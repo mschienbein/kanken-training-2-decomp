@@ -2,6 +2,17 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-15 (late) — independent oracle review: FAIL → all findings fixed
+
+- `astra-reviewer` found two false-PASS blockers (aliased data sections across/within units;
+  overlapping catalogue extents concealing a wrong function) and nine major/minor relocation,
+  naming, eligibility and robustness issues. All fixed with regression tests; the reviewer's
+  reproducers now fail closed. Record and dispositions: `docs/reviews/2026-10-15-harness-oracle-review.md`.
+- Post-fix receipts PASS: `build/2026-10-15-laptop-baseline-zero-c-r2`,
+  `build/2026-10-15-laptop-pilot-candidate-r2` (10 functions / 280 B). Suite: 60 tests OK.
+- C denominator now excludes classified kinds (6 veneers): 4,498 functions / 1,136,318 B.
+- Round-2 review of the fixes requested; its verdict goes to the same review file when sealed.
+
 ## 2026-10-15 (late) — harness ready for decompilation; moving to the Windows desktop
 
 Harness gates (`docs/ACCEPTANCE.md`):
@@ -16,7 +27,7 @@ Harness gates (`docs/ACCEPTANCE.md`):
 | H6 match loop | done | `match.py`, `compid.py`, `packet.py`; strict `inplace.py` with tests |
 | H7 integration | done (candidate) | `build/2026-10-15-laptop-pilot-candidate/receipt.json` PASS: 10 functions / 280 B from C |
 | H8 progress | done (stub) | `ci/progress_report.py` + workflow; ByteMatch needs a public repo |
-| H9 tests | done | 50 tests (`python -m unittest discover -s tests -t .`) |
+| H9 tests | done | 60 tests (`python -m unittest discover -s tests -t .`) |
 | H10 docs | done | README, AGENTS, ACCEPTANCE, COMPILER, BYTEMATCH, RESUME |
 | H11 pilot | open | agent pilot of ~10 stratified functions on the desktop |
 

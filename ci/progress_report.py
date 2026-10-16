@@ -25,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT_VERSION = 2
 BLOCK = 0x10000
 AUTO = re.compile(r"^func_([0-9a-fA-F]{8})$")
+RESERVED = re.compile(r"^(func|data|bss)_[0-9a-fA-F]{8}$")
 
 
 def measures(fns: list[dict], matched: set[int], data_total: int = 0) -> dict:
@@ -55,15 +56,20 @@ def load() -> tuple[dict, set[int], dict[int, str]]:
     catalogue = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
     names_path = ROOT / "config/names.json"
     overlay = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
+    reserved = sorted(n for n in overlay if RESERVED.match(n))
+    if reserved:  # same rule as tools/inplace.Resolver, so build and report agree on every address
+        raise SystemExit(f"config/names.json may not define reserved address names: {', '.join(reserved[:5])}")
     by_name = {name: entry["address"] for name, entry in overlay.items()}
-    addresses = {f["address"] for f in catalogue["functions"]}
+    kinds = {f["address"]: f.get("kind", "function") for f in catalogue["functions"]}
     matched: set[int] = set()
     for unit in json.loads((ROOT / "config/matches.json").read_text(encoding="utf-8"))["units"]:
         for name in unit["functions"]:
             m = AUTO.match(name)
             address = int(m.group(1), 16) if m else by_name.get(name)
-            if address not in addresses:
+            if address not in kinds:
                 raise SystemExit(f"matches.json credits {name}, which is not a catalogued function")
+            if kinds[address] != "function":
+                raise SystemExit(f"matches.json credits {name}, a {kinds[address]!r} that can never earn C credit")
             matched.add(address)
     display = {entry["address"]: name for name, entry in overlay.items()}
     return catalogue, matched, display
@@ -76,7 +82,8 @@ def main() -> int:
     parser.add_argument("--summary", type=Path, help="also append a Markdown summary (e.g. $GITHUB_STEP_SUMMARY)")
     args = parser.parse_args()
     catalogue, matched, display = load()
-    functions = sorted(catalogue["functions"], key=lambda f: f["address"])
+    # Classified kinds (linker veneers, ...) can never be C, so they are not in the C denominator.
+    functions = sorted((f for f in catalogue["functions"] if f.get("kind", "function") == "function"), key=lambda f: f["address"])
     data_total = sum(s["size"] for s in catalogue["segments"] if s["name"] in ("rodata", "data"))
 
     blocks: dict[int, list[dict]] = {}

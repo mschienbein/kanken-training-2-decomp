@@ -22,6 +22,7 @@ CATALOGUE = {
         {"address": 0x100000, "size": 0x40, "isa": "arm"},
         {"address": 0x100040, "size": 0x20, "isa": "arm"},
         {"address": 0x110000, "size": 0x100, "isa": "thumb"},
+        {"address": 0x111000, "size": 0x8, "isa": "arm", "kind": "veneer"},
     ],
 }
 
@@ -57,12 +58,27 @@ class ProgressReportTest(unittest.TestCase):
         self.assertEqual([u["name"] for u in report["units"]], ["text_00100000", "text_00110000"])
         self.assertEqual(report["units"][1]["measures"]["complete_units"], 1)
         names = [f["name"] for u in report["units"] for f in u["functions"]]
-        self.assertEqual(names, ["func_00100000", "func_00100040", "Named"])
+        self.assertEqual(names, ["func_00100000", "func_00100040", "Named"])  # the veneer is not C denominator
 
     def test_credit_outside_catalogue_is_refused(self):
         proc, _ = self.run_report([{"source": "src/a.c", "functions": ["func_00100004"]}])
         self.assertNotEqual(proc.returncode, 0)
         self.assertIn("not a catalogued function", proc.stderr)
+
+
+    def test_veneer_can_never_be_credited(self):
+        """Review F07: classified non-C kinds earn no C credit."""
+        proc, _ = self.run_report([{"source": "src/a.c", "functions": ["func_00111000"]}])
+        self.assertNotEqual(proc.returncode, 0)
+        self.assertIn("can never earn C credit", proc.stderr)
+
+    def test_reserved_overlay_names_are_refused(self):
+        """Review F06: the overlay may not redirect func_XXXXXXXX, or report and build disagree."""
+        proc, _ = self.run_report(
+            [{"source": "src/a.c", "functions": ["func_00100000"]}], {"func_00100000": {"address": 0x100040}}
+        )
+        self.assertNotEqual(proc.returncode, 0)
+        self.assertIn("reserved", proc.stderr)
 
 
 if __name__ == "__main__":

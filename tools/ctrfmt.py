@@ -172,7 +172,7 @@ class BlzError(ValueError):
     pass
 
 
-def blz_decompress(packed: bytes) -> bytes:
+def blz_decompress(packed: bytes, max_size: int = 64 << 20) -> bytes:
     """Decompress ExeFS `.code` (backward LZ77, decoded from the end of the buffer towards the start).
 
     Footer: u32 (top | bottom << 24), u32 extra size. `bottom` bytes of footer/padding sit at the
@@ -185,6 +185,8 @@ def blz_decompress(packed: bytes) -> bytes:
     top, bottom = top_bottom & 0xFFFFFF, top_bottom >> 24
     if not (8 <= bottom <= 11 and bottom <= top <= len(packed)):
         raise BlzError(f"bad footer top={top:#x} bottom={bottom:#x}")
+    if len(packed) + extra > max_size:
+        raise BlzError(f"footer claims {len(packed) + extra:#x} output bytes, more than {max_size:#x}")
     out = bytearray(packed) + bytearray(extra)
     dest = len(out)
     src = len(packed) - bottom

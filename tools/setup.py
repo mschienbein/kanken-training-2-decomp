@@ -100,7 +100,7 @@ def probe_compilers() -> dict:
     for cid in LOCK["armcc"]["builds"]:
         exe = armcc_exe(cid)
         argv = ([str(launcher)] if launcher else []) + [str(exe), "--vsn"]
-        proc = subprocess.run(argv, capture_output=True, text=True, timeout=60, env=os.environ | {"LC_ALL": "C"})
+        proc = subprocess.run(argv, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60, env=os.environ | {"LC_ALL": "C"})
         banner = (proc.stdout + proc.stderr).strip().splitlines()
         if proc.returncode != 0 or not banner:
             raise SetupError(f"{cid}: `armcc --vsn` failed ({proc.returncode}): {proc.stderr.strip()}")

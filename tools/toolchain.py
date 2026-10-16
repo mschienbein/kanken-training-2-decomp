@@ -80,6 +80,6 @@ def compile_source(profile: Profile, source: Path, output: Path, include_dirs: t
     output.parent.mkdir(parents=True, exist_ok=True)
     if output.exists():
         output.unlink()
-    proc = subprocess.run(argv, capture_output=True, text=True, timeout=300, env=os.environ | {"LC_ALL": "C"})
+    proc = subprocess.run(argv, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=300, env=os.environ | {"LC_ALL": "C"})
     if proc.returncode != 0 or not output.is_file():
         raise ToolchainError(f"armcc failed ({proc.returncode}) on {source.name}:\n{proc.stdout}{proc.stderr}")

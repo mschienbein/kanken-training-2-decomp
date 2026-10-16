@@ -54,7 +54,17 @@ def load_catalogue(path: Path = CATALOGUE) -> dict:
 
 
 def functions_by_address(catalogue: dict) -> dict[int, dict]:
-    return {f["address"]: f for f in catalogue["functions"]}
+    """Catalogue functions keyed by address; refuses overlapping extents."""
+    functions = sorted(catalogue["functions"], key=lambda f: f["address"])
+    for a, b in zip(functions, functions[1:]):
+        if a["address"] + a["size"] > b["address"]:
+            raise ImageError(f"catalogue extents overlap: {a['address']:#x}+{a['size']:#x} and {b['address']:#x}")
+    return {f["address"]: f for f in functions}
+
+
+def creditable(fn: dict) -> bool:
+    """Only ordinary functions can earn C credit; veneers and other classified kinds never do."""
+    return fn.get("kind", "function") == "function"
 
 
 def load_names(path: Path = NAMES) -> dict[str, dict]:

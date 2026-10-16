@@ -119,7 +119,7 @@ def import_rom(rom: Path, boot9: Path | None, with_romfs: bool) -> dict:
 
     layout = ctrfmt.parse_exheader(exheader)
     packed = exefs_files[".code"]
-    code = ctrfmt.blz_decompress(packed) if layout.compressed else packed
+    code = ctrfmt.blz_decompress(packed, max_size=layout.image_size) if layout.compressed else packed
     if layout.compressed and decompress_code(packed) != code:
         raise InputError("our backward-LZ77 decoder disagrees with pyctr")
     if len(code) != layout.image_size:

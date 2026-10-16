@@ -139,6 +139,96 @@ class InPlaceTest(unittest.TestCase):
         with self.assertRaisesRegex(inplace.LinkError, "no catalogued function"):
             self.link(obj, Memory())
 
+    def test_distinct_data_objects_cannot_alias(self):
+        """Review F01: two C objects inferred at one address must fail, not match."""
+        obj = self.compile(
+            "__attribute__((section(\".data.first\"))) int first = 17;\n"
+            "__attribute__((section(\".data.second\"))) int second = 17;\n"
+            "int func_00100000(void) { return first; }\nint func_00100040(void) { return second; }\n"
+        )
+        mem = Memory()
+        mem.write(TABLE_AT, struct.pack("<ii", 17, 17))
+        for fn in obj.defined_functions():
+            sec = obj.sections[fn.shndx]
+            data = bytearray(sec.data)
+            for rel in sec.relocs:
+                struct.pack_into("<I", data, rel.offset, TABLE_AT)  # both point at the same storage
+            mem.write(int(fn.name[5:], 16), bytes(data))
+        with self.assertRaisesRegex(inplace.LinkError, "overlap|disagree"):
+            self.link(obj, mem)
+
+    def test_unsplit_section_with_several_functions_is_refused(self):
+        """Review F09: without --split_sections two functions share .text; never misreport it."""
+        profile = toolchain.Profile("nosplit", PROFILE.compiler, tuple(f for f in PROFILE.flags if f != "--split_sections"))
+        tmp = Path(tempfile.mkdtemp())
+        (tmp / "two.c").write_text("int func_00100000(int x) { return x + 1; }\nint func_00100040(int x) { return x + 2; }\n", encoding="utf-8")
+        toolchain.compile_source(profile, tmp / "two.c", tmp / "two.o")
+        with self.assertRaisesRegex(inplace.LinkError, "several functions"):
+            self.link(inplace.ObjectFile(tmp / "two.o"), Memory())
+
+
+def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
+    sec = inplace.Section(1, "i.f", word, len(word), False, True, False)
+    rel = inplace.Reloc(0, rtype, symbol)
+    sec.relocs.append(rel)
+    return sec, rel
+
+
+class RelocationArithmeticTest(unittest.TestCase):
+    """Compiler-free checks of encodings the fixtures above do not reach."""
+
+    def linker(self, mem=None):
+        return inplace.InPlaceLinker(mem or Memory(), CATALOGUE, inplace.Resolver(CATALOGUE), (0x200000, 0x201000))
+
+    def test_prel31_keeps_thumb_bit_and_checks_range(self):
+        sym = inplace.Symbol("func_00100200", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+        sec, rel = synthetic(inplace.R_ARM_PREL31, b"\0\0\0\x80", sym)
+        data = bytearray(sec.data)
+        self.linker()._apply(rel, sec, data, 0x100000, inplace.Target(0x100200, True))
+        self.assertEqual(struct.unpack("<I", data)[0], 0x80000201)  # bit 31 kept, T bit set
+        with self.assertRaisesRegex(inplace.LinkError, "overflows"):
+            self.linker()._apply(rel, sec, bytearray(sec.data), 0x100000, inplace.Target(0x80100000, False))
+
+    def test_jump24_bl_to_thumb_needs_veneer(self):
+        sym = inplace.Symbol("func_00100200", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+        sec, rel = synthetic(inplace.R_ARM_JUMP24, struct.pack("<I", 0xEBFFFFFE), sym)
+        with self.assertRaisesRegex(inplace.LinkError, "veneer"):
+            self.linker()._apply(rel, sec, bytearray(sec.data), 0x100000, inplace.Target(0x100200, True))
+
+    def test_thumb_short_branches_infer_their_target(self):
+        """Review F05: B/Bcond to a defined Thumb function are decoded during placement."""
+        mem = Memory()
+        target = inplace.Symbol("local", 1, 4, "STT_FUNC", "STB_LOCAL", 2)
+        for rtype, opcode in ((inplace.R_ARM_THM_JUMP11, 0xE000), (inplace.R_ARM_THM_JUMP8, 0xD000)):
+            place = 0x100100
+            # original: branch from 0x100100 to 0x100140 => imm = (0x140 - 0x100 - 4) >> 1
+            imm = (0x100140 - place - 4) >> 1
+            mem.write(place, struct.pack("<H", opcode | imm))
+            sec, rel = synthetic(rtype, struct.pack("<H", opcode | (0x7FE if rtype == inplace.R_ARM_THM_JUMP11 else 0xFE)), target)
+            implied = self.linker(mem)._original_value(rel, place, sec)
+            addend = self.linker(mem)._addend(rel, sec)
+            self.assertEqual(implied - addend, 0x100140, f"type {rtype}")
+
+    def test_marker_relocations_need_no_symbol(self):
+        sec = inplace.Section(1, "i.f", b"\x1e\xff\x2f\xe1", 4, False, True, False)
+        sec.relocs.append(inplace.Reloc(0, inplace.R_ARM_V4BX, inplace.Symbol("", 0, 0, "STT_NOTYPE", "STB_LOCAL", "SHN_UNDEF")))
+
+        class Obj:
+            sections = {1: sec}
+
+            def defined_functions(self):
+                return [inplace.Symbol("func_00100000", 0, 4, "STT_FUNC", "STB_GLOBAL", 1)]
+
+        mem = Memory()
+        mem.write(0x100000, sec.data)
+        linked = self.linker(mem).link(Obj())
+        self.assertEqual(linked[1][1], sec.data)
+
+    def test_reserved_overlay_names_are_refused(self):
+        """Review F06: an overlay alias must not redirect a func_XXXXXXXX name."""
+        with self.assertRaisesRegex(inplace.LinkError, "reserved"):
+            inplace.Resolver(CATALOGUE, {"func_00100000": {"address": 0x100040}})
+
 
 if __name__ == "__main__":
     unittest.main()

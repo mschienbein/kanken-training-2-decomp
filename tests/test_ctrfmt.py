@@ -54,6 +54,13 @@ class BlzTest(unittest.TestCase):
         with self.assertRaises(ctrfmt.BlzError):
             ctrfmt.blz_decompress(tampered)
 
+    def test_oversized_footer_is_refused_before_allocating(self):
+        """Review F10: a footer claiming gigabytes of output is rejected up front."""
+        packed = bytearray(ctrfmt.blz_compress(compressible(8000, 3)))
+        struct.pack_into("<I", packed, len(packed) - 4, 0xFFFFFFF0)
+        with self.assertRaisesRegex(ctrfmt.BlzError, "more than"):
+            ctrfmt.blz_decompress(bytes(packed))
+
     @unittest.skipUnless((ORIG / "code.bin").is_file(), "private input not imported")
     def test_original_code_recompresses_exactly(self):
         code = (ORIG / "code.bin").read_bytes()

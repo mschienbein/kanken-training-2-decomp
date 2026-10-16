@@ -27,7 +27,7 @@ Windows desktop (native `armcc.exe`, more CPU/RAM/disk).
    .venv\Scripts\python.exe tools\rom.py verify
    .venv\Scripts\python.exe -m unittest discover -s tests -t .
    ```
-   Expected: `setup.py` lists 14 compiler banners (natively, no wibo); 50 tests pass.
+   Expected: `setup.py` lists 14 compiler banners (natively, no wibo); 60 tests pass.
 
 ### 2. Re-prove the laptop results on Windows (cross-host determinism)
 
@@ -38,6 +38,8 @@ certutil -hashfile scratch\analyze\catalogue.json SHA256
 .venv\Scripts\python.exe tools\build.py --name <date>-desktop-baseline-zero-c
 .venv\Scripts\python.exe tools\build.py --name <date>-desktop-pilot-candidate --matches config\candidates\pilot.json
 ```
+
+Read `docs/reviews/2026-10-15-harness-oracle-review.md` (findings, fixes, qualifications).
 
 Expected: catalogue sha256 `06027f34eb7e89666c138293a31393cbafc90d9c66862add8f3d9df571aedf13`
 (identical to `config/catalogue.json`); both builds PASS; the pilot credits 10 functions / 280 B.

@@ -2,12 +2,14 @@
 
     python tools/build.py --name <unique build name>
 
-For every unit in config/matches.json: compile it under its profile, link it in place, and require
-each credited function to match byte for byte. The output image starts as a copy of the original
-with every credited function's range erased (0xCC), then the compiled bytes are written in; a range
-that compiled code did not fully rewrite is an error. The result must equal orig/code.bin, and
-re-compressing it must reproduce the stored ExeFS `.code` exactly. Everything goes into
-build/<name>/ (exclusive: an existing name is refused) with receipt.json binding every input hash.
+Refuses to run unless config/catalogue.json is the recorded denominator (tools/denominator.py).
+For every unit in config/matches.json (or --matches): compile it under its profile and link it in
+place. Each credited function must be an ordinary catalogued function (never a veneer), must be
+produced as a section of exactly its catalogued size, and must equal the original on its own
+before it is written into the output image; sections placed by different units may never overlap.
+The output must equal orig/code.bin, and re-compressing it must reproduce the stored ExeFS
+`.code` exactly. Everything goes into build/<name>/ (exclusive: an existing name is refused) with
+receipt.json binding every input hash, including the harness sources.
 
 Not credited and not proven here: bytes outside credited functions (still original), linker-made
 content (veneers, section order), and data layout. See docs/ACCEPTANCE.md.
@@ -24,13 +26,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import ctrfmt  # noqa: E402
+import denominator  # noqa: E402
 import image as image_mod  # noqa: E402
 import inplace  # noqa: E402
 import toolchain  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 MATCHES = ROOT / "config/matches.json"
-FILL = 0xCC
+HARNESS = ("tools/build.py", "tools/inplace.py", "tools/image.py", "tools/toolchain.py", "tools/ctrfmt.py", "tools/denominator.py")
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -51,6 +54,10 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
         out.mkdir(parents=True, exist_ok=False)
     except FileExistsError:
         raise BuildError(f"build/{name} already exists; build records are immutable") from None
+    try:
+        denominator.verify()
+    except SystemExit as e:
+        raise BuildError(f"denominator: {e}") from None
     image = image_mod.Image.load()
     catalogue = image_mod.load_catalogue()
     if catalogue["image_sha256"] != image.sha256:
@@ -64,6 +71,8 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
 
     hybrid = bytearray(image.code)
     credited: dict[int, str] = {}
+    mismatched: list[str] = []
+    occupied: list[tuple[int, int, str]] = []  # every section any unit placed, across all units
     units = []
     for unit in matches["units"]:
         src = ROOT / unit["source"]
@@ -73,36 +82,41 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
         obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
         toolchain.compile_source(profile, src, obj)
         linked = linker.link(inplace.ObjectFile(obj))
+        occupied += [
+            (p.base, p.base + p.section.size, f"{unit['source']}:{p.section.name}")
+            for p, _ in linked.values() if p.section.size
+        ]
         placed = {p.base: data for p, data in linked.values() if p.origin == "catalogue"}
         for fname in unit["functions"]:
             address = resolver.resolve(fname).address
             fn = functions.get(address)
             if fn is None:
                 raise BuildError(f"{fname}: not a catalogued function")
+            if not image_mod.creditable(fn):
+                raise BuildError(f"{fname}: catalogue kind {fn.get('kind')!r} can never earn C credit")
             if address in credited:
                 raise BuildError(f"{fname}: credited by both {credited[address]} and {unit['source']}")
             data = placed.get(address)
             if data is None or len(data) != fn["size"]:
                 raise BuildError(f"{fname}: {unit['source']} does not produce a section of size {fn['size']:#x}")
+            # Check each credited function on its own before anything is written, so a later
+            # write can never conceal a wrong one.
+            if data != image.read(address, fn["size"]):
+                mismatched.append(f"{address:#x}")
             start = image.layout.file_offset(address)
-            hybrid[start : start + fn["size"]] = bytes([FILL]) * fn["size"]
+            hybrid[start : start + fn["size"]] = data
             credited[address] = unit["source"]
-        for address, data in placed.items():
-            if address in credited and credited[address] == unit["source"]:
-                start = image.layout.file_offset(address)
-                hybrid[start : start + len(data)] = data
         units.append({
             "source": unit["source"], "source_sha256": sha256_file(src), "profile": profile.name,
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
             "functions": sorted(unit["functions"]),
         })
+    try:
+        inplace.reject_overlaps(occupied)
+    except inplace.LinkError as e:
+        raise BuildError(f"units place overlapping sections: {e}") from None
 
     code = bytes(hybrid)
-    mismatched = [
-        f"{a:#x}" for a, fn in functions.items() if a in credited
-        and code[image.layout.file_offset(a) : image.layout.file_offset(a) + fn["size"]]
-        != image.read(a, fn["size"])
-    ]
     code_ok = code == image.code
     packed = ctrfmt.blz_compress(code)
     stored = (ROOT / "orig/exefs/code.blz").read_bytes()
@@ -126,6 +140,8 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
             "matches_sha256": sha256_file(matches_path),
             "profiles_sha256": sha256_file(toolchain.PROFILES),
             "toolchain_lock_sha256": sha256_file(ROOT / "toolchain.lock.json"),
+            "exheader_sha256": sha256_file(ROOT / "orig/exheader.bin"),
+            "harness_sha256": {p: sha256_file(ROOT / p) for p in HARNESS},
             "compilers": {c: sha256_file(toolchain.armcc_exe(c)) for c in used},
         },
         "units": units,
@@ -133,8 +149,9 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
         "credited": {
             "functions": len(credited),
             "bytes": sum(functions[a]["size"] for a in credited),
-            "catalogue_functions": len(functions),
-            "catalogue_bytes": sum(f["size"] for f in functions.values()),
+            # same C denominator as ci/progress_report.py: classified kinds (veneers) excluded
+            "catalogue_functions": sum(1 for f in functions.values() if image_mod.creditable(f)),
+            "catalogue_bytes": sum(f["size"] for f in functions.values() if image_mod.creditable(f)),
         },
         "checks": {
             "credited_functions_exact": not mismatched,

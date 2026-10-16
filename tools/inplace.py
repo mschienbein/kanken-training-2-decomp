@@ -126,11 +126,18 @@ class Target:
 
 
 class Resolver:
-    """Maps symbol names to original addresses: the names overlay first, then func_/data_/bss_XXXXXXXX."""
+    """Maps symbol names to original addresses: the names overlay, or func_/data_/bss_XXXXXXXX.
+
+    The overlay may not define names in the reserved func_/data_/bss_ form, so every consumer
+    (linker, build, progress report) resolves a name to the same address.
+    """
 
     def __init__(self, functions: dict[int, dict], names: dict[str, dict] | None = None):
         self.functions = functions  # catalogue functions keyed by address
         self.names = names or {}
+        reserved = sorted(n for n in self.names if AUTO_NAME.match(n))
+        if reserved:
+            raise LinkError(f"config/names.json may not define reserved address names: {', '.join(reserved[:5])}")
 
     def resolve(self, name: str) -> Target:
         entry = self.names.get(name)
@@ -152,6 +159,23 @@ class Placement:
     section: Section
     base: int
     origin: str  # "catalogue" or "inferred"
+
+
+def _is_thumb_function(sym: Symbol) -> bool:
+    return sym.kind == "STT_FUNC" and bool(sym.value & 1)
+
+
+def _symbol_offset(sym: Symbol) -> int:
+    """Offset inside its section; only function symbols carry the Thumb bit in their value."""
+    return sym.value & ~1 if sym.kind == "STT_FUNC" else sym.value
+
+
+def reject_overlaps(spans: list[tuple[int, int, str]]) -> None:
+    """Distinct sections can never share storage."""
+    spans = sorted(spans)
+    for (lo_a, hi_a, name_a), (lo_b, hi_b, name_b) in zip(spans, spans[1:]):
+        if lo_b < hi_a:
+            raise LinkError(f"{name_a} [{lo_a:#x}, {hi_a:#x}) and {name_b} [{lo_b:#x}, {hi_b:#x}) overlap")
 
 
 def _sx(value: int, bits: int) -> int:
@@ -194,7 +218,9 @@ class InPlaceLinker:
             base = address - (fn.value & ~1)
             prior = placements.get(sec.index)
             if prior and prior.base != base:
-                raise LinkError(f"{sec.name}: functions disagree on the section address")
+                # Only aliases (e.g. C++ C1/C2 constructors at one offset) may share a section;
+                # several distinct functions in one section need --split_sections.
+                raise LinkError(f"{sec.name}: holds several functions at different offsets; compile with --split_sections")
             placements[sec.index] = Placement(sec, base, "catalogue")
         # Infer data sections from the original values their references resolve to.
         changed = True
@@ -208,7 +234,9 @@ class InPlaceLinker:
                     implied = self._original_value(rel, placed.base + rel.offset, placed.section)
                     if implied is None:
                         continue
-                    base = implied - self._addend(rel, placed.section) - (sym.value & ~1)
+                    if _is_thumb_function(sym):
+                        implied &= ~1  # the T bit is not part of the address
+                    base = implied - self._addend(rel, placed.section) - _symbol_offset(sym)
                     prior = placements.get(sym.shndx)
                     if prior is None:
                         placements[sym.shndx] = Placement(obj.sections[sym.shndx], base, "inferred")
@@ -218,6 +246,9 @@ class InPlaceLinker:
                             f"{obj.sections[sym.shndx].name}: references disagree on its address "
                             f"({prior.base:#x} vs {base:#x})"
                         )
+        reject_overlaps(
+            [(p.base, p.base + p.section.size, p.section.name) for p in placements.values() if p.section.size]
+        )
         return placements
 
     def _address_for(self, name: str) -> int:
@@ -247,12 +278,11 @@ class InPlaceLinker:
         return 0
 
     def _original_value(self, rel: Reloc, place: int, sec: Section) -> int | None:
-        """S + A as implied by the original bytes at `place`, or None for marker relocations."""
+        """(S + A) | T as implied by the original bytes at `place`, or None for marker relocations."""
         if rel.type in (R_ARM_NONE, R_ARM_V4BX):
             return None
         if rel.type in (R_ARM_ABS32, R_ARM_TARGET1):
-            word = struct.unpack("<I", self.image.read(place, 4))[0]
-            return word & ~1 if rel.symbol.kind == "STT_FUNC" else word
+            return struct.unpack("<I", self.image.read(place, 4))[0]
         if rel.type == R_ARM_REL32:
             return (struct.unpack("<I", self.image.read(place, 4))[0] + place) & 0xFFFFFFFF
         if rel.type in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24):
@@ -262,6 +292,12 @@ class InPlaceLinker:
             # branch target = P + 4 + (S + A - P)
             hi, lo = struct.unpack("<HH", self.image.read(place, 4))
             return _thm_bl_target(hi, lo, place) - 4
+        if rel.type == R_ARM_THM_JUMP11:
+            insn = struct.unpack("<H", self.image.read(place, 2))[0]
+            return place + 4 + (_sx(insn & 0x7FF, 11) << 1) - 4
+        if rel.type == R_ARM_THM_JUMP8:
+            insn = struct.unpack("<H", self.image.read(place, 2))[0]
+            return place + 4 + (_sx(insn & 0xFF, 8) << 1) - 4
         if rel.type == R_ARM_PREL31:
             word = struct.unpack("<I", self.image.read(place, 4))[0]
             return (_sx(word & 0x7FFFFFFF, 31) + place) & 0xFFFFFFFF
@@ -272,8 +308,7 @@ class InPlaceLinker:
             placed = placements.get(sym.shndx)
             if placed is None:
                 raise LinkError(f"{sym.name or obj.sections[sym.shndx].name}: section was never placed")
-            thumb = sym.kind == "STT_FUNC" and bool(sym.value & 1)
-            return Target(placed.base + (sym.value & ~1), thumb)
+            return Target(placed.base + _symbol_offset(sym), _is_thumb_function(sym))
         if sym.shndx == "SHN_UNDEF":
             return self.resolver.resolve(sym.name)
         if sym.shndx == "SHN_ABS":
@@ -292,12 +327,17 @@ class InPlaceLinker:
         elif t == R_ARM_REL32:
             struct.pack_into("<I", data, o, (((s + a) | target.thumb) - place) & 0xFFFFFFFF)
         elif t == R_ARM_PREL31:
+            value = ((s + a) | target.thumb) - place
+            if not -(1 << 30) <= value < (1 << 30):
+                raise LinkError(f"{sec.name}+{o:#x}: PREL31 to {s:#x} overflows 31 bits")
             word = struct.unpack_from("<I", data, o)[0]
-            struct.pack_into("<I", data, o, (word & 0x80000000) | ((s + a - place) & 0x7FFFFFFF))
+            struct.pack_into("<I", data, o, (word & 0x80000000) | (value & 0x7FFFFFFF))
         elif t in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24):
             insn = struct.unpack_from("<I", data, o)[0]
             off = s + a - place
-            is_bl = insn >> 24 in (0xEB, 0xFA, 0xFB)  # unconditional BL or BLX(imm)
+            # Direct ARM->Thumb interworking (BL -> BLX) is only defined for R_ARM_CALL;
+            # JUMP24/PC24 to Thumb needs a linker veneer, which this oracle never invents.
+            is_bl = t == R_ARM_CALL and insn >> 24 in (0xEB, 0xFA, 0xFB)
             if not -(1 << 25) <= off < (1 << 25):
                 raise LinkError(f"{sec.name}+{o:#x}: branch to {s:#x} out of range (needs a veneer)")
             if target.thumb:
@@ -360,6 +400,8 @@ class InPlaceLinker:
                 continue
             data = bytearray(sec.data)
             for rel in sec.relocs:
+                if rel.type in (R_ARM_NONE, R_ARM_V4BX):
+                    continue  # markers; their symbol may be null and is never resolved
                 self._apply(rel, sec, data, placed.base + rel.offset, self._symbol_target(rel.symbol, obj, placements))
             linked[idx] = (placed, bytes(data))
             if placed.origin == "inferred":
