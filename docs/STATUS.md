@@ -2,6 +2,32 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-16 (afternoon) — c002 accepted; wave 2 under review; wave 3 authoring
+
+**Accepted:** c001-pilot-r4 (17) + c002-wave1-r3 (38) = **55 functions / 2,680 B (0.242%)** of the
+v3 denominator (4,231 creditable functions / 1,108,426 B). History seq 2.
+
+- **Catalogue v3 adopted** (denominator v3): in-section string literals, 114 multi-entry routines
+  classified non-C with recorded entries; unknown bytes 39,338 → 8,836. Remaining modelling
+  issues: `docs/catalogue/V4-BACKLOG.md` (NOP entries).
+- **Throughput:** H11 pilot 4/10 (`docs/pilot-h11.md`); wave 1 35/60 (re-derived 34 + 4 pilot);
+  wave 2 48/80 claimed and re-derived. Ordinary game C matches in 1–5 attempts; misses are SDK
+  svc/CP15 wrappers (policy pending), C runtime, catalogue gaps and register-allocation near misses.
+- **Gates v1.3–v1.5** (`docs/GATES.md`), each from a real defect: headers bound like sources
+  (c002 F02); C++ class definitions must agree across units (ODR, c002 F01); revised accepted
+  units are re-reviewed; reviews bind exactly the prepared files.
+- **Integration tools:** `tools/collect.py` (re-derives author matches at their destination),
+  `tools/triage.py --avoid svc,thumb,exclusive`, shared declarations in `include/game/`.
+- **Correction:** commit `3ab0516` says "c002-wave1-r2 ACCEPTED" but finalize had refused it (a
+  review was bound to a header tree containing wave-2 headers created during the review); the
+  commit only added the review records. Fixed by gates v1.5 and successor r3. Cause of the wrong
+  message: commit chained after finalize with `;` instead of `&&`.
+
+In flight: c003-wave2 (48 new + 3 revised functions) under two reviews; wave 3 (80 functions,
+three authors).
+
+Open policy question for the user (unchanged): `__svc(N)` and named-register CP15 variables as C.
+
 ## 2026-10-16 — decompiling on the Mac: first accepted checkpoint (c001-pilot-r4)
 
 **Accepted:** 17 functions / 1,096 B (0.096% of 1,136,354 code bytes; denominator v2, 4,437
