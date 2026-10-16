@@ -3,10 +3,12 @@
     python tools/compid.py probe.c [more.c ...] [--grid grid.json] [--catalogue PATH] [--out DIR]
 
 Each probe defines functions named func_XXXXXXXX whose C was written to reproduce the original.
-Every (compiler, flag set) pair is compiled and linked in place (tools/match.py's oracle); the
-table shows which pairs reproduce which functions byte for byte. A pair that matches every probe
-is a candidate profile; evidence is written to <out>/compid.json. Probes must be reviewed C, not
-tuned per compiler: the point is to discriminate builds, so one source text is used for all pairs.
+Every (compiler, flag set) pair is compiled and linked in place (tools/match.py's oracle, under the
+selected `--linker-model`, docs/LINKER.md); the table shows which pairs reproduce which functions
+byte for byte. A pair that matches every probe is a candidate profile; evidence is written to
+<out>/compid.json, with the linker model and every branch it rewrote per function and pair. Probes
+must be reviewed C, not tuned per compiler: the point is to discriminate builds, so one source text
+is used for all pairs.
 """
 from __future__ import annotations
 
@@ -42,6 +44,7 @@ def run_grid(ctx, sources: list[Path], grid: dict, out: Path) -> dict:
     one comparable function, and every function of every source matched.
     """
     rows: dict[str, dict[str, str]] = {}
+    rewrites: dict[str, dict[str, list[dict]]] = {}  # function -> pair -> linker rewrites (non-empty only)
     failures: dict[str, dict[str, str]] = {}  # pair -> {source: reason}
     pairs = []
     for compiler in grid["compilers"]:
@@ -63,12 +66,15 @@ def run_grid(ctx, sources: list[Path], grid: dict, out: Path) -> dict:
                 for r in results:
                     cell = {"match": "Y", "match_extent_differs": "E"}.get(r["status"]) or f"+{r['first_diff']:x}"
                     rows.setdefault(r["name"], {})[pair] = cell
+                    if r["linker_rewrites"]:
+                        rewrites.setdefault(r["name"], {})[pair] = r["linker_rewrites"]
     names = sorted(rows)
     qualifying = [
         p for p in pairs
         if names and p not in failures and all(rows[n].get(p) == "Y" for n in names)
     ]
-    return {"pairs": pairs, "functions": names, "results": rows, "failures": failures, "matching_all": qualifying}
+    return {"pairs": pairs, "functions": names, "results": rows, "failures": failures, "matching_all": qualifying,
+            "linker_model": ctx.model.name, "linker_rewrites": rewrites}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -77,9 +83,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--grid", type=Path, help='JSON {"compilers": [...], "flagsets": {name: [flags]}}')
     parser.add_argument("--catalogue", type=Path, default=ROOT / "config/catalogue.json")
     parser.add_argument("--out", type=Path, default=ROOT / "scratch/compid")
+    parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
+                        help="armlink output optimisations reproduced by the in-place link (docs/LINKER.md)")
     args = parser.parse_args(argv)
     grid = json.loads(args.grid.read_text(encoding="utf-8")) if args.grid else DEFAULT_GRID
-    ctx = match.Context(args.catalogue)
+    ctx = match.Context(args.catalogue, args.linker_model)
     result = run_grid(ctx, args.sources, grid, args.out)
 
     width = max(len(p) for p in result["pairs"])
@@ -94,10 +102,12 @@ def main(argv: list[str] | None = None) -> int:
         for src, reason in failed.items():
             print(f"{pair} {src}: {reason}", file=sys.stderr)
     full = result["matching_all"]
-    print(f"\npairs matching all {len(names)} probe functions from all {len(args.sources)} sources: {', '.join(full) or 'none'}")
+    print(f"\npairs matching all {len(names)} probe functions from all {len(args.sources)} sources: {', '.join(full) or 'none'}"
+          f" (linker model {result['linker_model']})")
     record = {
         "sources": {s.as_posix(): hashlib.sha256(s.read_bytes()).hexdigest() for s in args.sources},
-        "grid": grid, "image_sha256": ctx.image.sha256, **{k: result[k] for k in ("results", "failures", "matching_all")},
+        "grid": grid, "image_sha256": ctx.image.sha256,
+        **{k: result[k] for k in ("results", "failures", "matching_all", "linker_model", "linker_rewrites")},
     }
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "compid.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")

@@ -9,7 +9,12 @@ ARM<->Thumb BL/BLX interworking; an unsupported relocation type, an unresolved s
 branch that would need a linker veneer is an error, never a silent pass.
 
 Because relocated fields must reproduce the original bytes, a byte match also proves every call
-and data reference resolves to the same address as in the original.
+and data reference resolves to the same address as in the original — except where the selected
+`LinkerModel` reproduces an armlink output optimisation (docs/LINKER.md): a BL inlined as its
+callee's instruction (or a NOP), decided from the ORIGINAL function at the call's destination,
+proves only that the original callee's body is that instruction, and a B to the next instruction
+written as a NOP proves only that the target starts there. Every such rewrite is reported
+(`InPlaceLinker.rewrites`) and the model name is recorded by the callers.
 """
 from __future__ import annotations
 
@@ -18,6 +23,8 @@ import struct
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from capstone import CS_ARCH_ARM, CS_GRP_BRANCH_RELATIVE, CS_GRP_CALL, CS_GRP_INT, CS_GRP_IRET, CS_GRP_JUMP, CS_GRP_RET, CS_MODE_ARM, Cs
+from capstone import arm as cs_arm
 from elftools.elf.constants import SH_FLAGS
 from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
@@ -41,6 +48,107 @@ AUTO_NAME = re.compile(r"^(func|data|bss)_([0-9a-fA-F]{8})$")
 
 class LinkError(RuntimeError):
     pass
+
+
+# -- armlink output optimisations (docs/LINKER.md) ---------------------------------------------
+
+ARM_LINKER_NOP = 0xE1A00000  # MOV r0, r0: what armlink writes for a removed ARM branch or empty call
+_ARM_RETURNS = frozenset((0xE12FFF1E, 0xE1A0F00E))  # BX lr, MOV pc, lr (unconditional)
+_COND_AL = 0xE
+_ARM = Cs(CS_ARCH_ARM, CS_MODE_ARM)
+_ARM.detail = True
+_FLOW_GROUPS = frozenset((CS_GRP_JUMP, CS_GRP_CALL, CS_GRP_RET, CS_GRP_INT, CS_GRP_IRET, CS_GRP_BRANCH_RELATIVE))
+
+
+@dataclass(frozen=True)
+class LinkerModel:
+    """The armlink output optimisations an in-place link reproduces.
+
+    The name is the version: a rule change is a new model, never an edited one, so the model name
+    recorded in match results and build receipts says exactly which rules credited a function.
+    """
+
+    name: str
+    inline: bool = False  # --inline: ARM BL to a 4/8-byte ARM function -> its instruction, or a NOP
+    branchnop: bool = False  # --branchnop: relocated ARM B to the next instruction -> NOP
+
+
+LINKER_MODELS = {m.name: m for m in (
+    LinkerModel("strict-v1"),
+    LinkerModel("armlink5-inline-branchnop-v2", inline=True, branchnop=True),
+)}
+DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
+# Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).
+RETIRED_LINKER_MODELS = {
+    "armlink5-inline-branchnop-v1": "judged a callee defined in the candidate object by the candidate's own bytes, "
+    "not the original's (review F01); superseded by armlink5-inline-branchnop-v2",
+}
+
+
+def linker_model(name: str) -> LinkerModel:
+    if name in RETIRED_LINKER_MODELS:
+        raise LinkError(f"linker model {name!r} is retired: {RETIRED_LINKER_MODELS[name]}")
+    model = LINKER_MODELS.get(name)
+    if model is None:
+        raise LinkError(f"unknown linker model {name!r}; known: {', '.join(sorted(LINKER_MODELS))}")
+    return model
+
+
+@dataclass(frozen=True)
+class Rewrite:
+    """A branch written as armlink's output optimisation instead of being relocated."""
+
+    section: int  # index of the section holding the branch
+    offset: int  # of the branch inside that section
+    rule: str  # "inline_nop", "inline_insn" or "branchnop"
+    target: int  # the branch destination: the inlined callee, or the next instruction
+    word: int  # what was written in place of the branch
+
+    def record(self) -> dict:
+        return {"offset": self.offset, "rule": self.rule, "target": self.target, "word": f"{self.word:#010x}"}
+
+
+def inlinable_arm_instruction(word: int) -> bool:
+    """May armlink copy this callee instruction into the caller? (docs/LINKER.md, rule I2)
+
+    Not when it reads or writes the PC (the manual's rule); also refused, unverified either way:
+    LR access, control transfer, exception generation. Never armlink's own NOP: a callee starting
+    with MOV r0, r0 is a tail-call B that --branchnop removed after inlining ran, so armlink saw a
+    branch there (the original keeps the BL to every such callee)."""
+    if word == ARM_LINKER_NOP:
+        return False
+    insn = next(_ARM.disasm(struct.pack("<I", word), 0, 1), None)
+    if insn is None or _FLOW_GROUPS & set(insn.groups):
+        return False
+    read, written = insn.regs_access()
+    return not {cs_arm.ARM_REG_PC, cs_arm.ARM_REG_LR} & (set(read) | set(written))
+
+
+def inline_arm_call(call: int, body: bytes) -> tuple[str, int] | None:
+    """armlink's replacement for the ARM BL[cond] `call` to an ARM function whose whole section is
+    `body`: (rule, word), or None when the call stays a BL (docs/LINKER.md, rules I1-I3)."""
+    if len(body) not in (4, 8):
+        return None
+    words = struct.unpack(f"<{len(body) // 4}I", body)
+    if words[-1] not in _ARM_RETURNS:
+        return None
+    if len(words) == 1:
+        # A return-only function becomes a NOP, unconditional even for BLcond: in the original,
+        # conditional calls of empty functions left plain MOV r0, r0 after their compares.
+        return "inline_nop", ARM_LINKER_NOP
+    insn = words[0]
+    if not inlinable_arm_instruction(insn):
+        return None
+    call_cond, insn_cond = call >> 28, insn >> 28
+    if call_cond == _COND_AL:
+        return "inline_insn", insn
+    if insn_cond == 0xF:
+        return None  # an unconditional-only instruction cannot take the BL's condition
+    if insn_cond == _COND_AL:
+        return "inline_insn", (insn & 0x0FFFFFFF) | (call_cond << 28)
+    if insn_cond == call_cond:
+        return "inline_insn", insn
+    return None
 
 
 @dataclass
@@ -259,13 +367,17 @@ def _thm_bl_target(hi: int, lo: int, place: int) -> int:
 
 
 class InPlaceLinker:
-    def __init__(self, image, functions: dict[int, dict], resolver: Resolver, bss: tuple[int, int]):
+    def __init__(self, image, functions: dict[int, dict], resolver: Resolver, bss: tuple[int, int],
+                 model: LinkerModel | str = DEFAULT_LINKER_MODEL):
         """image: object with read(address, size) -> bytes; functions: catalogue functions by address;
-        bss: [start, end) of zero-initialised memory."""
+        bss: [start, end) of zero-initialised memory; model: the armlink output optimisations to
+        reproduce (a LinkerModel or a LINKER_MODELS name)."""
         self.image = image
         self.functions = functions
         self.resolver = resolver
         self.bss = bss
+        self.model = linker_model(model) if isinstance(model, str) else model
+        self.rewrites: list[Rewrite] = []
 
     # -- placement -----------------------------------------------------------------------------
 
@@ -482,6 +594,89 @@ class InPlaceLinker:
         else:
             raise LinkError(f"{sec.name}+{o:#x}: unsupported relocation type {t}")
 
+    # -- armlink output optimisations ------------------------------------------------------------
+
+    def _optimised_branch(self, rel: Reloc, sec: Section, place: int, target: Target, obj: ObjectFile,
+                          placements: dict[int, Placement]) -> Rewrite | None:
+        """What armlink writes instead of this relocated ARM branch under the model, or None."""
+        if rel.type not in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24) or target.thumb or not sec.executable:
+            return None  # Thumb destinations: relocated (and interworked or refused) as usual
+        insn = struct.unpack_from("<I", sec.data, rel.offset)[0]
+        cond = insn >> 28
+        if cond == 0xF or (insn >> 25) & 7 != 0b101:
+            return None  # BLX(imm), or a data word under a branch relocation
+        is_call = bool(insn >> 24 & 1)
+        dest = target.address + self._addend(rel, sec) + 8
+        if dest == place + 4:
+            if not self.model.branchnop:
+                return None
+            if is_call or cond != _COND_AL:
+                raise LinkError(
+                    f"{sec.name}+{rel.offset:#x}: {'BL' if is_call else 'conditional B'} to the next instruction: "
+                    f"armlink's --branchnop output for it is not established (docs/LINKER.md)"
+                )
+            return Rewrite(sec.index, rel.offset, "branchnop", dest, ARM_LINKER_NOP)
+        if not (is_call and self.model.inline):
+            return None
+        inlined = self._inline_decision(insn, rel, sec, dest, obj, placements)
+        return Rewrite(sec.index, rel.offset, inlined[0], dest, inlined[1]) if inlined else None
+
+    def _inline_decision(self, insn: int, rel: Reloc, sec: Section, dest: int, obj: ObjectFile,
+                         placements: dict[int, Placement]) -> tuple[str, int] | None:
+        """Rules I1-I3 for the BL `insn` to `dest`, decided from the ORIGINAL image only.
+
+        The callee is the original function at `dest` when the catalogue makes it an unambiguous
+        candidate (`eligible_original_callee`). A callee the candidate object defines itself must be
+        that same function: when either its own section or the original would be inlined, its
+        whole, relocation-free section must equal the eligible original body, or the link is
+        refused — otherwise a wrong local helper could decide the caller's bytes. When neither
+        would be inlined the call is an ordinary BL and nothing is decided.
+        """
+        original = self.eligible_original_callee(dest)
+        decided = inline_arm_call(insn, original) if original is not None else None
+        sym = rel.symbol
+        if isinstance(sym.shndx, int) and sym.shndx in obj.sections:
+            local = self._local_callee_section(sym, dest, obj, placements)
+            candidate = inline_arm_call(insn, local) if local is not None else None
+            if (decided or candidate) and (original is None or local != original):
+                why = ("is not an ordinary 4/8-byte ARM function with a single entry in the catalogue"
+                       if original is None else
+                       "is defined in this object with other bytes than the original"
+                       if local is not None else "is defined in this object by a section the model cannot judge")
+                raise LinkError(
+                    f"{sec.name}+{rel.offset:#x}: call to {sym.name or obj.sections[sym.shndx].name} at {dest:#x}: "
+                    f"armlink inlining is undecidable, the callee {why} (docs/LINKER.md)"
+                )
+        return decided
+
+    def eligible_original_callee(self, dest: int) -> bytes | None:
+        """The original bytes of the function at `dest` when the catalogue makes it an unambiguous
+        inlining candidate: an ordinary top-level ARM `function` of 4 or 8 bytes, all code, no
+        literal pool, no entry but its start. Its section cannot be longer than that extent: only
+        literal data could follow its return, and a callee that loads it reads the PC and is never
+        inlined. None for anything else (interior entries, multi-entry owners, veneers, Thumb):
+        such a call stays a BL."""
+        fn = self.functions.get(dest)
+        if fn is None or fn.get("isa") != "arm" or fn.get("kind", "function") != "function":
+            return None
+        if fn["size"] not in (4, 8) or fn.get("code_size", fn["size"]) != fn["size"]:
+            return None
+        if fn.get("pools") or fn.get("literals") or any(e["address"] != dest for e in fn.get("entries", ())):
+            return None
+        return self.image.read(dest, fn["size"])
+
+    @staticmethod
+    def _local_callee_section(sym: Symbol, dest: int, obj: ObjectFile, placements: dict[int, Placement]) -> bytes | None:
+        """The whole section of a callee defined in this object, when it starts at `dest` and holds
+        only executable, relocation-free bytes; None when the model cannot judge it."""
+        callee = obj.sections[sym.shndx]
+        placed = placements.get(sym.shndx)
+        if placed is None or dest != placed.base or not callee.executable or callee.nobits:
+            return None
+        if any(r.type not in (R_ARM_NONE, R_ARM_V4BX) for r in callee.relocs):
+            return None
+        return callee.data
+
     # -- link + verify -------------------------------------------------------------------------
 
     def link(self, obj: ObjectFile, names_to_address: dict[str, int] | None = None) -> dict[int, tuple[Placement, bytes]]:
@@ -489,9 +684,11 @@ class InPlaceLinker:
 
         Inferred (non-function) sections are verified here: their relocated bytes must equal the
         original image, BSS must lie in the BSS range. Function sections are returned unverified so
-        the caller can report per-function differences.
+        the caller can report per-function differences. Branches the linker model rewrote instead of
+        relocating are listed in `self.rewrites` (reset by each call).
         """
         placements = self.place(obj, names_to_address or {})
+        self.rewrites = []
         linked: dict[int, tuple[Placement, bytes]] = {}
         for idx, placed in placements.items():
             sec = placed.section
@@ -512,7 +709,14 @@ class InPlaceLinker:
                     if isinstance(sym.shndx, int) and sym.shndx in obj.sections and sym.shndx not in placements:
                         raise LinkError(f"{sec.name} depends on {obj.sections[sym.shndx].name}, which no reference places")
                     continue
-                self._apply(rel, sec, data, placed.base + rel.offset, self._symbol_target(rel.symbol, obj, placements))
+                place = placed.base + rel.offset
+                target = self._symbol_target(rel.symbol, obj, placements)
+                rewrite = self._optimised_branch(rel, sec, place, target, obj, placements)
+                if rewrite is not None:
+                    struct.pack_into("<I", data, rel.offset, rewrite.word)
+                    self.rewrites.append(rewrite)
+                    continue
+                self._apply(rel, sec, data, place, target)
             linked[idx] = (placed, bytes(data))
             if placed.origin == "inferred":
                 original = self.image.read(placed.base, sec.size)
