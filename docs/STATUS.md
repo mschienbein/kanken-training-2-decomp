@@ -2,6 +2,33 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-16 (evening) — c003 accepted; armlink emulation; catalogue v5; c004 integrating
+
+**Accepted:** c001 (17) + c002 (38) + c003 (48 new, 13 revised) = **103 functions / 5,056 B**
+(0.455% of denominator v5: 4,350 creditable functions / 1,111,934 B). History seq 3.
+
+- **armlink link-time rewrites emulated** (`docs/LINKER.md`, model `armlink5-inline-branchnop-v2`):
+  calls to return-only functions → `mov r0, r0` (505 sites), calls to some one-instruction
+  functions → the instruction, tail branches to the next function → `mov r0, r0` (270 sites); the
+  compiler's own `nop` words are a separate population. Found from an author's mismatch report;
+  implemented by an Opus agent, reviewed independently (v1 FAIL: same-object callee bypass; v2
+  PASS_WITH_QUALIFICATIONS). Gates v1.8 record the model and every rewrite.
+- **Catalogue v4/v5:** the "NOP entries" are C tail-call wrappers (86) — now ordinary functions;
+  pointer-only empty functions and a pointer-tail gap recovered; every v3 start/entry preserved.
+- **Gates v1.6–v1.8** from c003's reviews: revision-aware finalize, C++ local redeclaration
+  refusal, header class names one namespace for C++ (header ODR + forward-declaration collisions),
+  linker model binding.
+- **Throughput:** wave 3 66/80 claimed; wave 4 130/155 (94 wrappers/empties + 36 bodies) under
+  the new model. Integration (unifying declarations across independent authors) is now the
+  bottleneck: c004 needs 29 interface fixes before prepare.
+- **Process slips (both corrected):** a chained `;` produced a false "ACCEPTED" commit message
+  (3ab0516); a `suite | tail && push` pushed a merge whose suite had one failing test module
+  (fixed within minutes in the next commit). Rule now: capture exit codes, never pipe a gate.
+
+In flight: c004 interface unification (agent, worktree `c004-unify`); wave 5 (4 authors × 20).
+
+Open policy question for the user (unchanged): `__svc(N)` and named-register CP15 variables as C.
+
 ## 2026-10-16 (afternoon) — c002 accepted; wave 2 under review; wave 3 authoring
 
 **Accepted:** c001-pilot-r4 (17) + c002-wave1-r3 (38) = **55 functions / 2,680 B (0.242%)** of the
