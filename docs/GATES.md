@@ -1,6 +1,12 @@
-# Gate design — frozen v1.7 (2026-10-16)
+# Gate design — frozen v1.8 (2026-10-16)
 
 Revisions:
+- **v1.8** (2026-10-16): the linker model is part of acceptance. Builds use the armlink emulation
+  `armlink5-inline-branchnop-v2` (`docs/LINKER.md`; independent review PASS_WITH_QUALIFICATIONS in
+  `scratch/review/armlink-inline/REVIEW-v2.md`); `prepare` records `linker_model` and every
+  emulated rewrite inside new or revised units (`linker_rewrites`), G4 requires both builds to use
+  the same model, the history entry records the model, and reviewers check each rewrite's callee
+  choice (`docs/REVIEWING.md` step 6).
 - **v1.7** (2026-10-16): class/struct/union names are one project-wide namespace for C++ units.
   G3 compares every definition in a project header with same-named definitions in C++ units (ODR),
   and refuses a C++ forward declaration of a header-defined name in a unit that does not include

@@ -14,6 +14,8 @@ byte ranges live in ``literals``, and shared or boundary-crossing objects remain
 explicit conflicts rather than being stolen from another function.
 Non-C fallthrough chains and externally callable interior labels are represented
 as ``multi_entry`` routines with explicit, ISA-checked ``entries``.
+ARM ``mov r0, r0`` entry prefixes are separate tail-call wrappers under
+``armlink5-inline-branchnop-v1`` (docs/LINKER.md), not generic NOP padding.
 """
 from __future__ import annotations
 
@@ -148,6 +150,7 @@ class Analyzer:
         self.shared_literal_words: set[int] = set()
         self.entry_groups: list[dict] = []
         self.tail_target_repairs: dict[tuple[int, str], set[int]] = {}
+        self.linker_wrappers: set[int] = set()
 
     def inside(self, address: int, isa: str = "arm") -> bool:
         return self.base <= address < self.end and address % (4 if isa == "arm" else 2) == 0
@@ -379,6 +382,12 @@ class Analyzer:
     def trace(self, start: int, limit: int, *, internal_starts: set[int] | None = None) -> Trace:
         isa = self.seeds[start].isa
         result = Trace(start, isa)
+        if start in self.linker_wrappers and limit == start + 4:
+            # armlink --branchnop erased a relocated tail B to the next section.
+            # Keep its logical tail edge, without inventing a BL/branch source.
+            result.code[start] = 4
+            result.tails.add((limit, "arm", start))
+            return result
         veneer = self.veneer(start, isa)
         if veneer is not None and start + 8 <= limit:
             result.kind = "veneer"
@@ -771,8 +780,9 @@ class Analyzer:
     def group_fallthroughs(self, traces: list[Trace]) -> list[Trace]:
         """Keep every entry while grouping code that falls across section guesses.
 
-        A reachable fallthrough cannot connect separate ARMCC split sections.
-        These groups are classified, never offered as ordinary creditable C.
+        Reachable fallthroughs cannot connect separate ARMCC split sections,
+        except modelled armlink tail-call NOPs (handled by trace()).
+        Other groups are never offered as ordinary creditable C.
         """
         groups: list[Trace] = []
         self.entry_groups = []
@@ -832,6 +842,57 @@ class Analyzer:
                     changed = True
         return changed
 
+    def promote_linker_entries(self, traces: list[Trace]) -> bool:
+        """Split evidenced MOV-r0-r0 entries, after v3 boundary/data recovery.
+
+        armcc emits the architectural NOP hint, not MOV r0,r0. At an entry
+        the latter is armlink's relocated tail B to the next section. Only
+        existing entries and pointer-referenced padding establish wrappers;
+        interior call-site NOPs and unreferenced padding remain untouched.
+        """
+        entries = {address: entry for trace in traces for address, entry in trace.entries.items()}
+        code = {address: trace.isa for trace in traces for address in trace.code}
+        pools = {address for trace in traces for address in trace.pools}
+        pointers = set(self._external_pointers())
+        for trace in traces:
+            for address in trace.pools - trace.table_words:
+                pointer = self.word(address)
+                target, isa = pointer & ~1, "thumb" if pointer & 1 else "arm"
+                if self.inside(target, isa):
+                    pointers.add((target, isa))
+        # A secondary body label alone is not an independent section-start witness.
+        candidates = {address for address, entry in entries.items()
+                      if address in self.seeds and entry["isa"] == "arm"
+                      and self.word(address) == 0xE1A00000 and code.get(address + 4) == "arm"}
+        changed = False
+        for target, isa in sorted(pointers):
+            # A long callee can exceed pointer_plausible's bounded probe;
+            # its independently evidenced entry still proves this one-word tail.
+            if (isa == "arm" and target not in code and target not in pools
+                    and target + 4 in entries and entries[target + 4]["isa"] == "arm"
+                    and self.word(target) == 0xE1A00000):
+                changed |= self.add_seed(target, isa, "pointer")
+                candidates.add(target)
+        restored = set()
+        for address in sorted(candidates):
+            target = address + 4
+            if target not in self.seeds:
+                if not self.add_seed(target, "arm", "linker_branchnop"):
+                    continue
+                if target in entries:
+                    self.seeds[target].evidence.update(entries[target]["evidence"])
+                restored.add(target)
+                changed = True
+            if (target, "arm") in pointers:
+                self.seeds[target].evidence.add("pointer")
+            if address not in self.linker_wrappers:
+                self.linker_wrappers.add(address)
+                changed = True
+        # A former weak body start is now a section boundary, not a removed label.
+        self.internal_starts.difference_update(restored)
+        self.boundary_merges = [merge for merge in self.boundary_merges if merge["address"] not in restored]
+        return changed
+
     def record_entries(self, traces: list[Trace]) -> None:
         """Record external B targets and every BL/BLX target on instruction boundaries."""
         starts = [trace.address for trace in traces]
@@ -859,6 +920,9 @@ class Analyzer:
         owner_by_member = {member: trace.address for trace in traces for member in trace.members}
         for merge in self.boundary_merges:
             merge["retained_address"] = owner_by_member.get(merge["retained_address"], merge["retained_address"])
+            index = bisect_right(starts, merge["address"]) - 1
+            if index >= 0 and merge["address"] in traces[index].code:
+                merge["retained_address"] = traces[index].address
         for trace in traces:
             entry_addresses = sorted(trace.entries)
             for address, next_address in zip(entry_addresses, entry_addresses[1:]):
@@ -1051,11 +1115,13 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
     for _ in range(64):
         traces = analyzer.group_fallthroughs(analyzer.refine())
         analyzer.include_address_literals(traces)
-        if not analyzer.promote_missing_targets(traces):
+        if analyzer.promote_missing_targets(traces):
+            continue
+        analyzer.record_entries(traces)
+        if not analyzer.promote_linker_entries(traces):
             break
     else:
         raise ValueError("entry-target discovery did not converge after 64 rounds")
-    analyzer.record_entries(traces)
     anomalies: set[tuple[int, str]] = set()
     functions = []
     owners: list[int | None] = [None] * layout.text.size
@@ -1134,6 +1200,8 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "entry_groups": analyzer.entry_groups,
         "tail_target_repairs": [{"address": target, "isa": isa, "sources": sorted(sources)}
                                 for (target, isa), sources in sorted(analyzer.tail_target_repairs.items())],
+        "linker_tail_splits": [{"address": address, "target": address + 4, "isa": "arm"}
+                               for address in sorted(analyzer.linker_wrappers)],
         "stats": {}, "anomalies": [],
     }
     anomalies.update((issue["address"], issue["issue"]) for issue in validate_catalogue(result, image, layout))
@@ -1173,6 +1241,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "secondary_entries": sum(len(trace.entries) - 1 for trace in traces),
         "nop_entries": sum(entry["kind"] == "nop_entry" for trace in traces for entry in trace.entries.values()),
         "repaired_tail_targets": len(analyzer.tail_target_repairs),
+        "linker_tail_wrappers": len(analyzer.linker_wrappers),
     }
     return result
 

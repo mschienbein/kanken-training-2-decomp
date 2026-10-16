@@ -163,6 +163,9 @@ class AcceptGateTest(unittest.TestCase):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
         receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
+                   "inputs": {"linker_model": "armlink5-inline-branchnop-v2"},
+                   "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []}}
+                             for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
         stubs = {
             "build": types.SimpleNamespace(build=lambda *a, **k: dict(receipt), BuildError=RuntimeError),
@@ -197,6 +200,9 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(record["commit"], "0" * 40)
         on_disk = json.loads((self.root / "accept/c009/prepare.json").read_text(encoding="utf-8"))
         self.assertEqual(on_disk["checks"], record["checks"])
+        # Gates v1.8: the linker model and every emulated rewrite in new units are recorded.
+        self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v2")
+        self.assertEqual(record["linker_rewrites"], {"func_00100000": [{"kind": "inline_nop"}]})
 
     def test_revised_accepted_unit_must_be_reviewed_again(self):
         """Editing an accepted source in a later checkpoint needs review rows like new work."""

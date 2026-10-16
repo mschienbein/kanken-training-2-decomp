@@ -231,17 +231,109 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual([function["address"] for function in result["functions"]], [BASE, BASE + 16])
         self.assertEqual(result["functions"][0]["size"], 16)
 
-    def test_nop_entry_and_body_are_one_non_c_group(self) -> None:
+    def test_linker_nop_entry_and_body_are_separate_functions(self) -> None:
         result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20, link=True),
                                  0xE12FFF1E, 0, 0xE1A00000, 0xE3A00001, 0xE12FFF1E])
-        function = result["functions"][1]
-        self.assertEqual((function["address"], function["size"], function["kind"]),
-                         (BASE + 16, 12, "multi_entry"))
-        self.assertEqual([(entry["address"], entry["kind"]) for entry in function["entries"]],
-                         [(BASE + 16, "nop_entry"), (BASE + 20, "entry")])
+        wrapper, body = result["functions"][1:]
+        self.assertEqual((wrapper["address"], wrapper["size"], wrapper["kind"]),
+                         (BASE + 16, 4, "function"))
+        self.assertEqual((body["address"], body["size"], body["kind"]),
+                         (BASE + 20, 8, "function"))
+        self.assertEqual(wrapper["entries"][0]["sources"], [BASE])
+        self.assertEqual(body["entries"][0]["sources"], [BASE + 4])
+        self.assertEqual(result["stats"]["nop_entries"], 0)
+        self.assertEqual(result["entry_groups"], [])
+        self.assertEqual(result["linker_tail_splits"],
+                         [{"address": BASE + 16, "target": BASE + 20, "isa": "arm"}])
+
+    def test_leading_linker_nop_splits_without_a_body_pointer(self) -> None:
+        result = self.catalogue([0xE1A00000, 0xE59F0000, 0xE12FFF1E, 0x12345678])
+        wrapper, body = result["functions"]
+        self.assertEqual((wrapper["size"], wrapper["kind"]), (4, "function"))
+        self.assertEqual((body["address"], body["size"], body["kind"]), (BASE + 4, 12, "function"))
+        self.assertEqual(body["pools"], [[BASE + 12, BASE + 16]])
+        self.assertEqual(body["evidence"], ["linker_branchnop"])
+        self.assertEqual(result["stats"]["linker_tail_wrappers"], 1)
+
+    def test_linker_nop_restores_a_merged_weak_body_start(self) -> None:
+        image, layout = fixture([0xE1A00000, 0xE92D4010, 0xE8BD8010], rodata=[BASE + 4])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.add_seed(BASE, "arm", "entry")
+        analyzer.add_seed(BASE + 4, "arm", "pointer")
+        traces = analyzer.group_fallthroughs(analyzer.refine())
+        self.assertEqual(len(analyzer.boundary_merges), 1)
+        analyzer.record_entries(traces)
+        self.assertTrue(analyzer.promote_linker_entries(traces))
+        traces = analyzer.group_fallthroughs(analyzer.refine())
+        self.assertEqual([trace.address for trace in traces], [BASE, BASE + 4])
+        self.assertEqual(analyzer.boundary_merges, [])
+        self.assertEqual(analyzer.seeds[BASE + 4].evidence, {"linker_branchnop", "pointer"})
+
+    def test_pointer_referenced_linker_nop_padding_before_a_long_body(self) -> None:
+        long_body = [0xE2800001] * 40 + [0xE12FFF1E]
+        for segment in ("rodata", "data", "pool"):
+            with self.subTest(segment=segment):
+                if segment == "pool":
+                    words = [0xE59F0004, branch(BASE + 4, BASE + 20, link=True), 0xE12FFF1E,
+                             BASE + 16, 0xE1A00000, *long_body]
+                    result = self.catalogue(words)
+                    address = BASE + 16
+                else:
+                    words = [branch(BASE, BASE + 16, link=True), 0xE12FFF1E, 0, 0xE1A00000, *long_body]
+                    result = self.catalogue(words, **{segment: [BASE + 12]})
+                    address = BASE + 12
+                functions = {function["address"]: function for function in result["functions"]}
+                self.assertEqual((functions[address]["size"], functions[address]["kind"]), (4, "function"))
+                self.assertIn("pointer", functions[address]["evidence"])
+                self.assertEqual(functions[address + 4]["size"], 164)
+                self.assertEqual(functions[address + 4]["kind"], "function")
+
+    def test_pointer_only_empty_body_hidden_after_linker_nop(self) -> None:
+        for terminal in (0xE12FFF1E, 0xE1A0F00E):
+            with self.subTest(terminal=terminal):
+                result = self.catalogue([0xE1A00000, terminal], rodata=[BASE + 4])
+                wrapper, body = result["functions"]
+                self.assertEqual((wrapper["size"], body["size"]), (4, 4))
+                self.assertEqual((wrapper["kind"], body["kind"]), ("function", "function"))
+                self.assertIn("pointer", body["evidence"])
+
+    def test_linker_nop_chain_splits_each_wrapper(self) -> None:
+        result = self.catalogue([0xE1A00000, 0xE1A00000, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [4, 4, 4])
+        self.assertEqual(result["stats"]["linker_tail_wrappers"], 2)
+
+    def test_linker_nop_does_not_erase_other_multi_entry_evidence(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 24, link=True),
+                                 0xE12FFF1E, 0, 0xE1A00000, 0xE3A00001, 0xE12FFF1E])
+        wrapper, body = result["functions"][1:]
+        self.assertEqual((wrapper["address"], wrapper["kind"], wrapper["size"]), (BASE + 16, "function", 4))
+        self.assertEqual((body["address"], body["kind"]), (BASE + 20, "multi_entry"))
+        self.assertEqual([entry["address"] for entry in body["entries"]], [BASE + 20, BASE + 24])
+
+    def test_secondary_nop_inside_a_body_does_not_establish_a_wrapper(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20),
+                                 0, 0, 0xE3A00001, 0xE1A00000, 0xE12FFF1E])
+        body = result["functions"][1]
+        self.assertEqual((body["address"], body["kind"], body["size"]), (BASE + 16, "multi_entry", 12))
+        self.assertEqual([entry["address"] for entry in body["entries"]], [BASE + 16, BASE + 20])
+        self.assertEqual(result["linker_tail_splits"], [])
+
+    def test_architectural_nop_fallthrough_stays_multi_entry(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20, link=True),
+                                 0xE12FFF1E, 0, 0xE320F000, 0xE3A00001, 0xE12FFF1E])
+        self.assertEqual(result["functions"][1]["kind"], "multi_entry")
         self.assertEqual(result["stats"]["nop_entries"], 1)
-        self.assertEqual(result["entry_groups"],
-                         [{"address": BASE + 16, "members": [BASE + 16, BASE + 20], "reason": "fallthrough"}])
+        self.assertEqual(result["linker_tail_splits"], [])
+
+    def test_nonentry_and_trailing_linker_nops_are_not_split(self) -> None:
+        for words in ([0xE92D4010, 0xE1A00000, 0xE8BD8010],
+                      [0xE3A00001, 0xE1A00000, 0xE12FFF1E],
+                      [0xE12FFF1E, 0xE1A00000, 0xE12FFF1E],
+                      [0x01A00000, 0xE12FFF1E]):
+            with self.subTest(words=words):
+                result = self.catalogue(words)
+                self.assertEqual(len(result["functions"]), 1)
+                self.assertEqual(result["linker_tail_splits"], [])
 
     def test_external_body_branch_records_secondary_entry(self) -> None:
         result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20),
@@ -653,13 +745,22 @@ class CatalogueTests(unittest.TestCase):
         entry_owners = {entry["address"]: (function, entry) for function in first["functions"]
                         for entry in function["entries"]}
         owner, entry = entry_owners[0x18F7F0]
-        self.assertEqual((owner["address"], owner["kind"]), (0x18F7EC, "multi_entry"))
+        self.assertEqual((owner["address"], owner["kind"]), (0x18F7F0, "function"))
         self.assertTrue({0x11FA34, 0x11FFDC} <= set(entry["sources"]))
         owner, entry = entry_owners[0x12D1D8]
         self.assertEqual(owner["address"], 0x12D1CC)
         self.assertIn(0x135054, entry["sources"])
         owner, entry = entry_owners[0x1852F4]
-        self.assertEqual((owner["kind"], entry["kind"]), ("multi_entry", "nop_entry"))
+        self.assertEqual((owner["kind"], entry["kind"], owner["size"]), ("function", "entry", 4))
+        functions = {function["address"]: function for function in first["functions"]}
+        self.assertEqual((functions[0x186EEC]["kind"], functions[0x186EEC]["size"]), ("function", 4))
+        self.assertIn("pointer", functions[0x186EEC]["evidence"])
+        self.assertEqual((functions[0x1EF884]["kind"], functions[0x1EF884]["size"]), ("function", 4))
+        self.assertIn("pointer", functions[0x1EF884]["evidence"])
+        for split in first["linker_tail_splits"]:
+            self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
+                             ("function", 4))
+            self.assertEqual(functions[split["target"]]["kind"], "function")
 
 
 if __name__ == "__main__":

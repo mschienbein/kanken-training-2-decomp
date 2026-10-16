@@ -26,6 +26,11 @@ reading any other review of the same checkpoint.
    against other units by hand.
 5. **Credit scope:** only functions listed for the unit are credited; nothing credits a veneer or
    another classified kind.
+6. **Linker rewrites:** `prepare.json` `linker_rewrites` lists every emulated armlink rewrite
+   (`docs/LINKER.md`, model in `linker_model`) inside the functions you review. A call inlined to
+   `mov r0, r0` proves only that the original callee was a return-only function: the source's
+   choice of callee is unverifiable from bytes and must be plausible and marked `[INFERENCE]` in a
+   comment when it is not otherwise evidenced (e.g. by a pointer to the same function).
 
 ## Record
 
