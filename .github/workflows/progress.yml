@@ -1,0 +1,37 @@
+name: progress
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate configuration JSON
+        run: |
+          for f in config/*.json toolchain.lock.json; do
+            python3 -m json.tool "$f" > /dev/null
+          done
+
+      - name: Generate objdiff progress report
+        run: python3 ci/progress_report.py --version jp --output report.json --summary "$GITHUB_STEP_SUMMARY"
+
+      # ByteMatch reads the <version>_report artifact: default-branch push runs feed its history,
+      # pull request runs feed its PR comments. Registration needs a public repository (docs/BYTEMATCH.md).
+      - name: Upload progress report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jp_report
+          path: report.json

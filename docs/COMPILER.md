@@ -1,0 +1,50 @@
+# Compiler identification
+
+Status: **in progress.** Leading candidate: **ARM Compiler 5.04 (archive build `armcc_504_82`,
+banner `Tool: armcc [5040081]`), `-Otime`, ARM mode.** Not yet frozen as the game profile.
+
+## Method
+
+`tools/compid.py` compiles hand-written probe C under a grid of compiler builds × flag sets and
+links every result in place against the original (`tools/inplace.py`), so a "Y" means the probe
+reproduces the original function byte for byte, relocations included. Probe sources are written
+once and used unchanged for every grid cell. Probes and raw results live in `scratch/compid/`
+(private: the probes name original addresses).
+
+Base flags in every cell: `--cpu=MPCore --fpmode=fast --apcs=/interwork --arm --split_sections
+--signed_chars`.
+
+## Evidence so far (2026-10-15, macOS arm64 via wibo 1.2.0)
+
+| Function | Feature | 4.0 b821 | 4.1 b894–b1454 | 5.04 b82 |
+|---|---|---|---|---|
+| 0x10e664, 0x1149a8, 0x1179b4, 0x122350, 0x1263b8 | leaf loads/stores, conditional return | Y | Y | Y |
+| 0x136930 | branchy leaf (`-Otime` vs `-Ospace` split) | N | Y (Otime) | Y (Otime) |
+| 0x140dac | array indexing, early return | N | Y (Otime) | Y (Otime) |
+| 0x103798 | global via literal pool + BL | — | Y | Y |
+| 0x1103d4 | VFP divide, float return in s0 | — | Y | Y |
+| 0x1091d4 | VFP convert + store order | — | **N in all 24 statement orders** (b1049, b1440) | **Y** (2 of 24 orders) |
+| 0x1033cc | loop after allocation | — | N | N (source shape open; `-O3` unrolls ×2, the original does not) |
+| 0x10c498 | two virtual calls + float divides | — | N | near: only the order of two `vmov.f32` saves differs |
+
+Conclusions:
+
+- RVCT 4.0 is ruled out; `-Ospace` is ruled out for game code (0x136930, 0x140dac).
+- 4.1 builds cannot reproduce 0x1091d4's store scheduling under any statement order; 5.04 can.
+- `-O2` versus `-O3` is unresolved: 0x1033cc is not unrolled in the original, which `-O3 -Otime`
+  does by default. Find a source shape that matches under one of them before freezing.
+- Hard-float vs soft-float linkage made no difference on these probes; the original passes and
+  returns floats in VFP registers (`s0`, `s1`).
+- The archive's `armcc_41_561` reports `RVCT4.0 [Build 902]`; treat archive ids as labels.
+
+## Next
+
+1. Resolve `-O2`/`-O3` with loop-bearing functions; resolve 0x10c498's save order (likely source
+   shape).
+2. Probe C++ specifics (the game is C++: virtual calls through vtables): `--cpp`, RTTI and exception
+   flags, `--force_new_nothrow`.
+3. Fingerprint library regions separately (CTR-SDK, NW4C, PUX HWR, C runtime): prebuilt
+   libraries may use other builds/flags. Note the recurring `mov r0, r0` before `bx lr` in some
+   regions.
+4. Reach ≥10 independent matches across distinct features (gate H5), then freeze the profile as
+   `game` in `config/compiler_profiles.json`.

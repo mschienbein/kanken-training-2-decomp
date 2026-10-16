@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "note": "Trial profiles during compiler identification; none is the confirmed game profile yet.",
+  "profiles": {
+    "trial-41-1049-O3-Otime": {
+      "compiler": "armcc_41_1049",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O3",
+        "-Otime"
+      ]
+    },
+    "trial-504-82-O3-Otime": {
+      "compiler": "armcc_504_82",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O3",
+        "-Otime"
+      ]
+    },
+    "trial-504-82-O2-Otime": {
+      "compiler": "armcc_504_82",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O2",
+        "-Otime"
+      ]
+    },
+    "trial-504-82-O3-Ospace": {
+      "compiler": "armcc_504_82",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O3",
+        "-Ospace"
+      ]
+    }
+  }
+}
