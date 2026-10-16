@@ -53,7 +53,7 @@ def render(data: bytes, base: int, isa: str, data_ranges: list[tuple[int, int]])
 
 
 def diff_lines(original: bytes, candidate: bytes, base: int, fn: dict, limit: int) -> list[str]:
-    pools = [tuple(p) for p in fn.get("pools", [])]
+    pools = [tuple(p) for p in (*fn.get("pools", []), *fn.get("literals", []))]  # data inside the section
     left = render(original, base, fn["isa"], pools)
     right = render(candidate, base, fn["isa"], pools)
     out = []

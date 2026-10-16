@@ -57,7 +57,7 @@ def branch_target(insn) -> int | None:
 def disassemble(image, fn: dict):
     base, size, isa = fn["address"], fn["size"], fn["isa"]
     data = image.read(base, size)
-    pools = [tuple(p) for p in fn.get("pools", [])]
+    pools = [tuple(p) for p in (*fn.get("pools", []), *fn.get("literals", []))]  # data inside the section
     rows, pos = [], 0
     step = 4 if isa == "arm" else 2
     while pos < size:
@@ -161,7 +161,7 @@ def _calls(image, fn: dict, target: int) -> bool:
     if fn.get("kind") == "veneer":
         return False
     data = image.read(fn["address"], fn["size"])
-    pools = [(lo - fn["address"], hi - fn["address"]) for lo, hi in fn.get("pools", [])]
+    pools = [(lo - fn["address"], hi - fn["address"]) for lo, hi in (*fn.get("pools", []), *fn.get("literals", []))]
     if fn["isa"] == "arm":
         for pos in range(0, len(data) - 3, 4):
             if any(lo <= pos < hi for lo, hi in pools):
