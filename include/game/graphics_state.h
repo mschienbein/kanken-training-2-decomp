@@ -8,7 +8,7 @@ struct DisplayBuffer {
 
 struct GraphicsContext {
     unsigned char reserved00[0x5c];
-    struct DisplayBuffer *buffers[1];
+    struct DisplayBuffer *buffers[];        /* 0x5c; count not known */
 };
 
 struct GraphicsState {

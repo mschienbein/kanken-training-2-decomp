@@ -1,7 +1,5 @@
-class Resource;
-
-extern "C" void func_0019f568(void);
-extern "C" void func_0019d5c4(Resource *resource);
+#include "game/resource.h"
+#include "game/runtime.h"
 
 struct ResourceSlot {
     unsigned bits;

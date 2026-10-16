@@ -1,3 +1,5 @@
+#include "game/runtime.h"
+
 struct ResourceSet {
     unsigned char state[0x44];
     void *first;
@@ -8,7 +10,6 @@ struct ResourceSet {
 extern struct ResourceSet bss_00291758;
 extern void *func_0011ffdc(void *object);
 extern void *func_0011fa34(void *object);
-extern void func_001852f4(void *allocation);
 extern void func_0019dc20(void *allocation);
 
 void func_0019e02c(void)

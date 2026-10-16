@@ -46,7 +46,7 @@ import toolchain  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 BOUND = re.compile(r"(?:func|data|bss)_[0-9a-fA-F]{8}\Z")
 COVERAGE = {
-    "cpp": "only class-definition agreement across units (ODR, token-level); declarations and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+    "cpp": "class-definition agreement across units (ODR, token-level) and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
     "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
     "not_covered": [
         "whole-program/heap alias analysis and pointer arithmetic",
@@ -731,6 +731,16 @@ def cpp_class_definitions(text: str) -> list[tuple[str, str, int]]:
     return found
 
 
+CPP_EXTERN_C = re.compile(r'extern\s+"C"\s+[^;{}]*?\b((?:func|data|bss)_[0-9a-fA-F]{8})\b[^;{}]*;')
+
+
+def cpp_extern_declarations(text: str) -> list[tuple[str, int]]:
+    """(name, line) for each address-named `extern "C"` declaration written in C++ source text
+    (definitions, which end in a body, are not declarations). Comments are ignored."""
+    text = CPP_COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
+    return [(m.group(1), text.count("\n", 0, m.start()) + 1) for m in CPP_EXTERN_C.finditer(text)]
+
+
 def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -> dict:
     root = root.resolve()
     if names is None:
@@ -740,6 +750,7 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
     declarations: dict[str, list[Declaration]] = {}
     records: dict[tuple[str, str], list[tuple[Record, Analyzer]]] = {}
     cpp_classes: dict[str, list[tuple[str, dict]]] = {}
+    cpp_externs: dict[str, list[dict]] = {}
     for unit in units:  # Intentionally sequential: armcc runs on a shared laptop.
         source = display_path(unit.source, root)
         entry = {"source": source, "sha256": None, "checked": False}
@@ -750,6 +761,8 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
                 text = unit.source.read_text(encoding="utf-8")
                 for name, body, line in cpp_class_definitions(text):
                     cpp_classes.setdefault(name, []).append((body, {"source": source, "line": line, "type": "class definition"}))
+                for name, line in cpp_extern_declarations(text):
+                    cpp_externs.setdefault(name, []).append({"source": source, "line": line, "type": 'local extern "C" declaration'})
                 report["unchecked"].append({"source": source, "kind": "cpp", "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked"})
                 continue
             if unit.source.suffix.lower() != ".c":
@@ -791,6 +804,12 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
     for name, definitions in sorted(cpp_classes.items()):
         if len({body for body, _ in definitions}) > 1:
             report["disagreements"].append({"name": f"class {name}", "kind": "odr", "sites": unique_sites([site for _, site in definitions])})
+    # C++ declarations are not type-checked, so a symbol shared with any other unit must come from
+    # a header in include/ (the same text C units are checked against), never a local redeclaration.
+    for name, sites in sorted(cpp_externs.items()):
+        shared_with_c = [dict(d.site, type=describe(d.type)) for d in declarations.get(name, [])]
+        if shared_with_c or len({site["source"] for site in sites}) > 1:
+            report["disagreements"].append({"name": name, "kind": "cpp-redeclaration", "sites": unique_sites(sites + shared_with_c)})
     report["disagreements"].sort(key=lambda item: (item["name"], item["kind"]))
     return report
 

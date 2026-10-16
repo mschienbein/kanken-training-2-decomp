@@ -7,7 +7,7 @@ struct SlotBlock {
     struct SlotBlock *previous;
 };
 
-struct __attribute__((aligned(8))) SlotList {
+struct SlotList {
     struct SlotBlock *head;
     unsigned head_count;
     struct SlotBlock *tail;

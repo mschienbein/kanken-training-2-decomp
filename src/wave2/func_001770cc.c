@@ -9,7 +9,7 @@ struct Animation {
 
 struct AnimationOwner {
     unsigned char reserved00[0x20];
-    struct Animation *animations[1];
+    struct Animation *animations[];         /* count not known from this function */
 };
 
 void func_001770cc(struct AnimationOwner *owner, int index, int enabled)

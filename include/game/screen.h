@@ -3,7 +3,14 @@
 
 /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */
 
-struct Widget;
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+struct Widget {
+    unsigned char reserved00[0x92];
+    unsigned char types[2];                 /* 0x92 */
+};
 
 /* Named entries selected by index; `kind` 1 means `names` is valid. */
 struct NameTable {
@@ -32,7 +39,12 @@ struct Screen {
 };
 
 extern void func_0016e1d0(struct Screen *screen, int index, int enabled);
+extern unsigned char func_0017a9a0(const struct Widget *widget, int index);
 extern void func_0017a968(struct Widget *widget, const struct NameTable *table, int index, int mode);
 extern void func_001b7c9c(struct Screen *screen, int index, int value, const struct NameTable *const *labels);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

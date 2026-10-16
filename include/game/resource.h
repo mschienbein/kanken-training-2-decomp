@@ -1,0 +1,36 @@
+#ifndef GAME_RESOURCE_H
+#define GAME_RESOURCE_H
+
+/* Reference-owned resource interface (C++ only; partial vtable). */
+
+#ifndef __cplusplus
+#error "game/resource.h is C++ only"
+#endif
+
+class Resource {
+public:
+    virtual unsigned read(unsigned *transferred, unsigned long long offset,
+                          void *buffer, unsigned size);
+    virtual void slot01();
+    virtual void slot02();
+    virtual void slot03();
+    virtual void slot04();
+    virtual void slot05();
+    virtual void slot06();
+    virtual void slot07();
+    virtual void slot08();
+    virtual void slot09();
+    virtual void slot10();
+    virtual void slot11();
+    virtual void release();
+};
+
+/* Owner holding a tagged resource pointer: bit 0 flags an unexpected state on release. */
+struct ResourceOwner {
+    const void *vtable;
+    unsigned resource_bits;
+};
+
+extern "C" void func_0019d5c4(Resource *resource);
+
+#endif

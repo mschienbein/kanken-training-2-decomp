@@ -1,3 +1,5 @@
+#include "game/text.h"
+
 int func_0017adc4(const unsigned short *text)
 {
     int length = 0;

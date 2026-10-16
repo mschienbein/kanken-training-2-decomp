@@ -1,12 +1,5 @@
-class Resource;
-
-struct ResourceOwner {
-    const void *vtable;
-    unsigned resource_bits;
-};
-
-extern "C" void func_0019f568(void);
-extern "C" void func_0019d5c4(Resource *resource);
+#include "game/resource.h"
+#include "game/runtime.h"
 
 extern "C" void func_001d2da4(ResourceOwner *owner)
 {

@@ -1,3 +1,5 @@
+#include "game/runtime.h"
+
 class ResourceObject {
 public:
     virtual ~ResourceObject();
@@ -48,7 +50,6 @@ struct ResourceTable {
 
 extern "C" ResourceTable bss_002d3d60;
 extern "C" void *func_0013714c(void *object);
-extern "C" void func_001852f4(void *memory);
 
 extern "C" void func_0011f080(ResourceEntry *entry)
 {

@@ -352,6 +352,17 @@ void local(void) {
         self.assertEqual([(s["source"], s["line"]) for s in report["disagreements"][0]["sites"]], [("a.cpp", 1), ("b.cpp", 2)])
         self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
 
+    def test_cpp_local_redeclaration_of_a_shared_symbol_fails_even_when_waived(self):
+        """c003-wave2 F01: a C++ unit redeclared func_0017a968 with types the C side had renamed."""
+        self.add("a.c", "void func_0017a968(int *table) { }\n")
+        self.add("b.cpp", 'extern "C" void func_0017a968(long *table);\n'
+                          'extern "C" void func_00100000(void);  // local to this unit only: fine\n'
+                          'extern "C" int func_00100004(void) { return 0; }\n')
+        report = self.audit()
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("func_0017a968", "cpp-redeclaration")])
+        self.assertEqual(sorted(s["source"] for s in report["disagreements"][0]["sites"]), ["a.c", "b.cpp"])
+        self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
     def test_preprocess_failure_is_unchecked_not_pass(self):
         self.add("a.c", "int data_00200000;\n")
         with patch.object(interfaces, "preprocess", side_effect=interfaces.InterfaceError("compiler failed (7)")):

@@ -210,6 +210,19 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(record["revised_headers"], ["include/game/shared.h"])
         self.assertEqual(accept.new_functions(self.root / "accept/c010", record),
                          {"func_00100000": "src/a.c", "func_00100010": "src/b.c"})
+        # c003-wave2 F02: finalize must accept exactly the declared revisions...
+        rows = [{"function": f, "source": s, "verdict": "PASS", "method": "tools/match.py re-run", "finding_ids": []}
+                for f, s in (("func_00100000", "src/a.c"), ("func_00100010", "src/b.c"))]
+        review = self.root / "review-c010.json"
+        review.write_text(json.dumps({"reviewer": "rev1", "family": "openai", "verdict": "PASS",
+                                      "functions": rows, "findings": [], "qualifications": []}), encoding="utf-8")
+        accept.review("c010", review)
+        self.assertEqual(accept.finalize("c010", 1)["seq"], 2)
+        accept.verify_history()
+        # ...and nothing else: an undeclared edit to an accepted file still blocks verify.
+        (self.root / "src/a.c").write_text("int func_00100000(void) { return 5; }\n", encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "credited source differs"):
+            accept.verify_history()
 
     def test_prepare_refuses_a_dirty_tree(self):
         """Gates run on one committed tree; an uncommitted edit anywhere stops prepare."""

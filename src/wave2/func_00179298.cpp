@@ -1,8 +1,8 @@
-struct DisplayObject;
-struct AnimationTable;
+#include "game/text.h"
+#include "game/screen.h"
 
 struct DisplayHandle {
-    DisplayObject *object;
+    Widget *object;
 
     void set_active(int active);
 };
@@ -18,21 +18,17 @@ struct DisplayState {
 
 struct AnimationContext {
     unsigned int reserved00;
-    const AnimationTable *table;
+    const NameTable *table;
 };
 
 extern "C" AnimationContext bss_00246b48;
-extern "C" int func_0017adc4(const unsigned short *text);
-extern "C" void func_0017a968(DisplayObject *object,
-                             const AnimationTable *table, int index, int mode);
-extern "C" unsigned char func_0017a9a0(const DisplayObject *object, int index);
-extern "C" void func_001826fc(DisplayObject *object, int active);
-extern "C" void func_00195a08(DisplayObject *object, int index, int active);
-extern "C" void func_0015e948(DisplayObject *object, int active);
+extern "C" void func_001826fc(Widget *object, int active);
+extern "C" void func_00195a08(Widget *object, int index, int active);
+extern "C" void func_0015e948(Widget *object, int active);
 
 inline void DisplayHandle::set_active(int active)
 {
-    DisplayObject *display = object;
+    Widget *display = object;
     if (display == 0)
         return;
     switch (func_0017a9a0(display, 0)) {

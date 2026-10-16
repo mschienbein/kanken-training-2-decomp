@@ -357,7 +357,9 @@ def finalize(name: str, min_reviews: int) -> dict:
         raise AcceptError("profiles or catalogue changed since prepare")
     if sha256_file(MATCHES) != record["base_matches_sha256"]:
         raise AcceptError("the accepted ledger changed since prepare (another checkpoint finalized?)")
-    verify_history()
+    # Revisions prepare declared are pinned to their prepared hashes above ("sources/headers
+    # changed since prepare"); every other accepted file must still equal its accepted hash.
+    verify_history(revised_units=record.get("revised_units", ()), revised_headers=record.get("revised_headers", ()))
 
     ledger = (out / "matches.json").read_bytes()
     if hashlib.sha256(ledger).hexdigest() != record["ledger_sha256"]:
@@ -392,7 +394,9 @@ def finalize(name: str, min_reviews: int) -> dict:
 # -- verify ------------------------------------------------------------------------------------------
 
 
-def verify_history() -> list[dict]:
+def verify_history(revised_units=(), revised_headers=()) -> list[dict]:
+    """Check the hash chain and that the accepted ledger, credited sources and accepted headers
+    are unchanged. `revised_*` (finalize only) exempts exactly the revisions a prepare declared."""
     history = read_history()
     prev = None
     for i, e in enumerate(history, 1):
@@ -405,10 +409,14 @@ def verify_history() -> list[dict]:
     if history:
         if sha256_file(MATCHES) != history[-1]["matches_sha256"]:
             raise AcceptError("config/matches.json is not the last finalized ledger")
-        if source_hashes(ledger["units"]) != history[-1]["sources"]:
-            raise AcceptError("a credited source differs from its accepted hash")
+        revised = set(revised_units)
+        current_sources = source_hashes(ledger["units"])
+        drifted = sorted(s for s, sha in history[-1]["sources"].items() if s not in revised and current_sources.get(s) != sha)
+        if drifted or set(current_sources) != set(history[-1]["sources"]):
+            raise AcceptError(f"a credited source differs from its accepted hash: {', '.join(drifted) or 'unit set'}")
         current = header_hashes()
-        changed = sorted(h for h, sha in history[-1].get("headers", {}).items() if current.get(h) != sha)
+        changed = sorted(h for h, sha in history[-1].get("headers", {}).items()
+                         if h not in set(revised_headers) and current.get(h) != sha)
         if changed:
             raise AcceptError(f"an accepted header changed or disappeared: {', '.join(changed)}")
     elif ledger["units"]:

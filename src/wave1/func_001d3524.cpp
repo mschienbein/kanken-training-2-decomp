@@ -1,9 +1,5 @@
-class Resource;
-
-struct ResourceOwner {
-    const void *vtable;
-    unsigned resource_bits;
-};
+#include "game/resource.h"
+#include "game/runtime.h"
 
 struct Controller {
     char reserved00[0x34];
@@ -12,9 +8,6 @@ struct Controller {
     unsigned char active;
     unsigned char enabled;
 };
-
-extern "C" void func_0019f568(void);
-extern "C" void func_0019d5c4(Resource *resource);
 
 extern "C" void func_001d3524(Controller *controller)
 {

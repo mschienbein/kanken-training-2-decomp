@@ -1,9 +1,6 @@
-struct DisplayObject {
-    unsigned char reserved00[0x92];
-    unsigned char types[2];
-};
+#include "game/screen.h"
 
-unsigned char func_0017a9a0(const struct DisplayObject *object, int index)
+unsigned char func_0017a9a0(const struct Widget *widget, int index)
 {
-    return object->types[index];
+    return widget->types[index];
 }

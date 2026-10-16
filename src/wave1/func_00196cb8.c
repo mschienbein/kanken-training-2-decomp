@@ -1,3 +1,4 @@
+#include "game/runtime.h"
 typedef struct ResourceEntry {
     void *resource;
     unsigned char reserved[0xd0];
@@ -13,7 +14,6 @@ typedef struct ResourceState {
     ResourceGroup groups[2];
 } ResourceState;
 extern ResourceState bss_0049cbd0;
-extern void func_0019f568(void);
 
 void *func_00196cb8(int screen, int index)
 {

@@ -1,6 +1,13 @@
-# Gate design — frozen v1.5 (2026-10-16)
+# Gate design — frozen v1.6 (2026-10-16)
 
 Revisions:
+- **v1.6** (2026-10-16): (a) finalize is revision-aware — the drift check exempts exactly the
+  prepare-declared `revised_units`/`revised_headers` (already pinned to their prepared hashes) and
+  still refuses any other change to accepted files; before this, v1.4 revisions could never be
+  finalized (`c003-wave2` review F02). (b) G3 refuses a local `extern "C"` declaration in a C++
+  unit of an address-named symbol that a C unit or header also declares, or that two C++ units
+  declare: shared symbols come from `include/` headers, because C++ declarations are not
+  type-checked (`c003-wave2` F01, a C++ caller still using renamed types).
 - **v1.5** (2026-10-16): a review binds exactly the prepared files — the current hashes of the
   sources and headers named in `prepare.json` — and lists headers added since prepare
   (`headers_added_since_prepare`) without being unbound by them. Finalize still requires the whole
