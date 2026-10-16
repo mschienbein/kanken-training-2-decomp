@@ -5,12 +5,12 @@ Japan, `CTR-P-B2KJ`). The goal is C/C++ source that the original ARM compiler tu
 byte-identical `code.bin`, and then a native study app for Windows and iPad built on the recovered
 behaviour.
 
-<!-- ByteMatch badges go live once the repository is public and registered (see docs/BYTEMATCH.md):
 [![Code](https://bytematch.dev/mschienbein/kanken-training-2-decomp.svg?measure=matched_code_percent&label=Code)](https://bytematch.dev/mschienbein/kanken-training-2-decomp)
 [![Functions](https://bytematch.dev/mschienbein/kanken-training-2-decomp.svg?measure=matched_functions&label=Functions)](https://bytematch.dev/mschienbein/kanken-training-2-decomp)
--->
 
-**Status:** harness bootstrap. No game code is decompiled yet. See [`docs/STATUS.md`](docs/STATUS.md).
+**Status:** early. 103 functions (5,056 bytes) are accepted as matching C/C++, each re-derived by two
+independent reviews; the next checkpoints (≈230 functions) are in review. Details in
+[`docs/STATUS.md`](docs/STATUS.md).
 
 ## What you need
 
@@ -19,7 +19,7 @@ behaviour.
 - Either the encrypted cartridge dump plus a `boot9.bin` dumped from your own console (GodMode9), or
   the same dump with its content decrypted (GodMode9 "decrypt"). The accepted dumps are pinned by
   hash in [`config/title.json`](config/title.json).
-- macOS (Apple Silicon) or Linux, Python 3.12, [`uv`](https://docs.astral.sh/uv/).
+- macOS (Apple Silicon), Windows or Linux, Python 3.12, [`uv`](https://docs.astral.sh/uv/).
 
 ## Quick start
 
@@ -71,6 +71,7 @@ On Windows use `.venv\Scripts\python.exe`; `armcc.exe` runs natively there (no w
 | `tools/match.py src.c --profile P` | compile, link in place, compare byte for byte; diff on mismatch |
 | `tools/compid.py probe.c` | compiler builds × flag sets matrix |
 | `tools/build.py --name N` | build `code.bin` from credited source; receipt in `build/N/` |
+| `tools/accept.py prepare/review/finalize` | checkpoint gates ([`docs/GATES.md`](docs/GATES.md)); linker emulation in [`docs/LINKER.md`](docs/LINKER.md) |
 | `ci/progress_report.py` | objdiff report for ByteMatch (no ROM needed) |
 
 Current state: [`docs/STATUS.md`](docs/STATUS.md). Picking up on a new machine:

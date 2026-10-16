@@ -10,7 +10,7 @@ repository is public.
 |---|---|---|
 | Report generator | `ci/progress_report.py` | objdiff report v2 JSON; needs no ROM. Denominator: `config/catalogue.json`. Numerator: functions credited in `config/matches.json`. Units are 64 KiB text blocks until functions are grouped into translation units. |
 | Workflow | `.github/workflows/progress.yml` | Runs on push to `main`, on pull requests and on demand; uploads artifact `jp_report` containing `report.json`. |
-| Badges | `README.md` (commented out) | `measure=matched_code_percent` and `measure=matched_functions`. ByteMatch rejects decomp.dev's `code`/`functions` measure names. |
+| Badges | `README.md` | `measure=matched_code_percent` and `measure=matched_functions`. ByteMatch rejects decomp.dev's `code`/`functions` measure names. |
 
 `config/matches.json` changes only when the integrator records an accepted build
 (`tools/build.py` receipt `PASS`), so the dashboard shows accepted progress, never candidates.
