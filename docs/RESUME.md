@@ -2,6 +2,29 @@
 
 Current entry on top.
 
+## 2026-10-16 — decompiling on the Mac (work also resumable on the Windows desktop)
+
+State: `docs/STATUS.md` top entry. Accepted: c001-pilot-r4 (17 functions). Gates: `docs/GATES.md`
+v1.2. The Windows setup steps in the next entry still apply; the expected test count is now
+~180 (`tools/test_suite.py`), and the cross-host check is to re-run
+`tools/accept.py prepare` for a new checkpoint name on the desktop and compare its build outputs
+with `accept/c001-pilot-r4/prepare.json`.
+
+Loop for each wave (integrator):
+
+1. `tools/triage.py --exclude <in-flight.json> batches --size 15 --count N` → batch files; one
+   author agent per batch (contract: AGENTS.md author loop; deliver `scratch/authors/<agent>/RESULT.json`).
+2. Re-derive every claimed MATCH with `tools/match.py`, copy sources into `src/<area>/`, write
+   `config/candidates/<cp>.json`, commit (G0 needs a clean tree).
+3. `tools/jobs.py run --name <cp>-prepare -- .venv/bin/python tools/accept.py prepare --checkpoint <cp> --candidates ...`
+4. Two reviewers per `docs/REVIEWING.md`; fix any finding in a new checkpoint name; finalize with
+   `--min-reviews 2`; write `docs/known-issues-<cp>.md`; commit `accept/`, ledger, history; push.
+5. Fold boundary findings (EXTENT, string tails, multi-entry) into the next catalogue version via
+   `tools/denominator.py record`.
+
+Agents that edit tracked tools work in a git worktree (`scratch/worktrees/<name>`), never in the
+main checkout.
+
 ## 2026-10-15 — continue on the Windows desktop
 
 The harness was built and proven on the macOS laptop (see `docs/STATUS.md`). Work continues on the

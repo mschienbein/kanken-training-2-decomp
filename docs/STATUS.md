@@ -2,6 +2,35 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-16 — decompiling on the Mac: first accepted checkpoint (c001-pilot-r4)
+
+**Accepted:** 17 functions / 1,096 B (0.096% of 1,136,354 code bytes; denominator v2, 4,437
+creditable functions). History: `docs/progress-history.jsonl` seq 1; record `accept/c001-pilot-r4/`;
+known issues `docs/known-issues-c001-pilot-r4.md`. Two independent reviews (OpenAI family and a
+separate reviewer agent) each re-derived 17/17 MATCH.
+
+Since the laptop harness entry:
+- Compiler frozen (H5): profile `game` = ARMCC 5.04 `-O3 -Otime` ARM (`docs/COMPILER.md`).
+- Catalogue v2 adopted (denominator v2): 61 mid-function-pool / branch-into-body merges, noreturn
+  inference; 4,443 starts, 197 anomalies (`docs/catalogue/REPORT-v2.md`).
+- Oracle hardening: every global definition bound to its address (unbound globals refused,
+  cross-unit duplicates refused); ARMCC `__switch$$` labels; fixed-placement mismatches reported as
+  bytes; compid fails closed per source; packet negative PC literal fix.
+- Gates v1.2 (`docs/GATES.md`): G0 clean tree + commit binding, interface check (G3), two fresh
+  builds, sharded suite, structured review records, single finalize, CI ledger binding.
+- Speed (Shiren lessons 15–22): parallel compile, exact-input object cache, sharded suite
+  (~50 s, 178 tests), detached jobs (`tools/jobs.py`), triage + batches (`tools/triage.py`).
+- Process record: c001-pilot (record defect), c001-pilot-r2 (review FAIL: int vs config pointer),
+  c001-pilot-r3 (suite against another agent's in-progress edit) — all kept, never finalized.
+
+In flight: H11 agent pilot (10 stratified functions; AuthorPilotB 3/5 MATCH), wave 1 (3 authors ×
+15 functions), catalogue v3 (in-section string literals, NOP entries, multi-entry routines,
+missing tail-branch targets).
+
+Open policy question for the user: may ARMCC `__svc(N)` declarations and named-register
+variables (`__asm("cp15:...")` bindings) count as C? They are needed for CTR-SDK-style wrappers
+and some inlined game code (e.g. 0x106afc). Until ruled, nothing using them is credited.
+
 ## 2026-10-15 (final laptop entry) — oracle review PASS_WITH_QUALIFICATIONS; ready to decompile
 
 - Four review rounds by `astra-reviewer` (records in `docs/reviews/`): round 1 FAIL (11 findings),
