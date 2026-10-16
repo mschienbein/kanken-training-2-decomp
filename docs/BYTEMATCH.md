@@ -23,8 +23,10 @@ https://bytematch.dev/mschienbein/kanken-training-2-decomp (project id 142149078
     `https://www.imagineer.co.jp/package_game/kanken5/img/home/bg_header.png` (1920×517; shown as a
     3:1 crop).
   If either host disappears, the page falls back to no art; re-pick from those sources.
-- Not done: GitHub App (optional: instant ingestion and PR comments; without it new runs are polled
-  every few minutes) — install it for this repository only if wanted.
+- GitHub App `bytematchdev`: the owner added this repository to the existing installation
+  171769441 (Only select repositories: shiren2-decomp, kanken-training-2-decomp; Actions and
+  Metadata read, Pull requests write). The manage page reports "The GitHub App is installed: new
+  runs arrive instantly and pull requests get progress comments".
 
 ## What is in place
 
