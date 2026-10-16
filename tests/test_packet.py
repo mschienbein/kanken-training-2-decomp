@@ -24,8 +24,8 @@ class PcLiteralTest(unittest.TestCase):
 
     def test_thumb_literal_uses_aligned_pc(self):
         insn = decode(struct.pack("<H", 0x4801), 0x100002, CS_MODE_THUMB)  # ldr r0, [pc, #4]
-        self.assertEqual(packet.pc_literal(insn, "thumb"), 0x10000C)
-        insn = decode(struct.pack("<H", 0x4801), 0x100002, CS_MODE_THUMB)  # ldr r0, [pc, #4]
         self.assertEqual(packet.pc_literal(insn, "thumb"), 0x100008)  # Align(0x100006, 4) + 4
+
+
 if __name__ == "__main__":
     unittest.main()
