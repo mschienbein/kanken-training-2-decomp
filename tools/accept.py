@@ -1,6 +1,6 @@
 """Accept matched source as a checkpoint: prepare, independent review, finalize once.
 
-    python tools/accept.py prepare  --checkpoint c001-pilot --candidates config/candidates/pilot.json
+    python tools/accept.py prepare  --checkpoint c001-pilot --candidates config/candidates/c001-pilot.json
     python tools/accept.py review   --checkpoint c001-pilot --record review.json
     python tools/accept.py finalize --checkpoint c001-pilot [--min-reviews 1]
     python tools/accept.py verify                                        # CI-safe, no ROM
@@ -115,9 +115,10 @@ def run_suite() -> dict:
     }
 
 
-def prepare(name: str, candidates_path: Path) -> dict:
+def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False) -> dict:
     import build as build_mod  # imported lazily: build needs the private inputs
     import denominator
+    import interfaces
 
     out = checkpoint_dir(name)
     try:
@@ -138,6 +139,12 @@ def prepare(name: str, candidates_path: Path) -> dict:
     ledger = {"schema_version": 1, "note": f"Accepted ledger as of checkpoint {name}.", "units": units}
     write_exclusive(out / "matches.json", ledger)
 
+    # Mechanical interface gate before any review: declaration/definition agreement, struct
+    # layouts, const contracts and header policy across the whole ledger.
+    iface = interfaces.audit(interfaces.select_units([], out / "matches.json", ROOT), ROOT)
+    write_exclusive(out / "interfaces.json", iface)
+    iface_ok = not interfaces.failed(iface, allow_unchecked_cpp)
+
     builds = []
     for suffix in ("a", "b"):
         try:
@@ -154,6 +161,7 @@ def prepare(name: str, candidates_path: Path) -> dict:
         "build_b_pass": builds[1].get("result") == "PASS",
         "builds_identical": builds[0].get("outputs") == builds[1].get("outputs") and "outputs" in builds[0],
         "suite_pass": suite["returncode"] == 0,
+        "interfaces_pass": iface_ok,
     }
     record = {
         "schema_version": 1,
@@ -173,7 +181,12 @@ def prepare(name: str, candidates_path: Path) -> dict:
             for b in builds
         ],
         "suite": suite,
-        "checks": checks,
+        "interfaces": {
+            "disagreements": len(iface.get("disagreements", [])),
+            "policy": len(iface.get("policy", [])),
+            "unchecked": [u["source"] for u in iface.get("units", []) if not u.get("checked")],
+            "unchecked_cpp_waived": allow_unchecked_cpp,
+        },
     }
     record["result"] = "PASS" if all(checks.values()) else "FAIL"
     write_exclusive(out / "prepare.json", record)
@@ -350,6 +363,8 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("prepare")
     p.add_argument("--checkpoint", required=True)
     p.add_argument("--candidates", type=Path, required=True)
+    p.add_argument("--allow-unchecked-cpp", action="store_true",
+                   help="waive the mechanical interface check for C++ units (recorded; reviewers check them by hand)")
     r = sub.add_parser("review")
     r.add_argument("--checkpoint", required=True)
     r.add_argument("--record", type=Path, required=True, help="review record JSON (schema in validate_review)")
@@ -361,7 +376,7 @@ def main(argv: list[str] | None = None) -> int:
     sys.path.insert(0, str(ROOT / "tools"))
     try:
         if args.cmd == "prepare":
-            rec = prepare(args.checkpoint, args.candidates)
+            rec = prepare(args.checkpoint, args.candidates, args.allow_unchecked_cpp)
             print(f"{rec['result']}: {rec['checks']}; suite {rec['suite']['summary']}")
             return 0 if rec["result"] == "PASS" else 1
         if args.cmd == "review":
