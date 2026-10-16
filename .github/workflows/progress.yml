@@ -28,6 +28,9 @@ jobs:
       - name: Verify the denominator history
         run: python3 tools/denominator.py verify
 
+      - name: Verify the accepted ledger (config/matches.json bound to finalized checkpoints)
+        run: python3 tools/accept.py verify
+
       - name: Generate objdiff progress report
         run: python3 ci/progress_report.py --version jp --output report.json --summary "$GITHUB_STEP_SUMMARY"
 
