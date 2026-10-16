@@ -308,6 +308,10 @@ def review(name: str, record_path: Path) -> dict:
     prepare_record = load_json(prepared)
     record = load_json(record_path)
     validate_review(record, new_functions(out, prepare_record))
+    # A review binds the exact files prepare bound: the current hash of each prepared source and
+    # header (missing → None). Headers added since prepare are listed but do not unbind the
+    # review; finalize still refuses them (a new header could shadow one later on the path).
+    current = header_hashes()
     entry = {
         "schema_version": 1,
         "checkpoint": name,
@@ -315,7 +319,8 @@ def review(name: str, record_path: Path) -> dict:
         "reviewed_utc": now(),
         "prepare_sha256": sha256_file(prepared),
         "sources": source_hashes([{"source": s} for s in prepare_record["sources"]]),
-        "headers": header_hashes(),
+        "headers": {h: current.get(h) for h in prepare_record.get("headers", {})},
+        "headers_added_since_prepare": sorted(set(current) - set(prepare_record.get("headers", {}))),
         "record_sha256": sha256_file(record_path),
     }
     write_exclusive(out / "reviews" / f"{record['reviewer'].lower()}.json", entry)

@@ -106,6 +106,17 @@ class AcceptGateTest(unittest.TestCase):
         with self.assertRaisesRegex(accept.AcceptError, "bound|headers changed"):
             accept.finalize("c001", 1)
 
+    def test_unrelated_new_header_during_review_does_not_unbind_it_but_blocks_finalize(self):
+        """c002-wave1-r2: a header the integrator added after prepare unbound a valid review.
+        Reviews bind the prepared files; finalize still refuses any header added since prepare."""
+        (self.root / "include/game/next.h").write_text("struct Next;\n", encoding="utf-8")
+        entry = self.review()
+        self.assertEqual(entry["headers_added_since_prepare"], ["include/game/next.h"])
+        with self.assertRaisesRegex(accept.AcceptError, "headers changed since prepare"):
+            accept.finalize("c001", 1)
+        (self.root / "include/game/next.h").unlink()
+        self.assertEqual(accept.finalize("c001", 1)["seq"], 1)
+
     def test_accepted_header_edit_is_detected_but_new_headers_are_allowed(self):
         self.review()
         accept.finalize("c001", 1)

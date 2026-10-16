@@ -1,6 +1,13 @@
-# Gate design — frozen v1.4 (2026-10-16)
+# Gate design — frozen v1.5 (2026-10-16)
 
 Revisions:
+- **v1.5** (2026-10-16): a review binds exactly the prepared files — the current hashes of the
+  sources and headers named in `prepare.json` — and lists headers added since prepare
+  (`headers_added_since_prepare`) without being unbound by them. Finalize still requires the whole
+  header tree to equal the prepared one. Cause: `c002-wave1-r2` — the integrator created two
+  unrelated wave-2 headers while the second review ran, so its record hashed a different tree and
+  finalize refused it (correctly under v1.4). r2 stays unfinalized; its successor gets fresh
+  reviews. Integrator rule: no new files under `include/` while a checkpoint is under review.
 - **v1.4** (2026-10-16): revised accepted material is reviewed again. `prepare` records
   `revised_units` (accepted units whose source differs from the last accepted entry) and
   `revised_headers`; G6 requires a verdict row for every function in a revised unit, as for new
