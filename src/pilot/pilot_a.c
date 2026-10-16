@@ -14,7 +14,7 @@ int func_00136930(int c, int next) {
 }
 
 struct E140dac { int a, b, c; };
-struct H140dac { char pad[0xc]; struct E140dac e[1]; };
+struct H140dac { char pad[0xc]; struct E140dac e[]; };
 struct S140dac { int pad0; struct H140dac *p; int pad8; u8 flag; };
 int func_00140dac(struct S140dac *s, int i) { if (!s->flag) return 0; return s->p->e[i].a; }
 

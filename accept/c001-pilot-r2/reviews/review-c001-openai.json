@@ -1,0 +1,201 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c001-pilot-r2",
+ "reviewer": "review-c001-openai",
+ "family": "OpenAI",
+ "model": "openai-codex/gpt-6.1-sol",
+ "verdict": "PASS_WITH_QUALIFICATIONS",
+ "functions": [
+  {
+   "function": "func_0010e664",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:3-4: 32-bit zero store to object offset 0x1c; padding and field agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001149a8",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:6-7: three 32-bit fields at 0/4/8 and one unsigned byte at 0xc; no padding writes introduced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00136930",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:9-14: int-valued CR/LF predicates; return values 0/1/2 match the expressed newline classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00140dac",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:16-19: unsigned-byte flag at 0xc, pointer at 4, table at pointed-to offset 0xc, entry stride 0xc; one-element tail extent is a source-language qualification (F01).",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_001179b4",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:21-23: nullable pointer at 4; second 32-bit field at pointed-to offset 4, otherwise zero.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001263b8",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:25-27: one pointer indirection, 32-bit field at pointed-to offset 0x14, normalized nonzero predicate.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122350",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_a/pilot_a.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_a.c:29: affine int index calculation, stride 0x4c and prefix 0x30; caller input range is not independently recovered.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103798",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_b/pilot_b.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_b.c:1-9: global pointer at 0 and int at 4; conditional call, then reset count only. Pointer deliberately remains unchanged, as byte-matched; no unsupported claim about callee ownership.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001091d4",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_b/pilot_b.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_b.c:11-19: 0x3c-byte entry; int at 0x1c, floats at 0x28/0x30, int zero at 0x34. Signed int-to-float arguments and float widths agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001103d4",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result pilot_b/pilot_b.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/pilot_b.c:21-22: single-precision division numerator at 0x5c / denominator at 0x4c; no unnecessary integer reinterpretation.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103258",
+   "source": "src/pilot/loop_cleanup.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result loop_cleanup/loop_cleanup.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/loop_cleanup.c:4-8,28-49: 0x14-byte DetailEntry (id/value/flags/length/resource at 0/4/8/0xc/0x10); signed -1 sentinel, nullable resource release, cursor advancement and global count reloading retained.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103358",
+   "source": "src/pilot/loop_cleanup.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result loop_cleanup/loop_cleanup.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/loop_cleanup.c:1-8,10-26: 8-byte Entry (id at 0, resource at 4), signed -1 sentinel; resource and id reset, then allocation/list fields reset; matching shared cleanup declaration.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105084",
+   "source": "src/pilot/loop_resources.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result loop_resources/loop_resources.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/loop_resources.c:1-14: eight 0x10-byte Resource slots, allocation at 0, count at 4, two reserved ints; only nonnull slots cleared.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105fa8",
+   "source": "src/pilot/loop_state.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result loop_state/loop_state.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/loop_state.c:1-30: State fields at 0/4/8, byte flags at 0xc/0xd/0xe, position 0x10, step 0x14, eight 0xc-byte Item records at 0x18, final count 0x78; padding untouched.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0010d604",
+   "source": "src/pilot/game_heap.cpp",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result game_heap/game_heap.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/game_heap.cpp:1-14: manually checked virtual Heap declaration, void*-to-opaque-Widget* cast, C-linkage constructor and wrapper; original virtual slot +8 receives heap, size 0x48, alignment 0x20, and tail call forwards allocation/heap/parameter. No competing declaration exists in the other six src units.",
+   "finding_ids": [
+    "F02"
+   ]
+  },
+  {
+   "function": "func_001718ec",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result game_enum_switch/game_enum_switch.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/game_enum_switch.c:3-22: cases 0..11 map to 1..12. Original outside-domain path returns incoming r4; preserved uninitialized result is explicitly marked ORIGINAL BUG at line 6 (qualified, not a portable behavior guarantee).",
+   "finding_ids": [
+    "F02"
+   ]
+  },
+  {
+   "function": "func_00171c7c",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py re-run under frozen game profile: MATCH, equal complete catalogue extent; result game_enum_switch/game_enum_switch.result.json. Manually read source and checked source policy, field widths, signedness/pointer use and credit scope. src/pilot/game_enum_switch.c:24-43: cases 0..11 map to 2..13. Original outside-domain path returns incoming r4; preserved uninitialized result is explicitly marked ORIGINAL BUG at line 27 (qualified, not a portable behavior guarantee).",
+   "finding_ids": [
+    "F02"
+   ]
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "minor",
+   "subject": "src/pilot/pilot_a.c:16-19 (func_00140dac)",
+   "summary": "The header models its indexed tail as E140dac e[1], yet func_00140dac indexes it with an unconstrained int. The byte match and 0xc stride are established, but standard C only permits reading element 0 of this declared array. The sole direct original caller forwards its own argument_2; a zero-only precondition has not been recovered. [INFERENCE] This may be an old one-element trailing-array idiom, not a demonstrated runtime defect. Concrete repair: retain an explicit source-language/index-domain qualification in the checkpoint known-issues record; for a successor source revision, recover the real bound or use a supported flexible-tail representation, then re-prepare/re-match rather than mutate this prepared checkpoint.",
+   "repair": "Document this qualification before finalizing; change the source only in a newly prepared checkpoint using an evidence-backed bound or compiler-supported flexible tail.",
+   "evidence": [
+    "src/pilot/pilot_a.c:16-19",
+    "scratch/review/c001-pilot-r2/review-c001-openai/verification.json:array_accessor_provenance"
+   ]
+  },
+  {
+   "id": "F02",
+   "severity": "minor",
+   "subject": "docs/ACCEPTANCE.md:49,61-63; src/pilot/game_enum_switch.c:6,27; accept/c001-pilot-r2/prepare.json:79-85",
+   "summary": "D8 requires published checkpoint known issues when a checkpoint has any. No docs/known-issues-c001-pilot-r2.md (or other docs/*c001*) was found, although this checkpoint explicitly preserves two out-of-range uninitialized-result bugs and waives the C++ mechanical interface check. The facts are disclosed in source/prepare/compiler notes, so this is a publication gap rather than a false byte-match claim. Concrete repair: before finalizing, add the checkpoint known-issues document recording the two ORIGINAL BUG cases, F01 index-domain limitation, manual C++ interface review and inherited scope qualifications.",
+   "repair": "Publish docs/known-issues-c001-pilot-r2.md with the listed issues and qualifications before finalize; do not alter sealed review or prepared source files.",
+   "evidence": [
+    "docs/ACCEPTANCE.md:49,61-63",
+    "src/pilot/game_enum_switch.c:3-43",
+    "accept/c001-pilot-r2/prepare.json:79-85"
+   ]
+  }
+ ],
+ "qualifications": [
+  "func_00140dac: one-element trailing-array representation is accepted only as a frozen-profile source-language qualification; no proof of zero-only indexing or reachable valid nonzero indexing has been recovered. See F01.",
+  "func_001718ec and func_00171c7c intentionally preserve uninitialized out-of-range results. Original-image CFG inspection confirms incoming-r4 returns outside selector range 0..11, and both source locations carry ORIGINAL BUG comments. This is not portable C behavior or a guarantee that out-of-range inputs cannot occur.",
+  "Publish the checkpoint known-issues document before finalize, as required by D8 (F02). This review does not edit prepared sources or checkpoint records.",
+  "The C++ unit was mechanically unchecked under the recorded waiver. I manually checked all its declarations against all six other source units (no competing declarations), opaque pointer use and the original allocation/constructor argument flow; full Heap/Widget class definitions, unique original signedness, RTTI and exception ABI are not established.",
+  "This is independent review by OpenAI, not integrator/author review. It is cross-family for Anthropic-integrator pilot_a.c and pilot_b.c, but not cross-family for the five OpenAI CompilerIdR2-authored units.",
+  "All 17 functions / 1,096 bytes independently MATCH in seven sequential cached-capable match.py runs; all 90 prepared/receipt/interface/object/output binding comparisons were equal. Stored receipts report two fresh full builds and prepare reports 177 passing tests; I rehashed those artifacts but did not rerun full builds or the suite.",
+  "Inherited harness limitations remain: .ARM.exidx/unwind and full original-armlink equivalence unproven; lower RomFS IVFC levels not traversed (whole-CCI pin covers supplied dump); native-Windows cross-host byte reproduction pending. No emulator/behavior/native-port acceptance is claimed. The older ledger-binding limitation is addressed by current acceptance bindings, and these self-contained units have no transitive headers."
+ ],
+ "verification": {
+  "evidence": "scratch/review/c001-pilot-r2/review-c001-openai/verification.json",
+  "units": 7,
+  "functions": 17,
+  "bytes": 1096,
+  "bindings_equal": 90,
+  "stored_full_image_outputs_rehashed": 4,
+  "other_reviews_read": false,
+  "new_full_builds_run": 0,
+  "new_suites_run": 0,
+  "original_inspection": "Read pinned original image through project image/packet libraries and Capstone without emitting bytes or disassembly. Bounded local switch-CFG analysis for cases 0..11 and representative out-of-domain selectors; simple C++ argument-flow/constructor consistency and direct-caller provenance inspection. See evidence for exact helper code and its limits."
+ },
+ "independence": {
+  "integrator": false,
+  "author": false,
+  "other_reviews_read": false
+ },
+ "scope": "Only c001-pilot-r2 new_units / all 17 credited functions. No git, edits to tracked/canonical files, adoption, credit or finalize.",
+ "reviewed_utc": "2026-10-16T13:07:24Z",
+ "prepare_sha256": "5079435c2983621f51c29b36e0b7c28c2826756415d6cc811425e0eefb9875dc",
+ "sources": {
+  "src/pilot/pilot_a.c": "a3a86a5cfb43d980c8b91c9a26b39fd2ee7b8a29c5ffd14782bc9d9efd5d65c2",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "58317f4b696e64e076e7240b796c2b3d47ce8a4b589be0c18466cd871738f708",
+  "src/pilot/game_enum_switch.c": "1ad305430a43b66d217a4886643f563a9bf314476ab8121b3126415f4e4c835a"
+ },
+ "record_sha256": "a92c34f9c8372ca215f1e9e426e6cf4cd8f7723c33b656b92b7a57cf1e15f0c7"
+}

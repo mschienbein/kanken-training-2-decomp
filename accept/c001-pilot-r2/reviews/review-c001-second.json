@@ -1,0 +1,157 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c001-pilot-r2",
+ "reviewer": "review-c001-second",
+ "family": "openai",
+ "verdict": "FAIL",
+ "functions": [
+  {
+   "function": "func_0010e664",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 12/12 bytes; read complete source and checked the 32-bit field at offset 0x1c; confirmed ordinary function classification and exact ledger scope.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001149a8",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 24/24 bytes; read complete source and checked the three word fields and byte field at offset 0x0c; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00136930",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 40/40 bytes; reviewed LF, CR, CRLF and non-newline branches, integer parameter/result use and source policy; confirmed ordinary function classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00140dac",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 40/40 bytes; read source and own original packet plus caller func_00183d3c; checked byte flag at 0x0c, pointer at 0x04, table header 0x0c and 12-byte entry stride against the indexed load and size-consuming caller; confirmed ordinary function classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001179b4",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 16/16 bytes; read source and checked pointer depth, pointer offset 0x04, nested word offset 0x04 and null-result branch; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001263b8",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 20/20 bytes; read source and checked nested pointer use, word at offset 0x14 and normalized boolean result; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122350",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 16/16 bytes; read source and checked the integer stride 0x4c and offset 0x30 expression; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103798",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 40/40 bytes; read source, own original packet and release callee func_0019dc20; checked pointer/count layout, conditional release and count-only reset against target, and consistent release declarations across all source units; confirmed ordinary function classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001091d4",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 56/56 bytes; read source and checked 0x3c-byte entry stride, integer fields at 0x1c and 0x34, float fields at 0x28 and 0x30, and signed integer-to-float conversions; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001103d4",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 16/16 bytes; read source and checked float numerator at 0x5c, denominator at 0x4c and float return type; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103258",
+   "source": "src/pilot/loop_cleanup.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 136/136 bytes; read complete unit and checked 20-byte detail entries, resource pointer at 0x10, id sentinel -1, conditional release, field resets and final pointer/count clearing; checked release declaration agreement across source units and ordinary function classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103358",
+   "source": "src/pilot/loop_cleanup.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 116/116 bytes; read complete unit and checked 8-byte entry stride, resource pointer at 0x04, id sentinel -1, resource release and final list clearing; checked release declaration agreement across source units and ordinary function classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105084",
+   "source": "src/pilot/loop_resources.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 64/64 bytes; read complete source and checked eight 16-byte resources, allocation pointer/count offsets 0/4, conditional release/reset, consistent release declarations and ordinary function classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105fa8",
+   "source": "src/pilot/loop_state.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 100/100 bytes; read complete source and checked byte flags at 0x0c-0x0e, position/step at 0x10/0x14, eight 12-byte items beginning at 0x18, id -1 and final count at 0x78; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0010d604",
+   "source": "src/pilot/game_heap.cpp",
+   "verdict": "FAIL",
+   "method": "Independently reran match.py with profile game: MATCH, 64/64 bytes. Manually checked the waived C++ interface against all other source units and own original packets for this factory, caller func_00103c88 and consuming constructor func_001167f8. Allocation size 0x48, alignment 0x20, virtual slot +8, null branch and Widget pointer return agree; the configuration address is incorrectly declared int in both signatures (F01). Confirmed ordinary function classification.",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_001718ec",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 168/168 bytes; read source and own original packet plus selector producer func_001795bc; checked all twelve selector branches mapping 0-11 to 1-12 and the target out-of-range uninitialized result; required ORIGINAL BUG comment is present; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00171c7c",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "PASS",
+   "method": "Independently reran match.py with profile game: MATCH, 168/168 bytes; read source and own original packet plus selector producer func_001795bc; checked all twelve selector branches mapping 0-11 to 2-13 and the target out-of-range uninitialized result; required ORIGINAL BUG comment is present; confirmed ordinary function classification and source policy.",
+   "finding_ids": []
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "major",
+   "subject": "src/pilot/game_heap.cpp:7-8 (func_0010d604 and func_001167f8)",
+   "summary": "Preserve the configuration pointer type across both factory interfaces. The actual caller func_00103c88 builds a 24-byte configuration on the stack and passes its address to func_0010d604 at 0x00103ee8. The factory forwards that address as the third argument to func_001167f8, whose consuming implementation copies 24 bytes from that address into Widget storage at offset 0x30 (0x0011682c-0x00116830). Both new declarations instead type this address as int parameter. A type-correct C++ caller cannot pass the observed configuration pointer to this API without an invalid pointer-to-int conversion, and the constructor declaration likewise hides its required pointer dereference. The 32-bit target happens to MATCH because an int and pointer occupy the same argument register; this does not satisfy the required real cross-unit types or the manually reviewed C++ interface. Introduce a shared configuration type, opaque if necessary here, and use a pointer to it for both parameters.",
+   "title": "Preserve the configuration pointer type across both factory interfaces",
+   "priority": 2,
+   "confidence": 1.0,
+   "file_path": "/Users/mooki/Code/kanken-training-2-decomp/src/pilot/game_heap.cpp",
+   "line_start": 7,
+   "line_end": 8
+  }
+ ],
+ "qualifications": [],
+ "reviewed_utc": "2026-10-16T13:04:30Z",
+ "prepare_sha256": "5079435c2983621f51c29b36e0b7c28c2826756415d6cc811425e0eefb9875dc",
+ "sources": {
+  "src/pilot/pilot_a.c": "a3a86a5cfb43d980c8b91c9a26b39fd2ee7b8a29c5ffd14782bc9d9efd5d65c2",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "58317f4b696e64e076e7240b796c2b3d47ce8a4b589be0c18466cd871738f708",
+  "src/pilot/game_enum_switch.c": "1ad305430a43b66d217a4886643f563a9bf314476ab8121b3126415f4e4c835a"
+ },
+ "record_sha256": "89823072e7100f0c1dd66f3874fc7a1aa1dc0f3966fc5e9b592aca02c435cdfa"
+}
