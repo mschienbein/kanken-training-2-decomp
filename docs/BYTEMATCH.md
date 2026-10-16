@@ -15,9 +15,16 @@ https://bytematch.dev/mschienbein/kanken-training-2-decomp (project id 142149078
 - Backfill imported 44 history points from successful `main` runs; the latest ingested commit is
   `bbf6e7a` (103 / 4,350 functions, 0.455%). Later runs failed the ledger check while c004's
   revisions are pending, so the dashboard updates again once `c004-r2` finalizes.
+- Art (hotlinked, nothing stored here; SteamGridDB has no entry for this game). Both load without a
+  Referer, as ByteMatch requests them:
+  - icon: GameTDB box front for product code B2KJ,
+    `https://art.gametdb.com/3ds/coverM/JA/B2KJ.jpg` (400×352; ByteMatch center-crops it square);
+  - cover: the official Imagineer site's header background (the box art's yellow kanji pattern),
+    `https://www.imagineer.co.jp/package_game/kanken5/img/home/bg_header.png` (1920×517; shown as a
+    3:1 crop).
+  If either host disappears, the page falls back to no art; re-pick from those sources.
 - Not done: GitHub App (optional: instant ingestion and PR comments; without it new runs are polled
-  every few minutes) — install it for this repository only if wanted; icon/cover art (SteamGridDB
-  has no entry for this game).
+  every few minutes) — install it for this repository only if wanted.
 
 ## What is in place
 
