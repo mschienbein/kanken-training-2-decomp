@@ -1,0 +1,24 @@
+# Private inputs and anything derived from them: never committed (the repository must stay publishable).
+/orig/
+/baserom*
+*.3ds
+*.cci
+*.cxi
+*.cia
+boot9*.bin
+aes_keys*.txt
+seeddb.bin
+
+# Generated build state, provisioned toolchains, private work
+/build/
+/.cache/
+/tools/bin/
+/scratch/
+/split/
+/link/
+/out/
+
+.venv/
+__pycache__/
+*.pyc
+.DS_Store

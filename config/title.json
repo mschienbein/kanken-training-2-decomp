@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "title": "漢検トレーニング2",
+  "title_romaji": "Kanken Training 2",
+  "publisher": "Imagineer",
+  "region": "jp",
+  "version_slug": "jp",
+  "product_code": "CTR-P-B2KJ",
+  "program_id": "00040000001b8000",
+  "accepted_inputs": [
+    {
+      "id": "cci-encrypted",
+      "description": "Retail cartridge dump (CCI), encrypted; needs the user's own boot9.bin",
+      "size": 268435456,
+      "sha256": "23ba7aafbb902b2f7051fd4e4d5bb1d279d59921e34fb730cbaaf6f3909184bb",
+      "encrypted": true
+    },
+    {
+      "id": "cci-decrypted",
+      "description": "Same dump with NCCH content decrypted; header flags still claim crypto method 0x01",
+      "size": 268435456,
+      "sha256": "5874c3af40ac837e04b0bc667d2e5ecba083df544259b0e700f09adbb565f1aa",
+      "encrypted": false
+    }
+  ],
+  "derived": {
+    "exheader.bin": {
+      "size": 2048,
+      "sha256": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8"
+    },
+    "exefs/code.blz": {
+      "size": 758728,
+      "sha256": "19a4445c367af066b5f14b97ca016c0e19c305fc2b4babcb087595823d0060da"
+    },
+    "exefs/banner.bin": {
+      "size": 126024,
+      "sha256": "a90c4f936895ad57fbafb82627d36793785b15ce09374a25bd7dcca09bba18e4"
+    },
+    "exefs/icon.bin": {
+      "size": 14016,
+      "sha256": "aeb2a2d8fd30f75724694ed9b96b022bf488ea4e379b8f8ee9d051371cad9960"
+    },
+    "code.bin": {
+      "size": 1327104,
+      "sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361"
+    }
+  },
+  "romfs_raw_sha256": "0acc6ab7913d5092aa55a8d8ffcff754f860b1ca251d2f5ae0f57b2930312380",
+  "sdk_tags": [
+    "[SDK+NINTENDO:CTR_SDK-11_5_2_200_none]",
+    "[SDK+NINTENDO:Firmware-02_52_00]",
+    "[SDK+NINTENDO:NW4C_3_7_5_lyt1]",
+    "[SDK+NINTENDO:NW4C_3_7_5_snd]",
+    "[SDK+NINTENDO:NW4C_3_7_5_fnt1]",
+    "[SDK+PUX:HWR_2_0_1]"
+  ]
+}
