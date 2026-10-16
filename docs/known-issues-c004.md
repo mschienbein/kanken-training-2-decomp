@@ -1,4 +1,4 @@
-# Known issues — checkpoint c004
+# Known issues — checkpoint c004 (superseded by c004-r2; never finalized)
 
 196 new functions — wave 3 (66) and wave 4 (130: 86 armlink-NOP'd tail-call wrappers, 8 empty
 functions, 36 bodies) — by OpenAI-family authors (`openai-codex/gpt-6.1-sol`; `author` per unit
