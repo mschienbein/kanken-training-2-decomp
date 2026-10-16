@@ -142,8 +142,8 @@ class InPlaceTest(unittest.TestCase):
     def test_distinct_data_objects_cannot_alias(self):
         """Review F01: two C objects inferred at one address must fail, not match."""
         obj = self.compile(
-            "__attribute__((section(\".data.first\"))) int first = 17;\n"
-            "__attribute__((section(\".data.second\"))) int second = 17;\n"
+            "__attribute__((section(\".data.first\"))) static int first = 17;\n"
+            "__attribute__((section(\".data.second\"))) static int second = 17;\n"
             "int func_00100000(void) { return first; }\nint func_00100040(void) { return second; }\n"
         )
         mem = Memory()
@@ -168,7 +168,7 @@ class InPlaceTest(unittest.TestCase):
 
     def test_misaligned_placement_is_refused(self):
         """Review R2-01: an 8-byte-aligned data section placed at a 4-mod-8 address must fail."""
-        obj = self.compile("unsigned long long wide = 17ULL;\nunsigned long long *func_00100000(void) { return &wide; }\n")
+        obj = self.compile("static unsigned long long wide = 17ULL;\nunsigned long long *func_00100000(void) { return &wide; }\n")
         mem = Memory()
         mem.write(TABLE_AT + 4, struct.pack("<Q", 17))
         fn = obj.defined_functions()[0]
@@ -190,6 +190,56 @@ class InPlaceTest(unittest.TestCase):
         linker = inplace.InPlaceLinker(Memory(), catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000))
         with self.assertRaisesRegex(inplace.LinkError, "several functions"):
             linker.link(inplace.ObjectFile(tmp / "adj.o"))
+
+    def global_fixture(self, pointer_at):
+        """TU A defines g = 17 and returns &g; TU B uses extern g. The original's literal is pointer_at."""
+        a = self.compile("int g = 17;\nint *func_00100000(void) { return &g; }\n")
+        b = self.compile("extern int g;\nint *func_00100040(void) { return &g; }\n")
+        mem = Memory()
+        mem.write(TABLE_AT, struct.pack("<ii", 17, 17))
+        for obj in (a, b):
+            fn = obj.defined_functions()[0]
+            sec = obj.sections[fn.shndx]
+            data = bytearray(sec.data)
+            for rel in sec.relocs:
+                struct.pack_into("<I", data, rel.offset, pointer_at)
+            mem.write(int(fn.name[5:], 16), bytes(data))
+        return a, b, mem
+
+    def link_with_names(self, obj, mem, names):
+        linker = inplace.InPlaceLinker(mem, CATALOGUE, inplace.Resolver(CATALOGUE, names), (0x200000, 0x201000))
+        return {p.base: data for p, data in linker.link(obj).values() if p.origin == "catalogue"}
+
+    def test_global_definition_and_extern_resolve_to_one_address(self):
+        """Advisory: A's definition (reached via a section symbol) and B's extern must agree."""
+        a, b, mem = self.global_fixture(TABLE_AT)
+        names = {"g": {"address": TABLE_AT}}
+        self.assertEqual(self.link_with_names(a, mem, names)[0x100000], mem.read(0x100000, 12))
+        self.assertEqual(self.link_with_names(b, mem, names)[0x100040], mem.read(0x100040, 12))
+
+    def test_global_definition_away_from_its_binding_fails(self):
+        """Advisory: A infers g at TABLE_AT from its literal while the overlay binds g 4 bytes later."""
+        a, b, mem = self.global_fixture(TABLE_AT)
+        names = {"g": {"address": TABLE_AT + 4}}
+        with self.assertRaisesRegex(inplace.LinkError, "bound to|disagree"):
+            self.link_with_names(a, mem, names)
+        # B alone resolves g by name, so its literal (TABLE_AT) cannot match the binding
+        self.assertNotEqual(self.link_with_names(b, mem, names)[0x100040], mem.read(0x100040, 12))
+
+    def test_unbound_global_definition_fails(self):
+        a, _, mem = self.global_fixture(TABLE_AT)
+        with self.assertRaisesRegex(inplace.LinkError, "no address binding"):
+            self.link_with_names(a, mem, {})
+
+    def test_bound_data_definition_is_verified_without_references(self):
+        """A bound definition no code references is still placed and its bytes checked."""
+        obj = self.compile("int data_00180000 = 18;\nint func_00100000(void) { return 1; }\n")
+        mem = Memory()
+        fn = obj.defined_functions()[0]
+        mem.write(0x100000, obj.sections[fn.shndx].data)
+        mem.write(TABLE_AT, struct.pack("<i", 17))
+        with self.assertRaisesRegex(inplace.LinkError, "bytes differ"):
+            self.link(obj, mem)
 
 
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
@@ -244,6 +294,8 @@ class RelocationArithmeticTest(unittest.TestCase):
             def defined_functions(self):
                 return [inplace.Symbol("func_00100000", 0, 4, "STT_FUNC", "STB_GLOBAL", 1)]
 
+            defined_globals = defined_functions
+
         mem = Memory()
         mem.write(0x100000, sec.data)
         linked = self.linker(mem).link(Obj())
@@ -267,6 +319,8 @@ class RelocationArithmeticTest(unittest.TestCase):
 
             def defined_functions(self):
                 return [inplace.Symbol("func_00100000", 0, 4, "STT_FUNC", "STB_GLOBAL", 1)]
+
+            defined_globals = defined_functions
 
         mem = Memory()
         mem.write(0x100000, sec.data)

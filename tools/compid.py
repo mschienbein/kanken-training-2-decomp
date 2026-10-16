@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import image as image_mod  # noqa: E402
 import inplace  # noqa: E402
 import match  # noqa: E402
 import toolchain  # noqa: E402
@@ -34,6 +35,42 @@ DEFAULT_GRID = {
 }
 
 
+def run_grid(ctx, sources: list[Path], grid: dict, out: Path) -> dict:
+    """Compile every source under every (compiler, flag set) pair and compare in place.
+
+    Fails closed: a pair qualifies only if every source compiled, linked and produced at least
+    one comparable function, and every function of every source matched.
+    """
+    rows: dict[str, dict[str, str]] = {}
+    failures: dict[str, dict[str, str]] = {}  # pair -> {source: reason}
+    pairs = []
+    for compiler in grid["compilers"]:
+        for fname, flags in grid["flagsets"].items():
+            pair = f"{compiler}:{fname}"
+            pairs.append(pair)
+            profile = toolchain.Profile(pair, compiler, tuple(flags))
+            for src in sources:
+                obj = out / "obj" / compiler / fname / (src.stem + ".o")
+                try:
+                    toolchain.compile_source(profile, src.resolve(), obj)
+                    results = ctx.compare(obj)
+                except (toolchain.ToolchainError, inplace.LinkError, image_mod.ImageError) as e:
+                    failures.setdefault(pair, {})[src.as_posix()] = str(e).splitlines()[0]
+                    continue
+                if not results:
+                    failures.setdefault(pair, {})[src.as_posix()] = "no catalogued function in the object"
+                    continue
+                for r in results:
+                    cell = {"match": "Y", "match_extent_differs": "E"}.get(r["status"]) or f"+{r['first_diff']:x}"
+                    rows.setdefault(r["name"], {})[pair] = cell
+    names = sorted(rows)
+    qualifying = [
+        p for p in pairs
+        if names and p not in failures and all(rows[n].get(p) == "Y" for n in names)
+    ]
+    return {"pairs": pairs, "functions": names, "results": rows, "failures": failures, "matching_all": qualifying}
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("sources", type=Path, nargs="+")
@@ -43,39 +80,24 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     grid = json.loads(args.grid.read_text(encoding="utf-8")) if args.grid else DEFAULT_GRID
     ctx = match.Context(args.catalogue)
+    result = run_grid(ctx, args.sources, grid, args.out)
 
-    rows: dict[str, dict[str, str]] = {}
-    pairs = []
-    for compiler in grid["compilers"]:
-        for fname, flags in grid["flagsets"].items():
-            pair = f"{compiler}:{fname}"
-            pairs.append(pair)
-            profile = toolchain.Profile(pair, compiler, tuple(flags))
-            for src in args.sources:
-                obj = args.out / "obj" / compiler / fname / (src.stem + ".o")
-                try:
-                    toolchain.compile_source(profile, src.resolve(), obj)
-                    results = ctx.compare(obj)
-                except (toolchain.ToolchainError, inplace.LinkError) as e:
-                    print(f"{pair} {src.name}: {e}".splitlines()[0], file=sys.stderr)
-                    continue
-                for r in results:
-                    cell = {"match": "Y", "match_extent_differs": "E"}.get(r["status"]) or f"+{r['first_diff']:x}"
-                    rows.setdefault(r["name"], {})[pair] = cell
-
-    width = max(len(p) for p in pairs)
-    names = sorted(rows)
+    width = max(len(p) for p in result["pairs"])
+    names = result["functions"]
     print(" " * width + "  " + "  ".join(n[-8:] for n in names))
-    full = []
-    for pair in pairs:
-        cells = [rows[n].get(pair, "err") for n in names]
-        if all(c == "Y" for c in cells):
-            full.append(pair)
-        print(f"{pair:<{width}}  " + "  ".join(f"{c:>8}" for c in cells))
-    print(f"\npairs matching all {len(names)} probe functions: {', '.join(full) or 'none'}")
+    for pair in result["pairs"]:
+        cells = [result["results"][n].get(pair, "-") for n in names]
+        failed = result["failures"].get(pair, {})
+        note = f"   FAILED: {', '.join(Path(s).name for s in failed)}" if failed else ""
+        print(f"{pair:<{width}}  " + "  ".join(f"{c:>8}" for c in cells) + note)
+    for pair, failed in result["failures"].items():
+        for src, reason in failed.items():
+            print(f"{pair} {src}: {reason}", file=sys.stderr)
+    full = result["matching_all"]
+    print(f"\npairs matching all {len(names)} probe functions from all {len(args.sources)} sources: {', '.join(full) or 'none'}")
     record = {
         "sources": {s.as_posix(): hashlib.sha256(s.read_bytes()).hexdigest() for s in args.sources},
-        "grid": grid, "image_sha256": ctx.image.sha256, "results": rows, "matching_all": full,
+        "grid": grid, "image_sha256": ctx.image.sha256, **{k: result[k] for k in ("results", "failures", "matching_all")},
     }
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "compid.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")

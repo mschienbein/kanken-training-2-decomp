@@ -127,6 +127,15 @@ class ObjectFile:
             if s.kind == "STT_FUNC" and isinstance(s.shndx, int) and s.shndx in self.sections
         ]
 
+    def defined_globals(self) -> list[Symbol]:
+        """Externally visible definitions (functions and data) in allocated sections."""
+        return [
+            s for s in self.symbols
+            if s.bind in ("STB_GLOBAL", "STB_WEAK") and s.kind in ("STT_FUNC", "STT_OBJECT", "STT_NOTYPE")
+            and s.name and s.name not in ("$a", "$t", "$d")
+            and isinstance(s.shndx, int) and s.shndx in self.sections
+        ]
+
 
 @dataclass(frozen=True)
 class Target:
@@ -151,13 +160,20 @@ class Resolver:
             raise LinkError(f"config/names.json may not define reserved address names: {', '.join(reserved[:5])}")
 
     def resolve(self, name: str) -> Target:
+        target = self.lookup(name)
+        if target is None:
+            raise LinkError(f"unresolved symbol {name!r} (not in config/names.json, not func_/data_/bss_XXXXXXXX)")
+        return target
+
+    def lookup(self, name: str) -> Target | None:
+        """The bound address of `name`, or None when the name has no binding."""
         entry = self.names.get(name)
         if entry is not None:
             address = entry["address"]
         else:
             m = AUTO_NAME.match(name)
             if not m:
-                raise LinkError(f"unresolved symbol {name!r} (not in config/names.json, not func_/data_/bss_XXXXXXXX)")
+                return None
             address = int(m.group(2), 16)
             if m.group(1) == "func" and address not in self.functions:
                 raise LinkError(f"{name}: no catalogued function at {address:#x}")
@@ -258,6 +274,20 @@ class InPlaceLinker:
             if prior and prior.base != base:
                 raise LinkError(f"{sec.name}: aliases {fn.name} and another name resolve to different addresses")
             placements[sec.index] = Placement(sec, base, "catalogue")
+        # A data definition whose name is bound (names overlay or data_/bss_XXXXXXXX) lives at
+        # that address, whether or not any code references it; its bytes are then verified.
+        for sym in obj.defined_globals():
+            if sym.kind == "STT_FUNC":
+                continue
+            bound = self.resolver.lookup(sym.name)
+            if bound is None:
+                continue
+            base = bound.address - sym.value
+            prior = placements.get(sym.shndx)
+            if prior is None:
+                placements[sym.shndx] = Placement(obj.sections[sym.shndx], base, "inferred")
+            elif prior.base != base:
+                raise LinkError(f"{sym.name}: bound to {bound.address:#x}, but its section is placed at {prior.base:#x}")
         # Infer data sections from the original values their references resolve to.
         changed = True
         while changed:
@@ -282,6 +312,22 @@ class InPlaceLinker:
                             f"{obj.sections[sym.shndx].name}: references disagree on its address "
                             f"({prior.base:#x} vs {base:#x})"
                         )
+        # Every global definition must be bound and sit exactly at its binding, so a definition
+        # reached through a section symbol and an extern reference by name always resolve to one
+        # address. (Static definitions are local to the unit and need no binding.)
+        for sym in obj.defined_globals():
+            placed = placements.get(sym.shndx)
+            bound = self.resolver.lookup(sym.name)
+            if bound is None:
+                raise LinkError(
+                    f"global {sym.name!r} has no address binding: name it func_/data_/bss_XXXXXXXX, "
+                    f"add it to config/names.json, or make it static"
+                )
+            if placed is None:
+                continue
+            here = placed.base + _symbol_offset(sym)
+            if here != bound.address:
+                raise LinkError(f"{sym.name}: defined at {here:#x}, but the name is bound to {bound.address:#x}")
         for p in placements.values():
             if p.base % p.section.align:
                 raise LinkError(f"{p.section.name}: placed at {p.base:#x}, not aligned to {p.section.align}")

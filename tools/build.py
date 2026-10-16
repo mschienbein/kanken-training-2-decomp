@@ -72,7 +72,8 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
     hybrid = bytearray(image.code)
     credited: dict[int, str] = {}
     mismatched: list[str] = []
-    occupied: list[tuple[int, int, str]] = []  # every section any unit placed, across all units
+    occupied: list[tuple[int, int, str, tuple[str, str] | None]] = []  # sections placed by all units
+    definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
     units = []
     for unit in matches["units"]:
         src = ROOT / unit["source"]
@@ -81,7 +82,14 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
             raise BuildError(f"{unit['source']}: unknown profile {unit['profile']!r}")
         obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
         toolchain.compile_source(profile, src, obj)
-        linked = linker.link(inplace.ObjectFile(obj))
+        objfile = inplace.ObjectFile(obj)
+        linked = linker.link(objfile)
+        for sym in objfile.defined_globals():
+            if objfile.sections[sym.shndx].comdat:
+                continue  # one entity; its single address is enforced by reject_overlaps
+            if sym.name in definitions:
+                raise BuildError(f"{sym.name}: defined by both {definitions[sym.name]} and {unit['source']}")
+            definitions[sym.name] = unit["source"]
         occupied += [
             (p.base, p.base + p.section.size, f"{unit['source']}:{p.section.name}", inplace.comdat_key(p.section))
             for p, _ in linked.values() if p.section.size

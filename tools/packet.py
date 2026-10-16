@@ -78,18 +78,19 @@ def disassemble(image, fn: dict):
 
 
 def pc_literal(insn, isa: str) -> int | None:
-    """Address loaded by `ldr rX, [pc, #imm]` / `vldr`, or produced by `adr`."""
+    """Address loaded by `ldr rX, [pc, #imm]` / `vldr`, or produced by `adr`.
+
+    The displacement is parsed with its sign (`#-0x4` is -4) and added once.
+    """
     op = insn.op_str
     if "[pc" in op and insn.mnemonic.startswith(("ldr", "vldr")):
-        imm = 0
-        if "#" in op:
-            imm = int(op.split("#")[1].rstrip("]!").strip(), 16 if "0x" in op.split("#")[1] else 10)
+        imm = int(op.split("#")[1].rstrip("]!").strip(), 0) if "#" in op else 0
         pc = insn.address + (8 if isa == "arm" else 4)
         if isa == "thumb":
             pc &= ~3
-        return pc + (-imm if "#-" in op else imm)
+        return pc + imm
     if insn.mnemonic == "adr" and "#" in op:
-        return int(op.split("#")[1], 16)
+        return int(op.split("#")[1], 0)
     return None
 
 
