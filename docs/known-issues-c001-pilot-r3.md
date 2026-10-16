@@ -1,4 +1,4 @@
-# Known issues — checkpoint c001-pilot-r3
+# Known issues — checkpoint c001-pilot-r3 (superseded by c001-pilot-r4; never finalized)
 
 Scope: 17 functions / 1,096 B in `src/pilot/` (7 units), compiled with profile `game`.
 

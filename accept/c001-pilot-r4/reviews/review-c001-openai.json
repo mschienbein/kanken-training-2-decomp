@@ -1,0 +1,179 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c001-pilot-r4",
+ "reviewer": "review-c001-openai",
+ "family": "OpenAI",
+ "model": "openai-codex/gpt-6.1-sol",
+ "verdict": "PASS_WITH_QUALIFICATIONS",
+ "functions": [
+  {
+   "function": "func_0010e664",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:3-4: 32-bit zero store to object offset 0x1c; padding and field agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001149a8",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:6-7: three 32-bit fields at 0/4/8 and one unsigned byte at 0xc; no padding writes introduced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00136930",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:9-14: int-valued CR/LF predicates; return values 0/1/2 match the expressed newline classification.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00140dac",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:16-19: flag byte at 0xc, object pointer at 4, tail at pointed-to offset 0xc and entry stride 0xc. Flexible array e[] replaces e[1]; the source no longer asserts a false one-element bound. Original unchecked index and unrecovered allocation bound are disclosed in docs/known-issues-c001-pilot-r3.md:13-14.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001179b4",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:21-23: nullable pointer at 4; second 32-bit field at pointed-to offset 4, otherwise zero.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001263b8",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:25-27: one pointer indirection, 32-bit field at pointed-to offset 0x14, normalized nonzero predicate.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122350",
+   "source": "src/pilot/pilot_a.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_a/pilot_a.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_a.c:29: affine int index calculation, stride 0x4c and prefix 0x30; caller input range is not independently recovered.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103798",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_b/pilot_b.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_b.c:1-9: global pointer at 0 and int at 4; conditional call, then reset count only. Pointer deliberately remains unchanged, as byte-matched; no unsupported claim about callee ownership.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001091d4",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_b/pilot_b.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_b.c:11-19: 0x3c-byte entry; int at 0x1c, floats at 0x28/0x30, int zero at 0x34. Signed int-to-float arguments and float widths agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001103d4",
+   "source": "src/pilot/pilot_b.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result pilot_b/pilot_b.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/pilot_b.c:21-22: single-precision division numerator at 0x5c / denominator at 0x4c; no unnecessary integer reinterpretation.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103258",
+   "source": "src/pilot/loop_cleanup.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result loop_cleanup/loop_cleanup.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/loop_cleanup.c:4-8,28-49: 0x14-byte DetailEntry (id/value/flags/length/resource at 0/4/8/0xc/0x10); signed -1 sentinel, nullable resource release, cursor advancement and global count reloading retained.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00103358",
+   "source": "src/pilot/loop_cleanup.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result loop_cleanup/loop_cleanup.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/loop_cleanup.c:1-8,10-26: 8-byte Entry (id at 0, resource at 4), signed -1 sentinel; resource and id reset, then allocation/list fields reset; matching shared cleanup declaration.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105084",
+   "source": "src/pilot/loop_resources.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result loop_resources/loop_resources.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/loop_resources.c:1-14: eight 0x10-byte Resource slots, allocation at 0, count at 4, two reserved ints; only nonnull slots cleared.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105fa8",
+   "source": "src/pilot/loop_state.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result loop_state/loop_state.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/loop_state.c:1-30: State fields at 0/4/8, byte flags at 0xc/0xd/0xe, position 0x10, step 0x14, eight 0xc-byte Item records at 0x18, final count 0x78; padding untouched.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0010d604",
+   "source": "src/pilot/game_heap.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result game_heap/game_heap.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/game_heap.cpp:1-16: manually checked Heap virtual declaration, opaque Widget/WidgetConfig pointers, const input config, C linkage and void*-to-Widget* cast. Original vtable slot +8 receives heap/size 0x48/alignment 0x20; tail call forwards allocation/heap/config. Independently inspected constructor: six 32-bit reads from config+0..20 copied into storage+0x30..0x44, no direct input-config stores, return storage. No competing declarations in the other six units. Complete class layouts and interprocedural alias semantics remain unproven.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001718ec",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result game_enum_switch/game_enum_switch.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/game_enum_switch.c:3-22: cases 0..11 map to 1..12. Fresh original-image local CFG inspection returns incoming r4 outside that domain; preserved uninitialized result is marked ORIGINAL BUG at line 6. Qualified, not portable behavior.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00171c7c",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "New independent sequential tools/match.py run under frozen game profile: MATCH, exact complete catalogue size; result game_enum_switch/game_enum_switch.result.json. Freshly read full unit; checked source policy, plausible types/layout/pointer depth/signedness and ordinary-function credit scope. src/pilot/game_enum_switch.c:24-43: cases 0..11 map to 2..13. Fresh original-image local CFG inspection returns incoming r4 outside that domain; preserved uninitialized result is marked ORIGINAL BUG at line 27. Qualified, not portable behavior.",
+   "finding_ids": []
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "minor",
+   "subject": "docs/known-issues-c001-pilot-r3.md:1,19,30-36; docs/ACCEPTANCE.md:49,61-63",
+   "summary": "The substantive known-issues publication gap is fixed: the supplied r3 document describes all current source limitations. However, the document supplied to cover r4 still names only r3 in its title/scope history and its mechanical-waiver link points only to the failed r3 prepare. There is no explicit r4 scope marker or r4 known-issues file. This is an attribution/publication issue, not a source-match defect. Concrete repair: explicitly extend this document to c001-pilot-r4 and link accept/c001-pilot-r4/prepare.json, or publish docs/known-issues-c001-pilot-r4.md linking the shared issues, before publishing/finalizing r4.",
+   "repair": "Add an explicit r4 scope/waiver reference to the shared document, or an r4-specific known-issues entry linking it; leave prepared sources, acceptance records and sealed reviews unchanged."
+  }
+ ],
+ "qualifications": [
+  "The two switch functions intentionally preserve undefined/uninitialized results for selectors outside 0..11, with ORIGINAL BUG comments. Fresh local CFG inspection confirms those original paths return incoming r4. No proof that valid callers cannot reach those paths, and no portable behavior guarantee, is claimed.",
+  "Flexible e[] fixes the one-element-tail representation; actual allocation bounds and valid-index preconditions are still unrecovered and the original unchecked access is retained, as published in the shared known-issues document. Pilot struct layouts remain partial and names are placeholders, consistent with each unit use rather than fully recovered game types.",
+  "C++ remains mechanically unchecked under the recorded r4 waiver. I manually checked all declarations against all other source units and the original wrapper/constructor dataflow, including readonly 24-byte config copying. Full Heap/Widget/WidgetConfig definitions, RTTI, exception ABI and interprocedural aliases are not recovered.",
+  "The shared known-issues document substantively covers r4 by assignment, but needs explicit r4 attribution and the current waiver reference before publication/finalization (minor F01).",
+  "Seven new sequential match.py runs independently reproduce all 17 complete extents / 1,096 bytes. All 90 prepared/receipt/interface/object/output hash comparisons match. The r4 records report two fresh full builds and 178 tests, 0 skipped, 0 failed modules; I rehashed stored artifacts but did not run whole builds or the suite, and did not rerun the known r3 failure.",
+  "Gate v1.2 G0 and its pre-prepare guard were read; r4 prepare records commit 843b1f0b21684bfbb80097d4899dedb866449668. No git command was run, so clean-tree/HEAD identity is inherited from prepare rather than independently re-queried.",
+  "Inherited harness limits remain: original-armlink/section ordering/veneers/unwind equivalence unproven; lower RomFS IVFC not traversed (whole-CCI pin covers supplied dump); Windows cross-host reproduction pending. No runtime, emulator, behavior or native-port acceptance. These seven self-contained units have no source includes; old transitive-header limitations do not affect this source set.",
+  "Independent OpenAI reviewer, never the integrator or author. This is not a uniformly cross-family certificate: five original units were OpenAI CompilerIdR2-authored, while pilot_a.c and pilot_b.c were Anthropic-integrator authored."
+ ],
+ "verification": {
+  "evidence": "scratch/review/c001-pilot-r4/review-c001-openai/verification.json",
+  "units": 7,
+  "functions": 17,
+  "bytes": 1096,
+  "all_matches": true,
+  "equal_hash_comparisons": 90,
+  "stored_full_image_outputs_rehashed": 4,
+  "other_r4_reviews_read": false,
+  "new_full_builds_run": 0,
+  "new_suites_run": 0,
+  "original_inspection": "Fresh C++ wrapper/constructor pointer and config-copy provenance; fresh switch local CFG paths for selectors 0..11,12,13,-1,0x7fffffff. No original bytes or disassembly emitted."
+ },
+ "resolved_source_findings": {
+  "r2_openai_F01": "Closed for source representation: flexible array e[] observed at pilot_a.c:17 and independently MATCHed. Unrecovered actual bounds remain disclosed.",
+  "r2_openai_F02": "Substantive issue disclosures are now published in the shared r3 document. Remaining r4 attribution issue is minor F01 here.",
+  "configuration_pointer": "Directly re-derived: original constructor reads six words through its third argument, copies them to storage+0x30 and returns storage; corrected const WidgetConfig* declarations in wrapper and constructor are consistent. No other checkpoint review was read."
+ },
+ "scope": "Only c001-pilot-r4, every new unit and all 17 listed functions. No edits outside assigned review directory except the authorized tools/accept.py review submission. No git, adoption, credit, commit or finalize.",
+ "reviewed_utc": "2026-10-16T13:18:36Z",
+ "prepare_sha256": "1c7e4c92efdc44aee132850eb086c205429c51d27564e6ea3ed890a4a3083be9",
+ "sources": {
+  "src/pilot/pilot_a.c": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+  "src/pilot/game_enum_switch.c": "1ad305430a43b66d217a4886643f563a9bf314476ab8121b3126415f4e4c835a"
+ },
+ "record_sha256": "2a8280c49b1aa2ef7ae93b4225ee71d9a6e1000647e6a1a4244f6cc1453f0535"
+}
