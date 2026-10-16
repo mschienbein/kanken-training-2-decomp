@@ -2,7 +2,7 @@
 
 48 new functions from wave 2 (four OpenAI-family authors, `openai-codex/gpt-6.1-sol`; `author`
 per unit in `config/candidates/c003-wave2.json`), plus revisions to accepted material made by the
-integrator (Claude Opus) while unifying interfaces. Catalogue/denominator v3; gates v1.5.
+integrator (Claude Opus) while unifying interfaces. Catalogue/denominator v3; gates v1.6.
 
 ## Revisions to accepted material (`prepare.json` `revised_units` / `revised_headers`)
 
@@ -32,7 +32,9 @@ integrator (Claude Opus) while unifying interfaces. Catalogue/denominator v3; ga
   distinct types that shared a tag were renamed (`struct ItemPage`/`ItemPageSet` in
   `include/game/item_pages.h`). `Screen.slots` is sized to the highest index used (0x35).
 - **C++:** one new unit (`src/wave2/func_00179298.cpp`) under the recorded waiver; the gate checks
-  class-definition agreement (ODR) only.
+  class-definition agreement (ODR, token level) and the absence of local `extern "C"`
+  redeclarations of symbols shared with other units (gates v1.6b); declaration types and const
+  writes in C++ were checked by hand by both reviewers.
 - Inherited: preserved original bugs in `src/pilot/game_enum_switch.c` and
   `src/wave1/func_00196cb8.c`; catalogue v3 limits (`docs/catalogue/V4-BACKLOG.md`); harness
   limits (byte equality of the relinked image, no runtime test, no Windows reproduction yet).
