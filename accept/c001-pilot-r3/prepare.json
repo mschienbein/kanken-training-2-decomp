@@ -1,0 +1,97 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c001-pilot-r3",
+ "prepared_utc": "2026-10-16T13:09:21Z",
+ "base_matches_sha256": "6be89ac9b7e91ba2d33dfdbd3d0ad31c694f870e6e1088be6e231451575b4d16",
+ "candidates": "config/candidates/c001-pilot.json",
+ "candidates_sha256": "3c756a0c52aa66425b135679f5458827241fe971b2a8251e488c87c8891938f3",
+ "ledger_sha256": "f95242c21c1ef8abcc1ecf74da737a41516ec70e3b2ec6e9b5a2e4c349b7c817",
+ "sources": {
+  "src/pilot/pilot_a.c": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+  "src/pilot/game_enum_switch.c": "1ad305430a43b66d217a4886643f563a9bf314476ab8121b3126415f4e4c835a"
+ },
+ "new_units": [
+  "src/pilot/pilot_a.c",
+  "src/pilot/pilot_b.c",
+  "src/pilot/loop_cleanup.c",
+  "src/pilot/loop_resources.c",
+  "src/pilot/loop_state.c",
+  "src/pilot/game_heap.cpp",
+  "src/pilot/game_enum_switch.c"
+ ],
+ "profiles_sha256": "8fe374ecdfd54b9c6c78ab3ecb31e6eca26c047c3adfa47e438f836d78ffbb43",
+ "catalogue_sha256": "65d1c56942a759901f27311e8fe722ed2f67c0a5b09b1f2e69f58225d3374e89",
+ "denominator_version": 2,
+ "builds": [
+  {
+   "name": "c001-pilot-r3-a",
+   "result": "PASS",
+   "outputs": {
+    "code_bin_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "exefs_code_sha256": "19a4445c367af066b5f14b97ca016c0e19c305fc2b4babcb087595823d0060da"
+   },
+   "credited": {
+    "functions": 17,
+    "bytes": 1096,
+    "catalogue_functions": 4437,
+    "catalogue_bytes": 1136354
+   },
+   "checks": {
+    "credited_functions_exact": true,
+    "code_bin_identical": true,
+    "exefs_code_identical": true
+   }
+  },
+  {
+   "name": "c001-pilot-r3-b",
+   "result": "PASS",
+   "outputs": {
+    "code_bin_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "exefs_code_sha256": "19a4445c367af066b5f14b97ca016c0e19c305fc2b4babcb087595823d0060da"
+   },
+   "credited": {
+    "functions": 17,
+    "bytes": 1096,
+    "catalogue_functions": 4437,
+    "catalogue_bytes": 1136354
+   },
+   "checks": {
+    "credited_functions_exact": true,
+    "code_bin_identical": true,
+    "exefs_code_identical": true
+   }
+  }
+ ],
+ "suite": {
+  "command": "python tools/test_suite.py",
+  "returncode": 1,
+  "tests_run": 177,
+  "skipped": 0,
+  "failed_modules": [
+   "tests.test_analyze"
+  ],
+  "seconds": 48.429,
+  "summary": "177 tests, 0 skipped, 1 failed modules"
+ },
+ "interfaces": {
+  "disagreements": 0,
+  "policy": 0,
+  "unchecked": [
+   "src/pilot/game_heap.cpp"
+  ],
+  "unchecked_cpp_waived": true
+ },
+ "checks": {
+  "build_a_pass": true,
+  "build_b_pass": true,
+  "builds_identical": true,
+  "suite_pass": false,
+  "interfaces_pass": true
+ },
+ "result": "FAIL"
+}
