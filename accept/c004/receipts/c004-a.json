@@ -1,0 +1,6909 @@
+{
+ "schema_version": 1,
+ "name": "c004-a",
+ "created_utc": "2026-10-16T18:10:32Z",
+ "host": "Darwin-arm64",
+ "fresh": true,
+ "inputs": {
+  "code_bin_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "exefs_code_sha256": "19a4445c367af066b5f14b97ca016c0e19c305fc2b4babcb087595823d0060da",
+  "catalogue_sha256": "d490e753d55456f6624618c29150ec80dbbf1c3f0aed25fbbe406f58351506da",
+  "names_sha256": "02c2437d6399433e3be016af3453f64e78d985861d2e4d9fb160a00d491bcc52",
+  "matches": "accept/c004/matches.json",
+  "matches_canonical": false,
+  "matches_sha256": "66f211729bfc7297dbac2ce8f4717146f7892886ff480fea56566cbbf4b13352",
+  "profiles_sha256": "8fe374ecdfd54b9c6c78ab3ecb31e6eca26c047c3adfa47e438f836d78ffbb43",
+  "toolchain_lock_sha256": "4058507b69f000ac4e506a080db95c4b4241796280039d06dbb5356d4192dcb6",
+  "exheader_sha256": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+  "harness_sha256": {
+   "tools/build.py": "1112d8c34a07e080500186e87977799ce11f2413c4faa6db325803eb28f71d6b",
+   "tools/inplace.py": "3ded3c53bd73752ff815eda4a4c5ce98fb0ef4a1df4513d62df8c1a67632913b",
+   "tools/image.py": "f81ee6a82736715c70e0871b47359bfeae1776ee9dc8791ce6a56dfd4a59e127",
+   "tools/toolchain.py": "2e60bcb9ed29b9fa867bea0aa525487ac3b1782473a50406cb16521ae07dffb0",
+   "tools/ctrfmt.py": "d03f6f173a737a128ae65711257410775e55ae3ae6ba349baad5a3cfb8448497",
+   "tools/denominator.py": "4d9515f35edb9fb2dae5ecfb1f82ca1931fa2f5b7b2f151c436d6d2ba039f4a8"
+  },
+  "linker_model": "armlink5-inline-branchnop-v2",
+  "compilers": {
+   "armcc_504_82": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d"
+  }
+ },
+ "units": [
+  {
+   "source": "src/pilot/pilot_a.c",
+   "source_sha256": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b68208eb0a731bb24fcdda6437ab4cce401761abde772d9b7a6fdc7a36180a03",
+   "functions": [
+    "func_0010e664",
+    "func_001149a8",
+    "func_001179b4",
+    "func_00122350",
+    "func_001263b8",
+    "func_00136930",
+    "func_00140dac"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/pilot/pilot_b.c",
+   "source_sha256": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "133366f47c16a32acacc1a30eeab79bbd97c05d92215920d2b14cc2df14e7297",
+   "functions": [
+    "func_00103798",
+    "func_001091d4",
+    "func_001103d4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/pilot/loop_cleanup.c",
+   "source_sha256": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7c8bc204e7707d586bdef29bd9a88f0bd07b44ddd8e9c578290bea53b6c2138a",
+   "functions": [
+    "func_00103258",
+    "func_00103358"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/pilot/loop_resources.c",
+   "source_sha256": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "dd6b80162cbaff96029cc5b9d9a336fc3de9606ccf37506e52a7a1b733adf53d",
+   "functions": [
+    "func_00105084"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/pilot/loop_state.c",
+   "source_sha256": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b64a50e9863d4a62a2169ac9e5d5a45a65543c8f40425db30d7d9bef35c223e3",
+   "functions": [
+    "func_00105fa8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/pilot/game_heap.cpp",
+   "source_sha256": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d8b9198cf1e2ed1af4a32bdc18a4b450933e98a6b446d341542f5ff1704fa020",
+   "functions": [
+    "func_0010d604"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/pilot/game_enum_switch.c",
+   "source_sha256": "2608356701959fb5a3853a2cfc17097f73bc6f30b88ebc55c23b0d32e0ee8141",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c314ea1d0146259b0cc4e6f73aa1c73bb4ec725bc30a0c12fd7f274af063cf52",
+   "functions": [
+    "func_001718ec",
+    "func_00171c7c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001670e4.c",
+   "source_sha256": "f988b29935da652bafb9b0b08d1b8a5c91401a40ccccd90168a5148dab3ea9a6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ddf4cbe5a6fa610c0f31532d305af4fd57d85d6431e5e2e06429e0c899c45b6f",
+   "functions": [
+    "func_001670e4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011e928.c",
+   "source_sha256": "78738eea0f52343be947b708fcbd426fd2b2c0c1d069931de9dc6cd1d21ec82c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ee42f71ef01c7662a6b1bb3514876ac80de81e7da31fb2406ebcc42ad053208b",
+   "functions": [
+    "func_0011e928"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0018fdd4.cpp",
+   "source_sha256": "4aa9bb781425b63e520b19d4b49387e05a06dbccf49bcf6588791d9be26e8b98",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "0f59751fcd37f189ebeec28a0627645cd17d651c52af66a1fca16192ba54b283",
+   "functions": [
+    "func_0018fdd4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00195254.c",
+   "source_sha256": "b6b662ee0f85b3f9c82c903bcdf5c0c5821657d725d81f72f3199f80ea20f000",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ee86d966ca76a7866de327a3d4c270a59d17b755dacb49c157959c8b8e914da2",
+   "functions": [
+    "func_00195254"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00102cb0.c",
+   "source_sha256": "fb4f8c61979103df1db1a70d62878a992a00099bcb8e2fef213587428fd6f671",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2713dd04f6fd8a784c048ddf92845e68fc72a809a5dd1f41ea72ae186151cb35",
+   "functions": [
+    "func_00102cb0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00105058.c",
+   "source_sha256": "22b08b5d65a6ace20e59b8f97d56bc15e56ca9b22377e4b7cb3ad0c06cdc90fb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4ae2a5fb671610c77e1308af22be2f6bd2bbf866f3a7f661ac06069c9ac3f86c",
+   "functions": [
+    "func_00105058"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00110358.c",
+   "source_sha256": "55c85cfacee4fb29677c2b00d81138bb1339c55e0033d463e001bd3947c0b82f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f967b00d5ceaaa6174db8a927c6c5931366b80af6f0dd9aa4c8f04a6f1151cb0",
+   "functions": [
+    "func_00110358"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001107d0.c",
+   "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f9a89c78cc1abdab2a9936ccff625651b5c5e4d8b12e4ef097293c16edb6ae8f",
+   "functions": [
+    "func_001107d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011362c.c",
+   "source_sha256": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f51d1ba4595487d5245967f6e124d0d809f833326e881f6670e7391224741e69",
+   "functions": [
+    "func_0011362c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011e970.c",
+   "source_sha256": "1df1975c0216e80752ebf973071748cf1733979bc6b5820d2bc411d2bb2b1a68",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "9588f9431fdf8db3ab15100e430aaf28bce2c69cfa30085697998e43e70f839e",
+   "functions": [
+    "func_0011e970"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011e974.c",
+   "source_sha256": "9aa52f34e8dca1822ae8f9f4adaa349f3e47a45f73b13b3ceaa192b5108c1342",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "fb0e45d27abdafdd66962bff890178d5cb71edeb663894209ef74c2f2f62822f",
+   "functions": [
+    "func_0011e974"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011e978.c",
+   "source_sha256": "faac44df6650c9c651d2d4ee8b3fc20fb0eec1c09772b4bc7569830ed01d55d8",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "1aa1420ed1a5b2cea8e8e03b6a22801830b9b7e6a962458dc6340a5b5087b8e3",
+   "functions": [
+    "func_0011e978"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011e998.c",
+   "source_sha256": "3106c9f28fee5d8427d03c004e6097cc8c8791513b2e8da0980d0f814b24c0bf",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "462ad0bb3b55d0934a6625a1e79e3a6303b3f23a9c1a4eccde31e0868a61eeaa",
+   "functions": [
+    "func_0011e998"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0019e02c_returning.c",
+   "source_sha256": "ecc3f42be2f8c2199a764281ce9ce5d9ded43181d01497003a170e1b206064a9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "778625dcb6d85169b05116b80c87829d1f8f07dbfdcd9471bbab36890c80dbfd",
+   "functions": [
+    "func_0019e02c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0012ced8.c",
+   "source_sha256": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "920221db382c1653037ae7108072087deff8929ec2e20cb3145dc96fd6c7e9b0",
+   "functions": [
+    "func_0012ced8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0012d1c8.c",
+   "source_sha256": "bd742e97881a1006aed64828a721955a34a94fe83c66219c41974ffb94434a4d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "81aff055c85e34b54912af592f1fb8efafccf3fb7458883f0a6b7a829c55301a",
+   "functions": [
+    "func_0012d1c8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0012d4f0.c",
+   "source_sha256": "93af079ad1d9f8354ac1527f9d53ca08a9dd3bebdea5f22e2c88a1669471ada3",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b383e74ad47b43f8c81dd44a95ffc036f0cb16695571af5503233045d1d5273d",
+   "functions": [
+    "func_0012d4f0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0012f4f0.c",
+   "source_sha256": "dd0b35a3310a3df8060af68e15db33a952340933fd63e50c6467f482e15bcbe5",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "5283a48d098ad493b3af09d49e178dad772a70692d1f72cd92abe105b611c3cd",
+   "functions": [
+    "func_0012f4f0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0012f50c.c",
+   "source_sha256": "cdff29146f04b04146d63b110828b4b3bc2bc2ac855382a01dac9779c02d6d38",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "30fc60719830c2fd7b80f2d645627b6e2dc2328cf2e751dd2fb02b3f41328508",
+   "functions": [
+    "func_0012f50c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0018fcb4.c",
+   "source_sha256": "8650965cf5a96c44d18a7ea3298827ca2d782de453e6aa3c6d62343f1fadab27",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "80d84fdf5f453b8ea260fed31c9dc286bf0158ccb136717e53126bd9e0b44657",
+   "functions": [
+    "func_0018fcb4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00195e84.c",
+   "source_sha256": "c02694a5085a6f6cd12975711fd270b45389fb09f9acafa603b425b52505787d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "1c7054b8eba8bd7379baa42b3ba4ed147c6fa29024bc8ece705fc161f8078c79",
+   "functions": [
+    "func_00195e84"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00195e94.c",
+   "source_sha256": "ced7791a8996cc4cf8e7b6df3ccd2f1bee06724569a3cec5ba586c8161d4971e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f92e575ed817f68b94784270816d4580e652df3368b050fb6d4ebc20d32eba66",
+   "functions": [
+    "func_00195e94"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0011f080.cpp",
+   "source_sha256": "b3759e8d75b006e941939c2b5190159971f97a7b285edd32b3a494c5a62330e9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2a0050c52b7336972be857f97dc1d2a26b6143090f683ff45dcd05af8fe3b550",
+   "functions": [
+    "func_0011f080"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00134f04.c",
+   "source_sha256": "ddc73aaeffc367598de6fd9b6107b6d046767593c89bf753ff8366ab1e81d010",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f0c4e75117f172e5005fa7d771ceecccd65ba8996d65d7b7008af76474d0875f",
+   "functions": [
+    "func_00134f04"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00135a28.c",
+   "source_sha256": "6f649c2ab95e66a2973d490925804c41b3553cc8eb72cdc4d505674d7ab79402",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a3d2d722e59be071a52e7fba355a51c45ddeaa45045b0190faf0e326d197f643",
+   "functions": [
+    "func_00135a28"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00135a58.c",
+   "source_sha256": "3c10c74764f47cab823bcca94c739264e39fbee5523c1bd754d25152c90e6e68",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "068195282faac001f121a0e1ad69b2229166d6093ffeef664044af0b07d6338c",
+   "functions": [
+    "func_00135a58"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00135a88.c",
+   "source_sha256": "375cc7e84a571c6e9ca3b339c6d31662c4a1a852a49a11acfb1743eb1da9c5ba",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "70a2418a79f1ec3350970128dd07229757ffc509cfe0ed5c32c4397b00411237",
+   "functions": [
+    "func_00135a88"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00135ab8.c",
+   "source_sha256": "442648137a05324def2fafae0bd12a95941bd354666ae34c96d7f9e4dc510f95",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7430c134b79fcafdf4585299e2ced75993f98701571151ac67c3f5dc6deb5d0a",
+   "functions": [
+    "func_00135ab8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001360a4.c",
+   "source_sha256": "989581a50f6037d4735a0a3f3a13d78b0c995eeac63b90281038835ec71bdc10",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "bac63f69f57cd6a9f1dbd20399a6cc47894a30d977c63314950a160144f52771",
+   "functions": [
+    "func_001360a4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_00196cb8.c",
+   "source_sha256": "9f3fdd424e329780bde36bd6640963c4e3ff3feb7d9566b8a62e166d2fd8a00c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2c2823bb2b7cbace6d7d7efd2d16a98072999f803ed0452e5f27f3d208bce1b5",
+   "functions": [
+    "func_00196cb8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0019f450.c",
+   "source_sha256": "175eea6d9ab1904d0055260d4dca853786dca6203a49393aa7bf7e9d31704141",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d7b3ca3cc6b6a8baf3f64254802060c710c6ee338eace9f7efe0074bb1ddda50",
+   "functions": [
+    "func_0019f450"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0018fcc0.cpp",
+   "source_sha256": "caaf1c22a3cc3b88c19ed0752af42b16d2f6e2e87900d1d5c668ad0e5dea020c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "06a3a52cf5302908c56a15191b38fa0b73cc263f22b01b116bcd2371aa0f2b5f",
+   "functions": [
+    "func_0018fcc0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0018fd20.cpp",
+   "source_sha256": "ade0e20b5aac3936267d21af371562e5df72134e72fcc3d178ffdda50d34f9ab",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8ed77dedc6ba802c987cf09075918f8a3e140ed3d21225c34de1d2cee1245180",
+   "functions": [
+    "func_0018fd20"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_0019d5c4.cpp",
+   "source_sha256": "c4a789b46cc92c0063983c0f4e3272c710a242500f3f60d95cce078dba0a2335",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e7046378de610c6fd74abab821616ea541ebfc6a0d5563d20a536d2edba55a04",
+   "functions": [
+    "func_0019d5c4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001c44ec.cpp",
+   "source_sha256": "a2e696b4b2bf3fc2a10147508ef1d5d092b7092177e12ae39d1aabb91ee4824b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d880f29cc75a99921bb16d10da38c934cee852ba637824f10c33afcb72a1db4e",
+   "functions": [
+    "func_001c44ec"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001c4500.cpp",
+   "source_sha256": "15c02e7d7c850549468e41058aacfcda30f2fcb2e41d17c797f934274aff8758",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4d32fb780ec0ec7d17bb90fc82d9e5b797a99a5fe6dcfb8f10a4b5033b840a62",
+   "functions": [
+    "func_001c4500"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001d2da4.cpp",
+   "source_sha256": "d748394646261904d48940495aacdb5bc89926ca88a42c8ffeab2262eeefac35",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8be947716f83ca9d098073bebd267dbd7d145391df249dc47132bbbd6c83b68e",
+   "functions": [
+    "func_001d2da4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave1/func_001d3524.cpp",
+   "source_sha256": "91088496ad21a56007b45e32584b2d0856dc31e0c0c6f8a3348cb0e2dd87a564",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "da7b38df4a0d58cec932273c63724d07837c6afab800a98ddc8a1f8aaf073640",
+   "functions": [
+    "func_001d3524"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0013db3c.c",
+   "source_sha256": "b52de6cd04772297fe3d0e8e77ab90877041e2e28eaa2f8b0a4b66cc008f1aad",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b5480fca3445303323894a96c0329b738970316079b83586bc233e7f75c3e9e9",
+   "functions": [
+    "func_0013db3c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001415b0.c",
+   "source_sha256": "a01e311c7f197dd904a522d9f40791152eee8d3be4c2fbc5b14a26f49e53597a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f9f5ab07208175e6c102840935ddb6c072c6c732abca2c07d7ca4bf588c7a06a",
+   "functions": [
+    "func_001415b0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001415e8.c",
+   "source_sha256": "1d400cb97032274c0b1840be51a06da079fd699143825b28240cf7a389f5d7e6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ef739ed73b6d359fbe561079fb816ab4a6b1a6f060ca6af343049650fa9e3c73",
+   "functions": [
+    "func_001415e8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00142a54.c",
+   "source_sha256": "06ab0f33b6b862ed97aec977976febe86114238c9c9e4e109f46ad0a31d11aed",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "3559746d90c973fd11b27365a9d4225c4e8901a01ffb8bcda1c63d5bc5f8c106",
+   "functions": [
+    "func_00142a54"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00147260.c",
+   "source_sha256": "68f44ff520ffe1ce54ad4f9e32a73a6d439dd4a59f2cd1c8be34e84dae5a7c5b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e8a4cc539f3cd69583ccc789b469f08064c885634f1d84659232085f4c0d7b79",
+   "functions": [
+    "func_00147260"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00149424.c",
+   "source_sha256": "0d249fe3b1c5bf4e676820b56d35a7fcd48a1d2fee23f7f23e2d76e4a505477f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7b914bcd41ee440e9f699d26d7daeb7ed86e36236ec43265a6d18d3b9794dea5",
+   "functions": [
+    "func_00149424"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0014c2c8.c",
+   "source_sha256": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2b2b32314273e8b6b98363523f4193bc475861d0ffe6b9a08102049d9c404d0f",
+   "functions": [
+    "func_0014c2c8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0014de8c.c",
+   "source_sha256": "6d2e316760cd9b8512cb3c4c96eacd5230c3f6963fae4521760abc9716732b5b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "08b07cfcaebc1d3fe56ad0b4892b66245b8475dacd6bdcb3fc686dfeab28a2b6",
+   "functions": [
+    "func_0014de8c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0014f7e8.c",
+   "source_sha256": "9b521e9b9a8f4fc518a6b95d81fd2a7f9baadd2a3fc27c3875b311459a77053b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "eae8b13c61faa7e3407766037a6239397f128bddf004fbd8542f113fa369b716",
+   "functions": [
+    "func_0014f7e8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0015f5a0.c",
+   "source_sha256": "8d925319341dcfada1f6af1ccfa61bb68604fdd0d0a8ee026a006597d01da1fc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e0cc434d271b18c33edf4939a75c5b6ad9382217a24e44f0ca736f23a51c1168",
+   "functions": [
+    "func_0015f5a0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00164ebc.c",
+   "source_sha256": "5b7b71482f720217731f9b40a2a9c069a1fc2c708ef2624d66514bd1d67a7f3f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ac19da4d6da4a30577296d41e4214d2616f501213d71cf6a880d3f138f93cb14",
+   "functions": [
+    "func_00164ebc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0016e5cc.c",
+   "source_sha256": "8d6fc994c250374ef13c0012aa76c528a59fc27863a5305de89f22a42abf3821",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "19060b5d286a248b9bf64b421ca8e998d484fa532f86efb51efd67d9123f21df",
+   "functions": [
+    "func_0016e5cc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001791e0.c",
+   "source_sha256": "6553e9023f6c5c8c40837049dccd0e6c4527c37ca5cd13f962f74ddba42e899e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "0053506162f565a5efa0bba07a97325ee155dbce5e8b3145d1bba734e5dcd74f",
+   "functions": [
+    "func_001791e0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00179298.cpp",
+   "source_sha256": "e39e8ff019edf50edcf88bf4e7ebb98aac8d515ab77ea64fd5e9dcf6c713f644",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7802f002100e9698d4a01632a191c600bf37d9382f02ef6082a587a634fefc22",
+   "functions": [
+    "func_00179298"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0017a968.c",
+   "source_sha256": "183a9391867c7d8b7d05bc8abdb3c4aded4e69631d6fa5f11df458336a1e04eb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "551f98f90215c17f4391dc85d8dc92dbccc26fb4d266b0240ec6c91fbb99297f",
+   "functions": [
+    "func_0017a968"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0017a9a0.c",
+   "source_sha256": "dc49d9e1ea915a54d737f97d2c3d2884124a7884cd6997f1ae76bcbcd97fb6f7",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "164e68540a9a5f9e9917bbd644617432b79c6c9290ef2eb0aeb96fec674609dc",
+   "functions": [
+    "func_0017a9a0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0017adc4.c",
+   "source_sha256": "142df30436d3fbbcac701c1286e4a1c4c41ebc81496f2d4e42665ff9e3f63f90",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c0579e5d29c4303c03910ffce961859b04ba0fbf5e34111c7aaae2abf85873f8",
+   "functions": [
+    "func_0017adc4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0019df08.c",
+   "source_sha256": "0244505a186fd227ac109c4bae380fea27b0b7487793152023efbbede6660d88",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "dd1510a74adedeaa44c3dd8624dd947d6493931e6fa05a068a1341bba325321b",
+   "functions": [
+    "func_0019df08"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00174480.c",
+   "source_sha256": "107dcaf26a2870208c63397496af9081a81f3b642fa64d46aeb24862a0c3a710",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "1bdcd654c717155aea45d812304f06187b4e4c495d2008313fe8b3c9c72a5a6a",
+   "functions": [
+    "func_00174480"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00176ae8.c",
+   "source_sha256": "4c6e7565dfbe5edf15ad27690defe3c01e750244de510fa3985471b84cd73595",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "431f1b17425e36d0080d887be9e840e0b9394410da8a84277b8946d8f3aa9f7b",
+   "functions": [
+    "func_00176ae8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001770cc.c",
+   "source_sha256": "f0310f9a6256ea372f86ab5596cbf74a91aa8e629273ab9a08b23431f8dd6187",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6ecd6b1424c45d5af634996a5a9edb5ddb6d05d2b3e03d8f115347b8498c600f",
+   "functions": [
+    "func_001770cc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00178e9c.c",
+   "source_sha256": "60349c9fb885bd5e372afe8345cf45deb6938c3c8ab472810334359396316403",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c9bb8a9baf1fa8783d0f934d3f0460caa269e7e32af2ffd7db8498725cdb03de",
+   "functions": [
+    "func_00178e9c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00179398.c",
+   "source_sha256": "4f7a15643de5196479a4cd550ef411bdf9b91ff4378fe125d5caf5214ed804a3",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b97fc49b6acd7149a1a0b0ffa10c6b91843cf1258c98847b9f48d7ba646c059f",
+   "functions": [
+    "func_00179398"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001795bc.c",
+   "source_sha256": "7975433811f318129271e3482336109f695888217c1ec3d71c9c43f1b7e253f6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8b4987b933b5480ed218ca5307334d42783ece7648d6529b070e94352e1ae394",
+   "functions": [
+    "func_001795bc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001795cc.c",
+   "source_sha256": "7f78a4fba3cf9c0ea7b9353b2883fd88bb5c0417d4cf63d9b68425be66f37dc8",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e8eba7a20bccc570cb13b5fd3b0330b86766af86d9c1e586e2e9364e312c42c3",
+   "functions": [
+    "func_001795cc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0017a164.c",
+   "source_sha256": "429fe22d2a1c00f358f4365733cfa7659d9994b56f8d3d1ff42cc0fb62c6f863",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7ca3f396c95b1c3867a795cfe8a6018c82e47a676b85f3d94afa1ed1760f8624",
+   "functions": [
+    "func_0017a164"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0017a210.c",
+   "source_sha256": "c3111b59fca2542a5e716d465de99054f26b5e216c61de9d0ff1580ef773a5d3",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "0473948653988405e265e898f185ba12181cb0c27dc66e6ca7467fe206e8da8a",
+   "functions": [
+    "func_0017a210"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0017a4e8.c",
+   "source_sha256": "2948269ee27f3a50ee73e02093987f6638d20664f0559a78611a0540f76f0e81",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "75e5bf37e2258288ad07da61e3c480eefeb190b8395aad7c4099c3da082b2c42",
+   "functions": [
+    "func_0017a4e8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001b7424.c",
+   "source_sha256": "3ab047eea54b2cf4889ed9c327b8ea3232a338817d68d45cbd7e6271a1fe23b6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cfc672e340334a114ea48a77ae4a76c56c47f3155fc96f512c9c91a5439bd4ef",
+   "functions": [
+    "func_001b7424"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001b7530.c",
+   "source_sha256": "abf48ba69d70ba78e17a4e402cfdf02a49ed8b3406053f039e76f27407df08f3",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a7837201367cf034b14573b027232c6e8c364d136ce14d86fa6a56584d481030",
+   "functions": [
+    "func_001b7530"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001b7598.c",
+   "source_sha256": "0c5868c50de9ad18285c7edf0b180bf9c8bc0a19805c6cc5f54eeb3cb576f280",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a3f13e55cd31c1779fc9cc97b681f7152d624c1b05f7baa785eb8f42038e932d",
+   "functions": [
+    "func_001b7598"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001b7c9c.c",
+   "source_sha256": "98efbb91cfd1b2f13839ad4f731c372b72111821baf0c07740151d598c2976b9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c125efe12a22537972a7b1f5c904f2f005d42dbd05afa4ad58b1cbe7259240e6",
+   "functions": [
+    "func_001b7c9c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001847f8.c",
+   "source_sha256": "1671126361c1f8ee27850bbc60633c545f7fb34c1b2dc242ce08408c994d05eb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "664b92d952ea7d968527ea74af8b1349ba132acddf3a2c044be70c5f304a5c2b",
+   "functions": [
+    "func_001847f8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001861c4.c",
+   "source_sha256": "d3945b55adda25cf82bb317bfa4d6accf28570ef84d24ddfdf1afef3bbf69bc8",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f50425625d48a05b36bb5184de87a4448c486a15cb8d296d54a8ff9f7e998576",
+   "functions": [
+    "func_001861c4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_001861d4.c",
+   "source_sha256": "1360318059aa48a572f5783a972b90190dff21cd5c695837e6f18173af108e6c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "3f8779e5d8be9b799429e580510504b1f61de75ffd523fe4b112d5bb56227370",
+   "functions": [
+    "func_001861d4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00187818.c",
+   "source_sha256": "1eb328265fab62a04ad7e7fd9090c7807f37aad3ef3c4c1cb9a6ffba1d0febff",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ea7119103f55d9c480f45a3ec09a906e2ec9bd3269c5e97734b731b3327a7161",
+   "functions": [
+    "func_00187818"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0018f0ac.c",
+   "source_sha256": "b8f6d14ec2cb70159b8780ab449712b56fe9aa9aa08345815c39612ea051b099",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "5420f55b4542518865f7e913bb6c8e47374d776444f61ca93e2e593bac6c58f0",
+   "functions": [
+    "func_0018f0ac"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00190ae0.c",
+   "source_sha256": "e5e3c442c3b5f45b1ce6b433568bd8f0289bc3fb4016ac12147fbe30bb343a70",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8c3fc24f1067e5b2b65fb7a65ade8450b37b4cec4e55b468b03af0e4325c7259",
+   "functions": [
+    "func_00190ae0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0019cff8.c",
+   "source_sha256": "d6c2dd221f0e102621018f15eeb5f5abd9fb0533a40d80e54e8095be644681df",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "da7e6798fe2dae951b44ec2bb3c63924c96d82f5b9ecca22b10c1787db2061b4",
+   "functions": [
+    "func_0019cff8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00110634.c",
+   "source_sha256": "a262d3accf77d6df99e8578c71986d7025476970fa06caeecb02b51881112426",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "58e6ed331109bf0cdc2d648da54506ef977fc36a02a41cba3bdf4c4f23b37c9c",
+   "functions": [
+    "func_00110634"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00118074.c",
+   "source_sha256": "9ec18c612ca95dbe009c81b3df3ceacadcd1257296b28ba7d73dad979b795b6b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d5a65bcda07b6bfcd53a4d6dda9f9d17114a02a511fba50c7faf859cdd9afa2c",
+   "functions": [
+    "func_00118074"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0011d260.c",
+   "source_sha256": "73441850704d05200674c4f68476e366dc563fefcb6f9370ca85696a34e3d30c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "76941ff31e2cdda434c9f23851fe5545eb21e1201b64a45b22b8b6135d51278e",
+   "functions": [
+    "func_0011d260"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0011d2f0.c",
+   "source_sha256": "ccbb727758674fc5ffd8d85843316dffd7a94df6015b30e710ec95228e3936e5",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b47efa8d5f02ba8db945203719c75ab3c932c2b129825b166d3d59370bc3d95f",
+   "functions": [
+    "func_0011d2f0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00126f5c.c",
+   "source_sha256": "b5d91a4441a23395b9d850bcaf7440f398d57e513210af2df983bf92e546dffc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7b56b4509a63f04ef1b4da72559e16f871d28d314308eb7f389f0776e9675f3c",
+   "functions": [
+    "func_00126f5c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00127294.c",
+   "source_sha256": "c34bbf154e41ac6f09d7590a242f34253ec77fa3491fda6990d6338b1a7d433d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2479dad49ed5c53bd95c341d536b8c7666fd7cb9d53f620faa0c07bdf01dd7a4",
+   "functions": [
+    "func_00127294"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0018ce64.c",
+   "source_sha256": "bb6ff988076ba3d211ce2109e1942475f933c991a5546257ed4b04cd0a4c3322",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "71cf6f7ae8cd4f1d6610a753dedf5159663544144052b716e9350781badec6ba",
+   "functions": [
+    "func_0018ce64"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_00190adc.c",
+   "source_sha256": "3553b65425c40f74ef78137235655c72f2c2f16347f20d9956dc660507e6e9cf",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "85ac06da385eecc27f5d500375be773d32960eac6726cc2e2da4a6cc26c20f6c",
+   "functions": [
+    "func_00190adc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave2/func_0019ceb4.c",
+   "source_sha256": "87d7e2948322370c2972ebc126512ff14150168b2f9e8391d16d62aab38392da",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "75d0859c2941991fa91a3ad63403211d61278ef5660e74119dec27d35cd7e9ba",
+   "functions": [
+    "func_0019ceb4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001245b0.cpp",
+   "source_sha256": "ee1bfba5f478b43dac2ec9372c81e3634f53599b5ced0021d1dd6b0365b9837f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b768ec2003669283102fcb6b780b0eae1b14415942e6e92e86b370ab0a1d8d6b",
+   "functions": [
+    "func_001245b0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_00130e24.c",
+   "source_sha256": "8fb9c3a21bca704ae85cf325eb68d2887e96fb2e923dd19e7f5e8bb023bcd4b1",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "83d2685eb12c122555e6cc21a3cc3c4267d8a46c6bb9c26ac8d303a93b68d686",
+   "functions": [
+    "func_00130e24"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_00196a94.c",
+   "source_sha256": "9c643d3d213fde4b14e98d29eafaf438f7430cc0aeedee5115a7af89c4777e17",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "3ac733a0360dbdb6ee2babfc879af64e09acc876cdf497cb7ae1b2ab7d45adcd",
+   "functions": [
+    "func_00196a94"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_0019b8e4.c",
+   "source_sha256": "472f71017e916f85414a4277cea6a8c71b7c91487946f45a7276076a0be6f1b7",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a854d7f0dd42ad9f5c1fe7e920ed69b5976da6a05082be245f017bec3cda17c1",
+   "functions": [
+    "func_0019b8e4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_0019f170.cpp",
+   "source_sha256": "4a4364a839bd5055131b80b536d013dfb36c061e058d5ecff795d7c5c52811d4",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4a4cd57da986ef367df7ba234073d895973b0330d1c5ca3e030abf4d462c9657",
+   "functions": [
+    "func_0019f170"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_0019f6a8.c",
+   "source_sha256": "c8feb1bcf9d81646a8480dbdc9cf4274e242bc1421cd83de2fe8278a81374399",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ed2a0be4448f67969fed681b7440c41aa43f1fa43827b744f1540642e92beb3f",
+   "functions": [
+    "func_0019f6a8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001a0094.c",
+   "source_sha256": "a7f28020e40240ac74a12a015c34bc00006e5292328936cab669f92f0e51e381",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6f2b6ffe2c6335b38e9e4d4f5a871ecc745154fb8743a391ec0c740b992dff51",
+   "functions": [
+    "func_001a0094"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001acc18.c",
+   "source_sha256": "9b1c52d824a2be64a302cd1c73b7f5ecf6f1eed4815712543352853972dc013d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "30bacd56ac0b26836a2b9de2f970e6c00e2073795902a982489d8ad71843485e",
+   "functions": [
+    "func_001acc18"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001aff90.c",
+   "source_sha256": "1adbdb767890da04aabd9af2a0ca861ec947abe9cc5cef49728dc8124492008c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a693509eb3a33f860070364c349eb188ce37d0fce88c529d800bf34a758e9466",
+   "functions": [
+    "func_001aff90"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001b3340.c",
+   "source_sha256": "f5bb540cb051db7f3342085d858115426ed3c100a839bc1000ca9ead2cd49ee4",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "213d197091a3d685642dd66a22c24648a478ce5bf0ad3f8712b27bea694af0eb",
+   "functions": [
+    "func_001b3340"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001b3c08.c",
+   "source_sha256": "59b0aab6c9b2cc80775c19ea2824566659cc5ed2d3831cb0f30de95f59f4ed2d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8679e395fc1fcdaf7f01011470f20e5cb76908b26860d81d6b4074ea0ca6bbbb",
+   "functions": [
+    "func_001b3c08"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c4568.c",
+   "source_sha256": "006f0f21df119d325d3f88ef451729247676ec0b63bff092375678ef268755d1",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a891a93c7288897a233997c14831c46d3402232d29e69549c08692f1792064a4",
+   "functions": [
+    "func_001c4568"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c47b4.c",
+   "source_sha256": "7e35d2da776e6dae263193b91cbb5ba5f3dc6829441973dcd880f8290f3525af",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "38a57535d3f6f2e087049102d23fa9fa01e7efc4f67b0e05d17895bfdd4c6301",
+   "functions": [
+    "func_001c47b4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c5198.c",
+   "source_sha256": "7030abf8d359278f84365e840d7a26d5e408c5cac181300161bb205416d02725",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c0c4d8bc6b30a975295760cbbd58caf905ebe8e317329f0c1b17caac92a607e2",
+   "functions": [
+    "func_001c5198"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c519c.c",
+   "source_sha256": "3524a70ed37e2dd3f43103aa895bfea5233133e0fab72847ed9fb2365d425738",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2e94ba563e86b8d5871dc1ec5cb027059c6a9e198a735b6b00c94c6f508bf551",
+   "functions": [
+    "func_001c519c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c51a0.c",
+   "source_sha256": "8fb696c25068981441f4db73dd3bf51c03c7b450c82fe6f94ad2467736757507",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "71cb7e6959c2679984a142692d9f3660fdd1fbbe9038ddf3e7c1a13e3f6265cd",
+   "functions": [
+    "func_001c51a0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c5760.c",
+   "source_sha256": "5f8a0a3a0037c3a7fa6087957b1e6d39e3a45df07597de5f4a33bf898eae0e91",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c1cfefc1e37c0c5fcff6ba5fa9fd0c31136e1c158205365cad390633b4eac0c0",
+   "functions": [
+    "func_001c5760"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c5a98.c",
+   "source_sha256": "1eeabb431d3505cfc5f3c6f4c0bed2a0d794dd04122c28b4c333164db561febb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7a09c93019feed3b0ddcf340efe3563fbf887ba102758be92fca2a2f01dd381a",
+   "functions": [
+    "func_001c5a98"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c5e48.c",
+   "source_sha256": "638ec4c7faad87b9293a49b19b88c24b92739062a0a9c81e914ef1e05873bb20",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "dba7a3c6d63eccb28fbc496a528c18a9228eb60690a92fdf5cd2b8b4e94f53bd",
+   "functions": [
+    "func_001c5e48"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c65a8.c",
+   "source_sha256": "3c6355cbd204736f011fd6fb9fbf17d12cd3de668abe6fe56774026d2027584e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "99c315bd9cd5cd7a835c955da2a01485e5578e435a217a12d36eea30a6ff56fd",
+   "functions": [
+    "func_001c65a8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c6ad0.c",
+   "source_sha256": "1ec4fa6d126dc3b49fcb6e60a7a8ab64c6b8b22f4f5ee101aac2ac1d196eb717",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "322c7943e980cbba010d689718c400babbe4e31b88bd61596b172b76cace9767",
+   "functions": [
+    "func_001c6ad0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c6ad4.c",
+   "source_sha256": "2c134a782a2511127930fb4ec66b0b98101e877bff5a38885620dcf176e773f5",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8776fa0b1921d0ae8e18a8ae4cc165e1fbbc8ffc2cbeaa47383fe3cb80a33c00",
+   "functions": [
+    "func_001c6ad4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c6ae0.c",
+   "source_sha256": "bc2b0286f7893c617feb1baaf17806c56c51417becdceb4e1aff7e7125b7d41f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "163e99e22356c60080bcc47abb03fd0c147be6150412d7b5e0920e124b938705",
+   "functions": [
+    "func_001c6ae0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c6b3c.c",
+   "source_sha256": "4d702c6074ab475a319324e72d9b015c0f0d1b4104f1a9551f36b34575651d9b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "68f641995691e073a23ab6221245c64893d760a381abde28c00f5f367d4469ee",
+   "functions": [
+    "func_001c6b3c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c73c0.c",
+   "source_sha256": "89cd1b1b57c7638ebd15234f646619917bd837616dde8c840a358813dd0b3c79",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d4da67ef6c7134a9e0eb6abeed92530258be4f9aad6acdbb22817488d590297e",
+   "functions": [
+    "func_001c73c0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c73c4.c",
+   "source_sha256": "dcb2f25323278abaa045b95176fcdf1b0149f891742636ef8a31d1cd355d743f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e6eb1953a3e811a8aefa35f32ee7467798bb0e8445f46450b3b3d66b66f7001d",
+   "functions": [
+    "func_001c73c4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c73c8.c",
+   "source_sha256": "6fcb90995aa2dde91b27f762f18e54f392d01decb5ae3e39c2984dd22fe3506b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "36bf97282f69e0794ebd3b6f4bfeb9da8c6093bf8dee6d411110d39b2e1a39cb",
+   "functions": [
+    "func_001c73c8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c7e18.c",
+   "source_sha256": "dc782d4cd370d1d08b16b909f85f64d13b3bd20ea187bc4250968271268ea08d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d0d02f31d70a4351542999fa0880065eb2e88ed1ae12bb028cb33923380dd597",
+   "functions": [
+    "func_001c7e18"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c7f1c.c",
+   "source_sha256": "3ca90eb2f0a154ab6a752048c21ec74746512535c9a40710a6204ffdfee19e2f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "861dd73750a613a823bbe1deb2ece9eeba4a36e065034c88d5771a3e2fbf01b2",
+   "functions": [
+    "func_001c7f1c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c8890.c",
+   "source_sha256": "ddf2a95747b30e4e29b95cb5ce6d31429393e9df5cca55532a514161dadce8a2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "84ecf2648ef1e51cab627c14dbb8f6ba75749836524ad6088a8193850f300352",
+   "functions": [
+    "func_001c8890"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001c8990.c",
+   "source_sha256": "a6a5fa9ce068271e91b6f6830cd5148330b3ef132ff6ac69b7f090263b7c2817",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4eec6162234bc583b5f58485fefcae21711b8394bcbefaacc5a6aff7303142c7",
+   "functions": [
+    "func_001c8990"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001cd43c.c",
+   "source_sha256": "6d96c5c7531c8150aa7593fb8cc3a3e3058c793deea6ec7e53964316fd095883",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "57a06327ba5606214a25b0ca88ffe6267c85d79b1927b1d9a31747a07731f28f",
+   "functions": [
+    "func_001cd43c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001cdaa0.c",
+   "source_sha256": "19cbeec3aceac1a69fb7426a3dd4a38dab30c226a0ef4cf2749738d872b15cba",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "da3a8a64899c96d5427ecb86b965c2bc52c82d8ebb8aa9afb5a8409dba1b1e35",
+   "functions": [
+    "func_001cdaa0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001cfd3c.c",
+   "source_sha256": "657d66731a6068b4d7cfc1fc0a7d68c393430d9f2adc1f5857b6526f1905734f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7ccf948c63425235d5cce26f45b306c5f305306a18ab256676d357e90c3ed9f7",
+   "functions": [
+    "func_001cfd3c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d2b7c.c",
+   "source_sha256": "06bdcd533ddfa94b8987d03c028fcd1e9ee5fbe92842a89d58b8a0bca4c2e61f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d2446071cf33d34bcf0e7b6b7f77ec7e42fea69e8590633aa40554304a72c077",
+   "functions": [
+    "func_001d2b7c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d2cdc.c",
+   "source_sha256": "c21dd1adeea2744529c93a91627796afd5a8d8556aa99604c581cdca5a961da6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cc9e7d48995aaedf88e8aeb5029c9c2927565db2d7bb860a6dc4803cb79f6e3c",
+   "functions": [
+    "func_001d2cdc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d38d0.c",
+   "source_sha256": "bd2e9c06f338b3b3b68c74f39ad9c4b7c88e0c62c11d4932d78d7d18d07d7063",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "38ededbc6946bca9e26b2fd4ec67dd6f3f792e22fd5a435cfa00c512c74ffb51",
+   "functions": [
+    "func_001d38d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d3d28.c",
+   "source_sha256": "e011ccc4f3793421797347da1cad5582fc6da09360ea602b63d53645e643dbbd",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "479226337e797c647602a5b26aa40e270bb55b8320dcdcc0e0f4c85efd9a9245",
+   "functions": [
+    "func_001d3d28"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d3d2c.c",
+   "source_sha256": "5962644ae437f8ddc36f7fbdd2b3e279fb6ee1c7c5d672547ff1796553e535cc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "277f89118bcff14a052d8c9c84cacd8264938d185550a92285b528ce7ddf8af8",
+   "functions": [
+    "func_001d3d2c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d400c.c",
+   "source_sha256": "2afa9848975e739499d67d9cca428b3d35c2268fc98cf87c4ddec348677c6ee9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "69943411e9f2452eb7b2f1dc1dc707898ff2855906efe2ac171cae89b8896134",
+   "functions": [
+    "func_001d400c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d4338.c",
+   "source_sha256": "3ebd26ce555fbc485bb6242e8257f94e25af76789943b8fd2e33b971496e0ffa",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "051d598880ae731bc1639fecc38b0913eac3f37ab1989ea31ff1669950f76a7c",
+   "functions": [
+    "func_001d4338"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d433c.c",
+   "source_sha256": "8cbad21cafe5f841ca8c52d4da5aee075cf2c976b0338b538990370072eb6bbb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "0213a9d33697b61e40c1370b4e35a48fcb93dafd41c39295350265c16dc857d5",
+   "functions": [
+    "func_001d433c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d4acc.c",
+   "source_sha256": "d541ac70702989cfe06ee04719781c1507ffe96985a842304c45cdee158c6329",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8b844d8b65c8bb9aba54bc3deade0d089f48da0a5397370cd4974fc0fc7240ce",
+   "functions": [
+    "func_001d4acc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d4ad0.c",
+   "source_sha256": "588cd9998bf8b71388149a30e85c2e1864a5126e1ba3c9772784d587b1ca6337",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b332fa8f548fe714d5a8ae8c98d732876b6443dcd8d025f7442e41d1d2950f32",
+   "functions": [
+    "func_001d4ad0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d88ec.c",
+   "source_sha256": "ebd6a92bf2d1f2dc1ff02b1a02c2429036f7732b720308b482c398ce446cd5fe",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "9a65e91211fcd6c5b89b20031dc231d448ced4acdbbe511df6105ff450939081",
+   "functions": [
+    "func_001d88ec"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d9a30.c",
+   "source_sha256": "6201295101864bb7fb0d5ea150613c1825725f432a037cbfff1ba2529bf03537",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "aa4c94e9408e15778b686b11f38023aca96ebe34fae35fc086d627ef249804d5",
+   "functions": [
+    "func_001d9a30"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001d9b90.c",
+   "source_sha256": "37499fd9c7dfa3f02af95b3b63364ecefcc4f70a3cf656ff15f0faf0ab0079d2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ac25dbd4a80dc2d78e3a5f9719cf5434edab0d03b3c412cd6ac44c4771752ef2",
+   "functions": [
+    "func_001d9b90"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/empty_functions.c",
+   "source_sha256": "f2180f7c094ec797160c60b860e45c2d3904fffec85ee2dd12996514b89702b4",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "81eda7c26e3c92f4e6b621f4e0fc5991533c3deb00405627514a1c492ea3cc14",
+   "functions": [
+    "func_001d9df0",
+    "func_001d9df4",
+    "func_001d9df8",
+    "func_001d9dfc",
+    "func_001d9e00",
+    "func_001d9e04",
+    "func_001d9e08",
+    "func_001db958",
+    "func_001db95c",
+    "func_001dce3c",
+    "func_001dd360",
+    "func_001e35e0",
+    "func_001e37dc",
+    "func_001e3818",
+    "func_001ebe1c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001748b8.c",
+   "source_sha256": "1ca19b94fded8360edfb2a4d457d37ec2e8aa8e0dda9c0e467c35087fd404e8a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "de415a005dcfae26015e138c6e33a977ed86a06e2d246f9b0883d88863164aff",
+   "functions": [
+    "func_001748b8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/func_001ef888.c",
+   "source_sha256": "de9715abf85cc68ebac23d983e86cbd41c74ac9506c09f29e192449c11b367af",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4f2be1305a5358b4678066fac10a4b77af1ec849301c7e7f3514d43780c09a48",
+   "functions": [
+    "func_001ef888"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave3/parameter_values.c",
+   "source_sha256": "a752e272615ec84cca52978be74d4ac8ef4584e4dba12ce466fb44c5bfaf42de",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7427ecbd0842a9e8f296088ae81b00df49b3b075481c49fe58680005704744e1",
+   "functions": [
+    "func_00175648",
+    "func_001757d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00100078.c",
+   "source_sha256": "c8111b0ed1d8fb58fc8c4f67ec55a81fbf13b38e394d04772d2702f7686ce344",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8c4d11cbbb6042798595384adcfed56da8f1ed1c5cdb7b38ceecc806dea0999a",
+   "functions": [
+    "func_00100078"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00100078": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1048700,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00100d68.c",
+   "source_sha256": "502e6f8a375a253c827b1259c3611c7133ddfe901267fcfa65a6f4eb5332a1d7",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "bf5da8b8dc84246be3b103e2a352ebbf90e65c785963f6e64bcf69b69303272c",
+   "functions": [
+    "func_00100d68"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00100d68": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1052012,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0010c338.c",
+   "source_sha256": "d5b1aa6be8310499799c1d79492f5cf13fae14943372380068f69de078b38824",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "60fee469eefb824f90965bf3c75df7383701bc819da63bb2a29e9b0c04e73dd6",
+   "functions": [
+    "func_0010c338"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0010c338": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1098556,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0010c37c.c",
+   "source_sha256": "218d0e3233f9facd3bf401ec348a2fcf13c55d0acb911831bae814173d9dff43",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d18d773bec2e26f2cc7b7ce83c50754e9aac2e8991cbf945db573d61ce4a227d",
+   "functions": [
+    "func_0010c37c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0010c37c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1098624,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0010e67c.c",
+   "source_sha256": "986da15ce7a886a90f6ccf70ead8f8fd0566d85196965cea9b3d78850e78e765",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f3504bc7e52b0541a831080e56314bdc8999785e38d5f45aaaa92045c3dc9e76",
+   "functions": [
+    "func_0010e67c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0010e67c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1107584,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00110aa4.c",
+   "source_sha256": "18f3ac829faac20cc79bcecf70341052ec0df47eb7f6053a89de2145899759ac",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d6479f1a8a9b9c400a8058c4e6439dba2c57757711bae50c6542569a44b64e55",
+   "functions": [
+    "func_00110aa4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00110aa4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1116840,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00114fa4.c",
+   "source_sha256": "a9dc457e1178d2ad172401fd1f187d4746ae875526255bea567f48ebdc1886d9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6b265c036a51ab100387bdbcfb7e63081b043e6890908c4e042401df840be567",
+   "functions": [
+    "func_00114fa4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00114fa4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1134504,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0011ef48.c",
+   "source_sha256": "076940586d223db60e179ff8f37ebe8478ae24c28d104d3d57859f868c0787e4",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "44e62f59eeb992db9749c9821327fa13352fbfc3edbd37692064e4ca9dd3e88b",
+   "functions": [
+    "func_0011ef48"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0011ef48": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1175372,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0011ef54.c",
+   "source_sha256": "9e6ed786f83237d865048279a8d622b3efe13b2ea056bde5e33e689a17820a1e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e23180ec204d768190e361cca12f30dc097505b74f79b6531a7ebb45311b7de9",
+   "functions": [
+    "func_0011ef54"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0011ef54": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1175384,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00121764.c",
+   "source_sha256": "6510f45bfd73858293c07444a38221d44bd106eef8e02fc1abee2b88c3566c9b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e01ad820c010d3d7c028a86f5151e84b562cb94216c824ecfac4d0b1e5c84f4a",
+   "functions": [
+    "func_00121764"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00121764": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1185640,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001217b4.c",
+   "source_sha256": "38ca7513116aec7fc30fef7d46e08a80bac1bd0363d8ada735db237fdcd10800",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "5fe58699904321b2b946601d84b5a0bda4568737242da29a53d41562e8b716ff",
+   "functions": [
+    "func_001217b4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001217b4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1185720,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00121bc4.c",
+   "source_sha256": "a6967874ee6fb87223100cddf05d53b6bccea09a136f65abc1ea15d9a2dc6a2a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6fc11e9d5086cd62a0aafd7d23db9ce7a74b1d02572ae2e4eb67b5399aa56840",
+   "functions": [
+    "func_00121bc4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00121bc4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1186760,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00121da0.c",
+   "source_sha256": "d972069d35ccc83d0057b8734fb9ed80e2456c19f360ed7bf5000801636c0eff",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ae597545f7feb3e3dbff9628574ae783ee7729b8ab365d5d92c0499fafd89436",
+   "functions": [
+    "func_00121da0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00121da0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1187236,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00121ddc.c",
+   "source_sha256": "cc2062e9be3f17d2704eacc5f633c7c1516b255ab9e2ecef8b42a173309e0494",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "34339e3a55c07511233b8f068145d5174108235ddc0b5a9f1070ca7070c9e4a0",
+   "functions": [
+    "func_00121ddc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00121ddc": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1187296,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001224a0.c",
+   "source_sha256": "ef25ded32a14842e8b1f5e7c6b780439cea6e29ba5c9223e32d980aea2211d33",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8f8196218c4085f972194971e4345cf796f9df2c86c1bf3915db95ee5ce296b7",
+   "functions": [
+    "func_001224a0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001224a0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1189028,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001224fc.c",
+   "source_sha256": "18e2cbc652ef81a6248d0e51280ccae46d8ef5cbd0e5fd7eb6606f710c5cc01a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "9ce1f93218231f713a842d679b7eb6d4c2859cfe3cab97c077ede8824399883c",
+   "functions": [
+    "func_001224fc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001224fc": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1189120,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0012250c.c",
+   "source_sha256": "046b12f086b85c25b28c844063f7f72a33bf1567e80fd3e3ea0d2f44df7270aa",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "719a0d16d4eee85c0fbb026e57c76a9e8afebcca0bde2c281a6fdd1d63549ea7",
+   "functions": [
+    "func_0012250c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0012250c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1189136,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00122788.c",
+   "source_sha256": "696ee2a6d64866063d1a3bbcd4c8b954861caa5e163cf9e324b401ef5b1a4d0a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "5d867d54573d93107b68742820257fd44204b5f0e94b5c62e69b083f8d8924d4",
+   "functions": [
+    "func_00122788"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00122788": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1189772,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00122890.c",
+   "source_sha256": "40c169ad6bda87918b9cbadae5ec1287147bf62f90381b5044bd5358329e971f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d058aea108edcf661ae22bcc083f96cdfa00a0fb2d7f00570cc0ae7795be392a",
+   "functions": [
+    "func_00122890"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00122890": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190036,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001228bc.c",
+   "source_sha256": "911ba2003bea6b80e926cb12fc183a9f7c16901bf69f01a453737ba53661a599",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c7f4ad1415097f91661135d6a74172140f12e222d1e4f468a3cf0a8d38cbc991",
+   "functions": [
+    "func_001228bc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001228bc": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190080,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001228d0.c",
+   "source_sha256": "cfd8e8421582c379f9931742f271fed6f975664c11815d92a7a166456e9c4b66",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "0bd6655164e27f70b73c664ef821b6681449552467cb74b174cb3a5ce0ff92f7",
+   "functions": [
+    "func_001228d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001228d0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190100,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00122984.c",
+   "source_sha256": "2a4064c679688069365cae2a12f9438e444bcdc0be751cc592c8cde37fb2d7b5",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8bf574d15b8ad2ef8329b20b4b5de0e5e38d7c38e62392b549a62bc9cf6b174c",
+   "functions": [
+    "func_00122984"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00122984": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190280,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001229b8.c",
+   "source_sha256": "ffbbe091b2073976ed4956562146ceb6c05e4d50d2766747128fbe44d6d82090",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2158beb5da12e2282835ea0157d5edaab4fe313536ed10b379f7e0016c9275c2",
+   "functions": [
+    "func_001229b8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001229b8": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190332,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001229d0.c",
+   "source_sha256": "972a58654dc5f8a74194007adfbb485bcef98fdb2364a189745fc40f1151cf3b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "9caf17671a9418c43d6e67386089b92b4805a72dbf35e03e6307ef6450193548",
+   "functions": [
+    "func_001229d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001229d0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190356,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00122a1c.c",
+   "source_sha256": "17f1da4878891650fe545f9ef88d1945a46940ba894d8a5ed4b3fe2c9bba493a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8c7099d29d774680ca87fbe84b7f81660ef453978f4f8a536ac67e2989811a93",
+   "functions": [
+    "func_00122a1c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00122a1c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190432,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00122a68.c",
+   "source_sha256": "5d046f2a1bd0fd5005a3c984619fe11ef9db22d289e1a46242cbac9ed7e1d5f2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8404c2e5817b4cc741b7b33d458a29e0149a57bd90dd58765e62eaac90848761",
+   "functions": [
+    "func_00122a68"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00122a68": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1190508,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00125b50.c",
+   "source_sha256": "664b9823348e77b0ae851a9d8d703976efdf6faab19003c540b5814a498ed191",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "95402d840a5b672af3b854ce548e4087138b3cf92813283ebb0a0ad87c21038c",
+   "functions": [
+    "func_00125b50"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00125b50": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1203028,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00125b54.c",
+   "source_sha256": "53c91dfe49109f8e9ca8697f2e1222bb474665100c1d546e7416637fcb7f1589",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "139689e49912eb255a6145474a2f6de730c893cbf6d6c61d70edd8543a4f9d58",
+   "functions": [
+    "func_00125b54"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0012d5c0.c",
+   "source_sha256": "95dd50749c4f2b55032610ae76ecf3fbd5bf13470858a9ae38b5820fec4bca64",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cd3e4125ee4a17dae3ab1b8b81161508b77447159bba98d888117296b755aabb",
+   "functions": [
+    "func_0012d5c0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0012d5c0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1234372,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0012d62c.c",
+   "source_sha256": "555420ee6d60e51b928342a7c40b505f0df8c51ef50d33c216142a90002c454e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e04d3819a6b12a30db37f8383c3da3547fc9bbb3a8290c0f8339d1544093437f",
+   "functions": [
+    "func_0012d62c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0012d62c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1234480,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0012f518.c",
+   "source_sha256": "2c7388975f15d8c733c9f9180b1b3fb1516248ada58324abcaa3281bbd8a67e2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "eb986f38889380e1f361857a77243a20612326111d97889cbd213aae012fc04d",
+   "functions": [
+    "func_0012f518"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0012f518": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1242396,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0012fb38.c",
+   "source_sha256": "6bb0e06813e8177985c172049dcdb90af84f2bbc15021accbc9dab9cba43ccfb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a12758e3491ac36081f70bdb81868e16bc2f7af7c170a97d687160e22909a663",
+   "functions": [
+    "func_0012fb38"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0012fb38": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1243964,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0012fb48.c",
+   "source_sha256": "2f1313ab8f8313a812a9180e85ab2c92597f8214f0ce2a01eece19b3fd056d0d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8b18e266c38a82193520246e2d92b105638e1d3deda3809cdf7482ffd6b142f0",
+   "functions": [
+    "func_0012fb48"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0012fb48": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1243980,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001363b0.c",
+   "source_sha256": "fe071a7a7993d60395d9939ac904701f2d5962173afe14e29db1cf81e1a918cc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7d406f172fb2796a485e94f1ebcf0a446a2e531d648141473dc3f3264206c94f",
+   "functions": [
+    "func_001363b0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001363b0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1270708,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00136404.c",
+   "source_sha256": "77dbe4044571f9edbd64e7ba46355d8bb547221cd791f875824c0d3f27451bda",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "60d696cfd33c50d0f498f56ed56a4f14caf5357ccf40fb153f188d15efea4b22",
+   "functions": [
+    "func_00136404"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00136404": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1270792,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00136858.c",
+   "source_sha256": "0ff1543312c021649f2b01a9d273f598c2720388c4884933145926597ec262a2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "0746d257caf85555630e147c2271b0bbe523176abb445626c82085372810959d",
+   "functions": [
+    "func_00136858"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00136858": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1271900,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0013706c.c",
+   "source_sha256": "34ac967744215f14ce27d3fb87f09dbbf0395bfa6b496f1ee754c16c6ec99bd3",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "5017bd34e357d6961f1be50cda5b543e35841d65a2a3fa1413ff3030be8ec8b2",
+   "functions": [
+    "func_0013706c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0013706c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1273968,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001370ac.c",
+   "source_sha256": "9b056ad9741135498854f189ddb8a908a63d5811711d44bfadf753dbf2d15f79",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4548775681f17f67b84d47e66d50e0e185aadd297f39981cd40ae3eba45f5dd4",
+   "functions": [
+    "func_001370ac"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001370ac": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1274032,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0013714c.c",
+   "source_sha256": "fe9d05e8a42416a715fb9c835671e00d80205d522b72ef1a661bb53ab49681d9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "686fad2b28cd65b61b4b9dd2f4d5c22f11221a962bc15c4ccd0fea04d4dd3582",
+   "functions": [
+    "func_0013714c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0013714c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1274192,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00137150.c",
+   "source_sha256": "aa8862828a26d109f074f50872defcdc60e93789c28bac0e6e82ef739d678b01",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2f4cff877fc9ec21054778a3b0c33ed2e1373ae9417b47006c0e4cc45099e4c4",
+   "functions": [
+    "func_00137150"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0013776c.c",
+   "source_sha256": "4b659ecca4a9d218fadf108860e18cf5c289ffd641e4fba317f5dc4f5fc6ab4b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2075919957d23ab18955c990343d750ed46b1412273804a5981c34d71ea875cc",
+   "functions": [
+    "func_0013776c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0013776c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1275760,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001377a0.c",
+   "source_sha256": "03b0f0432f6c606c3dad6c4bd4b819d5da8e6d39bb4a0644517dd7d236285cbc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c08d0b17a5dd5cf3138ab48065b107611552682b1b1459ad2bfb18d5e4c0b3b0",
+   "functions": [
+    "func_001377a0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001377a0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1275812,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001378d4.c",
+   "source_sha256": "dc002c2f4b9de34e2d61922aa819cbf648ac06707fca84b3d9562d6d3b897831",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "365997b47b804c6f3ff32947fce5d0a4c80ce09652433ddf961bc47df0d8f783",
+   "functions": [
+    "func_001378d4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001378d4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1276120,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0013e7d0.c",
+   "source_sha256": "c6a6108ace5a015f26de63d56d7e7ce4b2e730f2f370b60d480c2356cb685e94",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "09ca87863c615fd8e305c60ba8354ced1330b9ccc67167b1acd561ddbd552cd2",
+   "functions": [
+    "func_0013e7d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0013e7d0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1304532,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00141c70.c",
+   "source_sha256": "c54e32639922e9a288e2cde317bff1d10ce257dc83bb333aeaac60640a0e398d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "023831b8702d66d542e0e542b077c8a72cbfdfc65dbe40628a811485af54cd8b",
+   "functions": [
+    "func_00141c70"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00141c70": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1318004,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00142640.c",
+   "source_sha256": "fd74c57500b156dc29e8fd76b23998816dcdbc60d0957b5718f73df1bec05eaa",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "783a86e8e4b5857c854f375eae258fa1c745bcaa73c4d3a61828dbad9550169b",
+   "functions": [
+    "func_00142640"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00142640": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1320516,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00144220.c",
+   "source_sha256": "e7ce77d7d92f457db2f683afeba1cbd4dfbd551e369e704bbccccedefc581c4d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "319c0093c99457a7abda6ad7fea984feb820562f917f92996c0e3ce198ccbaec",
+   "functions": [
+    "func_00144220"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00144220": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1327652,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00144224.c",
+   "source_sha256": "1eeb50f2163d5c9257d5cc9bacb584c66f6a0d2685ab657384c87b1082ec5da5",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d102073ee76aa1175fbf439d054056725b610ea26cf6ddb8bd92586bdb47f080",
+   "functions": [
+    "func_00144224"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00147994.c",
+   "source_sha256": "cf2db1585dcfce84b63d6a45159ade4688ede5fe397ddd326d32b1fa86d13b0b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "e74b6388e51a69ff0730826faa60cf1491933f102825272bc5f9aef71b81873a",
+   "functions": [
+    "func_00147994"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00147994": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1341848,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0014a988.c",
+   "source_sha256": "9e9c087c779dc3bc06c32af5af23c034781f0501c4fa576d7cbd7e823eeca8c7",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "65c729b2313d4d8176383b79ef03d6ff6accaa150293021314043296ea5ad232",
+   "functions": [
+    "func_0014a988"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0014a988": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1354124,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0014a9d8.c",
+   "source_sha256": "70c97f333c805cdcdbc2058ea9f904fdc6779a094543db2331e6a74ee158bf87",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6a308402a3759ba48d26ef833c73ca9a7567b020beb056e17d22c0c5a8359b23",
+   "functions": [
+    "func_0014a9d8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0014a9d8": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1354204,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0014c338.c",
+   "source_sha256": "e7a908d2a783298380365f782547a93e0a3dd045487b2466ba35c5baf75961a8",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d8e20840b37d98b8a6fbc5147ae66fd5dd2813fae4dc95b7c37c8aad4455f11f",
+   "functions": [
+    "func_0014c338"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0014c338": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1360700,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00156de8.c",
+   "source_sha256": "961bbc3ac4f6c02bd3e79f55e5fa628c750737e1986749a9eed6e41d23a59003",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cdc89459e2ef486f731421f9e13a73ab79cd1e0945c244d0f8a8e2df87956de8",
+   "functions": [
+    "func_00156de8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00156de8": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1404396,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0015e2b4.c",
+   "source_sha256": "81550dc8313ab07b904bdb02b7fa2035cd15a374aeab481f0a789f35f5d6e734",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "dd396c6c5ab285cd6beb216f36344f043b611970f2f9d1de47cd0f01cfce2e41",
+   "functions": [
+    "func_0015e2b4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0015e2b4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1434296,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0015e31c.c",
+   "source_sha256": "6a8b9c843241f7f3ff994616b01b163616f3a6b6bad5cff324b24a6bb98084a9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "1d1efc1bcddbe7fef5036b751d157b626e4a5175e69f870fe4eb483497153563",
+   "functions": [
+    "func_0015e31c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0015e31c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1434400,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00166eac.c",
+   "source_sha256": "f6f047c950d6f62277778150a5132737a894fadcf3c25fa70d9553e18ae59785",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d6602ee567ea8aebbc9a529b3f5717257838569673ac81838f478c01471eb0f2",
+   "functions": [
+    "func_00166eac"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00166eac": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1470128,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00166f1c.c",
+   "source_sha256": "701347f1b1dcb7fcd6d075d29af8981341189d62a87b4ae78bc88804a74fe64f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "50fcafc8ded5656cf45776903a0591c0a66487806f185574a7a4976af1d13236",
+   "functions": [
+    "func_00166f1c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00166f1c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1470240,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00169874.c",
+   "source_sha256": "abe9facb74816b5e157bd05042ac850f79c8abf09a55bbfc2befe04add68e1ab",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "5eefaa3e873ce2033a637a9d83de367d3d9a467fd2e3bcb65b619077cc7cee2d",
+   "functions": [
+    "func_00169874"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00169874": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1480824,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0016a994.c",
+   "source_sha256": "19aab19562edc839e0d94a7d692996388dc84066bdced816189a27bd2f40b7f5",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "719b71fd19f5088aae60b8f657220ee4d281073c3fc517f5c6650bf726ad769b",
+   "functions": [
+    "func_0016a994"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0016a994": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1485208,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0016f39c.c",
+   "source_sha256": "72b2c79ed0ee8f39e218afddbf0653f1ca8bdd98b9b984da1bd7201e925ceba6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "43a1d5e94918244708c43758a3b50c79a5bec231a48080cb9262de08eb268a7b",
+   "functions": [
+    "func_0016f39c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0016f39c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1504160,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0017e358.c",
+   "source_sha256": "1078605f59d56dc2467ae4c15c69a4bd28006d9903d8a064d4fb6740e9fd368c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6dcd61b1c0d25ec82007c03f34ddc88b43f3358d6a16629f09a2d11472c16b75",
+   "functions": [
+    "func_0017e358"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0017e358": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1565532,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00181e40.c",
+   "source_sha256": "89ba27deb766c0ca08f1d2ef1f83afb579359fb4160b6fdb6755a8044cd66e66",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f0230de52525e15bca0ebfafc59a1b37bb44b0802b6ccd9965570f5e0037d84e",
+   "functions": [
+    "func_00181e40"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00181e40": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1580612,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00182718.c",
+   "source_sha256": "c759397b16a2e06b4aaa38aab2db22ef2794a37c0974afb40661707176e3c87a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a3e83e41f7bc3367cea32945bf05a68bd5991e3044235e11e2c607bb301eb2bf",
+   "functions": [
+    "func_00182718"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00182718": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1582876,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00183030.c",
+   "source_sha256": "1ccae26cad026df51bab160b7acba5ea3710c60dd0cba9c28114d1912705ac0c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "69f86b9990290940d4de836e9f481ac0cf97c642b4a2b67b41d2b9719e2348aa",
+   "functions": [
+    "func_00183030"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00183030": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1585204,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001852f4.c",
+   "source_sha256": "ed625857cfb3701cecb4b7c28a96522fd287fb0a64bb4c622e2d0c314d954fbc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cf18f288e4319cdef16bf349170e315e89db626f779315438fb6232aae4ce24f",
+   "functions": [
+    "func_001852f4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001852f4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1594104,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00185b9c.c",
+   "source_sha256": "b5e793ff23651e9d69701b790261e27efa0d10bbf2f458156e64565d45399d35",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "fe7a90e0cdeda5cb2e49546208d781743d59c0c2f50217cae2c60ae14f276460",
+   "functions": [
+    "func_00185b9c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00185b9c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1596320,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00186484.c",
+   "source_sha256": "1baa9553a003d3c124a9788ea35c51806ab20edf68cfd4bf3a3c3f8005368cc7",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d226a65da3e815f4d2513f17865f6273cf95795a5c9f63500f4e4a2b3cdcafee",
+   "functions": [
+    "func_00186484"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00186484": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1598600,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00186eec.c",
+   "source_sha256": "4e96bfc2c6996940b30316097aa6a23381f307efd3d2c387da242f8324147b87",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cb0ae9d61a44806d72b5068bed1b5e4ab02c8d16bbadcc858871d0870a4d10b3",
+   "functions": [
+    "func_00186eec"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00186eec": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1601264,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0018f7ec.c",
+   "source_sha256": "d264677614be2ee856e112ddf753f40855f95fdbb88876b7a910ed12511eb22c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2d9d9ae2c6cce2e1628ed9c5bfefc486e797ba9e707febc5e8fe80292d9344b2",
+   "functions": [
+    "func_0018f7ec"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0018f7ec": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1636336,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0018f7f0.c",
+   "source_sha256": "9b444c451dea0db9981bdfdd283444d41d4e66f447cdd6d1d649b27ace0c6692",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f5b0e71fab526b65271efe460e10e61ca12dcf6258519411b8a2f269e5530218",
+   "functions": [
+    "func_0018f7f0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001900a8.c",
+   "source_sha256": "585289d8bd9195d9147032c5fd71edfdac0b19e508552912bfb53315795b13a1",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "08f77ec96d09cdf2ceeaa170c0bdb3f3395e09f5532786b03fd0dc35763543b9",
+   "functions": [
+    "func_001900a8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001900a8": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1638572,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0019721c.c",
+   "source_sha256": "4d0252359bf2dc9a280a5297825f042b731141244e96cc351345e2800fe0ae7c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a21ffda2f7be77b84aabc7c57d9461214cabdd05c060b27596aaead754f3f4e4",
+   "functions": [
+    "func_0019721c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0019721c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1667616,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0019dc1c.c",
+   "source_sha256": "639aeaeb2b8968bacb40b159c43eca8248eb1ab530413961467a2afcd682f3a2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "c951e3646aeb1aa697687f52b5626a8578c4cda4f6e9a88d85f7dacbbd14cfeb",
+   "functions": [
+    "func_0019dc1c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0019dc1c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1694752,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0019eb48.c",
+   "source_sha256": "ebe2d2d296babe2a75be2383ca6e5f05be4093b92fd6be1b2a59ae017282b32e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "285bf5fd1d086b8cde1714744253ab1b271151c29610491757c1e61384b41cb4",
+   "functions": [
+    "func_0019eb48"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0019eb48": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1698636,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0019f2e4.c",
+   "source_sha256": "7321339818d3bbec7258116c9645c870c9b67b54c52bfccc01baae9bb7429382",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "760f3c294982f712f4ab3d99e7618969bedf418c15dfc062822dcce8d319affd",
+   "functions": [
+    "func_0019f2e4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0019f2e4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1700584,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0019ffa4.c",
+   "source_sha256": "287d15d5f769037d397d25f44d73ce3d29d86b3e8d2ce81f85baacfbe1367aa0",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "99aed0439b4df097ff4c5997e8c95a06b24327c09739892e59de473e6a354a85",
+   "functions": [
+    "func_0019ffa4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0019ffa4": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1703848,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001b472c.c",
+   "source_sha256": "890c226a11863b3886e838630f2a51dc921f0dadb5213d9d57b2ff0597b1cfc7",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4ab2ed7b5fc88140172abcfed3e12e6ced329f918638a91ccb170cb76ed84e5a",
+   "functions": [
+    "func_001b472c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001b472c": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1787696,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001b54e8.c",
+   "source_sha256": "a9368ab8f02f15c4653874250087bedfde586f70327645f23eb8cb02e1f56231",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "fd4ed30e2fb59baaf630ae4d3be4332e98fd0ca1df476395e96af9a4b5be0f57",
+   "functions": [
+    "func_001b54e8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001b54e8": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1791212,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001c3abc.c",
+   "source_sha256": "a6e7d838451644f991efda68d81d07386b6290a8a9db46af381f35abc997b3e4",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f0bd78187ab2542a34e50e0e5c9fa639df8a15623a46545c80e44b203cb4744a",
+   "functions": [
+    "func_001c3abc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001c3abc": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1850048,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001c5b84.c",
+   "source_sha256": "ae8b7f00bb23d91539e18dc18c7fbd33dccae79faf29de651a35a80f28bb1a75",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b1db6a4605cced9911929fe24c7a08f325237c21d799535cf809a4720d5ee0b8",
+   "functions": [
+    "func_001c5b84"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001c5b84": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1858440,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001c5b88.c",
+   "source_sha256": "c44207ef59b8b43f5fdf67b74c6f23b0124a735be51e50b3deca7d0afb51cfe0",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cf0816b12a1183627af291cca85e20b0e724931de01514a2fdbc5ca2f8bb2957",
+   "functions": [
+    "func_001c5b88"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001c6a34.c",
+   "source_sha256": "d83c36fd2199f17f6a8475bab2b7c68b47e86cb71757e365c7c1f8377bdeca2f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7c04c9182fb9dafd1dd0b529c34b5a51fe99ad3a13c6813af881b2829be67f19",
+   "functions": [
+    "func_001c6a34"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001c6a34": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1862200,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001c6ad8.c",
+   "source_sha256": "f64f270524b16e38e9dc0143ae303a2c89d4c834bb0363597421aece21717780",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "2688b5cd823113bc18e81c37c60d05c1102367d0a39c3424d03a3f1e23fea074",
+   "functions": [
+    "func_001c6ad8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001c6ad8": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1862364,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001c6adc.c",
+   "source_sha256": "3a86dabd7a58a1a7a0ffca6e48cd020144a3db808cb88e4663d9fd1acd45a69d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "895645d7abecdbdbe03519cfb6780b3dacece19aafa60caeb27f89df622900ec",
+   "functions": [
+    "func_001c6adc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001d32e0.c",
+   "source_sha256": "28ff527548a4f713a70703496382d9a581992189a7349b4e6177bfbc9a6a06bc",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "532e9dad88f125bd40359739a8699c8014aa692107c39da1af55993c0edaea2c",
+   "functions": [
+    "func_001d32e0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001d32e0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1913572,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001d54ac.c",
+   "source_sha256": "311f9b51a36fa0b7ed7bf5449f688cc3b47861a5a30d1b75f34ad13c076899af",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "afbe547f45a8a80c732e60dfe0862dee2c8d7a0818ca3541e8994e2cbf930f4d",
+   "functions": [
+    "func_001d54ac"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001d54ac": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1922224,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001dacbc.c",
+   "source_sha256": "4b031d6dbd2c51ec04c27d4c59bb31616caff8cdfcfc93e8a4750ccf5e7a68f1",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "3b93d788c34cd28dfb28ffb4f2a12861df9f562ac30ecdee613930f9a6b350f3",
+   "functions": [
+    "func_001dacbc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001dacbc": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1944768,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001dadc0.c",
+   "source_sha256": "8277406f4fd87ac5e1dd305c31a710452f2b4756c890238b4c5264ba398c9ba6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "769cbe07d3c24b227e5546e7b7de16cda4710e4dcd8ee0e5e6304d4479be6d61",
+   "functions": [
+    "func_001dadc0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001dadc0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1945028,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001db130.c",
+   "source_sha256": "442119f25eddef9edae4f5bcf84e92137de213060a0d2d86f2260735923c6326",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "75f7123bcb050f82f727becd91b5a57970ccdee8b4c00c44c32ac1cc9c1dfaf7",
+   "functions": [
+    "func_001db130"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001db130": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 1945908,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001db134.c",
+   "source_sha256": "7ddbeb8f244d80459f2e7b01dfc0e34e6b214111dd7303a7da2c50ddc5751e24",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "635467f6ad6a203157f45eaa3abfb1b65b15d665ddd3b3cc8ecc6df5e5fe3085",
+   "functions": [
+    "func_001db134"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001e9818.c",
+   "source_sha256": "ae3a1da4d0226cadc14a7a5bfe9fd65b734ab80fee48fed2b08e3163b4f3379b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "aa21aeebd240910942276220d8b6de99f3850850df90de2ed383e65ebe050fbb",
+   "functions": [
+    "func_001e9818"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001e9818": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 2005020,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001eafa0.c",
+   "source_sha256": "7c600358667c75d8b37948596d7bfdd241bd11011edef3e3976c18ce55a7397d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ac169257403109b5e6a77ba928e079ca09bb13d2bb5aad10851fd7ec956ea9ac",
+   "functions": [
+    "func_001eafa0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001eafa0": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 2011044,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001ef880.c",
+   "source_sha256": "2cde6264675c057a5127c6f9dde1de796217ad1367166cd6de49c526b30684d2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "220683de5f1a623d9bdf1e3c1ee873664445ec16676abd6dbcc3eb9bb08a087b",
+   "functions": [
+    "func_001ef880"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_001ef880": [
+     {
+      "offset": 0,
+      "rule": "branchnop",
+      "target": 2029700,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001ef884.c",
+   "source_sha256": "982db95eb1dfb9b374a6bf26e5bca3ac6d439a3946aa33d349e26a40c78b9ec8",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4b91cbbbe0ed4193cd94c8ee9c58b7ae8d44d7e00ba704c04cf82b6af8821847",
+   "functions": [
+    "func_001ef884"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00122500.c",
+   "source_sha256": "2e051c0e680ed24e10d2353c6f19ec1f24f2c0bae9cab5e2a2e152044048279b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "b99a2e380d7b04a74fe9011c8777e4bb65634133c84e5baa9e10d17aad1e3230",
+   "functions": [
+    "func_00122500"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00122510.c",
+   "source_sha256": "9c205297e8cc5bcf3da89405fa537efbb8d10c829ca368559b12816e7020727a",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d129a7f263d0a94d2b501d8f01c8538a5f342b309fc13e1e9a95fe7e0ecfb57a",
+   "functions": [
+    "func_00122510"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00136448.c",
+   "source_sha256": "b83380be0fef17f980466fe1d2a12e66a8cd72764c00b55e8e4ce824516133c6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "87aff00d1cbffebcae54da19ea327f1e1503119486d110b4302e53ba63df18e6",
+   "functions": [
+    "func_00136448"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00146ff8.c",
+   "source_sha256": "d3799268f8fd6da75de23e59c2b22bcb77dd50c22afedf1972eed5182a938b86",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a9fa7ae8c60cd09fcf2b529dad5ab34a2189b8f2fb262e4c478948a8856701e2",
+   "functions": [
+    "func_00146ff8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001470c8.c",
+   "source_sha256": "b86716aff2c6d35134cb2a8d2b371a90512c7f40fa2eb6beda6e69e4bd295aa9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "52323d5a5fde8f38fdca436356181169d74b00b599bb8c0e55236aad79c60fa0",
+   "functions": [
+    "func_001470c8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00181394.c",
+   "source_sha256": "876772af7ad039692c94566751e1c2356b4e41487ca81869090b4a679bafc0a4",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "035d958064bdd25595798d71397919e9131196d31490f91377668f4f92703603",
+   "functions": [
+    "func_00181394"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00185cc0.c",
+   "source_sha256": "0a6572eff7da8d416ae25aa5d9b02d548a9e36fdfd7854fd440c2b9b57486379",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f51e1505a5fb6281f37e87a8a0815546486c7874ff2df8c5738c436a9ff49f91",
+   "functions": [
+    "func_00185cc0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00185cc0": [
+     {
+      "offset": 72,
+      "rule": "inline_nop",
+      "target": 2186948,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_00185d1c.c",
+   "source_sha256": "f3986cde2e2437f9c901759244ce30ca2c25f685313d3b31646eab08c7d9c37b",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "194971de876b85945d5d23c54621a1fb83869219c2b159e44e26420158cf6828",
+   "functions": [
+    "func_00185d1c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_00185d1c": [
+     {
+      "offset": 52,
+      "rule": "inline_nop",
+      "target": 2187584,
+      "word": "0xe1a00000"
+     },
+     {
+      "offset": 60,
+      "rule": "inline_nop",
+      "target": 2186948,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_001f4fac.c",
+   "source_sha256": "370f2ea47b6871d12193ad4dbb1ef559976c4642e1b09448fa8bbdf39266eadb",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "96dc143200b5f300b3bf454a3b136e93548a866dfed5c2caa38bc13249e14a35",
+   "functions": [
+    "func_001f4fac"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00215ec4.c",
+   "source_sha256": "634349a870194df94cfa83918f755416817019d5bd575dd85c7b483b7d13f055",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ef5e8498bde205368f1fea8eb0631fcd4e430d1e30ddeff061d4b1a970ccd56c",
+   "functions": [
+    "func_00215ec4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00216140.c",
+   "source_sha256": "75ab6e48931847b0df2176d3578c3c600084cf9a37c29773b6dbc530394a0a2c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "f26e4c07d34898ac7a8c23761a7aac9088d7c6a259113353985296f00af5da87",
+   "functions": [
+    "func_00216140"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00216ba4.c",
+   "source_sha256": "0cb6bff690814e7a63de65b73bf44a6c709735ab72c4bb0c28309702407348ba",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "fd1bc3ad41915611f83283998981602cc5325d0929da2826691a5fba3bfee4d0",
+   "functions": [
+    "func_00216ba4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00216e4c.c",
+   "source_sha256": "eadef9d18ea3accd01ba465fb4d2b814affe974981457f6de7e36f497bc1d8c9",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a133cec09766a9606695277702310e055e45245abdc3b5d92ba857ef08ae58c9",
+   "functions": [
+    "func_00216e4c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0014b174.c",
+   "source_sha256": "bd2e7e2146b6e8f092b747e1a19ce106e785c19cead7678b5cb8906629994e14",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "883d39bdf1af42a3131c7c566ccabfa7f72b4cc5ca37ecf6042ad003452f66c2",
+   "functions": [
+    "func_0014b174"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0014d784.c",
+   "source_sha256": "1c0dfb474d7c2a49f860e010336e7e5a0ef97c385137a67c9fbfdeb95e1d19ac",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "20475aa2861f3e80b987c3640c2d1d24df7c8751bdccd92a2558e973d3784aa2",
+   "functions": [
+    "func_0014d784"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0016a068.c",
+   "source_sha256": "9300f7c0a23f912ee2544416ad193e8bd1a9917225c6cdbf88ccbdbaa4621a39",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4847c45636a4bd7a4d507c40bcdc32a9ea56cc854c675fa0164bb2be37970c76",
+   "functions": [
+    "func_0016a068"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0017da3c.c",
+   "source_sha256": "2d92400f3898f13b0c5529f89000285f8856ec63e0993457643c4e056766f7c1",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cfdde171bfa9d4ff0a8945d05b0da68c51346a428c67f50477dc1c6fd7f25eb6",
+   "functions": [
+    "func_0017da3c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0017e7bc.c",
+   "source_sha256": "cc2f23da15e23b550e051d6b16e35036770da05ed0ac151a566e648beb226005",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4cc1f9adaf1429ee40574a1ebbcaf5c211bf11b1ab1cf43f60dde696c94f75ff",
+   "functions": [
+    "func_0017e7bc"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0017e7c4.c",
+   "source_sha256": "abb9c84a6bd69a328fd543c0dfb0d1eac5f1354c2a8a9293137ccd99b79fd811",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cd1b38d1179616884275a593b15011d943e1814e6d0032a9c59a361009100e75",
+   "functions": [
+    "func_0017e7c4"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {
+    "func_0017e7c4": [
+     {
+      "offset": 64,
+      "rule": "inline_nop",
+      "target": 1636336,
+      "word": "0xe1a00000"
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave4/func_0017e818.c",
+   "source_sha256": "b48504ea5245ed97e2e8960520d968d2a4a6b934486b9f830392727efa2b8867",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "4354b8af37f891a0c782db54168497bc8d281f1d478aff0d0b7c8bdb1068e158",
+   "functions": [
+    "func_0017e818"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001d3898.c",
+   "source_sha256": "e595710587d665a779da1d8725fc2bb7a26e39635cb8741cd3722e90fe08bbec",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "de3e2cd4da84f8aa78775f627eb930e0daa7c3b00e9bc35824d27f987b5af16d",
+   "functions": [
+    "func_001d3898"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001d9920.c",
+   "source_sha256": "d8bf6cb1e05d3532edf52546e43166ae9951e1474314bed9b2c4f22675b47b59",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8338b754e35584e9999be1613a3314277fbc360fa52843ad90784a34ec2e3093",
+   "functions": [
+    "func_001d9920"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001391d8.c",
+   "source_sha256": "d8cd5738ea30f6258fd64b7178c089ac196e534e50bcb0e7bdcbf881e095e005",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d0873cfb84a684f919c069960e8eb9a45a62615251fabb438f1e4140f35fab59",
+   "functions": [
+    "func_001391d8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0013e6b8.c",
+   "source_sha256": "2f6b388544e1e08bb9fdf78ca6315e230ac2b5df76ba4f86ecf211ff97fd5063",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "cd74de5ab25fdc27b12d8cc638c9b333949cd08204556b1dab71942a1c9b13b8",
+   "functions": [
+    "func_0013e6b8"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0013e6d0.c",
+   "source_sha256": "c7e404ddf21c287ce84864810643099304ca7757e95cd2cfc67b08d68aaa6567",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "084b4530c003c42bc4a896d0c8d2f9d9b4b4f8d37eebddf43d18ea76b2fd3851",
+   "functions": [
+    "func_0013e6d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0013e71c.c",
+   "source_sha256": "aed8634d0fadc17af385b9e74a0800e1e07cc0eb248d1667ad815bc19a40218c",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "8877396106f2df3cee52abd1a94cee14f0fe5314168914a8e50a0fd64794ab59",
+   "functions": [
+    "func_0013e71c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001424c0.c",
+   "source_sha256": "1b33306b088b1bfeff7b019ac1a29fe44a19b639600cd4379ea76fd50a8a2df2",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a9288121de2aef081573ba62877d0610e096870c93c107c3785513c59df0cbd8",
+   "functions": [
+    "func_001424c0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001424d0.c",
+   "source_sha256": "184aeb89d2004bd9ce3f3adca8417a785561635f620246096e2a7d8840bd7e48",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ca739fd66088432471b898303a6095c14f66e177d0619e8fb0ec365a2e16cd01",
+   "functions": [
+    "func_001424d0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_001440ec.c",
+   "source_sha256": "4c3882fc6d6d7e819c60cd0426c5af273942b69745b1bdae9ae51dfd21907e01",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ecb09b736201d82d4664ad8348774a80ce0bbd5a39833dc248e0809ce34b0b06",
+   "functions": [
+    "func_001440ec"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0014a2f0.c",
+   "source_sha256": "8453b899c4b9ff614fbbd1db817186b7459bcc907f9e12d98cabafcd64682c28",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "a651bf96fb17ae8f0a53fdae7e76da1a2d8e1effd272242e2cfef49fcec6038f",
+   "functions": [
+    "func_0014a2f0"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00182b5c.c",
+   "source_sha256": "55a556d75dfdf9ca29db4937f79bf042e4ec61311693809ff985de498af5840d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "d488749f23ba76377caffaf47e35f0d809fb80167da00bf761eddd8f48add6fa",
+   "functions": [
+    "func_00182b5c"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_00183c54.c",
+   "source_sha256": "62dc6fc1ab88268029ea3122afbec466a3579448c63f55d3b33edb885fc368e6",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "ef741c098838cc0a6abd508de7a2a69828e285e5a64b3f334ee9f74c68c126f0",
+   "functions": [
+    "func_00183c54"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0018d514.c",
+   "source_sha256": "0b64a42ff76ed65191f98905877e6a17715ea3f55c660b9229a40f0f5a8e3d1f",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "7ce9d0a6bc90071ca104b3beefa2102269486a1f26a228c9c5fc39f885bf1549",
+   "functions": [
+    "func_0018d514"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0019d048.c",
+   "source_sha256": "45cf04899ce8a513570f959c6bd314baebc488eb357b71c2cafec4611eaf653d",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "464dab02bf3905caa444258cbd242009803eca8bfa22dd321b22c55c803e9fb2",
+   "functions": [
+    "func_0019d048"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0019d058.c",
+   "source_sha256": "b50d2f482121f3e51b1e575f39c759d0ef2b00779a485d814263da018afcb760",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6ff9245398732b802fced5071038a7eb76d05670efff8f34ff5c60880376c0b7",
+   "functions": [
+    "func_0019d058"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  },
+  {
+   "source": "src/wave4/func_0019dc04.c",
+   "source_sha256": "ee0c8cf8dfb4522e529ca1048fd50f63764aad071a03c041c89a011e97ff066e",
+   "profile": "game",
+   "compiler": "armcc_504_82",
+   "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "object_sha256": "6f80764d623fc321f171a843e14f01f2c814de64a6647921330219330636115f",
+   "functions": [
+    "func_0019dc04"
+   ],
+   "cache_hit": false,
+   "linker_rewrites": {}
+  }
+ ],
+ "outputs": {
+  "code_bin_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "exefs_code_sha256": "19a4445c367af066b5f14b97ca016c0e19c305fc2b4babcb087595823d0060da"
+ },
+ "credited": {
+  "functions": 299,
+  "bytes": 7620,
+  "catalogue_functions": 4350,
+  "catalogue_bytes": 1111934
+ },
+ "checks": {
+  "credited_functions_exact": true,
+  "code_bin_identical": true,
+  "exefs_code_identical": true
+ },
+ "result": "PASS"
+}
