@@ -75,10 +75,16 @@ def main(argv: list[str] | None = None) -> int:
                 refused.append((src, str(e).splitlines()[0]))
                 continue
             bad = sorted(n for n in entry["claimed"] if rows.get(n) != "match")
+            classified = sorted(
+                n for n in entry["claimed"]
+                if ctx.functions.get(int(n[5:], 16), {}).get("kind", "function") != "function"
+            )
             clash = sorted(entry["claimed"] & taken)
             target = dest / src.name
             if bad:
                 refused.append((src, f"does not re-derive MATCH: {', '.join(bad)}"))
+            elif classified:
+                refused.append((src, f"catalogue kind is not creditable C: {', '.join(classified)}"))
             elif clash:
                 refused.append((src, f"already accepted or claimed: {', '.join(clash)}"))
             elif target.exists():

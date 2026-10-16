@@ -9,6 +9,11 @@ Boundary refinement uses ARMCC split-section literal ownership, without discardi
 observed call targets or callback-table entries. ``boundary_merges`` records every
 removed weak start; ``noreturn`` means the recovered normal-flow graph is closed,
 not merely that a return opcode was absent from an incomplete trace.
+PC-relative address-taken strings/data are finalized only after discovery: their
+byte ranges live in ``literals``, and shared or boundary-crossing objects remain
+explicit conflicts rather than being stolen from another function.
+Non-C fallthrough chains and externally callable interior labels are represented
+as ``multi_entry`` routines with explicit, ISA-checked ``entries``.
 """
 from __future__ import annotations
 
@@ -67,6 +72,9 @@ class Instruction:
     address_reference: bool = False
     switch: tuple[str, int] | None = None
     terminal: str | None = None
+    address_target: int | None = None
+    pc_add_register: int | None = None
+    register_constant: tuple[int, int] | None = None
 
 
 @dataclass(slots=True)
@@ -90,10 +98,17 @@ class Trace:
     switches: int = 0
     return_sites: set[int] = field(default_factory=set)
     open_exits: set[int] = field(default_factory=set)
+    address_words: set[int] = field(default_factory=set)
+    address_refs: dict[int, int] = field(default_factory=dict)
+    literals: list[list[int]] = field(default_factory=list)
+    literal_kinds: Counter[str] = field(default_factory=Counter)
+    members: set[int] = field(default_factory=set)
+    entries: dict[int, dict] = field(default_factory=dict)
 
     @property
     def end(self) -> int:
-        return max([self.address] + [a + n for a, n in self.code.items()] + [a + 4 for a in self.pools])
+        return max([self.address] + [a + n for a, n in self.code.items()]
+                   + [a + 4 for a in self.pools] + [end for _, end in self.literals])
 
 
 class Analyzer:
@@ -128,6 +143,11 @@ class Analyzer:
         self.noreturn: dict[int, list[str]] = {}
         self.protected_pointer_starts: set[int] = set()
         self.refining = False
+        self.literal_conflicts: list[dict] = []
+        self.literal_extent_changes: Counter[str] = Counter()
+        self.shared_literal_words: set[int] = set()
+        self.entry_groups: list[dict] = []
+        self.tail_target_repairs: dict[tuple[int, str], set[int]] = {}
 
     def inside(self, address: int, isa: str = "arm") -> bool:
         return self.base <= address < self.end and address % (4 if isa == "arm" else 2) == 0
@@ -197,6 +217,8 @@ class Analyzer:
                 literal = address + 8 + (_immediate(word) if (word >> 21) & 15 == 4 else -_immediate(word))
                 ins.pools = ((literal & ~3, (literal + 7) & ~3),)
                 ins.address_reference = True
+                if (word >> 12) & 15 != 15:
+                    ins.address_target = literal
             if word & 0x0E100000 == 0x08100000 and word & 0x8000:
                 ins.stop = True
                 ins.returns = (word >> 16) & 15 == 13
@@ -249,12 +271,28 @@ class Analyzer:
                     literal = ((address + 4) & ~3) + op.mem.disp
                     width = 8 if ops[0].type == arm.ARM_OP_REG and arm.ARM_REG_D0 <= ops[0].reg <= arm.ARM_REG_D31 else 4
                     ins.pools = ((literal, literal + width),)
+                    if (decoded.id == arm.ARM_INS_LDR and width == 4 and ops[0].type == arm.ARM_OP_REG
+                            and literal % 4 == 0 and self.base <= literal <= self.end - 4):
+                        ins.register_constant = (ops[0].reg, self.word(literal))
             if ops and ops[0].reg == arm.ARM_REG_PC:
                 ins.stop = ins.indirect = True
         elif decoded.id == arm.ARM_INS_ADR and len(ops) == 2:
             literal = ((address + 4) & ~3) + ops[1].imm
             ins.pools = ((literal & ~3, (literal + 7) & ~3),)
             ins.address_reference = True
+            ins.address_target = literal
+        elif decoded.id in (arm.ARM_INS_ADD, arm.ARM_INS_ADDW, arm.ARM_INS_SUB, arm.ARM_INS_SUBW):
+            if (len(ops) == 3 and ops[1].type == arm.ARM_OP_REG and ops[1].reg == arm.ARM_REG_PC
+                    and ops[2].type == arm.ARM_OP_IMM):
+                sign = -1 if decoded.id in (arm.ARM_INS_SUB, arm.ARM_INS_SUBW) else 1
+                ins.address_target = ((address + 4) & ~3) + sign * ops[2].imm
+                ins.address_reference = True
+            elif (decoded.id == arm.ARM_INS_ADD and len(ops) == 2
+                  and ops[1].type == arm.ARM_OP_REG and ops[1].reg == arm.ARM_REG_PC):
+                ins.pc_add_register = ops[0].reg
+        if (decoded.id in (arm.ARM_INS_MOV, arm.ARM_INS_MOVW) and len(ops) == 2
+                and ops[0].type == arm.ARM_OP_REG and ops[1].type == arm.ARM_OP_IMM):
+            ins.register_constant = (ops[0].reg, ops[1].imm)
         return ins
 
     def plausible(self, address: int, isa: str) -> bool:
@@ -455,7 +493,8 @@ class Analyzer:
                     if limit < self.end:
                         result.issues.add((address, "fallthrough_into_start"))
         occupied = {address & ~3 for address in result.code}
-        result.pools.update(address_words - occupied)
+        result.address_words.update(address_words - occupied - result.pools)
+        result.pools.update(result.address_words)
         return result
 
     def traces(self) -> list[Trace]:
@@ -729,6 +768,272 @@ class Analyzer:
         self.boundary_merges.sort(key=lambda item: item["address"])
         return traces
 
+    def group_fallthroughs(self, traces: list[Trace]) -> list[Trace]:
+        """Keep every entry while grouping code that falls across section guesses.
+
+        A reachable fallthrough cannot connect separate ARMCC split sections.
+        These groups are classified, never offered as ordinary creditable C.
+        """
+        groups: list[Trace] = []
+        self.entry_groups = []
+        for trace in traces:
+            trace.members = {trace.address}
+            trace.entries = {trace.address: {
+                "address": trace.address, "isa": trace.isa, "kind": "entry",
+                "evidence": set(self.seeds[trace.address].evidence), "sources": set(),
+            }}
+            if groups and (trace.address, "fallthrough_into_start") in groups[-1].issues:
+                left = groups[-1]
+                if left.isa != trace.isa or trace.kind == "veneer" or left.kind == "veneer":
+                    left.issues.add((trace.address, "incompatible_fallthrough_entries"))
+                    groups.append(trace)
+                    continue
+                left.kind = "multi_entry"
+                left.code.update(trace.code)
+                for name in ("pools", "table_words", "calls", "tails", "issues", "return_sites",
+                             "open_exits", "address_words", "members"):
+                    getattr(left, name).update(getattr(trace, name))
+                left.entries.update(trace.entries)
+                left.indirect_exits += trace.indirect_exits
+                left.switches += trace.switches
+                left.issues.discard((trace.address, "fallthrough_into_start"))
+                left.open_exits.discard(trace.address)
+            else:
+                groups.append(trace)
+        for trace in groups:
+            trace.tails = {(target, isa, site) for target, isa, site in trace.tails
+                           if target not in trace.code or isa != trace.isa}
+            if len(trace.members) > 1:
+                self.entry_groups.append({"address": trace.address, "members": sorted(trace.members),
+                                          "reason": "fallthrough"})
+        return groups
+
+    def promote_missing_targets(self, traces: list[Trace]) -> bool:
+        """Repair direct tail/call targets outside every final extent, not data holes."""
+        starts = [trace.address for trace in traces]
+        changed = False
+        for trace in traces:
+            for target, isa, site in sorted(trace.calls | trace.tails):
+                if target in self.seeds:
+                    continue
+                source_isa = "arm" if trace.kind == "veneer" and trace.isa == "thumb" and site == trace.address + 4 else trace.isa
+                ins = self.decode(site, source_isa)
+                if not (ins.call or ins.branch) or not self.inside(target, isa):
+                    continue
+                index = bisect_right(starts, target) - 1
+                if index >= 0 and target < traces[index].end:
+                    continue
+                if self.decode(target, isa) is None:
+                    trace.issues.add((site, "undecodable_tail_target"))
+                    continue
+                evidence = "blx_target" if ins.call and isa != source_isa else "bl_target" if ins.call else "tail_call"
+                if self.add_seed(target, isa, evidence, force=True):
+                    self.tail_target_repairs.setdefault((target, isa), set()).add(site)
+                    changed = True
+        return changed
+
+    def record_entries(self, traces: list[Trace]) -> None:
+        """Record external B targets and every BL/BLX target on instruction boundaries."""
+        starts = [trace.address for trace in traces]
+        for source in traces:
+            for target, isa, site in sorted(source.calls | source.tails):
+                index = bisect_right(starts, target) - 1
+                if index < 0 or target >= traces[index].end:
+                    continue
+                owner = traces[index]
+                source_isa = "arm" if source.kind == "veneer" and source.isa == "thumb" and site == source.address + 4 else source.isa
+                ins = self.decode(site, source_isa)
+                if not (ins.call or ins.branch) or source is owner and not ins.call:
+                    continue
+                target_isa = "arm" if owner.kind == "veneer" and owner.isa == "thumb" and target == owner.address + 4 else owner.isa
+                if target not in owner.code or isa != target_isa:
+                    source.issues.add((site, "entry_target_not_code"))
+                    continue
+                entry = owner.entries.setdefault(target, {
+                    "address": target, "isa": isa, "kind": "secondary_entry",
+                    "evidence": set(), "sources": set(),
+                })
+                entry["sources"].add(site)
+                entry["evidence"].add("blx_target" if ins.call and isa != source_isa
+                                      else "bl_target" if ins.call else "tail_call")
+        owner_by_member = {member: trace.address for trace in traces for member in trace.members}
+        for merge in self.boundary_merges:
+            merge["retained_address"] = owner_by_member.get(merge["retained_address"], merge["retained_address"])
+        for trace in traces:
+            entry_addresses = sorted(trace.entries)
+            for address, next_address in zip(entry_addresses, entry_addresses[1:]):
+                if (trace.entries[address]["isa"] == "arm" and next_address == address + 4
+                        and self.word(address) in (0xE1A00000, 0xE320F000)):
+                    trace.entries[address]["kind"] = "nop_entry"
+            if len(trace.entries) > 1 and trace.kind != "veneer":
+                trace.kind = "multi_entry"
+
+    def _string_end(self, target: int) -> int | None:
+        offset = target - self.base
+        stop = self.text.find(b"\0", offset)
+        if stop < 0:
+            return None
+        raw = self.text[offset:stop]
+        for encoding in ("utf-8", "cp932"):
+            try:
+                value = raw.decode(encoding)
+            except UnicodeDecodeError:
+                continue
+            if all(character.isprintable() or character in "\t\r\n" for character in value):
+                return self.base + stop + 1
+        return None
+
+    def include_address_literals(self, traces: list[Trace]) -> None:
+        """Claim exclusive address-taken objects without changing discovered starts.
+
+        NUL-terminated text has a complete bound. Other data retains only the
+        addressed word span already evidenced by v2, not a guessed array length.
+        References into string suffixes and external pointer tables count as shared.
+        """
+        self.literal_conflicts = []
+        self.literal_extent_changes.clear()
+        previous_ends = {trace.address: trace.end for trace in traces}
+        by_start = {trace.address: trace for trace in traces}
+        references: dict[int, set[int | None]] = {}
+        branch_targets = set(self.seeds) | self.internal_starts
+        for trace in traces:
+            trace.pools.difference_update(trace.address_words)
+            for target, _, _ in trace.calls | trace.tails:
+                branch_targets.add(target)
+            branch_targets.update(self.word(word) & ~1 for word in trace.table_words)
+            if trace.kind != "veneer":
+                for address in trace.code:
+                    ins = self.decode(address, trace.isa)
+                    if ins.branch and ins.target is not None:
+                        branch_targets.add(ins.target[0])
+        occupied = sorted((first, end, trace.address, kind) for trace in traces
+                          for kind, spans in (
+                              ("code", _merge([(a, a + size) for a, size in trace.code.items()])),
+                              ("pool", _merge([(a, a + 4) for a in trace.pools])))
+                          for first, end in spans)
+        occupied_starts = [first for first, _, _, _ in occupied]
+
+        def overlaps(first: int, end: int) -> list[tuple[int, int, int, str]]:
+            index = max(0, bisect_right(occupied_starts, first) - 1)
+            found = []
+            while index < len(occupied) and occupied[index][0] < end:
+                if first < occupied[index][1]:
+                    found.append(occupied[index])
+                index += 1
+            return found
+
+        def reference(target: int, owner: int | None) -> None:
+            if self.base <= target < self.end:
+                references.setdefault(target, set()).add(owner)
+
+        for trace in traces:
+            previous: tuple[int, Instruction] | None = None
+            if trace.kind != "veneer":
+                for address in sorted(trace.code):
+                    ins = self.decode(address, trace.isa)
+                    target = ins.address_target
+                    if (ins.pc_add_register is not None and address not in branch_targets
+                            and previous is not None and previous[0] + previous[1].size == address):
+                        constant = previous[1].register_constant
+                        if constant is not None and constant[0] == ins.pc_add_register:
+                            target = (address + 4 + constant[1]) & 0xFFFFFFFF
+                    if target is not None:
+                        trace.address_refs[address] = target
+                        reference(target, trace.address)
+                    if ins.target is not None:
+                        reference(ins.target[0], trace.address)
+                    previous = (address, ins)
+            for word in trace.pools:
+                reference(word, trace.address)
+                reference(self.word(word), trace.address)
+        for segment in (self.layout.rodata, self.layout.data):
+            if segment.size:
+                offset = self.layout.file_offset(segment.address)
+                for index in range(0, segment.size - 3, 4):
+                    reference(struct.unpack_from("<I", self.image, offset + index)[0], None)
+        reference_starts = sorted(references)
+        candidates = []
+        for index, trace in enumerate(traces):
+            targets: dict[int, list[int]] = {}
+            for site, target in sorted(trace.address_refs.items()):
+                if self.base <= target < self.end:
+                    targets.setdefault(target, []).append(site)
+            for target, sites in sorted(targets.items()):
+                if any(kind == "code" for _, _, _, kind in overlaps(target, target + 1)):
+                    continue  # Taking an instruction's address is not a data object.
+                content_end = self._string_end(target)
+                first = target if content_end is not None else target & ~3
+                end = (content_end + 3) & ~3 if content_end is not None else (target + 7) & ~3
+                candidates.append({
+                    "start": first, "end": end, "target": target, "function": trace.address,
+                    "kind": "string" if content_end is not None else "addressed_words",
+                    "references": sites,
+                    "limit": traces[index + 1].address if index + 1 < len(traces) else self.end,
+                })
+        candidates.sort(key=lambda item: (item["start"], item["end"], item["function"]))
+        clusters: list[list[dict]] = []
+        cluster_end = self.base
+        for candidate in candidates:
+            if not clusters or candidate["start"] >= cluster_end:
+                clusters.append([])
+                cluster_end = candidate["end"]
+            clusters[-1].append(candidate)
+            cluster_end = max(cluster_end, candidate["end"])
+        blocked_words: set[int] = set()
+        for cluster in clusters:
+            first = cluster[0]["start"]
+            end = max(candidate["end"] for candidate in cluster)
+            owners = {candidate["function"] for candidate in cluster}
+            incoming = set()
+            index = bisect_right(reference_starts, first - 1)
+            while index < len(reference_starts) and reference_starts[index] < end:
+                incoming.update(references[reference_starts[index]])
+                index += 1
+            incoming.update(owner for _, _, owner, kind in overlaps(first, end) if kind == "pool")
+            shared = len(owners) > 1 or bool(incoming - owners)
+            if shared:
+                blocked_words.update(range(first & ~3, (end + 3) & ~3, 4))
+            for candidate in cluster:
+                trace = by_start[candidate["function"]]
+                reasons = set()
+                if shared:
+                    reasons.add("shared_address_literal")
+                if candidate["start"] < trace.address:
+                    reasons.add("address_literal_before_function")
+                if candidate["end"] > candidate["limit"]:
+                    reasons.add("address_literal_crosses_start")
+                spans = overlaps(candidate["start"], candidate["end"])
+                if any(kind == "code" for _, _, _, kind in spans):
+                    reasons.add("address_literal_overlaps_code")
+                if reasons:
+                    self.literal_conflicts.append({
+                        "function": trace.address, "target": candidate["target"], "end": candidate["end"],
+                        "next_start": candidate["limit"], "references": candidate["references"],
+                        "reasons": sorted(reasons),
+                    })
+                    trace.issues.update((site, reason) for site in candidate["references"] for reason in reasons)
+                    continue
+                cursor = candidate["start"]
+                for pool_start, pool_end, _, _ in spans:
+                    if cursor < pool_start:
+                        trace.literals.append([cursor, pool_start])
+                    cursor = max(cursor, pool_end)
+                if cursor < candidate["end"]:
+                    trace.literals.append([cursor, candidate["end"]])
+                trace.literal_kinds[candidate["kind"]] += 1
+                for site in candidate["references"]:
+                    trace.issues.discard((site, "literal_outside_function"))
+        self.shared_literal_words = blocked_words
+        for trace in traces:
+            trace.pools.difference_update(blocked_words)
+            trace.literals = _merge([tuple(interval) for interval in trace.literals])
+            change = trace.end - previous_ends[trace.address]
+            if change:
+                direction = "grown" if change > 0 else "shrunk"
+                self.literal_extent_changes[f"functions_{direction}"] += 1
+                self.literal_extent_changes[f"extent_bytes_{direction}"] += abs(change)
+        self.literal_conflicts.sort(key=lambda item: (item["function"], item["target"]))
+
 
 def _append_range(ranges: list[dict], start: int, end: int, kind: str, owner: int | None) -> None:
     if start >= end:
@@ -743,7 +1048,14 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
     """Return deterministic schema-v1 metadata, preserving ambiguity as anomalies/unknown."""
     analyzer = Analyzer(image, layout)
     analyzer.discover()
-    traces = analyzer.refine()
+    for _ in range(64):
+        traces = analyzer.group_fallthroughs(analyzer.refine())
+        analyzer.include_address_literals(traces)
+        if not analyzer.promote_missing_targets(traces):
+            break
+    else:
+        raise ValueError("entry-target discovery did not converge after 64 rounds")
+    analyzer.record_entries(traces)
     anomalies: set[tuple[int, str]] = set()
     functions = []
     owners: list[int | None] = [None] * layout.text.size
@@ -756,13 +1068,15 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         functions.append({
             "address": trace.address, "size": trace.end - trace.address,
             "code_size": max(address + size for address, size in trace.code.items()) - trace.address,
-            "isa": trace.isa, "kind": trace.kind, "pools": pools,
+            "isa": trace.isa, "kind": trace.kind, "pools": pools, "literals": trace.literals,
             "code_ranges": code_ranges, "evidence": sorted(analyzer.seeds[trace.address].evidence),
+            "entries": [{**entry, "evidence": sorted(entry["evidence"]), "sources": sorted(entry["sources"])}
+                        for _, entry in sorted(trace.entries.items())],
             "noreturn": trace.address in analyzer.noreturn,
             "noreturn_reasons": analyzer.noreturn.get(trace.address, []),
         })
         anomalies.update(trace.issues)
-        for first, end in code_ranges + pools:
+        for first, end in code_ranges + pools + trace.literals:
             for address in range(first, end):
                 offset = address - analyzer.base
                 if owners[offset] is not None and owners[offset] != trace.address:
@@ -771,7 +1085,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         for first, end in code_ranges:
             if any(first < pool_end and pool_start < end for pool_start, pool_end in pools):
                 anomalies.add((first, "pool_overlaps_code"))
-        explained = _merge([tuple(interval) for interval in code_ranges + pools])
+        explained = _merge([tuple(interval) for interval in code_ranges + pools + trace.literals])
         if sum(end - first for first, end in explained) != trace.end - trace.address:
             anomalies.add((trace.address, "unexplained_function_bytes"))
     ranges: list[dict] = []
@@ -793,7 +1107,9 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
             # Only zero words / architectural NOPs adjacent to an explained boundary are padding.
             address = cursor
             while address < end:
-                is_padding = address % 4 == 0 and address + 4 <= end and analyzer.word(address) in (0, 0xE1A00000, 0xE320F000)
+                is_padding = (address % 4 == 0 and address + 4 <= end
+                              and address not in analyzer.shared_literal_words
+                              and analyzer.word(address) in (0, 0xE1A00000, 0xE320F000))
                 stop = address + (4 if is_padding else 1)
                 _append_range(ranges, address, stop, "padding" if is_padding else "unknown", None)
                 address = stop
@@ -814,6 +1130,10 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
                       "mapped_size": segment.mapped_size} for segment in sorted(layout.segments, key=lambda item: item.address)],
         "functions": sorted(functions, key=lambda item: item["address"]), "ranges": ranges,
         "boundary_merges": analyzer.boundary_merges,
+        "literal_conflicts": analyzer.literal_conflicts,
+        "entry_groups": analyzer.entry_groups,
+        "tail_target_repairs": [{"address": target, "isa": isa, "sources": sorted(sources)}
+                                for (target, isa), sources in sorted(analyzer.tail_target_repairs.items())],
         "stats": {}, "anomalies": [],
     }
     anomalies.update((issue["address"], issue["issue"]) for issue in validate_catalogue(result, image, layout))
@@ -842,7 +1162,17 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "merges_by_reason": dict(sorted(Counter(
             reason for merge in analyzer.boundary_merges for reason in merge["reasons"]).items())),
         "protected_pointer_table_starts": len(analyzer.protected_pointer_starts),
-        "noreturn_functions": len(analyzer.noreturn),
+        "noreturn_functions": sum(function["noreturn"] for function in functions),
+        "literal_bytes": sum(end - first for trace in traces for first, end in trace.literals),
+        "functions_with_literals": sum(bool(trace.literals) for trace in traces),
+        "literal_objects_by_kind": dict(sorted(sum((trace.literal_kinds for trace in traces), Counter()).items())),
+        "literal_extent_changes": dict(sorted(analyzer.literal_extent_changes.items())),
+        "literal_conflicts": len(analyzer.literal_conflicts),
+        "fallthrough_groups": len(analyzer.entry_groups),
+        "absorbed_function_starts": sum(len(trace.members) - 1 for trace in traces),
+        "secondary_entries": sum(len(trace.entries) - 1 for trace in traces),
+        "nop_entries": sum(entry["kind"] == "nop_entry" for trace in traces for entry in trace.entries.values()),
+        "repaired_tail_targets": len(analyzer.tail_target_repairs),
     }
     return result
 
@@ -856,7 +1186,21 @@ def validate_catalogue(catalogue: dict, image: bytes, layout: ctrfmt.CodeLayout)
     analyzer = Analyzer(image, layout)
     issues: set[tuple[int, str]] = set()
     functions = catalogue["functions"]
-    starts = {function["address"]: function for function in functions}
+    function_starts = [function["address"] for function in functions]
+    entry_model = any("entries" in function for function in functions)
+    entry_owners = {function["address"]: (function["address"], function["isa"]) for function in functions}
+    for function in functions:
+        previous_entry = function["address"] - 1
+        for entry in function.get("entries", []):
+            address, isa = entry["address"], entry["isa"]
+            if address <= previous_entry:
+                issues.add((address, "invalid_entry_order"))
+            previous_entry = address
+            if address in entry_owners and entry_owners[address][0] != function["address"]:
+                issues.add((address, "overlapping_entry_ownership"))
+            entry_owners[address] = (function["address"], isa)
+            if address != function["address"] and function["kind"] not in ("multi_entry", "veneer"):
+                issues.add((address, "invalid_secondary_entry_kind"))
     previous_end = layout.text.address
     for function in functions:
         start, end = function["address"], function["address"] + function["size"]
@@ -873,13 +1217,24 @@ def validate_catalogue(catalogue: dict, image: bytes, layout: ctrfmt.CodeLayout)
             if first % 4 or stop % 4 or not pool_end <= first < stop <= end:
                 issues.add((first, "invalid_pool_range"))
             pool_end = stop
+        literals = function.get("literals", [])
+        literal_end = start
+        for first, stop in literals:
+            if stop % 4 or not literal_end <= first < stop <= end:
+                issues.add((first, "invalid_literal_range"))
+            if any(first < pool_stop and pool_start < stop for pool_start, pool_stop in pools):
+                issues.add((first, "literal_overlaps_pool"))
+            literal_end = stop
         code_end = start
+        decoded_entries: dict[int, str] = {}
         for first, stop in function.get("code_ranges", [[start, start + function["code_size"]]]):
             if not code_end <= first < stop <= start + function["code_size"]:
                 issues.add((first, "invalid_code_range"))
             code_end = stop
             if any(first < pool_stop and pool_start < stop for pool_start, pool_stop in pools):
                 issues.add((first, "pool_overlaps_code"))
+            if any(first < literal_stop and literal_start < stop for literal_start, literal_stop in literals):
+                issues.add((first, "literal_overlaps_code"))
             address = first
             while address < stop:
                 isa = function["isa"]
@@ -889,15 +1244,30 @@ def validate_catalogue(catalogue: dict, image: bytes, layout: ctrfmt.CodeLayout)
                 if ins is None or address + ins.size > stop:
                     issues.add((address, "code_does_not_decode"))
                     break
+                decoded_entries[address] = isa
                 if ins.call and ins.target is not None:
                     target, target_isa = ins.target
-                    if target not in starts or starts[target]["isa"] != target_isa:
+                    if target not in entry_owners or entry_owners[target][1] != target_isa:
                         issues.add((address, "call_target_not_function_start"))
+                if ins.branch and ins.target is not None:
+                    target, target_isa = ins.target
+                    if analyzer.inside(target, target_isa):
+                        index = bisect_right(function_starts, target) - 1
+                        if index < 0 or target >= functions[index]["address"] + functions[index]["size"]:
+                            issues.add((address, "branch_target_outside_function_extents"))
+                        elif entry_model and functions[index]["address"] != start and (
+                                target not in entry_owners or entry_owners[target][1] != target_isa):
+                            issues.add((address, "branch_target_not_entry"))
                 address += ins.size
         if code_end != start + function["code_size"]:
             issues.add((start, "invalid_code_size"))
-        if max(code_end, pool_end) != end:
+        if max(code_end, pool_end, literal_end) != end:
             issues.add((start, "invalid_function_extent"))
+        for entry in function.get("entries", []):
+            address, isa = entry["address"], entry["isa"]
+            if (not start <= address < end or not analyzer.inside(address, isa)
+                    or decoded_entries.get(address) != isa):
+                issues.add((address, "invalid_entry_point"))
     ranges = catalogue["ranges"]
     expected = [(segment.address, segment.address + segment.mapped_size) for segment in sorted(layout.segments, key=lambda item: item.address) if segment.mapped_size]
     index = 0

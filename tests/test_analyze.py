@@ -28,6 +28,11 @@ def fixture(words: list[int], *, rodata: list[int] | None = None, data: list[int
     return image, ctrfmt.parse_exheader(exheader)
 
 
+def literal_words(value: bytes) -> list[int]:
+    padded = value + b"\0" * (-len(value) % 4)
+    return list(struct.unpack(f"<{len(padded) // 4}I", padded))
+
+
 class CatalogueTests(unittest.TestCase):
     def catalogue(self, words: list[int], **kwargs) -> dict:
         image, layout = fixture(words, **kwargs)
@@ -68,7 +73,139 @@ class CatalogueTests(unittest.TestCase):
 
     def test_adr_literal_pool(self) -> None:
         result = self.catalogue([0xE28F0000, 0xE12FFF1E, 0x12345678])
-        self.assertEqual(result["functions"][0]["pools"], [[BASE + 8, BASE + 12]])
+        self.assertEqual(result["functions"][0]["pools"], [])
+        self.assertEqual(result["functions"][0]["literals"], [[BASE + 8, BASE + 12]])
+
+    def test_function_pool_and_complete_adr_string(self) -> None:
+        result = self.catalogue([0xE28F0008, 0xE59F1000, 0xE12FFF1E, 0x12345678,
+                                 *literal_words(b"format=%s\0")])
+        function = result["functions"][0]
+        self.assertEqual(function["code_size"], 12)
+        self.assertEqual(function["size"], 28)
+        self.assertEqual(function["pools"], [[BASE + 12, BASE + 16]])
+        self.assertEqual(function["literals"], [[BASE + 16, BASE + 28]])
+        self.assertEqual(result["stats"]["literal_extent_changes"],
+                         {"extent_bytes_grown": 8, "functions_grown": 1})
+        self.assertEqual(result["stats"]["bytes_by_range_kind"]["function"], 28)
+
+    def test_all_six_strings_are_complete(self) -> None:
+        payload = []
+        targets = []
+        for value in (b"first\0", b"second=%s\0", b"third=%s:%d\0",
+                      b"fourth\0", b"fifth=%u\0", b"sixth=%s_%s\0"):
+            targets.append(BASE + 36 + 4 * len(payload))
+            payload.extend(literal_words(value))
+        code = [0xE28F0000 | (target - (BASE + 4 * index + 8)) for index, target in enumerate(targets)]
+        result = self.catalogue([*code, 0xE59F1000, 0xE12FFF1E, 0x12345678, *payload])
+        function = result["functions"][0]
+        self.assertEqual(function["size"], 36 + 4 * len(payload))
+        self.assertEqual(function["literals"], [[BASE + 36, BASE + function["size"]]])
+        self.assertEqual(result["stats"]["literal_objects_by_kind"], {"string": 6})
+
+    def test_add_sub_and_multibyte_string_literals(self) -> None:
+        for instruction in (0xE28F0000, 0xE24F0000):
+            for value in (b"\0", "日本語%s\0".encode(), "日本語%s\0".encode("cp932")):
+                with self.subTest(instruction=instruction, length=len(value)):
+                    payload = literal_words(value)
+                    result = self.catalogue([instruction, 0xE12FFF1E, *payload])
+                    self.assertEqual(result["functions"][0]["literals"],
+                                     [[BASE + 8, BASE + 8 + 4 * len(payload)]])
+                    self.assertEqual(result["stats"]["literal_objects_by_kind"], {"string": 1})
+
+    def test_shared_adr_string_remains_unknown(self) -> None:
+        for second_target in (32, 39):
+            with self.subTest(second_target=second_target):
+                image, layout = fixture([branch(BASE, BASE + 16, link=True), 0xE28F0014, 0xE12FFF1E, 0,
+                                         0xE28F0000 | (second_target - 24), 0xE12FFF1E, 0, 0,
+                                         *literal_words(b"shared-value\0")])
+                result = analyze.build_catalogue(image, layout)
+                self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+                self.assertTrue(all(not function["literals"] and not function["pools"]
+                                    for function in result["functions"]))
+                self.assertEqual(sum("shared_address_literal" in item["reasons"]
+                                     for item in result["literal_conflicts"]), 2)
+                self.assertTrue(all(item["kind"] == "unknown" and item["owner"] is None
+                                    for item in result["ranges"] if BASE + 32 <= item["start"] < BASE + 48))
+                self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 16)
+
+    def test_string_shared_through_another_functions_pool(self) -> None:
+        image, layout = fixture([branch(BASE, BASE + 16, link=True), 0xE28F0014, 0xE12FFF1E, 0,
+                                 0xE59F0000, 0xE12FFF1E, BASE + 32, 0, *literal_words(b"shared\0")])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertTrue(all(not function["literals"] for function in result["functions"]))
+        self.assertIn("shared_address_literal", result["literal_conflicts"][0]["reasons"])
+        self.assertEqual(result["functions"][1]["pools"], [[BASE + 24, BASE + 28]])
+
+    def test_external_data_pointer_prevents_string_absorption(self) -> None:
+        image, layout = fixture([0xE28F0000, 0xE12FFF1E, *literal_words(b"external\0")],
+                                 rodata=[BASE + 8])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual(result["functions"][0]["literals"], [])
+        self.assertEqual(result["functions"][0]["size"], 8)
+        self.assertIn("shared_address_literal", result["literal_conflicts"][0]["reasons"])
+
+    def test_string_crossing_a_start_is_not_stolen(self) -> None:
+        # A hard Thumb entry's synthetic BX bytes are also printable string bytes.
+        image, layout = fixture([0xE28F0004, 0xFA000001, 0xE12FFF1E,
+                                 *literal_words(b"ABCDpGEF\0")])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual([function["address"] for function in result["functions"]], [BASE, BASE + 16])
+        self.assertTrue(all(not function["literals"] for function in result["functions"]))
+        self.assertIn("address_literal_crosses_start", result["literal_conflicts"][0]["reasons"])
+        self.assertEqual(result["literal_conflicts"][0]["next_start"], BASE + 16)
+        self.assertLessEqual(result["functions"][0]["address"] + result["functions"][0]["size"], BASE + 16)
+
+    def test_unaligned_string_does_not_claim_its_prefix(self) -> None:
+        image, layout = fixture([0xE28F0009, 0xE12FFF1E, 0, 0, *literal_words(b"\xffhello\0")])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual(result["functions"][0]["literals"], [[BASE + 17, BASE + 24]])
+        self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 1)
+
+    def test_embedded_string_ranges_are_data_not_code(self) -> None:
+        image, layout = fixture([0xE28F0008, branch(BASE + 4, BASE + 24), 0, 0,
+                                 *literal_words(b"foo\0"), 0, 0xE12FFF1E])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual(result["functions"][0]["literals"], [[BASE + 16, BASE + 20]])
+        self.assertEqual(result["functions"][0]["code_ranges"], [[BASE, BASE + 8], [BASE + 24, BASE + 28]])
+
+    def test_thumb_adr_string_is_complete(self) -> None:
+        result = self.catalogue([0xFA000002, 0xE12FFF1E, 0, 0,
+                                 0x4770A000, *literal_words(b"thumb=%s\0")])
+        function = result["functions"][1]
+        self.assertEqual(function["literals"], [[BASE + 20, BASE + 32]])
+        self.assertEqual(function["pools"], [])
+        self.assertEqual(function["code_size"], 4)
+
+    def test_thumb_add_pc_uses_adjacent_proven_constant(self) -> None:
+        result = self.catalogue([0xFA000002, 0xE12FFF1E, 0, 0,
+                                 0x200046C0, 0x47704478, *literal_words(b"thumbadd\0")])
+        function = result["functions"][1]
+        self.assertEqual(function["literals"], [[BASE + 24, BASE + 36]])
+        self.assertEqual(function["code_size"], 8)
+        self.assertEqual(result["stats"]["literal_extent_changes"],
+                         {"extent_bytes_grown": 12, "functions_grown": 1})
+
+    def test_thumb_add_pc_does_not_assume_branch_entry_constant(self) -> None:
+        # A conditional branch can enter ADD without executing the MOV.
+        result = self.catalogue([0xFA000002, 0xE12FFF1E, 0, 0,
+                                 0x2000D000, 0x47704478, *literal_words(b"not-owned\0")])
+        self.assertEqual(result["functions"][1]["literals"], [])
+        self.assertEqual(result["functions"][1]["size"], 8)
+
+    def test_literal_validation_rejects_overlap_and_bad_alignment(self) -> None:
+        image, layout = fixture([0xE28F0000, 0xE12FFF1E, *literal_words(b"hello\0")])
+        for literal, issue in (([BASE + 8, BASE + 15], "invalid_literal_range"),
+                               ([BASE + 4, BASE + 16], "literal_overlaps_code")):
+            with self.subTest(issue=issue):
+                result = analyze.build_catalogue(image, layout)
+                result["functions"][0]["literals"] = [literal]
+                self.assertTrue(any(item["issue"] == issue
+                                    for item in analyze.validate_catalogue(result, image, layout)))
 
     def test_bl_to_following_function(self) -> None:
         result = self.catalogue([branch(BASE, BASE + 16, link=True), 0xE12FFF1E, 0, 0, 0xE3A00004, 0xE12FFF1E])
@@ -93,6 +230,87 @@ class CatalogueTests(unittest.TestCase):
                                  branch(BASE + 12, BASE + 16), 0xE3A00004, 0xE12FFF1E])
         self.assertEqual([function["address"] for function in result["functions"]], [BASE, BASE + 16])
         self.assertEqual(result["functions"][0]["size"], 16)
+
+    def test_nop_entry_and_body_are_one_non_c_group(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20, link=True),
+                                 0xE12FFF1E, 0, 0xE1A00000, 0xE3A00001, 0xE12FFF1E])
+        function = result["functions"][1]
+        self.assertEqual((function["address"], function["size"], function["kind"]),
+                         (BASE + 16, 12, "multi_entry"))
+        self.assertEqual([(entry["address"], entry["kind"]) for entry in function["entries"]],
+                         [(BASE + 16, "nop_entry"), (BASE + 20, "entry")])
+        self.assertEqual(result["stats"]["nop_entries"], 1)
+        self.assertEqual(result["entry_groups"],
+                         [{"address": BASE + 16, "members": [BASE + 16, BASE + 20], "reason": "fallthrough"}])
+
+    def test_external_body_branch_records_secondary_entry(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20),
+                                 0, 0, 0xE3A00001, 0xE12FFF1E])
+        function = result["functions"][1]
+        self.assertEqual(function["kind"], "multi_entry")
+        entry = function["entries"][1]
+        self.assertEqual(entry, {"address": BASE + 20, "isa": "arm", "kind": "secondary_entry",
+                                 "evidence": ["tail_call"], "sources": [BASE + 4]})
+        self.assertEqual(result["stats"]["secondary_entries"], 1)
+        self.assertEqual(result["entry_groups"], [])
+
+    def test_bl_target_can_be_an_explicit_group_entry(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20, link=True),
+                                 0xE12FFF1E, 0, 0xE3A00001, 0xE12FFF1E])
+        self.assertEqual([function["address"] for function in result["functions"]], [BASE, BASE + 16])
+        self.assertEqual(result["functions"][1]["kind"], "multi_entry")
+        self.assertEqual(result["functions"][1]["entries"][1]["address"], BASE + 20)
+        self.assertIn("bl_target", result["functions"][1]["entries"][1]["evidence"])
+
+    def test_conditional_return_fallthrough_is_non_c(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20, link=True),
+                                 0xE12FFF1E, 0, 0x012FFF1E, 0xE12FFF1E])
+        self.assertEqual(result["functions"][1]["kind"], "multi_entry")
+        self.assertEqual(result["functions"][1]["size"], 8)
+        self.assertEqual(result["stats"]["absorbed_function_starts"], 1)
+
+    def test_internal_branch_labels_are_not_secondary_entries(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 8, condition=0), 0xE12FFF1E, 0xE12FFF1E])
+        self.assertEqual(result["functions"][0]["kind"], "function")
+        self.assertEqual(len(result["functions"][0]["entries"]), 1)
+        self.assertEqual(result["stats"]["secondary_entries"], 0)
+
+    def test_tail_target_hidden_by_address_word_is_repaired(self) -> None:
+        image, layout = fixture([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 32), 0, 0,
+                                 0xE28F0008, 0xE12FFF1E, 0, 0, 0xE12FFF1E])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual([function["address"] for function in result["functions"]],
+                         [BASE, BASE + 16, BASE + 32])
+        self.assertIn("tail_call", result["functions"][-1]["evidence"])
+        self.assertEqual(result["tail_target_repairs"],
+                         [{"address": BASE + 32, "isa": "arm", "sources": [BASE + 4]}])
+
+    def test_secondary_entries_are_validated_not_assumed(self) -> None:
+        image, layout = fixture([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20),
+                                 0, 0, 0xE3A00001, 0xE12FFF1E])
+        for mutation, issue in (("remove", "branch_target_not_entry"),
+                                ("isa", "invalid_entry_point"),
+                                ("kind", "invalid_secondary_entry_kind")):
+            with self.subTest(mutation=mutation):
+                result = analyze.build_catalogue(image, layout)
+                function = result["functions"][1]
+                if mutation == "remove":
+                    function["entries"].pop()
+                elif mutation == "isa":
+                    function["entries"][1]["isa"] = "thumb"
+                else:
+                    function["kind"] = "function"
+                self.assertTrue(any(item["issue"] == issue
+                                    for item in analyze.validate_catalogue(result, image, layout)))
+
+    def test_legacy_catalogue_without_entries_still_validates(self) -> None:
+        image, layout = fixture([branch(BASE, BASE + 16, link=True), 0xE12FFF1E, 0, 0,
+                                 0xE3A00001, 0xE12FFF1E])
+        result = analyze.build_catalogue(image, layout)
+        for function in result["functions"]:
+            function.pop("entries")
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
 
     def test_mid_function_pool_merges_tail_only_start(self) -> None:
         # MOV; B over a zero-valued pool; LDR back from that pool; BX lr.
@@ -272,7 +490,8 @@ class CatalogueTests(unittest.TestCase):
                                          0x47700000 | load, 0x12345678])
                 function = next(function for function in result["functions"] if function["address"] == BASE + 16)
                 self.assertEqual(function["code_size"], 4)
-                self.assertEqual(function["pools"], [[BASE + 20, BASE + 24]])
+                self.assertEqual(function["pools"], [[BASE + 20, BASE + 24]] if load == 0x4800 else [])
+                self.assertEqual(function["literals"], [[BASE + 20, BASE + 24]] if load == 0xA000 else [])
 
     def test_thumb_bl_target(self) -> None:
         result = self.catalogue([0xFA000002, 0xE12FFF1E, 0, 0,
@@ -428,6 +647,19 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(analyze.validate_catalogue(first, image, layout), [])
         self.assertEqual(sum(item["end"] - item["start"] for item in first["ranges"]), len(image))
         self.assertGreater(first["stats"]["functions"], 100)
+        strings = next(function for function in first["functions"] if function["address"] == 0x1932E8)
+        self.assertEqual(strings["size"], 300)
+        self.assertEqual(strings["literals"], [[0x193390, 0x193414]])
+        entry_owners = {entry["address"]: (function, entry) for function in first["functions"]
+                        for entry in function["entries"]}
+        owner, entry = entry_owners[0x18F7F0]
+        self.assertEqual((owner["address"], owner["kind"]), (0x18F7EC, "multi_entry"))
+        self.assertTrue({0x11FA34, 0x11FFDC} <= set(entry["sources"]))
+        owner, entry = entry_owners[0x12D1D8]
+        self.assertEqual(owner["address"], 0x12D1CC)
+        self.assertIn(0x135054, entry["sources"])
+        owner, entry = entry_owners[0x1852F4]
+        self.assertEqual((owner["kind"], entry["kind"]), ("multi_entry", "nop_entry"))
 
 
 if __name__ == "__main__":
