@@ -48,6 +48,20 @@ Adapted from the Shiren lean contract r3. Every accepted checkpoint needs:
    changed. No retry-to-pass: a failed gate is recorded and its cause fixed.
 8. **Known issues** published per checkpoint: skips, rulings, preserved original bugs, qualifications.
 
+Implemented by `tools/accept.py` (records in `accept/<checkpoint>/`, history in
+`docs/progress-history.jsonl`):
+
+| Step | Command | Enforces |
+|---|---|---|
+| prepare | `accept.py prepare --checkpoint cNNN-name --candidates config/candidates/<file>.json` | 1, 2, 3 (two fresh `build.py` builds of ledger + candidates, identical outputs), full suite; exclusive, FAIL kept |
+| review | `accept.py review --checkpoint … --reviewer … --family … --verdict … --notes …` | 4, 5, 6: reviewer re-derives, verdict bound to the exact prepare and source hashes |
+| finalize | `accept.py finalize --checkpoint …` | 7: once; needs PASS prepare, ≥1 bound passing review, no FAIL, nothing changed since prepare |
+| verify | `accept.py verify` (CI) | `config/matches.json` equals the last finalized ledger and every credited source its accepted hash |
+
+Scale note for this project: the lean form is one review per checkpoint covering every changed
+function (per-function notes inside it), from another model family than the authors where
+possible. Item 8 lives in `docs/known-issues-<checkpoint>.md` when a checkpoint has any.
+
 Classified, never credited as C: SDK/library code proven identical to a known library, compiler
 runtime helpers, veneers/thunks, handwritten assembly, generated tables, data with format witnesses.
 

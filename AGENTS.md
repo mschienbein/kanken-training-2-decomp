@@ -47,12 +47,23 @@ only as a recorded qualification. Preserved original bugs carry an `ORIGINAL BUG
    disassembly); never commit them.
 2. Write C in your scratch directory. Name functions `func_XXXXXXXX` (or a `config/names.json`
    name); declare callees and globals as `extern` with the `func_`/`data_`/`bss_XXXXXXXX` names
-   the in-place linker resolves.
-3. `tools/match.py <file.c> --profile <profile> --out scratch/<agent>/...` until every function
+   the in-place linker resolves. A global you *define* must also carry its address name (or be
+   `static`); unbound global definitions are refused.
+3. `tools/match.py <file.c> --profile game --out scratch/<agent>/...` until every function
    reports `MATCH`. `EXTENT` means the bytes reproduce the original but the catalogue boundary is
    wrong: report it to the integrator, do not pad the source.
 4. Deliver: the source path, the `result.json`, profile, attempts, and remaining unknowns.
-   The integrator credits units only through a `tools/build.py` receipt.
+
+## Checkpoints (integrator)
+
+1. Copy delivered sources into `src/` (one translation unit per file) and list them in
+   `config/candidates/<checkpoint>.json`.
+2. `tools/accept.py prepare --checkpoint cNNN-name --candidates config/candidates/<checkpoint>.json`
+   (two fresh builds + full suite; exclusive record in `accept/<checkpoint>/`).
+3. A reviewer from another model family re-derives every function and records
+   `tools/accept.py review ...`. FAIL means fix and prepare a new checkpoint name.
+4. `tools/accept.py finalize --checkpoint ...` (once), commit `accept/`, `config/matches.json`,
+   `docs/progress-history.jsonl`, `src/` and docs together, push.
 
 ## Evidence
 
