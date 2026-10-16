@@ -1,0 +1,632 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c003-wave2-r2",
+ "reviewer": "review-c003-openai",
+ "family": "OpenAI",
+ "model": "openai-codex/gpt-6.1-sol",
+ "verdict": "PASS_WITH_QUALIFICATIONS",
+ "headers": {
+  "include/game/bss_0049ecf0.h": "2405974d2130cd24e17a2c9112e80c13a3bbfaf694cfa10f6532d5fb4518f2c8",
+  "include/game/graphics_state.h": "b4e643e0c2a0e285557f54ac9460f1259303fd180cf16631a18f155b28a795a5",
+  "include/game/item_pages.h": "fcdf0170ff46de270b8007716c87b29ae56d5f214ec315bf8a232979dbae8e66",
+  "include/game/render_state.h": "534c2a2cbd7eadcf332b1ea02b03c65f390e28b03b1fa6d40f860a64b7179231",
+  "include/game/resource.h": "4457e30d7909e5a53b5c381ede2e6d660e1a3d2e317b1ee6b6cede4f1969f4d3",
+  "include/game/result.h": "d3e9723ddd7a08fa81e968adfdc0bd916bb87bef3022b78b9cd832a62fd3a461",
+  "include/game/runtime.h": "4855166add39c3434718653f2f1204036c66189c49079f4a2508ef24b4191ba9",
+  "include/game/screen.h": "13fdafa9cd4b506d296a01f0fe3477edcf5d77ab6072661baac4b39ead218e69",
+  "include/game/selection.h": "24397723f884451a1e69cb99ce3a7e7673b05e1970b91928d5f7fa143f956aca",
+  "include/game/text.h": "007b55e026ad922371cc94e479a847c9e2054b62eccf4d2ac9fa347600b08f01"
+ },
+ "functions": [
+  {
+   "function": "func_001718ec",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see game_enum_switch/game_enum_switch.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/pilot/game_enum_switch.c:1-22; include/game/selection.h:4-5: revised int(void) API and no-argument selector agree with the new signed-halfword getter; cases 0..11 map to 1..12. ORIGINAL BUG marks the uninitialized default, so row remains qualified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00171c7c",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see game_enum_switch/game_enum_switch.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/pilot/game_enum_switch.c:24-43; include/game/selection.h:4-5: same corrected no-argument API; cases 0..11 map to 2..13. Preserved uninitialized default explicitly annotated and published.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00195254",
+   "source": "src/wave1/func_00195254.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00195254/func_00195254.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_00195254.c:1-37; include/game/bss_0049ecf0.h:7-47: canonical Command stride 0x1c, source/size/flags at 4/8/0xc, Queue offsets 4/0xc/0x14/0x18/0x20; shared producer/consumer fields agree. Replaced local types preserve complete bytes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00102cb0",
+   "source": "src/wave1/func_00102cb0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00102cb0/func_00102cb0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_00102cb0.c:1-11; include/game/runtime.h:6-15: conditional allocation cleanup now imports canonical C-linkage void(void*) helper; unconditional reset call and existing non-clear behavior unchanged.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019e02c",
+   "source": "src/wave1/func_0019e02c_returning.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0019e02c_returning/func_0019e02c_returning.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_0019e02c_returning.c:1-29; include/game/runtime.h:10: ResourceSet pointers at 0x44/0x48/0x4c; typed allocation returns feed canonical cleanup helper, then reset fields. Third cleanup signature agrees. Header migration changes no body behavior.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011f080",
+   "source": "src/wave1/func_0011f080.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0011f080/func_0011f080.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_0011f080.cpp:1-70; include/game/runtime.h:10: ResourceEntry active/allocation/object/byte flag at 0/4/8/0xf and table activeCount at 8. Virtual release +0x74/deleting destructor +4 align with partial class and fresh original ABI inspection; shared runtime free declaration now canonical.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00196cb8",
+   "source": "src/wave1/func_00196cb8.c",
+   "verdict": "QUALIFIED",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00196cb8/func_00196cb8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_00196cb8.c:1-40; include/game/runtime.h:11: entry/group strides 0xd4/0x6a4 and resource base +0x1c agree. Canonical warning/assertion declaration imported, not marked noreturn. Invalid-screen -1 index remains explicitly ORIGINAL BUG; qualified, no invented safe fallback.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018fcc0",
+   "source": "src/wave1/func_0018fcc0.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0018fcc0/func_0018fcc0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_0018fcc0.cpp:1-17; include/game/resource.h:10-26: shared Resource read slot 0, unsigned result, transferred pointer, aligned 64-bit offset and stacked buffer/size agree with fresh original ABI. Canonical class replaces duplicated complete definition; existing null error retained.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019d5c4",
+   "source": "src/wave1/func_0019d5c4.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0019d5c4/func_0019d5c4.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_0019d5c4.cpp:1-7; include/game/resource.h:10-34: definition matches canonical C-linkage Resource* prototype; guarded virtual release +0x30 and null behavior agree with original.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c44ec",
+   "source": "src/wave1/func_001c44ec.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001c44ec/func_001c44ec.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_001c44ec.cpp:1-9; include/game/runtime.h:10: opaque DeletingResourceOwner* call with int flags=0 agrees with companion definition, returned owner passed to canonical void* free helper. Remaining C++-to-C++ local prototype was checked manually, not assumed covered by the textual shared-declaration guard.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c4500",
+   "source": "src/wave1/func_001c4500.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001c4500/func_001c4500.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_001c4500.cpp:1-27; include/game/resource.h:10-34 and runtime.h:10-11: owner vptr 0/slot bits +4, tag mask ~1u, warning then typed resource release and reset. Prototype/definition agree with caller; explicit subobject destructor and owner adjustment reproduce original. Lifetime/portable provenance remain partial.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d2da4",
+   "source": "src/wave1/func_001d2da4.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001d2da4/func_001d2da4.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_001d2da4.cpp:1-12; include/game/resource.h:28-34 and runtime.h:11: canonical owner vptr/bits at 0/4 and shared release/error declarations; tag branch, mask and clear agree with original.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d3524",
+   "source": "src/wave1/func_001d3524.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001d3524/func_001d3524.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave1/func_001d3524.cpp:1-24; include/game/resource.h:28-34 and runtime.h:11: owner pointer at Controller+0x34, active/enabled bytes at 0x50/0x51; canonical owner/release declarations, original conditional cleanup and active clear agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013db3c",
+   "source": "src/wave2/func_0013db3c.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0013db3c/func_0013db3c.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0013db3c.c:1-6: int argument/result tail forwarding, ordinary wrapper only credited.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001415b0",
+   "source": "src/wave2/func_001415b0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001415b0/func_001415b0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001415b0.c:1-3: empty original implementation; fresh original inspection confirms one four-byte return-to-LR, not a stub.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001415e8",
+   "source": "src/wave2/func_001415e8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001415e8/func_001415e8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001415e8.c:1-6: int(void) tail forwarding, no invented state.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00142a54",
+   "source": "src/wave2/func_00142a54.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00142a54/func_00142a54.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00142a54.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00147260",
+   "source": "src/wave2/func_00147260.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00147260/func_00147260.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00147260.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00149424",
+   "source": "src/wave2/func_00149424.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00149424/func_00149424.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00149424.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014c2c8",
+   "source": "src/wave2/func_0014c2c8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0014c2c8/func_0014c2c8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0014c2c8.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014de8c",
+   "source": "src/wave2/func_0014de8c.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0014de8c/func_0014de8c.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0014de8c.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014f7e8",
+   "source": "src/wave2/func_0014f7e8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0014f7e8/func_0014f7e8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0014f7e8.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0015f5a0",
+   "source": "src/wave2/func_0015f5a0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0015f5a0/func_0015f5a0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0015f5a0.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00164ebc",
+   "source": "src/wave2/func_00164ebc.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00164ebc/func_00164ebc.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00164ebc.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0016e5cc",
+   "source": "src/wave2/func_0016e5cc.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0016e5cc/func_0016e5cc.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0016e5cc.c:1-7: const unsigned-short pointers and signed count forwarded consistently to int-returning helper.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001791e0",
+   "source": "src/wave2/func_001791e0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001791e0/func_001791e0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001791e0.c:1-15: signed-byte count +0x28, flexible const unsigned-short* tail +0x2c; signed index bounds remain original. False one-element extent removed without code difference.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00179298",
+   "source": "src/wave2/func_00179298.cpp",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00179298/func_00179298.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00179298.cpp:1-65; screen.h:6-48; text.h:6-14: imports canonical C-linkage Widget/NameTable/getter/setter/text declarations. Old DisplayObject/AnimationTable spellings gone. Handle/active/length at 0x10/0x50/0x58, object at handle+0, typed table at AnimationContext+4; helpers and original local ABI agree. Prior nominal-interface failure closed.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a968",
+   "source": "src/wave2/func_0017a968.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0017a968/func_0017a968.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0017a968.c:1-12; screen.h:16-22,43: canonical Widget/NameTable parameters now agree with C++ caller; table kind/count/names at 4/0x14/0x18 and guarded const-char* forwarding consistent.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a9a0",
+   "source": "src/wave2/func_0017a9a0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0017a9a0/func_0017a9a0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0017a9a0.c:1-6; screen.h:10-13,42: canonical Widget definition and const-pointer prototype replace stale DisplayObject name; unsigned byte array at 0x92, two-element modeled view. Current C++ index-0 use agrees; arbitrary index safety not claimed.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017adc4",
+   "source": "src/wave2/func_0017adc4.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0017adc4/func_0017adc4.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0017adc4.c:1-12; text.h:10: canonical C-linkage UTF-16 length declaration now shared with C++ caller; functional loop/goto and signed result remain unchanged.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019df08",
+   "source": "src/wave2/func_0019df08.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0019df08/func_0019df08.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0019df08.c:1-12: size-zero guard then unsigned byte clearing loop, original destination returned; pointer depth and count progression consistent.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00174480",
+   "source": "src/wave2/func_00174480.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00174480/func_00174480.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00174480.c:1-3: empty original implementation, independently confirmed four-byte return-to-LR.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00176ae8",
+   "source": "src/wave2/func_00176ae8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00176ae8/func_00176ae8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00176ae8.c:1-10: opaque Screen* reset then two typed enable calls; indices and flags forwarded without invented fields.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001770cc",
+   "source": "src/wave2/func_001770cc.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001770cc/func_001770cc.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001770cc.c:1-28: owner flexible pointer tail +0x20 replaces false [1] bound; animation flags 0, elapsed/previous 0x68/0x6c and frame 0x7c. Bit-2 updates, -1 sentinel and float zeros consistent. Actual tail count remains unknown.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00178e9c",
+   "source": "src/wave2/func_00178e9c.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00178e9c/func_00178e9c.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00178e9c.c:1-29; item_pages.h:6-18: item/count/page at 0xb4/0xb8/0xbc, endpoint checks and typed page lookup; nonnull/page/step/count invariants are caller preconditions, not added validation.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00179398",
+   "source": "src/wave2/func_00179398.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00179398/func_00179398.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00179398.c:1-7: opaque Screen*/index/enabled tail forwarding consistent.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001795bc",
+   "source": "src/wave2/func_001795bc.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001795bc/func_001795bc.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001795bc.c:1-13; selection.h:5: int(void) getter returns signed short at bss+0x52; revised accepted switch calls use this exact canonical declaration.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001795cc",
+   "source": "src/wave2/func_001795cc.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001795cc/func_001795cc.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001795cc.c:1-9: enables first index, skips second only for signed sentinel -1; typed forwarding correct.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a164",
+   "source": "src/wave2/func_0017a164.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0017a164/func_0017a164.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0017a164.c:1-23; screen.h:41: states 0..3 map canonical Screen button indices 0x31/0x32 to enable pairs; void default has defined no-op behavior.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a210",
+   "source": "src/wave2/func_0017a210.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0017a210/func_0017a210.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0017a210.c:1-20: single-precision fields at 0x44/0x48/0x58/0x5c/0x60, exact ordered predicates return 0/2/3/1.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a4e8",
+   "source": "src/wave2/func_0017a4e8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0017a4e8/func_0017a4e8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0017a4e8.c:1-10; item_pages.h:11-18: entries/pages at 0x10/0x14, pointer-to-pointer indexing and null guards agree with canonical callers.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7424",
+   "source": "src/wave2/func_001b7424.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001b7424/func_001b7424.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001b7424.c:1-33; screen.h:30-39: selected/count/mode at 0xe8/0xec/0xf0, four enable bands and mode-3 special case consistent. Count/allocation bounds not independently recovered.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7530",
+   "source": "src/wave2/func_001b7530.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001b7530/func_001b7530.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001b7530.c:1-11; screen.h:38,44: slots 0x34/0x35 and const NameTable* const* label pointer depth agree with shared setter.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7598",
+   "source": "src/wave2/func_001b7598.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001b7598/func_001b7598.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001b7598.c:1-12: four-band clearing loop uses canonical Screen count and enable prototype.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7c9c",
+   "source": "src/wave2/func_001b7c9c.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001b7c9c/func_001b7c9c.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001b7c9c.c:1-16; screen.h:24-44: nullable WidgetSlot*, object/short label/byte enabled at 0/4/6, canonical NameTable callback and index offset/mode choices consistent.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001847f8",
+   "source": "src/wave2/func_001847f8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001847f8/func_001847f8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001847f8.c:1-6; graphics_state.h:14-19: signed initialized byte offset 0 promoted to int.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001861c4",
+   "source": "src/wave2/func_001861c4.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001861c4/func_001861c4.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001861c4.c:1-6; graphics_state.h:9-19: context pointer +0x1c; GraphicsContext now has a flexible buffers[] tail at 0x5c rather than a false one-element bound.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001861d4",
+   "source": "src/wave2/func_001861d4.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_001861d4/func_001861d4.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_001861d4.c:1-7: opaque mutex address returned, no incomplete-type dereference or size assumption.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00187818",
+   "source": "src/wave2/func_00187818.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00187818/func_00187818.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00187818.c:1-6; graphics_state.h:14-19: signed stereo byte at offset 1 promoted consistently to int.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018f0ac",
+   "source": "src/wave2/func_0018f0ac.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0018f0ac/func_0018f0ac.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0018f0ac.c:1-6: const void* address/unsigned result tail forwarding; ordinary wrapper only.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00190ae0",
+   "source": "src/wave2/func_00190ae0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00190ae0/func_00190ae0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00190ae0.c:1-15; graphics_state.h:27: original query calls retained and fixed data-pointer endpoints selected by region; null default. No code bytes substituted.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019cff8",
+   "source": "src/wave2/func_0019cff8.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0019cff8/func_0019cff8.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0019cff8.c:1-13; graphics_state.h:27: shared stereo query selects original region start data addresses; null default, frozen ARM integer-pointer representation.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00110634",
+   "source": "src/wave2/func_00110634.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00110634/func_00110634.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00110634.c:1-19; bss_0049ecf0.h:7-45: canonical completed_count +0x24, command stride 0x1c/ready +2, global ready +0x18 and pending/enabled +0x11/+0x12 agree with revised accepted producer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00118074",
+   "source": "src/wave2/func_00118074.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00118074/func_00118074.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00118074.c:1-23; render_state.h:4-15: SlotList now uses natural alignment (attribute removed); head/count/tail/count at 0/4/8/0xc and SlotBlock next/previous at 0x20/0x24. Canonical source still MATCHes; no repeat of the prior A/B probe needed or claimed.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011d260",
+   "source": "src/wave2/func_0011d260.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0011d260/func_0011d260.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0011d260.c:1-25; render_state.h:49-66: PipelineStorage configuration +0x800, modeled size 0x854, owner pointer/ready 0/4; clear/allocation/error cleanup behavior consistent. Address-bound callback interior view remains a partial global model.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011d2f0",
+   "source": "src/wave2/func_0011d2f0.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0011d2f0/func_0011d2f0.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0011d2f0.c:1-14; render_state.h:26-32: four unsigned words at 0/4/8/0xc passed to typed shared initialization helpers.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00126f5c",
+   "source": "src/wave2/func_00126f5c.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00126f5c/func_00126f5c.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00126f5c.c:1-6; render_state.h:68: unsigned word value 1 stored through canonical unsigned* interface.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00127294",
+   "source": "src/wave2/func_00127294.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00127294/func_00127294.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00127294.c:1-17; render_state.h:69: state value 0x1c00, unsigned control read/modify/write at 0x770, then flush helper; no named-register binding.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018ce64",
+   "source": "src/wave2/func_0018ce64.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0018ce64/func_0018ce64.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0018ce64.c:1-21; render_state.h:4-24,70: typed allocation callback arguments and 40-byte SlotBlock, eight words and next/previous zeroing agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00190adc",
+   "source": "src/wave2/func_00190adc.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_00190adc/func_00190adc.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_00190adc.c:1-6: register address, const source and unsigned size forwarded to int-returning helper without hardware intrinsic/assembly.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019ceb4",
+   "source": "src/wave2/func_0019ceb4.c",
+   "verdict": "PASS",
+   "method": "New independent sequential tools/match.py under frozen game: MATCH, exact complete catalogue extent (see func_0019ceb4/func_0019ceb4.result.json). Freshly read complete current source; checked policy, field widths/layout/signedness/pointer depth and ordinary-function scope. src/wave2/func_0019ceb4.c:1-8: signed error word returned then reset; ordinary typed global access.",
+   "finding_ids": []
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "note",
+   "subject": "docs/known-issues-c003-wave2-r2.md:5,34-35; docs/GATES.md:1,4-10",
+   "summary": "The checkpoint notes still name gates v1.5 and describe C++ checking as ODR-only, while the governing design is v1.6 (a/b) and current interface coverage also includes the local shared extern-C redeclaration policy. The later notes correctly mention v1.6, so this is a nonblocking documentation inconsistency, not a missing technical fix. Repair the version/coverage wording while preserving the explicit limitation that C++ declaration types and const writes are not mechanically checked.",
+   "repair": "Update known-issues line 5 to v1.6 (a/b) and lines 34-35 to describe ODR plus shared-declaration policy, retaining manual type/const-write qualifications."
+  }
+ ],
+ "qualifications": [
+  "All 61 required ordinary ARM functions independently MATCH: 48 new functions / 2,376 bytes and thirteen functions in twelve revised accepted units, 3,620 reviewed bytes, via sixty sequential canonical match.py commands. All 672 bound hash comparisons match, including the ten prepared project headers and both stored full-image/object/receipt bundles.",
+  "The two revised switch functions retain their published ORIGINAL BUG uninitialized out-of-range results. Revised func_00196cb8 retains the published invalid-screen before-table access after a returning error helper. Valid caller reachability/domains and arbitrary index safety remain unproven; no safe fallback was invented.",
+  "Eight required C++ units (one new and seven revised accepted; eleven total in the ledger) were manually checked against canonical headers, companion declarations/definitions and supplemental original local ABI flow. No remaining predecessor nominal declaration mismatch was found. Mechanical checks remain bounded raw-source ODR/shared-declaration scans, not a C++ parser or full type/const/namespace/alias proof.",
+  "The remaining local C++-to-C++ func_001c4500 prototype was manually compared with its definition. The textual redeclaration policy does not analyze C++ function bodies as declarations; its published limits must not be mistaken for a complete declaration/definition checker.",
+  "Partial types, reserved offsets/virtual slots, chosen names, tagged-pointer cleanup and subobject-to-owner return provenance are not unique original class identity or portable object-lifetime/storage proofs. In particular, previously opaque uses of a tag such as the pilot Widget do not establish the same complete original class as the display view. Source per-unit field/ABI consistency is reviewed, not full native class recovery.",
+  "Flexible tails remove false one-element bounds without recovering actual allocation counts. Screen/count/page/label and buffer-extent/alignment assumptions remain caller preconditions. Natural SlotList alignment now MATCHes without the prior incidental attribute; the old private A/B experiment was not repeated or counted as new evidence.",
+  "Seven revised/shared headers plus new runtime/resource/text headers are all current prepare-bound inputs. C linkage guards, Resource/ResourceOwner canonical definitions and Widget getter/setter types were read in full. Full data ownership/alias modelling of address-bound interior globals is not recovered.",
+  "The revision-aware finalize path and successful-transition regression were inspected, and current intentional source/header drift equals exactly prepare revised_units/revised_headers. There is no undeclared predecessor drift. No actual finalize, verify_history, state transition or drift/mutation probe was run; operational success is not claimed from source inspection alone.",
+  "Stored receipts report two fresh 103-function / 5,056-byte hybrid builds and 207 tests, 0 skipped, 0 failed modules. Artifacts were rehashed; full builds, suite/regression execution, linters/formatters, runtime/emulator/native-port checks and known-failure confirmations were not run by this reviewer.",
+  "Prepared commit is b24ef7ed4083969d2f868d37650ff4ce0933e617 as recorded. The assignment separately reported local checkout commit 3d47dd0; no git or remote query was performed and the exact local prepared file hashes, not a pushed-tree assumption, identify this review.",
+  "Supplemental original ABI/empty-function inspection freshly executed reviewer-owned helper code from a sealed earlier artifact, not prior results. Ten empty functions are original single return-to-LR extents, not stubs. The conservative local CFG model is not formal behavior verification and leaves a HINT class unmodeled in the new C++ function. No original image bytes/disassembly were copied or emitted.",
+  "Catalogue v3 and ordinary-kind eligibility were rehashed, not regenerated/full-audited. No veneer/multi_entry/interior credit or SDK ownership claim is made. Full original-armlink/section-order/unwind equivalence, lower RomFS IVFC traversal and Windows cross-host reproduction remain unproven.",
+  "Independent reviewer, never an author or integrator. Actual family OpenAI, model openai-codex/gpt-6.1-sol. New units were authored by other OpenAI-family agents; integrator-authored revisions/headers receive cross-family review, but the whole batch is not uniformly cross-family. No other successor review record was read."
+ ],
+ "resolved_prior_findings": {
+  "c003-wave2/F01": {
+   "status": "CLOSED",
+   "evidence": [
+    "src/wave2/func_00179298.cpp:1-65",
+    "src/wave2/func_0017a9a0.c:1-6",
+    "include/game/screen.h:6-48",
+    "include/game/text.h:6-14"
+   ],
+   "observation": "Canonical Widget/NameTable and text/getter/setter declarations are imported with C++-safe C linkage; obsolete DisplayObject/AnimationTable spellings removed. Current C and C++ declarations agree; both relevant bodies independently MATCH."
+  },
+  "c003-wave2/F02": {
+   "status": "CLOSED by inspected revision transition",
+   "evidence": [
+    "tools/accept.py:352-362,397-424",
+    "tests/test_accept.py:201-225"
+   ],
+   "observation": "Prepared current hashes are checked before exact revised-unit/header exemptions are passed into predecessor validation. Independent hash comparison finds no undeclared drift; public default verify remains strict. Regression source includes successful revised-unit/header finalization plus subsequent drift rejection. No actual finalize/verify or regression test executed by reviewer."
+  },
+  "c003-wave2/F03": {
+   "status": "CLOSED",
+   "evidence": [
+    "src/wave2/func_001770cc.c:10-17",
+    "src/wave2/func_001791e0.c:1-13",
+    "include/game/graphics_state.h:9-12"
+   ],
+   "observation": "False one-element trailing arrays replaced with flexible array members; original offsets unchanged and current required functions MATCH. Runtime counts/domains remain unrecovered, not silently validated."
+  },
+  "c003-wave2/F04": {
+   "status": "CLOSED",
+   "evidence": [
+    "include/game/render_state.h:10-15",
+    "src/wave2/func_00118074.c:1-23"
+   ],
+   "observation": "Incidental aligned(8) attribute removed. Canonical natural-alignment consumer independently MATCHes; no new alignment probe or inferred original alignment claim."
+  }
+ },
+ "verification": {
+  "evidence": "scratch/review/c003-wave2-r2/review-c003-openai/verification.json",
+  "canonical_match_commands": 60,
+  "required_function_rows": 61,
+  "new_functions": 48,
+  "revised_accepted_functions": 13,
+  "new_bytes": 2376,
+  "reviewed_bytes": 3620,
+  "all_canonical_match": true,
+  "equal_bound_hash_comparisons": 672,
+  "prepared_headers_rehashed": 10,
+  "required_cpp_units_manually_checked": 8,
+  "other_r2_reviews_read": false,
+  "new_full_builds": 0,
+  "new_suites": 0,
+  "actual_finalize_or_verify_executed": false,
+  "source_row_summary": {
+   "PASS": 58,
+   "QUALIFIED": 3,
+   "FAIL": 0
+  }
+ },
+ "scope": "All 48 new functions and all thirteen functions in twelve revised accepted units; revised/shared headers and related cross-unit interfaces. Canonical inputs untouched. No git/deletion/adoption/credit/finalize/publication. Writes only inside assigned review directory except authorized accept.py review submission.",
+ "reviewed_utc": "2026-10-16T16:44:05Z",
+ "prepare_sha256": "5277da7562d64d0b8aad9ac722471e00b611a8dee3279b777ea04f57b35ae788",
+ "sources": {
+  "src/pilot/pilot_a.c": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+  "src/pilot/game_enum_switch.c": "2608356701959fb5a3853a2cfc17097f73bc6f30b88ebc55c23b0d32e0ee8141",
+  "src/wave1/func_001670e4.c": "f988b29935da652bafb9b0b08d1b8a5c91401a40ccccd90168a5148dab3ea9a6",
+  "src/wave1/func_0011e928.c": "78738eea0f52343be947b708fcbd426fd2b2c0c1d069931de9dc6cd1d21ec82c",
+  "src/wave1/func_0018fdd4.cpp": "4aa9bb781425b63e520b19d4b49387e05a06dbccf49bcf6588791d9be26e8b98",
+  "src/wave1/func_00195254.c": "fb5af3f56d4522d321d8a779a4a3bddbd3427aef9256a858267ceaabc50371c3",
+  "src/wave1/func_00102cb0.c": "fb4f8c61979103df1db1a70d62878a992a00099bcb8e2fef213587428fd6f671",
+  "src/wave1/func_00105058.c": "22b08b5d65a6ace20e59b8f97d56bc15e56ca9b22377e4b7cb3ad0c06cdc90fb",
+  "src/wave1/func_00110358.c": "55c85cfacee4fb29677c2b00d81138bb1339c55e0033d463e001bd3947c0b82f",
+  "src/wave1/func_001107d0.c": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+  "src/wave1/func_0011362c.c": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+  "src/wave1/func_0011e970.c": "1df1975c0216e80752ebf973071748cf1733979bc6b5820d2bc411d2bb2b1a68",
+  "src/wave1/func_0011e974.c": "9aa52f34e8dca1822ae8f9f4adaa349f3e47a45f73b13b3ceaa192b5108c1342",
+  "src/wave1/func_0011e978.c": "faac44df6650c9c651d2d4ee8b3fc20fb0eec1c09772b4bc7569830ed01d55d8",
+  "src/wave1/func_0011e998.c": "3106c9f28fee5d8427d03c004e6097cc8c8791513b2e8da0980d0f814b24c0bf",
+  "src/wave1/func_0019e02c_returning.c": "ecc3f42be2f8c2199a764281ce9ce5d9ded43181d01497003a170e1b206064a9",
+  "src/wave1/func_0012ced8.c": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80",
+  "src/wave1/func_0012d1c8.c": "bd742e97881a1006aed64828a721955a34a94fe83c66219c41974ffb94434a4d",
+  "src/wave1/func_0012d4f0.c": "93af079ad1d9f8354ac1527f9d53ca08a9dd3bebdea5f22e2c88a1669471ada3",
+  "src/wave1/func_0012f4f0.c": "dd0b35a3310a3df8060af68e15db33a952340933fd63e50c6467f482e15bcbe5",
+  "src/wave1/func_0012f50c.c": "cdff29146f04b04146d63b110828b4b3bc2bc2ac855382a01dac9779c02d6d38",
+  "src/wave1/func_0018fcb4.c": "8650965cf5a96c44d18a7ea3298827ca2d782de453e6aa3c6d62343f1fadab27",
+  "src/wave1/func_00195e84.c": "c02694a5085a6f6cd12975711fd270b45389fb09f9acafa603b425b52505787d",
+  "src/wave1/func_00195e94.c": "ced7791a8996cc4cf8e7b6df3ccd2f1bee06724569a3cec5ba586c8161d4971e",
+  "src/wave1/func_0011f080.cpp": "bc17b2827a91f96424b5da57de424324664292022eefe01b3b7606355c7ee70d",
+  "src/wave1/func_00134f04.c": "ddc73aaeffc367598de6fd9b6107b6d046767593c89bf753ff8366ab1e81d010",
+  "src/wave1/func_00135a28.c": "6f649c2ab95e66a2973d490925804c41b3553cc8eb72cdc4d505674d7ab79402",
+  "src/wave1/func_00135a58.c": "3c10c74764f47cab823bcca94c739264e39fbee5523c1bd754d25152c90e6e68",
+  "src/wave1/func_00135a88.c": "375cc7e84a571c6e9ca3b339c6d31662c4a1a852a49a11acfb1743eb1da9c5ba",
+  "src/wave1/func_00135ab8.c": "442648137a05324def2fafae0bd12a95941bd354666ae34c96d7f9e4dc510f95",
+  "src/wave1/func_001360a4.c": "989581a50f6037d4735a0a3f3a13d78b0c995eeac63b90281038835ec71bdc10",
+  "src/wave1/func_00196cb8.c": "9f3fdd424e329780bde36bd6640963c4e3ff3feb7d9566b8a62e166d2fd8a00c",
+  "src/wave1/func_0019f450.c": "175eea6d9ab1904d0055260d4dca853786dca6203a49393aa7bf7e9d31704141",
+  "src/wave1/func_0018fcc0.cpp": "caaf1c22a3cc3b88c19ed0752af42b16d2f6e2e87900d1d5c668ad0e5dea020c",
+  "src/wave1/func_0018fd20.cpp": "d0f60564f2c813fdffef70cfb368ad0bf97f9a993bd6947bc9915d875ff88974",
+  "src/wave1/func_0019d5c4.cpp": "c4a789b46cc92c0063983c0f4e3272c710a242500f3f60d95cce078dba0a2335",
+  "src/wave1/func_001c44ec.cpp": "a2e696b4b2bf3fc2a10147508ef1d5d092b7092177e12ae39d1aabb91ee4824b",
+  "src/wave1/func_001c4500.cpp": "15c02e7d7c850549468e41058aacfcda30f2fcb2e41d17c797f934274aff8758",
+  "src/wave1/func_001d2da4.cpp": "d748394646261904d48940495aacdb5bc89926ca88a42c8ffeab2262eeefac35",
+  "src/wave1/func_001d3524.cpp": "91088496ad21a56007b45e32584b2d0856dc31e0c0c6f8a3348cb0e2dd87a564",
+  "src/wave2/func_0013db3c.c": "c069d294a3e63ef42ce716bd1f2a328d611da384caf48e9067a7eccb09c10c79",
+  "src/wave2/func_001415b0.c": "a01e311c7f197dd904a522d9f40791152eee8d3be4c2fbc5b14a26f49e53597a",
+  "src/wave2/func_001415e8.c": "1d400cb97032274c0b1840be51a06da079fd699143825b28240cf7a389f5d7e6",
+  "src/wave2/func_00142a54.c": "06ab0f33b6b862ed97aec977976febe86114238c9c9e4e109f46ad0a31d11aed",
+  "src/wave2/func_00147260.c": "29e9ed7bbe4d5e8d4ae65e04f6eb9794eff41e9165c8f4e4e8bbd344aeeb637b",
+  "src/wave2/func_00149424.c": "0d249fe3b1c5bf4e676820b56d35a7fcd48a1d2fee23f7f23e2d76e4a505477f",
+  "src/wave2/func_0014c2c8.c": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
+  "src/wave2/func_0014de8c.c": "6d2e316760cd9b8512cb3c4c96eacd5230c3f6963fae4521760abc9716732b5b",
+  "src/wave2/func_0014f7e8.c": "9b521e9b9a8f4fc518a6b95d81fd2a7f9baadd2a3fc27c3875b311459a77053b",
+  "src/wave2/func_0015f5a0.c": "8d925319341dcfada1f6af1ccfa61bb68604fdd0d0a8ee026a006597d01da1fc",
+  "src/wave2/func_00164ebc.c": "5b7b71482f720217731f9b40a2a9c069a1fc2c708ef2624d66514bd1d67a7f3f",
+  "src/wave2/func_0016e5cc.c": "8d6fc994c250374ef13c0012aa76c528a59fc27863a5305de89f22a42abf3821",
+  "src/wave2/func_001791e0.c": "6553e9023f6c5c8c40837049dccd0e6c4527c37ca5cd13f962f74ddba42e899e",
+  "src/wave2/func_00179298.cpp": "deea757896fa97d95cccad7898a2cd0232005067d41b06bcf5328c09cd471b22",
+  "src/wave2/func_0017a968.c": "88eac07efc1b14a3765752397b03ea0089f51d60495d9cb1a6fc9622cb2501e7",
+  "src/wave2/func_0017a9a0.c": "0371df8b32ac1c494dce9e7483183aee91be2ab5608e00063917b57b43b4071f",
+  "src/wave2/func_0017adc4.c": "142df30436d3fbbcac701c1286e4a1c4c41ebc81496f2d4e42665ff9e3f63f90",
+  "src/wave2/func_0019df08.c": "0244505a186fd227ac109c4bae380fea27b0b7487793152023efbbede6660d88",
+  "src/wave2/func_00174480.c": "107dcaf26a2870208c63397496af9081a81f3b642fa64d46aeb24862a0c3a710",
+  "src/wave2/func_00176ae8.c": "4c6e7565dfbe5edf15ad27690defe3c01e750244de510fa3985471b84cd73595",
+  "src/wave2/func_001770cc.c": "f0310f9a6256ea372f86ab5596cbf74a91aa8e629273ab9a08b23431f8dd6187",
+  "src/wave2/func_00178e9c.c": "60349c9fb885bd5e372afe8345cf45deb6938c3c8ab472810334359396316403",
+  "src/wave2/func_00179398.c": "4f7a15643de5196479a4cd550ef411bdf9b91ff4378fe125d5caf5214ed804a3",
+  "src/wave2/func_001795bc.c": "7975433811f318129271e3482336109f695888217c1ec3d71c9c43f1b7e253f6",
+  "src/wave2/func_001795cc.c": "7f78a4fba3cf9c0ea7b9353b2883fd88bb5c0417d4cf63d9b68425be66f37dc8",
+  "src/wave2/func_0017a164.c": "429fe22d2a1c00f358f4365733cfa7659d9994b56f8d3d1ff42cc0fb62c6f863",
+  "src/wave2/func_0017a210.c": "c3111b59fca2542a5e716d465de99054f26b5e216c61de9d0ff1580ef773a5d3",
+  "src/wave2/func_0017a4e8.c": "2948269ee27f3a50ee73e02093987f6638d20664f0559a78611a0540f76f0e81",
+  "src/wave2/func_001b7424.c": "3ab047eea54b2cf4889ed9c327b8ea3232a338817d68d45cbd7e6271a1fe23b6",
+  "src/wave2/func_001b7530.c": "abf48ba69d70ba78e17a4e402cfdf02a49ed8b3406053f039e76f27407df08f3",
+  "src/wave2/func_001b7598.c": "0c5868c50de9ad18285c7edf0b180bf9c8bc0a19805c6cc5f54eeb3cb576f280",
+  "src/wave2/func_001b7c9c.c": "9ec501091311e32905855812567e7f2655510aecab19a375fa349afccf799f0f",
+  "src/wave2/func_001847f8.c": "1671126361c1f8ee27850bbc60633c545f7fb34c1b2dc242ce08408c994d05eb",
+  "src/wave2/func_001861c4.c": "d3945b55adda25cf82bb317bfa4d6accf28570ef84d24ddfdf1afef3bbf69bc8",
+  "src/wave2/func_001861d4.c": "1360318059aa48a572f5783a972b90190dff21cd5c695837e6f18173af108e6c",
+  "src/wave2/func_00187818.c": "1eb328265fab62a04ad7e7fd9090c7807f37aad3ef3c4c1cb9a6ffba1d0febff",
+  "src/wave2/func_0018f0ac.c": "b8f6d14ec2cb70159b8780ab449712b56fe9aa9aa08345815c39612ea051b099",
+  "src/wave2/func_00190ae0.c": "e5e3c442c3b5f45b1ce6b433568bd8f0289bc3fb4016ac12147fbe30bb343a70",
+  "src/wave2/func_0019cff8.c": "d6c2dd221f0e102621018f15eeb5f5abd9fb0533a40d80e54e8095be644681df",
+  "src/wave2/func_00110634.c": "0179d2cf7d2d2f4341588d4ea3d3a0e61209fc2c3ae5515ce7c298261527c9d4",
+  "src/wave2/func_00118074.c": "9ec18c612ca95dbe009c81b3df3ceacadcd1257296b28ba7d73dad979b795b6b",
+  "src/wave2/func_0011d260.c": "73441850704d05200674c4f68476e366dc563fefcb6f9370ca85696a34e3d30c",
+  "src/wave2/func_0011d2f0.c": "ccbb727758674fc5ffd8d85843316dffd7a94df6015b30e710ec95228e3936e5",
+  "src/wave2/func_00126f5c.c": "b5d91a4441a23395b9d850bcaf7440f398d57e513210af2df983bf92e546dffc",
+  "src/wave2/func_00127294.c": "882aae40c664c7ef5a0c1fc78eeb25f5a7c5403d0baa412855c8bffb1fe5da18",
+  "src/wave2/func_0018ce64.c": "bb6ff988076ba3d211ce2109e1942475f933c991a5546257ed4b04cd0a4c3322",
+  "src/wave2/func_00190adc.c": "3553b65425c40f74ef78137235655c72f2c2f16347f20d9956dc660507e6e9cf",
+  "src/wave2/func_0019ceb4.c": "87d7e2948322370c2972ebc126512ff14150168b2f9e8391d16d62aab38392da"
+ },
+ "headers_added_since_prepare": [],
+ "record_sha256": "44a729fe360950b512ac5444e01aa7dcd6a5310ff3661fc27f51c83767c14e3b"
+}
