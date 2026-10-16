@@ -181,20 +181,33 @@ def _symbol_offset(sym: Symbol) -> int:
     return sym.value & ~1 if sym.kind == "STT_FUNC" else sym.value
 
 
-def reject_overlaps(spans: list[tuple[int, int, str, str | None]]) -> None:
-    """Distinct sections can never share storage.
+def reject_overlaps(spans: list[tuple[int, int, str, tuple[str, str] | None]]) -> None:
+    """Distinct sections can never share storage, and one COMDAT entity has one address.
 
-    spans: (start, end, name, comdat signature or None). Members of the same COMDAT group placed
-    at the same span are one C++ entity (the linker keeps a single copy) and are merged first;
-    every other span stays distinct.
+    spans: (start, end, label, comdat key or None), where the key is (group signature, member
+    section name). The linker keeps a single copy of a COMDAT group, so every placement of the
+    same member must be the same span (merged into one), and a different span is a contradiction
+    even when nothing overlaps. Every other span stays distinct.
     """
     merged = {}
-    for i, (lo, hi, name, comdat) in enumerate(spans):
-        merged.setdefault(("comdat", lo, hi, comdat) if comdat else ("span", i), (lo, hi, name))
+    canonical: dict[tuple[str, str], tuple[int, int, str]] = {}
+    for i, (lo, hi, label, comdat) in enumerate(spans):
+        if comdat:
+            first = canonical.setdefault(comdat, (lo, hi, label))
+            if first[:2] != (lo, hi):
+                raise LinkError(
+                    f"COMDAT {comdat[0]} {comdat[1]} placed at [{first[0]:#x}, {first[1]:#x}) by {first[2]} "
+                    f"and at [{lo:#x}, {hi:#x}) by {label}"
+                )
+        merged.setdefault(("comdat", comdat) if comdat else ("span", i), (lo, hi, label))
     ordered = sorted(merged.values())
     for (lo_a, hi_a, name_a), (lo_b, hi_b, name_b) in zip(ordered, ordered[1:]):
         if lo_b < hi_a:
             raise LinkError(f"{name_a} [{lo_a:#x}, {hi_a:#x}) and {name_b} [{lo_b:#x}, {hi_b:#x}) overlap")
+
+
+def comdat_key(section: Section) -> tuple[str, str] | None:
+    return (section.comdat, section.name) if section.comdat else None
 
 
 def _sx(value: int, bits: int) -> int:
@@ -273,7 +286,7 @@ class InPlaceLinker:
             if p.base % p.section.align:
                 raise LinkError(f"{p.section.name}: placed at {p.base:#x}, not aligned to {p.section.align}")
         reject_overlaps(
-            [(p.base, p.base + p.section.size, p.section.name, p.section.comdat)
+            [(p.base, p.base + p.section.size, p.section.name, comdat_key(p.section))
              for p in placements.values() if p.section.size]
         )
         return placements

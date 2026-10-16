@@ -275,11 +275,18 @@ class RelocationArithmeticTest(unittest.TestCase):
 
     def test_comdat_copies_share_storage_but_other_sections_do_not(self):
         """Review R2-02: duplicate COMDAT members are one entity; anything else overlapping fails."""
-        inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data_X", "_ZX"), (0x102000, 0x102004, "b.o:.data_X", "_ZX")])
+        key = ("_ZX", ".data_X")
+        inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data_X", key), (0x102000, 0x102004, "b.o:.data_X", key)])
         with self.assertRaises(inplace.LinkError):
             inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data", None), (0x102000, 0x102004, "b.o:.data", None)])
         with self.assertRaises(inplace.LinkError):
-            inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data_X", "_ZX"), (0x102000, 0x102008, "b.o:.data_X", "_ZX")])
+            inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data_X", key), (0x102000, 0x102008, "b.o:.data_X", key)])
+
+    def test_one_comdat_entity_has_one_address(self):
+        """Review R3-01: the same COMDAT member at two non-overlapping addresses is a contradiction."""
+        key = ("_ZN6HolderILi1EE5valueE", ".data__ZN6HolderILi1EE5valueE")
+        with self.assertRaisesRegex(inplace.LinkError, "COMDAT"):
+            inplace.reject_overlaps([(0x102000, 0x102004, "a.o", key), (0x102004, 0x102008, "b.o", key)])
 
     def test_reserved_overlay_names_are_refused(self):
         """Review F06: an overlay alias must not redirect a func_XXXXXXXX name."""
