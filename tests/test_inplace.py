@@ -375,6 +375,18 @@ class RelocationArithmeticTest(unittest.TestCase):
         with self.assertRaisesRegex(inplace.LinkError, "COMDAT"):
             inplace.reject_overlaps([(0x102000, 0x102004, "a.o", key), (0x102004, 0x102008, "b.o", key)])
 
+    def test_secondary_entries_are_call_targets_but_not_definitions(self):
+        """Catalogue v3 `entries`: an interior entry can be called, never defined as a C function."""
+        catalogue = {0x100000: {"address": 0x100000, "size": 0x20, "isa": "arm", "kind": "multi_entry",
+                                "entries": [{"address": 0x100000, "isa": "arm"}, {"address": 0x10000c, "isa": "arm"}]}}
+        resolver = inplace.Resolver(catalogue)
+        self.assertEqual(resolver.resolve("func_0010000c"), inplace.Target(0x10000C, False))
+        linker = inplace.InPlaceLinker(Memory(), catalogue, resolver, (0x200000, 0x201000))
+        with self.assertRaisesRegex(inplace.LinkError, "not a catalogued function start"):
+            linker._address_for("func_0010000c")
+        with self.assertRaisesRegex(inplace.LinkError, "no catalogued function or entry"):
+            resolver.resolve("func_00100008")
+
     def test_reserved_overlay_names_are_refused(self):
         """Review F06: an overlay alias must not redirect a func_XXXXXXXX name."""
         with self.assertRaisesRegex(inplace.LinkError, "reserved"):

@@ -159,6 +159,13 @@ class Resolver:
         reserved = sorted(n for n in self.names if AUTO_NAME.match(n))
         if reserved:
             raise LinkError(f"config/names.json may not define reserved address names: {', '.join(reserved[:5])}")
+        # Call targets: every top-level start plus every recorded secondary entry (catalogue v3
+        # `entries`, e.g. interior B/BL targets of multi-entry routines), with its ISA.
+        self.call_targets: dict[int, str] = {}
+        for fn in functions.values():
+            for entry in fn.get("entries", ()):
+                self.call_targets[entry["address"]] = entry["isa"]
+            self.call_targets[fn["address"]] = fn["isa"]
 
     def resolve(self, name: str) -> Target:
         target = self.lookup(name)
@@ -176,10 +183,9 @@ class Resolver:
             if not m:
                 return None
             address = int(m.group(2), 16)
-            if m.group(1) == "func" and address not in self.functions:
-                raise LinkError(f"{name}: no catalogued function at {address:#x}")
-        fn = self.functions.get(address)
-        return Target(address, bool(fn and fn["isa"] == "thumb"))
+            if m.group(1) == "func" and address not in self.call_targets:
+                raise LinkError(f"{name}: no catalogued function or entry at {address:#x}")
+        return Target(address, self.call_targets.get(address) == "thumb")
 
 
 @dataclass
