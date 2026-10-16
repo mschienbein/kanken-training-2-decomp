@@ -2,6 +2,26 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-16 (night) — Mac session ends; c004-r2 ready to prepare on the desktop
+
+**Accepted:** 103 functions / 5,056 B (seq 3). Denominator **v6**: 4,549 creditable functions /
+1,129,946 B (0.445%). Restart steps: `docs/RESUME.md` top entry.
+
+- **c004** (waves 3+4, 196 functions + 6 revised units): prepare PASS; `review-c004-openai`
+  PASS_WITH_QUALIFICATIONS (F01 minor: undisclosed preserved null dereferences);
+  `review-c004-second` FAIL (five wrapper/callee interface types inferred too weakly). All six
+  findings are fixed on `main` (all functions still MATCH; `docs/known-issues-c004-r2.md`); the
+  successor `c004-r2` needs prepare + two fresh reviews. Until it finalizes, CI's ledger check is
+  red by design (accepted units revised by c004's interface unification).
+- **Wave 5:** 37/80 matched, collected on branch `c005-wave5` with its interface to-do list
+  (`docs/wip/c005-INTEGRATION.md`).
+- **Catalogue v6:** all 270 armlink tail-call NOP sites classified; 129 merged boundaries split
+  (e.g. 0x112c80 | 0x112c98); every v5 start/entry preserved; accepted/c004/c005 unchanged.
+- Session totals since the first accepted checkpoint: 5 author waves (≈340 functions attempted,
+  ≈340 claimed matches incl. wrappers; 336 now in accepted + c004 + c005), armlink emulation,
+  catalogue v3→v6, gates v1.2→v1.8. Review rounds found real defects every time (ODR, type
+  collisions, gate bugs, weak signatures); each became a mechanical check where possible.
+
 ## 2026-10-16 (evening) — c003 accepted; armlink emulation; catalogue v5; c004 integrating
 
 **Accepted:** c001 (17) + c002 (38) + c003 (48 new, 13 revised) = **103 functions / 5,056 B**

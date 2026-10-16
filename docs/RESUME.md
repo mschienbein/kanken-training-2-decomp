@@ -2,6 +2,45 @@
 
 Current entry on top.
 
+## 2026-10-16 (night) — hand-off from the Mac to the desktop
+
+**State** (details: `docs/STATUS.md` top entry): accepted **103 functions / 5,056 B**
+(c001-pilot-r4, c002-wave1-r3, c003-wave2-r3; history seq 3). Denominator **v6** (4,549
+creditable functions / 1,129,946 B). Gates **v1.8**. Linker model `armlink5-inline-branchnop-v2`.
+
+**CI on `main` is red, and that is expected:** `accept.py verify` refuses accepted sources that
+checkpoint c004 revises (interface unification) until a c004 successor finalizes. It turns
+green at step 3 below. Do not "fix" it by reverting the revisions.
+
+Setup: the Windows steps in the 2026-10-15 entry below still apply (private inputs from
+`3ds-experiments/inputs/`, never committed). Expect ~252 tests from `tools/test_suite.py`.
+`scratch/` was not transferred (author results, packets, review evidence stay on the Mac).
+
+Restart sequence:
+
+1. **c004-r2** (196 new functions from waves 3–4 + 6 revised accepted units; `main` already has
+   both reviews' fixes and `docs/known-issues-c004-r2.md`):
+   `tools/jobs.py run --name c004-r2-prepare -- <python> tools/accept.py prepare --checkpoint c004-r2 --candidates config/candidates/c004.json --allow-unchecked-cpp`.
+   This is also the first cross-host run of the gates: both fresh builds must still produce the
+   original image, as on the Mac.
+2. Two fresh reviews per `docs/REVIEWING.md` (202 rows, including step 6 for the 89 functions
+   with linker rewrites): reviewer `review-c004-openai` (astra-reviewer) and
+   `review-c004-second` (reviewer). The c004 records in `accept/c004/reviews/` show what each
+   found last time.
+3. `accept.py finalize --checkpoint c004-r2 --min-reviews 2 && accept.py verify && git add … && git commit … && git push`.
+   Capture exit codes; never pipe a gate into `tail`/`grep` before `&&`.
+4. **c005** (branch `c005-wave5`: 37 wave-5 functions collected): merge into `main`, then do the
+   interface unification listed in `docs/wip/c005-INTEGRATION.md` in a worktree (3 disagreements,
+   5 policy items), prepare `c005`, two reviews, finalize.
+5. Next waves: `tools/triage.py --avoid svc,thumb,exclusive batches …` against v6 (v6 made ~200
+   more functions creditable). Authors include `include/game/*.h` and never write local headers;
+   before each prepare run `tools/interfaces.py check` on a dry ledger (accepted + candidates) and
+   unify declarations first — that is now the main integration cost. On the desktop raise
+   `tools/build.py --jobs` and the author count.
+
+Open user decision (unchanged): may ARMCC `__svc(N)` and named-register CP15 variables count as C?
+Until ruled, SVC/CP15 wrappers are `library_candidate`.
+
 ## 2026-10-16 — decompiling on the Mac (work also resumable on the Windows desktop)
 
 State: `docs/STATUS.md` top entry. Accepted: c001-pilot-r4 (17 functions). Gates: `docs/GATES.md`
