@@ -1,8 +1,23 @@
 # ByteMatch progress tracking
 
 [ByteMatch](https://bytematch.dev) (the decomp.dev replacement) tracks matching progress from objdiff
-reports uploaded by GitHub Actions. This repository is wired for it; registration waits until the
-repository is public.
+reports uploaded by GitHub Actions. **Live since 2026-10-16:**
+https://bytematch.dev/mschienbein/kanken-training-2-decomp (project id 1421490781).
+
+## Registration record (2026-10-16)
+
+- Repository made public after a full-history audit (no ROM/asset/compiler paths, no disassembly
+  or byte dumps in any of 795 blobs, no secrets, one noreply author identity).
+- Added via Manage → Submit a project (owner `mschienbein`). Saved settings, verified through
+  `/api/v1/projects?q=kanken`: name 漢検トレーニング2 (Kanken Training 2), short name `kanken2`,
+  platform `3ds`, game 漢検トレーニング2, franchise 漢検 (Kanken), release year 2017, default branch
+  `main`, workflow `progress.yml`, artifact pattern default, default version `jp` (auto).
+- Backfill imported 44 history points from successful `main` runs; the latest ingested commit is
+  `bbf6e7a` (103 / 4,350 functions, 0.455%). Later runs failed the ledger check while c004's
+  revisions are pending, so the dashboard updates again once `c004-r2` finalizes.
+- Not done: GitHub App (optional: instant ingestion and PR comments; without it new runs are polled
+  every few minutes) — install it for this repository only if wanted; icon/cover art (SteamGridDB
+  has no entry for this game).
 
 ## What is in place
 
