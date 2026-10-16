@@ -1,4 +1,11 @@
-# Gate design — frozen v1 (2026-10-16)
+# Gate design — frozen v1.1 (2026-10-16)
+
+Revisions:
+- **v1.1** (2026-10-16): `prepare.json` again records the per-gate `checks` map (v1 tooling dropped
+  it through an editing error; gate logic and `result` were unaffected). Regression test
+  `tests/test_accept.py::test_prepare_records_every_gate_result`. The defective record
+  `accept/c001-pilot/` is kept unfinalized (see its DEFECT.md); the candidates were re-prepared as
+  `c001-pilot-r2`.
 
 Changing anything below needs a recorded revision here (new version, date, reason) **before** the
 next checkpoint is prepared. A batch never runs under a gate design that changed mid-batch.

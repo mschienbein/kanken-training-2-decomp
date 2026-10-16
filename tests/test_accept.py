@@ -130,6 +130,37 @@ class AcceptGateTest(unittest.TestCase):
         self.review("PASS_WITH_QUALIFICATIONS", row="QUALIFIED", qualifications=["preserved original bug"])
         self.assertEqual(accept.finalize("c001", 1)["reviews"][0]["verdict"], "PASS_WITH_QUALIFICATIONS")
 
+    def test_prepare_records_every_gate_result(self):
+        """The prepare record must show each gate's outcome, not only the overall result."""
+        import types
+        receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
+                   "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
+        stubs = {
+            "build": types.SimpleNamespace(build=lambda *a, **k: dict(receipt), BuildError=RuntimeError),
+            "denominator": types.SimpleNamespace(verify=lambda: None, read_history=lambda: [{}]),
+            "interfaces": types.SimpleNamespace(
+                audit=lambda units, root: {"units": [], "disagreements": [], "policy": []},
+                select_units=lambda s, m, r: [], failed=lambda report, allow=False: False),
+            "test_suite": types.SimpleNamespace(run=lambda: {"returncode": 0, "tests_run": 5, "skipped": 0,
+                                                             "failed_modules": [], "seconds": 1.0}),
+        }
+        saved = {k: sys.modules.get(k) for k in stubs}
+        sys.modules.update(stubs)
+        try:
+            cand = self.root / "config/candidates.json"
+            cand.write_text(json.dumps({"units": [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]}), encoding="utf-8")
+            record = accept.prepare("c009", cand)
+        finally:
+            for k, v in saved.items():
+                if v is None:
+                    sys.modules.pop(k, None)
+                else:
+                    sys.modules[k] = v
+        self.assertEqual(set(record["checks"]), {"build_a_pass", "build_b_pass", "builds_identical", "suite_pass", "interfaces_pass"})
+        self.assertEqual(record["result"], "PASS")
+        on_disk = json.loads((self.root / "accept/c009/prepare.json").read_text(encoding="utf-8"))
+        self.assertEqual(on_disk["checks"], record["checks"])
+
     def test_checkpoint_names_are_restricted(self):
         with self.assertRaises(accept.AcceptError):
             accept.checkpoint_dir("../escape")

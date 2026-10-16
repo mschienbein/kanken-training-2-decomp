@@ -168,7 +168,7 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "checkpoint": name,
         "prepared_utc": now(),
         "base_matches_sha256": sha256_file(MATCHES),
-        "candidates": candidates_path.resolve().relative_to(ROOT).as_posix(),
+        "candidates": candidates_path.resolve().relative_to(ROOT.resolve()).as_posix(),
         "candidates_sha256": sha256_file(candidates_path),
         "ledger_sha256": sha256_file(out / "matches.json"),
         "sources": source_hashes(units),
@@ -187,6 +187,7 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
             "unchecked": [u["source"] for u in iface.get("units", []) if not u.get("checked")],
             "unchecked_cpp_waived": allow_unchecked_cpp,
         },
+        "checks": checks,
     }
     record["result"] = "PASS" if all(checks.values()) else "FAIL"
     write_exclusive(out / "prepare.json", record)
