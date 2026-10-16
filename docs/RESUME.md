@@ -12,8 +12,11 @@ creditable functions / 1,129,946 B). Gates **v1.8**. Linker model `armlink5-inli
 checkpoint c004 revises (interface unification) until a c004 successor finalizes. It turns
 green at step 3 below. Do not "fix" it by reverting the revisions.
 
-Setup: the Windows steps in the 2026-10-15 entry below still apply (private inputs from
-`3ds-experiments/inputs/`, never committed). Expect ~252 tests from `tools/test_suite.py`.
+Setup: the Windows steps in the 2026-10-15 entry below, with current expected values (catalogue
+hash, test count, accepted-ledger build) in the private `3ds-experiments` repo:
+`context/session-handoffs/mac-to-pc-2026-10-16.md`. Private inputs come from
+`3ds-experiments/inputs/`, never committed. That entry's "both private", test count,
+catalogue hash and `pilot.json` are history.
 `scratch/` was not transferred (author results, packets, review evidence stay on the Mac).
 
 Restart sequence:
