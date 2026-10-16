@@ -196,10 +196,12 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
             write_exclusive(out / "receipts" / f"{name}-{suffix}.json", receipt)
         builds.append(receipt)
     suite = run_suite()
+    candidates_sources = [u["source"] for u in candidates["units"]]
     checks = {
         "build_a_pass": builds[0].get("result") == "PASS",
         "build_b_pass": builds[1].get("result") == "PASS",
-        "builds_identical": builds[0].get("outputs") == builds[1].get("outputs") and "outputs" in builds[0],
+        "builds_identical": builds[0].get("outputs") == builds[1].get("outputs") and "outputs" in builds[0]
+        and builds[0].get("inputs", {}).get("linker_model") == builds[1].get("inputs", {}).get("linker_model"),
         "suite_pass": suite["returncode"] == 0,
         "interfaces_pass": iface_ok,
     }
@@ -220,6 +222,14 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "profiles_sha256": sha256_file(PROFILES),
         "catalogue_sha256": sha256_file(CATALOGUE),
         "denominator_version": len(denominator.read_history()),
+        # The linker model (docs/LINKER.md) is part of what credits a function; every emulated
+        # armlink rewrite inside new or revised units is listed for the reviewers.
+        "linker_model": builds[0].get("inputs", {}).get("linker_model"),
+        "linker_rewrites": {
+            fn: rewrites
+            for u in builds[0].get("units", []) if u.get("source") in set(candidates_sources) | set(revised_units)
+            for fn, rewrites in sorted(u.get("linker_rewrites", {}).items()) if rewrites
+        },
         "builds": [
             {k: b.get(k) for k in ("name", "result", "outputs", "credited", "checks", "error") if k in b}
             for b in builds
@@ -378,6 +388,7 @@ def finalize(name: str, min_reviews: int) -> dict:
         "denominator_functions": credited["catalogue_functions"],
         "denominator_bytes": credited["catalogue_bytes"],
         "catalogue_sha256": record["catalogue_sha256"],
+        "linker_model": record.get("linker_model"),
         "prepare_sha256": prepare_sha,
         "outputs": record["builds"][0]["outputs"],
         "reviews": [{"reviewer": r["reviewer"], "family": r["family"], "verdict": r["verdict"]} for r in bound],
