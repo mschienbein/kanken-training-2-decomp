@@ -83,7 +83,7 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
         toolchain.compile_source(profile, src, obj)
         linked = linker.link(inplace.ObjectFile(obj))
         occupied += [
-            (p.base, p.base + p.section.size, f"{unit['source']}:{p.section.name}")
+            (p.base, p.base + p.section.size, f"{unit['source']}:{p.section.name}", p.section.comdat)
             for p, _ in linked.values() if p.section.size
         ]
         placed = {p.base: data for p, data in linked.values() if p.origin == "catalogue"}

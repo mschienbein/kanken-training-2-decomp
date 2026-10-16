@@ -166,6 +166,31 @@ class InPlaceTest(unittest.TestCase):
         with self.assertRaisesRegex(inplace.LinkError, "several functions"):
             self.link(inplace.ObjectFile(tmp / "two.o"), Memory())
 
+    def test_misaligned_placement_is_refused(self):
+        """Review R2-01: an 8-byte-aligned data section placed at a 4-mod-8 address must fail."""
+        obj = self.compile("unsigned long long wide = 17ULL;\nunsigned long long *func_00100000(void) { return &wide; }\n")
+        mem = Memory()
+        mem.write(TABLE_AT + 4, struct.pack("<Q", 17))
+        fn = obj.defined_functions()[0]
+        sec = obj.sections[fn.shndx]
+        data = bytearray(sec.data)
+        for rel in sec.relocs:
+            struct.pack_into("<I", data, rel.offset, TABLE_AT + 4)
+        mem.write(0x100000, bytes(data))
+        with self.assertRaisesRegex(inplace.LinkError, "not aligned"):
+            self.link(obj, mem)
+
+    def test_adjacent_functions_in_one_section_are_refused(self):
+        """Review R2-05: contiguous functions sharing .text must not collapse into one EXTENT row."""
+        profile = toolchain.Profile("nosplit", PROFILE.compiler, tuple(f for f in PROFILE.flags if f != "--split_sections"))
+        tmp = Path(tempfile.mkdtemp())
+        (tmp / "adj.c").write_text("int func_00100000(int x) { return x + 1; }\nint func_00100008(int x) { return x + 2; }\n", encoding="utf-8")
+        toolchain.compile_source(profile, tmp / "adj.c", tmp / "adj.o")
+        catalogue = {0x100000: {"address": 0x100000, "size": 8, "isa": "arm"}, 0x100008: {"address": 0x100008, "size": 8, "isa": "arm"}}
+        linker = inplace.InPlaceLinker(Memory(), catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000))
+        with self.assertRaisesRegex(inplace.LinkError, "several functions"):
+            linker.link(inplace.ObjectFile(tmp / "adj.o"))
+
 
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
     sec = inplace.Section(1, "i.f", word, len(word), False, True, False)
@@ -223,6 +248,38 @@ class RelocationArithmeticTest(unittest.TestCase):
         mem.write(0x100000, sec.data)
         linked = self.linker(mem).link(Obj())
         self.assertEqual(linked[1][1], sec.data)
+
+    def test_absolute_data_symbols_keep_their_low_bit(self):
+        """Review R2-03: only function symbols carry a Thumb bit."""
+        obj_sym = inplace.Symbol("abs_data", 0x102001, 1, "STT_OBJECT", "STB_GLOBAL", "SHN_ABS")
+        self.assertEqual(self.linker()._symbol_target(obj_sym, None, {}), inplace.Target(0x102001, False))
+        fn_sym = inplace.Symbol("abs_fn", 0x100201, 0, "STT_FUNC", "STB_GLOBAL", "SHN_ABS")
+        self.assertEqual(self.linker()._symbol_target(fn_sym, None, {}), inplace.Target(0x100200, True))
+
+    def test_none_dependency_on_an_unplaced_section_fails(self):
+        """Review R2-04: R_ARM_NONE keeps a section alive; it cannot silently drop out of the check."""
+        dep = inplace.Section(2, ".constdata", b"\x01\x02\x03\x04", 4, False, False, False)
+        sec = inplace.Section(1, "i.f", b"\x1e\xff\x2f\xe1", 4, False, True, False)
+        sec.relocs.append(inplace.Reloc(0, inplace.R_ARM_NONE, inplace.Symbol(".constdata", 0, 0, "STT_SECTION", "STB_LOCAL", 2)))
+
+        class Obj:
+            sections = {1: sec, 2: dep}
+
+            def defined_functions(self):
+                return [inplace.Symbol("func_00100000", 0, 4, "STT_FUNC", "STB_GLOBAL", 1)]
+
+        mem = Memory()
+        mem.write(0x100000, sec.data)
+        with self.assertRaisesRegex(inplace.LinkError, "depends on"):
+            self.linker(mem).link(Obj())
+
+    def test_comdat_copies_share_storage_but_other_sections_do_not(self):
+        """Review R2-02: duplicate COMDAT members are one entity; anything else overlapping fails."""
+        inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data_X", "_ZX"), (0x102000, 0x102004, "b.o:.data_X", "_ZX")])
+        with self.assertRaises(inplace.LinkError):
+            inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data", None), (0x102000, 0x102004, "b.o:.data", None)])
+        with self.assertRaises(inplace.LinkError):
+            inplace.reject_overlaps([(0x102000, 0x102004, "a.o:.data_X", "_ZX"), (0x102000, 0x102008, "b.o:.data_X", "_ZX")])
 
     def test_reserved_overlay_names_are_refused(self):
         """Review F06: an overlay alias must not redirect a func_XXXXXXXX name."""

@@ -71,6 +71,8 @@ class Section:
     writable: bool
     relocs: list[Reloc] = field(default_factory=list)
     mapping: list[tuple[int, str]] = field(default_factory=list)  # ($a|$t|$d offset, kind)
+    align: int = 1  # sh_addralign: every placement must respect it
+    comdat: str | None = None  # signature of the COMDAT group this section belongs to
 
 
 class ObjectFile:
@@ -88,12 +90,21 @@ class ObjectFile:
                     self.sections[i] = Section(
                         i, s.name, b"" if nobits else s.data(), s["sh_size"], nobits,
                         bool(s["sh_flags"] & SH_FLAGS.SHF_EXECINSTR), bool(s["sh_flags"] & SH_FLAGS.SHF_WRITE),
+                        align=max(1, s["sh_addralign"]),
                     )
             symtab = elf.get_section_by_name(".symtab")
             self.symbols = [
                 Symbol(sym.name, sym["st_value"], sym["st_size"], sym["st_info"]["type"], sym["st_info"]["bind"], sym["st_shndx"])
                 for sym in symtab.iter_symbols()
             ]
+            for s in elf.iter_sections():
+                if s["sh_type"] == "SHT_GROUP":
+                    words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
+                    if words and words[0] & 1:  # GRP_COMDAT: one entity, deduplicated by the linker
+                        signature = self.symbols[s["sh_info"]].name
+                        for member in words[1:]:
+                            if member in self.sections:
+                                self.sections[member].comdat = signature
             for s in elf.iter_sections():
                 if not isinstance(s, RelocationSection):
                     continue
@@ -170,10 +181,18 @@ def _symbol_offset(sym: Symbol) -> int:
     return sym.value & ~1 if sym.kind == "STT_FUNC" else sym.value
 
 
-def reject_overlaps(spans: list[tuple[int, int, str]]) -> None:
-    """Distinct sections can never share storage."""
-    spans = sorted(spans)
-    for (lo_a, hi_a, name_a), (lo_b, hi_b, name_b) in zip(spans, spans[1:]):
+def reject_overlaps(spans: list[tuple[int, int, str, str | None]]) -> None:
+    """Distinct sections can never share storage.
+
+    spans: (start, end, name, comdat signature or None). Members of the same COMDAT group placed
+    at the same span are one C++ entity (the linker keeps a single copy) and are merged first;
+    every other span stays distinct.
+    """
+    merged = {}
+    for i, (lo, hi, name, comdat) in enumerate(spans):
+        merged.setdefault(("comdat", lo, hi, comdat) if comdat else ("span", i), (lo, hi, name))
+    ordered = sorted(merged.values())
+    for (lo_a, hi_a, name_a), (lo_b, hi_b, name_b) in zip(ordered, ordered[1:]):
         if lo_b < hi_a:
             raise LinkError(f"{name_a} [{lo_a:#x}, {hi_a:#x}) and {name_b} [{lo_b:#x}, {hi_b:#x}) overlap")
 
@@ -210,17 +229,21 @@ class InPlaceLinker:
 
     def place(self, obj: ObjectFile, names_to_address: dict[str, int]) -> dict[int, Placement]:
         placements: dict[int, Placement] = {}
+        offsets: dict[int, set[int]] = {}
         for fn in obj.defined_functions():
             address = names_to_address.get(fn.name)
             if address is None:
                 address = self._address_for(fn.name)
             sec = obj.sections[fn.shndx]
-            base = address - (fn.value & ~1)
-            prior = placements.get(sec.index)
-            if prior and prior.base != base:
+            offsets.setdefault(sec.index, set()).add(fn.value & ~1)
+            if len(offsets[sec.index]) > 1:
                 # Only aliases (e.g. C++ C1/C2 constructors at one offset) may share a section;
                 # several distinct functions in one section need --split_sections.
                 raise LinkError(f"{sec.name}: holds several functions at different offsets; compile with --split_sections")
+            base = address - (fn.value & ~1)
+            prior = placements.get(sec.index)
+            if prior and prior.base != base:
+                raise LinkError(f"{sec.name}: aliases {fn.name} and another name resolve to different addresses")
             placements[sec.index] = Placement(sec, base, "catalogue")
         # Infer data sections from the original values their references resolve to.
         changed = True
@@ -246,8 +269,12 @@ class InPlaceLinker:
                             f"{obj.sections[sym.shndx].name}: references disagree on its address "
                             f"({prior.base:#x} vs {base:#x})"
                         )
+        for p in placements.values():
+            if p.base % p.section.align:
+                raise LinkError(f"{p.section.name}: placed at {p.base:#x}, not aligned to {p.section.align}")
         reject_overlaps(
-            [(p.base, p.base + p.section.size, p.section.name) for p in placements.values() if p.section.size]
+            [(p.base, p.base + p.section.size, p.section.name, p.section.comdat)
+             for p in placements.values() if p.section.size]
         )
         return placements
 
@@ -312,7 +339,7 @@ class InPlaceLinker:
         if sym.shndx == "SHN_UNDEF":
             return self.resolver.resolve(sym.name)
         if sym.shndx == "SHN_ABS":
-            return Target(sym.value & ~1, bool(sym.value & 1))
+            return Target(sym.value & ~1 if sym.kind == "STT_FUNC" else sym.value, _is_thumb_function(sym))
         raise LinkError(f"{sym.name}: unsupported symbol section {sym.shndx}")
 
     def _apply(self, rel: Reloc, sec: Section, data: bytearray, place: int, target: Target) -> None:
@@ -400,8 +427,15 @@ class InPlaceLinker:
                 continue
             data = bytearray(sec.data)
             for rel in sec.relocs:
-                if rel.type in (R_ARM_NONE, R_ARM_V4BX):
-                    continue  # markers; their symbol may be null and is never resolved
+                if rel.type == R_ARM_V4BX:
+                    continue  # marker; its symbol may be null and is never resolved
+                if rel.type == R_ARM_NONE:
+                    # A dependency: a section of this object it names must be part of the output,
+                    # which here means placed (and so verified); library symbols are external.
+                    sym = rel.symbol
+                    if isinstance(sym.shndx, int) and sym.shndx in obj.sections and sym.shndx not in placements:
+                        raise LinkError(f"{sec.name} depends on {obj.sections[sym.shndx].name}, which no reference places")
+                    continue
                 self._apply(rel, sec, data, placed.base + rel.offset, self._symbol_target(rel.symbol, obj, placements))
             linked[idx] = (placed, bytes(data))
             if placed.origin == "inferred":
