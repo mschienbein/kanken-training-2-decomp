@@ -1,0 +1,1785 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c004",
+ "reviewer": "review-c004-openai",
+ "family": "OpenAI",
+ "model": "openai-codex/gpt-6.1-sol",
+ "verdict": "PASS_WITH_QUALIFICATIONS",
+ "functions": [
+  {
+   "function": "func_00195254",
+   "source": "src/wave1/func_00195254.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 224 catalogue bytes, candidate size equal; read the complete source (src/wave1/func_00195254.c:1-35), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Revised interface only: uses the shared command queue/SystemState layout and imports the two zero-argument command-mutex helpers from bss_0049ecf0.h; queue command stride and existing field widths remain consistent.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011f080",
+   "source": "src/wave1/func_0011f080.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 132 catalogue bytes, candidate size equal; read the complete source (src/wave1/func_0011f080.cpp:1-69), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Manual C++ audit: ResourceEntry allocation/object at 4/8 and flag at 0xf, ResourceTable activeCount at 8; virtual release at slot 0x74, then deleting destructor. Canonical runtime.h declares pointer-returning 13714c and void release 1852f4; original argument-flow inspection observes the former result passed directly to the latter. Complete class/exception ABI remains qualified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013db3c",
+   "source": "src/wave2/func_0013db3c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave2/func_0013db3c.c:1-6), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Revised interface comes from functions.h: integer argument and integer tail return agree with the new func_00144224 identity body and its wrapper; no local competing declaration remains.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00147260",
+   "source": "src/wave2/func_00147260.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave2/func_00147260.c:1-5), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00110634",
+   "source": "src/wave2/func_00110634.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 88 catalogue bytes, candidate size equal; read the complete source (src/wave2/func_00110634.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Revised interface imports the shared queue/mutex definitions; completion counters and byte status flags retain their established widths and offsets, with no new algorithm or codegen steering.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00127294",
+   "source": "src/wave2/func_00127294.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 40 catalogue bytes, candidate size equal; read the complete source (src/wave2/func_00127294.c:1-11), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Revised shared GpuState matches control at 0x770; state word 0x1c00, existing control mask/OR 0x11000 and flush call are retained. No unrelated local layout remains.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001245b0",
+   "source": "src/wave3/func_001245b0.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 32 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001245b0.cpp:1-19), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Manual C++ audit: unsigned handle at 0, color/depth memory pointers at 0x14/0x18; zero handle skips query. Canonical func_00130e24(unsigned,void**,void**) agrees with its C definition. Original argument-flow inspection independently observes these two output-field addresses.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00130e24",
+   "source": "src/wave3/func_00130e24.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 224 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_00130e24.c:1-35), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Unsigned resource handle and optional void** color/depth outputs agree with the C++ caller and render_state.h. Word-sized integer/pointer query union, attachment queries and temporary binding restoration are consistent with 32-bit target types.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00196a94",
+   "source": "src/wave3/func_00196a94.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 48 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_00196a94.c:1-12), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Reads and saves an unsigned queue/binding value, changes it for flush, then restores it; shared function declarations and scalar widths agree with the uses.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019b8e4",
+   "source": "src/wave3/func_0019b8e4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 164 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_0019b8e4.c:1-10), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Four float parameters are independently clamped to [0,1] and written at GpuState clear_color 0x660..0x66c. The shared header and C++ caller agree; only frozen --fpmode=fast behavior is claimed.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019f170",
+   "source": "src/wave3/func_0019f170.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 176 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_0019f170.cpp:1-43), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Manual C++ audit: initialized byte at 4, mode at 0xc, ready word at 0x10, RenderTarget pointer at 0xa4; handle accessor slot 0x10 returns const unsigned*. Runtime/render shared C declarations agree, including four-float clear color and unsigned binding API; local 0011d330 declaration has no competing declaration in the current src/include tree. Full vtable identity remains qualified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019f6a8",
+   "source": "src/wave3/func_0019f6a8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_0019f6a8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Opaque PrintContext pointer, conversion integer and const arguments pointer are forwarded by the genuine tail call to 0018c268; no integer stand-in for the context pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001a0094",
+   "source": "src/wave3/func_001a0094.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001a0094.c:1-6), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Genuine no-argument tail call to the canonical runtime fatal/assertion handler; no __svc, named-register binding or suppressed failure is introduced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001acc18",
+   "source": "src/wave3/func_001acc18.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001acc18.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001aff90",
+   "source": "src/wave3/func_001aff90.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001aff90.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b3340",
+   "source": "src/wave3/func_001b3340.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001b3340.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b3c08",
+   "source": "src/wave3/func_001b3c08.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001b3c08.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c4568",
+   "source": "src/wave3/func_001c4568.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c4568.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c47b4",
+   "source": "src/wave3/func_001c47b4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c47b4.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c5198",
+   "source": "src/wave3/func_001c5198.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c5198.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c519c",
+   "source": "src/wave3/func_001c519c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c519c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c51a0",
+   "source": "src/wave3/func_001c51a0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c51a0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c5760",
+   "source": "src/wave3/func_001c5760.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c5760.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c5a98",
+   "source": "src/wave3/func_001c5a98.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c5a98.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c5e48",
+   "source": "src/wave3/func_001c5e48.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c5e48.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c65a8",
+   "source": "src/wave3/func_001c65a8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c65a8.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6ad0",
+   "source": "src/wave3/func_001c6ad0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c6ad0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6ad4",
+   "source": "src/wave3/func_001c6ad4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c6ad4.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6ae0",
+   "source": "src/wave3/func_001c6ae0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c6ae0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6b3c",
+   "source": "src/wave3/func_001c6b3c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c6b3c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c73c0",
+   "source": "src/wave3/func_001c73c0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c73c0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c73c4",
+   "source": "src/wave3/func_001c73c4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c73c4.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c73c8",
+   "source": "src/wave3/func_001c73c8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c73c8.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c7e18",
+   "source": "src/wave3/func_001c7e18.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c7e18.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c7f1c",
+   "source": "src/wave3/func_001c7f1c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c7f1c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c8890",
+   "source": "src/wave3/func_001c8890.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c8890.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c8990",
+   "source": "src/wave3/func_001c8990.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001c8990.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001cd43c",
+   "source": "src/wave3/func_001cd43c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001cd43c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001cdaa0",
+   "source": "src/wave3/func_001cdaa0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001cdaa0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001cfd3c",
+   "source": "src/wave3/func_001cfd3c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001cfd3c.c:1-6), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Forwards its allocation pointer unchanged to the shared heap-release API; the apparent tiny body is a real tail call rather than an empty placeholder.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d2b7c",
+   "source": "src/wave3/func_001d2b7c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d2b7c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d2cdc",
+   "source": "src/wave3/func_001d2cdc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d2cdc.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d38d0",
+   "source": "src/wave3/func_001d38d0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d38d0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d3d28",
+   "source": "src/wave3/func_001d3d28.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d3d28.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d3d2c",
+   "source": "src/wave3/func_001d3d2c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d3d2c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d400c",
+   "source": "src/wave3/func_001d400c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d400c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d4338",
+   "source": "src/wave3/func_001d4338.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d4338.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d433c",
+   "source": "src/wave3/func_001d433c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d433c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d4acc",
+   "source": "src/wave3/func_001d4acc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d4acc.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d4ad0",
+   "source": "src/wave3/func_001d4ad0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d4ad0.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d88ec",
+   "source": "src/wave3/func_001d88ec.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d88ec.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9a30",
+   "source": "src/wave3/func_001d9a30.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d9a30.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9b90",
+   "source": "src/wave3/func_001d9b90.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001d9b90.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9df0",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9df4",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9df8",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9dfc",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9e00",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9e04",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9e08",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001db958",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001db95c",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001dce3c",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001dd360",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001e35e0",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001e37dc",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001e3818",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001ebe1c",
+   "source": "src/wave3/empty_functions.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/empty_functions.c:1-16), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001748b8",
+   "source": "src/wave3/func_001748b8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 52 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001748b8.c:1-17), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ArrayOwner elements pointer at 8 is passed with callback address 001ef880 to Thumb helper 00100c80; helper result is then passed to 001ef888 and the field is cleared. Original provenance confirms both transfers and the callback address. Callback return type is an inference, not uniquely proved by the original helper ABI.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001ef888",
+   "source": "src/wave3/func_001ef888.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave3/func_001ef888.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Pointer-typed array allocation is forwarded to the existing heap-release function 0019dc20, consistently with its cleanup consumers and runtime.h.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00175648",
+   "source": "src/wave3/parameter_values.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 12 catalogue bytes, candidate size equal; read the complete source (src/wave3/parameter_values.c:1-15), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ParameterValue has a signed integer at 0; writes -1 and returns the original ParameterValue pointer. No copied byte blob or artificial bound is used.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001757d0",
+   "source": "src/wave3/parameter_values.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 12 catalogue bytes, candidate size equal; read the complete source (src/wave3/parameter_values.c:1-15), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ParameterValue has a signed integer at 0; writes -1 and returns the original ParameterValue pointer, consistently with its companion function in this unit.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00100078",
+   "source": "src/wave4/func_00100078.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00100078.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0010007c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Packet func_0010007c: no ordinary input register use or surviving callable prototype; void(void) fallback, return contract unknown.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00100d68",
+   "source": "src/wave4/func_00100d68.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00100d68.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00100d6c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Packet func_00100d6c: nonreturning supervisor-service entry; no parameters evidenced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0010c338",
+   "source": "src/wave4/func_0010c338.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0010c338.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0010c33c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_0010c33c: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0010c37c",
+   "source": "src/wave4/func_0010c37c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0010c37c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0010c380, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_0010c380: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0010e67c",
+   "source": "src/wave4/func_0010e67c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0010e67c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0010e680, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_0010e680: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00110aa4",
+   "source": "src/wave4/func_00110aa4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00110aa4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00110aa8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_00110aa8: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00114fa4",
+   "source": "src/wave4/func_00114fa4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00114fa4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00114fa8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_00114fa8: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011ef48",
+   "source": "src/wave4/func_0011ef48.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0011ef48.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0011ef4c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet and caller func_00195ee0 consume the paired r0/r1 result; 64-bit tick result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011ef54",
+   "source": "src/wave4/func_0011ef54.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0011ef54.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0011ef58, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet and callers func_001224a4/func_0012f51c supply a 64-bit duration in r0/r1.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00121764",
+   "source": "src/wave4/func_00121764.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00121764.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00121768, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet puts r0 in the IPC buffer-address descriptor, encodes r1 as its size and uses r2 as the request handle; callers consume the one-word result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001217b4",
+   "source": "src/wave4/func_001217b4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001217b4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001217b8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_001217b8: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00121bc4",
+   "source": "src/wave4/func_00121bc4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00121bc4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00121bc8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet preserves r0 and forwards it as the second argument to func_00186224/func_0012edd4.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00121da0",
+   "source": "src/wave4/func_00121da0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00121da0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00121da4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet stores r0 into its command payload and returns the result word; caller func_0010c33c supplies 6.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00121ddc",
+   "source": "src/wave4/func_00121ddc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00121ddc.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00121de0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet stores r0 into its command payload and returns the result word; caller func_0010c33c supplies 15.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001224a0",
+   "source": "src/wave4/func_001224a0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001224a0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001224a4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_001224a4: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001224fc",
+   "source": "src/wave4/func_001224fc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001224fc.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00122500, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: The callers func_00101784 and func_00109a48 test the returned r0 against zero.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012250c",
+   "source": "src/wave4/func_0012250c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0012250c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00122510, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Void contract: the sole caller func_00109a48 discards r0 after this call.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122788",
+   "source": "src/wave4/func_00122788.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122788.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0012278c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_0012278c: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122890",
+   "source": "src/wave4/func_00122890.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122890.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00122894, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet forwards r0/r1/r2 as arguments 1/2/3 to func_0012f9a8; helper packet determines output-buffer/size usage.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001228bc",
+   "source": "src/wave4/func_001228bc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001228bc.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001228c0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet tail-calls func_0012f84c with the global graphics context; no additional input arguments evidenced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001228d0",
+   "source": "src/wave4/func_001228d0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001228d0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001228d4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet indexes GraphicsContext.buffers and returns DisplayBuffer.active (signed byte); game/graphics_state.h defines these shared layouts.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122984",
+   "source": "src/wave4/func_00122984.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122984.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00122988, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee/helper packets and corroborating scratch/authors/Wave2Author3/func_00122984.c:3-7: register address, source buffer, mask buffer and byte size; source/mask are pointers, not integer payloads.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001229b8",
+   "source": "src/wave4/func_001229b8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001229b8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001229bc, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet returns a byte from the global context; wrapper caller func_0019bc7c consumes the value.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001229d0",
+   "source": "src/wave4/func_001229d0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001229d0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001229d4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet stores r0 in a selected context entry indexed by r1; pointer-vs-scalar for buffer inferred from graphics context use.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122a1c",
+   "source": "src/wave4/func_00122a1c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122a1c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00122a20, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet returns a global word; wrapper caller func_0019bc7c stores the result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122a68",
+   "source": "src/wave4/func_00122a68.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122a68.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00122a6c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_00122a6c: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00125b50",
+   "source": "src/wave4/func_00125b50.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00125b50.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00125b54, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Wrapper packet callers func_0010e1ac/func_001cf6dc provide an object; return-preserving empty callee propagates r0.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00125b54",
+   "source": "src/wave4/func_00125b54.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00125b54.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. Source explicitly discloses signature inference. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012d5c0",
+   "source": "src/wave4/func_0012d5c0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0012d5c0.c:1-10), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0012d5c4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Exact callee declaration in src/wave1/func_0012d4f0.c:1-5 (ArchiveInfo, EncodedId).",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012d62c",
+   "source": "src/wave4/func_0012d62c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0012d62c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0012d630, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet writes a word through r0, copies the byte mode from r1, and sends the aligned r2/r3 identifier; returns a command result word.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012f518",
+   "source": "src/wave4/func_0012f518.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0012f518.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0012f51c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_0012f51c: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012fb38",
+   "source": "src/wave4/func_0012fb38.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0012fb38.c:1-10), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0012fb3c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: The command-queue callers share the void(void) command-mutex interface.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012fb48",
+   "source": "src/wave4/func_0012fb48.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0012fb48.c:1-10), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0012fb4c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: The command-queue callers share the void(void) command-mutex interface.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001363b0",
+   "source": "src/wave4/func_001363b0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001363b0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001363b4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet writes a byte through r0, sends byte mode plus aligned r2/r3 identifier, and returns the command result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00136404",
+   "source": "src/wave4/func_00136404.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00136404.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00136408, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet has one output-byte pointer in r0 and returns its one-word command result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00136858",
+   "source": "src/wave4/func_00136858.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00136858.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0013685c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet supplies a local output byte to func_0013e734, whose only input is that output pointer; incoming r3 is pushed solely as stack-frame padding, not consumed as a parameter.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013706c",
+   "source": "src/wave4/func_0013706c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013706c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00137070, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet writes its response word through r0 and returns a one-word result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001370ac",
+   "source": "src/wave4/func_001370ac.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001370ac.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001370b0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet accesses the r0/r1 pointees, description offset 0x14 and a buffer/size command descriptor; unknown pointee layouts remain opaque and writable arguments are not const-qualified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013714c",
+   "source": "src/wave4/func_0013714c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013714c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00137150, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: The allocation cleanup in func_0011f080 uses this wrapper's returned pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00137150",
+   "source": "src/wave4/func_00137150.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00137150.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. Original accepted cleanup chains independently demonstrate the preserved r0 pointer being passed to heap release. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013776c",
+   "source": "src/wave4/func_0013776c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013776c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00137770, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet passes r0/r1 in r2/r3 to func_0013ed08; helper packet supplies buffer/size usage.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001377a0",
+   "source": "src/wave4/func_001377a0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001377a0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001377a4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet consumes all four incoming general registers while assembling a graphics command; r2 is compared as a mode.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001378d4",
+   "source": "src/wave4/func_001378d4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001378d4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001378d8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Exact callee declaration in src/wave2/func_0018f0ac.c:1; translates an address to an unsigned result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013e7d0",
+   "source": "src/wave4/func_0013e7d0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013e7d0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0013e7d4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet constructs an argument-free command and returns its one-word response result; wrapper caller func_0012d478 propagates it.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00141c70",
+   "source": "src/wave4/func_00141c70.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00141c70.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00141c74, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Exact callee declaration in src/wave2/func_001415e8.c:1; callee returns 0 or 1.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00142640",
+   "source": "src/wave4/func_00142640.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00142640.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00142644, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet puts r0 in a command payload and returns the response result; caller func_0013614c propagates it.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00144220",
+   "source": "src/wave4/func_00144220.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00144220.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00144224, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: The adjacent body preserves the integer tail-returned by func_0013db3c.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00144224",
+   "source": "src/wave4/func_00144224.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00144224.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. The reviewed 0013db3c integer tail caller and shared functions.h agree. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00147994",
+   "source": "src/wave4/func_00147994.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00147994.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00147998, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet stores incoming r0 into a queued entry; no return-value contract evidenced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014a988",
+   "source": "src/wave4/func_0014a988.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0014a988.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0014a98c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet consumes r1 and r2 while replacing r0 with a fixed argument for func_0014c360; wrapper caller func_0018191c tests the result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014a9d8",
+   "source": "src/wave4/func_0014a9d8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0014a9d8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0014a9dc, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet merges r0 flag bits into a halfword global; no additional inputs or return contract evidenced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014c338",
+   "source": "src/wave4/func_0014c338.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0014c338.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0014c33c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet supplies r0=0 to func_0014dae0; wrapper callers func_00149a98/func_0016d310 store its result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00156de8",
+   "source": "src/wave4/func_00156de8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00156de8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00156dec, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet reads object fields at 0/0x40 and copies its embedded data; caller func_001eb1f8 propagates a scalar result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0015e2b4",
+   "source": "src/wave4/func_0015e2b4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0015e2b4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0015e2b8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet consumes r0 as a search value and returns 0 or 1; callers func_001babb4/func_001e84ec test it.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0015e31c",
+   "source": "src/wave4/func_0015e31c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0015e31c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0015e320, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet consumes r0/r1 and returns a search index; callers func_001e3af4/func_001e84ec store it.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00166eac",
+   "source": "src/wave4/func_00166eac.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00166eac.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00166eb0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet forms a screen-slot address from r0 plus scaled r1 and calls DisplayObject helpers; r1 is an index, not a pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00166f1c",
+   "source": "src/wave4/func_00166f1c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00166f1c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00166f20, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses r0 as screen base, r1 as slot index and r2 as enabled/mode for widget-update helpers.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00169874",
+   "source": "src/wave4/func_00169874.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00169874.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00169878, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet dereferences list fields at 0xc/0x10, tests incoming r1, updates the count and returns a scalar search result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0016a994",
+   "source": "src/wave4/func_0016a994.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0016a994.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0016a998, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet dereferences r0 as an object, frees its member allocation and invokes virtual cleanup methods.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0016f39c",
+   "source": "src/wave4/func_0016f39c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0016f39c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0016f3a0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses r0 as screen base and scaled r1 as an index into widget and label entries.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017e358",
+   "source": "src/wave4/func_0017e358.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0017e358.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0017e35c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet reads/writes object fields rooted at r0 (0xd, 0x84, 0x90, 0x166) and performs cleanup.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00181e40",
+   "source": "src/wave4/func_00181e40.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00181e40.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00181e44, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_00181e44: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00182718",
+   "source": "src/wave4/func_00182718.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00182718.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0018271c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet follows pointers rooted at r0 offset 0x94 and stores the low byte of r1 as a flag.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00183030",
+   "source": "src/wave4/func_00183030.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00183030.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00183034, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet forwards r0/r1 into r2/r3 of func_00142604 after loading two fixed leading arguments; helper packet supplies buffer/size semantics.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001852f4",
+   "source": "src/wave4/func_001852f4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001852f4.c:1-10), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001852f8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: Signature: include/game/runtime.h; the allocation is forwarded unchanged.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00185b9c",
+   "source": "src/wave4/func_00185b9c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00185b9c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00185ba0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet initializes the leading vtable word and leaves r0 unchanged; callers use the constructor result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00186484",
+   "source": "src/wave4/func_00186484.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00186484.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00186488, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet clears the leading word and leaves r0 unchanged; caller func_001f50dc propagates that pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00186eec",
+   "source": "src/wave4/func_00186eec.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00186eec.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00186ef0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Exact adjacent-callee declaration in src/wave1/func_0011e970.c:1 (also 0011e974/0011e978); global command-queue completion callback.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018f7ec",
+   "source": "src/wave4/func_0018f7ec.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0018f7ec.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0018f7f0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: func_0011fa34/func_0011ffdc tail-return the body used by func_0019e02c's cleanup.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018f7f0",
+   "source": "src/wave4/func_0018f7f0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0018f7f0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. Original accepted cleanup chains independently demonstrate the preserved r0 pointer being passed to heap release. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001900a8",
+   "source": "src/wave4/func_001900a8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001900a8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001900ac, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses globals only; callers func_00110f1c/func_001811b8 test its r0 result.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019721c",
+   "source": "src/wave4/func_0019721c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019721c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_00197220, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_00197220: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019dc1c",
+   "source": "src/wave4/func_0019dc1c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019dc1c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0019dc20, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Exact adjacent-callee declarations in src/pilot/loop_cleanup.c:8 and src/pilot/loop_resources.c:3; heap release.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019eb48",
+   "source": "src/wave4/func_0019eb48.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019eb48.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0019eb4c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_0019eb4c: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019f2e4",
+   "source": "src/wave4/func_0019f2e4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019f2e4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0019f2e8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses globals and returns a scalar readiness result; callers func_00100d74/func_0011ef60/func_00135ae8 compare it.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019ffa4",
+   "source": "src/wave4/func_0019ffa4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019ffa4.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_0019ffa8, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet forwards incoming size to func_00195104 with fixed alignment 4/flags 0; numerous callers dereference the returned allocation.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b472c",
+   "source": "src/wave4/func_001b472c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001b472c.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001b4730, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses r0 as screen/object base and r1 as an index into global and widget tables.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b54e8",
+   "source": "src/wave4/func_001b54e8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001b54e8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001b54ec, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet forwards r0 to screen-update helpers and branches on incoming r1.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c3abc",
+   "source": "src/wave4/func_001c3abc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001c3abc.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001c3ac0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet consumes r0-r3: screen/table base, slot index, stored value and compared mode; all four are forwarded.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c5b84",
+   "source": "src/wave4/func_001c5b84.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001c5b84.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001c5b88, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Wrapper caller func_001c5b8c is a deleting-destructor pattern; the adjacent return-only callee preserves the object pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c5b88",
+   "source": "src/wave4/func_001c5b88.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001c5b88.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. Source explicitly discloses signature inference. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6a34",
+   "source": "src/wave4/func_001c6a34.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001c6a34.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001c6a38, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet tests r0 while maintaining a global count and entering its local loop body; there is no separate func_001c6a40 entry.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6ad8",
+   "source": "src/wave4/func_001c6ad8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001c6ad8.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001c6adc, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet func_001c6adc: no meaningful incoming parameters evidenced; void(void) fallback because no existing signature is available. Return contract is unspecified.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c6adc",
+   "source": "src/wave4/func_001c6adc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001c6adc.c:1-7), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. Source explicitly discloses signature inference. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d32e0",
+   "source": "src/wave4/func_001d32e0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001d32e0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001d32e4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet accesses object members through r0, compares r1 as a selector and locks the object mutex.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d54ac",
+   "source": "src/wave4/func_001d54ac.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001d54ac.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001d54b0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet performs object cleanup, updates its vtable/member pointer and returns the unchanged object pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001dacbc",
+   "source": "src/wave4/func_001dacbc.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001dacbc.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001dacc0, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet invokes virtual slot 0x18 and stores its result in data_00242fc8, declared unsigned char * by src/wave1/func_00195254.c:3; incoming r1 is a byte count.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001dadc0",
+   "source": "src/wave4/func_001dadc0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001dadc0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001dadc4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet invokes virtual slot 0x10 and stores its result in data_00242fc8, declared unsigned char * by src/wave1/func_00195254.c:3; incoming r1 is a byte count.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001db130",
+   "source": "src/wave4/func_001db130.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001db130.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001db134, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Wrapper packet caller func_001db404 adjusts the object pointer and tail-calls this wrapper; empty target ignores that pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001db134",
+   "source": "src/wave4/func_001db134.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001db134.c:1-7), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. Source explicitly discloses signature inference. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001e9818",
+   "source": "src/wave4/func_001e9818.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001e9818.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001e981c, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses r0 as screen base, scaled r1 as a slot index and stores/tests incoming r2/r3.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001eafa0",
+   "source": "src/wave4/func_001eafa0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001eafa0.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001eafa4, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: [INFERENCE] Signature: Callee packet uses r0/r1 as screen/slot index and forwards r2 as UTF-16 text to func_00170c20; helper packet and AuthorPilotA/func_00170c20.cpp:66-67 corroborate text type. Saved incoming r3 is padding, not a parameter.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001ef880",
+   "source": "src/wave4/func_001ef880.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001ef880.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Independently decoded the object relocation and original slot: unconditional B to func_001ef884, exactly address+4, replaced by the model NOP; target symbol and event agree. Signature is qualified where not uniquely evidenced. Source contract rationale: func_001748b8 passes this wrapper as a void *(*)(void *) destroy callback.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001ef884",
+   "source": "src/wave4/func_001ef884.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001ef884.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. The callback address is independently evidenced, but the original callback return type is not uniquely established. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122500",
+   "source": "src/wave4/func_00122500.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 12 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122500.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Tail helper argument is exactly 0x407. Independent ISA-aware inspection finds callers 00101784 and 00109a48 compare r0 immediately after wrapper 001224fc, supporting a scalar return; int signedness remains a partial-type inference.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00122510",
+   "source": "src/wave4/func_00122510.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 12 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00122510.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Tail helper argument is exactly 0x407. Independent bounded follow of the direct 00109a48 -> 0012250c call reaches an r0 overwrite before any explicit use. Void is plausible, but a unique original return type and indirect callers are not proved.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00136448",
+   "source": "src/wave4/func_00136448.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 8 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00136448.c:1-10), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Two unsigned word fields of WordPair are written at offsets 0/4 from the two corresponding arguments; natural target alignment is sufficient.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00146ff8",
+   "source": "src/wave4/func_00146ff8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 92 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00146ff8.c:1-37), checked source policy, type/field/pointer uses, and ordinary-function credit scope. MemoryArena embeds two lists/storage areas with 32-bit fields through 0x188 and byte flags 0x18c/0x18d; size becomes word_count by unsigned shift. Both initialization calls and embedded storage sizes are internally consistent.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001470c8",
+   "source": "src/wave4/func_001470c8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 8 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001470c8.c:1-14), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ObjectManager lock is a typed embedded member at 0x1c4 and is passed by address to its lock helper; no integer pointer reconstruction.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00181394",
+   "source": "src/wave4/func_00181394.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 12 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00181394.c:1-6), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Unused opaque manager parameter is retained while unsigned count is scaled by 0x60; arithmetic is intentionally unsigned and introduces no signed-overflow assumption.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00185cc0",
+   "source": "src/wave4/func_00185cc0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 92 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00185cc0.c:1-50), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Pool free list, active-list sentinel, initialized byte at 0x10, capacity at 0x14 and storage fields at 0x18/0x1c agree with stores. The removed guard-helper call is explicitly marked [INFERENCE]; return-only eligibility is checked, original target identity is not recoverable.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00185d1c",
+   "source": "src/wave4/func_00185d1c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 88 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00185d1c.c:1-19), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Opaque ObjectManager initialization retains both callback/image-base pointer setup and guard address. Both removed calls are explicitly marked [INFERENCE]; the selected registration/guard no-ops are plausible but their original identities are unproved.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001f4fac",
+   "source": "src/wave4/func_001f4fac.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001f4fac.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00215ec4",
+   "source": "src/wave4/func_00215ec4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00215ec4.c:1-5), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00216140",
+   "source": "src/wave4/func_00216140.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00216140.c:1-5), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00216ba4",
+   "source": "src/wave4/func_00216ba4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00216ba4.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00216e4c",
+   "source": "src/wave4/func_00216e4c.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 4 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00216e4c.c:1-3), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Original extent is one return-only ARM instruction; source is a genuine no-op/identity rather than a placeholder. Parameters and return type are not uniquely recoverable from that instruction; the declared contract is checked for consistency with shared headers and evidenced callers, otherwise retained as inference per known-issues-c004.md:16-18. ",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014b174",
+   "source": "src/wave4/func_0014b174.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 8 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0014b174.c:1-9), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Reads a single unsigned byte at object offset 3 using the matching padded ByteFlags layout.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014d784",
+   "source": "src/wave4/func_0014d784.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 28 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0014d784.c:1-12), checked source policy, type/field/pointer uses, and ordinary-function credit scope. RegisteredObject contains RegistryEntry at 0x88; passes the address of the actual embedded entry to 0017e7bc and returns the original object pointer.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0016a068",
+   "source": "src/wave4/func_0016a068.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 104 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0016a068.c:1-46), checked source policy, type/field/pointer uses, and ordinary-function credit scope. BaseState uses byte flags, aligned float scale/position fields and unsigned level byte at 0x2c; scalar defaults (including scales 1 and level 255) agree with every field use and do not overwrite padding.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017da3c",
+   "source": "src/wave4/func_0017da3c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 36 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0017da3c.c:1-24), checked source policy, type/field/pointer uses, and ordinary-function credit scope. RecordState word initialization and the explicitly overlaid flag byte at 0x11 are consistent with the union layout. The compiler-generated common memcpy helper is not separately credited; the redundant subfield reset is plausible initialization, not an unexplained assembly surrogate.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017e7bc",
+   "source": "src/wave4/func_0017e7bc.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 8 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0017e7bc.c:1-8), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Uses the canonical Registry/RegistryEntry declarations and passes &entry->link at offset 4 to 0018d868; link node pointer depth and element embedding agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017e7c4",
+   "source": "src/wave4/func_0017e7c4.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 84 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0017e7c4.c:1-23), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Registry count and self-linked sentinel are initialized under the volatile guard check. Source line 19 explicitly marks the removed return-only call target as [INFERENCE]; pointer-returning identity choice has no observable effect, but this call site does not identify the historical callee.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017e818",
+   "source": "src/wave4/func_0017e818.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 48 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0017e818.c:1-11), checked source policy, type/field/pointer uses, and ordinary-function credit scope. TimingState has float elapsed/duration at 0/4, count word at 8 and byte flags at 0xc/0xd/0xe; initializes duration to 6.25f and the documented flags without filling padding.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d3898",
+   "source": "src/wave4/func_001d3898.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 20 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001d3898.c:1-7), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Calls the shared TimingState initializer 0017e818 and returns the original typed state pointer; declaration and source definition agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d9920",
+   "source": "src/wave4/func_001d9920.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 60 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001d9920.c:1-21), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ExtendedTiming embeds the 0x10-byte TimingState, then word at 0x10, floats at 0x14/0x18 and bytes at 0x1c/0x1d. Uses the shared base initializer and returns the original object.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001391d8",
+   "source": "src/wave4/func_001391d8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 60 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001391d8.c:1-14), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ArchiveReader initialized flag at 0xc gates access; uses the const file pointer and unsigned block offset to locate and test the CWAT signature. Shared archive types and pointer depth agree.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013e6b8",
+   "source": "src/wave4/func_0013e6b8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 24 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013e6b8.c:1-11), checked source policy, type/field/pointer uses, and ordinary-function credit scope. MemorySpan is two unsigned words; tests the size word of the exact addressed global, not its base.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013e6d0",
+   "source": "src/wave4/func_0013e6d0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 76 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013e6d0.c:1-19), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Unsigned address/size containment checks require nonwrapping start<end and bounds against base+size, then apply the first translation word. No signed address comparison or broadened valid range is introduced.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013e71c",
+   "source": "src/wave4/func_0013e71c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 24 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0013e71c.c:1-13), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Nullable SharedMemory pointer returns its size at 8 or zero; reserved span preserves memory[] at 0x80 rather than an indexed one-element tail.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001424c0",
+   "source": "src/wave4/func_001424c0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 16 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001424c0.c:1-13), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Returns the unsigned size word at offset 4 of the same MemorySpan used by 001424d0 and 0013e6b8.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001424d0",
+   "source": "src/wave4/func_001424d0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 16 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001424d0.c:1-13), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Returns the unsigned base word at offset 0 of the same MemorySpan used by its size accessor.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001440ec",
+   "source": "src/wave4/func_001440ec.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 40 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_001440ec.c:1-14), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Const ArchiveFile has two 0xc-byte block references; selects type 0x6800 and returns offset word at +4. Missing-block null dereference is preserved and marked ORIGINAL BUG at line 12; original CFG inspection independently includes the null-reference load. See F01 publication gap.",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_0014a2f0",
+   "source": "src/wave4/func_0014a2f0.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 44 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0014a2f0.c:1-14), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Same two-reference type-0x6800 selection; returns a const ArchiveBlockHeader pointer formed from the file base plus offset. Missing-block null dereference is preserved and marked ORIGINAL BUG at line 12; original CFG inspection confirms it. See F01.",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_00182b5c",
+   "source": "src/wave4/func_00182b5c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 84 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00182b5c.c:1-25), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Unsigned nonempty range containment and endpoint checks use the second MemorySpan and second translation word. Pointer/address roles and unsigned overflow rejection agree with all uses.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00183c54",
+   "source": "src/wave4/func_00183c54.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 48 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_00183c54.c:1-15), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Selects type-0x6801 file block from two references and returns its offset. Missing-block null dereference is preserved and marked ORIGINAL BUG at line 13; original CFG inspection confirms it. See F01.",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_0018d514",
+   "source": "src/wave4/func_0018d514.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 8 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0018d514.c:1-12), checked source policy, type/field/pointer uses, and ordinary-function credit scope. ArchiveHandle index pointer at 4 and unsigned resource ID are forwarded with correct pointer depth to the existing index lookup.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019d048",
+   "source": "src/wave4/func_0019d048.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 16 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019d048.c:1-13), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Returns the unsigned size word at 4 of the second MemorySpan, paired with 0019d058.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019d058",
+   "source": "src/wave4/func_0019d058.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 16 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019d058.c:1-13), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Returns the unsigned base word at 0 of the second MemorySpan, paired with 0019d048.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019dc04",
+   "source": "src/wave4/func_0019dc04.c",
+   "verdict": "PASS",
+   "method": "Independent sequential tools/match.py --profile game --linker-model armlink5-inline-branchnop-v2: MATCH over all 24 catalogue bytes, candidate size equal; read the complete source (src/wave4/func_0019dc04.c:1-13), checked source policy, type/field/pointer uses, and ordinary-function credit scope. Nullable SharedMemory pointer yields its flexible byte memory[] at 0x80, or null; padding and the separately used size word at 8 agree.",
+   "finding_ids": []
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "minor",
+   "subject": "docs/known-issues-c004.md:39-44; src/wave4/func_001440ec.c:12-13; src/wave4/func_0014a2f0.c:12-13; src/wave4/func_00183c54.c:13-14",
+   "summary": "The c004 publication lists inherited original bugs but does not identify the three newly credited archive missing-block null dereferences. All three sources correctly annotate ORIGINAL BUG, and independent original-image CFG inspection observes the null-reference offset load, so this is a disclosure gap rather than a mismatch or a request to repair original behavior. D8 requires the checkpoint known issues to publish preserved original bugs.",
+   "repair": "Before finalization, add these three functions and their required-block precondition (0x6800 information or 0x6801 file block) to docs/known-issues-c004.md. Preserve the prepared source and do not add guards to a byte-matching checkpoint.",
+   "evidence": [
+    "docs/ACCEPTANCE.md:49,61-63",
+    "docs/known-issues-c004.md:39-44",
+    "src/wave4/func_001440ec.c:5-13",
+    "src/wave4/func_0014a2f0.c:5-13",
+    "src/wave4/func_00183c54.c:5-14",
+    "scratch/review/c004/review-c004-openai/verification.json:original_inspection.archive_bugs"
+   ]
+  }
+ ],
+ "qualifications": [
+  "All 202 reviewed functions (196 new / 2,564 B, six revised / 492 B) independently MATCH in 187 sequential cached-capable match.py invocations under the explicit frozen armlink5-inline-branchnop-v2 model. These are not claims of 187 fresh compiles, strict-v1 equality or runtime validation.",
+  "Every one of the 90 prepared rewrite events was independently checked against its object relocation and original slot: 86 unconditional branches to the next instruction; four calls to eligible ordinary 4-byte ARM return-only callees. Exact event maps, including emitted words, equal both stored receipts and all reviewer results. No credited event is inline_insn or depends on the conditional single-instruction rule.",
+  "The four removed-call targets in 0017e7c4, 00185cc0 and 00185d1c are plausible and explicitly marked [INFERENCE] at each call. Return-only replacement does not identify the historical callee. Branch-wrapper formal parameters, return types, scalar signedness and empty-function contracts are not uniquely recoverable from their bytes; source comments and known issues retain those limitations.",
+  "Independent original caller inspection supports a scalar result for 00122500 and a discarded result for the witnessed direct call of 00122510. Void for other/indirect callers remains inference. Accepted cleanup chains support pointer preservation for 0013714c/00137150 and 0018f7f0. The 001ef880 callback address and allocation-result flow are evidenced; its unique original callback return type is not proved.",
+  "Three changed/new C++ units were manually declaration-checked against the shared headers and other source declarations; no competing C++ class/header or shared-symbol declaration was found. The recorded mechanical waiver remains: declaration types, const writes, complete vtable identity, RTTI/exception ABI and whole-program/heap alias behavior are not mechanically proved. Partial structures and callback types remain partial recovery.",
+  "The three newly credited malformed-archive null dereferences are intentionally preserved and correctly source-annotated, not portable C behavior for missing-block inputs. Publish them in the checkpoint known issues before finalization (F01). Inherited switch uninitialized-result and resource-selection original bugs remain qualified.",
+  "All required prepared/receipt/interface/reviewer file, profile, size and rewrite binding comparisons were equal. The optional whole-object comparison to fresh build A differed in 187 objects solely in non-allocated .comment output-path metadata; every other ELF section was byte-identical, and replacing build/c004-a with build/c004-b makes each comment identical. Each stored object independently matches its own receipt hash.",
+  "Stored fresh receipts report identical full code.bin and recompressed code.blz; all four output files were rehashed, not rebuilt. Prepare reports 238 tests, zero skips/failing modules; no full build, suite, linter, formatter, emulator or runtime check was rerun for this review. Original inspection was bounded static analysis, with explicit unsupported/full-CFG probe limits and narrower successful witnesses, not behavior recovery.",
+  "Inherited harness limitations remain: no complete original-armlink/unwind equivalence proof, no native-Windows cross-host reproduction, no emulator/native-port acceptance; lower RomFS IVFC levels not traversed (whole-dump pin retained). Catalogue v5 inputs and ordinary credit classifications were rehashed/checked, not regenerated or comprehensively re-audited; documented 83 anomalies/8,704 unknown bytes remain outside this source review.",
+  "This reviewer is OpenAI, openai-codex/gpt-6.1-sol, not an integrator or author. The new-unit authors are also OpenAI-family, so this is independent but not cross-family coverage of those units. No other review of c004 was read before sealing."
+ ],
+ "verification": {
+  "evidence": "scratch/review/c004/review-c004-openai/verification.json",
+  "units": 187,
+  "functions": 202,
+  "extent_bytes": 3056,
+  "new_functions": 196,
+  "new_bytes": 2564,
+  "revised_functions": 6,
+  "revised_bytes": 492,
+  "sequential_match_invocations": 187,
+  "rewrite_functions": 89,
+  "rewrite_events": 90,
+  "rewrites": {
+   "branchnop": 86,
+   "inline_nop": 4,
+   "inline_insn": 0
+  },
+  "bound_sources": 274,
+  "bound_headers": 12,
+  "stored_full_image_outputs_rehashed": 4,
+  "new_full_builds_run": 0,
+  "new_suites_run": 0,
+  "other_c004_reviews_read": false
+ },
+ "independence": {
+  "integrator": false,
+  "author": false,
+  "cross_family_for_new_units": false,
+  "other_reviews_of_c004_read": false,
+  "prior_reviewer_owned_helper_code_reused": true
+ },
+ "scope": "Only c004 new and prepare-declared revised units: 202 rows. Writes limited to scratch/review/c004/review-c004-openai/ plus the one explicitly authorized accept.py review submission. No git, deletion, adoption, credit, finalization or canonical edits.",
+ "reviewed_utc": "2026-10-16T18:55:40Z",
+ "prepare_sha256": "033e531f7ab0d6399e7a485b7fdce7ceb8187fa48e39e71bfe798f7d12da0a24",
+ "sources": {
+  "src/pilot/pilot_a.c": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+  "src/pilot/game_enum_switch.c": "2608356701959fb5a3853a2cfc17097f73bc6f30b88ebc55c23b0d32e0ee8141",
+  "src/wave1/func_001670e4.c": "f988b29935da652bafb9b0b08d1b8a5c91401a40ccccd90168a5148dab3ea9a6",
+  "src/wave1/func_0011e928.c": "78738eea0f52343be947b708fcbd426fd2b2c0c1d069931de9dc6cd1d21ec82c",
+  "src/wave1/func_0018fdd4.cpp": "4aa9bb781425b63e520b19d4b49387e05a06dbccf49bcf6588791d9be26e8b98",
+  "src/wave1/func_00195254.c": "b6b662ee0f85b3f9c82c903bcdf5c0c5821657d725d81f72f3199f80ea20f000",
+  "src/wave1/func_00102cb0.c": "fb4f8c61979103df1db1a70d62878a992a00099bcb8e2fef213587428fd6f671",
+  "src/wave1/func_00105058.c": "22b08b5d65a6ace20e59b8f97d56bc15e56ca9b22377e4b7cb3ad0c06cdc90fb",
+  "src/wave1/func_00110358.c": "55c85cfacee4fb29677c2b00d81138bb1339c55e0033d463e001bd3947c0b82f",
+  "src/wave1/func_001107d0.c": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+  "src/wave1/func_0011362c.c": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+  "src/wave1/func_0011e970.c": "1df1975c0216e80752ebf973071748cf1733979bc6b5820d2bc411d2bb2b1a68",
+  "src/wave1/func_0011e974.c": "9aa52f34e8dca1822ae8f9f4adaa349f3e47a45f73b13b3ceaa192b5108c1342",
+  "src/wave1/func_0011e978.c": "faac44df6650c9c651d2d4ee8b3fc20fb0eec1c09772b4bc7569830ed01d55d8",
+  "src/wave1/func_0011e998.c": "3106c9f28fee5d8427d03c004e6097cc8c8791513b2e8da0980d0f814b24c0bf",
+  "src/wave1/func_0019e02c_returning.c": "ecc3f42be2f8c2199a764281ce9ce5d9ded43181d01497003a170e1b206064a9",
+  "src/wave1/func_0012ced8.c": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80",
+  "src/wave1/func_0012d1c8.c": "bd742e97881a1006aed64828a721955a34a94fe83c66219c41974ffb94434a4d",
+  "src/wave1/func_0012d4f0.c": "93af079ad1d9f8354ac1527f9d53ca08a9dd3bebdea5f22e2c88a1669471ada3",
+  "src/wave1/func_0012f4f0.c": "dd0b35a3310a3df8060af68e15db33a952340933fd63e50c6467f482e15bcbe5",
+  "src/wave1/func_0012f50c.c": "cdff29146f04b04146d63b110828b4b3bc2bc2ac855382a01dac9779c02d6d38",
+  "src/wave1/func_0018fcb4.c": "8650965cf5a96c44d18a7ea3298827ca2d782de453e6aa3c6d62343f1fadab27",
+  "src/wave1/func_00195e84.c": "c02694a5085a6f6cd12975711fd270b45389fb09f9acafa603b425b52505787d",
+  "src/wave1/func_00195e94.c": "ced7791a8996cc4cf8e7b6df3ccd2f1bee06724569a3cec5ba586c8161d4971e",
+  "src/wave1/func_0011f080.cpp": "b3759e8d75b006e941939c2b5190159971f97a7b285edd32b3a494c5a62330e9",
+  "src/wave1/func_00134f04.c": "ddc73aaeffc367598de6fd9b6107b6d046767593c89bf753ff8366ab1e81d010",
+  "src/wave1/func_00135a28.c": "6f649c2ab95e66a2973d490925804c41b3553cc8eb72cdc4d505674d7ab79402",
+  "src/wave1/func_00135a58.c": "3c10c74764f47cab823bcca94c739264e39fbee5523c1bd754d25152c90e6e68",
+  "src/wave1/func_00135a88.c": "375cc7e84a571c6e9ca3b339c6d31662c4a1a852a49a11acfb1743eb1da9c5ba",
+  "src/wave1/func_00135ab8.c": "442648137a05324def2fafae0bd12a95941bd354666ae34c96d7f9e4dc510f95",
+  "src/wave1/func_001360a4.c": "989581a50f6037d4735a0a3f3a13d78b0c995eeac63b90281038835ec71bdc10",
+  "src/wave1/func_00196cb8.c": "9f3fdd424e329780bde36bd6640963c4e3ff3feb7d9566b8a62e166d2fd8a00c",
+  "src/wave1/func_0019f450.c": "175eea6d9ab1904d0055260d4dca853786dca6203a49393aa7bf7e9d31704141",
+  "src/wave1/func_0018fcc0.cpp": "caaf1c22a3cc3b88c19ed0752af42b16d2f6e2e87900d1d5c668ad0e5dea020c",
+  "src/wave1/func_0018fd20.cpp": "ade0e20b5aac3936267d21af371562e5df72134e72fcc3d178ffdda50d34f9ab",
+  "src/wave1/func_0019d5c4.cpp": "c4a789b46cc92c0063983c0f4e3272c710a242500f3f60d95cce078dba0a2335",
+  "src/wave1/func_001c44ec.cpp": "a2e696b4b2bf3fc2a10147508ef1d5d092b7092177e12ae39d1aabb91ee4824b",
+  "src/wave1/func_001c4500.cpp": "15c02e7d7c850549468e41058aacfcda30f2fcb2e41d17c797f934274aff8758",
+  "src/wave1/func_001d2da4.cpp": "d748394646261904d48940495aacdb5bc89926ca88a42c8ffeab2262eeefac35",
+  "src/wave1/func_001d3524.cpp": "91088496ad21a56007b45e32584b2d0856dc31e0c0c6f8a3348cb0e2dd87a564",
+  "src/wave2/func_0013db3c.c": "b52de6cd04772297fe3d0e8e77ab90877041e2e28eaa2f8b0a4b66cc008f1aad",
+  "src/wave2/func_001415b0.c": "a01e311c7f197dd904a522d9f40791152eee8d3be4c2fbc5b14a26f49e53597a",
+  "src/wave2/func_001415e8.c": "1d400cb97032274c0b1840be51a06da079fd699143825b28240cf7a389f5d7e6",
+  "src/wave2/func_00142a54.c": "06ab0f33b6b862ed97aec977976febe86114238c9c9e4e109f46ad0a31d11aed",
+  "src/wave2/func_00147260.c": "68f44ff520ffe1ce54ad4f9e32a73a6d439dd4a59f2cd1c8be34e84dae5a7c5b",
+  "src/wave2/func_00149424.c": "0d249fe3b1c5bf4e676820b56d35a7fcd48a1d2fee23f7f23e2d76e4a505477f",
+  "src/wave2/func_0014c2c8.c": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
+  "src/wave2/func_0014de8c.c": "6d2e316760cd9b8512cb3c4c96eacd5230c3f6963fae4521760abc9716732b5b",
+  "src/wave2/func_0014f7e8.c": "9b521e9b9a8f4fc518a6b95d81fd2a7f9baadd2a3fc27c3875b311459a77053b",
+  "src/wave2/func_0015f5a0.c": "8d925319341dcfada1f6af1ccfa61bb68604fdd0d0a8ee026a006597d01da1fc",
+  "src/wave2/func_00164ebc.c": "5b7b71482f720217731f9b40a2a9c069a1fc2c708ef2624d66514bd1d67a7f3f",
+  "src/wave2/func_0016e5cc.c": "8d6fc994c250374ef13c0012aa76c528a59fc27863a5305de89f22a42abf3821",
+  "src/wave2/func_001791e0.c": "6553e9023f6c5c8c40837049dccd0e6c4527c37ca5cd13f962f74ddba42e899e",
+  "src/wave2/func_00179298.cpp": "e39e8ff019edf50edcf88bf4e7ebb98aac8d515ab77ea64fd5e9dcf6c713f644",
+  "src/wave2/func_0017a968.c": "183a9391867c7d8b7d05bc8abdb3c4aded4e69631d6fa5f11df458336a1e04eb",
+  "src/wave2/func_0017a9a0.c": "dc49d9e1ea915a54d737f97d2c3d2884124a7884cd6997f1ae76bcbcd97fb6f7",
+  "src/wave2/func_0017adc4.c": "142df30436d3fbbcac701c1286e4a1c4c41ebc81496f2d4e42665ff9e3f63f90",
+  "src/wave2/func_0019df08.c": "0244505a186fd227ac109c4bae380fea27b0b7487793152023efbbede6660d88",
+  "src/wave2/func_00174480.c": "107dcaf26a2870208c63397496af9081a81f3b642fa64d46aeb24862a0c3a710",
+  "src/wave2/func_00176ae8.c": "4c6e7565dfbe5edf15ad27690defe3c01e750244de510fa3985471b84cd73595",
+  "src/wave2/func_001770cc.c": "f0310f9a6256ea372f86ab5596cbf74a91aa8e629273ab9a08b23431f8dd6187",
+  "src/wave2/func_00178e9c.c": "60349c9fb885bd5e372afe8345cf45deb6938c3c8ab472810334359396316403",
+  "src/wave2/func_00179398.c": "4f7a15643de5196479a4cd550ef411bdf9b91ff4378fe125d5caf5214ed804a3",
+  "src/wave2/func_001795bc.c": "7975433811f318129271e3482336109f695888217c1ec3d71c9c43f1b7e253f6",
+  "src/wave2/func_001795cc.c": "7f78a4fba3cf9c0ea7b9353b2883fd88bb5c0417d4cf63d9b68425be66f37dc8",
+  "src/wave2/func_0017a164.c": "429fe22d2a1c00f358f4365733cfa7659d9994b56f8d3d1ff42cc0fb62c6f863",
+  "src/wave2/func_0017a210.c": "c3111b59fca2542a5e716d465de99054f26b5e216c61de9d0ff1580ef773a5d3",
+  "src/wave2/func_0017a4e8.c": "2948269ee27f3a50ee73e02093987f6638d20664f0559a78611a0540f76f0e81",
+  "src/wave2/func_001b7424.c": "3ab047eea54b2cf4889ed9c327b8ea3232a338817d68d45cbd7e6271a1fe23b6",
+  "src/wave2/func_001b7530.c": "abf48ba69d70ba78e17a4e402cfdf02a49ed8b3406053f039e76f27407df08f3",
+  "src/wave2/func_001b7598.c": "0c5868c50de9ad18285c7edf0b180bf9c8bc0a19805c6cc5f54eeb3cb576f280",
+  "src/wave2/func_001b7c9c.c": "98efbb91cfd1b2f13839ad4f731c372b72111821baf0c07740151d598c2976b9",
+  "src/wave2/func_001847f8.c": "1671126361c1f8ee27850bbc60633c545f7fb34c1b2dc242ce08408c994d05eb",
+  "src/wave2/func_001861c4.c": "d3945b55adda25cf82bb317bfa4d6accf28570ef84d24ddfdf1afef3bbf69bc8",
+  "src/wave2/func_001861d4.c": "1360318059aa48a572f5783a972b90190dff21cd5c695837e6f18173af108e6c",
+  "src/wave2/func_00187818.c": "1eb328265fab62a04ad7e7fd9090c7807f37aad3ef3c4c1cb9a6ffba1d0febff",
+  "src/wave2/func_0018f0ac.c": "b8f6d14ec2cb70159b8780ab449712b56fe9aa9aa08345815c39612ea051b099",
+  "src/wave2/func_00190ae0.c": "e5e3c442c3b5f45b1ce6b433568bd8f0289bc3fb4016ac12147fbe30bb343a70",
+  "src/wave2/func_0019cff8.c": "d6c2dd221f0e102621018f15eeb5f5abd9fb0533a40d80e54e8095be644681df",
+  "src/wave2/func_00110634.c": "a262d3accf77d6df99e8578c71986d7025476970fa06caeecb02b51881112426",
+  "src/wave2/func_00118074.c": "9ec18c612ca95dbe009c81b3df3ceacadcd1257296b28ba7d73dad979b795b6b",
+  "src/wave2/func_0011d260.c": "73441850704d05200674c4f68476e366dc563fefcb6f9370ca85696a34e3d30c",
+  "src/wave2/func_0011d2f0.c": "ccbb727758674fc5ffd8d85843316dffd7a94df6015b30e710ec95228e3936e5",
+  "src/wave2/func_00126f5c.c": "b5d91a4441a23395b9d850bcaf7440f398d57e513210af2df983bf92e546dffc",
+  "src/wave2/func_00127294.c": "c34bbf154e41ac6f09d7590a242f34253ec77fa3491fda6990d6338b1a7d433d",
+  "src/wave2/func_0018ce64.c": "bb6ff988076ba3d211ce2109e1942475f933c991a5546257ed4b04cd0a4c3322",
+  "src/wave2/func_00190adc.c": "3553b65425c40f74ef78137235655c72f2c2f16347f20d9956dc660507e6e9cf",
+  "src/wave2/func_0019ceb4.c": "87d7e2948322370c2972ebc126512ff14150168b2f9e8391d16d62aab38392da",
+  "src/wave3/func_001245b0.cpp": "ee1bfba5f478b43dac2ec9372c81e3634f53599b5ced0021d1dd6b0365b9837f",
+  "src/wave3/func_00130e24.c": "8fb9c3a21bca704ae85cf325eb68d2887e96fb2e923dd19e7f5e8bb023bcd4b1",
+  "src/wave3/func_00196a94.c": "9c643d3d213fde4b14e98d29eafaf438f7430cc0aeedee5115a7af89c4777e17",
+  "src/wave3/func_0019b8e4.c": "472f71017e916f85414a4277cea6a8c71b7c91487946f45a7276076a0be6f1b7",
+  "src/wave3/func_0019f170.cpp": "4a4364a839bd5055131b80b536d013dfb36c061e058d5ecff795d7c5c52811d4",
+  "src/wave3/func_0019f6a8.c": "c8feb1bcf9d81646a8480dbdc9cf4274e242bc1421cd83de2fe8278a81374399",
+  "src/wave3/func_001a0094.c": "a7f28020e40240ac74a12a015c34bc00006e5292328936cab669f92f0e51e381",
+  "src/wave3/func_001acc18.c": "9b1c52d824a2be64a302cd1c73b7f5ecf6f1eed4815712543352853972dc013d",
+  "src/wave3/func_001aff90.c": "1adbdb767890da04aabd9af2a0ca861ec947abe9cc5cef49728dc8124492008c",
+  "src/wave3/func_001b3340.c": "f5bb540cb051db7f3342085d858115426ed3c100a839bc1000ca9ead2cd49ee4",
+  "src/wave3/func_001b3c08.c": "59b0aab6c9b2cc80775c19ea2824566659cc5ed2d3831cb0f30de95f59f4ed2d",
+  "src/wave3/func_001c4568.c": "006f0f21df119d325d3f88ef451729247676ec0b63bff092375678ef268755d1",
+  "src/wave3/func_001c47b4.c": "7e35d2da776e6dae263193b91cbb5ba5f3dc6829441973dcd880f8290f3525af",
+  "src/wave3/func_001c5198.c": "7030abf8d359278f84365e840d7a26d5e408c5cac181300161bb205416d02725",
+  "src/wave3/func_001c519c.c": "3524a70ed37e2dd3f43103aa895bfea5233133e0fab72847ed9fb2365d425738",
+  "src/wave3/func_001c51a0.c": "8fb696c25068981441f4db73dd3bf51c03c7b450c82fe6f94ad2467736757507",
+  "src/wave3/func_001c5760.c": "5f8a0a3a0037c3a7fa6087957b1e6d39e3a45df07597de5f4a33bf898eae0e91",
+  "src/wave3/func_001c5a98.c": "1eeabb431d3505cfc5f3c6f4c0bed2a0d794dd04122c28b4c333164db561febb",
+  "src/wave3/func_001c5e48.c": "638ec4c7faad87b9293a49b19b88c24b92739062a0a9c81e914ef1e05873bb20",
+  "src/wave3/func_001c65a8.c": "3c6355cbd204736f011fd6fb9fbf17d12cd3de668abe6fe56774026d2027584e",
+  "src/wave3/func_001c6ad0.c": "1ec4fa6d126dc3b49fcb6e60a7a8ab64c6b8b22f4f5ee101aac2ac1d196eb717",
+  "src/wave3/func_001c6ad4.c": "2c134a782a2511127930fb4ec66b0b98101e877bff5a38885620dcf176e773f5",
+  "src/wave3/func_001c6ae0.c": "bc2b0286f7893c617feb1baaf17806c56c51417becdceb4e1aff7e7125b7d41f",
+  "src/wave3/func_001c6b3c.c": "4d702c6074ab475a319324e72d9b015c0f0d1b4104f1a9551f36b34575651d9b",
+  "src/wave3/func_001c73c0.c": "89cd1b1b57c7638ebd15234f646619917bd837616dde8c840a358813dd0b3c79",
+  "src/wave3/func_001c73c4.c": "dcb2f25323278abaa045b95176fcdf1b0149f891742636ef8a31d1cd355d743f",
+  "src/wave3/func_001c73c8.c": "6fcb90995aa2dde91b27f762f18e54f392d01decb5ae3e39c2984dd22fe3506b",
+  "src/wave3/func_001c7e18.c": "dc782d4cd370d1d08b16b909f85f64d13b3bd20ea187bc4250968271268ea08d",
+  "src/wave3/func_001c7f1c.c": "3ca90eb2f0a154ab6a752048c21ec74746512535c9a40710a6204ffdfee19e2f",
+  "src/wave3/func_001c8890.c": "ddf2a95747b30e4e29b95cb5ce6d31429393e9df5cca55532a514161dadce8a2",
+  "src/wave3/func_001c8990.c": "a6a5fa9ce068271e91b6f6830cd5148330b3ef132ff6ac69b7f090263b7c2817",
+  "src/wave3/func_001cd43c.c": "6d96c5c7531c8150aa7593fb8cc3a3e3058c793deea6ec7e53964316fd095883",
+  "src/wave3/func_001cdaa0.c": "19cbeec3aceac1a69fb7426a3dd4a38dab30c226a0ef4cf2749738d872b15cba",
+  "src/wave3/func_001cfd3c.c": "657d66731a6068b4d7cfc1fc0a7d68c393430d9f2adc1f5857b6526f1905734f",
+  "src/wave3/func_001d2b7c.c": "06bdcd533ddfa94b8987d03c028fcd1e9ee5fbe92842a89d58b8a0bca4c2e61f",
+  "src/wave3/func_001d2cdc.c": "c21dd1adeea2744529c93a91627796afd5a8d8556aa99604c581cdca5a961da6",
+  "src/wave3/func_001d38d0.c": "bd2e9c06f338b3b3b68c74f39ad9c4b7c88e0c62c11d4932d78d7d18d07d7063",
+  "src/wave3/func_001d3d28.c": "e011ccc4f3793421797347da1cad5582fc6da09360ea602b63d53645e643dbbd",
+  "src/wave3/func_001d3d2c.c": "5962644ae437f8ddc36f7fbdd2b3e279fb6ee1c7c5d672547ff1796553e535cc",
+  "src/wave3/func_001d400c.c": "2afa9848975e739499d67d9cca428b3d35c2268fc98cf87c4ddec348677c6ee9",
+  "src/wave3/func_001d4338.c": "3ebd26ce555fbc485bb6242e8257f94e25af76789943b8fd2e33b971496e0ffa",
+  "src/wave3/func_001d433c.c": "8cbad21cafe5f841ca8c52d4da5aee075cf2c976b0338b538990370072eb6bbb",
+  "src/wave3/func_001d4acc.c": "d541ac70702989cfe06ee04719781c1507ffe96985a842304c45cdee158c6329",
+  "src/wave3/func_001d4ad0.c": "588cd9998bf8b71388149a30e85c2e1864a5126e1ba3c9772784d587b1ca6337",
+  "src/wave3/func_001d88ec.c": "ebd6a92bf2d1f2dc1ff02b1a02c2429036f7732b720308b482c398ce446cd5fe",
+  "src/wave3/func_001d9a30.c": "6201295101864bb7fb0d5ea150613c1825725f432a037cbfff1ba2529bf03537",
+  "src/wave3/func_001d9b90.c": "37499fd9c7dfa3f02af95b3b63364ecefcc4f70a3cf656ff15f0faf0ab0079d2",
+  "src/wave3/empty_functions.c": "f2180f7c094ec797160c60b860e45c2d3904fffec85ee2dd12996514b89702b4",
+  "src/wave3/func_001748b8.c": "1ca19b94fded8360edfb2a4d457d37ec2e8aa8e0dda9c0e467c35087fd404e8a",
+  "src/wave3/func_001ef888.c": "de9715abf85cc68ebac23d983e86cbd41c74ac9506c09f29e192449c11b367af",
+  "src/wave3/parameter_values.c": "a752e272615ec84cca52978be74d4ac8ef4584e4dba12ce466fb44c5bfaf42de",
+  "src/wave4/func_00100078.c": "c8111b0ed1d8fb58fc8c4f67ec55a81fbf13b38e394d04772d2702f7686ce344",
+  "src/wave4/func_00100d68.c": "502e6f8a375a253c827b1259c3611c7133ddfe901267fcfa65a6f4eb5332a1d7",
+  "src/wave4/func_0010c338.c": "d5b1aa6be8310499799c1d79492f5cf13fae14943372380068f69de078b38824",
+  "src/wave4/func_0010c37c.c": "218d0e3233f9facd3bf401ec348a2fcf13c55d0acb911831bae814173d9dff43",
+  "src/wave4/func_0010e67c.c": "986da15ce7a886a90f6ccf70ead8f8fd0566d85196965cea9b3d78850e78e765",
+  "src/wave4/func_00110aa4.c": "18f3ac829faac20cc79bcecf70341052ec0df47eb7f6053a89de2145899759ac",
+  "src/wave4/func_00114fa4.c": "a9dc457e1178d2ad172401fd1f187d4746ae875526255bea567f48ebdc1886d9",
+  "src/wave4/func_0011ef48.c": "076940586d223db60e179ff8f37ebe8478ae24c28d104d3d57859f868c0787e4",
+  "src/wave4/func_0011ef54.c": "9e6ed786f83237d865048279a8d622b3efe13b2ea056bde5e33e689a17820a1e",
+  "src/wave4/func_00121764.c": "6510f45bfd73858293c07444a38221d44bd106eef8e02fc1abee2b88c3566c9b",
+  "src/wave4/func_001217b4.c": "38ca7513116aec7fc30fef7d46e08a80bac1bd0363d8ada735db237fdcd10800",
+  "src/wave4/func_00121bc4.c": "a6967874ee6fb87223100cddf05d53b6bccea09a136f65abc1ea15d9a2dc6a2a",
+  "src/wave4/func_00121da0.c": "d972069d35ccc83d0057b8734fb9ed80e2456c19f360ed7bf5000801636c0eff",
+  "src/wave4/func_00121ddc.c": "cc2062e9be3f17d2704eacc5f633c7c1516b255ab9e2ecef8b42a173309e0494",
+  "src/wave4/func_001224a0.c": "ef25ded32a14842e8b1f5e7c6b780439cea6e29ba5c9223e32d980aea2211d33",
+  "src/wave4/func_001224fc.c": "18e2cbc652ef81a6248d0e51280ccae46d8ef5cbd0e5fd7eb6606f710c5cc01a",
+  "src/wave4/func_0012250c.c": "046b12f086b85c25b28c844063f7f72a33bf1567e80fd3e3ea0d2f44df7270aa",
+  "src/wave4/func_00122788.c": "696ee2a6d64866063d1a3bbcd4c8b954861caa5e163cf9e324b401ef5b1a4d0a",
+  "src/wave4/func_00122890.c": "40c169ad6bda87918b9cbadae5ec1287147bf62f90381b5044bd5358329e971f",
+  "src/wave4/func_001228bc.c": "911ba2003bea6b80e926cb12fc183a9f7c16901bf69f01a453737ba53661a599",
+  "src/wave4/func_001228d0.c": "cfd8e8421582c379f9931742f271fed6f975664c11815d92a7a166456e9c4b66",
+  "src/wave4/func_00122984.c": "2a4064c679688069365cae2a12f9438e444bcdc0be751cc592c8cde37fb2d7b5",
+  "src/wave4/func_001229b8.c": "ffbbe091b2073976ed4956562146ceb6c05e4d50d2766747128fbe44d6d82090",
+  "src/wave4/func_001229d0.c": "972a58654dc5f8a74194007adfbb485bcef98fdb2364a189745fc40f1151cf3b",
+  "src/wave4/func_00122a1c.c": "17f1da4878891650fe545f9ef88d1945a46940ba894d8a5ed4b3fe2c9bba493a",
+  "src/wave4/func_00122a68.c": "5d046f2a1bd0fd5005a3c984619fe11ef9db22d289e1a46242cbac9ed7e1d5f2",
+  "src/wave4/func_00125b50.c": "664b9823348e77b0ae851a9d8d703976efdf6faab19003c540b5814a498ed191",
+  "src/wave4/func_00125b54.c": "53c91dfe49109f8e9ca8697f2e1222bb474665100c1d546e7416637fcb7f1589",
+  "src/wave4/func_0012d5c0.c": "95dd50749c4f2b55032610ae76ecf3fbd5bf13470858a9ae38b5820fec4bca64",
+  "src/wave4/func_0012d62c.c": "555420ee6d60e51b928342a7c40b505f0df8c51ef50d33c216142a90002c454e",
+  "src/wave4/func_0012f518.c": "2c7388975f15d8c733c9f9180b1b3fb1516248ada58324abcaa3281bbd8a67e2",
+  "src/wave4/func_0012fb38.c": "6bb0e06813e8177985c172049dcdb90af84f2bbc15021accbc9dab9cba43ccfb",
+  "src/wave4/func_0012fb48.c": "2f1313ab8f8313a812a9180e85ab2c92597f8214f0ce2a01eece19b3fd056d0d",
+  "src/wave4/func_001363b0.c": "fe071a7a7993d60395d9939ac904701f2d5962173afe14e29db1cf81e1a918cc",
+  "src/wave4/func_00136404.c": "77dbe4044571f9edbd64e7ba46355d8bb547221cd791f875824c0d3f27451bda",
+  "src/wave4/func_00136858.c": "0ff1543312c021649f2b01a9d273f598c2720388c4884933145926597ec262a2",
+  "src/wave4/func_0013706c.c": "34ac967744215f14ce27d3fb87f09dbbf0395bfa6b496f1ee754c16c6ec99bd3",
+  "src/wave4/func_001370ac.c": "9b056ad9741135498854f189ddb8a908a63d5811711d44bfadf753dbf2d15f79",
+  "src/wave4/func_0013714c.c": "fe9d05e8a42416a715fb9c835671e00d80205d522b72ef1a661bb53ab49681d9",
+  "src/wave4/func_00137150.c": "aa8862828a26d109f074f50872defcdc60e93789c28bac0e6e82ef739d678b01",
+  "src/wave4/func_0013776c.c": "4b659ecca4a9d218fadf108860e18cf5c289ffd641e4fba317f5dc4f5fc6ab4b",
+  "src/wave4/func_001377a0.c": "03b0f0432f6c606c3dad6c4bd4b819d5da8e6d39bb4a0644517dd7d236285cbc",
+  "src/wave4/func_001378d4.c": "dc002c2f4b9de34e2d61922aa819cbf648ac06707fca84b3d9562d6d3b897831",
+  "src/wave4/func_0013e7d0.c": "c6a6108ace5a015f26de63d56d7e7ce4b2e730f2f370b60d480c2356cb685e94",
+  "src/wave4/func_00141c70.c": "c54e32639922e9a288e2cde317bff1d10ce257dc83bb333aeaac60640a0e398d",
+  "src/wave4/func_00142640.c": "fd74c57500b156dc29e8fd76b23998816dcdbc60d0957b5718f73df1bec05eaa",
+  "src/wave4/func_00144220.c": "e7ce77d7d92f457db2f683afeba1cbd4dfbd551e369e704bbccccedefc581c4d",
+  "src/wave4/func_00144224.c": "1eeb50f2163d5c9257d5cc9bacb584c66f6a0d2685ab657384c87b1082ec5da5",
+  "src/wave4/func_00147994.c": "cf2db1585dcfce84b63d6a45159ade4688ede5fe397ddd326d32b1fa86d13b0b",
+  "src/wave4/func_0014a988.c": "9e9c087c779dc3bc06c32af5af23c034781f0501c4fa576d7cbd7e823eeca8c7",
+  "src/wave4/func_0014a9d8.c": "70c97f333c805cdcdbc2058ea9f904fdc6779a094543db2331e6a74ee158bf87",
+  "src/wave4/func_0014c338.c": "e7a908d2a783298380365f782547a93e0a3dd045487b2466ba35c5baf75961a8",
+  "src/wave4/func_00156de8.c": "961bbc3ac4f6c02bd3e79f55e5fa628c750737e1986749a9eed6e41d23a59003",
+  "src/wave4/func_0015e2b4.c": "81550dc8313ab07b904bdb02b7fa2035cd15a374aeab481f0a789f35f5d6e734",
+  "src/wave4/func_0015e31c.c": "6a8b9c843241f7f3ff994616b01b163616f3a6b6bad5cff324b24a6bb98084a9",
+  "src/wave4/func_00166eac.c": "f6f047c950d6f62277778150a5132737a894fadcf3c25fa70d9553e18ae59785",
+  "src/wave4/func_00166f1c.c": "701347f1b1dcb7fcd6d075d29af8981341189d62a87b4ae78bc88804a74fe64f",
+  "src/wave4/func_00169874.c": "abe9facb74816b5e157bd05042ac850f79c8abf09a55bbfc2befe04add68e1ab",
+  "src/wave4/func_0016a994.c": "19aab19562edc839e0d94a7d692996388dc84066bdced816189a27bd2f40b7f5",
+  "src/wave4/func_0016f39c.c": "72b2c79ed0ee8f39e218afddbf0653f1ca8bdd98b9b984da1bd7201e925ceba6",
+  "src/wave4/func_0017e358.c": "1078605f59d56dc2467ae4c15c69a4bd28006d9903d8a064d4fb6740e9fd368c",
+  "src/wave4/func_00181e40.c": "89ba27deb766c0ca08f1d2ef1f83afb579359fb4160b6fdb6755a8044cd66e66",
+  "src/wave4/func_00182718.c": "c759397b16a2e06b4aaa38aab2db22ef2794a37c0974afb40661707176e3c87a",
+  "src/wave4/func_00183030.c": "1ccae26cad026df51bab160b7acba5ea3710c60dd0cba9c28114d1912705ac0c",
+  "src/wave4/func_001852f4.c": "ed625857cfb3701cecb4b7c28a96522fd287fb0a64bb4c622e2d0c314d954fbc",
+  "src/wave4/func_00185b9c.c": "b5e793ff23651e9d69701b790261e27efa0d10bbf2f458156e64565d45399d35",
+  "src/wave4/func_00186484.c": "1baa9553a003d3c124a9788ea35c51806ab20edf68cfd4bf3a3c3f8005368cc7",
+  "src/wave4/func_00186eec.c": "4e96bfc2c6996940b30316097aa6a23381f307efd3d2c387da242f8324147b87",
+  "src/wave4/func_0018f7ec.c": "d264677614be2ee856e112ddf753f40855f95fdbb88876b7a910ed12511eb22c",
+  "src/wave4/func_0018f7f0.c": "9b444c451dea0db9981bdfdd283444d41d4e66f447cdd6d1d649b27ace0c6692",
+  "src/wave4/func_001900a8.c": "585289d8bd9195d9147032c5fd71edfdac0b19e508552912bfb53315795b13a1",
+  "src/wave4/func_0019721c.c": "4d0252359bf2dc9a280a5297825f042b731141244e96cc351345e2800fe0ae7c",
+  "src/wave4/func_0019dc1c.c": "639aeaeb2b8968bacb40b159c43eca8248eb1ab530413961467a2afcd682f3a2",
+  "src/wave4/func_0019eb48.c": "ebe2d2d296babe2a75be2383ca6e5f05be4093b92fd6be1b2a59ae017282b32e",
+  "src/wave4/func_0019f2e4.c": "7321339818d3bbec7258116c9645c870c9b67b54c52bfccc01baae9bb7429382",
+  "src/wave4/func_0019ffa4.c": "287d15d5f769037d397d25f44d73ce3d29d86b3e8d2ce81f85baacfbe1367aa0",
+  "src/wave4/func_001b472c.c": "890c226a11863b3886e838630f2a51dc921f0dadb5213d9d57b2ff0597b1cfc7",
+  "src/wave4/func_001b54e8.c": "a9368ab8f02f15c4653874250087bedfde586f70327645f23eb8cb02e1f56231",
+  "src/wave4/func_001c3abc.c": "a6e7d838451644f991efda68d81d07386b6290a8a9db46af381f35abc997b3e4",
+  "src/wave4/func_001c5b84.c": "ae8b7f00bb23d91539e18dc18c7fbd33dccae79faf29de651a35a80f28bb1a75",
+  "src/wave4/func_001c5b88.c": "c44207ef59b8b43f5fdf67b74c6f23b0124a735be51e50b3deca7d0afb51cfe0",
+  "src/wave4/func_001c6a34.c": "d83c36fd2199f17f6a8475bab2b7c68b47e86cb71757e365c7c1f8377bdeca2f",
+  "src/wave4/func_001c6ad8.c": "f64f270524b16e38e9dc0143ae303a2c89d4c834bb0363597421aece21717780",
+  "src/wave4/func_001c6adc.c": "3a86dabd7a58a1a7a0ffca6e48cd020144a3db808cb88e4663d9fd1acd45a69d",
+  "src/wave4/func_001d32e0.c": "28ff527548a4f713a70703496382d9a581992189a7349b4e6177bfbc9a6a06bc",
+  "src/wave4/func_001d54ac.c": "311f9b51a36fa0b7ed7bf5449f688cc3b47861a5a30d1b75f34ad13c076899af",
+  "src/wave4/func_001dacbc.c": "4b031d6dbd2c51ec04c27d4c59bb31616caff8cdfcfc93e8a4750ccf5e7a68f1",
+  "src/wave4/func_001dadc0.c": "8277406f4fd87ac5e1dd305c31a710452f2b4756c890238b4c5264ba398c9ba6",
+  "src/wave4/func_001db130.c": "442119f25eddef9edae4f5bcf84e92137de213060a0d2d86f2260735923c6326",
+  "src/wave4/func_001db134.c": "7ddbeb8f244d80459f2e7b01dfc0e34e6b214111dd7303a7da2c50ddc5751e24",
+  "src/wave4/func_001e9818.c": "ae3a1da4d0226cadc14a7a5bfe9fd65b734ab80fee48fed2b08e3163b4f3379b",
+  "src/wave4/func_001eafa0.c": "7c600358667c75d8b37948596d7bfdd241bd11011edef3e3976c18ce55a7397d",
+  "src/wave4/func_001ef880.c": "2cde6264675c057a5127c6f9dde1de796217ad1367166cd6de49c526b30684d2",
+  "src/wave4/func_001ef884.c": "982db95eb1dfb9b374a6bf26e5bca3ac6d439a3946aa33d349e26a40c78b9ec8",
+  "src/wave4/func_00122500.c": "2e051c0e680ed24e10d2353c6f19ec1f24f2c0bae9cab5e2a2e152044048279b",
+  "src/wave4/func_00122510.c": "9c205297e8cc5bcf3da89405fa537efbb8d10c829ca368559b12816e7020727a",
+  "src/wave4/func_00136448.c": "b83380be0fef17f980466fe1d2a12e66a8cd72764c00b55e8e4ce824516133c6",
+  "src/wave4/func_00146ff8.c": "d3799268f8fd6da75de23e59c2b22bcb77dd50c22afedf1972eed5182a938b86",
+  "src/wave4/func_001470c8.c": "b86716aff2c6d35134cb2a8d2b371a90512c7f40fa2eb6beda6e69e4bd295aa9",
+  "src/wave4/func_00181394.c": "876772af7ad039692c94566751e1c2356b4e41487ca81869090b4a679bafc0a4",
+  "src/wave4/func_00185cc0.c": "0a6572eff7da8d416ae25aa5d9b02d548a9e36fdfd7854fd440c2b9b57486379",
+  "src/wave4/func_00185d1c.c": "f3986cde2e2437f9c901759244ce30ca2c25f685313d3b31646eab08c7d9c37b",
+  "src/wave4/func_001f4fac.c": "370f2ea47b6871d12193ad4dbb1ef559976c4642e1b09448fa8bbdf39266eadb",
+  "src/wave4/func_00215ec4.c": "634349a870194df94cfa83918f755416817019d5bd575dd85c7b483b7d13f055",
+  "src/wave4/func_00216140.c": "75ab6e48931847b0df2176d3578c3c600084cf9a37c29773b6dbc530394a0a2c",
+  "src/wave4/func_00216ba4.c": "0cb6bff690814e7a63de65b73bf44a6c709735ab72c4bb0c28309702407348ba",
+  "src/wave4/func_00216e4c.c": "eadef9d18ea3accd01ba465fb4d2b814affe974981457f6de7e36f497bc1d8c9",
+  "src/wave4/func_0014b174.c": "bd2e7e2146b6e8f092b747e1a19ce106e785c19cead7678b5cb8906629994e14",
+  "src/wave4/func_0014d784.c": "1c0dfb474d7c2a49f860e010336e7e5a0ef97c385137a67c9fbfdeb95e1d19ac",
+  "src/wave4/func_0016a068.c": "9300f7c0a23f912ee2544416ad193e8bd1a9917225c6cdbf88ccbdbaa4621a39",
+  "src/wave4/func_0017da3c.c": "2d92400f3898f13b0c5529f89000285f8856ec63e0993457643c4e056766f7c1",
+  "src/wave4/func_0017e7bc.c": "cc2f23da15e23b550e051d6b16e35036770da05ed0ac151a566e648beb226005",
+  "src/wave4/func_0017e7c4.c": "abb9c84a6bd69a328fd543c0dfb0d1eac5f1354c2a8a9293137ccd99b79fd811",
+  "src/wave4/func_0017e818.c": "b48504ea5245ed97e2e8960520d968d2a4a6b934486b9f830392727efa2b8867",
+  "src/wave4/func_001d3898.c": "e595710587d665a779da1d8725fc2bb7a26e39635cb8741cd3722e90fe08bbec",
+  "src/wave4/func_001d9920.c": "d8bf6cb1e05d3532edf52546e43166ae9951e1474314bed9b2c4f22675b47b59",
+  "src/wave4/func_001391d8.c": "d8cd5738ea30f6258fd64b7178c089ac196e534e50bcb0e7bdcbf881e095e005",
+  "src/wave4/func_0013e6b8.c": "2f6b388544e1e08bb9fdf78ca6315e230ac2b5df76ba4f86ecf211ff97fd5063",
+  "src/wave4/func_0013e6d0.c": "c7e404ddf21c287ce84864810643099304ca7757e95cd2cfc67b08d68aaa6567",
+  "src/wave4/func_0013e71c.c": "aed8634d0fadc17af385b9e74a0800e1e07cc0eb248d1667ad815bc19a40218c",
+  "src/wave4/func_001424c0.c": "1b33306b088b1bfeff7b019ac1a29fe44a19b639600cd4379ea76fd50a8a2df2",
+  "src/wave4/func_001424d0.c": "184aeb89d2004bd9ce3f3adca8417a785561635f620246096e2a7d8840bd7e48",
+  "src/wave4/func_001440ec.c": "4c3882fc6d6d7e819c60cd0426c5af273942b69745b1bdae9ae51dfd21907e01",
+  "src/wave4/func_0014a2f0.c": "8453b899c4b9ff614fbbd1db817186b7459bcc907f9e12d98cabafcd64682c28",
+  "src/wave4/func_00182b5c.c": "55a556d75dfdf9ca29db4937f79bf042e4ec61311693809ff985de498af5840d",
+  "src/wave4/func_00183c54.c": "62dc6fc1ab88268029ea3122afbec466a3579448c63f55d3b33edb885fc368e6",
+  "src/wave4/func_0018d514.c": "0b64a42ff76ed65191f98905877e6a17715ea3f55c660b9229a40f0f5a8e3d1f",
+  "src/wave4/func_0019d048.c": "45cf04899ce8a513570f959c6bd314baebc488eb357b71c2cafec4611eaf653d",
+  "src/wave4/func_0019d058.c": "b50d2f482121f3e51b1e575f39c759d0ef2b00779a485d814263da018afcb760",
+  "src/wave4/func_0019dc04.c": "ee0c8cf8dfb4522e529ca1048fd50f63764aad071a03c041c89a011e97ff066e"
+ },
+ "headers": {
+  "include/game/archive.h": "039b88d9834980b284f0882ebdada4286d36efdbff292f23e460d60595c384fe",
+  "include/game/bss_0049ecf0.h": "4181fc0caa63ef9583e3c00b86520784028f570ca149ef23c77454b2ed8555b3",
+  "include/game/functions.h": "a9426df700ad3bafe5e3d8fc4b4340ed3c422fda0d006f921716a750a5ac5d71",
+  "include/game/graphics_state.h": "b4e643e0c2a0e285557f54ac9460f1259303fd180cf16631a18f155b28a795a5",
+  "include/game/item_pages.h": "fcdf0170ff46de270b8007716c87b29ae56d5f214ec315bf8a232979dbae8e66",
+  "include/game/render_state.h": "180706210fef038483ccfe9227d4106439a049b72ca7b5bc8ed6100c6e87eefd",
+  "include/game/resource.h": "4457e30d7909e5a53b5c381ede2e6d660e1a3d2e317b1ee6b6cede4f1969f4d3",
+  "include/game/result.h": "d3e9723ddd7a08fa81e968adfdc0bd916bb87bef3022b78b9cd832a62fd3a461",
+  "include/game/runtime.h": "b451c565dbb5f2771081f00b9c77fe39cd82043c732900329549e7c80c1af35a",
+  "include/game/screen.h": "91d56024987ac41ca68380c1a223112a55f69181b576e448d8f076975dfeee73",
+  "include/game/selection.h": "24397723f884451a1e69cb99ce3a7e7673b05e1970b91928d5f7fa143f956aca",
+  "include/game/text.h": "007b55e026ad922371cc94e479a847c9e2054b62eccf4d2ac9fa347600b08f01"
+ },
+ "headers_added_since_prepare": [],
+ "record_sha256": "78f0b7a926f56e20837a2f5dcf08ca5ce7f398e40f2fbc3a09a4c8901a38edb9"
+}
