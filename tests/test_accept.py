@@ -148,8 +148,8 @@ class AcceptGateTest(unittest.TestCase):
         self.review("PASS_WITH_QUALIFICATIONS", row="QUALIFIED", qualifications=["preserved original bug"])
         self.assertEqual(accept.finalize("c001", 1)["reviews"][0]["verdict"], "PASS_WITH_QUALIFICATIONS")
 
-    def test_prepare_records_every_gate_result(self):
-        """The prepare record must show each gate's outcome, not only the overall result."""
+    def stubbed_prepare(self, name, units):
+        """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
         receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
@@ -167,9 +167,9 @@ class AcceptGateTest(unittest.TestCase):
         real_clean_commit = accept.clean_commit
         accept.clean_commit = lambda: "0" * 40
         try:
-            cand = self.root / "config/candidates.json"
-            cand.write_text(json.dumps({"units": [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]}), encoding="utf-8")
-            record = accept.prepare("c009", cand)
+            cand = self.root / f"config/candidates-{name}.json"
+            cand.write_text(json.dumps({"units": units}), encoding="utf-8")
+            return accept.prepare(name, cand)
         finally:
             accept.clean_commit = real_clean_commit
             for k, v in saved.items():
@@ -177,11 +177,28 @@ class AcceptGateTest(unittest.TestCase):
                     sys.modules.pop(k, None)
                 else:
                     sys.modules[k] = v
+
+    def test_prepare_records_every_gate_result(self):
+        """The prepare record must show each gate's outcome, not only the overall result."""
+        record = self.stubbed_prepare("c009", [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}])
         self.assertEqual(set(record["checks"]), {"build_a_pass", "build_b_pass", "builds_identical", "suite_pass", "interfaces_pass"})
         self.assertEqual(record["result"], "PASS")
         self.assertEqual(record["commit"], "0" * 40)
         on_disk = json.loads((self.root / "accept/c009/prepare.json").read_text(encoding="utf-8"))
         self.assertEqual(on_disk["checks"], record["checks"])
+
+    def test_revised_accepted_unit_must_be_reviewed_again(self):
+        """Editing an accepted source in a later checkpoint needs review rows like new work."""
+        self.review()
+        accept.finalize("c001", 1)
+        (self.root / "src/a.c").write_text("int func_00100000(void) { return 4; }\n", encoding="utf-8")
+        (self.root / "include/game/shared.h").write_text("extern long data_00200000;\n", encoding="utf-8")
+        (self.root / "src/b.c").write_text("int func_00100010(void) { return 1; }\n", encoding="utf-8")
+        record = self.stubbed_prepare("c010", [{"source": "src/b.c", "profile": "game", "functions": ["func_00100010"]}])
+        self.assertEqual(record["revised_units"], ["src/a.c"])
+        self.assertEqual(record["revised_headers"], ["include/game/shared.h"])
+        self.assertEqual(accept.new_functions(self.root / "accept/c010", record),
+                         {"func_00100000": "src/a.c", "func_00100010": "src/b.c"})
 
     def test_prepare_refuses_a_dirty_tree(self):
         """Gates run on one committed tree; an uncommitted edit anywhere stops prepare."""

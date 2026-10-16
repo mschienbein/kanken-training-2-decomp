@@ -171,6 +171,13 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
     units = base["units"] + candidates["units"]
     ledger = {"schema_version": 1, "note": f"Accepted ledger as of checkpoint {name}.", "units": units}
     write_exclusive(out / "matches.json", ledger)
+    # Accepted material edited since the last accepted entry is reviewed again like new work:
+    # revised units' functions need review rows (new_functions); revised headers are listed.
+    history = read_history()
+    accepted_sources = history[-1]["sources"] if history else {}
+    accepted_headers = history[-1].get("headers", {}) if history else {}
+    revised_units = [u["source"] for u in base["units"] if accepted_sources.get(u["source"]) != sha256_file(ROOT / u["source"])]
+    revised_headers = sorted(h for h, sha in header_hashes().items() if h in accepted_headers and accepted_headers[h] != sha)
 
     # Mechanical interface gate before any review: declaration/definition agreement, struct
     # layouts, const contracts and header policy across the whole ledger.
@@ -208,6 +215,8 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "sources": source_hashes(units),
         "headers": header_hashes(),
         "new_units": [u["source"] for u in candidates["units"]],
+        "revised_units": revised_units,
+        "revised_headers": revised_headers,
         "profiles_sha256": sha256_file(PROFILES),
         "catalogue_sha256": sha256_file(CATALOGUE),
         "denominator_version": len(denominator.read_history()),
@@ -287,7 +296,7 @@ def validate_review(record: dict, required: dict[str, str]) -> None:
 
 def new_functions(out: Path, prepared: dict) -> dict[str, str]:
     ledger = load_json(out / "matches.json")
-    new = set(prepared["new_units"])
+    new = set(prepared["new_units"]) | set(prepared.get("revised_units", ()))
     return {fn: u["source"] for u in ledger["units"] if u["source"] in new for fn in u["functions"]}
 
 

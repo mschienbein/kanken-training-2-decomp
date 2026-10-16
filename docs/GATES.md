@@ -1,6 +1,11 @@
-# Gate design — frozen v1.3 (2026-10-16)
+# Gate design — frozen v1.4 (2026-10-16)
 
 Revisions:
+- **v1.4** (2026-10-16): revised accepted material is reviewed again. `prepare` records
+  `revised_units` (accepted units whose source differs from the last accepted entry) and
+  `revised_headers`; G6 requires a verdict row for every function in a revised unit, as for new
+  units. Cause: unifying wave 2 needed a correction to an accepted c001 prototype
+  (`func_001795bc` takes no argument); without this, such an edit would be rebuilt but unreviewed.
 - **v1.3** (2026-10-16): headers bound like sources. `prepare`, each review and the history entry
   record the SHA-256 of every project header (all files under `include/`, plus `.h/.hh/.hpp/.inc`
   under `src/`); G7 refuses a review bound to other header hashes or a header changed since
@@ -38,7 +43,7 @@ contradictory COMDAT copies, unsupported relocations, veneer needs, multi-functi
 | G3 | Interfaces | `prepare` → `accept/<cp>/interfaces.json` | any declaration/definition or struct-layout disagreement, const-contract violation or policy error across the **whole ledger**; C++ units unchecked unless `--allow-unchecked-cpp` (recorded; reviewers then check those units' interfaces by hand) |
 | G4 | Two fresh builds | `prepare` | either `tools/build.py` build (fresh: no object cache) fails, or outputs differ. Each build: every credited function an ordinary catalogued function, exact size, equal to the original on its own before being written; no overlapping sections across units; no duplicate global definitions; `code.bin` equal to the original; recompressed `.code` equal to the stored ExeFS `.code` |
 | G5 | Full suite | `prepare` | any module fails (`tools/test_suite.py`, sharded by module) |
-| G6 | Review | `review` | the record fails the schema: verdict row (PASS/QUALIFIED/FAIL + method) for every new function, unique finding ids F01…, severities, verdict consistency (blocker or FAIL row ⇒ FAIL; QUALIFIED or major ⇒ not PASS; PASS_WITH_QUALIFICATIONS ⇒ stated qualifications) |
+| G6 | Review | `review` | the record fails the schema: verdict row (PASS/QUALIFIED/FAIL + method) for every new function and every function in a revised accepted unit, unique finding ids F01…, severities, verdict consistency (blocker or FAIL row ⇒ FAIL; QUALIFIED or major ⇒ not PASS; PASS_WITH_QUALIFICATIONS ⇒ stated qualifications) |
 | G7 | Finalize once | `finalize` | prepare not PASS, fewer than `--min-reviews` (default 1) reviews bound to this exact prepare, any FAIL review, a review bound to other source or header hashes, sources/headers/profiles/catalogue/ledger changed since prepare, history broken |
 | G8 | Ledger binding | `verify` (CI) | `config/matches.json` ≠ last finalized ledger, a credited source ≠ its accepted hash, an accepted header changed or removed, or credit without any checkpoint |
 
