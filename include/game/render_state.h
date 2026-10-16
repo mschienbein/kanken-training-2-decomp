@@ -1,6 +1,10 @@
 #ifndef GAME_RENDER_STATE_H
 #define GAME_RENDER_STATE_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct SlotBlock {
     unsigned words[8];
     struct SlotBlock *next;
@@ -68,5 +72,22 @@ extern struct PipelineOwner data_00242a14;
 extern void func_00126f5c(unsigned *state);
 extern void func_00127294(unsigned *state);
 extern struct SlotBlock *func_0018ce64(void);
+
+/* GPU command/register state block (partial). */
+struct GpuState {
+    unsigned char reserved00[0x660];
+    float clear_color[4];                   /* 0x660 */
+    unsigned char reserved670[0x100];
+    unsigned control;                       /* 0x770 */
+};
+extern struct GpuState *data_00242fd0;
+
+extern void func_0019b8e4(float red, float green, float blue, float alpha);
+extern void func_00196d18(unsigned target, unsigned handle);
+extern void func_00130e24(unsigned handle, void **color_memory, void **depth_memory);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
