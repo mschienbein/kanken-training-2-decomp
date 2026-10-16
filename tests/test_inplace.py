@@ -221,10 +221,13 @@ class InPlaceTest(unittest.TestCase):
         """Advisory: A infers g at TABLE_AT from its literal while the overlay binds g 4 bytes later."""
         a, b, mem = self.global_fixture(TABLE_AT)
         names = {"g": {"address": TABLE_AT + 4}}
-        with self.assertRaisesRegex(inplace.LinkError, "bound to|disagree"):
-            self.link_with_names(a, mem, names)
-        # B alone resolves g by name, so its literal (TABLE_AT) cannot match the binding
-        self.assertNotEqual(self.link_with_names(b, mem, names)[0x100040], mem.read(0x100040, 12))
+        # A's definition is placed at its binding, so A's literal becomes TABLE_AT + 4: a mismatch
+        linked_a = self.link_with_names(a, mem, names)[0x100000]
+        linked_b = self.link_with_names(b, mem, names)[0x100040]
+        self.assertNotEqual(linked_a, mem.read(0x100000, 12))
+        self.assertNotEqual(linked_b, mem.read(0x100040, 12))
+        # and both functions now return the same pointer, as C requires
+        self.assertEqual(linked_a[-4:], linked_b[-4:])
 
     def test_unbound_global_definition_fails(self):
         a, _, mem = self.global_fixture(TABLE_AT)
@@ -240,6 +243,36 @@ class InPlaceTest(unittest.TestCase):
         mem.write(TABLE_AT, struct.pack("<i", 17))
         with self.assertRaisesRegex(inplace.LinkError, "bytes differ"):
             self.link(obj, mem)
+
+    def test_switch_table_label_is_not_a_function(self):
+        """ARMCC's local `__switch$$` label (jump-table base) relocates within its own section."""
+        obj = self.compile(
+            "extern void func_00100100(int);\n"
+            "void func_00100000(int x) {\n"
+            "  switch (x) { case 0: func_00100100(5); break; case 1: func_00100100(9); break;\n"
+            "  case 2: func_00100100(13); break; case 3: func_00100100(2); break;\n"
+            "  case 4: func_00100100(7); break; case 5: func_00100100(4); break; default: break; }\n"
+            "}\n"
+        )
+        self.assertEqual([f.name for f in obj.defined_functions()], ["func_00100000"])
+        fn = obj.defined_functions()[0]
+        sec = obj.sections[fn.shndx]
+        data = bytearray(sec.data)
+        for rel in sec.relocs:
+            if rel.type in (inplace.R_ARM_CALL, inplace.R_ARM_JUMP24):
+                insn = struct.unpack_from("<I", sec.data, rel.offset)[0]
+                off = (0x100100 - (0x100000 + rel.offset + 8)) >> 2
+                struct.pack_into("<I", data, rel.offset, (insn & 0xFF000000) | (off & 0xFFFFFF))
+            elif rel.type == inplace.R_ARM_ABS32:
+                addend = struct.unpack_from("<I", sec.data, rel.offset)[0]
+                struct.pack_into("<I", data, rel.offset, 0x100000 + rel.symbol.value + addend)
+        mem = Memory()
+        mem.write(0x100000, bytes(data))
+        catalogue = {0x100000: {"address": 0x100000, "size": len(data), "isa": "arm"},
+                     0x100100: {"address": 0x100100, "size": 0x10, "isa": "arm"}}
+        linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000))
+        linked = {p.base: d for p, d in linker.link(obj).values()}
+        self.assertEqual(linked[0x100000], bytes(data))
 
 
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):

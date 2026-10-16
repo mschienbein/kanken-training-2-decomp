@@ -125,6 +125,7 @@ class ObjectFile:
         return [
             s for s in self.symbols
             if s.kind == "STT_FUNC" and isinstance(s.shndx, int) and s.shndx in self.sections
+            and not _is_internal_label(s)
         ]
 
     def defined_globals(self) -> list[Symbol]:
@@ -186,6 +187,12 @@ class Placement:
     section: Section
     base: int
     origin: str  # "catalogue" or "inferred"
+
+
+def _is_internal_label(sym: Symbol) -> bool:
+    """ARMCC's `__switch$$` marks a jump table's base inside its function's own section: a local,
+    zero-size STT_FUNC label that table entries relocate against, not a separate function."""
+    return sym.name == "__switch$$" and sym.bind == "STB_LOCAL" and sym.size == 0
 
 
 def _is_thumb_function(sym: Symbol) -> bool:
@@ -288,6 +295,7 @@ class InPlaceLinker:
                 placements[sym.shndx] = Placement(obj.sections[sym.shndx], base, "inferred")
             elif prior.base != base:
                 raise LinkError(f"{sym.name}: bound to {bound.address:#x}, but its section is placed at {prior.base:#x}")
+        fixed = set(placements)  # addresses decided by the catalogue or by bound names
         # Infer data sections from the original values their references resolve to.
         changed = True
         while changed:
@@ -307,11 +315,14 @@ class InPlaceLinker:
                     if prior is None:
                         placements[sym.shndx] = Placement(obj.sections[sym.shndx], base, "inferred")
                         changed = True
-                    elif prior.base != base:
+                    elif prior.base != base and sym.shndx not in fixed:
                         raise LinkError(
                             f"{obj.sections[sym.shndx].name}: references disagree on its address "
                             f"({prior.base:#x} vs {base:#x})"
                         )
+                    # A reference into a section whose address is fixed (catalogue function or bound
+                    # name) that disagrees with the original is a byte mismatch in the referencing
+                    # section, reported by the comparison; it says nothing about placement.
         # Every global definition must be bound and sit exactly at its binding, so a definition
         # reached through a section symbol and an extern reference by name always resolve to one
         # address. (Static definitions are local to the unit and need no binding.)
