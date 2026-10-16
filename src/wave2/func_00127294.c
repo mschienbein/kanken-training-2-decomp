@@ -1,3 +1,5 @@
+#include "game/render_state.h"
+
 struct RegisterState {
     unsigned char reserved00[0x770];
     unsigned control;

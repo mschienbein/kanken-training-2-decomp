@@ -1,4 +1,4 @@
-#include "author_types.h"
+#include "game/render_state.h"
 
 extern void func_0019cecc(void *destination, unsigned size);
 extern struct PipelineConfiguration *func_0018c6d4(void);

@@ -1,4 +1,4 @@
-#include "graphics_state.h"
+#include "game/graphics_state.h"
 
 int func_001847f8(void)
 {

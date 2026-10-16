@@ -3,11 +3,12 @@
     python tools/collect.py --dest src/wave1 --candidates config/candidates/c002-wave1.json \
         scratch/authors/*/RESULT.json
 
-For every RESULT.json row with status "match": recompile the recorded source under its recorded
-profile and compare in place (tools/match.py's oracle). Only functions that re-derive as MATCH are
-credited; a source whose credited functions don't all re-derive is skipped and reported. Each
-credited source is copied into --dest (refusing name clashes and functions already accepted or
-claimed twice). Writes the candidates file and prints what was taken and what was refused.
+For every RESULT.json row with status "match": copy the recorded source into --dest, recompile
+the copy there (so includes resolve as in the build) under its recorded profile, and compare in
+place (tools/match.py's oracle). Only functions that re-derive as MATCH are credited; a source
+whose credited functions don't all re-derive is removed again and reported, as are name clashes,
+non-creditable catalogue kinds, and functions already accepted or claimed twice. Writes the
+candidates file and prints what was taken and what was refused.
 """
 from __future__ import annotations
 
@@ -67,40 +68,47 @@ def main(argv: list[str] | None = None) -> int:
             if profile is None:
                 refused.append((src, f"unknown profile {entry['profile']}"))
                 continue
-            obj = Path(tmp) / (src.stem + ".o")
-            try:
-                toolchain.compile_source(profile, src, obj)
-                rows = {r["name"]: r["status"] for r in ctx.compare(obj)}
-            except (toolchain.ToolchainError, inplace.LinkError) as e:
-                refused.append((src, str(e).splitlines()[0]))
-                continue
-            bad = sorted(n for n in entry["claimed"] if rows.get(n) != "match")
+            target = dest / src.name
             classified = sorted(
                 n for n in entry["claimed"]
                 if ctx.functions.get(int(n[5:], 16), {}).get("kind", "function") != "function"
             )
             clash = sorted(entry["claimed"] & taken)
-            target = dest / src.name
-            if bad:
-                refused.append((src, f"does not re-derive MATCH: {', '.join(bad)}"))
-            elif classified:
+            if classified:
                 refused.append((src, f"catalogue kind is not creditable C: {', '.join(classified)}"))
-            elif clash:
+                continue
+            if clash:
                 refused.append((src, f"already accepted or claimed: {', '.join(clash)}"))
-            elif target.exists():
+                continue
+            if target.exists():
                 refused.append((src, f"{target.relative_to(ROOT)} exists"))
-            else:
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(src, target)
-                taken |= entry["claimed"]
-                units.append({"source": target.relative_to(ROOT).as_posix(), "profile": entry["profile"],
-                              "functions": sorted(entry["claimed"]), "author": entry["agent"]})
+                continue
+            # Re-derive from the copy at its destination, so the include context is the one the
+            # build will use (a header next to the author's file is not there).
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src, target)
+            obj = Path(tmp) / (src.stem + ".o")
+            try:
+                toolchain.compile_source(profile, target, obj, cache=False)
+                rows = {r["name"]: r["status"] for r in ctx.compare(obj)}
+            except (toolchain.ToolchainError, inplace.LinkError) as e:
+                target.unlink()
+                refused.append((src, str(e).splitlines()[0]))
+                continue
+            bad = sorted(n for n in entry["claimed"] if rows.get(n) != "match")
+            if bad:
+                target.unlink()
+                refused.append((src, f"does not re-derive MATCH at {target.relative_to(ROOT)}: {', '.join(bad)}"))
+                continue
+            taken |= entry["claimed"]
+            units.append({"source": target.relative_to(ROOT).as_posix(), "profile": entry["profile"],
+                          "functions": sorted(entry["claimed"]), "author": entry["agent"]})
     record = {"schema_version": 1, "note": f"Collected from {len(args.results)} author results.", "units": units}
     args.candidates.parent.mkdir(parents=True, exist_ok=True)
     args.candidates.write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"taken: {len(units)} units, {sum(len(u['functions']) for u in units)} functions -> {args.candidates}")
     for src, why in refused:
-        print(f"refused: {src.relative_to(ROOT)}: {why}")
+        print(f"refused: {src.relative_to(ROOT) if src.is_relative_to(ROOT) else src}: {why}")
     return 0
 
 

@@ -1,26 +1,5 @@
 #include "game/bss_0049ecf0.h"
 
-struct Command {
-    unsigned char kind;
-    unsigned char reserved01[3];
-    const void *source;
-    unsigned size;
-    unsigned flags;
-    unsigned char reserved10[12];
-};
-
-struct CommandQueue {
-    unsigned char reserved00[4];
-    unsigned char *base;
-    unsigned char reserved08[4];
-    unsigned offset;
-    unsigned char reserved10[4];
-    unsigned committed_offset;
-    struct Command *commands;
-    unsigned char reserved1c[4];
-    int count;
-};
-
 extern unsigned char *data_00242fc8;
 extern void func_00192720(void *destination, const void *source, unsigned size);
 extern void func_00195f7c(void);

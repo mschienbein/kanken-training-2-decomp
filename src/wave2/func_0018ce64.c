@@ -1,4 +1,4 @@
-#include "author_types.h"
+#include "game/render_state.h"
 
 struct SlotBlock *func_0018ce64(void)
 {

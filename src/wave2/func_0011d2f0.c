@@ -1,7 +1,5 @@
-#include "author_types.h"
+#include "game/render_state.h"
 
-extern void func_00127294(unsigned *state);
-extern void func_00126f5c(unsigned *state);
 extern void func_00186fbc(unsigned *state);
 extern void func_00126f68(unsigned *state);
 

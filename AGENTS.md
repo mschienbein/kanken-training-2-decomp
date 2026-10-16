@@ -48,7 +48,11 @@ only as a recorded qualification. Preserved original bugs carry an `ORIGINAL BUG
 2. Write C in your scratch directory. Name functions `func_XXXXXXXX` (or a `config/names.json`
    name); declare callees and globals as `extern` with the `func_`/`data_`/`bss_XXXXXXXX` names
    the in-place linker resolves. A global you *define* must also carry its address name (or be
-   `static`); unbound global definitions are refused.
+   `static`); unbound global definitions are refused. Types and declarations go in the source
+   file itself or come from an existing `include/game/*.h`; never a header next to your source
+   (it is not copied — `tools/collect.py` recompiles each source at its destination and refuses
+   what no longer compiles). The integrator moves declarations shared between units into
+   `include/game/`.
 3. `tools/match.py <file.c> --profile game --out scratch/<agent>/...` until every function
    reports `MATCH`. `EXTENT` means the bytes reproduce the original but the catalogue boundary is
    wrong: report it to the integrator, do not pad the source.

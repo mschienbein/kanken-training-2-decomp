@@ -1,7 +1,6 @@
-#include "author_types.h"
+#include "game/render_state.h"
 
 extern struct SlotList *data_002426d8;
-extern struct SlotBlock *func_0018ce64(void);
 
 int func_00118074(struct SlotList *list)
 {

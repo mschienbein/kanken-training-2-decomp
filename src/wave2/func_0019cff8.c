@@ -1,4 +1,4 @@
-#include "graphics_state.h"
+#include "game/graphics_state.h"
 
 void *func_0019cff8(unsigned region)
 {

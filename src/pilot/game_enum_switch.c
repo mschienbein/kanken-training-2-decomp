@@ -1,10 +1,10 @@
-extern int func_001795bc(void *object);
+#include "game/selection.h"
 
-int func_001718ec(void *object)
+int func_001718ec(void)
 {
     int result;
     /* ORIGINAL BUG: out-of-range selector leaves the result uninitialized. */
-    switch (func_001795bc(object)) {
+    switch (func_001795bc()) {
     case 0: result = 1; break;
     case 1: result = 2; break;
     case 2: result = 3; break;
@@ -21,11 +21,11 @@ int func_001718ec(void *object)
     return result;
 }
 
-int func_00171c7c(void *object)
+int func_00171c7c(void)
 {
     int result;
     /* ORIGINAL BUG: out-of-range selector leaves the result uninitialized. */
-    switch (func_001795bc(object)) {
+    switch (func_001795bc()) {
     case 0: result = 2; break;
     case 1: result = 3; break;
     case 2: result = 4; break;

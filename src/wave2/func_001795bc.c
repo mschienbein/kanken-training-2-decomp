@@ -1,3 +1,5 @@
+#include "game/selection.h"
+
 struct SelectionState {
     unsigned char reserved00[0x52];
     short selection;
