@@ -86,6 +86,19 @@ def source_hashes(units: list[dict]) -> dict[str, str]:
     return out
 
 
+HEADER_SUFFIXES = {".h", ".hh", ".hpp", ".inc"}
+
+
+def header_hashes() -> dict[str, str]:
+    """Every project header a unit could include: all files under include/ plus header files
+    under src/. Bound like sources (gate G1, docs/GATES.md v1.3); over-binding unused headers is
+    deliberate, since one header edit can change any number of objects."""
+    paths = [p for p in (ROOT / "include").rglob("*") if p.is_file()] if (ROOT / "include").is_dir() else []
+    if (ROOT / "src").is_dir():
+        paths += [p for p in (ROOT / "src").rglob("*") if p.is_file() and p.suffix in HEADER_SUFFIXES]
+    return {p.relative_to(ROOT).as_posix(): sha256_file(p) for p in sorted(paths)}
+
+
 def read_history() -> list[dict]:
     if not HISTORY.is_file():
         return []
@@ -193,6 +206,7 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "candidates_sha256": sha256_file(candidates_path),
         "ledger_sha256": sha256_file(out / "matches.json"),
         "sources": source_hashes(units),
+        "headers": header_hashes(),
         "new_units": [u["source"] for u in candidates["units"]],
         "profiles_sha256": sha256_file(PROFILES),
         "catalogue_sha256": sha256_file(CATALOGUE),
@@ -292,6 +306,7 @@ def review(name: str, record_path: Path) -> dict:
         "reviewed_utc": now(),
         "prepare_sha256": sha256_file(prepared),
         "sources": source_hashes([{"source": s} for s in prepare_record["sources"]]),
+        "headers": header_hashes(),
         "record_sha256": sha256_file(record_path),
     }
     write_exclusive(out / "reviews" / f"{record['reviewer'].lower()}.json", entry)
@@ -316,11 +331,14 @@ def finalize(name: str, min_reviews: int) -> dict:
     failing = [r["reviewer"] for r in reviews if r["verdict"] not in PASSING]
     if failing:
         raise AcceptError(f"review verdict FAIL from {', '.join(failing)}: fix and prepare a new checkpoint")
-    bound = [r for r in reviews if r["prepare_sha256"] == prepare_sha and r["sources"] == record["sources"]]
+    bound = [r for r in reviews if r["prepare_sha256"] == prepare_sha and r["sources"] == record["sources"]
+             and r.get("headers") == record.get("headers")]
     if len(bound) < min_reviews or len(bound) != len(reviews):
         raise AcceptError(f"{len(bound)} reviews bound to this prepare (of {len(reviews)}); need {min_reviews}, all bound")
     if source_hashes([{"source": s} for s in record["sources"]]) != record["sources"]:
         raise AcceptError("sources changed since prepare")
+    if header_hashes() != record.get("headers", {}):
+        raise AcceptError("headers changed since prepare")
     if sha256_file(PROFILES) != record["profiles_sha256"] or sha256_file(CATALOGUE) != record["catalogue_sha256"]:
         raise AcceptError("profiles or catalogue changed since prepare")
     if sha256_file(MATCHES) != record["base_matches_sha256"]:
@@ -338,6 +356,7 @@ def finalize(name: str, min_reviews: int) -> dict:
         "recorded_utc": now(),
         "matches_sha256": record["ledger_sha256"],
         "sources": record["sources"],
+        "headers": record.get("headers", {}),
         "credited_functions": credited["functions"],
         "credited_bytes": credited["bytes"],
         "denominator_functions": credited["catalogue_functions"],
@@ -374,6 +393,10 @@ def verify_history() -> list[dict]:
             raise AcceptError("config/matches.json is not the last finalized ledger")
         if source_hashes(ledger["units"]) != history[-1]["sources"]:
             raise AcceptError("a credited source differs from its accepted hash")
+        current = header_hashes()
+        changed = sorted(h for h, sha in history[-1].get("headers", {}).items() if current.get(h) != sha)
+        if changed:
+            raise AcceptError(f"an accepted header changed or disappeared: {', '.join(changed)}")
     elif ledger["units"]:
         raise AcceptError("config/matches.json credits units but no checkpoint was ever finalized")
     return history

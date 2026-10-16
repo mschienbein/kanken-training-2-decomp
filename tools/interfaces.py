@@ -5,8 +5,10 @@
 
 All input units are preprocessed sequentially with their ledger profile (otherwise
 `game`), the toolchain launcher, and exactly compile_source's default include paths.
-This tool never compiles/replaces a matching object. C++ is explicitly unchecked;
---allow-unchecked-cpp waives only that limitation, not C parsing/preprocess errors.
+This tool never compiles/replaces a matching object. C++ units get only a token-level
+check that every class/struct/union defined in several units is defined identically (the
+one-definition rule); their declarations and const writes are unchecked, and
+--allow-unchecked-cpp waives only that limitation, not C parsing/preprocess errors or ODR.
 
 Type comparison is intentionally strict: qualifiers and explicit/unspecified array
 bounds are retained, including on parameters; typedefs and integer constant bounds
@@ -44,7 +46,7 @@ import toolchain  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 BOUND = re.compile(r"(?:func|data|bss)_[0-9a-fA-F]{8}\Z")
 COVERAGE = {
-    "cpp": "unchecked; --allow-unchecked-cpp waives C++ only",
+    "cpp": "only class-definition agreement across units (ODR, token-level); declarations and const writes unchecked; --allow-unchecked-cpp waives C++ only",
     "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
     "not_covered": [
         "whole-program/heap alias analysis and pointer arithmetic",
@@ -706,6 +708,29 @@ def unique_sites(sites: list[dict]) -> list[dict]:
     return [json.loads(s) for s in sorted({json.dumps(site, sort_keys=True) for site in sites})]
 
 
+CPP_CLASS = re.compile(r"^[ \t]*(?:struct|class|union)[ \t]+(\w+)[^;{]*\{", re.M)
+CPP_COMMENT = re.compile(r"//[^\n]*|/\*.*?\*/", re.S)
+
+
+def cpp_class_definitions(text: str) -> list[tuple[str, str, int]]:
+    """(name, token-normalised definition, line) for each class/struct/union definition in C++
+    source text. Comments are blanked (keeping line numbers) and whitespace collapsed, so two
+    definitions compare equal exactly when their token sequences agree, as the one-definition rule
+    requires of a class defined in several translation units."""
+    text = CPP_COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
+    found = []
+    for m in CPP_CLASS.finditer(text):
+        depth, i = 0, m.end() - 1
+        while i < len(text):
+            depth += {"{": 1, "}": -1}.get(text[i], 0)
+            i += 1
+            if depth == 0:
+                break
+        body = " ".join(text[m.start():i].split())
+        found.append((m.group(1), body, text.count("\n", 0, m.start()) + 1))
+    return found
+
+
 def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -> dict:
     root = root.resolve()
     if names is None:
@@ -714,6 +739,7 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
     report = {"schema_version": 1, "units": [], "disagreements": [], "policy": [], "unchecked": [], "coverage": COVERAGE}
     declarations: dict[str, list[Declaration]] = {}
     records: dict[tuple[str, str], list[tuple[Record, Analyzer]]] = {}
+    cpp_classes: dict[str, list[tuple[str, dict]]] = {}
     for unit in units:  # Intentionally sequential: armcc runs on a shared laptop.
         source = display_path(unit.source, root)
         entry = {"source": source, "sha256": None, "checked": False}
@@ -721,7 +747,10 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
         try:
             entry["sha256"] = hashlib.sha256(unit.source.read_bytes()).hexdigest()
             if unit.source.suffix.lower() == ".cpp":
-                report["unchecked"].append({"source": source, "kind": "cpp", "reason": "C++ parser unavailable; no interface or const-write checks performed"})
+                text = unit.source.read_text(encoding="utf-8")
+                for name, body, line in cpp_class_definitions(text):
+                    cpp_classes.setdefault(name, []).append((body, {"source": source, "line": line, "type": "class definition"}))
+                report["unchecked"].append({"source": source, "kind": "cpp", "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked"})
                 continue
             if unit.source.suffix.lower() != ".c":
                 raise InterfaceError("expected a .c or .cpp translation unit")
@@ -759,6 +788,9 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
                 site["type"] = f"{' '.join(record.attrs)} {kind} {name} {{ {members} }}".strip()
                 sites.append(site)
             report["disagreements"].append({"name": f"{kind} {name}", "kind": "layout", "sites": unique_sites(sites)})
+    for name, definitions in sorted(cpp_classes.items()):
+        if len({body for body, _ in definitions}) > 1:
+            report["disagreements"].append({"name": f"class {name}", "kind": "odr", "sites": unique_sites([site for _, site in definitions])})
     report["disagreements"].sort(key=lambda item: (item["name"], item["kind"]))
     return report
 

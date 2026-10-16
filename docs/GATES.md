@@ -1,6 +1,12 @@
-# Gate design — frozen v1.2 (2026-10-16)
+# Gate design — frozen v1.3 (2026-10-16)
 
 Revisions:
+- **v1.3** (2026-10-16): headers bound like sources. `prepare`, each review and the history entry
+  record the SHA-256 of every project header (all files under `include/`, plus `.h/.hh/.hpp/.inc`
+  under `src/`); G7 refuses a review bound to other header hashes or a header changed since
+  prepare; G8 refuses an accepted header that changed or disappeared (new headers are allowed).
+  Cause: `c002-wave1` review F02 — the shared `include/game/bss_0049ecf0.h` was unbound, so a
+  header edit after review could have changed credited objects unnoticed.
 - **v1.2** (2026-10-16): G0 clean tree. `prepare` refuses a working tree with any uncommitted or
   untracked non-ignored file and records the HEAD `commit`; reviews and finalize bind to that
   prepare. Cause: `c001-pilot-r3`'s suite ran against another agent's in-progress
@@ -33,8 +39,8 @@ contradictory COMDAT copies, unsupported relocations, veneer needs, multi-functi
 | G4 | Two fresh builds | `prepare` | either `tools/build.py` build (fresh: no object cache) fails, or outputs differ. Each build: every credited function an ordinary catalogued function, exact size, equal to the original on its own before being written; no overlapping sections across units; no duplicate global definitions; `code.bin` equal to the original; recompressed `.code` equal to the stored ExeFS `.code` |
 | G5 | Full suite | `prepare` | any module fails (`tools/test_suite.py`, sharded by module) |
 | G6 | Review | `review` | the record fails the schema: verdict row (PASS/QUALIFIED/FAIL + method) for every new function, unique finding ids F01…, severities, verdict consistency (blocker or FAIL row ⇒ FAIL; QUALIFIED or major ⇒ not PASS; PASS_WITH_QUALIFICATIONS ⇒ stated qualifications) |
-| G7 | Finalize once | `finalize` | prepare not PASS, fewer than `--min-reviews` (default 1) reviews bound to this exact prepare, any FAIL review, sources/profiles/catalogue/ledger changed since prepare, history broken |
-| G8 | Ledger binding | `verify` (CI) | `config/matches.json` ≠ last finalized ledger, a credited source ≠ its accepted hash, or credit without any checkpoint |
+| G7 | Finalize once | `finalize` | prepare not PASS, fewer than `--min-reviews` (default 1) reviews bound to this exact prepare, any FAIL review, a review bound to other source or header hashes, sources/headers/profiles/catalogue/ledger changed since prepare, history broken |
+| G8 | Ledger binding | `verify` (CI) | `config/matches.json` ≠ last finalized ledger, a credited source ≠ its accepted hash, an accepted header changed or removed, or credit without any checkpoint |
 
 Reviewer independence: the reviewer is never the integrator and never the author; at least one
 review per checkpoint is from a model family other than the author's, where possible.

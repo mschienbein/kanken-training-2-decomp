@@ -27,6 +27,7 @@ class AcceptGateTest(unittest.TestCase):
             "config/compiler_profiles.json": "{}",
             "config/catalogue.json": "{}",
             "src/a.c": "int func_00100000(void) { return 1; }\n",
+            "include/game/shared.h": "extern int data_00200000;\n",
             "notes.md": "re-derived",
         }.items():
             (root / rel).parent.mkdir(parents=True, exist_ok=True)
@@ -49,6 +50,7 @@ class AcceptGateTest(unittest.TestCase):
             "base_matches_sha256": accept.sha256_file(accept.MATCHES),
             "ledger_sha256": accept.sha256_file(out / "matches.json"),
             "sources": accept.source_hashes(units),
+            "headers": accept.header_hashes(),
             "new_units": ["src/a.c"],
             "profiles_sha256": accept.sha256_file(accept.PROFILES),
             "catalogue_sha256": accept.sha256_file(accept.CATALOGUE),
@@ -96,6 +98,22 @@ class AcceptGateTest(unittest.TestCase):
         (self.root / "src/a.c").write_text("int func_00100000(void) { return 2; }\n", encoding="utf-8")
         with self.assertRaisesRegex(accept.AcceptError, "bound|changed"):
             accept.finalize("c001", 1)
+
+    def test_header_change_after_review_blocks_finalize(self):
+        """A shared header changes every object that includes it, so it is bound like a source."""
+        self.review()
+        (self.root / "include/game/shared.h").write_text("extern short data_00200000;\n", encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "bound|headers changed"):
+            accept.finalize("c001", 1)
+
+    def test_accepted_header_edit_is_detected_but_new_headers_are_allowed(self):
+        self.review()
+        accept.finalize("c001", 1)
+        (self.root / "include/game/next.h").write_text("struct Next;\n", encoding="utf-8")
+        accept.verify_history()
+        (self.root / "include/game/shared.h").unlink()
+        with self.assertRaisesRegex(accept.AcceptError, "accepted header changed or disappeared: include/game/shared.h"):
+            accept.verify_history()
 
     def test_unaccepted_credit_is_detected(self):
         (self.root / "config/matches.json").write_text(json.dumps({"units": [{"source": "src/a.c"}]}), encoding="utf-8")

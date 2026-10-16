@@ -1,0 +1,365 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c002-wave1",
+ "reviewer": "review-c002-second",
+ "family": "openai",
+ "verdict": "FAIL",
+ "functions": [
+  {
+   "function": "func_001670e4",
+   "source": "src/wave1/func_001670e4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (8 bytes). Read complete source; checked four contiguous float stores, scalar argument types, source policy and ordinary function classification in catalogue v3. Own result source/catalogue hashes agree with the prepared inputs.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011e928",
+   "source": "src/wave1/func_0011e928.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (72 bytes). Read source and shared header; regenerated original packet. Checked callback field +0x160, event 0x401, signed counter +0x158 and modulo arithmetic. Header offsets and declaration agree with the queue-producing unit. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018fdd4",
+   "source": "src/wave1/func_0018fdd4.cpp",
+   "verdict": "FAIL",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (40 bytes). Manually checked all current C++ declarations and regenerated original packet: object pointer in r0, virtual release slot +0x30, zero success and 0xc8804465 error result in r0 agree. Source/catalogue hashes and v3 eligibility agree. Global Result has a different class definition from func_0018fd20.cpp, violating the cross-unit C++ one-definition rule (F01).",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_00195254",
+   "source": "src/wave1/func_00195254.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (224 bytes). Read source and shared CommandSystem header. Regenerated producer and consumers func_00195f7c/func_00190878; verified 28-byte command stride, source/size/flags offsets, explicit kind-1 consumer arm forwarding source and size, queue offsets 0x9c/0xa0, enabled/pending bytes, flush and lock/unlock routing. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00102cb0",
+   "source": "src/wave1/func_00102cb0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (32 bytes). Read complete source; checked conditional allocation release, subsequent cleanup call and consistent free declaration across C/C++ units. Checked source policy, v3 ordinary function eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00105058",
+   "source": "src/wave1/func_00105058.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (44 bytes). Read source; checked pointer/count fields at offsets 0/4, conditional free and resets, and agreement of release declarations with existing pilot units. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00110358",
+   "source": "src/wave1/func_00110358.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body reproduces the complete original return-only function, not an unfinished implementation. Catalogue v3 classifies it as function, not veneer or multi_entry. Checked source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001107d0",
+   "source": "src/wave1/func_001107d0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body reproduces the complete original return-only function, not a stub. Verified ordinary function rather than veneer/multi_entry classification, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011362c",
+   "source": "src/wave1/func_0011362c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; checked function-pointer parameter and unconditional callback forwarding, without a filtering or dropping branch. Verified source policy, v3 ordinary function eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011e970",
+   "source": "src/wave1/func_0011e970.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and regenerated consuming func_00186ef0 packet; target uses global queue state rather than incoming parameters. Tail call correctly forwards completion handling. Verified ordinary function classification, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011e974",
+   "source": "src/wave1/func_0011e974.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and consuming func_00186ef0 packet; verified global-state completion routing and no lost incoming argument. Catalogue v3 credits this wrapper only as an ordinary function. Checked source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011e978",
+   "source": "src/wave1/func_0011e978.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and consuming func_00186ef0 packet; checked tail routing to the same global-state completion handler. Verified ordinary function classification, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011e998",
+   "source": "src/wave1/func_0011e998.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; the empty body matches the complete original return-only implementation. Verified ordinary function classification rather than veneer/multi_entry, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019e02c",
+   "source": "src/wave1/func_0019e02c_returning.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (96 bytes). Read source; checked ResourceSet fields +0x44/+0x48/+0x4c, two destructor-return/free chains, allocation release and independent null resets. Checked release-declaration agreement across current units, source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012ced8",
+   "source": "src/wave1/func_0012ced8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C implementation is exact over the complete original return-only extent. Verified ordinary function classification, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012d1c8",
+   "source": "src/wave1/func_0012d1c8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C implementation reproduces the complete original return-only function. Checked ordinary function classification, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012d4f0",
+   "source": "src/wave1/func_0012d4f0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and regenerated the v3 multi_entry owner func_0012d5c0 containing callee entry 0x12d5c4. Checked unchanged forwarding of output pointer, byte mode, identifier pointer and count. Only this ordinary wrapper is credited; the multi_entry owner is not. Checked source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012f4f0",
+   "source": "src/wave1/func_0012f4f0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (28 bytes). Read source; checked buffer initialization length 0xe30, subsequent 16-bit value 5 store, and common initialization declaration with the paired unit. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0012f50c",
+   "source": "src/wave1/func_0012f50c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (12 bytes). Read source; checked destination pointer and exact 0x10cc8 initialization size, plus declaration agreement with the paired unit. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018fcb4",
+   "source": "src/wave1/func_0018fcb4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (12 bytes). Read source; checked return of the address of data_002430e0 through an opaque ServiceState pointer, with no fake data standing in for code. Verified v3 eligibility, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00195e84",
+   "source": "src/wave1/func_00195e84.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (16 bytes). Read source; checked signed-byte extension from offset 9 and compatibility of shared unsigned-byte-array declaration with func_00195e94. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00195e94",
+   "source": "src/wave1/func_00195e94.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (16 bytes). Read source; checked unsigned-byte return from offset 6 and shared array declaration agreement. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011f080",
+   "source": "src/wave1/func_0011f080.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (132 bytes). Manually checked all current C++ interfaces and regenerated original packet. Checked active/allocation/object fields 0/4/8, flag +0x0f, destructor-return/free call, release slot +0x74, deleting-destructor slot +4, null resets and ResourceTable activeCount +8. Class is partial, but the exercised ABI agrees. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00134f04",
+   "source": "src/wave1/func_00134f04.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (20 bytes). Read source; checked 16-bit global zero store and corresponding unsigned-short declaration. Verified source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00135a28",
+   "source": "src/wave1/func_00135a28.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (48 bytes). Read source; checked buffer/count/capacity offsets 0/4/8, conditional release and three resets at bss_0049da8c. Compared BufferState and release declarations across current units; checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00135a58",
+   "source": "src/wave1/func_00135a58.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (48 bytes). Read source; checked conditional free and buffer/count/capacity resets at bss_0049da58, with matching BufferState and release declarations. Verified source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00135a88",
+   "source": "src/wave1/func_00135a88.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (48 bytes). Read source; checked conditional free and buffer/count/capacity offsets/reset order at bss_0049d93c, plus common declaration compatibility. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00135ab8",
+   "source": "src/wave1/func_00135ab8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (48 bytes). Read source; checked conditional free and buffer/count/capacity offsets/reset order at bss_0049cbc0 and common declaration compatibility. Verified source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001360a4",
+   "source": "src/wave1/func_001360a4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (56 bytes). Read source; checked owner fields at +0xc08/+0xc0c/+0xc10, free only when owned, and unconditional field clearing once a buffer is present. Verified release interface agreement, source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00196cb8",
+   "source": "src/wave1/func_00196cb8.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (96 bytes). Read source and regenerated original packet. Checked screen 3/4 mapping, signed-short group calculation, group stride 0x6a4, entry stride 0xd4 and resource offset +0x1c. ORIGINAL BUG comment correctly discloses the invalid-screen indexing path if the error handler returns; index bounds remain unrecovered. Checkpoint disclosure is missing (F02). Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": [
+    "F02"
+   ]
+  },
+  {
+   "function": "func_0019f450",
+   "source": "src/wave1/func_0019f450.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (48 bytes). Read source; checked float rate/milliseconds/nominalFrames at +4/+8/+0x0c and 1000.0/rate and 60.0/rate calculations. Verified source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018fcc0",
+   "source": "src/wave1/func_0018fcc0.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (96 bytes). Manually compared duplicated Resource declarations and regenerated original packet plus caller func_0011264c. Checked transferred/resource pointers, 64-bit offset register pair, stack buffer/size arguments, read virtual slot 0, mode notification and null-input result 0xe0e046bc. Exercised ABI agrees; full class is partial. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018fd20",
+   "source": "src/wave1/func_0018fd20.cpp",
+   "verdict": "FAIL",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (72 bytes). Manually checked current C++ declarations and regenerated original packet plus caller func_0011264c. Checked output pointer depth, archive pointer, ignored high word, Path pointer, stack flags, virtual open slot 0, sign-bit failure routing and r0 result ABI. Own source/catalogue hashes and v3 eligibility agree. Result class conflicts with func_0018fdd4.cpp (F01), although the current per-unit machine code is exact.",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_0019d5c4",
+   "source": "src/wave1/func_0019d5c4.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (24 bytes). Manually checked Resource definition equality with func_0018fcc0.cpp and declarations in all three tagged-resource consumers. Regenerated original packet; verified null guard and release dispatch at virtual offset +0x30. Partial class qualification remains. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c44ec",
+   "source": "src/wave1/func_001c44ec.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (20 bytes). Manually checked shared DeletingResourceOwner pointer declaration against func_001c4500.cpp and regenerated both packets. Flags argument 0 and returned owner pointer are correctly forwarded to deallocation. Opaque owner and destructor ABI remain partial. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001c4500",
+   "source": "src/wave1/func_001c4500.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (56 bytes). Manually checked all linked declarations and regenerated original packet plus caller func_001c44ec. Checked slot +4, low-bit tagged handle, error call, release through func_0019d5c4, clearing and returned enclosing-owner address. Partial destructor/type reconstruction is a qualification. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d2da4",
+   "source": "src/wave1/func_001d2da4.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (52 bytes). Manually checked ResourceOwner definition equality with func_001d3524.cpp and all Resource/release declarations. Regenerated original packet; checked tagged field +4, bit-1 guard, pointer-mask forwarding to the release consumer and clear. Partial type qualification remains. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001d3524",
+   "source": "src/wave1/func_001d3524.cpp",
+   "verdict": "QUALIFIED",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (80 bytes). Manually checked ResourceOwner/Resource/release declarations across units and regenerated original packet. Checked owner +0x34, active/enabled +0x50/+0x51, tagged-pointer release forwarding, owner clear and active reset. Partial type qualification remains. Checked source policy, v3 eligibility and input hashes.",
+   "finding_ids": []
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "major",
+   "subject": "src/wave1/func_0018fd20.cpp:9-13 and src/wave1/func_0018fdd4.cpp:12-15",
+   "summary": "Share one identical Result definition across the C++ units. Both new translation units define the same namespace-scope class Result, and both use that class as their exported function result, but only func_0018fd20.cpp includes failed(). These are not translation-unit-local types: the combined ledger therefore contains different definitions of one external-linkage C++ class and violates the one-definition rule. Separate MATCH runs cannot detect this ill-formed combined C++ program, and both units were skipped by the mechanical interface checker. Put the complete identical definition in a shared header used by both units (or give genuinely distinct helper types distinct identities) before accepting their waived interfaces.",
+   "title": "Share one identical Result definition across the C++ units",
+   "priority": 2,
+   "confidence": 1.0,
+   "file_path": "/Users/mooki/Code/kanken-training-2-decomp/src/wave1/func_0018fd20.cpp",
+   "line_start": 9,
+   "line_end": 13
+  },
+  {
+   "id": "F02",
+   "severity": "minor",
+   "subject": "src/wave1/func_00196cb8.c:31 and checkpoint c002-wave1 known-issues disclosure",
+   "summary": "Publish the new checkpoint qualifications before acceptance. This new function explicitly preserves the invalid-screen indexing path, and c002 also adds nine mechanically unchecked C++ units with partial declarations, but the only published known-issues documents cover c001 and its 17-function scope. There is no docs/known-issues-c002-wave1.md or other known-issues entry covering these new functions. D8 in docs/ACCEPTANCE.md requires checkpoint-specific publication of preserved original bugs, skips and qualifications; record the conditional invalid-screen behavior, unrecovered bounds and new C++ waiver/type limitations there. The source ORIGINAL BUG comment is present and the current bytes MATCH; this is a disclosure omission, not a newly introduced runtime indexing change.",
+   "title": "Publish the new checkpoint preserved-behavior qualifications",
+   "priority": 2,
+   "confidence": 0.99,
+   "file_path": "/Users/mooki/Code/kanken-training-2-decomp/src/wave1/func_00196cb8.c",
+   "line_start": 31,
+   "line_end": 31
+  }
+ ],
+ "qualifications": [
+  "All 38 new functions were independently rerun sequentially with tools/match.py and profile game: 38 MATCH results covering 1584 new bytes. Read both prepared fresh full-build receipts: each records 55 total credited functions and 2680 bytes including the accepted c001 baseline, equal code.bin/ExeFS .code hashes and no cached unit. No full build or test suite was rerun by this reviewer.",
+  "Catalogue v3 was checked directly for all 38 addresses: every credited owner is kind function, none is a veneer or multi_entry. The forwarded callee entry 0x12d5c4 was inspected inside its non-credited multi_entry owner 0x12d5c0; it is not credited by this checkpoint.",
+  "All nine new C++ units were manually interface-checked against current C/C++ units and independently regenerated original packets; F01 is the outstanding cross-unit source defect. Apart from that defect, the exercised parameter, return and virtual-dispatch ABI agrees with the target. Resource classes, tagged handles, destructor reconstruction and other padded structs are partial 32-bit target descriptions, not fully recovered types or portable native-port proofs.",
+  "The shared CommandSystem header was read and its +0x11/+0x12, +0x9c/+0xa0, +0x158 and +0x160 fields were checked against both users and original queue/counter accesses. The produced command kind 1 has an explicit consuming dispatcher branch forwarding its source and size; no silent-drop integration defect was found there.",
+  "func_00196cb8 retains the original invalid-screen before-table path if the error handler returns, with an ORIGINAL BUG comment; valid-screen/index preconditions and error-handler return behavior are not established here. This is preserved target behavior rather than a proposed fix. Its checkpoint-specific disclosure is F02.",
+  "Inherited in-place hybrid-build limitations remain: a complete original-armlink reconstruction, unwind coverage, cross-host reproduction and lower RomFS IVFC traversal are separate unproven properties. Exact current target matching does not certify them."
+ ],
+ "reviewed_utc": "2026-10-16T14:15:08Z",
+ "prepare_sha256": "96729738468bb4bccf92f17004e35a943d606eb11a32d92b6ccb1977f49c1192",
+ "sources": {
+  "src/pilot/pilot_a.c": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+  "src/pilot/game_enum_switch.c": "1ad305430a43b66d217a4886643f563a9bf314476ab8121b3126415f4e4c835a",
+  "src/wave1/func_001670e4.c": "f988b29935da652bafb9b0b08d1b8a5c91401a40ccccd90168a5148dab3ea9a6",
+  "src/wave1/func_0011e928.c": "78738eea0f52343be947b708fcbd426fd2b2c0c1d069931de9dc6cd1d21ec82c",
+  "src/wave1/func_0018fdd4.cpp": "5c93a8ebd17f1315f90fdf6689cc4d885c81e711ae8b66373e9ce9bc5a5ec0a6",
+  "src/wave1/func_00195254.c": "d3791136329df32cc19da2fe4901899ef75c8cc2d9f4e60a31bc02e20df83468",
+  "src/wave1/func_00102cb0.c": "146a929db0cbd8852da0c2f748df1080c4254d2e3746e7b946b7c7a9f77378db",
+  "src/wave1/func_00105058.c": "22b08b5d65a6ace20e59b8f97d56bc15e56ca9b22377e4b7cb3ad0c06cdc90fb",
+  "src/wave1/func_00110358.c": "55c85cfacee4fb29677c2b00d81138bb1339c55e0033d463e001bd3947c0b82f",
+  "src/wave1/func_001107d0.c": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+  "src/wave1/func_0011362c.c": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+  "src/wave1/func_0011e970.c": "1df1975c0216e80752ebf973071748cf1733979bc6b5820d2bc411d2bb2b1a68",
+  "src/wave1/func_0011e974.c": "9aa52f34e8dca1822ae8f9f4adaa349f3e47a45f73b13b3ceaa192b5108c1342",
+  "src/wave1/func_0011e978.c": "faac44df6650c9c651d2d4ee8b3fc20fb0eec1c09772b4bc7569830ed01d55d8",
+  "src/wave1/func_0011e998.c": "3106c9f28fee5d8427d03c004e6097cc8c8791513b2e8da0980d0f814b24c0bf",
+  "src/wave1/func_0019e02c_returning.c": "546fcf95d3d4b6d43387d04b103d06e016705875bb3af20f63a0df394982cd58",
+  "src/wave1/func_0012ced8.c": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80",
+  "src/wave1/func_0012d1c8.c": "bd742e97881a1006aed64828a721955a34a94fe83c66219c41974ffb94434a4d",
+  "src/wave1/func_0012d4f0.c": "93af079ad1d9f8354ac1527f9d53ca08a9dd3bebdea5f22e2c88a1669471ada3",
+  "src/wave1/func_0012f4f0.c": "dd0b35a3310a3df8060af68e15db33a952340933fd63e50c6467f482e15bcbe5",
+  "src/wave1/func_0012f50c.c": "cdff29146f04b04146d63b110828b4b3bc2bc2ac855382a01dac9779c02d6d38",
+  "src/wave1/func_0018fcb4.c": "8650965cf5a96c44d18a7ea3298827ca2d782de453e6aa3c6d62343f1fadab27",
+  "src/wave1/func_00195e84.c": "c02694a5085a6f6cd12975711fd270b45389fb09f9acafa603b425b52505787d",
+  "src/wave1/func_00195e94.c": "ced7791a8996cc4cf8e7b6df3ccd2f1bee06724569a3cec5ba586c8161d4971e",
+  "src/wave1/func_0011f080.cpp": "fc95fa0a48cb79a1115809b5d486aac2701892a286ed9f9ff73b208c1b437b84",
+  "src/wave1/func_00134f04.c": "ddc73aaeffc367598de6fd9b6107b6d046767593c89bf753ff8366ab1e81d010",
+  "src/wave1/func_00135a28.c": "6f649c2ab95e66a2973d490925804c41b3553cc8eb72cdc4d505674d7ab79402",
+  "src/wave1/func_00135a58.c": "3c10c74764f47cab823bcca94c739264e39fbee5523c1bd754d25152c90e6e68",
+  "src/wave1/func_00135a88.c": "375cc7e84a571c6e9ca3b339c6d31662c4a1a852a49a11acfb1743eb1da9c5ba",
+  "src/wave1/func_00135ab8.c": "442648137a05324def2fafae0bd12a95941bd354666ae34c96d7f9e4dc510f95",
+  "src/wave1/func_001360a4.c": "989581a50f6037d4735a0a3f3a13d78b0c995eeac63b90281038835ec71bdc10",
+  "src/wave1/func_00196cb8.c": "21940b512e14068b1c83d2d27ab74a88d74c07a7f5932a4853df31ca473602fb",
+  "src/wave1/func_0019f450.c": "175eea6d9ab1904d0055260d4dca853786dca6203a49393aa7bf7e9d31704141",
+  "src/wave1/func_0018fcc0.cpp": "42151586cb74205fff8715553c320607424842b78e2727bd907401c84885b844",
+  "src/wave1/func_0018fd20.cpp": "a9715668d2f96e25569f1d62104b2fa3e7e6f52821297f52795020e9370bcd77",
+  "src/wave1/func_0019d5c4.cpp": "18e60a4728600252732448a62608e52c738833f856b79916f9fae18bf45ca497",
+  "src/wave1/func_001c44ec.cpp": "ac5e4783c71825512436d98f36db4245539fc560cf3c8c8441e2385ea4fe68bb",
+  "src/wave1/func_001c4500.cpp": "003ffab636960f47310a4bb3c35db5f46bff9cd758770ed8b69dc7edf6b5d473",
+  "src/wave1/func_001d2da4.cpp": "1b38a2ef18826056bf8a53a2f8651b724fc36079658c161ab9f579d937acaefa",
+  "src/wave1/func_001d3524.cpp": "a947f90ef89c2b9eee272d8fd5068494aa7f09cea2a862e2afe08dbe641a97d9"
+ },
+ "record_sha256": "d847e791d16bef612bf1cc140280367eb4aaae09b84970b2561f3de4f0ede25b"
+}

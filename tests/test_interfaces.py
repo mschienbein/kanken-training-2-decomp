@@ -342,6 +342,16 @@ void local(void) {
         self.assertTrue(interfaces.failed(report))
         self.assertFalse(interfaces.failed(report, allow_unchecked_cpp=True))
 
+    def test_cpp_class_defined_differently_in_two_units_fails_even_when_waived(self):
+        """c002-wave1 F01: two units defined `struct Result` differently (an ODR violation)."""
+        self.add("a.cpp", "struct Result {\n    unsigned value;\n};\nstruct Same { int x; };\n")
+        self.add("b.cpp", "// comment\nstruct Result {\n    unsigned value;\n    unsigned failed() const { return value >> 31; }\n};\n"
+                          "struct Same {  int x; /* spacing and comments are not tokens */ };\n")
+        report = interfaces.audit(self.units, self.root, set())
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("class Result", "odr")])
+        self.assertEqual([(s["source"], s["line"]) for s in report["disagreements"][0]["sites"]], [("a.cpp", 1), ("b.cpp", 2)])
+        self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
     def test_preprocess_failure_is_unchecked_not_pass(self):
         self.add("a.c", "int data_00200000;\n")
         with patch.object(interfaces, "preprocess", side_effect=interfaces.InterfaceError("compiler failed (7)")):

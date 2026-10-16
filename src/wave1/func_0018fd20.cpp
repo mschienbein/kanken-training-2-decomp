@@ -1,3 +1,5 @@
+#include "game/result.h"
+
 class Resource;
 
 struct Path {
@@ -6,11 +8,6 @@ struct Path {
     unsigned size;
 };
 
-struct Result {
-    unsigned value;
-    Result(unsigned code = 0) : value(code) {}
-    unsigned failed() const { return value >> 31; }
-};
 
 struct ArchiveInterface;
 

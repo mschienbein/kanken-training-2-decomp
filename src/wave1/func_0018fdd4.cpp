@@ -1,3 +1,5 @@
+#include "game/result.h"
+
 struct Interface;
 
 struct InterfaceVTable {
@@ -7,11 +9,6 @@ struct InterfaceVTable {
 
 struct Interface {
     const InterfaceVTable *vtable;
-};
-
-struct Result {
-    unsigned value;
-    Result(unsigned code = 0) : value(code) {}
 };
 
 extern "C" Result func_0018fdd4(Interface *object)
