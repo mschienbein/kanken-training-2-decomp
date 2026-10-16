@@ -452,17 +452,24 @@ class ArmlinkModelTest(unittest.TestCase):
         mem.write(base, bytes(data))
         return bytes(data)
 
-    def link(self, obj, mem, model=inplace.DEFAULT_LINKER_MODEL):
-        linker = inplace.InPlaceLinker(mem, MODEL_CATALOGUE, inplace.Resolver(MODEL_CATALOGUE), (0x200000, 0x201000), model)
+    def link(self, obj, mem, model=inplace.DEFAULT_LINKER_MODEL, catalogue=MODEL_CATALOGUE):
+        linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000), model)
         linked = {p.base: data for p, data in linker.link(obj).values() if p.origin == "catalogue"}
         return linked, [(w.rule, w.target, w.word) for w in linker.rewrites]
 
     def test_default_model_is_the_evidenced_armlink_model(self):
         model = inplace.linker_model(inplace.DEFAULT_LINKER_MODEL)
         self.assertTrue(model.inline and model.branchnop)
+        self.assertEqual(model.name, "armlink5-inline-branchnop-v2")
         self.assertFalse(inplace.linker_model("strict-v1").inline)
         with self.assertRaisesRegex(inplace.LinkError, "unknown linker model"):
             inplace.linker_model("armlink-guess")
+
+    def test_retired_model_never_runs_again(self):
+        """Review F01: v1 judged same-object callees by candidate bytes; its name stays reserved."""
+        self.assertNotIn("armlink5-inline-branchnop-v1", inplace.LINKER_MODELS)
+        with self.assertRaisesRegex(inplace.LinkError, "retired"):
+            inplace.linker_model("armlink5-inline-branchnop-v1")
 
     def test_calls_of_return_only_and_one_instruction_functions_are_inlined(self):
         """Rules I1/I2: BL to `bx lr` -> MOV r0, r0; BL to `mov r0, #0; bx lr` -> mov r0, #0."""
@@ -542,16 +549,70 @@ class ArmlinkModelTest(unittest.TestCase):
             linked, _ = self.link(obj, mem)
             self.assertNotEqual(linked[0x100000], want, calls)
 
-    def test_callee_defined_in_the_same_object_is_judged_by_its_own_section(self):
-        obj = self.compile(
-            "extern int data_00200000;\n__attribute__((noinline)) void func_00100100(void) {}\n"
-            "void func_00100000(void) { func_00100100(); data_00200000 = 1; }\n"
-        )
+    LOCAL_EMPTY = (
+        "extern int data_00200000;\n__attribute__((noinline)) void func_00100100(void) {}\n"
+        "void func_00100000(void) { func_00100100(); data_00200000 = 1; }\n"
+    )
+
+    def test_callee_defined_in_the_same_object_must_be_the_original_function(self):
+        """Decided from the original: the local `bx lr` equals the eligible original body."""
+        obj = self.compile(self.LOCAL_EMPTY)
         mem = self.memory()
         want = self.expected(obj, mem, 0x100000, {"func_00100100": MOV_R0_R0})
         linked, rewrites = self.link(obj, mem)
         self.assertEqual((linked[0x100000], linked[0x100100]), (want, BX_LR))
         self.assertEqual(rewrites, [("inline_nop", 0x100100, MOV_R0_R0)])
+
+    def test_same_object_callee_cannot_unlock_a_caller_match(self):
+        """Review F01 probes: the original at the callee's address is a 12-byte body, the excluded
+        MOV r0, r0; BX lr, or a return-only veneer / multi-entry owner. The local helper is `bx lr`
+        and the original caller holds the inlined NOP, so trusting the helper would make the caller
+        match. The link is refused outright: tools/build.py links the whole object before it reads
+        the ledger's function list, so a caller-only ledger cannot get past it either."""
+        obj = self.compile(self.LOCAL_EMPTY)
+        probes = {
+            "12-byte original body": (struct.pack("<3I", 0xE3A00002, 0xE3A01003, 0xE12FFF1E), {}),
+            "original MOV r0, r0; BX lr": (struct.pack("<I", MOV_R0_R0) + BX_LR, {}),
+            "original veneer": (BX_LR, {"kind": "veneer"}),
+            "original multi-entry owner": (BX_LR, {"kind": "multi_entry", "entries": [
+                {"address": 0x100100, "isa": "arm"}, {"address": 0x100102, "isa": "thumb"}]}),
+        }
+        for name, (body, meta) in probes.items():
+            with self.subTest(name):
+                catalogue = {0x100000: MODEL_CATALOGUE[0x100000],
+                             0x100100: {"address": 0x100100, "size": len(body), "isa": "arm", **meta}}
+                mem = Memory()
+                mem.write(0x100100, body)
+                self.expected(obj, mem, 0x100000, {"func_00100100": MOV_R0_R0})
+                with self.assertRaisesRegex(inplace.LinkError, "inlining is undecidable"):
+                    self.link(obj, mem, catalogue=catalogue)
+                # strict-v1 never rewrites: the caller keeps its BL and simply mismatches
+                strict, _ = self.link(obj, mem, "strict-v1", catalogue)
+                self.assertNotEqual(strict[0x100000], mem.read(0x100000, len(strict[0x100000])))
+
+    def test_same_object_callee_with_other_inlinable_bytes_is_refused(self):
+        """Local `mov r0, #1; bx lr` against an original `mov r0, #0; bx lr`: both inline, differently."""
+        obj = self.compile(
+            "extern int data_00200000;\n__attribute__((noinline)) int func_00100110(void) { return 1; }\n"
+            "void func_00100000(void) { data_00200000 = func_00100110(); }\n"
+        )
+        mem = self.memory()
+        self.expected(obj, mem, 0x100000, {"func_00100110": 0xE3A00000})
+        with self.assertRaisesRegex(inplace.LinkError, "other bytes than the original"):
+            self.link(obj, mem)
+
+    def test_mismatching_local_helper_that_neither_side_inlines_keeps_the_bl(self):
+        """No inlining decision, no refusal: an ordinary wrong helper is an ordinary mismatch."""
+        obj = self.compile(
+            "__attribute__((noinline)) int func_00100140(int x) { return x * 3 + 1; }\n"
+            "int func_00100000(int x) { return func_00100140(x) + 2; }\n"
+        )
+        mem = self.memory()
+        want = self.expected(obj, mem, 0x100000, {"func_00100140": None})
+        linked, rewrites = self.link(obj, mem)
+        self.assertEqual(rewrites, [])
+        self.assertEqual(linked[0x100000], want)
+        self.assertNotEqual(linked[0x100140], CALLEES[0x100140])
 
     def test_tail_call_to_the_next_instruction_becomes_a_nop(self):
         """Rule B1 (--branchnop): `b g` with g placed right after it is MOV r0, r0 (a NOP entry)."""
@@ -598,9 +659,8 @@ class OriginalImageEvidenceTest(unittest.TestCase):
         image = image_mod.Image.load(ROOT / "orig")
         functions = image_mod.functions_by_address(image_mod.load_catalogue())
         linker = inplace.InPlaceLinker(image, functions, inplace.Resolver(functions), image.bss)
-        external = inplace.Symbol("callee", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
         inlinable = {a for a in functions
-                     if (body := linker._callee_section(external, a, None, {})) and inplace.inline_arm_call(0xEB000000, body)}
+                     if (body := linker.eligible_original_callee(a)) and inplace.inline_arm_call(0xEB000000, body)}
         calls = contradictions = 0
         for fn in functions.values():
             if fn["isa"] != "arm":

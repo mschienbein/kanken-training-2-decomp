@@ -1,6 +1,6 @@
 # Linker model: armlink output optimisations
 
-Status: **implemented on branch `armlink-inline`, default model `armlink5-inline-branchnop-v1`**
+Status: **implemented on branch `armlink-inline`, default model `armlink5-inline-branchnop-v2`**
 (`tools/inplace.py`, `LINKER_MODELS`). Not yet adopted by a checkpoint: adopting it changes what the
 per-function oracle credits, so the integrator records a gate revision (docs/GATES.md) first.
 Author: ArmlinkInline (Anthropic, claude-opus-5-5, xhigh), 2026-10-16.
@@ -9,10 +9,20 @@ The public toolchain has armcc but no armlink, so the original link step cannot 
 in-place linker (`tools/inplace.py`) relocates each compiled branch itself. Two armlink output
 optimisations rewrite branches in the original image; without modelling them, C that the
 original linker turned into these bytes can never match. The model reproduces them **only
-where the rule follows from the final layout and the callee's own bytes**; every rewritten branch
-is reported (`linker_rewrites` in `tools/match.py` results and `tools/build.py` receipts), and the
-model name is recorded (`linker_model`). `strict-v1` (no rewrites; the oracle before this change)
-stays selectable with `--linker-model strict-v1`.
+where the rule follows from the final layout and the original callee's bytes**; every rewritten
+branch is reported (`linker_rewrites` in `tools/match.py` results, `tools/build.py` receipts and
+`tools/compid.py` records), and the model name is recorded (`linker_model`). `strict-v1` (no
+rewrites; the oracle before this change) stays selectable with `--linker-model strict-v1`.
+
+## Model history
+
+A model name is a version: rules are never edited under a recorded name.
+
+| Model | Status | Rules |
+|---|---|---|
+| `strict-v1` | selectable | no rewrites |
+| `armlink5-inline-branchnop-v1` (commit c11a0ad) | **retired**: `--linker-model` refuses it | as v2, except that a callee defined in the candidate object was judged by the candidate's own section, never by the original. Independent review (ReviewLinker, F01) showed a wrong local helper could make its caller match: a `bx lr` helper at an address whose original is a 12-byte body, the excluded `MOV r0, r0; BX lr`, a veneer or a multi-entry owner turned the caller's BL into the original's NOP, and a caller-only ledger credited the caller (reproduced on the real image with func_001b6ec4 calling a local `func_0013714c`). Only artifacts of this branch's own checks recorded it. |
+| `armlink5-inline-branchnop-v2` | default | below |
 
 ## Sources
 
@@ -31,7 +41,7 @@ Online index of the same chapter: <https://developer.arm.com/documentation/dui04
 
 The manual does not say which NOP encoding armlink writes; the image does (below).
 
-## Rules adopted (`armlink5-inline-branchnop-v1`)
+## Rules adopted (`armlink5-inline-branchnop-v2`)
 
 Applied to relocated ARM branches (`R_ARM_CALL`, `R_ARM_JUMP24`, `R_ARM_PC24`) in a candidate
 object whose destination is ARM code. Nothing else is rewritten.
@@ -45,13 +55,21 @@ object whose destination is ARM code. Nothing else is rewritten.
 - **I3 — conditions (manual, not observable in the image).** Unconditional BL: `insn` as is.
   BL*cond* with an unconditional `insn`: `insn` with the BL's condition. Equal conditions: as is.
   Different conditions, or an unconditional-only (`cond = 0xF`) `insn` under BL*cond*: kept.
-- **Callee identity.** A callee in the candidate object is judged by its own section (no
-  relocations, 4/8 bytes, starting at the call destination). An external callee is judged by its
-  catalogued extent, only when it is an ordinary top-level `kind: function` with no other entry, no
-  literal pool and size 4 or 8. A section that starts with `insn; BX lr` cannot extend past that
-  extent: only literal data could follow the return, and loading it reads the PC, which is never
-  inlined. Interior entries, `multi_entry` owners and veneers are never inlined (the call stays a
-  BL and mismatches if the original inlined it).
+- **Callee identity: decided from the original image only.** The callee is the original function
+  at the call destination, eligible only when the catalogue makes it unambiguous: an ordinary
+  top-level `kind: function`, ARM, size 4 or 8, all code (no pool or literal), no entry but its
+  start. I1–I3 apply to its original bytes (`InPlaceLinker.eligible_original_callee`). A section
+  that starts with `insn; BX lr` cannot extend past that extent: only literal data could follow the
+  return, and loading it reads the PC, which is never inlined. Interior entries, `multi_entry`
+  owners, veneers and Thumb functions are never inlined (the call stays a BL and mismatches if the
+  original inlined it).
+- **Callee defined in the candidate object.** armlink would judge the candidate's own section, so
+  it must be the original function: if either its section or the original would be inlined, the
+  local section (whole, relocation-free, starting at the destination) must equal the eligible
+  original body, otherwise the link is **refused** (`LinkError: armlink inlining is undecidable`).
+  `tools/build.py` links the whole object before it reads the ledger's function list, so a ledger
+  crediting only the caller is refused too. If neither would be inlined the call is an ordinary
+  relocated BL, so a wrong helper stays an ordinary mismatch.
 - **B1 — branch to the next instruction.** An unconditional relocated `B` whose destination is
   `place + 4` in the final (original) layout is written as `MOV r0, r0`. A relocated BL or
   B*cond* to the next instruction raises `LinkError` (armlink's output for it is not established;
@@ -126,10 +144,18 @@ were in different units placed adjacently — consistent with `--tailreorder` [I
 
 ## Measurements (branch `armlink-inline`)
 
-- **Accepted ledger:** `tools/build.py --name armlink-inline-accepted-check` with the default
-  model: PASS, 55/55 credited functions exact, `code.bin` and `.code` identical, no rewrites.
+- **Accepted ledger:** `tools/build.py --name armlink-inline-v2-accepted-check` with the default
+  model: PASS, 55/55 credited functions exact, `code.bin` and `.code` identical, no rewrites (v1:
+  `armlink-inline-accepted-check`, same result).
+- **F01 regression, real image:** func_001b6ec4 (below) with its two calls retargeted to a local
+  `void *func_0013714c(void *e) { return e; }` (compiles to `bx lr`; the original 0x13714c is
+  `MOV r0, r0; BX lr`), in a ledger crediting only func_001b6ec4: the v1 linker (c11a0ad) links it
+  with 2 `inline_nop` and the caller equal to the original (the helper differs); v2
+  `tools/build.py --matches scratch/armlink/f01-ledger.json` exits 2 with the refusal. The four
+  review probes (`scratch/review/armlink-inline/probe_local_callee.py` cases, run against v2) are all
+  refused; `tests/test_inplace.py::ArmlinkModelTest` reproduces each from a compiled object.
 - **Author mismatches:** every `mismatch` row with a source in `scratch/authors/*/RESULT.json` (67
-  rows, `research/linker/measure_authors.py`, sequential, both models). As written, **none newly matches**:
+  rows, `research/linker/measure_authors.py`, sequential, both models; identical under v1 and v2). As written, **none newly matches**:
   only func_001852f4 changes (MISMATCH → EXTENT: the 4-byte wrapper reproduces the NOP; the v3
   extent is the 68-byte group). No other candidate calls a function the model inlines, and none
   ends in a tail call to the next function. 5 rows fail identically under both models: two v3
@@ -157,11 +183,14 @@ were in different units placed adjacently — consistent with `--tailreorder` [I
 ## What a match under the model proves
 
 As before, for every relocated field: the same target address. For a rewritten branch only:
-- `inline_nop`/`inline_insn`: the called function's section (its catalogued extent) is that
-  return-only or one-instruction function — **not which function was called**.
+- `inline_nop`/`inline_insn`: the original function at the call's destination is that return-only
+  or one-instruction function (a body-equivalence class) — **not which function was called**, nor
+  the original call graph; interface and semantic review stay necessary.
 - `branchnop`: a function starts at the next instruction — the target symbol's address agrees with
   the layout, its identity is the C declaration's.
-Reviewers see each rewrite in the match result / build receipt.
+Reviewers see each rewrite in the match result, build receipt or compid record. These two
+qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
+checkpoint that credits a function through a rewrite (review F03).
 
 ## Residual unknowns
 

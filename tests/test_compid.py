@@ -1,4 +1,5 @@
 """tools/compid.py: a grid pair qualifies only when every supplied source compiled and matched."""
+import json
 import sys
 import tempfile
 import unittest
@@ -18,6 +19,8 @@ GRID = {
 GOOD = "struct S { char pad[0x1c]; int x1c; };\nvoid func_0010e664(struct S *s) { s->x1c = 0; }\n"
 BROKEN = "void func_0010e664(struct S *s) { s->x1c = ; }\n"
 EMPTY = "static int helper(int x) { return x + 1; }\n"
+# The v3 NOP entry 0x1852f4 as a C tail-call wrapper: one --branchnop rewrite (EXTENT under v3).
+WRAPPER = "extern void func_001852f8(void);\nvoid func_001852f4(void) { func_001852f8(); }\n"
 
 
 @unittest.skipUnless(HAVE_INPUTS, "private input or pinned compiler missing")
@@ -54,6 +57,34 @@ class CompidFailClosedTest(unittest.TestCase):
         self.assertEqual(result["matching_all"], [])
         reasons = list(result["failures"]["armcc_504_82:O3-Otime"].values())
         self.assertEqual(reasons, ["no catalogued function in the object"])
+
+    def test_linker_model_and_rewrites_are_recorded(self):
+        """Review F02: a cell must say which linker model produced it and what that model rewrote."""
+        result = self.run_sources(WRAPPER)
+        self.assertEqual(result["linker_model"], self.ctx.model.name)
+        self.assertEqual(result["results"]["func_001852f4"]["armcc_504_82:O3-Otime"], "E")
+        [rewrite] = result["linker_rewrites"]["func_001852f4"]["armcc_504_82:O3-Otime"]
+        self.assertEqual((rewrite["rule"], rewrite["target"], rewrite["word"]), ("branchnop", 0x1852F8, "0xe1a00000"))
+        strict = compid.run_grid(match.Context(ROOT / "config/catalogue.json", "strict-v1"),
+                                 [self.write_source(WRAPPER)], GRID, Path(tempfile.mkdtemp()))
+        self.assertEqual(strict["linker_model"], "strict-v1")
+        self.assertEqual(strict["linker_rewrites"], {})
+        self.assertTrue(strict["results"]["func_001852f4"]["armcc_504_82:O3-Otime"].startswith("+"))
+
+    def test_compid_json_binds_the_linker_model(self):
+        tmp = Path(tempfile.mkdtemp())
+        grid = tmp / "grid.json"
+        grid.write_text(json.dumps(GRID), encoding="utf-8")
+        code = compid.main([str(self.write_source(WRAPPER)), "--grid", str(grid), "--out", str(tmp / "out"),
+                            "--linker-model", "strict-v1"])
+        self.assertEqual(code, 1)
+        record = json.loads((tmp / "out/compid.json").read_text(encoding="utf-8"))
+        self.assertEqual((record["linker_model"], record["linker_rewrites"]), ("strict-v1", {}))
+
+    def write_source(self, text):
+        path = Path(tempfile.mkdtemp()) / "probe.c"
+        path.write_text(text, encoding="utf-8")
+        return path
 
 
 if __name__ == "__main__":

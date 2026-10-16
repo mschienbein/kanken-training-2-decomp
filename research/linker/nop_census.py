@@ -153,12 +153,11 @@ for a in range(text.address, text.address + text.size, 4):
         census["nop_hint" if word(a) == NOP_HINT else "mov_r0_r0"][where] += 1
 
 linker = inplace.InPlaceLinker(image, functions, inplace.Resolver(functions), image.bss)
-external = inplace.Symbol("callee", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
 small = {}
 for a, f in functions.items():
     code = f.get("code_size", f["size"])
     if f["isa"] == "arm" and code in (4, 8) and word(a + code - 4) in (0xE12FFF1E, 0xE1A0F00E):
-        body = linker._callee_section(external, a, None, {})
+        body = linker.eligible_original_callee(a)
         rule = inplace.inline_arm_call(0xEB000000, body) if body else None
         first = insn(a).mnemonic + (" [pc]" if "pc" in insn(a).op_str else "") if code == 8 else "return-only"
         small[a] = (rule[0] if rule else "kept", first)

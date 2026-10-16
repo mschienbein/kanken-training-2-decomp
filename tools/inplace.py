@@ -11,9 +11,10 @@ branch that would need a linker veneer is an error, never a silent pass.
 Because relocated fields must reproduce the original bytes, a byte match also proves every call
 and data reference resolves to the same address as in the original — except where the selected
 `LinkerModel` reproduces an armlink output optimisation (docs/LINKER.md): a BL inlined as its
-callee's instruction (or a NOP) proves only that the callee's body is that instruction, and a B
-to the next instruction written as a NOP proves only that the target starts there. Every such
-rewrite is reported (`InPlaceLinker.rewrites`) and the model name is recorded by the callers.
+callee's instruction (or a NOP), decided from the ORIGINAL function at the call's destination,
+proves only that the original callee's body is that instruction, and a B to the next instruction
+written as a NOP proves only that the target starts there. Every such rewrite is reported
+(`InPlaceLinker.rewrites`) and the model name is recorded by the callers.
 """
 from __future__ import annotations
 
@@ -74,12 +75,19 @@ class LinkerModel:
 
 LINKER_MODELS = {m.name: m for m in (
     LinkerModel("strict-v1"),
-    LinkerModel("armlink5-inline-branchnop-v1", inline=True, branchnop=True),
+    LinkerModel("armlink5-inline-branchnop-v2", inline=True, branchnop=True),
 )}
-DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v1"
+DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
+# Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).
+RETIRED_LINKER_MODELS = {
+    "armlink5-inline-branchnop-v1": "judged a callee defined in the candidate object by the candidate's own bytes, "
+    "not the original's (review F01); superseded by armlink5-inline-branchnop-v2",
+}
 
 
 def linker_model(name: str) -> LinkerModel:
+    if name in RETIRED_LINKER_MODELS:
+        raise LinkError(f"linker model {name!r} is retired: {RETIRED_LINKER_MODELS[name]}")
     model = LINKER_MODELS.get(name)
     if model is None:
         raise LinkError(f"unknown linker model {name!r}; known: {', '.join(sorted(LINKER_MODELS))}")
@@ -610,27 +618,44 @@ class InPlaceLinker:
             return Rewrite(sec.index, rel.offset, "branchnop", dest, ARM_LINKER_NOP)
         if not (is_call and self.model.inline):
             return None
-        body = self._callee_section(rel.symbol, dest, obj, placements)
-        inlined = inline_arm_call(insn, body) if body is not None else None
+        inlined = self._inline_decision(insn, rel, sec, dest, obj, placements)
         return Rewrite(sec.index, rel.offset, inlined[0], dest, inlined[1]) if inlined else None
 
-    def _callee_section(self, sym: Symbol, dest: int, obj: ObjectFile, placements: dict[int, Placement]) -> bytes | None:
-        """The bytes armlink sees as the called function's whole section, when they are known.
+    def _inline_decision(self, insn: int, rel: Reloc, sec: Section, dest: int, obj: ObjectFile,
+                         placements: dict[int, Placement]) -> tuple[str, int] | None:
+        """Rules I1-I3 for the BL `insn` to `dest`, decided from the ORIGINAL image only.
 
-        A callee in this object is its own section (unrelocated, so not a branch). An external callee
-        stands in through its catalogued extent, accepted only for an ordinary function that is all
-        code with no other entry: a 4/8-byte section ending in a return cannot be longer than that
-        extent, because only literal data could follow the return, and a callee that loads it reads
-        the PC and is never inlined. Anything else is not inlined, so the call stays a BL.
+        The callee is the original function at `dest` when the catalogue makes it an unambiguous
+        candidate (`eligible_original_callee`). A callee the candidate object defines itself must be
+        that same function: when either its own section or the original would be inlined, its
+        whole, relocation-free section must equal the eligible original body, or the link is
+        refused — otherwise a wrong local helper could decide the caller's bytes. When neither
+        would be inlined the call is an ordinary BL and nothing is decided.
         """
+        original = self.eligible_original_callee(dest)
+        decided = inline_arm_call(insn, original) if original is not None else None
+        sym = rel.symbol
         if isinstance(sym.shndx, int) and sym.shndx in obj.sections:
-            callee = obj.sections[sym.shndx]
-            placed = placements.get(sym.shndx)
-            if placed is None or dest != placed.base or not callee.executable or callee.nobits:
-                return None
-            if any(r.type not in (R_ARM_NONE, R_ARM_V4BX) for r in callee.relocs):
-                return None
-            return callee.data
+            local = self._local_callee_section(sym, dest, obj, placements)
+            candidate = inline_arm_call(insn, local) if local is not None else None
+            if (decided or candidate) and (original is None or local != original):
+                why = ("is not an ordinary 4/8-byte ARM function with a single entry in the catalogue"
+                       if original is None else
+                       "is defined in this object with other bytes than the original"
+                       if local is not None else "is defined in this object by a section the model cannot judge")
+                raise LinkError(
+                    f"{sec.name}+{rel.offset:#x}: call to {sym.name or obj.sections[sym.shndx].name} at {dest:#x}: "
+                    f"armlink inlining is undecidable, the callee {why} (docs/LINKER.md)"
+                )
+        return decided
+
+    def eligible_original_callee(self, dest: int) -> bytes | None:
+        """The original bytes of the function at `dest` when the catalogue makes it an unambiguous
+        inlining candidate: an ordinary top-level ARM `function` of 4 or 8 bytes, all code, no
+        literal pool, no entry but its start. Its section cannot be longer than that extent: only
+        literal data could follow its return, and a callee that loads it reads the PC and is never
+        inlined. None for anything else (interior entries, multi-entry owners, veneers, Thumb):
+        such a call stays a BL."""
         fn = self.functions.get(dest)
         if fn is None or fn.get("isa") != "arm" or fn.get("kind", "function") != "function":
             return None
@@ -639,6 +664,18 @@ class InPlaceLinker:
         if fn.get("pools") or fn.get("literals") or any(e["address"] != dest for e in fn.get("entries", ())):
             return None
         return self.image.read(dest, fn["size"])
+
+    @staticmethod
+    def _local_callee_section(sym: Symbol, dest: int, obj: ObjectFile, placements: dict[int, Placement]) -> bytes | None:
+        """The whole section of a callee defined in this object, when it starts at `dest` and holds
+        only executable, relocation-free bytes; None when the model cannot judge it."""
+        callee = obj.sections[sym.shndx]
+        placed = placements.get(sym.shndx)
+        if placed is None or dest != placed.base or not callee.executable or callee.nobits:
+            return None
+        if any(r.type not in (R_ARM_NONE, R_ARM_V4BX) for r in callee.relocs):
+            return None
+        return callee.data
 
     # -- link + verify -------------------------------------------------------------------------
 
