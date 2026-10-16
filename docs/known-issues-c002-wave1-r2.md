@@ -1,4 +1,4 @@
-# Known issues — checkpoint c002-wave1-r2
+# Known issues — checkpoint c002-wave1-r2 (superseded by c002-wave1-r3; never finalized)
 
 38 functions (H11 agent pilot and wave 1), authored by OpenAI-family agents
 (`openai-codex/gpt-6.1-sol`; the `author` field per unit is in `config/candidates/c002-wave1.json`).
