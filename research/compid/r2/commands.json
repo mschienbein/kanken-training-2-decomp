@@ -1,0 +1,2355 @@
+{
+  "worker": {
+    "id": "CompilerIdR2",
+    "family": "OpenAI",
+    "model": "openai-codex/gpt-6.1-sol"
+  },
+  "commands": [
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001033cc"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001033cc.log",
+      "seconds": 0.438
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010c498"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010c498.log",
+      "seconds": 0.437
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/loop_alloc.c",
+        "research/compid/r2/virtual_dimensions.cpp",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/optimization-initial"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/optimization-initial.log",
+      "seconds": 1.822
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/loop_alloc.c",
+        "--profile",
+        "trial-504-82-O2-Otime",
+        "--out",
+        "scratch/compid/r2/loop-alloc-initial"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loop-alloc-initial.log",
+      "seconds": 0.276
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/virtual_dimensions.cpp",
+        "--profile",
+        "trial-504-82-O2-Otime",
+        "--out",
+        "scratch/compid/r2/virtual-initial"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/virtual-initial.log",
+      "seconds": 0.273
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010163c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010163c.log",
+      "seconds": 0.472
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00103044"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00103044.log",
+      "seconds": 0.458
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00104d6c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00104d6c.log",
+      "seconds": 0.489
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00105084"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00105084.log",
+      "seconds": 0.498
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010b598"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010b598.log",
+      "seconds": 0.477
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00107dec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00107dec.log",
+      "seconds": 0.478
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001109b4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001109b4.log",
+      "seconds": 0.454
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001109cc"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001109cc.log",
+      "seconds": 0.526
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_loops.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/loops-initial"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loops-initial.log",
+      "seconds": 0.987
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/virtual_dimensions.cpp",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/virtual-o3-initial"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/virtual-o3-initial.log",
+      "seconds": 0.291
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_loops.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/loops-o3-initial",
+        "--show",
+        "40"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loops-o3-initial.log",
+      "seconds": 0.341
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_loops.c",
+        "--profile",
+        "trial-504-82-O2-Otime",
+        "--out",
+        "scratch/compid/r2/loops-o2-initial",
+        "--show",
+        "40"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loops-o2-initial.log",
+      "seconds": 0.282
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010e664"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010e664.log",
+      "seconds": 0.445
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001149a8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001149a8.log",
+      "seconds": 0.449
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00103798"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00103798.log",
+      "seconds": 0.486
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001091d4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001091d4.log",
+      "seconds": 0.498
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001103d4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001103d4.log",
+      "seconds": 0.5
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010bed4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010bed4.log",
+      "seconds": 0.454
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0012d0ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0012d0ec.log",
+      "seconds": 0.473
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00137bf8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00137bf8.log",
+      "seconds": 0.49
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0016b678"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0016b678.log",
+      "seconds": 0.502
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001109fc"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001109fc.log",
+      "seconds": 0.541
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00110a00"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00110a00.log",
+      "seconds": 3.377
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00137118"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00137118.log",
+      "seconds": 3.212
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0013714c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0013714c.log",
+      "seconds": 0.754
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00144220"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00144220.log",
+      "seconds": 0.699
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0018f7ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0018f7ec.log",
+      "seconds": 0.588
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c5b84"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c5b84.log",
+      "seconds": 0.616
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c6ad8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c6ad8.log",
+      "seconds": 0.687
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00100d6c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00100d6c.log",
+      "seconds": 0.62
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0011ef48"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0011ef48.log",
+      "seconds": 0.65
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001a00b8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001a00b8.log",
+      "seconds": 0.684
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/virtual_vector.cpp",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/virtual_vector-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/virtual_vector-grid.log",
+      "seconds": 1.209
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/virtual_locals.cpp",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/virtual_locals-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/virtual_locals-grid.log",
+      "seconds": 0.908
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/loop_alloc_global.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/loop_alloc_global-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loop_alloc_global-grid.log",
+      "seconds": 1.015
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010239c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010239c.log",
+      "seconds": 0.537
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00102410"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00102410.log",
+      "seconds": 0.493
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00102474"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00102474.log",
+      "seconds": 0.488
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010264c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010264c.log",
+      "seconds": 0.506
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00103258"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00103258.log",
+      "seconds": 0.496
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001032e0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001032e0.log",
+      "seconds": 0.497
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00103358"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00103358.log",
+      "seconds": 0.483
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001043f8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001043f8.log",
+      "seconds": 0.504
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00105fa8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00105fa8.log",
+      "seconds": 0.494
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010163c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010163c.log",
+      "seconds": 0.466
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010625c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010625c.log",
+      "seconds": 0.465
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010d500"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010d500.log",
+      "seconds": 0.523
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010d604"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010d604.log",
+      "seconds": 0.513
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010dcb0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010dcb0.log",
+      "seconds": 0.469
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010dce8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010dce8.log",
+      "seconds": 0.513
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010dd20"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010dd20.log",
+      "seconds": 0.522
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001107c4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001107c4.log",
+      "seconds": 0.48
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/loop_cleanup.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/loop_cleanup-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/loop_cleanup-grid.log",
+      "seconds": 0.969
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/loop_state.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/loop_state-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/loop_state-grid.log",
+      "seconds": 0.928
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_virtual.cpp",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/game_virtual-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/game_virtual-grid.log",
+      "seconds": 0.977
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/loop_alloc_cpp.cpp",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/loop_alloc_cpp-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loop_alloc_cpp-grid.log",
+      "seconds": 0.993
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001105a8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001105a8.log",
+      "seconds": 0.47
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001109fc"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001109fc.log",
+      "seconds": 0.518
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00110a00"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00110a00.log",
+      "seconds": 0.474
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00110a28"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00110a28.log",
+      "seconds": 0.468
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00110a2c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00110a2c.log",
+      "seconds": 0.465
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00110a58"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00110a58.log",
+      "seconds": 0.555
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00136510"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00136510.log",
+      "seconds": 0.472
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0016bf90"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0016bf90.log",
+      "seconds": 0.469
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001718ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001718ec.log",
+      "seconds": 0.48
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00171c7c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00171c7c.log",
+      "seconds": 0.559
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0017a034"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0017a034.log",
+      "seconds": 0.523
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_switch.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/game_switch-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/game_switch-grid.log",
+      "seconds": 1.016
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/loop_alloc_resource.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/loop_alloc_resource-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/loop_alloc_resource-grid.log",
+      "seconds": 1.089
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_virtual.cpp",
+        "--grid",
+        "research/compid/r2/cpp_grid.json",
+        "--out",
+        "scratch/compid/r2/cpp-options"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/cpp-options.log",
+      "seconds": 1.492
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010bc9c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010bc9c.log",
+      "seconds": 0.676
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001105a8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001105a8.log",
+      "seconds": 0.788
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0012d0ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0012d0ec.log",
+      "seconds": 0.662
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0012d148"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0012d148.log",
+      "seconds": 0.705
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0012d150"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0012d150.log",
+      "seconds": 0.636
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0012d168"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0012d168.log",
+      "seconds": 0.65
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00134e7c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00134e7c.log",
+      "seconds": 0.659
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00137bf8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00137bf8.log",
+      "seconds": 0.681
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0018f7d4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0018f7d4.log",
+      "seconds": 0.653
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0018f7ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0018f7ec.log",
+      "seconds": 0.594
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c43f0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c43f0.log",
+      "seconds": 0.706
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c4408"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c4408.log",
+      "seconds": 0.602
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c4478"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c4478.log",
+      "seconds": 0.603
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c4484"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c4484.log",
+      "seconds": 0.739
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c44ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c44ec.log",
+      "seconds": 0.605
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c4538"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c4538.log",
+      "seconds": 0.607
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c4540"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c4540.log",
+      "seconds": 0.8
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c4558"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c4558.log",
+      "seconds": 0.631
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c5b84"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c5b84.log",
+      "seconds": 0.639
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001a00f8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001a00f8.log",
+      "seconds": 0.744
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001a0200"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001a0200.log",
+      "seconds": 0.638
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001a29f4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001a29f4.log",
+      "seconds": 0.595
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001a407c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001a407c.log",
+      "seconds": 0.634
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001f7d7c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001f7d7c.log",
+      "seconds": 0.733
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00209ec8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00209ec8.log",
+      "seconds": 0.685
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001a0550"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001a0550.log",
+      "seconds": 0.783
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019d798"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019d798.log",
+      "seconds": 0.869
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019d3b4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019d3b4.log",
+      "seconds": 0.852
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019cf20"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019cf20.log",
+      "seconds": 0.826
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019da14"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019da14.log",
+      "seconds": 0.854
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db144"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db144.log",
+      "seconds": 0.764
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001ce9e8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001ce9e8.log",
+      "seconds": 0.812
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019da14"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019da14.log",
+      "seconds": 0.826
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db144"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db144.log",
+      "seconds": 0.764
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001ce9e8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001ce9e8.log",
+      "seconds": 0.826
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001d3c78"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001d3c78.log",
+      "seconds": 0.764
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014837c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014837c.log",
+      "seconds": 0.763
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014a3c4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014a3c4.log",
+      "seconds": 0.733
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014ded8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014ded8.log",
+      "seconds": 0.793
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014df74"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014df74.log",
+      "seconds": 0.832
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001582ac"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001582ac.log",
+      "seconds": 0.749
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00157fe8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00157fe8.log",
+      "seconds": 0.921
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001525c8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001525c8.log",
+      "seconds": 0.545
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001525dc"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001525dc.log",
+      "seconds": 0.63
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00152624"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00152624.log",
+      "seconds": 0.661
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0015274c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0015274c.log",
+      "seconds": 0.579
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00152964"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00152964.log",
+      "seconds": 0.627
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00153f90"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00153f90.log",
+      "seconds": 0.632
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00153fec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00153fec.log",
+      "seconds": 0.589
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00148004"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00148004.log",
+      "seconds": 0.555
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00148014"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00148014.log",
+      "seconds": 0.662
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00148358"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00148358.log",
+      "seconds": 0.558
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001487cc"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001487cc.log",
+      "seconds": 0.558
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001487e4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001487e4.log",
+      "seconds": 0.639
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001487ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001487ec.log",
+      "seconds": 0.579
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00136cc4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00136cc4.log",
+      "seconds": 0.624
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0013604c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0013604c.log",
+      "seconds": 0.724
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0013605c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0013605c.log",
+      "seconds": 0.693
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0013606c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0013606c.log",
+      "seconds": 0.634
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0013607c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0013607c.log",
+      "seconds": 0.684
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0013608c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0013608c.log",
+      "seconds": 0.742
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00136104"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00136104.log",
+      "seconds": 0.627
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00155b24"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00155b24.log",
+      "seconds": 0.779
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001560c4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001560c4.log",
+      "seconds": 0.87
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00156de8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00156de8.log",
+      "seconds": 0.791
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00156f74"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00156f74.log",
+      "seconds": 0.781
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014c338"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014c338.log",
+      "seconds": 0.566
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014db18"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014db18.log",
+      "seconds": 0.622
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014db3c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014db3c.log",
+      "seconds": 0.787
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014dc28"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014dc28.log",
+      "seconds": 0.77
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0015c5a4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0015c5a4.log",
+      "seconds": 0.796
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0015cab4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0015cab4.log",
+      "seconds": 0.769
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0017d9e0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0017d9e0.log",
+      "seconds": 0.754
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0014dc44"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0014dc44.log",
+      "seconds": 0.926
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db054"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db054.log",
+      "seconds": 0.797
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db068"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db068.log",
+      "seconds": 0.801
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db0f8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db0f8.log",
+      "seconds": 0.743
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db3ec"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db3ec.log",
+      "seconds": 0.861
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db610"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db610.log",
+      "seconds": 0.8
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db624"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db624.log",
+      "seconds": 1.023
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001db638"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001db638.log",
+      "seconds": 0.856
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001cc1d4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001cc1d4.log",
+      "seconds": 0.787
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001cc520"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001cc520.log",
+      "seconds": 0.832
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001cc66c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001cc66c.log",
+      "seconds": 0.659
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/library_ctr.c",
+        "research/compid/r2/library_nw4c.c",
+        "research/compid/r2/library_pux.c",
+        "--grid",
+        "research/compid/r2/library_grid.json",
+        "--out",
+        "scratch/compid/r2/library-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/library-grid.log",
+      "seconds": 11.395
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_switch.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/switch-post-oracle",
+        "--show",
+        "45"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/switch-post-oracle.log",
+      "seconds": 0.531
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/library_ctr.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/library_ctr-initial",
+        "--show",
+        "35"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/library_ctr-initial.log",
+      "seconds": 1.413
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/library_nw4c.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/library_nw4c-initial",
+        "--show",
+        "35"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/library_nw4c-initial.log",
+      "seconds": 1.437
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/virtual_dimensions.cpp",
+        "--grid",
+        "research/compid/r2/cpp_grid.json",
+        "--out",
+        "scratch/compid/r2/virtual_dimensions-cpp-options"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/virtual_dimensions-cpp-options.log",
+      "seconds": 6.545
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_switch_cpp.cpp",
+        "--grid",
+        "research/compid/r2/cpp_grid.json",
+        "--out",
+        "scratch/compid/r2/game_switch_cpp-cpp-options"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/game_switch_cpp-cpp-options.log",
+      "seconds": 5.428
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/library_nw4c_readers.c",
+        "--grid",
+        "research/compid/r2/library_grid.json",
+        "--out",
+        "scratch/compid/r2/nw4c-readers-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/nw4c-readers-grid.log",
+      "seconds": 7.692
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_core.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/game-core-initial",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/game-core-initial.log",
+      "seconds": 1.441
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_enum_switch.c",
+        "--grid",
+        "research/compid/r2/optimization_grid.json",
+        "--out",
+        "scratch/compid/r2/enum-switch-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/enum-switch-grid.log",
+      "seconds": 3.1
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/library_nop.c",
+        "--grid",
+        "research/compid/r2/library_grid.json",
+        "--out",
+        "scratch/compid/r2/nop-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/nop-grid.log",
+      "seconds": 5.16
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00181e94"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00181e94.log",
+      "seconds": 1.303
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00181e9e"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00181e9e.log",
+      "seconds": 1.191
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00191c80"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00191c80.log",
+      "seconds": 1.279
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019d5b0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019d5b0.log",
+      "seconds": 1.289
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019f9a0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019f9a0.log",
+      "seconds": 1.257
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019f9a4"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019f9a4.log",
+      "seconds": 1.293
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0019f9aa"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0019f9aa.log",
+      "seconds": 1.126
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_00100066"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-00100066.log",
+      "seconds": 1.283
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_0010006e"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-0010006e.log",
+      "seconds": 1.16
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001008d0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001008d0.log",
+      "seconds": 1.201
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/packet.py",
+        "func_001c6ad8"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/packet-001c6ad8.log",
+      "seconds": 1.235
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/runtime_thumb.c",
+        "--grid",
+        "research/compid/r2/thumb_grid.json",
+        "--out",
+        "scratch/compid/r2/thumb-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/thumb-grid.log",
+      "seconds": 3.602
+    },
+    {
+      "argv": [
+        ".cache/toolchain/bin/wibo",
+        ".cache/toolchain/armcc/5.04/b82/bin/armcc.exe",
+        "--help"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/compiler-help.log",
+      "seconds": 0.154
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/game_core.c",
+        "research/compid/r2/loop_cleanup.c",
+        "research/compid/r2/loop_state.c",
+        "research/compid/r2/loop_resources.c",
+        "research/compid/r2/game_virtual.cpp",
+        "research/compid/r2/game_enum_switch.c",
+        "--grid",
+        "research/compid/r2/final_grid.json",
+        "--out",
+        "scratch/compid/r2/final-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-grid.log",
+      "seconds": 28.662
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_core.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/final-match/game_core",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-match-game_core.log",
+      "seconds": 0.829
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/loop_cleanup.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/final-match/loop_cleanup",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-match-loop_cleanup.log",
+      "seconds": 0.663
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/loop_state.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/final-match/loop_state",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-match-loop_state.log",
+      "seconds": 0.735
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/loop_resources.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/final-match/loop_resources",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-match-loop_resources.log",
+      "seconds": 0.695
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_virtual.cpp",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/final-match/game_virtual",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-match-game_virtual.log",
+      "seconds": 0.662
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/game_enum_switch.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/final-match/game_enum_switch",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/final-match-game_enum_switch.log",
+      "seconds": 0.602
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/runtime_thumb_get.c",
+        "--grid",
+        "research/compid/r2/thumb_grid.json",
+        "--out",
+        "scratch/compid/r2/thumb-get-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/thumb-get-grid.log",
+      "seconds": 2.831
+    },
+    {
+      "argv": [
+        ".cache/toolchain/bin/wibo",
+        ".cache/toolchain/armcc/5.04/b82/bin/armcc.exe",
+        "-c",
+        "--cpu=MPCore",
+        "--arm",
+        "-O3",
+        "-Otime",
+        "--no_unroll",
+        "-o",
+        "scratch/compid/r2/unsupported-no-unroll.o",
+        "research/compid/r2/loop_resources.c"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/unsupported-no-unroll.log",
+      "seconds": 0.099
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/compid.py",
+        "research/compid/r2/library_ctr_wrappers.c",
+        "--grid",
+        "research/compid/r2/library_grid.json",
+        "--out",
+        "scratch/compid/r2/ctr-wrappers-grid"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 1,
+      "log": "scratch/compid/r2/ctr-wrappers-grid.log",
+      "seconds": 4.426
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/library_nw4c_readers.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/library-match/nw4c",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/library-match-nw4c.log",
+      "seconds": 0.645
+    },
+    {
+      "argv": [
+        ".venv/bin/python",
+        "tools/match.py",
+        "research/compid/r2/library_pux.c",
+        "--profile",
+        "trial-504-82-O3-Otime",
+        "--out",
+        "scratch/compid/r2/library-match/pux",
+        "--show",
+        "0"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/library-match-pux.log",
+      "seconds": 0.507
+    },
+    {
+      "argv": [
+        "du",
+        "-sk",
+        "scratch/compid/r2",
+        "scratch/packets"
+      ],
+      "cwd": "/Users/mooki/Code/kanken-training-2-decomp",
+      "exit_code": 0,
+      "log": "scratch/compid/r2/scratch-size.log",
+      "seconds": 0.101
+    }
+  ]
+}

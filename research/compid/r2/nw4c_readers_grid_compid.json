@@ -1,0 +1,128 @@
+{
+ "failures": {
+  "armcc_40_821:O0-time": {
+   "research/compid/r2/library_nw4c_readers.c": "i.func_001db054 [0x1db054, 0x1db070) and i.func_001db068 [0x1db068, 0x1db084) overlap"
+  },
+  "armcc_41_1049:O0-time": {
+   "research/compid/r2/library_nw4c_readers.c": "i.func_001db054 [0x1db054, 0x1db070) and i.func_001db068 [0x1db068, 0x1db084) overlap"
+  },
+  "armcc_41_1440:O0-time": {
+   "research/compid/r2/library_nw4c_readers.c": "i.func_001db054 [0x1db054, 0x1db070) and i.func_001db068 [0x1db068, 0x1db084) overlap"
+  },
+  "armcc_504_82:O0-time": {
+   "research/compid/r2/library_nw4c_readers.c": "i.func_001db054 [0x1db054, 0x1db070) and i.func_001db068 [0x1db068, 0x1db084) overlap"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_40_821",
+   "armcc_41_1049",
+   "armcc_41_1440",
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O0-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O0",
+    "-Otime"
+   ],
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-space": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Ospace"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [
+  "armcc_40_821:O3-time",
+  "armcc_40_821:O2-time",
+  "armcc_40_821:O3-space",
+  "armcc_41_1049:O3-time",
+  "armcc_41_1049:O2-time",
+  "armcc_41_1049:O3-space",
+  "armcc_41_1440:O3-time",
+  "armcc_41_1440:O2-time",
+  "armcc_41_1440:O3-space",
+  "armcc_504_82:O3-time",
+  "armcc_504_82:O2-time",
+  "armcc_504_82:O3-space"
+ ],
+ "results": {
+  "func_001db054": {
+   "armcc_40_821:O2-time": "Y",
+   "armcc_40_821:O3-space": "Y",
+   "armcc_40_821:O3-time": "Y",
+   "armcc_41_1049:O2-time": "Y",
+   "armcc_41_1049:O3-space": "Y",
+   "armcc_41_1049:O3-time": "Y",
+   "armcc_41_1440:O2-time": "Y",
+   "armcc_41_1440:O3-space": "Y",
+   "armcc_41_1440:O3-time": "Y",
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-space": "Y",
+   "armcc_504_82:O3-time": "Y"
+  },
+  "func_001db068": {
+   "armcc_40_821:O2-time": "Y",
+   "armcc_40_821:O3-space": "Y",
+   "armcc_40_821:O3-time": "Y",
+   "armcc_41_1049:O2-time": "Y",
+   "armcc_41_1049:O3-space": "Y",
+   "armcc_41_1049:O3-time": "Y",
+   "armcc_41_1440:O2-time": "Y",
+   "armcc_41_1440:O3-space": "Y",
+   "armcc_41_1440:O3-time": "Y",
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-space": "Y",
+   "armcc_504_82:O3-time": "Y"
+  },
+  "func_001db3ec": {
+   "armcc_40_821:O2-time": "Y",
+   "armcc_40_821:O3-space": "Y",
+   "armcc_40_821:O3-time": "Y",
+   "armcc_41_1049:O2-time": "Y",
+   "armcc_41_1049:O3-space": "Y",
+   "armcc_41_1049:O3-time": "Y",
+   "armcc_41_1440:O2-time": "Y",
+   "armcc_41_1440:O3-space": "Y",
+   "armcc_41_1440:O3-time": "Y",
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-space": "Y",
+   "armcc_504_82:O3-time": "Y"
+  }
+ },
+ "sources": {
+  "research/compid/r2/library_nw4c_readers.c": "72cf9c8a0d313b252948a068613117d19ba0ba5f8b4fdf3a2beabda49090192b"
+ }
+}

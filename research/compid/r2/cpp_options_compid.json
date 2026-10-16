@@ -1,0 +1,106 @@
+{
+ "failures": {},
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O3-default-cpp": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp"
+   ],
+   "O3-embedded-cpp": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_rtti",
+    "--no_exceptions",
+    "--force_new_nothrow",
+    "--no_vfe"
+   ],
+   "O3-force-new-nothrow": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--force_new_nothrow"
+   ],
+   "O3-no-exceptions": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_exceptions"
+   ],
+   "O3-no-rtti": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_rtti"
+   ],
+   "O3-no-vfe": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_vfe"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [
+  "armcc_504_82:O3-default-cpp",
+  "armcc_504_82:O3-no-rtti",
+  "armcc_504_82:O3-no-exceptions",
+  "armcc_504_82:O3-force-new-nothrow",
+  "armcc_504_82:O3-no-vfe",
+  "armcc_504_82:O3-embedded-cpp"
+ ],
+ "results": {
+  "func_0010d604": {
+   "armcc_504_82:O3-default-cpp": "Y",
+   "armcc_504_82:O3-embedded-cpp": "Y",
+   "armcc_504_82:O3-force-new-nothrow": "Y",
+   "armcc_504_82:O3-no-exceptions": "Y",
+   "armcc_504_82:O3-no-rtti": "Y",
+   "armcc_504_82:O3-no-vfe": "Y"
+  }
+ },
+ "sources": {
+  "research/compid/r2/game_virtual.cpp": "4fd10d2372c8f6e683ed0ead2455ad097ec3abec65c5e7869f0928810a719788"
+ }
+}

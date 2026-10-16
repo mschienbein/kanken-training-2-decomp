@@ -1,0 +1,70 @@
+{
+ "failures": {},
+ "grid": {
+  "compilers": [
+   "armcc_40_821",
+   "armcc_41_1049",
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "thumb-O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--thumb",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "thumb-O3-space": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--thumb",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Ospace"
+   ],
+   "thumb-O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--thumb",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [
+  "armcc_40_821:thumb-O3-time",
+  "armcc_40_821:thumb-O2-time",
+  "armcc_40_821:thumb-O3-space",
+  "armcc_41_1049:thumb-O3-time",
+  "armcc_41_1049:thumb-O2-time",
+  "armcc_41_1049:thumb-O3-space",
+  "armcc_504_82:thumb-O3-time",
+  "armcc_504_82:thumb-O2-time",
+  "armcc_504_82:thumb-O3-space"
+ ],
+ "results": {
+  "func_00181e94": {
+   "armcc_40_821:thumb-O2-time": "Y",
+   "armcc_40_821:thumb-O3-space": "Y",
+   "armcc_40_821:thumb-O3-time": "Y",
+   "armcc_41_1049:thumb-O2-time": "Y",
+   "armcc_41_1049:thumb-O3-space": "Y",
+   "armcc_41_1049:thumb-O3-time": "Y",
+   "armcc_504_82:thumb-O2-time": "Y",
+   "armcc_504_82:thumb-O3-space": "Y",
+   "armcc_504_82:thumb-O3-time": "Y"
+  }
+ },
+ "sources": {
+  "research/compid/r2/runtime_thumb_get.c": "e2f700b14efed36ea6461982b476d3704cef258bfd72a0b0732dae4a594d52fe"
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "failures": {
+  "armcc_504_82:O3-time-no-unroll": {
+   "research/compid/r2/loop_alloc.c": "armcc failed (1) on loop_alloc.c:",
+   "research/compid/r2/virtual_dimensions.cpp": "armcc failed (1) on virtual_dimensions.cpp:"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "O3-time-loop0": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=0"
+   ],
+   "O3-time-loop1": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=1"
+   ],
+   "O3-time-no-unroll": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--no_unroll"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_001033cc": {
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-time": "+0",
+   "armcc_504_82:O3-time-loop0": "+0",
+   "armcc_504_82:O3-time-loop1": "+0"
+  },
+  "func_0010c498": {
+   "armcc_504_82:O2-time": "+c",
+   "armcc_504_82:O3-time": "+c",
+   "armcc_504_82:O3-time-loop0": "+c",
+   "armcc_504_82:O3-time-loop1": "+c"
+  }
+ },
+ "sources": {
+  "research/compid/r2/loop_alloc.c": "d1b01bf7ef753f40ef8c9f19cdad8d53a1b52bba3c1f9095717613b4bf87033e",
+  "research/compid/r2/virtual_dimensions.cpp": "f691f4edc75d33889d5cac6bbaa3be026de580dd1aff32c758b88bfebb2268cc"
+ }
+}

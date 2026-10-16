@@ -1,0 +1,80 @@
+{
+ "failures": {
+  "armcc_504_82:O3-time-no-unroll": {
+   "research/compid/r2/loop_alloc_global.c": "armcc failed (1) on loop_alloc_global.c:"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "O3-time-loop0": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=0"
+   ],
+   "O3-time-loop1": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=1"
+   ],
+   "O3-time-no-unroll": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--no_unroll"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_001033cc": {
+   "armcc_504_82:O2-time": "+18",
+   "armcc_504_82:O3-time": "+0",
+   "armcc_504_82:O3-time-loop0": "+18",
+   "armcc_504_82:O3-time-loop1": "+0"
+  }
+ },
+ "sources": {
+  "research/compid/r2/loop_alloc_global.c": "5bbb734c9dffdb6e1c4af58047121741a2dc77436efd34136d2b35d2594d499e"
+ }
+}

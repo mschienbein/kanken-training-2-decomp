@@ -1,0 +1,85 @@
+{
+ "failures": {
+  "armcc_504_82:O2-time": {
+   "research/compid/r2/game_switch.c": "unresolved symbol '__switch$$' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+  },
+  "armcc_504_82:O3-time": {
+   "research/compid/r2/game_switch.c": "unresolved symbol '__switch$$' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+  },
+  "armcc_504_82:O3-time-loop0": {
+   "research/compid/r2/game_switch.c": "unresolved symbol '__switch$$' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+  },
+  "armcc_504_82:O3-time-loop1": {
+   "research/compid/r2/game_switch.c": "unresolved symbol '__switch$$' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+  },
+  "armcc_504_82:O3-time-no-unroll": {
+   "research/compid/r2/game_switch.c": "armcc failed (1) on game_switch.c:"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "O3-time-loop0": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=0"
+   ],
+   "O3-time-loop1": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=1"
+   ],
+   "O3-time-no-unroll": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--no_unroll"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {},
+ "sources": {
+  "research/compid/r2/game_switch.c": "1a14af1c57c2033d2d57043cee6e8d4c9e96e3b5d21de3439d834e76af0106ef"
+ }
+}

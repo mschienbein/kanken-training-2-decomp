@@ -1,0 +1,90 @@
+{
+ "failures": {
+  "armcc_504_82:O3-time-no-unroll": {
+   "research/compid/r2/loop_cleanup.c": "armcc failed (1) on loop_cleanup.c:"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "O3-time-loop0": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=0"
+   ],
+   "O3-time-loop1": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=1"
+   ],
+   "O3-time-no-unroll": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--no_unroll"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [
+  "armcc_504_82:O3-time",
+  "armcc_504_82:O3-time-loop0",
+  "armcc_504_82:O3-time-loop1"
+ ],
+ "results": {
+  "func_00103258": {
+   "armcc_504_82:O2-time": "+19",
+   "armcc_504_82:O3-time": "Y",
+   "armcc_504_82:O3-time-loop0": "Y",
+   "armcc_504_82:O3-time-loop1": "Y"
+  },
+  "func_00103358": {
+   "armcc_504_82:O2-time": "+4",
+   "armcc_504_82:O3-time": "Y",
+   "armcc_504_82:O3-time-loop0": "Y",
+   "armcc_504_82:O3-time-loop1": "Y"
+  }
+ },
+ "sources": {
+  "research/compid/r2/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8"
+ }
+}

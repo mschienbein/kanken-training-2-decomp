@@ -1,0 +1,258 @@
+{
+  "worker": {
+    "id": "CompilerIdR2",
+    "family": "OpenAI",
+    "model": "openai-codex/gpt-6.1-sol"
+  },
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "compiler": {
+    "id": "armcc_504_82",
+    "banner": "Tool: armcc [5040081]",
+    "exe_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "archive_url": "https://github.com/decompme/compilers/releases/download/compilers/armcc.zip?2026-03-04",
+    "archive_sha256": "bda0cea5b13a9c3f08322fa76f9f9dcda59bda290f57f1a06e05cd80044fafdb"
+  },
+  "final_profile": {
+    "compiler": "armcc_504_82",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "tested_profile_name": "trial-504-82-O3-Otime",
+    "recommended_profile_name": "game",
+    "language_selection": "armcc defaults to C for .c and C++ for .cpp; explicit --cpp tested separately"
+  },
+  "final_match_functions": 11,
+  "final_match_bytes": 940,
+  "conservative_independent_count_excluding_second_enum_adapter": 10,
+  "conservative_bytes": 772,
+  "rtti_analysis": {
+    "method": "Read two words preceding constructor-installed vtable addresses; classify as null/function/rodata/data rather than saving binary contents. Additional scan of aligned tables with zero offset-to-top and three initial catalogue function pointers.",
+    "constructor_vtable_witnesses": [
+      "0x223e2c",
+      "0x223ee8",
+      "0x223ef8",
+      "0x223f08",
+      "0x224d30"
+    ],
+    "witness_header_classifications": [
+      "null",
+      "null"
+    ],
+    "probable_header_count": 81,
+    "zero_typeinfo": 26,
+    "nonzero_previous_word_is_function_pointer": 55,
+    "nonzero_previous_word_is_data_pointer": 0,
+    "qualification": "Heuristic, not a complete vtable inventory or proof of a particular RTTI option."
+  },
+  "thumb_analysis": {
+    "catalogued_entries": 71,
+    "startup_block_entries": 47,
+    "matched_runtime_witness": "0x181e94",
+    "game_owned_thumb_identified": false,
+    "qualification": "No negative proof that all unclassified Thumb entries are libraries; catalogue includes internal tail entries."
+  },
+  "library_attribution": {
+    "ctr": "Service ABI identified from service numbers; no compiler identification from handwritten-wrapper hypotheses.",
+    "nw4c": "Likely font/layout component tied by CFNT/FINF/CMAP and CLYT format validation; exact vendor archive unavailable.",
+    "pux": "INFERENCE: short-coordinate/sentinel recognition component sharing state globals around 0x243830-0x24389c, anchored by 0x14dc28 and 0x15cab4; not a contiguous address classification."
+  },
+  "compiler_options": {
+    "--no_unroll": "Rejected: Fatal error C3900U, exit 1",
+    "--loop_optimization_level=0": "Accepted; rejected as shared game control by 0x105fa8 mismatch",
+    "--loop_optimization_level=1": "Accepted; equivalent to default O3 on tested loop witnesses",
+    "cpp_options": "All six cpp_grid.json cells match game_virtual.cpp; no discrimination among RTTI/exceptions/new-nothrow/VFE flags."
+  },
+  "artifact_index": [
+    {
+      "private_result": "scratch/compid/r2/cpp-options/compid.json",
+      "result": "research/compid/r2/cpp_options_compid.json",
+      "sha256": "81cb31f447b5b26d0774d0f1261a11a7342eb7aafb9586609df98b4f95d95ee4"
+    },
+    {
+      "private_result": "scratch/compid/r2/ctr-wrappers-grid/compid.json",
+      "result": "research/compid/r2/ctr_wrappers_grid_compid.json",
+      "sha256": "69ca387ef7b1343b3091b636bae1dec3dcfcbaec475165a71421d5d69541145a"
+    },
+    {
+      "private_result": "scratch/compid/r2/enum-switch-grid/compid.json",
+      "result": "research/compid/r2/enum_switch_grid_compid.json",
+      "sha256": "1b1950d0c6decacc33eb6fbca4b551dae09178e23a921734044b217bf05800aa"
+    },
+    {
+      "private_result": "scratch/compid/r2/final-grid/compid.json",
+      "result": "research/compid/r2/final_grid_compid.json",
+      "sha256": "a6b318a8e99439a70c62ff8a2b6cc12313267739d0210e862c82fe79d74a7ca2"
+    },
+    {
+      "private_result": "scratch/compid/r2/game_switch-grid/compid.json",
+      "result": "research/compid/r2/game_switch_grid_compid.json",
+      "sha256": "5cda482b5f9bcfaac58edf081a265879d5cb8a649e7e6605b4f7b9bc2b205a0b"
+    },
+    {
+      "private_result": "scratch/compid/r2/game_switch_cpp-cpp-options/compid.json",
+      "result": "research/compid/r2/game_switch_cpp_cpp_options_compid.json",
+      "sha256": "f37b67f04e0743016431e067a35795e859b715c3e68572aa075d573c9c422211"
+    },
+    {
+      "private_result": "scratch/compid/r2/game_virtual-grid/compid.json",
+      "result": "research/compid/r2/game_virtual_grid_compid.json",
+      "sha256": "323f05df6040baf03ccc221629a2e568ad9dfaf8254095a652097940f5e7280f"
+    },
+    {
+      "private_result": "scratch/compid/r2/library-grid/compid.json",
+      "result": "research/compid/r2/library_grid_compid.json",
+      "sha256": "dc373d84bd9e8b39b37d006df1ee07c548137f72aabb1f9f0c910f0077645a5d"
+    },
+    {
+      "private_result": "scratch/compid/r2/loop_alloc_cpp-grid/compid.json",
+      "result": "research/compid/r2/loop_alloc_cpp_grid_compid.json",
+      "sha256": "a15c221c9e26936963de036a8d53e43cbce4a6edea2e6a0a1f96fb35d36d8bab"
+    },
+    {
+      "private_result": "scratch/compid/r2/loop_alloc_global-grid/compid.json",
+      "result": "research/compid/r2/loop_alloc_global_grid_compid.json",
+      "sha256": "938e1dce42b1584640e3febc3c7e7f0bd8e1585f683f86a5848d441bba0143b2"
+    },
+    {
+      "private_result": "scratch/compid/r2/loop_alloc_resource-grid/compid.json",
+      "result": "research/compid/r2/loop_alloc_resource_grid_compid.json",
+      "sha256": "b4d5672529df1569cf97ae582ad8a45f82eb1ffadb50626a9c3d5a7134892002"
+    },
+    {
+      "private_result": "scratch/compid/r2/loop_cleanup-grid/compid.json",
+      "result": "research/compid/r2/loop_cleanup_grid_compid.json",
+      "sha256": "6f03b40fd8d7090ffcdc55ea2a84aee38658b135d119cc95e1f9f8304d1a70a1"
+    },
+    {
+      "private_result": "scratch/compid/r2/loop_state-grid/compid.json",
+      "result": "research/compid/r2/loop_state_grid_compid.json",
+      "sha256": "71a0e68cbd0a2a3e415719f17fb01cc89a18e7f5ef288c213f8440bddc555917"
+    },
+    {
+      "private_result": "scratch/compid/r2/loops-initial/compid.json",
+      "result": "research/compid/r2/loops_initial_compid.json",
+      "sha256": "edefdd6328151bdc79d2c2b99df5ae298d02200f11a93670e73e01c65c4eab81"
+    },
+    {
+      "private_result": "scratch/compid/r2/nop-grid/compid.json",
+      "result": "research/compid/r2/nop_grid_compid.json",
+      "sha256": "b2b352afb2c67505b0367a468e1fbb90a576525a8ee7c5580a2148c713c0f660"
+    },
+    {
+      "private_result": "scratch/compid/r2/nw4c-readers-grid/compid.json",
+      "result": "research/compid/r2/nw4c_readers_grid_compid.json",
+      "sha256": "732c8249df9a59d7682c19d1afd5572230e52d96ed84eecc0af42c37441425d8"
+    },
+    {
+      "private_result": "scratch/compid/r2/optimization-initial/compid.json",
+      "result": "research/compid/r2/optimization_initial_compid.json",
+      "sha256": "751f9b2a11f6c8451560c1b483539c38ea78aec6398895d65bb1705d74b9e06e"
+    },
+    {
+      "private_result": "scratch/compid/r2/thumb-get-grid/compid.json",
+      "result": "research/compid/r2/thumb_get_grid_compid.json",
+      "sha256": "7b97127416d4ce9941ada3f4a23222a7b7fb646d0a2813f23951be530bd41960"
+    },
+    {
+      "private_result": "scratch/compid/r2/thumb-grid/compid.json",
+      "result": "research/compid/r2/thumb_grid_compid.json",
+      "sha256": "1ea2c4425c1aa1040a92c8d563c1c8bd7ed816afeb6f3ff0f62f07168c632abc"
+    },
+    {
+      "private_result": "scratch/compid/r2/virtual_dimensions-cpp-options/compid.json",
+      "result": "research/compid/r2/virtual_dimensions_cpp_options_compid.json",
+      "sha256": "793f4ba8b239099163913a609c0eb5b20a5a97f7dd12e036a00f400484f6ab01"
+    },
+    {
+      "private_result": "scratch/compid/r2/virtual_locals-grid/compid.json",
+      "result": "research/compid/r2/virtual_locals_grid_compid.json",
+      "sha256": "8a3cb94cbfac87540d67256588048e7c06947a1bb6f32d060ee671d72239d19d"
+    },
+    {
+      "private_result": "scratch/compid/r2/virtual_vector-grid/compid.json",
+      "result": "research/compid/r2/virtual_vector_grid_compid.json",
+      "sha256": "698a0cbfeae63c73b2c9ff762fcde3dabb88bf1fd9fc9926186962b2d1a0b9b4"
+    },
+    {
+      "private_result": "scratch/compid/r2/heap-cpp-options/compid.json",
+      "result": "research/compid/r2/heap_cpp_options_compid.json",
+      "sha256": "66f92129f9edd4522b6f007c8701e6b39b71724415c89fa82dfc96b414b69c7f"
+    },
+    {
+      "private_result": "scratch/compid/r2/final-profile-grid/compid.json",
+      "result": "research/compid/r2/final_profile_grid_compid.json",
+      "sha256": "bf1cf5abd2e31971fb42babdbd98a5627d7948af2bbfe5709d1fb1b7082bb144"
+    }
+  ],
+  "match_receipts": [
+    {
+      "source": "/Users/mooki/Code/kanken-training-2-decomp/research/compid/r2/game_core.c",
+      "receipt": "research/compid/r2/game_core_match.json",
+      "sha256": "30d58e374305d1782928cffc07bf8944a3db7c5054269bc453b24e2bd3757c08",
+      "source_sha256": "c5878098d6393d7d9256f25b9310c7a5b23b1bd282668577ef86f1a941670623",
+      "functions": 4,
+      "matched_bytes": 124
+    },
+    {
+      "source": "/Users/mooki/Code/kanken-training-2-decomp/research/compid/r2/loop_cleanup.c",
+      "receipt": "research/compid/r2/loop_cleanup_match.json",
+      "sha256": "4d45350d1f81e6be1e4d9d94430355027ca71c9bf685182100193355907a65aa",
+      "source_sha256": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+      "functions": 2,
+      "matched_bytes": 252
+    },
+    {
+      "source": "/Users/mooki/Code/kanken-training-2-decomp/research/compid/r2/loop_state.c",
+      "receipt": "research/compid/r2/loop_state_match.json",
+      "sha256": "6e1df156a19cd17700c4926e2c362851a77ed6bc4cee0d373652b24e855dfee0",
+      "source_sha256": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+      "functions": 1,
+      "matched_bytes": 100
+    },
+    {
+      "source": "/Users/mooki/Code/kanken-training-2-decomp/research/compid/r2/loop_resources.c",
+      "receipt": "research/compid/r2/loop_resources_match.json",
+      "sha256": "385892ecfc278fc3e2ae4daf70267e0a0e692feedf76ec2af97ff5c3405ac2b2",
+      "source_sha256": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+      "functions": 1,
+      "matched_bytes": 64
+    },
+    {
+      "source": "/Users/mooki/Code/kanken-training-2-decomp/research/compid/r2/game_heap.cpp",
+      "receipt": "research/compid/r2/game_heap_match.json",
+      "sha256": "cc9c0cb847252a8470d880e8421a6a09994ed8ba506b547c3d808cd3b17a3cd6",
+      "source_sha256": "58317f4b696e64e076e7240b796c2b3d47ce8a4b589be0c18466cd871738f708",
+      "functions": 1,
+      "matched_bytes": 64
+    },
+    {
+      "source": "/Users/mooki/Code/kanken-training-2-decomp/research/compid/r2/game_enum_switch.c",
+      "receipt": "research/compid/r2/game_enum_switch_match.json",
+      "sha256": "d4efbd9b92af1643170accff2cc1b97aa2b4ecba6e28c76e72d3ba647f799902",
+      "source_sha256": "1ad305430a43b66d217a4886643f563a9bf314476ab8121b3126415f4e4c835a",
+      "functions": 2,
+      "matched_bytes": 336
+    }
+  ],
+  "tool_hashes_at_final_evidence_export": {
+    "compid.py": "fed21a539cca663dddb2f79967507037cc0cad27111093de1e3abb16aa7c87b6",
+    "match.py": "510e289245eaa16be028c98b13193831580feffe98a245a0b293d93942c64833",
+    "inplace.py": "03e43832fba790c435cc56836f1dc7b73f1b1a2c0270ee66ea48f08ef6b34c5a",
+    "toolchain.py": "1babfbede15fd5f17af2e97a3e4e7f223b4b94b926a580f4397c0a070dcd043a",
+    "packet.py": "44a4446c36ba6f251d1eb4001876050e58090e305262438a55846a54ddf309c1"
+  },
+  "verification_scope": "Sequential compid and match commands only; no full build, tests, git operations, publication, or configuration edits.",
+  "primary_grid": "research/compid/r2/final_profile_grid_compid.json",
+  "cpp_options_grid": "research/compid/r2/heap_cpp_options_compid.json",
+  "natural_cpp_class": "game_heap.cpp uses a virtual destructor followed by allocate; its two ABI destructor slots naturally produce the observed allocation slot, with no invented reserved methods.",
+  "supersedes_checkpoint_analysis": "research/compid/r2/analysis.json",
+  "commands_record": "research/compid/r2/commands_final.json",
+  "command_count": 199
+}

@@ -19,8 +19,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import platform
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -48,7 +50,22 @@ class BuildError(RuntimeError):
     pass
 
 
-def build(name: str, matches_path: Path = MATCHES) -> dict:
+def compile_units(units: list[dict], profiles: dict, out: Path, fresh: bool, jobs: int) -> dict[str, bool]:
+    """Compile every unit in parallel (armcc runs as separate processes). Returns source -> cache hit."""
+    for unit in units:
+        if unit["profile"] not in profiles:
+            raise BuildError(f"{unit['source']}: unknown profile {unit['profile']!r}")
+
+    def one(unit: dict) -> tuple[str, bool]:
+        obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
+        hit = toolchain.compile_source(profiles[unit["profile"]], ROOT / unit["source"], obj, cache=not fresh)
+        return unit["source"], hit
+
+    with ThreadPoolExecutor(max_workers=max(1, jobs)) as pool:
+        return dict(pool.map(one, units))
+
+
+def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: int | None = None) -> dict:
     out = ROOT / "build" / name
     try:
         out.mkdir(parents=True, exist_ok=False)
@@ -68,6 +85,7 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
     linker = inplace.InPlaceLinker(image, functions, resolver, image.bss)
     matches = json.loads(matches_path.read_text(encoding="utf-8"))
     profiles = toolchain.load_profiles()
+    hits = compile_units(matches["units"], profiles, out, fresh, jobs or os.cpu_count() or 1)
 
     hybrid = bytearray(image.code)
     credited: dict[int, str] = {}
@@ -77,11 +95,8 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
     units = []
     for unit in matches["units"]:
         src = ROOT / unit["source"]
-        profile = profiles.get(unit["profile"])
-        if profile is None:
-            raise BuildError(f"{unit['source']}: unknown profile {unit['profile']!r}")
+        profile = profiles[unit["profile"]]
         obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
-        toolchain.compile_source(profile, src, obj)
         objfile = inplace.ObjectFile(obj)
         linked = linker.link(objfile)
         for sym in objfile.defined_globals():
@@ -117,7 +132,7 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
         units.append({
             "source": unit["source"], "source_sha256": sha256_file(src), "profile": profile.name,
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
-            "functions": sorted(unit["functions"]),
+            "functions": sorted(unit["functions"]), "cache_hit": hits[unit["source"]],
         })
     try:
         inplace.reject_overlaps(occupied)
@@ -138,6 +153,7 @@ def build(name: str, matches_path: Path = MATCHES) -> dict:
         "name": name,
         "created_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "host": f"{platform.system()}-{platform.machine()}",
+        "fresh": fresh,
         "inputs": {
             "code_bin_sha256": image.sha256,
             "exefs_code_sha256": sha256_bytes(stored),
@@ -180,9 +196,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--name", required=True, help="unique build name, e.g. 2026-10-15-baseline")
     parser.add_argument("--matches", type=Path, default=MATCHES,
                         help="units to credit (default config/matches.json; a scratch file makes a candidate build)")
+    parser.add_argument("--fresh", action="store_true", help="compile everything, ignoring the object cache")
+    parser.add_argument("--jobs", type=int, help="parallel compiles (default: CPU count)")
     args = parser.parse_args(argv)
     try:
-        receipt = build(args.name, args.matches)
+        receipt = build(args.name, args.matches, args.fresh, args.jobs)
     except (BuildError, inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2

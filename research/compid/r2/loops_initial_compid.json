@@ -1,0 +1,92 @@
+{
+ "failures": {
+  "armcc_504_82:O3-time-no-unroll": {
+   "research/compid/r2/game_loops.c": "armcc failed (1) on game_loops.c:"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "O3-time-loop0": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=0"
+   ],
+   "O3-time-loop1": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=1"
+   ],
+   "O3-time-no-unroll": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--no_unroll"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_00103044": {
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-time": "+0",
+   "armcc_504_82:O3-time-loop0": "+0",
+   "armcc_504_82:O3-time-loop1": "+0"
+  },
+  "func_00105084": {
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-time": "Y",
+   "armcc_504_82:O3-time-loop0": "Y",
+   "armcc_504_82:O3-time-loop1": "Y"
+  },
+  "func_0010b598": {
+   "armcc_504_82:O2-time": "+1",
+   "armcc_504_82:O3-time": "+1",
+   "armcc_504_82:O3-time-loop0": "+1",
+   "armcc_504_82:O3-time-loop1": "+1"
+  }
+ },
+ "sources": {
+  "research/compid/r2/game_loops.c": "96ae4690b7f2d4f716e1832fa9d8f32c3253c1652cea19096c0168136149b4c8"
+ }
+}

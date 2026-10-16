@@ -1,0 +1,99 @@
+{
+ "failures": {},
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O3-default-cpp": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp"
+   ],
+   "O3-embedded-cpp": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_rtti",
+    "--no_exceptions",
+    "--force_new_nothrow",
+    "--no_vfe"
+   ],
+   "O3-force-new-nothrow": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--force_new_nothrow"
+   ],
+   "O3-no-exceptions": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_exceptions"
+   ],
+   "O3-no-rtti": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_rtti"
+   ],
+   "O3-no-vfe": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_vfe"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_0016bf90": {
+   "armcc_504_82:O3-default-cpp": "+24",
+   "armcc_504_82:O3-embedded-cpp": "+24",
+   "armcc_504_82:O3-force-new-nothrow": "+24",
+   "armcc_504_82:O3-no-exceptions": "+24",
+   "armcc_504_82:O3-no-rtti": "+24",
+   "armcc_504_82:O3-no-vfe": "+24"
+  }
+ },
+ "sources": {
+  "research/compid/r2/game_switch_cpp.cpp": "8b2f10e9e28689abd3689c495d301fabf6011937e318affdf6c67b5c8fd85bdf"
+ }
+}

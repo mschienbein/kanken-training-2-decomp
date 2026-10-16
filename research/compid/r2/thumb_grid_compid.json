@@ -1,0 +1,93 @@
+{
+ "failures": {},
+ "grid": {
+  "compilers": [
+   "armcc_40_821",
+   "armcc_41_1049",
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "thumb-O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--thumb",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "thumb-O3-space": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--thumb",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Ospace"
+   ],
+   "thumb-O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--thumb",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_00181e94": {
+   "armcc_40_821:thumb-O2-time": "Y",
+   "armcc_40_821:thumb-O3-space": "Y",
+   "armcc_40_821:thumb-O3-time": "Y",
+   "armcc_41_1049:thumb-O2-time": "Y",
+   "armcc_41_1049:thumb-O3-space": "Y",
+   "armcc_41_1049:thumb-O3-time": "Y",
+   "armcc_504_82:thumb-O2-time": "Y",
+   "armcc_504_82:thumb-O3-space": "Y",
+   "armcc_504_82:thumb-O3-time": "Y"
+  },
+  "func_00181e9e": {
+   "armcc_40_821:thumb-O2-time": "+3",
+   "armcc_40_821:thumb-O3-space": "+3",
+   "armcc_40_821:thumb-O3-time": "+3",
+   "armcc_41_1049:thumb-O2-time": "+3",
+   "armcc_41_1049:thumb-O3-space": "+3",
+   "armcc_41_1049:thumb-O3-time": "+3",
+   "armcc_504_82:thumb-O2-time": "+3",
+   "armcc_504_82:thumb-O3-space": "+3",
+   "armcc_504_82:thumb-O3-time": "+3"
+  },
+  "func_00191c80": {
+   "armcc_40_821:thumb-O2-time": "+f",
+   "armcc_40_821:thumb-O3-space": "+f",
+   "armcc_40_821:thumb-O3-time": "+f",
+   "armcc_41_1049:thumb-O2-time": "+f",
+   "armcc_41_1049:thumb-O3-space": "+f",
+   "armcc_41_1049:thumb-O3-time": "+f",
+   "armcc_504_82:thumb-O2-time": "+f",
+   "armcc_504_82:thumb-O3-space": "+f",
+   "armcc_504_82:thumb-O3-time": "+f"
+  },
+  "func_0019d5b0": {
+   "armcc_40_821:thumb-O2-time": "+0",
+   "armcc_40_821:thumb-O3-space": "+f",
+   "armcc_40_821:thumb-O3-time": "+0",
+   "armcc_41_1049:thumb-O2-time": "+0",
+   "armcc_41_1049:thumb-O3-space": "+0",
+   "armcc_41_1049:thumb-O3-time": "+0",
+   "armcc_504_82:thumb-O2-time": "+0",
+   "armcc_504_82:thumb-O3-space": "+0",
+   "armcc_504_82:thumb-O3-time": "+0"
+  }
+ },
+ "sources": {
+  "research/compid/r2/runtime_thumb.c": "7fea3981bd1713ecd4509e8b8649fbcf6f8e7ea1f9d8f3517deaaceca5f9fd42"
+ }
+}

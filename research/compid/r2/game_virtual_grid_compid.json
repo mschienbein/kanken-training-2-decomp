@@ -1,0 +1,85 @@
+{
+ "failures": {
+  "armcc_504_82:O3-time-no-unroll": {
+   "research/compid/r2/game_virtual.cpp": "armcc failed (1) on game_virtual.cpp:"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ],
+   "O3-time-loop0": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=0"
+   ],
+   "O3-time-loop1": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--loop_optimization_level=1"
+   ],
+   "O3-time-no-unroll": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--no_unroll"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [
+  "armcc_504_82:O2-time",
+  "armcc_504_82:O3-time",
+  "armcc_504_82:O3-time-loop0",
+  "armcc_504_82:O3-time-loop1"
+ ],
+ "results": {
+  "func_0010d604": {
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-time": "Y",
+   "armcc_504_82:O3-time-loop0": "Y",
+   "armcc_504_82:O3-time-loop1": "Y"
+  }
+ },
+ "sources": {
+  "research/compid/r2/game_virtual.cpp": "4fd10d2372c8f6e683ed0ead2455ad097ec3abec65c5e7869f0928810a719788"
+ }
+}

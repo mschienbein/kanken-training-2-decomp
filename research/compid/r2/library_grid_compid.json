@@ -1,0 +1,225 @@
+{
+ "failures": {
+  "armcc_40_821:O0-time": {
+   "research/compid/r2/library_nw4c.c": "i.func_001db054 [0x1db054, 0x1db06c) and i.func_001db068 [0x1db068, 0x1db080) overlap"
+  },
+  "armcc_41_1049:O0-time": {
+   "research/compid/r2/library_nw4c.c": "i.func_001db054 [0x1db054, 0x1db06c) and i.func_001db068 [0x1db068, 0x1db080) overlap"
+  },
+  "armcc_41_1440:O0-time": {
+   "research/compid/r2/library_nw4c.c": "i.func_001db054 [0x1db054, 0x1db06c) and i.func_001db068 [0x1db068, 0x1db080) overlap"
+  },
+  "armcc_504_82:O0-time": {
+   "research/compid/r2/library_nw4c.c": "i.func_001db054 [0x1db054, 0x1db06c) and i.func_001db068 [0x1db068, 0x1db080) overlap"
+  }
+ },
+ "grid": {
+  "compilers": [
+   "armcc_40_821",
+   "armcc_41_1049",
+   "armcc_41_1440",
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O0-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O0",
+    "-Otime"
+   ],
+   "O2-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O2",
+    "-Otime"
+   ],
+   "O3-space": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Ospace"
+   ],
+   "O3-time": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_00100d6c": {
+   "armcc_40_821:O0-time": "+0",
+   "armcc_40_821:O2-time": "+0",
+   "armcc_40_821:O3-space": "+0",
+   "armcc_40_821:O3-time": "+0",
+   "armcc_41_1049:O0-time": "+0",
+   "armcc_41_1049:O2-time": "+0",
+   "armcc_41_1049:O3-space": "+0",
+   "armcc_41_1049:O3-time": "+0",
+   "armcc_41_1440:O0-time": "+0",
+   "armcc_41_1440:O2-time": "+0",
+   "armcc_41_1440:O3-space": "+0",
+   "armcc_41_1440:O3-time": "+0",
+   "armcc_504_82:O0-time": "+0",
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-space": "+0",
+   "armcc_504_82:O3-time": "+0"
+  },
+  "func_0012d148": {
+   "armcc_40_821:O0-time": "+0",
+   "armcc_40_821:O2-time": "+0",
+   "armcc_40_821:O3-space": "+0",
+   "armcc_40_821:O3-time": "+0",
+   "armcc_41_1049:O0-time": "+0",
+   "armcc_41_1049:O2-time": "+0",
+   "armcc_41_1049:O3-space": "+0",
+   "armcc_41_1049:O3-time": "+0",
+   "armcc_41_1440:O0-time": "+0",
+   "armcc_41_1440:O2-time": "+0",
+   "armcc_41_1440:O3-space": "+0",
+   "armcc_41_1440:O3-time": "+0",
+   "armcc_504_82:O0-time": "+0",
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-space": "+0",
+   "armcc_504_82:O3-time": "+0"
+  },
+  "func_00134e7c": {
+   "armcc_40_821:O0-time": "+0",
+   "armcc_40_821:O2-time": "+0",
+   "armcc_40_821:O3-space": "+0",
+   "armcc_40_821:O3-time": "+0",
+   "armcc_41_1049:O0-time": "+0",
+   "armcc_41_1049:O2-time": "+0",
+   "armcc_41_1049:O3-space": "+0",
+   "armcc_41_1049:O3-time": "+0",
+   "armcc_41_1440:O0-time": "+0",
+   "armcc_41_1440:O2-time": "+0",
+   "armcc_41_1440:O3-space": "+0",
+   "armcc_41_1440:O3-time": "+0",
+   "armcc_504_82:O0-time": "+0",
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-space": "+0",
+   "armcc_504_82:O3-time": "+0"
+  },
+  "func_0014dc28": {
+   "armcc_40_821:O0-time": "+0",
+   "armcc_40_821:O2-time": "Y",
+   "armcc_40_821:O3-space": "Y",
+   "armcc_40_821:O3-time": "Y",
+   "armcc_41_1049:O0-time": "+0",
+   "armcc_41_1049:O2-time": "Y",
+   "armcc_41_1049:O3-space": "Y",
+   "armcc_41_1049:O3-time": "Y",
+   "armcc_41_1440:O0-time": "+0",
+   "armcc_41_1440:O2-time": "Y",
+   "armcc_41_1440:O3-space": "Y",
+   "armcc_41_1440:O3-time": "Y",
+   "armcc_504_82:O0-time": "+0",
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-space": "Y",
+   "armcc_504_82:O3-time": "Y"
+  },
+  "func_0015c5a4": {
+   "armcc_40_821:O0-time": "Y",
+   "armcc_40_821:O2-time": "Y",
+   "armcc_40_821:O3-space": "Y",
+   "armcc_40_821:O3-time": "Y",
+   "armcc_41_1049:O0-time": "Y",
+   "armcc_41_1049:O2-time": "Y",
+   "armcc_41_1049:O3-space": "Y",
+   "armcc_41_1049:O3-time": "Y",
+   "armcc_41_1440:O0-time": "Y",
+   "armcc_41_1440:O2-time": "Y",
+   "armcc_41_1440:O3-space": "Y",
+   "armcc_41_1440:O3-time": "Y",
+   "armcc_504_82:O0-time": "Y",
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-space": "Y",
+   "armcc_504_82:O3-time": "Y"
+  },
+  "func_0015cab4": {
+   "armcc_40_821:O0-time": "+0",
+   "armcc_40_821:O2-time": "Y",
+   "armcc_40_821:O3-space": "Y",
+   "armcc_40_821:O3-time": "Y",
+   "armcc_41_1049:O0-time": "+0",
+   "armcc_41_1049:O2-time": "Y",
+   "armcc_41_1049:O3-space": "+1",
+   "armcc_41_1049:O3-time": "Y",
+   "armcc_41_1440:O0-time": "+0",
+   "armcc_41_1440:O2-time": "Y",
+   "armcc_41_1440:O3-space": "+1",
+   "armcc_41_1440:O3-time": "Y",
+   "armcc_504_82:O0-time": "+0",
+   "armcc_504_82:O2-time": "Y",
+   "armcc_504_82:O3-space": "+1",
+   "armcc_504_82:O3-time": "Y"
+  },
+  "func_001cc1d4": {
+   "armcc_40_821:O2-time": "+0",
+   "armcc_40_821:O3-space": "+0",
+   "armcc_40_821:O3-time": "+0",
+   "armcc_41_1049:O2-time": "+0",
+   "armcc_41_1049:O3-space": "+0",
+   "armcc_41_1049:O3-time": "+0",
+   "armcc_41_1440:O2-time": "+0",
+   "armcc_41_1440:O3-space": "+0",
+   "armcc_41_1440:O3-time": "+0",
+   "armcc_504_82:O2-time": "+0",
+   "armcc_504_82:O3-space": "+0",
+   "armcc_504_82:O3-time": "+0"
+  },
+  "func_001db054": {
+   "armcc_40_821:O2-time": "+4",
+   "armcc_40_821:O3-space": "+4",
+   "armcc_40_821:O3-time": "+4",
+   "armcc_41_1049:O2-time": "+4",
+   "armcc_41_1049:O3-space": "+4",
+   "armcc_41_1049:O3-time": "+4",
+   "armcc_41_1440:O2-time": "+4",
+   "armcc_41_1440:O3-space": "+4",
+   "armcc_41_1440:O3-time": "+4",
+   "armcc_504_82:O2-time": "+4",
+   "armcc_504_82:O3-space": "+4",
+   "armcc_504_82:O3-time": "+4"
+  },
+  "func_001db068": {
+   "armcc_40_821:O2-time": "+6",
+   "armcc_40_821:O3-space": "+6",
+   "armcc_40_821:O3-time": "+6",
+   "armcc_41_1049:O2-time": "+6",
+   "armcc_41_1049:O3-space": "+6",
+   "armcc_41_1049:O3-time": "+6",
+   "armcc_41_1440:O2-time": "+6",
+   "armcc_41_1440:O3-space": "+6",
+   "armcc_41_1440:O3-time": "+6",
+   "armcc_504_82:O2-time": "+6",
+   "armcc_504_82:O3-space": "+6",
+   "armcc_504_82:O3-time": "+6"
+  }
+ },
+ "sources": {
+  "research/compid/r2/library_ctr.c": "50ab29ec58dd9fbf888c85f1c06cfd96475a5bfe2d9d173dac6bb16504219abd",
+  "research/compid/r2/library_nw4c.c": "59be95923ff4be2213aafa9b724bf0859a6b9a3af58ff62eb0bbaef895a083ca",
+  "research/compid/r2/library_pux.c": "20ed5f2bab6c47f7523866ab2e3dac5f5b65f3b8da1e48b2e9e1c1fb62481175"
+ }
+}

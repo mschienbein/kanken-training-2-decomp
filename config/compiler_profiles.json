@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "Trial profiles during compiler identification; none is the confirmed game profile yet.",
+  "note": "`game` is the identified game-code profile (H5, 2026-10-16; evidence docs/COMPILER.md and research/compid/r2/REPORT.md). `trial-*` profiles are kept for historical receipts; new work uses `game`.",
   "profiles": {
     "trial-41-1049-O3-Otime": {
       "compiler": "armcc_41_1049",
@@ -52,6 +52,19 @@
         "--signed_chars",
         "-O3",
         "-Ospace"
+      ]
+    },
+    "game": {
+      "compiler": "armcc_504_82",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O3",
+        "-Otime"
       ]
     }
   }

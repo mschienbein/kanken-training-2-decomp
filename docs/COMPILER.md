@@ -1,7 +1,38 @@
 # Compiler identification
 
-Status: **in progress.** Leading candidate: **ARM Compiler 5.04 (archive build `armcc_504_82`,
-banner `Tool: armcc [5040081]`), `-Otime`, ARM mode.** Not yet frozen as the game profile.
+Status: **frozen (gate H5, 2026-10-16).** Game code: profile **`game`** in
+`config/compiler_profiles.json` = ARM Compiler 5.04 (archive build `armcc_504_82`, banner
+`Tool: armcc [5040081]`) with
+`--cpu=MPCore --fpmode=fast --apcs=/interwork --arm --split_sections --signed_chars -O3 -Otime`.
+`.c` files compile as C, `.cpp` as C++ (armcc's default by suffix).
+
+## Round 2 result (2026-10-16)
+
+Full evidence: `research/compid/r2/REPORT.md` (worker CompilerIdR2, OpenAI family), re-derived by
+the integrator with `--profile game`: all 11 functions MATCH.
+
+| Address | Feature | Source (`research/compid/r2/`) |
+|---|---|---|
+| 0x103258, 0x103358 | pointer-advancing / bound-reloading loops with calls | `loop_cleanup.c` |
+| 0x105084 | fixed-count resource loop, indexed structs | `loop_resources.c` |
+| 0x105fa8 | strided initialisation loop, mixed field widths | `loop_state.c` |
+| 0x103798 | global via literal pool, conditional BL | `game_core.c` |
+| 0x1091d4 | int→float VFP conversions, store scheduling | `game_core.c` |
+| 0x10e664 | leaf field store | `game_core.c` |
+| 0x1103d4 | VFP divide, float return | `game_core.c` |
+| 0x10d604 | C++ class: virtual allocation call, null check, tail call | `game_heap.cpp` |
+| 0x1718ec, 0x171c7c | 12-entry switch jump tables (preserved out-of-range bug, `ORIGINAL BUG:`) | `game_enum_switch.c` |
+
+- **`-O3` over `-O2`:** four loop functions (0x103258, 0x103358, 0x105084, 0x105fa8) match only
+  at `-O3 -Otime`; 0x105fa8 also rejects `--loop_optimization_level=0`. Exactly one of twelve grid
+  cells matches every source.
+- **Libraries:** three NW4C-region and three probable PUX-region functions also match `game`;
+  CTR-SDK intrinsic-style wrappers did not match any probe yet. No separate library build is
+  identified; library code is classified, not credited, until its ownership is settled.
+- **Open:** original spelling of C++ switches (RTTI/exceptions/VFE flags don't change these
+  probes), source shapes for 0x1033cc / 0x10c498, Thumb function ownership.
+
+## Round 1 notes
 
 ## Method
 

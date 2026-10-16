@@ -1,0 +1,99 @@
+{
+ "failures": {},
+ "grid": {
+  "compilers": [
+   "armcc_504_82"
+  ],
+  "flagsets": {
+   "O3-default-cpp": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp"
+   ],
+   "O3-embedded-cpp": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_rtti",
+    "--no_exceptions",
+    "--force_new_nothrow",
+    "--no_vfe"
+   ],
+   "O3-force-new-nothrow": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--force_new_nothrow"
+   ],
+   "O3-no-exceptions": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_exceptions"
+   ],
+   "O3-no-rtti": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_rtti"
+   ],
+   "O3-no-vfe": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime",
+    "--cpp",
+    "--no_vfe"
+   ]
+  }
+ },
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "matching_all": [],
+ "results": {
+  "func_0010c498": {
+   "armcc_504_82:O3-default-cpp": "+c",
+   "armcc_504_82:O3-embedded-cpp": "+c",
+   "armcc_504_82:O3-force-new-nothrow": "+c",
+   "armcc_504_82:O3-no-exceptions": "+c",
+   "armcc_504_82:O3-no-rtti": "+c",
+   "armcc_504_82:O3-no-vfe": "+c"
+  }
+ },
+ "sources": {
+  "research/compid/r2/virtual_dimensions.cpp": "f691f4edc75d33889d5cac6bbaa3be026de580dd1aff32c758b88bfebb2268cc"
+ }
+}

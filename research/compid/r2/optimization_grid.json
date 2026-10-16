@@ -1,0 +1,10 @@
+{
+  "compilers": ["armcc_504_82"],
+  "flagsets": {
+    "O2-time": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O2", "-Otime"],
+    "O3-time": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime"],
+    "O3-time-no-unroll": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--no_unroll"],
+    "O3-time-loop0": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--loop_optimization_level=0"],
+    "O3-time-loop1": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--loop_optimization_level=1"]
+  }
+}

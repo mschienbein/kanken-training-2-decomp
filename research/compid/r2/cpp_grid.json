@@ -1,0 +1,11 @@
+{
+  "compilers": ["armcc_504_82"],
+  "flagsets": {
+    "O3-default-cpp": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--cpp"],
+    "O3-no-rtti": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--cpp", "--no_rtti"],
+    "O3-no-exceptions": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--cpp", "--no_exceptions"],
+    "O3-force-new-nothrow": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--cpp", "--force_new_nothrow"],
+    "O3-no-vfe": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--cpp", "--no_vfe"],
+    "O3-embedded-cpp": ["--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "--signed_chars", "-O3", "-Otime", "--cpp", "--no_rtti", "--no_exceptions", "--force_new_nothrow", "--no_vfe"]
+  }
+}
