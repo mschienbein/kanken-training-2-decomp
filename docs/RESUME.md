@@ -25,7 +25,10 @@ Restart sequence:
    both reviews' fixes and `docs/known-issues-c004-r2.md`):
    `tools/jobs.py run --name c004-r2-prepare -- <python> tools/accept.py prepare --checkpoint c004-r2 --candidates config/candidates/c004.json --allow-unchecked-cpp`.
    This is also the first cross-host run of the gates: both fresh builds must still produce the
-   original image, as on the Mac.
+   original image, as on the Mac. `jobs.py run` returns 0 as soon as the job starts, and a failed
+   prepare writes the same `scratch/jobs/c004-r2-prepare/exit` marker. Before any review, check
+   that the marker says `"exit_code": 0` **and** `accept/c004-r2/prepare.json` says
+   `"result": "PASS"`. Otherwise read the job's `log.txt`, fix, and prepare under a new name.
 2. Two fresh reviews per `docs/REVIEWING.md` (202 rows, including step 6 for the 89 functions
    with linker rewrites): reviewer `review-c004-openai` (astra-reviewer) and
    `review-c004-second` (reviewer). The c004 records in `accept/c004/reviews/` show what each
