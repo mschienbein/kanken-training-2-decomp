@@ -14,8 +14,8 @@ byte ranges live in ``literals``, and shared or boundary-crossing objects remain
 explicit conflicts rather than being stolen from another function.
 Non-C fallthrough chains and externally callable interior labels are represented
 as ``multi_entry`` routines with explicit, ISA-checked ``entries``.
-ARM ``mov r0, r0`` entry prefixes are separate tail-call wrappers under
-``armlink5-inline-branchnop-v1`` (docs/LINKER.md), not generic NOP padding.
+ARM ``mov r0, r0`` entry wrappers and proved internal tail boundaries use the
+``armlink5-inline-branchnop-v2`` layout rule (docs/LINKER.md), not generic NOP padding.
 """
 from __future__ import annotations
 
@@ -1148,7 +1148,323 @@ def _append_range(ranges: list[dict], start: int, end: int, kind: str, owner: in
         ranges.append({"start": start, "end": end, "kind": kind, "owner": owner})
 
 
-def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "code.bin") -> dict:
+def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: dict[int, dict]) -> dict:
+    """Partition proved branchnop sections after v5 recovery, without rediscovering starts.
+
+    The census's linear LR test identifies candidates, not sufficient boundaries.
+    Require independent successor evidence and reject every control/data crossing.
+    Keeping this pass last preserves v5 entries, literals and protected C extents.
+    Protection compares adopted records, so already-adopted split parts remain
+    reproducible when those parts are later added to an accepted manifest.
+    """
+    functions = catalogue["functions"]
+    by_address = {function["address"]: function for function in functions}
+    starts = sorted(by_address)
+    entries = {entry["address"]: entry for function in functions for entry in function["entries"]}
+    detailed = capstone.Cs(capstone.CS_ARCH_ARM, capstone.CS_MODE_ARM)
+    detailed.detail = True
+    decoded = {}
+
+    def instruction(address: int):
+        if address not in decoded:
+            offset = address - analyzer.base
+            decoded[address] = (next(detailed.disasm(analyzer.text[offset:offset + 4], address, 1), None)
+                                if analyzer.inside(address) and address + 4 <= analyzer.end else None)
+        return decoded[address]
+
+    def owner(address: int) -> dict | None:
+        index = bisect_right(starts, address) - 1
+        function = by_address[starts[index]] if index >= 0 else None
+        return function if function and address < function["address"] + function["size"] else None
+
+    def is_data(function: dict, address: int) -> bool:
+        return any(first <= address < end for first, end in function["pools"] + function["literals"])
+
+    caller_saved = {arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12}
+
+    def as_if_call(site: int) -> str:
+        written, flags = set(), False
+        for address in range(site + 4, site + 52, 4):
+            function = owner(address)
+            if function is None or function["isa"] != "arm" or is_data(function, address):
+                break
+            ins = instruction(address)
+            if ins is None:
+                break
+            read, wrote = ins.regs_access()
+            if (set(read) & caller_saved) - written:
+                return "reads_args"
+            if (ins.cc not in (arm.ARM_CC_AL, arm.ARM_CC_INVALID) or arm.ARM_REG_CPSR in read) and not flags:
+                return "reads_flags"
+            written.update(set(wrote) & caller_saved)
+            flags |= arm.ARM_REG_CPSR in wrote
+            if arm.ARM_REG_PC in wrote or ins.mnemonic in ("b", "bl", "bx", "blx"):
+                break
+        return "consistent"
+
+    pointers = set(analyzer._external_pointers())
+    for function in functions:
+        for first, end in function["pools"]:
+            for address in range(first, end, 4):
+                value = analyzer.word(address)
+                pointers.add((value & ~1, "thumb" if value & 1 else "arm"))
+    protected_owners = {}
+    for address in protected:
+        if (function := owner(address)) is not None:
+            protected_owners.setdefault(function["address"], []).append(address)
+    conflicted = {conflict["function"] for conflict in catalogue["literal_conflicts"]}
+    inventory = []
+    classes: Counter[str] = Counter()
+    code_by_owner = {}
+    for function in functions:
+        if function["isa"] != "arm":
+            continue
+        code = {address for first, end in function["code_ranges"] for address in range(first, end, 4)}
+        sites = {address for address in code if analyzer.word(address) == 0xE1A00000}
+        if not sites:
+            continue
+        code_by_owner[function["address"]] = code
+        saved = frame_saved = False
+        for address in range(function["address"], max(sites) + 4, 4):
+            if is_data(function, address):
+                continue
+            if address in sites:
+                previous = instruction(address - 4) if address > function["address"] else None
+                following = instruction(address + 4)
+                if address in entries and address + 4 in entries:
+                    category = "tail:nop_entry"
+                elif address + 4 in entries:
+                    category = "tail:falls_into_entry"
+                elif address in entries:
+                    category = "tail:leading_nop_of_start"
+                elif previous is not None and (previous.mnemonic == "vpop" or (
+                        previous.mnemonic in ("pop", "ldm") and "lr" in previous.op_str and "pc" not in previous.op_str)):
+                    category = "tail:after_epilogue"
+                elif following is not None and following.mnemonic in ("push", "stmdb") and "lr" in following.op_str:
+                    category = "tail:before_prologue"
+                else:
+                    category = "call:in_frame" if saved else "tail:in_leaf"
+                classes[category] += 1
+                if category.startswith("tail:"):
+                    inventory.append({"owner": function["address"], "site": address, "target": address + 4,
+                                      "census_class": category, "census_lr_saved": saved,
+                                      "lr_saved": frame_saved, "as_if_call": as_if_call(address)})
+            word = analyzer.word(address)
+            if word == 0xE52DE004:
+                frame_saved = True
+            elif word == 0xE49DE004:
+                frame_saved = False
+            block = word & 0x0E000000 == 0x08000000
+            if block or word in (0xE52DE004, 0xE49DE004):
+                ins = instruction(address)
+                if ins is not None and "lr" in ins.op_str:
+                    # Preserve the published census's textual LR heuristic,
+                    # but do not mistake an LR base register for a saved LR.
+                    stack_lr = block and (word >> 16) & 15 == 13 and bool(word & 0x4000)
+                    if ins.mnemonic in ("push", "stmdb", "stmfd"):
+                        saved = True
+                        if stack_lr:
+                            frame_saved = True
+                    elif ins.mnemonic in ("pop", "ldm", "ldmia", "ldmfd") and "pc" not in ins.op_str:
+                        saved = False
+                        if stack_lr:
+                            frame_saved = False
+    for address in range(analyzer.base, analyzer.end - 3, 4):
+        if analyzer.word(address) == 0xE1A00000 and owner(address) is None:
+            classes["tail:outside_catalogue"] += 1
+            inventory.append({"owner": None, "site": address, "target": address + 4,
+                              "census_class": "tail:outside_catalogue", "as_if_call": as_if_call(address)})
+
+    selected = {}
+    for row in inventory:
+        parent, target = row["owner"], row["target"]
+        if parent is None:
+            row["decision"] = "unowned_tail_no_head_start"
+            continue
+        function = by_address[parent]
+        if target in by_address:
+            row["decision"] = "already_separate"
+            continue
+        if target not in code_by_owner[parent]:
+            row["decision"] = "successor_not_owned_code"
+            continue
+        evidence = []
+        if target in entries and entries[target]["isa"] == "arm":
+            evidence.append("existing_entry")
+        if analyzer.prologue(target):
+            evidence.append("prologue")
+        if (target, "arm") in pointers:
+            evidence.append("pointer")
+        if analyzer.word(target) in (0xE12FFF1E, 0xE1A0F00E):
+            evidence.append("return_only_successor")
+        if row["as_if_call"] == "reads_args":
+            evidence.append("aapcs_live_arguments")
+        row["start_evidence"] = evidence
+        crossings, data_crossings = [], []
+        for address in sorted(code_by_owner[parent]):
+            ins = analyzer.decode(address, "arm")
+            if ins.branch and ins.target is not None:
+                destination, isa = ins.target
+                if parent <= destination < parent + function["size"] and (address < target) != (destination < target):
+                    crossings.append({"site": address, "target": destination, "isa": isa})
+            for first, end in ins.pools:
+                if parent <= first < parent + function["size"] and (address < target) != (first < target):
+                    data_crossings.append({"site": address, "target": first, "end": end})
+            if ins.switch is not None:
+                style, register = ins.switch
+                count = analyzer._switch_bound(address, register)
+                if style == "addresses" and count is not None:
+                    for word in range(address + 8, address + 8 + 4 * count, 4):
+                        destination = analyzer.word(word) & ~1
+                        if parent <= destination < parent + function["size"] and (address < target) != (destination < target):
+                            crossings.append({"site": address, "target": destination, "table_word": word})
+        row["crossing_branches"] = crossings
+        row["crossing_data"] = data_crossings
+        if function["kind"] not in ("function", "multi_entry"):
+            row["decision"] = "classified_owner"
+        elif crossings:
+            row["decision"] = "control_flow_crosses"
+        elif data_crossings or parent in conflicted:
+            row["decision"] = "literal_ownership_crosses"
+        elif row["lr_saved"]:
+            row["decision"] = "frame_not_restored"
+        elif not evidence:
+            row["decision"] = "no_independent_successor_witness"
+        else:
+            row["decision"] = "split"
+            selected.setdefault(parent, []).append(row)
+
+    partitions = {}
+    for parent, proposals in list(selected.items()):
+        function = by_address[parent]
+        bounds = [parent] + sorted(row["target"] for row in proposals) + [parent + function["size"]]
+        if any(sum(first <= entry["address"] < end and entry["address"] != first for entry in function["entries"])
+               for first, end in zip(bounds, bounds[1:])):
+            for row in proposals:
+                row["decision"] = "additional_interior_entries"
+            del selected[parent]
+            continue
+        partitions[parent] = bounds
+
+    new_functions, split_records = [], []
+    for function in functions:
+        parent = function["address"]
+        if parent not in partitions:
+            new_functions.append(function)
+            continue
+        bounds = partitions[parent]
+        proposals = {row["target"]: row for row in selected[parent]}
+        parts, part_splits = [], []
+        for index, (first, end) in enumerate(zip(bounds, bounds[1:])):
+            code = [[max(lo, first), min(hi, end)] for lo, hi in function["code_ranges"] if lo < end and first < hi]
+            pools = [[lo, hi] for lo, hi in function["pools"] if first <= lo < hi <= end]
+            literals = [[lo, hi] for lo, hi in function["literals"] if first <= lo < hi <= end]
+            own = next((entry for entry in function["entries"] if entry["address"] == first), None)
+            evidence = set(own["evidence"] if own is not None else ())
+            if index:
+                evidence.add("linker_branchnop")
+                evidence.update(item for item in proposals[first]["start_evidence"] if item in ("prologue", "pointer"))
+            else:
+                evidence.update(function["evidence"])
+            own = {"address": first, "isa": "arm", "kind": "entry", "evidence": sorted(evidence),
+                   "sources": list(own["sources"]) if own is not None else []}
+            reasons = set()
+            if function["noreturn"]:
+                reasons.add("no_return_sites")
+                if index + 1 < len(bounds) - 1:
+                    reasons.add("noreturn_tail")
+                for lo, hi in code:
+                    for address in range(lo, hi, 4):
+                        ins = analyzer.decode(address, "arm")
+                        if ins.terminal is not None:
+                            reasons.add(ins.terminal)
+                        if ins.call and ins.target is not None and ins.target[0] in analyzer.noreturn:
+                            reasons.add("noreturn_call")
+                        if ins.branch and ins.target is not None and not first <= ins.target[0] < end:
+                            reasons.add("noreturn_tail")
+                if reasons == {"no_return_sites"}:
+                    reasons.add("closed_loop")
+            parts.append({"address": first, "size": end - first, "code_size": max(hi for _, hi in code) - first,
+                          "isa": "arm", "kind": "function", "pools": pools, "literals": literals,
+                          "code_ranges": code, "evidence": sorted(evidence), "entries": [own],
+                          "noreturn": function["noreturn"], "noreturn_reasons": sorted(reasons)})
+            if index:
+                row = proposals[first]
+                row.update(head_address=bounds[index - 1], head_size=first - bounds[index - 1], tail_size=end - first)
+                part_splits.append(dict(row))
+        changed = []
+        for address in protected_owners.get(parent, []):
+            proposed = next(part for part in parts if part["address"] <= address < part["address"] + part["size"])
+            if proposed != protected[address]:
+                changed.append({"address": address, "expected_owner": protected[address]["address"],
+                                "expected_size": protected[address]["size"], "proposed_owner": proposed["address"],
+                                "proposed_size": proposed["size"]})
+        if changed:
+            for row in selected[parent]:
+                row.update(decision="protected_owner", protected_changes=changed)
+            del partitions[parent]
+            new_functions.append(function)
+        else:
+            new_functions.extend(parts)
+            split_records.extend(part_splits)
+    new_functions.sort(key=lambda function: function["address"])
+    new_starts = [function["address"] for function in new_functions]
+
+    def new_owner(address: int) -> int:
+        return new_starts[bisect_right(new_starts, address) - 1]
+
+    new_by_address = {function["address"]: function for function in new_functions}
+    for address, expected in protected.items():
+        actual = new_by_address.get(new_owner(address))
+        if actual != expected:
+            raise ValueError(f"protected function {address:#x} cannot retain its adopted catalogue record")
+
+    ranges = []
+    for item in catalogue["ranges"]:
+        if item["owner"] not in partitions:
+            ranges.append(item)  # Segment-padding ranges must retain their page boundaries.
+            continue
+        bounds = partitions[item["owner"]]
+        for first, end in zip(bounds, bounds[1:]):
+            _append_range(ranges, max(first, item["start"]), min(end, item["end"]), item["kind"], first)
+    catalogue["functions"], catalogue["ranges"] = new_functions, ranges
+    catalogue["boundary_merges"] = [dict(merge, retained_address=new_owner(merge["address"]))
+                                     for merge in catalogue["boundary_merges"] if merge["address"] not in new_starts]
+    catalogue["entry_groups"] = [group for group in catalogue["entry_groups"] if group["address"] not in partitions]
+    issues = {(item["address"], item["issue"]) for item in catalogue["anomalies"]
+              if not (item["address"] in partitions and item["issue"] == "unexplained_function_bytes")}
+    for function in new_functions:
+        if function["address"] in partitions or function["address"] not in by_address:
+            explained = sum(end - first for first, end in function["code_ranges"] + function["pools"] + function["literals"])
+            if explained != function["size"]:
+                issues.add((function["address"], "unexplained_function_bytes"))
+    issues.update((item["address"], item["issue"]) for item in validate_catalogue(catalogue, analyzer.image, analyzer.layout))
+    catalogue["anomalies"] = [{"address": address, "issue": issue} for address, issue in sorted(issues)]
+    catalogue["linker_tail_inventory"] = sorted(inventory, key=lambda row: row["site"])
+    catalogue["linker_tail_extent_splits"] = sorted(split_records, key=lambda row: row["site"])
+    stats = catalogue["stats"]
+    stats.update(functions=len(new_functions),
+                 functions_by_isa=dict(sorted(Counter(function["isa"] for function in new_functions).items())),
+                 functions_by_kind=dict(sorted(Counter(function["kind"] for function in new_functions).items())),
+                 starts_by_evidence=dict(sorted(Counter(item for function in new_functions for item in function["evidence"]).items())),
+                 anomalies=len(issues), anomalies_by_issue=dict(sorted(Counter(issue for _, issue in issues).items())),
+                 merged_starts=len(catalogue["boundary_merges"]),
+                 merges_by_reason=dict(sorted(Counter(reason for merge in catalogue["boundary_merges"] for reason in merge["reasons"]).items())),
+                 fallthrough_groups=len(catalogue["entry_groups"]),
+                 absorbed_function_starts=sum(len(group["members"]) - 1 for group in catalogue["entry_groups"]),
+                 secondary_entries=sum(len(function["entries"]) - 1 for function in new_functions),
+                 nop_entries=sum(entry["kind"] == "nop_entry" for function in new_functions for entry in function["entries"]),
+                 noreturn_functions=sum(function["noreturn"] for function in new_functions),
+                 functions_with_literals=sum(bool(function["literals"]) for function in new_functions),
+                 prologue_only_starts=sum(function["evidence"] == ["prologue"] for function in new_functions),
+                 linker_tail_census=dict(sorted(classes.items())),
+                 linker_tail_extent_splits=len(split_records))
+    stats["tail_calls"] += len(split_records)
+    return catalogue
+
+
+def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "code.bin", *,
+                    protected_functions: dict[int, dict] | None = None) -> dict:
     """Return deterministic schema-v1 metadata, preserving ambiguity as anomalies/unknown."""
     analyzer = Analyzer(image, layout)
     analyzer.discover()
@@ -1288,7 +1604,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "linker_tail_wrappers": len(analyzer.linker_wrappers),
         "repaired_pointer_targets": len(analyzer.pointer_target_repairs),
     }
-    return result
+    return _split_linker_tail_extents(result, analyzer, protected_functions or {})
 
 
 def validate_catalogue(catalogue: dict, image: bytes, layout: ctrfmt.CodeLayout) -> list[dict]:
@@ -1416,10 +1732,27 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--image", type=Path, default=ROOT / "orig/code.bin")
     command.add_argument("--exheader", type=Path, default=ROOT / "orig/exheader.bin")
     command.add_argument("--out", type=Path, default=ROOT / "scratch/analyze/catalogue.json")
+    command.add_argument("--protect-manifest", type=Path, action="append", default=[ROOT / "config/matches.json"],
+                         help="keep every function listed in this matches/candidate manifest unchanged (repeatable)")
     args = parser.parse_args(argv)
     started = time.perf_counter()
     try:
-        result = build_catalogue(args.image.read_bytes(), ctrfmt.parse_exheader(args.exheader.read_bytes()), args.image.name)
+        protected = {}
+        adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))["functions"]
+        adopted.sort(key=lambda function: function["address"])
+        adopted_starts = [function["address"] for function in adopted]
+        names_path = ROOT / "config/names.json"
+        names = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
+        for manifest in args.protect_manifest:
+            for unit in json.loads(manifest.read_text(encoding="utf-8"))["units"]:
+                for name in unit["functions"]:
+                    address = (names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1
+                    index = bisect_right(adopted_starts, address) - 1
+                    if index < 0 or address >= adopted[index]["address"] + adopted[index]["size"]:
+                        raise ValueError(f"protected function {name} has no adopted catalogue record")
+                    protected[address] = adopted[index]
+        result = build_catalogue(args.image.read_bytes(), ctrfmt.parse_exheader(args.exheader.read_bytes()), args.image.name,
+                                 protected_functions=protected)
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_bytes(serialize_catalogue(result))
     except (OSError, ValueError, struct.error) as error:
