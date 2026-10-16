@@ -393,5 +393,232 @@ class RelocationArithmeticTest(unittest.TestCase):
             inplace.Resolver(CATALOGUE, {"func_00100000": {"address": 0x100040}})
 
 
+# -- armlink output optimisations (docs/LINKER.md) --------------------------------------------
+
+MOV_R0_R0 = 0xE1A00000
+BX_LR = struct.pack("<I", 0xE12FFF1E)
+# Callees the model examines, with their original bytes.
+CALLEES = {
+    0x100100: BX_LR,  # empty: inlined as MOV r0, r0
+    0x100110: struct.pack("<I", 0xE3A00000) + BX_LR,  # mov r0, #0; bx lr: inlined as mov r0, #0
+    0x100120: struct.pack("<I", 0xE28F0000) + BX_LR,  # add r0, pc, #0: reads the PC, kept
+    0x100130: struct.pack("<I", MOV_R0_R0) + BX_LR,  # a tail-call B removed by --branchnop: kept
+    0x100140: struct.pack("<I", 0xE3A00000) + struct.pack("<I", 0xE3A01000) + BX_LR,  # 12 bytes: kept
+    0x100150: struct.pack("<I", 0xE3A00000) + BX_LR,  # qualifying bytes, but a multi-entry owner: kept
+    0x100160: struct.pack("<HH", 0x2000, 0x4770),  # Thumb movs r0, #0; bx lr: kept (never modelled)
+}
+MODEL_CATALOGUE = {
+    0x100000: {"address": 0x100000, "size": 0x40, "isa": "arm"},
+    0x100004: {"address": 0x100004, "size": 0x3C, "isa": "arm"},  # only for the branch-to-next fixture
+    0x100100: {"address": 0x100100, "size": 4, "isa": "arm"},
+    0x100110: {"address": 0x100110, "size": 8, "isa": "arm"},
+    0x100120: {"address": 0x100120, "size": 8, "isa": "arm"},
+    0x100130: {"address": 0x100130, "size": 8, "isa": "arm"},
+    0x100140: {"address": 0x100140, "size": 12, "isa": "arm"},
+    0x100150: {"address": 0x100150, "size": 8, "isa": "arm", "kind": "multi_entry",
+               "entries": [{"address": 0x100150, "isa": "arm"}, {"address": 0x100154, "isa": "arm"}]},
+    0x100160: {"address": 0x100160, "size": 4, "isa": "thumb"},
+}
+
+
+@unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+class ArmlinkModelTest(unittest.TestCase):
+    """Each rule of the default linker model, and the boundary where the call stays a BL."""
+
+    compile = InPlaceTest.compile
+
+    def memory(self):
+        mem = Memory()
+        for address, body in CALLEES.items():
+            mem.write(address, body)
+        return mem
+
+    def expected(self, obj, mem, base, calls, data_at=0x200000):
+        """Write what armlink produces for the function at `base` into `mem`, encoded here
+        independently: `calls` maps a callee name to the word armlink writes for a call to it
+        (None: an ordinary BL/BLX)."""
+        fn = next(f for f in obj.defined_functions() if int(f.name[5:], 16) == base)
+        sec = obj.sections[fn.shndx]
+        data = bytearray(sec.data)
+        for rel in sec.relocs:
+            if rel.type == inplace.R_ARM_ABS32:
+                struct.pack_into("<I", data, rel.offset, data_at)
+                continue
+            word = calls[rel.symbol.name]
+            if word is None:
+                target = int(rel.symbol.name[5:], 16)
+                word = bl(base + rel.offset, target, MODEL_CATALOGUE[target]["isa"] == "thumb")
+            struct.pack_into("<I", data, rel.offset, word)
+        mem.write(base, bytes(data))
+        return bytes(data)
+
+    def link(self, obj, mem, model=inplace.DEFAULT_LINKER_MODEL):
+        linker = inplace.InPlaceLinker(mem, MODEL_CATALOGUE, inplace.Resolver(MODEL_CATALOGUE), (0x200000, 0x201000), model)
+        linked = {p.base: data for p, data in linker.link(obj).values() if p.origin == "catalogue"}
+        return linked, [(w.rule, w.target, w.word) for w in linker.rewrites]
+
+    def test_default_model_is_the_evidenced_armlink_model(self):
+        model = inplace.linker_model(inplace.DEFAULT_LINKER_MODEL)
+        self.assertTrue(model.inline and model.branchnop)
+        self.assertFalse(inplace.linker_model("strict-v1").inline)
+        with self.assertRaisesRegex(inplace.LinkError, "unknown linker model"):
+            inplace.linker_model("armlink-guess")
+
+    def test_calls_of_return_only_and_one_instruction_functions_are_inlined(self):
+        """Rules I1/I2: BL to `bx lr` -> MOV r0, r0; BL to `mov r0, #0; bx lr` -> mov r0, #0."""
+        obj = self.compile(
+            "extern void func_00100100(void);\nextern int func_00100110(void);\nextern int data_00200000;\n"
+            "void func_00100000(void) { func_00100100(); data_00200000 = func_00100110(); }\n"
+        )
+        mem = self.memory()
+        want = self.expected(obj, mem, 0x100000, {"func_00100100": MOV_R0_R0, "func_00100110": 0xE3A00000})
+        linked, rewrites = self.link(obj, mem)
+        self.assertEqual(linked[0x100000], want)
+        self.assertEqual(rewrites, [("inline_nop", 0x100100, MOV_R0_R0), ("inline_insn", 0x100110, 0xE3A00000)])
+        strict, none = self.link(obj, mem, "strict-v1")
+        self.assertEqual(none, [])
+        self.assertNotEqual(strict[0x100000], want)  # the strict model keeps both BLs: a mismatch
+
+    def test_conditional_call_of_an_empty_function_becomes_an_unconditional_nop(self):
+        """Rule I3 (image evidence): `cmp; blne empty` left `cmp; mov r0, r0` in the original."""
+        obj = self.compile(
+            "extern void func_00100100(int);\nextern int data_00200000;\n"
+            "void func_00100000(int x) { if (x) func_00100100(x); data_00200000 = x; }\n"
+        )
+        sec = obj.sections[obj.defined_functions()[0].shndx]
+        rel = next(r for r in sec.relocs if r.symbol.name == "func_00100100")
+        self.assertEqual((rel.type, struct.unpack_from("<I", sec.data, rel.offset)[0] >> 28), (inplace.R_ARM_JUMP24, 0x1))
+        mem = self.memory()
+        want = self.expected(obj, mem, 0x100000, {"func_00100100": MOV_R0_R0})
+        linked, rewrites = self.link(obj, mem)
+        self.assertEqual(linked[0x100000], want)
+        self.assertEqual(rewrites, [("inline_nop", 0x100100, MOV_R0_R0)])
+
+    def test_condition_rules_for_an_inlined_instruction(self):
+        """Rule I3 (manual): the BL's condition goes onto an unconditional instruction; matching
+        conditions inline as they are; differing ones, or an unconditional-only instruction under
+        BLcond, keep the call."""
+        body = lambda insn: struct.pack("<I", insn) + BX_LR  # noqa: E731
+        blne, bl_ = 0x1BFFFFFE, 0xEBFFFFFE
+        self.assertEqual(inplace.inline_arm_call(blne, body(0xE3A00000)), ("inline_insn", 0x13A00000))
+        self.assertEqual(inplace.inline_arm_call(blne, body(0x13A00001)), ("inline_insn", 0x13A00001))
+        self.assertIsNone(inplace.inline_arm_call(blne, body(0x03A00001)))
+        self.assertIsNone(inplace.inline_arm_call(blne, body(0xF5D0F000)))  # pld [r0]
+        self.assertEqual(inplace.inline_arm_call(bl_, body(0xF5D0F000)), ("inline_insn", 0xF5D0F000))
+        self.assertEqual(inplace.inline_arm_call(blne, BX_LR), ("inline_nop", MOV_R0_R0))
+        self.assertEqual(inplace.inline_arm_call(bl_, struct.pack("<I", 0xE1A0F00E)), ("inline_nop", MOV_R0_R0))
+        for refused in (0xEF00003C, 0xE1A0000E, 0xE59F0000, 0xEA000000, 0xE12FFF1E):  # svc, lr, pc, b, bx
+            self.assertIsNone(inplace.inline_arm_call(bl_, body(refused)), f"{refused:#x}")
+        self.assertIsNone(inplace.inline_arm_call(bl_, struct.pack("<I", 0xE12FFF1E) * 3))
+        self.assertIsNone(inplace.inline_arm_call(bl_, struct.pack("<I", 0x012FFF1E)))  # bxeq lr only
+
+    def test_calls_that_do_not_qualify_stay_bl(self):
+        """Fail-closed boundary: PC access, a removed tail call (MOV r0, r0), a longer callee, a
+        multi-entry owner and a Thumb callee all keep an ordinary relocated BL/BLX."""
+        obj = self.compile(
+            "extern int func_00100120(void);\nextern int func_00100130(void);\nextern int func_00100140(void);\n"
+            "extern int func_00100150(void);\nextern int func_00100160(void);\n"
+            "int func_00100000(void) { return func_00100120() + func_00100130() + func_00100140()"
+            " + func_00100150() + func_00100160(); }\n"
+        )
+        mem = self.memory()
+        names = ("func_00100120", "func_00100130", "func_00100140", "func_00100150", "func_00100160")
+        want = self.expected(obj, mem, 0x100000, dict.fromkeys(names))
+        linked, rewrites = self.link(obj, mem)
+        self.assertEqual(rewrites, [])
+        self.assertEqual(linked[0x100000], want)
+
+    def test_a_non_matching_body_still_mismatches(self):
+        """The rewrite is what armlink writes, not what the original holds: an original MOV r0, #1
+        at the call of an empty function, or a MOV r0, r0 at a call armlink keeps, differ."""
+        obj = self.compile(
+            "extern void func_00100100(void);\nextern int func_00100140(void);\nextern int data_00200000;\n"
+            "void func_00100000(void) { func_00100100(); data_00200000 = func_00100140(); }\n"
+        )
+        for calls in ({"func_00100100": 0xE3A00001, "func_00100140": None},
+                      {"func_00100100": MOV_R0_R0, "func_00100140": MOV_R0_R0}):
+            mem = self.memory()
+            want = self.expected(obj, mem, 0x100000, calls)
+            linked, _ = self.link(obj, mem)
+            self.assertNotEqual(linked[0x100000], want, calls)
+
+    def test_callee_defined_in_the_same_object_is_judged_by_its_own_section(self):
+        obj = self.compile(
+            "extern int data_00200000;\n__attribute__((noinline)) void func_00100100(void) {}\n"
+            "void func_00100000(void) { func_00100100(); data_00200000 = 1; }\n"
+        )
+        mem = self.memory()
+        want = self.expected(obj, mem, 0x100000, {"func_00100100": MOV_R0_R0})
+        linked, rewrites = self.link(obj, mem)
+        self.assertEqual((linked[0x100000], linked[0x100100]), (want, BX_LR))
+        self.assertEqual(rewrites, [("inline_nop", 0x100100, MOV_R0_R0)])
+
+    def test_tail_call_to_the_next_instruction_becomes_a_nop(self):
+        """Rule B1 (--branchnop): `b g` with g placed right after it is MOV r0, r0 (a NOP entry)."""
+        obj = self.compile("extern void func_00100004(void);\nvoid func_00100000(void) { func_00100004(); }\n")
+        linked, rewrites = self.link(obj, self.memory())
+        self.assertEqual(linked[0x100000], struct.pack("<I", MOV_R0_R0))
+        self.assertEqual(rewrites, [("branchnop", 0x100004, MOV_R0_R0)])
+        strict, _ = self.link(obj, self.memory(), "strict-v1")
+        self.assertEqual(strict[0x100000], struct.pack("<I", 0xEAFFFFFF))
+
+    def test_tail_call_of_an_empty_function_is_not_inlined(self):
+        """Only BL is inlined: B to `bx lr` stays a B (the original keeps 42 of them)."""
+        obj = self.compile("extern void func_00100100(void);\nvoid func_00100000(void) { func_00100100(); }\n")
+        linked, rewrites = self.link(obj, self.memory())
+        self.assertEqual(rewrites, [])
+        self.assertEqual(linked[0x100000], struct.pack("<I", 0xEA000000 | ((0x100100 - 0x100008) >> 2)))
+
+
+class ArmlinkBoundaryTest(unittest.TestCase):
+    """Compiler-free: branches to the next instruction whose armlink output is not established."""
+
+    def test_conditional_branch_or_call_to_the_next_instruction_is_refused(self):
+        linker = inplace.InPlaceLinker(Memory(), MODEL_CATALOGUE, inplace.Resolver(MODEL_CATALOGUE), (0x200000, 0x201000))
+        sym = inplace.Symbol("func_00100004", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+        for rtype, word in ((inplace.R_ARM_JUMP24, 0x1AFFFFFE), (inplace.R_ARM_JUMP24, 0x1BFFFFFE), (inplace.R_ARM_CALL, 0xEBFFFFFE)):
+            sec, rel = synthetic(rtype, struct.pack("<I", word), sym)
+            with self.assertRaisesRegex(inplace.LinkError, "next instruction"):
+                linker._optimised_branch(rel, sec, 0x100000, inplace.Target(0x100004), None, {})
+        sec, rel = synthetic(inplace.R_ARM_JUMP24, struct.pack("<I", 0x1AFFFFFE), sym)
+        strict = inplace.InPlaceLinker(Memory(), MODEL_CATALOGUE, inplace.Resolver(MODEL_CATALOGUE), (0x200000, 0x201000), "strict-v1")
+        self.assertIsNone(strict._optimised_branch(rel, sec, 0x100000, inplace.Target(0x100004), None, {}))
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+@unittest.skipUnless((ROOT / "orig/code.bin").is_file() and (ROOT / "orig/exheader.bin").is_file(), "private inputs absent")
+class OriginalImageEvidenceTest(unittest.TestCase):
+    """The default model must never contradict the original: no BL it would have inlined survives."""
+
+    def test_no_surviving_call_targets_a_callee_the_model_inlines(self):
+        import image as image_mod
+
+        image = image_mod.Image.load(ROOT / "orig")
+        functions = image_mod.functions_by_address(image_mod.load_catalogue())
+        linker = inplace.InPlaceLinker(image, functions, inplace.Resolver(functions), image.bss)
+        external = inplace.Symbol("callee", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+        inlinable = {a for a in functions
+                     if (body := linker._callee_section(external, a, None, {})) and inplace.inline_arm_call(0xEB000000, body)}
+        calls = contradictions = 0
+        for fn in functions.values():
+            if fn["isa"] != "arm":
+                continue
+            data = [tuple(p) for p in (*fn.get("pools", []), *fn.get("literals", []))]
+            for lo, hi in fn["code_ranges"]:
+                for place in range(lo, hi, 4):
+                    if any(a <= place < b for a, b in data):
+                        continue
+                    word = struct.unpack("<I", image.read(place, 4))[0]
+                    if word >> 28 == 0xF or (word >> 24) & 0xF != 0xB:
+                        continue  # not BL/BLcond
+                    calls += 1
+                    contradictions += inplace._arm_branch_target(word, place) in inlinable
+        self.assertGreater(len(inlinable), 100)  # 74 empty + 36 one-instruction functions (v3)
+        self.assertGreater(calls, 19000)
+        self.assertEqual(contradictions, 0)
+
+
 if __name__ == "__main__":
     unittest.main()

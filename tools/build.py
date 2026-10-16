@@ -9,7 +9,9 @@ produced as a section of exactly its catalogued size, and must equal the origina
 before it is written into the output image; sections placed by different units may never overlap.
 The output must equal orig/code.bin, and re-compressing it must reproduce the stored ExeFS
 `.code` exactly. Everything goes into build/<name>/ (exclusive: an existing name is refused) with
-receipt.json binding every input hash, including the harness sources.
+receipt.json binding every input hash, including the harness sources, and the linker model
+(`--linker-model`, default `inplace.DEFAULT_LINKER_MODEL`, docs/LINKER.md) with every branch it
+wrote as an armlink optimisation inside a credited function.
 
 Not credited and not proven here: bytes outside credited functions (still original), linker-made
 content (veneers, section order), and data layout. See docs/ACCEPTANCE.md.
@@ -65,7 +67,8 @@ def compile_units(units: list[dict], profiles: dict, out: Path, fresh: bool, job
         return dict(pool.map(one, units))
 
 
-def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: int | None = None) -> dict:
+def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: int | None = None,
+          linker_model: str = inplace.DEFAULT_LINKER_MODEL) -> dict:
     out = ROOT / "build" / name
     try:
         out.mkdir(parents=True, exist_ok=False)
@@ -82,7 +85,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     functions = image_mod.functions_by_address(catalogue)
     names = image_mod.load_names()
     resolver = inplace.Resolver(functions, names)
-    linker = inplace.InPlaceLinker(image, functions, resolver, image.bss)
+    linker = inplace.InPlaceLinker(image, functions, resolver, image.bss, linker_model)
     matches = json.loads(matches_path.read_text(encoding="utf-8"))
     profiles = toolchain.load_profiles()
     hits = compile_units(matches["units"], profiles, out, fresh, jobs or os.cpu_count() or 1)
@@ -110,6 +113,8 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             for p, _ in linked.values() if p.section.size
         ]
         placed = {p.base: data for p, data in linked.values() if p.origin == "catalogue"}
+        section_of = {p.base: p.section.index for p, _ in linked.values() if p.origin == "catalogue"}
+        rewrites = {}
         for fname in unit["functions"]:
             address = resolver.resolve(fname).address
             fn = functions.get(address)
@@ -129,10 +134,14 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             start = image.layout.file_offset(address)
             hybrid[start : start + fn["size"]] = data
             credited[address] = unit["source"]
+            done = [w.record() for w in linker.rewrites if w.section == section_of[address]]
+            if done:
+                rewrites[fname] = done
         units.append({
             "source": unit["source"], "source_sha256": sha256_file(src), "profile": profile.name,
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
             "functions": sorted(unit["functions"]), "cache_hit": hits[unit["source"]],
+            "linker_rewrites": rewrites,
         })
     try:
         inplace.reject_overlaps(occupied)
@@ -166,6 +175,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "toolchain_lock_sha256": sha256_file(ROOT / "toolchain.lock.json"),
             "exheader_sha256": sha256_file(ROOT / "orig/exheader.bin"),
             "harness_sha256": {p: sha256_file(ROOT / p) for p in HARNESS},
+            "linker_model": linker.model.name,
             "compilers": {c: sha256_file(toolchain.armcc_exe(c)) for c in used},
         },
         "units": units,
@@ -198,9 +208,11 @@ def main(argv: list[str] | None = None) -> int:
                         help="units to credit (default config/matches.json; a scratch file makes a candidate build)")
     parser.add_argument("--fresh", action="store_true", help="compile everything, ignoring the object cache")
     parser.add_argument("--jobs", type=int, help="parallel compiles (default: CPU count)")
+    parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
+                        help="armlink output optimisations reproduced by the in-place link (docs/LINKER.md)")
     args = parser.parse_args(argv)
     try:
-        receipt = build(args.name, args.matches, args.fresh, args.jobs)
+        receipt = build(args.name, args.matches, args.fresh, args.jobs, args.linker_model)
     except (BuildError, inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
