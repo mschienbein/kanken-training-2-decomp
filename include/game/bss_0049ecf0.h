@@ -46,4 +46,15 @@ struct CommandSystem {
 
 extern struct CommandSystem bss_0049ecf0;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern void func_0012fb38(void);              /* lock the command mutex */
+extern void func_0012fb48(void);              /* unlock the command mutex */
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

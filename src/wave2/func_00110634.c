@@ -1,8 +1,5 @@
 #include "game/bss_0049ecf0.h"
 
-extern void func_0012fb38(void);
-extern void func_0012fb48(void);
-
 void func_00110634(void)
 {
     struct CommandQueue *queue = bss_0049ecf0.executing;

@@ -3,8 +3,6 @@
 extern unsigned char *data_00242fc8;
 extern void func_00192720(void *destination, const void *source, unsigned size);
 extern void func_00195f7c(void);
-extern void func_0012fb38(void);
-extern void func_0012fb48(void);
 extern void func_00190878(void);
 
 void func_00195254(const void *source, unsigned size, int immediate)

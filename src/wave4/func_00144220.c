@@ -1,6 +1,6 @@
-/* [INFERENCE] Signature: Exact adjacent-callee declaration in src/wave2/func_0013db3c.c:1; the return-only target is int identity. */
+/* The adjacent body preserves the integer tail-returned by func_0013db3c. */
 
-extern int func_00144224(int value);
+#include "game/functions.h"
 
 int func_00144220(int value)
 {

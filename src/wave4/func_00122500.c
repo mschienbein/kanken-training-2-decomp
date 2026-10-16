@@ -1,6 +1,8 @@
-extern void func_0012fda0(unsigned int flags);
+#include "game/functions.h"
 
-void func_00122500(void)
+extern int func_0012fda0(unsigned int flags);
+
+int func_00122500(void)
 {
-    func_0012fda0(0x407);
+    return func_0012fda0(0x407);
 }

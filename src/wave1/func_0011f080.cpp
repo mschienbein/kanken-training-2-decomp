@@ -49,7 +49,6 @@ struct ResourceTable {
 };
 
 extern "C" ResourceTable bss_002d3d60;
-extern "C" void *func_0013714c(void *object);
 
 extern "C" void func_0011f080(ResourceEntry *entry)
 {

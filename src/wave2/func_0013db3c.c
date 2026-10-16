@@ -1,4 +1,4 @@
-extern int func_00144224(int value);
+#include "game/functions.h"
 
 int func_0013db3c(int value)
 {

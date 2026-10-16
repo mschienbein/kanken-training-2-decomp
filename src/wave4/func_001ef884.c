@@ -1,5 +1,8 @@
-/* [INFERENCE] Signature: No surviving direct callers and no existing declaration; required void(void) fallback. A vtable/pointer entry alone does not reveal parameters. */
+/* The return-only body preserves the pointer required by func_001ef880's callback contract. */
 
-void func_001ef884(void)
+#include "game/runtime.h"
+
+void *func_001ef884(void *object)
 {
+    return object;
 }

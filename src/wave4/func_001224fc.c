@@ -1,6 +1,6 @@
-/* [INFERENCE] Signature: Callee packet tail-calls func_0012fda0 with a fixed handle; callers func_00101784/func_00109a48 test its result. */
+/* The callers func_00101784 and func_00109a48 test the returned r0 against zero. */
 
-extern int func_00122500(void);
+#include "game/functions.h"
 
 int func_001224fc(void)
 {

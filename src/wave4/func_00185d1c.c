@@ -1,13 +1,10 @@
-struct ObjectManager;
+#include "game/functions.h"
 
 extern volatile unsigned int data_00243738;
 extern struct ObjectManager bss_004b8fa8;
 extern int func_00191c80(volatile unsigned int *guard);
 extern struct ObjectManager *func_001807c0(struct ObjectManager *manager);
-extern void func_00147260(void);
 extern void func_00100000(void);
-extern void func_00215ec4(volatile unsigned int *guard);
-extern void func_00216140(struct ObjectManager *object, void (*destroy)(void), void (*image_base)(void));
 
 struct ObjectManager *func_00185d1c(void)
 {

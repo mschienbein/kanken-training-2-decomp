@@ -1,3 +1,5 @@
+#include "game/functions.h"
+
 struct PoolLink {
     struct PoolLink *next;
     struct PoolLink *previous;
@@ -21,7 +23,6 @@ struct ObjectPool {
 extern volatile unsigned int data_00243718;
 extern struct ObjectPool bss_004b8420;
 extern int func_00191c80(volatile unsigned int *guard);
-extern void func_00215ec4(volatile unsigned int *guard);
 
 static __forceinline void initializeList(struct PoolList *list)
 {

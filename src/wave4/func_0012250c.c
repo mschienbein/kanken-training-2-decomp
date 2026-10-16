@@ -1,8 +1,8 @@
-/* [INFERENCE] Signature: Callee packet tail-calls func_00137d0c with fixed handle 1031; one-word result inferred from helper contract. */
+/* [INFERENCE] Void contract: the sole caller func_00109a48 discards r0 after this call. */
 
-extern unsigned func_00122510(void);
+#include "game/functions.h"
 
-unsigned func_0012250c(void)
+void func_0012250c(void)
 {
-    return func_00122510();
+    func_00122510();
 }

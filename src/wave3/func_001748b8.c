@@ -6,7 +6,6 @@ struct ArrayOwner {
 };
 
 extern void *func_00100c80(void *elements, void *(*destroy)(void *element));
-extern void *func_001ef880(void *element);
 
 struct ArrayOwner *func_001748b8(struct ArrayOwner *owner)
 {

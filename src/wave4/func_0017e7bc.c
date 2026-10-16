@@ -1,15 +1,4 @@
-struct RegistryNode {
-    struct RegistryNode *next;
-    struct RegistryNode *previous;
-};
-struct Registry {
-    unsigned int count;
-    struct RegistryNode sentinel;
-};
-struct RegistryEntry {
-    const void *type;
-    struct RegistryNode link;
-};
+#include "game/functions.h"
 
 extern void func_0018d868(struct Registry *registry, struct RegistryNode *node);
 

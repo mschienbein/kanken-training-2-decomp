@@ -1,11 +1,4 @@
-struct TimingState {
-    float elapsed;
-    float duration;
-    unsigned int count;
-    unsigned char active;
-    unsigned char paused;
-    unsigned char complete;
-};
+#include "game/functions.h"
 
 void func_0017e818(struct TimingState *state)
 {

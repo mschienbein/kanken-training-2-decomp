@@ -1,4 +1,6 @@
-/* [INFERENCE] Signature: Direct tail callers func_0011fa34/func_0011ffdc have void *(void *) declarations in src/wave1/func_0019e02c_returning.c:11-12; pointer identity. */
+/* Return-only body: func_0019e02c frees its pointer through func_0011fa34/func_0011ffdc. */
+
+#include "game/runtime.h"
 
 void * func_0018f7f0(void *object)
 {

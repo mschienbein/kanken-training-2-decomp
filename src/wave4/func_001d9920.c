@@ -1,11 +1,5 @@
-struct TimingState {
-    float elapsed;
-    float duration;
-    unsigned int count;
-    unsigned char active;
-    unsigned char paused;
-    unsigned char complete;
-};
+#include "game/functions.h"
+
 struct ExtendedTimingState {
     struct TimingState timing;
     unsigned int value;
@@ -14,8 +8,6 @@ struct ExtendedTimingState {
     unsigned char enabled;
     unsigned char finished;
 };
-
-extern void func_0017e818(struct TimingState *state);
 
 struct ExtendedTimingState *func_001d9920(struct ExtendedTimingState *state)
 {
