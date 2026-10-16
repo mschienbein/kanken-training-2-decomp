@@ -5,6 +5,10 @@ not a frozen matching denominator. Discovery combines executable call edges,
 external pointers, linker veneers and prologues in otherwise unexplained gaps.
 ``code_ranges`` makes sparse recursive-descent coverage explicit; the enclosing
 ``size`` includes trailing pools, but unexplained holes remain unknown ranges.
+Boundary refinement uses ARMCC split-section literal ownership, without discarding
+observed call targets or callback-table entries. ``boundary_merges`` records every
+removed weak start; ``noreturn`` means the recovered normal-flow graph is closed,
+not merely that a return opcode was absent from an incomplete trace.
 """
 from __future__ import annotations
 
@@ -62,6 +66,7 @@ class Instruction:
     pools: tuple[tuple[int, int], ...] = ()
     address_reference: bool = False
     switch: tuple[str, int] | None = None
+    terminal: str | None = None
 
 
 @dataclass(slots=True)
@@ -83,6 +88,8 @@ class Trace:
     issues: set[tuple[int, str]] = field(default_factory=set)
     indirect_exits: int = 0
     switches: int = 0
+    return_sites: set[int] = field(default_factory=set)
+    open_exits: set[int] = field(default_factory=set)
 
     @property
     def end(self) -> int:
@@ -116,6 +123,11 @@ class Analyzer:
         self.raw_calls: dict[tuple[int, str], set[int]] = {}
         self.discovery_rounds = 0
         self.rejected_call_seeds = 0
+        self.internal_starts: set[int] = set()
+        self.boundary_merges: list[dict] = []
+        self.noreturn: dict[int, list[str]] = {}
+        self.protected_pointer_starts: set[int] = set()
+        self.refining = False
 
     def inside(self, address: int, isa: str = "arm") -> bool:
         return self.base <= address < self.end and address % (4 if isa == "arm" else 2) == 0
@@ -149,6 +161,8 @@ class Analyzer:
             # Unconditional-space PLD/PLI encodings resemble LDRB pc,[pc,...],
             # but prefetching instruction bytes neither exits nor owns a pool.
             return ins
+        elif word & 0x0FFFFFFF == 0x0F000003:
+            ins.terminal = "svc_exit_process"
         elif word & 0x0E000000 == 0x0A000000:
             ins.target = (address + 8 + (_signed(word & 0xFFFFFF, 24) << 2), "arm")
             ins.call = bool(word & 0x01000000)
@@ -227,6 +241,8 @@ class Analyzer:
             ins.stop = True
             ins.returns = ops[1].reg == arm.ARM_REG_LR
             ins.indirect = not ins.returns
+        elif decoded.id == arm.ARM_INS_SVC and ops and ops[0].imm == 3:
+            ins.terminal = "svc_exit_process"
         elif decoded.id in (arm.ARM_INS_LDR, arm.ARM_INS_VLDR):
             for op in ops:
                 if op.type == arm.ARM_OP_MEM and op.mem.base == arm.ARM_REG_PC and not op.mem.index:
@@ -322,7 +338,7 @@ class Analyzer:
                 return count if 0 < count <= 4096 else None
         return None
 
-    def trace(self, start: int, limit: int) -> Trace:
+    def trace(self, start: int, limit: int, *, internal_starts: set[int] | None = None) -> Trace:
         isa = self.seeds[start].isa
         result = Trace(start, isa)
         veneer = self.veneer(start, isa)
@@ -335,18 +351,25 @@ class Analyzer:
                 result.code.update({start: 2, start + 2: 2, start + 4: 4})
             result.tails.add((*veneer, start))
             return result
-        work = [start]
+        internal = self.internal_starts if internal_starts is None else internal_starts
+        work = [start] + sorted(address for address in internal if start < address < limit)
         address_words: set[int] = set()
         while work:
             address = work.pop()
             while start <= address < limit:
-                if address in result.code or address & ~3 in result.pools:
+                if address in result.code:
+                    break
+                if address & ~3 in result.pools:
+                    result.open_exits.add(address)
                     break
                 ins = self.decode(address, isa)
                 if ins is None or address + ins.size > limit:
                     result.issues.add((address, "undecodable_reachable_code"))
+                    result.open_exits.add(address)
                     break
                 result.code[address] = ins.size
+                if ins.returns:
+                    result.return_sites.add(address)
                 for first, end in ins.pools:
                     if first % 4 or end % 4:
                         result.issues.add((address, "unaligned_literal_reference"))
@@ -357,6 +380,8 @@ class Analyzer:
                 if ins.call:
                     if ins.target is not None:
                         result.calls.add((*ins.target, address))
+                        if ins.target[0] in self.noreturn and not ins.conditional:
+                            break
                 elif ins.switch is not None:
                     style, register = ins.switch
                     count = self._switch_bound(address, register)
@@ -371,12 +396,14 @@ class Analyzer:
                             count = None
                     if count is None or table + count * 4 > limit:
                         result.issues.add((address, "unresolved_switch"))
+                        result.open_exits.add(address)
                     else:
                         result.switches += 1
                         if style == "branches":
                             for entry in range(table, table + count * 4, 4):
                                 if self.word(entry) & 0xFF000000 != 0xEA000000:
                                     result.issues.add((entry, "invalid_switch_branch"))
+                                    result.open_exits.add(entry)
                                 else:
                                     work.append(entry)
                         else:
@@ -405,7 +432,8 @@ class Analyzer:
                                 for a in range(address + 4, target, 4))
                     )
                     tail = not start <= target < limit or (
-                        not ins.conditional and (address == start or restored_lr or padding_gap)
+                        target not in internal and not ins.conditional
+                        and (address == start or restored_lr or padding_gap)
                     )
                     if tail:
                         result.tails.add((target, target_isa, address))
@@ -413,15 +441,19 @@ class Analyzer:
                         work.append(target)
                     if not ins.conditional:
                         break
-                elif ins.stop:
+                elif ins.stop or self.refining and ins.terminal is not None:
                     if ins.target is not None:
                         result.tails.add((*ins.target, address))
                     result.indirect_exits += ins.indirect
+                    if ins.indirect and ins.target is None:
+                        result.open_exits.add(address)
                     if not ins.conditional:
                         break
                 address += ins.size
-                if address == limit and limit < self.end:
-                    result.issues.add((address, "fallthrough_into_start"))
+                if address == limit:
+                    result.open_exits.add(address)
+                    if limit < self.end:
+                        result.issues.add((address, "fallthrough_into_start"))
         occupied = {address & ~3 for address in result.code}
         result.pools.update(address_words - occupied)
         return result
@@ -525,6 +557,178 @@ class Analyzer:
                     return traces
         raise ValueError("function-start discovery did not converge after 64 rounds")
 
+    def _pointer_table_starts(self, traces: list[Trace]) -> set[int]:
+        """Protect runs of distinct entry pointers, allowing one null callback slot.
+
+        Switch-address tables name local labels, not separately callable functions.
+        A lone pointer remains weak evidence; adjacent pointers to different starts
+        are conservatively treated as a vtable/callback array, even without types.
+        """
+        protected: set[int] = set()
+        words: dict[int, int] = {}
+        for segment in (self.layout.rodata, self.layout.data):
+            if segment.size:
+                offset = self.layout.file_offset(segment.address)
+                words.update((segment.address + index, struct.unpack_from("<I", self.image, offset + index)[0])
+                             for index in range(0, segment.size - 3, 4))
+        for trace in traces:
+            words.update((address, self.word(address)) for address in trace.pools - trace.table_words)
+        run: set[int] = set()
+        previous = -8
+        null_slot = False
+        for address, pointer in sorted(words.items()):
+            target, isa = pointer & ~1, "thumb" if pointer & 1 else "arm"
+            seed = self.seeds.get(target)
+            entry = seed is not None and seed.isa == isa
+            if address != previous + 4 or not (entry or pointer == 0 and run and not null_slot):
+                if len(run) >= 2:
+                    protected.update(run)
+                run = set()
+            if entry:
+                run.add(target)
+            null_slot = pointer == 0
+            previous = address
+        if len(run) >= 2:
+            protected.update(run)
+        return protected
+
+    def _resolve_noreturn(self) -> list[Trace]:
+        """Find closed no-return graphs, then propagate terminating direct calls.
+
+        Unknown indirect exits, incomplete decoding, fallthroughs and unresolved
+        switches disqualify a graph. Tail-call cycles are solved together; a mere
+        lack of recognized returns is not sufficient evidence.
+        """
+        self.noreturn = {}
+        # Finish start discovery before pruning paths at newly recognized exits.
+        # Otherwise starts evidenced by pools on those paths disappear unrecorded.
+        self.refining = True
+        while True:
+            traces = self.traces()
+            by_start = {trace.address: trace for trace in traces}
+            candidates = {trace.address for trace in traces
+                          if trace.code and not trace.return_sites and not trace.open_exits}
+            while True:
+                rejected = {start for start in candidates if any(
+                    target not in candidates or by_start[target].isa != isa
+                    for target, isa, _ in by_start[start].tails)}
+                if not rejected:
+                    break
+                candidates.difference_update(rejected)
+            additions = candidates - self.noreturn.keys()
+            if not additions:
+                return traces
+            for start in sorted(additions):
+                trace = by_start[start]
+                reasons = {"no_return_sites"}
+                for address in trace.code if trace.kind != "veneer" else ():
+                    ins = self.decode(address, trace.isa)
+                    if ins.terminal is not None:
+                        reasons.add(ins.terminal)
+                    if ins.call and ins.target is not None and ins.target[0] in self.noreturn:
+                        reasons.add("noreturn_call")
+                if trace.tails:
+                    reasons.add("noreturn_tail")
+                if reasons == {"no_return_sites"} or any(target == start for target, _, _ in trace.tails):
+                    reasons.add("closed_loop")
+                self.noreturn[start] = sorted(reasons)
+
+    def _connections(self, traces: list[Trace]) -> list[tuple[int, int, str, int, int]]:
+        """Section constraints, expressed as inclusive runs of candidate indices."""
+        starts = [trace.address for trace in traces]
+        connections: set[tuple[int, int, str, int, int]] = set()
+        for index, trace in enumerate(traces):
+            if trace.kind == "veneer":
+                continue
+            for address in sorted(trace.code):
+                ins = self.decode(address, trace.isa)
+                for first, end in ins.pools if not ins.address_reference else ():
+                    if self.base <= first < end <= self.end:
+                        for word in range(first, end, 4):
+                            other = bisect_right(starts, word) - 1
+                            if other != index:
+                                connections.add((min(index, other), max(index, other),
+                                                 "section_literal", address, word))
+                if ins.branch and ins.target is not None:
+                    target, isa = ins.target
+                    if self.inside(target, isa):
+                        other = bisect_right(starts, target) - 1
+                        if (other != index and traces[other].isa == isa
+                                and target > traces[other].address and target in traces[other].code):
+                            connections.add((min(index, other), max(index, other),
+                                             "branch_into_body", address, target))
+            if (index + 1 < len(traces) and not trace.return_sites
+                    and (starts[index + 1], "fallthrough_into_start") in trace.issues):
+                connections.add((index, index + 1, "fallthrough_without_return",
+                                 max(trace.code), starts[index + 1]))
+        return sorted(connections, key=lambda item: (item[1] - item[0], item))
+
+    def refine(self) -> list[Trace]:
+        """Merge only connected weak entries; preserve every observed BL/BLX start."""
+        self.protected_pointer_starts.update(self._pointer_table_starts(self.traces()))
+        traces = self._resolve_noreturn()
+        while True:
+            self.protected_pointer_starts.update(self._pointer_table_starts(traces))
+            incoming: dict[int, set[int]] = {}
+            for trace in traces:
+                for target, _, _ in trace.calls | trace.tails:
+                    incoming.setdefault(target, set()).add(trace.address)
+            connections = self._connections(traces)
+            changed: set[int] = set()
+            groups = sorted({connection[:2] for connection in connections},
+                            key=lambda interval: (interval[1] - interval[0], interval))
+            for first, last in groups:
+                group = traces[first:last + 1]
+                left = group[0]
+                removed = {trace.address for trace in group[1:]}
+                members = removed | {left.address}
+                if members & changed:
+                    continue
+                # call_scan is unproved raw-byte evidence, unlike bl[x]_target.
+                weak = {"tail_call", "prologue", "pointer", "call_scan"}
+                if any(trace.kind != "function" or trace.isa != left.isa for trace in group):
+                    continue
+                if any(not self.seeds[address].evidence <= weak
+                       or address in self.protected_pointer_starts
+                       or incoming.get(address, set()) - members for address in removed):
+                    continue
+                limit = traces[last + 1].address if last + 1 < len(traces) else self.end
+                internal = self.internal_starts | removed
+                probe = self.trace(left.address, limit, internal_starts=internal)
+                old_code = {address for trace in group for address in trace.code}
+                if not old_code <= probe.code.keys():
+                    continue
+                if any(address & ~3 in probe.pools for address in probe.code):
+                    continue
+                if any(target in removed or target not in self.seeds or self.seeds[target].isa != isa
+                       for target, isa, _ in probe.calls):
+                    continue
+                for boundary, trace in enumerate(group[1:], first + 1):
+                    address = trace.address
+                    witnesses = [{"reason": reason, "address": site, "target": target}
+                                 for lo, hi, reason, site, target in connections
+                                 if first <= lo < boundary <= hi <= last]
+                    reasons = sorted({witness["reason"] for witness in witnesses})
+                    self.boundary_merges.append({
+                        "address": address, "retained_address": left.address,
+                        "evidence": sorted(self.seeds[address].evidence),
+                        "reasons": reasons, "witnesses": witnesses,
+                    })
+                    del self.seeds[address]
+                self.internal_starts.update(removed)
+                changed.update(members)
+            if not changed:
+                break
+            traces = self._resolve_noreturn()
+        owners = {merge["address"]: merge["retained_address"] for merge in self.boundary_merges}
+        for merge in self.boundary_merges:
+            owner = merge["retained_address"]
+            while owner in owners:
+                owner = owners[owner]
+            merge["retained_address"] = owner
+        self.boundary_merges.sort(key=lambda item: item["address"])
+        return traces
+
 
 def _append_range(ranges: list[dict], start: int, end: int, kind: str, owner: int | None) -> None:
     if start >= end:
@@ -538,7 +742,8 @@ def _append_range(ranges: list[dict], start: int, end: int, kind: str, owner: in
 def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "code.bin") -> dict:
     """Return deterministic schema-v1 metadata, preserving ambiguity as anomalies/unknown."""
     analyzer = Analyzer(image, layout)
-    traces = analyzer.discover()
+    analyzer.discover()
+    traces = analyzer.refine()
     anomalies: set[tuple[int, str]] = set()
     functions = []
     owners: list[int | None] = [None] * layout.text.size
@@ -553,6 +758,8 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
             "code_size": max(address + size for address, size in trace.code.items()) - trace.address,
             "isa": trace.isa, "kind": trace.kind, "pools": pools,
             "code_ranges": code_ranges, "evidence": sorted(analyzer.seeds[trace.address].evidence),
+            "noreturn": trace.address in analyzer.noreturn,
+            "noreturn_reasons": analyzer.noreturn.get(trace.address, []),
         })
         anomalies.update(trace.issues)
         for first, end in code_ranges + pools:
@@ -606,6 +813,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "segments": [{"name": segment.name, "address": segment.address, "size": segment.size,
                       "mapped_size": segment.mapped_size} for segment in sorted(layout.segments, key=lambda item: item.address)],
         "functions": sorted(functions, key=lambda item: item["address"]), "ranges": ranges,
+        "boundary_merges": analyzer.boundary_merges,
         "stats": {}, "anomalies": [],
     }
     anomalies.update((issue["address"], issue["issue"]) for issue in validate_catalogue(result, image, layout))
@@ -630,6 +838,11 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "pool_bytes": sum(len(trace.pools) * 4 for trace in traces),
         "prologue_only_starts": sum(function["evidence"] == ["prologue"] for function in functions),
         "discovery_rounds": analyzer.discovery_rounds, "rejected_raw_call_seeds": analyzer.rejected_call_seeds,
+        "merged_starts": len(analyzer.boundary_merges),
+        "merges_by_reason": dict(sorted(Counter(
+            reason for merge in analyzer.boundary_merges for reason in merge["reasons"]).items())),
+        "protected_pointer_table_starts": len(analyzer.protected_pointer_starts),
+        "noreturn_functions": len(analyzer.noreturn),
     }
     return result
 

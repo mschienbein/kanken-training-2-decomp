@@ -1,8 +1,7 @@
 """Accept matched source as a checkpoint: prepare, independent review, finalize once.
 
     python tools/accept.py prepare  --checkpoint c001-pilot --candidates config/candidates/pilot.json
-    python tools/accept.py review   --checkpoint c001-pilot --reviewer NAME --family FAMILY \
-                                    --verdict PASS|PASS_WITH_QUALIFICATIONS|FAIL --notes notes.md
+    python tools/accept.py review   --checkpoint c001-pilot --record review.json
     python tools/accept.py finalize --checkpoint c001-pilot [--min-reviews 1]
     python tools/accept.py verify                                        # CI-safe, no ROM
 
@@ -12,8 +11,10 @@ that ledger must PASS with identical outputs, and the full test suite must pass.
 recorded in accept/<checkpoint>/prepare.json (exclusive create; a FAIL is kept, never retried
 under the same name).
 
-review: records one reviewer's sealed verdict bound to the exact prepare.json and source hashes.
-The reviewer must not be the integrator and must re-derive results, not trust prepare.json.
+review: validates one reviewer's structured record (validate_review: a verdict row for every new
+function, finding ids, severities, verdict consistency) and seals it bound to the exact
+prepare.json and source hashes. The reviewer must not be the integrator and must re-derive
+results, not trust prepare.json.
 
 finalize (once): prepare PASS, at least --min-reviews passing reviews of this exact prepare and
 no FAIL review, sources/profiles/catalogue unchanged since prepare, and the canonical ledger
@@ -30,7 +31,6 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -101,17 +101,17 @@ def checkpoint_dir(name: str) -> Path:
 
 
 def run_suite() -> dict:
-    argv = [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-t", "."]
-    proc = subprocess.run(argv, cwd=ROOT, capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
-    tail = proc.stderr.strip().splitlines()[-3:]
-    ran = next((int(m.group(1)) for line in tail if (m := re.match(r"Ran (\d+) tests?", line))), None)
-    skipped = re.search(r"skipped=(\d+)", tail[-1]) if tail else None
+    import test_suite
+
+    result = test_suite.run()
     return {
-        "command": "python -m unittest discover -s tests -t .",
-        "returncode": proc.returncode,
-        "tests_run": ran,
-        "skipped": int(skipped.group(1)) if skipped else 0,
-        "summary": tail[-1] if tail else "",
+        "command": "python tools/test_suite.py",
+        "returncode": result["returncode"],
+        "tests_run": result["tests_run"],
+        "skipped": result["skipped"],
+        "failed_modules": result["failed_modules"],
+        "seconds": result["seconds"],
+        "summary": f"{result['tests_run']} tests, {result['skipped']} skipped, {len(result['failed_modules'])} failed modules",
     }
 
 
@@ -141,7 +141,8 @@ def prepare(name: str, candidates_path: Path) -> dict:
     builds = []
     for suffix in ("a", "b"):
         try:
-            receipt = build_mod.build(f"{name}-{suffix}", out / "matches.json")
+            # Fresh: acceptance builds never reuse cached objects, so two builds are two compiles.
+            receipt = build_mod.build(f"{name}-{suffix}", out / "matches.json", fresh=True)
         except (build_mod.BuildError, RuntimeError) as e:
             receipt = {"name": f"{name}-{suffix}", "result": "FAIL", "error": str(e)}
         else:
@@ -182,28 +183,83 @@ def prepare(name: str, candidates_path: Path) -> dict:
 # -- review ------------------------------------------------------------------------------------------
 
 
-def review(name: str, reviewer: str, family: str, verdict: str, notes: Path) -> dict:
+ROW_VERDICTS = ("PASS", "QUALIFIED", "FAIL")
+SEVERITIES = ("blocker", "major", "minor", "note")
+FINDING_ID = re.compile(r"^F\d{2,3}$")
+
+
+def validate_review(record: dict, required: dict[str, str]) -> None:
+    """Schema v1 of a review record. `required`: every credited new function -> its source.
+
+    {"reviewer", "family", "verdict": PASS|PASS_WITH_QUALIFICATIONS|FAIL,
+     "functions": [{"function", "source", "verdict": PASS|QUALIFIED|FAIL, "method", "finding_ids": []}],
+     "findings": [{"id": "F01", "severity": blocker|major|minor|note, "subject", "summary"}],
+     "qualifications": [str]}
+    """
+    for key in ("reviewer", "family", "verdict", "functions", "findings", "qualifications"):
+        if key not in record:
+            raise AcceptError(f"review record lacks {key!r}")
+    if record["verdict"] not in (*PASSING, "FAIL"):
+        raise AcceptError(f"verdict must be one of {', '.join((*PASSING, 'FAIL'))}")
+    if not NAME.match(record["reviewer"].lower()):
+        raise AcceptError(f"reviewer name {record['reviewer']!r} must match {NAME.pattern}")
+    findings = {}
+    for f in record["findings"]:
+        if not FINDING_ID.match(f.get("id", "")) or f["id"] in findings:
+            raise AcceptError(f"finding id {f.get('id')!r} must be unique and look like F01")
+        if f.get("severity") not in SEVERITIES or not f.get("subject") or not f.get("summary"):
+            raise AcceptError(f"{f['id']}: needs severity ({'/'.join(SEVERITIES)}), subject and summary")
+        findings[f["id"]] = f
+    rows = {}
+    for row in record["functions"]:
+        name = row.get("function")
+        if name in rows:
+            raise AcceptError(f"{name}: reviewed twice")
+        if required.get(name) != row.get("source"):
+            raise AcceptError(f"{name}: not a new function of this checkpoint (or wrong source)")
+        if row.get("verdict") not in ROW_VERDICTS or not row.get("method"):
+            raise AcceptError(f"{name}: needs verdict ({'/'.join(ROW_VERDICTS)}) and the method used to re-derive it")
+        unknown = [i for i in row.get("finding_ids", []) if i not in findings]
+        if unknown:
+            raise AcceptError(f"{name}: unknown finding ids {unknown}")
+        rows[name] = row
+    missing = sorted(set(required) - set(rows))
+    if missing:
+        raise AcceptError(f"review does not cover {len(missing)} functions: {', '.join(missing[:5])}")
+    blocking = any(r["verdict"] == "FAIL" for r in rows.values()) or any(f["severity"] == "blocker" for f in findings.values())
+    qualified = any(r["verdict"] == "QUALIFIED" for r in rows.values()) or any(f["severity"] == "major" for f in findings.values())
+    if blocking and record["verdict"] != "FAIL":
+        raise AcceptError("a FAIL row or blocker finding requires overall verdict FAIL")
+    if qualified and record["verdict"] == "PASS":
+        raise AcceptError("QUALIFIED rows or major findings require PASS_WITH_QUALIFICATIONS or FAIL")
+    if record["verdict"] == "PASS_WITH_QUALIFICATIONS" and not record["qualifications"]:
+        raise AcceptError("PASS_WITH_QUALIFICATIONS needs at least one stated qualification")
+
+
+def new_functions(out: Path, prepared: dict) -> dict[str, str]:
+    ledger = load_json(out / "matches.json")
+    new = set(prepared["new_units"])
+    return {fn: u["source"] for u in ledger["units"] if u["source"] in new for fn in u["functions"]}
+
+
+def review(name: str, record_path: Path) -> dict:
     out = checkpoint_dir(name)
     prepared = out / "prepare.json"
     if not prepared.is_file():
         raise AcceptError(f"accept/{name}: not prepared")
-    if verdict not in (*PASSING, "FAIL"):
-        raise AcceptError(f"verdict must be one of {', '.join((*PASSING, 'FAIL'))}")
-    if not NAME.match(reviewer.lower()):
-        raise AcceptError(f"reviewer name {reviewer!r} must match {NAME.pattern}")
-    record = load_json(prepared)
+    prepare_record = load_json(prepared)
+    record = load_json(record_path)
+    validate_review(record, new_functions(out, prepare_record))
     entry = {
         "schema_version": 1,
         "checkpoint": name,
-        "reviewer": reviewer,
-        "family": family,
-        "verdict": verdict,
+        **record,
         "reviewed_utc": now(),
         "prepare_sha256": sha256_file(prepared),
-        "sources": source_hashes([{"source": s} for s in record["sources"]]),
-        "notes": notes.read_text(encoding="utf-8"),
+        "sources": source_hashes([{"source": s} for s in prepare_record["sources"]]),
+        "record_sha256": sha256_file(record_path),
     }
-    write_exclusive(out / "reviews" / f"{reviewer.lower()}.json", entry)
+    write_exclusive(out / "reviews" / f"{record['reviewer'].lower()}.json", entry)
     return entry
 
 
@@ -296,10 +352,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--candidates", type=Path, required=True)
     r = sub.add_parser("review")
     r.add_argument("--checkpoint", required=True)
-    r.add_argument("--reviewer", required=True)
-    r.add_argument("--family", required=True)
-    r.add_argument("--verdict", required=True)
-    r.add_argument("--notes", type=Path, required=True)
+    r.add_argument("--record", type=Path, required=True, help="review record JSON (schema in validate_review)")
     f = sub.add_parser("finalize")
     f.add_argument("--checkpoint", required=True)
     f.add_argument("--min-reviews", type=int, default=1)
@@ -312,7 +365,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{rec['result']}: {rec['checks']}; suite {rec['suite']['summary']}")
             return 0 if rec["result"] == "PASS" else 1
         if args.cmd == "review":
-            rec = review(args.checkpoint, args.reviewer, args.family, args.verdict, args.notes)
+            rec = review(args.checkpoint, args.record)
             print(f"recorded {rec['verdict']} from {rec['reviewer']}")
         elif args.cmd == "finalize":
             e = finalize(args.checkpoint, args.min_reviews)

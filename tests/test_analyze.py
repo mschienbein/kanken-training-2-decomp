@@ -94,6 +94,120 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual([function["address"] for function in result["functions"]], [BASE, BASE + 16])
         self.assertEqual(result["functions"][0]["size"], 16)
 
+    def test_mid_function_pool_merges_tail_only_start(self) -> None:
+        # MOV; B over a zero-valued pool; LDR back from that pool; BX lr.
+        # The initial padding-gap heuristic mistakes the B for a tail call.
+        result = self.catalogue([0xE3A00001, branch(BASE + 4, BASE + 12),
+                                 0, 0xE51F000C, 0xE12FFF1E])
+        self.assertEqual([function["address"] for function in result["functions"]], [BASE])
+        self.assertEqual(result["functions"][0]["code_ranges"], [[BASE, BASE + 8], [BASE + 12, BASE + 20]])
+        self.assertEqual(result["functions"][0]["pools"], [[BASE + 8, BASE + 12]])
+        self.assertEqual(result["boundary_merges"], [{
+            "address": BASE + 12, "retained_address": BASE, "evidence": ["tail_call"],
+            "reasons": ["section_literal"],
+            "witnesses": [{"reason": "section_literal", "address": BASE + 12, "target": BASE + 8}],
+        }])
+
+    def test_mid_function_pool_merges_prologue_only_start(self) -> None:
+        image, layout = fixture([0xE3A00001, branch(BASE + 4, BASE + 12),
+                                 0, 0xE92D4010, 0xE51F0010, 0xE8BD8010])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.add_seed(BASE, "arm", "entry")
+        analyzer.add_seed(BASE + 12, "arm", "prologue")
+        traces = analyzer.refine()
+        self.assertEqual([trace.address for trace in traces], [BASE])
+        self.assertEqual(traces[0].pools, {BASE + 8})
+        self.assertEqual(analyzer.boundary_merges[0]["evidence"], ["prologue"])
+
+    def test_mid_function_pool_does_not_merge_bl_target(self) -> None:
+        words = [0xE3A00001, branch(BASE + 4, BASE + 12), 0, 0xE51F000C, 0xE12FFF1E,
+                 0xE92D4010, branch(BASE + 24, BASE + 12, link=True), 0xE8BD8010]
+        image, layout = fixture(words)
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertIn(BASE + 12, [function["address"] for function in result["functions"]])
+        self.assertEqual(result["boundary_merges"], [])
+        self.assertIn({"address": BASE + 12, "issue": "literal_outside_function"}, result["anomalies"])
+
+    def test_cross_isa_pool_does_not_merge_blx_target(self) -> None:
+        image, layout = fixture([0xE59F0010, 0xFA000001, 0xE12FFF1E, 0,
+                                 0x47704801, 0, 0x12345678])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        target = next(function for function in result["functions"] if function["address"] == BASE + 16)
+        self.assertEqual(target["isa"], "thumb")
+        self.assertIn("blx_target", target["evidence"])
+        self.assertEqual(result["boundary_merges"], [])
+
+    def test_pointer_tables_protect_weak_starts(self) -> None:
+        words = [0xE3A00001, branch(BASE + 4, BASE + 12), 0, 0xE51F000C, 0xE12FFF1E, 0xE12FFF1E]
+        for segment in ("rodata", "data"):
+            for nulls in ([], [0]):
+                with self.subTest(segment=segment, nulls=nulls):
+                    image, layout = fixture(words, **{segment: [BASE + 12, *nulls, BASE + 20]})
+                    result = analyze.build_catalogue(image, layout)
+                    self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+                    self.assertEqual(result["boundary_merges"], [])
+                    self.assertEqual(result["stats"]["protected_pointer_table_starts"], 2)
+                    self.assertIn(BASE + 12, [function["address"] for function in result["functions"]])
+
+    def test_isolated_pointer_can_name_an_internal_label(self) -> None:
+        result = self.catalogue([0xE3A00001, branch(BASE + 4, BASE + 12),
+                                 0, 0xE51F000C, 0xE12FFF1E], rodata=[BASE + 12])
+        self.assertEqual(len(result["functions"]), 1)
+        self.assertEqual(result["boundary_merges"][0]["evidence"], ["pointer", "tail_call"])
+
+    def test_external_tail_call_protects_weak_start(self) -> None:
+        words = [0xE3A00001, branch(BASE + 4, BASE + 12), 0, 0xE51F000C, 0xE12FFF1E,
+                 0xE92D4010, 0xE8BD4010, branch(BASE + 28, BASE + 12)]
+        image, layout = fixture(words)
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual(result["boundary_merges"], [])
+
+    def test_branch_into_body_merges_weak_label(self) -> None:
+        image, layout = fixture([0xE3A00001, branch(BASE + 4, BASE + 20), 0,
+                                 0xE92D4010, 0xE2800001, 0xE8BD8010])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual(len(result["functions"]), 1)
+        merges = {merge["address"]: merge for merge in result["boundary_merges"]}
+        self.assertEqual(merges[BASE + 12]["reasons"], ["branch_into_body"])
+        self.assertTrue(all(merge["retained_address"] == BASE for merge in merges.values()))
+        self.assertEqual(result["stats"]["bytes_by_range_kind"]["padding"], 4)
+
+    def test_literal_constraint_merges_multiple_weak_boundaries(self) -> None:
+        # A backward pool reference spans two weak entry guesses.
+        image, layout = fixture([0xE3A00001, branch(BASE + 4, BASE + 20), 0,
+                                 0xE3A00002, branch(BASE + 16, BASE + 20),
+                                 0xE51F0014, 0xE12FFF1E])
+        analyzer = analyze.Analyzer(image, layout)
+        for address, evidence in ((BASE, "entry"), (BASE + 12, "pointer"), (BASE + 20, "tail_call")):
+            analyzer.add_seed(address, "arm", evidence)
+        traces = analyzer.refine()
+        self.assertEqual([trace.address for trace in traces], [BASE])
+        self.assertEqual([merge["address"] for merge in analyzer.boundary_merges], [BASE + 12, BASE + 20])
+        self.assertTrue(all(merge["retained_address"] == BASE for merge in analyzer.boundary_merges))
+        self.assertTrue(all("section_literal" in merge["reasons"] for merge in analyzer.boundary_merges))
+
+    def test_fallthrough_without_return_merges_prologue(self) -> None:
+        image, layout = fixture([0xE3A00001, 0xE92D4010, 0xE8BD8010])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.add_seed(BASE, "arm", "entry")
+        analyzer.add_seed(BASE + 4, "arm", "prologue")
+        self.assertEqual([trace.address for trace in analyzer.refine()], [BASE])
+        self.assertEqual(analyzer.boundary_merges[0]["reasons"], ["fallthrough_without_return"])
+
+    def test_switch_labels_are_not_callback_table_entries(self) -> None:
+        image, layout = fixture([0xE12FFF1E, 0xE12FFF1E, BASE, BASE + 4])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.add_seed(BASE, "arm", "entry")
+        analyzer.add_seed(BASE + 4, "arm", "pointer")
+        trace = analyze.Trace(BASE, "arm", pools={BASE + 8, BASE + 12})
+        self.assertEqual(analyzer._pointer_table_starts([trace]), {BASE, BASE + 4})
+        trace.table_words.update(trace.pools)
+        self.assertEqual(analyzer._pointer_table_starts([trace]), set())
+
     def test_arm_branch_switch_table(self) -> None:
         # CMP r0,#1; ADDLS pc,pc,r0,LSL#2; default branch; two case branches.
         words = [0xE3500001, 0x908FF100, branch(BASE + 8, BASE + 36),
@@ -191,6 +305,87 @@ class CatalogueTests(unittest.TestCase):
         result = self.catalogue([0xE12FFF1E, 0x12345678])
         self.assertEqual(result["functions"][0]["size"], 4)
         self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 4)
+
+    def test_call_to_infinite_loop_terminates_fallthrough(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 8, link=True), 0xE12FFF1E,
+                                 branch(BASE + 8, BASE + 8), 0xE92D4010,
+                                 branch(BASE + 16, BASE + 4, link=True), 0xE8BD8010])
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertTrue(functions[BASE + 8]["noreturn"])
+        self.assertIn("closed_loop", functions[BASE + 8]["noreturn_reasons"])
+        self.assertTrue(functions[BASE]["noreturn"])
+        self.assertIn("noreturn_call", functions[BASE]["noreturn_reasons"])
+        self.assertEqual(functions[BASE]["code_size"], 4)
+        self.assertFalse(functions[BASE + 4]["noreturn"])
+
+    def test_noreturn_propagates_through_calls_to_exit_process(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 8, link=True), 0xE12FFF1E,
+                                 branch(BASE + 8, BASE + 16, link=True), 0xE12FFF1E, 0xEF000003],
+                                rodata=[BASE + 4, BASE + 12])
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertEqual({address for address, function in functions.items() if function["noreturn"]},
+                         {BASE, BASE + 8, BASE + 16})
+        self.assertIn("svc_exit_process", functions[BASE + 16]["noreturn_reasons"])
+        self.assertEqual(result["stats"]["noreturn_functions"], 3)
+
+    def test_discovery_and_table_protection_precede_exit_pruning(self) -> None:
+        # A double-width pool after ExitProcess contains two entry pointers.
+        result = self.catalogue([branch(BASE, BASE + 8, link=True), 0xE12FFF1E,
+                                 0xEF000003, 0xED9F0B00, 0xE12FFF1E, BASE + 28, BASE + 36,
+                                 0xE3A00001, 0xE12FFF1E, 0xE3A00002, 0xE12FFF1E])
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertTrue(functions[BASE + 8]["noreturn"])
+        self.assertEqual(functions[BASE + 8]["pools"], [])
+        self.assertIn("pointer", functions[BASE + 28]["evidence"])
+        self.assertIn("pointer", functions[BASE + 36]["evidence"])
+        self.assertEqual(result["stats"]["protected_pointer_table_starts"], 2)
+
+    def test_conditional_noreturn_call_keeps_returning_path(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 12, link=True, condition=1),
+                                 0xE12FFF1E, 0, branch(BASE + 12, BASE + 12)])
+        self.assertFalse(result["functions"][0]["noreturn"])
+        self.assertEqual(result["functions"][0]["code_size"], 8)
+        self.assertTrue(result["functions"][1]["noreturn"])
+
+    def test_unknown_indirect_exit_is_not_noreturn(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 8, link=True), 0xE12FFF1E, 0xE12FFF10])
+        self.assertFalse(any(function["noreturn"] for function in result["functions"]))
+
+    def test_incomplete_callee_is_not_noreturn(self) -> None:
+        for suffix in ([0xE3A00000, 0], [0xE3A00000]):
+            with self.subTest(suffix=suffix):
+                image, layout = fixture([branch(BASE, BASE + 8, link=True), 0xE12FFF1E, *suffix])
+                result = analyze.build_catalogue(image, layout)
+                self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+                self.assertFalse(any(function["noreturn"] for function in result["functions"]))
+
+    def test_other_or_conditional_svc_can_return(self) -> None:
+        for instruction in (0xEF000001, 0x1F000003):
+            with self.subTest(instruction=instruction):
+                result = self.catalogue([branch(BASE, BASE + 8, link=True), 0xE12FFF1E,
+                                         instruction, 0xE12FFF1E])
+                self.assertFalse(any(function["noreturn"] for function in result["functions"]))
+
+    def test_thumb_exit_process_is_noreturn(self) -> None:
+        result = self.catalogue([0xFA000002, 0xE12FFF1E, 0, 0, 0x4770DF03])
+        target = next(function for function in result["functions"] if function["address"] == BASE + 16)
+        self.assertTrue(target["noreturn"])
+        self.assertEqual(target["code_size"], 2)
+        self.assertIn("svc_exit_process", target["noreturn_reasons"])
+        self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 6)
+
+    def test_closed_tail_cycle_is_noreturn(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 8, link=True), 0xE12FFF1E,
+                                 branch(BASE + 8, BASE + 12), branch(BASE + 12, BASE + 8)],
+                                rodata=[BASE + 8, BASE + 12])
+        self.assertTrue(all(function["noreturn"] for function in result["functions"]))
+        self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 4)
+
+    def test_noreturn_call_does_not_absorb_unreferenced_return_code(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), 0xE3A00001,
+                                 0xE12FFF1E, 0, branch(BASE + 16, BASE + 16)])
+        self.assertEqual(result["functions"][0]["size"], 4)
+        self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 8)
 
     def test_nonzero_page_padding_is_anomaly(self) -> None:
         image, layout = fixture([0xE12FFF1E])
