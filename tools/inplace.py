@@ -719,7 +719,15 @@ class InPlaceLinker:
                 self._apply(rel, sec, data, place, target)
             linked[idx] = (placed, bytes(data))
             if placed.origin == "inferred":
-                original = self.image.read(placed.base, sec.size)
+                try:
+                    original = self.image.read(placed.base, sec.size)
+                except ValueError:
+                    # The original word where the candidate holds this reference is not an address
+                    # inside the image (e.g. an instruction): the candidate cannot match there.
+                    raise LinkError(
+                        f"{sec.name}: its references imply an address {placed.base:#x} outside the image; "
+                        "the original holds no reference there"
+                    ) from None
                 if original != bytes(data):
                     first = next(i for i in range(sec.size) if original[i] != data[i])
                     raise LinkError(

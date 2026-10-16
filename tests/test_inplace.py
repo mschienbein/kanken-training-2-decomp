@@ -42,6 +42,8 @@ class Memory:
         self.mem = bytearray(0x110000)
 
     def read(self, address, size):
+        if not BASE <= address <= address + size <= BASE + len(self.mem):
+            raise ValueError(f"address {address:#x} is outside code.bin")  # as image.Image.read
         return bytes(self.mem[address - BASE : address - BASE + size])
 
     def write(self, address, data):
@@ -155,6 +157,20 @@ class InPlaceTest(unittest.TestCase):
                 struct.pack_into("<I", data, rel.offset, TABLE_AT)  # both point at the same storage
             mem.write(int(fn.name[5:], 16), bytes(data))
         with self.assertRaisesRegex(inplace.LinkError, "overlap|disagree"):
+            self.link(obj, mem)
+
+    def test_reference_implying_an_address_outside_the_image_is_refused(self):
+        """Wave4Author2: a candidate's data reference sat where the original holds an instruction
+        (0xe1a04000); inferring the section there must be a LinkError, not a crash."""
+        obj = self.compile("static const int pair[2] = {0, -1};\nconst int *func_00100000(void) { return pair; }\n")
+        mem = Memory()
+        for fn in obj.defined_functions():
+            sec = obj.sections[fn.shndx]
+            data = bytearray(sec.data)
+            for rel in sec.relocs:
+                struct.pack_into("<I", data, rel.offset, 0xE1A04000)  # an instruction, not an address
+            mem.write(int(fn.name[5:], 16), bytes(data))
+        with self.assertRaisesRegex(inplace.LinkError, "outside the image"):
             self.link(obj, mem)
 
     def test_unsplit_section_with_several_functions_is_refused(self):
