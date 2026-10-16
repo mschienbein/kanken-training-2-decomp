@@ -11,28 +11,27 @@ import rom  # noqa: E402
 
 class RomIdentityTest(unittest.TestCase):
     def test_unknown_dump_is_rejected(self):
-        with tempfile.NamedTemporaryFile(suffix=".3ds") as f:
-            f.write(b"NCSD" * 1024)
-            f.flush()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "other.3ds"
+            path.write_bytes(b"NCSD" * 1024)
             with self.assertRaisesRegex(rom.InputError, "not an accepted input"):
-                rom.identify(Path(f.name), rom.load_title())
+                rom.identify(path, rom.load_title())
 
     def test_encrypted_dump_requires_boot9(self):
         title = rom.load_title()
         encrypted = next(e for e in title["accepted_inputs"] if e["encrypted"])
-        with tempfile.NamedTemporaryFile(suffix=".3ds") as f:
-            original = rom.identify
-            rom.identify = lambda *_: encrypted
-            try:
-                with self.assertRaisesRegex(rom.InputError, "boot9"):
-                    rom.import_rom(Path(f.name), None, False)
-            finally:
-                rom.identify = original
+        original = rom.identify
+        rom.identify = lambda *_: encrypted
+        try:
+            with self.assertRaisesRegex(rom.InputError, "boot9"):
+                rom.import_rom(Path("unused.3ds"), None, False)
+        finally:
+            rom.identify = original
 
     @unittest.skipUnless(rom.MANIFEST.is_file(), "private input not imported")
     def test_extracted_tree_matches_manifest_and_pins(self):
         manifest = rom.verify()
-        pins = json.loads(rom.TITLE.read_text())["derived"]
+        pins = json.loads(rom.TITLE.read_text(encoding="utf-8"))["derived"]
         for rel, pin in pins.items():
             self.assertEqual(manifest["files"][rel], pin)
 

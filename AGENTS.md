@@ -40,6 +40,20 @@ No inline assembly standing in for C. No byte blobs standing in for code or data
 every cross-unit interface. A fake match (dead code to steer register allocation, etc.) is allowed
 only as a recorded qualification. Preserved original bugs carry an `ORIGINAL BUG:` comment.
 
+## Author loop
+
+1. `tools/packet.py func_XXXXXXXX` → `scratch/packets/func_XXXXXXXX.md` (symbolized disassembly,
+   pool words, callers/callees, data refs) and a C skeleton. Packets are private (original
+   disassembly); never commit them.
+2. Write C in your scratch directory. Name functions `func_XXXXXXXX` (or a `config/names.json`
+   name); declare callees and globals as `extern` with the `func_`/`data_`/`bss_XXXXXXXX` names
+   the in-place linker resolves.
+3. `tools/match.py <file.c> --profile <profile> --out scratch/<agent>/...` until every function
+   reports `MATCH`. `EXTENT` means the bytes reproduce the original but the catalogue boundary is
+   wrong: report it to the integrator, do not pad the source.
+4. Deliver: the source path, the `result.json`, profile, attempts, and remaining unknowns.
+   The integrator credits units only through a `tools/build.py` receipt.
+
 ## Evidence
 
 - Records are immutable: versioned names, never overwritten; failures are kept.

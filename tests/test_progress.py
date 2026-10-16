@@ -40,7 +40,7 @@ class ProgressReportTest(unittest.TestCase):
             [sys.executable, "ci/progress_report.py", "--output", "report.json"],
             cwd=tmp, capture_output=True, text=True, check=False,
         )
-        report = json.loads((tmp / "report.json").read_text()) if proc.returncode == 0 else None
+        report = json.loads((tmp / "report.json").read_text(encoding="utf-8")) if proc.returncode == 0 else None
         return proc, report
 
     def test_measures_count_credited_bytes_and_blocks(self):

@@ -69,7 +69,7 @@ class InPlaceTest(unittest.TestCase):
     def compile(self, text):
         tmp = Path(tempfile.mkdtemp())
         src = tmp / "fixture.c"
-        src.write_text(text)
+        src.write_text(text, encoding="utf-8")
         toolchain.compile_source(PROFILE, src, tmp / "fixture.o")
         return inplace.ObjectFile(tmp / "fixture.o")
 

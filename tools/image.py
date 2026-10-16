@@ -29,7 +29,7 @@ class Image:
         code = (orig / "code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((orig / "exheader.bin").read_bytes())
         image = cls(code, layout)
-        pinned = json.loads((ROOT / "config/title.json").read_text())["derived"]["code.bin"]["sha256"]
+        pinned = json.loads((ROOT / "config/title.json").read_text(encoding="utf-8"))["derived"]["code.bin"]["sha256"]
         if image.sha256 != pinned:
             raise ImageError(f"orig/code.bin sha256 {image.sha256} != pinned {pinned}; run tools/rom.py import")
         return image
@@ -50,7 +50,7 @@ class Image:
 def load_catalogue(path: Path = CATALOGUE) -> dict:
     if not path.is_file():
         raise ImageError(f"{path} missing (the function catalogue is produced by tools/analyze.py)")
-    return json.loads(path.read_text())
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def functions_by_address(catalogue: dict) -> dict[int, dict]:
@@ -60,4 +60,4 @@ def functions_by_address(catalogue: dict) -> dict[int, dict]:
 def load_names(path: Path = NAMES) -> dict[str, dict]:
     if not path.is_file():
         return {}
-    return json.loads(path.read_text())["symbols"]
+    return json.loads(path.read_text(encoding="utf-8"))["symbols"]

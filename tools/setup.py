@@ -124,7 +124,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"error: {e}", file=sys.stderr)
         return 1
     INSTALL.mkdir(parents=True, exist_ok=True)
-    INSTALLED.write_text(json.dumps(record, indent=1, sort_keys=True) + "\n")
+    INSTALLED.write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     for cid, info in record["compilers"].items():
         print(f"{cid:16} {info['banner']}")
     return 0

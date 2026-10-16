@@ -1,0 +1,42 @@
+{
+ "compilers": [
+  "armcc_41_894",
+  "armcc_41_921",
+  "armcc_41_1049",
+  "armcc_41_1440",
+  "armcc_41_1454",
+  "armcc_504_82"
+ ],
+ "flagsets": {
+  "O3-Otime": [
+   "--cpu=MPCore",
+   "--fpmode=fast",
+   "--apcs=/interwork",
+   "--arm",
+   "--split_sections",
+   "--signed_chars",
+   "-O3",
+   "-Otime"
+  ],
+  "O3-Otime-hardfp": [
+   "--cpu=MPCore",
+   "--fpmode=fast",
+   "--apcs=/interwork/hardfp",
+   "--arm",
+   "--split_sections",
+   "--signed_chars",
+   "-O3",
+   "-Otime"
+  ],
+  "O2-Otime-hardfp": [
+   "--cpu=MPCore",
+   "--fpmode=fast",
+   "--apcs=/interwork/hardfp",
+   "--arm",
+   "--split_sections",
+   "--signed_chars",
+   "-O2",
+   "-Otime"
+  ]
+ }
+}

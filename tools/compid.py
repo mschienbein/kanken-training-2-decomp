@@ -41,7 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--catalogue", type=Path, default=ROOT / "config/catalogue.json")
     parser.add_argument("--out", type=Path, default=ROOT / "scratch/compid")
     args = parser.parse_args(argv)
-    grid = json.loads(args.grid.read_text()) if args.grid else DEFAULT_GRID
+    grid = json.loads(args.grid.read_text(encoding="utf-8")) if args.grid else DEFAULT_GRID
     ctx = match.Context(args.catalogue)
 
     rows: dict[str, dict[str, str]] = {}
@@ -60,7 +60,8 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"{pair} {src.name}: {e}".splitlines()[0], file=sys.stderr)
                     continue
                 for r in results:
-                    rows.setdefault(r["name"], {})[pair] = "Y" if r["status"] == "match" else f"+{r['first_diff']:x}"
+                    cell = {"match": "Y", "match_extent_differs": "E"}.get(r["status"]) or f"+{r['first_diff']:x}"
+                    rows.setdefault(r["name"], {})[pair] = cell
 
     width = max(len(p) for p in pairs)
     names = sorted(rows)
@@ -77,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
         "grid": grid, "image_sha256": ctx.image.sha256, "results": rows, "matching_all": full,
     }
     args.out.mkdir(parents=True, exist_ok=True)
-    (args.out / "compid.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n")
+    (args.out / "compid.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return 0 if full else 1
 
 

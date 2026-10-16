@@ -52,13 +52,13 @@ def measures(fns: list[dict], matched: set[int], data_total: int = 0) -> dict:
 
 
 def load() -> tuple[dict, set[int], dict[int, str]]:
-    catalogue = json.loads((ROOT / "config/catalogue.json").read_text())
+    catalogue = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
     names_path = ROOT / "config/names.json"
-    overlay = json.loads(names_path.read_text())["symbols"] if names_path.is_file() else {}
+    overlay = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
     by_name = {name: entry["address"] for name, entry in overlay.items()}
     addresses = {f["address"] for f in catalogue["functions"]}
     matched: set[int] = set()
-    for unit in json.loads((ROOT / "config/matches.json").read_text())["units"]:
+    for unit in json.loads((ROOT / "config/matches.json").read_text(encoding="utf-8"))["units"]:
         for name in unit["functions"]:
             m = AUTO.match(name)
             address = int(m.group(1), 16) if m else by_name.get(name)
@@ -111,7 +111,7 @@ def main() -> int:
         "version": REPORT_VERSION,
         "categories": [{"id": "game", "name": "code.bin", "measures": total}],
     }
-    args.output.write_text(json.dumps(report, indent=1) + "\n")
+    args.output.write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8", newline="\n")
     line = (f"{args.version}: {total['matched_functions']}/{total['total_functions']} functions, "
             f"{total['matched_code']}/{total['total_code']} code bytes ({total['matched_code_percent']:.3f}%)")
     print(line)

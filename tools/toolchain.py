@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-LOCK = json.loads((ROOT / "toolchain.lock.json").read_text())
+LOCK = json.loads((ROOT / "toolchain.lock.json").read_text(encoding="utf-8"))
 INSTALL = ROOT / LOCK["install_directory"]
 PROFILES = ROOT / "config/compiler_profiles.json"
 
@@ -62,7 +62,7 @@ class Profile:
 def load_profiles() -> dict[str, Profile]:
     if not PROFILES.is_file():
         return {}
-    data = json.loads(PROFILES.read_text())
+    data = json.loads(PROFILES.read_text(encoding="utf-8"))
     return {name: Profile(name, p["compiler"], tuple(p["flags"])) for name, p in data["profiles"].items()}
 
 

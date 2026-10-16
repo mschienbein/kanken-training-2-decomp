@@ -2,6 +2,27 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-15 (late) — harness ready for decompilation; moving to the Windows desktop
+
+Harness gates (`docs/ACCEPTANCE.md`):
+
+| Gate | State | Evidence |
+|---|---|---|
+| H1 input identity | done | `config/title.json`; `rom.py` refuses unknown dumps (test) |
+| H2 extraction | done | 51 files, hash chain verified; encrypted+boot9 and decrypted inputs give identical trees |
+| H3 zero-C baseline | done | `build/2026-10-15-laptop-baseline-zero-c/receipt.json` PASS (`code.bin` + `.code` exact) |
+| H4 denominator | done (v1) | `config/catalogue.json` 4,504 functions / 1,136,366 B; `docs/denominator-history.jsonl` v1; 39,470 unknown text bytes and 350 boundary anomalies recorded for revision |
+| H5 compiler | partial | ARMCC 5.04 `-Otime` leading; 10 probe functions match; `-O2`/`-O3` and C++/library flags open (`docs/COMPILER.md`) |
+| H6 match loop | done | `match.py`, `compid.py`, `packet.py`; strict `inplace.py` with tests |
+| H7 integration | done (candidate) | `build/2026-10-15-laptop-pilot-candidate/receipt.json` PASS: 10 functions / 280 B from C |
+| H8 progress | done (stub) | `ci/progress_report.py` + workflow; ByteMatch needs a public repo |
+| H9 tests | done | 50 tests (`python -m unittest discover -s tests -t .`) |
+| H10 docs | done | README, AGENTS, ACCEPTANCE, COMPILER, BYTEMATCH, RESUME |
+| H11 pilot | open | agent pilot of ~10 stratified functions on the desktop |
+
+Accepted progress: none (0 functions). The 10 pilot functions are candidates in
+`scratch/pilot/` (private) until reviewed and adopted.
+
 ## 2026-10-15 — harness bootstrap (H-gates in progress)
 
 - Inputs: encrypted cartridge dump (sha256 `23ba7aaf…`) and a decrypted copy (`5874c3af…`) both
@@ -15,6 +36,3 @@ Current entry on top; older entries are kept as history.
   turns `code.bin` back into the stored `.code` byte for byte.
 - SDK tags from the plaintext NCCH plain region: CTR-SDK 11.5.2, NW4C 3.7.5, PUX HWR 2.0.1.
 - Code is mostly ARM with heavy VFP use; Thumb is rare. No assert strings or source paths survive.
-- Next: function catalogue, split/relink roundtrip, compiler identification, match loop.
-
-Accepted progress: none (0 functions).

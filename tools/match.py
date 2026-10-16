@@ -90,14 +90,26 @@ class Context:
             if placed.origin != "catalogue":
                 continue
             fn = self.functions[placed.base]
-            original = self.image.read(placed.base, fn["size"])
-            exact = data == original
+            span = max(len(data), fn["size"])
+            try:
+                original = self.image.read(placed.base, span)
+            except image_mod.ImageError:
+                original = self.image.read(placed.base, fn["size"])
+            same = data == original[: len(data)]
+            if same and len(data) == fn["size"]:
+                status = "match"
+            elif same:
+                # The compiled section reproduces the original but ends elsewhere than the
+                # catalogue says: a catalogue boundary to revise, not credit.
+                status = "match_extent_differs"
+            else:
+                status = "mismatch"
             common = min(len(data), len(original))
-            first = None if exact else next((i for i in range(common) if data[i] != original[i]), common)
+            first = None if same else next((i for i in range(common) if data[i] != original[i]), common)
             name = next(s.name for s in obj.defined_functions() if s.shndx == placed.section.index)
             results.append({
                 "name": name, "address": placed.base, "size": fn["size"], "candidate_size": len(data),
-                "status": "match" if exact else "mismatch", "first_diff": first,
+                "status": status, "first_diff": first,
                 "_original": original, "_candidate": data,
             })
         return sorted(results, key=lambda r: r["address"])
@@ -109,10 +121,14 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
     toolchain.compile_source(profile, source, obj_path)
     results = ctx.compare(obj_path)
     for r in results:
-        exact = r["status"] == "match"
-        print(f"{'MATCH   ' if exact else 'MISMATCH'} {r['name']} @ {r['address']:#x} size {r['candidate_size']:#x}/{r['size']:#x}"
-              + ("" if exact else f" first difference at +{r['first_diff']:#x}"))
-        if not exact and show:
+        label = {"match": "MATCH   ", "match_extent_differs": "EXTENT  ", "mismatch": "MISMATCH"}[r["status"]]
+        detail = {
+            "match": "",
+            "match_extent_differs": " bytes reproduce the original; catalogue extent needs revision",
+            "mismatch": f" first difference at +{r['first_diff']:#x}" if r["first_diff"] is not None else "",
+        }[r["status"]]
+        print(f"{label} {r['name']} @ {r['address']:#x} size {r['candidate_size']:#x}/{r['size']:#x}{detail}")
+        if r["status"] == "mismatch" and show:
             for line in diff_lines(r["_original"], r["_candidate"], r["address"], ctx.functions[r["address"]], show):
                 print("   " + line)
     record = {
@@ -122,7 +138,7 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         "catalogue_sha256": sha256(catalogue_path),
         "functions": [{k: v for k, v in r.items() if not k.startswith("_")} for r in results],
     }
-    (out_dir / (source.stem + ".result.json")).write_text(json.dumps(record, indent=1) + "\n")
+    (out_dir / (source.stem + ".result.json")).write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n")
     return 0 if results and all(r["status"] == "match" for r in results) else 1
 
 

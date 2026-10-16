@@ -25,6 +25,9 @@ jobs:
             python3 -m json.tool "$f" > /dev/null
           done
 
+      - name: Verify the denominator history
+        run: python3 tools/denominator.py verify
+
       - name: Generate objdiff progress report
         run: python3 ci/progress_report.py --version jp --output report.json --summary "$GITHUB_STEP_SUMMARY"
 

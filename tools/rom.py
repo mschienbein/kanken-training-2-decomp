@@ -41,7 +41,7 @@ def file_sha256(path: Path) -> str:
 
 
 def load_title() -> dict:
-    return json.loads(TITLE.read_text())
+    return json.loads(TITLE.read_text(encoding="utf-8"))
 
 
 def identify(rom: Path, title: dict) -> dict:
@@ -140,7 +140,7 @@ def import_rom(rom: Path, boot9: Path | None, with_romfs: bool) -> dict:
         "bss_size": layout.bss_size,
     }
     check_pins(manifest, title)
-    MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\n")
+    MANIFEST.write_text(json.dumps(manifest, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     return manifest
 
 
@@ -169,7 +169,7 @@ def verify() -> dict:
     """Re-hash every extracted file against orig/manifest.json and the pins in config/title.json."""
     if not MANIFEST.is_file():
         raise InputError("orig/manifest.json missing; run `tools/rom.py import` first")
-    manifest = json.loads(MANIFEST.read_text())
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     for rel, expected in manifest["files"].items():
         path = ORIG / rel
         if not path.is_file():

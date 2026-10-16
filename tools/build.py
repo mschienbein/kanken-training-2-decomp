@@ -45,7 +45,7 @@ class BuildError(RuntimeError):
     pass
 
 
-def build(name: str) -> dict:
+def build(name: str, matches_path: Path = MATCHES) -> dict:
     out = ROOT / "build" / name
     try:
         out.mkdir(parents=True, exist_ok=False)
@@ -59,7 +59,7 @@ def build(name: str) -> dict:
     names = image_mod.load_names()
     resolver = inplace.Resolver(functions, names)
     linker = inplace.InPlaceLinker(image, functions, resolver, image.bss)
-    matches = json.loads(MATCHES.read_text())
+    matches = json.loads(matches_path.read_text(encoding="utf-8"))
     profiles = toolchain.load_profiles()
 
     hybrid = bytearray(image.code)
@@ -121,7 +121,9 @@ def build(name: str) -> dict:
             "exefs_code_sha256": sha256_bytes(stored),
             "catalogue_sha256": sha256_file(image_mod.CATALOGUE),
             "names_sha256": sha256_file(image_mod.NAMES) if image_mod.NAMES.is_file() else None,
-            "matches_sha256": sha256_file(MATCHES),
+            "matches": matches_path.resolve().relative_to(ROOT).as_posix(),
+            "matches_canonical": matches_path.resolve() == MATCHES.resolve(),
+            "matches_sha256": sha256_file(matches_path),
             "profiles_sha256": sha256_file(toolchain.PROFILES),
             "toolchain_lock_sha256": sha256_file(ROOT / "toolchain.lock.json"),
             "compilers": {c: sha256_file(toolchain.armcc_exe(c)) for c in used},
@@ -143,7 +145,7 @@ def build(name: str) -> dict:
     receipt["result"] = "PASS" if all(receipt["checks"].values()) else "FAIL"
     if mismatched:
         receipt["mismatched_functions"] = mismatched
-    with (out / "receipt.json").open("x") as f:
+    with (out / "receipt.json").open("x", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(receipt, indent=1) + "\n")
     return receipt
 
@@ -151,9 +153,11 @@ def build(name: str) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--name", required=True, help="unique build name, e.g. 2026-10-15-baseline")
+    parser.add_argument("--matches", type=Path, default=MATCHES,
+                        help="units to credit (default config/matches.json; a scratch file makes a candidate build)")
     args = parser.parse_args(argv)
     try:
-        receipt = build(args.name)
+        receipt = build(args.name, args.matches)
     except (BuildError, inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2

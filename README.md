@@ -52,6 +52,30 @@ inputs to the git-ignored `orig/` directory:
 | Modules | No CROs; all code is in `code.bin` |
 | SDK tags | CTR-SDK 11.5.2, NW4C 3.7.5 (layout, sound, font), PUX HWR 2.0.1 (handwriting recognition) |
 
+## Toolchain and tools
+
+```sh
+uv sync
+.venv/bin/python tools/setup.py          # ARMCC builds (decomp.me archive) + wibo; pinned by sha256
+.venv/bin/python -m unittest discover -s tests -t .
+```
+
+On Windows use `.venv\Scripts\python.exe`; `armcc.exe` runs natively there (no wibo).
+
+| Tool | Use |
+|---|---|
+| `tools/rom.py` | import/verify the private dump into `orig/` |
+| `tools/analyze.py` | regenerate the function catalogue (denominator) from `orig/code.bin` |
+| `tools/denominator.py` | hash-chained catalogue history; `verify` runs in CI |
+| `tools/packet.py func_XXXXXXXX` | author packet: symbolized disassembly, callers/callees, C skeleton (private, `scratch/packets/`) |
+| `tools/match.py src.c --profile P` | compile, link in place, compare byte for byte; diff on mismatch |
+| `tools/compid.py probe.c` | compiler builds × flag sets matrix |
+| `tools/build.py --name N` | build `code.bin` from credited source; receipt in `build/N/` |
+| `ci/progress_report.py` | objdiff report for ByteMatch (no ROM needed) |
+
+Current state: [`docs/STATUS.md`](docs/STATUS.md). Picking up on a new machine:
+[`docs/RESUME.md`](docs/RESUME.md).
+
 ## Rules
 
 - Never commit ROM bytes, decrypted or extracted data, disassembly of original code, SDK files,

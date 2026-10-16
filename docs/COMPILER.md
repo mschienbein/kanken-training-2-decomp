@@ -37,6 +37,10 @@ Conclusions:
   returns floats in VFP registers (`s0`, `s1`).
 - The archive's `armcc_41_561` reports `RVCT4.0 [Build 902]`; treat archive ids as labels.
 
+Pilot (candidate, not accepted): the ten matching probe functions, credited under
+`trial-504-82-O3-Otime`, give a PASS hybrid build (`build/2026-10-15-laptop-pilot-candidate`): 10
+functions / 280 bytes from compiled C, `code.bin` identical, `.code` recompresses identically.
+
 ## Next
 
 1. Resolve `-O2`/`-O3` with loop-bearing functions; resolve 0x10c498's save order (likely source
