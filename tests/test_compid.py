@@ -62,7 +62,8 @@ class CompidFailClosedTest(unittest.TestCase):
         """Review F02: a cell must say which linker model produced it and what that model rewrote."""
         result = self.run_sources(WRAPPER)
         self.assertEqual(result["linker_model"], self.ctx.model.name)
-        self.assertEqual(result["results"]["func_001852f4"]["armcc_504_82:O3-Otime"], "E")
+        # Catalogue v4 splits the NOP-entry wrapper into its own 4-byte function: with the model it MATCHes.
+        self.assertEqual(result["results"]["func_001852f4"]["armcc_504_82:O3-Otime"], "Y")
         [rewrite] = result["linker_rewrites"]["func_001852f4"]["armcc_504_82:O3-Otime"]
         self.assertEqual((rewrite["rule"], rewrite["target"], rewrite["word"]), ("branchnop", 0x1852F8, "0xe1a00000"))
         strict = compid.run_grid(match.Context(ROOT / "config/catalogue.json", "strict-v1"),
