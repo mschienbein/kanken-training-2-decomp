@@ -27,10 +27,13 @@ class Namer:
         self.image = image
         self.functions = functions
         self.by_address = {e["address"]: n for n, e in names.items()}
+        # Catalogue v3+ `entries` (secondary entry points of multi-entry routines) are call
+        # targets named func_XXXXXXXX, as tools/inplace.Resolver resolves them.
+        self.entries = {e["address"] for f in functions.values() for e in f.get("entries", ())}
 
     def kind(self, address: int) -> str | None:
         lay = self.image.layout
-        if address in self.functions:
+        if address in self.functions or address in self.entries:
             return "func"
         for seg, prefix in ((lay.text, "text"), (lay.rodata, "data"), (lay.data, "data")):
             if seg.address <= address < seg.address + seg.size:
@@ -120,8 +123,8 @@ def build_packet(target: str, catalogue_path: Path) -> tuple[str, str, Path]:
             note = ""
             tgt = branch_target(item)
             if tgt is not None:
-                if base := functions.get(tgt):
-                    ref = namer.name(base["address"])
+                if (base := functions.get(tgt)) or (tgt in namer.entries and not fn["address"] <= tgt < fn["address"] + fn["size"]):
+                    ref = namer.name(base["address"] if base else tgt)
                     if tgt != address:
                         callees.add(ref)
                     note = ref
