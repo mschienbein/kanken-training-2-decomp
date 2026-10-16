@@ -146,11 +146,14 @@ class AcceptGateTest(unittest.TestCase):
         }
         saved = {k: sys.modules.get(k) for k in stubs}
         sys.modules.update(stubs)
+        real_clean_commit = accept.clean_commit
+        accept.clean_commit = lambda: "0" * 40
         try:
             cand = self.root / "config/candidates.json"
             cand.write_text(json.dumps({"units": [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]}), encoding="utf-8")
             record = accept.prepare("c009", cand)
         finally:
+            accept.clean_commit = real_clean_commit
             for k, v in saved.items():
                 if v is None:
                     sys.modules.pop(k, None)
@@ -158,8 +161,26 @@ class AcceptGateTest(unittest.TestCase):
                     sys.modules[k] = v
         self.assertEqual(set(record["checks"]), {"build_a_pass", "build_b_pass", "builds_identical", "suite_pass", "interfaces_pass"})
         self.assertEqual(record["result"], "PASS")
+        self.assertEqual(record["commit"], "0" * 40)
         on_disk = json.loads((self.root / "accept/c009/prepare.json").read_text(encoding="utf-8"))
         self.assertEqual(on_disk["checks"], record["checks"])
+
+    def test_prepare_refuses_a_dirty_tree(self):
+        """Gates run on one committed tree; an uncommitted edit anywhere stops prepare."""
+        import subprocess
+        run = lambda *a: subprocess.run(["git", *a], cwd=self.root, check=True, capture_output=True)  # noqa: E731
+        run("init", "-q")
+        run("-c", "user.name=t", "-c", "user.email=t@t", "add", "-A")
+        run("-c", "user.name=t", "-c", "user.email=t@t", "commit", "-qm", "base")
+        self.assertEqual(len(accept.clean_commit()), 40)
+        (self.root / "src/a.c").write_text("int func_00100000(void) { return 9; }\n", encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "not clean"):
+            accept.clean_commit()
+        (self.root / "src/a.c").write_text("int func_00100000(void) { return 1; }\n", encoding="utf-8")
+        (self.root / "tools").mkdir()
+        (self.root / "tools/new.py").write_text("", encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "not clean"):
+            accept.clean_commit()
 
     def test_checkpoint_names_are_restricted(self):
         with self.assertRaises(accept.AcceptError):

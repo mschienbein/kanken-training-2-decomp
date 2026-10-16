@@ -31,6 +31,7 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -115,12 +116,31 @@ def run_suite() -> dict:
     }
 
 
+def clean_commit() -> str:
+    """The HEAD commit, refusing a working tree with any uncommitted or untracked (non-ignored) file.
+
+    Gates run on exactly one committed tree, so no in-progress edit (an agent's, or the
+    integrator's) can leak into a build or the suite.
+    """
+    def git(*args: str) -> str:
+        proc = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, check=False)
+        if proc.returncode:
+            raise AcceptError(f"git {' '.join(args)} failed: {proc.stderr.strip()}")
+        return proc.stdout
+
+    dirty = git("status", "--porcelain", "--untracked-files=all").strip()
+    if dirty:
+        raise AcceptError("working tree is not clean; commit or move these first:\n" + dirty)
+    return git("rev-parse", "HEAD").strip()
+
+
 def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False) -> dict:
     import build as build_mod  # imported lazily: build needs the private inputs
     import denominator
     import interfaces
 
     out = checkpoint_dir(name)
+    commit = clean_commit()
     try:
         out.mkdir(parents=True, exist_ok=False)
     except FileExistsError:
@@ -167,6 +187,7 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "schema_version": 1,
         "checkpoint": name,
         "prepared_utc": now(),
+        "commit": commit,
         "base_matches_sha256": sha256_file(MATCHES),
         "candidates": candidates_path.resolve().relative_to(ROOT.resolve()).as_posix(),
         "candidates_sha256": sha256_file(candidates_path),

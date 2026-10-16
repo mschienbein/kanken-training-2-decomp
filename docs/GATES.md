@@ -1,6 +1,11 @@
-# Gate design — frozen v1.1 (2026-10-16)
+# Gate design — frozen v1.2 (2026-10-16)
 
 Revisions:
+- **v1.2** (2026-10-16): G0 clean tree. `prepare` refuses a working tree with any uncommitted or
+  untracked non-ignored file and records the HEAD `commit`; reviews and finalize bind to that
+  prepare. Cause: `c001-pilot-r3`'s suite ran against another agent's in-progress
+  `tools/analyze.py` edit in the shared checkout and failed. Agents that edit tracked tools work
+  in their own git worktree from now on. Test `tests/test_accept.py::test_prepare_refuses_a_dirty_tree`.
 - **v1.1** (2026-10-16): `prepare.json` again records the per-gate `checks` map (v1 tooling dropped
   it through an editing error; gate logic and `result` were unaffected). Regression test
   `tests/test_accept.py::test_prepare_records_every_gate_result`. The defective record
@@ -21,6 +26,7 @@ contradictory COMDAT copies, unsupported relocations, veneer needs, multi-functi
 
 | # | Gate | Where | Fails when |
 |---|---|---|---|
+| G0 | Clean tree | `prepare` | any uncommitted or untracked non-ignored file; the HEAD commit is recorded |
 | G1 | Denominator | `prepare` | `config/catalogue.json` is not the recorded denominator (`tools/denominator.py verify`) |
 | G2 | Ledger composition | `prepare` | a candidate unit is already accepted |
 | G3 | Interfaces | `prepare` → `accept/<cp>/interfaces.json` | any declaration/definition or struct-layout disagreement, const-contract violation or policy error across the **whole ledger**; C++ units unchecked unless `--allow-unchecked-cpp` (recorded; reviewers then check those units' interfaces by hand) |
