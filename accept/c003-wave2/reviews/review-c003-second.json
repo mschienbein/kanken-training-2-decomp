@@ -1,0 +1,527 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c003-wave2",
+ "reviewer": "review-c003-second",
+ "family": "openai",
+ "verdict": "FAIL",
+ "functions": [
+  {
+   "function": "func_001718ec",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "Revised accepted function: independently reran match.py with profile game, MATCH (168 bytes). Read the entire revised unit and selection.h; checked the new no-argument getter definition and original packet, all twelve selector mappings to 1-12, and retained ORIGINAL BUG annotation for the uninitialized out-of-range result. Verified signature cutover, source policy, ordinary-function eligibility and prepared input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00171c7c",
+   "source": "src/pilot/game_enum_switch.c",
+   "verdict": "QUALIFIED",
+   "method": "Revised accepted function: independently reran match.py with profile game, MATCH (168 bytes). Read the entire revised unit and common selection prototype; checked getter int(void), all twelve mappings to 2-13, and the annotated preserved uninitialized out-of-range result. Verified no stale object argument remains in the credited callers, source policy, ordinary-function eligibility and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00195254",
+   "source": "src/wave1/func_00195254.c",
+   "verdict": "PASS",
+   "method": "Revised accepted function: independently reran match.py with profile game, MATCH (224 bytes). Read revised source and merged Command/CommandQueue/CommandSystem header. Checked 28-byte command stride and unchanged source/size/flags, commands +0x18, count +0x20, writing/executing +0x9c/+0xa0 and enabled/pending offsets. Re-read original queue consumer routing: command kind 1 is explicitly handled. Verified source policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0013db3c",
+   "source": "src/wave2/func_0013db3c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and containing original consumer owner at 0x144220; entry 0x144224 is a scalar identity return. Verified unchanged argument/result forwarding, ordinary wrapper credit only, source policy and input hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001415b0",
+   "source": "src/wave2/func_001415b0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body reproduces the entire original return-only function, not an unfinished stub. Verified ordinary function rather than veneer/multi_entry credit, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001415e8",
+   "source": "src/wave2/func_001415e8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and original containing owner 0x141c70; consuming entry 0x141c74 takes no input and returns status 0/1 after countdown/callback processing. Verified result propagation and ordinary wrapper credit, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00142a54",
+   "source": "src/wave2/func_00142a54.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body exactly reproduces the complete return-only original. Checked ordinary-function eligibility, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00147260",
+   "source": "src/wave2/func_00147260.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; the empty implementation is exact over the entire original return-only extent. Checked ordinary-function eligibility, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00149424",
+   "source": "src/wave2/func_00149424.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; return-only C body matches the entire original ordinary function rather than a NOP entry or veneer. Checked source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014c2c8",
+   "source": "src/wave2/func_0014c2c8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body is the exact complete return-only implementation. Checked ordinary-function classification, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014de8c",
+   "source": "src/wave2/func_0014de8c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body reproduces the full original return-only function. Checked ordinary-function classification, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0014f7e8",
+   "source": "src/wave2/func_0014f7e8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C body reproduces the complete ordinary return-only function. Checked source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0015f5a0",
+   "source": "src/wave2/func_0015f5a0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty C implementation matches the entire original return-only function, not a stub or classified entry prefix. Checked source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00164ebc",
+   "source": "src/wave2/func_00164ebc.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; empty implementation matches the full original return-only function. Checked ordinary-function eligibility, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0016e5cc",
+   "source": "src/wave2/func_0016e5cc.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and original owner 0x16e5d0 containing entry 0x16e5dc; checked 16-bit element loads from both pointer arguments, count forwarding and integer comparison result. Only the ordinary wrapper is credited. Checked source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001791e0",
+   "source": "src/wave2/func_001791e0.c",
+   "verdict": "FAIL",
+   "method": "Independent canonical match.py rerun, profile game: MATCH (28 bytes). Read source and original getter/caller packets; original func_0017775c loops over the signed count at +0x28 and forwards its index to this lookup. The source falsely bounds the tail at one pointer (F02). An isolated source changing only texts[1] to texts[] also MATCHes all 28 bytes. Checked field widths, ordinary-function eligibility and hashes.",
+   "finding_ids": [
+    "F02"
+   ]
+  },
+  {
+   "function": "func_00179298",
+   "source": "src/wave2/func_00179298.cpp",
+   "verdict": "FAIL",
+   "method": "Independent canonical match.py rerun, profile game: MATCH (256 bytes). Manually checked the waived C++ declarations against the current C definitions and shared header. Original packet confirms handle +0x10, active +0x50, length +0x58 and explicit dispatch for types 3/5/6. The func_0017a968 declaration disagrees with its shared C definition (F01). A private probe importing the actual header with C linkage is rejected by ARMCC error #338. Checked ordinary-function eligibility and hashes.",
+   "finding_ids": [
+    "F01"
+   ]
+  },
+  {
+   "function": "func_0017a968",
+   "source": "src/wave2/func_0017a968.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (56 bytes). Read source, shared screen header and original consumer packet; checked NameTable kind +4, count +0x14, names +0x18, nonnegative/in-count lookup and nonnull name forwarding to func_00195900. C definition agrees with shared Widget/NameTable prototype; F01 concerns the C++ caller. Checked eligibility, policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a9a0",
+   "source": "src/wave2/func_0017a9a0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (12 bytes). Read source and consuming original dispatchers; checked unsigned selector byte at +0x92+index and compatible const DisplayObject declaration in the C++ caller. Examined current dispatch uses with index 0. Checked ordinary-function eligibility, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017adc4",
+   "source": "src/wave2/func_0017adc4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (32 bytes). Read complete source and C++ consumer; checked 16-bit input elements, zero termination, integer length increment and matching const unsigned-short pointer declaration. Checked ordinary-function eligibility, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019df08",
+   "source": "src/wave2/func_0019df08.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (32 bytes). Read complete source; checked zero-size early return, unsigned byte count decrement, byte stores, advancing cursor and original destination pointer return. Checked ordinary-function eligibility, source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00174480",
+   "source": "src/wave2/func_00174480.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read complete source; return-only implementation is exact over the full original ordinary function. Checked source policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00176ae8",
+   "source": "src/wave2/func_00176ae8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (60 bytes). Read complete source; checked Screen pointer forwarding, reset value 0, and first/second index enable calls with value 1. Verified no index/result is silently discarded, source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001770cc",
+   "source": "src/wave2/func_001770cc.c",
+   "verdict": "FAIL",
+   "method": "Independent canonical match.py rerun, profile game: MATCH (64 bytes). Read source and original function/caller packets; func_00161240 explicitly calls this with index 1 at 0x1613f8 and 0x161450, outside the declared animations[1] tail (F03). Checked animation flags +0, elapsed +0x68, previous +0x6c and frame +0x7c. Isolated animations[] variant also MATCHes all 64 bytes. Checked eligibility and hashes.",
+   "finding_ids": [
+    "F03"
+   ]
+  },
+  {
+   "function": "func_00178e9c",
+   "source": "src/wave2/func_00178e9c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (140 bytes). Read source and shared item-page header; checked item/count/page at +0xb4/+0xb8/+0xbc, endpoint guards, page update, direct call to typed ItemPage lookup and count +0x0c when selecting the previous-page last item. Checked interface agreement, policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00179398",
+   "source": "src/wave2/func_00179398.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source; verified unchanged Screen pointer, index and enabled argument forwarding to func_0016e7e0, with no dropped branch. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001795bc",
+   "source": "src/wave2/func_001795bc.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (16 bytes). Read source, selection.h and original packet; checked no incoming argument, signed halfword at bss_0028c1f0 +0x52 and integer return. Verified the revised accepted enum wrappers consume this exact no-argument declaration. Checked policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001795cc",
+   "source": "src/wave2/func_001795cc.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (52 bytes). Read source; checked first index enable, second index -1 sentinel and conditional second enable, with unchanged Screen pointer and value 1. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a164",
+   "source": "src/wave2/func_0017a164.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (172 bytes). Read source/shared screen interface and original receiving entry 0x16e1d0 in its multi_entry owner. Checked all states 0-3 and enable combinations for slots 0x31/0x32; receiver explicitly handles those slots and forwards selector types 3/5/6. No credit assigned to the consumer group. Checked policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a210",
+   "source": "src/wave2/func_0017a210.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (72 bytes). Read source; checked float fields +0x44/+0x48/+0x58/+0x5c/+0x60 and ordered returns 0 for equal start/finish, 2 at lower, 3 at upper, otherwise 1. Checked widths, source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0017a4e8",
+   "source": "src/wave2/func_0017a4e8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (32 bytes). Read source and item-page header; checked entries +0x10 and pages +0x14 guards, one-level page-pointer indexing and compatible declaration/consumption in func_00178e9c. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7424",
+   "source": "src/wave2/func_001b7424.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (268 bytes). Read source/shared header and receiving screen dispatcher. Checked selected/count/mode at +0xe8/+0xec/+0xf0, four clear groups at index+1/+0x0d/+0x19/+0x25, mode-3 special selection and selected/unselected enable routing. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7530",
+   "source": "src/wave2/func_001b7530.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (104 bytes). Read source and shared header; checked slots 0x34/0x35, enable forwarding, labels +0x1e4 and calls into the typed func_001b7c9c consumer only when enabled. Highest explicit slot index 0x35 fits the partial header. Checked policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7598",
+   "source": "src/wave2/func_001b7598.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (108 bytes). Read source/shared header and original receiving entry; checked signed count loop and four index groups +1/+0x0d/+0x19/+0x25 with enable 0. Verified consumer routing, source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001b7c9c",
+   "source": "src/wave2/func_001b7c9c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (92 bytes). Read source/shared header and func_0017a968 definition. Checked slot table +0x0c, WidgetSlot pointer +0, short cached label +4, enabled byte +6, special slots 0x31/0x32, label index-0x31 and correct name/value/mode forwarding. Checked policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001847f8",
+   "source": "src/wave2/func_001847f8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (16 bytes). Read source and shared graphics header; checked signed-byte initialized return at offset 0 of data_002430f0 and consistent shared declarations. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001861c4",
+   "source": "src/wave2/func_001861c4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (16 bytes). Read source/shared graphics header; checked GraphicsContext pointer return from state +0x1c and matching shared prototype. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_001861d4",
+   "source": "src/wave2/func_001861d4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (12 bytes). Read source/shared declaration and original consumer func_0012f9fc; checked address return of opaque GraphicsMutex data_00243104 and pointer use in the register-write path. Checked policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00187818",
+   "source": "src/wave2/func_00187818.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (16 bytes). Read source/shared graphics header and both new region consumers; checked signed stereo byte at offset 1 and consistent integer return/nonzero tests. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018f0ac",
+   "source": "src/wave2/func_0018f0ac.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and original containing owner 0x1378d4; entry 0x1378d8 performs address-range conversion and returns a word. Checked const address pointer and unsigned result forwarding; only wrapper credited. Checked policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00190ae0",
+   "source": "src/wave2/func_00190ae0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (60 bytes). Read source/shared graphics interface; checked explicit regions 0x20000/0x30000, retained stereo getter calls, data-address ends 0x1f2fffff/0x1f5fffff and null default. Address literals are hardware data pointers, not code blobs. Checked eligibility, policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019cff8",
+   "source": "src/wave2/func_0019cff8.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (80 bytes). Read source/shared graphics interface; checked explicit region dispatch, stereo-based starts 0x1f180000/0x1f000000 and 0x1f380000/0x1f300000, and null default. Checked 32-bit data-pointer use, source policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00110634",
+   "source": "src/wave2/func_00110634.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (88 bytes). Read source, revised shared header and original producer/dispatcher packets. Checked executing queue +0xa0, pending +0x11, completed_count +0x24, command ready byte +2 at completed_count-1, system ready +0x18 and enabled +0x12. Original dispatcher explicitly consumes both ready fields. Checked lock/unlock pairing, policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00118074",
+   "source": "src/wave2/func_00118074.c",
+   "verdict": "QUALIFIED",
+   "method": "Independent canonical match.py rerun, profile game: MATCH (68 bytes). Read source/header and original target/caller packets; checked SlotBlock links +0x20/+0x24 and SlotList fields 0/4/8/0x0c. Isolated controls use identical canonical source bytes and a byte-identical header; removing only aligned(8) also MATCHes all 68 bytes. Dependency files confirm the intended private headers were used. Therefore the attribute is incidental for this match, not required evidence of recovered ABI alignment. Checked eligibility, policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011d260",
+   "source": "src/wave2/func_0011d260.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (116 bytes). Read source/render header; checked PipelineStorage configuration +0x800, size 0x854, owner storage/ready offsets 0/4, successful setup, failed allocation cleanup and release callback signature. Checked all exercised shared layouts, source policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0011d2f0",
+   "source": "src/wave2/func_0011d2f0.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (64 bytes). Read source/render header and typed helper definitions; checked stored SubmissionState pointer, four word fields 0/4/8/0x0c, address forwarding to each initializer and integer success 0. Checked source policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00126f5c",
+   "source": "src/wave2/func_00126f5c.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (12 bytes). Read source and common prototype/caller; checked unsigned-word value 1 store through the supplied state pointer with matching argument depth. Checked policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00127294",
+   "source": "src/wave2/func_00127294.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (40 bytes). Read source/header and original func_00132248 consumer. Checked state word 0x1c00, RegisterState control +0x770, mask clearing 0x2000 and setting 0x11000, plus direct command-emission routing. Checked policy, ordinary-function eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0018ce64",
+   "source": "src/wave2/func_0018ce64.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (104 bytes). Read source/render header and list consumer; checked allocate callback module 0x10000/kind 0x100/id 0/size 0x28, null path, eight word clears and links +0x20/+0x24. Checked callback/result pointer agreement, source policy, eligibility and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_00190adc",
+   "source": "src/wave2/func_00190adc.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (4 bytes). Read source and original consuming func_0012f9fc packet; checked register-address word, const source pointer and size forwarding, mutex/context acquisition in the consumer, and integer status propagation. Only the ordinary wrapper is credited. Checked policy and hashes.",
+   "finding_ids": []
+  },
+  {
+   "function": "func_0019ceb4",
+   "source": "src/wave2/func_0019ceb4.c",
+   "verdict": "PASS",
+   "method": "Independent sequential match.py rerun, profile game: MATCH (24 bytes). Read complete source; checked integer error load from data_002426d4, zero clearing and old-value return. Verified source policy, ordinary-function eligibility and input hashes.",
+   "finding_ids": []
+  }
+ ],
+ "findings": [
+  {
+   "id": "F01",
+   "severity": "major",
+   "subject": "src/wave2/func_00179298.cpp:26-27",
+   "summary": "Make the C++ declaration of func_0017a968 agree with its shared definition. This new C++ unit still declares the C entry point as taking DisplayObject * and const AnimationTable *, while include/game/screen.h and the compiled C definition in src/wave2/func_0017a968.c require Widget * and const NameTable *. The opaque tags are unrelated, not aliases, so the integrator interface unification has left two incompatible signatures for the same C-linked function. This is hidden by the C++ waiver and by all pointers occupying the same ARM argument registers. In an isolated probe, importing the actual shared header with C linkage into the otherwise unchanged C++ source produces ARMCC error #338: more than one instance of overloaded func_0017a968 has C linkage. Use one correctly C-linked shared prototype and consistent pointee types/conversions through the local handle/context rather than privately redeclaring a different API.",
+   "title": "Make the C++ widget-call declaration match the shared interface",
+   "priority": 2,
+   "confidence": 1.0,
+   "file_path": "/Users/mooki/Code/kanken-training-2-decomp/src/wave2/func_00179298.cpp",
+   "line_start": 26,
+   "line_end": 27
+  },
+  {
+   "id": "F02",
+   "severity": "major",
+   "subject": "src/wave2/func_001791e0.c:7",
+   "summary": "Represent the counted text-pointer payload without an artificial one-element bound. The function accepts any index below the signed count at +0x28, but texts is declared with length 1. For count >= 2 and index == 1 the guard succeeds and the returned texts[1] reads outside the declared array, introducing undefined C behavior in the recovered source. The original caller func_0017775c loops its index over that same count, so this is a counted table, not a fixed-index-zero lookup. Use a flexible trailing member or an evidence-backed true bound. An isolated change from texts[1] to texts[] preserves the complete 28-byte MATCH, so the false bound is not needed for exactness.",
+   "title": "Use a flexible member for the counted text-pointer tail",
+   "priority": 2,
+   "confidence": 0.99,
+   "file_path": "/Users/mooki/Code/kanken-training-2-decomp/src/wave2/func_001791e0.c",
+   "line_start": 7,
+   "line_end": 7
+  },
+  {
+   "id": "F03",
+   "severity": "major",
+   "subject": "src/wave2/func_001770cc.c:12",
+   "summary": "Allow the animation-pointer payload to contain the slots used by real callers. animations is declared with one element, but func_00161240 calls this function with index 1 at 0x001613f8 and 0x00161450 on the same owner used for index 0. Consequently owner->animations[index] performs an out-of-bounds C access on those normal call paths before the null check can help, even though the fixed compiler reproduces the original machine load. This is a source-layout artifact rather than an original algorithm bug. Replace the trailing one-element array with a flexible member or the recovered real bound. An isolated animations[] variant still MATCHes all 64 bytes.",
+   "title": "Model the indexed animation tail with a sufficient bound",
+   "priority": 2,
+   "confidence": 1.0,
+   "file_path": "/Users/mooki/Code/kanken-training-2-decomp/src/wave2/func_001770cc.c",
+   "line_start": 12,
+   "line_end": 12
+  }
+ ],
+ "qualifications": [
+  "Re-derived all 51 required functions in 50 sequential canonical-unit tools/match.py invocations under profile game: every function reports MATCH. This covers 2376 new bytes plus 560 bytes in revised accepted functions, 2936 reviewed bytes total. Source and catalogue hashes in all canonical result records agree with prepare. Scratch counterfactual/probe results are separate and receive no credit.",
+  "Read docs/known-issues-c003-wave2.md first, then the required source/review/gate rules. Reviewed all 48 new source units, both revised accepted units and all shared interfaces independently of the integrator. The no-argument selection cutover and merged Command/CommandQueue/CommandSystem fields agree with their consuming original branches. F01 is the remaining C++ declaration/definition disagreement; the new C++ unit otherwise reproduces the original type-3/5/6 dispatch.",
+  "SlotList alignment experiment: the aligned control header is byte-identical to the prepared render_state.h (SHA-256 0b6262cd81881e6019087d0d3b6fe4fbb4b42ef99f41d06bfcb7088fb093e03e). Both private source copies are byte-identical to canonical func_00118074.c (SHA-256 9ec18c612ca95dbe009c81b3df3ceacadcd1257296b28ba7d73dad979b795b6b). Removing only the aligned(8) attribute changes the header hash to 534c2a2cbd7eadcf332b1ea02b03c65f390e28b03b1fa6d40f860a64b7179231; both variants MATCH the full 68 bytes. Each compiler dependency file names its corresponding private header. Thus aligned(8) is not required for this checkpoint match. No claim is made that the complete unrecovered SDK alignment contract has been established. Evidence is under probes/aligned/ and probes/unaligned/.",
+  "Source-layout counterfactuals under probes/flexible_text/ and probes/flexible_animation/ change only the false one-element trailing array to a flexible member and MATCH 28/64 bytes respectively. The shared-interface probe under probes/shared_cpp/ imports the real screen header with C linkage and is rejected with ARMCC error #338, while the canonical C++ unit independently MATCHes 256 bytes. These are source-validity checks, not claims of a changed current cartridge binary.",
+  "All seven prepared header hashes were independently checked and the header inventory contains no source-local headers. Shared Screen/WidgetSlot/NameTable, ItemPage/ItemPageSet, graphics state, render state, command state and selection declarations were read in full and checked against their exercised uses. Partial layouts and integrator-chosen names do not establish full SDK classes or native-port ABI, and they do not excuse F01-F03.",
+  "Direct catalogue v3 inspection finds all 51 reviewed owners ordinary functions totalling 2936 bytes, with no veneer or multi_entry credit. External secondary entries were inspected through their containing multi_entry owner when necessary; those original groups remain uncredited.",
+  "Read both prepared fresh-build receipts: 103 total credited functions / 5056 bytes, equal code.bin and stored ExeFS .code hashes, 93 units and no cache hits. The recorded 206-test suite result was not rerun. Inherited original-switch and invalid-screen behavior remains as published. Full original-armlink layout/unwind reconstruction, runtime behavior tests, Windows reproduction and lower RomFS IVFC traversal remain separate unproven properties. No tracked source/header was edited and no build/finalization retry was run."
+ ],
+ "reviewed_utc": "2026-10-16T16:17:00Z",
+ "prepare_sha256": "a7d0de36e5385960c7c74857c75f71f48d2ef8247ca276a783c4d81f5fc6143c",
+ "sources": {
+  "src/pilot/pilot_a.c": "25cc6d8333abc8b031d6317125e1a443536ae78e5b5797bbd4eca06b9094d80d",
+  "src/pilot/pilot_b.c": "0ac43126570db3d0bcce8c4ec46c46ea092ad0d5227e62c770b453449a296459",
+  "src/pilot/loop_cleanup.c": "ab18acb85f67d2faad4006c5b54d8b38401bb5df2ba52bae07b494e996960ea8",
+  "src/pilot/loop_resources.c": "99396c256120a655609aea110d798e9cbd8204bcf57f0bd2b76f896cf9339bdb",
+  "src/pilot/loop_state.c": "8299b8d6b5e4640acfbfbe0c836d55b0a60d60048e57c98c4d7132b50b55c0e2",
+  "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+  "src/pilot/game_enum_switch.c": "2608356701959fb5a3853a2cfc17097f73bc6f30b88ebc55c23b0d32e0ee8141",
+  "src/wave1/func_001670e4.c": "f988b29935da652bafb9b0b08d1b8a5c91401a40ccccd90168a5148dab3ea9a6",
+  "src/wave1/func_0011e928.c": "78738eea0f52343be947b708fcbd426fd2b2c0c1d069931de9dc6cd1d21ec82c",
+  "src/wave1/func_0018fdd4.cpp": "4aa9bb781425b63e520b19d4b49387e05a06dbccf49bcf6588791d9be26e8b98",
+  "src/wave1/func_00195254.c": "fb5af3f56d4522d321d8a779a4a3bddbd3427aef9256a858267ceaabc50371c3",
+  "src/wave1/func_00102cb0.c": "146a929db0cbd8852da0c2f748df1080c4254d2e3746e7b946b7c7a9f77378db",
+  "src/wave1/func_00105058.c": "22b08b5d65a6ace20e59b8f97d56bc15e56ca9b22377e4b7cb3ad0c06cdc90fb",
+  "src/wave1/func_00110358.c": "55c85cfacee4fb29677c2b00d81138bb1339c55e0033d463e001bd3947c0b82f",
+  "src/wave1/func_001107d0.c": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+  "src/wave1/func_0011362c.c": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+  "src/wave1/func_0011e970.c": "1df1975c0216e80752ebf973071748cf1733979bc6b5820d2bc411d2bb2b1a68",
+  "src/wave1/func_0011e974.c": "9aa52f34e8dca1822ae8f9f4adaa349f3e47a45f73b13b3ceaa192b5108c1342",
+  "src/wave1/func_0011e978.c": "faac44df6650c9c651d2d4ee8b3fc20fb0eec1c09772b4bc7569830ed01d55d8",
+  "src/wave1/func_0011e998.c": "3106c9f28fee5d8427d03c004e6097cc8c8791513b2e8da0980d0f814b24c0bf",
+  "src/wave1/func_0019e02c_returning.c": "546fcf95d3d4b6d43387d04b103d06e016705875bb3af20f63a0df394982cd58",
+  "src/wave1/func_0012ced8.c": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80",
+  "src/wave1/func_0012d1c8.c": "bd742e97881a1006aed64828a721955a34a94fe83c66219c41974ffb94434a4d",
+  "src/wave1/func_0012d4f0.c": "93af079ad1d9f8354ac1527f9d53ca08a9dd3bebdea5f22e2c88a1669471ada3",
+  "src/wave1/func_0012f4f0.c": "dd0b35a3310a3df8060af68e15db33a952340933fd63e50c6467f482e15bcbe5",
+  "src/wave1/func_0012f50c.c": "cdff29146f04b04146d63b110828b4b3bc2bc2ac855382a01dac9779c02d6d38",
+  "src/wave1/func_0018fcb4.c": "8650965cf5a96c44d18a7ea3298827ca2d782de453e6aa3c6d62343f1fadab27",
+  "src/wave1/func_00195e84.c": "c02694a5085a6f6cd12975711fd270b45389fb09f9acafa603b425b52505787d",
+  "src/wave1/func_00195e94.c": "ced7791a8996cc4cf8e7b6df3ccd2f1bee06724569a3cec5ba586c8161d4971e",
+  "src/wave1/func_0011f080.cpp": "fc95fa0a48cb79a1115809b5d486aac2701892a286ed9f9ff73b208c1b437b84",
+  "src/wave1/func_00134f04.c": "ddc73aaeffc367598de6fd9b6107b6d046767593c89bf753ff8366ab1e81d010",
+  "src/wave1/func_00135a28.c": "6f649c2ab95e66a2973d490925804c41b3553cc8eb72cdc4d505674d7ab79402",
+  "src/wave1/func_00135a58.c": "3c10c74764f47cab823bcca94c739264e39fbee5523c1bd754d25152c90e6e68",
+  "src/wave1/func_00135a88.c": "375cc7e84a571c6e9ca3b339c6d31662c4a1a852a49a11acfb1743eb1da9c5ba",
+  "src/wave1/func_00135ab8.c": "442648137a05324def2fafae0bd12a95941bd354666ae34c96d7f9e4dc510f95",
+  "src/wave1/func_001360a4.c": "989581a50f6037d4735a0a3f3a13d78b0c995eeac63b90281038835ec71bdc10",
+  "src/wave1/func_00196cb8.c": "21940b512e14068b1c83d2d27ab74a88d74c07a7f5932a4853df31ca473602fb",
+  "src/wave1/func_0019f450.c": "175eea6d9ab1904d0055260d4dca853786dca6203a49393aa7bf7e9d31704141",
+  "src/wave1/func_0018fcc0.cpp": "42151586cb74205fff8715553c320607424842b78e2727bd907401c84885b844",
+  "src/wave1/func_0018fd20.cpp": "d0f60564f2c813fdffef70cfb368ad0bf97f9a993bd6947bc9915d875ff88974",
+  "src/wave1/func_0019d5c4.cpp": "18e60a4728600252732448a62608e52c738833f856b79916f9fae18bf45ca497",
+  "src/wave1/func_001c44ec.cpp": "ac5e4783c71825512436d98f36db4245539fc560cf3c8c8441e2385ea4fe68bb",
+  "src/wave1/func_001c4500.cpp": "003ffab636960f47310a4bb3c35db5f46bff9cd758770ed8b69dc7edf6b5d473",
+  "src/wave1/func_001d2da4.cpp": "1b38a2ef18826056bf8a53a2f8651b724fc36079658c161ab9f579d937acaefa",
+  "src/wave1/func_001d3524.cpp": "a947f90ef89c2b9eee272d8fd5068494aa7f09cea2a862e2afe08dbe641a97d9",
+  "src/wave2/func_0013db3c.c": "c069d294a3e63ef42ce716bd1f2a328d611da384caf48e9067a7eccb09c10c79",
+  "src/wave2/func_001415b0.c": "a01e311c7f197dd904a522d9f40791152eee8d3be4c2fbc5b14a26f49e53597a",
+  "src/wave2/func_001415e8.c": "1d400cb97032274c0b1840be51a06da079fd699143825b28240cf7a389f5d7e6",
+  "src/wave2/func_00142a54.c": "06ab0f33b6b862ed97aec977976febe86114238c9c9e4e109f46ad0a31d11aed",
+  "src/wave2/func_00147260.c": "29e9ed7bbe4d5e8d4ae65e04f6eb9794eff41e9165c8f4e4e8bbd344aeeb637b",
+  "src/wave2/func_00149424.c": "0d249fe3b1c5bf4e676820b56d35a7fcd48a1d2fee23f7f23e2d76e4a505477f",
+  "src/wave2/func_0014c2c8.c": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
+  "src/wave2/func_0014de8c.c": "6d2e316760cd9b8512cb3c4c96eacd5230c3f6963fae4521760abc9716732b5b",
+  "src/wave2/func_0014f7e8.c": "9b521e9b9a8f4fc518a6b95d81fd2a7f9baadd2a3fc27c3875b311459a77053b",
+  "src/wave2/func_0015f5a0.c": "8d925319341dcfada1f6af1ccfa61bb68604fdd0d0a8ee026a006597d01da1fc",
+  "src/wave2/func_00164ebc.c": "5b7b71482f720217731f9b40a2a9c069a1fc2c708ef2624d66514bd1d67a7f3f",
+  "src/wave2/func_0016e5cc.c": "8d6fc994c250374ef13c0012aa76c528a59fc27863a5305de89f22a42abf3821",
+  "src/wave2/func_001791e0.c": "a2911ae06655533d0e6ed72d208447823ce679195b547fc265341a0dc05026de",
+  "src/wave2/func_00179298.cpp": "4c497a0c384f8b406ad34e8bdb3007bd5d84074cd64a7eb8d355007607111c78",
+  "src/wave2/func_0017a968.c": "88eac07efc1b14a3765752397b03ea0089f51d60495d9cb1a6fc9622cb2501e7",
+  "src/wave2/func_0017a9a0.c": "a93d582e654eb326285f665469d1148bd6b0dbd2a4d6d83a26f3537ae2d1de49",
+  "src/wave2/func_0017adc4.c": "4ad608ab08236628a2f24a8d24f3e20fef25eeaa9226f1af4c9f271a9dd0e6e9",
+  "src/wave2/func_0019df08.c": "0244505a186fd227ac109c4bae380fea27b0b7487793152023efbbede6660d88",
+  "src/wave2/func_00174480.c": "107dcaf26a2870208c63397496af9081a81f3b642fa64d46aeb24862a0c3a710",
+  "src/wave2/func_00176ae8.c": "4c6e7565dfbe5edf15ad27690defe3c01e750244de510fa3985471b84cd73595",
+  "src/wave2/func_001770cc.c": "3c91515bd937e1e701955188d832689305ff9dbe2af4587ad1fc99e7b1e48e16",
+  "src/wave2/func_00178e9c.c": "60349c9fb885bd5e372afe8345cf45deb6938c3c8ab472810334359396316403",
+  "src/wave2/func_00179398.c": "4f7a15643de5196479a4cd550ef411bdf9b91ff4378fe125d5caf5214ed804a3",
+  "src/wave2/func_001795bc.c": "7975433811f318129271e3482336109f695888217c1ec3d71c9c43f1b7e253f6",
+  "src/wave2/func_001795cc.c": "7f78a4fba3cf9c0ea7b9353b2883fd88bb5c0417d4cf63d9b68425be66f37dc8",
+  "src/wave2/func_0017a164.c": "429fe22d2a1c00f358f4365733cfa7659d9994b56f8d3d1ff42cc0fb62c6f863",
+  "src/wave2/func_0017a210.c": "c3111b59fca2542a5e716d465de99054f26b5e216c61de9d0ff1580ef773a5d3",
+  "src/wave2/func_0017a4e8.c": "2948269ee27f3a50ee73e02093987f6638d20664f0559a78611a0540f76f0e81",
+  "src/wave2/func_001b7424.c": "3ab047eea54b2cf4889ed9c327b8ea3232a338817d68d45cbd7e6271a1fe23b6",
+  "src/wave2/func_001b7530.c": "abf48ba69d70ba78e17a4e402cfdf02a49ed8b3406053f039e76f27407df08f3",
+  "src/wave2/func_001b7598.c": "0c5868c50de9ad18285c7edf0b180bf9c8bc0a19805c6cc5f54eeb3cb576f280",
+  "src/wave2/func_001b7c9c.c": "9ec501091311e32905855812567e7f2655510aecab19a375fa349afccf799f0f",
+  "src/wave2/func_001847f8.c": "1671126361c1f8ee27850bbc60633c545f7fb34c1b2dc242ce08408c994d05eb",
+  "src/wave2/func_001861c4.c": "d3945b55adda25cf82bb317bfa4d6accf28570ef84d24ddfdf1afef3bbf69bc8",
+  "src/wave2/func_001861d4.c": "1360318059aa48a572f5783a972b90190dff21cd5c695837e6f18173af108e6c",
+  "src/wave2/func_00187818.c": "1eb328265fab62a04ad7e7fd9090c7807f37aad3ef3c4c1cb9a6ffba1d0febff",
+  "src/wave2/func_0018f0ac.c": "b8f6d14ec2cb70159b8780ab449712b56fe9aa9aa08345815c39612ea051b099",
+  "src/wave2/func_00190ae0.c": "e5e3c442c3b5f45b1ce6b433568bd8f0289bc3fb4016ac12147fbe30bb343a70",
+  "src/wave2/func_0019cff8.c": "d6c2dd221f0e102621018f15eeb5f5abd9fb0533a40d80e54e8095be644681df",
+  "src/wave2/func_00110634.c": "0179d2cf7d2d2f4341588d4ea3d3a0e61209fc2c3ae5515ce7c298261527c9d4",
+  "src/wave2/func_00118074.c": "9ec18c612ca95dbe009c81b3df3ceacadcd1257296b28ba7d73dad979b795b6b",
+  "src/wave2/func_0011d260.c": "73441850704d05200674c4f68476e366dc563fefcb6f9370ca85696a34e3d30c",
+  "src/wave2/func_0011d2f0.c": "ccbb727758674fc5ffd8d85843316dffd7a94df6015b30e710ec95228e3936e5",
+  "src/wave2/func_00126f5c.c": "b5d91a4441a23395b9d850bcaf7440f398d57e513210af2df983bf92e546dffc",
+  "src/wave2/func_00127294.c": "882aae40c664c7ef5a0c1fc78eeb25f5a7c5403d0baa412855c8bffb1fe5da18",
+  "src/wave2/func_0018ce64.c": "bb6ff988076ba3d211ce2109e1942475f933c991a5546257ed4b04cd0a4c3322",
+  "src/wave2/func_00190adc.c": "3553b65425c40f74ef78137235655c72f2c2f16347f20d9956dc660507e6e9cf",
+  "src/wave2/func_0019ceb4.c": "87d7e2948322370c2972ebc126512ff14150168b2f9e8391d16d62aab38392da"
+ },
+ "headers": {
+  "include/game/bss_0049ecf0.h": "2405974d2130cd24e17a2c9112e80c13a3bbfaf694cfa10f6532d5fb4518f2c8",
+  "include/game/graphics_state.h": "6688e4dafa2e23adafa5543bdbdf1284c018be487036c7e188ca687354eabc9c",
+  "include/game/item_pages.h": "fcdf0170ff46de270b8007716c87b29ae56d5f214ec315bf8a232979dbae8e66",
+  "include/game/render_state.h": "0b6262cd81881e6019087d0d3b6fe4fbb4b42ef99f41d06bfcb7088fb093e03e",
+  "include/game/result.h": "d3e9723ddd7a08fa81e968adfdc0bd916bb87bef3022b78b9cd832a62fd3a461",
+  "include/game/screen.h": "90c0a3f4c0ae5160b2038741a1b3eef0953214529bb19befa6834930fee41a6d",
+  "include/game/selection.h": "24397723f884451a1e69cb99ce3a7e7673b05e1970b91928d5f7fa143f956aca"
+ },
+ "headers_added_since_prepare": [],
+ "record_sha256": "2f452a75cefbcd10947b1f17c9f1e041a19c679f37b18ffd4a3b8cdb8d9b17a8"
+}
