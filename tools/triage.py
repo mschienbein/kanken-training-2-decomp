@@ -13,6 +13,11 @@ range includes them. Data refs count pool words pointing into actual rodata,
 data or BSS, not segment padding. Callees/callers count distinct addresses;
 loops count local backward branch sites, including self-branches, not calls.
 
+--avoid svc,thumb,exclusive drops functions with any SVC, Thumb functions, or
+exclusive-access instructions (ldrex/strex/clrex) from the author pool while they
+stay in the call graph: per the H11 pilot these are policy-pending SDK wrappers,
+ARM C runtime, or synchronisation primitives rather than ordinary game C.
+
 Difficulty is a heuristic, not a match or compiler-profile claim: instruction
 count + ceil(bytes/16), plus 8 per uncredited direct callee, 2 per credited
 callee, 6 per data ref, 4 per VFP instruction, 20 for a switch, 12 per loop,
@@ -59,6 +64,11 @@ FEATURE_CLASSES = (
     "leaf-small", "leaf-medium", "calls", "pool-data", "switch", "loop",
     "vfp", "indirect-call", "thumb", "svc",
 )
+AVOIDABLE = {
+    "svc": lambda record: record["features"]["svc"] > 0,
+    "thumb": lambda record: record["isa"] == "thumb",
+    "exclusive": lambda record: record["features"]["exclusive"] > 0,
+}
 
 
 def credited_addresses(functions: dict[int, dict], matches: dict, names: dict[str, dict]) -> set[int]:
@@ -193,7 +203,11 @@ def feature_classes(function: dict) -> list[str]:
 
 class Triage:
     def __init__(self, image: image_mod.Image, catalogue: dict, matches: dict,
-                 names: dict[str, dict] | None = None, excluded: set[int] | None = None):
+                 names: dict[str, dict] | None = None, excluded: set[int] | None = None,
+                 avoid: frozenset[str] = frozenset()):
+        unknown = sorted(set(avoid) - set(AVOIDABLE))
+        if unknown:
+            raise ValueError(f"unknown --avoid class: {', '.join(unknown)} (known: {', '.join(AVOIDABLE)})")
         if catalogue["image_sha256"] != image.sha256:
             raise image_mod.ImageError("catalogue image_sha256 does not match orig/code.bin")
         functions = image_mod.functions_by_address(catalogue)
@@ -222,7 +236,7 @@ class Triage:
                 "size": function["size"], "isa": function["isa"], "kind": function.get("kind", "function"),
                 "instruction_count": 0, "direct_callees": 0, "credited_callees": 0, "callers": 0,
                 "data_refs": 0, "vfp_instructions": 0, "switch_table": False, "loops": 0,
-                "indirect_calls": 0, "svc": 0, "undecoded_bytes": 0,
+                "indirect_calls": 0, "svc": 0, "exclusive": 0, "undecoded_bytes": 0,
                 "anomalies": anomalies[bisect_left(anomaly_addresses, address):bisect_left(anomaly_addresses, end)],
             }
             targets = set()
@@ -235,6 +249,7 @@ class Triage:
                         continue
                     features["instruction_count"] += 1
                     features["vfp_instructions"] += instruction.mnemonic.startswith("v")
+                    features["exclusive"] += instruction.mnemonic.startswith(("ldrex", "strex", "clrex"))
                     if instruction.id in (ARM_INS_BL, ARM_INS_BLX):
                         operand = instruction.operands[0]
                         if operand.type == ARM_OP_IMM:
@@ -269,7 +284,11 @@ class Triage:
         for address, record in self.records.items():
             record["features"]["callers"] = len(self.callers[address])
             record["depth"] = depths.get(address, 0)
-        self.functions = sorted((self.records[address] for address in unmatched - self.excluded),
+        pool = sorted(unmatched - self.excluded)
+        self.avoided = sorted(address for address in pool
+                              if any(AVOIDABLE[name](self.records[address]) for name in avoid))
+        avoided = set(self.avoided)
+        self.functions = sorted((self.records[address] for address in pool if address not in avoided),
                                 key=lambda function: (function["depth"], function["difficulty"], function["address"]))
 
     def queue(self, max_size: int | None = None, isa: str | None = None) -> list[dict]:
@@ -334,14 +353,14 @@ def load_exclusions(path: Path | None) -> set[int]:
     return result
 
 
-def load_triage(exclude_path: Path | None = None, root: Path = ROOT) -> tuple[Triage, dict]:
+def load_triage(exclude_path: Path | None = None, root: Path = ROOT, avoid: frozenset[str] = frozenset()) -> tuple[Triage, dict]:
     image = image_mod.Image.load(root / "orig")
     catalogue_path = root / "config/catalogue.json"
     catalogue = image_mod.load_catalogue(catalogue_path)
     matches_bytes = (root / "config/matches.json").read_bytes()
     matches = json.loads(matches_bytes)
     names = image_mod.load_names(root / "config/names.json")
-    analysis = Triage(image, catalogue, matches, names, load_exclusions(exclude_path))
+    analysis = Triage(image, catalogue, matches, names, load_exclusions(exclude_path), avoid)
     metadata = {
         "schema_version": 1, "image_sha256": image.sha256,
         "catalogue_sha256": hashlib.sha256(catalogue_path.read_bytes()).hexdigest(),
@@ -369,6 +388,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--exclude", type=Path, help="JSON list of in-flight addresses")
     parser.add_argument("--out", type=Path, default=ROOT / "scratch/triage")
+    parser.add_argument("--avoid", default="", help="comma list of: " + ",".join(AVOIDABLE))
     commands = parser.add_subparsers(dest="command", required=True)
     queue = commands.add_parser("queue", help="easiest-first, dependency-ordered author queue")
     queue.add_argument("--limit", type=positive_int)
@@ -383,10 +403,13 @@ def main(argv: list[str] | None = None) -> int:
     for command in (queue, stratified, batches):
         command.add_argument("--exclude", type=Path, default=argparse.SUPPRESS, help="JSON list of in-flight addresses")
         command.add_argument("--out", type=Path, default=argparse.SUPPRESS)
+        command.add_argument("--avoid", default=argparse.SUPPRESS, help="comma list of: " + ",".join(AVOIDABLE))
     args = parser.parse_args(argv)
     try:
-        analysis, metadata = load_triage(args.exclude)
-        document = {**metadata, "excluded_addresses": sorted(analysis.excluded)}
+        avoid = frozenset(filter(None, args.avoid.split(",")))
+        analysis, metadata = load_triage(args.exclude, avoid=avoid)
+        document = {**metadata, "excluded_addresses": sorted(analysis.excluded),
+                    "avoid": sorted(avoid), "avoided_addresses": analysis.avoided}
         if args.command == "queue":
             functions = analysis.queue(args.max_size, args.isa)
             document["functions"] = functions[:args.limit]

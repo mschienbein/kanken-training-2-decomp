@@ -306,11 +306,27 @@ class TriageTests(unittest.TestCase):
                     self.assertEqual(first, path.read_bytes())
 
     def test_cli_passes_global_and_command_exclusions(self) -> None:
-        for arguments in (["--exclude", "in-flight.json", "queue"], ["queue", "--exclude", "in-flight.json"]):
+        for arguments in (["--exclude", "in-flight.json", "--avoid", "svc", "queue"],
+                          ["queue", "--exclude", "in-flight.json", "--avoid", "svc"]):
             with tempfile.TemporaryDirectory() as directory, patch.object(triage, "load_triage", return_value=(self.analysis, {})) as loader:
                 with redirect_stdout(io.StringIO()):
                     triage.main([*arguments, "--out", directory])
-                loader.assert_called_once_with(Path("in-flight.json"))
+                loader.assert_called_once_with(Path("in-flight.json"), avoid=frozenset({"svc"}))
+
+    def test_avoided_functions_leave_the_pool_but_keep_the_graph(self) -> None:
+        code = bytearray(self.image.code)
+        struct.pack_into("<I", code, 0x00, 0xE1910F9F)  # ldrex r0, [r1] in the leaf at BASE.
+        image = triage.image_mod.Image(bytes(code), self.image.layout)
+        catalogue = {**self.catalogue, "image_sha256": image.sha256}
+        plain = triage.Triage(image, catalogue, EMPTY_MATCHES)
+        avoiding = triage.Triage(image, catalogue, EMPTY_MATCHES, avoid=frozenset({"svc", "thumb", "exclusive"}))
+        self.assertEqual(plain.records[BASE]["features"]["exclusive"], 1)
+        self.assertEqual(avoiding.avoided, [BASE, BASE + 0x90, BASE + 0xC0])
+        self.assertTrue({BASE, BASE + 0x90, BASE + 0xC0}.isdisjoint(f["address"] for f in avoiding.queue()))
+        self.assertEqual({a: r["depth"] for a, r in plain.records.items()},
+                         {a: r["depth"] for a, r in avoiding.records.items()})
+        with self.assertRaisesRegex(ValueError, "unknown --avoid class"):
+            triage.Triage(image, catalogue, EMPTY_MATCHES, avoid=frozenset({"asm"}))
 
     @unittest.skipUnless((ROOT / "orig/code.bin").is_file() and (ROOT / "orig/exheader.bin").is_file(), "private inputs absent")
     def test_real_image_smoke(self) -> None:
