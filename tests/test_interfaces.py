@@ -363,6 +363,19 @@ void local(void) {
         self.assertEqual(sorted(s["source"] for s in report["disagreements"][0]["sites"]), ["a.c", "b.cpp"])
         self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
 
+    def test_header_class_names_are_one_namespace_for_cpp_units(self):
+        """c003-wave2-r2 F01: screen.h completed `struct Widget` (0x94 bytes) while an accepted C++
+        unit forward-declared its own, different 0x48-byte `Widget` without that header."""
+        self.source("include/game/screen.h", "struct Widget { unsigned char bytes[0x94]; };\n")
+        self.source("include/game/other.h", '#include "game/screen.h"\n')
+        self.add("heap.cpp", "struct Widget;\nvoid *make(void);\n")
+        self.add("ui.cpp", '#include "game/other.h"\nstruct Widget;\n')
+        self.add("odr.cpp", "struct Widget { int other; };\n")
+        report = self.audit()
+        kinds = sorted((d["name"], d["kind"], tuple(sorted(s["source"] for s in d["sites"]))) for d in report["disagreements"])
+        self.assertEqual(kinds, [("class Widget", "odr", ("include/game/screen.h", "odr.cpp")),
+                                 ("class Widget", "type-name", ("heap.cpp", "include/game/screen.h"))])
+
     def test_preprocess_failure_is_unchecked_not_pass(self):
         self.add("a.c", "int data_00200000;\n")
         with patch.object(interfaces, "preprocess", side_effect=interfaces.InterfaceError("compiler failed (7)")):

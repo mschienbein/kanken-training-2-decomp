@@ -1,6 +1,12 @@
-# Gate design — frozen v1.6 (2026-10-16)
+# Gate design — frozen v1.7 (2026-10-16)
 
 Revisions:
+- **v1.7** (2026-10-16): class/struct/union names are one project-wide namespace for C++ units.
+  G3 compares every definition in a project header with same-named definitions in C++ units (ODR),
+  and refuses a C++ forward declaration of a header-defined name in a unit that does not include
+  that header (transitively). Cause: `c003-wave2-r2` review F01 — `include/game/screen.h`
+  completed `struct Widget` as a 0x94-byte display object while accepted `game_heap.cpp` forward-
+  declared a different 0x48-byte `Widget`; the v1.6 check read only `.cpp` text.
 - **v1.6** (2026-10-16): (a) finalize is revision-aware — the drift check exempts exactly the
   prepare-declared `revised_units`/`revised_headers` (already pinned to their prepared hashes) and
   still refuses any other change to accepted files; before this, v1.4 revisions could never be

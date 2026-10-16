@@ -1,4 +1,4 @@
-# Known issues — checkpoint c003-wave2-r2
+# Known issues — checkpoint c003-wave2-r2 (superseded by c003-wave2-r3; never finalized)
 
 48 new functions from wave 2 (four OpenAI-family authors, `openai-codex/gpt-6.1-sol`; `author`
 per unit in `config/candidates/c003-wave2.json`), plus revisions to accepted material made by the

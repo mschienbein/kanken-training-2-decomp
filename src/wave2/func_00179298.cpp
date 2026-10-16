@@ -2,7 +2,7 @@
 #include "game/screen.h"
 
 struct DisplayHandle {
-    Widget *object;
+    DisplayObject *object;
 
     void set_active(int active);
 };
@@ -22,13 +22,13 @@ struct AnimationContext {
 };
 
 extern "C" AnimationContext bss_00246b48;
-extern "C" void func_001826fc(Widget *object, int active);
-extern "C" void func_00195a08(Widget *object, int index, int active);
-extern "C" void func_0015e948(Widget *object, int active);
+extern "C" void func_001826fc(DisplayObject *object, int active);
+extern "C" void func_00195a08(DisplayObject *object, int index, int active);
+extern "C" void func_0015e948(DisplayObject *object, int active);
 
 inline void DisplayHandle::set_active(int active)
 {
-    Widget *display = object;
+    DisplayObject *display = object;
     if (display == 0)
         return;
     switch (func_0017a9a0(display, 0)) {

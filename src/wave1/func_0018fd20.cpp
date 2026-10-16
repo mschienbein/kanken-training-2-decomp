@@ -1,6 +1,6 @@
 #include "game/result.h"
 
-class Resource;
+#include "game/resource.h"
 
 struct Path {
     unsigned type;

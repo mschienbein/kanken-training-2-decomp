@@ -46,7 +46,7 @@ import toolchain  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 BOUND = re.compile(r"(?:func|data|bss)_[0-9a-fA-F]{8}\Z")
 COVERAGE = {
-    "cpp": "class-definition agreement across units (ODR, token-level) and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+    "cpp": "class-definition agreement across units and project headers (ODR, token-level), no forward declaration of a header-defined class name without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
     "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
     "not_covered": [
         "whole-program/heap alias analysis and pointer arithmetic",
@@ -741,6 +741,34 @@ def cpp_extern_declarations(text: str) -> list[tuple[str, int]]:
     return [(m.group(1), text.count("\n", 0, m.start()) + 1) for m in CPP_EXTERN_C.finditer(text)]
 
 
+CPP_FORWARD = re.compile(r"^[ \t]*(?:struct|class|union)[ \t]+(\w+)[ \t]*;", re.M)
+PROJECT_INCLUDE = re.compile(r'^[ \t]*#[ \t]*include[ \t]*"([^"]+)"', re.M)
+
+
+def project_headers(root: Path) -> dict[str, str]:
+    """Text of every project header (include/ plus header files under src/), keyed by the path
+    used in `#include "..."` for include/ files (e.g. "game/screen.h") or by its src path."""
+    found = {}
+    for path in sorted((root / "include").rglob("*")) if (root / "include").is_dir() else []:
+        if path.is_file():
+            found[path.relative_to(root / "include").as_posix()] = path.read_text(encoding="utf-8")
+    for path in sorted((root / "src").rglob("*")) if (root / "src").is_dir() else []:
+        if path.is_file() and path.suffix in (".h", ".hh", ".hpp", ".inc"):
+            found[path.relative_to(root).as_posix()] = path.read_text(encoding="utf-8")
+    return found
+
+
+def included_headers(text: str, headers: dict[str, str]) -> set[str]:
+    """Project headers reached from `text` by quoted includes (transitively)."""
+    seen, pending = set(), list(PROJECT_INCLUDE.findall(text))
+    while pending:
+        name = pending.pop()
+        if name in headers and name not in seen:
+            seen.add(name)
+            pending.extend(PROJECT_INCLUDE.findall(headers[name]))
+    return seen
+
+
 def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -> dict:
     root = root.resolve()
     if names is None:
@@ -751,6 +779,17 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
     records: dict[tuple[str, str], list[tuple[Record, Analyzer]]] = {}
     cpp_classes: dict[str, list[tuple[str, dict]]] = {}
     cpp_externs: dict[str, list[dict]] = {}
+    # Class/struct/union names are one project-wide namespace: every definition in a project header
+    # takes part in the ODR comparison, and a C++ unit may not forward-declare a header-defined
+    # name without including that header (two different objects sharing a name).
+    headers = project_headers(root)
+    header_defined: dict[str, list[tuple[str, dict]]] = {}
+    for header, text in headers.items():
+        display = header if header.startswith("src/") else f"include/{header}"
+        for name, body, line in cpp_class_definitions(text):
+            site = {"source": display, "line": line, "type": "class definition (header)"}
+            header_defined.setdefault(name, []).append((header, site))
+            cpp_classes.setdefault(name, []).append((body, site))
     for unit in units:  # Intentionally sequential: armcc runs on a shared laptop.
         source = display_path(unit.source, root)
         entry = {"source": source, "sha256": None, "checked": False}
@@ -761,6 +800,14 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
                 text = unit.source.read_text(encoding="utf-8")
                 for name, body, line in cpp_class_definitions(text):
                     cpp_classes.setdefault(name, []).append((body, {"source": source, "line": line, "type": "class definition"}))
+                reached = included_headers(text, headers)
+                stripped = CPP_COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
+                for m in CPP_FORWARD.finditer(stripped):
+                    defining = header_defined.get(m.group(1), [])
+                    if defining and not any(header in reached for header, _ in defining):
+                        site = {"source": source, "line": stripped.count("\n", 0, m.start()) + 1, "type": "forward declaration without the defining header"}
+                        report["disagreements"].append({"name": f"class {m.group(1)}", "kind": "type-name",
+                                                        "sites": unique_sites([site] + [s for _, s in defining])})
                 for name, line in cpp_extern_declarations(text):
                     cpp_externs.setdefault(name, []).append({"source": source, "line": line, "type": 'local extern "C" declaration'})
                 report["unchecked"].append({"source": source, "kind": "cpp", "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked"})

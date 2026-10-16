@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-struct Widget {
+struct DisplayObject {
     unsigned char reserved00[0x92];
     unsigned char types[2];                 /* 0x92 */
 };
@@ -22,7 +22,7 @@ struct NameTable {
 };
 
 struct WidgetSlot {
-    struct Widget *widget;
+    struct DisplayObject *object;
     short label_index;
     unsigned char enabled;
 };
@@ -39,8 +39,8 @@ struct Screen {
 };
 
 extern void func_0016e1d0(struct Screen *screen, int index, int enabled);
-extern unsigned char func_0017a9a0(const struct Widget *widget, int index);
-extern void func_0017a968(struct Widget *widget, const struct NameTable *table, int index, int mode);
+extern unsigned char func_0017a9a0(const struct DisplayObject *object, int index);
+extern void func_0017a968(struct DisplayObject *object, const struct NameTable *table, int index, int mode);
 extern void func_001b7c9c(struct Screen *screen, int index, int value, const struct NameTable *const *labels);
 
 #ifdef __cplusplus
