@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 from pathlib import Path
 import struct
 import unittest
@@ -287,6 +288,39 @@ class CatalogueTests(unittest.TestCase):
                 self.assertIn("pointer", functions[address]["evidence"])
                 self.assertEqual(functions[address + 4]["size"], 164)
                 self.assertEqual(functions[address + 4]["kind"], "function")
+
+    def test_pointer_tail_chain_discovers_unseeded_leaf(self) -> None:
+        result = self.catalogue([0xE12FFF1E, 0, 0xE3A00001, branch(BASE + 12, BASE + 24),
+                                 0, 0, 0xE3A00002, 0xE12FFF1E], rodata=[BASE + 8])
+        image, layout = fixture([0xE12FFF1E, 0, 0xE3A00001, branch(BASE + 12, BASE + 24),
+                                 0, 0, 0xE3A00002, 0xE12FFF1E], rodata=[BASE + 8])
+        probe = analyze.Analyzer(image, layout)
+        self.assertFalse(probe.pointer_plausible(BASE + 8, "arm"))
+        self.assertTrue(probe.pointer_plausible(BASE + 8, "arm", follow_tail_branches=True))
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertEqual(set(functions), {BASE, BASE + 8, BASE + 24})
+        self.assertEqual((functions[BASE + 8]["kind"], functions[BASE + 8]["size"]), ("function", 8))
+        self.assertIn("pointer", functions[BASE + 8]["evidence"])
+        self.assertIn("tail_call", functions[BASE + 24]["evidence"])
+
+    def test_late_pointer_probe_does_not_fall_into_a_published_body(self) -> None:
+        image, layout = fixture([0xE12FFF1E, 0, 0xE3A00001, 0xE3A00002, 0xE12FFF1E],
+                                 rodata=[BASE + 8])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.add_seed(BASE, "arm", "entry")
+        analyzer.add_seed(BASE + 12, "arm", "bl_target")
+        traces = analyzer.group_fallthroughs(analyzer.refine())
+        analyzer.record_entries(traces)
+        self.assertFalse(analyzer.promote_pointer_entries(traces))
+        self.assertEqual(set(analyzer.seeds), {BASE, BASE + 12})
+
+    def test_unproved_pointer_tail_cycles_remain_unknown(self) -> None:
+        for target in (BASE + 8, BASE + 16):
+            with self.subTest(target=target):
+                result = self.catalogue([0xE12FFF1E, 0, 0xE3A00001, branch(BASE + 12, target), 0],
+                                        rodata=[BASE + 8])
+                self.assertEqual([function["address"] for function in result["functions"]], [BASE])
+                self.assertEqual(result["stats"]["starts_by_evidence"], {"entry": 1})
 
     def test_pointer_only_empty_body_hidden_after_linker_nop(self) -> None:
         for terminal in (0xE12FFF1E, 0xE1A0F00E):
@@ -757,6 +791,15 @@ class CatalogueTests(unittest.TestCase):
         self.assertIn("pointer", functions[0x186EEC]["evidence"])
         self.assertEqual((functions[0x1EF884]["kind"], functions[0x1EF884]["size"]), ("function", 4))
         self.assertIn("pointer", functions[0x1EF884]["evidence"])
+        self.assertEqual(functions[0x149428]["kind"], "function")
+        self.assertIn("pointer", functions[0x149428]["evidence"])
+        for address in (0x195EC4, 0x180768, 0x180884, 0x149428):
+            self.assertEqual(entry_owners[address][1]["isa"], "arm")
+        adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
+        adopted_entries = {(entry["address"], entry["isa"]) for function in adopted["functions"]
+                           for entry in function.get("entries", [function])}
+        recovered_entries = {(address, entry["isa"]) for address, (_, entry) in entry_owners.items()}
+        self.assertEqual(sorted(adopted_entries - recovered_entries), [])
         for split in first["linker_tail_splits"]:
             self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
                              ("function", 4))

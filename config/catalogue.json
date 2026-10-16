@@ -173,6 +173,10 @@
       "issue": "unexplained_function_bytes"
     },
     {
+      "address": 1701548,
+      "issue": "literal_outside_function"
+    },
+    {
       "address": 1702232,
       "issue": "literal_outside_function"
     },
@@ -52858,6 +52862,42 @@
       "size": 4
     },
     {
+      "address": 1348648,
+      "code_ranges": [
+        [
+          1348648,
+          1348672
+        ]
+      ],
+      "code_size": 24,
+      "entries": [
+        {
+          "address": 1348648,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": []
+        }
+      ],
+      "evidence": [
+        "pointer"
+      ],
+      "isa": "arm",
+      "kind": "function",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [
+        [
+          1348672,
+          1348676
+        ]
+      ],
+      "size": 28
+    },
+    {
       "address": 1348676,
       "code_ranges": [
         [
@@ -54413,6 +54453,44 @@
         ]
       ],
       "size": 108
+    },
+    {
+      "address": 1356464,
+      "code_ranges": [
+        [
+          1356464,
+          1356512
+        ]
+      ],
+      "code_size": 48,
+      "entries": [
+        {
+          "address": 1356464,
+          "evidence": [
+            "tail_call"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": [
+            1348668
+          ]
+        }
+      ],
+      "evidence": [
+        "tail_call"
+      ],
+      "isa": "arm",
+      "kind": "function",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [
+        [
+          1356512,
+          1356520
+        ]
+      ],
+      "size": 56
     },
     {
       "address": 1356520,
@@ -64619,6 +64697,42 @@
       "noreturn_reasons": [],
       "pools": [],
       "size": 16
+    },
+    {
+      "address": 1404364,
+      "code_ranges": [
+        [
+          1404364,
+          1404384
+        ]
+      ],
+      "code_size": 20,
+      "entries": [
+        {
+          "address": 1404364,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": []
+        }
+      ],
+      "evidence": [
+        "pointer"
+      ],
+      "isa": "arm",
+      "kind": "function",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [
+        [
+          1404384,
+          1404392
+        ]
+      ],
+      "size": 28
     },
     {
       "address": 1404392,
@@ -125108,6 +125222,39 @@
       "size": 4
     },
     {
+      "address": 1701548,
+      "code_ranges": [
+        [
+          1701548,
+          1701556
+        ]
+      ],
+      "code_size": 8,
+      "entries": [
+        {
+          "address": 1701548,
+          "evidence": [
+            "tail_call"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": [
+            1404380
+          ]
+        }
+      ],
+      "evidence": [
+        "tail_call"
+      ],
+      "isa": "arm",
+      "kind": "function",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [],
+      "size": 8
+    },
+    {
       "address": 1701556,
       "code_ranges": [
         [
@@ -138330,6 +138477,37 @@
       "size": 240
     },
     {
+      "address": 1838660,
+      "code_ranges": [
+        [
+          1838660,
+          1838664
+        ]
+      ],
+      "code_size": 4,
+      "entries": [
+        {
+          "address": 1838660,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": []
+        }
+      ],
+      "evidence": [
+        "pointer"
+      ],
+      "isa": "arm",
+      "kind": "function",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [],
+      "size": 4
+    },
+    {
       "address": 1838664,
       "code_ranges": [
         [
@@ -150860,6 +151038,37 @@
       "size": 16
     },
     {
+      "address": 1899948,
+      "code_ranges": [
+        [
+          1899948,
+          1899956
+        ]
+      ],
+      "code_size": 8,
+      "entries": [
+        {
+          "address": 1899948,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": []
+        }
+      ],
+      "evidence": [
+        "pointer"
+      ],
+      "isa": "arm",
+      "kind": "function",
+      "literals": [],
+      "noreturn": false,
+      "noreturn_reasons": [],
+      "pools": [],
+      "size": 8
+    },
+    {
       "address": 1899956,
       "code_ranges": [
         [
@@ -151078,13 +151287,24 @@
           "isa": "arm",
           "kind": "entry",
           "sources": []
+        },
+        {
+          "address": 1900376,
+          "evidence": [
+            "tail_call"
+          ],
+          "isa": "arm",
+          "kind": "secondary_entry",
+          "sources": [
+            1899952
+          ]
         }
       ],
       "evidence": [
         "pointer"
       ],
       "isa": "arm",
-      "kind": "function",
+      "kind": "multi_entry",
       "literals": [],
       "noreturn": false,
       "noreturn_reasons": [],
@@ -184058,6 +184278,24 @@
       "target": 2109544
     }
   ],
+  "pointer_target_repairs": [
+    {
+      "address": 1348648,
+      "isa": "arm"
+    },
+    {
+      "address": 1404364,
+      "isa": "arm"
+    },
+    {
+      "address": 1838660,
+      "isa": "arm"
+    },
+    {
+      "address": 1899948,
+      "isa": "arm"
+    }
+  ],
   "ranges": [
     {
       "end": 1048608,
@@ -192593,8 +192831,8 @@
     },
     {
       "end": 1348676,
-      "kind": "unknown",
-      "owner": null,
+      "kind": "function",
+      "owner": 1348648,
       "start": 1348648
     },
     {
@@ -192857,8 +193095,8 @@
     },
     {
       "end": 1356520,
-      "kind": "unknown",
-      "owner": null,
+      "kind": "function",
+      "owner": 1356464,
       "start": 1356464
     },
     {
@@ -194596,10 +194834,16 @@
       "start": 1404332
     },
     {
-      "end": 1404392,
+      "end": 1404364,
       "kind": "unknown",
       "owner": null,
       "start": 1404348
+    },
+    {
+      "end": 1404392,
+      "kind": "function",
+      "owner": 1404364,
+      "start": 1404364
     },
     {
       "end": 1404396,
@@ -202253,8 +202497,8 @@
     },
     {
       "end": 1701556,
-      "kind": "unknown",
-      "owner": null,
+      "kind": "function",
+      "owner": 1701548,
       "start": 1701548
     },
     {
@@ -204035,8 +204279,8 @@
     },
     {
       "end": 1838664,
-      "kind": "unknown",
-      "owner": null,
+      "kind": "function",
+      "owner": 1838660,
       "start": 1838660
     },
     {
@@ -206315,8 +206559,8 @@
     },
     {
       "end": 1899956,
-      "kind": "unknown",
-      "owner": null,
+      "kind": "function",
+      "owner": 1899948,
       "start": 1899948
     },
     {
@@ -212571,40 +212815,40 @@
   ],
   "stats": {
     "absorbed_function_starts": 71,
-    "anomalies": 82,
+    "anomalies": 83,
     "anomalies_by_issue": {
       "address_literal_crosses_start": 7,
       "address_literal_overlaps_code": 5,
-      "literal_outside_function": 14,
+      "literal_outside_function": 15,
       "shared_address_literal": 14,
       "undecodable_reachable_code": 1,
       "unexplained_function_bytes": 41
     },
     "bytes_by_range_kind": {
       "data": 51464,
-      "function": 1135312,
+      "function": 1135444,
       "padding": 160,
       "rodata": 123064,
       "segment_padding": 8268,
-      "unknown": 8836
+      "unknown": 8704
     },
-    "code_bytes": 1054486,
-    "decoded_instructions": 264701,
+    "code_bytes": 1054598,
+    "decoded_instructions": 264729,
     "direct_calls": 19991,
     "discovery_rounds": 7,
     "fallthrough_groups": 71,
-    "functions": 4437,
+    "functions": 4443,
     "functions_by_isa": {
-      "arm": 4368,
+      "arm": 4374,
       "thumb": 69
     },
     "functions_by_kind": {
-      "function": 4345,
-      "multi_entry": 86,
+      "function": 4350,
+      "multi_entry": 87,
       "veneer": 6
     },
     "functions_with_literals": 99,
-    "indirect_exits": 155,
+    "indirect_exits": 156,
     "linker_tail_wrappers": 86,
     "literal_bytes": 40858,
     "literal_conflicts": 17,
@@ -212626,26 +212870,42 @@
     },
     "nop_entries": 0,
     "noreturn_functions": 6,
-    "pool_bytes": 39968,
+    "pool_bytes": 39988,
     "prologue_only_starts": 97,
-    "protected_pointer_table_starts": 637,
+    "protected_pointer_table_starts": 641,
     "rejected_raw_call_seeds": 0,
-    "repaired_tail_targets": 0,
-    "secondary_entries": 93,
+    "repaired_pointer_targets": 4,
+    "repaired_tail_targets": 2,
+    "secondary_entries": 94,
     "starts_by_evidence": {
       "bl_target": 3293,
       "blx_target": 43,
       "entry": 1,
       "linker_branchnop": 62,
-      "pointer": 777,
+      "pointer": 781,
       "prologue": 142,
-      "tail_call": 390,
+      "tail_call": 392,
       "veneer_pattern": 6,
       "veneer_target": 6
     },
     "switch_tables": 142,
-    "tail_calls": 1267,
-    "unknown_ranges": 194
+    "tail_calls": 1270,
+    "unknown_ranges": 189
   },
-  "tail_target_repairs": []
+  "tail_target_repairs": [
+    {
+      "address": 1356464,
+      "isa": "arm",
+      "sources": [
+        1348668
+      ]
+    },
+    {
+      "address": 1701548,
+      "isa": "arm",
+      "sources": [
+        1404380
+      ]
+    }
+  ]
 }

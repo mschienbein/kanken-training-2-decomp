@@ -151,6 +151,7 @@ class Analyzer:
         self.entry_groups: list[dict] = []
         self.tail_target_repairs: dict[tuple[int, str], set[int]] = {}
         self.linker_wrappers: set[int] = set()
+        self.pointer_target_repairs: set[tuple[int, str]] = set()
 
     def inside(self, address: int, isa: str = "arm") -> bool:
         return self.base <= address < self.end and address % (4 if isa == "arm" else 2) == 0
@@ -311,8 +312,9 @@ class Analyzer:
                 return False
         return True
 
-    def pointer_plausible(self, address: int, isa: str, *, prologue_sufficient: bool = True) -> bool:
-        """A pointer-sized integer alone is not a function-entry witness."""
+    def pointer_plausible(self, address: int, isa: str, *, prologue_sufficient: bool = True,
+                          follow_tail_branches: bool = False, fallthrough_limit: int | None = None) -> bool:
+        """Bound pointer witnesses; tail-chain recovery is opt-in after v3 refinement."""
         if not self.plausible(address, isa):
             return False
         if prologue_sufficient and (self.prologue(address, isa) or self.veneer(address, isa) is not None):
@@ -320,12 +322,24 @@ class Analyzer:
         cursor = address
         for _ in range(32):
             ins = self.decode(cursor, isa)
-            if ins is None:
+            if ins is None or fallthrough_limit is not None and cursor + ins.size > fallthrough_limit:
                 return False
             if ins.returns:
                 return True
             if ins.branch and not ins.conditional:
-                return ins.target is not None and ins.target[0] in self.seeds
+                if ins.target is None:
+                    return False
+                target, target_isa = ins.target
+                seed = self.seeds.get(target)
+                if seed is not None:
+                    return seed.isa == target_isa
+                if not follow_tail_branches or target_isa != isa or not self.plausible(target, isa):
+                    return False
+                # A pointer-only thunk may tail-call another undiscovered leaf.
+                # Both paths share this 32-instruction bound, including cycles.
+                cursor = target
+                fallthrough_limit = None  # The explicit tail B, not fallthrough, leaves the gap.
+                continue
             if ins.stop and not ins.conditional:
                 return ins.indirect
             cursor += ins.size
@@ -842,6 +856,38 @@ class Analyzer:
                     changed = True
         return changed
 
+    def _pointer_targets(self, traces: list[Trace]) -> set[tuple[int, str]]:
+        targets = set(self._external_pointers())
+        for trace in traces:
+            for address in trace.pools - trace.table_words:
+                pointer = self.word(address)
+                target, isa = pointer & ~1, "thumb" if pointer & 1 else "arm"
+                if self.inside(target, isa):
+                    targets.add((target, isa))
+        return targets
+
+    def promote_pointer_entries(self, traces: list[Trace]) -> bool:
+        """Recover unowned pointer-only tail chains without rerunning discovery.
+
+        Early tail following changes v3's weak-start refinement order. Wait for
+        its final extents, then promote only gaps, never code/data inside an owner.
+        Existing missing-target recovery discovers the new thunk's tail callee.
+        """
+        starts = [trace.address for trace in traces]
+        changed = False
+        for target, isa in sorted(self._pointer_targets(traces)):
+            if target in self.seeds:
+                continue
+            index = bisect_right(starts, target) - 1
+            if index >= 0 and target < traces[index].end:
+                continue
+            limit = starts[index + 1] if index + 1 < len(starts) else self.end
+            if self.pointer_plausible(target, isa, follow_tail_branches=True, fallthrough_limit=limit):
+                if self.add_seed(target, isa, "pointer"):
+                    self.pointer_target_repairs.add((target, isa))
+                    changed = True
+        return changed
+
     def promote_linker_entries(self, traces: list[Trace]) -> bool:
         """Split evidenced MOV-r0-r0 entries, after v3 boundary/data recovery.
 
@@ -853,13 +899,7 @@ class Analyzer:
         entries = {address: entry for trace in traces for address, entry in trace.entries.items()}
         code = {address: trace.isa for trace in traces for address in trace.code}
         pools = {address for trace in traces for address in trace.pools}
-        pointers = set(self._external_pointers())
-        for trace in traces:
-            for address in trace.pools - trace.table_words:
-                pointer = self.word(address)
-                target, isa = pointer & ~1, "thumb" if pointer & 1 else "arm"
-                if self.inside(target, isa):
-                    pointers.add((target, isa))
+        pointers = self._pointer_targets(traces)
         # A secondary body label alone is not an independent section-start witness.
         candidates = {address for address, entry in entries.items()
                       if address in self.seeds and entry["isa"] == "arm"
@@ -1118,7 +1158,9 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         if analyzer.promote_missing_targets(traces):
             continue
         analyzer.record_entries(traces)
-        if not analyzer.promote_linker_entries(traces):
+        if analyzer.promote_linker_entries(traces):
+            continue
+        if not analyzer.promote_pointer_entries(traces):
             break
     else:
         raise ValueError("entry-target discovery did not converge after 64 rounds")
@@ -1202,6 +1244,8 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
                                 for (target, isa), sources in sorted(analyzer.tail_target_repairs.items())],
         "linker_tail_splits": [{"address": address, "target": address + 4, "isa": "arm"}
                                for address in sorted(analyzer.linker_wrappers)],
+        "pointer_target_repairs": [{"address": address, "isa": isa}
+                                   for address, isa in sorted(analyzer.pointer_target_repairs)],
         "stats": {}, "anomalies": [],
     }
     anomalies.update((issue["address"], issue["issue"]) for issue in validate_catalogue(result, image, layout))
@@ -1242,6 +1286,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "nop_entries": sum(entry["kind"] == "nop_entry" for trace in traces for entry in trace.entries.values()),
         "repaired_tail_targets": len(analyzer.tail_target_repairs),
         "linker_tail_wrappers": len(analyzer.linker_wrappers),
+        "repaired_pointer_targets": len(analyzer.pointer_target_repairs),
     }
     return result
 
