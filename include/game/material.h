@@ -4,19 +4,18 @@
 struct BoundDisplayObject;
 struct ColoredDisplayBinding;
 struct DisplayPaneHolder;
+struct DisplayPane;
 struct Material;
 struct MaterialPair;
 struct MaterialVTable;
 struct MaterialWord;
 struct PaneColor;
-struct PaneLink;
-struct PaneMaterialVTable;
-struct PaneMaterialView;
 struct ResourceArray;
 struct ResourceDimensions;
 struct TextureDisplayBinding;
 
 #include "game/runtime.h"
+#include "game/screen.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct MaterialPair {
@@ -39,7 +38,7 @@ struct Material {
 
 struct DisplayPaneHolder {
     unsigned char reserved00[0x10];
-    struct PaneMaterialView *pane;
+    struct DisplayPane *pane;
 };
 
 struct ColoredDisplayBinding {
@@ -67,30 +66,6 @@ struct PaneColor {
     unsigned char red, green, blue, alpha;
 };
 
-struct PaneMaterialVTable {
-    void (*destroy)(struct PaneMaterialView *);
-    void (*destroy_delete)(struct PaneMaterialView *);
-    void (*reserved08)(void);
-    void (*reserved0c)(void);
-    void (*set_vertex_color)(struct PaneMaterialView *, unsigned int, const struct PaneColor *);
-    void (*reserved14[4])(void);
-    unsigned int (*material_count)(const struct PaneMaterialView *);
-    struct Material *(*material)(struct PaneMaterialView *, unsigned int);
-};
-
-struct PaneLink {
-    struct PaneLink *next;
-    struct PaneLink *previous;
-};
-
-struct PaneMaterialView {
-    const struct PaneMaterialVTable *vtable;
-    struct PaneLink sibling;
-    unsigned char reserved0c[8];
-    struct PaneLink children;
-    unsigned char reserved1c[0x120];
-    struct Material *material;
-};
 
 struct MaterialVTable {
     void (*destroy)(struct Material *);
@@ -102,25 +77,25 @@ struct TextureDisplayBinding {
     int mode;
     int resource;
     unsigned char reserved30[4];
-    struct PaneMaterialView *pane;
+    struct DisplayPane *pane;
     struct Material **material;
 };
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct Material *func_0017fd68(struct PaneMaterialView *pane);
+extern struct Material *func_0017fd68(struct DisplayPane *pane);
 extern struct MaterialPair *func_0014d254(struct Material *material);
 extern struct MaterialWord *func_0014d1ec(struct Material *material);
-extern void func_0017aa90(struct PaneMaterialView *pane, unsigned char red,
+extern void func_0017aa90(struct DisplayPane *pane, unsigned char red,
                         unsigned char green, unsigned char blue,
                         unsigned char alpha);
 extern struct ResourceArray bss_002d5ea0;
 struct Material *func_0017fe04(struct Material *material);
-extern void func_0017fda4(struct PaneMaterialView *pane, struct Material *material);
+extern void func_0017fda4(struct DisplayPane *pane, struct Material *material);
 void func_0017fd0c(struct Material *material, unsigned char count);
 void func_0017fc7c(struct Material *material, unsigned char count);
-void func_0014c5c4(struct PaneMaterialView *pane, struct Material **material,
+void func_0014c5c4(struct DisplayPane *pane, struct Material **material,
                   int resource, int replace);
 extern unsigned char *data_00242fc8;
 extern const unsigned data_00243148[0x5c];

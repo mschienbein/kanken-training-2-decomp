@@ -70,6 +70,8 @@ void *operator new(size_t size, const void *tag) throw();
 extern "C" {
 #endif
 
+/* ARM EABI's four-byte-aligned copy helper; the bound identity is already proven. */
+extern void __aeabi_memcpy4(void *destination, const void *source, size_t size);
 extern void func_00192720(void *destination, const void *source, unsigned size);
 extern void func_0016ee38(struct MotionState *state);
 extern int func_0016ece8(struct MotionState *state, const struct MotionKey *keys, int heap);

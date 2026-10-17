@@ -14,7 +14,7 @@ extern "C" void func_00181100(BoundDisplayObject *object, int resource, int repl
         return;
     }
     Material **slot = binding->material;
-    PaneMaterialView *pane = binding->pane;
+    DisplayPane *pane = binding->pane;
     if (*slot) {
         (*slot)->vtable->destroy_delete(*slot);
         Material *material = static_cast<Material *>(

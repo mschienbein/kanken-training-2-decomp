@@ -1,4 +1,5 @@
 #include "ctr/ipc.h"
+#include "game/applet.h"
 
 extern "C" CtrResult func_0012ff20(unsigned int value, unsigned char enabled)
 {

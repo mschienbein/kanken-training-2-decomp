@@ -1,0 +1,75 @@
+[
+ {
+  "id": "F01",
+  "severity": "blocker",
+  "priority": 2,
+  "confidence": 1.0,
+  "title": "Preserve the accepted contract of the inlined capability callee",
+  "subject": "include/game/resource_font.h:175; func_0016b6a4",
+  "file_path": "include/game/resource_font.h",
+  "line_start": 175,
+  "line_end": 175,
+  "summary": "The new declaration and func_0016b6a4 treat func_001f18c0 as bool(U8Directory *), but its already accepted C++ definition is bool(const FileInputStream *). These are unrelated canonical object contracts, not interchangeable declarations of the same C-linkage function. Preincluding resource_font.h with that accepted definition fails ARMCC with error #338. The constant-return linker rewrite erases the call and therefore hides, rather than validates, this discrepancy; use one evidence-backed canonical contract instead of assigning an incompatible directory identity solely to obtain MATCH.",
+  "evidence": [
+   "scratch/review/c008/openai/cpp-contracts/wave8/func_001f18c0/diagnostic.txt",
+   "src/wave8/func_001f18c0.cpp",
+   "src/wave12/func_0016b6a4.c"
+  ]
+ },
+ {
+  "id": "F02",
+  "severity": "blocker",
+  "priority": 2,
+  "confidence": 1.0,
+  "title": "Keep the SDK applet commands byte-wide parameter contract",
+  "subject": "include/game/applet.h:43; func_001923d4",
+  "file_path": "include/game/applet.h",
+  "line_start": 43,
+  "line_end": 43,
+  "summary": "The new prototype declares func_0012ff20 as unsigned(unsigned, unsigned), while the accepted SDK C++ definition is CtrResult(unsigned int, unsigned char), with CtrResult typedefd to int. The new func_001923d4 caller consequently uses a different return signedness and widens the byte-wide input at the same C-linkage boundary. Including the new canonical header with the accepted definition fails ARMCC error #338. Restore one shared SDK contract, including its actual input width, and reconcile the wrapper signature instead of retaining two incompatible declarations hidden by the unchecked-C++ waiver.",
+  "evidence": [
+   "scratch/review/c008/openai/cpp-contracts/sdk/func_0012ff20/diagnostic.txt",
+   "src/sdk/func_0012ff20.cpp",
+   "include/ctr/svc.h:21",
+   "src/wave14/func_001923d4.c"
+  ]
+ },
+ {
+  "id": "F03",
+  "severity": "blocker",
+  "priority": 2,
+  "confidence": 1.0,
+  "title": "Use the canonical input owner and preserve the forwarded status width",
+  "subject": "src/wave14/func_001462d4.c:5; include/game/display_animation.h:119",
+  "file_path": "src/wave14/func_001462d4.c",
+  "line_start": 5,
+  "line_end": 7,
+  "summary": "The original natural caller func_001821f4 forwards bss_004b97ac, canonically an InputSessionContext, and its unmodified machine-word status to this wrapper; the accepted func_0013e9d8 supplies that status from signed-byte configuration. AudioVolumeState * rejects this canonical caller with ARMCC #167, and the unsigned-short formal adds a truncation absent from the original forwarding path. An independently written caller using the canonical input owner plus int status matches the original entire 16-byte function (exit 0); fixing only the owner while retaining unsigned short instead produces 20 bytes and a mismatch (exit 1). The wrapper itself matches because it ignores its first input and forwards its second without checking the incoming ABI; correct both the shared declaration and definition now rather than waiting for the uncredited caller to expose the contract.",
+  "evidence": [
+   "scratch/review/c008/openai/input-status-boundary-facts.json",
+   "scratch/review/c008/openai/input-status-probes/canonical-narrow/command.log",
+   "scratch/review/c008/openai/input-status-probes/caller-wide/command.log",
+   "scratch/review/c008/openai/input-status-probes/correct-owner-narrow-value/command.log",
+   "src/sdk/func_0013e9d8.c",
+   "include/game/input_runtime.h"
+  ]
+ },
+ {
+  "id": "F04",
+  "severity": "blocker",
+  "priority": 2,
+  "confidence": 0.99,
+  "title": "Unify the shutdown input with the canonical audio task manager",
+  "subject": "src/wave13/func_001838ec.c:6; include/game/audio_voice.h:427",
+  "file_path": "src/wave13/func_001838ec.c",
+  "line_start": 6,
+  "line_end": 9,
+  "summary": "The existing getter func_00185de4 returns AudioTaskManager *, and the original natural caller func_00185d74 calls that getter immediately followed by func_001838ec with the same unadjusted pointer. Introducing unrelated AudioWorker * makes this existing cross-unit contract incompatible: a natural bridge using only the two canonical headers fails ARMCC #167. Matching the flag at +0x28 and queue at +0x38 explains why the isolated body matches but does not make the distinct C struct pointer types compatible. Use the existing manager identity consistently, or explicitly reconcile the canonical shared representation, rather than requiring a cast solely to repair this newly split owner type.",
+  "evidence": [
+   "scratch/review/c008/openai/boundary-facts.json",
+   "scratch/review/c008/openai/audio-manager-probe/diagnostic.txt",
+   "include/game/audio_tasks.h:60",
+   "include/game/audio_voice.h:292-297"
+  ]
+ }
+]

@@ -89,9 +89,14 @@ struct ServiceCoordinator {
     unsigned char reserved132c[0x15b0 - 0x132c];
     unsigned char publish;
 };
+struct AudioChannel;
 struct HandleManager {
-    unsigned char reserved00[0x18];
-    int selected;
+    unsigned pending, queued, completed;
+    unsigned short identifier;
+    unsigned char active, reserved0f;
+    struct StreamMutex mutex;
+    unsigned char reserved1c[0x18dc - 0x1c];
+    struct AudioChannel *channels[24];
 };
 struct AudioChannel;
 struct SharedConfiguration {

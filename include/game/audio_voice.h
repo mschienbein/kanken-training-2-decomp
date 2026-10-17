@@ -3,13 +3,12 @@
 
 struct AnimationTrack;
 struct AudioBiquadCoefficients;
-struct AudioChannelArray;
+struct HandleManager;
 struct AudioCounter;
 struct AudioFadeController;
 struct AudioLinearRamp;
 struct AudioSlotBufferDescriptor001d9580;
 struct AudioVoiceOwner001d9580;
-struct AudioWorker;
 struct ByteCursor001db068;
 struct ConfigState001719f4;
 struct ConfigTarget001719f4;
@@ -90,7 +89,6 @@ struct AudioChannel {
 };
 
 struct RecordState;
-struct AudioChannelOwner { unsigned char reserved00[0x18dc]; struct AudioChannel *channels[24]; };
 struct AudioVoiceGroup {
     struct AudioChannel *channels[2];
     int count;
@@ -272,29 +270,20 @@ struct AudioCounter {
 };
 
 struct AudioLinearRamp {
-    unsigned int reserved00;
+    unsigned char active, output_mode;
+    unsigned char reserved02[2];
     float start;
     float end;
     int duration;
     int elapsed;
 };
 
-struct AudioChannelArray {
-    unsigned char reserved00[0x18dc];
-    struct AudioChannel *channels[24];
-};
 
 struct SequenceEnabledState {
     unsigned char reserved00[0x34];
     unsigned char disabled;
 };
 
-struct AudioWorker {
-    unsigned char reserved00[0x28];
-    unsigned char stopping;
-    unsigned char reserved29[0x0f];
-    struct StreamQueue queue;
-};
 
 struct ConfigState001719f4 {
     unsigned char kind;
@@ -412,7 +401,8 @@ extern void func_0014fc78(struct AudioChannel *channel, float volume);
 extern float func_00151a1c(const struct AudioLinearRamp *ramp);
 extern void func_00152610(struct AudioChannelState *state, unsigned char value);
 extern void func_0015274c(struct AudioChannel *channel, float gain);
-extern void func_00154224(struct AudioChannelArray *array);
+extern void func_00154224(struct HandleManager *array);
+extern void func_0014603c(struct HandleManager *owner);
 extern short *func_0016504c(struct SequencePlayer *player, int index);
 extern void func_00168cd8(struct SequenceEnabledState *state, int enabled);
 extern void func_001d88f0(struct SequencePlayer *player, int event, struct AnimationTrack *track);
@@ -424,7 +414,6 @@ extern int func_00148988(struct ServiceCoordinator *context, unsigned int value)
 extern void func_001489e8(struct ServiceCoordinator *context, unsigned int value);
 extern void func_001526e0(struct AudioChannelState *state, int mode);
 extern unsigned int func_00155d24(unsigned int bits);
-extern void func_001838ec(struct AudioWorker *worker);
 extern void func_001719f4(struct ConfigState001719f4 *state, unsigned char kind, int format,
                   unsigned char option, int index, unsigned flags);
 extern void func_001d4ad4(struct FloatState001d4ad4 *state, float value);

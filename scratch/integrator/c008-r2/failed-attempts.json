@@ -1,0 +1,302 @@
+{
+ "unit_mismatches": [
+  {
+   "source": "src/wave5/func_00115040.c",
+   "profile": "game",
+   "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave5/func_00115040.c",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c008-r2/checks/direct-initial/src/wave5/func_00115040/match",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v2",
+    "--literal-model",
+    "none"
+   ],
+   "exit": 1,
+   "output": "MISMATCH func_00115040 @ 0x115040 size 0x44/0x44 first difference at +0x34\n",
+   "receipt": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/src/wave5/func_00115040.c",
+    "source_sha256": "b4977dc5ee2b026f1371cd61d84bd8966aeca2a97c34a00536313c86bc43b822",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+     "--cpu=MPCore",
+     "--fpmode=fast",
+     "--apcs=/interwork",
+     "--arm",
+     "--split_sections",
+     "--signed_chars",
+     "-O3",
+     "-Otime"
+    ],
+    "object_sha256": "820de44657f2868d5279f36aae4aae4991e8e58ba409e8f233d19997035628b5",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+     {
+      "name": "func_00115040",
+      "address": 1134656,
+      "size": 68,
+      "candidate_size": 68,
+      "status": "mismatch",
+      "first_diff": 52,
+      "linker_rewrites": []
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave14/func_0012fda0.c",
+   "profile": "sdk",
+   "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave14/func_0012fda0.c",
+    "--profile",
+    "sdk",
+    "--out",
+    "scratch/integrator/c008-r2/checks/direct-initial/src/wave14/func_0012fda0/match",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v2",
+    "--literal-model",
+    "none"
+   ],
+   "exit": 1,
+   "output": "MISMATCH func_0012fda0 @ 0x12fda0 size 0x34/0x30 first difference at +0x28\n",
+   "receipt": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/src/wave14/func_0012fda0.c",
+    "source_sha256": "eccd26b31c632ce792ed235e8868e2a5c3b76a27c0e31aa8ac617c54fba124e3",
+    "profile": "sdk",
+    "compiler": "armcc_41_791",
+    "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+    "flags": [
+     "--cpu=MPCore",
+     "--fpmode=fast",
+     "--apcs=/interwork",
+     "--arm",
+     "--split_sections",
+     "--signed_chars",
+     "-O2",
+     "-Otime"
+    ],
+    "object_sha256": "d5dab84a55f71cd3eefbcac24726e8fcb5e28e678fe150e8100472089a2c6eaa",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+     {
+      "name": "func_0012fda0",
+      "address": 1244576,
+      "size": 48,
+      "candidate_size": 52,
+      "status": "mismatch",
+      "first_diff": 40,
+      "linker_rewrites": []
+     }
+    ]
+   }
+  },
+  {
+   "source": "src/wave14/func_00186538.c",
+   "profile": "game",
+   "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave14/func_00186538.c",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c008-r2/checks/direct-initial/src/wave14/func_00186538/match",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v2",
+    "--literal-model",
+    "none"
+   ],
+   "exit": 1,
+   "output": "MISMATCH func_00186538 @ 0x186538 size 0x64/0x60 first difference at +0x4\n",
+   "receipt": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/src/wave14/func_00186538.c",
+    "source_sha256": "0083b12b4eac2007f5acc0406077e9d5b6c544a86091ac83e1a4ff98972893cb",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+     "--cpu=MPCore",
+     "--fpmode=fast",
+     "--apcs=/interwork",
+     "--arm",
+     "--split_sections",
+     "--signed_chars",
+     "-O3",
+     "-Otime"
+    ],
+    "object_sha256": "e9340ae1caab7231534688f9c709630a5a85e53897fc68274b39ffcf0c9138a9",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad",
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+     {
+      "name": "func_00186538",
+      "address": 1598776,
+      "size": 96,
+      "candidate_size": 100,
+      "status": "mismatch",
+      "first_diff": 4,
+      "linker_rewrites": []
+     }
+    ]
+   }
+  }
+ ],
+ "signature_driver_failure": {
+  "command": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c008-r2/probe_signatures.py --run final",
+  "exit": 1,
+  "cause": "KeyError: src/wave11/func_0019d068.c was a newly revised accepted unit not selected by the broad address-symbol header probe because its name is not declared in a canonical header.",
+  "disposition": "Driver fixed to use the actual source's project-header includes for additionally revised units lacking a broad-probe row. No source or compiler setting changed; the failed run and its partial artifacts remain intact."
+ },
+ "bridge_fixture_failure": {
+  "result": {
+   "step": "witnesses",
+   "scope": "direct",
+   "changed_files": [
+    "include/game/applet.h",
+    "include/game/archive.h",
+    "include/game/audio_tasks.h",
+    "include/game/audio_voice.h",
+    "include/game/aux_effect.h",
+    "include/game/display_animation.h",
+    "include/game/event_route.h",
+    "include/game/exp_heap.h",
+    "include/game/input_runtime.h",
+    "include/game/item_pages.h",
+    "include/game/item_text.h",
+    "include/game/material.h",
+    "include/game/resource_font.h",
+    "include/game/runtime.h",
+    "include/game/screen.h",
+    "include/game/selection.h",
+    "include/game/service_runtime.h",
+    "include/game/service_state.h",
+    "include/game/sound_controller.h",
+    "include/game/text.h",
+    "src/retries/func_0012349c.c",
+    "src/retries/func_001234e4.c",
+    "src/retries/func_0012f170.c",
+    "src/sdk/func_0012ff20.cpp",
+    "src/sdk2/func_0014603c.c",
+    "src/wave11/func_0019d068.c",
+    "src/wave11/func_0019dd00.c",
+    "src/wave12/func_001313f4.c",
+    "src/wave12/func_0014856c.c",
+    "src/wave12/func_00168e80.c",
+    "src/wave12/func_0016b6a4.c",
+    "src/wave12/func_001790a8.c",
+    "src/wave12/func_001dd4f8.c",
+    "src/wave12/func_001eb688.c",
+    "src/wave12/func_001eb694.c",
+    "src/wave12/func_001f22ac.c",
+    "src/wave12/func_001f2b98.c",
+    "src/wave13/func_0014aaf4.c",
+    "src/wave13/func_0014ab30.c",
+    "src/wave13/func_00154224.c",
+    "src/wave13/func_0015e9dc.c",
+    "src/wave13/func_0017fda4.cpp",
+    "src/wave13/func_00181100.cpp",
+    "src/wave13/func_001838ec.c",
+    "src/wave14/func_0012fda0.c",
+    "src/wave14/func_001462d4.c",
+    "src/wave14/func_00154f78.c",
+    "src/wave14/func_00177740.c",
+    "src/wave14/func_00186538.c",
+    "src/wave14/func_001923d4.c",
+    "src/wave14/func_00193a6c.c",
+    "src/wave14/func_001e37e0.c",
+    "src/wave14/func_001f22c4.c",
+    "src/wave14/func_001f239c.c",
+    "src/wave5/func_00115040.c",
+    "src/wave6/func_0019dc20.c",
+    "src/wave9/func_0012f1b4.c",
+    "src/wave9/func_0013712c.c"
+   ],
+   "rows": [
+    {
+     "command": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/.cache/toolchain/bin/wibo",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/.cache/toolchain/armcc/5.04/b82/bin/armcc.exe",
+      "-c",
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime",
+      "-I",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/include",
+      "-I",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/.cache/toolchain/armcc/5.04/b82/include",
+      "-o",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/scratch/integrator/c008-r2/checks/witnesses-final/probe.o",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/scratch/integrator/c008-r2/bridges.cpp"
+     ],
+     "diagnostic": "scratch/integrator/c008-r2/checks/witnesses-final/diagnostic.txt",
+     "diagnostic_codes": [
+      "20"
+     ],
+     "exit": 1,
+     "log": "scratch/integrator/c008-r2/checks/witnesses-final/diagnostic.txt"
+    },
+    {
+     "command": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "tools/match.py",
+      "scratch/integrator/c008-r2/witnesses/func_001821f4.c",
+      "--profile",
+      "game",
+      "--out",
+      "scratch/integrator/c008-r2/checks/witnesses-final/caller-match",
+      "--show",
+      "0",
+      "--linker-model",
+      "armlink5-inline-branchnop-v2",
+      "--literal-model",
+      "none"
+     ],
+     "exit": 0,
+     "log": "scratch/integrator/c008-r2/checks/witnesses-final/caller-command.log"
+    }
+   ]
+  },
+  "diagnostic": "\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/scratch/integrator/c008-r2/bridges.cpp\", line 25: Error:  #20: identifier \"func_0014856c\" is undefined\n      func_0014856c(&bss_004b97ac);\n      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c008-r2/scratch/integrator/c008-r2/bridges.cpp: 0 warnings, 1 error\n",
+  "disposition": "Missing game/sound_controller.h in compile-only fixture; added the real canonical header, not a private declaration. Corrected fixture exits 0."
+ },
+ "note": "Known independent-review F01/F02/#167 and C009 width failures are retained separately; no unchanged failed input was rerun to confirm it."
+}

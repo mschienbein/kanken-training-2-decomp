@@ -12,8 +12,8 @@ struct InputLatchSnapshot {
 };
 struct InputSessionContext {
     unsigned char active;
-    unsigned char reserved01[0x3b];
-    int selected;
+    unsigned char reserved01[0x33];
+    struct StreamMutex mutex;
 };
 struct ShortInputUpdate {
     unsigned short flags, value, reserved04, mode;

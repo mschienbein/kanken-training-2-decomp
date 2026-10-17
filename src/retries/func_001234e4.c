@@ -1,15 +1,7 @@
 #include "game/service_state.h"
-#include "ctr/cp15.h"
-#include "ctr/svc.h"
+#include "ctr/ipc.h"
 
 
-static __inline unsigned int ctrIpcStaticBufferDescriptor(unsigned int size,
-                                                          unsigned int index)
-{
-    unsigned int descriptor = index << 10;
-    descriptor |= size << 14;
-    return descriptor | 2u;
-}
 
 unsigned func_001234e4(const void *buffer, unsigned size, unsigned value)
 {
