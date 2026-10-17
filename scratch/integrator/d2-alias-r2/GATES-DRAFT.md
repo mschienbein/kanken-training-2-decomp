@@ -1,11 +1,27 @@
 # Proposed v1.18: composite v5 function-entry aliases
 
-Status: **DRAFT, unadopted**. Main alone owns gate adoption. This proposal depends on the
-separately corrected/re-reviewed v4 bounded-switch model (proposed v1.17), and on independent
-review of this exact v5 composite. Do not use this branch for checkpoint credit before those
-reviews and c008-r2 finalization/closure. Frozen `docs/GATES.md` v1.16 is unchanged; no prepared,
+Status: **DRAFT, unadopted**. Main alone owns gate adoption. V4's exact source series is now
+independently approved PASS_WITH_QUALIFICATIONS in the sealed R3 review identified below.
+V5 still requires independent implementation/exact-text review of this complete composite
+and c008-r2 finalization/closure. Frozen `docs/GATES.md` v1.16 is unchanged; no prepared,
 accepted or historical artifact is rewritten. The model name, not merely a gate number,
 versions behavior. If adoption numbering changes, preserve all normative requirements.
+
+## Approved v4 baseline and inherited qualifications
+
+V4 is exactly the scoped source series `21c2bd44e8048233abf555e95f7485eb09ebe292`,
+`e72fb34a08546173a1033893a9729c5dc996620a`,
+`5187259c427b8fc854642520ded03b7743320be6`. No stale parent is merged and this v5 draft
+does not alter v4 code, its selected behavior or any other frozen model.
+
+Authority: `scratch/review/r1-jumptables-r3/REVIEW.md`,
+**PASS_WITH_QUALIFICATIONS**, SHA-256
+`20bd7edc763b53c0003ae89d85674111d8188fca1cb76e63b89d9c9c37be0107`.
+Its “Exact acceptable GATES text” is the approved v4 text, not text to paraphrase or
+replace in this proposal. All its conditions and qualifications apply to v5 except
+the distinct model authorization and explicitly bounded ELF-alias extension below.
+Only Main may adopt that v4 text, unchanged except for the review's permitted revision/date
+substitutions, after c008-r2 finalizes. V4 approval is not approval or adoption of v5.
 
 ## Exact proposed revision entry
 
@@ -70,9 +86,11 @@ No old or in-flight checkpoint is retroactively selected or reinterpreted.
    Each guard-window instruction must belong to an explicitly modeled effect class;
    architectural destination/NZCV changes must be accounted for even when decoder write
    lists omit them. An empty access list is not preservation evidence. Before recovering
-   tables, every decoded owner instruction must belong to an explicitly modeled
-   state-preserving class; unsupported classes require refusal, not an assumed absence of
-   status changes. Unresolved exception returns, including every RFE addressing form, are
+   tables, every decoded owner instruction must pass the approved explicit class/encoding
+   effect model, including modeled core/NZCV and processor-state effects. This is not a
+   promise that all owner NZCV values remain unchanged. Unsupported classes or subencodings
+   require refusal, not an assumed absence of status changes. Unresolved exception returns,
+   including every RFE addressing form, are
    unknown control/state restoration, never ordinary fall-through or recognized returns.
    Their decoded presence prevents owner-state proof even before the guard, on one
    predecessor, or in an unreachable suffix. All incoming-path setup/entry/result contracts,
@@ -98,12 +116,20 @@ No old or in-flight checkpoint is retroactively selected or reinterpreted.
    review row for every affected caller. No recovered original helper identity, historical
    source call graph, genuine armlink execution or independent source-policy waiver is claimed.
 
+The approved v4 qualifications remain mandatory: explicit effects cover guard and owner-state
+classification, not a complete architectural or interprocedural model of inherited helper
+shape, input-provenance or outgoing-liveness decoder metadata. Little-endian catalogue entries
+and conforming call returns are manual ABI obligations; ordinary FP exceptions and arbitrary
+external behavior are not newly proved. Conservative unsupported subencodings, including the
+one-register scalar-LDR POP alias, remain refusals; ELF entry aliases do not authorize an
+instruction-alias workaround or broaden the v4 allowlist.
+
 ## Mandatory re-review and adoption evidence
 
 - Re-derive the exact corrected composite source/registry and selected identifier. Confirm
   v5 has both `bounded_switches` and `function_entry_aliases`, while strict/v2/v3 retain
-  their frozen flags, decoding, alias rules and bound-name display. Unadopted v4 must keep
-  its alias policy unchanged while receiving its reviewed proof corrections. Check public
+  their frozen flags, decoding, alias rules and bound-name display. Reviewed v4 must remain
+  exactly the approved three-commit baseline and keep its alias policy unchanged. Check public
   match/build consumers, not only private proof helpers. Default v2 remains unchanged.
 - Exercise contradictory copies and identical copies against a wrong 12-byte bound original,
   caller-only and helper-credit consumers, both object orders, retained roots through either

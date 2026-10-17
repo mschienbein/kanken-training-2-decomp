@@ -29,7 +29,7 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v1` (commit c11a0ad) | **retired**: `--linker-model` refuses it | as v2, except that a callee defined in the candidate object was judged by the candidate's own section, never by the original. Independent review (ReviewLinker, F01) showed a wrong local helper could make its caller match: a `bx lr` helper at an address whose original is a 12-byte body, the excluded `MOV r0, r0; BX lr`, a veneer or a multi-entry owner turned the caller's BL into the original's NOP, and a caller-only ledger credited the caller (reproduced on the real image with func_001b6ec4 calling a local `func_0013714c`). Only artifacts of this branch's own checks recorded it. |
 | `armlink5-inline-branchnop-v2` | default | below |
 | `armlink5-inline-branchnop-v3` | frozen opt-in, not the default | all v2 rules plus candidate-only callees in R1 below; original conservative CFG, no resolved jump tables |
-| `armlink5-inline-branchnop-v4` | proposed opt-in, pending independent re-review/adoption | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and conservative endian-state refusal |
+| `armlink5-inline-branchnop-v4` | independently reviewed PASS_WITH_QUALIFICATIONS; unadopted | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
 | `armlink5-inline-branchnop-v5` | unadopted composite proposal | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; explicit selection and composite independent review required |
 
 ## Function-entry alias identity (v5 only, unadopted)
@@ -41,11 +41,12 @@ virtual and non-virtual D1/D2 destructors as one full-section `STT_FUNC` plus a 
 the names alone **never** prove that two implementations are identical.
 
 Only the explicit **`armlink5-inline-branchnop-v5`** selection enables this identity
-extension. V5 composes the corrected v4 bounded-switch CFG, modeled guard effects and
-owner-state proof with the alias rules below; it must be independently reviewed as that
-composite before adoption.
-Frozen `strict-v1`, v2 and v3, and the separately proposed v4, retain their original alias
-behavior: no sibling-name binding inheritance, and no zero-size entry alias in R1.
+extension. V5 composes exactly the independently reviewed v4 baseline with the alias rules
+below; it must be independently reviewed as that composite before adoption. V4's approved
+source series is `21c2bd4` + `e72fb34` + `5187259` (sealed review:
+`scratch/review/r1-jumptables-r3/REVIEW.md`, PASS_WITH_QUALIFICATIONS).
+`strict-v1`, v2, v3 and v4 retain their original alias behavior: no sibling-name binding
+inheritance, and no zero-size entry alias in R1.
 
 `tools/inplace.py::function_aliases` proves identity from the ELF instead: the section must
 be executable, non-NOBITS and fully represented by its candidate bytes; every function
@@ -66,6 +67,11 @@ removal. Global data or untyped definitions are not function aliases and prevent
 Alias identity never waives those modeled effects: missing decoder write metadata is not
 proof that LDREXD/MRRC preserve a bounded index. Unresolved RFE PC/CPSR restoration remains
 unknown control/state, including in an otherwise unreachable decoded owner suffix.
+V4's effect model applies to guard and owner-state classification, not a complete
+architectural/interprocedural proof of inherited helper, input or outgoing decoder metadata.
+Little-endian catalogue entries and conforming call returns remain manual ABI obligations;
+ordinary FP exceptions and arbitrary external behavior are not newly proved. Every v4
+qualification and conservative unsupported-encoding refusal also applies to v5.
 
 Alias binding inheritance is **section-local**, not a guess about another COMDAT copy.
 Before R1 removal, every supplied copy's explicit original bindings are resolved.
