@@ -10,7 +10,7 @@ denominator v7; gates v1.10. Host: WSL2 Ubuntu on the Windows desktop
 into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pushes through
 `gh auth setup-git`.
 
-Restart sequence:
+Restart sequence (accepted now: 489 functions / 19,288 B, seq 5 c005-r2; gates v1.13; profiles game/sdk/middleware):
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules
@@ -45,7 +45,7 @@ hash, test count, accepted-ledger build) in the private `3ds-experiments` repo:
 catalogue hash and `pilot.json` are history.
 `scratch/` was not transferred (author results, packets, review evidence stay on the Mac).
 
-Restart sequence:
+Restart sequence (accepted now: 489 functions / 19,288 B, seq 5 c005-r2; gates v1.13; profiles game/sdk/middleware):
 
 1. **c004-r2** (196 new functions from waves 3–4 + 6 revised accepted units; `main` already has
    both reviews' fixes and `docs/known-issues-c004-r2.md`):

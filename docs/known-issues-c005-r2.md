@@ -6,7 +6,7 @@ wave 7 = 80 / 4,276 B in 78 units. All wave-6/7 authors are collected.
 All authors are OpenAI-family (`openai-codex/gpt-6.1-sol`);
 `author` provenance is retained per unit in `config/candidates/c005.json`.
 The separate wave-5 candidate manifest is replaced by that combined manifest.
-Denominator v7; gates v1.11; linker model `armlink5-inline-branchnop-v2`
+Denominator v7; gates v1.12 at prepare; linker model `armlink5-inline-branchnop-v2`
 ([`LINKER.md`](LINKER.md)). This describes checkpoint content, not acceptance.
 
 Review is single-family under
@@ -189,7 +189,8 @@ reconstructions, not recovered original source names.
   clients; current C++ clients access only the shared prefix. Word padding keeps
   four-byte prefix alignment where the flexible pointer tail supplied it in C.
   No one-element substitute arrays or competing struct definitions are used.
-- Stream queues share the 0xb4-byte layout, and both 0x190-byte StreamManager
+- Stream queues share one layout: a 0x34-byte state prefix followed by a 32-pointer backing
+  vector (0xb4 bytes in all), and both 0x190-byte StreamManager
   instances share their bool full flag and event/ring fields. Bitmap allocation
   and release share the allocator-evidenced signed capacity/used fields; element
   offsets and division by stride remain unsigned.
@@ -335,3 +336,12 @@ reviews and finalize are required anew for c005-r2 acceptance. This worker ran n
 full build/suite or prepare/finalize, authored no canonical-ledger change and
 published nothing. The final composed interface check exits 0 with zero errors,
 zero policy items and no unchecked C; its 25 C++ units are explicitly reported.
+
+## Acceptance (2026-10-17)
+
+Prepare PASS at `9faac65` (two fresh builds identical, 431 tests). `review-c005-openai` and
+`review-c005-second` both PASS_WITH_QUALIFICATIONS (234 rows each; 161/163 PASS, 73/71 QUALIFIED,
+0 FAIL). Both independently confirmed the rejection of the earlier `func_00181700` extra-r1
+finding (adding r1 lengthens both other callers by four bytes and breaks their match). Their minor
+documentation findings (stale gates version, StreamQueue size wording) are corrected above.
+**Finalized** 2026-10-17, history seq 5: 489 functions / 19,288 B accepted (1.71% of 1,129,946 B).

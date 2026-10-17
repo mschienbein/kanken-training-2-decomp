@@ -87,6 +87,7 @@ def function_spans(text: str) -> dict[str, tuple[int, int, int]]:
     """Name -> (declaration start, body start, body end), without interpreting macros.
 
     Token boundaries, not brace regexes, handle strings, comments and nested bodies.
+    Offsets always index the exact input, not the interface parser's expanded text.
     Preprocessor lines are masked only for locating the author's original spelling.
     """
     masked = re.sub(r"^[ \t]*#[^\n]*(?:\\\n[^\n]*)*", lambda m: " " * len(m[0]), text, flags=re.M)
@@ -141,20 +142,25 @@ class Program:
     @classmethod
     def parse(cls, text: str, targets: tuple[str, ...], source: Path,
               original: str | None = None) -> Program:
-        for token in interfaces.TOKEN.finditer(text):
-            if token[0] in {"asm", "__asm", "__asm__", "__svc", "__svc_indirect"}:
-                raise PermuteError("assembly, SVC declarations and named registers are forbidden")
-        prepared = interfaces.prepare(text, source)
+        # Let the interface auditor recognize approved SVC/result/CP15 declarations.
+        # Their raw spelling is retained; target-body annotations still fail closed.
+        try:
+            prepared = interfaces.prepare(text, source)
+        except interfaces.InterfaceError as exc:
+            raise PermuteError(str(exc)) from exc
         try:
             ast = c_parser.CParser().parse(prepared.text, filename=str(source))
         except plyparser.ParseError as exc:
             raise PermuteError("preprocessed input is not supported C (C++ is not supported)") from exc
         functions = {n.decl.name: n for n in ast.ext if isinstance(n, c_ast.FuncDef)}
-        spans = function_spans(prepared.text)
+        parser_spans = function_spans(prepared.text)
+        # prepare() expands __int64 to long long, so its offsets cannot slice text.
+        # Keep parser coordinates for annotation checks and raw coordinates for edits.
+        spans = function_spans(text)
         for name in targets:
-            if name not in functions or name not in spans:
+            if name not in functions or name not in spans or name not in parser_spans:
                 raise PermuteError(f"target function is not defined: {name}")
-            _, start, end = spans[name]
+            _, start, end = parser_spans[name]
             if any(start <= a.start < end for a in prepared.annotations):
                 raise PermuteError(f"target body has ABI-relevant ARMCC annotations: {name}")
             if functions[name].param_decls:
@@ -190,7 +196,7 @@ class Program:
 
     def hints(self, ast: c_ast.FileAST | None) -> tuple[str, str]:
         text = self.text if ast is None else self.render(ast)
-        spans = function_spans(interfaces.prepare(text, Path("candidate.c")).text)
+        spans = function_spans(text)
         functions, patches = [], []
         for name in self.targets:
             start, _, end = spans[name]

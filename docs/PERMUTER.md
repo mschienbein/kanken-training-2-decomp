@@ -17,9 +17,13 @@ The time budget stops scheduling rounds; an in-flight compile round is allowed t
 
 Preprocessing calls `interfaces.preprocess` directly: ARMCC `-E`, the pinned profile,
 the same launcher, and the same project/compiler include paths as the interface auditor.
-`interfaces.prepare` handles parser-facing ARMCC extensions. The unmodified preprocessed
-translation unit is retained, and only selected function bodies are regenerated with
-pycparser. All other functions, declarations, headers and ABI annotations remain verbatim.
+`interfaces.prepare` handles parser-facing ARMCC extensions. Parser offsets belong to
+that prepared text (including expanded `__int64` types), while edit and hint offsets
+always belong to the unmodified preprocessed translation unit. Only selected function
+bodies are regenerated with pycparser; other functions, declarations, headers and ABI
+annotations remain verbatim. Approved `ctr/svc.h` SVC/register-result declarations and
+`ctr/cp15.h` named-coprocessor-register helpers are accepted and preserved outside target
+bodies, using the interface auditor's extension rules.
 
 Each evaluation calls `toolchain.compile_source(cache=False)` in a private per-worker
 scratch directory, then `match.Context.compare`, using the frozen
@@ -59,8 +63,9 @@ The conservative AST mutations include:
 The default game profile is C90: when a mutation introduces a declaration after executable
 code, a suffix scope preserves initialization order instead of hoisting it. Unknown aliases,
 union fields, volatile accesses, ambiguous shadowed types and relevant goto/label cases are
-excluded from transformations that need independence or scope reasoning. No asm, `__svc`,
-named registers, new volatile qualifiers, arbitrary sign changes or changed constants are used.
+excluded from transformations that need independence or scope reasoning. No assembly,
+named registers, SVC annotations, new volatile qualifiers, arbitrary sign changes or
+changed constants are introduced by mutations.
 
 `initial.*` preserves the starting point. Every strictly improved worker best is retained as
 `improvement-NNNNNN.*`; a normalized-body improvement is also retained. `best.c` is the complete
@@ -73,8 +78,9 @@ Port the useful change back to clean source, then use the normal matching and re
 ## Limits and tests
 
 C only, not C++. Parser-unsupported constructs, ABI-relevant annotations inside a target
-body, old-style definitions, macros that generate whole function definitions, assembly and
-pragmas that the interface parser cannot model are refused rather than silently stripped.
+body (including CP15 named registers), old-style definitions, macros that generate whole
+function definitions, assembly/core-register bindings and pragmas that the interface
+parser cannot model are refused rather than silently stripped.
 The search is deliberately conservative and incomplete: it cannot repair incorrect semantics,
 invent types/interfaces, fix catalogue boundaries, prove arbitrary alias independence, or
 guarantee finding an existing matching spelling. A byte match remains an author hint, not
@@ -85,8 +91,10 @@ new floating temporaries.
 .venv/bin/python -m unittest tests.test_permute
 ```
 
-The module tests reparsing, target-only edits, safety guards, deterministic hill-climbing and
-bounded multiprocessing, synthetic real-compiler mutations/scoring, and optional native
-execution comparisons. Compiler tests skip without the pinned compiler/launcher; image tests
+The module tests reparsing, target-only edits, overlapping function names, prepared/raw
+offset separation, approved extension headers, clean C++ refusal, safety guards,
+deterministic hill-climbing and bounded multiprocessing, synthetic real-compiler
+mutations/scoring, and optional native execution comparisons.
+Compiler tests skip without the pinned compiler/launcher; image tests
 also skip without private `orig/code.bin` and `orig/exheader.bin`. All temporary artifacts stay
 in `scratch/`; no full build or full test suite is required.
