@@ -1,8 +1,6 @@
-/* [INFERENCE] Signature: Callee packet consumes r1 and r2 while replacing r0 with a fixed argument for func_0014c360; wrapper caller func_0018191c tests the result. */
+#include "game/hwr_image.h"
 
-extern int func_0014a98c(unsigned unused, unsigned value, int enabled);
-
-int func_0014a988(unsigned unused, unsigned value, int enabled)
+int func_0014a988(unsigned width, unsigned height, struct HwrImage *image)
 {
-    return func_0014a98c(unused, value, enabled);
+    return func_0014a98c(width, height, image);
 }

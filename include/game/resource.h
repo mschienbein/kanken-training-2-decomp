@@ -7,13 +7,22 @@
 #error "game/resource.h is C++ only"
 #endif
 
+#include "game/result.h"
+
+struct ResourceSize {
+    unsigned low;
+    unsigned high;
+    unsigned long long get() const { return ((unsigned long long)high << 32) | low; }
+    void set(unsigned long long value) { low = (unsigned)value; high = (unsigned)(value >> 32); }
+};
+
 class Resource {
 public:
     virtual unsigned read(unsigned *transferred, unsigned long long offset,
                           void *buffer, unsigned size);
     virtual void slot01();
     virtual void slot02();
-    virtual void slot03();
+    virtual Result get_size(ResourceSize *size);
     virtual void slot04();
     virtual void slot05();
     virtual void slot06();

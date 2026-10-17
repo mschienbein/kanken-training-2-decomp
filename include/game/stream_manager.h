@@ -79,8 +79,14 @@ extern void func_00180884(struct StreamQueue *queue, struct StreamEvent **storag
 extern struct StreamManager *func_00143d1c(struct StreamManager *manager);
 extern void func_001812f8(struct StreamManager *manager);
 extern int func_00181280(struct StreamSemaphore *semaphore, int amount);
+extern struct StreamManager *func_001916e8(void);
+extern void *func_0019147c(struct StreamManager *manager, unsigned words);
+extern unsigned func_00191458(struct StreamManager *manager, struct StreamEvent *event);
+extern unsigned func_001912b0(struct StreamManager *manager, int wait);
+extern void func_0019124c(struct StreamManager *manager, unsigned serial);
 extern void func_00192bd8(struct StreamMutex *mutex);
 extern void func_00195d74(struct StreamMutex *mutex);
+extern int func_001837c8(struct StreamQueue *queue, struct StreamEvent **output);
 #ifdef __cplusplus
 }
 #endif

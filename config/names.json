@@ -34,6 +34,66 @@
       "address": 1642956,
       "evidence": "scratch/integrator/runtime-helpers/REPORT.md: natural C++ member-array constructor at 0x0014d2e4 MATCH; unresolved without helper binding"
     },
+    "__cxa_guard_acquire": {
+      "address": 1645696,
+      "evidence": "scratch/authors/w8c/match/func_00180234/final-2/func_00180234.result.json: guarded Matrix34 identity singleton MATCH; guard acquire observes and sets the guard word"
+    },
+    "__cxa_guard_release": {
+      "address": 2186948,
+      "evidence": "[INFERENCE] scratch/authors/w8c/match/func_00180234/final-2/func_00180234.result.json: MATCH with armlink-inlined guard release; eligible return-only callee identity is unrecoverable"
+    },
+    "_ZZ16matrix34IdentityvE14identity_value": {
+      "address": 5124644,
+      "evidence": "scratch/authors/w8c/match/func_00180234/final-2/func_00180234.result.json: whole-function MATCH proves placement of the twelve-float identity static"
+    },
+    "_ZGVZ16matrix34IdentityvE14identity_value": {
+      "address": 2373880,
+      "evidence": "scratch/authors/w8c/match/func_00180234/final-2/func_00180234.result.json: whole-function MATCH proves the identity static guard placement"
+    },
+    "_ZN19ResourceCursorStateC1Ev": {
+      "address": 1205028,
+      "evidence": "scratch/authors/w9c/match/func_00126324/final/func_00126324.result.json: constructor MATCH; 0x117648 supplies this 20-byte-record initializer as an array callback; class name [INFERENCE]"
+    },
+    "_ZN19ResourceCursorStateC2Ev": {
+      "address": 1205028,
+      "evidence": "scratch/authors/w9c/match/func_00126324/final/func_00126324.result.json: MATCH proves ARMCC base-constructor alias at the same entry"
+    },
+    "_ZN14ResourceResultC1Ev": {
+      "address": 1697124,
+      "evidence": "scratch/authors/w9c/match/func_0019e564/final/func_0019e564.result.json: eight-byte result constructor MATCH; class name [INFERENCE]"
+    },
+    "_ZN14ResourceResultC2Ev": {
+      "address": 1697124,
+      "evidence": "scratch/authors/w9c/match/func_0019e564/final/func_0019e564.result.json: MATCH proves ARMCC base-constructor alias at the same entry"
+    },
+    "_ZnwjPKv": {
+      "address": 1703844,
+      "evidence": "scratch/authors/L002 and L003 final whole-function MATCH receipts: natural tagged operator new(size, const void *) aliases func_0019ffa4; no allocator body is credited under this name"
+    },
+    "_ZN9NameTableC1EiiPKciz": {
+      "address": 1461596,
+      "evidence": "c006 integration canonical NameTable: same constructor entry proven by w8a, w10f, L002 and L003 whole-function matches; semantic class name [INFERENCE]"
+    },
+    "_ZN9NameTableC1Ev": {
+      "address": 1499244,
+      "evidence": "c006 integration canonical NameTable: same default constructor entry proven by w10f, L002 and L003 whole-function matches; semantic class name [INFERENCE]"
+    },
+    "_ZN15RenderParameterC1Ev": {
+      "address": 1461952,
+      "evidence": "scratch/authors/w10i/match/func_00164ec0/final/func_00164ec0.result.json: native default constructor MATCH"
+    },
+    "_ZN15RenderParameterC2Ev": {
+      "address": 1461952,
+      "evidence": "scratch/authors/w10i/match/func_00164ec0/final/func_00164ec0.result.json: native base-constructor alias MATCH"
+    },
+    "_ZN15RenderParameterC1Effjjjj": {
+      "address": 1461964,
+      "evidence": "scratch/authors/w10i/match/func_00164ecc/final/func_00164ecc.result.json: native two-float/four-unsigned constructor MATCH"
+    },
+    "_ZN15RenderParameterC2Effjjjj": {
+      "address": 1461964,
+      "evidence": "scratch/authors/w10i/match/func_00164ecc/final/func_00164ecc.result.json: native base-constructor alias MATCH"
+    },
     "__aeabi_ldivmod": {
       "address": 1626628,
       "evidence": "scratch/authors/w12f: natural signed 64-bit division/modulo in func_001efb00, func_001efb68, func_00190fcc, func_00191024, func_0019107c MATCH only with this binding (integrator re-ran func_001efb00: unresolved before, MATCH after)"

@@ -1,4 +1,4 @@
-#include "game/runtime.h"
+#include "game/resource_tables.h"
 
 class ResourceObject {
 public:
@@ -33,24 +33,8 @@ public:
     virtual void release();
 };
 
-struct ResourceEntry {
-    int active;
-    void *allocation;
-    ResourceObject *object;
-    unsigned char reserved[3];
-    unsigned char flag;
-    unsigned char tail[8];
-};
 
-struct ResourceTable {
-    ResourceEntry *entries;
-    int count;
-    int activeCount;
-};
-
-extern "C" ResourceTable bss_002d3d60;
-
-extern "C" void func_0011f080(ResourceEntry *entry)
+extern "C" void func_0011f080(ResourceTableEntry *entry)
 {
     if (entry->active) {
         entry->active = 0;

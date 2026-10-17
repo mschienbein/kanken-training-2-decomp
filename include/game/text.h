@@ -33,6 +33,8 @@ extern "C" {
 extern int func_0017adc4(const unsigned short *text);   /* length in code units */
 extern const unsigned short *func_00179090(const struct MenuItem *item);
 extern const unsigned short *func_001791e0(const struct TextTable *table, int index);
+extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_limit,
+                                    const unsigned short *source);
 
 #ifdef __cplusplus
 }
