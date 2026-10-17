@@ -248,3 +248,33 @@ record binds original alias-review SHA-256
 No old failure was rerun merely to confirm it. No independent PASS or adoption is claimed.
 Main must verify serially and obtain a new independent review of this complete corrected
 composite; frozen gates and the c008-r2 finalization boundary remain unchanged.
+
+## Final review input on the independently approved v4 baseline
+
+V4's sealed R3 review is **PASS_WITH_QUALIFICATIONS** for exactly the three scoped
+commits identified at the top of this draft. This composite makes no further v4 change.
+Its approval text and qualifications are preserved verbatim by reference; v5 remains
+unadopted and still requires its own independent implementation/exact-text review.
+
+The requested focused smoke was executed at
+`71d17dcc4ab44747dce8eca772c7dbdb2646bf31`: **exit 0, 24 direct assertion groups PASS**,
+including six guard-write and 64 RFE public refusals, six compiler-object alias pair/binding
+positives, full-section equality/metadata preservation, COMDAT/root/owner/extent safeguards,
+complete v4 policy-field inheritance and unchanged old-model alias behavior.
+
+Exact command, with working directory `scratch/worktrees/d2-alias-r2`:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python -B -c 'import hashlib,json; from pathlib import Path; data=Path("scratch/integrator/d2-alias-r2/smoke-v5-hardening-r3.json").read_bytes(); assert hashlib.sha256(data).hexdigest()=="7030573bdaf9ec9fd353d39a8d23b2f4b29b379ad4d515750ef4222e62b51007"; exec(json.loads(data)["command"][3])'
+```
+
+This executes the previously retained, hash-pinned focused program, not a full test runner
+or build. No compiler or private-image match runs. New evidence:
+`scratch/integrator/d2-alias-r2/smoke-v5-reviewed-v4.json`,
+SHA-256 `74592a75fde70e3ef4b0a84e58e64e556e5f507336c5d275942fee49a99c75f6`.
+The final documentation-only successor and exact command are recorded in
+`result-v5-reviewed-v4.json`. All earlier records and sealed reviews remain unchanged.
+
+Main next runs its serialized integration suite and dispatches independent review of the
+complete main-based v5 composite. V4 approval, this focused smoke and this draft do not
+approve v5, adopt a gate, grant credit or alter the post-c008-r2 activation boundary.
