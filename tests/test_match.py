@@ -1,12 +1,17 @@
-"""Catalogue-bounded display of synthetic instructions and data in tools/match.py."""
+"""Catalogue-bounded display, placement refusals and CLI exit semantics in tools/match.py."""
+import io
+import json
 import struct
 import sys
+import tempfile
 import unittest
+from contextlib import ExitStack, redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import match  # noqa: E402
+from tests.test_inplace import BASE as IMAGE_BASE, placement_failure_fixture  # noqa: E402
 
 BASE = 0x10007C
 
@@ -182,6 +187,141 @@ class ModelOptionsTest(unittest.TestCase):
             self.assertEqual(match.main(["candidate.cpp", "--profile", "game"]), 0)
         self.assertEqual(run.call_args.args[5], match.inplace.DEFAULT_LINKER_MODEL)
         self.assertEqual(run.call_args.args[-1], "none")
+
+
+class PlacementRefusalTest(unittest.TestCase):
+    def invoke(self, obj, image, catalogue):
+        if not hasattr(image, "sha256"):
+            image.sha256 = "synthetic-image"
+        if not hasattr(image, "bss"):
+            image.bss = (0x300000, 0x301000)
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            source = root / "candidate.c"
+            source.write_text("void func_00100000(void) {}\n", encoding="utf-8")
+            compiler = root / "compiler"
+            compiler.write_bytes(b"synthetic compiler hash input")
+            catalogue_path = root / "catalogue.json"
+            catalogue_record = {"image_sha256": image.sha256, "functions": list(catalogue.values())}
+            catalogue_path.write_text(json.dumps(catalogue_record), encoding="utf-8")
+            out_dir = root / "out"
+            profile = match.toolchain.Profile("game", "synthetic", ())
+
+            def compile_source(profile, source, output):
+                output.parent.mkdir(parents=True, exist_ok=True)
+                output.write_bytes(b"synthetic object hash input")
+
+            for module, name, kwargs in (
+                (match.toolchain, "load_profiles", {"return_value": {"game": profile}}),
+                (match.toolchain, "compile_source", {"side_effect": compile_source}),
+                (match.toolchain, "armcc_exe", {"return_value": compiler}),
+                (match.image_mod.Image, "load", {"return_value": image}),
+                (match.image_mod, "load_catalogue", {"return_value": catalogue_record}),
+                (match.image_mod, "load_names", {"return_value": {}}),
+                (match.inplace, "ObjectFile", {"return_value": obj}),
+            ):
+                stack.enter_context(patch.object(module, name, **kwargs))
+            stdout, stderr = io.StringIO(), io.StringIO()
+            with redirect_stdout(stdout), redirect_stderr(stderr):
+                code = match.main([str(source), "--profile", "game", "--catalogue", str(catalogue_path),
+                                   "--out", str(out_dir), "--show", "0"])
+            record = json.loads((out_dir / "candidate.result.json").read_text(encoding="utf-8"))
+            return code, record, stderr.getvalue()
+
+    def test_preserved_crash_classes_exit_two_and_record_the_placement_reason(self):
+        for base, name, offset in ((0xE1A04000, ".constdata", 0), (0, ".rodata._ZTI6Layout", 4)):
+            with self.subTest(section=name):
+                obj, image, catalogue = placement_failure_fixture(base, name, offset)
+                code, record, stderr = self.invoke(obj, image, catalogue)
+                self.assertEqual(code, 2)
+                self.assertEqual(record["status"], "refused")
+                self.assertEqual(record["error_type"], "LinkError")
+                self.assertEqual(record["functions"], [])
+                self.assertIn(f"{name}+{offset:#x}", record["reason"])
+                self.assertIn(f"{base + offset:#x}", record["reason"])
+                self.assertIn(record["reason"], stderr)
+                self.assertNotIn("Traceback", stderr)
+
+    def test_ordinary_constdata_refusal_is_not_exit_one(self):
+        code, record, stderr = self.invoke(*placement_failure_fixture(0xE1A04000, nested=False))
+        self.assertEqual(code, 2)
+        self.assertEqual(record["status"], "refused")
+        self.assertIn(".constdata", record["reason"])
+        self.assertNotIn("Traceback", stderr)
+
+    def test_alias_offset_refuses_before_a_missing_catalogue_key_is_used(self):
+        obj, image, catalogue = placement_failure_fixture(0)
+        obj.sections[1].relocs = []
+        obj.symbols = [match.inplace.Symbol("func_00100000", 4, 4, "STT_FUNC", "STB_GLOBAL", 1)]
+        code, record, _ = self.invoke(obj, image, catalogue)
+        self.assertEqual(code, 2)
+        self.assertIn("section base 0xffffc", record["reason"])
+        self.assertIn("not a catalogued function start", record["reason"])
+
+    def test_byte_and_extent_comparison_exits_are_unchanged(self):
+        for size, original, expected_exit, expected_status in (
+            (4, 0, 0, "match"), (4, 1, 1, "mismatch"), (8, 0, 1, "match_extent_differs"),
+        ):
+            with self.subTest(status=expected_status):
+                obj, image, catalogue = placement_failure_fixture(original)
+                obj.sections[1].relocs = []
+                obj.sections[1].data = bytes(size)
+                obj.sections[1].size = size
+                code, record, stderr = self.invoke(obj, image, catalogue)
+                self.assertEqual(code, expected_exit)
+                self.assertEqual(record["functions"][0]["status"], expected_status)
+                self.assertNotIn("reason", record)
+                self.assertEqual(stderr, "")
+
+    def test_candidate_without_functions_is_a_recorded_refusal(self):
+        obj, image, catalogue = placement_failure_fixture(0)
+        obj.sections, obj.symbols = {}, []
+        code, record, _ = self.invoke(obj, image, catalogue)
+        self.assertEqual(code, 2)
+        self.assertIn("no surviving catalogued functions", record["reason"])
+
+    def test_ordinary_compare_valueerror_at_image_end_uses_catalogue_extent(self):
+        ctrfmt = match.image_mod.ctrfmt
+        layout = ctrfmt.CodeLayout(
+            "SYNTH", False, ctrfmt.CodeSegment("text", IMAGE_BASE, 1, 0x1000),
+            ctrfmt.CodeSegment("rodata", IMAGE_BASE + 0x1000, 0, 0),
+            ctrfmt.CodeSegment("data", 0x200000, 0, 0), 0x1000, 0, (),
+        )
+        image = match.image_mod.Image(bytes(0x1000), layout)
+        obj, _, _ = placement_failure_fixture(0)
+        obj.sections[1].relocs = []
+        obj.sections[1].data, obj.sections[1].size = bytes(8), 8
+        obj.symbols = [match.inplace.Symbol("func_00100ffc", 0, 8, "STT_FUNC", "STB_GLOBAL", 1)]
+        catalogue = {IMAGE_BASE + 0xFFC: {"address": IMAGE_BASE + 0xFFC, "size": 4, "isa": "arm"}}
+        code, record, stderr = self.invoke(obj, image, catalogue)
+        self.assertEqual(code, 1)
+        self.assertEqual(record["functions"][0]["status"], "mismatch")
+        self.assertEqual(record["functions"][0]["first_diff"], 4)
+        self.assertEqual(stderr, "")
+
+    def test_inferred_section_crossing_segments_is_a_contextual_refusal(self):
+        ctrfmt = match.image_mod.ctrfmt
+        layout = ctrfmt.CodeLayout(
+            "SYNTH", False, ctrfmt.CodeSegment("text", IMAGE_BASE, 1, 0x1000),
+            ctrfmt.CodeSegment("rodata", IMAGE_BASE + 0x2000, 1, 0x1000),
+            ctrfmt.CodeSegment("data", IMAGE_BASE + 0x4000, 1, 0x1000), 0x1000, 0, (),
+        )
+        code_bytes = bytearray(0x3000)
+        struct.pack_into("<I", code_bytes, 0, IMAGE_BASE + 0xFFC)
+        image = match.image_mod.Image(bytes(code_bytes), layout)
+        obj, _, catalogue = placement_failure_fixture(IMAGE_BASE + 0xFFC, nested=False)
+        obj.sections[2].data, obj.sections[2].size = bytes(0x1008), 0x1008
+        code, record, _ = self.invoke(obj, image, catalogue)
+        self.assertEqual(code, 2)
+        self.assertIn(".constdata", record["reason"])
+        self.assertIn("crosses a segment boundary", record["reason"])
+
+    def test_internal_valueerror_and_keyerror_remain_visible(self):
+        for error in (ValueError("internal arithmetic"), KeyError("internal invariant")):
+            with self.subTest(error=type(error).__name__), \
+                    patch.object(match.inplace.InPlaceLinker, "place", side_effect=error):
+                with self.assertRaises(type(error)):
+                    self.invoke(*placement_failure_fixture(0))
 
 
 if __name__ == "__main__":
