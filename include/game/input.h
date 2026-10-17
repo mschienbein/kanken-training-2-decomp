@@ -38,9 +38,21 @@ struct InputServiceConfiguration {
     const char *service_name;
 };
 
+struct InputPoint { float x, y; };
+struct TouchDeviceState {
+    unsigned char reserved00[0x0c];
+    unsigned active;
+    unsigned char reserved10[8];
+    unsigned flags;
+    unsigned char reserved1c[8];
+    unsigned released;
+    unsigned char reserved28[0x10];
+    struct InputPoint position;
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern struct TouchDeviceState bss_004972d8;
 extern struct InputService bss_004b1fb0;
 extern const struct InputServiceConfiguration data_0021b0ec;
 extern unsigned char data_00242c50[];

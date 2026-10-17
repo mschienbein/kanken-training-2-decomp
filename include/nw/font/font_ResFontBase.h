@@ -8,6 +8,7 @@
 #pragma once
 
 #include <nw/types.h>
+#include <nw/font/font_Types.h>
 #include <nw/font/font_Font.h>
 
 namespace nw{

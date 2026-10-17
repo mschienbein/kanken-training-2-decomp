@@ -15,10 +15,9 @@ struct W11Queue {
     struct W11QueueTail tail;
 };
 
-struct W11WakeEvent;
+#include "game/synchronization.h"
 extern struct W11QueueTail bss_0049a0d0;
-extern struct W11WakeEvent bss_0049a0e8;
-extern void func_0019ea6c(struct W11WakeEvent *event);
+extern struct SignalState bss_0049a0e8;
 
 void func_00186598(void)
 {

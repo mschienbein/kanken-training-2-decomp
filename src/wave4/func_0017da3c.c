@@ -1,17 +1,4 @@
-struct RecordState {
-    unsigned int words[4];
-    union {
-        unsigned int word;
-        struct {
-            unsigned char first;
-            unsigned char second;
-            unsigned char third;
-            unsigned char fourth;
-        } bytes;
-    } flags;
-    unsigned int value;
-};
-
+#include "game/audio_voice.h"
 void func_0017da3c(struct RecordState *state)
 {
     state->words[0] = 0;

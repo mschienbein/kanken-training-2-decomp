@@ -24,7 +24,8 @@ struct Animation {
     unsigned flags;
     unsigned char reserved04[4];
     struct AnimationChild **children;
-    unsigned char reserved0c[0x34];
+    unsigned char reserved0c[0x24];
+    float coordinates[4];
     float bounds[4];
     float width;
     float height;

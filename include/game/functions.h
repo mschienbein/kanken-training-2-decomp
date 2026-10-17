@@ -37,6 +37,8 @@ extern void func_00100000(void);
 extern int func_00191c80(volatile unsigned int *guard);
 extern int func_00122500(void);
 extern void func_00122510(void);
+extern void *func_00186488(void *object);
+extern void func_00186fbc(unsigned *state);
 extern void *func_00125b54(void *object);
 extern unsigned func_001424c0(void);
 extern unsigned func_001424d0(void);

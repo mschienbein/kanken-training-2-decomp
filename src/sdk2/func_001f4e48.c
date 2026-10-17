@@ -1,5 +1,5 @@
 #include <stddef.h>
-#include "game/functions.h"
+#include "game/object_manager.h"
 
 struct OperationSettings {
     unsigned value;
@@ -38,8 +38,6 @@ struct Operation {
     struct OperationTransform transform;
 };
 
-extern struct ObjectManager *func_00185d1c(void);
-extern void func_0017e634(struct ObjectManager *manager, struct RegistryEntry *entry);
 
 void func_001f4e48(struct RegistryEntry *entry, unsigned first, unsigned last)
 {

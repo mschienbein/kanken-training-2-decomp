@@ -1,6 +1,4 @@
-struct ServiceObject { unsigned handle; };
-extern unsigned func_0019058c(const struct ServiceObject *object);
-
+#include "game/service_protocol.h"
 unsigned func_0012d7a0(struct ServiceObject *out, struct ServiceObject object)
 {
     unsigned result;

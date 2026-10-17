@@ -12,6 +12,19 @@ struct ParameterValue { int value; };
 struct VectorParameter { int kind, first, second; float x, y, z; int extra; };
 struct ParameterRecord { int kind, first, second, third; float x, y, z; };
 
+struct CommandResetContext;
+struct CommandTarget;
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct CommandTarget bss_00290fc4, bss_00290f8c, data_0023f014, bss_00290e98;
+/* [INFERENCE] The four wrappers supply writable targets and the same signed
+ * selector/mode/flag words. They ignore the result; original target layout and
+ * semantic role remain unrecovered. */
+extern void func_0017a7e4(struct CommandTarget *target, int value, int mode, unsigned flags);
+#ifdef __cplusplus
+}
+#endif
 #ifdef __cplusplus
 struct W11BaseCommand {
     W11BaseCommand();

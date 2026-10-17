@@ -1,10 +1,4 @@
-#include "game/service_state.h"
-
-struct ServiceObject { unsigned handle; };
-struct ServiceConfiguration;
-extern unsigned func_00136510(const struct ServiceConfiguration *configuration);
-extern unsigned func_001365e0(const struct ServiceConfiguration *configuration);
-
+#include "game/service_protocol.h"
 unsigned func_0012dc7c(const struct ServiceObject *object)
 {
     void *memory;

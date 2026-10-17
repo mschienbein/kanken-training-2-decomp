@@ -1,6 +1,8 @@
 #include "game/archive_resource.h"
+/* [INFERENCE] Both direct callers explicitly supply zero in the fourth core
+ * argument slot. The original body ignores this word; flag semantics are not recovered. */
 _Bool func_00140e14(struct ArchiveLocationReader *index, unsigned resource_id,
-                  struct ArchiveFileLocation *location)
+                  struct ArchiveFileLocation *location, unsigned flags)
 {
     const struct ArchiveResourceReference *reference = func_00144114(index->info, resource_id);
     if (reference) {

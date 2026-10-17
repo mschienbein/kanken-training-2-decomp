@@ -20,7 +20,7 @@ class DisposeCallback
 public:
     ut::LinkListNode m_DisposeLink;
 
-    virtual ~DisposeCallback() { }
+    virtual ~DisposeCallback();
     virtual void InvalidateData(const void* start, const void* end) = 0;
 };
 

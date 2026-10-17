@@ -1,13 +1,4 @@
-#include "game/screen.h"
-
-struct W11ControlScreen {
-    unsigned char reserved00[0x0c];
-    struct WidgetSlot *slots[10];
-    int layout;
-    int active;
-    int selection;
-};
-
+#include "game/w11_control.h"
 static __inline void set_object_active(struct DisplayObject *object, int enabled)
 {
     if (object != 0) {

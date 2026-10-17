@@ -1,15 +1,4 @@
-struct W11TextEntry {
-    int text_offset;
-    unsigned reserved04;
-    int attributes_offset;
-    unsigned reserved0c;
-};
-
-struct W11TextResource {
-    unsigned char reserved00[0x10];
-    const struct W11TextEntry *entries;
-};
-
+#include "game/messages.h"
 const unsigned short *func_00170c00(const struct W11TextResource *resource, int index)
 {
     const struct W11TextEntry *entries = resource->entries;

@@ -1,16 +1,4 @@
-#include "game/screen.h"
-
-struct W11ControlScreen {
-    unsigned char reserved00[0x0c];
-    struct WidgetSlot *slots[10];
-    int layout;
-    int active;
-    int selection;
-};
-
-extern void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled);
-extern void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y);
-
+#include "game/w11_control.h"
 static __inline void set_all_controls(struct W11ControlScreen *screen, int enabled)
 {
     int index;

@@ -1,0 +1,104 @@
+/* SPDX-License-Identifier: GPL-3.0-only
+ * NintendoWare4Ctr contributors; upstream include/nw/Assert.h
+ * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
+ * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
+ * Modified 2026-10-17: remove SDK debug-header dependencies; only the original NW_RELEASE configuration is supported.
+ * This file is free software under GNU GPL version 3; see LICENSE.txt.
+ */
+#pragma once
+
+#ifndef NW_RELEASE
+#error "The imported NW4C candidates require the upstream release assertion configuration"
+#endif
+
+#ifdef NW_RELEASE
+  #define NW_WARNING(exp, ...) ((void)0)
+  #define NW_ASSERTMSG(exp, ... ) ((void)0)
+  #define NW_POINTER_ASSERT(exp)                                                                                            \
+              NW_ASSERTMSG(                                                                                                 \
+                    (((exp) & 0xFF000000) == 0x80000000)     \
+                  || (((exp) & 0xFF800000) == 0x81000000)    \
+                  || (((exp) & 0xF8000000) == 0x90000000)    \
+                  || (((exp) & 0xFF000000) == 0xC0000000)    \
+                  || (((exp) & 0xFF800000) == 0xC1000000)    \
+                  || (((exp) & 0xF8000000) == 0xD0000000)    \
+                  || (((exp) & 0xFFFFC000) == 0xE0000000),   \
+                  "NW:Pointer Error\n"#exp"(=%p) is not valid pointer.", (exp) )
+
+  #define NW_GL_ASSERT() ((void)0)
+  #define NW_FATAL_ERROR    true ? 0:
+#else
+  #define NW_WARNING(exp, ...) (void) ((exp) || (nwosWarning(__VA_ARGS__), 0))
+  #define NW_ASSERTMSG(exp, ... ) (void) ((exp) || (nwosPanic(__VA_ARGS__), 0))
+  #define NW_POINTER_ASSERT(exp)                                                                                            \
+              NW_ASSERTMSG(                                                                                                 \
+                  exp != 0,                                                                            \
+                  "NW:Pointer Error\n"#exp"(=%p) is not valid pointer.", (exp) )
+  #define NW_FATAL_ERROR(...) \
+              NW_ASSERTMSG( false, "NW:Fatal Error\n"__VA_ARGS__ )
+  #define NW_GL_ASSERT()                                              \
+    do {                                                            \
+        GLuint err = glGetError();                                  \
+        NW_ASSERTMSG( err == GL_NO_ERROR, "GL_ERROR : %s (0x%x)", nwGlErrorString( err ), err ); \
+    } while (0)                                                     
+#endif
+
+// ASSERT
+
+#ifndef NW_ASSERT
+#define NW_ASSERT(exp) \
+            NW_ASSERTMSG( (exp), "NW:Failed assertion " #exp )
+#endif
+
+// MIN VS MAX ASSERT
+
+#ifndef NW_MINMAX_ASSERT
+#define NW_MINMAX_ASSERT(exp, min, max) \
+            NW_ASSERTMSG((exp) >= (min) && (exp) <= (max), #exp " is out of bounds(%d)\n%d <= "#exp" <= %d not satisfied.", static_cast<int>(exp), static_cast<int>(min), static_cast<int>(max))
+#endif
+
+#ifndef NW_MINMAXLT_ASSERT
+#define NW_MINMAXLT_ASSERT(exp, min, max) \
+            NW_ASSERTMSG((exp) >= (min) && (exp) < (max), #exp " is out of bounds(%d)\n%d <= "#exp" < %d not satisfied.", static_cast<int>(exp), static_cast<int>(min), static_cast<int>(max))
+#endif
+
+// NULL ASSERT
+
+#ifndef NW_NULL_ASSERT
+#define NW_NULL_ASSERT(exp) \
+            NW_ASSERTMSG((exp) != NULL, "NW:Pointer must not be NULL ("#exp")")
+#endif
+
+// ALIGNMENT
+
+#ifndef NW_ALIGN_ASSERT
+#define NW_ALIGN_ASSERT(exp,align) \
+    NW_ASSERTMSG((NW_ANY_TO_PTR_VALUE(exp) & ((align) - 1)) == 0, "NW:Alignment Error(0x%x)\n"#exp" must be aligned to %d bytes boundary.", exp, align)
+#endif
+
+#ifndef NW_ALIGN32_ASSERT
+#define NW_ALIGN32_ASSERT(exp) \
+             NW_ALIGN_ASSERT((exp), 32)
+#endif
+
+#ifndef NW_ALIGN4_ASSERT
+#define NW_ALIGN4_ASSERT(exp) \
+             NW_ALIGN_ASSERT((exp), 4)
+#endif
+
+// FAILSAFE ASSERT
+
+#if !defined(NW_RELEASE)
+
+#define NW_FAILSAFE_IF(exp) if (exp)
+
+#else
+
+#define NW_FAILSAFE_IF(exp) if (false)
+
+#endif
+
+#define NW_NULL_ASSERT(exp) \
+    NW_FAILSAFE_IF(exp) \
+    { NW_FATAL_ERROR(#exp); }
+

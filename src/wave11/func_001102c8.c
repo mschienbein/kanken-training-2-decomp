@@ -1,3 +1,4 @@
+#include "game/runtime.h"
 struct RegionRecord {
     unsigned start;
     unsigned size;
@@ -11,8 +12,6 @@ struct RegionTracker {
     struct RegionRecord records[2][65];
 };
 
-extern void *func_0019cff8(unsigned region);
-extern void *func_00190ae0(unsigned region);
 
 void func_001102c8(struct RegionTracker *tracker)
 {

@@ -1,7 +1,4 @@
-struct ServiceReport;
-extern unsigned func_0013eab4(unsigned char *out, const struct ServiceReport *report,
-                              const char *text, float fade_seconds);
-
+#include "game/service_protocol.h"
 unsigned func_001375b0(unsigned char *out, const struct ServiceReport *report,
                        const char *text)
 {

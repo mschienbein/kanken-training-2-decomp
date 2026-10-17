@@ -1,11 +1,5 @@
+#include "game/exp_heap.h"
 #include "game/runtime.h"
-struct HeapArena {
-    unsigned char reserved00[0x54];
-    unsigned allocations;
-    unsigned char *lower;
-    unsigned size;
-};
-
 struct HeapRange {
     unsigned char *lower;
     unsigned size;

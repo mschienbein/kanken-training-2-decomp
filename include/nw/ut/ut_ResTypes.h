@@ -7,6 +7,7 @@
  */
 #pragma once
 
+#include <nw/math.h>
 #include <nw/ut/ut_Inlines.h>
 
 namespace nw {
@@ -93,6 +94,10 @@ typedef ResU32 Length;
 typedef ResU32 ResTypeInfo;
 
 
+typedef VEC3 ResVec3;
+typedef MTX33 ResMtx33;
+typedef MTX34 ResMtx34;
+typedef MTX44 ResMtx44;
 typedef struct BinString{
     ResS32 offset;
 

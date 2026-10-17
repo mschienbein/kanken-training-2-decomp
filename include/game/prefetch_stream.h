@@ -21,12 +21,6 @@ struct AdpcmChannelParameters {
     short history1;
     short history2;
 };
-struct RecordState {
-    const void *data;
-    unsigned sample_count;
-    const struct AdpcmLoopState *loop;
-    unsigned reserved0c[3];
-};
 struct StreamChannel {
     void *allocation;
     struct AudioVoiceGroup *channel;

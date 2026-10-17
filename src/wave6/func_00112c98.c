@@ -1,15 +1,4 @@
-struct ServiceResetState { unsigned int generation; };
-struct ServiceEntry {
-    unsigned int value;
-    unsigned char kind, variant;
-    unsigned short attributes;
-};
-struct ServiceList {
-    struct ServiceEntry *entries;
-    unsigned int capacity;
-    unsigned int count;
-    unsigned int remainder[36];
-};
+#include "game/service_protocol.h"
 extern struct ServiceList bss_004b47d0;
 extern void func_00192720(void *destination, const void *source, unsigned size);
 

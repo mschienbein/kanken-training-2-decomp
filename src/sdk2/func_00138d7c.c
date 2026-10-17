@@ -1,19 +1,7 @@
-#include "game/service_state.h"
+#include "game/service_protocol.h"
 
-/* Same generation-bearing input and list views as src/wave6/func_00112c98.c. */
-struct ServiceResetState { unsigned int generation; };
-struct ServiceEntry {
-    unsigned int value;
-    unsigned char kind, variant;
-    unsigned short attributes;
-};
-struct ServiceList {
-    struct ServiceEntry *entries;
-    unsigned int capacity;
-    unsigned int count;
-    unsigned int remainder[36];
-};
-
+/* [INFERENCE] The register keyword preserves the delivered source/codegen
+ * hint for the real output pointer; it is not evidence of original spelling. */
 unsigned func_00138d7c(const struct ServiceResetState *object, register unsigned *entry_count)
 {
     void *memory;

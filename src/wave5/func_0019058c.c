@@ -1,8 +1,4 @@
-#include "game/service_state.h"
-struct ServiceObject {
-    unsigned handle;
-};
-
+#include "game/service_protocol.h"
 unsigned func_0019058c(const struct ServiceObject *object)
 {
     void *memory;

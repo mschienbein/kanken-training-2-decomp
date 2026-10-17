@@ -10,8 +10,7 @@
 typedef unsigned int GLuint;
 extern "C" {
 void glDeleteTextures(int count, const GLuint* textures);
-/* INTEGRATOR: maps to src/wave6/func_0018f6c4.c, currently int(void*, unsigned).
- * Keep its int return; reconcile that wrapper and func_0012f570's buffer parameter
- * with const void* after reviewing the cache-maintenance implementation. */
+/* [INFERENCE] Readonly input follows the public NW4C callers. The int return
+ * retains the established matching wrapper contract at the same entry. */
 int nngxUpdateBuffer(const void* buffer, u32 size);
 }

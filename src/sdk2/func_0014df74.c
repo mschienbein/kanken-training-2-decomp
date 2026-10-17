@@ -1,10 +1,12 @@
 #include "game/input_runtime.h"
 
-extern void func_0014dfa8(struct InputController *controller, int index,
+extern int func_0014dfa8(struct InputController *controller, int index,
                           const struct ExtendedInputUpdate *update);
-void func_0014df74(struct InputSnapshot *snapshot, signed char index,
+/* [INFERENCE] Callers consume the forwarded core-word result. Its status
+ * role and signedness are unrecovered; int preserves that evidenced return ABI. */
+int func_0014df74(struct InputSnapshot *snapshot, signed char index,
                    const struct ExtendedInputUpdate *update)
 {
     snapshot->primary[1][index] = update->value != 0;
-    func_0014dfa8(func_00185044(), index, update);
+    return func_0014dfa8(func_00185044(), index, update);
 }

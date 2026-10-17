@@ -26,16 +26,17 @@ LinkListImpl::iterator LinkListImpl::erase(iterator itFirst, iterator itLast)
 {
     Node *pIt = itFirst.m_Pointer;
     Node *const pItLast = itLast.m_Pointer;
-    while (pIt != pItLast)
+    Node *pNext;
+    for (; pIt != pItLast; pIt = pNext)
     {
-        Node *const pNext = pIt->m_Next;
+        pNext = pIt->m_Next;
+        Node *const pNextNode = pIt->m_Next;
         Node *const pPrev = pIt->m_Prev;
-        pNext->m_Prev = pPrev;
-        pPrev->m_Next = pNext;
+        pNextNode->m_Prev = pPrev;
+        pPrev->m_Next = pNextNode;
         --m_Size;
         pIt->m_Next = NULL;
         pIt->m_Prev = NULL;
-        pIt = pNext;
     }
     return itLast;
 }

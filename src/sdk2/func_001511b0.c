@@ -1,4 +1,4 @@
-#include "game/functions.h"
+#include "game/object_manager.h"
 
 struct ExtendedOperationPair {
     unsigned first;
@@ -25,8 +25,6 @@ struct ExtendedOperation {
     struct ExtendedOperationTransform transform;
 };
 
-extern struct ObjectManager *func_00185d1c(void);
-extern struct RegistryNode *func_0017e640(struct ObjectManager *manager, struct RegistryEntry *entry);
 
 void func_001511b0(struct ExtendedOperation *operation,
                    const struct ExtendedOperationSettings *settings,

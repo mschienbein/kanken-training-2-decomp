@@ -63,6 +63,8 @@ extern struct Allocation bss_0049cbb4;
 extern struct AllocationRecord bss_0049cb24[8];
 extern int data_0024223c;
 extern const char data_002232d5[];
+extern void *func_0019cff8(unsigned region);
+extern void *func_00190ae0(unsigned region);
 extern void *func_00193110(unsigned size, const char *tag);
 extern void *func_0019ffa4(unsigned size, const void *tag);
 extern void *func_0011fa34(void *object);

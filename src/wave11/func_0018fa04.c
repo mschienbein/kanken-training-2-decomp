@@ -1,7 +1,4 @@
-struct ServiceReport;
-extern unsigned func_001375b0(unsigned char *out, const struct ServiceReport *report,
-                              const char *text);
-
+#include "game/service_protocol.h"
 static __forceinline int result_module(unsigned result)
 {
     return (result & 0x3fc00u) >> 10;

@@ -1,13 +1,12 @@
-#include "game/runtime.h"
+#include "game/graphics_resources.h"
 
-extern BufferState bss_0049da58;
 
 void func_00135a58(void)
 {
-    if (bss_0049da58.buffer) {
-        func_0019dc20(bss_0049da58.buffer);
-        bss_0049da58.buffer = 0;
-        bss_0049da58.count = 0;
-        bss_0049da58.capacity = 0;
+    if (bss_0049da58.buffers.buffer) {
+        func_0019dc20(bss_0049da58.buffers.buffer);
+        bss_0049da58.buffers.buffer = 0;
+        bss_0049da58.buffers.count = 0;
+        bss_0049da58.buffers.capacity = 0;
     }
 }

@@ -1,16 +1,4 @@
-#include "game/screen.h"
-
-struct W11ControlScreen {
-    unsigned char reserved00[0x0c];
-    struct WidgetSlot *slots[10];
-    int layout;
-    int active;
-    int selection;
-};
-
-extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
-extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
-
+#include "game/w11_control.h"
 void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y)
 {
     struct WidgetSlot *slot = screen->slots[index];

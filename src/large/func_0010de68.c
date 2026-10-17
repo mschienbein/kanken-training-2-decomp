@@ -1,30 +1,15 @@
+#include "game/shader.h"
 #include <string.h>
 
-struct ShaderBinary { unsigned reserved[0x130 / 4]; };
 struct ShaderResource {
     void *allocation;
     unsigned size;
-    struct ShaderBinary binary;
-    struct ShaderBinary *selected;
+    struct ShaderConfiguration binary;
+    struct ShaderConfiguration *selected;
     unsigned reserved13c[8];
     unsigned program2;
     unsigned program3;
 };
-
-extern void *func_00191968(unsigned size, int alignment);
-extern void func_00116f40(struct ShaderBinary *binary, const void *data, unsigned size);
-extern unsigned func_0019b13c(void);
-extern unsigned func_0019b01c(unsigned kind);
-extern void func_00199e10(unsigned count, unsigned *shader, unsigned type,
-                          const void *data, unsigned size);
-extern void func_00199d54(unsigned program, unsigned shader);
-extern void func_0019b254(unsigned shader);
-extern void func_00199c08(unsigned program, unsigned slot, const char *name);
-extern void func_00198170(unsigned program);
-extern void func_00197c68(unsigned program);
-extern int func_00191b08(unsigned program, const char *name);
-extern void func_0019194c(int location, unsigned value);
-extern void func_00191aec(void *allocation);
 
 void func_0010de68(struct ShaderResource *resource, int kind, void *data,
                    unsigned size, int release)

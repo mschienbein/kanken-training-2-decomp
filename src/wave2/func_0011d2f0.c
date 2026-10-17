@@ -1,8 +1,8 @@
+#include "game/functions.h"
 #include "game/render_state.h"
 
-extern void func_00186fbc(unsigned *state);
-extern void func_00126f68(unsigned *state);
 
+extern void func_00126f68(unsigned *state);
 int func_0011d2f0(struct SubmissionState *state)
 {
     data_002429f0 = state;
