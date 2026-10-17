@@ -1,4 +1,4 @@
-#include "game/pane.h"
+#include "game/layout.h"
 template <typename T>
 static inline T maximum(T left, T right)
 {

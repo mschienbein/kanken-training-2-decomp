@@ -1,7 +1,4 @@
-struct WidgetActionState {
-    unsigned char reserved00[0xbc];
-    unsigned active;
-};
+#include "game/screen.h"
 
 void func_001adabc(struct WidgetActionState *state)
 {

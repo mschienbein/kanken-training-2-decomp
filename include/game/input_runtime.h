@@ -37,6 +37,10 @@ extern struct InputController *func_00185044(void);
 extern struct InputLatches *func_001861e0(void);
 extern int func_0015341c(struct InputLatches *state, int group, int index);
 extern int func_00151cf8(struct InputLatchSnapshot *snapshot, signed char index);
+extern int func_0014ded8(struct InputLatchSnapshot *snapshot, signed char index,
+                          const struct ShortInputUpdate *update);
+extern int func_0014df74(struct InputLatchSnapshot *snapshot, signed char index,
+                          const struct ExtendedInputUpdate *update);
 extern void func_0014837c(struct InputLatchSnapshot *snapshot);
 extern void func_001483c0(struct InputController *controller);
 extern void func_0013712c(struct InputSessionContext *state);

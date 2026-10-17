@@ -1,4 +1,4 @@
-extern void func_00196144(int screen, int index);
+#include "game/screen.h"
 
 void func_00176df4(void)
 {

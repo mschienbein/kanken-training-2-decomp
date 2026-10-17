@@ -11,6 +11,7 @@ struct DeferredMemberCallback {
 };
 
 extern "C" {
+extern const MemberCallback data_002188d8;
 extern struct DeferredMemberCallback data_0023efb0;
 extern void func_001b7dac(void);
 extern void func_0015dec4(void (*callback)(void));

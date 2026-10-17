@@ -32,12 +32,25 @@ struct BitmapPool {
 #endif
 };
 
+struct MotionKey {
+    float time;
+    unsigned flags;
+    unsigned char reserved08[0x10];
+};
 struct MotionState {
-    unsigned char reserved00[0x10];
+    int mode;
+    unsigned key_flags;
+    unsigned flags;
+    float time;
     float scale;
-    unsigned char reserved14[0x18];
+    float first_time;
+    float last_time;
+    int first;
+    int last;
+    int current;
+    float blend;
     int count;
-    void *allocation;
+    struct MotionKey *allocation;
 };
 
 struct ResourceReleasable;
@@ -55,6 +68,14 @@ struct ResourceHandle {
 extern "C" {
 #endif
 
+extern void func_00192720(void *destination, const void *source, unsigned size);
+extern void func_0016ee38(struct MotionState *state);
+extern int func_0016ece8(struct MotionState *state, const struct MotionKey *keys, int heap);
+extern void func_0016ec84(struct MotionState *state, int first, int last);
+extern void func_0016ec6c(struct MotionState *state, int looping);
+extern void func_0016ec28(struct MotionState *state, int frame);
+extern void func_0016e924(struct MotionState *state, float delta);
+extern const struct MotionKey data_002188e8[4];
 extern unsigned char *func_00152d48(struct BitmapPool *pool);
 extern void func_0017e5f4(struct BitmapPool *pool, const void *element);
 extern BufferState bss_0049da8c;

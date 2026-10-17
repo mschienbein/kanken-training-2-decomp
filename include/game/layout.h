@@ -56,6 +56,7 @@ extern void func_0016b5fc(struct LayoutAnimationList *list,
 extern struct LayoutAnimationLink *func_001cff58(
     const struct LayoutAnimationList *list,
     const struct LayoutAnimationTransform *animation);
+extern void func_001c5930(struct PaneStyle *style, int extent);
 extern void func_001c59fc(struct Pane *pane, unsigned alignment);
 #ifdef __cplusplus
 }
