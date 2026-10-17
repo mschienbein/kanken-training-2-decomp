@@ -7,8 +7,12 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
+from tests.test_build import HAVE_COMPILER, SyntheticBuildFixture
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import accept  # noqa: E402
+import image  # noqa: E402
+import inplace  # noqa: E402
 
 PATHS = ("ROOT", "MATCHES", "HISTORY", "ACCEPT", "PROFILES", "CATALOGUE")
 
@@ -696,6 +700,275 @@ class AcceptGateTest(unittest.TestCase):
     def test_checkpoint_names_are_restricted(self):
         with self.assertRaises(accept.AcceptError):
             accept.checkpoint_dir("../escape")
+
+
+class RehomeCompositionTest(unittest.TestCase):
+    def setUp(self):
+        self.base = [
+            {"source": "src/a.c", "profile": "game", "functions": ["func_00100000", "func_00100010"]},
+            {"source": "src/b.c", "profile": "game", "functions": ["func_00100020"]},
+        ]
+
+    def test_move_is_explicit_and_preserves_every_accepted_function(self):
+        unit = {"source": "src/b.c", "profile": "game", "functions": ["func_00100000", "func_00100020"]}
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/b.c"}
+        units, moves, removed = accept.compose_units(self.base, {"units": [unit], "moves": [move]}, "c002")
+        self.assertEqual(units[0]["functions"], ["func_00100010"])
+        self.assertEqual(moves, [{**move, "checkpoint": "c002"}])
+        self.assertEqual(removed, [])
+        self.assertEqual(self.base[0]["functions"], ["func_00100000", "func_00100010"])
+        with self.assertRaisesRegex(accept.AcceptError, "already in the accepted ledger"):
+            accept.compose_units(self.base, {"units": [unit]}, "c002")
+
+    def test_addition_preserves_existing_zero_credit_helper_units(self):
+        helper = {"source": "src/helper.c", "profile": "game", "functions": []}
+        addition = {"source": "src/new.c", "profile": "game", "functions": ["func_00100030"]}
+        units, moves, removed = accept.compose_units(
+            self.base + [helper], {"units": [addition]}, "c002")
+        self.assertEqual(units, self.base + [helper, addition])
+        self.assertEqual(moves, [])
+        self.assertEqual(removed, [])
+
+    def test_moves_retire_only_emptied_credited_units_not_zero_credit_helpers(self):
+        helper = {"source": "src/helper.c", "profile": "game", "functions": []}
+        destination = {"source": "src/native.c", "profile": "game",
+                       "functions": ["func_00100000", "func_00100010"]}
+        declared = [{"function": fn, "from": "src/a.c", "to": "src/native.c"}
+                    for fn in self.base[0]["functions"]]
+        units, moves, removed = accept.compose_units(
+            self.base + [helper], {"units": [destination], "moves": declared}, "c002")
+        self.assertEqual(units, [self.base[1], helper, destination])
+        self.assertEqual(moves, [{**move, "checkpoint": "c002"} for move in declared])
+        self.assertEqual(removed, ["src/a.c"])
+
+    def test_moved_function_cannot_be_claimed_twice(self):
+        one = {"source": "src/native.c", "profile": "game", "functions": ["func_00100000"]}
+        two = {**one, "source": "src/duplicate.c"}
+        with self.assertRaisesRegex(accept.AcceptError, "credited by both"):
+            accept.compose_units(self.base, {"units": [one, two]}, "c002")
+        # A new candidate cannot silently steal credit without a move record either.
+        with self.assertRaisesRegex(accept.AcceptError, "credited by both"):
+            accept.compose_units(self.base, {"units": [one]}, "c002")
+
+    def test_bad_move_records_are_refused(self):
+        unit = {"source": "src/native.c", "profile": "game", "functions": ["func_00100000"]}
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/native.c"}
+        for moves, message in (
+            ([{**move, "from": "src/wrong.c"}], "accepted source"),
+            ([{**move, "to": "src/missing.c"}], "destination"),
+            ([move, move], "declared twice"),
+            ([{**move, "unexpected": True}], "list of"),
+        ):
+            with self.subTest(moves=moves), self.assertRaisesRegex(accept.AcceptError, message):
+                accept.compose_units(self.base, {"units": [unit], "moves": moves}, "c002")
+
+    def test_existing_destination_must_retain_its_accepted_functions(self):
+        unit = {"source": "src/b.c", "profile": "game", "functions": ["func_00100000"]}
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/b.c"}
+        with self.assertRaisesRegex(accept.AcceptError, "accepted functions cannot be removed"):
+            accept.compose_units(self.base, {"units": [unit], "moves": [move]}, "c002")
+
+
+@unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+class RehomeGateTest(SyntheticBuildFixture, unittest.TestCase):
+    def setUp(self):
+        super().setUp()
+        for key, value in (
+            ("ROOT", self.root), ("MATCHES", self.root / "config/matches.json"),
+            ("HISTORY", self.root / "docs/progress-history.jsonl"), ("ACCEPT", self.root / "accept"),
+            ("PROFILES", self.root / "config/compiler_profiles.json"), ("CATALOGUE", self.root / "config/catalogue.json"),
+        ):
+            patcher = patch.object(accept, key, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        # Only the real compiler, linker and byte verifier run here; do not invoke the full suite
+        # recursively or require these temporary fixtures to be committed in git.
+        for key, value in (
+            ("clean_commit", lambda: "0" * 40),
+            ("run_suite", lambda: {"returncode": 0, "summary": "suite isolated by fixture"}),
+        ):
+            patcher = patch.object(accept, key, value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        import interfaces
+        patcher = patch.object(interfaces, "audit", return_value={"units": [], "disagreements": [], "policy": [], "unchecked": []})
+        patcher.start()
+        self.addCleanup(patcher.stop)
+
+    def prepare_checkpoint(self, name, units, moves=()):
+        candidate = {"schema_version": 1, "units": units}
+        if moves:
+            candidate["moves"] = list(moves)
+        path = self.write_source(f"config/candidates/{name}.json", json.dumps(candidate))
+        return accept.prepare(name, path)
+
+    def finalize_checkpoint(self, name):
+        out = self.root / "accept" / name
+        prepared = accept.load_json(out / "prepare.json")
+        rows = [{"function": fn, "source": source, "verdict": "PASS", "method": "synthetic build re-derived",
+                 "finding_ids": []} for fn, source in accept.new_functions(out, prepared).items()]
+        record = {"reviewer": "rev1", "family": "test", "verdict": "PASS", "functions": rows,
+                  "findings": [], "qualifications": []}
+        path = self.write_source(f"review-{name}.json", json.dumps(record))
+        accept.review(name, path)
+        return accept.finalize(name, 1)
+
+    def accept_initial_units(self, split=False):
+        if split:
+            self.write_source("src/a.c", "int func_00100000(void) { return 1; }\n")
+            self.write_source("src/b.c", "int func_00100010(void) { return 2; }\n")
+            units = [self.unit("src/a.c", "func_00100000"), self.unit("src/b.c", "func_00100010")]
+        else:
+            self.write_source("src/a.c", "int func_00100000(void) { return 1; }\n"
+                              "int func_00100010(void) { return 2; }\n")
+            self.write_source("src/b.c", "int func_00100020(void) { return 3; }\n")
+            units = [self.unit("src/a.c", "func_00100000", "func_00100010"),
+                     self.unit("src/b.c", "func_00100020")]
+        self.assertEqual(self.prepare_checkpoint("c100", units)["result"], "PASS")
+        return self.finalize_checkpoint("c100")
+
+    def test_move_between_existing_units_keeps_continuous_credit(self):
+        before = self.accept_initial_units()
+        self.write_source("src/a.c", "int func_00100010(void) { return 2; }\n")
+        self.write_source("src/b.c", "int func_00100020(void) { return 3; }\n"
+                          "int func_00100000(void) { return 1; }\n")
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/b.c"}
+        record = self.prepare_checkpoint("c101", [self.unit("src/b.c", "func_00100020", "func_00100000")], [move])
+        self.assertEqual(record["result"], "PASS")
+        self.assertEqual(record["new_units"], [])
+        self.assertEqual(record["revised_units"], ["src/a.c", "src/b.c"])
+        self.assertEqual(accept.new_functions(self.root / "accept/c101", record),
+                         {"func_00100010": "src/a.c", "func_00100020": "src/b.c", "func_00100000": "src/b.c"})
+        entry = self.finalize_checkpoint("c101")
+        self.assertEqual(entry["moves"], [{**move, "checkpoint": "c101"}])
+        self.assertEqual(entry["selection_sha256"], record["selection_sha256"])
+        self.assertEqual((entry["credited_functions"], entry["credited_bytes"]),
+                         (before["credited_functions"], before["credited_bytes"]))
+        self.assertEqual(len(accept.verify_history()), 2)
+
+    def test_new_native_unit_retires_empty_units_and_preserves_history(self):
+        self.accept_initial_units(split=True)
+        original = {p.name: p.read_bytes() for p in (self.root / "accept/c100").glob("*.json")}
+        self.write_source("src/native.c", "int func_00100000(void) { return 1; }\n"
+                          "int func_00100010(void) { return 2; }\nint func_00100020(void) { return 3; }\n")
+        for name in ("a", "b"):
+            (self.root / f"src/{name}.c").unlink()
+        moves = [{"function": fn, "from": source, "to": "src/native.c"}
+                 for fn, source in (("func_00100000", "src/a.c"), ("func_00100010", "src/b.c"))]
+        record = self.prepare_checkpoint(
+            "c101", [self.unit("src/native.c", "func_00100000", "func_00100010", "func_00100020")], moves)
+        self.assertEqual(record["result"], "PASS")
+        self.assertEqual(record["new_units"], ["src/native.c"])
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["removed_units"], ["src/a.c", "src/b.c"])
+        entry = self.finalize_checkpoint("c101")
+        self.assertEqual(entry["credited_functions"], 3)
+        self.assertEqual(len(accept.verify_history()), 2)
+        self.assertEqual({p.name: p.read_bytes() for p in (self.root / "accept/c100").glob("*.json")}, original)
+        # A second move is validated against its immediate predecessor, not the first acceptance.
+        self.write_source("src/native.c", "int func_00100000(void) { return 1; }\n"
+                          "int func_00100020(void) { return 3; }\n")
+        self.write_source("src/readable.c", "int func_00100010(void) { return 2; }\n")
+        self.assertEqual(self.prepare_checkpoint(
+            "c102", [self.unit("src/readable.c", "func_00100010")],
+            [{"function": "func_00100010", "from": "src/native.c", "to": "src/readable.c"}])["result"], "PASS")
+        self.finalize_checkpoint("c102")
+        self.assertEqual(len(accept.verify_history()), 3)
+
+    def test_duplicate_definition_in_remaining_old_unit_fails_prepare(self):
+        self.accept_initial_units()
+        self.write_source("src/native.c", "int func_00100000(void) { return 1; }\n")
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/native.c"}
+        record = self.prepare_checkpoint("c101", [self.unit("src/native.c", "func_00100000")], [move])
+        self.assertEqual(record["result"], "FAIL")
+        self.assertTrue(all("defined by both" in b["error"] for b in record["builds"]))
+        with self.assertRaisesRegex(accept.AcceptError, "prepare is FAIL"):
+            accept.finalize("c101", 1)
+
+    def test_conflicting_comdat_definition_in_old_unit_fails_prepare_without_changing_history(self):
+        name = "_Z1fILi1EEiv"
+        template = "template<int x> int f(void) { return x; }\ntemplate int f<1>(void);\n"
+        retained = 'extern "C" int func_00100010(void) { return 2; }\n'
+        names = {name: {"address": 0x100000}}
+        self.write_source("config/names.json", json.dumps(names))
+        with patch.object(image, "load_names", return_value=names):
+            self.write_source("src/a.cpp", template + retained)
+            initial = self.unit("src/a.cpp", "func_00100000", "func_00100010")
+            self.assertEqual(self.prepare_checkpoint("c100", [initial])["result"], "PASS")
+            self.finalize_checkpoint("c100")
+            canonical = {path: path.read_bytes() for path in (accept.MATCHES, accept.HISTORY)}
+            historical = {p.name: p.read_bytes() for p in (self.root / "accept/c100").glob("*.json")}
+
+            self.write_source("src/a.cpp", template.replace("return x;", "return x + 3;") + retained)
+            self.write_source("src/native.cpp", template)
+            move = {"function": "func_00100000", "from": "src/a.cpp", "to": "src/native.cpp"}
+            record = self.prepare_checkpoint("c101", [self.unit("src/native.cpp", "func_00100000")], [move])
+            self.assertEqual(record["result"], "FAIL")
+            self.assertEqual(len(record["builds"]), 2)
+            for receipt in record["builds"]:
+                self.assertEqual(receipt["result"], "FAIL")
+                self.assertIn("func_00100000: defined by both", receipt["error"])
+
+            # Reproduce the reviewer's real-compiler bypass: same COMDAT key, conflicting old
+            # bytes, and a byte-exact destination. Neither credit subtraction nor coalescing
+            # may hide the stale old definition.
+            sections = []
+            for source in ("a", "native"):
+                obj = inplace.ObjectFile(self.root / f"build/c101-a/obj/src/{source}.o")
+                symbol = next(sym for sym in obj.defined_functions() if sym.name == name)
+                section = obj.sections[symbol.shndx]
+                self.assertEqual(section.comdat, name)
+                sections.append(section)
+            expected = self.image.read(0x100000, 8)
+            self.assertNotEqual(sections[0].data, sections[1].data)
+            self.assertNotEqual(sections[0].data, expected)
+            self.assertEqual(sections[1].data, expected)
+            with self.assertRaisesRegex(accept.AcceptError, "prepare is FAIL"):
+                accept.finalize("c101", 1)
+            for path, contents in canonical.items():
+                self.assertEqual(path.read_bytes(), contents)
+            self.assertEqual({p.name: p.read_bytes() for p in (self.root / "accept/c100").glob("*.json")}, historical)
+
+    def test_changed_moved_function_fails_prepare_without_changing_ledger(self):
+        self.accept_initial_units()
+        original = accept.sha256_file(accept.MATCHES)
+        self.write_source("src/a.c", "int func_00100010(void) { return 2; }\n")
+        self.write_source("src/native.c", "int func_00100000(void) { return 4; }\n")
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/native.c"}
+        record = self.prepare_checkpoint("c101", [self.unit("src/native.c", "func_00100000")], [move])
+        self.assertEqual(record["result"], "FAIL")
+        self.assertTrue(all(not b["checks"]["credited_functions_exact"] for b in record["builds"]))
+        self.assertEqual(accept.sha256_file(accept.MATCHES), original)
+        self.assertEqual(len(accept.read_history()), 1)
+        with self.assertRaisesRegex(accept.AcceptError, "prepare is FAIL"):
+            accept.finalize("c101", 1)
+
+    def test_empty_old_source_must_be_deleted_and_stay_deleted_through_finalize(self):
+        self.accept_initial_units(split=True)
+        self.write_source("src/native.c", "int func_00100000(void) { return 1; }\n")
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/native.c"}
+        with self.assertRaisesRegex(accept.AcceptError, "delete the old source"):
+            self.prepare_checkpoint("c101", [self.unit("src/native.c", "func_00100000")], [move])
+        (self.root / "src/a.c").unlink()
+        self.assertEqual(self.prepare_checkpoint(
+            "c102", [self.unit("src/native.c", "func_00100000")], [move])["result"], "PASS")
+        self.write_source("src/a.c", "int func_00100000(void) { return 1; }\n")
+        with self.assertRaisesRegex(accept.AcceptError, "delete the old source"):
+            self.finalize_checkpoint("c102")
+
+    def test_history_cannot_silently_forget_a_move(self):
+        self.accept_initial_units(split=True)
+        self.write_source("src/native.c", "int func_00100000(void) { return 1; }\n")
+        (self.root / "src/a.c").unlink()
+        move = {"function": "func_00100000", "from": "src/a.c", "to": "src/native.c"}
+        self.prepare_checkpoint("c101", [self.unit("src/native.c", "func_00100000")], [move])
+        self.finalize_checkpoint("c101")
+        history = accept.read_history()
+        history[-1].pop("moves")
+        history[-1]["entry_sha256"] = accept.entry_hash(history[-1])
+        accept.HISTORY.write_text("".join(json.dumps(e) + "\n" for e in history), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "move record"):
+            accept.verify_history()
 
 
 if __name__ == "__main__":

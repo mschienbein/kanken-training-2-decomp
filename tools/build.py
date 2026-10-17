@@ -6,7 +6,9 @@ Refuses to run unless config/catalogue.json is the recorded denominator (tools/d
 For every unit in config/matches.json (or --matches): compile it under its profile and link it in
 place. Each credited function must be an ordinary catalogued function (never a veneer), must be
 produced as a section of exactly its catalogued size, and must equal the original on its own
-before it is written into the output image; sections placed by different units may never overlap.
+before it is written into the output image. Its credited unit must be its sole emitted defining
+unit, including weak/COMDAT definitions and names-overlay aliases. Sections placed by different
+units may never overlap.
 The output must equal orig/code.bin, and re-compressing it must reproduce the stored ExeFS
 `.code` exactly. Everything goes into build/<name>/ (exclusive: an existing name is refused) with
 receipt.json binding every input hash, including the harness sources, and the linker model
@@ -95,8 +97,38 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     credited: dict[int, str] = {}
     mismatched: list[str] = []
     occupied: list[tuple[int, int, str, tuple[str, str] | None]] = []  # sections placed by all units
+    claims: dict[int, str] = {}
+    for unit in matches["units"]:
+        for fname in unit["functions"]:
+            address = resolver.resolve(fname).address
+            if address in claims:
+                raise BuildError(f"{fname}: credited by both {claims[address]} and {unit['source']}")
+            claims[address] = unit["source"]
     definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
+    function_definitions: dict[int, str] = {}  # credited stable identity -> emitted defining unit
     objects = [inplace.ObjectFile(out / "obj" / Path(unit["source"]).with_suffix(".o")) for unit in matches["units"]]
+    # Inspect the original objects before combining/linking can coalesce COMDAT copies. Removing
+    # an old credit claim must never hide an emitted body, even under another bound symbol name.
+    for unit, objfile in zip(matches["units"], objects):
+        for sym in objfile.symbols:
+            if sym.kind not in ("STT_FUNC", "STT_OBJECT", "STT_NOTYPE") or sym.shndx not in objfile.sections:
+                continue
+            target = resolver.lookup(sym.name)
+            if target is None or target.address not in claims:
+                continue
+            previous = function_definitions.get(target.address)
+            if previous is not None and previous != unit["source"]:
+                raise BuildError(f"func_{target.address:08x}: defined by both {previous} and {unit['source']}")
+            function_definitions[target.address] = unit["source"]
+        for sym in objfile.defined_globals():
+            if objfile.sections[sym.shndx].comdat:
+                continue  # unrelated COMDAT identities retain the existing overlap rules
+            if sym.name in definitions:
+                raise BuildError(f"{sym.name}: defined by both {definitions[sym.name]} and {unit['source']}")
+            definitions[sym.name] = unit["source"]
+    for address, source in function_definitions.items():
+        if source != claims[address]:
+            raise BuildError(f"func_{address:08x}: defined by {source}, not credited owner {claims[address]}")
     combined = inplace.ObjectFile.combine(objects, [unit["source"] for unit in matches["units"]])
     all_linked = linker.link(combined)
     units = []
@@ -104,14 +136,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
         src = ROOT / unit["source"]
         profile = profiles[unit["profile"]]
         obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
-        objfile = objects[owner]
         linked = {index: value for index, value in all_linked.items() if combined.section_owners[index] == owner}
-        for sym in objfile.defined_globals():
-            if objfile.sections[sym.shndx].comdat:
-                continue  # one entity; its single address is enforced by reject_overlaps
-            if sym.name in definitions:
-                raise BuildError(f"{sym.name}: defined by both {definitions[sym.name]} and {unit['source']}")
-            definitions[sym.name] = unit["source"]
         occupied += [
             (p.base, p.base + p.section.size, f"{unit['source']}:{p.section.name}", inplace.comdat_key(p.section))
             for p, _ in linked.values() if p.section.size

@@ -5,11 +5,11 @@
     python tools/accept.py finalize --checkpoint c001-pilot [--min-reviews 1]
     python tools/accept.py verify                                        # CI-safe, no ROM
 
-prepare: the denominator must verify; the candidate units are added to the accepted ledger
+prepare: candidate units and explicit function moves are composed with the accepted ledger
 (config/matches.json) into accept/<checkpoint>/matches.json; two fresh tools/build.py builds of
-that ledger must PASS with identical outputs, and the full test suite must pass. Everything is
-recorded in accept/<checkpoint>/prepare.json (exclusive create; a FAIL is kept, never retried
-under the same name).
+that ledger must PASS with identical outputs, and the full test suite must pass. Moves retain
+credit and bind the old/new units to this checkpoint. Everything is recorded in
+accept/<checkpoint>/prepare.json (exclusive create; a FAIL is kept, never retried under the same name).
 
 review: validates one reviewer's structured record (validate_review: a verdict row for every new,
 revised or removed-helper-dependent caller, finding ids, severities, verdict consistency) and
@@ -118,6 +118,88 @@ def checkpoint_dir(name: str) -> Path:
 
 
 # -- prepare ---------------------------------------------------------------------------------------
+
+def function_sources(units: list[dict]) -> dict[str, str]:
+    """A ledger has one unit per source and exactly one owner of each credited function."""
+    sources, functions = set(), {}
+    for unit in units:
+        source = unit["source"]
+        if source in sources:
+            raise AcceptError(f"{source}: duplicate unit")
+        sources.add(source)
+        for fn in unit["functions"]:
+            if fn in functions:
+                raise AcceptError(f"{fn}: credited by both {functions[fn]} and {source}")
+            functions[fn] = source
+    return functions
+
+
+def transition_moves(before: list[dict], after: list[dict], checkpoint: str) -> list[dict]:
+    """Derive the complete move record without ever withdrawing accepted function credit."""
+    old, new = function_sources(before), function_sources(after)
+    missing = sorted(old.keys() - new.keys())
+    if missing:
+        raise AcceptError(f"accepted functions cannot be removed: {', '.join(missing)}")
+    return [{"function": fn, "from": old[fn], "to": new[fn], "checkpoint": checkpoint}
+            for fn in sorted(old) if old[fn] != new[fn]]
+
+
+def removed_units(before: list[dict], after: list[dict]) -> list[str]:
+    current = {u["source"] for u in after}
+    return [u["source"] for u in before if u["source"] not in current]
+
+
+def require_removed_sources(sources: list[str]) -> None:
+    for source in sources:
+        if (ROOT / source).exists():
+            raise AcceptError(f"{source}: emptied by rehoming; delete the old source before prepare/finalize")
+
+
+def compose_units(base: list[dict], candidates: dict, checkpoint: str) -> tuple[list[dict], list[dict], list[str]]:
+    """Candidate units are additions, or complete replacements of units participating in moves.
+
+    A move is explicit: {"function": "func_XXXXXXXX", "from": "src/old.c", "to": "src/new.c"}.
+    Remaining functions stay in their old unit; empty old units leave the ledger.
+    """
+    accepted = function_sources(base)
+    proposed = candidates["units"]
+    function_sources(proposed)
+    by_source = {u["source"]: u for u in proposed}
+    declared = candidates.get("moves", [])
+    if not isinstance(declared, list) or any(
+        not isinstance(m, dict) or set(m) != {"function", "from", "to"}
+        or any(not isinstance(value, str) for value in m.values()) for m in declared
+    ):
+        raise AcceptError("moves must be a list of {function, from, to} records")
+    moving = {}
+    for move in declared:
+        fn, old, new = move["function"], move["from"], move["to"]
+        if fn in moving:
+            raise AcceptError(f"{fn}: move declared twice")
+        if accepted.get(fn) != old or old == new:
+            raise AcceptError(f"{fn}: move must name its accepted source and a different destination")
+        if new not in by_source or fn not in by_source[new]["functions"]:
+            raise AcceptError(f"{fn}: move destination {new} must list it in candidates.units")
+        moving[fn] = new
+    participants = {m[key] for m in declared for key in ("from", "to")}
+    units = []
+    for unit in base:
+        source = unit["source"]
+        if source in by_source:
+            if source not in participants:
+                raise AcceptError(f"{source} is already in the accepted ledger")
+            replacement = by_source.pop(source)
+        else:
+            replacement = {**unit, "functions": [fn for fn in unit["functions"] if fn not in moving]}
+        if replacement["functions"] or not unit["functions"]:
+            units.append(replacement)
+    units.extend(by_source.values())
+    moves = [{**m, "checkpoint": checkpoint} for m in sorted(declared, key=lambda m: m["function"])]
+    if transition_moves(base, units, checkpoint) != moves:
+        raise AcceptError("moves must exactly record every accepted function changing source")
+    return units, moves, removed_units(base, units)
+
+
 
 
 def run_suite() -> dict:
@@ -295,11 +377,8 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
         raise AcceptError(f"denominator: {e}") from None
     base = load_json(MATCHES)
     candidates = load_json(candidates_path)
-    have = {u["source"] for u in base["units"]}
-    for unit in candidates["units"]:
-        if unit["source"] in have:
-            raise AcceptError(f"{unit['source']} is already in the accepted ledger")
-    units = base["units"] + candidates["units"]
+    units, moves, removed = compose_units(base["units"], candidates, name)
+    require_removed_sources(removed)
     ledger = {"schema_version": 1, "note": f"Accepted ledger as of checkpoint {name}.", "units": units}
     write_exclusive(out / "matches.json", ledger)
     # Accepted material edited since the last accepted entry is reviewed again like new work:
@@ -307,7 +386,9 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
     history = read_history()
     accepted_sources = history[-1]["sources"] if history else {}
     accepted_headers = history[-1].get("headers", {}) if history else {}
-    revised_units = [u["source"] for u in base["units"] if accepted_sources.get(u["source"]) != sha256_file(ROOT / u["source"])]
+    previous_units = {u["source"]: u for u in base["units"]}
+    revised_units = [u["source"] for u in units if u["source"] in previous_units and (
+        u != previous_units[u["source"]] or accepted_sources.get(u["source"]) != sha256_file(ROOT / u["source"]))]
     current_headers = header_hashes()
     revised_headers = sorted(h for h in set(current_headers) | set(accepted_headers)
                              if history and current_headers.get(h) != accepted_headers.get(h))
@@ -370,7 +451,7 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
         "ledger_sha256": sha256_file(out / "matches.json"),
         "sources": source_hashes(units),
         "headers": header_hashes(),
-        "new_units": [u["source"] for u in candidates["units"]],
+        "new_units": [u["source"] for u in candidates["units"] if u["source"] not in previous_units],
         "revised_units": revised_units,
         "revised_headers": revised_headers,
         "profiles_sha256": sha256_file(PROFILES),
@@ -404,6 +485,8 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
         },
         "checks": checks,
     }
+    if moves:
+        record.update(moves=moves, removed_units=removed)
     record["result"] = "PASS" if all(checks.values()) else "FAIL"
     write_exclusive(out / "prepare.json", record)
     return record
@@ -554,9 +637,18 @@ def finalize(name: str, min_reviews: int) -> dict:
         raise AcceptError("profiles or catalogue changed since prepare")
     if sha256_file(MATCHES) != record["base_matches_sha256"]:
         raise AcceptError("the accepted ledger changed since prepare (another checkpoint finalized?)")
-    # Revisions prepare declared are pinned to their prepared hashes above ("sources/headers
-    # changed since prepare"); every other accepted file must still equal its accepted hash.
-    verify_history(revised_units=record.get("revised_units", ()), revised_headers=record.get("revised_headers", ()))
+    proposed = load_json(out / "matches.json")["units"]
+    base = load_json(MATCHES)["units"]
+    if transition_moves(base, proposed, name) != record.get("moves", []):
+        raise AcceptError("prepared moves do not describe the ledger transition")
+    removed = removed_units(base, proposed)
+    if removed != record.get("removed_units", []):
+        raise AcceptError("prepared removed_units do not describe the ledger transition")
+    require_removed_sources(removed)
+    # Revisions and deleted empty units are declared by prepare and bound above. No other
+    # accepted file may drift while this checkpoint is being reviewed.
+    verify_history(revised_units=record.get("revised_units", ()), revised_headers=record.get("revised_headers", ()),
+                   removed_sources=removed)
 
     ledger = (out / "matches.json").read_bytes()
     if hashlib.sha256(ledger).hexdigest() != record["ledger_sha256"]:
@@ -585,6 +677,8 @@ def finalize(name: str, min_reviews: int) -> dict:
     }
     if selected:
         entry["selection_sha256"] = record["selection_sha256"]
+    if record.get("moves"):
+        entry.update(moves=record["moves"], removed_units=removed)
     entry["entry_sha256"] = entry_hash(entry)
     MATCHES.write_bytes(ledger)
     with HISTORY.open("a", encoding="utf-8", newline="\n") as f:
@@ -596,20 +690,27 @@ def finalize(name: str, min_reviews: int) -> dict:
 # -- verify ------------------------------------------------------------------------------------------
 
 
-def verify_history(revised_units=(), revised_headers=()) -> list[dict]:
-    """Check the hash chain and that the accepted ledger, credited sources and accepted headers
-    are unchanged. `revised_*` (finalize only) exempts exactly the revisions a prepare declared."""
+def verify_history(revised_units=(), revised_headers=(), removed_sources=()) -> list[dict]:
+    """Check immutable ledger transitions and the live files of the latest accepted ledger.
+
+    Historical sources need not survive later revisions/moves. Only a sealed move record can
+    change a function's owner; credit is continuous across every snapshot. Finalize may exempt
+    exactly the revisions and deletions its prepare declared.
+    """
     history = read_history()
     prev = None
+    previous_units = []
     for i, e in enumerate(history, 1):
         if e["seq"] != i or e["prev"] != prev or e["entry_sha256"] != entry_hash(e):
             raise AcceptError(f"progress history broken at seq {i}")
         out = ACCEPT / e["checkpoint"]
         if not (out / "finalize.json").is_file():
             raise AcceptError(f"seq {i}: accept/{e['checkpoint']}/finalize.json missing")
+        if not (out / "matches.json").is_file() or sha256_file(out / "matches.json") != e["matches_sha256"]:
+            raise AcceptError(f"seq {i}: checkpoint ledger changed or missing")
         prepared = out / "prepare.json"
         if not prepared.is_file() or sha256_file(prepared) != e.get("prepare_sha256"):
-            raise AcceptError(f"seq {i}: prepare changed since finalize")
+            raise AcceptError(f"seq {i}: checkpoint prepare changed or missing")
         record = load_json(prepared)
         selected = verify_selection(
             out, record, required=(i >= SELECTION_FIRST_SEQ or e.get("schema_version", 1) >= 2
@@ -622,15 +723,25 @@ def verify_history(revised_units=(), revised_headers=()) -> list[dict]:
                 or selected and any(e.get(key) != record.get(key)
                                     for key in ("linker_model", "literal_model", "selection_sha256"))):
             raise AcceptError(f"seq {i}: history models differ from the prepared selection")
+        units = load_json(out / "matches.json")["units"]
+        moves = transition_moves(previous_units, units, e["checkpoint"])
+        removed = removed_units(previous_units, units)
+        if moves != e.get("moves", []) or moves != record.get("moves", []):
+            raise AcceptError(f"seq {i}: move record does not describe the ledger transition")
+        if removed != e.get("removed_units", []) or removed != record.get("removed_units", []):
+            raise AcceptError(f"seq {i}: removed_units do not describe the ledger transition")
+        previous_units = units
         prev = e["entry_sha256"]
     ledger = load_json(MATCHES)
     if history:
         if sha256_file(MATCHES) != history[-1]["matches_sha256"]:
             raise AcceptError("config/matches.json is not the last finalized ledger")
         revised = set(revised_units)
-        current_sources = source_hashes(ledger["units"])
-        drifted = sorted(s for s, sha in history[-1]["sources"].items() if s not in revised and current_sources.get(s) != sha)
-        if drifted or set(current_sources) != set(history[-1]["sources"]):
+        removed = set(removed_sources)
+        current_sources = source_hashes([u for u in ledger["units"] if u["source"] not in removed])
+        expected_sources = {s: sha for s, sha in history[-1]["sources"].items() if s not in removed}
+        drifted = sorted(s for s, sha in expected_sources.items() if s not in revised and current_sources.get(s) != sha)
+        if drifted or set(current_sources) != set(expected_sources):
             raise AcceptError(f"a credited source differs from its accepted hash: {', '.join(drifted) or 'unit set'}")
         current = header_hashes()
         changed = sorted(h for h, sha in history[-1].get("headers", {}).items()
