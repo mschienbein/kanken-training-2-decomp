@@ -63,6 +63,66 @@ Scale note for this project: the lean form is one review per checkpoint covering
 function (per-function notes inside it), from another model family than the authors where
 possible. Item 8 lives in `docs/known-issues-<checkpoint>.md` when a checkpoint has any.
 
+### Rehoming accepted functions
+
+Credit belongs to the stable function identity, not its filename. A candidate may explicitly move
+an accepted function into another translation unit without withdrawing and re-awarding its credit:
+
+```json
+{
+  "schema_version": 1,
+  "units": [
+    {
+      "source": "src/subsystem/native.c",
+      "profile": "game",
+      "functions": ["func_00100000", "func_00100010"]
+    }
+  ],
+  "moves": [
+    {
+      "function": "func_00100000",
+      "from": "src/old.c",
+      "to": "src/subsystem/native.c"
+    }
+  ]
+}
+```
+
+The identifiers above are illustrative. `units` lists the **complete** credited function set of
+each destination (including functions already accepted there); new functions may share the unit
+with moved ones. `moves` is optional, but every accepted function changing source needs exactly
+one `{function, from, to}` row naming its current ledger owner. An existing unit may appear in
+`units` only when it participates in a move; candidates without moves retain the addition-only
+format and rules. No accepted function may disappear, nor may two units claim the same identity.
+
+Integrator HOWTO:
+
+1. Put the complete native/consolidated source at its destination. Remove moved definitions from
+   old sources; **delete an old source when all its credited functions move out**. Prepare does
+   not edit source files or the canonical ledger.
+2. Write the candidate as above. Prepare subtracts moved functions from old ledger units and
+   removes empty units. If a destination is already accepted, list all its retained functions too.
+   Alternatively, `collect.py --rehome func_00100000` (repeatable) opts accepted author-result rows
+   into collection and writes the move rows; ordinary collection still refuses accepted rows.
+   Collection does not edit old accepted sources and still reports refused units independently.
+3. Commit the source/candidate changes and use the ordinary prepare → independent review →
+   finalize workflow. Both fresh builds recompile the whole proposed ledger and byte-check each
+   moved function in its new context. Definitions left in two compiled units fail the build.
+4. Review all functions in new/revised units, including moved functions, retained functions in an
+   edited old unit, and retained functions in an existing destination. Check each old/new owner
+   and the deletion of empty sources. A removed definition is covered by its destination row,
+   not by a duplicate review row for its former source.
+
+Prepare and the hash-chained history record `moves` rows with an added `checkpoint` field, plus
+`removed_units` (old sources removed from the ledger). Surviving old units and existing destinations
+whose ledger entry changes are `revised_units` even if their source hash happens not to change.
+Finalize pins deleted sources as absent through review and refuses unrelated accepted-source drift.
+Historical checkpoint ledgers, prepare records and reviews are never rewritten. `verify` checks
+their sealed snapshots and each owner transition against the move records, then checks only the
+latest ledger's live source hashes: old source paths may legitimately have changed or disappeared.
+Pure moves keep accepted function/byte totals unchanged; newly matched functions add credit once.
+
+
 Classified, never credited as C: SDK/library code proven identical to a known library, compiler
 runtime helpers, veneers/thunks, handwritten assembly, generated tables, data with format witnesses.
 

@@ -7,8 +7,10 @@ For every RESULT.json row with status "match": copy the recorded source into --d
 the copy there (so includes resolve as in the build) under its recorded profile, and compare in
 place (tools/match.py's oracle). Only functions that re-derive as MATCH are credited; a source
 whose credited functions don't all re-derive is removed again and reported, as are name clashes,
-non-creditable catalogue kinds, and functions already accepted or claimed twice. Writes the
-candidates file and prints what was taken and what was refused.
+non-creditable catalogue kinds, and functions already accepted or claimed twice. An accepted
+function may be explicitly selected with --rehome func_XXXXXXXX; the candidates then record its
+old/new unit (the integrator must remove its old definition before prepare). Writes the candidates
+file and prints what was taken and what was refused.
 """
 from __future__ import annotations
 
@@ -27,9 +29,9 @@ import toolchain  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def accepted_functions() -> set[str]:
+def accepted_sources() -> dict[str, str]:
     ledger = json.loads((ROOT / "config/matches.json").read_text(encoding="utf-8"))
-    return {fn for unit in ledger["units"] for fn in unit["functions"]}
+    return {fn: unit["source"] for unit in ledger["units"] for fn in unit["functions"]}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -37,13 +39,21 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("results", type=Path, nargs="+")
     parser.add_argument("--dest", type=Path, required=True)
     parser.add_argument("--candidates", type=Path, required=True)
+    parser.add_argument("--rehome", action="append", default=[], metavar="FUNCTION",
+                        help="allow this accepted func_XXXXXXXX to move into a collected unit (repeatable)")
     args = parser.parse_args(argv)
     if args.candidates.exists():
         print(f"error: {args.candidates} exists", file=sys.stderr)
         return 1
     profiles = toolchain.load_profiles()
     ctx = match.Context(ROOT / "config/catalogue.json")
-    taken = accepted_functions()
+    accepted = accepted_sources()
+    requested_moves = set(args.rehome)
+    unknown = sorted(requested_moves - accepted.keys())
+    if unknown:
+        print(f"error: --rehome functions are not accepted: {', '.join(unknown)}", file=sys.stderr)
+        return 1
+    taken = accepted.keys() - requested_moves
     by_source: dict[Path, dict] = {}
     for result in args.results:
         data = json.loads(result.read_text(encoding="utf-8"))
@@ -58,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
             elif entry["claimed"] is not None:
                 entry["claimed"].add(f"func_{int(row['address'], 16):08x}")
 
-    units, refused = [], []
+    units, moves, refused = [], [], []
     dest = ROOT / args.dest
     with tempfile.TemporaryDirectory() as tmp:
         for src, entry in sorted(by_source.items()):
@@ -105,7 +115,11 @@ def main(argv: list[str] | None = None) -> int:
             taken |= entry["claimed"]
             units.append({"source": target.relative_to(ROOT).as_posix(), "profile": entry["profile"],
                           "functions": sorted(entry["claimed"]), "author": entry["agent"]})
+            moves.extend({"function": fn, "from": accepted[fn], "to": target.relative_to(ROOT).as_posix()}
+                         for fn in sorted(entry["claimed"] & requested_moves))
     record = {"schema_version": 1, "note": f"Collected from {len(args.results)} author results.", "units": units}
+    if moves:
+        record["moves"] = sorted(moves, key=lambda m: m["function"])
     args.candidates.parent.mkdir(parents=True, exist_ok=True)
     args.candidates.write_text(json.dumps(record, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"taken: {len(units)} units, {sum(len(u['functions']) for u in units)} functions -> {args.candidates}")
