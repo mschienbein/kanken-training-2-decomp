@@ -712,7 +712,13 @@ class Analyzer(c_ast.NodeVisitor):
             origin = self.pointer_origin(node.expr)
             return origin or (self.root_name(node.expr) if self.is_const(self.expr_type(node)) else None)
         if isinstance(node, c_ast.ArrayRef):
-            return self.pointer_origin(node.name) or self.const_origin(node.name) or (self.root_name(node.name) if self.is_const(self.expr_type(node)) else None)
+            element_const = self.root_name(node.name) if self.is_const(self.expr_type(node)) else None
+            base = self.expr_type(node.name)
+            if base is not None and base.kind == "pointer":
+                # Indexing through a pointer value writes its pointee: the pointer's own constness
+                # (e.g. a pointer member of a const object) does not make the elements const.
+                return self.pointer_origin(node.name) or element_const
+            return self.pointer_origin(node.name) or self.const_origin(node.name) or element_const
         if isinstance(node, c_ast.StructRef):
             origin = self.pointer_origin(node.name) if node.type == "->" else self.const_origin(node.name)
             return origin or (self.root_name(node.name) if self.is_const(self.expr_type(node)) else None)

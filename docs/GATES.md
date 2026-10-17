@@ -1,6 +1,11 @@
-# Gate design — frozen v1.11 (2026-10-17)
+# Gate design — frozen v1.12 (2026-10-17)
 
 Revisions:
+- **v1.12** (2026-10-17): G3 const-write check fix. Indexing through a pointer (`obj->ptr[i] = v`)
+  writes the pointee, so the pointer's own constness (a pointer member of a const object) no
+  longer makes it a const write; indexing an array member of a const object still is one. Cause: a
+  false positive on c006's `func_00183bc8` (`const ArchiveReader *` whose `cache` array is
+  writable). Regression tests in `tests/test_interfaces.py`.
 - **v1.11** (2026-10-17): reviews add step 7 (`docs/REVIEWING.md`): the caller-contract audit
   `tools/argcheck.py` over the prepared ledger, every reported candidate adjudicated; the
   integrator runs the same audit before each prepare. Cause: c004-r2 and c005 both failed review on

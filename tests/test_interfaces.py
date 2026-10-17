@@ -262,6 +262,20 @@ void local(void) {
         self.assert_checked(report)
         self.assertEqual(report["disagreements"], [])
 
+    def test_indexing_a_pointer_member_of_a_const_object_writes_the_pointee(self):
+        # reader->cache is a const pointer member of *reader, but the array it points at is writable.
+        self.add("a.c", "struct Reader { const void **cache; }; "
+                        "void local(const struct Reader *reader, int i, const void *v) { reader->cache[i] = v; *reader->cache = v; }\n")
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual(report["disagreements"], [])
+
+    def test_indexing_an_array_member_of_a_const_object_is_a_const_write(self):
+        self.add("a.c", "struct Table { int slots[4]; }; void local(const struct Table *t) { t->slots[1] = 2; }\n")
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual([d["kind"] for d in report["disagreements"]], ["const-write"])
+
     def test_pointee_const_is_distinct_from_pointer_const(self):
         self.add("a.c", "extern const int *data_00200000;\n")
         self.add("b.c", "extern int * const data_00200000;\n")
