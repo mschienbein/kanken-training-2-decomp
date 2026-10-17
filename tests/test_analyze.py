@@ -39,6 +39,14 @@ def literal_words(value: bytes) -> list[int]:
     return list(struct.unpack(f"<{len(padded) // 4}I", padded))
 
 
+def walker_bounds(table: int, end: int, first_word: int) -> tuple[list[int], dict]:
+    """Two text pool words whose PC-relative arithmetic yields the table bounds."""
+    start_pool, end_pool = BASE + 4 * first_word, BASE + 4 * first_word + 4
+    start_base, end_base = start_pool + 16, end_pool + 16
+    return ([(table - start_base) & 0xFFFFFFFF, (end - end_base) & 0xFFFFFFFF],
+            {"start": [start_pool, start_base], "end": [end_pool, end_base]})
+
+
 # Synthetic swap/store-exclusive reproducers match the review's missing MEM WRITE
 # flags; exclusive loads must also be withheld because they change reservation state.
 ATOMIC_SETUPS = (
@@ -140,7 +148,7 @@ class CatalogueTests(unittest.TestCase):
                                      [[BASE + 8, BASE + 8 + 4 * len(payload)]])
                     self.assertEqual(result["stats"]["literal_objects_by_kind"], {"string": 1})
 
-    def test_shared_adr_string_remains_unknown(self) -> None:
+    def test_shared_adr_string_becomes_shared_rodata(self) -> None:
         for second_target in (32, 39):
             with self.subTest(second_target=second_target):
                 image, layout = fixture([branch(BASE, BASE + 16, link=True), 0xE28F0014, 0xE12FFF1E, 0,
@@ -150,11 +158,12 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
                 self.assertTrue(all(not function["literals"] and not function["pools"]
                                     for function in result["functions"]))
-                self.assertEqual(sum("shared_address_literal" in item["reasons"]
-                                     for item in result["literal_conflicts"]), 2)
-                self.assertTrue(all(item["kind"] == "unknown" and item["owner"] is None
+                self.assertEqual(result["literal_conflicts"], [])
+                self.assertTrue(all(item["kind"] == "rodata" and item["owner"] is None
                                     for item in result["ranges"] if BASE + 32 <= item["start"] < BASE + 48))
-                self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 16)
+                self.assertEqual(result["stats"]["bytes_by_range_kind"].get("unknown", 0), 0)
+                self.assertEqual((result["shared_literals"][0]["start"], result["shared_literals"][0]["end"]),
+                                 (BASE + 32, BASE + 48))
 
     def test_string_shared_through_another_functions_pool(self) -> None:
         image, layout = fixture([branch(BASE, BASE + 16, link=True), 0xE28F0014, 0xE12FFF1E, 0,
@@ -162,7 +171,8 @@ class CatalogueTests(unittest.TestCase):
         result = analyze.build_catalogue(image, layout)
         self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
         self.assertTrue(all(not function["literals"] for function in result["functions"]))
-        self.assertIn("shared_address_literal", result["literal_conflicts"][0]["reasons"])
+        self.assertEqual(result["literal_conflicts"], [])
+        self.assertEqual(result["shared_literals"][0]["start"], BASE + 32)
         self.assertEqual(result["functions"][1]["pools"], [[BASE + 24, BASE + 28]])
 
     def test_external_data_pointer_prevents_string_absorption(self) -> None:
@@ -172,7 +182,8 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
         self.assertEqual(result["functions"][0]["literals"], [])
         self.assertEqual(result["functions"][0]["size"], 8)
-        self.assertIn("shared_address_literal", result["literal_conflicts"][0]["reasons"])
+        self.assertEqual(result["literal_conflicts"], [])
+        self.assertEqual(result["shared_literals"][0]["start"], BASE + 8)
 
     def test_string_crossing_a_start_is_not_stolen(self) -> None:
         # A hard Thumb entry's synthetic BX bytes are also printable string bytes.
@@ -1296,7 +1307,7 @@ class CatalogueTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "protected function"):
             analyze.check_protected_functions(result, {BASE: published})
 
-    def test_manifest_protection_includes_c005_and_c006_branch_blob(self) -> None:
+    def test_manifest_protection_includes_c007_and_pinned_c008_blob(self) -> None:
         baseline = self.catalogue([0xE12FFF1E, 0xE12FFF1E, 0xE12FFF1E])
         # Separate entries are supplied explicitly; this fixture concerns manifest
         # resolution, not speculative discovery of unreachable adjacent returns.
@@ -1310,18 +1321,25 @@ class CatalogueTests(unittest.TestCase):
             (root / "config/matches.json").write_text(json.dumps({"units": [{"functions": ["func_00100000"]}]}))
             (root / "config/candidates/c005.json").write_text(
                 json.dumps({"units": [{"functions": ["func_00100004"]}]}))
+            (root / "config/candidates/c007.json").write_text(
+                json.dumps({"units": [{"functions": ["func_00100004"]}]}))
             content = json.dumps({"units": [{"functions": ["func_00100008"]}]}).encode()
             blob = "1" * 40
-            with mock.patch.object(analyze.subprocess, "run", side_effect=[
-                subprocess.CompletedProcess([], 0, f"{blob}\n".encode(), b""),
-                subprocess.CompletedProcess([], 0, content, b""),
-            ]) as run:
-                protected, summaries, hashes = analyze.load_protected_functions(root, baseline, [])
+            descriptor = {"reference": "c008-integrate:config/candidates/c008.json", "blob": blob,
+                          "sha256": hashlib.sha256(content).hexdigest()}
+            with mock.patch.object(analyze.subprocess, "run", return_value=
+                                   subprocess.CompletedProcess([], 0, content, b"")) as run:
+                protected, summaries, hashes = analyze.load_protected_functions(
+                    root, baseline, [], git_blobs=[descriptor])
             self.assertEqual(protected, {function["address"]: function for function in functions})
-            label = f"git:c006-integrate:config/candidates/c006.json@{blob}"
+            label = f"git:c008-integrate:config/candidates/c008.json@{blob}"
             self.assertEqual(summaries[label], {"functions": 1, "bytes": 4, "changes": []})
             self.assertEqual(hashes[label], hashlib.sha256(content).hexdigest())
-            self.assertEqual(run.call_args_list[1].args[0], ["git", "show", blob])
+            self.assertEqual(run.call_args.args[0], ["git", "show", blob])
+            with mock.patch.object(analyze.subprocess, "run", return_value=
+                                   subprocess.CompletedProcess([], 0, b"wrong blob", b"")):
+                with self.assertRaisesRegex(ValueError, "digest"):
+                    analyze.load_protected_functions(root, baseline, [], git_blobs=[descriptor])
 
     def test_plain_catalogue_command_includes_review_and_reproduces_all_bytes(self) -> None:
         image, layout = fixture([0xE12FFF1E])
@@ -1342,7 +1360,7 @@ class CatalogueTests(unittest.TestCase):
                 (root / "config/catalogue.json").write_bytes(analyze.serialize_catalogue(baseline))
                 (root / "config/matches.json").write_text(
                     json.dumps({"units": [{"functions": ["func_00100000"]}]} if protect else {"units": []}))
-                (root / "research/catalogue_v8_evidence.json").write_text(json.dumps(evidence))
+                (root / "research/catalogue_v9_evidence.json").write_text(json.dumps(evidence))
                 (root / "orig/code.bin").write_bytes(image)
                 exheader = bytearray(0x200)
                 for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
@@ -1356,7 +1374,7 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v8-r2")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v9")
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
 
@@ -1395,131 +1413,291 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(function["entries"], before)
         self.assertEqual(result["stats"]["creditable_functions"], 0)
 
+    def test_pc_relative_ip_exchange_is_a_code_veneer(self) -> None:
+        result = self.catalogue([0xE28FC001, 0xE12FFF1C, 0x47702007])
+        veneer, target = result["functions"]
+        self.assertEqual((veneer["kind"], veneer["size"], veneer["pools"], veneer["literals"]),
+                         ("veneer", 8, [], []))
+        self.assertEqual(veneer["code_ranges"], [[BASE, BASE + 8]])
+        self.assertEqual((target["address"], target["isa"], target["size"]), (BASE + 8, "thumb", 4))
+
+    def test_pc_relative_veneer_requires_exact_register_condition_and_thumb_target(self) -> None:
+        for setup, transfer in ((0xE28FC000, 0xE12FFF1C), (0x128FC001, 0xE12FFF1C),
+                                (0xE28F0001, 0xE12FFF10), (0xE28FC001, 0xE12FFF1E)):
+            with self.subTest(setup=setup, transfer=transfer):
+                image, layout = fixture([setup, transfer, 0x47702007])
+                self.assertIsNone(analyze.Analyzer(image, layout).veneer(BASE, "arm"))
+
+    def test_shared_empty_literal_is_data_not_padding_or_extent_growth(self) -> None:
+        image, layout = fixture([0xE28F0000, 0xE12FFF1E, 0], rodata=[BASE + 8])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(result["functions"][0]["size"], 8)
+        self.assertIn({"start": BASE + 8, "end": BASE + 12, "kind": "rodata", "owner": None}, result["ranges"])
+        self.assertEqual(result["anomalies"], [])
+
+    def test_reviewed_utf16_bounds_require_exact_references(self) -> None:
+        image, layout = fixture([0xE28F0000, 0xE12FFF1E, *literal_words("alpha\0".encode("utf-16le"))])
+        record = {"function": BASE, "target": BASE + 8, "references": [BASE], "encoding": "utf-16le"}
+        result = analyze.build_catalogue(image, layout, literal_encodings=[record])
+        self.assertEqual(result["functions"][0]["literals"], [[BASE + 8, BASE + 20]])
+        self.assertEqual(result["stats"]["literal_objects_by_kind"], {"utf16_string": 1})
+        for change in ({"references": [BASE + 4]}, {"encoding": "guessed-wide"}, {"function": BASE + 4}):
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                analyze.build_catalogue(image, layout, literal_encodings=[{**record, **change}])
+        with self.assertRaises(ValueError):
+            analyze.build_catalogue(image, layout, literal_encodings=[record, record])
+
+    def test_reviewed_utf16_type_cannot_override_callable_code(self) -> None:
+        image, layout = fixture([0xE28F0004, 0xFA000001, 0xE12FFF1E, *literal_words(b"ABCDpGEF\0\0")])
+        result = analyze.build_catalogue(image, layout, literal_encodings=[
+            {"function": BASE, "target": BASE + 12, "references": [BASE], "encoding": "utf-16le"}])
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual(result["functions"][0]["literals"], [])
+        self.assertIn("address_literal_overlaps_code", result["literal_conflicts"][0]["reasons"])
+
+    def test_reviewed_utf16_requires_a_complete_terminator(self) -> None:
+        image, layout = fixture([0xE28F0000, 0xE12FFF1E, *literal_words("abcd".encode("utf-16le"))])
+        with self.assertRaisesRegex(ValueError, "complete printable bound"):
+            analyze.build_catalogue(image, layout, literal_encodings=[
+                {"function": BASE, "target": BASE + 8, "references": [BASE], "encoding": "utf-16le"}])
+
+    def test_section_authenticated_relative_table_recovers_missing_entries(self) -> None:
+        table = BASE + 0x1000
+        pool_words, bounds = walker_bounds(table, table + 8, 8)
+        image, layout = fixture([0xE12FFF1E, 0, 0, 0, 0xE3A00007, 0xE12FFF1E, 0, 0, *pool_words],
+                                rodata=[(BASE - table) & 0xFFFFFFFF, (BASE + 16 - table - 4) & 0xFFFFFFFF])
+        record = {"start": table, "end": table + 8, "section": ".init_array", "bounds": bounds,
+                  "encoding": "self_relative_32", "evidence": "synthetic compiler section-ABI witness"}
+        baseline = analyze.build_catalogue(image, layout)
+        self.assertEqual([function["address"] for function in baseline["functions"]], [BASE])
+        result = analyze.build_catalogue(image, layout, relative_pointer_tables=[record])
+        self.assertEqual([function["address"] for function in result["functions"]], [BASE, BASE + 16])
+        self.assertEqual(result["functions"][1]["evidence"], ["relative_init_array"])
+        self.assertEqual([row["address"] for row in result["relative_pointer_tables"][0]["targets"]], [BASE, BASE + 16])
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+
+    def test_relative_table_is_bounded_to_the_proved_section(self) -> None:
+        table = BASE + 0x1000
+        pool_words, bounds = walker_bounds(table, table + 4, 8)
+        image, layout = fixture([0xE12FFF1E, 0, 0, 0, 0, 0, 0, 0, *pool_words], rodata=[(BASE - table) & 0xFFFFFFFF])
+        record = {"start": table, "end": table + 4, "section": ".init_array", "bounds": bounds,
+                  "encoding": "self_relative_32", "evidence": "synthetic compiler section-ABI witness"}
+        shifted = {"start": [bounds["start"][0], bounds["start"][1] + 4], "end": bounds["end"]}
+        for change in ({"start": table + 1}, {"end": table + 8}, {"section": ".guessed"},
+                       {"evidence": ""}, {"encoding": "absolute"}, {"start": BASE},
+                       {"bounds": {"end": bounds["end"]}}, {"bounds": shifted},
+                       {"bounds": {"start": [BASE + 0x2000, 0], "end": bounds["end"]}}):
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                analyze.build_catalogue(image, layout, relative_pointer_tables=[{**record, **change}])
+        bad_image, bad_layout = fixture([0xE12FFF1E, 0, 0, 0, 0, 0, 0, 0, *pool_words], rodata=[0])
+        with self.assertRaisesRegex(ValueError, "plausible code"):
+            analyze.build_catalogue(bad_image, bad_layout, relative_pointer_tables=[record])
+
+    def test_new_initializer_calls_preserve_complete_protected_entry_metadata(self) -> None:
+        table = BASE + 0x1000
+        pool_words, bounds = walker_bounds(table, table + 4, 9)
+        image, layout = fixture([branch(BASE, BASE + 32, link=True), 0xE12FFF1E, 0, 0,
+                                branch(BASE + 16, BASE + 32, link=True), 0xE12FFF1E, 0, 0, 0xE12FFF1E, *pool_words],
+                                rodata=[(BASE + 16 - table) & 0xFFFFFFFF])
+        baseline = analyze.build_catalogue(image, layout)
+        expected = next(function for function in baseline["functions"] if function["address"] == BASE + 32)
+        result = analyze.build_catalogue(image, layout, protected_functions={BASE + 32: expected},
+                                         relative_pointer_tables=[{
+                                             "start": table, "end": table + 4, "section": ".init_array",
+                                             "bounds": bounds, "encoding": "self_relative_32",
+                                             "evidence": "synthetic section proof"}])
+        actual = next(function for function in result["functions"] if function["address"] == BASE + 32)
+        self.assertEqual(actual, expected)
+        self.assertEqual(result["protected_entry_observations"], [
+            {"function": BASE + 16, "site": BASE + 16, "target": BASE + 32,
+             "reason": "protected_adopted_entry_metadata"}])
+
+    def test_initializer_recovery_preserves_a_legacy_prologue_entry_without_credit(self) -> None:
+        table = BASE + 0x1000
+        pool_words, bounds = walker_bounds(table, table + 4, 8)
+        image, layout = fixture([
+            0xE12FFF1E, 0, 0, 0, 0xE3A00007, 0xE92D4010, 0xE3A00000, 0xE8BD8010, *pool_words],
+            rodata=[(BASE + 16 - table) & 0xFFFFFFFF])
+        baseline = analyze.build_catalogue(image, layout)
+        prior = next(function for function in baseline["functions"] if function["address"] == BASE + 20)
+        result = analyze.build_catalogue(image, layout, prior_functions=baseline["functions"],
+                                         relative_pointer_tables=[{
+                                             "start": table, "end": table + 4, "section": ".init_array",
+                                             "bounds": bounds, "encoding": "self_relative_32",
+                                             "evidence": "synthetic section proof"}])
+        recovered = next(function for function in result["functions"] if function["address"] == BASE + 16)
+        self.assertEqual(recovered["kind"], "multi_entry")
+        self.assertEqual(recovered["entries"], [
+            {"address": BASE + 16, "isa": "arm", "kind": "entry",
+             "evidence": ["relative_init_array"], "sources": []},
+            {"address": BASE + 20, "isa": "arm", "kind": "secondary_entry",
+             "evidence": ["legacy_prologue"], "sources": []},
+        ])
+        self.assertEqual(result["legacy_entry_preservation"], [{
+            "old_address": BASE + 20, "address": BASE + 16, "old_size": prior["size"],
+            "size": recovered["size"], "isa": "arm", "old_entry_evidence": ["prologue"],
+            "entry_evidence": ["legacy_prologue"],
+            "reason": "preserved prior prologue-derived label; no independent callability witness or C credit",
+        }])
+        self.assertEqual(result["stats"]["creditable_functions"], 1)
+        self.assertEqual(result["stats"]["secondary_entries"], 1)
+
+    def test_legacy_preservation_refuses_unproved_or_noninstruction_mappings(self) -> None:
+        result = self.catalogue([0xE3A00007, 0xE3A00000, 0xE12FFF1E])
+        before = {**result["functions"][0], "address": BASE + 4, "size": 8, "code_size": 8,
+                  "code_ranges": [[BASE + 4, BASE + 12]], "evidence": ["prologue"],
+                  "entries": [{"address": BASE + 4, "isa": "arm", "kind": "entry",
+                               "evidence": ["prologue"], "sources": []}]}
+        for change in ("missing_initializer", "incoming_call", "wrong_isa", "unaligned", "lost_span"):
+            with self.subTest(change=change):
+                candidate, previous = json.loads(json.dumps(result)), json.loads(json.dumps(before))
+                candidate["functions"][0]["evidence"] = ["relative_init_array"]
+                if change == "missing_initializer":
+                    candidate["functions"][0]["evidence"] = ["pointer"]
+                elif change == "incoming_call":
+                    previous["entries"][0]["sources"] = [BASE + 0x100]
+                elif change == "wrong_isa":
+                    previous["entries"][0]["isa"] = "thumb"
+                elif change == "unaligned":
+                    previous["entries"][0]["address"] += 2
+                else:
+                    previous["code_ranges"][0][1] += 4
+                with self.assertRaisesRegex(ValueError, "prior entry"):
+                    analyze.preserve_prior_entries(candidate, [previous])
+
+    def test_nonstoring_wrapper_splits_closed_object_access_graph(self) -> None:
+        result = self.catalogue([
+            0xE5900008, 0xE1A00000, 0xE5901000, 0xE3510000,
+            branch(BASE + 16, BASE + 32, condition=0), 0xE5912000, 0xE5812004, 0xE1A00002, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [8, 28])
+        self.assertIn("nonstoring_wrapper_field_access_graph", result["linker_tail_extent_splits"][0]["start_evidence"])
+
+    def test_nonstoring_wrapper_splits_closed_pointer_count_loop(self) -> None:
+        result = self.catalogue([
+            0xE5900008, 0xE1A00000, 0xE1A01000, 0xE3A00000, 0xE5912000, 0xE3520000,
+            branch(BASE + 24, BASE + 40, condition=0), 0xE2800001, 0xE2811004,
+            branch(BASE + 36, BASE + 16), 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [8, 36])
+
+    def test_accessor_graph_intersects_definitions_at_control_flow_joins(self) -> None:
+        image, layout = fixture([
+            0xE5900008, 0xE1A00000, 0xE5901000, 0xE3510000,
+            branch(BASE + 16, BASE + 24, condition=0), 0xE3A02001, 0xE0820000, 0xE12FFF1E])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+
+    def test_accessor_graph_never_admits_an_atomic_prefix(self) -> None:
+        for prefix, _ in ATOMIC_SETUPS:
+            with self.subTest(prefix=prefix):
+                result = self.catalogue([
+                    prefix, 0xE1A00000, 0xE5901000, 0xE3510000,
+                    branch(BASE + 16, BASE + 24, condition=0), 0xE1A00001, 0xE12FFF1E])
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+
+    def test_restored_frame_splits_a_single_closed_tail_wrapper(self) -> None:
+        result = self.catalogue([
+            0xE92D4010, branch(BASE + 4, BASE + 28, link=True), 0xE8BD4010, 0xE1A00000,
+            branch(BASE + 16, BASE + 28), 0, 0, 0xE12FFF1E])
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertEqual((functions[BASE]["size"], functions[BASE + 16]["size"]), (16, 4))
+        self.assertIn("restored_frame_closed_tail", result["linker_tail_extent_splits"][0]["start_evidence"])
+
     @unittest.skipUnless((ROOT / "orig/code.bin").is_file() and (ROOT / "orig/exheader.bin").is_file(), "private inputs absent")
     def test_original_invariants_and_stability(self) -> None:
         image = (ROOT / "orig/code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((ROOT / "orig/exheader.bin").read_bytes())
-        adopted_bytes = (ROOT / "config/catalogue.json").read_bytes()
-        adopted = json.loads(adopted_bytes)
-        protected, _, _ = analyze.load_protected_functions(ROOT, adopted, [])
+        adopted = json.loads((ROOT / "config/catalogue.json").read_bytes())
+        evidence = json.loads((ROOT / "research/catalogue_v9_evidence.json").read_bytes())
+        protected, _, _ = analyze.load_protected_functions(
+            ROOT, adopted, [], git_blobs=evidence["protected_git_blobs"])
         adopted_functions = {function["address"]: function for function in adopted["functions"]}
-        self.assertTrue(set(protected) <= adopted_functions.keys())
-        # Replay the report's generation inputs: adoption replaced the v7 baseline,
-        # and later manifests must not rewrite the adopted catalogue's provenance.
-        reproduction_commit = "b52f08b1b6f17be29c03634c17c9cbd078ecd65c"
         scratch = ROOT / "scratch"
         scratch.mkdir(exist_ok=True)
-        with tempfile.TemporaryDirectory(dir=scratch) as temporary:
-            root = Path(temporary)
-            for name, digest in adopted["generator"]["input_sha256"].items():
-                if not name.startswith("config/"):
-                    continue
-                historical = subprocess.run(["git", "show", f"{reproduction_commit}:{name}"],
-                                            cwd=ROOT, capture_output=True, check=False)
-                self.assertEqual(historical.returncode, 0, f"cannot read recorded v8 input {name}")
-                self.assertEqual(hashlib.sha256(historical.stdout).hexdigest(), digest, name)
-                path = root / name
-                path.parent.mkdir(parents=True, exist_ok=True)
-                path.write_bytes(historical.stdout)
-            for directory in ("orig", "research"):
-                (root / directory).symlink_to(ROOT / directory, target_is_directory=True)
-            output = root / "regenerated.json"
-            with mock.patch.object(analyze, "ROOT", root), redirect_stdout(io.StringIO()):
-                self.assertEqual(analyze.main(["catalogue", "--out", str(output)]), 0)
-            regenerated_bytes = output.read_bytes()
-        self.assertEqual(regenerated_bytes, adopted_bytes)
-        first = json.loads(regenerated_bytes)
+        with tempfile.TemporaryDirectory(dir=scratch) as temporary, redirect_stdout(io.StringIO()):
+            paths = [Path(temporary) / name for name in ("first.json", "second.json")]
+            for path in paths:
+                self.assertEqual(analyze.main(["catalogue", "--out", str(path)]), 0)
+            self.assertEqual(paths[0].read_bytes(), paths[1].read_bytes())
+            first = json.loads(paths[0].read_bytes())
         self.assertEqual(analyze.validate_catalogue(first, image, layout), [])
         self.assertEqual(sum(item["end"] - item["start"] for item in first["ranges"]), len(image))
-        self.assertGreater(first["stats"]["functions"], 100)
-        strings = next(function for function in first["functions"] if function["address"] == 0x1932E8)
-        self.assertEqual(strings["size"], 300)
-        self.assertEqual(strings["literals"], [[0x193390, 0x193414]])
-        entry_owners = {entry["address"]: (function, entry) for function in first["functions"]
-                        for entry in function["entries"]}
-        owner, entry = entry_owners[0x18F7F0]
-        self.assertEqual((owner["address"], owner["kind"]), (0x18F7F0, "function"))
-        self.assertTrue({0x11FA34, 0x11FFDC} <= set(entry["sources"]))
-        owner, entry = entry_owners[0x12D1D8]
-        self.assertEqual((owner["address"], owner["kind"]), (0x12D1D8, "function"))
-        self.assertIn(0x135054, entry["sources"])
-        owner, entry = entry_owners[0x1852F4]
-        self.assertEqual((owner["kind"], entry["kind"], owner["size"]), ("function", "entry", 4))
         functions = {function["address"]: function for function in first["functions"]}
-        self.assertEqual((functions[0x186EEC]["kind"], functions[0x186EEC]["size"]), ("function", 4))
-        self.assertIn("pointer", functions[0x186EEC]["evidence"])
-        self.assertEqual((functions[0x1EF884]["kind"], functions[0x1EF884]["size"]), ("function", 4))
-        self.assertIn("pointer", functions[0x1EF884]["evidence"])
-        self.assertEqual(functions[0x149428]["kind"], "function")
-        self.assertIn("pointer", functions[0x149428]["evidence"])
-        for address in (0x195EC4, 0x180768, 0x180884, 0x149428):
-            self.assertEqual(entry_owners[address][1]["isa"], "arm")
-        adopted_entries = {(entry["address"], entry["isa"]) for function in adopted["functions"]
-                           for entry in function.get("entries", [function])}
-        recovered_entries = {(address, entry["isa"]) for address, (_, entry) in entry_owners.items()}
-        repairs = {row["old_address"]: row["address"] for row in first["leading_instruction_repairs"]}
-        self.assertEqual(repairs, {
-            0x107144: 0x107140, 0x113CA8: 0x113CA4, 0x1456E8: 0x1456E4,
-            0x195A54: 0x195A50, 0x1C6444: 0x1C6440, 0x1CB110: 0x1CB10C,
-            0x1CE684: 0x1CE67C, 0x1F50DC: 0x1F50D8, 0x1F5180: 0x1F5170,
-            0x1F5678: 0x1F5674, 0x1F5788: 0x1F5780, 0x1F5810: 0x1F580C,
-            0x1F5870: 0x1F586C, 0x203814: 0x203810, 0x205284: 0x205280,
-            0x20693C: 0x206938, 0x2102BC: 0x2102B4, 0x214588: 0x214580,
-            0x214D28: 0x214D18, 0x214DA0: 0x214D9C, 0x214E44: 0x214E40,
-            0x215130: 0x215120,
-        })
-        self.assertEqual(recovered_entries, adopted_entries)
-        for old_address, address in repairs.items():
-            with self.subTest(repaired_address=address):
-                self.assertIn((address, "arm"), adopted_entries)
-                self.assertIn(address, adopted_functions)
-                self.assertNotIn(old_address, adopted_functions)
-        self.assertEqual((functions[0x113CA4]["size"], functions[0x113CA4]["pools"]), (252, [[0x113D9C, 0x113DA0]]))
-        self.assertEqual(functions[0x110CC8]["size"], 484)
-        self.assertEqual(functions[0x14B358]["size"], 224)
-        for address in protected:
-            self.assertEqual(functions[address], adopted_functions[address])
-        self.assertEqual((functions[0x112C80]["kind"], functions[0x112C80]["size"]), ("function", 24))
-        self.assertEqual((functions[0x112C98]["kind"], functions[0x112C98]["size"]), ("function", 48))
-        self.assertEqual(len(first["linker_tail_inventory"]), 270)
-        expected_splits = {
-            0x15274C: (12, 0x152758, 20),
-            0x15E474: (12, 0x15E480, 28),
-            0x15E49C: (12, 0x15E4A8, 96),
-            0x15E5C4: (16, 0x15E5D4, 28),
-            0x15E624: (16, 0x15E634, 80),
-            0x15E684: (20, 0x15E698, 28),
-            0x1D2C44: (52, 0x1D2C78, 12),
-            0x1D2CF0: (36, 0x1D2D14, 12),
-            0x131948: (8, 0x131950, 8),
-            0x1EFCD0: (8, 0x1EFCD8, 8),
-        }
-        for address, (head_size, target, tail_size) in expected_splits.items():
-            with self.subTest(address=address):
-                self.assertEqual((functions[address]["kind"], functions[address]["size"]), ("function", head_size))
-                self.assertEqual((functions[target]["kind"], functions[target]["size"]), ("function", tail_size))
-        self.assertEqual(functions, adopted_functions)
-        self.assertTrue({0x110CC8, 0x14B358, 0x1C5260} <= set(functions))
-        self.assertEqual(len(first["linker_tail_extent_splits"]), 139)
-        self.assertEqual(sum(first["stats"]["linker_tail_census"].values()),
-                         sum(adopted["stats"]["linker_tail_census"].values()))
+        for address, expected in protected.items():
+            self.assertEqual(functions[expected["address"]], expected, f"{address:#x}")
+        self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
+                          first["stats"]["creditable_bytes"]), (4699, 4624, 1131454))
+        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
+                          first["stats"]["anomalies"]), (4417, 87, 37))
+        self.assertEqual(sum(first["stats"][key] for key in ("code_bytes", "pool_bytes", "literal_bytes")),
+                         first["stats"]["bytes_by_range_kind"]["function"])
+        self.assertEqual((functions[0x1372EC]["size"], functions[0x1372EC]["literals"]),
+                         (708, [[0x137520, 0x1375B0]]))
+        for address in (0x1BC29C, 0x1B8234):
+            item = next(row for row in first["ranges"] if row["start"] <= address < row["end"])
+            self.assertEqual((item["kind"], item["owner"], item["end"] - item["start"]), ("rodata", None, 1))
+            self.assertEqual(next(row for row in first["ranges"] if row["start"] == address + 1)["kind"], "unknown")
+        for address, (head_size, target, tail_size) in {
+            0x131948: (8, 0x131950, 8), 0x1EFCD0: (8, 0x1EFCD8, 8),
+            0x10BED4: (32, 0x10BEF4, 4), 0x1D033C: (12, 0x1D0348, 56),
+            0x1D222C: (8, 0x1D2234, 52), 0x1F4784: (8, 0x1F478C, 40),
+        }.items():
+            self.assertEqual((functions[address]["size"], functions[target]["size"]), (head_size, tail_size))
+        for address in (0x1008AC, 0x100C80, 0x100C9E, 0x19F6B4, 0x1847C8):
+            self.assertEqual(functions[address]["kind"], "runtime")
+        for address in (0x11EF2C, 0x11EF4C, 0x1565B0):
+            self.assertEqual((functions[address]["kind"], functions[address]["classification_evidence"]["basis"]),
+                             ("assembly", "unrepresentable_abi"))
+        for address in (0x10007C, 0x100114, 0x100520, 0x1008DC, 0x10090C, 0x100A6C, 0x100AF0, 0x100C94,
+                        0x19F5BC, 0x19F634, 0x19F6AC, 0x1911C4):
+            self.assertEqual((functions[address]["kind"], functions[address]["size"]), ("veneer", 8))
+        self.assertEqual(sum(function["kind"] == "veneer" for function in functions.values()), 18)
+        self.assertEqual((functions[0x212674]["size"], functions[0x2136C4]["size"]), (84, 56))
+        self.assertEqual(functions[0x212674]["pools"], [[0x2126B4, 0x2126C8]])
+        self.assertEqual(functions[0x2136C4]["pools"], [[0x2136EC, 0x2136FC]])
         self.assertEqual(first["stats"]["linker_nop_words"], 776)
-        nop_inventory = first["linker_nop_inventory"]
-        self.assertEqual([row["site"] for row in nop_inventory],
+        self.assertEqual(len(first["linker_tail_extent_splits"]), 143)
+        self.assertEqual([row["site"] for row in first["linker_nop_inventory"]],
                          [layout.text.address + offset for offset in range(0, layout.text.size - 3, 4)
                           if struct.unpack_from("<I", image, offset)[0] == 0xE1A00000])
-        self.assertEqual(sum(row["decision"] == "in_frame_not_tail" for row in nop_inventory), 505)
-        self.assertEqual(sum(row["decision"] == "not_executed_arm_code" for row in nop_inventory), 1)
-        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["anomalies"]),
-                         (adopted["stats"]["bytes_by_range_kind"]["unknown"], adopted["stats"]["anomalies"]))
-        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["anomalies"]),
-                         (7724, 70))
-        self.assertEqual(sum(first["stats"][field] for field in ("code_bytes", "pool_bytes", "literal_bytes")),
-                         first["stats"]["bytes_by_range_kind"]["function"])
-        for split in first["linker_tail_splits"]:
-            self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
-                             ("function", 4))
-            self.assertEqual(functions[split["target"]]["kind"], adopted_functions[split["target"]]["kind"])
+        review = first["revision_review"]
+        self.assertEqual(review["structural_issues"], [])
+        self.assertEqual(review["preservation"]["protected_changes"], [])
+        self.assertEqual(review["preservation"]["unexpected_entry_losses"], [])
+        self.assertEqual(review["preservation"]["unexpected_extent_changes"], [])
+        prior_entries = {(entry["address"], entry["isa"]) for function in adopted["functions"]
+                         for entry in function["entries"]}
+        current_entries = {(entry["address"], entry["isa"]) for function in functions.values()
+                           for entry in function["entries"]}
+        self.assertLessEqual(prior_entries, current_entries)
+        self.assertEqual(review["preservation"]["retained_prior_entries"], len(prior_entries))
+        expected_legacy = {0x1F5990: 0x1F5980, 0x2069F0: 0x2069EC, 0x212684: 0x212674,
+                           0x2136D0: 0x2136C4, 0x214FEC: 0x214FE8}
+        self.assertEqual({row["old_address"]: row["address"] for row in first["legacy_entry_preservation"]},
+                         expected_legacy)
+        for address, target in expected_legacy.items():
+            self.assertEqual(functions[target]["kind"], "multi_entry")
+            legacy = next(entry for entry in functions[target]["entries"] if entry["address"] == address)
+            self.assertEqual((legacy["kind"], legacy["evidence"], legacy["sources"]),
+                             ("secondary_entry", ["legacy_prologue"], []))
+        self.assertEqual((functions[0x145610]["kind"], functions[0x145610]["size"]), ("function", 28))
+        self.assertEqual(len(review["unknown_accounting"]), adopted["stats"]["unknown_ranges"])
+        self.assertEqual(len(review["anomaly_accounting"]), adopted["stats"]["anomalies"])
+        table_targets = [row for table in first["relative_pointer_tables"] for row in table["targets"]]
+        self.assertEqual(len(table_targets), 160)
+        entries = {(entry["address"], entry["isa"]) for function in first["functions"] for entry in function["entries"]}
+        self.assertTrue(all((row["address"], row["isa"]) in entries for row in table_targets))
+        self.assertEqual(len(evidence["initializer_targets_previously_unknown"]), 93)
+        residue = review["thumb_v9_residue"]
+        self.assertEqual(len(residue), 56)
+        self.assertFalse(any(row["ownership_classified"] for row in residue))
+        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 54)
+        self.assertEqual({row["address"]: row["candidate_owner"] for row in residue
+                          if row["candidate_owner_kind"] == "multi_entry"},
+                         {0x1000A0: 0x100084, 0x10030C: 0x10030C})
+        for address in (0x1932E8, 0x113CA4, 0x110CC8, 0x14B358, 0x112C80, 0x112C98, 0x14E50C, 0x16BDE0):
+            self.assertEqual(functions[address]["size"], adopted_functions[address]["size"])
+        self.assertNotIn(0x14E510, functions)
+        self.assertNotIn(0x16BDE4, functions)
 
 
 if __name__ == "__main__":
