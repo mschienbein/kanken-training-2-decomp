@@ -7,6 +7,7 @@ struct SignalState;
 struct StreamCriticalSection;
 struct StreamMutex;
 
+#include "game/aux_effect.h"
 #include "game/stream_manager.h"
 #include "ctr/svc.h"
 #include "game/synchronization.h"
@@ -40,7 +41,7 @@ struct ServiceOutput {
     unsigned reserved04;
     float volume;
     unsigned char reserved0c[8];
-    void (*callbacks[2])(void *, void *, void *);
+    AuxCallback callbacks[2];
     void *contexts[2];
     unsigned char reserved24[2];
     signed char shared_status;
@@ -147,7 +148,7 @@ extern void func_001521dc(struct HandleManager *manager, struct AudioChannel *ha
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern void func_00180558(const struct ServiceOutput *state, int index, void (**first)(void *, void *, void *), void **second);
+extern void func_00180558(const struct ServiceOutput *state, int index, AuxCallback *first, void **second);
 #ifdef __cplusplus
 }
 #endif

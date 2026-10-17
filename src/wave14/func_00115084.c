@@ -1,8 +1,10 @@
 #include "game/service_callbacks.h"
 #include "game/service_state.h"
-/* [INFERENCE] Callback roles are provisional; recovered parameter shapes follow
- * func_00122b30's indirect calls. Slots 11 and 15 have no recovered invocation,
- * so their signatures use the void(void) fallback. Slots 13 and 14 are unchanged. */
+/* [INFERENCE] Callback roles are provisional. Slot 11 forwards contexts[11]
+ * (func_0010ce6c/func_0010cf98); slot 15 forwards contexts[15] and all message
+ * receive outputs and returns a decision (func_00142d74/func_00191e18).
+ * Slots 13/14 also forward their contexts (func_00115000, including its tail
+ * call); neither slot is reset here. */
 void func_00115084(void)
 {
     func_001233c0(func_00122b30, 0);
