@@ -1151,9 +1151,10 @@ def _append_range(ranges: list[dict], start: int, end: int, kind: str, owner: in
 def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: dict[int, dict]) -> dict:
     """Partition proved branchnop sections after v5 recovery, without rediscovering starts.
 
-    The census's linear LR test identifies candidates, not sufficient boundaries.
-    Require independent successor evidence and reject every control/data crossing.
-    Keeping this pass last preserves v5 entries, literals and protected C extents.
+    Preserve the census's labels, but also consider independently proved stack-LR
+    restores that its textual heuristic misses. Neither population is sufficient:
+    require successor evidence and reject every control/data crossing.
+    Keeping this pass last preserves earlier entries, literals and protected C extents.
     Protection compares adopted records, so already-adopted split parts remain
     reproducible when those parts are later added to an accepted manifest.
     """
@@ -1180,10 +1181,30 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
     def is_data(function: dict, address: int) -> bool:
         return any(first <= address < end for first, end in function["pools"] + function["literals"])
 
-    caller_saved = {arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12}
+    core_arguments = {arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12}
+    fp_arguments = set(range(arm.ARM_REG_S0, arm.ARM_REG_S15 + 1))
+    caller_saved = core_arguments | fp_arguments
+    # A D register overlaps two S lanes: a partial S write must not initialize D.
+    register_units = {arm.ARM_REG_D0 + index: {arm.ARM_REG_S0 + 2 * index, arm.ARM_REG_S0 + 2 * index + 1}
+                      for index in range(16)}
+    result_classes = ({arm.ARM_REG_R0}, set(range(arm.ARM_REG_S0, arm.ARM_REG_S7 + 1)))
 
-    def as_if_call(site: int) -> str:
-        written, flags = set(), False
+    def registers(ins) -> tuple[set[int], set[int]]:
+        read, wrote = (set(items) for items in ins.regs_access())
+        # Capstone omits the VFP register lists of VSTM/VLDM from regs_access
+        # and marks those operands with access=0. Scalar VSTR/VLDR are complete.
+        fp_list = {op.reg for op in ins.operands if op.type == arm.ARM_OP_REG
+                   and (arm.ARM_REG_S0 <= op.reg <= arm.ARM_REG_S31
+                        or arm.ARM_REG_D0 <= op.reg <= arm.ARM_REG_D31)}
+        if ins.id in (arm.ARM_INS_VSTMIA, arm.ARM_INS_VSTMDB, arm.ARM_INS_VPUSH):
+            read.update(fp_list)
+        elif ins.id in (arm.ARM_INS_VLDMIA, arm.ARM_INS_VLDMDB, arm.ARM_INS_VPOP):
+            wrote.update(fp_list)
+        return ({unit for register in read for unit in register_units.get(register, {register})},
+                {unit for register in wrote for unit in register_units.get(register, {register})})
+
+    def as_if_call(site: int) -> dict:
+        written, live, flags = set(), set(), False
         for address in range(site + 4, site + 52, 4):
             function = owner(address)
             if function is None or function["isa"] != "arm" or is_data(function, address):
@@ -1191,16 +1212,49 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
             ins = instruction(address)
             if ins is None:
                 break
-            read, wrote = ins.regs_access()
-            if (set(read) & caller_saved) - written:
-                return "reads_args"
+            read, wrote = registers(ins)
+            live.update((read & caller_saved) - written)
+            # Keep both possible result classes, not a fictitious R0+VFP result.
+            # HFA returns can occupy D0-D3 (S0-S7); R0 alone is a core result.
+            # Thus S0 alone is not proof, but an untouched object pointer plus
+            # pass-through S0 is, as are argument lanes beyond the result block.
+            if not any(live <= result for result in result_classes):
+                return {"as_if_call": "reads_args",
+                        "live_argument_registers": sorted(detailed.reg_name(register) for register in live)}
             if (ins.cc not in (arm.ARM_CC_AL, arm.ARM_CC_INVALID) or arm.ARM_REG_CPSR in read) and not flags:
-                return "reads_flags"
-            written.update(set(wrote) & caller_saved)
-            flags |= arm.ARM_REG_CPSR in wrote
+                return {"as_if_call": "reads_flags"}
+            if ins.cc in (arm.ARM_CC_AL, arm.ARM_CC_INVALID):
+                written.update(wrote & caller_saved)
+                flags |= arm.ARM_REG_CPSR in wrote
             if arm.ARM_REG_PC in wrote or ins.mnemonic in ("b", "bl", "bx", "blx"):
                 break
-        return "consistent"
+        return {"as_if_call": "consistent"}
+
+    def leaf_setter(target: int, function: dict) -> bool:
+        """Prove a bounded, stack-independent field setter, not just a plausible opcode."""
+        written, stores = set(), False
+        end = function["address"] + function["size"]
+        for address in range(target, min(target + 48, end), 4):
+            if is_data(function, address) or not any(first <= address < last for first, last in function["code_ranges"]):
+                return False
+            ins = instruction(address)
+            if ins is None or ins.cc not in (arm.ARM_CC_AL, arm.ARM_CC_INVALID):
+                return False
+            read, wrote = registers(ins)
+            decoded_ins = analyzer.decode(address, "arm")
+            if analyzer.word(address) in (0xE12FFF1E, 0xE1A0F00E):
+                return stores and address + 4 == end
+            if (decoded_ins.call or decoded_ins.branch or decoded_ins.stop or decoded_ins.terminal
+                    or decoded_ins.pools or arm.ARM_REG_SP in read | wrote or arm.ARM_REG_LR in read | wrote
+                    or read - core_arguments or wrote - core_arguments
+                    or (read & core_arguments) - written - {arm.ARM_REG_R0}
+                    or arm.ARM_REG_R0 in wrote or ins.writeback
+                    or any(op.type == arm.ARM_OP_MEM and (op.mem.base != arm.ARM_REG_R0 or op.mem.index)
+                           for op in ins.operands)):
+                return False
+            stores |= ins.id in (arm.ARM_INS_STR, arm.ARM_INS_STRB, arm.ARM_INS_STRH)
+            written.update(wrote)
+        return False
 
     pointers = set(analyzer._external_pointers())
     for function in functions:
@@ -1213,7 +1267,7 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
         if (function := owner(address)) is not None:
             protected_owners.setdefault(function["address"], []).append(address)
     conflicted = {conflict["function"] for conflict in catalogue["literal_conflicts"]}
-    inventory = []
+    inventory, nop_inventory = [], []
     classes: Counter[str] = Counter()
     code_by_owner = {}
     for function in functions:
@@ -1224,7 +1278,9 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
         if not sites:
             continue
         code_by_owner[function["address"]] = code
-        saved = frame_saved = False
+        saved = frame_saved = frame_restored = False
+        restored_at = None
+        stack_offset, saved_lr_slot = 0, None
         for address in range(function["address"], max(sites) + 4, 4):
             if is_data(function, address):
                 continue
@@ -1245,35 +1301,86 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
                 else:
                     category = "call:in_frame" if saved else "tail:in_leaf"
                 classes[category] += 1
-                if category.startswith("tail:"):
-                    inventory.append({"owner": function["address"], "site": address, "target": address + 4,
-                                      "census_class": category, "census_lr_saved": saved,
-                                      "lr_saved": frame_saved, "as_if_call": as_if_call(address)})
+                row = {"owner": function["address"], "site": address, "target": address + 4,
+                       "census_class": category, "census_lr_saved": saved, "lr_saved": frame_saved,
+                       "restored_frame_at": restored_at if frame_restored and stack_offset == 0 else None,
+                       **as_if_call(address)}
+                nop_inventory.append(row)
+                if category.startswith("tail:") or frame_restored and stack_offset == 0:
+                    inventory.append(row)
+                else:
+                    row["decision"] = "in_frame_not_tail"
             word = analyzer.word(address)
-            if word == 0xE52DE004:
-                frame_saved = True
-            elif word == 0xE49DE004:
-                frame_saved = False
+            ins = instruction(address)
+            if ins is None:
+                continue
             block = word & 0x0E000000 == 0x08000000
-            if block or word in (0xE52DE004, 0xE49DE004):
-                ins = instruction(address)
-                if ins is not None and "lr" in ins.op_str:
-                    # Preserve the published census's textual LR heuristic,
-                    # but do not mistake an LR base register for a saved LR.
-                    stack_lr = block and (word >> 16) & 15 == 13 and bool(word & 0x4000)
-                    if ins.mnemonic in ("push", "stmdb", "stmfd"):
-                        saved = True
-                        if stack_lr:
-                            frame_saved = True
-                    elif ins.mnemonic in ("pop", "ldm", "ldmia", "ldmfd") and "pc" not in ins.op_str:
-                        saved = False
-                        if stack_lr:
-                            frame_saved = False
+            stack_lr = block and (word >> 16) & 15 == 13 and bool(word & 0x4000)
+            stack_memory = any(op.type == arm.ARM_OP_MEM and op.mem.base == arm.ARM_REG_SP for op in ins.operands)
+            single_lr = (word & 0x0E0F0000 == 0x040D0000 and (word >> 12) & 15 == 14)
+            stack_save = stack_lr and not word & 0x00100000 or (
+                single_lr and ins.id == arm.ARM_INS_STR and stack_memory)
+            stack_restore = stack_lr and bool(word & 0x00100000) or (
+                single_lr and ins.id == arm.ARM_INS_LDR and stack_memory)
+            unconditional = ins.cc in (arm.ARM_CC_AL, arm.ARM_CC_INVALID)
+            slot, adjustment = None, 0
+            if block and (word >> 16) & 15 == 13:
+                count = (word & 0xFFFF).bit_count()
+                upward, preindexed = bool(word & 0x00800000), bool(word & 0x01000000)
+                first = (4 if preindexed else 0) if upward else -4 * count + (0 if preindexed else 4)
+                if stack_lr and stack_offset is not None:
+                    slot = stack_offset + first + 4 * (word & 0x3FFF).bit_count()
+                if word & 0x00200000:
+                    adjustment = 4 * count * (1 if upward else -1)
+            elif word & 0x0E0F0000 == 0x040D0000:
+                displacement = (word & 0xFFF) * (1 if word & 0x00800000 else -1)
+                if single_lr and stack_offset is not None:
+                    slot = stack_offset + (displacement if word & 0x01000000 else 0)
+                if word & 0x00200000 or not word & 0x01000000:
+                    adjustment = displacement
+            elif (ins.id in (arm.ARM_INS_ADD, arm.ARM_INS_SUB) and len(ins.operands) == 3
+                  and ins.operands[0].type == ins.operands[1].type == arm.ARM_OP_REG
+                  and ins.operands[0].reg == ins.operands[1].reg == arm.ARM_REG_SP
+                  and ins.operands[2].type == arm.ARM_OP_IMM):
+                adjustment = ins.operands[2].imm * (1 if ins.id == arm.ARM_INS_ADD else -1)
+            elif arm.ARM_REG_SP in ins.regs_access()[1]:
+                stack_offset = None
+            if stack_save:
+                saved_lr_slot = slot if unconditional and not frame_saved else None
+                frame_saved, frame_restored = True, False
+            elif stack_restore and unconditional:
+                matched_slot = slot is not None and slot == saved_lr_slot
+                frame_restored = frame_saved and matched_slot
+                # Ordinary stack-register-list restores retain v6 semantics;
+                # newly recognized single loads need a matching saved slot.
+                if stack_lr or matched_slot:
+                    frame_saved = False
+                restored_at = address if frame_restored else None
+                saved_lr_slot = None
+            elif arm.ARM_REG_LR in ins.regs_access()[1]:
+                frame_restored = False
+            if adjustment:
+                stack_offset = stack_offset + adjustment if unconditional and stack_offset is not None else None
+            if (block or word in (0xE52DE004, 0xE49DE004)) and "lr" in ins.op_str:
+                # Preserve the published census's textual LR heuristic, but
+                # independently recognize actual stack saves/restores above.
+                if ins.mnemonic in ("push", "stmdb", "stmfd"):
+                    saved = True
+                elif ins.mnemonic in ("pop", "ldm", "ldmia", "ldmfd") and "pc" not in ins.op_str:
+                    saved = False
     for address in range(analyzer.base, analyzer.end - 3, 4):
-        if analyzer.word(address) == 0xE1A00000 and owner(address) is None:
+        if analyzer.word(address) != 0xE1A00000:
+            continue
+        function = owner(address)
+        if function is None:
             classes["tail:outside_catalogue"] += 1
-            inventory.append({"owner": None, "site": address, "target": address + 4,
-                              "census_class": "tail:outside_catalogue", "as_if_call": as_if_call(address)})
+            row = {"owner": None, "site": address, "target": address + 4,
+                   "census_class": "tail:outside_catalogue", **as_if_call(address)}
+            inventory.append(row)
+            nop_inventory.append(row)
+        elif address not in code_by_owner.get(function["address"], set()):
+            nop_inventory.append({"owner": function["address"], "site": address, "target": address + 4,
+                                  "census_class": "not_executed", "decision": "not_executed_arm_code"})
 
     selected = {}
     for row in inventory:
@@ -1299,6 +1406,8 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
             evidence.append("return_only_successor")
         if row["as_if_call"] == "reads_args":
             evidence.append("aapcs_live_arguments")
+        if row["restored_frame_at"] is not None and leaf_setter(target, function):
+            evidence.append("restored_frame_leaf_setter")
         row["start_evidence"] = evidence
         crossings, data_crossings = [], []
         for address in sorted(code_by_owner[parent]):
@@ -1441,6 +1550,7 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
     issues.update((item["address"], item["issue"]) for item in validate_catalogue(catalogue, analyzer.image, analyzer.layout))
     catalogue["anomalies"] = [{"address": address, "issue": issue} for address, issue in sorted(issues)]
     catalogue["linker_tail_inventory"] = sorted(inventory, key=lambda row: row["site"])
+    catalogue["linker_nop_inventory"] = sorted(nop_inventory, key=lambda row: row["site"])
     catalogue["linker_tail_extent_splits"] = sorted(split_records, key=lambda row: row["site"])
     stats = catalogue["stats"]
     stats.update(functions=len(new_functions),
@@ -1458,6 +1568,7 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
                  functions_with_literals=sum(bool(function["literals"]) for function in new_functions),
                  prologue_only_starts=sum(function["evidence"] == ["prologue"] for function in new_functions),
                  linker_tail_census=dict(sorted(classes.items())),
+                 linker_nop_words=len(nop_inventory),
                  linker_tail_extent_splits=len(split_records))
     stats["tail_calls"] += len(split_records)
     return catalogue
