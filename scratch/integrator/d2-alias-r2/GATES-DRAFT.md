@@ -110,3 +110,44 @@ The sealed failing `scratch/review/d2-alias/REVIEW.md`, original d2-alias worktr
 original source/evidence remain unchanged. Pre-versioning corrected safety-smoke evidence is
 retained separately as superseded diagnostics, not v5 acceptance evidence. Final settled-code
 smoke and exact composite revision are bound in the evidence block below.
+
+## Settled implementation and author smoke evidence
+
+- Base: current main `8bf3fe821c2172b94522fb334e7a8c5aa5512173`.
+- The reviewed alias change was applied only as patch
+  `56e312abb4c3fdeb6a684cd163f6b85ef6889150`, never by merging its stale parent.
+  F01's conservative whole-member refusal and all-copy consistency checks were then added.
+- The complete bounded-CFG feature was composed only through scoped commits
+  `21c2bd44e8048233abf555e95f7485eb09ebe292` and corrected successor
+  `e72fb34a08546173a1033893a9729c5dc996620a`. No check ran between the known-failed first
+  snapshot and its correction. Both model flags are preserved in the composite.
+- Settled source revision exercised:
+  `628aad34163a2b745a3cee7b1540dbc006887626`. The final documentation-only successor is
+  identified in the accompanying `result.json`; its code/test/model inputs are unchanged.
+- Focused smoke: `scratch/integrator/d2-alias-r2/smoke-v5.json`,
+  SHA-256 `7b46a4adf1c6f7d0eba2bc0f36fe4877c7f79e53ae8e8c0563146562796f4c0e`.
+  **Exit 0; 22 direct assertion groups passed.** This is not a full-suite/test-runner or
+  full-build execution. No real compiler or private-image match was run by this smoke.
+- The smoke covers public link/match/synthetic-build consumers for both F01 constructions,
+  both object orders, caller-only/helper credit, roots through either alias/different copy,
+  credited duplicate ownership, unsupported counterparts, retained original equality,
+  strict short-section EXTENT, explicit selector forwarding, both bounded-switch forms with
+  zero-size aliases, inherited SETEND BE/LE refusal, and frozen-model alias requirements.
+- Existing compiler object:
+  `scratch/worktrees/d2-alias/scratch/integrator/d2-alias/aliases.o`,
+  SHA-256 `591a272926412733a44bb7851082d93e297a4f76884b0fd8d1f672b0a8cb1640`.
+  Two complete-object v5 links cover all six constructor/non-virtual/virtual pair/binding
+  positives, with complete relocated-section equality and unchanged ELF metadata. Strict
+  v1/v2/v3/v4 retain their single-binding refusals and their all-explicit-bindings positives.
+- The earlier `smoke-before-model-separation.json` remains preserved as superseded diagnostic
+  evidence; its old-model broadening is not current v5 verification or adoption evidence.
+
+Main should run the serialized integration suite only after all changes land:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/test_suite.py --json scratch/review/d2-alias-r2/integration-suite.json
+```
+
+Then obtain a new independent review of the **complete main-based v5 composite**, including
+both scoped v4 commits and all alias safety/model changes. No independent PASS, gate
+adoption, motivating real-image MATCH or checkpoint credit is claimed here.
