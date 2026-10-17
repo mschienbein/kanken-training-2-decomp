@@ -192,6 +192,9 @@ class Analyzer:
         self.detailed_arm.detail = True
         self.detail_cache: dict[int, object] = {}
 
+    def __repr__(self) -> str:
+        return f"Analyzer(size={len(self.image)}, text=({self.base:#x}, {self.end:#x}))"
+
     def inside(self, address: int, isa: str = "arm") -> bool:
         return self.base <= address < self.end and address % (4 if isa == "arm" else 2) == 0
 

@@ -125,6 +125,36 @@ them; non-relocated literal values remain exact, while supported relocation fiel
 (including relocated literals) are wildcarded at bit granularity. Unknown relocation
 types produce `no_hits` with an explicit reason, not a guessed mask.
 
+`--archive LIBRARY.l` accepts a regular SysV/GNU/BSD `ar` archive instead of a
+source path. It reads ELF members in memory without extracting or modifying them;
+thin archives are refused. Archive mode does not require `--profile` because it
+does not compile anything. For example:
+
+```sh
+.venv/bin/python tools/fingerprint.py --archive .cache/private/runtime.l \
+  --out scratch/runtime-fingerprints.json
+```
+
+Each archive row retains its archive/member identity, member offset and digest,
+whole-function object/mask/masked digests, relocation-field metadata, and each
+hit's original/masked digest and exact/masked equality flags. Repeated members and
+aliases remain separate evidence rows. Archive mode honors sized outer assembly
+routines and their zero-sized same-start aliases without truncating them at
+exported secondary entries; those overlaps are listed explicitly. Zero-sized
+end labels have no body and remain member metadata. Index/long-name tables and
+Arm's named `SELECTION_SCRIPT` linker metadata are not objects and are never
+executed or printed. Other non-ELF members and malformed objects are reported and
+make the command exit 2 rather than silently claiming a complete scan. Neither reports
+nor object/member representations contain buffers. The archive API accepts a
+shared search cache for repeated library variants; it never merges provenance.
+
+`relocation_agreement: unverified` explicitly means only invariant bits matched.
+An archive hit alone does not bind the masked call/data targets or authenticate a
+library symbol. Any identity/classification proposal must separately establish
+relocation consistency, complete owner extent and ISA, and ambiguity across all
+members/variants; different bodies claiming one owner are a conflict. A match
+against a newer library version does not prove the game's compiler version.
+
 The first pass checks catalogue starts with the same extent size and ISA. Only when
 that finds nothing does the tool search every ISA-aligned text start. Consequently,
 `unique` in `scope: catalogue_size` means unique **within that first pass**, not

@@ -30,6 +30,9 @@ class Namer:
         # targets named func_XXXXXXXX, as tools/inplace.Resolver resolves them.
         self.entries = {e["address"] for f in functions.values() for e in f.get("entries", ())}
 
+    def __repr__(self) -> str:
+        return f"Namer(functions={len(self.functions)}, names={len(self.by_address)})"
+
     def kind(self, address: int) -> str | None:
         lay = self.image.layout
         if address in self.functions or address in self.entries:

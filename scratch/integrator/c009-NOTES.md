@@ -1,6 +1,26 @@
 # C009 recovered integration handoff
 
-## C008-r3 merged — stable c009 checks next
+## Readiness resumed from 1f66a8a on main f8adff4
+
+Main explicitly resumed c009 readiness. Merged prepared main `f8adff4`,
+including complete c008-r3 successor `b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b`.
+The sole merge conflict was the equivalent slot13/14 explanatory comment;
+c009's precise context/tail note and before/after names were retained.
+Slots 0/1/2 now use the corrected pending/byte-mode, ushort-command/handle-reply
+and const-data/handle contracts; ServiceCallbackState's real notification-node
+prefix is adopted. No earlier source search or collection was restarted.
+
+The prepared predecessor ledger preserves every prior identity/profile/owner.
+Scope is still **679 candidate units/functions / 57,276 B**, **122 revised
+predecessor units / 126 functions**, dry **2,206 units / 2,280 functions**.
+Authoritative predecessor evidence is main-root
+`scratch/integrator/c008-r3/complete/`; older root/final reports are historical.
+C010 confirms no compiler/audit job is running. C009 now owns the finite,
+nice'd sequential readiness slot. Stable G3, final MATCH, canonical sweeps,
+complete argcheck adjudication and seven-step pre-review are next; none is
+claimed complete by this merge milestone. No full suite/build/prepare is run here.
+
+## Historical merged wrap-up at 1f66a8a
 
 The user requested wrap-up at this merge milestone. This is a committed,
 resumable continuation, **not review-ready**. New static remediation after
