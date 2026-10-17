@@ -1,6 +1,16 @@
-# Gate design — frozen v1.12 (2026-10-17)
+# Gate design — frozen v1.13 (2026-10-17)
 
 Revisions:
+- **v1.13** (2026-10-17): G3 C++ class/struct/union identity is namespace-, nesting- and
+  template-specialization-aware, replacing v1.7's flat-name assumption. Definitions are compared
+  by fully qualified name, including enclosing classes and specialization arguments; primary
+  templates and explicit/partial specializations are distinct. Unnamed namespaces are
+  translation-unit-local, including definitions from included project headers. Different
+  definitions of the same qualified class remain ODR failures, and a forward declaration of a
+  header-defined qualified class still requires its defining header transitively. Aliases do not
+  introduce class identities. C checks and the explicit unchecked-C++ waiver are unchanged. Cause:
+  the licensed NW4C integration exposed false collisions between namespaced heaps, nested iterator
+  types and `iterator_traits` specializations.
 - **v1.12** (2026-10-17): G3 const-write check fix. Indexing through a pointer (`obj->ptr[i] = v`)
   writes the pointee, so the pointer's own constness (a pointer member of a const object) no
   longer makes it a const write; indexing an array member of a const object still is one. Cause: a
