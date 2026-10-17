@@ -15,10 +15,13 @@ reading any other review of the same checkpoint.
 
 1. **Exactness:** run `tools/match.py <source> --profile <unit profile> --out scratch/review/<cp>/<you>/...`
    yourself; every credited function must report `MATCH`.
-2. **Source policy:** no inline/embedded assembly, no byte arrays or casts of data standing in for
-   code, no `__svc`/named-register bindings (policy pending a user ruling), no dead code added only
-   to steer codegen unless declared as a qualification, `ORIGINAL BUG:` comments where original
-   misbehaviour is preserved.
+2. **Source policy:** no inline/embedded assembly (`__asm` statements or blocks, `__asm` functions),
+   no byte arrays or casts of data standing in for code, no dead code added only to steer codegen
+   unless declared as a qualification, `ORIGINAL BUG:` comments where original misbehaviour is
+   preserved. Documented ARMCC extensions count as C (`docs/rulings/2026-10-17-armcc-extensions.md`):
+   `__svc(N)` declarations, CP15 named-register variables (`__asm("cp15:...")` bindings) and
+   intrinsics (`__dmb`, `__ldrex`, …), each declared once in a shared header and listed as a
+   qualification on the function's row.
 3. **Plausibility:** the C reads as something a programmer wrote; types are consistent with use
    (field widths, signedness, pointer depth); magic offsets in padded structs are acceptable but
    must agree with every use in the unit.

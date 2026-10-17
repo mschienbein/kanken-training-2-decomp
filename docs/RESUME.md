@@ -44,10 +44,15 @@ Restart sequence:
    unify declarations first — that is now the main integration cost. On the desktop raise
    `tools/build.py --jobs` and the author count.
 
-Tool follow-up (display only, not the oracle): `match.render` and `packet.disassemble` decode by
-range membership at the instruction start, so a literal that starts mid-word is shown as code — in
-v6 `func_0010007c` has a 3-byte literal at `[0x100085,0x100088)` and both loops decode the word at
-`0x100084`. Render from `code_ranges` with bounded raw/data spans; use this case as the regression.
+Display follow-up fixed (display only, not the oracle): `match.render` and `packet.disassemble`
+share a catalogue-bounded decoder. Instructions must fit wholly inside `code_ranges`; literals,
+pools and padding remain bounded raw/data spans. The v6 `func_0010007c` 3-byte literal at
+`[0x100085,0x100088)` no longer lets the word at `0x100084` decode as an instruction.
+Synthetic regressions in `tests.test_match` and `tests.test_packet` cover mid-word boundaries,
+adjacent literals/pools, padding, mixed-width Thumb instructions and multiple code/entry islands.
+Match diff columns stay address-aligned even when the two sides use different Thumb widths.
+Focused validation: these modules plus `tests.test_compid` pass (35 tests); the private packet
+check emits separate 1-byte padding and 3-byte literal rows at `0x100084` and `0x100085`.
 
 Open user decision (unchanged): may ARMCC `__svc(N)` and named-register CP15 variables count as C?
 Until ruled, SVC/CP15 wrappers are `library_candidate`.

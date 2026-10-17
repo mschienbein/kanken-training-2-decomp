@@ -15,11 +15,10 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import display  # noqa: E402
 import image as image_mod  # noqa: E402
-from capstone import CS_ARCH_ARM, CS_MODE_ARM, CS_MODE_THUMB, Cs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-_CS = {"arm": Cs(CS_ARCH_ARM, CS_MODE_ARM), "thumb": Cs(CS_ARCH_ARM, CS_MODE_THUMB)}
 
 
 class Namer:
@@ -61,22 +60,15 @@ def disassemble(image, fn: dict):
     base, size, isa = fn["address"], fn["size"], fn["isa"]
     data = image.read(base, size)
     pools = [tuple(p) for p in (*fn.get("pools", []), *fn.get("literals", []))]  # data inside the section
-    rows, pos = [], 0
-    step = 4 if isa == "arm" else 2
-    while pos < size:
-        addr = base + pos
-        if any(lo <= addr < hi for lo, hi in pools):
-            word = struct.unpack_from("<I", data, pos)[0] if size - pos >= 4 else None
-            rows.append(("word", addr, word, None))
-            pos += 4
-            continue
-        insn = next(_CS[isa].disasm(data[pos : pos + 4], addr, 1), None)
-        if insn is None:
-            rows.append(("raw", addr, data[pos : pos + step].hex(), None))
-            pos += step
-            continue
-        rows.append(("insn", addr, insn, None))
-        pos += insn.size
+    code_ranges = [tuple(p) for p in fn["code_ranges"]]
+    rows = []
+    for kind, addr, chunk, insn in display.spans(data, base, isa, code_ranges, pools):
+        if kind == "insn":
+            rows.append(("insn", addr, insn, None))
+        elif kind == "data" and len(chunk) == 4:
+            rows.append(("word", addr, struct.unpack("<I", chunk)[0], None))
+        else:
+            rows.append(("raw", addr, chunk.hex(), None))
     return rows
 
 

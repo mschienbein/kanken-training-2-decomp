@@ -1,6 +1,16 @@
-# Gate design — frozen v1.8 (2026-10-16)
+# Gate design — frozen v1.9 (2026-10-17)
 
 Revisions:
+- **v1.9** (2026-10-17): source policy follows the user ruling
+  `docs/rulings/2026-10-17-armcc-extensions.md`: `__svc(N)` declarations, CP15 named-register
+  variables and ARMCC intrinsics count as C (declared once in a shared header; each use a
+  qualification on the function's review row); `__asm` statements/blocks and embedded-assembler
+  functions stay refused. Reviewers apply it under G6 (`docs/REVIEWING.md` step 2). The G3
+  interface parser does not yet accept named-register declarations (`__asm` raises an interface
+  error), so no unit using them can pass prepare until a later revision adds that support.
+  Also recorded: every subagent, both reviewers included, runs one model family
+  (`docs/rulings/2026-10-17-reviewer-model-family.md`); the cross-family clause below remains
+  "where possible".
 - **v1.8** (2026-10-16): the linker model is part of acceptance. Builds use the armlink emulation
   `armlink5-inline-branchnop-v2` (`docs/LINKER.md`; independent review PASS_WITH_QUALIFICATIONS in
   `scratch/review/armlink-inline/REVIEW-v2.md`); `prepare` records `linker_model` and every
