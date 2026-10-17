@@ -703,6 +703,7 @@ class SyntheticOracleTest(ScratchTest):
         context.functions = {0x100000: {"address": 0x100000, "size": len(data), "isa": "arm"}}
         context.resolver = inplace.Resolver(context.functions)
         context.model = inplace.linker_model(permute.MODEL)
+        context.literal_model = inplace.DEFAULT_LITERAL_MODEL
         self.oracle = permute.Oracle.__new__(permute.Oracle)
         self.oracle.profile, self.oracle.targets, self.oracle.context = PROFILE, ("func_00100000",), context
 
