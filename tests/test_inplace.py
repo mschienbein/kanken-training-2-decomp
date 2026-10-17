@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import inplace  # noqa: E402
@@ -966,6 +967,234 @@ class ArmCallAbiContextTest(unittest.TestCase):
         self.assertEqual(self.context(words, 12), "unresolved_control_flow")
 
 
+class JumpTableContextTest(unittest.TestCase):
+    """Compiler-free: the bounded ARMCC jump-table forms in R1's call-context CFG.
+
+    Every layout is the pattern armcc 5.04 emits (`cmp rM, #N; ...; ldrlo pc, [pc, rM, lsl #2]; b default;
+    <N words>` or `addlo pc, pc, rM, lsl #2; b default; <N branches>`), written out independently."""
+
+    PUSH, POP, NOP, STORE = 0xE92D4010, 0xE8BD8010, 0xE320F000, 0xE5801018  # STORE: str r1, [r0, #0x18]
+    CMP_R2_3, MOV_R4_R0, MOV_R1_7 = 0xE3520003, 0xE1A04000, 0xE3A01007
+    LDRLO, ADDLO = 0x379FF102, 0x308FF102  # ldrlo pc, [pc, r2, lsl #2] / addlo pc, pc, r2, lsl #2
+    ARGUMENTS = {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R1}
+
+    @staticmethod
+    def branch(place, target, condition=0xE):
+        return (condition << 28) | 0x0A000000 | (((target - place - 8) >> 2) & 0xFFFFFF)
+
+    def caller(self, form="words", compare=CMP_R2_3, window=(MOV_R4_R0,), writer=None, fall=POP, entries=3):
+        """Layout: PUSH, compare, window, writer, fall, table, then the cases: case 0 (index 0) loads r1
+        and runs the removed setter (the site), every other index returns."""
+        writer = writer if writer is not None else (self.LDRLO if form == "words" else self.ADDLO)
+        head = [self.PUSH, compare, *window, writer, fall]
+        table = 4 * len(head)
+        body = table + 4 * entries
+        targets = [body, body + 8] + [body + 16] * (entries - 2)
+        entry_words = ([BASE + target for target in targets] if form == "words"
+                       else [self.branch(BASE + table + 4 * slot, BASE + target) for slot, target in enumerate(targets)])
+        words = [*head, *entry_words, self.MOV_R1_7, self.STORE, self.POP, self.NOP, self.POP]
+        pool = range(len(head), len(head) + entries) if form == "words" else range(0)
+        return SimpleNamespace(words=words, pool=pool, site=body + 4, writer=table - 8, table=table, body=body, targets=targets)
+
+    def decode(self, caller, with_words=True):
+        instructions = {BASE + 4 * index: next(inplace._ARM.disasm(struct.pack("<I", word), BASE + 4 * index, 1))
+                        for index, word in enumerate(caller.words) if index not in caller.pool}
+        pool_words = {BASE + 4 * index: caller.words[index] for index in caller.pool} if with_words else {}
+        return instructions, pool_words
+
+    def context(self, caller, with_words=True, **kwargs):
+        instructions, pool_words = self.decode(caller, with_words)
+        return inplace.arm_call_abi_context(instructions, BASE + caller.site, self.ARGUMENTS, inplace.cs_arm.ARM_CC_AL,
+                                            kwargs.pop("entries", None), None, pool_words, **kwargs)
+
+    def tables(self, caller, with_words=True, entries=None):
+        instructions, pool_words = self.decode(caller, with_words)
+        flows = {address: inplace._arm_call_flow(insn) for address, insn in instructions.items()}
+        return inplace._arm_jump_tables(instructions, flows, entries or {BASE}, pool_words)
+
+    def test_word_table_resolves_exactly_the_bounded_entries(self):
+        caller = self.caller()
+        self.assertEqual(self.context(caller), "consistent")
+        writer = BASE + caller.writer
+        self.assertEqual(self.tables(caller), {writer: [writer + 4, *(BASE + target for target in dict.fromkeys(caller.targets))]})
+        self.assertEqual(self.context(caller, with_words=False), "unresolved_control_flow")
+
+    def test_only_whole_aligned_pool_words_inside_the_extent_are_available(self):
+        function = {"address": BASE, "size": 16, "pools": [[BASE - 8, BASE + 5]],
+                    "literals": [[BASE + 9, BASE + 32]]}
+        self.assertEqual(set(inplace.arm_pool_words(Memory(), function)), {BASE, BASE + 12})
+        function["pools"], function["literals"] = [[BASE + 1, BASE + 14]], []
+        self.assertEqual(set(inplace.arm_pool_words(Memory(), function)), {BASE + 4, BASE + 8})
+
+    def test_ls_bound_adds_one_entry_and_lo_does_not(self):
+        compare, ldrls = 0xE3520002, 0x979FF102  # cmp r2, #2; ldrls: indexes 0..2, three entries
+        caller = self.caller(compare=compare, writer=ldrls)
+        self.assertEqual(self.context(caller), "consistent")
+        self.assertEqual(len(self.tables(caller)[BASE + caller.writer]) - 1, len(set(caller.targets)))
+        # cmp r2, #3 with LS reaches four entries: three words are not enough, four resolve.
+        three = self.caller(writer=ldrls)
+        self.assertEqual(self.context(three), "unresolved_control_flow")
+        four = self.caller(writer=ldrls, entries=4)
+        self.assertEqual(self.context(four), "consistent")
+        self.assertEqual(self.context(self.caller(entries=4)), "consistent")  # LO: the fourth word is never read
+        # The bound cannot be read from the table: cmp r2, #4 with LO needs a fourth word the pool lacks.
+        self.assertEqual(self.context(self.caller(compare=0xE3520004)), "unresolved_control_flow")
+
+    def test_branch_table_resolves_exactly_the_bounded_entries(self):
+        caller = self.caller("branches")
+        self.assertEqual(self.context(caller), "consistent")
+        writer = BASE + caller.writer
+        self.assertEqual(self.tables(caller), {writer: [writer + 4, *(writer + 8 + 4 * slot for slot in range(3))]})
+        ls = self.caller("branches", compare=0xE3520002, writer=0x908FF102)  # addls: three entries
+        self.assertEqual(len(self.tables(ls)[BASE + ls.writer]) - 1, 3)
+        # LO with cmp #4 reads an entry that is plain code (mov r1, #7), not a branch.
+        self.assertEqual(self.context(self.caller("branches", compare=0xE3520004)), "unresolved_control_flow")
+
+    def test_branch_table_entries_must_be_unconditional_branches_inside_the_function(self):
+        for case in ("nop", "conditional", "leaves", "return"):
+            with self.subTest(case):
+                caller = self.caller("branches")
+                place, index = BASE + caller.table + 4, caller.table // 4 + 1
+                caller.words[index] = {
+                    "nop": self.NOP,
+                    "conditional": self.branch(place, BASE + caller.targets[1], 0x1),
+                    "leaves": self.branch(place, BASE + 0x1000),
+                    "return": 0xE12FFF1E,
+                }[case]
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_word_table_entries_must_name_instructions_of_this_function(self):
+        for case, target in (("outside", BASE + 0x1000), ("before", BASE - 4), ("thumb", BASE + 0x21),
+                             ("pool word", BASE + 0x14), ("misaligned", BASE + 0x22)):
+            with self.subTest(case):
+                caller = self.caller()
+                caller.words[caller.table // 4 + 1] = target
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_every_table_target_is_checked_after_a_site_before_the_switch(self):
+        # The removed setter precedes `cmp r4, #3; ldrlo pc, [pc, r4, lsl #2]`; r1 is clobbered by the call.
+        for reads_clobbered_r1 in (False, True):
+            with self.subTest(reads_clobbered_r1=reads_clobbered_r1):
+                words = [self.PUSH, 0xE1A04002, self.MOV_R1_7, self.STORE, 0xE3540003, 0x379FF104, self.POP,
+                         BASE + 0x28, BASE + 0x2c, BASE + 0x34, self.POP, 0xE1A00001 if reads_clobbered_r1 else self.NOP,
+                         self.POP, self.POP]
+                caller = SimpleNamespace(words=words, pool=range(7, 10), site=12)
+                self.assertEqual(self.context(caller), "reads_arguments" if reads_clobbered_r1 else "consistent")
+
+    def test_a_table_successor_cannot_bypass_argument_setup(self):
+        for form in ("words", "branches"):
+            with self.subTest(form=form):
+                caller = self.caller(form, window=(self.MOV_R4_R0, 0xE3A01002))
+                self.assertEqual(self.context(caller), "consistent")
+                slot = caller.table // 4 + 1
+                caller.words[slot] = (BASE + caller.site if form == "words"
+                                      else self.branch(BASE + 4 * slot, BASE + caller.site))
+                self.assertEqual(self.context(caller), "arguments_not_materialised")
+
+    def test_the_bound_must_come_from_a_plain_immediate_compare_of_the_index(self):
+        for case, compare in (("other register", 0xE3530003), ("register operand", 0xE1520003),
+                              ("conditional compare", 0x13520003), ("compare negative", 0xE3720003),
+                              ("no compare", self.NOP), ("test", 0xE1120003)):
+            with self.subTest(case):
+                for form in ("words", "branches"):
+                    self.assertEqual(self.context(self.caller(form, compare=compare)), "unresolved_control_flow")
+        instruction = next(inplace._ARM.disasm(struct.pack("<I", 0xE3520C01), 0, 1))  # cmp r2, #0x100 (rotated)
+        self.assertEqual(inplace._arm_compare_bound(instruction), (2, 0x100))
+
+    def test_nothing_between_the_compare_and_the_writer_may_change_the_index_or_flags(self):
+        for case, word in (("index written", 0xE1A02002), ("conditional index written", 0x11A02002),
+                           ("flags by subs", 0xE2555001), ("flags by tst", 0xE1150005),
+                           ("flags by msr", 0xE128F000), ("flags by mrc", 0xEE10FF10),
+                           ("flags by vmrs", 0xEEF1FA10), ("flags by call", 0xEB000010),
+                           ("branch", 0x1A000000), ("index loaded", 0xE5922000)):
+            with self.subTest(case):
+                self.assertEqual(self.context(self.caller(window=(self.MOV_R4_R0, word))), "unresolved_control_flow")
+        for case, word in (("other register", 0xE1A05000), ("store", 0xE5840000), ("predicated, no flags", 0x13A05001),
+                           ("nop", self.NOP)):
+            with self.subTest(case, positive=True):
+                self.assertEqual(self.context(self.caller(window=(self.MOV_R4_R0, word, word))), "consistent")
+
+    def test_the_writer_may_be_reached_only_by_falling_through_from_the_guard(self):
+        caller = self.caller()
+        compare, first, writer = BASE + 4, BASE + 8, BASE + caller.writer
+        loop = caller.targets[2] // 4  # a case off the site's own path
+        for case, target in (("window", first), ("writer", writer)):
+            with self.subTest(case):
+                patched = self.caller()
+                patched.words[loop] = self.branch(BASE + caller.targets[2], target)
+                self.assertEqual(self.context(patched), "unresolved_control_flow")
+        patched = self.caller()
+        patched.words[loop] = self.branch(BASE + caller.targets[2], compare)  # re-running the compare is fine
+        self.assertEqual(self.context(patched), "consistent")
+        for entry in (first, writer):
+            with self.subTest(entry=entry):
+                self.assertEqual(self.context(caller, entries={BASE, entry}), "unresolved_control_flow")
+        # A table target inside its own guard window is an entry there too.
+        again = self.caller()
+        again.words[again.table // 4 + 1] = first
+        self.assertEqual(self.context(again), "unresolved_control_flow")
+
+    def test_direct_calls_cannot_supply_an_alternate_entry_after_the_guard(self):
+        for thumb in (False, True):
+            with self.subTest(thumb=thumb):
+                caller = self.caller()
+                place = BASE + caller.targets[2]
+                caller.words[caller.targets[2] // 4] = bl(place, BASE + caller.writer, thumb)
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_another_resolved_table_cannot_enter_after_the_guard(self):
+        words = [self.PUSH, 0xE3520001, 0x979FF102, self.POP, BASE + 24, BASE + 36,
+                 self.MOV_R1_7, self.STORE, self.POP, 0xE3520001, self.LDRLO, self.POP, BASE + 8]
+        caller = SimpleNamespace(words=words, pool={4, 5, 12}, site=28)
+        self.assertNotIn(BASE + 8, self.tables(caller))
+        self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_the_fall_through_must_leave_the_table(self):
+        for case, fall in (("plain instruction", self.MOV_R1_7), ("conditional branch", self.branch(BASE + 0x10, BASE + 0x30, 0x1)),
+                           ("call", 0xEB000010), ("nop", self.NOP)):
+            with self.subTest(case):
+                for form in ("words", "branches"):
+                    self.assertEqual(self.context(self.caller(form, fall=fall)), "unresolved_control_flow")
+        branch = self.branch(BASE + 0x10, BASE + 0x30)  # armcc's `b default` is equally fine as a return
+        self.assertEqual(self.context(self.caller(fall=branch)), "consistent")
+
+    def test_the_default_branch_must_stay_inside_the_callers_code(self):
+        for form in ("words", "branches"):
+            for target in (BASE - 4, BASE + 0x1000):
+                with self.subTest(form=form, target=target):
+                    caller = self.caller(form)
+                    fall = caller.writer + 4
+                    caller.words[fall // 4] = self.branch(BASE + fall, target)
+                    self.assertEqual(self.context(caller), "unresolved_control_flow")
+        caller = self.caller()
+        caller.words[(caller.writer + 4) // 4] = self.branch(BASE + caller.writer + 4, BASE + caller.table)
+        self.assertEqual(self.context(caller), "unresolved_control_flow")  # data, not an exit
+
+    def test_only_the_recognised_writer_encodings_are_resolved(self):
+        for case, writer in (("hi", 0x879FF102), ("ne", 0x179FF102), ("always", 0xE79FF102), ("shift 3", 0x379FF182),
+                             ("subtracted index", 0x371FF102), ("writeback", 0x37BFF102), ("no shift", 0x379FF002),
+                             ("other base", 0x3790F102), ("mov pc", 0x31A0F002), ("bx index", 0x312FFF12),
+                             ("add, shift 3", 0x308FF182), ("sub", 0x304FF102), ("add, set flags", 0x309FF102),
+                             ("add, register shift", 0x308FF112), ("pc index", 0x379FF10F)):
+            with self.subTest(case):
+                self.assertEqual(self.context(self.caller(writer=writer)), "unresolved_control_flow")
+
+    def test_unrelated_indirect_transfers_stay_unresolved_next_to_a_resolved_table(self):
+        caller = self.caller()
+        caller.words[-1] = 0xE12FFF14  # bx r4 in a reachable case
+        self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_computed_pc_writes_are_not_mistaken_for_returns(self):
+        for case, word in (("add pc, r4, lr", 0xE084F00E), ("ldr pc, [lr]", 0xE59EF000),
+                           ("movs pc, lr", 0xE1B0F00E), ("bx r4", 0xE12FFF14)):
+            with self.subTest(case=case):
+                caller = self.caller()
+                caller.words[-1] = word
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+                caller = self.caller(fall=word)
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+
 class RemovedCalleeModelTest(unittest.TestCase):
     """V3's candidate-only exception is narrower than ordinary original-image inlining."""
 
@@ -1536,6 +1765,196 @@ class RemovedCalleeModelTest(unittest.TestCase):
         with self.assertRaisesRegex(inplace.LinkError, "contradictory removed-callee copies"):
             self.linker(mem, catalogue).link(inplace.ObjectFile.combine([first, second]))
 
+
+@unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+class SwitchRemovedCalleeTest(unittest.TestCase):
+    """R1 on real armcc switches: a bounded jump table no longer hides a removed setter's call
+    context, and an unbounded, escaping or computed transfer is still refused.
+
+    The synthetic original is the compiled caller with each relocation applied independently:
+    the setter calls hold the inlined `str r1, [r0, #0x18]`, table words hold absolute addresses."""
+
+    MODEL = "armlink5-inline-branchnop-v3"
+    SETTER = 0xE5801018  # str r1, [r0, #0x18]
+    HELPER = "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n"
+    CALLER = (
+        "extern void set_field18(unsigned *p, unsigned v);\n"
+        "void func_00100000(unsigned *p, unsigned v, int x) {\n"
+        "    switch (x) {\n"
+        "    case 0: set_field18(p, v); p[0] = 9; break;\n"
+        "    case 1: p[1] = 1; break;\n"
+        "    case 2: p[2] = 2; break;\n"
+        "    case 3: set_field18(p, v); p[3] = 3; break;\n"
+        "    case 4: p[4] = 4; break;\n"
+        "    default: break;\n"
+        "    }\n"
+        "}\n"
+    )
+    FUNCTION_POINTER = (
+        "extern void set_field18(unsigned *p, unsigned v);\n"
+        "void func_00100000(unsigned *p, unsigned v, void (*fn)(unsigned *)) {\n"
+        "    set_field18(p, v); p[1] = 2; fn(p);\n"
+        "}\n"
+    )
+
+    def fixture(self, caller=CALLER, profile="game"):
+        with tempfile.TemporaryDirectory() as directory:
+            objects = []
+            for name, text in (("caller.c", caller), ("helper.c", self.HELPER)):
+                source = Path(directory) / name
+                source.write_text(text, encoding="utf-8")
+                toolchain.compile_source(toolchain.load_profiles()[profile], source, source.with_suffix(".o"))
+                objects.append(inplace.ObjectFile(source.with_suffix(".o")))
+        definition = next(sym for sym in objects[0].defined_functions() if sym.name == "func_00100000")
+        section = objects[0].sections[definition.shndx]
+        original = bytearray(section.data)
+        for rel in section.relocs:
+            if rel.symbol.name == "set_field18" and rel.type == inplace.R_ARM_CALL:
+                struct.pack_into("<I", original, rel.offset, self.SETTER)
+            elif rel.symbol.name == "__switch$$" and rel.type == inplace.R_ARM_ABS32:
+                addend = struct.unpack_from("<I", section.data, rel.offset)[0]
+                struct.pack_into("<I", original, rel.offset, BASE + rel.symbol.value + addend)
+            else:
+                self.fail(f"unexpected relocation {rel.type} against {rel.symbol.name}")
+        spans = [(offset, end) for (offset, kind), end in zip(section.mapping, [o for o, _ in section.mapping[1:]] + [section.size])]
+        catalogue = {BASE: {
+            "address": BASE, "size": section.size, "isa": "arm",
+            "code_ranges": [[BASE + lo, BASE + hi] for (lo, hi), (_, kind) in zip(spans, section.mapping) if kind == "$a"],
+            "pools": [[BASE + lo, BASE + hi] for (lo, hi), (_, kind) in zip(spans, section.mapping) if kind == "$d"],
+        }}
+        mem = Memory()
+        mem.write(BASE, bytes(original))
+        combined = inplace.ObjectFile.combine(objects, ["caller.c", "helper.c"])
+        sites = [rel.offset for rel in section.relocs if rel.symbol.name == "set_field18"]
+        return SimpleNamespace(object=combined, memory=mem, catalogue=catalogue, original=bytes(original), sites=sites)
+
+    def locate(self, fixture):
+        """Offsets of the jump-table writer (and its form), of the guarding compare before it and of
+        the first table entry, found from the raw encodings."""
+        words = struct.unpack(f"<{len(fixture.original) // 4}I", fixture.original)
+        writer = next(4 * i for i, word in enumerate(words)
+                      if word & 0x0FFFFFF0 in (0x079FF100, 0x008FF100) and word >> 28 in (0x3, 0x9))
+        form = "words" if words[writer // 4] & 0x0FFFFFF0 == 0x079FF100 else "branches"
+        compare = max(4 * i for i, word in enumerate(words) if word & 0x0FF0F000 == 0x03500000 and 4 * i < writer)
+        return SimpleNamespace(writer=writer, form=form, compare=compare, table=writer + 8)
+
+    def link(self, fixture, model=None):
+        linker = inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                       (0x200000, 0x201000), model or self.MODEL)
+        return linker, linker.link(fixture.object)
+
+    def patch(self, fixture, offset, word):
+        fixture.memory.write(BASE + offset, struct.pack("<I", word))
+
+    def assert_refused(self, fixture):
+        linker = inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                       (0x200000, 0x201000), self.MODEL)
+        with self.assertRaisesRegex(inplace.LinkError, "removed callee i.set_field18 is still referenced"):
+            linker.link(fixture.object)
+        self.assertEqual(linker.removed_callees, [])
+
+    def assert_resolved(self, profile, form):
+        fixture = self.fixture(profile=profile)
+        self.assertEqual(self.locate(fixture).form, form)
+        self.assertEqual(len(fixture.sites), 2)
+        linker, linked = self.link(fixture)
+        self.assertEqual({placed.base: data for placed, data in linked.values()}, {BASE: fixture.original})
+        self.assertEqual([(rewrite.offset, rewrite.rule, rewrite.word) for rewrite in linker.rewrites],
+                         [(site, "inline_insn", self.SETTER) for site in fixture.sites])
+        self.assertEqual([callee["symbols"] for callee in linker.removed_callees], [["set_field18"]])
+        self.assertEqual([rewrite.target for rewrite in linker.rewrites], [None, None])
+        self.assertEqual(linker.removed_callees[0]["object"], "helper.c")
+        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+            self.link(fixture, "armlink5-inline-branchnop-v2")
+
+    def test_a_word_table_switch_no_longer_hides_the_removed_setters_context(self):
+        self.assert_resolved("game", "words")  # cmp r2, #5; ldrlo pc, [pc, r2, lsl #2]; b; five words
+
+    def test_a_branch_table_switch_no_longer_hides_the_removed_setters_context(self):
+        self.assert_resolved("trial-504-82-O3-Ospace", "branches")  # addlo pc, pc, r2, lsl #2; b; five B
+
+    def test_a_table_entry_outside_the_function_is_refused(self):
+        for case, entry in (("beyond the extent", 0x1000), ("before the function", -0x100), ("Thumb entry", 0x21)):
+            with self.subTest(case):
+                fixture = self.fixture()
+                located = self.locate(fixture)
+                self.patch(fixture, located.table + 8, (BASE + entry) & 0xFFFFFFFF)
+                self.assert_refused(fixture)
+        fixture = self.fixture(profile="trial-504-82-O3-Ospace")
+        located = self.locate(fixture)
+        place = BASE + located.table + 8
+        self.patch(fixture, located.table + 8, 0xEA000000 | (((BASE + 0x1000 - place - 8) >> 2) & 0xFFFFFF))
+        self.assert_refused(fixture)
+
+    def test_a_code_range_outside_the_callers_extent_cannot_supply_a_table_target(self):
+        fixture = self.fixture()
+        located = self.locate(fixture)
+        outside = BASE + 0x1000
+        fixture.catalogue[BASE]["code_ranges"].append([outside, outside + 4])
+        fixture.memory.write(outside, struct.pack("<I", 0xE12FFF1E))
+        self.patch(fixture, located.table + 8, outside)
+        self.assert_refused(fixture)
+
+    def test_the_default_edge_cannot_escape_the_function(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile=profile):
+                fixture = self.fixture(profile=profile)
+                offset = self.locate(fixture).writer + 4
+                self.patch(fixture, offset, 0xEA000000 | (((0x1000 - offset - 8) >> 2) & 0xFFFFFF))
+                self.assert_refused(fixture)
+
+    def test_a_table_edge_cannot_bypass_its_guard(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile=profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                entry = located.table + 8
+                target = BASE + located.writer
+                word = (target if located.form == "words"
+                        else 0xEA000000 | (((target - (BASE + entry) - 8) >> 2) & 0xFFFFFF))
+                self.patch(fixture, entry, word)
+                self.assert_refused(fixture)
+
+    def test_a_bound_that_the_table_does_not_cover_is_refused(self):
+        # cmp r2, #6 would read a sixth word, which is the first instruction after the pool; likewise
+        # a sixth branch-table entry would be a non-branch instruction.
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                self.patch(fixture, located.compare, 0xE3520006)
+                self.assert_refused(fixture)
+
+    def test_a_switch_without_its_bounding_compare_is_refused(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            for case, word in (("no compare", 0xE320F000), ("other register", 0xE3530005), ("register compare", 0xE1520003)):
+                with self.subTest(profile=profile, case=case):
+                    fixture = self.fixture(profile=profile)
+                    self.patch(fixture, self.locate(fixture).compare, word)
+                    self.assert_refused(fixture)
+
+    def test_flags_changed_between_the_compare_and_the_writer_are_refused(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                self.assertEqual(located.writer - located.compare, 8)  # `mov r4, r0` sits between them
+                self.patch(fixture, located.compare + 4, 0xE2504000)  # subs r4, r0, #0
+                self.assert_refused(fixture)
+
+    def test_the_index_changed_after_the_compare_is_refused(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile=profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                self.assertEqual(located.writer - located.compare, 8)
+                self.patch(fixture, located.compare + 4, 0xE1A02000)  # mov r2, r0
+                self.assert_refused(fixture)
+
+    def test_a_computed_branch_after_the_site_is_still_refused(self):
+        fixture = self.fixture(self.FUNCTION_POINTER)  # `bx ip` through the passed function pointer
+        self.assertEqual(len(fixture.sites), 1)
+        self.assert_refused(fixture)
 
 
 ROOT = Path(__file__).resolve().parents[1]

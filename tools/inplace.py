@@ -150,14 +150,12 @@ def _arm_call_flow(insn) -> str:
         return "call"
     if insn.id == cs_arm.ARM_INS_B and insn.operands[0].type == cs_arm.ARM_OP_IMM:
         return "branch"
-    read, written = map(set, insn.regs_access())
-    if (CS_GRP_RET in insn.groups
-            or insn.id == cs_arm.ARM_INS_BX and insn.operands[0].reg == cs_arm.ARM_REG_LR
-            or cs_arm.ARM_REG_PC in written and (
-                cs_arm.ARM_REG_LR in read or insn.id == cs_arm.ARM_INS_POP
-                or insn.id in (cs_arm.ARM_INS_LDM, cs_arm.ARM_INS_LDMDA, cs_arm.ARM_INS_LDMDB, cs_arm.ARM_INS_LDMIB)
-                and cs_arm.ARM_REG_SP in read)):
+    word = struct.unpack("<I", insn.bytes)[0]
+    if word >> 28 != 0xF and (
+            word & 0x0FFFFFFF in (0x012FFF1E, 0x01A0F00E)  # BX lr / MOV pc, lr
+            or word & 0x0FFF8000 == 0x08BD8000):  # LDMIA sp!, {..., pc} / POP
         return "return"
+    written = set(insn.regs_access()[1])
     if _FLOW_GROUPS & set(insn.groups) or cs_arm.ARM_REG_PC in written:
         return "unknown"
     return "other"
@@ -177,14 +175,129 @@ def _arm_successors(instructions: dict, insn, flow: str) -> list[int]:
     return successors
 
 
+# -- ARMCC bounded jump tables (docs/LINKER.md, "Jump tables in the call-context CFG") ----------
+
+_ARM_NUMBERED = (*(getattr(cs_arm, f"ARM_REG_R{n}") for n in range(13)),
+                 cs_arm.ARM_REG_SP, cs_arm.ARM_REG_LR, cs_arm.ARM_REG_PC)
+# The two encodings armcc 5.04 emits for a dense switch, both with the index scaled LSL #2:
+#   LDR<cc> pc, [pc, rM, lsl #2]  (word table: absolute target addresses, in the caller's pool)
+#   ADD<cc> pc, pc, rM, lsl #2    (branch table: one unconditional B per entry, in the code)
+# Each is taken only when its condition is LO (rM <  N) or LS (rM <= N) after `cmp rM, #N`.
+_SWITCH_ENCODINGS = {0x079FF100: "words", 0x008FF100: "branches"}
+_SWITCH_EXTRA_ENTRIES = {0x3: 0, 0x9: 1}  # condition field -> entries beyond N
+_SWITCH_BASE = 8  # the PC reads as the writer + 8: entry 0 is two words after the writer
+
+
+def _arm_word(insn) -> int:
+    return struct.unpack("<I", insn.bytes)[0]
+
+
+def _arm_compare_bound(insn) -> tuple[int, int] | None:
+    """(register number, value) of an unconditional `cmp rN, #immediate`, else None."""
+    word = _arm_word(insn)
+    if word >> 28 != _COND_AL or word & 0x0FF0F000 != 0x03500000:
+        return None
+    rotate, value = (word >> 7) & 0x1E, word & 0xFF
+    if rotate:
+        value = (value >> rotate | value << (32 - rotate)) & 0xFFFFFFFF
+    return (word >> 16) & 0xF, value
+
+
+def _arm_may_change(insn, register: int) -> bool:
+    """May `insn` change `register` or NZCV? Include explicit flag-update metadata and
+    system/VFP flag transfers; register access lists alone do not prove flag preservation."""
+    written = set(insn.regs_access()[1])
+    return bool(register in written or cs_arm.ARM_REG_CPSR in written or insn.update_flags
+                or insn.mnemonic.startswith(("msr", "mrc", "vmrs", "fmstat")))
+
+
+def _arm_switch_guard(instructions: dict, flows: dict, writer: int, index: int) -> tuple[int, int] | None:
+    """(address, value) of the `cmp rIndex, #value` that bounds the index at `writer`: the nearest
+    earlier word in straight-line code, with nothing between that can change the index or the
+    flags (every word between must be a plain, non-transferring instruction)."""
+    register = _ARM_NUMBERED[index]
+    address = writer
+    while True:
+        address -= 4
+        insn = instructions.get(address)
+        if insn is None or flows[address] != "other":
+            return None
+        bound = _arm_compare_bound(insn)
+        if bound is not None and bound[0] == index:
+            return address, bound[1]
+        if _arm_may_change(insn, register):
+            return None
+
+
+def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: dict[int, int]) -> dict[int, list[int]]:
+    """Successors of every ARMCC jump-table writer whose bound and every target are proven.
+
+    The bound comes from the guarding `cmp rM, #N` (see `_arm_switch_guard`) and the writer's own
+    LO/LS condition, so exactly N (LO) or N + 1 (LS) entries are reachable: no inference from the
+    table's contents or length. Entry i is the word at writer + 8 + 4i: an absolute address in
+    `words` (the caller's own pool, never an instruction) for the word-table form, or an
+    unconditional direct B for the branch-table form. Every target must be a decoded instruction
+    of this caller (never outside its catalogue extent, never Thumb), and the conditional-false
+    fall-through must be an unconditional transfer that cannot run into the table. The writer may
+    be reached only by falling through from the guard: no branch, call, entry or other table
+    target may land in (compare, writer]. Anything else stays unknown and the caller fails closed.
+    """
+    candidates = {}
+    for address, insn in instructions.items():
+        if flows[address] != "unknown":
+            continue
+        word = _arm_word(insn)
+        form = _SWITCH_ENCODINGS.get(word & 0x0FFFFFF0)
+        extra = _SWITCH_EXTRA_ENTRIES.get(word >> 28)
+        if form is None or extra is None or word & 0xF == 15:
+            continue
+        guard = _arm_switch_guard(instructions, flows, address, word & 0xF)
+        fall = instructions.get(address + 4)
+        if (guard is None or guard[1] + extra < 1 or fall is None
+                or fall.cc not in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID)
+                or flows[address + 4] not in ("branch", "return")
+                or flows[address + 4] == "branch" and fall.operands[0].imm not in instructions):
+            continue
+        count = guard[1] + extra
+        if count > len(words if form == "words" else instructions):
+            continue  # the complete bounded table must fit in the supplied caller ranges
+        targets = []
+        for slot in range(count):
+            entry = address + _SWITCH_BASE + 4 * slot
+            if form == "words":
+                target = words.get(entry) if entry not in instructions else None
+            else:
+                branch = instructions.get(entry)
+                unconditional = (branch is not None and flows[entry] == "branch"
+                                 and branch.cc in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID))
+                target = entry if unconditional and branch.operands[0].imm in instructions else None
+            if target not in instructions:
+                break
+            targets.append(target)
+        else:
+            candidates[address] = guard[0], [address + 4, *dict.fromkeys(targets)]
+    # Every address entered other than by falling through, tentatively including all table targets.
+    entered = set(entries)
+    for insn in instructions.values():
+        if insn.id in (cs_arm.ARM_INS_B, cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX) and insn.operands[0].type == cs_arm.ARM_OP_IMM:
+            entered.add(insn.operands[0].imm)
+    for _, successors in candidates.values():
+        entered.update(successors[1:])
+    return {address: successors for address, (guard, successors) in candidates.items()
+            if not any(window in entered for window in range(guard + 4, address + 4, 4))}
+
+
 def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], condition: int,
-                         entries: set[int] | None = None, call_sites: set[int] | None = None) -> str:
+                         entries: set[int] | None = None, call_sites: set[int] | None = None,
+                         words: dict[int, int] | None = None) -> str:
     """Conservative whole-caller CFG filter, not evidence of a historical helper's identity.
 
     An input is defined in the preceding four straight-line words on every incoming path,
     is an unmodified incoming argument, or is an unmodified r0/r1 result of an unconditional
     preceding call on that path. Conditional definitions/calls alone do not establish inputs.
-    Both conditional successors are checked; unresolved indirect transfers fail closed.
+    Both conditional successors are checked; unresolved indirect transfers fail closed, except
+    a bounded ARMCC jump table (`_arm_jump_tables`): `words` maps the caller's own pool addresses
+    to their original words and supplies the word-table form's targets.
     Afterwards, follow every successor until a call/return or unconditional definitions of all
     caller-saved registers/flags. r0 may be a result. Candidate removed calls are call barriers.
     """
@@ -193,8 +306,10 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
     entries = set(entries) if entries is not None else {min(instructions)}
     call_sites = call_sites or set()
     flows = {address: _arm_call_flow(insn) for address, insn in instructions.items()}
-    successors = {address: _arm_successors(instructions, insn, flows[address])
+    tables = _arm_jump_tables(instructions, flows, entries, words or {})
+    successors = {address: tables[address] if address in tables else _arm_successors(instructions, insn, flows[address])
                   for address, insn in instructions.items()}
+    flows.update(dict.fromkeys(tables, "switch"))
     reachable, pending = set(), list(entries)
     while pending:
         address = pending.pop()
@@ -267,6 +382,18 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
             continue
         pending.extend((following, live, flags_defined) for following in successors[address])
     return "consistent"
+
+
+def arm_pool_words(image, fn: dict) -> dict[int, int]:
+    """The original 32-bit words of one catalogued function's pools/literals, inside its own extent:
+    the only data `arm_call_abi_context` lets a jump table name targets from."""
+    words = {}
+    for lo, hi in (*fn.get("pools", ()), *fn.get("literals", ())):
+        lo, hi = (max(lo, fn["address"]) + 3) & ~3, min(hi, fn["address"] + fn["size"])
+        data = image.read(lo, hi - lo) if lo < hi else b""
+        for offset in range(0, len(data) - 3, 4):
+            words[lo + offset] = struct.unpack_from("<I", data, offset)[0]
+    return words
 
 
 @dataclass
@@ -1181,22 +1308,28 @@ class InPlaceLinker:
                     if placed.base not in contexts:
                         instructions = {}
                         for lo, hi in fn.get("code_ranges", [(placed.base, placed.base + fn["size"])]):
+                            lo, hi = max(lo, fn["address"]), min(hi, fn["address"] + fn["size"])
+                            if lo >= hi:
+                                continue
                             for insn in _ARM.disasm(self.image.read(lo, hi - lo), lo):
-                                if not any(a <= insn.address < b for a, b in (*fn.get("pools", ()), *fn.get("literals", ()))):
+                                if (insn.address % 4 == 0 and insn.size == 4 and insn.address + 4 <= hi
+                                        and not any(a < insn.address + 4 and insn.address < b
+                                                    for a, b in (*fn.get("pools", ()), *fn.get("literals", ())))):
                                     instructions[insn.address] = insn
+                        words = arm_pool_words(self.image, fn)
                         call_sites = {
                             placed.base + relocation.offset for relocation in section.relocs
                             if relocation.symbol.shndx in self._removed_sections
                             and relocation.type in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24)
                         }
-                        contexts[placed.base] = instructions, call_sites
-                    instructions, call_sites = contexts[placed.base]
+                        contexts[placed.base] = instructions, call_sites, words
+                    instructions, call_sites, words = contexts[placed.base]
                     replacement = next(_ARM.disasm(struct.pack("<I", decision[1]), site, 1), None)
                     arguments = set(replacement.regs_access()[0]) & _ARM_ARGUMENTS if obj.sections[index].size == 8 else set()
                     if (fn["isa"] != "arm" or site not in instructions
                             or arm_call_abi_context(instructions, site, arguments, replacement.cc,
                                                     {placed.base, *(entry["address"] for entry in fn.get("entries", ()))},
-                                                    call_sites) != "consistent"
+                                                    call_sites, words) != "consistent"
                             or next((kind for offset, kind in reversed(section.mapping) if offset <= rel.offset), "$a") != "$a"):
                         decision = None
                 if decision is None:

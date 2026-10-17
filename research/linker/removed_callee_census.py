@@ -78,6 +78,7 @@ def census(catalogue_path: Path, authors: Path) -> dict:
                 insn = next(md.disasm(image.read(address, 4), address, 1), None)
                 if insn is not None:
                     instructions[address] = insn
+        words = inplace.arm_pool_words(image, fn)
         sites = []
         for address, insn in instructions.items():
             word = struct.unpack("<I", insn.bytes)[0]
@@ -87,7 +88,7 @@ def census(catalogue_path: Path, authors: Path) -> dict:
             arguments = read & ARGUMENTS
             if not arguments or read - ARGUMENTS - {arm.ARM_REG_CPSR} or written - SCRATCH:
                 continue
-            if inplace.arm_call_abi_context(instructions, address, arguments, insn.cc) == "consistent":
+            if inplace.arm_call_abi_context(instructions, address, arguments, insn.cc, words=words) == "consistent":
                 sites.append(address)
         if sites:
             by_function[fn["address"]] = sites

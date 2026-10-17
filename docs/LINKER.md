@@ -452,6 +452,114 @@ MATCH 240/240 bytes**, one `inline_insn` at **+0x7c**, and the 8-byte `w16_set_s
 The rewrite retains `target: null`. Results are under
 `scratch/integrator/linker-v3-f08/w16d/func_001456e4/`; this opt-in match is not accepted credit.
 
+## Jump tables in the call-context CFG (pending independent review)
+
+The `r1-jumptables` extension resolves two bounded ARM compiler switch idioms inside R1's
+**original-code CFG**. It does not add a helper shape, a rewriting rule or any relaxed byte
+comparison. V2 and every R1 retention, retained-callee equality, reference-elimination,
+source/object binding and QUALIFIED provenance requirement remain unchanged. The proposed
+gate/reviewer text is `scratch/integrator/r1-jumptables/GATES-DRAFT.md`; this implementation does
+not adopt it or revise frozen v1.16. It must be independently reviewed and frozen before a new
+checkpoint uses the extended CFG. No prepared or finalized checkpoint is retroactively changed.
+
+### Exact recognized patterns
+
+Let `A` be the original address of the PC-writing instruction and `rM` a non-PC register:
+
+| Form | Guarded instruction | Each reachable slot at `A + 8 + 4*i` |
+|---|---|---|
+| Branch table | `ADDLS pc, pc, rM, LSL #2` | an unconditional direct ARM `B` to decoded caller code |
+| Address table | `LDRLS pc, [pc, rM, LSL #2]` | a complete aligned absolute-address word in this caller's catalogued pool/literal data |
+
+The unsigned **LO** forms are also recognized. An unconditional immediate `CMP rM, #N` must
+guard the same index: **LS enumerates indices 0 through N; LO enumerates 0 through N−1**.
+The immediate is decoded with ARM's rotate encoding, not inferred from apparent table length.
+There must be at least one entry and every required slot must be present. No unguarded table,
+register bound, signed/other predicate, different base, alternate scale, writeback, subtractive
+index or arbitrary computed PC write is resolved.
+
+Between the compare and the writer, every word must be contiguous decoded ordinary caller code,
+with no call/control transfer, possible index write or flag update. Conditional writes count as
+possible writes. Explicit flag-update metadata and system/VFP flag transfers are checked as well
+as register-access metadata. No catalogue entry, direct B/BL/BLX target or target of **any**
+otherwise-resolvable table may enter after the compare through the writer. Branching back to the
+compare is allowed because it repeats the bound. Unresolved reachable control flow elsewhere in
+the caller still refuses R1; a recognized table does not excuse another indirect transfer.
+
+Only original catalogue code ranges clipped to the owning function's complete extent supply
+instructions; pool/literal bytes never do. Address-table words likewise come only from complete
+aligned words of that owner's pool/literal ranges clipped to its extent, never from image
+search, candidate relocations, neighboring functions or arbitrary memory reads. Every address
+target and every branch-table entry's destination must be a decoded aligned ARM instruction of
+this caller. Thumb, out-of-extent, data and undecoded targets are refused.
+
+The not-taken successor at `A + 4` must be an unconditional direct branch to decoded caller code
+or a recognized ordinary return, so it cannot accidentally fall into an address table. Returns
+are restricted to `BX lr`, plain `MOV pc, lr`, and `LDMIA sp!, {..., pc}`/`POP`; merely reading LR
+while writing PC, a generic decoder return group, exception-return encodings or an arbitrary PC
+load is insufficient. Predicated ordinary returns retain both exit/fall-through behavior outside
+this unconditional default-slot requirement.
+
+The CFG includes the default successor and every bounded table successor. For branch tables it
+visits each entry's B and then its destination; duplicate address targets may share a successor
+without dropping a distinct path. The existing incoming argument-provenance and outgoing
+register/flag-clobber walks use this complete graph, including case paths that do not contain the
+proposed helper. A different case cannot bypass argument setup or hide a later clobbered read.
+No source-specific address, function-name exception or forced-consistent context is permitted.
+
+### Evidence and reviewer obligations
+
+`tests/test_inplace.py` adds compiler-free `JumpTableContextTest` cases for both LO/LS table forms,
+complete bounds, guard/index/flag stability, direct/entry/table guard bypass, every successor,
+pool ownership, unknown computed transfers and escaping defaults/targets. Its compiled
+`SwitchRemovedCalleeTest` exercises the public `InPlaceLinker.link` consumer with separate caller
+and setter objects: it expects an address table under `game` and a branch table under the
+existing `trial-504-82-O3-Ospace` profile. Positive cases require exact full caller
+bytes, two `target: null` rewrites and the helper's defining-object provenance; v2 must still
+refuse the unbound helper. Negative cases require refusal before reporting a removed callee.
+These are authored regressions, not a claim that the suite has been run for this extension.
+
+Independent reviewers must re-derive the compare's decoded immediate, unsigned bound/count,
+same-index and flag preservation, entry/dominance proof, every slot and the default edge from
+the original catalogue ranges. They must independently run the positive/negative consumers and
+five accepted-function v2/v3 regressions, then inspect every incoming/outgoing path and retain
+all existing typed-contract, implicit-argument, memory-effect, preserved-bug and historical
+helper-identity qualifications. A bounded CFG or exact match never proves that the original
+source contained the proposed helper. The previous r4052 forced-context byte match is evidence
+only, never credit. This is an emulated in-place link, **not an execution of armlink**.
+
+### Settled-code r4052 author-loop measurement
+
+The resumed branch ran the following command with the normal, unmodified call-context filter:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/match.py \
+  /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/func_001ab680_removed_setter.c \
+  --extra-source /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/removed_content_setter.c \
+  --profile game --linker-model armlink5-inline-branchnop-v3 --show 0 \
+  --out scratch/out/r4052-v3
+```
+
+**Exit 0; MATCH 2,212/2,212 B**, two `inline_insn` rewrites at **+0x5a8** and **+0x6bc**, both
+`target: null`; one 8-byte `bind_content` section removed. The caller and separate helper sources
+were unchanged. Their source/object hashes and all compiler-recorded transitive dependency
+hashes (respectively seven and six header dependencies) agree with the exact cache/object
+inputs used by this match. The receipt is
+`scratch/out/r4052-v3/func_001ab680_removed_setter.result.json`; command, exit, receipt hash,
+source/header/object closure and implementation/configuration hashes are recorded in
+`scratch/integrator/r1-jumptables/verification.json`. The pre-resume receipt was preserved
+separately rather than treated as fresh evidence.
+
+No suite, accepted-function regression, full build, prepare/finalize or gate-adoption command
+was run by the editing worker. The main agent must run the ten v2/v3 commands for the five
+accepted functions in the historical regression table and `tools/test_suite.py`, serialized
+with other full checks. Exact command vectors are in
+`scratch/integrator/r1-jumptables/regression-commands.json`. The new result is a private qualified
+author candidate only: it does not recover historical setter identity, waive typed/source
+review or award accepted credit.
+
+
+
 
 ## Historical V3 measurements (branch `linker-removed`, before independent review)
 
