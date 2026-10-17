@@ -109,6 +109,14 @@ indirect/callback sweep, argcheck and all seven pre-review steps remain open.
 No full build/suite/prepare/finalize/history/push was run here. This is a
 committed, exact **unready milestone**, not a checkpoint review request.
 
+C011 has reserved the four unaccepted c010 source identities 001d0348,
+001d2234, 001f478c and 001c7760 for cross-checkpoint shared-header/caller
+migrations. C010 will not rewrite those sources concurrently. Historical owner
+qualifications remain; the native texture pair call requires both same-address
+self-definition and actual native return-ABI proof. Runtime 00183458 stays
+uncredited. Service/framebuffer/183208 owner forks remain unresolved, not
+authorization to replace accepted contracts.
+
 
 ## Historical milestone 2 — canonical source cutovers, not review-ready
 
