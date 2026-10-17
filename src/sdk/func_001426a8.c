@@ -1,9 +1,10 @@
+#include "game/service_protocol.h"
 #include "ctr/cp15.h"
 #include "ctr/svc.h"
 
 extern CtrHandle data_002430d8;
 
-CtrResult func_001426a8(void *buffer, unsigned int size)
+CtrResult func_001426a8(const void *buffer, unsigned int size)
 {
     unsigned int *command = (unsigned int *)(ctrGetThreadLocalStorage() + 0x80);
     CtrResult result;

@@ -1,7 +1,8 @@
 # c007 integration issues and qualifications
 
 This is an integration record, **not acceptance or an independent review**.
-The branch is blocked on Main's explicit c006 finalization/release signal.
+Phase 2 is verified against finalized c006-r3 (`816c68d`); the former c006 release
+prerequisite is resolved. Main still owns independent review and prepare/finalize.
 
 | Area | Units | Functions | Catalogue bytes |
 |---|---:|---:|---:|
@@ -17,34 +18,50 @@ c007 ProfileProbe C owner; it is not duplicate credit.
 
 ## Exercised evidence
 
-- All258 candidates plus23 accepted-source revisions: **281 units /320 functions MATCH**,
-  expected-function presence checked, command exits0. Later changed-source supplements
-  bind current hashes. No full build or suite was run.
+- **258 candidates /297 functions /23,376 bytes**, plus **34 accepted-source
+  revisions**, pass the fresh per-unit sweep: **292 units /331 functions /26,880
+  bytes MATCH**, every command exit0. The revisions comprise the original23,
+  the ten released c006 replacements and finalized c006-r3's001c5994.
 - Adopted-v8 catalogue SHA:
   `e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad`.
   Every surviving candidate is creditable; none needs a v8 re-extent.
-- Actual merged-ledger G3 is **not clean**: last recorded9 disagreements,4 policy entries
-  and one unchecked C unit, all caused by ten frozen c006 files.
-- Complete private replacements for those ten files all MATCH. The complete private
-  shadow ledger passes G3, exit0. This does **not** claim the protected tracked files
-  were modified or that the actual ledger is clean.
-- Complete shadow caller audit exits2, not zero: **35 raw candidates in23 functions**
-  individually adjudicated; all194 input-setup notes retain declarations. C++ and unresolved
-  indirect invocations remain explicit limitations.
-- Source-bound seven-step integrator pre-review:320 rows, overall **FAIL** for the frozen
-  actual-interface prerequisite. It is not an independent acceptance review.
+- Actual accepted+c007 dry-union G3 exits **0** with `--allow-unchecked-cpp`:
+  **1,093 units /889 checked C /204 explicitly unchecked C++**, zero
+  disagreements, zero policy findings and zero unchecked C.
+- Fresh caller audit exits **2**, not zero: **35 raw candidates in23 functions**
+  are individually adjudicated against unchanged issue/prototype/site facts.
+  All195 conservative input-setup notes retain declarations.191 functions lack a
+  parsed C contract;1,048 unresolved indirect sites remain explicit limitations.
+- Canonical-header probe exits **0**: all **91 c007 C++ units /130 functions**
+  MATCH while including the62 C++-compatible canonical `include/game` headers
+  together, without private duplicate shared types. The unrelated C-only
+  `graphics_state.h` flexible-array view is not consumed by these C++ units.
+  Finalized001c5994 also passes this probe. The initializer probe preserves its
+  source basename for ARMCC's generated symbol; no candidate or binding was changed.
+- Full suite exits **0**: **547 tests /1 skipped /0 failed modules**,19 modules.
+- The single dry union build, launched through `tools/jobs.py` after a successful
+  no-other-build/prepare process check, exits **0**: **1,093 units /1,167 functions
+  /73,388 bytes**. Credited functions, `code.bin` and compressed ExeFS code are exact.
+- Source-bound seven-step integrator pre-review: **320 rows, PASS**, with the
+  existing semantic/C++/indirect-call qualifications retained. It is not an
+  independent acceptance review.
 
-Receipts, raw failures, caller facts, adjudications, bindings and exact private replacements
-are under worktree `scratch/integrator/c007/`. Main-checkout
-`scratch/integrator/c007-NOTES.md` is the ignored handoff record.
+Current receipts are under worktree `scratch/integrator/c007/phase2/`:
+`matches.json`, `interfaces.json`, `argcheck.json`, `argcheck-adjudications.json`,
+`canonical-probe.json`, `canonical-notification-supplement.json`, `suite.json`
+and `counts.json`. The dry-build receipt is
+`build/c007-phase2-dry-union-20261017-1932/receipt.json`; its jobs exit marker is
+under `scratch/jobs/` with the same name. Refreshed `pre-review.json` and
+`delivery-bindings.json` remain at the parent artifact root. The worktree-local
+`scratch/integrator/c007-NOTES.md` records the phase-2 handoff without editing main.
 
-## Frozen prerequisite
+## Resolved release prerequisite
 
-Main must finalize c006 before these tracked-source revisions are permitted:
-0014dc28,001426a8,00142718,0014e20c,0015475c,00116f40,001527c0,
-0019d8c4,001793e4,00150610. `frozen-revisions-ready.json` binds original hashes,
-complete replacements and surgical diffs. The real ledger must then be checked;
-a private-shadow PASS is not a substitute.
+Merged `c007-phase2` (`e3ee6c3`, including ten-replacement commit `843be9b`) and
+finalized c006-r3 main (`816c68d`) without conflicts. All ten replacement hashes
+still equal `frozen-revisions-ready.json`; they are actual tracked sources, not
+shadow substitutes. Finalized001c5994 uses `audio_voice.h`, and the removed
+`sound_notification.h` is neither restored nor referenced.
 
 ## Classification and explicit deferral
 

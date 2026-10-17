@@ -1,6 +1,4 @@
 #include "game/font.h"
-extern int func_001149c0(const struct FontFile *file, unsigned signature,
-                         unsigned version, unsigned minimumBlocks);
 
 unsigned func_0019d8c4(const struct FontFile *file)
 {

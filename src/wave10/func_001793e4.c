@@ -10,7 +10,6 @@ struct QueuedDisplayState {
     struct QueuedDisplayHandle *handle;
 };
 
-extern void func_00181448(struct BoundDisplayObject *object);
 
 void func_001793e4(struct QueuedDisplayState *state, int active)
 {
