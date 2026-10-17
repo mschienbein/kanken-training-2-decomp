@@ -95,13 +95,16 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     mismatched: list[str] = []
     occupied: list[tuple[int, int, str, tuple[str, str] | None]] = []  # sections placed by all units
     definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
+    objects = [inplace.ObjectFile(out / "obj" / Path(unit["source"]).with_suffix(".o")) for unit in matches["units"]]
+    combined = inplace.ObjectFile.combine(objects, [unit["source"] for unit in matches["units"]])
+    all_linked = linker.link(combined)
     units = []
-    for unit in matches["units"]:
+    for owner, unit in enumerate(matches["units"]):
         src = ROOT / unit["source"]
         profile = profiles[unit["profile"]]
         obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
-        objfile = inplace.ObjectFile(obj)
-        linked = linker.link(objfile)
+        objfile = objects[owner]
+        linked = {index: value for index, value in all_linked.items() if combined.section_owners[index] == owner}
         for sym in objfile.defined_globals():
             if objfile.sections[sym.shndx].comdat:
                 continue  # one entity; its single address is enforced by reject_overlaps
@@ -142,6 +145,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
             "functions": sorted(unit["functions"]), "cache_hit": hits[unit["source"]],
             "linker_rewrites": rewrites,
+            "removed_callees": [row for row in linker.removed_callees if row["object"] == unit["source"]],
         })
     try:
         inplace.reject_overlaps(occupied)
