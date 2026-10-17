@@ -28,6 +28,7 @@ import struct
 from dataclasses import dataclass, field, replace
 from fnmatch import fnmatchcase
 from pathlib import Path
+from typing import NamedTuple
 
 from capstone import CS_ARCH_ARM, CS_GRP_BRANCH_RELATIVE, CS_GRP_CALL, CS_GRP_INT, CS_GRP_IRET, CS_GRP_JUMP, CS_GRP_RET, CS_MODE_ARM, Cs
 from capstone import arm as cs_arm
@@ -290,7 +291,7 @@ class Reloc:
 class Section:
     index: int
     name: str
-    data: bytes
+    data: bytes = field(repr=False)
     size: int
     nobits: bool
     executable: bool
@@ -374,6 +375,9 @@ class ObjectFile:
                 self.sections[sym.shndx].mapping.append((sym.value, sym.name))
         for sec in self.sections.values():
             sec.mapping.sort()
+
+    def __repr__(self) -> str:
+        return f"ObjectFile(sections={len(self.sections)}, symbols={len(self.symbols)})"
 
     @classmethod
     def combine(cls, objects: list[ObjectFile], labels: list[str] | None = None) -> ObjectFile:
@@ -495,7 +499,21 @@ class Placement:
     base: int
     origin: str  # "catalogue" or "inferred"
     literal_offsets: dict[int, int] | None = None  # candidate record start -> output record start
-    literal_data: bytes | None = None  # reordered candidate bytes; never copied from the image
+    literal_data: bytes | None = field(default=None, repr=False)  # reordered candidate bytes; never copied from the image
+
+
+class LinkedSection(NamedTuple):
+    """A tuple-compatible link result whose display never renders its candidate buffer."""
+
+    placement: Placement
+    data: bytes
+
+    def __repr__(self) -> str:
+        return (f"LinkedSection(section={self.placement.section.index}, "
+                f"address={self.placement.base:#x}, size={len(self.data)})")
+
+    __str__ = __repr__
+
 
 
 def _is_internal_label(sym: Symbol) -> bool:
@@ -587,6 +605,9 @@ class InPlaceLinker:
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
         self._removed_sections: dict[int, dict] = {}
+
+    def __repr__(self) -> str:
+        return f"InPlaceLinker(functions={len(self.functions)}, bss=({self.bss[0]:#x}, {self.bss[1]:#x}))"
 
     # -- placement -----------------------------------------------------------------------------
 
@@ -1151,7 +1172,7 @@ class InPlaceLinker:
 
     # -- link + verify -------------------------------------------------------------------------
 
-    def link(self, obj: ObjectFile, names_to_address: dict[str, int] | None = None) -> dict[int, tuple[Placement, bytes]]:
+    def link(self, obj: ObjectFile, names_to_address: dict[str, int] | None = None) -> dict[int, LinkedSection]:
         """Place and relocate every referenced section; returns {section index: (placement, bytes)}.
 
         Inferred (non-function) sections are verified here: their relocated bytes must equal the
@@ -1165,14 +1186,14 @@ class InPlaceLinker:
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
-        linked: dict[int, tuple[Placement, bytes]] = {}
+        linked: dict[int, LinkedSection] = {}
         for idx, placed in placements.items():
             sec = placed.section
             if sec.nobits:
                 lo, hi = self.bss
                 if not (lo <= placed.base and placed.base + sec.size <= hi):
                     raise LinkError(f"{sec.name}: placed at {placed.base:#x}, outside BSS [{lo:#x}, {hi:#x})")
-                linked[idx] = (placed, b"")
+                linked[idx] = LinkedSection(placed, b"")
                 continue
             data = bytearray(placed.literal_data if placed.literal_data is not None else sec.data)
             for rel in sec.relocs:
@@ -1198,7 +1219,7 @@ class InPlaceLinker:
                     self.rewrites.append(rewrite)
                     continue
                 self._apply(rel, sec, data, place, target)
-            linked[idx] = (placed, bytes(data))
+            linked[idx] = LinkedSection(placed, bytes(data))
             if placed.origin == "inferred":
                 try:
                     original = self.image.read(placed.base, sec.size)

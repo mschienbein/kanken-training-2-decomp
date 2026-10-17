@@ -7,7 +7,7 @@ proposed identity with tools/match.py before adopting a symbol binding.
 from __future__ import annotations
 
 import argparse
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import json
 from pathlib import Path
 import sys
@@ -53,8 +53,8 @@ UNCHANGED_RELOCATIONS = {0, 40}  # R_ARM_NONE, R_ARM_V4BX (ARMv6K supports BX)
 class FunctionFingerprint:
     name: str
     isa: str
-    data: bytes
-    mask: bytes
+    data: bytes = field(repr=False)
+    mask: bytes = field(repr=False)
     code_size: int
     literal_size: int
     relocation_count: int
