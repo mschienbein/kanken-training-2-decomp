@@ -4,6 +4,7 @@ Compiler tests need the pinned toolchain; image tests additionally need orig/.
 All disposable files and compiler caches stay underneath scratch/.
 """
 import ctypes
+import io
 import json
 import random
 import shutil
@@ -230,10 +231,128 @@ class MutationTest(unittest.TestCase):
         self.assertTrue(rendered.startswith("__weak int target"))
         self.assertTrue(rendered.endswith("__packed struct S {int x;};\n"))
 
+    def test_approved_svc_results_and_cp15_helpers_are_preserved(self):
+        headers = (
+            "typedef struct Result {int result; unsigned handle;} Result;\n"
+            "__svc(0x17) __value_in_regs Result svcCreateEvent(unsigned reserved, int reset);\n"
+            "__svc_indirect(0) void svcIndirect(unsigned number);\n"
+            "static __forceinline unsigned char *get_tls(void) {\n"
+            '    register unsigned tls __asm("cp15:0:c13:c0:3");\n'
+            "    return (unsigned char *)tls;\n"
+            "}\n"
+        )
+        source = program(headers + "int target(int x){return x+1;}\n")
+        changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+        self.assertIsNotNone(changed)
+        rendered = source.render(changed[0])
+        self.assertTrue(rendered.startswith(headers))
+        functions, _ = source.hints(changed[0])
+        self.assertTrue(functions.startswith("int target("))
+        self.assertNotIn("__asm", functions)
+        self.assertNotIn("__svc", functions)
+
+    def test_cp15_annotations_inside_targets_remain_forbidden(self):
+        with self.assertRaisesRegex(permute.PermuteError, "target body has ABI-relevant ARMCC annotations"):
+            program('unsigned target(void){register unsigned tls __asm("cp15:0:c13:c0:3");return tls;}')
+
+    def test_non_cp15_assembly_is_refused_even_in_untouched_helpers(self):
+        for helper in (
+            "__asm void helper(void){}",
+            'unsigned helper(void){register unsigned value __asm("r0");return value;}',
+            'void helper(void){asm("nop");}',
+        ):
+            with self.subTest(helper=helper):
+                with self.assertRaises(permute.PermuteError):
+                    program(helper + "\nint target(int x){return x+1;}")
+
     def test_postfix_armcc_attribute_is_kept_in_original_function_diff(self):
         source = program("int target(int x) __attribute__((noinline)) {return x+1;}")
         changed = permute.mutate(source, source.ast, random.Random(0), "commute")
         self.assertIn("__attribute__((noinline))", source.hints(changed[0])[0])
+
+    def test_raw_spans_preserve_overlapping_names_and_multiple_target_bodies(self):
+        definitions = (
+            "__int64 a4(__int64 x) { return x - 4; }",
+            "int func_001a78a4_suffix(int x) { return x + 10; }",
+            "__weak __int64 func_001a78a4(__int64 x) __attribute__((noinline)) {\n"
+            "    __int64 result = x + 1; /* } func_001a78a4_suffix( */\n"
+            "    return result;\n}",
+            "__int64 prefix_func_001a78a4(__int64 x) { return x + 2; }",
+            "__int64 func_001a78a4_long(__int64 x) { return x + 3; }",
+        )
+        text = '#line 1 "header.h"\ntypedef __int64 Wide;\n'
+        text += definitions[0] + '\n# 40 "fixture.c"\n' + "\n".join(definitions[1:]) + "\n"
+        names = ("a4", "func_001a78a4_suffix", "func_001a78a4",
+                 "prefix_func_001a78a4", "func_001a78a4_long")
+        targets = ("func_001a78a4_long", "func_001a78a4")
+        source = permute.Program.parse(text, targets, Path("fixture.c"))
+        self.assertEqual(set(source.spans), set(names))
+        for name, definition in zip(names, definitions):
+            with self.subTest(name=name):
+                start, body, end = source.spans[name]
+                self.assertEqual(text[start:end], definition)
+                self.assertEqual(text[body], "{")
+                if name in targets:
+                    self.assertEqual(source.original_functions[name], definition + "\n")
+        rendered = source.render(source.ast)
+        reparsed = permute.Program.parse(rendered, targets, Path("normalized.c"))
+        self.assertEqual(permute.GENERATOR.visit(reparsed.ast), permute.GENERATOR.visit(source.ast))
+        for index in (0, 1, 3):
+            self.assertIn(definitions[index], rendered)
+        self.assertTrue(rendered.startswith('#line 1 "header.h"\ntypedef __int64 Wide;\n'))
+        original_hints, original_patch = source.hints(None)
+        self.assertEqual(original_hints, definitions[4] + "\n\n" + definitions[2] + "\n")
+        self.assertEqual(original_patch, "")
+        functions, patch = source.hints(source.ast)
+        self.assertEqual(set(permute.function_spans(functions)), set(targets))
+        self.assertIn("__weak __int64 func_001a78a4(", functions)
+        self.assertIn("__attribute__((noinline))", functions)
+        self.assertNotIn("prefix_func_001a78a4", functions)
+        self.assertIn("--- original/func_001a78a4.c", patch)
+
+    def test_hints_keep_prefix_annotations_after_type_expansion(self):
+        definition = "__weak __attribute__((noinline)) int target(int x) {return x+1;}"
+        source = program("typedef __int64 Wide;\n" + definition + "\n")
+        self.assertEqual(source.original_functions["target"], definition + "\n")
+        self.assertEqual(source.hints(None), (definition + "\n", ""))
+        self.assertTrue(source.hints(source.ast)[0].startswith(
+            "__weak __attribute__((noinline)) int target("))
+
+    def test_body_annotations_use_parser_offsets_not_raw_offsets(self):
+        prefix = "".join(f"typedef __int64 Wide{i};\n" for i in range(40))
+        source = program(prefix + "__packed struct S {int x;}; int target(struct S *p){return p->x;}")
+        self.assertIn("target", source.functions())
+        with self.assertRaisesRegex(permute.PermuteError, "target body has ABI-relevant ARMCC annotations"):
+            program(prefix + "int target(void){__packed struct S {int x;} s; return s.x;}")
+
+    def test_cpp_extensions_are_refused_before_preprocessing(self):
+        for suffix in (".cpp", ".cc", ".cxx", ".CPP"):
+            with self.subTest(suffix=suffix):
+                with mock.patch.object(interfaces, "preprocess") as preprocess:
+                    with self.assertRaisesRegex(permute.PermuteError, "accepts C .c files, not C\\+\\+"):
+                        permute.Program.preprocess(Path("fixture" + suffix), ("target",), PROFILE)
+                preprocess.assert_not_called()
+
+    def test_cpp_syntax_in_c_units_is_refused_cleanly(self):
+        for text in (
+            'extern "C" int target(int x){return x;}',
+            "namespace fixture {int target(int x){return x;}}",
+            "class Fixture {public: int target(int x){return x;}};",
+            "template<class T> T target(T x){return x;}",
+        ):
+            with self.subTest(source=text):
+                with self.assertRaisesRegex(permute.PermuteError, "C\\+\\+ is not supported"):
+                    program(text)
+
+    def test_cpp_cli_returns_input_error_without_search_or_traceback(self):
+        with mock.patch.object(interfaces, "preprocess") as preprocess:
+            with mock.patch.object(permute, "search") as search:
+                with mock.patch.object(sys, "stderr", new_callable=io.StringIO) as stderr:
+                    status = permute.main(["fixture.cpp", "target", "--out", "scratch/cpp-refused"])
+        self.assertEqual(status, 2)
+        self.assertEqual(stderr.getvalue(), "permuter: the permuter accepts C .c files, not C++\n")
+        preprocess.assert_not_called()
+        search.assert_not_called()
 
     def test_shadowed_typedefs_are_unknown_not_nonvolatile(self):
         source = program("typedef int T; int target(int x){typedef volatile int T;T value=x;return value;}")
@@ -347,6 +466,49 @@ class CompilerMutationTest(ScratchTest):
                 path = self.directory / "chain.c"
                 path.write_text(rendered, encoding="utf-8")
                 toolchain.compile_source(PROFILE, path, path.with_suffix(".o"), cache=False)
+
+    def test_preprocessed_int64_units_normalize_without_corrupting_declarations(self):
+        path = self.directory / "overlapping.c"
+        path.write_text(
+            "#include <stdint.h>\n"
+            "__int64 a4(__int64 x){return x-1;}\n"
+            "__int64 func_001a78a4(__int64 x){__int64 value=x+1;return value;}\n"
+            "int prefix_func_001a78a4(int x){return x+2;}\n"
+            "int func_001a78a4_suffix(int x){return x*3;}\n",
+            encoding="utf-8",
+        )
+        toolchain.compile_source(PROFILE, path, path.with_suffix(".o"), cache=False)
+        targets = ("func_001a78a4_suffix", "func_001a78a4")
+        source = permute.Program.preprocess(path, targets, PROFILE)
+        self.assertNotEqual(len(source.text), len(interfaces.prepare(source.text, path).text))
+        normalized = self.directory / "normalized.c"
+        normalized.write_text(source.render(source.ast), encoding="utf-8")
+        toolchain.compile_source(PROFILE, normalized, normalized.with_suffix(".o"), cache=False)
+        functions, _ = source.hints(source.ast)
+        self.assertEqual(set(permute.function_spans(functions)), set(targets))
+
+    def test_approved_extension_headers_normalize_and_compile(self):
+        path = self.directory / "extensions.c"
+        path.write_text(
+            '#include "ctr/svc.h"\n#include "ctr/cp15.h"\n'
+            "CtrResult target(CtrHandle session) {\n"
+            "    unsigned char *tls = ctrGetThreadLocalStorage();\n"
+            "    tls[0] = 0;\n"
+            "    return svcSendSyncRequest(session);\n"
+            "}\n",
+            encoding="utf-8",
+        )
+        toolchain.compile_source(PROFILE, path, path.with_suffix(".o"), cache=False)
+        source = permute.Program.preprocess(path, ("target",), PROFILE)
+        normalized = self.directory / "normalized-extensions.c"
+        rendered = source.render(source.ast)
+        start, body, end = source.spans["target"]
+        self.assertEqual(rendered[:body], source.text[:body])
+        self.assertTrue(rendered.endswith(source.text[end:]))
+        self.assertIn("__svc(0x17) __value_in_regs", rendered)
+        self.assertIn('__asm("cp15:0:c13:c0:3")', rendered)
+        normalized.write_text(rendered, encoding="utf-8")
+        toolchain.compile_source(PROFILE, normalized, normalized.with_suffix(".o"), cache=False)
 
 
 @unittest.skipUnless(sys.platform in {"linux", "darwin"} and shutil.which("cc"), "optional native C compiler required")
