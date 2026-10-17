@@ -90,13 +90,25 @@ def _deps_unchanged(deps: dict[str, str]) -> bool:
     return True
 
 
+def _host_dependency(dep: str) -> Path:
+    """A --depend entry as a host path. wibo shows armcc the host root as drive Z:, so a header the
+    compiler finds through its own install (bin/../include/stddef.h) is reported as Z:/...; on
+    Windows every path is already native."""
+    if wibo_path() is not None and len(dep) > 2 and dep[0] in "Zz" and dep[1] == ":" and dep[2] in "/\\":
+        return Path("/" + dep[3:].replace("\\", "/"))
+    return Path(dep)
+
+
 def _parse_depend(text: str, source: Path) -> list[Path]:
     deps = []
     for line in text.splitlines():
         _, _, dep = line.partition(": ")
         dep = dep.strip().replace("\\ ", " ")
-        if dep and Path(dep).resolve() != source.resolve():
-            deps.append(Path(dep))
+        if not dep:
+            continue
+        path = _host_dependency(dep)
+        if path.resolve() != source.resolve():
+            deps.append(path)
     return deps
 
 

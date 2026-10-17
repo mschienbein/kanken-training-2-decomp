@@ -49,6 +49,24 @@ class ObjectCacheTest(unittest.TestCase):
         self.assertFalse(self.compile(cache=False)[0])
         self.assertTrue(self.compile(name="cached.o")[0])
 
+    def test_compiler_system_header_is_tracked(self):
+        # armcc finds <stddef.h> through its own install; under wibo --depend reports it as Z:/...
+        self.source.write_text(
+            "#include <stddef.h>\nstruct pair { int a; int b; };\n"
+            "unsigned func_00100000(void) { return offsetof(struct pair, b); }\n", encoding="utf-8")
+        self.assertFalse(self.compile()[0])
+        self.assertTrue(self.compile(name="again.o")[0])
+
+
+class DependPathTest(unittest.TestCase):
+    @unittest.skipIf(toolchain.wibo_path() is None, "Windows hosts report native paths")
+    def test_wibo_drive_paths_map_to_host_paths(self):
+        text = "unit.o: Z:/usr/lib/armcc/bin/../include/stddef.h\nunit.o: z:\\opt\\inc\\x.h\nunit.o: inc/value.h\n"
+        self.assertEqual(
+            toolchain._parse_depend(text, Path("unit.c")),
+            [Path("/usr/lib/armcc/bin/../include/stddef.h"), Path("/opt/inc/x.h"), Path("inc/value.h")],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
