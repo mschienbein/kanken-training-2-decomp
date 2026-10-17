@@ -489,6 +489,13 @@ class AcceptGateTest(unittest.TestCase):
         accept.HISTORY.write_text("".join(json.dumps(e) + "\n" for e in history), encoding="utf-8")
         return history
 
+    def test_sequence_7_legacy_checkpoint_verifies_before_selector_cutover(self):
+        self.assertEqual(accept.SELECTION_FIRST_SEQ, 8)
+        history = self.make_legacy_history(7)
+        self.assertEqual(history[-1]["seq"], 7)
+        self.assertNotIn("selection_sha256", history[-1])
+        self.assertEqual(accept.verify_history(), history)
+
     def test_post_selector_history_requires_selection_without_schema_or_artifacts(self):
         self.make_legacy_history(accept.SELECTION_FIRST_SEQ)
         with self.assertRaisesRegex(accept.AcceptError, f"c{accept.SELECTION_FIRST_SEQ:03}:.*selection binding"):

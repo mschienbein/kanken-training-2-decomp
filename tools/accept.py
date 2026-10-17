@@ -46,9 +46,9 @@ PROFILES = ROOT / "config/compiler_profiles.json"
 CATALOGUE = ROOT / "config/catalogue.json"
 NAME = re.compile(r"^[a-z0-9][a-z0-9.-]{2,63}$")
 PASSING = ("PASS", "PASS_WITH_QUALIFICATIONS")
-# The six entries through c006-r3 predate the selector. This creation boundary is
-# independent of mutable prepare/history schema labels and must never move forward.
-SELECTION_FIRST_SEQ = 7
+# The seven checkpoints through c007 use pre-selector tooling; c007 must finalize
+# before this cutover merges. This boundary is independent of mutable schema labels.
+SELECTION_FIRST_SEQ = 8
 LEGACY_MODELS = {"linker_model": "armlink5-inline-branchnop-v2", "literal_model": "none"}
 
 
