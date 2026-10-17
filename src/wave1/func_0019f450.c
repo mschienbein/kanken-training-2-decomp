@@ -1,11 +1,4 @@
-typedef struct FrameTiming {
-    unsigned int reserved;
-    float rate;
-    float milliseconds;
-    float nominalFrames;
-} FrameTiming;
-
-extern FrameTiming bss_00495b30;
+#include "game/animation.h"
 
 void func_0019f450(float rate)
 {

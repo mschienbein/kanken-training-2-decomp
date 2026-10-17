@@ -8,6 +8,7 @@ struct ObjectManager;
 
 /* Domain entries use the same count-and-sentinel intrusive list as pool users. */
 
+
 struct RegistryEntry {
     const void *type;
     struct PoolLink link;
@@ -43,6 +44,8 @@ extern int func_00144224(int value);
 extern void func_00147260(struct ObjectManager *object);
 extern struct PoolLink *func_0018d868(struct PoolList *registry, struct PoolLink *node);
 extern void func_0017e7bc(struct PoolList *registry, struct RegistryEntry *entry);
+extern struct PoolLink *func_0017e790(struct PoolList *registry, struct RegistryEntry *entry);
+extern struct ObjectManager *func_00185d1c(void);
 extern struct PoolList *func_0017e7c4(void);
 extern void func_0017e818(struct TimingState *state);
 extern unsigned func_0019d048(void);

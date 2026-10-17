@@ -12,7 +12,7 @@ struct ArchiveBlockReference {
     unsigned short type;                   /* 0x00 */
     unsigned char reserved02[2];
     unsigned offset;                       /* 0x04 */
-    unsigned char reserved08[4];
+    unsigned size;                         /* 0x08 */
 };
 
 struct ArchiveFile {
@@ -23,12 +23,19 @@ struct ArchiveFile {
     struct ArchiveBlockReference blocks[2]; /* 0x14; references at 0x14 and 0x20 */
 };
 
+struct SoundContainerFile {
+    unsigned char reserved00[0x14];
+    struct ArchiveBlockReference blocks[3];
+};
+
 struct ArchiveBlockHeader {
     unsigned signature;                    /* 0x00 */
     unsigned char reserved04[4];
 };
 
-struct ArchiveInfoTable;
+struct ArchiveInfoTable {
+    unsigned count;
+};
 struct ArchiveReader {
     const struct ArchiveFile *file;         /* 0x00 */
     const struct ArchiveInfoTable *info;    /* 0x04 */
@@ -83,6 +90,17 @@ struct ArchiveSoundInfo {
 #ifndef __cplusplus
     unsigned parameters[];
 #endif
+};
+
+struct SoundRecord {
+    unsigned item_id;
+    unsigned field04;
+    unsigned char property;
+    unsigned char reserved09[3];
+    unsigned short type;
+    unsigned short reserved0e;
+    int detail_offset;
+    unsigned option_flags;
 };
 
 struct SoundRecord {
@@ -245,6 +263,8 @@ extern unsigned int func_0014a364(const struct SoundArchiveReader *reader);
 extern unsigned func_0014a380(const struct SoundArchiveReader *reader);
 extern unsigned char func_00140ccc(const struct SoundRecord *record);
 extern int func_00140d1c(const struct SoundRecord *record);
+extern const unsigned *func_0014c298(const struct SoundArchiveInfo *info);
+extern const unsigned *func_0014c2b0(const struct SoundArchiveInfo *info);
 extern unsigned func_0014c23c(const struct SoundFileInfo *info);
 extern const struct SoundFileInfo *func_0014c25c(const struct SoundArchiveInfo *info, unsigned id);
 extern bool func_00181334(const struct SoundArchive *archive, struct SoundPlayerResult *out);

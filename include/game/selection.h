@@ -27,9 +27,8 @@ struct W6ListGroup {
 
 struct W6ListController {
     unsigned reserved00[8]; /* retain four-byte prefix alignment in C and C++ */
-#ifndef __cplusplus
-    struct W6ListGroup *lists[];
-#endif
+    struct W6ListGroup *lists[21];
+    unsigned char dirty;
 };
 
 struct W6CategoryItem {
@@ -97,6 +96,7 @@ extern void func_00174210(struct W6Selector *selector, int resource);
 extern void func_001780c4(struct W6ListController *controller, int list, int item, int enabled);
 extern int func_00178144(void);
 extern void func_00178e98(struct W6ListController *controller, int index);
+extern int func_00178f84(struct W6ListController *controller, int index);
 extern int func_00179148(void);
 extern int func_001795bc(void);
 extern void func_001e8934(struct W6ListController *controller, int index);
