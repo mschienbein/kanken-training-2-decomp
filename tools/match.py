@@ -65,17 +65,28 @@ def diff_lines(original: bytes, candidate: bytes, base: int, fn: dict, limit: in
     return out[first : first + limit]
 
 
+def merge_names(base: dict[str, dict], proposed: dict[str, dict]) -> dict[str, dict]:
+    """config/names.json plus an author's proposed bindings; a proposal may add names, never move one."""
+    clash = sorted(n for n, e in proposed.items() if n in base and base[n]["address"] != e["address"])
+    if clash:
+        raise inplace.LinkError(f"proposed names rebind config/names.json names: {', '.join(clash[:5])}")
+    return {**base, **proposed}
+
+
 class Context:
     """The original image, catalogue and resolver shared by every comparison."""
 
-    def __init__(self, catalogue_path: Path, model: str = inplace.DEFAULT_LINKER_MODEL):
+    def __init__(self, catalogue_path: Path, model: str = inplace.DEFAULT_LINKER_MODEL, names_path: Path | None = None):
         self.image = image_mod.Image.load()
         self.catalogue_path = catalogue_path
         catalogue = image_mod.load_catalogue(catalogue_path)
         if catalogue["image_sha256"] != self.image.sha256:
             raise inplace.LinkError("catalogue was generated from a different code.bin")
         self.functions = image_mod.functions_by_address(catalogue)
-        self.resolver = inplace.Resolver(self.functions, image_mod.load_names())
+        names = image_mod.load_names()
+        if names_path is not None:
+            names = merge_names(names, image_mod.load_names(names_path))
+        self.resolver = inplace.Resolver(self.functions, names)
         self.model = inplace.linker_model(model)
 
     def compare(self, obj_path: Path) -> list[dict]:
@@ -116,8 +127,10 @@ class Context:
 
 
 def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir: Path, show: int,
-        model: str = inplace.DEFAULT_LINKER_MODEL) -> int:
-    ctx = Context(catalogue_path, model)
+        model: str = inplace.DEFAULT_LINKER_MODEL, names_path: Path | None = None) -> int:
+    ctx = Context(catalogue_path, model, names_path)
+    if names_path is not None:
+        print(f"note: proposed names overlay {names_path} (not config/names.json); a MATCH here needs those bindings adopted")
     obj_path = out_dir / (source.stem + ".o")
     toolchain.compile_source(profile, source, obj_path)
     results = ctx.compare(obj_path)
@@ -139,6 +152,7 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         "compiler": profile.compiler, "compiler_sha256": sha256(toolchain.armcc_exe(profile.compiler)),
         "flags": list(profile.flags), "object_sha256": sha256(obj_path), "image_sha256": ctx.image.sha256,
         "catalogue_sha256": sha256(catalogue_path), "linker_model": ctx.model.name,
+        "proposed_names": None if names_path is None else {"path": names_path.as_posix(), "sha256": sha256(names_path)},
         "functions": [{k: v for k, v in r.items() if not k.startswith("_")} for r in results],
     }
     (out_dir / (source.stem + ".result.json")).write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n")
@@ -154,6 +168,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--show", type=int, default=24, help="diff rows to print per mismatching function")
     parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
                         help="armlink output optimisations reproduced by the in-place link (docs/LINKER.md)")
+    parser.add_argument("--names", type=Path,
+                        help="proposed extra bindings (config/names.json schema) merged over config/names.json; "
+                             "may add names, never rebind one")
     args = parser.parse_args(argv)
     profiles = toolchain.load_profiles()
     if args.profile not in profiles:
@@ -161,7 +178,7 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     out_dir = args.out or ROOT / "scratch/match" / args.source.stem / args.profile
     try:
-        return run(args.source.resolve(), profiles[args.profile], args.catalogue, out_dir, args.show, args.linker_model)
+        return run(args.source.resolve(), profiles[args.profile], args.catalogue, out_dir, args.show, args.linker_model, args.names)
     except (inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
