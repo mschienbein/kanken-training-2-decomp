@@ -138,9 +138,13 @@ does not compile anything. For example:
 Each archive row retains its archive/member identity, member offset and digest,
 whole-function object/mask/masked digests, relocation-field metadata, and each
 hit's original/masked digest and exact/masked equality flags. Repeated members and
-aliases remain separate evidence rows. Index and long-name tables are not
-objects; other non-ELF members and malformed objects are reported and make the
-command exit 2 rather than silently claiming a complete scan. Neither reports
+aliases remain separate evidence rows. Archive mode honors sized outer assembly
+routines and their zero-sized same-start aliases without truncating them at
+exported secondary entries; those overlaps are listed explicitly. Zero-sized
+end labels have no body and remain member metadata. Index/long-name tables and
+Arm's named `SELECTION_SCRIPT` linker metadata are not objects and are never
+executed or printed. Other non-ELF members and malformed objects are reported and
+make the command exit 2 rather than silently claiming a complete scan. Neither reports
 nor object/member representations contain buffers. The archive API accepts a
 shared search cache for repeated library variants; it never merges provenance.
 

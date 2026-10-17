@@ -66,6 +66,7 @@ class FunctionFingerprint:
     section_index: int = 0
     section_offset: int = 0
     relocation_fields: tuple[inplace.Reloc, ...] = ()
+    overlapping_entries: tuple[int, ...] = ()
 
     @property
     def size(self) -> int:
@@ -82,21 +83,32 @@ class FunctionFingerprint:
         )
 
 
-def function_fingerprints(obj: inplace.ObjectFile) -> list[FunctionFingerprint]:
+def function_fingerprints(obj: inplace.ObjectFile, *, symbol_extents: bool = False) -> list[FunctionFingerprint]:
     """Include the function's owned section tail, not just ELF st_size.
 
     armcc's st_size can omit a trailing $d literal pool. With split sections the
     section is the whole matching extent; in a shared section the next distinct
     function start bounds ownership. Aliases intentionally get separate rows.
+    Archive assembly can export secondary entries inside a sized outer routine.
+    With symbol_extents, the largest declaration at one start also bounds its
+    zero-sized aliases; inner entries remain visible instead of truncating it.
     """
     functions = obj.defined_functions()
     output = []
     for symbol in functions:
         section = obj.sections[symbol.shndx]
         start = symbol.value & ~1
+        if symbol_extents and symbol.size == 0 and start == section.size:
+            continue  # exported end labels have no body to fingerprint
         following = [s.value & ~1 for s in functions
                      if s.shndx == symbol.shndx and (s.value & ~1) > start]
         end = min(following, default=section.size)
+        if symbol_extents:
+            declared_end = max(start + s.size for s in functions
+                               if s.shndx == symbol.shndx and (s.value & ~1) == start)
+            if declared_end > section.size:
+                raise FingerprintError(f"{symbol.name}: declared function exceeds section")
+            end = min((offset for offset in following if offset >= declared_end), default=section.size)
         if not section.executable or not 0 <= start < end <= len(section.data):
             raise FingerprintError(f"{symbol.name}: invalid executable function extent")
         if start + symbol.size > end:
@@ -136,7 +148,8 @@ def function_fingerprints(obj: inplace.ObjectFile) -> list[FunctionFingerprint]:
                                           len(data) - literal_size, literal_size, count, error,
                                           symbol.shndx, start,
                                           tuple(reloc for reloc in section.relocs
-                                                if start <= reloc.offset < end)))
+                                                if start <= reloc.offset < end),
+                                          tuple(sorted({offset - start for offset in following if offset < end}))))
     return output
 
 
@@ -303,6 +316,7 @@ def archive_function_report(fingerprint: FunctionFingerprint, image: image_mod.I
                object_body_sha256=hashlib.sha256(fingerprint.data).hexdigest(),
                masked_body_sha256=hashlib.sha256(normalized).hexdigest(),
                mask_sha256=hashlib.sha256(fingerprint.mask).hexdigest())
+    row["overlapping_entries"] = list(fingerprint.overlapping_entries)
     row["relocation_fields"] = [
         {"offset": reloc.offset - fingerprint.section_offset, "type": reloc.type,
          "symbol": reloc.symbol.name, "symbol_section": reloc.symbol.shndx,
@@ -333,13 +347,18 @@ def fingerprint_archive(path: Path, image: image_mod.Image, catalogue: dict,
         metadata = {"member": member.name, "member_offset": member.offset, "size": len(member.data),
                     "sha256": hashlib.sha256(member.data).hexdigest()}
         if not member.data.startswith(b"\x7fELF"):
-            metadata["status"] = "not_elf"
+            metadata["status"] = "linker_selection_metadata" if member.name == "SELECTION_SCRIPT" else "not_elf"
             report["members"].append(metadata)
             continue
         try:
             obj = inplace.ObjectFile(Path(f"{path}({member.name})"), data=member.data)
-            fingerprints = function_fingerprints(obj)
+            fingerprints = function_fingerprints(obj, symbol_extents=True)
             metadata.update(status="ok", functions=len(fingerprints))
+            metadata["empty_end_labels"] = [
+                {"symbol": sym.name, "section": sym.shndx, "offset": sym.value & ~1}
+                for sym in obj.defined_functions()
+                if sym.size == 0 and (sym.value & ~1) == obj.sections[sym.shndx].size
+            ]
             for fn in fingerprints:
                 row = archive_function_report(fn, image, functions, cache)
                 row.update(archive=path.as_posix(), member=member.name, member_offset=member.offset,
@@ -348,7 +367,8 @@ def fingerprint_archive(path: Path, image: image_mod.Image, catalogue: dict,
         except (FingerprintError, inplace.LinkError, ELFError, ValueError, KeyError) as exc:
             metadata.update(status="error", reason=f"{type(exc).__name__}: {exc}")
         report["members"].append(metadata)
-    report["member_errors"] = sum(member["status"] != "ok" for member in report["members"])
+    report["member_errors"] = sum(member["status"] not in ("ok", "linker_selection_metadata")
+                                  for member in report["members"])
     return report
 
 def main(argv: list[str] | None = None) -> int:

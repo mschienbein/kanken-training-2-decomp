@@ -146,6 +146,21 @@ class ObjectFingerprintTest(unittest.TestCase):
         with self.assertRaisesRegex(fingerprint.FingerprintError, "overlapping"):
             fingerprint.function_fingerprints(object_fixture(BODY * 2, [symbol("one", 0, 20), symbol("two", 16, 16)]))
 
+    def test_archive_sized_outer_body_and_zero_size_alias_keep_secondary_entries(self):
+        obj = object_fixture(BODY * 2, [symbol("outer", 0, 32), symbol("alias", 0, 0),
+                                      symbol("secondary", 16, 0)])
+        rows = fingerprint.function_fingerprints(obj, symbol_extents=True)
+        self.assertEqual([(row.name, row.size) for row in rows],
+                         [("outer", 32), ("alias", 32), ("secondary", 16)])
+        self.assertEqual(rows[0].overlapping_entries, (16,))
+        self.assertEqual(rows[1].overlapping_entries, (16,))
+
+    def test_archive_empty_end_label_has_no_body_and_oversized_symbol_still_fails(self):
+        obj = object_fixture(BODY, [symbol("body", 0, 16), symbol("end_label", 16, 0)])
+        self.assertEqual([row.name for row in fingerprint.function_fingerprints(obj, symbol_extents=True)], ["body"])
+        with self.assertRaisesRegex(fingerprint.FingerprintError, "exceeds section"):
+            fingerprint.function_fingerprints(object_fixture(BODY, [symbol(size=20)]), symbol_extents=True)
+
     def test_nonexecutable_function_fails(self):
         obj = object_fixture()
         obj.sections[1].executable = False
@@ -312,6 +327,16 @@ class ArchiveParserTest(unittest.TestCase):
         self.assertEqual(result["members"][0]["status"], "not_elf")
         self.assertEqual(result["functions"], [])
         self.assertNotIn("not an ELF", json.dumps(result))
+
+    def test_arm_linker_selection_metadata_is_named_but_never_executed_or_printed(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "synthetic.a"
+            path.write_bytes(b"!<arch>\n" + ar_member("SELECTION_SCRIPT", b"synthetic private selection metadata"))
+            result = fingerprint.fingerprint_archive(path, Memory(BODY),
+                                                      {"image_sha256": "synthetic", "functions": []})
+        self.assertEqual(result["member_errors"], 0)
+        self.assertEqual(result["members"][0]["status"], "linker_selection_metadata")
+        self.assertNotIn("synthetic private selection metadata", json.dumps(result))
 
     def test_catalogue_mismatch_is_rejected_before_reading_archive(self):
         with self.assertRaisesRegex(fingerprint.FingerprintError, "different code.bin"):
