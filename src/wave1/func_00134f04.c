@@ -1,6 +1,6 @@
-extern unsigned short bss_00290cac;
+#include "game/notification.h"
 
 void func_00134f04(void)
 {
-    bss_00290cac = 0;
+    bss_00290cac.status = 0;
 }

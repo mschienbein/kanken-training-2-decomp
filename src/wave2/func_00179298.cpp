@@ -1,11 +1,6 @@
 #include "game/text.h"
 #include "game/screen.h"
 
-struct DisplayHandle {
-    DisplayObject *object;
-
-    void set_active(int active);
-};
 
 struct DisplayState {
     unsigned char reserved00[0x10];
@@ -16,15 +11,6 @@ struct DisplayState {
     int length;
 };
 
-struct AnimationContext {
-    unsigned int reserved00;
-    const NameTable *table;
-};
-
-extern "C" AnimationContext bss_00246b48;
-extern "C" void func_001826fc(DisplayObject *object, int active);
-extern "C" void func_00195a08(DisplayObject *object, int index, int active);
-extern "C" void func_0015e948(DisplayObject *object, int active);
 
 inline void DisplayHandle::set_active(int active)
 {

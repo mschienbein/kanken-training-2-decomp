@@ -1,7 +1,4 @@
-struct WordPair {
-    unsigned int first;
-    unsigned int second;
-};
+#include "game/archive.h"
 
 void func_00136448(struct WordPair *pair, unsigned int first, unsigned int second)
 {

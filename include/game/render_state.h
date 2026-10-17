@@ -74,8 +74,31 @@ extern void func_00127294(unsigned *state);
 extern struct SlotBlock *func_0018ce64(void);
 
 /* GPU command/register state block (partial). */
+struct GpuVertexAttribute {
+    unsigned offset;
+    unsigned components;
+    unsigned format;
+    unsigned stride;
+    unsigned buffer;
+    unsigned char normalized;
+    unsigned char enabled;
+    unsigned char reserved16[2];
+};
+
 struct GpuState {
-    unsigned char reserved00[0x660];
+    unsigned dirty;
+    unsigned char reserved04[0x1c];
+    int viewport_x;
+    int viewport_y;
+    int viewport_width;
+    int viewport_height;
+    unsigned char viewport_dirty;
+    unsigned char reserved31[0x427];
+    struct GpuVertexAttribute attributes[16];
+    unsigned element_buffer;
+    unsigned array_buffer;
+    unsigned deferred_buffer;
+    unsigned char reserved5e4[0x7c];
     float clear_color[4];                   /* 0x660 */
     unsigned char reserved670[0x100];
     unsigned control;                       /* 0x770 */

@@ -1,6 +1,6 @@
-extern unsigned char data_00242a50[];
+#include "game/service_state.h"
 
 int func_00195e84(void)
 {
-    return (signed char)data_00242a50[9];
+    return data_00242a50.flag;
 }

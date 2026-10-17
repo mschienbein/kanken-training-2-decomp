@@ -1,10 +1,4 @@
-struct ArchiveIndex;
-struct ArchiveHandle {
-    unsigned reserved00;
-    struct ArchiveIndex *index;
-};
-
-extern unsigned func_00140a08(struct ArchiveIndex *index, unsigned resource_id);
+#include "game/archive.h"
 
 unsigned func_0018d514(struct ArchiveHandle *handle, unsigned resource_id)
 {

@@ -1,10 +1,4 @@
-struct Allocation {
-    void *pointer;
-    unsigned int count;
-};
-
-extern struct Allocation bss_0049cbb4;
-extern void func_0019dc20(void *allocation);
+#include "game/runtime.h"
 
 void func_00105058(void)
 {

@@ -1,6 +1,4 @@
-struct Resource { void *allocation; int count; int reserved[2]; };
-extern struct Resource bss_0049cb24[8];
-extern void func_0019dc20(void *allocation);
+#include "game/runtime.h"
 void func_00105084(void)
 {
     int i;

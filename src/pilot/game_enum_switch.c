@@ -1,6 +1,7 @@
 #include "game/selection.h"
 
-int func_001718ec(void)
+/* The screen argument is forwarded by callers; these implementations do not use it. */
+int func_001718ec(struct W6SelectionScreen *screen)
 {
     int result;
     /* ORIGINAL BUG: out-of-range selector leaves the result uninitialized. */
@@ -21,7 +22,7 @@ int func_001718ec(void)
     return result;
 }
 
-int func_00171c7c(void)
+int func_00171c7c(struct W6SelectionScreen *screen)
 {
     int result;
     /* ORIGINAL BUG: out-of-range selector leaves the result uninitialized. */
