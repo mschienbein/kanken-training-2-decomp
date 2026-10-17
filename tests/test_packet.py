@@ -28,6 +28,28 @@ class PcLiteralTest(unittest.TestCase):
         self.assertEqual(packet.pc_literal(insn, "thumb"), 0x100008)  # Align(0x100006, 4) + 4
 
 
+class LiteralNameTest(unittest.TestCase):
+    def namer(self):
+        image = Mock()
+        image.layout = Mock(text=Mock(address=0x100000, size=0x118000), rodata=Mock(address=0x218000, size=0x1F000),
+                            data=Mock(address=0x237000, size=0xD000))
+        image.bss = (0x244000, 0x4E4000)
+        functions = {0x100100: {"address": 0x100100, "isa": "thumb"}, 0x100200: {"address": 0x100200, "isa": "arm"}}
+        return packet.Namer(image, functions, {})
+
+    def test_odd_data_address_keeps_bit_zero(self):
+        self.assertEqual(self.namer().literal(0x2232D5), "data_002232d5")
+        self.assertIsNone(self.namer().code_target(0x2232D5))
+
+    def test_thumb_code_pointer_names_its_function(self):
+        self.assertEqual(self.namer().literal(0x100101), "func_00100100")
+        self.assertEqual(self.namer().code_target(0x100101), 0x100100)
+
+    def test_arm_function_and_even_data_are_exact(self):
+        self.assertEqual(self.namer().literal(0x100200), "func_00100200")
+        self.assertEqual(self.namer().literal(0x2232D4), "data_002232d4")
+
+
 class DisassembleTest(unittest.TestCase):
     def disassemble(self, data, isa, ranges, pools=(), literals=(), kind="function", entries=()):
         base = 0x10007C
