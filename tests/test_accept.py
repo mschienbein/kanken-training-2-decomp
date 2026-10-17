@@ -159,7 +159,7 @@ class AcceptGateTest(unittest.TestCase):
         self.review("PASS_WITH_QUALIFICATIONS", row="QUALIFIED", qualifications=["preserved original bug"])
         self.assertEqual(accept.finalize("c001", 1)["reviews"][0]["verdict"], "PASS_WITH_QUALIFICATIONS")
 
-    def stubbed_prepare(self, name, units):
+    def stubbed_prepare(self, name, units, receipt_units=None):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
         receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
@@ -167,6 +167,9 @@ class AcceptGateTest(unittest.TestCase):
                    "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []}}
                              for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
+        if receipt_units is not None:
+            receipt["units"] = receipt_units
+            receipt["inputs"]["linker_model"] = "armlink5-inline-branchnop-v3"
         stubs = {
             "build": types.SimpleNamespace(build=lambda *a, **k: dict(receipt), BuildError=RuntimeError),
             "denominator": types.SimpleNamespace(verify=lambda: None, read_history=lambda: [{}]),
@@ -229,6 +232,91 @@ class AcceptGateTest(unittest.TestCase):
         (self.root / "src/a.c").write_text("int func_00100000(void) { return 5; }\n", encoding="utf-8")
         with self.assertRaisesRegex(accept.AcceptError, "credited source differs"):
             accept.verify_history()
+
+    def removed_helper_baseline(self):
+        """An accepted caller plus a zero-credit helper, without running an actual prepare."""
+        helper = {"source": "src/helper.c", "profile": "game", "functions": []}
+        (self.root / helper["source"]).write_text(
+            "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n", encoding="utf-8")
+        out = self.root / "accept/c001"
+        ledger = accept.load_json(out / "matches.json")
+        ledger["units"].append(helper)
+        (out / "matches.json").write_text(json.dumps(ledger), encoding="utf-8")
+        prepared = accept.load_json(out / "prepare.json")
+        prepared["ledger_sha256"] = accept.sha256_file(out / "matches.json")
+        prepared["sources"] = accept.source_hashes(ledger["units"])
+        prepared["new_units"].append(helper["source"])
+        (out / "prepare.json").write_text(json.dumps(prepared), encoding="utf-8")
+        self.review()
+        accept.finalize("c001", 1)
+        rewrite = {"offset": 12, "rule": "inline_insn", "target": None,
+                   "removed_callee": {"object": "src/helper.c", "section": "i.set_field18",
+                                      "symbols": ["set_field18"], "size": 8}}
+        receipts = [
+            {"source": "src/a.c", "functions": ["func_00100000"], "linker_rewrites": {"func_00100000": [rewrite]}},
+            {"source": "src/helper.c", "functions": [], "linker_rewrites": {}},
+        ]
+        return receipts, rewrite
+
+    def test_helper_only_revision_reopens_unchanged_credited_caller_with_metadata(self):
+        receipts, rewrite = self.removed_helper_baseline()
+        (self.root / "src/helper.c").write_text(
+            "/* revised contract */\nvoid set_field18(unsigned *p, unsigned v) { p[6] = v; }\n",
+            encoding="utf-8")
+        record = self.stubbed_prepare("c011", [], receipts)
+        self.assertEqual(record["revised_units"], ["src/helper.c"])
+        self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
+        self.assertEqual(record["dependency_reviews"], {
+            "func_00100000": {"source": "src/a.c", "revised_helpers": ["src/helper.c"], "revised_headers": []},
+        })
+        self.assertEqual(accept.new_functions(self.root / "accept/c011", record), {"func_00100000": "src/a.c"})
+        empty = {"reviewer": "rev1", "family": "openai", "verdict": "PASS", "functions": [],
+                 "findings": [], "qualifications": []}
+        path = self.root / "empty-helper-review.json"
+        path.write_text(json.dumps(empty), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "does not cover"):
+            accept.review("c011", path)
+        with self.assertRaisesRegex(accept.AcceptError, "identity provenance requires a QUALIFIED"):
+            self.review(name="c011")
+        reviewed = self.review("PASS_WITH_QUALIFICATIONS", name="c011", row="QUALIFIED",
+                              qualifications=["[INFERENCE] removed helper identity; contract and all caller paths reviewed"])
+        self.assertEqual(reviewed["functions"][0]["source"], "src/a.c")
+        self.assertEqual(accept.finalize("c011", 1)["seq"], 2)
+
+    def test_header_contract_revision_reopens_r1_callers_without_source_changes(self):
+        receipts, rewrite = self.removed_helper_baseline()
+        (self.root / "include/game/shared.h").write_text("extern const int data_00200000;\n", encoding="utf-8")
+        record = self.stubbed_prepare("c012", [], receipts)
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
+        self.assertEqual(record["dependency_reviews"]["func_00100000"]["revised_headers"], ["include/game/shared.h"])
+        self.assertEqual(accept.new_functions(self.root / "accept/c012", record), {"func_00100000": "src/a.c"})
+
+    def test_unchanged_helper_does_not_reopen_unrelated_credited_callers(self):
+        receipts, _ = self.removed_helper_baseline()
+        record = self.stubbed_prepare("c013", [], receipts)
+        self.assertEqual(record["dependency_reviews"], {})
+        self.assertEqual(record["linker_rewrites"], {})
+        self.assertEqual(accept.new_functions(self.root / "accept/c013", record), {})
+
+    def test_dependency_row_must_name_a_credited_caller_and_its_source(self):
+        record = accept.load_json(self.root / "accept/c001/prepare.json")
+        record["new_units"] = []
+        record["dependency_reviews"] = {"func_00100000": {"source": "src/helper.c"}}
+        with self.assertRaisesRegex(accept.AcceptError, "not a credited caller"):
+            accept.new_functions(self.root / "accept/c001", record)
+
+    def test_helper_revision_selects_every_dependent_caller_and_not_other_helpers(self):
+        rows = lambda helper: [{"target": None, "removed_callee": {"object": helper}}]
+        first, second, other = rows("src/helper.c"), rows("src/helper.c"), rows("src/other.c")
+        receipts = {"units": [
+            {"source": "src/a.c", "linker_rewrites": {"func_00100000": first}},
+            {"source": "src/b.c", "linker_rewrites": {"func_00100010": second, "func_00100020": other}},
+            {"source": "src/helper.c", "functions": [], "linker_rewrites": {}},
+        ]}
+        rewrites, dependencies = accept.linker_review_summary(receipts, {"src/helper.c"}, [])
+        self.assertEqual(rewrites, {"func_00100000": first, "func_00100010": second})
+        self.assertEqual(set(dependencies), {"func_00100000", "func_00100010"})
 
     def test_prepare_refuses_a_dirty_tree(self):
         """Gates run on one committed tree; an uncommitted edit anywhere stops prepare."""

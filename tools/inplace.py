@@ -21,6 +21,7 @@ from __future__ import annotations
 import re
 import struct
 from dataclasses import dataclass, field, replace
+from fnmatch import fnmatchcase
 from pathlib import Path
 
 from capstone import CS_ARCH_ARM, CS_GRP_BRANCH_RELATIVE, CS_GRP_CALL, CS_GRP_INT, CS_GRP_IRET, CS_GRP_JUMP, CS_GRP_RET, CS_MODE_ARM, Cs
@@ -161,39 +162,125 @@ _ARM_ARGUMENTS = frozenset((cs_arm.ARM_REG_R0, cs_arm.ARM_REG_R1, cs_arm.ARM_REG
 _ARM_CALLER_SAVED = frozenset((cs_arm.ARM_REG_R1, cs_arm.ARM_REG_R2, cs_arm.ARM_REG_R3, cs_arm.ARM_REG_R12))
 
 
-def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], condition: int) -> str:
-    """Conservative removed-call census/filter, not proof that a call existed.
+def _arm_call_flow(insn) -> str:
+    """Classify only control flow whose successors the ARM-only R1 filter can prove."""
+    if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
+        return "call"
+    if insn.id == cs_arm.ARM_INS_B and insn.operands[0].type == cs_arm.ARM_OP_IMM:
+        return "branch"
+    read, written = map(set, insn.regs_access())
+    if (CS_GRP_RET in insn.groups
+            or insn.id == cs_arm.ARM_INS_BX and insn.operands[0].reg == cs_arm.ARM_REG_LR
+            or cs_arm.ARM_REG_PC in written and (
+                cs_arm.ARM_REG_LR in read or insn.id == cs_arm.ARM_INS_POP
+                or insn.id in (cs_arm.ARM_INS_LDM, cs_arm.ARM_INS_LDMDA, cs_arm.ARM_INS_LDMDB, cs_arm.ARM_INS_LDMIB)
+                and cs_arm.ARM_REG_SP in read)):
+        return "return"
+    if _FLOW_GROUPS & set(insn.groups) or cs_arm.ARM_REG_PC in written:
+        return "unknown"
+    return "other"
 
-    Every input argument must be materialised in the preceding four straight-line ARM words.
-    Afterwards, no caller-saved argument/scratch register or flags may be read before an
-    unconditional definition, up to the next control transfer or end of catalogued code.
-    r0 is allowed as a call result. Conditional definitions do not kill a value on all paths.
+
+def _arm_successors(instructions: dict, insn, flow: str) -> list[int]:
+    conditional = insn.cc not in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID)
+    successors = []
+    if flow == "branch":
+        target = insn.operands[0].imm
+        if target in instructions:
+            successors.append(target)
+    if flow in ("other", "call") or conditional and flow in ("branch", "return"):
+        following = insn.address + insn.size
+        if following in instructions:
+            successors.append(following)
+    return successors
+
+
+def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], condition: int,
+                         entries: set[int] | None = None, call_sites: set[int] | None = None) -> str:
+    """Conservative whole-caller CFG filter, not evidence of a historical helper's identity.
+
+    An input is either defined in the preceding four straight-line words on every incoming
+    path, or is an incoming argument unmodified on every entry-to-site path. Conditional
+    definitions alone do not establish an input. Both successors of a conditional branch are
+    checked; an unresolved indirect transfer fails closed. Afterwards, follow every successor
+    until a call/return or all caller-saved registers and flags have unconditional definitions.
+    r0 may be a call result. Other candidate removed calls remain call barriers for this check.
     """
-    needed = set(arguments)
-    for address in range(site - 4, site - 20, -4):
-        if not needed:
-            break
-        insn = instructions.get(address)
-        if insn is None or _FLOW_GROUPS & set(insn.groups):
-            break
-        if insn.cc in (cs_arm.ARM_CC_AL, condition):
-            needed.difference_update(insn.regs_access()[1])
-    if needed:
+    if site not in instructions:
         return "arguments_not_materialised"
-    written, flags = set(), False
-    address = site + 4
-    while (insn := instructions.get(address)) is not None:
+    entries = set(entries) if entries is not None else {min(instructions)}
+    call_sites = call_sites or set()
+    flows = {address: _arm_call_flow(insn) for address, insn in instructions.items()}
+    successors = {address: _arm_successors(instructions, insn, flows[address])
+                  for address, insn in instructions.items()}
+    reachable, pending = set(), list(entries)
+    while pending:
+        address = pending.pop()
+        if address in reachable:
+            continue
+        if address not in instructions or flows[address] == "unknown":
+            return "unresolved_control_flow"
+        reachable.add(address)
+        pending.extend(successors[address])
+    if site not in reachable:
+        return "arguments_not_materialised"
+    predecessors: dict[int, list[int]] = {address: [] for address in reachable}
+    for address in reachable:
+        for following in successors[address]:
+            predecessors[following].append(address)
+    for argument in arguments:
+        # remaining counts the bounded straight-line setup window; clean tracks whether the
+        # register could still be the caller's own incoming parameter after that window ends.
+        pending, seen = [(site, 4, True)], set()
+        while pending:
+            address, remaining, clean = pending.pop()
+            state = address, remaining, clean
+            if state in seen:
+                continue
+            seen.add(state)
+            if address in entries and not clean:
+                return "arguments_not_materialised"
+            if not predecessors[address] and address not in entries:
+                return "arguments_not_materialised"
+            for previous in predecessors[address]:
+                insn = instructions[previous]
+                flow = "call" if previous in call_sites else flows[previous]
+                if flow == "call":
+                    return "arguments_not_materialised"
+                window = remaining if flow == "other" and previous + insn.size == address else 0
+                wrote = set(insn.regs_access()[1])
+                unchanged = clean
+                if argument in wrote:
+                    if window and insn.cc in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID):
+                        continue  # this definition dominates this incoming path within the window
+                    unchanged = False
+                    if not window:
+                        return "arguments_not_materialised"
+                pending.append((previous, max(0, window - 1), unchanged))
+    pending = [(following, _ARM_CALLER_SAVED, False) for following in successors[site]]
+    seen = set()
+    while pending:
+        address, live, flags_defined = pending.pop()
+        state = address, live, flags_defined
+        if state in seen:
+            continue
+        seen.add(state)
+        insn = instructions[address]
         read, wrote = map(set, insn.regs_access())
-        if (read & _ARM_CALLER_SAVED) - written:
+        if read & live:
             return "reads_arguments"
-        if (insn.cc not in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID) or cs_arm.ARM_REG_CPSR in read) and not flags:
+        conditional = insn.cc not in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID)
+        if (conditional or cs_arm.ARM_REG_CPSR in read) and not flags_defined:
             return "reads_flags"
-        if insn.cc in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID):
-            written.update(wrote & _ARM_CALLER_SAVED)
-            flags |= cs_arm.ARM_REG_CPSR in wrote
-        if _FLOW_GROUPS & set(insn.groups) or cs_arm.ARM_REG_PC in wrote:
-            break
-        address += 4
+        if not conditional:
+            live = live - wrote
+            flags_defined |= cs_arm.ARM_REG_CPSR in wrote
+        flow = "call" if address in call_sites else flows[address]
+        if flow == "unknown":
+            return "unresolved_control_flow"
+        if flow == "call" or flow == "return" and not conditional or not live and flags_defined:
+            continue
+        pending.extend((following, live, flags_defined) for following in successors[address])
     return "consistent"
 
 
@@ -227,6 +314,7 @@ class Section:
     mapping: list[tuple[int, str]] = field(default_factory=list)  # ($a|$t|$d offset, kind)
     align: int = 1  # sh_addralign: every placement must respect it
     comdat: str | None = None  # signature of the COMDAT group this section belongs to
+    retention: tuple[str, ...] = ()  # explicit roots and uninterpreted retention metadata: never R1
 
 
 class ObjectFile:
@@ -246,12 +334,33 @@ class ObjectFile:
                         i, s.name, b"" if nobits else s.data(), s["sh_size"], nobits,
                         bool(s["sh_flags"] & SH_FLAGS.SHF_EXECINSTR), bool(s["sh_flags"] & SH_FLAGS.SHF_WRITE),
                         align=max(1, s["sh_addralign"]),
+                        retention=tuple(reason for flag, reason in (
+                            (0x10000000, "ARM entry section"), (0x200000, "GNU retain"),
+                            (SH_FLAGS.SHF_MASKOS | SH_FLAGS.SHF_MASKPROC, "OS/processor section flags"),
+                        ) if s["sh_flags"] & flag),
                     )
             symtab = elf.get_section_by_name(".symtab")
             self.symbols = [
                 Symbol(sym.name, sym["st_value"], sym["st_size"], sym["st_info"]["type"], sym["st_info"]["bind"], sym["st_shndx"])
                 for sym in symtab.iter_symbols()
             ]
+            for sym in symtab.iter_symbols():
+                section = self.sections.get(sym["st_shndx"])
+                if section is None:
+                    continue
+                if sym.name.startswith("__tagsym$$"):
+                    section.retention += (sym.name,)  # unknown tag semantics also fail closed
+                if sym["st_other"]["visibility"] not in ("STV_DEFAULT", "STV_HIDDEN", "STV_INTERNAL"):
+                    section.retention += (f"exported visibility: {sym.name}",)
+            # These input mechanisms can carry roots outside ordinary allocated relocations.
+            # Do not guess a script/directive/entry's meaning or silently discard its retention.
+            metadata = [s.name for s in elf.iter_sections()
+                        if (s["sh_size"] and s.name in (".directive", ".drectve", ".linker-options")
+                            or s["sh_type"] == "SHT_LLVM_LINKER_OPTIONS")]
+            if elf["e_entry"]:
+                metadata.append("ELF entry point")
+            for section in self.sections.values():
+                section.retention += tuple(f"uninterpreted {name}" for name in metadata)
             for s in elf.iter_sections():
                 if s["sh_type"] == "SHT_GROUP":
                     words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
@@ -462,15 +571,21 @@ def _thm_bl_target(hi: int, lo: int, place: int) -> int:
 
 class InPlaceLinker:
     def __init__(self, image, functions: dict[int, dict], resolver: Resolver, bss: tuple[int, int],
-                 model: LinkerModel | str = DEFAULT_LINKER_MODEL):
+                 model: LinkerModel | str = DEFAULT_LINKER_MODEL,
+                 retention_roots: dict[str, str] | None = None):
         """image: object with read(address, size) -> bytes; functions: catalogue functions by address;
-        bss: [start, end) of zero-initialised memory; model: the armlink output optimisations to
-        reproduce (a LinkerModel or a LINKER_MODELS name)."""
+        bss: [start, end) of zero-initialised memory; model: output optimisations to reproduce.
+        retention_roots maps symbol/section globs to retention reasons (KEEP, entry, exported,
+        first/last). Unknown reasons still retain; a selector that cannot be resolved is refused.
+        Raw linker scripts/directives are not interpreted by this linker.
+        """
         self.image = image
         self.functions = functions
         self.resolver = resolver
         self.bss = bss
         self.model = linker_model(model) if isinstance(model, str) else model
+        self.retention_roots = retention_roots or {}
+        self._retained_sections: dict[int, tuple[str, ...]] = {}
         self.rewrites: list[Rewrite] = []
         self.removed_callees: list[dict] = []
         self._removed_sections: dict[int, dict] = {}
@@ -734,6 +849,8 @@ class InPlaceLinker:
         refused — otherwise a wrong local helper could decide the caller's bytes. When neither
         would be inlined the call is an ordinary BL and nothing is decided.
         """
+        if self.model.removed_inline and rel.symbol.shndx in self._retained_sections:
+            return None  # a retained candidate's call stays a BL, never an R1 substitution
         original = self.eligible_original_callee(dest)
         decided = inline_arm_call(insn, original) if original is not None else None
         sym = rel.symbol
@@ -779,6 +896,26 @@ class InPlaceLinker:
             return None
         return callee.data
 
+    def _retention_sections(self, obj: ObjectFile) -> dict[int, tuple[str, ...]]:
+        """DUI0474K §4.3 roots survive independently of whether their calls inline."""
+        retained = {index: section.retention for index, section in obj.sections.items() if section.retention}
+        for sym in obj.symbols:
+            if sym.shndx in obj.sections and sym.name.startswith("__tagsym$$"):
+                retained[sym.shndx] = (*retained.get(sym.shndx, ()), sym.name)
+        for selector, reason in self.retention_roots.items():
+            matches = {index for index, section in obj.sections.items() if fnmatchcase(section.name, selector)}
+            matches.update(sym.shndx for sym in obj.symbols
+                           if sym.shndx in obj.sections and fnmatchcase(sym.name, selector))
+            if not matches:
+                raise LinkError(f"uninterpretable retention root {selector!r}: no supplied symbol/section")
+            for index in matches:
+                retained[index] = (*retained.get(index, ()), reason)
+        groups = {obj.sections[index].comdat for index in retained} - {None}
+        for index, section in obj.sections.items():
+            if section.comdat in groups and index not in retained:
+                retained[index] = ("retained COMDAT group",)
+        return retained
+
     def _candidate_only_callees(self, obj: ObjectFile, names_to_address: dict[str, int]) -> dict[int, dict]:
         """The v3 exception never competes with an original function/entry, including aliases."""
         if not self.model.removed_inline:
@@ -817,6 +954,9 @@ class InPlaceLinker:
                 if (read - _ARM_ARGUMENTS - {cs_arm.ARM_REG_CPSR}
                         or written - _ARM_ARGUMENTS - _ARM_CALLER_SAVED - {cs_arm.ARM_REG_CPSR}):
                     continue  # a tiny source callee must itself respect the call ABI
+            if index in self._retained_sections:
+                reasons = ", ".join(self._retained_sections[index])
+                raise LinkError(f"{section.name}: retained callee ({reasons}); its call must remain a BL")
             removed[index] = {
                 "symbols": sorted(sym.name for sym in aliases), "section": section.name, "size": section.size,
                 "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate"))),
@@ -866,12 +1006,19 @@ class InPlaceLinker:
                             for insn in _ARM.disasm(self.image.read(lo, hi - lo), lo):
                                 if not any(a <= insn.address < b for a, b in (*fn.get("pools", ()), *fn.get("literals", ()))):
                                     instructions[insn.address] = insn
-                        contexts[placed.base] = instructions
-                    instructions = contexts[placed.base]
+                        call_sites = {
+                            placed.base + relocation.offset for relocation in section.relocs
+                            if relocation.symbol.shndx in self._removed_sections
+                            and relocation.type in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24)
+                        }
+                        contexts[placed.base] = instructions, call_sites
+                    instructions, call_sites = contexts[placed.base]
                     replacement = next(_ARM.disasm(struct.pack("<I", decision[1]), site, 1), None)
                     arguments = set(replacement.regs_access()[0]) & _ARM_ARGUMENTS if obj.sections[index].size == 8 else set()
                     if (fn["isa"] != "arm" or site not in instructions
-                            or arm_call_abi_context(instructions, site, arguments, replacement.cc) != "consistent"
+                            or arm_call_abi_context(instructions, site, arguments, replacement.cc,
+                                                    {placed.base, *(entry["address"] for entry in fn.get("entries", ()))},
+                                                    call_sites) != "consistent"
                             or next((kind for offset, kind in reversed(section.mapping) if offset <= rel.offset), "$a") != "$a"):
                         decision = None
                 if decision is None:
@@ -902,6 +1049,7 @@ class InPlaceLinker:
         relocating are listed in `self.rewrites` (reset by each call).
         """
         self.rewrites, self.removed_callees = [], []
+        self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
