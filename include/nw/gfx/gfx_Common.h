@@ -1,0 +1,138 @@
+/* SPDX-License-Identifier: GPL-3.0-only
+ * NintendoWare4Ctr contributors; upstream include/nw/gfx/gfx_Common.h
+ * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
+ * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
+ * Modified 2026-10-17: standalone UTF-8 and relative include normalization.
+ * GNU GPL version 3; see LICENSE.txt.
+ */
+#pragma once
+
+#include "../types.h"
+#include "../os/os_Memory.h"
+#include "../ut/ut_BinaryFileFormat.h"
+#include "../ut/ut_RuntimeTypeInfo.h"
+#include "../ut/ut_ResUtil.h"
+
+#include "../../nn/gx.h"
+
+#include <algorithm>
+
+namespace nw{
+namespace gfx {
+namespace res {
+}
+using namespace ::nw::gfx::res;
+
+enum PlatformConstants
+{
+    VERTEX_ATTRIBUTE_COUNT = 12,
+    COMBINER_COUNT = 6,
+    COMBINER_AVAILABLE_COUNT = COMBINER_COUNT,
+    PIXELBASED_TEXTURE_UNIT_COUNT = 3,
+    LOOKUP_TABLE_COUNT = 32,
+    LIGHT_COUNT = 8,    
+    TEXTURE_COORDINATE_COUNT = 3,
+    FOG_TABLE_SIZE = 256
+};
+
+class Result
+{
+    typedef Result self_type;
+public:
+    Result() : m_Result(0) {}
+
+    Result(u32 code) : m_Result(code) {}
+
+    static const bit32 MASK_FAIL_BIT        = 0x80000000;
+    static const bit32 MASK_DESCRIPTION     = 0x0000ffff;
+
+    self_type operator = (u32 code) { m_Result = code; return *this; }
+    self_type operator |= (u32 code) { m_Result |= code; return *this; }
+    self_type operator &= (u32 code) { m_Result &= code; return *this; }
+    self_type operator = (self_type result) { m_Result = result.GetCode(); return *this; }
+    self_type operator |= (self_type result) { m_Result |= result.GetCode(); return *this; }
+    self_type operator &= (self_type result) { m_Result &= result.GetCode(); return *this; }
+
+    u32 GetCode() const
+    {
+        return m_Result;
+    }
+
+    bool IsFailure() const
+    {
+        return (m_Result & MASK_FAIL_BIT) != 0;
+    }
+
+    bool IsSuccess() const
+    {
+        return !IsFailure();
+    }
+
+    int GetDescription() const
+    {
+        return static_cast<int>(m_Result & MASK_DESCRIPTION);
+    }
+
+private:
+    u32 m_Result;
+};
+
+enum ResourceResult
+{
+    RESOURCE_RESULT_OK = 0,
+    RESOURCE_RESULT_NOT_FOUND_TEXTURE = 1 << 0,
+    RESOURCE_RESULT_NOT_FOUND_SHADER = 1 << 1,
+    RESOURCE_RESULT_NOT_FOUND_LUT  = 1 << 2,
+    RESOURCE_RESULT_IRRELEVANT_LOCATION_LUT  = 1 << 3,
+    RESOURCE_RESULT_IRRELEVANT_LOCATION_SHADER_SYMBOL  = 1 << 4,
+    RESOURCE_RESULT_IRRELEVANT_TEXTURE_MAPPING_METHOD = 1 << 5
+};
+
+enum InitializeResult
+{
+    INITIALIZE_RESULT_OK = 0
+};
+
+enum BindResult
+{
+    BIND_RESULT_OK = 0,
+    BIND_RESULT_NOT_ALL_ANIM_MEMBER_BOUND = 1 << 0,
+    BIND_RESULT_NO_MEMBER_BOUND = 1 << 1,
+    BIND_RESULT_IRRELEVANT_ANIM_TYPE = 1 << 2
+};
+
+using nw::ut::ResStaticCast;
+using nw::ut::ResDynamicCast;
+
+using nw::os::AllocateAndFill;
+using nw::os::AllocateAndFillN;
+using nw::os::AllocateAndAssignN;
+using nw::os::AllocateAndCopyString;
+
+namespace internal {
+
+template<typename TRes>
+inline bool ResCheckRevision(const TRes res)
+{
+    if (!res.IsValid()) { return false; }
+    
+    return nw::ut::internal::CheckRevision(res.GetRevision(), TRes::BINARY_REVISION);
+}
+
+}
+}
+}
+
+#define NW_ENSURE_MEMORY_ENABLED
+
+#if defined (NW_ENSURE_MEMORY_ENABLED)
+
+  #define NW_ENSURE_AND_RETURN(result) \
+    if (result.IsFailure() ) { return result; }
+
+#else
+  #define NW_ENSURE_AND_RETURN(result) \
+    NW_ASSERT(result.IsSuccess());
+
+#endif
+

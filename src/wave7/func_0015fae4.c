@@ -3,10 +3,6 @@
 #include "game/selection.h"
 
 
-struct W7dMenuControl {
-    unsigned char reserved00[0x20];
-    unsigned *flags[];
-};
 
 struct W7dSelectionState {
     unsigned char reserved00[0x4c];
@@ -24,7 +20,6 @@ struct W7dSelectionState {
 };
 
 extern struct MenuItem *func_0017a49c(struct ItemPage *page, int index, int *changed);
-extern void func_00179068(struct W7dMenuControl *control, int index, int enabled);
 
 static signed char item_kind(const struct MenuItem *item)
 {

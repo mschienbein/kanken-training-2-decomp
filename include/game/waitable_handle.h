@@ -6,7 +6,8 @@
 struct WaitableHandle {
     CtrHandle handle;
     unsigned char waited;
-    unsigned char reserved05[3];
+    unsigned char attached; /* [INFERENCE] Initialized alongside waited at +5. */
+    unsigned char reserved06[2];
 };
 struct WorkerThread {
     struct WaitableHandle thread;

@@ -95,7 +95,9 @@ struct InputOwner {
 struct TouchDeviceState {
     unsigned char reserved00[0x0c];
     unsigned int active;
-    unsigned char reserved10[0x14];
+    unsigned char reserved10[8];
+    unsigned flags;
+    unsigned char reserved1c[8];
     unsigned int released;
     unsigned char reserved28[0x10];
     struct InputPoint position;
@@ -104,12 +106,14 @@ struct TouchDeviceState {
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern struct TouchDeviceState bss_004972d8;
 extern struct InputService bss_004b1fb0;
 extern const struct InputServiceConfiguration data_0021b0ec;
 extern unsigned char data_00242c50[];
 extern struct InputController *func_00185044(void);
 extern void func_00137128(struct InputController *controller);
 extern int func_001137c4(struct InputService *service, const char *service_name);
+extern struct InputCalibration *func_00113b90(struct InputCalibration *calibration);
 extern void func_001139e4(struct InputCalibration *calibration, int minimum, int maximum);
 extern float func_00113a34(const struct InputCalibration *calibration, int coordinate);
 extern void func_00113ab0(struct InputCalibration *calibration);

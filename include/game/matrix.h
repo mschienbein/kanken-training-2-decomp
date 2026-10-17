@@ -19,11 +19,15 @@ struct MatrixObject {
     struct Matrix34 view;
 };
 
+struct Vector3 { float x, y, z; };
+struct Matrix33 { struct Vector3 row0, row1, row2; };
+struct BasisObject { unsigned char reserved00[24]; struct Vector3 translation; struct Matrix33 basis; };
 #ifdef __cplusplus
 extern "C" {
 #endif
 /* [INFERENCE] Both helpers preserve the destination in r0. Observed callers
  * ignore the result; pointer returns retain the established wave-5 contract. */
+extern void func_0012253c(const struct Matrix34 *in, struct Vector3 *translation, struct Matrix33 *basis);
 extern struct Matrix44 *func_001944f0(struct Matrix44 *destination, const struct Matrix44 *source);
 extern struct Matrix34 *func_00195334(struct Matrix34 *destination, const struct Matrix34 *source);
 #ifdef __cplusplus

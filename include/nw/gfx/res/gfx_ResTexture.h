@@ -1,0 +1,510 @@
+/* SPDX-License-Identifier: GPL-3.0-only
+ * NintendoWare4Ctr contributors; upstream include/nw/gfx/res/gfx_ResTexture.h
+ * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
+ * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
+ * Modified 2026-10-17: normalize standalone includes/UTF-8; omit unevidenced SDK
+ * area enumerators; keep default-flag constructors declaration-only. Field
+ * order, types and all remaining public algorithms are unchanged.
+ * GNU GPL version 3; see LICENSE.txt.
+ */
+#pragma once
+
+#include "../../../gles2/gl2.h"
+#include "../../../gles2/gl2extern.h"
+#include "../../ut/ut_Color.h"
+#include "../../ut/ut_ResUtil.h"
+#include "../../ut/ut_ResDictionary.h"
+#include "gfx_ResSceneObject.h"
+#include "gfx_ResRevision.h"
+#include "gfx_ResTypeInfo.h"
+
+namespace nw {
+namespace os {
+    class IAllocator;
+}
+namespace gfx {
+namespace res {
+
+class ResGraphicsFile;
+
+struct ResTextureData : public ResSceneObjectData
+{};
+
+struct ResPixelBasedTextureData : public ResTextureData
+{
+    nw::ut::ResS32 m_Height;
+    nw::ut::ResS32 m_Width;
+    nw::ut::ResU32 m_Format;
+    nw::ut::ResU32 m_FormatType;
+    nw::ut::ResS32 m_MipmapSize;
+    nw::ut::ResU32 m_TextureObject;
+    nw::ut::ResU32 m_LocationFlag;
+    nw::ut::ResU32 m_FormatHW;
+};
+
+struct ResPixelBasedImageData
+{
+    enum
+    {
+        AREA_NO_MALLOC = 0
+        /* Unproved SDK area selectors deliberately omitted, not guessed. */
+    };
+
+    nw::ut::ResS32 m_Height;
+    nw::ut::ResS32 m_Width;
+    nw::ut::ResS32 m_ImageDataTableCount;
+    nw::ut::Offset toImageDataTable;
+    nw::os::IAllocator*  m_DynamicAllocator;
+    u32 m_BitsPerPixel;
+    u32 m_LocationAddress;
+    u32                  m_MemoryArea;
+};
+
+struct ResImageTextureData : public ResPixelBasedTextureData
+{
+    nw::ut::Offset toImage;
+};
+
+struct ResCubeTextureData : public ResPixelBasedTextureData
+{
+    enum
+    {
+        MAX_CUBE_FACE = 6
+    };
+
+    nw::ut::Offset toPositiveXImage;
+    nw::ut::Offset toNegativeXImage;
+    nw::ut::Offset toPositiveYImage;
+    nw::ut::Offset toNegativeYImage;
+    nw::ut::Offset toPositiveZImage;
+    nw::ut::Offset toNegativeZImage;
+    nw::ut::Offset toImagesTables[MAX_CUBE_FACE];
+};
+
+struct ResShadowTextureData : public ResPixelBasedTextureData
+{
+    nw::ut::Offset  toImage;
+    nw::ut::ResBool m_IsPerspectiveShadow;
+    nw::ut::ResF32  m_ShadowZBias;
+    nw::ut::ResF32  m_ShadowZScale;
+};
+
+struct ResReferenceTextureData : public ResTextureData
+{
+    nw::ut::BinString toPath;
+    nw::ut::Offset    toTargetTexture;
+};
+
+class ResTexture : public ResSceneObject
+{
+public:
+    enum
+    {
+        TYPE_INFO       = NW_GFX_RES_TYPE_INFO(ResTexture)
+    };
+    enum
+    {
+        SIGNATURE       = NW_RES_SIGNATURE32('TXOB')
+    };
+    enum
+    {
+        BINARY_REVISION = REVISION_RES_TEXTURE
+    };
+
+    NW_RES_CTOR_INHERIT(ResTexture, ResSceneObject)
+
+    u32 GetRevision() const { return this->GetHeader().revision; }
+
+    inline ResTexture       Dereference();
+    inline const ResTexture Dereference() const;
+
+    Result Setup(nw::os::IAllocator* allocator, ResGraphicsFile graphicsFile);
+    Result Setup(nw::os::IAllocator* allocator);
+    void   Cleanup();
+};
+
+typedef nw::ut::ResArrayPatricia<ResTexture>::type ResTextureArray;
+
+class ResPixelBasedTexture : public ResTexture
+{
+public:
+    enum
+    {
+        TYPE_INFO = NW_GFX_RES_TYPE_INFO(ResPixelBasedTexture)
+    };
+    enum
+    {
+        SIGNATURE = NW_RES_SIGNATURE32('TXPB')
+    };
+
+    NW_RES_CTOR_INHERIT(ResPixelBasedTexture, ResTexture)
+
+
+    s32 GetHeight() const { return static_cast<s32>(ref().m_Height); }
+    void SetHeight(s32 value) { ref().m_Height = value; }
+
+    s32 GetWidth() const { return static_cast<s32>(ref().m_Width); }
+    void SetWidth(s32 value) { ref().m_Width = value; }
+
+    u32 GetFormatType() const { return static_cast<u32>(ref().m_FormatType); }
+    void SetFormatType(u32 value) { ref().m_FormatType = value; }
+
+    s32 GetMipmapSize() const { return static_cast<s32>(ref().m_MipmapSize); }
+    void SetMipmapSize(s32 value) { ref().m_MipmapSize = value; }
+
+    u32 GetTextureObject() const { return static_cast<u32>(ref().m_TextureObject); }
+    void SetTextureObject(u32 value) { ref().m_TextureObject = value; }
+
+    u32 GetLocationFlag() const { return static_cast<u32>(ref().m_LocationFlag); }
+    void SetLocationFlag(u32 value) { ref().m_LocationFlag = value; }
+
+    u32 GetFormatHW() const { return static_cast<u32>(ref().m_FormatHW); }
+    void SetFormatHW(u32 value) { ref().m_FormatHW = value; }
+
+    enum FormatHW
+    {
+        FORMAT_HW_RGBA8    = 0,
+        FORMAT_HW_RGB8     = 1,
+        FORMAT_HW_RGBA5551 = 2,
+        FORMAT_HW_RGB565   = 3,
+        FORMAT_HW_RGBA4    = 4,
+        FORMAT_HW_LA8      = 5,
+        FORMAT_HW_HILO8    = 6,
+        FORMAT_HW_L8       = 7,
+        FORMAT_HW_A8       = 8,
+        FORMAT_HW_LA4      = 9,
+        FORMAT_HW_L4       = 10,
+        FORMAT_HW_A4       = 11,
+        FORMAT_HW_ETC1     = 12,
+        FORMAT_HW_ETC1A4   = 13
+    };
+};
+
+class ResPixelBasedImage : public nw::ut::ResCommon<ResPixelBasedImageData>
+{
+public:
+    NW_RES_CTOR(ResPixelBasedImage)
+
+
+    s32 GetHeight() const { return static_cast<s32>(ref().m_Height); }
+    void SetHeight(s32 value) { ref().m_Height = value; }
+
+    s32 GetWidth() const { return static_cast<s32>(ref().m_Width); }
+    void SetWidth(s32 value) { ref().m_Width = value; }
+
+    s32 GetImageDataCount() const
+        { return ref().m_ImageDataTableCount; }
+    u8 GetImageData(int idx) const
+        {
+            const u8* tbl_ptr = static_cast<const u8*>(ref().toImageDataTable.to_table_ptr());
+            return tbl_ptr[idx];
+        }
+    void SetImageData(int idx, u8 value)
+        {
+            u8* tbl_ptr = GetImageData();
+            tbl_ptr[idx] = value;
+        }
+    u8* GetImageData()
+        { return static_cast<u8*>(ref().toImageDataTable.to_table_ptr()); }
+    const u8* GetImageData() const
+        { return static_cast<const u8*>(ref().toImageDataTable.to_table_ptr()); }
+
+    u32  GetLocationAddress() const { return ref().m_LocationAddress; }
+    void SetLocationAddress(u32 address) { ref().m_LocationAddress = address; }
+    void SetLocationAddress(const void* address) { ref().m_LocationAddress = reinterpret_cast<u32>(address); }
+    u32  GetBitsPerPixel() const { return ref().m_BitsPerPixel; }
+
+    u32 GetImageAddress() const
+    {
+        u32 locationAddress = this->GetLocationAddress();
+        if (locationAddress)
+            return locationAddress;
+        else
+            return reinterpret_cast<u32>(this->GetImageData());
+    }
+
+    bool CheckMemoryLocation() const;
+};
+
+typedef nw::ut::ResArrayClass<ResPixelBasedImage>::type       ResPixelBasedImageArray;
+typedef nw::ut::ResArrayClass<const ResPixelBasedImage>::type ResPixelBasedImageArrayConst;
+
+class ResImageTexture : public ResPixelBasedTexture
+{
+public:
+    enum
+    {
+        TYPE_INFO = NW_GFX_RES_TYPE_INFO(ResImageTexture)
+    };
+    enum
+    {
+        SIGNATURE = NW_RES_SIGNATURE32('TXIM')
+    };
+
+    NW_RES_CTOR_INHERIT(ResImageTexture, ResPixelBasedTexture)
+
+
+    ResPixelBasedImage GetImage() { return ResPixelBasedImage(ref().toImage.to_ptr()); }
+    const ResPixelBasedImage GetImage() const { return ResPixelBasedImage(ref().toImage.to_ptr()); }
+
+    u32  GetLocationAddress() const { return this->GetImage().GetLocationAddress(); }
+    void SetLocationAddress(u32 address) { this->GetImage().SetLocationAddress(address); }
+    void SetLocationAddress(const void* address) { this->GetImage().SetLocationAddress(address); }
+
+    struct Description
+    {
+        s32  height;
+        s32  width;
+        s32  mipmapSize;
+        u32  locationFlag;
+        u32  locationAddress;
+        u32  formatHW;
+        bool executingMemoryFill;
+        bool isDynamicAllocation;
+
+        /* Declaration-only: default SDK allocation flags are not evidenced. */
+        Description();
+    };
+
+    class DynamicBuilder
+    {
+    public:
+        DynamicBuilder() {}
+        ~DynamicBuilder() {}
+
+        DynamicBuilder& Height(s32 height) { m_Description.height = height; return *this; }
+        DynamicBuilder& Width(s32 width) { m_Description.width = width; return *this; }
+        DynamicBuilder& MipmapSize(s32 mipmapSize) { m_Description.mipmapSize = mipmapSize; return *this; }
+        DynamicBuilder& LocationFlag(u32 locationFlag) { m_Description.locationFlag = locationFlag; return *this; }
+        DynamicBuilder& LocationAddress(u32 locationAddress) { m_Description.locationAddress = locationAddress; return *this; }
+        DynamicBuilder& Format(ResPixelBasedTexture::FormatHW fmt) { m_Description.formatHW = static_cast<u32>(fmt); return *this; }
+        DynamicBuilder& ExecutingMemoryFill(bool v) { m_Description.executingMemoryFill = v; return *this; }
+        DynamicBuilder& DynamicAllocation(bool v) { m_Description.isDynamicAllocation = v; return *this; }
+
+        ResImageTexture Create(nw::os::IAllocator* allocator);
+
+    private:
+        Description m_Description;
+    };
+
+    void DynamicDestroy();
+};
+
+class ResCubeTexture : public ResPixelBasedTexture
+{
+public:
+    enum CubeFace
+    {
+        CUBE_FACE_POSITIVE_X = 0,
+        CUBE_FACE_NEGATIVE_X,
+        CUBE_FACE_POSITIVE_Y,
+        CUBE_FACE_NEGATIVE_Y,
+        CUBE_FACE_POSITIVE_Z,
+        CUBE_FACE_NEGATIVE_Z,
+        MAX_CUBE_FACE
+    };
+
+    enum
+    {
+        TYPE_INFO = NW_GFX_RES_TYPE_INFO(ResCubeTexture)
+    };
+    enum
+    {
+        SIGNATURE = NW_RES_SIGNATURE32('TXCB')
+    };
+
+    NW_RES_CTOR_INHERIT(ResCubeTexture, ResPixelBasedTexture)
+
+
+    ResPixelBasedImage GetPositiveXImage() { return ResPixelBasedImage(ref().toPositiveXImage.to_ptr()); }
+    const ResPixelBasedImage GetPositiveXImage() const { return ResPixelBasedImage(ref().toPositiveXImage.to_ptr()); }
+
+    ResPixelBasedImage GetNegativeXImage() { return ResPixelBasedImage(ref().toNegativeXImage.to_ptr()); }
+    const ResPixelBasedImage GetNegativeXImage() const { return ResPixelBasedImage(ref().toNegativeXImage.to_ptr()); }
+
+    ResPixelBasedImage GetPositiveYImage() { return ResPixelBasedImage(ref().toPositiveYImage.to_ptr()); }
+    const ResPixelBasedImage GetPositiveYImage() const { return ResPixelBasedImage(ref().toPositiveYImage.to_ptr()); }
+
+    ResPixelBasedImage GetNegativeYImage() { return ResPixelBasedImage(ref().toNegativeYImage.to_ptr()); }
+    const ResPixelBasedImage GetNegativeYImage() const { return ResPixelBasedImage(ref().toNegativeYImage.to_ptr()); }
+
+    ResPixelBasedImage GetPositiveZImage() { return ResPixelBasedImage(ref().toPositiveZImage.to_ptr()); }
+    const ResPixelBasedImage GetPositiveZImage() const { return ResPixelBasedImage(ref().toPositiveZImage.to_ptr()); }
+
+    ResPixelBasedImage GetNegativeZImage() { return ResPixelBasedImage(ref().toNegativeZImage.to_ptr()); }
+    const ResPixelBasedImage GetNegativeZImage() const { return ResPixelBasedImage(ref().toNegativeZImage.to_ptr()); }
+
+    s32 GetCubeFaceCount() const { return MAX_CUBE_FACE; }
+
+    ResPixelBasedImage GetImage(CubeFace face)
+    {
+        NW_ASSERT(0 <= face && face < MAX_CUBE_FACE);
+        return ResPixelBasedImage(ref().toImagesTables[face].to_ptr());
+    }
+
+    const ResPixelBasedImage GetImage(CubeFace face) const
+    {
+        NW_ASSERT(0 <= face && face < MAX_CUBE_FACE);
+        return ResPixelBasedImage(ref().toImagesTables[face].to_ptr());
+    }
+
+    u32  GetLocationAddress(CubeFace face) const { return this->GetImage(face).GetLocationAddress(); }
+    void SetLocationAddress(CubeFace face, u32 address) { this->GetImage(face).SetLocationAddress(address); }
+    void SetLocationAddress(CubeFace face, const void* address) { this->GetImage(face).SetLocationAddress(address); }
+
+    struct Description
+    {
+        s32  width;
+        s32  mipmapSize;
+        u32  locationFlag;
+        u32  locationAddress[MAX_CUBE_FACE];
+        u32  formatHW;
+        bool executingMemoryFill;
+        bool isDynamicAllocation;
+
+        /* Declaration-only: default SDK allocation flags are not evidenced. */
+        Description();
+    };
+
+    class DynamicBuilder
+    {
+    public:
+        DynamicBuilder() {}
+        ~DynamicBuilder() {}
+
+        DynamicBuilder& Width(s32 width) { m_Description.width = width; return *this; }
+        DynamicBuilder& MipmapSize(s32 mipmapSize) { m_Description.mipmapSize = mipmapSize; return *this; }
+        DynamicBuilder& LocationFlag(u32 locationFlag) { m_Description.locationFlag = locationFlag; return *this; }
+        DynamicBuilder& LocationAddress(CubeFace face, u32 locationAddress)
+        {
+            m_Description.locationAddress[face] = locationAddress;
+            return *this;
+        }
+        DynamicBuilder& Format(ResPixelBasedTexture::FormatHW fmt) { m_Description.formatHW = static_cast<u32>(fmt); return *this; }
+        DynamicBuilder& ExecutingMemoryFill(bool v) { m_Description.executingMemoryFill = v; return *this; }
+        DynamicBuilder& DynamicAllocation(bool v) { m_Description.isDynamicAllocation = v; return *this; }
+
+        ResCubeTexture Create(nw::os::IAllocator* allocator);
+
+    private:
+        Description m_Description;
+    };
+
+    void DynamicDestroy();
+};
+
+class ResShadowTexture : public ResPixelBasedTexture
+{
+public:
+    enum
+    {
+        TYPE_INFO = NW_GFX_RES_TYPE_INFO(ResShadowTexture)
+    };
+    enum
+    {
+        SIGNATURE = NW_RES_SIGNATURE32('TXSH')
+    };
+
+    NW_RES_CTOR_INHERIT(ResShadowTexture, ResPixelBasedTexture)
+
+
+    ResPixelBasedImage GetImage() { return ResPixelBasedImage(ref().toImage.to_ptr()); }
+    const ResPixelBasedImage GetImage() const { return ResPixelBasedImage(ref().toImage.to_ptr()); }
+
+    bool IsPerspectiveShadow() const { return static_cast<bool>(ref().m_IsPerspectiveShadow); }
+    void SetPerspectiveShadow(bool value) { ref().m_IsPerspectiveShadow = value; }
+
+    f32 GetShadowZBias() const { return static_cast<f32>(ref().m_ShadowZBias); }
+    void SetShadowZBias(f32 value) { ref().m_ShadowZBias = value; }
+
+    f32 GetShadowZScale() const { return static_cast<f32>(ref().m_ShadowZScale); }
+    void SetShadowZScale(f32 value) { ref().m_ShadowZScale = value; }
+
+    u32  GetLocationAddress() const { return this->GetImage().GetLocationAddress(); }
+    void SetLocationAddress(u32 address) { this->GetImage().SetLocationAddress(address); }
+    void SetLocationAddress(const void* address) { this->GetImage().SetLocationAddress(address); }
+
+    struct Description
+    {
+        s32  height;
+        s32  width;
+        u32  locationFlag;
+        u32  locationAddress;
+        bool executingMemoryFill;
+        bool isPerspectiveShadow;
+        f32  shadowZBias;
+        f32  shadowZScale;
+        bool isDynamicAllocation;
+
+        /* Declaration-only: default SDK allocation flags are not evidenced. */
+        Description();
+    };
+
+    class DynamicBuilder
+    {
+    public:
+        DynamicBuilder() {}
+        ~DynamicBuilder() {}
+
+        DynamicBuilder& Height(s32 height) { m_Description.height = height; return *this; }
+        DynamicBuilder& Width(s32 width) { m_Description.width = width; return *this; }
+        DynamicBuilder& LocationFlag(u32 locationFlag) { m_Description.locationFlag = locationFlag; return *this; }
+        DynamicBuilder& LocationAddress(u32 locationAddress) { m_Description.locationAddress = locationAddress; return *this; }
+        DynamicBuilder& ExecutingMemoryFill(bool v) { m_Description.executingMemoryFill = v; return *this; }
+        DynamicBuilder& PerspectiveShadow(bool v) { m_Description.isPerspectiveShadow = v; return *this; }
+        DynamicBuilder& ShadowZBias(f32 v) { m_Description.shadowZBias = v; return *this; }
+        DynamicBuilder& ShadowZScale(f32 v) { m_Description.shadowZScale = v; return *this; }
+        DynamicBuilder& DynamicAllocation(bool v) { m_Description.isDynamicAllocation = v; return *this; }
+
+        ResShadowTexture Create(nw::os::IAllocator* allocator);
+
+    private:
+        Description m_Description;
+    };
+
+    void DynamicDestroy();
+};
+
+class ResReferenceTexture : public ResTexture
+{
+public:
+    enum
+    {
+        TYPE_INFO = NW_GFX_RES_TYPE_INFO(ResReferenceTexture)
+    };
+    enum
+    {
+        SIGNATURE = NW_RES_SIGNATURE32('TXRF')
+    };
+
+    NW_RES_CTOR_INHERIT(ResReferenceTexture, ResTexture)
+
+
+    const char* GetPath() const { return ref().toPath.to_ptr(); }
+
+    ResTexture GetTargetTexture() { return ResTexture(ref().toTargetTexture.to_ptr()); }
+    const ResTexture GetTargetTexture() const { return ResTexture(ref().toTargetTexture.to_ptr()); }
+};
+
+inline ResTexture ResTexture::Dereference()
+{
+    NW_ASSERT(this->IsValid());
+    if (this->ref().typeInfo == ResReferenceTexture::TYPE_INFO)
+        return nw::ut::ResStaticCast<ResReferenceTexture>(*this).GetTargetTexture();
+    else
+        return *this;
+}
+
+inline const ResTexture ResTexture::Dereference() const
+{
+    NW_ASSERT(this->IsValid());
+    if (this->ref().typeInfo == ResReferenceTexture::TYPE_INFO)
+        return nw::ut::ResStaticCast<ResReferenceTexture>(*this).GetTargetTexture();
+    else
+        return *this;
+}
+
+}
+}
+}
+

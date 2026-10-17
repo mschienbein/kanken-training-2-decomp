@@ -11,19 +11,22 @@ struct GraphicsContext {
     struct DisplayBuffer *buffers[];        /* 0x5c; count not known */
 };
 
+struct GraphicsMutex { unsigned handle; };
 struct GraphicsState {
     signed char initialized;
     signed char stereo;
-    unsigned char reserved02[0x1a];
-    struct GraphicsContext *context;
-};
-
-struct GraphicsMutex {
+    unsigned char reserved02[0x0e];
     unsigned handle;
+    struct GraphicsMutex mutex;
+    unsigned reserved18;
+    struct GraphicsContext *context;
 };
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern void func_00122a6c(void);
+extern int func_0012f570(const void *buffer, unsigned size);
+extern int func_0018f6c4(const void *buffer, unsigned size);
 extern struct GraphicsState data_002430f0;
 extern struct GraphicsMutex data_00243104;
 extern struct GraphicsContext *func_001861c4(void);

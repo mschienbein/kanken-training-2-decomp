@@ -107,6 +107,10 @@ extern void func_00182204(void);
 extern int func_0018f018(void);
 extern void func_0017e7a0(struct ServiceOutput *output, int channel, unsigned value);
 extern void func_0014fa0c(struct ServiceOutput *output, int channel, float value);
+extern void func_00148220(struct ServiceWorker *backend);
+extern void func_0014b224(struct ServiceWorker *backend, bool enabled);
+/* [INFERENCE] The wrapper forwards this word; the worker body does not read it. */
+extern void func_0014fa48(struct ServiceWorker *backend, unsigned argument);
 extern void func_001521dc(struct HandleManager *manager, struct ManagedHandle *handle);
 #ifdef __cplusplus
 }

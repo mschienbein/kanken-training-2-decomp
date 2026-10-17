@@ -60,7 +60,9 @@ struct DisplayPane {
     float rotation[3];
     float scale[2];
     float size[2];
-    unsigned char reserved50[0x67];
+    unsigned char reserved50[0x64];
+    unsigned char alpha;                    /* 0xb4 */
+    unsigned char reservedb5[2];
     unsigned char flags;
 };
 
@@ -69,8 +71,16 @@ struct DisplayPaneLink {
     struct DisplayPane *pane;
 };
 
+struct DisplayBindingTarget {
+    unsigned char reserved00[0x10];
+    float value;
+};
 struct DisplayBinding {
-    unsigned char reserved00[0x28];
+    unsigned char reserved00[8];
+    float value;
+    unsigned char reserved0c[0x14];
+    struct DisplayBindingTarget *target;
+    unsigned reserved24;
     struct DisplayPaneLink *link;
     unsigned char reserved2c[8];
     struct DisplayPane *pane;
@@ -92,6 +102,39 @@ struct DisplayObjectList {
     struct BoundDisplayObject *head;
 };
 
+/* A resource slot contains a leading resource pointer and the queue object
+ * prefix at +4. The minimum queue prefix is 0xc4 bytes, not a guessed 0xd0.
+ * The final 12 slot bytes stay reserved until their users are integrated. */
+struct ResourceRegistrationSlot {
+    void *resource;
+    struct BoundDisplayObject display;
+    unsigned char reservedc8[0x0c];
+};
+struct ResourceRegistrationGroup {
+    unsigned reserved;
+    struct ResourceRegistrationSlot entries[8];
+};
+struct ResourceRegistrationState {
+    unsigned char reserved00[0x18];
+    struct ResourceRegistrationGroup groups[2];
+};
+struct MenuOptionGroup;
+struct SelectionList;
+struct AlternateSelectionList;
+struct ScreenInitializationState;
+struct W8DisplaySet;
+struct WidgetActionState {
+    unsigned char reserved00[0xbc];
+    unsigned active;
+};
+struct DisplayQueueFlags {
+    unsigned char reserved00[2];
+    unsigned char enabled;
+};
+struct DisplayQueueCounter {
+    unsigned char reserved00[8];
+    int count;
+};
 struct DisplayTexCoords {
     float uv[4][2];
 };
@@ -221,6 +264,30 @@ struct Screen {
     const struct NameTable *const *labels;  /* 0x1e4 */
 };
 
+extern struct ResourceRegistrationState bss_0049cbd0;
+extern struct DisplayQueueFlags data_0023ee9c;
+extern struct DisplayQueueCounter bss_00495c70;
+extern int func_0019efd0(void);
+extern void func_001b6c90(struct MenuOptionGroup *options);
+extern void func_001b7e9c(struct MenuOptionGroup *options);
+extern void func_00176b24(struct SelectionList *selection);
+extern void func_0017697c(struct AlternateSelectionList *selection);
+extern void func_00175b8c(void *screen);
+extern void func_00179160(struct W8DisplaySet *set, int index, float x, float y);
+extern void func_00175ab8(void *screen, int index,
+                         int red, int green, int blue, int alpha);
+extern void func_00166eac(void *screen, int index, float x, float y);
+extern void func_00175848(void);
+extern void func_001e807c(struct ScreenInitializationState *state);
+extern void func_001adabc(struct WidgetActionState *state);
+extern void func_00196230(int screen, int index);
+extern void func_00196144(int screen, int index);
+extern void func_00176d98(void);
+extern void func_00177084(void);
+extern void func_00176df4(void);
+extern void func_00181448(struct BoundDisplayObject *object);
+extern void func_0019637c(struct BoundDisplayObject *object,
+                          struct BoundDisplayObject **head, int primary);
 extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
@@ -233,11 +300,14 @@ extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
 extern void func_0015e948(struct DisplayObject *object, int active);
 extern void func_0015e954(struct DisplayPaneLink *link, int active);
 extern void func_00180358(struct DisplayObject *object, int first, int second);
+extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
+extern void func_0018271c(void *object, unsigned char alpha);
 extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
 extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
 extern void func_001826fc(struct DisplayObject *object, int active);
 extern void func_00195a08(struct DisplayObject *object, int index, int active);
 extern void func_001ad6ec(struct WidgetContainer *container, struct WidgetPosition position);
+extern void func_0016de90(struct Screen *screen, int index);
 extern void func_0016e1d0(struct Screen *screen, int index, int enabled);
 extern unsigned char func_0017a9a0(const struct DisplayObject *object, int index);
 extern void func_0017a968(struct DisplayObject *object, const struct NameTable *table, int index, int mode);

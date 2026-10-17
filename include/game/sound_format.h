@@ -24,6 +24,19 @@ struct SequenceFile {
 };
 
 struct SequenceLabelTable;
+struct SequenceLabelEntry { unsigned reserved00, offset; };
+struct SequenceLabelTable {
+    int count;
+#ifndef __cplusplus
+    struct SequenceLabelEntry entries[];
+#endif
+};
+struct SequenceLabelRecord {
+    unsigned reserved00, value, reserved08;
+#ifndef __cplusplus
+    char name[];
+#endif
+};
 struct SequenceReader {
     const struct SequenceFile *file;
     const unsigned char *data;
@@ -81,6 +94,17 @@ struct SoundEnvelope {
     unsigned char release;
 };
 
+struct WaveSoundReader {
+    const struct ArchiveFile *file;
+    const struct WaveSoundInfoBlock *info;
+};
+struct WaveNoteParameters {
+    struct WaveIdentifier wave;
+    struct SoundEnvelope envelope;
+    unsigned char parameter0, parameter2_low, parameter2_high, parameter1;
+    unsigned char reserved11[3];
+    float pitch;
+};
 struct SoundBasicInfo {
     unsigned item_id;
     unsigned field04;
@@ -145,6 +169,15 @@ struct SoundRegionFixed;
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern const struct WaveSoundData *func_00138fb0(const struct WaveSoundInfoBlock *info, unsigned index);
+extern const struct WaveNoteInfo *func_00138fe4(const struct WaveSoundData *data, unsigned index);
+extern const struct WaveIdentifierTable *func_00138fa4(const struct WaveSoundInfoBlock *info);
+extern float func_001390d8(const struct WaveNoteInfo *note);
+extern const struct SoundEnvelope *func_00139020(const struct WaveNoteInfo *note);
+extern unsigned char func_0013905c(const struct WaveNoteInfo *note);
+extern unsigned char func_001390b0(const struct WaveNoteInfo *note);
+extern unsigned char func_00139084(const struct WaveNoteInfo *note);
+extern unsigned char func_0013914c(const struct WaveNoteInfo *note);
 extern const struct SoundEnvelope data_0024380a;
 extern const struct SoundEnvelope data_002437f8;
 extern const struct SoundBankArchiveInfo *func_001409cc(
