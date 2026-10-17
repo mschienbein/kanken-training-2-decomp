@@ -10,7 +10,7 @@ denominator v7; gates v1.10. Host: WSL2 Ubuntu on the Windows desktop
 into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pushes through
 `gh auth setup-git`.
 
-Restart sequence (accepted now: 1,167 functions / 73,388 B, seq 7 c007; denominator v8; gates v1.13 until the v1.14–v1.16 cutover; profiles game/sdk/middleware):
+Restart sequence (accepted now: 1,601 functions / 185,952 B, seq 8 c008-r3; denominator v9-r2; gates v1.16, with reviewed linker models v4/v6 awaiting adoption; profiles game/sdk/middleware):
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules
@@ -24,8 +24,9 @@ Restart sequence (accepted now: 1,167 functions / 73,388 B, seq 7 c007; denomina
 3. Authoring: `tools/triage.py --exclude scratch/integrator/exclude.json --avoid svc,thumb,exclusive
    batches`; functions >512 B in focused batches, >2 KB solo; ARMCC-extension functions use
    `include/ctr/`. Near misses go through `tools/permute.py` (CPU only) before another model pass.
-4. Next: c005 (wave 5 + waves 6/7) prepare and reviews; adopt proven runtime/library bindings;
-   denominator v8 (runtime/library classification, remaining unknown bytes and anomalies).
+4. Next: adopt v4 then v6 (each a GATES revision + isolated full suite); c009 prepare and reviews,
+   then c010, c011 and a model-qualified checkpoint; catalogue v10 (runtime-library classification
+   from the Arm 5.04u2 b82 libraries, unknown bytes/anomalies); residue table in STATUS.
 
 
 ## 2026-10-16 (night) — hand-off from the Mac to the desktop

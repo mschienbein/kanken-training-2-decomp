@@ -2,6 +2,27 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-18 — c008-r3 accepted; denominator v9-r2; runtime libraries identified
+
+**Accepted:** 1,601 functions / 185,952 B (seq 8: … c007, c008-r3). Denominator **v9-r2**: 4,624
+creditable functions / 1,131,454 B (16.43%). Gates **v1.16**. CI green.
+
+- **c008-r3** (waves 12–14, retries r302–r343, solos, idivmod: 434 functions + 29 revised units):
+  c008 and c008-r2 each failed review on cross-unit callback/header contracts; r3 corrected the
+  original service callback slots, the auxiliary audio callback and the notification list from the
+  original consumers and passed both reviews with qualifications (`docs/known-issues-c008-r3.md`).
+- **Denominator v9-r2:** reviewed boundary/initializer/veneer recovery and shared UTF-16 bounds;
+  unknown bytes 7,724 → 4,408, anomalies 70 → 37 (`docs/catalogue/REPORT-v9-r2.md`). The v10
+  revision (unknown 360 B, 10 anomalies) is in its third review round.
+- **Runtime libraries:** the game's own toolchain build (Arm Compiler 5.04 update 2, build 82) was
+  obtained under the user's license (local only). Whole-body relocation-masked comparison
+  authenticates 36 of the 54 Thumb functions and 68 more owners as vendor runtime code, plus 87
+  helper names; the classification goes through the next reviewed catalogue revision.
+- **Next:** adopt the reviewed linker models v4 (bounded switch tables) and v6 (zero-size D2
+  destructor aliases; v5 retired); c009 (679 functions) and c010 (438) are integrating, c011 has
+  started; a dedicated checkpoint will credit model-qualified rows; the escalation ladder (fresh
+  author → whole-TU rewrite → permuter) continues over ~1,550 unmatched functions.
+
 ## 2026-10-17 (late night) — c007 accepted: wave 11, SDK/middleware, NW4C library imports
 
 **Accepted:** 1,167 functions / 73,388 B (seq 7: … c006-r3, c007). Denominator **v8**: 4,544
