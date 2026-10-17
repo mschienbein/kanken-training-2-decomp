@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "source_branch": "header-gaps",
+  "source_commit": "995aa2b3a2f77e8fcd336b5b9a678a8fe2b5c194",
+  "cherry_pick": "c741732",
+  "revised_headers": [
+    "include/nn/math.h",
+    "include/nn/snd.h",
+    "include/GLES2/gl2.h"
+  ],
+  "new_header": "include/GLES2/gl2dmpconstants.h",
+  "provenance_files": [
+    "THIRD_PARTY.md",
+    "src/nw4c/FACTS-HEADER-GAPS.json",
+    "src/nw4c/LICENSE-LIBCTRU.txt"
+  ],
+  "companion_evidence": {
+    "HANDOFF.md": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/header-gaps/scratch/header-gaps/HANDOFF.md",
+      "sha256": "b9ddc74ad935d094b18e7f3b6209df21c7561da3fd3d7f3452225162395b4829"
+    },
+    "consumer-rematches.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/header-gaps/scratch/header-gaps/consumer-rematches.json",
+      "sha256": "613fc2102bbf11484bfc10741f01072c100d05afb489ede1db9073dc11fdffbf"
+    },
+    "interface-checks.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/header-gaps/scratch/header-gaps/interface-checks.json",
+      "sha256": "cfc315ff75e10c70c6a2055908fad7a5c056594ac66c525748e0ff47f38c29b6"
+    },
+    "native-smokes.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/header-gaps/scratch/header-gaps/native-smokes.json",
+      "sha256": "1d2066b9cd6280d69fd092a6740b6880ff354135901e0192a9303af138ff3e35"
+    },
+    "smoke-inputs.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/header-gaps/scratch/header-gaps/smoke-inputs.json",
+      "sha256": "6458c7a35dbbdb34bcb037949bb48a02319b56f7a0083b641661cf4dce143882"
+    }
+  },
+  "observed_companion_results": {
+    "affected_units_match": 62,
+    "credited_functions_match": 92,
+    "emitted_functions_match": 93,
+    "smoke_compile_passes": 10,
+    "smoke_all_match_units": 1,
+    "smoke_mismatch_units": 6,
+    "smoke_link_refusals": 3,
+    "accepted_interfaces_exit": 0,
+    "c008_r2_interfaces_exit": 0,
+    "c009_baseline_interfaces_exit": 1,
+    "c009_patched_interfaces_exit": 1,
+    "c009_reports_byte_identical": true,
+    "c009_unchanged_finding": "global class Heap ODR + inline declaration policy"
+  },
+  "new_smoke_match_functions": [
+    "func_001d273c",
+    "func_00143058"
+  ],
+  "scope_additions": 0,
+  "scope_qualification": "Both matched identities already occur in c010 scope-dispositions-r2. These witnesses supplement evidence; original receipts/failures and provisional overlays are unchanged. Partial-TU MATCH does not authorize collecting a mismatching companion function.",
+  "qualifications": [
+    "Minimal PivotDirection/PIVOT_NONE and GL_LUT_TEXTURE0_DMP spelling/value associations are explicitly inferred from pinned public source plus private semantic evidence.",
+    "160 frame samples has public libctru provenance; SDK spelling/association remains inferred.",
+    "Companion-context evidence is not fresh current-c010 G3, signature, argcheck, header-dependent caller or final MATCH closure.",
+    "The three unresolved smoke symbols remain unbound; no aliases or shims were added."
+  ]
+}

@@ -1,23 +1,8 @@
 #include "game/sound_runtime.h"
 #include "game/functions.h"
 
-/* The frozen SoundInstance view hides the priority-pool link at 0xf8.  Keep
- * the canonical object as the union's principal view until that field is named. */
-struct SoundPoolLinkage {
-    unsigned char reserved00[0xf8];
-    PoolLink pool_link;
-};
-union SoundPoolObject {
-    SoundInstance instance;
-    SoundPoolLinkage linkage;
-};
-struct SoundInstancePool {
-    unsigned char reserved00[8];
-    PoolList active;
-    PoolList available;
-};
 struct SequencePoolSound {
-    SoundPoolObject sound;
+    SoundInstance sound;
     unsigned char reserved118[0x2314 - 0x118];
     RegistryEntry entry;
     unsigned char reserved2320[0x3044 - 0x2320];
@@ -28,12 +13,10 @@ struct SequencePoolSound {
     void setInactive() { active = 0; }
 };
 
-/* INTEGRATOR: move to include/game/sound_runtime.h; name pool_link at 0xf8.
- * func_001d6b24 differs from src/wave11/func_001d6b24.c: this caller supplies
- * the embedded entry address, not a scalar index.  Its pointed-to role remains
- * [INFERENCE] until the task-cancellation contract is unified. */
+/* INTEGRATOR: move SequencePoolSound and its declarations to the shared header
+ * once task-cancellation ownership is reconciled. This caller supplies the
+ * embedded entry address, while the accepted wrapper still uses a scalar. */
 extern "C" {
-void func_0016a3e0(SoundInstance *sound);
 void func_001d6b24(RegistryEntry *entry);
 void func_001d3230(SequencePoolSound *sound);
 }
@@ -43,13 +26,13 @@ void func_001d3230(SequencePoolSound *sound)
     if (sound->isActive()) {
         sound->setInactive();
         func_001d6b24(&sound->entry);
-        func_0016a3e0(&sound->sound.instance);
+        func_0016a3e0(&sound->sound);
         SoundInstancePool *pool = sound->pool;
-        func_0018d868(&pool->active, &sound->sound.linkage.pool_link);
-        sound->sound.instance.vtable->stop(&sound->sound.instance);
+        func_0018d868(&pool->active, &sound->sound.pool_link);
+        sound->sound.vtable->stop(&sound->sound);
         PoolList *available = &pool->available;
         PoolLink *position = &available->sentinel;
-        PoolLink *link = &sound->sound.linkage.pool_link;
+        PoolLink *link = &sound->sound.pool_link;
         func_00191154(available, position, link);
     }
 }

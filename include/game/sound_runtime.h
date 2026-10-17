@@ -22,6 +22,7 @@ struct SoundPool {
 };
 
 struct SoundInstance;
+struct SoundPlayer;
 struct SoundHandle {
     struct SoundInstance *sound;
 };
@@ -29,6 +30,8 @@ struct SoundHandle {
 struct SoundInstanceVTable {
     unsigned char reserved00[0x10];
     void (*stop)(struct SoundInstance *sound);
+    unsigned char reserved14[0x10];
+    void (*priority_changed)(struct SoundInstance *sound);
 };
 
 struct SoundInstance {
@@ -36,7 +39,8 @@ struct SoundInstance {
     unsigned char reserved04[4];
     struct SoundHandle *handle;
     struct SoundHandle *secondary_handle;
-    unsigned char reserved10[8];
+    struct SoundPlayer *player;
+    unsigned char reserved14[4];
     unsigned selection_state;
     unsigned char reserved1c[0x34];
     int priority_offset;
@@ -44,9 +48,32 @@ struct SoundInstance {
     unsigned char priority;
     unsigned char reserved9e[0x2a];
     float volume;
-    unsigned char reservedcc[0x3c];
+    unsigned char reservedcc[0x2c];
+    struct PoolLink pool_link;
+    unsigned char reserved100[8];
     struct PoolLink player_link;
     struct PoolLink selection_link;
+};
+
+/* [INFERENCE] Observed control prefixes, not complete original class sizes. */
+struct SoundInstancePool {
+    unsigned char reserved00[8];
+    struct PoolList active;
+    struct PoolList available;
+};
+struct SequenceSoundControl {
+    struct SoundInstance sound;
+    void *source;
+    struct SoundInstancePool *pool;
+    unsigned char active;
+    unsigned char enabled;
+};
+struct WaveSoundControl {
+    struct SoundInstance sound;
+    void *source;
+    struct SoundInstancePool *pool;
+    unsigned char active;
+    unsigned char enabled;
 };
 
 struct SoundFileGroup {
@@ -159,6 +186,14 @@ extern "C" {
 extern unsigned func_00180768(struct FreeListPool *pool, void *storage,
                              unsigned size, unsigned element_size);
 extern unsigned func_0018075c(struct SoundPool *pool, void *storage, unsigned size);
+/* Signed native priorities remain full words at the API; only the stored
+ * priority member is a byte (BasicSound::SetPriority(int,int)). */
+extern void func_0016a87c(struct SoundInstance *sound, int priority, int offset);
+extern void func_001d2c84(struct SoundInstance *sound, int priority);
+extern void func_00143328(struct SoundPlayer *player, struct SoundInstance *sound);
+extern void func_0016a3e0(struct SoundInstance *sound);
+extern void func_001d3bcc(struct SequenceSoundControl *sound);
+extern void func_001d9c14(struct WaveSoundControl *sound);
 extern int func_001d2cb4(const struct SoundPriorityHook *hook, unsigned sound_id);
 extern const unsigned data_0022459c[];
 extern const unsigned data_002245d8[];

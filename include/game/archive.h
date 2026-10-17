@@ -55,8 +55,25 @@ struct ArchiveFile {
     unsigned version;                      /* 0x08 */
     unsigned file_size;
     unsigned short block_count, reserved12;
-    struct ArchiveBlockReference blocks[2]; /* 0x14; references at 0x14 and 0x20 */
+#ifdef __cplusplus
+    /* The existing C++ clients use these two CWAR references only. This is
+     * an observed prefix, not the complete extent of every resource file. */
+    struct ArchiveBlockReference blocks[2];
+#else
+    /* Serialized files supply block_count records after the fixed header. */
+    struct ArchiveBlockReference blocks[];
+#endif
 };
+
+/* [INFERENCE] The stored tag is 16-bit, but the original comparisons consume
+ * the full incoming core word. Do not truncate it at the shared endpoint. */
+extern const struct ArchiveBlockReference *func_001650f8(
+    const struct ArchiveFile *file, unsigned type);
+extern unsigned func_001f1f20(const struct ArchiveFile *file);
+extern unsigned func_001f1f34(const struct ArchiveFile *file);
+extern unsigned func_001f1f4c(const struct ArchiveFile *file);
+extern bool func_001f1ebc(const struct ArchiveFile *file);
+extern bool func_001f1ed8(const struct ArchiveFile *file);
 
 struct SoundContainerFile {
     unsigned char reserved00[0x14];

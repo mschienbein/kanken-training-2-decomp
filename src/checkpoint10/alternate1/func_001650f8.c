@@ -1,25 +1,17 @@
 #include "game/archive.h"
 
-struct BinaryFileHeader {
-    unsigned signature;
-    unsigned short byte_order;
-    unsigned short header_size;
-    unsigned version;
-    unsigned file_size;
-    unsigned short block_count;
-    unsigned short reserved12;
-    struct ArchiveBlockReference blocks[];
-};
 
 /* The block search is an outlined leaf shared by the adjacent block queries. */
+/* [INFERENCE] Preserve the full incoming tag word. The original core-word
+ * comparisons do not establish a narrowing conversion or a historical
+ * unsigned-short formal merely because the serialized field is 16-bit. */
 __declspec(noinline) const struct ArchiveBlockReference *
-func_001650f8(const struct ArchiveFile *file, unsigned short type)
+func_001650f8(const struct ArchiveFile *file, unsigned type)
 {
     int index;
-    const struct BinaryFileHeader *header = (const struct BinaryFileHeader *)file;
-    for (index = 0; index < header->block_count; ++index) {
-        if (header->blocks[index].type == type)
-            return &header->blocks[index];
+    for (index = 0; index < file->block_count; ++index) {
+        if (file->blocks[index].type == type)
+            return &file->blocks[index];
     }
     return 0;
 }

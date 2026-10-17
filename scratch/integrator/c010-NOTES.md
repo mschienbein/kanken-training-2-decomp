@@ -4,7 +4,113 @@ This is an integrator working record, not acceptance or an independent review.
 No full build, full suite, prepare, finalize, history edit or push has run here.
 All counts below are candidate scope/evidence, never accepted credit.
 
-## Current milestone 2 — canonical source cutovers, not review-ready
+## Current milestone 3 — owner moves and priority-width correction, not review-ready
+
+Milestone 2 is preserved below as a historical snapshot. The preserving c008-r3
+follow-up `b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b` is merged, retaining
+c009's explicit context-bearing slot14 before/after comments. The latest merged
+c009 tip is `b6bfcecb8181c79bf0559e6e7f185156e98b374d`; c009's readiness
+checks are currently serialized ahead of c010. Inherited prepare artifacts are
+parent provenance, not a c010 prepare or whole-ledger G3 pass.
+
+The manifest now has **430 units / 441 claimed function identities**, comprising
+**438 new functions / 48,724 new target B** and **three explicitly moved accepted
+identities / 156 B**. Profiles are 311 game, 43 sdk and 76 middleware units.
+The new dry ledger is **2,633 units / 2,718 functions**; it removes the three old
+singleton owners before adding the complete destination unit. Four directly
+revised accepted source units are in the final match scope, including the
+priority setter below. **199 candidate units still contain INTEGRATOR markers.**
+The 648-row scope, 183 uncollected rows, 21 explicit contract deferrals and
+46 later-model witnesses remain as recorded in milestone 2; no old MATCH or
+failed author result was overwritten.
+
+### Emitted-owner blockers resolved with measured source
+
+- `ut_LinkList.cpp` is the sole owner of 00185bb0, 0018d868, 00191154 and
+  00191178 under middleware. The manifest contains all three required v1.16
+  moves, and the three old accepted singleton C definitions are deleted.
+  Their original source/profile/hash provenance is preserved under
+  `c010/owner-cutover/retired/` and `linklist-moves-r1.json`. No accepted
+  history or receipt was rewritten.
+- The alternate archive-query unit is the sole owner of 001650f8 and its five
+  query endpoints; the duplicate standalone source is deleted and preserved
+  under owner-cutover. The helper now accepts a full `unsigned` word.
+  Original abstract facts show three unchanged entry-word comparisons against
+  stored halfwords; halfword storage did not justify a narrowed parameter.
+  The canonical C archive exposes its variable tail directly; the private
+  BinaryFileHeader cast is removed. The existing C++ two-reference partial
+  prefix remains unchanged, not a claim of a universal archive size.
+- Both units were rematched sequentially and nice'd after the preserving
+  callback follow-up: **2/2 exits 0, 10/10 claimed functions MATCH** under
+  explicit frozen profiles, v2/none and `--show 0`.
+  `owner-post-followup-r1/results.json` binds commands, source hashes and
+  receipts. Earlier first-pass owner receipts are retained separately.
+- Emitted 00183458 remains classified runtime and **uncredited**.
+  `EMITTED-OWNERSHIP-DISPOSITIONS-r2.json` closes the two known owner blockers,
+  but does not claim a completed whole-object/whole-ledger ownership audit.
+
+### Full priority formals, byte storage, and shared sound prefixes
+
+Main's r41164 caller observation is preserved as ground truth. The new scoped
+`owner-cutover/priority-facts-r1.json` corroborates that original 001d0614
+supplies word loads to all three 0016a87c calls and the 001d2c84 call.
+0016a87c stores r2 as a word at +0x50 and r1 as a byte at +0x9d; 001d2c84
+also stores the priority byte. The pinned BasicSound header declares
+`SetPriority(int,int)` and `SetPlayerPriority(int)` while storing `u8 m_Priority`.
+Both C formals are therefore `int`; **the storage remains unsigned char**.
+No failed uchar-caller measurement was rerun or relabelled as an attempt.
+
+The canonical SoundInstance view now names the player pointer at +0x10 and
+pool link at +0xf8, preserving its size and +0x108/+0x110 links. Its +0x24
+notification slot receives the SoundInstance receiver; it is not void(void).
+The common observed pool/control prefixes and declarations are shared in
+sound_runtime.h, removing private redefinitions in 001d2c84, 001d3bcc and
+001d9c14. 001d3230 now uses the actual named pool link instead of a union
+overlay, but **retains its marker**: its task entry pointer still conflicts
+with the accepted cancellation wrapper's scalar contract. No cast, shadow
+shared declaration or fake callee masks that unresolved issue.
+
+The source/API adjudication and before/after bindings are in
+`owner-cutover/priority-contract-r1.json`. Descriptive C owner/control names
+are INFERENCE, not recovered native aliases or complete original class sizes.
+Native handles already forward int; channel 00155dec already takes/clamps int.
+Unrelated scheduler ushort fields are not widened, and 001d2ce0 is an
+attachment test, not a numeric priority getter. Body/result identities,
+all indirect consumers and final canonical signatures still require audit.
+**All five touched sound units now MATCH (5/5 exits 0, 364 target B)** in
+c009's explicitly released five-command window, sequential and nice'd.
+`priority-match-r1/results.json` binds the current source/profile receipts.
+The accepted 0016a87c remains an exact 12-byte match after widening the formal.
+The serial slot was returned to c009 immediately; no broader audit was run.
+
+### Delivered standalone header-gap prerequisites
+
+Cherry-picked HeaderGaps `995aa2b3a2f77e8fcd336b5b9a678a8fe2b5c194` as
+`c741732`: nn/math.h, nn/snd.h, GLES2/gl2.h and new gl2dmpconstants.h,
+plus its THIRD_PARTY/facts/license provenance. PivotDirection/PIVOT_NONE and
+the DMP token remain explicitly inferred minimal subsets. The 160-sample
+frame length has public libctru provenance; its SDK spelling remains inferred.
+No alias, implementation or shim is supplied for the three unresolved smoke
+symbols. The companion worktree measured 62/62 affected units MATCH
+(92 credited / 93 emitted functions), ten successful smoke compiles followed
+by one all-MATCH, six mismatches and three link refusals. Its accepted/c008-r2
+interfaces passed; its two c009 reports were byte-identical with the inherited
+Heap ODR finding. These are companion-context results, **not fresh c010 gates**.
+Exact handoff and receipts remain in `scratch/worktrees/header-gaps/scratch/header-gaps/`.
+
+### Exact unready handoff
+
+`HANDOFF.json` and `dry-matches-r3.json` supersede the milestone-2 live state;
+the old handoff is preserved separately. `match-scope-r3.json` has all 430
+candidate units and four directly revised accepted units. Final whole-scope matching,
+remaining collection including reviewed SVC caller 0019ecf8, 199 marked-unit
+contracts, canonical/native signatures, current dry-ledger G3, complete
+indirect/callback sweep, argcheck and all seven pre-review steps remain open.
+No full build/suite/prepare/finalize/history/push was run here. This is a
+committed, exact **unready milestone**, not a checkpoint review request.
+
+
+## Historical milestone 2 — canonical source cutovers, not review-ready
 
 Merged c009 `1d10b1d6ab522bf1ea4abbb2d14cb527303ea21b`, including c008-r3
 `642d725079b6a2154bc6f06fa554dcbeb063bcea`, and then c009's newer handoff
