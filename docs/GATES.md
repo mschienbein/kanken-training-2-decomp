@@ -1,6 +1,17 @@
-# Gate design — frozen v1.9 (2026-10-17)
+# Gate design — frozen v1.10 (2026-10-17)
 
 Revisions:
+- **v1.10** (2026-10-17): G3 (`tools/interfaces.py`) implements the v1.9 source policy and two
+  integration safeguards. (a) CP15 named-register variables (`register` storage, `__asm("cp15:...")`)
+  are audited as ordinary declarations; `__asm` statements, blocks, assembly functions and
+  core-register bindings (`__asm("r0")`) still fail. `__svc` declarations keep their ABI
+  annotation. (b) The pinned compiler's standard C headers audit cleanly (`__nothrow`, format
+  annotations, anonymous-union pragmas recognised; `__int64` normalised; `__softfp` kept); packing
+  and unknown attributes/pragmas still fail closed. (c) A unit source containing an `INTEGRATOR:`
+  marker comment (the authors' integration to-do marker) fails the audit. Shared declarations:
+  `include/ctr/svc.h` (raw kernel ABI for every SVC that `__svc` can express; r4/r5 calls such as
+  ControlMemory deliberately undeclared) and `include/ctr/cp15.h`. Cause: the ARMCC-extensions
+  ruling, and c005's units that include <string.h> being marked unchecked.
 - **v1.9** (2026-10-17): source policy follows the user ruling
   `docs/rulings/2026-10-17-armcc-extensions.md`: `__svc(N)` declarations, CP15 named-register
   variables and ARMCC intrinsics count as C (declared once in a shared header; each use a

@@ -10,6 +10,22 @@ import match  # noqa: E402
 BASE = 0x10007C
 
 
+class ProposedNamesTest(unittest.TestCase):
+    NAMES = {"__aeabi_memcpy": {"address": 0x1A000C}}
+
+    def test_proposals_add_names(self):
+        merged = match.merge_names(self.NAMES, {"__aeabi_vec_ctor_nocookie_nodtor": {"address": 0x1911CC}})
+        self.assertEqual(merged["__aeabi_vec_ctor_nocookie_nodtor"]["address"], 0x1911CC)
+        self.assertEqual(merged["__aeabi_memcpy"]["address"], 0x1A000C)
+
+    def test_proposals_never_rebind_a_name(self):
+        with self.assertRaisesRegex(match.inplace.LinkError, "__aeabi_memcpy"):
+            match.merge_names(self.NAMES, {"__aeabi_memcpy": {"address": 0x1A0010}})
+
+    def test_restating_a_binding_is_allowed(self):
+        self.assertEqual(match.merge_names(self.NAMES, dict(self.NAMES)), self.NAMES)
+
+
 class RenderTest(unittest.TestCase):
     def test_midword_literal_and_padding(self):
         data = struct.pack("<4I", *([0xE12FFF1E] * 4))
