@@ -9,6 +9,7 @@ from pathlib import Path
 import struct
 import subprocess
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest import mock
 
@@ -1692,7 +1693,7 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
                           first["stats"]["creditable_bytes"]), (4743, 4662, 1133322))
         self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
-                          first["stats"]["anomalies"]), (342, 27, 2))
+                          first["stats"]["anomalies"]), (360, 36, 10))
         self.assertEqual(sum(first["stats"][key] for key in ("code_bytes", "pool_bytes", "literal_bytes")),
                          first["stats"]["bytes_by_range_kind"]["function"])
         self.assertEqual((functions[0x1372EC]["size"], functions[0x1372EC]["literals"]),
@@ -1794,6 +1795,169 @@ class CatalogueClosureTests(unittest.TestCase):
                 closed = analyze.build_catalogue(image, layout, closure={})
                 self.assertEqual(closed["ranges"], baseline["ranges"])
                 self.assertEqual(analyze.validate_catalogue(closed, image, layout), [])
+
+    def test_conditional_calls_discard_every_caller_saved_pointer_fact(self) -> None:
+        for register in (0, 1, 2, 3, 12):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE92D4010, 0xE59F000C | register << 12, 0xE3500000 | register << 16,
+                        branch(BASE + 12, BASE + 32, link=True, condition=condition),
+                        0xE5904000 | register << 16, 0xE8BD8010, BASE + 48, 0xFFFFFFFF,
+                        0xE3A00000 | register << 12, 0xE12FFF1E, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 48 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    self.assertFalse(any(row["site"] == BASE + 16 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_conditional_register_call_also_clobbers_pointer_facts(self) -> None:
+        image, layout = fixture([
+            0xE92D4030, 0xE59F0014, 0xE59F5014, 0xE3500000, 0x112FFF35, 0xE5904000, 0xE8BD8030,
+            0xFFFFFFFF, BASE + 64, BASE + 48, 0xFFFFFFFF, 0xFFFFFFFF,
+            0xE3A00000, 0xE12FFF1E, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 64 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertFalse(any(row["site"] == BASE + 20 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_conditional_call_preserves_a_callee_saved_pointer_fact(self) -> None:
+        image, layout = fixture([
+            0xE92D4010, 0xE59F400C, 0xE3540000, branch(BASE + 12, BASE + 32, link=True, condition=1),
+            0xE5941000, 0xE8BD8010, BASE + 48, 0xFFFFFFFF, 0xE3A00000, 0xE12FFF1E,
+            0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 48 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+        self.assertTrue(any(row["site"] == BASE + 16 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_exception_return_forms_never_create_closed_copy_owners(self) -> None:
+        for terminal in (0xE1B0F00E, 0xE25EF004, 0xE8FD8010, 0xE1A0F08E, 0xE1A0F06E):
+            with self.subTest(terminal=terminal):
+                image, layout = fixture([0xE12FFF1E, 0xE5912000, 0xE5802000, terminal])
+                analyzer = analyze.Analyzer(image, layout)
+                self.assertIsNone(catalogue_closure.constant_copy_leaf(analyzer, BASE + 4, BASE + 16))
+                result = analyze.build_catalogue(image, layout, closure={})
+                self.assertNotIn(BASE + 4, {function["address"] for function in result["functions"]})
+        image, layout = fixture([0xE12FFF1E, 0xE5912000, 0xE5802000, 0xE1A0F00E])
+        self.assertIsNotNone(catalogue_closure.constant_copy_leaf(analyze.Analyzer(image, layout), BASE + 4, BASE + 16))
+        result = analyze.build_catalogue(image, layout, closure={})
+        self.assertIn(BASE + 4, {function["address"] for function in result["functions"]})
+
+    def test_signed_byte_and_halfword_reads_veto_alignment(self) -> None:
+        for instruction, width in ((0xE1DF10BE, 2), (0xE1DF10FE, 2), (0xE5DF100E, 1), (0xE1DF10DE, 1)):
+            with self.subTest(instruction=instruction, width=width):
+                image, layout = fixture([instruction, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+                self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+                reads = [row for row in result["closure_evidence"]["read_footprints"] if row["site"] == BASE]
+                self.assertEqual([(row["start"], row["end"]) for row in reads], [(BASE + 22, BASE + 22 + width)])
+                self.assertFalse(any(row["start"] <= BASE + 22 < row["end"] for row in result["closure_evidence"]["alignment"]))
+
+    def test_conditional_reads_veto_alignment_without_claiming_data(self) -> None:
+        for instruction in (0x01DF10BE, 0x01DF10FE, 0x01DF10DE):
+            with self.subTest(instruction=instruction):
+                image, layout = fixture([instruction, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+                self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                self.assertTrue(any(row["site"] == BASE for row in result["closure_evidence"]["read_vetoes"]))
+
+    def test_unmodeled_and_unbounded_reads_do_not_prove_no_reference(self) -> None:
+        image, layout = fixture([0xED9F0100, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+        self.assertEqual(analyze.Analyzer(image, layout).detailed(BASE).id, analyze.arm.ARM_INS_LDC)
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertTrue(any(row["site"] == BASE for row in result["closure_evidence"]["read_vetoes"]))
+        image, layout = fixture([0xE59F0014, 0xE7901002, 0xFA000000, 0xE12FFF1E, 0x4801B500,
+                                 0x0000BD00, 0x12345678, BASE + 22])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertTrue(any(row["site"] == BASE + 4 for row in result["closure_evidence"]["read_vetoes"]))
+
+    def test_read_inventory_widths_cover_signed_unprivileged_atomic_and_doubleword_forms(self) -> None:
+        arm = analyze.arm
+        register = SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R1)
+        memory = SimpleNamespace(type=arm.ARM_OP_MEM, access=0, subtracted=False,
+                                 mem=SimpleNamespace(base=arm.ARM_REG_R0, index=0, disp=6),
+                                 shift=SimpleNamespace(type=0, value=0))
+        known = {arm.ARM_REG_R0: (BASE, BASE, "synthetic")}
+        for width, names in ((1, ("LDRB", "LDRBT", "LDRSB", "LDRSBT", "LDREXB", "SWPB")),
+                             (2, ("LDRH", "LDRHT", "LDRSH", "LDRSHT", "LDREXH")),
+                             (4, ("LDR", "LDRT", "LDREX", "SWP")), (8, ("LDRD", "LDREXD"))):
+            for name in names:
+                with self.subTest(name=name):
+                    operands = [register, register, memory] if width == 8 else [register, memory]
+                    instruction = SimpleNamespace(id=getattr(arm, "ARM_INS_" + name), operands=operands)
+                    reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+                    self.assertEqual(reads, [(BASE + 6, BASE + 6 + width, BASE, "synthetic")])
+                    self.assertFalse(uncertain)
+        for reg, width in ((arm.ARM_REG_S0, 4), (arm.ARM_REG_D0, 8)):
+            instruction = SimpleNamespace(id=arm.ARM_INS_VLDR,
+                                          operands=[SimpleNamespace(type=arm.ARM_OP_REG, reg=reg), memory])
+            reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+            self.assertEqual(reads[0][:2], (BASE + 6, BASE + 6 + width))
+            self.assertFalse(uncertain)
+
+    def test_multiple_read_address_modes_use_complete_architectural_spans(self) -> None:
+        arm = analyze.arm
+        reg = lambda value: SimpleNamespace(type=arm.ARM_OP_REG, reg=value)
+        known = {arm.ARM_REG_R0: (BASE + 16, BASE, "synthetic"), arm.ARM_REG_SP: (BASE + 16, BASE, "synthetic")}
+        for name, registers, offset, width in (
+            ("LDM", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], 0, 8),
+            ("LDMIB", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], 4, 8),
+            ("LDMDA", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], -4, 8),
+            ("LDMDB", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], -8, 8),
+            ("VLDMIA", [arm.ARM_REG_R0, arm.ARM_REG_S0, arm.ARM_REG_S1], 0, 8),
+            ("VLDMDB", [arm.ARM_REG_R0, arm.ARM_REG_D0, arm.ARM_REG_D1], -16, 16),
+            ("POP", [arm.ARM_REG_R1, arm.ARM_REG_R2], 0, 8),
+            ("VPOP", [arm.ARM_REG_D0, arm.ARM_REG_D1], 0, 16)):
+            with self.subTest(name=name):
+                instruction = SimpleNamespace(id=getattr(arm, "ARM_INS_" + name), operands=[reg(value) for value in registers])
+                reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+                self.assertEqual(reads[0][:2], (BASE + 16 + offset, BASE + 16 + offset + width))
+                self.assertFalse(uncertain)
+
+    def test_partially_mapped_reads_veto_without_claiming_a_truncated_object(self) -> None:
+        image, layout = fixture([0xE12FFF1E])
+        catalogue = analyze.build_catalogue(image, layout)
+        analyzer = analyze.Analyzer(image, layout)
+        vetoes = []
+        with mock.patch.object(catalogue_closure, "_instruction_reads",
+                               return_value=([(BASE - 2, BASE + 2, BASE, "synthetic")], False)):
+            reads = catalogue_closure.read_footprints(catalogue, analyzer, read_vetoes=vetoes)
+        self.assertEqual(reads, [])
+        self.assertEqual([(row["start"], row["end"]) for row in vetoes], [(BASE, BASE + 2)])
+        self.assertEqual(vetoes[0]["evidence"], "partially_mapped_read_veto_only")
+
+    def test_unknown_memory_read_shapes_and_missing_access_flags_fail_closed(self) -> None:
+        arm = analyze.arm
+        register = SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R1)
+        memory = SimpleNamespace(type=arm.ARM_OP_MEM, access=0, subtracted=False,
+                                 mem=SimpleNamespace(base=arm.ARM_REG_R0, index=0, disp=0),
+                                 shift=SimpleNamespace(type=0, value=0))
+        known = {arm.ARM_REG_R0: (BASE, BASE, "synthetic")}
+        for instruction in (SimpleNamespace(id=arm.ARM_INS_LDC, operands=[register, memory]),
+                            SimpleNamespace(id=arm.ARM_INS_CDP, operands=[register, memory]),
+                            SimpleNamespace(id=arm.ARM_INS_LDRSH, operands=[register]),
+                            SimpleNamespace(id=arm.ARM_INS_LDM, operands=[register])):
+            with self.subTest(instruction=instruction.id):
+                self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], True))
+        # A known, store-only class does not become a read just because flags are absent.
+        instruction = SimpleNamespace(id=arm.ARM_INS_STR, operands=[register, memory])
+        self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], False))
+        memory.mem.index = arm.ARM_REG_R2
+        instruction = SimpleNamespace(id=arm.ARM_INS_LDR, operands=[register, memory])
+        self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], True))
+        known[arm.ARM_REG_R2] = (3, BASE, "synthetic")
+        memory.shift = SimpleNamespace(type=arm.ARM_SFT_LSL, value=1)
+        reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+        self.assertEqual(reads[0][:2], (BASE + 6, BASE + 10))
+        self.assertFalse(uncertain)
+        memory.shift = SimpleNamespace(type=arm.ARM_SFT_RRX, value=1)
+        self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], True))
 
     def test_complete_copy_effects_do_not_claim_library_ownership(self) -> None:
         for load, store, width in ((0xE5912000, 0xE5802000, 4), (0xE5D12000, 0xE5C02000, 1)):

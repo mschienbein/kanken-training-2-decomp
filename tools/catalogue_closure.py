@@ -94,13 +94,15 @@ def constant_copy_leaf(analyzer, start: int, limit: int, *, allow_record_layout:
     while cursor + 4 <= limit:
         decoded = analyzer.detailed(cursor)
         ins = analyzer.decode(cursor, "arm")
-        if decoded is None or ins is None or ins.conditional or ins.call or ins.branch or ins.pools or ins.address_target is not None:
+        if (decoded is None or ins is None or ins.conditional or ins.call or ins.branch or ins.pools
+                or ins.address_target is not None or decoded.update_flags):
             return None
         instructions += 1
         operands = decoded.operands
         terminal = (decoded.id == arm.ARM_INS_BX and len(operands) == 1 and operands[0].reg == arm.ARM_REG_LR
                     or decoded.id == arm.ARM_INS_MOV and len(operands) == 2
-                    and operands[0].reg == arm.ARM_REG_PC and operands[1].reg == arm.ARM_REG_LR)
+                    and operands[0].reg == arm.ARM_REG_PC and operands[1].reg == arm.ARM_REG_LR
+                    and not any(operand.shift.type for operand in operands))
         if terminal:
             end = cursor + 4
             if registers.get(arm.ARM_REG_SP) != original[arm.ARM_REG_SP] or stack:
@@ -131,7 +133,7 @@ def constant_copy_leaf(analyzer, start: int, limit: int, *, allow_record_layout:
                     "contract": "closed_fixed_record_leaf" if allow_record_layout else "closed_constant_copy_leaf",
                     "ownership_classified": False,
                     "qualification": "[INFERENCE] Historical section/caller identity is not recovered; exact closed record effects and balanced ABI are proved."}
-        if ins.stop or decoded.update_flags or decoded.writeback and decoded.id not in (
+        if ins.stop or decoded.writeback and decoded.id not in (
                 arm.ARM_INS_PUSH, arm.ARM_INS_POP, arm.ARM_INS_LDM, arm.ARM_INS_STM,
                 arm.ARM_INS_STMDB, arm.ARM_INS_LDR, arm.ARM_INS_STR, arm.ARM_INS_LDRB,
                 arm.ARM_INS_STRB, arm.ARM_INS_LDRH, arm.ARM_INS_STRH,
@@ -208,14 +210,102 @@ def constant_copy_leaf(analyzer, start: int, limit: int, *, allow_record_layout:
     return None
 
 
+_SCALAR_READ_WIDTHS = {
+    **{getattr(arm, f"ARM_INS_{name}"): 1 for name in
+       ("LDRB", "LDRBT", "LDRSB", "LDRSBT", "LDREXB", "SWPB")},
+    **{getattr(arm, f"ARM_INS_{name}"): 2 for name in
+       ("LDRH", "LDRHT", "LDRSH", "LDRSHT", "LDREXH")},
+    **{getattr(arm, f"ARM_INS_{name}"): 4 for name in ("LDR", "LDRT", "LDREX", "SWP")},
+    **{getattr(arm, f"ARM_INS_{name}"): 8 for name in ("LDRD", "LDREXD")},
+}
+_BLOCK_READ_MODES = {
+    arm.ARM_INS_LDM: "ia", arm.ARM_INS_LDMDA: "da", arm.ARM_INS_LDMDB: "db", arm.ARM_INS_LDMIB: "ib",
+    arm.ARM_INS_VLDMIA: "ia", arm.ARM_INS_VLDMDB: "db", arm.ARM_INS_POP: "pop", arm.ARM_INS_VPOP: "pop",
+}
+_MEMORY_STORES_AND_HINTS = {
+    getattr(arm, f"ARM_INS_{name}") for name in (
+        "STR", "STRB", "STRBT", "STRD", "STRH", "STRHT", "STRT",
+        "STREX", "STREXB", "STREXD", "STREXH", "STM", "STMDA", "STMDB", "STMIB",
+        "VSTR", "VSTMIA", "VSTMDB", "PUSH", "VPUSH", "STC", "STCL", "STC2", "STC2L",
+        "PLD", "PLDW", "PLI")
+}
+# Also catch implicit-register-list reads and new Capstone load classes whose
+# width/address semantics have not been implemented. Operand access flags alone
+# are insufficient (notably for atomic instructions).
+_READ_CLASSES = {value for name, value in vars(arm).items() if name.startswith((
+    "ARM_INS_LD", "ARM_INS_VLD", "ARM_INS_FLD", "ARM_INS_POP", "ARM_INS_VPOP",
+    "ARM_INS_SWP", "ARM_INS_RFE"))}
+
+
+def _instruction_reads(instruction, before: dict, site: int, pc: int) -> tuple[list[tuple], bool]:
+    """Return exact static read spans, or an uncertainty veto, never guessed data."""
+    operands = instruction.operands
+    width = _SCALAR_READ_WIDTHS.get(instruction.id)
+    mode = _BLOCK_READ_MODES.get(instruction.id)
+    memory_operands = [operand for operand in operands if operand.type == arm.ARM_OP_MEM]
+    if instruction.id == arm.ARM_INS_VLDR:
+        if not operands or operands[0].type != arm.ARM_OP_REG:
+            return [], True
+        width = 8 if arm.ARM_REG_D0 <= operands[0].reg <= arm.ARM_REG_D31 else 4
+    if width is None and mode is None:
+        return [], (instruction.id in _READ_CLASSES
+                    or bool(memory_operands) and instruction.id not in _MEMORY_STORES_AND_HINTS)
+    if mode is not None:
+        if not operands or any(operand.type != arm.ARM_OP_REG for operand in operands):
+            return [], True
+        base_register = arm.ARM_REG_SP if mode == "pop" else operands[0].reg
+        loaded = operands if mode == "pop" else operands[1:]
+        if not loaded or base_register == arm.ARM_REG_PC:
+            return [], True
+        width = sum(8 if arm.ARM_REG_D0 <= operand.reg <= arm.ARM_REG_D31 else 4 for operand in loaded)
+        displacement = {"ia": 0, "pop": 0, "ib": 4, "da": 4 - width, "db": -width}[mode]
+    else:
+        if len(memory_operands) != 1:
+            return [], True
+        operand = memory_operands[0]
+        memory = operand.mem
+        base_register, displacement = memory.base, memory.disp
+        if memory.index:
+            if memory.index not in before:
+                # A statically formed base with an unbounded indexed access may
+                # reach an alignment candidate. It supplies no ownership bound.
+                return [], base_register == arm.ARM_REG_PC or base_register in before
+            value = before[memory.index][0] & 0xFFFFFFFF
+            shift = operand.shift
+            if shift.type == arm.ARM_SFT_LSL:
+                value = (value << shift.value) & 0xFFFFFFFF
+            elif shift.type == arm.ARM_SFT_LSR:
+                value >>= shift.value
+            elif shift.type == arm.ARM_SFT_ASR:
+                value = ((value if value < 0x80000000 else value - 0x100000000) >> shift.value) & 0xFFFFFFFF
+            elif shift.type == arm.ARM_SFT_ROR:
+                amount = shift.value % 32
+                value = ((value >> amount) | (value << ((32 - amount) % 32))) & 0xFFFFFFFF
+            elif shift.type:
+                return [], True  # Register shifts/RRX need additional value/flag proofs.
+            displacement += -value if operand.subtracted else value
+    if base_register == arm.ARM_REG_PC:
+        base, origin, basis = pc, site, "architectural_pc_load"
+    elif base_register in before:
+        base, origin, basis = before[base_register]
+    else:
+        return [], False  # No statically recovered image address, not an invented reference.
+    first = (base + displacement) & 0xFFFFFFFF
+    if first + width > 0x100000000:
+        return [], True
+    return [(first, first + width, origin, basis)], False
+
+
 def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] | None = None,
-                    include_reads: bool = True) -> list[dict]:
+                    include_reads: bool = True, read_vetoes: list[dict] | None = None) -> list[dict]:
     """Enumerate actual fixed-width reads from locally proved image addresses.
 
     ADR alone is not a read. Values do not flow through a join, conditional
     definition, unknown arithmetic or a call-clobbered register. Reading a pool
     pointer does not grant ownership of its pointee; only a later actual read
-    contributes that exact span. No payload or pointer value is serialized.
+    contributes that exact span. Unmodeled reads, unbounded statically formed
+    addresses and conditional reads can veto alignment, never create data ownership.
+    No payload or pointer value is serialized.
     """
     rows = []
     for function in catalogue["functions"]:
@@ -247,36 +337,34 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
             before = dict(known)
             for register in writes:
                 known.pop(register, None)
+            if ins.call:
+                # Taken and untaken conditional-call paths must agree on every
+                # surviving fact. AAPCS caller-saved values do not survive that join.
+                for register in (arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12, arm.ARM_REG_LR):
+                    known.pop(register, None)
+            if include_reads:
+                pc = site + 8 if isa == "arm" else (site + 4) & ~3
+                reads, uncertain = _instruction_reads(instruction, before, site, pc)
+                if uncertain and read_vetoes is not None:
+                    read_vetoes.append({"function": function["address"], "site": site,
+                                       "start": analyzer.base, "end": analyzer.end,
+                                       "evidence": "unmodeled_or_unbounded_static_read_veto_only"})
+                for first, end, source_site, address_source in reads:
+                    if analyzer.base <= first < end <= analyzer.end:
+                        row = {"function": function["address"], "site": site, "start": first, "end": end,
+                               "address_source_site": source_site, "address_source": address_source,
+                               "evidence": "exact_architectural_read_footprint"}
+                        if ins.conditional:
+                            if read_vetoes is not None:
+                                read_vetoes.append({**row, "evidence": "conditional_read_veto_only"})
+                        else:
+                            rows.append(row)
+                    elif read_vetoes is not None and first < analyzer.end and analyzer.base < end:
+                        read_vetoes.append({"function": function["address"], "site": site,
+                                           "start": max(first, analyzer.base), "end": min(end, analyzer.end),
+                                           "evidence": "partially_mapped_read_veto_only"})
             if ins.conditional:
                 continue
-            source_site = site
-            address_source = "architectural_pc_load"
-            reads = []
-            load_ids = (arm.ARM_INS_LDR, arm.ARM_INS_LDRB, arm.ARM_INS_LDRH, arm.ARM_INS_VLDR)
-            if (not ins.address_reference and instruction.id in load_ids and len(operands) >= 2
-                    and operands[1].type == arm.ARM_OP_MEM and operands[1].mem.base == arm.ARM_REG_PC
-                    and not operands[1].mem.index):
-                width = (1 if instruction.id == arm.ARM_INS_LDRB else 2 if instruction.id == arm.ARM_INS_LDRH
-                         else 8 if arm.ARM_REG_D0 <= operands[0].reg <= arm.ARM_REG_D31 else 4)
-                pc = site + 8 if isa == "arm" else (site + 4) & ~3
-                first = pc + operands[1].mem.disp
-                reads.append((first, first + width))
-            if instruction.id in load_ids and len(operands) >= 2 and operands[1].type == arm.ARM_OP_MEM:
-                memory = operands[1].mem
-                if memory.base in before and not memory.index and not instruction.writeback:
-                    base, source_site, address_source = before[memory.base]
-                    width = (1 if instruction.id == arm.ARM_INS_LDRB else 2 if instruction.id == arm.ARM_INS_LDRH
-                             else 8 if arm.ARM_REG_D0 <= operands[0].reg <= arm.ARM_REG_D31 else 4)
-                    reads.append((base + memory.disp, base + memory.disp + width))
-            elif instruction.id in (arm.ARM_INS_LDM, arm.ARM_INS_VLDMIA) and operands and operands[0].reg in before:
-                base, source_site, address_source = before[operands[0].reg]
-                width = sum(8 if arm.ARM_REG_D0 <= operand.reg <= arm.ARM_REG_D31 else 4 for operand in operands[1:])
-                reads.append((base, base + width))
-            for first, end in reads if include_reads else []:
-                if analyzer.base <= first < end <= analyzer.end:
-                    rows.append({"function": function["address"], "site": site, "start": first, "end": end,
-                                 "address_source_site": source_site, "address_source": address_source,
-                                 "evidence": "exact_architectural_read_footprint"})
             if operands and operands[0].type == arm.ARM_OP_REG:
                 destination = operands[0].reg
                 if ins.address_target is not None:
@@ -305,10 +393,7 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
                         address_witnesses.append({"function": function["address"], "site": site,
                                                   "target": formed[0] & ~1, "isa": "thumb",
                                                   "definition_site": formed[1], "evidence": "dominated_tagged_pc_relative_value"})
-            if ins.call:
-                for register in (arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12, arm.ARM_REG_LR):
-                    known.pop(register, None)
-            elif ins.branch or ins.stop:
+            if not ins.call and (ins.branch or ins.stop):
                 known.clear()
     return sorted(rows, key=lambda row: (row["start"], row["end"], row["function"], row["site"]))
 
@@ -429,7 +514,8 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
     functions.sort(key=lambda function: function["address"])
     code = [(first, end) for function in functions for first, end in function["code_ranges"]]
     entries = {entry["address"] for function in functions for entry in function["entries"]}
-    footprints = read_footprints(catalogue, analyzer)
+    read_vetoes = []
+    footprints = read_footprints(catalogue, analyzer, read_vetoes=read_vetoes)
     needed_sites = {row["address"] for row in catalogue["anomalies"] if row["issue"] == "literal_outside_function"}
     unknown = [row for row in catalogue["ranges"] if row["kind"] == "unknown"]
     accepted_reads = [row for row in footprints if (
@@ -460,7 +546,8 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
                     or any(end == row["start"] for row in catalogue["shared_literals"]))
         if (preceding is None or preceding[2].conditional or not boundary
                 or not (preceding[2].returns or preceding[2].branch or preceding[2].stop)
-                or any(row["start"] < end and first < row["end"] for row in footprints)):
+                or any(row["start"] < end and first < row["end"] for row in footprints)
+                or any(row["start"] < end and first < row["end"] for row in read_vetoes)):
             continue
         alignment.append({"start": first, "end": end, "function": preceding[0]["address"],
                           "terminal": preceding[1], "evidence": "zero_halfword_after_thumb_terminal_before_word_boundary"})
@@ -517,7 +604,8 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
         retained.append(issue)
     catalogue["anomalies"] = retained
     catalogue["closure_evidence"] = {"closed_leaves": leaves, "read_footprints": accepted_reads,
-                                   "owner_merges": owner_merges, "alignment": alignment, "extent_explanations": explained}
+                                   "read_vetoes": read_vetoes, "owner_merges": owner_merges,
+                                   "alignment": alignment, "extent_explanations": explained}
     stats = catalogue["stats"]
     stats.update({"functions": len(functions),
                   "functions_by_isa": dict(sorted(Counter(function["isa"] for function in functions).items())),
