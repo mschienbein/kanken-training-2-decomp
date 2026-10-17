@@ -1,107 +1,113 @@
 # Proposed GATES.md revision: candidate-only removed callees
 
-Draft for the integrator, 2026-10-17, revised after independent review F01–F03.
-This is not an adopted gate change. `docs/GATES.md`, the default v2 linker model and already
-prepared checkpoints remain unchanged. Use the next unused revision number on adoption;
-v1.14 below is proposed, not reserved. Passing implementation tests does not adopt R1.
+Draft for the integrator, 2026-10-17, revised after independent re-review F08.
+This incorporates the re-reviewer's acceptable GATES text; it is not an adopted gate change.
+`docs/GATES.md`, the default v2 model and already prepared/finalized checkpoints stay unchanged.
+Use v1.14 only if still unused, otherwise the next unused revision without weakening the text.
+A passing independent re-review is required before adoption; implementation tests are not adoption.
 
 ## Revision entry to record before a new prepare
 
-- **v1.14 (proposed)** (2026-10-17): G4 may use `armlink5-inline-branchnop-v3`
-  (`docs/LINKER.md`, rule R1) for source-only tiny callees that armlink can inline and remove.
-  All v2 rules/refusals remain. R1 excludes every unremovable/root/kept section, including a
-  section defining `__tagsym$$used`. Removed helpers earn no catalogue credit. Their complete
-  defining sources, compiler profiles and objects remain in the prepared ledger/hash closure,
-  even for helper-only units with `functions: []`. Receipts expose every removed entity and
-  per-call rewrite with `target: null`. G6 requires manual contract/control-flow review, a
-  visible `[INFERENCE]` source note and QUALIFIED identity provenance for every credited R1
-  caller. Changing a removed helper's defining unit or reviewed shared-header contract reopens
-  all affected credited callers, even unchanged caller sources. An empty or unqualified
-  helper-only dependency review is refused. Cause: ARM DUI0474K §4.12 performs inlining before
-  unused-section elimination, while §4.3 still retains rooted/marked sections. R1 models a
-  possible removed helper, not recovery of its historical identity or original call graph.
+- **v1.14** (2026-10-17): G4 may use `armlink5-inline-branchnop-v3`
+  (`docs/LINKER.md`, rule R1) for source-defined tiny callees that armlink can
+  inline and subsequently remove. All v2 bound-callee equality/refusal checks
+  remain mandatory, including for rooted/retained candidate definitions. R1
+  excludes every retained/root/kept section, including `__tagsym$$used`.
+  Removed helpers earn no catalogue credit; their defining sources, frozen
+  profiles and objects remain in the prepared ledger/hash closure, including
+  helper-only units with `functions: []`. Receipts expose every removed entity
+  and per-call rewrite with `target: null`. G6 requires explicit QUALIFIED
+  identity provenance, a visible `[INFERENCE]` source note and manual typed
+  contract/control-flow review for each affected credited caller. A helper or
+  shared-header revision reopens all dependent credited callers, even when
+  their source and output bytes are unchanged. Prepare records added, changed
+  and removed project headers as explicit G1 revisions, including in non-R1
+  checkpoints; R1 dependency expansion is empty when no R1 caller is affected.
+  Cause: ARM DUI0474K §4.12 performs inlining before unused-section elimination,
+  while §4.3 separately requires retention of rooted/marked sections. R1 models
+  a possible removed helper, not recovered historical call identity.
 
-## R1 — candidate-only inlined and removed callee
+### R1 — candidate-only inlined and removed callee
 
-R1 is allowed only under the explicitly recorded model `armlink5-inline-branchnop-v3`, for a
-new checkpoint prepared after adoption of this revision and a passing independent implementation
-review. Both fresh G4 builds, prepare and finalized history must bind the same model. V2 remains
-the default; no already-prepared checkpoint changes gates/model mid-review. Opt-in author matches
-alone do not authorize acceptance.
+R1 is permitted only for a new checkpoint prepared after this revision and a
+passing independent implementation review, under the explicitly recorded model
+`armlink5-inline-branchnop-v3`. Both fresh G4 builds, prepare and finalized
+history must bind the same model. Existing prepared/finalized checkpoints do
+not change gates or model. Author-loop opt-in matches alone do not authorize
+acceptance; the acceptance build path must actually select and record v3.
 
-A caller may receive R1-qualified catalogue credit only when all of the following hold:
+A credited caller may use R1 only when all the following conditions hold:
 
-1. The complete callee function section is compiled from source supplied by this candidate
-   build, in the caller object or another supplied object. Its defining unit remains in the
-   ledger and every receipt with source/object hashes, even when it credits no functions.
-   An external declaration, guessed library body, ROM bytes or fabricated address is insufficient.
-2. No function, alias or other symbol binding gives the section an original address. Reserved
-   address names remain reserved. A binding overlapping any catalogue function/entry/extent
-   takes v2's retained-callee path, with its equality/refusal checks; an uncatalogued bound
-   address is refused. The section is not an entry/root, `used`/retain-marked, explicitly kept,
-   first/last, exported or otherwise required to survive removal. A definition of
-   `__tagsym$$used` retains its section. The implementation conservatively retains unknown
-   `__tagsym$$` metadata, OS/processor section flags, explicit exported symbol visibility,
-   uninterpreted linker directives and ELF entry metadata. Supplied root selectors must resolve
-   to candidate symbols/sections; unknown selectors fail closed. Retained COMDAT groups stay
-   retained. A rooted unbound helper is refused, never silently dropped; a bound rooted
-   candidate's call stays a BL under v3 and therefore mismatches an inlined original slot.
-   External KEEP/entry/export/first/last mechanisms must be supplied as explicit retention roots;
-   unexamined linker scripts/options are not supported evidence of removability.
-3. The whole section is executable, word-aligned, wholly ARM code, non-NOBITS, exactly 4 or 8
-   bytes, with every function entry at offset zero spanning the complete section. Only the
-   nonreferencing `R_ARM_V4BX` marker is permitted. Its own compiled body satisfies unchanged
-   I1–I3, including the PC/LR/control-transfer/exception/branch-NOP exclusions. Its non-return
-   instruction reads only r0–r3/flags and writes only r0–r3/r12/flags, preserving SP and all
-   callee-saved registers. All aliases/identical COMDAT copies represent the same entity;
+1. The complete callee section is compiled from supplied source under a frozen
+   profile in this candidate build, in the caller object or another supplied
+   object. Its defining unit remains in the ledger and every receipt with
+   source/object hashes even when `functions: []`. An external declaration,
+   guessed library body, ROM bytes or fabricated original address is insufficient.
+2. No function, alias or other binding gives the section an original address.
+   Reserved address names remain reserved. Every binding overlapping a
+   catalogue function, entry or extent takes the retained-callee path, retaining
+   all v2 equality/refusal checks. Retention metadata never waives those checks
+   or by itself proves calls should remain ordinary BLs. An uncatalogued bound
+   address is refused. An R1 section is not entry/root/used/retain/exported,
+   explicitly kept, first/last or otherwise required to survive removal.
+   Unknown supplied retention metadata fails closed; explicit root selectors
+   must resolve. Retention propagates to every copy/member of the COMDAT entity.
+   Unexamined linker scripts/options are not evidence of removability.
+3. The whole section is executable, word-aligned, wholly ARM code, non-NOBITS,
+   exactly 4 or 8 bytes, with every function entry at offset zero spanning the
+   complete section. Only nonreferencing `R_ARM_V4BX` markers are allowed. Its
+   own compiled body satisfies unchanged I1–I3, including all PC/LR/control-
+   transfer/exception/branch-NOP exclusions. The non-return instruction reads
+   only r0–r3/flags and writes only r0–r3/r12/flags; SP and callee-saved registers
+   are preserved. Aliases and identical COMDAT copies are one entity;
    contradictory copies are refused.
-4. Every use is an actual compiler-produced relocated ARM BL/BLcond exactly to the entry, at
-   original catalogued ARM code, with unchanged I1–I3 encodings/conditions. The original-code
-   call-ABI CFG filter must pass. Each r0–r3 input is defined within the preceding four
-   straight-line words on every incoming path, or is the caller's own incoming argument
-   register unmodified on every CFG path from entry to the site, or is an unmodified r0/r1
-   result of an unconditional preceding call on every incoming path. Branches cannot bypass
-   required setup; calls break incoming-parameter provenance but establish possible result
-   registers. Conditional definitions/calls alone do not establish an input. Reviewers must
-   check the actual preceding-call result type/width; BL alone does not prove its contract.
-   After the replacement, follow
-   all CFG successors, including both conditional arms and unconditional branch targets,
-   until calls/returns, code-range ends or unconditional redefinition of the tracked values.
-   No r1–r3/r12/flags read may precede an unconditional definition; conditional definitions
-   do not kill a value on every path. Unresolved indirect successors fail closed. r0 may be
-   a result; I1 requires no inputs. Entry-argument forwarding does not waive the mandatory
-   post-site caller-saved/flags check. Ordinary source policy still forbids hand-emitted
-   call/instruction encodings.
-5. At least one call to each removed entity is inlined and no reference remains in any supplied
-   allocated section, including otherwise unplaced sections. A pointer, B tail call, dependency,
-   interior/addended target, incompatible condition or invalid ABI context causes refusal.
-   Only the now-unreferenced, unrooted helper section is removed. This is not general dead-section
-   elimination and does not create a credited zero-size helper.
-6. Every rewrite records `removed_callee` (symbols, section, size and defining source/object)
-   and `target: null`. Match/build receipts list removed entities by defining unit. Prepared
-   evidence binds the full helper definition closure and exposes relevant caller rewrites.
-   A new/revised removed helper or reviewed shared-header contract makes all affected credited
-   callers review-required, even when caller text and output bytes are unchanged. Prepare's
-   `dependency_reviews` lists those callers and changed helpers/headers, and `linker_rewrites`
-   includes their per-call metadata. Each unchanged caller needs its own explicit function/source
-   row, just like a new/revised function. The review schema and finalize refuse missing rows;
-   a zero-credit helper is not a zero-review dependency. R1 caller rows must be QUALIFIED (or FAIL).
-   Revisions of any identical removed COMDAT copy's defining unit reopen the same callers.
-7. **Mandatory manual ABI/contract review:** reviewers inspect every incoming path and entry
-   argument, setup dominance, all outgoing successors, predication and flag dependencies,
-   helper definition, every declaration, shared-header use, argument types/meanings,
-   mutability/const contracts, memory effects, return/result semantics and preserved original
-   bugs. The automatic filter only bounds the decoded CFG; it does not replace these checks.
-   Argcheck must not invent an image callee edge from `target: null`. Missing original-target
-   evidence is an explicit manual-review obligation, not an ABI-audit pass or evidence of no
-   arguments/effects.
-8. **Mandatory historical-identity qualification:** every affected caller has a precise
-   `[INFERENCE]` note at the use/helper declaration and a QUALIFIED review row identifying
-   removed-helper identity provenance. Byte equality proves the emitted caller extent, not
-   that the original source contained that helper or that its historical identity/call graph
-   has been recovered. A helper chosen to influence code generation still needs a defensible
-   source-level contract and ordinary source-policy compliance. R1 is not an instruction-injection
-   exception. A census hit, clean CFG filter or argcheck report with no issues never waives this.
+4. Every use is an actual compiler-produced relocated ARM BL/BLcond exactly to
+   that entry, at catalogued original ARM code, satisfying unchanged I1–I3
+   encodings/conditions. The original-code call-ABI CFG filter must pass. Each
+   input is defined within the preceding four straight-line words on every
+   incoming path, is an unmodified actual incoming caller argument, or is an
+   unmodified actual r0/r1 result of a preceding unconditional call on every
+   path. Conditional definitions/calls alone do not establish input provenance.
+   Entry forwarding does not waive the outgoing check. All decoded successors,
+   including both conditional arms and branch targets, are checked for reads of
+   r1–r3/r12/flags before unconditional definitions up to calls/returns or decoded
+   code-range ends. Unknown indirect control flow fails closed; r0 may be a result
+   and I1 requires no inputs. These checks do not prove the argument/result
+   types, interprocedural liveness, or that the original source contained a call.
+5. At least one call to each removed entity is inlined. No reference survives in
+   any supplied allocated section, including otherwise unplaced sections. A
+   pointer, tail B, dependency, interior/addended target, incompatible condition
+   or invalid call context causes refusal. Only the now-unreferenced unrooted
+   helper section is removed; there is no general dead-section elimination or
+   credited zero-size helper.
+6. Each rewrite records `removed_callee` identity, section, size and defining
+   source/object with `target: null`. Match/build receipts list removed entities
+   by defining unit. Prepared evidence exposes every relevant caller rewrite and
+   binds the full helper definition closure. New/revised helper units, any
+   identical COMDAT copy, and added/changed/removed shared-header contracts reopen
+   all affected credited callers. Prepare's `dependency_reviews` names each
+   caller/source and changed dependency; unchanged callers need explicit rows
+   like new/revised functions. Review and finalize refuse missing rows or plain
+   PASS provenance for R1 callers. Zero credit does not mean zero review.
+7. Mandatory reviewer checks cover every incoming path and entry contract,
+   setup dominance, outgoing successors and exits, implicit arguments at later
+   calls/tail exits, predicate/flag dependencies, helper definitions and every
+   declaration/shared-header use, argument types/widths/meanings, mutability and
+   const contracts, memory effects, return/result semantics, and preserved
+   original bugs. For preceding-call results, reviewers establish the actual
+   return type and register width; BL alone does not prove r0/r1 are results.
+   Argcheck must not invent an original callee edge for `target: null`; missing
+   original-target evidence is a manual-review obligation, not an ABI-audit pass.
+8. Every affected caller has a precise `[INFERENCE]` note at the use/helper
+   declaration and an explicit QUALIFIED identity-provenance review row. Exact
+   bytes establish the caller extent, not that the original source called this
+   helper or that its identity/call graph is recovered. A matching original
+   store/arithmetic instruction may have arisen without any helper call. Any
+   helper selected to influence code generation still needs a defensible typed
+   source-level contract and ordinary source-policy compliance; hand-emitted
+   calls/instruction encodings and instruction-injection exceptions remain
+   forbidden. Census hits, a clean CFG filter and an issue-free argcheck never
+   waive these reviewer checks or qualifications.
 
 ## Primary rationale and independent review
 
@@ -111,9 +117,19 @@ elimination, the tiny-callee rules and retained roots. The pinned game-profile c
 `__tagsym$$used` for the reviewer's exact `__attribute__((used))` reproduction. R1 now refuses that
 otherwise eligible section. No real-armlink executable was run, and the model must not claim one.
 
-The independent review is `scratch/review/linker-v3/REVIEW.md`: its verdict was FAIL before these
-fixes. A subsequent independent passing review is still required before adoption. F03's identity
-qualification is inherent and is not mechanically discharged by the retention/dependency/CFG fixes.
+The initial review is `scratch/review/linker-v3/REVIEW.md`; the independent R2 re-review is
+`scratch/review/linker-v3-r2/REVIEW.md`. Both verdicts were FAIL before the current F08 fix.
+The rooted-bound shortcut is removed: retention no longer bypasses v2 equality/refusal or
+forces an ordinary BL. Matching rooted helpers retain their section, original identity and
+comparison. A subsequent passing independent re-review remains required before adoption.
+
+F03 is a **mandatory reviewer check**, not something discharged by the implementation fix.
+The re-review compiled nine exact source alternatives under all three frozen profiles whose
+controlled reference source never called the helper. Entry argument/result type and width,
+interprocedural liveness, and historical-call identity therefore still require the explicit
+review and QUALIFIED provenance above. F09's added/removed-header G1 behavior is disclosed in
+the revision text. The inherited F10 source/header drift is not fixed or re-verified here;
+no passing whole-worktree history verification is claimed.
 
 ## Historical triage and author measurements
 
@@ -127,7 +143,7 @@ The earlier s1ab680 preserved caller/separate-setter trial exited 2: 2,232 candi
 2,212 original bytes, with a shifted second call site. It was not a match or new credit. Keep v2
 for existing/frozen checkpoints; neither that trial nor this draft authorizes a relaxed call context.
 
-## R2 implementation verification (2026-10-17)
+## Historical R2 implementation verification (before F08)
 
 The branch merged current main's independent literal-model implementation and retained both
 build-test classes before the final runs:
@@ -166,3 +182,36 @@ Those variants earn no new matching-C credit. Their unchanged sources, command p
 scratch output locations are documented in `docs/LINKER.md`. No checkpoint prepare/finalize or
 full-ledger build was run. The full suite was explicitly requested; no evidence above replaces
 the fresh-build/adoption gates or the required new independent review.
+
+## F08 revision verification (2026-10-17)
+
+The rooted-bound early return is removed from `_inline_decision`. A retained candidate definition
+must pass the same v2 bound-original eligibility/equality checks; rooting never forces a BL.
+The compiler-produced negative regression uses the reviewer's 24-byte caller, wrong 8-byte
+`used` setter and bound 12-byte reference setter. Both v2 and v3 refuse before any caller-only
+credit, with zero rewrites/removals. The positive compiled regression retains and compares a
+legitimate rooted 8-byte helper equal to its original, with the same ordinary address-targeted
+I2 rewrite under both models.
+
+Requested full suite:
+
+```
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/test_suite.py
+```
+
+**Exit 0; `576 tests, 1 skipped, 0 failed modules, 30.9s`.** The inplace module ran
+**74 tests, no skips**, including the negative and positive real-compile F08 cases.
+
+The five accepted functions `func_00105084`, `func_0010d604`, `func_0011e928`, `func_0018fdd4`
+and `func_00195254` each MATCH their full extent under both v2 and v3: **10 commands, each exit 0**,
+zero rewrites/removals. W16d `func_001456e4`, with its separate `display_metadata.c`, remains
+**exit 0 / MATCH 240/240 bytes** under v3: one `inline_insn` at +0x7c and one removed 8-byte
+`w16_set_screen`, with `target: null`.
+
+The exact commands/exits and suite summary are
+`scratch/integrator/linker-v3-f08/verification.json`; result files are under that directory's
+`accepted/{v2,v3}/FUNCTION/` and `w16d/func_001456e4/`. No checkpoint prepare/finalize,
+full-ledger build, known-failing history re-verification or gate/default change was performed.
+F03 remains the mandatory reviewer check above, and a passing independent re-review is still
+required before adoption.
+

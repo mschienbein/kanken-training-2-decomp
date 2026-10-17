@@ -983,11 +983,10 @@ class InPlaceLinker:
         candidate (`eligible_original_callee`). A callee the candidate object defines itself must be
         that same function: when either its own section or the original would be inlined, its
         whole, relocation-free section must equal the eligible original body, or the link is
-        refused — otherwise a wrong local helper could decide the caller's bytes. When neither
-        would be inlined the call is an ordinary BL and nothing is decided.
+        refused — otherwise a wrong local helper could decide the caller's bytes. Retention
+        keeps the callee's section, but never waives these checks or prevents I1-I3 inlining.
+        When neither would be inlined the call is an ordinary BL and nothing is decided.
         """
-        if self.model.removed_inline and rel.symbol.shndx in self._retained_sections:
-            return None  # a retained candidate's call stays a BL, never an R1 substitution
         original = self.eligible_original_callee(dest)
         decided = inline_arm_call(insn, original) if original is not None else None
         sym = rel.symbol

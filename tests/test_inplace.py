@@ -903,19 +903,97 @@ class RemovedCalleeModelTest(unittest.TestCase):
             inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000),
                                   self.MODEL, retention_roots={"missing": "KEEP"}).link(obj)
 
-    def test_bound_retained_helper_keeps_the_call_as_a_bl(self):
+    def test_bound_retained_helper_uses_v2_identity_and_inline_rules(self):
         obj, mem, catalogue = self.fixture()
         obj.symbols.append(inplace.Symbol("__tagsym$$used", 0, 0, "STT_NOTYPE", "STB_LOCAL", 2))
         catalogue[0x100100] = {"address": 0x100100, "size": 8, "isa": "arm"}
         mem.write(0x100100, obj.sections[2].data)
-        linker = self.linker(mem, catalogue, {"set_field18": {"address": 0x100100}})
-        linked = linker.link(obj)
-        self.assertEqual(set(linked), {1, 2})
-        self.assertEqual(linker.removed_callees, [])
-        self.assertEqual(linker.rewrites, [])
-        self.assertNotEqual(linked[1][1], mem.read(BASE, 40))
-        for site in self.SITES:
-            self.assertEqual(struct.unpack_from("<I", linked[1][1], site)[0], bl(BASE + site, 0x100100, False))
+        for model in ("armlink5-inline-branchnop-v2", self.MODEL):
+            with self.subTest(model=model):
+                linker = self.linker(mem, catalogue, {"set_field18": {"address": 0x100100}}, model)
+                linked = linker.link(obj)
+                self.assertEqual(set(linked), {1, 2})
+                self.assertEqual(linked[1][1], mem.read(BASE, 40))
+                self.assertEqual(linked[2][0].origin, "catalogue")
+                self.assertEqual(linked[2][1], mem.read(0x100100, 8))
+                self.assertEqual(linker.removed_callees, [])
+                self.assertEqual([rewrite.target for rewrite in linker.rewrites], [0x100100] * 2)
+                self.assertEqual([rewrite.rule for rewrite in linker.rewrites], ["inline_insn"] * 2)
+
+    def compiled_bound_retained_fixture(self, reference_body, reference_size):
+        """F08's real game-profile objects against a wholly synthetic v2 reference image."""
+        sources = {
+            "caller.c": (
+                "extern void set_field18(unsigned *p, unsigned v);\n"
+                "extern void func_00100100(unsigned v);\n"
+                "unsigned func_00100000(unsigned *p, unsigned v) {\n"
+                "    set_field18(p, v); func_00100100(0); return 1;\n"
+                "}\n"),
+            "retained.c": (
+                "__attribute__((used))\n"
+                "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n"),
+            "reference.c": f"void set_field18(unsigned *p, unsigned v) {{ {reference_body} }}\n",
+        }
+        objects = {}
+        with tempfile.TemporaryDirectory() as directory:
+            for name, text in sources.items():
+                source = Path(directory) / name
+                source.write_text(text, encoding="utf-8")
+                toolchain.compile_source(toolchain.load_profiles()["game"], source, source.with_suffix(".o"))
+                objects[name] = inplace.ObjectFile(source.with_suffix(".o"))
+        caller = objects["caller.c"]
+        definition = next(sym for sym in caller.defined_functions() if sym.name == "func_00100000")
+        self.assertEqual(caller.sections[definition.shndx].size, 24)
+        helper = objects["retained.c"]
+        definition = next(sym for sym in helper.defined_functions() if sym.name == "set_field18")
+        self.assertEqual(helper.sections[definition.shndx].size, 8)
+        self.assertIn("__tagsym$$used", helper.sections[definition.shndx].retention)
+        original = objects["reference.c"]
+        definition = next(sym for sym in original.defined_functions() if sym.name == "set_field18")
+        self.assertEqual(original.sections[definition.shndx].size, reference_size)
+        helper_at = 0x100200
+        names = {"set_field18": {"address": helper_at}}
+        catalogue = {
+            BASE: {"address": BASE, "size": 24, "isa": "arm"},
+            0x100100: {"address": 0x100100, "size": 12, "isa": "arm"},
+            helper_at: {"address": helper_at, "size": reference_size, "isa": "arm"},
+        }
+        mem = Memory()
+        mem.write(helper_at, original.sections[definition.shndx].data)
+        reference = inplace.ObjectFile.combine([caller, original], ["caller.c", "reference.c"])
+        linker = self.linker(mem, catalogue, names, "armlink5-inline-branchnop-v2")
+        for placed, data in linker.link(reference).values():
+            mem.write(placed.base, data)
+        candidate = inplace.ObjectFile.combine([caller, helper], ["caller.c", "retained.c"])
+        return candidate, mem, catalogue, names
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_reviewer_bound_retained_wrong_helper_is_refused_like_v2(self):
+        obj, mem, catalogue, names = self.compiled_bound_retained_fixture("p[6] = v; p[7] = v;", 12)
+        # Linking precedes selection of caller-only credit: the zero-credit helper cannot bypass it.
+        for model in ("armlink5-inline-branchnop-v2", self.MODEL):
+            with self.subTest(model=model):
+                linker = self.linker(mem, catalogue, names, model)
+                with self.assertRaisesRegex(inplace.LinkError, "inlining is undecidable.*not an ordinary 4/8-byte"):
+                    linker.link(obj)
+                self.assertEqual(linker.removed_callees, [])
+                self.assertEqual(linker.rewrites, [])
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_compiler_bound_retained_matching_helper_is_compared_as_its_original(self):
+        obj, mem, catalogue, names = self.compiled_bound_retained_fixture("p[6] = v;", 8)
+        for model in ("armlink5-inline-branchnop-v2", self.MODEL):
+            with self.subTest(model=model):
+                linker = self.linker(mem, catalogue, names, model)
+                linked = {placed.base: (placed, data) for placed, data in linker.link(obj).values()}
+                self.assertEqual(set(linked), {BASE, 0x100200})
+                for address, (placed, data) in linked.items():
+                    self.assertEqual(placed.origin, "catalogue")
+                    self.assertEqual(data, mem.read(address, catalogue[address]["size"]))
+                self.assertEqual(linker.removed_callees, [])
+                self.assertEqual([rewrite.target for rewrite in linker.rewrites], [0x100200])
+                self.assertEqual([rewrite.rule for rewrite in linker.rewrites], ["inline_insn"])
+                self.assertNotIn("removed_callee", linker.rewrites[0].record())
 
     @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
     def test_elf_entry_retain_and_unknown_processor_metadata_fail_closed(self):
