@@ -3,12 +3,12 @@
 
 struct ResourceRegistry {
     unsigned char reserved00[0x10];
-    struct Registry entries;
+    struct PoolList entries;
 };
 
 struct RegisteredResource {
     void *type;
-    struct RegistryNode link;
+    struct PoolLink link;
     unsigned int registered;
 };
 

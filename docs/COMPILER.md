@@ -107,3 +107,36 @@ functions / 280 bytes from compiled C, `code.bin` identical, `.code` recompresse
    regions.
 4. Reach ≥10 independent matches across distinct features (gate H5), then freeze the profile as
    `game` in `config/compiler_profiles.json`.
+
+## Public-library fingerprint discovery
+
+`tools/fingerprint.py` compiles a library translation unit with a named profile
+using the normal compiler/cache, then searches the original text read-only:
+
+```sh
+.venv/bin/python tools/fingerprint.py vendor/library.cpp --profile game \
+  --include vendor/include --define NW_RELEASE --out scratch/library-fingerprints.json
+```
+
+`--object` accepts an existing ARM relocatable ELF instead. The JSON output contains
+symbol names, addresses, sizes and discovery evidence, never image bytes or
+disassembly. Trailing literal pools are included even when ELF `st_size` excludes
+them; non-relocated literal values remain exact, while supported relocation fields
+(including relocated literals) are wildcarded at bit granularity. Unknown relocation
+types produce `no_hits` with an explicit reason, not a guessed mask.
+
+The first pass checks catalogue starts with the same extent size and ISA. Only when
+that finds nothing does the tool search every ISA-aligned text start. Consequently,
+`unique` in `scope: catalogue_size` means unique **within that first pass**, not
+necessarily unique at interior or unequal-size starts. The report preserves every
+hit in the selected pass and labels it `unique`, `ambiguous`, or `no_hits`.
+Confidence (`high`, `medium`, `low`, `none`) ranks invariant-bit count, retained
+fraction, search scope and ambiguity; it is not a statistical probability.
+
+Fingerprints propose identities, not matching credit. They do not resolve the
+wildcarded calls or globals, prove external data equality, or emulate linker call
+inlining/branch removal. Bind an evidenced upstream mangled name with a names overlay
+and confirm the complete candidate unit with `tools/match.py --profile game --names
+scratch/proposed-names.json --show 0` before adoption. Different library versions,
+unlinked features and linker transformations can all produce `no_hits`; that alone
+does not prove version drift.

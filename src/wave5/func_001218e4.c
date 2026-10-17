@@ -1,8 +1,5 @@
-struct CallbackState {
-    unsigned char reserved00[2];
-    unsigned char pending;
-};
-extern struct CallbackState data_00242afc;
+#include "game/service_runtime.h"
+
 extern void (*bss_0049ef04[8])(void);
 
 void func_001218e4(void)

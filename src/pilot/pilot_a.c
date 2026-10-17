@@ -4,7 +4,16 @@ struct S10e664 { char pad[0x1c]; int x1c; };
 void func_0010e664(struct S10e664 *s) { s->x1c = 0; }
 
 struct S1149a8 { int a, b, c; u8 d; };
-void func_001149a8(struct S1149a8 *s) { s->a = 0; s->b = 0; s->c = 0; s->d = 0; }
+/* func_0010cc0c uses the retained r0 pointer after both calls.
+ * [INFERENCE] The original constructor/initializer spelling is unrecovered. */
+struct S1149a8 *func_001149a8(struct S1149a8 *s)
+{
+    s->a = 0;
+    s->b = 0;
+    s->c = 0;
+    s->d = 0;
+    return s;
+}
 
 int func_00136930(int c, int next) {
     if (c == '\n') return 1;

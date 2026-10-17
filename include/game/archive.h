@@ -65,8 +65,9 @@ struct ArchiveIndex {
     const struct ArchiveResourceTable *table;
 };
 
+struct ArchiveHandleVTable;
 struct ArchiveHandle {
-    unsigned reserved00;
+    const struct ArchiveHandleVTable *vtable;
     struct ArchiveIndex *index;
 };
 
@@ -84,11 +85,15 @@ struct ArchiveSoundInfo {
 #endif
 };
 
-struct ArchiveStreamInfo {
-    unsigned reserved00[5];
-#ifndef __cplusplus
-    unsigned parameters[];
-#endif
+struct SoundRecord {
+    unsigned item_id;
+    unsigned field04;
+    unsigned char property;
+    unsigned char reserved09[3];
+    unsigned short type;
+    unsigned short reserved0e;
+    int detail_offset;
+    unsigned option_flags;
 };
 
 struct ArchiveFileReference {
@@ -113,14 +118,22 @@ struct ArchiveFileInfo {
 };
 
 struct BankFile;
-struct BankReference {
-    unsigned type;
-    unsigned offset;
+struct SoundReference {
+    unsigned short type;
+    unsigned short reserved02;
+    int offset;
+};
+
+struct SoundReferenceTable {
+    unsigned count;
+#ifndef __cplusplus
+    struct SoundReference entries[];
+#endif
 };
 
 struct BankReader {
     const struct BankFile *file;
-    const struct BankReference *info;
+    const struct SoundReference *info;
     unsigned char valid;
 };
 
@@ -142,9 +155,17 @@ struct BankInstrumentInfo {
 
 /* Sound archive runtime object and its serialized metadata. */
 struct SoundArchiveInfo {
-    unsigned char reserved00[0x2c];
+    unsigned reserved00;
+    int sound_table_offset;
+    unsigned reserved08;
+    int range_table_offset;
+    unsigned reserved10;
+    int third_table_offset;
+    unsigned char reserved18[0x14];
     unsigned file_table_offset;
-    unsigned char reserved30[0x0c];
+    unsigned reserved30;
+    unsigned count_table_offset;
+    unsigned reserved38;
     unsigned player_info_offset;
 };
 
@@ -170,17 +191,6 @@ struct SoundFileInfo {
 #endif
 };
 
-struct SoundInfoReference {
-    unsigned type;
-    unsigned offset;
-};
-
-struct SoundInfoTable {
-    unsigned count;
-#ifndef __cplusplus
-    struct SoundInfoReference entries[];
-#endif
-};
 
 struct SoundFileResult {
     unsigned count;
@@ -222,24 +232,26 @@ struct SoundLookupProvider {
 
 struct SoundArchivePlayerView {
     const void *reserved00;
-    const struct SoundArchive *archive;
+    const struct SoundArchiveReader *archive;
     struct SoundLookupProvider *provider;
 };
 
 extern unsigned func_00140a08(struct ArchiveIndex *index, unsigned resource_id);
 extern unsigned func_00140a10(const struct ArchiveResourceTable *table, unsigned resource_id);
 extern const struct ArchiveIdList *func_00140ecc(const struct ArchiveIndex *index, unsigned resource_id);
-extern const struct BankWaveArchiveTable *func_00140fc0(const struct BankReference *reference);
+extern const struct BankWaveArchiveTable *func_00140fc0(const struct SoundReference *reference);
 extern unsigned int func_0014a35c(const struct SoundArchive *archive);
 extern unsigned int func_0014a364(const struct SoundArchiveReader *reader);
 extern unsigned func_0014a380(const struct SoundArchiveReader *reader);
+extern unsigned char func_00140ccc(const struct SoundRecord *record);
+extern int func_00140d1c(const struct SoundRecord *record);
 extern unsigned func_0014c23c(const struct SoundFileInfo *info);
 extern const struct SoundFileInfo *func_0014c25c(const struct SoundArchiveInfo *info, unsigned id);
 extern bool func_00181334(const struct SoundArchive *archive, struct SoundPlayerResult *out);
 extern int func_0018279c(const unsigned *packed, unsigned *out, unsigned index);
-extern int func_00131928(const struct SoundArchive *archive, unsigned int sound_id);
+extern int func_00131928(const struct SoundArchiveReader *reader, unsigned int sound_id);
 extern const void *func_0016a938(const struct SoundArchivePlayerView *player, unsigned int sound_id);
-extern const void *func_001f2ac8(const struct SoundArchive *archive, unsigned int sound_id);
+extern const void *func_001f2ac8(const struct SoundArchiveReader *reader, unsigned int sound_id);
 
 extern void func_00136448(struct WordPair *pair, unsigned int first, unsigned int second);
 extern const void *func_0017ded4(const struct RelativeReference *reference);
