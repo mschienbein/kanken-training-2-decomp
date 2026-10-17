@@ -11,15 +11,15 @@ struct GraphicsContext {
     struct DisplayBuffer *buffers[];        /* 0x5c; count not known */
 };
 
+struct GraphicsMutex { unsigned handle; };
 struct GraphicsState {
     signed char initialized;
     signed char stereo;
-    unsigned char reserved02[0x1a];
-    struct GraphicsContext *context;
-};
-
-struct GraphicsMutex {
+    unsigned char reserved02[0x0e];
     unsigned handle;
+    struct GraphicsMutex mutex;
+    unsigned reserved18;
+    struct GraphicsContext *context;
 };
 #ifdef __cplusplus
 extern "C" {

@@ -9,6 +9,7 @@ typedef struct BufferState {
     unsigned int capacity;
 } BufferState;
 
+struct ByteWriter { unsigned char *data; unsigned position; };
 struct Allocation {
     void *pointer;
     unsigned int count;
@@ -80,6 +81,7 @@ extern void func_0019f568(void);               /* fatal-error / assertion handle
 extern void *func_001ef880(void *object);      /* array-element destroy callback */
 extern void *func_001ef884(void *object);      /* preserves the element pointer */
 extern void func_001ef888(void *allocation);   /* releases an array allocation */
+extern struct Allocation *func_00130f90(struct Allocation *allocation);
 
 #ifdef __cplusplus
 }

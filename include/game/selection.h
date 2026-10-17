@@ -3,9 +3,11 @@
 
 #include <stdint.h>
 
-/* Selection state at 0x0028c1f0; both fields are read as signed halfwords. */
+/* Selection state at 0x0028c1f0; accessed selections are signed halfwords. */
 struct SelectionState {
-    unsigned char reserved00[0x52];
+    unsigned char reserved00[0x4c];
+    short selection4c;
+    unsigned char reserved4e[4];
     short selection;
     short mode;
 };

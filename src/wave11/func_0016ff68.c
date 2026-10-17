@@ -1,0 +1,31 @@
+#include "game/screen.h"
+
+struct W11ControlScreen {
+    unsigned char reserved00[0x0c];
+    struct WidgetSlot *slots[10];
+    int layout;
+    int active;
+    int selection;
+};
+
+static __inline void set_object_active(struct DisplayObject *object, int enabled)
+{
+    if (object != 0) {
+        switch (func_0017a9a0(object, 0)) {
+        case 3: func_00195a08(object, 0, enabled); break;
+        case 5: func_0015e948(object, enabled); break;
+        case 6: func_001826fc(object, enabled); break;
+        }
+    }
+}
+
+void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled)
+{
+    struct WidgetSlot *slot = screen->slots[index];
+    if (slot != 0) {
+        slot->state.label.enabled = enabled;
+        if (enabled == 0)
+            slot->state.label.label_index = -1;
+        set_object_active(slot->object, enabled);
+    }
+}

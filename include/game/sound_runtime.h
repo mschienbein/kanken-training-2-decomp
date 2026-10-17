@@ -114,9 +114,27 @@ struct SoundParameterTarget {
     unsigned char flagf4;
 };
 
+struct SoundPriorityCallback;
+struct SoundPriorityCallbackVTable {
+    unsigned char reserved00[0x0c];
+    int (*priority_offset)(struct SoundPriorityCallback *, void *, unsigned sound_id);
+};
+struct SoundPriorityCallback { const struct SoundPriorityCallbackVTable *vtable; };
+struct SoundPriorityHook {
+    struct SoundPriorityCallback *callback;
+    unsigned char reserved04[8];
+    void *context;
+#ifdef __cplusplus
+    int priorityOffset(unsigned sound_id) const
+    {
+        return callback ? callback->vtable->priority_offset(callback, context, sound_id) : 0;
+    }
+#endif
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern int func_001d2cb4(const struct SoundPriorityHook *hook, unsigned sound_id);
 extern const unsigned data_0022459c[];
 extern const unsigned data_002245d8[];
 extern void func_00190634(struct SoundInstance *sound);

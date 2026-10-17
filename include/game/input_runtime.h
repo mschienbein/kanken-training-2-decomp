@@ -16,6 +16,16 @@ struct InputSessionContext {
     unsigned char reserved01[0x3b];
     int selected;
 };
+struct ShortInputUpdate {
+    unsigned short flags, value, reserved04, mode;
+    void *data;
+    unsigned short parameters[4];
+};
+struct ExtendedInputUpdate {
+    unsigned short flags, value, reserved04, mode;
+    void *data[5];
+    unsigned short parameters[12];
+};
 #ifdef __cplusplus
 extern "C" {
 #endif

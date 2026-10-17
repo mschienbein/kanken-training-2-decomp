@@ -38,6 +38,8 @@ struct FontResource {
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern int func_001149c0(const struct FontFile *file, unsigned signature,
+                          unsigned minimum_version, unsigned maximum_version);
 extern struct FontFile *func_0013ea40(struct FontResource *font);
 extern struct FontFile *func_0019dbec(struct FontResource *font);
 extern int func_0019da14(struct FontResource *font, struct FontFile *file);

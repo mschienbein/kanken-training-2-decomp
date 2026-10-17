@@ -6,12 +6,12 @@
 struct RegionBlock;
 struct RegionHeap {
     const void *vtable;
-    struct RegistryNode registration;
+    struct PoolLink registration;
     unsigned char *start;
     unsigned char *end;
     unsigned signature;
     struct RegionHeap *parent;
-    struct RegistryNode children;
+    struct PoolLink children;
     unsigned options;
     unsigned char *low;
     unsigned char *high;
@@ -20,7 +20,7 @@ struct RegionHeap {
 
 struct HeapStorage {
     struct RegionHeap *heap;
-    struct Registry pending;
+    struct PoolList pending;
 #ifdef __cplusplus
     ~HeapStorage();
     int initialize(void *memory, unsigned size);

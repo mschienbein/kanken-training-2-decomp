@@ -1,6 +1,7 @@
 #ifndef GAME_AUDIO_VOICE_H
 #define GAME_AUDIO_VOICE_H
 
+#include <stdbool.h>
 #include "game/functions.h"
 
 struct AdpcmCoefficients {
@@ -21,6 +22,7 @@ struct AudioChannel {
     struct AudioChannelState *state;
 };
 
+struct RecordState;
 struct AudioVoiceGroup {
     struct AudioChannel *channels[2];
     int count;
@@ -30,7 +32,8 @@ struct AudioVoiceGroup {
     unsigned char flag15;
     unsigned char flag16;
     unsigned char flag17;
-    unsigned char reserved18[8];
+    unsigned char reserved18[4];
+    struct RecordState *record;
     unsigned short dirty;
     unsigned char reserved22;
     signed char mode23;
@@ -147,11 +150,34 @@ struct AudioControlBase {
     float value60;
 };
 
+struct AudioTrackControl;
+struct AudioVoiceStartArgs;
+struct AudioVoiceAllocator;
+struct AudioVoiceAllocatorVTable {
+    unsigned char reserved00[8];
+    struct AudioVoice *(*allocate)(struct AudioVoiceAllocator *, struct AudioTrackControl *,
+                                   unsigned char, const struct AudioVoiceStartArgs *);
+};
+struct AudioVoiceAllocator { const struct AudioVoiceAllocatorVTable *vtable; };
+struct AudioTrackControl {
+    struct AudioControlBase base;
+    unsigned char reserved64[0x10];
+    unsigned char transpose74;
+    unsigned char reserved75[3];
+    struct AudioByteRamp ramp78;
+    unsigned char reserved7e[2];
+    struct AudioVoiceAllocator *allocator;
+};
 struct RecordState;
 struct TaskPool;
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
+extern void func_0017da08(struct AudioVoiceGroup *group, int index,
+                          struct RecordState *record, bool remember);
+extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,
+    unsigned char index, const struct AudioVoiceStartArgs *arguments);
 extern void func_001545ec(struct AudioChannel *channel, int mode);
 extern void func_001545f4(struct AudioChannelState *state, int mode);
 extern void func_00154608(struct AudioChannel *channel, unsigned int value);
