@@ -468,6 +468,11 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
     old_ranges = catalogue["ranges"]
     new_ranges = []
     for old in old_ranges:
+        # Every witness is text-local. Keep other mapped segments' boundaries:
+        # adjacent, equally labelled page padding must not become one range.
+        if old["end"] <= analyzer.base or old["start"] >= analyzer.end:
+            new_ranges.append(dict(old))
+            continue
         cuts = {old["start"], old["end"]}
         applicable = [row for row in replacements if row[0] < old["end"] and old["start"] < row[1]]
         for first, end, _, _ in applicable:

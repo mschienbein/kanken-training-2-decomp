@@ -1786,6 +1786,15 @@ class CatalogueClosureTests(unittest.TestCase):
         return catalogue_closure.constant_copy_leaf(
             analyze.Analyzer(image, layout), BASE, BASE + len(words) * 4, allow_record_layout=record)
 
+    def test_text_closure_preserves_each_mapped_segments_range_boundaries(self) -> None:
+        for rodata, data in (([], []), ([0], []), ([], [0]), ([0], [0])):
+            with self.subTest(rodata=rodata, data=data):
+                image, layout = fixture([0xE12FFF1E], rodata=rodata, data=data)
+                baseline = analyze.build_catalogue(image, layout)
+                closed = analyze.build_catalogue(image, layout, closure={})
+                self.assertEqual(closed["ranges"], baseline["ranges"])
+                self.assertEqual(analyze.validate_catalogue(closed, image, layout), [])
+
     def test_complete_copy_effects_do_not_claim_library_ownership(self) -> None:
         for load, store, width in ((0xE5912000, 0xE5802000, 4), (0xE5D12000, 0xE5C02000, 1)):
             with self.subTest(width=width):
@@ -1828,8 +1837,15 @@ class CatalogueClosureTests(unittest.TestCase):
                                  *literal_words(b"foo\0")])
         result = analyze.build_catalogue(image, layout)
         row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
-        self.assertEqual((row["kind"], row["owner"]), ("function", BASE + 8))
+        # Sharing vetoes exclusive pool ownership before optional closure.
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertEqual(result["functions"][1]["pools"], [])
         self.assertEqual(result["functions"][0]["size"], 8)
+        # The actual LDR then proves four unowned data bytes, not a borrowed pool.
+        closed = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in closed["ranges"] if row["start"] <= BASE + 24 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+        self.assertEqual(closed["functions"][1]["pools"], [])
 
     def test_reviewed_wide_bound_requires_digest_terminator_and_zero_alignment(self) -> None:
         image, layout = fixture([0xE28F0000, 0xE12FFF1E, *literal_words("AB\0".encode("utf-16le"))])

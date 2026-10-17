@@ -14,6 +14,47 @@ change, matching-source authoring, full build, test suite, lint or formatter run
 Main owns combined checks and independent review. The five new assembly exclusions
 are review proposals, not a claim that arbitrary C implementations are impossible.
 
+## C2f326c verification follow-up: discrete synthetic-image fix
+
+Main's clean detached `c2f326c` full-suite run reported three failures in
+`tests.test_analyze` (170 tests): two CLI subcases exposed a genuine generator bug;
+the neighboring-pool assertion had an incorrect exclusive-ownership expectation.
+Main's real-image CLI generation succeeded and reproduced the original proposal.
+Those reported failures were not rerun solely for confirmation.
+
+The closure range writer coalesced adjacent equally labelled `segment_padding`
+across mapped segment boundaries, even though its witnesses are text-local.
+It now preserves every non-text range verbatim, retaining empty/nonempty segment
+and page-padding boundaries. **The tiling validator is unchanged**, not relaxed.
+A new synthetic regression covers all empty/nonempty rodata/data combinations.
+
+Intermediate trace diagnosis establishes the other fixture's intended behavior:
+the neighbor initially has an actual PC-load pool, but an incoming ADR makes that
+word shared, and the inherited address-literal pass removes exclusive pool ownership.
+Without optional closure the word is therefore unknown/unowned, not the neighbor's
+exclusive function data. With v10 closure, its actual four-byte architectural read
+proves unowned rodata. The corrected fixture checks both stages and never borrows
+the neighbor's pool. Diagnosis receipt:
+`scratch/closure/c2f326c-synthetic-diagnosis.json` (exit 0).
+
+The discrete fixup's exact sequential generation commands are:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/analyze.py catalogue --out scratch/analyze/catalogue-v10-fixup.json
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/analyze.py catalogue --out scratch/analyze/catalogue-v10-fixup-rerun.json
+```
+
+Both exit 0 and produce identical 6,514,890-byte outputs, SHA-256
+`7b5f857fc160083b100440834e4e92557431962b868d03f5b8e2895c0de5e00c`.
+**Functions, physical ranges, anomalies and statistics are identical** to the
+original proposal. Only two JSON values change:
+`generator.source_sha256.tools/catalogue_closure.py` and
+`revision_review.input_sha256.tools/catalogue_closure.py`. Keeping the old overall
+hash would incorrectly retain stale generator provenance. Comparison and commands:
+`scratch/closure/v10-fixup-generation.json`. Original outputs and receipts below
+remain preserved. No test, build, lint or formatter was run for this fixup;
+Main owns the clean-checkout suite and independent review.
+
 ## Baselines and reproducible output
 
 - Private worktree/branch: `scratch/worktrees/catalogue-v10`, `catalogue-v10`,
