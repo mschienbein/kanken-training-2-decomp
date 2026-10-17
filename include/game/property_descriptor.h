@@ -57,4 +57,17 @@ extern void func_0021521c(void);
 }
 #endif
 
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+
+
+
+
+extern "C" {
+extern struct NameTable *bss_0024445c[25];
+extern void func_00205380(void);
+}
+#endif
+
 #endif

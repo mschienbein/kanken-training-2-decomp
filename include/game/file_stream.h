@@ -3,6 +3,10 @@
 
 struct FileHandleObject;
 struct Result;
+struct FileStreamState;
+struct FileStreamView;
+
+
 
 #include "game/result.h"
 #include "game/runtime.h"
@@ -26,6 +30,30 @@ extern "C" {
 #endif
 extern struct Result func_001c4af0(struct FileHandleObject *file, int priority);
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+
+
+struct FileStreamState {
+    unsigned handle;
+    unsigned position_low;
+    int position_high;
+    unsigned size_low;
+    int size_high;
+};
+struct FileStreamView {
+    const void *vtable;
+    FileStreamState state;
+};
+
+extern "C" {
+int func_00180578(FileStreamState *state, long long position);
+int func_0019d5e4(FileStreamState *state, unsigned *read_size,
+                      void *destination, unsigned size);
 }
 #endif
 

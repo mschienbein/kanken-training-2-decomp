@@ -5,17 +5,37 @@
 extern "C" {
 #endif
 
-struct SlotBlock {
-    unsigned words[8];
-    struct SlotBlock *next;
-    struct SlotBlock *previous;
+struct TransferSurface;
+struct Framebuffer {
+    unsigned word00, word04, word08;
+    struct TransferSurface *surface;
+    unsigned word10, word14, word18, word1c;
+    struct Framebuffer *next;
+    struct Framebuffer *previous;
 };
 
-struct SlotList {
-    struct SlotBlock *head;
-    unsigned head_count;
-    struct SlotBlock *tail;
-    unsigned tail_count;
+struct Renderbuffer {
+    void *memory;
+    unsigned reserved04[2];
+    int width;
+    int height;
+    unsigned format;
+    unsigned type;
+    unsigned gpu_format;
+    unsigned size;
+    unsigned component_bits[4];
+    unsigned levels;
+    unsigned bits_per_pixel;
+    unsigned module;
+    unsigned handle;
+    struct Renderbuffer *next;
+};
+
+struct FramebufferManager {
+    struct Framebuffer *framebuffers;
+    struct Renderbuffer *renderbuffers;
+    struct Framebuffer *bound_framebuffer;
+    struct Renderbuffer *bound_renderbuffer;
 };
 
 struct AllocationSystem {
@@ -57,10 +77,19 @@ struct PipelineConfiguration {
     struct VertexRange ranges[16];
 };
 
+struct PipelineSnapshot {
+    unsigned value;
+};
+
 struct PipelineStorage {
     unsigned char reserved00[0x800];
     struct PipelineConfiguration *configuration;
-    unsigned char reserved804[0x50];
+    unsigned reserved804;
+    unsigned current;
+    unsigned reserved80c;
+#ifndef __cplusplus
+    struct PipelineSnapshot snapshots[];
+#endif
 };
 
 struct PipelineOwner {
@@ -71,7 +100,8 @@ extern struct PipelineOwner data_00242a14;
 
 extern void func_00126f5c(unsigned *state);
 extern void func_00127294(unsigned *state);
-extern struct SlotBlock *func_0018ce64(void);
+extern struct Framebuffer *func_0018ce64(void);
+extern struct FramebufferManager *data_002426d8;
 
 /* GPU command/register state block (partial). */
 struct GpuVertexAttribute {
@@ -93,7 +123,9 @@ struct GpuState {
     int viewport_width;
     int viewport_height;
     unsigned char viewport_dirty;
-    unsigned char reserved31[0x427];
+    unsigned char reserved31[0x27];
+    unsigned active_texture;
+    unsigned char reserved5c[0x3fc];
     struct GpuVertexAttribute attributes[16];
     unsigned element_buffer;
     unsigned array_buffer;

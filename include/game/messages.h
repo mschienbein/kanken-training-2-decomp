@@ -35,4 +35,14 @@ extern const unsigned short data_002276bc[];
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern float func_0017a424(const struct MessageLayout *layout);
+extern void func_00177198(struct MessageLayout *layout, const struct W11TextResource *archive, int index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,0 +1,79 @@
+#ifndef GAME_DISPLAY_GROUPS_H
+#define GAME_DISPLAY_GROUPS_H
+
+struct W17SmallCollection;
+struct W6DisplayCollection;
+struct W17WideHandle;
+struct W17WideCollection;
+struct W18DisplayCollection;
+struct W18WideDisplayCollection;
+struct W17Panel1068;
+struct W17DisplayGroup;
+struct W17Panel1578;
+struct W17Panel16e8;
+struct W17Panel1dc4;
+struct W17Panel395c;
+struct W17Panel43f0;
+
+#include "game/screen.h"
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+
+
+
+
+
+
+struct W17SmallCollection {
+    DisplayHandle *handles[9];
+};
+struct W6DisplayCollection {
+    unsigned char reserved00[0x18];
+    struct DisplayObject **objects[1];
+};
+struct W17WideHandle {
+    unsigned int reserved00;
+    DisplayObject *object;
+    DisplayObject *get_object() { return object; }
+};
+struct W17WideCollection {
+    unsigned int reserved00;
+    W17WideHandle *handles[11];
+    W17WideHandle *at(int index) { return handles[index]; }
+};
+struct W18DisplayCollection {
+    DisplayHandle *handles[10];
+};
+struct W18WideDisplayCollection {
+    DisplayHandle *handles[27];
+};
+
+extern "C" {
+
+
+extern W17DisplayGroup bss_00290e60;
+void func_0017a7e4(W17DisplayGroup *group, int index, int mode, int duration);
+
+extern W17DisplayGroup bss_00290f60;
+
+extern W17DisplayGroup data_0023f004;
+extern W17DisplayGroup bss_00290e2c;
+void func_00183208(DisplayObject *object);
+void func_0017a938(W17DisplayGroup *group, int index, int duration);
+
+
+extern W17DisplayGroup data_0023efdc;
+extern W17DisplayGroup bss_00290d8c;
+
+extern W17DisplayGroup bss_00290dd8;
+
+
+extern W17DisplayGroup bss_002910b4;
+
+extern W17DisplayGroup bss_0029101c;
+extern W17DisplayGroup bss_00290e98;
+}
+#endif
+
+#endif

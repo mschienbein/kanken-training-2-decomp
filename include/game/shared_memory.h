@@ -2,7 +2,8 @@
 #define GAME_SHARED_MEMORY_H
 #include "ctr/svc.h"
 struct SharedMemory {
-    unsigned reserved00[2];
+    unsigned state;
+    unsigned reserved04;
     unsigned size;
     unsigned char reserved0c[0x74];
 #ifndef __cplusplus

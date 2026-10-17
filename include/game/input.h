@@ -93,9 +93,12 @@ struct InputOwner {
 };
 
 struct TouchDeviceState {
-    unsigned char reserved00[0x0c];
+    unsigned char reserved00[4];
+    unsigned direction;
+    unsigned char reserved08[4];
     unsigned int active;
-    unsigned char reserved10[8];
+    unsigned buttons;
+    unsigned reserved14;
     unsigned flags;
     unsigned char reserved1c[8];
     unsigned int released;

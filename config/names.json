@@ -746,14 +746,6 @@
       "address": 1461196,
       "evidence": "c008: src/solo/func_002073fc.cpp whole-function MATCH emits an external _ZN7S2073fc12WindowMotionC1Eififififif reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
     },
-    "_ZN7S2073fc18WindowLabelBindingC1EiiPKc": {
-      "address": 1461156,
-      "evidence": "c008: src/solo/func_002073fc.cpp whole-function MATCH emits an external _ZN7S2073fc18WindowLabelBindingC1EiiPKc reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
-    },
-    "_ZN7S2073fc18WindowLabelBindingC1Ev": {
-      "address": 1461116,
-      "evidence": "c008: src/solo/func_002073fc.cpp whole-function MATCH emits an external _ZN7S2073fc18WindowLabelBindingC1Ev reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
-    },
     "_ZN9NameTableC1EiiPKciz": {
       "address": 1461596,
       "evidence": "c006 integration canonical NameTable: same constructor entry proven by w8a, w10f, L002 and L003 whole-function matches; semantic class name [INFERENCE]"
@@ -1093,6 +1085,106 @@
     "strncmp": {
       "address": 1636448,
       "evidence": "0x18f860 is a bounded NUL-terminated string comparison with aligned word and byte fallback paths; callers compare fixed names and string prefixes."
+    },
+    "_ZN14W17TexturePane7destroyEv": {
+      "address": 1899644,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. The original nondeleting texture-pane destructor assigns its class dispatch table and returns the result of base destruction; method naming is [INFERENCE]."
+    },
+    "_ZN14ScrollPositionC1Ev": {
+      "address": 1101360,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Caller 0x00103c88 allocates a 0x64-byte object, invokes this initializer and retains its pointer; [INFERENCE] descriptive class name."
+    },
+    "_ZN14ScrollPositionC2Ev": {
+      "address": 1101360,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object constructor alias for the same 0x64-byte initializer."
+    },
+    "_ZN10MotionPairC1Ev": {
+      "address": 1510816,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Callers initialize consecutive two-float members and reuse the returned this pointer; [INFERENCE] descriptive class name."
+    },
+    "_ZN10MotionPairC2Ev": {
+      "address": 1510816,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object constructor alias for the two-float member initializer."
+    },
+    "_ZN14ControlTriplet5clearEv": {
+      "address": 1470632,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Callers 0x001e8b10/0x001e9ea4 reset the same 0x24-byte member constructed by 0x00170388; [INFERENCE] descriptive class/method names."
+    },
+    "_ZN14ControlTripletC1Ev": {
+      "address": 1508232,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Callers initialize a separate 0x24-byte byte-and-float member; [INFERENCE] descriptive class name."
+    },
+    "_ZN14ControlTripletC2Ev": {
+      "address": 1508232,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object constructor alias for the separate 0x24-byte member initializer."
+    },
+    "_ZN15TextDecoderBaseC1Ev": {
+      "address": 1945860,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. func_001db104 initializes a decoder dispatch-table pointer and is called as the base construction step by func_001daf74; reconstructed class name."
+    },
+    "_ZN15TextDecoderBaseC2Ev": {
+      "address": 1945860,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC emits the C2 alias of the same reconstructed decoder base constructor as C1 at func_001db104."
+    },
+    "_ZTV15TextDecoderBase": {
+      "address": 2247864,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. The original base constructor writes data_00224cc0; ARMCC's native virtual constructor references its vtable with addend 8, fixing the symbol base at 0x00224cb8."
+    },
+    "_ZN13DisplayTargetC1Ev": {
+      "address": 1144916,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Natural C++ constructor binding for the catalogued display-target initializer; class name is inferred."
+    },
+    "_ZN13DisplayTargetC2Ev": {
+      "address": 1144916,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC complete/base constructor alias for the same catalogued display-target initializer; class name is inferred."
+    },
+    "_ZTV13DisplayTarget": {
+      "address": 2248156,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. Observed display-target vtable prefix immediately precedes its sole retained virtual entry at data_00224de4; class name is inferred."
+    },
+    "_ZN12SlotBitOwnerD1Ev": {
+      "address": 1855952,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. func_002136d0 registers this object callback as an ObjectDestructor; it releases the TLS-sized bitmask slot indexed by the object's leading unsigned word. Class identity is inferred."
+    },
+    "_ZN12SlotBitOwnerD2Ev": {
+      "address": 1855952,
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object and complete-object destructor symbols alias the same generated section."
+    },
+    "_ZTV17HeapAllocatorDcb0": {
+      "address": 2244320,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. Constructor at 0x0010dcb0 stores the vtable address point 0x00223ee8; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
+    },
+    "_ZTV17HeapAllocatorDce8": {
+      "address": 2244336,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010dce8 sets vtable address point data_00223ef8; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
+    },
+    "_ZTV17HeapAllocatorDd20": {
+      "address": 2244352,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010dd20 sets vtable address point data_00223f08; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
+    },
+    "_ZTV17HeapAllocatorD500": {
+      "address": 2244132,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010d500 sets vtable address point data_00223e2c; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
+    },
+    "_ZTV17HeapAllocator6be4": {
+      "address": 2244476,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_00116be4 sets vtable address point data_00223f84; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
+    },
+    "_ZN14ResourceObjectC1Ev": {
+      "address": 1323800,
+      "evidence": "[INFERENCE] Native ResourceObject identity; c009 constructor own definition rederived at func_00143318."
+    },
+    "_ZN14ResourceObjectC2Ev": {
+      "address": 1323800,
+      "evidence": "ARMCC base/complete constructor aliases emitted by the same matching c009 definition."
+    },
+    "_ZTV14ResourceObject": {
+      "address": 2244820,
+      "evidence": "[INFERENCE] Native vtable identity; constructor stores address point data_002240dc, eight bytes after its ABI symbol base."
+    },
+    "_ZN18ResourceDescriptorC2EiiPKc": {
+      "address": 1461156,
+      "evidence": "Own native c009 ResourceDescriptor complete/base constructor definition is matched at func_00164ba4; descriptive identity [INFERENCE]."
     }
   }
 }

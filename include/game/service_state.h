@@ -29,24 +29,39 @@ struct X07NarrowCommand;
 struct ServiceState {
     signed char flag_00;
     signed char active;
-    unsigned char reserved02[3];
+    unsigned char flag_02;
+    unsigned char flag_03;
+    unsigned char flag_04;
     unsigned char flag_05;
     unsigned char mode;
-    unsigned char reserved07[2];
+    signed char flag_07;
+    signed char flag_08;
     signed char flag;
     unsigned char flag_0a;
     unsigned char option;
     unsigned char flag_0c;
     unsigned char flag_0d;
-    unsigned char reserved0e[6];
+    unsigned char reserved0e[2];
+    unsigned value10;
     unsigned applet_id;
     volatile unsigned state;
+};
+
+struct AppletStartupState {
+    signed char ready;
+    unsigned char requested;
+    unsigned char reserved02[2];
+    unsigned reasons;
+    union SynchronizationStorage event;
 };
 
 struct PendingState {
     unsigned char reserved00;
     unsigned char pending;
     signed char blocking;
+    unsigned char graphics_active;
+    unsigned char reserved04[4];
+    struct ServiceWaitObject *wait_object;
 };
 
 /* The handle-bearing object at 0x002430e0 is not the flag block above. */
@@ -180,7 +195,7 @@ struct X07NarrowCommand {
 
 struct WorkQueue {
     int enabled;
-    int reserved04;
+    int current;
     int active;
     unsigned char reserved0c[0x1018];
     unsigned writeIndex, readIndex;
@@ -201,7 +216,7 @@ extern void func_001008ac(void);
 extern void func_0010163c(void);
 extern void func_001016c4(void);
 __declspec(noreturn) extern void func_00100d74(void);
-extern signed char data_0023fdd8;
+extern struct AppletStartupState data_0023fdd8;
 extern struct ServiceRegistration bss_004b1c88;
 extern unsigned func_0019ed2c(struct ServiceRegistration *entry, unsigned event);
 extern int func_00113ddc(unsigned value);

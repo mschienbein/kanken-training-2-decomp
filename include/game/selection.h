@@ -15,7 +15,8 @@ struct W8DisplaySet;
 struct SelectionState {
     unsigned char reserved00[0x4c];
     short selection4c;
-    unsigned char reserved4e[4];
+    short previous;                     /* 0x4e; also queried as limit kind */
+    short category;                     /* 0x50 */
     short selection;
     short mode;
     unsigned char reserved56[2];

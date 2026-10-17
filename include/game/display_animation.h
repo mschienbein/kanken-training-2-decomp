@@ -1,6 +1,8 @@
 #ifndef GAME_DISPLAY_ANIMATION_H
 #define GAME_DISPLAY_ANIMATION_H
 
+struct InputSessionContext;
+
 struct ActionMetadata;
 struct ArchiveParseArena;
 struct ArchiveParseContext;
@@ -116,7 +118,9 @@ extern void func_0012fb4c(void);
 extern void func_00137e60(void);
 extern int func_00137fe8(void);
 extern void func_0014282c(float volume);
-extern int func_001462d4(struct AudioVolumeState *owner, unsigned short value);
+/* [INFERENCE] The owner is forwarded but unused. Preserve the full word: the
+ * matching caller sign-extends a device configuration byte, including negatives. */
+extern int func_001462d4(struct InputSessionContext *owner, int value);
 extern void func_0015434c(struct ServiceOutput *renderer);
 extern void func_00154f78(struct AudioPacketRouter *router, int index,
                    const struct AudioChannelPacket *packet);

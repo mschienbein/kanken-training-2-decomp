@@ -36,4 +36,11 @@ extern struct SignalState data_0024301c;
 }
 #endif
 
+
+union SynchronizationStorage {
+    struct StreamSemaphore semaphore;
+    unsigned words[2];
+    struct SignalState signal;
+};
+
 #endif

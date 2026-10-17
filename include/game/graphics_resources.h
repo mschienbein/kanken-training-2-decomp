@@ -10,7 +10,7 @@ struct GraphicsResources {
     BufferState buffers;
     unsigned reserved0c;
     struct GraphicsRenderer *renderer;
-    unsigned char reserved14[0x14];
+    unsigned field14, field18, field1c, field20, field24;
     struct GraphicsResource *resources[3];
 };
 

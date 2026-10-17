@@ -1,0 +1,21 @@
+#include "game/audio_dsp.h"
+#include "game/service_runtime.h"
+
+/* The indexed table has no recovered bound; the selector is a second typed view. */
+
+extern void func_00182210(void);
+extern int func_0018f018(void);
+extern void func_00182204(void);
+
+void func_00180e14(struct ServiceCoordinator *driver, float volume)
+{
+    func_00182210();
+    if (func_0018f018()) {
+        struct AudioDspParameterBlock *command = driver->storage.audio.voice_parameters[driver->completion_slot];
+        command->master_volume = volume;
+        command->flags |= 0x10000;
+        func_00182204();
+        return;
+    }
+    func_00182204();
+}

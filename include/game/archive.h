@@ -1,7 +1,7 @@
 #ifndef GAME_ARCHIVE_H
 #define GAME_ARCHIVE_H
-struct SoundType1Details;
 
+struct SoundType1Details;
 struct ArchiveAccess;
 struct ArchiveProvider;
 struct ArchiveProviderVTable;
@@ -15,6 +15,23 @@ struct SoundType3Info;
 struct SoundWaveFile;
 struct SoundWaveInfo;
 struct SoundWaveReader;
+struct ArchiveHandleVTable;
+struct BankFile;
+struct SoundArchiveAddon;
+struct SoundLookupProvider;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include "game/archive_resource.h"
 
@@ -34,9 +51,10 @@ struct ArchiveBlockReference {
 
 struct ArchiveFile {
     unsigned signature;                    /* 0x00 */
-    unsigned char reserved04[4];
+    unsigned short byte_order, header_size;
     unsigned version;                      /* 0x08 */
-    unsigned char reserved0c[8];
+    unsigned file_size;
+    unsigned short block_count, reserved12;
     struct ArchiveBlockReference blocks[2]; /* 0x14; references at 0x14 and 0x20 */
 };
 
@@ -89,7 +107,7 @@ struct ArchiveIndex {
     const struct ArchiveResourceTable *table;
 };
 
-struct ArchiveHandleVTable;
+
 struct ArchiveHandle {
     const struct ArchiveHandleVTable *vtable;
     struct ArchiveIndex *index;
@@ -135,7 +153,7 @@ struct ArchiveFileInfo {
 #endif
 };
 
-struct BankFile;
+
 struct SoundReference {
     unsigned short type;
     unsigned short reserved02;
@@ -200,7 +218,7 @@ struct SoundArchiveReader {
     const struct SoundArchiveInfo *info;
 };
 
-struct SoundArchiveAddon;
+
 struct SoundArchive {
     const void *vtable;
     const struct SoundArchiveReader *reader;
@@ -242,11 +260,19 @@ struct SoundPlayerResult {
     unsigned stream_buffer_times;
 };
 
+
+
 struct SoundArchiveAddonVTable {
     unsigned char reserved00[0x20];
     bool (*read_file)(struct SoundArchiveAddon *, unsigned, struct SoundFileResult *);
-    unsigned char reserved24[0x10];
+    unsigned char reserved24[8];
+    bool (*read_file_group)(struct SoundArchiveAddon *, unsigned, struct ArchiveResourceInfo *);
+    void (*read_file_location)(struct SoundArchiveAddon *, unsigned, struct ArchiveFileLocation *, int);
     bool (*read_player)(struct SoundArchiveAddon *, struct SoundPlayerResult *);
+    unsigned char reserved38[4];
+    bool (*read_sequence)(struct SoundArchiveAddon *, unsigned, struct SoundType1Info *);
+    unsigned char reserved40[8];
+    bool (*read_wave_sound)(struct SoundArchiveAddon *, unsigned, struct SoundType3Info *);
 };
 struct SoundArchiveAddon {
     const struct SoundArchiveAddonVTable *vtable;
@@ -264,9 +290,23 @@ struct SoundArchiveAddon {
             return false;
         return vtable->read_player(this, out);
     }
+    bool read_sequence(unsigned id, SoundType1Info *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_sequence(this, id, out);
+    }
+    bool read_wave_sound(unsigned id, SoundType3Info *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_wave_sound(this, id, out);
+    }
+    void read_file_location(unsigned id, ArchiveFileLocation *out, int mode)
+    {
+        if (enabled) vtable->read_file_location(this, id, out, mode);
+    }
 #endif
 };
-struct SoundLookupProvider;
+
 struct SoundLookupVTable {
     unsigned char reserved00[0x0c];
     const void *(*lookup)(struct SoundLookupProvider *provider, unsigned int sound_id);
@@ -430,6 +470,21 @@ extern struct SoundWaveReader *func_001d3c78(struct SoundWaveReader *reader,
                                     const struct SoundWaveFile *file, unsigned char relocated);
 extern struct WordPair *func_00194a34(struct WordPair *out, unsigned code);
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+
+
+
+extern "C" {
+bool func_00140e14(const SoundArchiveReader *reader, unsigned file_id, ArchiveFileLocation *out, int mode);
+bool func_00138edc(const SoundArchive *archive, unsigned file_id, ArchiveFileLocation *out);
+bool func_00185884(const SoundArchive *archive, unsigned sound_id, SoundType3Info *out);
+bool func_00185b44(const SoundArchive *archive, unsigned sound_id, SoundType1Info *out);
 }
 #endif
 

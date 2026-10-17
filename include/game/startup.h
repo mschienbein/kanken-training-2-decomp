@@ -17,8 +17,13 @@ struct ApplicationControl {
     void (*callback)(void);
 };
 
+struct ResourceEvent;
 struct ResourceOptions {
-    unsigned char reserved00[0x18];
+    unsigned active;
+    unsigned pending;
+    unsigned reserved08[2];
+    void *allocation;
+    struct ResourceEvent *event;
     int enabled;
     int group;
     int count;

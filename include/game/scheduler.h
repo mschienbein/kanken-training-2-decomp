@@ -1,11 +1,16 @@
 #ifndef GAME_SCHEDULER_H
 #define GAME_SCHEDULER_H
+
+struct W19aScheduledTask;
+struct W19aScheduler;
+struct W19aTaskSelection;
+#include "game/service_state.h"
+struct ScheduledTaskBinding { int (*callback)(void); int wait; };
 struct ScheduledTask {
     unsigned short enabled;
     short previous, next;
     unsigned short priority;
-    void (*callback)(void);
-    int wait;
+    struct ScheduledTaskBinding binding;
     int repeat;
     int reserved14;
 };
@@ -14,6 +19,7 @@ struct Scheduler {
     int current;
     int next;
     short end, begin;
+    int pending;
 };
 #ifdef __cplusplus
 extern "C" {
@@ -37,4 +43,18 @@ extern int func_00141c70(void);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+
+
+
+extern "C" {
+
+
+extern int func_001900a8(void);
+void func_00110a70(void);
+}
+#endif
+
 #endif

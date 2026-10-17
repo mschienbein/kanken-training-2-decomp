@@ -16,32 +16,60 @@ struct Command {
     unsigned char reserved10[12];
 };
 
+/* This registry resource is not the unrelated stream RenderResource. */
+struct CommandResource {
+    unsigned id;
+    void *memory;
+    unsigned format;
+    int width;
+    int height;
+    unsigned module;
+    struct CommandResource *next;
+};
+
 struct CommandQueue {
-    unsigned char reserved00[4];
-    unsigned char *base;                    /* 0x04 */
-    unsigned char reserved08[4];
-    unsigned offset;                        /* 0x0c */
-    unsigned char reserved10[4];
-    unsigned committed_offset;              /* 0x14 */
-    struct Command *commands;               /* 0x18 */
+    unsigned id;
+    unsigned char *base;
+    unsigned capacity;
+    unsigned offset;
+    unsigned committed_bytes;               /* 0x10 */
+    unsigned committed_offset;
+    struct Command *commands;
     unsigned char reserved1c[4];
-    int count;                              /* 0x20 */
-    int completed_count;                    /* 0x24 */
+    int count;
+    int completed_count;
+    int cursor;                             /* 0x28 */
+    unsigned flags;
+    unsigned state30;
+    unsigned state34;
+    void (*callback)(void);                  /* 0x38; no distinct argument prepared */
+    unsigned reserved3c;
+    struct CommandQueue *next;
 };
 
 struct CommandSystem {
-    unsigned char reserved00[0x11];
-    unsigned char pending;                  /* 0x011 */
-    unsigned char enabled;                  /* 0x012 */
+    unsigned char reserved00[8];
+    int display_heights[2];
+    unsigned char initialized;              /* 0x10 */
+    unsigned char pending;
+    unsigned char enabled;
     unsigned char reserved13[5];
-    unsigned char ready;                    /* 0x018 */
-    unsigned char reserved19[0x83];
-    struct CommandQueue *writing;           /* 0x09c */
-    struct CommandQueue *executing;         /* 0x0a0 */
-    unsigned char reserveda4[0xb4];
-    int counter;                            /* 0x158 */
-    unsigned char reserved15c[4];
-    void (*callback)(int event);            /* 0x160 */
+    unsigned char ready;
+    unsigned char reserved19[3];
+    struct CommandQueue *queues[32];         /* 0x1c; also walked by shutdown */
+    struct CommandQueue *writing;
+    struct CommandQueue *executing;
+    struct CommandResource *resources[32];   /* 0xa4 */
+    int resource_index;
+    struct CommandResource *selected[3];
+    unsigned values[3];
+    unsigned modes[3];
+    unsigned char reserved14c[8];
+    int begin_counter;                      /* 0x154 */
+    int counter;
+    void (*begin_callback)(int event);
+    void (*callback)(int event);
+    int display_mode;
 };
 
 extern struct CommandSystem bss_0049ecf0;

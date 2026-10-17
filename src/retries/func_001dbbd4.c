@@ -3,9 +3,9 @@ static __forceinline void advance_progress(struct NotificationPayload *payload, 
 {
     struct W10CourseProgress *state;
     if (mode != 2)
-        state = &payload->storage.fields.primary;
+        state = &payload->storage.fields.courses[0];
     else
-        state = &payload->storage.fields.secondary;
+        state = &payload->storage.fields.courses[1];
     switch (mode) {
     case 0:
         state->progress++;

@@ -9,7 +9,8 @@ struct AudioDspReply;
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct AudioDspParameterBlock {
     unsigned int flags;
-    unsigned char reserved04[0x0c];
+    float master_volume;
+    unsigned char reserved08[8];
     unsigned short value10;
     unsigned char reserved12[4];
     unsigned short value16;

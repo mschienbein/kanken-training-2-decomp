@@ -1,6 +1,6 @@
 #include "game/command_state.h"
 struct VectorParameter *func_00174f04(struct VectorParameter *parameter,
-                                    int extra, int first, int second,
+                                    const wchar_t *extra, int first, int second,
                                     float x, float y, float z)
 {
     parameter->extra = extra;

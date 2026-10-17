@@ -1,5 +1,8 @@
 #ifndef GAME_EXP_HEAP_H
 #define GAME_EXP_HEAP_H
+
+#include <stddef.h>
+#include "game/runtime.h"
 #include <stdarg.h>
 
 struct AllocatorInterface;
@@ -46,8 +49,19 @@ struct ManagedExpHeap {
     unsigned allocations;
 };
 struct LockedExpHeap { struct ManagedExpHeap base; struct StreamMutex mutex; };
+struct AllocatorLink {
+    struct AllocatorLink *previous;
+    struct AllocatorLink *next;
+};
+struct AllocatorBase {
+    const unsigned *vtable;
+    unsigned char reserved04[8];
+    unsigned outstanding;
+    struct AllocatorLink *children;
+    unsigned reserved14;
+};
 struct HeapArena {
-    unsigned char reserved00[0x18];
+    struct AllocatorBase base;
     struct ExpHeap heap;
     unsigned allocations;
     unsigned char *lower;
@@ -124,6 +138,19 @@ extern struct RuntimeTypeInfo *func_001f017c(const struct RuntimeTypedObject *ob
 extern struct RuntimeTypeInfo *func_001f0188(const struct RuntimeTypedObject *object);
 extern struct RuntimeTypeInfo *func_001f0194(const struct RuntimeTypedObject *object);
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+
+
+
+extern "C" {
+extern const unsigned data_00223c98[];
+void func_00121bc4(struct ExpHeap *heap);
 }
 #endif
 

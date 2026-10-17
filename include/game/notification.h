@@ -25,20 +25,38 @@ struct W10CourseProgress {
     short progress;
 };
 
+struct NotificationDayEntry {
+    unsigned char flags;
+    unsigned char reserved01[3];
+    int day;
+};
+struct NotificationHistoryEntry {
+    signed char status;
+    unsigned char kind, category, reserved03;
+    short x, y;
+};
+struct NotificationHistoryTrack {
+    int current;
+    struct NotificationHistoryEntry entries[10];
+};
+
 struct NotificationFields {
     unsigned char reserved00[0x32];
     unsigned char flags;
     unsigned char reserved33;
     signed char selection;
     signed char mode;
-    unsigned char reserved36[0x25a2];
+    unsigned char reserved36[2];
+    int history_enabled;
+    unsigned char reserved3c[0x259c];
     struct W10HistoryGrade history[12];
-    unsigned char reserved61d8[0x660];
+    unsigned char reserved61d8[0xc0];
+    struct NotificationDayEntry days[180];
     unsigned char result_flags[12][0x640];
-    unsigned char reservedb338[0x3f0];
-    struct W10CourseProgress primary;
-    struct W10CourseProgress secondary;
-    unsigned char reservedb730[0x10];
+    struct NotificationHistoryTrack tracks[12];
+    struct W10CourseProgress courses[2];
+    signed char channels[12];
+    unsigned char reservedb73c[4];
 };
 
 /* UTF-16 and word-copy clients address one serialized storage object. */
@@ -103,6 +121,23 @@ extern "C" {
 #endif
 extern const short data_002181b4[5];
 extern void func_001dbbd4(int mode);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct NotificationCache {
+    unsigned char reserved00[0x748];
+    unsigned generation;
+    unsigned char reserved74c[0xdc];
+    unsigned char active;
+    unsigned char reserved829[3];
+    unsigned count;
+};
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct NotificationCache bss_0028baf0;
 #ifdef __cplusplus
 }
 #endif

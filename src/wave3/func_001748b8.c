@@ -1,9 +1,5 @@
+#include "game/command_state.h"
 #include "game/runtime.h"
-
-struct ArrayOwner {
-    unsigned char reserved00[8];
-    void *elements;
-};
 
 extern void *func_00100c80(void *elements, void *(*destroy)(void *element));
 

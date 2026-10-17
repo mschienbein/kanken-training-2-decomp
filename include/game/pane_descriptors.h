@@ -1,6 +1,8 @@
 #ifndef GAME_PANE_DESCRIPTORS_H
 #define GAME_PANE_DESCRIPTORS_H
 
+struct PanePlacement;
+
 #include "game/render_parameter.h"
 #include "game/property_descriptor.h"
 
@@ -47,6 +49,32 @@ extern void func_00210620(void);
 extern void func_00213798(void);
 extern void func_00213d3c(void);
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+
+struct PanePlacement {
+    float x, y, depth;
+    PanePlacement(float depth_value, float x_value, float y_value)
+        : x(x_value), y(y_value), depth(depth_value) {}
+};
+
+extern "C" {
+extern NameTable *bss_00244378[30];
+void func_00206afc(void);
+extern PanePlacement *bss_00246f7c[11];
+void func_0020fa08(void);
+extern NameTable *bss_00290e2c[10];
+void func_00212b60(void);
+extern NameTable *bss_00290e98[11];
+void func_002131b4(void);
+extern NameTable *bss_002910b4[20];
+void func_00214794(void);
+extern NameTable *bss_0029101c[19];
+void func_002153f4(void);
 }
 #endif
 

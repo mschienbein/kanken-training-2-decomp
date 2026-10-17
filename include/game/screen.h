@@ -81,7 +81,10 @@ struct DisplayBindingTarget {
 struct DisplayBinding {
     unsigned char reserved00[8];
     float value;
-    unsigned char reserved0c[0x14];
+    unsigned char reserved0c[8];
+    int mode;
+    float duration;
+    unsigned reserved1c;
     struct DisplayBindingTarget *target;
     unsigned reserved24;
     struct DisplayPaneLink *link;
@@ -118,12 +121,16 @@ struct ResourceRegistrationGroup {
     struct ResourceRegistrationSlot entries[8];
 };
 struct ResourceRegistrationState {
-    unsigned char reserved00[0x18];
+    unsigned initialized;
+    unsigned char reserved04[8];
+    unsigned first, second, third;
     struct ResourceRegistrationGroup groups[2];
+    unsigned char active, pending;
+    unsigned short reservedd62;
+    unsigned count;
 };
 struct MenuOptionGroup;
-struct SelectionList;
-struct AlternateSelectionList;
+struct Screen;
 struct ScreenInitializationState;
 struct W8DisplaySet;
 struct WidgetActionState {
@@ -139,8 +146,14 @@ struct DisplayQueueFlags {
     struct DisplayObject *object;
 };
 struct DisplayQueueCounter {
-    unsigned char reserved00[8];
-    int count;
+    unsigned ready;
+    unsigned count;
+    unsigned enabled;
+    int mode;
+    unsigned char active;
+    unsigned char reserved11[3];
+    int counter;
+    unsigned capacity;
 };
 struct DisplayTexCoords {
     float uv[4][2];
@@ -153,9 +166,12 @@ struct DisplayVertexArray {
     struct DisplayTexCoords *entries;
 };
 
+struct Material;
 struct DisplayVertexPane {
     struct DisplayPane pane;
-    unsigned char reservedb8[0x98];
+    unsigned char reservedb8[0x84];
+    struct Material *material;
+    unsigned char reserved140[0x10];
     struct DisplayVertexArray vertices;
 };
 
@@ -183,7 +199,7 @@ struct DisplayHandle {
 
 struct W8DisplayHandle {
     struct DisplayObject *object;
-    unsigned char reserved04[8];
+    float x, y;
     float scale_x;
     float scale_y;
 };
@@ -277,13 +293,14 @@ extern struct DisplayQueueCounter bss_00495c70;
 extern int func_0019efd0(void);
 extern void func_001b6c90(struct MenuOptionGroup *options);
 extern void func_001b7e9c(struct MenuOptionGroup *options);
-extern void func_00176b24(struct SelectionList *selection);
-extern void func_0017697c(struct AlternateSelectionList *selection);
+extern void func_00176b24(struct Screen *selection);
+extern void func_0017697c(struct Screen *selection);
 extern void func_00175b8c(void *screen);
 extern void func_00179160(struct W8DisplaySet *set, int index, float x, float y);
+extern void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y);
 extern void func_00175ab8(void *screen, int index,
                          int red, int green, int blue, int alpha);
-extern void func_00166eac(void *screen, int index, float x, float y);
+extern void func_00166eac(struct W8DisplaySet *screen, int index, float x, float y);
 extern void func_00175848(void);
 extern void func_001e807c(struct ScreenInitializationState *state);
 extern void func_001adabc(struct WidgetActionState *state);
@@ -344,8 +361,8 @@ extern void func_0016de90(struct Screen *screen, int index);
 
 struct W10DrawingInput {
     unsigned char reserved00[0xc];
-    struct DisplayObject *display;
-    unsigned char reserved10[0xa];
+    struct DisplayObject *displays[3];
+    unsigned char reserved18[2];
     unsigned short characters[0x440];
     short field89a;
     short count;

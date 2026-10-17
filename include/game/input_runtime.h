@@ -12,8 +12,13 @@ struct InputLatchSnapshot {
 };
 struct InputSessionContext {
     unsigned char active;
-    unsigned char reserved01[0x3b];
-    int selected;
+    unsigned char reserved01[3];
+    float first_gain, volume;
+    float channels[2];
+    AuxCallback callbacks[2];
+    void *contexts[2];
+    unsigned char reserved24[0x10];
+    struct StreamMutex mutex;
 };
 struct ShortInputUpdate {
     unsigned short flags, value, reserved04, mode;
@@ -47,4 +52,18 @@ extern void func_00137118(void);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_0014b244(struct InputSessionContext *context, signed char index,
+                          AuxCallback callback, void *argument);
+extern void func_00152428(struct InputSessionContext *context, int index, float value);
+extern void func_001487cc(struct InputSessionContext *context, float value);
+extern void func_0014cbf4(struct InputSessionContext *context, float value);
+extern void func_0017e858(struct InputSessionContext *context, unsigned index, unsigned char enabled);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

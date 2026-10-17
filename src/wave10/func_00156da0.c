@@ -1,9 +1,8 @@
-struct ResetReference {
-    unsigned value;
-};
+#include "game/reset_reference.h"
 
-/* No direct callers establish a result; only the writable pointer is evidenced. */
-void func_00156da0(struct ResetReference *reference)
+/* The vector-construction runtime consumes the callback's initialized object. */
+struct ResetReference *func_00156da0(struct ResetReference *reference)
 {
     reference->value = 0;
+    return reference;
 }

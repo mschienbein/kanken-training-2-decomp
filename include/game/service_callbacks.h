@@ -25,7 +25,8 @@ struct ServiceCallbacks {
     ServiceNotifyCallback complete;
     void (*reserved_callback)(void);
     ServiceNotifyCallback ready;
-    unsigned reserved34[2];
+    ServiceNotifyCallback before;
+    ServiceNotifyCallback after;
     void (*shutdown)(void);
 };
 
