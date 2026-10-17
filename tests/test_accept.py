@@ -5,6 +5,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import accept  # noqa: E402
@@ -159,22 +160,33 @@ class AcceptGateTest(unittest.TestCase):
         self.review("PASS_WITH_QUALIFICATIONS", row="QUALIFIED", qualifications=["preserved original bug"])
         self.assertEqual(accept.finalize("c001", 1)["reviews"][0]["verdict"], "PASS_WITH_QUALIFICATIONS")
 
-    def stubbed_prepare(self, name, units, literal_models=("none", "none"), literal_rebindings=(), receipt_units=None):
+    def stubbed_prepare(self, name, units, literal_models=None, literal_rebindings=(), receipt_units=None,
+                        linker_model="armlink5-inline-branchnop-v2", literal_model="none", linker_models=None):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
-        receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
-                   "inputs": {"linker_model": "armlink5-inline-branchnop-v2"},
-                   "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []},
+        receipt = {"result": "PASS", "outputs": {"code_bin_sha256": "x"},
+                   "units": [{"source": u["source"], "functions": u["functions"],
+                              "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []},
                               "literal_rebindings": list(literal_rebindings)} for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
         if receipt_units is not None:
             receipt["units"] = receipt_units
-            receipt["inputs"]["linker_model"] = "armlink5-inline-branchnop-v3"
-        models = iter(literal_models)
+        literal_choices = iter(literal_models) if literal_models is not None else None
+        linker_choices = iter(linker_models) if linker_models is not None else None
+        self.build_calls = []
+
+        def build(name, matches, **kwargs):
+            # The choice must already be frozen when the first build starts.
+            frozen = accept.load_json(matches.parent / "selection.json")
+            self.assertEqual(frozen, {"linker_model": kwargs["linker_model"], "literal_model": kwargs["literal_model"]})
+            self.build_calls.append((name, kwargs))
+            return {**receipt, "name": name, "fresh": kwargs["fresh"], "inputs": {
+                "linker_model": next(linker_choices) if linker_choices is not None else kwargs["linker_model"],
+                "literal_model": next(literal_choices) if literal_choices is not None else kwargs["literal_model"],
+            }}
+
         stubs = {
-            "build": types.SimpleNamespace(
-                build=lambda *a, **k: {**receipt, "inputs": {**receipt["inputs"], "literal_model": next(models)}},
-                BuildError=RuntimeError),
+            "build": types.SimpleNamespace(build=build, BuildError=RuntimeError),
             "denominator": types.SimpleNamespace(verify=lambda: None, read_history=lambda: [{}]),
             "interfaces": types.SimpleNamespace(
                 audit=lambda units, root: {"units": [], "disagreements": [], "policy": []},
@@ -189,7 +201,7 @@ class AcceptGateTest(unittest.TestCase):
         try:
             cand = self.root / f"config/candidates-{name}.json"
             cand.write_text(json.dumps({"units": units}), encoding="utf-8")
-            return accept.prepare(name, cand)
+            return accept.prepare(name, cand, linker_model=linker_model, literal_model=literal_model)
         finally:
             accept.clean_commit = real_clean_commit
             for k, v in saved.items():
@@ -201,7 +213,9 @@ class AcceptGateTest(unittest.TestCase):
     def test_prepare_records_every_gate_result(self):
         """The prepare record must show each gate's outcome, not only the overall result."""
         record = self.stubbed_prepare("c009", [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}])
-        self.assertEqual(set(record["checks"]), {"build_a_pass", "build_b_pass", "builds_identical", "suite_pass", "interfaces_pass"})
+        self.assertEqual(set(record["checks"]), {
+            "build_a_pass", "build_b_pass", "builds_identical", "models_selected", "suite_pass", "interfaces_pass",
+        })
         self.assertEqual(record["result"], "PASS")
         self.assertEqual(record["commit"], "0" * 40)
         on_disk = json.loads((self.root / "accept/c009/prepare.json").read_text(encoding="utf-8"))
@@ -211,6 +225,13 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(record["linker_rewrites"], {"func_00100000": [{"kind": "inline_nop"}]})
         self.assertEqual(record["literal_model"], "none")
         self.assertEqual(record["literal_rebindings"], {})
+        self.assertEqual(accept.load_json(self.root / "accept/c009/selection.json"), {
+            "linker_model": "armlink5-inline-branchnop-v2", "literal_model": "none",
+        })
+        self.assertEqual([call[1] for call in self.build_calls], [
+            {"fresh": True, "linker_model": "armlink5-inline-branchnop-v2", "literal_model": "none"},
+        ] * 2)
+        accept.verify_selection(self.root / "accept/c009", record)
 
     def test_two_builds_must_use_the_same_literal_model(self):
         units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
@@ -221,7 +242,8 @@ class AcceptGateTest(unittest.TestCase):
     def test_prepare_records_independent_literal_model_and_rebindings(self):
         units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
         rebindings = [{"rule": "anonymous-string-records-v1", "record_count": 3, "size": 46}]
-        record = self.stubbed_prepare("c012", units, ("anonymous-string-records-v1",) * 2, rebindings)
+        record = self.stubbed_prepare("c012", units, literal_rebindings=rebindings,
+                                     literal_model="anonymous-string-records-v1")
         self.assertEqual(record["result"], "PASS")
         self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v2")
         self.assertEqual(record["literal_model"], "anonymous-string-records-v1")
@@ -234,6 +256,177 @@ class AcceptGateTest(unittest.TestCase):
         path.write_text(json.dumps(record), encoding="utf-8")
         self.review()
         self.assertEqual(accept.finalize("c001", 1)["literal_model"], "anonymous-string-records-v1")
+
+    def test_prepare_cli_passes_explicit_independent_choices(self):
+        with patch.object(accept, "prepare", return_value={
+            "result": "PASS", "checks": {}, "suite": {"summary": "stub"},
+        }) as prepare, patch("builtins.print"):
+            self.assertEqual(accept.main([
+                "prepare", "--checkpoint", "c015", "--candidates", "config/candidates.json",
+                "--linker-model", "armlink5-inline-branchnop-v3",
+                "--literal-model", "anonymous-string-records-v1",
+            ]), 0)
+        prepare.assert_called_once_with("c015", Path("config/candidates.json"), False,
+                                        "armlink5-inline-branchnop-v3", "anonymous-string-records-v1")
+
+    def test_explicit_selection_is_bound_in_prepare_receipts_and_history(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c015", units, linker_model="armlink5-inline-branchnop-v3",
+                                     literal_model="anonymous-string-records-v1")
+        out = self.root / "accept/c015"
+        self.assertEqual(record["schema_version"], 2)
+        self.assertEqual(record["selection_sha256"], accept.sha256_file(out / "selection.json"))
+        self.assertEqual([call[1] for call in self.build_calls], [
+            {"fresh": True, "linker_model": "armlink5-inline-branchnop-v3",
+             "literal_model": "anonymous-string-records-v1"},
+        ] * 2)
+        for suffix, summary in zip(("a", "b"), record["builds"]):
+            self.assertEqual(summary["receipt_sha256"], accept.sha256_file(out / "receipts" / f"c015-{suffix}.json"))
+        self.review(name="c015")
+        entry = accept.finalize("c015", 1)
+        for key in ("selection_sha256", "linker_model", "literal_model"):
+            self.assertEqual(entry[key], record[key])
+        self.assertEqual(accept.verify_history(), [entry])
+
+    def test_two_builds_must_use_the_same_linker_model(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c015", units, linker_models=(
+            "armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3"))
+        self.assertEqual(record["result"], "FAIL")
+        self.assertFalse(record["checks"]["builds_identical"])
+        self.assertFalse(record["checks"]["models_selected"])
+        with self.assertRaisesRegex(accept.AcceptError, "prepare is FAIL"):
+            accept.finalize("c015", 1)
+
+    def test_identical_builds_cannot_silently_substitute_another_selected_model(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c015", units, linker_model="armlink5-inline-branchnop-v3",
+                                     linker_models=("armlink5-inline-branchnop-v2",) * 2)
+        self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v3")
+        self.assertTrue(record["checks"]["builds_identical"])
+        self.assertFalse(record["checks"]["models_selected"])
+        self.assertEqual(record["result"], "FAIL")
+
+    def test_identical_builds_cannot_silently_enable_the_literal_model(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c015", units, literal_models=("anonymous-string-records-v1",) * 2)
+        self.assertEqual(record["literal_model"], "none")
+        self.assertTrue(record["checks"]["builds_identical"])
+        self.assertFalse(record["checks"]["models_selected"])
+        self.assertEqual(record["result"], "FAIL")
+
+    def test_invalid_selection_is_refused_before_checkpoint_creation(self):
+        for kwargs in ({"linker_model": "armlink5-inline-branchnop-v1"}, {"literal_model": "unknown"}):
+            with self.assertRaisesRegex(accept.AcceptError, "unknown or retired|unknown literal"):
+                accept.prepare("c015", self.root / "unused.json", **kwargs)
+        self.assertFalse((self.root / "accept/c015").exists())
+
+    def test_selection_change_after_review_blocks_finalize(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c015", units, literal_model="anonymous-string-records-v1")
+        self.review(name="c015")
+        path = self.root / "accept/c015/selection.json"
+        selection = accept.load_json(path)
+        selection["literal_model"] = "none"
+        path.write_text(json.dumps(selection), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "model selection changed"):
+            accept.finalize("c015", 1)
+
+    def test_receipt_mapping_change_after_review_blocks_finalize(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c015", units, literal_model="anonymous-string-records-v1",
+                             literal_rebindings=[{"records": [{"candidate_offset": 0, "output_offset": 4, "size": 4}]}])
+        self.review(name="c015")
+        path = self.root / "accept/c015/receipts/c015-b.json"
+        receipt = accept.load_json(path)
+        receipt["units"][0]["literal_rebindings"] = []
+        path.write_text(json.dumps(receipt), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "build b receipt changed"):
+            accept.finalize("c015", 1)
+
+    def test_verify_history_checks_selected_prepare_and_full_receipts(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c015", units, literal_model="anonymous-string-records-v1")
+        self.review(name="c015")
+        accept.finalize("c015", 1)
+        for relative, message in (
+            ("prepare.json", "selected prepare changed"),
+            ("selection.json", "model selection changed"),
+            ("receipts/c015-a.json", "build a receipt changed"),
+            ("receipts/c015-b.json", "build b receipt changed"),
+        ):
+            with self.subTest(relative=relative):
+                path = self.root / "accept/c015" / relative
+                original = path.read_text(encoding="utf-8")
+                path.write_text(original + "\n", encoding="utf-8")
+                with self.assertRaisesRegex(accept.AcceptError, message):
+                    accept.verify_history()
+                path.write_text(original, encoding="utf-8")
+
+    def test_rehashed_history_cannot_change_the_prepared_model(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c015", units, literal_model="anonymous-string-records-v1")
+        self.review(name="c015")
+        entry = accept.finalize("c015", 1)
+        entry["literal_model"] = "none"
+        entry["entry_sha256"] = accept.entry_hash(entry)
+        accept.HISTORY.write_text(json.dumps(entry) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "history models differ"):
+            accept.verify_history()
+
+    def test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings(self):
+        self.review()
+        accept.finalize("c001", 1)
+        mappings = [{"rule": "anonymous-string-records-v1", "records": [
+            {"candidate_offset": 0, "output_offset": 4, "size": 4},
+            {"candidate_offset": 4, "output_offset": 0, "size": 4},
+        ]}]
+        receipt_units = [{"source": "src/a.c", "functions": ["func_00100000"], "literal_rebindings": mappings}]
+        record = self.stubbed_prepare("c015", [], receipt_units=receipt_units,
+                                     literal_model="anonymous-string-records-v1")
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["model_changes"], {
+            "literal_model": {"previous": "none", "selected": "anonymous-string-records-v1"},
+        })
+        self.assertEqual(record["literal_rebindings"], {"src/a.c": mappings})
+        self.assertEqual(record["model_uses"]["src/a.c"]["literal_rebindings"], mappings)
+        self.assertEqual(record["model_reviews"], {"func_00100000": {"source": "src/a.c", "rules": ["L1"]}})
+        self.assertEqual(accept.new_functions(self.root / "accept/c015", record), {"func_00100000": "src/a.c"})
+        empty = {"reviewer": "rev1", "family": "openai", "verdict": "PASS", "functions": [],
+                 "findings": [], "qualifications": []}
+        path = self.root / "empty-model-review.json"
+        path.write_text(json.dumps(empty), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "does not cover"):
+            accept.review("c015", path)
+        self.review("PASS_WITH_QUALIFICATIONS", name="c015", row="QUALIFIED",
+                    qualifications=["L1 witnessed candidate span; original pool extent and ownership unknown"])
+        self.assertEqual(accept.finalize("c015", 1)["seq"], 2)
+        accept.verify_history()
+
+    def test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers(self):
+        receipt_units, rewrite = self.removed_helper_baseline()
+        # Exercise a transition from a pre-selection record, rather than a helper/source edit.
+        history = accept.read_history()
+        history[0]["linker_model"] = "armlink5-inline-branchnop-v2"
+        history[0]["entry_sha256"] = accept.entry_hash(history[0])
+        accept.HISTORY.write_text(json.dumps(history[0]) + "\n", encoding="utf-8")
+        receipt_units[1]["removed_callees"] = [rewrite["removed_callee"]]
+        record = self.stubbed_prepare("c015", [], receipt_units=receipt_units,
+                                     linker_model="armlink5-inline-branchnop-v3")
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["model_uses"]["src/a.c"]["r1_callers"], ["func_00100000"])
+        self.assertEqual(record["model_uses"]["src/helper.c"]["removed_callees"], [rewrite["removed_callee"]])
+        self.assertEqual(record["model_reviews"], {"func_00100000": {"source": "src/a.c", "rules": ["R1"]}})
+        self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
+        with self.assertRaisesRegex(accept.AcceptError, "identity provenance requires a QUALIFIED"):
+            self.review(name="c015")
+
+    def test_history_without_model_selection_keeps_verifying(self):
+        self.review()
+        entry = accept.finalize("c001", 1)
+        self.assertNotIn("selection_sha256", entry)
+        self.assertEqual(entry["literal_model"], "none")
+        self.assertEqual(accept.verify_history(), [entry])
 
     def test_revised_accepted_unit_must_be_reviewed_again(self):
         """Editing an accepted source in a later checkpoint needs review rows like new work."""
@@ -274,6 +467,7 @@ class AcceptGateTest(unittest.TestCase):
         prepared["ledger_sha256"] = accept.sha256_file(out / "matches.json")
         prepared["sources"] = accept.source_hashes(ledger["units"])
         prepared["new_units"].append(helper["source"])
+        prepared["linker_model"] = "armlink5-inline-branchnop-v3"
         (out / "prepare.json").write_text(json.dumps(prepared), encoding="utf-8")
         self.review()
         accept.finalize("c001", 1)
@@ -291,7 +485,7 @@ class AcceptGateTest(unittest.TestCase):
         (self.root / "src/helper.c").write_text(
             "/* revised contract */\nvoid set_field18(unsigned *p, unsigned v) { p[6] = v; }\n",
             encoding="utf-8")
-        record = self.stubbed_prepare("c011", [], receipt_units=receipts)
+        record = self.stubbed_prepare("c011", [], receipt_units=receipts, linker_model="armlink5-inline-branchnop-v3")
         self.assertEqual(record["revised_units"], ["src/helper.c"])
         self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
         self.assertEqual(record["dependency_reviews"], {
@@ -314,7 +508,7 @@ class AcceptGateTest(unittest.TestCase):
     def test_header_contract_revision_reopens_r1_callers_without_source_changes(self):
         receipts, rewrite = self.removed_helper_baseline()
         (self.root / "include/game/shared.h").write_text("extern const int data_00200000;\n", encoding="utf-8")
-        record = self.stubbed_prepare("c012", [], receipt_units=receipts)
+        record = self.stubbed_prepare("c012", [], receipt_units=receipts, linker_model="armlink5-inline-branchnop-v3")
         self.assertEqual(record["revised_units"], [])
         self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
         self.assertEqual(record["dependency_reviews"]["func_00100000"]["revised_headers"], ["include/game/shared.h"])
@@ -322,7 +516,7 @@ class AcceptGateTest(unittest.TestCase):
 
     def test_unchanged_helper_does_not_reopen_unrelated_credited_callers(self):
         receipts, _ = self.removed_helper_baseline()
-        record = self.stubbed_prepare("c013", [], receipt_units=receipts)
+        record = self.stubbed_prepare("c013", [], receipt_units=receipts, linker_model="armlink5-inline-branchnop-v3")
         self.assertEqual(record["dependency_reviews"], {})
         self.assertEqual(record["linker_rewrites"], {})
         self.assertEqual(accept.new_functions(self.root / "accept/c013", record), {})

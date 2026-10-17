@@ -4,7 +4,9 @@ Status: default model **`armlink5-inline-branchnop-v2`**; candidate-only callee 
 implemented as the opt-in **`armlink5-inline-branchnop-v3`** (`tools/inplace.py`, `LINKER_MODELS`).
 V3 does not change the default or a checkpoint's gates: adoption requires a passing independent
 implementation review and an explicitly recorded gate/model revision in the acceptance path.
-The proposed gate text is `scratch/integrator/linker-removed/GATES-DRAFT.md`.
+`accept.py prepare --linker-model ... --literal-model ...` freezes both choices before its fresh
+builds; see `docs/ACCEPTANCE.md` for selection/receipt/history binding and transition review.
+The combined gate proposal is `scratch/integrator/adopt-r1-l1/GATES-DRAFT.md`, not adopted here.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -545,8 +547,10 @@ The section must be readonly, non-executable, relocation-free, non-COMDAT, with 
 must be nonempty, unique, terminated, and separated only by zero alignment padding. The bounds
 are 1 MiB and 4,096 records. Every record needs a placed ABS32/TARGET1 reference to its start;
 all references to one record must agree. Their original pointers must identify a bijection onto
-one contiguous, equal-sized pool outside all catalogued functions and BSS. Reordering **candidate**
-records and padding must reproduce that entire pool exactly. No image search, suffix/interior
+one contiguous, equal-sized witnessed span outside all catalogued functions and BSS. Reordering
+**candidate** records and padding must reproduce that entire witnessed span exactly. This does
+not establish the original pool's complete extent or ownership; surrounding records and sharing
+with uncompiled units remain unknown. No image search, suffix/interior
 binding, discarded record, invented data, instruction replacement, or relaxed function comparison
 is permitted. Existing intra-/inter-unit section-overlap checks remain in force.
 
@@ -554,10 +558,13 @@ Match JSON and build inputs record `literal_model` independently of `linker_mode
 `literal_rebindings` in match results and per-unit build receipts records the rule, pool address,
 size, section index, object ownership, record/reference counts, and candidate/output offsets and
 sizes; it contains no literal contents. Combined builds attribute each pool only to its owning
-unit. Prepare compares both models across its two builds, records the independent model and
-new/revised-unit mappings, and finalize retains the model in history; prepare still builds with
-the default-off literal model. Function bytes, including relocated pointer values, must still
-match independently.
+unit. Prepare freezes both explicit choices in `selection.json` before either fresh build,
+compares both receipts with that selection, and binds their complete hashes in prepare/history.
+Its `model_uses` summary includes unchanged-source uses; a model transition reopens all affected
+R1 callers and conservatively all credited functions in L1 pool-owning units. Review, finalize
+and history verification check the schema-2 selection/receipt closure; historical checkpoints
+retain their recorded rules. Function bytes, including relocated pointer values, must still
+match independently. Defaults remain v2 / `none`; enabling the path does not adopt new gates.
 
 The qualification is unknown original pool order/TU ownership, not uncertain literal bytes or
 targets. Source/interface review must still reject artificial seeding tables, section attributes,

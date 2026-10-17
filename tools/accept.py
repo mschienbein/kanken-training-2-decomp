@@ -36,6 +36,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+import inplace
+
 ROOT = Path(__file__).resolve().parents[1]
 MATCHES = ROOT / "config/matches.json"
 HISTORY = ROOT / "docs/progress-history.jsonl"
@@ -177,17 +179,89 @@ def linker_review_summary(receipt: dict, changed_units: set[str], revised_header
     return rewrites, dependencies
 
 
-def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False) -> dict:
+def model_use_summary(receipt: dict) -> dict:
+    """Expose every R1/L1 use, not only sources changed in this checkpoint.
+
+    A pool can be referenced through local tables, so conservatively review every credited
+    function in its owning unit rather than claiming a recovered function-to-record graph.
+    """
+    uses = {}
+    for unit in receipt.get("units", []):
+        callers = sorted(fn for fn, rows in unit.get("linker_rewrites", {}).items()
+                         if any(row.get("removed_callee") for row in rows))
+        pools = unit.get("literal_rebindings", [])
+        removed = unit.get("removed_callees", [])
+        if callers or pools or removed:
+            uses[unit["source"]] = {
+                "r1_callers": callers,
+                "l1_functions": sorted(unit.get("functions", [])) if pools else [],
+                "literal_rebindings": pools,
+                "removed_callees": removed,
+            }
+    return uses
+
+
+def model_selection(linker_model: str, literal_model: str) -> dict:
+    if linker_model not in inplace.LINKER_MODELS:
+        raise AcceptError(f"unknown or retired linker model {linker_model!r}")
+    if literal_model not in inplace.LITERAL_MODELS:
+        raise AcceptError(f"unknown literal model {literal_model!r}")
+    return {"linker_model": linker_model, "literal_model": literal_model}
+
+
+def build_summary(receipt: dict) -> dict:
+    return {k: receipt[k] for k in ("name", "result", "fresh", "inputs", "outputs", "credited", "checks", "error")
+            if k in receipt}
+
+
+def verify_selection(out: Path, record: dict) -> None:
+    """Schema 2 binds the pre-build choice and complete receipts without private inputs.
+
+    Schema 1 checkpoints predate selection; leave their frozen evidence and models unchanged.
+    """
+    if record.get("schema_version", 1) < 2:
+        return
+    selection_path = out / "selection.json"
+    if not selection_path.is_file() or sha256_file(selection_path) != record.get("selection_sha256"):
+        raise AcceptError(f"{out.name}: model selection changed since prepare")
+    selection = load_json(selection_path)
+    if model_selection(record.get("linker_model"), record.get("literal_model")) != selection:
+        raise AcceptError(f"{out.name}: prepared models differ from the frozen selection")
+    builds = record.get("builds", [])
+    if len(builds) != 2:
+        raise AcceptError(f"{out.name}: need two selected fresh-build receipts")
+    for suffix, summary in zip(("a", "b"), builds):
+        receipt_path = out / "receipts" / f"{out.name}-{suffix}.json"
+        if not receipt_path.is_file() or sha256_file(receipt_path) != summary.get("receipt_sha256"):
+            raise AcceptError(f"{out.name}: build {suffix} receipt changed since prepare")
+        receipt = load_json(receipt_path)
+        if summary != {**build_summary(receipt), "receipt_sha256": sha256_file(receipt_path)}:
+            raise AcceptError(f"{out.name}: build {suffix} summary differs from its receipt")
+        if receipt.get("result") != "PASS" or receipt.get("fresh") is not True:
+            raise AcceptError(f"{out.name}: build {suffix} is not a passing fresh build")
+        if any(receipt.get("inputs", {}).get(key) != value for key, value in selection.items()):
+            raise AcceptError(f"{out.name}: build {suffix} models differ from the frozen selection")
+    if not builds[0].get("outputs") or builds[0]["outputs"] != builds[1].get("outputs"):
+        raise AcceptError(f"{out.name}: selected build outputs differ")
+
+
+def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
+            linker_model: str = inplace.DEFAULT_LINKER_MODEL,
+            literal_model: str = inplace.DEFAULT_LITERAL_MODEL) -> dict:
     import build as build_mod  # imported lazily: build needs the private inputs
     import denominator
     import interfaces
 
+    selection = model_selection(linker_model, literal_model)
     out = checkpoint_dir(name)
     commit = clean_commit()
     try:
         out.mkdir(parents=True, exist_ok=False)
     except FileExistsError:
         raise AcceptError(f"accept/{name} exists; checkpoints are immutable (use a new name)") from None
+    # Freeze the explicit CLI/API choice before any gate or build can run. A failed prepare
+    # retains this choice; changing models requires a new immutable checkpoint name.
+    write_exclusive(out / "selection.json", selection)
     try:
         denominator.verify()
     except SystemExit as e:
@@ -221,7 +295,7 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
     for suffix in ("a", "b"):
         try:
             # Fresh: acceptance builds never reuse cached objects, so two builds are two compiles.
-            receipt = build_mod.build(f"{name}-{suffix}", out / "matches.json", fresh=True)
+            receipt = build_mod.build(f"{name}-{suffix}", out / "matches.json", fresh=True, **selection)
         except (build_mod.BuildError, RuntimeError) as e:
             receipt = {"name": f"{name}-{suffix}", "result": "FAIL", "error": str(e)}
         else:
@@ -229,8 +303,23 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         builds.append(receipt)
     suite = run_suite()
     candidates_sources = [u["source"] for u in candidates["units"]]
+    previous = history[-1] if history else {}
+    previous_models = {
+        "linker_model": previous.get("linker_model") or inplace.DEFAULT_LINKER_MODEL,
+        "literal_model": previous.get("literal_model", inplace.DEFAULT_LITERAL_MODEL),
+    }
+    model_changes = {key: {"previous": previous_models[key], "selected": value}
+                     for key, value in selection.items() if previous_models[key] != value}
+    model_uses = model_use_summary(builds[0])
+    model_reviews = {
+        fn: {"source": source, "rules": [rule for rule, functions in
+                                       (("R1", use["r1_callers"]), ("L1", use["l1_functions"])) if fn in functions]}
+        for source, use in model_uses.items() if model_changes
+        for fn in sorted(set(use["r1_callers"]) | set(use["l1_functions"]))
+    }
+    changed_units = set(candidates_sources) | set(revised_units)
     linker_rewrites, dependency_reviews = linker_review_summary(
-        builds[0], set(candidates_sources) | set(revised_units), revised_headers)
+        builds[0], changed_units | (set(model_uses) if model_changes else set()), revised_headers)
     checks = {
         "build_a_pass": builds[0].get("result") == "PASS",
         "build_b_pass": builds[1].get("result") == "PASS",
@@ -238,11 +327,13 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         and builds[0].get("inputs", {}).get("linker_model") == builds[1].get("inputs", {}).get("linker_model")
         and builds[0].get("inputs", {}).get("literal_model", "none")
         == builds[1].get("inputs", {}).get("literal_model", "none"),
+        "models_selected": all(
+            all(b.get("inputs", {}).get(key) == value for key, value in selection.items()) for b in builds),
         "suite_pass": suite["returncode"] == 0,
         "interfaces_pass": iface_ok,
     }
     record = {
-        "schema_version": 1,
+        "schema_version": 2,
         "checkpoint": name,
         "prepared_utc": now(),
         "commit": commit,
@@ -258,20 +349,24 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "profiles_sha256": sha256_file(PROFILES),
         "catalogue_sha256": sha256_file(CATALOGUE),
         "denominator_version": len(denominator.read_history()),
+        "selection_sha256": sha256_file(out / "selection.json"),
+        "model_changes": model_changes,
+        "model_uses": model_uses,
+        "model_reviews": model_reviews,
         # Include unchanged credited callers whenever their removed helper or shared contract
         # changes. Their rewrite metadata and required rows cannot hide behind functions: [].
-        "linker_model": builds[0].get("inputs", {}).get("linker_model"),
-        "literal_model": builds[0].get("inputs", {}).get("literal_model", "none"),
+        **selection,
         "literal_rebindings": {
             u["source"]: u["literal_rebindings"]
             for u in builds[0].get("units", [])
-            if u.get("source") in set(candidates_sources) | set(revised_units) and u.get("literal_rebindings")
+            if (u.get("source") in changed_units or model_changes) and u.get("literal_rebindings")
         },
         "linker_rewrites": linker_rewrites,
         "dependency_reviews": dependency_reviews,
         "builds": [
-            {k: b.get(k) for k in ("name", "result", "outputs", "credited", "checks", "error") if k in b}
-            for b in builds
+            {**build_summary(b), "receipt_sha256": sha256_file(out / "receipts" / f"{name}-{suffix}.json")}
+            if (out / "receipts" / f"{name}-{suffix}.json").is_file() else build_summary(b)
+            for suffix, b in zip(("a", "b"), builds)
         ],
         "suite": suite,
         "interfaces": {
@@ -356,6 +451,10 @@ def new_functions(out: Path, prepared: dict) -> dict[str, str]:
         if credited.get(function) != dependency.get("source"):
             raise AcceptError(f"{function}: removed-helper review dependency is not a credited caller")
         required[function] = dependency["source"]
+    for function, use in prepared.get("model_reviews", {}).items():
+        if credited.get(function) != use.get("source"):
+            raise AcceptError(f"{function}: model review dependency is not a credited function")
+        required[function] = use["source"]
     return required
 
 
@@ -372,6 +471,7 @@ def review(name: str, record_path: Path) -> dict:
     if not prepared.is_file():
         raise AcceptError(f"accept/{name}: not prepared")
     prepare_record = load_json(prepared)
+    verify_selection(out, prepare_record)
     record = load_json(record_path)
     validate_review(record, new_functions(out, prepare_record), removed_review_callers(prepare_record))
     # A review binds the exact files prepare bound: the current hash of each prepared source and
@@ -406,6 +506,7 @@ def finalize(name: str, min_reviews: int) -> dict:
     record = load_json(prepared)
     if record["result"] != "PASS":
         raise AcceptError(f"accept/{name}: prepare is {record['result']}")
+    verify_selection(out, record)
     prepare_sha = sha256_file(prepared)
     reviews = [load_json(p) for p in sorted((out / "reviews").glob("*.json"))] if (out / "reviews").is_dir() else []
     failing = [r["reviewer"] for r in reviews if r["verdict"] not in PASSING]
@@ -436,6 +537,7 @@ def finalize(name: str, min_reviews: int) -> dict:
     history = read_history()
     credited = record["builds"][0]["credited"]
     entry = {
+        "schema_version": record.get("schema_version", 1),
         "seq": len(history) + 1,
         "checkpoint": name,
         "recorded_utc": now(),
@@ -454,6 +556,8 @@ def finalize(name: str, min_reviews: int) -> dict:
         "reviews": [{"reviewer": r["reviewer"], "family": r["family"], "verdict": r["verdict"]} for r in bound],
         "prev": history[-1]["entry_sha256"] if history else None,
     }
+    if record.get("schema_version", 1) >= 2:
+        entry["selection_sha256"] = record["selection_sha256"]
     entry["entry_sha256"] = entry_hash(entry)
     MATCHES.write_bytes(ledger)
     with HISTORY.open("a", encoding="utf-8", newline="\n") as f:
@@ -475,6 +579,17 @@ def verify_history(revised_units=(), revised_headers=()) -> list[dict]:
             raise AcceptError(f"progress history broken at seq {i}")
         if not (ACCEPT / e["checkpoint"] / "finalize.json").is_file():
             raise AcceptError(f"seq {i}: accept/{e['checkpoint']}/finalize.json missing")
+        if e.get("schema_version", 1) >= 2 or "selection_sha256" in e:
+            out = ACCEPT / e["checkpoint"]
+            prepared = out / "prepare.json"
+            if not prepared.is_file() or sha256_file(prepared) != e.get("prepare_sha256"):
+                raise AcceptError(f"seq {i}: selected prepare changed since finalize")
+            record = load_json(prepared)
+            if record.get("schema_version", 1) < 2:
+                raise AcceptError(f"seq {i}: selected checkpoint lacks its selection binding")
+            verify_selection(out, record)
+            if any(e.get(key) != record.get(key) for key in ("linker_model", "literal_model", "selection_sha256")):
+                raise AcceptError(f"seq {i}: history models differ from the prepared selection")
         prev = e["entry_sha256"]
     ledger = load_json(MATCHES)
     if history:
@@ -501,6 +616,10 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("prepare")
     p.add_argument("--checkpoint", required=True)
     p.add_argument("--candidates", type=Path, required=True)
+    p.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
+                   help="freeze this checkpoint's branch model before either fresh build (default: %(default)s)")
+    p.add_argument("--literal-model", default=inplace.DEFAULT_LITERAL_MODEL, choices=inplace.LITERAL_MODELS,
+                   help="freeze this checkpoint's independent literal model (default: %(default)s)")
     p.add_argument("--allow-unchecked-cpp", action="store_true",
                    help="waive the mechanical interface check for C++ units (recorded; reviewers check them by hand)")
     r = sub.add_parser("review")
@@ -514,7 +633,8 @@ def main(argv: list[str] | None = None) -> int:
     sys.path.insert(0, str(ROOT / "tools"))
     try:
         if args.cmd == "prepare":
-            rec = prepare(args.checkpoint, args.candidates, args.allow_unchecked_cpp)
+            rec = prepare(args.checkpoint, args.candidates, args.allow_unchecked_cpp,
+                          args.linker_model, args.literal_model)
             print(f"{rec['result']}: {rec['checks']}; suite {rec['suite']['summary']}")
             return 0 if rec["result"] == "PASS" else 1
         if args.cmd == "review":
