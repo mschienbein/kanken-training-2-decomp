@@ -186,3 +186,39 @@ The historical passing smoke above did not exercise those findings and is not co
 approval. Its records and both sealed failing reviews remain unchanged. The v5 composite
 must include the corrective v4 successor and its modeled-class proof requirements before
 independent final review; strict/v2/v3 remain frozen and v4 remains unadopted.
+
+## Current hardened v4/v5 composite evidence
+
+The scoped F03/F04 correction `5187259c427b8fc854642520ded03b7743320be6` was composed as
+a single cherry-pick onto the existing main-based composite. No stale feature parent was
+merged, no model identity/flag was changed, and no frozen strict/v2/v3 policy was broadened.
+The v5 model continues to inherit v4 while alone enabling function-entry aliases.
+
+Settled code/test/model/documentation revision exercised:
+`35fb7cb468a754a47971e6f8e6bc4920b0851878`. The final documentation-only successor is
+identified in `result-v4-hardening-r3.json`; the smoke's source inputs are unchanged.
+This supersedes `7ea821d8a00e44502a248597ae6faa027cf4dcbf` as the composite review input.
+
+New versioned evidence: `scratch/integrator/d2-alias-r2/smoke-v5-hardening-r3.json`,
+SHA-256 `7030573bdaf9ec9fd353d39a8d23b2f4b29b379ad4d515750ef4222e62b51007`.
+**Exit 0; 24 direct assertion groups passed.** The added public v5 alias-and-switch matrix
+contains six omitted-guard-write refusals (LDREXD, predicated LDREXD and MRRC, both table
+forms), and 64 RFE refusals (all four addressing forms, r4/sp frames, both table forms,
+and window/before-compare/one-predecessor/unreachable placements). Refusals precede any
+rewrite/removal. The preceding copy/binding/root/ownership/extent checks, complete-object
+alias positives, explicit selector forwarding, inherited model fields and frozen-model
+alias behavior also pass under this hardened composite.
+
+The compiler object still has SHA-256
+`591a272926412733a44bb7851082d93e297a4f76884b0fd8d1f672b0a8cb1640`; two complete-object
+v5 links cover all six pair/binding positives with complete relocated-section equality and
+unchanged metadata. No compiler, private-image match, full suite/test runner or full build
+was invoked by this focused smoke.
+
+The old smoke/result files remain unchanged, as do both sealed failing reviews. The new
+record binds original alias-review SHA-256
+`2429bad830f802fcc919c7f413bb7c2ffcae74cf158f7f31251aeaec0fe08890` and R1 R2-review SHA-256
+`a539e6cddb357e89b097040a2f09c4910904492872c17012b24914bc55ce8074`.
+No old failure was rerun merely to confirm it. No independent PASS or adoption is claimed.
+Main must verify serially and obtain a new independent review of this complete corrected
+composite; frozen gates and the c008-r2 finalization boundary remain unchanged.
