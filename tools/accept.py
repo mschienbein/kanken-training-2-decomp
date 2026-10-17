@@ -36,7 +36,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-import inplace
+import linker_models  # names only; verify must not need the disassembler (CI)
 
 ROOT = Path(__file__).resolve().parents[1]
 MATCHES = ROOT / "config/matches.json"
@@ -288,9 +288,9 @@ def model_use_summary(receipt: dict) -> dict:
 
 
 def model_selection(linker_model: str, literal_model: str) -> dict:
-    if linker_model not in inplace.LINKER_MODELS:
+    if linker_model not in linker_models.LINKER_MODELS:
         raise AcceptError(f"unknown or retired linker model {linker_model!r}")
-    if literal_model not in inplace.LITERAL_MODELS:
+    if literal_model not in linker_models.LITERAL_MODELS:
         raise AcceptError(f"unknown literal model {literal_model!r}")
     return {"linker_model": linker_model, "literal_model": literal_model}
 
@@ -355,8 +355,8 @@ def verify_selection(out: Path, record: dict, *, required: bool = False) -> bool
 
 
 def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
-            linker_model: str = inplace.DEFAULT_LINKER_MODEL,
-            literal_model: str = inplace.DEFAULT_LITERAL_MODEL) -> dict:
+            linker_model: str = linker_models.DEFAULT_LINKER_MODEL,
+            literal_model: str = linker_models.DEFAULT_LITERAL_MODEL) -> dict:
     import build as build_mod  # imported lazily: build needs the private inputs
     import denominator
     import interfaces
@@ -413,8 +413,8 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
     candidates_sources = [u["source"] for u in candidates["units"]]
     previous = history[-1] if history else {}
     previous_models = {
-        "linker_model": previous.get("linker_model") or inplace.DEFAULT_LINKER_MODEL,
-        "literal_model": previous.get("literal_model", inplace.DEFAULT_LITERAL_MODEL),
+        "linker_model": previous.get("linker_model") or linker_models.DEFAULT_LINKER_MODEL,
+        "literal_model": previous.get("literal_model", linker_models.DEFAULT_LITERAL_MODEL),
     }
     model_changes = {key: {"previous": previous_models[key], "selected": value}
                      for key, value in selection.items() if previous_models[key] != value}
@@ -759,9 +759,9 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("prepare")
     p.add_argument("--checkpoint", required=True)
     p.add_argument("--candidates", type=Path, required=True)
-    p.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
+    p.add_argument("--linker-model", default=linker_models.DEFAULT_LINKER_MODEL, choices=sorted(linker_models.LINKER_MODELS),
                    help="freeze this checkpoint's branch model before either fresh build (default: %(default)s)")
-    p.add_argument("--literal-model", default=inplace.DEFAULT_LITERAL_MODEL, choices=inplace.LITERAL_MODELS,
+    p.add_argument("--literal-model", default=linker_models.DEFAULT_LITERAL_MODEL, choices=linker_models.LITERAL_MODELS,
                    help="freeze this checkpoint's independent literal model (default: %(default)s)")
     p.add_argument("--allow-unchecked-cpp", action="store_true",
                    help="waive the mechanical interface check for C++ units (recorded; reviewers check them by hand)")

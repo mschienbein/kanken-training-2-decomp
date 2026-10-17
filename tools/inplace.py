@@ -35,6 +35,9 @@ from elftools.elf.constants import SH_FLAGS
 from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
+from linker_models import (DEFAULT_LINKER_MODEL, DEFAULT_LITERAL_MODEL, LINKER_MODELS,  # noqa: F401  (re-exported)
+                           LITERAL_MODELS, RETIRED_LINKER_MODELS, LinkerModel)
+
 # ELF relocation types (AAELF32) handled here.
 R_ARM_NONE = 0
 R_ARM_PC24 = 1
@@ -64,36 +67,6 @@ _COND_AL = 0xE
 _ARM = Cs(CS_ARCH_ARM, CS_MODE_ARM)
 _ARM.detail = True
 _FLOW_GROUPS = frozenset((CS_GRP_JUMP, CS_GRP_CALL, CS_GRP_RET, CS_GRP_INT, CS_GRP_IRET, CS_GRP_BRANCH_RELATIVE))
-
-
-@dataclass(frozen=True)
-class LinkerModel:
-    """The armlink output optimisations an in-place link reproduces.
-
-    The name is the version: a rule change is a new model, never an edited one, so the model name
-    recorded in match results and build receipts says exactly which rules credited a function.
-    """
-
-    name: str
-    inline: bool = False  # --inline: ARM BL to a 4/8-byte ARM function -> its instruction, or a NOP
-    branchnop: bool = False  # --branchnop: relocated ARM B to the next instruction -> NOP
-    removed_inline: bool = False  # v3: inline and eliminate candidate-only tiny function sections
-
-
-LINKER_MODELS = {m.name: m for m in (
-    LinkerModel("strict-v1"),
-    LinkerModel("armlink5-inline-branchnop-v2", inline=True, branchnop=True),
-    LinkerModel("armlink5-inline-branchnop-v3", inline=True, branchnop=True, removed_inline=True),
-)}
-DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
-# Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).
-RETIRED_LINKER_MODELS = {
-    "armlink5-inline-branchnop-v1": "judged a callee defined in the candidate object by the candidate's own bytes, "
-    "not the original's (review F01); superseded by armlink5-inline-branchnop-v2",
-}
-
-LITERAL_MODELS = ("none", "anonymous-string-records-v1")
-DEFAULT_LITERAL_MODEL = "none"
 
 
 def linker_model(name: str) -> LinkerModel:
