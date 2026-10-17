@@ -1,6 +1,7 @@
 """Catalogue-bounded display of synthetic instructions and data in tools/match.py."""
 import struct
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -161,6 +162,41 @@ class DiffLinesTest(unittest.TestCase):
                 lines = match.diff_lines(original, candidate, BASE, fn, 20)
                 self.assertEqual(len(lines), 2)
                 self.assertEqual(lines[1], f"! {BASE + 4:08x}  {left:<40} {right}")
+
+
+@unittest.skipUnless(match.toolchain.armcc_exe("armcc_504_82").is_file(), "pinned compiler not installed (tools/setup.py)")
+class CppAliasCompareTest(unittest.TestCase):
+    def test_result_names_the_bound_abi_alias_and_compares_the_whole_section(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "alias.cpp"
+            source.write_text("class Plain { public: ~Plain(); };\nPlain::~Plain() {}\n", encoding="utf-8")
+            obj_path = source.with_suffix(".o")
+            match.toolchain.compile_source(match.toolchain.load_profiles()["game"], source, obj_path)
+            body = struct.pack("<I", 0xE12FFF1E)
+            catalogue = {BASE: {"address": BASE, "size": len(body), "isa": "arm"}}
+
+            class Image:
+                bss = (0x200000, 0x201000)
+
+                def read(self, address, size):
+                    if address != BASE or size != len(body):
+                        raise AssertionError("comparison must cover the complete synthetic function")
+                    return body
+
+            for model in match.inplace.LINKER_MODELS:
+                for name in ("_ZN5PlainD1Ev", "_ZN5PlainD2Ev"):
+                    with self.subTest(model=model, name=name):
+                        ctx = match.Context.__new__(match.Context)
+                        ctx.image, ctx.functions = Image(), catalogue
+                        ctx.resolver = match.inplace.Resolver(catalogue, {name: {"address": BASE}})
+                        ctx.model = match.inplace.linker_model(model)
+                        ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+                        rows = ctx.compare(obj_path)
+                        self.assertEqual(len(rows), 1)
+                        self.assertEqual((rows[0]["name"], rows[0]["candidate_size"], rows[0]["status"]),
+                                         (name, len(body), "match"))
+                        self.assertEqual(rows[0]["_candidate"], body)
+                        self.assertEqual(ctx.removed_callees, [])
 
 
 class ModelOptionsTest(unittest.TestCase):

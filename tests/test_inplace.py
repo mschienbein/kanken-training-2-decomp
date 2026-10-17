@@ -19,6 +19,7 @@ PROFILE = toolchain.Profile(
     ("--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "-O3", "-Otime"),
 )
 HAVE_COMPILER = toolchain.armcc_exe(PROFILE.compiler).is_file()
+GAME_PROFILE = toolchain.load_profiles()["game"]
 
 FIXTURE = r"""
 extern void func_00100100(int);
@@ -289,6 +290,159 @@ class InPlaceTest(unittest.TestCase):
         linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000))
         linked = {p.base: d for p, d in linker.link(obj).values()}
         self.assertEqual(linked[0x100000], bytes(data))
+
+
+@unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+class CppFunctionAliasTest(unittest.TestCase):
+    """Real game-profile C1/C2 and virtual/non-virtual D1/D2 ELF aliases."""
+
+    PAIRS = (
+        ("_ZN5PlainC1Ev", "_ZN5PlainC2Ev"),
+        ("_ZN5PlainD1Ev", "_ZN5PlainD2Ev"),
+        ("_ZN7VirtualD1Ev", "_ZN7VirtualD2Ev"),
+    )
+
+    @classmethod
+    def setUpClass(cls):
+        tmp = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(tmp.cleanup)
+        source = Path(tmp.name) / "aliases.cpp"
+        source.write_text(
+            "class Plain { public: Plain(); ~Plain(); };\n"
+            "Plain::Plain() {}\nPlain::~Plain() {}\n"
+            "class Virtual { public: virtual ~Virtual(); };\nVirtual::~Virtual() {}\n",
+            encoding="utf-8",
+        )
+        cls.object_path = source.with_suffix(".o")
+        toolchain.compile_source(GAME_PROFILE, source, cls.object_path)
+
+    def fixture(self, binding=0):
+        obj = inplace.ObjectFile(self.object_path)
+        addresses = {
+            index: (BASE if section.executable else TABLE_AT) + index * 0x100
+            for index, section in obj.sections.items()
+        }
+        skipped = {pair[1 - binding] for pair in self.PAIRS}
+        names = {
+            sym.name: {"address": addresses[sym.shndx] + sym.value}
+            for sym in obj.defined_globals() if sym.name not in skipped
+        }
+        names.update({
+            "_ZdlPv": {"address": BASE + 0x8000},
+            "_ZTVN10__cxxabiv117__class_type_infoE": {"address": TABLE_AT + 0x8000},
+        })
+        catalogue = {
+            addresses[index]: {"address": addresses[index], "size": sec.size, "isa": "arm"}
+            for index, sec in obj.sections.items() if sec.executable
+        }
+        catalogue[BASE + 0x8000] = {"address": BASE + 0x8000, "size": 16, "isa": "arm"}
+        mem, expected = Memory(), {}
+        for index, sec in obj.sections.items():
+            data = bytearray(sec.data)
+            for rel in sec.relocs:
+                sym = rel.symbol
+                target = (addresses[sym.shndx] + sym.value if isinstance(sym.shndx, int)
+                          else names[sym.name]["address"])
+                word = struct.unpack_from("<I", data, rel.offset)[0]
+                place = addresses[index] + rel.offset
+                if rel.type == inplace.R_ARM_JUMP24:
+                    addend = word & 0xFFFFFF
+                    if addend & 0x800000:
+                        addend -= 0x1000000
+                    word = (word & 0xFF000000) | (((target + (addend << 2) - place) >> 2) & 0xFFFFFF)
+                elif rel.type == inplace.R_ARM_ABS32:
+                    word = (target + word) & 0xFFFFFFFF
+                elif rel.type == inplace.R_ARM_PREL31:
+                    addend = word & 0x7FFFFFFF
+                    if addend & 0x40000000:
+                        addend -= 0x80000000
+                    word = (word & 0x80000000) | ((target + addend - place) & 0x7FFFFFFF)
+                else:
+                    self.fail(f"unexpected fixture relocation {rel.type}")
+                struct.pack_into("<I", data, rel.offset, word)
+            expected[index] = bytes(data)
+            mem.write(addresses[index], data)
+        return obj, mem, catalogue, names, expected
+
+    def linker(self, mem, catalogue, names, model=inplace.DEFAULT_LINKER_MODEL):
+        return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names),
+                                     (0x200000, 0x201000), model)
+
+    def test_game_compiler_emits_zero_size_constructor_and_destructor_aliases(self):
+        obj = inplace.ObjectFile(self.object_path)
+        symbols = {sym.name: sym for sym in obj.defined_functions()}
+        for complete, base in self.PAIRS:
+            with self.subTest(complete=complete):
+                full, zero = symbols[complete], symbols[base]
+                self.assertEqual((full.shndx, full.value), (zero.shndx, zero.value))
+                self.assertEqual((full.size, zero.size), (obj.sections[full.shndx].size, 0))
+                self.assertIn(full.shndx, inplace.function_aliases(obj))
+
+    def test_either_abi_name_places_one_unchanged_complete_section(self):
+        for model in inplace.LINKER_MODELS:
+            for binding in (0, 1):
+                with self.subTest(model=model, binding=binding):
+                    obj, mem, catalogue, names, expected = self.fixture(binding)
+                    metadata = [vars(sym).copy() for sym in obj.symbols]
+                    linker = self.linker(mem, catalogue, names, model)
+                    linked = linker.link(obj)
+                    for index, (placed, data) in linked.items():
+                        self.assertEqual(data, expected[index])
+                        self.assertEqual(len(data), placed.section.size)
+                    for pair in self.PAIRS:
+                        full, zero = (next(sym for sym in obj.symbols if sym.name == name) for name in pair)
+                        placements = {index: row[0] for index, row in linked.items()}
+                        self.assertEqual(linker._symbol_target(full, obj, placements),
+                                         linker._symbol_target(zero, obj, placements))
+                    self.assertEqual([vars(sym) for sym in obj.symbols], metadata)
+                    self.assertEqual(linker.removed_callees, [])
+
+    def test_zero_size_requires_an_identical_full_section_function_sibling(self):
+        for case in ("interior", "no_extent", "partial_extent", "other_isa", "not_executable"):
+            with self.subTest(case=case):
+                obj, mem, catalogue, names, _ = self.fixture()
+                full, zero = (next(sym for sym in obj.symbols if sym.name == name) for name in self.PAIRS[1])
+                if case == "interior":
+                    zero.value = 4
+                elif case == "no_extent":
+                    full.size = 0
+                elif case == "partial_extent":
+                    full.size -= 1
+                elif case == "other_isa":
+                    zero.value = 1
+                else:
+                    obj.sections[full.shndx].executable = False
+                with self.assertRaisesRegex(inplace.LinkError, "zero-size function"):
+                    self.linker(mem, catalogue, names).link(obj)
+
+    def test_a_zero_size_data_symbol_cannot_borrow_a_function_binding(self):
+        for kind in ("STT_OBJECT", "STT_NOTYPE"):
+            for model in inplace.LINKER_MODELS:
+                with self.subTest(kind=kind, model=model):
+                    obj, mem, catalogue, names, _ = self.fixture()
+                    zero = next(sym for sym in obj.symbols if sym.name == self.PAIRS[1][1])
+                    zero.kind = kind
+                    with self.assertRaisesRegex(inplace.LinkError, "global .* has no address binding"):
+                        self.linker(mem, catalogue, names, model).link(obj)
+
+    def test_alias_bindings_must_agree_and_name_a_catalogued_start(self):
+        for case in ("conflict", "interior", "absent"):
+            with self.subTest(case=case):
+                obj, mem, catalogue, names, _ = self.fixture()
+                complete, base = self.PAIRS[1]
+                address = names[complete]["address"]
+                names[base] = {"address": address + (0x100 if case == "conflict" else 1 if case == "interior" else 0x9000)}
+                reason = "aliases resolve to different addresses" if case == "conflict" else "not a catalogued function start"
+                with self.assertRaisesRegex(inplace.LinkError, reason):
+                    self.linker(mem, catalogue, names).link(obj)
+
+    def test_swapping_the_abi_name_with_the_recorded_extent_is_equivalent(self):
+        obj, mem, catalogue, names, expected = self.fixture(binding=1)
+        for complete, base in self.PAIRS:
+            full, zero = (next(sym for sym in obj.symbols if sym.name == name) for name in (complete, base))
+            full.size, zero.size = zero.size, full.size
+        linked = self.linker(mem, catalogue, names).link(obj)
+        self.assertTrue(all(data == expected[index] for index, (_, data) in linked.items()))
 
 
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
@@ -826,6 +980,44 @@ class RemovedCalleeModelTest(unittest.TestCase):
         linker = self.linker(mem, catalogue)
         self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
         self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
+
+    def test_zero_size_entry_aliases_are_the_same_callee_without_changing_r1(self):
+        obj, mem, catalogue = self.fixture()
+        helper = obj.symbols[1]
+        alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", helper.shndx)
+        obj.symbols.append(alias)
+        obj.sections[1].relocs[-1].symbol = alias
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+        self.assertEqual(linker.removed_callees[0]["symbols"], ["base_variant", "set_field18"])
+        self.assertEqual((helper.size, alias.size), (8, 0))
+        self.assertEqual([row.target for row in linker.rewrites], [None, None])
+        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+            self.linker(mem, catalogue, model=inplace.DEFAULT_LINKER_MODEL).link(obj)
+
+    def test_zero_size_aliases_do_not_relax_r1_reference_or_extent_checks(self):
+        for case in ("interior", "no_extent", "other_isa", "data_alias", "untyped_alias", "pointer", "unwind"):
+            with self.subTest(case=case):
+                obj, mem, catalogue = self.fixture()
+                helper = obj.symbols[1]
+                alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", helper.shndx)
+                obj.symbols.append(alias)
+                if case == "interior":
+                    alias.value = 4
+                elif case == "no_extent":
+                    helper.size = 0
+                elif case == "other_isa":
+                    alias.value = 1
+                elif case in ("data_alias", "untyped_alias"):
+                    alias.kind = "STT_OBJECT" if case == "data_alias" else "STT_NOTYPE"
+                else:
+                    symbol = alias if case == "pointer" else inplace.Symbol("i.helper", 0, 0, "STT_SECTION", "STB_LOCAL", 2)
+                    rtype = inplace.R_ARM_ABS32 if case == "pointer" else inplace.R_ARM_PREL31
+                    obj.sections[3] = inplace.Section(3, ".data.pointer" if case == "pointer" else ".ARM.exidx",
+                                                      bytes(4), 4, False, False, False,
+                                                      [inplace.Reloc(0, rtype, symbol)], align=4)
+                with self.assertRaises(inplace.LinkError):
+                    self.linker(mem, catalogue).link(obj)
 
     def test_a_definition_in_another_candidate_object_is_used_not_an_external_guess(self):
         obj, mem, catalogue = self.fixture()

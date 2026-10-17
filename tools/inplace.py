@@ -513,6 +513,28 @@ def _symbol_offset(sym: Symbol) -> int:
     return sym.value & ~1 if sym.kind == "STT_FUNC" else sym.value
 
 
+def function_aliases(obj: ObjectFile) -> dict[int, list[Symbol]]:
+    """Proven full-section entry aliases, without changing the ELF symbols.
+
+    ARMCC gives C1/C2 and D1/D2 aliases the same section and value, but may give only
+    one the function's size. A zero size alone proves nothing: require an executable
+    section, a full-sized sibling and identical entry/ISA for every function symbol.
+    Data symbols and interior labels never acquire a function's address or extent.
+    """
+    by_section: dict[int, list[Symbol]] = {}
+    for sym in obj.defined_functions():
+        by_section.setdefault(sym.shndx, []).append(sym)
+    return {
+        index: symbols for index, symbols in by_section.items()
+        if obj.sections[index].executable and not obj.sections[index].nobits
+        and obj.sections[index].size == len(obj.sections[index].data)
+        and symbols[0].value in (0, 1)
+        and all(sym.value == symbols[0].value and sym.size in (0, obj.sections[index].size)
+                for sym in symbols)
+        and any(sym.size == obj.sections[index].size for sym in symbols)
+    }
+
+
 def reject_overlaps(spans: list[tuple[int, int, str, tuple[str, str] | None]]) -> None:
     """Distinct sections can never share storage, and one COMDAT entity has one address.
 
@@ -593,10 +615,26 @@ class InPlaceLinker:
     def place(self, obj: ObjectFile, names_to_address: dict[str, int]) -> dict[int, Placement]:
         placements: dict[int, Placement] = {}
         offsets: dict[int, set[int]] = {}
+        aliases = function_aliases(obj)
+        alias_addresses: dict[int, int] = {}
+        for index, symbols in aliases.items():
+            if index in self._removed_sections:
+                continue
+            for sym in symbols:
+                address = names_to_address.get(sym.name)
+                if address is None and self.resolver.lookup(sym.name) is not None:
+                    address = self._address_for(sym.name)
+                if address is None:
+                    continue
+                prior = alias_addresses.setdefault(index, address)
+                if prior != address:
+                    raise LinkError(f"{obj.sections[index].name}: aliases resolve to different addresses")
         for fn in obj.defined_functions():
             if fn.shndx in self._removed_sections:
                 continue
-            address = names_to_address.get(fn.name)
+            if fn.size == 0 and fn.shndx not in aliases:
+                raise LinkError(f"{fn.name}: zero-size function is not a full-section entry alias")
+            address = names_to_address.get(fn.name, alias_addresses.get(fn.shndx))
             if address is None:
                 address = self._address_for(fn.name)
             sec = obj.sections[fn.shndx]
@@ -671,6 +709,8 @@ class InPlaceLinker:
                 continue  # checked globally after every reference has been inlined
             placed = placements.get(sym.shndx)
             bound = self.resolver.lookup(sym.name)
+            if bound is None and sym.kind == "STT_FUNC" and sym.shndx in alias_addresses:
+                bound = Target(alias_addresses[sym.shndx], _is_thumb_function(sym))
             if bound is None:
                 raise LinkError(
                     f"global {sym.name!r} has no address binding: name it func_/data_/bss_XXXXXXXX, "
@@ -1032,6 +1072,8 @@ class InPlaceLinker:
         by_section: dict[int, list[Symbol]] = {}
         for sym in obj.defined_functions():
             by_section.setdefault(sym.shndx, []).append(sym)
+        entry_aliases = function_aliases(obj)
+        non_function_globals = {sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
         removed = {}
         for index, aliases in by_section.items():
             section = obj.sections[index]
@@ -1052,7 +1094,8 @@ class InPlaceLinker:
                 raise LinkError(f"{section.name}: removed callee must have no original address binding")
             if (not section.executable or section.nobits or section.size != len(section.data)
                     or section.size not in (4, 8) or section.align < 4
-                    or any(sym.value != 0 or sym.size != section.size for sym in aliases)
+                    or index not in entry_aliases or any(sym.value != 0 for sym in aliases)
+                    or index in non_function_globals
                     or any(kind != "$a" or offset != 0 for offset, kind in section.mapping)
                     or any(rel.type != R_ARM_V4BX for rel in section.relocs)
                     or inline_arm_call(0xEB000000, section.data) is None):
