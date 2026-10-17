@@ -1,6 +1,22 @@
-# Gate design — frozen v1.17 (2026-10-17)
+# Gate design — frozen v1.18 (2026-10-17)
 
 Revisions:
+- **v1.18** (2026-10-17): only the new, explicitly selected immutable linker model
+  `armlink5-inline-branchnop-v6` permits proven full-section zero-size ELF `STT_FUNC` entry
+  aliases to borrow a sibling's binding or satisfy R1 entry identity. Independently bound
+  names retain the frozen placement and complete-extent checks without needing that borrowing
+  proof. V6 composes the separately reviewed v4 bounded-switch CFG and fail-closed endian-state
+  checks with the alias-identity and legacy-placement requirements below. Frozen strict-v1,
+  v2 and v3 retain their exact original semantics; v4 retains its original alias policy.
+  V5 is retired, never adopted: reviewed `22cb05b` refuses explicitly bound D1/D2 placements
+  that v4 credits (`func_001c6a68`, `func_001ef89c`); it is superseded by v6, not edited in place.
+  Every same-COMDAT member copy's binding is resolved before removal; mixed original-bound
+  and removable copies, unsupported retained copies and contradictory removed copies refuse.
+  Original-bound equality, all R3 roots/CFG/reference/dependency checks, unique emitted
+  ownership, strict complete-function extent and R1 provenance qualifications remain mandatory.
+  Selection, both fresh receipts, prepare and finalized history bind v6, and a transition
+  reopens every affected R1 caller under existing model-review rules. No checkpoint, helper,
+  data or denominator credit is granted by this draft or implementation.
 - **v1.17** (2026-10-17): the new immutable model `armlink5-inline-branchnop-v4` may resolve
   R1's fully bounded unsigned ARM compiler jump-table forms described in condition 4.
   Frozen `armlink5-inline-branchnop-v3` retains its original CFG policy, caller decoding and
@@ -189,6 +205,11 @@ The revision entries and normative blocks below quote the final accepted text fr
   `7af3169709c57f170caf55c857d7eb9661bba67d5d87c7b7bf961d5faeb67066`.
   The sole sequencing update, c008-r2 to c008-r3, is explicitly approved by
   `scratch/review/models-v6/GATES-ACCEPTED.md`, Stage A.
+- v1.18 v6 entry, adoption sequencing, model authorization, alias/legacy-placement boundary
+  and remaining obligations: `scratch/review/models-v6/GATES-ACCEPTED.md`, Stage B
+  (PASS_WITH_QUALIFICATIONS, reviewed tip `5bb20a9a3251e83cddc37d6b64a166679ebd8e51`);
+  `scratch/review/models-v6/SEAL.json` binds accepted-text SHA-256
+  `8527da3980abb976df18dfcaa9934e742c4e339916a2e3af083c3279573a5094`.
 
 The selector re-review requires the following integration order verbatim:
 
@@ -197,6 +218,23 @@ The selector re-review requires the following integration order verbatim:
 Sequence 8 and every later checkpoint require the frozen selection binding regardless of
 schema/model labels. Gate activation must precede the first relevant prepare and never occur
 during a checkpoint's review. Historical prepared/finalized evidence is not rewritten.
+
+### V4/v6 adoption sequencing
+
+**Required integration order:** finalize and close `c008-r3` under its existing frozen
+evidence and GATES v1.16; adopt the exact v4 edits below first; then adopt the distinct
+v6 revision and boundary below before the first new prepare selecting v6. V5 is never
+authorized. Do not edit an in-flight checkpoint or historical evidence. This review
+performs no adoption and grants no source/helper/data/denominator credit.
+
+V6 activation is permitted only after the `c008-r3` checkpoint has finalized and its
+frozen evidence is closed, after the independently approved v4 implementation and exact gate
+text have been adopted, and after this v6 implementation/exact-text proposal receives focused
+independent re-review. Adopt v6 under a distinct recorded revision before the first new prepare
+selecting it. Do not change gates during a checkpoint, rewrite historical selection/prepare/
+receipt/history evidence, merge a stale feature parent, or reinterpret strict-v1/v2/v3/v4 or
+retired v5 under another name. A private MATCH and passing checks grant no checkpoint,
+function, helper, data or denominator credit.
 
 ## Author loop (no gate, private)
 
@@ -322,6 +360,15 @@ retain their original meaning; this revision does not broaden or reinterpret
 that identifier. Selection, both fresh receipts, prepare and finalized history
 bind the new identifier, and transition review reopens all affected R1 callers
 as required by the existing selector. Strict/v2/v3 behavior is not changed.
+
+R1's model-selection introduction and the v4-only bounded-switch authorization also admit the
+distinct `armlink5-inline-branchnop-v6` identifier only after the v6 revision is independently
+approved and frozen. V6 must satisfy all corrected v4 bounded-CFG, modeled-effect and owner-
+state proof conditions, plus the entry-alias/legacy-placement conditions below. This adds a
+separately selected composite; it does not change strict/v2/v3/v4 or resurrect retired v5.
+The default remains v2. Selection, both fresh receipts, prepare and finalized history must
+name v6 explicitly; the existing transition review reopens all affected R1 callers. No old
+or in-flight checkpoint is retroactively selected or reinterpreted.
 
 A credited caller may use R1 only when all the following conditions hold:
 
@@ -559,16 +606,103 @@ Records: `accept/<cp>/` (exclusive-create JSON; FAIL kept), `docs/progress-histo
   equality remain mandatory. A model selector, private MATCH, suite pass or gate draft grants
   no credit by itself. No real armlink execution or standalone original link is claimed.
 
-## Conservative zero-size destructor-alias boundary (not broadened here)
+### Proven full-section function-entry aliases and independent bindings (v6 only)
 
-The integrator relayed w23f's `scratch/authors/w23f/v3-refusals.json`: ARMCC emits a zero-size
-D2 base-destructor alias alongside a four-byte D1 body. Current R1 eligibility checks **every**
-STT_FUNC alias for offset zero **and full section size**. A zero-size alias therefore leaves
-the section ineligible and produces a refusal, consistent with reviewed R1 item 3. This is a
-conservative unsupported representation, not evidence that the C++ helper cannot exist.
-Changing size-zero aliases into assumed full-section aliases would broaden the reviewed rule
-and needs separate implementation/evidence/review; this selector change does not make it.
-Do not edit object symbols or add an alias workaround to obtain credit.
+1. Only explicit `--linker-model armlink5-inline-branchnop-v6` enables sibling-binding
+   inheritance or the zero-size R1 entry representation. When relying on either extension,
+   the actual allocated candidate ELF section must be executable, non-NOBITS and completely
+   represented by candidate bytes. Every non-internal function symbol has the identical raw
+   entry value, exactly zero for ARM or one for Thumb; each size is zero or the complete
+   section size; at least one sibling records that complete size. ABI spelling alone is not
+   proof. Interior entries, mixed ISA values, absent/partial full-size witnesses, data and
+   untyped symbols cannot borrow identity or extent. Objects, symbols and candidate bytes
+   are never patched or normalized.
+
+   Independently supplied explicit bindings do not use that extension. If each function
+   name has its own binding, ordinary frozen placement still checks catalogued section base,
+   same-offset/same-placement consistency, global-definition binding, relocations, alignment,
+   overlap and the entire section/catalogue extent. A D1 size excluding a trailing pool and
+   a zero-size D2 may follow this legacy path when both are independently bound; no binding
+   or extent is borrowed, no pool is discarded and R1 removal is not enabled by this case.
+   An absent binding still requires the full-section proof; conflicting bindings or offsets
+   still refuse. Every trailing pool byte remains part of equality. A short complete section
+   is EXTENT, never MATCH or credit.
+
+2. Either proven function-entry alias may supply the original binding for its own section.
+   Every supplied function binding must agree and name a catalogued function start. This
+   inference is strictly section-local; no binding is guessed for another COMDAT copy. Before
+   selecting R1 removal, resolve every supplied copy's original bindings, including aliases
+   and other named symbols. A same-COMDAT member mixing an original-bound copy and an R1-
+   removable copy refuses even if identical. Unsupported/ineligible counterparts prevent
+   partial removal. Every removed copy independently satisfies R1 and has identical complete
+   bytes and ARM mapping. Contradictory copies cannot evade consistency checks by retention.
+
+3. A bound identity never receives an R1 rewrite with `target: null`, directly or through
+   another copy. Retained bound definitions keep all v2 original-body, size, eligibility and
+   equality refusals. A wrong-sized original remains a refusal when deciding inlining even
+   if only the caller is claimed or a root retains the helper. No address is invented for
+   an unbound helper. Strict complete-section/catalogue comparison remains mandatory.
+
+4. R3 retention is unchanged: roots through either alias, any same-COMDAT group copy/member,
+   `__tagsym$$used`, exported/entry/KEEP/first/last selectors and uninterpreted metadata prevent
+   removal. Unmatched explicit selectors fail closed. Retention keeps the section but never
+   waives bound equality or proves a call stays BL.
+
+5. V6 inherits the corrected v4 bounded-switch CFG/state proof without weakening it. Every
+   guard-window instruction belongs to an explicitly modeled effect class; architectural
+   core/NZCV changes are accounted for even if decoder write lists omit them. Empty access
+   lists do not prove preservation. Before table recovery, every decoded owner instruction
+   passes the approved explicit class/encoding effect model, including core/NZCV and state
+   effects. This does not promise all owner NZCV values remain unchanged. Unsupported classes
+   or subencodings refuse. Every RFE form is unknown control/state restoration, not ordinary
+   fall-through or a recognized return; its presence vetoes owner-state proof even before the
+   guard, on one predecessor or in an unreachable suffix. All incoming-path setup/entry/result
+   contracts, outgoing-successor/liveness checks and unknown-control-flow refusals remain.
+   Every allocated-section reference is censused, including otherwise unplaced sections:
+   pointers, tail calls, dependencies, interior/addended targets and PREL31/unwind references
+   are not discarded. Only unreferenced unrooted helpers with actual eligible inlined calls
+   may be removed; no general dead-section elimination or exidx removal is authorized.
+
+6. G4 unique emitted ownership remains mandatory before credit: each stable credited identity
+   has exactly one emitted defining unit, its ledger owner, including bound zero-size aliases
+   and weak/COMDAT copies. Identical duplicate credited definitions fail. A hidden unbound
+   counterpart cannot bypass this through R1 because mixed bound/removable members fail before
+   linking returns. Uncredited helpers earn no credit.
+
+7. Match selects a bound proven alias under v6 and compares the whole emitted section against
+   the whole catalogue function; independently bound legacy names retain the same complete-
+   extent comparison. Receipts expose every removed copy/source/object and actual rewrite,
+   with null targets only for genuinely unbound removed identities. Helper-only units remain
+   in the ledger/hash closure. Existing helper/COMDAT/header dependency and model-transition
+   reviews remain required, including unchanged credited callers and added/changed/removed
+   headers.
+
+8. Frozen R1 conditions 7–8 remain mandatory: manually establish every typed caller/helper
+   contract and control-flow path; retain a precise visible `[INFERENCE]` source note and
+   explicit QUALIFIED identity-provenance review row for each affected caller. No recovered
+   helper identity, historical source call graph, genuine armlink execution or independent
+   source-policy waiver is claimed.
+
+The approved v4 qualifications remain mandatory. Explicit effects cover guard and owner-state
+classification, not a complete architectural/interprocedural model of inherited helper shape,
+input provenance or outgoing-liveness decoder metadata. Little-endian catalogue entries and
+conforming call returns are manual ABI obligations; ordinary FP exceptions and arbitrary
+external behavior are not newly proved. Conservative unsupported subencodings, including the
+one-register scalar-LDR POP alias, remain refusals. Entry aliases do not authorize an instruction-
+alias workaround, exidx removal or a broader v4 allowlist.
+
+Except for distinct v6 authorization, full-section entry-alias representation and preservation
+of independently bound legacy placements above, retain all approved v4 and frozen R1, selector,
+L1, rehoming, source-policy, interface, ownership, extent and denominator obligations. Review
+both fresh receipts and every helper-copy dependency in full; summary metadata is insufficient.
+The old v5 accepted-text artifact remains historical and is not silently relabeled as v6 approval.
+
+Stage B explicitly extends the adopted R1 introduction and otherwise v4-only authorization
+to v6. The full-section zero-size entry representation is a v6-only exception to the
+recorded-symbol-size requirement in R1 condition 3; every other R1 shape, root, binding,
+reference and qualification requirement remains. Independently bound legacy placement
+is not that exception: it neither borrows identity nor makes a helper removable.
+No v5 normative text is adopted or mechanically renamed into v6 approval.
 
 ## Primary sources and review qualifications
 
