@@ -2247,7 +2247,8 @@ class RemovedUnwindModelTest(unittest.TestCase):
                 with self.subTest(model=model, binding=binding):
                     obj, mem, catalogue = RemovedCalleeModelTest().fixture()
                     obj.symbols[0].size = 4  # no full-section alias witness in this section
-                    obj.symbols.append(inplace.Symbol("bound_entry", 0, 0, "STT_FUNC", "STB_GLOBAL", 1))
+                    bind = "STB_GLOBAL" if binding == "resolver" else "STB_LOCAL"
+                    obj.symbols.append(inplace.Symbol("bound_entry", 0, 0, "STT_FUNC", bind, 1))
                     resolver_names = {"bound_entry": {"address": BASE}} if binding == "resolver" else {}
                     explicit_names = {"bound_entry": BASE} if binding == "explicit" else {}
                     linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, resolver_names),
