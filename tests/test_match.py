@@ -263,8 +263,9 @@ class ModelOptionsTest(unittest.TestCase):
         self.assertTrue(v4.bounded_switches)
         self.assertFalse(v4.function_entry_aliases)
         self.assertTrue(v5.function_entry_aliases)
-        for field in ("inline", "branchnop", "removed_inline", "bounded_switches"):
-            self.assertEqual(getattr(v5, field), getattr(v4, field))
+        for field, value in vars(v4).items():
+            if field not in ("name", "function_entry_aliases"):
+                self.assertEqual(getattr(v5, field), value)
 
     def test_literal_option_composes_with_frozen_v3_and_selected_successors(self):
         profile = match.toolchain.Profile("game", "synthetic", ())
