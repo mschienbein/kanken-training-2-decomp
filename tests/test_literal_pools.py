@@ -13,7 +13,7 @@ import match  # noqa: E402
 
 BASE = 0x100000
 POOL = 0x180000
-MODEL = "inplace-literal-records-v1"
+MODEL = "anonymous-string-records-v1"
 
 
 class Memory:
@@ -40,7 +40,8 @@ def pool_bytes(records, order, alignment):
     return bytes(data), offsets
 
 
-def fixture(unit=2, alignment=4, order=(2, 0, 1), lengths=(4, 6, 8)):
+def fixture(unit=2, alignment=4, order=(2, 0, 1), lengths=(4, 6, 8),
+            model=inplace.DEFAULT_LINKER_MODEL):
     records = [(chr(65 + i) * length).encode("utf-16le" if unit == 2 else "ascii")
                + bytes(unit) for i, length in enumerate(lengths)]
     candidate, offsets = pool_bytes(records, range(3), alignment)
@@ -61,7 +62,7 @@ def fixture(unit=2, alignment=4, order=(2, 0, 1), lengths=(4, 6, 8)):
     memory.write(BASE, struct.pack("<4I", *(POOL + output_offsets[i] for i in refs)))
     functions = {BASE: {"address": BASE, "size": 16, "isa": "arm", "code_ranges": []}}
     linker = inplace.InPlaceLinker(memory, functions, inplace.Resolver(functions),
-                                   (0x200000, 0x201000), MODEL)
+                                   (0x200000, 0x201000), model, literal_model=MODEL)
     return obj, memory, linker, offsets, output_offsets, original
 
 
@@ -86,13 +87,29 @@ class LiteralPoolTest(unittest.TestCase):
                                  (POOL, 3, 4))
                 self.assertEqual(set(record["records"][0]), {"candidate_offset", "output_offset", "size"})
 
-    def test_default_and_strict_models_still_refuse_permutations(self):
-        for model in ("strict-v1", inplace.DEFAULT_LINKER_MODEL):
-            obj, _, linker, *_ = fixture()
-            linker.model = inplace.linker_model(model)
+    def test_default_off_refuses_permutations_with_every_branch_model(self):
+        for model in inplace.LINKER_MODELS:
+            obj, _, linker, *_ = fixture(model=model)
+            linker.literal_model = inplace.DEFAULT_LITERAL_MODEL
             with self.assertRaisesRegex(inplace.LinkError, "references disagree"):
                 linker.link(obj)
-        self.assertFalse(inplace.linker_model(inplace.DEFAULT_LINKER_MODEL).string_records)
+        self.assertEqual(inplace.DEFAULT_LITERAL_MODEL, "none")
+        self.assertNotIn("inplace-literal-records-v1", inplace.LINKER_MODELS)
+
+    def test_record_placement_composes_with_every_branch_model(self):
+        for model in inplace.LINKER_MODELS:
+            with self.subTest(model=model):
+                obj, memory, linker, *_ = fixture(model=model)
+                linked = linker.link(obj)
+                self.assertEqual(linked[1][1], memory.read(BASE, 16))
+                self.assertEqual(linker.model.name, model)
+                self.assertEqual(linker.literal_model, MODEL)
+
+    def test_unknown_literal_model_is_refused(self):
+        obj, memory, linker, *_ = fixture()
+        with self.assertRaisesRegex(inplace.LinkError, "unknown literal model"):
+            inplace.InPlaceLinker(memory, linker.functions, linker.resolver, linker.bss,
+                                   literal_model="unrecognized")
 
     def test_target1_references_are_supported(self):
         obj, memory, linker, *_ = fixture()
@@ -291,10 +308,40 @@ class LiteralPoolTest(unittest.TestCase):
         context.functions = linker.functions
         context.resolver = linker.resolver
         context.model = linker.model
+        context.literal_model = linker.literal_model
         with patch.object(inplace, "ObjectFile", return_value=obj):
             results = context.compare(Path("synthetic.o"))
         self.assertEqual(results[0]["status"], "match")
         self.assertEqual(context.literal_rebindings[0]["record_count"], 3)
+
+    def test_record_placement_and_v3_callee_removal_operate_in_the_same_link(self):
+        obj, memory, linker, *_ = fixture(model="armlink5-inline-branchnop-v3")
+        address = BASE + 0x100
+        wrapper = inplace.Symbol("func_00100100", 0, 8, "STT_FUNC", "STB_GLOBAL", 3)
+        helper = inplace.Symbol("literal_test_helper", 0, 8, "STT_FUNC", "STB_GLOBAL", 4)
+        obj.symbols.extend((wrapper, helper))
+        obj.defined_functions = lambda: [obj.symbols[0], wrapper, helper]
+        obj.defined_globals = obj.defined_functions
+        obj.sections[3] = inplace.Section(
+            3, "i.wrapper", struct.pack("<2I", 0xEBFFFFFE, 0xE12FFF1E), 8, False, True, False,
+            [inplace.Reloc(0, inplace.R_ARM_CALL, helper)], [(0, "$a")], align=4)
+        body = struct.pack("<2I", 0xE3A00007, 0xE12FFF1E)
+        obj.sections[4] = inplace.Section(
+            4, "i.literal_test_helper", body, 8, False, True, False, mapping=[(0, "$a")], align=4)
+        linker.functions[address] = {"address": address, "size": 8, "isa": "arm",
+                                     "code_ranges": [(address, address + 8)]}
+        linker.resolver = inplace.Resolver(linker.functions)
+        memory.write(address, body)
+        linked = linker.link(obj)
+        self.assertEqual(set(linked), {1, 2, 3})
+        self.assertEqual(linked[1][1], memory.read(BASE, 16))
+        self.assertEqual(linked[3][1], body)
+        self.assertEqual(len(linker.literal_rebindings), 1)
+        self.assertEqual(len(linker.removed_callees), 1)
+        self.assertEqual(linker.removed_callees[0]["symbols"], ["literal_test_helper"])
+        linker.model = inplace.linker_model("armlink5-inline-branchnop-v2")
+        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+            linker.link(obj)
 
 
 if __name__ == "__main__":

@@ -159,16 +159,19 @@ class AcceptGateTest(unittest.TestCase):
         self.review("PASS_WITH_QUALIFICATIONS", row="QUALIFIED", qualifications=["preserved original bug"])
         self.assertEqual(accept.finalize("c001", 1)["reviews"][0]["verdict"], "PASS_WITH_QUALIFICATIONS")
 
-    def stubbed_prepare(self, name, units):
+    def stubbed_prepare(self, name, units, literal_models=("none", "none"), literal_rebindings=()):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
         receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
                    "inputs": {"linker_model": "armlink5-inline-branchnop-v2"},
-                   "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []}}
-                             for u in units],
+                   "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []},
+                              "literal_rebindings": list(literal_rebindings)} for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
+        models = iter(literal_models)
         stubs = {
-            "build": types.SimpleNamespace(build=lambda *a, **k: dict(receipt), BuildError=RuntimeError),
+            "build": types.SimpleNamespace(
+                build=lambda *a, **k: {**receipt, "inputs": {**receipt["inputs"], "literal_model": next(models)}},
+                BuildError=RuntimeError),
             "denominator": types.SimpleNamespace(verify=lambda: None, read_history=lambda: [{}]),
             "interfaces": types.SimpleNamespace(
                 audit=lambda units, root: {"units": [], "disagreements": [], "policy": []},
@@ -203,6 +206,31 @@ class AcceptGateTest(unittest.TestCase):
         # Gates v1.8: the linker model and every emulated rewrite in new units are recorded.
         self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v2")
         self.assertEqual(record["linker_rewrites"], {"func_00100000": [{"kind": "inline_nop"}]})
+        self.assertEqual(record["literal_model"], "none")
+        self.assertEqual(record["literal_rebindings"], {})
+
+    def test_two_builds_must_use_the_same_literal_model(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c011", units, ("none", "anonymous-string-records-v1"))
+        self.assertEqual(record["result"], "FAIL")
+        self.assertFalse(record["checks"]["builds_identical"])
+
+    def test_prepare_records_independent_literal_model_and_rebindings(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        rebindings = [{"rule": "anonymous-string-records-v1", "record_count": 3, "size": 46}]
+        record = self.stubbed_prepare("c012", units, ("anonymous-string-records-v1",) * 2, rebindings)
+        self.assertEqual(record["result"], "PASS")
+        self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v2")
+        self.assertEqual(record["literal_model"], "anonymous-string-records-v1")
+        self.assertEqual(record["literal_rebindings"], {"src/a.c": rebindings})
+
+    def test_finalize_preserves_the_independent_literal_model(self):
+        path = self.root / "accept/c001/prepare.json"
+        record = json.loads(path.read_text())
+        record["literal_model"] = "anonymous-string-records-v1"
+        path.write_text(json.dumps(record), encoding="utf-8")
+        self.review()
+        self.assertEqual(accept.finalize("c001", 1)["literal_model"], "anonymous-string-records-v1")
 
     def test_revised_accepted_unit_must_be_reviewed_again(self):
         """Editing an accepted source in a later checkpoint needs review rows like new work."""

@@ -33,6 +33,10 @@
     "__aeabi_vec_ctor_nocookie_nodtor": {
       "address": 1642956,
       "evidence": "scratch/integrator/runtime-helpers/REPORT.md: natural C++ member-array constructor at 0x0014d2e4 MATCH; unresolved without helper binding"
+    },
+    "__aeabi_ldivmod": {
+      "address": 1626628,
+      "evidence": "scratch/authors/w12f: natural signed 64-bit division/modulo in func_001efb00, func_001efb68, func_00190fcc, func_00191024, func_0019107c MATCH only with this binding (integrator re-ran func_001efb00: unresolved before, MATCH after)"
     }
   }
 }
