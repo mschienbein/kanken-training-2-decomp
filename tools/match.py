@@ -4,9 +4,9 @@
                           [--linker-model NAME]
 
 Every surviving function the unit defines must be named `func_XXXXXXXX` (its catalogue address) or
-appear in config/names.json; proven full-section entry aliases may share either name's binding.
-V3 can also remove eligible candidate-only callees; `--extra-source` supplies same-build helper
-definitions, compiled with the same profile. Surviving functions are
+appear in config/names.json. Only v5 lets proven full-section entry aliases share either name's
+binding. V3 and its explicit successor models can remove eligible candidate-only callees;
+`--extra-source` supplies same-build helper definitions, compiled with the same profile. Surviving functions are
 linked at their original addresses with tools/inplace.py and compared byte
 for byte over its whole catalogued extent (code + literal pool). The linker model (default
 `inplace.DEFAULT_LINKER_MODEL`, docs/LINKER.md) decides which armlink output optimisations the
@@ -129,7 +129,9 @@ class Context:
             common = min(len(data), len(original))
             first = None if same else next((i for i in range(common) if data[i] != original[i]), common)
             symbols = [s for s in obj.defined_functions() if s.shndx == placed.section.index]
-            name = next((s.name for s in symbols if self.resolver.lookup(s.name) is not None), symbols[0].name)
+            name = symbols[0].name
+            if self.model.function_entry_aliases:
+                name = next((s.name for s in symbols if self.resolver.lookup(s.name) is not None), name)
             results.append({
                 "name": name, "address": placed.base, "size": fn["size"], "candidate_size": len(data),
                 "status": status, "first_diff": first,

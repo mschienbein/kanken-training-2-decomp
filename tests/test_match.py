@@ -191,6 +191,10 @@ class CppAliasCompareTest(unittest.TestCase):
                         ctx.resolver = match.inplace.Resolver(catalogue, {name: {"address": BASE}})
                         ctx.model = match.inplace.linker_model(model)
                         ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+                        if not ctx.model.function_entry_aliases:
+                            with self.assertRaisesRegex(match.inplace.LinkError, "unresolved symbol"):
+                                ctx.compare(obj_path)
+                            continue
                         rows = ctx.compare(obj_path)
                         self.assertEqual(len(rows), 1)
                         self.assertEqual((rows[0]["name"], rows[0]["candidate_size"], rows[0]["status"]),
@@ -211,7 +215,7 @@ class AliasCompareSafetyTest(unittest.TestCase):
                 ctx = match.Context.__new__(match.Context)
                 ctx.image, ctx.functions = mem, catalogue
                 ctx.resolver = match.inplace.Resolver(catalogue, names)
-                ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v3")
+                ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v5")
                 ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
                 combine = match.inplace.ObjectFile.combine
 
@@ -237,7 +241,7 @@ class AliasCompareSafetyTest(unittest.TestCase):
         ctx = match.Context.__new__(match.Context)
         ctx.image, ctx.functions = mem, catalogue
         ctx.resolver = match.inplace.Resolver(catalogue, {"bound_variant": {"address": address}})
-        ctx.model = match.inplace.linker_model(match.inplace.DEFAULT_LINKER_MODEL)
+        ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v5")
         ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
         with patch.object(match.inplace, "ObjectFile", return_value=obj):
             rows = ctx.compare(Path("bound_copy.o"))
@@ -248,6 +252,20 @@ class AliasCompareSafetyTest(unittest.TestCase):
 
 
 class ModelOptionsTest(unittest.TestCase):
+    def test_v5_is_explicit_and_inherits_v4_without_broadening_frozen_models(self):
+        self.assertEqual(match.inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
+        for name in ("strict-v1", "armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3"):
+            policy = match.inplace.linker_model(name)
+            self.assertFalse(policy.function_entry_aliases)
+            self.assertFalse(policy.bounded_switches)
+        v4 = match.inplace.linker_model("armlink5-inline-branchnop-v4")
+        v5 = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+        self.assertTrue(v4.bounded_switches)
+        self.assertFalse(v4.function_entry_aliases)
+        self.assertTrue(v5.function_entry_aliases)
+        for field in ("inline", "branchnop", "removed_inline", "bounded_switches"):
+            self.assertEqual(getattr(v5, field), getattr(v4, field))
+
     def test_literal_option_composes_with_v3_without_changing_linker_option(self):
         profile = match.toolchain.Profile("game", "synthetic", ())
         with patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \

@@ -37,6 +37,9 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 original_size=12 if comdat_alias == "wrong_original" else 8)
             if comdat_alias == "duplicate_owner":
                 caller.symbols.append(inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+            elif comdat_alias == "unbound_alias":
+                names = {}
+                functions.pop(BASE + 0x100)
         else:
             caller, memory, functions = fixture.fixture()
             helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
@@ -150,13 +153,33 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 for reverse in (False, True):
                     with self.subTest(case=case, credit_helper=credit_helper, reverse=reverse):
                         with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
-                            self.synthetic_build(comdat_alias=case, credit_helper=credit_helper, reverse=reverse)
+                            self.synthetic_build(model="armlink5-inline-branchnop-v5", comdat_alias=case,
+                                                 credit_helper=credit_helper, reverse=reverse)
 
     def test_credited_zero_size_alias_requires_one_emitted_comdat_owner(self):
         for reverse in (False, True):
             with self.subTest(reverse=reverse):
                 with self.assertRaisesRegex(build.BuildError, "func_00100100: defined by both"):
-                    self.synthetic_build(comdat_alias="duplicate_owner", credit_helper=True, reverse=reverse)
+                    self.synthetic_build(model="armlink5-inline-branchnop-v5", comdat_alias="duplicate_owner",
+                                         credit_helper=True, reverse=reverse)
+
+    def test_v5_alias_copies_keep_helper_only_receipts_and_every_removed_owner(self):
+        for reverse in (False, True):
+            with self.subTest(reverse=reverse):
+                receipt, _ = self.synthetic_build(model="armlink5-inline-branchnop-v5",
+                                                   comdat_alias="unbound_alias", reverse=reverse)
+                self.assertEqual(receipt["result"], "PASS")
+                self.assertEqual(receipt["inputs"]["linker_model"], "armlink5-inline-branchnop-v5")
+                self.assertEqual(receipt["credited"]["functions"], 1)
+                self.assertEqual(receipt["credited"]["bytes"], 40)
+                units = {unit["source"]: unit for unit in receipt["units"]}
+                self.assertEqual(units["src/helper.c"]["functions"], [])
+                for source, unit in units.items():
+                    self.assertEqual([row["object"] for row in unit["removed_callees"]], [source])
+                self.assertIn("bound_variant", units["src/helper.c"]["removed_callees"][0]["symbols"])
+                rewrites = units["src/caller.c"]["linker_rewrites"]["func_00100000"]
+                self.assertEqual([row["target"] for row in rewrites], [None, None])
+                self.assertTrue(all(row["removed_callee"]["object"] == "src/caller.c" for row in rewrites))
 
 PROFILE = toolchain.Profile(
     "game", "armcc_504_82",

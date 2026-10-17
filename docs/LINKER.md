@@ -30,13 +30,19 @@ The v3 review fixes here precede its adoption; they do not revise v2 or any froz
 | `armlink5-inline-branchnop-v2` | default | below |
 | `armlink5-inline-branchnop-v3` | opt-in, not the default | all v2 rules plus candidate-only callees in R1 below |
 
-## Function-entry alias identity
+## Function-entry alias identity (v5 only, unadopted)
 
 ARMCC 5.04, under the frozen `game` profile, emits native C1/C2 constructors and both
 virtual and non-virtual D1/D2 destructors as one full-section `STT_FUNC` plus a zero-size
 `STT_FUNC` at the same section value. The ABI names distinguish
 [complete/base construction and destruction](https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling-special-ctor-dtor);
 the names alone **never** prove that two implementations are identical.
+
+Only the explicit **`armlink5-inline-branchnop-v5`** selection enables this identity
+extension. V5 composes v4's bounded-switch CFG and endian-state refusal with the alias
+rules below; it must be independently reviewed as that composite before adoption.
+Frozen `strict-v1`, v2 and v3, and the separately proposed v4, retain their original alias
+behavior: no sibling-name binding inheritance, and no zero-size entry alias in R1.
 
 `tools/inplace.py::function_aliases` proves identity from the ELF instead: the section must
 be executable, non-NOBITS and fully represented by its candidate bytes; every function
@@ -48,13 +54,12 @@ agree and name a catalogued function start. Match results use a bound name for t
 Interior zero-size symbols, missing/partial full-sized siblings and mixed ARM/Thumb entries
 are refused; data symbols never borrow a function binding.
 
-This identity handling is common to `strict-v1`, v2 and v3, not a new branch rewrite.
-In particular, the default v2 model **still refuses an entirely unbound destructor**:
-aliases cannot supply an original image address or authorize candidate-only elimination.
-For v3, R1's full-section-entry check uses only these proven identical aliases; its
-no-binding, code/ABI, call-site and all-reference checks remain unchanged. An allocated
-`.ARM.exidx` relocation to the helper is still a live reference and prevents removal.
-Global data or untyped definitions are not function aliases and prevent R1 removal.
+The default v2 model still refuses an entirely unbound destructor. V5 does not invent
+an original image address: an entirely unbound helper must satisfy every R1 requirement.
+Only v5 evaluates R1's full-section-entry check using the proven identical aliases above;
+the original-address exclusion, code/ABI, call-site and all-reference checks remain mandatory.
+An allocated `.ARM.exidx` relocation to the helper is still a live reference and prevents
+removal. Global data or untyped definitions are not function aliases and prevent v5 removal.
 
 Alias binding inheritance is **section-local**, not a guess about another COMDAT copy.
 Before R1 removal, every supplied copy's explicit original bindings are resolved.
@@ -71,9 +76,10 @@ bound aliases and byte-identical credited COMDAT copies.
 The original proposal failed independent review (F01, sealed in
 `scratch/review/d2-alias/REVIEW.md`). The corrected acceptance-input proposal is
 `scratch/integrator/d2-alias-r2/GATES-DRAFT.md`; it grants no checkpoint credit.
-Frozen GATES v1.16 remains unchanged. Changed alias acceptance requires a new independent
-review and explicit gate revision after c008's frozen evidence is finalized and closed;
-no existing model identifier or historical artifact is silently reinterpreted here.
+Frozen GATES v1.16 remains unchanged. The new v5 identifier and changed alias acceptance
+require a new composite independent review and explicit gate revision after c008's frozen
+evidence is finalized and closed. A gate-only revision never broadens v1/v2/v3 or v4;
+selection, both fresh receipts, prepare/history and model-transition review must bind v5.
 Regression coverage: `CppFunctionAliasTest`, `RemovedCalleeModelTest`,
 `CppAliasCompareTest`, `AliasCompareSafetyTest`, and `BuildRemovedCalleeModelTest` in
 `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
@@ -160,10 +166,10 @@ any catalogued function and not general dead-code removal:
    name without a catalogue entry is still refused. Any binding overlapping a catalogued
    function/entry/extent takes the retained-callee path, with every v2 equality/refusal intact;
    an uncatalogued bound address is also refused, rather than treated as absent.
-   All copies' bindings are inspected before removal. A COMDAT member mixing a bound copy
-   and an R1-removable copy is refused, rather than inferring a binding or giving the other
-   copy a null-target rewrite. Every supplied copy must be eligible and consistent before
-   that member can be removed.
+   Under v5, all copies' bindings are inspected before removal. A COMDAT member mixing a
+   bound copy and an R1-removable copy is refused, rather than inferring a binding or giving
+   the other copy a null-target rewrite. Every supplied copy must be eligible and consistent
+   before that member can be removed.
    It must also be unrooted: sections defining `__tagsym$$used` or another uninterpreted tag,
    ELF ARM entry/retain-marked sections, explicitly kept/first/last/entry/exported sections and
    retained COMDAT groups cannot use R1. `ObjectFile` preserves these roots, conservatively
@@ -174,8 +180,10 @@ any catalogued function and not general dead-code removal:
    A bound rooted definition retains all v2 identity/size/equality checks and I1–I3 decisions;
    retention keeps its section, not necessarily the BL.
 3. The section is executable, word-aligned, wholly code, non-Thumb and non-NOBITS, with all
-   function entries at offset zero spanning the whole section (proven identical aliases above
-   share the full-sized sibling's extent). No relocation is allowed except the nonreferencing
+   function entries at offset zero spanning the whole section. Frozen v3 and proposed v4
+   require each symbol's recorded size to equal that extent. Only v5 permits the proven
+   identical zero-size entry aliases above to share a full-sized sibling's extent.
+   No relocation is allowed except the nonreferencing
    `R_ARM_V4BX` marker. I1/I2 judge its own generated bytes, with all existing
    exclusions (PC, LR, control transfer, exceptions, armlink's branch NOP) unchanged. In addition,
    an I2 helper may read only r0–r3/flags and write only r0–r3/r12/flags: it cannot change a

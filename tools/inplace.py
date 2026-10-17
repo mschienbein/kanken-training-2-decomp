@@ -615,7 +615,7 @@ class InPlaceLinker:
     def place(self, obj: ObjectFile, names_to_address: dict[str, int]) -> dict[int, Placement]:
         placements: dict[int, Placement] = {}
         offsets: dict[int, set[int]] = {}
-        aliases = function_aliases(obj)
+        aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
         alias_addresses: dict[int, int] = {}
         for index, symbols in aliases.items():
             if index in self._removed_sections:
@@ -632,7 +632,7 @@ class InPlaceLinker:
         for fn in obj.defined_functions():
             if fn.shndx in self._removed_sections:
                 continue
-            if fn.size == 0 and fn.shndx not in aliases:
+            if self.model.function_entry_aliases and fn.size == 0 and fn.shndx not in aliases:
                 raise LinkError(f"{fn.name}: zero-size function is not a full-section entry alias")
             address = names_to_address.get(fn.name, alias_addresses.get(fn.shndx))
             if address is None:
@@ -1072,22 +1072,33 @@ class InPlaceLinker:
         by_section: dict[int, list[Symbol]] = {}
         for sym in obj.defined_functions():
             by_section.setdefault(sym.shndx, []).append(sym)
-        entry_aliases = function_aliases(obj)
-        non_function_globals = {sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
+        entry_aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
+        non_function_globals = ({sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
+                                if self.model.function_entry_aliases else set())
         # Resolve every copy before selecting any removal. A section-local alias binding
         # cannot turn another copy of the same COMDAT member into an unbound R1 entity.
         bindings: dict[int, list[int]] = {}
-        for sym in obj.symbols:
-            if sym.shndx not in obj.sections or not sym.name or sym.name.startswith("$"):
-                continue
-            target = self.resolver.lookup(sym.name)
-            address = names_to_address.get(sym.name, target.address if target else None)
-            if address is not None:
-                bindings.setdefault(sym.shndx, []).append(address - _symbol_offset(sym))
+        if self.model.function_entry_aliases:
+            for sym in obj.symbols:
+                if sym.shndx not in obj.sections or not sym.name or sym.name.startswith("$"):
+                    continue
+                target = self.resolver.lookup(sym.name)
+                address = names_to_address.get(sym.name, target.address if target else None)
+                if address is not None:
+                    bindings.setdefault(sym.shndx, []).append(address - _symbol_offset(sym))
         removed = {}
         for index, aliases in by_section.items():
             section = obj.sections[index]
             bound = bindings.get(index, ())
+            if not self.model.function_entry_aliases:
+                bound = []
+                for sym in obj.symbols:
+                    if sym.shndx != index or not sym.name or sym.name.startswith("$"):
+                        continue
+                    target = self.resolver.lookup(sym.name)
+                    address = names_to_address.get(sym.name, target.address if target else None)
+                    if address is not None:
+                        bound.append(address - _symbol_offset(sym))
             # A binding is a claim about an extant function, not licence to erase it. Include
             # interior entries/extents, so an alias cannot disguise a catalogued counterpart.
             if any(lo < address + section.size and address < lo + fn["size"]
@@ -1097,7 +1108,9 @@ class InPlaceLinker:
                 raise LinkError(f"{section.name}: removed callee must have no original address binding")
             if (not section.executable or section.nobits or section.size != len(section.data)
                     or section.size not in (4, 8) or section.align < 4
-                    or index not in entry_aliases or any(sym.value != 0 for sym in aliases)
+                    or (index not in entry_aliases or any(sym.value != 0 for sym in aliases)
+                        if self.model.function_entry_aliases
+                        else any(sym.value != 0 or sym.size != section.size for sym in aliases))
                     or index in non_function_globals
                     or any(kind != "$a" or offset != 0 for offset, kind in section.mapping)
                     or any(rel.type != R_ARM_V4BX for rel in section.relocs)
@@ -1120,7 +1133,9 @@ class InPlaceLinker:
                 removed[index]["comdat"] = section.comdat
         removed_comdats = {comdat_key(obj.sections[index]) for index in removed} - {None}
         comdats = {}
-        for index, section in obj.sections.items():
+        copies = (obj.sections.items() if self.model.function_entry_aliases
+                  else ((index, obj.sections[index]) for index in removed))
+        for index, section in copies:
             key = comdat_key(section)
             if key is not None:
                 if key not in removed_comdats:

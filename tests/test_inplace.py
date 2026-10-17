@@ -296,6 +296,8 @@ class InPlaceTest(unittest.TestCase):
 class CppFunctionAliasTest(unittest.TestCase):
     """Real game-profile C1/C2 and virtual/non-virtual D1/D2 ELF aliases."""
 
+    MODEL = "armlink5-inline-branchnop-v5"
+
     PAIRS = (
         ("_ZN5PlainC1Ev", "_ZN5PlainC2Ev"),
         ("_ZN5PlainD1Ev", "_ZN5PlainD2Ev"),
@@ -364,7 +366,7 @@ class CppFunctionAliasTest(unittest.TestCase):
             mem.write(addresses[index], data)
         return obj, mem, catalogue, names, expected
 
-    def linker(self, mem, catalogue, names, model=inplace.DEFAULT_LINKER_MODEL):
+    def linker(self, mem, catalogue, names, model=MODEL):
         return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names),
                                      (0x200000, 0x201000), model)
 
@@ -379,7 +381,9 @@ class CppFunctionAliasTest(unittest.TestCase):
                 self.assertIn(full.shndx, inplace.function_aliases(obj))
 
     def test_either_abi_name_places_one_unchanged_complete_section(self):
-        for model in inplace.LINKER_MODELS:
+        for model, policy in inplace.LINKER_MODELS.items():
+            if not policy.function_entry_aliases:
+                continue
             for binding in (0, 1):
                 with self.subTest(model=model, binding=binding):
                     obj, mem, catalogue, names, expected = self.fixture(binding)
@@ -396,6 +400,21 @@ class CppFunctionAliasTest(unittest.TestCase):
                                          linker._symbol_target(zero, obj, placements))
                     self.assertEqual([vars(sym) for sym in obj.symbols], metadata)
                     self.assertEqual(linker.removed_callees, [])
+
+    def test_frozen_models_keep_their_original_alias_requirements(self):
+        for model, policy in inplace.LINKER_MODELS.items():
+            if policy.function_entry_aliases:
+                continue
+            for binding in (0, 1):
+                with self.subTest(model=model, binding=binding):
+                    obj, mem, catalogue, names, _ = self.fixture(binding)
+                    with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                        self.linker(mem, catalogue, names, model).link(obj)
+            obj, mem, catalogue, names, expected = self.fixture()
+            for complete, base in self.PAIRS:
+                names[base] = dict(names[complete])
+            linked = self.linker(mem, catalogue, names, model).link(obj)
+            self.assertTrue(all(data == expected[index] for index, (_, data) in linked.items()))
 
     def test_zero_size_requires_an_identical_full_section_function_sibling(self):
         for case in ("interior", "no_extent", "partial_extent", "other_isa", "not_executable"):
@@ -417,7 +436,9 @@ class CppFunctionAliasTest(unittest.TestCase):
 
     def test_a_zero_size_data_symbol_cannot_borrow_a_function_binding(self):
         for kind in ("STT_OBJECT", "STT_NOTYPE"):
-            for model in inplace.LINKER_MODELS:
+            for model, policy in inplace.LINKER_MODELS.items():
+                if not policy.function_entry_aliases:
+                    continue
                 with self.subTest(kind=kind, model=model):
                     obj, mem, catalogue, names, _ = self.fixture()
                     zero = next(sym for sym in obj.symbols if sym.name == self.PAIRS[1][1])
@@ -904,6 +925,7 @@ class RemovedCalleeModelTest(unittest.TestCase):
     """V3's candidate-only exception is narrower than ordinary original-image inlining."""
 
     MODEL = "armlink5-inline-branchnop-v3"
+    ALIAS_MODEL = "armlink5-inline-branchnop-v5"
     SITES = (12, 28)
 
     def fixture(self, body=None, call=0xEBFFFFFE):
@@ -962,7 +984,7 @@ class RemovedCalleeModelTest(unittest.TestCase):
                     if reverse:
                         objects.reverse()
                         labels.reverse()
-                    linker = self.linker(mem, catalogue, names)
+                    linker = self.linker(mem, catalogue, names, self.ALIAS_MODEL)
                     with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
                         linker.link(inplace.ObjectFile.combine(objects, labels))
                     self.assertEqual(linker.removed_callees, [])
@@ -971,7 +993,7 @@ class RemovedCalleeModelTest(unittest.TestCase):
     def test_removal_checks_even_a_comdat_copy_with_no_full_sized_function(self):
         objects, mem, catalogue, _ = self.comdat_alias_fixture()
         objects[1].symbols[0].size = 0
-        linker = self.linker(mem, catalogue)
+        linker = self.linker(mem, catalogue, model=self.ALIAS_MODEL)
         with self.assertRaisesRegex(inplace.LinkError, "unsupported retained callee copy"):
             linker.link(inplace.ObjectFile.combine(objects))
         self.assertEqual(linker.removed_callees, [])
@@ -988,14 +1010,14 @@ class RemovedCalleeModelTest(unittest.TestCase):
                         objects[0].sections[1].relocs[-1].symbol = alias
                     linker = inplace.InPlaceLinker(
                         mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000),
-                        self.MODEL, retention_roots={selector: "KEEP"})
+                        self.ALIAS_MODEL, retention_roots={selector: "KEEP"})
                     with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
                         linker.link(inplace.ObjectFile.combine(objects))
                     self.assertEqual(linker.removed_callees, [])
                     self.assertEqual(linker.rewrites, [])
 
-    def test_bound_zero_size_alias_keeps_v2_equality_even_when_rooted(self):
-        for model in (inplace.DEFAULT_LINKER_MODEL, self.MODEL):
+    def test_bound_zero_size_alias_keeps_original_equality_even_when_rooted(self):
+        for model in (inplace.DEFAULT_LINKER_MODEL, self.MODEL, "armlink5-inline-branchnop-v4", self.ALIAS_MODEL):
             for rooted in (False, True):
                 for original_size in (8, 12):
                     with self.subTest(model=model, rooted=rooted, original_size=original_size):
@@ -1004,6 +1026,8 @@ class RemovedCalleeModelTest(unittest.TestCase):
                         alias = inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
                         obj.symbols.append(alias)
                         obj.sections[1].relocs[-1].symbol = alias
+                        if not inplace.linker_model(model).function_entry_aliases:
+                            names["set_field18"] = dict(names["bound_variant"])
                         if rooted:
                             obj.sections[2].retention = ("KEEP",)
                         linker = self.linker(mem, catalogue, names, model)
@@ -1067,13 +1091,17 @@ class RemovedCalleeModelTest(unittest.TestCase):
         alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", helper.shndx)
         obj.symbols.append(alias)
         obj.sections[1].relocs[-1].symbol = alias
-        linker = self.linker(mem, catalogue)
+        linker = self.linker(mem, catalogue, model=self.ALIAS_MODEL)
         self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
         self.assertEqual(linker.removed_callees[0]["symbols"], ["base_variant", "set_field18"])
         self.assertEqual((helper.size, alias.size), (8, 0))
         self.assertEqual([row.target for row in linker.rewrites], [None, None])
-        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
-            self.linker(mem, catalogue, model=inplace.DEFAULT_LINKER_MODEL).link(obj)
+        for model, policy in inplace.LINKER_MODELS.items():
+            if policy.function_entry_aliases:
+                continue
+            with self.subTest(frozen_model=model):
+                with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                    self.linker(mem, catalogue, model=model).link(obj)
 
     def test_zero_size_aliases_do_not_relax_r1_reference_or_extent_checks(self):
         for case in ("interior", "no_extent", "other_isa", "data_alias", "untyped_alias", "pointer", "unwind"):
@@ -1097,7 +1125,7 @@ class RemovedCalleeModelTest(unittest.TestCase):
                                                       bytes(4), 4, False, False, False,
                                                       [inplace.Reloc(0, rtype, symbol)], align=4)
                 with self.assertRaises(inplace.LinkError):
-                    self.linker(mem, catalogue).link(obj)
+                    self.linker(mem, catalogue, model=self.ALIAS_MODEL).link(obj)
 
     def test_a_definition_in_another_candidate_object_is_used_not_an_external_guess(self):
         obj, mem, catalogue = self.fixture()

@@ -19,6 +19,7 @@ class LinkerModel:
     inline: bool = False  # --inline: ARM BL to a 4/8-byte ARM function -> its instruction, or a NOP
     branchnop: bool = False  # --branchnop: relocated ARM B to the next instruction -> NOP
     removed_inline: bool = False  # v3: inline and eliminate candidate-only tiny function sections
+    function_entry_aliases: bool = False  # v5: proven same-section zero/full-sized entry aliases
 
 
 LINKER_MODELS = {m.name: m for m in (
