@@ -13,8 +13,9 @@ versions behavior. If adoption numbering changes, preserve all normative require
   `armlink5-inline-branchnop-v5` permits proven full-section zero-size ELF `STT_FUNC`
   entry aliases. It composes the separately reviewed v4 bounded-switch CFG and fail-closed
   endian-state checks with the alias-identity requirements below. Frozen `strict-v1`,
-  `armlink5-inline-branchnop-v2`, `armlink5-inline-branchnop-v3`, and v4 retain their exact
-  original semantics: no sibling-name binding inheritance and no zero-size R1 entry alias.
+  `armlink5-inline-branchnop-v2` and `armlink5-inline-branchnop-v3` retain their exact
+  original semantics. V4 remains unadopted and retains its original alias policy: no
+  sibling-name binding inheritance and no zero-size R1 entry alias.
   Every same-COMDAT member copy's binding is resolved before removal; mixed original-bound
   and removable copies, unsupported retained copies, and contradictory removed copies are
   refused. Original-bound equality, all R3 roots/CFG/reference/dependency checks, unique
@@ -54,9 +55,17 @@ versions behavior. If adoption numbering changes, preserve all normative require
    `__tagsym$$used`, exported/entry/KEEP/first/last selectors and uninterpreted metadata all
    prevent removal. Unmatched explicit selectors fail closed. Retention keeps the section
    but never waives original-bound equality or proves that a call must remain an ordinary BL.
-5. V5 inherits v4's complete bounded-switch CFG proof and endian-state refusal without
-   weakening them. All existing incoming-path setup/entry/result contracts, outgoing
-   successor/liveness checks and unknown-control-flow refusals remain mandatory. Every
+5. V5 inherits the corrected v4 bounded-switch CFG and state proof without weakening them.
+   Each guard-window instruction must belong to an explicitly modeled effect class;
+   architectural destination/NZCV changes must be accounted for even when decoder write
+   lists omit them. An empty access list is not preservation evidence. Before recovering
+   tables, every decoded owner instruction must belong to an explicitly modeled
+   state-preserving class; unsupported classes require refusal, not an assumed absence of
+   status changes. Unresolved exception returns, including every RFE addressing form, are
+   unknown control/state restoration, never ordinary fall-through or recognized returns.
+   Their decoded presence prevents owner-state proof even before the guard, on one
+   predecessor, or in an unreachable suffix. All incoming-path setup/entry/result contracts,
+   outgoing successor/liveness checks and unknown-control-flow refusals remain mandatory. Every
    reference in every supplied allocated section is still censused, including otherwise
    unplaced sections; pointers, tail calls, dependencies, interior/addended targets and
    PREL31/unwind references are not silently discarded. Only unreferenced unrooted helpers
@@ -81,9 +90,10 @@ versions behavior. If adoption numbering changes, preserve all normative require
 ## Mandatory re-review and adoption evidence
 
 - Re-derive the exact corrected composite source/registry and selected identifier. Confirm
-  v5 has both `bounded_switches` and `function_entry_aliases`, while older models retain
-  their frozen flags, decoding, alias rules and bound-name display. Check public match/build
-  consumers, not only private proof helpers. Default v2 remains unchanged.
+  v5 has both `bounded_switches` and `function_entry_aliases`, while strict/v2/v3 retain
+  their frozen flags, decoding, alias rules and bound-name display. Unadopted v4 must keep
+  its alias policy unchanged while receiving its reviewed proof corrections. Check public
+  match/build consumers, not only private proof helpers. Default v2 remains unchanged.
 - Exercise contradictory copies and identical copies against a wrong 12-byte bound original,
   caller-only and helper-credit consumers, both object orders, retained roots through either
   alias/different copy, credited duplicate owners, and unsupported retained counterparts.
@@ -92,8 +102,11 @@ versions behavior. If adoption numbering changes, preserve all normative require
   six pair/binding positives under explicit v5. The old proposal's six whole-object links
   across strict/v2/v3 are historical withdrawn broadening evidence, not current behavior;
   those frozen models now keep their original refusals unless all names are explicitly bound.
-- Exercise bounded switches and zero-size helper aliases together, including SETEND refusal,
-  not merely each feature in isolation. Retain strict complete-extent and bound-name checks.
+- Exercise bounded switches and zero-size helper aliases together, including SETEND,
+  LDREXD/predicated-LDREXD/MRRC omitted-write cases, every RFE addressing form and all
+  owner-state placements, not merely each feature in isolation. Independently establish
+  modeled guard effects and state-preserving classes rather than trusting decoder access
+  lists. Retain strict complete-extent and bound-name checks.
 - Main runs the combined suite once after all changes land, followed by independent composite
   review; do not overlap full verification with other workers. No full builds/suite, acceptance,
   gate adoption, history or push operations are authorized by this author assignment.
@@ -111,7 +124,7 @@ original source/evidence remain unchanged. Pre-versioning corrected safety-smoke
 retained separately as superseded diagnostics, not v5 acceptance evidence. Final settled-code
 smoke and exact composite revision are bound in the evidence block below.
 
-## Settled implementation and author smoke evidence
+## Historical pre-hardening implementation and author smoke evidence
 
 - Base: current main `8bf3fe821c2172b94522fb334e7a8c5aa5512173`.
 - The reviewed alias change was applied only as patch
@@ -122,8 +135,9 @@ smoke and exact composite revision are bound in the evidence block below.
   `e72fb34a08546173a1033893a9729c5dc996620a`. No check ran between the known-failed first
   snapshot and its correction. Both model flags are preserved in the composite.
 - Settled source revision exercised:
-  `628aad34163a2b745a3cee7b1540dbc006887626`. The final documentation-only successor is
-  identified in the accompanying `result.json`; its code/test/model inputs are unchanged.
+  `628aad34163a2b745a3cee7b1540dbc006887626`. Its documentation-only successor
+  `7ea821d8a00e44502a248597ae6faa027cf4dcbf` is identified in the preserved `result.json`;
+  its code/test/model inputs matched that smoke. These snapshots predate the F03/F04 hardening.
 - Focused smoke: `scratch/integrator/d2-alias-r2/smoke-v5.json`,
   SHA-256 `7b46a4adf1c6f7d0eba2bc0f36fe4877c7f79e53ae8e8c0563146562796f4c0e`.
   **Exit 0; 22 direct assertion groups passed.** This is not a full-suite/test-runner or
@@ -149,5 +163,15 @@ Main should run the serialized integration suite only after all changes land:
 ```
 
 Then obtain a new independent review of the **complete main-based v5 composite**, including
-both scoped v4 commits and all alias safety/model changes. No independent PASS, gate
+the complete scoped v4 hardening series and all alias safety/model changes. No independent PASS, gate
 adoption, motivating real-image MATCH or checkpoint credit is claimed here.
+
+## R1 R2 review boundary
+
+The sealed `scratch/review/r1-jumptables-r2/REVIEW.md` is **FAIL** for scoped v4 tip
+`e72fb34a08546173a1033893a9729c5dc996620a`: F03 finds omitted architectural guard writes
+(LDREXD/predicated LDREXD/MRRC), and F04 finds unmodeled RFE PC/CPSR restoration.
+The historical passing smoke above did not exercise those findings and is not composite
+approval. Its records and both sealed failing reviews remain unchanged. The v5 composite
+must include the corrective v4 successor and its modeled-class proof requirements before
+independent final review; strict/v2/v3 remain frozen and v4 remains unadopted.
