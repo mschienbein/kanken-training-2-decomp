@@ -1,10 +1,16 @@
-# R1 bounded ARM jump-table CFG — proposed GATES revision
+# R1 bounded ARM jump-table CFG — corrected v4 proposal (r2)
 
 **DRAFT — NOT ADOPTED.** Applies to branch `r1-jumptables`, resumed from `cee2571` with its
 existing implementation and regression work preserved. Frozen `docs/GATES.md` remains v1.16.
 An independent implementation review and the integrator's recorded revision must precede any
 new checkpoint using this extension. Never change gates during a checkpoint or rewrite old
 prepared/finalized evidence. No armlink execution or new accepted credit is claimed.
+
+The sealed review of `21c2bd4` is **FAIL** (`scratch/review/r1-jumptables/REVIEW.md`):
+F01 requires a new immutable selected model; F02 requires little-endian proof for LDR targets.
+The corrected policy is `armlink5-inline-branchnop-v4`. Frozen v3 behavior and all old evidence
+are preserved. This draft is not pre-approved by that failed review; a new independent
+implementation/text review is required.
 
 The revision number below is proposed only; the integrator assigns the next unused revision
 at adoption. The wording of the following normative blocks is the exact proposed text.
@@ -15,18 +21,33 @@ Insert at the top of the revision history and change the document's frozen-versi
 only after independent review and an explicit adoption decision:
 
 ```markdown
-- **v1.17** (2026-10-17): R1's original-code CFG may resolve the fully bounded unsigned ARM
-  compiler jump-table forms described in condition 4 below. The guard compares the unchanged
-  index with an immediate, no entry bypasses the guard, and every table/default successor is
-  proven inside the caller's catalogued code. Unknown, unbounded, escaping and other computed
-  transfers remain refusals. The existing incoming argument-provenance and outgoing
-  register/flag checks apply to all enumerated paths. No helper instruction shape, rewrite,
-  retention exception, equality relaxation, source/provenance waiver or additional credit is
-  introduced. V2 is unchanged. Cause: the 2,212-byte `func_001ab680` candidate was refused on a
-  compiler switch CFG even though a separate, explicitly uncredited forced-context experiment
-  reproduced its bytes. That experiment is not acceptance evidence. Independent reviewers
-  must re-derive the bounded CFG and all existing R1 qualifications before this revision is
-  adopted; implementing the decoder or obtaining a private MATCH alone is not adoption.
+- **v1.17** (2026-10-17): the new immutable model `armlink5-inline-branchnop-v4` may resolve
+  R1's fully bounded unsigned ARM compiler jump-table forms described in condition 4.
+  Frozen `armlink5-inline-branchnop-v3` retains its original CFG policy, caller decoding and
+  return classification; this revision never broadens or reinterprets that identifier.
+  V4 proves the same-index immediate bound, no guard bypass, complete owned table/default
+  successors, and little-endian data interpretation on every path to an address-table load.
+  Unknown, unbounded, escaping and other computed transfers remain refusals. The implementation
+  conservatively rejects owner state changes rather than guessing restored endian state.
+  Existing all-path incoming/outgoing ABI checks apply to the enumerated graph. Helper shape,
+  rewriting, retention, bound-callee equality, full source/object closure and QUALIFIED
+  provenance obligations are unchanged. V2 is unchanged. Both fresh receipts, prepare and
+  history bind v4 explicitly; transitions reopen affected R1 callers. Cause: compiler switches
+  in the 2,212-byte `func_001ab680` candidate, followed by independent F01/F02 findings on the
+  rejected same-name/endian-unproved implementation (`21c2bd4`). Prior forced-context matching
+  and private author-loop MATCH results are not adoption or accepted credit. A new independent
+  review and this recorded revision must precede any relevant prepare.
+```
+
+## Proposed model-selection addition after the R1 introduction
+
+```markdown
+The bounded-switch CFG proof policy is selected only by
+`armlink5-inline-branchnop-v4`. Frozen `armlink5-inline-branchnop-v3` records
+retain their original meaning; this revision does not broaden or reinterpret
+that identifier. Selection, both fresh receipts, prepare and finalized history
+bind the new identifier, and transition review reopens all affected R1 callers
+as required by the existing selector. Strict/v2/v3 behavior is not changed.
 ```
 
 ## Proposed replacement for R1 condition 4
@@ -46,9 +67,9 @@ only after independent review and an explicit adoption decision:
    no inputs. These checks do not prove the argument/result types,
    interprocedural liveness, or that the original source contained a call.
 
-   Only the following bounded ARM switch transfers may resolve an otherwise
-   indirect table edge. Let A be the original instruction address and rM a
-   non-PC index register. An unconditional immediate CMP rM, #N must guard
+   Only explicitly selected v4 may resolve the following bounded ARM switch
+   transfers as otherwise indirect table edges. Let A be the original instruction
+   address and rM a non-PC index register. An unconditional immediate CMP rM, #N must guard
    ADDLS pc, pc, rM, LSL #2 (branch table) or
    LDRLS pc, [pc, rM, LSL #2] (absolute-address table).
    The unsigned LO forms are also allowed: LS enumerates exactly indices
@@ -77,6 +98,19 @@ only after independent review and an explicit adoption decision:
    and code bytes cannot supply address-table words. Image search, neighboring
    owners, candidate relocations and arbitrary memory reads are not witnesses.
    Thumb, misaligned, data, undecoded and out-of-extent table destinations fail.
+
+   For an LDR address table, little-endian data interpretation at the load must
+   be established on every incoming path. A reachable SETEND or other unresolved
+   change of data-endianness state is a refusal unless that state is independently
+   proved little-endian at the load. A change before the comparison is subject to
+   the same requirement; preserving the index and NZCV flags alone is insufficient.
+   The target uses the little-endian public ARM ABI at catalogue entries and
+   conforming call returns. This implementation conservatively resolves no table
+   in an owner containing any decoded SETEND, MSR, MCR/MCRR (including suffixed
+   variants) or CPS instruction, even when unreachable or apparently restoring LE.
+   It also rejects flag-only MSR and non-system MCR rather than infer their state
+   effects. These conservative false negatives do not authorize an endian-state
+   bypass or claim interprocedural processor-state recovery.
 
    The not-taken successor at A + 4 is an unconditional direct branch to
    decoded caller code or an ordinary recognized return; it cannot fall into
@@ -108,14 +142,20 @@ only after independent review and an explicit adoption decision:
    comparison, decoded unsigned bound and exact entry count, preservation of
    index/flags, absence of alternate entries after the guard, every table slot
    and destination, the default edge and every subsequent path using only the
-   original owner's catalogue code/pool ranges. Inspect both incoming argument
-   setup and outgoing register/flag liveness across all cases; a helper-free
-   case, repeated target, loop, predicated instruction or another table must
-   not hide a bypass, read or unknown transfer. Independently exercise the
+   original owner's catalogue code/pool ranges. Establish little-endian data
+   interpretation on every incoming path to each LDR table, including changes
+   before the guard or on only one predecessor, and the entry/call ABI state
+   contract; index/NZCV stability alone is insufficient. Inspect both incoming
+   argument setup and outgoing register/flag liveness across all cases; a
+   helper-free case, repeated target, loop, predicated instruction or another
+   table must not hide a bypass, read or unknown transfer. Independently exercise
    positive and negative public linker consumers, including missing/changed
-   guards, index/flag changes, entry/branch/table guard bypasses, truncated or
-   escaping tables/defaults, and other computed flow. Re-run the five accepted
-   call-bearing function regressions under both v2 and v3 and the full suite.
+   guards, index/flag changes, entry/branch/table guard bypasses, endian/status/
+   system-state changes, truncated or escaping tables/defaults, and computed
+   flow. Require frozen v3's table refusal and selected v4's positive behavior.
+   Re-run the five accepted call-bearing function regressions under v2, frozen
+   v3 and selected v4, plus the full suite. Check every CLI/receipt/model-payload
+   selection and the unchanged-R1 transition review when v3 changes to v4.
    Argcheck must not invent an original callee edge for target: null; missing
    original-target evidence is a manual-review obligation, not an ABI-audit pass.
 ```
@@ -130,12 +170,14 @@ this draft does not opt any checkpoint into a new gate or amend existing selecti
 
 ## Independent review inputs and commands
 
-Implementation: `tools/inplace.py`; tests: `tests/test_inplace.py`; consumer synchronization:
-`research/linker/removed_callee_census.py`; exact explanatory contract: `docs/LINKER.md`,
-“Jump tables in the call-context CFG”. Review the complete diff against `cee2571`, including
-resumed changes, rather than only the latest session's edits. Seal an independent verdict
-before reading another review. Do not copy original bytes, disassembly or packets into Git,
-chat or logs.
+Implementation: `tools/inplace.py`, `tools/linker_models.py`, registry binding in `tools/build.py`;
+payload/selector regressions: `tests/test_inplace.py`, `tests/test_match.py`,
+`tests/test_build.py`, `tests/test_compid.py`, `tests/test_accept.py`; diagnostic consumer:
+`research/linker/removed_callee_census.py`; contracts: `docs/LINKER.md` and
+`docs/ACCEPTANCE.md`. Review the complete diff against `cee2571`, including the frozen-policy
+restoration and all resumed changes, not merely the r2 delta against the failed `21c2bd4`.
+Seal an independent verdict before reading another review. Do not copy original bytes,
+disassembly or packets into Git, chat or logs.
 
 Use the main repository interpreter from the assigned worktree:
 
@@ -143,18 +185,18 @@ Use the main repository interpreter from the assigned worktree:
 /home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/test_suite.py
 ```
 
-The main agent runs verification after implementation, serialized with other full builds,
-suites and checkpoint work. The editing worker does not run this suite. The relevant new
-classes are `JumpTableContextTest` and `SwitchRemovedCalleeTest`; the existing
-`ArmlinkModelTest`, `ArmCallAbiContextTest` and `RemovedCalleeModelTest` retain the v2/R1
-refusal, equality, rooting, ABI and provenance regressions. Do not pipe a gate; capture each
-process exit status.
+Main runs full verification after implementation, serialized with full builds, suites and
+checkpoint work. The editing worker performs only the requested focused settled-code smoke,
+not this full suite. Relevant new classes are `JumpTableContextTest`, `BoundedSwitchModelTest`
+and `SwitchRemovedCalleeTest`; retained `ArmlinkModelTest`, `ArmCallAbiContextTest` and
+`RemovedCalleeModelTest` cover frozen v2/v3 safeguards. CLI/model-payload and acceptance-transition
+tests additionally cover selected v4. Do not pipe a gate; capture every process exit.
 
-For each row below, independently execute `tools/match.py SOURCE --profile game --show 0`
-with **each** explicit `--linker-model armlink5-inline-branchnop-v2` and
-`--linker-model armlink5-inline-branchnop-v3`, using separate outputs under
-`scratch/integrator/r1-jumptables/accepted/{v2,v3}/FUNCTION`. Require each full extent to
-remain MATCH with no rewrites/removals; record all ten exits and actual receipts.
+For each row below, execute `tools/match.py SOURCE --profile game --show 0` with **each**
+explicit model `armlink5-inline-branchnop-v2`, `armlink5-inline-branchnop-v3`, and
+`armlink5-inline-branchnop-v4`. Use separate outputs under
+`scratch/integrator/r1-jumptables/r2/accepted/{v2,v3,v4}/FUNCTION`. Require each full extent
+to remain MATCH with no rewrites/removals; record all fifteen exits and actual receipts.
 
 | Function | SOURCE | Extent |
 |---|---|---:|
@@ -164,30 +206,45 @@ remain MATCH with no rewrites/removals; record all ten exits and actual receipts
 | `func_0018fdd4` | `src/wave1/func_0018fdd4.cpp` | 40 B |
 | `func_00195254` | `src/wave1/func_00195254.c` | 224 B |
 
-Real r4052 author-loop command (no bypass; capture its actual exit):
+Corrected real r4052 author-loop command (selected v4, no bypass; capture its actual exit):
 
 ```sh
 /home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/match.py \
   /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/func_001ab680_removed_setter.c \
   --extra-source /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/removed_content_setter.c \
-  --profile game --linker-model armlink5-inline-branchnop-v3 --show 0 \
-  --out scratch/out/r4052-v3
+  --profile game --linker-model armlink5-inline-branchnop-v4 --show 0 \
+  --out scratch/out/r4052-v4
 ```
 
-Observed editing-worker execution after implementation settled: **exit 0; MATCH 2,212/2,212 B**,
-two `inline_insn` rewrites at **+0x5a8/+0x6bc**, both `target: null`, and one 8-byte
-`bind_content` section removed. No forced-context override was used. The unchanged caller and
-helper source/object hashes, and their seven/six compiler-recorded transitive dependencies,
-agree with the exact compiler-cache inputs used by this command.
+Historical evidence is retained, not re-labelled: `21c2bd4`'s worker observed a normal-filter
+2,212/2,212 B MATCH with two rewrites, but under the incorrectly expanded v3 identifier.
+Its source/header/object closure is in `scratch/integrator/r1-jumptables/verification.json`.
+Main subsequently reported 652 tests (1 skipped, no failed modules) and ten exact v2/v3
+accepted-function regressions for that rejected snapshot. These do not verify corrected v4.
+The sealed F01/F02 counterexamples are ground truth and were not rerun on unchanged old code.
 
-The receipt and private `scratch/integrator/r1-jumptables/verification.json` record the
-worker's settled-code execution, result, rewrite/removal count and source/header/object
-closure. The pre-existing output was preserved separately; it and the earlier forced-context
-experiment are not fresh verification of this implementation. No tests, suite, full build,
-accepted-function regressions, prepare/finalize or gate-adoption command was executed by the
-editing worker. Exact command vectors for the main agent's ten accepted-function matches and
-full suite are in `scratch/integrator/r1-jumptables/regression-commands.json`.
+Corrected command vectors and focused-smoke/source-closure evidence are kept separately under
+`scratch/integrator/r1-jumptables/r2/`, with the real v4 receipt in `scratch/out/r4052-v4`.
+No old result, review, selection or checkpoint is overwritten. A MATCH remains a qualified
+author candidate, not historical helper identity or accepted credit. New independent
+implementation/text review and a normally selected, fresh prepared/finalized checkpoint are
+still mandatory. No armlink execution or gate adoption is authorized by this draft.
 
-The observed MATCH remains a qualified author candidate, not accepted source credit.
-Independent typed-contract/source review and a normally selected, fresh prepared/finalized
-checkpoint remain mandatory.
+## Corrected settled-code smoke evidence
+
+The requested focused post-fix smoke exited **0: 53 tests, OK**. Its public linker consumers
+require v4 positives and frozen-v3 refusals, reject the reported endian case and before-guard/
+single-predecessor/unreachable state changes, and exercise compiled switches, legacy ordinary
+helpers, CLI/model payloads, registry receipt binding and v3→v4 transition reviews.
+
+The corrected v4 command above exited **0: MATCH 2,212/2,212 B**, with exactly two
+`inline_insn` rewrites at **+0x5a8 / +0x6bc**, both `target: null`, and one 8-byte
+`bind_content` removed. Caller/helper sources and objects and their seven/six recorded header
+dependencies agree with the exact compiler-cache inputs. The new receipt is
+`scratch/out/r4052-v4/func_001ab680_removed_setter.result.json`; command, exit, hashes and closure
+are recorded in `scratch/integrator/r1-jumptables/r2/verification.json`.
+
+No full suite, full build, fifteen accepted-function regressions, prepare/finalize or gate
+adoption was executed by the editing worker for r2. The exact new Main commands are in
+`scratch/integrator/r1-jumptables/r2/regression-commands.json`. The old F01/F02 failures were not
+rerun on unchanged code. These focused results are not an independent PASS or adoption.

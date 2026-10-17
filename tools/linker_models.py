@@ -27,6 +27,8 @@ LINKER_MODELS = {m.name: m for m in (
     LinkerModel("strict-v1"),
     LinkerModel("armlink5-inline-branchnop-v2", inline=True, branchnop=True),
     LinkerModel("armlink5-inline-branchnop-v3", inline=True, branchnop=True, removed_inline=True),
+    LinkerModel("armlink5-inline-branchnop-v4", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True),
     LinkerModel("armlink5-inline-branchnop-v5", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True),
 )}

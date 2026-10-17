@@ -70,6 +70,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             "config/names.json": b"{}",
             "config/compiler_profiles.json": b"{}",
             "toolchain.lock.json": b"{}",
+            "tools/linker_models.py": Path(inplace.__file__).with_name("linker_models.py").read_bytes(),
             "orig/exheader.bin": b"synthetic-header",
             "orig/exefs/code.blz": b"synthetic-compression",
             "compiler.exe": b"synthetic-compiler",
@@ -98,7 +99,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
         with ExitStack() as stack:
             for target, attribute, value in (
                 (build, "ROOT", root), (build, "MATCHES", root / "config/matches.json"),
-                (build, "HARNESS", ()), (build.inplace, "ObjectFile", object_file),
+                (build, "HARNESS", ("tools/linker_models.py",)), (build.inplace, "ObjectFile", object_file),
                 (build.toolchain, "PROFILES", root / "config/compiler_profiles.json"),
                 (build.image_mod, "CATALOGUE", root / "config/catalogue.json"),
                 (build.image_mod, "NAMES", root / "config/names.json"),
@@ -138,6 +139,21 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 self.assertTrue(all(row["target"] is None for row in rewrites))
                 self.assertTrue(all(row["removed_callee"] == helper["removed_callees"][0] for row in rewrites))
                 self.assertEqual(caller["removed_callees"], [])
+
+    def test_v4_model_and_removed_helper_closure_are_recorded_without_changing_v3(self):
+        model = "armlink5-inline-branchnop-v4"
+        receipt, root = self.synthetic_build(model=model)
+        self.assertEqual(receipt["result"], "PASS")
+        self.assertEqual(receipt["inputs"]["linker_model"], model)
+        self.assertIn("tools/linker_models.py", build.HARNESS)
+        self.assertEqual(receipt["inputs"]["harness_sha256"]["tools/linker_models.py"],
+                         build.sha256_file(root / "tools/linker_models.py"))
+        caller, helper = ({unit["source"]: unit for unit in receipt["units"]}[source]
+                          for source in ("src/caller.c", "src/helper.c"))
+        self.assertEqual(helper["functions"], [])
+        self.assertEqual(helper["source_sha256"], build.sha256_file(root / "src/helper.c"))
+        self.assertEqual(helper["removed_callees"][0]["object"], "src/helper.c")
+        self.assertTrue(all(row["target"] is None for row in caller["linker_rewrites"]["func_00100000"]))
 
     def test_v2_never_uses_candidate_only_helper_elimination(self):
         with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
@@ -397,7 +413,8 @@ class BuildLiteralModelTest(unittest.TestCase):
         self.assertTrue(all(not u["literal_rebindings"] for u in receipt["units"]))
 
     def test_combined_build_attributes_each_pool_to_its_own_unit(self):
-        for model in ("armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3"):
+        for model in ("armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3",
+                      "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
             with self.subTest(model=model):
                 receipt = self.synthetic_build(linker_model=model)
                 self.assertEqual(receipt["result"], "PASS")
@@ -419,11 +436,12 @@ class BuildLiteralModelTest(unittest.TestCase):
     def test_cli_forwards_literal_and_linker_models_independently(self):
         receipt = {"result": "PASS", "credited": {"functions": 1, "catalogue_functions": 1,
                    "bytes": 4, "catalogue_bytes": 4}, "checks": {}}
-        with patch.object(build, "build", return_value=receipt) as run, contextlib.redirect_stdout(io.StringIO()):
-            code = build.main(["--name", "synthetic", "--linker-model", "armlink5-inline-branchnop-v3",
-                               "--literal-model", MODEL])
-        self.assertEqual(code, 0)
-        self.assertEqual(run.call_args.args[-2:], ("armlink5-inline-branchnop-v3", MODEL))
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+            with self.subTest(model=model), patch.object(build, "build", return_value=receipt) as run, \
+                    contextlib.redirect_stdout(io.StringIO()):
+                code = build.main(["--name", "synthetic", "--linker-model", model, "--literal-model", MODEL])
+                self.assertEqual(code, 0)
+                self.assertEqual(run.call_args.args[-2:], (model, MODEL))
 
     def test_cli_leaves_literal_model_off_by_default(self):
         receipt = {"result": "PASS", "credited": {"functions": 1, "catalogue_functions": 1,

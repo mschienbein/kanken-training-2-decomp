@@ -144,18 +144,26 @@ _ARM_CALLER_SAVED = frozenset((cs_arm.ARM_REG_R1, cs_arm.ARM_REG_R2, cs_arm.ARM_
 _ARM_RESULTS = frozenset((cs_arm.ARM_REG_R0, cs_arm.ARM_REG_R1))
 
 
-def _arm_call_flow(insn) -> str:
-    """Classify only control flow whose successors the ARM-only R1 filter can prove."""
+def _arm_call_flow(insn, *, bounded_switches: bool = False) -> str:
+    """R1 flow classification; v4 tightens returns without reinterpreting frozen v3."""
     if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
         return "call"
     if insn.id == cs_arm.ARM_INS_B and insn.operands[0].type == cs_arm.ARM_OP_IMM:
         return "branch"
-    word = struct.unpack("<I", insn.bytes)[0]
-    if word >> 28 != 0xF and (
-            word & 0x0FFFFFFF in (0x012FFF1E, 0x01A0F00E)  # BX lr / MOV pc, lr
-            or word & 0x0FFF8000 == 0x08BD8000):  # LDMIA sp!, {..., pc} / POP
+    read, written = map(set, insn.regs_access())
+    if bounded_switches:
+        word = struct.unpack("<I", insn.bytes)[0]
+        if word >> 28 != 0xF and (
+                word & 0x0FFFFFFF in (0x012FFF1E, 0x01A0F00E)  # BX lr / MOV pc, lr
+                or word & 0x0FFF8000 == 0x08BD8000):  # LDMIA sp!, {..., pc} / POP
+            return "return"
+    elif (CS_GRP_RET in insn.groups
+            or insn.id == cs_arm.ARM_INS_BX and insn.operands[0].reg == cs_arm.ARM_REG_LR
+            or cs_arm.ARM_REG_PC in written and (
+                cs_arm.ARM_REG_LR in read or insn.id == cs_arm.ARM_INS_POP
+                or insn.id in (cs_arm.ARM_INS_LDM, cs_arm.ARM_INS_LDMDA, cs_arm.ARM_INS_LDMDB, cs_arm.ARM_INS_LDMIB)
+                and cs_arm.ARM_REG_SP in read)):
         return "return"
-    written = set(insn.regs_access()[1])
     if _FLOW_GROUPS & set(insn.groups) or cs_arm.ARM_REG_PC in written:
         return "unknown"
     return "other"
@@ -229,6 +237,15 @@ def _arm_switch_guard(instructions: dict, flows: dict, writer: int, index: int) 
             return None
 
 
+def _arm_changes_data_endianness(insn) -> bool:
+    """V4 uses the target's LE ABI at entries/call returns, not a guessed CPSR.E value.
+
+    Reject even unreachable state changes, SETEND LE, flag-only MSR and non-system MCR:
+    no instruction in a decoded owner may require an unimplemented endian-state proof.
+    """
+    return insn.mnemonic.startswith(("setend", "msr", "mcr", "cps"))
+
+
 def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: dict[int, int]) -> dict[int, list[int]]:
     """Successors of every ARMCC jump-table writer whose bound and every target are proven.
 
@@ -241,7 +258,12 @@ def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: 
     fall-through must be an unconditional transfer that cannot run into the table. The writer may
     be reached only by falling through from the guard: no branch, call, entry or other table
     target may land in (compare, writer]. Anything else stays unknown and the caller fails closed.
+    V4 conservatively resolves no table in an owner containing a SETEND or unresolved
+    status/system-state write, even when unreachable. Target entries and ABI-conforming
+    call returns use little-endian data; no local state-changing path is guessed away.
     """
+    if any(_arm_changes_data_endianness(insn) for insn in instructions.values()):
+        return {}
     candidates = {}
     for address, insn in instructions.items():
         if flows[address] != "unknown":
@@ -289,15 +311,15 @@ def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: 
 
 def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], condition: int,
                          entries: set[int] | None = None, call_sites: set[int] | None = None,
-                         words: dict[int, int] | None = None) -> str:
+                         words: dict[int, int] | None = None, *, bounded_switches: bool = False) -> str:
     """Conservative whole-caller CFG filter, not evidence of a historical helper's identity.
 
     An input is defined in the preceding four straight-line words on every incoming path,
     is an unmodified incoming argument, or is an unmodified r0/r1 result of an unconditional
     preceding call on that path. Conditional definitions/calls alone do not establish inputs.
-    Both conditional successors are checked; unresolved indirect transfers fail closed, except
-    a bounded ARMCC jump table (`_arm_jump_tables`): `words` maps the caller's own pool addresses
-    to their original words and supplies the word-table form's targets.
+    Both conditional successors are checked; unresolved indirect transfers fail closed.
+    Only the explicit `bounded_switches` policy (v4/v5) enables `_arm_jump_tables`, with
+    `words` limited to this caller's own original pools. The default retains frozen v3 behavior.
     Afterwards, follow every successor until a call/return or unconditional definitions of all
     caller-saved registers/flags. r0 may be a result. Candidate removed calls are call barriers.
     """
@@ -305,8 +327,9 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
         return "arguments_not_materialised"
     entries = set(entries) if entries is not None else {min(instructions)}
     call_sites = call_sites or set()
-    flows = {address: _arm_call_flow(insn) for address, insn in instructions.items()}
-    tables = _arm_jump_tables(instructions, flows, entries, words or {})
+    flows = {address: _arm_call_flow(insn, bounded_switches=bounded_switches)
+             for address, insn in instructions.items()}
+    tables = _arm_jump_tables(instructions, flows, entries, words or {}) if bounded_switches else {}
     successors = {address: tables[address] if address in tables else _arm_successors(instructions, insn, flows[address])
                   for address, insn in instructions.items()}
     flows.update(dict.fromkeys(tables, "switch"))
@@ -1202,8 +1225,8 @@ class InPlaceLinker:
         entry_aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
         non_function_globals = ({sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
                                 if self.model.function_entry_aliases else set())
-        # Resolve every copy before selecting any removal. A section-local alias binding
-        # cannot turn another copy of the same COMDAT member into an unbound R1 entity.
+        # V5 resolves every copy before selecting any removal. A section-local alias binding
+        # cannot turn another copy into an unbound R1 entity; older models keep their scan below.
         bindings: dict[int, list[int]] = {}
         if self.model.function_entry_aliases:
             for sym in obj.symbols:
@@ -1308,15 +1331,21 @@ class InPlaceLinker:
                     if placed.base not in contexts:
                         instructions = {}
                         for lo, hi in fn.get("code_ranges", [(placed.base, placed.base + fn["size"])]):
-                            lo, hi = max(lo, fn["address"]), min(hi, fn["address"] + fn["size"])
-                            if lo >= hi:
-                                continue
+                            if self.model.bounded_switches:
+                                lo, hi = max(lo, fn["address"]), min(hi, fn["address"] + fn["size"])
+                                if lo >= hi:
+                                    continue
                             for insn in _ARM.disasm(self.image.read(lo, hi - lo), lo):
-                                if (insn.address % 4 == 0 and insn.size == 4 and insn.address + 4 <= hi
-                                        and not any(a < insn.address + 4 and insn.address < b
-                                                    for a, b in (*fn.get("pools", ()), *fn.get("literals", ())))):
-                                    instructions[insn.address] = insn
-                        words = arm_pool_words(self.image, fn)
+                                if self.model.bounded_switches:
+                                    if (insn.address % 4 or insn.size != 4 or insn.address + 4 > hi
+                                            or any(a < insn.address + 4 and insn.address < b
+                                                   for a, b in (*fn.get("pools", ()), *fn.get("literals", ())))):
+                                        continue
+                                elif any(a <= insn.address < b
+                                         for a, b in (*fn.get("pools", ()), *fn.get("literals", ()))):
+                                    continue
+                                instructions[insn.address] = insn
+                        words = arm_pool_words(self.image, fn) if self.model.bounded_switches else None
                         call_sites = {
                             placed.base + relocation.offset for relocation in section.relocs
                             if relocation.symbol.shndx in self._removed_sections
@@ -1329,7 +1358,7 @@ class InPlaceLinker:
                     if (fn["isa"] != "arm" or site not in instructions
                             or arm_call_abi_context(instructions, site, arguments, replacement.cc,
                                                     {placed.base, *(entry["address"] for entry in fn.get("entries", ()))},
-                                                    call_sites, words) != "consistent"
+                                                    call_sites, words, bounded_switches=self.model.bounded_switches) != "consistent"
                             or next((kind for offset, kind in reversed(section.mapping) if offset <= rel.offset), "$a") != "$a"):
                         decision = None
                 if decision is None:

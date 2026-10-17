@@ -266,16 +266,17 @@ class ModelOptionsTest(unittest.TestCase):
         for field in ("inline", "branchnop", "removed_inline", "bounded_switches"):
             self.assertEqual(getattr(v5, field), getattr(v4, field))
 
-    def test_literal_option_composes_with_v3_without_changing_linker_option(self):
+    def test_literal_option_composes_with_frozen_v3_and_selected_successors(self):
         profile = match.toolchain.Profile("game", "synthetic", ())
-        with patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
-                patch.object(match, "run", return_value=0) as run:
-            code = match.main(["candidate.cpp", "--profile", "game",
-                               "--linker-model", "armlink5-inline-branchnop-v3",
-                               "--literal-model", "anonymous-string-records-v1"])
-        self.assertEqual(code, 0)
-        self.assertEqual(run.call_args.args[5], "armlink5-inline-branchnop-v3")
-        self.assertEqual(run.call_args.args[-1], "anonymous-string-records-v1")
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+            with self.subTest(model=model), \
+                    patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
+                    patch.object(match, "run", return_value=0) as run:
+                code = match.main(["candidate.cpp", "--profile", "game", "--linker-model", model,
+                                   "--literal-model", "anonymous-string-records-v1"])
+                self.assertEqual(code, 0)
+                self.assertEqual(run.call_args.args[5], model)
+                self.assertEqual(run.call_args.args[-1], "anonymous-string-records-v1")
 
     def test_literal_option_is_off_by_default(self):
         profile = match.toolchain.Profile("game", "synthetic", ())

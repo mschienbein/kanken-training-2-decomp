@@ -1005,11 +1005,11 @@ class JumpTableContextTest(unittest.TestCase):
     def context(self, caller, with_words=True, **kwargs):
         instructions, pool_words = self.decode(caller, with_words)
         return inplace.arm_call_abi_context(instructions, BASE + caller.site, self.ARGUMENTS, inplace.cs_arm.ARM_CC_AL,
-                                            kwargs.pop("entries", None), None, pool_words, **kwargs)
+                                            kwargs.pop("entries", None), None, pool_words, bounded_switches=True, **kwargs)
 
     def tables(self, caller, with_words=True, entries=None):
         instructions, pool_words = self.decode(caller, with_words)
-        flows = {address: inplace._arm_call_flow(insn) for address, insn in instructions.items()}
+        flows = {address: inplace._arm_call_flow(insn, bounded_switches=True) for address, insn in instructions.items()}
         return inplace._arm_jump_tables(instructions, flows, entries or {BASE}, pool_words)
 
     def test_word_table_resolves_exactly_the_bounded_entries(self):
@@ -1193,6 +1193,103 @@ class JumpTableContextTest(unittest.TestCase):
                 self.assertEqual(self.context(caller), "unresolved_control_flow")
                 caller = self.caller(fall=word)
                 self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+
+class BoundedSwitchModelTest(unittest.TestCase):
+    """Public compiler-free linker consumers: v4 is explicit and endian changes fail closed."""
+
+    MODEL = "armlink5-inline-branchnop-v4"
+    SETEND_BE, SETEND_LE = 0xF1010200, 0xF1010000
+
+    def fixture(self, form="words", suffix=(), **kwargs):
+        layout = JumpTableContextTest().caller(form, **kwargs)
+        layout.words.extend(suffix)
+        original = struct.pack(f"<{len(layout.words)}I", *layout.words)
+        candidate = bytearray(original)
+        struct.pack_into("<I", candidate, layout.site, 0xEBFFFFFE)
+        helper_body = struct.pack("<2I", JumpTableContextTest.STORE, 0xE12FFF1E)
+        caller = inplace.Symbol("func_00100000", 0, len(original), "STT_FUNC", "STB_GLOBAL", 1)
+        helper = inplace.Symbol("set_field18", 0, len(helper_body), "STT_FUNC", "STB_GLOBAL", 2)
+        mapping = [(0, "$a"), (layout.table, "$d"), (layout.body, "$a")] if form == "words" else [(0, "$a")]
+        obj = inplace.ObjectFile.__new__(inplace.ObjectFile)
+        obj.symbols = [caller, helper]
+        obj.sections = {
+            1: inplace.Section(1, "i.caller", bytes(candidate), len(candidate), False, True, False,
+                               [inplace.Reloc(layout.site, inplace.R_ARM_CALL, helper)], mapping, align=4),
+            2: inplace.Section(2, "i.set_field18", helper_body, len(helper_body), False, True, False,
+                               mapping=[(0, "$a")], align=4),
+        }
+        obj.section_objects = {1: "caller.c", 2: "setter.c"}
+        ranges = ([[BASE, BASE + layout.table], [BASE + layout.body, BASE + len(original)]]
+                  if form == "words" else [[BASE, BASE + len(original)]])
+        catalogue = {BASE: {"address": BASE, "size": len(original), "isa": "arm", "code_ranges": ranges,
+                            "pools": [[BASE + layout.table, BASE + layout.body]] if form == "words" else []}}
+        memory = Memory()
+        memory.write(BASE, original)
+        return SimpleNamespace(object=obj, memory=memory, catalogue=catalogue, original=original, layout=layout)
+
+    def linker(self, fixture, model=None):
+        return inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                     (0x200000, 0x201000), model or self.MODEL)
+
+    def assert_refused(self, fixture, model=None):
+        linker = self.linker(fixture, model)
+        with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+            linker.link(fixture.object)
+        self.assertEqual(linker.rewrites, [])
+        self.assertEqual(linker.removed_callees, [])
+
+    def test_each_exact_form_requires_the_new_selected_model(self):
+        for form in ("words", "branches"):
+            for ls in (False, True):
+                with self.subTest(form=form, ls=ls):
+                    writer = (0x979FF102 if form == "words" else 0x908FF102) if ls else None
+                    fixture = self.fixture(form, compare=0xE3520002 if ls else 0xE3520003, writer=writer)
+                    self.assert_refused(fixture, "armlink5-inline-branchnop-v3")
+                    linker = self.linker(fixture)
+                    linked = linker.link(fixture.object)
+                    self.assertEqual(set(linked), {1})
+                    self.assertEqual(linked[1][1], fixture.original)
+                    self.assertEqual([(row.rule, row.target) for row in linker.rewrites], [("inline_insn", None)])
+                    self.assertEqual(linker.removed_callees[0]["object"], "setter.c")
+                    for model in ("strict-v1", "armlink5-inline-branchnop-v2"):
+                        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                            self.linker(fixture, model).link(fixture.object)
+
+    def test_setend_between_the_guard_and_load_is_refused_by_the_public_consumer(self):
+        fixture = self.fixture(window=(self.SETEND_BE,))
+        self.assertTrue(all(not BASE <= int.from_bytes(struct.pack("<I", BASE + target), "big")
+                            < BASE + len(fixture.original) for target in fixture.layout.targets))
+        self.assert_refused(fixture)
+
+    def test_endian_state_before_the_compare_is_not_ignored(self):
+        for state in (self.SETEND_BE, self.SETEND_LE, 0xE128F000, 0xEE010F10):
+            for form in ("words", "branches"):
+                with self.subTest(state=state, form=form):
+                    fixture = self.fixture(form, compare=state,
+                                           window=(JumpTableContextTest.CMP_R2_3, JumpTableContextTest.MOV_R4_R0))
+                    self.assert_refused(fixture)
+
+    def test_a_state_change_on_only_one_incoming_path_is_not_ignored(self):
+        branch = JumpTableContextTest.branch(BASE + 4, BASE + 12, 0x1)
+        fixture = self.fixture(compare=branch,
+                               window=(self.SETEND_BE, JumpTableContextTest.CMP_R2_3, JumpTableContextTest.MOV_R4_R0))
+        self.assert_refused(fixture)
+
+    def test_unreachable_state_changes_also_require_an_unimplemented_proof(self):
+        self.assert_refused(self.fixture(suffix=(self.SETEND_BE,)))
+
+    def test_frozen_models_keep_their_policy_payload_and_return_classification(self):
+        for name, flags in (("strict-v1", (False, False, False, False)),
+                            ("armlink5-inline-branchnop-v2", (True, True, False, False)),
+                            ("armlink5-inline-branchnop-v3", (True, True, True, False)),
+                            (self.MODEL, (True, True, True, True))):
+            model = inplace.linker_model(name)
+            self.assertEqual((model.inline, model.branchnop, model.removed_inline, model.bounded_switches), flags)
+        insn = next(inplace._ARM.disasm(struct.pack("<I", 0xE084F00E), BASE, 1))  # legacy LR-reading PC write
+        self.assertEqual(inplace._arm_call_flow(insn), "return")
+        self.assertEqual(inplace._arm_call_flow(insn, bounded_switches=True), "unknown")
+        self.assertEqual(inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
 
 
 class RemovedCalleeModelTest(unittest.TestCase):
@@ -1774,7 +1871,7 @@ class SwitchRemovedCalleeTest(unittest.TestCase):
     The synthetic original is the compiled caller with each relocation applied independently:
     the setter calls hold the inlined `str r1, [r0, #0x18]`, table words hold absolute addresses."""
 
-    MODEL = "armlink5-inline-branchnop-v3"
+    MODEL = "armlink5-inline-branchnop-v4"
     SETTER = 0xE5801018  # str r1, [r0, #0x18]
     HELPER = "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n"
     CALLER = (
@@ -1866,6 +1963,8 @@ class SwitchRemovedCalleeTest(unittest.TestCase):
         self.assertEqual(linker.removed_callees[0]["object"], "helper.c")
         with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
             self.link(fixture, "armlink5-inline-branchnop-v2")
+        with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+            self.link(fixture, "armlink5-inline-branchnop-v3")
 
     def test_a_word_table_switch_no_longer_hides_the_removed_setters_context(self):
         self.assert_resolved("game", "words")  # cmp r2, #5; ldrlo pc, [pc, r2, lsl #2]; b; five words
