@@ -2065,9 +2065,10 @@ class RemovedCalleeModelTest(unittest.TestCase):
 
 
 class RemovedUnwindModelTest(unittest.TestCase):
-    """V7 alone drops an exclusive EHABI index/compact extab for an R1-removed section."""
+    """V8 alone drops a complete, exclusive EHABI/group closure for an R1-removed section."""
 
-    MODEL = "armlink5-inline-branchnop-v7"
+    MODEL = "armlink5-inline-branchnop-v8"
+    GROUP = "removed_unwind_group"
 
     def fixture(self, form="cant", alias=False):
         obj, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR if alias else None)
@@ -2103,7 +2104,7 @@ class RemovedUnwindModelTest(unittest.TestCase):
         self.assertEqual(linker.rewrites, [])
         self.assertEqual(linker.removed_callees, [])
 
-    def test_v6_refuses_and_v7_removes_only_the_owners_unwind_sections(self):
+    def test_v6_refuses_and_v8_removes_only_the_owners_unwind_sections(self):
         for form in ("cant", "inline", "extab"):
             for alias in (False, True):
                 with self.subTest(form=form, alias=alias):
@@ -2132,6 +2133,131 @@ class RemovedUnwindModelTest(unittest.TestCase):
             linker = self.linker(mem, catalogue)
             self.assertEqual(set(linker.link(obj)), {1})
             self.assertEqual(len(linker.removed_callees[0]["unwind_sections"]), 2)
+
+    def group_fixture(self, form="cant", alias=False):
+        obj, mem, catalogue = self.fixture(form, alias)
+        members = {2, 3, *([4] if form == "extab" else [])}
+        for index in members:
+            obj.sections[index].comdat = self.GROUP
+        obj.section_groups = [(1, self.GROUP, members)]
+        return obj, mem, catalogue
+
+    def test_v7_is_retired_instead_of_changing_recorded_rules(self):
+        self.assertNotIn("armlink5-inline-branchnop-v7", inplace.LINKER_MODELS)
+        with self.assertRaisesRegex(inplace.LinkError, "retired.*COMDAT.*terminator"):
+            inplace.linker_model("armlink5-inline-branchnop-v7")
+
+    def test_complete_exclusive_groups_are_removable(self):
+        for form in ("cant", "inline", "extab"):
+            for alias in (False, True):
+                with self.subTest(form=form, alias=alias):
+                    obj, mem, catalogue = self.group_fixture(form, alias)
+                    linker = self.linker(mem, catalogue)
+                    self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+                    self.assertEqual(set(linker._removed_unwind), {3, *([4] if form == "extab" else [])})
+
+    def test_other_live_or_unmodeled_group_members_prevent_elimination(self):
+        # Sealed F01 accepted the kept-caller case under v7; no reference exemption may
+        # split that live group, including members that ordinary placement would ignore.
+        for case in ("caller", "kept_function", "bound_data", "unplaced_data", "unplaced_bss", "unmodeled_code"):
+            with self.subTest(case=case):
+                obj, mem, catalogue = self.group_fixture()
+                if case == "caller":
+                    obj.sections[1].comdat = self.GROUP
+                    obj.section_groups[0][2].add(1)
+                else:
+                    executable = case in ("kept_function", "unmodeled_code")
+                    data = BX_LR if executable else bytes(4)
+                    if case == "unmodeled_code":
+                        data *= 3
+                    size, nobits = len(data), case == "unplaced_bss"
+                    obj.sections[5] = inplace.Section(5, "i.other" if executable else ".data.other",
+                        b"" if nobits else data, size, nobits, executable, nobits, align=4, comdat=self.GROUP)
+                    obj.section_groups[0][2].add(5)
+                    if case == "kept_function":
+                        obj.symbols.append(inplace.Symbol("func_00100100", 0, 4, "STT_FUNC", "STB_GLOBAL", 5))
+                        catalogue[BASE + 0x100] = {"address": BASE + 0x100, "size": 4, "isa": "arm"}
+                        mem.write(BASE + 0x100, BX_LR)
+                    elif case == "unmodeled_code":
+                        obj.symbols.append(inplace.Symbol("long_helper", 0, size, "STT_FUNC", "STB_GLOBAL", 5))
+                    elif case == "bound_data":
+                        obj.symbols.append(inplace.Symbol("data_00180000", 0, 4, "STT_OBJECT", "STB_GLOBAL", 5))
+                self.refuse(obj, mem, catalogue, "group-removal proof")
+
+    def test_every_selected_group_code_member_still_needs_an_inlined_call(self):
+        obj, mem, catalogue = self.group_fixture()
+        obj.sections[5] = inplace.Section(5, "i.uncalled", BX_LR, 4, False, True, False,
+                                         mapping=[(0, "$a")], align=4, comdat=self.GROUP)
+        obj.symbols.append(inplace.Symbol("uncalled_helper", 0, 4, "STT_FUNC", "STB_GLOBAL", 5))
+        obj.section_groups[0][2].add(5)
+        self.refuse(obj, mem, catalogue, "no inlined call")
+
+    def test_multiple_independently_used_helpers_and_companions_can_close_a_group(self):
+        obj, mem, catalogue = self.group_fixture(alias=True)
+        helper = inplace.Symbol("second_empty", 0, 4, "STT_FUNC", "STB_GLOBAL", 5)
+        key = inplace.Symbol("i.second_empty", 0, 0, "STT_SECTION", "STB_LOCAL", 5)
+        obj.symbols.extend((helper, key))
+        obj.sections[5] = inplace.Section(5, "i.second_empty", BX_LR, 4, False, True, False,
+                                         mapping=[(0, "$a")], align=4, comdat=self.GROUP)
+        obj.sections[6] = inplace.Section(6, ".ARM.exidx.second", struct.pack("<2I", 0, 1),
+            8, False, False, False, [inplace.Reloc(0, inplace.R_ARM_PREL31, key)], align=4,
+            comdat=self.GROUP, elf_type="SHT_ARM_EXIDX", link_order=True, linked_section=5)
+        obj.sections[1].relocs[-1].symbol = helper
+        obj.section_groups[0][2].update((5, 6))
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+        self.assertEqual(len(linker.removed_callees), 2)
+        self.assertEqual(set(linker._removed_unwind), {3, 6})
+
+    def test_all_comdat_copies_require_group_closure_in_either_object_order(self):
+        for kept_member in (False, True):
+            for reverse in (False, True):
+                with self.subTest(kept_member=kept_member, reverse=reverse):
+                    first, mem, catalogue = self.group_fixture(alias=True)
+                    second, _, _ = self.group_fixture(alias=True)
+                    second.sections.pop(1)
+                    second.symbols = [sym for sym in second.symbols if sym.shndx != 1]
+                    if kept_member:
+                        second.sections[5] = inplace.Section(5, "i.kept_other", BX_LR, 4,
+                            False, True, False, mapping=[(0, "$a")], align=4, comdat=self.GROUP)
+                        second.symbols.append(inplace.Symbol("func_00100100", 0, 4, "STT_FUNC", "STB_GLOBAL", 5))
+                        second.section_groups[0][2].add(5)
+                        catalogue[BASE + 0x100] = {"address": BASE + 0x100, "size": 4, "isa": "arm"}
+                        mem.write(BASE + 0x100, BX_LR)
+                    objects = [second, first] if reverse else [first, second]
+                    obj = inplace.ObjectFile.combine(objects)
+                    if kept_member:
+                        self.refuse(obj, mem, catalogue, "group-removal proof")
+                    else:
+                        linker = self.linker(mem, catalogue)
+                        linked = linker.link(obj)
+                        self.assertEqual(next(iter(linked.values()))[1], mem.read(BASE, 40))
+                        self.assertEqual(len(linker.removed_callees), 2)
+                        self.assertEqual(len(linker._removed_unwind), 2)
+
+    def test_unrepresented_and_unsupported_allocated_group_members_fail_closed(self):
+        for flags in (0, 1, 3):
+            with self.subTest(flags=flags):
+                obj, mem, catalogue = self.group_fixture()
+                if flags == 1:
+                    obj.section_groups[0][2].add(99)  # zero-size allocated member omitted from placement
+                else:
+                    obj.section_groups[0] = (flags, self.GROUP if flags & 1 else "", {2, 3})
+                    if not flags:
+                        obj.sections[2].comdat = obj.sections[3].comdat = None
+                self.refuse(obj, mem, catalogue, "group-removal proof|unsupported section group")
+
+    def test_combining_preserves_unrepresented_group_members(self):
+        for reverse in (False, True):
+            with self.subTest(reverse=reverse):
+                first, mem, catalogue = self.group_fixture(alias=True)
+                second, _, _ = self.group_fixture(alias=True)
+                second.sections.pop(1)
+                second.symbols = [sym for sym in second.symbols if sym.shndx != 1]
+                second.section_groups[0][2].add(99)
+                obj = inplace.ObjectFile.combine([second, first] if reverse else [first, second])
+                self.assertTrue(any(isinstance(index, str) for _, _, members in obj.section_groups for index in members))
+                self.refuse(obj, mem, catalogue, "unrepresented allocated member.*group-removal proof")
 
     def test_incorrect_or_combined_index_metadata_is_refused(self):
         changes = (
@@ -2239,7 +2365,7 @@ class RemovedUnwindModelTest(unittest.TestCase):
         self.assertEqual(set(linker._removed_unwind), {3})
         self.assertEqual([r["section_index"] for r in linker.removed_callees[0]["unwind_sections"]], [3])
 
-    def test_v7_inherits_v6_independently_bound_zero_size_placement(self):
+    def test_v8_inherits_v6_independently_bound_zero_size_placement(self):
         # V5 regressed this v4 placement: independent bindings do not borrow a sibling's
         # identity and therefore do not require the full-section alias proof.
         for model in ("armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v6", self.MODEL):

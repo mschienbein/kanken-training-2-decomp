@@ -661,7 +661,13 @@ class ObjectFile:
             if elf["e_machine"] != "EM_ARM" or elf["e_type"] != "ET_REL":
                 raise LinkError(f"{path}: not an ARM relocatable object")
             self.sections: dict[int, Section] = {}
+            # Keep even zero-sized allocated group members as closure witnesses. They do not
+            # enter the frozen placement model, but v8 must not silently discard their group.
+            allocated_indices: set[int] = set()
+            self.section_groups: list[tuple[int, str, set[int | str]]] = []
             for i, s in enumerate(elf.iter_sections()):
+                if s["sh_flags"] & SH_FLAGS.SHF_ALLOC:
+                    allocated_indices.add(i)
                 if s["sh_flags"] & SH_FLAGS.SHF_ALLOC and s["sh_size"]:
                     nobits = s["sh_type"] == "SHT_NOBITS"
                     self.sections[i] = Section(
@@ -703,11 +709,15 @@ class ObjectFile:
             for s in elf.iter_sections():
                 if s["sh_type"] == "SHT_GROUP":
                     words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
-                    if words and words[0] & 1:  # GRP_COMDAT: one entity, deduplicated by the linker
-                        signature = self.symbols[s["sh_info"]].name
-                        for member in words[1:]:
-                            if member in self.sections:
-                                self.sections[member].comdat = signature
+                    if words:
+                        flags = words[0]
+                        signature = self.symbols[s["sh_info"]].name if flags & 1 else ""
+                        self.section_groups.append((
+                            flags, signature, {member for member in words[1:] if member in allocated_indices}))
+                        if flags & 1:  # Frozen COMDAT identity; other group semantics are not modeled.
+                            for member in words[1:]:
+                                if member in self.sections:
+                                    self.sections[member].comdat = signature
             for s in elf.iter_sections():
                 if not isinstance(s, RelocationSection):
                     continue
@@ -736,6 +746,7 @@ class ObjectFile:
         merged = cls.__new__(cls)
         merged.sections, merged.symbols = {}, []
         merged.section_owners, merged.section_objects = {}, {}
+        merged.section_groups = []
         symbols_by_object, indices_by_object = [], []
         definitions = {}
         for owner, obj in enumerate(objects):
@@ -749,6 +760,9 @@ class ObjectFile:
                 symbols[id(sym)] = replace(sym, shndx=shndx)
             symbols_by_object.append(symbols)
             merged.symbols.extend(symbols.values())
+            for flags, signature, members in getattr(obj, "section_groups", ()):
+                merged.section_groups.append((
+                    flags, signature, {indices.get(index, f"UNALLOCATED_{owner}_{index}") for index in members}))
             for index, section in obj.sections.items():
                 new_index = indices[index]
                 linked = (indices.get(section.linked_section, f"UNALLOCATED_{owner}_{section.linked_section}")
@@ -1562,7 +1576,7 @@ class InPlaceLinker:
         return None
 
     def _removed_unwind_sections(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, int]:
-        """V7: an exclusive, single-entry SHF_LINK_ORDER companion dies with its R1 owner.
+        """V8: an exclusive SHF_LINK_ORDER companion dies only with its complete R1/group closure.
 
         This is not general unwind-table placement or exception-table stripping. In particular,
         kept code's entries, shared extab data, roots and original-bound metadata never disappear.
@@ -1663,6 +1677,27 @@ class InPlaceLinker:
             if (section.link_order and section.linked_section in (self._removed_sections | companions)
                     and section.index not in companions):
                 raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")
+        # A group is indivisible, including all supplied copies and allocated members that
+        # placement would otherwise ignore. Only already-selected R1 code and validated own
+        # unwind sections have a removal proof; do not infer general unused-data elimination.
+        groups = {obj.sections[owner].comdat for owner in exidx_by_owner} - {None}
+        group_members = {
+            signature: {index for index, section in obj.sections.items() if section.comdat == signature}
+            for signature in groups
+        }
+        exempt = companions.keys() | exidx_by_owner.keys()
+        for flags, signature, members in getattr(obj, "section_groups", ()):
+            if (flags & 1 and signature in groups) or members & exempt:
+                if flags != 1:
+                    raise LinkError("unwind companion belongs to an unsupported section group")
+                group_members.setdefault(signature, set()).update(members)
+        for signature, members in sorted(group_members.items()):
+            for index in sorted(members, key=str):
+                member = obj.sections.get(index)
+                if (member is None or member.comdat != signature
+                        or index not in self._removed_sections and index not in companions):
+                    name = member.name if member is not None else "unrepresented allocated member"
+                    raise LinkError(f"COMDAT {signature}: {name} has no complete group-removal proof")
         for owner in exidx_by_owner:
             self._removed_sections[owner]["unwind_sections"] = [
                 {"section": obj.sections[index].name, "section_index": index,

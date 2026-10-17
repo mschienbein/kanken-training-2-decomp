@@ -21,7 +21,7 @@ class LinkerModel:
     removed_inline: bool = False  # v3: inline and eliminate candidate-only tiny function sections
     bounded_switches: bool = False  # v4: bounded ARM jump-table CFG with fail-closed endian state
     function_entry_aliases: bool = False  # v6: proven aliases plus independently bound legacy placement
-    removed_unwind: bool = False  # v7: eliminate a removed helper's exclusive EHABI companions
+    removed_unwind: bool = False  # v8: eliminate only complete, exclusive EHABI/group closures
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -32,7 +32,7 @@ LINKER_MODELS = {m.name: m for m in (
                 bounded_switches=True),
     LinkerModel("armlink5-inline-branchnop-v6", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True),
-    LinkerModel("armlink5-inline-branchnop-v7", inline=True, branchnop=True, removed_inline=True,
+    LinkerModel("armlink5-inline-branchnop-v8", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True, removed_unwind=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
@@ -42,6 +42,8 @@ RETIRED_LINKER_MODELS = {
     "not the original's (review F01); superseded by armlink5-inline-branchnop-v2",
     "armlink5-inline-branchnop-v5": "reviewed 22cb05b refuses explicitly bound D1/D2 placements that v4 credits "
     "(func_001c6a68, func_001ef89c); superseded by v6, never adopted",
+    "armlink5-inline-branchnop-v7": "permits partial removal of live COMDAT groups and accepts compact extab "
+    "entries without their descriptor-list terminator (exidx-v7 review F01/F02); superseded by v8, never adopted",
 }
 
 LITERAL_MODELS = ("none", "anonymous-string-records-v1")
