@@ -283,6 +283,54 @@ void local(void) {
         self.assert_checked(report)
         self.assertEqual(report["disagreements"], [])
 
+    def test_standard_header_nothrow_and_nonnull_attributes(self):
+        self.add("a.c", '__declspec(__nothrow) __pure int func_00100000(const int *p) __attribute__((__nonnull__(1)));\n')
+        self.add("b.c", '__nothrow int func_00100000(const int *renamed);\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual(report["disagreements"], [])
+
+    def test_softfp_is_retained_as_the_aapcs_function_abi(self):
+        self.add("a.c", '__softfp float func_00100000(float value);\n')
+        self.add("b.c", 'float func_00100000(float value) __attribute__((__pcs__("aapcs")));\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual(report["disagreements"], [])
+        self.source("b.c", 'float func_00100000(float value);\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual(len(report["disagreements"]), 1)
+
+    def test_int64_normalization_preserves_types_annotations_and_source_lines(self):
+        self.add("a.c", '__int64 func_00100000(unsigned __int64 value) __attribute__((__pcs__("aapcs")));\n')
+        self.add("b.c", 'long long func_00100000(unsigned long long value) __attribute__((__pcs__("aapcs")));\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual(report["disagreements"], [])
+        self.source("b.c", '\nlong long func_00100000(unsigned long value) __attribute__((__pcs__("aapcs")));\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual(len(report["disagreements"]), 1)
+        self.assertEqual([(s["source"], s["line"]) for s in report["disagreements"][0]["sites"]], [("a.c", 1), ("b.c", 2)])
+
+    def test_standard_header_pragmas_preserve_explicit_layouts_and_lines(self):
+        self.add("a.c", '#pragma push\n#pragma anon_unions\n'
+                        'struct Shared { union { int value; float real; }; };\n'
+                        '#pragma pop /* restore anon_unions */\n'
+                        '#pragma __printf_args\n#pragma __scanf_args\n'
+                        'extern struct Shared data_00200000;\n')
+        self.add("b.c", 'struct Shared { union { int value; double real; }; }; extern struct Shared data_00200000;\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertTrue(interfaces.failed(report))
+        self.assertTrue(any(site["source"] == "a.c" and site["line"] == 3 for d in report["disagreements"] for site in d["sites"]))
+
+    def test_pragma_push_does_not_hide_unsupported_layout_changes(self):
+        self.add("a.c", '#pragma push\n#pragma pack(1)\nstruct Shared { char c; int i; };\n#pragma pop\n')
+        report = self.audit()
+        self.assertTrue(interfaces.failed(report))
+        self.assertIn("#pragma pack(1)", report["unchecked"][0]["reason"])
+
     def test_packed_layout_difference(self):
         self.add("a.c", "__packed struct Shared { char c; int i; }; extern struct Shared data_00200000;\n")
         self.add("b.c", "struct Shared { char c; int i; }; extern struct Shared data_00200000;\n")
@@ -317,6 +365,87 @@ void local(void) {
         report = self.audit()
         self.assert_checked(report)
         self.assertEqual(len(report["disagreements"]), 1)
+
+    def test_cp15_named_register_variables_at_file_and_block_scope(self):
+        self.add("a.c", 'register unsigned int tls __asm("cp15:0:c13:c0:3");\n'
+                        'unsigned int func_00100000(void) { return tls + 0x5c; }\n')
+        self.add("b.c", 'typedef unsigned int Word;\n'
+                        'unsigned int local(void) {\n'
+                        '  register Word tls /* declaration */ __asm (/* register */ "cp15:0:c13:c0:3");\n'
+                        '  return tls;\n}\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertFalse(interfaces.failed(report))
+        self.assertEqual(report["policy"], [])
+
+    def test_cp15_named_register_does_not_hide_const_writes(self):
+        self.add("a.c", 'void local(void) {\n'
+                        '  register const unsigned int tls __asm("cp15:0:c13:c0:3");\n'
+                        '  tls = 0;\n}\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("tls", "const-write")])
+
+    def test_only_cp15_named_register_declarations_are_accepted(self):
+        for text in (
+            'void local(void) { __asm("cp15:0:c13:c0:3"); }\n',
+            'void local(void) { __asm { nop } }\n',
+            '__asm void local(void) { bx lr }\n',
+            'void local(void) __asm("cp15:0:c13:c0:3");\n',
+            'register unsigned int value __asm("r0");\n',
+            'register unsigned int value __asm("s0");\n',
+            'register unsigned int value __asm("cp14:0:c13:c0:3");\n',
+            'register unsigned int value __asm("cp15:0:c13:c0:3" : "=r"(value));\n',
+            'register unsigned int value __asm__("cp15:0:c13:c0:3");\n',
+            'register unsigned int value asm("cp15:0:c13:c0:3");\n',
+            'unsigned int value __asm("cp15:0:c13:c0:3");\n',
+            'register unsigned int value __asm("cp15:0:c13:c0:3") = 1;\n',
+            'register unsigned int *value __asm("cp15:0:c13:c0:3");\n',
+            'register unsigned int value[1] __asm("cp15:0:c13:c0:3");\n',
+            'void local(register unsigned int value __asm("cp15:0:c13:c0:3")) {}\n',
+        ):
+            with self.subTest(text=text):
+                self.units.clear()
+                self.add("a.c", text)
+                report = self.audit()
+                self.assertFalse(report["units"][0]["checked"])
+                self.assertEqual(len(report["unchecked"]), 1)
+                self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
+    def test_svc_declarations_and_intrinsic_calls_are_not_bound_interfaces(self):
+        for name in ("a.c", "b.c"):
+            self.add(name, '__svc(0x28) unsigned long long svcGetSystemTick(void);\n'
+                           '__svc(0x23) unsigned int svcCloseHandle(unsigned int handle);\n'
+                           'unsigned int local(volatile unsigned int *p) {\n'
+                           '  unsigned int value = __ldrex(p);\n'
+                           '  __dmb(0xf); __dsb(0xf); __isb(0xf);\n'
+                           '  __strex(value, p); __clrex(); __schedule_barrier();\n'
+                           '  svcCloseHandle(value);\n'
+                           '  return (unsigned int)svcGetSystemTick();\n}\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertFalse(interfaces.failed(report))
+        self.assertEqual(report["policy"], [])
+
+    def test_integrator_marker_comments_fail_before_preprocessing(self):
+        for suffix in ("c", "cpp"):
+            for comment in ("// INTEGRATOR: supply type", "/* INTEGRATOR: finish integration */",
+                            "/*\n * INTEGRATOR: finish integration\n */"):
+                with self.subTest(suffix=suffix, comment=comment):
+                    self.units.clear()
+                    self.add(f"a.{suffix}", f"int local(void) {{ return 1; }}\n{comment}\n")
+                    with patch.object(interfaces, "preprocess", side_effect=AssertionError("marker must be caught before -E")):
+                        report = interfaces.audit(self.units, self.root, set())
+                    self.assertEqual(len(report["unchecked"]), 1)
+                    self.assertIn("leftover INTEGRATOR: marker comment at line 2", report["unchecked"][0]["reason"])
+                    self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
+    def test_integrator_marker_in_string_is_not_a_comment(self):
+        self.add("a.c", 'const char *message = "INTEGRATOR: not a comment // or /*";\n'
+                        '/* Ordinary integration explanation. */\n')
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertFalse(interfaces.failed(report))
 
     def test_unsupported_syntax_and_assembly_fail_closed(self):
         for text in (
@@ -452,6 +581,57 @@ class ArmccIntegrationTest(unittest.TestCase):
             self.assertEqual(len(report["policy"]), 1)
             sites = report["disagreements"][0]["sites"]
             self.assertTrue(any(site["source"] == "include/shared.h" and site["line"] == 4 for site in sites))
+
+    @unittest.skipUnless(toolchain.armcc_exe(PROFILE.compiler).is_file(), "pinned ARMCC not installed")
+    def test_shared_extension_headers_compile_in_c_and_cpp_and_audit_in_c(self):
+        with tempfile.TemporaryDirectory(prefix="interfaces-extensions-") as temp:
+            root = Path(temp)
+            headers = root / "include/ctr"
+            headers.mkdir(parents=True)
+            for name in ("svc.h", "cp15.h"):
+                (headers / name).write_text((interfaces.ROOT / "include/ctr" / name).read_text(encoding="utf-8"), encoding="utf-8")
+            text = (
+                '#include "ctr/svc.h"\n#include "ctr/cp15.h"\n'
+                'register unsigned int file_tls __asm("cp15:0:c13:c0:3");\n'
+                'unsigned int func_00100000(CtrHandle handle, volatile unsigned int *word) {\n'
+                '  CtrSvcHandleResult event = svcCreateEvent(0, 0);\n'
+                '  CtrSvcProcessInfoResult info = svcGetProcessInfo(0, handle, 0);\n'
+                '  unsigned int value = __ldrex(word);\n'
+                '  __strex(value, word); __clrex();\n'
+                '  ctrDataMemoryBarrier(); ctrDataSynchronizationBarrier(); __schedule_barrier();\n'
+                '  svcCloseHandle(event.handle);\n'
+                '  return (unsigned int)svcGetSystemTick() + info.value_low + file_tls\n'
+                '       + (unsigned int)ctrGetThreadLocalStorage();\n}\n'
+            )
+            for suffix in ("c", "cpp"):
+                source = root / f"extensions.{suffix}"
+                source.write_text(text, encoding="utf-8")
+                toolchain.compile_source(PROFILE, source, root / f"extensions-{suffix}.o", (root / "include",))
+                if suffix == "c":
+                    report = interfaces.audit([interfaces.Unit(source, PROFILE)], root, set())
+                    self.assertEqual(report["unchecked"], [])
+                    self.assertEqual(report["disagreements"], [])
+                    self.assertEqual(report["policy"], [])
+
+    @unittest.skipUnless(toolchain.armcc_exe(PROFILE.compiler).is_file(), "pinned ARMCC not installed")
+    def test_armcc_standard_headers_compile_and_audit(self):
+        headers = (
+            "assert.h", "ctype.h", "errno.h", "float.h", "inttypes.h", "iso646.h",
+            "limits.h", "locale.h", "math.h", "setjmp.h", "signal.h", "stdarg.h",
+            "stdbool.h", "stddef.h", "stdint.h", "stdio.h", "stdlib.h", "string.h",
+            "time.h", "wchar.h", "wctype.h",
+        )
+        with tempfile.TemporaryDirectory(prefix="interfaces-standard-") as temp:
+            root = Path(temp)
+            for header in headers:
+                with self.subTest(header=header):
+                    source = root / (header.removesuffix(".h") + ".c")
+                    source.write_text(f"#include <{header}>\nint local(void) {{ return 0; }}\n", encoding="utf-8")
+                    toolchain.compile_source(PROFILE, source, source.with_suffix(".o"))
+                    report = interfaces.audit([interfaces.Unit(source, PROFILE)], root, set())
+                    self.assertEqual(report["unchecked"], [])
+                    self.assertEqual(report["disagreements"], [])
+                    self.assertEqual(report["policy"], [])
 
 
 if __name__ == "__main__":
