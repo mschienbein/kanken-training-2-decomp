@@ -90,7 +90,9 @@ def main(argv: list[str] | None = None) -> int:
             obj = Path(tmp) / (src.stem + ".o")
             try:
                 toolchain.compile_source(profile, target, obj, cache=False)
-                rows = {r["name"]: r["status"] for r in ctx.compare(obj)}
+                # Keyed by address: a function defined under a names-overlay name (a C++ mangled
+                # constructor, say) is still claimed by its func_XXXXXXXX identity.
+                rows = {f"func_{r['address']:08x}": r["status"] for r in ctx.compare(obj)}
             except (toolchain.ToolchainError, inplace.LinkError) as e:
                 target.unlink()
                 refused.append((src, str(e).splitlines()[0]))
