@@ -55,6 +55,58 @@ hash would incorrectly retain stale generator provenance. Comparison and command
 remain preserved. No test, build, lint or formatter was run for this fixup;
 Main owns the clean-checkout suite and independent review.
 
+## Additional initializer-owner evidence: eligibility change deferred
+
+Main subsequently supplied the exact retained r41284 `RESULT.json` and
+`MEASUREMENTS.json`. No compiler, matcher or saved failure was rerun. The evidence
+**positively establishes natural C representability of two complete repaired
+owners**; their current topology exclusion must not be read as non-C/library proof.
+It does not provide independent matching credit for the old secondary labels.
+
+| Complete owner | Preserved label | Retained whole-owner evidence | V10 decision |
+| --- | --- | --- | --- |
+| `0x00212674` / 84 B | `0x00212684` | `game`, `middleware`, `sdk`: exit 0, exact 84/84 B, no first difference, no linker rewrites; native array construction/mutex source with `names-array.json` | Keep labels and current topology pending explicit eligibility-model review |
+| `0x002136c4` / 56 B | `0x002136d0` | All three frozen profiles: exit 0, exact 56/56 B under approved v2 model; one `inline_nop` rewrite each; natural two-registration source | Same deferral; do not describe these as rewrite-free raw equality |
+| `0x00214fe8` / 312 B | `0x00214fec` | Supplied notes retain a natural primary mismatch, 296/312 B with 224 differing bytes | No equivalent whole-owner MATCH evidence in this record |
+| `0x001f5980` | `0x001f5990` | Not covered by the two supplied r41284 inputs | No assertion that another author's equivalent evidence does not exist |
+| `0x002069ec` | `0x002069f0` | Not covered by the two supplied r41284 inputs | Same qualification |
+
+The first matched source is
+`scratch/authors/r41284/src/func_00212674_mixed.cpp`; its per-profile receipt family is
+`scratch/authors/r41284/match/func_00212684/03-array-mutex-boundary-<profile>/func_00212674_mixed.result.json`.
+The second is `scratch/authors/r41284/src/func_002136c4.c`, with receipt family
+`scratch/authors/r41284/match/func_002136d0/01-current-owner-<profile>/func_002136c4.result.json`.
+The final game-profile repeats are also preserved. Author notes explicitly retain
+canonical shared-header/callback/name-contract review for Main before integration.
+The standalone legacy rows remain refused/mismatched; these successes belong to the
+complete primary owners, not separately callable old-label functions.
+
+**Decision: do not change v10's catalogue or generator for this new evidence.**
+The current validator explicitly rejects ordinary owners with non-primary entries
+(`invalid_secondary_entry_kind`); preservation converts retained weak prologue labels
+into secondary entries and the associated owner into `multi_entry`. Progress and
+credit consumers use the owner kind. Restoring ordinary eligibility while keeping
+all labels therefore requires an explicit interior-label versus independently
+callable-entry contract and a coherent consumer/generation/preservation cutover,
+not an address exception, deleting a label or silently relaxing a validation gate.
+That policy change is deferred to a later revision under the frozen-gate contract.
+[INFERENCE] These two complete C witnesses support considering that future change;
+they are not a universal claim about absence of every possible external interior
+caller. Genuine incoming-entry evidence must still veto such a restoration.
+
+If only these two owners are later restored, the denominator change is **+2 owners /
++140 extent B**, topology owners **25 → 23**, without changing physical ownership,
+unknown bytes, any entry identity or accepted credit. V10 remains **4,662 ordinary
+owners / 1,133,322 B**, 342 unknown B and two anomalies. Its latest generated proposal
+remains the `6c5aa76` fixup SHA above; this evaluation changes documentation only.
+Exact retained rows, input hashes and the deferral decision are preserved in
+`scratch/closure/initializer-eligibility-evaluation.json`.
+
+Supplied evidence identities:
+
+- `scratch/authors/r41284/RESULT.json`: SHA-256 `27205d78ed19537e6b1813ec0da6cf0adb820b9dd6ca5c56b77b58dc0ba26201`.
+- `scratch/authors/r41284/MEASUREMENTS.json`: SHA-256 `514e2c5a89f8ad8ca2c5e2840ee793af16ad5fd2873d6e1a81ad1053c57faaf1`.
+
 ## Baselines and reproducible output
 
 - Private worktree/branch: `scratch/worktrees/catalogue-v10`, `catalogue-v10`,
