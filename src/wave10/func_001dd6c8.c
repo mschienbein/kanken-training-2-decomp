@@ -1,10 +1,8 @@
 #include "game/selection.h"
+#include "game/animation.h"
+#include "game/notification.h"
 
-extern int func_00178f84(struct W6ListController *controller, int index);
-extern void func_0016fccc(int selection);
-extern int func_001758d4(void);
 extern int func_00172994(int index);
-extern float func_0017adb4(void);
 extern void func_0017433c(int index, int ticks);
 extern int func_0017abf8(int index, int resource);
 extern void func_0016fca0(int mode);

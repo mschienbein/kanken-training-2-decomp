@@ -1,6 +1,8 @@
 #ifndef GAME_INPUT_H
 #define GAME_INPUT_H
 
+#include <stdbool.h>
+
 struct InputController;
 
 struct InputCalibration {
@@ -38,17 +40,69 @@ struct InputServiceConfiguration {
     const char *service_name;
 };
 
-struct InputPoint { float x, y; };
+struct InputRectangle {
+    float x, y, width, height;
+};
+
+struct InputPoint {
+    float x, y;
+};
+
+struct InputSnapshot {
+    bool active, released;
+    unsigned char reserved02[2];
+    struct InputPoint position;
+    bool previous_active, previous_released;
+    unsigned char reserved0e[2];
+    struct InputPoint previous_position;
+    bool tracking;
+    unsigned char reserved19[3];
+    struct InputPoint start_position;
+    struct InputRectangle rectangle;
+    unsigned int state;
+};
+
+struct InputMode {
+    unsigned int value;
+};
+
+struct InputItem {
+    unsigned char reserved00[0x0c];
+    unsigned short flags;
+    unsigned char reserved0e;
+    unsigned char state;
+    unsigned char reserved10[2];
+    unsigned short counter;
+};
+
+struct InputGroup {
+    unsigned int reserved00;
+    int count;
+    struct InputItem **items;
+    struct InputSnapshot input;
+    unsigned char reserved44[0x3c];
+    unsigned int enabled;
+    struct InputMode mode;
+};
+
+struct InputOwner {
+    unsigned char reserved00[0x20];
+#ifndef __cplusplus
+    struct InputGroup *groups[];
+#endif
+};
+
 struct TouchDeviceState {
     unsigned char reserved00[0x0c];
-    unsigned active;
+    unsigned int active;
     unsigned char reserved10[8];
     unsigned flags;
     unsigned char reserved1c[8];
-    unsigned released;
+    unsigned int released;
     unsigned char reserved28[0x10];
     struct InputPoint position;
 };
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -71,6 +125,10 @@ extern void func_00115c40(const volatile struct ButtonRing *ring, struct ButtonS
 extern int func_00121354(void);
 extern void func_00123a64(struct ButtonSample *sample);
 extern void func_00123a70(unsigned *held, unsigned *pressed, unsigned *released);
+extern struct TouchDeviceState bss_004972d8;
+extern void func_00170418(struct InputSnapshot *input);
+extern int func_0016ec14(const struct InputMode *mode);
+extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
 #ifdef __cplusplus
 }
 #endif

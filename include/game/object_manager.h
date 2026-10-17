@@ -9,7 +9,7 @@ struct ObjectManager {
     unsigned field1b8, field1bc, field1c0;
     struct StreamMutex lock;
     unsigned char reserved1d0[0x0c];
-    struct PoolList active;                 /* 0x1dc; c006 migrates this to PoolList */
+    struct PoolList active;                 /* 0x1dc */
     unsigned char reserved1e8[0x0c];
     unsigned char running;
     unsigned char reserved1f5[2];
@@ -61,7 +61,7 @@ extern void func_001f4e48(struct RegistryEntry *entry, unsigned first, unsigned 
 extern void func_00195ec4(struct StreamMutex *lock);
 extern void func_0017e634(struct ObjectManager *manager, struct RegistryEntry *entry);
 extern struct PoolLink *func_0017e640(struct ObjectManager *manager,
-                                         struct RegistryEntry *entry);
+                                     struct RegistryEntry *entry);
 #ifdef __cplusplus
 }
 #endif

@@ -1,6 +1,4 @@
-struct InputMode {
-    unsigned int value;
-};
+#include "game/input.h"
 
 int func_0016ec14(const struct InputMode *mode)
 {

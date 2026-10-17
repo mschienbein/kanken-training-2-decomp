@@ -1,6 +1,4 @@
-struct InputRectangle {
-    float x, y, width, height;
-};
+#include "game/input.h"
 
 int func_00167058(const struct InputRectangle *rectangle, float x, float y)
 {

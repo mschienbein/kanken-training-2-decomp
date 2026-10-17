@@ -1,13 +1,4 @@
-struct RangeLink {
-    struct RangeLink *next;
-};
-
-struct RegionList {
-    unsigned reserved00[2];
-    struct RangeLink *head;
-};
-
-extern void func_00183724(struct RangeLink **head, void *memory, unsigned size);
+#include "game/region_heap.h"
 
 void func_0018371c(struct RegionList *list, void *memory, unsigned size)
 {

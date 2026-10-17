@@ -1,18 +1,11 @@
-#include <stdint.h>
-
-struct DeferredResource {
-    unsigned reserved00;
-    uintptr_t resource;
-    int index;
-};
+#include "game/selection.h"
+#include "game/resource_tables.h"
 struct DeferredRequest {
     int state;
     int resourceIndex;
     unsigned char *data;
 };
-extern const struct DeferredResource data_0023fce4[];
 extern int func_0019efd0(void);
-extern unsigned char *func_001971a0(uintptr_t resource, int index);
 
 void func_001e358c(struct DeferredRequest *request)
 {

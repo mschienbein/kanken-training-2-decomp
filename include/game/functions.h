@@ -43,6 +43,8 @@ extern void *func_00125b54(void *object);
 extern unsigned func_001424c0(void);
 extern unsigned func_001424d0(void);
 extern int func_00144224(int value);
+extern void func_0014f7e8(unsigned unused0, unsigned unused1);
+extern void func_0014c2c8(void);
 extern void func_00147260(struct ObjectManager *object);
 extern struct PoolLink *func_0018d868(struct PoolList *registry, struct PoolLink *node);
 extern void func_0017e7bc(struct PoolList *registry, struct RegistryEntry *entry);

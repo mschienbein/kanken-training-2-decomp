@@ -1,8 +1,6 @@
 #include <stdint.h>
 
-struct FreeLink {
-    struct FreeLink *next;
-};
+#include "game/region_heap.h"
 
 void func_00183724(struct FreeLink **head, void *storage, unsigned size)
 {

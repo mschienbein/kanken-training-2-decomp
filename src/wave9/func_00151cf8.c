@@ -1,6 +1,6 @@
 #include "game/input_runtime.h"
 
-int func_00151cf8(struct InputSnapshot *snapshot, signed char index)
+int func_00151cf8(struct InputLatchSnapshot *snapshot, signed char index)
 {
     if (!snapshot->enabled || snapshot->selected != -1)
         return 0;

@@ -1,15 +1,13 @@
+#include "game/scheduler.h"
+
 struct TransitionState {
     unsigned char reserved00[0x18];
     int active;
 };
 extern struct TransitionState bss_00290c90;
-extern int func_0019b564(void);
-extern int func_0019b54c(int task);
 extern int func_0019efd0(void);
 extern void func_0012d18c(void);
 extern void func_00136104(void);
-extern void func_0012d1c8(void);
-extern int func_00141c70(void);
 extern void func_0019f338(int task, void (*callback)(void), unsigned priority);
 extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(void),
                          void (*complete)(void), int argument);
