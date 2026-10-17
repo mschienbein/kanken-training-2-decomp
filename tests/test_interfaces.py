@@ -506,9 +506,8 @@ void local(void) {
         self.assertEqual(sorted(s["source"] for s in report["disagreements"][0]["sites"]), ["a.c", "b.cpp"])
         self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
 
-    def test_header_class_names_are_one_namespace_for_cpp_units(self):
-        """c003-wave2-r2 F01: screen.h completed `struct Widget` (0x94 bytes) while an accepted C++
-        unit forward-declared its own, different 0x48-byte `Widget` without that header."""
+    def test_flat_cpp_header_identity_and_forward_policy_are_unchanged(self):
+        """c003-wave2-r2 F01: game's unqualified Widget stays one project-wide identity."""
         self.source("include/game/screen.h", "struct Widget { unsigned char bytes[0x94]; };\n")
         self.source("include/game/other.h", '#include "game/screen.h"\n')
         self.add("heap.cpp", "struct Widget;\nvoid *make(void);\n")
@@ -518,6 +517,166 @@ void local(void) {
         kinds = sorted((d["name"], d["kind"], tuple(sorted(s["source"] for s in d["sites"]))) for d in report["disagreements"])
         self.assertEqual(kinds, [("class Widget", "odr", ("include/game/screen.h", "odr.cpp")),
                                  ("class Widget", "type-name", ("heap.cpp", "include/game/screen.h"))])
+
+    def test_cpp_namespaces_distinguish_frame_heaps(self):
+        self.source("include/ut.h", "namespace nw { namespace ut {\nclass FrameHeap { int allocator; };\n}}\n")
+        self.source("include/snd.h", "namespace nw::snd::internal {\nclass FrameHeap { void *buffer; };\n}\n")
+        self.add("heap.cpp", '#include "ut.h"\n#include "snd.h"\n')
+        report = self.audit()
+        self.assertEqual(report["disagreements"], [])
+        self.assertFalse(interfaces.failed(report, allow_unchecked_cpp=True))
+
+    def test_cpp_nested_iterators_and_namespace_iterators_are_distinct(self):
+        self.source("include/iterators.h", """
+namespace std {
+template<class T> struct iterator { typedef T value_type; };
+}
+namespace nw { namespace ut {
+namespace internal {
+template<class T> struct iterator { T *value; };
+class LinkListImpl {
+public:
+    class iterator { int *node; };
+    class const_iterator { const int *node; };
+};
+}
+template<class T> class LinkList {
+public:
+    class iterator { T *node; };
+    class const_iterator { const T *node; };
+    typedef iterator Iterator;
+    using ConstIterator = const_iterator;
+};
+}}
+""")
+        self.add("iterators.cpp", '#include "iterators.h"\n')
+        self.assertEqual(self.audit()["disagreements"], [])
+
+    def test_cpp_iterator_traits_primary_and_specializations_are_distinct(self):
+        text = """namespace nw { namespace ut { namespace internal {
+template<class It> struct iterator_traits { typedef typename It::value_type value_type; };
+template<class T> struct iterator_traits<T*> { typedef T value_type; };
+template<class T> struct iterator_traits<const T *> { typedef T value_type; typedef const T *pointer; };
+template<> struct iterator_traits<int*> { typedef int value_type; };
+}}}
+"""
+        self.source("include/traits.h", text)
+        self.add("traits.cpp", '#include "traits.h"\n')
+        self.assertEqual(self.audit()["disagreements"], [])
+        definitions = interfaces.cpp_class_declarations(text, "include/traits.h")
+        self.assertEqual([d.name for d in definitions], [
+            "nw::ut::internal::iterator_traits", "nw::ut::internal::iterator_traits<T*>",
+            "nw::ut::internal::iterator_traits<const T*>", "nw::ut::internal::iterator_traits<int*>",
+        ])
+        self.assertTrue(all(d.body is not None for d in definitions))
+
+    def test_cpp_same_qualified_header_and_unit_class_still_disagrees(self):
+        self.source("include/heap.h", "namespace nw::ut { class FrameHeap { int state; }; }\n")
+        self.add("a.cpp", "namespace nw { namespace ut {\nclass FrameHeap { unsigned state; };\n}}\n")
+        self.add("b.cpp", "namespace nw::snd::internal { class FrameHeap { void *state; }; }\n")
+        report = self.audit()
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("class nw::ut::FrameHeap", "odr")])
+        self.assertEqual({s["source"] for s in report["disagreements"][0]["sites"]}, {"include/heap.h", "a.cpp"})
+        self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
+    def test_cpp_same_qualified_class_in_two_units_still_disagrees(self):
+        self.add("a.cpp", "namespace nw { namespace ut { struct Shared { int value; }; }}\n")
+        self.add("b.cpp", "namespace nw::ut { struct Shared { long value; }; }\n")
+        self.assertEqual([(d["name"], d["kind"]) for d in self.audit()["disagreements"]], [("class nw::ut::Shared", "odr")])
+
+    def test_cpp_forward_policy_uses_qualified_identity_and_transitive_headers(self):
+        self.source("include/heap.h", "namespace nw::ut { class FrameHeap { int value; }; }\n")
+        self.source("include/umbrella.h", "#include <heap.h>\n")
+        self.add("missing.cpp", "namespace nw { namespace ut {\nclass FrameHeap;\n}}\n")
+        self.add("included.cpp", "#include <umbrella.h>\nnamespace nw::ut { class FrameHeap; }\n")
+        self.add("unrelated.cpp", "namespace nw::snd::internal { class FrameHeap; }\n")
+        report = self.audit()
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("class nw::ut::FrameHeap", "type-name")])
+        self.assertEqual({s["source"] for s in report["disagreements"][0]["sites"]}, {"include/heap.h", "missing.cpp"})
+        self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
+    def test_cpp_nested_forward_policy_uses_enclosing_class_identity(self):
+        self.source("include/outer.h", "namespace game { class Outer { public: class Inner { int value; }; }; }\n")
+        self.add("missing.cpp", "namespace game { class Outer::Inner; }\n")
+        self.add("unrelated.cpp", "namespace other { class Outer { class Inner; }; }\n")
+        report = self.audit()
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("class game::Outer::Inner", "type-name")])
+
+    def test_cpp_specialization_odr_and_forward_policy_remain_enforced(self):
+        self.source("include/traits.h", "namespace lib {\n"
+                    "template<class T> struct traits { int primary; };\n"
+                    "template<class T> struct traits<T*> { int pointer; };\n"
+                    "template<> struct traits<int> { int integer; };\n}\n")
+        self.add("odr.cpp", "namespace lib {\ntemplate<class T> struct traits<T *> { long pointer; };\n}\n")
+        self.add("missing.cpp", "namespace lib {\ntemplate<> struct traits<int>;\n}\n")
+        self.add("other.cpp", "namespace lib {\ntemplate<> struct traits<float>;\n}\n")
+        self.assertEqual([(d["name"], d["kind"]) for d in self.audit()["disagreements"]], [
+            ("class lib::traits<T*>", "odr"), ("class lib::traits<int>", "type-name"),
+        ])
+
+    def test_cpp_specialized_enclosing_classes_have_distinct_nested_types(self):
+        self.add("types.cpp", """namespace lib {
+template<class T> class Owner { class iterator { T *value; }; };
+template<class T> class Owner<T*> { class iterator { T **value; }; };
+template<> class Owner<int> { class iterator { int value; }; };
+}
+""")
+        self.assertEqual(self.audit()["disagreements"], [])
+
+    def test_cpp_unnamed_namespaces_are_unit_local_but_reopen_within_unit(self):
+        self.add("a.cpp", "namespace { struct Local { int value; }; }\n")
+        self.add("b.cpp", "namespace { struct Local { long value; }; }\n")
+        self.assertEqual(self.audit()["disagreements"], [])
+        self.add("c.cpp", "namespace { struct Local { int value; }; }\n"
+                         "namespace { struct Local { unsigned value; }; }\n")
+        report = self.audit()
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("class (anonymous)::Local", "odr")])
+        self.assertEqual({s["source"] for s in report["disagreements"][0]["sites"]}, {"c.cpp"})
+
+    def test_cpp_unnamed_header_classes_belong_to_including_units(self):
+        self.source("include/a.h", "namespace { struct Local { int value; }; }\n")
+        self.source("include/b.h", "namespace { struct Local { long value; }; }\n")
+        self.add("a.cpp", '#include "a.h"\n')
+        self.add("b.cpp", '#include "b.h"\n')
+        self.add("unrelated.cpp", "namespace { struct Local; }\n")
+        self.assertEqual(self.audit()["disagreements"], [])
+        self.add("both.cpp", '#include "a.h"\n#include "b.h"\n')
+        report = self.audit()
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]], [("class (anonymous)::Local", "odr")])
+        self.assertEqual({s["source"] for s in report["disagreements"][0]["sites"]}, {"include/a.h", "include/b.h"})
+
+    def test_cpp_scope_scanner_ignores_aliases_parameters_enums_and_literal_braces(self):
+        declarations = interfaces.cpp_class_declarations("""
+#define EXAMPLE namespace fake { class Macro {}; }
+namespace real {
+template<class Parameter, template<class> class Container> struct Owner {
+    using Alias = Parameter;
+    typedef Container<Parameter> OtherAlias;
+    enum class State { one, two };
+    friend class Friend;
+    friend bool operator==(Owner, Owner) { return true; }
+    struct Inner { const char *brace() { return "} /* not a comment */"; } };
+};
+namespace alias = real;
+using namespace alias;
+typedef struct { int value; } AnonymousAlias;
+}
+""", "types.cpp")
+        self.assertEqual([d.name for d in declarations], ["real::Owner", "real::Owner::Inner"])
+
+    def test_cpp_out_of_line_qualified_class_names_and_block_local_classes(self):
+        declarations = interfaces.cpp_class_declarations("""
+namespace lib { class Outer { class Inner; }; }
+struct lib::Outer::Inner { int value; };
+namespace other { struct ::lib::Global { int value; }; }
+void first() { struct Local { int value; }; }
+void second() { struct Local { long value; }; }
+""", "types.cpp")
+        self.assertEqual([d.name for d in declarations[:4]], [
+            "lib::Outer", "lib::Outer::Inner", "lib::Outer::Inner", "lib::Global",
+        ])
+        self.assertNotEqual(declarations[4].name, declarations[5].name)
+        self.assertTrue(all(d.unit_local for d in declarations[4:]))
 
     def test_preprocess_failure_is_unchecked_not_pass(self):
         self.add("a.c", "int data_00200000;\n")
