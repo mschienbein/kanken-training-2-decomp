@@ -4001,14 +4001,14 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Merge FixC008R3 preserving slot14/audit follow-up once its hash is supplied; 642d725 is already merged, with c009 before/after context notifications retained.",
+    "Merge FixC008R3 preserving follow-up for service slots0/1/2/14 and outside-scope adjudication when its hash is supplied; 642d725 and c009 slot14 resolution are already merged.",
     "Run tools/interfaces.py check --matches scratch/integrator/c009/dry-matches.json --allow-unchecked-cpp and preserve a new versioned report/actual exit. Saved 48 disagreements/28 policy/500 unchecked are historical, not current counts.",
     "Remediate any new merged-tree disagreements from evidence; no shims/shadow types or unchecked-C waiver. Existing exact deferrals are in collection-closure-r1.json, interface-deferrals-r1.json and contract-deferrals.json.",
     "Refresh revised scope against final r3 follow-up, then run scratch/integrator/c009/sweep.py with a new phase: all679 candidate units and122 revised predecessor units (126 functions) need final --show0 MATCH closure.",
     "Run probe_interfaces.py --mode native and --mode signatures under exclusive new run names. Reuse main-root c008-r3/audit_indirect.py and corrected final/source-slot-map.json for the c009-wide original consumer sweep, including indirect tails and callback storage.",
     "Scoped scheduler-bindings-acyclic-r1.json establishes a first-iteration root only, not all-path proof. Complete scheduler/startup/service/Aux callback consumer adjudication is still required.",
     "Run complete argcheck and adjudicate every candidate and unparsed C++ contract; finish all seven docs/REVIEWING.md steps with findings fixed before review-ready claim.",
-    "No full suite/build/prepare/finalize/history edit/push was performed or authorized here. Coordinate the serialized heavy slot with c010/Main before resuming."
+    "No full suite/build/prepare/finalize/history edit/push was performed or authorized. Next serialized audit slot is released to FixC008R3 before c010; coordinate with Main before resuming c009."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4135,6 +4135,17 @@
   ],
   "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3",
   "c008_r3_merged": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
-  "pending_c008_r3_followup": "Slot14 notification/tail-consumer disposition fix acknowledged by FixC008R3; preserving follow-up commit not yet supplied.",
-  "merge_evidence": "scratch/integrator/c009/merge-c008-r3-r1.json"
+  "pending_c008_r3_followup": "FixC008R3 preserving follow-up for ServiceCallbacks slots0/1/2/14 and complete outside-scope consumer adjudication; commit hash not supplied. This branch has only 642d725 plus its independently evidenced slot14 merge resolution.",
+  "merge_evidence": "scratch/integrator/c009/merge-c008-r3-r1.json",
+  "followup_report_attribution": {
+    "agent": "FixC008R3",
+    "status": "reported pending corrections, not applied or independently verified here",
+    "slots": {
+      "0": "int pending and unsigned-char mode",
+      "1": "unsigned-short command and CtrHandle* reply",
+      "2": "const buffer and CtrHandle rather than signed result",
+      "14": "typed context notification, already retained in c009 merge"
+    },
+    "audit_omission": "Slot14 tail was decoded but left unadjudicated outside selected source rows; every observed canonical-contract consumer requires adjudication irrespective of source scope."
+  }
 }

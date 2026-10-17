@@ -23,6 +23,16 @@ is `service-notify-r1.json`. FixC008R3 acknowledged its missing disposition and
 is preparing a preserving follow-up/audit fix without taking c009's heavy slot.
 Merge that follow-up when supplied; do not silently downgrade slot14 to reserved.
 
+Post-merge follow-up notice from FixC008R3: slot14 was decoded but left
+unadjudicated because its consumer was outside selected source rows. Complete
+canonical-contract adjudication must not use that scope filter. FixC008R3 also
+reports new complete `00122b30` author evidence requiring slot0 int pending +
+byte mode, slot1 ushort command + CtrHandle reply pointer, and slot2 const buffer
++ CtrHandle rather than signed result. These additional corrections are pending
+its preserving follow-up commit, not already applied or verified in c009.
+The serialized audit slot is released to FixC008R3 **before c010** for rebinding
+the affected dependencies/G3/probes.
+
 No merged-tree G3/final match/probe/argcheck result is yet claimed. The next command
 is whole-ledger interfaces on this stable merged dry ledger; no full build/suite
 or acceptance/history/push operation is authorized here.
