@@ -2,11 +2,14 @@
 
 ## Status
 
-**Pre-merge source-remediation snapshot, not review-ready or accepted.**
-Continued `9d6f051` and collection milestone `b63317e` without restarting searches.
+**C008-r3 merged, c009 final checks pending; not review-ready or accepted.**
+Continued `9d6f051`, collection `b63317e` and remediation `d031cce` without restarting searches.
 The original sixteen-address boundary is closed by six canonical MATCH destinations
 and ten recorded deferrals. Three further interface/tooling deferrals are below.
 `docs/GATES.md` stays v1.16. Main owns full builds/suite and acceptance.
+The user requested wrap-up at the merged continuation milestone. Later canonical
+source edits are preserved but unexercised; no merged-tree gate success or pre-review
+PASS is claimed. Resume from the committed NOTES/HANDOFF, not an earlier author search.
 
 `config/candidates/c009.json` lists **679 units / 679 functions / 57,276 target
 bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:
@@ -86,16 +89,17 @@ original c008. The current dry ledger has **2,206 units / 2,280 functions**:
 1,601 predecessor functions plus 679 c009 functions. The additional `0016b6a4`
 deferral remains excluded.
 
-The source delta against c008-r2 revises **122 predecessor units / 126 functions**,
+The source delta against c008-r3 revises **122 predecessor units / 126 functions**,
 including shared-header migrations and caller-evidenced constructor/callback input/result
 retention. Every revised unit is listed in HANDOFF and still needs fresh final
 byte/review closure. Header-only dependents need the complete canonical contract sweep.
 
-FixC008R3 has committed `642d725079b6a2154bc6f06fa554dcbeb063bcea` and closed its
-serial audit slot. Merge it before claiming a review-ready c009 base: it repairs
-service slots 11/13/15 and AuxCallback's scalar sample-count chain. Its scripts and
-final evidence live in main-root `scratch/integrator/c008-r3/`; historical c008
-records remain untouched. New c009 source edits still need merged-tree verification.
+Merged c008-r3 `642d725079b6a2154bc6f06fa554dcbeb063bcea`, retaining c009's channel
+fields and adopting corrected service slots 11/13/15 plus AuxCallback's scalar
+sample-count chain. Original `00115000` also proves slot14's context-taking tail
+consumer (`service-notify-r1.json`); c009 keeps its before/after names and correct
+types. FixC008R3 acknowledged that missed disposition and is preparing a preserving
+follow-up/audit correction. Final c009 checks must include that follow-up.
 
 ## Additional collection-scope deferrals
 

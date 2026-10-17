@@ -4,12 +4,19 @@
 struct ServiceCallbackState;
 struct ServiceCallbacks;
 
+#include "ctr/svc.h"
 #include "game/runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 typedef int (*ServicePollCallback)(void *context);
 
 typedef void (*ServiceNotifyCallback)(void *context);
+
+/* Both message-wait consumers forward all receive outputs and use an acceptance
+ * result. Only its low byte is tested: int width/signedness are [INFERENCE],
+ * not proof that historical callbacks produced a full-word decision. */
+typedef int (*ServiceMessageCallback)(void *context, unsigned applet_id,
+    int signal, void *buffer, unsigned capacity, unsigned size, CtrHandle handle);
 
 struct ServiceCallbacks {
     int (*request)(void *context, unsigned request, unsigned state);
@@ -23,11 +30,13 @@ struct ServiceCallbacks {
     ServiceNotifyCallback stop;
     ServiceNotifyCallback pause;
     ServiceNotifyCallback complete;
-    void (*reserved_callback)(void);
+    ServiceNotifyCallback reserved_callback;
     ServiceNotifyCallback ready;
+    /* Original 00115000 invokes slots 13/14 with contexts[13]/contexts[14].
+     * The second invocation is an indirect tail exit, not an unobserved slot. */
     ServiceNotifyCallback before;
     ServiceNotifyCallback after;
-    void (*shutdown)(void);
+    ServiceMessageCallback shutdown;
 };
 
 struct ServiceCallbackState {

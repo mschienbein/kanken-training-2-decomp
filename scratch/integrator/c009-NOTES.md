@@ -1,6 +1,33 @@
 # C009 recovered integration handoff
 
-## Pre-merge remediation snapshot — checks pending
+## C008-r3 merged — stable c009 checks next
+
+The user requested wrap-up at this merge milestone. This is a committed,
+resumable continuation, **not review-ready**. New static remediation after
+`b63317e` remains unexercised: no merged-tree G3, final MATCH sweep, canonical
+probe/same-class sweep, complete argcheck adjudication or seven-step PASS exists.
+
+Merged predecessor `642d725079b6a2154bc6f06fa554dcbeb063bcea` after preserving
+source-remediation milestone `d031cce`. Its 1,527-unit / 1,601-function ledger
+has exactly the same predecessor identities/profiles/owners as the prior dry base.
+Current c009 scope stays **679 units / 57,276 B**, dry **2,206 units /
+2,280 functions**, and source delta against r3 **122 units / 126 functions**.
+
+Merge choices preserve c009's evidenced `ServiceOutput.channels[2]` while
+adopting the corrected shared AuxCallback channels/scalar-count/context type.
+Service slots 11/13/15 retain r3's actual context/message contracts and explicit
+return-width qualification. The original `00115000` additionally proves slot14:
+tail `00115034` loads callback `00242ab0` and context `00242af0`. C009 retains its
+existing `before`/`after` names, now both typed context notifications; evidence
+is `service-notify-r1.json`. FixC008R3 acknowledged its missing disposition and
+is preparing a preserving follow-up/audit fix without taking c009's heavy slot.
+Merge that follow-up when supplied; do not silently downgrade slot14 to reserved.
+
+No merged-tree G3/final match/probe/argcheck result is yet claimed. The next command
+is whole-ledger interfaces on this stable merged dry ledger; no full build/suite
+or acceptance/history/push operation is authorized here.
+
+## Pre-merge d031cce snapshot — preserved unexercised remediation
 
 Continued milestone `b63317e` without restarting prior searches. Current scope is
 **679 units/functions / 57,276 target B**: game 616/51,528 B, middleware

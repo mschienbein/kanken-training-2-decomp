@@ -21,7 +21,9 @@ struct SoundSubsystem;
 #include "game/runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
-typedef void (*AuxCallback)(void *left, void *right, void *context);
+/* func_001543b8 supplies four planar buffer pointers and a scalar sample count.
+ * [INFERENCE] Sample signedness and count signedness are not fixed by that call. */
+typedef void (*AuxCallback)(int **channels, unsigned sample_count, void *context);
 
 struct AuxFloatRamp {
     float start;
@@ -94,7 +96,7 @@ extern void func_0017e654(struct AuxFloatRamp *ramp, int duration, float target)
 extern void func_0017e848(int index, float value);
 extern int func_001525c8(signed char channel, struct AuxDelayProcessor *effect);
 extern int func_001525dc(signed char channel, struct AuxReverbProcessor *effect);
-extern void func_00152c88(void *left, void *right, void *context);
+extern void func_00152c88(int **channels, unsigned sample_count, void *context);
 extern struct AuxFrameState bss_004b6584;
 extern int func_0014c90c(struct InputLatchSnapshot *flags, int kind, int channel);
 extern void func_00146150(struct ServiceOutput *manager, signed char channel,

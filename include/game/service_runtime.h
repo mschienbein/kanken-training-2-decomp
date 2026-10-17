@@ -20,10 +20,10 @@ struct AudioChannel;
 
 
 
+#include "game/aux_effect.h"
 #include "game/stream_manager.h"
 #include "ctr/svc.h"
 #include "game/synchronization.h"
-#include "game/aux_effect.h"
 typedef void (*LifecycleCallback)(void);
 
 /* Callback pending and resource busy are distinct fields of this state object. */
@@ -170,7 +170,7 @@ extern void func_001521dc(struct HandleManager *manager, struct AudioChannel *ha
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern void func_00180558(const struct ServiceOutput *state, int index, void (**first)(void *, void *, void *), void **second);
+extern void func_00180558(const struct ServiceOutput *state, int index, AuxCallback *first, void **second);
 #ifdef __cplusplus
 }
 #endif

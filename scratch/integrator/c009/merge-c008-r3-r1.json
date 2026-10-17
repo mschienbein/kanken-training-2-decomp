@@ -1,0 +1,28 @@
+{
+  "predecessor_commit": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
+  "preserved_source_remediation_commit": "d031cce",
+  "predecessor_ledger": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/final/dry-matches.json",
+    "sha256": "f0fe6997acb2fe8828b0fbf5f19954d3254511293e10f783a107138667ed7098",
+    "units": 1527,
+    "functions": 1601,
+    "identities_profiles_owners_equal_prior_dry_base": true
+  },
+  "conflict_resolutions": [
+    {
+      "source": "include/game/service_callbacks.h",
+      "choice": "Adopt r3 ServiceMessageCallback shutdown and context-typed notifications; preserve c009 before/after field names and slot14 context contract proven by original 00115000 indirect tail.",
+      "evidence": "scratch/integrator/c009/service-notify-r1.json"
+    },
+    {
+      "source": "include/game/service_runtime.h",
+      "choice": "Retain c009 channels[2] at +0x0c while adopting shared corrected AuxCallback and removing duplicate aux_effect include.",
+      "evidence": [
+        "src/wave18/func_0014fa0c.c",
+        "include/game/aux_effect.h"
+      ]
+    }
+  ],
+  "pending_predecessor_followup": "FixC008R3 acknowledged missed slot14 disposition and is preparing preserving follow-up/audit correction; merge when supplied.",
+  "verification": "No merged-tree G3/MATCH/native/signature/indirect/argcheck/pre-review run occurred; user requested wrap-up at merge milestone."
+}

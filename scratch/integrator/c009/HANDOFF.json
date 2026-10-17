@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "pre-merge-source-remediation-unverified",
+  "status": "user-requested-wrap-up-merged-milestone-not-review-ready",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.16 unchanged",
@@ -25,15 +25,8 @@
     }
   },
   "dry_ledger_units": 2206,
-  "dry_ledger_basis": "c008-r2 successor dry ledger plus 682 c009 additions; c008-r3 is pending committed merge",
+  "dry_ledger_basis": "c008-r3 final/dry-matches.json: 1527 units/1601 functions plus current 679 c009 additions; original failed c008 is not used",
   "revised_predecessor_units": [
-    {
-      "source": "src/pilot/loop_resources.c",
-      "profile": "game",
-      "functions": [
-        "func_00105084"
-      ]
-    },
     {
       "source": "src/pilot/pilot_b.c",
       "profile": "game",
@@ -44,76 +37,18 @@
       ]
     },
     {
-      "source": "src/retries/func_001dbbd4.c",
+      "source": "src/pilot/loop_resources.c",
       "profile": "game",
       "functions": [
-        "func_001dbbd4"
-      ],
-      "author": "r327"
+        "func_00105084"
+      ]
     },
     {
-      "source": "src/sdk/func_0010bf74.c",
+      "source": "src/pilot/loop_state.c",
       "profile": "game",
       "functions": [
-        "func_0010bf74"
-      ],
-      "author": "x01"
-    },
-    {
-      "source": "src/sdk/func_00113404.c",
-      "profile": "game",
-      "functions": [
-        "func_00113404"
-      ],
-      "author": "x02"
-    },
-    {
-      "source": "src/sdk/func_00121364.c",
-      "profile": "game",
-      "functions": [
-        "func_00121364"
-      ],
-      "author": "x03"
-    },
-    {
-      "source": "src/sdk/func_00136754.c",
-      "profile": "game",
-      "functions": [
-        "func_00136754"
-      ],
-      "author": "x05"
-    },
-    {
-      "source": "src/sdk/func_00137c5c.c",
-      "profile": "game",
-      "functions": [
-        "func_00137c5c"
-      ],
-      "author": "x06"
-    },
-    {
-      "source": "src/sdk/func_00182198.c",
-      "profile": "game",
-      "functions": [
-        "func_00182198"
-      ],
-      "author": "x09"
-    },
-    {
-      "source": "src/sdk/func_001c526c.c",
-      "profile": "game",
-      "functions": [
-        "func_001c526c"
-      ],
-      "author": "x11"
-    },
-    {
-      "source": "src/solo/func_002073fc.cpp",
-      "profile": "game",
-      "functions": [
-        "func_002073fc"
-      ],
-      "author": "s2073fc"
+        "func_00105fa8"
+      ]
     },
     {
       "source": "src/wave1/func_00102cb0.c",
@@ -130,6 +65,14 @@
         "func_00110358"
       ],
       "author": "Wave1Author0"
+    },
+    {
+      "source": "src/wave1/func_00195e94.c",
+      "profile": "game",
+      "functions": [
+        "func_00195e94"
+      ],
+      "author": "Wave1Author1"
     },
     {
       "source": "src/wave1/func_0011f080.cpp",
@@ -180,198 +123,6 @@
       "author": "Wave1Author2"
     },
     {
-      "source": "src/wave1/func_00195e94.c",
-      "profile": "game",
-      "functions": [
-        "func_00195e94"
-      ],
-      "author": "Wave1Author1"
-    },
-    {
-      "source": "src/wave10/func_0014a98c.c",
-      "profile": "game",
-      "functions": [
-        "func_0014a98c"
-      ],
-      "author": "w10a"
-    },
-    {
-      "source": "src/wave10/func_00156da0.c",
-      "profile": "game",
-      "functions": [
-        "func_00156da0"
-      ],
-      "author": "w10d"
-    },
-    {
-      "source": "src/wave10/func_0016dc50.c",
-      "profile": "game",
-      "functions": [
-        "func_0016dc50"
-      ],
-      "author": "w10h"
-    },
-    {
-      "source": "src/wave10/func_00179ed4.c",
-      "profile": "game",
-      "functions": [
-        "func_00179ed4"
-      ],
-      "author": "w10e"
-    },
-    {
-      "source": "src/wave10/func_0017a424.c",
-      "profile": "game",
-      "functions": [
-        "func_0017a424"
-      ],
-      "author": "w10g"
-    },
-    {
-      "source": "src/wave10/func_00180344.c",
-      "profile": "game",
-      "functions": [
-        "func_00180344"
-      ],
-      "author": "w10h"
-    },
-    {
-      "source": "src/wave10/func_001b06a4.c",
-      "profile": "game",
-      "functions": [
-        "func_001b06a4"
-      ],
-      "author": "L001"
-    },
-    {
-      "source": "src/wave10/func_001dd6c8.c",
-      "profile": "game",
-      "functions": [
-        "func_001dd6c8"
-      ],
-      "author": "w10j"
-    },
-    {
-      "source": "src/wave11/func_0010be94.c",
-      "profile": "game",
-      "functions": [
-        "func_0010be94"
-      ],
-      "author": "w11g"
-    },
-    {
-      "source": "src/wave11/func_0016ec28.c",
-      "profile": "middleware",
-      "functions": [
-        "func_0016ec28"
-      ],
-      "author": "w11h"
-    },
-    {
-      "source": "src/wave11/func_00174cb0.cpp",
-      "profile": "game",
-      "functions": [
-        "func_00174cb0"
-      ],
-      "author": "w11a"
-    },
-    {
-      "source": "src/wave11/func_00174ef8.c",
-      "profile": "game",
-      "functions": [
-        "func_00174ef8"
-      ],
-      "author": "w11b"
-    },
-    {
-      "source": "src/wave11/func_00174f04.c",
-      "profile": "game",
-      "functions": [
-        "func_00174f04"
-      ],
-      "author": "w11b"
-    },
-    {
-      "source": "src/wave11/func_00176df4.c",
-      "profile": "game",
-      "functions": [
-        "func_00176df4"
-      ],
-      "author": "w11h"
-    },
-    {
-      "source": "src/wave11/func_00177084.c",
-      "profile": "game",
-      "functions": [
-        "func_00177084"
-      ],
-      "author": "w11h"
-    },
-    {
-      "source": "src/wave11/func_00186598.c",
-      "profile": "game",
-      "functions": [
-        "func_00186598"
-      ],
-      "author": "w11a"
-    },
-    {
-      "source": "src/wave11/func_0019eb24.c",
-      "profile": "game",
-      "functions": [
-        "func_0019eb24"
-      ],
-      "author": "w11h"
-    },
-    {
-      "source": "src/wave11/func_001e807c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001e807c"
-      ],
-      "author": "w11h"
-    },
-    {
-      "source": "src/wave12/func_00181b58.c",
-      "profile": "game",
-      "functions": [
-        "func_00181b58"
-      ],
-      "author": "w12a"
-    },
-    {
-      "source": "src/wave12/func_001c1bf0.c",
-      "profile": "game",
-      "functions": [
-        "func_001c1bf0"
-      ],
-      "author": "w12f"
-    },
-    {
-      "source": "src/wave14/func_00106aec.c",
-      "profile": "game",
-      "functions": [
-        "func_00106aec"
-      ],
-      "author": "w14i"
-    },
-    {
-      "source": "src/wave14/func_00110ed8.c",
-      "profile": "game",
-      "functions": [
-        "func_00110ed8"
-      ],
-      "author": "w14g"
-    },
-    {
-      "source": "src/wave2/func_00118074.c",
-      "profile": "game",
-      "functions": [
-        "func_00118074"
-      ],
-      "author": "Wave2Author3"
-    },
-    {
       "source": "src/wave2/func_00149424.c",
       "profile": "game",
       "functions": [
@@ -380,10 +131,26 @@
       "author": "Wave2Author0"
     },
     {
+      "source": "src/wave2/func_0014de8c.c",
+      "profile": "game",
+      "functions": [
+        "func_0014de8c"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
       "source": "src/wave2/func_0014f7e8.c",
       "profile": "game",
       "functions": [
         "func_0014f7e8"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
+      "source": "src/wave2/func_00179298.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00179298"
       ],
       "author": "Wave2Author0"
     },
@@ -404,14 +171,6 @@
       "author": "Wave2Author1"
     },
     {
-      "source": "src/wave2/func_00179298.cpp",
-      "profile": "game",
-      "functions": [
-        "func_00179298"
-      ],
-      "author": "Wave2Author0"
-    },
-    {
       "source": "src/wave2/func_0017a210.c",
       "profile": "game",
       "functions": [
@@ -420,20 +179,28 @@
       "author": "Wave2Author1"
     },
     {
-      "source": "src/wave2/func_0018ce64.c",
-      "profile": "game",
-      "functions": [
-        "func_0018ce64"
-      ],
-      "author": "Wave2Author3"
-    },
-    {
       "source": "src/wave2/func_0018f0ac.c",
       "profile": "game",
       "functions": [
         "func_0018f0ac"
       ],
       "author": "Wave2Author2"
+    },
+    {
+      "source": "src/wave2/func_00118074.c",
+      "profile": "game",
+      "functions": [
+        "func_00118074"
+      ],
+      "author": "Wave2Author3"
+    },
+    {
+      "source": "src/wave2/func_0018ce64.c",
+      "profile": "game",
+      "functions": [
+        "func_0018ce64"
+      ],
+      "author": "Wave2Author3"
     },
     {
       "source": "src/wave2/func_00190adc.c",
@@ -450,14 +217,6 @@
         "func_0019ceb4"
       ],
       "author": "Wave2Author3"
-    },
-    {
-      "source": "src/wave3/func_001748b8.c",
-      "profile": "game",
-      "functions": [
-        "func_001748b8"
-      ],
-      "author": "Wave3Author2"
     },
     {
       "source": "src/wave3/func_00196a94.c",
@@ -484,6 +243,14 @@
       "author": "Wave3Author1"
     },
     {
+      "source": "src/wave3/func_001748b8.c",
+      "profile": "game",
+      "functions": [
+        "func_001748b8"
+      ],
+      "author": "Wave3Author2"
+    },
+    {
       "source": "src/wave4/func_00114fa4.c",
       "profile": "game",
       "functions": [
@@ -498,14 +265,6 @@
         "func_001217b4"
       ],
       "author": "Wave4Author0"
-    },
-    {
-      "source": "src/wave4/func_00122500.c",
-      "profile": "game",
-      "functions": [
-        "func_00122500"
-      ],
-      "author": "Wave4Author1"
     },
     {
       "source": "src/wave4/func_00122890.c",
@@ -588,14 +347,6 @@
       "author": "Wave4Author0"
     },
     {
-      "source": "src/wave4/func_0013e6b8.c",
-      "profile": "game",
-      "functions": [
-        "func_0013e6b8"
-      ],
-      "author": "Wave4Author3"
-    },
-    {
       "source": "src/wave4/func_00147994.c",
       "profile": "game",
       "functions": [
@@ -676,6 +427,30 @@
       "author": "Wave4Author0"
     },
     {
+      "source": "src/wave4/func_00122500.c",
+      "profile": "game",
+      "functions": [
+        "func_00122500"
+      ],
+      "author": "Wave4Author1"
+    },
+    {
+      "source": "src/wave4/func_0013e6b8.c",
+      "profile": "game",
+      "functions": [
+        "func_0013e6b8"
+      ],
+      "author": "Wave4Author3"
+    },
+    {
+      "source": "src/wave5/func_001c0e44.c",
+      "profile": "game",
+      "functions": [
+        "func_001c0e44"
+      ],
+      "author": "Wave5Author0"
+    },
+    {
       "source": "src/wave5/func_00123398.c",
       "profile": "game",
       "functions": [
@@ -690,14 +465,6 @@
         "func_00172d48"
       ],
       "author": "Wave5Author2"
-    },
-    {
-      "source": "src/wave5/func_001c0e44.c",
-      "profile": "game",
-      "functions": [
-        "func_001c0e44"
-      ],
-      "author": "Wave5Author0"
     },
     {
       "source": "src/wave6/func_001047c0.c",
@@ -764,6 +531,182 @@
       "author": "w7h"
     },
     {
+      "source": "src/sdk/func_0010bf74.c",
+      "profile": "game",
+      "functions": [
+        "func_0010bf74"
+      ],
+      "author": "x01"
+    },
+    {
+      "source": "src/sdk/func_00113404.c",
+      "profile": "game",
+      "functions": [
+        "func_00113404"
+      ],
+      "author": "x02"
+    },
+    {
+      "source": "src/sdk/func_00121364.c",
+      "profile": "game",
+      "functions": [
+        "func_00121364"
+      ],
+      "author": "x03"
+    },
+    {
+      "source": "src/sdk/func_00136754.c",
+      "profile": "game",
+      "functions": [
+        "func_00136754"
+      ],
+      "author": "x05"
+    },
+    {
+      "source": "src/sdk/func_00137c5c.c",
+      "profile": "game",
+      "functions": [
+        "func_00137c5c"
+      ],
+      "author": "x06"
+    },
+    {
+      "source": "src/sdk/func_00182198.c",
+      "profile": "game",
+      "functions": [
+        "func_00182198"
+      ],
+      "author": "x09"
+    },
+    {
+      "source": "src/sdk/func_001c526c.c",
+      "profile": "game",
+      "functions": [
+        "func_001c526c"
+      ],
+      "author": "x11"
+    },
+    {
+      "source": "src/wave10/func_0014a98c.c",
+      "profile": "game",
+      "functions": [
+        "func_0014a98c"
+      ],
+      "author": "w10a"
+    },
+    {
+      "source": "src/wave10/func_00156da0.c",
+      "profile": "game",
+      "functions": [
+        "func_00156da0"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e49c.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e49c"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e5c4.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e5c4"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e624.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e624"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e96c.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e96c"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0016dc50.c",
+      "profile": "game",
+      "functions": [
+        "func_0016dc50"
+      ],
+      "author": "w10h"
+    },
+    {
+      "source": "src/wave10/func_0016fff8.c",
+      "profile": "game",
+      "functions": [
+        "func_0016fff8"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_00170014.c",
+      "profile": "game",
+      "functions": [
+        "func_00170014"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_00179ed4.c",
+      "profile": "game",
+      "functions": [
+        "func_00179ed4"
+      ],
+      "author": "w10e"
+    },
+    {
+      "source": "src/wave10/func_0017a424.c",
+      "profile": "game",
+      "functions": [
+        "func_0017a424"
+      ],
+      "author": "w10g"
+    },
+    {
+      "source": "src/wave10/func_00180344.c",
+      "profile": "game",
+      "functions": [
+        "func_00180344"
+      ],
+      "author": "w10h"
+    },
+    {
+      "source": "src/wave10/func_001b06a4.c",
+      "profile": "game",
+      "functions": [
+        "func_001b06a4"
+      ],
+      "author": "L001"
+    },
+    {
+      "source": "src/wave10/func_001dd6c8.c",
+      "profile": "game",
+      "functions": [
+        "func_001dd6c8"
+      ],
+      "author": "w10j"
+    },
+    {
+      "source": "src/wave8/func_00179160.c",
+      "profile": "game",
+      "functions": [
+        "func_00179160"
+      ],
+      "author": "w8a"
+    },
+    {
       "source": "src/wave8/func_00181250.c",
       "profile": "game",
       "functions": [
@@ -772,12 +715,60 @@
       "author": "w8e"
     },
     {
+      "source": "src/wave8/func_001c5950.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5950"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001c5970.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5970"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001c59fc.c",
+      "profile": "game",
+      "functions": [
+        "func_001c59fc"
+      ],
+      "author": "w8f"
+    },
+    {
       "source": "src/wave8/func_001c7a1c.c",
       "profile": "game",
       "functions": [
         "func_001c7a1c"
       ],
       "author": "w8g"
+    },
+    {
+      "source": "src/wave8/func_001d4a48.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4a48"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001d4aac.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4aac"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001e403c.c",
+      "profile": "game",
+      "functions": [
+        "func_001e403c"
+      ],
+      "author": "w8a"
     },
     {
       "source": "src/wave8/func_001f2b90.c",
@@ -846,29 +837,6 @@
       "author": "w9a"
     },
     {
-      "source": "src/wave2/func_0014de8c.c",
-      "profile": "game",
-      "functions": [
-        "func_0014de8c"
-      ],
-      "author": "Wave2Author0"
-    },
-    {
-      "source": "src/wave8/func_00179160.c",
-      "profile": "game",
-      "functions": [
-        "func_00179160"
-      ],
-      "author": "w8a"
-    },
-    {
-      "source": "src/pilot/loop_state.c",
-      "profile": "game",
-      "functions": [
-        "func_00105fa8"
-      ]
-    },
-    {
       "source": "src/sdk2/func_0014ded8.c",
       "profile": "middleware",
       "functions": [
@@ -901,52 +869,44 @@
       "author": "integrator-recheck41"
     },
     {
-      "source": "src/wave10/func_0015e49c.c",
+      "source": "src/wave11/func_0010be94.c",
       "profile": "game",
       "functions": [
-        "func_0015e49c"
+        "func_0010be94"
       ],
-      "author": "w10d"
+      "author": "w11g"
     },
     {
-      "source": "src/wave10/func_0015e5c4.c",
+      "source": "src/wave11/func_00174cb0.cpp",
       "profile": "game",
       "functions": [
-        "func_0015e5c4"
+        "func_00174cb0"
       ],
-      "author": "w10d"
+      "author": "w11a"
     },
     {
-      "source": "src/wave10/func_0015e624.c",
+      "source": "src/wave11/func_00174ef8.c",
       "profile": "game",
       "functions": [
-        "func_0015e624"
+        "func_00174ef8"
       ],
-      "author": "w10d"
+      "author": "w11b"
     },
     {
-      "source": "src/wave10/func_0015e96c.c",
+      "source": "src/wave11/func_00174f04.c",
       "profile": "game",
       "functions": [
-        "func_0015e96c"
+        "func_00174f04"
       ],
-      "author": "w10d"
+      "author": "w11b"
     },
     {
-      "source": "src/wave10/func_0016fff8.c",
+      "source": "src/wave11/func_00186598.c",
       "profile": "game",
       "functions": [
-        "func_0016fff8"
+        "func_00186598"
       ],
-      "author": "w10d"
-    },
-    {
-      "source": "src/wave10/func_00170014.c",
-      "profile": "game",
-      "functions": [
-        "func_00170014"
-      ],
-      "author": "w10d"
+      "author": "w11a"
     },
     {
       "source": "src/wave11/func_00186fbc.c",
@@ -957,52 +917,92 @@
       "author": "w11f"
     },
     {
-      "source": "src/wave8/func_001c5950.c",
-      "profile": "game",
+      "source": "src/wave11/func_0016ec28.c",
+      "profile": "middleware",
       "functions": [
-        "func_001c5950"
+        "func_0016ec28"
       ],
-      "author": "w8f"
+      "author": "w11h"
     },
     {
-      "source": "src/wave8/func_001c5970.c",
+      "source": "src/wave11/func_00176df4.c",
       "profile": "game",
       "functions": [
-        "func_001c5970"
+        "func_00176df4"
       ],
-      "author": "w8f"
+      "author": "w11h"
     },
     {
-      "source": "src/wave8/func_001c59fc.c",
+      "source": "src/wave11/func_00177084.c",
       "profile": "game",
       "functions": [
-        "func_001c59fc"
+        "func_00177084"
       ],
-      "author": "w8f"
+      "author": "w11h"
     },
     {
-      "source": "src/wave8/func_001d4a48.c",
+      "source": "src/wave11/func_0019eb24.c",
       "profile": "game",
       "functions": [
-        "func_001d4a48"
+        "func_0019eb24"
       ],
-      "author": "w8f"
+      "author": "w11h"
     },
     {
-      "source": "src/wave8/func_001d4aac.c",
+      "source": "src/wave11/func_001e807c.cpp",
       "profile": "game",
       "functions": [
-        "func_001d4aac"
+        "func_001e807c"
       ],
-      "author": "w8f"
+      "author": "w11h"
     },
     {
-      "source": "src/wave8/func_001e403c.c",
+      "source": "src/wave12/func_00181b58.c",
       "profile": "game",
       "functions": [
-        "func_001e403c"
+        "func_00181b58"
       ],
-      "author": "w8a"
+      "author": "w12a"
+    },
+    {
+      "source": "src/wave12/func_001c1bf0.c",
+      "profile": "game",
+      "functions": [
+        "func_001c1bf0"
+      ],
+      "author": "w12f"
+    },
+    {
+      "source": "src/wave14/func_00110ed8.c",
+      "profile": "game",
+      "functions": [
+        "func_00110ed8"
+      ],
+      "author": "w14g"
+    },
+    {
+      "source": "src/wave14/func_00106aec.c",
+      "profile": "game",
+      "functions": [
+        "func_00106aec"
+      ],
+      "author": "w14i"
+    },
+    {
+      "source": "src/retries/func_001dbbd4.c",
+      "profile": "game",
+      "functions": [
+        "func_001dbbd4"
+      ],
+      "author": "r327"
+    },
+    {
+      "source": "src/solo/func_002073fc.cpp",
+      "profile": "game",
+      "functions": [
+        "func_002073fc"
+      ],
+      "author": "s2073fc"
     }
   ],
   "source_sha256": {
@@ -1020,7 +1020,7 @@
     "include/game/audio_filter.h": "7d8cdee8031480b608b85bf5259549cacc0a098f6786d84569a05a4c4f1729df",
     "include/game/audio_tasks.h": "4d2ccff264d24361b7e87bb0297feae44e0835ccf6a6e00d83f4292d35796f9c",
     "include/game/audio_voice.h": "992e3a4e318397229e45fde7cd51f9e5ab27bd5f1e89a22a69c657285e9b47e8",
-    "include/game/aux_effect.h": "6ec89c7c249cdd84287024cd374426583aeb722dde6d417e7e4822e452680e5d",
+    "include/game/aux_effect.h": "c20768c3b975338999f0ee5c835ac6eca325c6e4792a465cc51b6fc27bbb9983",
     "include/game/biquad_filter.h": "1b36abc727cb071c9882c116c2bedf831c2dfa78a84b14b6e18aa729fba22a9c",
     "include/game/bss_0049ecf0.h": "fd6b00612c2615eed40a79604fd8dde88f5235943a2ad288a5949b132954a701",
     "include/game/category_pattern.h": "c2ecd4a98da7c93ce510a87f3f04a5676b4b744b547d1e7199289ce61038a8b0",
@@ -1133,14 +1133,14 @@
     "include/game/sequence.h": "35234be854a334469f3228740e01479e0c302d0569fa01501018d3dc4c669f7d",
     "include/game/sequence_track.h": "df50ad2bc2eed881c96cbd8a9c3551cfc6a8253e6c53e1cb0b9cfe94876acd22",
     "include/game/service_availability.h": "5dd1fe2fc2d62a1a4658f768a4c185c60e9f7339f1d1f56ec4946001fd4172bd",
-    "include/game/service_callbacks.h": "22950ff1a64544db25bfb87e8daaab70ddb14d7eedb061eeec393b8836af606b",
+    "include/game/service_callbacks.h": "91f80e9e9069c408bb74ee65b35cfecc96424b317795db4898b0997ae9a5b978",
     "include/game/service_clients.h": "692b160f9556a380a35fad5ca171ee80b9e71bc489a231acede45a2b9e3728fc",
     "include/game/service_configuration_words.h": "e88fa3f0217213a76356727f1d66ad51a8eb9d7eb7ce5acad34f587f8716f4db",
     "include/game/service_lifetime.h": "6e2f4b69a18d0a4478b19d233a38635f09587615d6c1e964db87b94e2096bdee",
     "include/game/service_list.h": "e84ec156655fa2fba14cd73ca7490328f5c0b00303ed7653ed35669168511bf2",
     "include/game/service_protocol.h": "298241b446592c861eb41ce8081848da1eab0ae15f11a23ba48e03359665318f",
     "include/game/service_result.h": "39299bb4508d2e9a085414b0fdcebd7ccd4ad583ead36a72eeb7885405d74dd6",
-    "include/game/service_runtime.h": "4531fc808c3389c9a38799c76d2e109c38efb73f9b4cbdf0520097f0e8b822a8",
+    "include/game/service_runtime.h": "2e19ea4fccbb5cccc760e875d63f98d3a71ad46fa2d37c904eb09365a22bae00",
     "include/game/service_state.h": "98236a5a074f36f5390e9bfe97f78f540b05fa59f6035db0fe8d0dee8119cb67",
     "include/game/service_workers.h": "90b77475d1b7273bbd9e21db855af65aa0b43a7d80b76c82c49e3d66c4d68895",
     "include/game/shader.h": "b574cb0a710c8ef687c5458b5509284b8dbbe9bc04fe6692e7e0fe83bd7df62a",
@@ -1937,7 +1937,7 @@
     "src/wave13/func_00180404.c": "02a4abd18084a6a5c4c204183e01007771243cf6dbb98eaf0156beb3e697ae5a",
     "src/wave13/func_00180418.c": "9c9915d1bbc9ea851103a98e50fcef4d0504a53f87726976d79cca46d1cb0ab7",
     "src/wave13/func_00180510.cpp": "137ac2aef7025d9c002d46bad658bd521438dbe20ed2cb565122cf40d910515f",
-    "src/wave13/func_00180558.c": "a096d07b3cfa8e406960fdf4f92006fde1e504aa9d01a7685bfe79774b5c231a",
+    "src/wave13/func_00180558.c": "e7aa03c4bf668f6ad400f666537e2da8d6d3163f80e98a9b0a0311a8309ff116",
     "src/wave13/func_00181100.cpp": "7f815b22e87c5873f2b22d7848ef36c4e4a2323ce15f2b51b1c72a1ed32521c9",
     "src/wave13/func_00182204.c": "4c60d16d121326000e8807140b153870cc968debc5c526acb6e855e50a7dabf4",
     "src/wave13/func_00182210.c": "9088bbdbb27a3393e34301420571c7a7809a51ed22df3e6783432571aeef1d39",
@@ -2012,7 +2012,7 @@
     "src/wave14/func_00114f90.c": "190e80c486f3487b2147a52d541fd4dfbfea7774b02b28e33b4735ad31f87e2a",
     "src/wave14/func_00114fd0.c": "505cde3d1e93b94778e462542442d79a4c1c743d6bffffe260141d379240701d",
     "src/wave14/func_00114ff0.c": "055aa10eee140449b1e1a3b2a10782153352a2e6495efd3ad7e1610f9d31d699",
-    "src/wave14/func_00115084.c": "e6e0664a26877cd12a1518f85ac6300aee671c68586781526bccccb90a3e4d8f",
+    "src/wave14/func_00115084.c": "4414760d62cf67af18d0629f8de5582f07b4885ba00d8bd96f72006abf643685",
     "src/wave14/func_0011515c.c": "b1a4bf7bbeee093e04542364234bf0c73dd434d6b4cb285f2e56c1ea84a014d1",
     "src/wave14/func_00115344.c": "6df03b83a5cde7f4f07dcd1ef83828a63ff9c7127b317b06125157f6ff26946d",
     "src/wave14/func_001155f8.c": "e98edcc3e5c9e4140593973281833ee939106a830a7f2094b925e5061be5b44d",
@@ -3942,14 +3942,14 @@
   "target_bytes_current_catalogue": 57276,
   "dry_ledger_functions": 2280,
   "revised_predecessor_functions": 126,
-  "revised_predecessor_basis": "source delta against c008-r2, including canonical shared-header inclusion migrations; not all rematched",
+  "revised_predecessor_basis": "Actual source delta against corrected c008-r3 commit 642d725; 122 units/126 functions, not all rematched",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
     "src/large/func_00203810.cpp",
     "src/wave12/func_0016b6a4.c",
     "src/wave18/func_0010cc94.cpp"
   ],
-  "hash_inventory_method": "SHA-256 computed from current live files; does not prove compilation or acceptance",
+  "hash_inventory_method": "SHA-256 from current merged live inputs only; no compilation/acceptance claim. Removed deferred source paths are retained in their explicit deferral records.",
   "additional_contract_deferrals": [
     {
       "function": "func_0010cc94",
@@ -4001,12 +4001,14 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Merge committed c008-r3 642d725079b6a2154bc6f06fa554dcbeb063bcea immediately, preserving current source remediation; its toolchain slot is closed and c009 owns the next slot.",
-    "Run new whole-ledger G3 on scratch/integrator/c009/dry-matches.json; all saved disagreement families were remediated statically but no current exit result exists.",
-    "Three additional rows (0015e5d4/00190d0c/00190d68) were deferred with exact evidence, not accepted identities; original collection 16 remains 6 collected/10 contract-deferred.",
-    "Run final match.py --show 0 sweep of all 679 new and 122 revised predecessor units; refresh revised scope against the merged r3 base first.",
-    "Run probe_interfaces.py native/signatures and reuse main-root c008-r3/audit_indirect.py with final/source-slot-map.json for whole-original canonical slot consumers. All candidates need individual adjudication, including new startup/scheduler callback storage.",
-    "Run complete argcheck with every candidate adjudicated, then all seven pre-review steps; no full build/suite/prepare/finalize/history edit/push."
+    "Merge FixC008R3 preserving slot14/audit follow-up once its hash is supplied; 642d725 is already merged, with c009 before/after context notifications retained.",
+    "Run tools/interfaces.py check --matches scratch/integrator/c009/dry-matches.json --allow-unchecked-cpp and preserve a new versioned report/actual exit. Saved 48 disagreements/28 policy/500 unchecked are historical, not current counts.",
+    "Remediate any new merged-tree disagreements from evidence; no shims/shadow types or unchecked-C waiver. Existing exact deferrals are in collection-closure-r1.json, interface-deferrals-r1.json and contract-deferrals.json.",
+    "Refresh revised scope against final r3 follow-up, then run scratch/integrator/c009/sweep.py with a new phase: all679 candidate units and122 revised predecessor units (126 functions) need final --show0 MATCH closure.",
+    "Run probe_interfaces.py --mode native and --mode signatures under exclusive new run names. Reuse main-root c008-r3/audit_indirect.py and corrected final/source-slot-map.json for the c009-wide original consumer sweep, including indirect tails and callback storage.",
+    "Scoped scheduler-bindings-acyclic-r1.json establishes a first-iteration root only, not all-path proof. Complete scheduler/startup/service/Aux callback consumer adjudication is still required.",
+    "Run complete argcheck and adjudicate every candidate and unparsed C++ contract; finish all seven docs/REVIEWING.md steps with findings fixed before review-ready claim.",
+    "No full suite/build/prepare/finalize/history edit/push was performed or authorized here. Coordinate the serialized heavy slot with c010/Main before resuming."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4033,7 +4035,7 @@
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
     "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
-    "scratch/integrator/c009/dry-matches.json": "69536e5bfc0adc935bd8d6273c7f688847a46a5a2936172adf27fefb738faed1",
+    "scratch/integrator/c009/dry-matches.json": "1bdd2797cb9fb4b4a52d8bd5c7674cd27e5813331fe881d5aec617143d0cec95",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec",
@@ -4046,7 +4048,9 @@
     "scratch/integrator/c009/startup-root-references-r1.json": "b0c4e4cc8b5d0fbb59dff8be0e06656ee44ed369b20547984d9a152d6f8ed1c1",
     "scratch/integrator/c009/startup-consumers-r1.json": "4716769cb395b1723359b65f8aa3eaf34a539e3c1dfad00ce5d70ac21386ca26",
     "scratch/integrator/c009/scheduler-bindings-r1.json": "049bc8fd9b5b7a7f8d698669008e6e57626f9e633cd5f5fca2a67d66e15d8e54",
-    "scratch/integrator/c009/scheduler-bindings-acyclic-r1.json": "f02b5e0075c264f5841eb68dd6a0b8911625a297c3e9b528522a577ec6dc13b4"
+    "scratch/integrator/c009/scheduler-bindings-acyclic-r1.json": "f02b5e0075c264f5841eb68dd6a0b8911625a297c3e9b528522a577ec6dc13b4",
+    "scratch/integrator/c009/merge-c008-r3-r1.json": "7a4752c9211891b8b0412abe358fdee191a5dd2656719bc019e00355c896503a",
+    "scratch/integrator/c009/service-notify-r1.json": "96c94805174f6a227505b4085abba78224aaa27d6083bc970dcd49a5598bd7a3"
   },
   "collection_milestone": {
     "original_unique_new_scope": 16,
@@ -4129,6 +4133,8 @@
       "author_receipt_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29"
     }
   ],
-  "pending_c008_r3_merge": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
-  "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3"
+  "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3",
+  "c008_r3_merged": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
+  "pending_c008_r3_followup": "Slot14 notification/tail-consumer disposition fix acknowledged by FixC008R3; preserving follow-up commit not yet supplied.",
+  "merge_evidence": "scratch/integrator/c009/merge-c008-r3-r1.json"
 }
