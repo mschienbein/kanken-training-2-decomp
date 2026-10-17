@@ -1,8 +1,6 @@
 #include "game/screen.h"
 
 
-extern void func_0015e57c(struct DisplaySurface *surface, unsigned char red,
-                          unsigned char green, unsigned char blue, unsigned char alpha);
 
 static __inline void set_part_top(struct DisplayPart *part, unsigned char red,
                                 unsigned char green, unsigned char blue,

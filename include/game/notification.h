@@ -138,6 +138,8 @@ struct NotificationCache {
 extern "C" {
 #endif
 extern struct NotificationCache bss_0028baf0;
+/* [INFERENCE] Shared word result used as an index and cached unchanged. */
+extern int func_001699b8(void);
 #ifdef __cplusplus
 }
 #endif

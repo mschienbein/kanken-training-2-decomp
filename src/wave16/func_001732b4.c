@@ -1,18 +1,9 @@
 #include "game/selection.h"
 
-struct W16PositionedDisplay {
-    unsigned char reserved00[0x80];
-    float position[2];
-};
-
-struct W16WidgetSet {
-    unsigned char reserved00[0x7ec];
-    struct W16PositionedDisplay *objects[];
-};
 
 struct W16RestoreState {
     unsigned char reserved00[0x48];
-    struct W16WidgetSet *widgets;
+    struct W11jVisualOwner *widgets;
     unsigned char reserved4c[0xc];
     struct W6Selector *selector;
     unsigned char reserved5c[0x60];
@@ -25,8 +16,6 @@ struct W16RestoreState {
     float second_position[2];
 };
 
-extern void func_001741f8(struct W16WidgetSet *set, int index, float x, float y);
-extern void func_0017a034(struct W16WidgetSet *set, int index, int value);
 
 void func_001732b4(struct W16RestoreState *state)
 {

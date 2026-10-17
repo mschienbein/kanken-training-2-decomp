@@ -1,6 +1,5 @@
 #include "game/notification.h"
 
-extern int func_001699b8(void);
 
 /* The reset caller explicitly passes its mode; this callback ignores it. */
 void func_001dc204(int mode)

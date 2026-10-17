@@ -1,0 +1,1151 @@
+{
+  "status": "source-remediation-landed-not-yet-exercised",
+  "from_milestone": "b63317e",
+  "candidate_units": 679,
+  "profiles": {
+    "game": {
+      "units": 616,
+      "functions": 616,
+      "target_bytes": 51528
+    },
+    "middleware": {
+      "units": 38,
+      "functions": 38,
+      "target_bytes": 4064
+    },
+    "sdk": {
+      "units": 25,
+      "functions": 25,
+      "target_bytes": 1684
+    }
+  },
+  "revised_predecessor_units": [
+    {
+      "source": "src/pilot/loop_resources.c",
+      "profile": "game",
+      "functions": [
+        "func_00105084"
+      ]
+    },
+    {
+      "source": "src/pilot/pilot_b.c",
+      "profile": "game",
+      "functions": [
+        "func_00103798",
+        "func_001091d4",
+        "func_001103d4"
+      ]
+    },
+    {
+      "source": "src/retries/func_001dbbd4.c",
+      "profile": "game",
+      "functions": [
+        "func_001dbbd4"
+      ],
+      "author": "r327"
+    },
+    {
+      "source": "src/sdk/func_0010bf74.c",
+      "profile": "game",
+      "functions": [
+        "func_0010bf74"
+      ],
+      "author": "x01"
+    },
+    {
+      "source": "src/sdk/func_00113404.c",
+      "profile": "game",
+      "functions": [
+        "func_00113404"
+      ],
+      "author": "x02"
+    },
+    {
+      "source": "src/sdk/func_00121364.c",
+      "profile": "game",
+      "functions": [
+        "func_00121364"
+      ],
+      "author": "x03"
+    },
+    {
+      "source": "src/sdk/func_00136754.c",
+      "profile": "game",
+      "functions": [
+        "func_00136754"
+      ],
+      "author": "x05"
+    },
+    {
+      "source": "src/sdk/func_00137c5c.c",
+      "profile": "game",
+      "functions": [
+        "func_00137c5c"
+      ],
+      "author": "x06"
+    },
+    {
+      "source": "src/sdk/func_00182198.c",
+      "profile": "game",
+      "functions": [
+        "func_00182198"
+      ],
+      "author": "x09"
+    },
+    {
+      "source": "src/sdk/func_001c526c.c",
+      "profile": "game",
+      "functions": [
+        "func_001c526c"
+      ],
+      "author": "x11"
+    },
+    {
+      "source": "src/solo/func_002073fc.cpp",
+      "profile": "game",
+      "functions": [
+        "func_002073fc"
+      ],
+      "author": "s2073fc"
+    },
+    {
+      "source": "src/wave1/func_00102cb0.c",
+      "profile": "game",
+      "functions": [
+        "func_00102cb0"
+      ],
+      "author": "Wave1Author0"
+    },
+    {
+      "source": "src/wave1/func_00110358.c",
+      "profile": "game",
+      "functions": [
+        "func_00110358"
+      ],
+      "author": "Wave1Author0"
+    },
+    {
+      "source": "src/wave1/func_0011f080.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0011f080"
+      ],
+      "author": "Wave1Author2"
+    },
+    {
+      "source": "src/wave1/func_00135a28.c",
+      "profile": "game",
+      "functions": [
+        "func_00135a28"
+      ],
+      "author": "Wave1Author2"
+    },
+    {
+      "source": "src/wave1/func_00135a58.c",
+      "profile": "game",
+      "functions": [
+        "func_00135a58"
+      ],
+      "author": "Wave1Author2"
+    },
+    {
+      "source": "src/wave1/func_00135a88.c",
+      "profile": "game",
+      "functions": [
+        "func_00135a88"
+      ],
+      "author": "Wave1Author2"
+    },
+    {
+      "source": "src/wave1/func_00135ab8.c",
+      "profile": "game",
+      "functions": [
+        "func_00135ab8"
+      ],
+      "author": "Wave1Author2"
+    },
+    {
+      "source": "src/wave1/func_001360a4.c",
+      "profile": "game",
+      "functions": [
+        "func_001360a4"
+      ],
+      "author": "Wave1Author2"
+    },
+    {
+      "source": "src/wave1/func_00195e94.c",
+      "profile": "game",
+      "functions": [
+        "func_00195e94"
+      ],
+      "author": "Wave1Author1"
+    },
+    {
+      "source": "src/wave10/func_0014a98c.c",
+      "profile": "game",
+      "functions": [
+        "func_0014a98c"
+      ],
+      "author": "w10a"
+    },
+    {
+      "source": "src/wave10/func_00156da0.c",
+      "profile": "game",
+      "functions": [
+        "func_00156da0"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0016dc50.c",
+      "profile": "game",
+      "functions": [
+        "func_0016dc50"
+      ],
+      "author": "w10h"
+    },
+    {
+      "source": "src/wave10/func_00179ed4.c",
+      "profile": "game",
+      "functions": [
+        "func_00179ed4"
+      ],
+      "author": "w10e"
+    },
+    {
+      "source": "src/wave10/func_0017a424.c",
+      "profile": "game",
+      "functions": [
+        "func_0017a424"
+      ],
+      "author": "w10g"
+    },
+    {
+      "source": "src/wave10/func_00180344.c",
+      "profile": "game",
+      "functions": [
+        "func_00180344"
+      ],
+      "author": "w10h"
+    },
+    {
+      "source": "src/wave10/func_001b06a4.c",
+      "profile": "game",
+      "functions": [
+        "func_001b06a4"
+      ],
+      "author": "L001"
+    },
+    {
+      "source": "src/wave10/func_001dd6c8.c",
+      "profile": "game",
+      "functions": [
+        "func_001dd6c8"
+      ],
+      "author": "w10j"
+    },
+    {
+      "source": "src/wave11/func_0010be94.c",
+      "profile": "game",
+      "functions": [
+        "func_0010be94"
+      ],
+      "author": "w11g"
+    },
+    {
+      "source": "src/wave11/func_0016ec28.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0016ec28"
+      ],
+      "author": "w11h"
+    },
+    {
+      "source": "src/wave11/func_00174cb0.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00174cb0"
+      ],
+      "author": "w11a"
+    },
+    {
+      "source": "src/wave11/func_00174ef8.c",
+      "profile": "game",
+      "functions": [
+        "func_00174ef8"
+      ],
+      "author": "w11b"
+    },
+    {
+      "source": "src/wave11/func_00174f04.c",
+      "profile": "game",
+      "functions": [
+        "func_00174f04"
+      ],
+      "author": "w11b"
+    },
+    {
+      "source": "src/wave11/func_00176df4.c",
+      "profile": "game",
+      "functions": [
+        "func_00176df4"
+      ],
+      "author": "w11h"
+    },
+    {
+      "source": "src/wave11/func_00177084.c",
+      "profile": "game",
+      "functions": [
+        "func_00177084"
+      ],
+      "author": "w11h"
+    },
+    {
+      "source": "src/wave11/func_00186598.c",
+      "profile": "game",
+      "functions": [
+        "func_00186598"
+      ],
+      "author": "w11a"
+    },
+    {
+      "source": "src/wave11/func_0019eb24.c",
+      "profile": "game",
+      "functions": [
+        "func_0019eb24"
+      ],
+      "author": "w11h"
+    },
+    {
+      "source": "src/wave11/func_001e807c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001e807c"
+      ],
+      "author": "w11h"
+    },
+    {
+      "source": "src/wave12/func_00181b58.c",
+      "profile": "game",
+      "functions": [
+        "func_00181b58"
+      ],
+      "author": "w12a"
+    },
+    {
+      "source": "src/wave12/func_001c1bf0.c",
+      "profile": "game",
+      "functions": [
+        "func_001c1bf0"
+      ],
+      "author": "w12f"
+    },
+    {
+      "source": "src/wave14/func_00106aec.c",
+      "profile": "game",
+      "functions": [
+        "func_00106aec"
+      ],
+      "author": "w14i"
+    },
+    {
+      "source": "src/wave14/func_00110ed8.c",
+      "profile": "game",
+      "functions": [
+        "func_00110ed8"
+      ],
+      "author": "w14g"
+    },
+    {
+      "source": "src/wave2/func_00118074.c",
+      "profile": "game",
+      "functions": [
+        "func_00118074"
+      ],
+      "author": "Wave2Author3"
+    },
+    {
+      "source": "src/wave2/func_00149424.c",
+      "profile": "game",
+      "functions": [
+        "func_00149424"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
+      "source": "src/wave2/func_0014f7e8.c",
+      "profile": "game",
+      "functions": [
+        "func_0014f7e8"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
+      "source": "src/wave2/func_00174480.c",
+      "profile": "game",
+      "functions": [
+        "func_00174480"
+      ],
+      "author": "Wave2Author1"
+    },
+    {
+      "source": "src/wave2/func_00178e9c.c",
+      "profile": "game",
+      "functions": [
+        "func_00178e9c"
+      ],
+      "author": "Wave2Author1"
+    },
+    {
+      "source": "src/wave2/func_00179298.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00179298"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
+      "source": "src/wave2/func_0017a210.c",
+      "profile": "game",
+      "functions": [
+        "func_0017a210"
+      ],
+      "author": "Wave2Author1"
+    },
+    {
+      "source": "src/wave2/func_0018ce64.c",
+      "profile": "game",
+      "functions": [
+        "func_0018ce64"
+      ],
+      "author": "Wave2Author3"
+    },
+    {
+      "source": "src/wave2/func_0018f0ac.c",
+      "profile": "game",
+      "functions": [
+        "func_0018f0ac"
+      ],
+      "author": "Wave2Author2"
+    },
+    {
+      "source": "src/wave2/func_00190adc.c",
+      "profile": "game",
+      "functions": [
+        "func_00190adc"
+      ],
+      "author": "Wave2Author3"
+    },
+    {
+      "source": "src/wave2/func_0019ceb4.c",
+      "profile": "game",
+      "functions": [
+        "func_0019ceb4"
+      ],
+      "author": "Wave2Author3"
+    },
+    {
+      "source": "src/wave3/func_001748b8.c",
+      "profile": "game",
+      "functions": [
+        "func_001748b8"
+      ],
+      "author": "Wave3Author2"
+    },
+    {
+      "source": "src/wave3/func_00196a94.c",
+      "profile": "game",
+      "functions": [
+        "func_00196a94"
+      ],
+      "author": "Wave3Author0"
+    },
+    {
+      "source": "src/wave3/func_0019f170.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0019f170"
+      ],
+      "author": "Wave3Author0"
+    },
+    {
+      "source": "src/wave3/func_001acc18.c",
+      "profile": "game",
+      "functions": [
+        "func_001acc18"
+      ],
+      "author": "Wave3Author1"
+    },
+    {
+      "source": "src/wave4/func_00114fa4.c",
+      "profile": "game",
+      "functions": [
+        "func_00114fa4"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_001217b4.c",
+      "profile": "game",
+      "functions": [
+        "func_001217b4"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00122500.c",
+      "profile": "game",
+      "functions": [
+        "func_00122500"
+      ],
+      "author": "Wave4Author1"
+    },
+    {
+      "source": "src/wave4/func_00122890.c",
+      "profile": "game",
+      "functions": [
+        "func_00122890"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_001228bc.c",
+      "profile": "game",
+      "functions": [
+        "func_001228bc"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_001228d0.c",
+      "profile": "game",
+      "functions": [
+        "func_001228d0"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_001229b8.c",
+      "profile": "game",
+      "functions": [
+        "func_001229b8"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00122a1c.c",
+      "profile": "game",
+      "functions": [
+        "func_00122a1c"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00122a68.c",
+      "profile": "game",
+      "functions": [
+        "func_00122a68"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0012fb38.c",
+      "profile": "game",
+      "functions": [
+        "func_0012fb38"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0012fb48.c",
+      "profile": "game",
+      "functions": [
+        "func_0012fb48"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0013776c.c",
+      "profile": "game",
+      "functions": [
+        "func_0013776c"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_001378d4.c",
+      "profile": "game",
+      "functions": [
+        "func_001378d4"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0013e6b8.c",
+      "profile": "game",
+      "functions": [
+        "func_0013e6b8"
+      ],
+      "author": "Wave4Author3"
+    },
+    {
+      "source": "src/wave4/func_00147994.c",
+      "profile": "game",
+      "functions": [
+        "func_00147994"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0014c338.c",
+      "profile": "game",
+      "functions": [
+        "func_0014c338"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0015e2b4.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e2b4"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00166eac.c",
+      "profile": "game",
+      "functions": [
+        "func_00166eac"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00166f1c.c",
+      "profile": "game",
+      "functions": [
+        "func_00166f1c"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00169874.c",
+      "profile": "game",
+      "functions": [
+        "func_00169874"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_00181e40.c",
+      "profile": "game",
+      "functions": [
+        "func_00181e40"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0019eb48.c",
+      "profile": "game",
+      "functions": [
+        "func_0019eb48"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_0019f2e4.c",
+      "profile": "game",
+      "functions": [
+        "func_0019f2e4"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave4/func_001eafa0.c",
+      "profile": "game",
+      "functions": [
+        "func_001eafa0"
+      ],
+      "author": "Wave4Author0"
+    },
+    {
+      "source": "src/wave5/func_00123398.c",
+      "profile": "game",
+      "functions": [
+        "func_00123398"
+      ],
+      "author": "Wave5Author1"
+    },
+    {
+      "source": "src/wave5/func_00172d48.c",
+      "profile": "game",
+      "functions": [
+        "func_00172d48"
+      ],
+      "author": "Wave5Author2"
+    },
+    {
+      "source": "src/wave5/func_001c0e44.c",
+      "profile": "game",
+      "functions": [
+        "func_001c0e44"
+      ],
+      "author": "Wave5Author0"
+    },
+    {
+      "source": "src/wave6/func_001047c0.c",
+      "profile": "game",
+      "functions": [
+        "func_001047c0"
+      ],
+      "author": "w6a"
+    },
+    {
+      "source": "src/wave6/func_00104cd8.c",
+      "profile": "game",
+      "functions": [
+        "func_00104cd8"
+      ],
+      "author": "w6a"
+    },
+    {
+      "source": "src/wave6/func_0010b5f0.c",
+      "profile": "game",
+      "functions": [
+        "func_0010b5f0"
+      ],
+      "author": "w6d"
+    },
+    {
+      "source": "src/wave6/func_0010b610.c",
+      "profile": "game",
+      "functions": [
+        "func_0010b610"
+      ],
+      "author": "w6d"
+    },
+    {
+      "source": "src/wave6/func_0012d2bc.c",
+      "profile": "game",
+      "functions": [
+        "func_0012d2bc"
+      ],
+      "author": "w6a"
+    },
+    {
+      "source": "src/wave6/func_0012d2e8.c",
+      "profile": "game",
+      "functions": [
+        "func_0012d2e8"
+      ],
+      "author": "w6a"
+    },
+    {
+      "source": "src/wave6/func_0016f024.c",
+      "profile": "game",
+      "functions": [
+        "func_0016f024"
+      ],
+      "author": "w6a"
+    },
+    {
+      "source": "src/wave7/func_001ad6d0.c",
+      "profile": "game",
+      "functions": [
+        "func_001ad6d0"
+      ],
+      "author": "w7h"
+    },
+    {
+      "source": "src/wave8/func_00181250.c",
+      "profile": "game",
+      "functions": [
+        "func_00181250"
+      ],
+      "author": "w8e"
+    },
+    {
+      "source": "src/wave8/func_001c7a1c.c",
+      "profile": "game",
+      "functions": [
+        "func_001c7a1c"
+      ],
+      "author": "w8g"
+    },
+    {
+      "source": "src/wave8/func_001f2b90.c",
+      "profile": "game",
+      "functions": [
+        "func_001f2b90"
+      ],
+      "author": "w8i"
+    },
+    {
+      "source": "src/wave9/func_0011f234.c",
+      "profile": "game",
+      "functions": [
+        "func_0011f234"
+      ],
+      "author": "w9a"
+    },
+    {
+      "source": "src/wave9/func_0012f1c0.c",
+      "profile": "game",
+      "functions": [
+        "func_0012f1c0"
+      ],
+      "author": "w9d"
+    },
+    {
+      "source": "src/wave9/func_001415d0.c",
+      "profile": "game",
+      "functions": [
+        "func_001415d0"
+      ],
+      "author": "w9a"
+    },
+    {
+      "source": "src/wave9/func_0018269c.c",
+      "profile": "game",
+      "functions": [
+        "func_0018269c",
+        "func_001851f0",
+        "func_001971a0"
+      ],
+      "author": "w9a"
+    },
+    {
+      "source": "src/wave9/func_0019b54c.c",
+      "profile": "game",
+      "functions": [
+        "func_0019b54c"
+      ],
+      "author": "w9a"
+    },
+    {
+      "source": "src/wave9/func_001c4494.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c4494"
+      ],
+      "author": "w9j"
+    },
+    {
+      "source": "src/wave9/func_001e358c.c",
+      "profile": "game",
+      "functions": [
+        "func_001e358c"
+      ],
+      "author": "w9a"
+    },
+    {
+      "source": "src/wave2/func_0014de8c.c",
+      "profile": "game",
+      "functions": [
+        "func_0014de8c"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
+      "source": "src/wave8/func_00179160.c",
+      "profile": "game",
+      "functions": [
+        "func_00179160"
+      ],
+      "author": "w8a"
+    },
+    {
+      "source": "src/pilot/loop_state.c",
+      "profile": "game",
+      "functions": [
+        "func_00105fa8"
+      ]
+    },
+    {
+      "source": "src/sdk2/func_0014ded8.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0014ded8"
+      ],
+      "author": "profiles"
+    },
+    {
+      "source": "src/sdk2/func_0014df74.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0014df74"
+      ],
+      "author": "profiles"
+    },
+    {
+      "source": "src/sdk2/func_00193b2c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00193b2c"
+      ],
+      "author": "integrator-recheck41"
+    },
+    {
+      "source": "src/sdk2/func_001c5918.cpp",
+      "profile": "sdk",
+      "functions": [
+        "func_001c5918"
+      ],
+      "author": "integrator-recheck41"
+    },
+    {
+      "source": "src/wave10/func_0015e49c.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e49c"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e5c4.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e5c4"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e624.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e624"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0015e96c.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e96c"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_0016fff8.c",
+      "profile": "game",
+      "functions": [
+        "func_0016fff8"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave10/func_00170014.c",
+      "profile": "game",
+      "functions": [
+        "func_00170014"
+      ],
+      "author": "w10d"
+    },
+    {
+      "source": "src/wave11/func_00186fbc.c",
+      "profile": "game",
+      "functions": [
+        "func_00186fbc"
+      ],
+      "author": "w11f"
+    },
+    {
+      "source": "src/wave8/func_001c5950.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5950"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001c5970.c",
+      "profile": "game",
+      "functions": [
+        "func_001c5970"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001c59fc.c",
+      "profile": "game",
+      "functions": [
+        "func_001c59fc"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001d4a48.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4a48"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001d4aac.c",
+      "profile": "game",
+      "functions": [
+        "func_001d4aac"
+      ],
+      "author": "w8f"
+    },
+    {
+      "source": "src/wave8/func_001e403c.c",
+      "profile": "game",
+      "functions": [
+        "func_001e403c"
+      ],
+      "author": "w8a"
+    }
+  ],
+  "changed_inputs": [
+    "config/candidates/c009.json",
+    "include/game/audio_voice.h",
+    "include/game/controller_transitions.h",
+    "include/game/input_runtime.h",
+    "include/game/item_text.h",
+    "include/game/layout.h",
+    "include/game/material.h",
+    "include/game/notification.h",
+    "include/game/render_state.h",
+    "include/game/resource_runtime.h",
+    "include/game/scheduler.h",
+    "include/game/screen.h",
+    "include/game/selection.h",
+    "include/game/shader.h",
+    "include/game/startup.h",
+    "include/game/timed_screen.h",
+    "include/game/w11_control.h",
+    "src/large/func_00163488.c",
+    "src/pilot/loop_state.c",
+    "src/sdk2/func_0014ded8.c",
+    "src/sdk2/func_0014df74.c",
+    "src/sdk2/func_00193b2c.c",
+    "src/sdk2/func_001c5918.cpp",
+    "src/wave10/func_0015e49c.c",
+    "src/wave10/func_0015e5c4.c",
+    "src/wave10/func_0015e624.c",
+    "src/wave10/func_0015e96c.c",
+    "src/wave10/func_0016fff8.c",
+    "src/wave10/func_00170014.c",
+    "src/wave11/func_00186fbc.c",
+    "src/wave15/func_0014fbcc.c",
+    "src/wave15/func_001525f0.c",
+    "src/wave15/func_0016c9f0.c",
+    "src/wave15/func_001dc204.c",
+    "src/wave16/func_00106a50.c",
+    "src/wave16/func_001070e8.c",
+    "src/wave16/func_00107140.c",
+    "src/wave16/func_00135268.c",
+    "src/wave16/func_00135ae8.c",
+    "src/wave16/func_00135b4c.c",
+    "src/wave16/func_00135bb0.c",
+    "src/wave16/func_0013608c.c",
+    "src/wave16/func_001360ec.c",
+    "src/wave16/func_00136134.c",
+    "src/wave16/func_0016cb00.c",
+    "src/wave16/func_001732b4.c",
+    "src/wave16/func_001741f8.c",
+    "src/wave16/func_00179130.c",
+    "src/wave16/func_00195a50.c",
+    "src/wave17/func_0011f3a8.c",
+    "src/wave17/func_0012d328.c",
+    "src/wave17/func_00190688.c",
+    "src/wave17/func_001f22e0.c",
+    "src/wave18/func_001175f4.c",
+    "src/wave18/func_001272d8.c",
+    "src/wave18/func_0014ddc8.c",
+    "src/wave18/func_0014de1c.c",
+    "src/wave18/func_00152428.c",
+    "src/wave18/func_00180314.c",
+    "src/wave18/func_001af154.c",
+    "src/wave18/func_001b5c88.c",
+    "src/wave18/func_001c0e7c.c",
+    "src/wave18/func_001d94a0.c",
+    "src/wave18/func_001dc0a4.c",
+    "src/wave18/func_001eaf84.c",
+    "src/wave19/func_00110a70.cpp",
+    "src/wave19/func_0014df0c.c",
+    "src/wave19/func_0016d600.c",
+    "src/wave19/func_0016dae8.c",
+    "src/wave20/func_0014dfa8.c",
+    "src/wave20/func_0015e4a8.cpp",
+    "src/wave20/func_0015e634.cpp",
+    "src/wave20/func_001c1ddc.c",
+    "src/wave20/func_001eb190.c",
+    "src/wave8/func_001c5950.c",
+    "src/wave8/func_001c5970.c",
+    "src/wave8/func_001c59fc.c",
+    "src/wave8/func_001d4a48.c",
+    "src/wave8/func_001d4aac.c",
+    "src/wave8/func_001e403c.c",
+    "src/wave9/func_0011f234.c",
+    "src/wave9/func_001415d0.c"
+  ],
+  "additional_deferrals": [
+    {
+      "source": "src/wave17/func_0015e5d4.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e5d4"
+      ],
+      "author": "c009-wave17",
+      "function": "func_0015e5d4",
+      "target_size": 28,
+      "reason": "The new definition takes DisplayPaneLink* and accesses a material-bearing DisplayPane. Accepted 0015e5c4 forwards DisplayPart.surface, whose canonical C++ owner is DisplaySurface containing SurfaceTextState*. These are different concrete pointer/subobject contracts, not interchangeable names for a proven base. A cast, alias or fabricated common owner is refused; both independent surface wrappers remain in scope with explicit partial-view qualifications.",
+      "evidence": [
+        "scratch/integrator/c009/interfaces-remediation-r1.json",
+        "src/wave10/func_0015e5c4.c",
+        "include/game/screen.h"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_0015e5d4.c",
+      "integration_source_sha256": "13b1b9e079f6160a93baad94d54404b7dd76b574e8e154e0ac78cbb95c25561d",
+      "author_source": "scratch/authors/w17a/src/func_0015e5d4.c",
+      "author_receipt": "scratch/authors/w17a/match/func_0015e5d4/final/func_0015e5d4.result.json",
+      "author_receipt_sha256": "0c9bb085c06268a0a9c1d7d71947c45fe3dfc836b8aea9419144d8d878c2b1d4",
+      "author_receipt_source_sha256": "13b1b9e079f6160a93baad94d54404b7dd76b574e8e154e0ac78cbb95c25561d"
+    },
+    {
+      "source": "src/wave19/func_00190d0c.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d0c"
+      ],
+      "author": "c009-wave19",
+      "function": "func_00190d0c",
+      "target_size": 92,
+      "reason": "Valid standard-C variadic source uses ARMCC va_arg(values,int), whose compiler-preprocessed type-argument builtin is not parsed by the frozen G3 C parser. The saved whole-ledger audit marks this C unit unchecked (parse before int), which --allow-unchecked-cpp does not waive. No hand-written va_list representation, parser-suppression macro, C++ waiver conversion, or frozen tooling change is introduced merely to evade that failure.",
+      "evidence": [
+        "scratch/integrator/c009/interfaces-remediation-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_00190d0c.c",
+      "integration_source_sha256": "eb8a8878d734d2445d879c37287b357718590a68ecdbeee085e3cc05797856af",
+      "author_source": "scratch/authors/w19i/src/func_00190d0c.c",
+      "author_receipt": "scratch/authors/w19i/match/final/func_00190d0c/func_00190d0c.result.json",
+      "author_receipt_sha256": "879e3b76d0f2fafc153693b298491c8220d596bcf91cc9d0b26aafa2f1024134",
+      "author_receipt_source_sha256": "bc94ea8e306948e140741f39586bff8ce2d0ae27a46eeef623dac34e1df6fd11"
+    },
+    {
+      "source": "src/wave19/func_00190d68.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d68"
+      ],
+      "author": "c009-wave19",
+      "function": "func_00190d68",
+      "target_size": 88,
+      "reason": "Valid standard-C variadic source uses ARMCC va_arg(values,int), whose compiler-preprocessed type-argument builtin is not parsed by the frozen G3 C parser. The saved whole-ledger audit marks this C unit unchecked (parse before int), which --allow-unchecked-cpp does not waive. No hand-written va_list representation, parser-suppression macro, C++ waiver conversion, or frozen tooling change is introduced merely to evade that failure.",
+      "evidence": [
+        "scratch/integrator/c009/interfaces-remediation-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_00190d68.c",
+      "integration_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29",
+      "author_source": "scratch/authors/w19i/src/func_00190d68.c",
+      "author_receipt": "scratch/authors/w19i/match/final/func_00190d68/func_00190d68.result.json",
+      "author_receipt_sha256": "64a079762991fbd07853a49c3da434b0275014fb7e07433533c5f1f3eb6994a6",
+      "author_receipt_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29"
+    }
+  ],
+  "pending_c008_r3_merge": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
+  "qualification": "No new whole-ledger audit or final match result is claimed. Held heavy checks for c008-r3 serialization; scoped address/register/storage evidence only was exercised."
+}

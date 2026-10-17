@@ -27,6 +27,8 @@ struct W12cSoundOptionResult;
 struct W12cSoundDetail {
     unsigned signature;
     struct RelativeReference contents;
+    unsigned reserved0c[3];
+    struct RelativeReference option;
 };
 
 

@@ -7,7 +7,9 @@ struct W11ControlScreen {
     int layout, active, selection;
 };
 struct W11jVisualNode {
-    unsigned char reserved00[0x90];
+    unsigned char reserved00[0x80];
+    float position[2];
+    unsigned char reserved88[8];
     float scale_x, scale_y;
     unsigned char color[4];
 };
@@ -74,6 +76,9 @@ extern struct AnimationState *func_001b43bc(struct AnimationState *state);
 extern struct AnimationState *func_001b44e8(struct AnimationState *state);
 extern void func_001b0600(struct W11ControlScreen *screen);
 extern void func_0016d554(struct W11ControlScreen *screen, int state);
+extern void func_001741f8(struct W11jVisualOwner *owner, int index, float x, float y);
+extern void func_0016f9a8(struct W11jVisualOwner *owner, int index, float x, float y);
+extern void func_00175d90(struct W11jVisualOwner *owner);
 extern void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled);
 extern void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y);
 #ifdef __cplusplus

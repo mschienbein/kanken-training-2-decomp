@@ -93,6 +93,47 @@ struct DisplayPaneLink {
     struct DisplayPane *pane;
 };
 
+#ifdef __cplusplus
+/* [INFERENCE] Shared partial text-field view used by application wrappers.
+ * Complete native class identity/allocation is not established, and this view
+ * is not equated to the material-bearing DisplayPane or DisplayPaneLink. */
+struct SurfaceSize {
+    float width, height;
+    SurfaceSize(float w, float h) : width(w), height(h) {}
+    SurfaceSize(const SurfaceSize &other) : width(other.width), height(other.height) {}
+    bool operator==(const SurfaceSize &other) const
+    { return width == other.width && height == other.height; }
+    bool operator!=(const SurfaceSize &other) const { return !(*this == other); }
+};
+struct SurfaceTextState {
+    unsigned char reserved00[0xe4];
+    SurfaceSize size;
+    float line_spacing, character_spacing;
+    unsigned char reservedf4[0x0a];
+    unsigned char dirty;
+    bool update_dirty(bool changed) { dirty |= changed; return changed; }
+    void set_size(const SurfaceSize &value)
+    {
+        if (update_dirty(!(size == value)))
+            size = value;
+    }
+    void set_character_spacing(float value)
+    {
+        if (update_dirty(character_spacing != value))
+            character_spacing = value;
+    }
+    void set_line_spacing(float value)
+    {
+        if (update_dirty(line_spacing != value))
+            line_spacing = value;
+    }
+};
+struct DisplaySurface {
+    unsigned char reserved00[8];
+    SurfaceTextState *text;
+};
+#endif
+
 struct DisplayBindingTarget {
     unsigned char reserved00[0x10];
     float value;
@@ -351,6 +392,8 @@ extern void func_001b6c90(struct MenuOptionGroup *options);
 extern void func_001b7e9c(struct MenuOptionGroup *options);
 extern void func_00176b24(struct Screen *selection);
 extern void func_0017697c(struct Screen *selection);
+extern void func_0015eac8(struct DisplayObject *object, int index, float value);
+extern void func_001701b4(struct WidgetController *controller, int index, int enabled);
 extern void func_00175b8c(void *screen);
 extern void func_00179160(struct W8DisplaySet *set, int index, float x, float y);
 extern void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y);
@@ -385,6 +428,15 @@ extern void func_0014e504(struct DisplayVertexPane *pane, unsigned count);
 extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
 extern void func_0015e948(struct DisplayObject *object, int active);
 extern void func_0015e954(struct DisplayPaneLink *link, int active);
+extern void func_0015e4a8(struct DisplaySurface *surface, float character_spacing, float line_spacing);
+extern void func_0015e634(struct DisplaySurface *surface, float width, float height);
+extern void func_0015e5d4(struct DisplaySurface *surface, float x, float y, float z);
+extern void func_0015e3f4(struct DisplaySurface *surface, unsigned char red,
+                          unsigned char green, unsigned char blue, unsigned char alpha);
+extern void func_0015e534(struct DisplaySurface *surface, unsigned char red,
+                          unsigned char green, unsigned char blue, unsigned char alpha);
+extern void func_0015e57c(struct DisplaySurface *surface, unsigned char red,
+                          unsigned char green, unsigned char blue, unsigned char alpha);
 extern void func_00180358(struct DisplayObject *object, int first, int second);
 extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
 extern void func_0018271c(void *object, unsigned char alpha);
@@ -452,6 +504,7 @@ extern void func_00166d5c(struct W10DrawingInput *input, int active, float x, fl
 extern struct NameTable *bss_00245344[8];
 extern void func_00202ca8(void);
 extern void func_0016dbc4(struct W10DrawingInput *input);
+extern void func_0016dc94(struct W10DrawingInput *input, int index);
 extern int func_00115138(void);
 extern void func_00195900(struct DisplayObject *object, int index, const char *name, int mode);
 #ifdef __cplusplus

@@ -1,0 +1,160 @@
+"""Emit scoped original address/register/storage facts, never instruction text or bytes."""
+from __future__ import annotations
+
+import argparse
+from collections import deque
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / "tools"))
+
+import argcheck as ac
+import capstone
+
+
+REUSED = ROOT.parents[2] / "scratch/integrator/c008-r3/audit_indirect.py"
+os.environ["DECOMP_ROOT"] = str(ROOT)
+SPEC = importlib.util.spec_from_file_location("c008_r3_indirect", REUSED)
+indirect = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(indirect)
+
+
+def transfer(insn, fact, state: dict, image):
+    """Retain exact constant-root array provenance through scaled ADDs."""
+    before = state.copy()
+    event = indirect.transfer(insn, fact, state, image)
+    if insn.id != capstone.arm.ARM_INS_ADD or len(insn.operands) != 3:
+        return event
+    def operand(op):
+        if op.type == capstone.arm.ARM_OP_IMM:
+            return ("constant", op.imm & 0xffffffff)
+        if op.type != capstone.arm.ARM_OP_REG:
+            return None
+        name = ac.canonical(insn.reg_name(op.reg))
+        value = indirect.plain(before.get(name), insn.cc if fact.conditional else None)
+        if op.shift.type:
+            if op.shift.type != capstone.arm.ARM_SFT_LSL or value is None:
+                return None
+            if value[0] == "constant":
+                return ("constant", (value[1] << op.shift.value) & 0xffffffff)
+            base, factor = (value[1], value[2]) if value[0] == "scaled" else (value, 1)
+            return ("scaled", base, factor << op.shift.value)
+        return value
+    left, right = (operand(op) for op in insn.operands[1:])
+    value = None
+    if left is not None and right is not None:
+        if right[0] == "constant":
+            value = indirect.add(left, right[1])
+        elif left[0] == "constant":
+            base, factor = (right[1], right[2]) if right[0] == "scaled" else (right, 1)
+            value = ("indexed", left, factor)
+        else:
+            first, a = (left[1], left[2]) if left[0] == "scaled" else (left, 1)
+            second, b = (right[1], right[2]) if right[0] == "scaled" else (right, 1)
+            if first == second:
+                value = ("scaled", first, a + b)
+    if value is not None:
+        destination = ac.canonical(insn.reg_name(insn.operands[0].reg))
+        state[destination] = (("when", insn.cc, before.get(destination), value)
+                              if fact.conditional and before.get(destination) != value else value)
+    return event
+
+
+def enhanced(function: dict, blocks: list, successors: list, decoder, image,
+             acyclic: bool) -> dict:
+    """Reuse r3's CFG transfer, including stack and multiple-register storage."""
+    instructions = {insn.address: insn for start, stop in function["code_ranges"]
+                    for insn in decoder.disasm(image.read(start, stop - start), start)}
+    entries = {entry["address"] for entry in function["entries"]}
+    incoming = {}
+    queue = deque()
+    for index, block in enumerate(blocks):
+        if block[0].address in entries:
+            incoming[index] = {reg: ("parameter", function["address"], reg)
+                               for reg in ac.ARGUMENTS}
+            incoming[index]["sp"] = ("stack", function["address"], 0)
+            queue.append(index)
+    while queue:
+        index = queue.popleft()
+        state = incoming[index].copy()
+        for fact in blocks[index]:
+            transfer(instructions[fact.address], fact, state, image)
+        for successor in successors[index]:
+            if acyclic and successor <= index:
+                continue
+            previous = incoming.get(successor)
+            merged = state.copy() if previous is None else {
+                key: value for key, value in previous.items() if state.get(key) == value}
+            if previous != merged:
+                incoming[successor] = merged
+                queue.append(successor)
+    calls, memory = [], {}
+    for index, initial in sorted(incoming.items()):
+        state = initial.copy()
+        for fact in blocks[index]:
+            event = transfer(instructions[fact.address], fact, state, image)
+            if event:
+                calls.append({"site": ac.address(event["site"]),
+                              "target": ac.address(event["target"]) if event["target"] else None,
+                              "pointer": indirect.describe(event["pointer"]),
+                              "registers": {reg: indirect.describe(value)
+                                            for reg, value in event["registers"].items()
+                                            if value is not None},
+                              "stack": {offset: indirect.describe(value)
+                                        for offset, value in event["stack"].items()
+                                        if value is not None}})
+        for key, value in state.items():
+            if isinstance(key, tuple) and key[0] == "memory":
+                memory[json.dumps(indirect.describe(key[1]), sort_keys=True)] = indirect.describe(value)
+    return {"calls": calls, "storage": [{"location": json.loads(key), "value": value}
+                                        for key, value in sorted(memory.items())]}
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("addresses", nargs="+", type=lambda value: int(value, 16))
+    parser.add_argument("--out", required=True, type=Path)
+    parser.add_argument("--acyclic", action="store_true",
+                        help="Exclude backedges to expose first-iteration roots; not an all-path proof")
+    args = parser.parse_args()
+    image = ac.image_mod.Image.load(ROOT / "orig")
+    catalogue = ac.image_mod.load_catalogue(ROOT / "config/catalogue.json")
+    functions = ac.image_mod.functions_by_address(catalogue)
+    entries = {entry["address"] for function in functions.values() for entry in function["entries"]}
+    decoders = {"arm": capstone.Cs(capstone.CS_ARCH_ARM, capstone.CS_MODE_ARM),
+                "thumb": capstone.Cs(capstone.CS_ARCH_ARM, capstone.CS_MODE_THUMB)}
+    for decoder in decoders.values():
+        decoder.detail = True
+    rows = []
+    for address in args.addresses:
+        function = functions[address]
+        facts = ac.decode_function(image, function, decoders[function["isa"]])
+        blocks, successors = ac.blocks(facts, [entry["address"] for entry in function["entries"]])
+        events = ac.symbolic_events(function, blocks, successors, image)
+        stores = [{"site": ac.address(event[3]), "location": ac.value_fact(event[1]),
+                   "value": ac.value_fact(event[2])} for event in events if event[0] == "store"]
+        calls = [{"site": ac.address(event[3]),
+                  "target": ac.address(event[1]) if event[1] is not None else None,
+                  "target_pointer": ac.value_fact(event[4]) if event[4] else None,
+                  "core_inputs": {key: ac.value_fact(value) for key, value in event[2].items()
+                                  if key in ("r0", "r1", "r2", "r3")}}
+                 for event in events if event[0] == "call"]
+        rows.append({"function": ac.address(address), "stores": stores, "calls": calls,
+                     "sites": ac.call_sites(function, blocks, entries, {}),
+                     "enhanced": enhanced(function, blocks, successors,
+                                          decoders[function["isa"]], image, args.acyclic)})
+    args.out.write_text(json.dumps({"facts": rows, "coverage": __doc__,
+                                   "acyclic_only": args.acyclic,
+                                   "reused_helper": str(REUSED),
+                                   "reused_helper_sha256": hashlib.sha256(REUSED.read_bytes()).hexdigest()},
+                                  indent=2) + "\n")
+    print(json.dumps({"functions": len(rows), "report": str(args.out)}))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

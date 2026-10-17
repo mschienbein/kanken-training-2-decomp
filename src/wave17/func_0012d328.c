@@ -3,7 +3,6 @@
 
 
 extern int func_0011f4b4(void);
-extern void func_00190688(int index, void (*callback)(void));
 
 extern void func_00135f80(void);
 

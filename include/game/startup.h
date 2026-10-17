@@ -42,6 +42,20 @@ struct StartupResources {
 
 struct RestorableState { unsigned current, saved; };
 
+struct StartupItem { int value, flags, id; };
+/* Callback storage is established by 00195b6c and exact 0049c87c/0049c880
+ * indirect consumers in 00105444, not inferred from zero initialization. */
+struct StartupState {
+    int a;
+    void (*b)(void);
+    void (*c)(void);
+    unsigned char enabled, active, ready;
+    char reserved;
+    int position, step;
+    struct StartupItem items[8];
+    int count;
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -55,6 +69,10 @@ extern struct RestorableState data_0023fdc8;
 extern void func_001906b8(int suspended);
 extern void func_001906a8(void (*callback)(void));
 extern void func_00190688(int index, void (*callback)(void));
+extern void func_0019f338(int index, void (*callback)(void), unsigned priority);
+extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(void),
+                          void (*complete)(void), void (*finish)(void));
+extern struct StartupState bss_0049c878;
 extern void func_0011ef60(void);
 extern void func_0011f234(void);
 extern unsigned char func_00190678(void);

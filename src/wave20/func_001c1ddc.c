@@ -1,19 +1,15 @@
 #include "game/screen.h"
+#include "game/display_animation.h"
 
-struct SmallWidgetPanel {
-    struct WidgetSlot *slots[2];
-};
-extern void func_001c1e6c(struct SmallWidgetPanel *panel, int index, int enabled);
-
-void func_001c1ddc(struct SmallWidgetPanel *panel, int index, float x, float y)
+void func_001c1ddc(struct DisplayRegistration *const *panel, int index, float x, float y)
 {
-    struct WidgetSlot *slot;
+    struct DisplayRegistration *slot;
     struct DisplayObject *object;
     /* ORIGINAL BUG: the upper-bound check accepts negative indices. */
     if (index >= 1)
         return;
     func_001c1e6c(panel, index, 1);
-    slot = panel->slots[index];
+    slot = panel[index];
     if (slot == 0)
         return;
     /* ORIGINAL BUG: a slot with no display object is dereferenced. */

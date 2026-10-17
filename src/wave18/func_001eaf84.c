@@ -1,19 +1,10 @@
-struct PositionSlot {
-    void *object;
-    float x;
-    float y;
-};
-struct PositionScreen {
-    unsigned char reserved00[0x1300];
-    struct PositionSlot *slots[];
-};
-extern void func_00166eb0(void *screen, int index, float x, float y);
+#include "game/screen.h"
 
-void func_001eaf84(struct PositionScreen *screen, int index, float y)
+void func_001eaf84(struct W8DisplaySet *screen, int index, float y)
 {
-    struct PositionSlot *slot = screen->slots[index];
+    struct W8DisplayHandle *slot = screen->handles[index];
     float x = y;
     if (slot != 0)
-        x = slot->x;
+        x = slot->position.x;
     func_00166eb0(screen, index, x, y);
 }

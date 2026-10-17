@@ -2,7 +2,6 @@
 
 extern void func_001876ac(unsigned *state);
 extern void func_001871e4(unsigned *state);
-extern void func_00186fc8(unsigned *state);
 extern void func_001395c0(unsigned *state);
 
 void func_001272d8(unsigned *state)

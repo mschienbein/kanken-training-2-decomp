@@ -2,9 +2,6 @@
 #include "game/screen.h"
 #include "game/pane_descriptors.h"
 
-extern void func_0015eac8(struct FlagDisplayObject *object, int index, float value);
-
-extern void func_001701b4(struct Screen *screen, int index, int active);
 
 void func_001af154(struct Screen *screen, int current, int total)
 {
@@ -12,7 +9,7 @@ void func_001af154(struct Screen *screen, int current, int total)
     if (object && total != 0) {
         int percentage = (int)((float)current / (float)total * 100.0f);
         func_0017a968(object, bss_0024716c[10], 0, 0);
-        func_0015eac8((struct FlagDisplayObject *)object, 0, (float)percentage);
+        func_0015eac8(object, 0, (float)percentage);
         func_0015ea60((struct FlagDisplayObject *)object, 0, 0);
         object->position[0] = 1.0f;
         object->position[1] = 21.0f;
@@ -26,6 +23,6 @@ void func_001af154(struct Screen *screen, int current, int total)
                          object->position[0], object->position[1], object->position[2]);
             break;
         }
-        func_001701b4(screen, 3, 1);
+        func_001701b4(&screen->controller, 3, 1);
     }
 }
