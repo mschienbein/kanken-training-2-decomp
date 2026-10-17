@@ -732,6 +732,9 @@ class Oracle:
         self.profile, self.targets, self.suffix = profile, targets, suffix
         self.context = match.Context(catalogue, MODEL)
 
+    def __repr__(self) -> str:
+        return f"Oracle(targets={len(self.targets)})"
+
     def evaluate(self, text: str, worker_dir: Path) -> Evaluation:
         worker_dir.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix="candidate-", dir=worker_dir) as temporary:
