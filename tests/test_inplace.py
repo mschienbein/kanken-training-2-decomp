@@ -1982,6 +1982,220 @@ class RemovedCalleeModelTest(unittest.TestCase):
             self.linker(mem, catalogue).link(inplace.ObjectFile.combine([first, second]))
 
 
+class RemovedUnwindModelTest(unittest.TestCase):
+    """V6 alone drops an exclusive EHABI index/compact extab for an R1-removed section."""
+
+    MODEL = "armlink5-inline-branchnop-v6"
+
+    def fixture(self, form="cant", alias=False):
+        obj, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR if alias else None)
+        helper = obj.symbols[1]
+        if alias:
+            zero = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+            obj.symbols.append(zero)
+            obj.sections[1].relocs[-1].symbol = zero
+        key = inplace.Symbol("i.helper", 0, 0, "STT_SECTION", "STB_LOCAL", 2)
+        obj.symbols.append(key)
+        second = 0x80B0B0B0 if form == "inline" else 1
+        relocs = [inplace.Reloc(0, inplace.R_ARM_PREL31, key)]
+        obj.sections[3] = inplace.Section(
+            3, ".ARM.exidx.helper", struct.pack("<2I", 0, second), 8, False, False, False,
+            relocs, align=4, elf_type="SHT_ARM_EXIDX", link_order=True, linked_section=2)
+        if form == "extab":
+            extab = inplace.Symbol(".ARM.extab.helper", 0, 0, "STT_SECTION", "STB_LOCAL", 4)
+            obj.symbols.append(extab)
+            obj.sections[3].data = bytes(8)
+            relocs.append(inplace.Reloc(4, inplace.R_ARM_PREL31, extab))
+            obj.sections[4] = inplace.Section(
+                4, ".ARM.extab.helper", struct.pack("<I", 0x80B0B0B0), 4, False, False, False, align=4)
+        return obj, mem, catalogue
+
+    def linker(self, mem, catalogue, **kwargs):
+        return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue),
+                                     (0x200000, 0x201000), self.MODEL, **kwargs)
+
+    def refuse(self, obj, mem, catalogue, pattern=None, **kwargs):
+        linker = self.linker(mem, catalogue, **kwargs)
+        with self.assertRaisesRegex(inplace.LinkError, pattern or "."):
+            linker.link(obj)
+        self.assertEqual(linker.rewrites, [])
+        self.assertEqual(linker.removed_callees, [])
+
+    def test_v5_refuses_and_v6_removes_only_the_owners_unwind_sections(self):
+        for form in ("cant", "inline", "extab"):
+            for alias in (False, True):
+                with self.subTest(form=form, alias=alias):
+                    obj, mem, catalogue = self.fixture(form, alias)
+                    with self.assertRaises(inplace.LinkError):
+                        RemovedCalleeModelTest().linker(mem, catalogue, model="armlink5-inline-branchnop-v5").link(obj)
+                    linker = self.linker(mem, catalogue)
+                    linked = linker.link(obj)
+                    self.assertEqual(set(linked), {1})
+                    self.assertEqual(linked[1][1], mem.read(BASE, 40))
+                    removed = linker.removed_callees[0]
+                    self.assertEqual([r["kind"] for r in removed["unwind_sections"]],
+                                     ["exidx", "extab"] if form == "extab" else ["exidx"])
+                    self.assertTrue(all(row.target is None and row.removed_callee == removed
+                                        for row in linker.rewrites))
+
+    def test_compact_extab_personalities_and_dependency_markers_are_bounded(self):
+        for personality in (0, 1, 2):
+            obj, mem, catalogue = self.fixture("extab")
+            header = 0x80B0B0B0 if personality == 0 else ((0x80 + personality) << 24) | 0x0001B0B0
+            obj.sections[4].data = struct.pack("<I", header) + (bytes(4) if personality else b"")
+            obj.sections[4].size = len(obj.sections[4].data)
+            routine = inplace.Symbol(f"__aeabi_unwind_cpp_pr{personality}", 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+            obj.symbols.append(routine)
+            obj.sections[4].relocs = [inplace.Reloc(0, inplace.R_ARM_NONE, routine)]
+            linker = self.linker(mem, catalogue)
+            self.assertEqual(set(linker.link(obj)), {1})
+            self.assertEqual(len(linker.removed_callees[0]["unwind_sections"]), 2)
+
+    def test_incorrect_or_combined_index_metadata_is_refused(self):
+        changes = (
+            ("elf_type", "SHT_PROGBITS"), ("link_order", False), ("linked_section", 1),
+            ("linked_section", 999), ("writable", True), ("executable", True),
+            ("nobits", True), ("align", 1), ("entsize", 4), ("comdat", "other"),
+            ("name", ".data.imposter"), ("size", 16), ("data", bytes(16)),
+        )
+        for field, value in changes:
+            with self.subTest(field=field, value=value):
+                obj, mem, catalogue = self.fixture()
+                setattr(obj.sections[3], field, value)
+                self.refuse(obj, mem, catalogue)
+
+    def test_keys_for_kept_or_interior_functions_are_not_removed(self):
+        for case in ("kept", "interior", "high_bit", "duplicate", "wrong_kind"):
+            with self.subTest(case=case):
+                obj, mem, catalogue = self.fixture()
+                index = obj.sections[3]
+                if case == "kept":
+                    index.relocs[0].symbol = obj.symbols[0]
+                elif case == "duplicate":
+                    index.relocs.append(inplace.Reloc(0, inplace.R_ARM_PREL31, obj.symbols[1]))
+                elif case == "wrong_kind":
+                    index.relocs[0].type = inplace.R_ARM_ABS32
+                else:
+                    index.data = struct.pack("<2I", 4 if case == "interior" else 0x80000000, 1)
+                self.refuse(obj, mem, catalogue)
+
+    def test_any_other_incoming_reference_to_helper_or_companions_is_refused(self):
+        for target in (2, 3, 4):
+            for rtype in (inplace.R_ARM_ABS32, inplace.R_ARM_PREL31, inplace.R_ARM_NONE, 255):
+                with self.subTest(target=target, rtype=rtype):
+                    obj, mem, catalogue = self.fixture("extab")
+                    symbol = inplace.Symbol("dependency", 0, 0, "STT_SECTION", "STB_LOCAL", target)
+                    obj.symbols.append(symbol)
+                    obj.sections[5] = inplace.Section(5, ".data.unplaced", bytes(4), 4, False, False, False,
+                                                      [inplace.Reloc(0, rtype, symbol)], align=4)
+                    self.refuse(obj, mem, catalogue)
+
+    def test_unknown_outgoing_metadata_relocations_are_not_erased(self):
+        for target in (3, 4):
+            for rtype in (inplace.R_ARM_ABS32, inplace.R_ARM_PREL31, inplace.R_ARM_V4BX, 255):
+                with self.subTest(target=target, rtype=rtype):
+                    obj, mem, catalogue = self.fixture("extab")
+                    unknown = inplace.Symbol("unknown", 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+                    obj.symbols.append(unknown)
+                    obj.sections[target].relocs.append(inplace.Reloc(0, rtype, unknown))
+                    self.refuse(obj, mem, catalogue)
+
+    def test_duplicate_indexes_and_shared_or_combined_extab_are_refused(self):
+        for case in ("duplicate_index", "shared_extab", "interior_extab", "combined_extab", "generic_extab",
+                     "extra_dependency", "wrong_personality", "unsupported_inline"):
+            with self.subTest(case=case):
+                obj, mem, catalogue = self.fixture("extab")
+                if case in ("duplicate_index", "shared_extab"):
+                    import copy
+                    duplicate = copy.copy(obj.sections[3])
+                    duplicate.index, duplicate.relocs = 5, list(duplicate.relocs)
+                    if case == "shared_extab":
+                        duplicate.linked_section = 1
+                        duplicate.relocs[0] = inplace.Reloc(0, inplace.R_ARM_PREL31, obj.symbols[0])
+                    obj.sections[5] = duplicate
+                elif case == "interior_extab":
+                    obj.sections[3].data = struct.pack("<2I", 0, 4)
+                elif case == "combined_extab":
+                    obj.sections[4].data *= 2
+                    obj.sections[4].size = 8
+                elif case == "generic_extab":
+                    obj.sections[4].data = bytes(4)
+                elif case in ("extra_dependency", "wrong_personality"):
+                    name = "__aeabi_unwind_cpp_pr1" if case == "wrong_personality" else "other_root"
+                    dep = inplace.Symbol(name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+                    obj.symbols.append(dep)
+                    obj.sections[4].relocs.append(inplace.Reloc(0, inplace.R_ARM_NONE, dep))
+                else:
+                    obj.sections[3].data = struct.pack("<2I", 0, 0x83000000)
+                    obj.sections[3].relocs.pop()
+                self.refuse(obj, mem, catalogue)
+
+    def test_roots_and_original_bound_unwind_entries_cannot_disappear(self):
+        for index in (3, 4):
+            for case in ("retained", "named", "original_bound", "link_dependency"):
+                with self.subTest(index=index, case=case):
+                    obj, mem, catalogue = self.fixture("extab")
+                    if case == "retained":
+                        self.refuse(obj, mem, catalogue, retention_roots={obj.sections[index].name: "KEEP"})
+                        continue
+                    if case == "link_dependency":
+                        obj.sections[5] = inplace.Section(5, ".linked", bytes(4), 4, False, False, False,
+                                                          align=4, link_order=True, linked_section=index)
+                    else:
+                        name = "data_00180000" if case == "original_bound" else "named_unwind"
+                        obj.symbols.append(inplace.Symbol(name, 0, 4, "STT_OBJECT", "STB_GLOBAL", index))
+                    self.refuse(obj, mem, catalogue)
+
+    def test_a_kept_functions_separate_index_is_never_eliminated(self):
+        obj, mem, catalogue = self.fixture()
+        obj.sections[4] = inplace.Section(
+            4, ".ARM.exidx.caller", struct.pack("<2I", 0, 1), 8, False, False, False,
+            [inplace.Reloc(0, inplace.R_ARM_PREL31, obj.symbols[0])], align=4,
+            elf_type="SHT_ARM_EXIDX", link_order=True, linked_section=1)
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(set(linker.link(obj)), {1})
+        self.assertEqual(set(linker._removed_unwind), {3})
+        self.assertEqual([r["section_index"] for r in linker.removed_callees[0]["unwind_sections"]], [3])
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_real_d1_d2_elf_metadata_survives_combining_in_either_object_order(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "lifetime.cpp"
+            source.write_text("class Lifetime { public: ~Lifetime(); }; Lifetime::~Lifetime() {}\n", encoding="utf-8")
+            path = source.with_suffix(".o")
+            toolchain.compile_source(GAME_PROFILE, source, path)
+            helper = inplace.ObjectFile(path)
+            full = next(sym for sym in helper.defined_functions() if sym.size)
+            aliases = inplace.function_aliases(helper)[full.shndx]
+            self.assertEqual(sorted(sym.size for sym in aliases), [0, 4])
+            indexes = [sec for sec in helper.sections.values() if sec.elf_type == "SHT_ARM_EXIDX"]
+            self.assertEqual(len(indexes), 1)
+            self.assertTrue(indexes[0].link_order)
+            self.assertEqual(indexes[0].linked_section, full.shndx)
+            for reverse in (False, True):
+                caller, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR)
+                caller.sections.pop(2)
+                caller.symbols = caller.symbols[:1]
+                external = inplace.Symbol(full.name, 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+                caller.symbols.append(external)
+                for rel in caller.sections[1].relocs:
+                    rel.symbol = external
+                objects, labels = [caller, helper], ["caller.cpp", "lifetime.cpp"]
+                if reverse:
+                    objects.reverse()
+                    labels.reverse()
+                combined = inplace.ObjectFile.combine(objects, labels)
+                for sec in combined.sections.values():
+                    if sec.elf_type == "SHT_ARM_EXIDX":
+                        self.assertEqual(sec.linked_section, sec.relocs[0].symbol.shndx)
+                with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                    RemovedCalleeModelTest().linker(mem, catalogue, model="armlink5-inline-branchnop-v5").link(combined)
+                linker = self.linker(mem, catalogue)
+                self.assertEqual(next(iter(linker.link(combined).values()))[1], mem.read(BASE, 40))
+                self.assertEqual(linker.removed_callees[0]["object"], "lifetime.cpp")
+                self.assertEqual(linker.removed_callees[0]["unwind_sections"][0]["object"], "lifetime.cpp")
+
+
 @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
 class SwitchRemovedCalleeTest(unittest.TestCase):
     """R1 on real armcc switches: a bounded jump table no longer hides a removed setter's call

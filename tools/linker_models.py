@@ -21,6 +21,7 @@ class LinkerModel:
     removed_inline: bool = False  # v3: inline and eliminate candidate-only tiny function sections
     bounded_switches: bool = False  # v4: bounded ARM jump-table CFG with fail-closed endian state
     function_entry_aliases: bool = False  # v5: proven same-section zero/full-sized entry aliases
+    removed_unwind: bool = False  # v6: eliminate a removed helper's exclusive EHABI companions
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -31,6 +32,8 @@ LINKER_MODELS = {m.name: m for m in (
                 bounded_switches=True),
     LinkerModel("armlink5-inline-branchnop-v5", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True),
+    LinkerModel("armlink5-inline-branchnop-v6", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).
