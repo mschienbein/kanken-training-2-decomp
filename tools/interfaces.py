@@ -23,6 +23,9 @@ heap aliases, pointer arithmetic, interprocedural/branch-sensitive propagation a
 writes performed by called functions/assembly are NOT covered. Coverage and all
 unchecked units are always included in the JSON and human reports. Unsupported
 syntax/extensions fail closed instead of being silently stripped into a PASS.
+Documented __svc declarations, compiler intrinsic calls and CP15 named-register
+declarations are C; other assembly remains refused. Unit-source INTEGRATOR: marker
+comments are refused before preprocessing can erase them.
 """
 from __future__ import annotations
 
@@ -102,16 +105,18 @@ def preprocess(unit: Unit, root: Path = ROOT) -> str:
     return proc.stdout
 
 
-# Token positions let us blank extensions without losing source coordinates, and
-# attach ABI-relevant annotations to the actual declaration/aggregate, not a line.
+# Token positions associate ABI annotations with the owning declaration. Expansion
+# of __int64 preserves lines; all subsequent offsets refer to the expanded text.
 TOKEN = re.compile(
     r"/\*.*?\*/|//[^\n]*|(?:u8|[LuU])?\"(?:\\.|[^\"\\])*\"|"
     r"(?:[LuU])?'(?:\\.|[^'\\])*'|[A-Za-z_]\w*|(?:0[xX][0-9a-fA-F]+|\d+)\w*|[^\s]",
     re.DOTALL,
 )
 LINE = re.compile(r'^\s*#\s*(?:line\s+)?(\d+)\s+"((?:\\.|[^"\\])*)"')
+HEADER_PRAGMA = re.compile(r"^\s*#\s*pragma\s+(?:push|pop|anon_unions|__printf_args|__scanf_args)\s*$")
 IGNORED_WORDS = {
     "__inline", "__inline__", "__forceinline", "__weak", "__pure",
+    "__nothrow", "__noreturn",
 }
 REPLACEMENTS = {
     "__const": "const", "__const__": "const", "__volatile": "volatile",
@@ -122,6 +127,7 @@ IGNORED_ATTRIBUTES = {
     "unused", "used", "weak", "noinline", "always_inline", "noreturn", "section",
     "visibility", "deprecated", "pure", "const", "notshared", "nonnull",
     "warn_unused_result", "format", "malloc", "alias", "constructor", "destructor",
+    "nothrow",
 }
 TYPE_ATTRIBUTES = {"packed", "aligned", "pcs", "vector_size", "mode"}
 
@@ -131,6 +137,7 @@ class Annotation:
     start: int
     end: int
     value: str
+    declarator: int | None = None
 
 
 @dataclass
@@ -160,12 +167,18 @@ def prepare(text: str, source: Path) -> Prepared:
             lineno = int(marker[1])
             lines.append("".join("\n" if c == "\n" else " " for c in raw))
         elif raw.lstrip().startswith("#"):
-            # In particular, #pragma pack changes layouts and cannot be ignored.
-            raise InterfaceError(f"unsupported preprocessing directive: {raw.strip()}")
+            # These standard-header pragmas only permit anonymous unions or add
+            # format diagnostics. Their layouts are already explicit in the AST.
+            directive = re.sub(r"/\*.*?\*/|//[^\n]*", "", raw)
+            if not HEADER_PRAGMA.fullmatch(directive):
+                # In particular, #pragma pack must still fail closed.
+                raise InterfaceError(f"unsupported preprocessing directive: {raw.strip()}")
+            lines.append("".join("\n" if c == "\n" else " " for c in raw))
+            lineno += 1
         else:
             lines.append(raw)
             lineno += 1
-    plain = "".join(lines)
+    plain = TOKEN.sub(lambda m: "long long" if m[0] == "__int64" else m[0], "".join(lines))
     chars = list(plain)
     tokens = list(TOKEN.finditer(plain))
     annotations = []
@@ -199,6 +212,9 @@ def prepare(text: str, source: Path) -> Prepared:
         elif word in ("__packed", "__value_in_regs"):
             annotations.append(Annotation(token.start(), token.end(), word.strip("_")))
             blank(token.start(), token.end())
+        elif word == "__softfp":
+            annotations.append(Annotation(token.start(), token.end(), 'pcs("aapcs")'))
+            blank(token.start(), token.end())
         elif word in ("__svc", "__svc_indirect"):
             if i + 1 >= len(tokens) or tokens[i + 1][0] != "(":
                 raise InterfaceError(f"malformed {word}")
@@ -228,12 +244,27 @@ def prepare(text: str, source: Path) -> Prepared:
             blank(token.start(), tokens[end].end())
             i = end
         elif word in ("__asm", "__asm__", "asm"):
-            # ARM assembly bodies / labels are not C declarations. Never pretend
-            # deleting them establishes their interfaces or their memory writes.
-            raise InterfaceError("__asm is not covered by the C interface parser")
-        elif word == "__int64":
-            # A longer replacement would corrupt the coordinate mapping.
-            raise InterfaceError("__int64 extension: use a standard long long typedef for this audit")
+            # Only ARMCC's coprocessor named-register *declaration* is C here.
+            # Core-register bindings can steer allocation; assembly bodies/labels
+            # cannot be erased without concealing interfaces and memory writes.
+            if word != "__asm" or i + 1 >= len(tokens) or tokens[i + 1][0] != "(":
+                raise InterfaceError("__asm is not covered by the C interface parser")
+            end = closing(i + 1)
+            args = [t for t in tokens[i + 2:end] if not t[0].startswith(("/*", "//"))]
+            previous = i - 1
+            while previous >= 0 and tokens[previous][0].startswith(("/*", "//")):
+                previous -= 1
+            if (
+                len(args) != 1 or not re.fullmatch(r'"cp15:[^"\\]*"', args[0][0])
+                or previous < 0 or not re.fullmatch(r"[A-Za-z_]\w*", tokens[previous][0])
+            ):
+                raise InterfaceError("__asm is not a CP15 named-register declaration")
+            annotations.append(Annotation(
+                token.start(), tokens[end].end(), "named_register(" + args[0][0] + ")",
+                tokens[previous].start(),
+            ))
+            blank(token.start(), tokens[end].end())
+            i = end
         i += 1
     offsets, cursor = [], 0
     for raw in plain.splitlines(keepends=True):
@@ -363,15 +394,36 @@ class Analyzer(c_ast.NodeVisitor):
 
     def bind_annotations(self, tree: c_ast.FileAST) -> None:
         nodes = []
+        parents = []
+        variable_declarations = set()
 
         class Index(c_ast.NodeVisitor):
             def generic_visit(_, node):
                 if isinstance(node, (c_ast.Decl, c_ast.Typedef, c_ast.Struct, c_ast.Union, c_ast.PtrDecl)) and node.coord:
                     nodes.append(node)
+                if isinstance(node, c_ast.Decl) and parents and isinstance(parents[-1], (c_ast.FileAST, c_ast.Compound, c_ast.DeclList)):
+                    variable_declarations.add(id(node))
+                parents.append(node)
                 super().generic_visit(node)
+                parents.pop()
 
         Index().visit(tree)
         for annotation in self.prepared.annotations:
+            if annotation.declarator is not None:
+                candidates = [
+                    node for node in nodes
+                    if isinstance(node, c_ast.Decl)
+                    and self.prepared.offset(node) == annotation.declarator
+                ]
+                if len(candidates) != 1 or "register" not in candidates[0].storage:
+                    raise InterfaceError("CP15 named-register declaration requires a register variable")
+                node = candidates[0]
+                if id(node) not in variable_declarations:
+                    raise InterfaceError("CP15 named-register variable must have file or block scope")
+                if not isinstance(node.type, c_ast.TypeDecl) or node.init is not None or node.bitsize is not None:
+                    raise InterfaceError("CP15 named-register declaration requires an uninitialized scalar variable")
+                self.attributes[id(node)] = (*self.attributes.get(id(node), ()), annotation.value)
+                continue
             candidates = []
             for node in nodes:
                 pos = self.prepared.offset(node)
@@ -406,6 +458,22 @@ class Analyzer(c_ast.NodeVisitor):
                     score = 1 if pos >= annotation.end else 2
                     if isinstance(node, c_ast.PtrDecl) and self.prepared.text[pos:annotation.start].strip() == "*":
                         score = 0
+                    if (
+                        isinstance(node, c_ast.Decl) and isinstance(node.type, c_ast.FuncDecl)
+                        and annotation.value.split("(")[0] in {"pcs", "svc", "svc_indirect", "value_in_regs"}
+                    ):
+                        # An ABI attribute after f(arguments) belongs to f, not
+                        # the last parameter declaration inside those parentheses.
+                        depth = 0
+                        for token in TOKEN.finditer(self.prepared.text, pos):
+                            if token[0] == "(":
+                                depth += 1
+                            elif token[0] == ")":
+                                depth -= 1
+                                if depth == 0:
+                                    if token.end() <= annotation.start and not self.prepared.text[token.end():annotation.start].strip():
+                                        score = 0
+                                    break
                     candidates.append((score, abs(pos - annotation.start), node))
             if not candidates:
                 raise InterfaceError(f"cannot associate ARMCC annotation {annotation.value!r} with a declaration")
@@ -796,8 +864,12 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
         report["units"].append(entry)
         try:
             entry["sha256"] = hashlib.sha256(unit.source.read_bytes()).hexdigest()
+            text = unit.source.read_text(encoding="utf-8")
+            for token in TOKEN.finditer(text):
+                if token[0].startswith(("/*", "//")) and re.search(r"\bINTEGRATOR:", token[0]):
+                    line = text.count("\n", 0, token.start()) + 1
+                    raise InterfaceError(f"leftover INTEGRATOR: marker comment at line {line}")
             if unit.source.suffix.lower() == ".cpp":
-                text = unit.source.read_text(encoding="utf-8")
                 for name, body, line in cpp_class_definitions(text):
                     cpp_classes.setdefault(name, []).append((body, {"source": source, "line": line, "type": "class definition"}))
                 reached = included_headers(text, headers)
