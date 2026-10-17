@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "scope": "Minimal standalone prerequisites for the licensed NW4C headers; no additional function credit, complete SDK enum claim, private image bytes or instruction listing.",
+  "public_sources": [
+    {
+      "repository": "https://github.com/ctrdecomp/NintendoWare4Ctr",
+      "commit": "15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+      "license": "GPL-3.0-only",
+      "paths": [
+        "include/nw/math/math_Types.h",
+        "include/nw/gfx/gfx_CameraProjectionUpdater.h",
+        "include/nw/gfx/gfx_RenderContext.h",
+        "include/nw/gfx/gfx_Common.h",
+        "include/nw/gfx/res/gfx_ResCamera.h",
+        "include/nw/gfx/res/gfx_ResTypeInfo.h",
+        "include/nw/snd/snd_FxReverb.h",
+        "sources/libraries/gfx/gfx_PerspectiveProjectionUpdater.cpp",
+        "sources/libraries/snd/snd_FxReverb.cpp"
+      ],
+      "finding": "The public code supplies the prerequisite names and uses, but its tree contains no defining nn/ or GLES2/ SDK headers. No unlicensed SDK source was consulted or copied."
+    },
+    {
+      "repository": "https://github.com/devkitPro/libctru",
+      "commit": "9b55eda44cf80b971503991e0c78f9bc8fe50425",
+      "license": "zlib",
+      "path": "libctru/source/ndsp/ndsp.c",
+      "url": "https://raw.githubusercontent.com/devkitPro/libctru/9b55eda44cf80b971503991e0c78f9bc8fe50425/libctru/source/ndsp/ndsp.c",
+      "sha256": "6d2e98b8e8250aaef2dc09a7eebf63addb86f3b218656c76d1ea5f617333b8d5",
+      "value": 160,
+      "finding": "ndspSync passes a count of 160 to ndspUpdateCapture for each received DSP frame. Only this numerical fact is reused; the declaration is independently authored.",
+      "license_source": "README.md",
+      "license_source_sha256": "6ca781f919d70afba6206e61415ac8bd003adce37fc08c10d8367c9114c77fd0",
+      "license_notice": "src/nw4c/LICENSE-LIBCTRU.txt"
+    },
+    {
+      "repository": "https://github.com/KhronosGroup/OpenGL-Registry",
+      "license": "MIT",
+      "evidence": "src/nw4c/FACTS-KHRONOS.json",
+      "finding": "The existing public-registry survey explicitly lists GL_LUT_TEXTURE0_DMP under not_in_public_registry. The current extensions/DMP directory lists only DMP_program_binary.txt and DMP_shader_binary.txt, neither a LUT definition. No Khronos provenance is asserted for the new DMP value."
+    }
+  ],
+  "game_evidence": {
+    "image_path": "orig/code.bin",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_path": "config/catalogue.json",
+    "method": "Read-only semantic extraction with tools/image.py and Capstone over catalogued code ranges. Only scalar declaration facts and their locations are recorded, not bytes, disassembly or packets."
+  },
+  "declarations": [
+    {
+      "header": "include/nn/math.h",
+      "name": "nn::math::PivotDirection",
+      "visible_as": "nw::math::PivotDirection through the existing using namespace nn::math in nw/math/math_Types.h",
+      "minimal_definition": "enum PivotDirection { PIVOT_NONE = 0 };",
+      "qualification": "[INFERENCE] The public initializer names the default PIVOT_NONE. Its value and byte-width are inferred from the matching projection-construction layout, not from a licensed defining SDK header. No other direction names or values are inferred.",
+      "witness": {
+        "function": "func_001246a4",
+        "size": 252,
+        "role": "[INFERENCE] PerspectiveProjectionUpdater::Create: the two allocations are 32 and 20 bytes, and the resource type-info initializer is 0x20000000, agreeing with the public perspective resource and builder.",
+        "pivot_initialization_site": "func_001246a4+0xb8",
+        "object_field_offset": "0x08",
+        "store_width": 1,
+        "default_value": 0,
+        "dynamic_flag_initialization_site": "func_001246a4+0xc0",
+        "dynamic_flag_offset": "0x09",
+        "dynamic_flag_value": 1,
+        "texture_scale_translate": "Four 0.5f coordinates begin at object +0x0c, agreeing with the public CameraProjectionUpdater initializer."
+      }
+    },
+    {
+      "header": "include/GLES2/gl2dmpconstants.h",
+      "name": "GL_LUT_TEXTURE0_DMP",
+      "value": "0x6600",
+      "qualification": "[INFERENCE] Public RenderContext::ToLutTexture adds this missing base to a zero-based lookup-table index; gfx_Common.h supplies LOOKUP_TABLE_COUNT = 32. The game texture-target dispatcher independently normalizes the corresponding target family to a zero-based index. This identifies the minimal used token, not the complete DMP API.",
+      "witness": {
+        "caller": "func_0017fe98",
+        "ordinary_texture_bind_site": "func_0017fe98+0xf8",
+        "ordinary_texture_target": "GL_TEXTURE_2D = 0x0de1",
+        "callee": "func_00184808",
+        "callee_role": "[INFERENCE] glBindTexture-like target dispatcher, supported by the adjacent GL_TEXTURE0 selection and GL_TEXTURE_2D binding in func_0017fe98.",
+        "ordinary_target_normalization_site": "func_00184808+0x80",
+        "ordinary_target_bias": "-0x0de1",
+        "lut_target_normalization_site": "func_00184808+0x8c",
+        "lut_target_bias": "-0x6600",
+        "special_target_cases": ["0x6616", "0x661f"]
+      }
+    },
+    {
+      "header": "include/nn/snd.h",
+      "name": "NN_SND_SAMPLES_PER_FRAME",
+      "value": 160,
+      "source": "Pinned libctru ndspSync frame-capture count above.",
+      "qualification": "[INFERENCE] The SDK spelling follows the licensed NW4C header's 19x, 23x and 13x frame-size uses; the numerical frame length is independently public and corroborated by the game's reverb initialization.",
+      "witness": {
+        "function": "func_001d2790",
+        "role": "[INFERENCE] FxReverb constructor from the complete field-initialization pattern in the public reverb implementation.",
+        "delay_length_initialization_sites": ["func_001d2790+0xa8", "func_001d2790+0xc4"],
+        "delay_length_value": 160
+      }
+    }
+  ]
+}
