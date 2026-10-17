@@ -34,6 +34,7 @@ from capstone import arm as cs_arm
 from elftools.elf.constants import SH_FLAGS
 from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
+from image import ImageError
 
 from linker_models import (DEFAULT_LINKER_MODEL, DEFAULT_LITERAL_MODEL, LINKER_MODELS,  # noqa: F401  (re-exported)
                            LITERAL_MODELS, RETIRED_LINKER_MODELS, LinkerModel)
@@ -606,6 +607,11 @@ class InPlaceLinker:
                 # several distinct functions in one section need --split_sections.
                 raise LinkError(f"{sec.name}: holds several functions at different offsets; compile with --split_sections")
             base = address - (fn.value & ~1)
+            if base not in self.functions:
+                raise LinkError(
+                    f"{sec.name}: {fn.name} at section offset {fn.value & ~1:#x} implies "
+                    f"section base {base:#x}, which is not a catalogued function start"
+                )
             prior = placements.get(sec.index)
             if prior and prior.base != base:
                 raise LinkError(f"{sec.name}: aliases {fn.name} and another name resolve to different addresses")
@@ -771,10 +777,7 @@ class InPlaceLinker:
                 reordered.extend(bytes((-len(reordered)) % sec.align))
         if len(reordered) != sec.size:
             raise LinkError(f"{sec.name}: reordered string pool changes the section size")
-        try:
-            original = self.image.read(base, sec.size)
-        except ValueError:
-            raise LinkError(f"{sec.name}: witnessed string pool is outside the image") from None
+        original = self._read_original(base, sec.size, f"{sec.name}: witnessed string pool")
         if original != reordered:
             raise LinkError(f"{sec.name}: complete witnessed string pool differs from the candidate records")
         self.literal_rebindings.append({
@@ -794,6 +797,16 @@ class InPlaceLinker:
         return target.address
 
     # -- relocation arithmetic -------------------------------------------------------------------
+
+    def _read_original(self, address: int, size: int, context: str) -> bytes:
+        """Translate only image-address failures, not exceptions from linker arithmetic."""
+        try:
+            return self.image.read(address, size)
+        except (ValueError, ImageError) as exc:
+            raise LinkError(
+                f"{context}: cannot read original [{address:#x}, +{size:#x}) outside the image "
+                f"or across a segment boundary: {exc}"
+            ) from None
 
     @staticmethod
     def _addend(rel: Reloc, sec: Section) -> int:
@@ -817,27 +830,34 @@ class InPlaceLinker:
         """(S + A) | T as implied by the original bytes at `place`, or None for marker relocations."""
         if rel.type in (R_ARM_NONE, R_ARM_V4BX):
             return None
+        if rel.type not in (R_ARM_ABS32, R_ARM_TARGET1, R_ARM_REL32, R_ARM_PREL31,
+                            R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24, R_ARM_THM_CALL,
+                            R_ARM_THM_JUMP11, R_ARM_THM_JUMP8):
+            raise LinkError(f"{sec.name}+{rel.offset:#x}: unsupported relocation type {rel.type}")
+        size = 2 if rel.type in (R_ARM_THM_JUMP11, R_ARM_THM_JUMP8) else 4
+        original = self._read_original(
+            place, size, f"{sec.name}+{rel.offset:#x}: placement reference to {rel.symbol.name!r}"
+        )
         if rel.type in (R_ARM_ABS32, R_ARM_TARGET1):
-            return struct.unpack("<I", self.image.read(place, 4))[0]
+            return struct.unpack("<I", original)[0]
         if rel.type == R_ARM_REL32:
-            return (struct.unpack("<I", self.image.read(place, 4))[0] + place) & 0xFFFFFFFF
+            return (struct.unpack("<I", original)[0] + place) & 0xFFFFFFFF
         if rel.type in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24):
             # branch target = P + 8 + (S + A - P)
-            return _arm_branch_target(struct.unpack("<I", self.image.read(place, 4))[0], place) - 8
+            return _arm_branch_target(struct.unpack("<I", original)[0], place) - 8
         if rel.type == R_ARM_THM_CALL:
             # branch target = P + 4 + (S + A - P)
-            hi, lo = struct.unpack("<HH", self.image.read(place, 4))
+            hi, lo = struct.unpack("<HH", original)
             return _thm_bl_target(hi, lo, place) - 4
         if rel.type == R_ARM_THM_JUMP11:
-            insn = struct.unpack("<H", self.image.read(place, 2))[0]
+            insn = struct.unpack("<H", original)[0]
             return place + 4 + (_sx(insn & 0x7FF, 11) << 1) - 4
         if rel.type == R_ARM_THM_JUMP8:
-            insn = struct.unpack("<H", self.image.read(place, 2))[0]
+            insn = struct.unpack("<H", original)[0]
             return place + 4 + (_sx(insn & 0xFF, 8) << 1) - 4
         if rel.type == R_ARM_PREL31:
-            word = struct.unpack("<I", self.image.read(place, 4))[0]
+            word = struct.unpack("<I", original)[0]
             return (_sx(word & 0x7FFFFFFF, 31) + place) & 0xFFFFFFFF
-        raise LinkError(f"{sec.name}+{rel.offset:#x}: unsupported relocation type {rel.type}")
 
     def _symbol_target(self, sym: Symbol, obj: ObjectFile, placements: dict[int, Placement],
                        addend: int = 0) -> Target:
@@ -991,7 +1011,7 @@ class InPlaceLinker:
             return None
         if fn.get("pools") or fn.get("literals") or any(e["address"] != dest for e in fn.get("entries", ())):
             return None
-        return self.image.read(dest, fn["size"])
+        return self._read_original(dest, fn["size"], f"function {dest:#x}: inline-callee body")
 
     @staticmethod
     def _local_callee_section(sym: Symbol, dest: int, obj: ObjectFile, placements: dict[int, Placement]) -> bytes | None:
@@ -1114,7 +1134,8 @@ class InPlaceLinker:
                     if placed.base not in contexts:
                         instructions = {}
                         for lo, hi in fn.get("code_ranges", [(placed.base, placed.base + fn["size"])]):
-                            for insn in _ARM.disasm(self.image.read(lo, hi - lo), lo):
+                            original = self._read_original(lo, hi - lo, f"{section.name}: removed-call context")
+                            for insn in _ARM.disasm(original, lo):
                                 if not any(a <= insn.address < b for a, b in (*fn.get("pools", ()), *fn.get("literals", ()))):
                                     instructions[insn.address] = insn
                         call_sites = {
@@ -1200,15 +1221,9 @@ class InPlaceLinker:
                 self._apply(rel, sec, data, place, target)
             linked[idx] = (placed, bytes(data))
             if placed.origin == "inferred":
-                try:
-                    original = self.image.read(placed.base, sec.size)
-                except ValueError:
-                    # The original word where the candidate holds this reference is not an address
-                    # inside the image (e.g. an instruction): the candidate cannot match there.
-                    raise LinkError(
-                        f"{sec.name}: its references imply an address {placed.base:#x} outside the image; "
-                        "the original holds no reference there"
-                    ) from None
+                original = self._read_original(
+                    placed.base, sec.size, f"{sec.name}: section placed from its references"
+                )
                 if original != bytes(data):
                     first = next(i for i in range(sec.size) if original[i] != data[i])
                     raise LinkError(
