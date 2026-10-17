@@ -68,7 +68,8 @@ def compile_units(units: list[dict], profiles: dict, out: Path, fresh: bool, job
 
 
 def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: int | None = None,
-          linker_model: str = inplace.DEFAULT_LINKER_MODEL) -> dict:
+          linker_model: str = inplace.DEFAULT_LINKER_MODEL,
+          literal_model: str = inplace.DEFAULT_LITERAL_MODEL) -> dict:
     out = ROOT / "build" / name
     try:
         out.mkdir(parents=True, exist_ok=False)
@@ -85,7 +86,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     functions = image_mod.functions_by_address(catalogue)
     names = image_mod.load_names()
     resolver = inplace.Resolver(functions, names)
-    linker = inplace.InPlaceLinker(image, functions, resolver, image.bss, linker_model)
+    linker = inplace.InPlaceLinker(image, functions, resolver, image.bss, linker_model, literal_model)
     matches = json.loads(matches_path.read_text(encoding="utf-8"))
     profiles = toolchain.load_profiles()
     hits = compile_units(matches["units"], profiles, out, fresh, jobs or os.cpu_count() or 1)
@@ -145,6 +146,8 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
             "functions": sorted(unit["functions"]), "cache_hit": hits[unit["source"]],
             "linker_rewrites": rewrites,
+            "literal_rebindings": [row for row in linker.literal_rebindings
+                                   if combined.section_owners[row["section_index"]] == owner],
             "removed_callees": [row for row in linker.removed_callees if row["object"] == unit["source"]],
         })
     try:
@@ -180,6 +183,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "exheader_sha256": sha256_file(ROOT / "orig/exheader.bin"),
             "harness_sha256": {p: sha256_file(ROOT / p) for p in HARNESS},
             "linker_model": linker.model.name,
+            "literal_model": linker.literal_model,
             "compilers": {c: sha256_file(toolchain.armcc_exe(c)) for c in used},
         },
         "units": units,
@@ -214,9 +218,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--jobs", type=int, help="parallel compiles (default: CPU count)")
     parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
                         help="armlink output optimisations reproduced by the in-place link (docs/LINKER.md)")
+    parser.add_argument("--literal-model", default=inplace.DEFAULT_LITERAL_MODEL, choices=inplace.LITERAL_MODELS,
+                        help="independent anonymous string placement rule; default off (docs/LINKER.md)")
     args = parser.parse_args(argv)
     try:
-        receipt = build(args.name, args.matches, args.fresh, args.jobs, args.linker_model)
+        receipt = build(args.name, args.matches, args.fresh, args.jobs, args.linker_model, args.literal_model)
     except (BuildError, inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
