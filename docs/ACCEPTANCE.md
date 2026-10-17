@@ -41,7 +41,8 @@ Adapted from the Shiren lean contract r3. Every accepted checkpoint needs:
 3. **Full build equality:** `code.bin` (and CROs) byte-identical, reproduced by two fresh builds.
 4. **Interfaces:** whole-tree audit of cross-unit declarations; real types on every interface.
 5. **Source policy:** no inline asm standing in for C, no byte blobs standing in for code or data, no
-   fake matches without a recorded qualification.
+   fake matches without a recorded qualification. Documented ARMCC extensions (`__svc`, CP15 named
+   registers, intrinsics) count as C per `docs/rulings/2026-10-17-armcc-extensions.md`.
 6. **Independent review:** one certificate per changed function, plus two fresh whole-receipt reviews
    (cross-family where possible). The integrator never reviews its own work.
 7. **Finalize once:** progress recorded in a hash-chained history; a reviewed denominator plan if the map

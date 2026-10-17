@@ -39,6 +39,8 @@ compile and compare their own candidate in isolation. Two state-changing runs ne
 No inline assembly standing in for C. No byte blobs standing in for code or data. Real types on
 every cross-unit interface. A fake match (dead code to steer register allocation, etc.) is allowed
 only as a recorded qualification. Preserved original bugs carry an `ORIGINAL BUG:` comment.
+Documented ARMCC extensions (`__svc(N)`, CP15 named-register variables, intrinsics) count as C
+(`docs/rulings/2026-10-17-armcc-extensions.md`).
 
 ## Author loop
 
