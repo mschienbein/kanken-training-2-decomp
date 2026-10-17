@@ -7,6 +7,9 @@ and fail-closed endian-state handling; it requires a new independent review and 
 `accept.py prepare --linker-model ... --literal-model ...` freezes both choices before its fresh
 builds; see `docs/ACCEPTANCE.md` for selection/receipt/history binding and transition review.
 V4's draft is `scratch/integrator/r1-jumptables/GATES-DRAFT.md`; no v4 gate is adopted here.
+The corrected alias composite is opt-in **`armlink5-inline-branchnop-v6`**, pending focused
+independent re-review; v5 is retired, never adopted. V6's draft is
+`scratch/models-integration/GATES-DRAFT.md`; neither v4 nor v6 is adopted here.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -51,19 +54,20 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v2` | default | below |
 | `armlink5-inline-branchnop-v3` | frozen opt-in, not the default | all v2 rules plus candidate-only callees in R1 below; original conservative CFG, no resolved jump tables |
 | `armlink5-inline-branchnop-v4` | independently reviewed PASS_WITH_QUALIFICATIONS; unadopted | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
-| `armlink5-inline-branchnop-v5` | unadopted composite proposal | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; explicit selection and composite independent review required |
+| `armlink5-inline-branchnop-v5` (reviewed 22cb05b) | **retired**, never adopted | reviewed v4/alias composite incorrectly refuses independently bound D1/D2 sections when the nonzero symbol excludes a trailing pool; historical receipts retain that identity, superseded by v6 |
+| `armlink5-inline-branchnop-v6` | unadopted corrected composite, focused re-review required | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
 
-## Function-entry alias identity (v5 only, unadopted)
+## Function-entry alias identity (v6 only, unadopted)
 
 ARMCC 5.04, under the frozen `game` profile, emits native C1/C2 constructors and both
-virtual and non-virtual D1/D2 destructors as one full-section `STT_FUNC` plus a zero-size
-`STT_FUNC` at the same section value. The ABI names distinguish
+virtual and non-virtual D1/D2 destructors as same-entry `STT_FUNC` symbols, with a nonzero
+size on only one sibling. That size can exclude a trailing literal pool. The ABI names distinguish
 [complete/base construction and destruction](https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling-special-ctor-dtor);
 the names alone **never** prove that two implementations are identical.
 
-Only the explicit **`armlink5-inline-branchnop-v5`** selection enables this identity
-extension. V5 composes exactly the independently reviewed v4 baseline with the alias rules
-below; it must be independently reviewed as that composite before adoption. V4's approved
+Only the explicit **`armlink5-inline-branchnop-v6`** selection enables this identity
+extension. V6 composes the independently reviewed v4 baseline with the alias rules
+and bound-placement correction below; it needs focused independent re-review before adoption. V4's approved
 source series is `21c2bd4` + `e72fb34` + `5187259` (sealed review:
 `scratch/review/r1-jumptables-r3/REVIEW.md`, PASS_WITH_QUALIFICATIONS).
 `strict-v1`, v2, v3 and v4 retain their original alias behavior: no sibling-name binding
@@ -77,14 +81,23 @@ entry has the full sibling's address and extent, without altering its ELF metada
 Either ABI name may supply the original address binding, but every supplied binding must
 agree and name a catalogued function start. Match results use a bound name for the section.
 Interior zero-size symbols, missing/partial full-sized siblings and mixed ARM/Thumb entries
-are refused; data symbols never borrow a function binding.
+cannot borrow a sibling's binding or satisfy R1's alias proof; data symbols never borrow a function binding.
 
-The default v2 model still refuses an entirely unbound destructor. V5 does not invent
+**Independently bound retained names do not borrow identity.** When every function name has its
+own explicit agreeing binding, the existing placement path still checks the section base,
+same-offset/same-placement consistency, global-definition binding, relocations, overlap and the
+complete candidate/catalogue extent. That frozen path accepts a D1 code-size symbol and a zero-size
+D2 symbol even when a trailing literal pool makes neither symbol a full-section witness. V6
+preserves it without changing `function_aliases`, inventing a binding, normalizing ELF metadata,
+discarding the pool or permitting R1 removal. Missing bindings still require the full-section
+proof above; mismatched pool bytes remain MISMATCH and a short section remains EXTENT.
+
+The default v2 model still refuses an entirely unbound destructor. V6 does not invent
 an original image address: an entirely unbound helper must satisfy every R1 requirement.
-Only v5 evaluates R1's full-section-entry check using the proven identical aliases above;
+Only v6 evaluates R1's full-section-entry check using the proven identical aliases above;
 the original-address exclusion, code/ABI, call-site and all-reference checks remain mandatory.
 An allocated `.ARM.exidx` relocation to the helper is still a live reference and prevents
-removal. Global data or untyped definitions are not function aliases and prevent v5 removal.
+removal. Global data or untyped definitions are not function aliases and prevent v6 removal.
 Alias identity never waives those modeled effects: missing decoder write metadata is not
 proof that LDREXD/MRRC preserve a bounded index. Unresolved RFE PC/CPSR restoration remains
 unknown control/state, including in an otherwise unreachable decoded owner suffix.
@@ -92,7 +105,7 @@ V4's effect model applies to guard and owner-state classification, not a complet
 architectural/interprocedural proof of inherited helper, input or outgoing decoder metadata.
 Little-endian catalogue entries and conforming call returns remain manual ABI obligations;
 ordinary FP exceptions and arbitrary external behavior are not newly proved. Every v4
-qualification and conservative unsupported-encoding refusal also applies to v5.
+qualification and conservative unsupported-encoding refusal also applies to v6.
 
 Alias binding inheritance is **section-local**, not a guess about another COMDAT copy.
 Before R1 removal, every supplied copy's explicit original bindings are resolved.
@@ -107,12 +120,21 @@ The build's pre-link unique emitted-owner checks remain mandatory, including zer
 bound aliases and byte-identical credited COMDAT copies.
 
 The original proposal failed independent review (F01, sealed in
-`scratch/review/d2-alias/REVIEW.md`). The corrected acceptance-input proposal is
-`scratch/integrator/d2-alias-r2/GATES-DRAFT.md`; it grants no checkpoint credit.
-Frozen GATES v1.16 remains unchanged. The new v5 identifier and changed alias acceptance
-require a new composite independent review and explicit gate revision after c008-r2's frozen
-evidence is finalized and closed. A gate-only revision never broadens v1/v2/v3 or v4;
-selection, both fresh receipts, prepare/history and model-transition review must bind v5.
+`scratch/review/d2-alias/REVIEW.md`); the corrected v5 implementation at `22cb05b` received
+PASS_WITH_QUALIFICATIONS (`scratch/review/d2-alias-r2/REVIEW.md`). A subsequent real-source
+model sweep exposed a different v5 regression: `func_001c6a68` has a 100-byte D1 plus 4-byte
+pool, and `func_001ef89c` a 188-byte D1 plus 8-byte pool; both have a zero-size D2, both names
+explicitly bound, and full sections matching under v4. V5 incorrectly rejected them before
+comparison. Its blanket zero-size refusal is historical, not corrected under the same name:
+v5 is retired with that reason and v6 adds the bounded correction described above. No v4 fix
+or unsound v4 credit follows from these rows.
+
+The v6 acceptance-input proposal is `scratch/models-integration/GATES-DRAFT.md`.
+Frozen GATES v1.16 remains unchanged. V6 requires focused independent re-review of this
+correction and an explicit gate revision after the current checkpoint's frozen evidence is
+finalized and closed, with the independently approved v4 implementation/text adopted first.
+Selection, both fresh receipts, prepare/history and model-transition review must bind v6.
+Existing v5 author scratch receipts and the original sweep remain immutable and grant no credit.
 Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
 `RemovedCalleeModelTest`, `CppAliasCompareTest`, `AliasCompareSafetyTest`, and
 `BuildRemovedCalleeModelTest` in `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
@@ -199,7 +221,7 @@ any catalogued function and not general dead-code removal:
    name without a catalogue entry is still refused. Any binding overlapping a catalogued
    function/entry/extent takes the retained-callee path, with every v2 equality/refusal intact;
    an uncatalogued bound address is also refused, rather than treated as absent.
-   Under v5, all copies' bindings are inspected before removal. A COMDAT member mixing a
+   Under v6, all copies' bindings are inspected before removal. A COMDAT member mixing a
    bound copy and an R1-removable copy is refused, rather than inferring a binding or giving
    the other copy a null-target rewrite. Every supplied copy must be eligible and consistent
    before that member can be removed.
@@ -214,7 +236,7 @@ any catalogued function and not general dead-code removal:
    retention keeps its section, not necessarily the BL.
 3. The section is executable, word-aligned, wholly code, non-Thumb and non-NOBITS, with all
    function entries at offset zero spanning the whole section. Frozen v3 and proposed v4
-   require each symbol's recorded size to equal that extent. Only v5 permits the proven
+   require each symbol's recorded size to equal that extent. Only v6 permits the proven
    identical zero-size entry aliases above to share a full-sized sibling's extent.
    No relocation is allowed except the nonreferencing
    `R_ARM_V4BX` marker. I1/I2 judge its own generated bytes, with all existing

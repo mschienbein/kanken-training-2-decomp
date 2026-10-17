@@ -224,7 +224,7 @@ class AliasCompareSafetyTest(unittest.TestCase):
                 ctx = match.Context.__new__(match.Context)
                 ctx.image, ctx.functions = mem, catalogue
                 ctx.resolver = match.inplace.Resolver(catalogue, names)
-                ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+                ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v6")
                 ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
                 combine = match.inplace.ObjectFile.combine
 
@@ -250,7 +250,7 @@ class AliasCompareSafetyTest(unittest.TestCase):
         ctx = match.Context.__new__(match.Context)
         ctx.image, ctx.functions = mem, catalogue
         ctx.resolver = match.inplace.Resolver(catalogue, {"bound_variant": {"address": address}})
-        ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+        ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v6")
         ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
         with patch.object(match.inplace, "ObjectFile", return_value=obj):
             rows = ctx.compare(Path("bound_copy.o"))
@@ -259,26 +259,96 @@ class AliasCompareSafetyTest(unittest.TestCase):
                          ("bound_variant", 4, 8, "match_extent_differs"))
         self.assertEqual(ctx.removed_callees, [])
 
+    def explicit_bound_pool_fixture(self, code_size=4, pool_size=4):
+        from tests.test_inplace import BX_LR, Memory
+
+        body = BX_LR * (code_size // 4) + bytes(range(1, pool_size + 1))
+        complete = match.inplace.Symbol("complete_entry", 0, code_size, "STT_FUNC", "STB_GLOBAL", 1)
+        zero = match.inplace.Symbol("base_entry", 0, 0, "STT_FUNC", "STB_GLOBAL", 1)
+        obj = match.inplace.ObjectFile.__new__(match.inplace.ObjectFile)
+        obj.symbols = [complete, zero]
+        obj.sections = {1: match.inplace.Section(
+            1, "i.complete_entry", body, len(body), False, True, False,
+            mapping=[(0, "$a"), (code_size, "$d")], align=4)}
+        mem = Memory()
+        mem.bss = (0x200000, 0x201000)
+        mem.write(BASE, body)
+        catalogue = {BASE: {"address": BASE, "size": len(body), "isa": "arm"}}
+        names = {sym.name: {"address": BASE} for sym in obj.symbols}
+        return obj, mem, catalogue, names
+
+    def test_explicit_bound_aliases_preserve_synthetic_and_reported_pool_extents(self):
+        cases = (("synthetic", 4, 4), ("func_001c6a68", 100, 4), ("func_001ef89c", 188, 8))
+        for case, code_size, pool_size in cases:
+            for model in match.inplace.LINKER_MODELS:
+                with self.subTest(case=case, model=model):
+                    obj, mem, catalogue, names = self.explicit_bound_pool_fixture(code_size, pool_size)
+                    self.assertEqual(match.inplace.function_aliases(obj), {})
+                    metadata = [vars(sym).copy() for sym in obj.symbols]
+                    ctx = match.Context.__new__(match.Context)
+                    ctx.image, ctx.functions = mem, catalogue
+                    ctx.resolver = match.inplace.Resolver(catalogue, names)
+                    ctx.model = match.inplace.linker_model(model)
+                    ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+                    with patch.object(match.inplace, "ObjectFile", return_value=obj):
+                        rows = ctx.compare(Path("explicit.o"))
+                    self.assertEqual(len(rows), 1)
+                    self.assertEqual((rows[0]["status"], rows[0]["size"], rows[0]["candidate_size"]),
+                                     ("match", code_size + pool_size, code_size + pool_size))
+                    self.assertEqual(rows[0]["_candidate"], mem.read(BASE, code_size + pool_size))
+                    self.assertEqual([vars(sym) for sym in obj.symbols], metadata)
+                    self.assertEqual((ctx.removed_callees, rows[0]["linker_rewrites"]), ([], []))
+
+    def test_explicit_bound_pool_aliases_do_not_borrow_missing_bindings_or_skip_bytes(self):
+        for missing in ("complete_entry", "base_entry"):
+            obj, mem, catalogue, names = self.explicit_bound_pool_fixture()
+            names.pop(missing)
+            linker = match.inplace.InPlaceLinker(
+                mem, catalogue, match.inplace.Resolver(catalogue, names), mem.bss,
+                "armlink5-inline-branchnop-v6")
+            with self.subTest(missing=missing), self.assertRaises(match.inplace.LinkError):
+                linker.link(obj)
+        for failure in ("pool_mismatch", "extent"):
+            obj, mem, catalogue, names = self.explicit_bound_pool_fixture()
+            if failure == "pool_mismatch":
+                mem.write(BASE + 4, b"\0" * 4)
+            else:
+                catalogue[BASE]["size"] += 4
+            ctx = match.Context.__new__(match.Context)
+            ctx.image, ctx.functions = mem, catalogue
+            ctx.resolver = match.inplace.Resolver(catalogue, names)
+            ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v6")
+            ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+            with self.subTest(failure=failure), patch.object(match.inplace, "ObjectFile", return_value=obj):
+                rows = ctx.compare(Path("explicit.o"))
+                self.assertEqual(rows[0]["status"],
+                                 "mismatch" if failure == "pool_mismatch" else "match_extent_differs")
+
 
 class ModelOptionsTest(unittest.TestCase):
-    def test_v5_is_explicit_and_inherits_v4_without_broadening_frozen_models(self):
+    def test_v6_is_explicit_and_inherits_v4_without_broadening_frozen_models(self):
         self.assertEqual(match.inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
         for name in ("strict-v1", "armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3"):
             policy = match.inplace.linker_model(name)
             self.assertFalse(policy.function_entry_aliases)
             self.assertFalse(policy.bounded_switches)
         v4 = match.inplace.linker_model("armlink5-inline-branchnop-v4")
-        v5 = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+        v6 = match.inplace.linker_model("armlink5-inline-branchnop-v6")
         self.assertTrue(v4.bounded_switches)
         self.assertFalse(v4.function_entry_aliases)
-        self.assertTrue(v5.function_entry_aliases)
+        self.assertTrue(v6.function_entry_aliases)
         for field, value in vars(v4).items():
             if field not in ("name", "function_entry_aliases"):
-                self.assertEqual(getattr(v5, field), value)
+                self.assertEqual(getattr(v6, field), value)
+
+    def test_v5_is_retired_instead_of_reinterpreted_as_v6(self):
+        self.assertNotIn("armlink5-inline-branchnop-v5", match.inplace.LINKER_MODELS)
+        with self.assertRaisesRegex(match.inplace.LinkError, "retired.*superseded by v6, never adopted"):
+            match.inplace.linker_model("armlink5-inline-branchnop-v5")
 
     def test_literal_option_composes_with_frozen_v3_and_selected_successors(self):
         profile = match.toolchain.Profile("game", "synthetic", ())
-        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v6"):
             with self.subTest(model=model), \
                     patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
                     patch.object(match, "run", return_value=0) as run:
@@ -392,7 +462,7 @@ class PlacementRefusalTest(unittest.TestCase):
         from tests.test_inplace import RemovedCalleeModelTest
 
         for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4",
-                      "armlink5-inline-branchnop-v5"):
+                      "armlink5-inline-branchnop-v6"):
             for error in (ValueError, match.image_mod.ImageError):
                 with self.subTest(model=model, error=error.__name__):
                     obj, image, catalogue = RemovedCalleeModelTest().fixture()

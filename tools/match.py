@@ -4,7 +4,7 @@
                           [--linker-model NAME]
 
 Every surviving function the unit defines must be named `func_XXXXXXXX` (its catalogue address) or
-appear in config/names.json. Only v5 lets proven full-section entry aliases share either name's
+appear in config/names.json. Only v6 lets proven full-section entry aliases share either name's
 binding. V3 and its explicit successor models can remove eligible candidate-only callees;
 `--extra-source` supplies same-build helper definitions, compiled with the same profile. Surviving functions are
 linked at their original addresses with tools/inplace.py and compared byte

@@ -512,7 +512,7 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
     is an unmodified incoming argument, or is an unmodified r0/r1 result of an unconditional
     preceding call on that path. Conditional definitions/calls alone do not establish inputs.
     Both conditional successors are checked; unresolved indirect transfers fail closed.
-    Only the explicit `bounded_switches` policy (v4/v5) enables `_arm_jump_tables`, with
+    Only the explicit `bounded_switches` policy (v4/v6) enables `_arm_jump_tables`, with
     `words` limited to this caller's own original pools. The default retains frozen v3 behavior.
     Afterwards, follow every successor until a call/return or unconditional definitions of all
     caller-saved registers/flags. r0 may be a result. Candidate removed calls are call barriers.
@@ -996,7 +996,10 @@ class InPlaceLinker:
         for fn in obj.defined_functions():
             if fn.shndx in self._removed_sections:
                 continue
-            if self.model.function_entry_aliases and fn.size == 0 and fn.shndx not in aliases:
+            # Full-section proof is required to borrow a sibling's binding, not to
+            # place independently bound names through the frozen extent checks.
+            if (self.model.function_entry_aliases and fn.size == 0 and fn.shndx not in aliases
+                    and fn.name not in names_to_address and self.resolver.lookup(fn.name) is None):
                 raise LinkError(f"{fn.name}: zero-size function is not a full-section entry alias")
             address = names_to_address.get(fn.name, alias_addresses.get(fn.shndx))
             if address is None:
@@ -1466,7 +1469,7 @@ class InPlaceLinker:
         entry_aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
         non_function_globals = ({sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
                                 if self.model.function_entry_aliases else set())
-        # V5 resolves every copy before selecting any removal. A section-local alias binding
+        # V6 resolves every copy before selecting any removal. A section-local alias binding
         # cannot turn another copy into an unbound R1 entity; older models keep their scan below.
         bindings: dict[int, list[int]] = {}
         if self.model.function_entry_aliases:

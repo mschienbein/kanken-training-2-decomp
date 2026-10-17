@@ -7,7 +7,7 @@ I2-eligible, call-ABI instruction, at least one input in r0-r3 materialised in t
 straight-line words, and the linker's as-if-call test after the site. Exclude instructions any
 eligible original callee can produce under I3. Author overlap is deliberately literal: mismatch
 rows in */RESULT.json whose text contains the case-insensitive substring 'inlin'.
-Bounded-switch CFG recovery requires explicit v4/v5 selection; the default keeps the frozen
+Bounded-switch CFG recovery requires explicit v4/v6 selection; the default keeps the frozen
 original context policy. The output records the selected model and never grants credit.
 """
 from __future__ import annotations
