@@ -36,11 +36,17 @@ scratch directory, then `match.Context.compare`, using the frozen
 removed when finished. No oracle or linker behavior is changed. Unknown symbols, unsupported
 relocations and compiler failures invalidate a candidate; they never count as a match.
 
-The score sums aligned instruction-token edits (4-byte ARM words, 2-byte Thumb halfwords),
-changed bytes and a size penalty. It is a search heuristic, not a match percentage. **Zero
-requires the oracle's exact MATCH status and exact catalogue extent for every target**;
-EXTENT is always nonzero. Output summaries contain counts, offsets and linker rewrite rule
-counts, never original bytes, instruction text, packets, or rewrite encodings.
+The score remains `instruction_changes * 16 + aligned_changed_bytes + abs(size_delta) * 8`.
+Instruction-token edits align 4-byte ARM words or 2-byte Thumb halfwords;
+`aligned_changed_bytes` counts byte edits within those aligned edit hunks. It is a search
+heuristic, not a match percentage. Separately, `changed_bytes` compares bytes at the same
+offset over the catalogue extent and counts every extra or missing candidate byte once.
+Thus moved instructions can give different aligned and positional byte counts without
+changing the candidate or its score. Older search records called the aligned component
+`changed_bytes`; those immutable records do not contain a positional byte count.
+**Zero requires the oracle's exact MATCH status and exact catalogue extent for every
+target**; EXTENT is always nonzero. Output summaries contain counts, offsets and linker
+rewrite rule counts, never original bytes, instruction text, packets, or rewrite encodings.
 
 Workers hill-climb independently, accept neutral plateaus, and restart randomly or after
 stagnation. Ordered multiprocessing rounds make proposals, scoring decisions and tie-breaking
@@ -99,8 +105,8 @@ new floating temporaries.
 The module tests reparsing, target-only edits, overlapping function names, prepared/raw
 offset separation, multiline macros and continued comments with LF/CRLF, approved
 extension headers, clean C++ refusal, safety guards, deterministic hill-climbing and
-bounded multiprocessing, synthetic real-compiler mutations/scoring, and optional native
-execution comparisons.
+bounded multiprocessing, distinct aligned/positional byte counts (including unequal
+extents), synthetic real-compiler mutations/scoring, and optional native execution comparisons.
 Compiler tests skip without the pinned compiler/launcher; image tests
 also skip without private `orig/code.bin` and `orig/exheader.bin`. All temporary artifacts stay
 in `scratch/`; no full build or full test suite is required.

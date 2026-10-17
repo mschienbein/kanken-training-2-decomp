@@ -685,14 +685,15 @@ def score_rows(rows: list[dict], targets: tuple[str, ...], functions: dict[int, 
         width = 4 if functions[row["address"]]["isa"] == "arm" else 2
         left = [original[i:i + width] for i in range(0, len(original), width)]
         right = [candidate[i:i + width] for i in range(0, len(candidate), width)]
-        changes, byte_changes = 0, 0
+        changes, aligned_byte_changes = 0, 0
         for tag, a, b, c, d in difflib.SequenceMatcher(None, left, right, autojunk=False).get_opcodes():
             if tag != "equal":
                 changes += max(b - a, d - c)
                 x, y = b"".join(left[a:b]), b"".join(right[c:d])
-                byte_changes += sum(p != q for p, q in zip(x, y)) + abs(len(x) - len(y))
+                aligned_byte_changes += sum(p != q for p, q in zip(x, y)) + abs(len(x) - len(y))
         delta = len(candidate) - row["size"]
-        score = changes * 16 + byte_changes + abs(delta) * 8
+        byte_changes = sum(p != q for p, q in zip(original, candidate)) + abs(delta)
+        score = changes * 16 + aligned_byte_changes + abs(delta) * 8
         if row["status"] != "match":
             score = max(1, score)
         elif score:
@@ -701,7 +702,8 @@ def score_rows(rows: list[dict], targets: tuple[str, ...], functions: dict[int, 
         summaries.append({
             "name": name, "score": score, "status": row["status"], "address": row["address"],
             "size": row["size"], "candidate_size": len(candidate), "size_delta": delta,
-            "instruction_changes": changes, "changed_bytes": byte_changes, "first_diff": row["first_diff"],
+            "instruction_changes": changes, "aligned_changed_bytes": aligned_byte_changes,
+            "changed_bytes": byte_changes, "first_diff": row["first_diff"],
             # Rewrite encodings and original instructions must never enter output records.
             "linker_rewrites": dict(Counter(w["rule"] for w in row.get("linker_rewrites", []))),
         })
