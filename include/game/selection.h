@@ -8,6 +8,9 @@ struct SelectionState {
     unsigned char reserved00[0x52];
     short selection;
     short mode;
+    unsigned char reserved56[2];
+    short attempts;
+    short successes;
 };
 
 struct W6ListItem {
@@ -27,9 +30,9 @@ struct W6ListGroup {
 
 struct W6ListController {
     unsigned reserved00[8]; /* retain four-byte prefix alignment in C and C++ */
-#ifndef __cplusplus
-    struct W6ListGroup *lists[];
-#endif
+    struct W6ListGroup *lists[20];
+    unsigned char reserved70[4];
+    unsigned char refreshing;
 };
 
 struct W6CategoryItem {
@@ -45,6 +48,7 @@ struct W6Category {
 };
 
 struct W6Selector;
+struct W6HandlePanel10;
 struct W6SelectionScreen {
     unsigned char reserved00[0x4c];
     struct W6ListController *list;
@@ -97,9 +101,14 @@ extern void func_00174210(struct W6Selector *selector, int resource);
 extern void func_001780c4(struct W6ListController *controller, int list, int item, int enabled);
 extern int func_00178144(void);
 extern void func_00178e98(struct W6ListController *controller, int index);
+extern int func_00178f84(struct W6ListController *controller, int index);
 extern int func_00179148(void);
 extern int func_001795bc(void);
 extern void func_001e8934(struct W6ListController *controller, int index);
+extern void func_001e9950(struct W6ListController *controller);
+extern void func_00179600(struct W6ListController *controller, int index, int active);
+extern void func_001e9818(void *screen, int index, int first, int second);
+extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
 #ifdef __cplusplus
 }
 #endif

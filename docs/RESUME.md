@@ -10,7 +10,7 @@ denominator v7; gates v1.10. Host: WSL2 Ubuntu on the Windows desktop
 into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pushes through
 `gh auth setup-git`.
 
-Restart sequence (accepted now: 489 functions / 19,288 B, seq 5 c005-r2; gates v1.13; profiles game/sdk/middleware):
+Restart sequence (accepted now: 870 functions / 50,012 B, seq 6 c006-r3; denominator v8; gates v1.13; profiles game/sdk/middleware):
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules

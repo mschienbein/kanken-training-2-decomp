@@ -1,13 +1,6 @@
-struct SharedMemory {
-    unsigned reserved00[2];
-    unsigned size;
-    unsigned char reserved0c[0x74];
-    unsigned char memory[];
-};
-
-extern struct SharedMemory *data_00242d88;
+#include "game/shared_memory.h"
 
 unsigned char *func_0019dc04(void)
 {
-    return data_00242d88 ? data_00242d88->memory : 0;
+    return data_00242d88.address ? data_00242d88.address->memory : 0;
 }

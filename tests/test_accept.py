@@ -11,6 +11,8 @@ from tests.test_build import HAVE_COMPILER, SyntheticBuildFixture
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import accept  # noqa: E402
+import image  # noqa: E402
+import inplace  # noqa: E402
 
 PATHS = ("ROOT", "MATCHES", "HISTORY", "ACCEPT", "PROFILES", "CATALOGUE")
 
@@ -162,16 +164,19 @@ class AcceptGateTest(unittest.TestCase):
         self.review("PASS_WITH_QUALIFICATIONS", row="QUALIFIED", qualifications=["preserved original bug"])
         self.assertEqual(accept.finalize("c001", 1)["reviews"][0]["verdict"], "PASS_WITH_QUALIFICATIONS")
 
-    def stubbed_prepare(self, name, units):
+    def stubbed_prepare(self, name, units, literal_models=("none", "none"), literal_rebindings=()):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
         receipt = {"name": "x", "result": "PASS", "outputs": {"code_bin_sha256": "x"},
                    "inputs": {"linker_model": "armlink5-inline-branchnop-v2"},
-                   "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []}}
-                             for u in units],
+                   "units": [{"source": u["source"], "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []},
+                              "literal_rebindings": list(literal_rebindings)} for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
+        models = iter(literal_models)
         stubs = {
-            "build": types.SimpleNamespace(build=lambda *a, **k: dict(receipt), BuildError=RuntimeError),
+            "build": types.SimpleNamespace(
+                build=lambda *a, **k: {**receipt, "inputs": {**receipt["inputs"], "literal_model": next(models)}},
+                BuildError=RuntimeError),
             "denominator": types.SimpleNamespace(verify=lambda: None, read_history=lambda: [{}]),
             "interfaces": types.SimpleNamespace(
                 audit=lambda units, root: {"units": [], "disagreements": [], "policy": []},
@@ -206,6 +211,31 @@ class AcceptGateTest(unittest.TestCase):
         # Gates v1.8: the linker model and every emulated rewrite in new units are recorded.
         self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v2")
         self.assertEqual(record["linker_rewrites"], {"func_00100000": [{"kind": "inline_nop"}]})
+        self.assertEqual(record["literal_model"], "none")
+        self.assertEqual(record["literal_rebindings"], {})
+
+    def test_two_builds_must_use_the_same_literal_model(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c011", units, ("none", "anonymous-string-records-v1"))
+        self.assertEqual(record["result"], "FAIL")
+        self.assertFalse(record["checks"]["builds_identical"])
+
+    def test_prepare_records_independent_literal_model_and_rebindings(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        rebindings = [{"rule": "anonymous-string-records-v1", "record_count": 3, "size": 46}]
+        record = self.stubbed_prepare("c012", units, ("anonymous-string-records-v1",) * 2, rebindings)
+        self.assertEqual(record["result"], "PASS")
+        self.assertEqual(record["linker_model"], "armlink5-inline-branchnop-v2")
+        self.assertEqual(record["literal_model"], "anonymous-string-records-v1")
+        self.assertEqual(record["literal_rebindings"], {"src/a.c": rebindings})
+
+    def test_finalize_preserves_the_independent_literal_model(self):
+        path = self.root / "accept/c001/prepare.json"
+        record = json.loads(path.read_text())
+        record["literal_model"] = "anonymous-string-records-v1"
+        path.write_text(json.dumps(record), encoding="utf-8")
+        self.review()
+        self.assertEqual(accept.finalize("c001", 1)["literal_model"], "anonymous-string-records-v1")
 
     def test_revised_accepted_unit_must_be_reviewed_again(self):
         """Editing an accepted source in a later checkpoint needs review rows like new work."""
@@ -415,6 +445,50 @@ class RehomeGateTest(SyntheticBuildFixture, unittest.TestCase):
         self.assertTrue(all("defined by both" in b["error"] for b in record["builds"]))
         with self.assertRaisesRegex(accept.AcceptError, "prepare is FAIL"):
             accept.finalize("c101", 1)
+
+    def test_conflicting_comdat_definition_in_old_unit_fails_prepare_without_changing_history(self):
+        name = "_Z1fILi1EEiv"
+        template = "template<int x> int f(void) { return x; }\ntemplate int f<1>(void);\n"
+        retained = 'extern "C" int func_00100010(void) { return 2; }\n'
+        names = {name: {"address": 0x100000}}
+        self.write_source("config/names.json", json.dumps(names))
+        with patch.object(image, "load_names", return_value=names):
+            self.write_source("src/a.cpp", template + retained)
+            initial = self.unit("src/a.cpp", "func_00100000", "func_00100010")
+            self.assertEqual(self.prepare_checkpoint("c100", [initial])["result"], "PASS")
+            self.finalize_checkpoint("c100")
+            canonical = {path: path.read_bytes() for path in (accept.MATCHES, accept.HISTORY)}
+            historical = {p.name: p.read_bytes() for p in (self.root / "accept/c100").glob("*.json")}
+
+            self.write_source("src/a.cpp", template.replace("return x;", "return x + 3;") + retained)
+            self.write_source("src/native.cpp", template)
+            move = {"function": "func_00100000", "from": "src/a.cpp", "to": "src/native.cpp"}
+            record = self.prepare_checkpoint("c101", [self.unit("src/native.cpp", "func_00100000")], [move])
+            self.assertEqual(record["result"], "FAIL")
+            self.assertEqual(len(record["builds"]), 2)
+            for receipt in record["builds"]:
+                self.assertEqual(receipt["result"], "FAIL")
+                self.assertIn("func_00100000: defined by both", receipt["error"])
+
+            # Reproduce the reviewer's real-compiler bypass: same COMDAT key, conflicting old
+            # bytes, and a byte-exact destination. Neither credit subtraction nor coalescing
+            # may hide the stale old definition.
+            sections = []
+            for source in ("a", "native"):
+                obj = inplace.ObjectFile(self.root / f"build/c101-a/obj/src/{source}.o")
+                symbol = next(sym for sym in obj.defined_functions() if sym.name == name)
+                section = obj.sections[symbol.shndx]
+                self.assertEqual(section.comdat, name)
+                sections.append(section)
+            expected = self.image.read(0x100000, 8)
+            self.assertNotEqual(sections[0].data, sections[1].data)
+            self.assertNotEqual(sections[0].data, expected)
+            self.assertEqual(sections[1].data, expected)
+            with self.assertRaisesRegex(accept.AcceptError, "prepare is FAIL"):
+                accept.finalize("c101", 1)
+            for path, contents in canonical.items():
+                self.assertEqual(path.read_bytes(), contents)
+            self.assertEqual({p.name: p.read_bytes() for p in (self.root / "accept/c100").glob("*.json")}, historical)
 
     def test_changed_moved_function_fails_prepare_without_changing_ledger(self):
         self.accept_initial_units()

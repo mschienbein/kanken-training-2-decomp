@@ -6,7 +6,9 @@ Refuses to run unless config/catalogue.json is the recorded denominator (tools/d
 For every unit in config/matches.json (or --matches): compile it under its profile and link it in
 place. Each credited function must be an ordinary catalogued function (never a veneer), must be
 produced as a section of exactly its catalogued size, and must equal the original on its own
-before it is written into the output image; sections placed by different units may never overlap.
+before it is written into the output image. Its credited unit must be its sole emitted defining
+unit, including weak/COMDAT definitions and names-overlay aliases. Sections placed by different
+units may never overlap.
 The output must equal orig/code.bin, and re-compressing it must reproduce the stored ExeFS
 `.code` exactly. Everything goes into build/<name>/ (exclusive: an existing name is refused) with
 receipt.json binding every input hash, including the harness sources, and the linker model
@@ -68,7 +70,8 @@ def compile_units(units: list[dict], profiles: dict, out: Path, fresh: bool, job
 
 
 def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: int | None = None,
-          linker_model: str = inplace.DEFAULT_LINKER_MODEL) -> dict:
+          linker_model: str = inplace.DEFAULT_LINKER_MODEL,
+          literal_model: str = inplace.DEFAULT_LITERAL_MODEL) -> dict:
     out = ROOT / "build" / name
     try:
         out.mkdir(parents=True, exist_ok=False)
@@ -85,7 +88,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     functions = image_mod.functions_by_address(catalogue)
     names = image_mod.load_names()
     resolver = inplace.Resolver(functions, names)
-    linker = inplace.InPlaceLinker(image, functions, resolver, image.bss, linker_model)
+    linker = inplace.InPlaceLinker(image, functions, resolver, image.bss, linker_model, literal_model)
     matches = json.loads(matches_path.read_text(encoding="utf-8"))
     profiles = toolchain.load_profiles()
     hits = compile_units(matches["units"], profiles, out, fresh, jobs or os.cpu_count() or 1)
@@ -94,20 +97,46 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     credited: dict[int, str] = {}
     mismatched: list[str] = []
     occupied: list[tuple[int, int, str, tuple[str, str] | None]] = []  # sections placed by all units
-    definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
-    units = []
+    claims: dict[int, str] = {}
     for unit in matches["units"]:
-        src = ROOT / unit["source"]
-        profile = profiles[unit["profile"]]
-        obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
-        objfile = inplace.ObjectFile(obj)
-        linked = linker.link(objfile)
+        for fname in unit["functions"]:
+            address = resolver.resolve(fname).address
+            if address in claims:
+                raise BuildError(f"{fname}: credited by both {claims[address]} and {unit['source']}")
+            claims[address] = unit["source"]
+    definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
+    function_definitions: dict[int, str] = {}  # credited stable identity -> emitted defining unit
+    objects = [inplace.ObjectFile(out / "obj" / Path(unit["source"]).with_suffix(".o")) for unit in matches["units"]]
+    # Inspect the original objects before combining/linking can coalesce COMDAT copies. Removing
+    # an old credit claim must never hide an emitted body, even under another bound symbol name.
+    for unit, objfile in zip(matches["units"], objects):
+        for sym in objfile.symbols:
+            if sym.kind not in ("STT_FUNC", "STT_OBJECT", "STT_NOTYPE") or sym.shndx not in objfile.sections:
+                continue
+            target = resolver.lookup(sym.name)
+            if target is None or target.address not in claims:
+                continue
+            previous = function_definitions.get(target.address)
+            if previous is not None and previous != unit["source"]:
+                raise BuildError(f"func_{target.address:08x}: defined by both {previous} and {unit['source']}")
+            function_definitions[target.address] = unit["source"]
         for sym in objfile.defined_globals():
             if objfile.sections[sym.shndx].comdat:
-                continue  # one entity; its single address is enforced by reject_overlaps
+                continue  # unrelated COMDAT identities retain the existing overlap rules
             if sym.name in definitions:
                 raise BuildError(f"{sym.name}: defined by both {definitions[sym.name]} and {unit['source']}")
             definitions[sym.name] = unit["source"]
+    for address, source in function_definitions.items():
+        if source != claims[address]:
+            raise BuildError(f"func_{address:08x}: defined by {source}, not credited owner {claims[address]}")
+    combined = inplace.ObjectFile.combine(objects, [unit["source"] for unit in matches["units"]])
+    all_linked = linker.link(combined)
+    units = []
+    for owner, unit in enumerate(matches["units"]):
+        src = ROOT / unit["source"]
+        profile = profiles[unit["profile"]]
+        obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
+        linked = {index: value for index, value in all_linked.items() if combined.section_owners[index] == owner}
         occupied += [
             (p.base, p.base + p.section.size, f"{unit['source']}:{p.section.name}", inplace.comdat_key(p.section))
             for p, _ in linked.values() if p.section.size
@@ -142,6 +171,9 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
             "functions": sorted(unit["functions"]), "cache_hit": hits[unit["source"]],
             "linker_rewrites": rewrites,
+            "literal_rebindings": [row for row in linker.literal_rebindings
+                                   if combined.section_owners[row["section_index"]] == owner],
+            "removed_callees": [row for row in linker.removed_callees if row["object"] == unit["source"]],
         })
     try:
         inplace.reject_overlaps(occupied)
@@ -176,6 +208,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "exheader_sha256": sha256_file(ROOT / "orig/exheader.bin"),
             "harness_sha256": {p: sha256_file(ROOT / p) for p in HARNESS},
             "linker_model": linker.model.name,
+            "literal_model": linker.literal_model,
             "compilers": {c: sha256_file(toolchain.armcc_exe(c)) for c in used},
         },
         "units": units,
@@ -210,9 +243,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--jobs", type=int, help="parallel compiles (default: CPU count)")
     parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
                         help="armlink output optimisations reproduced by the in-place link (docs/LINKER.md)")
+    parser.add_argument("--literal-model", default=inplace.DEFAULT_LITERAL_MODEL, choices=inplace.LITERAL_MODELS,
+                        help="independent anonymous string placement rule; default off (docs/LINKER.md)")
     args = parser.parse_args(argv)
     try:
-        receipt = build(args.name, args.matches, args.fresh, args.jobs, args.linker_model)
+        receipt = build(args.name, args.matches, args.fresh, args.jobs, args.linker_model, args.literal_model)
     except (BuildError, inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2

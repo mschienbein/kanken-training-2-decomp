@@ -107,7 +107,10 @@ Integrator HOWTO:
    Collection does not edit old accepted sources and still reports refused units independently.
 3. Commit the source/candidate changes and use the ordinary prepare → independent review →
    finalize workflow. Both fresh builds recompile the whole proposed ledger and byte-check each
-   moved function in its new context. Definitions left in two compiled units fail the build.
+   moved function in its new context. Each credited identity must have exactly one emitted
+   defining unit, its ledger owner: a remaining definition in an old or unrelated unit fails
+   even if it is weak, inline/COMDAT, byte-identical, or spelled via a names-overlay alias.
+   Uncredited COMDAT identities retain the existing duplicate/section-placement rules.
 4. Review all functions in new/revised units, including moved functions, retained functions in an
    edited old unit, and retained functions in an existing destination. Check each old/new owner
    and the deletion of empty sources. A removed definition is covered by its destination row,
