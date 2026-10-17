@@ -6,9 +6,10 @@
 All input units are preprocessed sequentially with their ledger profile (otherwise
 `game`), the toolchain launcher, and exactly compile_source's default include paths.
 This tool never compiles/replaces a matching object. C++ units get only a token-level
-check that every class/struct/union defined in several units is defined identically (the
-one-definition rule); their declarations and const writes are unchecked, and
---allow-unchecked-cpp waives only that limitation, not C parsing/preprocess errors or ODR.
+class/struct/union ODR check, keyed by namespace, enclosing class and template
+specialization (unnamed namespaces are unit-local), plus the shared-header policies.
+Their declaration types and const writes are unchecked; --allow-unchecked-cpp waives
+only that limitation, not C parsing/preprocess errors or ODR.
 
 Type comparison is intentionally strict: qualifiers and explicit/unspecified array
 bounds are retained, including on parameters; typedefs and integer constant bounds
@@ -49,7 +50,7 @@ import toolchain  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 BOUND = re.compile(r"(?:func|data|bss)_[0-9a-fA-F]{8}\Z")
 COVERAGE = {
-    "cpp": "class-definition agreement across units and project headers (ODR, token-level), no forward declaration of a header-defined class name without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+    "cpp": "qualified class-definition agreement across units and project headers (ODR, token-level; namespaces, enclosing classes and template specializations; unnamed namespaces unit-local), no forward declaration of a header-defined qualified class without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
     "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
     "not_covered": [
         "whole-program/heap alias analysis and pointer arithmetic",
@@ -782,26 +783,140 @@ def unique_sites(sites: list[dict]) -> list[dict]:
     return [json.loads(s) for s in sorted({json.dumps(site, sort_keys=True) for site in sites})]
 
 
-CPP_CLASS = re.compile(r"^[ \t]*(?:struct|class|union)[ \t]+(\w+)[^;{]*\{", re.M)
 CPP_COMMENT = re.compile(r"//[^\n]*|/\*.*?\*/", re.S)
+CPP_DIRECTIVE = re.compile(r"^[ \t]*#(?:[^\n\\]|\\[^\n]|\\\n)*", re.M)
+CPP_TOKEN = re.compile(
+    r"::|\.\.\.|->\*|\.\*|<<=|>>=|<<|>>|->|\+\+|--|&&|\|\||"
+    r"[+\-*/%&|^!=<>]=|" + TOKEN.pattern, re.S,
+)
+CPP_IDENTIFIER = re.compile(r"[A-Za-z_]\w*\Z")
 
 
-def cpp_class_definitions(text: str) -> list[tuple[str, str, int]]:
-    """(name, token-normalised definition, line) for each class/struct/union definition in C++
-    source text. Comments are blanked (keeping line numbers) and whitespace collapsed, so two
-    definitions compare equal exactly when their token sequences agree, as the one-definition rule
-    requires of a class defined in several translation units."""
-    text = CPP_COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
+@dataclass(frozen=True)
+class CppClass:
+    name: str
+    body: str | None
+    line: int
+    unit_local: bool
+
+
+def cpp_class_declarations(text: str, source: str) -> list[CppClass]:
+    """Read class definitions/forwards by qualified, token-level identity.
+
+    Template parameter lists are not declarations of classes; only a class-head's
+    specialization arguments become part of its name. Aliases do not introduce class
+    identities. This is a scope scanner, not C++ name lookup or template substitution.
+    """
+    text = CPP_DIRECTIVE.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
+    tokens = [m for m in CPP_TOKEN.finditer(text) if not m[0].startswith(("//", "/*"))]
+    words = [m[0] for m in tokens]
+    pairs, stack = {}, []
+    for i, word in enumerate(words):
+        if word in ("(", "[", "{"):
+            stack.append(i)
+        elif word in (")", "]", "}") and stack and words[stack[-1]] == {")": "(", "]": "[", "}": "{"}[word]:
+            pairs[stack.pop()] = i
     found = []
-    for m in CPP_CLASS.finditer(text):
-        depth, i = 0, m.end() - 1
-        while i < len(text):
-            depth += {"{": 1, "}": -1}.get(text[i], 0)
+
+    def angle_end(start: int, end: int) -> int:
+        depth, i = 1, start + 1
+        while i < end:
+            word = words[i]
+            if word in ("(", "[", "{") and i in pairs:
+                i = pairs[i] + 1
+                continue
+            depth += {"<": 1, ">": -1, ">>": -2}.get(word, 0)
+            if depth <= 0:
+                return i + 1
             i += 1
-            if depth == 0:
+        return end
+
+    def spelling(start: int, end: int) -> str:
+        # Whitespace between identifiers is significant; whitespace at punctuation is not.
+        return "".join(
+            (" " if i > start and re.match(r"\w", words[i - 1][-1]) and re.match(r"\w", word) else "") + word
+            for i, word in enumerate(words[start:end], start)
+        )
+
+    def qualified(start: int, end: int) -> tuple[tuple[str, ...], int, bool]:
+        absolute = start < end and words[start] == "::"
+        i, names = start + int(absolute), []
+        while i < end and CPP_IDENTIFIER.fullmatch(words[i]):
+            begin, i = i, i + 1
+            if i < end and words[i] == "<":
+                i = angle_end(i, end)
+            names.append(spelling(begin, i))
+            if i >= end or words[i] != "::":
                 break
-        body = " ".join(text[m.start():i].split())
-        found.append((m.group(1), body, text.count("\n", 0, m.start()) + 1))
+            i += 1
+            if i < end and words[i] == "template":
+                i += 1
+        return tuple(names), i, absolute
+
+    def scan(start: int, end: int, scope: tuple[str, ...], local: bool = False) -> None:
+        i = start
+        while i < end:
+            begin = i
+            while i + 1 < end and words[i] == "template" and words[i + 1] == "<":
+                i = angle_end(i + 1, end)
+            if i >= end:
+                break
+            word = words[i]
+            if word == "namespace":
+                names, j, _ = qualified(i + 1, end)
+                if j < end and words[j] == "{" and j in pairs:
+                    scan(j + 1, pairs[j], scope + (names or ("(anonymous)",)), local or not names)
+                    i = pairs[j] + 1
+                    continue
+            elif word == "extern" and i + 2 < end and words[i + 1] == '"C"' and words[i + 2] == "{":
+                j = i + 2
+                if j in pairs:
+                    scan(j + 1, pairs[j], scope, local)
+                    i = pairs[j] + 1
+                    continue
+            elif word in ("using", "friend", "enum") or (word == "template" and begin == i):
+                # Aliases, friend references, scoped enums and explicit instantiations
+                # do not define class identities. Skip their bodies/parameter lists too.
+                while i < end and words[i] != ";":
+                    if words[i] == "{" and i in pairs:
+                        i = pairs[i] + 1
+                        break
+                    i = pairs[i] + 1 if i in pairs else i + 1
+                if i < end and words[i] == ";":
+                    i += 1
+                continue
+            elif word in ("class", "struct", "union"):
+                names, j, absolute = qualified(i + 1, end)
+                if j < end and words[j] == "final":
+                    j += 1
+                if j < end and words[j] == ":":
+                    j += 1
+                    while j < end and words[j] not in ("{", ";"):
+                        j = pairs[j] + 1 if j in pairs else j + 1
+                if names and j < end and words[j] in ("{", ";"):
+                    identity = "::".join((() if absolute else scope) + names)
+                    line = text.count("\n", 0, tokens[i].start()) + 1
+                    if words[j] == "{" and j in pairs:
+                        close = pairs[j]
+                        found.append(CppClass(identity, " ".join(words[begin:close + 1]), line, local))
+                        scan(j + 1, close, (() if absolute else scope) + names, local)
+                        i = close + 1
+                        continue
+                    if words[j] == ";":
+                        found.append(CppClass(identity, None, line, local))
+                        i = j + 1
+                        continue
+            if word == "{" and i in pairs:
+                # Function/block-local and unnamed-class members are not project-wide
+                # identities. Include the origin so separate local scopes cannot collide.
+                scan(i + 1, pairs[i], scope + (f"(block@{source}:{tokens[i].start()})",), True)
+                i = pairs[i] + 1
+            elif word in ("(", "[") and i in pairs:
+                i = pairs[i] + 1
+            else:
+                i += 1
+
+    scan(0, len(words), ())
     return found
 
 
@@ -815,8 +930,7 @@ def cpp_extern_declarations(text: str) -> list[tuple[str, int]]:
     return [(m.group(1), text.count("\n", 0, m.start()) + 1) for m in CPP_EXTERN_C.finditer(text)]
 
 
-CPP_FORWARD = re.compile(r"^[ \t]*(?:struct|class|union)[ \t]+(\w+)[ \t]*;", re.M)
-PROJECT_INCLUDE = re.compile(r'^[ \t]*#[ \t]*include[ \t]*"([^"]+)"', re.M)
+PROJECT_INCLUDE = re.compile(r'^[ \t]*#[ \t]*include[ \t]*[<"]([^>"]+)[>"]', re.M)
 
 
 def project_headers(root: Path) -> dict[str, str]:
@@ -833,7 +947,7 @@ def project_headers(root: Path) -> dict[str, str]:
 
 
 def included_headers(text: str, headers: dict[str, str]) -> set[str]:
-    """Project headers reached from `text` by quoted includes (transitively)."""
+    """Project headers reached from `text` by quoted or angle includes (transitively)."""
     seen, pending = set(), list(PROJECT_INCLUDE.findall(text))
     while pending:
         name = pending.pop()
@@ -851,19 +965,25 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
     report = {"schema_version": 1, "units": [], "disagreements": [], "policy": [], "unchecked": [], "coverage": COVERAGE}
     declarations: dict[str, list[Declaration]] = {}
     records: dict[tuple[str, str], list[tuple[Record, Analyzer]]] = {}
-    cpp_classes: dict[str, list[tuple[str, dict]]] = {}
+    cpp_classes: dict[tuple[str, str | None], list[tuple[str, dict]]] = {}
     cpp_externs: dict[str, list[dict]] = {}
-    # Class/struct/union names are one project-wide namespace: every definition in a project header
-    # takes part in the ODR comparison, and a C++ unit may not forward-declare a header-defined
-    # name without including that header (two different objects sharing a name).
+    # Named class identities include namespaces, enclosing classes and specialization
+    # arguments. Header definitions in unnamed namespaces instead belong to each
+    # including C++ unit, never to one project-wide anonymous namespace.
     headers = project_headers(root)
     header_defined: dict[str, list[tuple[str, dict]]] = {}
+    local_header_classes: dict[str, list[tuple[CppClass, dict]]] = {}
     for header, text in headers.items():
         display = header if header.startswith("src/") else f"include/{header}"
-        for name, body, line in cpp_class_definitions(text):
-            site = {"source": display, "line": line, "type": "class definition (header)"}
-            header_defined.setdefault(name, []).append((header, site))
-            cpp_classes.setdefault(name, []).append((body, site))
+        for decl in cpp_class_declarations(text, display):
+            if decl.body is None:
+                continue
+            site = {"source": display, "line": decl.line, "type": "class definition (header)"}
+            if decl.unit_local:
+                local_header_classes.setdefault(header, []).append((decl, site))
+            else:
+                header_defined.setdefault(decl.name, []).append((header, site))
+                cpp_classes.setdefault((decl.name, None), []).append((decl.body, site))
     for unit in units:  # Intentionally sequential: armcc runs on a shared laptop.
         source = display_path(unit.source, root)
         entry = {"source": source, "sha256": None, "checked": False}
@@ -876,16 +996,20 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
                     line = text.count("\n", 0, token.start()) + 1
                     raise InterfaceError(f"leftover INTEGRATOR: marker comment at line {line}")
             if unit.source.suffix.lower() == ".cpp":
-                for name, body, line in cpp_class_definitions(text):
-                    cpp_classes.setdefault(name, []).append((body, {"source": source, "line": line, "type": "class definition"}))
                 reached = included_headers(text, headers)
-                stripped = CPP_COMMENT.sub(lambda m: re.sub(r"[^\n]", " ", m.group()), text)
-                for m in CPP_FORWARD.finditer(stripped):
-                    defining = header_defined.get(m.group(1), [])
-                    if defining and not any(header in reached for header, _ in defining):
-                        site = {"source": source, "line": stripped.count("\n", 0, m.start()) + 1, "type": "forward declaration without the defining header"}
-                        report["disagreements"].append({"name": f"class {m.group(1)}", "kind": "type-name",
-                                                        "sites": unique_sites([site] + [s for _, s in defining])})
+                for header in sorted(reached & local_header_classes.keys()):
+                    for decl, site in local_header_classes[header]:
+                        cpp_classes.setdefault((decl.name, source), []).append((decl.body, site))
+                for decl in cpp_class_declarations(text, source):
+                    if decl.body is not None:
+                        key = (decl.name, source if decl.unit_local else None)
+                        cpp_classes.setdefault(key, []).append((decl.body, {"source": source, "line": decl.line, "type": "class definition"}))
+                    elif not decl.unit_local:
+                        defining = header_defined.get(decl.name, [])
+                        if defining and not any(header in reached for header, _ in defining):
+                            site = {"source": source, "line": decl.line, "type": "forward declaration without the defining header"}
+                            report["disagreements"].append({"name": f"class {decl.name}", "kind": "type-name",
+                                                            "sites": unique_sites([site] + [s for _, s in defining])})
                 for name, line in cpp_extern_declarations(text):
                     cpp_externs.setdefault(name, []).append({"source": source, "line": line, "type": 'local extern "C" declaration'})
                 report["unchecked"].append({"source": source, "kind": "cpp", "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked"})
@@ -926,7 +1050,7 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
                 site["type"] = f"{' '.join(record.attrs)} {kind} {name} {{ {members} }}".strip()
                 sites.append(site)
             report["disagreements"].append({"name": f"{kind} {name}", "kind": "layout", "sites": unique_sites(sites)})
-    for name, definitions in sorted(cpp_classes.items()):
+    for (name, _), definitions in sorted(cpp_classes.items(), key=lambda item: (item[0][0], item[0][1] or "")):
         if len({body for body, _ in definitions}) > 1:
             report["disagreements"].append({"name": f"class {name}", "kind": "odr", "sites": unique_sites([site for _, site in definitions])})
     # C++ declarations are not type-checked, so a symbol shared with any other unit must come from
