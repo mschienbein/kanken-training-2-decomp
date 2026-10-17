@@ -1238,6 +1238,50 @@ class JumpTableContextTest(unittest.TestCase):
                 self.assertEqual(self.context(caller), "unresolved_control_flow")
 
 
+class BoundedSwitchEffectsTest(unittest.TestCase):
+    """Effect proofs use an explicit decoder-class/encoding allowlist, never absent writes."""
+
+    def test_every_decoder_instruction_class_is_allowlisted_or_refused(self):
+        classes = {value for name, value in vars(inplace.cs_arm).items()
+                   if name.startswith("ARM_INS_") and isinstance(value, int)}
+        self.assertTrue(inplace._ARM_SWITCH_MODELED_IDS <= classes)
+        self.assertTrue(classes - inplace._ARM_SWITCH_MODELED_IDS)
+        for instruction_id in classes:
+            with self.subTest(instruction_id=instruction_id):
+                if instruction_id not in inplace._ARM_SWITCH_MODELED_IDS:
+                    opaque = SimpleNamespace(id=instruction_id)  # no access metadata or bytes to guess from
+                    self.assertIsNone(inplace._arm_switch_effects(opaque))
+                    self.assertTrue(inplace._arm_may_change(opaque, inplace.cs_arm.ARM_REG_R2))
+                    self.assertEqual(inplace._arm_call_flow(opaque, bounded_switches=True), "unknown")
+                invalid = SimpleNamespace(id=instruction_id, bytes=struct.pack("<I", 0xFFFFFFFF))
+                self.assertIsNone(inplace._arm_switch_effects(invalid))
+                self.assertTrue(inplace._arm_may_change(invalid, inplace.cs_arm.ARM_REG_R2))
+
+    def test_modeled_destinations_and_flags_do_not_depend_on_decoder_write_lists(self):
+        # Independent non-ROM A32 encodings; R2 is the prospective bounded table index.
+        cases = (
+            (0xE1A02002, {2}, False), (0x11A02002, {2}, False), (0xE2504000, {4}, True),
+            (0xE5902000, {2}, False), (0xE4920004, {0, 2}, False),
+            (0xE1C020D0, {2, 3}, False), (0xE1E200F8, {2}, False),
+            (0xE8B0000C, {0, 2, 3}, False), (0xE8B20003, {0, 1, 2}, False),
+            (0xE8BD8010, {4, 13, 15}, False),
+            (0xE0020190, {2}, False), (0xE0832190, {2, 3}, False),
+            (0xEE102A10, {2}, False), (0xEC532B10, {2, 3}, False),
+            (0xEEF12A10, {2}, False), (0xEEF1FA10, set(), True),
+            (0xEE002A10, set(), False), (0xED920A00, set(), False),
+            (0xED2D8B04, {13}, False), (0xECBD8B04, {13}, False),
+            (0xE320F000, set(), False),
+        )
+        for word, registers, flags in cases:
+            with self.subTest(word=word):
+                insn = next(inplace._ARM.disasm(struct.pack("<I", word), BASE, 1), None)
+                self.assertIsNotNone(insn)
+                opaque = SimpleNamespace(id=insn.id, bytes=insn.bytes)  # regs_access/groups/update_flags absent
+                expected = frozenset(inplace._ARM_NUMBERED[index] for index in registers), flags
+                self.assertEqual(inplace._arm_switch_effects(opaque), expected)
+                self.assertEqual(inplace._arm_may_change(opaque, inplace.cs_arm.ARM_REG_R2), 2 in registers or flags)
+
+
 class BoundedSwitchModelTest(unittest.TestCase):
     """Public compiler-free linker consumers: v4 is explicit and endian changes fail closed."""
 
@@ -1321,6 +1365,38 @@ class BoundedSwitchModelTest(unittest.TestCase):
 
     def test_unreachable_state_changes_also_require_an_unimplemented_proof(self):
         self.assert_refused(self.fixture(suffix=(self.SETEND_BE,)))
+
+    def test_exclusive_and_coprocessor_destinations_cannot_bypass_guard(self):
+        for name, word in (("LDREXD", 0xE1B02F9F), ("LDREXDLO", 0x31B02F9F), ("MRRC", 0xEC532F00)):
+            for form in ("words", "branches"):
+                with self.subTest(name=name, form=form):
+                    self.assert_refused(self.fixture(form, window=(word,)))
+
+    def test_modeled_load_destinations_and_writeback_cannot_change_index(self):
+        for word in (0xE1C020D0, 0x31C020D0, 0xE8B0000C, 0xE8B20003, 0xE4920004, 0xE1E200F8,
+                     0xEE102A10, 0xEC532B10, 0xEEF12A10):
+            for form in ("words", "branches"):
+                with self.subTest(word=word, form=form):
+                    self.assert_refused(self.fixture(form, window=(word,)))
+
+    def test_rfe_forms_refuse_every_state_path_placement(self):
+        for frame_register in (4, 13):
+            for word in (0xF8BD0A00, 0xF83D0A00, 0xF93D0A00, 0xF9BD0A00):
+                word = (word & ~0xF0000) | (frame_register << 16)
+                insn = next(inplace._ARM.disasm(struct.pack("<I", word), BASE, 1))
+                self.assertIsNone(inplace._arm_switch_effects(insn))
+                self.assertEqual(inplace._arm_call_flow(insn, bounded_switches=True), "unknown")
+                branch = JumpTableContextTest.branch(BASE + 4, BASE + 12, 0x1)
+                placements = {
+                    "window": {"window": (word,)},
+                    "before_compare": {"compare": word, "window": (JumpTableContextTest.CMP_R2_3,)},
+                    "one_predecessor": {"compare": branch, "window": (word, JumpTableContextTest.CMP_R2_3)},
+                    "unreachable": {"suffix": (word,)},
+                }
+                for form in ("words", "branches"):
+                    for placement, kwargs in placements.items():
+                        with self.subTest(frame_register=frame_register, word=word, form=form, placement=placement):
+                            self.assert_refused(self.fixture(form, **kwargs))
 
     def test_frozen_models_keep_their_policy_payload_and_return_classification(self):
         for name, flags in (("strict-v1", (False, False, False, False)),

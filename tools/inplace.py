@@ -145,19 +145,26 @@ _ARM_RESULTS = frozenset((cs_arm.ARM_REG_R0, cs_arm.ARM_REG_R1))
 
 
 def _arm_call_flow(insn, *, bounded_switches: bool = False) -> str:
-    """R1 flow classification; v4 tightens returns without reinterpreting frozen v3."""
+    """R1 flow classification; v4 models effects without reinterpreting frozen v3."""
+    if bounded_switches:
+        effects = _arm_switch_effects(insn)
+        if effects is None:
+            return "unknown"
+        if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
+            return "call"
+        if insn.id == cs_arm.ARM_INS_B:
+            return "branch"
+        word = _arm_word(insn)
+        if (word & 0x0FFFFFFF in (0x012FFF1E, 0x01A0F00E)
+                or word & 0x0FFF8000 == 0x08BD8000):
+            return "return"
+        return "unknown" if cs_arm.ARM_REG_PC in effects[0] else "other"
     if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
         return "call"
     if insn.id == cs_arm.ARM_INS_B and insn.operands[0].type == cs_arm.ARM_OP_IMM:
         return "branch"
     read, written = map(set, insn.regs_access())
-    if bounded_switches:
-        word = struct.unpack("<I", insn.bytes)[0]
-        if word >> 28 != 0xF and (
-                word & 0x0FFFFFFF in (0x012FFF1E, 0x01A0F00E)  # BX lr / MOV pc, lr
-                or word & 0x0FFF8000 == 0x08BD8000):  # LDMIA sp!, {..., pc} / POP
-            return "return"
-    elif (CS_GRP_RET in insn.groups
+    if (CS_GRP_RET in insn.groups
             or insn.id == cs_arm.ARM_INS_BX and insn.operands[0].reg == cs_arm.ARM_REG_LR
             or cs_arm.ARM_REG_PC in written and (
                 cs_arm.ARM_REG_LR in read or insn.id == cs_arm.ARM_INS_POP
@@ -195,6 +202,199 @@ _SWITCH_ENCODINGS = {0x079FF100: "words", 0x008FF100: "branches"}
 _SWITCH_EXTRA_ENTRIES = {0x3: 0, 0x9: 1}  # condition field -> entries beyond N
 _SWITCH_BASE = 8  # the PC reads as the writer + 8: entry 0 is two words after the writer
 
+# Explicit ARM instruction classes whose core-register/NZCV/processor-state effects are modeled.
+# Membership is necessary, not sufficient: each encoding below is also validated. Decoder
+# regs_access/update_flags/groups are deliberately NOT evidence for either switch proof.
+_ARM_SWITCH_DP_OPS = {
+    getattr(cs_arm, "ARM_INS_" + name): (opcode,)
+    for opcode, name in enumerate(("AND", "EOR", "SUB", "RSB", "ADD", "ADC", "SBC", "RSC",
+                                  "TST", "TEQ", "CMP", "CMN", "ORR", "MOV", "BIC", "MVN"))
+}
+_ARM_SWITCH_DP_OPS.update({getattr(cs_arm, "ARM_INS_" + name): (13,)
+                           for name in ("ASR", "LSL", "LSR", "ROR", "RRX")})
+_ARM_SWITCH_DP_OPS[cs_arm.ARM_INS_ADR] = (2, 4)
+_ARM_SWITCH_SINGLE_MEMORY = {
+    cs_arm.ARM_INS_LDR: (1, 0), cs_arm.ARM_INS_STR: (0, 0),
+    cs_arm.ARM_INS_LDRB: (1, 1), cs_arm.ARM_INS_STRB: (0, 1),
+}
+_ARM_SWITCH_EXTRA_MEMORY = {
+    cs_arm.ARM_INS_LDRH: (1, 1), cs_arm.ARM_INS_STRH: (0, 1),
+    cs_arm.ARM_INS_LDRSB: (1, 2), cs_arm.ARM_INS_LDRSH: (1, 3),
+    cs_arm.ARM_INS_LDRD: (0, 2), cs_arm.ARM_INS_STRD: (0, 3),
+}
+_ARM_SWITCH_MULTI_MEMORY = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "PUSH", "POP", "LDM", "LDMDA", "LDMDB", "LDMIB", "STM", "STMDA", "STMDB", "STMIB"))
+_ARM_SWITCH_VFP_DATA = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "VABS", "VADD", "VCMP", "VCMPE", "VCVT", "VCVTR", "VDIV", "VMLA", "VMLS",
+    "VMUL", "VNEG", "VNMLA", "VNMLS", "VNMUL", "VSQRT", "VSUB"))
+_ARM_SWITCH_VFP_MEMORY = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "VLDR", "VSTR", "VPUSH", "VPOP", "VLDMIA", "VLDMDB", "VSTMIA", "VSTMDB"))
+_ARM_SWITCH_MULTIPLY = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "MUL", "MLA", "UMULL", "UMLAL", "SMULL", "SMLAL"))
+_ARM_SWITCH_CONTROL = frozenset((cs_arm.ARM_INS_B, cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX, cs_arm.ARM_INS_BX))
+_ARM_SWITCH_HINTS = frozenset((cs_arm.ARM_INS_NOP, cs_arm.ARM_INS_HINT))
+_ARM_SWITCH_MODELED_IDS = frozenset(_ARM_SWITCH_DP_OPS) | frozenset(_ARM_SWITCH_SINGLE_MEMORY) | frozenset(
+    _ARM_SWITCH_EXTRA_MEMORY) | _ARM_SWITCH_MULTI_MEMORY | _ARM_SWITCH_VFP_DATA | _ARM_SWITCH_VFP_MEMORY | (
+    _ARM_SWITCH_MULTIPLY | _ARM_SWITCH_CONTROL | _ARM_SWITCH_HINTS
+    | {cs_arm.ARM_INS_VMOV, cs_arm.ARM_INS_VMRS, cs_arm.ARM_INS_FMSTAT})
+
+
+def _arm_switch_effects(insn) -> tuple[frozenset[int], bool] | None:
+    """Complete possible core writes and NZCV writes for allowed A32 classes; None is refusal.
+
+    Only validated, ordinary encodings with known processor-state effects are admitted.
+    In particular, no exception return, status restore, coprocessor/exclusive instruction
+    or unknown/new decoder class is inferred harmless from an empty decoder access list.
+    VFP data/FP-status writes do not change core registers, CPSR.NZCV or CPSR.E; VMOV/VMRS
+    core transfers and scalar/multiple load/writeback destinations are decoded explicitly.
+    Calls retain the existing LE entry/ABI-conforming-return contract, not a callee-state proof.
+    """
+    if insn.id not in _ARM_SWITCH_MODELED_IDS:
+        return None
+    word = _arm_word(insn)
+    condition, rn, rd = word >> 28, (word >> 16) & 15, (word >> 12) & 15
+    written = set()
+    flags = False
+    if insn.id in _ARM_SWITCH_CONTROL:
+        if (word >> 25) & 7 == 5:
+            if (condition == 15) != (insn.id == cs_arm.ARM_INS_BLX):
+                return None
+            if condition != 15 and bool(word & (1 << 24)) != (insn.id == cs_arm.ARM_INS_BL):
+                return None
+        elif (condition == 15 or insn.id not in (cs_arm.ARM_INS_BX, cs_arm.ARM_INS_BLX)
+              or word & 0x0FFFFFF0 != (0x012FFF30 if insn.id == cs_arm.ARM_INS_BLX else 0x012FFF10)
+              or word & 15 == 15):
+            return None
+        written.add(cs_arm.ARM_REG_PC)
+        if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
+            written.add(cs_arm.ARM_REG_LR)
+    elif condition == 15:
+        return None  # unconditional system/exception/NEON encodings are not ordinary A32
+    elif insn.id in _ARM_SWITCH_HINTS:
+        if word & 0x0FFFFFFF != 0x0320F000:
+            return None  # only the compiler's actual NOP, not arbitrary hints
+    elif insn.id in _ARM_SWITCH_DP_OPS:
+        opcode = (word >> 21) & 15
+        if (word & 0x0C000000 or opcode not in _ARM_SWITCH_DP_OPS[insn.id]
+                or not word & (1 << 25) and word & (1 << 4)):
+            return None
+        flags = bool(word & (1 << 20))
+        if 8 <= opcode <= 11:
+            if not flags or rd:
+                return None
+        else:
+            if rd == 15 and (flags or not (
+                    word & 0x0FFFFFFF == 0x01A0F00E
+                    or word & 0x0FFFFFF0 == 0x008FF100 and condition in _SWITCH_EXTRA_ENTRIES)):
+                return None
+            written.add(_ARM_NUMBERED[rd])
+    elif insn.id in _ARM_SWITCH_SINGLE_MEMORY or insn.id in _ARM_SWITCH_EXTRA_MEMORY:
+        if insn.id in _ARM_SWITCH_SINGLE_MEMORY:
+            if (word & 0x0C000000 != 0x04000000
+                    or word & (1 << 25) and (word & (1 << 4) or word & 15 == 15)
+                    or ((word >> 20) & 1, (word >> 22) & 1) != _ARM_SWITCH_SINGLE_MEMORY[insn.id]):
+                return None
+        elif (word & 0x0E000090 != 0x00000090
+              or ((word >> 20) & 1, (word >> 5) & 3) != _ARM_SWITCH_EXTRA_MEMORY[insn.id]
+              or not word & (1 << 22) and (word & 0xF00 or word & 15 == 15)):
+            return None
+        double = insn.id in (cs_arm.ARM_INS_LDRD, cs_arm.ARM_INS_STRD)
+        if double and (rd & 1 or rd > 12):
+            return None
+        load = bool(word & (1 << 20)) or insn.id == cs_arm.ARM_INS_LDRD
+        destinations = {rd, rd + 1} if double else {rd}
+        if not load and rd == 15 and insn.id != cs_arm.ARM_INS_STR:
+            return None
+        if load:
+            if rd == 15 and not (
+                    insn.id == cs_arm.ARM_INS_LDR and word & 0x0FFFFFF0 == 0x079FF100
+                    and condition in _SWITCH_EXTRA_ENTRIES):
+                return None
+            written.update(_ARM_NUMBERED[register] for register in destinations)
+        if not word & (1 << 24) or word & (1 << 21):
+            if rn == 15 or rn in destinations:
+                return None  # reserved/unpredictable writeback is not a preservation proof
+            written.add(_ARM_NUMBERED[rn])
+    elif insn.id in _ARM_SWITCH_MULTI_MEMORY:
+        registers = word & 0xFFFF
+        if (word & 0x0E000000 != 0x08000000 or word & (1 << 22) or not registers or rn == 15
+                or word & (1 << 21) and registers & (1 << rn)):
+            return None
+        if word & (1 << 20):
+            if registers & (1 << 15) and word & 0x0FFF8000 != 0x08BD8000:
+                return None  # only the ordinary SP-based POP return, never CPSR-restoring LDM
+            written.update(_ARM_NUMBERED[register] for register in range(16) if registers & (1 << register))
+        if word & (1 << 21):
+            written.add(_ARM_NUMBERED[rn])
+    elif insn.id in _ARM_SWITCH_MULTIPLY:
+        if insn.id in (cs_arm.ARM_INS_MUL, cs_arm.ARM_INS_MLA):
+            if word & 0x0FC000F0 != 0x00000090 or bool(word & (1 << 21)) != (insn.id == cs_arm.ARM_INS_MLA):
+                return None
+            if (insn.id == cs_arm.ARM_INS_MUL and rd
+                    or insn.id == cs_arm.ARM_INS_MLA and rd in (13, 15)):
+                return None
+            destinations = {rn}
+        else:
+            if word & 0x0F8000F0 != 0x00800090 or rn == rd:
+                return None
+            destinations = {rn, rd}
+        if destinations & {13, 15} or (word & 15) in (13, 15) or ((word >> 8) & 15) in (13, 15):
+            return None
+        written.update(_ARM_NUMBERED[register] for register in destinations)
+        flags = bool(word & (1 << 20))
+    elif insn.id in _ARM_SWITCH_VFP_MEMORY:
+        if word & 0x0E000E00 != 0x0C000A00:
+            return None
+        pre, up, writeback, load = ((word >> bit) & 1 for bit in (24, 23, 21, 20))
+        if insn.id in (cs_arm.ARM_INS_VLDR, cs_arm.ARM_INS_VSTR):
+            if not pre or writeback or load != (insn.id == cs_arm.ARM_INS_VLDR):
+                return None
+        else:
+            decrement = insn.id in (cs_arm.ARM_INS_VPUSH, cs_arm.ARM_INS_VLDMDB, cs_arm.ARM_INS_VSTMDB)
+            loading = insn.id in (cs_arm.ARM_INS_VPOP, cs_arm.ARM_INS_VLDMIA, cs_arm.ARM_INS_VLDMDB)
+            if (pre != decrement or up == decrement or load != loading or rn == 15
+                    or decrement and not writeback
+                    or insn.id in (cs_arm.ARM_INS_VPUSH, cs_arm.ARM_INS_VPOP) and (rn != 13 or not writeback)):
+                return None
+            count = word & 0xFF
+            double = bool(word & (1 << 8))
+            first = rd + (((word >> 22) & 1) << 4) if double else rd * 2 + ((word >> 22) & 1)
+            if (not count or double and count & 1
+                    or first + (count // 2 if double else count) > (16 if double else 32)):
+                return None
+        if word & (1 << 21):
+            if rn == 15:
+                return None
+            written.add(_ARM_NUMBERED[rn])
+    elif insn.id in (cs_arm.ARM_INS_VMRS, cs_arm.ARM_INS_FMSTAT):
+        if word & 0x0FFF0FFF != 0x0EF10A10 or insn.id == cs_arm.ARM_INS_FMSTAT and rd != 15:
+            return None  # only FPSCR, not an arbitrary processor/system-register transfer
+        if rd == 15:
+            flags = True
+        else:
+            written.add(_ARM_NUMBERED[rd])
+    elif insn.id == cs_arm.ARM_INS_VMOV:
+        if word & 0x0F000E10 == 0x0E000A00:
+            pass  # VFP register/immediate data move: no core destination or CPSR update
+        elif word & 0x0FE00F7F == 0x0E000A10:
+            if rd in (13, 15):
+                return None
+            if word & (1 << 20):
+                written.add(_ARM_NUMBERED[rd])
+        elif word & 0x0FE00EF0 == 0x0C400A10:
+            if rn in (13, 15) or rd in (13, 15) or rn == rd:
+                return None
+            if word & (1 << 20):
+                written.update((_ARM_NUMBERED[rn], _ARM_NUMBERED[rd]))
+        else:
+            return None
+    elif insn.id in _ARM_SWITCH_VFP_DATA:
+        if word & 0x0F000E10 != 0x0E000A00:
+            return None
+    else:
+        return None
+    return frozenset(written), flags
+
 
 def _arm_word(insn) -> int:
     return struct.unpack("<I", insn.bytes)[0]
@@ -212,11 +412,9 @@ def _arm_compare_bound(insn) -> tuple[int, int] | None:
 
 
 def _arm_may_change(insn, register: int) -> bool:
-    """May `insn` change `register` or NZCV? Include explicit flag-update metadata and
-    system/VFP flag transfers; register access lists alone do not prove flag preservation."""
-    written = set(insn.regs_access()[1])
-    return bool(register in written or cs_arm.ARM_REG_CPSR in written or insn.update_flags
-                or insn.mnemonic.startswith(("msr", "mrc", "vmrs", "fmstat")))
+    """An unmodeled instruction is never evidence that the index or NZCV is preserved."""
+    effects = _arm_switch_effects(insn)
+    return effects is None or register in effects[0] or effects[1]
 
 
 def _arm_switch_guard(instructions: dict, flows: dict, writer: int, index: int) -> tuple[int, int] | None:
@@ -237,13 +435,6 @@ def _arm_switch_guard(instructions: dict, flows: dict, writer: int, index: int) 
             return None
 
 
-def _arm_changes_data_endianness(insn) -> bool:
-    """V4 uses the target's LE ABI at entries/call returns, not a guessed CPSR.E value.
-
-    Reject even unreachable state changes, SETEND LE, flag-only MSR and non-system MCR:
-    no instruction in a decoded owner may require an unimplemented endian-state proof.
-    """
-    return insn.mnemonic.startswith(("setend", "msr", "mcr", "cps"))
 
 
 def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: dict[int, int]) -> dict[int, list[int]]:
@@ -258,11 +449,11 @@ def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: 
     fall-through must be an unconditional transfer that cannot run into the table. The writer may
     be reached only by falling through from the guard: no branch, call, entry or other table
     target may land in (compare, writer]. Anything else stays unknown and the caller fails closed.
-    V4 conservatively resolves no table in an owner containing a SETEND or unresolved
-    status/system-state write, even when unreachable. Target entries and ABI-conforming
-    call returns use little-endian data; no local state-changing path is guessed away.
+    V4 resolves no table unless every decoded owner instruction has a modeled ordinary
+    processor-state effect, even when unreachable. Incomplete/unknown classes and exception
+    returns cannot establish preserved state; the target's LE entry/call ABI remains required.
     """
-    if any(_arm_changes_data_endianness(insn) for insn in instructions.values()):
+    if any(_arm_switch_effects(insn) is None for insn in instructions.values()):
         return {}
     candidates = {}
     for address, insn in instructions.items():

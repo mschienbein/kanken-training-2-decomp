@@ -472,11 +472,18 @@ source/object binding and QUALIFIED provenance requirement remains unchanged.
 The first patch (`21c2bd4`) incorrectly broadened the frozen v3 name and did not prove data
 endianness for LDR targets; its sealed independent review
 `scratch/review/r1-jumptables/REVIEW.md` is **FAIL** (F01/F02). Those reported reproductions are
-ground truth, not checks to rerun on unchanged code. The corrected implementation uses v4 and
-the revised draft `scratch/integrator/r1-jumptables/GATES-DRAFT.md`; it does not change frozen
-v1.16. Independent re-review and gate adoption must precede a new checkpoint using v4. Selection,
-both fresh receipts, prepare and history must bind v4; v3→v4 transition review reopens all
-affected R1 callers. No old checkpoint or evidence is reinterpreted.
+ground truth, not checks to rerun on unchanged code. The next patch (`e72fb34`) correctly
+separated v4 and fixed SETEND, but its sealed
+`scratch/review/r1-jumptables-r2/REVIEW.md` is **FAIL**: F03 exposes omitted LDREXD/MRRC writes;
+F04 exposes unmodeled RFE PC/CPSR restoration. The r3 correction replaces permissive access
+metadata and a state-changing mnemonic denylist with explicit class/encoding effect models.
+V4 is still unadopted, so its identifier stays v4; strict/v2/v3 remain frozen.
+
+The revised draft `scratch/integrator/r1-jumptables/GATES-DRAFT.md` does not change frozen
+v1.16. Adoption must wait until `c008-r2` finalizes, followed by passing independent
+implementation/exact-text re-review and a recorded revision before a new prepare. Selection,
+both fresh receipts, prepare and history bind v4; transitions reopen all affected R1 callers.
+No old checkpoint or evidence is reinterpreted.
 
 ### Exact recognized patterns
 
@@ -494,13 +501,16 @@ There must be at least one entry and every required slot must be present. No ung
 register bound, signed/other predicate, different base, alternate scale, writeback, subtractive
 index or arbitrary computed PC write is resolved.
 
-Between the compare and the writer, every word must be contiguous decoded ordinary caller code,
-with no call/control transfer, possible index write or flag update. Conditional writes count as
-possible writes. Explicit flag-update metadata and system/VFP flag transfers are checked as well
-as register-access metadata. No catalogue entry, direct B/BL/BLX target or target of **any**
-otherwise-resolvable table may enter after the compare through the writer. Branching back to the
-compare is allowed because it repeats the bound. Unresolved reachable control flow elsewhere in
-the caller still refuses R1; a recognized table does not excuse another indirect transfer.
+Between the compare and the writer, every word must be contiguous, modeled ordinary caller
+code, with no control transfer or possible index/NZCV write. Conditional writes are possible
+writes. `_arm_switch_effects` admits only an explicit instruction-ID allowlist **and validated
+A32 encoding**; it derives core destinations, load pairs/register lists, base writeback and
+NZCV changes from instruction fields, never from `regs_access`, `update_flags` or decoder
+control-flow groups. An absent write list is not preservation evidence. Generic coprocessor/
+exclusive instructions and all other unmodeled classes are refused rather than presumed safe.
+No catalogue entry, direct B/BL/BLX target or target of any otherwise-resolvable table may enter
+after the compare through the writer. Re-entry at the compare repeats the bound and is allowed.
+Any other reachable unresolved transfer still refuses the complete caller.
 
 Only original catalogue code ranges clipped to the owning function's complete extent supply
 instructions; pool/literal bytes never do. Address-table words likewise come only from complete
@@ -510,15 +520,27 @@ target and every branch-table entry's destination must be a decoded aligned ARM 
 this caller. Thumb, out-of-extent, data and undecoded targets are refused.
 
 For LDR tables, data interpretation must be little-endian on **every** incoming path, not just
-after a stable compare. The target's public ARM ABI uses little-endian data at function entries
-and conforming call returns. V4 conservatively resolves **no table of either form** if any
-decoded owner instruction is `SETEND`, `MSR`, `MCR`/`MCRR` (including suffixed variants), or `CPS`:
-these may require an unimplemented endian/system-state proof. This veto includes changes before
-the comparison, changes on only one predecessor, unreachable changes, `SETEND LE`, and flag-only
-MSR/non-system MCR forms. It deliberately prefers false negatives over assuming restored LE
-state. Normal index/NZCV preservation alone cannot prove address-table interpretation. Unknown
-reachable control flow still refuses the complete caller. Reviewers retain the entry/call ABI
-state contract; no interprocedural processor-state recovery is claimed.
+after a stable compare. The target's public ARM ABI uses LE data at entries and conforming call
+returns. Before resolving **either** table form, every decoded owner instruction must pass the
+same explicit class/encoding effect model—even unreachable instructions. This is an allowlist,
+not a claim that a list of suspicious mnemonic prefixes exhausts state-restoring operations.
+
+Modeled classes are ordinary integer data processing with immediate/immediate-shift operands;
+validated scalar, double and register-list loads/stores with all destinations/writeback;
+ordinary short/long multiply; scalar VFP data/memory operations, explicitly decoded VMOV core
+transfers and FPSCR-only VMRS (including its FMSTAT alias); the actual compiler NOP; and branch/call/return
+encodings. Unsupported subencodings, reserved/unpredictable combinations and unknown/new
+decoder classes are refused. CPU core/NZCV effects are modeled separately from VFP register/
+FPSCR effects. VMRS-to-APSR/FMSTAT sets NZCV; ordinary VFP data operations do not. No modeled ordinary
+instruction restores CPSR.E; calls retain the manual LE ABI-return obligation.
+
+LDREXD (including predicated forms), generic MRRC, status/system writes, all RFE variants and
+other exception returns are unmodeled: their effects return refusal, and v4 flow is unknown
+even when the decoder reports neither writes nor control groups. A known LDRD/LDM or VMOV
+pair cannot hide an index or base write: both destinations and writeback are decoded directly.
+This owner-wide rule also covers instructions before the guard, on one predecessor or
+unreachable. Conservative false negatives are intentional; no interprocedural state recovery
+or restored-LE guess is claimed.
 
 The not-taken successor at `A + 4` must be an unconditional direct branch to decoded caller code
 or a recognized ordinary return, so it cannot accidentally fall into an address table. Returns
@@ -544,28 +566,57 @@ and setter objects: it expects an address table under `game` and a branch table 
 existing `trial-504-82-O3-Ospace` profile. Positive cases require exact full caller
 bytes, two `target: null` rewrites and the helper's defining-object provenance; frozen v3 must
 still refuse these tables and v2 must refuse the unbound helper. Compiler-free
-`BoundedSwitchModelTest` uses the public linker for all ADD/LDR LO/LS selections and for SETEND
-between guard/load, state changes before the compare/on one predecessor, and unreachable state
-changes. It also fixes the frozen/new flag payloads and legacy return classification. Match,
-build and compiler-grid selector/payload tests include v4 alongside v3; acceptance tests bind
-v4 in both receipts/history and require re-review of unchanged R1 callers on a v3→v4 transition.
+`BoundedSwitchModelTest` uses the public linker for ADD/LDR LO/LS selection and all reported
+LDREXD/predicated-LDREXD/MRRC negatives, modeled load/pair/writeback index changes, and RFE
+IA/DA/DB/IB with SP/r4 frames in the window, before the guard, on one predecessor and unreachable.
+`BoundedSwitchEffectsTest` enumerates every decoder instruction ID: an unmodeled class fails
+closed even without any access metadata; every ID also refuses an invalid encoding. Independent
+encoding vectors check modeled destinations/NZCV with access metadata absent. Frozen/new model
+payload and legacy classification checks remain. Match/build/compid selectors include v4;
+acceptance tests bind both receipts/history and reopen unchanged R1 callers on v3→v4 transition.
 New build receipts also bind `tools/linker_models.py` in their harness hashes, so the registry's
 selected policy flags are input-bound; historical receipts are not rewritten. The census has
 an explicit `--linker-model` selector and enables v4's CFG only when that model is selected.
 
 Independent reviewers must re-derive the compare's decoded immediate, unsigned bound/count,
 same-index and flag preservation, entry/dominance proof, every slot and the default edge from
-the original catalogue ranges, including the little-endian entry/call contract and absence of
-unresolved state changes on every path. They must independently run positive/negative public
-consumers and five accepted-function regressions under v2, frozen v3 and selected v4, then retain
-all existing typed-contract, implicit-argument, memory-effect, preserved-bug and historical
+the original catalogue ranges, including each intervening instruction's architectural core
+writes, base writeback and NZCV effects even when decoder access sets are incomplete. They must
+re-derive the LE entry/call contract and explicit exception-return/state-restoration refusals;
+neither a missing write nor a missing flow group proves safety. Run the meta-test and public
+positive/negative consumers, plus five accepted-function regressions under v2, frozen v3 and v4;
+retain all existing typed-contract, implicit-argument, memory-effect, preserved-bug and historical
 helper-identity qualifications. Neither a clean CFG nor exact bytes prove that the original
 source contained the helper. Earlier forced-context evidence remains uncredited. This is an
 emulated in-place link, **not an execution of armlink**.
 
-### Corrected v4 focused smoke (r2)
+### Effect-allowlisted v4 focused evidence (r3)
 
-After implementation settled, the requested targeted smoke exited **0: 53 tests, OK**.
+After the class/encoding models and public/meta regressions settled, the requested focused
+smoke exited **0: 58 tests, OK**. It exercises the entire decoder-ID refusal policy, modeled
+destinations/writeback/NZCV without decoder access metadata, all reported LDREXD/MRRC and RFE
+public-consumer cases, ordinary compiled switches, frozen-model behavior and model/receipt
+selectors. The first focused run safely refused the legitimate FPSCR-to-NZCV transfer because
+Capstone names it FMSTAT rather than VMRS; that failed run and input hashes are retained.
+An explicit FPSCR-only FMSTAT effect model fixed the cause without weakening any test.
+
+The unchanged motivating sources, selected v4 and normal filter, were then exercised with
+`tools/match.py ... --profile game --linker-model armlink5-inline-branchnop-v4 --show 0
+--out scratch/out/r4052-v4-r3`: **exit 0; MATCH 2,212/2,212 B**, two `inline_insn` rewrites at
+**+0x5a8 / +0x6bc**, both `target: null`, and one 8-byte `bind_content` removed. The receipt is
+`scratch/out/r4052-v4-r3/func_001ab680_removed_setter.result.json`. Both source/object hashes and
+all seven/six recorded transitive header hashes agree with the exact compiler-cache inputs.
+
+Exact commands, both focused attempts, exits, input/receipt hashes and source closure are in
+`scratch/integrator/r1-jumptables/r3/verification.json`; fifteen fresh accepted-function command
+vectors and the Main full-suite command are in the adjacent `regression-commands.json`.
+The worker ran no full suite/build, accepted-function regression, prepare/finalize or adoption.
+Prior F03/F04 counterexamples were not rerun on unchanged old code. New independent
+implementation/exact-text review remains required; this is not armlink execution or credit.
+
+### Historical failed-r2 focused smoke (`e72fb34`)
+
+Before F03/F04 were corrected, its targeted smoke exited **0: 53 tests, OK**.
 It includes public v4/frozen-v3 table consumers, endian-state negatives, compiled switch
 fixtures, legacy ABI/ordinary-helper behavior, match/build/compid CLI/model payloads and
 v3→v4 acceptance transition/receipt/history binding. It is not the full suite or a full build.
@@ -589,11 +640,11 @@ unchanged sources, both compiled objects and all seven/six recorded header depen
 which agree with the exact compiler-cache inputs. No override or armlink execution was used.
 This is a private qualified candidate, not gate adoption or accepted credit.
 
-Main must run the full suite and fifteen accepted-function matches (the existing five functions,
-each under v2/v3/v4); exact new command vectors are in
-`scratch/integrator/r1-jumptables/r2/regression-commands.json`. Prior 652-test/ten-match evidence
-is retained only for the failed snapshot. A new independent implementation/text review is
-required before any v4 adoption; frozen `docs/GATES.md` remains unchanged.
+Main subsequently supplied **661 tests, 1 skipped, zero failed modules**, plus all fifteen
+exact accepted-function regressions for r2, as recorded in its sealed review. Those results
+are historical evidence for `e72fb34`, not verification of r3. The r2 command vectors and
+records remain unchanged under `scratch/integrator/r1-jumptables/r2/`. New r3 evidence/commands
+use `scratch/integrator/r1-jumptables/r3/`; independent re-review and adoption remain required.
 
 ### Historical failed-revision r4052 measurement (`21c2bd4`)
 
