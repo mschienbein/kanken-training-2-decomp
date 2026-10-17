@@ -18,10 +18,19 @@ typedef void (*ServiceNotifyCallback)(void *context);
 typedef int (*ServiceMessageCallback)(void *context, unsigned applet_id,
     int signal, void *buffer, unsigned capacity, unsigned size, CtrHandle handle);
 
+/* The poll consumer walks this context-taking notification list at state +4. */
+struct ServiceCallbackNode {
+    struct ServiceCallbackNode *previous;
+    struct ServiceCallbackNode *next;
+    ServiceNotifyCallback callback;
+    void *context;
+};
+
 struct ServiceCallbacks {
-    int (*request)(void *context, unsigned request, unsigned state);
-    void (*message)(void *context, unsigned kind, void **payload);
-    void (*receive)(void *context, unsigned kind, void *data, unsigned size, int result);
+    int (*request)(void *context, int pending, unsigned char mode);
+    void (*message)(void *context, unsigned short command, CtrHandle *reply_handle);
+    void (*receive)(void *context, unsigned applet_id, const void *data,
+                    unsigned size, CtrHandle handle);
     ServiceNotifyCallback begin;
     ServiceNotifyCallback end;
     ServicePollCallback poll;
@@ -32,14 +41,17 @@ struct ServiceCallbacks {
     ServiceNotifyCallback complete;
     ServiceNotifyCallback reserved_callback;
     ServiceNotifyCallback ready;
-    ServiceNotifyCallback callback13;
-    unsigned reserved38;
+    /* func_00115000 invokes both slots; the second is an indirect tail call. */
+    ServiceNotifyCallback before;
+    ServiceNotifyCallback after;
     ServiceMessageCallback shutdown;
 };
 
 struct ServiceCallbackState {
     signed char status;
-    unsigned char reserved01[0x0b];
+    unsigned char reserved01[3];
+    struct ServiceCallbackNode *notifications;
+    unsigned reserved08;
     struct ServiceCallbacks callbacks;
     void *contexts[16];
 };
