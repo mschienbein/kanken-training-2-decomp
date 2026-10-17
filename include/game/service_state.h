@@ -41,7 +41,7 @@ struct ServiceState {
     unsigned char reserved0e[6];
     unsigned applet_id;
     volatile unsigned state;
-};;
+};
 
 struct PendingState {
     unsigned char reserved00;

@@ -1,6 +1,6 @@
 #include "game/layout.h"
 
-extern void func_001c5978(struct PaneStyle *style, unsigned direction);
+#include "game/layout_draw.h"
 
 void func_001c5970(struct Pane *pane, unsigned direction)
 {

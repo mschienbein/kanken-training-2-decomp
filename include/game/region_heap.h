@@ -43,7 +43,7 @@ struct HeapStorage {
     int initialize(void *memory, unsigned size);
     void clear();
 #endif
-};;
+};
 
 struct RegionHeapOwner {
     const void *vtable;

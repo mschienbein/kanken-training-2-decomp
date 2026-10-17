@@ -11,7 +11,6 @@ struct StreamMutex;
 #include "ctr/svc.h"
 #include "game/synchronization.h"
 typedef void (*LifecycleCallback)(void);
-struct ResourceServiceLock;
 struct ResourceServiceEvent;
 
 /* Callback pending and resource busy are distinct fields of this state object. */
@@ -49,7 +48,7 @@ struct ServiceOutput {
     int consumed_samples;
     unsigned char reserved34[0x18];
     int selected;
-};;
+};
 struct ServiceWorker {
     long long elapsed;
     unsigned char timed;
@@ -89,7 +88,7 @@ struct ServiceCoordinator {
     unsigned extra;
     unsigned char reserved132c[0x15b0 - 0x132c];
     unsigned char publish;
-};;
+};
 struct HandleManager {
     unsigned char reserved00[0x18];
     int selected;
@@ -114,7 +113,7 @@ extern struct ServiceOutput bss_004b5234;
 extern struct ServiceCoordinator bss_004b5284;
 extern struct HandleManager bss_004b6888;
 extern void func_0012fbd4(struct ResourceServiceEvent *event);
-extern void func_0012e620(struct ResourceServiceLock *lock);
+extern void func_0012e620(struct StreamCriticalSection *lock);
 extern int func_0012e854(LifecycleCallback first, LifecycleCallback second,
     LifecycleCallback third);
 extern void func_0013e84c(void);

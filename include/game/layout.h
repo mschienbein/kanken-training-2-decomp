@@ -3,14 +3,14 @@
 
 #include "game/matrix.h"
 
-struct PaneStyle;
+struct AudioChannelState;
 struct Pane {
     unsigned char reserved00[5];
     unsigned char alignment;
     unsigned char reserved06[0x12];
     int extent;
     unsigned char reserved1c[0x4c];
-    struct PaneStyle *style;
+    struct AudioChannelState *style;
 };
 
 struct LayoutAnimationTransform;
@@ -56,8 +56,9 @@ extern void func_0016b5fc(struct LayoutAnimationList *list,
 extern struct LayoutAnimationLink *func_001cff58(
     const struct LayoutAnimationList *list,
     const struct LayoutAnimationTransform *animation);
-extern void func_001c5930(struct PaneStyle *style, int extent);
+extern void func_001c5930(struct AudioChannelState *style, int extent);
 extern void func_001c59fc(struct Pane *pane, unsigned alignment);
+extern void func_001c5a08(struct AudioChannelState *style, unsigned alignment);
 #ifdef __cplusplus
 }
 #endif

@@ -34,7 +34,7 @@ struct SoundInstance {
     unsigned char reservedcc[0x3c];
     struct PoolLink player_link;
     struct PoolLink selection_link;
-};;
+};
 
 struct SoundFileGroup {
     struct PoolList playing;
@@ -97,7 +97,7 @@ struct SoundPlaybackState {
 #ifdef __cplusplus
     SoundPlaybackState();
 #endif
-};;
+};
 
 struct SequenceSound {
     unsigned char reserved00[0x118];

@@ -30,7 +30,7 @@ struct SceneEngine {
 #ifdef __cplusplus
     ~SceneEngine();
 #endif
-};;
+};
 
 struct ObjectPool;
 struct ResourceCallbackState { unsigned state, completion; };

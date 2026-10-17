@@ -39,7 +39,7 @@ struct ResourceTable {
     void *secondSheets;
     uintptr_t secondResource;
     int secondIndex;
-};;
+};
 
 struct Entry {
     int id;

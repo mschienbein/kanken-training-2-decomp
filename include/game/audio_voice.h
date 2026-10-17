@@ -79,7 +79,7 @@ struct AudioChannelState {
     unsigned char flag6f;
     unsigned char reserved70[0x0c];
     struct AdpcmCoefficients coefficients;
-};;
+};
 
 struct AudioChannel {
     unsigned char reserved00[0x1c];
@@ -87,7 +87,7 @@ struct AudioChannel {
     unsigned char reserved20[0x44];
     float gain;
     struct AudioChannelState *state;
-};;
+};
 
 struct RecordState;
 struct AudioChannelOwner { unsigned char reserved00[0x18dc]; struct AudioChannel *channels[24]; };
@@ -120,7 +120,7 @@ struct AudioVoiceGroup {
     unsigned char format;
     unsigned char reserved51[7];
     struct PoolLink link;
-};;
+};
 
 struct AudioEnvelope {
     unsigned char state;

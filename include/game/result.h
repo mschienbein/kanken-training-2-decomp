@@ -9,7 +9,7 @@ struct Result {
     Result(unsigned code = 0) : value(code) {}
     unsigned failed() const { return value >> 31; }
 #endif
-};;
+};
 
 
 

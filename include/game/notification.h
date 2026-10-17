@@ -54,7 +54,7 @@ union NotificationStorage {
     unsigned short text[0x5ba0];
     struct NotificationFields fields;
     struct NotificationSelection selection;
-};;
+};
 
 struct NotificationPayload {
     union NotificationStorage storage;

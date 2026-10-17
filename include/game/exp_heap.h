@@ -59,7 +59,7 @@ struct StreamLockGuard {
     explicit StreamLockGuard(struct StreamMutex *value) : mutex(value) { func_00192bd8(mutex); }
     ~StreamLockGuard() { func_00195d74(mutex); }
 #endif
-};;
+};
 
 #ifdef __cplusplus
 extern "C" {

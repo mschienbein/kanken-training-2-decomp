@@ -45,14 +45,14 @@ struct W6ListController {
     unsigned char refreshing;
 };
 
-struct W6CategoryItem { int kind; short values[2][2]; };;
+struct W6CategoryItem { int kind; short values[2][2]; };
 
 struct W6Category {
     short identifier, group_count, count, value;
     struct CategoryPattern patterns[9];
     unsigned char reserved62[2];
     struct W6CategoryItem items[12];
-};;
+};
 
 struct W6Selector;
 struct W6HandlePanel10;
@@ -63,7 +63,7 @@ struct W6SelectionScreen {
     struct W6Selector *selector;
     unsigned char reserved5c[0x54];
     int selection;
-};;
+};
 
 struct GlyphRecord {
     unsigned reserved00[7];

@@ -26,7 +26,7 @@ struct AudioTaskManager {
     struct StreamMutex lock;
     struct StreamQueue queue;
     struct StreamEvent *storage[32];
-};;
+};
 struct AudioWorkItem;
 struct AudioWorkRequest {
     const void *type;

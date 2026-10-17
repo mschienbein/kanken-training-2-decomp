@@ -8,7 +8,12 @@ struct DisplayBuffer {
 
 struct GraphicsContext {
     unsigned char reserved00[0x5c];
-    struct DisplayBuffer *buffers[];        /* 0x5c; count not known */
+#ifdef __cplusplus
+    /* Trailing-storage view, not an inferred capacity or complete object size. */
+    struct DisplayBuffer *buffers[1];        /* 0x5c; count not known */
+#else
+    struct DisplayBuffer *buffers[];         /* 0x5c; count not known */
+#endif
 };
 
 struct GraphicsMutex { unsigned handle; };
