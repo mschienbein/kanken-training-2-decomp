@@ -9,9 +9,10 @@ sources, match receipts and worktrees; do not discard or repeat completed work.
 
 For this resumed run, the earlier session-only Sonnet fallback is not reinstated. Runtime
 inspection found `modelRoles.subagent = openai-codex/gpt-6.1-sol:max` and an empty
-`retry.fallbackChains`. Every new task also supplies the explicit Codex max selector. If Codex
-is unavailable, preserve the interrupted state and report the limitation rather than switch
-providers without a new user instruction.
+`retry.fallbackChains`. All bundled agent types route through that explicit subagent role.
+The task API rejects a per-task `model` field for non-seance agents, so the verified role
+assignment supplies the selector. If Codex is unavailable, preserve the interrupted state and
+report the limitation rather than switch providers without a new user instruction.
 
 This supersedes the fallback routing in `2026-10-17-subagent-model-fallback.md` for the resumed
 run, not the historical record of models that already produced evidence. Reviewer independence,
