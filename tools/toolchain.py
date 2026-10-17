@@ -61,10 +61,10 @@ class Profile:
     flags: tuple[str, ...]
 
 
-def load_profiles() -> dict[str, Profile]:
-    if not PROFILES.is_file():
+def load_profiles(path: Path = PROFILES) -> dict[str, Profile]:
+    if not path.is_file():
         return {}
-    data = json.loads(PROFILES.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8"))
     return {name: Profile(name, p["compiler"], tuple(p["flags"])) for name, p in data["profiles"].items()}
 
 
