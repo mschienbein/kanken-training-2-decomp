@@ -938,6 +938,86 @@ class RemovedCalleeModelTest(unittest.TestCase):
         return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names),
                                      (0x200000, 0x201000), model or self.MODEL)
 
+    def comdat_alias_fixture(self, contradictory=False, original_size=8):
+        """F01: only the second copy supplies the bound zero-size entry alias."""
+        first, mem, catalogue = self.fixture()
+        second, _, _ = self.fixture()
+        second.sections.pop(1)
+        second.symbols.pop(0)
+        first.sections[2].comdat = second.sections[2].comdat = "set_field18"
+        second.symbols.append(inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+        if contradictory:
+            second.sections[2].data = struct.pack("<I", 0xE580101C) + BX_LR
+        address = BASE + 0x100
+        catalogue[address] = {"address": address, "size": original_size, "isa": "arm"}
+        mem.write(address, second.sections[2].data + (BX_LR if original_size == 12 else b""))
+        return [first, second], mem, catalogue, {"bound_variant": {"address": address}}
+
+    def test_bound_and_removable_comdat_copies_fail_before_caller_only_linking(self):
+        for contradictory, original_size in ((True, 8), (False, 12)):
+            for reverse in (False, True):
+                with self.subTest(contradictory=contradictory, original_size=original_size, reverse=reverse):
+                    objects, mem, catalogue, names = self.comdat_alias_fixture(contradictory, original_size)
+                    labels = ["caller_and_copy.cpp", "bound_copy.cpp"]
+                    if reverse:
+                        objects.reverse()
+                        labels.reverse()
+                    linker = self.linker(mem, catalogue, names)
+                    with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
+                        linker.link(inplace.ObjectFile.combine(objects, labels))
+                    self.assertEqual(linker.removed_callees, [])
+                    self.assertEqual(linker.rewrites, [])
+
+    def test_removal_checks_even_a_comdat_copy_with_no_full_sized_function(self):
+        objects, mem, catalogue, _ = self.comdat_alias_fixture()
+        objects[1].symbols[0].size = 0
+        linker = self.linker(mem, catalogue)
+        with self.assertRaisesRegex(inplace.LinkError, "unsupported retained callee copy"):
+            linker.link(inplace.ObjectFile.combine(objects))
+        self.assertEqual(linker.removed_callees, [])
+        self.assertEqual(linker.rewrites, [])
+
+    def test_roots_through_either_alias_or_another_copy_prevent_removal(self):
+        for selector in ("set_field18", "caller_variant", "bound_variant"):
+            for alias_call in (False, True):
+                with self.subTest(selector=selector, alias_call=alias_call):
+                    objects, mem, catalogue, _ = self.comdat_alias_fixture()
+                    alias = inplace.Symbol("caller_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+                    objects[0].symbols.append(alias)
+                    if alias_call:
+                        objects[0].sections[1].relocs[-1].symbol = alias
+                    linker = inplace.InPlaceLinker(
+                        mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000),
+                        self.MODEL, retention_roots={selector: "KEEP"})
+                    with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
+                        linker.link(inplace.ObjectFile.combine(objects))
+                    self.assertEqual(linker.removed_callees, [])
+                    self.assertEqual(linker.rewrites, [])
+
+    def test_bound_zero_size_alias_keeps_v2_equality_even_when_rooted(self):
+        for model in (inplace.DEFAULT_LINKER_MODEL, self.MODEL):
+            for rooted in (False, True):
+                for original_size in (8, 12):
+                    with self.subTest(model=model, rooted=rooted, original_size=original_size):
+                        objects, mem, catalogue, names = self.comdat_alias_fixture(original_size=original_size)
+                        obj = objects[0]
+                        alias = inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+                        obj.symbols.append(alias)
+                        obj.sections[1].relocs[-1].symbol = alias
+                        if rooted:
+                            obj.sections[2].retention = ("KEEP",)
+                        linker = self.linker(mem, catalogue, names, model)
+                        if original_size == 12:
+                            with self.assertRaisesRegex(inplace.LinkError, "inlining is undecidable"):
+                                linker.link(obj)
+                            self.assertEqual(linker.rewrites, [])
+                        else:
+                            linked = linker.link(obj)
+                            self.assertEqual(linked[1][1], mem.read(BASE, 40))
+                            self.assertEqual(linked[2][1], mem.read(BASE + 0x100, original_size))
+                            self.assertEqual([row.target for row in linker.rewrites], [BASE + 0x100] * 2)
+                        self.assertEqual(linker.removed_callees, [])
+
     def test_two_setter_calls_inline_and_the_unreferenced_section_is_dropped(self):
         obj, mem, catalogue = self.fixture()
         linker = self.linker(mem, catalogue)

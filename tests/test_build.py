@@ -24,23 +24,34 @@ BASE = inplace_tests.BASE
 
 
 class BuildRemovedCalleeModelTest(unittest.TestCase):
-    def synthetic_build(self, model="armlink5-inline-branchnop-v3", retained=False, reverse=False):
+    def synthetic_build(self, model="armlink5-inline-branchnop-v3", retained=False, reverse=False,
+                        comdat_alias=None, credit_helper=False):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
-        caller, memory, functions = inplace_tests.RemovedCalleeModelTest().fixture()
-        helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
-        definition = caller.symbols.pop()
-        helper.sections, helper.symbols = {2: caller.sections.pop(2)}, [definition]
+        fixture = inplace_tests.RemovedCalleeModelTest()
+        names = {}
+        if comdat_alias is not None:
+            (caller, helper), memory, functions, names = fixture.comdat_alias_fixture(
+                contradictory=comdat_alias == "contradictory",
+                original_size=12 if comdat_alias == "wrong_original" else 8)
+            if comdat_alias == "duplicate_owner":
+                caller.symbols.append(inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+        else:
+            caller, memory, functions = fixture.fixture()
+            helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
+            definition = caller.symbols.pop()
+            helper.sections, helper.symbols = {2: caller.sections.pop(2)}, [definition]
+            external = inplace.Symbol(definition.name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+            caller.symbols.append(external)
+            for relocation in caller.sections[1].relocs:
+                relocation.symbol = external
         if retained:
             helper.sections[2].retention = ("__tagsym$$used",)
-        external = inplace.Symbol(definition.name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
-        caller.symbols.append(external)
-        for relocation in caller.sections[1].relocs:
-            relocation.symbol = external
         pairs = [
             ({"source": "src/caller.c", "profile": "game", "functions": ["func_00100000"]}, caller),
-            ({"source": "src/helper.c", "profile": "game", "functions": []}, helper),
+            ({"source": "src/helper.c", "profile": "game",
+              "functions": ["bound_variant"] if credit_helper else []}, helper),
         ]
         if reverse:
             pairs.reverse()
@@ -63,7 +74,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             path = root / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(contents)
-        memory.code = memory.read(BASE, 40)
+        memory.code = memory.read(BASE, max(address + fn["size"] for address, fn in functions.items()) - BASE)
         memory.sha256 = build.sha256_bytes(memory.code)
         memory.bss = (0x200000, 0x201000)
         memory.layout = SimpleNamespace(file_offset=lambda address: address - BASE)
@@ -93,7 +104,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             stack.enter_context(patch.object(build.denominator, "verify", return_value=None))
             stack.enter_context(patch.object(build.image_mod.Image, "load", return_value=memory))
             stack.enter_context(patch.object(build.image_mod, "load_catalogue", return_value=catalogue))
-            stack.enter_context(patch.object(build.image_mod, "load_names", return_value={}))
+            stack.enter_context(patch.object(build.image_mod, "load_names", return_value=names))
             stack.enter_context(patch.object(build, "compile_units", side_effect=compile_units))
             stack.enter_context(patch.object(build.toolchain, "load_profiles", return_value={
                 "game": toolchain.Profile("game", "synthetic", ())}))
@@ -132,6 +143,20 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
     def test_retained_helper_cannot_receive_a_successful_build_receipt(self):
         with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
             self.synthetic_build(retained=True)
+
+    def test_asymmetric_bound_comdat_alias_cannot_receive_caller_only_or_helper_credit(self):
+        for case in ("contradictory", "wrong_original"):
+            for credit_helper in (False, True):
+                for reverse in (False, True):
+                    with self.subTest(case=case, credit_helper=credit_helper, reverse=reverse):
+                        with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
+                            self.synthetic_build(comdat_alias=case, credit_helper=credit_helper, reverse=reverse)
+
+    def test_credited_zero_size_alias_requires_one_emitted_comdat_owner(self):
+        for reverse in (False, True):
+            with self.subTest(reverse=reverse):
+                with self.assertRaisesRegex(build.BuildError, "func_00100100: defined by both"):
+                    self.synthetic_build(comdat_alias="duplicate_owner", credit_helper=True, reverse=reverse)
 
 PROFILE = toolchain.Profile(
     "game", "armcc_504_82",

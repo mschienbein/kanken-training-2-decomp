@@ -55,10 +55,28 @@ For v3, R1's full-section-entry check uses only these proven identical aliases; 
 no-binding, code/ABI, call-site and all-reference checks remain unchanged. An allocated
 `.ARM.exidx` relocation to the helper is still a live reference and prevents removal.
 Global data or untyped definitions are not function aliases and prevent R1 removal.
-The acceptance-input correction is proposed for review in
-`scratch/integrator/d2-alias/GATES-DRAFT.md`; it does not adopt v3 for any checkpoint.
-Regression coverage: `CppFunctionAliasTest`, `CppAliasCompareTest`, and
-`RemovedCalleeModelTest` in `tests/test_inplace.py` / `tests/test_match.py`.
+
+Alias binding inheritance is **section-local**, not a guess about another COMDAT copy.
+Before R1 removal, every supplied copy's explicit original bindings are resolved.
+If one copy of a COMDAT member is original-bound and another would be removed, the
+entire link is refused, even when their bytes are identical. A copy with unsupported
+entry metadata or otherwise ineligible for removal also prevents partial entity removal.
+Every copy of a removed member must pass R1 and have identical complete bytes and code
+mapping. No bound identity can acquire an R1 `target: null` through a different copy.
+Roots through either entry alias, or a different copy, retain the whole COMDAT group;
+retention never waives v2's original-body equality or complete-extent comparison.
+The build's pre-link unique emitted-owner checks remain mandatory, including zero-size
+bound aliases and byte-identical credited COMDAT copies.
+
+The original proposal failed independent review (F01, sealed in
+`scratch/review/d2-alias/REVIEW.md`). The corrected acceptance-input proposal is
+`scratch/integrator/d2-alias-r2/GATES-DRAFT.md`; it grants no checkpoint credit.
+Frozen GATES v1.16 remains unchanged. Changed alias acceptance requires a new independent
+review and explicit gate revision after c008's frozen evidence is finalized and closed;
+no existing model identifier or historical artifact is silently reinterpreted here.
+Regression coverage: `CppFunctionAliasTest`, `RemovedCalleeModelTest`,
+`CppAliasCompareTest`, `AliasCompareSafetyTest`, and `BuildRemovedCalleeModelTest` in
+`tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
 
 ## Sources
 
@@ -142,6 +160,10 @@ any catalogued function and not general dead-code removal:
    name without a catalogue entry is still refused. Any binding overlapping a catalogued
    function/entry/extent takes the retained-callee path, with every v2 equality/refusal intact;
    an uncatalogued bound address is also refused, rather than treated as absent.
+   All copies' bindings are inspected before removal. A COMDAT member mixing a bound copy
+   and an R1-removable copy is refused, rather than inferring a binding or giving the other
+   copy a null-target rewrite. Every supplied copy must be eligible and consistent before
+   that member can be removed.
    It must also be unrooted: sections defining `__tagsym$$used` or another uninterpreted tag,
    ELF ARM entry/retain-marked sections, explicitly kept/first/last/entry/exported sections and
    retained COMDAT groups cannot use R1. `ObjectFile` preserves these roots, conservatively

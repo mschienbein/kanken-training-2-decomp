@@ -199,6 +199,54 @@ class CppAliasCompareTest(unittest.TestCase):
                         self.assertEqual(ctx.removed_callees, [])
 
 
+class AliasCompareSafetyTest(unittest.TestCase):
+    def test_extra_comdat_copy_cannot_hide_a_bound_alias_from_comparison(self):
+        from tests.test_inplace import RemovedCalleeModelTest
+
+        for contradictory, original_size in ((True, 8), (False, 12)):
+            with self.subTest(contradictory=contradictory, original_size=original_size):
+                objects, mem, catalogue, names = RemovedCalleeModelTest().comdat_alias_fixture(
+                    contradictory, original_size)
+                mem.bss = (0x200000, 0x201000)
+                ctx = match.Context.__new__(match.Context)
+                ctx.image, ctx.functions = mem, catalogue
+                ctx.resolver = match.inplace.Resolver(catalogue, names)
+                ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v3")
+                ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+                combine = match.inplace.ObjectFile.combine
+
+                def object_file(path):
+                    return objects[0 if path.name == "caller.o" else 1]
+
+                object_file.combine = combine
+                with patch.object(match.inplace, "ObjectFile", object_file):
+                    with self.assertRaisesRegex(match.inplace.LinkError, "mixes original-bound and removable callee copies"):
+                        ctx.compare(Path("caller.o"), [Path("bound_copy.o")])
+
+    def test_a_bound_zero_size_alias_does_not_credit_a_short_complete_section(self):
+        from tests.test_inplace import BX_LR, RemovedCalleeModelTest
+
+        obj, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR)
+        obj.sections.pop(1)
+        obj.symbols.pop(0)
+        obj.symbols.append(match.inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+        address = 0x100100
+        catalogue[address] = {"address": address, "size": 8, "isa": "arm"}
+        mem.write(address, BX_LR + BX_LR)
+        mem.bss = (0x200000, 0x201000)
+        ctx = match.Context.__new__(match.Context)
+        ctx.image, ctx.functions = mem, catalogue
+        ctx.resolver = match.inplace.Resolver(catalogue, {"bound_variant": {"address": address}})
+        ctx.model = match.inplace.linker_model(match.inplace.DEFAULT_LINKER_MODEL)
+        ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+        with patch.object(match.inplace, "ObjectFile", return_value=obj):
+            rows = ctx.compare(Path("bound_copy.o"))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual((rows[0]["name"], rows[0]["candidate_size"], rows[0]["size"], rows[0]["status"]),
+                         ("bound_variant", 4, 8, "match_extent_differs"))
+        self.assertEqual(ctx.removed_callees, [])
+
+
 class ModelOptionsTest(unittest.TestCase):
     def test_literal_option_composes_with_v3_without_changing_linker_option(self):
         profile = match.toolchain.Profile("game", "synthetic", ())

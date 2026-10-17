@@ -1074,17 +1074,20 @@ class InPlaceLinker:
             by_section.setdefault(sym.shndx, []).append(sym)
         entry_aliases = function_aliases(obj)
         non_function_globals = {sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
+        # Resolve every copy before selecting any removal. A section-local alias binding
+        # cannot turn another copy of the same COMDAT member into an unbound R1 entity.
+        bindings: dict[int, list[int]] = {}
+        for sym in obj.symbols:
+            if sym.shndx not in obj.sections or not sym.name or sym.name.startswith("$"):
+                continue
+            target = self.resolver.lookup(sym.name)
+            address = names_to_address.get(sym.name, target.address if target else None)
+            if address is not None:
+                bindings.setdefault(sym.shndx, []).append(address - _symbol_offset(sym))
         removed = {}
         for index, aliases in by_section.items():
             section = obj.sections[index]
-            bound = []
-            for sym in obj.symbols:
-                if sym.shndx != index or not sym.name or sym.name.startswith("$"):
-                    continue
-                target = self.resolver.lookup(sym.name)
-                address = names_to_address.get(sym.name, target.address if target else None)
-                if address is not None:
-                    bound.append(address - _symbol_offset(sym))
+            bound = bindings.get(index, ())
             # A binding is a claim about an extant function, not licence to erase it. Include
             # interior entries/extents, so an alias cannot disguise a catalogued counterpart.
             if any(lo < address + section.size and address < lo + fn["size"]
@@ -1115,11 +1118,17 @@ class InPlaceLinker:
             }
             if section.comdat:
                 removed[index]["comdat"] = section.comdat
+        removed_comdats = {comdat_key(obj.sections[index]) for index in removed} - {None}
         comdats = {}
-        for index in removed:
-            section = obj.sections[index]
+        for index, section in obj.sections.items():
             key = comdat_key(section)
             if key is not None:
+                if key not in removed_comdats:
+                    continue
+                if bindings.get(index):
+                    raise LinkError(f"COMDAT {key[0]} {key[1]} mixes original-bound and removable callee copies")
+                if index not in removed:
+                    raise LinkError(f"COMDAT {key[0]} {key[1]} has an unsupported retained callee copy")
                 prior = comdats.setdefault(key, section)
                 if section.data != prior.data or section.mapping != prior.mapping:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory removed-callee copies")
