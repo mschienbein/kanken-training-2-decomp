@@ -171,8 +171,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--names", type=Path,
                         help="proposed extra bindings (config/names.json schema) merged over config/names.json; "
                              "may add names, never rebind one")
+    parser.add_argument("--profiles", type=Path,
+                        help="extra trial profiles (config/compiler_profiles.json schema) for experiments; "
+                             "may add profile names, never redefine one. Credit needs a frozen profile in config/")
     args = parser.parse_args(argv)
     profiles = toolchain.load_profiles()
+    if args.profiles is not None:
+        extra = toolchain.load_profiles(args.profiles)
+        clash = sorted(n for n in extra if n in profiles and extra[n] != profiles[n])
+        if clash:
+            print(f"error: --profiles redefines frozen profiles: {', '.join(clash)}", file=sys.stderr)
+            return 2
+        profiles = {**profiles, **extra}
+        print(f"note: trial profiles from {args.profiles} (not config/compiler_profiles.json)")
     if args.profile not in profiles:
         print(f"error: unknown profile {args.profile!r}; known: {', '.join(sorted(profiles))}", file=sys.stderr)
         return 2

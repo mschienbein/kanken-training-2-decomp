@@ -6,6 +6,30 @@ Status: **frozen (gate H5, 2026-10-16).** Game code: profile **`game`** in
 `--cpu=MPCore --fpmode=fast --apcs=/interwork --arm --split_sections --signed_chars -O3 -Otime`.
 `.c` files compile as C, `.cpp` as C++ (armcc's default by suffix).
 
+## Middleware profiles (frozen 2026-10-17)
+
+CTR-SDK and middleware code was built with an older compiler than the game. Two further profiles,
+both on ARM Compiler 4.1 (archive build `armcc_41_791`) with the game's other flags:
+
+| Profile | Optimisation | Clean-source matches | Of these, fail under `game` |
+|---|---|---:|---:|
+| `sdk` | `-O2 -Otime` | 54 functions / 3,260 B | 53 |
+| `middleware` | `-O3 -Otime` | 57 functions / 3,932 B (47 SDK-looking, 4 NW4C-looking, 4 probable PUX HWR, 2 utilities) | 55 |
+
+Evidence (private study, 2026-10-17, agent ProfileProbe, OpenAI family): 352,363 compiler runs over
+14 ARMCC builds × 128 flag sets × 194 functions × 312 source hypotheses; 35 of 143 author near misses
+matched under ARMCC 4.1 and under no 5.04 setting. Natural source only (no `volatile` or scheduling
+steering): the SDK's narrow byte/halfword IPC wrappers reproduce their parameter spills only with
+address-taking marshalling (C++ `const&` helpers, a union view through `&param`, `memcpy`) compiled
+by 4.1. Build 791 is the common reproducer: NW4C-looking `0x138fe4` matches only under 4.1 b791
+`-O3 -Otime`; the eight actual 4.1 builds otherwise agree on the SDK witnesses, so b791 is a
+measured reproducer, not an authenticated original build. `-O2` vs `-O3` is per population:
+PUX HWR `0x17d67c` (556 B) matches only at `-O3`; SDK IPC wrappers `0x15a44`, `0x13e7d4`,
+`0x142644` only at `-O2`.
+
+Rule: a unit records the profile its bytes match (`profile` in the ledger); game code stays on
+`game`. A reviewer checks that a non-`game` unit is plausibly SDK/middleware code.
+
 ## Round 2 result (2026-10-16)
 
 Full evidence: `research/compid/r2/REPORT.md` (worker CompilerIdR2, OpenAI family), re-derived by

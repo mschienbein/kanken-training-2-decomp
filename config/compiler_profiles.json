@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "note": "`game` is the identified game-code profile (H5, 2026-10-16; evidence docs/COMPILER.md and research/compid/r2/REPORT.md). `trial-*` profiles are kept for historical receipts; new work uses `game`.",
+  "note": "`game` is the identified game-code profile (H5, 2026-10-16; evidence docs/COMPILER.md and research/compid/r2/REPORT.md). `trial-*` profiles are kept for historical receipts; new work uses `game`. `sdk` (ARMCC 4.1 b791 -O2 -Otime) and `middleware` (ARMCC 4.1 b791 -O3 -Otime) are frozen 2026-10-17 for CTR-SDK and middleware code (NW4C, PUX HWR) on measured evidence (docs/COMPILER.md 'Middleware profiles'); a unit uses the profile its bytes match, recorded per unit in the ledger.",
   "profiles": {
     "trial-41-1049-O3-Otime": {
       "compiler": "armcc_41_1049",
@@ -74,6 +74,32 @@
         "--fpmode=fast",
         "--apcs=/interwork",
         "--thumb",
+        "--split_sections",
+        "--signed_chars",
+        "-O3",
+        "-Otime"
+      ]
+    },
+    "sdk": {
+      "compiler": "armcc_41_791",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
+        "--split_sections",
+        "--signed_chars",
+        "-O2",
+        "-Otime"
+      ]
+    },
+    "middleware": {
+      "compiler": "armcc_41_791",
+      "flags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--arm",
         "--split_sections",
         "--signed_chars",
         "-O3",
