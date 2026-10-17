@@ -75,6 +75,20 @@ def merge_names(base: dict[str, dict], proposed: dict[str, dict]) -> dict[str, d
     return {**base, **proposed}
 
 
+class Comparison(dict):
+    """A comparison row with ordinary dict semantics and buffer-free implicit display.
+
+    Private buffers remain available through explicit key access for diffs and scoring.
+    Receipt serialization must continue to exclude private keys, independently of repr.
+    """
+
+    def __repr__(self) -> str:
+        public = {key: value for key, value in self.items() if not key.startswith("_")}
+        return f"Comparison({public!r})"
+
+    __str__ = __repr__
+
+
 class Context:
     """The original image, catalogue and resolver shared by every comparison."""
 
@@ -95,7 +109,10 @@ class Context:
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
 
-    def compare(self, obj_path: Path, extra_objects: list[Path] | None = None) -> list[dict]:
+    def __repr__(self) -> str:
+        return f"Context(functions={len(self.functions)})"
+
+    def compare(self, obj_path: Path, extra_objects: list[Path] | None = None) -> list[Comparison]:
         """Link the object in place; one result row per catalogued function it defines, listing
         the branches the linker model wrote as armlink's optimisations (`linker_rewrites`)."""
         obj = inplace.ObjectFile(obj_path)
@@ -128,12 +145,12 @@ class Context:
             common = min(len(data), len(original))
             first = None if same else next((i for i in range(common) if data[i] != original[i]), common)
             name = next(s.name for s in obj.defined_functions() if s.shndx == placed.section.index)
-            results.append({
+            results.append(Comparison({
                 "name": name, "address": placed.base, "size": fn["size"], "candidate_size": len(data),
                 "status": status, "first_diff": first,
                 "linker_rewrites": [w.record() for w in linker.rewrites if w.section == placed.section.index],
                 "_original": original, "_candidate": data,
-            })
+            }))
         return sorted(results, key=lambda r: r["address"])
 
 

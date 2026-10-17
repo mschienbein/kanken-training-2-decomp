@@ -82,6 +82,9 @@ Current state: [`docs/STATUS.md`](docs/STATUS.md). Picking up on a new machine:
 
 - Never commit ROM bytes, decrypted or extracted data, disassembly of original code, SDK files,
   compilers, or console keys. The repository history must stay publishable.
+  Tool image/section/fingerprint objects and match/link results omit raw buffers from `repr` and
+  `str`; explicit buffer access and private disassembly are still private. Receipts retain only
+  their existing metadata and hashes, never the private comparison buffers.
 - "Matched" means the function's bytes come from compiled C/C++ in a full `code.bin` build that is
   byte-identical to the original. A split-and-relink of original bytes, an objdiff score, or a
   plausible decompilation are not matches.
