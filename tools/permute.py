@@ -87,11 +87,31 @@ def function_spans(text: str) -> dict[str, tuple[int, int, int]]:
     """Name -> (declaration start, body start, body end), without interpreting macros.
 
     Token boundaries, not brace regexes, handle strings, comments and nested bodies.
-    Offsets always index the exact input, not the interface parser's expanded text.
-    Preprocessor lines are masked only for locating the author's original spelling.
+    Splice continued lines before recognizing comments or preprocessing directives,
+    retaining a map back to the exact input for every returned offset.
     """
-    masked = re.sub(r"^[ \t]*#[^\n]*(?:\\\n[^\n]*)*", lambda m: " " * len(m[0]), text, flags=re.M)
-    tokens = [t for t in interfaces.TOKEN.finditer(masked) if not t[0].startswith(("/*", "//"))]
+    pieces, offsets = [], []
+    cursor = 0
+    for continuation in re.finditer(r"\\\r?\n", text):
+        pieces.append(text[cursor:continuation.start()])
+        offsets.extend(range(cursor, continuation.start()))
+        cursor = continuation.end()
+    pieces.append(text[cursor:])
+    offsets.extend(range(cursor, len(text)))
+    spliced = "".join(pieces)
+    tokens = []
+    line_start, directive, previous_end = True, False, 0
+    for token in interfaces.TOKEN.finditer(spliced):
+        if "\n" in spliced[previous_end:token.start()]:
+            line_start, directive = True, False
+        previous_end = token.end()
+        if token[0].startswith(("/*", "//")):
+            continue
+        if line_start:
+            directive = token[0] == "#"
+        line_start = False
+        if not directive:
+            tokens.append(token)
     spans = {}
     start = 0
     depth = 0
@@ -121,7 +141,8 @@ def function_spans(text: str) -> dict[str, tuple[int, int, int]]:
                         break
                 if braces:
                     raise PermuteError("unbalanced function body")
-                spans[word] = (tokens[start].start(), tokens[j].start(), tokens[k - 1].end())
+                spans[word] = (offsets[tokens[start].start()], offsets[tokens[j].start()],
+                               offsets[tokens[k - 1].end() - 1] + 1)
                 i, start = k, k
                 continue
         depth += (word == "{") - (word == "}")
