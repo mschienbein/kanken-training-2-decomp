@@ -37,6 +37,7 @@ extern unsigned char bss_004b35c4[0x1000];
 extern struct AppletServiceNames data_00243000;
 extern void func_0012fd88(const char *name);
 extern unsigned func_0019ecf8(void);
+extern CtrResult func_00115b0c(void);
 extern int func_0018f068(unsigned handle, unsigned char *value);
 extern void func_00192afc(int result, const void *pc);
 extern void func_0019ec88(void);
