@@ -1,6 +1,4 @@
-struct Matrix34 {
-    float elements[12];
-};
+#include "game/matrix.h"
 union Matrix34Command {
     struct Matrix34 matrix;
     unsigned words[12];
@@ -28,7 +26,6 @@ struct ModelMatrixState {
     union ModelMatrixPacket packet;
 };
 extern unsigned char *data_00242fc8;
-extern struct Matrix34 *func_00195334(struct Matrix34 *destination, const struct Matrix34 *source);
 extern void func_00192720(void *destination, const void *source, unsigned size);
 
 void func_001147c0(struct ModelMatrixState *state, const struct Matrix34 *matrix)

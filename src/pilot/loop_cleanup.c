@@ -1,11 +1,11 @@
-struct Entry { int id; void *resource; };
+#include "game/runtime.h"
+
+struct Entry { int id; struct ResourceHandle *resource; };
 struct EntryList { struct Entry *entries; int count; };
 extern struct EntryList data_0024225c;
-struct DetailEntry { int id; int value; int flags; int length; void *resource; };
+struct DetailEntry { int id; int value; int flags; int length; struct ResourceHandle *resource; };
 struct DetailList { struct DetailEntry *entries; int count; };
 extern struct DetailList data_00242264;
-extern void func_0019cf20(void *resource);
-extern void func_0019dc20(void *allocation);
 
 void func_00103358(void)
 {

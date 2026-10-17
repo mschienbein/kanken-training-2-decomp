@@ -5,7 +5,7 @@
  * the status word at 0x18 is shared by the service-state predicates. */
 struct ServiceState {
     unsigned char flag_00;
-    unsigned char active;
+    signed char active;
     unsigned char reserved02[4];
     unsigned char mode;
     unsigned char reserved07[2];
@@ -18,6 +18,12 @@ struct ServiceState {
     volatile unsigned state;
 };
 
+struct PendingState {
+    unsigned char reserved00;
+    unsigned char pending;
+    signed char blocking;
+};
+
 /* The handle-bearing object at 0x002430e0 is not the flag block above. */
 struct ServiceContext;
 
@@ -26,6 +32,10 @@ extern "C" {
 #endif
 extern struct ServiceState data_00242a50;
 extern struct ServiceContext data_002430e0;
+extern struct PendingState data_00242a28;
+extern int func_001927a8(void);
+extern int func_00192c10(void);
+extern void func_00115040(unsigned mode);
 extern unsigned char func_00122af0(void);
 extern void func_00122fe8(unsigned char value);
 extern void func_00122ff8(void);

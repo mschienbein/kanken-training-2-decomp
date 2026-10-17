@@ -1,99 +1,188 @@
 # Known issues — checkpoint c005
 
-37 new functions / 1,852 B in 31 wave-5 units by OpenAI-family authors
-(`openai-codex/gpt-6.1-sol`; `author` per unit in `config/candidates/c005-wave5.json`),
-plus six interface revisions relative to the c004-r2 prepared ledger. Denominator v6;
-gates v1.8; linker model `armlink5-inline-branchnop-v2` (`docs/LINKER.md`).
-This is checkpoint content, not an acceptance or a completed independent review.
+Current collected content: **182 new candidate functions / 11,056 B in 174 units**:
+wave 5 = 37 functions / 1,852 B in 31 units; wave 6 = 73 / 5,540 B in 73 units;
+wave 7 = 72 / 3,664 B in 70 units. W7b is still authoring and is not included in
+these numbers. All authors are OpenAI-family (`openai-codex/gpt-6.1-sol`);
+`author` provenance is retained per unit in `config/candidates/c005.json`.
+The separate wave-5 candidate manifest is replaced by that combined manifest.
+Denominator v7; gates v1.10; linker model `armlink5-inline-branchnop-v2`
+([`LINKER.md`](LINKER.md)). This describes checkpoint content, not acceptance.
 
 Review is single-family under
-[`rulings/2026-10-17-reviewer-model-family.md`](rulings/2026-10-17-reviewer-model-family.md):
-two separate, fresh-context OpenAI-family reviewers must re-derive and seal their records.
-The integration pre-review does not replace those reviews.
+[`rulings/2026-10-17-reviewer-model-family.md`](rulings/2026-10-17-reviewer-model-family.md).
+Two separate fresh-context reviewers must re-derive and seal their records. The
+integration pre-review is not an independent acceptance review.
 
-## Linker model qualifications
+## Shared interfaces and layout qualifications
 
-- None of the 37 new functions requires an emulated linker rewrite.
-- Revised `func_0011ef54` retains its c004-r2 `branchnop` rewrite: the tail target is the
-  adjacent `func_0011ef58`. The shared prototype forwards a signed 64-bit nanosecond
-  duration in r0/r1; its caller/callee evidence and `[INFERENCE]` comment are retained.
-- The model still qualifies inherited material: an inlined return-only call proves an
-  eligible callee body, not its identity; a branch-to-next rewrite proves the final
-  adjacent target, not whether source order or linker reordering placed it there.
-  Conditional single-instruction inlining remains manual-backed, not newly established
-  by this checkpoint. See `docs/LINKER.md` and the eventual receipt's `linker_rewrites`.
+The integration uses one shared definition for the input/calibration/sample,
+selection, GPU/matrix/radar, serialized archive, sound runtime/voice/channel,
+display binding/pane/handle, notification and intrusive-list views. Declarations
+come from C/C++-safe `include/game/` headers rather than local C-linkage copies.
+Semantic subsystem/type names and unobserved object portions remain partial
+reconstructions, not recovered original source names.
 
-## Revisions to accepted material (`revised_units` / `revised_headers`)
+- `SelectionState` contains signed halfwords at +0x52/+0x54. The existing enum
+  mappings receive the screen pointer explicitly supplied by callers, even though
+  their bodies ignore it. No unused argument was invented solely for codegen.
+- The service's active byte at +1 is signed, as read by `func_00192c10`; existing
+  setters still write only 0/1. The distinct pending-state block has an unsigned
+  pending byte at +1 and signed blocking byte at +2.
+- `GpuState` retains clear color +0x660 and control +0x770 while sharing the
+  evidenced attribute stride/enable/dirty fields. The Matrix34/44 views use one
+  layout. **[INFERENCE]** Copy helpers `func_001944f0` / `func_00195334` retain the
+  established destination-pointer return contract: they preserve destination r0,
+  but inspected callers ignore the result. The source does not fabricate a use
+  of that result to imply stronger evidence.
+- Resource-index and sound archive metadata are distinct formats, not aliases
+  merely because both readers have a metadata pointer at +0x3c. The C definition
+  and C++ caller of `func_0014c23c` share a count plus packed-parameter-tail view.
+- `SoundArchivePlayerView` has a mutable provider behind its read-only parent.
+  The provider's enabled byte and pointer-returning lookup slot +0x0c are typed;
+  unobserved virtual slots are padding, not invented method signatures.
+- Sound instance views share the handle fields, signed priority adjustment,
+  unsigned priority byte, volume and intrusive links. The formerly separate
+  player/group views share the same requested-count, pending-list and active
+  fields. Explicit casts preserve the observed signed comparisons where the
+  common list count is unsigned.
+- Audio channel views agree on the state pointer at +0x68, flag halfwords
+  +0x1e/+0x6c and ADPCM coefficients +0x7c. Voice-group views also agree on the
+  callback/context, byte flags, dirty field and list link. The callback receives
+  the mutable group, event number and context; its result is ignored. A competing
+  unused float/int field view is reserved storage rather than an invented type.
+- `DisplayObject` remains a 0x94-byte prefix, with type bytes at +0x92; bindings
+  and queue fields are an explicit extension. Menu text uses a 0x2c-byte prefix
+  and the following counted pointer vector, avoiding an invented fixed bound.
+  The saved notification payload remains 0xb740 bytes, including the flag at
+  payload +0x32 = global +0x3a.
+- **[INFERENCE]** `func_001ad6ec` takes a two-float position value object in s0/s1.
+  A two-scalar-float interface is ABI-equivalent at this leaf; the shared source
+  retains the evidenced caller-compatible value-object interpretation.
+- **[INFERENCE]** `func_0018d868` returns the successor iterator retained in r0.
+  All inspected callers ignore it. Its registry/node arguments are mutable;
+  caller declarations use this one contract rather than conflicting void returns.
+- **[INFERENCE]** `func_00169920` forwards its third integer argument as a fourth
+  target argument, although the target ignores it. Callers supply an integer
+  sentinel; the wrapper is not changed to a weaker signature.
+- The return-only `func_00137128` / `func_001467e4` have no direct callers or image
+  pointer references. Their `void(void)` signatures are explicitly [INFERENCE].
+  In contrast, `func_001c0e44` is an evidenced writable array-element callback;
+  only its unused void return interpretation remains [INFERENCE].
+- The allocation callback used by `func_0016a830` is at vtable +8 and takes the
+  allocator plus byte size. Earlier slots are padding. RegistryOwner likewise
+  uses an opaque vtable rather than inventing an unused destructor contract.
+  Resource cleanup's actually invoked deleting destructor remains natural C++
+  `delete`, with a typed ResourceHandle interface.
+- ARMCC C++ rejects C flexible-array members. Shared headers retain the same
+  fixed-prefix ABI layout, exposing zero-size flexible tails only to C clients;
+  current C++ clients access only the shared prefix. No one-element substitute
+  arrays or competing struct definitions are used.
 
-The baseline for integration is `accept/c004-r2/matches.json`. Four currently accepted
-wave-1 units change, and two c004-r2 units will be revisions relative to c004-r2 after
-that checkpoint finalizes:
+## Compiler-extension and outlining qualifications
 
-- `src/wave1/func_00134f04.c`: reset the leading `NotificationState.status` halfword
-  through new `game/notification.h`, rather than declaring the whole object a scalar.
-- `src/wave1/func_0018fcb4.c`: return the distinct opaque `ServiceContext` at
-  `data_002430e0`, not the flag-block type at `data_00242a50`.
-- `src/wave1/func_00195e84.c`, `src/wave1/func_00195e94.c`: read the shared
-  `ServiceState` signed flag at 0x09 and unsigned mode byte at 0x06.
-- `src/wave4/func_0011ef54.c`: obtain both sleep prototypes from `game/runtime.h`.
-- `src/wave4/func_00136448.c`: obtain the two-word `WordPair` layout and setter
-  prototype from `game/archive.h`.
+The ruling
+[`rulings/2026-10-17-armcc-extensions.md`](rulings/2026-10-17-armcc-extensions.md)
+applies. `func_001d007c` and `func_001d4410` use ARMCC's `__usat` intrinsic to
+saturate the combined priority to seven bits. Each needs that qualification on
+its eventual function review row. No new SVC or CP15 named-register declaration
+is introduced by these waves.
 
-Existing headers `game/archive.h` and `game/runtime.h` are revised; new headers
-`game/service_state.h` and `game/notification.h` replace local, conflicting declarations.
-The self-relative reference resolver and its callers now share the archive header.
+The shared metadata search `func_00168670` is explicitly `__declspec(noinline)`;
+the three-function source marks the outlined-helper interpretation [INFERENCE].
+Other small source helpers retain ordinary inline/force-inline annotations, not
+injected instructions or dead code.
 
-The pre-review also corrects candidate-only interfaces and partial layouts:
-`func_0018fa44` reads a const service context and writes its memory output;
-`func_0012fab0` reads a const handle object; `func_00186294` receives a writable
-0x80-byte error record, including its handle field at 0x0c. The return-only
-`func_001c0e44` is an array-element callback with a writable element pointer, not a
-no-argument function; its unused return type remains explicitly `[INFERENCE]`.
-The C++ animation updater has a writable object and an integer-returning virtual
-advance callback taking the object and integer mode; unobserved virtual slots remain
-padding rather than invented destructor declarations.
+Natural `memcpy` / `memset` source is kept where its lowering matches the
+original helper entry. `func_00154378` deliberately calls the shared general copy
+entry `func_001a000c` for word-aligned buffers: natural memcpy currently selects
+an unbound aligned helper instead. This preserves the observed call target
+without inventing a helper binding or weakening the real word-pointer types.
+Compiler/library helper bodies remain uncredited.
 
-The request record keeps the evidenced 0xf80-byte extent with padding for unaccessed
-synchronization storage, avoiding an unchecked packing pragma. The notification
-payload uses a literal word count of the same size, avoiding an unsupported parser
-expression. Both C units are now checked by the interface tool rather than waived.
+## Linker-model qualifications
 
-## Preserved original bugs (new in this checkpoint)
+- None of the 37 wave-5 additions requires a rewrite.
+- The newly integrated w6/w7 wrappers use branch-to-next (`branchnop`) rewrites
+  where their explicitly typed target is the adjacent catalogued function.
+- `func_00160298` has two `inline_insn` getter calls. Its source marks the choice
+  of `func_001c6af4` **[INFERENCE]**: the eligible body reads `ItemPage.count`, but
+  inlining does not recover the original callee identity.
+- Revised sleep wrapper `func_0011ef54` retains its adjacent `func_0011ef58`
+  branchnop and signed 64-bit r0/r1 forwarding inference.
+- The model qualifies inherited material too: inlined calls prove eligible
+  callee bodies, not identities; branch-to-next proves the final adjacent target,
+  not whether source order or linker reordering placed it there. Conditional
+  single-instruction inlining remains manual-backed. See the eventual receipt's
+  `linker_rewrites`, not a claim of recovered original call graphs.
 
-- `src/wave5/func_001533b8.c`: unsupported relative-reference types resolve to null,
-  but the original still copies 0x4c bytes from that source.
-- `src/wave5/func_001f28cc.c`: the same failed resolution is followed by field reads
-  through the null source, rather than an error return.
+## Revisions to accepted material
 
-Both carry `ORIGINAL BUG:` comments. No null guard or substitute output was introduced.
+The four carried wave-5 revisions remain: w1 `func_00134f04` uses the notification
+status halfword, `func_0018fcb4` returns the separate service context, and
+`func_00195e84` / `func_00195e94` use the shared signed flag / unsigned mode fields.
 
-## Not credited
+Additional revisions are limited to interfaces and common views:
 
-- No unit was removed from the candidate list: all 31 units / 37 functions re-derived
-  MATCH at their destinations under catalogue v6, before and after integration.
-- Other wave-5 attempts remain outside the candidate manifest and receive no credit.
-  SVC/CP15 intrinsics, exclusive-access primitives and compiler helpers are not admitted
-  by this integration pass.
-- No full build, suite, prepare, independent review, finalize, canonical-ledger change
-  or publication was performed here. The dry ledger is private integration evidence.
+- `src/pilot/game_enum_switch.c`: both enum mappings' evidenced screen argument.
+- `src/pilot/loop_cleanup.c`: typed ResourceHandle pointers/shared declarations.
+- `src/pilot/loop_resources.c`: shared allocation-record layout/deallocator.
+- `src/pilot/pilot_b.c`: shared deallocator declaration.
+- `src/wave1/func_00105058.c`: common allocation state/deallocator declaration.
+- `src/wave1/func_00135a28.c`, `func_00135a58.c`, `func_00135a88.c`,
+  `func_00135ab8.c`: common buffer state/deallocator declarations.
+- `src/wave1/func_001360a4.c`: shared deallocator declaration.
+- `src/wave1/func_0019e02c_returning.c`: shared pointer-preserving wrappers/release.
+- `src/wave2/func_001795bc.c`: shared expanded SelectionState.
+- `src/wave2/func_001791e0.c`: common text prefix/following pointer vector.
+- `src/wave2/func_00179298.cpp`: shared display-handle/context/activation interfaces.
 
-## Inherited
+The carried c004 sleep and WordPair units also use the shared headers. Six more
+c004-only declaration/layout migrations are intentionally deferred until the
+separately fixed c004-r3 baseline lands; their exact units/evidence are recorded
+in the integrator's private notes. They are the remaining current dry-interface
+items, not waived policy findings.
 
-Partial layouts and inferred source-level contracts; preserved original bugs from prior
-checkpoints; no runtime execution in this preparation pass. The interface tool checks C,
-C++ ODR/header-name/local-redeclaration policy and limited const use, not all aliasing or
-callee writes. Fourteen C++ units in the dry ledger remain mechanically unchecked under
-`--allow-unchecked-cpp`; the new animation unit was checked by hand against its callers
-and virtual-call use. The other thirteen are inherited c004-r2 material.
+## Preserved original bugs
 
-## Preparation evidence
+Every listed function carries an `ORIGINAL BUG:` comment; no substitute result,
+validation, null guard or exception suppression was added.
 
-The private dry ledger combines 274 c004-r2 units and 31 c005 units: 305 units /
-336 functions. Initial interface checking found three disagreements, five policy items
-and two unchecked C constructs. All were resolved. Final checking reports 291 checked C
-units, fourteen permitted C++ units, zero disagreements and zero policy items.
+- W5 `func_001533b8`: unsupported relative-reference types yield null, but 0x4c
+  bytes are still copied from that source.
+- W5 `func_001f28cc`: failed relative resolution is followed by source field reads.
+- W6 `func_00112c98`: increments the generation and copies an uninitialized
+  156-byte local list into global state.
+- W6 `func_001678dc` / `func_001e5978`: the scale-setting path can still forward a
+  null widget to the renderer. The latter's ordinary caller first guards null.
+- W6 `func_001705a8`: a missing chart is still dereferenced by the color loop.
+- W6 `func_001e59d4`: cleanup dereferences a missing chart instead of skipping it.
+- W7 `func_0014b58c`: a negative configured limit is retained rather than clamped
+  to zero, affecting the pruning loop.
+- W7 `func_00152d48`: scanning the rounded-up bitmap capacity can expose a padding
+  bit beyond the logical pool capacity.
+- W7 `func_0015fae4`: page/item/text lookup failures are used without null checks.
+- W7 `func_001815a8`: the lookup result is dereferenced before the queued test.
 
-Final sequential destination checks report MATCH for all 62 selected units / 68 functions:
-every c005 unit, all six revised baseline units and the other shared-header dependents.
-These are per-unit results, not a substitute for the two fresh full builds and independent
-reviews required by checkpoint acceptance.
+Inherited bugs, including the enum mappings' uninitialized out-of-range result,
+remain documented at their source and in earlier checkpoint records.
+
+## Evidence and uncredited scope
+
+Every currently collected function has re-derived MATCH at its destination;
+source/header changes receive sequential per-unit rechecks during integration.
+The private dry ledger is exactly canonical matches + c004 candidates + c005
+candidates. The integration pre-review reads every c005/revised source for
+plausibility, typed interfaces, source policy, preserved bugs and linker callee
+qualifications; C++ interfaces are checked by hand, not waived semantically.
+
+Only RESULT rows re-derived as MATCH are collected. Other mismatches, extent
+reports and library candidates remain outside this manifest. No runtime helper
+body is credited, no catalogue boundary is padded, and no candidate is silently
+dropped to make a gate pass.
+
+Full-image equality, two fresh builds, the full suite, sealed independent
+reviews and finalize are still required for acceptance. This worker performs no
+full build/suite or prepare/finalize, changes no canonical ledger, and publishes
+nothing. The current c004-r3 cutover and final complete collection/check results
+will be reflected here before the integration handoff.

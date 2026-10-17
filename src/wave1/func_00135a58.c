@@ -1,11 +1,6 @@
-typedef struct BufferState {
-    void *buffer;
-    unsigned int count;
-    unsigned int capacity;
-} BufferState;
+#include "game/runtime.h"
 
 extern BufferState bss_0049da58;
-extern void func_0019dc20(void *memory);
 
 void func_00135a58(void)
 {

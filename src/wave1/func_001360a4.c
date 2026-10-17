@@ -1,3 +1,4 @@
+#include "game/runtime.h"
 typedef struct BufferOwner {
     unsigned char reserved[0xc08];
     void *buffer;
@@ -6,7 +7,6 @@ typedef struct BufferOwner {
 } BufferOwner;
 
 extern BufferOwner bss_002d4270;
-extern void func_0019dc20(void *memory);
 
 void func_001360a4(void)
 {

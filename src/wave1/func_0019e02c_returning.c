@@ -8,9 +8,6 @@ struct ResourceSet {
 };
 
 extern struct ResourceSet bss_00291758;
-extern void *func_0011ffdc(void *object);
-extern void *func_0011fa34(void *object);
-extern void func_0019dc20(void *allocation);
 
 void func_0019e02c(void)
 {

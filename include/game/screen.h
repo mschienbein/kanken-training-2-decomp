@@ -8,10 +8,106 @@ extern "C" {
 #endif
 
 struct DisplayObject {
-    unsigned char reserved00[0x92];
+    float position[3];
+    float rotation[3];
+    float scale[3];
+    unsigned char reserved24[0x6e];
     unsigned char types[2];                 /* 0x92 */
 };
 
+
+struct DisplayPane {
+    const void *vtable;
+    unsigned char reserved04[0x24];
+    float position[3];
+    float rotation[3];
+    float scale[2];
+    float size[2];
+    unsigned char reserved50[0x67];
+    unsigned char flags;
+};
+
+struct DisplayPaneLink {
+    unsigned char reserved00[8];
+    struct DisplayPane *pane;
+};
+
+struct DisplayBinding {
+    unsigned char reserved00[0x28];
+    struct DisplayPaneLink *link;
+    unsigned char reserved2c[8];
+    struct DisplayPane *pane;
+};
+
+struct BoundDisplayObject {
+    struct DisplayObject base;
+    struct DisplayBinding *bindings[5];
+    int screen;
+    int index;
+    struct BoundDisplayObject *next;
+    unsigned char reservedb4[0xc];
+    unsigned char queued;
+};
+
+struct DisplayObjectList {
+    unsigned char reserved00[0x2c];
+    struct BoundDisplayObject *head;
+};
+
+struct DisplayTexCoords {
+    float uv[4][2];
+};
+
+struct DisplayVertexArray {
+    unsigned char capacity;
+    unsigned char count;
+    unsigned short reserved02;
+    struct DisplayTexCoords *entries;
+};
+
+struct DisplayVertexPane {
+    struct DisplayPane pane;
+    unsigned char reservedb8[0x98];
+    struct DisplayVertexArray vertices;
+};
+
+struct DisplayFlagSlot {
+    unsigned int reserved00;
+    unsigned int flags;
+};
+
+struct FlagDisplayObject {
+    struct DisplayObject base;
+#ifndef __cplusplus
+    struct DisplayFlagSlot *slots[];
+#endif
+};
+
+struct DisplayHandle {
+    struct DisplayObject *object;
+    unsigned char reserved04[0x14];
+    float x;
+    float y;
+#ifdef __cplusplus
+    void set_active(int active);
+#endif
+};
+
+struct AnimationContext {
+    unsigned int reserved00;
+    const struct NameTable *table;
+};
+
+struct WidgetContainer {
+    unsigned char reserved00[8];
+    struct DisplayHandle *handle;
+};
+
+/* [INFERENCE] Value object passed in s0/s1 by the container's position setter. */
+struct WidgetPosition {
+    float x;
+    float y;
+};
 /* Named entries selected by index; `kind` 1 means `names` is valid. */
 struct NameTable {
     unsigned int reserved00;
@@ -38,6 +134,18 @@ struct Screen {
     const struct NameTable *const *labels;  /* 0x1e4 */
 };
 
+extern struct AnimationContext bss_00246b48;
+extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,
+                         const struct DisplayTexCoords *coordinates);
+extern void func_0014e504(struct DisplayVertexPane *pane, unsigned count);
+extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
+extern void func_0015e948(struct DisplayObject *object, int active);
+extern void func_0015e954(struct DisplayPaneLink *link, int active);
+extern void func_00180358(struct DisplayObject *object, int first, int second);
+extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
+extern void func_001826fc(struct DisplayObject *object, int active);
+extern void func_00195a08(struct DisplayObject *object, int index, int active);
+extern void func_001ad6ec(struct WidgetContainer *container, struct WidgetPosition position);
 extern void func_0016e1d0(struct Screen *screen, int index, int enabled);
 extern unsigned char func_0017a9a0(const struct DisplayObject *object, int index);
 extern void func_0017a968(struct DisplayObject *object, const struct NameTable *table, int index, int mode);
