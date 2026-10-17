@@ -16,6 +16,8 @@ struct W17Panel395c;
 struct W17Panel43f0;
 
 #include "game/screen.h"
+#include "game/pane_descriptors.h"
+#include "game/command_state.h"
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
@@ -52,27 +54,11 @@ struct W18WideDisplayCollection {
 extern "C" {
 
 
-extern W17DisplayGroup bss_00290e60;
-void func_0017a7e4(W17DisplayGroup *group, int index, int mode, int duration);
-
-extern W17DisplayGroup bss_00290f60;
-
-extern W17DisplayGroup data_0023f004;
-extern W17DisplayGroup bss_00290e2c;
-void func_00183208(DisplayObject *object);
-void func_0017a938(W17DisplayGroup *group, int index, int duration);
 
 
-extern W17DisplayGroup data_0023efdc;
-extern W17DisplayGroup bss_00290d8c;
-
-extern W17DisplayGroup bss_00290dd8;
 
 
-extern W17DisplayGroup bss_002910b4;
 
-extern W17DisplayGroup bss_0029101c;
-extern W17DisplayGroup bss_00290e98;
 }
 #endif
 

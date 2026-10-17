@@ -23,6 +23,10 @@ extern "C" {
  * Descriptor category/identifier words are read; wrappers ignore the result. */
 extern void func_0017a7e4(const struct NameTable *const *table, int count,
                           int mode, unsigned flags);
+extern void func_0017a938(const struct NameTable *const *table, int count,
+                          unsigned option);
+extern void func_001670ec(int operation, const struct NameTable *const *table,
+                          int count, int selection, int transition, unsigned option);
 #ifdef __cplusplus
 }
 #endif

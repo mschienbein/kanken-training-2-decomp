@@ -1,4 +1,4 @@
-extern float func_0014b2b0(unsigned short angle);
+#include "game/matrix.h"
 
 float func_00149428(float turns)
 {

@@ -5,5 +5,5 @@
 
 extern "C" void func_001c1dc4(W17Panel1dc4 *panel)
 {
-    func_0017a7e4(&data_0023efdc, -1, 3, 128);
+    func_0017a7e4(data_0023efdc, -1, 3, 128);
 }

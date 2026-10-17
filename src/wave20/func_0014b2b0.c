@@ -1,5 +1,4 @@
-struct TrigEntry { float sine, cosine, sine_step, cosine_step; };
-extern const struct TrigEntry data_0021b100[];
+#include "game/matrix.h"
 
 float func_0014b2b0(unsigned angle)
 {

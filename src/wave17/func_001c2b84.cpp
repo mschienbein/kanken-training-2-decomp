@@ -5,5 +5,5 @@
 
 extern "C" void func_001c2b84(W6DisplayCollection *collection)
 {
-    func_0017a7e4(&bss_00290d8c, -1, 3, 128);
+    func_0017a7e4(bss_00290d8c, -1, 3, 128);
 }

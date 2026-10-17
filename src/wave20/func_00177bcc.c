@@ -1,10 +1,6 @@
+#include "game/messages.h"
+
 struct CategoryTextCatalog;
-struct CategoryValues {
-    unsigned reserved00;
-    const unsigned short *values[];
-};
-extern const struct CategoryValues *bss_00290ec4[];
-extern int func_001dd3a4(int category, int kind);
 
 /* [INFERENCE] The unused first input is the caller's category/context object. */
 /* The returned pointer is passed as UTF-16 text to func_0017a43c by both callers. */

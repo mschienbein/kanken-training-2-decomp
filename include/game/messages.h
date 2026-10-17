@@ -21,10 +21,19 @@ struct W11TextEntry {
     unsigned reserved0c;
 };
 struct W11TextResource { unsigned char reserved00[0x10]; const struct W11TextEntry *entries; };
+/* The prefix word is skipped by both indexed text-table consumers. */
+struct CategoryValues {
+    unsigned reserved00;
+#ifndef __cplusplus
+    const unsigned short *values[];
+#endif
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern const unsigned short *func_00170c00(const struct W11TextResource *resource, int index);
+extern const struct CategoryValues *bss_00290ec4[];
+extern int func_001dd3a4(int category, int kind);
 /* [INFERENCE] The secondary relative pointer is forwarded through the same
  * UTF-16 pointer contract as MessageLayout's existing assignment routine;
  * its author-proposed attribute semantics are not independently recovered. */

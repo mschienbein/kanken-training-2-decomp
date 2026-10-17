@@ -20,6 +20,7 @@ struct TaskRuntime {
 extern "C" {
 #endif
 extern struct TaskRuntime bss_0029f540;
+extern int func_0015e2b8(int index);
 #ifdef __cplusplus
 }
 #endif

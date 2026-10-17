@@ -32,6 +32,14 @@ struct Allocation {
     unsigned int count;
 };
 
+/* The allocation and optional-value fields share the address-rooted owner. */
+struct OptionalAllocation {
+    struct Allocation allocation;
+    int value;
+    unsigned reserved0c;
+    unsigned state;
+};
+
 struct AllocationRecord {
     void *allocation;
     int count;
@@ -106,6 +114,7 @@ extern struct BufferOwner bss_002d4270;
 extern struct ExtendedBufferState bss_0049da8c;
 extern struct TaggedBufferState bss_0049cbc0;
 extern struct Allocation bss_0049cbb4;
+extern struct OptionalAllocation bss_002d2138;
 extern struct AllocationRecordTable bss_0049cb24;
 extern int data_0024223c;
 extern const char data_002232d5[];
