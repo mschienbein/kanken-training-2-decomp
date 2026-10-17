@@ -1509,7 +1509,7 @@ class InPlaceLinker:
         return None
 
     def _removed_unwind_sections(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, int]:
-        """V6: an exclusive, single-entry SHF_LINK_ORDER companion dies with its R1 owner.
+        """V7: an exclusive, single-entry SHF_LINK_ORDER companion dies with its R1 owner.
 
         This is not general unwind-table placement or exception-table stripping. In particular,
         kept code's entries, shared extab data, roots and original-bound metadata never disappear.

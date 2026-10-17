@@ -7,8 +7,8 @@ and fail-closed endian-state handling; it requires a new independent review and 
 `accept.py prepare --linker-model ... --literal-model ...` freezes both choices before its fresh
 builds; see `docs/ACCEPTANCE.md` for selection/receipt/history binding and transition review.
 V4's draft is `scratch/integrator/r1-jumptables/GATES-DRAFT.md`; no v4 gate is adopted here.
-V5 and **`armlink5-inline-branchnop-v6`** are also explicit, unadopted models. V6 adds only
-exclusive removed-helper EHABI companion elimination to v5; its exact gate proposal is
+The new **`armlink5-inline-branchnop-v7`** is explicit and unadopted. V7 adds only
+exclusive removed-helper EHABI companion elimination to corrected v6; its exact gate proposal is
 `scratch/exidx/GATES-DRAFT.md` in the `exidx-removal` worktree. No gate/default changes here.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
@@ -34,7 +34,7 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v3` | frozen opt-in, not the default | all v2 rules plus candidate-only callees in R1 below; original conservative CFG, no resolved jump tables |
 | `armlink5-inline-branchnop-v4` | independently reviewed PASS_WITH_QUALIFICATIONS; unadopted | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
 | `armlink5-inline-branchnop-v5` | unadopted composite proposal | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; explicit selection and composite independent review required |
-| `armlink5-inline-branchnop-v6` | unadopted, explicit composite proposal | all v5 rules plus exclusive removed-helper EHABI exidx/compact-extab elimination; no kept-function unwind-table removal |
+| `armlink5-inline-branchnop-v7` | unadopted, explicit composite proposal | all corrected v6 rules plus exclusive removed-helper EHABI exidx/compact-extab elimination; no kept-function unwind-table removal |
 
 ## Function-entry alias identity (v5 only, unadopted)
 
@@ -100,11 +100,11 @@ Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
 `RemovedCalleeModelTest`, `CppAliasCompareTest`, `AliasCompareSafetyTest`, and
 `BuildRemovedCalleeModelTest` in `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
 
-## Removed-helper unwind companions (v6 only, unadopted)
+## Removed-helper unwind companions (v7 only, unadopted)
 
-`armlink5-inline-branchnop-v6` is v5 plus the following single R1 extension. The default,
-`strict-v1`, and v2/v3/v4/v5 policies remain unchanged. In particular, v5 continues to refuse
-the allocated `.ARM.exidx` reference described above. Neither alias identity nor unwind
+`armlink5-inline-branchnop-v7` is corrected v6 plus the following single R1 extension.
+The default, `strict-v1`, and v2/v3/v4/v6 policies remain unchanged; v5 is retired, not adopted.
+V6 still refuses the allocated `.ARM.exidx` reference. Neither alias identity nor unwind
 ownership relaxes any helper, original-binding, retention, I1–I3, CFG or typed-contract rule.
 
 1. Only a helper already independently eligible for R1 removal can own eliminated unwind data.
@@ -142,7 +142,7 @@ ownership relaxes any helper, original-binding, retention, I1–I3, CFG or typed
    incoming reference that would require a companion in the original output is refused.
    Candidate-only helpers have no original address, so their keys cannot be inserted into
    an original table without inventing an address. Existing original unwind bytes, if any,
-   remain untouched by this hybrid linker. V6 is not general exception-table stripping,
+   remain untouched by this hybrid linker. V7 is not general exception-table stripping,
    placement, merging, rewriting or proof of a complete standalone armlink image.
 
 Each removed helper and its per-call `target: null` rewrite records `unwind_sections`,
@@ -156,7 +156,7 @@ no catalogue credit and retains every R1 identity/provenance qualification.
 - [ARM DUI0474K §4.12](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2)
   runs inlining before unused-section elimination; §4.3 removes whole unreachable sections
   and preserves roots/used sections. §3.7 separately says exception tables are silently
-  discarded if no code throws. That last rule is **not** implemented by v6.
+  discarded if no code throws. That last rule is **not** implemented by v7.
 - [EHABI32, “The object producer interface — Sections” and “Index table entries”](https://github.com/ARM-software/abi-aa/blob/main/ehabi32/ehabi32.rst)
   specifies one index fragment per code section, `SHT_ARM_EXIDX`, `SHF_LINK_ORDER`,
   `sh_link` to that code, and the two-word PREL31/function plus compact/extab/CANTUNWIND
@@ -176,7 +176,7 @@ no catalogue credit and retains every R1 identity/provenance qualification.
   [INFERENCE] No original EHABI unwind-index table is identified; its absence and the original
   exception-link flags cannot be proved solely from this sectionless image. In particular,
   candidate C++ exidx emission is not evidence that the final image contains those entries.
-  V6 relies on exclusive candidate ownership and absence of required original placement, not
+  V7 relies on exclusive candidate ownership and absence of required original placement, not
   on treating this inference as a blanket permission to erase original/kept-function tables.
 
 Synthetic and real-compiler coverage is `RemovedUnwindModelTest` in `tests/test_inplace.py`.

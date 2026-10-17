@@ -1983,9 +1983,9 @@ class RemovedCalleeModelTest(unittest.TestCase):
 
 
 class RemovedUnwindModelTest(unittest.TestCase):
-    """V6 alone drops an exclusive EHABI index/compact extab for an R1-removed section."""
+    """V7 alone drops an exclusive EHABI index/compact extab for an R1-removed section."""
 
-    MODEL = "armlink5-inline-branchnop-v6"
+    MODEL = "armlink5-inline-branchnop-v7"
 
     def fixture(self, form="cant", alias=False):
         obj, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR if alias else None)
@@ -2021,13 +2021,13 @@ class RemovedUnwindModelTest(unittest.TestCase):
         self.assertEqual(linker.rewrites, [])
         self.assertEqual(linker.removed_callees, [])
 
-    def test_v5_refuses_and_v6_removes_only_the_owners_unwind_sections(self):
+    def test_v6_refuses_and_v7_removes_only_the_owners_unwind_sections(self):
         for form in ("cant", "inline", "extab"):
             for alias in (False, True):
                 with self.subTest(form=form, alias=alias):
                     obj, mem, catalogue = self.fixture(form, alias)
                     with self.assertRaises(inplace.LinkError):
-                        RemovedCalleeModelTest().linker(mem, catalogue, model="armlink5-inline-branchnop-v5").link(obj)
+                        RemovedCalleeModelTest().linker(mem, catalogue, model="armlink5-inline-branchnop-v6").link(obj)
                     linker = self.linker(mem, catalogue)
                     linked = linker.link(obj)
                     self.assertEqual(set(linked), {1})
@@ -2189,7 +2189,7 @@ class RemovedUnwindModelTest(unittest.TestCase):
                     if sec.elf_type == "SHT_ARM_EXIDX":
                         self.assertEqual(sec.linked_section, sec.relocs[0].symbol.shndx)
                 with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
-                    RemovedCalleeModelTest().linker(mem, catalogue, model="armlink5-inline-branchnop-v5").link(combined)
+                    RemovedCalleeModelTest().linker(mem, catalogue, model="armlink5-inline-branchnop-v6").link(combined)
                 linker = self.linker(mem, catalogue)
                 self.assertEqual(next(iter(linker.link(combined).values()))[1], mem.read(BASE, 40))
                 self.assertEqual(linker.removed_callees[0]["object"], "lifetime.cpp")
