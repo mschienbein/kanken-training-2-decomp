@@ -30,8 +30,10 @@ invent mismatch rows.
 Image-address failures during placement are `LinkError`s, including nested references through
 common initializer sections, RTTI/typeinfo, ordinary `.constdata`, anonymous string witnesses,
 inline-callee reads and removed-call context reads. Diagnostics identify the referring
-section/offset or operation and the unreadable original span. A function/alias whose section
-offset implies a noncatalogued section base is refused before catalogue lookup. These checks
+section/offset or operation, span size and failure category. Unvalidated placement witnesses
+and underlying image-error values are redacted, including alignment/conflict/overlap diagnostics.
+A function/alias whose section offset implies a noncatalogued section base is refused before
+catalogue lookup. These checks
 do not infer another placement or change relocation, equality, alias or model decisions.
 Only failures of the image-read boundary are translated; unrelated internal `ValueError`s
 and `KeyError`s remain visible.

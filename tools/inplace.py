@@ -547,14 +547,14 @@ def reject_overlaps(spans: list[tuple[int, int, str, tuple[str, str] | None]]) -
             first = canonical.setdefault(comdat, (lo, hi, label))
             if first[:2] != (lo, hi):
                 raise LinkError(
-                    f"COMDAT {comdat[0]} {comdat[1]} placed at [{first[0]:#x}, {first[1]:#x}) by {first[2]} "
-                    f"and at [{lo:#x}, {hi:#x}) by {label}"
+                    f"COMDAT {comdat[0]} {comdat[1]} has contradictory placement spans "
+                    f"in {first[2]} and {label} (witness addresses redacted)"
                 )
         merged.setdefault(("comdat", comdat) if comdat else ("span", i), (lo, hi, label))
     ordered = sorted(merged.values())
     for (lo_a, hi_a, name_a), (lo_b, hi_b, name_b) in zip(ordered, ordered[1:]):
         if lo_b < hi_a:
-            raise LinkError(f"{name_a} [{lo_a:#x}, {hi_a:#x}) and {name_b} [{lo_b:#x}, {hi_b:#x}) overlap")
+            raise LinkError(f"{name_a} ({hi_a - lo_a:#x} bytes) and {name_b} ({hi_b - lo_b:#x} bytes) overlap")
 
 
 def comdat_key(section: Section) -> tuple[str, str] | None:
@@ -650,7 +650,7 @@ class InPlaceLinker:
             if prior is None:
                 placements[sym.shndx] = Placement(obj.sections[sym.shndx], base, "inferred")
             elif prior.base != base:
-                raise LinkError(f"{sym.name}: bound to {bound.address:#x}, but its section is placed at {prior.base:#x}")
+                raise LinkError(f"{sym.name}: its section placement disagrees with its bound address")
         fixed = set(placements)  # addresses decided by the catalogue or by bound names
         literal_sections = {}
         if self.literal_model == "anonymous-string-records-v1":
@@ -683,7 +683,7 @@ class InPlaceLinker:
                     elif prior.base != base and sym.shndx not in fixed:
                         raise LinkError(
                             f"{obj.sections[sym.shndx].name}: references disagree on its address "
-                            f"({prior.base:#x} vs {base:#x})"
+                            "(witness addresses redacted)"
                         )
                     # A reference into a section whose address is fixed (catalogue function or bound
                     # name) that disagrees with the original is a byte mismatch in the referencing
@@ -707,10 +707,13 @@ class InPlaceLinker:
                 continue
             here = placed.base + _symbol_offset(sym)
             if here != bound.address:
-                raise LinkError(f"{sym.name}: defined at {here:#x}, but the name is bound to {bound.address:#x}")
+                raise LinkError(f"{sym.name}: its defined location disagrees with its bound address")
         for p in placements.values():
             if p.base % p.section.align:
-                raise LinkError(f"{p.section.name}: placed at {p.base:#x}, not aligned to {p.section.align}")
+                raise LinkError(
+                    f"{p.section.name}: placement is not aligned to {p.section.align} "
+                    "(witness address redacted)"
+                )
         reject_overlaps(
             [(p.base, p.base + p.section.size, p.section.name, comdat_key(p.section))
              for p in placements.values() if p.section.size]
@@ -823,10 +826,15 @@ class InPlaceLinker:
         """Translate only image-address failures, not exceptions from linker arithmetic."""
         try:
             return self.image.read(address, size)
-        except (ValueError, ImageError) as exc:
+        except ValueError:
             raise LinkError(
-                f"{context}: cannot read original [{address:#x}, +{size:#x}) outside the image "
-                f"or across a segment boundary: {exc}"
+                f"{context}: original {size:#x}-byte span is outside the image "
+                "(witness address redacted)"
+            ) from None
+        except ImageError:
+            raise LinkError(
+                f"{context}: original {size:#x}-byte span crosses a segment boundary "
+                "(witness address redacted)"
             ) from None
 
     @staticmethod
@@ -912,7 +920,7 @@ class InPlaceLinker:
         elif t == R_ARM_PREL31:
             value = ((s + a) | target.thumb) - place
             if not -(1 << 30) <= value < (1 << 30):
-                raise LinkError(f"{sec.name}+{o:#x}: PREL31 to {s:#x} overflows 31 bits")
+                raise LinkError(f"{sec.name}+{o:#x}: PREL31 to {rel.symbol.name!r} overflows 31 bits")
             word = struct.unpack_from("<I", data, o)[0]
             struct.pack_into("<I", data, o, (word & 0x80000000) | (value & 0x7FFFFFFF))
         elif t in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24):
@@ -922,14 +930,14 @@ class InPlaceLinker:
             # JUMP24/PC24 to Thumb needs a linker veneer, which this oracle never invents.
             is_bl = t == R_ARM_CALL and insn >> 24 in (0xEB, 0xFA, 0xFB)
             if not -(1 << 25) <= off < (1 << 25):
-                raise LinkError(f"{sec.name}+{o:#x}: branch to {s:#x} out of range (needs a veneer)")
+                raise LinkError(f"{sec.name}+{o:#x}: branch to {rel.symbol.name!r} out of range (needs a veneer)")
             if target.thumb:
                 if not is_bl:
-                    raise LinkError(f"{sec.name}+{o:#x}: B/BLcond to Thumb {s:#x} needs an interworking veneer")
+                    raise LinkError(f"{sec.name}+{o:#x}: B/BLcond to Thumb {rel.symbol.name!r} needs an interworking veneer")
                 insn = 0xFA000000 | (((off >> 1) & 1) << 24) | ((off >> 2) & 0xFFFFFF)
             else:
                 if off & 3:
-                    raise LinkError(f"{sec.name}+{o:#x}: misaligned ARM branch target {s:#x}")
+                    raise LinkError(f"{sec.name}+{o:#x}: misaligned ARM branch target {rel.symbol.name!r}")
                 if insn >> 28 == 0xF:  # BLX(imm) to an ARM target becomes BL
                     insn = 0xEB000000
                 insn = (insn & 0xFF000000) | ((off >> 2) & 0xFFFFFF)
@@ -943,21 +951,21 @@ class InPlaceLinker:
                 off = (s + a + 4) - ((place + 4) & ~3)
                 lo = 0xE800
             if not -(1 << 22) <= off < (1 << 22):
-                raise LinkError(f"{sec.name}+{o:#x}: Thumb BL to {s:#x} out of range")
+                raise LinkError(f"{sec.name}+{o:#x}: Thumb BL to {rel.symbol.name!r} out of range")
             imm = (off >> 1) & 0x3FFFFF
             if lo == 0xE800 and imm & 1:
-                raise LinkError(f"{sec.name}+{o:#x}: misaligned BLX target {s:#x}")
+                raise LinkError(f"{sec.name}+{o:#x}: misaligned BLX target {rel.symbol.name!r}")
             struct.pack_into("<HH", data, o, 0xF000 | (imm >> 11), lo | (imm & 0x7FF))
         elif t == R_ARM_THM_JUMP11:
             off = s + a - place
             if not target.thumb or not -(1 << 11) <= off < (1 << 11):
-                raise LinkError(f"{sec.name}+{o:#x}: Thumb B to {s:#x} unreachable")
+                raise LinkError(f"{sec.name}+{o:#x}: Thumb B to {rel.symbol.name!r} unreachable")
             struct.pack_into("<H", data, o, 0xE000 | ((off >> 1) & 0x7FF))
         elif t == R_ARM_THM_JUMP8:
             off = s + a - place
             insn = struct.unpack_from("<H", data, o)[0]
             if not target.thumb or not -(1 << 8) <= off < (1 << 8):
-                raise LinkError(f"{sec.name}+{o:#x}: Thumb Bcond to {s:#x} unreachable")
+                raise LinkError(f"{sec.name}+{o:#x}: Thumb Bcond to {rel.symbol.name!r} unreachable")
             struct.pack_into("<H", data, o, (insn & 0xFF00) | ((off >> 1) & 0xFF))
         else:
             raise LinkError(f"{sec.name}+{o:#x}: unsupported relocation type {t}")
@@ -1013,7 +1021,7 @@ class InPlaceLinker:
                        "is defined in this object with other bytes than the original"
                        if local is not None else "is defined in this object by a section the model cannot judge")
                 raise LinkError(
-                    f"{sec.name}+{rel.offset:#x}: call to {sym.name or obj.sections[sym.shndx].name} at {dest:#x}: "
+                    f"{sec.name}+{rel.offset:#x}: call to {sym.name or obj.sections[sym.shndx].name}: "
                     f"armlink inlining is undecidable, the callee {why} (docs/LINKER.md)"
                 )
         return decided
@@ -1213,7 +1221,10 @@ class InPlaceLinker:
             if sec.nobits:
                 lo, hi = self.bss
                 if not (lo <= placed.base and placed.base + sec.size <= hi):
-                    raise LinkError(f"{sec.name}: placed at {placed.base:#x}, outside BSS [{lo:#x}, {hi:#x})")
+                    raise LinkError(
+                        f"{sec.name}: placement is outside BSS [{lo:#x}, {hi:#x}) "
+                        "(witness address redacted)"
+                    )
                 linked[idx] = LinkedSection(placed, b"")
                 continue
             data = bytearray(placed.literal_data if placed.literal_data is not None else sec.data)
@@ -1248,7 +1259,7 @@ class InPlaceLinker:
                 if original != bytes(data):
                     first = next(i for i in range(sec.size) if original[i] != data[i])
                     raise LinkError(
-                        f"{sec.name}: placed at {placed.base:#x} from its references, but its bytes differ from "
-                        f"the original at +{first:#x}"
+                        f"{sec.name}: placed from its references, but its bytes differ from "
+                        f"the original at +{first:#x} (witness address redacted)"
                     )
         return linked

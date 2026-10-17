@@ -326,18 +326,18 @@ class PlacementFailureTest(unittest.TestCase):
     def test_common_section_nested_relocation_refuses_instead_of_raising_valueerror(self):
         """r41256: placement follows an instruction-valued pointer into a common initializer."""
         obj, mem, catalogue = placement_failure_fixture(0xE1A04000)
-        with self.assertRaisesRegex(inplace.LinkError, r"\.constdata\+0x0:.*0xe1a04000.*outside the image"):
+        with self.assertRaisesRegex(inplace.LinkError, r"\.constdata\+0x0:.*outside the image.*redacted"):
             self.linker(mem, catalogue).link(obj)
 
     def test_typeinfo_nested_relocation_refuses_instead_of_raising_valueerror(self):
         """r41272: the inferred RTTI section starts at zero and its pointer lies at address four."""
         obj, mem, catalogue = placement_failure_fixture(0, ".rodata._ZTI6Layout", 4)
-        with self.assertRaisesRegex(inplace.LinkError, r"_ZTI6Layout\+0x4:.*0x4.*outside the image"):
+        with self.assertRaisesRegex(inplace.LinkError, r"_ZTI6Layout\+0x4:.*outside the image.*redacted"):
             self.linker(mem, catalogue).link(obj)
 
     def test_terminal_constdata_read_remains_a_refusal(self):
         obj, mem, catalogue = placement_failure_fixture(0xE1A04000, nested=False)
-        with self.assertRaisesRegex(inplace.LinkError, r"\.constdata:.*0xe1a04000.*outside the image"):
+        with self.assertRaisesRegex(inplace.LinkError, r"\.constdata:.*outside the image.*redacted"):
             self.linker(mem, catalogue).link(obj)
 
     def test_every_placement_relocation_translates_image_address_failure(self):
@@ -349,7 +349,7 @@ class PlacementFailureTest(unittest.TestCase):
                       inplace.R_ARM_THM_JUMP11, inplace.R_ARM_THM_JUMP8):
             with self.subTest(rtype=rtype):
                 sec, rel = synthetic(rtype, bytes(4), symbol)
-                with self.assertRaisesRegex(inplace.LinkError, "placement reference.*0x4"):
+                with self.assertRaisesRegex(inplace.LinkError, "placement reference.*witness address redacted"):
                     linker._original_value(rel, 4, sec)
         for rtype in (inplace.R_ARM_NONE, inplace.R_ARM_V4BX):
             sec, rel = synthetic(rtype, bytes(4), symbol)
