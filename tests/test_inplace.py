@@ -466,6 +466,51 @@ class CppFunctionAliasTest(unittest.TestCase):
         self.assertTrue(all(data == expected[index] for index, (_, data) in linked.items()))
 
 
+class CompositeAliasSwitchTest(unittest.TestCase):
+    """V5 must exercise the v4 CFG and alias proof together, not select either one."""
+
+    MODEL = "armlink5-inline-branchnop-v5"
+
+    def fixture(self, form="words", alias_call=False, **kwargs):
+        fixture = BoundedSwitchModelTest().fixture(form, **kwargs)
+        alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+        fixture.object.symbols.append(alias)
+        if alias_call:
+            fixture.object.sections[1].relocs[0].symbol = alias
+        return fixture
+
+    def linker(self, fixture, model=MODEL):
+        return inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                     (0x200000, 0x201000), model)
+
+    def test_v5_composes_both_switch_forms_and_both_alias_call_spellings(self):
+        for form in ("words", "branches"):
+            for alias_call in (False, True):
+                with self.subTest(form=form, alias_call=alias_call):
+                    fixture = self.fixture(form, alias_call)
+                    metadata = [vars(sym).copy() for sym in fixture.object.symbols]
+                    with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                        self.linker(fixture, "armlink5-inline-branchnop-v4").link(fixture.object)
+                    linker = self.linker(fixture)
+                    linked = linker.link(fixture.object)
+                    self.assertEqual(set(linked), {1})
+                    self.assertEqual(linked[1][1], fixture.original)
+                    self.assertEqual([row.target for row in linker.rewrites], [None])
+                    self.assertEqual(linker.removed_callees[0]["symbols"], ["base_variant", "set_field18"])
+                    self.assertEqual([vars(sym) for sym in fixture.object.symbols], metadata)
+
+    def test_v5_aliases_do_not_bypass_v4_endian_state_refusal(self):
+        for form in ("words", "branches"):
+            for state in (BoundedSwitchModelTest.SETEND_BE, BoundedSwitchModelTest.SETEND_LE):
+                with self.subTest(form=form, state=state):
+                    fixture = self.fixture(form, alias_call=True, window=(state,))
+                    linker = self.linker(fixture)
+                    with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                        linker.link(fixture.object)
+                    self.assertEqual(linker.rewrites, [])
+                    self.assertEqual(linker.removed_callees, [])
+
+
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
     sec = inplace.Section(1, "i.f", word, len(word), False, True, False)
     rel = inplace.Reloc(0, rtype, symbol)
