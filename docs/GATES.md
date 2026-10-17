@@ -1,6 +1,12 @@
-# Gate design — frozen v1.10 (2026-10-17)
+# Gate design — frozen v1.11 (2026-10-17)
 
 Revisions:
+- **v1.11** (2026-10-17): reviews add step 7 (`docs/REVIEWING.md`): the caller-contract audit
+  `tools/argcheck.py` over the prepared ledger, every reported candidate adjudicated; the
+  integrator runs the same audit before each prepare. Cause: c004-r2 and c005 both failed review on
+  empty/wrapper/callback prototypes that dropped caller-evidenced arguments. Also: compiler profiles
+  `sdk` and `middleware` (ARMCC 4.1 b791, `docs/COMPILER.md`) join `game`; a unit's ledger profile
+  is the one its bytes match, and reviewers check that non-`game` units are plausibly SDK/middleware.
 - **v1.10** (2026-10-17): G3 (`tools/interfaces.py`) implements the v1.9 source policy and two
   integration safeguards. (a) CP15 named-register variables (`register` storage, `__asm("cp15:...")`)
   are audited as ordinary declarations; `__asm` statements, blocks, assembly functions and

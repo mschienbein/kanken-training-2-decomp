@@ -34,6 +34,14 @@ reading any other review of the same checkpoint.
    `mov r0, r0` proves only that the original callee was a return-only function: the source's
    choice of callee is unverifiable from bytes and must be plausible and marked `[INFERENCE]` in a
    comment when it is not otherwise evidenced (e.g. by a pointer to the same function).
+7. **Caller contracts:** run `tools/argcheck.py --matches accept/<cp>/matches.json --json
+   scratch/review/<cp>/<you>/argcheck.json` and adjudicate every reported candidate. A matching
+   body does not establish its unused inputs or its return contract — especially for empty
+   functions, return-only callees, tail-call wrappers and callbacks. Core and VFP argument
+   registers are allocated independently; keep caller-evidenced inputs even when the callee ignores
+   them (types and roles `[INFERENCE]` where unrecovered). The tool is conservative and local:
+   register temporaries can look like arguments, forwarded inputs and cross-block setup can escape
+   it, and C++ units are not parsed, so review those and its notes by hand; no warning is not proof.
 
 ## Record
 
