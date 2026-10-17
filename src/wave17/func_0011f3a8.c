@@ -5,7 +5,6 @@
 
 
 
-extern void func_00190688(int index, void (*callback)(void));
 
 
 

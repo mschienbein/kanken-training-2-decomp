@@ -1,6 +1,51 @@
 # C009 recovered integration handoff
 
-## Continuation milestone 1 — collection scope closed, not review-ready
+## Pre-merge remediation snapshot — checks pending
+
+Continued milestone `b63317e` without restarting prior searches. Current scope is
+**679 units/functions / 57,276 target B**: game 616/51,528 B, middleware
+38/4,064 B, sdk 25/1,684 B. Dry ledger: **2,206 units / 2,280 functions**.
+The source delta against c008-r2 is **122 predecessor units / 126 functions**.
+All current units and exact revisions are bound in HANDOFF.
+
+The remaining saved C interface families were migrated to canonical input-update/
+session/channel types, ResourceEvent pools, resource records, numeric visual owners,
+typed drawing/position prefixes and shared GPU/notification/startup declarations.
+These edits have **not yet been exercised** by final matching or stable-ledger G3.
+
+Scoped address/register/storage facts establish that `00195b6c`'s fifth stack
+argument is stored at `0049c880` and later called indirectly by `00105444`.
+The old scalar declaration was corrected to a callback, and all four StartupState
+users now share the callback-bearing header. Scheduler binding stores are rooted
+at `00495c8c` with 24-byte stride; the first-iteration consumer trace observes its
+callback at +8. `scheduler-bindings-acyclic-r1.json` is expressly **not** an
+all-path proof; the complete indirect sweep and manual adjudication remain required.
+
+Three further rows are deferred with exact preserved source/receipt evidence in
+`interface-deferrals-r1.json`: `0015e5d4` has incompatible DisplayPaneLink versus
+DisplaySurface/SurfaceTextState consumers; `00190d0c` and `00190d68` use valid
+standard-C varargs that the frozen G3 C parser does not support. No source-language
+waiver conversion, ABI hand-coding or frozen tool change was used to hide those
+parser failures. The two independent surface text wrappers remain in scope using
+one shared partial field view; complete native identity/allocation remains explicit
+`[INFERENCE]`, not a claim that this is DisplayPane.
+
+FixC008R3 has now handed off **`642d725079b6a2154bc6f06fa554dcbeb063bcea`**,
+closing its serialized toolchain slot. Merge it immediately, then run c009 G3 and
+final matching/probes/argcheck/pre-review on that merged tree. Its five tracked
+files correct service slots 11/13/15 and AuxCallback's channels/count/context chain.
+Reusable scripts/evidence are in **main-root**
+`scratch/integrator/c008-r3/`, not inside the c008-r3 worktree:
+`audit_indirect.py`, `final/source-slot-map.json`,
+`final/indirect/consumers/results.json`. C009 now owns the next finite audit slot;
+c010 has been asked to continue static work only.
+
+`probe_interfaces.py` reuses c008-r2's compile helper for canonical native and
+compiler-derived C-signature probes. It is staged but unexercised. No new names
+were adopted after collection milestone 1. No full suite/build, prepare/finalize,
+history edit or push was performed.
+
+## Milestone 1 at b63317e — preserved collection evidence
 
 Continued `9d6f051` in the existing `c009-integrate` worktree; no completed
 author search or destination collection was restarted.

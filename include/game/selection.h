@@ -9,6 +9,7 @@ struct SelectionHintPanel;
 struct W8DisplaySet;
 
 #include "game/category_pattern.h"
+#include "game/w11_control.h"
 
 #include <stdint.h>
 
@@ -168,7 +169,7 @@ extern void func_00173ef4(struct Screen *screen);
 extern void func_00173fb4(struct Screen *screen);
 extern int func_00174444(void);
 extern int func_00174470(void);
-extern void func_0017a034(struct Screen *screen, int index, int value);
+extern void func_0017a034(struct W11jVisualOwner *owner, int index, int value);
 extern void func_001a2a78(struct W6SelectionScreen *screen, int from_list);
 extern void func_001a2e6c(struct W6SelectionScreen *screen, int from_list);
 extern void func_001b472c(void *screen, int index);

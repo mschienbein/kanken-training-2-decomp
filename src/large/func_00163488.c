@@ -1,10 +1,9 @@
 #include "game/functions.h"
 #include "game/selection.h"
 
-struct ActionPanel;
 struct GradeOptionScreen {
     unsigned char reserved00[0x48];
-    struct ActionPanel *panel;
+    struct W11jVisualOwner *panel;
     struct W6ListController *list;
     unsigned char reserved50[8];
     struct W6Selector *selector;
@@ -15,8 +14,6 @@ extern unsigned func_0017418c(void);
 
 
 
-extern void func_001741f8(struct ActionPanel *panel, int index, float x, float y);
-extern void func_0017a034(struct ActionPanel *panel, int index, int value);
 
 void func_00163488(struct GradeOptionScreen *screen, int from_list)
 {

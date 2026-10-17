@@ -1,0 +1,178 @@
+{
+  "facts": [
+    {
+      "function": "0x0010239c",
+      "stores": [],
+      "calls": [
+        {
+          "site": "0x001023f4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {}
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x0010239c",
+          "site": "0x001023f4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r0"
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x001023f4",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {},
+            "stack": {}
+          }
+        ],
+        "storage": []
+      }
+    },
+    {
+      "function": "0x00190688",
+      "stores": [],
+      "calls": [],
+      "sites": [],
+      "enhanced": {
+        "calls": [],
+        "storage": [
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 12
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          },
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 8
+            },
+            "value": {
+              "parameter_of": "func_00190688",
+              "register": "r1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "function": "0x0019f338",
+      "stores": [],
+      "calls": [],
+      "sites": [],
+      "enhanced": {
+        "calls": [],
+        "storage": [
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 12
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          },
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 16
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          },
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 20
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          },
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 6
+            },
+            "value": {
+              "parameter_of": "func_0019f338",
+              "register": "r2"
+            }
+          },
+          {
+            "location": {
+              "base": {
+                "element_width": 24,
+                "indexed_base": {
+                  "address_or_scalar": "0x495c8c"
+                }
+              },
+              "offset": 8
+            },
+            "value": {
+              "parameter_of": "func_0019f338",
+              "register": "r1"
+            }
+          },
+          {
+            "location": {
+              "element_width": 24,
+              "indexed_base": {
+                "address_or_scalar": "0x495c8c"
+              }
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "coverage": "Emit scoped original address/register/storage facts, never instruction text or bytes.",
+  "reused_helper": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py",
+  "reused_helper_sha256": "6df413333b0056d015ce836e79345d1a254ad18ef43dec18dc33d77faa5bb59e"
+}

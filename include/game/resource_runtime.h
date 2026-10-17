@@ -101,6 +101,7 @@ extern struct ResourceEventPool data_00242238;
 extern struct ResourceControlState bss_00495c34, bss_00495c48, bss_00495c5c;
 extern void func_0019d3b4(struct ResourceEvent *event);
 extern void func_00183208(struct ResourceEvent *event);
+extern void func_0018663c(struct ResourceEvent *event);
 extern void func_00176e24(struct ScreenResourceManager *manager);
 extern void func_001e3548(struct W17SelectionOwner *component);
 #ifdef __cplusplus

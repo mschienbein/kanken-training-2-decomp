@@ -1,4 +1,5 @@
 #include "game/screen.h"
+#include "game/audio.h"
 
 struct AnimatedPanel {
     struct WidgetController controller;
@@ -6,7 +7,6 @@ struct AnimatedPanel {
     unsigned char primary;
 };
 
-extern int func_00195874(const struct DisplayObject *object, int index);
 
 int func_001b5c88(const struct AnimatedPanel *panel)
 {

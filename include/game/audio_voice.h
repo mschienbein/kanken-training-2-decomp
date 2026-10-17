@@ -83,9 +83,13 @@ struct AudioChannelState {
 struct AudioChannel {
     unsigned char reserved00[4];
     unsigned char mode;
-    unsigned char reserved05[7];
+    unsigned char alignment;
+    unsigned char reserved06;
+    unsigned char flags;
+    unsigned char reserved08[4];
     struct AudioBiquadCoefficients filter;
-    unsigned char reserved16[6];
+    unsigned char reserved16[2];
+    int extent;
     float volume;
     unsigned char reserved20[0x44];
     float gain;
@@ -407,6 +411,10 @@ extern void func_0014ee5c(struct AudioVoiceGroup *group);
 extern void func_0014fc78(struct AudioChannel *channel, float volume);
 extern float func_00151a1c(const struct AudioLinearRamp *ramp);
 extern void func_00152610(struct AudioChannelState *state, unsigned char value);
+extern void func_0014fbcc(struct AudioChannel *channel, int enabled);
+extern void func_001525f0(struct AudioChannel *channel, int enabled);
+extern void func_001d4a48(struct AudioVoiceGroup *group, unsigned mode);
+extern void func_001d4aac(struct AudioVoiceGroup *group);
 extern void func_0015274c(struct AudioChannel *channel, float gain);
 extern void func_00154224(struct HandleManager *array);
 extern void func_0014603c(struct HandleManager *owner);

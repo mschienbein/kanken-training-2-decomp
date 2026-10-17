@@ -100,6 +100,8 @@ extern struct PipelineOwner data_00242a14;
 
 extern void func_00126f5c(unsigned *state);
 extern void func_00127294(unsigned *state);
+extern void func_00186fc8(unsigned *state);
+extern void func_001272bc(unsigned index);
 extern struct Framebuffer *func_0018ce64(void);
 extern struct FramebufferManager *data_002426d8;
 

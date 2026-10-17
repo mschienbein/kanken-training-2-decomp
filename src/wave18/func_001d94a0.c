@@ -52,8 +52,6 @@ extern const float data_00220c20;
 extern void func_001d2d68(struct AudioSweep *sweep, float value);
 extern void func_001d48d4(struct AudioVoiceGroup *group, const struct VoiceWaveInfo *info, unsigned sample_offset);
 extern void func_001d9238(struct NoteVoice *voice, const struct VoiceWaveInfo *info, unsigned sample_offset);
-extern void func_001d4a48(struct AudioVoiceGroup *group, unsigned mode);
-extern void func_001d4aac(struct AudioVoiceGroup *group);
 
 void func_001d94a0(struct NoteVoice *voice, const struct VoiceWaveInfo *info,
                    unsigned id, unsigned sample_offset)

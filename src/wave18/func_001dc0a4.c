@@ -5,7 +5,6 @@
 extern void func_00192720(void *destination, const void *source, unsigned size);
 
 
-extern unsigned func_001699b8(void);
 
 void func_001dc0a4(int index)
 {

@@ -2,7 +2,7 @@
 
 /* [INFERENCE] The frozen sdk profile reproduces this binding copy exactly;
  * subsystem/compiler provenance is not established merely by a byte match. */
-void func_00190688(unsigned index, int (*callback)(void))
+void func_00190688(int index, void (*callback)(void))
 {
     struct ScheduledTaskBinding binding;
     binding.callback = callback;

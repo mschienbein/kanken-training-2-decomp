@@ -2,18 +2,18 @@
 
 ## Status
 
-**Continuation milestone 1, not review-ready or accepted.** Continued `9d6f051`
-without restarting collection. The sixteen originally uncollected new-scope
-addresses now have explicit dispositions: six canonical destinations MATCH;
-ten remain deferred with exact contract reasons below. `docs/GATES.md` stays
-v1.16. Main owns serialized full builds/suite and acceptance.
+**Pre-merge source-remediation snapshot, not review-ready or accepted.**
+Continued `9d6f051` and collection milestone `b63317e` without restarting searches.
+The original sixteen-address boundary is closed by six canonical MATCH destinations
+and ten recorded deferrals. Three further interface/tooling deferrals are below.
+`docs/GATES.md` stays v1.16. Main owns full builds/suite and acceptance.
 
-`config/candidates/c009.json` lists **682 units / 682 functions / 57,484 target
-bytes**. These are unaccepted scope totals, not an all-c009 final-MATCH claim:
+`config/candidates/c009.json` lists **679 units / 679 functions / 57,276 target
+bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:
 
 | Frozen profile | Units/functions | Target bytes |
 | --- | ---: | ---: |
-| game | 619 | 51,736 |
+| game | 616 | 51,528 |
 | middleware | 38 | 4,064 |
 | sdk | 25 | 1,684 |
 
@@ -82,20 +82,20 @@ or acceptance claims.
 ## Predecessor boundary and newer pending remediation
 
 c008-r2 `38b4c01` was merged at `9218542`; the dry ledger no longer uses failed
-original c008. The current dry ledger has **2,209 units / 2,283 functions**:
-1,601 predecessor functions plus 682 c009 functions. The additional `0016b6a4`
+original c008. The current dry ledger has **2,206 units / 2,280 functions**:
+1,601 predecessor functions plus 679 c009 functions. The additional `0016b6a4`
 deferral remains excluded.
 
-The source delta against c008-r2 revises **104 predecessor units / 108 functions**,
-including shared-header migrations and caller-evidenced constructor input/result
+The source delta against c008-r2 revises **122 predecessor units / 126 functions**,
+including shared-header migrations and caller-evidenced constructor/callback input/result
 retention. Every revised unit is listed in HANDOFF and still needs fresh final
 byte/review closure. Header-only dependents need the complete canonical contract sweep.
 
-At wrap-up, FixC008R3 reported new `c008-r3` remediation from current main
-`f3ae330`: slot 11 context, slot 15 context/saved arguments/result, and an
-indirect-consumer same-class audit. c008-r2 remains unfinalized. Those fixes are
-owned by FixC008R3 and were not duplicated or merged here. Reconcile that successor
-before claiming a review-ready c009 base; historical c008 records remain untouched.
+FixC008R3 has committed `642d725079b6a2154bc6f06fa554dcbeb063bcea` and closed its
+serial audit slot. Merge it before claiming a review-ready c009 base: it repairs
+service slots 11/13/15 and AuxCallback's scalar sample-count chain. Its scripts and
+final evidence live in main-root `scratch/integrator/c008-r3/`; historical c008
+records remain untouched. New c009 source edits still need merged-tree verification.
 
 ## Additional collection-scope deferrals
 
@@ -115,3 +115,16 @@ or duplicate native-class aliases were adopted to conceal these contracts.
 Private `collection-closure-r1.json` retains exact sources, receipts, proposed
 names, source/receipt hashes and per-row reasons. This is the user's defer-with-
 recorded-reason option, not approval of a false match or accepted credit.
+
+## Further G3 remediation deferrals
+
+| Function(s) | Exact reason |
+| --- | --- |
+| `0015e5d4` | The definition takes DisplayPaneLink with a material-bearing DisplayPane, while accepted `0015e5c4` forwards DisplaySurface containing a different partial text-field owner. A common concrete owner or subobject relationship is not proven; no cast/shadow type is used to erase it. |
+| `00190d0c`, `00190d68` | Their standard-C `va_arg(values,int)` expansion is unsupported by the frozen G3 C parser. The retained audit records both as unchecked C, not waived C++; source correctness is not faulted. No parser suppression, hand-coded va_list ABI or language-waiver conversion is substituted for the missing tool support. |
+
+Exact sources and original author receipts remain in private
+`interface-deferrals-r1.json`. The shared SurfaceTextState used by the retained
+spacing/size wrappers is a qualified partial field view, not a complete recovered
+native class or an alias of DisplayPane. Its actual allocation and native identity
+remain unrecovered.

@@ -1,0 +1,7346 @@
+{
+  "facts": [
+    {
+      "function": "0x001071ec",
+      "stores": [
+        {
+          "site": "0x0010720c",
+          "location": {
+            "address": "0x004990dc"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00107250",
+          "location": {
+            "address": "0x004990e0"
+          },
+          "value": {
+            "address": "0x00000000"
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site": "0x00107210",
+          "target": "0x0019ea6c",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "function": "0x001071ec",
+              "register": "r1"
+            },
+            "r2": {
+              "function": "0x001071ec",
+              "register": "r2"
+            },
+            "r3": {
+              "function": "0x001071ec",
+              "register": "r3"
+            },
+            "r0": {
+              "address": "0x0049a0e8"
+            }
+          }
+        },
+        {
+          "site": "0x0010722c",
+          "target": "0x0019dfbc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x004990e0"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x0010723c",
+          "target": "0x0019df84",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x004990e0"
+            }
+          }
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x001071ec",
+          "site": "0x00107210",
+          "kind": "direct",
+          "target": 1698412,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00107208",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x001071ec",
+          "site": "0x0010722c",
+          "kind": "direct",
+          "target": 1695676,
+          "arguments": [
+            {
+              "register": "r1",
+              "write": "0x00107228",
+              "written_as": "r1"
+            },
+            {
+              "register": "r3",
+              "write": "0x00107220",
+              "written_as": "r3"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x001071ec",
+          "site": "0x0010723c",
+          "kind": "direct",
+          "target": 1695620,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00107234",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x001071ec",
+          "site": "0x00107278",
+          "kind": "tail",
+          "target": 1661648,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x00107210",
+            "target": "0x0019ea6c",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49a0e8"
+              },
+              "r1": {
+                "parameter_of": "func_001071ec",
+                "register": "r1"
+              },
+              "r2": {
+                "parameter_of": "func_001071ec",
+                "register": "r2"
+              },
+              "r3": {
+                "parameter_of": "func_001071ec",
+                "register": "r3"
+              },
+              "s0": {
+                "parameter_of": "func_001071ec",
+                "register": "s0"
+              },
+              "s1": {
+                "parameter_of": "func_001071ec",
+                "register": "s1"
+              },
+              "s2": {
+                "parameter_of": "func_001071ec",
+                "register": "s2"
+              },
+              "s3": {
+                "parameter_of": "func_001071ec",
+                "register": "s3"
+              },
+              "s4": {
+                "parameter_of": "func_001071ec",
+                "register": "s4"
+              },
+              "s5": {
+                "parameter_of": "func_001071ec",
+                "register": "s5"
+              },
+              "s6": {
+                "parameter_of": "func_001071ec",
+                "register": "s6"
+              },
+              "s7": {
+                "parameter_of": "func_001071ec",
+                "register": "s7"
+              },
+              "s8": {
+                "parameter_of": "func_001071ec",
+                "register": "s8"
+              },
+              "s9": {
+                "parameter_of": "func_001071ec",
+                "register": "s9"
+              },
+              "s10": {
+                "parameter_of": "func_001071ec",
+                "register": "s10"
+              },
+              "s11": {
+                "parameter_of": "func_001071ec",
+                "register": "s11"
+              },
+              "s12": {
+                "parameter_of": "func_001071ec",
+                "register": "s12"
+              },
+              "s13": {
+                "parameter_of": "func_001071ec",
+                "register": "s13"
+              },
+              "s14": {
+                "parameter_of": "func_001071ec",
+                "register": "s14"
+              },
+              "s15": {
+                "parameter_of": "func_001071ec",
+                "register": "s15"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0010722c",
+            "target": "0x0019dfbc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x4990e0"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0010723c",
+            "target": "0x0019df84",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x4990e0"
+              }
+            },
+            "stack": {}
+          }
+        ],
+        "storage": [
+          {
+            "location": {
+              "address_or_scalar": "0x4990dc"
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x4990e0"
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x4990e4"
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "function": "0x00105444",
+      "stores": [
+        {
+          "site": "0x00105588",
+          "location": {
+            "address": "0x0049d948"
+          },
+          "value": {
+            "address": "0x00000002"
+          }
+        },
+        {
+          "site": "0x00105674",
+          "location": {
+            "address": "0x0049da64"
+          },
+          "value": {
+            "address": "0x00000002"
+          }
+        },
+        {
+          "site": "0x00105868",
+          "location": {
+            "address": "0x0049cbcc"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00105930",
+          "location": {
+            "address": "0x0049d948"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00105a60",
+          "location": {
+            "address": "0x0049cbcc"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00105be4",
+          "location": {
+            "address": "0x0049cbcc"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00105c88",
+          "location": {
+            "address": "0x0049da64"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00105d10",
+          "location": {
+            "address": "0x0049d948"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        },
+        {
+          "site": "0x00105e2c",
+          "location": {
+            "address": "0x0049cbcc"
+          },
+          "value": {
+            "address": "0x00000001"
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site": "0x00105484",
+          "target": "0x00196d18",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "function": "0x00105444",
+              "register": "r2"
+            },
+            "r3": {
+              "function": "0x00105444",
+              "register": "r3"
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x00495c08"
+              }
+            },
+            "r0": {
+              "address": "0x00008d40"
+            }
+          }
+        },
+        {
+          "site": "0x00105488",
+          "target": "0x0010b430",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105490",
+          "target": "0x00196cb8",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x001054b8",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001054cc",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x001054e0",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x001054f0",
+          "target": "0x00196c50",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105500",
+          "target": "0x00196c04",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105510",
+          "target": "0x0018d894",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105520",
+          "target": "0x00196ac4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x0010552c",
+          "target": "0x0010921c",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105538",
+          "target": "0x001103d4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d4024"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105548",
+          "target": "0x0019f220",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x00105554",
+          "target": "0x00196a94",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f2c"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105560",
+          "target": "0x00196a94",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f30"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x0010556c",
+          "target": "0x00196a94",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f34"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105578",
+          "target": "0x0010b56c",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f2c"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x001055c0",
+          "target": "0x00196784",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001055f4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105608",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x0010561c",
+          "target": null,
+          "target_pointer": {
+            "loaded_from": {
+              "base": {
+                "loaded_from": {
+                  "loaded_from": {
+                    "address": "0x0049d954"
+                  }
+                }
+              },
+              "offset": 12
+            }
+          },
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r2": {
+              "loaded_from": {
+                "base": {
+                  "loaded_from": {
+                    "loaded_from": {
+                      "address": "0x0049d954"
+                    }
+                  }
+                },
+                "offset": 12
+              }
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x0010562c",
+          "target": "0x00196c04",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105640",
+          "target": null,
+          "target_pointer": {
+            "loaded_from": {
+              "base": {
+                "loaded_from": {
+                  "loaded_from": {
+                    "address": "0x0049d954"
+                  }
+                }
+              },
+              "offset": 20
+            }
+          },
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r2": {
+              "loaded_from": {
+                "base": {
+                  "loaded_from": {
+                    "loaded_from": {
+                      "address": "0x0049d954"
+                    }
+                  }
+                },
+                "offset": 20
+              }
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105658",
+          "target": "0x0019c9b0",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x002d3f28"
+              }
+            },
+            "r0": {
+              "address": "0x002d3f38"
+            }
+          }
+        },
+        {
+          "site": "0x00105664",
+          "target": "0x0010b56c",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f34"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x001056b8",
+          "target": "0x0010d644",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049da68"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x001056c4",
+          "target": "0x0010ab40",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x000000f0"
+            },
+            "r0": {
+              "address": "0x00000190"
+            }
+          }
+        },
+        {
+          "site": "0x001056cc",
+          "target": "0x001074f0",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x001056e4",
+          "target": "0x0019c9b0",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x002d3f28"
+              }
+            },
+            "r0": {
+              "address": "0x002d3f60"
+            }
+          }
+        },
+        {
+          "site": "0x001056f0",
+          "target": "0x00107a9c",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x00105714",
+          "target": "0x0019f220",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x00105724",
+          "target": "0x0019f170",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105730",
+          "target": "0x001966e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x00105744",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105754",
+          "target": "0x00196c50",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105760",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f2c"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f38"
+            }
+          }
+        },
+        {
+          "site": "0x00105770",
+          "target": "0x0018d894",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x0010577c",
+          "target": "0x0019f0c4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x001057c0",
+          "target": "0x0019f220",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x001057d0",
+          "target": "0x0019f170",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001057dc",
+          "target": "0x001966e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x001057ec",
+          "target": "0x001965e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049da68"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049da84"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001057f8",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f34"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f60"
+            }
+          }
+        },
+        {
+          "site": "0x00105810",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105820",
+          "target": "0x00196c50",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x0010582c",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f2c"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f38"
+            }
+          }
+        },
+        {
+          "site": "0x0010583c",
+          "target": "0x0018d894",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105848",
+          "target": "0x00197774",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105854",
+          "target": "0x001965a4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049c9e4"
+            }
+          }
+        },
+        {
+          "site": "0x00105860",
+          "target": "0x00196564",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049caa4"
+            }
+          }
+        },
+        {
+          "site": "0x00105894",
+          "target": "0x0019e414",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00003fff"
+            }
+          }
+        },
+        {
+          "site": "0x001058c0",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001058ec",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049cbcc"
+              }
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105900",
+          "target": "0x0019f0c4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x00105918",
+          "target": "0x0019f220",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000002"
+            }
+          }
+        },
+        {
+          "site": "0x00105928",
+          "target": "0x0019f170",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x0010593c",
+          "target": "0x0010ac18",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x000000f0"
+            },
+            "r0": {
+              "address": "0x00000190"
+            }
+          }
+        },
+        {
+          "site": "0x0010594c",
+          "target": "0x00196ac4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x00105958",
+          "target": "0x001966e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x00105994",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x001059a0",
+          "target": "0x00196784",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001059b8",
+          "target": "0x0019f220",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000002"
+            }
+          }
+        },
+        {
+          "site": "0x001059c8",
+          "target": "0x0019f170",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001059d4",
+          "target": "0x001966e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        },
+        {
+          "site": "0x001059e4",
+          "target": "0x001965e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049da68"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049da88"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x001059f0",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f34"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f60"
+            }
+          }
+        },
+        {
+          "site": "0x00105a08",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105a18",
+          "target": "0x00196c50",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105a24",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f2c"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f38"
+            }
+          }
+        },
+        {
+          "site": "0x00105a34",
+          "target": "0x0018d894",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105a40",
+          "target": "0x00197774",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105a4c",
+          "target": "0x001965a4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049ca24"
+            }
+          }
+        },
+        {
+          "site": "0x00105a58",
+          "target": "0x00196564",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049cae4"
+            }
+          }
+        },
+        {
+          "site": "0x00105a8c",
+          "target": "0x0019e414",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00003fff"
+            }
+          }
+        },
+        {
+          "site": "0x00105ab8",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105ae4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049cbcc"
+              }
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105af8",
+          "target": "0x0019f0c4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x00105b24",
+          "target": "0x0019f220",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000004"
+            }
+          }
+        },
+        {
+          "site": "0x00105b34",
+          "target": "0x0019f170",
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105b44",
+          "target": "0x00196ac4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000004"
+            }
+          }
+        },
+        {
+          "site": "0x00105b60",
+          "target": "0x001965e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049da68"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105b6c",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f34"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f60"
+            }
+          }
+        },
+        {
+          "site": "0x00105b78",
+          "target": "0x001966e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000004"
+            }
+          }
+        },
+        {
+          "site": "0x00105b8c",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105b9c",
+          "target": "0x00196c50",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105ba8",
+          "target": "0x001966bc",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x002d3f2c"
+              }
+            },
+            "r1": {
+              "address": "0x002d3f38"
+            }
+          }
+        },
+        {
+          "site": "0x00105bb8",
+          "target": "0x0018d894",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105bc4",
+          "target": "0x00197774",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105bd0",
+          "target": "0x001965a4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049c9a4"
+            }
+          }
+        },
+        {
+          "site": "0x00105bdc",
+          "target": "0x00196564",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049ca64"
+            }
+          }
+        },
+        {
+          "site": "0x00105c10",
+          "target": "0x0019e414",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00003fff"
+            }
+          }
+        },
+        {
+          "site": "0x00105c3c",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105c68",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049cbcc"
+              }
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105c80",
+          "target": "0x0010921c",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105c98",
+          "target": "0x001965e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049da68"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049da80"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105cdc",
+          "target": "0x0010d644",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049da68"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105ce8",
+          "target": "0x0010ab40",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x000000f0"
+            },
+            "r0": {
+              "address": "0x00000140"
+            }
+          }
+        },
+        {
+          "site": "0x00105cf0",
+          "target": "0x001074f0",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105d08",
+          "target": "0x001966e4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            },
+            "r0": {
+              "address": "0x00000004"
+            }
+          }
+        },
+        {
+          "site": "0x00105d1c",
+          "target": "0x0010ac18",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x000000f0"
+            },
+            "r0": {
+              "address": "0x00000140"
+            }
+          }
+        },
+        {
+          "site": "0x00105d60",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105d6c",
+          "target": "0x00196784",
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105da0",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105db4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105dc8",
+          "target": "0x00196ca4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105dd8",
+          "target": "0x00196c50",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105de8",
+          "target": "0x00196c04",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            }
+          }
+        },
+        {
+          "site": "0x00105df8",
+          "target": "0x0018d894",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049d954"
+              }
+            },
+            "r1": {
+              "loaded_from": {
+                "address": "0x0049d950"
+              }
+            },
+            "r2": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105e0c",
+          "target": "0x00197774",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105e18",
+          "target": "0x001965a4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049c9a4"
+            }
+          }
+        },
+        {
+          "site": "0x00105e24",
+          "target": "0x00196564",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x0049ca64"
+            }
+          }
+        },
+        {
+          "site": "0x00105e58",
+          "target": "0x0019e414",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00003fff"
+            }
+          }
+        },
+        {
+          "site": "0x00105e88",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105eb4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {
+            "r2": {
+              "loaded_from": {
+                "address": "0x0049cbcc"
+              }
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105ed8",
+          "target": "0x0019e414",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00003fff"
+            }
+          }
+        },
+        {
+          "site": "0x00105ee4",
+          "target": "0x00108988",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105eec",
+          "target": "0x0019f0c4",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000001"
+            }
+          }
+        },
+        {
+          "site": "0x00105ef8",
+          "target": "0x00107358",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105f18",
+          "target": "0x00196504",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "address": "0x00000000"
+            },
+            "r1": {
+              "address": "0x00000000"
+            }
+          }
+        },
+        {
+          "site": "0x00105f24",
+          "target": "0x00107ddc",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105f30",
+          "target": "0x00196498",
+          "target_pointer": null,
+          "core_inputs": {}
+        },
+        {
+          "site": "0x00105f54",
+          "target": null,
+          "target_pointer": {
+            "loaded_from": {
+              "address": "0x0049c87c"
+            }
+          },
+          "core_inputs": {
+            "r1": {
+              "function": "0x00105444",
+              "register": "r1"
+            },
+            "r2": {
+              "function": "0x00105444",
+              "register": "r2"
+            },
+            "r3": {
+              "function": "0x00105444",
+              "register": "r3"
+            },
+            "r0": {
+              "loaded_from": {
+                "address": "0x0049c87c"
+              }
+            }
+          }
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x00105444",
+          "site": "0x00105484",
+          "kind": "direct",
+          "target": 1666328,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105480",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0010547c",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105488",
+          "kind": "direct",
+          "target": 1094704,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105490",
+          "kind": "direct",
+          "target": 1666232,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010548c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0010548c",
+              "written_as": "r1"
+            }
+          ],
+          "results": [
+            {
+              "register": "r0",
+              "read": "0x00105498"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001054b8",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001054b4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001054ac",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001054cc",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001054c8",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001054c0",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001054e0",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001054d4",
+              "written_as": "r0"
+            },
+            {
+              "register": "s1",
+              "write": "0x001054dc",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x001054d8",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001054f0",
+          "kind": "direct",
+          "target": 1666128,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001054e4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001054e8",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x001054ec",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105500",
+          "kind": "direct",
+          "target": 1666052,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001054f4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001054fc",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x001054f8",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105510",
+          "kind": "direct",
+          "target": 1628308,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105504",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105508",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x0010550c",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105520",
+          "kind": "direct",
+          "target": 1665732,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010551c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105518",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010552c",
+          "kind": "direct",
+          "target": 1085980,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105538",
+          "kind": "direct",
+          "target": 1115092,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105530",
+              "written_as": "r0"
+            }
+          ],
+          "results": [
+            {
+              "register": "s0",
+              "read": "0x00105544"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105548",
+          "kind": "direct",
+          "target": 1700384,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105540",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105554",
+          "kind": "direct",
+          "target": 1665684,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010554c",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105560",
+          "kind": "direct",
+          "target": 1665684,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105558",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010556c",
+          "kind": "direct",
+          "target": 1665684,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105564",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105578",
+          "kind": "direct",
+          "target": 1095020,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105570",
+              "written_as": "r0"
+            }
+          ],
+          "results": [
+            {
+              "register": "r0",
+              "read": "0x00105580"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001055c0",
+          "kind": "direct",
+          "target": 1664900,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001055bc",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001055b8",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001055f4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001055f0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001055e8",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105608",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105604",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001055fc",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010561c",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r1",
+              "write": "0x00105618",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010562c",
+          "kind": "direct",
+          "target": 1666052,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105620",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105628",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105624",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105640",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r1",
+              "write": "0x0010563c",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105658",
+          "kind": "direct",
+          "target": 1690032,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105654",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105650",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105664",
+          "kind": "direct",
+          "target": 1095020,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010565c",
+              "written_as": "r0"
+            }
+          ],
+          "results": [
+            {
+              "register": "r0",
+              "read": "0x0010566c"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001056b8",
+          "kind": "direct",
+          "target": 1103428,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001056b4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001056b0",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001056c4",
+          "kind": "direct",
+          "target": 1092416,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001056c0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001056bc",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001056cc",
+          "kind": "direct",
+          "target": 1078512,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001056c8",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001056e4",
+          "kind": "direct",
+          "target": 1690032,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001056e0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001056dc",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001056f0",
+          "kind": "direct",
+          "target": 1079964,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001056e8",
+              "written_as": "r0"
+            }
+          ],
+          "results": [
+            {
+              "register": "r0",
+              "read": "0x001056f4"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105714",
+          "kind": "direct",
+          "target": 1700384,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105724",
+          "kind": "direct",
+          "target": 1700208,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105720",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0010571c",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105730",
+          "kind": "direct",
+          "target": 1664740,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010572c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105728",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105744",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105738",
+              "written_as": "r0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105740",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x0010573c",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105754",
+          "kind": "direct",
+          "target": 1666128,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105748",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0010574c",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105750",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105760",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105758",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x0010575c",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105770",
+          "kind": "direct",
+          "target": 1628308,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105764",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105768",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x0010576c",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010577c",
+          "kind": "direct",
+          "target": 1700036,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105774",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001057c0",
+          "kind": "direct",
+          "target": 1700384,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001057d0",
+          "kind": "direct",
+          "target": 1700208,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001057cc",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001057c8",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001057dc",
+          "kind": "direct",
+          "target": 1664740,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001057d8",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001057d4",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001057ec",
+          "kind": "direct",
+          "target": 1664484,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001057e0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001057e4",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x001057e8",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001057f8",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001057f0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001057f4",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105810",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010580c",
+              "written_as": "r0"
+            },
+            {
+              "register": "s0",
+              "write": "0x00105804",
+              "written_as": "s0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105808",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x00105800",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105820",
+          "kind": "direct",
+          "target": 1666128,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105814",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105818",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x0010581c",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010582c",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105824",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105828",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010583c",
+          "kind": "direct",
+          "target": 1628308,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105830",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105834",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105838",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105848",
+          "kind": "direct",
+          "target": 1668980,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105840",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105854",
+          "kind": "direct",
+          "target": 1664420,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010584c",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105860",
+          "kind": "direct",
+          "target": 1664356,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105858",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105894",
+          "kind": "direct",
+          "target": 1696788,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105890",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001058c0",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001058ec",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r3"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105900",
+          "kind": "direct",
+          "target": 1700036,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001058fc",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105918",
+          "kind": "direct",
+          "target": 1700384,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105928",
+          "kind": "direct",
+          "target": 1700208,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105924",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105920",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010593c",
+          "kind": "direct",
+          "target": 1092632,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105938",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105934",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x0010594c",
+          "kind": "direct",
+          "target": 1665732,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105948",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105944",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105958",
+          "kind": "direct",
+          "target": 1664740,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105954",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105950",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105994",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105988",
+              "written_as": "r0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105990",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x0010598c",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001059a0",
+          "kind": "direct",
+          "target": 1664900,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x0010599c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105998",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001059b8",
+          "kind": "direct",
+          "target": 1700384,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001059c8",
+          "kind": "direct",
+          "target": 1700208,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001059c4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001059c0",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001059d4",
+          "kind": "direct",
+          "target": 1664740,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001059d0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001059cc",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001059e4",
+          "kind": "direct",
+          "target": 1664484,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001059d8",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001059dc",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x001059e0",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x001059f0",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x001059e8",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x001059ec",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a08",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a04",
+              "written_as": "r0"
+            },
+            {
+              "register": "s0",
+              "write": "0x001059fc",
+              "written_as": "s0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105a00",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x001059f8",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a18",
+          "kind": "direct",
+          "target": 1666128,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a0c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105a10",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105a14",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a24",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a1c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105a20",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a34",
+          "kind": "direct",
+          "target": 1628308,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a28",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105a2c",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105a30",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a40",
+          "kind": "direct",
+          "target": 1668980,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a38",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a4c",
+          "kind": "direct",
+          "target": 1664420,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a44",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a58",
+          "kind": "direct",
+          "target": 1664356,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a50",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105a8c",
+          "kind": "direct",
+          "target": 1696788,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105a88",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ab8",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ae4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r3"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105af8",
+          "kind": "direct",
+          "target": 1700036,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105af4",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b24",
+          "kind": "direct",
+          "target": 1700384,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b20",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b34",
+          "kind": "direct",
+          "target": 1700208,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b30",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105b2c",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b44",
+          "kind": "direct",
+          "target": 1665732,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b40",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105b38",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105b3c",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b60",
+          "kind": "direct",
+          "target": 1664484,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b54",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105b5c",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105b58",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b6c",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b64",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105b68",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b78",
+          "kind": "direct",
+          "target": 1664740,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b74",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105b70",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b8c",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b80",
+              "written_as": "r0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105b88",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x00105b84",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105b9c",
+          "kind": "direct",
+          "target": 1666128,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105b90",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105b94",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105b98",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ba8",
+          "kind": "direct",
+          "target": 1664700,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105ba0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105ba4",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105bb8",
+          "kind": "direct",
+          "target": 1628308,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105bb4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105bac",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105bb0",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105bc4",
+          "kind": "direct",
+          "target": 1668980,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105bbc",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105bd0",
+          "kind": "direct",
+          "target": 1664420,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105bc8",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105bdc",
+          "kind": "direct",
+          "target": 1664356,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105bd4",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105c10",
+          "kind": "direct",
+          "target": 1696788,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105c0c",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105c3c",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105c68",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r3"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105c80",
+          "kind": "direct",
+          "target": 1085980,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105c98",
+          "kind": "direct",
+          "target": 1664484,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105c8c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105c90",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105c94",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105cdc",
+          "kind": "direct",
+          "target": 1103428,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105cd8",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105cd4",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ce8",
+          "kind": "direct",
+          "target": 1092416,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105ce4",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105ce0",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105cf0",
+          "kind": "direct",
+          "target": 1078512,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105cec",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105d08",
+          "kind": "direct",
+          "target": 1664740,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105d04",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105d00",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105d1c",
+          "kind": "direct",
+          "target": 1092632,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105d18",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105d14",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105d60",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105d54",
+              "written_as": "r0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105d5c",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x00105d58",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105d6c",
+          "kind": "direct",
+          "target": 1664900,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105d68",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105d64",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105da0",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105d9c",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105d94",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105db4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105db0",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105da8",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105dc8",
+          "kind": "direct",
+          "target": 1666212,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105dbc",
+              "written_as": "r0"
+            },
+            {
+              "register": "s1",
+              "write": "0x00105dc4",
+              "written_as": "s1"
+            },
+            {
+              "register": "s2",
+              "write": "0x00105dc0",
+              "written_as": "s2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105dd8",
+          "kind": "direct",
+          "target": 1666128,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105dcc",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105dd0",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105dd4",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105de8",
+          "kind": "direct",
+          "target": 1666052,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105ddc",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105de4",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105de0",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105df8",
+          "kind": "direct",
+          "target": 1628308,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105dec",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105df0",
+              "written_as": "r1"
+            },
+            {
+              "register": "r2",
+              "write": "0x00105df4",
+              "written_as": "r2"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105e0c",
+          "kind": "direct",
+          "target": 1668980,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105e08",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105e18",
+          "kind": "direct",
+          "target": 1664420,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105e10",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105e24",
+          "kind": "direct",
+          "target": 1664356,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105e1c",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105e58",
+          "kind": "direct",
+          "target": 1696788,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105e54",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105e88",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r2"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105eb4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r3"
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ed8",
+          "kind": "direct",
+          "target": 1696788,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105ed4",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ee4",
+          "kind": "direct",
+          "target": 1083784,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105eec",
+          "kind": "direct",
+          "target": 1700036,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105ee8",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105ef8",
+          "kind": "direct",
+          "target": 1078104,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105ef0",
+              "written_as": "r0"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105f18",
+          "kind": "direct",
+          "target": 1664260,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105f10",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00105f14",
+              "written_as": "r1"
+            }
+          ],
+          "results": [
+            {
+              "register": "r0",
+              "read": "0x00105f1c"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105f24",
+          "kind": "direct",
+          "target": 1080796,
+          "arguments": [],
+          "results": [
+            {
+              "register": "s0",
+              "read": "0x00105f28"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105f30",
+          "kind": "direct",
+          "target": 1664152,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00105f2c",
+              "written_as": "r0"
+            }
+          ],
+          "results": [
+            {
+              "register": "r0",
+              "read": "0x00105f40"
+            }
+          ],
+          "target_register": null
+        },
+        {
+          "caller": "0x00105444",
+          "site": "0x00105f54",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r0"
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x00105484",
+            "target": "0x00196d18",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x8d40"
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x495c08"
+                }
+              },
+              "r2": {
+                "parameter_of": "func_00105444",
+                "register": "r2"
+              },
+              "r3": {
+                "parameter_of": "func_00105444",
+                "register": "r3"
+              },
+              "s0": {
+                "parameter_of": "func_00105444",
+                "register": "s0"
+              },
+              "s1": {
+                "parameter_of": "func_00105444",
+                "register": "s1"
+              },
+              "s2": {
+                "parameter_of": "func_00105444",
+                "register": "s2"
+              },
+              "s3": {
+                "parameter_of": "func_00105444",
+                "register": "s3"
+              },
+              "s4": {
+                "parameter_of": "func_00105444",
+                "register": "s4"
+              },
+              "s5": {
+                "parameter_of": "func_00105444",
+                "register": "s5"
+              },
+              "s6": {
+                "parameter_of": "func_00105444",
+                "register": "s6"
+              },
+              "s7": {
+                "parameter_of": "func_00105444",
+                "register": "s7"
+              },
+              "s8": {
+                "parameter_of": "func_00105444",
+                "register": "s8"
+              },
+              "s9": {
+                "parameter_of": "func_00105444",
+                "register": "s9"
+              },
+              "s10": {
+                "parameter_of": "func_00105444",
+                "register": "s10"
+              },
+              "s11": {
+                "parameter_of": "func_00105444",
+                "register": "s11"
+              },
+              "s12": {
+                "parameter_of": "func_00105444",
+                "register": "s12"
+              },
+              "s13": {
+                "parameter_of": "func_00105444",
+                "register": "s13"
+              },
+              "s14": {
+                "parameter_of": "func_00105444",
+                "register": "s14"
+              },
+              "s15": {
+                "parameter_of": "func_00105444",
+                "register": "s15"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105488",
+            "target": "0x0010b430",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_00196d18",
+                "site": "0x105484",
+                "register": "r0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105490",
+            "target": "0x00196cb8",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x495c1c"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x495c20"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001054b8",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "base": {
+                  "loaded_from": {
+                    "return_of": "func_00196cb8",
+                    "site": "0x105490",
+                    "register": "r0"
+                  }
+                },
+                "offset": 48
+              }
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_00196cb8",
+                "site": "0x105490",
+                "register": "r0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "loaded_from": {
+                  "base": {
+                    "loaded_from": {
+                      "return_of": "func_00196cb8",
+                      "site": "0x105490",
+                      "register": "r0"
+                    }
+                  },
+                  "offset": 48
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001054cc",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "base": {
+                  "loaded_from": {
+                    "return_of": "func_00196cb8",
+                    "site": "0x105490",
+                    "register": "r0"
+                  }
+                },
+                "offset": 52
+              }
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_00196cb8",
+                "site": "0x105490",
+                "register": "r0"
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "loaded_from": {
+                  "base": {
+                    "loaded_from": {
+                      "return_of": "func_00196cb8",
+                      "site": "0x105490",
+                      "register": "r0"
+                    }
+                  },
+                  "offset": 52
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001054e0",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "s0": {
+                "address_or_scalar": "0x0"
+              },
+              "s1": {
+                "address_or_scalar": "0x0"
+              },
+              "s2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001054f0",
+            "target": "0x00196c50",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105500",
+            "target": "0x00196c04",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "return_of": "func_00196cb8",
+                "site": "0x105490",
+                "register": "r0"
+              },
+              "r2": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105510",
+            "target": "0x0018d894",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105520",
+            "target": "0x00196ac4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0010552c",
+            "target": "0x0010921c",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_00196ac4",
+                "site": "0x105520",
+                "register": "r0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105538",
+            "target": "0x001103d4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d4024"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105548",
+            "target": "0x0019f220",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "s1": {
+                "address_or_scalar": "0x43c80000"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105554",
+            "target": "0x00196a94",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f2c"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105560",
+            "target": "0x00196a94",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f30"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0010556c",
+            "target": "0x00196a94",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f34"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105578",
+            "target": "0x0010b56c",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f2c"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001055c0",
+            "target": "0x00196784",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001055f4",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105608",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0010561c",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "base": {
+                  "loaded_from": {
+                    "loaded_from": {
+                      "address_or_scalar": "0x49d954"
+                    }
+                  }
+                },
+                "offset": 12
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "loaded_from": {
+                  "base": {
+                    "loaded_from": {
+                      "loaded_from": {
+                        "address_or_scalar": "0x49d954"
+                      }
+                    }
+                  },
+                  "offset": 12
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0010562c",
+            "target": "0x00196c04",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r2": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105640",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "base": {
+                  "loaded_from": {
+                    "loaded_from": {
+                      "address_or_scalar": "0x49d954"
+                    }
+                  }
+                },
+                "offset": 20
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "loaded_from": {
+                  "base": {
+                    "loaded_from": {
+                      "loaded_from": {
+                        "address_or_scalar": "0x49d954"
+                      }
+                    }
+                  },
+                  "offset": 20
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105658",
+            "target": "0x0019c9b0",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x2d3f38"
+              },
+              "r1": {
+                "return_of": "func_0010b56c",
+                "site": "0x105578",
+                "register": "r0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105664",
+            "target": "0x0010b56c",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f34"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001056b8",
+            "target": "0x0010d644",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da68"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001056c4",
+            "target": "0x0010ab40",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x190"
+              },
+              "r1": {
+                "address_or_scalar": "0xf0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001056cc",
+            "target": "0x001074f0",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {},
+            "stack": {}
+          },
+          {
+            "site": "0x001056e4",
+            "target": "0x0019c9b0",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x2d3f60"
+              },
+              "r1": {
+                "return_of": "func_0010b56c",
+                "site": "0x105664",
+                "register": "r0"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x001056f0",
+            "target": "0x00107a9c",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105714",
+            "target": "0x0019f220",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105724",
+            "target": "0x0019f170",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105730",
+            "target": "0x001966e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105744",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "s0": {
+                "address_or_scalar": "0x0"
+              },
+              "s1": {
+                "address_or_scalar": "0x0"
+              },
+              "s2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105754",
+            "target": "0x00196c50",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105760",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f2c"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f38"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105770",
+            "target": "0x0018d894",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x0010577c",
+            "target": "0x0019f0c4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001057c0",
+            "target": "0x0019f220",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001057d0",
+            "target": "0x0019f170",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001057dc",
+            "target": "0x001966e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001057ec",
+            "target": "0x001965e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da68"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da84"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001057f8",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f34"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f60"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105810",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "s1": {
+                "loaded_from": {
+                  "base": {
+                    "loaded_from": {
+                      "address_or_scalar": "0x2d4024"
+                    }
+                  },
+                  "offset": 80
+                }
+              },
+              "s2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105820",
+            "target": "0x00196c50",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x0010582c",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f2c"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f38"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x0010583c",
+            "target": "0x0018d894",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105848",
+            "target": "0x00197774",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105854",
+            "target": "0x001965a4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49c9e4"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105860",
+            "target": "0x00196564",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49caa4"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105894",
+            "target": "0x0019e414",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3fff"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001058c0",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001058ec",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105900",
+            "target": "0x0019f0c4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105918",
+            "target": "0x0019f220",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x2"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105928",
+            "target": "0x0019f170",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x0010593c",
+            "target": "0x0010ac18",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x190"
+              },
+              "r1": {
+                "address_or_scalar": "0xf0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x0010594c",
+            "target": "0x00196ac4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105958",
+            "target": "0x001966e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105994",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001059a0",
+            "target": "0x00196784",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001059b8",
+            "target": "0x0019f220",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x2"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001059c8",
+            "target": "0x0019f170",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001059d4",
+            "target": "0x001966e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001059e4",
+            "target": "0x001965e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da68"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da88"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x001059f0",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f34"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f60"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a08",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "s1": {
+                "loaded_from": {
+                  "base": {
+                    "loaded_from": {
+                      "address_or_scalar": "0x2d4024"
+                    }
+                  },
+                  "offset": 80
+                }
+              },
+              "s2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a18",
+            "target": "0x00196c50",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a24",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f2c"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f38"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a34",
+            "target": "0x0018d894",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a40",
+            "target": "0x00197774",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a4c",
+            "target": "0x001965a4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49ca24"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a58",
+            "target": "0x00196564",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49cae4"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105a8c",
+            "target": "0x0019e414",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3fff"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ab8",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ae4",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105af8",
+            "target": "0x0019f0c4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b24",
+            "target": "0x0019f220",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x4"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b34",
+            "target": "0x0019f170",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b44",
+            "target": "0x00196ac4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x4"
+              },
+              "r1": {
+                "loaded_from": {
+                  "caller_frame": "func_00105444",
+                  "offset": -44
+                }
+              },
+              "r2": {
+                "loaded_from": {
+                  "caller_frame": "func_00105444",
+                  "offset": -48
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b60",
+            "target": "0x001965e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da68"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b6c",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f34"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f60"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b78",
+            "target": "0x001966e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x4"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b8c",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "s0": {
+                "address_or_scalar": "0x0"
+              },
+              "s1": {
+                "address_or_scalar": "0x0"
+              },
+              "s2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105b9c",
+            "target": "0x00196c50",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ba8",
+            "target": "0x001966bc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x2d3f2c"
+                }
+              },
+              "r1": {
+                "address_or_scalar": "0x2d3f38"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105bb8",
+            "target": "0x0018d894",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105bc4",
+            "target": "0x00197774",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105bd0",
+            "target": "0x001965a4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49c9a4"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105bdc",
+            "target": "0x00196564",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49ca64"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105c10",
+            "target": "0x0019e414",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3fff"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105c3c",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105c68",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105c80",
+            "target": "0x0010921c",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x495b59"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105c98",
+            "target": "0x001965e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da68"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da80"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105cdc",
+            "target": "0x0010d644",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49da68"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ce8",
+            "target": "0x0010ab40",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x140"
+              },
+              "r1": {
+                "address_or_scalar": "0xf0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105cf0",
+            "target": "0x001074f0",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {},
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105d08",
+            "target": "0x001966e4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x4"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105d1c",
+            "target": "0x0010ac18",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x140"
+              },
+              "r1": {
+                "address_or_scalar": "0xf0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105d60",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105d6c",
+            "target": "0x00196784",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105da0",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105db4",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105dc8",
+            "target": "0x00196ca4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105dd8",
+            "target": "0x00196c50",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105de8",
+            "target": "0x00196c04",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r2": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105df8",
+            "target": "0x0018d894",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d954"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49d950"
+                }
+              },
+              "r2": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105e0c",
+            "target": "0x00197774",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105e18",
+            "target": "0x001965a4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49c9a4"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105e24",
+            "target": "0x00196564",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x49ca64"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105e58",
+            "target": "0x0019e414",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3fff"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105e88",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105eb4",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r1": {
+                "address_or_scalar": "0x0"
+              },
+              "r2": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ed8",
+            "target": "0x0019e414",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3fff"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ee4",
+            "target": "0x00108988",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_0019e414",
+                "site": "0x105ed8",
+                "register": "r0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105eec",
+            "target": "0x0019f0c4",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x1"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105ef8",
+            "target": "0x00107358",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105f18",
+            "target": "0x00196504",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x0"
+              },
+              "r1": {
+                "address_or_scalar": "0x0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105f24",
+            "target": "0x00107ddc",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "return_of": "func_00196504",
+                "site": "0x105f18",
+                "register": "r0"
+              }
+            },
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105f30",
+            "target": "0x00196498",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {},
+            "stack": {
+              "8": {
+                "return_of": "func_00107a9c",
+                "site": "0x1056f0",
+                "register": "r0"
+              }
+            }
+          },
+          {
+            "site": "0x00105f54",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "address_or_scalar": "0x49c87c"
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49c87c"
+                }
+              },
+              "r1": {
+                "parameter_of": "func_00105444",
+                "register": "r1"
+              },
+              "r2": {
+                "parameter_of": "func_00105444",
+                "register": "r2"
+              },
+              "r3": {
+                "parameter_of": "func_00105444",
+                "register": "r3"
+              },
+              "s0": {
+                "parameter_of": "func_00105444",
+                "register": "s0"
+              },
+              "s1": {
+                "parameter_of": "func_00105444",
+                "register": "s1"
+              },
+              "s2": {
+                "parameter_of": "func_00105444",
+                "register": "s2"
+              },
+              "s3": {
+                "parameter_of": "func_00105444",
+                "register": "s3"
+              },
+              "s4": {
+                "parameter_of": "func_00105444",
+                "register": "s4"
+              },
+              "s5": {
+                "parameter_of": "func_00105444",
+                "register": "s5"
+              },
+              "s6": {
+                "parameter_of": "func_00105444",
+                "register": "s6"
+              },
+              "s7": {
+                "parameter_of": "func_00105444",
+                "register": "s7"
+              },
+              "s8": {
+                "parameter_of": "func_00105444",
+                "register": "s8"
+              },
+              "s9": {
+                "parameter_of": "func_00105444",
+                "register": "s9"
+              },
+              "s10": {
+                "parameter_of": "func_00105444",
+                "register": "s10"
+              },
+              "s11": {
+                "parameter_of": "func_00105444",
+                "register": "s11"
+              },
+              "s12": {
+                "parameter_of": "func_00105444",
+                "register": "s12"
+              },
+              "s13": {
+                "parameter_of": "func_00105444",
+                "register": "s13"
+              },
+              "s14": {
+                "parameter_of": "func_00105444",
+                "register": "s14"
+              },
+              "s15": {
+                "parameter_of": "func_00105444",
+                "register": "s15"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00105f7c",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "address_or_scalar": "0x49c880"
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x49c880"
+                }
+              }
+            },
+            "stack": {}
+          }
+        ],
+        "storage": [
+          {
+            "location": {
+              "address_or_scalar": "0x2d3f28"
+            },
+            "value": {
+              "return_of": "func_0010b56c",
+              "site": "0x105664",
+              "register": "r0"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x49c850"
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x49c854"
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x49c858"
+            },
+            "value": {
+              "return_of": "func_00196498",
+              "site": "0x105f30",
+              "register": "r0"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x49cbcc"
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x49d948"
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x49da64"
+            },
+            "value": {
+              "address_or_scalar": "0x1"
+            }
+          },
+          {
+            "location": {
+              "caller_frame": "func_00105444",
+              "offset": -40
+            },
+            "value": {
+              "return_of": "func_00107a9c",
+              "site": "0x1056f0",
+              "register": "r0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "function": "0x0010239c",
+      "stores": [],
+      "calls": [
+        {
+          "site": "0x001023f4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {}
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x0010239c",
+          "site": "0x001023f4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r0"
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x001023f4",
+            "target": null,
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {},
+            "stack": {}
+          }
+        ],
+        "storage": []
+      }
+    },
+    {
+      "function": "0x00107f0c",
+      "stores": [
+        {
+          "site": "0x00107f28",
+          "location": {
+            "address": "0x00495ce4"
+          },
+          "value": {
+            "address": "0x00000000"
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site": "0x00107f1c",
+          "target": "0x0019f338",
+          "target_pointer": null,
+          "core_inputs": {
+            "r3": {
+              "function": "0x00107f0c",
+              "register": "r3"
+            },
+            "r2": {
+              "address": "0x00000003"
+            },
+            "r1": {
+              "address": "0x00110cc8"
+            },
+            "r0": {
+              "address": "0x00000003"
+            }
+          }
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x00107f0c",
+          "site": "0x00107f1c",
+          "kind": "direct",
+          "target": 1700664,
+          "arguments": [
+            {
+              "register": "r0",
+              "write": "0x00107f14",
+              "written_as": "r0"
+            },
+            {
+              "register": "r1",
+              "write": "0x00107f10",
+              "written_as": "r1"
+            }
+          ],
+          "results": [],
+          "target_register": null
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x00107f1c",
+            "target": "0x0019f338",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "address_or_scalar": "0x3"
+              },
+              "r1": {
+                "address_or_scalar": "0x110cc8"
+              },
+              "r2": {
+                "address_or_scalar": "0x3"
+              },
+              "r3": {
+                "parameter_of": "func_00107f0c",
+                "register": "r3"
+              },
+              "s0": {
+                "parameter_of": "func_00107f0c",
+                "register": "s0"
+              },
+              "s1": {
+                "parameter_of": "func_00107f0c",
+                "register": "s1"
+              },
+              "s2": {
+                "parameter_of": "func_00107f0c",
+                "register": "s2"
+              },
+              "s3": {
+                "parameter_of": "func_00107f0c",
+                "register": "s3"
+              },
+              "s4": {
+                "parameter_of": "func_00107f0c",
+                "register": "s4"
+              },
+              "s5": {
+                "parameter_of": "func_00107f0c",
+                "register": "s5"
+              },
+              "s6": {
+                "parameter_of": "func_00107f0c",
+                "register": "s6"
+              },
+              "s7": {
+                "parameter_of": "func_00107f0c",
+                "register": "s7"
+              },
+              "s8": {
+                "parameter_of": "func_00107f0c",
+                "register": "s8"
+              },
+              "s9": {
+                "parameter_of": "func_00107f0c",
+                "register": "s9"
+              },
+              "s10": {
+                "parameter_of": "func_00107f0c",
+                "register": "s10"
+              },
+              "s11": {
+                "parameter_of": "func_00107f0c",
+                "register": "s11"
+              },
+              "s12": {
+                "parameter_of": "func_00107f0c",
+                "register": "s12"
+              },
+              "s13": {
+                "parameter_of": "func_00107f0c",
+                "register": "s13"
+              },
+              "s14": {
+                "parameter_of": "func_00107f0c",
+                "register": "s14"
+              },
+              "s15": {
+                "parameter_of": "func_00107f0c",
+                "register": "s15"
+              }
+            },
+            "stack": {}
+          }
+        ],
+        "storage": [
+          {
+            "location": {
+              "address_or_scalar": "0x495ce4"
+            },
+            "value": {
+              "address_or_scalar": "0x0"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "coverage": "Emit scoped original address/register/storage facts, never instruction text or bytes.",
+  "reused_helper": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py",
+  "reused_helper_sha256": "6df413333b0056d015ce836e79345d1a254ad18ef43dec18dc33d77faa5bb59e"
+}

@@ -17,7 +17,7 @@ struct SelectionController {
     int count;
     int selected;
     short entries[514];
-    struct Screen *indicators;
+    struct W11ControlScreen *indicators;
 };
 
 
@@ -25,7 +25,6 @@ struct SelectionController {
 
 extern void func_0017a258(struct AnimationState *state, float content, float viewport);
 
-extern void func_0016d554(struct Screen *screen, int state);
 
 void func_0016cb00(struct SelectionController *controller)
 {

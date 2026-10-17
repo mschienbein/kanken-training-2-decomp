@@ -36,7 +36,7 @@ struct RestartTransitionScreenW19G : TransitionScreenW19G {
 };
 struct DetailedTransitionScreenW19G : CallbackTarget {
     unsigned char reserved04[0x44];
-    Screen *region;
+    W11jVisualOwner *region;
     W6ListController *choices;
     unsigned reserved50;
     Screen *buttons;
@@ -68,9 +68,6 @@ extern void func_001b7e9c(MenuOptionGroup *resource);
 extern Screen *func_001671d4(void);
 extern void func_0017673c(AnimationState *set);
 extern void func_0017a258(AnimationState *set, float width, float height);
-extern void func_00175d90(Screen *set);
-extern void func_0016f9a8(Screen *set, int index, float x, float y);
-extern void func_0017a034(Screen *set, int index, int value);
 extern void func_001e9944(W6ListController *controller);
 }
 #endif

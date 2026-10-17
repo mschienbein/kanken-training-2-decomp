@@ -13,9 +13,6 @@ extern void func_00135058(void);
 
 
 
-extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(void),
-                         void (*complete)(void), int argument);
-/* func_001109fc/func_00110a28 pass this shutdown callback, not an integer. */
 
 
 void func_00195a50(void)

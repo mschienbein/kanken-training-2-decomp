@@ -20,7 +20,7 @@ struct W15gTimedScreenVTable {
 struct W15gTimedScreen {
     const W15gTimedScreenVTable *vtable;
     unsigned char reserved04[0x44];
-    Screen *numbers;
+    W11jVisualOwner *numbers;
     unsigned char reserved4c[0x108];
     unsigned char active;
     unsigned char reserved155[0x27];

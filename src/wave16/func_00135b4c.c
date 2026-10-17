@@ -1,12 +1,12 @@
 #include "game/functions.h"
 #include "game/runtime.h"
+#include "game/exp_heap.h"
 
 struct BufferEntry44 {
     unsigned active;
     unsigned char reserved04[40];
 };
 
-extern void *func_0019d798(unsigned heap, unsigned alignment, unsigned size);
 
 void func_00135b4c(int count)
 {

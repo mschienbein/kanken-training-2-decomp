@@ -4,8 +4,6 @@
 #include "game/service_state.h"
 
 
-extern struct StreamMutex bss_0029f528;
-extern struct StreamMutex bss_0029f534;
 
 extern void func_0010b5cc(void *context);
 

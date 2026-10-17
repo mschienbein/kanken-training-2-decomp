@@ -1,7 +1,8 @@
 #include "game/screen.h"
+#include "game/audio.h"
 
 struct ActionSlot {
-    const struct FlagDisplayObject *object;
+    const struct DisplayObject *object;
     int active;
 };
 
@@ -9,12 +10,11 @@ struct ActionSlots {
     struct ActionSlot *slots[3];
 };
 
-extern int func_00195874(const struct FlagDisplayObject *object, int index);
 
 static __inline int query_action_slot(const struct ActionSlot *slot)
 {
     int result = 0;
-    const struct FlagDisplayObject *object = slot->object;
+    const struct DisplayObject *object = slot->object;
     if (object)
         result = func_00195874(object, 0);
     return result;

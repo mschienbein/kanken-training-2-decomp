@@ -5,7 +5,9 @@ struct W19aScheduledTask;
 struct W19aScheduler;
 struct W19aTaskSelection;
 #include "game/service_state.h"
-struct ScheduledTaskBinding { int (*callback)(void); int wait; };
+/* Original 0010239c invokes the bound slot without consuming its result.
+ * Existing int-returning callbacks are explicitly converted when registered. */
+struct ScheduledTaskBinding { void (*callback)(void); int wait; };
 struct ScheduledTask {
     unsigned short enabled;
     short previous, next;
@@ -36,6 +38,7 @@ extern struct TransitionState bss_00290c90;
 extern int func_0019b54c(int task);
 extern int func_0019b564(void);
 extern void func_00195ad0(unsigned int index);
+extern void func_00190688(int index, void (*callback)(void));
 extern void func_001071cc(void);
 extern void func_001074d0(void);
 extern void func_00107dbc(void);
