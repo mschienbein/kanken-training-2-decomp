@@ -21,45 +21,37 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import display  # noqa: E402
 import image as image_mod  # noqa: E402
 import inplace  # noqa: E402
 import toolchain  # noqa: E402
-from capstone import CS_ARCH_ARM, CS_MODE_ARM, CS_MODE_THUMB, Cs  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-_DISASM = {"arm": Cs(CS_ARCH_ARM, CS_MODE_ARM), "thumb": Cs(CS_ARCH_ARM, CS_MODE_THUMB)}
 
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def render(data: bytes, base: int, isa: str, data_ranges: list[tuple[int, int]]) -> list[tuple[int, int, str]]:
-    """(address, size, text) rows; `data_ranges` are absolute [start, end) literal-pool spans."""
+def render(data: bytes, base: int, isa: str, code_ranges: list[tuple[int, int]],
+           data_ranges: list[tuple[int, int]]) -> list[tuple[int, int, str]]:
+    """(address, size, text) rows bounded by absolute catalogue code/data ranges."""
     rows = []
-    pos = 0
-    step = 4 if isa == "arm" else 2
-    while pos < len(data):
-        addr = base + pos
-        if any(lo <= addr < hi for lo, hi in data_ranges) or len(data) - pos < step:
-            word = data[pos : pos + 4]
-            rows.append((addr, len(word), ".word 0x" + word[::-1].hex()))
-            pos += len(word)
-            continue
-        insn = next(_DISASM[isa].disasm(data[pos : pos + 4], addr, 1), None)
-        if insn is None:
-            rows.append((addr, step, ".inst 0x" + data[pos : pos + step][::-1].hex()))
-            pos += step
+    for kind, addr, chunk, insn in display.spans(data, base, isa, code_ranges, data_ranges):
+        if kind == "insn":
+            text = f"{insn.mnemonic} {insn.op_str}".strip()
         else:
-            rows.append((addr, insn.size, f"{insn.mnemonic} {insn.op_str}".strip()))
-            pos += insn.size
+            directive = ".inst" if kind == "raw" else ".word"
+            text = directive + " 0x" + chunk[::-1].hex()
+        rows.append((addr, len(chunk), text))
     return rows
 
 
 def diff_lines(original: bytes, candidate: bytes, base: int, fn: dict, limit: int) -> list[str]:
     pools = [tuple(p) for p in (*fn.get("pools", []), *fn.get("literals", []))]  # data inside the section
-    left = render(original, base, fn["isa"], pools)
-    right = render(candidate, base, fn["isa"], pools)
+    code_ranges = [tuple(p) for p in fn["code_ranges"]]
+    left = render(original, base, fn["isa"], code_ranges, pools)
+    right = render(candidate, base, fn["isa"], code_ranges, pools)
     out = []
     for i in range(max(len(left), len(right))):
         a = left[i] if i < len(left) else (0, 0, "")
