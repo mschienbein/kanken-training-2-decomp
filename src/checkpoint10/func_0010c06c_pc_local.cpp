@@ -1,3 +1,5 @@
+#include "game/runtime.h"
+#include "game/service_clients.h"
 #include "game/result.h"
 
 struct HardwareInfo {
@@ -10,7 +12,7 @@ struct HardwareInfo {
 /* INTEGRATOR: move to include/game/hardware_info.h */
 extern "C" {
 extern unsigned func_00121764(void *buffer, unsigned size, unsigned handle);
-extern void func_0019d6c4(unsigned result, unsigned address);
+
 bool func_0010c06c(void);
 }
 

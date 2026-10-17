@@ -1,3 +1,4 @@
+#include "game/animation.h"
 #include "game/screen.h"
 
 struct AnimationResetSlot {
@@ -21,7 +22,7 @@ struct TimedAnimationList {
     struct TimedAnimation *entries[11];
 };
 
-extern float func_00191134(void);
+
 extern void func_0015eaa8(struct AnimationDisplayObject *object, int index);
 
 void func_001c2e98(struct TimedAnimationList *list)

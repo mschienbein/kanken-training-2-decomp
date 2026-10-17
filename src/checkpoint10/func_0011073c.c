@@ -1,3 +1,4 @@
+#include "game/memory_arena.h"
 #include "ctr/svc.h"
 #include "game/waitable_handle.h"
 
@@ -14,9 +15,8 @@ struct MappedMemoryBlock {
 };
 struct MemoryArena;
 extern unsigned char data_00242d74;
-extern struct MemoryArena bss_004b204c;
-extern void *func_001906c8(struct MemoryArena *arena, struct MappedMemoryBlock *block,
-                          unsigned int size, unsigned int alignment);
+
+
 
 static void *allocate_block_pages(struct MappedMemoryBlock *block, unsigned size)
 {

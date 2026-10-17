@@ -1,7 +1,8 @@
+#include "game/resource_runtime.h"
 #include "game/screen.h"
 #include "game/runtime.h"
 
-extern void func_00183208(struct DisplayObject *object);
+
 
 struct W24BOffsetWidgetOwner {
     unsigned char reserved00[0x10];

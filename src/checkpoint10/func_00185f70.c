@@ -1,3 +1,5 @@
+#include "game/service_state.h"
+#include "game/service_runtime.h"
 /* INTEGRATOR: differs from include/game/service_state.h: PendingState also has a writable completion flag at +4. */
 struct PendingState {
     unsigned char reserved00;
@@ -6,9 +8,9 @@ struct PendingState {
     unsigned char reserved03;
     unsigned char completion;
 };
-extern struct PendingState data_00242a28;
+
 extern void func_001368b0(void);
-extern int func_0018f018(void);
+
 extern void func_0018ef74(void);
 
 void func_00185f70(int enabled)

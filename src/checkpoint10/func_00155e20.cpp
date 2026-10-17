@@ -1,3 +1,4 @@
+#include "game/service_runtime.h"
 #include "ctr/svc.h"
 #include "game/synchronization.h"
 struct CoordinatorRequest {
@@ -13,7 +14,6 @@ struct CoordinatorChannelSlots {
     struct CoordinatorRequestBank banks[2];
     struct CoordinatorRequest *trailing[96];
 };
-struct ServiceBufferPair { unsigned int first, second; };
 /* INTEGRATOR: differs from include/game/service_runtime.h: completion_slots
  * point to request records with flags at +0 and a value at +0x1e. */
 struct ServiceCoordinator {
@@ -33,12 +33,6 @@ struct ServiceCoordinator {
     unsigned char reserved132c[0x15b0 - 0x132c];
     unsigned char publish;
 };
-/* INTEGRATOR: move to include/game/service_runtime.h */
-extern "C" {
-extern void func_00182210(void);
-extern void func_00182204(void);
-extern int func_0018f018(void);
-}
 
 extern "C" int func_00155e20(struct ServiceCoordinator *state, int channel)
 {

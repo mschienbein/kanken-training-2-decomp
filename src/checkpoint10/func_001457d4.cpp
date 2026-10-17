@@ -1,11 +1,7 @@
+#include "game/functions.h"
 #include <string.h>
 #include "game/notification.h"
 
-/* INTEGRATOR: move to include/game/notification.h */
-extern "C" {
-void func_00181250(int index);
-NotificationPayload *func_00181224(int index);
-}
 
 static inline int payload_index(int index)
 {

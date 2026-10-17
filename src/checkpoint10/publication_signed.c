@@ -1,3 +1,6 @@
+#include "game/service_runtime.h"
+#include "game/service_state.h"
+#include "game/applet.h"
 #include "ctr/svc.h"
 /* INTEGRATOR: reconcile the session pointer and source/size fields with
  * include/game/service_runtime.h. This caller sign-extends the mode at +3,
@@ -13,13 +16,13 @@ struct ServicePublicationState {
     const void *source;
     unsigned size;
 };
-extern struct ServicePublicationState data_00242afc;
+
 /* [INFERENCE] Dispatch sets up no explicit callback arguments; callback
  * identities and their complete contracts remain to be adjudicated. */
-extern void (*bss_0049eee4[8])(void);
+
 extern CtrResult func_00185050(const void *source, unsigned size,
     unsigned short first, unsigned short second);
-extern void func_00192afc(CtrResult result, const void *location);
+
 /* [INFERENCE] Signed-byte mode matches this caller's extension. The callee
  * body does not establish whether its source parameter was signed char or int. */
 extern CtrResult func_00136878(const CtrHandle *session, signed char mode);

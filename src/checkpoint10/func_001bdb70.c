@@ -1,3 +1,7 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/scene_lifecycle.h"
+#include "game/screen_transition.h"
 #include "game/selection.h"
 
 struct W6HandlePanel10;
@@ -16,8 +20,8 @@ struct W6SelectionReset {
     struct W6DisplayHandle **handles;
 };
 extern void func_0016c55c(struct W6SelectionReset *state);
-extern void func_00181b68(unsigned mask, unsigned direction, int animate);
-extern int func_00177124(unsigned mask);
+
+
 
 static __forceinline void set_mode(struct W6SelectionReset *screen, int mode)
 {

@@ -1,3 +1,4 @@
+#include "game/playback_screen.h"
 #include "game/screen.h"
 #include "game/runtime.h"
 
@@ -23,7 +24,7 @@ public:
 /* INTEGRATOR: move to include/game/controller.h */
 extern "C" {
 void func_0016d038(FadeInputState *input);
-float func_0016e874(const MotionState *state);
+
 void func_00170088(DisplayData *object, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
 void func_00170030(BoundDisplayObject *object, unsigned red, unsigned green, unsigned blue, unsigned alpha);
 void func_00170014(DisplayData *object, unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);

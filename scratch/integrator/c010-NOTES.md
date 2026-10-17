@@ -4,6 +4,149 @@ This is an integrator working record, not acceptance or an independent review.
 No full build, full suite, prepare, finalize, history edit or push has run here.
 All counts below are candidate scope/evidence, never accepted credit.
 
+## Current milestone 2 — canonical source cutovers, not review-ready
+
+Merged c009 `1d10b1d6ab522bf1ea4abbb2d14cb527303ea21b`, including c008-r3
+`642d725079b6a2154bc6f06fa554dcbeb063bcea`, and then c009's newer handoff
+`1f66a8a76f7a16ba730946e9403ee2d7cbaf3491`. The inherited c009 dry base is
+2,206 units / 2,280 functions; its final matching/G3/probes/argcheck remain
+unrun. C009 retains the actual context-bearing slot14 before/after callbacks.
+FixC008R3 now owns the higher-priority preserving follow-up for service slots
+0/1/2/14 and the notification-list prefix. That follow-up is not merged here.
+No whole-ledger G3 success or checkpoint readiness can be inherited from r3.
+
+The current source proposal is **431 units / 438 functions / 48,724 target B**
+(311 game / 43 sdk / 77 middleware units), plus three revised accepted units:
+`src/sdk2/func_00180768.c` (sdk), `src/wave4/func_00185cc0.c` (game), and
+`src/wave6/func_001467e4.c` (game). **No final matching pass of these edits has
+run.** The prior collection results below remain historical destination results.
+
+### Scope is preserved through the latest publication seal
+
+`SCOPE-SUPPLEMENT-r2.json` and `SCOPE-SUPPLEMENT-r3.json` extend the initial
+272-manifest snapshot to **374 enumerated result manifests**. They add
+**19 unique hash-bound default-v2 matches**, not silently replacing historical
+attempts. Together with the separately reviewed SVC caller the scope is now
+**648 unique functions**:
+
+| Current disposition | Functions |
+| --- | ---: |
+| Collected proposal, still awaiting final canonical/MATCH checks | 438 |
+| Still-uncollected rows, including new publications and the SVC caller | 183 |
+| Explicit predecessor/c010 contract-resolution deferrals in this scope | 21 |
+| Added to c009, excluded from c010 credit | 6 |
+
+The later-model list remains 46 nondefault witnesses / 21 functions; the
+supplementary exact-receipt scan found no additional nondefault MATCH.
+C009's additional `0015e5d4`, `00190d0c` and `00190d68` deferrals are also
+guarded against recollection, without reclassifying their valid source as non-C.
+`scope-dispositions-r2.json` and HANDOFF bind the current row-by-row boundary.
+
+### Actual source and header integration performed
+
+- Removed **319 source-local function prototypes across 106 units** with
+  structural AST edits and imported their existing canonical headers.
+- Removed **65 source-local global declarations across 59 units**, so real
+  owner, pointer-depth, const and vtable contracts are no longer hidden by
+  private redeclarations.
+- Consolidated **32 token-identical record definitions** across 21 units,
+  and **six additional POD records** across four units differing only in
+  standard integer/elaborated C++ type spellings. No alias, owner rename,
+  member-name change, width narrowing or callback cast was used.
+- Added actual defining headers for four C++ forward-owner dependencies;
+  removed only seven now-empty extern-C blocks and their completed move markers.
+- Retained native preprocessing context: one existing NW_RELEASE definition
+  and four existing preinclude.h imports remain ahead of newly imported headers.
+- The free-list allocator now has one shared `FreeListPool` state using the
+  existing `FreeLink` node. ObjectPool contains that real subobject, its accepted
+  initializer uses `.head`, and both allocation wrappers use the actual owner
+  instead of a pointer-to-pointer prototype or duplicate BlockPool/SoundPoolLink
+  layouts. SoundPool remains an explicitly partial +8 pool-state view.
+- RegionHeap exposes the actual count-and-sentinel child list and state-chain
+  record. The allocator-mode operation has a void result and the return-only
+  hook retains its caller-evidenced owner input; erased identity remains INFERENCE.
+- New `game/runtime_type_initializers.h` owns 20 native declarations from
+  14 initializer units, retaining canonical RuntimeTypeInfo/VEC3 types.
+  One already-collected unit is migrated; 13 exact original-source variants
+  await destination collection. Their original receipt/source and variant hashes
+  are separately bound in `SOURCE-OVERRIDES-r1.json`. No author file was edited.
+
+Canonical imports are not ABI signoff. The static inventory retained 79
+different-definition leads before the newest parent merge; six spelling-only
+cases were subsequently discharged. Other owner/layout leads still require
+native probes and consumer adjudication. **202 candidate units still contain
+INTEGRATOR markers**; they are not represented as ready or silently stripped.
+
+### Names and concrete deferrals
+
+`names-admitted-r1.json` binds **127 non-address-name proposals** added to the
+checkpoint overlay, all actual hash-bound same-address emitted self-definitions
+(70 compiler-generated static-initializer names). Existing entries are unchanged.
+The earlier 717-name analyzer output is a raw metadata inventory that includes
+reserved automatic address names; it is not 717 adopted aliases. No undefined
+destructor/runtime alias, erased-call guess, __aeabi_atexit or __dso_handle binding
+was admitted. Native spelling/class/role and canonical typed contracts remain
+qualified and require review before acceptance.
+
+Two new concrete contract deferrals remove **188 B** from the proposal, not
+from accepted credit. Original sources/receipts and canonical variants are kept:
+
+- `001db404` (48 B): its private ResourceFont/ResourceFontVTable contradicts
+  canonical FontVTable data_00224d30 and the accepted native
+  ResFontBase::RemoveResourceBuffer endpoint. No shadow extern-C method or
+  guessed destructor alias is used. The accepted 001db130 wrapper is unchanged.
+- `00146758` (140 B): its C RegionHeap call to 0018216c cannot be represented
+  as a second declaration of the credited native HeapBase::FillFreeMemory.
+  The void result/full mode word are corrected, but a real native/C owner
+  cutover is still needed. No fake LockHeap/UnlockHeap aliases are invented.
+
+### Newly identified emitted-owner blockers — not yet changed
+
+`EMITTED-OWNERSHIP-LEADS-r1.json` records every extra catalogue definition in
+the bound author receipts. Five leads occur in three collected units:
+
+- `ut_LinkList.cpp` also emits accepted 0018d868, 00191154 and 00191178,
+  still owned by their old C units. GATES v1.16 requires explicit moves,
+  complete four-function destination ownership/profile, and deletion of the
+  obsolete old definitions; none of those moves/deletions has been applied.
+- The alternate block-query TU also emits 001650f8, duplicating the standalone
+  new unit. It narrows the tag to unsigned short while the standalone definition
+  retains the full unsigned input. A correct consolidation must preserve the
+  full word, remove the duplicate owner and reconcile the real variable-length
+  ArchiveFile block tail instead of keeping its shadow BinaryFileHeader cast.
+  The proposed archive/header consolidation has **not** been applied.
+- `001c7760` also emits 00183458, a classified **runtime** identity. It remains
+  uncredited and must not be added to C progress.
+
+These are concrete pre-review/G4 blockers, not reasons to ignore extra emitted
+functions or quietly reduce scope. Complete source/evidence is preserved.
+The user requested wrap-up before the newly coordinated owner fixes began.
+
+### Exact check boundary and continuation
+
+Main approved a single bounded, nice'd, sequential remaining collection plus
+per-unit canonical/MATCH pass, with a clean pause for c008 prepare. Before it
+started, FixC008R3 reclaimed the next audit slot for its preserving follow-up.
+**No c010 compile/collection/probe pass is currently running.** The driver is
+`collect_remaining.py --run collect-r2`; it excludes all predecessor/c010
+deferrals, consumes the publication supplements and verified canonical-input
+overrides, and preserves new refusals without automatically editing the manifest.
+After that collection, canonicalize its SVC source's now-shared 00115b0c
+declaration and merge the resulting units into c010's manifest deliberately.
+
+`probe_scope.py` reuses the existing c008-r2 compile helper for native and actual
+C-signature checks. `match_scope.py` uses explicit v2/none, --show 0, exact
+unit profiles, captured exits and a PAUSE-file boundary between units.
+`match-scope-r2.json` includes every current new unit and the three accepted
+source revisions. No full build/suite/prepare/finalize/history/push is authorized.
+
+Stable-ledger G3 exit 0, post-cutover native/signature probes, final matching,
+complete indirect/callback adjudication, argcheck and the seven-step pre-review
+are all **unexercised** on this merged source state. Preserve this milestone;
+do not substitute its original author MATCHes for any of those gates.
+
+## Historical milestone 1 record
+
 ## Base and frozen selection
 
 - Worktree `scratch/worktrees/c010`, branch `c010-integrate`, created from

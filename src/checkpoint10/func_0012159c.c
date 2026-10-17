@@ -1,12 +1,12 @@
 #include "ctr/svc.h"
 #include "game/stream_manager.h"
 
-extern struct StreamMutex *func_0018f734(void);
+
 extern CtrResult func_0012e7b4(CtrHandle *handle);
 extern int data_00243770;
 extern CtrHandle data_002438a4;
 extern CtrHandle data_002438a8;
-extern unsigned data_00243054;
+
 extern const unsigned data_00220b5c;
 
 static __forceinline void release_service(int *references)

@@ -7,6 +7,19 @@ struct PoolList;
 
 #include "game/pool_list.h"
 #include "game/functions.h"
+#include "game/region_heap.h"
+
+/* The allocator owns the first link word; enclosing pools pass this real
+ * subobject rather than declaring the allocator as a pointer-to-pointer API. */
+struct FreeListPool {
+    struct FreeLink *head;
+};
+
+/* [INFERENCE] Only the pool prefix and its +8 allocator state are recovered. */
+struct SoundPool {
+    unsigned char reserved00[8];
+    struct FreeListPool state;
+};
 
 struct SoundInstance;
 struct SoundHandle {
@@ -143,6 +156,9 @@ struct SoundPriorityHook {
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern unsigned func_00180768(struct FreeListPool *pool, void *storage,
+                             unsigned size, unsigned element_size);
+extern unsigned func_0018075c(struct SoundPool *pool, void *storage, unsigned size);
 extern int func_001d2cb4(const struct SoundPriorityHook *hook, unsigned sound_id);
 extern const unsigned data_0022459c[];
 extern const unsigned data_002245d8[];

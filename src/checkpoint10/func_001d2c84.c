@@ -1,10 +1,8 @@
+#include "game/sound_runtime.h"
 #include "game/pool_list.h"
 
 struct SoundInstance;
 struct SoundPlayer;
-struct SoundHandle {
-    struct SoundInstance *sound;
-};
 struct SoundInstanceVTable {
     unsigned char reserved00[0x10];
     void (*stop)(struct SoundInstance *sound);

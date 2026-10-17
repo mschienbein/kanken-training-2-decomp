@@ -1,3 +1,4 @@
+#include "game/task_runtime.h"
 struct PlaybackSlot {
     int resource;
     void *object;
@@ -9,7 +10,7 @@ struct PlaybackRegistry {
     struct PlaybackSlot entries[];
 };
 
-extern struct PlaybackRegistry bss_0029f540;
+
 
 int func_00172994(int index)
 {

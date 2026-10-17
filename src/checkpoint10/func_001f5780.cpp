@@ -1,10 +1,11 @@
+#include "game/graphics_resources.h"
 #include "game/functions.h"
 
 struct W19RegisteredObject { const void *vtable; };
 /* INTEGRATOR: move to include/game/static_registry.h */
 extern "C" {
 extern struct W19RegisteredObject data_002426cc;
-extern struct W19RegisteredObject data_002426d0;
+
 extern const void *const data_00224dcc[];
 extern const void *const data_00224db4[];
 extern void func_00164ebc(void *object, ObjectDestructor destroy, void (*image_base)(void));

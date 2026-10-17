@@ -1,3 +1,6 @@
+#include "game/motion_screen.h"
+#include "game/runtime.h"
+#include "game/text_writer.h"
 /* MotionState mirrors include/game/runtime.h. */
 struct MotionState {
     int mode;
@@ -15,22 +18,7 @@ struct MotionState {
     struct MotionKey *allocation;
 };
 
-struct AnimatedWidget {
-    unsigned flags;
-    int enabled;
-    unsigned char reserved08[0x48];
-    float position[2];
-    float displacement[2];
-    float effective[2];
-    float base[2];
-    unsigned char reserved70[0x14];
-    struct MotionState motion;
-};
 
-struct MotionScreen {
-    unsigned char reserved00[0x20];
-    struct AnimatedWidget *widgets[20];
-};
 /* INTEGRATOR: differs from include/game/runtime.h: MotionKey has a float value
  * at 0x14, written by this function; the existing reserved tail needs refinement. */
 struct MotionKey {
@@ -40,14 +28,14 @@ struct MotionKey {
     float value;
 };
 
-extern void func_0016ee38(struct MotionState *state);
-extern int func_0016ece8(struct MotionState *state, const struct MotionKey *keys, int heap);
-extern void func_0016ec84(struct MotionState *state, int first, int last);
-extern void func_0016ec6c(struct MotionState *state, int loop);
-extern void func_0016ec28(struct MotionState *state, int index);
+
+
+
+
+
 
 extern const struct MotionKey data_002180fc[3];
-extern void func_00192720(void *destination, const void *source, unsigned size);
+
 
 void func_001e9754(struct MotionScreen *screen, int index, float start, float finish, float duration)
 {

@@ -1,3 +1,8 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/resource_runtime.h"
+#include "game/scene_lifecycle.h"
+#include "game/text_writer.h"
 #include "game/screen.h"
 #include "game/selection.h"
 
@@ -27,10 +32,10 @@ struct TrainingMenuScene : MenuSceneBase {
 
 /* INTEGRATOR: move to include/game/menu_scene.h */
 extern "C" {
-int func_00177124(int channel);
-void func_00176e24(MenuSceneBase *scene);
-void func_00176dc8(int scene);
-void func_00174480(void *object);
+
+
+
+
 void func_00179a48(TrainingMenuScene *scene, int active);
 void func_00161650(TrainingMenuScene *scene);
 }

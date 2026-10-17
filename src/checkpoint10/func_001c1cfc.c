@@ -1,7 +1,9 @@
+#include "game/command_state.h"
+#include "game/resource_runtime.h"
 #include "game/property_descriptor.h"
 
-extern void func_00183208(struct DisplayObject *object);
-extern void func_0017a938(struct NameTable *const *table, int index, int mode);
+
+
 
 static __inline void reset_slot(struct WidgetSlot *slot)
 {

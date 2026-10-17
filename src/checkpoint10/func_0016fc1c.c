@@ -1,3 +1,5 @@
+#include "game/playback_screen.h"
+#include "game/screen_transition.h"
 #include "game/selection.h"
 
 /* INTEGRATOR: differs from src/wave10/func_001b06a4.c: the same object has
@@ -14,7 +16,7 @@ struct SettingsScreen {
     int previous_state;
     int transition;
 };
-extern void func_00181b68(int sound, int flags, int enabled);
+
 
 void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition)
 {

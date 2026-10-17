@@ -1,9 +1,6 @@
+#include "game/file_handle.h"
 #include "game/runtime.h"
 
-struct FileHandleOwner {
-    unsigned reserved00;
-    unsigned handle;
-};
 
 /* [INFERENCE] Role names: the SDK's checked-result helper reports a failing
  * result together with the address of the check (__current_pc). The

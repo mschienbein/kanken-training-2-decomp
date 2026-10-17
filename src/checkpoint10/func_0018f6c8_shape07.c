@@ -1,3 +1,4 @@
+#include "game/memory_arena.h"
 #include "ctr/svc.h"
 #include "game/waitable_handle.h"
 
@@ -14,8 +15,8 @@ struct MappedMemoryBlock {
 };
 
 struct MemoryArena;
-extern struct MemoryArena bss_004b51d0;
-extern void func_0014ae4c(struct MemoryArena *arena, struct MappedMemoryBlock *block);
+
+
 
 /* INTEGRATOR: differs from src/sdk/func_001c51a4.c: the pointed object is a
  * MappedMemoryBlock, evidenced by its mapping fields and shared arena; the

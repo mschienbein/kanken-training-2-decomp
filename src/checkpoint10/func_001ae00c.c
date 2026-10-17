@@ -1,3 +1,5 @@
+#include "game/resource_descriptors.h"
+#include "game/playback_screen.h"
 #include "game/screen.h"
 #include "game/input.h"
 
@@ -15,9 +17,9 @@ struct W19ChoiceMap {
     signed char values[];
 };
 
-extern const struct W19ChoiceMap *bss_002470cc[];
+
 extern void func_001adc0c(struct W19SelectionPanel *panel, int index);
-extern int func_0015e31c(unsigned value, unsigned parameter);
+
 
 static const struct W19ChoiceMap *choice_map(const struct W19SelectionPanel *panel)
 {

@@ -1,0 +1,22 @@
+[
+  {
+    "function": "func_00146758",
+    "profile": "middleware",
+    "original_source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4000/src/func_00146758.c",
+    "original_receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4000/match/func_00146758/final-middleware/func_00146758.result.json",
+    "original_source_sha256": "42b62d6d69f99bcd6ffb2502e422eea1523b1a1dd9995e555d2e5a2435d952b4",
+    "integration_source": "src/checkpoint10/func_00146758.c",
+    "integration_source_sha256": "cf5187e87ec64fe656a328e54d8e236830277ced2811046927b56e45eaeed90a",
+    "preserved_integration_source": "scratch/integrator/c010/deferred-contract/func_00146758.c",
+    "classification": "contract-resolution-deferred-not-rejected-match",
+    "reason": "Canonicalization fixes the full-word mode and void result, but this candidate calls func_0018216c with RegionHeap*. The credited definition is native nw::ut::HeapBase::FillFreeMemory(void*,u32), whose this owner is HeapBase, not an extern-C RegionHeap method. A duplicate C declaration or reinterpretation would conceal the same nominal accepted-definition contradiction that failed c008. The C view can describe matching offsets, but it does not itself establish a native declaration/definition identity or authorize a type shim. Preserve the author MATCH and canonical variant; re-entry needs a real native FrameHeap/HeapBase caller and lifecycle cutover (including the return-only hook ownership), or independently coherent canonical C/native interface evidence. No fake LockHeap/UnlockHeap aliases are proposed over the erased calls.",
+    "evidence": [
+      "src/nw4c/ut_HeapBase.cpp",
+      "include/nw/ut/ut_HeapBase.h",
+      "include/nw/ut/ut_FrameHeap.h",
+      "include/game/region_heap.h",
+      "src/wave6/func_001467e4.c",
+      "config/names.json"
+    ]
+  }
+]

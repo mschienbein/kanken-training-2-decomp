@@ -1,15 +1,8 @@
+#include "game/command_buffer.h"
+#include "game/material.h"
+#include "game/render_state.h"
 /* INTEGRATOR: differs from include/game/render_state.h: reserved ranges
  * contain the capability flags and force-update flag named below. */
-struct GpuVertexAttribute {
-    unsigned offset;
-    unsigned components;
-    unsigned format;
-    unsigned stride;
-    unsigned buffer;
-    unsigned char normalized;
-    unsigned char enabled;
-    unsigned char reserved16[2];
-};
 struct GpuState {
     unsigned dirty;
     unsigned char reserved04[8];
@@ -54,10 +47,10 @@ struct GpuState {
     unsigned char reserved695[0xdb];
     unsigned control;
 };
-extern struct GpuState *data_00242fd0;
+
 /* INTEGRATOR: differs from src/wave1/func_00195254.c: command generation
  * accesses the cursor as a word pointer; byte-copy users need an explicit cast. */
-extern unsigned *data_00242fc8;
+
 extern unsigned *data_00242fcc;
 extern unsigned data_00242fd4;
 extern unsigned data_00242fd8;

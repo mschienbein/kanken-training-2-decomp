@@ -1,3 +1,4 @@
+#include "game/service_runtime.h"
 struct AudioChannelState;
 /* INTEGRATOR: differs from include/game/audio_voice.h: the reserved00 region
  * contains a signed queue priority at offset 0x20 (written here, 0x20 bytes
@@ -9,7 +10,7 @@ struct AudioChannel {
     struct AudioChannelState *state;
 };
 struct AudioChannelQueue;
-extern struct AudioChannelQueue bss_004b6888;
+
 extern void func_00156484(struct AudioChannelQueue *queue,
                           struct AudioChannel *channel, int priority);
 

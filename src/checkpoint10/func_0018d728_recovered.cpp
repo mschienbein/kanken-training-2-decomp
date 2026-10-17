@@ -1,18 +1,18 @@
+#include <preinclude.h>
+#include "game/archive.h"
 /* SPDX-License-Identifier: GPL-3.0-only
  * LoadFile/LoadImpl control flow adapted from public NintendoWare4Ctr,
  * sources/libraries/snd/snd_SoundArchiveLoader.cpp, commit
  * 15ddb5632db5a6f0d2f46e3827fc78df468684bd. Selected definitions only;
  * address-named callees preserve the currently evidenced image contracts.
  */
-#include <preinclude.h>
 #include <nw/snd/snd_SoundArchiveLoader.h>
 #include <nw/snd/snd_SoundMemoryAllocatable.h>
 #include "game/functions.h"
 
 /* INTEGRATOR: move to include/game/sound_archive_loader.h */
 extern "C" {
-bool func_00138edc(const nw::snd::SoundArchive *, unsigned,
-                   nw::snd::SoundArchive::FileInfo *);
+
 int func_001839cc(nw::snd::internal::SoundArchiveLoader *, unsigned, void *,
                        unsigned, int, unsigned);
 unsigned func_00183030(void *, unsigned);

@@ -1,4 +1,5 @@
 #include <preinclude.h>
+#include "game/sound_loader.h"
 #include <nw/snd/snd_SoundArchive.h>
 #include <nw/snd/snd_WaveSoundFileReader.h>
 #include "game/archive.h"

@@ -1,3 +1,10 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/resource_runtime.h"
+#include "game/scene_lifecycle.h"
+#include "game/screen.h"
+#include "game/selection.h"
+#include "game/text_writer.h"
 /* [INFERENCE] Recovered partial menu-scene layout; names describe observed roles. */
 struct MenuScenePanel;
 struct MenuChannelA;
@@ -15,13 +22,13 @@ struct MenuSceneBase {
 
 /* INTEGRATOR: move to include/game/menu_scene.h */
 extern "C" {
-int func_00177124(int channel);
-void func_00177084(void);
-void func_00181b58(int scene);
-void func_00176e24(MenuSceneBase *scene);
-void func_00176df4(void);
-void func_00176dc8(int scene);
-void func_00174480(void *object);
+
+
+
+
+
+
+
 extern const unsigned data_0022359c[];
 void func_001ab540(MenuSceneBase *scene);
 }

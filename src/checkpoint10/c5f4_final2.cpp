@@ -1,42 +1,11 @@
+#include "game/scene_runtime.h"
 #include "game/functions.h"
 #include "game/matrix.h"
 #include "game/pool_list.h"
 
-struct SceneVec3 { float x, y, z; };
-struct SceneVec2 { float x, y; };
-union SceneMode {
-    unsigned char byte;
-    struct {
-        unsigned char kind : 4;
-        unsigned char global : 1;
-        unsigned char reserved : 3;
-    } bits;
-};
 /* INTEGRATOR: differs from include/game/screen.h (DisplayPane) and
  * include/game/layout.h (LayoutPane): expanded pane view with recovered
  * lists, transform matrices, packed mode, name and user-data fields. */
-struct SceneNode {
-    const void *const *vtable;
-    unsigned value04;
-    unsigned value08;
-    struct SceneNode *parent;
-    struct PoolList children;
-    struct PoolList links;
-    struct SceneVec3 position;
-    struct SceneVec3 angles;
-    struct SceneVec2 scale;
-    struct SceneVec2 offset;
-    struct Matrix34 local;
-    struct Matrix34 world;
-    struct SceneNode *next;
-    unsigned char alpha;
-    unsigned char inherited_alpha;
-    union SceneMode mode;
-    unsigned char flags;
-    char name[17];
-    char secondary_name[9];
-    unsigned char reservedd2[2];
-};
 
 /* INTEGRATOR: identical to MatrixIdentityW8C / matrix34Identity() in
  * src/wave8/func_00180234.cpp (same COMDAT statics, bound in config/names.json);

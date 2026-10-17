@@ -1,3 +1,4 @@
+#include "game/sound_task.h"
 #include <stddef.h>
 #include "game/sound_runtime.h"
 
@@ -18,7 +19,7 @@ struct WaveSoundCleanup {
 
 /* INTEGRATOR: move to include/game/sound_runtime.h */
 extern "C" {
-extern const unsigned data_002246b8[];
+
 PlaybackCleanupState *func_001d9050(PlaybackCleanupState *object);
 }
 

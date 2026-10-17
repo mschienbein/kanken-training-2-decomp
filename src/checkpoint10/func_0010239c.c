@@ -1,3 +1,4 @@
+#include "game/scheduler.h"
 /* INTEGRATOR: differs from include/game/scheduler.h: the dispatcher loads
  * enabled as a signed halfword and reads a scheduling-mode word at 0x60c. */
 struct ScheduledTask {
@@ -16,7 +17,7 @@ struct Scheduler {
     short end, begin;
     int dispatch_mode;
 };
-extern struct Scheduler bss_00495c8c;
+
 
 void func_0010239c(void)
 {

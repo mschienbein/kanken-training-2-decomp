@@ -1,3 +1,4 @@
+#include "game/graphics_resources.h"
 #include "game/runtime.h"
 
 class CleanupElement;
@@ -33,7 +34,7 @@ struct ResourceResetState {
 /* INTEGRATOR: move to include/game/resource_reset.h */
 extern "C" {
 /* INTEGRATOR: differs from src/wave1/func_00135a58.c: reset also owns object slots at +0x10 through +0x30. */
-extern ResourceResetState bss_0049da58;
+
 }
 
 static inline void release_element(CleanupElement **slot)

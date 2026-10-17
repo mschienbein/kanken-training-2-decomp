@@ -1,3 +1,4 @@
+#include "game/audio_voice.h"
 #include "game/object_manager.h"
 
 struct SoundVoiceGroup;
@@ -18,7 +19,7 @@ struct SoundOperation {
     struct SoundOperationEntry entries[];
 };
 extern void func_001d6678(struct RegistryEntry *entry);
-extern void func_001835b8(struct SoundVoiceGroup *group);
+
 
 void func_001d7e6c(struct SoundOperation *operation)
 {

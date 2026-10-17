@@ -1,16 +1,11 @@
+#include "game/render_state.h"
 /* INTEGRATOR: differs from include/game/render_state.h: the word at +4 is a control-flag field, not opaque padding. */
 struct GpuFlushState {
     unsigned dirty;
     unsigned control_flags;
 };
-struct SubmissionState {
-    unsigned command_mode;
-    unsigned enabled;
-    unsigned texture_state;
-    unsigned feature_mask;
-};
-extern struct GpuFlushState *data_00242fd0;
-extern struct SubmissionState *data_002429f0;
+
+
 extern void func_00133b08(void);
 extern void func_001876ac(struct GpuFlushState *state);
 extern void func_001871e4(struct GpuFlushState *state);

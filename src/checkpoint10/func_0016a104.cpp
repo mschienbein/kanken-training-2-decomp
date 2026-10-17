@@ -1,30 +1,8 @@
+#include "game/sound_loader.h"
 #include <stddef.h>
 #include "game/archive.h"
 
 struct SoundLoaderVTable;
-struct SoundLoaderState {
-    const SoundLoaderVTable *vtable;
-    const SoundArchive *archive;
-    unsigned char reserved08[0x200];
-    unsigned short loaded_count;
-    unsigned char state;
-    unsigned char reserved20b;
-};
-struct SoundLoaderCacheEntry {
-    unsigned file_id;
-    const void *file;
-};
-struct CachedSoundLoaderState {
-    const void *heap_vtable;
-    unsigned used;
-    unsigned limit;
-    SoundLoaderState loader;
-    SoundLoaderCacheEntry cache[9];
-    bool active;
-    bool released;
-    CachedSoundLoaderState();
-    ~CachedSoundLoaderState();
-};
 
 struct PrimarySoundLoaderVTable {
     const void *entries[8];
@@ -36,8 +14,8 @@ extern const PrimarySoundLoaderVTable data_00224854;
 /* INTEGRATOR: differs from src/wave8/func_001d4174.c: this caller uses the
  * SoundArchiveLoader layout (+4 archive pointer), not ArchiveHandle ownership.
  * Reconcile with the native nw::snd::internal::SoundArchiveLoader declaration. */
-void func_001d4174(SoundLoaderState *loader, const SoundArchive *archive);
-SoundLoaderState *func_001d4324(SoundLoaderState *loader);
+
+
 CachedSoundLoaderState *func_0016a104(CachedSoundLoaderState *owner);
 }
 

@@ -1,3 +1,7 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/scene_lifecycle.h"
+#include "game/screen_transition.h"
 struct W23FlowScreen {
     unsigned char reserved00[0x90];
     int stack_index;
@@ -5,8 +9,8 @@ struct W23FlowScreen {
     int previous_modes[2];
 };
 extern void func_001737c0(struct W23FlowScreen *screen, int enabled);
-extern void func_00181b68(unsigned mask, int direction, int animate);
-extern int func_00177124(unsigned mask);
+
+
 
 static void set_mode(struct W23FlowScreen *screen, int mode)
 {

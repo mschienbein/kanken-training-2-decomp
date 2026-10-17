@@ -1,5 +1,5 @@
-#include "game/screen.h"
 #define NW_RELEASE
+#include "game/screen.h"
 #include "nw/ut/ut_Color.h"
 
 struct DisplayPaneColors {

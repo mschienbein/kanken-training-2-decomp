@@ -1,10 +1,11 @@
+#include "game/service_state.h"
 #include "game/synchronization.h"
 
 struct StartupSignalState {
     unsigned char reserved00;
     unsigned char signaled;
 };
-extern struct StartupSignalState data_0023fdd8;
+
 extern struct SignalState data_0023fde0;
 
 /* Registered through func_0010ce44 with a null context. The lifecycle registry

@@ -1,4 +1,5 @@
-extern void func_0019df5c(void);
+#include "game/service_clients.h"
+
 extern int func_001367d8(void);
 extern void func_001217b4(void);
 extern unsigned func_0013614c(const char *name, unsigned *handle);

@@ -1,18 +1,6 @@
+#include "game/packed_records.h"
 #include "game/messages.h"
 
-struct PackedRecord {
-    int text_offset;
-    unsigned reserved04[2];
-    int value;
-    unsigned short identifier;
-    unsigned char reserved12;
-    signed char flag;
-};
-struct PackedRecordSet {
-    unsigned char reserved00[0x0c];
-    struct PackedRecord *records;
-    int count;
-};
 extern int func_00181aac(int selection);
 extern void func_00170dc0(struct DisplayHandle **handles, int index, int enabled);
 extern const unsigned short *func_001dcecc(struct PackedRecordSet *list, int value);

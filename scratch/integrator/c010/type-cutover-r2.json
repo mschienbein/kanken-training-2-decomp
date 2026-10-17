@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "plan": "type-cutover-plan-r2.json",
+  "definitions": 6,
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_0020f858.cpp",
+      "types": [
+        "NameTable"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0020f858.cpp#7BE6]\n5:struct NameTableVTable;\n6:/* Canonical NameTable from include/game/screen.h. */\n7:\n8:/* INTEGRATOR: differs from include/game/screen.h: this initializer writes\n9: * descriptor pointers in all three slots at +0/+4/+8. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "types": [
+        "AudioSlot"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001c599c.cpp#94B9]\n2:#include \"game/stream_manager.h\"\n3:\n4:/* INTEGRATOR: differs from include/game/audio_voice.h: recover a slot-list head\n5: * at 0x30, a dirty byte at 0x6f and the StreamMutex at 0x70 from reserved fields. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "types": [
+        "SoundHandle",
+        "SoundInstanceVTable"
+      ],
+      "headers_added": [
+        "game/sound_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d3bcc.cpp#15BE]\n1:#include \"game/sound_runtime.h\"\n2:#include \"game/functions.h\"\n3:\n4:struct SoundInstance;\n5:/* INTEGRATOR: differs from include/game/sound_runtime.h: expose the pool link\n6: * at 0xf8 inside reservedcc without moving the two existing links. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "types": [
+        "SoundHandle",
+        "SoundInstanceVTable"
+      ],
+      "headers_added": [
+        "game/sound_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d9c14.cpp#801E]\n1:#include \"game/sound_runtime.h\"\n2:#include \"game/functions.h\"\n3:\n4:struct SoundInstance;\n5:/* INTEGRATOR: differs from include/game/sound_runtime.h: expose the pool link\n6: * at 0xf8 inside reservedcc without moving the two existing links. */"
+    }
+  ],
+  "qualification": "Only standard scalar/elaborated type spellings differed; no alias, owner merge, member-name change or width change was introduced."
+}

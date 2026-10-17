@@ -1,11 +1,13 @@
+#include "game/command_state.h"
+#include "game/exp_heap.h"
+#include "game/playback_screen.h"
 #include "game/resource_tables.h"
 
-extern void func_00181a4c(uintptr_t resource, int first, int last,
-                         int mode, unsigned alpha);
-extern void func_00186598(void);
+
+
 extern void func_001811b8(void);
 extern unsigned func_0019d8c4(const struct FontFile *file);
-extern void *func_0019d798(int heap, int alignment, unsigned size);
+
 
 void func_00145928(uintptr_t resource, int index)
 {

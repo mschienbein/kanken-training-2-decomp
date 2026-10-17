@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/messages.h"
 #include "game/resource_tables.h"
 
@@ -22,9 +23,9 @@ extern unsigned char *func_0015d704(unsigned char *destination, const unsigned c
  * decoder input; bytes cannot distinguish that formal argument from eager
  * shared header parsing. Reconcile the decoder declaration before adoption. */
 extern int func_00192c20(const unsigned char *source, unsigned char *destination, unsigned count);
-extern void func_00180314(int texture);
+
 extern int func_0017fe98(int slot, const void *data, int format, int options);
-extern void func_0019d95c(uintptr_t resource, int index, int mode);
+
 extern void func_001ad848(struct MessageLayout *layout, int index);
 extern struct BoundDisplayObject *func_00170a20(int texture, int screen, int active,
                                                 int index, float x, float y, float z);

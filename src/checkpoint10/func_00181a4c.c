@@ -1,3 +1,4 @@
+#include "game/service_state.h"
 /* [INFERENCE] Role names. The queue lives at bss_004990d0 (256 records of 32
  * bytes starting at +0x102c, write index at +0x1024); the sibling
  * func_00186598 reaches the same object through its tail at bss_0049a0d0 (+0x1000).
@@ -32,7 +33,7 @@ struct CommandQueue {
  * +0x102c and types writeIndex as unsigned. This matching client accesses the
  * following 256 records and uses signed remainder for the index update.
  * Extend/unify the shared queue type before adopting this unit. */
-extern struct CommandQueue bss_004990d0;
+
 
 /* INTEGRATOR: differs from include/game/command_state.h: that prototype is
  * (int, int, int, int, unsigned); the stacked fifth word is read as a float

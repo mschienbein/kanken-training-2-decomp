@@ -1,16 +1,8 @@
+#include "game/audio_voice.h"
 #include "game/stream_manager.h"
 
 struct AudioBiquadCoefficients {
     short b0, b1, b2, a1, a2;
-};
-struct AdpcmCoefficients { short pairs[8][2]; };
-struct AudioSlot {
-    unsigned char reserved00[0x10];
-    signed char mode;
-    unsigned char state;
-    unsigned char reserved12[2];
-    struct AudioSlot *next;
-    unsigned char reserved18[0x18];
 };
 /* INTEGRATOR: differs from include/game/audio_voice.h: named fields occupy the
  * existing padding, including the pending list at 0x30 and mutex at 0x70. */
@@ -45,7 +37,7 @@ struct AudioChannel {
 };
 
 extern void func_0014fc98(struct AudioChannelState *state);
-extern void func_001526e0(struct AudioChannelState *state, int mode);
+
 
 void func_001526b4(struct AudioChannel *channel, int mode)
 {

@@ -1,3 +1,4 @@
+#include "game/notification.h"
 struct NotificationKeyEntry {
     unsigned char enabled;
     unsigned char reserved01[3];
@@ -9,7 +10,7 @@ struct NotificationKeyTable {
 };
 /* INTEGRATOR: differs from include/game/notification.h: this adds the keyed
  * table within SavedNotification.payload.storage.fields.reserved61d8. */
-extern struct NotificationKeyTable bss_00280af0;
+
 extern unsigned int func_00183070(int year, int month, int day);
 
 unsigned char func_001dc100(int year, int month, int day)

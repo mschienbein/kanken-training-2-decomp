@@ -1,3 +1,4 @@
+#include "game/scene_lifecycle.h"
 #include "game/cleanup.h"
 
 /* [INFERENCE] The base constructor's three configuration words are integer
@@ -5,7 +6,7 @@
 /* INTEGRATOR: move to include/game/controller_construction.h */
 extern "C" {
 BaseObject *func_00174484(BaseObject *object, int first, int second, int third);
-extern const ConstructedVtable data_00223838;
+
 BaseObject *func_001e7c4c(BaseObject *object);
 }
 

@@ -1,3 +1,4 @@
+#include "game/selection.h"
 #include <stdarg.h>
 
 /* INTEGRATOR: differs from include/game/selection.h: nine ten-byte records
@@ -19,7 +20,7 @@ struct W6Category {
     short reserved62;
     struct W6CategoryItem items[12];
 };
-extern struct W6Category bss_00290120[];
+
 
 void func_00190c1c(int category, int kind, int count, ...)
 {

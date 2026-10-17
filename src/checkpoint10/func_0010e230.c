@@ -1,3 +1,4 @@
+#include "game/resource_instance.h"
 /* [INFERENCE] Role: initializes a game-side RectDrawer-derived instance from a shader
  * binary descriptor.  func_00116e30 is the command-buffer size query, func_00116d18 the
  * RectDrawer::Initialize(void *buffer, const void *shaderBinary, u32 size) overload that
@@ -25,7 +26,7 @@ struct ResourceDescriptor {
 };
 
 extern unsigned func_00116e30(const struct ResourceFile *file, unsigned file_size);
-extern void *func_00116cb4(unsigned size, unsigned alignment);
+
 extern void func_00116d18(struct ResourceInstance *instance, void *workspace,
                           const struct ResourceFile *file, unsigned file_size);
 extern void func_00116dc0(struct ResourceInstance *instance, void *shared_table,

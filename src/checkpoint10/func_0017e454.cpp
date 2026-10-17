@@ -1,3 +1,4 @@
+#include "game/prefetch_stream.h"
 struct PrefetchReferenceTable;
 struct PrefetchInfoBlock {
     unsigned reserved00[4];

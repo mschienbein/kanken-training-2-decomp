@@ -1,3 +1,4 @@
+#include "game/resource_tables.h"
 #include <stdint.h>
 #include "game/shared_memory.h"
 
@@ -26,7 +27,7 @@ struct ResourceTable {
     uintptr_t secondResource;
     int secondIndex;
 };
-extern struct ResourceTable bss_002d3d60;
+
 
 void func_00103978(void)
 {

@@ -1,14 +1,20 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/resource_runtime.h"
+#include "game/scene_lifecycle.h"
+#include "game/screen.h"
+#include "game/selection.h"
 struct SceneTransitionState {
     unsigned char reserved00[0x34];
     int next_scene;
 };
 
-extern int func_00177124(unsigned mask);
-extern void func_00177084(void);
-extern void func_00181b58(int mode);
-extern void func_00176e24(struct SceneTransitionState *state);
-extern void func_00176df4(void);
-extern void func_00176dc8(int scene);
+
+
+
+
+
+
 
 void func_001a407c(struct SceneTransitionState *state)
 {

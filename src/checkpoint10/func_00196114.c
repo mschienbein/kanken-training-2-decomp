@@ -1,10 +1,11 @@
+#include "game/bss_0049ecf0.h"
 /* INTEGRATOR: differs from include/game/bss_0049ecf0.h: its reserveda4
  * span contains the writable selected-resource index at aggregate offset 0x124. */
 struct CommandSystem {
     unsigned char reserved00[0x124];
     int resource_index;
 };
-extern struct CommandSystem bss_0049ecf0;
+
 
 void func_00196114(unsigned mode)
 {

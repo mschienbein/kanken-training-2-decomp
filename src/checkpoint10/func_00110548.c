@@ -1,3 +1,4 @@
+#include "game/bss_0049ecf0.h"
 /* INTEGRATOR: differs from include/game/bss_0049ecf0.h: queue words 0x28 and
  * 0x2c are the execution threshold and queue mode. Other definitions agree. */
 struct Command {
@@ -34,9 +35,9 @@ struct CommandSystem {
     unsigned char reserved15c[4];
     void (*callback)(int event);
 };
-extern struct CommandSystem bss_0049ecf0;
-extern void func_0012fb38(void);
-extern void func_0012fb48(void);
+
+
+
 extern void func_00190878(void);
 
 void func_00110548(void)

@@ -1,3 +1,4 @@
+#include "game/cleanup_registry.h"
 #include "game/stream_manager.h"
 
 struct AsyncAllocatorState {
@@ -13,8 +14,7 @@ struct AsyncHeap {
 /* INTEGRATOR: move to include/game/async_heap.h */
 extern "C" {
 extern unsigned func_001d9ca0(void *memory, void *context);
-extern void *func_001d995c(struct AsyncAllocatorState *allocator, unsigned int size,
-                          unsigned (*complete)(void *, void *), void *context);
+
 }
 
 class ScopedStreamLock {

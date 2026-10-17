@@ -1,3 +1,4 @@
+#include "game/pane_descriptors.h"
 #include "game/character_panel.h"
 #include "game/selection.h"
 
@@ -8,7 +9,7 @@ struct W10LayoutPosition {
 
 /* INTEGRATOR: move to include/game/character_panel.h */
 extern "C" {
-extern const struct W10LayoutPosition *bss_00246f7c[];
+
 extern void func_0016e300(struct WidgetController *controller, int index,
                         unsigned char red, unsigned char green,
                         unsigned char blue, unsigned char alpha);

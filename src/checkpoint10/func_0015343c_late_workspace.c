@@ -1,3 +1,6 @@
+#include "game/service_runtime.h"
+#include "game/functions.h"
+#include "game/input_runtime.h"
 #include "game/stream_manager.h"
 
 struct StreamLockGuard {
@@ -20,10 +23,6 @@ struct ChannelWorkspace;
 struct ExtendedWorkspace;
 struct WorkspaceCoordinator;
 
-struct WorkspacePair {
-    struct ChannelWorkspace *channels;
-    struct ExtendedWorkspace *extended;
-};
 
 struct WorkspaceOwner {
     unsigned char reserved00[0x34];
@@ -31,10 +30,10 @@ struct WorkspaceOwner {
     struct StreamMutex mutex;
 };
 
-extern struct WorkspaceCoordinator bss_004b97ac;
+
 extern void func_0017e8fc(struct ChannelWorkspace *workspace);
-extern void func_0017e8bc(struct ExtendedWorkspace *workspace);
-extern void func_0017e858(struct WorkspaceCoordinator *coordinator, unsigned index, unsigned char enabled);
+
+
 extern int func_00154438(struct ChannelWorkspace *workspace);
 
 static __forceinline void release_workspace(struct WorkspaceOwner *owner, unsigned index)

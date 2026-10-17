@@ -1,3 +1,5 @@
+#include "game/render_state.h"
+#include "game/screen.h"
 struct GpuVertexAttribute {
     unsigned offset, components, format, stride, buffer;
     unsigned char normalized, enabled, reserved16[2];
@@ -21,8 +23,8 @@ struct GpuState {
     unsigned char reserved670[0x100];
     unsigned control;
 };
-extern struct GpuState *data_00242fd0;
-extern void func_0019cecc(void *destination, unsigned int size);
+
+
 
 void func_0019e414(unsigned features)
 {

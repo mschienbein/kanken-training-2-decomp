@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/runtime.h"
 
 struct RenderGroupVTable;
@@ -17,7 +18,7 @@ struct RenderResourceGroup {
 /* INTEGRATOR: move to include/game/render_resource.h */
 extern "C" {
 extern const RenderGroupVTable data_00224e04;
-int func_0019ceb4(void);
+
 void func_0019cc68(unsigned id);
 void func_0019cb3c(int count, const unsigned *ids);
 RenderResourceGroup *func_0016cb6c(RenderResourceGroup *group);

@@ -1,3 +1,4 @@
+#include "game/screen.h"
 /* INTEGRATOR: differs from include/game/screen.h: the global's partial
  * DisplayQueueCounter layout also has an enable word at +0x0c. */
 struct DisplayQueueCounter {
@@ -6,7 +7,7 @@ struct DisplayQueueCounter {
     int enabled;
 };
 
-extern struct DisplayQueueCounter bss_00495c70;
+
 
 void func_0010a814(void)
 {

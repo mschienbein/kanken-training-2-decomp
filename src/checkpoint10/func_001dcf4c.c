@@ -1,3 +1,5 @@
+#include "game/controller_transitions.h"
+#include "game/screen.h"
 #include "game/resource_tables.h"
 
 struct DeferredResourceList20 {
@@ -7,7 +9,7 @@ struct DeferredResourceList20 {
     int count;
 };
 
-extern int func_0019efd0(void);
+
 
 void func_001dcf4c(struct DeferredResourceList20 *list)
 {

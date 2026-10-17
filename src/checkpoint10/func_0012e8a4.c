@@ -1,3 +1,5 @@
+#include "game/service_runtime.h"
+#include "game/service_state.h"
 #include "ctr/svc.h"
 #include "game/applet.h"
 
@@ -14,8 +16,8 @@ struct ServicePublicationState {
 };
 /* INTEGRATOR: differs from include/game/service_runtime.h: publication uses
  * +4/+6 halfword parameters, a session pointer at +8, and payload at +28/+32. */
-extern struct ServicePublicationState data_00242afc;
-extern void (*bss_0049eee4[8])(void);
+
+
 extern CtrResult func_00185050(const void *source, unsigned size,
     unsigned short first, unsigned short second);
 /* INTEGRATOR: differs from src/sdk/func_00136878.cpp: this caller sign-extends

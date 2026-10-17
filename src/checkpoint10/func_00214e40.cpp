@@ -1,3 +1,4 @@
+#include "game/layout_draw.h"
 #include <new>
 #include "game/functions.h"
 
@@ -18,7 +19,7 @@ extern "C" {
 extern volatile StaticGuardW22E data_002438d0;
 extern volatile StaticGuardW22E data_002438d8;
 extern TextTagProcessorW22E data_002438d4;
-extern TextTagProcessorW22E data_002438dc;
+
 extern const void *const data_00224c90[];
 extern const void *const data_00224ca8[];
 extern void func_00216ba4(unsigned int category, unsigned int code);

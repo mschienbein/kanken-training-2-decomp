@@ -25,8 +25,8 @@ struct W19PracticeScreen {
     unsigned char has_link;
 };
 
-extern struct MenuItem *func_0017a49c(struct ItemPage *page, int index, int *changed);
-extern void func_00179068(struct W7dMenuControl *control, int index, int enabled);
+
+
 extern void func_0016dc94(struct W8EffectState *effects, int index);
 
 void func_001dd884(struct W19PracticeScreen *screen)

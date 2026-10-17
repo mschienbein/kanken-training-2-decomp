@@ -1,3 +1,5 @@
+#include "game/functions.h"
+#include "game/resource_runtime.h"
 #include <stddef.h>
 #include "game/runtime.h"
 #include "game/screen.h"
@@ -36,9 +38,9 @@ struct W24CollectionScreen {
     unsigned char reserved00[0x20];
     struct W24CollectionState *states[20];
 };
-extern void func_00183208(struct DisplayObject *object);
+
 extern void func_0019e08c(void *allocation);
-extern void func_0016f024(struct MotionState *state);
+
 extern void func_001e9ea4(struct W24CollectionScreen *screen, int index);
 
 void func_001e8810(struct W24CollectionScreen *screen, int index)

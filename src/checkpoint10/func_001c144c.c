@@ -1,3 +1,4 @@
+#include "game/random.h"
 #include "game/screen.h"
 
 struct W24BDecorationPanel {
@@ -5,7 +6,7 @@ struct W24BDecorationPanel {
 };
 
 extern void func_0016bf90(struct W24BDecorationPanel *panel, int index, int kind);
-extern int func_0018ffac(int bound);
+
 extern struct DisplayObject *func_0016eea4(
     unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha,
     int layer, int active, int kind,

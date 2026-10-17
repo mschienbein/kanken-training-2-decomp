@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "status": "same-global-POD-type-standard-spelling-equivalence",
+  "rules": [
+    "unsigned int and unsigned, signed int and int, short int and short, long int and long are the same standard scalar types.",
+    "Only C++ elaborated struct/class/union specifiers on existing member type names may differ; class-heads, member names, qualifiers and all other tokens must match.",
+    "No inheritance, nested definitions, record aliases, width changes, signed-char substitutions or method bodies are normalized."
+  ],
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_0020f858.cpp",
+      "type": "NameTable",
+      "line": 7,
+      "source_sha256": "2e14b52e8a45f884e2c0ed9c1d0694ddcc5aee66941dad8313c2606a13e5eaf8",
+      "kind": "identical-definition",
+      "body": "struct NameTable { const NameTableVTable * vtable ; int kind ; int category ; int identifier ; const char * name ; int count ; const char * * names ; NameTable ( ) ; NameTable ( int category , int identifier , const char * name , int count , ... ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/screen.h",
+          "body": "struct NameTable { const struct NameTableVTable * vtable ; int kind ; int category ; int identifier ; const char * name ; int count ; const char * * names ; NameTable ( ) ; NameTable ( int category , int identifier , const char * name , int count , ... ) ; }",
+          "line": 287
+        }
+      ],
+      "matching_headers": [
+        "include/game/screen.h"
+      ],
+      "classification": "same-POD-contract-primitive-or-elaborated-spelling-only"
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "type": "AudioSlot",
+      "line": 6,
+      "source_sha256": "1b146794ebd8bea2c9bd10a8536e7be909f036e1e061dc0e8ae8272449525610",
+      "kind": "identical-definition",
+      "body": "struct AudioSlot { unsigned char reserved00 [ 0x10 ] ; signed char mode ; unsigned char state ; unsigned char reserved12 [ 2 ] ; AudioSlot * next ; unsigned char reserved18 [ 0x18 ] ; }",
+      "canonical": [
+        {
+          "header": "include/game/audio_voice.h",
+          "body": "struct AudioSlot { unsigned char reserved00 [ 0x10 ] ; signed char mode ; unsigned char state ; unsigned char reserved12 [ 2 ] ; struct AudioSlot * next ; unsigned char reserved18 [ 0x18 ] ; }",
+          "line": 141
+        }
+      ],
+      "matching_headers": [
+        "include/game/audio_voice.h"
+      ],
+      "classification": "same-POD-contract-primitive-or-elaborated-spelling-only"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "type": "SoundHandle",
+      "line": 4,
+      "source_sha256": "1557722d0de21a4b58df285514769dce86440f662e660b241bf423fc8dec55e3",
+      "kind": "identical-definition",
+      "body": "struct SoundHandle { SoundInstance * sound ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundHandle { struct SoundInstance * sound ; }",
+          "line": 25
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_runtime.h"
+      ],
+      "classification": "same-POD-contract-primitive-or-elaborated-spelling-only"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3bcc.cpp",
+      "type": "SoundInstanceVTable",
+      "line": 5,
+      "source_sha256": "1557722d0de21a4b58df285514769dce86440f662e660b241bf423fc8dec55e3",
+      "kind": "identical-definition",
+      "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( SoundInstance * sound ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( struct SoundInstance * sound ) ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_runtime.h"
+      ],
+      "classification": "same-POD-contract-primitive-or-elaborated-spelling-only"
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "type": "SoundHandle",
+      "line": 4,
+      "source_sha256": "5f98bbefc021b3a6b3d4f69cb138f1bd4a97f92fa0fad5eca7969fda5dd14237",
+      "kind": "identical-definition",
+      "body": "struct SoundHandle { SoundInstance * sound ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundHandle { struct SoundInstance * sound ; }",
+          "line": 25
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_runtime.h"
+      ],
+      "classification": "same-POD-contract-primitive-or-elaborated-spelling-only"
+    },
+    {
+      "source": "src/checkpoint10/func_001d9c14.cpp",
+      "type": "SoundInstanceVTable",
+      "line": 5,
+      "source_sha256": "5f98bbefc021b3a6b3d4f69cb138f1bd4a97f92fa0fad5eca7969fda5dd14237",
+      "kind": "identical-definition",
+      "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( SoundInstance * sound ) ; }",
+      "canonical": [
+        {
+          "header": "include/game/sound_runtime.h",
+          "body": "struct SoundInstanceVTable { unsigned char reserved00 [ 0x10 ] ; void ( * stop ) ( struct SoundInstance * sound ) ; }",
+          "line": 29
+        }
+      ],
+      "matching_headers": [
+        "include/game/sound_runtime.h"
+      ],
+      "classification": "same-POD-contract-primitive-or-elaborated-spelling-only"
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+#include "game/drawing_system.h"
+#include "game/functions.h"
 #include "game/runtime.h"
 
 struct RenderTarget;
@@ -18,13 +20,13 @@ struct DrawingSystem {
     unsigned char reserved14[0x90];
     RenderTarget *target;
 };
-extern DrawingSystem bss_002d3dd0;
+
 
 /* INTEGRATOR: move to include/game/drawing_system.h */
 extern "C" {
 void func_0011de68(unsigned handle, unsigned mask, unsigned offset,
                    unsigned count, unsigned flags);
-int func_0019ceb4(void);
+
 void func_0019f0c4(int requested);
 }
 

@@ -1,7 +1,8 @@
+#include "game/resource_runtime.h"
 #include "game/screen.h"
 #include "game/runtime.h"
 
-extern void func_00183208(struct DisplayObject *object);
+
 
 static void reset_slot(struct WidgetSlot *slot)
 {

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct RelativeCallbackOwner {
     unsigned char reserved00[8];
     int offset;
@@ -5,7 +6,7 @@ struct RelativeCallbackOwner {
     unsigned state;
 };
 
-extern void func_001840dc(void **object);
+
 
 static void *ResolveRelative(int *relative)
 {

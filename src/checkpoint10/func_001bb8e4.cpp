@@ -1,3 +1,10 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/resource_runtime.h"
+#include "game/scene_lifecycle.h"
+#include "game/screen.h"
+#include "game/selection.h"
+#include "game/text_writer.h"
 /* [INFERENCE] Recovered partial menu-scene layout; names describe observed roles. */
 struct MenuScenePanel;
 struct MenuChannelA;
@@ -27,19 +34,19 @@ struct FeedbackMenuScene : MenuSceneBase {
 
 /* INTEGRATOR: move to include/game/menu_scene.h */
 extern "C" {
-int func_00177124(int channel);
-void func_00177084(void);
-void func_00181b58(int scene);
-void func_00176e24(MenuSceneBase *scene);
-void func_00176df4(void);
-void func_00176dc8(int scene);
-void func_00174480(void *object);
-void func_0016f55c(int group, int mode, unsigned short kind, unsigned short index, float x, float y, unsigned short flags);
-void func_001c31c0(MenuPageA *page);
-void func_001c3618(MenuPageB *page);
+
+
+
+
+
+
+
+
+
+
 void func_001c3c50(SceneDisplayResource *display);
-void func_001dc0a4(SceneFeedback *feedback);
-int func_0016d000(int index);
+
+
 extern const unsigned data_002236b8[];
 void func_001bb8e4(FeedbackMenuScene *scene);
 }

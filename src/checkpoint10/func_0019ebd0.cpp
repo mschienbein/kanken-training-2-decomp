@@ -1,3 +1,4 @@
+#include "game/service_protocol.h"
 #include "ctr/svc.h"
 
 /* [INFERENCE] The adjacent publication words form one value object. */
@@ -15,9 +16,6 @@ struct GameResourceState {
     void publish(unsigned int v) { value = v; flags = PublicationFlags(0, 1); }
 };
 
-struct ServiceObject {
-    unsigned handle;
-};
 
 struct ResourceTransferDescriptor {
     void *buffer;

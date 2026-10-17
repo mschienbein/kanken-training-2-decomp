@@ -1,3 +1,4 @@
+#include "game/service_state.h"
 #include "ctr/svc.h"
 
 /* Activity state polled by the cooperative idle wait: +0 selects between the
@@ -8,7 +9,7 @@ struct RuntimeActivity {
     unsigned int outstanding;
 };
 
-extern struct RuntimeActivity bss_004990d0;
+
 extern int func_001900ac(void);
 
 /* Qualification: every svc 0x0a in the image (0x104c04, 0x110f5c, 0x1811e0,

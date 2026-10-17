@@ -1,3 +1,4 @@
+#include "game/layout.h"
 #include "game/functions.h"
 #include "game/object_manager.h"
 #include "game/runtime.h"

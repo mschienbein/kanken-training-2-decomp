@@ -1,18 +1,8 @@
+#include "game/screen.h"
 /* INTEGRATOR: differs from include/game/screen.h: stack-passed blue and alpha
  * are read as bytes, and the core color arguments are forwarded as unsigned char. */
-struct DisplayObject {
-    float position[3];
-    float rotation[3];
-    float scale[3];
-    unsigned char reserved24[0x6e];
-    unsigned char types[2];
-};
 struct DisplayPart;
-struct DisplayData {
-    struct DisplayObject base;
-    struct DisplayPart *parts[];
-};
-extern unsigned char func_0017a9a0(const struct DisplayObject *object, int index);
+
 
 
 struct DisplayColorState {

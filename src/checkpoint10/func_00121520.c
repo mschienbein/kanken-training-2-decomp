@@ -1,7 +1,7 @@
 #include "ctr/svc.h"
 #include "game/stream_manager.h"
 
-extern struct StreamMutex *func_0018f734(void);
+
 extern CtrResult func_0012e7b4(CtrHandle *handle);
 struct ServiceReleaseState {
     unsigned char active;
@@ -10,7 +10,7 @@ struct ServiceReleaseState {
 };
 extern struct ServiceReleaseState data_00243774;
 extern CtrHandle data_002438a8;
-extern unsigned data_00243054;
+
 extern const unsigned data_00220b64;
 
 static __forceinline void release_service(struct ServiceReleaseState *state)

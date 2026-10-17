@@ -1,3 +1,5 @@
+#include "game/controller_transitions.h"
+#include "game/functions.h"
 #include "game/screen.h"
 #include "game/selection.h"
 
@@ -11,9 +13,9 @@ struct W24eCategoryState {
     int selection;
     int secondary;
 };
-extern void func_00166f1c(void *screen, int index, int enabled);
+
 extern void func_001741f8(struct Screen *screen, int index, float x, float y);
-extern void func_0017a034(struct Screen *screen, int index, int value);
+
 
 void func_001ed2cc(struct W24eCategoryState *state)
 {

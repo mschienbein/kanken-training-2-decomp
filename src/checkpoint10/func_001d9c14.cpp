@@ -1,11 +1,7 @@
+#include "game/sound_runtime.h"
 #include "game/functions.h"
 
 struct SoundInstance;
-struct SoundHandle { SoundInstance *sound; };
-struct SoundInstanceVTable {
-    unsigned char reserved00[0x10];
-    void (*stop)(SoundInstance *sound);
-};
 /* INTEGRATOR: differs from include/game/sound_runtime.h: expose the pool link
  * at 0xf8 inside reservedcc without moving the two existing links. */
 struct SoundInstance {

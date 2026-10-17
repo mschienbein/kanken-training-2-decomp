@@ -1,3 +1,4 @@
+#include "game/task_runtime.h"
 #include "game/synchronization.h"
 #include "game/region_heap.h"
 #include "game/archive.h"
@@ -26,7 +27,7 @@ struct W24eSoundLoadWorker {
     int read;
     int release_marker;
 };
-extern struct W24eSoundLoadWorker bss_0029f540;
+
 extern int func_00116ce8(struct RegionHeapOwner *owner);
 extern int func_00192ec8(struct W24eSoundLoader *loader, unsigned sound,
                          struct RegionHeapOwner *heap, int offset, int flags);

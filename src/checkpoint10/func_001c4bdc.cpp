@@ -1,3 +1,4 @@
+#include "game/file_handle.h"
 #include "game/file_session.h"
 #include "game/stream_manager.h"
 
@@ -16,7 +17,7 @@ struct FileObjectPool {
 
 /* INTEGRATOR: move to include/game/file_session.h */
 extern "C" {
-CtrHandle func_0016bd7c(FileSessionObject *object);
+
 CtrResult func_001c4f80(const CtrHandle *session);
 }
 

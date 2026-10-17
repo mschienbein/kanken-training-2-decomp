@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "scratch/integrator/c008-r2"))
 from probe_contracts import compile_probe, save
 import interfaces
 import toolchain
-from pycparser import c_ast, c_generator, c_parser
+from pycparser import c_ast, c_generator, c_parser, plyparser
 
 SYMBOL = re.compile(r"\b(?:func|data|bss)_[0-9a-fA-F]{8}\b")
 
@@ -70,7 +70,7 @@ def main() -> int:
                 body += '#include "' + str(source) + '"\n'
             path.write_text(body)
             metadata.update(compile_probe(path, profiles[unit["profile"]], subdir))
-        except (interfaces.InterfaceError, toolchain.ToolchainError, c_parser.ParseError, ValueError) as error:
+        except (interfaces.InterfaceError, toolchain.ToolchainError, plyparser.ParseError, ValueError) as error:
             metadata.update({"preprocess_error": str(error), "compiler_exit": None})
         rows.append(metadata)
         with (directory / "exits.jsonl").open("a") as stream:

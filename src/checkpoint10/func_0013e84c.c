@@ -1,6 +1,7 @@
+#include "game/sound_task.h"
 #include "game/service_runtime.h"
 
-extern void func_0019df28(struct SignalState *event, int value);
+
 
 void func_0013e84c(void)
 {

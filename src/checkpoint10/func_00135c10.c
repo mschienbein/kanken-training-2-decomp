@@ -1,11 +1,13 @@
+#include "game/render_resource.h"
+#include "game/exp_heap.h"
 #include "game/runtime.h"
 
 struct RuntimeRecord88 {
     unsigned active;
     unsigned char reserved04[0x54];
 };
-extern BufferState bss_0049d93c;
-extern void *func_0019d798(int heap, int alignment, unsigned size);
+
+
 
 void func_00135c10(int count)
 {

@@ -1,4 +1,5 @@
 #include <preinclude.h>
+#include "game/font_resource.h"
 #include <cstddef>
 #include <nw/ut/ut_LinkList.h>
 
@@ -13,7 +14,7 @@ struct SoundPlayerState;
 extern "C" {
 /* [INFERENCE] callee identity: BasicSound::DetachSoundPlayer(SoundPlayer *); the 12-byte callee
  * only clears the sound's player slot and is reached by a tail branch that armlink turned into a NOP. */
-void func_001d2c78(PlayerSound *sound, SoundPlayerState *player);
+
 void func_001d2c44(SoundPlayerState *player, PlayerSound *sound);
 }
 

@@ -1,3 +1,4 @@
+#include "game/pane_descriptors.h"
 #include "game/screen.h"
 
 struct MarkerPosition { short x, y; };
@@ -14,7 +15,7 @@ extern "C" {
 extern const MarkerPosition data_0023ed14[];
 extern const MarkerPosition data_0023ed60[];
 extern const MarkerPosition data_0023ede0[];
-extern MarkerResources bss_0024716c;
+
 void func_001701b4(MarkerController *controller, int index, int enabled);
 void func_001af00c(MarkerController *controller, unsigned mode, int value, int total);
 }

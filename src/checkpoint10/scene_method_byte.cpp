@@ -1,3 +1,5 @@
+#include "game/adjusted_callbacks.h"
+#include "game/scene_lifecycle.h"
 #include "game/functions.h"
 #include <stddef.h>
 
@@ -65,8 +67,8 @@ extern "C" {
 void func_001d6ab8(struct SceneEngine *engine);
 int func_001f2f40(const struct SceneEngine *engine);
 void func_001d7b6c(struct SceneController *controller, struct SceneWork *work);
-void func_0016a27c(struct AudioVoiceGroup *element, int enabled);
-void func_001d80b0(struct SceneController *controller);
+
+
 }
 
 inline void SceneController::propagateEnabled(unsigned char enabled)

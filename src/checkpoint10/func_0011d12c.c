@@ -1,3 +1,4 @@
+#include "game/render_state.h"
 struct PipelineConfiguration;
 
 struct W6eGpuBufferPayload;
@@ -19,21 +20,7 @@ struct PipelineStorage {
     unsigned char reserved804[0x50];
 };
 
-struct PipelineOwner {
-    struct PipelineStorage *storage;
-    unsigned ready;
-};
 
-struct GpuVertexAttribute {
-    unsigned offset;
-    unsigned components;
-    unsigned format;
-    unsigned stride;
-    unsigned buffer;
-    unsigned char normalized;
-    unsigned char enabled;
-    unsigned char reserved16[2];
-};
 
 struct GpuState {
     unsigned dirty;
@@ -54,8 +41,8 @@ struct GpuState {
     unsigned control;
 };
 
-extern struct PipelineOwner data_00242a14;
-extern struct GpuState *data_00242fd0;
+
+
 extern void (*data_002429f8)(unsigned module, unsigned kind, unsigned id, void *memory);
 extern void func_0018c784(struct W6eGpuBuffer *object);
 

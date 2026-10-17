@@ -1,3 +1,4 @@
+#include "game/drawing.h"
 #include "game/selection.h"
 #include "game/animation.h"
 
@@ -7,7 +8,7 @@ struct SelectionModes {
     int modes[7];
 };
 
-extern int func_00171c44(const struct W6ListController *controller, int index);
+
 
 void func_001a78a4(struct W6SelectionScreen *screen, int use_active)
 {

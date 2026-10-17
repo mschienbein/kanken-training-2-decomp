@@ -1,3 +1,7 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/scene_lifecycle.h"
+#include "game/screen_transition.h"
 #include "game/animation.h"
 #include "game/selection.h"
 
@@ -36,8 +40,8 @@ struct W24ePhaseState {
     unsigned elapsed;
 };
 
-extern int func_00177124(unsigned mask);
-extern void func_00181b68(unsigned mask, int active, int reset);
+
+
 extern void func_001e403c(struct W8ScreenState *state);
 
 void func_001e42fc(struct W24ePhaseState *state)

@@ -1,3 +1,4 @@
+#include "game/sound_controller.h"
 #include "game/animation.h"
 #include "game/selection.h"
 
@@ -24,7 +25,7 @@ extern void func_00179d48(struct AnimationOwner *owner, int panel_index,
 extern void func_001690a8(struct MenuTransitionState *state, int enabled);
 extern void func_00169018(struct MenuTransitionState *state, int enabled);
 extern void func_0016f174(struct MenuHint *hint, int enabled);
-extern void func_00177598(struct MenuMotion *motion, float x, float y);
+
 extern void func_001de2c0(struct MenuTransitionState *state);
 
 void func_00168dd0(struct MenuTransitionState *state, int enabled)

@@ -1,3 +1,4 @@
+#include "game/region_heap.h"
 #include "game/functions.h"
 #include <stddef.h>
 
@@ -7,9 +8,6 @@ struct SynchronizationState {
 struct SynchronizationOwner {
     const void *vtable;
     struct SynchronizationState synchronization;
-};
-struct FreeLink {
-    struct FreeLink *next;
 };
 struct SceneEntry;
 struct SceneEntryVtable {

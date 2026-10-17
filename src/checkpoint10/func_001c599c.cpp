@@ -1,16 +1,6 @@
+#include "game/audio_voice.h"
 #include "game/stream_manager.h"
 
-struct AdpcmCoefficients {
-    short pairs[8][2];
-};
-struct AudioSlot {
-    unsigned char reserved00[0x10];
-    signed char mode;
-    unsigned char state;
-    unsigned char reserved12[2];
-    AudioSlot *next;
-    unsigned char reserved18[0x18];
-};
 /* INTEGRATOR: differs from include/game/audio_voice.h: recover a slot-list head
  * at 0x30, a dirty byte at 0x6f and the StreamMutex at 0x70 from reserved fields. */
 struct AudioChannelState {

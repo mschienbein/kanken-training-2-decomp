@@ -1,7 +1,8 @@
+#include "game/applet.h"
 #include "game/service_state.h"
 
 extern void func_00192458(unsigned value);
-extern void func_0019242c(void);
+
 
 void func_00192410(void)
 {

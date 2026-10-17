@@ -1,3 +1,4 @@
+#include "game/applet.h"
 #include <stdbool.h>
 #include "ctr/svc.h"
 #include "game/service_state.h"
@@ -6,18 +7,18 @@ struct AppletTimeout {
     long long nanoseconds;
 };
 extern struct AppletTimeout data_00242a40;
-extern void func_00195e64(bool notify);
-extern unsigned func_0019ecf8(void);
+
+
 extern CtrResult func_00115ad4(unsigned state);
-extern void func_00192afc(CtrResult result, const void *location);
-extern void func_0019ec88(void);
-extern unsigned char *func_0011561c(void);
+
+
+
 extern bool func_00191e18(unsigned *handle, void *buffer, unsigned capacity,
                            void **memory, unsigned *size, struct AppletTimeout timeout);
-extern void func_0011587c(unsigned handle);
-extern void func_001155f8(void *memory);
-extern void func_00115608(void);
-extern void func_00115628(bool available);
+
+
+
+
 
 static __forceinline void check_result(CtrResult result, const void *location)
 {

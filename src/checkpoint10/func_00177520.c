@@ -1,3 +1,4 @@
+#include "game/messages.h"
 #include <stddef.h>
 #include "game/screen.h"
 
@@ -17,8 +18,7 @@ struct MessageLayout {
     unsigned char reserved24[4];
     unsigned short *text;
 };
-extern void func_0017a43c(struct MessageLayout *layout, const unsigned short *left,
-                         const unsigned short *right, int index);
+
 /* INTEGRATOR: differs from src/wave10/func_00170db4.c: the root object is a
  * MessageLayout whose entries begin with the referenced display object. */
 extern void func_00170dc0(struct MessageLayout *layout, int index, int enabled);

@@ -1,3 +1,4 @@
+#include "game/service_lifetime.h"
 #include "ctr/svc.h"
 
 /* [INFERENCE] Result comparison is performed on a one-word SDK value object. */
@@ -12,7 +13,7 @@ public:
 /* INTEGRATOR: move to include/game/service_runtime.h */
 extern "C" {
 extern CtrResult func_00136278(void);
-extern CtrResult func_0012d478(void);
+
 }
 
 extern "C" CtrResult func_0012d3e4(void)

@@ -1,3 +1,4 @@
+#include "game/shader.h"
 #include "game/matrix.h"
 
 struct MatrixIdentityW8C : Matrix34 {
@@ -33,7 +34,7 @@ struct RendererState {
 extern "C" {
 extern const char *data_00242e48[79];
 void func_00116c1c(struct ShaderGeometryBuffers *state);
-int func_00191b08(unsigned program_id, const char *name);
+
 }
 
 extern "C" void func_0010dd88(RendererState *state)

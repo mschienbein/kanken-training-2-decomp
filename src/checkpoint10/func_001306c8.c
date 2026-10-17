@@ -1,3 +1,5 @@
+#include "game/command_buffer.h"
+#include "game/material.h"
 /* [INFERENCE] Shader/draw-list layouts recovered from this function's field accesses only. */
 struct RenderShaderResource {
     unsigned reserved00[2];
@@ -44,8 +46,8 @@ static __forceinline void *renderRelative(const int *offset)
     return 0;
 }
 
-extern unsigned char *data_00242fc8;
-extern void func_0018e764(void *destination, const void *source, unsigned size);
+
+
 extern void func_001387f4(struct RenderDrawList **draws, int indexed);
 extern unsigned *func_0018423c(unsigned *destination, const unsigned *source);
 

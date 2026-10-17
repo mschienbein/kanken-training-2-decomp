@@ -1,3 +1,4 @@
+#include "game/notification.h"
 struct W23JProgressDay {
     unsigned char flags;
     unsigned char reserved01[3];
@@ -9,7 +10,7 @@ struct W23JProgressStore {
 };
 /* INTEGRATOR: differs from include/game/notification.h: the reserved region
  * contains eight-byte day records with byte flags at absolute offset 0x62a0. */
-extern struct W23JProgressStore bss_00280af0;
+
 extern int func_001699b8(void);
 
 void func_001dc180(void)

@@ -1,3 +1,4 @@
+#include "game/resource_runtime.h"
 #include <stddef.h>
 #include "game/runtime.h"
 #include "game/screen.h"
@@ -14,7 +15,7 @@ struct W24TextScreen {
     unsigned char reserved00[0x1300];
     struct W24TextSlot *slots[32];
 };
-extern void func_00183208(struct DisplayObject *object);
+
 extern void *func_0019df08(void *destination, unsigned int size);
 
 

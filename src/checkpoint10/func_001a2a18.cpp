@@ -1,3 +1,9 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/resource_runtime.h"
+#include "game/scene_lifecycle.h"
+#include "game/selection.h"
+#include "game/text_writer.h"
 #include "game/screen.h"
 
 struct W24BMenuVTable;
@@ -12,15 +18,15 @@ struct W24BMenuState {
 
 /* INTEGRATOR: move to include/game/menu_state.h */
 extern "C" {
-int func_00177124(unsigned int mask);
-void func_00177084(void);
-void func_00181b58(unsigned short state);
+
+
+
 void func_001c0f5c(struct WidgetSlot **slots);
 void func_001c1cfc(struct WidgetSlot **slots);
-void func_00176e24(struct W24BMenuState *screen);
-void func_00176df4(void);
-void func_00176dc8(int selection);
-void func_00174480(void *object);
+
+
+
+
 extern const struct W24BMenuVTable data_00223544;
 }
 

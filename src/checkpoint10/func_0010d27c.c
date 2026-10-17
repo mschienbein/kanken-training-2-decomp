@@ -1,6 +1,7 @@
+#include "game/functions.h"
 #include "game/runtime.h"
 #include "ctr/svc.h"
-extern int func_00195e94(void);
+
 extern int func_00195e84(void);
 /* [INFERENCE] Buffer/size are forwarded to an IPC static-buffer descriptor;
  * the third input is marshalled in the handle-transfer descriptor. */

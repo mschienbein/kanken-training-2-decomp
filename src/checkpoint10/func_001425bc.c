@@ -1,3 +1,4 @@
+#include "game/service_runtime.h"
 /* Caller contract: func_0013dec8 consumes bit 31 of this returned result;
  * the previous void declaration dropped an observed return value. */
 #include "ctr/svc.h"
@@ -13,7 +14,7 @@ struct ServicePublicationState {
     unsigned size;
 };
 /* INTEGRATOR: differs from include/game/service_runtime.h: +8 is a session pointer and +4/+6 are halfword publication parameters. */
-extern struct ServicePublicationState data_00242afc;
+
 extern const unsigned char data_00229aa0[];
 /* INTEGRATOR: move to include/game/service_runtime.h */
 CtrResult func_00185050(const void *source, unsigned size,

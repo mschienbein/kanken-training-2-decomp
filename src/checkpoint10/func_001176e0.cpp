@@ -1,3 +1,4 @@
+#include "game/exp_heap.h"
 #include "game/runtime.h"
 struct W15fVTable;
 struct HeapArena {
@@ -34,7 +35,7 @@ struct HeapManager {
 };
 /* INTEGRATOR: move to include/game/static_objects.h */
 extern "C" {
-extern void func_00193a6c(struct HeapArena *heap, void *allocation);
+
 extern void func_0019f518(struct HeapListState *lists, void *allocation);
 extern void func_0011774c(struct HeapListState *lists, void *allocation);
 }

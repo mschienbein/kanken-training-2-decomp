@@ -1,10 +1,10 @@
+#include "game/command_state.h"
 struct QueuedValueState {
     unsigned char reserved00[0x14];
     unsigned value;
 };
 
-extern void func_00181a4c(unsigned opcode, unsigned first, unsigned second,
-                          unsigned kind, unsigned flags);
+
 
 void func_0017771c(struct QueuedValueState *state, unsigned value)
 {

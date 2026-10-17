@@ -1,3 +1,4 @@
+#include "game/font_resource.h"
 struct ResourceArrayObject;
 struct ResourceArrayVTable {
     unsigned char reserved00[0x68];
@@ -12,10 +13,6 @@ struct ResourceArrayObject {
     unsigned char reserved04[8];
     ResourceArrayEntry *entries;
 };
-/* INTEGRATOR: move to include/game/resource.h */
-extern "C" {
-void func_0018f0dc(int count, const unsigned int *handles);
-}
 
 extern "C" void func_00113e20(ResourceArrayObject *object)
 {

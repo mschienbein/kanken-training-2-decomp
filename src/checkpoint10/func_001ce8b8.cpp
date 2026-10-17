@@ -1,3 +1,4 @@
+#include "game/font_resource.h"
 struct BinaryFileHeader;
 struct BinaryBlockHeader;
 struct LayoutAnimationFile {

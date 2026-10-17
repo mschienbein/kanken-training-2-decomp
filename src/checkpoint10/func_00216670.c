@@ -1,3 +1,5 @@
+#include "game/runtime.h"
+#include "game/text_writer.h"
 #include "game/functions.h"
 #include "game/screen.h"
 
@@ -6,7 +8,7 @@ struct W24eTextWriter {
     struct WidgetPosition position;
     unsigned char reserved34[0x30];
 };
-extern void func_00192720(void *destination, const void *source, unsigned size);
+
 extern float func_002166cc(struct W24eTextWriter *writer,
                            const unsigned short *text, int length);
 

@@ -1,17 +1,13 @@
+#include "game/material.h"
+#include "game/exp_heap.h"
 #include "game/runtime.h"
 
-struct ResourceArray {
-    void *buffer;
-    unsigned int count;
-    unsigned int capacity;
-    unsigned int state;
-};
 struct ResourceArrayEntry {
     unsigned active;
     unsigned char reserved04[0x18];
 };
-extern struct ResourceArray bss_002d5ea0;
-extern void *func_0019d798(int heap, int alignment, unsigned size);
+
+
 
 void func_00104fc4(void)
 {

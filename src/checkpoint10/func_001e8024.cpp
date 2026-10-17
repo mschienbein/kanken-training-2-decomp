@@ -1,3 +1,9 @@
+#include "game/functions.h"
+#include "game/playback_screen.h"
+#include "game/prompt.h"
+#include "game/resource_runtime.h"
+#include "game/scene_lifecycle.h"
+#include "game/text_writer.h"
 #include "game/runtime.h"
 #include "game/screen.h"
 
@@ -35,18 +41,18 @@ struct GridCleanupScreen {
 
 /* INTEGRATOR: move to include/game/selection_cleanup.h */
 extern "C" {
-int func_00177124(unsigned mask);
-void func_00177084(void);
-void func_00176e24(ScreenCleanupBase *screen);
-void func_00176df4(void);
-void func_00176dc8(int selection);
+
+
+
+
+
 void func_00168618(DisplayHandle **handles);
 void func_001685c0(DisplayHandle **handles);
 void func_00168454(SelectionGrid24 *grid);
 void func_001682e8(SelectionGrid29 *grid);
-void func_0016f024(MotionState *state);
-void func_00174480(void *object);
-PairedDisplayOwner *func_0016e270(void);
+
+
+
 void func_001c1600(PairedDisplayOwner *owner);
 extern const unsigned data_002237b4[];
 extern const unsigned data_00223890[];

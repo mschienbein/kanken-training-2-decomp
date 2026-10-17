@@ -1,14 +1,7 @@
+#include "game/resource_instance.h"
+#include "game/layout_binding.h"
 #include "game/pool_list.h"
 
-struct LayoutBinding {
-    const void *vtable;
-    PoolLink link;
-    unsigned count;
-    float frame;
-    void *first_allocation;
-    void *second_allocation;
-    unsigned short flags;
-};
 struct LayoutBindingAllocator;
 struct LayoutBindingAllocatorVTable {
     unsigned char reserved00[8];
@@ -24,8 +17,8 @@ struct LayoutBindingManager {
 
 /* INTEGRATOR: move to include/game/layout_binding.h */
 extern "C" {
-extern LayoutBindingAllocator *data_00242f84;
-extern LayoutBinding *func_001cce4c(LayoutBinding *binding);
+
+
 LayoutBinding *func_001ce940(LayoutBindingManager *manager);
 }
 
