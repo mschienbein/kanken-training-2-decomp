@@ -1399,14 +1399,36 @@ class CatalogueTests(unittest.TestCase):
     def test_original_invariants_and_stability(self) -> None:
         image = (ROOT / "orig/code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((ROOT / "orig/exheader.bin").read_bytes())
-        adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
+        adopted_bytes = (ROOT / "config/catalogue.json").read_bytes()
+        adopted = json.loads(adopted_bytes)
         protected, _, _ = analyze.load_protected_functions(ROOT, adopted, [])
         adopted_functions = {function["address"]: function for function in adopted["functions"]}
         self.assertTrue(set(protected) <= adopted_functions.keys())
-        first = analyze.build_catalogue(image, layout, protected_functions=protected)
-        second = analyze.build_catalogue(image, layout, protected_functions=protected)
-        self.assertEqual(first["stats"], second["stats"])
-        self.assertEqual(analyze.serialize_catalogue(first), analyze.serialize_catalogue(second))
+        # Replay the report's generation inputs: adoption replaced the v7 baseline,
+        # and later manifests must not rewrite the adopted catalogue's provenance.
+        reproduction_commit = "b52f08b1b6f17be29c03634c17c9cbd078ecd65c"
+        scratch = ROOT / "scratch"
+        scratch.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=scratch) as temporary:
+            root = Path(temporary)
+            for name, digest in adopted["generator"]["input_sha256"].items():
+                if not name.startswith("config/"):
+                    continue
+                historical = subprocess.run(["git", "show", f"{reproduction_commit}:{name}"],
+                                            cwd=ROOT, capture_output=True, check=False)
+                self.assertEqual(historical.returncode, 0, f"cannot read recorded v8 input {name}")
+                self.assertEqual(hashlib.sha256(historical.stdout).hexdigest(), digest, name)
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(historical.stdout)
+            for directory in ("orig", "research"):
+                (root / directory).symlink_to(ROOT / directory, target_is_directory=True)
+            output = root / "regenerated.json"
+            with mock.patch.object(analyze, "ROOT", root), redirect_stdout(io.StringIO()):
+                self.assertEqual(analyze.main(["catalogue", "--out", str(output)]), 0)
+            regenerated_bytes = output.read_bytes()
+        self.assertEqual(regenerated_bytes, adopted_bytes)
+        first = json.loads(regenerated_bytes)
         self.assertEqual(analyze.validate_catalogue(first, image, layout), [])
         self.assertEqual(sum(item["end"] - item["start"] for item in first["ranges"]), len(image))
         self.assertGreater(first["stats"]["functions"], 100)
@@ -1446,7 +1468,12 @@ class CatalogueTests(unittest.TestCase):
             0x214D28: 0x214D18, 0x214DA0: 0x214D9C, 0x214E44: 0x214E40,
             0x215130: 0x215120,
         })
-        self.assertEqual(sorted(adopted_entries - recovered_entries), sorted((address, "arm") for address in repairs))
+        self.assertEqual(recovered_entries, adopted_entries)
+        for old_address, address in repairs.items():
+            with self.subTest(repaired_address=address):
+                self.assertIn((address, "arm"), adopted_entries)
+                self.assertIn(address, adopted_functions)
+                self.assertNotIn(old_address, adopted_functions)
         self.assertEqual((functions[0x113CA4]["size"], functions[0x113CA4]["pools"]), (252, [[0x113D9C, 0x113DA0]]))
         self.assertEqual(functions[0x110CC8]["size"], 484)
         self.assertEqual(functions[0x14B358]["size"], 224)
@@ -1471,11 +1498,7 @@ class CatalogueTests(unittest.TestCase):
             with self.subTest(address=address):
                 self.assertEqual((functions[address]["kind"], functions[address]["size"]), ("function", head_size))
                 self.assertEqual((functions[target]["kind"], functions[target]["size"]), ("function", tail_size))
-        self.assertEqual({address for address, function in adopted_functions.items()
-                          if address in functions and functions[address] != function},
-                         {address for address, row in expected_splits.items()
-                          if adopted_functions[address]["size"] != row[0]})
-        self.assertEqual(set(adopted_functions) - set(functions), set(repairs))
+        self.assertEqual(functions, adopted_functions)
         self.assertTrue({0x110CC8, 0x14B358, 0x1C5260} <= set(functions))
         self.assertEqual(len(first["linker_tail_extent_splits"]), 139)
         self.assertEqual(sum(first["stats"]["linker_tail_census"].values()),
@@ -1487,17 +1510,16 @@ class CatalogueTests(unittest.TestCase):
                           if struct.unpack_from("<I", image, offset)[0] == 0xE1A00000])
         self.assertEqual(sum(row["decision"] == "in_frame_not_tail" for row in nop_inventory), 505)
         self.assertEqual(sum(row["decision"] == "not_executed_arm_code" for row in nop_inventory), 1)
-        self.assertLess(first["stats"]["bytes_by_range_kind"]["unknown"],
-                        adopted["stats"]["bytes_by_range_kind"]["unknown"])
-        self.assertLess(first["stats"]["anomalies"], adopted["stats"]["anomalies"])
-        self.assertEqual(sum(first["stats"][field] - adopted["stats"][field]
-                             for field in ("code_bytes", "pool_bytes", "literal_bytes")),
-                         first["stats"]["bytes_by_range_kind"]["function"]
-                         - adopted["stats"]["bytes_by_range_kind"]["function"])
+        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["anomalies"]),
+                         (adopted["stats"]["bytes_by_range_kind"]["unknown"], adopted["stats"]["anomalies"]))
+        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["anomalies"]),
+                         (7724, 70))
+        self.assertEqual(sum(first["stats"][field] for field in ("code_bytes", "pool_bytes", "literal_bytes")),
+                         first["stats"]["bytes_by_range_kind"]["function"])
         for split in first["linker_tail_splits"]:
             self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
                              ("function", 4))
-            self.assertEqual(functions[split["target"]]["kind"], "function")
+            self.assertEqual(functions[split["target"]]["kind"], adopted_functions[split["target"]]["kind"])
 
 
 if __name__ == "__main__":
