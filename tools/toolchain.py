@@ -93,10 +93,36 @@ def _deps_unchanged(deps: dict[str, str]) -> bool:
 def _host_dependency(dep: str) -> Path:
     """A --depend entry as a host path. wibo shows armcc the host root as drive Z:, so a header the
     compiler finds through its own install (bin/../include/stddef.h) is reported as Z:/...; on
-    Windows every path is already native."""
+    Windows every path is already native. Windows names are case-insensitive, so armcc may report
+    a header in another case than the host file (algorithm.CC for algorithm.cc): such a path is
+    resolved to the existing file, component by component."""
     if wibo_path() is not None and len(dep) > 2 and dep[0] in "Zz" and dep[1] == ":" and dep[2] in "/\\":
-        return Path("/" + dep[3:].replace("\\", "/"))
-    return Path(dep)
+        path = Path("/" + dep[3:].replace("\\", "/"))
+    else:
+        path = Path(dep)
+    if wibo_path() is None or path.exists():
+        return path
+    return _case_insensitive(path) or path
+
+
+def _case_insensitive(path: Path) -> Path | None:
+    current = Path(path.anchor) if path.is_absolute() else Path(".")
+    for part in path.parts[1:] if path.is_absolute() else path.parts:
+        if part in (".", ".."):
+            current = current / part
+            continue
+        candidate = current / part
+        if candidate.exists():
+            current = candidate
+            continue
+        try:
+            matches = [p for p in current.iterdir() if p.name.lower() == part.lower()]
+        except OSError:
+            return None
+        if len(matches) != 1:
+            return None
+        current = matches[0]
+    return current
 
 
 def _parse_depend(text: str, source: Path) -> list[Path]:

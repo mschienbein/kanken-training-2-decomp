@@ -87,10 +87,31 @@ def function_spans(text: str) -> dict[str, tuple[int, int, int]]:
     """Name -> (declaration start, body start, body end), without interpreting macros.
 
     Token boundaries, not brace regexes, handle strings, comments and nested bodies.
-    Preprocessor lines are masked only for locating the author's original spelling.
+    Splice continued lines before recognizing comments or preprocessing directives,
+    retaining a map back to the exact input for every returned offset.
     """
-    masked = re.sub(r"^[ \t]*#[^\n]*(?:\\\n[^\n]*)*", lambda m: " " * len(m[0]), text, flags=re.M)
-    tokens = [t for t in interfaces.TOKEN.finditer(masked) if not t[0].startswith(("/*", "//"))]
+    pieces, offsets = [], []
+    cursor = 0
+    for continuation in re.finditer(r"\\\r?\n", text):
+        pieces.append(text[cursor:continuation.start()])
+        offsets.extend(range(cursor, continuation.start()))
+        cursor = continuation.end()
+    pieces.append(text[cursor:])
+    offsets.extend(range(cursor, len(text)))
+    spliced = "".join(pieces)
+    tokens = []
+    line_start, directive, previous_end = True, False, 0
+    for token in interfaces.TOKEN.finditer(spliced):
+        if "\n" in spliced[previous_end:token.start()]:
+            line_start, directive = True, False
+        previous_end = token.end()
+        if token[0].startswith(("/*", "//")):
+            continue
+        if line_start:
+            directive = token[0] == "#"
+        line_start = False
+        if not directive:
+            tokens.append(token)
     spans = {}
     start = 0
     depth = 0
@@ -120,7 +141,8 @@ def function_spans(text: str) -> dict[str, tuple[int, int, int]]:
                         break
                 if braces:
                     raise PermuteError("unbalanced function body")
-                spans[word] = (tokens[start].start(), tokens[j].start(), tokens[k - 1].end())
+                spans[word] = (offsets[tokens[start].start()], offsets[tokens[j].start()],
+                               offsets[tokens[k - 1].end() - 1] + 1)
                 i, start = k, k
                 continue
         depth += (word == "{") - (word == "}")
@@ -141,20 +163,25 @@ class Program:
     @classmethod
     def parse(cls, text: str, targets: tuple[str, ...], source: Path,
               original: str | None = None) -> Program:
-        for token in interfaces.TOKEN.finditer(text):
-            if token[0] in {"asm", "__asm", "__asm__", "__svc", "__svc_indirect"}:
-                raise PermuteError("assembly, SVC declarations and named registers are forbidden")
-        prepared = interfaces.prepare(text, source)
+        # Let the interface auditor recognize approved SVC/result/CP15 declarations.
+        # Their raw spelling is retained; target-body annotations still fail closed.
+        try:
+            prepared = interfaces.prepare(text, source)
+        except interfaces.InterfaceError as exc:
+            raise PermuteError(str(exc)) from exc
         try:
             ast = c_parser.CParser().parse(prepared.text, filename=str(source))
         except plyparser.ParseError as exc:
             raise PermuteError("preprocessed input is not supported C (C++ is not supported)") from exc
         functions = {n.decl.name: n for n in ast.ext if isinstance(n, c_ast.FuncDef)}
-        spans = function_spans(prepared.text)
+        parser_spans = function_spans(prepared.text)
+        # prepare() expands __int64 to long long, so its offsets cannot slice text.
+        # Keep parser coordinates for annotation checks and raw coordinates for edits.
+        spans = function_spans(text)
         for name in targets:
-            if name not in functions or name not in spans:
+            if name not in functions or name not in spans or name not in parser_spans:
                 raise PermuteError(f"target function is not defined: {name}")
-            _, start, end = spans[name]
+            _, start, end = parser_spans[name]
             if any(start <= a.start < end for a in prepared.annotations):
                 raise PermuteError(f"target body has ABI-relevant ARMCC annotations: {name}")
             if functions[name].param_decls:
@@ -190,7 +217,7 @@ class Program:
 
     def hints(self, ast: c_ast.FileAST | None) -> tuple[str, str]:
         text = self.text if ast is None else self.render(ast)
-        spans = function_spans(interfaces.prepare(text, Path("candidate.c")).text)
+        spans = function_spans(text)
         functions, patches = [], []
         for name in self.targets:
             start, _, end = spans[name]

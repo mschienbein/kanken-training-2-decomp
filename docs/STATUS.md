@@ -2,6 +2,26 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-17 (evening) — c005-r2 accepted; SDK/middleware compiler found; library reuse
+
+**Accepted:** 489 functions / 19,288 B (seq 5: … c004-r3, c005-r2). Denominator **v7**: 4,557
+creditable functions / 1,129,946 B (1.71%). Gates **v1.13**. CI green.
+
+- **c005-r2** (waves 5–7, 190 functions + 34 revised units): c005 failed both reviews on three
+  dropped caller-evidenced arguments; r2 fixed them, rejected one finding with caller evidence that
+  both reviewers re-derived, and swept 351 contracts (`docs/known-issues-c005-r2.md`).
+- **Compiler:** CTR-SDK and middleware were built with ARMCC 4.1; frozen profiles `sdk` (-O2) and
+  `middleware` (-O3) on build 791 (`docs/COMPILER.md`), from a 352k-compile study.
+- **Reuse (GPL-3.0, `LICENSE`, `THIRD_PARTY.md`):** public NW4C decompilation adapted with
+  `tools/fingerprint.py` (115 functions confirmed so far, pending checkpoints).
+- **Harness:** caller-contract audit `tools/argcheck.py` (review step 7), Ghidra author aid
+  `tools/decompile.py`, G3 fixes (standard headers, CP15 registers, const provenance,
+  namespace-aware C++ identity), runtime/C-library bindings, case-insensitive dependency paths.
+- **In flight (private):** c006 (waves 8–10 + SDK batches, ~380 functions) and c007 (wave 11,
+  large functions, SDK/IPC template, NW4C) integrating; ~60 parallel authors including 16–45 KB
+  static-initializer functions (two already match: 0x1f7d7c 44,844 B, 0x209ec8 16,752 B);
+  denominator v8 under revision after a failed review.
+
 ## 2026-10-17 — WSL desktop: c004-r3 accepted; harness widened for parallel authoring
 
 **Accepted:** 299 functions / 7,620 B (seq 4: c001-pilot-r4, c002-wave1-r3, c003-wave2-r3,

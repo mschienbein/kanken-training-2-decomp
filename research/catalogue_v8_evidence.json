@@ -1,0 +1,1186 @@
+{
+  "author_dispositions": [
+    {
+      "address": "0x0015dd7c",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0,
+      "notes": "[INFERENCE] Library identity: strcmp-family/NW4C string comparison utility. Evidence is a leaf NUL-terminated character comparison loop returning the difference of signed chars; unlike ISO strcmp, ordering of high-bit characters is signed. Library ownership still needs independent classification evidence, so no library source is authored.",
+      "profile": "game",
+      "report": "scratch/authors/w10d/RESULT.json",
+      "size": 76,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0019de40",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 2,
+      "notes": "Optimized ARM strlcpy implementation: destination/source/capacity interface, reserved terminator byte, bounded copy while scanning the full source, return of full source length, and aligned word-at-a-time zero-byte detection with a byte fallback. No authored replacement per the standard ARM/string-library rule. Callers use size_t func_0019de40(char *, const char *, size_t).",
+      "profile": null,
+      "report": "scratch/authors/w11e/RESULT.json",
+      "size": 200,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00192720",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "final_match_exit_code": null,
+      "isa": "arm",
+      "match_result": null,
+      "minutes": 0.0,
+      "notes": "[INFERENCE] Optimized handwritten/runtime-style memory-copy helper (prefetching block copy and flag-driven remainder handling). library_candidate only: independent library byte-identity evidence is not established; no candidate source supplied.",
+      "profile": "game",
+      "report": "scratch/authors/w6c/RESULT.json",
+      "size": 116,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x001008dc",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 1,
+      "notes": "[INFERENCE] compiler-generated ARM-to-Thumb interworking helper in the runtime region; no source under the author policy. The catalogue marks only the ARM prefix as code and the remaining half as literals, despite the control-flow transition into that half; investigate its mixed-ISA ownership before credit.",
+      "profile": "game",
+      "report": "scratch/authors/w6d/RESULT.json",
+      "size": 16,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0019147c",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 1,
+      "notes": "Contains a CP15 memory-barrier operation in the command allocator; no approved shared extension header is present, so no candidate source is supplied.",
+      "profile": "game",
+      "report": "scratch/authors/w7b/RESULT.json",
+      "size": 620,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00186454",
+      "attempts": 0,
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 0.5,
+      "notes": "Compiler unsigned division/remainder dispatch helper; library_candidate, no source. The main names overlay now binds natural unsigned division to this helper.",
+      "profile": "game",
+      "report": "scratch/authors/w7b/RESULT.json",
+      "size": 48,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00192bd8",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.5,
+      "notes": "CP15 TLS-based recursive-lock acquisition primitive; no approved shared extension header is present, so no candidate source is supplied.",
+      "profile": "game",
+      "report": "scratch/authors/w7b/RESULT.json",
+      "size": 56,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x001941f8",
+      "attempts": 0,
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "[INFERENCE] Compiler unsigned 64-bit quotient/remainder runtime helper, using normalization and reciprocal-table arithmetic. No source authored under the brief's compiler-helper exclusion.",
+      "profile": "game",
+      "report": "scratch/authors/w7f/RESULT.json",
+      "size": 692,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0018d204",
+      "attempts": 0,
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "[INFERENCE] Compiler signed 64-bit quotient/remainder wrapper around func_001941f8, with operand and result sign correction. No source authored under the compiler-helper exclusion.",
+      "profile": "game",
+      "report": "scratch/authors/w7f/RESULT.json",
+      "size": 80,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x001a000c",
+      "attempts": 0,
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "[INFERENCE] Generic memcpy/__aeabi_memcpy-style runtime helper with alignment and short-tail paths; also called by runtime conversion and formatting functions according to LibraryEvidence. No known-library byte fingerprint was established. No source or C-credit claim.",
+      "profile": "game",
+      "report": "scratch/authors/w7g/RESULT.json",
+      "size": 136,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0018f7f4",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "[INFERENCE] Optimized standard strncpy runtime helper: aligned word-at-a-time zero detection, byte tail and NUL padding. No known-library byte fingerprint was established. No source or C-credit claim.",
+      "profile": "game",
+      "report": "scratch/authors/w7g/RESULT.json",
+      "size": 108,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00196504",
+      "attempts": 0,
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 0,
+      "notes": "[INFERENCE] Compiler runtime unsigned-64-to-float conversion wrapper (__aeabi_ul2f); base/softfp ABI and secondary conversion entry. No C source supplied.",
+      "profile": "game",
+      "report": "scratch/authors/w8c/RESULT.json",
+      "size": 8,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00196498",
+      "attempts": 0,
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 0,
+      "notes": "[INFERENCE] Compiler runtime float-to-unsigned-64 conversion helper (__aeabi_f2ulz); integer bit decomposition and floating exceptional dispatcher. No C source supplied.",
+      "profile": "game",
+      "report": "scratch/authors/w8c/RESULT.json",
+      "size": 80,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00145570",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0,
+      "notes": "Compiler-runtime floating exceptional dispatcher uses return-address-relative descriptors and computed control flow; library candidate, not policy-compliant authored C.",
+      "profile": "game",
+      "report": "scratch/authors/w8c/RESULT.json",
+      "size": 160,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0014a860",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0,
+      "notes": "[INFERENCE] Compiler runtime software floating remainder core; integer normalization, quotient/remainder rounding and exceptional dispatcher. No C source supplied.",
+      "profile": "game",
+      "report": "scratch/authors/w8c/RESULT.json",
+      "size": 296,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0019f5bc",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "library_candidate: mixed ARM/Thumb interworking entry reached by formatting-runtime dispatch. The catalogue marks only the ARM entry as code; its Thumb continuation needs catalogue/ownership review. [INFERENCE] formatting-library ownership; no source authored.",
+      "profile": "game",
+      "report": "scratch/authors/w8e/RESULT.json",
+      "size": 16,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x002175ec",
+      "attempts": 1,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.005,
+      "notes": "[INFERENCE] ARM C-library floating-point status-word stub (__ARM_fp_statusword shape): the Thumb floating-format conversion caller passes two zero control words and consumes the returned rounding-status bits. Library candidate under the revised brief; the early constant-return candidate was removed.",
+      "profile": "game",
+      "report": "scratch/authors/w8j/RESULT.json",
+      "size": 8,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x001912b0",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.003,
+      "notes": "SDK command-arena submit/wait primitive contains a CP15 data-memory barrier. library_candidate with no source, as required for the privileged synchronization primitive by the author brief.",
+      "profile": "game",
+      "report": "scratch/authors/w8j/RESULT.json",
+      "size": 332,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0019e08c",
+      "attempts": 2,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.004,
+      "notes": "[INFERENCE] C++ operator delete[] ABI adapter forwarding to heap deallocation; the catalogue loader naturally calls this address when deleting its previous trivially-destructible array. Classified as library_candidate, with no authored source retained.",
+      "profile": "game",
+      "report": "scratch/authors/w9c/RESULT.json",
+      "size": 12,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0018f860",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "Standard ARM C-library strncmp candidate: bounded NUL-aware string comparison with aligned-word and byte fallback paths. Proposed strncmp binding is supplied; no authored source retained.",
+      "profile": "game",
+      "report": "scratch/authors/w9c/RESULT.json",
+      "size": 240,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00192b78",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "Configured strlen implementation; optimized byte/word string-length routine with an aligned word scanning path. Standard C-library candidate, not authored.",
+      "profile": "game",
+      "report": "scratch/authors/w9c/RESULT.json",
+      "size": 96,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00195be4",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 26.97,
+      "notes": "ARM runtime strcmp candidate: alignment-sensitive word/byte paths use packed-byte saturation operations to locate a NUL or differing byte; no C source authored and no exact library build asserted.",
+      "profile": "game",
+      "report": "scratch/authors/w9e/RESULT.json",
+      "size": 244,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00107078",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 26.97,
+      "notes": "[INFERENCE] Compiler-generated RTTI/type-query callback candidate: self-relative name comparison and descriptor return; registered with the corresponding callback by runtime initializer func_00101670. No source authored; classification remains a candidate, not a proven library-build identity.",
+      "profile": "game",
+      "report": "scratch/authors/w9e/RESULT.json",
+      "size": 72,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00134128",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 26.97,
+      "notes": "[INFERENCE] Compiler-generated RTTI/type-query callback candidate: same self-relative name comparison and descriptor-return shape as func_00107078, with the same runtime initializer caller func_00101670. No source authored; classification remains a candidate.",
+      "profile": "game",
+      "report": "scratch/authors/w9e/RESULT.json",
+      "size": 72,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00183458",
+      "attempts": 2,
+      "classification_evidence": {
+        "equals_original": true,
+        "generated_size": 20,
+        "generated_symbol": "__ARM_common_memcpy4_5",
+        "identity_check_exit": 0,
+        "relocations": 0
+      },
+      "disposition": "runtime: admitted compiler identity/ABI evidence",
+      "isa": "arm",
+      "minutes": 18.62,
+      "notes": "Compiler-generated __ARM_common_memcpy4_5, not C credit: ARMCC emitted an identical relocation-free 20-byte COMDAT for five-byte structure assignment. Identity comparison exit 0; no authored source retained.",
+      "profile": "game",
+      "report": "scratch/authors/w9f/RESULT.json",
+      "size": 20,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0019d074",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "ARM C math-library cosf: quadrant-zero even polynomial returns one for tiny inputs, shared argument reduction, and infinity/NaN error handling; game rotation code supplies angle arguments.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 376,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x001180b8",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "[INFERENCE] ARM math-library Payne–Hanek float argument-reduction helper (__mathlib_rredf2 family): multiword products, PC-relative reduction table, float remainder plus quadrant output; called by both sine and cosine.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 324,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0019d1ec",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "ARM C math-library sinf: quadrant-zero odd polynomial returns the tiny input, with subnormal underflow signalling, shared argument reduction, and infinity/NaN error handling.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 456,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00181e84",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "[INFERENCE] ARM math-library floating-underflow helper: deliberately squares a tiny nonzero float to raise underflow; called from the subnormal-input sine path.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 16,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x0014f6b0",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "ARM C99 float-classification helper: sign-independent exponent/fraction classification distinguishes zero, subnormal, normal, infinity and NaN; used by sine and power exceptional paths.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 44,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00155208",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "ARM C math-library powf: two-float power implementation, logarithm/exponential tables and exceptional cases; reverb callers compute 10 raised to a negative decay-time ratio.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 1888,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x00155ddc",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.3,
+      "notes": "ARM software-float ABI float-to-unsigned conversion helper (__aeabi_f2uiz family): incoming float bits and the unsigned conversion result pass through integer argument/result registers.",
+      "profile": "game",
+      "report": "scratch/authors/w9g/RESULT.json",
+      "size": 16,
+      "source": null,
+      "status": "library_candidate"
+    },
+    {
+      "address": "0x001213b0",
+      "attempts": 0,
+      "disposition": "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+      "isa": "arm",
+      "minutes": 0.0,
+      "notes": "ARM C-library per-thread context initializer [INFERENCE]: installs the runtime TLS slot at +0x5c, initializes its +0x60 context and runtime callbacks (func_00100078/func_00121410), and consults an optional runtime hook. Batch evidence explicitly identifies C-runtime TLS context initialization. Propose reviewed runtime classification, not C credit; authenticated archive/member identity remains unproven. No source authored. Original operation includes a CP15 TLS read; no extension use is proposed for credit.",
+      "profile": "game",
+      "report": "scratch/authors/x03/RESULT.json",
+      "size": 96,
+      "source": null,
+      "status": "library_candidate"
+    }
+  ],
+  "classification_records": [
+    {
+      "address": 1052012,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "no-frame C __svc shape failed all 16 compiler-grid cells; new 12/4-byte negative probe",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: no-frame C __svc shape failed all 16 compiler-grid cells; new 12/4-byte negative probe",
+      "identity": "kernel ABI ExitProcess",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 4
+    },
+    {
+      "address": 1077440,
+      "basis": "compiler_abi",
+      "compiler_emission": "404 original-ABI cases; probe_lasr emits __aeabi_lasr",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: 404 original-ABI cases; probe_lasr emits __aeabi_lasr",
+      "identity": "__aeabi_lasr",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 40
+    },
+    {
+      "address": 1116620,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "#1505: six raw result words require r0-r5",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: #1505: six raw result words require r0-r5",
+      "identity": "kernel ABI QueryMemory",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 48
+    },
+    {
+      "address": 1175304,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "#1501: required processor-ID input in r4",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: #1501: required processor-ID input in r4",
+      "identity": "kernel ABI CreateThread",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 36
+    },
+    {
+      "address": 1208108,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memset4_5",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 24,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1233224,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "no-frame C __svc shape failed all 16 compiler-grid cells",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: no-frame C __svc shape failed all 16 compiler-grid cells",
+      "identity": "kernel ABI ExitThread",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 8
+    },
+    {
+      "address": 1233256,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "#1501: required timeout high input in r4",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: #1501: required timeout high input in r4",
+      "identity": "kernel ABI WaitSynchronizationN",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 36
+    },
+    {
+      "address": 1249168,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memclr4_8",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 16,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1251672,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memcpy4_8",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 20,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1265276,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "no-frame C __svc shape failed all 16 compiler-grid cells",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: no-frame C __svc shape failed all 16 compiler-grid cells",
+      "identity": "kernel ABI Break",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 8
+    },
+    {
+      "address": 1386852,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memclr4_12",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 20,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1563232,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memcpy4_6",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 20,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1586264,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memcpy4_5",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 20,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1593608,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "#1501: required timeout input in r4/r5",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: #1501: required timeout input in r4/r5",
+      "identity": "kernel ABI ArbitrateAddress",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 24
+    },
+    {
+      "address": 1598548,
+      "basis": "compiler_abi",
+      "compiler_emission": "names.json full natural division caller MATCH; 530 original-ABI cases",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: names.json full natural division caller MATCH; 530 original-ABI cases",
+      "identity": "__aeabi_uidivmod",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 48
+    },
+    {
+      "address": 1598684,
+      "basis": "compiler_abi",
+      "compiler_emission": "names.json two natural zero-fill caller MATCHes; 50 original-ABI cases",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: names.json two natural zero-fill caller MATCHes; 50 original-ABI cases",
+      "identity": "__aeabi_memclr / __aeabi_memclr4",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 64
+    },
+    {
+      "address": 1624908,
+      "basis": "compiler_abi",
+      "compiler_emission": "names.json natural constructor/fill caller MATCH; 50 original-ABI cases",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: names.json natural constructor/fill caller MATCH; 50 original-ABI cases",
+      "identity": "__aeabi_memset",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 16
+    },
+    {
+      "address": 1626628,
+      "basis": "compiler_abi",
+      "compiler_emission": "530 original-ABI cases; probe_idiv64/probe_imod64 emit __aeabi_ldivmod",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: 530 original-ABI cases; probe_idiv64/probe_imod64 emit __aeabi_ldivmod",
+      "identity": "__aeabi_ldivmod",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 80
+    },
+    {
+      "address": 1642956,
+      "basis": "compiler_abi",
+      "compiler_emission": "names.json full natural member-array constructor MATCH; 17 original-ABI cases",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: names.json full natural member-array constructor MATCH; 17 original-ABI cases",
+      "identity": "__aeabi_vec_ctor_nocookie_nodtor",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "thumb",
+      "kind": "runtime",
+      "size": 34
+    },
+    {
+      "address": 1655288,
+      "basis": "compiler_abi",
+      "compiler_emission": "530 original-ABI cases; probe_udiv64/probe_umod64 emit __aeabi_uldivmod",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: 530 original-ABI cases; probe_udiv64/probe_umod64 emit __aeabi_uldivmod",
+      "identity": "__aeabi_uldivmod",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 692
+    },
+    {
+      "address": 1662168,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "#1501: required permission input in r4",
+      "evidence": "scratch/integrator/armcc-ext/REPORT.md, raw-ABI compiler limits / literal-stub probes: #1501: required permission input in r4",
+      "identity": "kernel ABI ControlMemory",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "size": 36
+    },
+    {
+      "address": 1664152,
+      "basis": "compiler_abi",
+      "compiler_emission": "404 original-ABI cases; probe_f2ul emits __aeabi_f2ulz",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: 404 original-ABI cases; probe_f2ul emits __aeabi_f2ulz",
+      "identity": "__aeabi_f2ulz",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 80
+    },
+    {
+      "address": 1664260,
+      "basis": "compiler_abi",
+      "compiler_emission": "407 original-ABI cases; probe_ul2f emits __aeabi_ul2f",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: 407 original-ABI cases; probe_ul2f emits __aeabi_ul2f",
+      "identity": "__aeabi_ul2f",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 8
+    },
+    {
+      "address": 1701592,
+      "basis": "compiler_abi",
+      "compiler_emission": "530 original-ABI cases; probe_idiv32/probe_imod32 emit __aeabi_idivmod",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: 530 original-ABI cases; probe_idiv32/probe_imod32 emit __aeabi_idivmod",
+      "identity": "__aeabi_idivmod",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 556
+    },
+    {
+      "address": 1703948,
+      "basis": "compiler_abi",
+      "compiler_emission": "names.json two full natural copy caller MATCHes; 50 original-ABI cases",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, binding proofs and 20-owner ABI inventory: names.json two full natural copy caller MATCHes; 50 original-ABI cases",
+      "identity": "__aeabi_memcpy / __aeabi_memcpy4",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 136
+    },
+    {
+      "address": 1919004,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memclr4_8",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 16,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    },
+    {
+      "address": 1922400,
+      "basis": "compiler_generated",
+      "evidence": "scratch/integrator/runtime-helpers/REPORT.md, compiler-generated whole-body identity table",
+      "identity": "__ARM_common_memclr4_5",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "runtime",
+      "size": 16,
+      "whole_body_identity": "Named relocation-free ARMCC-emitted section equals the entire original extent"
+    }
+  ],
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "provenance": {
+    "independent_review": "scratch/review/catalogue-v8/REVIEW.md independently checked all eight common-helper body digests and retained corrected-grid/source identities, not the old ABI/compiler executions.",
+    "kernel_abi": "Five raw-ABI declaration rejections and the corrected three-function 16-cell no-frame grid are inherited from scratch/integrator/armcc-ext/REPORT.md; not rerun for this revision.",
+    "leading_input_model": "Calls may read every r0-r3 argument. At 0x002102b4 the r1 setup relies on that declared may-read model, not a freshly recovered callee prototype.",
+    "ownership": "SDK/archive/handwritten ownership beyond the demonstrated ABI/shape constraints remains [INFERENCE].",
+    "proof_status": "Retained reports and identity-bound metadata, not fresh compiler/emulation executions.",
+    "runtime_helpers": "3,552 original ABI executions, natural-caller MATCHes and compiler-emission/body-identity proofs are inherited from scratch/integrator/runtime-helpers/REPORT.md; former private worktrees are absent."
+  },
+  "schema_version": 1,
+  "source_candidate_sha256": "2fe7c9767b57a60a1b5a43b4fdc2c2ac0651a30d580341f75f183230e1dc3d8c",
+  "source_input_sha256": {
+    "config/candidates/c004.json": "2626c2911fae00d433e162c87b8835cac0415fd0baf6e406610cd96666130af8",
+    "config/candidates/c005.json": "514701fedc425d536f37fed07472173d99e5fd0015d837265ca3fcd04dff7df5",
+    "config/catalogue.json": "b303210af5d4f8395044bb8cd31508d7ee801b4640704c1253a433e68e1c88d3",
+    "config/matches.json": "fd31d2cd50424520fe6e7444fe70b553dc76e1b2a2abb377eb61e8ef85cd11e4",
+    "config/names.json": "90834c90c362fcd648d3e777b253bfa7aa35d8496cc03b2649459f175ab61378",
+    "scratch/analyze/catalogue-v7.json": "b303210af5d4f8395044bb8cd31508d7ee801b4640704c1253a433e68e1c88d3",
+    "scratch/authors/w10d/RESULT.json": "66115566b286dbc949bbceebf3e815666f11fb7aa7aa18a0c667dae24091feaa",
+    "scratch/authors/w11e/RESULT.json": "9689ce3f67e8c65debc2dbf8abb3496548a6ec55546e656e71c69ed28ef3514b",
+    "scratch/authors/w6c/RESULT.json": "5d93123e0797d1f71213c711bcf4843d17397485c2982ada5569f920441d1fae",
+    "scratch/authors/w6d/RESULT.json": "4c33d0db789d712f912b9d8c23b75ae078387e07b33cf9dc3559175d9d48d483",
+    "scratch/authors/w7b/RESULT.json": "12be2d509ef18391d72a6d7db60bdb53fc270a0fa3a063d003d705f206e3a5ff",
+    "scratch/authors/w7f/RESULT.json": "983942cc794951fd3663a35db8981d0ef0bd6aefcdebf204167cc977a68f2c53",
+    "scratch/authors/w7g/RESULT.json": "e1f34527da49297d4b21f9e9bdcbe8983f1e9ef997e0210dc55427ea3c518380",
+    "scratch/authors/w8c/RESULT.json": "fac849f5733d7c2211142fd42a805a3536adf623ee9551aa358cf3a3c9f699f4",
+    "scratch/authors/w8e/RESULT.json": "bb854ae7c7a07a7b2768ed3a9b1255c48d9197fbc56b70171253c2df1a645ce7",
+    "scratch/authors/w8j/RESULT.json": "05892faef9dbcba76a7003bba49c0990177eccc45e193a1a803890b81200f27b",
+    "scratch/authors/w9c/RESULT.json": "2fbcc22d063daf0893ad370198a5ec1bf23e2c4dbc926eceae3d98102b3cb332",
+    "scratch/authors/w9e/RESULT.json": "f8d053fe23f09b584ed3dd6b13e5bc05e3aac47a4ee5a2dae7f2b02977843b8f",
+    "scratch/authors/w9f/RESULT.json": "368e7f53a0a38158ab69eb82c1f69510a1b38517c61b5702913b71d9693e6339",
+    "scratch/authors/w9g/RESULT.json": "45a92c5fad0a7eb48c6d80472476fa77e13998d838b4c809e125491c29de87e8",
+    "scratch/authors/x03/RESULT.json": "b2bcc05d1912e2fdb01210b4731edb82516b507c86f4895b882b56cc0c9f6467",
+    "scratch/integrator/armcc-ext/REPORT.md": "66a2f95a6deda10781d3f20b4a5c4a5adf15d3d717c92cc56c46a37a195bb2d3",
+    "scratch/integrator/residue/REPORT.md": "4e0ab6e351a4f2fe107b783067b7aa038949a71171b2abce097d1af824de584a",
+    "scratch/integrator/residue/avoided.json": "a2fadfb6e2daa77424bb00724cd966a20fd00c2b76a53e43b3c1acf0c4114f67",
+    "scratch/integrator/runtime-helpers/REPORT.md": "cdd63c35f704b0f46796efd65442d9df1935fab0de24881c56f645b5a646150a",
+    "scratch/worktrees/catalogue-v8/research/catalogue_v8.py": "6749a203a32e2e0e1a6de86efed77ee298435e719a204604303fc54ad8560f19",
+    "scratch/worktrees/catalogue-v8/tests/test_analyze.py": "3ca79bd4edf19a96033aa5b07613c3d016b746121f11b34044fcf28a5177c4f0",
+    "scratch/worktrees/catalogue-v8/tools/analyze.py": "6292e93f25ba8555d6cc1a71f6dbf601f7db322a89a9122f56a664d156b5841f"
+  },
+  "thumb_dispositions": [
+    {
+      "address": "0x00100048",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Locale-table uppercase conversion, including the exceptional 223 character case. Observed direct/tail callers include 0x001130a0, 0x001207b8 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 30
+    },
+    {
+      "address": "0x00100066",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Forwarder into the signed wide-integer text-conversion routine at 0x100206. Observed direct/tail callers include 0x001263cc, 0x00126800 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 8
+    },
+    {
+      "address": "0x0010006e",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Forwarder into the unsigned wide-integer text-conversion routine at 0x100290. Observed direct/tail callers include 0x00120028, 0x0018fa84 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 8
+    },
+    {
+      "address": "0x001000a0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Wide-string to multibyte conversion with output-length/state accounting and the locale conversion callback. Observed direct/tail callers include 0x0012da18 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 108
+    },
+    {
+      "address": "0x0010010c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Forwarder into the reentrant delimiter-tokenization implementation at 0x1003e0. Observed direct/tail callers include 0x0012da18 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 8
+    },
+    {
+      "address": "0x0010011c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Allocation of a 136-byte runtime state block, called by the lazy locale-state initializer. Observed direct/tail callers include 0x0010030c (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 18
+    },
+    {
+      "address": "0x0010015e",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Radix-8/10/16 unsigned text parsing with end-pointer and range-error handling. Observed direct/tail callers include 0x0018fe60 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 168
+    },
+    {
+      "address": "0x00100206",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Signed 64-bit text conversion with whitespace, sign, end-pointer and overflow handling. Observed direct/tail callers include 0x00100066 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 138
+    },
+    {
+      "address": "0x00100290",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Unsigned 64-bit text conversion preserving error state and handling an optional minus sign. Observed direct/tail callers include 0x0010006e (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 124
+    },
+    {
+      "address": "0x0010030c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Lazy per-thread C-library locale/state allocation through the TLS slot accessor at 0x140fcc. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 84
+    },
+    {
+      "address": "0x00100360",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Bounded byte-string formatted-output adapter using a callback cursor and terminating zero. Observed direct/tail callers include 0x00136510 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 60
+    },
+    {
+      "address": "0x0010039c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Locale-dependent wide-character to multibyte conversion, including callback dispatch for nontrivial encodings. Observed direct/tail callers include 0x001000a0 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 68
+    },
+    {
+      "address": "0x001003e0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Reentrant string tokenization using delimiter membership scans and a saved cursor. Observed direct/tail callers include 0x0010010c (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 72
+    },
+    {
+      "address": "0x00100428",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "ASCII radix-digit decoding for decimal and alphabetic digits, returning failure outside the requested base. Observed direct/tail callers include 0x0010015e, 0x00100446 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 30
+    },
+    {
+      "address": "0x00100446",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Unsigned 64-bit radix accumulation shared by signed/unsigned integer-conversion adapters. Observed direct/tail callers include 0x00100206, 0x00100290 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 216
+    },
+    {
+      "address": "0x00100528",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Hexadecimal/pointer integer formatting with positional digit-table access and 64-bit nibble extraction. Observed direct/tail callers include 0x00100580, 0x0010059c (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 88
+    },
+    {
+      "address": "0x00100580",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "32-bit variadic-argument adapter into the shared hexadecimal integer formatter. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 28
+    },
+    {
+      "address": "0x0010059c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Eight-byte-aligned 64-bit variadic-argument adapter into the same hexadecimal formatter. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 10
+    },
+    {
+      "address": "0x001005ca",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-format engine context adapter, constructing callback/output state before the shared parser. Observed direct/tail callers include 0x00100360 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 38
+    },
+    {
+      "address": "0x001005f0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-output callback advancing a destination cursor after storing one character. Observed direct/tail callers include 0x00100360 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 10
+    },
+    {
+      "address": "0x0010060a",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-string complement-span scan against a delimiter set, used by tokenization. Observed direct/tail callers include 0x001003e0 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 34
+    },
+    {
+      "address": "0x0010062c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-string initial-span scan against a delimiter set, used by tokenization. Observed direct/tail callers include 0x001003e0 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 32
+    },
+    {
+      "address": "0x0010064c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Formatted-output conversion parser with percent, width, precision, flags and conversion dispatch. Observed direct/tail callers include 0x001005ca, 0x001009de (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 392
+    },
+    {
+      "address": "0x001007d4",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Bounded byte-string concatenation with explicit terminating zero. Observed direct/tail callers include 0x00143df4 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 36
+    },
+    {
+      "address": "0x001007f8",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Multibyte conversion-state initialization predicate, accepting null or zero state. Observed direct/tail callers include 0x00146c38 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 18
+    },
+    {
+      "address": "0x0010080a",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Stateful multibyte-to-wide-character adapter with the C-library default state path. Observed direct/tail callers include 0x00146c38 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 36
+    },
+    {
+      "address": "0x0010082e",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "ASCII decimal-digit predicate shared by the format parser. Observed direct/tail callers include 0x0010064c (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 14
+    },
+    {
+      "address": "0x0010083c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Bounded wide-character formatted-output adapter with two-byte output cursor and truncation result. Observed direct/tail callers include 0x0015db7c, 0x0015dc14 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 72
+    },
+    {
+      "address": "0x00100884",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Count-bounded unsigned 16-bit string comparison, stopping at the first unequal or zero element. Observed direct/tail callers include 0x00216e50, 0x0021707c (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 40
+    },
+    {
+      "address": "0x001008ac",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Position-independent initializer-array walker using relative function entries and four-byte cursor steps. Observed direct/tail callers include 0x00100000 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 36
+    },
+    {
+      "address": "0x001008d0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Wide-character lowercase adapter that uses the byte locale mapping only for ASCII values. Observed direct/tail callers include 0x0016b678 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 12
+    },
+    {
+      "address": "0x00100914",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-string printf conversion dispatcher using the shared formatting context. Observed direct/tail callers include 0x0010093a (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 22
+    },
+    {
+      "address": "0x0010093a",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Variadic pointer-argument adapter for the byte-string printf conversion dispatcher. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 8
+    },
+    {
+      "address": "0x00100944",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-string printf conversion with multibyte decoding, width accounting and callback padding. Observed direct/tail callers include 0x00100914 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 144
+    },
+    {
+      "address": "0x001009de",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Wide-format engine context adapter, paired with the byte adapter at 0x1005ca. Observed direct/tail callers include 0x0010083c (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 38
+    },
+    {
+      "address": "0x00100a04",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Bounded 16-bit output callback updating the cursor only while space remains. Observed direct/tail callers include 0x0010083c (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 16
+    },
+    {
+      "address": "0x00100a14",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Wide-string printf conversion with width, precision and callback output. Observed direct/tail callers include 0x00100af8 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 86
+    },
+    {
+      "address": "0x00100a74",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Octal 64-bit integer formatting with three-bit extraction and optional prefix. Observed direct/tail callers include 0x00100ab8, 0x00100ad0 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 68
+    },
+    {
+      "address": "0x00100ab8",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "32-bit variadic-argument adapter into the octal formatter. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 24
+    },
+    {
+      "address": "0x00100ad0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Eight-byte-aligned 64-bit variadic-argument adapter into the octal formatter. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 10
+    },
+    {
+      "address": "0x00100ae4",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Runtime diagnostic dispatch adapter passing diagnostic category 12 to the common hook. Observed direct/tail callers include 0x00100c9e (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 12
+    },
+    {
+      "address": "0x00100af8",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Wide-string printf conversion dispatcher using the shared formatting context. Observed direct/tail callers include 0x00100b1e (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 22
+    },
+    {
+      "address": "0x00100b1e",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Variadic pointer-argument adapter for the wide-string printf conversion dispatcher. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 8
+    },
+    {
+      "address": "0x00100b28",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Floating-format special-value rendering with fixed three-character alternatives, sign handling and padding. Observed direct/tail callers include 0x0019faa8 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 136
+    },
+    {
+      "address": "0x00100bb0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Table-driven extended-precision decimal scaling used by the shared floating-format implementation. Observed direct/tail callers include 0x0019f9aa (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 208
+    },
+    {
+      "address": "0x00100c80",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "C++ array-cookie destructor adapter recovering element size/count before reverse iteration. Observed direct/tail callers include 0x001748b8 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 18
+    },
+    {
+      "address": "0x00100c9e",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Common virtual/diagnostic failure callback forwarding zero to the runtime diagnostic adapter, with many vtable-pointer sites. No direct/tail caller is recorded, but 83 data-table pointers reference this entry; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 10
+    },
+    {
+      "address": "0x0016b678",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Case-insensitive 16-bit string comparison through the shared wide-lowercase helper. Observed direct/tail callers include 0x0016b6a4, 0x001cd070, 0x001cdb10 (3 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 42
+    },
+    {
+      "address": "0x00181e94",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "C-library error-state getter through the shared state pointer at 0x1a0098. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 10
+    },
+    {
+      "address": "0x00181e9e",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "C-library error-state setter through the same shared state pointer. Observed direct/tail callers include 0x00155208, 0x00182cc4, 0x0019d074 (4 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 12
+    },
+    {
+      "address": "0x0018272c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Byte-string concatenation scanning the destination terminator then copying through the source terminator. Observed direct/tail callers include 0x00195900, 0x00196e14 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 24
+    },
+    {
+      "address": "0x0018651c",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Count-bounded 16-bit string copy that repeats zero padding after the source terminator. Observed direct/tail callers include 0x001372ec, 0x00193168 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 28
+    },
+    {
+      "address": "0x0018fd68",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Multibyte string to 16-bit string conversion, tracking conversion state and output-element count. Observed direct/tail callers include 0x0011264c, 0x00112808, 0x0011fa38 (3 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 80
+    },
+    {
+      "address": "0x0018fe60",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Signed word-sized text conversion with locale whitespace classification, base prefixes, end-pointer and range errors. Observed direct/tail callers include 0x00111af4, 0x00111f2c, 0x0011f6e8 (5 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 112
+    },
+    {
+      "address": "0x001911cc",
+      "disposition": "runtime: bound natural C++ caller proof",
+      "evidence": "C++ array-construction iterator applying a constructor callback at an element stride and returning the array base. Observed direct/tail callers include 0x0010e3a0, 0x0011035c, 0x00111af4 (43 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 34
+    },
+    {
+      "address": "0x00191c80",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "C++ static-initialization guard acquire/test-and-set used by global/static constructors across many ARM units. Observed direct/tail callers include 0x0010dd88, 0x0010e2e0, 0x00116064 (73 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 18
+    },
+    {
+      "address": "0x0019d5b0",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "16-bit string length returning the element count rather than the byte count. Observed direct/tail callers include 0x00102074, 0x0011264c, 0x00112808 (6 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 18
+    },
+    {
+      "address": "0x0019f6b4",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "C++ reverse array-destructor iterator, returning the allocation pointer before the eight-byte array cookie. Observed direct/tail callers include 0x00100c80, 0x00103c88, 0x001bb9b4 (5 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 34
+    },
+    {
+      "address": "0x0019f9a4",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Internal tail entry computing a span then entering the shared numeric-formatting body at 0x19f96a. Observed direct/tail callers include 0x0019f912 (1 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 6
+    },
+    {
+      "address": "0x0019faa8",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Floating-point formatted-output conversion with decimal/exponent selection and shared padding/output helpers. No direct/tail caller or aligned rodata/data pointer is recorded; this does not exclude indirect calls or live-register entry use; ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 620
+    },
+    {
+      "address": "0x0019fd50",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Locale-table byte lowercase conversion used by the wide-lowercase adapter. Observed direct/tail callers include 0x001008d0, 0x0016ba0c (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 26
+    },
+    {
+      "address": "0x0019fe04",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Locale-aware stateful multibyte decoder shared by conversion adapters. Observed direct/tail callers include 0x0010080a, 0x00146c38 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 116
+    },
+    {
+      "address": "0x0019fe78",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Leading width/sign/prefix padding callback for the formatted-output context. Observed direct/tail callers include 0x00100944, 0x00100a14, 0x00100b28 (5 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 44
+    },
+    {
+      "address": "0x0019fea4",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Trailing width padding callback for the same formatted-output context. Observed direct/tail callers include 0x00100944, 0x00100a14, 0x00100b28 (5 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 34
+    },
+    {
+      "address": "0x0019fedc",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Variadic integer width normalization, truncating to byte/short according to formatting flags. Observed direct/tail callers include 0x00100580, 0x00100ab8 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 22
+    },
+    {
+      "address": "0x0019fef2",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Shared integer-format field-width, precision, prefix and digit-output implementation. Observed direct/tail callers include 0x00100528, 0x00100a74 (2 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 176
+    },
+    {
+      "address": "0x001a00b8",
+      "disposition": "creditable: original-address compiler-emission/library identity missing",
+      "evidence": "Locale-dependent byte-to-wide-character conversion with a position-independent locale callback. Observed direct/tail callers include 0x00100944, 0x0018fd68, 0x0019fe04 (3 total); ARM runtime/C-library ownership is [INFERENCE] from API/ABI semantics and the shared helper graph, not a known-library archive match.",
+      "size": 64
+    }
+  ]
+}
