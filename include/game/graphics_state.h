@@ -24,6 +24,7 @@ struct GraphicsState {
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern void func_00122a6c(void);
 extern int func_0012f570(const void *buffer, unsigned size);
 extern int func_0018f6c4(const void *buffer, unsigned size);
 extern struct GraphicsState data_002430f0;

@@ -80,6 +80,11 @@ struct MetadataEntry {
     int index;
 };
 
+/* The pointer vector is variable-sized; only its +0x20 base is established. */
+struct W7dMenuControl {
+    unsigned char reserved00[0x20];
+    unsigned *flags[];
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -99,6 +104,7 @@ extern void func_001780c4(struct W6ListController *controller, int list, int ite
 extern int func_00178144(void);
 extern void func_00178e98(struct W6ListController *controller, int index);
 extern int func_00178f84(struct W6ListController *controller, int index);
+extern void func_00179068(struct W7dMenuControl *control, int index, int enabled);
 extern int func_00179148(void);
 extern int func_001795bc(void);
 extern void func_001e8934(struct W6ListController *controller, int index);

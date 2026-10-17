@@ -2,7 +2,7 @@
  * NintendoWare4Ctr contributors; upstream include/nw/gfx/gfx_ParticleTime.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: standalone UTF-8 and relative include normalization.
+ * Modified 2026-10-17: retain the default public fixed-point configuration used by the imported release units; normalize standalone includes.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -13,13 +13,10 @@
 namespace nw{
 namespace gfx{
 
-#ifdef NW_GFX_PARTICLE_COMPAT_1_1
-
-typedef f32 ParticleTime;
-
-#else
-
-#ifndef NW_GFX_NO_USE_PARTICLETIME
+/* Alternative public build configurations are outside this selective import. */
+#if defined(NW_GFX_PARTICLE_COMPAT_1_1) || defined(NW_GFX_NO_USE_PARTICLETIME)
+#error "Only the default public fixed-point particle-time configuration is imported"
+#endif
 
 class ParticleTime
 {
@@ -162,130 +159,6 @@ NW_FORCE_INLINE ParticleTime operator -(const ParticleTime& rhs)
     return result;
 }
 
-#else
-
-class ParticleTime
-{
-    friend ParticleTime operator -(const ParticleTime& rhs);
-public:
-    ParticleTime(): 
-        m_ParticleTime(0) {}
-
-    ParticleTime(const ParticleTime& value)
-    {
-        m_ParticleTime = value.m_ParticleTime;
-    }
-
-    ParticleTime(s32 ivalue)
-    {
-        m_ParticleTime = ivalue;
-    }
-
-    ParticleTime(f32 fvalue)
-    {
-        m_ParticleTime = Float32ToParticleTime(fvalue);
-    }
-
-    f32     GetFloat32Value() const { return m_ParticleTime; }
-    s32     GetS32Value() const { return m_ParticleTime; }
-    f32     GetParticleTimeValue() const { return m_ParticleTime; }
-
-    ParticleTime operator +(ParticleTime right) const
-    {
-        return ParticleTime(this->m_ParticleTime + right.m_ParticleTime);
-    }
-
-    ParticleTime operator -(ParticleTime right) const
-    {
-        return ParticleTime(this->m_ParticleTime - right.m_ParticleTime);
-    }
-
-    ParticleTime operator *(ParticleTime right) const
-    {
-        return ParticleTime(this->m_ParticleTime * right.m_ParticleTime);
-    }
-
-    ParticleTime operator /(ParticleTime right) const
-    {
-        return ParticleTime(this->m_ParticleTime / right.m_ParticleTime);
-    }
-
-    s32 GetIntegralParts() const
-    {
-        return (int)m_ParticleTime;
-    }
-
-    f32 GetFractionalParts() const
-    {
-        return m_ParticleTime - (int)m_ParticleTime;
-    }
-
-    s32 Floor() const
-    {
-        return math::FFloor(m_ParticleTime);
-    }
-
-    s32 Ceil() const
-    {
-        return math::FCeil(m_ParticleTime);
-    }
-
-    ParticleTime& FMod(s32 value)
-    {
-        this->m_ParticleTime = nw::math::FMod(this->m_ParticleTime, static_cast<f32>(value));
-        return *this;
-    }
-
-    ParticleTime& operator =(f32 value) { this->m_ParticleTime = Float32ToParticleTime(value); return *this; }
-    ParticleTime& operator =(s32 value) { this->m_ParticleTime = value; return *this; }
-    ParticleTime& operator =(ParticleTime value) { this->m_ParticleTime = value.m_ParticleTime; return *this; }
-    ParticleTime& operator +=(f32 value) { this->m_ParticleTime += value; return *this; }
-    ParticleTime& operator +=(s32 value) { this->m_ParticleTime += value; return *this; }
-    ParticleTime& operator +=(ParticleTime value) { this->m_ParticleTime += value.m_ParticleTime; return *this; }
-    ParticleTime& operator -=(f32 value) { this->m_ParticleTime -= value; return *this; }
-    ParticleTime& operator -=(s32 value) { this->m_ParticleTime -= value; return *this; }
-    ParticleTime& operator -=(ParticleTime value) { this->m_ParticleTime -= value.m_ParticleTime; return *this; }
-
-    bool operator ==(const ParticleTime& rhs) const { return this->m_ParticleTime == rhs.m_ParticleTime; }
-    bool operator !=(const ParticleTime& rhs) const { return this->m_ParticleTime == rhs.m_ParticleTime; }
-    bool operator >=(const ParticleTime& rhs) const { return this->m_ParticleTime >= rhs.m_ParticleTime; }
-    bool operator <=(const ParticleTime& rhs) const { return this->m_ParticleTime <= rhs.m_ParticleTime; }
-    bool operator >(const ParticleTime& rhs) const { return this->m_ParticleTime > rhs.m_ParticleTime; }
-    bool operator <(const ParticleTime& rhs) const { return this->m_ParticleTime < rhs.m_ParticleTime; }
-
-    bool operator ==(s32 rhs) const { return this->m_ParticleTime == rhs; }
-    bool operator !=(s32 rhs) const { return this->m_ParticleTime == rhs; }
-    bool operator >=(s32 rhs) const { return this->m_ParticleTime >= rhs; }
-    bool operator <=(s32 rhs) const { return this->m_ParticleTime <= rhs; }
-    bool operator >(s32 rhs) const { return this->m_ParticleTime > rhs; }
-    bool operator <(s32 rhs) const { return this->m_ParticleTime < rhs; }
-
-    ParticleTime Interp(const ParticleTime& length, s32 factor) const
-    {
-        return ParticleTime(this->GetFloat32Value() / length.GetFloat32Value() * factor);
-    }
-
-    static f32 ParticleTimeToFloat32(f32 particleTime)
-    {
-        return particleTime;
-    }
-
-    static f32 Float32ToParticleTime(f32 value)
-    {
-        return value;
-    }
-
-private:
-    f32 m_ParticleTime;
-};
-
-NW_FORCE_INLINE ParticleTime operator -(const ParticleTime& rhs)
-{
-    return ParticleTime(-rhs.m_ParticleTime);
-}
-
-#endif
-#endif
 
 }
 }

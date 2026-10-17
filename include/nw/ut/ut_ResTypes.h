@@ -2,12 +2,12 @@
  * NintendoWare4Ctr contributors; upstream include/nw/ut/ut_ResTypes.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: retain scalar resource types and their inline operations; omit unused SDK matrix/vector aliases and their math-header dependency.
+ * Modified 2026-10-17: retain scalar resource operations and adapter-backed math aliases; normalize standalone includes.
  * This file is free software under GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
 
-#include <nw/math.h>
+#include <nn/math.h>
 #include <nw/ut/ut_Inlines.h>
 
 namespace nw {
@@ -94,10 +94,10 @@ typedef ResU32 Length;
 typedef ResU32 ResTypeInfo;
 
 
-typedef VEC3 ResVec3;
-typedef MTX33 ResMtx33;
-typedef MTX34 ResMtx34;
-typedef MTX44 ResMtx44;
+typedef nn::math::VEC3 ResVec3;
+typedef nn::math::MTX33 ResMtx33;
+typedef nn::math::MTX34 ResMtx34;
+typedef nn::math::MTX44 ResMtx44;
 typedef struct BinString{
     ResS32 offset;
 

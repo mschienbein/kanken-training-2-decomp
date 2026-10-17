@@ -218,6 +218,7 @@ extern void func_0015e948(struct DisplayObject *object, int active);
 extern void func_0015e954(struct DisplayPaneLink *link, int active);
 extern void func_00180358(struct DisplayObject *object, int first, int second);
 extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
+extern void func_0018271c(void *object, unsigned char alpha);
 extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
 extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
 extern void func_001826fc(struct DisplayObject *object, int active);

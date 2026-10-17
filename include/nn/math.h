@@ -2,7 +2,7 @@
  * Project-owned math ABI declarations and elementary value operations inferred
  * from uses in public NintendoWare4Ctr, commit
  * 15ddb5632db5a6f0d2f46e3827fc78df468684bd. No Nintendo SDK source consulted.
- * Named matrix fields alias row-major m[][] as the public NW4C math/*.ipp code
+ * Named matrix fields alias row-major m[][] as the public NW4C math inline code
  * requires. Transform3 field order is [INFERENCE] from scale/rotate/translate
  * resource semantics; a compile success is not a layout or inline-code proof.
  * Non-elementary operations stay declarations and resolve to original code.

@@ -83,7 +83,8 @@ extern void func_0019f568(void);               /* fatal-error / assertion handle
 extern void *func_001ef880(void *object);      /* array-element destroy callback */
 extern void *func_001ef884(void *object);      /* preserves the element pointer */
 extern void func_001ef888(void *allocation);   /* releases an array allocation */
-extern struct Allocation *func_00130f90(struct Allocation *allocation);
+/* Runtime __ARM_common_memclr4_8; callers do not consume a C return value. */
+extern void func_00130f90(void *destination);
 
 #ifdef __cplusplus
 }
