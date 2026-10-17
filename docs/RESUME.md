@@ -2,6 +2,32 @@
 
 Current entry on top.
 
+## 2026-10-17 — WSL desktop (current)
+
+**State:** `docs/STATUS.md` top entry. Accepted 299 functions / 7,620 B (seq 4, c004-r3);
+denominator v7; gates v1.10. Host: WSL2 Ubuntu on the Windows desktop
+(`~/code/kanken-training-2-decomp`; private inputs in `~/code/3ds-experiments/inputs/`, imported
+into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pushes through
+`gh auth setup-git`.
+
+Restart sequence:
+
+1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
+   agents in flight, batch queue, exclusions, retry pool, residue), and the author rules
+   `scratch/integrator/AUTHOR-BRIEF.md`. Private scratch does not travel between machines.
+2. Checkpoint loop: collect authors' `RESULT.json` in a worktree (`tools/collect.py`), unify
+   declarations into `include/` (`tools/interfaces.py check` on the dry ledger: zero errors and zero
+   policy items), pre-review, merge after the previous checkpoint finalizes, then
+   `tools/jobs.py run --name <cp>-prepare -- .venv/bin/python tools/accept.py prepare ...`; check
+   `exit_code` 0 **and** `prepare.json` PASS; two fresh reviews (`docs/REVIEWING.md`); finalize
+   `--min-reviews 2`; `accept.py verify`; known issues + STATUS/RESUME; commit; push.
+3. Authoring: `tools/triage.py --exclude scratch/integrator/exclude.json --avoid svc,thumb,exclusive
+   batches`; functions >512 B in focused batches, >2 KB solo; ARMCC-extension functions use
+   `include/ctr/`. Near misses go through `tools/permute.py` (CPU only) before another model pass.
+4. Next: c005 (wave 5 + waves 6/7) prepare and reviews; adopt proven runtime/library bindings;
+   denominator v8 (runtime/library classification, remaining unknown bytes and anomalies).
+
+
 ## 2026-10-16 (night) — hand-off from the Mac to the desktop
 
 **State** (details: `docs/STATUS.md` top entry): accepted **103 functions / 5,056 B**

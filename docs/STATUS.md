@@ -2,6 +2,34 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-17 — WSL desktop: c004-r3 accepted; harness widened for parallel authoring
+
+**Accepted:** 299 functions / 7,620 B (seq 4: c001-pilot-r4, c002-wave1-r3, c003-wave2-r3,
+c004-r3). Denominator **v7**: 4,557 creditable functions / 1,129,946 B (0.674%). Gates **v1.10**.
+Linker model `armlink5-inline-branchnop-v2`. CI's ledger check is green again.
+
+- **c004-r3** (waves 3+4, 196 functions + 6 revised units): c004-r2 was prepared on WSL (first
+  Linux-x86_64 prepare; both fresh builds byte-identical) and FAILed `review-c004-second`
+  (func_001f4fac dropped two caller-evidenced arguments). r3 swept all 240 empty/wrapper/callee
+  contracts against 3,270 call sites and 214 pointer uses (12 changed) and passed both reviews
+  without findings (`docs/known-issues-c004-r3.md`).
+- **Rulings (user):** all subagents incl. both reviewers run one model family
+  (`docs/rulings/2026-10-17-reviewer-model-family.md`); documented ARMCC extensions — `__svc`,
+  CP15 named registers, intrinsics — count as C (`docs/rulings/2026-10-17-armcc-extensions.md`,
+  gates v1.9/v1.10; shared declarations in `include/ctr/svc.h`, `include/ctr/cp15.h`).
+- **Denominator v7:** 8 more armlink tail-call boundaries (VFP pass-through tails, restored-frame
+  setters), independently reviewed (`docs/catalogue/REPORT-v7.md`, `REVIEW-v7.md`).
+- **Harness:** packet/match display bounded by catalogue code ranges; wibo `Z:/` dependency paths
+  (system headers crashed the object cache on Linux); odd data literals no longer shown as Thumb
+  pointers; `match.py --names` proposed bindings; runtime-helper and C-library bindings in
+  `config/names.json`, each proven by a whole-function match (`__aeabi_uidivmod`,
+  `__aeabi_memcpy/memcpy4`, `__aeabi_memclr/memclr4`, `__aeabi_memset`, `strlen`,
+  `__aeabi_vec_ctor_nocookie_nodtor`); G3 audits standard headers and CP15 named registers and
+  refuses leftover `INTEGRATOR:` markers; source permuter `tools/permute.py` (`docs/PERMUTER.md`).
+- **In flight (private, not accepted):** c005 = wave 5 (37) + waves 6/7 being unified in a
+  worktree; waves 8–10, large-function and ARMCC-extension batches authored by ~20 parallel
+  agents (≈300 further candidate matches so far); middleware/library ownership census.
+
 ## 2026-10-16 (night) — Mac session ends; c004-r2 ready to prepare on the desktop
 
 **Accepted:** 103 functions / 5,056 B (seq 3). Denominator **v6**: 4,549 creditable functions /

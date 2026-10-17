@@ -8,8 +8,8 @@ behaviour.
 [![Code](https://bytematch.dev/mschienbein/kanken-training-2-decomp.svg?measure=matched_code_percent&label=Code)](https://bytematch.dev/mschienbein/kanken-training-2-decomp)
 [![Functions](https://bytematch.dev/mschienbein/kanken-training-2-decomp.svg?measure=matched_functions&label=Functions)](https://bytematch.dev/mschienbein/kanken-training-2-decomp)
 
-**Status:** early. 103 functions (5,056 bytes) are accepted as matching C/C++, each re-derived by two
-independent reviews; the next checkpoints (≈230 functions) are in review. Details in
+**Status:** early. 299 functions (7,620 bytes) are accepted as matching C/C++, each re-derived by two
+independent reviews; the next checkpoint (wave 5 onward) is being integrated. Details in
 [`docs/STATUS.md`](docs/STATUS.md).
 
 ## What you need
