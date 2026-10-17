@@ -305,13 +305,13 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
-## Catalogue recovery safeguards (candidate v9)
+## Catalogue recovery safeguards (candidate v9-r2)
 
 `tools/analyze.py catalogue --out X` is the single candidate generator. For the
 reviewed image it includes the immutable, image/extent/ISA-bound classification
 records, reviewed UTF-16 object references, the section-authenticated `.init_array`
 table and the immutable protected-checkpoint blob list in
-`research/catalogue_v9_evidence.json`, and recomputes the revision's
+`research/catalogue_v9_r2_evidence.json`, and recomputes the revision's
 ownership, anomaly and pointer evidence. The output records the command, source
 hashes and input hashes; neither output path nor elapsed time changes its bytes.
 The former separate `research/catalogue_v8.py` generator has been replaced by
@@ -356,14 +356,20 @@ control/data/protected-record vetoes still apply. **(3)** A canonical AAPCS
 interworking veneer (`add ip, pc, #odd` followed by `bx ip`) is recognized as code
 only when its odd PC-relative target is mapped Thumb text; the veneer is not an ADR
 string. **(4)** A reviewed record may type an address-taken literal as UTF-16LE
-only for the exact owner/reference sites and only when a complete printable halfword
-terminator is present; ordinary NUL-string inference is unchanged.
+only for the exact owner/reference sites and only when a complete printable or
+Unicode-whitespace halfword terminator is present; non-whitespace controls and
+unterminated data fail closed. Ordinary untyped NUL-string inference is unchanged.
 
 A complete address-taken NUL string shared by several owners is no longer left
 unknown when it does not overlap owned code/pools or branch targets. Its **exact
 terminated object** becomes unowned `rodata`; alignment bytes after it are claimed
 only when they are all zero. This neither assigns the object to a function nor grows
 any function extent.
+V9-R01 fixes three typed shared objects at `0x001b54e4`, `0x001b8234` and
+`0x001bc29c`: each complete UTF-16 record is four bytes, not one byte of an
+empty narrow string. The natural r4023 wide-literal EXTENT witness is 128/124 B,
+with no rewrites; its full object does not establish exclusive ownership.
+
 
 A reviewed `.init_array` table is accepted only as a bounded, aligned, self-relative
 32-bit table inside mapped rodata. Every entry must point to plausible code. The
@@ -377,7 +383,11 @@ start precedes a prior prologue-only owner, the old address is retained as a
 instruction boundary and every old code/pool/literal span survives in the new
 owner. `legacy_entry_preservation` records each exact mapping. The recovered
 owner is conservatively `multi_entry`, not credited as C; the retained label is
-not evidence of independently proved callability. Other entry losses fail closed.
+not evidence of independently proved callability. A later baseline generation
+retains that exact `legacy_prologue` secondary-label form only under the same
+initializer owner, valid ARM boundary, no incoming sources and complete prior
+owned-span preservation. It does not convert genuine called/pointer entries into
+legacy guesses. Other entry losses fail closed (V9-R02).
 
 Classification proofs retain their original provenance. Old ABI executions,
 natural-caller matches, declaration rejections and the corrected no-frame compiler

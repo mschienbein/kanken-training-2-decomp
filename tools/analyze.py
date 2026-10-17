@@ -1289,7 +1289,7 @@ class Analyzer:
                     value = self.text[target - self.base:cursor - self.base].decode("utf-16le")
                 except UnicodeDecodeError:
                     return None
-                return cursor + 2 if all(c.isprintable() or c in "\t\r\n" for c in value) else None
+                return cursor + 2 if all(c.isprintable() or c.isspace() for c in value) else None
             cursor += 2
         return None
 
@@ -2036,7 +2036,8 @@ def preserve_prior_entries(catalogue: dict, prior_functions: list[dict]) -> None
     An authenticated initializer can precede a former prologue-only owner. Keep
     that old address as a conservative secondary entry only when every old owned
     span survives in the recovered owner and the address is an ARM instruction
-    boundary. Other entry losses fail rather than receiving a blanket exemption.
+    boundary. A subsequently adopted legacy label is carried forward under the
+    same owner and span checks. Other entry losses fail closed.
     """
     functions = catalogue["functions"]
     starts = [function["address"] for function in functions]
@@ -2050,9 +2051,14 @@ def preserve_prior_entries(catalogue: dict, prior_functions: list[dict]) -> None
                 continue
             index = bisect_right(starts, address) - 1
             after = functions[index] if index >= 0 else None
-            if (after is None or before["evidence"] != ["prologue"]
-                    or before["kind"] != "function" or len(before["entries"]) != 1
-                    or entry["evidence"] != ["prologue"] or entry["sources"]
+            original_label = (before["evidence"] == ["prologue"] and before["kind"] == "function"
+                              and len(before["entries"]) == 1 and entry["evidence"] == ["prologue"])
+            adopted_label = (after is not None and before["kind"] == "multi_entry"
+                             and before["address"] == after["address"]
+                             and "relative_init_array" in before["evidence"]
+                             and entry["kind"] == "secondary_entry"
+                             and entry["evidence"] == ["legacy_prologue"])
+            if (after is None or not (original_label or adopted_label) or entry["sources"]
                     or isa != after["isa"] or isa != "arm" or address % 4
                     or not after["address"] < address < after["address"] + after["size"]
                     or "relative_init_array" not in after["evidence"]
@@ -2489,7 +2495,7 @@ def main(argv: list[str] | None = None) -> int:
         baseline = catalogue_review.load(baseline_path)
         image, exheader = args.image.read_bytes(), args.exheader.read_bytes()
         layout = ctrfmt.parse_exheader(exheader)
-        evidence_path = ROOT / "research/catalogue_v9_evidence.json"
+        evidence_path = ROOT / "research/catalogue_v9_r2_evidence.json"
         evidence = catalogue_review.load(evidence_path)
         protected, protected_summary, inputs = load_protected_functions(
             ROOT, baseline, args.protect_manifest, git_blobs=evidence.get("protected_git_blobs", []))
@@ -2524,7 +2530,7 @@ def main(argv: list[str] | None = None) -> int:
                    for name in ("analyze.py", "catalogue_review.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v9",
+            "revision": "catalogue-v9-r2",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,
