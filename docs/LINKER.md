@@ -83,7 +83,7 @@ The original proposal failed independent review (F01, sealed in
 `scratch/review/d2-alias/REVIEW.md`). The corrected acceptance-input proposal is
 `scratch/integrator/d2-alias-r2/GATES-DRAFT.md`; it grants no checkpoint credit.
 Frozen GATES v1.16 remains unchanged. The new v5 identifier and changed alias acceptance
-require a new composite independent review and explicit gate revision after c008's frozen
+require a new composite independent review and explicit gate revision after c008-r2's frozen
 evidence is finalized and closed. A gate-only revision never broadens v1/v2/v3 or v4;
 selection, both fresh receipts, prepare/history and model-transition review must bind v5.
 Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,

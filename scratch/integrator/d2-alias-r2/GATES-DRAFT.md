@@ -3,7 +3,7 @@
 Status: **DRAFT, unadopted**. Main alone owns gate adoption. This proposal depends on the
 separately corrected/re-reviewed v4 bounded-switch model (proposed v1.17), and on independent
 review of this exact v5 composite. Do not use this branch for checkpoint credit before those
-reviews and c008 finalization/closure. Frozen `docs/GATES.md` v1.16 is unchanged; no prepared,
+reviews and c008-r2 finalization/closure. Frozen `docs/GATES.md` v1.16 is unchanged; no prepared,
 accepted or historical artifact is rewritten. The model name, not merely a gate number,
 versions behavior. If adoption numbering changes, preserve all normative requirements.
 
