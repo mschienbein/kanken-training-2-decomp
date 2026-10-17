@@ -113,3 +113,22 @@ are preserved. `THIRD_PARTY.md` and `src/nw4c/INTEGRATED-PROVENANCE.json` distin
 provenance hashes from reconciled files and preserve Khronos MIT notices/fact sources.
 These adapters are not copied proprietary SDK implementations or a native portability claim.
 No original bytes/disassembly, packet contents or keys are part of this record.
+
+## Acceptance (checkpoint c007, finalized)
+
+- **Prepare** (`accept/c007/prepare.json`): PASS — two identical fresh builds, suite 547 tests /
+  1 skipped / 0 failed modules, interfaces pass with `--allow-unchecked-cpp`. The prepared scope
+  declares **33 revised accepted functions** and **29 linker-rewrite records**; the integration
+  prose above (34 revisions / 28 rewrite records) is superseded by those prepared counts
+  (review `second` F08, minor).
+- **Reviews** (sealed in `accept/c007/reviews/`), both PASS_WITH_QUALIFICATIONS:
+  - `openai`: 115 PASS · 215 QUALIFIED · 0 FAIL of 330 rows; F02 minor — two revised IPC wrappers
+    keep three disclosed scheduling barriers each; F01/F03–F08 notes (extensions, two erased
+    callee identities, caller contracts, NW4C GPL provenance and 205 names additions with
+    whole-match evidence, 15 preserved original bugs, unchecked C++ interfaces, single-family
+    independence).
+  - `second`: 108 PASS · 222 QUALIFIED · 0 FAIL of 330 rows; F01–F07 notes, F08 minor (counts
+    above).
+- Runtime helpers `0x00130f90` / `0x00183458` and deferred `func_00185bb0` receive no credit.
+
+**Finalized** 2026-10-17, history seq 7: 1,167 functions / 73,388 B accepted (6.50% of 1,129,400 B).
