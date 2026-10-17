@@ -64,6 +64,59 @@ The supplementary shared-callee audit also repaired `func_001855fc` in
 and `00147644` consume r0. Signed source spelling remains **[INFERENCE]**. This header repair
 does not claim another credited function; the complete v8 matching pass includes it.
 
+## c006-r3 canonical C++ repair and compile scan
+
+The `c006-r2` OpenAI review **FAILED** on blocker **F01**: `func_001c5994` used
+`SoundNotificationForwarder` / `SoundNotification` instead of the shared
+`AudioChannel` / `AudioSlot` interface used by accepted caller `func_001d49e8`.
+The second review passed with qualifications; neither verdict overrides the conflicting
+C-linkage declarations. The other findings in both reviews remain notes/qualifications.
+
+**F01 is repaired, not waived or dropped.** `src/wave8/func_001c5994.cpp` now includes
+`game/audio_voice.h`, defines the exact canonical `AudioChannel *` / `const AudioSlot *`
+signature and forwards `channel->state` to `func_001c599c`. The latter declaration now lives
+in the same canonical header with `AudioChannelState *` / `const AudioSlot *` parameters.
+This pointee naming follows the accepted caller and the forwarded shared member;
+original SDK/class names remain **[INFERENCE]**. The otherwise-unused
+`include/game/sound_notification.h` and its competing types were removed, not retained as aliases.
+
+The first natural canonical-type version **MATCHes all 8 bytes**, under the ledger's frozen
+`game` profile, with the existing adjacent-tail rewrite unchanged. No accepted or candidate
+function bytes, compiler profiles, catalogue entries or ledger entries were changed.
+All **21 units including `audio_voice.h`** (20 accepted C units and this candidate) were
+individually matched against adopted v8; **all command exits were 0**.
+
+The compile scan also checked **all 88 c006 C++ candidate units**, including the repaired
+function, by adding the canonical game headers before including each unchanged translation unit:
+
+| Candidate directory | C++ units checked | Canonical-header MATCH / exit 0 | Further conflicts / drops |
+|---|---:|---:|---:|
+| `src/sdk` | 11 | 11 | 0 / 0 |
+| `src/wave8` | 38 | 38 | 0 / 0 |
+| `src/wave9` | 9 | 9 | 0 / 0 |
+| `src/wave10` | 30 | 30 | 0 / 0 |
+| **Total** | **88** | **88** | **0 / 0** |
+
+Thus the other **87 C++ candidates** expose no further duplicate-type/prototype compilation
+conflicts. Each probe includes **46 canonical `include/game` headers**, a stronger check than
+only adding the function's immediate header. An initial all-47-header baseline was rejected
+because ARMCC C++ does not accept `graphics_state.h`'s C flexible-array member; that C-only
+header was excluded after confirming that none of its declared type, object or function names
+occurs in any repository C++ unit. The remaining 46-header baseline compiled with exit 0.
+This scan does not claim runtime equivalence or eliminate the other interface qualifications.
+
+Fresh, per-unit source/header bindings, exact commands and exits are in worktree
+`scratch/integrator/c006-r3/`: `header-dependants.json` lists all 21 rematched units;
+`canonical-scan.json` lists all 88 probes and their match receipts; the target's direct receipt
+is `match/func_001c5994/func_001c5994.result.json`.
+`tools/interfaces.py check --matches scratch/integrator/c006-r3/dry-matches.json
+--allow-unchecked-cpp --json scratch/integrator/c006-r3/interfaces.json` exits **0**:
+**835 units / 722 checked C / 113 explicitly unchecked C++ / zero disagreements / zero policy
+items**. The dry ledger is exactly `config/matches.json` plus `config/candidates/c006.json`;
+no c006 row was deferred. The earlier r2 certificates below remain historical and do not bind
+the repaired source/header state; Main must prepare and independently re-review that state.
+
+
 ## Classified, not credited
 
 `func_00152964` / **20 bytes** was removed from the candidate manifest and its uncredited source
@@ -255,10 +308,11 @@ Interpreter: `/home/michael/code/kanken-training-2-decomp/.venv/bin/python`; cwd
    `pre-review.json` contains **391 source-bound function rows covering all seven steps of
    [REVIEWING.md](REVIEWING.md)**, including the qualifications above. It is an integrator
    pre-review, **not an independent reviewer certificate**.
-   `delivery-bindings.json` binds the final reports, all 835 dry-ledger sources, 51 headers and
-   relevant configuration hashes. `interfaces-v8.json` is the final interface report.
+   The historical r2 `delivery-bindings.json` binds its reports, all 835 dry-ledger sources,
+   51 headers and relevant configuration hashes; `interfaces-v8.json` records that pre-r3
+   state. The r3 source/header repair and fresh evidence are documented above.
 
-No full build, full suite, c006 prepare, sealed independent review, finalize, push or main-branch
-commit was performed by this worker. Main must run those acceptance stages and re-review the
-revised accepted units before c006 can receive credit. No runtime-behavior equivalence or unique
-original source reconstruction is claimed by a per-unit byte match.
+This repair ran no full build, full suite, c006 prepare, sealed independent review, finalize,
+push or main-branch commit. Main owns those acceptance stages and re-review of the repaired
+state before c006 can receive credit. No runtime-behavior equivalence or unique original
+source reconstruction is claimed by a per-unit byte match.

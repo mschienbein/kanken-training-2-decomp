@@ -200,6 +200,7 @@ extern void func_001550e8(struct AudioChannelState *state,
                          const struct AdpcmCoefficients *coefficients);
 extern void func_001563a0(struct AudioChannelState *state, struct RecordState *record);
 extern void func_001c5994(struct AudioChannel *channel, const struct AudioSlot *slot);
+extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *slot);
 extern void func_001d49e8(struct AudioVoiceGroup *group, int index, const struct AudioSlot *slot);
 #ifdef __cplusplus
 }
