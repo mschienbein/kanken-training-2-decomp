@@ -27,6 +27,7 @@ import re
 import struct
 from dataclasses import dataclass, field, replace
 from fnmatch import fnmatchcase
+from io import BytesIO
 from pathlib import Path
 from typing import NamedTuple
 
@@ -309,9 +310,9 @@ class Section:
 class ObjectFile:
     """The allocatable sections, symbols and REL relocations of one armcc object."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, *, data: bytes | None = None):
         self.path = path
-        with path.open("rb") as f:
+        with path.open("rb") if data is None else BytesIO(data) as f:
             elf = ELFFile(f)
             if elf["e_machine"] != "EM_ARM" or elf["e_type"] != "ET_REL":
                 raise LinkError(f"{path}: not an ARM relocatable object")

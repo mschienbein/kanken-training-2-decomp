@@ -8,10 +8,14 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass, field
+import hashlib
 import json
 from pathlib import Path
 import sys
 import tempfile
+from collections.abc import Iterator
+
+from elftools.common.exceptions import ELFError
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import image as image_mod  # noqa: E402
@@ -59,6 +63,10 @@ class FunctionFingerprint:
     literal_size: int
     relocation_count: int
     error: str | None = None
+    section_index: int = 0
+    section_offset: int = 0
+    relocation_fields: tuple[inplace.Reloc, ...] = ()
+    overlapping_entries: tuple[int, ...] = ()
 
     @property
     def size(self) -> int:
@@ -75,21 +83,32 @@ class FunctionFingerprint:
         )
 
 
-def function_fingerprints(obj: inplace.ObjectFile) -> list[FunctionFingerprint]:
+def function_fingerprints(obj: inplace.ObjectFile, *, symbol_extents: bool = False) -> list[FunctionFingerprint]:
     """Include the function's owned section tail, not just ELF st_size.
 
     armcc's st_size can omit a trailing $d literal pool. With split sections the
     section is the whole matching extent; in a shared section the next distinct
     function start bounds ownership. Aliases intentionally get separate rows.
+    Archive assembly can export secondary entries inside a sized outer routine.
+    With symbol_extents, the largest declaration at one start also bounds its
+    zero-sized aliases; inner entries remain visible instead of truncating it.
     """
     functions = obj.defined_functions()
     output = []
     for symbol in functions:
         section = obj.sections[symbol.shndx]
         start = symbol.value & ~1
+        if symbol_extents and symbol.size == 0 and start == section.size:
+            continue  # exported end labels have no body to fingerprint
         following = [s.value & ~1 for s in functions
                      if s.shndx == symbol.shndx and (s.value & ~1) > start]
         end = min(following, default=section.size)
+        if symbol_extents:
+            declared_end = max(start + s.size for s in functions
+                               if s.shndx == symbol.shndx and (s.value & ~1) == start)
+            if declared_end > section.size:
+                raise FingerprintError(f"{symbol.name}: declared function exceeds section")
+            end = min((offset for offset in following if offset >= declared_end), default=section.size)
         if not section.executable or not 0 <= start < end <= len(section.data):
             raise FingerprintError(f"{symbol.name}: invalid executable function extent")
         if start + symbol.size > end:
@@ -126,7 +145,11 @@ def function_fingerprints(obj: inplace.ObjectFile) -> list[FunctionFingerprint]:
                 literal_size += offset - cursor
             cursor, kind = offset, next_kind
         output.append(FunctionFingerprint(symbol.name, isa, data, bytes(mask),
-                                          len(data) - literal_size, literal_size, count, error))
+                                          len(data) - literal_size, literal_size, count, error,
+                                          symbol.shndx, start,
+                                          tuple(reloc for reloc in section.relocs
+                                                if start <= reloc.offset < end),
+                                          tuple(sorted({offset - start for offset in following if offset < end}))))
     return output
 
 
@@ -204,40 +227,197 @@ def fingerprint_object(obj_path: Path, image: image_mod.Image, catalogue: dict) 
             for fn in function_fingerprints(inplace.ObjectFile(obj_path))]
 
 
+@dataclass(frozen=True)
+class ArchiveMember:
+    name: str
+    offset: int
+    data: bytes = field(repr=False)
+
+
+def archive_members(path: Path) -> Iterator[ArchiveMember]:
+    """Read regular SysV/GNU/BSD ar members in memory, never extracting input files."""
+    data = path.read_bytes()
+    if data.startswith(b"!<thin>\n"):
+        raise FingerprintError(f"{path}: thin archives are not self-contained")
+    if not data.startswith(b"!<arch>\n"):
+        raise FingerprintError(f"{path}: not a regular ar archive")
+    cursor = 8
+    names = b""
+    while cursor < len(data):
+        header = data[cursor:cursor + 60]
+        if len(header) != 60 or header[58:60] != b"`\n":
+            raise FingerprintError(f"{path}: invalid ar header at offset {cursor}")
+        try:
+            size = int(header[48:58].strip())
+            name = header[:16].decode("utf-8").rstrip()
+        except (ValueError, UnicodeDecodeError):
+            raise FingerprintError(f"{path}: invalid ar metadata at offset {cursor}") from None
+        first, end = cursor + 60, cursor + 60 + size
+        if size < 0 or end > len(data) or end + (size & 1) > len(data):
+            raise FingerprintError(f"{path}: truncated ar member at offset {cursor}")
+        payload = data[first:end]
+        offset = cursor
+        cursor = end + (size & 1)
+        if name == "//":
+            names = payload
+            continue
+        if name in ("/", "/SYM64/"):
+            continue
+        if name.startswith("#1/"):
+            try:
+                length = int(name[3:])
+            except ValueError:
+                raise FingerprintError(f"{path}: invalid BSD member name at offset {offset}") from None
+            if not 0 < length <= size:
+                raise FingerprintError(f"{path}: invalid BSD name length at offset {offset}")
+            try:
+                name = payload[:length].rstrip(b"\0").decode("utf-8")
+            except UnicodeDecodeError:
+                raise FingerprintError(f"{path}: invalid BSD member name at offset {offset}") from None
+            payload = payload[length:]
+        elif name.startswith("/") and name[1:].isdigit():
+            index = int(name[1:])
+            if not 0 <= index < len(names) or index and names[index - 1] not in (0, 10):
+                raise FingerprintError(f"{path}: invalid GNU name offset at member {offset}")
+            stop = names.find(b"\n", index)
+            if stop < 0:
+                raise FingerprintError(f"{path}: unterminated GNU member name at offset {offset}")
+            try:
+                name = names[index:stop].rstrip(b"/\0").decode("utf-8")
+            except UnicodeDecodeError:
+                raise FingerprintError(f"{path}: invalid GNU member name at offset {offset}") from None
+        else:
+            name = name.removesuffix("/")
+        if name.startswith("__.SYMDEF"):
+            continue
+        if not name:
+            raise FingerprintError(f"{path}: empty member name at offset {offset}")
+        yield ArchiveMember(name, offset, payload)
+
+
+def _masked(data: bytes, mask: bytes) -> bytes:
+    return bytes(value & bits for value, bits in zip(data, mask))
+
+
+def archive_function_report(fingerprint: FunctionFingerprint, image: image_mod.Image,
+                            functions: dict[int, dict], search_cache: dict | None = None) -> dict:
+    """Add safe digest/relocation metadata; masked equality is not target agreement."""
+    normalized = _masked(fingerprint.data, fingerprint.mask)
+    key = (fingerprint.isa, normalized, fingerprint.mask, fingerprint.error)
+    if search_cache is not None and key in search_cache:
+        located = search_cache[key]
+    else:
+        located = locate_function(fingerprint, image, functions)
+        if search_cache is not None:
+            search_cache[key] = located
+    row = dict(located, name=fingerprint.name, code_size=fingerprint.code_size,
+               literal_size=fingerprint.literal_size, relocations=fingerprint.relocation_count,
+               object_section=fingerprint.section_index, object_offset=fingerprint.section_offset,
+               object_body_sha256=hashlib.sha256(fingerprint.data).hexdigest(),
+               masked_body_sha256=hashlib.sha256(normalized).hexdigest(),
+               mask_sha256=hashlib.sha256(fingerprint.mask).hexdigest())
+    row["overlapping_entries"] = list(fingerprint.overlapping_entries)
+    row["relocation_fields"] = [
+        {"offset": reloc.offset - fingerprint.section_offset, "type": reloc.type,
+         "symbol": reloc.symbol.name, "symbol_section": reloc.symbol.shndx,
+         "symbol_value": reloc.symbol.value, "symbol_kind": reloc.symbol.kind,
+         "symbol_binding": reloc.symbol.bind}
+        for reloc in fingerprint.relocation_fields
+    ]
+    row["hits"] = []
+    for hit in located["hits"]:
+        original = image.read(hit["address"], fingerprint.size)
+        row["hits"].append(dict(
+            hit, image_body_sha256=hashlib.sha256(original).hexdigest(),
+            masked_body_sha256=hashlib.sha256(_masked(original, fingerprint.mask)).hexdigest(),
+            whole_body_masked_equal=True, whole_body_exact_equal=original == fingerprint.data,
+            relocation_agreement="unverified" if fingerprint.relocation_count else "not_applicable"))
+    return row
+
+
+def fingerprint_archive(path: Path, image: image_mod.Image, catalogue: dict,
+                        search_cache: dict | None = None) -> dict:
+    if catalogue["image_sha256"] != image.sha256:
+        raise FingerprintError("catalogue was generated from a different code.bin")
+    functions = image_mod.functions_by_address(catalogue)
+    report = {"archive": path.as_posix(), "archive_sha256": toolchain.file_sha256(path),
+              "image_sha256": image.sha256, "members": [], "functions": []}
+    cache = search_cache if search_cache is not None else {}
+    for member in archive_members(path):
+        metadata = {"member": member.name, "member_offset": member.offset, "size": len(member.data),
+                    "sha256": hashlib.sha256(member.data).hexdigest()}
+        if not member.data.startswith(b"\x7fELF"):
+            metadata["status"] = "linker_selection_metadata" if member.name == "SELECTION_SCRIPT" else "not_elf"
+            report["members"].append(metadata)
+            continue
+        try:
+            obj = inplace.ObjectFile(Path(f"{path}({member.name})"), data=member.data)
+            fingerprints = function_fingerprints(obj, symbol_extents=True)
+            metadata.update(status="ok", functions=len(fingerprints))
+            metadata["empty_end_labels"] = [
+                {"symbol": sym.name, "section": sym.shndx, "offset": sym.value & ~1}
+                for sym in obj.defined_functions()
+                if sym.size == 0 and (sym.value & ~1) == obj.sections[sym.shndx].size
+            ]
+            for fn in fingerprints:
+                row = archive_function_report(fn, image, functions, cache)
+                row.update(archive=path.as_posix(), member=member.name, member_offset=member.offset,
+                           member_sha256=metadata["sha256"])
+                report["functions"].append(row)
+        except (FingerprintError, inplace.LinkError, ELFError, ValueError, KeyError) as exc:
+            metadata.update(status="error", reason=f"{type(exc).__name__}: {exc}")
+        report["members"].append(metadata)
+    report["member_errors"] = sum(member["status"] not in ("ok", "linker_selection_metadata")
+                                  for member in report["members"])
+    return report
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("source", type=Path, help="library translation unit (or ELF with --object)")
-    parser.add_argument("--profile", required=True, help="name in config/compiler_profiles.json")
-    parser.add_argument("--object", action="store_true", help="fingerprint an existing ARM ELF object")
+    parser.add_argument("source", nargs="?", type=Path, help="library translation unit (or ELF with --object)")
+    parser.add_argument("--profile", help="name in config/compiler_profiles.json (required for source)")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--object", action="store_true", help="fingerprint an existing ARM ELF object")
+    mode.add_argument("--archive", type=Path, help="fingerprint every ELF member of a regular ar archive in memory")
     parser.add_argument("--include", "-I", type=Path, action="append", default=[], help="additional include directory")
     parser.add_argument("--define", "-D", action="append", default=[], help="compile-time macro, e.g. NW_RELEASE")
     parser.add_argument("--catalogue", type=Path, default=image_mod.CATALOGUE)
     parser.add_argument("--out", type=Path, help="write the same address-only JSON report to this path")
     args = parser.parse_args(argv)
+    if args.archive and args.source or not args.archive and args.source is None:
+        parser.error("supply either SOURCE or --archive LIBRARY")
+    if not args.archive and not args.object and not args.profile:
+        parser.error("--profile is required when compiling source")
+    if (args.object or args.archive) and (args.include or args.define):
+        parser.error("--include/--define apply only when compiling source")
     try:
-        profiles = toolchain.load_profiles()
-        if args.profile not in profiles:
-            raise FingerprintError(f"unknown profile {args.profile!r}; known: {', '.join(sorted(profiles))}")
-        base_profile = profiles[args.profile]
-        profile = toolchain.Profile(base_profile.name, base_profile.compiler,
-                                    (*base_profile.flags, *(f"-D{value}" for value in args.define)))
+        profile = None
+        if args.profile:
+            profiles = toolchain.load_profiles()
+            if args.profile not in profiles:
+                raise FingerprintError(f"unknown profile {args.profile!r}; known: {', '.join(sorted(profiles))}")
+            base_profile = profiles[args.profile]
+            profile = toolchain.Profile(base_profile.name, base_profile.compiler,
+                                        (*base_profile.flags, *(f"-D{value}" for value in args.define)))
         image = image_mod.Image.load()
         catalogue = image_mod.load_catalogue(args.catalogue)
-        with tempfile.TemporaryDirectory(prefix="fingerprint-") as tmp:
-            obj_path = args.source if args.object else Path(tmp) / "library.o"
-            if not args.object:
-                toolchain.compile_source(profile, args.source, obj_path, tuple(args.include))
-            rows = fingerprint_object(obj_path, image, catalogue)
-        report = {"source": args.source.as_posix(), "profile": profile.name,
-                  "compiler": profile.compiler, "flags": list(profile.flags),
-                  "image_sha256": image.sha256, "functions": rows}
+        if args.archive:
+            report = fingerprint_archive(args.archive, image, catalogue)
+        else:
+            with tempfile.TemporaryDirectory(prefix="fingerprint-") as tmp:
+                obj_path = args.source if args.object else Path(tmp) / "library.o"
+                if not args.object:
+                    toolchain.compile_source(profile, args.source, obj_path, tuple(args.include))
+                rows = fingerprint_object(obj_path, image, catalogue)
+            report = {"source": args.source.as_posix(), "image_sha256": image.sha256, "functions": rows}
+            if profile:
+                report.update(profile=profile.name, compiler=profile.compiler, flags=list(profile.flags))
         serialized = json.dumps(report, indent=1) + "\n"
         if args.out:
             args.out.parent.mkdir(parents=True, exist_ok=True)
             args.out.write_text(serialized, encoding="utf-8", newline="\n")
         print(serialized, end="")
-        return 0
-    except (FingerprintError, inplace.LinkError, image_mod.ImageError, toolchain.ToolchainError, OSError) as exc:
+        return 2 if report.get("member_errors") else 0
+    except (FingerprintError, inplace.LinkError, image_mod.ImageError, toolchain.ToolchainError, ELFError, OSError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 2
 
