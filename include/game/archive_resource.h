@@ -29,6 +29,8 @@ struct ArchiveResourceInfo { unsigned file_id, size; unsigned char external; };
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern bool func_00140e88(const struct ArchiveIndex *index, unsigned resource_id,
+                           struct ArchiveResourceInfo *out);
 extern const struct ArchiveResourceReference *func_00144114(const struct ArchiveInfoBlock *info,
                                                             unsigned resource_id);
 extern unsigned func_001441d4(const struct ArchiveResourceReference *reference);

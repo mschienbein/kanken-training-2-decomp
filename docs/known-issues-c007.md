@@ -72,6 +72,13 @@ WordPair pointer follows new natural callers;10be94 no longer invents a one-word
 layout when it only passes an opaque allocator address. Opaque callback identity,
 cross-language partial views and unused original inputs remain qualified.
 
+The c008 interface cutover shares `PackageFile`/`PackageView` through
+`game/package_file.h`;00193120 has no private duplicate records.00140e88 returns
+`bool` under the shared `game/archive_resource.h` declaration, preserving its recorded
+SDK-profile MATCH. The four c007 units consuming these touched headers/sources all
+re-MATCHed (phase1 receipts under `scratch/integrator/c007/phase1/`). No existing c007
+source caller declares00140e88; c008 owns the natural bool-returning00183eb0 caller.
+
 GPL notices and the pinned [NintendoWare4Ctr source](https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd)
 are preserved. `THIRD_PARTY.md` and `src/nw4c/INTEGRATED-PROVENANCE.json` distinguish supplied
 provenance hashes from reconciled files and preserve Khronos MIT notices/fact sources.
