@@ -4,6 +4,8 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "tools"))
@@ -21,6 +23,27 @@ BROKEN = "void func_0010e664(struct S *s) { s->x1c = ; }\n"
 EMPTY = "static int helper(int x) { return x + 1; }\n"
 # The v3 NOP entry 0x1852f4 as a C tail-call wrapper: one --branchnop rewrite (EXTENT under v3).
 WRAPPER = "extern void func_001852f8(void);\nvoid func_001852f4(void) { func_001852f8(); }\n"
+
+
+class CompidModelOptionsTest(unittest.TestCase):
+    def test_registry_selection_and_json_payload_keep_the_requested_model(self):
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4"):
+            with self.subTest(model=model), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                source = root / "candidate.c"
+                source.write_text(GOOD, encoding="utf-8")
+                context = SimpleNamespace(image=SimpleNamespace(sha256="synthetic"), model=SimpleNamespace(name=model))
+                empty = {"pairs": ["synthetic"], "functions": [], "results": {}, "failures": {},
+                         "matching_all": [], "linker_model": model, "linker_rewrites": {}}
+                self.assertEqual(compid.run_grid(context, [], {"compilers": [], "flagsets": {}}, root)["linker_model"], model)
+                with patch.object(compid.match, "Context", return_value=context) as selected, \
+                        patch.object(compid, "run_grid", return_value=empty), patch("builtins.print"):
+                    code = compid.main([str(source), "--out", str(root / "out"), "--linker-model", model])
+                self.assertEqual(code, 1)  # no compilation or qualifying grid cell is fabricated
+                self.assertEqual(selected.call_args.args[-1], model)
+                record = json.loads((root / "out/compid.json").read_text(encoding="utf-8"))
+                self.assertEqual(record["linker_model"], model)
+                self.assertEqual(record["matching_all"], [])
 
 
 @unittest.skipUnless(HAVE_INPUTS, "private input or pinned compiler missing")

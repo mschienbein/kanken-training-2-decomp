@@ -1,12 +1,16 @@
 # Linker model: armlink output optimisations
 
-Status: default model **`armlink5-inline-branchnop-v2`**; candidate-only callee elimination is
-implemented as the opt-in **`armlink5-inline-branchnop-v3`** (`tools/inplace.py`, `LINKER_MODELS`).
-V3 does not change the default or a checkpoint's gates: adoption requires a passing independent
-implementation review and an explicitly recorded gate/model revision in the acceptance path.
+Status: default model **`armlink5-inline-branchnop-v2`**; frozen
+**`armlink5-inline-branchnop-v3`** adds R1 removed-callee handling under adopted gates v1.15.
+The opt-in **`armlink5-inline-branchnop-v4`** separately selects bounded-switch CFG recovery
+and fail-closed endian-state handling under adopted gates v1.17.
 `accept.py prepare --linker-model ... --literal-model ...` freezes both choices before its fresh
 builds; see `docs/ACCEPTANCE.md` for selection/receipt/history binding and transition review.
-The combined gate proposal is `scratch/integrator/adopt-r1-l1/GATES-DRAFT.md`, not adopted here.
+The corrected alias composite is opt-in **`armlink5-inline-branchnop-v6`**, adopted under
+gates v1.18; v5 is retired, never adopted. The exact accepted gate text and sealed independent
+reviews are `scratch/review/r1-jumptables-r3/REVIEW.md` and
+`scratch/review/models-v6/GATES-ACCEPTED.md` / `SEAL.json` (PASS_WITH_QUALIFICATIONS).
+Both gate revisions follow finalized `c008-r3` (sequence 8) and precede the code merge.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -42,14 +46,99 @@ and `KeyError`s remain visible.
 ## Model history
 
 A model name is a version: rules are never edited under a recorded name.
-The v3 review fixes here precede its adoption; they do not revise v2 or any frozen checkpoint.
+The older v3 review fixes below preceded its adoption. V4 never changes v3's frozen policy.
 
 | Model | Status | Rules |
 |---|---|---|
 | `strict-v1` | selectable | no rewrites |
 | `armlink5-inline-branchnop-v1` (commit c11a0ad) | **retired**: `--linker-model` refuses it | as v2, except that a callee defined in the candidate object was judged by the candidate's own section, never by the original. Independent review (ReviewLinker, F01) showed a wrong local helper could make its caller match: a `bx lr` helper at an address whose original is a 12-byte body, the excluded `MOV r0, r0; BX lr`, a veneer or a multi-entry owner turned the caller's BL into the original's NOP, and a caller-only ledger credited the caller (reproduced on the real image with func_001b6ec4 calling a local `func_0013714c`). Only artifacts of this branch's own checks recorded it. |
 | `armlink5-inline-branchnop-v2` | default | below |
-| `armlink5-inline-branchnop-v3` | opt-in, not the default | all v2 rules plus candidate-only callees in R1 below |
+| `armlink5-inline-branchnop-v3` | frozen opt-in, not the default | all v2 rules plus candidate-only callees in R1 below; original conservative CFG, no resolved jump tables |
+| `armlink5-inline-branchnop-v4` | frozen opt-in, adopted gates v1.17; PASS_WITH_QUALIFICATIONS | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
+| `armlink5-inline-branchnop-v5` (reviewed 22cb05b) | **retired**, never adopted | reviewed v4/alias composite incorrectly refuses independently bound D1/D2 sections when the nonzero symbol excludes a trailing pool; historical receipts retain that identity, superseded by v6 |
+| `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
+
+## Function-entry alias identity (v6 only)
+
+ARMCC 5.04, under the frozen `game` profile, emits native C1/C2 constructors and both
+virtual and non-virtual D1/D2 destructors as same-entry `STT_FUNC` symbols, with a nonzero
+size on only one sibling. That size can exclude a trailing literal pool. The ABI names distinguish
+[complete/base construction and destruction](https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling-special-ctor-dtor);
+the names alone **never** prove that two implementations are identical.
+
+Only the explicit **`armlink5-inline-branchnop-v6`** selection enables this identity
+extension. V6 composes the independently reviewed v4 baseline with the alias rules
+and bound-placement correction below, adopted under gates v1.18. V4's approved
+source series is `21c2bd4` + `e72fb34` + `5187259` (sealed review:
+`scratch/review/r1-jumptables-r3/REVIEW.md`, PASS_WITH_QUALIFICATIONS).
+`strict-v1`, v2, v3 and v4 retain their original alias behavior: no sibling-name binding
+inheritance, and no zero-size entry alias in R1.
+
+`tools/inplace.py::function_aliases` proves identity from the ELF instead: the section must
+be executable, non-NOBITS and fully represented by its candidate bytes; every function
+symbol has the same offset-zero entry **and ISA**, every size is zero or the complete
+section size, and at least one function symbol supplies that full size. A proven zero-size
+entry has the full sibling's address and extent, without altering its ELF metadata or bytes.
+Either ABI name may supply the original address binding, but every supplied binding must
+agree and name a catalogued function start. Match results use a bound name for the section.
+Interior zero-size symbols, missing/partial full-sized siblings and mixed ARM/Thumb entries
+cannot borrow a sibling's binding or satisfy R1's alias proof; data symbols never borrow a function binding.
+
+**Independently bound retained names do not borrow identity.** When every function name has its
+own explicit agreeing binding, the existing placement path still checks the section base,
+same-offset/same-placement consistency, global-definition binding, relocations, overlap and the
+complete candidate/catalogue extent. That frozen path accepts a D1 code-size symbol and a zero-size
+D2 symbol even when a trailing literal pool makes neither symbol a full-section witness. V6
+preserves it without changing `function_aliases`, inventing a binding, normalizing ELF metadata,
+discarding the pool or permitting R1 removal. Missing bindings still require the full-section
+proof above; mismatched pool bytes remain MISMATCH and a short section remains EXTENT.
+
+The default v2 model still refuses an entirely unbound destructor. V6 does not invent
+an original image address: an entirely unbound helper must satisfy every R1 requirement.
+Only v6 evaluates R1's full-section-entry check using the proven identical aliases above;
+the original-address exclusion, code/ABI, call-site and all-reference checks remain mandatory.
+An allocated `.ARM.exidx` relocation to the helper is still a live reference and prevents
+removal. Global data or untyped definitions are not function aliases and prevent v6 removal.
+Alias identity never waives those modeled effects: missing decoder write metadata is not
+proof that LDREXD/MRRC preserve a bounded index. Unresolved RFE PC/CPSR restoration remains
+unknown control/state, including in an otherwise unreachable decoded owner suffix.
+V4's effect model applies to guard and owner-state classification, not a complete
+architectural/interprocedural proof of inherited helper, input or outgoing decoder metadata.
+Little-endian catalogue entries and conforming call returns remain manual ABI obligations;
+ordinary FP exceptions and arbitrary external behavior are not newly proved. Every v4
+qualification and conservative unsupported-encoding refusal also applies to v6.
+
+Alias binding inheritance is **section-local**, not a guess about another COMDAT copy.
+Before R1 removal, every supplied copy's explicit original bindings are resolved.
+If one copy of a COMDAT member is original-bound and another would be removed, the
+entire link is refused, even when their bytes are identical. A copy with unsupported
+entry metadata or otherwise ineligible for removal also prevents partial entity removal.
+Every copy of a removed member must pass R1 and have identical complete bytes and code
+mapping. No bound identity can acquire an R1 `target: null` through a different copy.
+Roots through either entry alias, or a different copy, retain the whole COMDAT group;
+retention never waives v2's original-body equality or complete-extent comparison.
+The build's pre-link unique emitted-owner checks remain mandatory, including zero-size
+bound aliases and byte-identical credited COMDAT copies.
+
+The original proposal failed independent review (F01, sealed in
+`scratch/review/d2-alias/REVIEW.md`); the corrected v5 implementation at `22cb05b` received
+PASS_WITH_QUALIFICATIONS (`scratch/review/d2-alias-r2/REVIEW.md`). A subsequent real-source
+model sweep exposed a different v5 regression: `func_001c6a68` has a 100-byte D1 plus 4-byte
+pool, and `func_001ef89c` a 188-byte D1 plus 8-byte pool; both have a zero-size D2, both names
+explicitly bound, and full sections matching under v4. V5 incorrectly rejected them before
+comparison. Its blanket zero-size refusal is historical, not corrected under the same name:
+v5 is retired with that reason and v6 adds the bounded correction described above. No v4 fix
+or unsound v4 credit follows from these rows.
+
+The v6 implementation at `5bb20a9` passed focused independent re-review
+(`scratch/review/models-v6/REVIEW.md` / `SEAL.json`, PASS_WITH_QUALIFICATIONS).
+GATES v1.17 and v1.18 adopt the exact accepted v4 and v6 texts after `c008-r3` finalized,
+before the code merge and before any new checkpoint selecting these models.
+Selection, both fresh receipts, prepare/history and model-transition review must bind v6.
+Existing v5 author scratch receipts and the original sweep remain immutable and grant no credit.
+Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
+`RemovedCalleeModelTest`, `CppAliasCompareTest`, `AliasCompareSafetyTest`, and
+`BuildRemovedCalleeModelTest` in `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
 
 ## Sources
 
@@ -69,7 +158,7 @@ Online index of the same chapter: <https://developer.arm.com/documentation/dui04
 
 The manual does not say which NOP encoding armlink writes; the image does (below).
 
-## Retained-callee rules (v2 and v3)
+## Retained-callee rules (v2, v3, v4 and v6)
 
 Applied to relocated ARM branches (`R_ARM_CALL`, `R_ARM_JUMP24`, `R_ARM_PC24`) in a candidate
 object whose destination is ARM code. Nothing else is rewritten.
@@ -118,7 +207,7 @@ before layout; `--branchnop` needs final addresses) — a PC-writing instruction
 image agrees: all 8 surviving BLs to `MOV r0, r0; BX lr` functions (0x125b50, 0x13714c, 0x144220,
 0x18f7ec, 0x1c5b84) were kept, while no BL survives to any callee rule I1/I2 inlines.
 
-## Candidate-only removed callees (v3, rule R1)
+## Candidate-only removed callees (v3, v4 and v6, rule R1)
 
 The original-only identity rule cannot describe every link. [DUI0474K §4.12](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2)
 says inlining runs **before unused-section elimination**: a callee inlined at every reference
@@ -133,6 +222,10 @@ any catalogued function and not general dead-code removal:
    name without a catalogue entry is still refused. Any binding overlapping a catalogued
    function/entry/extent takes the retained-callee path, with every v2 equality/refusal intact;
    an uncatalogued bound address is also refused, rather than treated as absent.
+   Under v6, all copies' bindings are inspected before removal. A COMDAT member mixing a
+   bound copy and an R1-removable copy is refused, rather than inferring a binding or giving
+   the other copy a null-target rewrite. Every supplied copy must be eligible and consistent
+   before that member can be removed.
    It must also be unrooted: sections defining `__tagsym$$used` or another uninterpreted tag,
    ELF ARM entry/retain-marked sections, explicitly kept/first/last/entry/exported sections and
    retained COMDAT groups cannot use R1. `ObjectFile` preserves these roots, conservatively
@@ -143,8 +236,11 @@ any catalogued function and not general dead-code removal:
    A bound rooted definition retains all v2 identity/size/equality checks and I1–I3 decisions;
    retention keeps its section, not necessarily the BL.
 3. The section is executable, word-aligned, wholly code, non-Thumb and non-NOBITS, with all
-   function symbols at offset zero spanning the whole section. No relocation is allowed except
-   the nonreferencing `R_ARM_V4BX` marker. I1/I2 judge its own generated bytes, with all existing
+   function entries at offset zero spanning the whole section. Frozen v3 and v4
+   require each symbol's recorded size to equal that extent. Only v6 permits the proven
+   identical zero-size entry aliases above to share a full-sized sibling's extent.
+   No relocation is allowed except the nonreferencing
+   `R_ARM_V4BX` marker. I1/I2 judge its own generated bytes, with all existing
    exclusions (PC, LR, control transfer, exceptions, armlink's branch NOP) unchanged. In addition,
    an I2 helper may read only r0–r3/flags and write only r0–r3/r12/flags: it cannot change a
    callee-saved register or the stack. Conflicting candidate COMDAT copies are refused.
@@ -163,6 +259,8 @@ any catalogued function and not general dead-code removal:
    successors fail closed; r0 may be a result, and I1 requires no inputs. The post-site clobber
    check remains mandatory for entry-argument forwarding. This bounds ABI consistency in the
    decoded CFG, not historical helper identity, argument meanings or original source provenance.
+   V3 keeps its frozen CFG behavior. Only explicitly selected v4 or v6 enables the bounded-switch
+   policy described below; v4's range/return refinements are not applied to v3.
 5. After inlining, **every** reference to the section in every supplied allocated section must
    be gone, even in an otherwise unplaced section. A function pointer, `B` tail call,
    `R_ARM_NONE` dependency, incompatible I3 condition or non-ABI site raises `LinkError`; the
@@ -411,6 +509,226 @@ with `--profile game --linker-model armlink5-inline-branchnop-v3 --show 0`. **Ex
 MATCH 240/240 bytes**, one `inline_insn` at **+0x7c**, and the 8-byte `w16_set_screen` removed.
 The rewrite retains `target: null`. Results are under
 `scratch/integrator/linker-v3-f08/w16d/func_001456e4/`; this opt-in match is not accepted credit.
+
+## Jump tables in the call-context CFG (v4 and v6)
+
+The `r1-jumptables` extension resolves two bounded ARM compiler switch idioms inside R1's
+**original-code CFG** only under explicitly selected **`armlink5-inline-branchnop-v4`** or **`armlink5-inline-branchnop-v6`**.
+Frozen strict/v2/v3 policies retain their exact prior behavior, including v3's original caller
+decoding and return classification. It does not add a helper shape, a rewriting rule or relaxed
+byte comparison. Every R1 retention, retained-callee equality, reference-elimination,
+source/object binding and QUALIFIED provenance requirement remains unchanged.
+
+The first patch (`21c2bd4`) incorrectly broadened the frozen v3 name and did not prove data
+endianness for LDR targets; its sealed independent review
+`scratch/review/r1-jumptables/REVIEW.md` is **FAIL** (F01/F02). Those reported reproductions are
+ground truth, not checks to rerun on unchanged code. The next patch (`e72fb34`) correctly
+separated v4 and fixed SETEND, but its sealed
+`scratch/review/r1-jumptables-r2/REVIEW.md` is **FAIL**: F03 exposes omitted LDREXD/MRRC writes;
+F04 exposes unmodeled RFE PC/CPSR restoration. The r3 correction replaces permissive access
+metadata and a state-changing mnemonic denylist with explicit class/encoding effect models.
+Those corrections preceded v4 adoption; strict/v2/v3 remain frozen.
+
+The independent implementation/exact-text re-review passed with qualifications
+(`scratch/review/r1-jumptables-r3/REVIEW.md` / `SEAL.json`). The later composite review
+explicitly updates its adoption boundary to finalized `c008-r3`; gates v1.17 adopt v4,
+then v1.18 admit v6 without weakening this proof. Selection, both fresh receipts, prepare
+and history bind the chosen identifier; transitions reopen all affected R1 callers.
+No old checkpoint or evidence is reinterpreted.
+
+### Exact recognized patterns
+
+Let `A` be the original address of the PC-writing instruction and `rM` a non-PC register:
+
+| Form | Guarded instruction | Each reachable slot at `A + 8 + 4*i` |
+|---|---|---|
+| Branch table | `ADDLS pc, pc, rM, LSL #2` | an unconditional direct ARM `B` to decoded caller code |
+| Address table | `LDRLS pc, [pc, rM, LSL #2]` | a complete aligned absolute-address word in this caller's catalogued pool/literal data |
+
+The unsigned **LO** forms are also recognized. An unconditional immediate `CMP rM, #N` must
+guard the same index: **LS enumerates indices 0 through N; LO enumerates 0 through N−1**.
+The immediate is decoded with ARM's rotate encoding, not inferred from apparent table length.
+There must be at least one entry and every required slot must be present. No unguarded table,
+register bound, signed/other predicate, different base, alternate scale, writeback, subtractive
+index or arbitrary computed PC write is resolved.
+
+Between the compare and the writer, every word must be contiguous, modeled ordinary caller
+code, with no control transfer or possible index/NZCV write. Conditional writes are possible
+writes. `_arm_switch_effects` admits only an explicit instruction-ID allowlist **and validated
+A32 encoding**; it derives core destinations, load pairs/register lists, base writeback and
+NZCV changes from instruction fields, never from `regs_access`, `update_flags` or decoder
+control-flow groups. An absent write list is not preservation evidence. Generic coprocessor/
+exclusive instructions and all other unmodeled classes are refused rather than presumed safe.
+No catalogue entry, direct B/BL/BLX target or target of any otherwise-resolvable table may enter
+after the compare through the writer. Re-entry at the compare repeats the bound and is allowed.
+Any other reachable unresolved transfer still refuses the complete caller.
+
+Only original catalogue code ranges clipped to the owning function's complete extent supply
+instructions; pool/literal bytes never do. Address-table words likewise come only from complete
+aligned words of that owner's pool/literal ranges clipped to its extent, never from image
+search, candidate relocations, neighboring functions or arbitrary memory reads. Every address
+target and every branch-table entry's destination must be a decoded aligned ARM instruction of
+this caller. Thumb, out-of-extent, data and undecoded targets are refused.
+
+For LDR tables, data interpretation must be little-endian on **every** incoming path, not just
+after a stable compare. The target's public ARM ABI uses LE data at entries and conforming call
+returns. Before resolving **either** table form, every decoded owner instruction must pass the
+same explicit class/encoding effect model—even unreachable instructions. This is an allowlist,
+not a claim that a list of suspicious mnemonic prefixes exhausts state-restoring operations.
+
+Modeled classes are ordinary integer data processing with immediate/immediate-shift operands;
+validated scalar, double and register-list loads/stores with all destinations/writeback;
+ordinary short/long multiply; scalar VFP data/memory operations, explicitly decoded VMOV core
+transfers and FPSCR-only VMRS (including its FMSTAT alias); the actual compiler NOP; and branch/call/return
+encodings. Unsupported subencodings, reserved/unpredictable combinations and unknown/new
+decoder classes are refused. CPU core/NZCV effects are modeled separately from VFP register/
+FPSCR effects. VMRS-to-APSR/FMSTAT sets NZCV; ordinary VFP data operations do not. No modeled ordinary
+instruction restores CPSR.E; calls retain the manual LE ABI-return obligation.
+
+LDREXD (including predicated forms), generic MRRC, status/system writes, all RFE variants and
+other exception returns are unmodeled: their effects return refusal, and v4 flow is unknown
+even when the decoder reports neither writes nor control groups. A known LDRD/LDM or VMOV
+pair cannot hide an index or base write: both destinations and writeback are decoded directly.
+This owner-wide rule also covers instructions before the guard, on one predecessor or
+unreachable. Conservative false negatives are intentional; no interprocedural state recovery
+or restored-LE guess is claimed.
+
+The not-taken successor at `A + 4` must be an unconditional direct branch to decoded caller code
+or a recognized ordinary return, so it cannot accidentally fall into an address table. Returns
+are restricted to `BX lr`, plain `MOV pc, lr`, and `LDMIA sp!, {..., pc}`/`POP`; merely reading LR
+while writing PC, a generic decoder return group, exception-return encodings or an arbitrary PC
+load is insufficient. Predicated ordinary returns retain both exit/fall-through behavior outside
+this unconditional default-slot requirement.
+
+The CFG includes the default successor and every bounded table successor. For branch tables it
+visits each entry's B and then its destination; duplicate address targets may share a successor
+without dropping a distinct path. The existing incoming argument-provenance and outgoing
+register/flag-clobber walks use this complete graph, including case paths that do not contain the
+proposed helper. A different case cannot bypass argument setup or hide a later clobbered read.
+No source-specific address, function-name exception or forced-consistent context is permitted.
+
+### Evidence and reviewer obligations
+
+`tests/test_inplace.py` adds compiler-free `JumpTableContextTest` cases for both LO/LS table forms,
+complete bounds, guard/index/flag stability, direct/entry/table guard bypass, every successor,
+pool ownership, unknown computed transfers and escaping defaults/targets. Its compiled
+`SwitchRemovedCalleeTest` exercises the public `InPlaceLinker.link` consumer with separate caller
+and setter objects: it expects an address table under `game` and a branch table under the
+existing `trial-504-82-O3-Ospace` profile. Positive cases require exact full caller
+bytes, two `target: null` rewrites and the helper's defining-object provenance; frozen v3 must
+still refuse these tables and v2 must refuse the unbound helper. Compiler-free
+`BoundedSwitchModelTest` uses the public linker for ADD/LDR LO/LS selection and all reported
+LDREXD/predicated-LDREXD/MRRC negatives, modeled load/pair/writeback index changes, and RFE
+IA/DA/DB/IB with SP/r4 frames in the window, before the guard, on one predecessor and unreachable.
+`BoundedSwitchEffectsTest` enumerates every decoder instruction ID: an unmodeled class fails
+closed even without any access metadata; every ID also refuses an invalid encoding. Independent
+encoding vectors check modeled destinations/NZCV with access metadata absent. Frozen/new model
+payload and legacy classification checks remain. Match/build/compid selectors include v4;
+acceptance tests bind both receipts/history and reopen unchanged R1 callers on v3→v4 transition.
+New build receipts also bind `tools/linker_models.py` in their harness hashes, so the registry's
+selected policy flags are input-bound; historical receipts are not rewritten. The census has
+an explicit `--linker-model` selector and enables v4's CFG only for explicitly selected v4/v6.
+
+Independent reviewers must re-derive the compare's decoded immediate, unsigned bound/count,
+same-index and flag preservation, entry/dominance proof, every slot and the default edge from
+the original catalogue ranges, including each intervening instruction's architectural core
+writes, base writeback and NZCV effects even when decoder access sets are incomplete. They must
+re-derive the LE entry/call contract and explicit exception-return/state-restoration refusals;
+neither a missing write nor a missing flow group proves safety. Run the meta-test and public
+positive/negative consumers, plus five accepted-function regressions under v2, frozen v3 and v4;
+retain all existing typed-contract, implicit-argument, memory-effect, preserved-bug and historical
+helper-identity qualifications. Neither a clean CFG nor exact bytes prove that the original
+source contained the helper. Earlier forced-context evidence remains uncredited. This is an
+emulated in-place link, **not an execution of armlink**.
+
+### Effect-allowlisted v4 focused evidence (r3)
+
+After the class/encoding models and public/meta regressions settled, the requested focused
+smoke exited **0: 58 tests, OK**. It exercises the entire decoder-ID refusal policy, modeled
+destinations/writeback/NZCV without decoder access metadata, all reported LDREXD/MRRC and RFE
+public-consumer cases, ordinary compiled switches, frozen-model behavior and model/receipt
+selectors. The first focused run safely refused the legitimate FPSCR-to-NZCV transfer because
+Capstone names it FMSTAT rather than VMRS; that failed run and input hashes are retained.
+An explicit FPSCR-only FMSTAT effect model fixed the cause without weakening any test.
+
+The unchanged motivating sources, selected v4 and normal filter, were then exercised with
+`tools/match.py ... --profile game --linker-model armlink5-inline-branchnop-v4 --show 0
+--out scratch/out/r4052-v4-r3`: **exit 0; MATCH 2,212/2,212 B**, two `inline_insn` rewrites at
+**+0x5a8 / +0x6bc**, both `target: null`, and one 8-byte `bind_content` removed. The receipt is
+`scratch/out/r4052-v4-r3/func_001ab680_removed_setter.result.json`. Both source/object hashes and
+all seven/six recorded transitive header hashes agree with the exact compiler-cache inputs.
+
+Exact commands, both focused attempts, exits, input/receipt hashes and source closure are in
+`scratch/integrator/r1-jumptables/r3/verification.json`; fifteen fresh accepted-function command
+vectors and the Main full-suite command are in the adjacent `regression-commands.json`.
+The worker ran no full suite/build, accepted-function regression, prepare/finalize or adoption.
+Prior F03/F04 counterexamples were not rerun on unchanged old code. Independent
+implementation/exact-text re-review was still required at that point; this is not armlink execution or credit.
+
+### Historical failed-r2 focused smoke (`e72fb34`)
+
+Before F03/F04 were corrected, its targeted smoke exited **0: 53 tests, OK**.
+It includes public v4/frozen-v3 table consumers, endian-state negatives, compiled switch
+fixtures, legacy ABI/ordinary-helper behavior, match/build/compid CLI/model payloads and
+v3→v4 acceptance transition/receipt/history binding. It is not the full suite or a full build.
+The exact command, output and exits are in
+`scratch/integrator/r1-jumptables/r2/verification.json`.
+
+The unchanged motivating caller and separate helper were exercised normally with:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/match.py \
+  /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/func_001ab680_removed_setter.c \
+  --extra-source /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/removed_content_setter.c \
+  --profile game --linker-model armlink5-inline-branchnop-v4 --show 0 \
+  --out scratch/out/r4052-v4
+```
+
+**Exit 0; MATCH 2,212/2,212 B**, two `inline_insn` rewrites at **+0x5a8 / +0x6bc** with
+`target: null`, one 8-byte `bind_content` removed. Receipt:
+`scratch/out/r4052-v4/func_001ab680_removed_setter.result.json`. The r2 evidence binds both
+unchanged sources, both compiled objects and all seven/six recorded header dependency hashes,
+which agree with the exact compiler-cache inputs. No override or armlink execution was used.
+This is a private qualified candidate, not gate adoption or accepted credit.
+
+Main subsequently supplied **661 tests, 1 skipped, zero failed modules**, plus all fifteen
+exact accepted-function regressions for r2, as recorded in its sealed review. Those results
+are historical evidence for `e72fb34`, not verification of r3. The r2 command vectors and
+records remain unchanged under `scratch/integrator/r1-jumptables/r2/`. New r3 evidence/commands
+use `scratch/integrator/r1-jumptables/r3/`; independent re-review and adoption remain required.
+
+### Historical failed-revision r4052 measurement (`21c2bd4`)
+
+Before F01/F02 were corrected, that patch ran this normal-filter command under its incorrectly
+expanded v3 name. This is preserved historical evidence, **not current v3/v4 verification**:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/match.py \
+  /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/func_001ab680_removed_setter.c \
+  --extra-source /home/michael/code/kanken-training-2-decomp/scratch/authors/r4052/src/removed_content_setter.c \
+  --profile game --linker-model armlink5-inline-branchnop-v3 --show 0 \
+  --out scratch/out/r4052-v3
+```
+
+**Exit 0; MATCH 2,212/2,212 B**, two `inline_insn` rewrites at **+0x5a8** and **+0x6bc**, both
+`target: null`; one 8-byte `bind_content` section removed. The caller and separate helper sources
+were unchanged. Their source/object hashes and all compiler-recorded transitive dependency
+hashes (respectively seven and six header dependencies) agree with the exact cache/object
+inputs used by this match. The receipt is
+`scratch/out/r4052-v3/func_001ab680_removed_setter.result.json`; command, exit, receipt hash,
+source/header/object closure and implementation/configuration hashes are recorded in
+`scratch/integrator/r1-jumptables/verification.json`. The pre-resume receipt was preserved
+separately rather than treated as fresh evidence.
+
+The editing worker did not run suites or accepted-function regressions for that patch. Main
+subsequently reported **652 tests, 1 skipped, 0 failed modules**, and ten exact accepted-function
+v2/v3 regressions; the sealed review records that attribution. Those checks apply only to the
+failed revision, not the corrected v4 implementation. Prior command/evidence files are retained;
+new command vectors and focused-smoke evidence live under
+`scratch/integrator/r1-jumptables/r2/`. A private match still earns no accepted credit or
+historical helper identity, and neither revision executes armlink.
+
+
 
 
 ## Historical V3 measurements (branch `linker-removed`, before independent review)
