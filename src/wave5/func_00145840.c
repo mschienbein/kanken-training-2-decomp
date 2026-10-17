@@ -1,10 +1,4 @@
-#pragma pack(push, 2)
-struct SynchronizationState {
-    unsigned owner;
-    unsigned recursion;
-    unsigned short locked;
-};
-#pragma pack(pop)
+#include "game/service_state.h"
 
 struct RequestRecord {
     unsigned kind;
@@ -18,11 +12,9 @@ struct RequestRecord {
     unsigned char auxiliary[0x89];
     int handle;
     unsigned short status;
-    struct SynchronizationState synchronization;
+    unsigned char reservedf76[10]; /* synchronization storage initialized by func_0019051c */
 };
 extern void func_0019051c(struct RequestRecord *record);
-extern void func_001904ec(void);
-extern void func_001904e0(void);
 extern void func_00190450(unsigned char *output, struct RequestRecord *record);
 
 static void copyText(unsigned short *destination, const unsigned short *text,

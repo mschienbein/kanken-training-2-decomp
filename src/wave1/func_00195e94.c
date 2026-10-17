@@ -1,6 +1,6 @@
-extern unsigned char data_00242a50[];
+#include "game/service_state.h"
 
 int func_00195e94(void)
 {
-    return data_00242a50[6];
+    return data_00242a50.mode;
 }

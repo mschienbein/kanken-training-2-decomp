@@ -34,6 +34,27 @@ struct ArchiveReader {
     unsigned char initialized;             /* 0x0c */
 };
 
+/* A typed, self-relative resource reference; unsupported types resolve to null. */
+struct RelativeReference {
+    unsigned short type;
+    unsigned short reserved;
+    int offset;
+};
+
+struct ResourceBlock {
+    const struct ArchiveFile *file;
+    const struct RelativeReference *reference;
+};
+
+/* Two consecutive words, also used by the pair setter at 0x00136448. */
+struct WordPair {
+    unsigned int first;
+    unsigned int second;
+};
+
+extern void func_00136448(struct WordPair *pair, unsigned int first, unsigned int second);
+extern const void *func_0017ded4(const struct RelativeReference *reference);
+
 extern const struct ArchiveBlockHeader *func_0014a2f0(const struct ArchiveFile *file);
 extern unsigned func_00183c54(const struct ArchiveFile *file);
 extern struct ArchiveReader *func_00183c84(struct ArchiveReader *reader,

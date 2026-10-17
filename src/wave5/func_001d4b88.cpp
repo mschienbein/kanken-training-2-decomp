@@ -1,7 +1,6 @@
 struct AnimationTrack;
 struct AnimationTrackVTable {
-    void (*destroy)(AnimationTrack *);
-    void (*release)(AnimationTrack *);
+    unsigned char reserved00[8]; /* only the advance slot is evidenced here */
     int (*advance)(AnimationTrack *, int);
 };
 struct Progress {

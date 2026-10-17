@@ -1,5 +1,4 @@
-extern unsigned func_00191de8(void);
-extern int func_0018eed0(void);
+#include "game/service_state.h"
 
 int func_00122b00(void)
 {

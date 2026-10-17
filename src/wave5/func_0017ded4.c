@@ -1,8 +1,4 @@
-struct RelativeReference {
-    unsigned short type;
-    unsigned short reserved;
-    int offset;
-};
+#include "game/archive.h"
 
 const void *func_0017ded4(const struct RelativeReference *reference)
 {

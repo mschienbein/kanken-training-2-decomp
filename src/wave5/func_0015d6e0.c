@@ -1,11 +1,4 @@
-struct NotificationState {
-    unsigned char reserved00[2];
-    unsigned char pending;
-    unsigned char value;
-    unsigned char enabled;
-    unsigned char acknowledged;
-};
-extern struct NotificationState bss_00290cac;
+#include "game/notification.h"
 
 void func_0015d6e0(int value)
 {

@@ -1,17 +1,5 @@
 #include "game/archive.h"
 
-struct RelativeReference {
-    unsigned short type;
-    unsigned short reserved;
-    int offset;
-};
-struct ResourceBlock {
-    const struct ArchiveFile *file;
-    const struct RelativeReference *reference;
-};
-struct WordPair {
-    unsigned words[2];
-};
 struct ResourceData {
     unsigned char flags[4];
     unsigned reserved04;
@@ -25,11 +13,12 @@ struct ResourceData {
     unsigned extended_start;
     unsigned extended_end;
 };
-extern const void *func_0017ded4(const struct RelativeReference *reference);
 
 int func_001f28cc(const struct ResourceBlock *block, struct ResourceData *output)
 {
     const struct ResourceData *source = func_0017ded4(block->reference);
+    /* ORIGINAL BUG: unsupported reference types yield null, but the original
+     * still reads the resource fields through that null source. */
     unsigned version;
     output->flags[0] = source->flags[0];
     output->flags[1] = source->flags[1];

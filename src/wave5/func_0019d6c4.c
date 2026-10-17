@@ -4,6 +4,8 @@ struct FatalErrorInfo {
     unsigned short version;
     unsigned result;
     unsigned address;
+    unsigned handle; /* func_00186294 writes this through func_0012d150 */
+    unsigned char reserved10[0x70]; /* the report copies the complete 0x80-byte object */
 };
 
 extern struct FatalErrorInfo bss_004b1200;

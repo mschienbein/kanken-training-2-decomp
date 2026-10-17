@@ -1,5 +1,7 @@
+#include "game/notification.h"
+
 struct NotificationPayload {
-    unsigned words[0xb740 / sizeof(unsigned)];
+    unsigned words[0x2dd0]; /* 0xb740 bytes of saved notification state */
 };
 struct SavedNotification {
     int index;
@@ -8,7 +10,6 @@ struct SavedNotification {
 };
 extern struct NotificationPayload bss_002476b0[];
 extern struct SavedNotification bss_00280af0;
-extern void func_0015d6e0(int value);
 extern void func_00169b58(void);
 extern void func_00192720(void *destination, const void *source, unsigned size);
 

@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+extern void func_0011ef54(long long nanoseconds); /* sleep wrapper */
+extern void func_0011ef58(long long nanoseconds); /* underlying sleep operation */
 extern void *func_0013714c(void *object);      /* empty destructor wrapper */
 extern void *func_00137150(void *object);      /* preserves the allocation pointer */
 extern void func_001852f4(void *allocation);   /* releases a heap allocation */

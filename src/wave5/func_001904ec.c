@@ -1,4 +1,5 @@
 #include "game/runtime.h"
+#include "game/service_state.h"
 
 extern int func_00137f0c(unsigned flags);
 
