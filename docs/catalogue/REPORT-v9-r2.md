@@ -71,3 +71,22 @@ retired evidence filename; the whole-image fixture already reads the r2 input.
 Generator code and proposal contents are unchanged, so the proposal identity
 above remains the generation identity. No suite or test was executed by this
 author after the fix; Main owns the clean-checkout rerun.
+
+## Adoption on main (integrator, 2026-10-17)
+
+Adopted as denominator **v9-r2** after independent re-review `docs/catalogue/REVIEW-v9-r2.md`
+(PASS_WITH_QUALIFICATIONS, intermediate revision; the v9 FAIL is `REVIEW-v9-r1.md`). Generator merged
+as `855bc71`. Main verification before adoption: clean checkout of `a930af3` full suite exit 0
+(566 tests, 1 skipped, 0 failed modules); plain CLI generation there reproduced the reviewed SHA-256
+`7bc3fd8b…` twice.
+
+`config/catalogue.json` is main's own plain CLI generation
+(`.venv/bin/python tools/analyze.py catalogue --out scratch/analyze/catalogue-v9-r2-main.json`,
+exit 0, SHA-256 `d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64`). It differs from
+the reviewed file in exactly nine provenance fields, because main's inputs are newer than the
+proposal branch's: `config/matches.json` now holds finalized c007 (1,167 functions / 73,388 B instead
+of the pre-c007 870 / 50,012 B snapshot), `config/names.json` holds c008's names, and the prepared
+`config/candidates/c008.json` exists on disk (the branch protected the same pinned blob). Every
+function record, entry, range, unknown interval and anomaly is identical: 4,699 owners, 4,624
+creditable functions, 4,408 unknown B / 84 ranges, 37 anomalies. These remain open intermediate
+work, not completed recovery.
