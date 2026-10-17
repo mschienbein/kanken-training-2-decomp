@@ -46,7 +46,7 @@ struct AudioVoiceGroup {
     float value44;
     float sends[2];
     unsigned char reserved50[8];
-    struct RegistryNode link;
+    struct PoolLink link;
 };
 
 struct AudioEnvelope {

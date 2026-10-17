@@ -3,9 +3,9 @@
 
 
 extern volatile unsigned int data_00243800;
-extern struct Registry bss_004b9810;
+extern struct PoolList bss_004b9810;
 
-struct Registry *func_0017e7c4(void)
+struct PoolList *func_0017e7c4(void)
 {
     if ((data_00243800 & 1) == 0 && func_00191c80(&data_00243800)) {
         bss_004b9810.sentinel.next = &bss_004b9810.sentinel;

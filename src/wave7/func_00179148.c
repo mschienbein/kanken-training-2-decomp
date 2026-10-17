@@ -3,7 +3,7 @@
 
 int func_00179148(void)
 {
-    if (bss_00280af0.payload.flags & 1)
+    if (bss_00280af0.payload.storage.fields.flags & 1)
         return 1;
     return 0;
 }

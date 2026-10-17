@@ -1,6 +1,8 @@
 #ifndef GAME_SELECTION_H
 #define GAME_SELECTION_H
 
+#include <stdint.h>
+
 /* Selection state at 0x0028c1f0; both fields are read as signed halfwords. */
 struct SelectionState {
     unsigned char reserved00[0x52];
@@ -17,6 +19,10 @@ struct W6ListGroup {
     unsigned int reserved00;
     int count;
     struct W6ListItem **items;
+    unsigned char reserved0c[0x6c];
+    int mode;
+    int selected;
+    int preserve_selected;
 };
 
 struct W6ListController {
@@ -69,7 +75,8 @@ struct MetadataHeader {
 
 struct MetadataEntry {
     const struct MetadataHeader *header;
-    unsigned char reserved04[8];
+    uintptr_t resource;
+    int index;
 };
 
 #ifdef __cplusplus
