@@ -2157,6 +2157,22 @@ class RemovedUnwindModelTest(unittest.TestCase):
         self.assertEqual(set(linker._removed_unwind), {3})
         self.assertEqual([r["section_index"] for r in linker.removed_callees[0]["unwind_sections"]], [3])
 
+    def test_v7_inherits_v6_independently_bound_zero_size_placement(self):
+        # V5 regressed this v4 placement: independent bindings do not borrow a sibling's
+        # identity and therefore do not require the full-section alias proof.
+        for model in ("armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v6", self.MODEL):
+            for binding in ("resolver", "explicit"):
+                with self.subTest(model=model, binding=binding):
+                    obj, mem, catalogue = RemovedCalleeModelTest().fixture()
+                    obj.symbols[0].size = 4  # no full-section alias witness in this section
+                    obj.symbols.append(inplace.Symbol("bound_entry", 0, 0, "STT_FUNC", "STB_GLOBAL", 1))
+                    resolver_names = {"bound_entry": {"address": BASE}} if binding == "resolver" else {}
+                    explicit_names = {"bound_entry": BASE} if binding == "explicit" else {}
+                    linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, resolver_names),
+                                                   (0x200000, 0x201000), model)
+                    self.assertEqual(linker.link(obj, explicit_names)[1][1], mem.read(BASE, 40))
+                    self.assertNotIn("unwind_sections", linker.removed_callees[0])
+
     @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
     def test_real_d1_d2_elf_metadata_survives_combining_in_either_object_order(self):
         with tempfile.TemporaryDirectory() as tmp:
