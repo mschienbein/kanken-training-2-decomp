@@ -4,8 +4,7 @@
 
 void func_0014aaf4(struct BoundDisplayObject *object, int mode, float value)
 {
-    struct Material *material = func_0017fd68(
-        (struct PaneMaterialView *)object->bindings[0]->pane);
+    struct Material *material = func_0017fd68(object->bindings[0]->pane);
     struct MaterialPair pair;
     /* ORIGINAL BUG: the unused upper bits of the mode word are uninitialized. */
     pair.mode = mode;

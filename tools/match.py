@@ -4,15 +4,16 @@
                           [--linker-model NAME]
 
 Every surviving function the unit defines must be named `func_XXXXXXXX` (its catalogue address) or
-appear in config/names.json. Only v5 lets proven full-section entry aliases share either name's
+appear in config/names.json. Only v6 lets proven full-section entry aliases share either name's
 binding. V3 and its explicit successor models can remove eligible candidate-only callees;
 `--extra-source` supplies same-build helper definitions, compiled with the same profile. Surviving functions are
 linked at their original addresses with tools/inplace.py and compared byte
 for byte over its whole catalogued extent (code + literal pool). The linker model (default
 `inplace.DEFAULT_LINKER_MODEL`, docs/LINKER.md) decides which armlink output optimisations the
 link reproduces; every branch it rewrote is listed per function. Exit status: 0 all functions
-match, 1 some differ, 2 the candidate could not be compiled or linked. A JSON result is written next
-to the object. This is the author's loop; adoption and acceptance happen in the integrator's build.
+match, 1 some bytes or extents differ, 2 the candidate could not be compiled or linked.
+A JSON result is written next to the object; refusals record status "refused" and a reason, not
+function mismatches. This is the author's loop; adoption and acceptance happen in the integrator's build.
 """
 from __future__ import annotations
 
@@ -76,6 +77,20 @@ def merge_names(base: dict[str, dict], proposed: dict[str, dict]) -> dict[str, d
     return {**base, **proposed}
 
 
+class Comparison(dict):
+    """A comparison row with ordinary dict semantics and buffer-free implicit display.
+
+    Private buffers remain available through explicit key access for diffs and scoring.
+    Receipt serialization must continue to exclude private keys, independently of repr.
+    """
+
+    def __repr__(self) -> str:
+        public = {key: value for key, value in self.items() if not key.startswith("_")}
+        return f"Comparison({public!r})"
+
+    __str__ = __repr__
+
+
 class Context:
     """The original image, catalogue and resolver shared by every comparison."""
 
@@ -96,7 +111,10 @@ class Context:
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
 
-    def compare(self, obj_path: Path, extra_objects: list[Path] | None = None) -> list[dict]:
+    def __repr__(self) -> str:
+        return f"Context(functions={len(self.functions)})"
+
+    def compare(self, obj_path: Path, extra_objects: list[Path] | None = None) -> list[Comparison]:
         """Link the object in place; one result row per catalogued function it defines, listing
         the branches the linker model wrote as armlink's optimisations (`linker_rewrites`)."""
         obj = inplace.ObjectFile(obj_path)
@@ -115,8 +133,13 @@ class Context:
             span = max(len(data), fn["size"])
             try:
                 original = self.image.read(placed.base, span)
-            except image_mod.ImageError:
-                original = self.image.read(placed.base, fn["size"])
+            except (ValueError, image_mod.ImageError):
+                try:
+                    original = self.image.read(placed.base, fn["size"])
+                except (ValueError, image_mod.ImageError) as exc:
+                    raise inplace.LinkError(
+                        f"{placed.section.name}: cannot read catalogued function at {placed.base:#x}: {exc}"
+                    ) from None
             same = data == original[: len(data)]
             if same and len(data) == fn["size"]:
                 status = "match"
@@ -132,12 +155,12 @@ class Context:
             name = symbols[0].name
             if self.model.function_entry_aliases:
                 name = next((s.name for s in symbols if self.resolver.lookup(s.name) is not None), name)
-            results.append({
+            results.append(Comparison({
                 "name": name, "address": placed.base, "size": fn["size"], "candidate_size": len(data),
                 "status": status, "first_diff": first,
                 "linker_rewrites": [w.record() for w in linker.rewrites if w.section == placed.section.index],
                 "_original": original, "_candidate": data,
-            })
+            }))
         return sorted(results, key=lambda r: r["address"])
 
 
@@ -156,6 +179,8 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         toolchain.compile_source(profile, extra, companion)
         companions.append(companion)
     results = ctx.compare(obj_path, companions)
+    if not results:
+        raise inplace.LinkError("candidate defines no surviving catalogued functions to compare")
     for r in results:
         label = {"match": "MATCH   ", "match_extent_differs": "EXTENT  ", "mismatch": "MISMATCH"}[r["status"]]
         detail = {
@@ -185,7 +210,7 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         "functions": [{k: v for k, v in r.items() if not k.startswith("_")} for r in results],
     }
     (out_dir / (source.stem + ".result.json")).write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n")
-    return 0 if results and all(r["status"] == "match" for r in results) else 1
+    return 0 if all(r["status"] == "match" for r in results) else 1
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -226,6 +251,16 @@ def main(argv: list[str] | None = None) -> int:
                    args.names, [path.resolve() for path in args.extra_source], args.literal_model)
     except (inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        record = {
+            "source": args.source.resolve().as_posix(), "profile": args.profile,
+            "linker_model": args.linker_model, "literal_model": args.literal_model,
+            "status": "refused", "reason": str(e), "error_type": type(e).__name__,
+            "functions": [],
+        }
+        (out_dir / (args.source.stem + ".result.json")).write_text(
+            json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n"
+        )
         return 2
 
 

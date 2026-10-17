@@ -20,7 +20,7 @@ class LinkerModel:
     branchnop: bool = False  # --branchnop: relocated ARM B to the next instruction -> NOP
     removed_inline: bool = False  # v3: inline and eliminate candidate-only tiny function sections
     bounded_switches: bool = False  # v4: bounded ARM jump-table CFG with fail-closed endian state
-    function_entry_aliases: bool = False  # v5: proven same-section zero/full-sized entry aliases
+    function_entry_aliases: bool = False  # v6: proven aliases plus independently bound legacy placement
     removed_unwind: bool = False  # v7: eliminate a removed helper's exclusive EHABI companions
 
 
@@ -30,7 +30,7 @@ LINKER_MODELS = {m.name: m for m in (
     LinkerModel("armlink5-inline-branchnop-v3", inline=True, branchnop=True, removed_inline=True),
     LinkerModel("armlink5-inline-branchnop-v4", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True),
-    LinkerModel("armlink5-inline-branchnop-v5", inline=True, branchnop=True, removed_inline=True,
+    LinkerModel("armlink5-inline-branchnop-v6", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True),
     LinkerModel("armlink5-inline-branchnop-v7", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True, removed_unwind=True),
@@ -40,6 +40,8 @@ DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 RETIRED_LINKER_MODELS = {
     "armlink5-inline-branchnop-v1": "judged a callee defined in the candidate object by the candidate's own bytes, "
     "not the original's (review F01); superseded by armlink5-inline-branchnop-v2",
+    "armlink5-inline-branchnop-v5": "reviewed 22cb05b refuses explicitly bound D1/D2 placements that v4 credits "
+    "(func_001c6a68, func_001ef89c); superseded by v6, never adopted",
 }
 
 LITERAL_MODELS = ("none", "anonymous-string-records-v1")

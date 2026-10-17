@@ -5,5 +5,5 @@
 
 unsigned func_001f2b98(struct ArchiveIndex *reader)
 {
-    return *func_001f22ac((const struct W12cArchiveTables *)reader->table);
+    return *func_001f22ac(reader->table);
 }

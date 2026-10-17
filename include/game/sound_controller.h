@@ -5,7 +5,7 @@ struct AudioTaskManager;
 struct FileSoundController001d40a8;
 struct ForwardedFileStream;
 struct ForwardingFileStream;
-struct LazyStreamMutex;
+struct InputSessionContext;
 struct PositionPair;
 struct ResetState001d4850;
 struct ResourceFontView;
@@ -27,11 +27,6 @@ struct X03PendingCommand {
     unsigned words[128];
 };
 
-struct LazyStreamMutex {
-    unsigned char initialized;
-    unsigned char reserved01[0x33];
-    struct StreamMutex mutex;
-};
 
 struct StreamDecodeState {
     unsigned char reserved00[0x38];
@@ -107,7 +102,7 @@ extern void func_001d2da4(struct ResourceOwner *owner);
 extern struct ResourceState001d0164 *func_001d017c(struct ResourceState001d0164 *state);
 extern unsigned func_0012d40c(unsigned *detail);
 extern unsigned func_0012d424(struct X03PendingCommand *command);
-extern void func_0014856c(struct LazyStreamMutex *object);
+extern void func_0014856c(struct InputSessionContext *object);
 extern struct StreamDecodeState *func_00149374(struct StreamDecodeState *state);
 extern void func_00180860(struct AudioTaskManager *manager);
 extern bool func_001f1fe0(const struct ForwardingFileStream *object);

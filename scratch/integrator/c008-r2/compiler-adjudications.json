@@ -1,0 +1,2694 @@
+{
+ "raw_failures": 236,
+ "final_raw_failures": 77,
+ "final_scoped_native_failures": 0,
+ "final_actual_cpp_failures": 0,
+ "signature_units": 364,
+ "signature_failures": 0,
+ "rows": [
+  {
+   "run": "initial-fixed",
+   "source": "src/pilot/pilot_a.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "70"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/pilot/pilot_b.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/pilot/pilot_b.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/pilot/loop_cleanup.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/pilot/loop_cleanup.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave2/func_001770cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave4/func_00146ff8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave4/func_0013e6d0.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave4/func_0013e6d0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave4/func_00182b5c.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave4/func_00182b5c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave5/func_0019d6c4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave5/func_0019d6c4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256",
+    "338"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave5/func_001147c0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "294"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave5/func_001f28cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave6/func_00104f90.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave6/func_00104f90.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave6/func_00186874.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave6/func_00195a08.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_00144140.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_00144188.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_0014c23c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_0014c25c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_00152d48.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_0017e5f4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_001815a8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_001837c8.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_001837c8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_001f2334.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave7/func_001f2354.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/sdk/func_00143ac8.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "12",
+    "20",
+    "325",
+    "326",
+    "40",
+    "65",
+    "80"
+   ],
+   "disposition": "probe-injection-C++-only-header",
+   "adjudication": "Broad symbol intersection injected the C++-only kernel_owners.h into unrelated C SVC definition units. Their actual native includes do not do this; SVC contracts come from ctr/svc.h. No canonical source change is justified by that artificial co-location."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/sdk/func_001c52bc.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "12",
+    "20",
+    "325",
+    "326",
+    "40",
+    "65",
+    "80"
+   ],
+   "disposition": "probe-injection-C++-only-header",
+   "adjudication": "Broad symbol intersection injected the C++-only kernel_owners.h into unrelated C SVC definition units. Their actual native includes do not do this; SVC contracts come from ctr/svc.h. No canonical source change is justified by that artificial co-location."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave10/func_00179d48.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave10/func_00179e00.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave10/func_00179e40.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_001409cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_00152f10.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_00174324.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_00174454.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_001770b4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_0017710c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_00178fb0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_00179030.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_00179160.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_0017a0e0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave8/func_0018290c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave9/func_0012f4e4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave9/func_0012f4e4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256",
+    "338"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave9/func_00138fb0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave9/func_00140bf0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave9/func_00182760.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave9/func_0018341c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/sdk2/func_00138fe4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/sdk2/func_001533e0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/sdk2/func_001f240c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/sdk2/func_001f459c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "20"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_001102c8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_0012dc7c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_001312a4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_001312a4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_00175a5c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_00179068.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_0018271c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_00186224.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave11/func_0019ffa8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave12/func_00195874.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave12/func_001d5bf4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave12/func_001cf1cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave14/func_0012fda0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "resolved-byte-representation-contract",
+   "adjudication": "Preserve signed result storage and explicitly expose its one-byte object representation as unsigned char* to the canonical endpoint. Retyped unsigned storage added instructions and its mismatch was retained. Final matching and C++ signature pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave14/func_0012d43c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave14/func_00186538.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167",
+    "291"
+   ],
+   "disposition": "resolved-byte-contract-with-C-body-limit",
+   "adjudication": "The unsigned-byte endpoint now receives a legal unsigned-character representation view of signed storage. The remaining synthetic C-as-C++ default-constructor error is unrelated to the C contract; actual C body and C++ signature pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave14/func_0015db7c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/wave14/func_001f1f80.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_0012f170.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "20"
+   ],
+   "disposition": "resolved-missing-prototype",
+   "adjudication": "The implicit __aeabi_memcpy4 declaration was real (C warning 223 / C++ error 20). A typed ARM EABI declaration is now in game/runtime.h and included by this unit; final native, C++ signature and exact matching pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_00150c58.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_00150cb8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_00150f2c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_00150f6c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_001234e4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "247"
+   ],
+   "disposition": "resolved-shared-helper-reuse",
+   "adjudication": "Injected ctr/ipc.h duplicated this source-local static helper. The unit now includes ctr/ipc.h and uses its identical shared implementation; native and signature probes and exact matching pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_001234e4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "247"
+   ],
+   "disposition": "resolved-shared-helper-reuse",
+   "adjudication": "Injected ctr/ipc.h duplicated this source-local static helper. The unit now includes ctr/ipc.h and uses its identical shared implementation; native and signature probes and exact matching pass."
+  },
+  {
+   "run": "initial-fixed",
+   "source": "src/retries/func_0012d550.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "800"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/pilot/pilot_a.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "70"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/pilot/pilot_b.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/pilot/pilot_b.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/pilot/loop_cleanup.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/pilot/loop_cleanup.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave2/func_001770cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave4/func_00146ff8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave4/func_0013e6d0.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave4/func_0013e6d0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave4/func_00182b5c.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave4/func_00182b5c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave5/func_0019d6c4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave5/func_0019d6c4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256",
+    "338"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave5/func_001147c0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "294"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave5/func_001f28cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave6/func_00104f90.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave6/func_00104f90.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave6/func_00186874.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave6/func_00195a08.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_00144140.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_00144188.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_0014c23c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_0014c25c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_00152d48.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_0017e5f4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_001815a8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_001837c8.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_001837c8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_001f2334.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave7/func_001f2354.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/sdk/func_00143ac8.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "12",
+    "20",
+    "325",
+    "326",
+    "40",
+    "65",
+    "80"
+   ],
+   "disposition": "probe-injection-C++-only-header",
+   "adjudication": "Broad symbol intersection injected the C++-only kernel_owners.h into unrelated C SVC definition units. Their actual native includes do not do this; SVC contracts come from ctr/svc.h. No canonical source change is justified by that artificial co-location."
+  },
+  {
+   "run": "final",
+   "source": "src/sdk/func_001c52bc.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "12",
+    "20",
+    "325",
+    "326",
+    "40",
+    "65",
+    "80"
+   ],
+   "disposition": "probe-injection-C++-only-header",
+   "adjudication": "Broad symbol intersection injected the C++-only kernel_owners.h into unrelated C SVC definition units. Their actual native includes do not do this; SVC contracts come from ctr/svc.h. No canonical source change is justified by that artificial co-location."
+  },
+  {
+   "run": "final",
+   "source": "src/wave10/func_00179d48.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave10/func_00179e00.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave10/func_00179e40.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_001409cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_00152f10.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_00174324.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_00174454.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_001770b4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_0017710c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_00178fb0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_00179030.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_00179160.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_0017a0e0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave8/func_0018290c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave9/func_0012f4e4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave9/func_0012f4e4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256",
+    "338"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave9/func_00138fb0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave9/func_00140bf0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave9/func_00182760.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave9/func_0018341c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/sdk2/func_00138fe4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/sdk2/func_001533e0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/sdk2/func_001f240c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/sdk2/func_001f459c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "20"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_001102c8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_0012dc7c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_001312a4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_001312a4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_00175a5c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_00179068.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_0018271c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_00186224.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave11/func_0019ffa8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave12/func_00195874.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave12/func_001d5bf4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave12/func_001cf1cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave14/func_0012d43c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave14/func_00186538.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave14/func_0015db7c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/wave14/func_001f1f80.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/retries/func_0012f170.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "20"
+   ],
+   "disposition": "resolved-missing-prototype",
+   "adjudication": "The implicit __aeabi_memcpy4 declaration was real (C warning 223 / C++ error 20). A typed ARM EABI declaration is now in game/runtime.h and included by this unit; final native, C++ signature and exact matching pass."
+  },
+  {
+   "run": "final",
+   "source": "src/retries/func_00150c58.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/retries/func_00150cb8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/retries/func_00150f2c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/retries/func_00150f6c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final",
+   "source": "src/retries/func_0012d550.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "800"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/pilot/pilot_a.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "70"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/pilot/pilot_b.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/pilot/pilot_b.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/pilot/loop_cleanup.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/pilot/loop_cleanup.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave2/func_001770cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave4/func_00146ff8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave4/func_0013e6d0.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave4/func_0013e6d0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave4/func_00182b5c.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave4/func_00182b5c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave5/func_0019d6c4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave5/func_0019d6c4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256",
+    "338"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave5/func_001147c0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "294"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave5/func_001f28cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave6/func_00104f90.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave6/func_00104f90.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "147",
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave6/func_00186874.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave6/func_00195a08.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_00144140.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_00144188.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_0014c23c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_0014c25c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_00152d48.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_0017e5f4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_001815a8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_001837c8.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_001837c8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_001f2334.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave7/func_001f2354.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/sdk/func_00143ac8.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "12",
+    "20",
+    "325",
+    "326",
+    "40",
+    "65",
+    "80"
+   ],
+   "disposition": "probe-injection-C++-only-header",
+   "adjudication": "Broad symbol intersection injected the C++-only kernel_owners.h into unrelated C SVC definition units. Their actual native includes do not do this; SVC contracts come from ctr/svc.h. No canonical source change is justified by that artificial co-location."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/sdk/func_001c52bc.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "12",
+    "20",
+    "325",
+    "326",
+    "40",
+    "65",
+    "80"
+   ],
+   "disposition": "probe-injection-C++-only-header",
+   "adjudication": "Broad symbol intersection injected the C++-only kernel_owners.h into unrelated C SVC definition units. Their actual native includes do not do this; SVC contracts come from ctr/svc.h. No canonical source change is justified by that artificial co-location."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave10/func_00179d48.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave10/func_00179e00.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave10/func_00179e40.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_001409cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_00152f10.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_00174324.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_00174454.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_001770b4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_0017710c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_00178fb0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_00179030.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_00179160.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_0017a0e0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave8/func_0018290c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave9/func_0012f4e4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101",
+    "147"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave9/func_0012f4e4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256",
+    "338"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave9/func_00138fb0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave9/func_00140bf0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave9/func_00182760.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave9/func_0018341c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/sdk2/func_00138fe4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/sdk2/func_001533e0.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/sdk2/func_001f240c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/sdk2/func_001f459c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "20"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_001102c8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_0012dc7c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "167"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_001312a4.c",
+   "language": "native",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "101"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_001312a4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "256"
+   ],
+   "disposition": "probe-injection-duplicate-C-tag",
+   "adjudication": "A pre-existing accepted C unit defines the same C tag that the injected canonical header completes. Co-location creates duplicate definitions and cascading 147/338 diagnostics, rather than a disagreement between translation units. Whole-ledger G3 reports zero layout/declaration disagreements; no private replacement type was added."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_00175a5c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_00179068.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_0018271c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_00186224.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave11/func_0019ffa8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave12/func_00195874.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave12/func_001d5bf4.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "144"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave12/func_001cf1cc.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave14/func_0012d43c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave14/func_00186538.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "291"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave14/func_0015db7c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "513"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/wave14/func_001f1f80.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/retries/func_00150c58.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/retries/func_00150cb8.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/retries/func_00150f2c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/retries/func_00150f6c.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "135"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  },
+  {
+   "run": "final-r2",
+   "source": "src/retries/func_0012d550.c",
+   "language": "cxx-c-linkage",
+   "compiler_exit": 1,
+   "actual_diagnostic_codes": [
+    "800"
+   ],
+   "disposition": "C-body-not-C++-source",
+   "adjudication": "This is a synthetic translation of an actual C body, not a failing C++ definition: C-only flexible members, void-pointer conversions, C guard initialization, _Bool or template headers under the artificial linkage wrapper. Actual C native compile and independently generated C++ C-linkage definition-signature probes pass."
+  }
+ ],
+ "warning_adjudications": {
+  "231": "SelectionHintPanel had two prototype-scope tags; one file-scope opaque declaration now makes both refer to the same type.",
+  "223": "Missing __aeabi_memcpy4 prototype fixed with its shared typed ARM EABI declaration.",
+  "68": "Defined conversion of -1 to the full-width unsigned mutex-depth sentinel, including accepted pre-existing resetters; no narrowing or incompatible interface.",
+  "1293": "Intentional assignment in condition in the matching SoundWaveReader initializer; not an interface disagreement."
+ }
+}

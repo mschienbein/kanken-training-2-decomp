@@ -1,0 +1,95 @@
+[
+  {
+    "name": "caller-with-frozen-ushort",
+    "source": "scratch/review/c008/second/width-probes/caller-with-frozen-ushort.c",
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "tools/match.py",
+      "/home/michael/code/kanken-training-2-decomp/scratch/review/c008/second/width-probes/caller-with-frozen-ushort.c",
+      "--profile",
+      "game",
+      "--show",
+      "0",
+      "--linker-model",
+      "armlink5-inline-branchnop-v2",
+      "--literal-model",
+      "none",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/review/c008/second/width-probes/caller-with-frozen-ushort"
+    ],
+    "exit": 1,
+    "statuses": [
+      {
+        "name": "func_001821f4",
+        "size": 16,
+        "candidate_size": 20,
+        "status": "mismatch",
+        "first_diff": 4
+      }
+    ],
+    "result_path": "scratch/review/c008/second/width-probes/caller-with-frozen-ushort/caller-with-frozen-ushort.result.json",
+    "output": "MISMATCH func_001821f4 @ 0x1821f4 size 0x14/0x10 first difference at +0x4\n"
+  },
+  {
+    "name": "caller-with-word-contract",
+    "source": "scratch/review/c008/second/width-probes/caller-with-word-contract.c",
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "tools/match.py",
+      "/home/michael/code/kanken-training-2-decomp/scratch/review/c008/second/width-probes/caller-with-word-contract.c",
+      "--profile",
+      "game",
+      "--show",
+      "0",
+      "--linker-model",
+      "armlink5-inline-branchnop-v2",
+      "--literal-model",
+      "none",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/review/c008/second/width-probes/caller-with-word-contract"
+    ],
+    "exit": 0,
+    "statuses": [
+      {
+        "name": "func_001821f4",
+        "size": 16,
+        "candidate_size": 16,
+        "status": "match",
+        "first_diff": null
+      }
+    ],
+    "result_path": "scratch/review/c008/second/width-probes/caller-with-word-contract/caller-with-word-contract.result.json",
+    "output": "MATCH    func_001821f4 @ 0x1821f4 size 0x10/0x10\n"
+  },
+  {
+    "name": "callee-with-word-contract",
+    "source": "scratch/review/c008/second/width-probes/callee-with-word-contract.c",
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "tools/match.py",
+      "/home/michael/code/kanken-training-2-decomp/scratch/review/c008/second/width-probes/callee-with-word-contract.c",
+      "--profile",
+      "game",
+      "--show",
+      "0",
+      "--linker-model",
+      "armlink5-inline-branchnop-v2",
+      "--literal-model",
+      "none",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/review/c008/second/width-probes/callee-with-word-contract"
+    ],
+    "exit": 0,
+    "statuses": [
+      {
+        "name": "func_001462d4",
+        "size": 12,
+        "candidate_size": 12,
+        "status": "match",
+        "first_diff": null
+      }
+    ],
+    "result_path": "scratch/review/c008/second/width-probes/callee-with-word-contract/callee-with-word-contract.result.json",
+    "output": "MATCH    func_001462d4 @ 0x1462d4 size 0xc/0xc\n"
+  }
+]

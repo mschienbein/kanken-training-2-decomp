@@ -172,6 +172,12 @@ class Analyzer:
         self.protected_pointer_starts: set[int] = set()
         self.refining = False
         self.literal_conflicts: list[dict] = []
+        self.shared_literals: list[dict] = []
+        self.literal_encodings: dict[tuple[int, int], dict] = {}
+        self.relative_table_pointers: set[tuple[int, str]] = set()
+        self.relative_pointer_tables: list[dict] = []
+        self.protected_entry_observations: set[tuple[int, int, int]] = set()
+        self.protected_start_observations: set[tuple[int, str]] = set()
         self.literal_extent_changes: Counter[str] = Counter()
         self.shared_literal_words: set[int] = set()
         self.entry_groups: list[dict] = []
@@ -185,6 +191,9 @@ class Analyzer:
         self.detailed_arm = capstone.Cs(capstone.CS_ARCH_ARM, capstone.CS_MODE_ARM)
         self.detailed_arm.detail = True
         self.detail_cache: dict[int, object] = {}
+
+    def __repr__(self) -> str:
+        return f"Analyzer(size={len(self.image)}, text=({self.base:#x}, {self.end:#x}))"
 
     def inside(self, address: int, isa: str = "arm") -> bool:
         return self.base <= address < self.end and address % (4 if isa == "arm" else 2) == 0
@@ -411,6 +420,14 @@ class Analyzer:
         if isa == "arm" and self.word(address) == 0xE51FF004:
             target = self.word(address + 4)
             return target & ~1, "thumb" if target & 1 else "arm"
+        if isa == "arm":
+            setup, transfer = self.word(address), self.word(address + 4)
+            # AAPCS interworking veneer: a PC-relative odd address in IP,
+            # immediately exchanged through IP. This is code, not an ADR string.
+            if setup & 0xFFFFF000 == 0xE28FC000 and transfer == 0xE12FFF1C:
+                target = (address + 8 + _immediate(setup)) & 0xFFFFFFFF
+                if target & 1 and self.inside(target & ~1, "thumb"):
+                    return target & ~1, "thumb"
         if isa == "thumb" and self.word(address) in (0x46C04778, 0xBF004778):
             branch = self.word(address + 4)
             if branch & 0xFF000000 == 0xEA000000:
@@ -440,7 +457,10 @@ class Analyzer:
             result.kind = "veneer"
             if isa == "arm":
                 result.code[start] = 4
-                result.pools.add(start + 4)
+                if self.word(start) == 0xE51FF004:
+                    result.pools.add(start + 4)
+                else:
+                    result.code[start + 4] = 4
             else:
                 result.code.update({start: 2, start + 2: 2, start + 4: 4})
             result.tails.add((*veneer, start))
@@ -573,6 +593,32 @@ class Analyzer:
                 if self.inside(target, isa):
                     targets.append((target, isa))
         return targets
+
+    def include_relative_pointer_tables(self, tables: list[dict]) -> None:
+        """Import reviewed section-ABI tables, not arbitrary pointer-shaped words."""
+        for row in tables:
+            first, end = row["start"], row["end"]
+            if (row.get("encoding") != "self_relative_32" or row.get("section") != ".init_array"
+                    or not row.get("evidence") or first % 4 or end % 4 or not first < end
+                    or not self.layout.rodata.address <= first < end <= self.layout.rodata.address + self.layout.rodata.size):
+                raise ValueError("relative initializer table lacks a bounded section-ABI witness")
+            for key, expected in (("start", first), ("end", end)):
+                pool, base = row.get("bounds", {}).get(key, (None, None))
+                if (pool is None or pool % 4 or not self.base <= pool <= self.end - 4
+                        or (base + self.word(pool)) & 0xFFFFFFFF != expected):
+                    raise ValueError(f"relative initializer table {key} is not derived by its walker pool word")
+            targets = []
+            for site in range(first, end, 4):
+                offset = self.layout.file_offset(site)
+                pointer = (site + struct.unpack_from("<I", self.image, offset)[0]) & 0xFFFFFFFF
+                target, isa = pointer & ~1, "thumb" if pointer & 1 else "arm"
+                if not self.plausible(target, isa):
+                    raise ValueError(f"initializer table {site:#x} does not target plausible code")
+                targets.append({"site": site, "address": target, "isa": isa})
+                if target not in self.seeds:
+                    self.add_seed(target, isa, "relative_init_array")
+                    self.relative_table_pointers.add((target, isa))
+            self.relative_pointer_tables.append({**row, "targets": targets})
 
     def discover(self) -> list[Trace]:
         self.add_seed(self.base, "arm", "entry", force=True)
@@ -893,7 +939,7 @@ class Analyzer:
         return changed
 
     def _pointer_targets(self, traces: list[Trace]) -> set[tuple[int, str]]:
-        targets = set(self._external_pointers())
+        targets = set(self._external_pointers()) | self.relative_table_pointers
         for trace in traces:
             for address in trace.pools - trace.table_words:
                 pointer = self.word(address)
@@ -1175,7 +1221,7 @@ class Analyzer:
         self.boundary_merges = [merge for merge in self.boundary_merges if merge["address"] not in restored]
         return changed
 
-    def record_entries(self, traces: list[Trace]) -> None:
+    def record_entries(self, traces: list[Trace], protected_entries: dict[int, dict] | None = None) -> None:
         """Record external B targets and every BL/BLX target on instruction boundaries."""
         starts = [trace.address for trace in traces]
         for source in traces:
@@ -1191,6 +1237,12 @@ class Analyzer:
                 target_isa = "arm" if owner.kind == "veneer" and owner.isa == "thumb" and target == owner.address + 4 else owner.isa
                 if target not in owner.code or isa != target_isa:
                     source.issues.add((site, "entry_target_not_code"))
+                    continue
+                expected = (protected_entries or {}).get(target)
+                if expected is not None and site not in expected["sources"]:
+                    # New caller observations are retained separately rather than
+                    # silently changing an accepted record's metadata.
+                    self.protected_entry_observations.add((source.address, site, target))
                     continue
                 entry = owner.entries.setdefault(target, {
                     "address": target, "isa": isa, "kind": "secondary_entry",
@@ -1229,6 +1281,21 @@ class Analyzer:
                 return self.base + stop + 1
         return None
 
+    def _utf16_string_end(self, target: int) -> int | None:
+        """Bound a reviewed halfword-string use, never infer width from glyphs."""
+        if target % 2:
+            return None
+        cursor = target
+        while cursor + 2 <= self.end:
+            if struct.unpack_from("<H", self.text, cursor - self.base)[0] == 0:
+                try:
+                    value = self.text[target - self.base:cursor - self.base].decode("utf-16le")
+                except UnicodeDecodeError:
+                    return None
+                return cursor + 2 if all(c.isprintable() or c.isspace() for c in value) else None
+            cursor += 2
+        return None
+
     def include_address_literals(self, traces: list[Trace]) -> None:
         """Claim exclusive address-taken objects without changing discovered starts.
 
@@ -1237,6 +1304,7 @@ class Analyzer:
         References into string suffixes and external pointer tables count as shared.
         """
         self.literal_conflicts = []
+        self.shared_literals = []
         self.literal_extent_changes.clear()
         previous_ends = {trace.address: trace.end for trace in traces}
         by_start = {trace.address: trace for trace in traces}
@@ -1307,12 +1375,18 @@ class Analyzer:
             for target, sites in sorted(targets.items()):
                 if any(kind == "code" for _, _, _, kind in overlaps(target, target + 1)):
                     continue  # Taking an instruction's address is not a data object.
-                content_end = self._string_end(target)
+                encoding = self.literal_encodings.get((trace.address, target))
+                if encoding is not None and encoding["references"] != sorted(sites):
+                    raise ValueError(f"reviewed literal {target:#x} has different address references")
+                content_end = self._utf16_string_end(target) if encoding else self._string_end(target)
+                if encoding is not None and content_end is None:
+                    raise ValueError(f"reviewed UTF-16 literal {target:#x} has no complete printable bound")
                 first = target if content_end is not None else target & ~3
                 end = (content_end + 3) & ~3 if content_end is not None else (target + 7) & ~3
                 candidates.append({
                     "start": first, "end": end, "target": target, "function": trace.address,
-                    "kind": "string" if content_end is not None else "addressed_words",
+                    "kind": "utf16_string" if encoding else "string" if content_end is not None else "addressed_words",
+                    "content_end": content_end,
                     "references": sites,
                     "limit": traces[index + 1].address if index + 1 < len(traces) else self.end,
                 })
@@ -1339,8 +1413,27 @@ class Analyzer:
             shared = len(owners) > 1 or bool(incoming - owners)
             if shared:
                 blocked_words.update(range(first & ~3, (end + 3) & ~3, 4))
+            padding_start = max((candidate["content_end"] or 0 for candidate in cluster), default=0)
+            shared_data = (shared and all(candidate["kind"] in ("string", "utf16_string") for candidate in cluster)
+                           and end <= self.end and padding_start > first
+                           and not overlaps(first, padding_start)
+                           and not any(first <= address < padding_start for address in branch_targets))
+            # The exact terminated object is data. Claim alignment bytes only when they are zero.
+            shared_end = end if shared_data and not any(
+                self.text[address - self.base] for address in range(padding_start, end)) else padding_start
+            if shared_data:
+                self.shared_literals.append({
+                    "start": first, "end": shared_end, "kind": "rodata",
+                    "owners": sorted(owners),
+                    "references": sorted(site for candidate in cluster for site in candidate["references"]),
+                    "evidence": "shared_bounded_addressed_string",
+                })
             for candidate in cluster:
                 trace = by_start[candidate["function"]]
+                if shared_data:
+                    for site in candidate["references"]:
+                        trace.issues.discard((site, "literal_outside_function"))
+                    continue
                 reasons = set()
                 if shared:
                     reasons.add("shared_address_literal")
@@ -1527,6 +1620,84 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
         return (tail is not None and terminal.target[1] == tail["isa"] == "arm"
                 and tail["address"] != function["address"] and not tail["noreturn"])
 
+    def field_access_graph_successor(target: int, function: dict) -> bool:
+        """Prove a complete scalar-memory R0-input leaf CFG, including bounded loops.
+
+        Definite register initialization is intersected at joins. The erased-tail
+        interpretation still requires an exact NOP, a nonstoring wrapper prefix,
+        and the outer control/data/frame/protection vetoes.
+        """
+        end = function["address"] + function["size"]
+        if (not 8 < end - target <= 64 or not analyzer._nonstoring_prefix(function["address"], target)
+                or any(is_data(function, site) or site not in code_by_owner[function["address"]]
+                       for site in range(target, end, 4))):
+            return False
+        first = instruction(target)
+        scalar_loads = (arm.ARM_INS_LDR, arm.ARM_INS_LDRB, arm.ARM_INS_LDRH,
+                        arm.ARM_INS_LDRSB, arm.ARM_INS_LDRSH)
+        scalar_stores = (arm.ARM_INS_STR, arm.ARM_INS_STRB, arm.ARM_INS_STRH)
+        first_load = (first is not None and first.id in scalar_loads and len(first.operands) == 2
+                      and first.operands[1].type == arm.ARM_OP_MEM
+                      and first.operands[1].mem.base == arm.ARM_REG_R0 and not first.operands[1].mem.index)
+        first_copy = (first is not None and first.id == arm.ARM_INS_MOV and len(first.operands) == 2
+                      and first.operands[1].type == arm.ARM_OP_REG and first.operands[1].reg == arm.ARM_REG_R0)
+        if first is None or first.cc != arm.ARM_CC_AL or first.writeback or not (first_load or first_copy):
+            return False
+        incoming, work, returns = {target: {arm.ARM_REG_R0}}, [target], set()
+        allowed = core_arguments | {arm.ARM_REG_CPSR}
+        loads, branches = set(), set()
+        while work:
+            site = work.pop()
+            ins, flow = instruction(site), analyzer.decode(site, "arm")
+            if ins is None or flow is None:
+                return False
+            initialized = incoming[site]
+            if flow.returns:
+                if flow.conditional or analyzer.word(site) not in (0xE12FFF1E, 0xE1A0F00E):
+                    return False
+                returns.add(site)
+                continue
+            read, wrote = registers(ins)
+            read.discard(arm.ARM_REG_PC)  # Direct branches read architectural PC.
+            if flow.branch:
+                wrote.discard(arm.ARM_REG_PC)
+            if flow.conditional:
+                read.add(arm.ARM_REG_CPSR)
+            memory = [operand.mem for operand in ins.operands if operand.type == arm.ARM_OP_MEM]
+            scalar_store = ins.id in scalar_stores and memory and all(
+                operand.base in core_arguments and not operand.index for operand in memory)
+            if ins.id in scalar_loads:
+                loads.add(site)
+            if (flow.call or flow.stop or flow.terminal or flow.pools or ins.writeback
+                    or _memory_side_effect(ins) and not scalar_store or read - allowed or wrote - allowed
+                    or read - initialized):
+                return False
+            outgoing = initialized | wrote if not flow.conditional else initialized
+            successors = []
+            if flow.branch:
+                branches.add(site)
+                if flow.target is None or flow.target[1] != "arm":
+                    return False
+                successors.append(flow.target[0])
+            if not flow.branch or flow.conditional:
+                successors.append(site + 4)
+            for successor in successors:
+                if not target <= successor < end:
+                    return False
+                merged = incoming[successor] & outgoing if successor in incoming else outgoing
+                if successor not in incoming or merged != incoming[successor]:
+                    incoming[successor] = merged
+                    work.append(successor)
+        return bool(returns and loads and branches) and incoming.keys() == set(range(target, end, 4))
+
+    def closed_tail_successor(target: int, function: dict, restored: int | None) -> bool:
+        if restored is None or target + 4 != function["address"] + function["size"]:
+            return False
+        terminal = analyzer.decode(target, "arm")
+        tail = by_address.get(terminal.target[0]) if terminal and terminal.branch and terminal.target else None
+        return (tail is not None and not terminal.conditional and terminal.target[1] == tail["isa"] == "arm"
+                and tail["address"] != function["address"] and not tail["noreturn"])
+
     pointers = set(analyzer._external_pointers())
     for function in functions:
         for first, end in function["pools"]:
@@ -1681,6 +1852,10 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
             evidence.append("restored_frame_leaf_setter")
         if field_read_successor(target, function):
             evidence.append("nonstoring_wrapper_field_read")
+        if field_access_graph_successor(target, function):
+            evidence.append("nonstoring_wrapper_field_access_graph")
+        if closed_tail_successor(target, function, row["restored_frame_at"]):
+            evidence.append("restored_frame_closed_tail")
         row["start_evidence"] = evidence
         crossings, data_crossings = [], []
         for address in sorted(code_by_owner[parent]):
@@ -1858,6 +2033,61 @@ def check_protected_functions(catalogue: dict, protected: dict[int, dict]) -> No
             raise ValueError(f"protected function {address:#x} cannot retain its adopted catalogue record")
 
 
+def preserve_prior_entries(catalogue: dict, prior_functions: list[dict]) -> None:
+    """Retain weak legacy labels without claiming independently proved callability.
+
+    An authenticated initializer can precede a former prologue-only owner. Keep
+    that old address as a conservative secondary entry only when every old owned
+    span survives in the recovered owner and the address is an ARM instruction
+    boundary. A subsequently adopted legacy label is carried forward under the
+    same owner and span checks. Other entry losses fail closed.
+    """
+    functions = catalogue["functions"]
+    starts = [function["address"] for function in functions]
+    entries = {(entry["address"], entry["isa"])
+               for function in functions for entry in function["entries"]}
+    retained = []
+    for before in prior_functions:
+        for entry in before["entries"]:
+            address, isa = entry["address"], entry["isa"]
+            if (address, isa) in entries:
+                continue
+            index = bisect_right(starts, address) - 1
+            after = functions[index] if index >= 0 else None
+            original_label = (before["evidence"] == ["prologue"] and before["kind"] == "function"
+                              and len(before["entries"]) == 1 and entry["evidence"] == ["prologue"])
+            adopted_label = (after is not None and before["kind"] == "multi_entry"
+                             and before["address"] == after["address"]
+                             and "relative_init_array" in before["evidence"]
+                             and entry["kind"] == "secondary_entry"
+                             and entry["evidence"] == ["legacy_prologue"])
+            if (after is None or not (original_label or adopted_label) or entry["sources"]
+                    or isa != after["isa"] or isa != "arm" or address % 4
+                    or not after["address"] < address < after["address"] + after["size"]
+                    or "relative_init_array" not in after["evidence"]
+                    or after["kind"] not in ("function", "multi_entry")
+                    or not any(first <= address < end for first, end in after["code_ranges"])
+                    or not all(any(nlo <= lo < hi <= nhi for nlo, nhi in after[kind])
+                               for kind in ("code_ranges", "pools", "literals") for lo, hi in before[kind])):
+                raise ValueError(f"prior entry {address:#x}/{isa} cannot be preserved")
+            after["entries"].append({
+                "address": address, "isa": isa, "kind": "secondary_entry",
+                "evidence": ["legacy_prologue"], "sources": [],
+            })
+            after["entries"].sort(key=lambda item: item["address"])
+            after["kind"] = "multi_entry"
+            entries.add((address, isa))
+            retained.append({
+                "old_address": address, "address": after["address"],
+                "old_size": before["size"], "size": after["size"], "isa": isa,
+                "old_entry_evidence": list(entry["evidence"]),
+                "entry_evidence": ["legacy_prologue"],
+                "reason": "preserved prior prologue-derived label; no independent callability witness or C credit",
+            })
+    catalogue["legacy_entry_preservation"] = sorted(retained, key=lambda row: row["old_address"])
+    catalogue["stats"]["secondary_entries"] = sum(len(function["entries"]) - 1 for function in functions)
+
+
 def apply_classifications(catalogue: dict, records: list[dict]) -> None:
     """Apply reviewed evidence, not semantic guesses or a library-address heuristic.
 
@@ -1897,27 +2127,49 @@ def apply_classifications(catalogue: dict, records: list[dict]) -> None:
 
 def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "code.bin", *,
                     protected_functions: dict[int, dict] | None = None,
-                    classifications: list[dict] | None = None) -> dict:
+                    classifications: list[dict] | None = None,
+                    literal_encodings: list[dict] | None = None,
+                    relative_pointer_tables: list[dict] | None = None,
+                    prior_functions: list[dict] | None = None) -> dict:
     """Return deterministic schema-v1 metadata, preserving ambiguity as anomalies/unknown."""
     analyzer = Analyzer(image, layout)
+    for row in literal_encodings or []:
+        key = row["function"], row["target"]
+        if key in analyzer.literal_encodings or row.get("encoding") != "utf-16le" or not row.get("references"):
+            raise ValueError("reviewed literal needs unique owner/target, encoding and reference sites")
+        analyzer.literal_encodings[key] = row
     analyzer.discover()
+    analyzer.include_relative_pointer_tables(relative_pointer_tables or [])
+    protected_entries = {entry["address"]: entry for function in (protected_functions or {}).values()
+                         for entry in function["entries"]}
     for _ in range(64):
+        for address, expected in (protected_functions or {}).items():
+            seed = analyzer.seeds.get(address)
+            if seed is not None and expected["address"] == address:
+                additions = (seed.evidence - set(expected["evidence"])) & {"pointer", "relative_init_array", "veneer_target"}
+                analyzer.protected_start_observations.update((address, item) for item in additions)
+                seed.evidence.difference_update(additions)
         traces = analyzer.group_fallthroughs(analyzer.refine())
         analyzer.include_address_literals(traces)
         if analyzer.promote_leading_instructions(traces, protected_functions or {}):
             continue
         if analyzer.promote_missing_targets(traces):
             continue
-        analyzer.record_entries(traces)
+        analyzer.record_entries(traces, protected_entries)
         if analyzer.promote_linker_entries(traces):
             continue
         if not analyzer.promote_pointer_entries(traces):
             break
     else:
         raise ValueError("entry-target discovery did not converge after 64 rounds")
+    for (owner, target), row in analyzer.literal_encodings.items():
+        if not any(trace.address == owner and all(trace.address_refs.get(site) == target
+                                                for site in row["references"]) for trace in traces):
+            raise ValueError(f"reviewed literal {target:#x} has no retained owner/reference")
     anomalies: set[tuple[int, str]] = set()
     functions = []
     owners: list[int | None] = [None] * layout.text.size
+    shared_data = {address for row in analyzer.shared_literals for address in range(row["start"], row["end"])}
     for trace in traces:
         if not trace.code:
             anomalies.add((trace.address, "empty_function_start"))
@@ -1961,8 +2213,13 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
             cursor = end
         else:
             end = cursor + 1
-            while end < text_end and owners[end - analyzer.base] is None:
+            is_shared = cursor in shared_data
+            while end < text_end and owners[end - analyzer.base] is None and (end in shared_data) == is_shared:
                 end += 1
+            if is_shared:
+                _append_range(ranges, cursor, end, "rodata", None)
+                cursor = end
+                continue
             # Only zero words / architectural NOPs adjacent to an explained boundary are padding.
             address = cursor
             while address < end:
@@ -1990,6 +2247,14 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "functions": sorted(functions, key=lambda item: item["address"]), "ranges": ranges,
         "boundary_merges": analyzer.boundary_merges,
         "literal_conflicts": analyzer.literal_conflicts,
+        "shared_literals": analyzer.shared_literals,
+        "relative_pointer_tables": analyzer.relative_pointer_tables,
+        "protected_entry_observations": [
+            {"function": function, "site": site, "target": target, "reason": "protected_adopted_entry_metadata"}
+            for function, site, target in sorted(analyzer.protected_entry_observations)],
+        "protected_start_observations": [
+            {"address": address, "evidence": evidence, "reason": "protected_adopted_start_metadata"}
+            for address, evidence in sorted(analyzer.protected_start_observations)],
         "entry_groups": analyzer.entry_groups,
         "tail_target_repairs": [{"address": target, "isa": isa, "sources": sorted(sources)}
                                 for (target, isa), sources in sorted(analyzer.tail_target_repairs.items())],
@@ -2045,6 +2310,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "repaired_pointer_targets": len(analyzer.pointer_target_repairs),
     }
     result = _split_linker_tail_extents(result, analyzer, protected_functions or {})
+    preserve_prior_entries(result, prior_functions or [])
     apply_classifications(result, classifications or [])
     check_protected_functions(result, protected_functions or {})
     return result
@@ -2168,8 +2434,9 @@ def serialize_catalogue(catalogue: dict) -> bytes:
     return (json.dumps(catalogue, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8")
 
 
-def load_protected_functions(root: Path, baseline: dict, manifests: list[Path]) -> tuple[dict, dict, dict]:
-    """Resolve complete adopted records, including the in-flight c006 branch blob."""
+def load_protected_functions(root: Path, baseline: dict, manifests: list[Path], *,
+                             git_blobs: list[dict] | None = None) -> tuple[dict, dict, dict]:
+    """Resolve whole adopted records; remote checkpoint inputs are immutable blobs."""
     adopted = sorted(baseline["functions"], key=lambda function: function["address"])
     starts = [function["address"] for function in adopted]
     names_path = root / "config/names.json"
@@ -2177,23 +2444,22 @@ def load_protected_functions(root: Path, baseline: dict, manifests: list[Path]) 
     inputs = {"config/names.json": hashlib.sha256(names_path.read_bytes()).hexdigest()} if names_path.is_file() else {}
     sources = {}
     paths = [root / "config/matches.json"]
-    paths.extend(path for name in ("c004", "c005", "c006")
+    paths.extend(path for name in ("c004", "c005", "c006", "c007", "c008")
                  if (path := root / f"config/candidates/{name}.json").is_file())
     paths.extend(manifests)
     for path in paths:
         label = str(path.relative_to(root)) if path.is_relative_to(root) else str(path)
         sources[label] = path.read_bytes()
-    reference = "c006-integrate:config/candidates/c006.json"
-    resolved = subprocess.run(["git", "rev-parse", "--verify", "--quiet", reference],
-                              cwd=root, capture_output=True, check=False)
-    if resolved.returncode == 0:
-        blob = resolved.stdout.decode("ascii").strip()
+    for row in git_blobs or []:
+        blob = row["blob"]
+        if len(blob) != 40 or any(character not in "0123456789abcdef" for character in blob):
+            raise ValueError("protected checkpoint needs an immutable Git blob")
         content = subprocess.run(["git", "show", blob], cwd=root, capture_output=True, check=False)
         if content.returncode:
-            raise ValueError(f"cannot read c006 protection blob (git exit {content.returncode})")
-        sources[f"git:{reference}@{blob}"] = content.stdout
-    elif resolved.returncode != 1:
-        raise ValueError(f"cannot resolve c006 protection blob (git exit {resolved.returncode})")
+            raise ValueError(f"cannot read protection blob (git exit {content.returncode})")
+        if hashlib.sha256(content.stdout).hexdigest() != row["sha256"]:
+            raise ValueError("protected checkpoint blob digest does not match reviewed evidence")
+        sources[f"git:{row['reference']}@{blob}"] = content.stdout
     protected, summaries = {}, {}
     for label, content in sources.items():
         rows = []
@@ -2230,11 +2496,12 @@ def main(argv: list[str] | None = None) -> int:
             import catalogue_review
         baseline_path = ROOT / "config/catalogue.json"
         baseline = catalogue_review.load(baseline_path)
-        protected, protected_summary, inputs = load_protected_functions(ROOT, baseline, args.protect_manifest)
         image, exheader = args.image.read_bytes(), args.exheader.read_bytes()
         layout = ctrfmt.parse_exheader(exheader)
-        evidence_path = ROOT / "research/catalogue_v8_evidence.json"
+        evidence_path = ROOT / "research/catalogue_v9_r2_evidence.json"
         evidence = catalogue_review.load(evidence_path)
+        protected, protected_summary, inputs = load_protected_functions(
+            ROOT, baseline, args.protect_manifest, git_blobs=evidence.get("protected_git_blobs", []))
         bundled = args.classifications is None and hashlib.sha256(image).hexdigest() == evidence["image_sha256"]
         records = (catalogue_review.load(args.classifications) if args.classifications
                    else evidence["classification_records"] if bundled else [])
@@ -2247,8 +2514,11 @@ def main(argv: list[str] | None = None) -> int:
             withheld = [{**row, "reason": "protected_adopted_record"}
                         for row in records if row["address"] in protected_owners]
             records = [row for row in records if row["address"] not in protected_owners]
-        result = build_catalogue(image, layout, args.image.name,
-                                 protected_functions=protected, classifications=records)
+        result = build_catalogue(
+            image, layout, args.image.name, protected_functions=protected, classifications=records,
+            literal_encodings=evidence.get("literal_encodings", []) if bundled else [],
+            relative_pointer_tables=evidence.get("relative_pointer_tables", []) if bundled else [],
+            prior_functions=baseline["functions"] if bundled else [])
         inputs.update({
             "config/catalogue.json": catalogue_review.digest(baseline_path),
             "exheader": hashlib.sha256(exheader).hexdigest(),
@@ -2263,7 +2533,7 @@ def main(argv: list[str] | None = None) -> int:
                    for name in ("analyze.py", "catalogue_review.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v8-r2",
+            "revision": "catalogue-v9-r2",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

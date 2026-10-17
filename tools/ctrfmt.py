@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import struct
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 MEDIA_UNIT = 0x200
 
@@ -33,7 +33,7 @@ def ncsd_partitions(header: bytes) -> list[Partition]:
 
 @dataclass(frozen=True)
 class NcchHeader:
-    raw: bytes
+    raw: bytes = field(repr=False)
     program_id: str
     product_code: str
     version: int
@@ -42,14 +42,14 @@ class NcchHeader:
     fixed_key: bool
     seed_crypto: bool
     exheader_size: int
-    exheader_hash: bytes
+    exheader_hash: bytes = field(repr=False)
     plain: tuple[int, int]
     logo: tuple[int, int]
     exefs: tuple[int, int]
-    exefs_superblock_hash: bytes
+    exefs_superblock_hash: bytes = field(repr=False)
     romfs: tuple[int, int]
     romfs_hash_region_size: int
-    romfs_superblock_hash: bytes
+    romfs_superblock_hash: bytes = field(repr=False)
 
 
 def parse_ncch(raw: bytes) -> NcchHeader:
@@ -149,7 +149,7 @@ class ExefsEntry:
     name: str
     offset: int  # from end of the 0x200-byte ExeFS header
     size: int
-    sha256: bytes
+    sha256: bytes = field(repr=False)
 
 
 def parse_exefs_header(header: bytes) -> list[ExefsEntry]:

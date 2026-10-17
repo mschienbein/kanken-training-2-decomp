@@ -2,37 +2,33 @@
 #define GAME_ITEM_TEXT_H
 
 struct ArchiveIndex;
+struct ArchiveResourceTable;
 struct BankInstrumentInfo;
 struct ItemPage;
+struct ItemPageSet;
 struct MenuItem;
 struct SoundArchiveReader;
 struct SoundRecord;
 struct W12cAlternateTextState;
-struct W12cArchiveTables;
 struct W12cGlyphMetrics;
-struct W12cItemTextList;
-struct W12cItemTextTable;
 struct W12cPrimaryTextState;
 struct W12cRegionData;
 struct W12cRegionReader;
-struct W12cSelectionDescriptor;
 struct W12cSoundDetail;
 struct W12cSoundOption;
 struct W12cSoundOptionResult;
 
 #include "game/runtime.h"
+#include "game/text.h"
+#include "game/item_pages.h"
+#include "game/archive.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
-struct W12cItemTextTable {
-    unsigned char reserved00[0x28];
-    signed char count;
-    unsigned char reserved29[3];
+struct W12cSoundDetail {
+    unsigned signature;
+    struct RelativeReference contents;
 };
 
-struct W12cItemTextList {
-    unsigned char reserved00[0x108];
-    struct W12cItemTextTable text;
-};
 
 struct W12cAlternateTextState {
     unsigned char reserved00[0xcc];
@@ -68,11 +64,6 @@ struct W12cGlyphMetrics {
     void **texture_cache;
 };
 
-struct W12cSelectionDescriptor {
-    unsigned char reserved00;
-    signed char variant;
-    signed char group;
-};
 
 struct W12cRegionData {
     unsigned char reserved00;
@@ -90,13 +81,6 @@ struct W12cRegionReader {
     const struct W12cRegionData *data;
 };
 
-struct W12cArchiveTables {
-    unsigned char reserved00[0x10];
-    int detail_offset;
-    int property_offset;
-    unsigned reserved18;
-    int count_offset;
-};
 
 struct W12cSoundOption {
     unsigned flags;
@@ -115,13 +99,13 @@ struct W12cSoundOptionResult {
 extern "C" {
 #endif
 extern struct MenuItem *func_0017a49c(struct ItemPage *page, int index, int *changed);
-extern int func_001eb688(const struct W12cItemTextList *item);
-extern const unsigned short *func_001eb694(const struct W12cItemTextList *item, int index);
+extern int func_001eb688(const struct MenuItem *item);
+extern const unsigned short *func_001eb694(const struct MenuItem *item, int index);
 extern unsigned short *func_0015de60(unsigned short *destination, unsigned capacity_bytes,
                              const unsigned short *source, int count);
 extern int func_0016992c(int group, int index, int mask, int value);
 extern int func_001dd504(int group, int index, int variant);
-extern const unsigned *func_001f22ac(const struct W12cArchiveTables *info);
+extern const unsigned *func_001f22ac(const struct ArchiveResourceTable *info);
 extern const struct W12cSoundDetail *func_001f23ec(const struct SoundRecord *record);
 extern const struct W12cSoundOption *func_001f22e0(const struct W12cSoundDetail *detail);
 extern int func_001f23b8(const struct BankInstrumentInfo *info);
@@ -132,7 +116,7 @@ extern unsigned short *func_001790a8(struct W12cPrimaryTextState *state);
 extern void func_001db138(struct W12cGlyphMetrics *metrics);
 extern int func_001dc574(int group, int index, int value);
 extern int func_001dc90c(int group, int index, int value);
-extern int func_001dd4f8(const struct W12cSelectionDescriptor *descriptor, int index);
+extern int func_001dd4f8(const struct ItemPageSet *descriptor, int index);
 extern int func_001efce0(const struct W12cRegionReader *reader);
 extern unsigned func_001efe90(const struct W12cRegionReader *reader);
 extern unsigned func_001f0028(const struct W12cRegionReader *reader);

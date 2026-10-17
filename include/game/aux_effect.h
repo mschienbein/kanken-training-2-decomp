@@ -17,6 +17,7 @@ struct ServiceOutput;
 struct SoundSubsystem;
 
 #include "game/pool_list.h"
+#include "game/audio_voice.h"
 #include "game/runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
@@ -46,9 +47,7 @@ struct AuxEffectSlot {
 };
 
 struct SoundSubsystem {
-    unsigned char active;
-    unsigned char output_mode;
-    unsigned char reserved02[0x12];
+    struct AudioLinearRamp master_volume;
     struct AuxFloatRamp volume[2];
     unsigned char reserved34[0x20];
     struct PoolList effects[2];

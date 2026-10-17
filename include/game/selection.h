@@ -5,6 +5,7 @@ struct CategoryPattern;
 struct Screen;
 struct SelectionCallbacks;
 struct SelectionInterface;
+struct SelectionHintPanel;
 struct W8DisplaySet;
 
 #include "game/category_pattern.h"

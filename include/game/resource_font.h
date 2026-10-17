@@ -172,9 +172,7 @@ extern bool func_0016b80c(struct U8Archive *archive, const wchar_t *path,
                     struct U8Directory *directory);
 extern bool func_0016b76c(struct U8Directory *directory, struct U8DirectoryEntry *entry);
 extern bool func_0016b860(struct U8Archive *archive, const wchar_t *path);
-extern bool func_001f18c0(struct U8Directory *directory);
 extern int func_0016ba0c(const struct U8Archive *archive, const wchar_t *path);
-extern int func_0016b6a4(struct U8Archive *archive, const wchar_t *name);
 extern unsigned func_001c456c(struct StreamSizeForwarder *self,
                                   unsigned long long *size);
 extern unsigned func_001c4588(struct StreamCapabilityForwarder *self, unsigned *value);

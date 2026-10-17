@@ -24,6 +24,9 @@ class Image:
         self.layout = layout
         self.sha256 = hashlib.sha256(code).hexdigest()
 
+    def __repr__(self) -> str:
+        return f"Image(size={len(self.code)}, text_address={self.layout.text.address:#x})"
+
     @classmethod
     def load(cls, orig: Path = ROOT / "orig") -> Image:
         code = (orig / "code.bin").read_bytes()

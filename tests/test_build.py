@@ -169,23 +169,23 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 for reverse in (False, True):
                     with self.subTest(case=case, credit_helper=credit_helper, reverse=reverse):
                         with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
-                            self.synthetic_build(model="armlink5-inline-branchnop-v5", comdat_alias=case,
+                            self.synthetic_build(model="armlink5-inline-branchnop-v6", comdat_alias=case,
                                                  credit_helper=credit_helper, reverse=reverse)
 
     def test_credited_zero_size_alias_requires_one_emitted_comdat_owner(self):
         for reverse in (False, True):
             with self.subTest(reverse=reverse):
                 with self.assertRaisesRegex(build.BuildError, "func_00100100: defined by both"):
-                    self.synthetic_build(model="armlink5-inline-branchnop-v5", comdat_alias="duplicate_owner",
+                    self.synthetic_build(model="armlink5-inline-branchnop-v6", comdat_alias="duplicate_owner",
                                          credit_helper=True, reverse=reverse)
 
-    def test_v5_alias_copies_keep_helper_only_receipts_and_every_removed_owner(self):
+    def test_v6_alias_copies_keep_helper_only_receipts_and_every_removed_owner(self):
         for reverse in (False, True):
             with self.subTest(reverse=reverse):
-                receipt, _ = self.synthetic_build(model="armlink5-inline-branchnop-v5",
+                receipt, _ = self.synthetic_build(model="armlink5-inline-branchnop-v6",
                                                    comdat_alias="unbound_alias", reverse=reverse)
                 self.assertEqual(receipt["result"], "PASS")
-                self.assertEqual(receipt["inputs"]["linker_model"], "armlink5-inline-branchnop-v5")
+                self.assertEqual(receipt["inputs"]["linker_model"], "armlink5-inline-branchnop-v6")
                 self.assertEqual(receipt["credited"]["functions"], 1)
                 self.assertEqual(receipt["credited"]["bytes"], 40)
                 units = {unit["source"]: unit for unit in receipt["units"]}
@@ -414,7 +414,7 @@ class BuildLiteralModelTest(unittest.TestCase):
 
     def test_combined_build_attributes_each_pool_to_its_own_unit(self):
         for model in ("armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3",
-                      "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+                      "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v6"):
             with self.subTest(model=model):
                 receipt = self.synthetic_build(linker_model=model)
                 self.assertEqual(receipt["result"], "PASS")
@@ -436,7 +436,7 @@ class BuildLiteralModelTest(unittest.TestCase):
     def test_cli_forwards_literal_and_linker_models_independently(self):
         receipt = {"result": "PASS", "credited": {"functions": 1, "catalogue_functions": 1,
                    "bytes": 4, "catalogue_bytes": 4}, "checks": {}}
-        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v6"):
             with self.subTest(model=model), patch.object(build, "build", return_value=receipt) as run, \
                     contextlib.redirect_stdout(io.StringIO()):
                 code = build.main(["--name", "synthetic", "--linker-model", model, "--literal-model", MODEL])
