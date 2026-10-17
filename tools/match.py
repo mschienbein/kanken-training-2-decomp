@@ -50,14 +50,14 @@ def render(data: bytes, base: int, isa: str, code_ranges: list[tuple[int, int]],
 def diff_lines(original: bytes, candidate: bytes, base: int, fn: dict, limit: int) -> list[str]:
     pools = [tuple(p) for p in (*fn.get("pools", []), *fn.get("literals", []))]  # data inside the section
     code_ranges = [tuple(p) for p in fn["code_ranges"]]
-    left = render(original, base, fn["isa"], code_ranges, pools)
-    right = render(candidate, base, fn["isa"], code_ranges, pools)
+    left = {addr: text for addr, _, text in render(original, base, fn["isa"], code_ranges, pools)}
+    right = {addr: text for addr, _, text in render(candidate, base, fn["isa"], code_ranges, pools)}
     out = []
-    for i in range(max(len(left), len(right))):
-        a = left[i] if i < len(left) else (0, 0, "")
-        b = right[i] if i < len(right) else (0, 0, "")
-        mark = " " if a[2] == b[2] else "!"
-        out.append(f"{mark} {a[0] or b[0]:08x}  {a[2]:<40} {b[2]}")
+    # Thumb instruction widths can differ; keep both columns at their actual addresses.
+    for addr in sorted(left.keys() | right.keys()):
+        a, b = left.get(addr, ""), right.get(addr, "")
+        mark = " " if a == b else "!"
+        out.append(f"{mark} {addr:08x}  {a:<40} {b}")
     shown = [i for i, line in enumerate(out) if line.startswith("!")]
     if not shown:
         return out[:limit]
