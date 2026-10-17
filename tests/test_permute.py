@@ -422,11 +422,11 @@ class MutationTest(unittest.TestCase):
         with self.assertRaisesRegex(permute.PermuteError, "target body has ABI-relevant ARMCC annotations"):
             program(prefix + "int target(void){__packed struct S {int x;} s; return s.x;}")
 
-    def test_cpp_extensions_are_refused_before_preprocessing(self):
-        for suffix in (".cpp", ".cc", ".cxx", ".CPP"):
+    def test_non_source_extensions_are_refused_before_preprocessing(self):
+        for suffix in (".h", ".hpp", ".s", ".txt"):
             with self.subTest(suffix=suffix):
                 with mock.patch.object(interfaces, "preprocess") as preprocess:
-                    with self.assertRaisesRegex(permute.PermuteError, "accepts C .c files, not C\\+\\+"):
+                    with self.assertRaisesRegex(permute.PermuteError, "accepts .c, .cpp, .cc or .cxx"):
                         permute.Program.preprocess(Path("fixture" + suffix), ("target",), PROFILE)
                 preprocess.assert_not_called()
 
@@ -441,13 +441,13 @@ class MutationTest(unittest.TestCase):
                 with self.assertRaisesRegex(permute.PermuteError, "C\\+\\+ is not supported"):
                     program(text)
 
-    def test_cpp_cli_returns_input_error_without_search_or_traceback(self):
+    def test_invalid_extension_cli_returns_input_error_without_search_or_traceback(self):
         with mock.patch.object(interfaces, "preprocess") as preprocess:
             with mock.patch.object(permute, "search") as search:
                 with mock.patch.object(sys, "stderr", new_callable=io.StringIO) as stderr:
-                    status = permute.main(["fixture.cpp", "target", "--out", "scratch/cpp-refused"])
+                    status = permute.main(["fixture.s", "target", "--out", "scratch/invalid-extension"])
         self.assertEqual(status, 2)
-        self.assertEqual(stderr.getvalue(), "permuter: the permuter accepts C .c files, not C++\n")
+        self.assertEqual(stderr.getvalue(), "permuter: the permuter accepts .c, .cpp, .cc or .cxx source files\n")
         preprocess.assert_not_called()
         search.assert_not_called()
 
@@ -728,6 +728,7 @@ class SyntheticOracleTest(ScratchTest):
         context.literal_model = inplace.DEFAULT_LITERAL_MODEL
         self.oracle = permute.Oracle.__new__(permute.Oracle)
         self.oracle.profile, self.oracle.targets, self.oracle.context = PROFILE, ("func_00100000",), context
+        self.oracle.suffix = ".c"
 
     def test_compiled_exact_and_perturbed_scores_use_context_compare(self):
         exact = self.oracle.evaluate("int func_00100000(int x){return x+3;}", self.directory / "worker")
