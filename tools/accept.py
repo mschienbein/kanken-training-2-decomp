@@ -46,6 +46,10 @@ PROFILES = ROOT / "config/compiler_profiles.json"
 CATALOGUE = ROOT / "config/catalogue.json"
 NAME = re.compile(r"^[a-z0-9][a-z0-9.-]{2,63}$")
 PASSING = ("PASS", "PASS_WITH_QUALIFICATIONS")
+# The six entries through c006-r3 predate the selector. This creation boundary is
+# independent of mutable prepare/history schema labels and must never move forward.
+SELECTION_FIRST_SEQ = 7
+LEGACY_MODELS = {"linker_model": "armlink5-inline-branchnop-v2", "literal_model": "none"}
 
 
 class AcceptError(RuntimeError):
@@ -209,25 +213,47 @@ def model_selection(linker_model: str, literal_model: str) -> dict:
     return {"linker_model": linker_model, "literal_model": literal_model}
 
 
+def recorded_models(record: dict) -> dict:
+    """Interpret only the model omissions used by pre-selector checkpoints."""
+    return {
+        "linker_model": record.get("linker_model") or LEGACY_MODELS["linker_model"],
+        "literal_model": record.get("literal_model", LEGACY_MODELS["literal_model"]),
+    }
+
+
 def build_summary(receipt: dict) -> dict:
     return {k: receipt[k] for k in ("name", "result", "fresh", "inputs", "outputs", "credited", "checks", "error")
             if k in receipt}
 
 
-def verify_selection(out: Path, record: dict) -> None:
-    """Schema 2 binds the pre-build choice and complete receipts without private inputs.
+def verify_selection(out: Path, record: dict, *, required: bool = False) -> bool:
+    """Bind selected evidence even if its mutable schema label was lowered or removed.
 
-    Schema 1 checkpoints predate selection; leave their frozen evidence and models unchanged.
+    Only pre-selector, default-model records without any selection evidence use the
+    legacy path. Their full receipts must still agree with the recorded models.
     """
-    if record.get("schema_version", 1) < 2:
-        return
     selection_path = out / "selection.json"
+    builds = record.get("builds", [])
+    models = recorded_models(record)
+    selected = (required or record.get("schema_version", 1) >= 2
+                or "selection_sha256" in record or selection_path.exists()
+                or any("receipt_sha256" in b or "inputs" in b for b in builds)
+                or models != LEGACY_MODELS)
+    if not selected:
+        for suffix in ("a", "b"):
+            receipt_path = out / "receipts" / f"{out.name}-{suffix}.json"
+            if not receipt_path.is_file():
+                raise AcceptError(f"{out.name}: build {suffix} receipt missing")
+            if recorded_models(load_json(receipt_path).get("inputs", {})) != models:
+                raise AcceptError(f"{out.name}: build {suffix} models differ from the prepared models")
+        return False
+    if record.get("schema_version", 1) < 2:
+        raise AcceptError(f"{out.name}: selected checkpoint lacks its selection binding")
     if not selection_path.is_file() or sha256_file(selection_path) != record.get("selection_sha256"):
         raise AcceptError(f"{out.name}: model selection changed since prepare")
     selection = load_json(selection_path)
     if model_selection(record.get("linker_model"), record.get("literal_model")) != selection:
         raise AcceptError(f"{out.name}: prepared models differ from the frozen selection")
-    builds = record.get("builds", [])
     if len(builds) != 2:
         raise AcceptError(f"{out.name}: need two selected fresh-build receipts")
     for suffix, summary in zip(("a", "b"), builds):
@@ -243,6 +269,7 @@ def verify_selection(out: Path, record: dict) -> None:
             raise AcceptError(f"{out.name}: build {suffix} models differ from the frozen selection")
     if not builds[0].get("outputs") or builds[0]["outputs"] != builds[1].get("outputs"):
         raise AcceptError(f"{out.name}: selected build outputs differ")
+    return True
 
 
 def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
@@ -471,7 +498,7 @@ def review(name: str, record_path: Path) -> dict:
     if not prepared.is_file():
         raise AcceptError(f"accept/{name}: not prepared")
     prepare_record = load_json(prepared)
-    verify_selection(out, prepare_record)
+    verify_selection(out, prepare_record, required=len(read_history()) + 1 >= SELECTION_FIRST_SEQ)
     record = load_json(record_path)
     validate_review(record, new_functions(out, prepare_record), removed_review_callers(prepare_record))
     # A review binds the exact files prepare bound: the current hash of each prepared source and
@@ -506,7 +533,7 @@ def finalize(name: str, min_reviews: int) -> dict:
     record = load_json(prepared)
     if record["result"] != "PASS":
         raise AcceptError(f"accept/{name}: prepare is {record['result']}")
-    verify_selection(out, record)
+    selected = verify_selection(out, record, required=len(read_history()) + 1 >= SELECTION_FIRST_SEQ)
     prepare_sha = sha256_file(prepared)
     reviews = [load_json(p) for p in sorted((out / "reviews").glob("*.json"))] if (out / "reviews").is_dir() else []
     failing = [r["reviewer"] for r in reviews if r["verdict"] not in PASSING]
@@ -537,7 +564,7 @@ def finalize(name: str, min_reviews: int) -> dict:
     history = read_history()
     credited = record["builds"][0]["credited"]
     entry = {
-        "schema_version": record.get("schema_version", 1),
+        "schema_version": 2 if selected else 1,
         "seq": len(history) + 1,
         "checkpoint": name,
         "recorded_utc": now(),
@@ -556,7 +583,7 @@ def finalize(name: str, min_reviews: int) -> dict:
         "reviews": [{"reviewer": r["reviewer"], "family": r["family"], "verdict": r["verdict"]} for r in bound],
         "prev": history[-1]["entry_sha256"] if history else None,
     }
-    if record.get("schema_version", 1) >= 2:
+    if selected:
         entry["selection_sha256"] = record["selection_sha256"]
     entry["entry_sha256"] = entry_hash(entry)
     MATCHES.write_bytes(ledger)
@@ -577,19 +604,24 @@ def verify_history(revised_units=(), revised_headers=()) -> list[dict]:
     for i, e in enumerate(history, 1):
         if e["seq"] != i or e["prev"] != prev or e["entry_sha256"] != entry_hash(e):
             raise AcceptError(f"progress history broken at seq {i}")
-        if not (ACCEPT / e["checkpoint"] / "finalize.json").is_file():
+        out = ACCEPT / e["checkpoint"]
+        if not (out / "finalize.json").is_file():
             raise AcceptError(f"seq {i}: accept/{e['checkpoint']}/finalize.json missing")
-        if e.get("schema_version", 1) >= 2 or "selection_sha256" in e:
-            out = ACCEPT / e["checkpoint"]
-            prepared = out / "prepare.json"
-            if not prepared.is_file() or sha256_file(prepared) != e.get("prepare_sha256"):
-                raise AcceptError(f"seq {i}: selected prepare changed since finalize")
-            record = load_json(prepared)
-            if record.get("schema_version", 1) < 2:
-                raise AcceptError(f"seq {i}: selected checkpoint lacks its selection binding")
-            verify_selection(out, record)
-            if any(e.get(key) != record.get(key) for key in ("linker_model", "literal_model", "selection_sha256")):
-                raise AcceptError(f"seq {i}: history models differ from the prepared selection")
+        prepared = out / "prepare.json"
+        if not prepared.is_file() or sha256_file(prepared) != e.get("prepare_sha256"):
+            raise AcceptError(f"seq {i}: prepare changed since finalize")
+        record = load_json(prepared)
+        selected = verify_selection(
+            out, record, required=(i >= SELECTION_FIRST_SEQ or e.get("schema_version", 1) >= 2
+                                   or "selection_sha256" in e or recorded_models(e) != LEGACY_MODELS))
+        if selected and (e.get("schema_version", 1) < 2 or not e.get("selection_sha256")):
+            raise AcceptError(f"seq {i}: selected checkpoint lacks its selection binding")
+        # Receipt models agree with prepare above, including on the legacy path;
+        # matching history to prepare closes that binding for every checkpoint.
+        if (recorded_models(e) != recorded_models(record)
+                or selected and any(e.get(key) != record.get(key)
+                                    for key in ("linker_model", "literal_model", "selection_sha256"))):
+            raise AcceptError(f"seq {i}: history models differ from the prepared selection")
         prev = e["entry_sha256"]
     ledger = load_json(MATCHES)
     if history:

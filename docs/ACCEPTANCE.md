@@ -83,9 +83,17 @@ either receipt disagrees with the selection or the builds disagree with each oth
 
 New prepare/history records use schema 2. They bind the selection hash and both complete receipt
 hashes, including every literal mapping and removed helper. Review/finalize recheck this closure;
-`verify` checks it for finalized schema-2 checkpoints without ROM inputs. Historical schema-1
-checkpoints keep their original verification and recorded model semantics; no old record is
-rewritten or opted in retroactively.
+`verify` checks it without ROM inputs. The selector's creation boundary is fixed after the six
+historical entries through `c006-r3`: **sequence 7 and every later checkpoint require
+`selection_sha256`**, irrespective of mutable schema/model labels. Before that boundary, a
+selection artifact, selection/receipt binding, build-input summary or non-default model also
+requires the selected-checkpoint closure. Lowering/deleting schema metadata cannot opt selected
+evidence into the legacy path.
+
+For every checkpoint, `verify` binds the prepared record's hash and cross-checks both full
+receipts' models against the prepared and historical models. Only genuinely pre-selector,
+default-model evidence can use legacy model omissions (v2 / `none`); no historical artifact or
+recorded model is rewritten or opted in retroactively.
 
 `model_uses` lists **every** R1 caller, removed-helper unit (including `functions: []`), L1 owning
 unit and full pool mappings, including unchanged sources. `model_changes` compares both choices

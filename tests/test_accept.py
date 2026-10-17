@@ -42,10 +42,19 @@ class AcceptGateTest(unittest.TestCase):
             setattr(accept, k, v)
 
     def make_prepared(self, name, result):
-        """A prepare record as tools/accept.py prepare writes it (builds are exercised elsewhere)."""
+        """Frozen pre-selector evidence, with full receipts but no selection/model fields."""
         out = self.root / "accept" / name
         units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
         accept.write_exclusive(out / "matches.json", {"schema_version": 1, "units": units})
+        builds = []
+        for suffix in ("a", "b"):
+            receipt = {
+                "name": f"{name}-{suffix}", "result": result, "fresh": True, "inputs": {},
+                "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80},
+                "outputs": {"code_bin_sha256": "x"},
+            }
+            accept.write_exclusive(out / "receipts" / f"{name}-{suffix}.json", receipt)
+            builds.append({key: receipt[key] for key in ("name", "result", "credited", "outputs")})
         record = {
             "checkpoint": name,
             "base_matches_sha256": accept.sha256_file(accept.MATCHES),
@@ -55,8 +64,7 @@ class AcceptGateTest(unittest.TestCase):
             "new_units": ["src/a.c"],
             "profiles_sha256": accept.sha256_file(accept.PROFILES),
             "catalogue_sha256": accept.sha256_file(accept.CATALOGUE),
-            "builds": [{"credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80},
-                        "outputs": {"code_bin_sha256": "x"}}],
+            "builds": builds,
             "result": result,
         }
         accept.write_exclusive(out / "prepare.json", record)
@@ -250,12 +258,10 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(record["literal_rebindings"], {"src/a.c": rebindings})
 
     def test_finalize_preserves_the_independent_literal_model(self):
-        path = self.root / "accept/c001/prepare.json"
-        record = json.loads(path.read_text())
-        record["literal_model"] = "anonymous-string-records-v1"
-        path.write_text(json.dumps(record), encoding="utf-8")
-        self.review()
-        self.assertEqual(accept.finalize("c001", 1)["literal_model"], "anonymous-string-records-v1")
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c015", units, literal_model="anonymous-string-records-v1")
+        self.review(name="c015")
+        self.assertEqual(accept.finalize("c015", 1)["literal_model"], "anonymous-string-records-v1")
 
     def test_prepare_cli_passes_explicit_independent_choices(self):
         with patch.object(accept, "prepare", return_value={
@@ -350,7 +356,7 @@ class AcceptGateTest(unittest.TestCase):
         self.review(name="c015")
         accept.finalize("c015", 1)
         for relative, message in (
-            ("prepare.json", "selected prepare changed"),
+            ("prepare.json", "prepare changed"),
             ("selection.json", "model selection changed"),
             ("receipts/c015-a.json", "build a receipt changed"),
             ("receipts/c015-b.json", "build b receipt changed"),
@@ -373,6 +379,129 @@ class AcceptGateTest(unittest.TestCase):
         accept.HISTORY.write_text(json.dumps(entry) + "\n", encoding="utf-8")
         with self.assertRaisesRegex(accept.AcceptError, "history models differ"):
             accept.verify_history()
+
+    def assert_prepare_schema_downgrade_refused(self, schema_version):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c015", units, linker_model="armlink5-inline-branchnop-v3",
+                                     literal_model="anonymous-string-records-v1")
+        self.review(name="c015")
+        out = self.root / "accept/c015"
+        if schema_version is None:
+            record.pop("schema_version")
+        else:
+            record["schema_version"] = schema_version
+        record.update(accept.LEGACY_MODELS)
+        (out / "prepare.json").write_text(json.dumps(record), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "selection binding"):
+            self.review(name="c015", reviewer="rev2")
+        self.assertFalse((out / "reviews/rev2.json").exists())
+        # Keep the review bound to the exact downgraded prepare: finalize must refuse
+        # the selection inconsistency itself, not merely a stale review hash.
+        review_path = out / "reviews/rev1.json"
+        reviewed = accept.load_json(review_path)
+        reviewed["prepare_sha256"] = accept.sha256_file(out / "prepare.json")
+        review_path.write_text(json.dumps(reviewed), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "selection binding"):
+            accept.finalize("c015", 1)
+
+    def test_prepare_schema_downgrade_blocks_review_and_finalize(self):
+        self.assert_prepare_schema_downgrade_refused(1)
+
+    def test_prepare_schema_removal_blocks_review_and_finalize(self):
+        self.assert_prepare_schema_downgrade_refused(None)
+
+    def assert_history_schema_downgrade_refused(self, schema_version):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c015", units, linker_model="armlink5-inline-branchnop-v3",
+                             literal_model="anonymous-string-records-v1")
+        self.review(name="c015")
+        entry = accept.finalize("c015", 1)
+        self.assertEqual(accept.verify_history(), [entry])
+        if schema_version is None:
+            entry.pop("schema_version")
+        else:
+            entry["schema_version"] = schema_version
+        entry.pop("selection_sha256")
+        entry.update(accept.LEGACY_MODELS)
+        entry["entry_sha256"] = accept.entry_hash(entry)
+        accept.HISTORY.write_text(json.dumps(entry) + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "selection binding"):
+            accept.verify_history()
+
+    def test_finalized_history_schema_downgrade_cannot_remove_selection(self):
+        self.assert_history_schema_downgrade_refused(1)
+
+    def test_finalized_history_schema_removal_cannot_remove_selection(self):
+        self.assert_history_schema_downgrade_refused(None)
+
+    def test_legacy_prepare_cannot_hide_nondefault_receipt_models(self):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        record = self.stubbed_prepare("c015", units, linker_model="armlink5-inline-branchnop-v3",
+                                     literal_model="anonymous-string-records-v1")
+        out = self.root / "accept/c015"
+        (out / "selection.json").unlink()
+        record.pop("schema_version")
+        record.pop("selection_sha256")
+        record.update(accept.LEGACY_MODELS)
+        for summary in record["builds"]:
+            summary.pop("receipt_sha256")
+            summary.pop("inputs")
+        (out / "prepare.json").write_text(json.dumps(record), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "models differ"):
+            self.review(name="c015")
+        with self.assertRaisesRegex(accept.AcceptError, "models differ"):
+            accept.finalize("c015", 1)
+
+    def test_legacy_history_receipts_must_agree_with_recorded_models(self):
+        self.review()
+        accept.finalize("c001", 1)
+        for suffix in ("a", "b"):
+            path = self.root / f"accept/c001/receipts/c001-{suffix}.json"
+            original = path.read_text(encoding="utf-8")
+            for key, value in (("linker_model", "armlink5-inline-branchnop-v3"),
+                               ("literal_model", "anonymous-string-records-v1")):
+                with self.subTest(build=suffix, model=key):
+                    receipt = json.loads(original)
+                    receipt["inputs"][key] = value
+                    path.write_text(json.dumps(receipt), encoding="utf-8")
+                    with self.assertRaisesRegex(accept.AcceptError, "models differ"):
+                        accept.verify_history()
+                    path.write_text(original, encoding="utf-8")
+
+    def make_legacy_history(self, count):
+        """Construct legacy-shaped evidence, including deliberate post-cutover forgeries."""
+        self.review()
+        history = [accept.finalize("c001", 1)]
+        for seq in range(2, count + 1):
+            name = f"c{seq:03}"
+            self.make_prepared(name, result="PASS")
+            out = self.root / "accept" / name
+            entry = {**history[-1], "seq": seq, "checkpoint": name,
+                     "prepare_sha256": accept.sha256_file(out / "prepare.json"),
+                     "matches_sha256": accept.sha256_file(out / "matches.json"),
+                     "prev": history[-1]["entry_sha256"]}
+            entry.pop("schema_version", None)
+            entry["entry_sha256"] = accept.entry_hash(entry)
+            accept.write_exclusive(out / "finalize.json", {
+                "checkpoint": name, "entry_sha256": entry["entry_sha256"],
+            })
+            history.append(entry)
+        accept.HISTORY.write_text("".join(json.dumps(e) + "\n" for e in history), encoding="utf-8")
+        return history
+
+    def test_post_selector_history_requires_selection_without_schema_or_artifacts(self):
+        self.make_legacy_history(accept.SELECTION_FIRST_SEQ)
+        with self.assertRaisesRegex(accept.AcceptError, f"c{accept.SELECTION_FIRST_SEQ:03}:.*selection binding"):
+            accept.verify_history()
+
+    def test_post_selector_prepare_requires_selection_without_schema_or_artifacts(self):
+        history = self.make_legacy_history(accept.SELECTION_FIRST_SEQ - 1)
+        self.assertEqual(accept.verify_history(), history)
+        self.make_prepared("c015", result="PASS")
+        with self.assertRaisesRegex(accept.AcceptError, "selection binding"):
+            self.review(name="c015")
+        with self.assertRaisesRegex(accept.AcceptError, "selection binding"):
+            accept.finalize("c015", 1)
 
     def test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings(self):
         self.review()
@@ -404,12 +533,8 @@ class AcceptGateTest(unittest.TestCase):
         accept.verify_history()
 
     def test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers(self):
-        receipt_units, rewrite = self.removed_helper_baseline()
-        # Exercise a transition from a pre-selection record, rather than a helper/source edit.
-        history = accept.read_history()
-        history[0]["linker_model"] = "armlink5-inline-branchnop-v2"
-        history[0]["entry_sha256"] = accept.entry_hash(history[0])
-        accept.HISTORY.write_text(json.dumps(history[0]) + "\n", encoding="utf-8")
+        receipt_units, rewrite = self.removed_helper_baseline(linker_model="armlink5-inline-branchnop-v2")
+        # Exercise a default-model transition rather than a helper/source edit.
         receipt_units[1]["removed_callees"] = [rewrite["removed_callee"]]
         record = self.stubbed_prepare("c015", [], receipt_units=receipt_units,
                                      linker_model="armlink5-inline-branchnop-v3")
@@ -454,23 +579,15 @@ class AcceptGateTest(unittest.TestCase):
         with self.assertRaisesRegex(accept.AcceptError, "credited source differs"):
             accept.verify_history()
 
-    def removed_helper_baseline(self):
-        """An accepted caller plus a zero-credit helper, without running an actual prepare."""
+    def removed_helper_baseline(self, linker_model="armlink5-inline-branchnop-v3"):
+        """An accepted caller plus a zero-credit helper, with selected synthetic receipts."""
         helper = {"source": "src/helper.c", "profile": "game", "functions": []}
         (self.root / helper["source"]).write_text(
             "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n", encoding="utf-8")
-        out = self.root / "accept/c001"
-        ledger = accept.load_json(out / "matches.json")
-        ledger["units"].append(helper)
-        (out / "matches.json").write_text(json.dumps(ledger), encoding="utf-8")
-        prepared = accept.load_json(out / "prepare.json")
-        prepared["ledger_sha256"] = accept.sha256_file(out / "matches.json")
-        prepared["sources"] = accept.source_hashes(ledger["units"])
-        prepared["new_units"].append(helper["source"])
-        prepared["linker_model"] = "armlink5-inline-branchnop-v3"
-        (out / "prepare.json").write_text(json.dumps(prepared), encoding="utf-8")
-        self.review()
-        accept.finalize("c001", 1)
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}, helper]
+        self.stubbed_prepare("c014", units, linker_model=linker_model)
+        self.review(name="c014")
+        accept.finalize("c014", 1)
         rewrite = {"offset": 12, "rule": "inline_insn", "target": None,
                    "removed_callee": {"object": "src/helper.c", "section": "i.set_field18",
                                       "symbols": ["set_field18"], "size": 8}}
