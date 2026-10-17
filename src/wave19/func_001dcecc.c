@@ -1,6 +1,6 @@
 #include "game/packed_records.h"
 
-extern int func_00169878(struct PackedRecordSet *list, int value);
+
 
 const unsigned short *func_001dcecc(struct PackedRecordSet *list, int value)
 {

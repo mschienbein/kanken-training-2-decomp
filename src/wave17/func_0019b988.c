@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/runtime.h"
 
 struct RenderGroupVTable;
@@ -25,8 +26,8 @@ extern void func_00196114(unsigned mode);
 extern void func_0011dbb4(int count, unsigned *ids);
 extern void func_0019cc68(unsigned id);
 extern void func_0011dab4(unsigned format, int width, int height, unsigned memory_type);
-extern int func_0019ceb4(void);
-extern void func_0011da90(unsigned value, unsigned mode);
+
+
 
 void func_0019b988(const struct RenderResourceConfiguration *configuration,
                    struct RenderResourceGroup *group)

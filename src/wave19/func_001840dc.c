@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct BinaryResourceHeader {
     int type;
 };

@@ -4,10 +4,10 @@
 
 struct ServiceCoordinator;
 
-extern void func_00182210(void);
-extern int func_0018f018(void);
 
-extern void func_00182204(void);
+
+
+
 
 int func_0014877c(struct ServiceOutput *state, int mode)
 {

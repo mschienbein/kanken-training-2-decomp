@@ -1,9 +1,6 @@
 #ifndef GAME_LAYOUT_LIFECYCLE_H
 #define GAME_LAYOUT_LIFECYCLE_H
 
-struct W17AllocatorVTable;
-struct W17Allocator;
-struct W17AllocatorPair;
 struct W17MaterialVTable;
 struct W17Material;
 struct W17LayoutVTable;
@@ -16,6 +13,7 @@ struct W17StorageHeader;
 #include "game/pool_list.h"
 #include "game/runtime.h"
 #include "game/screen.h"
+#include "game/resource_instance.h"
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
@@ -29,14 +27,6 @@ struct W17StorageHeader;
 
 
 
-struct W17AllocatorVTable {
-    void (*reserved00)(W17Allocator *);
-    void (*reserved04)(W17Allocator *);
-    void (*reserved08)(W17Allocator *);
-    void (*release)(W17Allocator *, void *);
-};
-struct W17Allocator { const W17AllocatorVTable *vtable; };
-struct W17AllocatorPair { W17Allocator *normal; W17Allocator *temporary; };
 struct W17MaterialVTable {
     void (*destroy)(W17Material *);
     void (*reserved04)(W17Material *);
@@ -92,13 +82,11 @@ struct W17StorageHeader {
 
 extern "C" {
 
-extern W17AllocatorPair data_00242f84;
 void func_0016b260(void *allocation);
 
 
 void func_00191aec(void *allocation);
 void *func_0016a998(void *object);
-void func_0016b5fc(PoolList *list, void *owner);
 void func_0016aa74(DisplayVertexArray *buffer);
 void func_001cf67c(W17TexturePane *pane);
 extern const W17LayoutVTable data_00224370;

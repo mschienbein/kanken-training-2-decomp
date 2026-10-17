@@ -72,7 +72,7 @@ extern int func_0017abf8(int channel, int sound);
 extern void func_00181b68(int channel, int mode, int enabled);
 extern int func_00177124(int channel);
 extern int func_0015e31c(unsigned value, unsigned parameter);
-extern int func_0015e2b4(unsigned value);
+extern int func_0015e2b4(int value);
 extern void func_001b6d44(struct MenuOptionGroup *options);
 extern void func_001b7f50(struct MenuOptionGroup *options);
 extern float func_0016e874(const struct MotionState *state);

@@ -1,8 +1,4 @@
-struct RestorableState {
-    unsigned current;
-    unsigned saved;
-};
-extern struct RestorableState data_0023fdc8;
+#include "game/startup.h"
 
 void func_0013dea0(void)
 {

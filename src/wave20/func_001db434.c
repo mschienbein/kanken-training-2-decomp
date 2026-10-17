@@ -1,6 +1,7 @@
+#include "game/functions.h"
 extern void func_00182dc8(unsigned target, int level, unsigned internal_format,
     int width, int height, int border, unsigned format, unsigned type, const void *pixels);
-extern void func_00182db4(unsigned target, unsigned parameter, int value);
+
 extern void func_00182d9c(unsigned target, unsigned parameter, float value);
 
 void func_001db434(int width, int height, unsigned kind, const void *pixels,

@@ -1,0 +1,3409 @@
+{
+  "plans": [
+    {
+      "name": "func_001091d4",
+      "canonical": "void func_001091d4(int, int, int, int);",
+      "definition_source": "src/pilot/pilot_b.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_001091d4(int idx, int a, int x, int y);",
+          "type": "function(int, int, int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010920c",
+      "canonical": "void func_0010920c(int);",
+      "definition_source": "src/wave15/func_0010920c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0010920c(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010a804",
+      "canonical": "void func_0010a804(int);",
+      "definition_source": "src/wave15/func_0010a804.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0010a804(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010a828",
+      "canonical": "void func_0010a828(int);",
+      "definition_source": "src/wave15/func_0010a828.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0010a828(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010aa18",
+      "canonical": "void func_0010aa18(int);",
+      "definition_source": "src/wave15/func_0010aa18.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0010aa18(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010b5f0",
+      "canonical": "void func_0010b5f0(void *);",
+      "definition_source": "src/wave6/func_0010b5f0.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern void func_0010b5f0(void *context);",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010b610",
+      "canonical": "int func_0010b610(void *);",
+      "definition_source": "src/wave6/func_0010b610.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern int func_0010b610(void *context);",
+          "type": "function(pointer to (void)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0010c1c8",
+      "canonical": "void func_0010c1c8(void);",
+      "definition_source": "src/wave13/func_0010c1c8.c",
+      "tags": [],
+      "headers": [
+        "include/game/service_state.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave1/func_00102cb0.c",
+          "pattern": "extern void func_0010c1c8(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010ce44",
+      "canonical": "void func_0010ce44(void (*)(void *), void *);",
+      "definition_source": "src/wave16/func_0010ce44.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern void func_0010ce44(void (*callback)(void *context), void *context);",
+          "type": "function(pointer to (function(pointer to (void)) -> void), pointer to (void)) -> void"
+        },
+        {
+          "source": "src/wave16/func_00106e04.c",
+          "pattern": "extern void func_0010ce44(void (*callback)(void *context), void *context);",
+          "type": "function(pointer to (function(pointer to (void)) -> void), pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010ce58",
+      "canonical": "void func_0010ce58(int (*)(void *), void *);",
+      "definition_source": "src/wave16/func_0010ce58.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern void func_0010ce58(int (*callback)(void *context), void *context);",
+          "type": "function(pointer to (function(pointer to (void)) -> int), pointer to (void)) -> void"
+        },
+        {
+          "source": "src/wave16/func_00106e04.c",
+          "pattern": "extern void func_0010ce58(int (*callback)(void *context), void *context);",
+          "type": "function(pointer to (function(pointer to (void)) -> int), pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010cf84",
+      "canonical": "void func_0010cf84(void (*)(void *), void *);",
+      "definition_source": "src/wave16/func_0010cf84.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern void func_0010cf84(void (*callback)(void *context), void *context);",
+          "type": "function(pointer to (function(pointer to (void)) -> void), pointer to (void)) -> void"
+        },
+        {
+          "source": "src/wave16/func_00106e04.c",
+          "pattern": "extern void func_0010cf84(void (*callback)(void *context), void *context);",
+          "type": "function(pointer to (function(pointer to (void)) -> void), pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0010e818",
+      "canonical": "void func_0010e818(void);",
+      "definition_source": "src/wave15/func_0010e818.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0010e818(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001109fc",
+      "canonical": "void func_001109fc(void);",
+      "definition_source": "src/wave14/func_001109fc.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_001070e8.c",
+          "pattern": "extern void func_001109fc(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00110a28",
+      "canonical": "void func_00110a28(void);",
+      "definition_source": "src/wave14/func_00110a28.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_00107140.c",
+          "pattern": "extern void func_00110a28(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00110a58",
+      "canonical": "void func_00110a58(void);",
+      "definition_source": "src/wave16/func_00110a58.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00107140.c",
+          "pattern": "extern void func_00110a58(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave16/func_001070e8.c",
+          "pattern": "extern void func_00110a58(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00110ed8",
+      "canonical": "void func_00110ed8(int);",
+      "definition_source": "src/wave14/func_00110ed8.c",
+      "tags": [],
+      "headers": [
+        "include/game/exp_heap.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_001070e8.c",
+          "pattern": "extern void func_00110ed8(int count);",
+          "type": "function(int) -> void"
+        },
+        {
+          "source": "src/wave16/func_00107140.c",
+          "pattern": "extern void func_00110ed8(int count);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00113404",
+      "canonical": "int func_00113404(const unsigned int *, unsigned int);",
+      "definition_source": "src/sdk/func_00113404.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_0010bc70.c",
+          "pattern": "extern int func_00113404(const unsigned *handle, unsigned event);",
+          "type": "function(pointer to (const unsigned int), unsigned int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00114fa8",
+      "canonical": "void func_00114fa8(void);",
+      "definition_source": "src/wave18/func_00114fa8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_00114fa4.c",
+          "pattern": "extern void func_00114fa8(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00115118",
+      "canonical": "unsigned char func_00115118(void);",
+      "definition_source": "src/wave15/func_00115118.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_0010d0ac.c",
+          "pattern": "extern unsigned char func_00115118(void);",
+          "type": "function(void) -> unsigned char"
+        }
+      ]
+    },
+    {
+      "name": "func_00115128",
+      "canonical": "int func_00115128(void);",
+      "definition_source": "src/wave15/func_00115128.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00115138.c",
+          "pattern": "extern int func_00115128(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00116ca4",
+      "canonical": "void func_00116ca4(struct RuntimeInterface *);",
+      "definition_source": "src/wave15/func_00116ca4.c",
+      "tags": [
+        [
+          "struct",
+          "RuntimeInterface"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_0010dd58.c",
+          "pattern": "extern void func_00116ca4(struct RuntimeInterface *interface);",
+          "type": "function(pointer to (struct RuntimeInterface)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00116cd8",
+      "canonical": "void func_00116cd8(struct RuntimeInterface *);",
+      "definition_source": "src/wave15/func_00116cd8.c",
+      "tags": [
+        [
+          "struct",
+          "RuntimeInterface"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_0010dd58.c",
+          "pattern": "extern void func_00116cd8(struct RuntimeInterface *interface);",
+          "type": "function(pointer to (struct RuntimeInterface)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0011c77c",
+      "canonical": "void func_0011c77c(void);",
+      "definition_source": "src/wave17/func_0011c77c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001103e4.c",
+          "pattern": "extern void func_0011c77c(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0011d2d4",
+      "canonical": "void func_0011d2d4(void);",
+      "definition_source": "src/wave17/func_0011d2d4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001103e4.c",
+          "pattern": "extern void func_0011d2d4(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0011da90",
+      "canonical": "void func_0011da90(unsigned int, unsigned int);",
+      "definition_source": "src/wave17/func_0011da90.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0019b988.c",
+          "pattern": "extern void func_0011da90(unsigned value, unsigned mode);",
+          "type": "function(unsigned int, unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0011db78",
+      "canonical": "void func_0011db78(int);",
+      "definition_source": "src/wave18/func_0011db78.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_00107358.c",
+          "pattern": "extern void func_0011db78(int count);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0011dcec",
+      "canonical": "void func_0011dcec(int);",
+      "definition_source": "src/wave19/func_0011dcec.c",
+      "tags": [],
+      "headers": [
+        "include/game/drawing_system.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave19/func_0010a9bc.c",
+          "pattern": "extern void func_0011dcec(int mode);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00121364",
+      "canonical": "void func_00121364(void);",
+      "definition_source": "src/sdk/func_00121364.c",
+      "tags": [],
+      "headers": [
+        "include/game/input_device.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0012d0a4.c",
+          "pattern": "extern void func_00121364(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001217b8",
+      "canonical": "void func_001217b8(void);",
+      "definition_source": "src/retries/func_001217b8.c",
+      "tags": [],
+      "headers": [
+        "include/game/stream_manager.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave4/func_001217b4.c",
+          "pattern": "extern void func_001217b8(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00122890",
+      "canonical": "unsigned int func_00122890(unsigned int, void *, unsigned int);",
+      "definition_source": "src/wave4/func_00122890.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_0019b574.c",
+          "pattern": "extern unsigned func_00122890(unsigned register_address, void *destination, unsigned size);",
+          "type": "function(unsigned int, pointer to (void), unsigned int) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_00122894",
+      "canonical": "unsigned int func_00122894(unsigned int, void *, unsigned int);",
+      "definition_source": "src/wave17/func_00122894.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_00122890.c",
+          "pattern": "extern unsigned func_00122894(unsigned register_address, void *destination, unsigned size);",
+          "type": "function(unsigned int, pointer to (void), unsigned int) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_001228d4",
+      "canonical": "signed char func_001228d4(unsigned int);",
+      "definition_source": "src/wave15/func_001228d4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_001228d0.c",
+          "pattern": "extern signed char func_001228d4(unsigned index);",
+          "type": "function(unsigned int) -> signed char"
+        }
+      ]
+    },
+    {
+      "name": "func_00122a20",
+      "canonical": "unsigned int func_00122a20(void);",
+      "definition_source": "src/wave15/func_00122a20.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_00122a1c.c",
+          "pattern": "extern unsigned func_00122a20(void);",
+          "type": "function(void) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_00122a68",
+      "canonical": "void func_00122a68(void);",
+      "definition_source": "src/wave4/func_00122a68.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001103e4.c",
+          "pattern": "extern void func_00122a68(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00122ad0",
+      "canonical": "void func_00122ad0(void);",
+      "definition_source": "src/wave15/func_00122ad0.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00115000.c",
+          "pattern": "extern void func_00122ad0(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0012d2bc",
+      "canonical": "void func_0012d2bc(void);",
+      "definition_source": "src/wave6/func_0012d2bc.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_0012d2bc(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0012d2e8",
+      "canonical": "void func_0012d2e8(void);",
+      "definition_source": "src/wave6/func_0012d2e8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_0012d2e8(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0012d328",
+      "canonical": "void func_0012d328(void);",
+      "definition_source": "src/wave17/func_0012d328.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern void func_0012d328(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0012f980",
+      "canonical": "int func_0012f980(void);",
+      "definition_source": "src/wave17/func_0012f980.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave5/func_00123398.c",
+          "pattern": "extern int func_0012f980(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0012f9fc",
+      "canonical": "int func_0012f9fc(unsigned int, const void *, unsigned int);",
+      "definition_source": "src/wave17/func_0012f9fc.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave2/func_00190adc.c",
+          "pattern": "extern int func_0012f9fc(unsigned register_address, const void *source, unsigned size);",
+          "type": "function(unsigned int, pointer to (const void), unsigned int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0012fb3c",
+      "canonical": "void func_0012fb3c(void);",
+      "definition_source": "src/wave14/func_0012fb3c.c",
+      "tags": [],
+      "headers": [
+        "include/game/display_animation.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave4/func_0012fb38.c",
+          "pattern": "extern void func_0012fb3c(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0012fb4c",
+      "canonical": "void func_0012fb4c(void);",
+      "definition_source": "src/wave14/func_0012fb4c.c",
+      "tags": [],
+      "headers": [
+        "include/game/display_animation.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave4/func_0012fb48.c",
+          "pattern": "extern void func_0012fb4c(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0012fda0",
+      "canonical": "int func_0012fda0(unsigned int);",
+      "definition_source": "src/wave14/func_0012fda0.c",
+      "tags": [],
+      "headers": [
+        "include/game/applet.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave4/func_00122500.c",
+          "pattern": "extern int func_0012fda0(unsigned int flags);",
+          "type": "function(unsigned int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001351bc",
+      "canonical": "void func_001351bc(void);",
+      "definition_source": "src/wave15/func_001351bc.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_001351bc(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135268",
+      "canonical": "void func_00135268(unsigned int, int);",
+      "definition_source": "src/wave16/func_00135268.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00107140.c",
+          "pattern": "extern void func_00135268(unsigned heap, int count);",
+          "type": "function(unsigned int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135a28",
+      "canonical": "void func_00135a28(void);",
+      "definition_source": "src/wave1/func_00135a28.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_00135a28(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135a58",
+      "canonical": "void func_00135a58(void);",
+      "definition_source": "src/wave1/func_00135a58.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_00135a58(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135a88",
+      "canonical": "void func_00135a88(void);",
+      "definition_source": "src/wave1/func_00135a88.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_00135a88(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135ab8",
+      "canonical": "void func_00135ab8(void);",
+      "definition_source": "src/wave1/func_00135ab8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_00135ab8(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135ae8",
+      "canonical": "void func_00135ae8(void);",
+      "definition_source": "src/wave16/func_00135ae8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0012d328.c",
+          "pattern": "extern void func_00135ae8(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135b4c",
+      "canonical": "void func_00135b4c(int);",
+      "definition_source": "src/wave16/func_00135b4c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00107140.c",
+          "pattern": "extern void func_00135b4c(int count);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00135bb0",
+      "canonical": "void func_00135bb0(int);",
+      "definition_source": "src/wave16/func_00135bb0.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00107140.c",
+          "pattern": "extern void func_00135bb0(int count);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0013604c",
+      "canonical": "void func_0013604c(int);",
+      "definition_source": "src/wave14/func_0013604c.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0013604c(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0013605c",
+      "canonical": "void func_0013605c(int);",
+      "definition_source": "src/wave14/func_0013605c.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0013605c(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0013606c",
+      "canonical": "void func_0013606c(int);",
+      "definition_source": "src/wave14/func_0013606c.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0013606c(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0013607c",
+      "canonical": "void func_0013607c(int);",
+      "definition_source": "src/wave14/func_0013607c.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0013607c(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0013608c",
+      "canonical": "void func_0013608c(unsigned char, unsigned char, unsigned char);",
+      "definition_source": "src/wave16/func_0013608c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00136104.c",
+          "pattern": "extern void func_0013608c(unsigned char enabled, unsigned char active, unsigned char ready);",
+          "type": "function(unsigned char, unsigned char, unsigned char) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001360a4",
+      "canonical": "void func_001360a4(void);",
+      "definition_source": "src/wave1/func_001360a4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_001360a4(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001360dc",
+      "canonical": "void func_001360dc(int);",
+      "definition_source": "src/wave14/func_001360dc.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_001360dc(int value);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001360ec",
+      "canonical": "void func_001360ec(int, int);",
+      "definition_source": "src/wave16/func_001360ec.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00136104.c",
+          "pattern": "extern void func_001360ec(int index, int value);",
+          "type": "function(int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00136104",
+      "canonical": "void func_00136104(void);",
+      "definition_source": "src/wave16/func_00136104.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave9/func_0011f234.c",
+          "pattern": "extern void func_00136104(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00136134",
+      "canonical": "void func_00136134(int, int);",
+      "definition_source": "src/wave16/func_00136134.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00136104.c",
+          "pattern": "extern void func_00136134(int index, int flags);",
+          "type": "function(int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001365f8",
+      "canonical": "int func_001365f8(const unsigned int *, unsigned int *);",
+      "definition_source": "src/sdk2/func_001365f8.c",
+      "tags": [],
+      "headers": [
+        "include/ctr/ipc.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_0012dcc0.c",
+          "pattern": "extern int func_001365f8(const unsigned *handle, unsigned *output);",
+          "type": "function(pointer to (const unsigned int), pointer to (unsigned int)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0013776c",
+      "canonical": "unsigned int func_0013776c(void *, unsigned int);",
+      "definition_source": "src/wave4/func_0013776c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_0012ccd8.c",
+          "pattern": "extern unsigned func_0013776c(void *buffer, unsigned size);",
+          "type": "function(pointer to (void), unsigned int) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_001378d8",
+      "canonical": "unsigned int func_001378d8(const void *);",
+      "definition_source": "src/wave20/func_001378d8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave2/func_0018f0ac.c",
+          "pattern": "extern unsigned func_001378d8(const void *address);",
+          "type": "function(pointer to (const void)) -> unsigned int"
+        },
+        {
+          "source": "src/wave4/func_001378d4.c",
+          "pattern": "extern unsigned func_001378d8(const void *address);",
+          "type": "function(pointer to (const void)) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_0013e6b8",
+      "canonical": "int func_0013e6b8(void);",
+      "definition_source": "src/wave4/func_0013e6b8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave20/func_001378d8.c",
+          "pattern": "extern int func_0013e6b8(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0013e6d0",
+      "canonical": "unsigned int func_0013e6d0(unsigned int, unsigned int);",
+      "definition_source": "src/wave4/func_0013e6d0.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave20/func_001378d8.c",
+          "pattern": "extern unsigned func_0013e6d0(unsigned address, unsigned size);",
+          "type": "function(unsigned int, unsigned int) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_0014562c",
+      "canonical": "void func_0014562c(void);",
+      "definition_source": "src/wave14/func_0014562c.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave9/func_001415d0.c",
+          "pattern": "extern void func_0014562c(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00145f74",
+      "canonical": "int func_00145f74(void (*)(void), void (*)(void), void (*)(void));",
+      "definition_source": "src/wave15/func_00145f74.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00142764.c",
+          "pattern": "extern int func_00145f74(ServiceCallback first, ServiceCallback second, ServiceCallback third);",
+          "type": "function(pointer to (function(void) -> void), pointer to (function(void) -> void), pointer to (function(void) -> void)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00147998",
+      "canonical": "void func_00147998(unsigned int);",
+      "definition_source": "src/wave20/func_00147998.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_00147994.c",
+          "pattern": "extern void func_00147998(unsigned value);",
+          "type": "function(unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001487cc",
+      "canonical": "void func_001487cc(struct InputSessionContext *, float);",
+      "definition_source": "src/wave19/func_001487cc.c",
+      "tags": [
+        [
+          "struct",
+          "InputSessionContext"
+        ]
+      ],
+      "headers": [
+        "include/game/input_runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave18/func_00146168.c",
+          "pattern": "extern void func_001487cc(struct InputSessionContext *state, float value);",
+          "type": "function(pointer to (struct InputSessionContext), float) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00149388",
+      "canonical": "float func_00149388(void);",
+      "definition_source": "src/wave13/func_00149388.c",
+      "tags": [],
+      "headers": [
+        "include/game/audio_voice.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave19/func_00147478.c",
+          "pattern": "extern float func_00149388(void);",
+          "type": "function(void) -> float"
+        }
+      ]
+    },
+    {
+      "name": "func_001493a8",
+      "canonical": "float func_001493a8(float);",
+      "definition_source": "src/wave18/func_001493a8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_00147478.c",
+          "pattern": "extern float func_001493a8(float value);",
+          "type": "function(float) -> float"
+        }
+      ]
+    },
+    {
+      "name": "func_001493c4",
+      "canonical": "float func_001493c4(float);",
+      "definition_source": "src/wave20/func_001493c4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_00147478.c",
+          "pattern": "extern float func_001493c4(float value);",
+          "type": "function(float) -> float"
+        }
+      ]
+    },
+    {
+      "name": "func_00149424",
+      "canonical": "void func_00149424(void);",
+      "definition_source": "src/wave2/func_00149424.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_00147478.c",
+          "pattern": "extern void func_00149424(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00149428",
+      "canonical": "float func_00149428(float);",
+      "definition_source": "src/wave19/func_00149428.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_00147478.c",
+          "pattern": "extern float func_00149428(float value);",
+          "type": "function(float) -> float"
+        }
+      ]
+    },
+    {
+      "name": "func_00149a98",
+      "canonical": "struct NotificationController *func_00149a98(struct NotificationController *);",
+      "definition_source": "src/wave18/func_00149a98.c",
+      "tags": [
+        [
+          "struct",
+          "NotificationController"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001819f4.c",
+          "pattern": "extern struct NotificationController *func_00149a98(struct NotificationController *controller);",
+          "type": "function(pointer to (struct NotificationController)) -> pointer to (struct NotificationController)"
+        }
+      ]
+    },
+    {
+      "name": "func_0014c338",
+      "canonical": "unsigned int func_0014c338(void);",
+      "definition_source": "src/wave4/func_0014c338.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_00149a98.c",
+          "pattern": "extern unsigned func_0014c338(void);",
+          "type": "function(void) -> unsigned int"
+        },
+        {
+          "source": "src/wave18/func_0016d310.c",
+          "pattern": "extern unsigned func_0014c338(void);",
+          "type": "function(void) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_0014c33c",
+      "canonical": "unsigned int func_0014c33c(void);",
+      "definition_source": "src/wave17/func_0014c33c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_0014c338.c",
+          "pattern": "extern unsigned func_0014c33c(void);",
+          "type": "function(void) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_0014cbf4",
+      "canonical": "void func_0014cbf4(struct InputSessionContext *, float);",
+      "definition_source": "src/wave19/func_0014cbf4.c",
+      "tags": [
+        [
+          "struct",
+          "InputSessionContext"
+        ]
+      ],
+      "headers": [
+        "include/game/input_runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave18/func_0014b154.c",
+          "pattern": "extern void func_0014cbf4(struct InputSessionContext *state, float value);",
+          "type": "function(pointer to (struct InputSessionContext), float) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0014f7e8",
+      "canonical": "void func_0014f7e8(unsigned int, unsigned int);",
+      "definition_source": "src/wave2/func_0014f7e8.c",
+      "tags": [],
+      "headers": [
+        "include/game/functions.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_0010dd58.c",
+          "pattern": "extern void func_0014f7e8(unsigned unused0, unsigned unused1);",
+          "type": "function(unsigned int, unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00152664",
+      "canonical": "void func_00152664(struct AudioChannelState *, const struct AudioBiquadCoefficients *);",
+      "definition_source": "src/wave16/func_00152664.c",
+      "tags": [
+        [
+          "struct",
+          "AudioBiquadCoefficients"
+        ],
+        [
+          "struct",
+          "AudioChannelState"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_0015263c.c",
+          "pattern": "extern void func_00152664(struct AudioChannelState *state, const struct AudioBiquadCoefficients *coefficients);",
+          "type": "function(pointer to (struct AudioChannelState), pointer to (const struct AudioBiquadCoefficients)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001549c8",
+      "canonical": "int func_001549c8(void);",
+      "definition_source": "src/wave15/func_001549c8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00154258.c",
+          "pattern": "extern int func_001549c8(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00155148",
+      "canonical": "void func_00155148(struct AudioVoiceGroup *, int);",
+      "definition_source": "src/wave15/func_00155148.c",
+      "tags": [
+        [
+          "struct",
+          "AudioVoiceGroup"
+        ]
+      ],
+      "headers": [
+        "include/game/sequence.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_001d9530.c",
+          "pattern": "extern void func_00155148(struct AudioVoiceGroup *group, int priority);",
+          "type": "function(pointer to (struct AudioVoiceGroup), int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00156f04",
+      "canonical": "int func_00156f04(void);",
+      "definition_source": "src/wave17/func_00156f04.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0015d548.c",
+          "pattern": "extern int func_00156f04(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00156f50",
+      "canonical": "int func_00156f50(void);",
+      "definition_source": "src/wave17/func_00156f50.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0015d548.c",
+          "pattern": "extern int func_00156f50(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0015cab4",
+      "canonical": "void func_0015cab4(void);",
+      "definition_source": "src/wave17/func_0015cab4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_00156f04.c",
+          "pattern": "extern void func_0015cab4(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0015ea60",
+      "canonical": "void func_0015ea60(struct FlagDisplayObject *, int, int);",
+      "definition_source": "src/wave18/func_0015ea60.c",
+      "tags": [
+        [
+          "struct",
+          "FlagDisplayObject"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001af154.c",
+          "pattern": "extern void func_0015ea60(struct FlagDisplayObject *object, int index, int operation);",
+          "type": "function(pointer to (struct FlagDisplayObject), int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0015eb90",
+      "canonical": "int func_0015eb90(struct Component0015eb90 *);",
+      "definition_source": "src/wave17/func_0015eb90.c",
+      "tags": [
+        [
+          "struct",
+          "Component0015eb90"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_0015eb90(struct Component0015eb90 *component);",
+          "type": "function(pointer to (struct Component0015eb90)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0015f5b0",
+      "canonical": "int func_0015f5b0(const struct CountedResource *);",
+      "definition_source": "src/wave19/func_0015f5b0.c",
+      "tags": [
+        [
+          "struct",
+          "CountedResource"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_001743d8.c",
+          "pattern": "extern int func_0015f5b0(const struct CountedResource *resource);",
+          "type": "function(pointer to (const struct CountedResource)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00166f1c",
+      "canonical": "void func_00166f1c(void *, int, int);",
+      "definition_source": "src/wave4/func_00166f1c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/large/func_00163488.c",
+          "pattern": "extern void func_00166f1c(void *screen, int index, int enabled);",
+          "type": "function(pointer to (void), int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00167284",
+      "canonical": "struct SliderState *func_00167284(void);",
+      "definition_source": "src/wave19/func_00167284.c",
+      "tags": [
+        [
+          "struct",
+          "SliderState"
+        ]
+      ],
+      "headers": [
+        "include/game/controller_transitions.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave19/func_001e74b8.c",
+          "pattern": "extern struct SliderState *func_00167284(void);",
+          "type": "function(void) -> pointer to (struct SliderState)"
+        }
+      ]
+    },
+    {
+      "name": "func_00169878",
+      "canonical": "int func_00169878(struct PackedRecordSet *, int);",
+      "definition_source": "src/wave19/func_00169878.c",
+      "tags": [
+        [
+          "struct",
+          "PackedRecordSet"
+        ]
+      ],
+      "headers": [
+        "include/game/packed_records.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave19/func_0017749c.c",
+          "pattern": "extern int func_00169878(struct PackedRecordSet *list, int value);",
+          "type": "function(pointer to (struct PackedRecordSet), int) -> int"
+        },
+        {
+          "source": "src/wave19/func_001dcecc.c",
+          "pattern": "extern int func_00169878(struct PackedRecordSet *list, int value);",
+          "type": "function(pointer to (struct PackedRecordSet), int) -> int"
+        },
+        {
+          "source": "src/wave19/func_001dcf0c.c",
+          "pattern": "extern int func_00169878(struct PackedRecordSet *list, int value);",
+          "type": "function(pointer to (struct PackedRecordSet), int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00169974",
+      "canonical": "int func_00169974(void);",
+      "definition_source": "src/wave18/func_00169974.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_00171e30.c",
+          "pattern": "extern int func_00169974(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00169b58",
+      "canonical": "void func_00169b58(void);",
+      "definition_source": "src/wave16/func_00169b58.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave5/func_00172d48.c",
+          "pattern": "extern void func_00169b58(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016d000",
+      "canonical": "int func_0016d000(int);",
+      "definition_source": "src/wave18/func_0016d000.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern int func_0016d000(int index);",
+          "type": "function(int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0016d310",
+      "canonical": "void func_0016d310(struct NotificationController *);",
+      "definition_source": "src/wave18/func_0016d310.c",
+      "tags": [
+        [
+          "struct",
+          "NotificationController"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_0016d310(struct NotificationController *controller);",
+          "type": "function(pointer to (struct NotificationController)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016dc50",
+      "canonical": "int func_0016dc50(struct CharacterPanel *, int);",
+      "definition_source": "src/wave10/func_0016dc50.c",
+      "tags": [
+        [
+          "struct",
+          "CharacterPanel"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_0016d600.c",
+          "pattern": "extern int func_0016dc50(struct CharacterPanel *controller, int index);",
+          "type": "function(pointer to (struct CharacterPanel), int) -> int"
+        },
+        {
+          "source": "src/wave19/func_0016dae8.c",
+          "pattern": "extern int func_0016dc50(struct CharacterPanel *controller, int index);",
+          "type": "function(pointer to (struct CharacterPanel), int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0016ec28",
+      "canonical": "void func_0016ec28(struct MotionState *, int);",
+      "definition_source": "src/wave11/func_0016ec28.c",
+      "tags": [
+        [
+          "struct",
+          "MotionState"
+        ]
+      ],
+      "headers": [
+        "include/game/runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0016cf80.c",
+          "pattern": "extern void func_0016ec28(struct MotionState *state, int index);",
+          "type": "function(pointer to (struct MotionState), int) -> void"
+        },
+        {
+          "source": "src/wave16/func_001e96d4.c",
+          "pattern": "extern void func_0016ec28(struct MotionState *state, int index);",
+          "type": "function(pointer to (struct MotionState), int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016ec6c",
+      "canonical": "void func_0016ec6c(struct MotionState *, int);",
+      "definition_source": "src/wave11/func_0016ec6c.c",
+      "tags": [
+        [
+          "struct",
+          "MotionState"
+        ]
+      ],
+      "headers": [
+        "include/game/runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0016cf80.c",
+          "pattern": "extern void func_0016ec6c(struct MotionState *state, int loop);",
+          "type": "function(pointer to (struct MotionState), int) -> void"
+        },
+        {
+          "source": "src/wave16/func_001e96d4.c",
+          "pattern": "extern void func_0016ec6c(struct MotionState *state, int loop);",
+          "type": "function(pointer to (struct MotionState), int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016ee38",
+      "canonical": "void func_0016ee38(struct MotionState *);",
+      "definition_source": "src/wave6/func_0016ee38.c",
+      "tags": [
+        [
+          "struct",
+          "MotionState"
+        ]
+      ],
+      "headers": [
+        "include/game/runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0016cf80.c",
+          "pattern": "extern void func_0016ee38(struct MotionState *state);",
+          "type": "function(pointer to (struct MotionState)) -> void"
+        },
+        {
+          "source": "src/wave16/func_001e96d4.c",
+          "pattern": "extern void func_0016ee38(struct MotionState *state);",
+          "type": "function(pointer to (struct MotionState)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016f024",
+      "canonical": "void func_0016f024(struct MotionState *);",
+      "definition_source": "src/wave6/func_0016f024.c",
+      "tags": [
+        [
+          "struct",
+          "MotionState"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_0016f024(struct MotionState *state);",
+          "type": "function(pointer to (struct MotionState)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016f55c",
+      "canonical": "void func_0016f55c(int, int, unsigned int, unsigned int, unsigned int, float, float);",
+      "definition_source": "src/wave18/func_0016f55c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_0016f55c(int group, int index, unsigned value, unsigned count, unsigned flags, float x, float y);",
+          "type": "function(int, int, unsigned int, unsigned int, unsigned int, float, float) -> void"
+        },
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_0016f55c(int group, int index, unsigned value, unsigned count, unsigned flags, float x, float y);",
+          "type": "function(int, int, unsigned int, unsigned int, unsigned int, float, float) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016fa18",
+      "canonical": "void func_0016fa18(int);",
+      "definition_source": "src/wave17/func_0016fa18.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave10/func_001dd6c8.c",
+          "pattern": "extern void func_0016fa18(int enabled);",
+          "type": "function(int) -> void"
+        },
+        {
+          "source": "src/wave10/func_001b06a4.c",
+          "pattern": "extern void func_0016fa18(int enabled);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0016fa38",
+      "canonical": "void func_0016fa38(int);",
+      "definition_source": "src/wave17/func_0016fa38.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave10/func_001b06a4.c",
+          "pattern": "extern void func_0016fa38(int enabled);",
+          "type": "function(int) -> void"
+        },
+        {
+          "source": "src/wave10/func_001dd6c8.c",
+          "pattern": "extern void func_0016fa38(int enabled);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00174430",
+      "canonical": "int func_00174430(void);",
+      "definition_source": "src/wave16/func_00174430.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/large/func_00163488.c",
+          "pattern": "extern int func_00174430(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00174444",
+      "canonical": "int func_00174444(void);",
+      "definition_source": "src/wave15/func_00174444.c",
+      "tags": [],
+      "headers": [
+        "include/game/selection.h"
+      ],
+      "sites": [
+        {
+          "source": "src/large/func_00163488.c",
+          "pattern": "extern int func_00174444(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave15/func_00172ea0.c",
+          "pattern": "extern int func_00174444(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00174470",
+      "canonical": "int func_00174470(void);",
+      "definition_source": "src/wave15/func_00174470.c",
+      "tags": [],
+      "headers": [
+        "include/game/selection.h"
+      ],
+      "sites": [
+        {
+          "source": "src/large/func_00163488.c",
+          "pattern": "extern int func_00174470(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00174480",
+      "canonical": "void func_00174480(void *);",
+      "definition_source": "src/wave2/func_00174480.c",
+      "tags": [],
+      "headers": [
+        "include/game/scene_lifecycle.h",
+        "include/game/text_writer.h"
+      ],
+      "sites": [
+        {
+          "source": "src/large/func_00176e24.c",
+          "pattern": "extern void func_00174480(void *object);",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00176dc8",
+      "canonical": "void func_00176dc8(int);",
+      "definition_source": "src/wave17/func_00176dc8.c",
+      "tags": [],
+      "headers": [
+        "include/game/scene_lifecycle.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_00176dc8(int phase);",
+          "type": "function(int) -> void"
+        },
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_00176dc8(int phase);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00176df4",
+      "canonical": "void func_00176df4(void);",
+      "definition_source": "src/wave11/func_00176df4.c",
+      "tags": [],
+      "headers": [
+        "include/game/scene_lifecycle.h",
+        "include/game/screen.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_00176df4(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_00176df4(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00177084",
+      "canonical": "void func_00177084(void);",
+      "definition_source": "src/wave11/func_00177084.c",
+      "tags": [],
+      "headers": [
+        "include/game/scene_lifecycle.h",
+        "include/game/screen.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_00177084(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_00177084(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00177198",
+      "canonical": "void func_00177198(struct MessageLayout *, const struct W11TextResource *, int);",
+      "definition_source": "src/wave11/func_00177198.c",
+      "tags": [
+        [
+          "struct",
+          "MessageLayout"
+        ],
+        [
+          "struct",
+          "W11TextResource"
+        ]
+      ],
+      "headers": [
+        "include/game/messages.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0016cb00.c",
+          "pattern": "extern void func_00177198(struct MessageLayout *layout, const struct W11TextResource *archive, int index);",
+          "type": "function(pointer to (struct MessageLayout), pointer to (const struct W11TextResource), int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00178e9c",
+      "canonical": "int func_00178e9c(struct NavigationState *, int, int);",
+      "definition_source": "src/wave2/func_00178e9c.c",
+      "tags": [
+        [
+          "struct",
+          "NavigationState"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave20/func_001601bc.c",
+          "pattern": "extern int func_00178e9c(struct NavigationState *state, int step, int select_item);",
+          "type": "function(pointer to (struct NavigationState), int, int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00179ed4",
+      "canonical": "int func_00179ed4(struct CharacterPanel *, int);",
+      "definition_source": "src/wave10/func_00179ed4.c",
+      "tags": [
+        [
+          "struct",
+          "CharacterPanel"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_0016d600.c",
+          "pattern": "extern int func_00179ed4(struct CharacterPanel *screen, int compact);",
+          "type": "function(pointer to (struct CharacterPanel), int) -> int"
+        },
+        {
+          "source": "src/wave19/func_0016dae8.c",
+          "pattern": "extern int func_00179ed4(struct CharacterPanel *screen, int compact);",
+          "type": "function(pointer to (struct CharacterPanel), int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0017a210",
+      "canonical": "int func_0017a210(const struct AnimationState *);",
+      "definition_source": "src/wave2/func_0017a210.c",
+      "tags": [
+        [
+          "struct",
+          "AnimationState"
+        ]
+      ],
+      "headers": [
+        "include/game/controller.h",
+        "include/game/w11_control.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0016cb00.c",
+          "pattern": "extern int func_0017a210(const struct AnimationState *state);",
+          "type": "function(pointer to (const struct AnimationState)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0017a424",
+      "canonical": "float func_0017a424(const struct MessageLayout *);",
+      "definition_source": "src/wave10/func_0017a424.c",
+      "tags": [
+        [
+          "struct",
+          "MessageLayout"
+        ]
+      ],
+      "headers": [
+        "include/game/messages.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_0016cb00.c",
+          "pattern": "extern float func_0017a424(const struct MessageLayout *layout);",
+          "type": "function(pointer to (const struct MessageLayout)) -> float"
+        }
+      ]
+    },
+    {
+      "name": "func_0017a7e4",
+      "canonical": "void func_0017a7e4(const struct NameTable *const *, int, int, unsigned int);",
+      "definition_source": "src/wave17/func_0017a7e4.c",
+      "tags": [
+        [
+          "struct",
+          "NameTable"
+        ]
+      ],
+      "headers": [
+        "include/game/command_state.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave17/func_001b6d2c.c",
+          "pattern": "extern void func_0017a7e4(const struct NameTable * const *items, int count, int mode, unsigned int flags);",
+          "type": "function(pointer to (const pointer to (const struct NameTable)), int, int, unsigned int) -> void"
+        },
+        {
+          "source": "src/wave17/func_001b7f38.c",
+          "pattern": "extern void func_0017a7e4(const struct NameTable * const *items, int count, int mode, unsigned int flags);",
+          "type": "function(pointer to (const pointer to (const struct NameTable)), int, int, unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0017e8bc",
+      "canonical": "void func_0017e8bc(struct ExtendedWorkspace *);",
+      "definition_source": "src/wave18/func_0017e8bc.c",
+      "tags": [
+        [
+          "struct",
+          "ExtendedWorkspace"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_0014c930.c",
+          "pattern": "extern void func_0017e8bc(struct ExtendedWorkspace *workspace);",
+          "type": "function(pointer to (struct ExtendedWorkspace)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00180314",
+      "canonical": "void func_00180314(int);",
+      "definition_source": "src/wave18/func_00180314.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_00149a98.c",
+          "pattern": "extern void func_00180314(int index);",
+          "type": "function(int) -> void"
+        },
+        {
+          "source": "src/wave18/func_0016d310.c",
+          "pattern": "extern void func_00180314(int index);",
+          "type": "function(int) -> void"
+        },
+        {
+          "source": "src/large/func_00176e24.c",
+          "pattern": "extern void func_00180314(int slot);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00180344",
+      "canonical": "void func_00180344(void);",
+      "definition_source": "src/wave10/func_00180344.c",
+      "tags": [],
+      "headers": [
+        "include/game/screen.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave20/func_001eb190.c",
+          "pattern": "extern void func_00180344(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave18/func_0016d4f8.c",
+          "pattern": "extern void func_00180344(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00180e14",
+      "canonical": "void func_00180e14(struct ServiceCoordinator *, float);",
+      "definition_source": "src/wave15/func_00180e14.c",
+      "tags": [
+        [
+          "struct",
+          "ServiceCoordinator"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_001487cc.c",
+          "pattern": "extern void func_00180e14(struct ServiceCoordinator *coordinator, float value);",
+          "type": "function(pointer to (struct ServiceCoordinator), float) -> void"
+        },
+        {
+          "source": "src/wave19/func_0014cbf4.c",
+          "pattern": "extern void func_00180e14(struct ServiceCoordinator *coordinator, float value);",
+          "type": "function(pointer to (struct ServiceCoordinator), float) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00181224",
+      "canonical": "struct NotificationPayload *func_00181224(int);",
+      "definition_source": "src/wave18/func_00181224.c",
+      "tags": [
+        [
+          "struct",
+          "NotificationPayload"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001456a4.c",
+          "pattern": "extern struct NotificationPayload *func_00181224(int index);",
+          "type": "function(int) -> pointer to (struct NotificationPayload)"
+        },
+        {
+          "source": "src/wave18/func_00145810.c",
+          "pattern": "extern struct NotificationPayload *func_00181224(int index);",
+          "type": "function(int) -> pointer to (struct NotificationPayload)"
+        }
+      ]
+    },
+    {
+      "name": "func_00181250",
+      "canonical": "void func_00181250(int);",
+      "definition_source": "src/wave8/func_00181250.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001456a4.c",
+          "pattern": "extern void func_00181250(int index);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001819f4",
+      "canonical": "struct NotificationController *func_001819f4(void);",
+      "definition_source": "src/wave18/func_001819f4.c",
+      "tags": [
+        [
+          "struct",
+          "NotificationController"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_0016fca0.c",
+          "pattern": "extern struct NotificationController *func_001819f4(void);",
+          "type": "function(void) -> pointer to (struct NotificationController)"
+        },
+        {
+          "source": "src/wave18/func_001dc0a4.c",
+          "pattern": "extern struct NotificationController *func_001819f4(void);",
+          "type": "function(void) -> pointer to (struct NotificationController)"
+        }
+      ]
+    },
+    {
+      "name": "func_00181b58",
+      "canonical": "void func_00181b58(unsigned short);",
+      "definition_source": "src/wave12/func_00181b58.c",
+      "tags": [],
+      "headers": [
+        "include/game/scene_lifecycle.h",
+        "include/game/selection.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_00181b58(unsigned short state);",
+          "type": "function(unsigned short) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00181dcc",
+      "canonical": "void func_00181dcc(int, int, int);",
+      "definition_source": "src/wave18/func_00181dcc.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_00169974.c",
+          "pattern": "extern void func_00181dcc(int reason, int enabled, int notify);",
+          "type": "function(int, int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00181e44",
+      "canonical": "void func_00181e44(void);",
+      "definition_source": "src/wave15/func_00181e44.c",
+      "tags": [],
+      "headers": [
+        "include/game/controller_transitions.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave4/func_00181e40.c",
+          "pattern": "extern void func_00181e44(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00182204",
+      "canonical": "void func_00182204(void);",
+      "definition_source": "src/wave13/func_00182204.c",
+      "tags": [],
+      "headers": [
+        "include/game/service_runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_0014877c.c",
+          "pattern": "extern void func_00182204(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave15/func_00180c84.c",
+          "pattern": "extern void func_00182204(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave15/func_00180d10.c",
+          "pattern": "extern void func_00182204(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave15/func_00180e14.c",
+          "pattern": "extern void func_00182204(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00182210",
+      "canonical": "void func_00182210(void);",
+      "definition_source": "src/wave13/func_00182210.c",
+      "tags": [],
+      "headers": [
+        "include/game/service_runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00180c84.c",
+          "pattern": "extern void func_00182210(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave15/func_00180d10.c",
+          "pattern": "extern void func_00182210(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave15/func_00180e14.c",
+          "pattern": "extern void func_00182210(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave15/func_0014877c.c",
+          "pattern": "extern void func_00182210(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00182b5c",
+      "canonical": "unsigned int func_00182b5c(unsigned int, unsigned int);",
+      "definition_source": "src/wave4/func_00182b5c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave20/func_001378d8.c",
+          "pattern": "extern unsigned func_00182b5c(unsigned address, unsigned size);",
+          "type": "function(unsigned int, unsigned int) -> unsigned int"
+        }
+      ]
+    },
+    {
+      "name": "func_00182db4",
+      "canonical": "void func_00182db4(unsigned int, unsigned int, int);",
+      "definition_source": "src/wave15/func_00182db4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave20/func_001db434.c",
+          "pattern": "extern void func_00182db4(unsigned target, unsigned parameter, int value);",
+          "type": "function(unsigned int, unsigned int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001840dc",
+      "canonical": "void func_001840dc(struct BinaryResourceReference *);",
+      "definition_source": "src/wave19/func_001840dc.c",
+      "tags": [
+        [
+          "struct",
+          "BinaryResourceReference"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_001c8b1c.c",
+          "pattern": "extern void func_001840dc(struct BinaryResourceReference *reference);",
+          "type": "function(pointer to (struct BinaryResourceReference)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001851f0",
+      "canonical": "struct DetailEntry *func_001851f0(int, int);",
+      "definition_source": "src/wave9/func_0018269c.c",
+      "tags": [
+        [
+          "struct",
+          "DetailEntry"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0019d95c.c",
+          "pattern": "extern struct DetailEntry *func_001851f0(int id, int index);",
+          "type": "function(int, int) -> pointer to (struct DetailEntry)"
+        }
+      ]
+    },
+    {
+      "name": "func_001864cc",
+      "canonical": "void func_001864cc(unsigned char);",
+      "definition_source": "src/wave15/func_001864cc.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_0019eb60.c",
+          "pattern": "extern void func_001864cc(unsigned char suspended);",
+          "type": "function(unsigned char) -> void"
+        },
+        {
+          "source": "src/wave18/func_00181dcc.c",
+          "pattern": "extern void func_001864cc(unsigned char suspended);",
+          "type": "function(unsigned char) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00186598",
+      "canonical": "void func_00186598(void);",
+      "definition_source": "src/wave11/func_00186598.c",
+      "tags": [],
+      "headers": [
+        "include/game/command_state.h",
+        "include/game/playback_screen.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern void func_00186598(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001865ec",
+      "canonical": "void func_001865ec(int, int);",
+      "definition_source": "src/wave17/func_001865ec.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern void func_001865ec(int first, int second);",
+          "type": "function(int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00186944",
+      "canonical": "void func_00186944(int, int);",
+      "definition_source": "src/wave17/func_00186944.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave9/func_0011f234.c",
+          "pattern": "extern void func_00186944(int task, int wait);",
+          "type": "function(int, int) -> void"
+        },
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern void func_00186944(int index, int value);",
+          "type": "function(int, int) -> void"
+        },
+        {
+          "source": "src/wave17/func_0012d328.c",
+          "pattern": "extern void func_00186944(int index, int value);",
+          "type": "function(int, int) -> void"
+        },
+        {
+          "source": "src/wave16/func_00135ae8.c",
+          "pattern": "extern void func_00186944(int task, int wait);",
+          "type": "function(int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001869d0",
+      "canonical": "int func_001869d0(int);",
+      "definition_source": "src/wave16/func_001869d0.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern int func_001869d0(int slot);",
+          "type": "function(int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001869f0",
+      "canonical": "void func_001869f0(void);",
+      "definition_source": "src/wave15/func_001869f0.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_0019eb60.c",
+          "pattern": "extern void func_001869f0(void);",
+          "type": "function(void) -> void"
+        },
+        {
+          "source": "src/wave18/func_00181dcc.c",
+          "pattern": "extern void func_001869f0(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0018f018",
+      "canonical": "int func_0018f018(void);",
+      "definition_source": "src/wave13/func_0018f018.c",
+      "tags": [],
+      "headers": [
+        "include/game/service_runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00180c84.c",
+          "pattern": "extern int func_0018f018(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave15/func_00180d10.c",
+          "pattern": "extern int func_0018f018(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave15/func_00180e14.c",
+          "pattern": "extern int func_0018f018(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave15/func_0014877c.c",
+          "pattern": "extern int func_0018f018(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0018ffac",
+      "canonical": "int func_0018ffac(int);",
+      "definition_source": "src/wave19/func_0018ffac.c",
+      "tags": [],
+      "headers": [
+        "include/game/random.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave19/func_00173350.c",
+          "pattern": "extern int func_0018ffac(int limit);",
+          "type": "function(int) -> int"
+        },
+        {
+          "source": "src/wave19/func_001e74b8.c",
+          "pattern": "extern int func_0018ffac(int limit);",
+          "type": "function(int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001906a8",
+      "canonical": "void func_001906a8(void (*)(void));",
+      "definition_source": "src/wave14/func_001906a8.c",
+      "tags": [],
+      "headers": [
+        "include/game/startup.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_00195a50.c",
+          "pattern": "extern void func_001906a8(void (*callback)(void));",
+          "type": "function(pointer to (function(void) -> void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001923c4",
+      "canonical": "unsigned char func_001923c4(void);",
+      "definition_source": "src/wave15/func_001923c4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00115138.c",
+          "pattern": "extern unsigned char func_001923c4(void);",
+          "type": "function(void) -> unsigned char"
+        }
+      ]
+    },
+    {
+      "name": "func_001923d4",
+      "canonical": "void func_001923d4(unsigned char);",
+      "definition_source": "src/wave14/func_001923d4.c",
+      "tags": [],
+      "headers": [
+        "include/game/applet.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_0018ee88.c",
+          "pattern": "extern void func_001923d4(unsigned mode);",
+          "type": "function(unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00193a6c",
+      "canonical": "void func_00193a6c(struct ManagedExpHeap *, void *);",
+      "definition_source": "src/wave14/func_00193a6c.c",
+      "tags": [
+        [
+          "struct",
+          "ManagedExpHeap"
+        ]
+      ],
+      "headers": [
+        "include/game/exp_heap.h"
+      ],
+      "sites": []
+    },
+    {
+      "name": "func_00193af4",
+      "canonical": "void func_00193af4(unsigned int);",
+      "definition_source": "src/wave18/func_00193af4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001175f4.c",
+          "pattern": "extern void func_00193af4(unsigned index);",
+          "type": "function(unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_00195e84",
+      "canonical": "int func_00195e84(void);",
+      "definition_source": "src/wave1/func_00195e84.c",
+      "tags": [],
+      "headers": [
+        "include/game/service_state.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern int func_00195e84(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00195e94",
+      "canonical": "int func_00195e94(void);",
+      "definition_source": "src/wave1/func_00195e94.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00106a50.c",
+          "pattern": "extern int func_00195e94(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_00195ea4",
+      "canonical": "void func_00195ea4(struct HandleManager *);",
+      "definition_source": "src/wave15/func_00195ea4.c",
+      "tags": [
+        [
+          "struct",
+          "HandleManager"
+        ]
+      ],
+      "headers": [
+        "include/game/service_runtime.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_00142764.c",
+          "pattern": "extern void func_00195ea4(struct HandleManager *state);",
+          "type": "function(pointer to (struct HandleManager)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0019b54c",
+      "canonical": "int func_0019b54c(int);",
+      "definition_source": "src/wave9/func_0019b54c.c",
+      "tags": [],
+      "headers": [
+        "include/game/scheduler.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern int func_0019b54c(int index);",
+          "type": "function(int) -> int"
+        },
+        {
+          "source": "src/wave17/func_0012d328.c",
+          "pattern": "extern int func_0019b54c(int index);",
+          "type": "function(int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0019b564",
+      "canonical": "int func_0019b564(void);",
+      "definition_source": "src/wave9/func_0019b564.c",
+      "tags": [],
+      "headers": [
+        "include/game/scheduler.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern int func_0019b564(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave17/func_0012d328.c",
+          "pattern": "extern int func_0019b564(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0019b574",
+      "canonical": "void func_0019b574(unsigned int, unsigned int *);",
+      "definition_source": "src/wave18/func_0019b574.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_0010b56c.c",
+          "pattern": "extern void func_0019b574(unsigned parameter, unsigned *value);",
+          "type": "function(unsigned int, pointer to (unsigned int)) -> void"
+        },
+        {
+          "source": "src/wave3/func_00196a94.c",
+          "pattern": "extern void func_0019b574(unsigned parameter, unsigned *value);",
+          "type": "function(unsigned int, pointer to (unsigned int)) -> void"
+        },
+        {
+          "source": "src/wave18/func_00107358.c",
+          "pattern": "extern void func_0019b574(unsigned parameter, unsigned *value);",
+          "type": "function(unsigned int, pointer to (unsigned int)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0019ceb4",
+      "canonical": "int func_0019ceb4(void);",
+      "definition_source": "src/wave2/func_0019ceb4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_0019b988.c",
+          "pattern": "extern int func_0019ceb4(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0019d95c",
+      "canonical": "void func_0019d95c(unsigned int, int, int);",
+      "definition_source": "src/wave17/func_0019d95c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_00135230.c",
+          "pattern": "extern void func_0019d95c(uintptr_t resource, int index, int force);",
+          "type": "function(unsigned int, int, int) -> void"
+        },
+        {
+          "source": "src/wave17/func_00172e60.c",
+          "pattern": "extern void func_0019d95c(uintptr_t resource, int index, int force);",
+          "type": "function(unsigned int, int, int) -> void"
+        },
+        {
+          "source": "src/wave17/func_00177160.c",
+          "pattern": "extern void func_0019d95c(uintptr_t resource, int index, int force);",
+          "type": "function(unsigned int, int, int) -> void"
+        },
+        {
+          "source": "src/wave17/func_0017731c.c",
+          "pattern": "extern void func_0019d95c(uintptr_t resource, int index, int force);",
+          "type": "function(unsigned int, int, int) -> void"
+        },
+        {
+          "source": "src/wave17/func_001e3548.c",
+          "pattern": "extern void func_0019d95c(uintptr_t resource, int index, int force);",
+          "type": "function(unsigned int, int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0019eb24",
+      "canonical": "void func_0019eb24(void);",
+      "definition_source": "src/wave11/func_0019eb24.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_00169974.c",
+          "pattern": "extern void func_0019eb24(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0019eb4c",
+      "canonical": "void func_0019eb4c(void);",
+      "definition_source": "src/wave16/func_0019eb4c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave4/func_0019eb48.c",
+          "pattern": "extern void func_0019eb4c(void);",
+          "type": "function(void) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0019eb60",
+      "canonical": "void func_0019eb60(int, int);",
+      "definition_source": "src/wave15/func_0019eb60.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave15/func_00106190.c",
+          "pattern": "extern void func_0019eb60(int value, int enabled);",
+          "type": "function(int, int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_0019efd0",
+      "canonical": "int func_0019efd0(void);",
+      "definition_source": "src/retries/func_0019efd0.c",
+      "tags": [],
+      "headers": [
+        "include/game/controller_transitions.h",
+        "include/game/screen.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave17/func_0011f3a8.c",
+          "pattern": "extern int func_0019efd0(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave9/func_0011f234.c",
+          "pattern": "extern int func_0019efd0(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave9/func_001e358c.c",
+          "pattern": "extern int func_0019efd0(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_0019f2e8",
+      "canonical": "int func_0019f2e8(void);",
+      "definition_source": "src/wave16/func_0019f2e8.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave16/func_00135ae8.c",
+          "pattern": "extern int func_0019f2e8(void);",
+          "type": "function(void) -> int"
+        },
+        {
+          "source": "src/wave4/func_0019f2e4.c",
+          "pattern": "extern int func_0019f2e8(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001acc18",
+      "canonical": "void func_001acc18(void *);",
+      "definition_source": "src/wave3/func_001acc18.c",
+      "tags": [],
+      "headers": [
+        "include/game/controller.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern void func_001acc18(void *object);",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001acc1c",
+      "canonical": "int func_001acc1c(struct Component001acc1c *);",
+      "definition_source": "src/wave17/func_001acc1c.c",
+      "tags": [
+        [
+          "struct",
+          "Component001acc1c"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001acc1c(struct Component001acc1c *component);",
+          "type": "function(pointer to (struct Component001acc1c)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001acebc",
+      "canonical": "int func_001acebc(struct Component001acebc *);",
+      "definition_source": "src/wave17/func_001acebc.c",
+      "tags": [
+        [
+          "struct",
+          "Component001acebc"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001acebc(struct Component001acebc *component);",
+          "type": "function(pointer to (struct Component001acebc)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001ad134",
+      "canonical": "int func_001ad134(struct Component001ad134 *);",
+      "definition_source": "src/wave17/func_001ad134.c",
+      "tags": [
+        [
+          "struct",
+          "Component001ad134"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001ad134(struct Component001ad134 *component);",
+          "type": "function(pointer to (struct Component001ad134)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001adff8",
+      "canonical": "void func_001adff8(struct Component001adff8 *);",
+      "definition_source": "src/wave17/func_001adff8.c",
+      "tags": [
+        [
+          "struct",
+          "Component001adff8"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern void func_001adff8(struct Component001adff8 *component);",
+          "type": "function(pointer to (struct Component001adff8)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001af244",
+      "canonical": "int func_001af244(struct Component001af244 *);",
+      "definition_source": "src/wave17/func_001af244.c",
+      "tags": [
+        [
+          "struct",
+          "Component001af244"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001af244(struct Component001af244 *component);",
+          "type": "function(pointer to (struct Component001af244)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001b4718",
+      "canonical": "int func_001b4718(struct Component001b4718 *);",
+      "definition_source": "src/wave17/func_001b4718.c",
+      "tags": [
+        [
+          "struct",
+          "Component001b4718"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001b4718(struct Component001b4718 *component);",
+          "type": "function(pointer to (struct Component001b4718)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001b6b88",
+      "canonical": "int func_001b6b88(struct Component001b6b88 *);",
+      "definition_source": "src/wave17/func_001b6b88.c",
+      "tags": [
+        [
+          "struct",
+          "Component001b6b88"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001b6b88(struct Component001b6b88 *component);",
+          "type": "function(pointer to (struct Component001b6b88)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001b7c88",
+      "canonical": "int func_001b7c88(struct Component001b7c88 *);",
+      "definition_source": "src/wave17/func_001b7c88.c",
+      "tags": [
+        [
+          "struct",
+          "Component001b7c88"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001b7c88(struct Component001b7c88 *component);",
+          "type": "function(pointer to (struct Component001b7c88)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001c0e44",
+      "canonical": "void func_001c0e44(void *);",
+      "definition_source": "src/wave5/func_001c0e44.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ef960.c",
+          "pattern": "extern void func_001c0e44(void *element);",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001c31c0",
+      "canonical": "void func_001c31c0(struct AssetSlot **);",
+      "definition_source": "src/wave18/func_001c31c0.c",
+      "tags": [
+        [
+          "struct",
+          "AssetSlot"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_001c31c0(struct AssetSlot **slots);",
+          "type": "function(pointer to (pointer to (struct AssetSlot))) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001c3618",
+      "canonical": "void func_001c3618(struct AssetSlot **);",
+      "definition_source": "src/wave18/func_001c3618.c",
+      "tags": [
+        [
+          "struct",
+          "AssetSlot"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_001c3618(struct AssetSlot **slots);",
+          "type": "function(pointer to (pointer to (struct AssetSlot))) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001c3854",
+      "canonical": "void func_001c3854(struct AssetSlot **);",
+      "definition_source": "src/wave18/func_001c3854.c",
+      "tags": [
+        [
+          "struct",
+          "AssetSlot"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_001c3854(struct AssetSlot **slots);",
+          "type": "function(pointer to (pointer to (struct AssetSlot))) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001c42e8",
+      "canonical": "void func_001c42e8(struct AssetSlot **);",
+      "definition_source": "src/wave18/func_001c42e8.c",
+      "tags": [
+        [
+          "struct",
+          "AssetSlot"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001be180.c",
+          "pattern": "extern void func_001c42e8(struct AssetSlot **slots);",
+          "type": "function(pointer to (pointer to (struct AssetSlot))) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001c526c",
+      "canonical": "struct KernelHandleOwner *func_001c526c(struct KernelHandleOwner *);",
+      "definition_source": "src/sdk/func_001c526c.c",
+      "tags": [
+        [
+          "struct",
+          "KernelHandleOwner"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_00156dcc.c",
+          "pattern": "extern struct KernelHandleOwner *func_001c526c(struct KernelHandleOwner *object);",
+          "type": "function(pointer to (struct KernelHandleOwner)) -> pointer to (struct KernelHandleOwner)"
+        }
+      ]
+    },
+    {
+      "name": "func_001c55dc",
+      "canonical": "int func_001c55dc(int);",
+      "definition_source": "src/wave19/func_001c55dc.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave19/func_0015e290.c",
+          "pattern": "extern int func_001c55dc(int year);",
+          "type": "function(int) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001c7a1c",
+      "canonical": "int func_001c7a1c(void);",
+      "definition_source": "src/wave8/func_001c7a1c.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_00156f04.c",
+          "pattern": "extern int func_001c7a1c(void);",
+          "type": "function(void) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001d98f4",
+      "canonical": "void func_001d98f4(struct AudioModulationState *);",
+      "definition_source": "src/wave18/func_001d98f4.c",
+      "tags": [
+        [
+          "struct",
+          "AudioModulationState"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001d94a0.c",
+          "pattern": "extern void func_001d98f4(struct AudioModulationState *state);",
+          "type": "function(pointer to (struct AudioModulationState)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001dc064",
+      "canonical": "void func_001dc064(int);",
+      "definition_source": "src/wave17/func_001dc064.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave10/func_001b06a4.c",
+          "pattern": "extern void func_001dc064(int enabled);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001dc084",
+      "canonical": "void func_001dc084(int);",
+      "definition_source": "src/wave17/func_001dc084.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave10/func_001b06a4.c",
+          "pattern": "extern void func_001dc084(int enabled);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001dc0a4",
+      "canonical": "void func_001dc0a4(int);",
+      "definition_source": "src/wave18/func_001dc0a4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_001ba280.c",
+          "pattern": "extern void func_001dc0a4(int index);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001dc3a4",
+      "canonical": "void func_001dc3a4(int);",
+      "definition_source": "src/wave17/func_001dc3a4.c",
+      "tags": [],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave10/func_001b06a4.c",
+          "pattern": "extern void func_001dc3a4(int enabled);",
+          "type": "function(int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001e358c",
+      "canonical": "void func_001e358c(struct DeferredRequest *);",
+      "definition_source": "src/wave9/func_001e358c.c",
+      "tags": [
+        [
+          "struct",
+          "DeferredRequest"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern void func_001e358c(struct DeferredRequest *request);",
+          "type": "function(pointer to (struct DeferredRequest)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001eaaac",
+      "canonical": "int func_001eaaac(struct Component001eaaac *);",
+      "definition_source": "src/wave17/func_001eaaac.c",
+      "tags": [
+        [
+          "struct",
+          "Component001eaaac"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001eaaac(struct Component001eaaac *component);",
+          "type": "function(pointer to (struct Component001eaaac)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001eaf70",
+      "canonical": "int func_001eaf70(struct Component001eaf70 *);",
+      "definition_source": "src/wave17/func_001eaf70.c",
+      "tags": [
+        [
+          "struct",
+          "Component001eaf70"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave17/func_001eb7a4.c",
+          "pattern": "extern int func_001eaf70(struct Component001eaf70 *component);",
+          "type": "function(pointer to (struct Component001eaf70)) -> int"
+        }
+      ]
+    },
+    {
+      "name": "func_001eafa0",
+      "canonical": "void func_001eafa0(void *, int, const unsigned short *);",
+      "definition_source": "src/wave4/func_001eafa0.c",
+      "tags": [],
+      "headers": [
+        "include/game/screen.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave15/func_0016c9f0.c",
+          "pattern": "extern void func_001eafa0(void *screen, int index, const unsigned short *text);",
+          "type": "function(pointer to (void), int, pointer to (const unsigned short)) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001eb1cc",
+      "canonical": "void func_001eb1cc(struct NotificationController *, unsigned int);",
+      "definition_source": "src/wave18/func_001eb1cc.c",
+      "tags": [
+        [
+          "struct",
+          "NotificationController"
+        ]
+      ],
+      "headers": [],
+      "sites": [
+        {
+          "source": "src/wave18/func_0016fca0.c",
+          "pattern": "extern void func_001eb1cc(struct NotificationController *controller, unsigned index);",
+          "type": "function(pointer to (struct NotificationController), unsigned int) -> void"
+        },
+        {
+          "source": "src/wave18/func_001dc0a4.c",
+          "pattern": "extern void func_001eb1cc(struct NotificationController *controller, unsigned index);",
+          "type": "function(pointer to (struct NotificationController), unsigned int) -> void"
+        }
+      ]
+    },
+    {
+      "name": "func_001f2b98",
+      "canonical": "unsigned int func_001f2b98(struct ArchiveIndex *);",
+      "definition_source": "src/wave12/func_001f2b98.c",
+      "tags": [
+        [
+          "struct",
+          "ArchiveIndex"
+        ]
+      ],
+      "headers": [
+        "include/game/item_text.h"
+      ],
+      "sites": [
+        {
+          "source": "src/wave8/func_001f2b90.c",
+          "pattern": "extern unsigned func_001f2b98(struct ArchiveIndex *index);",
+          "type": "function(pointer to (struct ArchiveIndex)) -> unsigned int"
+        }
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "name": "bss_0029f528",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "bss_0029f534",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00110eac",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00122a30",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0012d0b8",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0012fa24",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00137c5c",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0014b2b0",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0014df0c",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0014dfa8",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00152610",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0015e2b8",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0015e5d4",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0015eac8",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00166eb0",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0016d4f8",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0016d554",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0016dbc4",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0016fca0",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_001701b4",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00170c00",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_001741f8",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00176e24",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_0017a938",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00183208",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00190688",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_00195874",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_001d4a48",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_001d4aac",
+      "reason": "requires contract resolution before declaration migration"
+    },
+    {
+      "name": "func_001e3548",
+      "reason": "requires contract resolution before declaration migration"
+    }
+  ]
+}

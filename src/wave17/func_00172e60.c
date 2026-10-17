@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/selection.h"
 
 struct W17SelectionResource {
@@ -6,7 +7,7 @@ struct W17SelectionResource {
     unsigned int count;
 };
 
-extern void func_0019d95c(uintptr_t resource, int index, int force);
+
 
 void func_00172e60(struct W17SelectionResource *state)
 {

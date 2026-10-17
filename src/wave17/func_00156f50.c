@@ -1,12 +1,5 @@
-struct HwrState {
-    unsigned short state;
-    unsigned short mode;
-    unsigned short previous_mode;
-    unsigned char reserved06[0xc];
-    unsigned short option;
-};
-
-extern struct HwrState bss_004bfce0;
+#include "game/functions.h"
+#include "game/hwr_runtime.h"
 
 int func_00156f50(void)
 {

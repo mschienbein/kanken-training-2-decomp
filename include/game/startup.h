@@ -40,6 +40,8 @@ struct StartupResources {
     struct StartupCommandPool *commands;
 };
 
+struct RestorableState { unsigned current, saved; };
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -49,6 +51,7 @@ extern void func_001070e8(void);
 extern void func_00107140(void);
 extern void func_00107a88(void (*callback)(void));
 extern struct ApplicationControl bss_0049629c;
+extern struct RestorableState data_0023fdc8;
 extern void func_001906b8(int suspended);
 extern void func_001906a8(void (*callback)(void));
 extern void func_00190688(int index, void (*callback)(void));

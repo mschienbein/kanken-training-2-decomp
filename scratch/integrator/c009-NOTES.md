@@ -1,6 +1,59 @@
 # C009 recovered integration handoff
 
-## Bound state
+## Current continuation handoff — not review-ready
+
+The user requested wrap-up during remediation. Preserve this branch; do not
+prepare/finalize or treat any scope count as accepted/MATCH credit.
+
+* Resumed `1cc9f60`; merged adopted main `959311b` and c008-r2 `38b4c01`
+  (merge `9218542`). The current dry ledger is successor-based, not failed c008.
+* Current candidate scope: **676 units/functions / 54,648 target B**:
+  game 614/48,964 B; middleware 37/4,000 B; sdk 25/1,684 B.
+  Dry ledger: **2,203 units / 2,277 functions**. Source delta against c008-r2:
+  **102 predecessor units / 106 functions**, all listed in HANDOFF.
+* The final compile-only co-inclusion of **166 game headers exits 0**
+  (`c009/cpp-compat-r5.json`, input `cpp-compat-r3.cpp`). Native-unit, actual C
+  signature, indirect-consumer and matching sweeps have not discharged those
+  contracts; this is not a whole-ledger G3 or matching pass.
+* The intermediate G3 remediation run exits 1 (48 disagreements / 28 policy /
+  500 unchecked). It ran while edits continued and before the two new deferrals,
+  so those are historical observed counts, not a current final audit.
+* Additional evidenced deferrals: `0010cc94` (accepted native ResFontBase
+  constructor versus EntryObject shadow) and `00203810` (concrete scene owner/
+  initialization/destruction contracts; a common dispatch view is insufficient).
+  Their sources/contradictions are in `contract-deferrals.json`; the shared
+  shadow declarations were removed, not aliased. Preserve the original three
+  approved c009 deferrals and six c008 deferrals, plus c008-r2's `0016b6a4`.
+* All sixteen original uncollected new-scope MATCH addresses remain open in
+  `UNRESOLVED-SCOPE.json`. None was silently dropped or newly collected here.
+* New information at wrap-up: FixC008R3 owns `c008-r3` from current main
+  `f3ae330`, correcting slot 11 context and slot 15 context/saved arguments/
+  result with an indirect-consumer audit. c008-r2 remains unfinalized.
+  Reconcile that successor before claiming a review-ready predecessor base;
+  these fixes were not duplicated in c009.
+
+Canonicalization includes shared NameTable arrays, address-rooted global fields,
+canonical Heap and AudioTaskManager clients, ResourceEvent's display prefix,
+the shared ScreenResourceManager view, and raw IPC scalar/result/handle contracts.
+The source changes still need final byte matches. Partial views do not establish
+every original complete class or allocation size. The array-constructor callback
+now carries the shared ARM EABI pointer-result contract and still needs its
+revised accepted-row byte/review closure. No new names-overlay alias was adopted
+during this continuation; inherited proposals remain subject to final review.
+
+The c008-r2 reusable scripts are at `../c008-r2/scratch/integrator/c008-r2/`:
+`probe_contracts.py` exposes `compile_probe(source, profile, directory)` and
+`probe_signatures.py` derives C signatures from compiler-preprocessed ASTs.
+The c009-wide reuse/sweep has **not run**. `c009/declaration-plan.json` records
+the 242 shared-prototype removals; `c009/sweep.py` is the sequential match driver.
+HANDOFF now binds **2,371 live input hashes** and preserves the initial record
+separately as `HANDOFF-from-1cc9f60.json`.
+
+Final MATCH sweep, stable-ledger G3 exit 0, complete argcheck adjudication and all
+seven pre-review steps remain unexercised. No full build/suite, prepare/finalize,
+history edit or push was performed.
+
+## Original preserved state at 1cc9f60
 
 Worktree: `/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009`.
 Branch `c009-integrate`, original base `11e1992`. This is preserved incomplete work,
@@ -8,7 +61,7 @@ not a ready checkpoint. No reset, provider switch, replacement author search, fu
 build, test suite, prepare or finalize was performed. Existing `inputs/`,
 `initial-*.json`, `filter-skipped.json` and `filter.py` remain in `c009/`.
 
-`c009/HANDOFF.json` binds 2,374 current source/header/configuration hashes and contains
+The original `HANDOFF-from-1cc9f60.json` binds 2,374 source/header/configuration hashes and contains
 all 37 revised predecessor units. It records 678 new units/functions and 55,272
 recovered target bytes: game 616/49,588 B; middleware 37/4,000 B; sdk 25/1,684 B.
 These are unaccepted scope totals, not an edited-tree final-match claim.
@@ -20,11 +73,27 @@ continue from the current canonical sources and the saved inputs/receipts.
 
 Merged current `main` (959311b) into `c009-integrate` without restarting the
 preserved source integration. The catalogue recheck intersection is exactly
-`00203810` and `00214580`; `match.py --show 0` reports `00214580` MATCH, while
-`00203810` is blocked by existing incompatible SceneLifecycle declarations
-(not a byte comparison failure). Exact diagnostics are retained in
-`c009/catalogue-rechecks.json`; this row must be rerun after the header repair.
-FixC008R2 has been asked for its successor commit and reusable linkage probe.
+`00203810` and `00214580`; `match.py --show 0` reports `00214580` MATCH.
+`00203810` exited 2 on incompatible scene declarations, not a byte comparison
+failure. It was subsequently withdrawn on concrete owner-contract evidence;
+reinstatement needs real per-owner initialization contracts and the changed
+catalogue extent match. Diagnostics remain in `c009/catalogue-rechecks.json`.
+Merged `c008-r2` commit `38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac` as
+`9218542`. The dry ledger is now based on that successor's 1,601 functions;
+`0016b6a4` stays deferred. Conflicts retained r2's ManagedExpHeap containment,
+DisplayPane material-bearing view, mutex/channel ownership, and InputSessionContext
+resetters; C009's extra callback/gain fields and ItemPageSet metric fields were
+retained without reintroducing the old owner/value declarations.
+
+Declaration migration has removed 242 source-local shared prototypes from 116
+files and added their compiler-derived interfaces to existing game headers.
+The intermediate remediation report (`interfaces-remediation-r1.json`) has 48
+disagreements / 28 policy findings / 500 unchecked, versus the inherited 75/218/501.
+It is not a final gate result: remediation continued while it ran. The native
+font wrapper `0010cc94` is now explicitly deferred with exact constructor/owner
+contradiction evidence in `contract-deferrals.json`; no EntryObject shadow or
+false extern-C declaration of the accepted NW4C constructor is retained.
+
 
 ## Completed integration refinements (not full verification)
 

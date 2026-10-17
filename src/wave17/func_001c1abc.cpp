@@ -15,5 +15,5 @@ extern "C" void func_001c1abc(W17SmallCollection *collection)
                 handle->object = 0;
         }
     }
-    func_0017a938(&bss_00290e2c, -1, 0);
+    func_0017a938(bss_00290e2c, -1, 0);
 }

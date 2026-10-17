@@ -1,3 +1,5 @@
+#include "game/audio_voice.h"
+#include "game/functions.h"
 struct GraphicsConverters {
     float (*wrap)(float value);
     float (*curve)(float value);
@@ -8,11 +10,11 @@ struct GraphicsConverters {
 };
 extern struct GraphicsConverters bss_004b8440;
 extern void func_0019cecc(void *destination, unsigned int size);
-extern float func_00149428(float value);
-extern float func_001493c4(float value);
-extern void func_00149424(void);
-extern float func_001493a8(float value);
-extern float func_00149388(void);
+
+
+
+
+
 
 void func_00147478(void)
 {

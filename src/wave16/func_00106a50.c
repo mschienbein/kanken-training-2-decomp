@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/sound_task.h"
 #include "game/object_manager.h"
 #include "game/service_state.h"
@@ -5,18 +6,18 @@
 
 extern struct StreamMutex bss_0029f528;
 extern struct StreamMutex bss_0029f534;
-extern int func_0010b610(void *context);
+
 extern void func_0010b5cc(void *context);
-extern void func_0010b5f0(void *context);
-extern void func_0010ce58(int (*callback)(void *context), void *context);
-extern void func_0010ce44(void (*callback)(void *context), void *context);
-extern void func_0010cf84(void (*callback)(void *context), void *context);
+
+
+
+
 
 
 
 extern void func_0010d454(int mode);
-extern int func_00195e94(void);
-extern int func_00195e84(void);
+
+
 
 void func_00106a50(void)
 {

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/service_state.h"
 
 unsigned char func_001923c4(void)

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/runtime.h"
 
 void func_001360a4(void)

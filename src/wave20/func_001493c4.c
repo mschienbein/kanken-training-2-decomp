@@ -1,3 +1,4 @@
+#include "game/functions.h"
 float func_001493c4(float value)
 {
     unsigned index = (unsigned)(value * 4.0f);

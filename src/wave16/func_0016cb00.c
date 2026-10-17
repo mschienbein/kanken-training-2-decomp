@@ -1,3 +1,4 @@
+#include "game/controller.h"
 #include "game/messages.h"
 #include "game/w11_control.h"
 #include "game/screen.h"
@@ -19,11 +20,11 @@ struct SelectionController {
     struct Screen *indicators;
 };
 
-extern void func_00177198(struct MessageLayout *layout, const struct W11TextResource *archive, int index);
 
-extern float func_0017a424(const struct MessageLayout *layout);
+
+
 extern void func_0017a258(struct AnimationState *state, float content, float viewport);
-extern int func_0017a210(const struct AnimationState *state);
+
 extern void func_0016d554(struct Screen *screen, int state);
 
 void func_0016cb00(struct SelectionController *controller)

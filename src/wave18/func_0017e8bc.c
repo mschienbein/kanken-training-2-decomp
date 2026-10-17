@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct ExtendedWorkspace {
     unsigned reserved00;
     unsigned first_duration;

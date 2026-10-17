@@ -1,10 +1,11 @@
+#include "game/selection.h"
 struct SelectionAction {
     signed char kind;
     unsigned char reserved01[0x17];
     int enabled;
 };
 
-extern int func_00174444(void);
+
 extern void func_001e6f40(struct SelectionAction *action);
 extern void func_001e6df8(struct SelectionAction *action);
 extern void func_001e612c(struct SelectionAction *action);

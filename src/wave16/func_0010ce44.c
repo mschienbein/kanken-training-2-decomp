@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/service_callbacks.h"
 
 void func_0010ce44(void (*callback)(void *context), void *context)

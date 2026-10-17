@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/notification.h"
 
 /* Core and VFP parameter allocation is independent. The callers supply all five

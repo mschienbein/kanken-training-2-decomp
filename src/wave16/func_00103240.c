@@ -1,13 +1,7 @@
-/* [INFERENCE] The two halfwords are an initial value and a reset counter. */
-struct HalfwordState {
-    unsigned short initial;
-    unsigned short current;
-};
-
-extern struct HalfwordState data_00242240;
+#include "game/random.h"
 
 void func_00103240(unsigned short initial)
 {
-    data_00242240.initial = initial;
-    data_00242240.current = 0;
+    data_00242240.seed.unsigned_value = initial;
+    data_00242240.counter = 0;
 }

@@ -1,8 +1,9 @@
+#include "game/functions.h"
 #include "game/screen.h"
 #include "game/pane_descriptors.h"
 
 extern void func_0015eac8(struct FlagDisplayObject *object, int index, float value);
-extern void func_0015ea60(struct FlagDisplayObject *object, int index, int operation);
+
 extern void func_001701b4(struct Screen *screen, int index, int active);
 
 void func_001af154(struct Screen *screen, int current, int total)

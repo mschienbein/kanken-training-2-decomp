@@ -21,10 +21,18 @@ struct Scheduler {
     short end, begin;
     int pending;
 };
+
+/* Distinct words at +0x14 and +0x18 are used by transition activation and reset. */
+struct TransitionState {
+    unsigned char reserved00[0x14];
+    unsigned enabled;
+    int active;
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern struct Scheduler bss_00495c8c;
+extern struct TransitionState bss_00290c90;
 extern int func_0019b54c(int task);
 extern int func_0019b564(void);
 extern void func_00195ad0(unsigned int index);

@@ -1,8 +1,4 @@
-struct W19DeferredCallback {
-    unsigned reserved00[2];
-    void (*callback)(void);
-};
-extern struct W19DeferredCallback bss_0049629c;
+#include "game/startup.h"
 
 void func_0010625c(void)
 {

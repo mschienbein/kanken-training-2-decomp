@@ -1,19 +1,12 @@
-struct W17SceneEntries {
-    const void *entries[21];
-};
-struct W17SceneSelection {
-    unsigned char reserved00[0x0c];
-    int index;
-    unsigned int pending;
-    const void *selected;
-    unsigned char reserved18[0x0c];
-    struct W17SceneEntries table;
-};
-extern struct W17SceneSelection data_0023ee9c;
+#include "game/functions.h"
+#include "game/screen.h"
 
-static const void *scene_entry_at(const struct W17SceneEntries *table, int index)
+typedef void (*SceneCallback)(void);
+/* Each of the 21 original table entries resolves to a catalogued function;
+ * the scene dispatch wrappers and their callers discard callback results. */
+static SceneCallback scene_entry_at(const SceneCallback *table, int index)
 {
-    return table->entries[index];
+    return table[index];
 }
 
 /* Direct non-tail callers ignore the result; the index is a signed word.
@@ -22,7 +15,7 @@ void func_00176dc8(int index)
 {
     /* ORIGINAL BUG: a negative index passes the upper-bound-only check. */
     if (index < 21)
-        data_0023ee9c.selected = scene_entry_at(&data_0023ee9c.table, index);
+        data_0023ee9c.callback = scene_entry_at(data_0023ee9c.callbacks, index);
     data_0023ee9c.index = index;
     data_0023ee9c.pending = 0;
 }

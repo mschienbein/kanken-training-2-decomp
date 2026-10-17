@@ -1,3 +1,4 @@
+#include "game/drawing_system.h"
 #include "game/bss_0049ecf0.h"
 struct CommandQueue;
 struct FramebufferSurface;

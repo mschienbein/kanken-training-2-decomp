@@ -1,6 +1,7 @@
+#include "game/sequence.h"
 #include "game/audio_voice.h"
 
-extern void func_00155148(struct AudioVoiceGroup *group, int priority);
+
 
 void func_001d9530(struct AudioVoice *voice)
 {

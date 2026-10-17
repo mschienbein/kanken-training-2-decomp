@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/selection.h"
 #include "game/character_panel.h"
 
@@ -19,8 +20,8 @@ struct W19TrainingScreen {
 
 extern void func_0016e798(struct CharacterPanel *panel, int mode);
 extern void func_0016dc94(struct W8EffectState *effects, int index);
-extern int func_0016dc50(struct CharacterPanel *controller, int index);
-extern int func_00179ed4(struct CharacterPanel *screen, int compact);
+
+
 extern void func_0016dbc4(struct W8EffectState *effects);
 
 void func_0016dae8(struct W19TrainingScreen *screen, int mode, int reset)

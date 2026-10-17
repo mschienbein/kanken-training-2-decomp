@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include <stdint.h>
 
 struct W17PrimaryState {
@@ -6,7 +7,7 @@ struct W17PrimaryState {
     unsigned int active;
 };
 
-extern void func_0019d95c(uintptr_t resource, int index, int force);
+
 
 int func_00177160(struct W17PrimaryState *state)
 {

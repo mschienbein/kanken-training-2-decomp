@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/task_runtime.h"
 #include "game/synchronization.h"
 

@@ -1,11 +1,7 @@
-struct W15fConfiguration {
-    unsigned int reserved00;
-    signed char mode;
-};
-
-extern struct W15fConfiguration data_00242d90;
+#include "game/functions.h"
+#include "game/service_runtime.h"
 
 int func_001549c8(void)
 {
-    return data_00242d90.mode;
+    return data_00242d90.shared_status;
 }

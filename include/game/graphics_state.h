@@ -1,5 +1,6 @@
 #ifndef GAME_GRAPHICS_STATE_H
 #define GAME_GRAPHICS_STATE_H
+#include "ctr/svc.h"
 
 struct DisplayBuffer {
     unsigned char reserved00;
@@ -15,7 +16,7 @@ struct GraphicsContext {
     signed char status;
 };
 
-struct GraphicsMutex { unsigned handle; };
+struct GraphicsMutex { CtrHandle handle; };
 struct GraphicsState {
     signed char initialized;
     signed char stereo;

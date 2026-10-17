@@ -15,5 +15,5 @@ extern "C" void func_001c13f4(W18WideDisplayCollection *collection)
                 handle->object = 0;
         }
     }
-    func_0017a938(&bss_00290f60, -1, 0);
+    func_0017a938(bss_00290f60, -1, 0);
 }

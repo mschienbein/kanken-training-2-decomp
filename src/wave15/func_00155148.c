@@ -1,3 +1,4 @@
+#include "game/sequence.h"
 #include "game/audio_voice.h"
 
 extern void func_00155d68(struct TaskPool *pool, struct AudioVoiceGroup *group);

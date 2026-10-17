@@ -1,11 +1,12 @@
+#include "game/functions.h"
 #include "game/audio_dsp.h"
 #include "game/service_runtime.h"
 
 /* The indexed table has no recovered bound; the selector is a second typed view. */
 
-extern void func_00182210(void);
-extern int func_0018f018(void);
-extern void func_00182204(void);
+
+
+
 
 void func_00180e14(struct ServiceCoordinator *driver, float volume)
 {

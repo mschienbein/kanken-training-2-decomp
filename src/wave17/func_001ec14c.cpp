@@ -2,7 +2,7 @@
 
 /* [INFERENCE] Lifecycle names: this entry occupies the first vtable slot. */
 
-extern "C" void func_001ec14c(W17SceneBase *scene)
+extern "C" void func_001ec14c(ScreenResourceManager *scene)
 {
     scene->vtable = &data_00223908;
     if (func_00177124(7) == 0) {

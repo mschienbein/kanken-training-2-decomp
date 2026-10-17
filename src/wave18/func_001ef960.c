@@ -1,4 +1,5 @@
-#include <stddef.h>
+#include "game/functions.h"
+#include "game/reset_reference.h"
 
 struct ArrayElement {
     unsigned char reserved00[0xd4];
@@ -9,9 +10,7 @@ struct ElementArray {
     struct ArrayElement elements[8];
 };
 
-extern void func_001c0e44(void *element);
-extern void *__aeabi_vec_ctor_nocookie_nodtor(void *storage, void (*constructor)(void *),
-                                           size_t element_size, size_t element_count);
+
 
 struct ElementArray *func_001ef960(struct ElementArray *array)
 {

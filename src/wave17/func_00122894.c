@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/graphics_state.h"
 
 extern unsigned func_0012f9a8(struct GraphicsMutex *mutex, unsigned register_address,

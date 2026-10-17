@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/screen.h"
 
 void func_0015ea60(struct FlagDisplayObject *object, int index, int operation)

@@ -61,13 +61,11 @@ extern void func_00175848(void);
 
 
 extern int data_0023f028;
-extern void func_00181e44(void);
 extern void func_001b6c90(MenuOptionGroup *resource);
 extern void func_001b7e9c(MenuOptionGroup *resource);
 
 
 extern Screen *func_001671d4(void);
-extern AnimationState *func_00167284(void);
 extern void func_0017673c(AnimationState *set);
 extern void func_0017a258(AnimationState *set, float width, float height);
 extern void func_00175d90(Screen *set);

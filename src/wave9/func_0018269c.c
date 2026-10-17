@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/resource_tables.h"
 
 /* Keep the observed out-of-line calls while compiling these leaf queries together. */

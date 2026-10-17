@@ -1,10 +1,11 @@
+#include "game/screen.h"
 #include "game/selection.h"
 
 struct W15gNumberController;
 struct W15gDictionary;
 extern void func_0017a034(struct W15gNumberController *controller, int index, int value);
 extern const unsigned short *func_00170c00(const struct W15gDictionary *dictionary, int index);
-extern void func_001eafa0(void *screen, int index, const unsigned short *text);
+
 extern const unsigned short data_001bc29c[];
 struct W15gFiveColumnScreen {
     unsigned char reserved00[0x3c];

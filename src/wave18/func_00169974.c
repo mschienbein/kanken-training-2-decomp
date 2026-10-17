@@ -1,7 +1,8 @@
+#include "game/functions.h"
 #include "game/notification.h"
 
-extern void func_0019eb24(void);
-extern void func_00181dcc(int reason, int enabled, int notify);
+
+
 
 int func_00169974(void)
 {

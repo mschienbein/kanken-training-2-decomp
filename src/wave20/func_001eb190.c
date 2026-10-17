@@ -10,7 +10,7 @@ struct TouchStrokeController {
     float origin_y;
 };
 
-extern void func_00180344(void);
+
 extern void func_00166d5c(struct TouchStrokeController *controller, int enabled, float x, float y);
 
 void func_001eb190(struct TouchStrokeController *controller)

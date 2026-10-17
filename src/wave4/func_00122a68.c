@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/graphics_state.h"
 
 void func_00122a68(void)

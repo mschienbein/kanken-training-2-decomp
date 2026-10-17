@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/render_resource.h"
 #include "game/runtime.h"
 

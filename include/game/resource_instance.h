@@ -3,18 +3,18 @@
 
 #include "game/heap_interface.h"
 
-#ifdef __cplusplus
-/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
-struct AllocatorPair;
-
+/* Both allocation and release consumers select this same pair of heap owners. */
 struct AllocatorPair {
-    Heap *primary;
-    Heap *secondary;
+    struct Heap *primary;
+    struct Heap *secondary;
 };
 
+#ifdef __cplusplus
 extern "C" {
+#endif
 extern struct AllocatorPair data_00242f84;
 void *func_00116cb4(unsigned size, unsigned alignment);
+#ifdef __cplusplus
 }
 #endif
 

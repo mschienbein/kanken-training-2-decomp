@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/notification.h"
 
 extern void func_00190e44(struct NotificationPayload *payload);

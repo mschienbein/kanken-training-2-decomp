@@ -20,6 +20,21 @@ struct DisplayObject {
     unsigned char types[2];                 /* 0x92 */
 };
 
+/* Resource-pool entries expose the same display prefix used by handle clients.
+ * The cleanup/allocation paths establish the containing record, not just padding. */
+struct EventResource;
+struct ResourceEvent {
+    struct DisplayObject base;
+    struct EventResource *resources[2];
+    unsigned reserved9c;
+    unsigned active;
+    float reserveda4;
+    unsigned paira8[2];
+    unsigned char reservedb0[0x10];
+    unsigned char cleanupc0;
+    unsigned char reservedc1[0xb];
+};
+
 struct DisplaySurface;
 struct LayoutContainer;
 struct LayoutPane;
@@ -148,6 +163,11 @@ struct DisplayQueueFlags {
     signed char active;
     unsigned char reserved05[3];
     struct DisplayObject *object;
+    int index;
+    unsigned pending;
+    void (*callback)(void);
+    unsigned char reserved18[0x0c];
+    void (*callbacks[21])(void);
 };
 struct DisplayQueueCounter {
     unsigned ready;
@@ -191,7 +211,7 @@ struct FlagDisplayObject {
 };
 
 struct DisplayHandle {
-    struct DisplayObject *object;
+    struct ResourceEvent *object;
     unsigned char reserved04[0x14];
     float x;
     float y;
@@ -301,6 +321,8 @@ extern void func_0017697c(struct Screen *selection);
 extern void func_00175b8c(void *screen);
 extern void func_00179160(struct W8DisplaySet *set, int index, float x, float y);
 extern void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y);
+extern struct ResourceEvent *func_0017a818(const struct NameTable *table,
+    int screen, int active, float x, float y, float z);
 extern void func_00175ab8(void *screen, int index,
                          int red, int green, int blue, int alpha);
 extern void func_00166eac(struct W8DisplaySet *screen, int index, float x, float y);
@@ -363,9 +385,10 @@ extern void func_0016de90(struct Screen *screen, int index);
 
 
 struct W10DrawingInput {
-    unsigned char reserved00[0xc];
-    struct DisplayObject *displays[3];
-    unsigned char reserved18[2];
+    unsigned char reserved00[4];
+    int identifiers[2];
+    struct ResourceEvent *displays[3];
+    unsigned char notification_active, reserved19;
     unsigned short characters[0x440];
     short field89a;
     short count;

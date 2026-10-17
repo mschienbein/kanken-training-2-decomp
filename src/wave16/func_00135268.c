@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/resource_runtime.h"
 
 struct RenderEntryState {

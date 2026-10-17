@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/notification.h"
 
 int func_0016d000(int index)

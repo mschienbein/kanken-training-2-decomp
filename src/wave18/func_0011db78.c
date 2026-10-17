@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/bss_0049ecf0.h"
 
 struct ExtendedCommandQueue {

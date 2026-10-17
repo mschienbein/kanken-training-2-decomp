@@ -1,6 +1,7 @@
-extern void func_0013608c(unsigned char enabled, unsigned char active, unsigned char ready);
-extern void func_001360ec(int index, int value);
-extern void func_00136134(int index, int flags);
+#include "game/functions.h"
+
+
+
 
 void func_00136104(void)
 {

@@ -18,6 +18,7 @@ struct W17Panel43f0;
 #include "game/screen.h"
 #include "game/pane_descriptors.h"
 #include "game/command_state.h"
+#include "game/resource_runtime.h"
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
@@ -32,12 +33,12 @@ struct W17SmallCollection {
 };
 struct W6DisplayCollection {
     unsigned char reserved00[0x18];
-    struct DisplayObject **objects[1];
+    struct ResourceEvent **objects[1];
 };
 struct W17WideHandle {
     unsigned int reserved00;
-    DisplayObject *object;
-    DisplayObject *get_object() { return object; }
+    ResourceEvent *object;
+    ResourceEvent *get_object() { return object; }
 };
 struct W17WideCollection {
     unsigned int reserved00;

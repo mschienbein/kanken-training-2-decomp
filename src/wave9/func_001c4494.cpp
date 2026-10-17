@@ -9,7 +9,7 @@ static inline void check_result(unsigned pc, Result result)
 
 extern "C" int func_001c4494(ResourceFile *file, void *buffer, unsigned size)
 {
-    int count;
+    unsigned count;
     Result result = func_0019d5e4(&file->stream, &count, buffer, size);
     check_result(__current_pc(), result);
     return count;

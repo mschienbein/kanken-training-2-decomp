@@ -1,8 +1,9 @@
+#include "game/hwr_runtime.h"
+
 struct ChannelResetEntry {
     unsigned short state;
     unsigned short reserved02[3];
 };
-extern const unsigned short *data_00243888;
 extern struct ChannelResetEntry bss_004e1dfc[];
 
 int func_00157f90(void)

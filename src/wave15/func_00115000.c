@@ -1,6 +1,7 @@
+#include "game/functions.h"
 #include "game/service_callbacks.h"
 
-extern void func_00122ad0(void);
+
 
 void func_00115000(int wait)
 {

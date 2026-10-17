@@ -39,7 +39,7 @@ static __forceinline void check_result(Result result, unsigned address)
 {
     switch (result.failed()) {
     case 0: break;
-    default: func_00192afc(result, address);
+    default: func_00192afc((int)result.value, reinterpret_cast<const void *>(address));
     }
 }
 

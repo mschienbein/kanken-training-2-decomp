@@ -1,3 +1,4 @@
+#include "game/scene_lifecycle.h"
 #include "game/selection.h"
 void func_00181b58(unsigned short screen)
 {

@@ -1,16 +1,4 @@
-struct TextureResource;
-struct GraphicsResourceLink {
-    struct TextureResource *resource;
-    unsigned kind;
-    unsigned identifier;
-    struct GraphicsResourceLink *next;
-};
-struct GraphicsResourceTable {
-    struct TextureResource *defaults[2];
-    unsigned reserved08[2];
-    struct GraphicsResourceLink *buckets[512];
-};
-extern struct GraphicsResourceTable *data_00242a0c;
+#include "game/graphics_resources.h"
 
 struct TextureResource *func_0014f74c(unsigned identifier)
 {

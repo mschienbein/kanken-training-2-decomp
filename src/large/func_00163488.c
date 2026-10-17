@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/selection.h"
 
 struct ActionPanel;
@@ -10,10 +11,10 @@ struct GradeOptionScreen {
 };
 
 extern unsigned func_0017418c(void);
-extern void func_00166f1c(void *screen, int index, int enabled);
-extern int func_00174444(void);
-extern int func_00174430(void);
-extern int func_00174470(void);
+
+
+
+
 extern void func_001741f8(struct ActionPanel *panel, int index, float x, float y);
 extern void func_0017a034(struct ActionPanel *panel, int index, int value);
 

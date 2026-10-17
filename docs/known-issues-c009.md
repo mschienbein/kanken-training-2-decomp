@@ -2,18 +2,19 @@
 
 ## Status
 
-**Preserved integration, not review-ready or accepted.** This branch has not reached the
-requested final-match/interface/argcheck/pre-review closure. Do not prepare/finalize it or
-interpret the manifest counts as accepted progress. The original base is `11e1992`;
-`docs/GATES.md` remains v1.16. Main owns the subsequent serialized build/suite and acceptance.
+**Preserved continuation, not review-ready or accepted.** The user requested wrap-up
+before final-match/interface/argcheck/pre-review closure. Do not prepare/finalize
+or interpret these scope counts as accepted progress. Continued from `1cc9f60`,
+merged adopted main `959311b` and c008-r2 `38b4c01`; `docs/GATES.md` stays v1.16.
+Main owns serialized full builds/suite and acceptance.
 
-`config/candidates/c009.json` currently lists 678 units / 678 functions, representing
-55,272 target bytes from recovered author records. These are candidate scope numbers,
-not a claim that the edited integration currently matches:
+`config/candidates/c009.json` now lists 676 units / 676 functions / 54,648 target
+bytes. Two additional concrete contract blockers were withdrawn below; these
+numbers are scope, not an edited-tree final-MATCH claim:
 
 | Frozen profile | Units/functions | Target bytes |
 | --- | ---: | ---: |
-| game | 616 | 49,588 |
+| game | 614 | 48,964 |
 | middleware | 37 | 4,000 |
 | sdk | 25 | 1,684 |
 
@@ -24,30 +25,28 @@ results are not silently admitted into this default-model checkpoint.
 
 ## Blocking evidence
 
-* Last whole-tree `interfaces --allow-unchecked-cpp` run exited **1** on the
-  accepted + original C008 + C009 dry ledger (2,206 units): 1,705 checked,
-  75 disagreements, 218 inline-declaration policy findings, 501 unchecked.
-  This report precedes the final PipelineStorage marker cutover. Of its unchecked
-  rows, 498 are C++, two are ARMCC varargs parser failures (`00190d0c`, `00190d68`),
-  and one was the since-repaired `001272bc` marker. No new exit-zero report exists.
-* The shared-header C++ include probe exited **1**. After repairing the malformed
-  archive inline-member scope, it still reports incompatible canonical declarations:
-  display-group objects versus NameTable pointer arrays, font vtable typing,
-  layout-list/allocator contracts, ResourceEvent versus display-object destruction,
-  resource-stream result typing, and scene/global dispatch ownership. C++ waiver
-  does not establish these contracts.
-* Final all-candidate matching, complete caller-contract argcheck adjudication and
-  the complete seven-step pre-review have **not** been executed after the cutovers.
-  No full build, suite, prepare or finalize was run by this worker.
-* Sixteen additional unique new-scope status-MATCH addresses remain uncollected
-  beyond the three approved contract deferrals below; their aliases/canonical
-  cutovers are not closed. In particular, `002102b4` and `001eade0` have plausible
-  existing-canonical-name cutovers that have not been implemented/matched. These
-  are unfinished scope, not newly approved exclusions.
+* The intermediate whole-ledger `interfaces --allow-unchecked-cpp` remediation run
+  exited **1**: 2,205 units, 1,705 checked, 48 disagreements, 28 inline-declaration
+  findings, 500 unchecked (498 C++ and the two ARMCC varargs parser failures).
+  Remediation continued while that audit ran. It is not a current final count,
+  and no exit-zero G3 report exists.
+* The final **166-game-header C++ co-inclusion probe exited 0** after canonical
+  pointer-array, allocator, audio-manager, resource/scene-prefix, stream and raw
+  IPC/result repairs. This is compile-only shared-header compatibility, not the
+  native-unit, actual-signature or indirect-consumer same-class sweep. Those
+  c009-wide probes using c008-r2's reusable helpers remain unexercised.
+* The catalogue recheck intersection was `00214580` (MATCH, exit 0) and
+  `00203810` (compile exit 2, then deferred on concrete owner-contract evidence).
+* Final all-new/revised matching, complete argcheck adjudication and the seven-step
+  pre-review have **not** run after these changes. No full build, suite, prepare,
+  finalize, history edit or push was performed.
+* Sixteen unique additional new-scope status-MATCH addresses are still uncollected.
+  Their alias/canonical cutovers in `UNRESOLVED-SCOPE.json` are unfinished scope,
+  not newly approved exclusions; no collection claim is made.
 
 Private exact evidence and source bindings are recorded in the worktree's
 `scratch/integrator/c009/HANDOFF.json`, `UNRESOLVED-SCOPE.json`,
-`interfaces-canonical-r2.json` and `cpp-includes-r{1,2}.json`.
+`interfaces-remediation-r1.json`, `cpp-compat-r5.json` and `contract-deferrals.json`.
 The remaining integration state is described in `scratch/integrator/c009-NOTES.md`.
 
 ## Approved contract-resolution deferrals
@@ -70,16 +69,30 @@ None of the prior six has been proven resolved: `001b7110`, `001b6df4`, `001a2fc
 contract), `001f59b8` (canonical FloatPropertyDescriptor caller), and `001c5a08`
 (full-word forwarding contract). The previous C008 NOTES/deferred evidence is unchanged.
 
-## Pending C008-r2 reconciliation
+## Additional evidenced contract deferrals
 
-The current dry ledger still uses original C008, not the pending reviewed revision.
-FixC008R2 owns the coherent `001462d4` InputSessionContext/full-word value correction
-and same-class InputSessionContext/HandleManager layout sweeps, including the old
-selected fields that actually belong to mutex depth. Local predecessor/access
-refinements are staged only in this C009 worktree; Main's frozen C008 sources and
-review snapshots were not edited. C009 must reconcile onto the completed C008-r2
-source/header hashes rather than duplicate or supersede that revision accidentally.
+| Function | Concrete blocker |
+| --- | --- |
+| `0010cc94` | The proposed extern-C EntryObject constructor contradicts the accepted native `nw::font::ResFontBase` constructor at `00113e78`, and its unsigned-array vtable declaration contradicts canonical FontVTable. The actual derived identity is unresolved; canonical ResFont's constructor is bound elsewhere (`001db3ec`). The shadow source/header were withdrawn, not aliased. |
+| `00203810` | Its L045SceneN constructor/destructor declarations disagree with concrete lifecycle definitions, including `001e7470`, `001ec14c` and `001e7fdc`. A shared virtual-dispatch prefix does not prove the full derived owners. The initializer and its 42 shadow prototypes were withdrawn instead of retaining a wrong common-owner erasure. The changed v9-r2 extent remains unclosed. |
 
-The integration currently revises 37 predecessor source units in addition to the new
-manifest. Their complete list and source/header hashes are private in HANDOFF.json.
-Every changed predecessor function still needs final-byte and review closure.
+Both are recorded under step 3's defer-with-reason option, with private sources
+and exact evidence retained in `contract-deferrals.json`. They are not MATCH
+or acceptance claims.
+
+## Predecessor boundary and newer pending remediation
+
+c008-r2 `38b4c01` was merged at `9218542`; the dry ledger no longer uses failed
+original c008. It has 2,203 units / 2,277 functions: 1,601 predecessor functions
+plus 676 c009 functions. Its additional `0016b6a4` deferral remains excluded.
+
+The current source delta against c008-r2 revises **102 predecessor units /
+106 functions**, including shared-header inclusion migrations. Every revised
+unit is listed in HANDOFF and still needs fresh byte/review closure. Header-only
+dependents also require the complete canonical contract sweep.
+
+At wrap-up, FixC008R3 reported new `c008-r3` remediation from current main
+`f3ae330`: slot 11 context, slot 15 context/saved arguments/result, and an
+indirect-consumer same-class audit. c008-r2 remains unfinalized. Those fixes are
+owned by FixC008R3 and were not duplicated or merged here. Reconcile that successor
+before claiming a review-ready c009 base; historical c008 records remain untouched.

@@ -1,9 +1,9 @@
+#include "game/command_state.h"
 #include "game/property_descriptor.h"
 
 struct ParameterValue;
 
-extern void func_0017a7e4(const struct NameTable *const *items,
-                          int count, int mode, unsigned int flags);
+
 
 /* [INFERENCE] The caller-supplied parameter collection is unused. */
 void func_001b7f38(struct ParameterValue **parameters)

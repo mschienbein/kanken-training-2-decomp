@@ -1,23 +1,15 @@
+#include "game/random.h"
 #include "game/input.h"
 #include "game/selection.h"
 
-struct SliderState {
-    unsigned char reserved00[0x10];
-    void *primary;
-    unsigned char reserved14[0x40];
-    int enabled;
-    float minimum;
-    float maximum;
-    float value;
-};
+#include "game/w11_control.h"
 
-extern struct SliderState *func_00167284(void);
-extern void func_001b3c0c(struct SliderState *slider, int delta);
-extern int func_0018ffac(int limit);
+extern void func_001b3c0c(struct AnimationState *slider, int delta);
+
 
 void func_001e74b8(struct W6SelectionScreen *screen)
 {
-    struct SliderState *slider = func_00167284();
+    struct AnimationState *slider = func_00167284();
     if (slider) {
         if (bss_004972d8.direction & 0x800)
             func_001b3c0c(slider, 1);

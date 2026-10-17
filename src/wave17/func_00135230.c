@@ -1,6 +1,7 @@
+#include "game/functions.h"
 #include "game/resource_tables.h"
 
-extern void func_0019d95c(uintptr_t resource, int index, int force);
+
 
 void func_00135230(void)
 {

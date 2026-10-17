@@ -1,54 +1,9 @@
+#include "game/functions.h"
+#include "game/text_writer.h"
 #include "game/screen.h"
 #include "game/runtime.h"
 
-struct DisplayResource4c {
-    struct DisplayObject *object;
-    unsigned char reserved04[0x48];
-};
-struct DisplayResource50 {
-    struct DisplayObject *object;
-    unsigned char reserved04[0x2c];
-    void *allocation;
-    unsigned char reserved34[0x1c];
-};
-struct DisplayResource6c {
-    struct DisplayObject *object;
-    unsigned char reserved04[0x64];
-    int texture_slot;
-};
-
-struct ScreenResourceManager {
-    unsigned char reserved00[8];
-    struct DisplayResource4c *first;
-    struct DisplayResource50 *second;
-    struct DisplayResource6c *third;
-    unsigned char reserved14[0x0c];
-    int first_count, second_count, third_count;
-    unsigned char reserved2c[0x0c];
-    void *preliminary[2];
-    struct Component001e3548 *component00;
-    struct Component001b3434 *component01;
-    struct Component001ea87c *component02;
-    struct Component001e9cdc *component03;
-    struct Component001eaed8 *component04;
-    struct Component00168454 *component05;
-    struct Component001af424 *component06;
-    struct Component001acff0 *component07;
-    struct Component001682e8 *component08;
-    struct Component001b6a0c *component09;
-    struct Component001b45ac *component10;
-    struct Component001b41b8 *component11;
-    struct Component001aeb30 *component12;
-    struct Component001acd38 *component13;
-    struct Component001ad708 *component14;
-    struct Component001b5e44 *component15;
-    struct Component001b494c *component16;
-    struct Component001b7604 *component17;
-    struct Component001ae140 *component18;
-    struct Component001b64b0 *component19;
-};
-
-extern void func_001e3548(struct Component001e3548 *component);
+#include "game/resource_runtime.h"
 extern void func_001b3434(struct Component001b3434 *component);
 extern void func_001ea87c(struct Component001ea87c *component);
 extern void func_001e9cdc(struct Component001e9cdc *component);
@@ -68,9 +23,8 @@ extern void func_001b494c(struct Component001b494c *component);
 extern void func_001b7604(struct Component001b7604 *component);
 extern void func_001ae140(struct Component001ae140 *component);
 extern void func_001b64b0(struct Component001b64b0 *component);
-extern void func_00183208(struct DisplayObject *object);
-extern void func_00180314(int slot);
-extern void func_00174480(void *object);
+
+
 
 void func_00176e24(struct ScreenResourceManager *manager)
 {

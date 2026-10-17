@@ -2,7 +2,7 @@
 
 extern int func_0012f5a0(void);
 extern int func_0012f608(void);
-extern void func_00192afc(unsigned result, unsigned address);
+#include "game/applet.h"
 
 static __inline void check_result(int result, unsigned address)
 {
@@ -10,7 +10,7 @@ static __inline void check_result(int result, unsigned address)
     case 0:
         break;
     default:
-        func_00192afc((unsigned)result, address);
+        func_00192afc(result, (const void *)address);
         break;
     }
 }

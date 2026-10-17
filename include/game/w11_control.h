@@ -27,9 +27,12 @@ struct W11jWidgetGroup {
     int mode;
 };
 struct AnimationState {
-    unsigned char reserved00[0x44];
+    unsigned char reserved00[0x10];
+    void *primary;
+    unsigned char reserved14[0x30];
     float start, finish;
-    unsigned char reserved4c[0x0c];
+    unsigned char reserved4c[8];
+    int enabled;
     float lower, upper, current;
 };
 struct W11AnimatedScreenA;
@@ -64,6 +67,11 @@ struct W11AnimatedScreenB {
 extern "C" {
 #endif
 extern int func_0017a210(const struct AnimationState *state);
+extern struct AnimationState *func_00167284(void);
+extern struct AnimationState bss_0024424c;
+extern volatile unsigned data_0023ecc0;
+extern struct AnimationState *func_001b43bc(struct AnimationState *state);
+extern struct AnimationState *func_001b44e8(struct AnimationState *state);
 extern void func_001b0600(struct W11ControlScreen *screen);
 extern void func_0016d554(struct W11ControlScreen *screen, int state);
 extern void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled);

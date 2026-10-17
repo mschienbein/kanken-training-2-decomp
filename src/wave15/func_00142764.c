@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/input_runtime.h"
 #include "game/audio_voice.h"
 #include "game/service_runtime.h"
@@ -14,18 +15,17 @@ typedef void (*ServiceCallback)(void);
 
 
 
-extern unsigned func_0019edcc(void);
+#include "game/service_availability.h"
 
 
-extern void func_00195ea4(struct HandleManager *state);
+
 extern void func_00146070(struct ServiceOutput *state);
 
 
 
 
 
-extern int func_00145f74(ServiceCallback first, ServiceCallback second,
-                        ServiceCallback third);
+
 
 union ResultStatus {
     unsigned code;

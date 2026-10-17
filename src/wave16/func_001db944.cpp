@@ -5,5 +5,5 @@
 
 void func_001db944(void)
 {
-    bss_0028dd7c.dispatch();
+    bss_0028dd7c.invoke_slot02();
 }

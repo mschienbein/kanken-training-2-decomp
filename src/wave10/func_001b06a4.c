@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/selection.h"
 #include "game/notification.h"
 #include "game/animation.h"
@@ -13,11 +14,11 @@ extern void func_0017433c(int channel, int duration);
 extern void func_0016fca0(int enabled);
 extern void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition);
 extern void func_0016fa58(struct SettingsScreen *screen, int enabled);
-extern void func_001dc3a4(int enabled);
-extern void func_001dc084(int enabled);
-extern void func_001dc064(int enabled);
-extern void func_0016fa38(int enabled);
-extern void func_0016fa18(int enabled);
+
+
+
+
+
 
 void func_001b06a4(struct SettingsScreen *screen)
 {

@@ -1,23 +1,9 @@
-struct HwrConfiguration {
-    short initialized;
-    unsigned short cursor_x;
-    unsigned short cursor_y;
-    short width;
-    short height;
-    unsigned short reserved0a;
-    int area;
-    unsigned short flags;
-    unsigned short mode_b;
-    unsigned short mode_a;
-    unsigned short limit_a;
-    unsigned short limit_b;
-};
-extern struct HwrConfiguration bss_004bfce0;
+#include "game/hwr_runtime.h"
 
 int func_0014c4cc(unsigned flags, int mode_a, int mode_b,
                   int width, int height, unsigned limit_a, unsigned limit_b)
 {
-    if (bss_004bfce0.initialized != 1)
+    if (bss_004bfce0.state != 1)
         return -1;
     if (flags)
         bss_004bfce0.flags = (flags & 0x5fff) | 0x8000;
@@ -30,8 +16,8 @@ int func_0014c4cc(unsigned flags, int mode_a, int mode_b,
         if (mode_b != 1 && mode_b != 2)
             return -1;
         bss_004bfce0.mode_b = mode_b;
-        bss_004bfce0.cursor_y = 0;
-        bss_004bfce0.cursor_x = 0;
+        bss_004bfce0.previous = 0;
+        bss_004bfce0.current = 0;
     }
     if (width) {
         if ((unsigned)(width - 32) >= 224)

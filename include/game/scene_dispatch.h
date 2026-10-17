@@ -44,6 +44,13 @@ extern SceneObject bss_0028e27c;
 extern SceneObject bss_0028f3d8;
 extern SceneObject bss_0028db2c;
 extern SceneObject bss_0028f850;
+extern SceneObject bss_0028d9a4;
+extern SceneObject bss_0028da50;
+extern SceneObject bss_0028e900;
+extern SceneObject bss_0028f200;
+extern SceneObject bss_0028fdd4;
+extern SceneObject bss_0028fe70;
+extern SceneObject bss_0028ff10;
 extern SceneObject bss_0028fd24;
 extern SceneObject bss_0028dd7c;
 }

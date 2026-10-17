@@ -1,6 +1,7 @@
+#include "game/functions.h"
 #include "game/notification.h"
 
-extern void func_00169b58(void);
+
 extern void func_00192720(void *destination, const void *source, unsigned size);
 
 void func_00172d48(int index)

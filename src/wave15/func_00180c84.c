@@ -1,3 +1,4 @@
+#include "game/service_runtime.h"
 struct DriverPayload {
     float master_volume;
     unsigned char reserved04[0x1c];
@@ -23,9 +24,9 @@ union DriverContext {
     struct DriverCommandTable table;
 };
 
-extern void func_00182210(void);
-extern int func_0018f018(void);
-extern void func_00182204(void);
+
+
+
 
 static __forceinline void set_route(struct DriverPayload *parameters,
                                     int channel, short value)

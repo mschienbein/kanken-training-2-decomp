@@ -1,3 +1,4 @@
+#include "game/selection.h"
 #include "game/notification.h"
 
 int func_00174470(void)

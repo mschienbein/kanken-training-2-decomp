@@ -1,8 +1,9 @@
+#include "game/applet.h"
 #include "game/service_callbacks.h"
 #include "game/service_state.h"
 
 
-extern void func_001923d4(unsigned mode);
+
 
 /* [INFERENCE] Compiler-inlined mode operation shared with func_00115040. */
 static __inline void set_mode(unsigned mode)

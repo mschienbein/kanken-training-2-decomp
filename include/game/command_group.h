@@ -81,11 +81,17 @@ struct OptionalVoiceMode {
     signed char mode;
 };
 
+struct MainThreadRecord {
+    struct InputRegistrationState *registration;
+    unsigned char *thread_local_storage;
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern struct InputRegistrationState bss_004b4fc0;
 extern void func_00113630(struct InputRegistrationState *state);
+extern struct MainThreadRecord data_00242d78;
 extern struct TouchInputService bss_004b1fb8;
 extern int func_0019ec14(struct SignalState *state);
 extern struct PoolLink *func_0016a0d0(struct TaskQueueContext *context,

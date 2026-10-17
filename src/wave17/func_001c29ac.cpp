@@ -6,7 +6,7 @@
 extern "C" void func_001c29ac(W6DisplayCollection *collection)
 {
     for (int group = 0; group < 1; ++group) {
-        DisplayObject **objects = collection->objects[group];
+        ResourceEvent **objects = collection->objects[group];
         if (objects != 0) {
             for (int i = 0; i < 63; ++i) {
                 if (objects[i] != 0)
@@ -19,5 +19,5 @@ extern "C" void func_001c29ac(W6DisplayCollection *collection)
             }
         }
     }
-    func_0017a938(&bss_00290d8c, -1, 0);
+    func_0017a938(bss_00290d8c, -1, 0);
 }

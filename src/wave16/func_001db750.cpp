@@ -6,6 +6,6 @@
 
 extern "C" void func_001db750(void)
 {
-    SceneLifecycle *scene = &bss_0028ecf4;
-    scene->vtable->finalize(scene);
+    SceneObject *scene = &bss_0028ecf4;
+    scene->vtable->slot05(scene);
 }

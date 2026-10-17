@@ -1,6 +1,7 @@
+#include "game/functions.h"
 #include "game/shader.h"
 
-extern void func_00193af4(unsigned index);
+
 extern void func_0018f0dc(int count, const unsigned *textures);
 extern void func_00197c68(unsigned program);
 extern void func_0019b344(unsigned program);

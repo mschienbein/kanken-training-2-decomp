@@ -1,13 +1,4 @@
-struct SlotValue {
-    void *value;
-};
-
-struct SlotTable {
-    unsigned char reserved00[0x828];
-    const struct SlotValue *slots[32];
-};
-
-extern const struct SlotTable *data_00242a0c;
+#include "game/graphics_resources.h"
 
 void *func_0018cb5c(unsigned index)
 {

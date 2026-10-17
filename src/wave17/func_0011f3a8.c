@@ -1,11 +1,15 @@
-extern int func_0019b564(void);
-extern int func_0019b54c(int index);
-extern int func_0019efd0(void);
+#include "game/command_state.h"
+#include "game/functions.h"
+#include "game/scheduler.h"
+#include "game/screen.h"
+
+
+
 extern void func_00190688(int index, void (*callback)(void));
-extern void func_00186944(int index, int value);
-extern void func_001865ec(int first, int second);
-extern void func_00186598(void);
-extern void func_0012d328(void);
+
+
+
+
 
 void func_0011f3a8(void)
 {

@@ -8,6 +8,7 @@ class ScreenController;
 
 #include "game/w11_control.h"
 #include "game/screen.h"
+#include "game/functions.h"
 
 #ifdef __cplusplus
 /* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
@@ -38,7 +39,6 @@ void func_0017457c(MotionScreen *screen);
 void func_0015fc3c(ScreenController *controller);
 int func_0017a210(const AnimationState *state);
 void func_0017a164(Screen *screen, int state);
-void func_001acc18(void *object);
 }
 #endif
 

@@ -3,7 +3,7 @@
 
 struct InputSessionContext;
 extern struct InputSessionContext bss_004b97ac;
-extern void func_001487cc(struct InputSessionContext *state, float value);
+
 
 void func_00146168(struct ServiceOutput *state, float value)
 {

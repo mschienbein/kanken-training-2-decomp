@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/input_runtime.h"
 #include "game/exp_heap.h"
 #include "game/stream_manager.h"
@@ -20,7 +21,7 @@ struct InputSessionContext;
 
 extern struct InputSessionContext bss_004b97ac;
 extern void func_0017e8fc(struct ChannelWorkspace *workspace);
-extern void func_0017e8bc(struct ExtendedWorkspace *workspace);
+
 extern void func_0017e858(struct InputSessionContext *coordinator, unsigned index, unsigned char enabled);
 
 void func_0014c930(struct ServiceOutput *owner, signed char index)

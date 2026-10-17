@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/item_pages.h"
 
 struct NavigationState {
@@ -6,7 +7,7 @@ struct NavigationState {
     int count;
     int page;
 };
-extern int func_00178e9c(struct NavigationState *state, int step, int select_item);
+
 /* [INFERENCE] callee identity: inlined by armlink; this retained getter reads ItemPage.count. */
 extern int func_001c6af4(const struct ItemPage *page);
 

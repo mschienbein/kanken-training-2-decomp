@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct CountedResource {
     unsigned char reserved00[6];
     signed char category;
@@ -15,7 +16,7 @@ struct CountedResourceList {
     struct CountedResource **items;
 };
 
-extern int func_0015f5b0(const struct CountedResource *resource);
+
 
 int func_001743d8(const struct CountedResourceList *list)
 {

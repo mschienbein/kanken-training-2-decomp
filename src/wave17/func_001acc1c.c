@@ -1,3 +1,4 @@
+#include "game/functions.h"
 /* [INFERENCE] Component type and count-result role. func_001eb7a4
  * passes its +0x60 component and discards the completed count. */
 struct Component001acc1c;

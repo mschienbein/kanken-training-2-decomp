@@ -1,20 +1,22 @@
+#include "game/functions.h"
+#include "game/startup.h"
 #include "game/scheduler.h"
 
-extern int func_001869d0(int slot);
-extern void func_001360a4(void);
-extern void func_00135a28(void);
-extern void func_00135a58(void);
-extern void func_00135a88(void);
+
+
+
+
+
 extern void func_00197220(void);
-extern void func_00135ab8(void);
+
 extern void func_00135058(void);
-extern void func_001351bc(void);
-extern void func_0012d2bc(void);
-extern void func_0012d2e8(void);
+
+
+
 extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(void),
                          void (*complete)(void), int argument);
 /* func_001109fc/func_00110a28 pass this shutdown callback, not an integer. */
-extern void func_001906a8(void (*callback)(void));
+
 
 void func_00195a50(void)
 {

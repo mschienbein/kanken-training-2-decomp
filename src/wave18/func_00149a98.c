@@ -1,25 +1,15 @@
-struct ScreenAsset;
-struct NotificationController {
-    unsigned char reserved00[4];
-    int identifiers[2];
-    struct ScreenAsset *assets[3];
-    unsigned char active;
-    unsigned char reserved19[0x881];
-    unsigned short previous;
-    unsigned char reserved89c[0x20];
-    float scale;
-};
-extern void func_00183208(struct ScreenAsset *asset);
-extern void func_00180314(int index);
-extern unsigned func_0014c338(void);
+#include "game/functions.h"
+#include "game/resource_runtime.h"
 
-struct NotificationController *func_00149a98(struct NotificationController *controller)
+
+
+struct W10DrawingInput *func_00149a98(struct W10DrawingInput *controller)
 {
     int i;
     for (i = 0; i < 3; ++i) {
-        if (controller->assets[i]) {
-            func_00183208(controller->assets[i]);
-            controller->assets[i] = 0;
+        if (controller->displays[i]) {
+            func_00183208(controller->displays[i]);
+            controller->displays[i] = 0;
         }
     }
     for (i = 0; i < 2; ++i) {
@@ -28,9 +18,9 @@ struct NotificationController *func_00149a98(struct NotificationController *cont
             controller->identifiers[i] = -1;
         }
     }
-    if (controller->active == 1) {
-        controller->previous = func_0014c338();
-        controller->active = 0;
+    if (controller->notification_active == 1) {
+        controller->field89a = func_0014c338();
+        controller->notification_active = 0;
     }
     return controller;
 }

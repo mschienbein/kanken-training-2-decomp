@@ -1,6 +1,7 @@
 #ifndef GAME_SERVICE_RUNTIME_H
 #define GAME_SERVICE_RUNTIME_H
 
+#include "ctr/ipc.h"
 struct AudioDspParameterBlock;
 struct AudioDspReply;
 struct SignalState;
@@ -182,17 +183,10 @@ extern void func_00180558(const struct ServiceOutput *state, int index, void (**
 
 
 extern "C" {
-extern Result func_00148118(const struct ServiceHandle *session, uint16_t flags);
 extern Result func_00145e84(uint16_t flags);
-extern Result func_00148198(const struct ServiceHandle *session, unsigned int *output);
 extern Result func_00145eb0(unsigned int *output);
-extern Result func_0014aed0(const struct ServiceHandle *session, uint16_t flags);
 extern Result func_00148014(uint16_t flags);
-extern Result func_001480d4(const struct ServiceHandle *service,
-                            unsigned short id, unsigned char *value);
 Result func_00145e08(unsigned short id, unsigned char *value);
-extern Result func_001481cc(const struct ServiceHandle *service,
-                            unsigned short id, unsigned short *value);
 Result func_00146008(unsigned short id, unsigned short *value);
 }
 #endif

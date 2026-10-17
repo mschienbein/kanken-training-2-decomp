@@ -1,6 +1,7 @@
+#include "game/functions.h"
 extern void func_00195f7c(void);
-extern void func_0019b574(unsigned parameter, unsigned *value);
-extern void func_0011db78(int count);
+
+
 
 struct CommandCapture {
     unsigned reserved00;

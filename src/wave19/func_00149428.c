@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/matrix.h"
 
 float func_00149428(float turns)

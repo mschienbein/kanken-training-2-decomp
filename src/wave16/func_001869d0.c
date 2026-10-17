@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/scheduler.h"
 
 int func_001869d0(int slot)

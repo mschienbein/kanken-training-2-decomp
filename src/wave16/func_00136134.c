@@ -1,3 +1,4 @@
+#include "game/functions.h"
 /* Shared declaration copied exactly from src/pilot/loop_state.c. */
 struct Item { int value; int flags; int id; };
 struct State {

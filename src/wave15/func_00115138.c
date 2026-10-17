@@ -1,5 +1,6 @@
-extern int func_00115128(void);
-extern unsigned char func_001923c4(void);
+#include "game/functions.h"
+
+
 
 int func_00115138(void)
 {

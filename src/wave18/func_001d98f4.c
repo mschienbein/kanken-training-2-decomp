@@ -1,3 +1,4 @@
+#include "game/functions.h"
 /* [INFERENCE] Per-channel modulation state; untouched prefix belongs to its configuration. */
 struct AudioModulationState {
     unsigned char reserved00[0x10];

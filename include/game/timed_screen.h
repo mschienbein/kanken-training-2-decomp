@@ -1,9 +1,9 @@
 #ifndef GAME_TIMED_SCREEN_H
 #define GAME_TIMED_SCREEN_H
+#include "game/selection.h"
 
 struct W15gTimedScreenVTable;
 struct W15gTimedScreen;
-struct W15gNumberController;
 
 
 
@@ -20,7 +20,7 @@ struct W15gTimedScreenVTable {
 struct W15gTimedScreen {
     const W15gTimedScreenVTable *vtable;
     unsigned char reserved04[0x44];
-    W15gNumberController *numbers;
+    Screen *numbers;
     unsigned char reserved4c[0x108];
     unsigned char active;
     unsigned char reserved155[0x27];
@@ -32,7 +32,6 @@ extern "C" {
 
 void func_001c1590(unsigned ignored);
 void func_001dbf40(unsigned *value, unsigned *minutes, unsigned *seconds, unsigned *milliseconds);
-void func_0017a034(W15gNumberController *controller, int index, int value);
 void func_001ef704(W15gTimedScreen *screen);
 }
 #endif

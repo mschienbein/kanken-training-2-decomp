@@ -14,6 +14,21 @@ struct GraphicsResources {
     struct GraphicsResource *resources[3];
 };
 
+struct TextureResource;
+struct GraphicsResourceLink {
+    struct TextureResource *resource;
+    unsigned kind, identifier;
+    struct GraphicsResourceLink *next;
+};
+struct SlotValue { void *value; };
+struct GraphicsResourceTable {
+    struct TextureResource *defaults[2];
+    unsigned reserved08[2];
+    struct GraphicsResourceLink *buckets[512];
+    unsigned char reserved810[0x18];
+    const struct SlotValue *slots[32];
+};
+
 #ifdef __cplusplus
 struct GraphicsHeap;
 struct GraphicsHeapVTable {
@@ -81,6 +96,7 @@ struct GraphicsDescription {
 extern "C" {
 #endif
 extern struct GraphicsResources bss_0049da58;
+extern struct GraphicsResourceTable *data_00242a0c;
 extern struct GraphicsHeap data_002426d0;
 extern struct GraphicsResource *func_001936a0(struct GraphicsDescription *description, struct GraphicsHeap *heap);
 extern void func_00108f94(void);

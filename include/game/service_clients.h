@@ -3,6 +3,9 @@
 
 #include "game/result.h"
 #include <string.h>
+#include "game/applet.h"
+#include "game/service_availability.h"
+#include "ctr/ipc.h"
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
@@ -18,15 +21,11 @@ void func_0010b98c(void);
 void func_0019df5c(void);
 Result func_00112558(void);
 Result func_00113c0c(unsigned *handle, const char *name);
-Result func_00113c74(void);
-void func_00192afc(Result result, unsigned address);
+CtrResult func_00113c74(void);
 extern unsigned data_0024377c;
 extern const char data_0021c5d9[];
-Result func_0019edcc(void);
-Result func_00192b44(unsigned *handle, const char *name, int length, unsigned flags);
 extern unsigned char data_002430dc;
 unsigned func_00192a7c(void);
-Result func_0012e528(const unsigned *handle, signed char *output);
 void func_0019d6c4(unsigned result, unsigned address);
 Result func_00121444(void);
 }

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/screen.h"
 
 void func_0010920c(int value)

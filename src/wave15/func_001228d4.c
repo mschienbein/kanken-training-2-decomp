@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/graphics_state.h"
 
 signed char func_001228d4(unsigned int index)

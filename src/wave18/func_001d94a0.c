@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/audio_voice.h"
 
 
@@ -47,7 +48,7 @@ struct NoteVoice {
     struct AudioVoiceGroup *group;
 };
 extern const float data_00220c20;
-extern void func_001d98f4(struct AudioModulationState *state);
+
 extern void func_001d2d68(struct AudioSweep *sweep, float value);
 extern void func_001d48d4(struct AudioVoiceGroup *group, const struct VoiceWaveInfo *info, unsigned sample_offset);
 extern void func_001d9238(struct NoteVoice *voice, const struct VoiceWaveInfo *info, unsigned sample_offset);

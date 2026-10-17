@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/runtime.h"
 
 struct BufferEntry44 {

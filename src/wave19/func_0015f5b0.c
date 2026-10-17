@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct CountedResource {
     unsigned char reserved00[6];
     signed char category;

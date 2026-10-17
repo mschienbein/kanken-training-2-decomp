@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/audio_voice.h"
 #include "game/stream_manager.h"
 

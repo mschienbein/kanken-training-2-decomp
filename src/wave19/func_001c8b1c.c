@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include <stdint.h>
 
 struct BinaryResourceHeader {
@@ -10,7 +11,7 @@ struct RelativeBinaryResource {
     unsigned char reserved00[8];
     int offset;
 };
-extern void func_001840dc(struct BinaryResourceReference *reference);
+
 
 void func_001c8b1c(struct RelativeBinaryResource *object)
 {

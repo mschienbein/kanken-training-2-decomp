@@ -157,7 +157,7 @@ extern int func_001dd44c(int category, int kind, int mode);
 extern int func_001dd61c(int category);
 extern void func_00190dc0(int category);
 extern int func_00171bf0(int category, int kind);
-extern int func_00173350(int sound);
+extern void func_00173350(int sound);
 extern void func_00173408(struct SelectionHintPanel *panel, int state);
 extern int func_00173608(void);
 extern void func_00173630(struct W6ListController *controller, int list, int resource);

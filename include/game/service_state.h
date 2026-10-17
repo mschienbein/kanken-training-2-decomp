@@ -194,12 +194,20 @@ struct X07NarrowCommand {
     void *buffer;
 };
 
+struct WorkCommand {
+    unsigned operation, flags, reserved08;
+    int first, second;
+    unsigned reserved14[3];
+};
 struct WorkQueue {
     int enabled;
     int current;
     int active;
     unsigned char reserved0c[0x1018];
     unsigned writeIndex, readIndex;
+#ifndef __cplusplus
+    struct WorkCommand commands[];
+#endif
 };
 
 #ifdef __cplusplus

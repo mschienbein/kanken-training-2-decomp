@@ -1,6 +1,7 @@
+#include "game/functions.h"
 #include "game/resource_tables.h"
 
-extern struct DetailEntry *func_001851f0(int id, int index);
+
 
 void func_0019d95c(uintptr_t resource, int index, int force)
 {

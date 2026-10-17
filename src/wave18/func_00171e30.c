@@ -1,4 +1,5 @@
-extern int func_00169974(void);
+#include "game/functions.h"
+
 
 int func_00171e30(void)
 {

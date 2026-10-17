@@ -1,10 +1,11 @@
+#include "game/functions.h"
 struct W15fCostOptions {
     unsigned char reserved00[2];
     unsigned char option;
     unsigned char kind;
 };
 
-extern int func_001549c8(void);
+
 
 int func_00154258(const struct W15fCostOptions *options)
 {

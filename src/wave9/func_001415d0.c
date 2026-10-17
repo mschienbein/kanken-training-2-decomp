@@ -1,5 +1,6 @@
+#include "game/startup.h"
 #include "game/scheduler.h"
-extern void func_0014562c(void);
+
 extern void func_00190688(int task, void (*callback)(void));
 
 void func_001415d0(void)

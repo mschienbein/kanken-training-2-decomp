@@ -3,11 +3,11 @@
 
 struct MotionKey;
 
-extern void func_0016ee38(struct MotionState *state);
+
 extern int func_0016ece8(struct MotionState *state, const struct MotionKey *keys, int heap);
 extern void func_0016ec84(struct MotionState *state, int first, int last);
-extern void func_0016ec6c(struct MotionState *state, int loop);
-extern void func_0016ec28(struct MotionState *state, int index);
+
+
 
 void func_0016cf80(struct MotionScreen *screen, int index, const struct MotionKey *keys)
 {

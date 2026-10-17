@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/selection.h"
 #include "game/animation.h"
 #include "game/notification.h"
@@ -6,8 +7,8 @@ extern int func_00172994(int index);
 extern void func_0017433c(int index, int ticks);
 extern int func_0017abf8(int index, int resource);
 extern void func_0016fca0(int mode);
-extern void func_0016fa38(int enabled);
-extern void func_0016fa18(int enabled);
+
+
 
 void func_001dd6c8(struct W6SelectionScreen *screen)
 {

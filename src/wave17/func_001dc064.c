@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/notification.h"
 
 void func_001dc064(int enabled)

@@ -1,12 +1,8 @@
 #include <string.h>
 
-struct HwrOutputState {
-    unsigned reserved00;
-    unsigned count;
-};
+#include "game/hwr_image.h"
 
 extern unsigned bss_004bfbc8[32];
-extern struct HwrOutputState data_00243818;
 
 void func_0017d9e0(void)
 {

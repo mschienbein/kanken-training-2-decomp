@@ -22,7 +22,7 @@ extern "C" {
 int func_00146dfc(ResourceFile *file, int offset, int origin);
 int func_00146d98(ResourceFile *file, void *buffer, unsigned size, int *transferred);
 Result func_00180944(ResourceStream *stream, long long offset, int origin);
-Result func_0019d5e4(ResourceStream *stream, int *transferred, void *buffer, unsigned size);
+int func_0019d5e4(ResourceStream *stream, unsigned *transferred, void *buffer, unsigned size);
 Result func_0019d66c(ResourceStream *stream, ResourceSize *size);
 }
 

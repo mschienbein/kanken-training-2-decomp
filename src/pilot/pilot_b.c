@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/runtime.h"
 struct G103798 { void *p; int n; };
 extern struct G103798 data_00242220;

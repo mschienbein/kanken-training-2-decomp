@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/bss_0049ecf0.h"
 
 struct CommandPatch {
@@ -15,7 +16,7 @@ struct ExtendedCommandQueue {
     unsigned char complete;
     unsigned char flush;
 };
-extern unsigned func_0013776c(void *buffer, unsigned size);
+
 
 void func_0012ccd8(struct ExtendedCommandQueue *detail, struct Command *command)
 {

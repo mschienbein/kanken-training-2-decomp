@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/material.h"
 /* ResourceArray is copied exactly from src/wave6/func_00104f90.c. */
 

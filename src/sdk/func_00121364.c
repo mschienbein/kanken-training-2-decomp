@@ -1,3 +1,4 @@
+#include "game/input_device.h"
 #include "ctr/cp15.h"
 
 void func_00121364(void)

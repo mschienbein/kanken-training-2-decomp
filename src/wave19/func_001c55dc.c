@@ -1,3 +1,4 @@
+#include "game/functions.h"
 int func_001c55dc(int year)
 {
     if (year % 400 == 0)

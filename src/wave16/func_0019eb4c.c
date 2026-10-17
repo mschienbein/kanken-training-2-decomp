@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/screen.h"
 
 static struct DisplayQueueCounter *enable_state(void)

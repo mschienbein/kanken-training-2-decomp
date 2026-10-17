@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/bss_0049ecf0.h"
 #include "game/render_state.h"
 
@@ -5,13 +6,13 @@
 
 struct CommandQueue;
 
-extern void func_0011d2d4(void);
+
 extern void func_0011cc30(void);
 extern void func_001181fc(void);
 extern void func_0011d12c(void);
 extern void func_00117f2c(void);
-extern void func_0011c77c(void);
-extern void func_00122a68(void);
+
+
 
 void func_001103e4(void)
 {

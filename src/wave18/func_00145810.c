@@ -1,7 +1,8 @@
+#include "game/functions.h"
 #include <string.h>
 #include "game/notification.h"
 
-extern struct NotificationPayload *func_00181224(int index);
+
 
 void func_00145810(struct NotificationPayload *output, int index)
 {

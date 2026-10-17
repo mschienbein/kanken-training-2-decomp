@@ -1,4 +1,5 @@
-extern int func_0018ffac(int limit);
+#include "game/random.h"
+
 extern int func_0017abf8(int channel, int sound);
 
 void func_00173350(int kind)

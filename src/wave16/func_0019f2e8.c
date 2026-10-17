@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/task_runtime.h"
 struct WidgetReadinessState {
     unsigned char reserved00[0x708];

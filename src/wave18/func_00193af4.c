@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/render_state.h"
 
 void func_00193af4(unsigned index)

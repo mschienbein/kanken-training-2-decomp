@@ -1,4 +1,5 @@
-extern int func_001c55dc(int year);
+#include "game/functions.h"
+
 
 int func_0015e290(int year)
 {

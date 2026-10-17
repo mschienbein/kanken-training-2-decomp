@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/resource_runtime.h"
 
 void func_0010a828(int value)

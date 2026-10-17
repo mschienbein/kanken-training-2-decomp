@@ -1,9 +1,10 @@
+#include "game/functions.h"
 #include <stdint.h>
 #include "game/shared_memory.h"
 
-extern unsigned func_00182b5c(unsigned address, unsigned size);
-extern int func_0013e6b8(void);
-extern unsigned func_0013e6d0(unsigned address, unsigned size);
+
+
+
 
 unsigned func_001378d8(const void *pointer)
 {

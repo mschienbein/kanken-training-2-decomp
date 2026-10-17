@@ -1,7 +1,8 @@
+#include "game/functions.h"
 #include "game/service_state.h"
 
-extern void func_001864cc(unsigned char suspended);
-extern void func_001869f0(void);
+
+
 
 void func_0019eb60(int reason, int enabled)
 {

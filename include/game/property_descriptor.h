@@ -31,6 +31,9 @@ extern struct NameTable *data_0023ecc4[2];
 extern struct NameTable *data_0023efdc[2];
 extern struct NameTable *data_0023f004[2];
 extern struct NameTable *data_0023f014[2];
+extern struct NameTable *bss_00290e2c[10];
+extern struct NameTable *bss_002910b4[20];
+extern struct NameTable *bss_0029101c[19];
 
 extern struct NameTable *func_0016e06c(struct NameTable *object);
 extern void func_0015f5a4(struct NameTable *object, int category, int identifier,

@@ -1,6 +1,6 @@
 #include "game/drawing_system.h"
 
-extern void func_0011dcec(int mode);
+
 extern void func_0019b74c(int display);
 
 void func_0010a9bc(int event)

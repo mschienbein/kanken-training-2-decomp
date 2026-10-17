@@ -1,10 +1,12 @@
-extern int func_0019b564(void);
-extern int func_0019b54c(int index);
+#include "game/functions.h"
+#include "game/scheduler.h"
+
+
 extern int func_0011f4b4(void);
 extern void func_00190688(int index, void (*callback)(void));
-extern void func_00186944(int index, int value);
+
 extern void func_00135f80(void);
-extern void func_00135ae8(void);
+
 
 void func_0012d328(void)
 {

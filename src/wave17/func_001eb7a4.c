@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/screen.h"
 
 struct Component001dcf4c;
@@ -71,25 +72,25 @@ struct DisplayUpdateManager {
 
 extern void func_001dcf4c(struct Component001dcf4c *component);
 extern void func_001dcdd0(struct Component001dcdd0 *component);
-extern void func_001e358c(struct DeferredRequest *request);
+
 extern void func_001b3564(struct Component001b3564 *component);
-extern int func_001eaaac(struct Component001eaaac *component);
+
 extern void func_001e9e7c(struct Component001e9e7c *component);
-extern int func_001eaf70(struct Component001eaf70 *component);
-extern int func_0015eb90(struct Component0015eb90 *component);
-extern void func_001acc18(void *object);
-extern int func_001ad134(struct Component001ad134 *component);
-extern int func_001acc1c(struct Component001acc1c *component);
-extern int func_001b6b88(struct Component001b6b88 *component);
-extern int func_001b4718(struct Component001b4718 *component);
+
+
+
+
+
+
+
 extern void func_001b4310(struct Component001b4310 *component);
-extern int func_001af244(struct Component001af244 *component);
-extern int func_001acebc(struct Component001acebc *component);
+
+
 extern void func_001ad7a0(struct Component001ad7a0 *component);
 extern void func_001b6098(struct Component001b6098 *component);
 extern void func_001b4d58(struct Component001b4d58 *component);
-extern int func_001b7c88(struct Component001b7c88 *component);
-extern void func_001adff8(struct Component001adff8 *component);
+
+
 extern int func_001b6604(struct TransitionController *group);
 extern void func_001ebb14(struct DisplayUpdateManager *manager, struct DisplayUpdateEntry4c *entry);
 extern void func_001eb95c(struct DisplayUpdateManager *manager, struct DisplayUpdateEntry50 *entry);

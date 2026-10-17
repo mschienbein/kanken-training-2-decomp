@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct HwrPoint {
     unsigned char x;
     unsigned char y;
@@ -9,8 +10,8 @@ struct HwrStroke {
 };
 
 extern struct HwrStroke bss_004b94e8;
-extern int func_00156f04(void);
-extern int func_00156f50(void);
+
+
 extern int func_00156f74(struct HwrStroke *stroke, int update_selection);
 
 int func_0015d548(const unsigned char *encoded)

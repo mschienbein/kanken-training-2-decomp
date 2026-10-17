@@ -1,11 +1,8 @@
-struct W18DisplayCollection;
+#include "game/display_groups.h"
 
 /* Callers pass a writable ten-slot collection and ignore the result.
- * [INFERENCE] The residual counter is exposed as the return value. */
+ * [INFERENCE] Capacity-like result semantics; no original loop is claimed. */
 extern "C" int func_001c20e8(W18DisplayCollection *collection)
 {
-    int i;
-    for (i = 0; i < 10; ++i) {
-    }
-    return i;
+    return 10;
 }

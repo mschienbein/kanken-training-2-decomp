@@ -1,6 +1,7 @@
+#include "game/applet.h"
 #include "game/functions.h"
 
-extern int func_0012fda0(unsigned int flags);
+
 
 int func_00122500(void)
 {

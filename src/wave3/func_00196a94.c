@@ -1,4 +1,5 @@
-extern void func_0019b574(unsigned parameter, unsigned *value);
+#include "game/functions.h"
+
 extern void func_0019c9d4(unsigned queue);
 extern void func_0019c920(void);
 

@@ -1,25 +1,7 @@
-struct HwrState {
-    unsigned short state;
-    unsigned short mode;
-    unsigned short previous_mode;
-    unsigned char reserved06[0xc];
-    unsigned short option;
-};
+#include "game/functions.h"
+#include "game/hwr_runtime.h"
 
-struct HwrContext {
-    unsigned short reserved00;
-    unsigned short strokes;
-    unsigned short points;
-    unsigned char reserved06[0x16];
-    unsigned short encoded_size;
-    unsigned char reserved1e[0xa];
-    unsigned short *group_count;
-};
 
-extern struct HwrState bss_004bfce0;
-extern struct HwrContext data_00243834;
-extern void func_0015cab4(void);
-extern int func_001c7a1c(void);
 
 int func_00156f04(void)
 {

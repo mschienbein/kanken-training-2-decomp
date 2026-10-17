@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/startup.h"
 #include "game/resource_runtime.h"
 #include "game/runtime.h"

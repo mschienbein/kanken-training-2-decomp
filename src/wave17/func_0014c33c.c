@@ -1,3 +1,4 @@
+#include "game/functions.h"
 extern unsigned data_0024388c;
 /* [INFERENCE] The caller supplies zero; this input is unused by the callee. */
 extern unsigned func_0014dae0(unsigned unused);
