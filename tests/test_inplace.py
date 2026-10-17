@@ -511,6 +511,49 @@ class CompositeAliasSwitchTest(unittest.TestCase):
                     self.assertEqual(linker.rewrites, [])
                     self.assertEqual(linker.removed_callees, [])
 
+    def test_v5_aliases_refuse_omitted_architectural_guard_writes(self):
+        # Independent F03 fixtures: these loads/transfers write the bounded index even
+        # when the installed decoder's register-access list omits their destinations.
+        for name, word in (("ldrexd", 0xE1B02F9F), ("predicated ldrexd", 0x31B02F9F),
+                           ("mrrc", 0xEC532F00)):
+            for form in ("words", "branches"):
+                with self.subTest(instruction=name, form=form):
+                    fixture = self.fixture(form, alias_call=True, window=(word,))
+                    linker = self.linker(fixture)
+                    with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                        linker.link(fixture.object)
+                    self.assertEqual(linker.rewrites, [])
+                    self.assertEqual(linker.removed_callees, [])
+
+    def test_v5_aliases_refuse_all_rfe_forms_and_owner_placements(self):
+        # Independently encoded exception returns, with both the review's r4 frame
+        # and an sp frame: none proves PC/CPSR or little-endian state preservation.
+        variants = (("rfeia", 0xF8BD0A00), ("rfeda", 0xF83D0A00),
+                    ("rfedb", 0xF93D0A00), ("rfeib", 0xF9BD0A00))
+        for name, encoding in variants:
+            for base in (4, 13):
+                word = (encoding & ~(0xF << 16)) | base << 16
+                for form in ("words", "branches"):
+                    for placement in ("window", "before_compare", "one_predecessor", "unreachable"):
+                        with self.subTest(instruction=name, base=base, form=form, placement=placement):
+                            if placement == "window":
+                                kwargs = {"window": (word,)}
+                            elif placement == "before_compare":
+                                kwargs = {"compare": word, "window": (
+                                    JumpTableContextTest.CMP_R2_3, JumpTableContextTest.MOV_R4_R0)}
+                            elif placement == "one_predecessor":
+                                kwargs = {"compare": JumpTableContextTest.branch(BASE + 4, BASE + 12, 0x1),
+                                          "window": (word, JumpTableContextTest.CMP_R2_3,
+                                                     JumpTableContextTest.MOV_R4_R0)}
+                            else:
+                                kwargs = {"suffix": (word,)}
+                            fixture = self.fixture(form, alias_call=True, **kwargs)
+                            linker = self.linker(fixture)
+                            with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                                linker.link(fixture.object)
+                            self.assertEqual(linker.rewrites, [])
+                            self.assertEqual(linker.removed_callees, [])
+
 
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
     sec = inplace.Section(1, "i.f", word, len(word), False, True, False)
