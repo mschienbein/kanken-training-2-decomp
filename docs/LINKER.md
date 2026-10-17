@@ -18,6 +18,27 @@ branch is reported (`linker_rewrites` in `tools/match.py` results, `tools/build.
 `tools/compid.py` records), and the model name is recorded (`linker_model`). `strict-v1` (no
 rewrites; the oracle before this change) stays selectable with `--linker-model strict-v1`.
 
+## Placement refusals and matcher exits
+
+`tools/match.py` exits **0** only when every surviving function matches, **1** for a
+completed comparison with differing bytes or extents, and **2** when compilation or linking
+is refused. A candidate with no surviving catalogued function to compare is also refused.
+Compile/link refusals write `<source-stem>.result.json` with `status: "refused"`, a precise
+`reason`, the `error_type`, selected profile/models and an empty `functions` list; they never
+invent mismatch rows.
+
+Image-address failures during placement are `LinkError`s, including nested references through
+common initializer sections, RTTI/typeinfo, ordinary `.constdata`, anonymous string witnesses,
+inline-callee reads and removed-call context reads. Diagnostics identify the referring
+section/offset or operation, span size and failure category. Unvalidated placement witnesses
+and underlying image-error values are redacted, including alignment/conflict/overlap diagnostics.
+A function/alias whose section offset implies a noncatalogued section base is refused before
+catalogue lookup. These checks
+do not infer another placement or change relocation, equality, alias or model decisions.
+Only failures of the image-read boundary are translated; unrelated internal `ValueError`s
+and `KeyError`s remain visible.
+
+
 ## Model history
 
 A model name is a version: rules are never edited under a recorded name.

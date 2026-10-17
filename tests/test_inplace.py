@@ -298,6 +298,88 @@ def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
     return sec, rel
 
 
+def placement_failure_fixture(base, section_name=".constdata", relocation_offset=0, nested=True):
+    """Synthetic pointer chain: caller -> common data/typeinfo -> anonymous string section."""
+    caller = inplace.Symbol("func_00100000", 0, 4, "STT_FUNC", "STB_GLOBAL", 1)
+    common = inplace.Symbol(section_name, 0, 0, "STT_SECTION", "STB_LOCAL", 2)
+    string = inplace.Symbol(".conststring", 0, 0, "STT_SECTION", "STB_LOCAL", 3)
+    size = relocation_offset + 4
+    obj = inplace.ObjectFile.__new__(inplace.ObjectFile)
+    obj.sections = {
+        1: inplace.Section(1, "i.caller", bytes(4), 4, False, True, False,
+                           [inplace.Reloc(0, inplace.R_ARM_ABS32, common)]),
+        2: inplace.Section(2, section_name, bytes(size), size, False, False, False,
+                           [inplace.Reloc(relocation_offset, inplace.R_ARM_ABS32, string)] if nested else []),
+        3: inplace.Section(3, ".conststring", b"name\0", 5, False, False, False),
+    }
+    obj.symbols = [caller, common, string]
+    catalogue = {BASE: {"address": BASE, "size": 4, "isa": "arm"}}
+    mem = Memory()
+    mem.write(BASE, struct.pack("<I", base))
+    return obj, mem, catalogue
+
+
+class PlacementFailureTest(unittest.TestCase):
+    def linker(self, mem, catalogue):
+        return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x300000, 0x301000))
+
+    def test_common_section_nested_relocation_refuses_instead_of_raising_valueerror(self):
+        """r41256: placement follows an instruction-valued pointer into a common initializer."""
+        obj, mem, catalogue = placement_failure_fixture(0xE1A04000)
+        with self.assertRaisesRegex(inplace.LinkError, r"\.constdata\+0x0:.*outside the image.*redacted"):
+            self.linker(mem, catalogue).link(obj)
+
+    def test_typeinfo_nested_relocation_refuses_instead_of_raising_valueerror(self):
+        """r41272: the inferred RTTI section starts at zero and its pointer lies at address four."""
+        obj, mem, catalogue = placement_failure_fixture(0, ".rodata._ZTI6Layout", 4)
+        with self.assertRaisesRegex(inplace.LinkError, r"_ZTI6Layout\+0x4:.*outside the image.*redacted"):
+            self.linker(mem, catalogue).link(obj)
+
+    def test_terminal_constdata_read_remains_a_refusal(self):
+        obj, mem, catalogue = placement_failure_fixture(0xE1A04000, nested=False)
+        with self.assertRaisesRegex(inplace.LinkError, r"\.constdata:.*outside the image.*redacted"):
+            self.linker(mem, catalogue).link(obj)
+
+    def test_every_placement_relocation_translates_image_address_failure(self):
+        symbol = inplace.Symbol("local", 0, 0, "STT_SECTION", "STB_LOCAL", 2)
+        linker = self.linker(Memory(), CATALOGUE)
+        for rtype in (inplace.R_ARM_ABS32, inplace.R_ARM_TARGET1, inplace.R_ARM_REL32,
+                      inplace.R_ARM_PREL31, inplace.R_ARM_CALL, inplace.R_ARM_JUMP24,
+                      inplace.R_ARM_PC24, inplace.R_ARM_THM_CALL,
+                      inplace.R_ARM_THM_JUMP11, inplace.R_ARM_THM_JUMP8):
+            with self.subTest(rtype=rtype):
+                sec, rel = synthetic(rtype, bytes(4), symbol)
+                with self.assertRaisesRegex(inplace.LinkError, "placement reference.*witness address redacted"):
+                    linker._original_value(rel, 4, sec)
+        for rtype in (inplace.R_ARM_NONE, inplace.R_ARM_V4BX):
+            sec, rel = synthetic(rtype, bytes(4), symbol)
+            self.assertIsNone(linker._original_value(rel, 4, sec))
+
+    def test_catalogue_alias_section_base_is_checked_before_indexing(self):
+        obj, mem, catalogue = placement_failure_fixture(0)
+        obj.sections[1].relocs = []
+        obj.symbols = [
+            inplace.Symbol("constructor", 4, 4, "STT_FUNC", "STB_GLOBAL", 1),
+            inplace.Symbol("constructor_alias", 4, 4, "STT_FUNC", "STB_GLOBAL", 1),
+        ]
+        names = {name: {"address": BASE} for name in ("constructor", "constructor_alias")}
+        linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names), (0x300000, 0x301000))
+        with self.assertRaisesRegex(inplace.LinkError, "section offset 0x4.*section base 0xffffc.*not a catalogued"):
+            linker.link(obj)
+
+    def test_same_address_aliases_still_share_one_catalogue_placement(self):
+        obj, mem, catalogue = placement_failure_fixture(0)
+        obj.sections[1].relocs = []
+        obj.symbols = [
+            inplace.Symbol("constructor", 0, 4, "STT_FUNC", "STB_GLOBAL", 1),
+            inplace.Symbol("constructor_alias", 0, 0, "STT_FUNC", "STB_GLOBAL", 1),
+        ]
+        names = {name: {"address": BASE} for name in ("constructor", "constructor_alias")}
+        linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names), (0x300000, 0x301000))
+        placed, data = linker.link(obj)[1]
+        self.assertEqual((placed.base, placed.origin, data), (BASE, "catalogue", bytes(4)))
+
+
 class RelocationArithmeticTest(unittest.TestCase):
     """Compiler-free checks of encodings the fixtures above do not reach."""
 

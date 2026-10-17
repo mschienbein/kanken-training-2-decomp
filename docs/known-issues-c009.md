@@ -2,14 +2,14 @@
 
 ## Status
 
-**C008-r3 merged, c009 final checks pending; not review-ready or accepted.**
-Continued `9d6f051`, collection `b63317e` and remediation `d031cce` without restarting searches.
+**Readiness resumed on prepared main f8adff4; not review-ready or accepted.**
+Includes complete c008-r3 successor `b5e8b8a`, preserving c009's typed slot13/14 work.
 The original sixteen-address boundary is closed by six canonical MATCH destinations
 and ten recorded deferrals. Three further interface/tooling deferrals are below.
 `docs/GATES.md` stays v1.16. Main owns full builds/suite and acceptance.
-The user requested wrap-up at the merged continuation milestone. Later canonical
-source edits are preserved but unexercised; no merged-tree gate success or pre-review
-PASS is claimed. Resume from the committed NOTES/HANDOFF, not an earlier author search.
+Main resumed the committed continuation without restarting searches. Final checks
+run nice'd and sequentially in the c009 worktree. No merged-tree gate success or
+pre-review PASS is claimed yet; Main alone owns full builds/suite/prepare.
 
 `config/candidates/c009.json` lists **679 units / 679 functions / 57,276 target
 bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:

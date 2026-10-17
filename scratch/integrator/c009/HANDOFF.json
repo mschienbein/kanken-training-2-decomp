@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "user-requested-wrap-up-merged-milestone-not-review-ready",
+  "status": "resumed-readiness-checks-pending-main-f8adff4",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.16 unchanged",
@@ -25,7 +25,7 @@
     }
   },
   "dry_ledger_units": 2206,
-  "dry_ledger_basis": "c008-r3 final/dry-matches.json: 1527 units/1601 functions plus current 679 c009 additions; original failed c008 is not used",
+  "dry_ledger_basis": "Prepared main-root accept/c008-r3/matches.json (1527 units/1601 functions) plus679 c009 additions",
   "revised_predecessor_units": [
     {
       "source": "src/pilot/pilot_b.c",
@@ -1133,7 +1133,7 @@
     "include/game/sequence.h": "35234be854a334469f3228740e01479e0c302d0569fa01501018d3dc4c669f7d",
     "include/game/sequence_track.h": "df50ad2bc2eed881c96cbd8a9c3551cfc6a8253e6c53e1cb0b9cfe94876acd22",
     "include/game/service_availability.h": "5dd1fe2fc2d62a1a4658f768a4c185c60e9f7339f1d1f56ec4946001fd4172bd",
-    "include/game/service_callbacks.h": "91f80e9e9069c408bb74ee65b35cfecc96424b317795db4898b0997ae9a5b978",
+    "include/game/service_callbacks.h": "d9fbfdfd13d873dadd0a239935f835c47941a7cf228492ef74eb21b5464701fe",
     "include/game/service_clients.h": "692b160f9556a380a35fad5ca171ee80b9e71bc489a231acede45a2b9e3728fc",
     "include/game/service_configuration_words.h": "e88fa3f0217213a76356727f1d66ad51a8eb9d7eb7ce5acad34f587f8716f4db",
     "include/game/service_lifetime.h": "6e2f4b69a18d0a4478b19d233a38635f09587615d6c1e964db87b94e2096bdee",
@@ -2012,7 +2012,7 @@
     "src/wave14/func_00114f90.c": "190e80c486f3487b2147a52d541fd4dfbfea7774b02b28e33b4735ad31f87e2a",
     "src/wave14/func_00114fd0.c": "505cde3d1e93b94778e462542442d79a4c1c743d6bffffe260141d379240701d",
     "src/wave14/func_00114ff0.c": "055aa10eee140449b1e1a3b2a10782153352a2e6495efd3ad7e1610f9d31d699",
-    "src/wave14/func_00115084.c": "4414760d62cf67af18d0629f8de5582f07b4885ba00d8bd96f72006abf643685",
+    "src/wave14/func_00115084.c": "9c775e53687f5330032fa3627c8066bab6ed00980ee1e6ed37147e400cf86b9c",
     "src/wave14/func_0011515c.c": "b1a4bf7bbeee093e04542364234bf0c73dd434d6b4cb285f2e56c1ea84a014d1",
     "src/wave14/func_00115344.c": "6df03b83a5cde7f4f07dcd1ef83828a63ff9c7127b317b06125157f6ff26946d",
     "src/wave14/func_001155f8.c": "e98edcc3e5c9e4140593973281833ee939106a830a7f2094b925e5061be5b44d",
@@ -3936,13 +3936,13 @@
     "push"
   ],
   "resumed_from": "9d6f0515230d641f51d91dc9ab4b3ffb14011c05",
-  "main_merged": "959311b45dc6ba2e373fbbec83a9b4b1e42ccae0",
+  "main_merged": "f8adff4",
   "c008_r2_merged": "38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac",
   "c008_r2_merge_commit": "9218542",
   "target_bytes_current_catalogue": 57276,
   "dry_ledger_functions": 2280,
   "revised_predecessor_functions": 126,
-  "revised_predecessor_basis": "Actual source delta against corrected c008-r3 commit 642d725; 122 units/126 functions, not all rematched",
+  "revised_predecessor_basis": "Source delta against main f8adff4, before fresh merged-tree verification",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
     "src/large/func_00203810.cpp",
@@ -4001,14 +4001,10 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Merge FixC008R3 preserving follow-up for service slots0/1/2/14 and outside-scope adjudication when its hash is supplied; 642d725 and c009 slot14 resolution are already merged.",
-    "Run tools/interfaces.py check --matches scratch/integrator/c009/dry-matches.json --allow-unchecked-cpp and preserve a new versioned report/actual exit. Saved 48 disagreements/28 policy/500 unchecked are historical, not current counts.",
-    "Remediate any new merged-tree disagreements from evidence; no shims/shadow types or unchecked-C waiver. Existing exact deferrals are in collection-closure-r1.json, interface-deferrals-r1.json and contract-deferrals.json.",
-    "Refresh revised scope against final r3 follow-up, then run scratch/integrator/c009/sweep.py with a new phase: all679 candidate units and122 revised predecessor units (126 functions) need final --show0 MATCH closure.",
-    "Run probe_interfaces.py --mode native and --mode signatures under exclusive new run names. Reuse main-root c008-r3/audit_indirect.py and corrected final/source-slot-map.json for the c009-wide original consumer sweep, including indirect tails and callback storage.",
-    "Scoped scheduler-bindings-acyclic-r1.json establishes a first-iteration root only, not all-path proof. Complete scheduler/startup/service/Aux callback consumer adjudication is still required.",
-    "Run complete argcheck and adjudicate every candidate and unparsed C++ contract; finish all seven docs/REVIEWING.md steps with findings fixed before review-ready claim.",
-    "No full suite/build/prepare/finalize/history edit/push was performed or authorized. Next serialized audit slot is released to FixC008R3 before c010; coordinate with Main before resuming c009."
+    "Main explicitly resumed readiness. Main f8adff4 / complete c008-r3 b5e8b8a is merged with slots0/1/2/14 corrected and before/after names preserved.",
+    "Run stable-ledger G3 to exit0; preserve exact reports/exits. Then final new/revised MATCH sweep, native/signature/indirect/forwarding consumers, complete argcheck adjudication and seven-step pre-review.",
+    "Use main-root scratch/integrator/c008-r3/complete/ as authoritative predecessor evidence. All observed canonical-contract consumers must be adjudicated irrespective of selected source rows.",
+    "Keep checks nice'd and sequential; no full suite/build/prepare/finalize/history edit/push. Coordinate finite toolchain slot with c010/Main."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4035,7 +4031,7 @@
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
     "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
-    "scratch/integrator/c009/dry-matches.json": "1bdd2797cb9fb4b4a52d8bd5c7674cd27e5813331fe881d5aec617143d0cec95",
+    "scratch/integrator/c009/dry-matches.json": "8063013743bf951a9f66e26b023c595585c8ca3ebf90c351dd4d025a023d28ce",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec",
@@ -4134,8 +4130,7 @@
     }
   ],
   "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3",
-  "c008_r3_merged": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
-  "pending_c008_r3_followup": "FixC008R3 preserving follow-up for ServiceCallbacks slots0/1/2/14 and complete outside-scope consumer adjudication; commit hash not supplied. This branch has only 642d725 plus its independently evidenced slot14 merge resolution.",
+  "c008_r3_merged": "b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b",
   "merge_evidence": "scratch/integrator/c009/merge-c008-r3-r1.json",
   "followup_report_attribution": {
     "agent": "FixC008R3",
@@ -4147,5 +4142,10 @@
       "14": "typed context notification, already retained in c009 merge"
     },
     "audit_omission": "Slot14 tail was decoded but left unadjudicated outside selected source rows; every observed canonical-contract consumer requires adjudication irrespective of source scope."
+  },
+  "prepared_predecessor_input": {
+    "path": "/home/michael/code/kanken-training-2-decomp/accept/c008-r3/matches.json",
+    "sha256": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
+    "owners_profiles_unchanged": true
   }
 }
