@@ -29,6 +29,7 @@ The v3 review fixes here precede its adoption; they do not revise v2 or any froz
 | `armlink5-inline-branchnop-v1` (commit c11a0ad) | **retired**: `--linker-model` refuses it | as v2, except that a callee defined in the candidate object was judged by the candidate's own section, never by the original. Independent review (ReviewLinker, F01) showed a wrong local helper could make its caller match: a `bx lr` helper at an address whose original is a 12-byte body, the excluded `MOV r0, r0; BX lr`, a veneer or a multi-entry owner turned the caller's BL into the original's NOP, and a caller-only ledger credited the caller (reproduced on the real image with func_001b6ec4 calling a local `func_0013714c`). Only artifacts of this branch's own checks recorded it. |
 | `armlink5-inline-branchnop-v2` | default | below |
 | `armlink5-inline-branchnop-v3` | opt-in, not the default | all v2 rules plus candidate-only callees in R1 below |
+| `armlink5-inline-branchnop-v5` | unadopted composite proposal | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; explicit selection and composite independent review required |
 
 ## Function-entry alias identity (v5 only, unadopted)
 
@@ -80,9 +81,9 @@ Frozen GATES v1.16 remains unchanged. The new v5 identifier and changed alias ac
 require a new composite independent review and explicit gate revision after c008's frozen
 evidence is finalized and closed. A gate-only revision never broadens v1/v2/v3 or v4;
 selection, both fresh receipts, prepare/history and model-transition review must bind v5.
-Regression coverage: `CppFunctionAliasTest`, `RemovedCalleeModelTest`,
-`CppAliasCompareTest`, `AliasCompareSafetyTest`, and `BuildRemovedCalleeModelTest` in
-`tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
+Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
+`RemovedCalleeModelTest`, `CppAliasCompareTest`, `AliasCompareSafetyTest`, and
+`BuildRemovedCalleeModelTest` in `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
 
 ## Sources
 
