@@ -24,6 +24,17 @@ versions behavior. If adoption numbering changes, preserve all normative require
   v5, and a transition reopens every affected R1 caller under existing model-review rules.
   No checkpoint, helper, data or denominator credit is granted by this implementation or draft.
 
+## Exact addition to the R1 model-selection introduction
+
+R1's model-selection introduction and the v4-only bounded-switch authorization also admit
+the distinct `armlink5-inline-branchnop-v5` identifier after this revision is independently
+approved and frozen. V5 must satisfy **all corrected v4 bounded-CFG, modeled-effect and
+owner-state proof conditions**, plus the alias conditions below. This adds a separately
+selected composite; it does not change the meaning of strict/v2/v3 or add alias support to
+v4. The default remains v2. Selection, both fresh receipts, prepare and finalized history
+must name v5 explicitly, and the existing transition review reopens all affected R1 callers.
+No old or in-flight checkpoint is retroactively selected or reinterpreted.
+
 ## Exact replacement for the conservative zero-size destructor-alias boundary
 
 ### Proven full-section function-entry aliases (v5 only)
