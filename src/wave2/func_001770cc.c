@@ -1,16 +1,4 @@
-struct Animation {
-    unsigned flags;
-    unsigned char reserved04[0x64];
-    float elapsed;
-    float previous;
-    unsigned char reserved70[0x0c];
-    int frame;
-};
-
-struct AnimationOwner {
-    unsigned char reserved00[0x20];
-    struct Animation *animations[];         /* count not known from this function */
-};
+#include "game/animation.h"
 
 void func_001770cc(struct AnimationOwner *owner, int index, int enabled)
 {

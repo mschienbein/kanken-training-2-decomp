@@ -26,7 +26,7 @@ struct StreamCriticalSection {
 struct StreamMutex {
     struct StreamCriticalSection critical;
     void *owner;
-    int depth;
+    unsigned int depth;
 };
 
 struct StreamQueue {
@@ -39,13 +39,13 @@ struct StreamQueue {
     int count;
     unsigned int field2c;
     int waiting_writers;
-    unsigned char reserved34[0x80];
 };
 
 struct StreamManager {
     struct StreamQueue requests;
+    struct StreamEvent *request_storage[32];
     struct StreamQueue completions;
-    unsigned int field168;
+    struct StreamEvent *completion_storage[33];
     struct StreamEvent *pending_head;
     struct StreamEvent *pending_tail;
     unsigned int serial;
@@ -76,6 +76,13 @@ extern struct StreamManager bss_004b87d0;
 extern struct StreamManager *func_00143d1c(struct StreamManager *manager);
 extern void func_001812f8(struct StreamManager *manager);
 extern int func_00181280(struct StreamSemaphore *semaphore, int amount);
+extern void func_00180884(struct StreamQueue *queue, struct StreamEvent **storage,
+                          unsigned int capacity);
+extern struct StreamManager *func_001916e8(void);
+extern void *func_0019147c(struct StreamManager *manager, unsigned words);
+extern unsigned func_00191458(struct StreamManager *manager, struct StreamEvent *event);
+extern unsigned func_001912b0(struct StreamManager *manager, int wait);
+extern void func_0019124c(struct StreamManager *manager, unsigned serial);
 extern void func_00192bd8(struct StreamMutex *mutex);
 extern void func_00195d74(struct StreamMutex *mutex);
 #ifdef __cplusplus

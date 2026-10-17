@@ -61,6 +61,9 @@ extern BufferState bss_0049cbc0;
 extern struct Allocation bss_0049cbb4;
 extern struct AllocationRecord bss_0049cb24[8];
 extern int data_0024223c;
+extern const char data_002232d5[];
+extern void *func_00193110(unsigned size, const char *tag);
+extern void *func_0019ffa4(unsigned size, const void *tag);
 extern void *func_0011fa34(void *object);
 extern void *func_0011ffdc(void *object);
 extern void *func_00196cb8(int screen, int index);
@@ -72,6 +75,7 @@ extern void *func_0013714c(void *object);      /* empty destructor wrapper */
 extern void *func_00137150(void *object);      /* preserves the allocation pointer */
 extern void func_001852f4(void *allocation);   /* releases a heap allocation */
 extern void *func_0018f7f0(void *object);      /* preserves the allocation pointer */
+extern void func_0019d6c4(unsigned result, unsigned instruction_address);
 extern void func_0019f568(void);               /* fatal-error / assertion handler */
 extern void *func_001ef880(void *object);      /* array-element destroy callback */
 extern void *func_001ef884(void *object);      /* preserves the element pointer */

@@ -15,6 +15,13 @@ struct Registry {
     struct RegistryNode sentinel;
 };
 
+struct RegistryIterator {
+    struct RegistryNode *node;
+#ifdef __cplusplus
+    RegistryIterator(struct RegistryNode *value) : node(value) {}
+#endif
+};
+
 struct RegistryEntry {
     const void *type;
     struct RegistryNode link;
@@ -50,6 +57,11 @@ extern int func_00144224(int value);
 extern void func_00147260(struct ObjectManager *object);
 extern struct RegistryNode *func_0018d868(struct Registry *registry, struct RegistryNode *node);
 extern void func_0017e7bc(struct Registry *registry, struct RegistryEntry *entry);
+extern struct RegistryNode *func_00191154(struct Registry *registry,
+                                         struct RegistryIterator position,
+                                         struct RegistryNode *node);
+extern struct RegistryNode *func_0017e790(struct Registry *registry, struct RegistryEntry *entry);
+extern struct ObjectManager *func_00185d1c(void);
 extern struct Registry *func_0017e7c4(void);
 extern void func_0017e818(struct TimingState *state);
 extern unsigned func_0019d048(void);

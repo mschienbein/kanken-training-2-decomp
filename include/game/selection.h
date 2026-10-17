@@ -1,6 +1,8 @@
 #ifndef GAME_SELECTION_H
 #define GAME_SELECTION_H
 
+#include <stdint.h>
+
 /* Selection state at 0x0028c1f0; both fields are read as signed halfwords. */
 struct SelectionState {
     unsigned char reserved00[0x52];
@@ -17,13 +19,16 @@ struct W6ListGroup {
     unsigned int reserved00;
     int count;
     struct W6ListItem **items;
+    unsigned char reserved0c[0x6c];
+    int mode;
+    int selected;
+    int preserve_selected;
 };
 
 struct W6ListController {
     unsigned reserved00[8]; /* retain four-byte prefix alignment in C and C++ */
-#ifndef __cplusplus
-    struct W6ListGroup *lists[];
-#endif
+    struct W6ListGroup *lists[21];
+    unsigned char dirty;
 };
 
 struct W6CategoryItem {
@@ -69,7 +74,8 @@ struct MetadataHeader {
 
 struct MetadataEntry {
     const struct MetadataHeader *header;
-    unsigned char reserved04[8];
+    uintptr_t resource;
+    int index;
 };
 
 #ifdef __cplusplus
@@ -90,6 +96,7 @@ extern void func_00174210(struct W6Selector *selector, int resource);
 extern void func_001780c4(struct W6ListController *controller, int list, int item, int enabled);
 extern int func_00178144(void);
 extern void func_00178e98(struct W6ListController *controller, int index);
+extern int func_00178f84(struct W6ListController *controller, int index);
 extern int func_00179148(void);
 extern int func_001795bc(void);
 extern void func_001e8934(struct W6ListController *controller, int index);

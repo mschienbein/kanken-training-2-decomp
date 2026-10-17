@@ -90,6 +90,30 @@ struct SoundPlaybackState {
     unsigned fields100[6];
 };
 
+struct SequenceSound {
+    unsigned char reserved00[0x118];
+    struct SoundPlaybackState playback;
+};
+
+struct WaveSound {
+    unsigned char reserved00[0x128];
+    struct SoundPlaybackState playback;
+};
+
+struct StreamSound {
+    unsigned char reserved00[0x124];
+    struct SoundPlaybackState playback;
+};
+
+struct SoundParameterTarget {
+    unsigned char reserved00[0x83];
+    unsigned char flag83;
+    unsigned char reserved84[0x6c];
+    unsigned char flagf0;
+    unsigned char reservedf1[3];
+    unsigned char flagf4;
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif

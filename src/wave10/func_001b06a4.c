@@ -1,0 +1,92 @@
+struct AnimationOwner;
+struct SettingsScreen {
+    unsigned char reserved00[0x34];
+    int next_state;
+    unsigned char reserved38[0x14];
+    struct AnimationOwner *controls;
+};
+extern int func_00178f84(struct AnimationOwner *owner, int index);
+extern void func_0016fccc(int mode);
+extern int func_001758d4(void);
+extern int func_00172994(int channel);
+extern void func_0017abf8(int channel, int sound);
+extern float func_0017adb4(void);
+extern void func_0017433c(int channel, int duration);
+extern void func_0016fca0(int enabled);
+extern void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition);
+extern void func_0016fa58(struct SettingsScreen *screen, int enabled);
+extern void func_001dc3a4(int enabled);
+extern void func_001dc084(int enabled);
+extern void func_001dc064(int enabled);
+extern void func_0016fa38(int enabled);
+extern void func_0016fa18(int enabled);
+extern void func_00172d48(int slot);
+
+void func_001b06a4(struct SettingsScreen *screen)
+{
+    int index;
+    for (index = 5; index < 16; ++index) {
+        int value = func_00178f84(screen->controls, index);
+        if (value != -1) {
+            switch (index) {
+            case 5:
+                func_001dc3a4(value == 1);
+                return;
+            case 6: {
+                int mode;
+                func_0016fccc(value);
+                mode = func_001758d4();
+                if (mode == 3) {
+                    func_0017433c(0, (int)func_0017adb4() * 60);
+                } else if (func_00172994(0) != mode + 0x1000003) {
+                    switch (func_001758d4()) {
+                    case 0: func_0017abf8(0, 0x1000003); break;
+                    case 1: func_0017abf8(0, 0x1000004); break;
+                    case 2: func_0017abf8(0, 0x1000005); break;
+                    }
+                }
+                return;
+            }
+            case 7:
+                func_0016fca0(value);
+                return;
+            case 8:
+                screen->next_state = 14;
+                func_0016fc1c(screen, 12, 1, 1);
+                return;
+            case 9:
+                func_0016fa58(screen, 1);
+                return;
+            case 10:
+                func_001dc084(value == 0);
+                return;
+            case 11:
+                func_001dc064(value == 0);
+                return;
+            case 12:
+                func_0016fa38(value == 0);
+                return;
+            case 13:
+                func_0016fa18(value == 0);
+                return;
+            case 14:
+                func_0016fa58(screen, 0);
+                return;
+            case 15:
+                switch (value) {
+                case 0:
+                    screen->next_state = 6;
+                    func_0016fc1c(screen, 12, 1, 1);
+                    break;
+                case 1:
+                    func_00172d48(-1);
+                    screen->next_state = 4;
+                    func_0016fc1c(screen, 12, 1, 1);
+                    break;
+                }
+                return;
+            }
+            return;
+        }
+    }
+}

@@ -11,17 +11,40 @@ struct NotificationState {
     unsigned char acknowledged;
 };
 
-struct NotificationPayload {
-    unsigned reserved00[12];
-    unsigned char reserved30[2];
+struct NotificationFields {
+    unsigned char reserved00[0x32];
     unsigned char flags;
     unsigned char reserved33[0xb70d];
+};
+
+/* One serialized payload has both UTF-16 and word-copy uses. These are
+ * representation views, not additional storage or separate global objects. */
+union NotificationStorage {
+    unsigned words[0x2dd0];
+    unsigned short text[0x5ba0];
+    struct NotificationFields fields;
+};
+
+struct NotificationPayload {
+    union NotificationStorage storage;
+};
+
+struct TransformEntry {
+    unsigned int reserved00;
+    float x;
+    float y;
+    unsigned short count;
+    unsigned short flags;
 };
 
 struct SavedNotification {
     int index;
     unsigned reserved;
     struct NotificationPayload payload;
+    unsigned char reservedb748[0xe8];
+#ifndef __cplusplus
+    struct TransformEntry transforms[][4];
+#endif
 };
 
 #ifdef __cplusplus
@@ -31,6 +54,7 @@ extern struct NotificationState bss_00290cac;
 extern struct NotificationPayload bss_002476b0[];
 extern struct SavedNotification bss_00280af0;
 extern void func_0015d6e0(int value);
+extern void func_00190e44(struct NotificationPayload *payload);
 #ifdef __cplusplus
 }
 #endif

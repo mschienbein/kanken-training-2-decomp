@@ -15,6 +15,43 @@ struct DisplayObject {
     unsigned char types[2];                 /* 0x92 */
 };
 
+struct DisplaySurface;
+struct LayoutContainer;
+struct LayoutPane;
+struct DisplayPart {
+    unsigned char reserved00[0x10];
+    unsigned char alpha, red, green, blue;
+    unsigned char reserved14[8];
+    struct LayoutContainer *container;
+    unsigned char reserved20[8];
+    struct DisplaySurface *surface;
+    unsigned char reserved2c[8];
+    struct LayoutPane *pane;
+};
+
+struct DisplayData {
+    struct DisplayObject base;
+#ifndef __cplusplus
+    struct DisplayPart *parts[];
+#endif
+};
+
+struct AlignmentHandle;
+struct PackedTextState;
+struct WidgetBinding {
+    unsigned char reserved00[0x28];
+    struct AlignmentHandle *alignment;
+    unsigned char reserved2c[8];
+    struct PackedTextState *text;
+};
+
+struct TrainingWidget {
+    struct DisplayObject base;
+#ifndef __cplusplus
+    struct WidgetBinding *bindings[];
+#endif
+};
+
 
 struct DisplayPane {
     const void *vtable;
@@ -109,22 +146,56 @@ struct WidgetPosition {
     float y;
 };
 /* Named entries selected by index; `kind` 1 means `names` is valid. */
+struct NameTableVTable;
 struct NameTable {
-    unsigned int reserved00;
+    const struct NameTableVTable *vtable;
     int kind;                               /* 0x04 */
-    unsigned char reserved08[0xc];
+    int category;                           /* 0x08 */
+    int identifier;                         /* 0x0c */
+    const char *name;                       /* 0x10 */
     int count;                              /* 0x14 */
     const char **names;                     /* 0x18 */
+#ifdef __cplusplus
+    NameTable();
+    NameTable(int category, int identifier, const char *name, int count, ...);
+#endif
 };
 
-struct WidgetSlot {
-    struct DisplayObject *object;
+struct WidgetSlotLabel {
     short label_index;
     unsigned char enabled;
 };
 
-struct Screen {
+union WidgetSlotState {
+    unsigned int flags;
+    struct WidgetSlotLabel label;
+};
+
+struct WidgetSlot {
+    struct DisplayObject *object;
+    union WidgetSlotState state;
+    unsigned short text[2];
+    unsigned short output[16];
+    unsigned short *label;
+    unsigned short *formatted;
+#ifdef __cplusplus
+    void set_active(int enabled);
+#endif
+};
+
+/* Shared fixed prefix of widget controllers. The following pointer-vector has
+ * a different extent in menu screens and character panels. */
+struct WidgetController {
     unsigned char reserved00[0x0c];
+};
+
+static __forceinline struct WidgetSlot **widget_slots(struct WidgetController *controller)
+{
+    return (struct WidgetSlot **)(controller + 1);
+}
+
+struct Screen {
+    struct WidgetController controller;
     struct WidgetSlot *slots[0x36];         /* 0x00c; highest index used: 0x35 */
     unsigned char reservede4[4];
     int selected;                           /* 0x0e8 */
@@ -134,6 +205,10 @@ struct Screen {
     const struct NameTable *const *labels;  /* 0x1e4 */
 };
 
+extern const struct NameTable *bss_00246f4c[];
+extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
+extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
+extern void func_0016e648(struct WidgetController *controller, int index, int character);
 extern struct AnimationContext bss_00246b48;
 extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,
                          const struct DisplayTexCoords *coordinates);

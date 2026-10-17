@@ -12,7 +12,7 @@ struct ArchiveBlockReference {
     unsigned short type;                   /* 0x00 */
     unsigned char reserved02[2];
     unsigned offset;                       /* 0x04 */
-    unsigned char reserved08[4];
+    unsigned size;                         /* 0x08 */
 };
 
 struct ArchiveFile {
@@ -23,12 +23,19 @@ struct ArchiveFile {
     struct ArchiveBlockReference blocks[2]; /* 0x14; references at 0x14 and 0x20 */
 };
 
+struct SoundContainerFile {
+    unsigned char reserved00[0x14];
+    struct ArchiveBlockReference blocks[3];
+};
+
 struct ArchiveBlockHeader {
     unsigned signature;                    /* 0x00 */
     unsigned char reserved04[4];
 };
 
-struct ArchiveInfoTable;
+struct ArchiveInfoTable {
+    unsigned count;
+};
 struct ArchiveReader {
     const struct ArchiveFile *file;         /* 0x00 */
     const struct ArchiveInfoTable *info;    /* 0x04 */
@@ -65,8 +72,9 @@ struct ArchiveIndex {
     const struct ArchiveResourceTable *table;
 };
 
+struct ArchiveHandleVTable;
 struct ArchiveHandle {
-    unsigned reserved00;
+    const struct ArchiveHandleVTable *vtable;
     struct ArchiveIndex *index;
 };
 
@@ -91,6 +99,17 @@ struct ArchiveStreamInfo {
 #endif
 };
 
+struct SoundRecord {
+    unsigned item_id;
+    unsigned field04;
+    unsigned char property;
+    unsigned char reserved09[3];
+    unsigned short type;
+    unsigned short reserved0e;
+    int detail_offset;
+    unsigned option_flags;
+};
+
 struct ArchiveFileReference {
     unsigned type;
     unsigned offset;
@@ -113,14 +132,22 @@ struct ArchiveFileInfo {
 };
 
 struct BankFile;
-struct BankReference {
-    unsigned type;
-    unsigned offset;
+struct SoundReference {
+    unsigned short type;
+    unsigned short reserved02;
+    int offset;
+};
+
+struct SoundReferenceTable {
+    unsigned count;
+#ifndef __cplusplus
+    struct SoundReference entries[];
+#endif
 };
 
 struct BankReader {
     const struct BankFile *file;
-    const struct BankReference *info;
+    const struct SoundReference *info;
     unsigned char valid;
 };
 
@@ -142,9 +169,17 @@ struct BankInstrumentInfo {
 
 /* Sound archive runtime object and its serialized metadata. */
 struct SoundArchiveInfo {
-    unsigned char reserved00[0x2c];
+    unsigned reserved00;
+    int sound_table_offset;
+    unsigned reserved08;
+    int range_table_offset;
+    unsigned reserved10;
+    int third_table_offset;
+    unsigned char reserved18[0x14];
     unsigned file_table_offset;
-    unsigned char reserved30[0x0c];
+    unsigned reserved30;
+    unsigned count_table_offset;
+    unsigned reserved38;
     unsigned player_info_offset;
 };
 
@@ -222,24 +257,26 @@ struct SoundLookupProvider {
 
 struct SoundArchivePlayerView {
     const void *reserved00;
-    const struct SoundArchive *archive;
+    const struct SoundArchiveReader *archive;
     struct SoundLookupProvider *provider;
 };
 
 extern unsigned func_00140a08(struct ArchiveIndex *index, unsigned resource_id);
 extern unsigned func_00140a10(const struct ArchiveResourceTable *table, unsigned resource_id);
 extern const struct ArchiveIdList *func_00140ecc(const struct ArchiveIndex *index, unsigned resource_id);
-extern const struct BankWaveArchiveTable *func_00140fc0(const struct BankReference *reference);
+extern const struct BankWaveArchiveTable *func_00140fc0(const struct SoundReference *reference);
 extern unsigned int func_0014a35c(const struct SoundArchive *archive);
 extern unsigned int func_0014a364(const struct SoundArchiveReader *reader);
 extern unsigned func_0014a380(const struct SoundArchiveReader *reader);
+extern const unsigned *func_0014c298(const struct SoundArchiveInfo *info);
+extern const unsigned *func_0014c2b0(const struct SoundArchiveInfo *info);
 extern unsigned func_0014c23c(const struct SoundFileInfo *info);
 extern const struct SoundFileInfo *func_0014c25c(const struct SoundArchiveInfo *info, unsigned id);
 extern bool func_00181334(const struct SoundArchive *archive, struct SoundPlayerResult *out);
 extern int func_0018279c(const unsigned *packed, unsigned *out, unsigned index);
-extern int func_00131928(const struct SoundArchive *archive, unsigned int sound_id);
+extern int func_00131928(const struct SoundArchiveReader *reader, unsigned int sound_id);
 extern const void *func_0016a938(const struct SoundArchivePlayerView *player, unsigned int sound_id);
-extern const void *func_001f2ac8(const struct SoundArchive *archive, unsigned int sound_id);
+extern const void *func_001f2ac8(const struct SoundArchiveReader *reader, unsigned int sound_id);
 
 extern void func_00136448(struct WordPair *pair, unsigned int first, unsigned int second);
 extern const void *func_0017ded4(const struct RelativeReference *reference);
