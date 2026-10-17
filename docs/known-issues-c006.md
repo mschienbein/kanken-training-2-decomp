@@ -13,10 +13,12 @@
 | `src/wave10` | 121 | 121 | 16,800 |
 | `src/sdk` | 64 | 64 | 4,012 |
 
-Profiles: **363 `game`, seven `sdk`, nine `middleware`**. The checked catalogue is v7; the explicit
-runtime exclusion below also honors the pending v8 classification evidence. Frozen profiles and
-canonical credit were not changed here. The composed dry ledger is canonical matches plus c005
-and c006 candidates, duplicate-checked: **835 units / 870 functions**, based on finalized c005-r2
+Profiles: **363 `game`, seven `sdk`, nine `middleware`**. Verification uses **adopted catalogue
+v8**, SHA-256 `e33aad973846b60b5286be6becb5080c9626188fa9a64a6c0b48197b16e8adad`.
+No candidate overlaps a v8 non-creditable owner or changed boundary; the specific v8 splits and
+re-extents flagged by Main are outside this manifest. Frozen profiles and canonical credit were
+not changed here. The composed dry ledger is canonical matches plus c005 and c006 candidates,
+duplicate-checked: **835 units / 870 functions**, based on finalized c005-r2
 (history sequence 5; 489 accepted functions).
 
 The supplied snapshot already contained every closed-scope author's final MATCH row. The
@@ -57,6 +59,11 @@ The list-controller view exposes twenty evidenced slots, an unidentified word at
 refresh byte at +0x74, not an invented twenty-first slot. Semantic names and unrecovered original
 class identities remain **[INFERENCE]**.
 
+The supplementary shared-callee audit also repaired `func_001855fc` in
+`include/game/region_heap.h`: its result is **`int`, not `void`**. Original calls at `00125a7c`
+and `00147644` consume r0. Signed source spelling remains **[INFERENCE]**. This header repair
+does not claim another credited function; the complete v8 matching pass includes it.
+
 ## Classified, not credited
 
 `func_00152964` / **20 bytes** was removed from the candidate manifest and its uncredited source
@@ -64,7 +71,7 @@ removed from `src/`. The v8 evidence identifies the compiler-emitted
 `__ARM_common_memclr4_12`; a matching three-pointer reset is not independent C credit for a
 compiler runtime helper. All **27 admitted classification rows** in the supplied
 `scratch/analyze/REPORT-v8.md` were intersected with the c006 manifest: this was the only hit.
-Classification/denominator adoption remains Main's responsibility.
+Main adopted that classification and denominator on main; c006 was then reverified under v8.
 
 ## Non-game profile plausibility
 
@@ -170,11 +177,14 @@ normal returned values or initialized output values on those paths.
 
 ## Caller-contract adjudication
 
-Both the ordinary dry-ledger audit and an additional audit restoring this checkpoint's new
-inline-nop sites report **30 raw candidates in 19 functions**, with **123 input-observation
-notes**. Every row is adjudicated, without suppressing raw reports. The augmented evidence has
-8,427 direct sites, 331 tail sites, five resolved callbacks and 15 restored inline sites. Core and
-VFP register allocation were considered independently.
+The ordinary dry-ledger audit reports **30 raw candidates in 19 functions**, with **123
+input-observation notes**. A supplementary audit of **177 uncredited callee contracts** (101
+shared declarations and 76 additional C-visible callees, including the standard `strlen` alias)
+checks **1,047 functions**: **45 raw candidates in 32 functions / 154 input notes**. Every row
+is adjudicated without suppressing the raw reports. The final augmented audit covers 10,140
+direct sites, 545 tail sites, five resolved callbacks and 15 restored inline sites. These
+additional contracts are audit inputs, **not matching credit**. Core and VFP allocation were
+considered independently.
 
 | Function(s) | Disposition |
 |---|---|
@@ -182,14 +192,28 @@ VFP register allocation were considered independently.
 | `00103258`, `00103798`, `00104f90` | Reported r0 setup is an armlink self-copy, not a supplied input. |
 | `0015e948`, `00164ebc`, `00174480`, `001816e0`, `001826fc`, `001852f4`, `00195a08` | Extra r3 writes restore epilogue stack padding. Existing genuine inputs are retained. |
 | `0016a178` | Condition-sensitive continuation analysis finds no live returned-r0 read at the reported candidate, starting with all 16 NZCV assignments and conservatively allowing unknown flag updates. This is a local proof, not a global claim about all future paths. |
-| `00181700` | Reject the speculative extra r1. Four of six physical calls in `00141cd8`/`001456e8`/`001793e4`/`001e403c` have no dedicated r1 setup. The two isolated zeros do not establish a universal parameter; r3 witnesses are stack padding. Existing explicit-r1 probes for both c006 callers mismatch by four bytes and were not rerun. |
+| `00181700` | Reject the speculative extra r1. Four of six physical calls in `00141cd8`/`001456e4`/`001793e4`/`001e403c` have no dedicated r1 setup. The two isolated zeros do not establish a universal parameter; r3 witnesses are stack padding. Existing explicit-r1 probes for both c006 callers mismatch by four bytes and were not rerun. |
 | `00191134` | r1 computes the condition codes for the conditional timing-getter call, not a dedicated input. |
 | `001971a0` | s0 is a caller temporary consumed after the pointer result; the resolver and both actual helpers have no floating-register access. |
 | `0019d6c4` | 33 r2 condition-code computations and two r3 epilogue restores, not extra arguments. |
 
-All 123 input notes retain the declared inputs: forwarded values, earlier setup and an already
-consumed local write are not grounds to remove a parameter. Names, opaque pointees and original
-integer spellings remain **[INFERENCE]** where the binary does not uniquely establish them.
+The supplementary callee-contract candidates have these additional dispositions:
+
+| Function(s) | Disposition |
+|---|---|
+| `0015e474`, `0015e684`, `00195ad0`, `0016bde0`, `00186944`, `00190688`, `0019f338` | Extra r3 witnesses restore epilogue stack padding. |
+| `00195ec4` | Residual r1/r2 at `00213670` belong to an erased destructor-registration operation at `00213660`, not mutex inputs. The registration identity is **[INFERENCE]**; the actual mutex helper consumes only r0. |
+| `0019dfbc` | Condition-code temporaries and padding, plus 22 timeout-high r3 values already consumed by an intervening raw WaitSynchronization1 SVC `0x24`; the tool does not model that raw SVC argument consumption. |
+| `0019f568` | Core-word witnesses are condition-code temporaries/self-copies/padding. The apparent return read belongs to a terminal fatal-diagnostic continuation, not normal return-value proof. |
+| `00136630` | The apparent returned-r0 read is an MRC into r0: the CP15 TLS read replaces r0. Decoder operand-access metadata misclassifies this as consumption of the lock-call result. |
+| `00181448` | Two of seven calls prepare r1=0; five do not dedicate r1, and the queue routine reads only incoming r0. Reject a speculative universal extra parameter; unused original inputs are not proved absent. |
+| `00192afc` | r2 witnesses compute condition codes. One apparent result read is a self-copy; the other is a conditional failure-report continuation through `00186294`. The terminal-diagnostic qualification remains, not an invented normal result. |
+
+All **154 augmented input notes** retain the declarations: forwarded values, earlier setup and
+already-consumed writes are not grounds to remove a parameter. Source/shared-callee/caller/
+callback evidence is considered as applicable; unused inputs and unresolved invocations remain
+qualified. Names, opaque pointees and original integer spellings remain **[INFERENCE]** where
+the binary does not uniquely establish them.
 
 Additional explicit interface limitations:
 
@@ -200,7 +224,9 @@ Additional explicit interface limitations:
   unused inputs and integer-zero versus null-pointer source identity remain qualified.
 - **113 C++ units** are explicitly unchecked by the mechanical C parser; all **89 scoped C++
   sources** were read manually with their shared declarations, native constructors and used
-  virtual/member/callback contracts. **102 functions** have no mechanically parsed C prototype.
+  virtual/member/callback contracts. The ordinary audit has **102 functions** without a parsed
+  C prototype; borrowed C declarations reduce this to **69** in the supplementary audit, without
+  mechanically certifying the C++ sources.
 - The caller tool retains **1,048 unresolved indirect sites** across the image. These are not a
   claim of absent indirect consumers, and equal field offsets were not treated as object identity.
 
@@ -210,23 +236,27 @@ Interpreter: `/home/michael/code/kanken-training-2-decomp/.venv/bin/python`; cwd
 `scratch/worktrees/c006`. Private, source-bound records are under
 `scratch/integrator/c006-finish/` in that worktree.
 
-1. `tools/match.py SOURCE --profile PROFILE --out ... --show 0`: **389 current-source MATCH
-   receipts / 391 functions, each recorded command exit 0**. The delivered set combines 386
-   unchanged successful receipts from `matches-final.json` and three qualified-loop repairs;
-   `verified-matches.json` binds every current source. Earlier mismatches and shorter-source
-   experiments remain separately recorded, not overwritten or called passes.
+1. `tools/match.py SOURCE --profile PROFILE --out ... --show 0`: one complete adopted-v8 pass,
+   **389 current-source MATCH receipts / 391 functions, all 389 commands exit 0**, in
+   `matches-v8.json`. Earlier mismatches and shorter-source experiments remain separately
+   recorded, not overwritten or called passes.
 2. `tools/interfaces.py check --matches scratch/integrator/c006-finish/dry-matches.json
    --allow-unchecked-cpp --json ...`: **exit 0; 835 units; 722 checked C; 113 explicitly
    unchecked C++; zero errors, zero policy items, zero unchecked C**.
 3. `tools/argcheck.py --matches scratch/integrator/c006-finish/dry-matches.json --json ...`:
-   **exit 2**, the tool's unchecked-C++ outcome, not a raw PASS. The additional `--rewrites`
-   audit also exits 2 and introduces no additional candidates. All 30 candidates and 123 notes
-   are closed in `argcheck-adjudications.json`; sanitized independent facts are in
-   `caller-derived-facts-delivery.json`.
+   **exit 2**, the tool's unchecked-C++ outcome, not a raw PASS. `argcheck-v8.json` retains the
+   30 candidates / 123 notes; `argcheck-adjudications.json` closes every row.
+   The supplementary callee audit with repeated `--matches`, source overrides and `--rewrites`
+   also exits **2**; `argcheck-all-callees-v8-final.json` retains all 45 candidates / 154 notes,
+   closed in `argcheck-all-callee-adjudications-v8.json`. Sanitized independently derived facts
+   are in `caller-derived-facts-all-callees-v8.json`, `shared-callee-derived-facts.json` and
+   `local-callee-derived-facts-v8.json`. The `strlen` alias repair changes no candidate evidence.
 4. The source-policy inventory has no remaining integration marker or local C++ extern-C copy.
    `pre-review.json` contains **391 source-bound function rows covering all seven steps of
    [REVIEWING.md](REVIEWING.md)**, including the qualifications above. It is an integrator
    pre-review, **not an independent reviewer certificate**.
+   `delivery-bindings.json` binds the final reports, all 835 dry-ledger sources, 51 headers and
+   relevant configuration hashes. `interfaces-v8.json` is the final interface report.
 
 No full build, full suite, c006 prepare, sealed independent review, finalize, push or main-branch
 commit was performed by this worker. Main must run those acceptance stages and re-review the

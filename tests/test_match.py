@@ -3,6 +3,7 @@ import struct
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import match  # noqa: E402
@@ -160,6 +161,27 @@ class DiffLinesTest(unittest.TestCase):
                 lines = match.diff_lines(original, candidate, BASE, fn, 20)
                 self.assertEqual(len(lines), 2)
                 self.assertEqual(lines[1], f"! {BASE + 4:08x}  {left:<40} {right}")
+
+
+class ModelOptionsTest(unittest.TestCase):
+    def test_literal_option_composes_with_v3_without_changing_linker_option(self):
+        profile = match.toolchain.Profile("game", "synthetic", ())
+        with patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
+                patch.object(match, "run", return_value=0) as run:
+            code = match.main(["candidate.cpp", "--profile", "game",
+                               "--linker-model", "armlink5-inline-branchnop-v3",
+                               "--literal-model", "anonymous-string-records-v1"])
+        self.assertEqual(code, 0)
+        self.assertEqual(run.call_args.args[5], "armlink5-inline-branchnop-v3")
+        self.assertEqual(run.call_args.args[-1], "anonymous-string-records-v1")
+
+    def test_literal_option_is_off_by_default(self):
+        profile = match.toolchain.Profile("game", "synthetic", ())
+        with patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
+                patch.object(match, "run", return_value=0) as run:
+            self.assertEqual(match.main(["candidate.cpp", "--profile", "game"]), 0)
+        self.assertEqual(run.call_args.args[5], match.inplace.DEFAULT_LINKER_MODEL)
+        self.assertEqual(run.call_args.args[-1], "none")
 
 
 if __name__ == "__main__":
