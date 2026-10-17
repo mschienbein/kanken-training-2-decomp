@@ -1,5 +1,6 @@
 # Private inputs and anything derived from them: never committed (the repository must stay publishable).
-/orig/
+# No trailing slash: worktrees link orig as a symlink, which a directory-only pattern misses.
+/orig
 /baserom*
 *.3ds
 *.cci
