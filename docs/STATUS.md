@@ -2,6 +2,29 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-17 (night) — c006-r3 accepted; denominator v8; every function attempted
+
+**Accepted:** 870 functions / 50,012 B (seq 6: … c005-r2, c006-r3). Denominator **v8**: 4,544
+creditable functions / 1,129,400 B (4.43%). Gates **v1.13**. CI green.
+
+- **c006-r3** (waves 8–10, L001–L003, SDK batches x01–x11: 381 functions + 10 revised units):
+  c006 failed prepare on a broken test fixture; c006-r2 failed one review (one unit used private
+  sound types that conflict with the canonical `AudioChannel`/`AudioSlot`); r3 fixed it, swept all
+  88 C++ units against their canonical headers, and passed both reviews with qualifications
+  (`docs/known-issues-c006-r3.md`).
+- **Denominator v8:** compiler-runtime/kernel-stub classification under a stated evidence standard,
+  recovered leading instructions, two more tail-call splits; first review failed (R01–R06),
+  re-review passed with qualifications (`docs/catalogue/REPORT-v8.md`, `REVIEW-v8*.md`).
+- **Bindings:** `__aeabi_ldivmod` and `__aeabi_idivmod` proven by whole-function matches.
+- **Harness (opt-in, not yet gates):** removed-inlined-callee linker model (three reviews; last
+  PASS_WITH_QUALIFICATIONS), anonymous string-record placement (review PASS_WITH_QUALIFICATIONS),
+  accepted-function rehoming (in review); permuter fixes; full-suite rule before every prepare.
+- **Authoring:** every creditable function has now had at least one attempt or is in flight.
+  ~965 further author matches (~152 KB) await checkpoints c007 (320 functions, ready) and c008
+  (integrating); ~850 mismatches enter the escalation steps (census in private scratch).
+- **Rulings:** subagent fallback to Sonnet 5.5 on a Codex usage limit
+  (`docs/rulings/2026-10-17-subagent-model-fallback.md`).
+
 ## 2026-10-17 (evening) — c005-r2 accepted; SDK/middleware compiler found; library reuse
 
 **Accepted:** 489 functions / 19,288 B (seq 5: … c004-r3, c005-r2). Denominator **v7**: 4,557
