@@ -41,8 +41,9 @@ virtual and non-virtual D1/D2 destructors as one full-section `STT_FUNC` plus a 
 the names alone **never** prove that two implementations are identical.
 
 Only the explicit **`armlink5-inline-branchnop-v5`** selection enables this identity
-extension. V5 composes v4's bounded-switch CFG and endian-state refusal with the alias
-rules below; it must be independently reviewed as that composite before adoption.
+extension. V5 composes the corrected v4 bounded-switch CFG, modeled guard effects and
+owner-state proof with the alias rules below; it must be independently reviewed as that
+composite before adoption.
 Frozen `strict-v1`, v2 and v3, and the separately proposed v4, retain their original alias
 behavior: no sibling-name binding inheritance, and no zero-size entry alias in R1.
 
@@ -62,6 +63,9 @@ Only v5 evaluates R1's full-section-entry check using the proven identical alias
 the original-address exclusion, code/ABI, call-site and all-reference checks remain mandatory.
 An allocated `.ARM.exidx` relocation to the helper is still a live reference and prevents
 removal. Global data or untyped definitions are not function aliases and prevent v5 removal.
+Alias identity never waives those modeled effects: missing decoder write metadata is not
+proof that LDREXD/MRRC preserve a bounded index. Unresolved RFE PC/CPSR restoration remains
+unknown control/state, including in an otherwise unreachable decoded owner suffix.
 
 Alias binding inheritance is **section-local**, not a guess about another COMDAT copy.
 Before R1 removal, every supplied copy's explicit original bindings are resolved.
