@@ -2,6 +2,22 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-17 (late night) — c007 accepted: wave 11, SDK/middleware, NW4C library imports
+
+**Accepted:** 1,167 functions / 73,388 B (seq 7: … c006-r3, c007). Denominator **v8**: 4,544
+creditable functions / 1,129,400 B (6.50%). Gates **v1.13**. CI green.
+
+- **c007** (297 functions + 33 revised accepted functions): wave 11, large batches L004–L012,
+  CTR-SDK IPC wrappers (natural address-taking marshalling), ARMCC 4.1 `sdk`/`middleware`
+  recoveries, and NintendoWare4Ctr library code adapted from the GPL-3.0 public decompilation
+  (`THIRD_PARTY.md`). First prepare passed; both reviews PASS_WITH_QUALIFICATIONS
+  (`docs/known-issues-c007.md`).
+- **Next:** gate revisions v1.14–v1.16 (string-record placement L1, removed-inlined-callee linker
+  model R1, accepted-function rehoming; each independently reviewed) land before c008; c008
+  (waves 12–14 + retries, ~440 functions) is integrating; escalation batches (best attempt + diff)
+  are re-authoring ~600 near misses; denominator v9 (runtime/library classification, boundary
+  fixes, unknown bytes/anomalies) is being built.
+
 ## 2026-10-17 (night) — c006-r3 accepted; denominator v8; every function attempted
 
 **Accepted:** 870 functions / 50,012 B (seq 6: … c005-r2, c006-r3). Denominator **v8**: 4,544

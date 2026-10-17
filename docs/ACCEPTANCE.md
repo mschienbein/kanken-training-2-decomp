@@ -63,6 +63,116 @@ Scale note for this project: the lean form is one review per checkpoint covering
 function (per-function notes inside it), from another model family than the authors where
 possible. Item 8 lives in `docs/known-issues-<checkpoint>.md` when a checkpoint has any.
 
+### Checkpoint linker/literal selection
+
+`prepare` accepts independent `--linker-model` and `--literal-model` choices. Omitting them
+retains `armlink5-inline-branchnop-v2` / `none`; the previous checkpoint's opt-in is **not**
+silently inherited. For example, after the applicable gate revisions and independent reviews:
+
+```sh
+python tools/accept.py prepare --checkpoint cNNN-name --candidates config/candidates/<file>.json \
+  --linker-model armlink5-inline-branchnop-v3 --literal-model anonymous-string-records-v1
+```
+
+CLI arguments are the per-checkpoint authority, rather than optional manifest fields: they use
+the same identifiers as the author/build tools, make model selection visible at invocation, and
+do not silently change an existing candidate manifest's interpretation. Before any prepare gate
+or build runs, the immutable checkpoint directory gets `selection.json` with both explicit
+choices. Both fresh builds receive those exact values, even for defaults. Prepare fails if
+either receipt disagrees with the selection or the builds disagree with each other.
+
+New prepare/history records use schema 2. They bind the selection hash and both complete receipt
+hashes, including every literal mapping and removed helper. Review/finalize recheck this closure;
+`verify` checks it without ROM inputs. The selector's creation boundary is fixed after
+pre-selector `c007` (sequence 7): this change merges only after `c007` finalizes and before
+`c008` prepares. **Sequence 8 and every later checkpoint require `selection_sha256`**,
+irrespective of mutable schema/model labels. Before that boundary, a
+selection artifact, selection/receipt binding, build-input summary or non-default model also
+requires the selected-checkpoint closure. Lowering/deleting schema metadata cannot opt selected
+evidence into the legacy path.
+
+For every checkpoint, `verify` binds the prepared record's hash and cross-checks both full
+receipts' models against the prepared and historical models. Only genuinely pre-selector,
+default-model evidence can use legacy model omissions (v2 / `none`); no historical artifact or
+recorded model is rewritten or opted in retroactively.
+
+`model_uses` lists **every** R1 caller, removed-helper unit (including `functions: []`), L1 owning
+unit and full pool mappings, including unchanged sources. `model_changes` compares both choices
+with the last accepted checkpoint. On a model transition, `model_reviews` reopens every current
+R1 caller and, conservatively, every credited function of each current L1 pool-owning unit:
+the linker does not claim a recovered per-function literal-reference graph. These required rows
+join new/revised functions and R1 helper/header dependencies; R1 provenance rows remain QUALIFIED.
+Inspect both full receipts, not only the summary. A selector is not gate adoption: L1/R1 still
+require their independently reviewed, frozen gate revisions before a real prepare uses them.
+The combined proposal is `scratch/integrator/adopt-r1-l1/GATES-DRAFT.md`; `docs/GATES.md` is not
+changed by implementing the selection path.
+
+### Rehoming accepted functions
+
+Credit belongs to the stable function identity, not its filename. A candidate may explicitly move
+an accepted function into another translation unit without withdrawing and re-awarding its credit:
+
+```json
+{
+  "schema_version": 1,
+  "units": [
+    {
+      "source": "src/subsystem/native.c",
+      "profile": "game",
+      "functions": ["func_00100000", "func_00100010"]
+    }
+  ],
+  "moves": [
+    {
+      "function": "func_00100000",
+      "from": "src/old.c",
+      "to": "src/subsystem/native.c"
+    }
+  ]
+}
+```
+
+The identifiers above are illustrative. `units` lists the **complete** credited function set of
+each destination (including functions already accepted there); new functions may share the unit
+with moved ones. `moves` is optional, but every accepted function changing source needs exactly
+one `{function, from, to}` row naming its current ledger owner. An existing unit may appear in
+`units` only when it participates in a move; candidates without moves retain the addition-only
+format and rules. No accepted function may disappear, nor may two units claim the same identity.
+
+Integrator HOWTO:
+
+1. Put the complete native/consolidated source at its destination. Remove moved definitions from
+   old sources; **delete an old source when all its credited functions move out**. Prepare does
+   not edit source files or the canonical ledger.
+2. Write the candidate as above. Prepare subtracts moved functions from old ledger units and
+   removes empty units. If a destination is already accepted, list all its retained functions too.
+   Alternatively, `collect.py --rehome func_00100000` (repeatable) opts accepted author-result rows
+   into collection and writes the move rows; ordinary collection still refuses accepted rows.
+   Collection does not edit old accepted sources and still reports refused units independently.
+3. Commit the source/candidate changes and use the ordinary prepare → independent review →
+   finalize workflow. Both fresh builds recompile the whole proposed ledger and byte-check each
+   moved function in its new context. Each credited identity must have exactly one emitted
+   defining unit, its ledger owner: a remaining definition in an old or unrelated unit fails
+   even if it is weak, inline/COMDAT, byte-identical, or spelled via a names-overlay alias.
+   Uncredited COMDAT identities retain the existing duplicate/section-placement rules.
+4. Review all functions in new/revised units, including moved functions, retained functions in an
+   edited old unit, and retained functions in an existing destination. Check each old/new owner
+   and the deletion of empty sources. A removed definition is covered by its destination row,
+   not by a duplicate review row for its former source.
+
+Prepare and the hash-chained history record `moves` rows with an added `checkpoint` field, plus
+`removed_units` (old sources removed from the ledger). Surviving old units and existing destinations
+whose ledger entry changes are `revised_units` even if their source hash happens not to change.
+Finalize pins deleted sources as absent through review and refuses unrelated accepted-source drift.
+Historical checkpoint ledgers, prepare records and reviews are never rewritten. `verify` checks
+their sealed snapshots and each owner transition against the move records, then checks only the
+latest ledger's live source hashes: old source paths may legitimately have changed or disappeared.
+Pure moves keep accepted function/byte totals unchanged; newly matched functions add credit once.
+Existing helper-only units (`functions: []`) remain in the proposed ledger and source/object/profile
+closure; only credited units emptied by declared moves retire. Rehoming does not waive checkpoint
+selection, full-receipt binding, or R1 helper/header and model-transition review requirements.
+
+
 Classified, never credited as C: SDK/library code proven identical to a known library, compiler
 runtime helpers, veneers/thunks, handwritten assembly, generated tables, data with format witnesses.
 
