@@ -1,6 +1,7 @@
 """Relocation-masked discovery against synthetic ELF objects and images only."""
 import contextlib
 import io
+import hashlib
 import json
 from pathlib import Path
 import struct
@@ -252,6 +253,175 @@ class LocateTest(unittest.TestCase):
             result = fingerprint.main(["library.cpp", "--profile", "missing"])
         self.assertEqual(result, 2)
         self.assertIn("unknown profile", stderr.getvalue())
+
+
+def ar_member(name, data):
+    """Synthetic regular-ar encoding, including the required odd-byte alignment."""
+    header = f"{name:<16}{0:<12}{0:<6}{0:<6}{0o644:<8}{len(data):<10}`\n".encode("ascii")
+    if len(header) != 60:
+        raise ValueError("fixture member name does not fit")
+    return header + data + (b"\n" if len(data) & 1 else b"")
+
+
+class ArchiveParserTest(unittest.TestCase):
+    def members(self, payload):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "synthetic.a"
+            path.write_bytes(payload)
+            return list(fingerprint.archive_members(path))
+
+    def test_sysv_duplicates_and_odd_members_are_preserved(self):
+        members = self.members(b"!<arch>\n" + ar_member("same.o/", b"abc") + ar_member("same.o/", b"de"))
+        self.assertEqual([(member.name, member.offset, member.data) for member in members],
+                         [("same.o", 8, b"abc"), ("same.o", 72, b"de")])
+        self.assertNotIn("abc", repr(members))
+
+    def test_gnu_names_and_both_index_widths(self):
+        names = b"long_member_filename.o/\nother_long_filename.o/\n"
+        members = self.members(b"!<arch>\n" + ar_member("/", b"index") + ar_member("/SYM64/", b"index64")
+                               + ar_member("//", names) + ar_member("/0", b"first")
+                               + ar_member(f"/{names.index(b'other')}", b"second"))
+        self.assertEqual([(member.name, member.data) for member in members],
+                         [("long_member_filename.o", b"first"), ("other_long_filename.o", b"second")])
+
+    def test_bsd_extended_names_and_index(self):
+        name = b"long_bsd_member_name.o\0"
+        members = self.members(b"!<arch>\n" + ar_member("__.SYMDEF", b"index")
+                               + ar_member(f"#1/{len(name)}", name + b"body"))
+        self.assertEqual([(member.name, member.data) for member in members], [("long_bsd_member_name.o", b"body")])
+
+    def test_bad_magic_thin_truncated_and_invalid_names_fail_closed(self):
+        cases = [(b"not an archive", "regular ar"), (b"!<thin>\n", "thin"),
+                 (b"!<arch>\nshort", "header"),
+                 (b"!<arch>\n" + ar_member("obj.o/", b"ab")[:-1], "truncated"),
+                 (b"!<arch>\n" + ar_member("obj.o/", b"a")[:-1], "truncated"),
+                 (b"!<arch>\n" + ar_member("/0", b"elf"), "GNU name"),
+                 (b"!<arch>\n" + ar_member("#1/9", b"abc"), "BSD name"),
+                 (b"!<arch>\n" + ar_member("//", b"long.o/") + ar_member("/0", b"elf"), "unterminated")]
+        for payload, error in cases:
+            with self.subTest(error=error), self.assertRaisesRegex(fingerprint.FingerprintError, error):
+                self.members(payload)
+
+    def test_non_elf_member_is_an_explicit_incomplete_scan(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "synthetic.a"
+            path.write_bytes(b"!<arch>\n" + ar_member("unknown/", b"not an ELF"))
+            result = fingerprint.fingerprint_archive(path, Memory(BODY),
+                                                      {"image_sha256": "synthetic", "functions": []})
+        self.assertEqual(result["member_errors"], 1)
+        self.assertEqual(result["members"][0]["status"], "not_elf")
+        self.assertEqual(result["functions"], [])
+        self.assertNotIn("not an ELF", json.dumps(result))
+
+    def test_catalogue_mismatch_is_rejected_before_reading_archive(self):
+        with self.assertRaisesRegex(fingerprint.FingerprintError, "different code.bin"):
+            fingerprint.fingerprint_archive(Path("unused.a"), Memory(BODY), {"image_sha256": "wrong"})
+
+    def test_cli_archive_needs_no_profile_and_never_compiles(self):
+        report = {"archive": "synthetic.a", "members": [], "functions": [], "member_errors": 0}
+        with patch.object(fingerprint.image_mod.Image, "load", return_value=Memory(BODY)), \
+                patch.object(fingerprint.image_mod, "load_catalogue", return_value={}), \
+                patch.object(fingerprint, "fingerprint_archive", return_value=report) as scan, \
+                patch.object(fingerprint.toolchain, "compile_source") as compile_source, \
+                contextlib.redirect_stdout(io.StringIO()) as stdout:
+            result = fingerprint.main(["--archive", "synthetic.a"])
+        self.assertEqual(result, 0)
+        scan.assert_called_once()
+        compile_source.assert_not_called()
+        self.assertEqual(json.loads(stdout.getvalue()), report)
+
+    def test_cli_incomplete_archive_returns_two_and_keeps_report(self):
+        with patch.object(fingerprint.image_mod.Image, "load", return_value=Memory(BODY)), \
+                patch.object(fingerprint.image_mod, "load_catalogue", return_value={}), \
+                patch.object(fingerprint, "fingerprint_archive", return_value={"member_errors": 1}), \
+                contextlib.redirect_stdout(io.StringIO()) as stdout:
+            result = fingerprint.main(["--archive", "synthetic.a"])
+        self.assertEqual(result, 2)
+        self.assertEqual(json.loads(stdout.getvalue())["member_errors"], 1)
+
+
+ARCHIVE_PROFILE = toolchain.Profile(
+    "archive-test", "armcc_504_82",
+    ("--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "-O3", "-Otime"),
+)
+
+
+@unittest.skipUnless(toolchain.armcc_exe(ARCHIVE_PROFILE.compiler).is_file(), "pinned compiler not installed")
+class CompiledArchiveTest(unittest.TestCase):
+    """Only locally compiled synthetic objects enter these archives; no vendor library inputs."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(cls.tmp.cleanup)
+        cls.root = Path(cls.tmp.name)
+        cls.objects = []
+        for isa in ("arm", "thumb"):
+            source = cls.root / f"{isa}.c"
+            source.write_text("extern unsigned external_helper(unsigned);\n"
+                              f"unsigned synthetic_{isa}(unsigned *p, unsigned x) "
+                              "{ return p[1] + external_helper(x) + 19; }\n", encoding="utf-8")
+            profile = toolchain.Profile(ARCHIVE_PROFILE.name, ARCHIVE_PROFILE.compiler,
+                                        tuple(f"--{isa}" if flag == "--arm" else flag
+                                              for flag in ARCHIVE_PROFILE.flags))
+            obj_path = cls.root / f"{isa}.o"
+            toolchain.compile_source(profile, source, obj_path)
+            cls.objects.append(obj_path.read_bytes())
+
+    def fixture(self):
+        bodies = []
+        functions = []
+        for index, data in enumerate(self.objects):
+            obj = inplace.ObjectFile(Path(f"memory-{index}.o"), data=data)
+            function = fingerprint.function_fingerprints(obj)[0]
+            offset = sum(len(body) for body in bodies)
+            bodies.append(function.data + b"\0" * (-function.size % 4))
+            functions.append({"address": BASE + offset, "size": function.size, "isa": function.isa})
+        archive = self.root / "compiled-fixture.a"
+        long_name = b"synthetic_thumb_long_member_name.o/\n"
+        archive.write_bytes(b"!<arch>\n" + ar_member("/", b"synthetic-index") + ar_member("//", long_name)
+                            + ar_member("arm.o/", self.objects[0]) + ar_member("/0", self.objects[1])
+                            + ar_member("arm.o/", self.objects[0]))
+        return archive, Memory(b"".join(bodies)), {"image_sha256": "synthetic", "functions": functions}
+
+    def test_compiled_arm_thumb_and_duplicate_member_reports_are_whole_body(self):
+        archive, memory, cat = self.fixture()
+        report = fingerprint.fingerprint_archive(archive, memory, cat)
+        self.assertEqual(report["member_errors"], 0)
+        self.assertEqual(len(report["members"]), 3)
+        self.assertEqual(len(report["functions"]), 3)
+        self.assertEqual({row["isa"] for row in report["functions"]}, {"arm", "thumb"})
+        for row in report["functions"]:
+            hit, = row["hits"]
+            self.assertEqual(row["status"], "unique")
+            self.assertEqual(row["size"], hit["catalogue_size"])
+            self.assertTrue(hit["whole_body_exact_equal"])
+            self.assertTrue(hit["whole_body_masked_equal"])
+            self.assertEqual(row["object_body_sha256"], hit["image_body_sha256"])
+            self.assertEqual(row["masked_body_sha256"], hit["masked_body_sha256"])
+            self.assertEqual(hit["relocation_agreement"], "unverified")
+            self.assertTrue(row["relocation_fields"])
+        self.assertNotEqual(report["functions"][0]["member_offset"], report["functions"][2]["member_offset"])
+        serialized = json.dumps(report)
+        self.assertNotIn('"data"', serialized)
+        self.assertNotIn('"mask"', serialized)
+        self.assertEqual(report["archive_sha256"], hashlib.sha256(archive.read_bytes()).hexdigest())
+
+    def test_shared_cache_preserves_each_members_identity_and_digest(self):
+        archive, memory, cat = self.fixture()
+        cache = {}
+        first = fingerprint.fingerprint_archive(archive, memory, cat, cache)
+        self.assertEqual(len(cache), 2)
+        with patch.object(fingerprint, "locate_function", side_effect=AssertionError("cache miss")):
+            second = fingerprint.fingerprint_archive(archive, memory, cat, cache)
+        self.assertEqual(first, second)
+        self.assertEqual(first["functions"][0]["member"], "arm.o")
+        self.assertEqual(first["functions"][1]["member"], "synthetic_thumb_long_member_name.o")
+
+    def test_object_bytes_constructor_does_not_open_a_member_path(self):
+        with patch.object(Path, "open", side_effect=AssertionError("member was extracted")):
+            obj = inplace.ObjectFile(Path("does-not-exist/member.o"), data=self.objects[0])
+        self.assertEqual(len(fingerprint.function_fingerprints(obj)), 1)
 
 
 if __name__ == "__main__":
