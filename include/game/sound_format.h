@@ -1,6 +1,16 @@
 #ifndef GAME_SOUND_FORMAT_H
 #define GAME_SOUND_FORMAT_H
 
+struct ArchiveBlockHeader;
+struct ArchiveBlockReference;
+struct ArchiveFile;
+struct SoundArchiveInfo;
+struct SoundRecord;
+struct SoundReference;
+struct WaveSoundParameters;
+
+#include <stdbool.h>
+
 #include "game/archive.h"
 
 struct SoundBankArchiveInfo {
@@ -196,6 +206,37 @@ extern unsigned func_00140cf0(const struct SoundRecord *record);
 extern int func_00140d1c(const struct SoundRecord *record);
 extern unsigned func_00140d40(const struct SoundRecord *record);
 extern unsigned func_00140d78(const struct SoundRecord *record);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct WaveSoundParameters {
+    float pitch;
+    struct SoundEnvelope envelope;
+    unsigned char parameter0;
+    signed char parameter0_high;
+    unsigned char send;
+    unsigned char sends[2];
+    unsigned char parameter2_low;
+    unsigned char parameter2_middle;
+    unsigned char parameter2_high;
+};
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern const struct SoundOptionalParameters *func_001f1904(const struct WaveSoundData *data);
+extern float func_001f1af4(const struct SoundOptionalParameters *note);
+extern unsigned char func_001f1ad0(const unsigned *parameters);
+extern signed char func_001f1aa8(const struct SoundOptionalParameters *note);
+extern void func_001f1934(const struct SoundOptionalParameters *note, unsigned char *send,
+                         unsigned char *sends, unsigned count);
+extern const struct SoundEnvelope *func_001f1a20(const struct SoundOptionalParameters *note);
+extern unsigned char func_001f1910(const unsigned *parameters);
+extern unsigned char func_001f1a58(const struct SoundOptionalParameters *note);
+extern unsigned char func_001f1a80(const struct SoundOptionalParameters *note);
+extern bool func_001f2700(const struct WaveSoundReader *reader, struct WaveSoundParameters *out, unsigned index);
 #ifdef __cplusplus
 }
 #endif

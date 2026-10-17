@@ -1,5 +1,18 @@
 #ifndef GAME_AUDIO_TASKS_H
 #define GAME_AUDIO_TASKS_H
+
+struct Allocation;
+struct ObjectManager;
+struct PoolLink;
+struct PoolList;
+struct StreamEvent;
+struct StreamMutex;
+struct StreamQueue;
+struct TaskPool;
+struct WorkerThread;
+
+#include "game/pool_list.h"
+#include "game/stream_manager.h"
 #include "game/audio_voice.h"
 #include "game/object_manager.h"
 #include "game/runtime.h"
@@ -12,7 +25,8 @@ struct AudioTaskManager {
     unsigned char reserved29[3];
     struct StreamMutex lock;
     struct StreamQueue queue;
-};
+    struct StreamEvent *storage[32];
+};;
 struct AudioWorkItem;
 struct AudioWorkRequest {
     const void *type;
@@ -61,4 +75,7 @@ extern void func_0017df84(struct AudioTaskManager *manager,
 #ifdef __cplusplus
 }
 #endif
+
+
+
 #endif

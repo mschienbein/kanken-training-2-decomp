@@ -13,9 +13,9 @@ struct ItemPage {
 
 struct ItemPageSet {
     unsigned char reserved00[0x10];
-    void *entries;                          /* 0x10 */
+    int count;                          /* 0x10 */
     struct ItemPage **pages;                /* 0x14 */
-};
+};;
 
 #ifdef __cplusplus
 extern "C" {
@@ -25,5 +25,8 @@ extern struct ItemPage *func_0017a4e8(struct ItemPageSet *set, int index);
 #ifdef __cplusplus
 }
 #endif
+
+
+
 
 #endif

@@ -1,9 +1,6 @@
-struct ByteFlags {
-    unsigned char reserved[3];
-    unsigned char value;
-};
+#include "game/service_runtime.h"
 
-unsigned char func_0014b174(const struct ByteFlags *flags)
+unsigned char func_0014b174(const struct ServiceOutput *flags)
 {
-    return flags->value;
+    return flags->flag03;
 }

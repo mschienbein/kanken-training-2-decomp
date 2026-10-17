@@ -1,8 +1,9 @@
 #include "game/scene_lifecycle.h"
 
-void func_0018290c(struct ManagedResource *resource, unsigned event,
-                   struct SceneChild *child)
+void func_0018290c(struct AudioVoiceGroup *resource, int event,
+                   void *context)
 {
+    struct SoundTrack *child = context;
     unsigned notification = 2;
     switch (event) {
     case 0:
@@ -18,10 +19,10 @@ void func_0018290c(struct ManagedResource *resource, unsigned event,
         break;
     }
     if (child->callback)
-        child->callback(child, notification, child->context);
-    child->element = 0;
+        child->callback(child, notification, child->callback_data);
+    child->task = 0;
     child->enabled = 0;
     child->active = 0;
-    child->state = 0;
+    child->pending = 0;
     func_00182994(func_00185cc0(), child);
 }

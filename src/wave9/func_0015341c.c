@@ -1,9 +1,9 @@
 #include "game/input_runtime.h"
 
-int func_0015341c(struct InputLatches *state, int group, int index)
+int func_0015341c(struct InputLatchSnapshot *state, int group, int index)
 {
-    if (state->acquired[group][index] != 0)
+    if (state->current[group][index] != 0)
         return 0;
-    state->acquired[group][index] = 1;
+    state->current[group][index] = 1;
     return 1;
 }

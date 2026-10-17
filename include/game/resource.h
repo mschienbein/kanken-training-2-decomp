@@ -1,5 +1,6 @@
 #ifndef GAME_RESOURCE_H
 #define GAME_RESOURCE_H
+#include "game/resource_owner.h"
 
 /* Reference-owned resource interface (C++ only; partial vtable). */
 
@@ -35,10 +36,7 @@ public:
 };
 
 /* Owner holding a tagged resource pointer: bit 0 flags an unexpected state on release. */
-struct ResourceOwner {
-    const void *vtable;
-    unsigned resource_bits;
-};
+
 
 extern "C" void func_0019d5c4(Resource *resource);
 

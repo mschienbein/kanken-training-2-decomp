@@ -1,6 +1,12 @@
 #ifndef GAME_OBJECT_MANAGER_H
 #define GAME_OBJECT_MANAGER_H
 
+struct PoolLink;
+struct PoolList;
+struct RegistryEntry;
+struct StreamMutex;
+
+
 #include "game/stream_manager.h"
 
 
@@ -62,6 +68,15 @@ extern void func_00195ec4(struct StreamMutex *lock);
 extern void func_0017e634(struct ObjectManager *manager, struct RegistryEntry *entry);
 extern struct PoolLink *func_0017e640(struct ObjectManager *manager,
                                      struct RegistryEntry *entry);
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_001d5c10(struct Operation *operation);
 #ifdef __cplusplus
 }
 #endif

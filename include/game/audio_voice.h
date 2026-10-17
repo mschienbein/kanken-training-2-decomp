@@ -1,6 +1,40 @@
 #ifndef GAME_AUDIO_VOICE_H
 #define GAME_AUDIO_VOICE_H
 
+struct AnimationTrack;
+struct AudioBiquadCoefficients;
+struct AudioChannelArray;
+struct AudioCounter;
+struct AudioFadeController;
+struct AudioLinearRamp;
+struct AudioSlotBufferDescriptor001d9580;
+struct AudioVoiceOwner001d9580;
+struct AudioWorker;
+struct ByteCursor001db068;
+struct ConfigState001719f4;
+struct ConfigTarget001719f4;
+struct FloatState001d4ad4;
+struct FloatState001d4b70;
+struct FloatState001d4cec;
+struct FloatState001d51b8;
+struct FloatState001d5284;
+struct FloatState001d5404;
+struct HalfwordCursor001db054;
+struct PackedPointer001f15fc;
+struct PoolLink;
+struct ResetState001d4850;
+struct ResourceState001d0164;
+struct SequenceEnabledState;
+struct SequencePlayer;
+struct ServiceCoordinator;
+struct StreamCriticalSection;
+struct StreamEvent;
+struct StreamQueue;
+
+#include "game/audio_filter.h"
+#include "game/pool_list.h"
+#include "game/stream_manager.h"
+
 #include <stdbool.h>
 #include "game/functions.h"
 
@@ -18,18 +52,42 @@ struct AdpcmCoefficients {
 };
 
 struct AudioChannelState {
-    unsigned char reserved00[0x1e];
+    unsigned int channel;
+    unsigned short generation;
+    unsigned short value06;
+    unsigned int value08;
+    unsigned char active;
+    unsigned char mode;
+    unsigned char flag0e;
+    unsigned char flag0f;
+    unsigned int value10;
+    struct AudioBiquadCoefficients biquad;
     unsigned short flags1e;
-    unsigned char reserved20[0x4c];
+    unsigned int sample_rate;
+    float value24;
+    unsigned char reserved28[4];
+    unsigned int value2c;
+    unsigned int value30;
+    unsigned short value34;
+    unsigned short value36;
+    float value38;
+    float value3c;
+    float values40[10];
+    float value68;
     unsigned short flags;
-    unsigned char reserved6e[0x0e];
+    unsigned char flag6e;
+    unsigned char flag6f;
+    unsigned char reserved70[0x0c];
     struct AdpcmCoefficients coefficients;
-};
+};;
 
 struct AudioChannel {
-    unsigned char reserved00[0x68];
+    unsigned char reserved00[0x1c];
+    float volume;
+    unsigned char reserved20[0x44];
+    float gain;
     struct AudioChannelState *state;
-};
+};;
 
 struct RecordState;
 struct AudioChannelOwner { unsigned char reserved00[0x18dc]; struct AudioChannel *channels[24]; };
@@ -41,13 +99,14 @@ struct AudioVoiceGroup {
     unsigned char active;
     unsigned char flag15;
     unsigned char flag16;
-    unsigned char flag17;
-    unsigned char reserved18[4];
+    signed char flag17;
+    unsigned char flag18;
+    unsigned char reserved19[3];
     struct RecordState *record;
     unsigned short dirty;
     unsigned char reserved22;
     signed char mode23;
-    unsigned char reserved24[8];
+    float value24, value28;
     unsigned char option2c;
     unsigned char option2d;
     unsigned char reserved2e[2];
@@ -58,9 +117,10 @@ struct AudioVoiceGroup {
     unsigned reserved40;
     float value44;
     float sends[2];
-    unsigned char reserved50[8];
+    unsigned char format;
+    unsigned char reserved51[7];
     struct PoolLink link;
-};
+};;
 
 struct AudioEnvelope {
     unsigned char state;
@@ -201,6 +261,185 @@ extern void func_001550e8(struct AudioChannelState *state,
 extern void func_001563a0(struct AudioChannelState *state, struct RecordState *record);
 extern void func_001c5994(struct AudioChannel *channel, const struct AudioSlot *slot);
 extern void func_001d49e8(struct AudioVoiceGroup *group, int index, const struct AudioSlot *slot);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct AudioCounter {
+    unsigned long long value;
+};
+
+struct AudioLinearRamp {
+    unsigned int reserved00;
+    float start;
+    float end;
+    int duration;
+    int elapsed;
+};
+
+struct AudioChannelArray {
+    unsigned char reserved00[0x18dc];
+    struct AudioChannel *channels[24];
+};
+
+struct SequenceEnabledState {
+    unsigned char reserved00[0x34];
+    unsigned char disabled;
+};
+
+struct AudioWorker {
+    unsigned char reserved00[0x28];
+    unsigned char stopping;
+    unsigned char reserved29[0x0f];
+    struct StreamQueue queue;
+};
+
+struct ConfigState001719f4 {
+    unsigned char kind;
+    unsigned char complex_format;
+    unsigned char option;
+    unsigned char reserved03;
+    int index;
+    unsigned char reserved08[0x10];
+    struct ConfigTarget001719f4 *target;
+};
+
+struct ResourceState001d0164 {
+    const void *vtable;
+    unsigned field04;
+    unsigned reserved08;
+    unsigned char mask;
+    unsigned char flags;
+};
+
+struct FloatState001d4ad4 {
+    unsigned char reserved00[0x104];
+    float value;
+};
+
+struct FloatState001d4b70 {
+    unsigned char reserved00[0x18];
+    float value;
+};
+
+struct FloatState001d4cec {
+    unsigned char reserved00[0x14];
+    float value;
+};
+
+struct FloatState001d51b8 {
+    unsigned char reserved00[0x10];
+    float value;
+};
+
+struct FloatState001d5284 {
+    unsigned char reserved00[0x0c];
+    float value;
+};
+
+struct FloatState001d5404 {
+    unsigned char reserved00[8];
+    float value;
+};
+
+struct AudioVoiceOwner001d9580 {
+    unsigned char reserved00[0x0c];
+    struct AudioVoice *voice;
+};
+
+struct AudioSlotBufferDescriptor001d9580 {
+    const unsigned char *address;
+    unsigned sample_count;
+    unsigned char reserved08[9];
+    unsigned char state;
+    unsigned char reserved12[6];
+};
+
+struct HalfwordCursor001db054 {
+    const unsigned short *current;
+};
+
+struct ByteCursor001db068 {
+    const unsigned char *current;
+};
+
+struct PackedPointer001f15fc {
+    unsigned char reserved00[0x2c];
+    unsigned char selector;
+    unsigned char reserved2d[7];
+    unsigned char *address;
+};
+
+struct AudioFadeController {
+    unsigned char reserved00[0x7b];
+    bool muted;
+    unsigned char reserved7c[0xb4];
+    struct AudioVoice *voices;
+};
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct AudioCounter *func_00156dac(struct AudioCounter *counter);
+extern unsigned int func_00180418(void);
+extern void func_0015268c(struct AudioChannelState *state, float volume);
+extern void func_00152758(struct AudioChannelState *state, float gain);
+extern void func_0015510c(struct AudioChannelState *state);
+extern void func_00155b24(struct AudioChannelState *state);
+extern unsigned int data_00243748;
+extern short *func_00169f9c(struct AnimationTrack *track, int index);
+extern int func_001524ec(struct ServiceCoordinator *context, unsigned int channel);
+extern int func_00152560(struct ServiceCoordinator *context, unsigned int channel);
+extern void func_00145da8(struct StreamCriticalSection *critical);
+extern void func_00145d3c(struct StreamCriticalSection *critical);
+extern void func_00183900(struct StreamQueue *queue, struct StreamEvent *event);
+extern int func_001dc390(int format);
+extern void func_00171a34(struct ConfigTarget001719f4 *target, unsigned char option,
+                          int index, unsigned flags);
+extern unsigned char func_001f2f2c(const struct AudioVoiceGroup *group);
+extern unsigned func_001d4864(unsigned samples, int format);
+extern void func_001835b8(struct AudioVoiceGroup *group);
+extern unsigned func_001efcd0(const struct AudioChannel *channel);
+extern void func_001d4850(struct ResetState001d4850 *state);
+extern void func_001d0164(struct ResourceState001d0164 *state);
+extern int func_00148a3c(struct ServiceCoordinator *context, unsigned value);
+extern int func_001549d8(struct ServiceCoordinator *context);
+extern float func_00149388(void);
+extern void func_0014ee5c(struct AudioVoiceGroup *group);
+extern void func_0014fc78(struct AudioChannel *channel, float volume);
+extern float func_00151a1c(const struct AudioLinearRamp *ramp);
+extern void func_00152610(struct AudioChannelState *state, unsigned char value);
+extern void func_0015274c(struct AudioChannel *channel, float gain);
+extern void func_00154224(struct AudioChannelArray *array);
+extern short *func_0016504c(struct SequencePlayer *player, int index);
+extern void func_00168cd8(struct SequenceEnabledState *state, int enabled);
+extern void func_001d88f0(struct SequencePlayer *player, int event, struct AnimationTrack *track);
+extern void func_00148800(struct ServiceCoordinator *context, unsigned int value);
+extern int func_00148854(struct ServiceCoordinator *context, unsigned int value);
+extern int func_001488bc(struct ServiceCoordinator *context, unsigned int value);
+extern int func_0014891c(struct ServiceCoordinator *context, unsigned int value);
+extern int func_00148988(struct ServiceCoordinator *context, unsigned int value);
+extern void func_001489e8(struct ServiceCoordinator *context, unsigned int value);
+extern void func_001526e0(struct AudioChannelState *state, int mode);
+extern unsigned int func_00155d24(unsigned int bits);
+extern void func_001838ec(struct AudioWorker *worker);
+extern void func_001719f4(struct ConfigState001719f4 *state, unsigned char kind, int format,
+                  unsigned char option, int index, unsigned flags);
+extern void func_001d4ad4(struct FloatState001d4ad4 *state, float value);
+extern void func_001d4b70(struct FloatState001d4b70 *state, float value);
+extern void func_001d4cec(struct FloatState001d4cec *state, float value);
+extern void func_001d51b8(struct FloatState001d51b8 *state, float value);
+extern void func_001d5284(struct FloatState001d5284 *state, float value);
+extern void func_001d5404(struct FloatState001d5404 *state, float value);
+extern void func_001d9580(struct AudioVoiceOwner001d9580 *owner,
+                             const unsigned char *first, const unsigned char *last);
+extern unsigned short func_001db054(struct HalfwordCursor001db054 *cursor);
+extern unsigned char func_001db068(struct ByteCursor001db068 *cursor);
+extern void *func_001f15fc(const struct PackedPointer001f15fc *state);
+extern unsigned func_001f2ef8(const struct AudioVoiceGroup *group);
+extern void func_001d4adc(struct AudioFadeController *controller, bool muted,
+                   unsigned int milliseconds);
 #ifdef __cplusplus
 }
 #endif

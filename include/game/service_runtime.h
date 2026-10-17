@@ -1,5 +1,13 @@
 #ifndef GAME_SERVICE_RUNTIME_H
 #define GAME_SERVICE_RUNTIME_H
+
+struct AudioDspParameterBlock;
+struct AudioDspReply;
+struct SignalState;
+struct StreamCriticalSection;
+struct StreamMutex;
+
+#include "game/stream_manager.h"
 #include "ctr/svc.h"
 #include "game/synchronization.h"
 typedef void (*LifecycleCallback)(void);
@@ -28,11 +36,20 @@ struct SharedPublicationState {
 };
 struct ServiceOutput {
     unsigned char active;
-    unsigned char reserved01[0x25];
+    unsigned char reserved01[2];
+    unsigned char flag03;
+    unsigned reserved04;
+    float volume;
+    unsigned char reserved0c[8];
+    void (*callbacks[2])(void *, void *, void *);
+    void *contexts[2];
+    unsigned char reserved24[2];
     signed char shared_status;
-    unsigned char reserved27[0x25];
+    unsigned char reserved27[9];
+    int consumed_samples;
+    unsigned char reserved34[0x18];
     int selected;
-};
+};;
 struct ServiceWorker {
     long long elapsed;
     unsigned char timed;
@@ -53,24 +70,31 @@ struct ServiceWorker {
 };
 struct ServiceBufferPair { unsigned int first, second; };
 struct ServiceCoordinator {
-    CtrHandle ready_event;
-    CtrHandle completion_event;
+    CtrHandle ready_event, completion_event;
     struct StreamMutex mutex;
     unsigned char reserved14[0x109c - 0x14];
-    unsigned short *completion_slots[150];
+    union {
+        unsigned short *completion_slots[150];
+        struct {
+            unsigned short *reserved109c[2];
+            struct AudioDspParameterBlock *voice_parameters[2];
+            struct AudioDspReply *replies[2];
+            struct AudioDspParameterBlock *auxiliary_parameters[2][24];
+        } audio;
+    } storage;
     struct ServiceBufferPair buffers[5];
     unsigned char enabled, pending;
     unsigned short serial, current_buffer, completion_slot;
     int expected;
-    unsigned int extra;
+    unsigned extra;
     unsigned char reserved132c[0x15b0 - 0x132c];
     unsigned char publish;
-};
+};;
 struct HandleManager {
     unsigned char reserved00[0x18];
     int selected;
 };
-struct ManagedHandle;
+struct AudioChannel;
 struct SharedConfiguration {
     unsigned char reserved00[0xc0];
     signed char shared_status;
@@ -79,10 +103,10 @@ struct SharedConfiguration {
 extern "C" {
 #endif
 extern struct ResourceServiceState data_00242afc;
-extern unsigned bss_0049eec4[8];
+extern LifecycleCallback bss_0049eec4[8];
 extern void (*bss_0049ef04[8])(void);
 extern struct ResourceServiceEvent bss_0049ef24;
-extern struct ResourceServiceLock data_00242b0c;
+extern struct StreamCriticalSection data_00242b0c;
 extern CtrHandle data_00242b14;
 extern const struct InvalidHandleRecord data_0021abd0;
 extern struct SharedPublicationState data_00242d90;
@@ -108,11 +132,20 @@ extern int func_0018f018(void);
 extern void func_0017e7a0(struct ServiceOutput *output, int channel, unsigned value);
 extern void func_0014fa0c(struct ServiceOutput *output, int channel, float value);
 extern void func_00148220(struct ServiceWorker *backend);
-extern void func_0014b224(struct ServiceWorker *backend, bool enabled);
+extern void func_0014b224(struct ServiceWorker *state, unsigned char value);
 /* [INFERENCE] The wrapper forwards this word; the worker body does not read it. */
 extern void func_0014fa48(struct ServiceWorker *backend, unsigned argument);
-extern void func_001521dc(struct HandleManager *manager, struct ManagedHandle *handle);
+extern void func_001521dc(struct HandleManager *manager, struct AudioChannel *handle);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_00180558(const struct ServiceOutput *state, int index, void (**first)(void *, void *, void *), void **second);
+#ifdef __cplusplus
+}
+#endif
+
 #endif
