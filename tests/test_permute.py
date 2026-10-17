@@ -422,11 +422,11 @@ class MutationTest(unittest.TestCase):
         with self.assertRaisesRegex(permute.PermuteError, "target body has ABI-relevant ARMCC annotations"):
             program(prefix + "int target(void){__packed struct S {int x;} s; return s.x;}")
 
-    def test_cpp_extensions_are_refused_before_preprocessing(self):
-        for suffix in (".cpp", ".cc", ".cxx", ".CPP"):
+    def test_non_source_extensions_are_refused_before_preprocessing(self):
+        for suffix in (".h", ".hpp", ".s", ".txt"):
             with self.subTest(suffix=suffix):
                 with mock.patch.object(interfaces, "preprocess") as preprocess:
-                    with self.assertRaisesRegex(permute.PermuteError, "accepts C .c files, not C\\+\\+"):
+                    with self.assertRaisesRegex(permute.PermuteError, "accepts .c, .cpp, .cc or .cxx"):
                         permute.Program.preprocess(Path("fixture" + suffix), ("target",), PROFILE)
                 preprocess.assert_not_called()
 
@@ -441,13 +441,13 @@ class MutationTest(unittest.TestCase):
                 with self.assertRaisesRegex(permute.PermuteError, "C\\+\\+ is not supported"):
                     program(text)
 
-    def test_cpp_cli_returns_input_error_without_search_or_traceback(self):
+    def test_invalid_extension_cli_returns_input_error_without_search_or_traceback(self):
         with mock.patch.object(interfaces, "preprocess") as preprocess:
             with mock.patch.object(permute, "search") as search:
                 with mock.patch.object(sys, "stderr", new_callable=io.StringIO) as stderr:
-                    status = permute.main(["fixture.cpp", "target", "--out", "scratch/cpp-refused"])
+                    status = permute.main(["fixture.s", "target", "--out", "scratch/invalid-extension"])
         self.assertEqual(status, 2)
-        self.assertEqual(stderr.getvalue(), "permuter: the permuter accepts C .c files, not C++\n")
+        self.assertEqual(stderr.getvalue(), "permuter: the permuter accepts .c, .cpp, .cc or .cxx source files\n")
         preprocess.assert_not_called()
         search.assert_not_called()
 
@@ -509,6 +509,28 @@ class DistanceTest(unittest.TestCase):
         extent = self.score(b"aaaabbbb", b"aaaa", status="match_extent_differs")
         self.assertGreater(extent.score, 0)
         self.assertGreater(self.score(b"aaaa", b"aaaa", status="mismatch").score, 0)
+
+    def test_positional_byte_count_is_distinct_from_aligned_score_component(self):
+        result = self.score(b"aaaabbbbcccc", b"bbbbccccaaaa")
+        summary = result.functions[0]
+        self.assertEqual(summary["changed_bytes"], 12)
+        self.assertEqual(summary["aligned_changed_bytes"], 8)
+        self.assertEqual(summary["instruction_changes"], 2)
+        self.assertEqual(result.score, 40)
+
+    def test_positional_byte_count_includes_every_unpaired_byte(self):
+        for original, candidate, delta in (
+            (b"aaaabbbbcccc", b"aaaaxxxxbbbbcccc", 4),
+            (b"aaaaxxxxbbbbcccc", b"aaaabbbbcccc", -4),
+        ):
+            with self.subTest(size_delta=delta):
+                result = self.score(original, candidate)
+                summary = result.functions[0]
+                self.assertEqual(summary["changed_bytes"], 12)
+                self.assertEqual(summary["aligned_changed_bytes"], 4)
+                self.assertEqual(summary["instruction_changes"], 1)
+                self.assertEqual(summary["size_delta"], delta)
+                self.assertEqual(result.score, 52)
 
     def test_original_data_and_rewrite_words_are_never_exported(self):
         result = self.score(b"abcdefgh", b"abcdEfgh")
@@ -706,6 +728,7 @@ class SyntheticOracleTest(ScratchTest):
         context.literal_model = inplace.DEFAULT_LITERAL_MODEL
         self.oracle = permute.Oracle.__new__(permute.Oracle)
         self.oracle.profile, self.oracle.targets, self.oracle.context = PROFILE, ("func_00100000",), context
+        self.oracle.suffix = ".c"
 
     def test_compiled_exact_and_perturbed_scores_use_context_compare(self):
         exact = self.oracle.evaluate("int func_00100000(int x){return x+3;}", self.directory / "worker")
@@ -714,6 +737,31 @@ class SyntheticOracleTest(ScratchTest):
         self.assertGreater(changed.score, 0)
         self.assertEqual(exact.functions[0]["status"], "match")
         self.assertEqual(changed.functions[0]["status"], "mismatch")
+
+    def test_published_byte_counts_reproduce_from_compiled_candidate(self):
+        source = permute.Program.parse(
+            "int func_00100000(int x){return x*7+3;}\n",
+            self.oracle.targets, self.directory / "input.c",
+        )
+        result = self.oracle.evaluate(source.text, self.directory / "worker")
+        permute.save_candidate(self.directory, "best", source, None, result, {})
+        record = json.loads((self.directory / "best.json").read_text(encoding="utf-8"))
+        emitted = self.directory / "best.c"
+        toolchain.compile_source(PROFILE, emitted, emitted.with_suffix(".o"), cache=False)
+        row = self.oracle.context.compare(emitted.with_suffix(".o"))[0]
+        original, candidate = row["_original"][:row["size"]], row["_candidate"]
+        positional = sum(a != b for a, b in zip(original, candidate)) + abs(len(original) - len(candidate))
+        summary = record["functions"][0]
+        self.assertEqual(summary["changed_bytes"], positional)
+        self.assertNotEqual(summary["aligned_changed_bytes"], positional)
+        self.assertEqual(summary["status"], row["status"])
+        self.assertEqual(summary["candidate_size"], row["candidate_size"])
+        self.assertEqual(summary["first_diff"], row["first_diff"])
+        self.assertEqual(
+            record["score"],
+            summary["instruction_changes"] * 16 + summary["aligned_changed_bytes"]
+            + abs(summary["size_delta"]) * 8,
+        )
 
     def test_unresolved_candidate_is_invalid_not_match(self):
         result = self.oracle.evaluate("extern int unknown(int);int func_00100000(int x){return unknown(x);}", self.directory / "worker")

@@ -152,16 +152,23 @@ def accounting(baseline: dict, candidate: dict, image: bytes, layout: ctrfmt.Cod
                              if conflict["target"] < end and first < conflict["end"]]
                 if conflicts:
                     reason = "PC-relative data reference conflicts with another owner/start or executable bytes; no exclusive data claim"
+                elif any(item["end"] == first for item in candidate.get("shared_literals", [])):
+                    reason = "Alignment remainder after a proven shared bounded string: no reference, zero-padding proof or data-format witness"
                 elif function:
                     reason = "Unreached hole inside the extent: no reachable instruction edge or bounded data-format witness"
                 else:
                     reason = "Unowned gap: no evidenced callable entry/closed CFG or bounded data-format witness; plausible decoding alone is insufficient"
             else:
-                reason = "Recovered function instruction/pool/literal ownership" if new_range["kind"] == "function" else "Proved padding/data"
+                reason = ("Recovered function instruction/pool/literal ownership" if new_range["kind"] == "function"
+                          else "Shared address-taken bounded string data; unowned and not a function extent"
+                          if new_range["kind"] == "rodata" else "Proved padding/data")
             parts.append({"start": first, "end": end, "kind": new_range["kind"], "owner": new_range["owner"], "reason": reason})
         if sum(part["end"] - part["start"] for part in parts) != old_range["end"] - old_range["start"]:
-            raise ValueError("v7 unknown accounting does not conserve bytes")
+            raise ValueError("baseline unknown accounting does not conserve bytes")
         unknown_rows.append({"start": old_range["start"], "end": old_range["end"], "parts": parts})
+        offset = layout.file_offset(old_range["start"])
+        unknown_rows[-1]["image_interval_sha256"] = hashlib.sha256(
+            image[offset:offset + old_range["end"] - old_range["start"]]).hexdigest()
     new_issues = {(row["address"], row["issue"]) for row in candidate["anomalies"]}
     repairs = {row["old_address"]: row["address"] for row in candidate["leading_instruction_repairs"]}
     anomaly_rows = []
@@ -172,7 +179,7 @@ def accounting(baseline: dict, candidate: dict, image: bytes, layout: ctrfmt.Cod
         function = owner(functions, starts, replacement)
         row = {**old_issue, "disposition": "open" if remains else "resolved", "owner": function["address"] if function else None}
         if not remains:
-            row["reason"] = "Leading-instruction recovery restores the referenced pool and/or closes the function's formerly unknown hole"
+            row["reason"] = "Image-backed initializer/veneer boundary or bounded literal/shared-data recovery closes this exact old issue"
         elif issue == "unexplained_function_bytes":
             row["reason"] = "Extent contains unowned/unreached holes or alignment not included in code/pools; no byte is silently claimed"
             row["holes"] = [{"start": item["start"], "end": item["end"], "kind": item["kind"]}
@@ -202,17 +209,47 @@ def enrich_catalogue(candidate: dict, baseline: dict, image: bytes, layout: ctrf
     repairs = {row["old_address"]: row["address"] for row in candidate["leading_instruction_repairs"]}
     old_entries = {(entry["address"], entry["isa"]) for function in old.values() for entry in function["entries"]}
     new_entries = {(entry["address"], entry["isa"]) for function in new.values() for entry in function["entries"]}
-    losses = sorted(old_entries - new_entries - {(address, "arm") for address in repairs})
+    starts = sorted(new)
+    analyzer = analyze.Analyzer(image, layout)
+    boundary_repairs = []
+    for address in sorted(old.keys() - new.keys()):
+        before = old[address]
+        after = owner(candidate["functions"], starts, address)
+        if (after is not None and before["evidence"] == ["prologue"]
+                and not any(entry["sources"] for entry in before["entries"])
+                and "relative_init_array" in after["evidence"]
+                and all(any(nlo <= lo < hi <= nhi for nlo, nhi in after[kind])
+                        for kind in ("code_ranges", "pools", "literals") for lo, hi in before[kind])):
+            boundary_repairs.append({
+                "old_address": address, "address": after["address"],
+                "old_size": before["size"], "size": after["size"],
+                "preserved_entry": any(entry["address"] == address for entry in after["entries"]),
+                "entry_evidence": next((entry["evidence"] for entry in after["entries"]
+                                        if entry["address"] == address), []),
+                "evidence": "section-authenticated initializer entry precedes a weak interior prologue; all old owned spans retained",
+            })
+    losses = sorted(old_entries - new_entries)
     split_parents = {row["owner"] for row in candidate["linker_tail_extent_splits"]}
-    unexpected = [
-        address for address in sorted(old.keys() & new.keys())
-        if address not in split_parents
-        and (old[address]["size"], old[address]["isa"], old[address]["entries"])
-        != (new[address]["size"], new[address]["isa"], new[address]["entries"])
-    ]
+    typed_owners = {row["function"] for row in evidence.get("literal_encodings", [])}
+    extent_changes, unexpected = [], []
+    for address in sorted(old.keys() & new.keys()):
+        before, after = old[address], new[address]
+        if (before["size"], before["isa"]) == (after["size"], after["isa"]):
+            continue
+        basis = ("linker_tail_partition" if address in split_parents
+                 else "reviewed_utf16_object_bound" if address in typed_owners and before["isa"] == after["isa"]
+                 else "canonical_interworking_veneer" if after["kind"] == "veneer" and after["size"] == 8
+                 and analyzer.veneer(address, after["isa"]) is not None else None)
+        extent_changes.append({"address": address, "old_size": before["size"], "size": after["size"], "basis": basis})
+        if basis is None:
+            unexpected.append(address)
     structural = analyze.validate_catalogue(candidate, image, layout)
-    if losses or unexpected or structural:
-        raise ValueError(f"preservation/structural failure: entries={losses}, extents={unexpected}, structural={structural}")
+    entry_addresses = {address for address, _ in new_entries}
+    missing_initializers = sorted({row["address"] for table in candidate.get("relative_pointer_tables", [])
+                                   for row in table["targets"]} - entry_addresses)
+    if losses or unexpected or structural or missing_initializers:
+        raise ValueError(f"preservation/structural failure: entries={losses}, extents={unexpected}, "
+                         f"structural={structural}, initializers={missing_initializers}")
     unknown_rows, anomaly_rows = accounting(baseline, candidate, image, layout)
     classifications = [function["classification_evidence"] for function in candidate["functions"]
                        if "classification_evidence" in function]
@@ -220,36 +257,71 @@ def enrich_catalogue(candidate: dict, baseline: dict, image: bytes, layout: ctrf
     thumb_rows = []
     for row in evidence["thumb_dispositions"]:
         address = int(row["address"], 16)
+        current = owner(candidate["functions"], starts, address)
+        disposition = ("runtime: admitted extent-bound compiler ABI/emission evidence" if address in classified
+                       else "creditable: original-address compiler-emission/library identity missing"
+                       if current and current["kind"] == "function"
+                       else "topology-excluded; ownership and C eligibility unresolved")
         thumb_rows.append({
-            **row, "disposition": "runtime: bound natural C++ caller proof" if address in classified
-            else "creditable: original-address compiler-emission/library identity missing",
+            **row, "disposition": disposition,
+            "candidate_owner": current["address"] if current else None,
+            "candidate_owner_kind": current["kind"] if current else None,
         })
     author_rows = []
     for row in evidence["author_dispositions"]:
         address = int(row["address"], 16)
+        current = owner(candidate["functions"], starts, address)
+        disposition = row.get("decision", "runtime" if address in classified else "retain_creditable")
+        if any(item["old_address"] == address for item in candidate.get("legacy_entry_preservation", [])):
+            disposition = "preserved_legacy_entry_in_noncreditable_multi_entry_owner"
         author_rows.append({
-            **row, "disposition": "runtime: admitted compiler identity/ABI evidence" if address in classified
-            else "creditable: evidence below ordinary-library/original-callsite runtime threshold",
+            **row, "disposition": disposition,
+            "candidate_owner": current["address"] if current else None,
+            "candidate_owner_kind": current["kind"] if current else None,
         })
+    census = pointer_census(candidate, image, layout)
+    for row in unknown_rows:
+        row["pointer_witnesses"] = [
+            {"address": item["address"], "isa": item["isa"], "disposition": item["disposition"],
+             "references": item["references"], "uses": item["uses"]}
+            for item in census if row["start"] <= item["address"] < row["end"]]
+        row["disposition"] = ("resolved" if all(part["kind"] != "unknown" for part in row["parts"])
+                              else "partial" if any(part["kind"] != "unknown" for part in row["parts"]) else "open")
     candidate["revision_review"] = {
-        "name": "catalogue-v8-r2",
+        "name": evidence.get("revision", "catalogue-v9"),
         "baseline_sha256": input_sha256["config/catalogue.json"],
         "classifications": classifications, "withheld_classifications": withheld,
         "thumb_dispositions": thumb_rows, "author_dispositions": author_rows,
+        "thumb_v9_residue": [
+            {**row, "candidate_owner": current["address"] if current else None,
+             "candidate_owner_kind": current["kind"] if current else None,
+             "ownership_classified": row["address"] in classified}
+            for row in evidence.get("thumb_v9_residue", [])
+            for current in [owner(candidate["functions"], starts, row["address"])]],
+        "kernel_adapter_dispositions": evidence.get("kernel_adapter_dispositions", []),
+        "boundary_queue": evidence.get("boundary_queue", []),
+        "boundary_repairs": boundary_repairs,
+        "extent_changes": extent_changes,
+        "legacy_entry_preservation": candidate.get("legacy_entry_preservation", []),
         "provenance": evidence["provenance"],
         "retained_evidence_source_sha256": evidence["source_candidate_sha256"],
         "retained_evidence_input_sha256": evidence["source_input_sha256"],
         "unknown_accounting": unknown_rows, "anomaly_accounting": anomaly_rows,
-        "pointer_census": pointer_census(candidate, image, layout),
+        "pointer_census": census,
         "protected_summary": protected_summary,
         "protected_rows": [{"address": address, "size": function["size"]}
                            for address, function in sorted(protected.items())],
         "c006_present": any("c006.json" in name for name in protected_summary),
+        "c007_present": any("c007.json" in name for name in protected_summary),
+        "c008_present": any("c008.json" in name for name in protected_summary),
         "structural_issues": structural,
         "preservation": {
             "unexpected_entry_losses": losses, "protected_changes": [],
+            "prior_entries": len(old_entries), "retained_prior_entries": len(old_entries & new_entries),
             "unexpected_extent_changes": unexpected,
-            "old_starts_replaced_only_by_listed_repairs": old.keys() - new.keys() == repairs.keys(),
+            "old_starts_replaced_only_by_listed_repairs": (
+                old.keys() - new.keys() <= {row["old_address"] for row in boundary_repairs}
+                | {address for address, _ in new_entries} | {address for address in repairs if address in old}),
             "partitioned_owners": sorted(address for address in split_parents & old.keys()
                                          if old[address]["size"] != new[address]["size"]),
         },

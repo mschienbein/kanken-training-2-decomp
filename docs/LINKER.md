@@ -478,22 +478,27 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
-## Catalogue recovery safeguards (candidate v8-r2)
+## Catalogue recovery safeguards (candidate v9-r2)
 
 `tools/analyze.py catalogue --out X` is the single candidate generator. For the
 reviewed image it includes the immutable, image/extent/ISA-bound classification
-records in `research/catalogue_v8_evidence.json` and recomputes the revision's
+records, reviewed UTF-16 object references, the section-authenticated `.init_array`
+table and the immutable protected-checkpoint blob list in
+`research/catalogue_v9_r2_evidence.json`, and recomputes the revision's
 ownership, anomaly and pointer evidence. The output records the command, source
 hashes and input hashes; neither output path nor elapsed time changes its bytes.
 The former separate `research/catalogue_v8.py` generator has been replaced by
 `tools/catalogue_review.py`; no active author-result directory is scanned.
 
 Protection compares complete adopted owners **after classification**, not only
-addresses and sizes before it. Accepted matches, existing c004/c005/c006 candidate
-files, extra `--protect-manifest` inputs, and the c006 candidate blob from
-`c006-integrate` are included. The branch blob identity and content hash are
-recorded. A bundled classification conflicting with a protected owner is
-explicitly withheld; an explicit conflicting `--classifications` input fails.
+addresses and sizes before it. Accepted matches, existing c004-c008 candidate
+files, extra `--protect-manifest` inputs, and the digest-pinned Git blob of the
+unmerged `c008-integrate` candidate are included. The blob identity and content
+hash are recorded and verified before use. A bundled classification conflicting
+with a protected owner is explicitly withheld; an explicit conflicting
+`--classifications` input fails. Newly observed callers/start evidence for a
+protected owner are recorded in `protected_entry_observations` /
+`protected_start_observations` instead of rewriting the accepted record.
 
 Leading-prefix and pointer-prefix recovery allow benign argument-memory loads,
 but refuse memory writes, writeback and atomic/exclusive reservation operations.
@@ -511,6 +516,51 @@ crossing, literal/data crossing, saved-frame, interior-entry and complete-record
 protection vetoes still apply. This recovers `0x001efcd0 | 0x001efcd8` and
 `0x00131948 | 0x00131950` under the adopted erased-tail-branch interpretation;
 it is not a general rule to split every leaf NOP.
+
+Catalogue v9 adds four image-structural rules. **(1)** A bounded R0-input leaf CFG
+(scalar loads, argument-object scalar stores through the same R0-R3/R12 inputs,
+loops, intersected definite initialization at every join, plain returns, no calls,
+pools, writeback, atomic or exclusive effects, and no exit from the proved suffix)
+may follow an exact linker NOP after a nonstoring wrapper prefix
+(`nonstoring_wrapper_field_access_graph`). **(2)** A single unconditional tail branch
+after an independently proved frame restore may become a four-byte wrapper when its
+direct target is a known returning ARM owner (`restored_frame_closed_tail`). The same
+control/data/protected-record vetoes still apply. **(3)** A canonical AAPCS
+interworking veneer (`add ip, pc, #odd` followed by `bx ip`) is recognized as code
+only when its odd PC-relative target is mapped Thumb text; the veneer is not an ADR
+string. **(4)** A reviewed record may type an address-taken literal as UTF-16LE
+only for the exact owner/reference sites and only when a complete printable or
+Unicode-whitespace halfword terminator is present; non-whitespace controls and
+unterminated data fail closed. Ordinary untyped NUL-string inference is unchanged.
+
+A complete address-taken NUL string shared by several owners is no longer left
+unknown when it does not overlap owned code/pools or branch targets. Its **exact
+terminated object** becomes unowned `rodata`; alignment bytes after it are claimed
+only when they are all zero. This neither assigns the object to a function nor grows
+any function extent.
+V9-R01 fixes three typed shared objects at `0x001b54e4`, `0x001b8234` and
+`0x001bc29c`: each complete UTF-16 record is four bytes, not one byte of an
+empty narrow string. The natural r4023 wide-literal EXTENT witness is 128/124 B,
+with no rewrites; its full object does not establish exclusive ownership.
+
+
+A reviewed `.init_array` table is accepted only as a bounded, aligned, self-relative
+32-bit table inside mapped rodata. Every entry must point to plausible code. The
+original startup walker's table traversal and the compiler `.init_array` /
+`R_ARM_TARGET1` emission are the section-ABI witness; this is not a general scan
+for pointer-shaped words. Each target becomes an independent start before weak
+interior prologue guesses are consolidated. Every prior entry address/ISA remains
+present, and protected complete records remain identical. If a new initializer
+start precedes a prior prologue-only owner, the old address is retained as a
+`secondary_entry` with `legacy_prologue` evidence only when it is a valid ARM
+instruction boundary and every old code/pool/literal span survives in the new
+owner. `legacy_entry_preservation` records each exact mapping. The recovered
+owner is conservatively `multi_entry`, not credited as C; the retained label is
+not evidence of independently proved callability. A later baseline generation
+retains that exact `legacy_prologue` secondary-label form only under the same
+initializer owner, valid ARM boundary, no incoming sources and complete prior
+owned-span preservation. It does not convert genuine called/pointer entries into
+legacy guesses. Other entry losses fail closed (V9-R02).
 
 Classification proofs retain their original provenance. Old ABI executions,
 natural-caller matches, declaration rejections and the corrected no-frame compiler

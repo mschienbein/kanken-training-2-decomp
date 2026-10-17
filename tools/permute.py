@@ -1,4 +1,4 @@
-"""Search C source shapes with the repository's strict in-place matching oracle.
+"""Search C/C++ source shapes with the repository's strict in-place matching oracle.
 
 Only selected function bodies are rewritten. Outputs are private author hints, not
 accepted source; no original instructions or bytes are rendered or recorded.
@@ -29,6 +29,7 @@ import inplace  # noqa: E402
 import interfaces  # noqa: E402
 import match  # noqa: E402
 import toolchain  # noqa: E402
+import permute_cpp as cpp  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = "armlink5-inline-branchnop-v2"
@@ -40,6 +41,7 @@ MUTATIONS = (
 INTEGER_TYPES = {
     "int", "unsigned int", "long", "unsigned long", "long long", "unsigned long long",
 }
+CPP_SUFFIXES = {".cpp", ".cc", ".cxx"}
 
 
 class PermuteError(RuntimeError):
@@ -159,10 +161,20 @@ class Program:
     targets: tuple[str, ...]
     spans: dict[str, tuple[int, int, int]]
     original_functions: dict[str, str]
+    suffix: str = ".c"
+
+    @property
+    def oracle_targets(self) -> tuple[str, ...]:
+        return self.targets
 
     @classmethod
     def parse(cls, text: str, targets: tuple[str, ...], source: Path,
-              original: str | None = None) -> Program:
+              original: str | None = None) -> Program | cpp.Program:
+        if source.suffix.lower() in CPP_SUFFIXES:
+            try:
+                return cpp.Program.parse(text, targets, source, original)
+            except cpp.CppError as exc:
+                raise PermuteError(str(exc)) from exc
         # Let the interface auditor recognize approved SVC/result/CP15 declarations.
         # Their raw spelling is retained; target-body annotations still fail closed.
         try:
@@ -196,9 +208,9 @@ class Program:
         })
 
     @classmethod
-    def preprocess(cls, source: Path, targets: tuple[str, ...], profile: toolchain.Profile) -> Program:
-        if source.suffix.lower() != ".c":
-            raise PermuteError("the permuter accepts C .c files, not C++")
+    def preprocess(cls, source: Path, targets: tuple[str, ...], profile: toolchain.Profile) -> Program | cpp.Program:
+        if source.suffix.lower() not in {".c", *CPP_SUFFIXES}:
+            raise PermuteError("the permuter accepts .c, .cpp, .cc or .cxx source files")
         # This is exactly the interface auditor's launcher, flags and include path.
         text = interfaces.preprocess(interfaces.Unit(source, profile))
         return cls.parse(text, targets, source, source.read_text(encoding="utf-8"))
@@ -651,8 +663,13 @@ def c90_scopes(node: c_ast.Node) -> None:
                 executable = True
 
 
-def mutate(program: Program, ast: c_ast.FileAST, rng: random.Random,
-           kind: str | None = None) -> tuple[c_ast.FileAST, str] | None:
+def mutate(program: Program | cpp.Program, ast: c_ast.FileAST | str, rng: random.Random,
+           kind: str | None = None) -> tuple[c_ast.FileAST | str, str] | None:
+    if isinstance(program, cpp.Program):
+        try:
+            return cpp.mutate(program, ast, rng, kind)
+        except cpp.CppError as exc:
+            raise PermuteError(str(exc)) from exc
     kinds = [kind] if kind else list(MUTATIONS)
     rng.shuffle(kinds)
     names = list(program.targets)
@@ -685,14 +702,15 @@ def score_rows(rows: list[dict], targets: tuple[str, ...], functions: dict[int, 
         width = 4 if functions[row["address"]]["isa"] == "arm" else 2
         left = [original[i:i + width] for i in range(0, len(original), width)]
         right = [candidate[i:i + width] for i in range(0, len(candidate), width)]
-        changes, byte_changes = 0, 0
+        changes, aligned_byte_changes = 0, 0
         for tag, a, b, c, d in difflib.SequenceMatcher(None, left, right, autojunk=False).get_opcodes():
             if tag != "equal":
                 changes += max(b - a, d - c)
                 x, y = b"".join(left[a:b]), b"".join(right[c:d])
-                byte_changes += sum(p != q for p, q in zip(x, y)) + abs(len(x) - len(y))
+                aligned_byte_changes += sum(p != q for p, q in zip(x, y)) + abs(len(x) - len(y))
         delta = len(candidate) - row["size"]
-        score = changes * 16 + byte_changes + abs(delta) * 8
+        byte_changes = sum(p != q for p, q in zip(original, candidate)) + abs(delta)
+        score = changes * 16 + aligned_byte_changes + abs(delta) * 8
         if row["status"] != "match":
             score = max(1, score)
         elif score:
@@ -701,7 +719,8 @@ def score_rows(rows: list[dict], targets: tuple[str, ...], functions: dict[int, 
         summaries.append({
             "name": name, "score": score, "status": row["status"], "address": row["address"],
             "size": row["size"], "candidate_size": len(candidate), "size_delta": delta,
-            "instruction_changes": changes, "changed_bytes": byte_changes, "first_diff": row["first_diff"],
+            "instruction_changes": changes, "aligned_changed_bytes": aligned_byte_changes,
+            "changed_bytes": byte_changes, "first_diff": row["first_diff"],
             # Rewrite encodings and original instructions must never enter output records.
             "linker_rewrites": dict(Counter(w["rule"] for w in row.get("linker_rewrites", []))),
         })
@@ -709,15 +728,15 @@ def score_rows(rows: list[dict], targets: tuple[str, ...], functions: dict[int, 
 
 
 class Oracle:
-    def __init__(self, profile: toolchain.Profile, catalogue: Path, targets: tuple[str, ...]):
-        self.profile, self.targets = profile, targets
+    def __init__(self, profile: toolchain.Profile, catalogue: Path, targets: tuple[str, ...], suffix: str = ".c"):
+        self.profile, self.targets, self.suffix = profile, targets, suffix
         self.context = match.Context(catalogue, MODEL)
 
     def evaluate(self, text: str, worker_dir: Path) -> Evaluation:
         worker_dir.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(prefix="candidate-", dir=worker_dir) as temporary:
             directory = Path(temporary)
-            source, obj = directory / "candidate.c", directory / "candidate.o"
+            source, obj = directory / f"candidate{self.suffix}", directory / "candidate.o"
             source.write_text(text, encoding="utf-8", newline="\n")
             saved_cache = toolchain.CACHE
             # compile_source(cache=False) still refreshes the object cache. Keep that
@@ -735,9 +754,9 @@ class Oracle:
 _WORKER_ORACLE: Oracle | None = None
 
 
-def initialize_worker(profile: toolchain.Profile, catalogue: Path, targets: tuple[str, ...]) -> None:
+def initialize_worker(profile: toolchain.Profile, catalogue: Path, targets: tuple[str, ...], suffix: str = ".c") -> None:
     global _WORKER_ORACLE
-    _WORKER_ORACLE = Oracle(profile, catalogue, targets)
+    _WORKER_ORACLE = Oracle(profile, catalogue, targets, suffix)
 
 
 def evaluate_worker(task: tuple[str, Path]) -> Evaluation:
@@ -746,7 +765,7 @@ def evaluate_worker(task: tuple[str, Path]) -> Evaluation:
 
 
 class Climber:
-    def __init__(self, program: Program, seed: int, baseline: Evaluation):
+    def __init__(self, program: Program | cpp.Program, seed: int, baseline: Evaluation):
         self.program, self.rng = program, random.Random(seed)
         self.current = copy.deepcopy(program.ast)
         self.score = baseline.score
@@ -754,7 +773,7 @@ class Climber:
         self.stale = 0
         self.seen = {hashlib.sha256(program.render(self.current).encode()).digest()}
 
-    def propose(self) -> tuple[c_ast.FileAST, str] | None:
+    def propose(self) -> tuple[c_ast.FileAST | str, str] | None:
         for _ in range(48):
             restart = self.stale >= 32 or self.rng.randrange(24) == 0
             base = self.program.ast if restart else self.current
@@ -778,7 +797,7 @@ class Climber:
             return candidate, ",".join(history)
         return None
 
-    def observe(self, ast: c_ast.FileAST, result: Evaluation) -> bool:
+    def observe(self, ast: c_ast.FileAST | str, result: Evaluation) -> bool:
         improved = result.score is not None and (self.best is None or result.score < self.best)
         if improved:
             self.best = result.score
@@ -788,18 +807,18 @@ class Climber:
         return improved
 
 
-def save_candidate(out: Path, stem: str, program: Program, ast: c_ast.FileAST | None,
+def save_candidate(out: Path, stem: str, program: Program | cpp.Program, ast: c_ast.FileAST | str | None,
                    result: Evaluation, details: dict) -> None:
     functions, patch = program.hints(ast)
     text = program.text if ast is None else program.render(ast)
-    (out / f"{stem}.c").write_text(text, encoding="utf-8", newline="\n")
-    (out / f"{stem}.functions.c").write_text(functions, encoding="utf-8", newline="\n")
+    (out / f"{stem}{program.suffix}").write_text(text, encoding="utf-8", newline="\n")
+    (out / f"{stem}.functions{program.suffix}").write_text(functions, encoding="utf-8", newline="\n")
     (out / f"{stem}.diff").write_text(patch, encoding="utf-8", newline="\n")
     record = details | {"score": result.score, "functions": list(result.functions)}
     (out / f"{stem}.json").write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
 
-def search(program: Program, profile: toolchain.Profile, out: Path, *, seconds: float,
+def search(program: Program | cpp.Program, profile: toolchain.Profile, out: Path, *, seconds: float,
            workers: int, seed: int, catalogue: Path = image.CATALOGUE,
            max_candidates: int | None = None) -> dict:
     if workers < 1 or seconds <= 0 or max_candidates is not None and max_candidates < 1:
@@ -809,7 +828,7 @@ def search(program: Program, profile: toolchain.Profile, out: Path, *, seconds: 
         raise PermuteError("output must be a new directory underneath this worktree's scratch/")
     out.mkdir(parents=True, exist_ok=False)
     started = time.monotonic()
-    oracle = Oracle(profile, catalogue, program.targets)
+    oracle = Oracle(profile, catalogue, program.oracle_targets, program.suffix)
     best_ast = None
     metadata = {
         "seed": seed, "workers": workers, "profile": profile.name, "compiler": profile.compiler,
@@ -817,6 +836,8 @@ def search(program: Program, profile: toolchain.Profile, out: Path, *, seconds: 
         "catalogue_sha256": match.sha256(catalogue), "image_sha256": oracle.context.image.sha256,
         "input_sha256": hashlib.sha256(program.text.encode()).hexdigest(),
     }
+    if isinstance(program, cpp.Program):
+        metadata |= {"language": "c++", "target_symbols": dict(zip(program.targets, program.oracle_targets))}
     evaluated, invalid, improvements, match_seconds = 0, 0, 0, None
     with tempfile.TemporaryDirectory(prefix=".workers-", dir=out) as temporary:
         work = Path(temporary)
@@ -844,7 +865,7 @@ def search(program: Program, profile: toolchain.Profile, out: Path, *, seconds: 
         stop = "match" if best.score == 0 else "budget"
         if best.score:
             context = multiprocessing.get_context("spawn")
-            with context.Pool(workers, initializer=initialize_worker, initargs=(profile, catalogue, program.targets)) as pool:
+            with context.Pool(workers, initializer=initialize_worker, initargs=(profile, catalogue, program.oracle_targets, program.suffix)) as pool:
                 while time.monotonic() - started < seconds and (max_candidates is None or evaluated < max_candidates):
                     proposals = []
                     for index, climber in enumerate(climbers):
@@ -922,7 +943,7 @@ def main(argv: list[str] | None = None) -> int:
           f"rate={summary['candidates_per_second']:.2f}/s elapsed={summary['elapsed_seconds']:.3f}s")
     if summary["time_to_match_seconds"] is not None:
         print(f"time_to_match={summary['time_to_match_seconds']:.3f}s")
-    print(f"Author hints: {args.out / 'best.functions.c'} and {args.out / 'best.diff'}")
+    print(f"Author hints: {args.out / ('best.functions' + program.suffix)} and {args.out / 'best.diff'}")
     return 0 if summary["score"] == 0 else 1
 
 
