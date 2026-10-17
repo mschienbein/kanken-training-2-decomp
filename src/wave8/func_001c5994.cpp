@@ -1,7 +1,6 @@
-#include "game/sound_notification.h"
+#include "game/audio_voice.h"
 
-extern "C" void func_001c5994(SoundNotificationForwarder *object,
-                              const SoundNotification *notification)
+extern "C" void func_001c5994(AudioChannel *channel, const AudioSlot *slot)
 {
-    func_001c599c(object->receiver, notification);
+    func_001c599c(channel->state, slot);
 }
