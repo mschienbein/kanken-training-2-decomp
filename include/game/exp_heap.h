@@ -61,9 +61,7 @@ struct AllocatorBase {
     unsigned reserved14;
 };
 struct HeapArena {
-    struct AllocatorBase base;
-    struct ExpHeap heap;
-    unsigned allocations;
+    struct ManagedExpHeap base;
     unsigned char *lower;
     unsigned size;
 };
@@ -117,7 +115,7 @@ extern struct ResourceEntry *func_0015d798(struct ResourceEntry *entry, int scre
     unsigned capacity, const unsigned short *text);
 extern void func_00121a88(struct ExpHeap *heap, void *allocation);
 extern struct HeapArena bss_00495ad0;
-extern void func_00193a6c(struct HeapArena *heap, void *allocation);
+extern void func_00193a6c(struct ManagedExpHeap *heap, void *allocation);
 extern struct RuntimeTypeInfo data_00242da8;
 extern struct RuntimeTypeInfo data_00242e2c;
 extern struct RuntimeTypeInfo data_00243494;

@@ -13,7 +13,8 @@ int func_0012fda0(unsigned int flags)
     unsigned result;
     const void *address;
     func_0019ecf8();
-    result = func_0018f068(flags, &registered);
+    /* The endpoint writes one representation byte; the result is signed. */
+    result = func_0018f068(flags, (unsigned char *)&registered);
     address = (const void *)__current_pc();
     if (result_failed(result))
         func_00192afc(result, address);

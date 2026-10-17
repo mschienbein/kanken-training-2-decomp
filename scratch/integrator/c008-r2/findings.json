@@ -1,0 +1,296 @@
+{
+ "source": "Integrator remediation, not independent review or acceptance.",
+ "all_original_findings_disposed": true,
+ "findings": [
+  {
+   "id": "F01",
+   "review_ids": {
+    "openai": "F01",
+    "second": "F02"
+   },
+   "functions": [
+    "func_0016b6a4"
+   ],
+   "disposition": "deferred-to-c009",
+   "summary": "Remove the unproven directory cleanup call identity from the successor rather than cast U8Directory to accepted const FileInputStream. Delete this new unit and its two proposed declarations; leave the accepted stream definition unchanged.",
+   "evidence": [
+    "deferred/func_0016b6a4-c008.c",
+    "retained/openai/F01-diagnostic.txt",
+    "retained/openai/findings.json",
+    "candidates.json",
+    "dry-matches.json"
+   ]
+  },
+  {
+   "id": "F02",
+   "review_ids": {
+    "openai": "F02",
+    "second": "F03"
+   },
+   "functions": [
+    "func_0012ff20",
+    "func_001923d4",
+    "func_00115040"
+   ],
+   "disposition": "fixed",
+   "summary": "One CtrResult(unsigned,unsigned char) SDK boundary, canonical header included by its accepted C++ definition, and byte-wide forwarding wrappers all the way through the accepted dispatcher.",
+   "evidence": [
+    "retained/openai/F02-diagnostic.txt",
+    "signature-probes.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "F03",
+   "review_ids": {
+    "openai": "F03",
+    "second": "F04"
+   },
+   "functions": [
+    "func_001462d4"
+   ],
+   "disposition": "fixed",
+   "summary": "Canonical InputSessionContext* and int status, preserving unused owner and the unmodified machine word. Reuse C009 exact source/comment bytes; fresh callee and natural caller witnesses match.",
+   "evidence": [
+    "retained/c009/contract-audit-r2.json",
+    "retained/openai/input-status-boundary-facts.json",
+    "witnesses/func_001821f4.c",
+    "checks/witnesses-final-r2/caller-match/func_001821f4.result.json",
+    "post-merge-matches/wave14/func_001462d4.result.json"
+   ]
+  },
+  {
+   "id": "F04",
+   "review_ids": {
+    "openai": "F04",
+    "second": "F01"
+   },
+   "functions": [
+    "func_001838ec"
+   ],
+   "disposition": "fixed",
+   "summary": "Use the canonical AudioTaskManager returned unadjusted by func_00185de4; remove AudioWorker and declare the stop API in audio_tasks.h.",
+   "evidence": [
+    "retained/openai/boundary-facts.json",
+    "retained/second/audio-manager-contract-evidence.json",
+    "bridges.cpp",
+    "post-merge-matches/wave13/func_001838ec.result.json"
+   ]
+  },
+  {
+   "id": "S01",
+   "functions": [
+    "func_0012fda0",
+    "func_00186538"
+   ],
+   "disposition": "fixed",
+   "summary": "Canonical unsigned-byte endpoints write the object representation of signed result storage through an explicit unsigned-char view. Signed interpretation is unchanged; the nonmatching unsigned-storage alternative is retained.",
+   "evidence": [
+    "compiler-probes.json",
+    "failed-attempts.json",
+    "post-merge-match-index.json"
+   ]
+  },
+  {
+   "id": "S02",
+   "functions": [
+    "func_0014856c",
+    "func_0013712c"
+   ],
+   "disposition": "fixed",
+   "summary": "InputSessionContext owns active at 0 and StreamMutex at 0x34. The old selected word is that mutex depth, not another owner; the lazy initializer and accepted resetter now use the same canonical type.",
+   "evidence": [
+    "forwarding-results.json",
+    "forwarding-adjudications.json",
+    "retained/c009/native-cutover-r2.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S03",
+   "functions": [
+    "func_0014603c",
+    "func_00154224",
+    "func_00154f78",
+    "func_0012f1b4"
+   ],
+   "disposition": "fixed",
+   "summary": "HandleManager now has its evidenced mutex prefix and 24-channel vector. Its accepted resetter uses mutex.depth; all three channel consumers use the real owner, with no duplicate owner structs.",
+   "evidence": [
+    "forwarding-results.json",
+    "retained/c009/native-cutover-r2.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S04",
+   "functions": [
+    "func_00168e80",
+    "func_001790a8",
+    "func_001eb688",
+    "func_001eb694",
+    "func_00177740"
+   ],
+   "disposition": "fixed",
+   "summary": "MenuItem getter results stay MenuItem pointers. Expose its alternate TextTable and metadata words in the canonical representation and remove unrelated W12c item/action views and casts.",
+   "evidence": [
+    "forwarding-results.json",
+    "forwarding-adjudications.json",
+    "signature-probes.json",
+    "post-merge-match-index.json"
+   ]
+  },
+  {
+   "id": "S05",
+   "functions": [
+    "func_001dd4f8"
+   ],
+   "disposition": "fixed",
+   "summary": "The forwarded data_0023ecf4 value is ItemPageSet*. Its signed variant/group bytes are now exposed in that canonical prefix, replacing the unrelated descriptor type.",
+   "evidence": [
+    "forwarding-results.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S06",
+   "functions": [
+    "func_001f22ac",
+    "func_001f2b98"
+   ],
+   "disposition": "fixed",
+   "summary": "ArchiveResourceTable is already the table member type. The helper now reads its canonical file_table_offset and the caller no longer casts it to W12cArchiveTables.",
+   "evidence": [
+    "forwarding-results.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S07",
+   "functions": [
+    "func_0014aaf4",
+    "func_0014ab30",
+    "func_0015e9dc",
+    "func_0017fda4",
+    "func_00181100"
+   ],
+   "disposition": "fixed-with-view-qualification",
+   "summary": "Material interfaces use canonical DisplayPane, including its observed material-bearing +0x13c view. Preserve DisplayVertexPane vertices at +0x150. This is not a claim about every original pane class size.",
+   "evidence": [
+    "forwarding-results.json",
+    "forwarding-adjudications.json",
+    "compiler-probes.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S08",
+   "functions": [
+    "func_00193a6c",
+    "func_001e37e0",
+    "func_0019d068",
+    "func_0019dd00",
+    "func_0019dc20"
+   ],
+   "disposition": "fixed",
+   "summary": "The common allocation/free prefix is ManagedExpHeap. HeapArena explicitly embeds it, as LockedExpHeap already does; migrate every source caller and field access to the real base member without pointer casts.",
+   "evidence": [
+    "forwarding-results.json",
+    "forwarding-adjudications.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S09",
+   "functions": [
+    "func_001313f4",
+    "func_00151a1c"
+   ],
+   "disposition": "fixed-with-containing-prefix-qualification",
+   "summary": "SoundSubsystem explicitly contains its master AudioLinearRamp at zero; existing status bytes belong to that prefix. Per-channel AuxFloatRamp remains a distinct shorter value type.",
+   "evidence": [
+    "forwarding-results.json",
+    "forwarding-adjudications.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S10",
+   "functions": [
+    "func_0012349c"
+   ],
+   "disposition": "fixed",
+   "summary": "The natural wrapper forwards SharedMemory**; the IPC output now has that canonical pointer-to-pointer type, and the handle output is CtrHandle*. The serialized address is converted once from its IPC word.",
+   "evidence": [
+    "forwarding-results.json",
+    "post-merge-match-index.json",
+    "bridges.cpp"
+   ]
+  },
+  {
+   "id": "S11",
+   "functions": [
+    "func_001f22c4",
+    "func_001f239c"
+   ],
+   "disposition": "fixed",
+   "summary": "Getter results retain W12cSoundDetail and BankInstrumentInfo identities. Complete their observed relative-reference prefixes and remove the unrelated BinaryReferenceBlock view.",
+   "evidence": [
+    "forwarding-results.json",
+    "post-merge-match-index.json",
+    "signature-probes.json"
+   ]
+  },
+  {
+   "id": "S12",
+   "functions": [
+    "func_0012f170"
+   ],
+   "disposition": "fixed",
+   "summary": "Replace the real implicit __aeabi_memcpy4 declaration with its shared void(void*,const void*,size_t) ARM EABI contract in runtime.h. The already proven binding is unchanged.",
+   "evidence": [
+    "compiler-probes.json",
+    "compiler-adjudications.json",
+    "post-merge-matches/retries/func_0012f170.result.json"
+   ]
+  },
+  {
+   "id": "S13",
+   "functions": [],
+   "disposition": "fixed",
+   "summary": "One file-scope opaque SelectionHintPanel tag prevents distinct prototype-scope identities in selection.h. Its descriptive role remains INFERENCE.",
+   "evidence": [
+    "compiler-probes.json",
+    "compiler-adjudications.json",
+    "interfaces.json"
+   ]
+  },
+  {
+   "id": "S14",
+   "functions": [
+    "func_001234e4"
+   ],
+   "disposition": "shared-implementation-reuse",
+   "summary": "Remove the duplicate private ctrIpcStaticBufferDescriptor implementation and include ctr/ipc.h. This resolves artificial canonical co-inclusion and follows the existing shared helper convention, without changing the command or bytes.",
+   "evidence": [
+    "compiler-probes.json",
+    "compiler-adjudications.json",
+    "post-merge-matches/retries/func_001234e4.result.json"
+   ]
+  }
+ ],
+ "qualifications": [
+  "Canonical descriptive field/class roles remain INFERENCE where only layout/forwarding is recovered.",
+  "All previous non-F01 identity, original-bug, runtime-extension, indirect-call and native-name qualifications remain.",
+  "No R1/L1 model or new alias has been adopted; v2/none only.",
+  "No full build, suite, prepare, finalize, adoption, history update or push was performed."
+ ]
+}

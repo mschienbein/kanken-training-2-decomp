@@ -8,14 +8,18 @@ struct TextTable {
     unsigned reserved00[4];
     unsigned char reserved10;
     signed char kind;
-    unsigned char reserved12[0x16];
+    unsigned char reserved12[0x0e];
+    int action_first;
+    int action_second;
     signed char count;
     unsigned char reserved29[3];
 };
 
 struct MenuItem {
     struct TextTable text;
-    unsigned char reserved2c[0x188];
+    unsigned char reserved2c[0xdc];
+    struct TextTable alternate_text;
+    unsigned char reserved134[0x80];
     signed char link_count;
     unsigned char reserved1b5[3];
     const unsigned short *link;

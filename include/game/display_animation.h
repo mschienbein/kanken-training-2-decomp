@@ -1,16 +1,13 @@
 #ifndef GAME_DISPLAY_ANIMATION_H
 #define GAME_DISPLAY_ANIMATION_H
 
-struct InputSessionContext;
 
-struct ActionMetadata;
 struct ArchiveParseArena;
 struct ArchiveParseContext;
 struct AudioChannel;
 struct AudioChannelPacket;
 struct AudioChannelState;
-struct AudioPacketRouter;
-struct AudioVolumeState;
+struct HandleManager;
 struct BoundDisplayObject;
 struct DisplayAnimationController;
 struct DisplayAnimationNode;
@@ -18,6 +15,8 @@ struct DisplayAnimationSlot;
 struct DisplayAnimationTrack;
 struct DisplayObject;
 struct DisplayRegistration;
+struct InputSessionContext;
+struct MenuItem;
 struct PositionableStream;
 struct PositionableStreamVTable;
 struct QuestionRecord;
@@ -57,10 +56,6 @@ struct AudioChannelPacket {
     unsigned short last;
 };
 
-struct AudioPacketRouter {
-    unsigned char reserved00[0x18dc];
-    struct AudioChannel *channels[24];
-};
 
 struct QuestionRecord {
     unsigned char reserved00[0x1f];
@@ -97,11 +92,6 @@ struct DisplayRegistration {
     int enabled;
 };
 
-struct ActionMetadata {
-    unsigned char reserved00[0x20];
-    int first;
-    int second;
-};
 
 #ifdef __cplusplus
 extern "C" {
@@ -122,12 +112,12 @@ extern void func_0014282c(float volume);
  * matching caller sign-extends a device configuration byte, including negatives. */
 extern int func_001462d4(struct InputSessionContext *owner, int value);
 extern void func_0015434c(struct ServiceOutput *renderer);
-extern void func_00154f78(struct AudioPacketRouter *router, int index,
+extern void func_00154f78(struct HandleManager *router, int index,
                    const struct AudioChannelPacket *packet);
 extern int func_001672dc(const struct QuestionTable *table, int index);
 extern void func_0016bf80(struct BoundDisplayObject *object, int index, float speed);
 extern void func_00173d90(struct DisplayRegistration *const *slots, int index, int active);
-extern void func_00177740(const struct ActionMetadata *metadata, int *first, int *second);
+extern void func_00177740(const struct MenuItem *metadata, int *first, int *second);
 extern void func_001810e4(struct BoundDisplayObject *object, int index);
 #ifdef __cplusplus
 }

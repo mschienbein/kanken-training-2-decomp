@@ -188,7 +188,9 @@ struct BankWaveArchiveTable {
 };
 
 struct BankInstrumentInfo {
-    unsigned reserved00[6];
+    unsigned signature;
+    struct RelativeReference contents;
+    unsigned reserved0c[3];
 #ifndef __cplusplus
     unsigned parameters[];
 #endif

@@ -23,6 +23,7 @@ struct X07NarrowCommand;
 #include "game/pool_list.h"
 #include "game/service_callbacks.h"
 #include "game/service_runtime.h"
+#include "game/shared_memory.h"
 
 /* Partial state at 0x00242a50. The signed flag is read by func_00195e84;
  * the status word at 0x18 is shared by the service-state predicates. */
@@ -75,7 +76,7 @@ extern struct ServiceContext data_002430e0;
 extern struct PendingState data_00242a28;
 extern int func_001927a8(void);
 extern int func_00192c10(void);
-extern void func_00115040(unsigned mode);
+extern void func_00115040(unsigned char mode);
 extern unsigned char func_00122af0(void);
 extern void func_00122fe8(unsigned char value);
 extern void func_00122ff8(void);
@@ -258,7 +259,7 @@ extern void func_00150cb8(struct S150cb8 *object, unsigned mask, float value);
 extern void func_00150f2c(struct S150f2c *object, unsigned mask, float value);
 extern void func_00150f6c(struct S150f6c *object, unsigned mask, int enabled);
 extern CtrResult func_00112494(CtrHandle handle);
-extern CtrResult func_0012349c(unsigned *first, unsigned *second);
+extern CtrResult func_0012349c(CtrHandle *handle, struct SharedMemory **address);
 extern CtrResult func_0012fa24(const CtrHandle *session, unsigned int register_address,
                         const void *source, unsigned int size);
 extern unsigned func_001234e4(const void *buffer, unsigned size, unsigned value);

@@ -1,0 +1,23 @@
+{
+ "purpose": "Exercise the shipped signature/forwarding scripts using committed aggregate inputs, without depending on ignored raw run directories.",
+ "commands": [
+  {
+   "command": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c008-r2/probe_signatures.py --run portable",
+   "exit": 0,
+   "units": 364,
+   "failures": 0
+  },
+  {
+   "command": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c008-r2/sweep_forwarding.py --run portable",
+   "exit": 0,
+   "selected_functions": 469,
+   "canonical_functions": 1060,
+   "canonical_globals": 151,
+   "catalogue_functions": 4699,
+   "candidates": 40,
+   "adjudications": "forwarding-adjudications.json, final phase"
+  }
+ ],
+ "inputs": ["match-index.json", "compiler-probes.json", "dry-matches.json"],
+ "note": "Original source and byte-match receipts were unchanged. Raw portable runs remain private; complete equivalent result data is retained in signature-probes.json and forwarding-results.json."
+}

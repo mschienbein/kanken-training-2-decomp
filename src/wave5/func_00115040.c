@@ -1,7 +1,7 @@
 #include "game/service_state.h"
-extern void func_001923d4(unsigned mode);
+#include "game/applet.h"
 
-void func_00115040(unsigned mode)
+void func_00115040(unsigned char mode)
 {
     switch (mode) {
     case 0:

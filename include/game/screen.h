@@ -3,6 +3,7 @@
 
 struct PairStorage;
 struct W10DrawingInput;
+struct Material;
 
 
 /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */
@@ -67,6 +68,9 @@ struct DisplayPane {
     unsigned char alpha;                    /* 0xb4 */
     unsigned char reservedb5[2];
     unsigned char flags;
+    /* Material-bearing pane extent, evidenced by the direct material clients. */
+    unsigned char reservedb8[0x84];
+    struct Material *material;
 };
 
 struct DisplayPaneLink {
@@ -169,8 +173,7 @@ struct DisplayVertexArray {
 struct Material;
 struct DisplayVertexPane {
     struct DisplayPane pane;
-    unsigned char reservedb8[0x84];
-    struct Material *material;
+
     unsigned char reserved140[0x10];
     struct DisplayVertexArray vertices;
 };

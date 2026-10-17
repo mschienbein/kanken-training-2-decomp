@@ -1,5 +1,6 @@
 #include "game/service_configuration_words.h"
 #include "game/service_protocol.h"
+#include "game/runtime.h"
 #include "ctr/cp15.h"
 #include "ctr/svc.h"
 

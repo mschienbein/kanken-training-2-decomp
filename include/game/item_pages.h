@@ -12,7 +12,10 @@ struct ItemPage {
 };
 
 struct ItemPageSet {
-    unsigned char reserved00[8];
+    unsigned char reserved00;
+    signed char variant;
+    signed char group;
+    unsigned char reserved03[5];
     short metric8;
     short metrica;
     unsigned char reserved0c[4];

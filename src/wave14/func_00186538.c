@@ -33,7 +33,8 @@ int func_00186538(void)
     signed char available;
     if (active || func_0012d43c()) {
         available = 0;
-        func_0013622c(0, &available);
+        /* The endpoint writes one representation byte; the result is signed. */
+        func_0013622c(0, (unsigned char *)&available);
         return available;
     }
     return 0;

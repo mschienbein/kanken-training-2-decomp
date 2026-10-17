@@ -3,14 +3,14 @@
 #include <stdbool.h>
 
 
-static __forceinline bool result_failed(unsigned result)
+static __forceinline bool result_failed(CtrResult result)
 {
-    return result >> 31;
+    return (unsigned)result >> 31;
 }
 
-void func_001923d4(unsigned mode)
+void func_001923d4(unsigned char mode)
 {
-    unsigned result;
+    CtrResult result;
     const void *address;
     func_0019ecf8();
     result = func_0012ff20(func_00191dd8(), mode);

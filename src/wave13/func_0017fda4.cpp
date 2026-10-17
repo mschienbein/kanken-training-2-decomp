@@ -1,6 +1,6 @@
 #include "game/material.h"
 #include "game/shader.h"
-extern "C" void func_0017fda4(PaneMaterialView *pane, Material *material)
+extern "C" void func_0017fda4(DisplayPane *pane, Material *material)
 {
     Material *previous = pane->material;
     if (previous == material)

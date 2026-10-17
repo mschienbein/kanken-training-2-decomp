@@ -67,6 +67,7 @@ extern void func_00131330(struct ObjectManager *manager);
 extern void func_001312a4(struct ObjectManager *manager);
 extern void func_00131304(struct ObjectManager *manager);
 extern void func_00148210(void);
+extern void func_001838ec(struct AudioTaskManager *manager);
 extern void func_00183f08(struct AudioTaskManager *manager);
 extern void func_001d32e0(struct AudioTaskManager *manager, int index);
 extern void func_001d32e4(struct AudioTaskManager *manager, int index);

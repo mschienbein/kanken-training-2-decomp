@@ -1,10 +1,10 @@
-#include "game/audio_voice.h"
-#include "game/stream_manager.h"
+#include "game/audio_tasks.h"
 
 
 
-void func_001838ec(struct AudioWorker *worker)
+/* The natural shutdown caller forwards func_00185de4() without adjustment. */
+void func_001838ec(struct AudioTaskManager *manager)
 {
-    worker->stopping = 1;
-    func_00183900(&worker->queue, 0);
+    manager->active = 1;
+    func_00183900(&manager->queue, 0);
 }

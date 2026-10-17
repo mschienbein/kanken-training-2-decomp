@@ -1,0 +1,131 @@
+{
+  "original_functions": [
+    {
+      "function": "func_001821f4",
+      "size": 16,
+      "effects": [
+        {
+          "address": "0x1821f4",
+          "effect": "store low byte into ServiceOutput.shared_status",
+          "reads": [
+            "r1",
+            "r0"
+          ],
+          "writes": []
+        },
+        {
+          "address": "0x1821f8",
+          "effect": "load word",
+          "reads": [
+            "pc"
+          ],
+          "writes": [
+            "r0"
+          ],
+          "loaded_pointer": "0x4b97ac"
+        },
+        {
+          "address": "0x1821fc",
+          "effect": "branch",
+          "reads": [
+            "pc"
+          ],
+          "writes": [
+            "pc"
+          ],
+          "target": "0x1462d4"
+        }
+      ]
+    },
+    {
+      "function": "func_001462d4",
+      "size": 12,
+      "effects": [
+        {
+          "address": "0x1462d4",
+          "effect": "load word",
+          "reads": [
+            "pc"
+          ],
+          "writes": [
+            "r0"
+          ],
+          "loaded_pointer": "0x4b5284"
+        },
+        {
+          "address": "0x1462d8",
+          "effect": "branch",
+          "reads": [
+            "pc"
+          ],
+          "writes": [
+            "pc"
+          ],
+          "target": "0x148a3c"
+        }
+      ]
+    },
+    {
+      "function": "func_0013e9d8",
+      "size": 104,
+      "effects": [
+        {
+          "address": "0x13e9e0",
+          "effect": "load signed 8-bit value",
+          "reads": [
+            "r4"
+          ],
+          "writes": [
+            "r0"
+          ]
+        },
+        {
+          "address": "0x13e9e4",
+          "effect": "load signed 8-bit value",
+          "reads": [
+            "r4"
+          ],
+          "writes": [
+            "r1"
+          ]
+        },
+        {
+          "address": "0x13ea00",
+          "effect": "load signed 8-bit value",
+          "reads": [
+            "r0"
+          ],
+          "writes": [
+            "r1"
+          ]
+        },
+        {
+          "address": "0x13ea0c",
+          "effect": "call",
+          "reads": [
+            "pc"
+          ],
+          "writes": [
+            "lr",
+            "pc"
+          ],
+          "target": "0x1821f4"
+        }
+      ]
+    }
+  ],
+  "canonical_owner": {
+    "object": "bss_004b97ac",
+    "header": "include/game/input_runtime.h",
+    "type": "struct InputSessionContext"
+  },
+  "width_path": {
+    "source": "include/game/service_runtime.h SharedConfiguration.shared_status: signed char; original signed-byte load 0x0013ea00",
+    "intermediate": "func_001821f4 stores the byte at ServiceOutput.shared_status, then replaces r0 with 0x004b97ac and tail-forwards r1 unchanged to func_001462d4",
+    "callee": "func_001462d4 replaces r0 with 0x004b5284 and tail-forwards r1 unchanged to func_00148a3c(unsigned int value); it does not zero-extend r1 as unsigned short would require",
+    "conclusion": "Known original caller supplies a canonical InputSessionContext pointer and can supply a sign-extended negative status; the new AudioVolumeState*/unsigned-short API neither describes that owner nor its observed whole-word forwarding.",
+    "startup_r1_preserved_from_signed_load_to_call": true
+  },
+  "negative_interface_probe_exit": 2,
+  "independent_width_probe_evidence": "scratch/review/c008/second/session-width-probe-results.json"
+}
