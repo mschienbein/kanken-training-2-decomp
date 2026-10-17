@@ -63,6 +63,51 @@ Scale note for this project: the lean form is one review per checkpoint covering
 function (per-function notes inside it), from another model family than the authors where
 possible. Item 8 lives in `docs/known-issues-<checkpoint>.md` when a checkpoint has any.
 
+### Checkpoint linker/literal selection
+
+`prepare` accepts independent `--linker-model` and `--literal-model` choices. Omitting them
+retains `armlink5-inline-branchnop-v2` / `none`; the previous checkpoint's opt-in is **not**
+silently inherited. For example, after the applicable gate revisions and independent reviews:
+
+```sh
+python tools/accept.py prepare --checkpoint cNNN-name --candidates config/candidates/<file>.json \
+  --linker-model armlink5-inline-branchnop-v3 --literal-model anonymous-string-records-v1
+```
+
+CLI arguments are the per-checkpoint authority, rather than optional manifest fields: they use
+the same identifiers as the author/build tools, make model selection visible at invocation, and
+do not silently change an existing candidate manifest's interpretation. Before any prepare gate
+or build runs, the immutable checkpoint directory gets `selection.json` with both explicit
+choices. Both fresh builds receive those exact values, even for defaults. Prepare fails if
+either receipt disagrees with the selection or the builds disagree with each other.
+
+New prepare/history records use schema 2. They bind the selection hash and both complete receipt
+hashes, including every literal mapping and removed helper. Review/finalize recheck this closure;
+`verify` checks it without ROM inputs. The selector's creation boundary is fixed after
+pre-selector `c007` (sequence 7): this change merges only after `c007` finalizes and before
+`c008` prepares. **Sequence 8 and every later checkpoint require `selection_sha256`**,
+irrespective of mutable schema/model labels. Before that boundary, a
+selection artifact, selection/receipt binding, build-input summary or non-default model also
+requires the selected-checkpoint closure. Lowering/deleting schema metadata cannot opt selected
+evidence into the legacy path.
+
+For every checkpoint, `verify` binds the prepared record's hash and cross-checks both full
+receipts' models against the prepared and historical models. Only genuinely pre-selector,
+default-model evidence can use legacy model omissions (v2 / `none`); no historical artifact or
+recorded model is rewritten or opted in retroactively.
+
+`model_uses` lists **every** R1 caller, removed-helper unit (including `functions: []`), L1 owning
+unit and full pool mappings, including unchanged sources. `model_changes` compares both choices
+with the last accepted checkpoint. On a model transition, `model_reviews` reopens every current
+R1 caller and, conservatively, every credited function of each current L1 pool-owning unit:
+the linker does not claim a recovered per-function literal-reference graph. These required rows
+join new/revised functions and R1 helper/header dependencies; R1 provenance rows remain QUALIFIED.
+Inspect both full receipts, not only the summary. A selector is not gate adoption: L1/R1 still
+require their independently reviewed, frozen gate revisions before a real prepare uses them.
+The combined proposal is `scratch/integrator/adopt-r1-l1/GATES-DRAFT.md`; `docs/GATES.md` is not
+changed by implementing the selection path.
+
+
 Classified, never credited as C: SDK/library code proven identical to a known library, compiler
 runtime helpers, veneers/thunks, handwritten assembly, generated tables, data with format witnesses.
 

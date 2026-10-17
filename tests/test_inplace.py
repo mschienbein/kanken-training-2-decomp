@@ -662,6 +662,90 @@ class ArmlinkBoundaryTest(unittest.TestCase):
         self.assertIsNone(strict._optimised_branch(rel, sec, 0x100000, inplace.Target(0x100004), None, {}))
 
 
+class ArmCallAbiContextTest(unittest.TestCase):
+    """Non-ROM CFG probes for R1's incoming argument and outgoing clobber checks."""
+
+    def context(self, words, site, arguments=None, **kwargs):
+        instructions = {insn.address: insn for insn in inplace._ARM.disasm(
+            struct.pack(f"<{len(words)}I", *words), BASE)}
+        arguments = {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R1} if arguments is None else arguments
+        return inplace.arm_call_abi_context(instructions, BASE + site, arguments,
+                                           inplace.cs_arm.ARM_CC_AL, **kwargs)
+
+    def test_reviewer_branch_successor_reads_a_clobbered_argument(self):
+        # The linear suffix looks clean, but B reaches a read of the pre-call r1.
+        words = [0xE92D4010, 0xE1A00004, 0xE3A01007, 0xE5801018, 0xEA000001,
+                 0xE3A01000, 0xE12FFF1E, 0xE2812001, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 12), "reads_arguments")
+
+    def test_both_conditional_successors_must_kill_caller_saved_values(self):
+        for read_in_taken_arm in (False, True):
+            words = [0xE92D4010, 0xE1A00004, 0xE3A01007, 0xE5801018, 0xE3500000,
+                     0x1A000001, 0xE3A01000, 0xE12FFF1E, 0xE2812001, 0xE12FFF1E]
+            if not read_in_taken_arm:
+                words[6], words[8] = words[8], words[6]
+            with self.subTest(read_in_taken_arm=read_in_taken_arm):
+                self.assertEqual(self.context(words, 12), "reads_arguments")
+
+    def test_reviewer_branch_skips_the_nearby_argument_setup(self):
+        # r1 was modified at entry; the only reachable incoming edge bypasses the nearby MOV.
+        words = [0xE3A01002, 0xEA000002, 0xE320F000, 0xE320F000, 0xE3A01007,
+                 0xE5801018, 0xE3A01000, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 20), "arguments_not_materialised")
+
+    def test_unmodified_entry_arguments_can_pass_through_without_nearby_moves(self):
+        words = [0xE92D4010, 0xE1A04002, 0xE5801000, 0xE3A01000, 0xE5804008, 0xE8BD8010]
+        self.assertEqual(self.context(words, 8), "consistent")
+        # The new incoming-parameter allowance never waives the post-site clobber check.
+        words[3] = 0xE2812001
+        self.assertEqual(self.context(words, 8), "reads_arguments")
+
+    def test_entry_arguments_are_unmodified_on_every_cfg_path(self):
+        words = [0xE3520000, 0x1A000001, 0xE3A04000, 0xE320F000,
+                 0xE5801018, 0xE3A01000, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 16), "consistent")
+        # One arm now changes r1 too far before the site; the other leaves it untouched.
+        words = [0xE3520000, 0x1A000004, 0xE3A01007, 0xE320F000, 0xE320F000,
+                 0xE320F000, 0xE320F000, 0xE5801018, 0xE3A01000, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 28), "arguments_not_materialised")
+
+    def test_prior_calls_break_entry_argument_provenance(self):
+        words = [0xE92D4010, 0xEB000020, 0xE5802018, 0xE3A01000, 0xE8BD8010]
+        arguments = {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R2}
+        self.assertEqual(self.context(words, 8, arguments), "arguments_not_materialised")
+        words[1] = 0xE5801000
+        self.assertEqual(self.context(words, 8, arguments, call_sites={BASE + 4}), "arguments_not_materialised")
+
+    def test_call_results_are_inputs_without_artificial_argument_moves(self):
+        # A 32-bit result in r0, or a two-word result in r0/r1, feeds the removed helper.
+        for arguments in ({inplace.cs_arm.ARM_REG_R0},
+                          {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R1}):
+            with self.subTest(arguments=arguments):
+                instruction = 0xE2000102 if len(arguments) == 1 else 0xE0000001
+                words = [0xE92D4010, 0xEB000020, instruction, 0xE3A01000, 0xE8BD8010]
+                self.assertEqual(self.context(words, 8, arguments), "consistent")
+                words[3] = 0xE2812001
+                self.assertEqual(self.context(words, 8, arguments), "reads_arguments")
+
+    def test_call_result_provenance_must_hold_on_every_incoming_path(self):
+        # Taken arm bypasses the call, retaining an old modified r0 instead of a result.
+        words = [0xE3A00001, 0xE3520000, 0x1A000003, 0xE320F000, 0xE320F000,
+                 0xEB000020, 0xE320F000, 0xE2000102, 0xE3500000, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 28, {inplace.cs_arm.ARM_REG_R0}), "arguments_not_materialised")
+        # A conditional BL alone also cannot establish a result on every incoming path.
+        words[2], words[5] = 0xE320F000, 0x1B000020
+        self.assertEqual(self.context(words, 28, {inplace.cs_arm.ARM_REG_R0}), "arguments_not_materialised")
+
+    def test_conditional_definition_does_not_establish_a_missing_argument(self):
+        words = [0xE3A01001, 0xE320F000, 0xE320F000, 0xE320F000, 0xE320F000,
+                 0xE3500000, 0x13A01007, 0xE5801018, 0xE3A01000, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 28), "arguments_not_materialised")
+
+    def test_unknown_successors_fail_closed(self):
+        words = [0xE92D4010, 0xE1A00004, 0xE3A01007, 0xE5801018, 0xE12FFF14]
+        self.assertEqual(self.context(words, 12), "unresolved_control_flow")
+
+
 class RemovedCalleeModelTest(unittest.TestCase):
     """V3's candidate-only exception is narrower than ordinary original-image inlining."""
 
@@ -715,6 +799,34 @@ class RemovedCalleeModelTest(unittest.TestCase):
         with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
             self.linker(mem, catalogue, model="armlink5-inline-branchnop-v2").link(obj)
 
+    def test_entry_argument_forwarding_is_allowed_by_the_full_link(self):
+        obj, mem, catalogue = self.fixture()
+        candidate, original = bytearray(obj.sections[1].data), bytearray(mem.read(BASE, 40))
+        for offset in (4, 8):
+            struct.pack_into("<I", candidate, offset, 0xE320F000)
+            struct.pack_into("<I", original, offset, 0xE320F000)
+        obj.sections[1].data = bytes(candidate)
+        mem.write(BASE, original)
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+        self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
+
+    def test_prior_call_result_can_feed_a_removed_helper_in_the_full_link(self):
+        obj, mem, catalogue = self.fixture(struct.pack("<I", 0xE2000102) + BX_LR)
+        ordinary = inplace.Symbol("func_00100100", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+        obj.symbols.append(ordinary)
+        obj.sections[1].relocs.insert(0, inplace.Reloc(4, inplace.R_ARM_CALL, ordinary))
+        candidate, original = bytearray(obj.sections[1].data), bytearray(mem.read(BASE, 40))
+        struct.pack_into("<I", candidate, 4, 0xEBFFFFFE)
+        struct.pack_into("<I", original, 4, bl(BASE + 4, 0x100100, False))
+        obj.sections[1].data = bytes(candidate)
+        mem.write(BASE, original)
+        catalogue[0x100100] = {"address": 0x100100, "size": 12, "isa": "arm"}
+        mem.write(0x100100, struct.pack("<3I", 0xE3A00000, 0xE3A01000, 0xE12FFF1E))
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+        self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
+
     def test_a_definition_in_another_candidate_object_is_used_not_an_external_guess(self):
         obj, mem, catalogue = self.fixture()
         helper = obj.symbols[1]
@@ -734,6 +846,194 @@ class RemovedCalleeModelTest(unittest.TestCase):
         self.assertEqual(extern.shndx, "SHN_UNDEF")  # combining does not mutate inputs
         with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
             self.linker(mem, catalogue).link(obj)
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_reviewer_compiler_used_helper_is_retained(self):
+        """F01: armcc's actual __attribute__((used)) marker defeats otherwise eligible R1."""
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "used.c"
+            source.write_text(
+                "__attribute__((used))\n"
+                "void set_field18(unsigned *p, unsigned value) { p[6] = value; }\n",
+                encoding="utf-8")
+            toolchain.compile_source(toolchain.load_profiles()["game"], source, source.with_suffix(".o"))
+            helper = inplace.ObjectFile(source.with_suffix(".o"))
+            definition = next(sym for sym in helper.defined_functions() if sym.name == "set_field18")
+            self.assertEqual(helper.sections[definition.shndx].size, 8)
+            self.assertIn("__tagsym$$used", helper.sections[definition.shndx].retention)
+            obj, mem, catalogue = self.fixture()
+            obj.sections.pop(2)
+            obj.symbols[1].shndx = "SHN_UNDEF"
+            combined = inplace.ObjectFile.combine([obj, helper], ["caller.c", "used.c"])
+            linker = self.linker(mem, catalogue)
+            with self.assertRaisesRegex(inplace.LinkError, r"retained callee .*__tagsym\$\$used"):
+                linker.link(combined)
+            self.assertEqual(linker.removed_callees, [])
+            self.assertEqual(linker.rewrites, [])
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_compiler_exported_helper_is_retained(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "export.c"
+            source.write_text(
+                "__declspec(dllexport) void set_field18(unsigned *p, unsigned value) { p[6] = value; }\n",
+                encoding="utf-8")
+            toolchain.compile_source(toolchain.load_profiles()["game"], source, source.with_suffix(".o"))
+            helper = inplace.ObjectFile(source.with_suffix(".o"))
+            obj, mem, catalogue = self.fixture()
+            obj.sections.pop(2)
+            obj.symbols[1].shndx = "SHN_UNDEF"
+            linker = self.linker(mem, catalogue)
+            with self.assertRaisesRegex(inplace.LinkError, "retained callee .*exported visibility"):
+                linker.link(inplace.ObjectFile.combine([obj, helper]))
+            self.assertEqual(linker.removed_callees, [])
+
+    def test_keep_entry_first_last_and_exported_roots_never_remove_helpers(self):
+        for reason in ("KEEP", "entry", "first", "last", "exported", "unknown retention mechanism"):
+            for selector in ("set_field18", "i.set_*"):
+                with self.subTest(reason=reason, selector=selector):
+                    obj, mem, catalogue = self.fixture()
+                    linker = inplace.InPlaceLinker(
+                        mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000),
+                        self.MODEL, retention_roots={selector: reason})
+                    with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
+                        linker.link(obj)
+                    self.assertEqual(linker.removed_callees, [])
+        with self.assertRaisesRegex(inplace.LinkError, "uninterpretable retention root"):
+            inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000),
+                                  self.MODEL, retention_roots={"missing": "KEEP"}).link(obj)
+
+    def test_bound_retained_helper_uses_v2_identity_and_inline_rules(self):
+        obj, mem, catalogue = self.fixture()
+        obj.symbols.append(inplace.Symbol("__tagsym$$used", 0, 0, "STT_NOTYPE", "STB_LOCAL", 2))
+        catalogue[0x100100] = {"address": 0x100100, "size": 8, "isa": "arm"}
+        mem.write(0x100100, obj.sections[2].data)
+        for model in ("armlink5-inline-branchnop-v2", self.MODEL):
+            with self.subTest(model=model):
+                linker = self.linker(mem, catalogue, {"set_field18": {"address": 0x100100}}, model)
+                linked = linker.link(obj)
+                self.assertEqual(set(linked), {1, 2})
+                self.assertEqual(linked[1][1], mem.read(BASE, 40))
+                self.assertEqual(linked[2][0].origin, "catalogue")
+                self.assertEqual(linked[2][1], mem.read(0x100100, 8))
+                self.assertEqual(linker.removed_callees, [])
+                self.assertEqual([rewrite.target for rewrite in linker.rewrites], [0x100100] * 2)
+                self.assertEqual([rewrite.rule for rewrite in linker.rewrites], ["inline_insn"] * 2)
+
+    def compiled_bound_retained_fixture(self, reference_body, reference_size):
+        """F08's real game-profile objects against a wholly synthetic v2 reference image."""
+        sources = {
+            "caller.c": (
+                "extern void set_field18(unsigned *p, unsigned v);\n"
+                "extern void func_00100100(unsigned v);\n"
+                "unsigned func_00100000(unsigned *p, unsigned v) {\n"
+                "    set_field18(p, v); func_00100100(0); return 1;\n"
+                "}\n"),
+            "retained.c": (
+                "__attribute__((used))\n"
+                "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n"),
+            "reference.c": f"void set_field18(unsigned *p, unsigned v) {{ {reference_body} }}\n",
+        }
+        objects = {}
+        with tempfile.TemporaryDirectory() as directory:
+            for name, text in sources.items():
+                source = Path(directory) / name
+                source.write_text(text, encoding="utf-8")
+                toolchain.compile_source(toolchain.load_profiles()["game"], source, source.with_suffix(".o"))
+                objects[name] = inplace.ObjectFile(source.with_suffix(".o"))
+        caller = objects["caller.c"]
+        definition = next(sym for sym in caller.defined_functions() if sym.name == "func_00100000")
+        self.assertEqual(caller.sections[definition.shndx].size, 24)
+        helper = objects["retained.c"]
+        definition = next(sym for sym in helper.defined_functions() if sym.name == "set_field18")
+        self.assertEqual(helper.sections[definition.shndx].size, 8)
+        self.assertIn("__tagsym$$used", helper.sections[definition.shndx].retention)
+        original = objects["reference.c"]
+        definition = next(sym for sym in original.defined_functions() if sym.name == "set_field18")
+        self.assertEqual(original.sections[definition.shndx].size, reference_size)
+        helper_at = 0x100200
+        names = {"set_field18": {"address": helper_at}}
+        catalogue = {
+            BASE: {"address": BASE, "size": 24, "isa": "arm"},
+            0x100100: {"address": 0x100100, "size": 12, "isa": "arm"},
+            helper_at: {"address": helper_at, "size": reference_size, "isa": "arm"},
+        }
+        mem = Memory()
+        mem.write(helper_at, original.sections[definition.shndx].data)
+        reference = inplace.ObjectFile.combine([caller, original], ["caller.c", "reference.c"])
+        linker = self.linker(mem, catalogue, names, "armlink5-inline-branchnop-v2")
+        for placed, data in linker.link(reference).values():
+            mem.write(placed.base, data)
+        candidate = inplace.ObjectFile.combine([caller, helper], ["caller.c", "retained.c"])
+        return candidate, mem, catalogue, names
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_reviewer_bound_retained_wrong_helper_is_refused_like_v2(self):
+        obj, mem, catalogue, names = self.compiled_bound_retained_fixture("p[6] = v; p[7] = v;", 12)
+        # Linking precedes selection of caller-only credit: the zero-credit helper cannot bypass it.
+        for model in ("armlink5-inline-branchnop-v2", self.MODEL):
+            with self.subTest(model=model):
+                linker = self.linker(mem, catalogue, names, model)
+                with self.assertRaisesRegex(inplace.LinkError, "inlining is undecidable.*not an ordinary 4/8-byte"):
+                    linker.link(obj)
+                self.assertEqual(linker.removed_callees, [])
+                self.assertEqual(linker.rewrites, [])
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_compiler_bound_retained_matching_helper_is_compared_as_its_original(self):
+        obj, mem, catalogue, names = self.compiled_bound_retained_fixture("p[6] = v;", 8)
+        for model in ("armlink5-inline-branchnop-v2", self.MODEL):
+            with self.subTest(model=model):
+                linker = self.linker(mem, catalogue, names, model)
+                linked = {placed.base: (placed, data) for placed, data in linker.link(obj).values()}
+                self.assertEqual(set(linked), {BASE, 0x100200})
+                for address, (placed, data) in linked.items():
+                    self.assertEqual(placed.origin, "catalogue")
+                    self.assertEqual(data, mem.read(address, catalogue[address]["size"]))
+                self.assertEqual(linker.removed_callees, [])
+                self.assertEqual([rewrite.target for rewrite in linker.rewrites], [0x100200])
+                self.assertEqual([rewrite.rule for rewrite in linker.rewrites], ["inline_insn"])
+                self.assertNotIn("removed_callee", linker.rewrites[0].record())
+
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_elf_entry_retain_and_unknown_processor_metadata_fail_closed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "root.c"
+            source.write_text("void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n", encoding="utf-8")
+            path = source.with_suffix(".o")
+            toolchain.compile_source(toolchain.load_profiles()["game"], source, path)
+            raw = path.read_bytes()  # only the synthetic compiler object, never private image bytes
+            with path.open("rb") as stream:
+                elf = inplace.ELFFile(stream)
+                index = next(i for i, section in enumerate(elf.iter_sections()) if section.name == "i.set_field18")
+                flag_offset = elf["e_shoff"] + index * elf["e_shentsize"] + 8  # Elf32_Shdr.sh_flags
+            for flags in (0x10000006, 0x200006, 0x80000006):
+                with self.subTest(flags=flags):
+                    data = bytearray(raw)
+                    struct.pack_into("<I", data, flag_offset, flags)
+                    path.write_bytes(data)
+                    helper = inplace.ObjectFile(path)
+                    obj, mem, catalogue = self.fixture()
+                    obj.sections.pop(2)
+                    obj.symbols[1].shndx = "SHN_UNDEF"
+                    with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
+                        self.linker(mem, catalogue).link(inplace.ObjectFile.combine([obj, helper]))
+            data = bytearray(raw)
+            struct.pack_into("<I", data, 24, 4)  # Elf32_Ehdr.e_entry cannot be interpreted as a section identity
+            path.write_bytes(data)
+            helper = inplace.ObjectFile(path)
+            with self.assertRaisesRegex(inplace.LinkError, "retained callee .*ELF entry point"):
+                self.linker(mem, catalogue).link(inplace.ObjectFile.combine([obj, helper]))
+
+    def test_retained_comdat_copy_retains_the_whole_entity(self):
+        first, mem, catalogue = self.fixture()
+        second, _, _ = self.fixture()
+        second.sections.pop(1)
+        second.symbols.pop(0)
+        first.sections[2].comdat = second.sections[2].comdat = "set_field18"
+        second.sections[2].retention = ("entry section",)
+        with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
+            self.linker(mem, catalogue).link(inplace.ObjectFile.combine([first, second]))
 
     def test_a_pointer_even_in_an_unplaced_section_prevents_removal(self):
         for kind in ("STT_FUNC", "STT_SECTION"):
@@ -845,11 +1145,10 @@ class RemovedCalleeModelTest(unittest.TestCase):
     def test_non_call_abi_context_or_thumb_caller_is_refused(self):
         for case in ("missing_argument", "live_argument", "live_flags", "conditional_definition", "thumb"):
             with self.subTest(case):
-                obj, mem, catalogue = self.fixture()
+                body = struct.pack("<I", 0xE5802018) + BX_LR if case == "missing_argument" else None
+                obj, mem, catalogue = self.fixture(body)
                 data = bytearray(mem.read(BASE, 40))
-                if case == "missing_argument":
-                    struct.pack_into("<I", data, 8, 0xE3A02007)
-                elif case == "live_argument":
+                if case == "live_argument":
                     struct.pack_into("<I", data, 16, 0xE2812001)
                 elif case == "live_flags":
                     struct.pack_into("<I", data, 16, 0x03A01000)
@@ -857,7 +1156,7 @@ class RemovedCalleeModelTest(unittest.TestCase):
                     struct.pack_into("<I", data, 16, 0xE3500000)
                     struct.pack_into("<I", data, 20, 0x13A01000)
                     struct.pack_into("<I", data, 24, 0xE2812001)
-                else:
+                elif case == "thumb":
                     obj.sections[1].mapping = [(0, "$t")]
                 mem.write(BASE, data)
                 with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
