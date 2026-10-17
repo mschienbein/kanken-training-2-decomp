@@ -19,12 +19,18 @@ class LinkerModel:
     inline: bool = False  # --inline: ARM BL to a 4/8-byte ARM function -> its instruction, or a NOP
     branchnop: bool = False  # --branchnop: relocated ARM B to the next instruction -> NOP
     removed_inline: bool = False  # v3: inline and eliminate candidate-only tiny function sections
+    bounded_switches: bool = False  # v4: bounded ARM jump-table CFG with fail-closed endian state
+    function_entry_aliases: bool = False  # v5: proven same-section zero/full-sized entry aliases
 
 
 LINKER_MODELS = {m.name: m for m in (
     LinkerModel("strict-v1"),
     LinkerModel("armlink5-inline-branchnop-v2", inline=True, branchnop=True),
     LinkerModel("armlink5-inline-branchnop-v3", inline=True, branchnop=True, removed_inline=True),
+    LinkerModel("armlink5-inline-branchnop-v4", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True),
+    LinkerModel("armlink5-inline-branchnop-v5", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).

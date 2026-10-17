@@ -168,17 +168,125 @@ class DiffLinesTest(unittest.TestCase):
                 self.assertEqual(lines[1], f"! {BASE + 4:08x}  {left:<40} {right}")
 
 
+@unittest.skipUnless(match.toolchain.armcc_exe("armcc_504_82").is_file(), "pinned compiler not installed (tools/setup.py)")
+class CppAliasCompareTest(unittest.TestCase):
+    def test_result_names_the_bound_abi_alias_and_compares_the_whole_section(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "alias.cpp"
+            source.write_text("class Plain { public: ~Plain(); };\nPlain::~Plain() {}\n", encoding="utf-8")
+            obj_path = source.with_suffix(".o")
+            match.toolchain.compile_source(match.toolchain.load_profiles()["game"], source, obj_path)
+            body = struct.pack("<I", 0xE12FFF1E)
+            catalogue = {BASE: {"address": BASE, "size": len(body), "isa": "arm"}}
+
+            class Image:
+                bss = (0x200000, 0x201000)
+
+                def read(self, address, size):
+                    if address != BASE or size != len(body):
+                        raise AssertionError("comparison must cover the complete synthetic function")
+                    return body
+
+            for model in match.inplace.LINKER_MODELS:
+                for name in ("_ZN5PlainD1Ev", "_ZN5PlainD2Ev"):
+                    with self.subTest(model=model, name=name):
+                        ctx = match.Context.__new__(match.Context)
+                        ctx.image, ctx.functions = Image(), catalogue
+                        ctx.resolver = match.inplace.Resolver(catalogue, {name: {"address": BASE}})
+                        ctx.model = match.inplace.linker_model(model)
+                        ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+                        if not ctx.model.function_entry_aliases:
+                            with self.assertRaisesRegex(match.inplace.LinkError, "unresolved symbol"):
+                                ctx.compare(obj_path)
+                            continue
+                        rows = ctx.compare(obj_path)
+                        self.assertEqual(len(rows), 1)
+                        self.assertEqual((rows[0]["name"], rows[0]["candidate_size"], rows[0]["status"]),
+                                         (name, len(body), "match"))
+                        self.assertEqual(rows[0]["_candidate"], body)
+                        self.assertIsInstance(rows[0], match.Comparison)
+                        for render in (repr, str):
+                            self.assertNotIn("_original", render(rows[0]))
+                            self.assertNotIn("_candidate", render(rows[0]))
+                            self.assertNotIn(repr(body), render(rows[0]))
+                        self.assertEqual(ctx.removed_callees, [])
+
+
+class AliasCompareSafetyTest(unittest.TestCase):
+    def test_extra_comdat_copy_cannot_hide_a_bound_alias_from_comparison(self):
+        from tests.test_inplace import RemovedCalleeModelTest
+
+        for contradictory, original_size in ((True, 8), (False, 12)):
+            with self.subTest(contradictory=contradictory, original_size=original_size):
+                objects, mem, catalogue, names = RemovedCalleeModelTest().comdat_alias_fixture(
+                    contradictory, original_size)
+                mem.bss = (0x200000, 0x201000)
+                ctx = match.Context.__new__(match.Context)
+                ctx.image, ctx.functions = mem, catalogue
+                ctx.resolver = match.inplace.Resolver(catalogue, names)
+                ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+                ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+                combine = match.inplace.ObjectFile.combine
+
+                def object_file(path):
+                    return objects[0 if path.name == "caller.o" else 1]
+
+                object_file.combine = combine
+                with patch.object(match.inplace, "ObjectFile", object_file):
+                    with self.assertRaisesRegex(match.inplace.LinkError, "mixes original-bound and removable callee copies"):
+                        ctx.compare(Path("caller.o"), [Path("bound_copy.o")])
+
+    def test_a_bound_zero_size_alias_does_not_credit_a_short_complete_section(self):
+        from tests.test_inplace import BX_LR, RemovedCalleeModelTest
+
+        obj, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR)
+        obj.sections.pop(1)
+        obj.symbols.pop(0)
+        obj.symbols.append(match.inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+        address = 0x100100
+        catalogue[address] = {"address": address, "size": 8, "isa": "arm"}
+        mem.write(address, BX_LR + BX_LR)
+        mem.bss = (0x200000, 0x201000)
+        ctx = match.Context.__new__(match.Context)
+        ctx.image, ctx.functions = mem, catalogue
+        ctx.resolver = match.inplace.Resolver(catalogue, {"bound_variant": {"address": address}})
+        ctx.model = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+        ctx.literal_model = match.inplace.DEFAULT_LITERAL_MODEL
+        with patch.object(match.inplace, "ObjectFile", return_value=obj):
+            rows = ctx.compare(Path("bound_copy.o"))
+        self.assertEqual(len(rows), 1)
+        self.assertEqual((rows[0]["name"], rows[0]["candidate_size"], rows[0]["size"], rows[0]["status"]),
+                         ("bound_variant", 4, 8, "match_extent_differs"))
+        self.assertEqual(ctx.removed_callees, [])
+
+
 class ModelOptionsTest(unittest.TestCase):
-    def test_literal_option_composes_with_v3_without_changing_linker_option(self):
+    def test_v5_is_explicit_and_inherits_v4_without_broadening_frozen_models(self):
+        self.assertEqual(match.inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
+        for name in ("strict-v1", "armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3"):
+            policy = match.inplace.linker_model(name)
+            self.assertFalse(policy.function_entry_aliases)
+            self.assertFalse(policy.bounded_switches)
+        v4 = match.inplace.linker_model("armlink5-inline-branchnop-v4")
+        v5 = match.inplace.linker_model("armlink5-inline-branchnop-v5")
+        self.assertTrue(v4.bounded_switches)
+        self.assertFalse(v4.function_entry_aliases)
+        self.assertTrue(v5.function_entry_aliases)
+        for field, value in vars(v4).items():
+            if field not in ("name", "function_entry_aliases"):
+                self.assertEqual(getattr(v5, field), value)
+
+    def test_literal_option_composes_with_frozen_v3_and_selected_successors(self):
         profile = match.toolchain.Profile("game", "synthetic", ())
-        with patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
-                patch.object(match, "run", return_value=0) as run:
-            code = match.main(["candidate.cpp", "--profile", "game",
-                               "--linker-model", "armlink5-inline-branchnop-v3",
-                               "--literal-model", "anonymous-string-records-v1"])
-        self.assertEqual(code, 0)
-        self.assertEqual(run.call_args.args[5], "armlink5-inline-branchnop-v3")
-        self.assertEqual(run.call_args.args[-1], "anonymous-string-records-v1")
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+            with self.subTest(model=model), \
+                    patch.object(match.toolchain, "load_profiles", return_value={"game": profile}), \
+                    patch.object(match, "run", return_value=0) as run:
+                code = match.main(["candidate.cpp", "--profile", "game", "--linker-model", model,
+                                   "--literal-model", "anonymous-string-records-v1"])
+                self.assertEqual(code, 0)
+                self.assertEqual(run.call_args.args[5], model)
+                self.assertEqual(run.call_args.args[-1], "anonymous-string-records-v1")
 
     def test_literal_option_is_off_by_default(self):
         profile = match.toolchain.Profile("game", "synthetic", ())
@@ -190,7 +298,7 @@ class ModelOptionsTest(unittest.TestCase):
 
 
 class PlacementRefusalTest(unittest.TestCase):
-    def invoke(self, obj, image, catalogue):
+    def invoke(self, obj, image, catalogue, model=match.inplace.DEFAULT_LINKER_MODEL):
         if not hasattr(image, "sha256"):
             image.sha256 = "synthetic-image"
         if not hasattr(image, "bss"):
@@ -224,7 +332,7 @@ class PlacementRefusalTest(unittest.TestCase):
             stdout, stderr = io.StringIO(), io.StringIO()
             with redirect_stdout(stdout), redirect_stderr(stderr):
                 code = match.main([str(source), "--profile", "game", "--catalogue", str(catalogue_path),
-                                   "--out", str(out_dir), "--show", "0"])
+                                   "--out", str(out_dir), "--show", "0", "--linker-model", model])
             record = json.loads((out_dir / "candidate.result.json").read_text(encoding="utf-8"))
             return code, record, stderr.getvalue()
 
@@ -279,6 +387,29 @@ class PlacementRefusalTest(unittest.TestCase):
                     "conflict": "references disagree",
                 }[failure]
                 self.assertIn(expected_reason, record["reason"])
+
+    def test_removed_call_context_read_keeps_redacted_refusal_receipts(self):
+        from tests.test_inplace import RemovedCalleeModelTest
+
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4",
+                      "armlink5-inline-branchnop-v5"):
+            for error in (ValueError, match.image_mod.ImageError):
+                with self.subTest(model=model, error=error.__name__):
+                    obj, image, catalogue = RemovedCalleeModelTest().fixture()
+
+                    def invalid_read(address, size):
+                        raise error("synthetic private witness 0xe1a04000")
+
+                    image.read = invalid_read
+                    code, record, stderr = self.invoke(obj, image, catalogue, model)
+                    self.assertEqual(code, 2)
+                    self.assertEqual(record["status"], "refused")
+                    self.assertEqual(record["error_type"], "LinkError")
+                    self.assertEqual(record["linker_model"], model)
+                    self.assertEqual(record["functions"], [])
+                    self.assertIn("i.caller: removed-call context", record["reason"])
+                    self.assertIn("witness address redacted", record["reason"])
+                    self.assertNotIn("0xe1a04000", json.dumps(record) + stderr)
 
     def test_alias_offset_refuses_before_a_missing_catalogue_key_is_used(self):
         obj, image, catalogue = placement_failure_fixture(0)

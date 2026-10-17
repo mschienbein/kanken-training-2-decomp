@@ -39,7 +39,8 @@ import toolchain  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 MATCHES = ROOT / "config/matches.json"
-HARNESS = ("tools/build.py", "tools/inplace.py", "tools/image.py", "tools/toolchain.py", "tools/ctrfmt.py", "tools/denominator.py")
+HARNESS = ("tools/build.py", "tools/inplace.py", "tools/linker_models.py", "tools/image.py",
+           "tools/toolchain.py", "tools/ctrfmt.py", "tools/denominator.py")
 
 
 def sha256_bytes(data: bytes) -> str:

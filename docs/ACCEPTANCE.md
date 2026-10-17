@@ -107,6 +107,14 @@ require their independently reviewed, frozen gate revisions before a real prepar
 The combined proposal is `scratch/integrator/adopt-r1-l1/GATES-DRAFT.md`; `docs/GATES.md` is not
 changed by implementing the selection path.
 
+The proposed bounded-switch CFG policy has the fresh identifier
+`armlink5-inline-branchnop-v4`; it does not broaden frozen v3. Its registry entry is not gate
+adoption. The independent-review draft is `scratch/integrator/r1-jumptables/GATES-DRAFT.md`;
+frozen `docs/GATES.md` remains unchanged until a separately approved revision. Once authorized
+for a future checkpoint, select v4 explicitly: both fresh receipts, prepare and history must
+bind that identifier, and a v3→v4 transition reopens all affected R1 callers through the existing
+model-transition machinery. Default v2 and every older recorded model retain their meaning.
+
 ### Rehoming accepted functions
 
 Credit belongs to the stable function identity, not its filename. A candidate may explicitly move

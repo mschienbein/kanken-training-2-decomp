@@ -24,23 +24,37 @@ BASE = inplace_tests.BASE
 
 
 class BuildRemovedCalleeModelTest(unittest.TestCase):
-    def synthetic_build(self, model="armlink5-inline-branchnop-v3", retained=False, reverse=False):
+    def synthetic_build(self, model="armlink5-inline-branchnop-v3", retained=False, reverse=False,
+                        comdat_alias=None, credit_helper=False):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
-        caller, memory, functions = inplace_tests.RemovedCalleeModelTest().fixture()
-        helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
-        definition = caller.symbols.pop()
-        helper.sections, helper.symbols = {2: caller.sections.pop(2)}, [definition]
+        fixture = inplace_tests.RemovedCalleeModelTest()
+        names = {}
+        if comdat_alias is not None:
+            (caller, helper), memory, functions, names = fixture.comdat_alias_fixture(
+                contradictory=comdat_alias == "contradictory",
+                original_size=12 if comdat_alias == "wrong_original" else 8)
+            if comdat_alias == "duplicate_owner":
+                caller.symbols.append(inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+            elif comdat_alias == "unbound_alias":
+                names = {}
+                functions.pop(BASE + 0x100)
+        else:
+            caller, memory, functions = fixture.fixture()
+            helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
+            definition = caller.symbols.pop()
+            helper.sections, helper.symbols = {2: caller.sections.pop(2)}, [definition]
+            external = inplace.Symbol(definition.name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+            caller.symbols.append(external)
+            for relocation in caller.sections[1].relocs:
+                relocation.symbol = external
         if retained:
             helper.sections[2].retention = ("__tagsym$$used",)
-        external = inplace.Symbol(definition.name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
-        caller.symbols.append(external)
-        for relocation in caller.sections[1].relocs:
-            relocation.symbol = external
         pairs = [
             ({"source": "src/caller.c", "profile": "game", "functions": ["func_00100000"]}, caller),
-            ({"source": "src/helper.c", "profile": "game", "functions": []}, helper),
+            ({"source": "src/helper.c", "profile": "game",
+              "functions": ["bound_variant"] if credit_helper else []}, helper),
         ]
         if reverse:
             pairs.reverse()
@@ -56,6 +70,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             "config/names.json": b"{}",
             "config/compiler_profiles.json": b"{}",
             "toolchain.lock.json": b"{}",
+            "tools/linker_models.py": Path(inplace.__file__).with_name("linker_models.py").read_bytes(),
             "orig/exheader.bin": b"synthetic-header",
             "orig/exefs/code.blz": b"synthetic-compression",
             "compiler.exe": b"synthetic-compiler",
@@ -63,7 +78,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             path = root / name
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(contents)
-        memory.code = memory.read(BASE, 40)
+        memory.code = memory.read(BASE, max(address + fn["size"] for address, fn in functions.items()) - BASE)
         memory.sha256 = build.sha256_bytes(memory.code)
         memory.bss = (0x200000, 0x201000)
         memory.layout = SimpleNamespace(file_offset=lambda address: address - BASE)
@@ -84,7 +99,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
         with ExitStack() as stack:
             for target, attribute, value in (
                 (build, "ROOT", root), (build, "MATCHES", root / "config/matches.json"),
-                (build, "HARNESS", ()), (build.inplace, "ObjectFile", object_file),
+                (build, "HARNESS", ("tools/linker_models.py",)), (build.inplace, "ObjectFile", object_file),
                 (build.toolchain, "PROFILES", root / "config/compiler_profiles.json"),
                 (build.image_mod, "CATALOGUE", root / "config/catalogue.json"),
                 (build.image_mod, "NAMES", root / "config/names.json"),
@@ -93,7 +108,7 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             stack.enter_context(patch.object(build.denominator, "verify", return_value=None))
             stack.enter_context(patch.object(build.image_mod.Image, "load", return_value=memory))
             stack.enter_context(patch.object(build.image_mod, "load_catalogue", return_value=catalogue))
-            stack.enter_context(patch.object(build.image_mod, "load_names", return_value={}))
+            stack.enter_context(patch.object(build.image_mod, "load_names", return_value=names))
             stack.enter_context(patch.object(build, "compile_units", side_effect=compile_units))
             stack.enter_context(patch.object(build.toolchain, "load_profiles", return_value={
                 "game": toolchain.Profile("game", "synthetic", ())}))
@@ -125,6 +140,21 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 self.assertTrue(all(row["removed_callee"] == helper["removed_callees"][0] for row in rewrites))
                 self.assertEqual(caller["removed_callees"], [])
 
+    def test_v4_model_and_removed_helper_closure_are_recorded_without_changing_v3(self):
+        model = "armlink5-inline-branchnop-v4"
+        receipt, root = self.synthetic_build(model=model)
+        self.assertEqual(receipt["result"], "PASS")
+        self.assertEqual(receipt["inputs"]["linker_model"], model)
+        self.assertIn("tools/linker_models.py", build.HARNESS)
+        self.assertEqual(receipt["inputs"]["harness_sha256"]["tools/linker_models.py"],
+                         build.sha256_file(root / "tools/linker_models.py"))
+        caller, helper = ({unit["source"]: unit for unit in receipt["units"]}[source]
+                          for source in ("src/caller.c", "src/helper.c"))
+        self.assertEqual(helper["functions"], [])
+        self.assertEqual(helper["source_sha256"], build.sha256_file(root / "src/helper.c"))
+        self.assertEqual(helper["removed_callees"][0]["object"], "src/helper.c")
+        self.assertTrue(all(row["target"] is None for row in caller["linker_rewrites"]["func_00100000"]))
+
     def test_v2_never_uses_candidate_only_helper_elimination(self):
         with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
             self.synthetic_build(model="armlink5-inline-branchnop-v2")
@@ -132,6 +162,40 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
     def test_retained_helper_cannot_receive_a_successful_build_receipt(self):
         with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
             self.synthetic_build(retained=True)
+
+    def test_asymmetric_bound_comdat_alias_cannot_receive_caller_only_or_helper_credit(self):
+        for case in ("contradictory", "wrong_original"):
+            for credit_helper in (False, True):
+                for reverse in (False, True):
+                    with self.subTest(case=case, credit_helper=credit_helper, reverse=reverse):
+                        with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
+                            self.synthetic_build(model="armlink5-inline-branchnop-v5", comdat_alias=case,
+                                                 credit_helper=credit_helper, reverse=reverse)
+
+    def test_credited_zero_size_alias_requires_one_emitted_comdat_owner(self):
+        for reverse in (False, True):
+            with self.subTest(reverse=reverse):
+                with self.assertRaisesRegex(build.BuildError, "func_00100100: defined by both"):
+                    self.synthetic_build(model="armlink5-inline-branchnop-v5", comdat_alias="duplicate_owner",
+                                         credit_helper=True, reverse=reverse)
+
+    def test_v5_alias_copies_keep_helper_only_receipts_and_every_removed_owner(self):
+        for reverse in (False, True):
+            with self.subTest(reverse=reverse):
+                receipt, _ = self.synthetic_build(model="armlink5-inline-branchnop-v5",
+                                                   comdat_alias="unbound_alias", reverse=reverse)
+                self.assertEqual(receipt["result"], "PASS")
+                self.assertEqual(receipt["inputs"]["linker_model"], "armlink5-inline-branchnop-v5")
+                self.assertEqual(receipt["credited"]["functions"], 1)
+                self.assertEqual(receipt["credited"]["bytes"], 40)
+                units = {unit["source"]: unit for unit in receipt["units"]}
+                self.assertEqual(units["src/helper.c"]["functions"], [])
+                for source, unit in units.items():
+                    self.assertEqual([row["object"] for row in unit["removed_callees"]], [source])
+                self.assertIn("bound_variant", units["src/helper.c"]["removed_callees"][0]["symbols"])
+                rewrites = units["src/caller.c"]["linker_rewrites"]["func_00100000"]
+                self.assertEqual([row["target"] for row in rewrites], [None, None])
+                self.assertTrue(all(row["removed_callee"]["object"] == "src/caller.c" for row in rewrites))
 
 PROFILE = toolchain.Profile(
     "game", "armcc_504_82",
@@ -349,7 +413,8 @@ class BuildLiteralModelTest(unittest.TestCase):
         self.assertTrue(all(not u["literal_rebindings"] for u in receipt["units"]))
 
     def test_combined_build_attributes_each_pool_to_its_own_unit(self):
-        for model in ("armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3"):
+        for model in ("armlink5-inline-branchnop-v2", "armlink5-inline-branchnop-v3",
+                      "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
             with self.subTest(model=model):
                 receipt = self.synthetic_build(linker_model=model)
                 self.assertEqual(receipt["result"], "PASS")
@@ -371,11 +436,12 @@ class BuildLiteralModelTest(unittest.TestCase):
     def test_cli_forwards_literal_and_linker_models_independently(self):
         receipt = {"result": "PASS", "credited": {"functions": 1, "catalogue_functions": 1,
                    "bytes": 4, "catalogue_bytes": 4}, "checks": {}}
-        with patch.object(build, "build", return_value=receipt) as run, contextlib.redirect_stdout(io.StringIO()):
-            code = build.main(["--name", "synthetic", "--linker-model", "armlink5-inline-branchnop-v3",
-                               "--literal-model", MODEL])
-        self.assertEqual(code, 0)
-        self.assertEqual(run.call_args.args[-2:], ("armlink5-inline-branchnop-v3", MODEL))
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4", "armlink5-inline-branchnop-v5"):
+            with self.subTest(model=model), patch.object(build, "build", return_value=receipt) as run, \
+                    contextlib.redirect_stdout(io.StringIO()):
+                code = build.main(["--name", "synthetic", "--linker-model", model, "--literal-model", MODEL])
+                self.assertEqual(code, 0)
+                self.assertEqual(run.call_args.args[-2:], (model, MODEL))
 
     def test_cli_leaves_literal_model_off_by_default(self):
         receipt = {"result": "PASS", "credited": {"functions": 1, "catalogue_functions": 1,

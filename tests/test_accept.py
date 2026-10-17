@@ -268,16 +268,16 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(accept.finalize("c015", 1)["literal_model"], "anonymous-string-records-v1")
 
     def test_prepare_cli_passes_explicit_independent_choices(self):
-        with patch.object(accept, "prepare", return_value={
-            "result": "PASS", "checks": {}, "suite": {"summary": "stub"},
-        }) as prepare, patch("builtins.print"):
-            self.assertEqual(accept.main([
-                "prepare", "--checkpoint", "c015", "--candidates", "config/candidates.json",
-                "--linker-model", "armlink5-inline-branchnop-v3",
-                "--literal-model", "anonymous-string-records-v1",
-            ]), 0)
-        prepare.assert_called_once_with("c015", Path("config/candidates.json"), False,
-                                        "armlink5-inline-branchnop-v3", "anonymous-string-records-v1")
+        for model in ("armlink5-inline-branchnop-v3", "armlink5-inline-branchnop-v4"):
+            with self.subTest(model=model), patch.object(accept, "prepare", return_value={
+                "result": "PASS", "checks": {}, "suite": {"summary": "stub"},
+            }) as prepare, patch("builtins.print"):
+                self.assertEqual(accept.main([
+                    "prepare", "--checkpoint", "c015", "--candidates", "config/candidates.json",
+                    "--linker-model", model, "--literal-model", "anonymous-string-records-v1",
+                ]), 0)
+                prepare.assert_called_once_with("c015", Path("config/candidates.json"), False,
+                                                model, "anonymous-string-records-v1")
 
     def test_explicit_selection_is_bound_in_prepare_receipts_and_history(self):
         units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
@@ -556,6 +556,33 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
         with self.assertRaisesRegex(accept.AcceptError, "identity provenance requires a QUALIFIED"):
             self.review(name="c015")
+
+    def test_v3_to_v4_selection_binds_receipts_and_reopens_unchanged_r1_callers(self):
+        receipts, rewrite = self.removed_helper_baseline()
+        receipts[1]["removed_callees"] = [rewrite["removed_callee"]]
+        model = "armlink5-inline-branchnop-v4"
+        record = self.stubbed_prepare("c015", [], receipt_units=receipts, linker_model=model)
+        out = self.root / "accept/c015"
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["model_changes"], {
+            "linker_model": {"previous": "armlink5-inline-branchnop-v3", "selected": model},
+        })
+        self.assertEqual(accept.load_json(out / "selection.json"), {"linker_model": model, "literal_model": "none"})
+        self.assertEqual([call[1]["linker_model"] for call in self.build_calls], [model, model])
+        self.assertEqual(record["model_reviews"], {"func_00100000": {"source": "src/a.c", "rules": ["R1"]}})
+        self.assertEqual(record["linker_rewrites"], {"func_00100000": [rewrite]})
+        for suffix, summary in zip(("a", "b"), record["builds"]):
+            receipt_path = out / "receipts" / f"c015-{suffix}.json"
+            self.assertEqual(accept.load_json(receipt_path)["inputs"]["linker_model"], model)
+            self.assertEqual(summary["receipt_sha256"], accept.sha256_file(receipt_path))
+        with self.assertRaisesRegex(accept.AcceptError, "identity provenance requires a QUALIFIED"):
+            self.review(name="c015")
+        self.review("PASS_WITH_QUALIFICATIONS", name="c015", row="QUALIFIED",
+                    qualifications=["R1 helper identity remains inferred under the selected v4 CFG policy"])
+        entry = accept.finalize("c015", 1)
+        self.assertEqual(entry["linker_model"], model)
+        self.assertEqual(entry["selection_sha256"], record["selection_sha256"])
+        self.assertEqual(accept.verify_history()[-1], entry)
 
     def test_history_without_model_selection_keeps_verifying(self):
         self.review()
