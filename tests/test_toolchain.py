@@ -67,6 +67,14 @@ class DependPathTest(unittest.TestCase):
             [Path("/usr/lib/armcc/bin/../include/stddef.h"), Path("/opt/inc/x.h"), Path("inc/value.h")],
         )
 
+    @unittest.skipIf(toolchain.wibo_path() is None, "Windows hosts resolve case natively")
+    def test_dependency_case_mismatch_resolves_to_the_existing_file(self):
+        tmp = Path(tempfile.mkdtemp())
+        (tmp / "inc" / "rw").mkdir(parents=True)
+        (tmp / "inc" / "rw" / "_random.cc").write_text("x", encoding="utf-8")
+        text = f"unit.o: Z:{tmp.as_posix()}/inc/RW/_random.CC\n"
+        self.assertEqual(toolchain._parse_depend(text, Path("unit.c")), [tmp / "inc" / "rw" / "_random.cc"])
+
 
 if __name__ == "__main__":
     unittest.main()
