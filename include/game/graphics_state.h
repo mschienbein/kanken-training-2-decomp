@@ -18,12 +18,21 @@ struct GraphicsState {
     struct GraphicsContext *context;
 };
 
-struct GraphicsMutex;
+struct GraphicsMutex {
+    unsigned handle;
+};
+#ifdef __cplusplus
+extern "C" {
+#endif
 extern struct GraphicsState data_002430f0;
 extern struct GraphicsMutex data_00243104;
 extern struct GraphicsContext *func_001861c4(void);
 extern struct GraphicsMutex *func_001861d4(void);
+extern unsigned func_0012fab0(const struct GraphicsMutex *mutex);
 extern int func_001847f8(void);
 extern int func_00187818(void);
+#ifdef __cplusplus
+}
+#endif
 
 #endif

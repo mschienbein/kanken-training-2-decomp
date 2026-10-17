@@ -3,10 +3,10 @@
 
 /* [INFERENCE] The retained next pointer is represented as a successor iterator;
  * observed callers ignore the result. */
-struct RegistryNode *func_0018d868(struct Registry *registry, struct RegistryNode *node)
+struct PoolLink *func_0018d868(struct PoolList *registry, struct PoolLink *node)
 {
-    struct RegistryNode *next = node->next;
-    struct RegistryNode *previous = node->previous;
+    struct PoolLink *next = node->next;
+    struct PoolLink *previous = node->previous;
     next->previous = previous;
     previous->next = next;
     --registry->count;
