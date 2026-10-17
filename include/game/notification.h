@@ -1,6 +1,10 @@
 #ifndef GAME_NOTIFICATION_H
 #define GAME_NOTIFICATION_H
 
+struct W14ValuePair;
+
+#include "game/notification_selection.h"
+
 /* Partial notification state: reset writes the leading halfword; the consumer
  * at func_001415ec reads the pending state and value as signed bytes. */
 struct NotificationState {
@@ -38,10 +42,18 @@ struct NotificationFields {
 };
 
 /* UTF-16 and word-copy clients address one serialized storage object. */
+struct NotificationSelection {
+    unsigned char reserved00[0x58];
+    struct W14ValuePair primary[12][150];
+    struct W14ValuePair secondary[12][50];
+    struct W10HistoryGrade history[12];
+};
+
 union NotificationStorage {
     unsigned words[0x2dd0];
     unsigned short text[0x5ba0];
     struct NotificationFields fields;
+    struct NotificationSelection selection;
 };
 
 struct NotificationPayload {
@@ -81,6 +93,16 @@ extern unsigned short *func_00172008(int index);
 extern void func_00172d48(int index);
 extern void func_0016fccc(int selection);
 extern int func_001758d4(void);
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern const short data_002181b4[5];
+extern void func_001dbbd4(int mode);
 #ifdef __cplusplus
 }
 #endif

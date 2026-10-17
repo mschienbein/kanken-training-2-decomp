@@ -1,8 +1,6 @@
-/* [INFERENCE] Signature: Callee packet reads/writes object fields rooted at r0 (0xd, 0x84, 0x90, 0x166) and performs cleanup. */
+#include "game/sequence.h"
 
-extern void func_0017e35c(void *object);
-
-void func_0017e358(void *object)
+void func_0017e358(struct SequencePlayer *object)
 {
     func_0017e35c(object);
 }

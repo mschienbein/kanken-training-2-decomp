@@ -1,12 +1,12 @@
 #include "game/scene_lifecycle.h"
 
-void func_001d4cf4(struct SceneChild *parent, bool enabled)
+void func_001d4cf4(struct SoundTrack *parent, bool enabled)
 {
-    struct SceneChild *child = parent->children;
+    struct SoundTrack *child = parent->children;
     while (child) {
         if (child->active && (child->enabled != 0) != enabled) {
             child->enabled = enabled;
-            func_0016a27c(child->element, enabled);
+            func_0016a27c(child->task, enabled);
         }
         child = child->next;
     }

@@ -1,6 +1,19 @@
 #ifndef GAME_ANIMATION_H
 #define GAME_ANIMATION_H
 
+struct AnimatedObject;
+struct AnimationIterator;
+struct AnimationLinkPrefix;
+struct DisplayObject;
+struct NameTable;
+struct PoolLink;
+struct PoolList;
+struct WidgetPosition;
+
+#include <stdbool.h>
+#include "game/audio.h"
+#include "game/pool_list.h"
+
 #include "game/screen.h"
 
 struct AnimationChild {
@@ -70,6 +83,43 @@ extern void func_00178fb0(const struct AnimationOwner *owner, int index,
                           float *width, float *height);
 extern void func_00179030(const struct AnimationOwner *owner, int index,
                           int child_index, float *width, float *height);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct AnimationLinkPrefix {
+    unsigned char reserved00[0x100];
+    struct PoolLink update_link;
+};
+
+#ifdef __cplusplus
+struct AnimationIterator {
+    PoolLink *node;
+    AnimationIterator(PoolLink *value) : node(value) {}
+    bool operator!=(const AnimationIterator &other) const
+    {
+        return node != other.node;
+    }
+    AnimatedObject &operator*() const
+    {
+        return *reinterpret_cast<AnimatedObject *>(reinterpret_cast<char *>(node) -
+                    offsetof(AnimationLinkPrefix, update_link));
+    }
+    AnimationIterator operator++(int)
+    {
+        AnimationIterator old = *this;
+        node = node->next;
+        return old;
+    }
+};
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_00183f24(struct AnimatedObject *object, int frames);
+extern void func_00130f54(struct PoolList *registry, int frames);
 #ifdef __cplusplus
 }
 #endif

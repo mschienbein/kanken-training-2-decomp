@@ -1,6 +1,6 @@
 #include "game/layout.h"
 
-extern void func_001c5958(struct PaneStyle *style, unsigned mode);
+#include "game/command_group.h"
 
 void func_001c5950(struct Pane *pane, unsigned mode)
 {

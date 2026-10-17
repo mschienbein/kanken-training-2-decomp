@@ -1,5 +1,6 @@
 #ifndef GAME_RUNTIME_H
 #define GAME_RUNTIME_H
+#include <stddef.h>
 
 /* Process-wide helpers used across subsystems. */
 
@@ -65,6 +66,7 @@ struct ResourceHandle {
 };
 
 #ifdef __cplusplus
+void *operator new(size_t size, const void *tag) throw();
 extern "C" {
 #endif
 
@@ -107,6 +109,16 @@ extern void func_001ef888(void *allocation);   /* releases an array allocation *
 /* Runtime __ARM_common_memclr4_8; callers do not consume a C return value. */
 extern void func_00130f90(void *destination);
 
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+void func_0019dc1c(void *allocation);
+extern void func_001bbc0c(void *allocation);
 #ifdef __cplusplus
 }
 #endif

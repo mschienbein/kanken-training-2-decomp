@@ -1,5 +1,10 @@
 #ifndef GAME_SDK_INIT_H
 #define GAME_SDK_INIT_H
+
+struct Result;
+struct WaitableHandle;
+
+#include "ctr/svc.h"
 #include "game/waitable_handle.h"
 struct KernelConfiguration { unsigned char reserved00[0x14]; unsigned char environment; };
 struct TranslationOffsets { unsigned first, second; };
@@ -45,4 +50,7 @@ struct OwnedHandle {
     ~OwnedHandle();
 };
 #endif
+
+
+
 #endif

@@ -1,6 +1,12 @@
 #ifndef GAME_STREAM_MANAGER_H
 #define GAME_STREAM_MANAGER_H
 
+struct RenderResource;
+struct ResourceCommand;
+struct X03ServiceReferences;
+
+#include "ctr/svc.h"
+
 #include <stdbool.h>
 #include "game/functions.h"
 
@@ -91,6 +97,43 @@ extern struct StreamManager *func_00185bfc(void);
 extern void func_00131284(struct StreamManager *manager);
 extern struct StreamQueue *func_00183f18(struct StreamQueue *queue);
 extern int func_001837c8(struct StreamQueue *queue, struct StreamEvent **output);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct RenderResource {
+    unsigned char reserved00[0x218];
+    unsigned allocation;
+    unsigned count;
+};
+
+#ifdef __cplusplus
+struct ResourceCommand : StreamEvent {
+    StreamEvent *initialize(RenderResource *resource)
+    {
+        opcode = 0x33;
+        object = resource;
+        return this;
+    }
+};
+#endif
+
+struct X03ServiceReferences {
+    unsigned char initialized;
+    unsigned char reserved[7];
+    int references;
+};
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct X03ServiceReferences data_00243048;
+extern CtrHandle data_00243054;
+extern const CtrHandle data_0021c5d0;
+extern struct StreamMutex *func_0018f734(void);
+extern void func_00124aac(struct RenderResource *resource);
+extern void func_001217b8(void);
 #ifdef __cplusplus
 }
 #endif

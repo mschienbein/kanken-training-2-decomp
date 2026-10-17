@@ -1,6 +1,10 @@
 #ifndef GAME_SCREEN_H
 #define GAME_SCREEN_H
 
+struct PairStorage;
+struct W10DrawingInput;
+
+
 /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */
 
 #ifdef __cplusplus
@@ -36,7 +40,6 @@ struct DisplayData {
 #endif
 };
 
-struct AlignmentHandle;
 struct PackedTextState;
 struct WidgetBinding {
     unsigned char reserved00[0x28];
@@ -130,6 +133,10 @@ struct WidgetActionState {
 struct DisplayQueueFlags {
     unsigned char reserved00[2];
     unsigned char enabled;
+    unsigned char available;
+    signed char active;
+    unsigned char reserved05[3];
+    struct DisplayObject *object;
 };
 struct DisplayQueueCounter {
     unsigned char reserved00[8];
@@ -330,6 +337,43 @@ extern void func_0018695c(struct BoundDisplayObject *object,
 extern void func_001eafa0(void *screen, int index, const unsigned short *text);
 extern void func_0016de90(struct Screen *screen, int index);
 
+#ifdef __cplusplus
+}
+#endif
+
+
+struct W10DrawingInput {
+    unsigned char reserved00[0xc];
+    struct DisplayObject *display;
+    unsigned char reserved10[0xa];
+    unsigned short characters[0x440];
+    short field89a;
+    short count;
+    unsigned char reserved89e[0x1a];
+    unsigned char active;
+    unsigned char finished;
+    unsigned char reserved8ba[6];
+    float progress;
+    int state;
+    unsigned char reserved8c8[0x14];
+    unsigned char buffer[0x800];
+    unsigned int reserved10dc;
+    int status;
+};
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_0015e698(struct DisplayPaneLink *link, float x, float y, float z);
+extern void func_0019cecc(void *destination, unsigned int size);
+extern void func_00180344(void);
+extern void func_00166d5c(struct W10DrawingInput *input, int active, float x, float y);
+extern struct NameTable *bss_00245344[8];
+extern void func_00202ca8(void);
+extern void func_0016dbc4(struct W10DrawingInput *input);
+extern int func_00115138(void);
+extern void func_00195900(struct DisplayObject *object, int index, const char *name, int mode);
 #ifdef __cplusplus
 }
 #endif

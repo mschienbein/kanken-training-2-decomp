@@ -1,5 +1,9 @@
 #ifndef GAME_SERVICE_PROTOCOL_H
 #define GAME_SERVICE_PROTOCOL_H
+
+struct ServiceConfigurationWords;
+
+#include "ctr/svc.h"
 #include "game/service_state.h"
 struct ServiceObject { unsigned handle; };
 struct ServiceResetState { unsigned generation; };
@@ -31,4 +35,14 @@ extern int func_00142718(const void *text, unsigned size);
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern CtrResult func_0012f170(struct ServiceConfigurationWords *out);
+extern CtrHandle data_002430d8;
+#ifdef __cplusplus
+}
+#endif
+
 #endif

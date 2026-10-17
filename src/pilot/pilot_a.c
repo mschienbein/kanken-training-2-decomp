@@ -1,3 +1,5 @@
+#include "game/font_resource.h"
+
 typedef unsigned char u8;
 
 struct S10e664 { char pad[0x1c]; int x1c; };
@@ -27,8 +29,6 @@ struct H140dac { char pad[0xc]; struct E140dac e[]; };
 struct S140dac { int pad0; struct H140dac *p; int pad8; u8 flag; };
 int func_00140dac(struct S140dac *s, int i) { if (!s->flag) return 0; return s->p->e[i].a; }
 
-struct P1179b4 { int a, b; };
-struct S1179b4 { int pad; struct P1179b4 *p; };
 int func_001179b4(struct S1179b4 *s) { return s->p ? s->p->b : 0; }
 
 struct Q1263b8 { char pad[0x14]; int x; };

@@ -2,7 +2,8 @@
 #include "game/service_protocol.h"
 extern struct ServiceList bss_004b47d0;
 
-void func_00112c98(struct ServiceResetState *state)
+/* [INFERENCE] 00112c80 forwards its handle word in r1; this reset ignores it. */
+void func_00112c98(struct ServiceResetState *state, unsigned handle)
 {
     struct ServiceList list;
     ++state->generation;

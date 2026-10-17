@@ -1,5 +1,11 @@
 #ifndef GAME_WAITABLE_HANDLE_H
 #define GAME_WAITABLE_HANDLE_H
+
+struct JoinedHandleOwner10;
+struct JoinedHandleOwner14;
+struct JoinedHandleOwner18;
+struct JoinedHandleOwnerC20;
+
 #include "ctr/svc.h"
 
 /* The common wait-once prefix is read at +0 and +4 by func_0019df84. */
@@ -42,4 +48,36 @@ extern void func_0019f6b4(struct LargeResourceElement *array,
 #ifdef __cplusplus
 }
 #endif
+
+struct JoinedHandleOwner14 {
+    unsigned char reserved00[0x14];
+    struct WaitableHandle completion;
+};
+
+struct JoinedHandleOwner18 {
+    unsigned char reserved00[0x18];
+    struct WaitableHandle completion;
+};
+
+struct JoinedHandleOwner10 {
+    unsigned char reserved00[0x10];
+    struct WaitableHandle completion;
+};
+
+struct JoinedHandleOwnerC20 {
+    unsigned char reserved00[0xc20];
+    struct WaitableHandle completion;
+};
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct JoinedHandleOwner14 *func_001b7308(struct JoinedHandleOwner14 *object);
+extern struct JoinedHandleOwner18 *func_001bba58(struct JoinedHandleOwner18 *object);
+extern struct JoinedHandleOwner10 *func_001c0e48(struct JoinedHandleOwner10 *object);
+extern struct JoinedHandleOwnerC20 *func_001c2158(struct JoinedHandleOwnerC20 *object);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

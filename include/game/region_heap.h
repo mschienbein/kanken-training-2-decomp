@@ -1,6 +1,14 @@
 #ifndef GAME_REGION_HEAP_H
 #define GAME_REGION_HEAP_H
 
+struct HeapLink;
+struct HeapList;
+struct PoolLink;
+struct PoolList;
+struct StreamMutex;
+
+#include "game/pool_list.h"
+
 #include "game/object_manager.h"
 
 struct FreeLink {
@@ -33,6 +41,7 @@ struct HeapStorage {
 #ifdef __cplusplus
     ~HeapStorage();
     int initialize(void *memory, unsigned size);
+    void clear();
 #endif
 };
 
@@ -60,6 +69,25 @@ extern int func_001855d8(struct HeapStorage *storage);
 extern int func_001855fc(struct HeapStorage *storage, int count);
 extern int func_001856d8(struct HeapStorage *storage);
 extern void func_00183724(struct FreeLink **head, void *storage, unsigned size);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct HeapLink {
+    struct HeapLink *next;
+    struct HeapLink *previous;
+};
+
+struct HeapList {
+    unsigned count;
+    struct HeapLink root;
+};
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct RegionHeap *func_00148b08(void *memory, unsigned size, unsigned options);
 #ifdef __cplusplus
 }
 #endif

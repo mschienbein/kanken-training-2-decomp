@@ -1,6 +1,10 @@
 #ifndef GAME_SOUND_RUNTIME_H
 #define GAME_SOUND_RUNTIME_H
 
+struct PoolLink;
+struct PoolList;
+
+
 #include "game/pool_list.h"
 #include "game/functions.h"
 
@@ -19,7 +23,9 @@ struct SoundInstance {
     unsigned char reserved04[4];
     struct SoundHandle *handle;
     struct SoundHandle *secondary_handle;
-    unsigned char reserved10[0x40];
+    unsigned char reserved10[8];
+    unsigned selection_state;
+    unsigned char reserved1c[0x34];
     int priority_offset;
     unsigned char reserved54[0x49];
     unsigned char priority;
@@ -88,6 +94,9 @@ struct SoundPlaybackState {
     unsigned field_f4;
     struct PoolLink runtime_link;
     unsigned fields100[6];
+#ifdef __cplusplus
+    SoundPlaybackState();
+#endif
 };
 
 struct SequenceSound {
@@ -142,6 +151,15 @@ extern void func_0019063c(struct SoundHandle *handle);
 extern int func_001d2ce0(const struct SoundInstance *sound);
 extern struct SoundInstance *func_001d4464(const struct SoundSelectionList *selection);
 extern void func_001d2d14(struct SoundInstance *object, struct PoolList *registry);
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern const unsigned data_002245ec[];
 #ifdef __cplusplus
 }
 #endif

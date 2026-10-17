@@ -1,6 +1,9 @@
 #ifndef GAME_SYNCHRONIZATION_H
 #define GAME_SYNCHRONIZATION_H
 
+struct StreamCriticalSection;
+
+
 #include "game/stream_manager.h"
 
 struct SignalState {
@@ -20,6 +23,15 @@ extern "C" {
 #endif
 extern void func_0019ea6c(struct SignalState *state);
 extern void func_00195d94(struct SignalState *state);
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct SignalState data_0024301c;
 #ifdef __cplusplus
 }
 #endif
