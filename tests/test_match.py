@@ -238,7 +238,9 @@ class PlacementRefusalTest(unittest.TestCase):
                 self.assertEqual(record["error_type"], "LinkError")
                 self.assertEqual(record["functions"], [])
                 self.assertIn(f"{name}+{offset:#x}", record["reason"])
-                self.assertIn(f"{base + offset:#x}", record["reason"])
+                self.assertIn("witness address redacted", record["reason"])
+                if base:
+                    self.assertNotIn(f"{base + offset:#x}", json.dumps(record) + stderr)
                 self.assertIn(record["reason"], stderr)
                 self.assertNotIn("Traceback", stderr)
 
@@ -248,6 +250,35 @@ class PlacementRefusalTest(unittest.TestCase):
         self.assertEqual(record["status"], "refused")
         self.assertIn(".constdata", record["reason"])
         self.assertNotIn("Traceback", stderr)
+
+    def test_refusal_text_and_receipts_redact_unvalidated_witness_words(self):
+        for failure in ("outside", "alignment", "conflict"):
+            with self.subTest(failure=failure):
+                witness = 0xE1A04004 if failure == "alignment" else 0xE1A04000
+                witnesses = [witness]
+                obj, image, catalogue = placement_failure_fixture(witness, nested=False)
+                if failure == "alignment":
+                    obj.sections[2].align = 8
+                elif failure == "conflict":
+                    witnesses.append(0xE1A05000)
+                    obj.sections[1].data, obj.sections[1].size = bytes(8), 8
+                    obj.sections[1].relocs.append(
+                        match.inplace.Reloc(4, match.inplace.R_ARM_ABS32, obj.symbols[1])
+                    )
+                    image.write(IMAGE_BASE, struct.pack("<2I", *witnesses))
+                code, record, stderr = self.invoke(obj, image, catalogue)
+                self.assertEqual(code, 2)
+                self.assertEqual(record["status"], "refused")
+                self.assertIn(".constdata", record["reason"])
+                serialized = (json.dumps(record) + stderr).lower()
+                for word in witnesses:
+                    self.assertNotIn(f"{word:#x}", serialized)
+                    self.assertNotIn(str(word), serialized)
+                expected_reason = {
+                    "outside": "outside the image", "alignment": "not aligned",
+                    "conflict": "references disagree",
+                }[failure]
+                self.assertIn(expected_reason, record["reason"])
 
     def test_alias_offset_refuses_before_a_missing_catalogue_key_is_used(self):
         obj, image, catalogue = placement_failure_fixture(0)
