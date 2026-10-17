@@ -228,7 +228,9 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         "build_a_pass": builds[0].get("result") == "PASS",
         "build_b_pass": builds[1].get("result") == "PASS",
         "builds_identical": builds[0].get("outputs") == builds[1].get("outputs") and "outputs" in builds[0]
-        and builds[0].get("inputs", {}).get("linker_model") == builds[1].get("inputs", {}).get("linker_model"),
+        and builds[0].get("inputs", {}).get("linker_model") == builds[1].get("inputs", {}).get("linker_model")
+        and builds[0].get("inputs", {}).get("literal_model", "none")
+        == builds[1].get("inputs", {}).get("literal_model", "none"),
         "suite_pass": suite["returncode"] == 0,
         "interfaces_pass": iface_ok,
     }
@@ -252,6 +254,12 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False)
         # Include unchanged credited callers whenever their removed helper or shared contract
         # changes. Their rewrite metadata and required rows cannot hide behind functions: [].
         "linker_model": builds[0].get("inputs", {}).get("linker_model"),
+        "literal_model": builds[0].get("inputs", {}).get("literal_model", "none"),
+        "literal_rebindings": {
+            u["source"]: u["literal_rebindings"]
+            for u in builds[0].get("units", [])
+            if u.get("source") in set(candidates_sources) | set(revised_units) and u.get("literal_rebindings")
+        },
         "linker_rewrites": linker_rewrites,
         "dependency_reviews": dependency_reviews,
         "builds": [
@@ -433,6 +441,7 @@ def finalize(name: str, min_reviews: int) -> dict:
         "denominator_bytes": credited["catalogue_bytes"],
         "catalogue_sha256": record["catalogue_sha256"],
         "linker_model": record.get("linker_model"),
+        "literal_model": record.get("literal_model", "none"),
         "prepare_sha256": prepare_sha,
         "outputs": record["builds"][0]["outputs"],
         "reviews": [{"reviewer": r["reviewer"], "family": r["family"], "verdict": r["verdict"]} for r in bound],

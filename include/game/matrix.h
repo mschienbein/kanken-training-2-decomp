@@ -7,6 +7,10 @@ struct Matrix44 {
 
 struct Matrix34 {
     float elements[12];
+#ifdef __cplusplus
+    Matrix34() {} /* Matrix temporaries intentionally retain uninitialized storage. */
+    Matrix34(const Matrix34 &source);
+#endif
 };
 
 struct MatrixObject {
@@ -23,6 +27,13 @@ extern "C" {
 extern struct Matrix44 *func_001944f0(struct Matrix44 *destination, const struct Matrix44 *source);
 extern struct Matrix34 *func_00195334(struct Matrix34 *destination, const struct Matrix34 *source);
 #ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+inline Matrix34::Matrix34(const Matrix34 &source)
+{
+    func_00195334(this, &source);
 }
 #endif
 
