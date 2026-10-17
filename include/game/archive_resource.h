@@ -1,6 +1,8 @@
 #ifndef GAME_ARCHIVE_RESOURCE_H
 #define GAME_ARCHIVE_RESOURCE_H
+#include <stdbool.h>
 #include "game/archive.h"
+struct ArchiveIndex;
 struct ArchiveResourceReference {
     unsigned short type, reserved02;
     int offset;

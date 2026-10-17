@@ -21,6 +21,9 @@ extern const struct NameTableVTable data_00223678;
 extern struct NameTable *bss_002466f8[6];
 extern struct NameTable *bss_00290d28[5];
 extern struct NameTable *bss_00290e60[4];
+/* [INFERENCE] Initializer002131b4's NameTable constructor results occupy
+ * consecutive slots here. Keep the bound unspecified pending an accepted owner. */
+extern struct NameTable *bss_00290e98[];
 extern struct NameTable *bss_00290f60[6];
 extern struct NameTable *bss_00290f8c[6];
 extern struct NameTable *bss_00290fc4[4];

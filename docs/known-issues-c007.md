@@ -78,6 +78,18 @@ The c008 interface cutover shares `PackageFile`/`PackageView` through
 SDK-profile MATCH. The four c007 units consuming these touched headers/sources all
 re-MATCHed (phase1 receipts under `scratch/integrator/c007/phase1/`). No existing c007
 source caller declares00140e88; c008 owns the natural bool-returning00183eb0 caller.
+The resource header includes`<stdbool.h>` and forward-declares`ArchiveIndex` itself,
+so c008's reverse include order cannot leave the bool contract or tag undeclared.
+Its three current dependants re-MATCHed after that include-order correction.
+
+The four0017a7e4 wrappers now pass canonical`NameTable`pointer tables, not addresses
+of invented opaque`CommandTarget`objects. The three existing arrays keep their
+`property_descriptor.h`bounds[6]/[4]/[2]. [INFERENCE] Private initializer002131b4
+independently supplies consecutive`NameTable`constructor results at00290e98;
+that fourth array deliberately keeps an unspecified bound pending an accepted owner.
+The common dispatcher reads descriptor category/identifier words and a sentinel.
+All40 direct/transitive header dependants re-MATCHed; targeted G3 exits0 with
+15 checked C units,25 explicitly unchecked C++ units, zero disagreements/policy.
 
 GPL notices and the pinned [NintendoWare4Ctr source](https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd)
 are preserved. `THIRD_PARTY.md` and `src/nw4c/INTEGRATED-PROVENANCE.json` distinguish supplied

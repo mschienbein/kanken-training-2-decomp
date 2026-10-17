@@ -1,6 +1,8 @@
 #ifndef GAME_COMMAND_STATE_H
 #define GAME_COMMAND_STATE_H
 
+#include "game/property_descriptor.h"
+
 /* [INFERENCE] Command/parameter roles; the fields and constructor stores are
  * evidenced. Distinct object identities are not equated just for sharing offsets. */
 struct W11HandleA { int id; };
@@ -13,15 +15,14 @@ struct VectorParameter { int kind, first, second; float x, y, z; int extra; };
 struct ParameterRecord { int kind, first, second, third; float x, y, z; };
 
 struct CommandResetContext;
-struct CommandTarget;
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct CommandTarget bss_00290fc4, bss_00290f8c, data_0023f014, bss_00290e98;
-/* [INFERENCE] The four wrappers supply writable targets and the same signed
- * selector/mode/flag words. They ignore the result; original target layout and
- * semantic role remain unrecovered. */
-extern void func_0017a7e4(struct CommandTarget *target, int value, int mode, unsigned flags);
+/* [INFERENCE] The wrappers forward sentinel-terminated NameTable pointer tables
+ * to the common dispatcher. A negative count selects its sentinel-limited scan.
+ * Descriptor category/identifier words are read; wrappers ignore the result. */
+extern void func_0017a7e4(const struct NameTable *const *table, int count,
+                          int mode, unsigned flags);
 #ifdef __cplusplus
 }
 #endif
