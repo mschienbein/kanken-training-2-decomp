@@ -334,6 +334,18 @@ class AcceptGateTest(unittest.TestCase):
         with self.assertRaisesRegex(accept.AcceptError, "not a credited caller"):
             accept.new_functions(self.root / "accept/c001", record)
 
+    def test_revision_of_any_removed_comdat_copy_reopens_its_callers(self):
+        helper = {"object": "src/first.c", "comdat": "set_field18"}
+        copies = [{"source": source, "functions": [], "removed_callees": [{**helper, "object": source}]}
+                  for source in ("src/first.c", "src/second.c")]
+        rows = [{"target": None, "removed_callee": helper}]
+        receipt = {"units": [
+            {"source": "src/a.c", "linker_rewrites": {"func_00100000": rows}}, *copies,
+        ]}
+        rewrites, dependencies = accept.linker_review_summary(receipt, {"src/second.c"}, [])
+        self.assertEqual(rewrites, {"func_00100000": rows})
+        self.assertEqual(dependencies["func_00100000"]["revised_helpers"], ["src/second.c"])
+
     def test_helper_revision_selects_every_dependent_caller_and_not_other_helpers(self):
         rows = lambda helper: [{"target": None, "removed_callee": {"object": helper}}]
         first, second, other = rows("src/helper.c"), rows("src/helper.c"), rows("src/other.c")

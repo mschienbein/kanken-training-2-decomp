@@ -18,6 +18,7 @@ rewrites; the oracle before this change) stays selectable with `--linker-model s
 ## Model history
 
 A model name is a version: rules are never edited under a recorded name.
+The v3 review fixes here precede its adoption; they do not revise v2 or any frozen checkpoint.
 
 | Model | Status | Rules |
 |---|---|---|
@@ -122,9 +123,11 @@ any catalogued function and not general dead-code removal:
    exactly to the section entry (no interior/addended target), eligible under the unchanged
    I1–I3 encodings. Call-site data-flow is checked against **original** catalogued code:
    each input must be defined within the preceding four straight-line words on **every**
-   incoming CFG path, or be the caller's own incoming argument register, unmodified on every
-   entry-to-site path. A branch cannot silently bypass setup, and a preceding actual/candidate
-   call breaks entry-argument provenance. Conditional definitions alone do not establish setup.
+   incoming CFG path, be the caller's own incoming argument register unmodified on every
+   entry-to-site path, or be an unmodified r0/r1 result of an unconditional preceding call on
+   every path. A branch cannot silently bypass setup; calls break entry-argument provenance
+   but establish possible result registers. Conditional definitions/calls alone do not prove
+   setup. Reviewers must establish the preceding call's actual result type and width.
    After the site, **all CFG successors** (both conditional arms and branch targets) are followed:
    r1–r3/r12 and flags cannot be read before an unconditional definition, until a call/return or
    code-range end. Conditional definitions do not kill values on all paths. Unknown indirect
@@ -139,7 +142,8 @@ any catalogued function and not general dead-code removal:
    Only then is the helper section dropped; it earns no catalogue credit.
 
 Each rewrite retains `inline_insn`/`inline_nop` and has `target: null`, **not an invented image
-address**, plus `removed_callee` (symbols, section, size and defining candidate object/source).
+address**, plus `removed_callee` (symbols, section, size, defining candidate object/source and,
+when applicable, the COMDAT group signature).
 Match JSON and build receipt unit rows also list `removed_callees`; the defining source and
 object hashes remain bound even for a helper-only ledger unit with an empty `functions` list.
 Prepare's `linker_rewrites` includes new/revised callers and **unchanged credited callers whose
@@ -147,6 +151,7 @@ removed helper's defining unit or shared-header contract changed**. `dependency_
 each affected caller/source and its changed helper/header dependencies. These callers require
 explicit review rows even if the helper unit has `functions: []`; an empty PASS review is refused.
 Every reviewed R1 caller needs QUALIFIED identity provenance (or FAIL), including unchanged ones.
+Dependencies include every removed COMDAT copy's defining unit, not just the selected copy.
 The review schema and finalize both enforce coverage. `argcheck` does not fabricate an original
 edge to a missing address: reviewers must inspect the helper's prototype, arguments and use.
 
@@ -244,7 +249,71 @@ must be separate sections that armcc did not merge: in one translation unit `-O3
 target into the wrapper (observed for all 8 wrapper/body pairs tried below), so the original pairs
 were in different units placed adjacently — consistent with `--tailreorder` [INFERENCE].
 
-## V3 measurements (branch `linker-removed`, 2026-10-17)
+## V3 independent-review fixes (branch `linker-v3-r2`, 2026-10-17)
+
+The pre-adoption F01 blocker is fixed: the reviewer's exact game-profile `used` helper is
+compiled in a regression and refused, not removed. Explicit KEEP/entry/exported/first/last roots,
+ELF entry/retain flags, unknown retention metadata and retained COMDAT copies are covered.
+Bound retained candidates keep ordinary BLs under v3. V2 remains the default.
+
+F02 now closes helper-only review dependencies, including identical COMDAT copies and shared
+header contracts. Prepare exposes unchanged dependent callers and their rewrite metadata;
+review/finalize refuse missing rows or unqualified R1 provenance. Synthetic build tests keep
+helper-only source/object hashes and removed metadata without granting helper credit.
+
+F03 follows every decoded CFG successor and checks all incoming paths. It accepts unchanged
+entry arguments and unmodified r0/r1 results of preceding unconditional calls, while preserving
+the post-site clobber check. The reviewer's branch-successor/skipped-setup probes are negative
+tests; entry-forwarding and prior-call-result cases are positive tests. Historical identity,
+actual result widths and source-level contracts remain mandatory manual qualifications.
+
+Verification after merging main's independent literal-model work (both build-test classes kept):
+
+```
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python -m unittest \
+  tests.test_inplace tests.test_match tests.test_compid tests.test_argcheck \
+  tests.test_accept tests.test_build
+```
+
+**Exit 0; 166 tests; OK; no skips.**
+
+```
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/test_suite.py
+```
+
+**Exit 0; `574 tests, 1 skipped, 0 failed modules, 30.3s`.**
+
+The five accepted functions listed in the historical table below were re-matched with the final
+v2 and v3 implementations: **all ten commands exit 0**, complete extents MATCH without rewrites.
+Invocation pattern (replace source/function/model using that table):
+
+```
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/match.py SOURCE \
+  --profile game --linker-model armlink5-inline-branchnop-v3 --show 0 \
+  --out scratch/integrator/linker-v3-r2/accepted-final/v3/FUNCTION
+```
+
+The same pattern with v2 was run separately. Exact commands/exits are in
+`scratch/integrator/linker-v3-r2/final-match-commands.json`.
+
+Additional reported false-negative contexts were exercised without changing author sources:
+
+- w16b `func_00112628`, `func_00112b5c`, `func_001131d4`, each with separate
+  `linear_buffer_allocator.c`, `--profile game --linker-model armlink5-inline-branchnop-v3
+  --show 0`: each context now permits one `inline_insn` and removes the 8-byte helper.
+  **All three still exit 1 / MISMATCH**, 36/36 bytes, first difference **+0x4**.
+  Results: `scratch/integrator/linker-v3-r2/w16b/`; commands:
+  `scratch/integrator/linker-v3-r2/match-commands.json`.
+- w16a `variants/func_0010be58_removed.c` with separate `variants/sdk_result_failure_bits.c`
+  and the same options: the preceding-call result is accepted, with one `inline_insn` and
+  the 8-byte helper removed. **Exit 1 / MISMATCH**, 60/60 bytes, first difference **+0x2f**.
+  Results: `scratch/integrator/linker-v3-r2/w16a/func_0010be58/`; command recorded in
+  `final-match-commands.json`.
+
+These four author variants earn **no new matching-C credit**. No checkpoint prepare/finalize
+or full-ledger build was run for this revision; the full suite above was explicitly requested.
+
+## Historical V3 measurements (branch `linker-removed`, before independent review)
 
 - Regression command:
   `/home/michael/code/kanken-training-2-decomp/.venv/bin/python -m unittest tests.test_inplace tests.test_match tests.test_compid tests.test_argcheck tests.test_accept`

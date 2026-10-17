@@ -168,6 +168,7 @@ def inline_arm_call(call: int, body: bytes) -> tuple[str, int] | None:
 
 _ARM_ARGUMENTS = frozenset((cs_arm.ARM_REG_R0, cs_arm.ARM_REG_R1, cs_arm.ARM_REG_R2, cs_arm.ARM_REG_R3))
 _ARM_CALLER_SAVED = frozenset((cs_arm.ARM_REG_R1, cs_arm.ARM_REG_R2, cs_arm.ARM_REG_R3, cs_arm.ARM_REG_R12))
+_ARM_RESULTS = frozenset((cs_arm.ARM_REG_R0, cs_arm.ARM_REG_R1))
 
 
 def _arm_call_flow(insn) -> str:
@@ -207,12 +208,12 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
                          entries: set[int] | None = None, call_sites: set[int] | None = None) -> str:
     """Conservative whole-caller CFG filter, not evidence of a historical helper's identity.
 
-    An input is either defined in the preceding four straight-line words on every incoming
-    path, or is an incoming argument unmodified on every entry-to-site path. Conditional
-    definitions alone do not establish an input. Both successors of a conditional branch are
-    checked; an unresolved indirect transfer fails closed. Afterwards, follow every successor
-    until a call/return or all caller-saved registers and flags have unconditional definitions.
-    r0 may be a call result. Other candidate removed calls remain call barriers for this check.
+    An input is defined in the preceding four straight-line words on every incoming path,
+    is an unmodified incoming argument, or is an unmodified r0/r1 result of an unconditional
+    preceding call on that path. Conditional definitions/calls alone do not establish inputs.
+    Both conditional successors are checked; unresolved indirect transfers fail closed.
+    Afterwards, follow every successor until a call/return or unconditional definitions of all
+    caller-saved registers/flags. r0 may be a result. Candidate removed calls are call barriers.
     """
     if site not in instructions:
         return "arguments_not_materialised"
@@ -254,6 +255,9 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
                 insn = instructions[previous]
                 flow = "call" if previous in call_sites else flows[previous]
                 if flow == "call":
+                    if (clean and argument in _ARM_RESULTS
+                            and insn.cc in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID)):
+                        continue  # an unmodified r0/r1 result on this incoming CFG path
                     return "arguments_not_materialised"
                 window = remaining if flow == "other" and previous + insn.size == address else 0
                 wrote = set(insn.regs_access()[1])
@@ -1094,6 +1098,8 @@ class InPlaceLinker:
                 "symbols": sorted(sym.name for sym in aliases), "section": section.name, "size": section.size,
                 "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate"))),
             }
+            if section.comdat:
+                removed[index]["comdat"] = section.comdat
         comdats = {}
         for index in removed:
             section = obj.sections[index]

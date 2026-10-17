@@ -710,10 +710,31 @@ class ArmCallAbiContextTest(unittest.TestCase):
         self.assertEqual(self.context(words, 28), "arguments_not_materialised")
 
     def test_prior_calls_break_entry_argument_provenance(self):
-        words = [0xE92D4010, 0xEB000020, 0xE5801018, 0xE3A01000, 0xE8BD8010]
-        self.assertEqual(self.context(words, 8), "arguments_not_materialised")
+        words = [0xE92D4010, 0xEB000020, 0xE5802018, 0xE3A01000, 0xE8BD8010]
+        arguments = {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R2}
+        self.assertEqual(self.context(words, 8, arguments), "arguments_not_materialised")
         words[1] = 0xE5801000
-        self.assertEqual(self.context(words, 8, call_sites={BASE + 4}), "arguments_not_materialised")
+        self.assertEqual(self.context(words, 8, arguments, call_sites={BASE + 4}), "arguments_not_materialised")
+
+    def test_call_results_are_inputs_without_artificial_argument_moves(self):
+        # A 32-bit result in r0, or a two-word result in r0/r1, feeds the removed helper.
+        for arguments in ({inplace.cs_arm.ARM_REG_R0},
+                          {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R1}):
+            with self.subTest(arguments=arguments):
+                instruction = 0xE2000102 if len(arguments) == 1 else 0xE0000001
+                words = [0xE92D4010, 0xEB000020, instruction, 0xE3A01000, 0xE8BD8010]
+                self.assertEqual(self.context(words, 8, arguments), "consistent")
+                words[3] = 0xE2812001
+                self.assertEqual(self.context(words, 8, arguments), "reads_arguments")
+
+    def test_call_result_provenance_must_hold_on_every_incoming_path(self):
+        # Taken arm bypasses the call, retaining an old modified r0 instead of a result.
+        words = [0xE3A00001, 0xE3520000, 0x1A000003, 0xE320F000, 0xE320F000,
+                 0xEB000020, 0xE320F000, 0xE2000102, 0xE3500000, 0xE12FFF1E]
+        self.assertEqual(self.context(words, 28, {inplace.cs_arm.ARM_REG_R0}), "arguments_not_materialised")
+        # A conditional BL alone also cannot establish a result on every incoming path.
+        words[2], words[5] = 0xE320F000, 0x1B000020
+        self.assertEqual(self.context(words, 28, {inplace.cs_arm.ARM_REG_R0}), "arguments_not_materialised")
 
     def test_conditional_definition_does_not_establish_a_missing_argument(self):
         words = [0xE3A01001, 0xE320F000, 0xE320F000, 0xE320F000, 0xE320F000,
@@ -786,6 +807,22 @@ class RemovedCalleeModelTest(unittest.TestCase):
             struct.pack_into("<I", original, offset, 0xE320F000)
         obj.sections[1].data = bytes(candidate)
         mem.write(BASE, original)
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+        self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
+
+    def test_prior_call_result_can_feed_a_removed_helper_in_the_full_link(self):
+        obj, mem, catalogue = self.fixture(struct.pack("<I", 0xE2000102) + BX_LR)
+        ordinary = inplace.Symbol("func_00100100", 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+        obj.symbols.append(ordinary)
+        obj.sections[1].relocs.insert(0, inplace.Reloc(4, inplace.R_ARM_CALL, ordinary))
+        candidate, original = bytearray(obj.sections[1].data), bytearray(mem.read(BASE, 40))
+        struct.pack_into("<I", candidate, 4, 0xEBFFFFFE)
+        struct.pack_into("<I", original, 4, bl(BASE + 4, 0x100100, False))
+        obj.sections[1].data = bytes(candidate)
+        mem.write(BASE, original)
+        catalogue[0x100100] = {"address": 0x100100, "size": 12, "isa": "arm"}
+        mem.write(0x100100, struct.pack("<3I", 0xE3A00000, 0xE3A01000, 0xE12FFF1E))
         linker = self.linker(mem, catalogue)
         self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
         self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
@@ -1030,14 +1067,10 @@ class RemovedCalleeModelTest(unittest.TestCase):
     def test_non_call_abi_context_or_thumb_caller_is_refused(self):
         for case in ("missing_argument", "live_argument", "live_flags", "conditional_definition", "thumb"):
             with self.subTest(case):
-                obj, mem, catalogue = self.fixture()
+                body = struct.pack("<I", 0xE5802018) + BX_LR if case == "missing_argument" else None
+                obj, mem, catalogue = self.fixture(body)
                 data = bytearray(mem.read(BASE, 40))
-                if case == "missing_argument":
-                    # Entry pass-through is now valid. Remove both setups after the first
-                    # candidate call so its clobber, not the caller's entry r1, reaches site two.
-                    struct.pack_into("<I", data, 16, 0xE3A02000)
-                    struct.pack_into("<I", data, 24, 0xE3A02008)
-                elif case == "live_argument":
+                if case == "live_argument":
                     struct.pack_into("<I", data, 16, 0xE2812001)
                 elif case == "live_flags":
                     struct.pack_into("<I", data, 16, 0x03A01000)
@@ -1045,7 +1078,7 @@ class RemovedCalleeModelTest(unittest.TestCase):
                     struct.pack_into("<I", data, 16, 0xE3500000)
                     struct.pack_into("<I", data, 20, 0x13A01000)
                     struct.pack_into("<I", data, 24, 0xE2812001)
-                else:
+                elif case == "thumb":
                     obj.sections[1].mapping = [(0, "$t")]
                 mem.write(BASE, data)
                 with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
