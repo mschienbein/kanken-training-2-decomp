@@ -86,3 +86,9 @@ Current state: [`docs/STATUS.md`](docs/STATUS.md). Picking up on a new machine:
   plausible decompilation are not matches.
 - See [`AGENTS.md`](AGENTS.md) for the agent workflow and [`docs/ACCEPTANCE.md`](docs/ACCEPTANCE.md)
   for the gates.
+
+## License
+
+GPL-3.0-or-later ([`LICENSE`](LICENSE)). The project reuses public decompilation work where its
+license allows (see [`THIRD_PARTY.md`](THIRD_PARTY.md)); unlicensed public code is not copied. No
+ROM data, Nintendo SDK files or compilers are part of the repository or covered by this license.
