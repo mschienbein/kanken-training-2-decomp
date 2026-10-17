@@ -1,28 +1,4 @@
-#include <stdbool.h>
-
-struct InputRectangle {
-    float x, y, width, height;
-};
-
-struct InputPoint {
-    float x, y;
-};
-
-struct InputSnapshot {
-    bool active, released;
-    unsigned char reserved02[2];
-    struct InputPoint position;
-    bool previous_active, previous_released;
-    unsigned char reserved0e[2];
-    struct InputPoint previous_position;
-    bool tracking;
-    unsigned char reserved19[3];
-    struct InputPoint start_position;
-    struct InputRectangle rectangle;
-    unsigned int state;
-};
-
-extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
+#include "game/input.h"
 
 int func_001b5ff0(struct InputSnapshot *input)
 {

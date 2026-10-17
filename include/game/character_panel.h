@@ -18,6 +18,7 @@ struct CharacterPanel {
 extern "C" {
 #endif
 extern void func_00179724(struct CharacterPanel *panel, int primary, int secondary);
+extern void func_001b5cc0(struct CharacterPanel *panel, int slot, int row);
 #ifdef __cplusplus
 }
 #endif

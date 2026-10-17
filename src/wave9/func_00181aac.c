@@ -1,6 +1,6 @@
 #include "game/resource_tables.h"
 
-extern unsigned char *func_0019dc04(void);
+#include "game/shared_memory.h"
 
 int func_00181aac(int selection)
 {

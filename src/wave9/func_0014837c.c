@@ -1,6 +1,6 @@
 #include "game/input_runtime.h"
 
-void func_0014837c(struct InputSnapshot *snapshot)
+void func_0014837c(struct InputLatchSnapshot *snapshot)
 {
     int i, group;
     for (i = 0; i < 2; ++i) {

@@ -20,7 +20,7 @@ extern "C" {
 #endif
 extern struct Scheduler bss_00495c8c;
 extern int func_0019b54c(int task);
-extern int func_0019b564(int task);
+extern int func_0019b564(void);
 extern void func_00195ad0(unsigned int index);
 extern void func_001071cc(void);
 extern void func_001074d0(void);
@@ -32,6 +32,8 @@ extern void func_0012d1cc(void);
 extern void func_0012d1d8(int count, int preserve);
 extern void func_0012ced8(void);
 extern void func_001951dc(unsigned int handle);
+extern void func_0012d1c8(void);
+extern int func_00141c70(void);
 #ifdef __cplusplus
 }
 #endif

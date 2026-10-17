@@ -1,16 +1,14 @@
-struct AnimationOwner;
+#include "game/selection.h"
+#include "game/notification.h"
+#include "game/animation.h"
 struct SettingsScreen {
     unsigned char reserved00[0x34];
     int next_state;
     unsigned char reserved38[0x14];
-    struct AnimationOwner *controls;
+    struct W6ListController *controls;
 };
-extern int func_00178f84(struct AnimationOwner *owner, int index);
-extern void func_0016fccc(int mode);
-extern int func_001758d4(void);
 extern int func_00172994(int channel);
-extern void func_0017abf8(int channel, int sound);
-extern float func_0017adb4(void);
+extern int func_0017abf8(int channel, int sound);
 extern void func_0017433c(int channel, int duration);
 extern void func_0016fca0(int enabled);
 extern void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition);
@@ -20,7 +18,6 @@ extern void func_001dc084(int enabled);
 extern void func_001dc064(int enabled);
 extern void func_0016fa38(int enabled);
 extern void func_0016fa18(int enabled);
-extern void func_00172d48(int slot);
 
 void func_001b06a4(struct SettingsScreen *screen)
 {

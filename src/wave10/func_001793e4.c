@@ -1,6 +1,5 @@
 #include "game/screen.h"
 
-struct ResourceEvent;
 struct QueuedDisplayHandle {
     struct BoundDisplayObject *object;
     unsigned int flags;
@@ -11,9 +10,6 @@ struct QueuedDisplayState {
     struct QueuedDisplayHandle *handle;
 };
 
-extern void func_001963f8(struct ResourceEvent *event);
-extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
-extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
 extern void func_00181448(struct BoundDisplayObject *object);
 
 void func_001793e4(struct QueuedDisplayState *state, int active)
@@ -22,7 +18,7 @@ void func_001793e4(struct QueuedDisplayState *state, int active)
     struct BoundDisplayObject *object;
     if (!handle || !handle->object)
         return;
-    func_001963f8((struct ResourceEvent *)handle->object);
+    func_001963f8(handle->object);
     if (active) {
         if (state->handle && state->handle->object)
             state->handle->flags &= ~1u;

@@ -15,7 +15,7 @@ struct ManagedResource {
     unsigned char reserved18[8];
     unsigned short flags;
     unsigned char reserved22[0x36];
-    struct RegistryNode link;
+    struct PoolLink link;
 };
 
 struct SceneChild {
@@ -30,14 +30,14 @@ struct SceneChild {
     void *context;
     struct ManagedResource *element;
     struct SceneChild *next;
-    struct RegistryNode link;
+    struct PoolLink link;
 };
 
 struct SceneEngine {
     unsigned char reserved00[0x51];
     unsigned char inhibited;
     unsigned char reserved52[0x32];
-    struct Registry active;
+    struct PoolList active;
 };
 
 struct ObjectPool;

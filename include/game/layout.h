@@ -3,6 +3,16 @@
 
 #include "game/matrix.h"
 
+struct PaneStyle;
+struct Pane {
+    unsigned char reserved00[5];
+    unsigned char alignment;
+    unsigned char reserved06[0x12];
+    int extent;
+    unsigned char reserved1c[0x4c];
+    struct PaneStyle *style;
+};
+
 struct LayoutAnimationTransform;
 struct LayoutAnimationLink;
 struct LayoutDrawInfo;
@@ -46,6 +56,7 @@ extern void func_0016b5fc(struct LayoutAnimationList *list,
 extern struct LayoutAnimationLink *func_001cff58(
     const struct LayoutAnimationList *list,
     const struct LayoutAnimationTransform *animation);
+extern void func_001c59fc(struct Pane *pane, unsigned alignment);
 #ifdef __cplusplus
 }
 #endif

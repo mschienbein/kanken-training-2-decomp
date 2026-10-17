@@ -1,38 +1,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-struct InputRectangle {
-    float x, y, width, height;
-};
-
-struct InputPoint {
-    float x, y;
-};
-
-struct InputSnapshot {
-    bool active, released;
-    unsigned char reserved02[2];
-    struct InputPoint position;
-    bool previous_active, previous_released;
-    unsigned char reserved0e[2];
-    struct InputPoint previous_position;
-    bool tracking;
-    unsigned char reserved19[3];
-    struct InputPoint start_position;
-    struct InputRectangle rectangle;
-    unsigned int state;
-};
-
-struct TouchDeviceState {
-    unsigned char reserved00[0x0c];
-    unsigned int active;
-    unsigned char reserved10[0x14];
-    unsigned int released;
-    unsigned char reserved28[0x10];
-    struct InputPoint position;
-};
-
-extern struct TouchDeviceState bss_004972d8;
+#include "game/input.h"
 
 void func_00170418(struct InputSnapshot *input)
 {

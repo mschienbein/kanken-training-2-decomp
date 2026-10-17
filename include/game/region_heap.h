@@ -3,15 +3,24 @@
 
 #include "game/object_manager.h"
 
+struct FreeLink {
+    struct FreeLink *next;
+};
+
+struct RegionList {
+    unsigned reserved00[2];
+    struct FreeLink *head;
+};
+
 struct RegionBlock;
 struct RegionHeap {
     const void *vtable;
-    struct RegistryNode registration;
+    struct PoolLink registration;
     unsigned char *start;
     unsigned char *end;
     unsigned signature;
     struct RegionHeap *parent;
-    struct RegistryNode children;
+    struct PoolLink children;
     unsigned options;
     unsigned char *low;
     unsigned char *high;
@@ -20,7 +29,7 @@ struct RegionHeap {
 
 struct HeapStorage {
     struct RegionHeap *heap;
-    struct Registry pending;
+    struct PoolList pending;
 #ifdef __cplusplus
     ~HeapStorage();
     int initialize(void *memory, unsigned size);
@@ -49,6 +58,7 @@ extern struct RegionHeap *func_001834a4(struct RegionHeap *heap);
 extern int func_001855d8(struct HeapStorage *storage);
 extern void func_001855fc(struct HeapStorage *storage, int count);
 extern int func_001856d8(struct HeapStorage *storage);
+extern void func_00183724(struct FreeLink **head, void *storage, unsigned size);
 #ifdef __cplusplus
 }
 #endif

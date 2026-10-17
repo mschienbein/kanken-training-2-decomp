@@ -1,4 +1,4 @@
-struct Pane;
+#include "game/layout.h"
 struct PaneGroup {
     struct Pane *panes[2];
     int count;
@@ -13,7 +13,6 @@ struct PaneGroup {
     unsigned char mode;
 };
 
-extern void func_001c59fc(struct Pane *pane, unsigned alignment);
 
 void func_001d4a48(struct PaneGroup *group, unsigned alignment)
 {

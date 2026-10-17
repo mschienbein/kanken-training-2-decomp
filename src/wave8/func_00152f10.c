@@ -1,10 +1,9 @@
-struct ManagedResource;
+#include "game/scene_lifecycle.h"
 struct ResourceCallbackState {
     unsigned state;
     unsigned completion;
 };
 
-extern void func_00183550(struct ManagedResource *resource);
 
 void func_00152f10(struct ManagedResource *resource, unsigned event,
                    struct ResourceCallbackState *state)

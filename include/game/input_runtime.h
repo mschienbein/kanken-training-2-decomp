@@ -4,7 +4,7 @@
 struct InputController;
 struct InputLatches { unsigned char acquired[2][2]; };
 /* This device-latch snapshot is not the unrelated widget/touch snapshot. */
-struct InputSnapshot {
+struct InputLatchSnapshot {
     unsigned char current[2][2];
     unsigned char primary[2][2];
     unsigned char changed[2][2];
@@ -26,8 +26,8 @@ extern void func_00137128(struct InputController *controller);
 extern struct InputController *func_00185044(void);
 extern struct InputLatches *func_001861e0(void);
 extern int func_0015341c(struct InputLatches *state, int group, int index);
-extern int func_00151cf8(struct InputSnapshot *snapshot, signed char index);
-extern void func_0014837c(struct InputSnapshot *snapshot);
+extern int func_00151cf8(struct InputLatchSnapshot *snapshot, signed char index);
+extern void func_0014837c(struct InputLatchSnapshot *snapshot);
 extern void func_001483c0(struct InputController *controller);
 extern void func_0013712c(struct InputSessionContext *state);
 extern void func_00137118(void);

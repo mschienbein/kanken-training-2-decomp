@@ -7,6 +7,10 @@ struct SignalState {
     unsigned int state;
     struct StreamCriticalSection critical;
 };
+struct SynchronizationOwner {
+    const void *vtable;
+    struct SignalState synchronization;
+};
 struct SignalCallback {
     unsigned char reserved00[0x10];
     struct SignalState *state;

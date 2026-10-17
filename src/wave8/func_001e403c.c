@@ -1,21 +1,20 @@
 #include "game/text.h"
 
 #include "game/screen.h"
-struct Screen;
-struct W8ChoiceController;
+#include "game/selection.h"
+#include "game/notification.h"
 struct W8DisplaySet;
-struct W8ResourceChoice;
 struct W8EffectState;
 
 struct W8ScreenState {
     unsigned char reserved00[0x14];
     struct W8EffectState *effects;
     unsigned char reserved18[0x34];
-    struct W8ChoiceController *choices;
+    struct W6ListController *choices;
     struct W8DisplaySet *display;
     struct Screen *buttons;
-    struct W8ResourceChoice *first_resource;
-    struct W8ResourceChoice *second_resource;
+    struct W6Selector *first_resource;
+    struct W6HandlePanel10 *second_resource;
     struct Screen *selector;
     struct Screen *other;
     unsigned char reserved68[0x2c];
@@ -30,24 +29,6 @@ struct W8ScreenState {
     struct DisplayObject *cursor;
 };
 
-extern void func_0017a9ac(struct Screen *screen);
-extern void func_00170e50(struct Screen *screen, int index);
-extern void func_00179600(struct W8ChoiceController *controller, int index, int active);
-extern void func_0017a0e0(struct W8DisplaySet *set, int index, int active);
-extern void func_0017a6f4(struct Screen *screen, int index);
-extern void func_00174210(struct W8ResourceChoice *resource, int index);
-extern void func_00173d8c(struct W8ResourceChoice *resource, int index);
-extern void func_001795cc(struct Screen *screen, int first, int second);
-extern void func_0016de90(struct Screen *screen, int index);
-extern void func_00178e98(struct W8ChoiceController *controller, int index);
-extern void func_001e9818(void *screen, int index, int first, int second);
-extern int func_00178f84(struct W8ChoiceController *controller, int index);
-extern unsigned short *func_00172008(int index);
-extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_limit,
-                                   const unsigned short *source);
-extern void func_001eafa0(void *screen, int index, const unsigned short *text);
-extern void func_00181700(struct DisplayObject *object, float x, float y, float z);
-extern void func_0015e684(struct DisplayObject *object, int index, float x, float y, float z);
 extern void func_0016dc94(struct W8EffectState *effects, int index);
 
 static __forceinline void set_active(struct DisplayObject *object, int active)
@@ -68,10 +49,10 @@ static __forceinline void set_position(struct DisplayObject *object, float x, fl
     object->position[1] = y;
     switch (func_0017a9a0(object, 0)) {
     case 6:
-        func_00181700(object, object->position[0], object->position[1], object->position[2]);
+        func_00181700((struct BoundDisplayObject *)object, object->position[0], object->position[1], object->position[2]);
         break;
     case 5:
-        func_0015e684(object, 0, object->position[0], object->position[1], object->position[2]);
+        func_0015e684((struct BoundDisplayObject *)object, 0, object->position[0], object->position[1], object->position[2]);
         break;
     }
 }

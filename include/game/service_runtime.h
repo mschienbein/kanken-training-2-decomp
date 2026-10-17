@@ -18,8 +18,8 @@ struct ResourceServiceState {
 };
 struct InvalidHandleRecord { unsigned int reserved; CtrHandle handle; };
 struct SharedPublicationState {
-    unsigned char initialized;
-    unsigned char published;
+    signed char initialized;
+    signed char published;
     unsigned char pending;
     unsigned char stopped;
     signed char shared_status;

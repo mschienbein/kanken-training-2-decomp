@@ -1,12 +1,4 @@
-struct PaneStyle;
-struct Pane {
-    unsigned char reserved00[5];
-    unsigned char alignment;
-    unsigned char reserved06[0x12];
-    int extent;
-    unsigned char reserved1c[0x4c];
-    struct PaneStyle *style;
-};
+#include "game/layout.h"
 
 extern void func_001c5958(struct PaneStyle *style, unsigned mode);
 

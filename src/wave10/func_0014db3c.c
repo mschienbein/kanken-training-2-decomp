@@ -1,14 +1,4 @@
-struct HwrImage;
-
-struct HwrImageSource {
-    struct HwrImage *image;
-    unsigned option_a;
-    unsigned option_b;
-};
-
-extern unsigned char *data_00243890;
-extern struct HwrImage *data_00243854;
-extern void func_0014f7ec(void);
+#include "game/hwr_image.h"
 
 int func_0014db3c(struct HwrImageSource source)
 {

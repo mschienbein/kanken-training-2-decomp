@@ -103,16 +103,6 @@ struct SoundRecord {
     unsigned option_flags;
 };
 
-struct SoundRecord {
-    unsigned item_id;
-    unsigned field04;
-    unsigned char property;
-    unsigned char reserved09[3];
-    unsigned short type;
-    unsigned short reserved0e;
-    int detail_offset;
-    unsigned option_flags;
-};
 
 struct ArchiveFileReference {
     unsigned type;
