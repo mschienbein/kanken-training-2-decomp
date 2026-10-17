@@ -5,7 +5,6 @@ struct ServiceReport {
     int state;
     struct WordPair result;
 };
-extern void func_00194a34(struct WordPair *out, unsigned result);
 
 static __forceinline int result_failure(unsigned result)
 {

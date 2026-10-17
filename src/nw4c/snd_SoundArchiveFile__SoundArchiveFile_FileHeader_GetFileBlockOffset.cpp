@@ -110,6 +110,7 @@ SoundArchiveFile::FileHeader::GetReferenceBy(u16 typeId) const
 
 s32 SoundArchiveFile::FileHeader::GetFileBlockOffset() const
 {
+    /* ORIGINAL BUG: an absent FILE-block reference is dereferenced without validation. */
     return GetReferenceBy(0x2002)->offset;
 }
 

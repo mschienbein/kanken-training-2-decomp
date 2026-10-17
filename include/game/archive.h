@@ -300,6 +300,8 @@ extern int func_00131928(const struct SoundArchiveReader *reader, unsigned int s
 extern const void *func_0016a938(const struct SoundArchivePlayerView *player, unsigned int sound_id);
 extern const void *func_001f2ac8(const struct SoundArchiveReader *reader, unsigned int sound_id);
 
+/* [INFERENCE] Natural callers consume the returned result-object pointer. */
+extern struct WordPair *func_00194a34(struct WordPair *out, unsigned result);
 extern void func_00136448(struct WordPair *pair, unsigned int first, unsigned int second);
 extern const void *func_0017ded4(const struct RelativeReference *reference);
 

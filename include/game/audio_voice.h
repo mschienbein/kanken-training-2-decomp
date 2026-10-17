@@ -185,7 +185,7 @@ extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
 extern void func_0017da08(struct AudioVoiceGroup *group, int index,
-                          struct RecordState *record, bool remember);
+                          struct RecordState *record, int remember);
 extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,
     unsigned char index, const struct AudioVoiceStartArgs *arguments);
 extern void func_0014e20c(struct AudioChannelState *state);

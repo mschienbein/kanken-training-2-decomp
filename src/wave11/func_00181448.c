@@ -2,6 +2,9 @@
 
 
 
+/* [INFERENCE] The pass-through 00181420 entry establishes the one-object
+ * contract. Two external sites also prepare zero in r1; that unused word is
+ * not established as a required input. See the c007 caller-audit qualification. */
 void func_00181448(struct BoundDisplayObject *event)
 {
     if (event->queued)
