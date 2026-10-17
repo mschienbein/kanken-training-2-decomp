@@ -230,6 +230,8 @@ extern unsigned func_00140a08(struct ArchiveIndex *index, unsigned resource_id);
 extern unsigned func_00140a10(const struct ArchiveResourceTable *table, unsigned resource_id);
 extern const struct ArchiveIdList *func_00140ecc(const struct ArchiveIndex *index, unsigned resource_id);
 extern const struct BankWaveArchiveTable *func_00140fc0(const struct BankReference *reference);
+extern unsigned int func_0014a35c(const struct SoundArchive *archive);
+extern unsigned int func_0014a364(const struct SoundArchiveReader *reader);
 extern unsigned func_0014a380(const struct SoundArchiveReader *reader);
 extern unsigned func_0014c23c(const struct SoundFileInfo *info);
 extern const struct SoundFileInfo *func_0014c25c(const struct SoundArchiveInfo *info, unsigned id);

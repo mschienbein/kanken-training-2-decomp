@@ -20,6 +20,17 @@ struct AllocationRecord {
     int reserved[2];
 };
 
+struct BitmapPool {
+    unsigned char *storage;
+    unsigned int reserved04;
+    unsigned int stride;
+    int capacity;
+    int used;
+#ifndef __cplusplus
+    unsigned char bits[];
+#endif
+};
+
 struct MotionState {
     unsigned char reserved00[0x10];
     float scale;
@@ -43,6 +54,8 @@ struct ResourceHandle {
 extern "C" {
 #endif
 
+extern unsigned char *func_00152d48(struct BitmapPool *pool);
+extern void func_0017e5f4(struct BitmapPool *pool, const void *element);
 extern BufferState bss_0049da8c;
 extern BufferState bss_0049cbc0;
 extern struct Allocation bss_0049cbb4;
@@ -53,7 +66,6 @@ extern void *func_0011ffdc(void *object);
 extern void *func_00196cb8(int screen, int index);
 extern void func_0019cf20(struct ResourceHandle *resource);
 extern void func_0019dc20(void *allocation);
-extern void func_001a000c(void *destination, const void *source, unsigned size);
 extern void func_0011ef54(long long nanoseconds); /* sleep wrapper */
 extern void func_0011ef58(long long nanoseconds); /* underlying sleep operation */
 extern void *func_0013714c(void *object);      /* empty destructor wrapper */

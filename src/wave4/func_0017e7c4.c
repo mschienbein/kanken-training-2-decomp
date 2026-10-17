@@ -1,14 +1,9 @@
 #include "game/functions.h"
 #include "game/runtime.h"
 
-struct Registry {
-    unsigned int count;
-    struct RegistryNode sentinel;
-};
 
 extern volatile unsigned int data_00243800;
 extern struct Registry bss_004b9810;
-extern int func_00191c80(volatile unsigned int *guard);
 
 struct Registry *func_0017e7c4(void)
 {

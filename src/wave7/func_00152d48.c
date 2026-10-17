@@ -1,11 +1,4 @@
-struct BitmapPool {
-    unsigned char *storage;
-    unsigned int reserved04;
-    unsigned int stride;
-    int capacity;
-    int used;
-    unsigned char bits[];
-};
+#include "game/runtime.h"
 
 unsigned char *func_00152d48(struct BitmapPool *pool)
 {

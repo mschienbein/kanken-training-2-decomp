@@ -37,7 +37,7 @@ struct RadarChartSlot {
 };
 
 struct RadarWidget {
-    unsigned char reserved00[0x94];
+    unsigned reserved00[0x25]; /* retain four-byte prefix alignment in C and C++ */
 #ifndef __cplusplus
     struct RadarChartSlot *slots[];
 #endif

@@ -30,17 +30,24 @@ struct TimingState {
     unsigned char complete;
 };
 
+/* Generic destructor registration erases the concrete object-pointer type.
+ * Typed destructor callbacks are converted explicitly at the registration site;
+ * all object pointers use the same single-word AAPCS parameter ABI. */
+typedef void (*ObjectDestructor)(void *object);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+extern void func_00100000(void);
+extern int func_00191c80(volatile unsigned int *guard);
 extern int func_00122500(void);
 extern void func_00122510(void);
 extern void *func_00125b54(void *object);
 extern unsigned func_001424c0(void);
 extern unsigned func_001424d0(void);
 extern int func_00144224(int value);
-extern void func_00147260(void);
+extern void func_00147260(struct ObjectManager *object);
 extern struct RegistryNode *func_0018d868(struct Registry *registry, struct RegistryNode *node);
 extern void func_0017e7bc(struct Registry *registry, struct RegistryEntry *entry);
 extern struct Registry *func_0017e7c4(void);
@@ -51,8 +58,7 @@ extern void *func_001c5b88(void *object);
 extern void func_001c6adc(void);
 extern void func_001db134(void *object);
 extern void func_00215ec4(volatile unsigned int *guard);
-extern void func_00216140(struct ObjectManager *object, void (*destroy)(void),
-                          void (*image_base)(void));
+extern void func_00216140(void *object, ObjectDestructor destroy, void (*image_base)(void));
 
 #ifdef __cplusplus
 }

@@ -1,0 +1,85 @@
+#ifndef GAME_STREAM_MANAGER_H
+#define GAME_STREAM_MANAGER_H
+
+#include <stdbool.h>
+#include "game/functions.h"
+
+struct StreamEvent {
+    struct StreamEvent *next;
+    unsigned char opcode;
+    unsigned char reserved05[3];
+    unsigned int serial;
+    unsigned int start;
+    void *object;
+};
+
+struct StreamSemaphore {
+    int value;
+    short waiters;
+    short limit;
+};
+
+struct StreamCriticalSection {
+    unsigned int state;
+};
+
+struct StreamMutex {
+    struct StreamCriticalSection critical;
+    void *owner;
+    int depth;
+};
+
+struct StreamQueue {
+    struct StreamEvent **slots;
+    struct StreamSemaphore readable;
+    struct StreamSemaphore available;
+    struct StreamMutex mutex;
+    unsigned int capacity;
+    unsigned int read_index;
+    int count;
+    unsigned int field2c;
+    int waiting_writers;
+    unsigned char reserved34[0x80];
+};
+
+struct StreamManager {
+    struct StreamQueue requests;
+    struct StreamQueue completions;
+    unsigned int field168;
+    struct StreamEvent *pending_head;
+    struct StreamEvent *pending_tail;
+    unsigned int serial;
+    unsigned int completed_serial;
+    unsigned int *buffer;
+    unsigned int capacity;
+    unsigned int write_index;
+    unsigned int read_index;
+    bool full;
+    unsigned char initialized;
+    unsigned char reserved18e[2];
+};
+
+struct StreamManagerGuards {
+    volatile unsigned int first;
+    volatile unsigned int second;
+};
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct StreamManagerGuards data_0024371c;
+/* [INFERENCE] The image references this same volatile guard both as parent+4
+ * and as a direct symbol. This names the second word, not another allocation. */
+extern volatile unsigned int data_00243720;
+extern struct StreamManager bss_004b8640;
+extern struct StreamManager bss_004b87d0;
+extern struct StreamManager *func_00143d1c(struct StreamManager *manager);
+extern void func_001812f8(struct StreamManager *manager);
+extern int func_00181280(struct StreamSemaphore *semaphore, int amount);
+extern void func_00192bd8(struct StreamMutex *mutex);
+extern void func_00195d74(struct StreamMutex *mutex);
+#ifdef __cplusplus
+}
+#endif
+
+#endif

@@ -20,7 +20,7 @@ struct W6ListGroup {
 };
 
 struct W6ListController {
-    unsigned char reserved00[0x20];
+    unsigned reserved00[8]; /* retain four-byte prefix alignment in C and C++ */
 #ifndef __cplusplus
     struct W6ListGroup *lists[];
 #endif

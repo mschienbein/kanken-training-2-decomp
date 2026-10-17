@@ -1,9 +1,9 @@
 # Known issues — checkpoint c005
 
-Current collected content: **182 new candidate functions / 11,056 B in 174 units**:
+**190 new candidate functions / 11,668 B in 182 units**:
 wave 5 = 37 functions / 1,852 B in 31 units; wave 6 = 73 / 5,540 B in 73 units;
-wave 7 = 72 / 3,664 B in 70 units. W7b is still authoring and is not included in
-these numbers. All authors are OpenAI-family (`openai-codex/gpt-6.1-sol`);
+wave 7 = 80 / 4,276 B in 78 units. All wave-6/7 authors are collected.
+All authors are OpenAI-family (`openai-codex/gpt-6.1-sol`);
 `author` provenance is retained per unit in `config/candidates/c005.json`.
 The separate wave-5 candidate manifest is replaced by that combined manifest.
 Denominator v7; gates v1.10; linker model `armlink5-inline-branchnop-v2`
@@ -75,9 +75,26 @@ reconstructions, not recovered original source names.
   Resource cleanup's actually invoked deleting destructor remains natural C++
   `delete`, with a typed ResourceHandle interface.
 - ARMCC C++ rejects C flexible-array members. Shared headers retain the same
-  fixed-prefix ABI layout, exposing zero-size flexible tails only to C clients;
-  current C++ clients access only the shared prefix. No one-element substitute
-  arrays or competing struct definitions are used.
+  fixed-prefix size and alignment, exposing zero-size flexible tails only to C
+  clients; current C++ clients access only the shared prefix. Word padding keeps
+  four-byte prefix alignment where the flexible pointer tail supplied it in C.
+  No one-element substitute arrays or competing struct definitions are used.
+- Stream queues share the 0xb4-byte layout, and both 0x190-byte StreamManager
+  instances share their bool full flag and event/ring fields. Bitmap allocation
+  and release share the allocator-evidenced signed capacity/used fields; element
+  offsets and division by stride remain unsigned.
+- **[INFERENCE / ABI qualification]** Destructor registration accepts a generic
+  object pointer and a one-pointer `ObjectDestructor`, not a no-argument callback.
+  StreamManager and ObjectManager destructors keep their concrete prototypes;
+  explicit function-pointer conversions at registration rely on the uniform
+  single-word AAPCS object-pointer ABI, not ISO C function-type equivalence.
+  The empty ObjectManager destructor's argument follows that registered use.
+- **[INFERENCE / address-view qualification]** `func_00185bfc` tests the second
+  guard as `data_0024371c.second`, but guard operations reference the direct
+  symbol `data_00243720` at that same address. Both volatile-word declarations
+  are shared once, with their overlap documented; no second allocation is
+  defined. Collapsing the two C address expressions shortens the function from
+  92 to 88 bytes. The original split addressing is retained explicitly.
 
 ## Compiler-extension and outlining qualifications
 
@@ -93,23 +110,29 @@ the three-function source marks the outlined-helper interpretation [INFERENCE].
 Other small source helpers retain ordinary inline/force-inline annotations, not
 injected instructions or dead code.
 
-Natural `memcpy` / `memset` source is kept where its lowering matches the
-original helper entry. `func_00154378` deliberately calls the shared general copy
-entry `func_001a000c` for word-aligned buffers: natural memcpy currently selects
-an unbound aligned helper instead. This preserves the observed call target
-without inventing a helper binding or weakening the real word-pointer types.
+Natural `memcpy` / `memset` source is kept. Both `__aeabi_memcpy` and the
+word-aligned `__aeabi_memcpy4` lowering are independently bound to the same
+original entry, so the WordRingWriter retains its real word-pointer types and
+ordinary memcpy without a local binding or explicit runtime-helper substitute.
 Compiler/library helper bodies remain uncredited.
 
 ## Linker-model qualifications
 
 - None of the 37 wave-5 additions requires a rewrite.
-- The newly integrated w6/w7 wrappers use branch-to-next (`branchnop`) rewrites
-  where their explicitly typed target is the adjacent catalogued function.
+- New candidates contain **35 rewrite sites in 32 functions**: 29 `branchnop`,
+  two `inline_insn` and four `inline_nop` sites. The branch-to-next targets are
+  explicitly typed adjacent catalogued functions.
 - `func_00160298` has two `inline_insn` getter calls. Its source marks the choice
   of `func_001c6af4` **[INFERENCE]**: the eligible body reads `ItemPage.count`, but
   inlining does not recover the original callee identity.
+- `func_00185bfc` / `func_001916e8` each use two `inline_nop` sites for destructor
+  registration and guard release. Both callee identities remain marked
+  **[INFERENCE]**, not recovered original call-graph facts.
 - Revised sleep wrapper `func_0011ef54` retains its adjacent `func_0011ef58`
   branchnop and signed 64-bit r0/r1 forwarding inference.
+- Five revised functions contain six inherited/newly rechecked rewrite sites:
+  `func_0011ef54`, `func_0019dc1c`, `func_0017e7c4`, `func_00185cc0` and
+  `func_00185d1c`. Their adjacent-target or inlined-callee qualifications remain.
 - The model qualifies inherited material too: inlined calls prove eligible
   callee bodies, not identities; branch-to-next proves the final adjacent target,
   not whether source order or linker reordering placed it there. Conditional
@@ -122,7 +145,8 @@ The four carried wave-5 revisions remain: w1 `func_00134f04` uses the notificati
 status halfword, `func_0018fcb4` returns the separate service context, and
 `func_00195e84` / `func_00195e94` use the shared signed flag / unsigned mode fields.
 
-Additional revisions are limited to interfaces and common views:
+Relative to finalized c004-r3, **29 accepted units / 33 functions / 1,824 B**
+are revised and rechecked, limited to interfaces and common views:
 
 - `src/pilot/game_enum_switch.c`: both enum mappings' evidenced screen argument.
 - `src/pilot/loop_cleanup.c`: typed ResourceHandle pointers/shared declarations.
@@ -136,12 +160,14 @@ Additional revisions are limited to interfaces and common views:
 - `src/wave2/func_001795bc.c`: shared expanded SelectionState.
 - `src/wave2/func_001791e0.c`: common text prefix/following pointer vector.
 - `src/wave2/func_00179298.cpp`: shared display-handle/context/activation interfaces.
+- `src/wave2/func_00147260.c`: evidenced registered ObjectManager destructor argument.
 
-The carried c004 sleep and WordPair units also use the shared headers. Six more
-c004-only declaration/layout migrations are intentionally deferred until the
-separately fixed c004-r3 baseline lands; their exact units/evidence are recorded
-in the integrator's private notes. They are the remaining current dry-interface
-items, not waived policy findings.
+After Main finalized c004-r3 and released these edits, the six deferred c004
+shared-header migrations were applied to `func_001ef888`, `func_0019dc1c`,
+`func_0018d514`, `func_0017e7bc`, `func_0017e7c4` and `func_00185cc0`. The
+registration contract also revises `func_00216140` and `func_00185d1c`; the carried
+sleep and WordPair revisions remain. Every affected caller is migrated and all
+these functions MATCH. No c004 revision remains pending.
 
 ## Preserved original bugs
 
@@ -169,12 +195,20 @@ remain documented at their source and in earlier checkpoint records.
 
 ## Evidence and uncredited scope
 
-Every currently collected function has re-derived MATCH at its destination;
-source/header changes receive sequential per-unit rechecks during integration.
-The private dry ledger is exactly canonical matches + c004 candidates + c005
-candidates. The integration pre-review reads every c005/revised source for
-plausibility, typed interfaces, source policy, preserved bugs and linker callee
-qualifications; C++ interfaces are checked by hand, not waived semantically.
+Final sequential per-unit evidence covers **211 units / 223 functions / 13,492 B**:
+every c005 unit and all 29 revised accepted units report MATCH under `game`.
+An integration pre-review record covers all 223 functions, including source
+policy, exact layouts/use, preserved bugs, callee identity and ABI qualifications.
+All twelve c005 C++ units and the revised accepted C++ activation caller were
+checked by hand; this does not replace fresh independent checkpoint reviews.
+
+The dry ledger is the set union of canonical matches, c004 and c005 candidates.
+Since c004-r3 is now accepted, its 181 units already occur in canonical matches
+and are included once, after checking that their profile/function sets agree.
+Final `interfaces.py check --allow-unchecked-cpp` exits 0: **456 units / 489
+functions / 19,288 B**, 431 checked C units, 25 permitted C++ units, **zero
+disagreements, zero policy items and no unchecked C**. The twelve other C++ units
+are inherited, unrevised material covered by the accepted checkpoint review chain.
 
 Only RESULT rows re-derived as MATCH are collected. Other mismatches, extent
 reports and library candidates remain outside this manifest. No runtime helper
@@ -182,7 +216,6 @@ body is credited, no catalogue boundary is padded, and no candidate is silently
 dropped to make a gate pass.
 
 Full-image equality, two fresh builds, the full suite, sealed independent
-reviews and finalize are still required for acceptance. This worker performs no
-full build/suite or prepare/finalize, changes no canonical ledger, and publishes
-nothing. The current c004-r3 cutover and final complete collection/check results
-will be reflected here before the integration handoff.
+reviews and finalize are still required for c005 acceptance. This worker ran no
+full build/suite or prepare/finalize, authored no canonical-ledger change and
+published nothing. The accepted c004-r3 ledger was received only by merging main.
