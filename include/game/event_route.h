@@ -3,7 +3,7 @@
 
 struct ArchiveFile;
 struct BinaryByteParameters;
-struct BinaryReferenceBlock;
+struct W12cSoundDetail;
 struct BinaryReferenceTable;
 struct BinaryTableBlock;
 struct BinaryVersionReader;
@@ -76,10 +76,6 @@ struct BinaryTableBlock {
     struct RelativeReference table;
 };
 
-struct BinaryReferenceBlock {
-    unsigned signature;
-    struct RelativeReference contents;
-};
 
 struct BinaryVersionReader {
     const struct ArchiveFile *file;
@@ -137,8 +133,8 @@ extern unsigned *func_00165684(struct DrawCommandState *state, unsigned *command
 extern unsigned *func_001dacf8(struct DrawCommandState *state, unsigned *commands, unsigned flags);
 extern const struct BinaryReferenceTable *func_001f1f64(const struct BinaryTableBlock *block);
 extern const struct BinaryByteParameters *func_001f1f80(const struct BinaryReferenceTable *table, unsigned index);
-extern const void *func_001f22c4(const struct BinaryReferenceBlock *block);
-extern const void *func_001f239c(const struct BinaryReferenceBlock *block);
+extern const void *func_001f22c4(const struct W12cSoundDetail *block);
+extern const void *func_001f239c(const struct BankInstrumentInfo *block);
 extern bool func_001f2a58(const struct BinaryVersionReader *reader);
 extern const unsigned *func_001f494c(const struct DrawCommandState *state);
 extern unsigned func_001f4958(const struct DrawCommandState *state, unsigned count);

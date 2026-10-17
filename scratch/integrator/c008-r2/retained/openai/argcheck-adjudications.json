@@ -1,0 +1,1262 @@
+{
+ "command": ".venv/bin/python tools/argcheck.py --matches accept/c008/matches.json --json scratch/review/c008/openai/argcheck.json",
+ "exit": 2,
+ "candidate_count": 46,
+ "flagged_functions": 28,
+ "all_candidates_adjudicated": true,
+ "dispositions": {
+  "rejected": 38,
+  "qualified": 8
+ },
+ "rows": [
+  {
+   "id": "A001",
+   "function": "func_00102cb0",
+   "declaration": {
+    "line": 5,
+    "source": "src/wave1/func_00102cb0.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00101530"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The only apparent post-call r0 consumption is an identity no-op, not consumption of a returned value; the void callback contract is retained.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A002",
+   "function": "func_00103258",
+   "declaration": {
+    "line": 28,
+    "source": "src/pilot/loop_cleanup.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0010150c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The alleged r0 preparation is an identity no-op left by linking, not an argument definition.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A003",
+   "function": "func_00103798",
+   "declaration": {
+    "line": 4,
+    "source": "src/pilot/pilot_b.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00101548"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The alleged r0 preparation is an identity no-op left by linking, not an argument definition.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A004",
+   "function": "func_00104f90",
+   "declaration": {
+    "line": 11,
+    "source": "src/wave6/func_00104f90.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00101434"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The alleged r0 preparation is an identity no-op left by linking, not an argument definition.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A005",
+   "function": "func_00105084",
+   "declaration": {
+    "line": 2,
+    "source": "src/pilot/loop_resources.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001014a0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent post-call r0 read is an identity no-op; it supplies no result-consumer evidence.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A006",
+   "function": "func_001071cc",
+   "declaration": {
+    "line": 25,
+    "source": "include/game/scheduler.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0010141c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent post-call r0 read is an identity no-op; both the shared declaration and source definition correctly remain void.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A007",
+   "function": "func_001071cc",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave9/func_001071cc.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0010141c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent post-call r0 read is an identity no-op; both the shared declaration and source definition correctly remain void.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A008",
+   "function": "func_001074d0",
+   "declaration": {
+    "line": 26,
+    "source": "include/game/scheduler.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001071e0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent post-call r0 read at the adjacent continuation is an identity no-op, not a result use.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A009",
+   "function": "func_001074d0",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave9/func_001074d0.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001071e0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent post-call r0 read at the adjacent continuation is an identity no-op, not a result use.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A010",
+   "function": "func_001135e8",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave11/func_001135e8.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0010bef4"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The putative incoming r0 setup before the tail call is an identity no-op. No new argument is established by this site.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A011",
+   "function": "func_0013deb4",
+   "declaration": {
+    "line": 69,
+    "source": "include/game/startup.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00134fc0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent r0 result read is an identity no-op before a later independent assignment; it does not establish a return value.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A012",
+   "function": "func_0013deb4",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave14/func_0013deb4.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00134fc0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent r0 result read is an identity no-op before a later independent assignment; it does not establish a return value.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A013",
+   "function": "func_0015e684",
+   "declaration": {
+    "line": 310,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001ad6c0",
+    "0x001c0d20"
+   ],
+   "disposition": "rejected",
+   "adjudication": "At both flagged tail sites r3 is restored by the epilogue stack load, not prepared as an argument. The existing r0/r1 and independently allocated VFP s0-s2 inputs are preserved.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A014",
+   "function": "func_0015e684",
+   "declaration": {
+    "line": 329,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001ad6c0",
+    "0x001c0d20"
+   ],
+   "disposition": "rejected",
+   "adjudication": "At both flagged tail sites r3 is restored by the epilogue stack load, not prepared as an argument. The existing r0/r1 and independently allocated VFP s0-s2 inputs are preserved.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A015",
+   "function": "func_0015e684",
+   "declaration": {
+    "line": 4,
+    "source": "src/retries/func_0015e684.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001ad6c0",
+    "0x001c0d20"
+   ],
+   "disposition": "rejected",
+   "adjudication": "At both flagged tail sites r3 is restored by the epilogue stack load, not prepared as an argument. The existing r0/r1 and independently allocated VFP s0-s2 inputs are preserved.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A016",
+   "function": "func_0015e948",
+   "declaration": {
+    "line": 307,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0016e5c4"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The additional r3 is restored from the caller stack immediately before the tail transfer, not an extra input.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A017",
+   "function": "func_0015e948",
+   "declaration": {
+    "line": 4,
+    "source": "src/wave6/func_0015e948.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0016e5c4"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The additional r3 is restored from the caller stack immediately before the tail transfer, not an extra input.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A018",
+   "function": "func_00164ebc",
+   "declaration": {
+    "line": 5,
+    "source": "src/wave2/func_00164ebc.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0020536c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The alleged fourth core input is the r3 epilogue restore at the flagged tail transfer. The source retains its three independently evidenced formal inputs despite its empty body.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A019",
+   "function": "func_0016a178",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave7/func_0016a178.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001d504c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The flagged post-call conditional store is reached with r0 independently conditionally overwritten from the saved input under the same predicate. It does not consume the void callees result.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A020",
+   "function": "func_00174480",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave2/func_00174480.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001bb9a8",
+    "0x001c0e38"
+   ],
+   "disposition": "rejected",
+   "adjudication": "Both alleged additional r3 inputs are epilogue stack restores before the tail transfer.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A021",
+   "function": "func_00175838",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave11/func_00175838.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00161af0",
+    "0x001e11e8"
+   ],
+   "disposition": "rejected",
+   "adjudication": "Both putative r0 argument definitions are identity no-ops. The independently stored short-valued return is not evidence of an input parameter.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A022",
+   "function": "func_00181448",
+   "declaration": {
+    "line": 295,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1"
+   ],
+   "sites": [
+    "0x001e57b0",
+    "0x001ebb4c"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The two exceptional r1 writes assign zero while initializing surrounding object state. The exact accepted natural caller func_00181420 forwards only the canonical object; no consistent additional r1 argument is established across callers. [INFERENCE] the original spelling/role of any unused second formal remains unrecoverable; retain the explicit existing qualification, not a new required input.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A023",
+   "function": "func_00181448",
+   "declaration": {
+    "line": 8,
+    "source": "src/wave11/func_00181448.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1"
+   ],
+   "sites": [
+    "0x001e57b0",
+    "0x001ebb4c"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The two exceptional r1 writes assign zero while initializing surrounding object state. The exact accepted natural caller func_00181420 forwards only the canonical object; no consistent additional r1 argument is established across callers. [INFERENCE] the original spelling/role of any unused second formal remains unrecoverable; retain the explicit existing qualification, not a new required input.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A024",
+   "function": "func_001816e0",
+   "declaration": {
+    "line": 327,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001eb0ac"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The flagged r3 is an epilogue stack restore at the tail call.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A025",
+   "function": "func_001816e0",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave7/func_001816e0.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001eb0ac"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The flagged r3 is an epilogue stack restore at the tail call.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A026",
+   "function": "func_00181700",
+   "declaration": {
+    "line": 312,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r3"
+   ],
+   "sites": [
+    "0x0014218c",
+    "0x0014577c",
+    "0x001ad6ac",
+    "0x001c0d0c"
+   ],
+   "disposition": "qualified",
+   "adjudication": "At 0x14218c and 0x14577c r1 is an isolated zero written during surrounding state initialization; the required object and VFP s0-s2 inputs are retained. The r3 writes at 0x1ad6ac and 0x1c0d0c are epilogue restores. Exact accepted C callers func_0016ff08, func_001793e4 and func_001e403c naturally pass the object and three VFP arguments without an extra core input. [INFERENCE] unused historical formals cannot be reconstructed from the body alone.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A027",
+   "function": "func_00181700",
+   "declaration": {
+    "line": 5,
+    "source": "src/wave7/func_00181700.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r3"
+   ],
+   "sites": [
+    "0x0014218c",
+    "0x0014577c",
+    "0x001ad6ac",
+    "0x001c0d0c"
+   ],
+   "disposition": "qualified",
+   "adjudication": "At 0x14218c and 0x14577c r1 is an isolated zero written during surrounding state initialization; the required object and VFP s0-s2 inputs are retained. The r3 writes at 0x1ad6ac and 0x1c0d0c are epilogue restores. Exact accepted C callers func_0016ff08, func_001793e4 and func_001e403c naturally pass the object and three VFP arguments without an extra core input. [INFERENCE] unused historical formals cannot be reconstructed from the body alone.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A028",
+   "function": "func_001826fc",
+   "declaration": {
+    "line": 314,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0016e5a0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The extra r3 comes from the caller epilogue stack load, not argument preparation.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A029",
+   "function": "func_001826fc",
+   "declaration": {
+    "line": 4,
+    "source": "src/wave6/func_001826fc.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0016e5a0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The extra r3 comes from the caller epilogue stack load, not argument preparation.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A030",
+   "function": "func_001847dc",
+   "declaration": {
+    "line": 39,
+    "source": "include/game/service_result.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00130128"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The conditional result-looking store has a matching conditional r0 overwrite after the call. On the path performing the store, r0 is not the void callees output.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A031",
+   "function": "func_001847dc",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave14/func_001847dc.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00130128"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The conditional result-looking store has a matching conditional r0 overwrite after the call. On the path performing the store, r0 is not the void callees output.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A032",
+   "function": "func_001852f4",
+   "declaration": {
+    "line": 102,
+    "source": "include/game/runtime.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x00103c7c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The flagged extra r3 is an epilogue stack restore before the tail transfer. An additional identity no-op in this caller also does not define an argument.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A033",
+   "function": "func_001852f4",
+   "declaration": {
+    "line": 7,
+    "source": "src/wave4/func_001852f4.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x00103c7c"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The flagged extra r3 is an epilogue stack restore before the tail transfer. An additional identity no-op in this caller also does not define an argument.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A034",
+   "function": "func_0018d074",
+   "declaration": {
+    "line": 46,
+    "source": "include/game/object_pool.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001dc6fc"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The post-call conditional store is paired with a same-predicate stack load into r0, guarded by the saved output pointer. It consumes the reloaded output value rather than a result from the void function.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A035",
+   "function": "func_0018d074",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave12/func_0018d074.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001dc6fc"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The post-call conditional store is paired with a same-predicate stack load into r0, guarded by the saved output pointer. It consumes the reloaded output value rather than a result from the void function.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A036",
+   "function": "func_00191134",
+   "declaration": {
+    "line": 77,
+    "source": "include/game/animation.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1"
+   ],
+   "sites": [
+    "0x0016e94c"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The exceptional caller moves and shifts the incoming floating value through core scratch registers immediately before the getter; other exact accepted natural uses, including func_001c1700, call the global interval getter with no inputs. [INFERENCE] these core values are caller temporaries, not consistently evidenced required formals; the local conservative candidate is insufficient to add parameters.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A037",
+   "function": "func_00191134",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave8/func_00191134.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1"
+   ],
+   "sites": [
+    "0x0016e94c"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The exceptional caller moves and shifts the incoming floating value through core scratch registers immediately before the getter; other exact accepted natural uses, including func_001c1700, call the global interval getter with no inputs. [INFERENCE] these core values are caller temporaries, not consistently evidenced required formals; the local conservative candidate is insufficient to add parameters.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A038",
+   "function": "func_00195a08",
+   "declaration": {
+    "line": 315,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0016e5b4"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The additional r3 is restored by the epilogue stack load at the tail transfer.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A039",
+   "function": "func_00195a08",
+   "declaration": {
+    "line": 4,
+    "source": "src/wave6/func_00195a08.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x0016e5b4"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The additional r3 is restored by the epilogue stack load at the tail transfer.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A040",
+   "function": "func_00195ec4",
+   "declaration": {
+    "line": 67,
+    "source": "include/game/object_manager.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x00213670"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The r1/r2 values at the exceptional static-initialization site are earlier PC-relative registration operands surviving a preceding erased call, not fresh mutex-call argument definitions. Exact natural constructors func_0014856c and func_00180860 and the TaggedPoolList constructor supply only the mutex address. [INFERENCE] the erased registrations historical identity remains unprovable; it is not a reason to invent required mutex parameters.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A041",
+   "function": "func_00195ec4",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave12/func_00195ec4.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x00213670"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The r1/r2 values at the exceptional static-initialization site are earlier PC-relative registration operands surviving a preceding erased call, not fresh mutex-call argument definitions. Exact natural constructors func_0014856c and func_00180860 and the TaggedPoolList constructor supply only the mutex address. [INFERENCE] the erased registrations historical identity remains unprovable; it is not a reason to invent required mutex parameters.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A042",
+   "function": "func_001971a0",
+   "declaration": {
+    "line": 71,
+    "source": "include/game/resource_tables.h"
+   },
+   "kind": "missing_float_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "s0"
+   ],
+   "sites": [
+    "0x00181500",
+    "0x00181544"
+   ],
+   "disposition": "rejected",
+   "adjudication": "Both callers load a later stack-passed float into s0 before this resource lookup and spill that same s0 immediately after it, before calling func_00196e14. The float belongs to the subsequent call, not this lookup. Independent core and VFP allocation has been considered rather than assuming that core inputs exclude float inputs.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A043",
+   "function": "func_001971a0",
+   "declaration": {
+    "line": 36,
+    "source": "src/wave9/func_0018269c.c"
+   },
+   "kind": "missing_float_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "s0"
+   ],
+   "sites": [
+    "0x00181500",
+    "0x00181544"
+   ],
+   "disposition": "rejected",
+   "adjudication": "Both callers load a later stack-passed float into s0 before this resource lookup and spill that same s0 immediately after it, before calling func_00196e14. The float belongs to the subsequent call, not this lookup. Independent core and VFP allocation has been considered rather than assuming that core inputs exclude float inputs.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A044",
+   "function": "func_0019d6c4",
+   "declaration": {
+    "line": 104,
+    "source": "include/game/runtime.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r2",
+    "r3"
+   ],
+   "sites": [
+    "0x00102220",
+    "0x00104518",
+    "0x00104550",
+    "0x0010b9b8",
+    "0x0010b9e0",
+    "0x0010ba30",
+    "0x0010ba70",
+    "0x0010bac0",
+    "0x0010bb5c",
+    "0x0010bd2c",
+    "0x0010bd6c",
+    "0x0010c028",
+    "0x0010c044",
+    "0x0010c08c",
+    "0x0010c0d8",
+    "0x0010c0f4",
+    "0x0010d334",
+    "0x0010d38c",
+    "0x0011557c",
+    "0x00120edc",
+    "0x0012e068",
+    "0x0012e6b4",
+    "0x001367f4",
+    "0x0013eedc",
+    "0x00146d84",
+    "0x00146de8",
+    "0x00146e6c",
+    "0x001650c8",
+    "0x001c44b4",
+    "0x001c44e4",
+    "0x001d3404",
+    "0x001d3478",
+    "0x001d3698",
+    "0x001d382c",
+    "0x001ef9a0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The 35 sites have error-condition/sign scratch registers, earlier call setup, or epilogue restores in r2/r3; the condition-setting writes are visible in the independent per-site audit. Exact new C callers func_0010ba4c and func_0010ba9c naturally pass the result and address only. The complete fatal report consumes those two fields, not a consistent additional caller value.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A045",
+   "function": "func_0019d6c4",
+   "declaration": {
+    "line": 26,
+    "source": "src/wave5/func_0019d6c4.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r2",
+    "r3"
+   ],
+   "sites": [
+    "0x00102220",
+    "0x00104518",
+    "0x00104550",
+    "0x0010b9b8",
+    "0x0010b9e0",
+    "0x0010ba30",
+    "0x0010ba70",
+    "0x0010bac0",
+    "0x0010bb5c",
+    "0x0010bd2c",
+    "0x0010bd6c",
+    "0x0010c028",
+    "0x0010c044",
+    "0x0010c08c",
+    "0x0010c0d8",
+    "0x0010c0f4",
+    "0x0010d334",
+    "0x0010d38c",
+    "0x0011557c",
+    "0x00120edc",
+    "0x0012e068",
+    "0x0012e6b4",
+    "0x001367f4",
+    "0x0013eedc",
+    "0x00146d84",
+    "0x00146de8",
+    "0x00146e6c",
+    "0x001650c8",
+    "0x001c44b4",
+    "0x001c44e4",
+    "0x001d3404",
+    "0x001d3478",
+    "0x001d3698",
+    "0x001d382c",
+    "0x001ef9a0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The 35 sites have error-condition/sign scratch registers, earlier call setup, or epilogue restores in r2/r3; the condition-setting writes are visible in the independent per-site audit. Exact new C callers func_0010ba4c and func_0010ba9c naturally pass the result and address only. The complete fatal report consumes those two fields, not a consistent additional caller value.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  },
+  {
+   "id": "A046",
+   "function": "func_0019dfbc",
+   "declaration": {
+    "line": 40,
+    "source": "include/game/waitable_handle.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r3"
+   ],
+   "sites": [
+    "0x00101c10",
+    "0x00101e0c",
+    "0x001028f8",
+    "0x001029f0",
+    "0x001035d8",
+    "0x00103634",
+    "0x00103744",
+    "0x00103844",
+    "0x00103938",
+    "0x00104e68",
+    "0x00104f48",
+    "0x00106f88",
+    "0x0010722c",
+    "0x0010747c",
+    "0x0010b7c0",
+    "0x0010c418",
+    "0x00110c8c",
+    "0x00113694",
+    "0x00113cc8",
+    "0x00115694",
+    "0x001156f0",
+    "0x00115750",
+    "0x001157c0",
+    "0x0011f4f0",
+    "0x0011f590",
+    "0x0011f624",
+    "0x001230d4",
+    "0x001230f8",
+    "0x0012f6d4",
+    "0x0012f81c",
+    "0x0012f8b0",
+    "0x0012f8cc",
+    "0x00136004",
+    "0x001379b4",
+    "0x001379cc",
+    "0x00137e8c",
+    "0x00137eac",
+    "0x001428dc",
+    "0x00146374",
+    "0x0014638c",
+    "0x00146570",
+    "0x00146f14",
+    "0x00148254",
+    "0x001482b4",
+    "0x0014ca5c",
+    "0x0014cbc0",
+    "0x001537f0",
+    "0x00153858",
+    "0x00153878",
+    "0x001538c8",
+    "0x001538d8",
+    "0x00185db0",
+    "0x0018f708",
+    "0x0019dfac",
+    "0x0019ed1c",
+    "0x00205348"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The 56 sites retain r1 sign-test/predicate temporaries and occasional r3 operands of an earlier kernel call, not consistent additional error-dispatch arguments. Independently read the unchecked C++ definition: it decodes the one CtrResult and supplies any downstream arguments itself. The canonical-header compatibility probe also accepts this definition.",
+   "evidence": [
+    "scratch/review/c008/openai/contract-sources.txt",
+    "scratch/review/c008/openai/caller-register-traces.json",
+    "scratch/review/c008/openai/caller-derived-properties-r2.json",
+    "scratch/review/c008/openai/caller-identity-noops.json"
+   ]
+  }
+ ]
+}

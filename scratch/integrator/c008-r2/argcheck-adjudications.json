@@ -1,0 +1,1632 @@
+{
+ "tool_exit": 2,
+ "wrapper_exit": 1,
+ "summary": {
+  "callback_sites": 0,
+  "direct_sites": 1161,
+  "elapsed_seconds": 34.524,
+  "flagged_functions": 5,
+  "functions": 469,
+  "issues": 11,
+  "notes": 92,
+  "rewrite_sites": 0,
+  "tail_sites": 76,
+  "unchecked_functions": 38,
+  "unresolved_indirect_sites": 1055
+ },
+ "all_candidates_adjudicated": true,
+ "dispositions": {
+  "rejected": 9,
+  "qualified": 2
+ },
+ "rows": [
+  {
+   "function": "func_0013deb4",
+   "declaration": {
+    "line": 69,
+    "source": "include/game/startup.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00134fc0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent r0 result read is an identity no-op before a later independent assignment; it does not establish a return value.",
+   "retained_original_ids": [
+    "A011",
+    "A012"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_0013deb4",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave14/func_0013deb4.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00134fc0"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The apparent r0 result read is an identity no-op before a later independent assignment; it does not establish a return value.",
+   "retained_original_ids": [
+    "A011",
+    "A012"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_0015e684",
+   "declaration": {
+    "line": 314,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001ad6c0",
+    "0x001c0d20"
+   ],
+   "disposition": "rejected",
+   "adjudication": "At both flagged tail sites r3 is restored by the epilogue stack load, not prepared as an argument. The existing r0/r1 and independently allocated VFP s0-s2 inputs are preserved.",
+   "retained_original_ids": [
+    "A013",
+    "A014",
+    "A015"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_0015e684",
+   "declaration": {
+    "line": 333,
+    "source": "include/game/screen.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001ad6c0",
+    "0x001c0d20"
+   ],
+   "disposition": "rejected",
+   "adjudication": "At both flagged tail sites r3 is restored by the epilogue stack load, not prepared as an argument. The existing r0/r1 and independently allocated VFP s0-s2 inputs are preserved.",
+   "retained_original_ids": [
+    "A013",
+    "A014",
+    "A015"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_0015e684",
+   "declaration": {
+    "line": 4,
+    "source": "src/retries/func_0015e684.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r3"
+   ],
+   "sites": [
+    "0x001ad6c0",
+    "0x001c0d20"
+   ],
+   "disposition": "rejected",
+   "adjudication": "At both flagged tail sites r3 is restored by the epilogue stack load, not prepared as an argument. The existing r0/r1 and independently allocated VFP s0-s2 inputs are preserved.",
+   "retained_original_ids": [
+    "A013",
+    "A014",
+    "A015"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_001847dc",
+   "declaration": {
+    "line": 39,
+    "source": "include/game/service_result.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00130128"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The conditional result-looking store has a matching conditional r0 overwrite after the call. On the path performing the store, r0 is not the void callees output.",
+   "retained_original_ids": [
+    "A030",
+    "A031"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_001847dc",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave14/func_001847dc.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00130128"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The conditional result-looking store has a matching conditional r0 overwrite after the call. On the path performing the store, r0 is not the void callees output.",
+   "retained_original_ids": [
+    "A030",
+    "A031"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_0018d074",
+   "declaration": {
+    "line": 46,
+    "source": "include/game/object_pool.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001dc6fc"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The post-call conditional store is paired with a same-predicate stack load into r0, guarded by the saved output pointer. It consumes the reloaded output value rather than a result from the void function.",
+   "retained_original_ids": [
+    "A034",
+    "A035"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_0018d074",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave12/func_0018d074.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x001dc6fc"
+   ],
+   "disposition": "rejected",
+   "adjudication": "The post-call conditional store is paired with a same-predicate stack load into r0, guarded by the saved output pointer. It consumes the reloaded output value rather than a result from the void function.",
+   "retained_original_ids": [
+    "A034",
+    "A035"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_00195ec4",
+   "declaration": {
+    "line": 67,
+    "source": "include/game/object_manager.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x00213670"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The r1/r2 values at the exceptional static-initialization site are earlier PC-relative registration operands surviving a preceding erased call, not fresh mutex-call argument definitions. Exact natural constructors func_0014856c and func_00180860 and the TaggedPoolList constructor supply only the mutex address. [INFERENCE] the erased registrations historical identity remains unprovable; it is not a reason to invent required mutex parameters.",
+   "retained_original_ids": [
+    "A040",
+    "A041"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  },
+  {
+   "function": "func_00195ec4",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave12/func_00195ec4.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x00213670"
+   ],
+   "disposition": "qualified",
+   "adjudication": "The r1/r2 values at the exceptional static-initialization site are earlier PC-relative registration operands surviving a preceding erased call, not fresh mutex-call argument definitions. Exact natural constructors func_0014856c and func_00180860 and the TaggedPoolList constructor supply only the mutex address. [INFERENCE] the erased registrations historical identity remains unprovable; it is not a reason to invent required mutex parameters.",
+   "retained_original_ids": [
+    "A040",
+    "A041"
+   ],
+   "evidence": [
+    "retained/scoped-caller-facts.json",
+    "retained/openai/argcheck-adjudications.json"
+   ],
+   "current_raw_report": "checks/argcheck-post-merge/argcheck.json"
+  }
+ ],
+ "notes": [
+  {
+   "function": "func_0010e2c8",
+   "declaration": {
+    "line": 108,
+    "source": "include/game/input_device.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00112494",
+   "declaration": {
+    "line": 246,
+    "source": "include/game/service_state.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00112494",
+   "declaration": {
+    "line": 7,
+    "source": "src/retries/func_00112494.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00122350",
+   "declaration": {
+    "line": 38,
+    "source": "src/pilot/pilot_a.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0012d550",
+   "declaration": {
+    "line": 4,
+    "source": "src/retries/func_0012d550.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1",
+    "r2",
+    "r3"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0012ff20",
+   "declaration": {
+    "line": 44,
+    "source": "include/game/applet.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "r0 is the full-word return of func_00191dd8 in the exact new wrapper. The signed result and byte-wide second argument now agree with the accepted SDK definition."
+  },
+  {
+   "function": "func_00136930",
+   "declaration": {
+    "line": 20,
+    "source": "src/pilot/pilot_a.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001392b0",
+   "declaration": {
+    "line": 419,
+    "source": "include/game/archive.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00139358",
+   "declaration": {
+    "line": 409,
+    "source": "include/game/archive.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00140c50",
+   "declaration": {
+    "line": 405,
+    "source": "include/game/archive.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00140c50",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave7/func_00140c50.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001462d4",
+   "declaration": {
+    "line": 110,
+    "source": "include/game/display_animation.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "The full-width r1 status is forwarded unchanged by natural caller func_001821f4 (fresh 16/16 MATCH); the unused canonical InputSessionContext input is deliberately retained."
+  },
+  {
+   "function": "func_001462d4",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave14/func_001462d4.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "The full-width r1 status is forwarded unchanged by natural caller func_001821f4 (fresh 16/16 MATCH); the unused canonical InputSessionContext input is deliberately retained."
+  },
+  {
+   "function": "func_00148358",
+   "declaration": {
+    "line": 96,
+    "source": "include/game/aux_effect.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00148358",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave12/func_00148358.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00148a3c",
+   "declaration": {
+    "line": 396,
+    "source": "include/game/audio_voice.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00148a3c",
+   "declaration": {
+    "line": 9,
+    "source": "src/wave13/func_00148a3c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014b078",
+   "declaration": {
+    "line": 99,
+    "source": "include/game/aux_effect.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014b078",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave12/func_0014b078.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014c90c",
+   "declaration": {
+    "line": 93,
+    "source": "include/game/aux_effect.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014c90c",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave12/func_0014c90c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014d254",
+   "declaration": {
+    "line": 88,
+    "source": "include/game/material.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014d254",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave13/func_0014d254.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014fc78",
+   "declaration": {
+    "line": 400,
+    "source": "include/game/audio_voice.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0014fc78",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave13/func_0014fc78.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0015274c",
+   "declaration": {
+    "line": 403,
+    "source": "include/game/audio_voice.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0015274c",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave13/func_0015274c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0015341c",
+   "declaration": {
+    "line": 37,
+    "source": "include/game/input_runtime.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0015341c",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave9/func_0015341c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0015db7c",
+   "declaration": {
+    "line": 114,
+    "source": "include/game/exp_heap.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r3"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0015db7c",
+   "declaration": {
+    "line": 7,
+    "source": "src/wave14/func_0015db7c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r3"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0016504c",
+   "declaration": {
+    "line": 406,
+    "source": "include/game/audio_voice.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0016504c",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave13/func_0016504c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00177598",
+   "declaration": {
+    "line": 116,
+    "source": "include/game/sound_controller.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00177598",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave13/func_00177598.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00177740",
+   "declaration": {
+    "line": 117,
+    "source": "include/game/display_animation.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00177740",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave14/func_00177740.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0017deec",
+   "declaration": {
+    "line": 126,
+    "source": "include/game/sequence.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0017deec",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave12/func_0017deec.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00180404",
+   "declaration": {
+    "line": 110,
+    "source": "include/game/material.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00180404",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave13/func_00180404.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00180860",
+   "declaration": {
+    "line": 107,
+    "source": "include/game/sound_controller.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00180860",
+   "declaration": {
+    "line": 10,
+    "source": "src/wave12/func_00180860.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001810e4",
+   "declaration": {
+    "line": 118,
+    "source": "include/game/display_animation.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001810e4",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave14/func_001810e4.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00181384",
+   "declaration": {
+    "line": 49,
+    "source": "include/game/object_pool.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00181384",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave12/func_00181384.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001838ec",
+   "declaration": {
+    "line": 70,
+    "source": "include/game/audio_tasks.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "The missing local preparation is the unchanged r0 result of immediately preceding func_00185de4; both canonical contracts are AudioTaskManager*. Retained original boundary facts and the strict C++ bridge establish the type."
+  },
+  {
+   "function": "func_001838ec",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave13/func_001838ec.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "The missing local preparation is the unchanged r0 result of immediately preceding func_00185de4; both canonical contracts are AudioTaskManager*. Retained original boundary facts and the strict C++ bridge establish the type."
+  },
+  {
+   "function": "func_001861ec",
+   "declaration": {
+    "line": 417,
+    "source": "include/game/archive.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r3"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001861ec",
+   "declaration": {
+    "line": 8,
+    "source": "src/retries/func_001861ec_helper.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r3"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0018eef0",
+   "declaration": {
+    "line": 172,
+    "source": "include/game/sound_track.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0018eef0",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave13/func_0018eef0.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_0018fa44",
+   "declaration": {
+    "line": 71,
+    "source": "include/game/service_state.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00195e64",
+   "declaration": {
+    "line": 61,
+    "source": "include/game/applet.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_00195e64",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave14/func_00195e64.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001c4478",
+   "declaration": {
+    "line": 68,
+    "source": "include/game/audio.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001c4484",
+   "declaration": {
+    "line": 69,
+    "source": "include/game/audio.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001c5970",
+   "declaration": {
+    "line": 5,
+    "source": "src/wave8/func_001c5970.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001c59fc",
+   "declaration": {
+    "line": 60,
+    "source": "include/game/layout.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001c59fc",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave8/func_001c59fc.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001cd904",
+   "declaration": {
+    "line": 179,
+    "source": "include/game/resource_font.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001cd904",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave12/func_001cd904.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001cf6dc",
+   "declaration": {
+    "line": 188,
+    "source": "include/game/layout_draw.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001cfd9c",
+   "declaration": {
+    "line": 183,
+    "source": "include/game/resource_font.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001cfd9c",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave12/func_001cfd9c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d2b80",
+   "declaration": {
+    "line": 64,
+    "source": "include/game/audio.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d2b80",
+   "declaration": {
+    "line": 3,
+    "source": "src/wave12/func_001d2b80.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d2e04",
+   "declaration": {
+    "line": 141,
+    "source": "include/game/font_resource.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d2e04",
+   "declaration": {
+    "line": 4,
+    "source": "src/wave12/func_001d2e04.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d3d30",
+   "declaration": {
+    "line": 179,
+    "source": "include/game/sound_track.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d3d30",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave13/func_001d3d30.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d40a8",
+   "declaration": {
+    "line": 99,
+    "source": "include/game/sound_controller.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d4cf4",
+   "declaration": {
+    "line": 50,
+    "source": "include/game/scene_lifecycle.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d607c",
+   "declaration": {
+    "line": 153,
+    "source": "include/game/sound_track.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001d9198",
+   "declaration": {
+    "line": 181,
+    "source": "include/game/sound_track.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001da358",
+   "declaration": {
+    "line": 162,
+    "source": "include/game/sound_track.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001da358",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave12/func_001da358.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001dae98",
+   "declaration": {
+    "line": 144,
+    "source": "include/game/font_resource.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r2"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001dae98",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave12/func_001dae98.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r2"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001db0f8",
+   "declaration": {
+    "line": 107,
+    "source": "include/game/command_group.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001db0f8",
+   "declaration": {
+    "line": 4,
+    "source": "src/wave13/func_001db0f8.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "s0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001eb688",
+   "declaration": {
+    "line": 102,
+    "source": "include/game/item_text.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001eb688",
+   "declaration": {
+    "line": 2,
+    "source": "src/wave12/func_001eb688.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f1f80",
+   "declaration": {
+    "line": 135,
+    "source": "include/game/event_route.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f1f80",
+   "declaration": {
+    "line": 6,
+    "source": "src/wave14/func_001f1f80.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f23ec",
+   "declaration": {
+    "line": 109,
+    "source": "include/game/item_text.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f23ec",
+   "declaration": {
+    "line": 5,
+    "source": "src/wave12/func_001f23ec.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f23f8",
+   "declaration": {
+    "line": 136,
+    "source": "include/game/font_resource.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f23f8",
+   "declaration": {
+    "line": 4,
+    "source": "src/wave12/func_001f23f8.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f2e3c",
+   "declaration": {
+    "line": 126,
+    "source": "include/game/item_text.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  },
+  {
+   "function": "func_001f2e3c",
+   "declaration": {
+    "line": 9,
+    "source": "src/wave12/func_001f2e3c.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "disposition": "retain-input-with-qualification",
+   "adjudication": "Retain the declared input. The local unconsumed-write window excludes forwarded entry arguments, previous call results and earlier setup; its absence is not evidence for removing parameters. Existing matching definition/signature and the inherited independent qualifications are retained."
+  }
+ ],
+ "limitations": {
+  "arguments": "Explicit writes not subsequently read in the call-site basic block; calls consume/reset pending writes. Core and VFP allocation are independent (AAPCS-VFP).",
+  "callbacks": "Exact symbolic storage-location equality, including literal/data pointers and one-hop registration helpers; unmatched address references remain unresolved, never matched by field offset alone.",
+  "limits": "[INFERENCE] Register writes can be temporaries; preserved/forwarded arguments, stack arguments, cross-block results, virtual dispatch and general alias analysis are not proven. Excess declared inputs are notes, not failures. C++ is explicitly unchecked, as in interfaces.py.",
+  "results": "Explicit r0/s0 reads before overwrite, branch, return or another call in the continuation block; tail-call results are unknown.",
+  "rewrites": "Recorded inline_nop/inline_insn sites restore erased calls. Their callee identity is recorded-source evidence, not independently recoverable from the original image."
+ }
+}

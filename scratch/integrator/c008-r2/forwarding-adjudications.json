@@ -1,0 +1,1872 @@
+{
+ "initial_candidates": 59,
+ "final_candidates": 40,
+ "every_candidate_adjudicated": true,
+ "unresolved_confirmed_defects": 0,
+ "limits": "Remaining inference limits are explicitly retained; no candidate or no candidate is proof of a complete original contract.",
+ "rows": [
+  {
+   "phase": "initial",
+   "index": 1,
+   "caller": "func_0010b628",
+   "callee": "func_00192b44",
+   "site": "0x10b6d8",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_0021ab9c",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 2,
+   "caller": "func_00115040",
+   "callee": "func_001923d4",
+   "site": "0x11507c",
+   "parameter": 0,
+   "actual": "unsigned int",
+   "expected": "unsigned char",
+   "provenance": {
+    "parameter_of": "func_00115040",
+    "index": 0
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": "F02",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The endpoint and wrapper are byte-wide and signed-result coherent; accepted func_00115040 is also byte-wide so its original unchanged forwarding does not acquire a mask."
+  },
+  {
+   "phase": "initial",
+   "index": 3,
+   "caller": "func_001151b8",
+   "callee": "func_0012349c",
+   "site": "0x1151d0",
+   "parameter": 1,
+   "actual": "pointer to (pointer to (struct SharedMemory))",
+   "expected": "pointer to (unsigned int)",
+   "provenance": {
+    "parameter_of": "func_001151b8",
+    "index": 1
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": "S10",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The natural wrapper forwards SharedMemory**; the IPC output now has that canonical pointer-to-pointer type, and the handle output is CtrHandle*. The serialized address is converted once from its IPC word."
+  },
+  {
+   "phase": "initial",
+   "index": 4,
+   "caller": "func_00139358",
+   "callee": "func_00140bf0",
+   "site": "0x1393bc",
+   "parameter": 1,
+   "actual": "pointer to (array[4] of (unsigned int))",
+   "expected": "pointer to (unsigned int)",
+   "provenance": {
+    "base": {
+     "parameter_of": "func_00139358",
+     "index": 2
+    },
+    "offset": 4
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 5,
+   "caller": "func_00146070",
+   "callee": "func_0014856c",
+   "site": "0x146090",
+   "parameter": 0,
+   "actual": "pointer to (struct InputSessionContext)",
+   "expected": "pointer to (struct LazyStreamMutex)",
+   "provenance": {
+    "global": "bss_004b97ac",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S02",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "InputSessionContext owns active at 0 and StreamMutex at 0x34. The old selected word is that mutex depth, not another owner; the lazy initializer and accepted resetter now use the same canonical type."
+  },
+  {
+   "phase": "initial",
+   "index": 6,
+   "caller": "func_00148358",
+   "callee": "func_00180558",
+   "site": "0x148368",
+   "parameter": 1,
+   "actual": "signed char",
+   "expected": "int",
+   "provenance": {
+    "parameter_of": "func_00148358",
+    "index": 0
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "initial",
+   "index": 7,
+   "caller": "func_0014aaf4",
+   "callee": "func_0017fd68",
+   "site": "0x14ab0c",
+   "parameter": 0,
+   "actual": "pointer to (struct DisplayPane)",
+   "expected": "pointer to (struct PaneMaterialView)",
+   "provenance": {
+    "loaded_from": {
+     "base": {
+      "loaded_from": {
+       "base": {
+        "parameter_of": "func_0014aaf4",
+        "index": 0
+       },
+       "offset": 148
+      }
+     },
+     "offset": 52
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S07",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "All direct pane material APIs and shared binding fields now use canonical DisplayPane. Its material-bearing view exposes the observed +0x13c field; obsolete PaneMaterialView and casts are gone."
+  },
+  {
+   "phase": "initial",
+   "index": 8,
+   "caller": "func_0014ab30",
+   "callee": "func_0017fd68",
+   "site": "0x14ab40",
+   "parameter": 0,
+   "actual": "pointer to (struct DisplayPane)",
+   "expected": "pointer to (struct PaneMaterialView)",
+   "provenance": {
+    "loaded_from": {
+     "base": {
+      "loaded_from": {
+       "base": {
+        "parameter_of": "func_0014ab30",
+        "index": 0
+       },
+       "offset": 148
+      }
+     },
+     "offset": 52
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S07",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "All direct pane material APIs and shared binding fields now use canonical DisplayPane. Its material-bearing view exposes the observed +0x13c field; obsolete PaneMaterialView and casts are gone."
+  },
+  {
+   "phase": "initial",
+   "index": 9,
+   "caller": "func_0014eec8",
+   "callee": "func_00151a1c",
+   "site": "0x14ef54",
+   "parameter": 0,
+   "actual": "pointer to (struct SoundSubsystem)",
+   "expected": "pointer to (const struct AudioLinearRamp)",
+   "provenance": {
+    "global": "bss_004b32c0",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S09",
+   "disposition": "resolved-explicit-first-member",
+   "adjudication": "SoundSubsystem now explicitly contains the observed master AudioLinearRamp at offset zero, including the existing status bytes. The typed bridge passes &bss_004b32c0.master_volume. A zero-offset provenance token alone cannot distinguish an object address from this legitimate member address."
+  },
+  {
+   "phase": "initial",
+   "index": 10,
+   "caller": "func_0014f114",
+   "callee": "func_00151a1c",
+   "site": "0x14f1a8",
+   "parameter": 0,
+   "actual": "pointer to (struct SoundSubsystem)",
+   "expected": "pointer to (const struct AudioLinearRamp)",
+   "provenance": {
+    "global": "bss_004b32c0",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S09",
+   "disposition": "resolved-explicit-first-member",
+   "adjudication": "SoundSubsystem now explicitly contains the observed master AudioLinearRamp at offset zero, including the existing status bytes. The typed bridge passes &bss_004b32c0.master_volume. A zero-offset provenance token alone cannot distinguish an object address from this legitimate member address."
+  },
+  {
+   "phase": "initial",
+   "index": 11,
+   "caller": "func_00150570",
+   "callee": "func_00183614",
+   "site": "0x1505e8",
+   "parameter": 2,
+   "actual": "unsigned char",
+   "expected": "pointer to (void)",
+   "provenance": {
+    "parameter_of": "func_00150570",
+    "index": 1
+   },
+   "candidate": "pointer_value_role_mismatch",
+   "finding": null,
+   "disposition": "qualified-scalar-callback-cookie",
+   "adjudication": "func_00150570 explicitly encodes its channel index as the opaque void* callback cookie on the pinned 32-bit ABI. It makes no claim that the integer is an object pointer. [INFERENCE] the callback cookie role remains descriptive."
+  },
+  {
+   "phase": "initial",
+   "index": 12,
+   "caller": "func_00151cf8",
+   "callee": "func_0015341c",
+   "site": "0x151d3c",
+   "parameter": 2,
+   "actual": "signed char",
+   "expected": "int",
+   "provenance": {
+    "parameter_of": "func_00151cf8",
+    "index": 1
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "initial",
+   "index": 13,
+   "caller": "func_001536c8",
+   "callee": "func_00154224",
+   "site": "0x15378c",
+   "parameter": 0,
+   "actual": "pointer to (struct HandleManager)",
+   "expected": "pointer to (struct AudioChannelArray)",
+   "provenance": {
+    "global": "bss_004b6888",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S03",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "Use the canonical HandleManager global owner and its 24 channel pointers at 0x18dc; no AudioChannelArray shadow type remains."
+  },
+  {
+   "phase": "initial",
+   "index": 14,
+   "caller": "func_0015dc14",
+   "callee": "func_0010083c",
+   "site": "0x15dc44",
+   "parameter": 1,
+   "actual": "unsigned short",
+   "expected": "unsigned int",
+   "provenance": {
+    "return_of": "func_001f15e0",
+    "site": "0x15dc24"
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "initial",
+   "index": 15,
+   "caller": "func_00161240",
+   "callee": "func_00177740",
+   "site": "0x161340",
+   "parameter": 0,
+   "actual": "pointer to (struct MenuItem)",
+   "expected": "pointer to (const struct ActionMetadata)",
+   "provenance": {
+    "return_of": "func_0017a49c",
+    "site": "0x161334"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S04",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The natural caller forwards the MenuItem getter result. Its two metadata words at 0x20/0x24 now live in the canonical TextTable prefix; no unrelated ActionMetadata pointer is required."
+  },
+  {
+   "phase": "initial",
+   "index": 16,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x1677c0",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 17,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x1677d4",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 18,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x1677e4",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 19,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x167824",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 20,
+   "caller": "func_00168e80",
+   "callee": "func_001eb688",
+   "site": "0x168ea8",
+   "parameter": 0,
+   "actual": "pointer to (struct MenuItem)",
+   "expected": "pointer to (const struct W12cItemTextList)",
+   "provenance": {
+    "return_of": "func_0017a49c",
+    "site": "0x168ea0"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S04",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "MenuItem already is the getter result. Its alternate TextTable at 0x108 is now represented in that canonical object, and both text helpers consume MenuItem directly."
+  },
+  {
+   "phase": "initial",
+   "index": 21,
+   "caller": "func_00168e80",
+   "callee": "func_001eb694",
+   "site": "0x168ec0",
+   "parameter": 0,
+   "actual": "pointer to (struct MenuItem)",
+   "expected": "pointer to (const struct W12cItemTextList)",
+   "provenance": {
+    "return_of": "func_0017a49c",
+    "site": "0x168ea0"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S04",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "Canonical MenuItem alternate_text replaces the cast to W12cItemTextList and its duplicate table view; count and entry offsets are preserved."
+  },
+  {
+   "phase": "initial",
+   "index": 22,
+   "caller": "func_0016b6a4",
+   "callee": "func_0016b80c",
+   "site": "0x16b6c0",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2ec",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 23,
+   "caller": "func_0016b6a4",
+   "callee": "func_0016b860",
+   "site": "0x16b708",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 24,
+   "caller": "func_00178154",
+   "callee": "func_001dd4f8",
+   "site": "0x178da8",
+   "parameter": 0,
+   "actual": "pointer to (struct ItemPageSet)",
+   "expected": "pointer to (const struct W12cSelectionDescriptor)",
+   "provenance": {
+    "loaded_from": {
+     "global": "data_0023ecf4",
+     "form": "address"
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S05",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The forwarded data_0023ecf4 value is ItemPageSet*. Its signed variant/group bytes are now exposed in that canonical prefix, replacing the unrelated descriptor type."
+  },
+  {
+   "phase": "initial",
+   "index": 25,
+   "caller": "func_001790a8",
+   "callee": "func_001eb688",
+   "site": "0x1790d0",
+   "parameter": 0,
+   "actual": "pointer to (struct MenuItem)",
+   "expected": "pointer to (const struct W12cItemTextList)",
+   "provenance": {
+    "return_of": "func_0017a49c",
+    "site": "0x1790c8"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S04",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "MenuItem already is the getter result. Its alternate TextTable at 0x108 is now represented in that canonical object, and both text helpers consume MenuItem directly."
+  },
+  {
+   "phase": "initial",
+   "index": 26,
+   "caller": "func_001790a8",
+   "callee": "func_001eb694",
+   "site": "0x1790e8",
+   "parameter": 0,
+   "actual": "pointer to (struct MenuItem)",
+   "expected": "pointer to (const struct W12cItemTextList)",
+   "provenance": {
+    "return_of": "func_0017a49c",
+    "site": "0x1790c8"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S04",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "Canonical MenuItem alternate_text replaces the cast to W12cItemTextList and its duplicate table view; count and entry offsets are preserved."
+  },
+  {
+   "phase": "initial",
+   "index": 27,
+   "caller": "func_0017e198",
+   "callee": "func_00154f78",
+   "site": "0x17e23c",
+   "parameter": 0,
+   "actual": "pointer to (struct HandleManager)",
+   "expected": "pointer to (struct AudioPacketRouter)",
+   "provenance": {
+    "global": "bss_004b6888",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S03",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "Use the same HandleManager owner and channel field, not the nominally unrelated AudioPacketRouter."
+  },
+  {
+   "phase": "initial",
+   "index": 28,
+   "caller": "func_00181100",
+   "callee": "func_0017fda4",
+   "site": "0x181184",
+   "parameter": 0,
+   "actual": "pointer to (struct DisplayPane)",
+   "expected": "pointer to (struct PaneMaterialView)",
+   "provenance": {
+    "loaded_from": {
+     "base": {
+      "loaded_from": {
+       "base": {
+        "parameter_of": "func_00181100",
+        "index": 0
+       },
+       "offset": 148
+      }
+     },
+     "offset": 52
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S07",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The mutable DisplayPane material field and all related declarations/clients are canonical; the existing DisplayVertexPane vertices offset is preserved explicitly."
+  },
+  {
+   "phase": "initial",
+   "index": 29,
+   "caller": "func_00181100",
+   "callee": "func_0017fd68",
+   "site": "0x18118c",
+   "parameter": 0,
+   "actual": "pointer to (struct DisplayPane)",
+   "expected": "pointer to (struct PaneMaterialView)",
+   "provenance": {
+    "loaded_from": {
+     "base": {
+      "loaded_from": {
+       "base": {
+        "parameter_of": "func_00181100",
+        "index": 0
+       },
+       "offset": 148
+      }
+     },
+     "offset": 52
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S07",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "All direct pane material APIs and shared binding fields now use canonical DisplayPane. Its material-bearing view exposes the observed +0x13c field; obsolete PaneMaterialView and casts are gone."
+  },
+  {
+   "phase": "initial",
+   "index": 30,
+   "caller": "func_00181100",
+   "callee": "func_0017fd68",
+   "site": "0x1811a4",
+   "parameter": 0,
+   "actual": "pointer to (struct DisplayPane)",
+   "expected": "pointer to (struct PaneMaterialView)",
+   "provenance": {
+    "loaded_from": {
+     "base": {
+      "loaded_from": {
+       "base": {
+        "parameter_of": "func_00181100",
+        "index": 0
+       },
+       "offset": 148
+      }
+     },
+     "offset": 52
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S07",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "All direct pane material APIs and shared binding fields now use canonical DisplayPane. Its material-bearing view exposes the observed +0x13c field; obsolete PaneMaterialView and casts are gone."
+  },
+  {
+   "phase": "initial",
+   "index": 31,
+   "caller": "func_001852f8",
+   "callee": "func_00193a6c",
+   "site": "0x185324",
+   "parameter": 0,
+   "actual": "pointer to (struct LockedExpHeap)",
+   "expected": "pointer to (struct HeapArena)",
+   "provenance": {
+    "loaded_from": {
+     "global": "data_00242c54",
+     "form": "address"
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S08",
+   "disposition": "resolved-explicit-containing-base",
+   "adjudication": "The free API consumes canonical ManagedExpHeap. Both HeapArena and LockedExpHeap explicitly contain that base at offset zero. All current clients pass &object.base, and the canonical bridge compiles; this is not a guessed owner cast."
+  },
+  {
+   "phase": "initial",
+   "index": 32,
+   "caller": "func_00195ec4",
+   "callee": "func_0012e560",
+   "site": "0x195ecc",
+   "parameter": 0,
+   "actual": "pointer to (struct StreamMutex)",
+   "expected": "pointer to (struct StreamCriticalSection)",
+   "provenance": {
+    "parameter_of": "func_00195ec4",
+    "index": 0
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The initializer explicitly passes &mutex->critical. StreamCriticalSection is the first real member of StreamMutex; source and header agree."
+  },
+  {
+   "phase": "initial",
+   "index": 33,
+   "caller": "func_001cd070",
+   "callee": "func_0016b860",
+   "site": "0x1cd1ac",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 34,
+   "caller": "func_001cd070",
+   "callee": "func_0016b860",
+   "site": "0x1cd1b8",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 35,
+   "caller": "func_001cd070",
+   "callee": "func_0016b80c",
+   "site": "0x1cd23c",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2ec",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 36,
+   "caller": "func_001cd070",
+   "callee": "func_0016b860",
+   "site": "0x1cd288",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 37,
+   "caller": "func_001cd904",
+   "callee": "func_00191154",
+   "site": "0x1cd910",
+   "parameter": 2,
+   "actual": "pointer to (struct AnimationBinding)",
+   "expected": "pointer to (struct PoolLink)",
+   "provenance": {
+    "parameter_of": "func_001cd904",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The callers pass &binding->link, a real first PoolLink member of AnimationBinding. Symbolic offset zero is not a nominal pointer cast in the C source."
+  },
+  {
+   "phase": "initial",
+   "index": 38,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b860",
+   "site": "0x1cdbc8",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 39,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b860",
+   "site": "0x1cdbd4",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 40,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b80c",
+   "site": "0x1cdc40",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2ec",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 41,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b860",
+   "site": "0x1cdc8c",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 42,
+   "caller": "func_001cf504",
+   "callee": "func_001da0fc",
+   "site": "0x1cf530",
+   "parameter": 0,
+   "actual": "pointer to (struct LayoutDrawState)",
+   "expected": "pointer to (struct LayoutParameterBase)",
+   "provenance": {
+    "parameter_of": "func_001cf504",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "canonical-C++-base-conversion",
+   "adjudication": "layout_draw.h explicitly declares LayoutDrawState : LayoutParameterBase. Its valid primary-base conversion is not modeled by the C-only canonical type index; native C++ headers and definitions compile."
+  },
+  {
+   "phase": "initial",
+   "index": 43,
+   "caller": "func_001cf504",
+   "callee": "func_0017a558",
+   "site": "0x1cf660",
+   "parameter": 0,
+   "actual": "pointer to (struct LayoutDrawState)",
+   "expected": "pointer to (struct LayoutParameterBase)",
+   "provenance": {
+    "parameter_of": "func_001cf504",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "canonical-C++-base-conversion",
+   "adjudication": "layout_draw.h explicitly declares LayoutDrawState : LayoutParameterBase. Its valid primary-base conversion is not modeled by the C-only canonical type index; native C++ headers and definitions compile."
+  },
+  {
+   "phase": "initial",
+   "index": 44,
+   "caller": "func_001cf504",
+   "callee": "func_0017a558",
+   "site": "0x1cf674",
+   "parameter": 0,
+   "actual": "pointer to (struct LayoutDrawState)",
+   "expected": "pointer to (struct LayoutParameterBase)",
+   "provenance": {
+    "parameter_of": "func_001cf504",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "canonical-C++-base-conversion",
+   "adjudication": "layout_draw.h explicitly declares LayoutDrawState : LayoutParameterBase. Its valid primary-base conversion is not modeled by the C-only canonical type index; native C++ headers and definitions compile."
+  },
+  {
+   "phase": "initial",
+   "index": 45,
+   "caller": "func_001cfd9c",
+   "callee": "func_00191154",
+   "site": "0x1cfda8",
+   "parameter": 2,
+   "actual": "pointer to (struct AnimationBinding)",
+   "expected": "pointer to (struct PoolLink)",
+   "provenance": {
+    "parameter_of": "func_001cfd9c",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The callers pass &binding->link, a real first PoolLink member of AnimationBinding. Symbolic offset zero is not a nominal pointer cast in the C source."
+  },
+  {
+   "phase": "initial",
+   "index": 46,
+   "caller": "func_001d3c78",
+   "callee": "func_001f47b4",
+   "site": "0x1d3cd0",
+   "parameter": 0,
+   "actual": "struct SoundWaveReader",
+   "expected": "pointer to (const struct SoundWaveFile)",
+   "provenance": {
+    "loaded_from": {
+     "parameter_of": "func_001d3c78",
+     "index": 0
+    }
+   },
+   "candidate": "pointer_value_role_mismatch",
+   "finding": null,
+   "disposition": "analysis-fix-first-member-load",
+   "adjudication": "The initial model labeled a word load from the object start with the whole enclosing record. Actual source loads the first pointer field (file or channel[0]); the final model resolves that member and the candidate disappears."
+  },
+  {
+   "phase": "initial",
+   "index": 47,
+   "caller": "func_001d40a8",
+   "callee": "func_001d0164",
+   "site": "0x1d40e0",
+   "parameter": 0,
+   "actual": "pointer to (struct FileSoundController001d40a8)",
+   "expected": "pointer to (struct ResourceState001d0164)",
+   "provenance": {
+    "parameter_of": "func_001d40a8",
+    "index": 0
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "FileSoundController001d40a8 explicitly embeds ResourceState001d0164 as base, and the source passes &state->base. No unrelated owner is substituted."
+  },
+  {
+   "phase": "initial",
+   "index": 48,
+   "caller": "func_001d40a8",
+   "callee": "func_001d017c",
+   "site": "0x1d411c",
+   "parameter": 0,
+   "actual": "pointer to (struct FileSoundController001d40a8)",
+   "expected": "pointer to (struct ResourceState001d0164)",
+   "provenance": {
+    "parameter_of": "func_001d40a8",
+    "index": 0
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "FileSoundController001d40a8 explicitly embeds ResourceState001d0164 as base, and the source passes &state->base. No unrelated owner is substituted."
+  },
+  {
+   "phase": "initial",
+   "index": 49,
+   "caller": "func_001d4cf4",
+   "callee": "func_0016a27c",
+   "site": "0x1d4d34",
+   "parameter": 1,
+   "actual": "_Bool",
+   "expected": "int",
+   "provenance": {
+    "parameter_of": "func_001d4cf4",
+    "index": 1
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "initial",
+   "index": 50,
+   "caller": "func_001d9090",
+   "callee": "func_001d607c",
+   "site": "0x1d90ac",
+   "parameter": 0,
+   "actual": "pointer to (struct FreeListNode)",
+   "expected": "pointer to (struct SoundTrack)",
+   "provenance": {
+    "return_of": "func_0017dfdc",
+    "site": "0x1d90a0"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "qualified-recycled-construction-storage",
+   "adjudication": "The free-list pop yields allocation storage, immediately used by the matching track initializer and its base initializer before track fields are accessed. This is storage reuse for construction, not forwarding a live unrelated owner. [INFERENCE] historical class/lifetime spelling remains qualified."
+  },
+  {
+   "phase": "initial",
+   "index": 51,
+   "caller": "func_001d9580",
+   "callee": "func_001d4864",
+   "site": "0x1d95fc",
+   "parameter": 1,
+   "actual": "unsigned char",
+   "expected": "int",
+   "provenance": {
+    "return_of": "func_001f2f2c",
+    "site": "0x1d95ec"
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "initial",
+   "index": 52,
+   "caller": "func_001e6f40",
+   "callee": "func_001dbcb0",
+   "site": "0x1e707c",
+   "parameter": 2,
+   "actual": "void",
+   "expected": "int",
+   "provenance": {
+    "loaded_from": {
+     "return_of": "func_0019ffa8",
+     "site": "0x1e6fd0"
+    }
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "analysis-fix-void-storage-load",
+   "adjudication": "The initial model incorrectly treated a load through untyped allocation storage as a C void value. The corrected model leaves it unknown; no typed producer/consumer conflict is proved."
+  },
+  {
+   "phase": "initial",
+   "index": 53,
+   "caller": "func_001f2700",
+   "callee": "func_001f1ad0",
+   "site": "0x1f272c",
+   "parameter": 0,
+   "actual": "pointer to (const struct SoundOptionalParameters)",
+   "expected": "pointer to (const unsigned int)",
+   "provenance": {
+    "return_of": "func_001f1904",
+    "site": "0x1f2718"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The source explicitly passes &parameters->flags, the first unsigned word of SoundOptionalParameters. Zero-offset provenance elides that member selection; no object-owner retyping occurs."
+  },
+  {
+   "phase": "initial",
+   "index": 54,
+   "caller": "func_001f2700",
+   "callee": "func_001f1934",
+   "site": "0x1f2750",
+   "parameter": 2,
+   "actual": "pointer to (array[2] of (unsigned char))",
+   "expected": "pointer to (unsigned char)",
+   "provenance": {
+    "base": {
+     "parameter_of": "func_001f2700",
+     "index": 1
+    },
+    "offset": 12
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "initial",
+   "index": 55,
+   "caller": "func_001f2700",
+   "callee": "func_001f1910",
+   "site": "0x1f2780",
+   "parameter": 0,
+   "actual": "pointer to (const struct SoundOptionalParameters)",
+   "expected": "pointer to (const unsigned int)",
+   "provenance": {
+    "return_of": "func_001f1904",
+    "site": "0x1f2718"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The source explicitly passes &parameters->flags, the first unsigned word of SoundOptionalParameters. Zero-offset provenance elides that member selection; no object-owner retyping occurs."
+  },
+  {
+   "phase": "initial",
+   "index": 56,
+   "caller": "func_001f2b98",
+   "callee": "func_001f22ac",
+   "site": "0x1f2ba0",
+   "parameter": 0,
+   "actual": "pointer to (const struct ArchiveResourceTable)",
+   "expected": "pointer to (const struct W12cArchiveTables)",
+   "provenance": {
+    "loaded_from": {
+     "base": {
+      "parameter_of": "func_001f2b98",
+      "index": 0
+     },
+     "offset": 60
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S06",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "ArchiveResourceTable is already the table member type. The helper now reads its canonical file_table_offset and the caller no longer casts it to W12cArchiveTables."
+  },
+  {
+   "phase": "initial",
+   "index": 57,
+   "caller": "func_001f2bac",
+   "callee": "func_001f22c4",
+   "site": "0x1f2c78",
+   "parameter": 0,
+   "actual": "pointer to (const struct W12cSoundDetail)",
+   "expected": "pointer to (const struct BinaryReferenceBlock)",
+   "provenance": {
+    "return_of": "func_001f23ec",
+    "site": "0x1f2bf8"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S11",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The direct helper now consumes W12cSoundDetail*, completing its observed RelativeReference prefix instead of assigning another unrelated block identity to the getter result."
+  },
+  {
+   "phase": "initial",
+   "index": 58,
+   "caller": "func_001f2bac",
+   "callee": "func_001f239c",
+   "site": "0x1f2cc4",
+   "parameter": 0,
+   "actual": "pointer to (const struct BankInstrumentInfo)",
+   "expected": "pointer to (const struct BinaryReferenceBlock)",
+   "provenance": {
+    "return_of": "func_001f23f8",
+    "site": "0x1f2c84"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S11",
+   "disposition": "resolved-canonical-contract",
+   "adjudication": "The bank helper now consumes canonical BankInstrumentInfo*, whose already-reserved prefix exposes the observed RelativeReference without changing its size or parameter offset."
+  },
+  {
+   "phase": "initial",
+   "index": 59,
+   "caller": "func_001f2ef8",
+   "callee": "func_001efcd0",
+   "site": "0x1f2f04",
+   "parameter": 0,
+   "actual": "const struct AudioVoiceGroup",
+   "expected": "pointer to (const struct AudioChannel)",
+   "provenance": {
+    "loaded_from": {
+     "parameter_of": "func_001f2ef8",
+     "index": 0
+    }
+   },
+   "candidate": "pointer_value_role_mismatch",
+   "finding": null,
+   "disposition": "analysis-fix-first-member-load",
+   "adjudication": "The initial model labeled a word load from the object start with the whole enclosing record. Actual source loads the first pointer field (file or channel[0]); the final model resolves that member and the candidate disappears."
+  },
+  {
+   "phase": "final",
+   "index": 1,
+   "caller": "func_0010b628",
+   "callee": "func_00192b44",
+   "site": "0x10b6d8",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_0021ab9c",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 2,
+   "caller": "func_00139358",
+   "callee": "func_00140bf0",
+   "site": "0x1393bc",
+   "parameter": 1,
+   "actual": "pointer to (array[4] of (unsigned int))",
+   "expected": "pointer to (unsigned int)",
+   "provenance": {
+    "base": {
+     "parameter_of": "func_00139358",
+     "index": 2
+    },
+    "offset": 4
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 3,
+   "caller": "func_00148358",
+   "callee": "func_00180558",
+   "site": "0x148368",
+   "parameter": 1,
+   "actual": "signed char",
+   "expected": "int",
+   "provenance": {
+    "parameter_of": "func_00148358",
+    "index": 0
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "final",
+   "index": 4,
+   "caller": "func_0014eec8",
+   "callee": "func_00151a1c",
+   "site": "0x14ef54",
+   "parameter": 0,
+   "actual": "pointer to (struct SoundSubsystem)",
+   "expected": "pointer to (const struct AudioLinearRamp)",
+   "provenance": {
+    "global": "bss_004b32c0",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S09",
+   "disposition": "explicit-first-member-base",
+   "adjudication": "SoundSubsystem now explicitly contains the observed master AudioLinearRamp at offset zero, including the existing status bytes. The typed bridge passes &bss_004b32c0.master_volume. A zero-offset provenance token alone cannot distinguish an object address from this legitimate member address."
+  },
+  {
+   "phase": "final",
+   "index": 5,
+   "caller": "func_0014f114",
+   "callee": "func_00151a1c",
+   "site": "0x14f1a8",
+   "parameter": 0,
+   "actual": "pointer to (struct SoundSubsystem)",
+   "expected": "pointer to (const struct AudioLinearRamp)",
+   "provenance": {
+    "global": "bss_004b32c0",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S09",
+   "disposition": "explicit-first-member-base",
+   "adjudication": "SoundSubsystem now explicitly contains the observed master AudioLinearRamp at offset zero, including the existing status bytes. The typed bridge passes &bss_004b32c0.master_volume. A zero-offset provenance token alone cannot distinguish an object address from this legitimate member address."
+  },
+  {
+   "phase": "final",
+   "index": 6,
+   "caller": "func_00150570",
+   "callee": "func_00183614",
+   "site": "0x1505e8",
+   "parameter": 2,
+   "actual": "unsigned char",
+   "expected": "pointer to (void)",
+   "provenance": {
+    "parameter_of": "func_00150570",
+    "index": 1
+   },
+   "candidate": "pointer_value_role_mismatch",
+   "finding": null,
+   "disposition": "qualified-scalar-callback-cookie",
+   "adjudication": "func_00150570 explicitly encodes its channel index as the opaque void* callback cookie on the pinned 32-bit ABI. It makes no claim that the integer is an object pointer. [INFERENCE] the callback cookie role remains descriptive."
+  },
+  {
+   "phase": "final",
+   "index": 7,
+   "caller": "func_00151cf8",
+   "callee": "func_0015341c",
+   "site": "0x151d3c",
+   "parameter": 2,
+   "actual": "signed char",
+   "expected": "int",
+   "provenance": {
+    "parameter_of": "func_00151cf8",
+    "index": 1
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "final",
+   "index": 8,
+   "caller": "func_0015dc14",
+   "callee": "func_0010083c",
+   "site": "0x15dc44",
+   "parameter": 1,
+   "actual": "unsigned short",
+   "expected": "unsigned int",
+   "provenance": {
+    "return_of": "func_001f15e0",
+    "site": "0x15dc24"
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "final",
+   "index": 9,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x1677c0",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 10,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x1677d4",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 11,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x1677e4",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 12,
+   "caller": "func_001677a4",
+   "callee": "func_00193110",
+   "site": "0x167824",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const char))",
+   "expected": "pointer to (const char)",
+   "provenance": {
+    "global": "data_002232d5",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 13,
+   "caller": "func_0016b6a4",
+   "callee": "func_0016b80c",
+   "site": "0x16b6c0",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2ec",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 14,
+   "caller": "func_0016b6a4",
+   "callee": "func_0016b860",
+   "site": "0x16b708",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 15,
+   "caller": "func_001852f8",
+   "callee": "func_00193a6c",
+   "site": "0x185324",
+   "parameter": 0,
+   "actual": "pointer to (struct LockedExpHeap)",
+   "expected": "pointer to (struct ManagedExpHeap)",
+   "provenance": {
+    "loaded_from": {
+     "global": "data_00242c54",
+     "form": "address"
+    }
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S08",
+   "disposition": "explicit-first-member-base",
+   "adjudication": "The free API consumes canonical ManagedExpHeap. Both HeapArena and LockedExpHeap explicitly contain that base at offset zero. All current clients pass &object.base, and the canonical bridge compiles; this is not a guessed owner cast."
+  },
+  {
+   "phase": "final",
+   "index": 16,
+   "caller": "func_00195ec4",
+   "callee": "func_0012e560",
+   "site": "0x195ecc",
+   "parameter": 0,
+   "actual": "pointer to (struct StreamMutex)",
+   "expected": "pointer to (struct StreamCriticalSection)",
+   "provenance": {
+    "parameter_of": "func_00195ec4",
+    "index": 0
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The initializer explicitly passes &mutex->critical. StreamCriticalSection is the first real member of StreamMutex; source and header agree."
+  },
+  {
+   "phase": "final",
+   "index": 17,
+   "caller": "func_00197220",
+   "callee": "func_0019dc20",
+   "site": "0x1973bc",
+   "parameter": 0,
+   "actual": "unsigned char",
+   "expected": "pointer to (void)",
+   "provenance": {
+    "loaded_from": {
+     "global": "bss_0049cbd0",
+     "form": "address"
+    }
+   },
+   "candidate": "pointer_value_role_mismatch",
+   "finding": null,
+   "disposition": "analysis-limit-raw-storage-word",
+   "adjudication": "The canonical root is an opaque unsigned-char array, while the symbolic load model handles word loads. Inferring an 8-bit scalar producer from its first array element is unsound; no byte-to-pointer ABI conversion is established. The void* free contract is not narrowed or changed."
+  },
+  {
+   "phase": "final",
+   "index": 18,
+   "caller": "func_0019dc20",
+   "callee": "func_00193a6c",
+   "site": "0x19dc70",
+   "parameter": 0,
+   "actual": "pointer to (struct HeapArena)",
+   "expected": "pointer to (struct ManagedExpHeap)",
+   "provenance": {
+    "global": "bss_00495ad0",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S08",
+   "disposition": "explicit-first-member-base",
+   "adjudication": "The free API consumes canonical ManagedExpHeap. Both HeapArena and LockedExpHeap explicitly contain that base at offset zero. All current clients pass &object.base, and the canonical bridge compiles; this is not a guessed owner cast."
+  },
+  {
+   "phase": "final",
+   "index": 19,
+   "caller": "func_001cd070",
+   "callee": "func_0016b860",
+   "site": "0x1cd1ac",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 20,
+   "caller": "func_001cd070",
+   "callee": "func_0016b860",
+   "site": "0x1cd1b8",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 21,
+   "caller": "func_001cd070",
+   "callee": "func_0016b80c",
+   "site": "0x1cd23c",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2ec",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 22,
+   "caller": "func_001cd070",
+   "callee": "func_0016b860",
+   "site": "0x1cd288",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 23,
+   "caller": "func_001cd904",
+   "callee": "func_00191154",
+   "site": "0x1cd910",
+   "parameter": 2,
+   "actual": "pointer to (struct AnimationBinding)",
+   "expected": "pointer to (struct PoolLink)",
+   "provenance": {
+    "parameter_of": "func_001cd904",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The callers pass &binding->link, a real first PoolLink member of AnimationBinding. Symbolic offset zero is not a nominal pointer cast in the C source."
+  },
+  {
+   "phase": "final",
+   "index": 24,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b860",
+   "site": "0x1cdbc8",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 25,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b860",
+   "site": "0x1cdbd4",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 26,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b80c",
+   "site": "0x1cdc40",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2ec",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 27,
+   "caller": "func_001cdb10",
+   "callee": "func_0016b860",
+   "site": "0x1cdc8c",
+   "parameter": 1,
+   "actual": "pointer to (array[] of (const unsigned short))",
+   "expected": "pointer to (const unsigned short)",
+   "provenance": {
+    "global": "data_001cd2e4",
+    "form": "address"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 28,
+   "caller": "func_001cf504",
+   "callee": "func_001da0fc",
+   "site": "0x1cf530",
+   "parameter": 0,
+   "actual": "pointer to (struct LayoutDrawState)",
+   "expected": "pointer to (struct LayoutParameterBase)",
+   "provenance": {
+    "parameter_of": "func_001cf504",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "canonical-C++-base-conversion",
+   "adjudication": "layout_draw.h explicitly declares LayoutDrawState : LayoutParameterBase. Its valid primary-base conversion is not modeled by the C-only canonical type index; native C++ headers and definitions compile."
+  },
+  {
+   "phase": "final",
+   "index": 29,
+   "caller": "func_001cf504",
+   "callee": "func_0017a558",
+   "site": "0x1cf660",
+   "parameter": 0,
+   "actual": "pointer to (struct LayoutDrawState)",
+   "expected": "pointer to (struct LayoutParameterBase)",
+   "provenance": {
+    "parameter_of": "func_001cf504",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "canonical-C++-base-conversion",
+   "adjudication": "layout_draw.h explicitly declares LayoutDrawState : LayoutParameterBase. Its valid primary-base conversion is not modeled by the C-only canonical type index; native C++ headers and definitions compile."
+  },
+  {
+   "phase": "final",
+   "index": 30,
+   "caller": "func_001cf504",
+   "callee": "func_0017a558",
+   "site": "0x1cf674",
+   "parameter": 0,
+   "actual": "pointer to (struct LayoutDrawState)",
+   "expected": "pointer to (struct LayoutParameterBase)",
+   "provenance": {
+    "parameter_of": "func_001cf504",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "canonical-C++-base-conversion",
+   "adjudication": "layout_draw.h explicitly declares LayoutDrawState : LayoutParameterBase. Its valid primary-base conversion is not modeled by the C-only canonical type index; native C++ headers and definitions compile."
+  },
+  {
+   "phase": "final",
+   "index": 31,
+   "caller": "func_001cfd9c",
+   "callee": "func_00191154",
+   "site": "0x1cfda8",
+   "parameter": 2,
+   "actual": "pointer to (struct AnimationBinding)",
+   "expected": "pointer to (struct PoolLink)",
+   "provenance": {
+    "parameter_of": "func_001cfd9c",
+    "index": 1
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The callers pass &binding->link, a real first PoolLink member of AnimationBinding. Symbolic offset zero is not a nominal pointer cast in the C source."
+  },
+  {
+   "phase": "final",
+   "index": 32,
+   "caller": "func_001d40a8",
+   "callee": "func_001d0164",
+   "site": "0x1d40e0",
+   "parameter": 0,
+   "actual": "pointer to (struct FileSoundController001d40a8)",
+   "expected": "pointer to (struct ResourceState001d0164)",
+   "provenance": {
+    "parameter_of": "func_001d40a8",
+    "index": 0
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "FileSoundController001d40a8 explicitly embeds ResourceState001d0164 as base, and the source passes &state->base. No unrelated owner is substituted."
+  },
+  {
+   "phase": "final",
+   "index": 33,
+   "caller": "func_001d40a8",
+   "callee": "func_001d017c",
+   "site": "0x1d411c",
+   "parameter": 0,
+   "actual": "pointer to (struct FileSoundController001d40a8)",
+   "expected": "pointer to (struct ResourceState001d0164)",
+   "provenance": {
+    "parameter_of": "func_001d40a8",
+    "index": 0
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "FileSoundController001d40a8 explicitly embeds ResourceState001d0164 as base, and the source passes &state->base. No unrelated owner is substituted."
+  },
+  {
+   "phase": "final",
+   "index": 34,
+   "caller": "func_001d4cf4",
+   "callee": "func_0016a27c",
+   "site": "0x1d4d34",
+   "parameter": 1,
+   "actual": "_Bool",
+   "expected": "int",
+   "provenance": {
+    "parameter_of": "func_001d4cf4",
+    "index": 1
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "final",
+   "index": 35,
+   "caller": "func_001d9090",
+   "callee": "func_001d607c",
+   "site": "0x1d90ac",
+   "parameter": 0,
+   "actual": "pointer to (struct FreeListNode)",
+   "expected": "pointer to (struct SoundTrack)",
+   "provenance": {
+    "return_of": "func_0017dfdc",
+    "site": "0x1d90a0"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": null,
+   "disposition": "qualified-recycled-construction-storage",
+   "adjudication": "The free-list pop yields allocation storage, immediately used by the matching track initializer and its base initializer before track fields are accessed. This is storage reuse for construction, not forwarding a live unrelated owner. [INFERENCE] historical class/lifetime spelling remains qualified."
+  },
+  {
+   "phase": "final",
+   "index": 36,
+   "caller": "func_001d9580",
+   "callee": "func_001d4864",
+   "site": "0x1d95fc",
+   "parameter": 1,
+   "actual": "unsigned char",
+   "expected": "int",
+   "provenance": {
+    "return_of": "func_001f2f2c",
+    "site": "0x1d95ec"
+   },
+   "candidate": "forwarded_scalar_width_change",
+   "finding": null,
+   "disposition": "value-preserving-integer-promotion",
+   "adjudication": "A byte/halfword/bool input or return is promoted to the wider formal integer. No value bits are discarded and the incoming narrow ABI already supplies the proper extension. This differs from the rejected full-word-to-ushort status contract."
+  },
+  {
+   "phase": "final",
+   "index": 37,
+   "caller": "func_001e37e0",
+   "callee": "func_00193a6c",
+   "site": "0x1e37e4",
+   "parameter": 0,
+   "actual": "pointer to (struct HeapArena)",
+   "expected": "pointer to (struct ManagedExpHeap)",
+   "provenance": {
+    "global": "bss_00495ad0",
+    "form": "address"
+   },
+   "candidate": "nominal_owner_mismatch",
+   "finding": "S08",
+   "disposition": "explicit-first-member-base",
+   "adjudication": "The free API consumes canonical ManagedExpHeap. Both HeapArena and LockedExpHeap explicitly contain that base at offset zero. All current clients pass &object.base, and the canonical bridge compiles; this is not a guessed owner cast."
+  },
+  {
+   "phase": "final",
+   "index": 38,
+   "caller": "func_001f2700",
+   "callee": "func_001f1ad0",
+   "site": "0x1f272c",
+   "parameter": 0,
+   "actual": "pointer to (const struct SoundOptionalParameters)",
+   "expected": "pointer to (const unsigned int)",
+   "provenance": {
+    "return_of": "func_001f1904",
+    "site": "0x1f2718"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The source explicitly passes &parameters->flags, the first unsigned word of SoundOptionalParameters. Zero-offset provenance elides that member selection; no object-owner retyping occurs."
+  },
+  {
+   "phase": "final",
+   "index": 39,
+   "caller": "func_001f2700",
+   "callee": "func_001f1934",
+   "site": "0x1f2750",
+   "parameter": 2,
+   "actual": "pointer to (array[2] of (unsigned char))",
+   "expected": "pointer to (unsigned char)",
+   "provenance": {
+    "base": {
+     "parameter_of": "func_001f2700",
+     "index": 1
+    },
+    "offset": 12
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "array-to-first-element",
+   "adjudication": "The symbol or member is an array. Actual source passes its first element by ordinary array decay; the symbolic address model retained the array aggregate rather than the decayed element type."
+  },
+  {
+   "phase": "final",
+   "index": 40,
+   "caller": "func_001f2700",
+   "callee": "func_001f1910",
+   "site": "0x1f2780",
+   "parameter": 0,
+   "actual": "pointer to (const struct SoundOptionalParameters)",
+   "expected": "pointer to (const unsigned int)",
+   "provenance": {
+    "return_of": "func_001f1904",
+    "site": "0x1f2718"
+   },
+   "candidate": "pointee_value_type_mismatch",
+   "finding": null,
+   "disposition": "explicit-first-member-address",
+   "adjudication": "The source explicitly passes &parameters->flags, the first unsigned word of SoundOptionalParameters. Zero-offset provenance elides that member selection; no object-owner retyping occurs."
+  }
+ ]
+}

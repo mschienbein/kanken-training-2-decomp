@@ -2,7 +2,7 @@
 #include "game/archive.h"
 
 
-const void *func_001f239c(const struct BinaryReferenceBlock *block)
+const void *func_001f239c(const struct BankInstrumentInfo *block)
 {
     if (block->contents.type != 0x101)
         return 0;

@@ -10,8 +10,7 @@ unsigned short *func_001790a8(struct W12cPrimaryTextState *state)
 {
     struct ItemPageSet *set = data_0023ecf4;
     struct ItemPage *page = func_0017a4e8(set, state->page_index);
-    const struct W12cItemTextList *item =
-        (const struct W12cItemTextList *)func_0017a49c(page, state->item_index, 0);
+    const struct MenuItem *item = func_0017a49c(page, state->item_index, 0);
     int count = func_001eb688(item);
     int index;
     /* ORIGINAL BUG: page, item, and individual text pointers are not null-checked. */

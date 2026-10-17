@@ -12,7 +12,10 @@ struct ItemPage {
 };
 
 struct ItemPageSet {
-    unsigned char reserved00[0x10];
+    unsigned char reserved00;
+    signed char variant;
+    signed char group;
+    unsigned char reserved03[0x0d];
     int count;                          /* 0x10 */
     struct ItemPage **pages;                /* 0x14 */
 };
