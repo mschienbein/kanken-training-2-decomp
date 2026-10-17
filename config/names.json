@@ -33,6 +33,258 @@
     "__aeabi_vec_ctor_nocookie_nodtor": {
       "address": 1642956,
       "evidence": "scratch/integrator/runtime-helpers/REPORT.md: natural C++ member-array constructor at 0x0014d2e4 MATCH; unresolved without helper binding"
+    },
+    "__ARM_common_memcpy4_5": {
+      "address": 1586264,
+      "evidence": "scratch/authors/profiles/names.json: func_00185764 uses the five-word aligned copy helper; frozen SDK profile reproduces the whole function."
+    },
+    "_ZN14W11BaseCommandC1Ev": {
+      "address": 1549576,
+      "evidence": "Complete/base-object constructor aliases at 0x0017a508 reproduce the original base-vtable initializer under game."
+    },
+    "_ZN14W11BaseCommandC2Ev": {
+      "address": 1549576,
+      "evidence": "Complete/base-object constructor aliases at 0x0017a508 reproduce the original base-vtable initializer under game."
+    },
+    "_ZN18W11PositionCommandC1Ev": {
+      "address": 1817576,
+      "evidence": "Complete/base-object constructor aliases at 0x001bbbe8 reproduce the original default positioned-command initializer under game."
+    },
+    "_ZN18W11PositionCommandC2Ev": {
+      "address": 1817576,
+      "evidence": "Complete/base-object constructor aliases at 0x001bbbe8 reproduce the original default positioned-command initializer under game."
+    },
+    "_ZTV14W11BaseCommand": {
+      "address": 2242904,
+      "evidence": "Matching base constructor at 0x0017a508 installs this ARM ABI vtable address plus eight."
+    },
+    "_ZTV18W11PositionCommand": {
+      "address": 2242268,
+      "evidence": "Matching default constructor at 0x001bbbe8 installs this ARM ABI vtable address plus eight."
+    },
+    "_ZN11OwnedHandleD1Ev": {
+      "address": 1856188,
+      "evidence": "Initializer at 0x00205320 registers the handle destructor at 0x001c52bc; that destructor closes the first-word handle and returns the object."
+    },
+    "__aeabi_atexit": {
+      "address": 1461948,
+      "evidence": "Static initializer at 0x00205320 passes object 0x00242d80, destructor 0x001c52bc and image-base DSO handle to the empty registration stub at 0x00164ebc."
+    },
+    "__dso_handle": {
+      "address": 1048576,
+      "evidence": "Natural C++ global initialization at 0x00205320 matches in full with image base 0x00100000 as the __dso_handle argument to destructor registration."
+    },
+    "__sti___17_func_00205320_cpp_bbfb87fb": {
+      "address": 2118432,
+      "evidence": "Natural OwnedHandle static initialization at 0x00205320 matches in full under game, including compiler-generated destructor registration."
+    },
+    "_ZN2nw2ut24GetNextBinaryBlockHeaderEPNS0_16BinaryFileHeaderEPNS0_17BinaryBlockHeaderE": {
+      "address": 1336952,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_BinaryFileFormat.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8HeapBase10InitializeEjPvS2_t": {
+      "address": 1356868,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_HeapBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8HeapBase14FillFreeMemoryEPvj": {
+      "address": 1581420,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_HeapBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8HeapBase15FillAllocMemoryEPvj": {
+      "address": 1583896,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_HeapBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8HeapBase15FindContainHeapEPNS0_8LinkListIS1_Ll4EEEPKv": {
+      "address": 1575412,
+      "evidence": "Original relocation destination at 0x0014b488 in relocation-masked located _ZN2nw2ut8HeapBase10InitializeEjPvS2_t; complete source confirmation is recorded in match/ut_HeapBase/ut_HeapBase.result.json."
+    },
+    "_ZN2nw2ut8HeapBase8FinalizeEv": {
+      "address": 1337320,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_HeapBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8internal10g_RootListE": {
+      "address": 5124544,
+      "evidence": "Original relocation destination at 0x0014b4ac in relocation-masked located _ZN2nw2ut8HeapBase10InitializeEjPvS2_t; complete source confirmation is recorded in match/ut_HeapBase/ut_HeapBase.result.json."
+    },
+    "_ZN2nw2ut8internal12LinkListImpl5eraseENS2_8iteratorE": {
+      "address": 1642872,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_LinkList.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8internal12LinkListImpl5eraseENS2_8iteratorES3_": {
+      "address": 1596336,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_LinkList.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8internal12LinkListImpl5eraseEPNS0_12LinkListNodeE": {
+      "address": 1628264,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_LinkList.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut8internal12LinkListImpl6insertENS2_8iteratorEPNS0_12LinkListNodeE": {
+      "address": 1642836,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/ut/ut_LinkList.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw2ut9FrameHeap11FreeByStateEj": {
+      "address": 1306732,
+      "evidence": "Original relocation destination at 0x00125a98 in relocation-masked located _ZN2nw3snd8internal9FrameHeap9SaveStateEv; complete source confirmation is recorded in match/snd_FrameHeap/snd_FrameHeap.result.json."
+    },
+    "_ZN2nw2ut9FrameHeap11RecordStateEj": {
+      "address": 1306896,
+      "evidence": "Original relocation destination at 0x00125a68 in relocation-masked located _ZN2nw3snd8internal9FrameHeap9SaveStateEv; complete source confirmation is recorded in match/snd_FrameHeap/snd_FrameHeap.result.json."
+    },
+    "_ZN2nw3lyt11ARCFastOpenEPNS0_9ARCHandleEiPNS0_11ARCFileInfoE": {
+      "address": 1883076,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/lyt/lyt_Arc.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3lyt13ARCInitHandleEPvPNS0_9ARCHandleE": {
+      "address": 1323724,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/lyt/lyt_Arc.cpp at pinned NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; discovery JSON records invariant bits and scope; full match confirmation is recorded in RESULT.json."
+    },
+    "_ZN2nw3lyt13FontContainer10RegistFontEPKcPNS_4font4FontEb": {
+      "address": 1884240,
+      "evidence": "Original relocation destination at 0x001ccfc0 in relocation-masked located _ZN2nw3lyt19ArcResourceAccessor7GetFontEPKc; complete source confirmation is recorded in match/lyt_ArcResourceAccessor/lyt_ArcResourceAccessor.result.json."
+    },
+    "_ZN2nw3lyt13FontContainer14FindFontByNameEPKc": {
+      "address": 1884380,
+      "evidence": "Original relocation destination at 0x001ccf88 in relocation-masked located _ZN2nw3lyt19ArcResourceAccessor7GetFontEPKc; complete source confirmation is recorded in match/lyt_ArcResourceAccessor/lyt_ArcResourceAccessor.result.json."
+    },
+    "_ZN2nw3lyt16ResourceAccessorC2Ev": {
+      "address": 1323800,
+      "evidence": "Original relocation destination at 0x00140560 in relocation-masked located _ZN2nw3lyt19ArcResourceAccessorC1Ev; complete source confirmation is recorded in match/lyt_ArcResourceAccessor/lyt_ArcResourceAccessor.result.json."
+    },
+    "_ZN2nw3lyt19ArcResourceAccessor6AttachEPvPKc": {
+      "address": 1311988,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/lyt/lyt_ArcResourceAccessor.cpp at pinned NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; complete confirmation, or the remaining mismatch, is in RESULT.json."
+    },
+    "_ZN2nw3lyt19ArcResourceAccessor7GetFontEPKc": {
+      "address": 1888120,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/lyt/lyt_ArcResourceAccessor.cpp at pinned NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; complete confirmation, or the remaining mismatch, is in RESULT.json."
+    },
+    "_ZN2nw3lyt19ArcResourceAccessorC1Ev": {
+      "address": 1312092,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/lyt/lyt_ArcResourceAccessor.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3lyt19ArcResourceAccessorC2Ev": {
+      "address": 1312092,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/lyt/lyt_ArcResourceAccessor.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr10InitializeEf": {
+      "address": 1912096,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr10SetReleaseEi": {
+      "address": 1483268,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr11VOLUME_INITE": {
+      "address": 2231328,
+      "evidence": "Data-section base inferred consistently from original literals of located snd_CurveAdshr methods; match.py verifies the entire public data section, including this definition."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr18DecibelSquareTableE": {
+      "address": 2231332,
+      "evidence": "Data-section base inferred consistently from original literals of located snd_CurveAdshr methods; match.py verifies the entire public data section, including this definition."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr5ResetEf": {
+      "address": 1912168,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr6UpdateEi": {
+      "address": 1375492,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr7SetHoldEi": {
+      "address": 1483096,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr8SetDecayEi": {
+      "address": 1483128,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshr9SetAttackEi": {
+      "address": 1483248,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshrC1Ev": {
+      "address": 1912196,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal10CurveAdshrC2Ev": {
+      "address": 1912196,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal9FrameHeap10NewSectionEv": {
+      "address": 1595096,
+      "evidence": "Original relocation destination at 0x00125a7c in relocation-masked located _ZN2nw3snd8internal9FrameHeap9SaveStateEv; complete source confirmation is recorded in match/snd_FrameHeap/snd_FrameHeap.result.json."
+    },
+    "_ZN2nw3snd8internal9FrameHeap9SaveStateEv": {
+      "address": 1202780,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/snd/snd_FrameHeap.cpp at pinned NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; discovery JSON records invariant bits and scope; full match confirmation is recorded in RESULT.json."
+    },
+    "_ZN2nw3snd8internal9FrameHeapC1Ev": {
+      "address": 1341012,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_FrameHeap.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw3snd8internal9FrameHeapC2Ev": {
+      "address": 1341012,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_FrameHeap.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw4font11ResFontBase15GenTextureNamesEv": {
+      "address": 1945096,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/font/font_ResFontBase.cpp; public NW4C 15ddb5632db5a6f0d2f46e3827fc78df468684bd; full source outcome in RESULT.json."
+    },
+    "_ZN2nw4font11ResFontBase18DeleteTextureNamesEv": {
+      "address": 1945252,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/font/font_ResFontBase.cpp; public NW4C 15ddb5632db5a6f0d2f46e3827fc78df468684bd; full source outcome in RESULT.json."
+    },
+    "_ZN2nw4font11ResFontBase20RemoveResourceBufferEv": {
+      "address": 1945340,
+      "evidence": "Unique high-confidence relocation-masked fingerprint of sources/libraries/font/font_ResFontBase.cpp; public NW4C 15ddb5632db5a6f0d2f46e3827fc78df468684bd; full source outcome in RESULT.json."
+    },
+    "_ZN2nw4font11ResFontBaseC1Ev": {
+      "address": 1130104,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/font/font_ResFontBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw4font11ResFontBaseC2Ev": {
+      "address": 1130104,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/font/font_ResFontBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZN2nw4font8internal13TextureObject3SetEjPKNS0_4FontEPKvttt": {
+      "address": 1947084,
+      "evidence": "Original relocation destination at 0x001dae68 in relocation-masked located _ZN2nw4font11ResFontBase15GenTextureNamesEv; complete source confirmation is recorded in match/font_ResFontBase/font_ResFontBase.result.json."
+    },
+    "_ZNK2nw3snd8internal10CurveAdshr8GetValueEv": {
+      "address": 1382884,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/snd/snd_CurveAdshr.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv": {
+      "address": 2031624,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/font/font_ResFontBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv": {
+      "address": 2031640,
+      "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/font/font_ResFontBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
+    },
+    "_ZTVN2nw3lyt19ArcResourceAccessorE": {
+      "address": 2244896,
+      "evidence": "Original relocation destination at 0x001405a0 in relocation-masked located _ZN2nw3lyt19ArcResourceAccessorC1Ev; complete source confirmation is recorded in match/lyt_ArcResourceAccessor/lyt_ArcResourceAccessor.result.json."
+    },
+    "_ZTVN2nw4font11ResFontBaseE": {
+      "address": 2243792,
+      "evidence": "Original relocation destination at 0x00113ea8 in relocation-masked located _ZN2nw4font11ResFontBaseC1Ev; complete source confirmation is recorded in match/font_ResFontBase_ctor/font_ResFontBase_ctor.result.json."
+    },
+    "glDeleteTextures": {
+      "address": 1634524,
+      "evidence": "Original relocation destination at 0x001daee0 in relocation-masked located _ZN2nw4font11ResFontBase18DeleteTextureNamesEv; complete source confirmation is recorded in match/font_ResFontBase/font_ResFontBase.result.json."
+    },
+    "nngxUpdateBuffer": {
+      "address": 1636036,
+      "evidence": "Original relocation destination at 0x001dae94 in relocation-masked located _ZN2nw4font11ResFontBase15GenTextureNamesEv; complete source confirmation is recorded in match/font_ResFontBase/font_ResFontBase.result.json."
+    },
+    "_ZN11HeapStorage10initializeEPvj": {
+      "address": 1340880,
+      "evidence": "The catalogued func_001475d0 initializes HeapStorage from a writable memory region and size, replacing its owned heap."
+    },
+    "strncmp": {
+      "address": 1636448,
+      "evidence": "0x18f860 is a bounded NUL-terminated string comparison with aligned word and byte fallback paths; callers compare fixed names and string prefixes."
     }
   }
 }
