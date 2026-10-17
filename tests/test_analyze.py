@@ -1030,12 +1030,183 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(result["stats"]["bytes_by_range_kind"]["unknown"], 4)
         self.assertIn({"address": BASE, "issue": "unexplained_function_bytes"}, result["anomalies"])
 
+    def test_leading_literal_setup_recovers_start_and_trailing_pool(self) -> None:
+        result = self.catalogue([0xE12FFF1E, 0xE59F500C, 0xE24DD004, 0xE1A00005,
+                                 0xE28DD004, 0xE12FFF1E, 0x12345678])
+        function = result["functions"][1]
+        self.assertEqual((function["address"], function["size"]), (BASE + 4, 24))
+        self.assertEqual(function["pools"], [[BASE + 24, BASE + 28]])
+        self.assertEqual(result["leading_instruction_repairs"][0]["old_address"], BASE + 8)
+
+    def test_multiple_leading_instructions_follow_register_dependencies(self) -> None:
+        result = self.catalogue([0xE12FFF1E, 0xE3A01003, 0xE2810001,
+                                 0xE92D4010, 0xE1A04000, 0xE8BD8010])
+        self.assertEqual(result["functions"][1]["address"], BASE + 4)
+        self.assertEqual(len(result["leading_instruction_repairs"][0]["instructions"]), 2)
+
+    def test_leading_setup_rejects_unused_predicated_and_unknown_inputs(self) -> None:
+        for prefix, body in ((0xE3A05001, 0xE3A00000),
+                             (0x13A05001, 0xE1A00005),
+                             (0xE1A05006, 0xE1A00005)):
+            with self.subTest(prefix=prefix):
+                result = self.catalogue([0xE12FFF1E, prefix, 0xE24DD004,
+                                         body, 0xE28DD004, 0xE12FFF1E])
+                self.assertEqual(result["functions"][1]["address"], BASE + 8)
+                self.assertEqual(result["leading_instruction_repairs"], [])
+
+    def test_real_call_entry_is_not_moved_to_a_leading_setup(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 12, link=True), 0xE12FFF1E,
+                                 0xE3A05001, 0xE24DD004, 0xE1A00005,
+                                 0xE28DD004, 0xE12FFF1E])
+        self.assertEqual(result["functions"][1]["address"], BASE + 12)
+        self.assertEqual(result["leading_instruction_repairs"], [])
+
+    def test_protected_leading_setup_is_withheld(self) -> None:
+        image, layout = fixture([0xE12FFF1E, 0xE3A05001, 0xE24DD004,
+                                 0xE1A00005, 0xE28DD004, 0xE12FFF1E])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.discover()
+        traces = analyzer.group_fallthroughs(analyzer.refine())
+        analyzer.include_address_literals(traces)
+        protected = {BASE + 8: {"address": BASE + 8, "size": 16}}
+        self.assertFalse(analyzer.promote_leading_instructions(traces, protected))
+        self.assertEqual(analyzer.leading_instruction_inventory[BASE + 8]["decision"], "protected_extent")
+
+    def test_leading_setup_scan_does_not_absorb_an_unbounded_gap(self) -> None:
+        result = self.catalogue([0xE12FFF1E, *([0xE2800001] * 65),
+                                 0xE92D4010, 0xE1A04000, 0xE8BD8010])
+        self.assertEqual(result["leading_instruction_repairs"], [])
+        self.assertEqual(result["functions"][1]["address"], BASE + 264)
+
+    def test_adopted_leading_repair_is_reproduced_when_protected(self) -> None:
+        image, layout = fixture([0xE12FFF1E, 0xE59F500C, 0xE24DD004, 0xE1A00005,
+                                 0xE28DD004, 0xE12FFF1E, 0x12345678])
+        first = analyze.build_catalogue(image, layout)
+        expected = first["functions"][1]
+        second = analyze.build_catalogue(image, layout, protected_functions={BASE + 4: expected})
+        self.assertEqual(second["functions"][1], expected)
+        self.assertEqual(second["leading_instruction_repairs"], first["leading_instruction_repairs"])
+
+    def test_leading_pool_cannot_cross_a_known_entry(self) -> None:
+        image, layout = fixture([0xE12FFF1E, 0xE59F5010, 0xE24DD004,
+                                 0xE1A00005, 0xE28DD004, 0xE12FFF1E,
+                                 0xE12FFF1E, 0x12345678], rodata=[BASE + 24])
+        result = analyze.build_catalogue(image, layout)
+        self.assertNotIn(BASE + 4, {function["address"] for function in result["functions"]})
+        self.assertEqual(result["leading_instruction_repairs"], [])
+
+    def test_long_pointer_only_closed_cfg_recovers_nonstandard_prologue(self) -> None:
+        result = self.catalogue([0xE12FFF1E, 0xE92D0010, *([0xE2800001] * 40),
+                                 0xE8BD0010, 0xE12FFF1E], rodata=[BASE + 4])
+        function = result["functions"][1]
+        self.assertEqual((function["address"], function["size"]), (BASE + 4, 172))
+        proof = next(row for row in result["pointer_entry_inventory"] if row["address"] == BASE + 4)
+        self.assertEqual(proof["reason"], "closed_pointer_cfg")
+        self.assertEqual(proof["open_exits"], [])
+
+    def test_long_pointer_probe_rejects_an_open_or_invalid_graph(self) -> None:
+        for terminal in (0, 0xE12FFF10, branch(BASE + 164, BASE + 0x4000)):
+            with self.subTest(terminal=terminal):
+                image, layout = fixture([0xE12FFF1E, *([0xE2800001] * 40), terminal],
+                                         rodata=[BASE + 4])
+                result = analyze.build_catalogue(image, layout)
+                self.assertNotIn(BASE + 4, {function["address"] for function in result["functions"]})
+
+    def test_pointer_prefix_ends_at_proved_linker_tail_nop(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), 0xE12FFF1E,
+                                 0xE2800004, 0xE1A00000, *([0xE2800001] * 40),
+                                 0xE12FFF1E], rodata=[BASE + 8])
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertEqual(functions[BASE + 8]["size"], 8)
+        self.assertEqual(functions[BASE + 16]["size"], 164)
+        self.assertEqual(result["pointer_prefix_wrappers"],
+                         [{"address": BASE + 8, "target": BASE + 16, "tail_nop": BASE + 12}])
+
+    def test_pointer_prefix_requires_exact_nop_and_local_flags(self) -> None:
+        for words, accepted in (([0xE2800004, 0xE320F000], False),
+                                ([0x13A00001, 0xE1A00000], False),
+                                ([0xE5801000, 0xE1A00000], False),
+                                ([0xE24DD004, 0xE1A00000], False),
+                                ([0xE3500000, 0x13A00001, 0xE1A00000], True)):
+            with self.subTest(words=words):
+                image, layout = fixture([*words, 0xE12FFF1E])
+                analyzer = analyze.Analyzer(image, layout)
+                end = BASE + len(words) * 4
+                analyzer.seeds[end] = analyze.Seed("arm", {"bl_target"})
+                self.assertEqual(analyzer._pointer_prefix_wrapper(BASE, "arm", end), accepted)
+
+    def test_reviewed_classification_retains_extent_and_physical_ownership(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        physical_ranges = json.loads(json.dumps(result["ranges"]))
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": result["image_sha256"],
+               "kind": "runtime", "basis": "compiler_abi", "identity": "synthetic ABI helper",
+               "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper"}
+        analyze.apply_classifications(result, [row])
+        self.assertEqual(result["functions"][0]["kind"], "runtime")
+        self.assertEqual(result["functions"][0]["classification_evidence"], row)
+        self.assertEqual(result["ranges"], physical_ranges)
+        self.assertEqual((result["stats"]["creditable_functions"], result["stats"]["creditable_bytes"]), (0, 0))
+
+    def test_classification_requires_identity_proofs_and_is_transactional(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": result["image_sha256"],
+               "kind": "runtime", "basis": "compiler_generated", "identity": "synthetic outlined helper",
+               "evidence": "synthetic identity", "whole_body_identity": "synthetic equal named section"}
+        for change in ({"size": 8}, {"image_sha256": "wrong"}, {"whole_body_identity": ""},
+                       {"identity": ""}, {"kind": "library"}, {"basis": "semantic_guess"}):
+            with self.subTest(change=change):
+                before = analyze.serialize_catalogue(result)
+                with self.assertRaises(ValueError):
+                    analyze.apply_classifications(result, [{**row, **change}])
+                self.assertEqual(analyze.serialize_catalogue(result), before)
+        with self.assertRaises(ValueError):
+            analyze.apply_classifications(result, [row, row])
+        self.assertEqual(result["functions"][0]["kind"], "function")
+
+    def test_ordinary_library_identity_is_not_just_a_semantic_name(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": result["image_sha256"],
+               "kind": "library", "basis": "known_library", "identity": "synthetic strlen",
+               "evidence": "synthetic string semantics"}
+        with self.assertRaises(ValueError):
+            analyze.apply_classifications(result, [row])
+        row["known_library_identity"] = "synthetic authenticated member equality"
+        analyze.apply_classifications(result, [row])
+        self.assertEqual(result["functions"][0]["kind"], "library")
+
+    def test_raw_abi_classification_needs_a_hard_compiler_limit(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": result["image_sha256"],
+               "kind": "assembly", "basis": "unrepresentable_abi", "identity": "synthetic raw kernel ABI",
+               "evidence": "synthetic wrapper shape"}
+        with self.assertRaises(ValueError):
+            analyze.apply_classifications(result, [row])
+        row["compiler_limit"] = "synthetic rejected r4 argument proof"
+        analyze.apply_classifications(result, [row])
+        self.assertEqual(result["functions"][0]["kind"], "assembly")
+
+    def test_runtime_evidence_does_not_erase_existing_multi_entry_topology(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        function = result["functions"][0]
+        function["kind"] = "multi_entry"
+        before = json.loads(json.dumps(function["entries"]))
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": result["image_sha256"],
+               "kind": "runtime", "basis": "compiler_abi", "identity": "synthetic shared ABI",
+               "evidence": "synthetic ABI witness", "compiler_emission": "synthetic emitted helper"}
+        analyze.apply_classifications(result, [row])
+        self.assertEqual(function["kind"], "multi_entry")
+        self.assertEqual(function["entries"], before)
+        self.assertEqual(result["stats"]["creditable_functions"], 0)
+
     @unittest.skipUnless((ROOT / "orig/code.bin").is_file() and (ROOT / "orig/exheader.bin").is_file(), "private inputs absent")
     def test_original_invariants_and_stability(self) -> None:
         image = (ROOT / "orig/code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((ROOT / "orig/exheader.bin").read_bytes())
-        protected_addresses = {int(name.removeprefix("func_"), 16)
-                               for path in ("config/matches.json", "config/candidates/c004.json")
+        names = json.loads((ROOT / "config/names.json").read_text(encoding="utf-8"))["symbols"]
+        protected_addresses = {(names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1
+                               for path in ("config/matches.json", "config/candidates/c004.json",
+                                            "config/candidates/c005.json", "config/candidates/c006.json")
+                               if (ROOT / path).is_file()
                                for unit in json.loads((ROOT / path).read_text(encoding="utf-8"))["units"]
                                for name in unit["functions"]}
         adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
@@ -1073,7 +1244,21 @@ class CatalogueTests(unittest.TestCase):
         adopted_entries = {(entry["address"], entry["isa"]) for function in adopted["functions"]
                            for entry in function.get("entries", [function])}
         recovered_entries = {(address, entry["isa"]) for address, (_, entry) in entry_owners.items()}
-        self.assertEqual(sorted(adopted_entries - recovered_entries), [])
+        repairs = {row["old_address"]: row["address"] for row in first["leading_instruction_repairs"]}
+        self.assertEqual(repairs, {
+            0x107144: 0x107140, 0x113CA8: 0x113CA4, 0x1456E8: 0x1456E4,
+            0x195A54: 0x195A50, 0x1C6444: 0x1C6440, 0x1CB110: 0x1CB10C,
+            0x1CE684: 0x1CE67C, 0x1F50DC: 0x1F50D8, 0x1F5180: 0x1F5170,
+            0x1F5678: 0x1F5674, 0x1F5788: 0x1F5780, 0x1F5810: 0x1F580C,
+            0x1F5870: 0x1F586C, 0x203814: 0x203810, 0x205284: 0x205280,
+            0x20693C: 0x206938, 0x2102BC: 0x2102B4, 0x214588: 0x214580,
+            0x214D28: 0x214D18, 0x214DA0: 0x214D9C, 0x214E44: 0x214E40,
+            0x215130: 0x215120,
+        })
+        self.assertEqual(sorted(adopted_entries - recovered_entries), sorted((address, "arm") for address in repairs))
+        self.assertEqual((functions[0x113CA4]["size"], functions[0x113CA4]["pools"]), (252, [[0x113D9C, 0x113DA0]]))
+        self.assertEqual(functions[0x110CC8]["size"], 484)
+        self.assertEqual(functions[0x14B358]["size"], 224)
         for address in protected:
             self.assertEqual(functions[address], adopted_functions[address])
         self.assertEqual((functions[0x112C80]["kind"], functions[0x112C80]["size"]), ("function", 24))
@@ -1093,13 +1278,15 @@ class CatalogueTests(unittest.TestCase):
             with self.subTest(address=address):
                 self.assertEqual((functions[address]["kind"], functions[address]["size"]), ("function", head_size))
                 self.assertEqual((functions[target]["kind"], functions[target]["size"]), ("function", tail_size))
-        self.assertEqual({address for address, function in adopted_functions.items() if functions[address] != function},
+        self.assertEqual({address for address, function in adopted_functions.items()
+                          if address in functions and functions[address] != function},
                          {address for address, row in expected_splits.items()
                           if adopted_functions[address]["size"] != row[0]})
-        self.assertEqual(set(functions) - set(adopted_functions),
-                         {row[1] for row in expected_splits.values()} - set(adopted_functions))
+        self.assertEqual(set(adopted_functions) - set(functions), set(repairs))
+        self.assertTrue({0x110CC8, 0x14B358, 0x1C5260} <= set(functions))
         self.assertEqual(len(first["linker_tail_extent_splits"]), 137)
-        self.assertEqual(first["stats"]["linker_tail_census"], adopted["stats"]["linker_tail_census"])
+        self.assertEqual(sum(first["stats"]["linker_tail_census"].values()),
+                         sum(adopted["stats"]["linker_tail_census"].values()))
         self.assertEqual(first["stats"]["linker_nop_words"], 776)
         nop_inventory = first["linker_nop_inventory"]
         self.assertEqual([row["site"] for row in nop_inventory],
@@ -1107,10 +1294,13 @@ class CatalogueTests(unittest.TestCase):
                           if struct.unpack_from("<I", image, offset)[0] == 0xE1A00000])
         self.assertEqual(sum(row["decision"] == "in_frame_not_tail" for row in nop_inventory), 505)
         self.assertEqual(sum(row["decision"] == "not_executed_arm_code" for row in nop_inventory), 1)
-        for field in ("code_bytes", "pool_bytes", "literal_bytes", "bytes_by_range_kind", "anomalies_by_issue"):
-            self.assertEqual(first["stats"][field], adopted["stats"][field])
-        self.assertEqual(sum(function["size"] for function in first["functions"]),
-                         sum(function["size"] for function in adopted["functions"]))
+        self.assertLess(first["stats"]["bytes_by_range_kind"]["unknown"],
+                        adopted["stats"]["bytes_by_range_kind"]["unknown"])
+        self.assertLess(first["stats"]["anomalies"], adopted["stats"]["anomalies"])
+        self.assertEqual(sum(first["stats"][field] - adopted["stats"][field]
+                             for field in ("code_bytes", "pool_bytes", "literal_bytes")),
+                         first["stats"]["bytes_by_range_kind"]["function"]
+                         - adopted["stats"]["bytes_by_range_kind"]["function"])
         for split in first["linker_tail_splits"]:
             self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
                              ("function", 4))
