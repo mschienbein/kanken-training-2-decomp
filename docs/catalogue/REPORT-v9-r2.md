@@ -51,3 +51,23 @@ The first two are the complete plain generation procedure, without postprocessin
 Receipts are under `scratch/closure/`: `v9-r2-generation.json`, `v9-r2-regeneration.json`, `v9-r2-adopted-baseline-command.json`, `v9-r2-adopted-v9-evidence.json` and `v9-r2-differences.json`. They capture commands, exit codes, complete identities and exact range/stat differences. The reviewer's original exit-1 failure remains immutable evidence; the unchanged failing implementation was not rerun merely to reconfirm it.
 
 **Not run:** new or existing tests, suites, builds, compiler probes, matcher runs, lint/formatters, prepare/finalize, adoption or push. Added regressions cover shared U+3000 bounds, refusal of non-whitespace controls, adopted multi-entry legacy-label regeneration, malformed adopted-label refusals and whole-image regeneration using the freshly proposed function records as the prior baseline. Main must run `tests.test_analyze` and the combined checks, then obtain independent re-review before any adoption. No claim of a passing test is made here.
+
+## Main-observed fixture failure and isolated correction
+
+Main ran the full suite on a clean detached checkout of `4891c6d6b923f3e510001a41f5f19ecfa8e45c04`.
+It reported one failed module: `tests.test_analyze` ran 159 tests with two
+subtest failures, the protected/unprotected cases of
+`test_plain_catalogue_command_includes_review_and_reproduces_all_bytes`.
+Its isolated temporary root still wrote the old `catalogue_v9_evidence.json`
+name, while the corrected CLI requires `catalogue_v9_r2_evidence.json`.
+The other 18 modules were reported OK; 566 tests were reported in total.
+These are **main-observed facts**, not author-run checks, and the failure is
+not rerun unchanged here.
+
+The discrete fix changes that fixture's sole evidence-input path, supplies its
+explicit `catalogue-v9-r2` revision and checks the serialized classification-input
+path. A targeted source search found no other temporary-root fixture using the
+retired evidence filename; the whole-image fixture already reads the r2 input.
+Generator code and proposal contents are unchanged, so the proposal identity
+above remains the generation identity. No suite or test was executed by this
+author after the fix; Main owns the clean-checkout rerun.

@@ -1366,9 +1366,10 @@ class CatalogueTests(unittest.TestCase):
         row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": baseline["image_sha256"],
                "kind": "runtime", "basis": "compiler_abi", "identity": "synthetic ABI helper",
                "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper"}
-        evidence = {"image_sha256": baseline["image_sha256"], "classification_records": [row],
-                    "thumb_dispositions": [], "author_dispositions": [], "provenance": {"proof_status": "synthetic"},
-                    "source_candidate_sha256": "synthetic", "source_input_sha256": {}}
+        evidence = {"revision": "catalogue-v9-r2", "image_sha256": baseline["image_sha256"],
+                    "classification_records": [row], "thumb_dispositions": [], "author_dispositions": [],
+                    "provenance": {"proof_status": "synthetic"}, "source_candidate_sha256": "synthetic",
+                    "source_input_sha256": {}}
         scratch = ROOT / "scratch"
         scratch.mkdir(exist_ok=True)
         for protect in (False, True):
@@ -1379,7 +1380,7 @@ class CatalogueTests(unittest.TestCase):
                 (root / "config/catalogue.json").write_bytes(analyze.serialize_catalogue(baseline))
                 (root / "config/matches.json").write_text(
                     json.dumps({"units": [{"functions": ["func_00100000"]}]} if protect else {"units": []}))
-                (root / "research/catalogue_v9_evidence.json").write_text(json.dumps(evidence))
+                (root / "research/catalogue_v9_r2_evidence.json").write_text(json.dumps(evidence))
                 (root / "orig/code.bin").write_bytes(image)
                 exheader = bytearray(0x200)
                 for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
@@ -1393,7 +1394,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v9")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v9-r2")
+                self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
 
