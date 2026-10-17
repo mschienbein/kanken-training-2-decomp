@@ -310,6 +310,103 @@ class MutationTest(unittest.TestCase):
         self.assertNotIn("prefix_func_001a78a4", functions)
         self.assertIn("--- original/func_001a78a4.c", patch)
 
+    def test_multiline_directives_keep_original_function_spans(self):
+        before = (
+            "#define BEFORE(value) /* continued comment \\\n"
+            "    still in the comment */ \\\n"
+            "    do { \\\n"
+            "        if (value) { ++(value); } \\\n"
+            "    } while (0)\n"
+        )
+        target = (
+            "int target(int x) {\n"
+            "#define INSIDE(value) do { \\\n"
+            "    (value) += 2; \\\n"
+            "} while (0)\n"
+            "    BEFORE(x);\n"
+            "    INSIDE(x);\n"
+            "#undef INSIDE\n"
+            "    return x;\n"
+            "}"
+        )
+        after = (
+            "#define AFTER(value) \\\n"
+            "    int macro_generated(int value) { \\\n"
+            "        return value; \\\n"
+            "    }\n"
+        )
+        definitions = ("int earlier(void) { return 1; }", target,
+                       "int later(void) { return 2; }")
+        original = before + "\n".join(definitions[:2]) + "\n" + after + definitions[2] + "\n"
+        preprocessed = (
+            definitions[0] + "\nint target(int x) { if (x) ++x; x += 2; return x; }\n"
+            + definitions[2] + "\n"
+        )
+        for newline in ("\n", "\r\n"):
+            with self.subTest(newline=repr(newline)):
+                text = original.replace("\n", newline)
+                spans = permute.function_spans(text)
+                self.assertEqual(set(spans), {"earlier", "target", "later"})
+                for name, definition in zip(("earlier", "target", "later"), definitions):
+                    start, body, end = spans[name]
+                    self.assertEqual(text[start:end], definition.replace("\n", newline))
+                    self.assertEqual(text[body], "{")
+                source = permute.Program.parse(preprocessed, ("target",), Path("fixture.c"), text)
+                self.assertEqual(source.original_functions["target"], target.replace("\n", newline) + "\n")
+                functions, patch = source.hints(source.ast)
+                self.assertEqual(set(permute.function_spans(functions)), {"target"})
+                self.assertIn("-#define INSIDE(value)", patch)
+                self.assertNotIn("#define BEFORE", patch)
+                self.assertNotIn("#define AFTER", patch)
+
+    def test_every_trailing_backslash_splices_directive_lines(self):
+        target = "int target(void) { return 1; }"
+        for newline in ("\n", "\r\n"):
+            for backslashes in (1, 2, 3):
+                with self.subTest(newline=repr(newline), backslashes=backslashes):
+                    directive = "#define UNUSED " + "\\" * backslashes + newline
+                    text = directive + "int hidden(void) { return 0; }" + newline + target
+                    spans = permute.function_spans(text)
+                    self.assertEqual(set(spans), {"target"})
+                    start, _, end = spans["target"]
+                    self.assertEqual(text[start:end], target)
+
+    def test_continuations_in_comments_cannot_hide_or_invent_functions(self):
+        prefix = (
+            "/* A directive-looking line is still in this comment.\n"
+            "#define HIDDEN \\\n"
+            "*/\n"
+            "// This entire continued line is a comment. \\\n"
+            "int hidden(void) { return 0; } \\\n"
+            "#define ALSO_HIDDEN \\\n"
+            "int also_hidden(void) { return 1; }\n"
+            "/\\\n* Spliced block-comment delimiters. *\\\n/\n"
+        )
+        target = (
+            "int target(int x) {\n"
+            "    // A continued comment must not close the target body. \\\n"
+            "} \\\n"
+            "int hidden_inside(void) { return 2; }\n"
+            "    return x + 1;\n"
+            "}"
+        )
+        suffix = (
+            "\n// A continued comment must not replace the real target. \\\n"
+            "int target(int x) { return x - 1; }\n"
+        )
+        for newline in ("\n", "\r\n"):
+            with self.subTest(newline=repr(newline)):
+                text = (prefix + target + suffix).replace("\n", newline)
+                spans = permute.function_spans(text)
+                self.assertEqual(set(spans), {"target"})
+                start, body, end = spans["target"]
+                self.assertEqual(text[start:end], target.replace("\n", newline))
+                self.assertEqual(text[body], "{")
+                source = permute.Program.parse(
+                    "int target(int x) { return x + 1; }", ("target",), Path("fixture.c"), text,
+                )
+                self.assertEqual(source.original_functions["target"], target.replace("\n", newline) + "\n")
+
     def test_hints_keep_prefix_annotations_after_type_expansion(self):
         definition = "__weak __attribute__((noinline)) int target(int x) {return x+1;}"
         source = program("typedef __int64 Wide;\n" + definition + "\n")
@@ -486,6 +583,44 @@ class CompilerMutationTest(ScratchTest):
         toolchain.compile_source(PROFILE, normalized, normalized.with_suffix(".o"), cache=False)
         functions, _ = source.hints(source.ast)
         self.assertEqual(set(permute.function_spans(functions)), set(targets))
+
+    def test_multiline_macros_preprocess_normalize_and_compile(self):
+        prefix = (
+            "#define BEFORE(value) do { \\\n"
+            "    (value) += 1; \\\n"
+            "} while (0)\n"
+            "int earlier(void) { return 1; }\n"
+        )
+        target = (
+            "int target(int x) {\n"
+            "#define INSIDE(value) do { \\\n"
+            "    (value) += 2; \\\n"
+            "} while (0)\n"
+            "    BEFORE(x);\n"
+            "    INSIDE(x);\n"
+            "#undef INSIDE\n"
+            "    return x;\n"
+            "}"
+        )
+        suffix = (
+            "\n#define AFTER(value) do { \\\n"
+            "    (value) += 3; \\\n"
+            "} while (0)\n"
+            "int later(int x) { AFTER(x); return x; }\n"
+        )
+        for label, newline in (("lf", "\n"), ("crlf", "\r\n")):
+            with self.subTest(newline=label):
+                path = self.directory / f"macros-{label}.c"
+                path.write_text((prefix + target + suffix).replace("\n", newline), encoding="utf-8", newline="")
+                toolchain.compile_source(PROFILE, path, path.with_suffix(".o"), cache=False)
+                source = permute.Program.preprocess(path, ("target",), PROFILE)
+                self.assertEqual(source.original_functions["target"], target + "\n")
+                normalized = self.directory / f"normalized-macros-{label}.c"
+                normalized.write_text(source.render(source.ast), encoding="utf-8")
+                toolchain.compile_source(PROFILE, normalized, normalized.with_suffix(".o"), cache=False)
+                functions, patch = source.hints(source.ast)
+                self.assertEqual(set(permute.function_spans(functions)), {"target"})
+                self.assertIn("-#define INSIDE(value)", patch)
 
     def test_approved_extension_headers_normalize_and_compile(self):
         path = self.directory / "extensions.c"
