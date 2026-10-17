@@ -10,7 +10,16 @@
       "_ZN12RuntimeGuardD1Ev",
       "_ZN16RuntimeFinalizerD1Ev"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed destructor aliases bind 00215ec4 (canonical guard-release volatile unsigned* contract) and 00216140 (canonical three-input registration contract) as one-object destructors. Those role/arity contracts cannot be reconciled by callback casts or separate aliases over empty code. RuntimeGuard/RuntimeFinalizer initialization sources are retained, but no destructor identity is adopted.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "60581506da6f344967612e54b43cd27c69602872a77899d6029db2c2077a1e0e",
+    "author_source_current_sha256": "cd526755046110a798b47185db8a3db91271de0a5dea657a2155f9069e5b8779",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w18b",
@@ -25,7 +34,13 @@
       "_ZSt7nothrow",
       "_ZnwjRKSt9nothrow_t"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/large/func_002102b4.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "04e7fdf8ede72eacdce3b28faf003885ef8eebb6fedf10c94e64f81d4efece54",
+    "author_source_current_sha256": "700606a786e8177f323db0864a725f107b7835d42174678af0da4863690d5b3c",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w18b",
@@ -39,7 +54,13 @@
       "_ZSt7nothrow",
       "_ZnwjRKSt9nothrow_t"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/wave18/func_001eade0.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r3.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "20480d6356f8ccf39674494164db4c9f2898f8bb9f2b3ec1082f3fbd329bf88f",
+    "author_source_current_sha256": "50ac79ac615045999c42868813c3abdd4d84800c50fe6d856fe5e9cc6894929e",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w18c",
@@ -53,7 +74,13 @@
       "_ZN18RuntimeMemberOwnerC2Ev",
       "_ZN13RuntimeMemberC1Ev"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/wave18/func_0014d2e4.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "8a56c682c4a345e2ac6fbd24dabb94e4493d3fb0b961c564f8f220626a782abc",
+    "author_source_current_sha256": "f4d5fc2c7c319df96bc4639b8789298d1f83fe6833a2f82afd667111507beed1",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w18i",
@@ -81,7 +108,16 @@
       "_ZN19ShaderConfigurationD1Ev",
       "_ZN13EmptyResourceD1Ev"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The delivered RenderResource name collides with canonical stream_manager.h RenderResource. More substantially, its embedded ShaderConfiguration ends at 0xf0 whereas canonical shader.h includes the evidenced tail through 0x130; the enclosing count at +0x138 overlays ShaderResource.selected (a ShaderConfiguration*) in 0010de68. The complete lifecycle/owner relation and EmptyResource destructor subobject are unresolved; renaming the shadow or aliasing destructors is insufficient.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "7a91fcc5b5b1925e40a1a2766ad50dfb8f6427548556dd1658caec7f3bc52435",
+    "author_source_current_sha256": "ec45b6dd7b9aac0a5b860b416344db5bfc94e7e29779522c15614bfc06be4623",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19a",
@@ -107,7 +143,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed 29-slot native singleton returns WidgetSet29W19G*, but canonical controller_transitions.h and accepted 001e759c require Screen*, whose evidenced slot/state extent differs. Its implicit __aeabi_atexit/__dso_handle bindings also have no canonical runtime identity proof; a prefix cast or shadow class is not admitted.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "0ab3a73f4be25fb959dab470c97186c2f42a9d566971953de55f09982ff85921",
+    "author_source_current_sha256": "3ab00751d372f02c0d36ca93d4d3f931d87c4da70476b0af70193fd7ec1b131e",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19g",
@@ -123,7 +168,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed DeferredStateW19G destructor alias is 001e35e0, still an accepted void(void) body in src/wave3/empty_functions.c. Callback object input/result and concrete owner identity must be reconciled rather than hidden behind a second method alias. The implicit __aeabi_atexit/__dso_handle runtime identities remain unproven.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "8b2360c62baac2812cd3de485bf667783136b6c83ea97497b801ad471e4f4e26",
+    "author_source_current_sha256": "95fa66dee1f9f6545f7503a54ad9d8d29488901e1062f817bf68f82c8594e441",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19g",
@@ -139,7 +193,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed BufferedStateW19G destructor alias is 001dd360, still accepted as void(void) in src/wave3/empty_functions.c. Its registered object input and native return-this contract are not represented canonically. The implicit __aeabi_atexit/__dso_handle runtime identities remain unproven.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "775db969eb4422f86a1fbf2bc60c174e8775a67aeacd2b1c56d6270fc3699c48",
+    "author_source_current_sha256": "4ad5353fc129da25a8a09e435c86cd7b97a6b135e200ec4d25a91a6ae366efec",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19g",
@@ -155,7 +218,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed IndexedBufferW19G destructor alias is 001dce3c, still accepted as void(void) in src/wave3/empty_functions.c. Its registered object input and native return-this contract are not represented canonically. The implicit __aeabi_atexit/__dso_handle runtime identities remain unproven.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "b4e5620bd337d100f106dc87cbf827c0e7f46015de1d368b47f948bbe87971df",
+    "author_source_current_sha256": "acdd154bce15bc928563ad61caae9fbcac3d3153a7eefa400f1e9e471f6eaa23",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19g",
@@ -171,7 +243,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed WidgetSet24W19G destructor at 0015eba4 has no same-address defining source in this ledger proving that complete owner. The implicit __aeabi_atexit/__dso_handle binding would assert a standard runtime contract over canonical void func_00216140(void*,ObjectDestructor,void(*)(void)); identical return-only bytes do not prove that identity.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "085732190dfd10de9bb36452a3271611394d53e55f9a2a438c98b4545dd62873",
+    "author_source_current_sha256": "a4169f8243144f71e8f02cd4454796df3fc005ea10bfb9d86e2b9d8a8c25c704",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19g",
@@ -187,7 +268,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed WidgetSet2W19G destructor at 001aced0 has no same-address defining source in this ledger proving that complete owner. The implicit __aeabi_atexit/__dso_handle binding would assert a standard runtime contract over canonical void func_00216140(void*,ObjectDestructor,void(*)(void)); identical return-only bytes do not prove that identity.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "500a823490418ae1f63cdf923e8848f0020a27a32fc3a75be6b8bafbff874d9f",
+    "author_source_current_sha256": "e90209111a00ff7bf0bf1e0231121839c0b901a64607c1b82519d120c7ab8d9c",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w19g",
@@ -203,7 +293,16 @@
       "__aeabi_atexit",
       "__dso_handle"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The proposed WidgetSet4W19G destructor at 001af304 has no same-address defining source in this ledger proving that complete fade-reference owner. The implicit __aeabi_atexit/__dso_handle binding would assert a standard runtime contract over canonical void func_00216140(void*,ObjectDestructor,void(*)(void)); identical return-only bytes do not prove that identity.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "607edf14a28c61b3236aa18142d3f15c961cbbd0a3c99c70ecef01916918994a",
+    "author_source_current_sha256": "125181ba6db766734ca4ff0f5b078ac3cff6d97f39b81f84fa6c681f0b6e8809",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w20b",
@@ -218,7 +317,13 @@
       "_ZN14CodeUnitReader12readVariant1Ev",
       "_ZN14CodeUnitReader12readVariant2Ev"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/wave20/func_0013156c.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
+    "author_source_current_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w20b",
@@ -233,7 +338,13 @@
       "_ZN17CodeUnitReaderAlt12readVariant1Ev",
       "_ZN17CodeUnitReaderAlt12readVariant2Ev"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/wave20/func_001f4cf8.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "2002e94154b5c5ba7cb7d9e1e3692153ccf76783c543b1d68dc7297c783f6e7f",
+    "author_source_current_sha256": "e3767c0d1fa069d0869e90cb86c833248fb00509763ce6c79c5b0376737ec49b",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "w20e",
@@ -249,7 +360,16 @@
       "_ZN13NativeTextBoxC2EPK15TextBoxResourceRK16ResourceBlockSetj",
       "_ZN20LayoutRenderMaterialC1EPK16MaterialResourceRK16ResourceBlockSet"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "deferred-with-recorded-contract-reason",
+    "reason": "The delivered NativeTextBox/NativePane/LayoutColor/LayoutRenderMaterial shadows duplicate the pinned nw::lyt/nw::ut classes. Its resource constructor includes a format input and passes it to initialization/string consumers, whereas pinned nw::lyt::TextBox declares only (res::TextBox*,const ResBlockSet&). The real per-version owner/constructor contract must be established without changing frozen native headers, dropping the input, or retaining duplicate native classes.",
+    "evidence": [
+      "original source and immutable receipt above",
+      "include/game/functions.h",
+      "docs/known-issues-c009.md"
+    ],
+    "author_receipt_sha256": "0654876287e810264f48d8d32c1a0ae0934537504e6d2bc54a3318f5f98ad572",
+    "author_source_current_sha256": "5bfeab6653259c451d192261e52d9babfafac3fb55418018ac0c6e6357e90f9e",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "L034",
@@ -273,7 +393,13 @@
       "_ZN18PaneNameDescriptorC1EiiPKc",
       "_ZN13PaneIndexListC1Eiz"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/large/func_002095c0.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "6a5cf2102f3b2053202d5a8d43074b478224e79c4baca6173c5f986e43b8aa13",
+    "author_source_current_sha256": "892c73171bfb41c7e1f52f74984f50c3173b3a75aeb972e9326964b4359b7dce",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "L046",
@@ -286,7 +412,13 @@
       "_ZN18PaneNameDescriptorC1Ev",
       "_ZN18PaneNameDescriptorC1EiiPKc"
     ],
-    "classification": "uncollected-scope-not-yet-closed"
+    "classification": "collected-canonical-destination-MATCH",
+    "destination": "src/large/func_002102b4.cpp",
+    "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "author_receipt_sha256": "f575495d9407fd52207fed62c8aef1f383f53a320721d3f69f5cba36a76808bc",
+    "author_source_current_sha256": "c4f3bd0ca6133459dc65e8eb8685ac41e20e7bbeac9f7121e10f6ceecbbf1f34",
+    "author_receipt_source_hash_agrees": true
   },
   {
     "author": "s1a2fc4",

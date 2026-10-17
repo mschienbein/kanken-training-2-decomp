@@ -39,6 +39,13 @@ public:
     ResourceDescriptor();
     ResourceDescriptor(int category, int resource, const char *name);
 };
+
+/* [INFERENCE] Compact index-list constructor witnessed by 002095c0. */
+struct PaneIndexList {
+    int count;
+    unsigned char indices[16];
+    PaneIndexList(int count, ...);
+};
 #endif
 
 #ifdef __cplusplus
@@ -51,6 +58,11 @@ extern struct LayoutDescriptor *bss_00246748[18];
 extern const struct ResourceDispatch data_002234f4;
 extern struct ResourceDescriptor *bss_00246790[31];
 extern struct ResourceDescriptor *bss_0024680c[31];
+extern struct ResourceDescriptor *bss_00247098[13];
+extern struct ResourceDescriptor *bss_002471f8[14];
+extern struct PaneIndexList *bss_002470cc[12];
+extern void func_002095c0(void);
+extern void func_002102b4(void);
 extern void func_0020e460(void);
 #ifdef __cplusplus
 }

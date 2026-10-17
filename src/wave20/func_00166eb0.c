@@ -1,5 +1,4 @@
 #include "game/screen.h"
-#include "game/screen.h"
 
 void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y)
 {
@@ -7,8 +6,8 @@ void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y)
     if (handle != 0) {
         struct DisplayObject *object;
         int type;
-        handle->x = x;
-        handle->y = y;
+        handle->position.x = x;
+        handle->position.y = y;
         object = handle->object;
         object->position[0] = x;
         object->position[1] = y;

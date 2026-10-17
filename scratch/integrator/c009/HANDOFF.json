@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "status": "continuation-preserved-incomplete-user-requested-wrap-up-not-review-ready",
+  "status": "milestone-1-collection-closed-not-review-ready",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.16 unchanged",
-  "candidate_units": 676,
-  "candidate_functions": 676,
-  "target_bytes_from_author_records": 54648,
+  "candidate_units": 682,
+  "candidate_functions": 682,
+  "target_bytes_from_author_records": 57484,
   "profiles": {
     "game": {
-      "units": 614,
-      "functions": 614,
-      "target_bytes": 48964
+      "units": 619,
+      "functions": 619,
+      "target_bytes": 51736
     },
     "middleware": {
-      "units": 37,
-      "functions": 37,
-      "target_bytes": 4000
+      "units": 38,
+      "functions": 38,
+      "target_bytes": 4064
     },
     "sdk": {
       "units": 25,
@@ -24,8 +24,8 @@
       "target_bytes": 1684
     }
   },
-  "dry_ledger_units": 2203,
-  "dry_ledger_basis": "c008-r2 dry-matches.json (1527 units/1601 functions), plus current c009; failed original c008 is not used",
+  "dry_ledger_units": 2209,
+  "dry_ledger_basis": "c008-r2 successor dry ledger plus 682 c009 additions; c008-r3 is pending committed merge",
   "revised_predecessor_units": [
     {
       "source": "src/pilot/loop_resources.c",
@@ -844,11 +844,27 @@
         "func_001e358c"
       ],
       "author": "w9a"
+    },
+    {
+      "source": "src/wave2/func_0014de8c.c",
+      "profile": "game",
+      "functions": [
+        "func_0014de8c"
+      ],
+      "author": "Wave2Author0"
+    },
+    {
+      "source": "src/wave8/func_00179160.c",
+      "profile": "game",
+      "functions": [
+        "func_00179160"
+      ],
+      "author": "w8a"
     }
   ],
   "source_sha256": {
-    "config/candidates/c009.json": "889a591cd5080b24319d26d23e042b20de270fdd7fb45c59cd4b4fa09d8a612a",
-    "config/names.json": "f1e1d11a4f407eb3c42a7723baddb96cfb4939a893b0777b0c238876a7f24ca3",
+    "config/candidates/c009.json": "9e670e328dad9c028aa878ecf17cf1a01b06f543ec65dd8253b1deb84ebc8a89",
+    "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
     "include/game/adjusted_callbacks.h": "2071245cda5e2b18f35e61014afe62bab4e64bfa5a62ab239d9d3639a3185074",
     "include/game/animation.h": "e6dc76dc1e76ad9699e45a9226691db74672bb2f2bc5003dfbd9095da815b94d",
     "include/game/applet.h": "13b4f47f23fe6a40ba7c822366d2e04a8f5605f4cda13e720128cd9d09daaf62",
@@ -947,12 +963,12 @@
     "include/game/render_parameter.h": "cbdae89a6d8a8842fa6a89fc6a278eeda0dc27066c90fd77abb710ac7d3b6ef3",
     "include/game/render_resource.h": "4bdc93b8c6790ee5b04f96e909dd1b77e93b616a4529f0ba3e27942501bc1043",
     "include/game/render_state.h": "373827a209e2180d79fd7209daae8774b7312ed417b916d85aa0dba3fb26c14b",
-    "include/game/reset_reference.h": "5e6ad60745cf8a40c3553aac469be070680a49bd37839d19eff435b3c018a9cf",
+    "include/game/reset_reference.h": "e45158289df593544275c934e8cc7334b10c6f9c3980d6e28aeb2130605afa7c",
     "include/game/resettable_manager.h": "6e4ec28c6bd467a69c5c850957046d59eef61f6ea69ed15e72521e3473f99b4d",
     "include/game/resource.h": "360da6882b2fb54b99e13c10e320db17880b328641a1dc0c78fa5d699af1d4a2",
     "include/game/resource_cache.h": "c1a2c65178b2e12c6713858ed54b14bf51c79a898ece82421ce79667fd14b9aa",
     "include/game/resource_cleanup.h": "c7053047886a10e6dd25e3168371777c0f32bf9ac779a3c7a9e1d328c6c9b6ea",
-    "include/game/resource_descriptors.h": "e239801076938548721c014309c0dfa6a7b24daf6c9c4050571f3668d86f5a26",
+    "include/game/resource_descriptors.h": "4275c6554bc4f45e62a7872bd9a7a3dfd78d838b203dfea203a049adeae02427",
     "include/game/resource_font.h": "7f3c43dd66cd99afc8fc3912732657616ffeb84f12048c33cd504b730d769a78",
     "include/game/resource_instance.h": "d83bd16acf42f1d9f38ba3dd7b234a9560ccd264aaf22f2c4772d2f611b68742",
     "include/game/resource_objects.h": "8664a19652b93081faede1beb1ac7c75cf22cf7082e2a419faf97f0baa156932",
@@ -967,7 +983,7 @@
     "include/game/scene_lifecycle.h": "1aff056542e2fc82e1c867655e9919acff7d636277be5faf02638f6489e10543",
     "include/game/scene_runtime.h": "de7086ea74d689242604711acf8e30c1a96921da6bbf0ba5192735e4c154f323",
     "include/game/scheduler.h": "e4be62a972172915571cc3194a47dccfa3f671414739a0df62468b0e106b4db5",
-    "include/game/screen.h": "0de46b982b0ceb0487a044edff595cd2e5fcffce087bfa8278d05bf333c1bd7b",
+    "include/game/screen.h": "71632dd08722c88268d185941fb7a478cb9901ac8a2dad7b071b85182862d2d8",
     "include/game/screen_transition.h": "ab345eb2f94f210e8eba0e4a844b2c89cd9a94fbf81941865bd7b11d12ff1675",
     "include/game/sdk_init.h": "fc4f97a9a83b511c3da9a83ef0f4f311a14479b2468dfac061f5d468e44202e0",
     "include/game/selection.h": "d3963ef997ecc8bdbb95ea71982791e195b141ee835605cdbadd7f5d8a032426",
@@ -1006,7 +1022,7 @@
     "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92",
     "include/game/task_dispatcher.h": "0708e62557068b012885fc7841f984a755284d0a0eec2912ca981ad3c1069320",
     "include/game/task_runtime.h": "1772a0b58d98d9f9dd0a953dcba14f2c86e5571cc5b1029c9d9695964cff8ca1",
-    "include/game/text.h": "57c986c7b8488e6d6ee9ae0aa7908a29ef58226168e0e0f5353ce0decb9901a9",
+    "include/game/text.h": "7eb793698dcd2dab5b13ba76789860ca7b540479fd5b9b02c301a8f9d951fc3a",
     "include/game/text_renderer.h": "fd26b4f316be5e1183351b4c54827c1ba054b25740f57f3b14900780a406f273",
     "include/game/text_writer.h": "45171408c7ec964b165845160e8a17451f74a4632254959bbe57b7214493f257",
     "include/game/timed_screen.h": "6a67e8347554e98d4eaff87b622fb1da464e73dd0b6b87a0cf6243497db0ce6b",
@@ -2412,7 +2428,7 @@
     "src/wave18/func_0016f55c.c": "4ac5928a4255528a3f849e2e75502650f9b14cf5a9779e3e5256eb8c5e64b479",
     "src/wave18/func_0016fca0.c": "8cb1adae2e1fbd9debb1d2ff4c3f714c6f374025e0778fed08e20f3cad092de2",
     "src/wave18/func_00170388.cpp": "60ee88a0811041947dfbf8aff38556ea3ac9c4555494e3ca31750f5cf4cf027e",
-    "src/wave18/func_00170da0.cpp": "b72249d01596f08d92e8f5c3dd413917b0fa27e4f01c97da1865bceac96c24c4",
+    "src/wave18/func_00170da0.cpp": "5d55c86975c37a1d0887f31c704a8d226297cafc2f530a6d69fac4007aac4ea6",
     "src/wave18/func_00170f6c.cpp": "e80525cb319f0591b3f404f541f6c7c337d3f7796833000f04e1534d6f12c840",
     "src/wave18/func_00171e30.c": "ad7966f7ce5dd04880741307b43c8de1fb058b8d2e464686fef6711334962bf4",
     "src/wave18/func_0017e8bc.c": "56a75d78f714423e824be1a6212f75a59b5d68481e46e064ea1ec7ec0995355e",
@@ -2568,7 +2584,7 @@
     "src/wave2/func_00147260.c": "02d21276c24f28e1bb59125a984b0fe28d3de407f5d46d775c5254c1b6070850",
     "src/wave2/func_00149424.c": "78dfece36cc793784961bca5a106dad6fca713d6594230deea8936d6b4f5861d",
     "src/wave2/func_0014c2c8.c": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
-    "src/wave2/func_0014de8c.c": "6d2e316760cd9b8512cb3c4c96eacd5230c3f6963fae4521760abc9716732b5b",
+    "src/wave2/func_0014de8c.c": "405b2eeb8c04e728a37133b013d885349912c866702c9444db190e6ce1b636c6",
     "src/wave2/func_0014f7e8.c": "1acf66043f5ab148a832e91a19ec92cc0fe2269dbc3009cadf780d8b79803ce0",
     "src/wave2/func_0015f5a0.c": "8d925319341dcfada1f6af1ccfa61bb68604fdd0d0a8ee026a006597d01da1fc",
     "src/wave2/func_00164ebc.c": "97bef02071a0bed89271c463f9773e1221e78ef187b2c0a00b2b59fca69b3499",
@@ -2631,7 +2647,7 @@
     "src/wave20/func_0015e4a8.cpp": "6820f95d76b3fafa606cf2cce2c79e2fb7cbafb4ffc0604cc49548dc77993d1b",
     "src/wave20/func_0015e634.cpp": "48e0e73fa3c6276aa74d8457b77c8a349f5854eb8bc728505902276b5f3c56b9",
     "src/wave20/func_001601bc.c": "cc1c14a6da34be976e2f4745e349e70c007d9b77a96b27bcf2793f159395e366",
-    "src/wave20/func_00166eb0.c": "b92cf3855a2fe9e42c75892a235db2b8e531139898c03195c0e2c5995d51a44d",
+    "src/wave20/func_00166eb0.c": "eb24aa811489f5aff2f4f5dd894b9ffdb64f57c6a7b6acfa7b8005192e1a1733",
     "src/wave20/func_0016bd08.c": "10bee65521a4777ec798af125ce09b91cf1e409ff1cf0048d28436bdaedccd16",
     "src/wave20/func_0016e0a0.c": "8ad1c698d24ebdf0645d46ed4afba8bf0ab193af45d6e24105d8d7687a76ca93",
     "src/wave20/func_00177bcc.c": "4f9e1a9b76c1da15bb837be409cd4c5f37ef51601c978304158271b44c5ca657",
@@ -3053,7 +3069,7 @@
     "src/wave8/func_00178f84.cpp": "3ce59405661fcbe344287cb3fa98e0ebe4f41a475fb67b0c00ce484d85372c64",
     "src/wave8/func_00178fb0.c": "270b40af526c50a25ae46885483261634784f06d6d5bd99ffd524e469a17b086",
     "src/wave8/func_00179030.c": "72eadf8226bad178382e7953b4eb5e83952036e1827111b59bcc752fb893306d",
-    "src/wave8/func_00179160.c": "c3ee8ae9f49c7817b698dd4a87d0b59f4fdba2e380a0330f1dd8becaa1982f0c",
+    "src/wave8/func_00179160.c": "453c663c6366b9386db555b443a5bc11a3a7b24ed60ef1e712d2f50a72b0deef",
     "src/wave8/func_0017a0e0.c": "325d273ce3587264f327cf17d4b367f9ed04411125695db7a55d489e561494c1",
     "src/wave8/func_0017a9ac.c": "60a89ca635de0b89ddce526a06765b9f7c0d5debe2d26d3d3fdecc8560f67751",
     "src/wave8/func_0017adb4.c": "b6af99de7c369676f01aa98599c20b07ee245738854878c3e7eaad0842ee657d",
@@ -3217,7 +3233,13 @@
     "src/wave9/func_001f45c8.c": "20ca5fd66141ef0bbe5256760f817aa6e08651cddbf9110fe8231c002bb08310",
     "src/wave9/func_001f45e0.c": "c1458eae3bc32e736704842f108a856250ba74c0227907ffa2eee8e2d5d6507a",
     "src/wave9/func_001f460c.c": "e955b11b14826c1ee0b49ce6c44be40bf4c92be4b880ee5e705404f9cf325783",
-    "src/wave9/func_001f46a8.c": "377b3319d19f7158e6d0cf206003d314062c6b408bb14d0c1f8da70fcc9f3758"
+    "src/wave9/func_001f46a8.c": "377b3319d19f7158e6d0cf206003d314062c6b408bb14d0c1f8da70fcc9f3758",
+    "src/wave18/func_001eade0.cpp": "0e2a8309b58afc2fb4803baefaf565c92728baa127b8629143bcd916f80e6ed7",
+    "src/large/func_002095c0.cpp": "e65e16c9cab9a1725027f7b9cd2780ab66b32346ae2d2504236818826f6315aa",
+    "src/large/func_002102b4.cpp": "9306a0ace6ba7e770017ef885d3bb2a6f55f6ec105d0c8d457ba2322efbd6109",
+    "src/wave20/func_0013156c.cpp": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b",
+    "src/wave20/func_001f4cf8.cpp": "7a181f50d5cd052087019ef7adc5a6a99c44dd6295097f2d46bd1f6cca17ad66",
+    "src/wave18/func_0014d2e4.cpp": "5a9a9891dea0b065390d0e2c5e71f46dc13d6d9020e74be311da0b37344c5406"
   },
   "approved_contract_deferrals": [
     {
@@ -3279,7 +3301,16 @@
         "_ZN12RuntimeGuardD1Ev",
         "_ZN16RuntimeFinalizerD1Ev"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed destructor aliases bind 00215ec4 (canonical guard-release volatile unsigned* contract) and 00216140 (canonical three-input registration contract) as one-object destructors. Those role/arity contracts cannot be reconciled by callback casts or separate aliases over empty code. RuntimeGuard/RuntimeFinalizer initialization sources are retained, but no destructor identity is adopted.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "60581506da6f344967612e54b43cd27c69602872a77899d6029db2c2077a1e0e",
+      "author_source_current_sha256": "cd526755046110a798b47185db8a3db91271de0a5dea657a2155f9069e5b8779",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w18b",
@@ -3294,7 +3325,13 @@
         "_ZSt7nothrow",
         "_ZnwjRKSt9nothrow_t"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/large/func_002102b4.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "04e7fdf8ede72eacdce3b28faf003885ef8eebb6fedf10c94e64f81d4efece54",
+      "author_source_current_sha256": "700606a786e8177f323db0864a725f107b7835d42174678af0da4863690d5b3c",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w18b",
@@ -3308,7 +3345,13 @@
         "_ZSt7nothrow",
         "_ZnwjRKSt9nothrow_t"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/wave18/func_001eade0.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r3.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "20480d6356f8ccf39674494164db4c9f2898f8bb9f2b3ec1082f3fbd329bf88f",
+      "author_source_current_sha256": "50ac79ac615045999c42868813c3abdd4d84800c50fe6d856fe5e9cc6894929e",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w18c",
@@ -3322,7 +3365,13 @@
         "_ZN18RuntimeMemberOwnerC2Ev",
         "_ZN13RuntimeMemberC1Ev"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/wave18/func_0014d2e4.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "8a56c682c4a345e2ac6fbd24dabb94e4493d3fb0b961c564f8f220626a782abc",
+      "author_source_current_sha256": "f4d5fc2c7c319df96bc4639b8789298d1f83fe6833a2f82afd667111507beed1",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w18i",
@@ -3350,7 +3399,16 @@
         "_ZN19ShaderConfigurationD1Ev",
         "_ZN13EmptyResourceD1Ev"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The delivered RenderResource name collides with canonical stream_manager.h RenderResource. More substantially, its embedded ShaderConfiguration ends at 0xf0 whereas canonical shader.h includes the evidenced tail through 0x130; the enclosing count at +0x138 overlays ShaderResource.selected (a ShaderConfiguration*) in 0010de68. The complete lifecycle/owner relation and EmptyResource destructor subobject are unresolved; renaming the shadow or aliasing destructors is insufficient.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "7a91fcc5b5b1925e40a1a2766ad50dfb8f6427548556dd1658caec7f3bc52435",
+      "author_source_current_sha256": "ec45b6dd7b9aac0a5b860b416344db5bfc94e7e29779522c15614bfc06be4623",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19a",
@@ -3376,7 +3434,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed 29-slot native singleton returns WidgetSet29W19G*, but canonical controller_transitions.h and accepted 001e759c require Screen*, whose evidenced slot/state extent differs. Its implicit __aeabi_atexit/__dso_handle bindings also have no canonical runtime identity proof; a prefix cast or shadow class is not admitted.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "0ab3a73f4be25fb959dab470c97186c2f42a9d566971953de55f09982ff85921",
+      "author_source_current_sha256": "3ab00751d372f02c0d36ca93d4d3f931d87c4da70476b0af70193fd7ec1b131e",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19g",
@@ -3392,7 +3459,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed DeferredStateW19G destructor alias is 001e35e0, still an accepted void(void) body in src/wave3/empty_functions.c. Callback object input/result and concrete owner identity must be reconciled rather than hidden behind a second method alias. The implicit __aeabi_atexit/__dso_handle runtime identities remain unproven.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "8b2360c62baac2812cd3de485bf667783136b6c83ea97497b801ad471e4f4e26",
+      "author_source_current_sha256": "95fa66dee1f9f6545f7503a54ad9d8d29488901e1062f817bf68f82c8594e441",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19g",
@@ -3408,7 +3484,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed BufferedStateW19G destructor alias is 001dd360, still accepted as void(void) in src/wave3/empty_functions.c. Its registered object input and native return-this contract are not represented canonically. The implicit __aeabi_atexit/__dso_handle runtime identities remain unproven.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "775db969eb4422f86a1fbf2bc60c174e8775a67aeacd2b1c56d6270fc3699c48",
+      "author_source_current_sha256": "4ad5353fc129da25a8a09e435c86cd7b97a6b135e200ec4d25a91a6ae366efec",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19g",
@@ -3424,7 +3509,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed IndexedBufferW19G destructor alias is 001dce3c, still accepted as void(void) in src/wave3/empty_functions.c. Its registered object input and native return-this contract are not represented canonically. The implicit __aeabi_atexit/__dso_handle runtime identities remain unproven.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "b4e5620bd337d100f106dc87cbf827c0e7f46015de1d368b47f948bbe87971df",
+      "author_source_current_sha256": "acdd154bce15bc928563ad61caae9fbcac3d3153a7eefa400f1e9e471f6eaa23",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19g",
@@ -3440,7 +3534,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed WidgetSet24W19G destructor at 0015eba4 has no same-address defining source in this ledger proving that complete owner. The implicit __aeabi_atexit/__dso_handle binding would assert a standard runtime contract over canonical void func_00216140(void*,ObjectDestructor,void(*)(void)); identical return-only bytes do not prove that identity.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "085732190dfd10de9bb36452a3271611394d53e55f9a2a438c98b4545dd62873",
+      "author_source_current_sha256": "a4169f8243144f71e8f02cd4454796df3fc005ea10bfb9d86e2b9d8a8c25c704",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19g",
@@ -3456,7 +3559,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed WidgetSet2W19G destructor at 001aced0 has no same-address defining source in this ledger proving that complete owner. The implicit __aeabi_atexit/__dso_handle binding would assert a standard runtime contract over canonical void func_00216140(void*,ObjectDestructor,void(*)(void)); identical return-only bytes do not prove that identity.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "500a823490418ae1f63cdf923e8848f0020a27a32fc3a75be6b8bafbff874d9f",
+      "author_source_current_sha256": "e90209111a00ff7bf0bf1e0231121839c0b901a64607c1b82519d120c7ab8d9c",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w19g",
@@ -3472,7 +3584,16 @@
         "__aeabi_atexit",
         "__dso_handle"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The proposed WidgetSet4W19G destructor at 001af304 has no same-address defining source in this ledger proving that complete fade-reference owner. The implicit __aeabi_atexit/__dso_handle binding would assert a standard runtime contract over canonical void func_00216140(void*,ObjectDestructor,void(*)(void)); identical return-only bytes do not prove that identity.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "607edf14a28c61b3236aa18142d3f15c961cbbd0a3c99c70ecef01916918994a",
+      "author_source_current_sha256": "125181ba6db766734ca4ff0f5b078ac3cff6d97f39b81f84fa6c681f0b6e8809",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w20b",
@@ -3487,7 +3608,13 @@
         "_ZN14CodeUnitReader12readVariant1Ev",
         "_ZN14CodeUnitReader12readVariant2Ev"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/wave20/func_0013156c.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
+      "author_source_current_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w20b",
@@ -3502,7 +3629,13 @@
         "_ZN17CodeUnitReaderAlt12readVariant1Ev",
         "_ZN17CodeUnitReaderAlt12readVariant2Ev"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/wave20/func_001f4cf8.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "2002e94154b5c5ba7cb7d9e1e3692153ccf76783c543b1d68dc7297c783f6e7f",
+      "author_source_current_sha256": "e3767c0d1fa069d0869e90cb86c833248fb00509763ce6c79c5b0376737ec49b",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "w20e",
@@ -3518,7 +3651,16 @@
         "_ZN13NativeTextBoxC2EPK15TextBoxResourceRK16ResourceBlockSetj",
         "_ZN20LayoutRenderMaterialC1EPK16MaterialResourceRK16ResourceBlockSet"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "deferred-with-recorded-contract-reason",
+      "reason": "The delivered NativeTextBox/NativePane/LayoutColor/LayoutRenderMaterial shadows duplicate the pinned nw::lyt/nw::ut classes. Its resource constructor includes a format input and passes it to initialization/string consumers, whereas pinned nw::lyt::TextBox declares only (res::TextBox*,const ResBlockSet&). The real per-version owner/constructor contract must be established without changing frozen native headers, dropping the input, or retaining duplicate native classes.",
+      "evidence": [
+        "original source and immutable receipt above",
+        "include/game/functions.h",
+        "docs/known-issues-c009.md"
+      ],
+      "author_receipt_sha256": "0654876287e810264f48d8d32c1a0ae0934537504e6d2bc54a3318f5f98ad572",
+      "author_source_current_sha256": "5bfeab6653259c451d192261e52d9babfafac3fb55418018ac0c6e6357e90f9e",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "L034",
@@ -3542,7 +3684,13 @@
         "_ZN18PaneNameDescriptorC1EiiPKc",
         "_ZN13PaneIndexListC1Eiz"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/large/func_002095c0.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "6a5cf2102f3b2053202d5a8d43074b478224e79c4baca6173c5f986e43b8aa13",
+      "author_source_current_sha256": "892c73171bfb41c7e1f52f74984f50c3173b3a75aeb972e9326964b4359b7dce",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "L046",
@@ -3555,7 +3703,13 @@
         "_ZN18PaneNameDescriptorC1Ev",
         "_ZN18PaneNameDescriptorC1EiiPKc"
       ],
-      "classification": "uncollected-scope-not-yet-closed"
+      "classification": "collected-canonical-destination-MATCH",
+      "destination": "src/large/func_002102b4.cpp",
+      "collection_evidence": "scratch/integrator/c009/collection-r1.json",
+      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "author_receipt_sha256": "f575495d9407fd52207fed62c8aef1f383f53a320721d3f69f5cba36a76808bc",
+      "author_source_current_sha256": "c4f3bd0ca6133459dc65e8eb8685ac41e20e7bbeac9f7121e10f6ceecbbf1f34",
+      "author_receipt_source_hash_agrees": true
     },
     {
       "author": "s1a2fc4",
@@ -3641,13 +3795,13 @@
     "history edits",
     "push"
   ],
-  "resumed_from": "1cc9f60",
+  "resumed_from": "9d6f0515230d641f51d91dc9ab4b3ffb14011c05",
   "main_merged": "959311b45dc6ba2e373fbbec83a9b4b1e42ccae0",
   "c008_r2_merged": "38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac",
   "c008_r2_merge_commit": "9218542",
-  "target_bytes_current_catalogue": 54648,
-  "dry_ledger_functions": 2277,
-  "revised_predecessor_functions": 106,
+  "target_bytes_current_catalogue": 57484,
+  "dry_ledger_functions": 2283,
+  "revised_predecessor_functions": 108,
   "revised_predecessor_basis": "source delta against c008-r2, including canonical shared-header inclusion migrations; not all rematched",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
@@ -3699,7 +3853,7 @@
     "path": "scratch/integrator/c009/cpp-compat-r5.json",
     "exit_code": 0,
     "headers": 166,
-    "limitations": "Game-header co-inclusion only; no native-unit/signature/forwarding sweep or match proof."
+    "limitations": "Historical pre-collection compile-only header probe; new collection header changes not yet included. No native-unit/signature/indirect-consumer sweep proof."
   },
   "declaration_migration": {
     "source_local_prototypes_removed": 242,
@@ -3707,11 +3861,11 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Complete the remaining C contract families in interfaces-remediation-r1.json; it is an intermediate mixed-input report, not final counts.",
-    "Use c008-r2 probe_contracts.compile_probe and probe_signatures for all c009 new/revised units; these c009-wide probes have not yet run.",
-    "Sixteen original uncollected new-scope MATCH addresses remain open in UNRESOLVED-SCOPE.json; no additional author results were collected during this continuation.",
-    "No final matching sweep, final G3 exit-zero ledger, argcheck adjudication or seven-step pre-review was executed.",
-    "Do not prepare/finalize or claim review-ready/accepted progress from this handoff."
+    "Merge FixC008R3 committed branch as soon supplied; do not overlap its current serial whole-ledger work.",
+    "All original 16 collection addresses have dispositions: 6 canonical MATCH destinations and 10 exact recorded deferrals; do not restart author searches.",
+    "Remediate interfaces-remediation-r1.json findings using evidence, then run a new stable successor-ledger G3 check; historical report is mixed-input and not final.",
+    "Run final all-new/revised match sweep with --show 0, canonical native/signature/indirect-consumer sweeps using c008-r2/r3 helpers, full argcheck candidate adjudication, and seven-step pre-review.",
+    "No full suite/build/prepare/finalize/history edit/push is authorized here."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -3737,10 +3891,27 @@
     "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
-    "config/names.json": "f1e1d11a4f407eb3c42a7723baddb96cfb4939a893b0777b0c238876a7f24ca3",
-    "scratch/integrator/c009/dry-matches.json": "bf640b4737f9b5203866caaf08ebdc8fb6206df5986e908d712635f8cc182e9c",
+    "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
+    "scratch/integrator/c009/dry-matches.json": "2540007357a38720fe6acea340923a22639924c88628525fbddb9bfe9886dad9",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec"
-  }
+  },
+  "collection_milestone": {
+    "original_unique_new_scope": 16,
+    "collected_unique": 6,
+    "deferred_unique": 10,
+    "report": "scratch/integrator/c009/collection-closure-r1.json",
+    "failures_preserved": [
+      "scratch/integrator/c009/collection-r1.json",
+      "scratch/integrator/c009/collection-r2.json"
+    ],
+    "final_style_owner_match": "scratch/integrator/c009/collection-r3.json"
+  },
+  "names_adopted_this_continuation": [
+    "_ZN13PaneIndexListC1Eiz",
+    "_ZN18RuntimeMemberOwnerC1Ev",
+    "_ZN18RuntimeMemberOwnerC2Ev",
+    "_ZN13RuntimeMemberC1Ev"
+  ]
 }

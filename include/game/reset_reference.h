@@ -3,6 +3,21 @@
 #include <stddef.h>
 struct ResetReference { unsigned value; };
 struct InitialRegisterState { unsigned values[6]; };
+/* [INFERENCE] The native member-array constructor supplies each 24-byte
+ * element's address to the return-this constructor callback. */
+struct RuntimeMember {
+    unsigned words[6];
+#ifdef __cplusplus
+    RuntimeMember();
+#endif
+};
+struct RuntimeMemberOwner {
+    unsigned prefix[2];
+    struct RuntimeMember members[32];
+#ifdef __cplusplus
+    RuntimeMemberOwner();
+#endif
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -12,6 +27,7 @@ extern struct ResetReference bss_004b2a44[24];
 extern struct ResetReference *func_00156da0(struct ResetReference *reference);
 extern void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void *(*constructor)(void *),
                                             size_t element_size, size_t element_count);
+extern struct RuntimeMember *func_0014de8c(struct RuntimeMember *object);
 #ifdef __cplusplus
 }
 #endif

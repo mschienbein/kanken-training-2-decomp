@@ -1,6 +1,49 @@
 # C009 recovered integration handoff
 
-## Current continuation handoff — not review-ready
+## Continuation milestone 1 — collection scope closed, not review-ready
+
+Continued `9d6f051` in the existing `c009-integrate` worktree; no completed
+author search or destination collection was restarted.
+
+* All **16 unique** originally uncollected new-scope addresses now have exact
+  dispositions in `c009/collection-closure-r1.json` and `UNRESOLVED-SCOPE.json`.
+  **Six** were collected and measured MATCH at their canonical destinations:
+  `002095c0`, `002102b4`, `0014d2e4`, `001eade0`, `0013156c`, `001f4cf8`.
+  The duplicate w18b/L046 delivery of `002102b4` earns one scope row.
+* **Ten** remain expressly deferred for recorded canonical-contract reasons,
+  not as MATCH credit: `00214d9c`, `0010e1ac`, `001671d4`, `001e3380`,
+  `001dce40`, `001dca5c`, `0015eae0`, `001acc88`, `001aea80`, `001cf974`.
+  Their original sources, immutable MATCH receipts and receipt/source hashes
+  are retained. All original receipt/source hashes agree.
+* Current scope: **682 units/functions / 57,484 target B**:
+  game 619/51,736 B; middleware 38/4,064 B; sdk 25/1,684 B.
+  Dry ledger: **2,209 units / 2,283 functions**. Revised predecessor scope:
+  **104 units / 108 functions**, including new `0014de8c` and `00179160` revisions.
+* Canonical migrations reuse ResourceDescriptor, tagged allocation, shared
+  MotionPair/display-handle types and the ARM EABI constructor callback result.
+  The concrete StyleOwner contains the shared display prefix plus 32 handles;
+  other display sets retain their evidenced variable-length prefix.
+  Both reader method-pointer tables stay external original data: no method
+  aliases or data credit were added.
+* Adopted names: `_ZN13PaneIndexListC1Eiz` has the natural non-inlined
+  `002095c0` caller witness; RuntimeMemberOwner C1/C2 are same-address own
+  definitions; RuntimeMember C1 is the compiler-emitted element callback in
+  matching `0014d2e4`. Names and semantic roles remain `[INFERENCE]`.
+* Evidence: `collection-r1.json` (nine MATCH results plus the initial style-owner
+  mismatch); `collection-r2.json` (same 244/248 mismatch after separate color
+  assignments); `collection-r3.json` (concrete shared-prefix containment MATCH,
+  248/248). All commands used `--show 0` and captured exits. Failures are kept.
+* FixC008R3 is still running its assigned serial matching/audit checks and has
+  requested that c009 hold whole-ledger/heavy checks until its committed handoff.
+  Merge its committed branch first, then run stable-ledger G3 remediation,
+  all-new/revised matching, canonical native/signature/indirect-consumer sweeps,
+  complete argcheck adjudication and all seven pre-review steps.
+
+`HANDOFF-from-9d6f051.json` preserves the incoming handoff. The prior 166-header
+probe is historical evidence, not a probe of these newer header changes.
+No full suite/build, prepare/finalize, history edit or push was performed.
+
+## Previous handoff at 9d6f051 — preserved historical state
 
 The user requested wrap-up during remediation. Preserve this branch; do not
 prepare/finalize or treat any scope count as accepted/MATCH credit.

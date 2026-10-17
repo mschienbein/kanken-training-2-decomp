@@ -220,11 +220,35 @@ struct DisplayHandle {
 #endif
 };
 
+/* [INFERENCE] The native two-float constructor and the guarded 32-slot owner
+ * establish the complete display-handle allocation, including its text tail. */
+struct MotionPair {
+    float x, y;
+#ifdef __cplusplus
+    MotionPair();
+#endif
+};
+
 struct W8DisplayHandle {
     struct DisplayObject *object;
-    float x, y;
-    float scale_x;
-    float scale_y;
+    struct MotionPair position;
+    struct MotionPair scale;
+    unsigned char color[4];
+    unsigned char text[0x80];
+#ifdef __cplusplus
+    W8DisplayHandle()
+    {
+        object = 0;
+        position.x = 0.0f;
+        position.y = 0.0f;
+        scale.x = 1.0f;
+        scale.y = 1.0f;
+        color[0] = 255;
+        color[1] = 255;
+        color[2] = 255;
+        color[3] = 255;
+    }
+#endif
 };
 
 struct W8DisplaySet {
@@ -233,6 +257,15 @@ struct W8DisplaySet {
     struct W8DisplayHandle *handles[];
 #endif
 };
+
+#ifdef __cplusplus
+/* The style singleton owns exactly 32 handles after the shared display prefix;
+ * other W8DisplaySet clients still use only their evidenced flexible prefix. */
+struct StyleOwner {
+    W8DisplaySet base;
+    W8DisplayHandle *slots[32];
+};
+#endif
 
 struct AnimationContext {
     unsigned int reserved00;
@@ -321,6 +354,10 @@ extern void func_0017697c(struct Screen *selection);
 extern void func_00175b8c(void *screen);
 extern void func_00179160(struct W8DisplaySet *set, int index, float x, float y);
 extern void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y);
+extern unsigned data_0023ecdc;
+extern struct StyleOwner bss_00245364;
+extern struct StyleOwner *func_001eb0d0(struct StyleOwner *owner);
+extern struct StyleOwner *func_001eade0(void);
 extern struct ResourceEvent *func_0017a818(const struct NameTable *table,
     int screen, int active, float x, float y, float z);
 extern void func_00175ab8(void *screen, int index,

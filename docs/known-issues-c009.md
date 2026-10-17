@@ -2,20 +2,19 @@
 
 ## Status
 
-**Preserved continuation, not review-ready or accepted.** The user requested wrap-up
-before final-match/interface/argcheck/pre-review closure. Do not prepare/finalize
-or interpret these scope counts as accepted progress. Continued from `1cc9f60`,
-merged adopted main `959311b` and c008-r2 `38b4c01`; `docs/GATES.md` stays v1.16.
-Main owns serialized full builds/suite and acceptance.
+**Continuation milestone 1, not review-ready or accepted.** Continued `9d6f051`
+without restarting collection. The sixteen originally uncollected new-scope
+addresses now have explicit dispositions: six canonical destinations MATCH;
+ten remain deferred with exact contract reasons below. `docs/GATES.md` stays
+v1.16. Main owns serialized full builds/suite and acceptance.
 
-`config/candidates/c009.json` now lists 676 units / 676 functions / 54,648 target
-bytes. Two additional concrete contract blockers were withdrawn below; these
-numbers are scope, not an edited-tree final-MATCH claim:
+`config/candidates/c009.json` lists **682 units / 682 functions / 57,484 target
+bytes**. These are unaccepted scope totals, not an all-c009 final-MATCH claim:
 
 | Frozen profile | Units/functions | Target bytes |
 | --- | ---: | ---: |
-| game | 614 | 48,964 |
-| middleware | 37 | 4,000 |
+| game | 619 | 51,736 |
+| middleware | 38 | 4,064 |
 | sdk | 25 | 1,684 |
 
 Previous collect inputs, successful destination receipts, dirty sources and author results
@@ -30,19 +29,19 @@ results are not silently admitted into this default-model checkpoint.
   findings, 500 unchecked (498 C++ and the two ARMCC varargs parser failures).
   Remediation continued while that audit ran. It is not a current final count,
   and no exit-zero G3 report exists.
-* The final **166-game-header C++ co-inclusion probe exited 0** after canonical
-  pointer-array, allocator, audio-manager, resource/scene-prefix, stream and raw
-  IPC/result repairs. This is compile-only shared-header compatibility, not the
-  native-unit, actual-signature or indirect-consumer same-class sweep. Those
-  c009-wide probes using c008-r2's reusable helpers remain unexercised.
+* The prior **166-game-header C++ co-inclusion probe exited 0** before the
+  collection milestone's header changes. It is historical compile-only evidence,
+  not a current native-unit, actual-signature or indirect-consumer sweep.
+  Those c009-wide probes using c008-r2's reusable helpers remain unexercised.
 * The catalogue recheck intersection was `00214580` (MATCH, exit 0) and
   `00203810` (compile exit 2, then deferred on concrete owner-contract evidence).
 * Final all-new/revised matching, complete argcheck adjudication and the seven-step
   pre-review have **not** run after these changes. No full build, suite, prepare,
   finalize, history edit or push was performed.
-* Sixteen unique additional new-scope status-MATCH addresses are still uncollected.
-  Their alias/canonical cutovers in `UNRESOLVED-SCOPE.json` are unfinished scope,
-  not newly approved exclusions; no collection claim is made.
+* Collection closure is recorded in `collection-closure-r1.json`: canonical
+  ResourceDescriptor/index-list initializers, member-array construction, style
+  owner and both typed reader setups are collected; ten contract blockers are
+  explicitly deferred. Every original author source matches its retained receipt hash.
 
 Private exact evidence and source bindings are recorded in the worktree's
 `scratch/integrator/c009/HANDOFF.json`, `UNRESOLVED-SCOPE.json`,
@@ -83,16 +82,36 @@ or acceptance claims.
 ## Predecessor boundary and newer pending remediation
 
 c008-r2 `38b4c01` was merged at `9218542`; the dry ledger no longer uses failed
-original c008. It has 2,203 units / 2,277 functions: 1,601 predecessor functions
-plus 676 c009 functions. Its additional `0016b6a4` deferral remains excluded.
+original c008. The current dry ledger has **2,209 units / 2,283 functions**:
+1,601 predecessor functions plus 682 c009 functions. The additional `0016b6a4`
+deferral remains excluded.
 
-The current source delta against c008-r2 revises **102 predecessor units /
-106 functions**, including shared-header inclusion migrations. Every revised
-unit is listed in HANDOFF and still needs fresh byte/review closure. Header-only
-dependents also require the complete canonical contract sweep.
+The source delta against c008-r2 revises **104 predecessor units / 108 functions**,
+including shared-header migrations and caller-evidenced constructor input/result
+retention. Every revised unit is listed in HANDOFF and still needs fresh final
+byte/review closure. Header-only dependents need the complete canonical contract sweep.
 
 At wrap-up, FixC008R3 reported new `c008-r3` remediation from current main
 `f3ae330`: slot 11 context, slot 15 context/saved arguments/result, and an
 indirect-consumer same-class audit. c008-r2 remains unfinalized. Those fixes are
 owned by FixC008R3 and were not duplicated or merged here. Reconcile that successor
 before claiming a review-ready c009 base; historical c008 records remain untouched.
+
+## Additional collection-scope deferrals
+
+The original sixteen-address collection boundary is closed by six new canonical
+MATCH destinations and the following ten explicit deferrals. No destructor, runtime
+or duplicate native-class aliases were adopted to conceal these contracts.
+
+| Function(s) | Exact unresolved contract |
+| --- | --- |
+| `00214d9c` | Proposed one-object destructors alias the canonical guard-release `00215ec4` and three-input registration `00216140` functions. Separate callback aliases over empty code do not establish compatible lifecycle roles. |
+| `0010e1ac` | Delivered RenderResource collides with the stream owner; its shorter ShaderConfiguration subobject and unsigned `+0x138` count disagree with canonical shader extent and ShaderResource's selected-pointer slot. Full owner/lifecycle relation is unresolved. |
+| `001671d4` | The delivered 29-slot singleton conflicts with canonical Screen return/consumer contracts and Screen's larger evidenced slot/state extent. Its implicit standard runtime bindings also remain unproven. |
+| `001e3380`, `001dce40`, `001dca5c` | Registered native-destructor object/result contracts disagree with accepted void(void) definitions `001e35e0`, `001dd360`, `001dce3c`. Concrete owners and implicit runtime identities are unresolved; these accepted callback inputs remain part of final caller-contract remediation. |
+| `0015eae0`, `001acc88`, `001aea80` | Complete singleton/destructor owners at `0015eba4`, `001aced0`, `001af304` are not defined in the ledger. Implicit `__aeabi_atexit`/`__dso_handle` bindings assert a standard runtime identity over the existing void registration and code-address image-base contracts, without a canonical identity proof. |
+| `001cf974` | The delivered native-layout shadows duplicate pinned NW4C classes while adding a constructor/initialization format input absent from the pinned TextBox API. Version-specific complete contracts must be recovered without dropping the input or retaining duplicate classes. |
+
+Private `collection-closure-r1.json` retains exact sources, receipts, proposed
+names, source/receipt hashes and per-row reasons. This is the user's defer-with-
+recorded-reason option, not approval of a false match or accepted credit.

@@ -44,4 +44,41 @@ extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_
 }
 #endif
 
+#ifdef __cplusplus
+/* [INFERENCE] Reader identities and encoding roles; the original method-pointer
+ * tables remain external data, not new method-name aliases or credited data. */
+struct EncodingSource;
+struct EncodingSourceVTable {
+    void (*reserved00[18])(void);
+    int (*encoding)(EncodingSource *source);
+};
+struct EncodingSource {
+    const EncodingSourceVTable *vtable;
+};
+struct CodeUnitReader {
+    typedef unsigned short (CodeUnitReader::*NextCodeUnit)();
+    union Cursor {
+        const void *pointer;
+        const unsigned char *bytes;
+        const unsigned short *words;
+    } cursor;
+    NextCodeUnit next;
+};
+struct CodeUnitReaderAlt {
+    typedef unsigned short (CodeUnitReaderAlt::*NextCodeUnit)();
+    union Cursor {
+        const void *pointer;
+        const unsigned char *bytes;
+        const unsigned short *words;
+    } cursor;
+    NextCodeUnit next;
+};
+extern "C" {
+extern const CodeUnitReader::NextCodeUnit data_0021c5e0[4];
+extern const CodeUnitReaderAlt::NextCodeUnit data_0021c64c[4];
+void func_0013156c(CodeUnitReader *reader, EncodingSource *source);
+void func_001f4cf8(CodeUnitReaderAlt *reader, EncodingSource *source);
+}
+#endif
+
 #endif
