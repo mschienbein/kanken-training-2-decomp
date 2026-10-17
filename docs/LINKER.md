@@ -478,7 +478,7 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
-## Catalogue recovery safeguards (candidate v10-r2)
+## Catalogue recovery safeguards (candidate v10-r3)
 
 `tools/analyze.py catalogue --out X` is the single candidate generator. For the
 reviewed image it includes the immutable, image/extent/ISA-bound classification
@@ -569,8 +569,12 @@ V10's bounded closure rules live in `tools/catalogue_closure.py`:
   forms as well as ordinary scalar/VFP loads. Conditional, partially mapped,
   unmodeled or unbounded statically formed reads can veto alignment without
   creating data ownership; an incomplete inventory is never proof of no reference.
-  Conditional calls invalidate caller-saved facts before their early exit, and
-  fixed-copy terminals must be non-flag-setting, unshifted ordinary LR returns.
+  Decoded explicit/implicit writes, operand WRITE flags, register pairs/lists and
+  every writeback base invalidate tracked values before any conditional exit.
+  BL/BLX and returning SVC conservatively invalidate r0-r3/r12/LR. Unmodeled
+  destination effects discard facts rather than retaining stale image pointers;
+  shifted MOV values are not mistaken for unshifted copies. Fixed-copy terminals
+  must be non-flag-setting, unshifted ordinary LR returns.
 - A frozen original-entry/behavior witness can join only unprotected, single-entry,
   prologue-only weak owners when one connected normal ARM CFG from the new entry
   covers the entire bounded span without calls, pools, unknown exits or
@@ -584,11 +588,12 @@ three v9 witnesses. Their finite 90-cell mismatch grid is **not** universal
 impossibility of C, nor proof that raw r0-r3 syscall interfaces are unrepresentable.
 They remain separate from topology exclusions and ordinary recovered leaves.
 
-The v10-r2 guard checkpoint remains partial: 360 unknown bytes in 36 intervals and
-ten unresolved anomalies. `docs/catalogue/REPORT-v10-r2.md` records the guard fixes,
-all real-image deltas and focused verification; the original v10 interval/accounting
-history remains in `docs/catalogue/REPORT-v10.md`. Neither unresolved data nor
-exceptional dispatch is hidden as padding.
+The v10-r3 guard checkpoint remains partial: 360 unknown bytes in 36 intervals and
+ten unresolved anomalies. `docs/catalogue/REPORT-v10-r3.md` records register-effect
+class closure, exact real-image deltas and focused verification. The prior
+`docs/catalogue/REPORT-v10-r2.md` preserves the earlier guard history;
+`docs/catalogue/REPORT-v10.md` preserves the original interval/accounting history.
+Neither unresolved data nor exceptional dispatch is hidden as padding.
 
 
 A reviewed `.init_array` table is accepted only as a bounded, aligned, self-relative

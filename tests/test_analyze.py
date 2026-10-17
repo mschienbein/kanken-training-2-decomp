@@ -1796,6 +1796,94 @@ class CatalogueClosureTests(unittest.TestCase):
                 self.assertEqual(closed["ranges"], baseline["ranges"])
                 self.assertEqual(analyze.validate_catalogue(closed, image, layout), [])
 
+    def test_returning_svc_discards_all_core_call_clobbered_pointer_facts(self) -> None:
+        for register in (0, 1, 2, 3, 12):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE59F0008 | register << 12, condition << 28 | 0x0F000028,
+                        0xE1D010F0 | register << 16, 0xE12FFF1E, BASE + 24,
+                        0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    self.assertFalse(any(row["site"] == BASE + 8 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_exclusive_pair_write_does_not_leave_a_stale_pointer(self) -> None:
+        # LDREXD writes both r0/r1; Capstone 5's aggregate writes/access flags omit them.
+        image, layout = fixture([
+            0xE59F100C, 0xE3A02000, 0xE1B20F9F, 0xE1D130F0, 0xE12FFF1E,
+            BASE + 28, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 28 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertFalse(any(row["site"] == BASE + 12 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_coprocessor_and_status_reads_invalidate_their_destinations(self) -> None:
+        for instruction, register in ((0xEE100F10, 0), (0xEC510F00, 0), (0xEC510F00, 1), (0xE10F0000, 0)):
+            with self.subTest(instruction=instruction, register=register):
+                image, layout = fixture([
+                    0xE59F0008 | register << 12, instruction, 0xE1D020F0 | register << 16,
+                    0xE12FFF1E, BASE + 24, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+                self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+
+    def test_shifted_move_does_not_reintroduce_an_unmodeled_pointer_value(self) -> None:
+        image, layout = fixture([
+            0xE59F1008, 0xE1A00081, 0xE1D020F0, 0xE12FFF1E, BASE + 24,
+            0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+
+    def test_postindex_base_write_cannot_reuse_its_old_pointer(self) -> None:
+        image, layout = fixture([
+            0xE59F0010, 0xE4D01002, 0xE1D030F0, 0xE12FFF1E,
+            0xFFFFFFFF, 0xFFFFFFFF, BASE + 32, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        self.assertTrue(any(row["site"] == BASE + 4 for row in result["closure_evidence"]["read_footprints"]))
+        self.assertFalse(any(row["site"] == BASE + 8 for row in result["closure_evidence"]["read_footprints"]))
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 33 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+
+    def test_register_inventory_covers_actual_multi_outputs_and_writeback(self) -> None:
+        for instruction, expected in (
+            (0xEF000028, {"r0", "r1", "r2", "r3", "ip", "lr"}),
+            (0xE0810392, {"r0", "r1"}), (0xE0C10392, {"r0", "r1"}),
+            (0xE1C200D0, {"r0", "r1"}), (0xE0C200D8, {"r0", "r1", "r2"}),
+            (0xE8920003, {"r0", "r1"}), (0xE8B20003, {"r0", "r1", "r2"}),
+            (0xE1B20F9F, {"r0", "r1"}), (0xE1020091, {"r0"}),
+            (0xE10F0000, {"r0"}), (0xEE100F10, {"r0"}), (0xEC510F00, {"r0", "r1"}),
+            (0xE92D4010, {"sp"}), (0xE8BD4030, {"sp", "r4", "r5", "lr"})):
+            with self.subTest(instruction=instruction):
+                image, layout = fixture([instruction, 0xE12FFF1E])
+                decoded = analyze.Analyzer(image, layout).detailed(BASE)
+                writes = catalogue_closure._register_writes(decoded)
+                self.assertIsNotNone(writes)
+                self.assertLessEqual(expected, {decoded.reg_name(register) for register in writes})
+
+    def test_register_inventory_uses_implicit_writes_and_refuses_unknown_effects(self) -> None:
+        arm = analyze.arm
+        register = SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R1, access=1)
+        unknown = SimpleNamespace(id=arm.ARM_INS_CDP, operands=[register], regs_write=[arm.ARM_REG_R6],
+                                  regs_access=lambda: ([], []), writeback=False)
+        self.assertEqual(catalogue_closure._register_writes(unknown), {arm.ARM_REG_R1, arm.ARM_REG_R6})
+        unknown.operands = []
+        unknown.regs_write = []
+        self.assertIsNone(catalogue_closure._register_writes(unknown))
+        memory = SimpleNamespace(type=arm.ARM_OP_MEM, mem=SimpleNamespace(base=arm.ARM_REG_R0), access=0)
+        store = SimpleNamespace(id=arm.ARM_INS_STR, operands=[register, memory], regs_write=[],
+                                regs_access=lambda: ([], []), writeback=True)
+        self.assertEqual(catalogue_closure._register_writes(store), {arm.ARM_REG_R0})
+        for opcode, operands in ((arm.ARM_INS_LDREXD, [register, memory]),
+                                 (arm.ARM_INS_LDM, [register]), (arm.ARM_INS_MRRC, [register]),
+                                 (arm.ARM_INS_LDR, [memory])):
+            malformed = SimpleNamespace(id=opcode, operands=operands, regs_write=[],
+                                        regs_access=lambda: ([], []), writeback=False)
+            with self.subTest(malformed_opcode=opcode):
+                self.assertIsNone(catalogue_closure._register_writes(malformed))
+
     def test_conditional_calls_discard_every_caller_saved_pointer_fact(self) -> None:
         for register in (0, 1, 2, 3, 12):
             for condition in (1, 14):

@@ -10,7 +10,7 @@ import json
 import subprocess
 from pathlib import Path
 
-from capstone import arm
+from capstone import CS_AC_WRITE, arm
 
 
 def constant_copy_leaf(analyzer, start: int, limit: int, *, allow_record_layout: bool = False) -> dict | None:
@@ -237,6 +237,70 @@ _READ_CLASSES = {value for name, value in vars(arm).items() if name.startswith((
     "ARM_INS_SWP", "ARM_INS_RFE"))}
 
 
+_CALL_OR_SVC_CLOBBERS = {
+    arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12, arm.ARM_REG_LR,
+}
+_SINGLE_DEST_WRITES = {getattr(arm, f"ARM_INS_{name}") for name in (
+    "ADC", "ADD", "AND", "ASR", "BIC", "CLZ", "EOR", "LSL", "LSR", "MLA", "MOV", "MOVT", "MOVW",
+    "MUL", "MVN", "ORR", "ROR", "RRX", "RSB", "RSC", "SBC", "SUB", "REV", "REV16", "REVSH",
+    "SXTB", "SXTB16", "SXTH", "UXTB", "UXTB16", "UXTH", "PKHBT", "PKHTB", "SSAT", "SSAT16", "USAT", "USAT16")}
+_DOUBLE_DEST_WRITES = {getattr(arm, f"ARM_INS_{name}") for name in (
+    "UMULL", "SMULL", "UMLAL", "SMLAL", "UMAAL", "SMLALD", "SMLSLD", "LDRD", "LDREXD")}
+_COPROCESSOR_CORE_READS = {getattr(arm, f"ARM_INS_{name}") for name in ("MRC", "MRC2", "MRRC", "MRRC2", "MRS")}
+_EXCLUSIVE_STATUS_WRITES = {getattr(arm, f"ARM_INS_{name}") for name in ("STREX", "STREXB", "STREXD", "STREXH")}
+_NO_CORE_DESTINATION = _MEMORY_STORES_AND_HINTS | {
+    arm.ARM_INS_CMP, arm.ARM_INS_CMN, arm.ARM_INS_TST, arm.ARM_INS_TEQ,
+    arm.ARM_INS_B, arm.ARM_INS_BX, arm.ARM_INS_NOP,
+}
+
+
+def _register_writes(instruction, *, call: bool = False) -> set[int] | None:
+    """Invalidate decoded explicit/implicit writes, with ISA fallbacks for omissions.
+
+    None means an opaque effect with no trustworthy destination inventory: discard
+    every fact. An unknown instruction with explicit register operands discards all
+    of those operands, never assumes that an omitted WRITE flag means read-only.
+    """
+    operands = instruction.operands
+    registers = [operand.reg for operand in operands if operand.type == arm.ARM_OP_REG]
+    writes = set(instruction.regs_write) | set(instruction.regs_access()[1])
+    writes.update(operand.reg for operand in operands if operand.type == arm.ARM_OP_REG and operand.access & CS_AC_WRITE)
+    if call or instruction.id == arm.ARM_INS_SVC:
+        # Raw result contracts: include/ctr/svc.h (notably GetSystemTick r0/r1).
+        # Model the conservative core call-clobber set for every returning SVC.
+        writes.update(_CALL_OR_SVC_CLOBBERS)
+    elif instruction.id in _BLOCK_READ_MODES:
+        minimum = 1 if _BLOCK_READ_MODES[instruction.id] == "pop" else 2
+        if len(registers) < minimum or any(operand.type != arm.ARM_OP_REG for operand in operands):
+            return None
+        writes.update(registers if _BLOCK_READ_MODES[instruction.id] == "pop" else registers[1:])
+    elif instruction.id in _DOUBLE_DEST_WRITES:
+        if len(operands) < 2 or any(operand.type != arm.ARM_OP_REG for operand in operands[:2]):
+            return None
+        writes.update(registers[:2])
+    elif instruction.id in _COPROCESSOR_CORE_READS:
+        # MRC/MRRC destination access flags can incorrectly say READ or zero.
+        minimum = 2 if instruction.id in (arm.ARM_INS_MRRC, arm.ARM_INS_MRRC2) else 1
+        if len(registers) < minimum:
+            return None
+        writes.update(registers)
+    elif (instruction.id in _SINGLE_DEST_WRITES or instruction.id in _SCALAR_READ_WIDTHS
+          or instruction.id == arm.ARM_INS_VLDR or instruction.id in _EXCLUSIVE_STATUS_WRITES):
+        if not operands or operands[0].type != arm.ARM_OP_REG:
+            return None
+        writes.add(operands[0].reg)
+    elif instruction.id not in _NO_CORE_DESTINATION:
+        if not registers and not writes:
+            return None
+        writes.update(registers)
+    if instruction.id in (arm.ARM_INS_PUSH, arm.ARM_INS_POP, arm.ARM_INS_VPUSH, arm.ARM_INS_VPOP):
+        writes.add(arm.ARM_REG_SP)
+    if instruction.writeback:
+        memory = [operand.mem.base for operand in operands if operand.type == arm.ARM_OP_MEM]
+        writes.update(memory or registers[:1])
+    return writes
+
+
 def _instruction_reads(instruction, before: dict, site: int, pc: int) -> tuple[list[tuple], bool]:
     """Return exact static read spans, or an uncertainty veto, never guessed data."""
     operands = instruction.operands
@@ -333,14 +397,12 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
             previous_end = site + instruction.size
             ins = analyzer.decode(site, isa)
             operands = instruction.operands
-            writes = set(instruction.regs_access()[1])
+            writes = _register_writes(instruction, call=ins.call)
             before = dict(known)
-            for register in writes:
-                known.pop(register, None)
-            if ins.call:
-                # Taken and untaken conditional-call paths must agree on every
-                # surviving fact. AAPCS caller-saved values do not survive that join.
-                for register in (arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12, arm.ARM_REG_LR):
+            if writes is None:
+                known.clear()
+            else:
+                for register in writes:
                     known.pop(register, None)
             if include_reads:
                 pc = site + 8 if isa == "arm" else (site + 4) & ~3
@@ -379,7 +441,8 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
                     first, end = ins.pools[0]
                     if end - first == 4 and analyzer.base <= first <= analyzer.end - 4:
                         known[destination] = (analyzer.word(first), site, "loaded_pool_pointer")
-                elif instruction.id == arm.ARM_INS_MOV and len(operands) == 2 and operands[1].type == arm.ARM_OP_REG:
+                elif (instruction.id == arm.ARM_INS_MOV and len(operands) == 2 and operands[1].type == arm.ARM_OP_REG
+                      and not any(operand.shift.type for operand in operands)):
                     if operands[1].reg in before:
                         known[destination] = before[operands[1].reg]
                 elif (instruction.id in (arm.ARM_INS_ADD, arm.ARM_INS_SUB) and len(operands) == 3
