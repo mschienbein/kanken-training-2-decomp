@@ -25,6 +25,11 @@ annotations remain verbatim. Approved `ctr/svc.h` SVC/register-result declaratio
 `ctr/cp15.h` named-coprocessor-register helpers are accepted and preserved outside target
 bodies, using the interface auditor's extension rules.
 
+Original-source hints locate functions after splicing backslash-newline continuations
+(LF or CRLF) and ignoring comments and complete preprocessing directives. Multiline
+macros before, after or inside an ordinary target do not alter its source boundaries;
+all hint slices still use offsets into the original text.
+
 Each evaluation calls `toolchain.compile_source(cache=False)` in a private per-worker
 scratch directory, then `match.Context.compare`, using the frozen
 `armlink5-inline-branchnop-v2` model. Temporary objects and cache refreshes are private and
@@ -92,9 +97,10 @@ new floating temporaries.
 ```
 
 The module tests reparsing, target-only edits, overlapping function names, prepared/raw
-offset separation, approved extension headers, clean C++ refusal, safety guards,
-deterministic hill-climbing and bounded multiprocessing, synthetic real-compiler
-mutations/scoring, and optional native execution comparisons.
+offset separation, multiline macros and continued comments with LF/CRLF, approved
+extension headers, clean C++ refusal, safety guards, deterministic hill-climbing and
+bounded multiprocessing, synthetic real-compiler mutations/scoring, and optional native
+execution comparisons.
 Compiler tests skip without the pinned compiler/launcher; image tests
 also skip without private `orig/code.bin` and `orig/exheader.bin`. All temporary artifacts stay
 in `scratch/`; no full build or full test suite is required.
