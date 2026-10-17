@@ -142,6 +142,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "compiler": profile.compiler, "flags": list(profile.flags), "object_sha256": sha256_file(obj),
             "functions": sorted(unit["functions"]), "cache_hit": hits[unit["source"]],
             "linker_rewrites": rewrites,
+            "literal_rebindings": linker.literal_rebindings,
         })
     try:
         inplace.reject_overlaps(occupied)

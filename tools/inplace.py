@@ -15,6 +15,11 @@ callee's instruction (or a NOP), decided from the ORIGINAL function at the call'
 proves only that the original callee's body is that instruction, and a B to the next instruction
 written as a NOP proves only that the target starts there. Every such rewrite is reported
 (`InPlaceLinker.rewrites`) and the model name is recorded by the callers.
+
+An opt-in, non-default model also permits a complete anonymous SHF_MERGE|SHF_STRINGS section
+to be permuted by whole-record identity (rule anonymous-string-records-v1). It never searches
+for data or changes instructions: every record needs an original relocation witness, the same
+record bytes, and a bijective placement inside one equal-sized, completely verified pool.
 """
 from __future__ import annotations
 
@@ -71,11 +76,13 @@ class LinkerModel:
     name: str
     inline: bool = False  # --inline: ARM BL to a 4/8-byte ARM function -> its instruction, or a NOP
     branchnop: bool = False  # --branchnop: relocated ARM B to the next instruction -> NOP
+    string_records: bool = False  # anonymous-string-records-v1: complete, witnessed literal permutation
 
 
 LINKER_MODELS = {m.name: m for m in (
     LinkerModel("strict-v1"),
     LinkerModel("armlink5-inline-branchnop-v2", inline=True, branchnop=True),
+    LinkerModel("inplace-literal-records-v1", inline=True, branchnop=True, string_records=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).
@@ -181,6 +188,8 @@ class Section:
     mapping: list[tuple[int, str]] = field(default_factory=list)  # ($a|$t|$d offset, kind)
     align: int = 1  # sh_addralign: every placement must respect it
     comdat: str | None = None  # signature of the COMDAT group this section belongs to
+    merge_strings: bool = False  # both SHF_MERGE and SHF_STRINGS, not merely a familiar section name
+    entsize: int = 0
 
 
 class ObjectFile:
@@ -199,6 +208,9 @@ class ObjectFile:
                         i, s.name, b"" if nobits else s.data(), s["sh_size"], nobits,
                         bool(s["sh_flags"] & SH_FLAGS.SHF_EXECINSTR), bool(s["sh_flags"] & SH_FLAGS.SHF_WRITE),
                         align=max(1, s["sh_addralign"]),
+                        merge_strings=(s["sh_flags"] & (SH_FLAGS.SHF_MERGE | SH_FLAGS.SHF_STRINGS)
+                                       == SH_FLAGS.SHF_MERGE | SH_FLAGS.SHF_STRINGS),
+                        entsize=s["sh_entsize"],
                     )
             symtab = elf.get_section_by_name(".symtab")
             self.symbols = [
@@ -301,6 +313,8 @@ class Placement:
     section: Section
     base: int
     origin: str  # "catalogue" or "inferred"
+    literal_offsets: dict[int, int] | None = None  # candidate record start -> output record start
+    literal_data: bytes | None = None  # reordered candidate bytes; never copied from the image
 
 
 def _is_internal_label(sym: Symbol) -> bool:
@@ -378,6 +392,7 @@ class InPlaceLinker:
         self.bss = bss
         self.model = linker_model(model) if isinstance(model, str) else model
         self.rewrites: list[Rewrite] = []
+        self.literal_rebindings: list[dict] = []
 
     # -- placement -----------------------------------------------------------------------------
 
@@ -414,6 +429,11 @@ class InPlaceLinker:
             elif prior.base != base:
                 raise LinkError(f"{sym.name}: bound to {bound.address:#x}, but its section is placed at {prior.base:#x}")
         fixed = set(placements)  # addresses decided by the catalogue or by bound names
+        literal_sections = {}
+        if self.model.string_records:
+            for sec in obj.sections.values():
+                if sec.name in (".conststring", ".constwstring") and sec.merge_strings:
+                    literal_sections[sec.index] = self._literal_records(obj, sec)
         # Infer data sections from the original values their references resolve to.
         changed = True
         while changed:
@@ -423,6 +443,8 @@ class InPlaceLinker:
                     sym = rel.symbol
                     if not isinstance(sym.shndx, int) or sym.shndx not in obj.sections:
                         continue
+                    if sym.shndx in literal_sections:
+                        continue  # a mergeable pool has record addresses, not one affine section base
                     implied = self._original_value(rel, placed.base + rel.offset, placed.section)
                     if implied is None:
                         continue
@@ -441,6 +463,8 @@ class InPlaceLinker:
                     # A reference into a section whose address is fixed (catalogue function or bound
                     # name) that disagrees with the original is a byte mismatch in the referencing
                     # section, reported by the comparison; it says nothing about placement.
+        for idx, records in literal_sections.items():
+            placements[idx] = self._place_literal_records(obj, obj.sections[idx], records, placements)
         # Every global definition must be bound and sit exactly at its binding, so a definition
         # reached through a section symbol and an extern reference by name always resolve to one
         # address. (Static definitions are local to the unit and need no binding.)
@@ -465,6 +489,101 @@ class InPlaceLinker:
              for p in placements.values() if p.section.size]
         )
         return placements
+
+    @staticmethod
+    def _literal_records(obj: ObjectFile, sec: Section) -> dict[int, bytes]:
+        """Parse only compiler-marked anonymous pools, including their zero alignment padding."""
+        unit = 2 if sec.name == ".constwstring" else 1
+        if (sec.nobits or sec.executable or sec.writable or sec.relocs or sec.comdat
+                or sec.entsize != unit or sec.align not in (unit, 4)
+                or sec.size != len(sec.data) or not 0 < sec.size <= 1 << 20):
+            raise LinkError(f"{sec.name}: not an eligible anonymous string pool")
+        symbols = [s for s in obj.symbols if s.shndx == sec.index]
+        if not symbols or any(s.kind != "STT_SECTION" or s.bind != "STB_LOCAL" or s.value
+                              for s in symbols):
+            raise LinkError(f"{sec.name}: string pool has a named or non-section definition")
+        records: dict[int, bytes] = {}
+        seen: set[bytes] = set()
+        offset = 0
+        while offset < sec.size:
+            end = offset
+            while end + unit <= sec.size and any(sec.data[end:end + unit]):
+                end += unit
+            if end == offset or end + unit > sec.size:
+                raise LinkError(f"{sec.name}+{offset:#x}: empty or unterminated string record")
+            end += unit
+            record = sec.data[offset:end]
+            if record in seen or len(records) >= 4096:
+                raise LinkError(f"{sec.name}: duplicate records or too many string records")
+            records[offset] = record
+            seen.add(record)
+            aligned = (end + sec.align - 1) // sec.align * sec.align
+            if end == sec.size:
+                break
+            if aligned >= sec.size or any(sec.data[end:aligned]):
+                raise LinkError(f"{sec.name}+{end:#x}: invalid string alignment padding")
+            offset = aligned
+        return records
+
+    def _place_literal_records(self, obj: ObjectFile, sec: Section, records: dict[int, bytes],
+                               placements: dict[int, Placement]) -> Placement:
+        """L1: use each incoming original pointer as a witness; no image scan or suffix merging."""
+        targets: dict[int, int] = {}
+        references = 0
+        for source in obj.sections.values():
+            for rel in source.relocs:
+                if rel.symbol.shndx != sec.index or rel.type == R_ARM_NONE:
+                    continue
+                placed = placements.get(source.index)
+                if (placed is None or rel.type not in (R_ARM_ABS32, R_ARM_TARGET1)
+                        or rel.symbol.kind != "STT_SECTION" or rel.symbol.bind != "STB_LOCAL"
+                        or rel.symbol.value):
+                    raise LinkError(f"{sec.name}: unsupported or unplaced incoming string reference")
+                offset = self._addend(rel, source)
+                if offset not in records:
+                    raise LinkError(f"{sec.name}+{offset:#x}: reference is not a whole-record start")
+                target = self._original_value(rel, placed.base + rel.offset, source)
+                if target is None or target % sec.align:
+                    raise LinkError(f"{sec.name}: misaligned original string reference")
+                prior = targets.setdefault(offset, target)
+                if prior != target:
+                    raise LinkError(f"{sec.name}+{offset:#x}: repeated string references disagree")
+                references += 1
+        if targets.keys() != records.keys():
+            raise LinkError(f"{sec.name}: every string record needs a placed relocation witness")
+        if len(set(targets.values())) != len(records):
+            raise LinkError(f"{sec.name}: string record placement is not bijective")
+        base = min(targets.values())
+        end = base + sec.size
+        if (base < self.bss[1] and self.bss[0] < end
+                or any(base < address + fn["size"] and address < end
+                       for address, fn in self.functions.items())):
+            raise LinkError(f"{sec.name}: string pool overlaps a catalogued function or BSS")
+        reordered = bytearray()
+        offsets: dict[int, int] = {}
+        ordered = sorted(targets, key=targets.__getitem__)
+        for index, offset in enumerate(ordered):
+            if targets[offset] != base + len(reordered):
+                raise LinkError(f"{sec.name}: string witnesses do not cover one contiguous pool")
+            offsets[offset] = len(reordered)
+            reordered.extend(records[offset])
+            if index + 1 < len(ordered):
+                reordered.extend(bytes((-len(reordered)) % sec.align))
+        if len(reordered) != sec.size:
+            raise LinkError(f"{sec.name}: reordered string pool changes the section size")
+        try:
+            original = self.image.read(base, sec.size)
+        except ValueError:
+            raise LinkError(f"{sec.name}: witnessed string pool is outside the image") from None
+        if original != reordered:
+            raise LinkError(f"{sec.name}: complete witnessed string pool differs from the candidate records")
+        self.literal_rebindings.append({
+            "rule": "anonymous-string-records-v1", "section": sec.name, "base": base,
+            "size": sec.size, "record_count": len(records), "reference_count": references,
+            "records": [{"candidate_offset": offset, "output_offset": offsets[offset],
+                         "size": len(records[offset])} for offset in records],
+        })
+        return Placement(sec, base, "inferred", offsets, bytes(reordered))
 
     def _address_for(self, name: str) -> int:
         target = self.resolver.resolve(name)
@@ -518,11 +637,17 @@ class InPlaceLinker:
             return (_sx(word & 0x7FFFFFFF, 31) + place) & 0xFFFFFFFF
         raise LinkError(f"{sec.name}+{rel.offset:#x}: unsupported relocation type {rel.type}")
 
-    def _symbol_target(self, sym: Symbol, obj: ObjectFile, placements: dict[int, Placement]) -> Target:
+    def _symbol_target(self, sym: Symbol, obj: ObjectFile, placements: dict[int, Placement],
+                       addend: int = 0) -> Target:
         if isinstance(sym.shndx, int) and sym.shndx in obj.sections:
             placed = placements.get(sym.shndx)
             if placed is None:
                 raise LinkError(f"{sym.name or obj.sections[sym.shndx].name}: section was never placed")
+            if placed.literal_offsets is not None:
+                offset = _symbol_offset(sym) + addend
+                if offset not in placed.literal_offsets:
+                    raise LinkError(f"{placed.section.name}+{offset:#x}: not a string record start")
+                return Target(placed.base + placed.literal_offsets[offset] - addend)
             return Target(placed.base + _symbol_offset(sym), _is_thumb_function(sym))
         if sym.shndx == "SHN_UNDEF":
             return self.resolver.resolve(sym.name)
@@ -687,6 +812,7 @@ class InPlaceLinker:
         the caller can report per-function differences. Branches the linker model rewrote instead of
         relocating are listed in `self.rewrites` (reset by each call).
         """
+        self.literal_rebindings = []
         placements = self.place(obj, names_to_address or {})
         self.rewrites = []
         linked: dict[int, tuple[Placement, bytes]] = {}
@@ -698,7 +824,7 @@ class InPlaceLinker:
                     raise LinkError(f"{sec.name}: placed at {placed.base:#x}, outside BSS [{lo:#x}, {hi:#x})")
                 linked[idx] = (placed, b"")
                 continue
-            data = bytearray(sec.data)
+            data = bytearray(placed.literal_data if placed.literal_data is not None else sec.data)
             for rel in sec.relocs:
                 if rel.type == R_ARM_V4BX:
                     continue  # marker; its symbol may be null and is never resolved
@@ -710,7 +836,7 @@ class InPlaceLinker:
                         raise LinkError(f"{sec.name} depends on {obj.sections[sym.shndx].name}, which no reference places")
                     continue
                 place = placed.base + rel.offset
-                target = self._symbol_target(rel.symbol, obj, placements)
+                target = self._symbol_target(rel.symbol, obj, placements, self._addend(rel, sec))
                 rewrite = self._optimised_branch(rel, sec, place, target, obj, placements)
                 if rewrite is not None:
                     struct.pack_into("<I", data, rel.offset, rewrite.word)

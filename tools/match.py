@@ -88,6 +88,7 @@ class Context:
             names = merge_names(names, image_mod.load_names(names_path))
         self.resolver = inplace.Resolver(self.functions, names)
         self.model = inplace.linker_model(model)
+        self.literal_rebindings: list[dict] = []
 
     def compare(self, obj_path: Path) -> list[dict]:
         """Link the object in place; one result row per catalogued function it defines, listing
@@ -95,6 +96,7 @@ class Context:
         obj = inplace.ObjectFile(obj_path)
         linker = inplace.InPlaceLinker(self.image, self.functions, self.resolver, self.image.bss, self.model)
         linked = linker.link(obj)
+        self.literal_rebindings = linker.literal_rebindings
         results = []
         for placed, data in linked.values():
             if placed.origin != "catalogue":
@@ -152,6 +154,7 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         "compiler": profile.compiler, "compiler_sha256": sha256(toolchain.armcc_exe(profile.compiler)),
         "flags": list(profile.flags), "object_sha256": sha256(obj_path), "image_sha256": ctx.image.sha256,
         "catalogue_sha256": sha256(catalogue_path), "linker_model": ctx.model.name,
+        "literal_rebindings": ctx.literal_rebindings,
         "proposed_names": None if names_path is None else {"path": names_path.as_posix(), "sha256": sha256(names_path)},
         "functions": [{k: v for k, v in r.items() if not k.startswith("_")} for r in results],
     }

@@ -205,3 +205,32 @@ checkpoint that credits a function through a rewrite (review F03).
   catalogue v4 splits there (the 28 NOP entries, 55 leading NOPs, 78 fallthroughs into entries, 98
   other in-extent tail calls, 11 uncatalogued thunks/wrappers such as 0x186eec), plus pointer-only
   entries such as 0x1ef884.
+
+## Experimental literal-record placement (2026-10-17)
+
+`--linker-model inplace-literal-records-v1` is an **opt-in proposal**, not the frozen default.
+It retains the default's branch rules and adds `anonymous-string-records-v1`: a compiler-marked,
+anonymous `.conststring` or `.constwstring` pool may be placed by complete record identity rather
+than one affine section base. This does **not** claim to reconstruct armlink's original ordering
+algorithm. It isolates a separately reviewable data-layout qualification; no acceptance gate is
+changed by selecting or implementing the model.
+
+The section must be readonly, non-executable, relocation-free, non-COMDAT, with both
+`SHF_MERGE|SHF_STRINGS`, the correct 1/2-byte entity size, and only local section symbols. Records
+must be nonempty, unique, terminated, and separated only by zero alignment padding. The bounds
+are 1 MiB and 4,096 records. Every record needs a placed ABS32/TARGET1 reference to its start;
+all references to one record must agree. Their original pointers must identify a bijection onto
+one contiguous, equal-sized pool outside all catalogued functions and BSS. Reordering **candidate**
+records and padding must reproduce that entire pool exactly. No image search, suffix/interior
+binding, discarded record, invented data, instruction replacement, or relaxed function comparison
+is permitted. Existing intra-/inter-unit section-overlap checks remain in force.
+
+`literal_rebindings` in match results and per-unit build receipts records the rule, pool address,
+size, record/reference counts, and candidate/output offsets and sizes; it contains no literal
+contents. Function bytes, including relocated pointer values, must still match independently.
+The qualification is unknown original pool order/TU ownership, not uncertain literal bytes or
+targets. Source/interface review must still reject artificial seeding tables, section attributes,
+unused declarations or other compiler steering. `tests/test_literal_pools.py` covers the positive
+case and fail-closed boundaries without private inputs. The frozen default and `strict-v1` retain
+their existing common-section placement rule.
+
