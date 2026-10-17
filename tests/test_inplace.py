@@ -9,6 +9,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 import inplace  # noqa: E402
@@ -19,6 +20,7 @@ PROFILE = toolchain.Profile(
     ("--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "-O3", "-Otime"),
 )
 HAVE_COMPILER = toolchain.armcc_exe(PROFILE.compiler).is_file()
+GAME_PROFILE = toolchain.load_profiles()["game"]
 
 FIXTURE = r"""
 extern void func_00100100(int);
@@ -289,6 +291,268 @@ class InPlaceTest(unittest.TestCase):
         linker = inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000))
         linked = {p.base: d for p, d in linker.link(obj).values()}
         self.assertEqual(linked[0x100000], bytes(data))
+
+
+@unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+class CppFunctionAliasTest(unittest.TestCase):
+    """Real game-profile C1/C2 and virtual/non-virtual D1/D2 ELF aliases."""
+
+    MODEL = "armlink5-inline-branchnop-v6"
+
+    PAIRS = (
+        ("_ZN5PlainC1Ev", "_ZN5PlainC2Ev"),
+        ("_ZN5PlainD1Ev", "_ZN5PlainD2Ev"),
+        ("_ZN7VirtualD1Ev", "_ZN7VirtualD2Ev"),
+    )
+
+    @classmethod
+    def setUpClass(cls):
+        tmp = tempfile.TemporaryDirectory()
+        cls.addClassCleanup(tmp.cleanup)
+        source = Path(tmp.name) / "aliases.cpp"
+        source.write_text(
+            "class Plain { public: Plain(); ~Plain(); };\n"
+            "Plain::Plain() {}\nPlain::~Plain() {}\n"
+            "class Virtual { public: virtual ~Virtual(); };\nVirtual::~Virtual() {}\n",
+            encoding="utf-8",
+        )
+        cls.object_path = source.with_suffix(".o")
+        toolchain.compile_source(GAME_PROFILE, source, cls.object_path)
+
+    def fixture(self, binding=0):
+        obj = inplace.ObjectFile(self.object_path)
+        addresses = {
+            index: (BASE if section.executable else TABLE_AT) + index * 0x100
+            for index, section in obj.sections.items()
+        }
+        skipped = {pair[1 - binding] for pair in self.PAIRS}
+        names = {
+            sym.name: {"address": addresses[sym.shndx] + sym.value}
+            for sym in obj.defined_globals() if sym.name not in skipped
+        }
+        names.update({
+            "_ZdlPv": {"address": BASE + 0x8000},
+            "_ZTVN10__cxxabiv117__class_type_infoE": {"address": TABLE_AT + 0x8000},
+        })
+        catalogue = {
+            addresses[index]: {"address": addresses[index], "size": sec.size, "isa": "arm"}
+            for index, sec in obj.sections.items() if sec.executable
+        }
+        catalogue[BASE + 0x8000] = {"address": BASE + 0x8000, "size": 16, "isa": "arm"}
+        mem, expected = Memory(), {}
+        for index, sec in obj.sections.items():
+            data = bytearray(sec.data)
+            for rel in sec.relocs:
+                sym = rel.symbol
+                target = (addresses[sym.shndx] + sym.value if isinstance(sym.shndx, int)
+                          else names[sym.name]["address"])
+                word = struct.unpack_from("<I", data, rel.offset)[0]
+                place = addresses[index] + rel.offset
+                if rel.type == inplace.R_ARM_JUMP24:
+                    addend = word & 0xFFFFFF
+                    if addend & 0x800000:
+                        addend -= 0x1000000
+                    word = (word & 0xFF000000) | (((target + (addend << 2) - place) >> 2) & 0xFFFFFF)
+                elif rel.type == inplace.R_ARM_ABS32:
+                    word = (target + word) & 0xFFFFFFFF
+                elif rel.type == inplace.R_ARM_PREL31:
+                    addend = word & 0x7FFFFFFF
+                    if addend & 0x40000000:
+                        addend -= 0x80000000
+                    word = (word & 0x80000000) | ((target + addend - place) & 0x7FFFFFFF)
+                else:
+                    self.fail(f"unexpected fixture relocation {rel.type}")
+                struct.pack_into("<I", data, rel.offset, word)
+            expected[index] = bytes(data)
+            mem.write(addresses[index], data)
+        return obj, mem, catalogue, names, expected
+
+    def linker(self, mem, catalogue, names, model=MODEL):
+        return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names),
+                                     (0x200000, 0x201000), model)
+
+    def test_game_compiler_emits_zero_size_constructor_and_destructor_aliases(self):
+        obj = inplace.ObjectFile(self.object_path)
+        symbols = {sym.name: sym for sym in obj.defined_functions()}
+        for complete, base in self.PAIRS:
+            with self.subTest(complete=complete):
+                full, zero = symbols[complete], symbols[base]
+                self.assertEqual((full.shndx, full.value), (zero.shndx, zero.value))
+                self.assertEqual((full.size, zero.size), (obj.sections[full.shndx].size, 0))
+                self.assertIn(full.shndx, inplace.function_aliases(obj))
+
+    def test_either_abi_name_places_one_unchanged_complete_section(self):
+        for model, policy in inplace.LINKER_MODELS.items():
+            if not policy.function_entry_aliases:
+                continue
+            for binding in (0, 1):
+                with self.subTest(model=model, binding=binding):
+                    obj, mem, catalogue, names, expected = self.fixture(binding)
+                    metadata = [vars(sym).copy() for sym in obj.symbols]
+                    linker = self.linker(mem, catalogue, names, model)
+                    linked = linker.link(obj)
+                    for index, (placed, data) in linked.items():
+                        self.assertEqual(data, expected[index])
+                        self.assertEqual(len(data), placed.section.size)
+                    for pair in self.PAIRS:
+                        full, zero = (next(sym for sym in obj.symbols if sym.name == name) for name in pair)
+                        placements = {index: row[0] for index, row in linked.items()}
+                        self.assertEqual(linker._symbol_target(full, obj, placements),
+                                         linker._symbol_target(zero, obj, placements))
+                    self.assertEqual([vars(sym) for sym in obj.symbols], metadata)
+                    self.assertEqual(linker.removed_callees, [])
+
+    def test_frozen_models_keep_their_original_alias_requirements(self):
+        for model, policy in inplace.LINKER_MODELS.items():
+            if policy.function_entry_aliases:
+                continue
+            for binding in (0, 1):
+                with self.subTest(model=model, binding=binding):
+                    obj, mem, catalogue, names, _ = self.fixture(binding)
+                    with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                        self.linker(mem, catalogue, names, model).link(obj)
+            obj, mem, catalogue, names, expected = self.fixture()
+            for complete, base in self.PAIRS:
+                names[base] = dict(names[complete])
+            linked = self.linker(mem, catalogue, names, model).link(obj)
+            self.assertTrue(all(data == expected[index] for index, (_, data) in linked.items()))
+
+    def test_zero_size_requires_an_identical_full_section_function_sibling(self):
+        for case in ("interior", "no_extent", "partial_extent", "other_isa", "not_executable"):
+            with self.subTest(case=case):
+                obj, mem, catalogue, names, _ = self.fixture()
+                full, zero = (next(sym for sym in obj.symbols if sym.name == name) for name in self.PAIRS[1])
+                if case == "interior":
+                    zero.value = 4
+                elif case == "no_extent":
+                    full.size = 0
+                elif case == "partial_extent":
+                    full.size -= 1
+                elif case == "other_isa":
+                    zero.value = 1
+                else:
+                    obj.sections[full.shndx].executable = False
+                with self.assertRaisesRegex(inplace.LinkError, "zero-size function"):
+                    self.linker(mem, catalogue, names).link(obj)
+
+    def test_a_zero_size_data_symbol_cannot_borrow_a_function_binding(self):
+        for kind in ("STT_OBJECT", "STT_NOTYPE"):
+            for model, policy in inplace.LINKER_MODELS.items():
+                if not policy.function_entry_aliases:
+                    continue
+                with self.subTest(kind=kind, model=model):
+                    obj, mem, catalogue, names, _ = self.fixture()
+                    zero = next(sym for sym in obj.symbols if sym.name == self.PAIRS[1][1])
+                    zero.kind = kind
+                    with self.assertRaisesRegex(inplace.LinkError, "global .* has no address binding"):
+                        self.linker(mem, catalogue, names, model).link(obj)
+
+    def test_alias_bindings_must_agree_and_name_a_catalogued_start(self):
+        for case in ("conflict", "interior", "absent"):
+            with self.subTest(case=case):
+                obj, mem, catalogue, names, _ = self.fixture()
+                complete, base = self.PAIRS[1]
+                address = names[complete]["address"]
+                names[base] = {"address": address + (0x100 if case == "conflict" else 1 if case == "interior" else 0x9000)}
+                reason = "aliases resolve to different addresses" if case == "conflict" else "not a catalogued function start"
+                with self.assertRaisesRegex(inplace.LinkError, reason):
+                    self.linker(mem, catalogue, names).link(obj)
+
+    def test_swapping_the_abi_name_with_the_recorded_extent_is_equivalent(self):
+        obj, mem, catalogue, names, expected = self.fixture(binding=1)
+        for complete, base in self.PAIRS:
+            full, zero = (next(sym for sym in obj.symbols if sym.name == name) for name in (complete, base))
+            full.size, zero.size = zero.size, full.size
+        linked = self.linker(mem, catalogue, names).link(obj)
+        self.assertTrue(all(data == expected[index] for index, (_, data) in linked.items()))
+
+
+class CompositeAliasSwitchTest(unittest.TestCase):
+    """V6 must exercise the v4 CFG and alias proof together, not select either one."""
+
+    MODEL = "armlink5-inline-branchnop-v6"
+
+    def fixture(self, form="words", alias_call=False, **kwargs):
+        fixture = BoundedSwitchModelTest().fixture(form, **kwargs)
+        alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+        fixture.object.symbols.append(alias)
+        if alias_call:
+            fixture.object.sections[1].relocs[0].symbol = alias
+        return fixture
+
+    def linker(self, fixture, model=MODEL):
+        return inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                     (0x200000, 0x201000), model)
+
+    def test_v6_composes_both_switch_forms_and_both_alias_call_spellings(self):
+        for form in ("words", "branches"):
+            for alias_call in (False, True):
+                with self.subTest(form=form, alias_call=alias_call):
+                    fixture = self.fixture(form, alias_call)
+                    metadata = [vars(sym).copy() for sym in fixture.object.symbols]
+                    with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                        self.linker(fixture, "armlink5-inline-branchnop-v4").link(fixture.object)
+                    linker = self.linker(fixture)
+                    linked = linker.link(fixture.object)
+                    self.assertEqual(set(linked), {1})
+                    self.assertEqual(linked[1][1], fixture.original)
+                    self.assertEqual([row.target for row in linker.rewrites], [None])
+                    self.assertEqual(linker.removed_callees[0]["symbols"], ["base_variant", "set_field18"])
+                    self.assertEqual([vars(sym) for sym in fixture.object.symbols], metadata)
+
+    def test_v6_aliases_do_not_bypass_v4_endian_state_refusal(self):
+        for form in ("words", "branches"):
+            for state in (BoundedSwitchModelTest.SETEND_BE, BoundedSwitchModelTest.SETEND_LE):
+                with self.subTest(form=form, state=state):
+                    fixture = self.fixture(form, alias_call=True, window=(state,))
+                    linker = self.linker(fixture)
+                    with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                        linker.link(fixture.object)
+                    self.assertEqual(linker.rewrites, [])
+                    self.assertEqual(linker.removed_callees, [])
+
+    def test_v6_aliases_refuse_omitted_architectural_guard_writes(self):
+        # Independent F03 fixtures: these loads/transfers write the bounded index even
+        # when the installed decoder's register-access list omits their destinations.
+        for name, word in (("ldrexd", 0xE1B02F9F), ("predicated ldrexd", 0x31B02F9F),
+                           ("mrrc", 0xEC532F00)):
+            for form in ("words", "branches"):
+                with self.subTest(instruction=name, form=form):
+                    fixture = self.fixture(form, alias_call=True, window=(word,))
+                    linker = self.linker(fixture)
+                    with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                        linker.link(fixture.object)
+                    self.assertEqual(linker.rewrites, [])
+                    self.assertEqual(linker.removed_callees, [])
+
+    def test_v6_aliases_refuse_all_rfe_forms_and_owner_placements(self):
+        # Independently encoded exception returns, with both the review's r4 frame
+        # and an sp frame: none proves PC/CPSR or little-endian state preservation.
+        variants = (("rfeia", 0xF8BD0A00), ("rfeda", 0xF83D0A00),
+                    ("rfedb", 0xF93D0A00), ("rfeib", 0xF9BD0A00))
+        for name, encoding in variants:
+            for base in (4, 13):
+                word = (encoding & ~(0xF << 16)) | base << 16
+                for form in ("words", "branches"):
+                    for placement in ("window", "before_compare", "one_predecessor", "unreachable"):
+                        with self.subTest(instruction=name, base=base, form=form, placement=placement):
+                            if placement == "window":
+                                kwargs = {"window": (word,)}
+                            elif placement == "before_compare":
+                                kwargs = {"compare": word, "window": (
+                                    JumpTableContextTest.CMP_R2_3, JumpTableContextTest.MOV_R4_R0)}
+                            elif placement == "one_predecessor":
+                                kwargs = {"compare": JumpTableContextTest.branch(BASE + 4, BASE + 12, 0x1),
+                                          "window": (word, JumpTableContextTest.CMP_R2_3,
+                                                     JumpTableContextTest.MOV_R4_R0)}
+                            else:
+                                kwargs = {"suffix": (word,)}
+                            fixture = self.fixture(form, alias_call=True, **kwargs)
+                            linker = self.linker(fixture)
+                            with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                                linker.link(fixture.object)
+                            self.assertEqual(linker.rewrites, [])
+                            self.assertEqual(linker.removed_callees, [])
 
 
 def synthetic(rtype: int, word: bytes, symbol: inplace.Symbol):
@@ -828,10 +1092,412 @@ class ArmCallAbiContextTest(unittest.TestCase):
         self.assertEqual(self.context(words, 12), "unresolved_control_flow")
 
 
+class JumpTableContextTest(unittest.TestCase):
+    """Compiler-free: the bounded ARMCC jump-table forms in R1's call-context CFG.
+
+    Every layout is the pattern armcc 5.04 emits (`cmp rM, #N; ...; ldrlo pc, [pc, rM, lsl #2]; b default;
+    <N words>` or `addlo pc, pc, rM, lsl #2; b default; <N branches>`), written out independently."""
+
+    PUSH, POP, NOP, STORE = 0xE92D4010, 0xE8BD8010, 0xE320F000, 0xE5801018  # STORE: str r1, [r0, #0x18]
+    CMP_R2_3, MOV_R4_R0, MOV_R1_7 = 0xE3520003, 0xE1A04000, 0xE3A01007
+    LDRLO, ADDLO = 0x379FF102, 0x308FF102  # ldrlo pc, [pc, r2, lsl #2] / addlo pc, pc, r2, lsl #2
+    ARGUMENTS = {inplace.cs_arm.ARM_REG_R0, inplace.cs_arm.ARM_REG_R1}
+
+    @staticmethod
+    def branch(place, target, condition=0xE):
+        return (condition << 28) | 0x0A000000 | (((target - place - 8) >> 2) & 0xFFFFFF)
+
+    def caller(self, form="words", compare=CMP_R2_3, window=(MOV_R4_R0,), writer=None, fall=POP, entries=3):
+        """Layout: PUSH, compare, window, writer, fall, table, then the cases: case 0 (index 0) loads r1
+        and runs the removed setter (the site), every other index returns."""
+        writer = writer if writer is not None else (self.LDRLO if form == "words" else self.ADDLO)
+        head = [self.PUSH, compare, *window, writer, fall]
+        table = 4 * len(head)
+        body = table + 4 * entries
+        targets = [body, body + 8] + [body + 16] * (entries - 2)
+        entry_words = ([BASE + target for target in targets] if form == "words"
+                       else [self.branch(BASE + table + 4 * slot, BASE + target) for slot, target in enumerate(targets)])
+        words = [*head, *entry_words, self.MOV_R1_7, self.STORE, self.POP, self.NOP, self.POP]
+        pool = range(len(head), len(head) + entries) if form == "words" else range(0)
+        return SimpleNamespace(words=words, pool=pool, site=body + 4, writer=table - 8, table=table, body=body, targets=targets)
+
+    def decode(self, caller, with_words=True):
+        instructions = {BASE + 4 * index: next(inplace._ARM.disasm(struct.pack("<I", word), BASE + 4 * index, 1))
+                        for index, word in enumerate(caller.words) if index not in caller.pool}
+        pool_words = {BASE + 4 * index: caller.words[index] for index in caller.pool} if with_words else {}
+        return instructions, pool_words
+
+    def context(self, caller, with_words=True, **kwargs):
+        instructions, pool_words = self.decode(caller, with_words)
+        return inplace.arm_call_abi_context(instructions, BASE + caller.site, self.ARGUMENTS, inplace.cs_arm.ARM_CC_AL,
+                                            kwargs.pop("entries", None), None, pool_words, bounded_switches=True, **kwargs)
+
+    def tables(self, caller, with_words=True, entries=None):
+        instructions, pool_words = self.decode(caller, with_words)
+        flows = {address: inplace._arm_call_flow(insn, bounded_switches=True) for address, insn in instructions.items()}
+        return inplace._arm_jump_tables(instructions, flows, entries or {BASE}, pool_words)
+
+    def test_word_table_resolves_exactly_the_bounded_entries(self):
+        caller = self.caller()
+        self.assertEqual(self.context(caller), "consistent")
+        writer = BASE + caller.writer
+        self.assertEqual(self.tables(caller), {writer: [writer + 4, *(BASE + target for target in dict.fromkeys(caller.targets))]})
+        self.assertEqual(self.context(caller, with_words=False), "unresolved_control_flow")
+
+    def test_only_whole_aligned_pool_words_inside_the_extent_are_available(self):
+        function = {"address": BASE, "size": 16, "pools": [[BASE - 8, BASE + 5]],
+                    "literals": [[BASE + 9, BASE + 32]]}
+        self.assertEqual(set(inplace.arm_pool_words(Memory(), function)), {BASE, BASE + 12})
+        function["pools"], function["literals"] = [[BASE + 1, BASE + 14]], []
+        self.assertEqual(set(inplace.arm_pool_words(Memory(), function)), {BASE + 4, BASE + 8})
+
+    def test_ls_bound_adds_one_entry_and_lo_does_not(self):
+        compare, ldrls = 0xE3520002, 0x979FF102  # cmp r2, #2; ldrls: indexes 0..2, three entries
+        caller = self.caller(compare=compare, writer=ldrls)
+        self.assertEqual(self.context(caller), "consistent")
+        self.assertEqual(len(self.tables(caller)[BASE + caller.writer]) - 1, len(set(caller.targets)))
+        # cmp r2, #3 with LS reaches four entries: three words are not enough, four resolve.
+        three = self.caller(writer=ldrls)
+        self.assertEqual(self.context(three), "unresolved_control_flow")
+        four = self.caller(writer=ldrls, entries=4)
+        self.assertEqual(self.context(four), "consistent")
+        self.assertEqual(self.context(self.caller(entries=4)), "consistent")  # LO: the fourth word is never read
+        # The bound cannot be read from the table: cmp r2, #4 with LO needs a fourth word the pool lacks.
+        self.assertEqual(self.context(self.caller(compare=0xE3520004)), "unresolved_control_flow")
+
+    def test_branch_table_resolves_exactly_the_bounded_entries(self):
+        caller = self.caller("branches")
+        self.assertEqual(self.context(caller), "consistent")
+        writer = BASE + caller.writer
+        self.assertEqual(self.tables(caller), {writer: [writer + 4, *(writer + 8 + 4 * slot for slot in range(3))]})
+        ls = self.caller("branches", compare=0xE3520002, writer=0x908FF102)  # addls: three entries
+        self.assertEqual(len(self.tables(ls)[BASE + ls.writer]) - 1, 3)
+        # LO with cmp #4 reads an entry that is plain code (mov r1, #7), not a branch.
+        self.assertEqual(self.context(self.caller("branches", compare=0xE3520004)), "unresolved_control_flow")
+
+    def test_branch_table_entries_must_be_unconditional_branches_inside_the_function(self):
+        for case in ("nop", "conditional", "leaves", "return"):
+            with self.subTest(case):
+                caller = self.caller("branches")
+                place, index = BASE + caller.table + 4, caller.table // 4 + 1
+                caller.words[index] = {
+                    "nop": self.NOP,
+                    "conditional": self.branch(place, BASE + caller.targets[1], 0x1),
+                    "leaves": self.branch(place, BASE + 0x1000),
+                    "return": 0xE12FFF1E,
+                }[case]
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_word_table_entries_must_name_instructions_of_this_function(self):
+        for case, target in (("outside", BASE + 0x1000), ("before", BASE - 4), ("thumb", BASE + 0x21),
+                             ("pool word", BASE + 0x14), ("misaligned", BASE + 0x22)):
+            with self.subTest(case):
+                caller = self.caller()
+                caller.words[caller.table // 4 + 1] = target
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_every_table_target_is_checked_after_a_site_before_the_switch(self):
+        # The removed setter precedes `cmp r4, #3; ldrlo pc, [pc, r4, lsl #2]`; r1 is clobbered by the call.
+        for reads_clobbered_r1 in (False, True):
+            with self.subTest(reads_clobbered_r1=reads_clobbered_r1):
+                words = [self.PUSH, 0xE1A04002, self.MOV_R1_7, self.STORE, 0xE3540003, 0x379FF104, self.POP,
+                         BASE + 0x28, BASE + 0x2c, BASE + 0x34, self.POP, 0xE1A00001 if reads_clobbered_r1 else self.NOP,
+                         self.POP, self.POP]
+                caller = SimpleNamespace(words=words, pool=range(7, 10), site=12)
+                self.assertEqual(self.context(caller), "reads_arguments" if reads_clobbered_r1 else "consistent")
+
+    def test_a_table_successor_cannot_bypass_argument_setup(self):
+        for form in ("words", "branches"):
+            with self.subTest(form=form):
+                caller = self.caller(form, window=(self.MOV_R4_R0, 0xE3A01002))
+                self.assertEqual(self.context(caller), "consistent")
+                slot = caller.table // 4 + 1
+                caller.words[slot] = (BASE + caller.site if form == "words"
+                                      else self.branch(BASE + 4 * slot, BASE + caller.site))
+                self.assertEqual(self.context(caller), "arguments_not_materialised")
+
+    def test_the_bound_must_come_from_a_plain_immediate_compare_of_the_index(self):
+        for case, compare in (("other register", 0xE3530003), ("register operand", 0xE1520003),
+                              ("conditional compare", 0x13520003), ("compare negative", 0xE3720003),
+                              ("no compare", self.NOP), ("test", 0xE1120003)):
+            with self.subTest(case):
+                for form in ("words", "branches"):
+                    self.assertEqual(self.context(self.caller(form, compare=compare)), "unresolved_control_flow")
+        instruction = next(inplace._ARM.disasm(struct.pack("<I", 0xE3520C01), 0, 1))  # cmp r2, #0x100 (rotated)
+        self.assertEqual(inplace._arm_compare_bound(instruction), (2, 0x100))
+
+    def test_nothing_between_the_compare_and_the_writer_may_change_the_index_or_flags(self):
+        for case, word in (("index written", 0xE1A02002), ("conditional index written", 0x11A02002),
+                           ("flags by subs", 0xE2555001), ("flags by tst", 0xE1150005),
+                           ("flags by msr", 0xE128F000), ("flags by mrc", 0xEE10FF10),
+                           ("flags by vmrs", 0xEEF1FA10), ("flags by call", 0xEB000010),
+                           ("branch", 0x1A000000), ("index loaded", 0xE5922000)):
+            with self.subTest(case):
+                self.assertEqual(self.context(self.caller(window=(self.MOV_R4_R0, word))), "unresolved_control_flow")
+        for case, word in (("other register", 0xE1A05000), ("store", 0xE5840000), ("predicated, no flags", 0x13A05001),
+                           ("nop", self.NOP)):
+            with self.subTest(case, positive=True):
+                self.assertEqual(self.context(self.caller(window=(self.MOV_R4_R0, word, word))), "consistent")
+
+    def test_the_writer_may_be_reached_only_by_falling_through_from_the_guard(self):
+        caller = self.caller()
+        compare, first, writer = BASE + 4, BASE + 8, BASE + caller.writer
+        loop = caller.targets[2] // 4  # a case off the site's own path
+        for case, target in (("window", first), ("writer", writer)):
+            with self.subTest(case):
+                patched = self.caller()
+                patched.words[loop] = self.branch(BASE + caller.targets[2], target)
+                self.assertEqual(self.context(patched), "unresolved_control_flow")
+        patched = self.caller()
+        patched.words[loop] = self.branch(BASE + caller.targets[2], compare)  # re-running the compare is fine
+        self.assertEqual(self.context(patched), "consistent")
+        for entry in (first, writer):
+            with self.subTest(entry=entry):
+                self.assertEqual(self.context(caller, entries={BASE, entry}), "unresolved_control_flow")
+        # A table target inside its own guard window is an entry there too.
+        again = self.caller()
+        again.words[again.table // 4 + 1] = first
+        self.assertEqual(self.context(again), "unresolved_control_flow")
+
+    def test_direct_calls_cannot_supply_an_alternate_entry_after_the_guard(self):
+        for thumb in (False, True):
+            with self.subTest(thumb=thumb):
+                caller = self.caller()
+                place = BASE + caller.targets[2]
+                caller.words[caller.targets[2] // 4] = bl(place, BASE + caller.writer, thumb)
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_another_resolved_table_cannot_enter_after_the_guard(self):
+        words = [self.PUSH, 0xE3520001, 0x979FF102, self.POP, BASE + 24, BASE + 36,
+                 self.MOV_R1_7, self.STORE, self.POP, 0xE3520001, self.LDRLO, self.POP, BASE + 8]
+        caller = SimpleNamespace(words=words, pool={4, 5, 12}, site=28)
+        self.assertNotIn(BASE + 8, self.tables(caller))
+        self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_the_fall_through_must_leave_the_table(self):
+        for case, fall in (("plain instruction", self.MOV_R1_7), ("conditional branch", self.branch(BASE + 0x10, BASE + 0x30, 0x1)),
+                           ("call", 0xEB000010), ("nop", self.NOP)):
+            with self.subTest(case):
+                for form in ("words", "branches"):
+                    self.assertEqual(self.context(self.caller(form, fall=fall)), "unresolved_control_flow")
+        branch = self.branch(BASE + 0x10, BASE + 0x30)  # armcc's `b default` is equally fine as a return
+        self.assertEqual(self.context(self.caller(fall=branch)), "consistent")
+
+    def test_the_default_branch_must_stay_inside_the_callers_code(self):
+        for form in ("words", "branches"):
+            for target in (BASE - 4, BASE + 0x1000):
+                with self.subTest(form=form, target=target):
+                    caller = self.caller(form)
+                    fall = caller.writer + 4
+                    caller.words[fall // 4] = self.branch(BASE + fall, target)
+                    self.assertEqual(self.context(caller), "unresolved_control_flow")
+        caller = self.caller()
+        caller.words[(caller.writer + 4) // 4] = self.branch(BASE + caller.writer + 4, BASE + caller.table)
+        self.assertEqual(self.context(caller), "unresolved_control_flow")  # data, not an exit
+
+    def test_only_the_recognised_writer_encodings_are_resolved(self):
+        for case, writer in (("hi", 0x879FF102), ("ne", 0x179FF102), ("always", 0xE79FF102), ("shift 3", 0x379FF182),
+                             ("subtracted index", 0x371FF102), ("writeback", 0x37BFF102), ("no shift", 0x379FF002),
+                             ("other base", 0x3790F102), ("mov pc", 0x31A0F002), ("bx index", 0x312FFF12),
+                             ("add, shift 3", 0x308FF182), ("sub", 0x304FF102), ("add, set flags", 0x309FF102),
+                             ("add, register shift", 0x308FF112), ("pc index", 0x379FF10F)):
+            with self.subTest(case):
+                self.assertEqual(self.context(self.caller(writer=writer)), "unresolved_control_flow")
+
+    def test_unrelated_indirect_transfers_stay_unresolved_next_to_a_resolved_table(self):
+        caller = self.caller()
+        caller.words[-1] = 0xE12FFF14  # bx r4 in a reachable case
+        self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+    def test_computed_pc_writes_are_not_mistaken_for_returns(self):
+        for case, word in (("add pc, r4, lr", 0xE084F00E), ("ldr pc, [lr]", 0xE59EF000),
+                           ("movs pc, lr", 0xE1B0F00E), ("bx r4", 0xE12FFF14)):
+            with self.subTest(case=case):
+                caller = self.caller()
+                caller.words[-1] = word
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+                caller = self.caller(fall=word)
+                self.assertEqual(self.context(caller), "unresolved_control_flow")
+
+
+class BoundedSwitchEffectsTest(unittest.TestCase):
+    """Effect proofs use an explicit decoder-class/encoding allowlist, never absent writes."""
+
+    def test_every_decoder_instruction_class_is_allowlisted_or_refused(self):
+        classes = {value for name, value in vars(inplace.cs_arm).items()
+                   if name.startswith("ARM_INS_") and isinstance(value, int)}
+        self.assertTrue(inplace._ARM_SWITCH_MODELED_IDS <= classes)
+        self.assertTrue(classes - inplace._ARM_SWITCH_MODELED_IDS)
+        for instruction_id in classes:
+            with self.subTest(instruction_id=instruction_id):
+                if instruction_id not in inplace._ARM_SWITCH_MODELED_IDS:
+                    opaque = SimpleNamespace(id=instruction_id)  # no access metadata or bytes to guess from
+                    self.assertIsNone(inplace._arm_switch_effects(opaque))
+                    self.assertTrue(inplace._arm_may_change(opaque, inplace.cs_arm.ARM_REG_R2))
+                    self.assertEqual(inplace._arm_call_flow(opaque, bounded_switches=True), "unknown")
+                invalid = SimpleNamespace(id=instruction_id, bytes=struct.pack("<I", 0xFFFFFFFF))
+                self.assertIsNone(inplace._arm_switch_effects(invalid))
+                self.assertTrue(inplace._arm_may_change(invalid, inplace.cs_arm.ARM_REG_R2))
+
+    def test_modeled_destinations_and_flags_do_not_depend_on_decoder_write_lists(self):
+        # Independent non-ROM A32 encodings; R2 is the prospective bounded table index.
+        cases = (
+            (0xE1A02002, {2}, False), (0x11A02002, {2}, False), (0xE2504000, {4}, True),
+            (0xE5902000, {2}, False), (0xE4920004, {0, 2}, False),
+            (0xE1C020D0, {2, 3}, False), (0xE1E200F8, {2}, False),
+            (0xE8B0000C, {0, 2, 3}, False), (0xE8B20003, {0, 1, 2}, False),
+            (0xE8BD8010, {4, 13, 15}, False),
+            (0xE0020190, {2}, False), (0xE0832190, {2, 3}, False),
+            (0xEE102A10, {2}, False), (0xEC532B10, {2, 3}, False),
+            (0xEEF12A10, {2}, False), (0xEEF1FA10, set(), True),
+            (0xEE002A10, set(), False), (0xED920A00, set(), False),
+            (0xED2D8B04, {13}, False), (0xECBD8B04, {13}, False),
+            (0xE320F000, set(), False),
+        )
+        for word, registers, flags in cases:
+            with self.subTest(word=word):
+                insn = next(inplace._ARM.disasm(struct.pack("<I", word), BASE, 1), None)
+                self.assertIsNotNone(insn)
+                opaque = SimpleNamespace(id=insn.id, bytes=insn.bytes)  # regs_access/groups/update_flags absent
+                expected = frozenset(inplace._ARM_NUMBERED[index] for index in registers), flags
+                self.assertEqual(inplace._arm_switch_effects(opaque), expected)
+                self.assertEqual(inplace._arm_may_change(opaque, inplace.cs_arm.ARM_REG_R2), 2 in registers or flags)
+
+
+class BoundedSwitchModelTest(unittest.TestCase):
+    """Public compiler-free linker consumers: v4 is explicit and endian changes fail closed."""
+
+    MODEL = "armlink5-inline-branchnop-v4"
+    SETEND_BE, SETEND_LE = 0xF1010200, 0xF1010000
+
+    def fixture(self, form="words", suffix=(), **kwargs):
+        layout = JumpTableContextTest().caller(form, **kwargs)
+        layout.words.extend(suffix)
+        original = struct.pack(f"<{len(layout.words)}I", *layout.words)
+        candidate = bytearray(original)
+        struct.pack_into("<I", candidate, layout.site, 0xEBFFFFFE)
+        helper_body = struct.pack("<2I", JumpTableContextTest.STORE, 0xE12FFF1E)
+        caller = inplace.Symbol("func_00100000", 0, len(original), "STT_FUNC", "STB_GLOBAL", 1)
+        helper = inplace.Symbol("set_field18", 0, len(helper_body), "STT_FUNC", "STB_GLOBAL", 2)
+        mapping = [(0, "$a"), (layout.table, "$d"), (layout.body, "$a")] if form == "words" else [(0, "$a")]
+        obj = inplace.ObjectFile.__new__(inplace.ObjectFile)
+        obj.symbols = [caller, helper]
+        obj.sections = {
+            1: inplace.Section(1, "i.caller", bytes(candidate), len(candidate), False, True, False,
+                               [inplace.Reloc(layout.site, inplace.R_ARM_CALL, helper)], mapping, align=4),
+            2: inplace.Section(2, "i.set_field18", helper_body, len(helper_body), False, True, False,
+                               mapping=[(0, "$a")], align=4),
+        }
+        obj.section_objects = {1: "caller.c", 2: "setter.c"}
+        ranges = ([[BASE, BASE + layout.table], [BASE + layout.body, BASE + len(original)]]
+                  if form == "words" else [[BASE, BASE + len(original)]])
+        catalogue = {BASE: {"address": BASE, "size": len(original), "isa": "arm", "code_ranges": ranges,
+                            "pools": [[BASE + layout.table, BASE + layout.body]] if form == "words" else []}}
+        memory = Memory()
+        memory.write(BASE, original)
+        return SimpleNamespace(object=obj, memory=memory, catalogue=catalogue, original=original, layout=layout)
+
+    def linker(self, fixture, model=None):
+        return inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                     (0x200000, 0x201000), model or self.MODEL)
+
+    def assert_refused(self, fixture, model=None):
+        linker = self.linker(fixture, model)
+        with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+            linker.link(fixture.object)
+        self.assertEqual(linker.rewrites, [])
+        self.assertEqual(linker.removed_callees, [])
+
+    def test_each_exact_form_requires_the_new_selected_model(self):
+        for form in ("words", "branches"):
+            for ls in (False, True):
+                with self.subTest(form=form, ls=ls):
+                    writer = (0x979FF102 if form == "words" else 0x908FF102) if ls else None
+                    fixture = self.fixture(form, compare=0xE3520002 if ls else 0xE3520003, writer=writer)
+                    self.assert_refused(fixture, "armlink5-inline-branchnop-v3")
+                    linker = self.linker(fixture)
+                    linked = linker.link(fixture.object)
+                    self.assertEqual(set(linked), {1})
+                    self.assertEqual(linked[1][1], fixture.original)
+                    self.assertEqual([(row.rule, row.target) for row in linker.rewrites], [("inline_insn", None)])
+                    self.assertEqual(linker.removed_callees[0]["object"], "setter.c")
+                    for model in ("strict-v1", "armlink5-inline-branchnop-v2"):
+                        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                            self.linker(fixture, model).link(fixture.object)
+
+    def test_setend_between_the_guard_and_load_is_refused_by_the_public_consumer(self):
+        fixture = self.fixture(window=(self.SETEND_BE,))
+        self.assertTrue(all(not BASE <= int.from_bytes(struct.pack("<I", BASE + target), "big")
+                            < BASE + len(fixture.original) for target in fixture.layout.targets))
+        self.assert_refused(fixture)
+
+    def test_endian_state_before_the_compare_is_not_ignored(self):
+        for state in (self.SETEND_BE, self.SETEND_LE, 0xE128F000, 0xEE010F10):
+            for form in ("words", "branches"):
+                with self.subTest(state=state, form=form):
+                    fixture = self.fixture(form, compare=state,
+                                           window=(JumpTableContextTest.CMP_R2_3, JumpTableContextTest.MOV_R4_R0))
+                    self.assert_refused(fixture)
+
+    def test_a_state_change_on_only_one_incoming_path_is_not_ignored(self):
+        branch = JumpTableContextTest.branch(BASE + 4, BASE + 12, 0x1)
+        fixture = self.fixture(compare=branch,
+                               window=(self.SETEND_BE, JumpTableContextTest.CMP_R2_3, JumpTableContextTest.MOV_R4_R0))
+        self.assert_refused(fixture)
+
+    def test_unreachable_state_changes_also_require_an_unimplemented_proof(self):
+        self.assert_refused(self.fixture(suffix=(self.SETEND_BE,)))
+
+    def test_exclusive_and_coprocessor_destinations_cannot_bypass_guard(self):
+        for name, word in (("LDREXD", 0xE1B02F9F), ("LDREXDLO", 0x31B02F9F), ("MRRC", 0xEC532F00)):
+            for form in ("words", "branches"):
+                with self.subTest(name=name, form=form):
+                    self.assert_refused(self.fixture(form, window=(word,)))
+
+    def test_modeled_load_destinations_and_writeback_cannot_change_index(self):
+        for word in (0xE1C020D0, 0x31C020D0, 0xE8B0000C, 0xE8B20003, 0xE4920004, 0xE1E200F8,
+                     0xEE102A10, 0xEC532B10, 0xEEF12A10):
+            for form in ("words", "branches"):
+                with self.subTest(word=word, form=form):
+                    self.assert_refused(self.fixture(form, window=(word,)))
+
+    def test_rfe_forms_refuse_every_state_path_placement(self):
+        for frame_register in (4, 13):
+            for word in (0xF8BD0A00, 0xF83D0A00, 0xF93D0A00, 0xF9BD0A00):
+                word = (word & ~0xF0000) | (frame_register << 16)
+                insn = next(inplace._ARM.disasm(struct.pack("<I", word), BASE, 1))
+                self.assertIsNone(inplace._arm_switch_effects(insn))
+                self.assertEqual(inplace._arm_call_flow(insn, bounded_switches=True), "unknown")
+                branch = JumpTableContextTest.branch(BASE + 4, BASE + 12, 0x1)
+                placements = {
+                    "window": {"window": (word,)},
+                    "before_compare": {"compare": word, "window": (JumpTableContextTest.CMP_R2_3,)},
+                    "one_predecessor": {"compare": branch, "window": (word, JumpTableContextTest.CMP_R2_3)},
+                    "unreachable": {"suffix": (word,)},
+                }
+                for form in ("words", "branches"):
+                    for placement, kwargs in placements.items():
+                        with self.subTest(frame_register=frame_register, word=word, form=form, placement=placement):
+                            self.assert_refused(self.fixture(form, **kwargs))
+
+    def test_frozen_models_keep_their_policy_payload_and_return_classification(self):
+        for name, flags in (("strict-v1", (False, False, False, False)),
+                            ("armlink5-inline-branchnop-v2", (True, True, False, False)),
+                            ("armlink5-inline-branchnop-v3", (True, True, True, False)),
+                            (self.MODEL, (True, True, True, True))):
+            model = inplace.linker_model(name)
+            self.assertEqual((model.inline, model.branchnop, model.removed_inline, model.bounded_switches), flags)
+        insn = next(inplace._ARM.disasm(struct.pack("<I", 0xE084F00E), BASE, 1))  # legacy LR-reading PC write
+        self.assertEqual(inplace._arm_call_flow(insn), "return")
+        self.assertEqual(inplace._arm_call_flow(insn, bounded_switches=True), "unknown")
+        self.assertEqual(inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
+
+
 class RemovedCalleeModelTest(unittest.TestCase):
     """V3's candidate-only exception is narrower than ordinary original-image inlining."""
 
     MODEL = "armlink5-inline-branchnop-v3"
+    ALIAS_MODEL = "armlink5-inline-branchnop-v6"
     SITES = (12, 28)
 
     def fixture(self, body=None, call=0xEBFFFFFE):
@@ -865,6 +1531,88 @@ class RemovedCalleeModelTest(unittest.TestCase):
     def linker(self, mem, catalogue, names=None, model=None):
         return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names),
                                      (0x200000, 0x201000), model or self.MODEL)
+
+    def comdat_alias_fixture(self, contradictory=False, original_size=8):
+        """F01: only the second copy supplies the bound zero-size entry alias."""
+        first, mem, catalogue = self.fixture()
+        second, _, _ = self.fixture()
+        second.sections.pop(1)
+        second.symbols.pop(0)
+        first.sections[2].comdat = second.sections[2].comdat = "set_field18"
+        second.symbols.append(inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2))
+        if contradictory:
+            second.sections[2].data = struct.pack("<I", 0xE580101C) + BX_LR
+        address = BASE + 0x100
+        catalogue[address] = {"address": address, "size": original_size, "isa": "arm"}
+        mem.write(address, second.sections[2].data + (BX_LR if original_size == 12 else b""))
+        return [first, second], mem, catalogue, {"bound_variant": {"address": address}}
+
+    def test_bound_and_removable_comdat_copies_fail_before_caller_only_linking(self):
+        for contradictory, original_size in ((True, 8), (False, 12)):
+            for reverse in (False, True):
+                with self.subTest(contradictory=contradictory, original_size=original_size, reverse=reverse):
+                    objects, mem, catalogue, names = self.comdat_alias_fixture(contradictory, original_size)
+                    labels = ["caller_and_copy.cpp", "bound_copy.cpp"]
+                    if reverse:
+                        objects.reverse()
+                        labels.reverse()
+                    linker = self.linker(mem, catalogue, names, self.ALIAS_MODEL)
+                    with self.assertRaisesRegex(inplace.LinkError, "mixes original-bound and removable callee copies"):
+                        linker.link(inplace.ObjectFile.combine(objects, labels))
+                    self.assertEqual(linker.removed_callees, [])
+                    self.assertEqual(linker.rewrites, [])
+
+    def test_removal_checks_even_a_comdat_copy_with_no_full_sized_function(self):
+        objects, mem, catalogue, _ = self.comdat_alias_fixture()
+        objects[1].symbols[0].size = 0
+        linker = self.linker(mem, catalogue, model=self.ALIAS_MODEL)
+        with self.assertRaisesRegex(inplace.LinkError, "unsupported retained callee copy"):
+            linker.link(inplace.ObjectFile.combine(objects))
+        self.assertEqual(linker.removed_callees, [])
+        self.assertEqual(linker.rewrites, [])
+
+    def test_roots_through_either_alias_or_another_copy_prevent_removal(self):
+        for selector in ("set_field18", "caller_variant", "bound_variant"):
+            for alias_call in (False, True):
+                with self.subTest(selector=selector, alias_call=alias_call):
+                    objects, mem, catalogue, _ = self.comdat_alias_fixture()
+                    alias = inplace.Symbol("caller_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+                    objects[0].symbols.append(alias)
+                    if alias_call:
+                        objects[0].sections[1].relocs[-1].symbol = alias
+                    linker = inplace.InPlaceLinker(
+                        mem, catalogue, inplace.Resolver(catalogue), (0x200000, 0x201000),
+                        self.ALIAS_MODEL, retention_roots={selector: "KEEP"})
+                    with self.assertRaisesRegex(inplace.LinkError, "retained callee"):
+                        linker.link(inplace.ObjectFile.combine(objects))
+                    self.assertEqual(linker.removed_callees, [])
+                    self.assertEqual(linker.rewrites, [])
+
+    def test_bound_zero_size_alias_keeps_original_equality_even_when_rooted(self):
+        for model in (inplace.DEFAULT_LINKER_MODEL, self.MODEL, "armlink5-inline-branchnop-v4", self.ALIAS_MODEL):
+            for rooted in (False, True):
+                for original_size in (8, 12):
+                    with self.subTest(model=model, rooted=rooted, original_size=original_size):
+                        objects, mem, catalogue, names = self.comdat_alias_fixture(original_size=original_size)
+                        obj = objects[0]
+                        alias = inplace.Symbol("bound_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", 2)
+                        obj.symbols.append(alias)
+                        obj.sections[1].relocs[-1].symbol = alias
+                        if not inplace.linker_model(model).function_entry_aliases:
+                            names["set_field18"] = dict(names["bound_variant"])
+                        if rooted:
+                            obj.sections[2].retention = ("KEEP",)
+                        linker = self.linker(mem, catalogue, names, model)
+                        if original_size == 12:
+                            with self.assertRaisesRegex(inplace.LinkError, "inlining is undecidable"):
+                                linker.link(obj)
+                            self.assertEqual(linker.rewrites, [])
+                        else:
+                            linked = linker.link(obj)
+                            self.assertEqual(linked[1][1], mem.read(BASE, 40))
+                            self.assertEqual(linked[2][1], mem.read(BASE + 0x100, original_size))
+                            self.assertEqual([row.target for row in linker.rewrites], [BASE + 0x100] * 2)
+                        self.assertEqual(linker.removed_callees, [])
 
     def test_two_setter_calls_inline_and_the_unreferenced_section_is_dropped(self):
         obj, mem, catalogue = self.fixture()
@@ -908,6 +1656,48 @@ class RemovedCalleeModelTest(unittest.TestCase):
         linker = self.linker(mem, catalogue)
         self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
         self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
+
+    def test_zero_size_entry_aliases_are_the_same_callee_without_changing_r1(self):
+        obj, mem, catalogue = self.fixture()
+        helper = obj.symbols[1]
+        alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", helper.shndx)
+        obj.symbols.append(alias)
+        obj.sections[1].relocs[-1].symbol = alias
+        linker = self.linker(mem, catalogue, model=self.ALIAS_MODEL)
+        self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+        self.assertEqual(linker.removed_callees[0]["symbols"], ["base_variant", "set_field18"])
+        self.assertEqual((helper.size, alias.size), (8, 0))
+        self.assertEqual([row.target for row in linker.rewrites], [None, None])
+        for model, policy in inplace.LINKER_MODELS.items():
+            if policy.function_entry_aliases:
+                continue
+            with self.subTest(frozen_model=model):
+                with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                    self.linker(mem, catalogue, model=model).link(obj)
+
+    def test_zero_size_aliases_do_not_relax_r1_reference_or_extent_checks(self):
+        for case in ("interior", "no_extent", "other_isa", "data_alias", "untyped_alias", "pointer", "unwind"):
+            with self.subTest(case=case):
+                obj, mem, catalogue = self.fixture()
+                helper = obj.symbols[1]
+                alias = inplace.Symbol("base_variant", 0, 0, "STT_FUNC", "STB_GLOBAL", helper.shndx)
+                obj.symbols.append(alias)
+                if case == "interior":
+                    alias.value = 4
+                elif case == "no_extent":
+                    helper.size = 0
+                elif case == "other_isa":
+                    alias.value = 1
+                elif case in ("data_alias", "untyped_alias"):
+                    alias.kind = "STT_OBJECT" if case == "data_alias" else "STT_NOTYPE"
+                else:
+                    symbol = alias if case == "pointer" else inplace.Symbol("i.helper", 0, 0, "STT_SECTION", "STB_LOCAL", 2)
+                    rtype = inplace.R_ARM_ABS32 if case == "pointer" else inplace.R_ARM_PREL31
+                    obj.sections[3] = inplace.Section(3, ".data.pointer" if case == "pointer" else ".ARM.exidx",
+                                                      bytes(4), 4, False, False, False,
+                                                      [inplace.Reloc(0, rtype, symbol)], align=4)
+                with self.assertRaises(inplace.LinkError):
+                    self.linker(mem, catalogue, model=self.ALIAS_MODEL).link(obj)
 
     def test_a_definition_in_another_candidate_object_is_used_not_an_external_guess(self):
         obj, mem, catalogue = self.fixture()
@@ -1273,6 +2063,198 @@ class RemovedCalleeModelTest(unittest.TestCase):
         with self.assertRaisesRegex(inplace.LinkError, "contradictory removed-callee copies"):
             self.linker(mem, catalogue).link(inplace.ObjectFile.combine([first, second]))
 
+
+@unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+class SwitchRemovedCalleeTest(unittest.TestCase):
+    """R1 on real armcc switches: a bounded jump table no longer hides a removed setter's call
+    context, and an unbounded, escaping or computed transfer is still refused.
+
+    The synthetic original is the compiled caller with each relocation applied independently:
+    the setter calls hold the inlined `str r1, [r0, #0x18]`, table words hold absolute addresses."""
+
+    MODEL = "armlink5-inline-branchnop-v4"
+    SETTER = 0xE5801018  # str r1, [r0, #0x18]
+    HELPER = "void set_field18(unsigned *p, unsigned v) { p[6] = v; }\n"
+    CALLER = (
+        "extern void set_field18(unsigned *p, unsigned v);\n"
+        "void func_00100000(unsigned *p, unsigned v, int x) {\n"
+        "    switch (x) {\n"
+        "    case 0: set_field18(p, v); p[0] = 9; break;\n"
+        "    case 1: p[1] = 1; break;\n"
+        "    case 2: p[2] = 2; break;\n"
+        "    case 3: set_field18(p, v); p[3] = 3; break;\n"
+        "    case 4: p[4] = 4; break;\n"
+        "    default: break;\n"
+        "    }\n"
+        "}\n"
+    )
+    FUNCTION_POINTER = (
+        "extern void set_field18(unsigned *p, unsigned v);\n"
+        "void func_00100000(unsigned *p, unsigned v, void (*fn)(unsigned *)) {\n"
+        "    set_field18(p, v); p[1] = 2; fn(p);\n"
+        "}\n"
+    )
+
+    def fixture(self, caller=CALLER, profile="game"):
+        with tempfile.TemporaryDirectory() as directory:
+            objects = []
+            for name, text in (("caller.c", caller), ("helper.c", self.HELPER)):
+                source = Path(directory) / name
+                source.write_text(text, encoding="utf-8")
+                toolchain.compile_source(toolchain.load_profiles()[profile], source, source.with_suffix(".o"))
+                objects.append(inplace.ObjectFile(source.with_suffix(".o")))
+        definition = next(sym for sym in objects[0].defined_functions() if sym.name == "func_00100000")
+        section = objects[0].sections[definition.shndx]
+        original = bytearray(section.data)
+        for rel in section.relocs:
+            if rel.symbol.name == "set_field18" and rel.type == inplace.R_ARM_CALL:
+                struct.pack_into("<I", original, rel.offset, self.SETTER)
+            elif rel.symbol.name == "__switch$$" and rel.type == inplace.R_ARM_ABS32:
+                addend = struct.unpack_from("<I", section.data, rel.offset)[0]
+                struct.pack_into("<I", original, rel.offset, BASE + rel.symbol.value + addend)
+            else:
+                self.fail(f"unexpected relocation {rel.type} against {rel.symbol.name}")
+        spans = [(offset, end) for (offset, kind), end in zip(section.mapping, [o for o, _ in section.mapping[1:]] + [section.size])]
+        catalogue = {BASE: {
+            "address": BASE, "size": section.size, "isa": "arm",
+            "code_ranges": [[BASE + lo, BASE + hi] for (lo, hi), (_, kind) in zip(spans, section.mapping) if kind == "$a"],
+            "pools": [[BASE + lo, BASE + hi] for (lo, hi), (_, kind) in zip(spans, section.mapping) if kind == "$d"],
+        }}
+        mem = Memory()
+        mem.write(BASE, bytes(original))
+        combined = inplace.ObjectFile.combine(objects, ["caller.c", "helper.c"])
+        sites = [rel.offset for rel in section.relocs if rel.symbol.name == "set_field18"]
+        return SimpleNamespace(object=combined, memory=mem, catalogue=catalogue, original=bytes(original), sites=sites)
+
+    def locate(self, fixture):
+        """Offsets of the jump-table writer (and its form), of the guarding compare before it and of
+        the first table entry, found from the raw encodings."""
+        words = struct.unpack(f"<{len(fixture.original) // 4}I", fixture.original)
+        writer = next(4 * i for i, word in enumerate(words)
+                      if word & 0x0FFFFFF0 in (0x079FF100, 0x008FF100) and word >> 28 in (0x3, 0x9))
+        form = "words" if words[writer // 4] & 0x0FFFFFF0 == 0x079FF100 else "branches"
+        compare = max(4 * i for i, word in enumerate(words) if word & 0x0FF0F000 == 0x03500000 and 4 * i < writer)
+        return SimpleNamespace(writer=writer, form=form, compare=compare, table=writer + 8)
+
+    def link(self, fixture, model=None):
+        linker = inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                       (0x200000, 0x201000), model or self.MODEL)
+        return linker, linker.link(fixture.object)
+
+    def patch(self, fixture, offset, word):
+        fixture.memory.write(BASE + offset, struct.pack("<I", word))
+
+    def assert_refused(self, fixture):
+        linker = inplace.InPlaceLinker(fixture.memory, fixture.catalogue, inplace.Resolver(fixture.catalogue),
+                                       (0x200000, 0x201000), self.MODEL)
+        with self.assertRaisesRegex(inplace.LinkError, "removed callee i.set_field18 is still referenced"):
+            linker.link(fixture.object)
+        self.assertEqual(linker.removed_callees, [])
+
+    def assert_resolved(self, profile, form):
+        fixture = self.fixture(profile=profile)
+        self.assertEqual(self.locate(fixture).form, form)
+        self.assertEqual(len(fixture.sites), 2)
+        linker, linked = self.link(fixture)
+        self.assertEqual({placed.base: data for placed, data in linked.values()}, {BASE: fixture.original})
+        self.assertEqual([(rewrite.offset, rewrite.rule, rewrite.word) for rewrite in linker.rewrites],
+                         [(site, "inline_insn", self.SETTER) for site in fixture.sites])
+        self.assertEqual([callee["symbols"] for callee in linker.removed_callees], [["set_field18"]])
+        self.assertEqual([rewrite.target for rewrite in linker.rewrites], [None, None])
+        self.assertEqual(linker.removed_callees[0]["object"], "helper.c")
+        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+            self.link(fixture, "armlink5-inline-branchnop-v2")
+        with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+            self.link(fixture, "armlink5-inline-branchnop-v3")
+
+    def test_a_word_table_switch_no_longer_hides_the_removed_setters_context(self):
+        self.assert_resolved("game", "words")  # cmp r2, #5; ldrlo pc, [pc, r2, lsl #2]; b; five words
+
+    def test_a_branch_table_switch_no_longer_hides_the_removed_setters_context(self):
+        self.assert_resolved("trial-504-82-O3-Ospace", "branches")  # addlo pc, pc, r2, lsl #2; b; five B
+
+    def test_a_table_entry_outside_the_function_is_refused(self):
+        for case, entry in (("beyond the extent", 0x1000), ("before the function", -0x100), ("Thumb entry", 0x21)):
+            with self.subTest(case):
+                fixture = self.fixture()
+                located = self.locate(fixture)
+                self.patch(fixture, located.table + 8, (BASE + entry) & 0xFFFFFFFF)
+                self.assert_refused(fixture)
+        fixture = self.fixture(profile="trial-504-82-O3-Ospace")
+        located = self.locate(fixture)
+        place = BASE + located.table + 8
+        self.patch(fixture, located.table + 8, 0xEA000000 | (((BASE + 0x1000 - place - 8) >> 2) & 0xFFFFFF))
+        self.assert_refused(fixture)
+
+    def test_a_code_range_outside_the_callers_extent_cannot_supply_a_table_target(self):
+        fixture = self.fixture()
+        located = self.locate(fixture)
+        outside = BASE + 0x1000
+        fixture.catalogue[BASE]["code_ranges"].append([outside, outside + 4])
+        fixture.memory.write(outside, struct.pack("<I", 0xE12FFF1E))
+        self.patch(fixture, located.table + 8, outside)
+        self.assert_refused(fixture)
+
+    def test_the_default_edge_cannot_escape_the_function(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile=profile):
+                fixture = self.fixture(profile=profile)
+                offset = self.locate(fixture).writer + 4
+                self.patch(fixture, offset, 0xEA000000 | (((0x1000 - offset - 8) >> 2) & 0xFFFFFF))
+                self.assert_refused(fixture)
+
+    def test_a_table_edge_cannot_bypass_its_guard(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile=profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                entry = located.table + 8
+                target = BASE + located.writer
+                word = (target if located.form == "words"
+                        else 0xEA000000 | (((target - (BASE + entry) - 8) >> 2) & 0xFFFFFF))
+                self.patch(fixture, entry, word)
+                self.assert_refused(fixture)
+
+    def test_a_bound_that_the_table_does_not_cover_is_refused(self):
+        # cmp r2, #6 would read a sixth word, which is the first instruction after the pool; likewise
+        # a sixth branch-table entry would be a non-branch instruction.
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                self.patch(fixture, located.compare, 0xE3520006)
+                self.assert_refused(fixture)
+
+    def test_a_switch_without_its_bounding_compare_is_refused(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            for case, word in (("no compare", 0xE320F000), ("other register", 0xE3530005), ("register compare", 0xE1520003)):
+                with self.subTest(profile=profile, case=case):
+                    fixture = self.fixture(profile=profile)
+                    self.patch(fixture, self.locate(fixture).compare, word)
+                    self.assert_refused(fixture)
+
+    def test_flags_changed_between_the_compare_and_the_writer_are_refused(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                self.assertEqual(located.writer - located.compare, 8)  # `mov r4, r0` sits between them
+                self.patch(fixture, located.compare + 4, 0xE2504000)  # subs r4, r0, #0
+                self.assert_refused(fixture)
+
+    def test_the_index_changed_after_the_compare_is_refused(self):
+        for profile in ("game", "trial-504-82-O3-Ospace"):
+            with self.subTest(profile=profile):
+                fixture = self.fixture(profile=profile)
+                located = self.locate(fixture)
+                self.assertEqual(located.writer - located.compare, 8)
+                self.patch(fixture, located.compare + 4, 0xE1A02000)  # mov r2, r0
+                self.assert_refused(fixture)
+
+    def test_a_computed_branch_after_the_site_is_still_refused(self):
+        fixture = self.fixture(self.FUNCTION_POINTER)  # `bx ip` through the passed function pointer
+        self.assertEqual(len(fixture.sites), 1)
+        self.assert_refused(fixture)
 
 
 ROOT = Path(__file__).resolve().parents[1]
