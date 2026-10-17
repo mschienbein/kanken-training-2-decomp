@@ -123,5 +123,8 @@ no runtime test; no Windows reproduction yet. Diagnostic continuations after the
   the overview says v5 instead of v6). `review-c004-openai` PASS_WITH_QUALIFICATIONS (202 rows:
   43 PASS, 159 QUALIFIED; F01 minor is the same denominator metadata error). Never finalized.
 - `c004-r3`: the class-wide interface revisions and metadata correction above; all c004 and
-  inherited revised units MATCH and the composed interface audit is clean. Preparation, the two
-  fresh independent reviews, and finalization belong to the integrator.
+  inherited revised units MATCH and the composed interface audit is clean. Prepare PASS at
+  `ac3e8ff` on WSL Linux-x86_64 (two fresh builds identical, 346 tests; denominator v7, gates
+  v1.10). `review-c004-openai` and `review-c004-second` both PASS_WITH_QUALIFICATIONS (202 rows
+  each: 43 PASS, 159 QUALIFIED; no findings). **Finalized** 2026-10-17 (history seq 4): 299
+  functions / 7,620 B accepted (0.674% of 1,129,946 B).
