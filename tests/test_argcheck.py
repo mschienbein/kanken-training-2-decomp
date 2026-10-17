@@ -286,6 +286,19 @@ class InputAndReportTests(unittest.TestCase):
             self.assertNotIn("word", json.dumps(rewrites))
             self.assertNotIn("synthetic-private-value", json.dumps(rewrites))
 
+    def test_removed_callee_has_no_fabricated_original_call_edge(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "receipt.json"
+            row = {"offset": 4, "rule": "inline_insn", "target": None,
+                   "removed_callee": {"symbols": ["set_field18"], "section": "i.set_field18", "size": 8}}
+            functions = {BASE: function(BASE, BASE + 8)}
+            path.write_text(json.dumps({"linker_rewrites": {"func_00100000": [row]}}))
+            self.assertEqual(argcheck.load_rewrites([path], functions, {}, Path(tmp)), {})
+            for patch in ({"target": BASE}, {"offset": 8}, {"removed_callee": {"symbols": [], "size": 8}}):
+                path.write_text(json.dumps({"linker_rewrites": {"func_00100000": [{**row, **patch}]}}))
+                with self.assertRaises(argcheck.ArgcheckError):
+                    argcheck.load_rewrites([path], functions, {}, Path(tmp))
+
     def test_invalid_rewrite_site_is_refused(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "receipt.json"

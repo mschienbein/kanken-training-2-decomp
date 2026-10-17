@@ -662,6 +662,238 @@ class ArmlinkBoundaryTest(unittest.TestCase):
         self.assertIsNone(strict._optimised_branch(rel, sec, 0x100000, inplace.Target(0x100004), None, {}))
 
 
+class RemovedCalleeModelTest(unittest.TestCase):
+    """V3's candidate-only exception is narrower than ordinary original-image inlining."""
+
+    MODEL = "armlink5-inline-branchnop-v3"
+    SITES = (12, 28)
+
+    def fixture(self, body=None, call=0xEBFFFFFE):
+        body = body if body is not None else struct.pack("<I", 0xE5801018) + BX_LR
+        helper = inplace.Symbol("set_field18", 0, len(body), "STT_FUNC", "STB_GLOBAL", 2)
+        caller = inplace.Symbol("func_00100000", 0, 40, "STT_FUNC", "STB_GLOBAL", 1)
+        # Independently authored ARM fixture: frame, argument moves, two setter calls, return.
+        words = [0xE92D4010, 0xE1A00004, 0xE3A01007, call, 0xE3A01000,
+                 0xE1A00004, 0xE3A01008, call, 0xE3500000, 0xE8BD8010]
+        decision = inplace.inline_arm_call(call, body)
+        if call >> 28 != 0xE or decision is not None and decision[1] >> 28 not in (0xE, 0xF):
+            words[4] = 0xE3500000  # establish fresh flags, never rely on a preceding call's flags
+        raw = struct.pack("<10I", *words)
+        obj = inplace.ObjectFile.__new__(inplace.ObjectFile)
+        obj.sections = {
+            1: inplace.Section(1, "i.caller", raw, len(raw), False, True, False,
+                               [inplace.Reloc(site, inplace.R_ARM_CALL, helper) for site in self.SITES],
+                               [(0, "$a")], align=4),
+            2: inplace.Section(2, "i.set_field18", body, len(body), False, True, False,
+                               mapping=[(0, "$a")], align=4),
+        }
+        obj.symbols = [caller, helper]
+        catalogue = {BASE: {"address": BASE, "size": len(raw), "isa": "arm"}}
+        mem = Memory()
+        original = bytearray(raw)
+        for site in self.SITES:
+            struct.pack_into("<I", original, site, decision[1] if decision else 0xE5801018)
+        mem.write(BASE, original)
+        return obj, mem, catalogue
+
+    def linker(self, mem, catalogue, names=None, model=None):
+        return inplace.InPlaceLinker(mem, catalogue, inplace.Resolver(catalogue, names),
+                                     (0x200000, 0x201000), model or self.MODEL)
+
+    def test_two_setter_calls_inline_and_the_unreferenced_section_is_dropped(self):
+        obj, mem, catalogue = self.fixture()
+        linker = self.linker(mem, catalogue)
+        linked = linker.link(obj)
+        self.assertEqual(set(linked), {1})
+        self.assertEqual(linked[1][1], mem.read(BASE, 40))
+        self.assertEqual([rewrite.offset for rewrite in linker.rewrites], list(self.SITES))
+        self.assertEqual([rewrite.target for rewrite in linker.rewrites], [None, None])
+        self.assertEqual([rewrite.rule for rewrite in linker.rewrites], ["inline_insn"] * 2)
+        self.assertEqual(linker.removed_callees[0]["symbols"], ["set_field18"])
+        self.assertEqual(linker.removed_callees[0]["size"], 8)
+        self.assertEqual(linker.rewrites[0].record()["removed_callee"], linker.removed_callees[0])
+        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+            self.linker(mem, catalogue, model="armlink5-inline-branchnop-v2").link(obj)
+
+    def test_a_definition_in_another_candidate_object_is_used_not_an_external_guess(self):
+        obj, mem, catalogue = self.fixture()
+        helper = obj.symbols[1]
+        helper_object = inplace.ObjectFile.__new__(inplace.ObjectFile)
+        helper_object.sections, helper_object.symbols = {2: obj.sections.pop(2)}, [helper]
+        obj.symbols.remove(helper)
+        extern = inplace.Symbol(helper.name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+        obj.symbols.append(extern)
+        for rel in obj.sections[1].relocs:
+            rel.symbol = extern
+        combined = inplace.ObjectFile.combine([obj, helper_object], ["caller.c", "setter.c"])
+        linker = self.linker(mem, catalogue)
+        linked = linker.link(combined)
+        self.assertEqual(len(linked), 1)
+        self.assertEqual(next(iter(linked.values()))[1], mem.read(BASE, 40))
+        self.assertEqual(linker.removed_callees[0]["object"], "setter.c")
+        self.assertEqual(extern.shndx, "SHN_UNDEF")  # combining does not mutate inputs
+        with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+            self.linker(mem, catalogue).link(obj)
+
+    def test_a_pointer_even_in_an_unplaced_section_prevents_removal(self):
+        for kind in ("STT_FUNC", "STT_SECTION"):
+            with self.subTest(kind):
+                obj, mem, catalogue = self.fixture()
+                symbol = obj.symbols[1] if kind == "STT_FUNC" else inplace.Symbol("", 0, 0, kind, "STB_LOCAL", 2)
+                obj.symbols.append(symbol)
+                obj.sections[3] = inplace.Section(3, ".data.pointer", bytes(4), 4, False, False, True,
+                                                  [inplace.Reloc(0, inplace.R_ARM_ABS32, symbol)], align=4)
+                with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                    self.linker(mem, catalogue).link(obj)
+
+    def test_a_pointer_in_another_object_prevents_removal(self):
+        obj, mem, catalogue = self.fixture()
+        pointer = inplace.ObjectFile.__new__(inplace.ObjectFile)
+        symbol = inplace.Symbol("set_field18", 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+        pointer.symbols = [symbol]
+        pointer.sections = {1: inplace.Section(1, ".data.pointer", bytes(4), 4, False, False, True,
+                                               [inplace.Reloc(0, inplace.R_ARM_ABS32, symbol)], align=4)}
+        with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+            self.linker(mem, catalogue).link(inplace.ObjectFile.combine([obj, pointer]))
+
+    def test_tail_branch_dependency_or_interior_call_prevents_removal(self):
+        for case in ("B", "dependency", "interior"):
+            with self.subTest(case):
+                obj, mem, catalogue = self.fixture()
+                section = obj.sections[1]
+                rel = section.relocs[-1]
+                if case == "B":
+                    data = bytearray(section.data)
+                    struct.pack_into("<I", data, rel.offset, 0xEAFFFFFE)
+                    section.data, rel.type = bytes(data), inplace.R_ARM_JUMP24
+                elif case == "dependency":
+                    rel.type = inplace.R_ARM_NONE
+                else:
+                    rel.symbol = inplace.Symbol("inside", 4, 0, "STT_NOTYPE", "STB_LOCAL", 2)
+                with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                    self.linker(mem, catalogue).link(obj)
+
+    def test_a_catalogued_address_never_uses_the_candidate_only_exception(self):
+        obj, mem, catalogue = self.fixture()
+        catalogue[0x100100] = {"address": 0x100100, "size": 12, "isa": "arm"}
+        mem.write(0x100100, struct.pack("<3I", 0xE3A00001, 0xE3A01002, 0xE12FFF1E))
+        linker = self.linker(mem, catalogue, {"set_field18": {"address": 0x100100}})
+        with self.assertRaisesRegex(inplace.LinkError, "inlining is undecidable"):
+            linker.link(obj)
+        self.assertEqual(linker.removed_callees, [])
+        # An interior address binding cannot disguise an existing function either.
+        with self.assertRaisesRegex(inplace.LinkError, "not a catalogued function start"):
+            self.linker(mem, catalogue, {"set_field18": {"address": 0x100104}}).link(obj)
+
+    def test_an_alias_cannot_hide_a_catalogued_counterpart(self):
+        obj, mem, catalogue = self.fixture()
+        alias = inplace.Symbol("func_00100100", 0, 8, "STT_FUNC", "STB_GLOBAL", 2)
+        obj.symbols.append(alias)
+        catalogue[0x100100] = {"address": 0x100100, "size": 8, "isa": "arm"}
+        with self.assertRaises(inplace.LinkError):
+            self.linker(mem, catalogue).link(obj)
+        # Reserved address names remain reserved even when no such catalogue entry exists.
+        obj.symbols.pop()
+        obj.symbols[1].name = "func_00100300"
+        with self.assertRaisesRegex(inplace.LinkError, "no catalogued function"):
+            self.linker(mem, catalogue).link(obj)
+
+    def test_pc_lr_svc_and_branchnop_bodies_keep_calls_and_sections(self):
+        for word in (0xE59F0000, 0xE1A0000E, 0xEF00003C, MOV_R0_R0):
+            with self.subTest(word=word):
+                obj, mem, catalogue = self.fixture(struct.pack("<I", word) + BX_LR)
+                obj.symbols[1].name = "func_00100100"
+                catalogue[0x100100] = {"address": 0x100100, "size": 8, "isa": "arm"}
+                mem.write(0x100100, obj.sections[2].data)
+                linker = self.linker(mem, catalogue)
+                linked = linker.link(obj)
+                self.assertEqual(set(linked), {1, 2})
+                self.assertEqual(linker.rewrites, [])
+                self.assertEqual(linker.removed_callees, [])
+                for site in self.SITES:
+                    self.assertEqual(struct.unpack_from("<I", linked[1][1], site)[0], bl(BASE + site, 0x100100, False))
+                obj.symbols[1].name = "set_field18"
+                with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                    self.linker(mem, catalogue).link(obj)  # an unplaceable callee is not silently erased
+
+    def test_i3_conditions_are_identical_for_removed_callees(self):
+        for call, instruction, replacement in (
+                (0x1BFFFFFE, 0xE5801018, 0x15801018),
+                (0x1BFFFFFE, 0x15801018, 0x15801018),
+                (0xEBFFFFFE, 0x15801018, 0x15801018)):
+            with self.subTest(call=call, instruction=instruction):
+                obj, mem, catalogue = self.fixture(struct.pack("<I", instruction) + BX_LR, call)
+                linker = self.linker(mem, catalogue)
+                linked = linker.link(obj)
+                self.assertEqual(set(linked), {1})
+                self.assertEqual([rewrite.word for rewrite in linker.rewrites], [replacement] * 2)
+        for instruction in (0x05801018, 0xF5D0F000):
+            with self.subTest(incompatible=instruction):
+                obj, mem, catalogue = self.fixture(struct.pack("<I", instruction) + BX_LR, 0x1BFFFFFE)
+                with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                    self.linker(mem, catalogue).link(obj)
+
+    def test_conditional_return_only_calls_drop_the_section_and_emit_unconditional_nops(self):
+        for body in (BX_LR, struct.pack("<I", 0xE1A0F00E)):
+            with self.subTest(body_size=len(body)):
+                obj, mem, catalogue = self.fixture(body, 0x1BFFFFFE)
+                linker = self.linker(mem, catalogue)
+                self.assertEqual(set(linker.link(obj)), {1})
+                self.assertEqual([(rewrite.rule, rewrite.word) for rewrite in linker.rewrites],
+                                 [("inline_nop", MOV_R0_R0)] * 2)
+
+    def test_non_call_abi_context_or_thumb_caller_is_refused(self):
+        for case in ("missing_argument", "live_argument", "live_flags", "conditional_definition", "thumb"):
+            with self.subTest(case):
+                obj, mem, catalogue = self.fixture()
+                data = bytearray(mem.read(BASE, 40))
+                if case == "missing_argument":
+                    struct.pack_into("<I", data, 8, 0xE3A02007)
+                elif case == "live_argument":
+                    struct.pack_into("<I", data, 16, 0xE2812001)
+                elif case == "live_flags":
+                    struct.pack_into("<I", data, 16, 0x03A01000)
+                elif case == "conditional_definition":
+                    struct.pack_into("<I", data, 16, 0xE3500000)
+                    struct.pack_into("<I", data, 20, 0x13A01000)
+                    struct.pack_into("<I", data, 24, 0xE2812001)
+                else:
+                    obj.sections[1].mapping = [(0, "$t")]
+                mem.write(BASE, data)
+                with self.assertRaisesRegex(inplace.LinkError, "still referenced"):
+                    self.linker(mem, catalogue).link(obj)
+
+    def test_no_general_unused_section_elimination_or_abi_breaking_helper(self):
+        obj, mem, catalogue = self.fixture()
+        obj.sections[1].relocs.clear()
+        with self.assertRaisesRegex(inplace.LinkError, "no inlined call"):
+            self.linker(mem, catalogue).link(obj)
+        for word in (0xE1A00004, 0xE3A04000, 0xE24DD004):
+            obj, mem, catalogue = self.fixture(struct.pack("<I", word) + BX_LR)
+            with self.assertRaisesRegex(inplace.LinkError, "unresolved symbol"):
+                self.linker(mem, catalogue).link(obj)
+
+    def test_combining_candidates_rejects_duplicate_non_comdat_definitions(self):
+        first, _, _ = self.fixture()
+        second, _, _ = self.fixture()
+        with self.assertRaisesRegex(inplace.LinkError, "several candidate objects"):
+            inplace.ObjectFile.combine([first, second])
+
+    def test_removed_comdat_copies_must_agree_and_are_dropped_as_one_entity(self):
+        first, mem, catalogue = self.fixture()
+        second, _, _ = self.fixture()
+        second.sections.pop(1)
+        second.symbols.pop(0)
+        first.sections[2].comdat = second.sections[2].comdat = "set_field18"
+        linker = self.linker(mem, catalogue)
+        self.assertEqual(len(linker.link(inplace.ObjectFile.combine([first, second]))), 1)
+        self.assertEqual(len(linker.removed_callees), 2)
+        second.sections[2].data = struct.pack("<I", 0xE580101C) + BX_LR
+        with self.assertRaisesRegex(inplace.LinkError, "contradictory removed-callee copies"):
+            self.linker(mem, catalogue).link(inplace.ObjectFile.combine([first, second]))
+
+
+
 ROOT = Path(__file__).resolve().parents[1]
 
 

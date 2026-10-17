@@ -431,6 +431,15 @@ def load_rewrites(paths: list[Path], functions: dict[int, dict], names: dict[str
             for row in rows:
                 if row["rule"] not in ("inline_nop", "inline_insn"):
                     continue
+                site = owner + row["offset"]
+                if row.get("removed_callee") is not None:
+                    callee = row["removed_callee"]
+                    if (row["target"] is not None or not callee.get("symbols") or callee.get("size") not in (4, 8)
+                            or not any(a <= site < b for a, b in functions[owner]["code_ranges"])):
+                        raise ArgcheckError(f"invalid removed-callee rewrite in {path}")
+                    # No image address exists to audit as an original call edge. The source-only
+                    # helper and its ABI contract require explicit review (docs/LINKER.md, v3).
+                    continue
                 site, target = owner + row["offset"], row["target"] & ~1
                 if target not in functions or not any(a <= site < b for a, b in functions[owner]["code_ranges"]):
                     raise ArgcheckError(f"invalid linker rewrite address in {path}")

@@ -1,9 +1,10 @@
 # Linker model: armlink output optimisations
 
-Status: **implemented on branch `armlink-inline`, default model `armlink5-inline-branchnop-v2`**
-(`tools/inplace.py`, `LINKER_MODELS`). Not yet adopted by a checkpoint: adopting it changes what the
-per-function oracle credits, so the integrator records a gate revision (docs/GATES.md) first.
-Author: ArmlinkInline (Anthropic, claude-opus-5-5, xhigh), 2026-10-16.
+Status: default model **`armlink5-inline-branchnop-v2`**; candidate-only callee elimination is
+implemented as the opt-in **`armlink5-inline-branchnop-v3`** (`tools/inplace.py`, `LINKER_MODELS`).
+V3 does not change the default or a checkpoint's gates: the integrator must record the proposed
+gate revision before adopting it. The draft is `scratch/integrator/linker-removed/GATES-DRAFT.md`.
+Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
 in-place linker (`tools/inplace.py`) relocates each compiled branch itself. Two armlink output
@@ -23,6 +24,7 @@ A model name is a version: rules are never edited under a recorded name.
 | `strict-v1` | selectable | no rewrites |
 | `armlink5-inline-branchnop-v1` (commit c11a0ad) | **retired**: `--linker-model` refuses it | as v2, except that a callee defined in the candidate object was judged by the candidate's own section, never by the original. Independent review (ReviewLinker, F01) showed a wrong local helper could make its caller match: a `bx lr` helper at an address whose original is a 12-byte body, the excluded `MOV r0, r0; BX lr`, a veneer or a multi-entry owner turned the caller's BL into the original's NOP, and a caller-only ledger credited the caller (reproduced on the real image with func_001b6ec4 calling a local `func_0013714c`). Only artifacts of this branch's own checks recorded it. |
 | `armlink5-inline-branchnop-v2` | default | below |
+| `armlink5-inline-branchnop-v3` | opt-in, not the default | all v2 rules plus candidate-only callees in R1 below |
 
 ## Sources
 
@@ -41,7 +43,7 @@ Online index of the same chapter: <https://developer.arm.com/documentation/dui04
 
 The manual does not say which NOP encoding armlink writes; the image does (below).
 
-## Rules adopted (`armlink5-inline-branchnop-v2`)
+## Retained-callee rules (v2 and v3)
 
 Applied to relocated ARM branches (`R_ARM_CALL`, `R_ARM_JUMP24`, `R_ARM_PC24`) in a candidate
 object whose destination is ARM code. Nothing else is rewritten.
@@ -55,7 +57,7 @@ object whose destination is ARM code. Nothing else is rewritten.
 - **I3 — conditions (manual, not observable in the image).** Unconditional BL: `insn` as is.
   BL*cond* with an unconditional `insn`: `insn` with the BL's condition. Equal conditions: as is.
   Different conditions, or an unconditional-only (`cond = 0xF`) `insn` under BL*cond*: kept.
-- **Callee identity: decided from the original image only.** The callee is the original function
+- **Retained-callee identity: decided from the original image only.** The callee is the original function
   at the call destination, eligible only when the catalogue makes it unambiguous: an ordinary
   top-level `kind: function`, ARM, size 4 or 8, all code (no pool or literal), no entry but its
   start. I1–I3 apply to its original bytes (`InPlaceLinker.eligible_original_callee`). A section
@@ -63,7 +65,7 @@ object whose destination is ARM code. Nothing else is rewritten.
   return, and loading it reads the PC, which is never inlined. Interior entries, `multi_entry`
   owners, veneers and Thumb functions are never inlined (the call stays a BL and mismatches if the
   original inlined it).
-- **Callee defined in the candidate object.** armlink would judge the candidate's own section, so
+- **Retained callee defined in the candidate build.** armlink would judge the candidate's own section, so
   it must be the original function: if either its section or the original would be inlined, the
   local section (whole, relocation-free, starting at the destination) must equal the eligible
   original body, otherwise the link is **refused** (`LinkError: armlink inlining is undecidable`).
@@ -85,6 +87,81 @@ begins with `MOV r0, r0` is a section that was a tail-call `B` when inlining ran
 before layout; `--branchnop` needs final addresses) — a PC-writing instruction, never inlined. The
 image agrees: all 8 surviving BLs to `MOV r0, r0; BX lr` functions (0x125b50, 0x13714c, 0x144220,
 0x18f7ec, 0x1c5b84) were kept, while no BL survives to any callee rule I1/I2 inlines.
+
+## Candidate-only removed callees (v3, rule R1)
+
+The original-only identity rule cannot describe every link. [DUI0474K §4.12](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2)
+says inlining runs **before unused-section elimination**: a callee inlined at every reference
+need not survive in the executable. V3 admits exactly that case, not a replacement for any
+catalogued function and not general dead-code removal:
+
+1. The complete 4/8-byte ARM callee section must be defined in the candidate build. A declaration
+   of an absent external function is not evidence. `tools/build.py` combines candidate objects
+   while preserving local symbols and per-unit ownership; `tools/match.py --extra-source FILE`
+   supplies a separate helper translation unit under the same selected compiler profile.
+2. The section has **no original address binding**, including aliases. A reserved `func_XXXXXXXX`
+   name without a catalogue entry is still refused. Any binding overlapping a catalogued
+   function/entry/extent takes the retained-callee path, with every v2 equality/refusal intact;
+   an uncatalogued bound address is also refused, rather than treated as absent.
+3. The section is executable, word-aligned, wholly code, non-Thumb and non-NOBITS, with all
+   function symbols at offset zero spanning the whole section. No relocation is allowed except
+   the nonreferencing `R_ARM_V4BX` marker. I1/I2 judge its own generated bytes, with all existing
+   exclusions (PC, LR, control transfer, exceptions, armlink's branch NOP) unchanged. In addition,
+   an I2 helper may read only r0–r3/flags and write only r0–r3/r12/flags: it cannot change a
+   callee-saved register or the stack. Conflicting candidate COMDAT copies are refused.
+4. Each reference must be a real relocated ARM `BL`/`BLcond` at a catalogued ARM code site,
+   exactly to the section entry (no interior/addended target), eligible under the unchanged
+   I1–I3 encodings. Call-site data-flow is checked against **original** catalogued code:
+   each input argument must be materialised within the preceding four straight-line words;
+   after the site, r1–r3/r12 and flags cannot be read before an unconditional definition, up to
+   the next control transfer or code-range end. Conditional definitions do not kill values on
+   all paths. r0 may be read as a call result; a return-only I1 callee has no input requirements.
+   This is a conservative filter, not recovery of an original call graph.
+5. After inlining, **every** reference to the section in every supplied allocated section must
+   be gone, even in an otherwise unplaced section. A function pointer, `B` tail call,
+   `R_ARM_NONE` dependency, incompatible I3 condition or non-ABI site raises `LinkError`; the
+   linker cannot silently retain an unplaceable callee or erase a live reference. There must be
+   at least one inlined call to each removed entity (identical COMDAT copies count together).
+   Only then is the helper section dropped; it earns no catalogue credit.
+
+Each rewrite retains `inline_insn`/`inline_nop` and has `target: null`, **not an invented image
+address**, plus `removed_callee` (symbols, section, size and defining candidate object/source).
+Match JSON and build receipt unit rows also list `removed_callees`; the defining source and
+object hashes remain bound even for a helper-only ledger unit with an empty `functions` list.
+Prepare's existing `linker_rewrites` carries the per-call metadata into reviewer evidence.
+`argcheck` does not fabricate an original edge to a missing address: reviewers must inspect the
+source helper's prototype, argument contracts and use explicitly.
+
+**Abuse bound and qualification.** An author could invent a source helper to emit an instruction.
+This model permits at most one non-PC, non-LR, non-control-transfer/non-exception instruction
+(or an empty-call NOP) at a compiler-produced relocated call site with the checked call-ABI
+data-flow. The emitted instruction must still match all original caller bytes; the section must
+vanish without any live references, and cannot replace any catalogued callee. These restrictions
+do **not** prove that the original source had this helper, its identity, or its semantics. R1
+credit therefore requires a visible `[INFERENCE]` source note and explicit reviewer qualification,
+not a claim of recovered original callee identity.
+
+### Removed-callee shape census
+
+`research/linker/removed_callee_census.py` emits counts and addresses only. It enumerates I2
+instruction shapes with at least one r0–r3 input, the R1 helper ABI and call-context filter,
+excluding every word any eligible original callee can produce under I3. It does not classify
+every surviving arithmetic/store instruction as an actual removed call.
+
+Against the adopted catalogue on 2026-10-17: **5,443 possible sites in 1,753 functions**.
+The literal, case-insensitive `inlin` search in mismatch rows of 151 author `RESULT.json` files
+finds 131 rows / 130 distinct functions; **438 census sites in 82 functions** overlap those notes.
+The substring deliberately also includes compiler-inline/forceinline discussion, so this is a
+triage intersection, not a count of proven linker failures. `func_001ab680` has 22 shape sites,
+including both reported setter sites **0x001abc28** and **0x001abd3c**.
+
+Reproduce from a linked worktree (exit 0 for the measurement above):
+
+```
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python research/linker/removed_callee_census.py \
+  --authors /home/michael/code/kanken-training-2-decomp/scratch/authors
+```
+
 
 ## Binary evidence
 
@@ -142,6 +219,39 @@ must be separate sections that armcc did not merge: in one translation unit `-O3
 target into the wrapper (observed for all 8 wrapper/body pairs tried below), so the original pairs
 were in different units placed adjacently — consistent with `--tailreorder` [INFERENCE].
 
+## V3 measurements (branch `linker-removed`, 2026-10-17)
+
+- Regression command:
+  `/home/michael/code/kanken-training-2-decomp/.venv/bin/python -m unittest tests.test_inplace tests.test_match tests.test_compid tests.test_argcheck tests.test_accept`
+  — **exit 0, 129 tests, no skips**. Includes two-site setter elimination, same-build separate
+  objects, pointer/B/dependency/interior refusals, catalogue/alias collisions, PC/LR/SVC/NOP
+  exclusions, I3, original call-ABI failures and conflicting removed COMDAT copies. The old F01
+  probes still run through `ArmlinkModelTest`.
+- Five accepted, call-bearing ledger functions were recompiled through **`tools/match.py`**, under
+  both v2 and v3, using `--profile game --show 0` and separate scratch output directories. All ten
+  commands **exit 0**, each complete extent remains MATCH, with no rewrites:
+
+  | Function | Source | Bytes | Original call sites |
+  |---|---|---:|---:|
+  | `func_00105084` | `src/pilot/loop_resources.c` | 64 | 1 |
+  | `func_0010d604` | `src/pilot/game_heap.cpp` | 64 | 1 |
+  | `func_0011e928` | `src/wave1/func_0011e928.c` | 72 | 1 |
+  | `func_0018fdd4` | `src/wave1/func_0018fdd4.cpp` | 40 | 1 |
+  | `func_00195254` | `src/wave1/func_00195254.c` | 224 | 4 |
+
+  Results: `scratch/integrator/linker-removed/accepted/{v2,v3}/func_XXXXXXXX/`.
+  No `accept.py verify`, checkpoint prepare/finalize, full-suite or full-ledger build was run.
+- **s1ab680 source-only setter retest:** `tools/match.py` on the preserved
+  `scratch/authors/s1ab680/src/func_001ab680_removed_setter.c`, with
+  `--extra-source scratch/authors/s1ab680/src/source_only_setter.c --profile game
+  --linker-model armlink5-inline-branchnop-v3 --show 0`, **exits 2**, fail-closed.
+  The separate setter is eligible (8 bytes), but this caller variant compiles to **2,232 bytes,
+  not 2,212**. Its first call at +0x5a8 / 0x001abc28 has the correct replacement and passes the
+  original call-context test. Its second call is at **+0x6d8 / 0x001abd58**, rather than the reported
+  original site +0x6bc / 0x001abd3c; it fails argument-materialisation there and would not reproduce
+  that original slot. No source was altered or target address fabricated to force a match.
+  Objects: `scratch/integrator/linker-removed/s1ab680/v3/`; this is **not new matching-C credit**.
+
 ## Measurements (branch `armlink-inline`)
 
 - **Accepted ledger:** `tools/build.py --name armlink-inline-v2-accepted-check` with the default
@@ -182,13 +292,16 @@ were in different units placed adjacently — consistent with `--tailreorder` [I
 
 ## What a match under the model proves
 
-As before, for every relocated field: the same target address. For a rewritten branch only:
-- `inline_nop`/`inline_insn`: the original function at the call's destination is that return-only
+For every ordinarily relocated field: the same target address. For a rewritten branch only:
+- Retained-callee `inline_nop`/`inline_insn`: the original function at the call's destination is that return-only
   or one-instruction function (a body-equivalence class) — **not which function was called**, nor
   the original call graph; interface and semantic review stay necessary.
+- V3 `removed_callee`: the candidate helper's I1/I2 instruction reproduces the caller site and
+  all of its candidate references were eliminated; **neither an original address nor the original
+  existence/identity of that helper is proved**. Its semantic/interface contract needs source review.
 - `branchnop`: a function starts at the next instruction — the target symbol's address agrees with
   the layout, its identity is the C declaration's.
-Reviewers see each rewrite in the match result, build receipt or compid record. These two
+Reviewers see each rewrite in the match result, build receipt or compid record. These
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
@@ -245,3 +358,40 @@ Leading-input dependence is a may-read model at calls, not a recovered prototype
   catalogue v4 splits there (the 28 NOP entries, 55 leading NOPs, 78 fallthroughs into entries, 98
   other in-extent tail calls, 11 uncatalogued thunks/wrappers such as 0x186eec), plus pointer-only
   entries such as 0x1ef884.
+
+## Experimental literal-record placement (2026-10-17)
+
+`--literal-model anonymous-string-records-v1` is an **opt-in proposal**, independent of the
+branch-rewrite `--linker-model`. The literal model defaults to `none` and composes with `strict-v1`,
+v2, and the opt-in v3 removed-callee model. No extra branch-model name or alias is introduced.
+A compiler-marked anonymous `.conststring` or `.constwstring` pool may be placed by complete
+record identity rather than one affine section base. This does **not** claim to reconstruct
+armlink's original ordering algorithm. It isolates a separately reviewable data-layout
+qualification; no acceptance gate is adopted by implementing the model.
+
+The section must be readonly, non-executable, relocation-free, non-COMDAT, with both
+`SHF_MERGE|SHF_STRINGS`, the correct 1/2-byte entity size, and only local section symbols. Records
+must be nonempty, unique, terminated, and separated only by zero alignment padding. The bounds
+are 1 MiB and 4,096 records. Every record needs a placed ABS32/TARGET1 reference to its start;
+all references to one record must agree. Their original pointers must identify a bijection onto
+one contiguous, equal-sized pool outside all catalogued functions and BSS. Reordering **candidate**
+records and padding must reproduce that entire pool exactly. No image search, suffix/interior
+binding, discarded record, invented data, instruction replacement, or relaxed function comparison
+is permitted. Existing intra-/inter-unit section-overlap checks remain in force.
+
+Match JSON and build inputs record `literal_model` independently of `linker_model`.
+`literal_rebindings` in match results and per-unit build receipts records the rule, pool address,
+size, section index, object ownership, record/reference counts, and candidate/output offsets and
+sizes; it contains no literal contents. Combined builds attribute each pool only to its owning
+unit. Prepare compares both models across its two builds, records the independent model and
+new/revised-unit mappings, and finalize retains the model in history; prepare still builds with
+the default-off literal model. Function bytes, including relocated pointer values, must still
+match independently.
+
+The qualification is unknown original pool order/TU ownership, not uncertain literal bytes or
+targets. Source/interface review must still reject artificial seeding tables, section attributes,
+unused declarations or other compiler steering. `tests/test_literal_pools.py` covers the positive
+case, simultaneous v3 callee removal and fail-closed boundaries without private inputs;
+`tests/test_build.py` covers combined-build attribution and independent option/receipt fields.
+Without `--literal-model`, every branch model retains its existing common-section placement rule.
+
