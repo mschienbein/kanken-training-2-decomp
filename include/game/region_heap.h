@@ -56,7 +56,8 @@ extern void func_001467e8(struct RegionHeap *heap);
 extern void func_001834b8(struct HeapStorage *storage);
 extern struct RegionHeap *func_001834a4(struct RegionHeap *heap);
 extern int func_001855d8(struct HeapStorage *storage);
-extern void func_001855fc(struct HeapStorage *storage, int count);
+/* Call sites 0x00125a7c and 0x00147644 consume r0; signed spelling [INFERENCE]. */
+extern int func_001855fc(struct HeapStorage *storage, int count);
 extern int func_001856d8(struct HeapStorage *storage);
 extern void func_00183724(struct FreeLink **head, void *storage, unsigned size);
 #ifdef __cplusplus
