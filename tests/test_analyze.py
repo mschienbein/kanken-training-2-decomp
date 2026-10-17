@@ -51,6 +51,12 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(result["stats"]["bytes_by_range_kind"]["padding"], 8)
         self.assertEqual(result["stats"]["bytes_by_range_kind"]["segment_padding"], 0x3000 - 16)
 
+    def test_empty_segments_keep_separate_page_padding(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        padding = [(row["start"], row["end"]) for row in result["ranges"] if row["kind"] == "segment_padding"]
+        self.assertEqual(padding, [(BASE + 4, BASE + 0x1000),
+                                   (BASE + 0x1000, BASE + 0x2000), (BASE + 0x2000, BASE + 0x3000)])
+
     def test_return_forms_and_prefetch(self) -> None:
         for terminal in (0xE12FFF1E, 0xE1A0F00E, 0xE8BD8010, 0xE49DF004):
             with self.subTest(terminal=terminal):
@@ -359,15 +365,127 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(result["stats"]["nop_entries"], 1)
         self.assertEqual(result["linker_tail_splits"], [])
 
-    def test_nonentry_and_trailing_linker_nops_are_not_split(self) -> None:
+    def test_nonentry_and_unreferenced_linker_nops_are_not_split(self) -> None:
         for words in ([0xE92D4010, 0xE1A00000, 0xE8BD8010],
-                      [0xE3A00001, 0xE1A00000, 0xE12FFF1E],
                       [0xE12FFF1E, 0xE1A00000, 0xE12FFF1E],
                       [0x01A00000, 0xE12FFF1E]):
             with self.subTest(words=words):
                 result = self.catalogue(words)
                 self.assertEqual(len(result["functions"]), 1)
                 self.assertEqual(result["linker_tail_splits"], [])
+
+    def test_tail_nop_after_epilogue_splits_before_a_prologue(self) -> None:
+        result = self.catalogue([0xE92D4010, 0xE1A04000, branch(BASE + 8, BASE + 40, link=True),
+                                 0xE1A00004, 0xE8BD4010, 0xE1A00000,
+                                 0xE92D4010, 0xE3A00002, 0xE8BD8010, 0, 0xE12FFF1E])
+        functions = {function["address"]: function for function in result["functions"]}
+        self.assertEqual((functions[BASE]["kind"], functions[BASE]["size"]), ("function", 24))
+        self.assertEqual((functions[BASE + 24]["kind"], functions[BASE + 24]["size"]), ("function", 12))
+        self.assertEqual(result["linker_tail_extent_splits"][0]["site"], BASE + 20)
+        self.assertIn("prologue", result["linker_tail_extent_splits"][0]["start_evidence"])
+
+    def test_tail_nop_group_becomes_two_ordinary_functions(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 24, link=True),
+                                 0xE12FFF1E, 0, 0xE3A00001, 0xE1A00000,
+                                 0xE92D4010, 0xE3A00002, 0xE8BD8010])
+        head, tail = result["functions"][1:]
+        self.assertEqual((head["address"], head["size"], head["kind"]), (BASE + 16, 8, "function"))
+        self.assertEqual((tail["address"], tail["size"], tail["kind"]), (BASE + 24, 12, "function"))
+        self.assertEqual(head["entries"][0]["sources"], [BASE])
+        self.assertEqual(tail["entries"][0]["sources"], [BASE + 4])
+        self.assertEqual(result["entry_groups"], [])
+
+    def test_tail_nop_live_arguments_prove_a_leaf_successor(self) -> None:
+        result = self.catalogue([0xE3A00001, 0xE1A00000, 0xE0800001, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [8, 8])
+        self.assertIn("aapcs_live_arguments", result["linker_tail_extent_splits"][0]["start_evidence"])
+
+    def test_tail_nop_without_successor_evidence_is_retained(self) -> None:
+        result = self.catalogue([0xE3A00001, 0xE1A00000, 0xE2800002, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [16])
+        self.assertEqual(result["linker_tail_inventory"][0]["decision"], "no_independent_successor_witness")
+
+    def test_tail_census_lr_base_does_not_discard_a_saved_stack_lr(self) -> None:
+        for middle, category in (([], "tail:after_epilogue"), ([0xE3A00001], "tail:in_leaf")):
+            with self.subTest(category=category):
+                result = self.catalogue([0xE92D4010, 0xE89E0001, *middle,
+                                         0xE1A00000, 0xE1A00001, 0xE8BD8010])
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                row = result["linker_tail_inventory"][0]
+                self.assertEqual(row["census_class"], category)
+                self.assertFalse(row["census_lr_saved"])
+                self.assertTrue(row["lr_saved"])
+                self.assertEqual(row["decision"], "frame_not_restored")
+
+    def test_tail_nop_before_an_empty_successor_is_split(self) -> None:
+        result = self.catalogue([0xE3A00001, 0xE1A00000, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [8, 4])
+        self.assertIn("return_only_successor", result["linker_tail_extent_splits"][0]["start_evidence"])
+
+    def test_tail_nop_crossing_branches_are_not_split(self) -> None:
+        for words in (
+            [branch(BASE, BASE + 16, condition=0), 0xE3A00001, 0xE1A00000,
+             0xE92D4010, 0xE3A00002, 0xE8BD8010],
+            [0xE3A00001, 0xE1A00000, 0xE92D4010, branch(BASE + 12, BASE, condition=0), 0xE8BD8010],
+        ):
+            with self.subTest(words=words):
+                result = self.catalogue(words)
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                self.assertEqual(result["linker_tail_inventory"][0]["decision"], "control_flow_crosses")
+
+    def test_tail_nop_switch_edges_are_not_split(self) -> None:
+        result = self.catalogue([0xE3500001, 0x979FF100, branch(BASE + 8, BASE + 20),
+                                 BASE + 20, BASE + 28, 0xE3A00001, 0xE1A00000,
+                                 0xE92D4010, 0xE3A00002, 0xE8BD8010])
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        row = result["linker_tail_inventory"][0]
+        self.assertEqual(row["decision"], "control_flow_crosses")
+        self.assertTrue(any("table_word" in edge for edge in row["crossing_branches"]))
+
+    def test_tail_nop_crossing_literal_ownership_is_not_split(self) -> None:
+        result = self.catalogue([0xE59F000C, 0xE1A00000, 0xE92D4010, 0xE3A00002, 0xE8BD8010, 0x12345678])
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        self.assertEqual(result["linker_tail_inventory"][0]["decision"], "literal_ownership_crosses")
+
+    def test_tail_nop_extra_interior_entries_remain_multi_entry(self) -> None:
+        result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 28, link=True),
+                                 0xE12FFF1E, 0, 0xE3A00001, 0xE1A00000,
+                                 0xE92D4010, 0xE3A00002, 0xE8BD8010])
+        self.assertEqual(result["functions"][1]["kind"], "multi_entry")
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        self.assertEqual(result["linker_tail_inventory"][0]["decision"], "additional_interior_entries")
+
+    def test_tail_nop_protected_owner_is_not_changed(self) -> None:
+        image, layout = fixture([0xE3A00001, 0xE1A00000, 0xE12FFF1E])
+        split = analyze.build_catalogue(image, layout)
+        published = dict(split["functions"][0], size=12, code_size=12, code_ranges=[[BASE, BASE + 12]])
+        result = analyze.build_catalogue(image, layout, protected_functions={BASE: published})
+        self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+        self.assertEqual((result["functions"][0]["kind"], result["functions"][0]["size"]), ("function", 12))
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        self.assertEqual(result["linker_tail_inventory"][0]["decision"], "protected_owner")
+
+    def test_tail_nop_protected_secondary_entry_keeps_the_group(self) -> None:
+        image, layout = fixture([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 24, link=True),
+                                 0xE12FFF1E, 0, 0xE3A00001, 0xE1A00000,
+                                 0xE92D4010, 0xE3A00002, 0xE8BD8010])
+        split = analyze.build_catalogue(image, layout)
+        head, tail = split["functions"][1:]
+        published = dict(head, size=20, code_size=20, kind="multi_entry",
+                         code_ranges=[[BASE + 16, BASE + 36]],
+                         entries=[head["entries"][0], dict(tail["entries"][0], evidence=["bl_target"])])
+        result = analyze.build_catalogue(image, layout, protected_functions={BASE + 24: published})
+        self.assertEqual(result["functions"][1]["kind"], "multi_entry")
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        self.assertEqual(result["linker_tail_inventory"][0]["decision"], "protected_owner")
+
+    def test_adopted_tail_split_is_reproduced_when_its_parts_become_protected(self) -> None:
+        image, layout = fixture([0xE3A00001, 0xE1A00000, 0xE12FFF1E])
+        adopted = analyze.build_catalogue(image, layout)
+        protected = {function["address"]: function for function in adopted["functions"]}
+        regenerated = analyze.build_catalogue(image, layout, protected_functions=protected)
+        self.assertEqual(analyze.serialize_catalogue(regenerated), analyze.serialize_catalogue(adopted))
+        self.assertEqual(len(regenerated["linker_tail_extent_splits"]), 1)
 
     def test_external_body_branch_records_secondary_entry(self) -> None:
         result = self.catalogue([branch(BASE, BASE + 16, link=True), branch(BASE + 4, BASE + 20),
@@ -766,8 +884,15 @@ class CatalogueTests(unittest.TestCase):
     def test_original_invariants_and_stability(self) -> None:
         image = (ROOT / "orig/code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((ROOT / "orig/exheader.bin").read_bytes())
-        first = analyze.build_catalogue(image, layout)
-        second = analyze.build_catalogue(image, layout)
+        protected_addresses = {int(name.removeprefix("func_"), 16)
+                               for path in ("config/matches.json", "config/candidates/c004.json")
+                               for unit in json.loads((ROOT / path).read_text(encoding="utf-8"))["units"]
+                               for name in unit["functions"]}
+        adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
+        adopted_functions = {function["address"]: function for function in adopted["functions"]}
+        protected = {address: adopted_functions[address] for address in protected_addresses}
+        first = analyze.build_catalogue(image, layout, protected_functions=protected)
+        second = analyze.build_catalogue(image, layout, protected_functions=protected)
         self.assertEqual(first["stats"], second["stats"])
         self.assertEqual(analyze.serialize_catalogue(first), analyze.serialize_catalogue(second))
         self.assertEqual(analyze.validate_catalogue(first, image, layout), [])
@@ -782,7 +907,7 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual((owner["address"], owner["kind"]), (0x18F7F0, "function"))
         self.assertTrue({0x11FA34, 0x11FFDC} <= set(entry["sources"]))
         owner, entry = entry_owners[0x12D1D8]
-        self.assertEqual(owner["address"], 0x12D1CC)
+        self.assertEqual((owner["address"], owner["kind"]), (0x12D1D8, "function"))
         self.assertIn(0x135054, entry["sources"])
         owner, entry = entry_owners[0x1852F4]
         self.assertEqual((owner["kind"], entry["kind"], owner["size"]), ("function", "entry", 4))
@@ -795,11 +920,15 @@ class CatalogueTests(unittest.TestCase):
         self.assertIn("pointer", functions[0x149428]["evidence"])
         for address in (0x195EC4, 0x180768, 0x180884, 0x149428):
             self.assertEqual(entry_owners[address][1]["isa"], "arm")
-        adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
         adopted_entries = {(entry["address"], entry["isa"]) for function in adopted["functions"]
                            for entry in function.get("entries", [function])}
         recovered_entries = {(address, entry["isa"]) for address, (_, entry) in entry_owners.items()}
         self.assertEqual(sorted(adopted_entries - recovered_entries), [])
+        for address in protected:
+            self.assertEqual(functions[address], adopted_functions[address])
+        self.assertEqual((functions[0x112C80]["kind"], functions[0x112C80]["size"]), ("function", 24))
+        self.assertEqual((functions[0x112C98]["kind"], functions[0x112C98]["size"]), ("function", 48))
+        self.assertEqual(len(first["linker_tail_inventory"]), 270)
         for split in first["linker_tail_splits"]:
             self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
                              ("function", 4))

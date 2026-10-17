@@ -2,6 +2,56 @@
 
 Current entry on top.
 
+## 2026-10-16 (night) — hand-off from the Mac to the desktop
+
+**State** (details: `docs/STATUS.md` top entry): accepted **103 functions / 5,056 B**
+(c001-pilot-r4, c002-wave1-r3, c003-wave2-r3; history seq 3). Denominator **v6** (4,549
+creditable functions / 1,129,946 B). Gates **v1.8**. Linker model `armlink5-inline-branchnop-v2`.
+
+**CI on `main` is red, and that is expected:** `accept.py verify` refuses accepted sources that
+checkpoint c004 revises (interface unification) until a c004 successor finalizes. It turns
+green at step 3 below. Do not "fix" it by reverting the revisions.
+
+Setup: the Windows steps in the 2026-10-15 entry below, with current expected values (catalogue
+hash, test count, accepted-ledger build) in the private `3ds-experiments` repo:
+`context/session-handoffs/mac-to-pc-2026-10-16.md`. Private inputs come from
+`3ds-experiments/inputs/`, never committed. That entry's "both private", test count,
+catalogue hash and `pilot.json` are history.
+`scratch/` was not transferred (author results, packets, review evidence stay on the Mac).
+
+Restart sequence:
+
+1. **c004-r2** (196 new functions from waves 3–4 + 6 revised accepted units; `main` already has
+   both reviews' fixes and `docs/known-issues-c004-r2.md`):
+   `tools/jobs.py run --name c004-r2-prepare -- <python> tools/accept.py prepare --checkpoint c004-r2 --candidates config/candidates/c004.json --allow-unchecked-cpp`.
+   This is also the first cross-host run of the gates: both fresh builds must still produce the
+   original image, as on the Mac. `jobs.py run` returns 0 as soon as the job starts, and a failed
+   prepare writes the same `scratch/jobs/c004-r2-prepare/exit` marker. Before any review, check
+   that the marker says `"exit_code": 0` **and** `accept/c004-r2/prepare.json` says
+   `"result": "PASS"`. Otherwise read the job's `log.txt`, fix, and prepare under a new name.
+2. Two fresh reviews per `docs/REVIEWING.md` (202 rows, including step 6 for the 89 functions
+   with linker rewrites): reviewer `review-c004-openai` (astra-reviewer) and
+   `review-c004-second` (reviewer). The c004 records in `accept/c004/reviews/` show what each
+   found last time.
+3. `accept.py finalize --checkpoint c004-r2 --min-reviews 2 && accept.py verify && git add … && git commit … && git push`.
+   Capture exit codes; never pipe a gate into `tail`/`grep` before `&&`.
+4. **c005** (branch `c005-wave5`: 37 wave-5 functions collected): merge into `main`, then do the
+   interface unification listed in `docs/wip/c005-INTEGRATION.md` in a worktree (3 disagreements,
+   5 policy items), prepare `c005`, two reviews, finalize.
+5. Next waves: `tools/triage.py --avoid svc,thumb,exclusive batches …` against v6 (v6 made ~200
+   more functions creditable). Authors include `include/game/*.h` and never write local headers;
+   before each prepare run `tools/interfaces.py check` on a dry ledger (accepted + candidates) and
+   unify declarations first — that is now the main integration cost. On the desktop raise
+   `tools/build.py --jobs` and the author count.
+
+Tool follow-up (display only, not the oracle): `match.render` and `packet.disassemble` decode by
+range membership at the instruction start, so a literal that starts mid-word is shown as code — in
+v6 `func_0010007c` has a 3-byte literal at `[0x100085,0x100088)` and both loops decode the word at
+`0x100084`. Render from `code_ranges` with bounded raw/data spans; use this case as the regression.
+
+Open user decision (unchanged): may ARMCC `__svc(N)` and named-register CP15 variables count as C?
+Until ruled, SVC/CP15 wrappers are `library_candidate`.
+
 ## 2026-10-16 — decompiling on the Mac (work also resumable on the Windows desktop)
 
 State: `docs/STATUS.md` top entry. Accepted: c001-pilot-r4 (17 functions). Gates: `docs/GATES.md`

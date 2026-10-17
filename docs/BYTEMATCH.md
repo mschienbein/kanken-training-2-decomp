@@ -1,8 +1,32 @@
 # ByteMatch progress tracking
 
 [ByteMatch](https://bytematch.dev) (the decomp.dev replacement) tracks matching progress from objdiff
-reports uploaded by GitHub Actions. This repository is wired for it; registration waits until the
-repository is public.
+reports uploaded by GitHub Actions. **Live since 2026-10-16:**
+https://bytematch.dev/mschienbein/kanken-training-2-decomp (project id 1421490781).
+
+## Registration record (2026-10-16)
+
+- Repository made public after a full-history audit (no ROM/asset/compiler paths, no disassembly
+  or byte dumps in any of 795 blobs, no secrets, one noreply author identity).
+- Added via Manage → Submit a project (owner `mschienbein`). Saved settings, verified through
+  `/api/v1/projects?q=kanken`: name 漢検トレーニング2 (Kanken Training 2), short name `kanken2`,
+  platform `3ds`, game 漢検トレーニング2, franchise 漢検 (Kanken), release year 2017, default branch
+  `main`, workflow `progress.yml`, artifact pattern default, default version `jp` (auto).
+- Backfill imported 44 history points from successful `main` runs; the latest ingested commit is
+  `bbf6e7a` (103 / 4,350 functions, 0.455%). Later runs failed the ledger check while c004's
+  revisions are pending, so the dashboard updates again once `c004-r2` finalizes.
+- Art (hotlinked, nothing stored here; SteamGridDB has no entry for this game). Both load without a
+  Referer, as ByteMatch requests them:
+  - icon: GameTDB box front for product code B2KJ,
+    `https://art.gametdb.com/3ds/coverM/JA/B2KJ.jpg` (400×352; ByteMatch center-crops it square);
+  - cover: the official Imagineer site's header background (the box art's yellow kanji pattern),
+    `https://www.imagineer.co.jp/package_game/kanken5/img/home/bg_header.png` (1920×517; shown as a
+    3:1 crop).
+  If either host disappears, the page falls back to no art; re-pick from those sources.
+- GitHub App `bytematchdev`: the owner added this repository to the existing installation
+  171769441 (Only select repositories: shiren2-decomp, kanken-training-2-decomp; Actions and
+  Metadata read, Pull requests write). The manage page reports "The GitHub App is installed: new
+  runs arrive instantly and pull requests get progress comments".
 
 ## What is in place
 
@@ -10,7 +34,7 @@ repository is public.
 |---|---|---|
 | Report generator | `ci/progress_report.py` | objdiff report v2 JSON; needs no ROM. Denominator: `config/catalogue.json`. Numerator: functions credited in `config/matches.json`. Units are 64 KiB text blocks until functions are grouped into translation units. |
 | Workflow | `.github/workflows/progress.yml` | Runs on push to `main`, on pull requests and on demand; uploads artifact `jp_report` containing `report.json`. |
-| Badges | `README.md` (commented out) | `measure=matched_code_percent` and `measure=matched_functions`. ByteMatch rejects decomp.dev's `code`/`functions` measure names. |
+| Badges | `README.md` | `measure=matched_code_percent` and `measure=matched_functions`. ByteMatch rejects decomp.dev's `code`/`functions` measure names. |
 
 `config/matches.json` changes only when the integrator records an accepted build
 (`tools/build.py` receipt `PASS`), so the dashboard shows accepted progress, never candidates.
