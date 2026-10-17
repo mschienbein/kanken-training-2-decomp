@@ -217,6 +217,7 @@ extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
 extern void func_0015e948(struct DisplayObject *object, int active);
 extern void func_0015e954(struct DisplayPaneLink *link, int active);
 extern void func_00180358(struct DisplayObject *object, int first, int second);
+extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
 extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
 extern void func_001826fc(struct DisplayObject *object, int active);
 extern void func_00195a08(struct DisplayObject *object, int index, int active);

@@ -17,8 +17,7 @@ struct NotificationFields {
     unsigned char reserved33[0xb70d];
 };
 
-/* One serialized payload has both UTF-16 and word-copy uses. These are
- * representation views, not additional storage or separate global objects. */
+/* UTF-16 and word-copy clients address one serialized storage object. */
 union NotificationStorage {
     unsigned words[0x2dd0];
     unsigned short text[0x5ba0];

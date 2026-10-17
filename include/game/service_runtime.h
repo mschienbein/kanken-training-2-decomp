@@ -5,6 +5,8 @@
 typedef void (*LifecycleCallback)(void);
 struct ResourceServiceLock;
 struct ResourceServiceEvent;
+
+/* Callback pending and resource busy are distinct fields of this state object. */
 struct ResourceServiceState {
     unsigned char reserved00[2];
     unsigned char pending;

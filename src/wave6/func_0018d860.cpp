@@ -3,11 +3,11 @@
 
 struct RegistryOwner {
     const void *vtable;
-    Registry registry;
+    PoolList registry;
 };
 
 
-extern "C" void func_0018d860(RegistryOwner *owner, RegistryNode *node)
+extern "C" void func_0018d860(RegistryOwner *owner, PoolLink *node)
 {
     func_0018d868(&owner->registry, node);
 }

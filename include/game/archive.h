@@ -92,11 +92,15 @@ struct ArchiveSoundInfo {
 #endif
 };
 
-struct ArchiveStreamInfo {
-    unsigned reserved00[5];
-#ifndef __cplusplus
-    unsigned parameters[];
-#endif
+struct SoundRecord {
+    unsigned item_id;
+    unsigned field04;
+    unsigned char property;
+    unsigned char reserved09[3];
+    unsigned short type;
+    unsigned short reserved0e;
+    int detail_offset;
+    unsigned option_flags;
 };
 
 struct SoundRecord {
@@ -205,17 +209,6 @@ struct SoundFileInfo {
 #endif
 };
 
-struct SoundInfoReference {
-    unsigned type;
-    unsigned offset;
-};
-
-struct SoundInfoTable {
-    unsigned count;
-#ifndef __cplusplus
-    struct SoundInfoReference entries[];
-#endif
-};
 
 struct SoundFileResult {
     unsigned count;
@@ -270,6 +263,8 @@ extern unsigned int func_0014a364(const struct SoundArchiveReader *reader);
 extern unsigned func_0014a380(const struct SoundArchiveReader *reader);
 extern const unsigned *func_0014c298(const struct SoundArchiveInfo *info);
 extern const unsigned *func_0014c2b0(const struct SoundArchiveInfo *info);
+extern unsigned char func_00140ccc(const struct SoundRecord *record);
+extern int func_00140d1c(const struct SoundRecord *record);
 extern unsigned func_0014c23c(const struct SoundFileInfo *info);
 extern const struct SoundFileInfo *func_0014c25c(const struct SoundArchiveInfo *info, unsigned id);
 extern bool func_00181334(const struct SoundArchive *archive, struct SoundPlayerResult *out);

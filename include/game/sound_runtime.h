@@ -27,7 +27,7 @@ struct SoundInstance {
     float volume;
     unsigned char reservedcc[0x3c];
     struct PoolLink player_link;
-    struct RegistryNode selection_link;
+    struct PoolLink selection_link;
 };
 
 struct SoundFileGroup {
@@ -123,7 +123,7 @@ extern void func_00190634(struct SoundInstance *sound);
 extern void func_0019063c(struct SoundHandle *handle);
 extern int func_001d2ce0(const struct SoundInstance *sound);
 extern struct SoundInstance *func_001d4464(const struct SoundSelectionList *selection);
-extern void func_001d2d14(struct SoundInstance *object, struct Registry *registry);
+extern void func_001d2d14(struct SoundInstance *object, struct PoolList *registry);
 #ifdef __cplusplus
 }
 #endif

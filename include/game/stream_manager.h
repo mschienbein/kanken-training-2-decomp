@@ -73,6 +73,9 @@ extern struct StreamManagerGuards data_0024371c;
 extern volatile unsigned int data_00243720;
 extern struct StreamManager bss_004b8640;
 extern struct StreamManager bss_004b87d0;
+extern void func_00146ff8(struct StreamManager *manager, void *storage, unsigned int size);
+extern void func_00180884(struct StreamQueue *queue, struct StreamEvent **storage,
+                          unsigned int capacity);
 extern struct StreamManager *func_00143d1c(struct StreamManager *manager);
 extern void func_001812f8(struct StreamManager *manager);
 extern int func_00181280(struct StreamSemaphore *semaphore, int amount);
