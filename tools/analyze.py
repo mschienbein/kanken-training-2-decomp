@@ -31,6 +31,7 @@ import hashlib
 import json
 from pathlib import Path
 import struct
+import subprocess
 import sys
 import time
 
@@ -43,6 +44,27 @@ else:
     import ctrfmt
 
 ROOT = Path(__file__).resolve().parents[1]
+
+# Capstone does not reliably mark the memory operand WRITE access on SWP/STREX.
+# Exclusive loads also change reservation state and are not benign setup loads.
+MEMORY_SIDE_EFFECTS = frozenset(
+    getattr(arm, f"ARM_INS_{name}") for name in (
+        "CLREX", "LDAEX", "LDAEXB", "LDAEXD", "LDAEXH",
+        "LDREX", "LDREXB", "LDREXD", "LDREXH", "PUSH",
+        "SRSDA", "SRSDB", "SRSIA", "SRSIB", "STC", "STC2", "STC2L", "STCL",
+        "STL", "STLB", "STLEX", "STLEXB", "STLEXD", "STLEXH", "STLH",
+        "STM", "STMDA", "STMDB", "STMIB", "STR", "STRB", "STRBT", "STRD",
+        "STREX", "STREXB", "STREXD", "STREXH", "STRH", "STRHT", "STRT",
+        "SWP", "SWPB", "VPUSH", "VST1", "VST2", "VST3", "VST4",
+        "VSTMDB", "VSTMIA", "VSTR",
+    )
+)
+
+
+def _memory_side_effect(instruction) -> bool:
+    return (instruction.id in MEMORY_SIDE_EFFECTS
+            or any(op.type == arm.ARM_OP_MEM and op.access & capstone.CS_AC_WRITE
+                   for op in instruction.operands))
 
 
 def _signed(value: int, bits: int) -> int:
@@ -931,9 +953,10 @@ class Analyzer:
         """Repair only weak prologue starts; a real incoming entry is never moved.
 
         Scan every gap, not selected addresses. A prefix must be unconditional,
-        side-effect-free register setup, fit entirely in the gap, supply a body
-        input, and have no unexplained callee-saved input. Literal ownership,
-        executable/data overlap, known entries and protected extents are guards.
+        nonstoring register/constant setup (benign memory reads are allowed), fit
+        entirely in the gap, supply a body input, and have no unexplained
+        callee-saved input. Literal ownership, executable/data overlap, known entries
+        and protected extents are guards.
         """
         pointers = self._pointer_targets(traces)
         occupied = {address + offset for trace in traces for address, size in trace.code.items()
@@ -976,8 +999,7 @@ class Analyzer:
                     break
                 read, wrote = (set(items) for items in decoded.regs_access())
                 if (not wrote or not wrote <= core or not wrote & needed
-                        or any(op.type == arm.ARM_OP_MEM and op.access & capstone.CS_AC_WRITE
-                               for op in decoded.operands) or decoded.writeback):
+                        or _memory_side_effect(decoded) or decoded.writeback):
                     break
                 if any(not start <= first < end <= limit or any(p in occupied for p in range(first, end))
                        for first, end in ins.pools):
@@ -1044,21 +1066,26 @@ class Analyzer:
                           "pool_overlaps_code": overlaps}
 
     def _pointer_prefix_wrapper(self, address: int, isa: str, limit: int) -> bool:
-        """Prove pointer-referenced register setup ending in armlink's erased tail B.
+        """Prove pointer-referenced nonstoring setup before an independent entry."""
+        return (isa == "arm" and limit in self.seeds and self.seeds[limit].isa == "arm"
+                and self._nonstoring_prefix(address, limit))
 
-        The successor already has an independent entry. No saved LR, call, memory
-        side effect, pool, architectural NOP hint or incoming flags may stand in
-        for this exact linker witness. Conditional setup needs locally set flags.
+    def _nonstoring_prefix(self, address: int, limit: int) -> bool:
+        """Bound setup ending in armlink's exact erased tail B; loads are allowed.
+
+        No SP/LR change, call, memory side effect, pool, architectural NOP hint or
+        incoming flags may stand in for the linker witness. Conditional setup
+        needs locally set flags.
         """
-        if (isa != "arm" or not 4 < limit - address <= 64 or limit not in self.seeds
-                or self.seeds[limit].isa != "arm" or self.word(limit - 4) != 0xE1A00000):
+        if not 4 < limit - address <= 64 or self.word(limit - 4) != 0xE1A00000:
             return False
         core = set(range(arm.ARM_REG_R0, arm.ARM_REG_R3 + 1)) | {arm.ARM_REG_R12}
         written: set[int] = set()
         for site in range(address, limit - 4, 4):
             decoded, ins = self.detailed(site), self.decode(site, "arm")
             if (decoded is None or ins is None or ins.call or ins.branch or ins.stop
-                    or ins.pools or ins.address_reference or decoded.writeback):
+                    or ins.pools or ins.address_reference or decoded.writeback
+                    or _memory_side_effect(decoded)):
                 return False
             read, wrote = (set(items) for items in decoded.regs_access())
             if (not wrote or not wrote <= core | {arm.ARM_REG_CPSR}
@@ -1471,6 +1498,35 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
             written.update(wrote)
         return False
 
+    def field_read_successor(target: int, function: dict) -> bool:
+        """A nonstoring leaf wrapper followed by a complete scalar field getter.
+
+        The exact linker NOP is still required. Unlike an arbitrary R0-only
+        arithmetic suffix, a field load has an object input and a closed return
+        contract, even though the may-read ABI analysis also permits R0 results.
+        A final direct tail transfer must reach an independently known returning
+        ARM owner; calls and unknown/interior targets cannot establish this proof.
+        """
+        end = function["address"] + function["size"]
+        if (end != target + 8 or not analyzer._nonstoring_prefix(function["address"], target)
+                or any(is_data(function, address) or address not in code_by_owner[function["address"]]
+                       for address in (target, target + 4))):
+            return False
+        load, terminal = instruction(target), analyzer.decode(target + 4, "arm")
+        if (load is None or terminal is None or load.cc != arm.ARM_CC_AL or load.writeback
+                or load.id not in (arm.ARM_INS_LDR, arm.ARM_INS_LDRB, arm.ARM_INS_LDRH,
+                                   arm.ARM_INS_LDRSB, arm.ARM_INS_LDRSH)
+                or len(load.operands) != 2 or load.operands[0].type != arm.ARM_OP_REG
+                or load.operands[0].reg != arm.ARM_REG_R0 or load.operands[1].type != arm.ARM_OP_MEM
+                or load.operands[1].mem.base != arm.ARM_REG_R0 or load.operands[1].mem.index
+                or terminal.conditional or terminal.call):
+            return False
+        if terminal.returns:
+            return analyzer.word(target + 4) in (0xE12FFF1E, 0xE1A0F00E)
+        tail = by_address.get(terminal.target[0]) if terminal.branch and terminal.target else None
+        return (tail is not None and terminal.target[1] == tail["isa"] == "arm"
+                and tail["address"] != function["address"] and not tail["noreturn"])
+
     pointers = set(analyzer._external_pointers())
     for function in functions:
         for first, end in function["pools"]:
@@ -1623,6 +1679,8 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
             evidence.append("aapcs_live_arguments")
         if row["restored_frame_at"] is not None and leaf_setter(target, function):
             evidence.append("restored_frame_leaf_setter")
+        if field_read_successor(target, function):
+            evidence.append("nonstoring_wrapper_field_read")
         row["start_evidence"] = evidence
         crossings, data_crossings = [], []
         for address in sorted(code_by_owner[parent]):
@@ -1787,6 +1845,17 @@ def _split_linker_tail_extents(catalogue: dict, analyzer: Analyzer, protected: d
                  linker_tail_extent_splits=len(split_records))
     stats["tail_calls"] += len(split_records)
     return catalogue
+
+
+def check_protected_functions(catalogue: dict, protected: dict[int, dict]) -> None:
+    """Compare complete adopted owners, including classifications and evidence."""
+    functions = catalogue["functions"]
+    starts = [function["address"] for function in functions]
+    for address, expected in protected.items():
+        index = bisect_right(starts, address) - 1
+        actual = functions[index] if index >= 0 else None
+        if actual != expected or not actual["address"] <= address < actual["address"] + actual["size"]:
+            raise ValueError(f"protected function {address:#x} cannot retain its adopted catalogue record")
 
 
 def apply_classifications(catalogue: dict, records: list[dict]) -> None:
@@ -1977,6 +2046,7 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
     }
     result = _split_linker_tail_extents(result, analyzer, protected_functions or {})
     apply_classifications(result, classifications or [])
+    check_protected_functions(result, protected_functions or {})
     return result
 
 
@@ -2098,6 +2168,48 @@ def serialize_catalogue(catalogue: dict) -> bytes:
     return (json.dumps(catalogue, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8")
 
 
+def load_protected_functions(root: Path, baseline: dict, manifests: list[Path]) -> tuple[dict, dict, dict]:
+    """Resolve complete adopted records, including the in-flight c006 branch blob."""
+    adopted = sorted(baseline["functions"], key=lambda function: function["address"])
+    starts = [function["address"] for function in adopted]
+    names_path = root / "config/names.json"
+    names = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
+    inputs = {"config/names.json": hashlib.sha256(names_path.read_bytes()).hexdigest()} if names_path.is_file() else {}
+    sources = {}
+    paths = [root / "config/matches.json"]
+    paths.extend(path for name in ("c004", "c005", "c006")
+                 if (path := root / f"config/candidates/{name}.json").is_file())
+    paths.extend(manifests)
+    for path in paths:
+        label = str(path.relative_to(root)) if path.is_relative_to(root) else str(path)
+        sources[label] = path.read_bytes()
+    reference = "c006-integrate:config/candidates/c006.json"
+    resolved = subprocess.run(["git", "rev-parse", "--verify", "--quiet", reference],
+                              cwd=root, capture_output=True, check=False)
+    if resolved.returncode == 0:
+        blob = resolved.stdout.decode("ascii").strip()
+        content = subprocess.run(["git", "show", blob], cwd=root, capture_output=True, check=False)
+        if content.returncode:
+            raise ValueError(f"cannot read c006 protection blob (git exit {content.returncode})")
+        sources[f"git:{reference}@{blob}"] = content.stdout
+    elif resolved.returncode != 1:
+        raise ValueError(f"cannot resolve c006 protection blob (git exit {resolved.returncode})")
+    protected, summaries = {}, {}
+    for label, content in sources.items():
+        rows = []
+        for unit in json.loads(content)["units"]:
+            for name in unit["functions"]:
+                address = (names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1
+                index = bisect_right(starts, address) - 1
+                if index < 0 or address >= adopted[index]["address"] + adopted[index]["size"]:
+                    raise ValueError(f"protected function {name} has no adopted catalogue record")
+                protected[address] = adopted[index]
+                rows.append((address, adopted[index]["size"]))
+        inputs[label] = hashlib.sha256(content).hexdigest()
+        summaries[label] = {"functions": len(rows), "bytes": sum(size for _, size in rows), "changes": []}
+    return protected, summaries, inputs
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -2105,31 +2217,63 @@ def main(argv: list[str] | None = None) -> int:
     command.add_argument("--image", type=Path, default=ROOT / "orig/code.bin")
     command.add_argument("--exheader", type=Path, default=ROOT / "orig/exheader.bin")
     command.add_argument("--out", type=Path, default=ROOT / "scratch/analyze/catalogue.json")
-    command.add_argument("--protect-manifest", type=Path, action="append", default=[ROOT / "config/matches.json"],
-                         help="keep every function listed in this matches/candidate manifest unchanged (repeatable)")
+    command.add_argument("--protect-manifest", type=Path, action="append", default=[],
+                         help="also protect this manifest; accepted/candidate checkpoints are automatic")
     command.add_argument("--classifications", type=Path,
-                         help="reviewed image/extent-bound runtime, library or assembly evidence records")
+                         help="override bundled image-bound reviewed classification evidence")
     args = parser.parse_args(argv)
     started = time.perf_counter()
     try:
-        protected = {}
-        adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))["functions"]
-        adopted.sort(key=lambda function: function["address"])
-        adopted_starts = [function["address"] for function in adopted]
-        names_path = ROOT / "config/names.json"
-        names = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
-        for manifest in args.protect_manifest:
-            for unit in json.loads(manifest.read_text(encoding="utf-8"))["units"]:
-                for name in unit["functions"]:
-                    address = (names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1
-                    index = bisect_right(adopted_starts, address) - 1
-                    if index < 0 or address >= adopted[index]["address"] + adopted[index]["size"]:
-                        raise ValueError(f"protected function {name} has no adopted catalogue record")
-                    protected[address] = adopted[index]
-        result = build_catalogue(args.image.read_bytes(), ctrfmt.parse_exheader(args.exheader.read_bytes()), args.image.name,
-                                 protected_functions=protected,
-                                 classifications=json.loads(args.classifications.read_text(encoding="utf-8"))
-                                 if args.classifications else None)
+        if __package__:
+            from . import catalogue_review
+        else:
+            import catalogue_review
+        baseline_path = ROOT / "config/catalogue.json"
+        baseline = catalogue_review.load(baseline_path)
+        protected, protected_summary, inputs = load_protected_functions(ROOT, baseline, args.protect_manifest)
+        image, exheader = args.image.read_bytes(), args.exheader.read_bytes()
+        layout = ctrfmt.parse_exheader(exheader)
+        evidence_path = ROOT / "research/catalogue_v8_evidence.json"
+        evidence = catalogue_review.load(evidence_path)
+        bundled = args.classifications is None and hashlib.sha256(image).hexdigest() == evidence["image_sha256"]
+        records = (catalogue_review.load(args.classifications) if args.classifications
+                   else evidence["classification_records"] if bundled else [])
+        withheld = []
+        if bundled:
+            # A reviewed reclassification cannot silently outrank an accepted or
+            # in-flight complete record. Explicit classification inputs instead
+            # reach build_catalogue's final invariant and fail on any conflict.
+            protected_owners = {function["address"] for function in protected.values()}
+            withheld = [{**row, "reason": "protected_adopted_record"}
+                        for row in records if row["address"] in protected_owners]
+            records = [row for row in records if row["address"] not in protected_owners]
+        result = build_catalogue(image, layout, args.image.name,
+                                 protected_functions=protected, classifications=records)
+        inputs.update({
+            "config/catalogue.json": catalogue_review.digest(baseline_path),
+            "exheader": hashlib.sha256(exheader).hexdigest(),
+            "image": result["image_sha256"],
+        })
+        classification_input = args.classifications or evidence_path
+        classification_label = (str(classification_input.relative_to(ROOT))
+                                if classification_input.is_relative_to(ROOT) else str(classification_input))
+        inputs[classification_label] = catalogue_review.digest(classification_input)
+        source_root = Path(__file__).resolve().parent
+        sources = {f"tools/{name}": catalogue_review.digest(source_root / name)
+                   for name in ("analyze.py", "catalogue_review.py")}
+        result["generator"] = {
+            "command": "tools/analyze.py catalogue --out X",
+            "revision": "catalogue-v8-r2",
+            "source_sha256": sources,
+            "classification_input": classification_label,
+            "bundled_review_applied": bundled,
+            "input_sha256": dict(sorted(inputs.items())),
+        }
+        if bundled:
+            catalogue_review.enrich_catalogue(
+                result, baseline, image, layout, protected=protected,
+                protected_summary=protected_summary, evidence=evidence,
+                input_sha256={**inputs, **sources}, withheld=withheld)
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_bytes(serialize_catalogue(result))
     except (OSError, ValueError, struct.error) as error:

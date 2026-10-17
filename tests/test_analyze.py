@@ -1,11 +1,16 @@
 """Hand-encoded synthetic ARM/Thumb fixtures; no original executable bytes."""
 from __future__ import annotations
 
+from contextlib import redirect_stdout
 import hashlib
+import io
 import json
 from pathlib import Path
 import struct
+import subprocess
+import tempfile
 import unittest
+from unittest import mock
 
 from tools import analyze, ctrfmt
 
@@ -32,6 +37,22 @@ def fixture(words: list[int], *, rodata: list[int] | None = None, data: list[int
 def literal_words(value: bytes) -> list[int]:
     padded = value + b"\0" * (-len(value) % 4)
     return list(struct.unpack(f"<{len(padded) // 4}I", padded))
+
+
+# Synthetic swap/store-exclusive reproducers match the review's missing MEM WRITE
+# flags; exclusive loads must also be withheld because they change reservation state.
+ATOMIC_SETUPS = (
+    (0xE1030091, analyze.arm.ARM_INS_SWP),
+    (0xE1430091, analyze.arm.ARM_INS_SWPB),
+    (0xE1830F91, analyze.arm.ARM_INS_STREX),
+    (0xE1C30F91, analyze.arm.ARM_INS_STREXB),
+    (0xE1E30F91, analyze.arm.ARM_INS_STREXH),
+    (0xE1A30F92, analyze.arm.ARM_INS_STREXD),
+    (0xE1930F9F, analyze.arm.ARM_INS_LDREX),
+    (0xE1D30F9F, analyze.arm.ARM_INS_LDREXB),
+    (0xE1F30F9F, analyze.arm.ARM_INS_LDREXH),
+    (0xE1B30F9F, analyze.arm.ARM_INS_LDREXD),
+)
 
 
 class CatalogueTests(unittest.TestCase):
@@ -400,6 +421,64 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual([function["size"] for function in result["functions"]], [8, 8])
         self.assertIn("aapcs_live_arguments", result["linker_tail_extent_splits"][0]["start_evidence"])
 
+    def test_nonstoring_wrapper_splits_a_complete_field_getter(self) -> None:
+        for load in (0xE5900004, 0xE5D00004, 0xE1D000B4, 0xE1D000D4, 0xE1D000F4):
+            for terminal in (0xE12FFF1E, 0xE1A0F00E):
+                with self.subTest(load=load, terminal=terminal):
+                    result = self.catalogue([0xE5900008, 0xE1A00000, load, terminal])
+                    self.assertEqual([function["size"] for function in result["functions"]], [8, 8])
+                    self.assertEqual(result["linker_tail_extent_splits"][0]["start_evidence"],
+                                     ["nonstoring_wrapper_field_read"])
+
+    def test_field_getter_may_tail_to_an_independent_returning_owner(self) -> None:
+        result = self.catalogue([0xE5900008, 0xE1A00000, 0xE5900004,
+                                 branch(BASE + 12, BASE + 20), 0, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [8, 8, 4])
+        self.assertEqual(result["linker_tail_extent_splits"][0]["start_evidence"],
+                         ["nonstoring_wrapper_field_read"])
+
+    def test_field_getter_does_not_tail_to_a_noreturn_owner(self) -> None:
+        result = self.catalogue([0xE5900008, 0xE1A00000, 0xE5900004,
+                                 branch(BASE + 12, BASE + 20), 0, 0xEF000003])
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+
+    def test_field_getter_requires_unconditional_scalar_read_and_plain_return(self) -> None:
+        for suffix in (
+            [0xE4900004, 0xE12FFF1E],  # Writeback.
+            [0x15900004, 0xE12FFF1E],  # Conditional read.
+            [0xE5940004, 0xE12FFF1E],  # Not an argument-object field.
+            [0xE5800004, 0xE12FFF1E],  # Store, not a read.
+            [0xE5900004, 0xE49DF004],  # Stack-dependent return.
+            [0xE5900004, 0x012FFF1E],  # Conditional return.
+            [0xE5900004, 0xE2800001, 0xE12FFF1E],  # Arbitrary longer body.
+        ):
+            with self.subTest(suffix=suffix):
+                image, layout = fixture([0xE5900008, 0xE1A00000, *suffix])
+                result = analyze.build_catalogue(image, layout)
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                self.assertNotIn("nonstoring_wrapper_field_read",
+                                 result["linker_tail_inventory"][0]["start_evidence"])
+
+    def test_field_getter_requires_nonstoring_stack_and_lr_independent_prefix(self) -> None:
+        for prefix in ([0xE5801000], [0xE59D0000], [0xE1A0E000], [0x15900008],
+                       *([word] for word, _ in ATOMIC_SETUPS)):
+            with self.subTest(prefix=prefix):
+                result = self.catalogue([*prefix, 0xE1A00000, 0xE5900004, 0xE12FFF1E])
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+
+    def test_field_getter_does_not_override_crossing_control_or_pool_ownership(self) -> None:
+        for words, decision in (
+            ([branch(BASE, BASE + 12, condition=0), 0xE5900008, 0xE1A00000,
+              0xE5900004, 0xE12FFF1E], "control_flow_crosses"),
+            ([0xE59F0008, 0xE1A00000, 0xE5900004, 0xE12FFF1E, 0x12345678],
+             "literal_ownership_crosses"),
+        ):
+            with self.subTest(decision=decision):
+                image, layout = fixture(words)
+                result = analyze.build_catalogue(image, layout)
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                self.assertEqual(result["linker_tail_inventory"][0]["decision"], decision)
+
     def test_tail_nop_vfp_scalar_and_register_lists_are_live_arguments(self) -> None:
         for suffix in (
             [0xED800A00, 0xE12FFF1E],  # VSTR S0,[R0].
@@ -536,6 +615,7 @@ class CatalogueTests(unittest.TestCase):
         for words in (
             [0xE3A00001, 0xE1A00000, 0xED800A00, 0xE12FFF1E],
             [0xE92D4010, 0xE8BD4010, 0xE1A00000, 0xE3A01001, 0xE5801000, 0xE12FFF1E],
+            [0xE5900008, 0xE1A00000, 0xE5900004, 0xE12FFF1E],
         ):
             with self.subTest(words=words):
                 image, layout = fixture(words)
@@ -1087,6 +1167,25 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(second["functions"][1], expected)
         self.assertEqual(second["leading_instruction_repairs"], first["leading_instruction_repairs"])
 
+    def test_leading_setup_refuses_swap_store_exclusive_and_exclusive_loads(self) -> None:
+        for word, expected_id in ATOMIC_SETUPS:
+            with self.subTest(instruction_id=expected_id):
+                image, layout = fixture([0xE12FFF1E, word, 0xE92D4010, 0xE1A04000, 0xE8BD8010])
+                analyzer = analyze.Analyzer(image, layout)
+                decoded = analyzer.detailed(BASE + 4)
+                self.assertEqual(decoded.id, expected_id)
+                self.assertTrue(analyze._memory_side_effect(decoded))
+                if expected_id in (analyze.arm.ARM_INS_SWP, analyze.arm.ARM_INS_STREX):
+                    self.assertFalse(any(op.type == analyze.arm.ARM_OP_MEM
+                                         and op.access & analyze.capstone.CS_AC_WRITE for op in decoded.operands))
+                result = analyze.build_catalogue(image, layout)
+                self.assertEqual(result["leading_instruction_repairs"], [])
+                self.assertEqual(result["functions"][1]["address"], BASE + 8)
+
+    def test_leading_setup_allows_benign_argument_memory_reads(self) -> None:
+        result = self.catalogue([0xE12FFF1E, 0xE5910004, 0xE92D4010, 0xE1A04000, 0xE8BD8010])
+        self.assertEqual(result["functions"][1]["address"], BASE + 4)
+
     def test_leading_pool_cannot_cross_a_known_entry(self) -> None:
         image, layout = fixture([0xE12FFF1E, 0xE59F5010, 0xE24DD004,
                                  0xE1A00005, 0xE28DD004, 0xE12FFF1E,
@@ -1135,6 +1234,21 @@ class CatalogueTests(unittest.TestCase):
                 analyzer.seeds[end] = analyze.Seed("arm", {"bl_target"})
                 self.assertEqual(analyzer._pointer_prefix_wrapper(BASE, "arm", end), accepted)
 
+    def test_pointer_prefix_refuses_swap_store_exclusive_and_exclusive_loads(self) -> None:
+        for word, expected_id in ATOMIC_SETUPS:
+            with self.subTest(instruction_id=expected_id):
+                image, layout = fixture([word, 0xE1A00000, 0xE12FFF1E])
+                analyzer = analyze.Analyzer(image, layout)
+                analyzer.seeds[BASE + 8] = analyze.Seed("arm", {"bl_target"})
+                self.assertEqual(analyzer.detailed(BASE).id, expected_id)
+                self.assertFalse(analyzer._pointer_prefix_wrapper(BASE, "arm", BASE + 8))
+
+    def test_pointer_prefix_allows_benign_argument_memory_reads(self) -> None:
+        image, layout = fixture([0xE5930004, 0xE3A01001, 0xE1A00000, 0xE12FFF1E])
+        analyzer = analyze.Analyzer(image, layout)
+        analyzer.seeds[BASE + 12] = analyze.Seed("arm", {"bl_target"})
+        self.assertTrue(analyzer._pointer_prefix_wrapper(BASE, "arm", BASE + 12))
+
     def test_reviewed_classification_retains_extent_and_physical_ownership(self) -> None:
         result = self.catalogue([0xE12FFF1E])
         physical_ranges = json.loads(json.dumps(result["ranges"]))
@@ -1162,6 +1276,89 @@ class CatalogueTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             analyze.apply_classifications(result, [row, row])
         self.assertEqual(result["functions"][0]["kind"], "function")
+
+    def test_classification_cannot_mutate_a_complete_protected_record(self) -> None:
+        image, layout = fixture([0xE12FFF1E])
+        baseline = analyze.build_catalogue(image, layout)
+        published = baseline["functions"][0]
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": baseline["image_sha256"],
+               "kind": "runtime", "basis": "compiler_abi", "identity": "synthetic ABI helper",
+               "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper"}
+        with self.assertRaisesRegex(ValueError, "protected function"):
+            analyze.build_catalogue(image, layout, protected_functions={BASE: published}, classifications=[row])
+        self.assertEqual(published["kind"], "function")
+        self.assertNotIn("classification_evidence", published)
+
+    def test_protected_comparison_rejects_evidence_only_mutation(self) -> None:
+        result = self.catalogue([0xE12FFF1E])
+        published = json.loads(json.dumps(result["functions"][0]))
+        result["functions"][0]["classification_evidence"] = {"evidence": "synthetic annotation"}
+        with self.assertRaisesRegex(ValueError, "protected function"):
+            analyze.check_protected_functions(result, {BASE: published})
+
+    def test_manifest_protection_includes_c005_and_c006_branch_blob(self) -> None:
+        baseline = self.catalogue([0xE12FFF1E, 0xE12FFF1E, 0xE12FFF1E])
+        # Separate entries are supplied explicitly; this fixture concerns manifest
+        # resolution, not speculative discovery of unreachable adjacent returns.
+        functions = [dict(baseline["functions"][0], address=BASE + 4 * index, size=4) for index in range(3)]
+        baseline["functions"] = functions
+        scratch = ROOT / "scratch"
+        scratch.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=scratch) as temporary:
+            root = Path(temporary)
+            (root / "config/candidates").mkdir(parents=True)
+            (root / "config/matches.json").write_text(json.dumps({"units": [{"functions": ["func_00100000"]}]}))
+            (root / "config/candidates/c005.json").write_text(
+                json.dumps({"units": [{"functions": ["func_00100004"]}]}))
+            content = json.dumps({"units": [{"functions": ["func_00100008"]}]}).encode()
+            blob = "1" * 40
+            with mock.patch.object(analyze.subprocess, "run", side_effect=[
+                subprocess.CompletedProcess([], 0, f"{blob}\n".encode(), b""),
+                subprocess.CompletedProcess([], 0, content, b""),
+            ]) as run:
+                protected, summaries, hashes = analyze.load_protected_functions(root, baseline, [])
+            self.assertEqual(protected, {function["address"]: function for function in functions})
+            label = f"git:c006-integrate:config/candidates/c006.json@{blob}"
+            self.assertEqual(summaries[label], {"functions": 1, "bytes": 4, "changes": []})
+            self.assertEqual(hashes[label], hashlib.sha256(content).hexdigest())
+            self.assertEqual(run.call_args_list[1].args[0], ["git", "show", blob])
+
+    def test_plain_catalogue_command_includes_review_and_reproduces_all_bytes(self) -> None:
+        image, layout = fixture([0xE12FFF1E])
+        baseline = analyze.build_catalogue(image, layout)
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": baseline["image_sha256"],
+               "kind": "runtime", "basis": "compiler_abi", "identity": "synthetic ABI helper",
+               "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper"}
+        evidence = {"image_sha256": baseline["image_sha256"], "classification_records": [row],
+                    "thumb_dispositions": [], "author_dispositions": [], "provenance": {"proof_status": "synthetic"},
+                    "source_candidate_sha256": "synthetic", "source_input_sha256": {}}
+        scratch = ROOT / "scratch"
+        scratch.mkdir(exist_ok=True)
+        for protect in (False, True):
+            with self.subTest(protected=protect), tempfile.TemporaryDirectory(dir=scratch) as temporary:
+                root = Path(temporary)
+                for directory in ("config", "orig", "research"):
+                    (root / directory).mkdir()
+                (root / "config/catalogue.json").write_bytes(analyze.serialize_catalogue(baseline))
+                (root / "config/matches.json").write_text(
+                    json.dumps({"units": [{"functions": ["func_00100000"]}]} if protect else {"units": []}))
+                (root / "research/catalogue_v8_evidence.json").write_text(json.dumps(evidence))
+                (root / "orig/code.bin").write_bytes(image)
+                exheader = bytearray(0x200)
+                for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
+                    struct.pack_into("<III", exheader, offset, segment.address, 1, segment.size)
+                (root / "orig/exheader.bin").write_bytes(exheader)
+                with mock.patch.object(analyze, "ROOT", root), mock.patch.object(
+                    analyze.subprocess, "run", return_value=subprocess.CompletedProcess([], 1, b"", b"")
+                ), redirect_stdout(io.StringIO()):
+                    for name in ("first", "second"):
+                        self.assertEqual(analyze.main(["catalogue", "--out", str(root / f"{name}.json")]), 0)
+                self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
+                result = json.loads((root / "first.json").read_bytes())
+                self.assertTrue(result["generator"]["bundled_review_applied"])
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v8-r2")
+                self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
+                self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
 
     def test_ordinary_library_identity_is_not_just_a_semantic_name(self) -> None:
         result = self.catalogue([0xE12FFF1E])
@@ -1202,16 +1399,10 @@ class CatalogueTests(unittest.TestCase):
     def test_original_invariants_and_stability(self) -> None:
         image = (ROOT / "orig/code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((ROOT / "orig/exheader.bin").read_bytes())
-        names = json.loads((ROOT / "config/names.json").read_text(encoding="utf-8"))["symbols"]
-        protected_addresses = {(names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1
-                               for path in ("config/matches.json", "config/candidates/c004.json",
-                                            "config/candidates/c005.json", "config/candidates/c006.json")
-                               if (ROOT / path).is_file()
-                               for unit in json.loads((ROOT / path).read_text(encoding="utf-8"))["units"]
-                               for name in unit["functions"]}
         adopted = json.loads((ROOT / "config/catalogue.json").read_text(encoding="utf-8"))
+        protected, _, _ = analyze.load_protected_functions(ROOT, adopted, [])
         adopted_functions = {function["address"]: function for function in adopted["functions"]}
-        protected = {address: adopted_functions[address] for address in protected_addresses}
+        self.assertTrue(set(protected) <= adopted_functions.keys())
         first = analyze.build_catalogue(image, layout, protected_functions=protected)
         second = analyze.build_catalogue(image, layout, protected_functions=protected)
         self.assertEqual(first["stats"], second["stats"])
@@ -1273,6 +1464,8 @@ class CatalogueTests(unittest.TestCase):
             0x15E684: (20, 0x15E698, 28),
             0x1D2C44: (52, 0x1D2C78, 12),
             0x1D2CF0: (36, 0x1D2D14, 12),
+            0x131948: (8, 0x131950, 8),
+            0x1EFCD0: (8, 0x1EFCD8, 8),
         }
         for address, (head_size, target, tail_size) in expected_splits.items():
             with self.subTest(address=address):
@@ -1284,7 +1477,7 @@ class CatalogueTests(unittest.TestCase):
                           if adopted_functions[address]["size"] != row[0]})
         self.assertEqual(set(adopted_functions) - set(functions), set(repairs))
         self.assertTrue({0x110CC8, 0x14B358, 0x1C5260} <= set(functions))
-        self.assertEqual(len(first["linker_tail_extent_splits"]), 137)
+        self.assertEqual(len(first["linker_tail_extent_splits"]), 139)
         self.assertEqual(sum(first["stats"]["linker_tail_census"].values()),
                          sum(adopted["stats"]["linker_tail_census"].values()))
         self.assertEqual(first["stats"]["linker_nop_words"], 776)

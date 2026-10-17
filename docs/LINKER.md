@@ -192,6 +192,46 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
+## Catalogue recovery safeguards (candidate v8-r2)
+
+`tools/analyze.py catalogue --out X` is the single candidate generator. For the
+reviewed image it includes the immutable, image/extent/ISA-bound classification
+records in `research/catalogue_v8_evidence.json` and recomputes the revision's
+ownership, anomaly and pointer evidence. The output records the command, source
+hashes and input hashes; neither output path nor elapsed time changes its bytes.
+The former separate `research/catalogue_v8.py` generator has been replaced by
+`tools/catalogue_review.py`; no active author-result directory is scanned.
+
+Protection compares complete adopted owners **after classification**, not only
+addresses and sizes before it. Accepted matches, existing c004/c005/c006 candidate
+files, extra `--protect-manifest` inputs, and the c006 candidate blob from
+`c006-integrate` are included. The branch blob identity and content hash are
+recorded. A bundled classification conflicting with a protected owner is
+explicitly withheld; an explicit conflicting `--classifications` input fails.
+
+Leading-prefix and pointer-prefix recovery allow benign argument-memory loads,
+but refuse memory writes, writeback and atomic/exclusive reservation operations.
+Explicit instruction-class exclusions cover SWP/STREX/LDREX variants even when
+Capstone omits a memory operand's WRITE flag. In particular, `0x001f3e78` is a
+nonstoring argument-memory-read prefix, not register-only setup.
+
+The exact executed linker MOV-NOP may also delimit a bounded nonstoring leaf
+wrapper from a complete two-instruction scalar field-read body. The read must
+return in r0 from a nonindexed, non-writeback r0-based field and end in a plain LR
+return or an unconditional tail transfer to an independently known returning ARM
+owner. Predication, calls, stack/LR-dependent setup, longer arbitrary suffixes and
+unknown/interior/noreturn tail targets are insufficient. Existing control/switch
+crossing, literal/data crossing, saved-frame, interior-entry and complete-record
+protection vetoes still apply. This recovers `0x001efcd0 | 0x001efcd8` and
+`0x00131948 | 0x00131950` under the adopted erased-tail-branch interpretation;
+it is not a general rule to split every leaf NOP.
+
+Classification proofs retain their original provenance. Old ABI executions,
+natural-caller matches, declaration rejections and the corrected no-frame compiler
+grid are cited as retained evidence, not newly executed checks. SDK/archive or
+handwritten ownership beyond demonstrated ABI constraints remains [INFERENCE].
+Leading-input dependence is a may-read model at calls, not a recovered prototype.
+
 ## Residual unknowns
 
 - armlink's output for a relocated BL or B*cond* to the next instruction (refused, none in image).
