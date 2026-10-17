@@ -48,6 +48,19 @@ class Namer:
             return f"{kind}_{address:08x}"
         return None
 
+    def code_target(self, word: int) -> int | None:
+        """The function or entry a literal word points at, clearing bit 0 (the Thumb bit) only
+        when that lands on one. Any other word, odd data addresses included, is not code."""
+        for address in ((word & ~1, word) if word & 1 else (word,)):
+            if self.kind(address) == "func":
+                return address
+        return None
+
+    def literal(self, word: int) -> str | None:
+        """Name a pointer-sized literal: a code address by its function, anything else exactly."""
+        target = self.code_target(word)
+        return self.name(word if target is None else target)
+
 
 def branch_target(insn) -> int | None:
     m = insn.mnemonic
@@ -104,9 +117,9 @@ def build_packet(target: str, catalogue_path: Path) -> tuple[str, str, Path]:
     callees, data_refs, lines = set(), set(), []
     for kind, addr, item, _ in disassemble(image, fn):
         if kind == "word":
-            ref = namer.name(item & ~1) if item is not None else None
+            ref = namer.literal(item) if item is not None else None
             if ref and ref != fname:
-                (callees if ref.startswith("func_") or (item & ~1) in functions else data_refs).add(ref)
+                (callees if ref.startswith("func_") or namer.code_target(item) is not None else data_refs).add(ref)
             lines.append(f"{addr:08x}:  .word 0x{item:08x}" + (f"    ; {ref}" if ref else ""))
         elif kind == "raw":
             lines.append(f"{addr:08x}:  .inst {item}")
@@ -125,7 +138,7 @@ def build_packet(target: str, catalogue_path: Path) -> tuple[str, str, Path]:
             lit = pc_literal(item, fn["isa"])
             if lit is not None and fn["address"] <= lit < fn["address"] + fn["size"]:
                 word = struct.unpack("<I", image.read(lit, 4))[0]
-                ref = namer.name(word & ~1)
+                ref = namer.literal(word)
                 note = f"={ref}" if ref else f"=0x{word:08x}"
             lines.append(f"{item.address:08x}:  {text:<40}" + (f"; {note}" if note else ""))
 

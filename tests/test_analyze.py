@@ -400,6 +400,156 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual([function["size"] for function in result["functions"]], [8, 8])
         self.assertIn("aapcs_live_arguments", result["linker_tail_extent_splits"][0]["start_evidence"])
 
+    def test_tail_nop_vfp_scalar_and_register_lists_are_live_arguments(self) -> None:
+        for suffix in (
+            [0xED800A00, 0xE12FFF1E],  # VSTR S0,[R0].
+            [0xE5901000, 0xEC810A02, 0xE12FFF1E],  # VSTMIA R1,{S0,S1}.
+            [0xE5901000, 0xEC810A03, 0xE12FFF1E],  # Three pass-through floats.
+            [0xE5901000, 0xEC810B04, 0xE12FFF1E],  # VSTMIA R1,{D0,D1}.
+            [0xEDC07A00, 0xE12FFF1E],  # Last single argument lane S15.
+            [0xED807B00, 0xE12FFF1E],  # Last double argument register D7.
+            [0xED840A00, 0xE5900000, 0xE12FFF1E],  # VFP use before the R0 use.
+        ):
+            with self.subTest(suffix=suffix):
+                result = self.catalogue([0xE3A00001, 0xE1A00000, *suffix])
+                self.assertEqual([function["size"] for function in result["functions"]], [8, 4 * len(suffix)])
+                row = result["linker_tail_extent_splits"][0]
+                self.assertIn("aapcs_live_arguments", row["start_evidence"])
+                self.assertTrue(any(name.startswith("s") for name in row["live_argument_registers"]))
+
+    def test_vfp_return_values_and_callee_saved_lanes_are_not_argument_witnesses(self) -> None:
+        for suffix in (
+            [0xED840A00, 0xE12FFF1E],  # S0 alone may be a scalar result.
+            [0xEC840A04, 0xE12FFF1E],  # S0-S3 may be an HFA result.
+            [0xEC840B08, 0xE12FFF1E],  # D0-D3 may be an HFA result.
+            [0xED808A00, 0xE12FFF1E],  # S16 is callee-saved.
+            [0xED808B00, 0xE12FFF1E],  # D8 is callee-saved.
+            [0xE3A00001, 0xED800A00, 0xE12FFF1E],  # R0 is initialized after the call.
+        ):
+            with self.subTest(suffix=suffix):
+                result = self.catalogue([0xE3A00001, 0xE1A00000, *suffix])
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                self.assertEqual(result["linker_tail_inventory"][0]["as_if_call"], "consistent")
+
+    def test_vfp_alias_writes_and_load_lists_initialize_exact_lanes(self) -> None:
+        for load, store, split in (
+            (0xED900B00, 0xED800A00, False),  # D0 writes both S0 and S1.
+            (0xED900A00, 0xED800B00, True),  # S0 does not initialize all of D0.
+            (0xEC900A02, 0xEC800A02, False),  # VLDMIA writes both list registers.
+            (0xEC900A01, 0xEC800A02, True),  # Loading S0 leaves S1 live.
+        ):
+            with self.subTest(load=load, store=store):
+                result = self.catalogue([0xE3A00001, 0xE1A00000, load, store, 0xE12FFF1E])
+                self.assertEqual(bool(result["linker_tail_extent_splits"]), split)
+
+    def test_live_vfp_arguments_do_not_override_a_saved_lr(self) -> None:
+        result = self.catalogue([0xE92D4010, 0xE1A00000, 0xED800A00, 0xE8BD8010])
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        self.assertEqual(len(result["functions"]), 1)
+
+    def test_nop_census_keeps_non_tail_words_without_splitting_them(self) -> None:
+        result = self.catalogue([0xE92D4010, 0xE1A00000, 0xED800A00, 0xE8BD8010])
+        self.assertEqual(len(result["linker_nop_inventory"]), 1)
+        row = result["linker_nop_inventory"][0]
+        self.assertEqual((row["census_class"], row["decision"]), ("call:in_frame", "in_frame_not_tail"))
+        self.assertEqual(row["as_if_call"], "reads_args")
+        self.assertTrue(row["lr_saved"])
+        self.assertEqual(result["linker_tail_inventory"], [])
+
+    def test_live_vfp_arguments_do_not_override_crossing_control_or_literals(self) -> None:
+        for words, decision in (
+            ([branch(BASE, BASE + 12, condition=0), 0xE3A00001, 0xE1A00000,
+              0xED800A00, 0xE12FFF1E], "control_flow_crosses"),
+            ([0xE59F2008, 0xE1A00000, 0xED800A00, 0xE12FFF1E, 0x12345678],
+             "literal_ownership_crosses"),
+        ):
+            with self.subTest(decision=decision):
+                result = self.catalogue(words)
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                row = result["linker_tail_inventory"][0]
+                self.assertIn("aapcs_live_arguments", row["start_evidence"])
+                self.assertEqual(row["decision"], decision)
+
+    def test_flags_only_dependency_is_not_a_boundary_witness(self) -> None:
+        result = self.catalogue([0xE3500000, 0xE1A00000, 0x12800001, 0xE12FFF1E])
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        self.assertEqual(result["linker_tail_inventory"][0]["as_if_call"], "reads_flags")
+
+    def test_restored_frame_proves_short_leaf_setters(self) -> None:
+        for store in (0xE5801000, 0xE5C01000, 0xE1C010B0):
+            with self.subTest(store=store):
+                result = self.catalogue([0xE92D4010, 0xE8BD4010, 0xE1A00000,
+                                         0xE3A01001, store, 0xE12FFF1E])
+                self.assertEqual([function["size"] for function in result["functions"]], [12, 12])
+                row = result["linker_tail_extent_splits"][0]
+                self.assertEqual(row["restored_frame_at"], BASE + 4)
+                self.assertEqual(row["start_evidence"], ["restored_frame_leaf_setter"])
+
+    def test_post_epilogue_nop_outside_the_frozen_census_is_considered(self) -> None:
+        # A non-writeback LDR restores the actual saved LR slot; a later ADD
+        # balances SP. The census only understands POP/LDM and misses this tail.
+        result = self.catalogue([0xE92D4010, 0xE59DE004, 0xE28DD008, 0xE1A00000,
+                                 0xE3A01001, 0xE5801000, 0xE12FFF1E])
+        self.assertEqual([function["size"] for function in result["functions"]], [16, 12])
+        row = result["linker_tail_extent_splits"][0]
+        self.assertEqual(row["census_class"], "call:in_frame")
+        self.assertTrue(row["census_lr_saved"])
+        self.assertFalse(row["lr_saved"])
+        self.assertEqual(row["restored_frame_at"], BASE + 4)
+        self.assertEqual(row["start_evidence"], ["restored_frame_leaf_setter"])
+
+    def test_leaf_setter_needs_a_genuine_balanced_lr_restore(self) -> None:
+        for prefix in (
+            [0xE3A00001],  # A setter shape alone is not a section witness.
+            [0xE92D4010, 0x08BD4010],  # A conditional restore is insufficient.
+            [0xE92D4010, 0xE59DE000, 0xE28DD008],  # Wrong stack slot.
+            [0xE92D4010, 0xE59DE004],  # LR loaded, but SP remains in the frame.
+            [0xE92D4010, 0xE8BD4010, 0xE1A0E000],  # Restored LR overwritten.
+        ):
+            with self.subTest(prefix=prefix):
+                result = self.catalogue([*prefix, 0xE1A00000, 0xE3A01001, 0xE5801000, 0xE12FFF1E])
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                self.assertEqual(len(result["functions"]), 1)
+
+    def test_restored_frame_does_not_make_an_arbitrary_suffix_a_setter(self) -> None:
+        for suffix in (
+            [0xE2800001, 0xE12FFF1E],  # No field store.
+            [0xE3A01001, 0x05801000, 0xE12FFF1E],  # Conditional store.
+            [0xE3A01001, 0xE5841000, 0xE12FFF1E],  # Non-argument base register.
+            [0xE3A01001, 0xE5801000, 0xE59DE000, 0xE12FFF1E],  # Stack dependency.
+            [0xE3A01001, 0xE5801000, *([0xE3A01001] * 10), 0xE12FFF1E],  # Beyond the probe bound.
+        ):
+            with self.subTest(suffix=suffix):
+                result = self.catalogue([0xE92D4010, 0xE8BD4010, 0xE1A00000, *suffix])
+                self.assertEqual(result["linker_tail_extent_splits"], [])
+                self.assertNotIn("restored_frame_leaf_setter", result["linker_tail_inventory"][0]["start_evidence"])
+
+    def test_restored_frame_setter_still_rejects_crossing_branches(self) -> None:
+        result = self.catalogue([0xE92D4010, branch(BASE + 4, BASE + 20, condition=0),
+                                 0xE8BD4010, 0xE1A00000, 0xE3A01001, 0xE5801000, 0xE12FFF1E])
+        self.assertEqual(result["linker_tail_extent_splits"], [])
+        row = result["linker_tail_inventory"][0]
+        self.assertIn("restored_frame_leaf_setter", row["start_evidence"])
+        self.assertEqual(row["decision"], "control_flow_crosses")
+
+    def test_new_tail_evidence_keeps_protected_owners_and_adopted_splits(self) -> None:
+        for words in (
+            [0xE3A00001, 0xE1A00000, 0xED800A00, 0xE12FFF1E],
+            [0xE92D4010, 0xE8BD4010, 0xE1A00000, 0xE3A01001, 0xE5801000, 0xE12FFF1E],
+        ):
+            with self.subTest(words=words):
+                image, layout = fixture(words)
+                split = analyze.build_catalogue(image, layout)
+                published = dict(split["functions"][0], size=4 * len(words), code_size=4 * len(words),
+                                 code_ranges=[[BASE, BASE + 4 * len(words)]])
+                protected = analyze.build_catalogue(image, layout, protected_functions={BASE: published})
+                self.assertEqual(protected["functions"], [published])
+                self.assertEqual(protected["linker_tail_extent_splits"], [])
+                self.assertEqual(protected["linker_tail_inventory"][0]["decision"], "protected_owner")
+                adopted = analyze.build_catalogue(
+                    image, layout, protected_functions={function["address"]: function for function in split["functions"]})
+                self.assertEqual(analyze.serialize_catalogue(adopted), analyze.serialize_catalogue(split))
+
     def test_tail_nop_without_successor_evidence_is_retained(self) -> None:
         result = self.catalogue([0xE3A00001, 0xE1A00000, 0xE2800002, 0xE12FFF1E])
         self.assertEqual([function["size"] for function in result["functions"]], [16])
@@ -929,6 +1079,38 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual((functions[0x112C80]["kind"], functions[0x112C80]["size"]), ("function", 24))
         self.assertEqual((functions[0x112C98]["kind"], functions[0x112C98]["size"]), ("function", 48))
         self.assertEqual(len(first["linker_tail_inventory"]), 270)
+        expected_splits = {
+            0x15274C: (12, 0x152758, 20),
+            0x15E474: (12, 0x15E480, 28),
+            0x15E49C: (12, 0x15E4A8, 96),
+            0x15E5C4: (16, 0x15E5D4, 28),
+            0x15E624: (16, 0x15E634, 80),
+            0x15E684: (20, 0x15E698, 28),
+            0x1D2C44: (52, 0x1D2C78, 12),
+            0x1D2CF0: (36, 0x1D2D14, 12),
+        }
+        for address, (head_size, target, tail_size) in expected_splits.items():
+            with self.subTest(address=address):
+                self.assertEqual((functions[address]["kind"], functions[address]["size"]), ("function", head_size))
+                self.assertEqual((functions[target]["kind"], functions[target]["size"]), ("function", tail_size))
+        self.assertEqual({address for address, function in adopted_functions.items() if functions[address] != function},
+                         {address for address, row in expected_splits.items()
+                          if adopted_functions[address]["size"] != row[0]})
+        self.assertEqual(set(functions) - set(adopted_functions),
+                         {row[1] for row in expected_splits.values()} - set(adopted_functions))
+        self.assertEqual(len(first["linker_tail_extent_splits"]), 137)
+        self.assertEqual(first["stats"]["linker_tail_census"], adopted["stats"]["linker_tail_census"])
+        self.assertEqual(first["stats"]["linker_nop_words"], 776)
+        nop_inventory = first["linker_nop_inventory"]
+        self.assertEqual([row["site"] for row in nop_inventory],
+                         [layout.text.address + offset for offset in range(0, layout.text.size - 3, 4)
+                          if struct.unpack_from("<I", image, offset)[0] == 0xE1A00000])
+        self.assertEqual(sum(row["decision"] == "in_frame_not_tail" for row in nop_inventory), 505)
+        self.assertEqual(sum(row["decision"] == "not_executed_arm_code" for row in nop_inventory), 1)
+        for field in ("code_bytes", "pool_bytes", "literal_bytes", "bytes_by_range_kind", "anomalies_by_issue"):
+            self.assertEqual(first["stats"][field], adopted["stats"][field])
+        self.assertEqual(sum(function["size"] for function in first["functions"]),
+                         sum(function["size"] for function in adopted["functions"]))
         for split in first["linker_tail_splits"]:
             self.assertEqual((functions[split["address"]]["kind"], functions[split["address"]]["size"]),
                              ("function", 4))
