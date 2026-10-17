@@ -1,6 +1,22 @@
-# Gate design — frozen v1.16 (2026-10-17)
+# Gate design — frozen v1.17 (2026-10-17)
 
 Revisions:
+- **v1.17** (2026-10-17): the new immutable model `armlink5-inline-branchnop-v4` may resolve
+  R1's fully bounded unsigned ARM compiler jump-table forms described in condition 4.
+  Frozen `armlink5-inline-branchnop-v3` retains its original CFG policy, caller decoding and
+  return classification; this revision never broadens or reinterprets that identifier.
+  V4 proves the same-index immediate bound, no guard bypass, complete owned table/default
+  successors, and little-endian data interpretation on every path to an address-table load.
+  Unknown, unbounded, escaping and other computed transfers remain refusals. The implementation
+  accepts only explicit class/encoding effect models, refusing unknown writes/state restoration.
+  Existing all-path incoming/outgoing ABI checks apply to the enumerated graph. Helper shape,
+  rewriting, retention, bound-callee equality, full source/object closure and QUALIFIED
+  provenance obligations are unchanged. V2 is unchanged. Both fresh receipts, prepare and
+  history bind v4 explicitly; transitions reopen affected R1 callers. Cause: compiler switches
+  in the 2,212-byte `func_001ab680` candidate, then independent F01/F02 and F03/F04 findings
+  on the rejected same-name/endian- and effect-unproved predecessors. Prior forced-context
+  and private MATCH evidence is not adoption or accepted credit. Adoption must follow c008-r3
+  finalization, passing independent implementation/exact-text review, and the recorded revision.
 - **v1.16** (2026-10-17): accepted credit follows stable function identities across
   explicitly recorded translation-unit moves. A candidate may declare
   `moves: [{function, from, to}]` and supplies each destination's complete credited
@@ -166,6 +182,13 @@ The revision entries and normative blocks below quote the final accepted text fr
   `scratch/review/ledger-rehome-r2/REVIEW.md`, “Exact acceptable GATES text”
   (PASS_WITH_QUALIFICATIONS, `806b8575149b54469711b122fd491f224429e7bb`). Only that
   review's explicitly permitted revision-number change, v1.14 to v1.16, is made.
+- v1.17 bounded-switch entry, R1 introduction and conditions 4 and 7:
+  `scratch/review/r1-jumptables-r3/REVIEW.md`, “Exact acceptable GATES text”
+  (PASS_WITH_QUALIFICATIONS, reviewed tip `5187259c427b8fc854642520ded03b7743320be6`);
+  `SEAL.json` binds approved normative text SHA-256
+  `7af3169709c57f170caf55c857d7eb9661bba67d5d87c7b7bf961d5faeb67066`.
+  The sole sequencing update, c008-r2 to c008-r3, is explicitly approved by
+  `scratch/review/models-v6/GATES-ACCEPTED.md`, Stage A.
 
 The selector re-review requires the following integration order verbatim:
 
@@ -284,12 +307,21 @@ Verbatim from `scratch/review/adopt-r1-l1-r2/REVIEW.md`, “Replace G4's table r
 
 ### R1 — candidate-only inlined and removed callee
 
-R1 is permitted only for a new checkpoint prepared after this revision and a
-passing independent implementation review, under the explicitly recorded model
-`armlink5-inline-branchnop-v3`. Both fresh G4 builds, prepare and finalized
-history must bind the same model. Existing prepared/finalized checkpoints do
-not change gates or model. Author-loop opt-in matches alone do not authorize
-acceptance; the acceptance build path must actually select and record v3.
+R1 is permitted only for a new checkpoint prepared after the applicable gate
+revision and a passing independent implementation review, under the explicitly
+recorded model `armlink5-inline-branchnop-v3` or, after adoption of the bounded-switch
+revision below, `armlink5-inline-branchnop-v4`. Both fresh G4 builds, prepare and
+finalized history must bind the same explicitly selected model. Existing
+prepared/finalized checkpoints do not change gates or model. Author-loop opt-in
+matches alone do not authorize acceptance; the acceptance build path must actually
+select and record the chosen model.
+
+The bounded-switch CFG proof policy is selected only by
+`armlink5-inline-branchnop-v4`. Frozen `armlink5-inline-branchnop-v3` records
+retain their original meaning; this revision does not broaden or reinterpret
+that identifier. Selection, both fresh receipts, prepare and finalized history
+bind the new identifier, and transition review reopens all affected R1 callers
+as required by the existing selector. Strict/v2/v3 behavior is not changed.
 
 A credited caller may use R1 only when all the following conditions hold:
 
@@ -324,11 +356,86 @@ A credited caller may use R1 only when all the following conditions hold:
    unmodified actual r0/r1 result of a preceding unconditional call on every
    path. Conditional definitions/calls alone do not establish input provenance.
    Entry forwarding does not waive the outgoing check. All decoded successors,
-   including both conditional arms and branch targets, are checked for reads of
-   r1–r3/r12/flags before unconditional definitions up to calls/returns or decoded
-   code-range ends. Unknown indirect control flow fails closed; r0 may be a result
-   and I1 requires no inputs. These checks do not prove the argument/result
-   types, interprocedural liveness, or that the original source contained a call.
+   including both conditional arms and every resolved branch/table target, are
+   checked for reads of r1–r3/r12/flags before unconditional definitions up to
+   calls/returns or decoded code-range ends. r0 may be a result and I1 requires
+   no inputs. These checks do not prove the argument/result types,
+   interprocedural liveness, or that the original source contained a call.
+
+   Only explicitly selected v4 may resolve the following bounded ARM switch
+   transfers as otherwise indirect table edges. Let A be the original instruction
+   address and rM a non-PC index register. An unconditional immediate CMP rM, #N must guard
+   ADDLS pc, pc, rM, LSL #2 (branch table) or
+   LDRLS pc, [pc, rM, LSL #2] (absolute-address table).
+   The unsigned LO forms are also allowed: LS enumerates exactly indices
+   0..N, LO exactly 0..N-1, with at least one entry. The immediate uses ARM's
+   decoded rotate encoding. Neither table contents nor apparent table length
+   supplies a missing bound. Other predicates, signed comparisons, register
+   bounds, scales/bases, writeback, subtractive indexing and unguarded or
+   otherwise computed PC writes are not resolved.
+
+   All words between compare and transfer must be contiguous modeled ordinary
+   instructions that cannot change the index or NZCV. Conditional writes are
+   possible writes. Only explicit instruction-class and validated A32-encoding
+   allowlists may establish these effects. Decode architectural core destinations,
+   paired/multiple-load destinations, base writeback and NZCV directly; missing
+   decoder writes, update_flags or control-flow groups are never safety evidence.
+   An unmodeled or invalid subencoding refuses the window. No call or other
+   control transfer intervenes. No catalogue entry, direct B/BL/BLX target or
+   otherwise-resolvable table target may enter after the compare through the
+   transfer. Re-entry at the compare repeats the bound and is allowed.
+
+   Every slot is at A + 8 + 4*i. A branch-table slot is an unconditional
+   direct ARM B whose destination is decoded caller code; the CFG visits
+   both the entry B and that destination. An address-table slot is a complete
+   aligned absolute-address word in this caller's catalogued pool/literal
+   data, and its destination is decoded caller code. Instructions and pool
+   words are limited to their declared ranges clipped to the owning
+   function's complete extent. Pool/data bytes cannot supply instructions,
+   and code bytes cannot supply address-table words. Image search, neighboring
+   owners, candidate relocations and arbitrary memory reads are not witnesses.
+   Thumb, misaligned, data, undecoded and out-of-extent table destinations fail.
+
+   For an LDR address table, little-endian data interpretation at the load must
+   be established on every incoming path. A reachable SETEND or other unresolved
+   change of data-endianness state is a refusal unless that state is independently
+   proved little-endian at the load. A change before the comparison is subject to
+   the same requirement; preserving the index and NZCV flags alone is insufficient.
+   The target uses the little-endian public ARM ABI at catalogue entries and
+   conforming call returns. Before either table form resolves, every decoded
+   owner instruction, even unreachable, must pass the explicit effect allowlist:
+   ordinary integer data-processing/immediate-shift, validated scalar/double/
+   register-list memory with every destination/writeback, ordinary multiply,
+   scalar VFP data/memory and explicit VMOV/FPSCR-VMRS/FMSTAT transfers, compiler NOP,
+   or recognized branch/call/ordinary-return encodings. Each admitted subencoding
+   must have modeled core/NZCV and processor-state effects; class membership
+   alone is insufficient. Unsupported or invalid subencodings fail closed.
+   Ordinary VFP writes to FP registers/FPSCR do not set core NZCV; FPSCR VMRS
+   to APSR (FMSTAT) does. Calls retain the manual LE ABI-return contract.
+
+   Generic coprocessor/exclusive instructions, including MRRC and LDREXD with
+   any predicate, are not admitted by an empty write list. All RFE variants and
+   other exception/status restores are unmodeled, unknown control flow and a
+   refusal of the owner-state proof, even when the decoder omits PC/CPSR writes
+   or branch groups. SETEND/MSR/MCR/CPS are likewise outside the allowlist.
+   This rule includes instructions before the compare, on one predecessor or
+   unreachable, and apparently LE-restoring instructions. Conservative false
+   negatives are intentional; no interprocedural processor-state recovery is claimed.
+
+   The not-taken successor at A + 4 is an unconditional direct branch to
+   decoded caller code or an ordinary recognized return; it cannot fall into
+   the table or leave the caller through an unexamined default branch. Ordinary
+   recognized returns are BX lr, plain MOV pc, lr, and
+   LDMIA sp!, {..., pc}/POP. Merely reading LR while writing PC, generic decoder
+   return groups, exception-return encodings and arbitrary PC loads do not
+   establish returns. Predicated recognized returns elsewhere retain their
+   conditional fall-through paths. The CFG includes the default and every
+   bounded slot; repeated address targets may share a successor but no
+   distinct path may be omitted. Every reachable unknown indirect transfer,
+   including any rejected table pattern, still fails closed. No function-name,
+   address-specific, forced-consistent or other input-specific exception is
+   permitted. This is bounded control-flow recovery, not evidence of a
+   historical helper identity or an execution of armlink.
 5. At least one call to each removed entity is inlined. No reference survives in
    any supplied allocated section, including otherwise unplaced sections. A
    pointer, tail B, dependency, interior/addended target, incompatible condition
@@ -351,7 +458,29 @@ A credited caller may use R1 only when all the following conditions hold:
    const contracts, memory effects, return/result semantics, and preserved
    original bugs. For preceding-call results, reviewers establish the actual
    return type and register width; BL alone does not prove r0/r1 are results.
-   Argcheck must not invent an original callee edge for `target: null`; missing
+   For every resolved switch, independently re-derive the same-index immediate
+   comparison, decoded unsigned bound and exact entry count, preservation of
+   index/flags, absence of alternate entries after the guard, every table slot
+   and destination, the default edge and every subsequent path using only the
+   original owner's catalogue code/pool ranges. Establish little-endian data
+   interpretation on every incoming path to each LDR table, including changes
+   before the guard or on only one predecessor, and the entry/call ABI state
+   contract; index/NZCV stability alone is insufficient. Check architectural
+   register-pair/list and base-writeback effects without trusting missing decoder
+   writes, and explicitly refuse exception-return PC/CPSR restoration. Inspect
+   incoming setup and outgoing liveness across all cases; no helper-free case,
+   repeated target, loop, predication or other table may hide a bypass or read.
+   Exercise public consumers for LDREXD/predicated LDREXD/MRRC, modeled pair/
+   multiple loads and writeback into the index/base, and every ARM RFE addressing
+   form with SP/r4 frames in the window, before the guard, on one predecessor
+   and unreachable. Exercise the decoder-ID meta-test: every emitted class is
+   explicitly allowlisted with validated effects or refused, including with absent
+   access metadata. Retain missing/changed guard, index/flag, entry-bypass,
+   endian/state, truncation, escaping-target/default and other computed-flow cases.
+   Require frozen v3 refusal and selected v4 positives, all five accepted-function
+   regressions under v2/v3/v4, the full suite, CLI/receipt/model-payload bindings
+   and unchanged-R1 transition review. No mechanical result waives typed review.
+   Argcheck must not invent an original callee edge for target: null; missing
    original-target evidence is a manual-review obligation, not an ABI-audit pass.
 8. Every affected caller has a precise `[INFERENCE]` note at the use/helper
    declaration and an explicit QUALIFIED identity-provenance review row. Exact
