@@ -187,6 +187,7 @@ class Analyzer:
         self.leading_instruction_repairs: list[dict] = []
         self.leading_instruction_inventory: dict[int, dict] = {}
         self.pointer_entry_inventory: dict[tuple[int, str], dict] = {}
+        self.formed_code_pointers: list[dict] = []
         self.pointer_prefix_wrappers: dict[int, int] = {}
         self.detailed_arm = capstone.Cs(capstone.CS_ARCH_ARM, capstone.CS_MODE_ARM)
         self.detailed_arm.detail = True
@@ -943,6 +944,23 @@ class Analyzer:
                 target, isa = pointer & ~1, "thumb" if pointer & 1 else "arm"
                 if self.inside(target, isa):
                     targets.add((target, isa))
+            # A PC-relative value with the architecture's Thumb tag is an
+            # address witness too. Admission below requires a complete CFG;
+            # an odd byte-string address is not sufficient.
+            targets.update((pointer & ~1, "thumb") for pointer in trace.address_refs.values()
+                           if pointer & 1 and self.inside(pointer & ~1, "thumb"))
+        if __package__:
+            from . import catalogue_closure
+        else:
+            import catalogue_closure
+        self.formed_code_pointers = []
+        catalogue_closure.read_footprints({"functions": [
+            {"address": trace.address, "isa": trace.isa, "kind": trace.kind,
+             "code_ranges": _merge([(site, site + size) for site, size in trace.code.items()]),
+             "entries": list(trace.entries.values())}
+            for trace in traces if trace.isa == "thumb"]}, self,
+            address_witnesses=self.formed_code_pointers, include_reads=False)
+        targets.update((row["target"], row["isa"]) for row in self.formed_code_pointers)
         return targets
 
     def detailed(self, address: int):
@@ -1149,14 +1167,23 @@ class Analyzer:
         """
         starts = [trace.address for trace in traces]
         changed = False
-        for target, isa in sorted(self._pointer_targets(traces)):
+        addressed = {(pointer & ~1, "thumb") for trace in traces for pointer in trace.address_refs.values()
+                     if pointer & 1 and self.inside(pointer & ~1, "thumb")}
+        targets = self._pointer_targets(traces)
+        addressed.update((row["target"], row["isa"]) for row in self.formed_code_pointers)
+        for target, isa in sorted(targets):
             if target in self.seeds:
                 continue
             index = bisect_right(starts, target) - 1
             if index >= 0 and target < traces[index].end:
                 continue
             limit = starts[index + 1] if index + 1 < len(starts) else self.end
-            accepted = self.pointer_plausible(target, isa, follow_tail_branches=True, fallthrough_limit=limit)
+            if (target, isa) in addressed:
+                accepted, proof = self._closed_pointer_body(target, isa, limit)
+                self.pointer_entry_inventory[(target, isa)] = {
+                    "address": target, "isa": isa, "pointer_source": "tagged_pc_relative_address", **proof}
+            else:
+                accepted = self.pointer_plausible(target, isa, follow_tail_branches=True, fallthrough_limit=limit)
             if not accepted and self._pointer_prefix_wrapper(target, isa, limit):
                 self.pointer_prefix_wrappers[target] = limit
                 self.pointer_entry_inventory[(target, isa)] = {
@@ -1378,6 +1405,12 @@ class Analyzer:
                 content_end = self._utf16_string_end(target) if encoding else self._string_end(target)
                 if encoding is not None and content_end is None:
                     raise ValueError(f"reviewed UTF-16 literal {target:#x} has no complete printable bound")
+                if encoding is not None and "end" in encoding:
+                    actual = self.text[target - self.base:content_end - self.base]
+                    if (content_end != encoding["end"]
+                            or hashlib.sha256(actual).hexdigest() != encoding.get("image_interval_sha256")
+                            or any(self.text[content_end - self.base:((content_end + 3) & ~3) - self.base])):
+                        raise ValueError(f"reviewed UTF-16 literal {target:#x} changed its exact bound, contents or zero alignment")
                 first = target if content_end is not None else target & ~3
                 end = (content_end + 3) & ~3 if content_end is not None else (target + 7) & ~3
                 candidates.append({
@@ -1408,22 +1441,26 @@ class Analyzer:
                 index += 1
             incoming.update(owner for _, _, owner, kind in overlaps(first, end) if kind == "pool")
             shared = len(owners) > 1 or bool(incoming - owners)
+            nonlocal_object = any(candidate["start"] < candidate["function"]
+                                  or candidate["end"] > candidate["limit"] for candidate in cluster)
             if shared:
                 blocked_words.update(range(first & ~3, (end + 3) & ~3, 4))
             padding_start = max((candidate["content_end"] or 0 for candidate in cluster), default=0)
-            shared_data = (shared and all(candidate["kind"] in ("string", "utf16_string") for candidate in cluster)
+            shared_data = ((shared or nonlocal_object)
+                           and all(candidate["kind"] in ("string", "utf16_string") for candidate in cluster)
                            and end <= self.end and padding_start > first
-                           and not overlaps(first, padding_start)
-                           and not any(first <= address < padding_start for address in branch_targets))
+                           and not overlaps(first, end)
+                           and not any(first <= address < end for address in branch_targets))
             # The exact terminated object is data. Claim alignment bytes only when they are zero.
             shared_end = end if shared_data and not any(
                 self.text[address - self.base] for address in range(padding_start, end)) else padding_start
             if shared_data:
+                blocked_words.update(range(first & ~3, (end + 3) & ~3, 4))
                 self.shared_literals.append({
                     "start": first, "end": shared_end, "kind": "rodata",
                     "owners": sorted(owners),
                     "references": sorted(site for candidate in cluster for site in candidate["references"]),
-                    "evidence": "shared_bounded_addressed_string",
+                    "evidence": "shared_bounded_addressed_string" if shared else "nonlocal_bounded_addressed_string",
                 })
             for candidate in cluster:
                 trace = by_start[candidate["function"]]
@@ -2127,9 +2164,15 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
                     classifications: list[dict] | None = None,
                     literal_encodings: list[dict] | None = None,
                     relative_pointer_tables: list[dict] | None = None,
-                    prior_functions: list[dict] | None = None) -> dict:
+                    prior_functions: list[dict] | None = None,
+                    closure: dict | None = None) -> dict:
     """Return deterministic schema-v1 metadata, preserving ambiguity as anomalies/unknown."""
     analyzer = Analyzer(image, layout)
+    for record in classifications or []:
+        if "original_extent_sha256" in record:
+            first = layout.file_offset(record["address"])
+            if hashlib.sha256(image[first:first + record["size"]]).hexdigest() != record["original_extent_sha256"]:
+                raise ValueError("classification whole-extent witness differs from the image")
     for row in literal_encodings or []:
         key = row["function"], row["target"]
         if key in analyzer.literal_encodings or row.get("encoding") != "utf-16le" or not row.get("references"):
@@ -2246,6 +2289,8 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "literal_conflicts": analyzer.literal_conflicts,
         "shared_literals": analyzer.shared_literals,
         "relative_pointer_tables": analyzer.relative_pointer_tables,
+        "pc_relative_pointer_witnesses": [row for row in analyzer.formed_code_pointers
+                                         if (row["target"], row["isa"]) in analyzer.pointer_target_repairs],
         "protected_entry_observations": [
             {"function": function, "site": site, "target": target, "reason": "protected_adopted_entry_metadata"}
             for function, site, target in sorted(analyzer.protected_entry_observations)],
@@ -2307,6 +2352,12 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         "repaired_pointer_targets": len(analyzer.pointer_target_repairs),
     }
     result = _split_linker_tail_extents(result, analyzer, protected_functions or {})
+    if closure is not None:
+        if __package__:
+            from . import catalogue_closure
+        else:
+            import catalogue_closure
+        catalogue_closure.close_catalogue(result, analyzer, closure, protected_functions or {})
     preserve_prior_entries(result, prior_functions or [])
     apply_classifications(result, classifications or [])
     check_protected_functions(result, protected_functions or {})
@@ -2504,6 +2555,18 @@ def main(argv: list[str] | None = None) -> int:
                    else evidence["classification_records"] if bundled else [])
         withheld = []
         if bundled:
+            if __package__:
+                from . import catalogue_closure
+            else:
+                import catalogue_closure
+            closure_evidence, prior_proposal, closure_inputs = catalogue_closure.load_inputs(ROOT, evidence_path)
+            if closure_evidence["image_sha256"] != evidence["image_sha256"]:
+                raise ValueError("closure evidence image differs from its parent")
+            inputs.update(closure_inputs)
+            records = records + closure_evidence.get("classification_records", [])
+            evidence = {**evidence, "revision": "catalogue-v10",
+                        "literal_encodings": evidence.get("literal_encodings", []) + closure_evidence["literal_encodings"],
+                        "provenance": {**evidence["provenance"], "catalogue_v10": closure_evidence["provenance"]}}
             # A reviewed reclassification cannot silently outrank an accepted or
             # in-flight complete record. Explicit classification inputs instead
             # reach build_catalogue's final invariant and fail on any conflict.
@@ -2515,7 +2578,7 @@ def main(argv: list[str] | None = None) -> int:
             image, layout, args.image.name, protected_functions=protected, classifications=records,
             literal_encodings=evidence.get("literal_encodings", []) if bundled else [],
             relative_pointer_tables=evidence.get("relative_pointer_tables", []) if bundled else [],
-            prior_functions=baseline["functions"] if bundled else [])
+            prior_functions=baseline["functions"] if bundled else [], closure=closure_evidence if bundled else None)
         inputs.update({
             "config/catalogue.json": catalogue_review.digest(baseline_path),
             "exheader": hashlib.sha256(exheader).hexdigest(),
@@ -2527,10 +2590,10 @@ def main(argv: list[str] | None = None) -> int:
         inputs[classification_label] = catalogue_review.digest(classification_input)
         source_root = Path(__file__).resolve().parent
         sources = {f"tools/{name}": catalogue_review.digest(source_root / name)
-                   for name in ("analyze.py", "catalogue_review.py")}
+                   for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v9-r2",
+            "revision": "catalogue-v10",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,
@@ -2541,6 +2604,7 @@ def main(argv: list[str] | None = None) -> int:
                 result, baseline, image, layout, protected=protected,
                 protected_summary=protected_summary, evidence=evidence,
                 input_sha256={**inputs, **sources}, withheld=withheld)
+            catalogue_closure.enrich_review(result, prior_proposal, image, layout, closure_evidence)
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_bytes(serialize_catalogue(result))
     except (OSError, ValueError, struct.error) as error:

@@ -478,15 +478,18 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
-## Catalogue recovery safeguards (candidate v9-r2)
+## Catalogue recovery safeguards (candidate v10)
 
 `tools/analyze.py catalogue --out X` is the single candidate generator. For the
 reviewed image it includes the immutable, image/extent/ISA-bound classification
 records, reviewed UTF-16 object references, the section-authenticated `.init_array`
 table and the immutable protected-checkpoint blob list in
-`research/catalogue_v9_r2_evidence.json`, and recomputes the revision's
-ownership, anomaly and pointer evidence. The output records the command, source
-hashes and input hashes; neither output path nor elapsed time changes its bytes.
+`research/catalogue_v9_r2_evidence.json`, together with the next proposal's
+`research/catalogue_v10_evidence.json`. V10 pins the adopted v9-r2 baseline by
+immutable Git blob and separately preserves the original v9 proposal's complete
+entry/identity metadata. It recomputes ownership, anomalies, per-old-range accounting
+and pointer evidence. The output records source/input hashes; neither output path
+nor elapsed time changes its bytes. It does not adopt a catalogue or award C credit.
 The former separate `research/catalogue_v8.py` generator has been replaced by
 `tools/catalogue_review.py`; no active author-result directory is scanned.
 
@@ -542,6 +545,43 @@ V9-R01 fixes three typed shared objects at `0x001b54e4`, `0x001b8234` and
 `0x001bc29c`: each complete UTF-16 record is four bytes, not one byte of an
 empty narrow string. The natural r4023 wide-literal EXTENT witness is 128/124 B,
 with no rewrites; its full object does not establish exclusive ownership.
+
+V10's bounded closure rules live in `tools/catalogue_closure.py`:
+
+- Complete straight-line scalar/multiple-register/caller-saved-VFP copy leaves
+  require enumerated fixed memory effects, balanced stack, preserved callee
+  registers and an ordinary LR return. Explicit fixed-record contracts also
+  permit bounded field permutations/subsets and immediate/r2/r3 fields, not
+  arithmetic computation, predicates, calls or unbounded accesses. These are
+  **ordinary uncredited denominator candidates**, not inferred library owners.
+- A dominated odd PC-relative Thumb value needs a complete closed callback CFG;
+  a plausible halfword or unreferenced return alone is insufficient. Exact
+  architectural reads may explain cross-owner references without enlarging the
+  loading owner or stealing a neighboring pool. A bounded addressed string outside
+  its sole owner's extent may likewise become unowned rodata only after full-span
+  code/pool/entry-overlap vetoes. ADR alone is not a memory-read footprint.
+- Explicit source/object-typed UTF-16 bounds additionally bind the complete original
+  terminated interval's digest and require zero alignment. This is separate from
+  exclusive ownership. An unreferenced zero halfword after a Thumb terminal can
+  align an evidenced word-aligned pool/literal/entry; nonzero fill is not guessed
+  to be padding.
+- A frozen original-entry/behavior witness can join only unprotected, single-entry,
+  prologue-only weak owners when one connected normal ARM CFG from the new entry
+  covers the entire bounded span without calls, pools, unknown exits or
+  unbound/noreturn tails. Every prior weak label remains a legacy secondary entry.
+  The recovered owner is conservatively **multi-entry/topology-excluded**; no
+  runtime/library identity or non-C ownership is claimed.
+
+The five additional kernel-wrapper assembly classifications are individually
+reviewable no-LR-frame proposals under the same compiler-limit standard as the
+three v9 witnesses. Their finite 90-cell mismatch grid is **not** universal
+impossibility of C, nor proof that raw r0-r3 syscall interfaces are unrepresentable.
+They remain separate from topology exclusions and ordinary recovered leaves.
+
+V10 remains partial: 342 unknown bytes in 27 intervals and two unresolved anomalies.
+`docs/catalogue/REPORT-v10.md` records every adopted-v9-r2/original-v9 interval and
+anomaly, exact generation commands, retained negative investigations and missing
+prerequisites. Neither unresolved data nor exceptional dispatch is hidden as padding.
 
 
 A reviewed `.init_array` table is accepted only as a bounded, aligned, self-relative
