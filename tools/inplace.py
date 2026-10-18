@@ -646,6 +646,9 @@ class Section:
     merge_strings: bool = False  # both SHF_MERGE and SHF_STRINGS, not merely a familiar section name
     entsize: int = 0
     retention: tuple[str, ...] = ()  # explicit roots and uninterpreted retention metadata: never R1
+    elf_type: str = "SHT_PROGBITS"
+    link_order: bool = False
+    linked_section: int | str = 0  # sh_link for SHF_LINK_ORDER; remapped with candidate ownership
 
 
 class ObjectFile:
@@ -658,7 +661,13 @@ class ObjectFile:
             if elf["e_machine"] != "EM_ARM" or elf["e_type"] != "ET_REL":
                 raise LinkError(f"{path}: not an ARM relocatable object")
             self.sections: dict[int, Section] = {}
+            # Keep even zero-sized allocated group members as closure witnesses. They do not
+            # enter the frozen placement model, but v8 must not silently discard their group.
+            allocated_indices: set[int] = set()
+            self.section_groups: list[tuple[int, str, set[int | str]]] = []
             for i, s in enumerate(elf.iter_sections()):
+                if s["sh_flags"] & SH_FLAGS.SHF_ALLOC:
+                    allocated_indices.add(i)
                 if s["sh_flags"] & SH_FLAGS.SHF_ALLOC and s["sh_size"]:
                     nobits = s["sh_type"] == "SHT_NOBITS"
                     self.sections[i] = Section(
@@ -668,6 +677,8 @@ class ObjectFile:
                         merge_strings=(s["sh_flags"] & (SH_FLAGS.SHF_MERGE | SH_FLAGS.SHF_STRINGS)
                                        == SH_FLAGS.SHF_MERGE | SH_FLAGS.SHF_STRINGS),
                         entsize=s["sh_entsize"],
+                        elf_type=s["sh_type"], link_order=bool(s["sh_flags"] & SH_FLAGS.SHF_LINK_ORDER),
+                        linked_section=s["sh_link"] if s["sh_flags"] & SH_FLAGS.SHF_LINK_ORDER else 0,
                         retention=tuple(reason for flag, reason in (
                             (0x10000000, "ARM entry section"), (0x200000, "GNU retain"),
                             (SH_FLAGS.SHF_MASKOS | SH_FLAGS.SHF_MASKPROC, "OS/processor section flags"),
@@ -698,11 +709,15 @@ class ObjectFile:
             for s in elf.iter_sections():
                 if s["sh_type"] == "SHT_GROUP":
                     words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
-                    if words and words[0] & 1:  # GRP_COMDAT: one entity, deduplicated by the linker
-                        signature = self.symbols[s["sh_info"]].name
-                        for member in words[1:]:
-                            if member in self.sections:
-                                self.sections[member].comdat = signature
+                    if words:
+                        flags = words[0]
+                        signature = self.symbols[s["sh_info"]].name if flags & 1 else ""
+                        self.section_groups.append((
+                            flags, signature, {member for member in words[1:] if member in allocated_indices}))
+                        if flags & 1:  # Frozen COMDAT identity; other group semantics are not modeled.
+                            for member in words[1:]:
+                                if member in self.sections:
+                                    self.sections[member].comdat = signature
             for s in elf.iter_sections():
                 if not isinstance(s, RelocationSection):
                     continue
@@ -731,6 +746,7 @@ class ObjectFile:
         merged = cls.__new__(cls)
         merged.sections, merged.symbols = {}, []
         merged.section_owners, merged.section_objects = {}, {}
+        merged.section_groups = []
         symbols_by_object, indices_by_object = [], []
         definitions = {}
         for owner, obj in enumerate(objects):
@@ -744,9 +760,14 @@ class ObjectFile:
                 symbols[id(sym)] = replace(sym, shndx=shndx)
             symbols_by_object.append(symbols)
             merged.symbols.extend(symbols.values())
+            for flags, signature, members in getattr(obj, "section_groups", ()):
+                merged.section_groups.append((
+                    flags, signature, {indices.get(index, f"UNALLOCATED_{owner}_{index}") for index in members}))
             for index, section in obj.sections.items():
                 new_index = indices[index]
-                merged.sections[new_index] = replace(section, index=new_index, relocs=[])
+                linked = (indices.get(section.linked_section, f"UNALLOCATED_{owner}_{section.linked_section}")
+                          if section.link_order else 0)
+                merged.sections[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked)
                 merged.section_owners[new_index] = owner
                 merged.section_objects[new_index] = labels[owner] if labels is not None else str(getattr(obj, "path", f"object[{owner}]"))
             for sym in obj.defined_globals():
@@ -970,6 +991,7 @@ class InPlaceLinker:
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
         self._removed_sections: dict[int, dict] = {}
+        self._removed_unwind: dict[int, int] = {}  # companion section -> its removed code section
 
     def __repr__(self) -> str:
         return f"InPlaceLinker(functions={len(self.functions)}, bss=({self.bss[0]:#x}, {self.bss[1]:#x}))"
@@ -1543,6 +1565,150 @@ class InPlaceLinker:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory removed-callee copies")
         return removed
 
+    @staticmethod
+    def _compact_unwind_prefix_size(word: int) -> int | None:
+        """Header plus compact unwind words only; an out-of-line descriptor terminator follows."""
+        personality = word >> 24
+        if personality == 0x80:
+            return 4
+        if personality in (0x81, 0x82):
+            return 4 * (1 + ((word >> 16) & 0xFF))
+        return None
+
+    def _removed_unwind_sections(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, int]:
+        """V8: an exclusive SHF_LINK_ORDER companion dies only with its complete R1/group closure.
+
+        This is not general unwind-table placement or exception-table stripping. In particular,
+        kept code's entries, shared extab data, roots and original-bound metadata never disappear.
+        """
+        if not self.model.removed_unwind or not self._removed_sections:
+            return {}
+        companions: dict[int, int] = {}
+        exidx_by_owner: dict[int, int] = {}
+        incoming: dict[int, list[tuple[Section, Reloc]]] = {}
+        for section in obj.sections.values():
+            for rel in section.relocs:
+                if rel.type != R_ARM_V4BX:
+                    incoming.setdefault(rel.symbol.shndx, []).append((section, rel))
+
+        def private_data(section: Section, owner: int, kind: str) -> None:
+            if (not section.name.startswith(f".ARM.{kind}") or section.nobits or section.executable
+                    or section.writable or section.size != len(section.data) or section.align < 4
+                    or section.size % 4 or section.merge_strings
+                    or section.comdat != obj.sections[owner].comdat
+                    or section.index in self._retained_sections):
+                raise LinkError(f"{section.name}: not an exclusive unrooted {kind} companion")
+            for sym in obj.symbols:
+                if sym.shndx != section.index:
+                    continue
+                if sym.name and (sym.name in names or self.resolver.lookup(sym.name) is not None):
+                    raise LinkError(f"{section.name}: unwind companion has an original address binding")
+                if not (sym.bind == "STB_LOCAL" and sym.value == 0 and sym.size == 0
+                        and (sym.kind == "STT_SECTION" or sym.kind == "STT_NOTYPE" and sym.name == "$d")):
+                    raise LinkError(f"{section.name}: unwind companion has an independently named entity")
+
+        def dependencies(section: Section, personality: int, structural: list[Reloc]) -> None:
+            for rel in section.relocs:
+                if any(rel is known for known in structural):
+                    continue
+                if (rel.type != R_ARM_NONE or rel.offset != 0
+                        or rel.symbol.shndx != "SHN_UNDEF"
+                        or rel.symbol.name != f"__aeabi_unwind_cpp_pr{personality}"):
+                    raise LinkError(f"{section.name}: unsupported unwind relocation or dependency")
+
+        for section in obj.sections.values():
+            references = [rel for rel in section.relocs
+                          if rel.type != R_ARM_V4BX and rel.symbol.shndx in self._removed_sections]
+            linked_owner = section.linked_section if section.link_order else None
+            if not references and linked_owner not in self._removed_sections:
+                continue
+            # Ordinary call/data references still go through the unchanged R1 all-reference test.
+            if not (section.name.startswith(".ARM.exidx") or section.elf_type == "SHT_ARM_EXIDX"
+                    or linked_owner in self._removed_sections):
+                continue
+            owner = linked_owner
+            if (owner not in self._removed_sections or section.elf_type != "SHT_ARM_EXIDX"
+                    or section.size != 8 or section.entsize not in (0, 8)
+                    or owner in exidx_by_owner):
+                raise LinkError(f"{section.name}: shared, combined or unassociated unwind index")
+            private_data(section, owner, "exidx")
+            first, second = struct.unpack("<2I", section.data)
+            keys = [rel for rel in section.relocs if rel.offset == 0 and rel.type == R_ARM_PREL31]
+            if (len(keys) != 1 or keys[0].symbol.shndx != owner or first & 0x80000000
+                    or keys[0].symbol.kind not in ("STT_SECTION", "STT_FUNC")
+                    or _symbol_offset(keys[0].symbol) + self._addend(keys[0], section) != 0):
+                raise LinkError(f"{section.name}: unwind key is not the removed helper's exact entry")
+            if incoming.get(section.index):
+                raise LinkError(f"{section.name}: unwind index has another incoming reference")
+            structural = [keys[0]]
+            tails = [rel for rel in section.relocs if rel.offset == 4 and rel.type == R_ARM_PREL31]
+            if tails:
+                tail = tails[0]
+                extab = obj.sections.get(tail.symbol.shndx)
+                if (len(tails) != 1 or second & 0x80000000 or extab is None
+                        or _symbol_offset(tail.symbol) + self._addend(tail, section) != 0
+                        or extab.index in companions):
+                    raise LinkError(f"{section.name}: shared or interior exception table")
+                private_data(extab, owner, "extab")
+                if extab.elf_type != "SHT_PROGBITS" or extab.link_order or extab.size < 8 or extab.entsize:
+                    raise LinkError(f"{extab.name}: unsupported exception-table section metadata")
+                header = struct.unpack_from("<I", extab.data)[0]
+                prefix_size = self._compact_unwind_prefix_size(header)
+                if (prefix_size is None or extab.size != prefix_size + 4
+                        or struct.unpack_from("<I", extab.data, prefix_size)[0] != 0):
+                    raise LinkError(f"{extab.name}: truncated, combined or nonempty-descriptor exception-table entry")
+                if incoming.get(extab.index) != [(section, tail)]:
+                    raise LinkError(f"{extab.name}: exception table has another incoming reference")
+                dependencies(extab, (header >> 24) & 0xF, [])
+                companions[extab.index] = owner
+                structural.append(tail)
+                # Personality dependence lives in extab, never an unrelated exidx dependency.
+                if len(section.relocs) != 2:
+                    raise LinkError(f"{section.name}: unsupported unwind relocation or dependency")
+            else:
+                if second != 1 and second >> 24 != 0x80:
+                    raise LinkError(f"{section.name}: unsupported inline unwind entry")
+                dependencies(section, 0, structural)
+                if second == 1 and len(section.relocs) != 1:
+                    raise LinkError(f"{section.name}: CANTUNWIND entry has an unexpected dependency")
+            companions[section.index] = owner
+            exidx_by_owner[owner] = section.index
+
+        # Section links are dependencies too, even without an allocated relocation.
+        for section in obj.sections.values():
+            if (section.link_order and section.linked_section in (self._removed_sections | companions)
+                    and section.index not in companions):
+                raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")
+        # A group is indivisible, including all supplied copies and allocated members that
+        # placement would otherwise ignore. Only already-selected R1 code and validated own
+        # unwind sections have a removal proof; do not infer general unused-data elimination.
+        groups = {obj.sections[owner].comdat for owner in exidx_by_owner} - {None}
+        group_members = {
+            signature: {index for index, section in obj.sections.items() if section.comdat == signature}
+            for signature in groups
+        }
+        exempt = companions.keys() | exidx_by_owner.keys()
+        for flags, signature, members in getattr(obj, "section_groups", ()):
+            if (flags & 1 and signature in groups) or members & exempt:
+                if flags != 1:
+                    raise LinkError("unwind companion belongs to an unsupported section group")
+                group_members.setdefault(signature, set()).update(members)
+        for signature, members in sorted(group_members.items()):
+            for index in sorted(members, key=str):
+                member = obj.sections.get(index)
+                if (member is None or member.comdat != signature
+                        or index not in self._removed_sections and index not in companions):
+                    name = member.name if member is not None else "unrepresented allocated member"
+                    raise LinkError(f"COMDAT {signature}: {name} has no complete group-removal proof")
+        for owner in exidx_by_owner:
+            self._removed_sections[owner]["unwind_sections"] = [
+                {"section": obj.sections[index].name, "section_index": index,
+                 "size": obj.sections[index].size, "kind": "exidx" if index == exidx_by_owner[owner] else "extab",
+                 "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate")))}
+                for index in sorted(companions) if companions[index] == owner
+            ]
+        return companions
+
     def _removed_call_rewrites(self, obj: ObjectFile, placements: dict[int, Placement]) -> dict[tuple[int, int], Rewrite]:
         """Inline every reference to candidate-only callees, or refuse the entire link.
 
@@ -1556,6 +1722,8 @@ class InPlaceLinker:
         used = set()
         contexts = {}
         for section in obj.sections.values():
+            if section.index in self._removed_unwind:
+                continue
             for rel in section.relocs:
                 index = rel.symbol.shndx
                 if index not in self._removed_sections or rel.type == R_ARM_V4BX:
@@ -1635,8 +1803,10 @@ class InPlaceLinker:
         """
         self.literal_rebindings = []
         self.rewrites, self.removed_callees = [], []
+        self._removed_unwind = {}
         self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
+        self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {})
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
         linked: dict[int, LinkedSection] = {}

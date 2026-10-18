@@ -11,6 +11,9 @@ gates v1.18; v5 is retired, never adopted. The exact accepted gate text and seal
 reviews are `scratch/review/r1-jumptables-r3/REVIEW.md` and
 `scratch/review/models-v6/GATES-ACCEPTED.md` / `SEAL.json` (PASS_WITH_QUALIFICATIONS).
 Both gate revisions follow finalized `c008-r3` (sequence 8) and precede the code merge.
+The new **`armlink5-inline-branchnop-v8`** is explicit and unadopted. V7 is retired after
+independent review found incomplete group-retention and compact-extab extent proofs.
+V8's exact gate proposal is `scratch/exidx/v8/GATES-DRAFT.md`; no gate/default changes here.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -57,6 +60,8 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v4` | frozen opt-in, adopted gates v1.17; PASS_WITH_QUALIFICATIONS | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
 | `armlink5-inline-branchnop-v5` (reviewed 22cb05b) | **retired**, never adopted | reviewed v4/alias composite incorrectly refuses independently bound D1/D2 sections when the nonzero symbol excludes a trailing pool; historical receipts retain that identity, superseded by v6 |
 | `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
+| `armlink5-inline-branchnop-v7` (88f5c38) | **retired**, never adopted | its own-exidx exception could partially remove a live COMDAT group and accepted truncated compact extab while rejecting complete zero-terminated entries; sealed review `scratch/review/exidx-v7/REVIEW.md`, FAIL |
+| `armlink5-inline-branchnop-v8` | unadopted, separate independent review required | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
 
 ## Function-entry alias identity (v6 only)
 
@@ -139,6 +144,119 @@ Existing v5 author scratch receipts and the original sweep remain immutable and 
 Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
 `RemovedCalleeModelTest`, `CppAliasCompareTest`, `AliasCompareSafetyTest`, and
 `BuildRemovedCalleeModelTest` in `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
+
+## Removed-helper unwind companions (v8 only, unadopted)
+
+`armlink5-inline-branchnop-v8` is corrected v6 plus the following single R1 extension.
+The default, `strict-v1`, and v2/v3/v4/v6 policies remain unchanged; v5 and v7 remain retired.
+V6 still refuses the allocated `.ARM.exidx` reference. Neither alias identity nor unwind
+ownership relaxes any helper, original-binding, retention, I1–I3, CFG or typed-contract rule.
+
+1. Only a helper already independently eligible for R1 removal can own eliminated unwind data.
+   Its own readonly, allocated, non-executable `.ARM.exidx*` must be `SHT_ARM_EXIDX`, have
+   `SHF_LINK_ORDER`, and `sh_link` must name that exact candidate text section. ELF reading
+   preserves these fields and combining objects remaps the linked section within its owning
+   object; equal section numbers in different objects never establish ownership.
+2. The complete index section is exactly one eight-byte entry, aligned at least four, with
+   entry size zero or eight. Exactly one `R_ARM_PREL31` at offset zero targets the removed
+   helper's section/function entry with zero effective addend and bit 31 clear. A second
+   index section for the same text section, a combined index, a kept-function key, an interior
+   key or missing/wrong section metadata is refused, not partially discarded.
+3. The second word is either `EXIDX_CANTUNWIND` (1), a single-word compact personality-0
+   entry, or an offset-four `R_ARM_PREL31` to the beginning of one exclusive `.ARM.extab*`.
+   Extab must be complete readonly, non-executable `SHT_PROGBITS` without link-order or
+   fixed-entry metadata. Only frame-only compact personalities 0/1/2 with an empty descriptor
+   list are modeled. The unwind prefix is four bytes for personality 0 and
+   `4 * (1 + extra_word_count)` for personalities 1/2; **one further zero word is mandatory**.
+   Thus a complete personality-0 extab is eight bytes and a personality-1/2 extab is
+   `4 * (2 + extra_word_count)` bytes. The final zero is validated separately, outside the
+   unwind-word count. Missing/partial terminators, nonempty scope descriptors, generic
+   personalities, combined/trailing data and interior extab references are refused.
+   The one-word personality-0 encoding directly in exidx is unchanged and needs no extab.
+4. Beyond those structural PREL31 relocations, only offset-zero `R_ARM_NONE` dependency
+   markers to the matching undefined `__aeabi_unwind_cpp_pr0/1/2` are understood. A
+   CANTUNWIND entry has no extra dependency. An extab-pointing exidx has exactly its two
+   structural relocations; its personality dependence belongs in extab. Every other
+   relocation/dependency, including arbitrary NONE markers and V4BX in unwind data, refuses
+   removal. V4BX retains its existing nonreferencing meaning in ordinary code.
+5. Neither companion may be rooted, independently named/exported, original-address-bound,
+   or in a different COMDAT group from its text. Only local offset-zero, zero-size section
+   symbols/data mapping markers are permitted. Exidx has no incoming allocated reference;
+   extab's only incoming reference is its own exidx's offset-four PREL31. All supplied allocated
+   sections, even unplaced sections, are checked. Other link-order dependencies on removed
+   code or companions also refuse removal. Shared extab and references from kept entries
+   cannot disappear. Every other reference to the helper still passes the unchanged R1
+   all-reference check; a pointer, tail call, NONE dependency or inadmissible BL refuses.
+   Before any companion-reference exemption, every allocated member of each affected COMDAT
+   group and every supplied copy must already be selected v6-eligible R1 code or a validated
+   own-exidx/extab companion. A surviving caller/function, bound or unplaced data/BSS,
+   unsupported code or unrepresented allocated member prevents whole-group elimination.
+   ELF reading retains zero-size allocated group witnesses even though frozen placement does
+   not represent their sections; object combination preserves/remaps every witness.
+   Non-COMDAT and unknown group semantics are not modeled by this exemption and fail closed.
+   No arbitrary unused group member is swept in, and every selected code entity still needs
+   its actual eligible inlined call (or an identical used COMDAT copy).
+6. A surviving function's own unwind entry is never selected by this rule. Any binding or
+   incoming reference that would require a companion in the original output is refused.
+   Candidate-only helpers have no original address, so their keys cannot be inserted into
+   an original table without inventing an address. Existing original unwind bytes, if any,
+   remain untouched by this hybrid linker. V8 is not general exception-table stripping,
+   placement, merging, rewriting or proof of a complete standalone armlink image.
+
+Each removed helper and its per-call `target: null` rewrite records `unwind_sections`,
+including section name/index, kind, size and defining-object ownership. Whole input-object
+hashes already bind the eliminated contents; no private table payload is emitted. The helper
+still needs at least one successfully inlined call (or an identical used COMDAT copy), earns
+no catalogue credit and retains every R1 identity/provenance qualification.
+
+The sealed v7 review (`scratch/review/exidx-v7/REVIEW.md`, FAIL) found that matching group
+signatures alone did not establish group-unit removability (F01), and that its compact-extab
+size omitted the empty descriptor-list terminator (F02). V7 and its rejected exact-text
+proposal/receipts retain their historical identity; v8 corrects both classes under a new name.
+That review approves neither v8 nor any gate text.
+
+### ARM specification and image evidence
+
+- [ARM DUI0474K §4.12](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2)
+  runs inlining before unused-section elimination; §4.3 removes whole unreachable sections
+  and preserves roots/used sections. §3.7 separately says exception tables are silently
+  discarded if no code throws. That last rule is **not** implemented by v8.
+- [EHABI32, “The object producer interface — Sections” and “Index table entries”](https://github.com/ARM-software/abi-aa/blob/main/ehabi32/ehabi32.rst)
+  specifies one index fragment per code section, `SHT_ARM_EXIDX`, `SHF_LINK_ORDER`,
+  `sh_link` to that code, and the two-word PREL31/function plus compact/extab/CANTUNWIND
+  format. The cited 2025Q4 text retains the relevant pre-2017 section/table format.
+- [EHABI32, “Personality routine exception-handling table entries”](https://github.com/ARM-software/abi-aa/blob/main/ehabi32/ehabi32.rst#personality-routine-exception-handling-table-entries)
+  counts only the additional unwind words in personalities 1/2, then separately requires the
+  descriptor list's terminating zero word. [LLVM's ARM ELF producer](https://github.com/llvm/llvm-project/blob/main/llvm/lib/Target/ARM/MCTargetDesc/ARMELFStreamer.cpp)
+  also emits the zero when no handler data is supplied.
+- [ELF gABI, section groups](https://gabi.xinuos.com/elf/03-sheader.html#section-groups)
+  requires group sections to be included or omitted as a unit. A kept member of an affected
+  COMDAT group/copy therefore prevents the new unwind-elimination exception.
+- [ELF gABI, SHF_LINK_ORDER](https://gabi.xinuos.com/elf/03-sheader.html#section-flags)
+  explicitly says linked metadata and its referenced section are retained/discarded together,
+  and metadata relocations back to that section are not evidence of liveness.
+  [INFERENCE] Applying these documented semantics to armlink means an eliminated function's
+  exclusive exidx fragment, then exclusively reached extab, dies with it. The supplied public
+  toolchain has no armlink; no fresh native-armlink execution is claimed.
+- `research/linker/exidx_census.py` reports addresses/counts only, plus optional candidate ELF
+  metadata (`--object FILE`). The original is a flat `code.bin`, not an ELF: it has no section
+  headers or original exidx bounds. Under this branch's pinned image and catalogue, the RO-data
+  segment has one word that could be a PREL31 text key, but its following word is not an EHABI
+  second word; no plausible non-code index entry targets a catalogued function/entry start.
+  Loose text/data pointer coincidences are reported, not mislabeled as an authenticated table.
+  [INFERENCE] No original EHABI unwind-index table is identified; its absence and the original
+  exception-link flags cannot be proved solely from this sectionless image. In particular,
+  candidate C++ exidx emission is not evidence that the final image contains those entries.
+  V8 relies on complete candidate/group ownership and absence of required original placement, not
+  on treating this inference as a blanket permission to erase original/kept-function tables.
+
+Synthetic and real-compiler coverage is `RemovedUnwindModelTest` in `tests/test_inplace.py`,
+including the sealed counterexamples, all group copies/orderings, unrepresented allocated
+members and complete/truncated compact entries. New evidence, copied-source smoke receipts,
+frozen-model comparisons and exact exits are under `scratch/exidx/v8/`; v7 evidence is
+unchanged. No author source/receipt or `docs/GATES.md` is modified. Independent composite
+review and an explicit gate revision after the active frozen checkpoint closes are required
+before adoption; a private MATCH does not grant credit.
 
 ## Sources
 
