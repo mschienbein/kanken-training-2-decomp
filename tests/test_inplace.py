@@ -2090,7 +2090,7 @@ class RemovedUnwindModelTest(unittest.TestCase):
             obj.sections[3].data = bytes(8)
             relocs.append(inplace.Reloc(4, inplace.R_ARM_PREL31, extab))
             obj.sections[4] = inplace.Section(
-                4, ".ARM.extab.helper", struct.pack("<I", 0x80B0B0B0), 4, False, False, False, align=4)
+                4, ".ARM.extab.helper", struct.pack("<2I", 0x80B0B0B0, 0), 8, False, False, False, align=4)
         return obj, mem, catalogue
 
     def linker(self, mem, catalogue, **kwargs):
@@ -2125,7 +2125,7 @@ class RemovedUnwindModelTest(unittest.TestCase):
         for personality in (0, 1, 2):
             obj, mem, catalogue = self.fixture("extab")
             header = 0x80B0B0B0 if personality == 0 else ((0x80 + personality) << 24) | 0x0001B0B0
-            obj.sections[4].data = struct.pack("<I", header) + (bytes(4) if personality else b"")
+            obj.sections[4].data = struct.pack("<I", header) + (struct.pack("<I", 0xB0B0B0B0) if personality else b"") + bytes(4)
             obj.sections[4].size = len(obj.sections[4].data)
             routine = inplace.Symbol(f"__aeabi_unwind_cpp_pr{personality}", 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
             obj.symbols.append(routine)
@@ -2133,6 +2133,53 @@ class RemovedUnwindModelTest(unittest.TestCase):
             linker = self.linker(mem, catalogue)
             self.assertEqual(set(linker.link(obj)), {1})
             self.assertEqual(len(linker.removed_callees[0]["unwind_sections"]), 2)
+
+    def test_complete_compact_extab_counts_terminator_separately_from_unwind_words(self):
+        # Sealed F02 refused complete 8/12/12-byte entries under v7. The terminator is
+        # required out of line, not part of the encoded unwind-word count.
+        for personality in (0, 1, 2):
+            for count in ((0,) if personality == 0 else (0, 1, 3, 255)):
+                with self.subTest(personality=personality, extra_unwind_words=count):
+                    obj, mem, catalogue = self.fixture("extab")
+                    header = 0x80B0B0B0 if personality == 0 else ((0x80 + personality) << 24) | (count << 16) | 0xB0B0
+                    prefix = struct.pack("<I", header) + struct.pack("<I", 0xB0B0B0B0) * count
+                    obj.sections[4].data = prefix + bytes(4)
+                    obj.sections[4].size = len(prefix) + 4
+                    linker = self.linker(mem, catalogue)
+                    self.assertEqual(linker.link(obj)[1][1], mem.read(BASE, 40))
+                    self.assertEqual(linker.removed_callees[0]["unwind_sections"][-1]["size"], 4 * (2 + count))
+
+    def test_truncated_descriptor_lists_and_trailing_extab_data_are_refused(self):
+        for personality in (0, 1, 2):
+            for case in ("missing_terminator", "partial_terminator", "nonempty_descriptor",
+                         "extra_zero_word", "second_entry", "too_few_unwind_words", "too_many_unwind_words",
+                         "descriptor_relocation"):
+                with self.subTest(personality=personality, case=case):
+                    obj, mem, catalogue = self.fixture("extab")
+                    count = 0 if personality == 0 else 1
+                    header = 0x80B0B0B0 if personality == 0 else ((0x80 + personality) << 24) | (count << 16) | 0xB0B0
+                    prefix = struct.pack("<I", header) + struct.pack("<I", 0xB0B0B0B0) * count
+                    data = prefix + bytes(4)
+                    if case == "missing_terminator":
+                        data = prefix
+                    elif case == "partial_terminator":
+                        data = data[:-2]
+                    elif case == "nonempty_descriptor":
+                        data = prefix + struct.pack("<I", 0x00010001)
+                    elif case == "extra_zero_word":
+                        data += bytes(4)
+                    elif case == "second_entry":
+                        data += struct.pack("<2I", 0x80B0B0B0, 0)
+                    elif case == "too_few_unwind_words":
+                        data = data[:4] + data[8:] if count else bytes(4)
+                    elif case == "too_many_unwind_words":
+                        data = prefix + struct.pack("<I", 0xB0B0B0B0) + bytes(4)
+                    else:
+                        target = inplace.Symbol("landing_pad", 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+                        obj.symbols.append(target)
+                        obj.sections[4].relocs.append(inplace.Reloc(len(prefix), inplace.R_ARM_PREL31, target))
+                    obj.sections[4].data, obj.sections[4].size = data, len(data)
+                    self.refuse(obj, mem, catalogue)
 
     def group_fixture(self, form="cant", alias=False):
         obj, mem, catalogue = self.fixture(form, alias)
@@ -2259,6 +2306,61 @@ class RemovedUnwindModelTest(unittest.TestCase):
                 self.assertTrue(any(isinstance(index, str) for _, _, members in obj.section_groups for index in members))
                 self.refuse(obj, mem, catalogue, "unrepresented allocated member.*group-removal proof")
 
+    @unittest.skipUnless(HAVE_COMPILER, "pinned compiler not installed (tools/setup.py)")
+    def test_real_elf_groups_preserve_zero_size_allocated_members(self):
+        from io import BytesIO
+
+        with tempfile.TemporaryDirectory() as tmp:
+            source = Path(tmp) / "group.cpp"
+            source.write_text("template<class T> void group_release(T *) {}\n"
+                              "template void group_release<int>(int *);\n", encoding="utf-8")
+            path = source.with_suffix(".o")
+            toolchain.compile_source(GAME_PROFILE, source, path)
+            original = path.read_bytes()
+            helper = inplace.ObjectFile(path)
+            full = next(sym for sym in helper.defined_functions() if sym.size)
+            self.assertTrue(helper.sections[full.shndx].comdat)
+            self.assertTrue(any(full.shndx in members for _, _, members in helper.section_groups))
+
+            # Append a zero-sized allocated member to the actual compiler group. Only ELF
+            # metadata changes; no code, unwind data or relocation is invented or patched.
+            elf = inplace.ELFFile(BytesIO(original))
+            group_index, group = next(
+                (index, section) for index, section in enumerate(elf.iter_sections())
+                if section["sh_type"] == "SHT_GROUP"
+                and full.shndx in struct.unpack(f"<{section['sh_size'] // 4}I", section.data())[1:])
+            count, stride, old_headers = elf.num_sections(), elf["e_shentsize"], elf["e_shoff"]
+            self.assertEqual(stride, 40)  # pinned compiler emits ELF32 section headers
+            headers = bytearray(original[old_headers:old_headers + count * stride])
+            modified = bytearray(original)
+            modified.extend(bytes(-len(modified) % 4))
+            group_offset = len(modified)
+            group_data = group.data() + struct.pack("<I", count)
+            modified.extend(group_data)
+            modified.extend(bytes(-len(modified) % 4))
+            header_offset = len(modified)
+            struct.pack_into("<I", headers, group_index * stride + 16, group_offset)
+            struct.pack_into("<I", headers, group_index * stride + 20, len(group_data))
+            modified.extend(headers)
+            modified.extend(struct.pack("<10I", 0, 1, 0x202, 0, 0, 0, 0, 0, 4, 0))
+            struct.pack_into("<I", modified, 32, header_offset)
+            struct.pack_into("<H", modified, 48, count + 1)
+            with_zero = inplace.ObjectFile(path, data=bytes(modified))
+            self.assertNotIn(count, with_zero.sections)
+            self.assertTrue(any(count in members for _, _, members in with_zero.section_groups))
+
+            caller, mem, catalogue = RemovedCalleeModelTest().fixture(BX_LR)
+            caller.sections.pop(2)
+            caller.symbols = caller.symbols[:1]
+            external = inplace.Symbol(full.name, 0, 0, "STT_FUNC", "STB_GLOBAL", "SHN_UNDEF")
+            caller.symbols.append(external)
+            for rel in caller.sections[1].relocs:
+                rel.symbol = external
+            linked = self.linker(mem, catalogue).link(inplace.ObjectFile.combine([caller, helper]))
+            self.assertEqual(next(iter(linked.values()))[1], mem.read(BASE, 40))
+            for objects in ([caller, with_zero], [with_zero, caller]):
+                self.refuse(inplace.ObjectFile.combine(objects), mem, catalogue, "unrepresented allocated member.*group-removal proof")
+
     def test_incorrect_or_combined_index_metadata_is_refused(self):
         changes = (
             ("elf_type", "SHT_PROGBITS"), ("link_order", False), ("linked_section", 1),
@@ -2325,9 +2427,9 @@ class RemovedUnwindModelTest(unittest.TestCase):
                     obj.sections[3].data = struct.pack("<2I", 0, 4)
                 elif case == "combined_extab":
                     obj.sections[4].data *= 2
-                    obj.sections[4].size = 8
+                    obj.sections[4].size = len(obj.sections[4].data)
                 elif case == "generic_extab":
-                    obj.sections[4].data = bytes(4)
+                    obj.sections[4].data = bytes(8)
                 elif case in ("extra_dependency", "wrong_personality"):
                     name = "__aeabi_unwind_cpp_pr1" if case == "wrong_personality" else "other_root"
                     dep = inplace.Symbol(name, 0, 0, "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")

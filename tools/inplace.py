@@ -1566,8 +1566,8 @@ class InPlaceLinker:
         return removed
 
     @staticmethod
-    def _compact_unwind_size(word: int) -> int | None:
-        """EHABI compact frame-only entries, not generic personalities or scope descriptors."""
+    def _compact_unwind_prefix_size(word: int) -> int | None:
+        """Header plus compact unwind words only; an out-of-line descriptor terminator follows."""
         personality = word >> 24
         if personality == 0x80:
             return 4
@@ -1650,11 +1650,13 @@ class InPlaceLinker:
                         or extab.index in companions):
                     raise LinkError(f"{section.name}: shared or interior exception table")
                 private_data(extab, owner, "extab")
-                if extab.elf_type != "SHT_PROGBITS" or extab.link_order or extab.size < 4 or extab.entsize:
+                if extab.elf_type != "SHT_PROGBITS" or extab.link_order or extab.size < 8 or extab.entsize:
                     raise LinkError(f"{extab.name}: unsupported exception-table section metadata")
                 header = struct.unpack_from("<I", extab.data)[0]
-                if self._compact_unwind_size(header) != extab.size:
-                    raise LinkError(f"{extab.name}: combined or unsupported exception-table entry")
+                prefix_size = self._compact_unwind_prefix_size(header)
+                if (prefix_size is None or extab.size != prefix_size + 4
+                        or struct.unpack_from("<I", extab.data, prefix_size)[0] != 0):
+                    raise LinkError(f"{extab.name}: truncated, combined or nonempty-descriptor exception-table entry")
                 if incoming.get(extab.index) != [(section, tail)]:
                     raise LinkError(f"{extab.name}: exception table has another incoming reference")
                 dependencies(extab, (header >> 24) & 0xF, [])
