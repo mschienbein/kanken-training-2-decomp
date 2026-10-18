@@ -1,6 +1,22 @@
 # C009 recovered integration handoff
 
-## Milestone: stable G3 r2 exits zero
+## Finalized predecessor merged at d4f52d9
+
+Merged Main **`bb60cd7`** at **`d4f52d963cae908de5207bb320b2e7cee3a6299a`**.
+C008-r3 is finalized, sequence 8, with **1,527 units / 1,601 accepted functions**.
+The merge is clean and changes only accepted records, config/matches.json and docs;
+no source, header, tool or linker-model adoption arrived. The dry ledger now uses
+that finalized canonical predecessor. `readiness-scope-r3.json` binds the
+**801-unit / 805-function** final new/revised union with canonical credit names.
+
+The requested `candidates.json` proposal is present; it remains unaccepted and
+not yet review-ready. Next is stable G3 r3, then the final MATCH and canonical
+checks, complete argcheck adjudication and seven-step pre-review, all nice'd
+and sequential. Source-level G3 r2's PASS and all earlier failed evidence remain
+preserved under their actual input snapshots. C009 remains explicit v2/none.
+
+
+## Historical milestone: stable G3 r2 exits zero
 
 `interfaces-stable-r2.json` exits **0** with `--allow-unchecked-cpp`:
 **2,205 units, 1,704 checked, zero disagreements, zero policy findings,

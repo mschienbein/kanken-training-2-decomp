@@ -2,15 +2,15 @@
 
 ## Status
 
-**Readiness resumed on prepared main f8adff4; not review-ready or accepted.**
-Includes complete c008-r3 successor `b5e8b8a`, preserving c009's typed slot13/14 work.
+**Readiness on finalized main bb60cd7; not review-ready or accepted.**
+Includes finalized c008-r3 (sequence 8), preserving c009's typed slot13/14 work.
 The original sixteen-address boundary currently retains five canonical destinations
 and eleven recorded deferrals: the earlier collected `0013156c` was withdrawn
 on a native C++ API qualification. Three other interface/tooling deferrals remain.
 `docs/GATES.md` stays v1.16. Main owns full builds/suite and acceptance.
 Main resumed the committed continuation without restarting searches. Checks run
-nice'd and sequentially. Stable merged-tree G3 r2 exits0; Main's later finalized
-bb60cd7 merge and its final recheck remain pending. No pre-review PASS is claimed.
+nice'd and sequentially. Stable merged-tree G3 r2 exits0; finalized Main bb60cd7
+is now merged. Its stable G3 r3 is next; no pre-review PASS is claimed yet.
 
 `config/candidates/c009.json` lists **678 units / 678 functions / 57,212 target
 bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:
@@ -35,7 +35,7 @@ results are not silently admitted into this default-model checkpoint.
   Corrected stable `interfaces-stable-r2.json` exits **0**: 2,205 units,
   1,704 checked, zero disagreements, zero policy findings, 501 unchecked C++
   and zero unchecked C. Its exact dry input snapshot is retained. Finalized Main
-  `bb60cd7` arrived afterward and must be merged/rechecked before final matching.
+  `bb60cd7` is now merged; its stable r3 verdict remains pending before final matching.
 
 * The intermediate whole-ledger `interfaces --allow-unchecked-cpp` remediation run
   exited **1**: 2,205 units, 1,705 checked, 48 disagreements, 28 inline-declaration

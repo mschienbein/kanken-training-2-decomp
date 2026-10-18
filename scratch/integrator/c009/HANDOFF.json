@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "milestone-G3-r2-exit0-native-reader-corrected-main-bb60cd7-merge-pending",
+  "status": "finalized-main-bb60cd7-merged-stable-final-G3-next",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.16 unchanged",
@@ -25,7 +25,7 @@
     }
   },
   "dry_ledger_units": 2205,
-  "dry_ledger_basis": "Prepared main-root accept/c008-r3/matches.json (1527 units/1601 functions) plus678 c009 additions",
+  "dry_ledger_basis": "Finalized c008-r3 config/matches.json (1527units/1601functions) plus678 c009 additions",
   "revised_predecessor_units": [
     {
       "source": "src/pilot/pilot_b.c",
@@ -3987,13 +3987,13 @@
     "push"
   ],
   "resumed_from": "9d6f0515230d641f51d91dc9ab4b3ffb14011c05",
-  "main_merged": "f8adff4",
+  "main_merged": "bb60cd7",
   "c008_r2_merged": "38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac",
   "c008_r2_merge_commit": "9218542",
   "target_bytes_current_catalogue": 57212,
   "dry_ledger_functions": 2279,
   "revised_predecessor_functions": 127,
-  "revised_predecessor_basis": "Source delta against main f8adff4, before fresh merged-tree verification",
+  "revised_predecessor_basis": "Source delta against finalized main bb60cd7; all changed predecessor units remain review-required.",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
     "src/large/func_00203810.cpp",
@@ -4053,13 +4053,13 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Commit this G3/native-API milestone, then merge Main bb60cd7 (finalized c008-r3 seq8,1601 accepted functions). Incoming changes are only accept records/config/matches/docs; no source/header/tool/model changes.",
-    "Stable G3 r2 exit0:2205units,1704checked,0disagreements,0policy,501unchecked C++,0unchecked C. Preserve r1 failure and r2 PASS. Repeat G3 after finalized predecessor merge on canonical-credit-label dry ledger.",
-    "Current scope678new/57212B plus123revised predecessor units/127functions; dry2205units/2279functions. Final required union801units/805functions.",
-    "001f4cf8 is the native wchar_t factory own definition (64B MATCH).0013156c remains withdrawn with exact unresolved distinct-native-API reason; do not restore shadow readers or guess another overload.",
-    "Use scratch/integrator/c009/candidates.json as Main requested. It has the same schema/units as the tracked candidate manifest; all credit identifiers remain canonical catalogue func_ names.",
-    "After final G3: nice10 sequential final match sweep (sweep.py final-match-r1 explicitly v2/none,--show0); canonical native/signature/co-inclusion/indirect/forwarding sweeps; every argcheck issue/note and C++/callback/unused-input candidate adjudicated; seven-step pre-review.",
-    "No full suite/build/prepare/finalize/history edits/push here. Do not merge adopt-models or select v4/v6. Main owns isolated suite and c009 preparation after the review-ready commit."
+    "Finalized Main bb60cd7 is merged at d4f52d963cae908de5207bb320b2e7cee3a6299a; c008-r3 seq8 has1601 accepted functions. Only accepted records/config/matches/docs arrived; no source/header/tool/model changes.",
+    "Run stable interfaces-stable-r3.json on this final canonical dry ledger. Prior stable r2 exit0 is preserved, not silently reattributed to this new input ledger.",
+    "Current scope678new/57212B plus123revised predecessor units/127functions; dry2205units/2279functions. Final required union801units/805functions in readiness-scope-r3.json.",
+    "Main manifest scratch/integrator/c009/candidates.json is same-schema with canonical func_ credit identities. C009 explicit armlink5-inline-branchnop-v2 / none; do not merge adopt-models or use v4/v6.",
+    "After G3: final sequential sweep.py final-match-r1 (--show0, explicit v2/none); native/signature/co-inclusion/indirect/forwarding sweeps; complete argcheck candidate and note adjudication including all C++ consumers/unused inputs/core+VFP; seven-step pre-review.",
+    "001f4cf8 native wchar_t factory MATCH64B;0013156c deferred with exact distinct-owner/API reason and immutable original collection evidence. No shadow readers or guessed overloads.",
+    "No suite/build/prepare/finalize/history edits/push. Main owns suite and c009 preparation after the review-ready commit."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4086,7 +4086,7 @@
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
     "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
-    "scratch/integrator/c009/dry-matches.json": "a0e5395ff88d16536079d21251a30f0bc3aee43aa74905b7507488025a93b24f",
+    "scratch/integrator/c009/dry-matches.json": "568d1a5086d5fb6830216061be72be56a15654396ac5d33d8d3b6af7070f42b3",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec",
@@ -4112,8 +4112,10 @@
     "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json": "b27af3703648b95f7f2b030578102550b5dd1f714e26fb868af2d920903c182b",
     "scratch/integrator/c009/interfaces-stable-r2.json": "92c23f77f1c0ac317dbc6d1b274d10ab4b1c4d81f8f13ed1bbb6ef62520d2f8a",
     "scratch/integrator/c009/dry-matches-g3-r2.json": "0a8355e20937566e726f740a6341b1d9ac30585ff9096a7e35278de73813b994",
-    "scratch/integrator/c009/candidates.json": "914500a27a216c992eddc114090f27b6c9afabaf4c173aa152fa9ca28ddb8fc0",
-    "scratch/integrator/c009/sweep.py": "0cd2c77f7b4251ec826a13912dd0282845f9c67972f0aaf9874eaa5461b259a2"
+    "scratch/integrator/c009/candidates.json": "3ed2bcef23065eb886f35fe909a669f6275b1728050368fb8494828dd3dc0df0",
+    "scratch/integrator/c009/sweep.py": "0cd2c77f7b4251ec826a13912dd0282845f9c67972f0aaf9874eaa5461b259a2",
+    "config/matches.json": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
+    "scratch/integrator/c009/readiness-scope-r3.json": "35636249e86e6072e300966ff80cbbccb054af1e6a95d204351f165135b72e7f"
   },
   "collection_milestone": {
     "original_unique_new_scope": 16,
@@ -4248,5 +4250,17 @@
     "linker_model": "armlink5-inline-branchnop-v2",
     "literal_model": "none",
     "status": "explicit in final sweep driver; v4/v6 adoption excluded from c009"
+  },
+  "main_finalized_merge_commit": "d4f52d963cae908de5207bb320b2e7cee3a6299a",
+  "accepted_predecessor_input": {
+    "path": "config/matches.json",
+    "sha256": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
+    "units": 1527,
+    "functions": 1601,
+    "finalize_record": {
+      "checkpoint": "c008-r3",
+      "finalized_utc": "2026-10-17T23:52:32Z",
+      "entry_sha256": "1ce759c53c4ec8c74b87e78c5920f8f0dd0ffe95c817ca5464df5d33c6669407"
+    }
   }
 }
