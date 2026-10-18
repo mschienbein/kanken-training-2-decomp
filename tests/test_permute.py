@@ -94,6 +94,27 @@ class ScratchTest(unittest.TestCase):
         toolchain.CACHE = self.directory / "cache"
         self.addCleanup(setattr, toolchain, "CACHE", self.cache)
 
+    def pragma_once_source(self, suffix):
+        headers = {
+            "shared.h": '#pragma once\n#include "shared.h"\nstruct Shared { int value; };\n',
+            "left.h": '#pragma once\n#include "shared.h"\n',
+            "right.h": '#pragma once\n#include "./shared.h"\n',
+            "other/shared.h": '#pragma once\nstruct Other { int value; };\n',
+            "repeat.h": 'extern int repeated;\n',
+        }
+        for name, text in headers.items():
+            path = self.directory / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(text, encoding="utf-8")
+        path = self.directory / ("fixture" + suffix)
+        path.write_text(
+            '#include "left.h"\n#include "right.h"\n#include "./shared.h"\n'
+            '#include "other/shared.h"\n#include "repeat.h"\n#include "repeat.h"\n'
+            'int target(int x, struct Shared *s, struct Other *o) { return x + 1; }\n',
+            encoding="utf-8",
+        )
+        return path
+
 
 class MutationTest(unittest.TestCase):
     def test_every_mutation_reparses_across_synthetic_functions(self):
@@ -230,6 +251,24 @@ class MutationTest(unittest.TestCase):
         rendered = source.render(changed[0])
         self.assertTrue(rendered.startswith("__weak int target"))
         self.assertTrue(rendered.endswith("__packed struct S {int x;};\n"))
+
+    def test_once_and_diagnostic_pragmas_remain_in_candidates(self):
+        prefix = "#pragma once\n#pragma push\n#pragma diag_suppress 177\n"
+        text = prefix + "int target(int x){\n#pragma diag_warning 177\nreturn x+1;\n}\n#pragma pop\n"
+        source = program(text)
+        changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+        self.assertIsNotNone(changed)
+        rendered = source.render(changed[0])
+        self.assertTrue(rendered.startswith(prefix))
+        self.assertIn("#pragma diag_warning 177\n", rendered)
+        self.assertTrue(rendered.endswith("\n#pragma pop\n"))
+        program(rendered)
+
+    def test_codegen_pragmas_still_fail_closed(self):
+        for directive in ("pack(1)", "arm", "thumb", "O0", "unsigned_chars", "import symbol"):
+            with self.subTest(directive=directive):
+                with self.assertRaisesRegex(permute.PermuteError, "unsupported preprocessing directive"):
+                    program("#pragma " + directive + "\nint target(int x){return x+1;}\n")
 
     def test_approved_svc_results_and_cp15_helpers_are_preserved(self):
         headers = (
@@ -546,6 +585,46 @@ class DistanceTest(unittest.TestCase):
 
 @unittest.skipUnless(HAVE_COMPILER, "pinned compiler/launcher not installed (tools/setup.py)")
 class CompilerMutationTest(ScratchTest):
+    def test_pragma_once_is_per_file_and_translation_unit(self):
+        path = self.pragma_once_source(".c")
+        for unit in range(2):
+            with self.subTest(unit=unit):
+                source = permute.Program.preprocess(path, ("target",), PROFILE)
+                self.assertEqual(source.text.count("struct Shared {"), 1)
+                self.assertEqual(source.text.count("struct Other {"), 1)
+                self.assertEqual(source.text.count("extern int repeated;"), 2)
+                self.assertEqual(source.text.count("#pragma once"), 4)
+                changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+                self.assertIsNotNone(changed)
+                rendered = source.render(changed[0])
+                self.assertEqual(rendered.count("#pragma once"), 4)
+                output = self.directory / f"emitted-{unit}.c"
+                output.write_text(rendered, encoding="utf-8")
+                toolchain.compile_source(PROFILE, output, output.with_suffix(".o"), cache=False)
+
+    def test_only_compiler_confirmed_unknown_pragmas_are_ignored(self):
+        prefix = (
+            '#pragma diag_suppress 161,1067\n'
+            '#pragma permuter_unknown ignored\n'
+            '#pragma GCC diagnostic ignored "-Wunused-variable"\n'
+            '#pragma STDC FP_CONTRACT OFF\n'
+        )
+        path = self.directory / "unknown-pragmas.c"
+        body_pragma = "#pragma permuter_unknown __weak __int64\n"
+        path.write_text(prefix + "int target(int x){\n" + body_pragma + "return x+1;}\n", encoding="utf-8")
+        source = permute.Program.preprocess(path, ("target",), PROFILE)
+        changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+        self.assertIsNotNone(changed)
+        rendered = source.render(changed[0])
+        self.assertIn(prefix, rendered)
+        self.assertIn(body_pragma, rendered)
+        output = self.directory / "unknown-emitted.c"
+        output.write_text(rendered, encoding="utf-8")
+        toolchain.compile_source(PROFILE, output, output.with_suffix(".o"), cache=False)
+        path.write_text("#pragma pack(1)\nint target(int x){return x+1;}\n", encoding="utf-8")
+        with self.assertRaisesRegex(permute.PermuteError, "unsupported preprocessing directive"):
+            permute.Program.preprocess(path, ("target",), PROFILE)
+
     def test_every_eligible_mutation_compiles_on_synthetic_functions(self):
         exercised = set()
         for index, text in enumerate(SOURCES):

@@ -38,7 +38,9 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass, field, replace
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -114,7 +116,17 @@ TOKEN = re.compile(
     re.DOTALL,
 )
 LINE = re.compile(r'^\s*#\s*(?:line\s+)?(\d+)\s+"((?:\\.|[^"\\])*)"')
-HEADER_PRAGMA = re.compile(r"^\s*#\s*pragma\s+(?:push|pop|anon_unions|__printf_args|__scanf_args)\s*$")
+HEADER_PRAGMA = re.compile(
+    r"^\s*#\s*pragma\s+(?:(?:once|push|pop|(?:no_)?anon_unions|"
+    r"__printf_args|__scanf_args|(?:no_)?check_(?:printf|scanf)_formats)\s*|"
+    r"diag_(?:default|error|once|remark|suppress|warning)\b[^\n]*)$"
+)
+# A retained pragma is opaque to ARMCC-extension normalization as well as to
+# mutations: even an ignored pragma can contain words such as __weak or __int64.
+PREPARE_TOKEN = re.compile(
+    r"^[ \t]*#[ \t]*pragma\b[^\n]*|" + TOKEN.pattern, re.MULTILINE | re.DOTALL,
+)
+PRAGMA = re.compile(r"^\s*#\s*pragma\b")
 IGNORED_WORDS = {
     "__inline", "__inline__", "__forceinline", "__weak", "__pure",
     "__nothrow", "__noreturn",
@@ -156,7 +168,44 @@ class Prepared:
         return {"source": display_path(origin_path(name, root), root), "line": line}
 
 
-def prepare(text: str, source: Path) -> Prepared:
+@lru_cache(maxsize=128)
+def ignored_pragma(directive: str, profile: toolchain.Profile, suffix: str) -> bool:
+    """Accept an unfamiliar pragma only when the selected ARMCC ignores it.
+
+    -E retains both recognized and unrecognized pragmas without diagnosing them.
+    Probe the directive in isolation, promoting ARMCC's two unrecognized-pragma
+    diagnostics to errors so source diagnostic controls cannot conceal them.
+    The real preprocessed translation unit is never changed.
+    """
+    scratch = ROOT / "scratch"
+    scratch.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="pragma-", dir=scratch) as temporary:
+        source = Path(temporary) / ("probe" + suffix)
+        source.write_text(directive + "\nint permuter_pragma_probe;\n", encoding="utf-8")
+        launcher = toolchain.wibo_path()
+        argv = [str(launcher)] if launcher else []
+        argv += [
+            str(toolchain.armcc_exe(profile.compiler)), "-c", *profile.flags,
+            "--diag_error=161,1067", str(source), "-o", str(source.with_suffix(".o")),
+        ]
+        try:
+            proc = subprocess.run(
+                argv, cwd=ROOT, capture_output=True, text=True, encoding="utf-8",
+                errors="replace", timeout=300, env=os.environ | {"LC_ALL": "C"},
+            )
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            raise InterfaceError(f"ARMCC pragma classification failed: {type(exc).__name__}") from exc
+    diagnostics = re.findall(
+        r"(?m)^.*(?:Error|Warning|Remark|Fatal error):[^\n]*", proc.stdout + proc.stderr,
+    )
+    return proc.returncode == 1 and bool(diagnostics) and all(
+        re.search(r"#(?:161-D: unrecognized #pragma|1067-D: unrecognized STDC pragma)\s*$", line)
+        for line in diagnostics
+    )
+
+
+def prepare(text: str, source: Path, *, profile: toolchain.Profile | None = None,
+            preserve_pragmas: bool = False) -> Prepared:
     locations = []
     lines = []
     filename, lineno = str(source.resolve()), 1
@@ -168,20 +217,24 @@ def prepare(text: str, source: Path) -> Prepared:
             lineno = int(marker[1])
             lines.append("".join("\n" if c == "\n" else " " for c in raw))
         elif raw.lstrip().startswith("#"):
-            # These standard-header pragmas only permit anonymous unions or add
-            # format diagnostics. Their layouts are already explicit in the AST.
-            directive = re.sub(r"/\*.*?\*/|//[^\n]*", "", raw)
-            if not HEADER_PRAGMA.fullmatch(directive):
-                # In particular, #pragma pack must still fail closed.
+            # ARMCC has already enforced once-per-file inclusion for this unit.
+            # Diagnostics/explicit anonymous unions need no additional type model.
+            # Unknown pragmas need compiler evidence, not a codegen-pragmas denylist.
+            directive = re.sub(r"/\*.*?\*/|//[^\n]*", "", raw).strip()
+            accepted = HEADER_PRAGMA.fullmatch(directive)
+            if not accepted and profile is not None and PRAGMA.match(directive):
+                suffix = ".cpp" if source.suffix.lower() in {".cpp", ".cc", ".cxx"} else ".c"
+                accepted = ignored_pragma(directive, profile, suffix)
+            if not accepted:
                 raise InterfaceError(f"unsupported preprocessing directive: {raw.strip()}")
-            lines.append("".join("\n" if c == "\n" else " " for c in raw))
+            lines.append(raw if preserve_pragmas else "".join("\n" if c == "\n" else " " for c in raw))
             lineno += 1
         else:
             lines.append(raw)
             lineno += 1
-    plain = TOKEN.sub(lambda m: "long long" if m[0] == "__int64" else m[0], "".join(lines))
+    plain = PREPARE_TOKEN.sub(lambda m: "long long" if m[0] == "__int64" else m[0], "".join(lines))
     chars = list(plain)
-    tokens = list(TOKEN.finditer(plain))
+    tokens = list(PREPARE_TOKEN.finditer(plain))
     annotations = []
 
     def blank(start: int, end: int) -> None:
@@ -203,7 +256,9 @@ def prepare(text: str, source: Path) -> Prepared:
     while i < len(tokens):
         token = tokens[i]
         word = token[0]
-        if word.startswith(("/*", "//")):
+        if word.lstrip().startswith("#"):
+            pass
+        elif word.startswith(("/*", "//")):
             blank(token.start(), token.end())
         elif word in IGNORED_WORDS:
             blank(token.start(), token.end())

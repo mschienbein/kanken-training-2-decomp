@@ -71,6 +71,24 @@ class CppMutationTest(unittest.TestCase):
                 self.assertIsInstance(result, cpp.Program)
                 self.assertEqual(result.render(result.ast), SOURCE)
 
+    def test_once_and_diagnostic_pragmas_preserve_raw_cpp_text(self):
+        prefix = "#pragma once\n#pragma diag_suppress 177\n"
+        text = prefix + 'extern "C" int target(int x){\n#pragma diag_warning 177\nreturn x+1;\n}\n'
+        source = program(text)
+        changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+        self.assertIsNotNone(changed)
+        rendered = source.render(changed[0])
+        self.assertTrue(rendered.startswith(prefix))
+        self.assertIn("#pragma diag_warning 177\n", rendered)
+        program(rendered)
+
+    def test_cpp_edits_cannot_discard_intervening_pragmas(self):
+        source = program(
+            'extern "C" int target(int x){if(x)\n#pragma diag_suppress 177\n'
+            'return 1; else return 2;}\n'
+        )
+        self.assertIsNone(permute.mutate(source, source.ast, random.Random(0), "condition"))
+
     def test_cpp_cli_uses_search_and_cpp_author_hint_names(self):
         source = program()
         summary = {"score": 10, "initial_score": 12, "workers": 1, "candidates": 2,
@@ -233,6 +251,37 @@ int Thing::target(int x) const { return value + x; }
 
 @unittest.skipUnless(HAVE_COMPILER, "pinned compiler/launcher not installed (tools/setup.py)")
 class CppCompilerTest(ScratchTest):
+    def test_pragma_once_is_per_file_and_translation_unit(self):
+        path = self.pragma_once_source(".cpp")
+        for unit in range(2):
+            with self.subTest(unit=unit):
+                source = permute.Program.preprocess(path, ("target",), PROFILE)
+                self.assertEqual(source.text.count("struct Shared {"), 1)
+                self.assertEqual(source.text.count("struct Other {"), 1)
+                self.assertEqual(source.text.count("extern int repeated;"), 2)
+                self.assertEqual(source.text.count("#pragma once"), 4)
+                changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+                self.assertIsNotNone(changed)
+                rendered = source.render(changed[0])
+                self.assertEqual(rendered.count("#pragma once"), 4)
+                output = self.directory / f"emitted-{unit}.cpp"
+                output.write_text(rendered, encoding="utf-8")
+                toolchain.compile_source(PROFILE, output, output.with_suffix(".o"), cache=False)
+
+    def test_compiler_ignored_pragmas_survive_cpp_reparsing(self):
+        prefix = '#pragma permuter_unknown ignored\n#pragma GCC diagnostic ignored "-Wunused-variable"\n'
+        path = self.directory / "unknown-pragmas.cpp"
+        path.write_text(prefix + 'extern "C" int target(int x){return x+1;}\n', encoding="utf-8")
+        source = permute.Program.preprocess(path, ("target",), PROFILE)
+        changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+        self.assertIsNotNone(changed)
+        rendered = source.render(changed[0])
+        self.assertIn(prefix, rendered)
+        source.hints(changed[0])
+        output = self.directory / "unknown-emitted.cpp"
+        output.write_text(rendered, encoding="utf-8")
+        toolchain.compile_source(PROFILE, output, output.with_suffix(".o"), cache=False)
+
     def test_every_cpp_mutation_and_chains_compile_with_armcc(self):
         source = program()
         for kind in cpp.MUTATIONS:

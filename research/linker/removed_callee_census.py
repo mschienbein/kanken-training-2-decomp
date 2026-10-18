@@ -1,12 +1,14 @@
 """Count possible armlink-inlined, eliminated I2 callees; never emit image bytes or disassembly.
 
-    .venv/bin/python research/linker/removed_callee_census.py [--authors scratch/authors]
+    .venv/bin/python research/linker/removed_callee_census.py [--authors scratch/authors] [--linker-model ID]
 
 This is a conservative shape census, not proof that any particular call existed. Require an
 I2-eligible, call-ABI instruction, at least one input in r0-r3 materialised in the preceding four
 straight-line words, and the linker's as-if-call test after the site. Exclude instructions any
 eligible original callee can produce under I3. Author overlap is deliberately literal: mismatch
 rows in */RESULT.json whose text contains the case-insensitive substring 'inlin'.
+Bounded-switch CFG recovery requires explicit v4/v6 selection; the default keeps the frozen
+original context policy. The output records the selected model and never grants credit.
 """
 from __future__ import annotations
 
@@ -51,10 +53,10 @@ def mismatch_notes(authors: Path) -> tuple[set[int], int, int]:
     return addresses, files, hits
 
 
-def census(catalogue_path: Path, authors: Path) -> dict:
+def census(catalogue_path: Path, authors: Path, model: str = inplace.DEFAULT_LINKER_MODEL) -> dict:
     image = image_mod.Image.load()
     functions = image_mod.functions_by_address(image_mod.load_catalogue(catalogue_path))
-    linker = inplace.InPlaceLinker(image, functions, inplace.Resolver(functions), image.bss)
+    linker = inplace.InPlaceLinker(image, functions, inplace.Resolver(functions), image.bss, model)
     original_replacements = set()
     for address in functions:
         body = linker.eligible_original_callee(address)
@@ -78,6 +80,7 @@ def census(catalogue_path: Path, authors: Path) -> dict:
                 insn = next(md.disasm(image.read(address, 4), address, 1), None)
                 if insn is not None:
                     instructions[address] = insn
+        words = inplace.arm_pool_words(image, fn) if linker.model.bounded_switches else None
         sites = []
         for address, insn in instructions.items():
             word = struct.unpack("<I", insn.bytes)[0]
@@ -87,13 +90,15 @@ def census(catalogue_path: Path, authors: Path) -> dict:
             arguments = read & ARGUMENTS
             if not arguments or read - ARGUMENTS - {arm.ARM_REG_CPSR} or written - SCRATCH:
                 continue
-            if inplace.arm_call_abi_context(instructions, address, arguments, insn.cc) == "consistent":
+            if inplace.arm_call_abi_context(instructions, address, arguments, insn.cc, words=words,
+                                           bounded_switches=linker.model.bounded_switches) == "consistent":
                 sites.append(address)
         if sites:
             by_function[fn["address"]] = sites
     noted, result_files, note_rows = mismatch_notes(authors)
     overlap = sorted(noted & by_function.keys())
     return {
+        "linker_model": linker.model.name,
         "candidate_sites": sum(map(len, by_function.values())),
         "candidate_functions": len(by_function),
         "author_result_files": result_files,
@@ -111,8 +116,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--catalogue", type=Path, default=image_mod.CATALOGUE)
     parser.add_argument("--authors", type=Path, default=ROOT / "scratch/authors")
+    parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS))
     args = parser.parse_args()
-    print(json.dumps(census(args.catalogue, args.authors), indent=1))
+    print(json.dumps(census(args.catalogue, args.authors, args.linker_model), indent=1))
     return 0
 
 

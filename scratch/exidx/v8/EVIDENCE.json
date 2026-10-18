@@ -1,0 +1,1865 @@
+{
+  "model": "armlink5-inline-branchnop-v8",
+  "base_model": "armlink5-inline-branchnop-v6",
+  "base_commit": "5bb20a9a3251e83cddc37d6b64a166679ebd8e51",
+  "superseded_v7_commit": "88f5c38f4b014817cbcd2c64eebc710e4f3f8dc9",
+  "group_closure_commit": "d64767e71760c7e6337fe40a0bc3f398c78aa360",
+  "compact_extab_commit": "75c4aa51fdc2a00e82ce5b60a6552ff6904eb50b",
+  "adopted": false,
+  "v7_retired_reason": "linker model 'armlink5-inline-branchnop-v7' is retired: permits partial removal of live COMDAT groups and accepts compact extab entries without their descriptor-list terminator (exidx-v7 review F01/F02); superseded by v8, never adopted",
+  "review_before": {
+    "source": "sealed independent exidx-v7 FAIL",
+    "report": "/home/michael/code/kanken-training-2-decomp/scratch/review/exidx-v7/REVIEW.md",
+    "report_sha256": "434d85ed19c49c12b78bea35208a09cb8a11004672e6041844732d648817278f",
+    "seal_sha256": "a1f5591406d6665526e949443dfd8c1844a90ba97c82f9ee33795494a6ff8f75",
+    "v7_rerun": false
+  },
+  "correction_results": [
+    {
+      "case": "complete-own-group",
+      "finding": "F01",
+      "expected": "linked",
+      "status": "linked",
+      "caller_bytes_equal": true,
+      "linked_sections": 1,
+      "caller_sha256": "3a4f21674b56d1f93694fda1bf65086c27f1a19c4236389466155a178367db2b",
+      "rewrites": 2,
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "case": "kept-caller",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "COMDAT removed_unwind_group: i.caller has no complete group-removal proof",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "bound-data",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "COMDAT removed_unwind_group: .data.other has no complete group-removal proof",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "unplaced-data",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "COMDAT removed_unwind_group: .data.other has no complete group-removal proof",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "unrepresented-member",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "COMDAT removed_unwind_group: unrepresented allocated member has no complete group-removal proof",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "unsupported-flags",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "unwind companion belongs to an unsupported section group",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "non-COMDAT",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "unwind companion belongs to an unsupported section group",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "other-copy-kept-member-order-False",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "COMDAT removed_unwind_group: i.kept_other has no complete group-removal proof",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "other-copy-kept-member-order-True",
+      "finding": "F01",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": "COMDAT removed_unwind_group: i.kept_other has no complete group-removal proof",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-0-complete-8B",
+      "finding": "F02",
+      "expected": "linked",
+      "status": "linked",
+      "caller_bytes_equal": true,
+      "linked_sections": 1,
+      "caller_sha256": "3a4f21674b56d1f93694fda1bf65086c27f1a19c4236389466155a178367db2b",
+      "rewrites": 2,
+      "removed_helpers": 1,
+      "removed_unwind": 2
+    },
+    {
+      "case": "personality-0-truncated-4B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: unsupported exception-table section metadata",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-0-nonempty-descriptor-8B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-0-trailing-zero-12B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-1-complete-12B",
+      "finding": "F02",
+      "expected": "linked",
+      "status": "linked",
+      "caller_bytes_equal": true,
+      "linked_sections": 1,
+      "caller_sha256": "3a4f21674b56d1f93694fda1bf65086c27f1a19c4236389466155a178367db2b",
+      "rewrites": 2,
+      "removed_helpers": 1,
+      "removed_unwind": 2
+    },
+    {
+      "case": "personality-1-truncated-8B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-1-nonempty-descriptor-12B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-1-trailing-zero-16B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-2-complete-12B",
+      "finding": "F02",
+      "expected": "linked",
+      "status": "linked",
+      "caller_bytes_equal": true,
+      "linked_sections": 1,
+      "caller_sha256": "3a4f21674b56d1f93694fda1bf65086c27f1a19c4236389466155a178367db2b",
+      "rewrites": 2,
+      "removed_helpers": 1,
+      "removed_unwind": 2
+    },
+    {
+      "case": "personality-2-truncated-8B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-2-nonempty-descriptor-12B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "personality-2-trailing-zero-16B",
+      "finding": "F02",
+      "expected": "refused",
+      "status": "refused",
+      "error_type": "LinkError",
+      "reason": ".ARM.extab.helper: truncated, combined or nonempty-descriptor exception-table entry",
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "case": "direct-inline-exidx-personality-0",
+      "finding": "F02",
+      "expected": "linked",
+      "status": "linked",
+      "caller_bytes_equal": true,
+      "linked_sections": 1,
+      "caller_sha256": "3a4f21674b56d1f93694fda1bf65086c27f1a19c4236389466155a178367db2b",
+      "rewrites": 2,
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    }
+  ],
+  "focused_tests": {
+    "implementation_commit": "75c4aa51fdc2a00e82ce5b60a6552ff6904eb50b",
+    "group_closure_commit": "d64767e71760c7e6337fe40a0bc3f398c78aa360",
+    "base_commit": "5bb20a9a3251e83cddc37d6b64a166679ebd8e51",
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/exidx-removal",
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-m",
+      "unittest",
+      "tests.test_inplace",
+      "tests.test_match",
+      "tests.test_literal_pools"
+    ],
+    "exit_code": 0,
+    "tests_run": 226,
+    "seconds": 3.408,
+    "result": "OK",
+    "failed_review": "scratch/review/exidx-v7/REVIEW.md",
+    "new_tests_cover": [
+      "complete group/copy closure",
+      "kept/placed/unplaced/unrepresented group members",
+      "unsupported group flags",
+      "real ELF zero-size allocated membership",
+      "complete compact extab with separate zero terminator",
+      "truncated/nonempty/trailing/incorrect-count extab refusals",
+      "v7 retirement"
+    ],
+    "full_suite_executed": false
+  },
+  "frozen_equivalence": {
+    "base_commit": "5bb20a9a3251e83cddc37d6b64a166679ebd8e51",
+    "implementation_commit": "75c4aa51fdc2a00e82ce5b60a6552ff6904eb50b",
+    "base_source_sha256": {
+      "inplace.py": "bd3042b8014c31a8b38c2e10122a916a2ff039fe8a847b068450ef5a9f207a97",
+      "linker_models.py": "caea2283b676440230c5193748e9b94bb29c9b873593c48fa62f6e93e225da2a"
+    },
+    "runs": [
+      {
+        "label": "baseline",
+        "command": [
+          "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+          "scratch/exidx/v8/fingerprint_frozen.py",
+          "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/exidx-removal/scratch/exidx/v8/frozen-tools"
+        ],
+        "exit_code": 0,
+        "seconds": 1.5192499490003684,
+        "stderr": "",
+        "sha256": "f4fa701d4bc700e043263be45e95dfe6310eebe6d50950bd226d4af5fbc788bc"
+      },
+      {
+        "label": "current",
+        "command": [
+          "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+          "scratch/exidx/v8/fingerprint_frozen.py",
+          "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/exidx-removal/tools"
+        ],
+        "exit_code": 0,
+        "seconds": 1.5589681130004465,
+        "stderr": "",
+        "sha256": "f4fa701d4bc700e043263be45e95dfe6310eebe6d50950bd226d4af5fbc788bc"
+      }
+    ],
+    "byte_identical": true,
+    "cases": 40,
+    "models": [
+      "armlink5-inline-branchnop-v2",
+      "armlink5-inline-branchnop-v3",
+      "armlink5-inline-branchnop-v4",
+      "armlink5-inline-branchnop-v6",
+      "strict-v1"
+    ],
+    "outcomes": 200,
+    "v5_retirement_unchanged": true
+  },
+  "context": {
+    "artifact": "scratch/exidx/v8/context.json",
+    "headers": 471,
+    "equal_reviewed_v7_headers": true,
+    "equal_reviewed_v7_config": true
+  },
+  "natural_runs": [
+    {
+      "id": "tu659-final",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/tu659-final/v6/func_001be68c.result.json",
+      "receipt_sha256": "752c1ea20438f615dcd43fd32ace8e40a2ebdd59ceed136be75e8300f477947c",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN14ParameterValueD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "tu659-final",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/tu659-final/v8/func_001be68c.result.json",
+      "receipt_sha256": "cb08af27ff8874318a4c6da64897a822fa603f50e499c5bf9542734bc5205430",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001be68c",
+          "address": 1828492,
+          "status": "mismatch",
+          "candidate_size": 2444,
+          "size": 2444,
+          "first_diff": 925,
+          "rewrite_count": 3
+        }
+      ],
+      "removed_helpers": 2,
+      "removed_unwind": 2
+    },
+    {
+      "id": "r41103-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41103-game/v6/func_0011e99c.result.json",
+      "receipt_sha256": "f2efdca66044803c56d1e806d682859d334a22e826916580abb76b5e2e45d3a0",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN2nw4font14TextWriterBaseIwED1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41103-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41103-game/v8/func_0011e99c.result.json",
+      "receipt_sha256": "5cca426ede325909597ab2aab1fc6a5466da1dd3ba77e6ecb486c044d0ae259b",
+      "reason": null,
+      "functions": [
+        {
+          "name": "_ZN2nw4font14TextWriterBaseIwE9PrintImplEPKwi",
+          "address": 1173916,
+          "status": "mismatch",
+          "candidate_size": 1236,
+          "size": 1248,
+          "first_diff": 16,
+          "rewrite_count": 4
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41154-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41154-game/v6/func_001a84e0.result.json",
+      "receipt_sha256": "e9dd8a9ee2a0fedc76f68e4c377e22f13b829a4e688c4112248c1b5bf96f1bbc",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN18ModeParameterValueD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41154-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41154-game/v8/func_001a84e0.result.json",
+      "receipt_sha256": "3827bd5fd54872e982c61e4ad213053736e9daa1a81fb5e0e8655aaa822e6c5b",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001a84e0",
+          "address": 1737952,
+          "status": "mismatch",
+          "candidate_size": 12320,
+          "size": 12292,
+          "first_diff": 36,
+          "rewrite_count": 9
+        }
+      ],
+      "removed_helpers": 9,
+      "removed_unwind": 9
+    },
+    {
+      "id": "r41103-sdk",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41103-sdk/v6/func_0011e99c.result.json",
+      "receipt_sha256": "e853fd67db5eeb41c77be5ccb70619ca8bf5e7266ad4da53ee8a3140c6163c32",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN2nw4font14TextWriterBaseIwED1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41103-sdk",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41103-sdk/v8/func_0011e99c.result.json",
+      "receipt_sha256": "9439c665c1a2bb63b927051c2768b71d502549d78b7b49b0723f1639e7827899",
+      "reason": null,
+      "functions": [
+        {
+          "name": "_ZN2nw4font14TextWriterBaseIwE9PrintImplEPKwi",
+          "address": 1173916,
+          "status": "mismatch",
+          "candidate_size": 1204,
+          "size": 1248,
+          "first_diff": 4,
+          "rewrite_count": 4
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41154-sdk",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41154-sdk/v6/func_001a84e0.result.json",
+      "receipt_sha256": "d3df147a855a98b17e98b393c2ae3f96218f12c16958ea34798e05b3fccc870c",
+      "reason": "i.func_001a84e0+0x7f8: removed callee i._ZN22SequenceParameterValueD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41154-sdk",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41154-sdk/v8/func_001a84e0.result.json",
+      "receipt_sha256": "69a5a5064c8ace6284a7aa43981b7d29e4ebc05468a01b7824c17d9cd203694d",
+      "reason": "i.func_001a84e0+0x7f8: removed callee i._ZN22SequenceParameterValueD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41103-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41103-middleware/v6/func_0011e99c.result.json",
+      "receipt_sha256": "5e8e88473b0cb967513ffc2084ce3b26cf2406eaf891ce16a301254bd9fc830b",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN2nw4font14TextWriterBaseIwED1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41103-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41103-middleware/v8/func_0011e99c.result.json",
+      "receipt_sha256": "d43e41a70736892273a8fecbdd1883428a3d61702fcd862823a81e6e6cc7d922",
+      "reason": null,
+      "functions": [
+        {
+          "name": "_ZN2nw4font14TextWriterBaseIwE9PrintImplEPKwi",
+          "address": 1173916,
+          "status": "mismatch",
+          "candidate_size": 1244,
+          "size": 1248,
+          "first_diff": 4,
+          "rewrite_count": 4
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41154-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41154-middleware/v6/func_001a84e0.result.json",
+      "receipt_sha256": "582345ae42134cd01dc5bac9bd4c7d060a8d69e11ee2ca2686701f323a114347",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN18ModeParameterValueD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41154-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41154-middleware/v8/func_001a84e0.result.json",
+      "receipt_sha256": "90056c3066bff903e558c14fe242f791eeaad04f88ed612b8f8b8f002d4f66f8",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001a84e0",
+          "address": 1737952,
+          "status": "mismatch",
+          "candidate_size": 12416,
+          "size": 12292,
+          "first_diff": 5,
+          "rewrite_count": 9
+        }
+      ],
+      "removed_helpers": 9,
+      "removed_unwind": 9
+    },
+    {
+      "id": "r41128-early",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41128-early/v6/func_00161ad0.result.json",
+      "receipt_sha256": "7a6419168eed21cee02a8e012445f9db94e1b0e95ee4301f3095fefa5eb8939e",
+      "reason": ".ARM.exidx+0x0: removed callee i.selection_session_setup is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41128-early",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41128-early/v8/func_00161ad0.result.json",
+      "receipt_sha256": "9d54a5045f4d472eeb235ee8ac84e4ac94b9644164ee39155a23846e0d98cbaf",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_00161ad0",
+          "address": 1448656,
+          "status": "mismatch",
+          "candidate_size": 5236,
+          "size": 5180,
+          "first_diff": 41,
+          "rewrite_count": 10
+        }
+      ],
+      "removed_helpers": 9,
+      "removed_unwind": 9
+    },
+    {
+      "id": "r41128-final",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41128-final/v6/func_00161ad0.result.json",
+      "receipt_sha256": "83abe62cb9e0e8617a3e4fd2c2f2894059e70db997595d3d1f8115f2a2e2fe65",
+      "reason": "i.func_00161ad0+0x35c: removed callee i._ZN17CategoryParameterD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41128-final",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41128-final/v8/func_00161ad0.result.json",
+      "receipt_sha256": "208d6dec6f962f882df5929f5b74de3fdfab16885b1c898f92f85376a2b26167",
+      "reason": "i.func_00161ad0+0x35c: removed callee i._ZN17CategoryParameterD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r4026-member-hooks",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r4026-member-hooks/v6/func_0013f06c_v3.result.json",
+      "receipt_sha256": "41862550526c2996a79ba57d36d100c445906e1ab04a3d7f923d4f894a5d8e44",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN2nw2ut8HeapBase8LockHeapEv is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r4026-member-hooks",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/smoke/r4026-member-hooks/v8/func_0013f06c_v3.result.json",
+      "receipt_sha256": "d5327a047a905e8860d9a46f6961fb0c3abb1913b444e5826c74fd282b643814",
+      "reason": null,
+      "functions": [
+        {
+          "name": "_ZN2nw2ut9FrameHeap11FreeByStateEj",
+          "address": 1306732,
+          "status": "match",
+          "candidate_size": 164,
+          "size": 164,
+          "first_diff": null,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 2,
+      "removed_unwind": 2
+    },
+    {
+      "id": "r4076-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r4076-middleware/v6/18_native_removed_hooks.result.json",
+      "receipt_sha256": "31436fa05e8d191fdd0cafb1b996baea1416e5cf6d0e7cef690eb72ae28bd224",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN2nw2ut8HeapBase8LockHeapEv is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r4076-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r4076-middleware/v8/18_native_removed_hooks.result.json",
+      "receipt_sha256": "f65a71828c5cd0089af93bc9187e999bb8d35f42b08e1584cc0843aa0faac9c2",
+      "reason": null,
+      "functions": [
+        {
+          "name": "_ZN2nw2ut9FrameHeap11RecordStateEj",
+          "address": 1306896,
+          "status": "mismatch",
+          "candidate_size": 140,
+          "size": 140,
+          "first_diff": 20,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 2,
+      "removed_unwind": 2
+    },
+    {
+      "id": "r4076-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r4076-game/v6/19_native_removed_hooks.result.json",
+      "receipt_sha256": "5ac89683d913e45f33ff7989aa374ae934e8ef14103a02817e8d122415404ee4",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZN2nw2ut8HeapBase8LockHeapEv is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r4076-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r4076-game/v8/19_native_removed_hooks.result.json",
+      "receipt_sha256": "d63eaf66d5e8869152e9e66df9f73e87a7cc79b1e295ccecf93e127cca4ab486",
+      "reason": null,
+      "functions": [
+        {
+          "name": "_ZN2nw2ut9FrameHeap11RecordStateEj",
+          "address": 1306896,
+          "status": "mismatch",
+          "candidate_size": 140,
+          "size": 140,
+          "first_diff": 5,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 2,
+      "removed_unwind": 2
+    },
+    {
+      "id": "r4088-cpp-hook",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r4088-cpp-hook/v6/func_00102074.result.json",
+      "receipt_sha256": "e13191645fc3f66ecbe69b8335dccc1b17a96204c7bd70e563eb45bd118a4334",
+      "reason": ".ARM.exidx+0x0: removed callee i._Z20complete_text_writerP10TextWriter is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r4088-cpp-hook",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r4088-cpp-hook/v8/func_00102074.result.json",
+      "receipt_sha256": "5a9bae7fd5c2cb62542b60d4307baf7ec923f4496f3d9090e4b146140a8560da",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_00102074",
+          "address": 1056884,
+          "status": "mismatch",
+          "candidate_size": 804,
+          "size": 808,
+          "first_diff": 48,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41207-cpp-result",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41207-cpp-result/v6/typed-result-accessor.result.json",
+      "receipt_sha256": "dcab5d4682b7a0f935c4ab40da59e5cde62ad706a49b0c760fce28efcf48eed5",
+      "reason": ".ARM.exidx+0x0: removed callee i._Z17ResultFailureBits6Result is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41207-cpp-result",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41207-cpp-result/v8/typed-result-accessor.result.json",
+      "receipt_sha256": "f2518d8f846a8d4067ccaac0de8094ccf4196178ee1b07dec961f2d0bbd7459b",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_0010be58",
+          "address": 1097304,
+          "status": "mismatch",
+          "candidate_size": 60,
+          "size": 60,
+          "first_diff": 47,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41224-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": false,
+      "exit_code": null,
+      "status": "not_run_reported_compile_failure",
+      "reported_failure": {
+        "reason": "PaneMaterialView is undefined under the frozen headers; do not rerun an unchanged source to confirm this reported compiler failure.",
+        "prior_receipts": [
+          {
+            "model": "armlink5-inline-branchnop-v6",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-game/v6/func_0014ace0-texture-array-v3-game.result.json",
+            "receipt_sha256": "fbcf5026194852b7c44b02d5f255066f457bddabbeadd596c26bc21b3086dc36"
+          },
+          {
+            "model": "armlink5-inline-branchnop-v7",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-game/v7/func_0014ace0-texture-array-v3-game.result.json",
+            "receipt_sha256": "013986bfd04f30289e6f7b713aebd37a1bb494aa602997ab90cfe373fe42db87"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r41224-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": false,
+      "exit_code": null,
+      "status": "not_run_reported_compile_failure",
+      "reported_failure": {
+        "reason": "PaneMaterialView is undefined under the frozen headers; do not rerun an unchanged source to confirm this reported compiler failure.",
+        "prior_receipts": [
+          {
+            "model": "armlink5-inline-branchnop-v6",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-game/v6/func_0014ace0-texture-array-v3-game.result.json",
+            "receipt_sha256": "fbcf5026194852b7c44b02d5f255066f457bddabbeadd596c26bc21b3086dc36"
+          },
+          {
+            "model": "armlink5-inline-branchnop-v7",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-game/v7/func_0014ace0-texture-array-v3-game.result.json",
+            "receipt_sha256": "013986bfd04f30289e6f7b713aebd37a1bb494aa602997ab90cfe373fe42db87"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r41224-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": false,
+      "exit_code": null,
+      "status": "not_run_reported_compile_failure",
+      "reported_failure": {
+        "reason": "PaneMaterialView is undefined under the frozen headers; do not rerun an unchanged source to confirm this reported compiler failure.",
+        "prior_receipts": [
+          {
+            "model": "armlink5-inline-branchnop-v6",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-middleware/v6/func_0014ace0-texture-array-v3-middleware.result.json",
+            "receipt_sha256": "0119218b35c5d945d198e16d2897338a4e18ab36afed379777356373f0afc0a1"
+          },
+          {
+            "model": "armlink5-inline-branchnop-v7",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-middleware/v7/func_0014ace0-texture-array-v3-middleware.result.json",
+            "receipt_sha256": "d9bb2b172b85ae539fd897df04732cd8e9d3d6342f6f98437408237f4844827a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r41224-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": false,
+      "exit_code": null,
+      "status": "not_run_reported_compile_failure",
+      "reported_failure": {
+        "reason": "PaneMaterialView is undefined under the frozen headers; do not rerun an unchanged source to confirm this reported compiler failure.",
+        "prior_receipts": [
+          {
+            "model": "armlink5-inline-branchnop-v6",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-middleware/v6/func_0014ace0-texture-array-v3-middleware.result.json",
+            "receipt_sha256": "0119218b35c5d945d198e16d2897338a4e18ab36afed379777356373f0afc0a1"
+          },
+          {
+            "model": "armlink5-inline-branchnop-v7",
+            "exit_code": 2,
+            "receipt": "scratch/exidx/v7/smoke/r41224-middleware/v7/func_0014ace0-texture-array-v3-middleware.result.json",
+            "receipt_sha256": "d9bb2b172b85ae539fd897df04732cd8e9d3d6342f6f98437408237f4844827a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "r41234-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41234-game/v6/step2-01-qualified-transient.result.json",
+      "receipt_sha256": "6fe8d1eb1e32d628c25e4d6bd01a08d1581f685c1a74e765e1ac09fc69db4e78",
+      "reason": ".ARM.exidx+0x0: removed callee i.r41234_transient_cleanup is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41234-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41234-game/v8/step2-01-qualified-transient.result.json",
+      "receipt_sha256": "ef1c8a716f3323a6a111f18f0266a2e0ae088e03c0ce3f5c59d4e838f99c3475",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_00162f9c",
+          "address": 1453980,
+          "status": "mismatch",
+          "candidate_size": 188,
+          "size": 192,
+          "first_diff": 0,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41234-sdk",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41234-sdk/v6/step2-01-qualified-transient.result.json",
+      "receipt_sha256": "3466c92e9e698857f27ab175255f26b23f378295f600375dc734ec1ebde01888",
+      "reason": ".ARM.exidx+0x0: removed callee i.r41234_transient_cleanup is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41234-sdk",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41234-sdk/v8/step2-01-qualified-transient.result.json",
+      "receipt_sha256": "10dacc714c501424306013bc7369329391bb9ca78c0a41b187d8c9d646e3fb16",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_00162f9c",
+          "address": 1453980,
+          "status": "mismatch",
+          "candidate_size": 176,
+          "size": 192,
+          "first_diff": 0,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41234-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41234-middleware/v6/step2-01-qualified-transient.result.json",
+      "receipt_sha256": "3dc5aafec6a5ecb7e85ae7fc873abf94ab3a3067c376f96e1e7179fd491aff22",
+      "reason": ".ARM.exidx+0x0: removed callee i.r41234_transient_cleanup is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41234-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41234-middleware/v8/step2-01-qualified-transient.result.json",
+      "receipt_sha256": "737dea36c75ecd3e5d476a97494637d0622debc96fdff7c64b185d3a76fc7ca0",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_00162f9c",
+          "address": 1453980,
+          "status": "mismatch",
+          "candidate_size": 188,
+          "size": 192,
+          "first_diff": 0,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41262-001bd68c",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41262-001bd68c/v6/func_001bd68c.result.json",
+      "receipt_sha256": "54d0e2c2496549163c5b48b3a85c1dd7a171cb1842fa3c9457d0682bedda8ab0",
+      "reason": ".ARM.exidx+0x0: removed callee i.r41262_drawing_state is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41262-001bd68c",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/smoke/r41262-001bd68c/v8/func_001bd68c.result.json",
+      "receipt_sha256": "da529546074c412bdb545d544aaaed14527cbbbfba05fe04737c8c9bd3240ac2",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001bd68c",
+          "address": 1824396,
+          "status": "match",
+          "candidate_size": 696,
+          "size": 696,
+          "first_diff": null,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41262-001c09e8",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41262-001c09e8/v6/func_001c09e8.result.json",
+      "receipt_sha256": "163b73e90ca145f958c12c63c6b10e467f87729c82c1f90982f8fe772d7db043",
+      "reason": ".ARM.exidx+0x0: removed callee i.r41262_drawing_state is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41262-001c09e8",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41262-001c09e8/v8/func_001c09e8.result.json",
+      "receipt_sha256": "f34e7943f40ba5907d4428aa1e1665010809fd7a79914e2dfed26a7b75ad2ac6",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001c09e8",
+          "address": 1837544,
+          "status": "mismatch",
+          "candidate_size": 840,
+          "size": 840,
+          "first_diff": 168,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41275-cpp-predicate",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41275-cpp-predicate/v6/03-removed-completion-predicate.result.json",
+      "receipt_sha256": "4acb7e60070482915b13f83a636c820a7399ff0876c35cd26b0937621616f792",
+      "reason": ".ARM.exidx+0x0: removed callee i._ZNK14PendingRequest11is_completeEv is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41275-cpp-predicate",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41275-cpp-predicate/v8/03-removed-completion-predicate.result.json",
+      "receipt_sha256": "7d1363cd0eba0fff5136d056a2e96be9e26b95f44a4f0727910c81a6a6e9ea30",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001d5ca0",
+          "address": 1924256,
+          "status": "mismatch",
+          "candidate_size": 640,
+          "size": 636,
+          "first_diff": 36,
+          "rewrite_count": 1
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r3L25-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r3L25-game/v6/scene_v3.result.json",
+      "receipt_sha256": "2b4b9e66ecefb447d9eea4f62394ff081e710889cccb43882297a0f265e21a2a",
+      "reason": "i.func_001babb4+0x668: removed callee i._Z13dialog_statusPK20TransitionController is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r3L25-game",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r3L25-game/v8/scene_v3.result.json",
+      "receipt_sha256": "ce067264c6420d8ce212415c3c635dd7f6bc7d4d9ac9a35b422b66b1d2c4e140",
+      "reason": "i.func_001babb4+0x668: removed callee i._Z13dialog_statusPK20TransitionController is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r3L25-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r3L25-middleware/v6/scene_v3.result.json",
+      "receipt_sha256": "b028c22c89a292b1cfa9e0c299fec8daa3b1f70e1a9dbc13c6d1be845175179f",
+      "reason": ".ARM.exidx+0x0: removed callee i._Z13dialog_statusPK20TransitionController is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r3L25-middleware",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r3L25-middleware/v8/scene_v3.result.json",
+      "receipt_sha256": "69566f0851d9de81a061f6ab2ed075e2d37b9901e8633964d776de600669cb45",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001babb4",
+          "address": 1813428,
+          "status": "mismatch",
+          "candidate_size": 3332,
+          "size": 3340,
+          "first_diff": 12,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41307-001e722c-complete",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41307-001e722c-complete/v6/func_001e722c_nothrow_lifetime.result.json",
+      "receipt_sha256": "d33e11f8ecbfed7c9a71c7f05e937a8b7b4b9011e0b94ac933559973e6442783",
+      "reason": ".ARM.exidx+0x0: removed callee i._Z23destroy_scene_parameterP14ParameterValue is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41307-001e722c-complete",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41307-001e722c-complete/v8/func_001e722c_nothrow_lifetime.result.json",
+      "receipt_sha256": "2f3dc4605998bba0cf0a2a3745c68079262d49c8711f285ef62c369aa4919af6",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001e722c",
+          "address": 1995308,
+          "status": "mismatch",
+          "candidate_size": 360,
+          "size": 364,
+          "first_diff": 24,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41307-001e7db0-complete",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41307-001e7db0-complete/v6/func_001e7db0_nothrow_lifetime.result.json",
+      "receipt_sha256": "a4803981ccb4dce1d0e694d6212b446056684b80a4a078e808438a8c50ed9e20",
+      "reason": ".ARM.exidx+0x0: removed callee i._Z23destroy_scene_parameterP14ParameterValue is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41307-001e7db0-complete",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41307-001e7db0-complete/v8/func_001e7db0_nothrow_lifetime.result.json",
+      "receipt_sha256": "54c2ac050f174a1d81da1053c64b2282e72d18e8fc847bcfe3ed4ec75f4d99c5",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001e7db0",
+          "address": 1998256,
+          "status": "mismatch",
+          "candidate_size": 344,
+          "size": 348,
+          "first_diff": 9,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    },
+    {
+      "id": "r41307-001e395c-complete",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v6",
+      "executed": true,
+      "exit_code": 2,
+      "receipt": "scratch/exidx/v8/smoke/r41307-001e395c-complete/v6/func_001e395c_nothrow_lifetime.result.json",
+      "receipt_sha256": "acd45f4bdce5fa4487e5fe0758251bff1f97233330feac64795b8e4f7681253b",
+      "reason": ".ARM.exidx+0x0: removed callee i._Z23destroy_scene_parameterP14ParameterValue is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "functions": [],
+      "removed_helpers": 0,
+      "removed_unwind": 0
+    },
+    {
+      "id": "r41307-001e395c-complete",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v8",
+      "executed": true,
+      "exit_code": 1,
+      "receipt": "scratch/exidx/v8/smoke/r41307-001e395c-complete/v8/func_001e395c_nothrow_lifetime.result.json",
+      "receipt_sha256": "28cfe01b01e8edf0beb9ecb6f9751db54fea937ac5362d3708bde8d312302b73",
+      "reason": null,
+      "functions": [
+        {
+          "name": "func_001e395c",
+          "address": 1980764,
+          "status": "mismatch",
+          "candidate_size": 440,
+          "size": 408,
+          "first_diff": 56,
+          "rewrite_count": 2
+        }
+      ],
+      "removed_helpers": 1,
+      "removed_unwind": 1
+    }
+  ],
+  "accepted_runs": [
+    {
+      "row": 1,
+      "function": "func_00105084",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row01-func_00105084/v6/loop_resources.result.json",
+      "receipt_sha256": "eadc68e8daa81ef4b47e2a396a91fea8fa937c5be6793aac148333d663fd2b7b",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 1,
+      "function": "func_00105084",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row01-func_00105084/v8/loop_resources.result.json",
+      "receipt_sha256": "aa9e36568a5a706e68fea2f4699602f4ce77dfb1e8157c25ab48d706f7e6c0e1",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 2,
+      "function": "func_0010d604",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row02-func_0010d604/v6/game_heap.result.json",
+      "receipt_sha256": "2ca3e295b205b65254970f207b33e750f970a28a6dbef59b743341a69bad580a",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 2,
+      "function": "func_0010d604",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row02-func_0010d604/v8/game_heap.result.json",
+      "receipt_sha256": "654b60da91538b29f15a165281805c379e3779fc41783ee0f4e6ba4fa83c3d0e",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 3,
+      "function": "func_0011e928",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row03-func_0011e928/v6/func_0011e928.result.json",
+      "receipt_sha256": "2d381b5b95f041ffadda2045b8c120632fe2d05904286075940f1a5872056bd2",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        72
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 3,
+      "function": "func_0011e928",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row03-func_0011e928/v8/func_0011e928.result.json",
+      "receipt_sha256": "3d66340720c7aa448a89f491cb65717d281892567c7a7a624cfe92a1fa0d336c",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        72
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 4,
+      "function": "func_0018fdd4",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row04-func_0018fdd4/v6/func_0018fdd4.result.json",
+      "receipt_sha256": "73fbd10b98dfeb0156aa9565c579423dc5fa4dd5fda1467190aac2ba84c6393e",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        40
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 4,
+      "function": "func_0018fdd4",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row04-func_0018fdd4/v8/func_0018fdd4.result.json",
+      "receipt_sha256": "95fc2374521654c0b1a0520db0cfb65d8e4e49050a8eb27aabd3c226de381334",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        40
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 5,
+      "function": "func_00195254",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row05-func_00195254/v6/func_00195254.result.json",
+      "receipt_sha256": "28d43566fc3c164714de2625db840d984af6fe68889557852962889cb52f795a",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        224
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 5,
+      "function": "func_00195254",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v2",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row05-func_00195254/v8/func_00195254.result.json",
+      "receipt_sha256": "ae2e5b281764f859a071f0700eb26c80a3659fd7bd605d206286b4091f5e1fc3",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        224
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 6,
+      "function": "func_00105084",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row06-func_00105084/v6/loop_resources.result.json",
+      "receipt_sha256": "eadc68e8daa81ef4b47e2a396a91fea8fa937c5be6793aac148333d663fd2b7b",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 6,
+      "function": "func_00105084",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row06-func_00105084/v8/loop_resources.result.json",
+      "receipt_sha256": "aa9e36568a5a706e68fea2f4699602f4ce77dfb1e8157c25ab48d706f7e6c0e1",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 7,
+      "function": "func_0010d604",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row07-func_0010d604/v6/game_heap.result.json",
+      "receipt_sha256": "2ca3e295b205b65254970f207b33e750f970a28a6dbef59b743341a69bad580a",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 7,
+      "function": "func_0010d604",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row07-func_0010d604/v8/game_heap.result.json",
+      "receipt_sha256": "654b60da91538b29f15a165281805c379e3779fc41783ee0f4e6ba4fa83c3d0e",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 8,
+      "function": "func_0011e928",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row08-func_0011e928/v6/func_0011e928.result.json",
+      "receipt_sha256": "2d381b5b95f041ffadda2045b8c120632fe2d05904286075940f1a5872056bd2",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        72
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 8,
+      "function": "func_0011e928",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row08-func_0011e928/v8/func_0011e928.result.json",
+      "receipt_sha256": "3d66340720c7aa448a89f491cb65717d281892567c7a7a624cfe92a1fa0d336c",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        72
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 9,
+      "function": "func_0018fdd4",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row09-func_0018fdd4/v6/func_0018fdd4.result.json",
+      "receipt_sha256": "73fbd10b98dfeb0156aa9565c579423dc5fa4dd5fda1467190aac2ba84c6393e",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        40
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 9,
+      "function": "func_0018fdd4",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row09-func_0018fdd4/v8/func_0018fdd4.result.json",
+      "receipt_sha256": "95fc2374521654c0b1a0520db0cfb65d8e4e49050a8eb27aabd3c226de381334",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        40
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 10,
+      "function": "func_00195254",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row10-func_00195254/v6/func_00195254.result.json",
+      "receipt_sha256": "28d43566fc3c164714de2625db840d984af6fe68889557852962889cb52f795a",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        224
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 10,
+      "function": "func_00195254",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v3",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row10-func_00195254/v8/func_00195254.result.json",
+      "receipt_sha256": "ae2e5b281764f859a071f0700eb26c80a3659fd7bd605d206286b4091f5e1fc3",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        224
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 11,
+      "function": "func_00105084",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row11-func_00105084/v6/loop_resources.result.json",
+      "receipt_sha256": "eadc68e8daa81ef4b47e2a396a91fea8fa937c5be6793aac148333d663fd2b7b",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 11,
+      "function": "func_00105084",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row11-func_00105084/v8/loop_resources.result.json",
+      "receipt_sha256": "aa9e36568a5a706e68fea2f4699602f4ce77dfb1e8157c25ab48d706f7e6c0e1",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 12,
+      "function": "func_0010d604",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row12-func_0010d604/v6/game_heap.result.json",
+      "receipt_sha256": "2ca3e295b205b65254970f207b33e750f970a28a6dbef59b743341a69bad580a",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 12,
+      "function": "func_0010d604",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row12-func_0010d604/v8/game_heap.result.json",
+      "receipt_sha256": "654b60da91538b29f15a165281805c379e3779fc41783ee0f4e6ba4fa83c3d0e",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        64
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 13,
+      "function": "func_0011e928",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row13-func_0011e928/v6/func_0011e928.result.json",
+      "receipt_sha256": "2d381b5b95f041ffadda2045b8c120632fe2d05904286075940f1a5872056bd2",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        72
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 13,
+      "function": "func_0011e928",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row13-func_0011e928/v8/func_0011e928.result.json",
+      "receipt_sha256": "3d66340720c7aa448a89f491cb65717d281892567c7a7a624cfe92a1fa0d336c",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        72
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 14,
+      "function": "func_0018fdd4",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row14-func_0018fdd4/v6/func_0018fdd4.result.json",
+      "receipt_sha256": "73fbd10b98dfeb0156aa9565c579423dc5fa4dd5fda1467190aac2ba84c6393e",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        40
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 14,
+      "function": "func_0018fdd4",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row14-func_0018fdd4/v8/func_0018fdd4.result.json",
+      "receipt_sha256": "95fc2374521654c0b1a0520db0cfb65d8e4e49050a8eb27aabd3c226de381334",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        40
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 15,
+      "function": "func_00195254",
+      "model": "armlink5-inline-branchnop-v6",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row15-func_00195254/v6/func_00195254.result.json",
+      "receipt_sha256": "28d43566fc3c164714de2625db840d984af6fe68889557852962889cb52f795a",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        224
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    },
+    {
+      "row": 15,
+      "function": "func_00195254",
+      "model": "armlink5-inline-branchnop-v8",
+      "original_model": "armlink5-inline-branchnop-v4",
+      "executed": true,
+      "exit_code": 0,
+      "receipt": "scratch/exidx/v8/accepted/row15-func_00195254/v8/func_00195254.result.json",
+      "receipt_sha256": "ae2e5b281764f859a071f0700eb26c80a3659fd7bd605d206286b4091f5e1fc3",
+      "statuses": [
+        "match"
+      ],
+      "sizes": [
+        224
+      ],
+      "rewrites": 0,
+      "removed_helpers": 0
+    }
+  ],
+  "original_image_evidence": {
+    "artifact": "scratch/exidx/v7/image-census.json",
+    "sha256": "65cd4894320bc457706cbb4c333f0104c94fdab71f7559f5c8fb1df7279d4afe",
+    "status": "Retained, independently reproduced and qualified by the sealed v7 review; not rerun solely to reconfirm the reported observation. Original table absence remains inference, never a stripping premise."
+  },
+  "artifact_sha256": {
+    "GATES-DRAFT.md": "a9c6daae9fec6f5c1def4ad8c5431a73d087481d3abd7bc398be7a0ae41f444f",
+    "focused-tests.json": "b6dc44897bb21134e7cb96f986adcb9a8302dad0fbea381e3433f8e6fe768e54",
+    "inputs.json": "5249a68ffa0ca8639bf21926d3ad77e4450df525f6b8f361f26589cd69073c56",
+    "context.json": "acc5fa7c1ad30ba317df02d3b8c818b0cc93fef7e55acd0aca785440258d6d18",
+    "summary.json": "6603bc19beac4163598fe5f229eb369d90d894147181734ff2546f78445ffa8c",
+    "run_smoke.py": "789f17e975c4c58c5176788547a7aed11cde3bc29e1edb57263eec5a5e67ca5a",
+    "fingerprint_frozen.py": "ca4daa342f7ceea20c5ad58d0626e2519f5e4f61a6bd9dd09aa810bff1ed6854",
+    "frozen-baseline.json": "f4fa701d4bc700e043263be45e95dfe6310eebe6d50950bd226d4af5fbc788bc",
+    "frozen-current.json": "f4fa701d4bc700e043263be45e95dfe6310eebe6d50950bd226d4af5fbc788bc",
+    "frozen-equivalence.json": "ac58b31ad18dcbe5ae2e6dd1bb933f234930c755deecab34f8d1dfe00c1e98f5",
+    "corrections.py": "8597da6b7c2e881edb952e62cf7b4b0e3c556ab561b02b0884c423047d262c52",
+    "corrections.json": "c5eaef99e53a30b724806e0bd65ec5536ce78704cc1fa97c2785918d9910fd36",
+    "corrections-command.json": "34b551a9b32cd5caaf94003625e4d7341e2d889566142cd79d2c2b4b18139463"
+  },
+  "no_full_suite_or_adoption": true,
+  "note": "All v7 receipts, the rejected v7 draft, and sealed review are unchanged. Known unchanged author compiler failures are referenced rather than retried or relabeled as v8 receipts. No packet, ROM payload or disassembly is recorded."
+}
