@@ -2,15 +2,15 @@
 
 ## Status
 
-**Readiness on finalized main bb60cd7; not review-ready or accepted.**
+**Readiness on main f24fa0b / frozen GATES v1.19; not review-ready or accepted.**
 Includes finalized c008-r3 (sequence 8), preserving c009's typed slot13/14 work.
 The original sixteen-address boundary currently retains five canonical destinations
 and eleven recorded deferrals: the earlier collected `0013156c` was withdrawn
 on a native C++ API qualification. Three other interface/tooling deferrals remain.
-`docs/GATES.md` stays v1.16. Main owns full builds/suite and acceptance.
-Main resumed the committed continuation without restarting searches. Checks run
-nice'd and sequentially. Stable merged-tree G3 r3 exits0, but later canonical
-repairs need a new final gate/sweep. Thirteen byte mismatches remain; no pre-review PASS.
+Main owns full builds/suite and acceptance. Current main tooling is merged, but
+c009 stays explicitly **armlink5-inline-branchnop-v2 / none**; no model transition.
+Corrected current G3 r5 exits0. Three byte mismatches remain.
+No pre-review PASS is claimed.
 
 `config/candidates/c009.json` lists **678 units / 678 functions / 57,212 target
 bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:
@@ -30,9 +30,10 @@ results are not silently admitted into this default-model checkpoint.
 
 * The full final MATCH sweep measured all **801 required units / 805 functions**:
   **772 MATCH units, 16 compiler-failure units, 13 byte-mismatch units**.
-  All sixteen compilation failures subsequently MATCH after canonical repairs
-  (`compile-repair-r1.json`, `compile-repair-r2.json`). Earlier failed results stay
-  intact, and the changed headers require a fresh final whole-scope sweep.
+  All sixteen compilation failures subsequently MATCH after canonical repairs.
+  Nine non-counter byte mismatches have scoped MATCH repairs; the original counted
+  loop closes the tenth after Main's faithful-control-flow ruling below. All failed
+  results remain intact, and changed headers require a fresh final whole-scope sweep.
   Native/signature probes did not run because the dependent shell stopped at matching.
 
 * The stable merged-tree `interfaces-stable-r1.json` exited **1**: 2,206 units,
@@ -41,9 +42,11 @@ results are not silently admitted into this default-model checkpoint.
   were fixed afterward, followed by the native reader correction/withdrawal below.
   Corrected stable `interfaces-stable-r2.json` exits **0**: 2,205 units,
   1,704 checked, zero disagreements, zero policy findings, 501 unchecked C++
-  and zero unchecked C. Its exact dry input snapshot is retained. Finalized Main
-  `bb60cd7` is merged and stable r3 also exits0. Later compilation repairs require
-  a new final gate on their changed-header tree.
+  and zero unchecked C. Its exact dry input snapshot is retained.
+  Current main f24fa0b is merged. Stable r4 also exits0 on the corrected headers:
+  2,204 units, 1,704 checked, zero disagreements/policy findings, 500 unchecked C++
+  and zero unchecked C. Restored-loop **r5 exits0**: **2,205 units, 1,704 checked,
+  zero disagreements/policy findings, 501 unchecked C++ and zero unchecked C**.
 
 * The intermediate whole-ledger `interfaces --allow-unchecked-cpp` remediation run
   exited **1**: 2,205 units, 1,705 checked, 48 disagreements, 28 inline-declaration
@@ -56,11 +59,11 @@ results are not silently admitted into this default-model checkpoint.
   Those c009-wide probes using c008-r2's reusable helpers remain unexercised.
 * The catalogue recheck intersection was `00214580` (MATCH, exit 0) and
   `00203810` (compile exit 2, then deferred on concrete owner-contract evidence).
-* Remaining byte mismatches: `00113c0c`, `0018ee88`, `001c1d4c`, `001865ec`,
-  `0011db78`, `0012ccd8`, `00141514`, `001c20e8`, `001eb1cc`, `001105c0`,
-  `001eb190`, `001c4494`, `0019eb24`. Four queue-tail shadow records incorrectly
-  extend the already-complete canonical CommandQueue. Other fixes require actual
-  width/offset/ABI provenance; no steering is admitted. Exact rows remain in HANDOFF.
+* Remaining byte mismatches: **`00113c0c`, `0018ee88`, `001c4494`**.
+  Canonical queue-tail shadows are removed; their actual field/width repairs MATCH.
+  Nine bounded natural error-check/early-return source forms did not close the
+  three remaining scheduling/register differences. Exact source/exit/receipt evidence
+  is preserved; do not change provider types or add steering for those bytes.
 * Final all-new/revised matching, complete argcheck adjudication and the seven-step
   pre-review have **not** run after these changes. No full build, suite, prepare,
   finalize, history edit or push was performed.
@@ -171,4 +174,16 @@ table remains external data; no read-method aliases or data credit are added.
 `native-reader-attempts-r1.json` preserves the initial missing-NW_RELEASE compile
 failure and successful corrected invocation. The frozen native headers and profiles
 are unchanged. This scoped success is not a final checkpoint-wide MATCH claim.
+
+## Original counted loop: mandatory qualification
+
+Main ruled `001c20e8`'s original counted backedge faithful, not added steering.
+The plain observed loop is restored and MATCHes all20 bytes (exit0), with no
+volatile, asm, artificial uses or register forcing. Its purpose remains unknown
+(delay or leftover loop), visibly `[INFERENCE]` in the source. The eventual
+pre-review and independent review row **must be QUALIFIED** for explicit adjudication.
+`counter-loop-ruling-r1.json`, `counter-loop-ruled-r1.json` and
+`pre-review-required-qualifications-r1.json` retain the ruling/evidence.
+The historical `interface-deferrals-r3.json` concern is superseded, not erased.
+
 

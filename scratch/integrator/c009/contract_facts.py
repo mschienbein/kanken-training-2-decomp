@@ -93,11 +93,38 @@ def enhanced(function: dict, blocks: list, successors: list, decoder, image,
             if previous != merged:
                 incoming[successor] = merged
                 queue.append(successor)
-    calls, memory = [], {}
+    calls, memory, accesses, returns, signed_shifts = [], {}, [], [], []
+    access_types = {
+        capstone.arm.ARM_INS_LDR: ("read", 32, False),
+        capstone.arm.ARM_INS_LDRB: ("read", 8, False),
+        capstone.arm.ARM_INS_LDRSB: ("read", 8, True),
+        capstone.arm.ARM_INS_LDRH: ("read", 16, False),
+        capstone.arm.ARM_INS_LDRSH: ("read", 16, True),
+        capstone.arm.ARM_INS_STR: ("write", 32, False),
+        capstone.arm.ARM_INS_STRB: ("write", 8, False),
+        capstone.arm.ARM_INS_STRH: ("write", 16, False),
+    }
     for index, initial in sorted(incoming.items()):
         state = initial.copy()
         for fact in blocks[index]:
-            event = transfer(instructions[fact.address], fact, state, image)
+            instruction = instructions[fact.address]
+            access = access_types.get(instruction.id)
+            if instruction.id in (capstone.arm.ARM_INS_VLDR, capstone.arm.ARM_INS_VSTR):
+                register = instruction.reg_name(instruction.operands[0].reg)
+                access = ("read" if instruction.id == capstone.arm.ARM_INS_VLDR else "write",
+                          64 if register.startswith("d") else 32, False)
+            if access is not None:
+                accesses.append({"site": ac.address(fact.address), "operation": access[0],
+                                 "bits": access[1], "signed_load": access[2],
+                                 "location": indirect.describe(ac.memory_value(fact, state))})
+            if instruction.id == capstone.arm.ARM_INS_ASR or any(
+                    op.shift.type == capstone.arm.ARM_SFT_ASR for op in instruction.operands):
+                signed_shifts.append(ac.address(fact.address))
+            event = transfer(instruction, fact, state, image)
+            if fact.flow == "return":
+                returns.append({"site": ac.address(fact.address),
+                                "registers": {reg: indirect.describe(state.get(reg))
+                                              for reg in ("r0", "r1", "s0")}})
             if event:
                 calls.append({"site": ac.address(event["site"]),
                               "target": ac.address(event["target"]) if event["target"] else None,
@@ -112,7 +139,13 @@ def enhanced(function: dict, blocks: list, successors: list, decoder, image,
             if isinstance(key, tuple) and key[0] == "memory":
                 memory[json.dumps(indirect.describe(key[1]), sort_keys=True)] = indirect.describe(value)
     return {"calls": calls, "storage": [{"location": json.loads(key), "value": value}
-                                        for key, value in sorted(memory.items())]}
+                                        for key, value in sorted(memory.items())],
+            "memory_accesses": accesses, "returns": returns,
+            "signed_right_shift_sites": signed_shifts,
+            "backedges": [{"from": ac.address(blocks[index][-1].address),
+                            "to": ac.address(blocks[target][0].address)}
+                           for index, targets in enumerate(successors)
+                           for target in targets if target <= index]}
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)

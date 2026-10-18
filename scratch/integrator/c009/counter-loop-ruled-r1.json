@@ -1,0 +1,26 @@
+{
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave18/func_001c20e8.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v2",
+    "--literal-model",
+    "none",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/c009/counter-loop-ruled-r1"
+  ],
+  "exit_code": 0,
+  "source": "src/wave18/func_001c20e8.cpp",
+  "source_sha256": "9bea731bc5c70b1691fd2f9cc7e72c15a5c51a337872889cd203d52f98b10328",
+  "output": "MATCH    func_001c20e8 @ 0x1c20e8 size 0x14/0x14\n",
+  "ruling": "scratch/integrator/c009/counter-loop-ruling-r1.json",
+  "review_verdict_required": "QUALIFIED"
+}

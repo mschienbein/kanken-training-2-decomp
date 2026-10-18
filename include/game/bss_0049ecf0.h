@@ -27,6 +27,12 @@ struct CommandResource {
     struct CommandResource *next;
 };
 
+struct CommandPatch {
+    unsigned reserved00[2];
+    unsigned pair_count;
+    unsigned reserved0c[3];
+};
+
 struct CommandQueue {
     unsigned id;
     unsigned char *base;
@@ -35,15 +41,16 @@ struct CommandQueue {
     unsigned committed_bytes;               /* 0x10 */
     unsigned committed_offset;
     struct Command *commands;
-    unsigned char reserved1c[4];
+    unsigned command_bytes;
     int count;
     int completed_count;
     int cursor;                             /* 0x28 */
-    unsigned flags;
-    unsigned state30;
-    unsigned state34;
+    int option;                             /* 0x2c; queried as an unsigned word */
+    unsigned captured_size;
+    struct CommandPatch *patch;
     void (*callback)(void);                  /* 0x38; no distinct argument prepared */
-    unsigned reserved3c;
+    unsigned char complete, flush;
+    unsigned char reserved3e[2];
     struct CommandQueue *next;
 };
 
@@ -80,6 +87,7 @@ extern "C" {
 
 extern void func_0012fb38(void);              /* lock the command mutex */
 extern void func_0012fb48(void);              /* unlock the command mutex */
+extern void func_0012ccd8(struct CommandQueue *queue, struct Command *command);
 
 #ifdef __cplusplus
 }

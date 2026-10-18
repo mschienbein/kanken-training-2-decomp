@@ -484,7 +484,8 @@ struct W10DrawingInput {
     unsigned char reserved89e[0x1a];
     unsigned char active;
     unsigned char finished;
-    unsigned char reserved8ba[6];
+    unsigned char reserved8ba[2];
+    float scale;
     float progress;
     int state;
     unsigned char reserved8c8[0x14];

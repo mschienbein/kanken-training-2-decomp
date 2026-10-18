@@ -1,38 +1,18 @@
 #include "game/functions.h"
 #include "game/bss_0049ecf0.h"
 
-struct CommandPatch;
-struct CommandQueueDetail {
-    unsigned id;
-    unsigned char *base;
-    unsigned capacity_bytes;
-    unsigned offset;
-    unsigned command_capacity;
-    unsigned committed_offset;
-    struct Command *commands;
-    unsigned command_bytes;
-    int count;
-    int completed_count;
-    int cursor;
-    unsigned capacity;
-    unsigned captured_size;
-    struct CommandPatch *patch;
-    unsigned reserved38;
-    unsigned char complete;
-    unsigned char flush;
-};
 extern unsigned char *data_00242fc8;
 
 
 void func_0019b574(unsigned parameter, unsigned *value)
 {
-    struct CommandQueueDetail *queue = (struct CommandQueueDetail *)bss_0049ecf0.writing;
+    struct CommandQueue *queue = bss_0049ecf0.writing;
     switch (parameter) {
     case 0x200:
-        *value = queue->capacity;
+        *value = queue->option;
         break;
     case 0x201:
-        *value = bss_0049ecf0.executing == (struct CommandQueue *)queue && bss_0049ecf0.pending;
+        *value = bss_0049ecf0.executing == queue && bss_0049ecf0.pending;
         break;
     case 0x202:
         queue->offset = data_00242fc8 - queue->base;
@@ -42,7 +22,7 @@ void func_0019b574(unsigned parameter, unsigned *value)
         *value = queue->count;
         break;
     case 0x204:
-        *value = queue->capacity_bytes;
+        *value = queue->capacity;
         break;
     case 0x205:
         *value = queue->command_bytes;
@@ -57,7 +37,7 @@ void func_0019b574(unsigned parameter, unsigned *value)
         *value = (unsigned)data_00242fc8;
         break;
     case 0x209:
-        *value = queue->command_capacity;
+        *value = queue->committed_bytes;
         break;
     case 0x20a:
         *value = queue->cursor;
