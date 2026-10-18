@@ -116,6 +116,7 @@ extern struct ResourceEntry *func_0015d798(struct ResourceEntry *entry, int scre
 extern void func_00121a88(struct ExpHeap *heap, void *allocation);
 extern struct HeapArena bss_00495ad0;
 extern void func_00193a6c(struct ManagedExpHeap *heap, void *allocation);
+extern struct AllocatorBase *func_00183234(struct AllocatorBase *allocator);
 extern struct RuntimeTypeInfo data_00242da8;
 extern struct RuntimeTypeInfo data_00242e2c;
 extern struct RuntimeTypeInfo data_00243494;

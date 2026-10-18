@@ -1,6 +1,48 @@
 # C009 recovered integration handoff
 
-## Finalized predecessor merged at d4f52d9
+## Full MATCH coverage recorded; compilation repair slice closes
+
+At `c43d995`, finalized-predecessor **G3 r3 exits 0**: 2,205 units,
+1,704 checked, zero disagreements/policy findings, 501 unchecked C++ and
+zero unchecked C. The sequential final match sweep then measured **all
+801 required units / 805 functions**, explicitly v2/none and `--show 0`:
+**772 units MATCH, 16 compiler failures, 13 byte mismatches**. The shell
+stopped there, so native/signature probes did **not** run. Exact per-unit
+commands, exits, source hashes and failure output remain in `final-match-r1.json`.
+
+All **16 compiler failures** now have scoped MATCH evidence:
+`compile-repair-r1.json` records 14 MATCH plus two remaining mismatches;
+`compile-repair-r2.json` records both corrected units MATCH. Fixes reuse actual
+canonical members/prototypes: service flag bytes, nested heap/material/buffer
+owners, SoundTrack child/task, and the real WorkerThread mutex/stop fields.
+No DispatcherWorker or SceneChild shadow was restored. Playback original facts
+prove transition +0x34, count +0x9c, handle +0x98, and tail slot byte offset
+0x20 (`callback8`), not slot2. The signed-byte IPC wrapper retains signed storage
+through a standard unsigned-char object-representation view of its raw-byte output.
+Its original uninitialized-error-path bug stays explicit.
+
+These repairs change four headers, so **neither the earlier 772 MATCH rows nor
+G3 r3 is a final verdict on the later changed-header tree**. Thirteen original
+byte mismatches remain: `00113c0c`, `0018ee88`, `001c1d4c`, `001865ec`,
+`0011db78`, `0012ccd8`, `00141514`, `001c20e8`, `001eb1cc`, `001105c0`,
+`001eb190`, `001c4494`, `0019eb24`. HANDOFF retains every exact row/output.
+The four ExtendedCommandQueue/W19aWritableQueue shadows incorrectly append a
+prefix onto the now-complete 0x44-byte CommandQueue and need canonical migration.
+The other mismatches require real width/offset/ABI evidence; no dead/register/
+volatile steering or guessed aliases are permitted.
+
+Scope remains **678 new / 57,212 B**, **123 revised units / 127 functions**,
+dry **2,205 / 2,279**, required union **801 / 805**. The requested
+`scratch/integrator/c009/candidates.json` exists but is **not review-ready**.
+After the remaining repairs: fresh stable G3 and complete MATCH, native/signature/
+co-inclusion/indirect/forwarding sweeps, full argcheck adjudication and seven-step
+pre-review are still required. `names-review-r1.json` inventories all 30 c009
+name additions, zero modified bindings and two removed obsolete descriptor aliases.
+Main currently holds the isolated heavy slot; wait for its explicit
+**"slot returned"** before another full audit/build/suite. Static work is allowed.
+
+
+## Historical finalized predecessor merge at d4f52d9
 
 Merged Main **`bb60cd7`** at **`d4f52d963cae908de5207bb320b2e7cee3a6299a`**.
 C008-r3 is finalized, sequence 8, with **1,527 units / 1,601 accepted functions**.

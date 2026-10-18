@@ -2,5 +2,5 @@
 
 void func_0012fb64(void)
 {
-    data_00242a50.reserved07[1] = 1;
+    data_00242a50.flag_08 = 1;
 }
