@@ -478,7 +478,7 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
-## Catalogue recovery safeguards (candidate v10-r3)
+## Catalogue recovery safeguards (candidate v10-r4)
 
 `tools/analyze.py catalogue --out X` is the single candidate generator. For the
 reviewed image it includes the immutable, image/extent/ISA-bound classification
@@ -572,8 +572,12 @@ V10's bounded closure rules live in `tools/catalogue_closure.py`:
   creating data ownership; an incomplete inventory is never proof of no reference.
   Decoded explicit/implicit writes, operand WRITE flags, register pairs/lists and
   every writeback base invalidate tracked values before any conditional exit.
-  BL/BLX and returning SVC conservatively invalidate r0-r3/r12/LR. Unmodeled
-  destination effects discard facts rather than retaining stale image pointers;
+  Ordinary BL/BLX invalidate r0-r3/r12/LR while preserving callee-saved facts.
+  Raw SVC uses a separately cited service/output table, never the ordinary-call
+  ABI: complete documented services invalidate r0-r7/IP/LR/flags conservatively;
+  unknown numbers, unlisted services and incomplete outputs discard every fact.
+  This includes QueryMemory r4/r5 and conditional SVC. No flag fact proves a
+  predicate. Unmodeled destination effects likewise discard stale pointer facts;
   shifted MOV values are not mistaken for unshifted copies. Fixed-copy terminals
   must be non-flag-setting, unshifted ordinary LR returns.
 - A frozen original-entry/behavior witness can join only unprotected, single-entry,
@@ -589,7 +593,7 @@ three v9 witnesses. Their finite 90-cell mismatch grid is **not** universal
 impossibility of C, nor proof that raw r0-r3 syscall interfaces are unrepresentable.
 They remain separate from topology exclusions and ordinary recovered leaves.
 
-The v10-r3 candidate remains partial: 360 unknown bytes in 36 intervals and ten
+The v10-r4 SVC checkpoint remains partial: 360 unknown bytes in 36 intervals and ten
 unresolved anomalies. Its separate licensed Arm Compiler 5.04u2 b82 r6 evidence
 classifies 68 exact whole-owner library bodies (9,284 B), with no geometry/entry
 changes. All 206 protected tiny-body coincidences remain flags only; all 87
@@ -597,8 +601,9 @@ vendor-backed proposed names remain metadata, with zero canonical names applied.
 Wrong image/extent/ISA/digest, unsupported same-byte aliases, duplicate identities
 and protected-coincidence collisions are rejected. Prior authenticated runtime
 records remain unchanged; vendor naming does not close unknown pools or dispatch.
-`docs/catalogue/REPORT-v10-r3.md` records the discrete register-effect repair,
-separate library proposal, every changed owner, exact deltas and focused checks. The prior
+`docs/catalogue/REPORT-v10-r4.md` records the isolated raw-kernel ABI repair and
+the reproducible 293-site / 25-service audit. `docs/catalogue/REPORT-v10-r3.md`
+preserves the earlier register-effect, library-classification and residue history.
 `docs/catalogue/REPORT-v10-r2.md` preserves the earlier guard history;
 `docs/catalogue/REPORT-v10.md` preserves the original interval/accounting history.
 Neither unresolved data nor exceptional dispatch is hidden as padding.

@@ -237,9 +237,68 @@ _READ_CLASSES = {value for name, value in vars(arm).items() if name.startswith((
     "ARM_INS_SWP", "ARM_INS_RFE"))}
 
 
-_CALL_OR_SVC_CLOBBERS = {
+_CALL_CLOBBERS = {
     arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2, arm.ARM_REG_R3, arm.ARM_REG_R12, arm.ARM_REG_LR,
 }
+_RAW_SVC_CLOBBERS = _CALL_CLOBBERS | {
+    *(getattr(arm, f"ARM_REG_R{register}") for register in range(4, 8)),
+    arm.ARM_REG_CPSR, arm.ARM_REG_APSR, arm.ARM_REG_APSR_NZCV,
+}
+# Raw consecutive-register results, not the userland pointer-output signatures.
+# Kernel_ABI supplies the raw rule and QueryMemory r0-r5; the pinned libctru
+# wrappers corroborate the remaining marshalled outputs. All documented services
+# still discard r0-r7/IP/LR/flags conservatively, not merely their listed results.
+_RAW_SVC_SOURCES = [
+    "https://www.3dbrew.org/w/index.php?title=Kernel_ABI&oldid=23691#System_calls",
+    "https://www.3dbrew.org/wiki/SVC#System_calls",
+    "https://github.com/devkitPro/libctru/blob/cb9d682f652e210824d5ccb3a94468dba207978e/libctru/source/svc.s",
+]
+_RAW_SVC_CONTRACTS = {
+    0x01: ("ControlMemory", (0, 1)),
+    0x02: ("QueryMemory", (0, 1, 2, 3, 4, 5)),
+    0x03: ("ExitProcess", ()),  # Nonreturning; this does not extend CFG inference.
+    0x08: ("CreateThread", (0, 1)),
+    0x09: ("ExitThread", ()),
+    0x0A: ("SleepThread", ()),
+    0x14: ("ReleaseMutex", (0,)),
+    0x17: ("CreateEvent", (0, 1)),
+    0x18: ("SignalEvent", (0,)),
+    0x19: ("ClearEvent", (0,)),
+    0x1E: ("CreateMemoryBlock", (0, 1)),
+    0x1F: ("MapMemoryBlock", (0,)),
+    0x20: ("UnmapMemoryBlock", (0,)),
+    0x21: ("CreateAddressArbiter", (0, 1)),
+    0x22: ("ArbitrateAddress", (0,)),
+    0x23: ("CloseHandle", (0,)),
+    0x24: ("WaitSynchronization1", (0,)),
+    0x25: ("WaitSynchronizationN", (0, 1)),
+    0x27: ("DuplicateHandle", (0, 1)),
+    0x28: ("GetSystemTick", (0, 1)),
+    0x29: ("GetHandleInfo", (0, 1, 2)),
+    0x2A: ("GetSystemInfo", (0, 1, 2)),
+    0x2B: ("GetProcessInfo", (0, 1, 2)),
+    0x2C: ("GetThreadInfo", (0, 1, 2)),
+    0x2D: ("ConnectToPort", (0, 1)),
+    0x32: ("SendSyncRequest", (0,)),
+    0x35: ("GetProcessId", (0, 1)),
+    0x3C: ("Break", None),  # Debugger-dependent continuation; no complete output contract.
+}
+
+
+def _raw_svc_service(instruction) -> int | None:
+    operands = instruction.operands
+    return (operands[0].imm if len(operands) == 1 and operands[0].type == arm.ARM_OP_IMM
+            and 0 <= operands[0].imm <= 0xFF else None)
+
+
+def _raw_svc_writes(instruction) -> set[int] | None:
+    contract = _RAW_SVC_CONTRACTS.get(_raw_svc_service(instruction))
+    if contract is None or contract[1] is None:
+        # Unknown service/outputs: refuse all surviving address facts, including
+        # callee-saved ones. An ordinary-call convention cannot fill this gap.
+        return None
+    return _RAW_SVC_CLOBBERS | {getattr(arm, f"ARM_REG_R{register}") for register in contract[1]}
+
 _SINGLE_DEST_WRITES = {getattr(arm, f"ARM_INS_{name}") for name in (
     "ADC", "ADD", "AND", "ASR", "BIC", "CLZ", "EOR", "LSL", "LSR", "MLA", "MOV", "MOVT", "MOVW",
     "MUL", "MVN", "ORR", "ROR", "RRX", "RSB", "RSC", "SBC", "SUB", "REV", "REV16", "REVSH",
@@ -265,10 +324,13 @@ def _register_writes(instruction, *, call: bool = False) -> set[int] | None:
     registers = [operand.reg for operand in operands if operand.type == arm.ARM_OP_REG]
     writes = set(instruction.regs_write) | set(instruction.regs_access()[1])
     writes.update(operand.reg for operand in operands if operand.type == arm.ARM_OP_REG and operand.access & CS_AC_WRITE)
-    if call or instruction.id == arm.ARM_INS_SVC:
-        # Raw result contracts: include/ctr/svc.h (notably GetSystemTick r0/r1).
-        # Model the conservative core call-clobber set for every returning SVC.
-        writes.update(_CALL_OR_SVC_CLOBBERS)
+    if instruction.id == arm.ARM_INS_SVC:
+        effects = _raw_svc_writes(instruction)
+        if effects is None:
+            return None
+        writes.update(effects)
+    elif call:
+        writes.update(_CALL_CLOBBERS)
     elif instruction.id in _BLOCK_READ_MODES:
         minimum = 1 if _BLOCK_READ_MODES[instruction.id] == "pop" else 2
         if len(registers) < minimum or any(operand.type != arm.ARM_OP_REG for operand in operands):
@@ -361,7 +423,8 @@ def _instruction_reads(instruction, before: dict, site: int, pc: int) -> tuple[l
 
 
 def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] | None = None,
-                    include_reads: bool = True, read_vetoes: list[dict] | None = None) -> list[dict]:
+                    include_reads: bool = True, read_vetoes: list[dict] | None = None,
+                    raw_svc_sites: list[dict] | None = None) -> list[dict]:
     """Enumerate actual fixed-width reads from locally proved image addresses.
 
     ADR alone is not a read. Values do not flow through a join, conditional
@@ -398,6 +461,16 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
             ins = analyzer.decode(site, isa)
             operands = instruction.operands
             writes = _register_writes(instruction, call=ins.call)
+            if raw_svc_sites is not None and instruction.id == arm.ARM_INS_SVC:
+                service = _raw_svc_service(instruction)
+                contract = _RAW_SVC_CONTRACTS.get(service)
+                raw_svc_sites.append({
+                    "function": function["address"], "site": site, "isa": isa,
+                    "service": service, "conditional": ins.conditional,
+                    "name": contract[0] if contract else None,
+                    "documented_outputs": list(contract[1]) if contract and contract[1] is not None else None,
+                    "invalidation": "all_address_facts" if writes is None else "r0-r7_ip_lr_flags",
+                })
             before = dict(known)
             if writes is None:
                 known.clear()
@@ -578,7 +651,8 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
     code = [(first, end) for function in functions for first, end in function["code_ranges"]]
     entries = {entry["address"] for function in functions for entry in function["entries"]}
     read_vetoes = []
-    footprints = read_footprints(catalogue, analyzer, read_vetoes=read_vetoes)
+    raw_svc_sites = []
+    footprints = read_footprints(catalogue, analyzer, read_vetoes=read_vetoes, raw_svc_sites=raw_svc_sites)
     needed_sites = {row["address"] for row in catalogue["anomalies"] if row["issue"] == "literal_outside_function"}
     unknown = [row for row in catalogue["ranges"] if row["kind"] == "unknown"]
     accepted_reads = [row for row in footprints if (
@@ -668,7 +742,8 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
     catalogue["anomalies"] = retained
     catalogue["closure_evidence"] = {"closed_leaves": leaves, "read_footprints": accepted_reads,
                                    "read_vetoes": read_vetoes, "owner_merges": owner_merges,
-                                   "alignment": alignment, "extent_explanations": explained}
+                                   "alignment": alignment, "extent_explanations": explained,
+                                   "raw_svc_sites": raw_svc_sites}
     stats = catalogue["stats"]
     stats.update({"functions": len(functions),
                   "functions_by_isa": dict(sorted(Counter(function["isa"] for function in functions).items())),
@@ -766,7 +841,7 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     evidence["classification_records"] = evidence.get("classification_records", []) + revision["classification_records"]
     evidence["library_identification"] = library
     evidence["library_provenance"] = revision["provenance"]
-    evidence["revision"] = revision["revision"]
+    evidence["revision"] = "catalogue-v10-r4"
     inputs[str(revision_path.relative_to(root))] = hashlib.sha256(revision_path.read_bytes()).hexdigest()
     return evidence, prior, inputs
 
@@ -889,4 +964,15 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
         "authenticated_prior_owners_preserved": len(prior_authentication),
         "protected_coincidences_flag_only": len(library["protected_collisions"]),
         "proposed_names": len(library["names_proposal"]["symbols"]), "canonical_names_applied": 0,
+    }
+    candidate["revision_review"]["raw_svc_contracts"] = {
+        "sources": _RAW_SVC_SOURCES,
+        "documented_service_policy": "Invalidate r0-r7, IP, LR and flags, unioned with decoded writes and complete documented outputs.",
+        "unknown_service_policy": "Unknown number, unlisted service or incomplete output contract discards every address fact; no AAPCS preservation assumption.",
+        "flags": "No condition-flag value is propagated or used to prove a predicate; CPSR/APSR/NZCV are explicitly invalidated.",
+        "services": [
+            {"service": service, "name": name, "documented_outputs": list(outputs) if outputs is not None else None,
+             "owned_sites": sum(row["service"] == service for row in closure["raw_svc_sites"])}
+            for service, (name, outputs) in sorted(_RAW_SVC_CONTRACTS.items())
+        ],
     }

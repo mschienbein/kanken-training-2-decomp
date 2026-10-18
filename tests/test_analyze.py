@@ -1421,7 +1421,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v10-r3")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v10-r4")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v10-r4")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
@@ -1756,6 +1757,19 @@ class CatalogueTests(unittest.TestCase):
         self.assertEqual(len(first["closure_evidence"]["closed_leaves"]), 42)
         self.assertEqual(sum(row["end"] - row["start"] for row in first["closure_evidence"]["closed_leaves"]), 2560)
         self.assertEqual(len(first["pc_relative_pointer_witnesses"]), 3)
+        raw_sites = first["closure_evidence"]["raw_svc_sites"]
+        expected_services = {0x01: 1, 0x02: 1, 0x03: 3, 0x08: 1, 0x09: 1, 0x0A: 5,
+                             0x14: 1, 0x17: 1, 0x18: 5, 0x19: 5, 0x1E: 1, 0x1F: 3,
+                             0x20: 2, 0x21: 1, 0x22: 1, 0x23: 91, 0x24: 23, 0x25: 1,
+                             0x27: 1, 0x28: 23, 0x2B: 1, 0x2D: 1, 0x32: 118, 0x35: 1, 0x3C: 1}
+        self.assertEqual(len(raw_sites), 293)
+        self.assertEqual({service: sum(row["service"] == service for row in raw_sites)
+                          for service in {row["service"] for row in raw_sites}}, expected_services)
+        self.assertTrue(all(row["invalidation"] == ("all_address_facts" if row["service"] == 0x3C
+                                                   else "r0-r7_ip_lr_flags") for row in raw_sites))
+        self.assertTrue(all(row["documented_outputs"] == [0, 1, 2, 3, 4, 5]
+                            for row in raw_sites if row["service"] == 0x02))
+        self.assertTrue(first["revision_review"]["raw_svc_contracts"]["sources"])
         library_review = first["revision_review"]["library_identification"]
         self.assertEqual((library_review["proposed_classifications"], library_review["applied_classifications"],
                           library_review["applied_extent_bytes"]), (68, 68, 9284))
@@ -1858,6 +1872,77 @@ class CatalogueClosureTests(unittest.TestCase):
                     row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
                     self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
                     self.assertFalse(any(row["site"] == BASE + 8 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_query_memory_raw_r4_r5_outputs_never_own_stale_pointees(self) -> None:
+        # The sealed review's four ABI-preserving hand-encoded callers, unchanged.
+        for register in (4, 5):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE92D4070, 0xE3A02000, 0xE59F000C | register << 12, 0xE3520001,
+                        condition << 28 | 0x0F000002, 0xE1D060F0 | register << 16, 0xE8BD8070,
+                        BASE + 40, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 40 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    self.assertFalse(any(row["site"] == BASE + 20
+                                         for row in result["closure_evidence"]["read_footprints"]))
+                    self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+
+    def test_raw_svc_table_and_unknown_contracts_do_not_use_aapcs_preservation(self) -> None:
+        arm = analyze.arm
+        raw_clobbers = {getattr(arm, f"ARM_REG_R{register}") for register in range(8)} | {
+            arm.ARM_REG_R12, arm.ARM_REG_LR, arm.ARM_REG_CPSR, arm.ARM_REG_APSR, arm.ARM_REG_APSR_NZCV}
+        for service, (_, outputs) in catalogue_closure._RAW_SVC_CONTRACTS.items():
+            image, layout = fixture([0xEF000000 | service, 0xE12FFF1E])
+            decoded = analyze.Analyzer(image, layout).detailed(BASE)
+            with self.subTest(service=service):
+                writes = catalogue_closure._register_writes(decoded)
+                if outputs is None:
+                    self.assertIsNone(writes)
+                else:
+                    self.assertLessEqual(raw_clobbers, writes)
+                    self.assertLessEqual({getattr(arm, f"ARM_REG_R{register}") for register in outputs}, writes)
+        for operands in ([], [SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R12, access=1)],
+                         [SimpleNamespace(type=arm.ARM_OP_IMM, imm=0x7F)],
+                         [SimpleNamespace(type=arm.ARM_OP_IMM, imm=0x100)],
+                         [SimpleNamespace(type=arm.ARM_OP_IMM, imm=-1)]):
+            with self.subTest(operands=operands):
+                svc = SimpleNamespace(id=arm.ARM_INS_SVC, operands=operands, regs_write=[],
+                                      regs_access=lambda: ([], []), writeback=False)
+                self.assertIsNone(catalogue_closure._register_writes(svc, call=True))
+
+    def test_other_raw_results_and_unknown_services_fail_closed_for_every_predicate(self) -> None:
+        for service in (0x1E, 0x2A, 0x2B, 0x3C, 0x7F):
+            registers = range(12) if service in (0x3C, 0x7F) else range(8)
+            for register in registers:
+                for condition in range(15):
+                    with self.subTest(service=service, register=register, condition=condition):
+                        image, layout = fixture([
+                            0xE92D4FF0, 0xE3A02000, 0xE59F000C | register << 12, 0xE3520001,
+                            condition << 28 | 0x0F000000 | service,
+                            0xE1D060F0 | register << 16, 0xE8BD8FF0, BASE + 40,
+                            0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                        result = analyze.build_catalogue(image, layout, closure={})
+                        row = next(row for row in result["ranges"] if row["start"] <= BASE + 40 < row["end"])
+                        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                        self.assertFalse(any(row["site"] == BASE + 20
+                                             for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_ordinary_calls_still_preserve_r4_r7_pointer_facts(self) -> None:
+        for register in range(4, 8):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE92D40F0, 0xE59F000C | register << 12, 0xE3500000 | register << 16,
+                        branch(BASE + 12, BASE + 32, link=True, condition=condition),
+                        0xE5901000 | register << 16, 0xE8BD80F0, BASE + 48, 0xFFFFFFFF,
+                        0xE3A00000, 0xE12FFF1E, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 48 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+                    self.assertTrue(any(row["site"] == BASE + 16
+                                        for row in result["closure_evidence"]["read_footprints"]))
 
     def test_exclusive_pair_write_does_not_leave_a_stale_pointer(self) -> None:
         # LDREXD writes both r0/r1; Capstone 5's aggregate writes/access flags omit them.
