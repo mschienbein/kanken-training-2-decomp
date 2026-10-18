@@ -2564,9 +2564,10 @@ def main(argv: list[str] | None = None) -> int:
                 raise ValueError("closure evidence image differs from its parent")
             inputs.update(closure_inputs)
             records = records + closure_evidence.get("classification_records", [])
-            evidence = {**evidence, "revision": "catalogue-v10",
+            evidence = {**evidence, "revision": closure_evidence["revision"],
                         "literal_encodings": evidence.get("literal_encodings", []) + closure_evidence["literal_encodings"],
-                        "provenance": {**evidence["provenance"], "catalogue_v10": closure_evidence["provenance"]}}
+                        "provenance": {**evidence["provenance"], "catalogue_v10": closure_evidence["provenance"],
+                                       "catalogue_v10_r3": closure_evidence["library_provenance"]}}
             # A reviewed reclassification cannot silently outrank an accepted or
             # in-flight complete record. Explicit classification inputs instead
             # reach build_catalogue's final invariant and fail on any conflict.
@@ -2593,7 +2594,7 @@ def main(argv: list[str] | None = None) -> int:
                    for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v10",
+            "revision": "catalogue-v10-r3",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

@@ -485,7 +485,8 @@ reviewed image it includes the immutable, image/extent/ISA-bound classification
 records, reviewed UTF-16 object references, the section-authenticated `.init_array`
 table and the immutable protected-checkpoint blob list in
 `research/catalogue_v9_r2_evidence.json`, together with the next proposal's
-`research/catalogue_v10_evidence.json`. V10 pins the adopted v9-r2 baseline by
+`research/catalogue_v10_evidence.json` and the digest-bound child
+`research/catalogue_v10_r3_evidence.json`. V10 pins the adopted v9-r2 baseline by
 immutable Git blob and separately preserves the original v9 proposal's complete
 entry/identity metadata. It recomputes ownership, anomalies, per-old-range accounting
 and pointer evidence. The output records source/input hashes; neither output path
@@ -588,9 +589,16 @@ three v9 witnesses. Their finite 90-cell mismatch grid is **not** universal
 impossibility of C, nor proof that raw r0-r3 syscall interfaces are unrepresentable.
 They remain separate from topology exclusions and ordinary recovered leaves.
 
-The v10-r3 guard checkpoint remains partial: 360 unknown bytes in 36 intervals and
-ten unresolved anomalies. `docs/catalogue/REPORT-v10-r3.md` records register-effect
-class closure, exact real-image deltas and focused verification. The prior
+The v10-r3 candidate remains partial: 360 unknown bytes in 36 intervals and ten
+unresolved anomalies. Its separate licensed Arm Compiler 5.04u2 b82 r6 evidence
+classifies 68 exact whole-owner library bodies (9,284 B), with no geometry/entry
+changes. All 206 protected tiny-body coincidences remain flags only; all 87
+vendor-backed proposed names remain metadata, with zero canonical names applied.
+Wrong image/extent/ISA/digest, unsupported same-byte aliases, duplicate identities
+and protected-coincidence collisions are rejected. Prior authenticated runtime
+records remain unchanged; vendor naming does not close unknown pools or dispatch.
+`docs/catalogue/REPORT-v10-r3.md` records the discrete register-effect repair,
+separate library proposal, every changed owner, exact deltas and focused checks. The prior
 `docs/catalogue/REPORT-v10-r2.md` preserves the earlier guard history;
 `docs/catalogue/REPORT-v10.md` preserves the original interval/accounting history.
 Neither unresolved data nor exceptional dispatch is hidden as padding.

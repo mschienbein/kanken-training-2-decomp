@@ -688,6 +688,44 @@ def close_catalogue(catalogue: dict, analyzer, evidence: dict, protected: dict[i
     stats["closed_graph_absorbed_owners"] = sum(len(row["legacy_owners"]) for row in owner_merges)
 
 
+def _validate_library_evidence(records: list[dict], library: dict, image_sha256: str) -> None:
+    """Check frozen identity/alias contracts, not reinterpret a byte coincidence."""
+    owners = {row["address"]: row for row in library["authenticated_owners"]}
+    if len(owners) != len(library["authenticated_owners"]):
+        raise ValueError("duplicate authenticated library owner")
+    if any(not row["authenticated"] or not row["whole_body_identical"] for row in owners.values()):
+        raise ValueError("unresolved byte coincidences are not authenticated library owners")
+    flags = library["protected_collisions"]
+    if any(row["authenticated"] for row in flags):
+        raise ValueError("protected library coincidences must remain flag-only")
+    flagged = {row["address"] for row in flags}
+    if owners.keys() & flagged:
+        raise ValueError("protected C coincidences cannot supply authenticated identities or proposed names")
+    if len({row["address"] for row in records}) != len(records):
+        raise ValueError("duplicate library classification")
+    for record in records:
+        owner = owners.get(record["address"])
+        witness = record.get("library_witness", {})
+        digest = record.get("original_extent_sha256")
+        if record["address"] in flagged:
+            raise ValueError("protected C coincidence cannot become a library classification")
+        if (record.get("kind") != "library" or record.get("basis") != "known_library"
+                or record.get("image_sha256") != image_sha256 or owner is None
+                or not owner["authenticated"] or not owner["whole_body_identical"]
+                or (owner["size"], owner["isa"]) != (record["size"], record["isa"])
+                or not isinstance(digest, str) or len(digest) != 64
+                or witness.get("image_body_sha256") != digest):
+            raise ValueError("library proposal lacks a complete image/extent/ISA-bound authenticated identity")
+        aliases = {name for group in owner["selected_alias_groups"] for name in group}
+        if witness.get("symbol") not in aliases:
+            raise ValueError("library witness symbol has no same-object alias evidence")
+    for name, binding in library["names_proposal"]["symbols"].items():
+        owner = owners.get(binding["address"])
+        if (owner is None or not owner["authenticated"] or not owner["whole_body_identical"]
+                or name not in {alias for group in owner["selected_alias_groups"] for alias in group}):
+            raise ValueError("proposed library name has no authenticated same-object definition")
+
+
 def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     """Load immutable metadata witnesses, never changing author directories."""
     path = root / "research/catalogue_v10_evidence.json"
@@ -717,6 +755,19 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
             raise ValueError("closure earlier proposal differs from its frozen metadata")
         evidence["_earlier_catalogue"] = json.loads(payload)
         inputs[str(earlier_path.relative_to(root))] = descriptor["sha256"]
+    revision_path = root / "research/catalogue_v10_r3_evidence.json"
+    revision = json.loads(revision_path.read_bytes())
+    descriptor = revision["parent_evidence"]
+    if (root / descriptor["path"] != path or descriptor["sha256"] != inputs[str(path.relative_to(root))]
+            or revision["image_sha256"] != evidence["image_sha256"]):
+        raise ValueError("v10-r3 evidence differs from its frozen parent/image")
+    library = revision["library_identification"]
+    _validate_library_evidence(revision["classification_records"], library, revision["image_sha256"])
+    evidence["classification_records"] = evidence.get("classification_records", []) + revision["classification_records"]
+    evidence["library_identification"] = library
+    evidence["library_provenance"] = revision["provenance"]
+    evidence["revision"] = revision["revision"]
+    inputs[str(revision_path.relative_to(root))] = hashlib.sha256(revision_path.read_bytes()).hexdigest()
     return evidence, prior, inputs
 
 
@@ -820,3 +871,22 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
             "revision": earlier["revision"], "catalogue_sha256": earlier["source_catalogue_sha256"],
             "unknown_accounting": unknown, "anomaly_accounting": anomalies,
         }
+    library = evidence["library_identification"]
+    for row in library["authenticated_owners"]:
+        function = current.get(row["address"])
+        if function is None or (function["size"], function["isa"]) != (row["size"], row["isa"]):
+            raise ValueError("authenticated library evidence no longer matches the candidate extent/ISA")
+    prior_authentication = [row for row in library["prior_classification_authentication"] if row["authenticated"]]
+    for row in prior_authentication:
+        function = current.get(row["address"])
+        if function is None or (function["size"], function["isa"], function["kind"]) != (row["size"], row["isa"], row["kind"]):
+            raise ValueError("supplemental vendor authentication cannot replace prior ownership/provenance")
+    proposed = [row for row in evidence["classification_records"] if row["kind"] == "library"]
+    applied = [row for row in proposed if current[row["address"]].get("classification_evidence") == row]
+    candidate["revision_review"]["library_identification"] = {
+        **library, "proposed_classifications": len(proposed), "applied_classifications": len(applied),
+        "applied_extent_bytes": sum(row["size"] for row in applied),
+        "authenticated_prior_owners_preserved": len(prior_authentication),
+        "protected_coincidences_flag_only": len(library["protected_collisions"]),
+        "proposed_names": len(library["names_proposal"]["symbols"]), "canonical_names_applied": 0,
+    }
