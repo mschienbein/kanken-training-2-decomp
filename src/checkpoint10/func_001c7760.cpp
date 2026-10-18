@@ -4,20 +4,12 @@
  * sources/libraries/gfx/res/gfx_ResTextureMapper.cpp, SetupTexture.
  * Native wrappers and std::pair replace the earlier local ABI approximations.
  */
-#include <preinclude.h>
-#include <nw/gfx/res/gfx_ResTexture.h>
-#include <nw/gfx/res/gfx_ResGraphicsFile.h>
+#include "game/texture_resource.h"
 #include <utility>
 
-/* INTEGRATOR: move to include/game/texture_resource.h. GetReferenceTextureTarget
- * identity is [INFERENCE]; original target and native pair ABI are witnessed
- * by this natural caller. No mangled alias is proposed. */
-extern "C" {
-nw::gfx::Result func_001c74e8(nw::gfx::res::ResTexture *, nw::os::IAllocator *,
-    nw::gfx::res::ResGraphicsFile);
-std::pair<nw::gfx::res::ResTexture, bool> func_001c7fa0(
-    nw::gfx::res::ResReferenceTexture, nw::gfx::res::ResGraphicsFile);
-}
+/* GetReferenceTextureTarget is the actual canonical native definition at
+ * 001c7fa0. Its hash-bound MATCH and the native declaration establish this
+ * pair-return ABI; historical spelling remains [INFERENCE]. */
 
 extern "C" nw::gfx::Result func_001c7760(nw::os::IAllocator *allocator,
     nw::gfx::res::ResTexture texture, nw::gfx::res::ResGraphicsFile graphicsFile)
@@ -34,7 +26,7 @@ extern "C" nw::gfx::Result func_001c7760(nw::os::IAllocator *allocator,
                 exists = true;
             } else {
                 std::pair<ResTexture, bool> resolution;
-                resolution = func_001c7fa0(reference, graphicsFile);
+                resolution = nw::gfx::res::GetReferenceTextureTarget(reference, graphicsFile);
                 if (resolution.second) {
                     setupTexture = resolution.first;
                     exists = true;

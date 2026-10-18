@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/collect.py",
+    "--dest",
+    "src/checkpoint11",
+    "--candidates",
+    "config/candidates/c011.json",
+    "scratch/integrator/c011/COLLECT-INPUT-r1.json"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 1.4967360496520996,
+  "stdout": "taken: 14 units, 16 functions -> config/candidates/c011.json\nrefused: /home/michael/code/kanken-training-2-decomp/scratch/authors/tu876/src/func_001d4e2c.cpp: armcc failed (1) on func_001d4e2c.cpp:\nrefused: scratch/integrator/c011/canonical-inputs/func_00164b34.cpp: unresolved symbol '_ZN13PaneIndexListC2Eiz' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+  "stderr": "",
+  "selected_functions": 18,
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  }
+}

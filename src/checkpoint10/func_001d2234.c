@@ -1,11 +1,7 @@
 /* [INFERENCE] Descriptive type, matching the prior wrapper candidate
  * scratch/authors/w18e/src/func_001d222c.c. The wrapper selects linked;
  * this body clears both sides of that relationship. */
-struct LinkedView {
-    struct LinkedView *peer;
-    unsigned char reserved04[0x114];
-    struct LinkedView *linked;
-};
+#include "game/linked_owners.h"
 
 void func_001d2234(struct LinkedView *view)
 {

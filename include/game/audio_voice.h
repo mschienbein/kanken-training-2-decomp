@@ -253,6 +253,8 @@ struct TaskPool;
 extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
+extern void func_001d9178(struct AudioVoice *voice, int increment);
+extern void func_001d9530(struct AudioVoice *voice);
 extern void func_0017da08(struct AudioVoiceGroup *group, int index,
                           struct RecordState *record, int remember);
 extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,

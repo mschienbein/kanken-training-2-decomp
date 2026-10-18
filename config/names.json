@@ -1709,6 +1709,58 @@
     "_ZN13RuntimeMemberC1Ev": {
       "address": 1367692,
       "evidence": "[INFERENCE] Native member identity; compiler-produced callback reference in matching 0014d2e4 supplies an element this pointer. Canonical func_0014de8c preserves and returns that pointer; no unused-input erasure."
+    },
+    "_ZGVbss_002470fc": {
+      "address": 2354436,
+      "evidence": "c011: retained guard-section relocation in the hash-bound whole-function MATCH of func_001b6400; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Native local-static identity."
+    },
+    "_ZN14PairCollectionD1Ev": {
+      "address": 1796356,
+      "evidence": "c011: retained destructor-registration pointer in natural caller func_001b6400 MATCH; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Descriptive class identity."
+    },
+    "_ZGVbss_0024719c": {
+      "address": 2354824,
+      "evidence": "c011: retained guard-section relocation in the hash-bound whole-function MATCH of func_001b695c; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Native local-static identity."
+    },
+    "_ZN16ScalarCollectionD1Ev": {
+      "address": 1797020,
+      "evidence": "c011: retained destructor-registration pointer in natural caller func_001b695c MATCH; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Descriptive class identity."
+    },
+    "_ZN17UiResourceContextD1Ev": {
+      "address": 1860672,
+      "evidence": "c011: hash-bound same-address whole-function MATCH self-definition, with canonical native GfxPtr/MoveArray lifetimes; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Descriptive context identity."
+    },
+    "_ZN17UiResourceContextD2Ev": {
+      "address": 1860672,
+      "evidence": "c011: zero-size same-entry alias of the MATCH UiResourceContext destructor self-definition; scratch/integrator/c011/NAMES-PROVENANCE-r1.json."
+    },
+    "_ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE": {
+      "address": 1867680,
+      "evidence": "c011: hash-bound whole-function MATCH self-definition using the canonical ResReferenceTexture, ResGraphicsFile and native pair result; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Historical method spelling."
+    },
+    "_ZNK2nw2ut14ResDicPatricia3GetEPKcj": {
+      "address": 2031780,
+      "evidence": "c011: retained direct call relocation in natural GetReferenceTextureTarget MATCH to the canonical dictionary/name/length method; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Historical method identity."
+    },
+    "_ZN2nw3lyt6Layout19DeleteAnimTransformEPNS0_13AnimTransformE": {
+      "address": 1894808,
+      "evidence": "c011: hash-bound whole-function MATCH self-definition under the canonical Layout/AnimTransform declaration; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Historical method identity."
+    },
+    "_ZN18ReusablePoolR413067releaseEP20ReusableObjectR41306": {
+      "address": 1937608,
+      "evidence": "c011: hash-bound whole-function MATCH same-address native member self-definition with canonical InstancePool; scratch/integrator/c011/NAMES-PROVENANCE-r1.json. [INFERENCE] Descriptive pool/object identity."
+    },
+    "_ZN13PaneIndexListC2Eiz": {
+      "address": 1461044,
+      "evidence": "c011: same-entry base-constructor alias of the canonical PaneIndexList self-definition, exact MATCH in scratch/integrator/c011/canonical-index-r1/func_00164b34.result.json. The native caller already binds C1; no alternative class identity is adopted."
+    },
+    "_ZN14PairCollectionD2Ev": {
+      "address": 1796356,
+      "evidence": "c011: same-entry base-destructor alias of the native PairCollection definition, exact MATCH in scratch/integrator/c011/native-collection-lifetimes-r1/func_001b6904.result.json. The natural singleton caller independently fixes the D1 registration address."
+    },
+    "_ZN16ScalarCollectionD2Ev": {
+      "address": 1797020,
+      "evidence": "c011: same-entry base-destructor alias of the native ScalarCollection definition, exact MATCH in scratch/integrator/c011/native-collection-lifetimes-r1/func_001b6904.result.json. The natural singleton caller independently fixes the D1 registration address."
     }
   }
 }
