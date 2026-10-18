@@ -1,11 +1,11 @@
 {
-  "schema_version": 4,
-  "status": "milestone-4-remaining-scope-dispositioned-audio-corrected-not-review-ready",
+  "schema_version": 5,
+  "status": "milestone-5-shared-callback-atomic-pipeline-resolved-not-review-ready",
   "branch": "c010-integrate",
   "worktree": "scratch/worktrees/c010",
   "initial_committed_milestone": "3a09a67",
   "parent_branch": "c009-integrate",
-  "parent_tip_merged": "90cc196cb7107f5c79424d721ec4730b74323495",
+  "parent_tip_merged": "66ae9935979611ba916910d0217376dbb6ee3fda",
   "parent_source_milestone": "1d10b1d6ab522bf1ea4abbb2d14cb527303ea21b",
   "inherited_c008_r3": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
   "parent_review_ready": false,
@@ -45,12 +45,15 @@
     "sdk": 47,
     "game": 401
   },
-  "changed_collected_source_units": 172,
+  "changed_collected_source_units": 177,
   "changed_collected_sources": [
     "src/checkpoint10/alternate1/func_001650f8.c",
     "src/checkpoint10/c5f4_final2.cpp",
     "src/checkpoint10/collect-r2/aux_commands.cpp",
+    "src/checkpoint10/collect-r2/func_0011359c.cpp",
     "src/checkpoint10/collect-r2/func_0019ecf8.c",
+    "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+    "src/checkpoint10/collect-r2/func_001c7d7c.cpp",
     "src/checkpoint10/collect-r2/func_001dc4a4.c",
     "src/checkpoint10/func_0010239c.c",
     "src/checkpoint10/func_00103978.c",
@@ -166,6 +169,8 @@
     "src/checkpoint10/func_001c2e98.c",
     "src/checkpoint10/func_001c4bdc.cpp",
     "src/checkpoint10/func_001c599c.cpp",
+    "src/checkpoint10/func_001c7e90.cpp",
+    "src/checkpoint10/func_001c7f20.cpp",
     "src/checkpoint10/func_001c8af0.c",
     "src/checkpoint10/func_001ce8b8.cpp",
     "src/checkpoint10/func_001cf338_material.cpp",
@@ -220,9 +225,9 @@
     "src/checkpoint10/scene_method_byte.cpp",
     "src/checkpoint10/scene_targets.cpp"
   ],
-  "units_with_remaining_integrator_markers": 253,
+  "units_with_remaining_integrator_markers": 248,
   "dry_ledger": {
-    "path": "scratch/integrator/c010/dry-matches-r4.json",
+    "path": "scratch/integrator/c010/dry-matches-r5.json",
     "units": 2738,
     "functions": 2827,
     "parent_units": 2205,
@@ -318,6 +323,30 @@
         "func_001d3c78"
       ],
       "author": "r327"
+    },
+    {
+      "source": "src/sdk/func_0010be14.c",
+      "profile": "game",
+      "functions": [
+        "func_0010be14"
+      ],
+      "author": "x01"
+    },
+    {
+      "source": "src/wave2/func_0011d260.c",
+      "profile": "game",
+      "functions": [
+        "func_0011d260"
+      ],
+      "author": "Wave2Author3"
+    },
+    {
+      "source": "src/wave15/func_0018dc38.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0018dc38"
+      ],
+      "author": "c009-wave15"
     }
   ],
   "revised_headers": [
@@ -331,8 +360,10 @@
     "include/game/item_pages.h",
     "include/game/object_pool.h",
     "include/game/region_heap.h",
+    "include/game/render_state.h",
     "include/game/sound_runtime.h",
     "include/game/sound_track.h",
+    "include/game/synchronization.h",
     "include/nn/math.h",
     "include/nn/snd.h"
   ],
@@ -377,7 +408,15 @@
     "model_audio_prerequisites": "AUDIO-CONTRACT-ADJUDICATION-r1.json",
     "extra_collected_owners": "owner-cutover/collected-owner-moves-r2.json",
     "sound_initializer_equivalent_records": 2,
-    "current_static_type_inventory": "type-inventory-r3.json (before the2 initializer equivalents were removed; not an ABI/signature audit)"
+    "current_static_type_inventory": "type-inventory-r3.json (before the2 initializer equivalents were removed; not an ABI/signature audit)",
+    "atomic_callback_pipeline": "CALLBACK-ATOMIC-ADJUDICATION-r1.json",
+    "pipeline_cleared_extent": "owner-cutover/factory-facts-pipeline-r1.json",
+    "additional_private_types_removed": [
+      "W6eGpuBuffer",
+      "PipelineStorage",
+      "GpuState"
+    ],
+    "additional_completed_marker_units": 5
   },
   "names": {
     "proposed_entries": 127,
@@ -788,27 +827,50 @@
       ],
       "matches": 0,
       "qualification": "Source keyword inventory only, not a compiler/semantic steering or full gate pass."
+    },
+    {
+      "tool": "match_scope.py",
+      "record": "header-callback-match-r1/results.json",
+      "units": 9,
+      "match_units": 7,
+      "exits": {
+        "0": 7,
+        "1": 1,
+        "2": 1
+      },
+      "qualification": "Exact nine implemented callback/atomic/pipeline consumers; not a whole original indirect-object or final current-header closure. The final run precedes the latest unrelated c009 semantic-fix merge."
+    },
+    {
+      "tool": "match_scope.py",
+      "record": "header-callback-match-r2/results.json",
+      "units": 9,
+      "match_units": 9,
+      "exits": {
+        "0": 9
+      },
+      "qualification": "Exact nine implemented callback/atomic/pipeline consumers; not a whole original indirect-object or final current-header closure. The final run precedes the latest unrelated c009 semantic-fix merge."
     }
   ],
   "unexercised": [
-    "253 marked-unit canonical migrations and the residual differing-definition/nominal owner leads; concrete incoherent rows may be deferred with evidence, never hidden behind casts/shims.",
-    "Final current-header explicit v2/none --show0 matching of all538 complete candidate units plus11 directly revised accepted units and all affected accepted header consumers.",
+    "248 marked-unit canonical migrations and the residual differing-definition/nominal owner leads; concrete incoherent rows may be deferred with evidence, never hidden behind casts/shims.",
+    "Final current-header explicit v2/none --show0 matching of all538 complete candidate units plus14 directly revised accepted units and all affected accepted header consumers.",
     "Stable2738-unit dry-ledger G3 to exit0, canonical actual C/C++ signatures and native probes once the heavy slot is released.",
     "Complete original indirect/callback-slot consumer sweep and all unresolved callable storage provenance adjudicated, including the revised AudioVoice factory/callback family.",
     "Complete argcheck adjudication, qualifications and all7 integrator pre-review steps; independent checkpoint review/prepare remains Main-owned.",
-    "Newest global author/permuter publication reconciliation; current649-row seal includes the exact late steering witness but is not a claim of a final current-world inventory."
+    "Newest global author/permuter publication reconciliation; current649-row seal includes the exact late steering witness but is not a claim of a final current-world inventory.",
+    "Complete original data_002429f8 callback-object consumer sweep, and final header-dependent consumers of typed bucket/atomic refinements. Existing implemented callers are coherent, but that does not adjudicate all original sites."
   ],
   "continuation_order": [
     "Merge c009-integrate at each next milestone and its final tip when supplied. Keep main mergeable while preserving c010 v2/none.",
     "Keep all649 c010-owned scope identities (collected/deferrals/policy witness) excluded from c011; honor recorded source reservations and forward-move ownership dependencies.",
-    "Continue253 marked units using canonical provider definitions and natural caller evidence. Constructor174d9c still narrows private parameters against the canonical int declaration; do not blindly change the header to reproduce save order.",
+    "Continue248 marked units using canonical provider definitions and natural caller evidence. Constructor174d9c still narrows private parameters against the canonical int declaration; do not blindly change the header to reproduce save order.",
     "Use recorded complete diagnostics/deferrals rather than restarting immutable searches. Remaining collection is fully dispositioned; re-enter specific rows only after an actual typed/identity prerequisite is resolved.",
     "After c009 prepare and explicit heavy-slot release, expand stable affected-header scope and run G3/native/signature/MATCH/indirect/argcheck/seven-step closure once, retaining all actual failures."
   ],
   "staged_check_commands": [
-    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run native-r1 --manifest scratch/integrator/c010/match-scope-r4.json",
-    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run signatures-r1 --signatures --manifest scratch/integrator/c010/match-scope-r4.json",
-    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/match_scope.py --run match-r1 --scope scratch/integrator/c010/match-scope-r4.json"
+    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run native-r1 --manifest scratch/integrator/c010/match-scope-r5.json",
+    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run signatures-r1 --signatures --manifest scratch/integrator/c010/match-scope-r5.json",
+    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/match_scope.py --run match-r1 --scope scratch/integrator/c010/match-scope-r5.json"
   ],
   "indirect_auditor": {
     "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py",
@@ -822,7 +884,8 @@
   "failures_preserved": [
     "FAILED-ATTEMPTS-r1.json",
     "FAILED-ATTEMPTS-r2.json",
-    "HANDOFF-STAGING-INCIDENT-r1.json"
+    "HANDOFF-STAGING-INCIDENT-r1.json",
+    "FAILED-ATTEMPTS-r3.json"
   ],
   "prohibited_operations_not_run": [
     "full build",
@@ -861,7 +924,7 @@
     "include/game/audio_voice.h": "6f2cddd222fb1581cf0a33585e362058a0c755a630fe6b18016640235a4a4e64",
     "include/game/aux_effect.h": "c20768c3b975338999f0ee5c835ac6eca325c6e4792a465cc51b6fc27bbb9983",
     "include/game/biquad_filter.h": "1b36abc727cb071c9882c116c2bedf831c2dfa78a84b14b6e18aa729fba22a9c",
-    "include/game/bss_0049ecf0.h": "fd6b00612c2615eed40a79604fd8dde88f5235943a2ad288a5949b132954a701",
+    "include/game/bss_0049ecf0.h": "1443dcac10504686a0ffcdc384135e487e6c2ede753482326a676cae0d503834",
     "include/game/category_pattern.h": "c2ecd4a98da7c93ce510a87f3f04a5676b4b744b547d1e7199289ce61038a8b0",
     "include/game/category_progress.h": "5fa12fc0e32052d119c126298326e31a04ad2e75c870471786572b6c2f791039",
     "include/game/character_panel.h": "d99fecfb7dbd7f28c698c6f499e6709900be40f0f57e834d74f9ea7e4ef3994d",
@@ -948,7 +1011,7 @@
     "include/game/region_heap.h": "8d6d6834f1fb947ff47bd5f807894eba63653bfe4c752d222627e1005be1150c",
     "include/game/render_parameter.h": "cbdae89a6d8a8842fa6a89fc6a278eeda0dc27066c90fd77abb710ac7d3b6ef3",
     "include/game/render_resource.h": "4bdc93b8c6790ee5b04f96e909dd1b77e93b616a4529f0ba3e27942501bc1043",
-    "include/game/render_state.h": "82c394bff3a0f2301fac2d96b4ab6fcc83292be2b334d7f4c501fdd51ead32df",
+    "include/game/render_state.h": "cef869463cc40084cf1674b866868deb83d0e6ab2497a775983eabf8e3b071ad",
     "include/game/reset_reference.h": "e45158289df593544275c934e8cc7334b10c6f9c3980d6e28aeb2130605afa7c",
     "include/game/resettable_manager.h": "6e4ec28c6bd467a69c5c850957046d59eef61f6ea69ed15e72521e3473f99b4d",
     "include/game/resource.h": "360da6882b2fb54b99e13c10e320db17880b328641a1dc0c78fa5d699af1d4a2",
@@ -970,7 +1033,7 @@
     "include/game/scene_lifecycle.h": "2804bd8ca669280b61f3b9a2bcc086b7ed4d3f908d69e5e8627aef49ffd08d06",
     "include/game/scene_runtime.h": "de7086ea74d689242604711acf8e30c1a96921da6bbf0ba5192735e4c154f323",
     "include/game/scheduler.h": "c4a9266502d11bb085a8493bad437790536aa87db330c3639b2177a2617e2fbc",
-    "include/game/screen.h": "9598091e52612bb642e85dccea8fe7bcc105b80a393991c94c64eb45377f94d9",
+    "include/game/screen.h": "00731c07d53f7b93a146d01d5af0ca57bf1a36ced6b10eddad737ddac8a59691",
     "include/game/screen_operations.h": "7ce03f9dfe2589f1074992243b0c515570036eeb9a19eac535d3b1358c6438f6",
     "include/game/screen_transition.h": "ab345eb2f94f210e8eba0e4a844b2c89cd9a94fbf81941865bd7b11d12ff1675",
     "include/game/sdk_init.h": "fc4f97a9a83b511c3da9a83ef0f4f311a14479b2468dfac061f5d468e44202e0",
@@ -986,7 +1049,7 @@
     "include/game/service_protocol.h": "298241b446592c861eb41ce8081848da1eab0ae15f11a23ba48e03359665318f",
     "include/game/service_result.h": "39299bb4508d2e9a085414b0fdcebd7ccd4ad583ead36a72eeb7885405d74dd6",
     "include/game/service_runtime.h": "2e19ea4fccbb5cccc760e875d63f98d3a71ad46fa2d37c904eb09365a22bae00",
-    "include/game/service_state.h": "98236a5a074f36f5390e9bfe97f78f540b05fa59f6035db0fe8d0dee8119cb67",
+    "include/game/service_state.h": "84834fbd9b25a21f3250df757933a5288425c057dcfcbb1b8ac1e0ee477d1f3d",
     "include/game/service_workers.h": "90b77475d1b7273bbd9e21db855af65aa0b43a7d80b76c82c49e3d66c4d68895",
     "include/game/shader.h": "b574cb0a710c8ef687c5458b5509284b8dbbe9bc04fe6692e7e0fe83bd7df62a",
     "include/game/shared_memory.h": "7db6da0adc6646eb3d617b5ecb5612e0669b1113e13d72f35e79841458a7d9d5",
@@ -1007,7 +1070,7 @@
     "include/game/startup_descriptors.h": "8bf8e0fe595a2f1acc39ea4a2d91419179946b61aa2f3350d52c248359b4b4a1",
     "include/game/static_objects.h": "262c83133a66b5ad831b39e44f217e6372742adef55a236b2a73669147b59aae",
     "include/game/stream_manager.h": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0",
-    "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92",
+    "include/game/synchronization.h": "bd283e8f25793df2c2a292903ebe4d42cb2d1bc3f6aa75de9607a03d980a2711",
     "include/game/task_dispatcher.h": "0708e62557068b012885fc7841f984a755284d0a0eec2912ca981ad3c1069320",
     "include/game/task_runtime.h": "1772a0b58d98d9f9dd0a953dcba14f2c86e5571cc5b1029c9d9695964cff8ca1",
     "include/game/text.h": "b763ab0418759fb66cd04da407f267bfad04b87687cb502aca6d4ffe5b33979e",
@@ -1371,7 +1434,7 @@
     "include/nw/ut/ut_TypeTraits.h": "1f157f17cbf4fbabfbd385841e54dcfb417e97659defd760a623b2ba27778752",
     "include/nw/version.h": "6aea6b7fa65037753f4104543daca6a8a815f5943eb9760f90dae42b9cc898ce",
     "include/preinclude.h": "7e97b53a88d2fa4dadae21dcd1f5ba29c37e5154172e811b4402328f3ba0ac10",
-    "scratch/integrator/c009/dry-matches.json": "568d1a5086d5fb6830216061be72be56a15654396ac5d33d8d3b6af7070f42b3",
+    "scratch/integrator/c009/dry-matches.json": "b06fd5ad422db36944abafcacad05234fcb9d936cabbb6436ea76d81a1657cd3",
     "src/checkpoint10/alternate1/func_001650f8.c": "c023fd493842a293bf6b0212371bd0f262fb9767b2715ee72b21f231f48da3c9",
     "src/checkpoint10/archive_access.cpp": "6337edcd9612fefc544d164109100b3b580dd667f6d89a0dbf7bac872d85dd91",
     "src/checkpoint10/c5f4_final2.cpp": "77aa07f0d83301f1d964d1e3d37ee92dba70b44febdfeaa1e070fefcf40db8de",
@@ -1380,7 +1443,7 @@
     "src/checkpoint10/collect-r2/aux_commands.cpp": "e5c3768671cdb4d4dc195eb5052cb90afe206d163ef817d16b16c351c98b1435",
     "src/checkpoint10/collect-r2/cutoff.cpp": "59c2cc6419e8906fff3563fa0477072b0e3c6494a75544f944027ec5e6020669",
     "src/checkpoint10/collect-r2/decoder_command.cpp": "88b160c4d32a6b8962435f15219dfaf1b0fe6a986c418ef6a61143fa78a01ab1",
-    "src/checkpoint10/collect-r2/func_0011359c.cpp": "df2f8c2e3a91a580fbf4cb3722894ed0ba96634dab7c41200b4e0a21d98992aa",
+    "src/checkpoint10/collect-r2/func_0011359c.cpp": "d3cb024318d2bcad68816fdc4dc0224d186cdd0552dc2086c3500e3b335bcef0",
     "src/checkpoint10/collect-r2/func_00117ea8_native_lazy.cpp": "d665f023b605b6c9f643c80447710b83a541f181666a053b92cb786bc4a1a130",
     "src/checkpoint10/collect-r2/func_00123364.c": "568c100c4b256e41a2faef40cccd142d33df6406d2da3691a98d574d82491216",
     "src/checkpoint10/collect-r2/func_00130fa0_public_range.cpp": "c3071a5cce67e2d7a12b53e494292664dae9179e883d2751d228f1686ed35e33",
@@ -1402,8 +1465,8 @@
     "src/checkpoint10/collect-r2/func_001c5a9c_native.cpp": "88d6d13ed723dc682ef019d839f4f65d590d186dfc091b685a80eaf0939921fe",
     "src/checkpoint10/collect-r2/func_001c5d94.cpp": "d00e4f7c4b7ad9633bdbd5caad539be138eae6309e21f720cbed062bcab7a35a",
     "src/checkpoint10/collect-r2/func_001c6a68.cpp": "60c1e8b4916e39797d1c3c0c8ee0e0d52b74d07ad3de73ce0bf2b1634eab23cb",
-    "src/checkpoint10/collect-r2/func_001c7ab4.cpp": "2e54ef314508070fdc6d8e3f8d2fb98c12dc405adf72aa9bd80aea51ec0c2d52",
-    "src/checkpoint10/collect-r2/func_001c7d7c.cpp": "5f928678226ce2e58a038ec8371278b5f5bd8623448f01ff309cab0f589d4e5c",
+    "src/checkpoint10/collect-r2/func_001c7ab4.cpp": "8a18a0d9e9011d7f44a377045fbb19e80d931605fbb445c7216beaadf892f584",
+    "src/checkpoint10/collect-r2/func_001c7d7c.cpp": "fc45414322c5e7e06a4d6c9af368b0678241b9efa9c353c0f4b63f1d8b68b2fe",
     "src/checkpoint10/collect-r2/func_001c8244.cpp": "deb9d79eddd78d2cacd88fb6b3ae2026e3419e3cb6b1e26d74348dfe122e1ff3",
     "src/checkpoint10/collect-r2/func_001cb10c_destructor.cpp": "9a37a92495ffb508ac9a32bb4a1550d48494dd764d568ab200bc2b01bd5bd10d",
     "src/checkpoint10/collect-r2/func_001cc1d4_real.cpp": "ae922edc6c4d82b906830a61d8af22493f6b28998dce2d714f9741622d724be8",
@@ -1526,7 +1589,7 @@
     "src/checkpoint10/func_001159e8.c": "1362d036347075af351835b1c9fbaa37b74057350d59ee36503cd9c9ff393854",
     "src/checkpoint10/func_00116c1c.c": "c8aa2c6d09f408f309ff243e76c1f44bfa2d458fd6124a89da5d9adf32d20b37",
     "src/checkpoint10/func_001176e0.cpp": "ec89ccea2b9c070d0f2d8972fa16f2234fbe6df8353d331e367f4034158b94df",
-    "src/checkpoint10/func_0011d12c.c": "b8d4c8e7ed0ea268ba034fa3eebb7be66333578e02f44aff8b865ff7d93fafd2",
+    "src/checkpoint10/func_0011d12c.c": "e5ea53336e3b9e4530f75d88df129303f76148d720305a9c4321961b8951731e",
     "src/checkpoint10/func_0011da50.c": "6ebef64697beec7ab531c1a1a566d2d6c1f1b3305e2d546e65d7bfe51673f61c",
     "src/checkpoint10/func_0011f6a8.c": "cbfe614c16f0c795172b6e742ba60f862f24a15d1291bf5eabf0b113621cc395",
     "src/checkpoint10/func_0011f6c8.c": "a6695f80127d31f876c34afe17bfc4ad1602062d142d9c3048aebc63d4f2cbf5",
@@ -1783,8 +1846,8 @@
     "src/checkpoint10/func_001c7a24.cpp": "8e71e1dbadd9b07561b0e5e50c1d0022c2068a9a78c243b4cdbbfd5bf7685c7a",
     "src/checkpoint10/func_001c7d00.cpp": "9dbf53f41c9c88616fd53e802b2fc120a3b7ff775883c454dce8ac09f6498654",
     "src/checkpoint10/func_001c7e1c.cpp": "c18eed050c85d00cccc0d04741a45c65e5e898392b81e8e5874d0847d7fca72a",
-    "src/checkpoint10/func_001c7e90.cpp": "7525e56a8fe496d5d8825b1d03291dd784993bcd844bd9d55476627b42bd31d4",
-    "src/checkpoint10/func_001c7f20.cpp": "85c2277ac16eaa584854fc9609232dd255d749ab0a2ba2c502b580d3d872633f",
+    "src/checkpoint10/func_001c7e90.cpp": "bf1627bb1304a2f81d2ad4d216771c6993385e6c8a3559fe21bf3a4952d3d45d",
+    "src/checkpoint10/func_001c7f20.cpp": "597fdd4a520df587a2c4133a803daeb75fe6cb9afaf2cdb9d501364e129d80f1",
     "src/checkpoint10/func_001c80cc.cpp": "9af01bf8ade9e8ea82b9c0b8f94e754bbf26f60406f50fa5a14835c6ffc43c59",
     "src/checkpoint10/func_001c8a40.cpp": "7a65a8c02c2ac77d4627733b70bc59347c6199d2567c4e650bc4144ed4afd663",
     "src/checkpoint10/func_001c8af0.c": "21e12451fd4f769d8324322af6570402274bc957bf85e13094568c657f595e76",
@@ -2062,7 +2125,7 @@
     "src/retries/func_001f2700.c": "ebe6a4491339f5378cdb9be3621f3c4ed9490efa18dd07fdb4552248c6dab0b5",
     "src/retries/func_001f281c.cpp": "5bf8e64511b7116d6e57e8fdb2f992b664da30910e7187c9a3ab7fdbca6506df",
     "src/sdk/func_0010bc9c.c": "a1943e11bb813202d8cce754fd7e4b33de77376d7215973e5bd50dd25053a642",
-    "src/sdk/func_0010be14.c": "ab5b229fcfbd01ffce54838e552ef3ce2f495eedf9f8ad5754e19d473800bad3",
+    "src/sdk/func_0010be14.c": "759466c43a7710716661d65807bd8727f90b2d16a392d460886104c338c11456",
     "src/sdk/func_0010bf74.c": "8cc5567d25084f9c4b53db76b4402641c93fd2cf8156d5e20d535501822e2834",
     "src/sdk/func_0010bf88.c": "cea465e55f812f4dd1736a98e29e5f0055b68b2e5d750f9e92eb18a0c078c949",
     "src/sdk/func_0010c444.c": "faa67868a79ba4f4f1a468207605daa2725fb5ac6f01217b78d4ba7ab963ac3d",
@@ -2462,7 +2525,7 @@
     "src/wave11/func_0019d068.c": "3f04bfa9a8f01ac1f43e86fb5d33b8987309fde7cc67e4cb5fb6bd2f17b9faaa",
     "src/wave11/func_0019dd00.c": "00d828d5356eb169c4e9467a30a8303b44293464e6e826ca3fbe61098e2c7ec2",
     "src/wave11/func_0019dfbc.cpp": "65516ab328d073483103b47dc2f8175c4cdb0d52d7eb829ecaf3775edce079b8",
-    "src/wave11/func_0019eb24.c": "97d4cd6bd5cb28d10c16b3ace15b571a4480dda94d455f264c44ae97c873e36e",
+    "src/wave11/func_0019eb24.c": "cfce269b755dea424340e837a4741088eb1348564035910267c628aa8f4e247e",
     "src/wave11/func_0019ffa8.c": "888831cb1cd5508d09b4bc66ad4ae1b0d946aa7308b838173f59d2c87ace12a6",
     "src/wave11/func_001adabc.c": "3d6a3a36c759adf9b4962cef4dbbf37f87059de3549fad7bad82df1a56dc4e3c",
     "src/wave11/func_001b0188.c": "8d2651ea10930ba1373ab4f5df30d306480286ae7f821c25a9c7ff197d5a23b8",
@@ -2867,7 +2930,7 @@
     "src/wave15/func_0011121c.c": "f896eb0da4bdf6b478942dc14a955d1c7de8bb773d5f93f8e632f3a1f09c3d40",
     "src/wave15/func_00112558.cpp": "dd0edc6dc171d7660e0e7f46ee6539ac8162d7d2150726c0830e65363b3765eb",
     "src/wave15/func_00113630.c": "36169c91496cbea6ed2805728d017aa2163f9aef2ce3c820924adac1190db4b3",
-    "src/wave15/func_00113c0c.cpp": "0b2081b69e6a7415e144321eb3c1250746b9b80079ada485a1f5b7ddb00c8363",
+    "src/wave15/func_00113c0c.cpp": "7f081529690f4197b85afd8c801fc6fd649e61b99f8fc3b6d654b62634c23615",
     "src/wave15/func_00115000.c": "8f0f0b9ea217f51116c6fa2ec3ba465bb583aaa20c44b67967fa712819a61006",
     "src/wave15/func_00115118.c": "318aa0c1a8477cdd05efe4d6d9f7c536688c3901469aa5858eccf8cc1ae099a1",
     "src/wave15/func_00115128.c": "99998cf417e996dcd71904467b11007235803ecf559a4f4011fb3750c81c90d6",
@@ -2936,8 +2999,8 @@
     "src/wave15/func_001869f0.c": "5485e83a9a542c5ff19993a94910ac5623d8ebbc897f15e495250d64ffe9720c",
     "src/wave15/func_0018d8c4.c": "8bd87c2d60426975c9c5ceec25ecf3c31c4e81615233244f3d09568f6448caed",
     "src/wave15/func_0018d8d4.c": "cf0433642a306b39ed8add2510fa3c970283729bc787e19dec1d7f3ad3c1da69",
-    "src/wave15/func_0018dc38.c": "b564521faa0dab8995976431c407de5ab856f4accaf58fd1aa1c49b35e37d068",
-    "src/wave15/func_0018ee88.c": "0707f877180912a9ce87d971ee03610f6d67771fe6f9040c27543167cbdab9c2",
+    "src/wave15/func_0018dc38.c": "fade75e848ff595d24bbe6d97a0b997dd3444a67ad65ae2ee594fa671b0e9e27",
+    "src/wave15/func_0018ee88.c": "94201f3d2152b3963b951cc1ed448fcae4f409bda81ccf369b235c0d74014b54",
     "src/wave15/func_00191d34.c": "ccdd40f55381bc506200abf9dedf122b50d50c9e79e4f25fe0db66747f8f00a3",
     "src/wave15/func_001923c4.c": "f01d2d37cc1bfe23809a584a9c7c0014607a6557d2aac1dda68fd463c1f0e067",
     "src/wave15/func_00195ea4.c": "c077ef74b7f601a6a07be590b4423047cf56981c5bc07acf032eef685a829c68",
@@ -3059,7 +3122,7 @@
     "src/wave16/func_0019f2e8.c": "553d697c1351dbfcb3b0e649a497fbbc2fe1e6f7779c3186c6374e05d41184d0",
     "src/wave16/func_001ab65c.c": "1ad336fe9df1b3684ce5bff70411b41aee7ad5d98f2871198668e8a81abe6c53",
     "src/wave16/func_001bd9f0.c": "c2c1c1dbd48910edfc87733321838a2f4b3f616ae775e5164e8bee9b286a2285",
-    "src/wave16/func_001c1d4c.c": "eb65d2cd00c94a7f2ffea41eebdcdaa9f66048fea251809fd00033968a98e8e6",
+    "src/wave16/func_001c1d4c.c": "1bfc9faaa679cfdff48735c85e2b1f2a29d72f71ea7f928181a1d4e4ab5d4bbd",
     "src/wave16/func_001cfd24.cpp": "783bb103fff0f9d114035ba47a08d4ea48866a8abdb45c7634410f03a850859a",
     "src/wave16/func_001d0324.cpp": "53a2d5f8cbcbfc3ddef905fc7bc541949af6b3d70e005ff0432f652e107e7990",
     "src/wave16/func_001d4124.cpp": "016a70b6a8b234587d220f268d0647022e556afe30e2354f647b5456afd98902",
@@ -3264,12 +3327,12 @@
     "src/wave18/func_00114fa8.c": "3395ca27f450235cde573901a93065c6b0c75a4c58b55e5c757135d84432149a",
     "src/wave18/func_001175f4.c": "2eead0335affbd0bf936b09354e8bea4b31a0c189c426229afceef32f7014147",
     "src/wave18/func_00117854.cpp": "e87948db7250ac80d88a37b0cae5784cfccced38c91d457bbfe8db669b4d1f93",
-    "src/wave18/func_0011db78.c": "95bfa3f89c8cd4fd754a89450c6a8cd8be2b15b87a8a7946fd845f39d8aa32f3",
+    "src/wave18/func_0011db78.c": "a3e3d4734865b7221ad9d4f2589240e16c77350a211d641a166c004aa0229684",
     "src/wave18/func_0011f688.c": "68d8bad64211fdeaa2780ecbb3de2198b3931b30532137a1bc8dbc6b0f834165",
     "src/wave18/func_001272d8.c": "d9fade0487782d68056536ef75b92b5d2caccc3212c214666b8275fd52fdeed3",
-    "src/wave18/func_0012ccd8.c": "0455e62ed526e383d2f49df86fb38cb9cb328820f45e7db298cfa93c5973062a",
+    "src/wave18/func_0012ccd8.c": "264268036e6177e9bbe4c5f37f4e7bce880b0d1a1d4491bcfaf7b325233236b2",
     "src/wave18/func_00138edc.cpp": "4e2a1eac5a574f3602d8f3d8e051f41c13c57a5b4eb3cd46c7a710f4b1d84a64",
-    "src/wave18/func_00141514.c": "63e2aac2fdbccf89a139ae22e782466d82b79bc0b6c2c935c6914d05c94a13ec",
+    "src/wave18/func_00141514.c": "c50d414ed08c77d0687eddb96e8ac980e410817f62bf565c94bc9687f0a6e2fe",
     "src/wave18/func_00143190.c": "9d6780602f5fe5001f670e5e8dd7919783178975c69bf4e88e86dbb80af22122",
     "src/wave18/func_00145658.c": "263d4804f99561675af3de68b03da234f36294da801cd58fb8d739ff7426e8c1",
     "src/wave18/func_001456a4.c": "5facf71b5e29a7a592e27bfd250424aa6ce0aac645554d79300b824673f91c5a",
@@ -3323,7 +3386,7 @@
     "src/wave18/func_00185b44.cpp": "a17febc1108f6ec453c7a814b1f5fb1408e4b6a5e8fc9717b52f2b5318acaed2",
     "src/wave18/func_0018cb5c.c": "162408cb1996b267ff3872eb5d8ae2fbce659d56461b9ce6b124edbeed3f7217",
     "src/wave18/func_00193af4.c": "f947ce8df1dcf385d8daaf8f6f6913c75977059821258962a002413c8157bd86",
-    "src/wave18/func_0019b574.c": "9a9f71ace760fa5f4d974eb0f9686cca20c4a5b8fd5145b906d5b36a681beec8",
+    "src/wave18/func_0019b574.c": "61cfbbc6974197e214351a67076fe656d9ba5a5a289b57903698320494100c5f",
     "src/wave18/func_001abfec.cpp": "6ed470e7bb6909f324b869fac84ac214dff51b640faa5efd9dc81b8b68d66e27",
     "src/wave18/func_001acb04.cpp": "32c64fc03a19008d1abcb36bd9bed5e106504ea7e5c2a30d53feb666f85c6f42",
     "src/wave18/func_001acbb4.cpp": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
@@ -3343,7 +3406,7 @@
     "src/wave18/func_001c0e7c.c": "0b6e37f099633b1037af8fed78a3ace1b5f3112914e0104937bf27bb5c9ba9a6",
     "src/wave18/func_001c13f4.cpp": "0ef6a1ab1a78d0e5515e8541ccac5e2de67392ba700b6ed176a7941133560786",
     "src/wave18/func_001c1bdc.cpp": "2dbde7ab425c5897b4d792e0e505f3488e736f2af07d6a274188377081153e30",
-    "src/wave18/func_001c20e8.cpp": "94a0f9ab1bf03ae01d68e0e253e6b89d9db4e8a27e5b01dc52d25eacc4dfe077",
+    "src/wave18/func_001c20e8.cpp": "9bea731bc5c70b1691fd2f9cc7e72c15a5c51a337872889cd203d52f98b10328",
     "src/wave18/func_001c31c0.c": "98899560179c5d622618561b30892be0443cb517b3cf54246efc48e0e5042492",
     "src/wave18/func_001c3618.c": "8b8166db6aed15a997298cac89b5d425774a8ef376314266ec8245663eabe87b",
     "src/wave18/func_001c3854.c": "335b2c8b15931dd2c3cab953018c8257af10faed38abd27c179a57532343f5c7",
@@ -3365,7 +3428,7 @@
     "src/wave18/func_001dd364.c": "1d02b81e82cc064b27f80e0ee19a15bf717da406bdb5cd3bbfaebd067791b1c1",
     "src/wave18/func_001eade0.cpp": "0e2a8309b58afc2fb4803baefaf565c92728baa127b8629143bcd916f80e6ed7",
     "src/wave18/func_001eaf84.c": "3acda89a4bc8ee827151aba6f33f61f12a948e2d338c960530c5260882564bbb",
-    "src/wave18/func_001eb1cc.c": "0a964286a9db84a34160ae7390c9506f6833b8293846829f1178e9d81493700b",
+    "src/wave18/func_001eb1cc.c": "6cba67240af8148418e421396a737f6ed294028b9783d0399c0aeff28f9eba58",
     "src/wave18/func_001ed820.cpp": "0d3311eab49534eafef22c12ecf2b5bd83e76f6093189e9992de13186e9f9b01",
     "src/wave18/func_001ef7b4.cpp": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
     "src/wave18/func_001ef960.c": "aa7d4cf2cbeffa19cb8b7c1d4f3212f3bf6cff388f15e788265f12559a6c7fb4",
@@ -3377,7 +3440,7 @@
     "src/wave19/func_00105314.c": "0fb5a13686912eb71bcdff3fe98a9da43896f81e900653bf807a657cb3f5a8bc",
     "src/wave19/func_0010625c.c": "5edbebb511376ec64eb225392dc7d26790cc2d5cf78298120af9cd4c4758d7f4",
     "src/wave19/func_0010a9bc.c": "d36cd42ac39a7a566878917fa65aef4a2f421b0a556edbd6464ce27f44c6cb2f",
-    "src/wave19/func_001105c0.c": "700ddbaf90546c5d839dbe08ab9b4ec9cb93a3f1bcd42109a46d2d315cedcab2",
+    "src/wave19/func_001105c0.c": "fbf82864f87f9290d45b93673cd420182b5225951fa7ae3d872940dab28ba18e",
     "src/wave19/func_00110a70.cpp": "eab786abc502251f45c3532d7fa4e15fddf5ac2063596a9d8e692feb78b6f219",
     "src/wave19/func_0011774c.c": "463cc013275d76c935247aed8503587b1ddb4c5f91fa6b7980ebbe5d71bc5283",
     "src/wave19/func_0011dcec.c": "284bf3ace4b41e8c2b420a0176b0d0f217f2254476feb92b720852d4ac180de3",
@@ -3453,7 +3516,7 @@
     "src/wave19/func_001f4994.cpp": "7b6e598d7a21bdf7b8b6dcf4bec2edd86dd30878251f3c6051e10c674108fa5d",
     "src/wave2/func_00110634.c": "a262d3accf77d6df99e8578c71986d7025476970fa06caeecb02b51881112426",
     "src/wave2/func_00118074.c": "e6d54edac764efdf17413ed921432a64ee722cd27911e7fe9f1e513e14bcff52",
-    "src/wave2/func_0011d260.c": "73441850704d05200674c4f68476e366dc563fefcb6f9370ca85696a34e3d30c",
+    "src/wave2/func_0011d260.c": "5e757c440ed3e595e89998e34dcaa1ba2f39e38bf0b35d9f0ec26370ddfb882a",
     "src/wave2/func_0011d2f0.c": "7e305a7691b66f3f39621791d6d572d569f8fe085261ad52a0c2a7a73b59a89e",
     "src/wave2/func_00126f5c.c": "b5d91a4441a23395b9d850bcaf7440f398d57e513210af2df983bf92e546dffc",
     "src/wave2/func_00127294.c": "c34bbf154e41ac6f09d7590a242f34253ec77fa3491fda6990d6338b1a7d433d",
@@ -3547,7 +3610,7 @@
     "src/wave20/func_001d3e90.cpp": "171c87e44b7de36dd73d9692fd837f5f63724b0c18facc238d126d417963f9ea",
     "src/wave20/func_001db434.c": "5533a5e48d83e8a079bc05a0c91eb68ddbcdfdd162a39d2a60213b7ae4aa01d8",
     "src/wave20/func_001ea9f8.c": "0605c4f9ed1d31f0ee90c0e453b06cb9402aa6817197961d89dc2db34a0a0553",
-    "src/wave20/func_001eb190.c": "1064573430cac4ba77655664db00425dd53613cdb42cc301a477e41a928b9c22",
+    "src/wave20/func_001eb190.c": "d4429dc522d81ebfb50013db3afa3aad63f7080b8d2ae6d06a2bc7c6dbaf5543",
     "src/wave20/func_001f004c.cpp": "723c469853508ab41d3ed2f4a46d34cbac27d63563ddf00fb35a32e341792e3a",
     "src/wave20/func_001f0078.cpp": "29278f535781af8dfe00e6e3daf894f32b1f4fa8a79862dca4b4390efe0d5d91",
     "src/wave20/func_001f2638.cpp": "73fe07d38ce3647959c8a48e622b9e39edff0df575141e1e3aa98faba98d40bb",
@@ -4094,7 +4157,7 @@
     "src/wave9/func_0019d8c4.c": "5efbe31658c60225f11314ed8ac48a10afc1ed8b7d91b34c9341afb1f7a9d262",
     "src/wave9/func_0019dbec.c": "a19afdcfd9ed82a6c123de49f1395b500e2ff85047dbd5adff80e9825ce46959",
     "src/wave9/func_0019e564.cpp": "e5b7e544fad302117dec4cb83c40f23700c90f8cc2a8f458c0e033ee6d022210",
-    "src/wave9/func_001c4494.cpp": "719b662f0730c33d5a54d7120a6308702b65589b7358c8339b0437df8961ef9f",
+    "src/wave9/func_001c4494.cpp": "70912c39d8e85279b0b0783305b5ad6c2e51ea86e16cdbd676b5fd3924382135",
     "src/wave9/func_001c44c0.cpp": "331a9cc2b9e1e37ba6e60d519d9308e407cfe1ab19794b4cf81917da2ed85355",
     "src/wave9/func_001cff34.c": "3c78a99fea5ad1e2a234518ff7b376c20773a814b7a0667a09d19196715c56fa",
     "src/wave9/func_001e358c.c": "34d158538e277317f0cc721d086a2ef54106c0c673deed718f090b79e0ef6eae",
@@ -4114,8 +4177,8 @@
     "src/wave9/func_001f46a8.c": "377b3319d19f7158e6d0cf206003d314062c6b408bb14d0c1f8da70fcc9f3758",
     "toolchain.lock.json": "4058507b69f000ac4e506a080db95c4b4241796280039d06dbb5356d4192dcb6"
   },
-  "previous_committed_milestone": "beec234b77c92634aaddea024805ecd83471e852",
-  "milestone_base_commit": "a00765a2fa054ebb04ba13eca863b9c9bfd6269f",
+  "previous_committed_milestone": "c407dda52e3816e5bab2e21d9ee57fb43c258cc3",
+  "milestone_base_commit": "b3c001ae7a7b12fc50b100e0c0490f72f0b6b06f",
   "inherited_c008_r3_preserving_followup": "b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b",
   "candidate_new_functions": 548,
   "candidate_moved_accepted_functions": 5,
@@ -4148,7 +4211,6 @@
     "src/checkpoint10/func_0016f3a0.c",
     "src/checkpoint10/func_0010c06c_pc_local.cpp",
     "src/checkpoint10/func_001d2c44.cpp",
-    "src/checkpoint10/func_0011d12c.c",
     "src/checkpoint10/func_00104804.cpp",
     "src/checkpoint10/func_001235a8_input_constructor.cpp",
     "src/checkpoint10/func_0014d664.cpp",
@@ -4208,8 +4270,6 @@
     "src/checkpoint10/func_001c7a24.cpp",
     "src/checkpoint10/func_001c7d00.cpp",
     "src/checkpoint10/func_001c7e1c.cpp",
-    "src/checkpoint10/func_001c7e90.cpp",
-    "src/checkpoint10/func_001c7f20.cpp",
     "src/checkpoint10/func_001c80cc.cpp",
     "src/checkpoint10/func_001c8a40.cpp",
     "src/checkpoint10/func_001c8c3c_helper.cpp",
@@ -4321,12 +4381,10 @@
     "src/checkpoint10/collect-r2/func_00117ea8_native_lazy.cpp",
     "src/checkpoint10/collect-r2/func_00174d9c.cpp",
     "src/checkpoint10/collect-r2/func_001c6a68.cpp",
-    "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
     "src/checkpoint10/collect-r2/func_001c7d7c.cpp",
     "src/checkpoint10/collect-r2/func_001c8244.cpp",
     "src/checkpoint10/collect-r2/func_001cb10c_destructor.cpp",
     "src/checkpoint10/collect-r2/func_001387f4.cpp",
-    "src/checkpoint10/collect-r2/func_0011359c.cpp",
     "src/checkpoint10/collect-r2/cutoff.cpp",
     "src/checkpoint10/collect-r2/func_0017a71c.cpp",
     "src/checkpoint10/collect-r2/func_001a2d9c.cpp",
@@ -4387,7 +4445,7 @@
     "src/wave12/func_001dc90c.c": "647cc177ed9e93178989854a1ab564507a728b1e8c66f2ef402b25c6f4ca2013",
     "src/wave20/func_0013156c.cpp": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b"
   },
-  "notes_sha256": "b0bc4002fd88e30e01c7f071adad9ed9722cdb27d9633784e54cfdea52c14ca9",
+  "notes_sha256": "8cf7b1b9e1397b37dd5734fb3c95894dfcae31833bb220f5fd7c3a23f6d142a4",
   "cross_checkpoint_reservations": {
     "agent": "IntegrateC011",
     "functions": [
@@ -4458,5 +4516,6 @@
   },
   "audio_contract_adjudication": "AUDIO-CONTRACT-ADJUDICATION-r1.json",
   "task_contract_adjudication": "TASK-CANCELLATION-ADJUDICATION-r1.json",
-  "input_hash_scope": "Previous complete source/header/config binding set, current proposed dry-ledger sources and the10 new project headers explicitly listed by the merged model commit. No compiler or whole-audit success is implied."
+  "input_hash_scope": "Previous complete source/header/config binding set, current proposed dry-ledger sources and the10 new project headers explicitly listed by the merged model commit. No compiler or whole-audit success is implied.",
+  "callback_atomic_adjudication": "CALLBACK-ATOMIC-ADJUDICATION-r1.json"
 }

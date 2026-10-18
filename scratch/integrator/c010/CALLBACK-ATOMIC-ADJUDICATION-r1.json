@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "source_bindings": [
+    {
+      "source": "src/checkpoint10/collect-r2/func_0011359c.cpp",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/checkpoint10/collect-r2/func_0011359c.cpp",
+      "before_sha256": "df2f8c2e3a91a580fbf4cb3722894ed0ba96634dab7c41200b4e0a21d98992aa",
+      "after_sha256": "d3cb024318d2bcad68816fdc4dc0224d186cdd0552dc2086c3500e3b335bcef0"
+    },
+    {
+      "source": "src/sdk/func_0010be14.c",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/sdk/func_0010be14.c",
+      "before_sha256": "ab5b229fcfbd01ffce54838e552ef3ce2f495eedf9f8ad5754e19d473800bad3",
+      "after_sha256": "759466c43a7710716661d65807bd8727f90b2d16a392d460886104c338c11456"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7e90.cpp",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/checkpoint10/func_001c7e90.cpp",
+      "before_sha256": "7525e56a8fe496d5d8825b1d03291dd784993bcd844bd9d55476627b42bd31d4",
+      "after_sha256": "bf1627bb1304a2f81d2ad4d216771c6993385e6c8a3559fe21bf3a4952d3d45d"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7f20.cpp",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/checkpoint10/func_001c7f20.cpp",
+      "before_sha256": "85c2277ac16eaa584854fc9609232dd255d749ab0a2ba2c502b580d3d872633f",
+      "after_sha256": "597fdd4a520df587a2c4133a803daeb75fe6cb9afaf2cdb9d501364e129d80f1"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+      "before_sha256": "2e54ef314508070fdc6d8e3f8d2fb98c12dc405adf72aa9bd80aea51ec0c2d52",
+      "after_sha256": "8a18a0d9e9011d7f44a377045fbb19e80d931605fbb445c7216beaadf892f584"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c7d7c.cpp",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/checkpoint10/collect-r2/func_001c7d7c.cpp",
+      "before_sha256": "5f928678226ce2e58a038ec8371278b5f5bd8623448f01ff309cab0f589d4e5c",
+      "after_sha256": "fc45414322c5e7e06a4d6c9af368b0678241b9efa9c353c0f4b63f1d8b68b2fe"
+    },
+    {
+      "source": "src/wave2/func_0011d260.c",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/wave2/func_0011d260.c",
+      "before_sha256": "73441850704d05200674c4f68476e366dc563fefcb6f9370ca85696a34e3d30c",
+      "after_sha256": "5e757c440ed3e595e89998e34dcaa1ba2f39e38bf0b35d9f0ec26370ddfb882a"
+    },
+    {
+      "source": "src/wave15/func_0018dc38.c",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/wave15/func_0018dc38.c",
+      "before_sha256": "b564521faa0dab8995976431c407de5ab856f4accaf58fd1aa1c49b35e37d068",
+      "after_sha256": "fade75e848ff595d24bbe6d97a0b997dd3444a67ad65ae2ee594fa671b0e9e27"
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "preserved_before": "scratch/integrator/c010/owner-cutover/before-milestone5/src/checkpoint10/func_0011d12c.c",
+      "before_sha256": "b8d4c8e7ed0ea268ba034fa3eebb7be66333578e02f44aff8b865ff7d93fafd2",
+      "after_sha256": "e5ea53336e3b9e4530f75d88df129303f76148d720305a9c4321961b8951731e"
+    }
+  ],
+  "allocation_callback": {
+    "symbol": "data_002429f8",
+    "contract": "void(*)(unsigned module,unsigned kind,unsigned id,void*memory)",
+    "storage": "interior word AllocationSystem.release at data_002429f4+4, not another allocation",
+    "canonical_header": "include/game/render_state.h",
+    "source_consumers": [
+      "src/checkpoint10/func_001c7e90.cpp",
+      "src/checkpoint10/func_001c7f20.cpp",
+      "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+      "src/checkpoint10/collect-r2/func_001c7d7c.cpp",
+      "src/wave2/func_0011d260.c",
+      "src/wave15/func_0018dc38.c",
+      "src/checkpoint10/func_0011d12c.c"
+    ],
+    "qualification": "The implemented consumer declarations/calls are coherent; the original full indirect/global-object consumer sweep remains part of final heavy-slot audit."
+  },
+  "atomic": {
+    "symbol": "func_0011359c",
+    "contract": "int(int*state)",
+    "canonical_header": "include/game/synchronization.h",
+    "source_consumers": [
+      "src/checkpoint10/collect-r2/func_0011359c.cpp",
+      "src/sdk/func_0010be14.c"
+    ],
+    "proof": "Existing recursive-mutex consumer requires a signed word and a scalar success result; emitted definition uses approved ARMCC exclusives intrinsics. No inline assembly or volatile steering added."
+  },
+  "pipeline": {
+    "original_facts": "owner-cutover/factory-facts-pipeline-r1.json",
+    "cleared_byte_count": 2132,
+    "decision": "Preserve original fixed initialization extent0x854 independently of sizeof a partial flexible-tail view.",
+    "canonical_refinement": "512 typed buffer bucket pointers replace exactly the opaque0x800-byte prefix, with existing configuration/current/snapshot offsets unchanged.",
+    "removed_private_types": [
+      "W6eGpuBuffer",
+      "PipelineStorage",
+      "GpuState"
+    ],
+    "retained_qualification": "W6eGpuBuffer is a descriptive observed partial buffer view, not a recovered native class. The existing canonicalGpuState already refines an opaque region into active_texture at+0x58; that equivalent additional field does not establish a second owner."
+  },
+  "actual_runs": {
+    "initial": "header-callback-match-r1/results.json",
+    "initial_exits": {
+      "0": 7,
+      "1": 1,
+      "2": 1
+    },
+    "final": "header-callback-match-r2/results.json",
+    "final_exits": {
+      "0": 9
+    },
+    "all9_match": true,
+    "qualification": "Final pass preceded the last unrelated c009 semantic-fix merge; no final stable-header G3/signature/argcheck is inferred."
+  },
+  "remaining_integrator_markers": 248,
+  "completed_marker_units": [
+    "src/checkpoint10/collect-r2/func_0011359c.cpp",
+    "src/checkpoint10/func_001c7e90.cpp",
+    "src/checkpoint10/func_001c7f20.cpp",
+    "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+    "src/checkpoint10/func_0011d12c.c"
+  ],
+  "new_aliases": 0,
+  "shims": 0
+}

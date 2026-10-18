@@ -1,10 +1,7 @@
 /* [INFERENCE] Descriptive exclusive-word wrapper. The signed state and scalar
  * success contract follow the recursive-mutex client in src/sdk/func_0010be14.c.
  * ARMCC __ldrex, __strex and __clrex are approved compiler intrinsics. */
-/* INTEGRATOR: move the C-linkage entry declaration to a shared atomic header. */
-extern "C" {
-int func_0011359c(int *state);
-}
+#include "game/synchronization.h"
 
 class ExclusiveWord {
     unsigned *value;

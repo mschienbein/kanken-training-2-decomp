@@ -4,7 +4,56 @@ This is an integrator working record, not acceptance or an independent review.
 No full build, full suite, prepare, finalize, history edit or push has run here.
 All counts below are candidate scope/evidence, never accepted credit.
 
-## Current milestone 4 — remaining collection and audio contracts, not review-ready
+## Current milestone 5 — shared callback/atomic family, not review-ready
+
+Milestone 4 is committed at `c407dda52e3816e5bab2e21d9ee57fb43c258cc3`.
+C009 is now merged through `66ae9935979611ba916910d0217376dbb6ee3fda`;
+main remains merged through `85fd18dc7173e0542d8c33db157d03b7910c18c5`.
+C010 remains **v2/none**, with the same **538 units / 553 identities**
+(548 new functions / 56,380 B plus five accepted moves / 180 B).
+The dry proposal remains **2,738 units / 2,827 functions**. The final scope
+now includes **14 directly revised accepted units**. **248 marked candidate
+units remain**; this is not ready for independent checkpoint review.
+
+`render_state.h` now owns the four-argument data_002429f8 callback declaration.
+It denotes the existing AllocationSystem.release word at data_002429f4 + 4,
+not a second allocation. All seven implemented source-local declarations were
+removed, including native namespace declarations which now resolve the same
+global C-linkage object. No callback arguments were dropped or reinterpreted.
+`synchronization.h` also owns caller-proven `int func_0011359c(int*)`; both the
+exclusive-word definition and the accepted recursive-mutex consumer use it.
+Approved ARMCC exclusive intrinsics remain unchanged; no assembly or volatile
+steering was added.
+
+The first nine-unit pass exposed two genuine existing canonical regressions:
+0011d12c still redeclared PipelineStorage/GpuState privately, and accepted
+0011d260 used sizeof a partial flexible-tail view as the original clear extent.
+These actual compile/mismatch results are retained, not called harness incidents.
+Original abstract call facts prove that 0011d260 clears **2,132 B (0x854)**.
+It now uses that semantic fixed extent rather than inventing a complete class
+size. The canonical pipeline exposes its 512 actual buffer-bucket pointers
+within the same +0..+0x7ff prefix, preserving configuration/current/snapshot
+offsets. The source now reuses canonical GpuState, whose additional active-texture
+field merely refines the former opaque span. Its observed buffer-prefix record
+is shared without a recovered-native-class claim.
+
+After those coherent fixes, **all nine scoped units MATCH, nine exits 0**,
+including all three newly revised accepted consumers. Five more marked units
+are complete. `CALLBACK-ATOMIC-ADJUDICATION-r1.json` binds every source revision,
+the original clear-size facts, both actual runs and their qualifications.
+The final pass preceded the newest unrelated c009 semantic-fix merge; it is
+not a fresh whole-header/G3/argcheck pass on that last parent state.
+
+`HANDOFF.json`, `dry-matches-r5.json` and `match-scope-r5.json` are the current
+boundary. All previously 183 uncollected rows remain fully dispositioned, and
+all audio/model prerequisites and deferrals from milestone 4 remain in force.
+FinishC009b still owns the heavy slot. Canonical signatures, final affected-
+header caller expansion/MATCH, G3, complete original indirect/callback consumer
+sweep, argcheck and the seven-step pre-review remain open. No compiler job is
+running. No full build/suite/prepare/finalize/history/push operation was run here.
+
+
+## Historical milestone 4 — remaining collection and audio contracts, not review-ready
 
 Merged finalized main (c008-r3 seq8) and c009 through
 `90cc196cb7107f5c79424d721ec4730b74323495`, then main

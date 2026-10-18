@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "INCOMPLETE-NOT-A-PRE-REVIEW-PASS",
+  "scope": "Mandatory qualifications to carry into the eventual complete801-unit/805-function pre-review and independent reviews",
+  "functions": [
+    {
+      "function": "func_001c20e8",
+      "source": "src/wave18/func_001c20e8.cpp",
+      "verdict": "QUALIFIED",
+      "method": "Original-safe CFG proves counted backedge and no memory effects; Main rules plain observed loop faithful, not absent codegen steering. Destination match.py re-run MATCH20/20,exit0.",
+      "qualification": "Original loop purpose unknown (delay or leftover loop); compiler retains the counted loop. Unused writable collection formal is preserved; caller/result contracts still require the full caller sweep.",
+      "ruling": "scratch/integrator/c009/counter-loop-ruling-r1.json",
+      "evidence": "scratch/integrator/c009/counter-loop-ruled-r1.json"
+    }
+  ]
+}

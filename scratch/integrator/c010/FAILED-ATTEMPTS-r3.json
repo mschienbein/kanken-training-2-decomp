@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "actual_runs": [
+    "header-callback-match-r1/results.json",
+    "header-callback-match-r2/results.json"
+  ],
+  "initial_results": {
+    "match": 7,
+    "mismatch": 1,
+    "refused": 1
+  },
+  "initial_mismatch": {
+    "source": "src/wave2/func_0011d260.c",
+    "observed": "112/116B after using sizeof the partial flexible-tail canonical view",
+    "cause": "Original clears2132B independently of the partial current C view size.",
+    "resolution": "Use semantic PIPELINE_STORAGE_INITIALIZED_BYTES=0x854 proven by original call argument."
+  },
+  "initial_refusal": {
+    "source": "src/checkpoint10/func_0011d12c.c",
+    "observed": "PrivatePipelineStorage/GpuState redefinitions and missing canonical bucket member; exact errors retained.",
+    "resolution": "Canonical512-bucket prefix +shared observed buffer record, remove private equivalent GpuState and PipelineStorage definitions, preserve existing config/current/snapshot offsets."
+  },
+  "final_results": {
+    "match": 9,
+    "exits": {
+      "0": 9
+    }
+  },
+  "harness_incident": false
+}

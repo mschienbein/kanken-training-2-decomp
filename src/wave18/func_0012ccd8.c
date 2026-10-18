@@ -1,24 +1,9 @@
 #include "game/functions.h"
 #include "game/bss_0049ecf0.h"
 
-struct CommandPatch {
-    unsigned reserved00[2];
-    unsigned pair_count;
-    unsigned reserved0c[3];
-};
-struct ExtendedCommandQueue {
-    struct CommandQueue queue;
-    int cursor;
-    unsigned capacity;
-    unsigned captured_size;
-    struct CommandPatch *patch;
-    unsigned reserved38;
-    unsigned char complete;
-    unsigned char flush;
-};
 
 
-void func_0012ccd8(struct ExtendedCommandQueue *detail, struct Command *command)
+void func_0012ccd8(struct CommandQueue *detail, struct Command *command)
 {
     detail->patch->pair_count = ((unsigned)((const unsigned char *)command->source + command->size -
         (const unsigned char *)detail->patch) - sizeof(struct CommandPatch)) >> 3;

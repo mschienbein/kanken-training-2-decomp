@@ -14,7 +14,7 @@ void func_001c1d4c(struct W16SingleDisplay *state)
         struct ResourceEvent *object = func_0017a818(table, 4, 0, 0.0f, 0.0f, 2.2f);
         /* ORIGINAL BUG: label setup is not skipped if allocation fails. */
         if (table->count > 0)
-            func_0017a968(object ? &object->base : 0, table, 0, 0);
+            func_0017a968(&object->base, table, 0, 0);
         handle->object = object;
     }
 }

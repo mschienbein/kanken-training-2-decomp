@@ -204,7 +204,8 @@ struct WorkQueue {
     int current;
     int active;
     unsigned char reserved0c[0x1018];
-    unsigned writeIndex, readIndex;
+    int writeIndex;                         /* signed modulo-256 producer arithmetic */
+    unsigned readIndex;
 #ifndef __cplusplus
     struct WorkCommand commands[];
 #endif
