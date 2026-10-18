@@ -1454,6 +1454,10 @@
       "address": 2031640,
       "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/font/font_ResFontBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
     },
+    "_ZNK2nw4font4Font17GetCharStrmReaderEw": {
+      "address": 2051320,
+      "evidence": "c009: src/wave20/func_001f4cf8.cpp defines the frozen native nw::font::Font::GetCharStrmReader(wchar_t) const API at this address; whole-function 64-byte MATCH under the frozen game profile is scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json. The hidden aggregate result, const Font receiver and unused wchar_t dummy are retained. This is a same-address own definition, not an external callee alias; original private identity remains qualified."
+    },
     "_ZTV14W11BaseCommand": {
       "address": 2242904,
       "evidence": "Matching base constructor at 0x0017a508 installs this ARM ABI vtable address plus eight."

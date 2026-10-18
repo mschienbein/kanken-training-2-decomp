@@ -317,13 +317,17 @@
       "_ZN14CodeUnitReader12readVariant1Ev",
       "_ZN14CodeUnitReader12readVariant2Ev"
     ],
-    "classification": "collected-canonical-destination-MATCH",
+    "classification": "withdrawn-after-collected-MATCH-contract-unresolved",
     "destination": "src/wave20/func_0013156c.cpp",
     "collection_evidence": "scratch/integrator/c009/collection-r1.json",
-    "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "reason": "The reconstructed mutable CodeUnitReader/EncodingSource classes duplicate the physical native Font/CharStrmReader family without establishing its real API. The frozen native factory returns const CharStrmReader by value, takes a const Font receiver and retains an unused wchar_t dummy; the same-address native definition now MATCHes at 001f4cf8. The separate 0013156c factory uses method table 0021c5e0 under the middleware profile. Its distinct version/namespace, result/receiver and unused-input contracts remain unresolved. Binding the already-owned native member name at a second address, assuming another overload, or retaining a shadow reader is refused. Original collected MATCH/source/receipt evidence is preserved; this row is withdrawn from current credit.",
     "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
     "author_source_current_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7",
-    "author_receipt_source_hash_agrees": true
+    "author_receipt_source_hash_agrees": true,
+    "prior_collection_reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+    "current_credit": false,
+    "deferral_report": "scratch/integrator/c009/interface-deferrals-r2.json",
+    "preserved_canonical_source": "scratch/integrator/c009/deferred-contract/func_0013156c.cpp"
   },
   {
     "author": "w20b",
@@ -338,13 +342,16 @@
       "_ZN17CodeUnitReaderAlt12readVariant1Ev",
       "_ZN17CodeUnitReaderAlt12readVariant2Ev"
     ],
-    "classification": "collected-canonical-destination-MATCH",
+    "classification": "collected-native-definition-MATCH",
     "destination": "src/wave20/func_001f4cf8.cpp",
     "collection_evidence": "scratch/integrator/c009/collection-r1.json",
     "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
     "author_receipt_sha256": "2002e94154b5c5ba7cb7d9e1e3692153ccf76783c543b1d68dc7297c783f6e7f",
     "author_source_current_sha256": "e3767c0d1fa069d0869e90cb86c833248fb00509763ce6c79c5b0376737ec49b",
-    "author_receipt_source_hash_agrees": true
+    "author_receipt_source_hash_agrees": true,
+    "native_definition": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+    "native_evidence": "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+    "native_reason": "Frozen native wchar_t factory API replaces the mutable reader shadow: by-value const aggregate result, const Font receiver, unused dummy and private const method-pointer initialization are retained. Whole 64-byte native definition MATCH, exit0; proposed own-definition name adopted."
   },
   {
     "author": "w20e",

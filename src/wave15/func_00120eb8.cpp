@@ -17,7 +17,8 @@ extern "C" signed char func_00120eb8(void)
 {
     unsigned handle = func_00192a7c();
     signed char value;
-    Result result = func_0012e528(&handle, &value);
+    /* The IPC writes raw object bytes; this wrapper interprets the byte as signed. */
+    Result result = func_0012e528(&handle, reinterpret_cast<unsigned char *>(&value));
     unsigned address = (unsigned)__current_pc();
     check_result(result, address);
     /* ORIGINAL BUG: a returning error reporter leaves value uninitialized after failed IPC. */

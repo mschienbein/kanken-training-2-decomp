@@ -18,7 +18,9 @@ struct ScreenInitializationState;
 struct L043PlaybackEntry;
 
 struct ScreenInitializationState : CallbackTarget {
-    unsigned char reserved04[0x48];
+    unsigned char reserved04[0x30];
+    int transition;
+    unsigned char reserved38[0x14];
     struct W6ListController *actions;
     struct W8DisplaySet *screen;
     struct Screen *selection;
