@@ -11,9 +11,10 @@ gates v1.18; v5 is retired, never adopted. The exact accepted gate text and seal
 reviews are `scratch/review/r1-jumptables-r3/REVIEW.md` and
 `scratch/review/models-v6/GATES-ACCEPTED.md` / `SEAL.json` (PASS_WITH_QUALIFICATIONS).
 Both gate revisions follow finalized `c008-r3` (sequence 8) and precede the code merge.
-The new **`armlink5-inline-branchnop-v8`** is explicit and unadopted. V7 is retired after
-independent review found incomplete group-retention and compact-extab extent proofs.
-V8's exact gate proposal is `scratch/exidx/v8/GATES-DRAFT.md`; no gate/default changes here.
+The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-unwind closure)
+is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
+sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
+(PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -61,7 +62,7 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v5` (reviewed 22cb05b) | **retired**, never adopted | reviewed v4/alias composite incorrectly refuses independently bound D1/D2 sections when the nonzero symbol excludes a trailing pool; historical receipts retain that identity, superseded by v6 |
 | `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
 | `armlink5-inline-branchnop-v7` (88f5c38) | **retired**, never adopted | its own-exidx exception could partially remove a live COMDAT group and accepted truncated compact extab while rejecting complete zero-terminated entries; sealed review `scratch/review/exidx-v7/REVIEW.md`, FAIL |
-| `armlink5-inline-branchnop-v8` | unadopted, separate independent review required | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
+| `armlink5-inline-branchnop-v8` | frozen opt-in, adopted gates v1.19; PASS_WITH_QUALIFICATIONS | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
 
 ## Function-entry alias identity (v6 only)
 
@@ -145,7 +146,7 @@ Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
 `RemovedCalleeModelTest`, `CppAliasCompareTest`, `AliasCompareSafetyTest`, and
 `BuildRemovedCalleeModelTest` in `tests/test_inplace.py`, `tests/test_match.py`, and `tests/test_build.py`.
 
-## Removed-helper unwind companions (v8 only, unadopted)
+## Removed-helper unwind companions (v8 only)
 
 `armlink5-inline-branchnop-v8` is corrected v6 plus the following single R1 extension.
 The default, `strict-v1`, and v2/v3/v4/v6 policies remain unchanged; v5 and v7 remain retired.
