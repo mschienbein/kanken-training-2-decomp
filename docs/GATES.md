@@ -1,6 +1,23 @@
-# Gate design — frozen v1.18 (2026-10-17)
+# Gate design — frozen v1.19 (2026-10-17)
 
 Revisions:
+- **v1.19** (2026-10-17): only the new, explicitly selected immutable model
+  `armlink5-inline-branchnop-v8` permits an R1-removed helper's exclusive own EHABI index
+  and supported frame-only extab to disappear with its complete removable allocated
+  section-group/copy closure. V8 is corrected v6 plus this rule only. The active frozen
+  strict-v1/v2/v3/v4/v6 rules remain unchanged; v5 and v7 remain retired, never adopted.
+  V7's rejected rule permitted partial live-COMDAT-group removal and accepted compact extab
+  without the required empty descriptor-list terminator; neither behavior is corrected
+  under its recorded name. V8 requires every affected group's allocated member in every
+  supplied copy to have an independent R1-code or own-companion removal proof; kept,
+  unmodeled or unrepresented members and unsupported group semantics refuse removal.
+  Out-of-line compact extab includes the complete unwind prefix plus exactly one final
+  zero descriptor-list terminator, checked separately from encoded unwind-word count.
+  Shared/combined metadata, kept-function keys, required original placement, other incoming
+  references, unsupported relocations, scope descriptors and incomplete/trailing data fail
+  closed. Selection, both fresh full receipts, prepare and history explicitly bind v8 and
+  every eliminated companion; model transitions reopen every affected R1 caller. No function,
+  helper, metadata, data or denominator credit follows from this implementation or draft.
 - **v1.18** (2026-10-17): only the new, explicitly selected immutable linker model
   `armlink5-inline-branchnop-v6` permits proven full-section zero-size ELF `STT_FUNC` entry
   aliases to borrow a sibling's binding or satisfy R1 entry identity. Independently bound
@@ -210,6 +227,13 @@ The revision entries and normative blocks below quote the final accepted text fr
   (PASS_WITH_QUALIFICATIONS, reviewed tip `5bb20a9a3251e83cddc37d6b64a166679ebd8e51`);
   `scratch/review/models-v6/SEAL.json` binds accepted-text SHA-256
   `8527da3980abb976df18dfcaa9934e742c4e339916a2e3af083c3279573a5094`.
+- v1.19 v8 entry, adoption boundary, R1 model-selection addition, complete own-unwind closure
+  and G4/G6 reviewer additions: `scratch/review/exidx-v8/GATES-ACCEPTED.md`
+  (PASS_WITH_QUALIFICATIONS, implementation `75c4aa51fdc2a00e82ce5b60a6552ff6904eb50b`,
+  reviewed tip `7304f5c0a4ad891f0f3602a86c265b7fd2b57b46`); `scratch/review/exidx-v8/SEAL.json`
+  binds accepted-text SHA-256
+  `4886bfc5fe81c2349c044c216ef6814064d6d5763f06ba024569dbae1c095ea9`. The branch's later
+  merge of main (`70fe237`) reconciles `docs/LINKER.md` status text only.
 
 The selector re-review requires the following integration order verbatim:
 
@@ -235,6 +259,20 @@ selecting it. Do not change gates during a checkpoint, rewrite historical select
 receipt/history evidence, merge a stale feature parent, or reinterpret strict-v1/v2/v3/v4 or
 retired v5 under another name. A private MATCH and passing checks grant no checkpoint,
 function, helper, data or denominator credit.
+
+### V8 adoption sequencing
+
+Adopt this as a distinct recorded revision on top of frozen GATES v1.18. Preserve all
+v1.17/v1.18 provisions and historical evidence; do not replace main with the author
+branch GATES v1.16 file. Activation requires this passing independent implementation/
+exact-text review, Main running the integrated full suite, and finalization and closure
+of any active checkpoint under its existing frozen evidence before a new prepare selects
+v8. Do not change gates during a checkpoint or retroactively select any checkpoint.
+The inherited otherwise-v4/v6-only bounded-switch and function-entry-alias authorizations
+also apply under explicit v8 selection; no older model identity or proof is changed.
+Only the complete own-unwind exception below extends the v6 reference-removal boundary.
+This approval performs no adoption and grants no source, helper, metadata, data or
+denominator credit.
 
 ## Author loop (no gate, private)
 
@@ -369,6 +407,17 @@ separately selected composite; it does not change strict/v2/v3/v4 or resurrect r
 The default remains v2. Selection, both fresh receipts, prepare and finalized history must
 name v6 explicitly; the existing transition review reopens all affected R1 callers. No old
 or in-flight checkpoint is retroactively selected or reinterpreted.
+
+After this complete v8 implementation and exact text receive independent approval and this
+revision is frozen, R1 also admits the distinct `armlink5-inline-branchnop-v8` identifier.
+V8 inherits every approved v4 bounded-CFG/effect/state condition and corrected-v6 alias,
+independent-binding, COMDAT, retention and placement condition. Its only exception to v6's
+all-reference/unwind boundary is the complete own-companion rule below. V7 remains retired
+with its historical failure reason; no old identity is broadened or silently reinterpreted.
+Default selection remains v2 / literal `none`. Both fresh G4 builds, immutable selection,
+prepare and finalized history must name v8 explicitly. Existing model-transition and
+helper/header/COMDAT dependency reviews remain mandatory, including unchanged credited
+callers and helper-only ledger units. A private MATCH is neither adoption nor acceptance.
 
 A credited caller may use R1 only when all the following conditions hold:
 
@@ -703,6 +752,100 @@ recorded-symbol-size requirement in R1 condition 3; every other R1 shape, root, 
 reference and qualification requirement remains. Independently bound legacy placement
 is not that exception: it neither borrows identity nor makes a helper removable.
 No v5 normative text is adopted or mechanically renamed into v6 approval.
+
+### Complete own-unwind closure (v8 only)
+
+1. Only explicit v8 selection enables this exception. Select the code helper under every
+   unchanged corrected-v6 R1 requirement first. The complete source-defined 4/8-byte ARM
+   helper and every supplied identical removable COMDAT copy must remain original-unbound,
+   unrooted and independently eligible. At least one actual admissible inlined call per
+   entity is required, including the existing identical-used-copy rule. A metadata entry
+   or apparently unused group cannot authorize general dead-code/data elimination. Bound
+   aliases, mixed original-bound/removable copies, unsupported counterparts, contradictory
+   copies and all existing call-ABI/CFG/reference failures remain refusals.
+2. Each eliminated text section owns at most one eliminated index. It is complete readonly,
+   allocated, non-executable, non-NOBITS `.ARM.exidx*`, type SHT_ARM_EXIDX, SHF_LINK_ORDER,
+   with sh_link to that exact defining text section in that object. Combining objects remaps
+   the linked index within object ownership. Size is exactly eight, alignment at least four,
+   entry size zero/eight. Exactly one offset-zero R_ARM_PREL31 targets the helper's section/
+   function entry, zero effective addend and bit 31 clear. Shared/combined/duplicate indexes,
+   keys for kept code, interior keys and missing/unsupported metadata are refused; no entry
+   is split out of a section or assigned an invented original address.
+3. The second index word is CANTUNWIND (1), one-word compact personality 0 directly in exidx,
+   or exactly one offset-four R_ARM_PREL31 to the start of one exclusive `.ARM.extab*`.
+   Extab is complete readonly, allocated, non-executable, non-NOBITS SHT_PROGBITS, aligned
+   at least four, without link-order/fixed-entry metadata. Only compact personalities 0/1/2
+   followed by an **empty descriptor list** are modeled. The header/unwind prefix occupies
+   four bytes for personality 0 and `4 * (1 + N)` bytes for personalities 1/2, where N is the
+   encoded extra-unwind-word count. Exactly one additional zero word must follow that prefix.
+   Validate its value independently of N and require the complete section size to be eight
+   bytes for personality 0 or `4 * (2 + N)` for personalities 1/2. Missing/partial/nonzero
+   terminators, missing/excess unwind words, nonempty scope descriptors, generic formats,
+   trailing/combined entries and interior targets refuse removal. The direct one-word
+   personality-0 representation inside exidx is distinct and remains unchanged.
+4. Only the structural PREL31 references above and offset-zero R_ARM_NONE dependency markers
+   to the matching undefined `__aeabi_unwind_cpp_pr0/1/2` are modeled in eliminated metadata.
+   CANTUNWIND has no extra dependency. An extab-pointing index has exactly its two structural
+   references, with personality dependence in extab. Every other relocation or dependency,
+   misplaced/unknown NONE marker, descriptor relocation and V4BX in metadata is refused, not
+   ignored on the assumption that it will disappear. Ordinary code's existing nonreferencing
+   V4BX treatment is unchanged.
+5. Both companions have no root, explicit retention, original binding or independent named/
+   exported entity, and their COMDAT identity agrees with the described code. Only local
+   zero-size offset-zero section/data-mapping symbols are allowed. Exidx has no incoming
+   allocated reference; extab's sole incoming reference is its own index's offset-four
+   PREL31. Census every supplied allocated section, including otherwise unplaced sections,
+   and all link-order dependencies. Sharing, other incoming references and required original
+   placement prevent elimination. Every other helper reference still passes unchanged R1;
+   pointers, tail calls, dependencies, interior/addended targets and inadmissible calls cannot
+   disappear through this exception.
+6. **Complete allocated group/copy closure is mandatory before exempting any metadata
+   reference.** Equal signatures alone are insufficient. For each affected COMDAT signature,
+   inspect every supplied group's/copy's actual allocated membership and all same-signature
+   allocated sections. Every member must already be selected v6-eligible R1 code or a fully
+   validated own-exidx/extab companion. Any surviving catalogued caller/function, independently
+   bound entity, ordinary placed or unplaced data/BSS, unsupported code or unrepresented
+   allocated member prevents whole-group elimination. Preserve allocated membership witnesses
+   even for zero-size sections omitted from frozen placement, and preserve/remap them through
+   object combination. A missing/contradictory witness or member cannot be ignored. Non-COMDAT
+   or unknown group semantics are unsupported by the exception and fail closed. No arbitrary
+   unused member is swept into the removal set. Every selected code entity must still pass
+   the unchanged actual-inlined-call requirement; closing a group does not waive it.
+7. Never select an entry for a surviving function. Such a function's separate unwind index
+   remains under the inherited hybrid-link qualification, not a new reconstruction claim.
+   A companion binding or incoming reference requiring it in the original output refuses
+   elimination. An unbound removed helper has no original address to encode as an original
+   key. Do not invent one or alter original unwind bytes. The flat image has no section
+   headers/authenticated original exidx bounds; absence of an identified original table stays
+   explicitly [INFERENCE], not a stripping premise. V8 is not general exception-table
+   placement/merging/stripping or proof of the original exception regime.
+8. Each removed helper and per-call target-null rewrite records every eliminated companion's
+   name/index, kind, full size and defining-object ownership in `unwind_sections`. Complete
+   defining source/object/profile hashes remain bound in both full receipts and the ledger,
+   including helper-only units. No helper or metadata earns catalogue/data credit; no payload
+   or original disassembly is recorded. Existing selection/full-receipt/history closure and
+   all helper/COMDAT/header dependency/model-transition reviews remain mandatory.
+9. Exact full-function bytes/extents, every incoming/outgoing ABI/control-flow path, typed
+   helper/caller contracts, little-endian/conforming-call obligations, visible [INFERENCE]
+   source notes and explicit QUALIFIED identity-provenance review rows remain mandatory.
+   Neither group closure, metadata framing nor an exact MATCH proves the helper's original
+   existence, identity or historical call graph. No source-policy waiver or complete native
+   armlink/all-source unwind/exception proof is claimed.
+
+#### G4/G6 reviewer additions (v8)
+
+G4's exactness, frozen selection and full-receipt obligations also require the complete v8
+rule above in each fresh build. Every eliminated companion must appear in each full receipt.
+Byte-identical output cannot waive a live group member, truncated entry, unsupported metadata
+or required original placement.
+
+Under G6 inspect actual ELF group membership/flags for all affected copies, including zero-size
+allocated witnesses and object-local remapping; do not infer group discard from signatures or
+helper-call removal alone. Independently establish every member's removal proof. Inspect
+actual type/flags/sh_link, effective PREL31 targets, whole-section extent, encoded unwind-word
+count and separate final zero descriptor terminator. Check all incoming references, ownership,
+roots and original bindings. Establish that no kept function/group member or required original
+entry is erased. Preserve every inherited typed-contract/ABI/QUALIFIED provenance obligation.
 
 ## Primary sources and review qualifications
 
