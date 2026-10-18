@@ -1,6 +1,70 @@
 # C009 recovered integration handoff
 
-## Readiness resumed from 1f66a8a on main f8adff4
+## Milestone: stable G3 r2 exits zero
+
+`interfaces-stable-r2.json` exits **0** with `--allow-unchecked-cpp`:
+**2,205 units, 1,704 checked, zero disagreements, zero policy findings,
+501 unchecked C++ units and zero unchecked C**. The exact input ledger is
+preserved as `dry-matches-g3-r2.json`. All prior failures remain intact.
+The native member's ledger credit identifier was then normalized back to
+catalogue `func_001f4cf8`; the genuine own-definition alias stays in names.json.
+This label normalization does not change any source, profile or address.
+
+Main subsequently finalized c008-r3 (sequence 8, 1,601 accepted functions) at
+`bb60cd7`. Merge that exact main commit next; incoming changes are only accepted
+records, config/matches.json and documentation. Then repeat stable G3 on the
+finalized successor ledger before the final MATCH/canonical/argcheck/pre-review
+checks. C009 stays explicitly **armlink5-inline-branchnop-v2 / none**; do not
+merge the parallel adopt-models branch or select v4/v6.
+
+Main's requested manifest is `scratch/integrator/c009/candidates.json`, with the
+same schema and canonical credit identifiers as the tracked candidate manifest.
+Scope remains **678 new / 57,212 B**, **123 revised units / 127 functions**;
+the required final union is **801 units / 805 functions**. This is a completed
+G3 remediation milestone, not yet a review-ready checkpoint.
+
+
+## Earlier stable G3 remediation and native reader contract
+
+Continued merge `b6bfcec` without restarting any completed author search.
+Stable `interfaces-stable-r1.json` exited **1**: 2,206 units, 1,704 checked,
+one Heap ODR disagreement, one duplicated-local-prototype policy finding,
+and 502 unchecked C++ units (**zero unchecked C**). The exact failed report
+is retained. `pilot/game_heap.cpp` now includes the canonical Heap definition;
+the two redundant `func_0016fca0` declarations were removed because
+`game/functions.h` already supplies the shared declaration.
+
+Manual C++ inspection found that both mutable CodeUnitReader reconstructions
+duplicated the native character-reader layout without preserving its full API.
+`001f4cf8` now defines the frozen
+`nw::font::Font::GetCharStrmReader(wchar_t) const` interface: a by-value const
+CharStrmReader result, const receiver, and the unused dummy all remain explicit.
+The genuine private constructor initializes its const method-pointer member.
+This complete native definition is **MATCH 64/64 B, exit 0** in
+`native-reader-r2/func_001f4cf8.result.json`; its own same-address mangled name
+is adopted. The initial missing-NW_RELEASE compile failure is preserved in
+`native-reader-attempts-r1.json`; only the existing upstream release-header
+configuration was added, with no frozen header/profile change.
+
+The separate middleware `0013156c` identity/API is not established by that
+physical resemblance. Its distinct table/version/namespace cannot be replaced
+by the already-bound native member name, a guessed overload, or a shadow class.
+It is withdrawn with source and original collection receipt preserved in
+`interface-deferrals-r2.json`. Both mutable reader shadows are removed.
+The original sixteen-address boundary now retains **five** current destinations
+and **eleven** exact deferrals; the earlier six MATCH measurements stay historical.
+
+Current scope: **678 new units/functions / 57,212 B** (game 616/51,528 B,
+middleware 37/4,000 B, sdk 25/1,684 B), **123 revised predecessor units /
+127 functions**, dry **2,205 units / 2,279 functions**. The final required union
+is **801 units / 805 functions**, bound in `readiness-scope-r2.json`.
+Stable G3 r2, the final MATCH sweep, canonical probes, full argcheck adjudication
+and seven-step pre-review remain required; no review-ready claim is made here.
+Checks remain nice'd and sequential. C010's agreed five-unit window has finished
+and no peer compiler/audit process remains in the slot.
+
+
+## Historical initial readiness resume from 1f66a8a on main f8adff4
 
 Main explicitly resumed c009 readiness. Merged prepared main `f8adff4`,
 including complete c008-r3 successor `b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b`.

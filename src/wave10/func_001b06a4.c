@@ -11,7 +11,6 @@ struct SettingsScreen {
 extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);
 extern void func_0017433c(int channel, int duration);
-extern void func_0016fca0(int enabled);
 extern void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition);
 extern void func_0016fa58(struct SettingsScreen *screen, int enabled);
 

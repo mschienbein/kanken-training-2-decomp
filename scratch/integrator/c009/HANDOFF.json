@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "status": "resumed-readiness-checks-pending-main-f8adff4",
+  "status": "milestone-G3-r2-exit0-native-reader-corrected-main-bb60cd7-merge-pending",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.16 unchanged",
-  "candidate_units": 679,
-  "candidate_functions": 679,
-  "target_bytes_from_author_records": 57276,
+  "candidate_units": 678,
+  "candidate_functions": 678,
+  "target_bytes_from_author_records": 57212,
   "profiles": {
     "game": {
       "units": 616,
@@ -14,9 +14,9 @@
       "target_bytes": 51528
     },
     "middleware": {
-      "units": 38,
-      "functions": 38,
-      "target_bytes": 4064
+      "units": 37,
+      "functions": 37,
+      "target_bytes": 4000
     },
     "sdk": {
       "units": 25,
@@ -24,8 +24,8 @@
       "target_bytes": 1684
     }
   },
-  "dry_ledger_units": 2206,
-  "dry_ledger_basis": "Prepared main-root accept/c008-r3/matches.json (1527 units/1601 functions) plus679 c009 additions",
+  "dry_ledger_units": 2205,
+  "dry_ledger_basis": "Prepared main-root accept/c008-r3/matches.json (1527 units/1601 functions) plus678 c009 additions",
   "revised_predecessor_units": [
     {
       "source": "src/pilot/pilot_b.c",
@@ -48,6 +48,13 @@
       "profile": "game",
       "functions": [
         "func_00105fa8"
+      ]
+    },
+    {
+      "source": "src/pilot/game_heap.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0010d604"
       ]
     },
     {
@@ -1006,8 +1013,8 @@
     }
   ],
   "source_sha256": {
-    "config/candidates/c009.json": "038b8a9537b408e11a33404ef6249567b882d495903624e6a40acb6259978463",
-    "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
+    "config/candidates/c009.json": "7b3a07a05ea334f7bbc951f13f7a2cd2801a0f6a624ffe72e349ab2c491d9eb1",
+    "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
     "include/game/adjusted_callbacks.h": "2071245cda5e2b18f35e61014afe62bab4e64bfa5a62ab239d9d3639a3185074",
     "include/game/animation.h": "e6dc76dc1e76ad9699e45a9226691db74672bb2f2bc5003dfbd9095da815b94d",
     "include/game/applet.h": "13b4f47f23fe6a40ba7c822366d2e04a8f5605f4cda13e720128cd9d09daaf62",
@@ -1165,7 +1172,7 @@
     "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92",
     "include/game/task_dispatcher.h": "0708e62557068b012885fc7841f984a755284d0a0eec2912ca981ad3c1069320",
     "include/game/task_runtime.h": "1772a0b58d98d9f9dd0a953dcba14f2c86e5571cc5b1029c9d9695964cff8ca1",
-    "include/game/text.h": "7eb793698dcd2dab5b13ba76789860ca7b540479fd5b9b02c301a8f9d951fc3a",
+    "include/game/text.h": "57c986c7b8488e6d6ee9ae0aa7908a29ef58226168e0e0f5353ce0decb9901a9",
     "include/game/text_renderer.h": "fd26b4f316be5e1183351b4c54827c1ba054b25740f57f3b14900780a406f273",
     "include/game/text_writer.h": "45171408c7ec964b165845160e8a17451f74a4632254959bbe57b7214493f257",
     "include/game/timed_screen.h": "362d40038ff105a1902d27ce27e2d49aa27838b5390f066b53cca6766572d389",
@@ -1258,7 +1265,7 @@
     "src/nw4c/ut_BinaryFileFormat.cpp": "ba4781bc8546c7eb8a01e2e84f69c0061a4b8efbb151a76678a2d20f93fcfc19",
     "src/nw4c/ut_HeapBase.cpp": "60ff73b6d300cb04e212b05081e48ec546a438197ba392345ea06ccad8477d27",
     "src/pilot/game_enum_switch.c": "7c691962bee1ed8e5a2bc793a6915ca3ad02a9b1d61813192019fa05a4076bb3",
-    "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+    "src/pilot/game_heap.cpp": "0ba7c6c9cd78c0fa12d7f71ec6ada5d86fd7d3eb78276df533ff59c0f429b611",
     "src/pilot/loop_cleanup.c": "7b81ffeff17fe7505f3ae87571c79da60ddb7bb65b13cf0804d03a55063f5a44",
     "src/pilot/loop_resources.c": "351698086f70dd04d70f343a50bb4a6341e48b7bf483d74236e998778bc2b829",
     "src/pilot/loop_state.c": "95e71bd3139b9bbf24a1cb6b1199b115c8c411bb9b1db4b627e3b32db9db10eb",
@@ -1597,7 +1604,7 @@
     "src/wave10/func_00180344.c": "73d8f9155cdf6c0f1a25c529c677be3db8c5c98ac3ee4cf91e868a97fb6aa7c6",
     "src/wave10/func_00180358.c": "3c3d7e5bf61916fc03eb70add11a516a286ab7aec77c23e2154b624009e5678f",
     "src/wave10/func_001963f8.c": "d001bb2bde5516ffbc7d2aaf0e94e6890fc5ba55a87fdd79ad04dd49ac146f6b",
-    "src/wave10/func_001b06a4.c": "a382b273846588a0b74508a89546c5be1069923d081bc6f54b70fef33cad7bfd",
+    "src/wave10/func_001b06a4.c": "8b2850ace7c9b38ec15c29721b6b2c2f564bff4fadf47f1800012aeff95263ee",
     "src/wave10/func_001b5ddc.c": "e89818258b59dcbb7251b444f523838faad8a605abd63303515dc055bce82030",
     "src/wave10/func_001b5ff0.c": "4a21e6831dfa697773e69192debe8f4e454b53ac433733a1b9d567a1c968d45c",
     "src/wave10/func_001dbcec.c": "dae967406afa4c16781b389ae2ae27dd18fc7fcc861864eb82fccae56dbd0bdb",
@@ -1605,7 +1612,7 @@
     "src/wave10/func_001dc160.c": "2b49563b5dd49d54ef8269f10d0f69c3f8f97011d912cbce5583174962d2b010",
     "src/wave10/func_001dc170.c": "75ec84a44215fa2728104d9bcece17141a1725c9954a491f4a1d8e633a0a0ae4",
     "src/wave10/func_001dc230.c": "51ad02575f7a366c91dc742010444885709802500ab3877bd5d5e467b3ed824b",
-    "src/wave10/func_001dd6c8.c": "7a4b13f54d556003d4d4fec6bab6950dd28b893fdb4c15278e42a02d078b0b1f",
+    "src/wave10/func_001dd6c8.c": "5b18a478a49148b72f3d9970fc32244d14f681d5e434c8b954e318b1f662e94f",
     "src/wave10/func_001e9944.c": "b52039b707e8947f6b34dbbebe3944fee621d99ea3670021f38d9e128addff3a",
     "src/wave10/func_001f4fb0.cpp": "e171ba245cd57164e60d8f908a344a40e5bf029a31f110e3b9d97c44fbf713dc",
     "src/wave10/func_002059b8.cpp": "64423286f6261924a37851145fb83adbf884a3648c59f4ea8e146c2e3ac678b1",
@@ -3377,8 +3384,7 @@
     "src/wave18/func_001eade0.cpp": "0e2a8309b58afc2fb4803baefaf565c92728baa127b8629143bcd916f80e6ed7",
     "src/large/func_002095c0.cpp": "e65e16c9cab9a1725027f7b9cd2780ab66b32346ae2d2504236818826f6315aa",
     "src/large/func_002102b4.cpp": "9306a0ace6ba7e770017ef885d3bb2a6f55f6ec105d0c8d457ba2322efbd6109",
-    "src/wave20/func_0013156c.cpp": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b",
-    "src/wave20/func_001f4cf8.cpp": "7a181f50d5cd052087019ef7adc5a6a99c44dd6295097f2d46bd1f6cca17ad66",
+    "src/wave20/func_001f4cf8.cpp": "8100060ef4e1b2417b04aaafe65927cea03e3159253726dfff2cac63c5f3dea8",
     "src/wave18/func_0014d2e4.cpp": "5a9a9891dea0b065390d0e2c5e71f46dc13d6d9020e74be311da0b37344c5406"
   },
   "approved_contract_deferrals": [
@@ -3748,13 +3754,17 @@
         "_ZN14CodeUnitReader12readVariant1Ev",
         "_ZN14CodeUnitReader12readVariant2Ev"
       ],
-      "classification": "collected-canonical-destination-MATCH",
+      "classification": "withdrawn-after-collected-MATCH-contract-unresolved",
       "destination": "src/wave20/func_0013156c.cpp",
       "collection_evidence": "scratch/integrator/c009/collection-r1.json",
-      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "reason": "The reconstructed mutable CodeUnitReader/EncodingSource classes duplicate the physical native Font/CharStrmReader family without establishing its real API. The frozen native factory returns const CharStrmReader by value, takes a const Font receiver and retains an unused wchar_t dummy; the same-address native definition now MATCHes at 001f4cf8. The separate 0013156c factory uses method table 0021c5e0 under the middleware profile. Its distinct version/namespace, result/receiver and unused-input contracts remain unresolved. Binding the already-owned native member name at a second address, assuming another overload, or retaining a shadow reader is refused. Original collected MATCH/source/receipt evidence is preserved; this row is withdrawn from current credit.",
       "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
       "author_source_current_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7",
-      "author_receipt_source_hash_agrees": true
+      "author_receipt_source_hash_agrees": true,
+      "prior_collection_reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "current_credit": false,
+      "deferral_report": "scratch/integrator/c009/interface-deferrals-r2.json",
+      "preserved_canonical_source": "scratch/integrator/c009/deferred-contract/func_0013156c.cpp"
     },
     {
       "author": "w20b",
@@ -3769,13 +3779,16 @@
         "_ZN17CodeUnitReaderAlt12readVariant1Ev",
         "_ZN17CodeUnitReaderAlt12readVariant2Ev"
       ],
-      "classification": "collected-canonical-destination-MATCH",
+      "classification": "collected-native-definition-MATCH",
       "destination": "src/wave20/func_001f4cf8.cpp",
       "collection_evidence": "scratch/integrator/c009/collection-r1.json",
       "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
       "author_receipt_sha256": "2002e94154b5c5ba7cb7d9e1e3692153ccf76783c543b1d68dc7297c783f6e7f",
       "author_source_current_sha256": "e3767c0d1fa069d0869e90cb86c833248fb00509763ce6c79c5b0376737ec49b",
-      "author_receipt_source_hash_agrees": true
+      "author_receipt_source_hash_agrees": true,
+      "native_definition": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+      "native_evidence": "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+      "native_reason": "Frozen native wchar_t factory API replaces the mutable reader shadow: by-value const aggregate result, const Font receiver, unused dummy and private const method-pointer initialization are retained. Whole 64-byte native definition MATCH, exit0; proposed own-definition name adopted."
     },
     {
       "author": "w20e",
@@ -3920,11 +3933,49 @@
     "cpp_compat_r5": {
       "path": "scratch/integrator/c009/cpp-compat-r5.json",
       "exit_code": 0
+    },
+    "interfaces_stable_r1": {
+      "path": "scratch/integrator/c009/interfaces-stable-r1.json",
+      "exit_code": 1,
+      "units": 2206,
+      "checked": 1704,
+      "disagreements": 1,
+      "policy": 1,
+      "unchecked": 502,
+      "unchecked_c": 0,
+      "findings": [
+        "Heap shadow in pilot/game_heap.cpp migrated to canonical heap_interface.h",
+        "Two legacy local func_0016fca0 declarations removed; functions.h already provides the canonical declaration"
+      ],
+      "note": "Exact failed stable snapshot preserved. Both findings fixed afterward; native reader correction and one withdrawal also follow this run."
+    },
+    "native_reader_r2": {
+      "path": "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+      "attempts": "scratch/integrator/c009/native-reader-attempts-r1.json",
+      "exit_code": 0,
+      "status": "MATCH",
+      "address": "001f4cf8",
+      "target_bytes": 64,
+      "definition": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+      "note": "Native API preserves hidden aggregate result, const receiver and unused wchar_t dummy; both mutable reader shadows were removed. First compile exit2 for missing required NW_RELEASE is retained, not overwritten."
+    },
+    "interfaces_stable_r2": {
+      "path": "scratch/integrator/c009/interfaces-stable-r2.json",
+      "exit_code": 0,
+      "units": 2205,
+      "checked": 1704,
+      "disagreements": 0,
+      "policy": 0,
+      "unchecked_cpp": 501,
+      "unchecked_c": 0,
+      "input_ledger": "scratch/integrator/c009/dry-matches-g3-r2.json",
+      "input_ledger_sha256": "0a8355e20937566e726f740a6341b1d9ac30585ff9096a7e35278de73813b994",
+      "note": "Stable source/profile snapshot passes with --allow-unchecked-cpp. Native member credit label was subsequently normalized back to canonical func_001f4cf8 without source/profile changes. Main finalized bb60cd7 afterward; merge it and repeat G3 on the final successor ledger before final MATCH."
     }
   },
   "not_exercised": [
     "final sequential match sweep of all current new/revised units",
-    "final tools/interfaces.py check on stable successor-based dry ledger",
+    "post-bb60cd7 final tools/interfaces.py check on stable successor-based dry ledger",
     "c009-wide native/signature/forwarding same-class probes using c008-r2 script API",
     "complete argcheck run and individual adjudication",
     "complete seven-step pre-review",
@@ -3939,15 +3990,16 @@
   "main_merged": "f8adff4",
   "c008_r2_merged": "38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac",
   "c008_r2_merge_commit": "9218542",
-  "target_bytes_current_catalogue": 57276,
-  "dry_ledger_functions": 2280,
-  "revised_predecessor_functions": 126,
+  "target_bytes_current_catalogue": 57212,
+  "dry_ledger_functions": 2279,
+  "revised_predecessor_functions": 127,
   "revised_predecessor_basis": "Source delta against main f8adff4, before fresh merged-tree verification",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
     "src/large/func_00203810.cpp",
     "src/wave12/func_0016b6a4.c",
-    "src/wave18/func_0010cc94.cpp"
+    "src/wave18/func_0010cc94.cpp",
+    "src/wave20/func_0013156c.cpp"
   ],
   "hash_inventory_method": "SHA-256 from current merged live inputs only; no compilation/acceptance claim. Removed deferred source paths are retained in their explicit deferral records.",
   "additional_contract_deferrals": [
@@ -4001,10 +4053,13 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Main explicitly resumed readiness. Main f8adff4 / complete c008-r3 b5e8b8a is merged with slots0/1/2/14 corrected and before/after names preserved.",
-    "Run stable-ledger G3 to exit0; preserve exact reports/exits. Then final new/revised MATCH sweep, native/signature/indirect/forwarding consumers, complete argcheck adjudication and seven-step pre-review.",
-    "Use main-root scratch/integrator/c008-r3/complete/ as authoritative predecessor evidence. All observed canonical-contract consumers must be adjudicated irrespective of selected source rows.",
-    "Keep checks nice'd and sequential; no full suite/build/prepare/finalize/history edit/push. Coordinate finite toolchain slot with c010/Main."
+    "Commit this G3/native-API milestone, then merge Main bb60cd7 (finalized c008-r3 seq8,1601 accepted functions). Incoming changes are only accept records/config/matches/docs; no source/header/tool/model changes.",
+    "Stable G3 r2 exit0:2205units,1704checked,0disagreements,0policy,501unchecked C++,0unchecked C. Preserve r1 failure and r2 PASS. Repeat G3 after finalized predecessor merge on canonical-credit-label dry ledger.",
+    "Current scope678new/57212B plus123revised predecessor units/127functions; dry2205units/2279functions. Final required union801units/805functions.",
+    "001f4cf8 is the native wchar_t factory own definition (64B MATCH).0013156c remains withdrawn with exact unresolved distinct-native-API reason; do not restore shadow readers or guess another overload.",
+    "Use scratch/integrator/c009/candidates.json as Main requested. It has the same schema/units as the tracked candidate manifest; all credit identifiers remain canonical catalogue func_ names.",
+    "After final G3: nice10 sequential final match sweep (sweep.py final-match-r1 explicitly v2/none,--show0); canonical native/signature/co-inclusion/indirect/forwarding sweeps; every argcheck issue/note and C++/callback/unused-input candidate adjudicated; seven-step pre-review.",
+    "No full suite/build/prepare/finalize/history edits/push here. Do not merge adopt-models or select v4/v6. Main owns isolated suite and c009 preparation after the review-ready commit."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4016,11 +4071,11 @@
       "slot 15 context, saved arguments and result",
       "same-class indirect-consumer audit"
     ],
-    "status": "in progress; no successor commit merged; c008-r2 remains unfinalized",
+    "status": "Complete successor b5e8b8a merged via prepared main f8adff4; no known unmerged c008-r3 fix. Main owns independent review/finalization.",
     "do_not_duplicate": true
   },
   "names_adopted_in_continuation": [],
-  "wrap_up_reason": "User explicitly requested wrapping up the current step and reporting; review-ready acceptance criteria remain unmet.",
+  "wrap_up_reason": "Previous user wrap-up was superseded by Main explicitly resuming readiness; current work continues from the preserved milestone.",
   "handoff_documents": {
     "docs/known-issues-c009.md": "9ddd2555b626bbf1b5084c3e280aa750cefbc3972f2d79554828848ff8ff6261",
     "scratch/integrator/c009-NOTES.md": "af18cbaeebb7d53c9f02ff1d721eaa2acccdeb3a8a63703ab1445886823e207b"
@@ -4030,8 +4085,8 @@
     "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
-    "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
-    "scratch/integrator/c009/dry-matches.json": "8063013743bf951a9f66e26b023c595585c8ca3ebf90c351dd4d025a023d28ce",
+    "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
+    "scratch/integrator/c009/dry-matches.json": "a0e5395ff88d16536079d21251a30f0bc3aee43aa74905b7507488025a93b24f",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec",
@@ -4046,7 +4101,19 @@
     "scratch/integrator/c009/scheduler-bindings-r1.json": "049bc8fd9b5b7a7f8d698669008e6e57626f9e633cd5f5fca2a67d66e15d8e54",
     "scratch/integrator/c009/scheduler-bindings-acyclic-r1.json": "f02b5e0075c264f5841eb68dd6a0b8911625a297c3e9b528522a577ec6dc13b4",
     "scratch/integrator/c009/merge-c008-r3-r1.json": "7a4752c9211891b8b0412abe358fdee191a5dd2656719bc019e00355c896503a",
-    "scratch/integrator/c009/service-notify-r1.json": "96c94805174f6a227505b4085abba78224aaa27d6083bc970dcd49a5598bd7a3"
+    "scratch/integrator/c009/service-notify-r1.json": "96c94805174f6a227505b4085abba78224aaa27d6083bc970dcd49a5598bd7a3",
+    "include/nw/font/font_Font.h": "c1da6dcb284bc9bc233737cfd24a8c74ed407291dd5a46ef00c90fb120455134",
+    "include/nw/font/font_CharStrmReader.h": "3dd3b434f7f17d87872e0f2371e0b580516d4dc6c21e3392b532c4cffee79704",
+    "include/nw/font/font_ResourceFormat.h": "24be15cc1eba0b7cb693bcbb41639de3745344b0c809f7c078855c1a20e12a8e",
+    "include/nw/assert.h": "c9cf614a50090fa3d6cfe66c21019cb6d9e97937e0de718734c1b61013400f8b",
+    "scratch/integrator/c009/interface-deferrals-r2.json": "21b934c2902ab21d336c3c293c7c09cbf3cdb05042cf881c90f6c5d2b36164f1",
+    "scratch/integrator/c009/interfaces-stable-r1.json": "1f761cb0b666d0b5013032ef33abad635c790135954b584903e51ac739d43eef",
+    "scratch/integrator/c009/native-reader-attempts-r1.json": "df03d0f7fcd23f226e9b5c1bcc8f80df5e4ff7598e40f26b2e8d9d4ac33d6cd2",
+    "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json": "b27af3703648b95f7f2b030578102550b5dd1f714e26fb868af2d920903c182b",
+    "scratch/integrator/c009/interfaces-stable-r2.json": "92c23f77f1c0ac317dbc6d1b274d10ab4b1c4d81f8f13ed1bbb6ef62520d2f8a",
+    "scratch/integrator/c009/dry-matches-g3-r2.json": "0a8355e20937566e726f740a6341b1d9ac30585ff9096a7e35278de73813b994",
+    "scratch/integrator/c009/candidates.json": "914500a27a216c992eddc114090f27b6c9afabaf4c173aa152fa9ca28ddb8fc0",
+    "scratch/integrator/c009/sweep.py": "0cd2c77f7b4251ec826a13912dd0282845f9c67972f0aaf9874eaa5461b259a2"
   },
   "collection_milestone": {
     "original_unique_new_scope": 16,
@@ -4057,13 +4124,18 @@
       "scratch/integrator/c009/collection-r1.json",
       "scratch/integrator/c009/collection-r2.json"
     ],
-    "final_style_owner_match": "scratch/integrator/c009/collection-r3.json"
+    "final_style_owner_match": "scratch/integrator/c009/collection-r3.json",
+    "current_retained_unique": 5,
+    "current_deferred_unique": 11,
+    "post_collection_withdrawal": "0013156c; exact canonical API identity reason in interface-deferrals-r2.json",
+    "native_definition_correction": "001f4cf8; native-reader-r2 MATCH, replacing the incomplete explicit-output shadow API"
   },
   "names_adopted_this_continuation": [
     "_ZN13PaneIndexListC1Eiz",
     "_ZN18RuntimeMemberOwnerC1Ev",
     "_ZN18RuntimeMemberOwnerC2Ev",
-    "_ZN13RuntimeMemberC1Ev"
+    "_ZN13RuntimeMemberC1Ev",
+    "_ZNK2nw4font4Font17GetCharStrmReaderEw"
   ],
   "additional_interface_deferrals": [
     {
@@ -4127,6 +4199,29 @@
       "author_receipt": "scratch/authors/w19i/match/final/func_00190d68/func_00190d68.result.json",
       "author_receipt_sha256": "64a079762991fbd07853a49c3da434b0275014fb7e07433533c5f1f3eb6994a6",
       "author_receipt_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29"
+    },
+    {
+      "source": "src/wave20/func_0013156c.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_0013156c"
+      ],
+      "author": "w20b",
+      "function": "func_0013156c",
+      "target_size": 64,
+      "reason": "The reconstructed mutable CodeUnitReader/EncodingSource classes duplicate the physical native Font/CharStrmReader family without establishing its real API. The frozen native factory returns const CharStrmReader by value, takes a const Font receiver and retains an unused wchar_t dummy; the same-address native definition now MATCHes at 001f4cf8. The separate 0013156c factory uses method table 0021c5e0 under the middleware profile. Its distinct version/namespace, result/receiver and unused-input contracts remain unresolved. Binding the already-owned native member name at a second address, assuming another overload, or retaining a shadow reader is refused. Original collected MATCH/source/receipt evidence is preserved; this row is withdrawn from current credit.",
+      "evidence": [
+        "include/nw/font/font_Font.h",
+        "include/nw/font/font_CharStrmReader.h",
+        "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+        "scratch/integrator/c009/collection-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_0013156c.cpp",
+      "integration_source_sha256": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b",
+      "author_source": "scratch/authors/w20b/src/func_0013156c.cpp",
+      "author_receipt": "scratch/authors/w20b/match/func_0013156c/final/func_0013156c.result.json",
+      "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
+      "author_receipt_source_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7"
     }
   ],
   "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3",
@@ -4147,5 +4242,11 @@
     "path": "/home/michael/code/kanken-training-2-decomp/accept/c008-r3/matches.json",
     "sha256": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
     "owners_profiles_unchanged": true
+  },
+  "candidate_manifest_for_main": "scratch/integrator/c009/candidates.json",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none",
+    "status": "explicit in final sweep driver; v4/v6 adoption excluded from c009"
   }
 }
