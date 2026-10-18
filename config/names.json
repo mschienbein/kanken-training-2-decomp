@@ -538,6 +538,10 @@
       "address": 1931068,
       "evidence": "c008: src/retries/func_001d32a0.cpp whole-function MATCH emits an external _ZN11SceneEngineD1Ev reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
     },
+    "_ZN11TextChoicesC1Eiz": {
+      "address": 1461224,
+      "evidence": "cmodels: func_00203a68 allocates 52-byte counted UTF-16 choice objects; its natural native constructor relocation resolves to func_00164be8 and the complete 2540-byte caller MATCHes with L1. [INFERENCE] Descriptive class identity; no C2/destructor or vtable binding is inferred."
+    },
     "_ZN13ArchiveAccess18read_resource_infoEjP19ArchiveResourceInfo": {
       "address": 1588912,
       "evidence": "scratch/integrator/c008/match-pre-merge/func_00183eb0/func_00183eb0.result.json: native definition MATCH at the bound address; class name [INFERENCE]."

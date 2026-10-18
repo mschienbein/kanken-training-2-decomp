@@ -11,6 +11,10 @@ non-creditable catalogue kinds, and functions already accepted or claimed twice.
 function may be explicitly selected with --rehome func_XXXXXXXX; the candidates then record its
 old/new unit (the integrator must remove its old definition before prepare). Writes the candidates
 file and prints what was taken and what was refused.
+
+Explicit --linker-model/--literal-model choices use the matcher's oracle; prepare must select
+them again to freeze the checkpoint. Repeatable --extra-source helpers are copied and compiled
+at their destination under the callers' single shared profile, then retained as zero-credit units.
 """
 from __future__ import annotations
 
@@ -41,12 +45,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--candidates", type=Path, required=True)
     parser.add_argument("--rehome", action="append", default=[], metavar="FUNCTION",
                         help="allow this accepted func_XXXXXXXX to move into a collected unit (repeatable)")
+    parser.add_argument("--linker-model", default=inplace.DEFAULT_LINKER_MODEL, choices=sorted(inplace.LINKER_MODELS),
+                        help="armlink model used to re-derive candidates (prepare must select it explicitly)")
+    parser.add_argument("--literal-model", default=inplace.DEFAULT_LITERAL_MODEL, choices=inplace.LITERAL_MODELS,
+                        help="independent anonymous string placement rule; default off")
+    parser.add_argument("--extra-source", type=Path, action="append", default=[],
+                        help="same-build helper copied with all callers, which must share one profile (repeatable)")
     args = parser.parse_args(argv)
     if args.candidates.exists():
         print(f"error: {args.candidates} exists", file=sys.stderr)
         return 1
     profiles = toolchain.load_profiles()
-    ctx = match.Context(ROOT / "config/catalogue.json")
+    ctx = match.Context(ROOT / "config/catalogue.json", model=args.linker_model, literal_model=args.literal_model)
     accepted = accepted_sources()
     requested_moves = set(args.rehome)
     unknown = sorted(requested_moves - accepted.keys())
@@ -70,7 +80,37 @@ def main(argv: list[str] | None = None) -> int:
 
     units, moves, refused = [], [], []
     dest = ROOT / args.dest
+    extras = list(dict.fromkeys((ROOT / path).resolve() for path in args.extra_source))
+    extra_targets = [dest / path.name for path in extras]
+    helper_profile = None
+    if extras:
+        profile_names = {entry["profile"] for entry in by_source.values() if entry["claimed"]}
+        if len(profile_names) != 1 or not profile_names <= profiles.keys():
+            print("error: --extra-source callers must share one known profile", file=sys.stderr)
+            return 1
+        helper_profile = profiles[next(iter(profile_names))]
+        names = [path.name for path in extras]
+        if len(names) != len(set(names)) or set(names) & {path.name for path in by_source}:
+            print("error: --extra-source destination name clashes with another input", file=sys.stderr)
+            return 1
+        for source, target in zip(extras, extra_targets):
+            if not source.is_file() or target.exists():
+                print(f"error: helper source missing or destination exists: {source} -> {target}", file=sys.stderr)
+                return 1
     with tempfile.TemporaryDirectory() as tmp:
+        extra_objects = []
+        try:
+            for index, (source, target) in enumerate(zip(extras, extra_targets)):
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, target)
+                obj = Path(tmp) / f"extra-{index}-{source.stem}.o"
+                toolchain.compile_source(helper_profile, target, obj, cache=False)
+                extra_objects.append(obj)
+        except toolchain.ToolchainError as e:
+            for target in extra_targets:
+                target.unlink(missing_ok=True)
+            print(f"error: helper compilation refused: {str(e).splitlines()[0]}", file=sys.stderr)
+            return 1
         for src, entry in sorted(by_source.items()):
             if not entry["claimed"]:
                 continue
@@ -102,7 +142,8 @@ def main(argv: list[str] | None = None) -> int:
                 toolchain.compile_source(profile, target, obj, cache=False)
                 # Keyed by address: a function defined under a names-overlay name (a C++ mangled
                 # constructor, say) is still claimed by its func_XXXXXXXX identity.
-                rows = {f"func_{r['address']:08x}": r["status"] for r in ctx.compare(obj)}
+                results = ctx.compare(obj, extra_objects) if extra_objects else ctx.compare(obj)
+                rows = {f"func_{r['address']:08x}": r["status"] for r in results}
             except (toolchain.ToolchainError, inplace.LinkError) as e:
                 target.unlink()
                 refused.append((src, str(e).splitlines()[0]))
@@ -117,6 +158,12 @@ def main(argv: list[str] | None = None) -> int:
                           "functions": sorted(entry["claimed"]), "author": entry["agent"]})
             moves.extend({"function": fn, "from": accepted[fn], "to": target.relative_to(ROOT).as_posix()}
                          for fn in sorted(entry["claimed"] & requested_moves))
+    if units:
+        units.extend({"source": target.relative_to(ROOT).as_posix(), "profile": helper_profile.name,
+                      "functions": []} for target in extra_targets)
+    else:
+        for target in extra_targets:
+            target.unlink()
     record = {"schema_version": 1, "note": f"Collected from {len(args.results)} author results.", "units": units}
     if moves:
         record["moves"] = sorted(moves, key=lambda m: m["function"])

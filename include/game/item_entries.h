@@ -29,6 +29,9 @@ extern "C" {
 #endif
 extern void *func_0019d788(unsigned size);
 extern struct W8ItemEntry *func_0015f84c(struct W8ItemEntry *entry);
+/* [INFERENCE] Candidate-only field accessors; historical identities unknown. */
+int w19_item_category(const struct W8ItemEntry *entry);
+unsigned w19_item_value(const struct W8ItemEntry *entry);
 #ifdef __cplusplus
 }
 #endif

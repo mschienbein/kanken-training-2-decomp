@@ -39,6 +39,9 @@ extern const unsigned short *func_00179090(const struct MenuItem *item);
 extern const unsigned short *func_001791e0(const struct TextTable *table, int index);
 extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_limit,
                                     const unsigned short *source);
+/* [INFERENCE] Candidate-only item accessor identities remain unrecovered. */
+int r41279_item_identifier(const struct MenuItem *item);
+int r41279_item_category(const struct MenuItem *item);
 
 #ifdef __cplusplus
 }
