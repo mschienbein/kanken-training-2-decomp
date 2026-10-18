@@ -1,0 +1,18 @@
+{
+  "agent": "nf045-cmodels2-isolation",
+  "source_record": "scratch/authors/nf045/RESULT.json",
+  "functions": [
+    {
+      "address": "0x001e958c",
+      "size": 296,
+      "status": "match",
+      "source": "scratch/integrator/cmodels2/split/menu_teardown.cpp",
+      "profile": "game",
+      "linker_model": "armlink5-inline-branchnop-v8",
+      "literal_model": "anonymous-string-records-v1",
+      "extra_sources": ["scratch/integrator/cmodels2/split/ui_geometry.cpp"],
+      "receipt": "scratch/cm2/split/menu_teardown.result.json",
+      "qualification": "[INFERENCE] Native Point/Rectangle empty lifetime identities and original outlining remain unrecovered. Only the exact cleanup definition is emitted; context 001e96b4 and mismatching 001eb0d0 are omitted without changing their sources/claims. Resource release uses the established ResourceEvent receiver, not a fictitious DisplayObject/class-identity assertion."
+    }
+  ]
+}

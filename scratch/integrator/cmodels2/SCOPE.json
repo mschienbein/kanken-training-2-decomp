@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "checkpoint_candidate": "cmodels2",
+  "status": "static-candidate-awaiting-finalized-cmodels-main-merge",
+  "branch": "cmodels2-integrate",
+  "base_commit": "85fd18dc7173e0542d8c33db157d03b7910c18c5",
+  "gate_revision": "v1.19",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/cmodels2.json",
+    "sha256": "d347dc182d34060ecd18bacebad77862402206a44ecb8e735d7e8d86931751b5"
+  },
+  "scope_functions": 1,
+  "scope_target_bytes": 296,
+  "scope_sources": 2,
+  "credited_source_units": 1,
+  "helper_only_units": 1,
+  "accepted_credit_added": false,
+  "pool": {
+    "summary": "scratch/model-sweep-2/summary.json",
+    "sha256": "d20985fabb51bc1706b3eeac5aca1b48c925a9f99c2711b9c8737e14712845bb",
+    "functions": 132,
+    "bytes": 148272,
+    "reported_required_matrix": {
+      "v6_none": {
+        "functions": 32,
+        "bytes": 9464
+      },
+      "v6_l1": {
+        "functions": 1,
+        "bytes": 2540
+      },
+      "v8_only": {
+        "functions": 2,
+        "bytes": 504
+      }
+    },
+    "effective_late_sources": "Applied both separately hashed late appendices; unchanged addresses are not double-counted.",
+    "routing_record": "scratch/integrator/cmodels2/POOL-ROUTING.metadata.json",
+    "routing_record_sha256": "11dc6fc225fc744f153bc855109ab86f4f5649ec4ee02a72861262e6ee63902a",
+    "disposition_counts": {
+      "no-model-match": 72,
+      "non-model-hard-hold": 23,
+      "cmodels-owned": 20,
+      "predecessor-owned": 11,
+      "inherited-typed-contract-deferral": 2,
+      "default-model-contract-deferral-c011": 1,
+      "released-predecessor-typed-contract-deferral": 2,
+      "admitted": 1
+    },
+    "predecessor_scope_inputs": [
+      {
+        "checkpoint": "cmodels",
+        "kind": "candidates",
+        "path": "scratch/worktrees/cmodels2/config/candidates/cmodels.json",
+        "sha256": "5d5fb0519f67ba4fd4ca7680afb9a27a26f30b74a239da57c6029b4b405f1cf8"
+      },
+      {
+        "checkpoint": "cmodels",
+        "kind": "scope",
+        "path": "scratch/worktrees/cmodels2/scratch/integrator/cmodels/SCOPE.json",
+        "sha256": "36690b6e7f69acf0c38614fc600e1d17e51bd815fe9cb0052e63df3ff09f79b2"
+      },
+      {
+        "checkpoint": "c009",
+        "kind": "candidates",
+        "path": "scratch/worktrees/c009/config/candidates/c009.json",
+        "sha256": "7b3a07a05ea334f7bbc951f13f7a2cd2801a0f6a624ffe72e349ab2c491d9eb1"
+      },
+      {
+        "checkpoint": "c010",
+        "kind": "candidates",
+        "path": "scratch/worktrees/c010/config/candidates/c010.json",
+        "sha256": "8c1fa8129fd9bd8528c0538e2cf5db2dae74062330aabacd90f671cef314423d"
+      },
+      {
+        "checkpoint": "c010",
+        "kind": "scope",
+        "path": "scratch/worktrees/c010/scratch/integrator/c010/SCOPE.json",
+        "sha256": "b4dfdb9545bf0007aceb919b25317c7062e4c769921fae912f19168034f9f81e"
+      },
+      {
+        "checkpoint": "c011",
+        "kind": "candidates",
+        "path": "scratch/worktrees/c011/config/candidates/c011.json",
+        "sha256": "62d8d1e7910c4515d5d50b8df2541c03ba64ba094739b01288d9a1a45ead09f3"
+      },
+      {
+        "checkpoint": "c011",
+        "kind": "scope",
+        "path": "scratch/worktrees/c011/scratch/integrator/c011/SCOPE.json",
+        "sha256": "4199c7f52ccd40b7e8c02ca8306a0068aeef4d3f613ec0615bb77c75369ac887"
+      }
+    ]
+  },
+  "late_queue": {
+    "snapshot": "scratch/integrator/cmodels2/MODEL-ROWS-NEXT.snapshot.json",
+    "snapshot_sha256": "53a2994b7b04fe25ee4acb460c26b14425f7ddb12b7ec93eac75b7111ebe4049",
+    "rows": [
+      {
+        "function": "func_001e958c",
+        "size": 296,
+        "disposition": "admitted-isolated-v8-l1-match"
+      },
+      {
+        "function": "func_001ed874",
+        "size": 828,
+        "disposition": "cmodels-owned-no-new-credit"
+      },
+      {
+        "function": "func_00169018",
+        "size": 144,
+        "disposition": "v8-l1-match-but-typed-contract-deferred",
+        "receipt": "scratch/cm2/late-00169018/func_00169018.result.json",
+        "receipt_sha256": "968b35d8776fde359ff51c4547504ef3db17824ee76066151fb3f4156ed5df71"
+      }
+    ]
+  },
+  "selected": [
+    {
+      "function": "func_001e958c",
+      "address": "0x001e958c",
+      "target_bytes": 296,
+      "author": "nf045 (unchanged inherited tu894 semantics, integration isolation)",
+      "original_source": "scratch/authors/nf045/src/menu_teardown.cpp",
+      "source": "src/models2/menu_resources/menu_teardown.cpp",
+      "source_sha256": "0d10940a421d8caa12ba6c5b13a21dcdf25aad0f504121ce84010ebd4fee0f8b",
+      "profile": "game",
+      "extra_sources": [
+        {
+          "source": "src/models2/menu_resources/ui_geometry.cpp",
+          "sha256": "3aec912a174809659a0038220c41d8d3c717eb3ad46bbc7bc3f9725222ff46ea"
+        }
+      ],
+      "receipt": "scratch/cm2/final/menu_teardown.result.json",
+      "receipt_sha256": "0b91da2ef8719d6a09403ed7c982b07bfbba2188a0a08cfa5b134ca3cfa1bf10",
+      "exit_code": 0,
+      "status": "match",
+      "emitted_catalogued_functions": [
+        "func_001e958c"
+      ],
+      "model_necessity": "The isolated new unit is refused under v6+L1 by its own .ARM.exidx reference, and MATCHes under v8+L1. The previously measured mixed-TU source is not a complete-unit acceptance witness.",
+      "qualification": "[INFERENCE] Native Point/Rectangle lifetime names, historical outlining/existence and TU identity are not recovered. Full typed CFG/reference/copy/unwind review remains mandatory."
+    }
+  ],
+  "integration": {
+    "new_headers": [
+      {
+        "path": "include/game/menu_resources.h",
+        "sha256": "0bf91e6d6cfec5b2b3e58530025f1ceca9432880efc8587160368622763b8193"
+      }
+    ],
+    "revised_accepted_headers": [],
+    "revised_accepted_sources": [],
+    "names_added": [],
+    "moves": [],
+    "ownership_resolution": {
+      "func_001a77d4": "Do not adopt the tu917 context-only model variant. c010 owns the separate tu604 complete game/v2/none MATCH source (sha fe8a4c7eedf44d00fd1f84d8b0c49352f66b7a5dfcdfd6e3bab63e7af0589313), explicitly confirmed by IntegrateC010.",
+      "func_001e96b4": "The context is c009-owned; no definition or competing prototype is delivered.",
+      "func_001eb0d0": "The unrelated text cleanup mismatch and its private helper/types are omitted; no partial body or context credit is claimed."
+    },
+    "source_policy": "Natural C++ cleanup/lifetimes only; no asm, retention attributes, address aliases, dummy calls, byte blobs, or forced exception/unwind settings. Shared types replace local extern-C copies and every INTEGRATOR marker.",
+    "provenance": "scratch/integrator/cmodels2/SOURCE-PROVENANCE.json",
+    "provenance_sha256": "2305aa3e0cf9f019bb0dfa4a64a1bb0ac282d84d6c817db17ec2ca05170d9e94",
+    "subsystem_coordination": "IntegrateC010 reserved menu_resources.h and confirmed separate Item +0xa identity and ResourceEvent* release receiver; no common AnimationChild/StyleOwner fiction is introduced."
+  },
+  "model_uses": {
+    "removed_helpers": [
+      {
+        "symbols": [
+          "_ZN13MenuResources5PointD1Ev",
+          "_ZN13MenuResources5PointD2Ev"
+        ],
+        "section": "i._ZN13MenuResources5PointD1Ev",
+        "size": 4,
+        "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+        "unwind_sections": [
+          {
+            "section": ".ARM.exidx",
+            "section_index": 5,
+            "size": 8,
+            "kind": "exidx",
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+          }
+        ]
+      },
+      {
+        "symbols": [
+          "_ZN13MenuResources9RectangleD1Ev",
+          "_ZN13MenuResources9RectangleD2Ev"
+        ],
+        "section": "i._ZN13MenuResources9RectangleD1Ev",
+        "size": 4,
+        "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+        "unwind_sections": [
+          {
+            "section": ".ARM.exidx",
+            "section_index": 6,
+            "size": 8,
+            "kind": "exidx",
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+          }
+        ]
+      }
+    ],
+    "rewrite_sites": [
+      {
+        "offset": 116,
+        "rule": "inline_nop",
+        "target": null
+      },
+      {
+        "offset": 200,
+        "rule": "inline_nop",
+        "target": null
+      },
+      {
+        "offset": 212,
+        "rule": "inline_nop",
+        "target": null
+      }
+    ],
+    "removed_code_bytes": 8,
+    "removed_unwind_companions": 2,
+    "removed_unwind_bytes": 16,
+    "removed_extab_companions": 0,
+    "literal_pools_in_new_unit": 0,
+    "helper_or_metadata_credit": 0,
+    "existing_transition": "scratch/integrator/cmodels2/MODEL-TRANSITION.json",
+    "existing_transition_sha256": "25f5f4e910b5fad31f0af739f76fd7d3b649975abe8f23a7f03fdb571772d5c4",
+    "existing_R1_functions": 19,
+    "existing_L1_owning_functions": 1,
+    "qualifications": "V8 models only complete own-unwind closure for independently removable R1 code, not general table stripping or native all-source linking. No original EHABI table absence/exception flag claim is made."
+  },
+  "contract_deferrals": {
+    "path": "scratch/integrator/cmodels2/CONTRACT-DEFERRALS.json",
+    "sha256": "f0d807f24c0036da24255179b4b696cc78ae215b5d9ed2e3f08650beb6a4749a",
+    "explicit_Main_holds": [
+      "func_001d5864",
+      "func_001ab680"
+    ],
+    "released_predecessor_rows": [
+      "func_001db404",
+      "func_001ef89c"
+    ],
+    "late_row": [
+      "func_00169018"
+    ],
+    "default_model_c011_hold": [
+      "func_001d5694"
+    ],
+    "policy": "Selected-model equality does not clear typed receiver/vtable/lifecycle forks or prove proposed names. No contract is coerced to obtain admission."
+  },
+  "verification": {
+    "final_candidate": {
+      "units": 1,
+      "functions": 1,
+      "bytes": 296,
+      "exit_code": 0,
+      "receipt": "scratch/cm2/final/menu_teardown.result.json",
+      "receipt_sha256": "0b91da2ef8719d6a09403ed7c982b07bfbba2188a0a08cfa5b134ca3cfa1bf10"
+    },
+    "v6_boundary": {
+      "exit_code": 2,
+      "receipt": "scratch/cm2/v6-boundary/menu_teardown.result.json",
+      "reason": "own .ARM.exidx reference prevents Point destructor removal under v6"
+    },
+    "whole_prospective_accepted_ledger": {
+      "basis": "Prepared PASS accept/cmodels/matches.json (not yet claimed finalized at measurement time)",
+      "units": 1562,
+      "credited_source_units_checked": 1546,
+      "helper_only_units_covered": 16,
+      "functions": 1621,
+      "bytes": 195908,
+      "all_exit_zero": true,
+      "at_risk_units": [],
+      "headers_harness_config_unchanged_during_measurements": true,
+      "record": "scratch/integrator/cmodels2/ACCEPTED-V8.json",
+      "record_sha256": "31400f7a3aa534e903df366872291e6179ba4ca8771265e783c2f0202a90770f"
+    },
+    "standard_regression_sources": "All five unique standard source units occur in the whole-ledger v8+L1 measurements. Historical 15 v2/v3/v4 baseline witnesses remain unchanged in cmodels; no unchanged baseline was rerun.",
+    "per_unit_execution": "Sequential nice -n 10 tools/match.py commands, --show 0, no private bytes/disassembly output. Helpers compiled with their caller profile and retained as helper-only ledger units.",
+    "not_run": [
+      "full build",
+      "full suite",
+      "G3 interfaces",
+      "argcheck/manual full ABI audit",
+      "prepare",
+      "independent checkpoint review",
+      "finalize"
+    ],
+    "risk_assessment": "No observed selected-model byte/extent/compile regression in any prior accepted or prepared-cmodels credited unit. This is per-unit evidence only; whole-build equality/overlap/COMDAT ownership and independent typed/unwind reviews remain Main gates after cmodels finalizes."
+  },
+  "handoff_merge": "Pending Main notification of finalized cmodels main tip; must merge before handoff, retaining this exact v8/L1 selection."
+}
