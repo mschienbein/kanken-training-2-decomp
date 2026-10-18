@@ -2,14 +2,15 @@
 
 Status: default model **`armlink5-inline-branchnop-v2`**; frozen
 **`armlink5-inline-branchnop-v3`** adds R1 removed-callee handling under adopted gates v1.15.
-The proposed **`armlink5-inline-branchnop-v4`** separately selects bounded-switch CFG recovery
-and fail-closed endian-state handling; it requires a new independent review and gate revision.
+The opt-in **`armlink5-inline-branchnop-v4`** separately selects bounded-switch CFG recovery
+and fail-closed endian-state handling under adopted gates v1.17.
 `accept.py prepare --linker-model ... --literal-model ...` freezes both choices before its fresh
 builds; see `docs/ACCEPTANCE.md` for selection/receipt/history binding and transition review.
-V4's draft is `scratch/integrator/r1-jumptables/GATES-DRAFT.md`; no v4 gate is adopted here.
-The corrected alias composite is opt-in **`armlink5-inline-branchnop-v6`**, pending focused
-independent re-review; v5 is retired, never adopted. V6's draft is
-`scratch/models-integration/GATES-DRAFT.md`; neither v4 nor v6 is adopted here.
+The corrected alias composite is opt-in **`armlink5-inline-branchnop-v6`**, adopted under
+gates v1.18; v5 is retired, never adopted. The exact accepted gate text and sealed independent
+reviews are `scratch/review/r1-jumptables-r3/REVIEW.md` and
+`scratch/review/models-v6/GATES-ACCEPTED.md` / `SEAL.json` (PASS_WITH_QUALIFICATIONS).
+Both gate revisions follow finalized `c008-r3` (sequence 8) and precede the code merge.
 The new **`armlink5-inline-branchnop-v8`** is explicit and unadopted. V7 is retired after
 independent review found incomplete group-retention and compact-extab extent proofs.
 V8's exact gate proposal is `scratch/exidx/v8/GATES-DRAFT.md`; no gate/default changes here.
@@ -56,13 +57,13 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v1` (commit c11a0ad) | **retired**: `--linker-model` refuses it | as v2, except that a callee defined in the candidate object was judged by the candidate's own section, never by the original. Independent review (ReviewLinker, F01) showed a wrong local helper could make its caller match: a `bx lr` helper at an address whose original is a 12-byte body, the excluded `MOV r0, r0; BX lr`, a veneer or a multi-entry owner turned the caller's BL into the original's NOP, and a caller-only ledger credited the caller (reproduced on the real image with func_001b6ec4 calling a local `func_0013714c`). Only artifacts of this branch's own checks recorded it. |
 | `armlink5-inline-branchnop-v2` | default | below |
 | `armlink5-inline-branchnop-v3` | frozen opt-in, not the default | all v2 rules plus candidate-only callees in R1 below; original conservative CFG, no resolved jump tables |
-| `armlink5-inline-branchnop-v4` | independently reviewed PASS_WITH_QUALIFICATIONS; unadopted | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
+| `armlink5-inline-branchnop-v4` | frozen opt-in, adopted gates v1.17; PASS_WITH_QUALIFICATIONS | all v3 helper/retention/equality rules; explicitly selected bounded-switch CFG, strict ordinary returns, owned-range clipping and explicit modeled-effect/state proof |
 | `armlink5-inline-branchnop-v5` (reviewed 22cb05b) | **retired**, never adopted | reviewed v4/alias composite incorrectly refuses independently bound D1/D2 sections when the nonzero symbol excludes a trailing pool; historical receipts retain that identity, superseded by v6 |
-| `armlink5-inline-branchnop-v6` | unadopted corrected composite, focused re-review required | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
+| `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
 | `armlink5-inline-branchnop-v7` (88f5c38) | **retired**, never adopted | its own-exidx exception could partially remove a live COMDAT group and accepted truncated compact extab while rejecting complete zero-terminated entries; sealed review `scratch/review/exidx-v7/REVIEW.md`, FAIL |
 | `armlink5-inline-branchnop-v8` | unadopted, separate independent review required | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
 
-## Function-entry alias identity (v6 only, unadopted)
+## Function-entry alias identity (v6 only)
 
 ARMCC 5.04, under the frozen `game` profile, emits native C1/C2 constructors and both
 virtual and non-virtual D1/D2 destructors as same-entry `STT_FUNC` symbols, with a nonzero
@@ -72,7 +73,7 @@ the names alone **never** prove that two implementations are identical.
 
 Only the explicit **`armlink5-inline-branchnop-v6`** selection enables this identity
 extension. V6 composes the independently reviewed v4 baseline with the alias rules
-and bound-placement correction below; it needs focused independent re-review before adoption. V4's approved
+and bound-placement correction below, adopted under gates v1.18. V4's approved
 source series is `21c2bd4` + `e72fb34` + `5187259` (sealed review:
 `scratch/review/r1-jumptables-r3/REVIEW.md`, PASS_WITH_QUALIFICATIONS).
 `strict-v1`, v2, v3 and v4 retain their original alias behavior: no sibling-name binding
@@ -134,10 +135,10 @@ comparison. Its blanket zero-size refusal is historical, not corrected under the
 v5 is retired with that reason and v6 adds the bounded correction described above. No v4 fix
 or unsound v4 credit follows from these rows.
 
-The v6 acceptance-input proposal is `scratch/models-integration/GATES-DRAFT.md`.
-Frozen GATES v1.16 remains unchanged. V6 requires focused independent re-review of this
-correction and an explicit gate revision after the current checkpoint's frozen evidence is
-finalized and closed, with the independently approved v4 implementation/text adopted first.
+The v6 implementation at `5bb20a9` passed focused independent re-review
+(`scratch/review/models-v6/REVIEW.md` / `SEAL.json`, PASS_WITH_QUALIFICATIONS).
+GATES v1.17 and v1.18 adopt the exact accepted v4 and v6 texts after `c008-r3` finalized,
+before the code merge and before any new checkpoint selecting these models.
 Selection, both fresh receipts, prepare/history and model-transition review must bind v6.
 Existing v5 author scratch receipts and the original sweep remain immutable and grant no credit.
 Regression coverage: `CppFunctionAliasTest`, `CompositeAliasSwitchTest`,
@@ -275,7 +276,7 @@ Online index of the same chapter: <https://developer.arm.com/documentation/dui04
 
 The manual does not say which NOP encoding armlink writes; the image does (below).
 
-## Retained-callee rules (v2, v3 and v4)
+## Retained-callee rules (v2, v3, v4 and v6)
 
 Applied to relocated ARM branches (`R_ARM_CALL`, `R_ARM_JUMP24`, `R_ARM_PC24`) in a candidate
 object whose destination is ARM code. Nothing else is rewritten.
@@ -324,7 +325,7 @@ before layout; `--branchnop` needs final addresses) — a PC-writing instruction
 image agrees: all 8 surviving BLs to `MOV r0, r0; BX lr` functions (0x125b50, 0x13714c, 0x144220,
 0x18f7ec, 0x1c5b84) were kept, while no BL survives to any callee rule I1/I2 inlines.
 
-## Candidate-only removed callees (v3 and v4, rule R1)
+## Candidate-only removed callees (v3, v4 and v6, rule R1)
 
 The original-only identity rule cannot describe every link. [DUI0474K §4.12](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2)
 says inlining runs **before unused-section elimination**: a callee inlined at every reference
@@ -353,7 +354,7 @@ any catalogued function and not general dead-code removal:
    A bound rooted definition retains all v2 identity/size/equality checks and I1–I3 decisions;
    retention keeps its section, not necessarily the BL.
 3. The section is executable, word-aligned, wholly code, non-Thumb and non-NOBITS, with all
-   function entries at offset zero spanning the whole section. Frozen v3 and proposed v4
+   function entries at offset zero spanning the whole section. Frozen v3 and v4
    require each symbol's recorded size to equal that extent. Only v6 permits the proven
    identical zero-size entry aliases above to share a full-sized sibling's extent.
    No relocation is allowed except the nonreferencing
@@ -376,7 +377,7 @@ any catalogued function and not general dead-code removal:
    successors fail closed; r0 may be a result, and I1 requires no inputs. The post-site clobber
    check remains mandatory for entry-argument forwarding. This bounds ABI consistency in the
    decoded CFG, not historical helper identity, argument meanings or original source provenance.
-   V3 keeps its frozen CFG behavior. Only explicitly selected v4 enables the bounded-switch
+   V3 keeps its frozen CFG behavior. Only explicitly selected v4 or v6 enables the bounded-switch
    policy described below; v4's range/return refinements are not applied to v3.
 5. After inlining, **every** reference to the section in every supplied allocated section must
    be gone, even in an otherwise unplaced section. A function pointer, `B` tail call,
@@ -627,10 +628,10 @@ MATCH 240/240 bytes**, one `inline_insn` at **+0x7c**, and the 8-byte `w16_set_s
 The rewrite retains `target: null`. Results are under
 `scratch/integrator/linker-v3-f08/w16d/func_001456e4/`; this opt-in match is not accepted credit.
 
-## Jump tables in the call-context CFG (v4, pending independent re-review)
+## Jump tables in the call-context CFG (v4 and v6)
 
 The `r1-jumptables` extension resolves two bounded ARM compiler switch idioms inside R1's
-**original-code CFG** only under the new **`armlink5-inline-branchnop-v4`** identifier.
+**original-code CFG** only under explicitly selected **`armlink5-inline-branchnop-v4`** or **`armlink5-inline-branchnop-v6`**.
 Frozen strict/v2/v3 policies retain their exact prior behavior, including v3's original caller
 decoding and return classification. It does not add a helper shape, a rewriting rule or relaxed
 byte comparison. Every R1 retention, retained-callee equality, reference-elimination,
@@ -644,12 +645,13 @@ separated v4 and fixed SETEND, but its sealed
 `scratch/review/r1-jumptables-r2/REVIEW.md` is **FAIL**: F03 exposes omitted LDREXD/MRRC writes;
 F04 exposes unmodeled RFE PC/CPSR restoration. The r3 correction replaces permissive access
 metadata and a state-changing mnemonic denylist with explicit class/encoding effect models.
-V4 is still unadopted, so its identifier stays v4; strict/v2/v3 remain frozen.
+Those corrections preceded v4 adoption; strict/v2/v3 remain frozen.
 
-The revised draft `scratch/integrator/r1-jumptables/GATES-DRAFT.md` does not change frozen
-v1.16. Adoption must wait until `c008-r2` finalizes, followed by passing independent
-implementation/exact-text re-review and a recorded revision before a new prepare. Selection,
-both fresh receipts, prepare and history bind v4; transitions reopen all affected R1 callers.
+The independent implementation/exact-text re-review passed with qualifications
+(`scratch/review/r1-jumptables-r3/REVIEW.md` / `SEAL.json`). The later composite review
+explicitly updates its adoption boundary to finalized `c008-r3`; gates v1.17 adopt v4,
+then v1.18 admit v6 without weakening this proof. Selection, both fresh receipts, prepare
+and history bind the chosen identifier; transitions reopen all affected R1 callers.
 No old checkpoint or evidence is reinterpreted.
 
 ### Exact recognized patterns
@@ -743,7 +745,7 @@ payload and legacy classification checks remain. Match/build/compid selectors in
 acceptance tests bind both receipts/history and reopen unchanged R1 callers on v3→v4 transition.
 New build receipts also bind `tools/linker_models.py` in their harness hashes, so the registry's
 selected policy flags are input-bound; historical receipts are not rewritten. The census has
-an explicit `--linker-model` selector and enables v4's CFG only when that model is selected.
+an explicit `--linker-model` selector and enables v4's CFG only for explicitly selected v4/v6.
 
 Independent reviewers must re-derive the compare's decoded immediate, unsigned bound/count,
 same-index and flag preservation, entry/dominance proof, every slot and the default edge from
@@ -778,8 +780,8 @@ Exact commands, both focused attempts, exits, input/receipt hashes and source cl
 `scratch/integrator/r1-jumptables/r3/verification.json`; fifteen fresh accepted-function command
 vectors and the Main full-suite command are in the adjacent `regression-commands.json`.
 The worker ran no full suite/build, accepted-function regression, prepare/finalize or adoption.
-Prior F03/F04 counterexamples were not rerun on unchanged old code. New independent
-implementation/exact-text review remains required; this is not armlink execution or credit.
+Prior F03/F04 counterexamples were not rerun on unchanged old code. Independent
+implementation/exact-text re-review was still required at that point; this is not armlink execution or credit.
 
 ### Historical failed-r2 focused smoke (`e72fb34`)
 

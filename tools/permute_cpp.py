@@ -14,6 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import interfaces
+import toolchain
 
 
 class CppError(RuntimeError):
@@ -136,7 +137,7 @@ def source_spans(text: str, spelling: str) -> list[tuple[int, tuple[int, int, in
 class View:
     """Parser-only normalization with an exact UTF-8-byte -> raw-char map."""
 
-    def __init__(self, text: str, source: Path):
+    def __init__(self, text: str, source: Path, profile: toolchain.Profile | None = None):
         # Expand ourselves before prepare(), so every length-changing replacement
         # has a known map. Other prepare() substitutions preserve character count.
         parts, raw_map, cursor = [], [], 0
@@ -152,7 +153,7 @@ class View:
         raw_map.extend(range(cursor, len(text)))
         expanded = "".join(parts)
         try:
-            self.prepared = interfaces.prepare(expanded, source)
+            self.prepared = interfaces.prepare(expanded, source, profile=profile)
         except interfaces.InterfaceError as exc:
             raise CppError(str(exc)) from exc
         self.offsets = []
@@ -178,9 +179,9 @@ def clang_api():
         raise CppError("C++ support requires the pinned libclang wheel; run uv sync") from exc
 
 
-def parse_tree(text: str, source: Path):
+def parse_tree(text: str, source: Path, profile: toolchain.Profile | None = None):
     clang = clang_api()
-    view = View(text, source)
+    view = View(text, source, profile)
     intrinsic_header = str(Path(__file__).resolve().with_name(".permute-cpp-intrinsics.h"))
     try:
         tree = clang.Index.create().parse(
@@ -255,10 +256,12 @@ class Program:
     original_functions: dict[str, str]
     oracle_targets: tuple[str, ...]
     suffix: str = ".cpp"
+    profile: toolchain.Profile | None = None
 
     @classmethod
-    def parse(cls, text: str, targets: tuple[str, ...], source: Path, original: str | None = None) -> Program:
-        view, tree = parse_tree(text, source)
+    def parse(cls, text: str, targets: tuple[str, ...], source: Path, original: str | None = None,
+              *, profile: toolchain.Profile | None = None) -> Program:
+        view, tree = parse_tree(text, source, profile)
         functions = definitions(tree)
         selected = resolve(functions, targets)
         spans, originals, symbols = {}, {}, []
@@ -292,14 +295,14 @@ class Program:
             if not symbol:
                 raise CppError(f"target has no unique emitted C++ symbol: {target}")
             symbols.append(symbol)
-        return cls(text, text, targets, source, spans, originals, tuple(symbols))
+        return cls(text, text, targets, source, spans, originals, tuple(symbols), profile=profile)
 
     def render(self, ast: str) -> str:
         return ast
 
     def hints(self, ast: str | None) -> tuple[str, str]:
         text = self.text if ast is None else ast
-        current = self if text == self.text else self.parse(text, self.targets, self.source)
+        current = self if text == self.text else self.parse(text, self.targets, self.source, profile=self.profile)
         functions, patch = [], []
         for target in self.targets:
             start, _, end = current.spans[target]
@@ -459,7 +462,7 @@ def statement_end(view: View, node) -> int:
 
 
 def mutate(program: Program, ast: str, rng: random.Random, kind: str | None = None) -> tuple[str, str] | None:
-    view, tree = parse_tree(ast, program.source)
+    view, tree = parse_tree(ast, program.source, program.profile)
     selected = resolve(definitions(tree), program.targets)
     kinds = [kind] if kind else list(MUTATIONS)
     rng.shuffle(kinds)
@@ -471,13 +474,17 @@ def mutate(program: Program, ast: str, rng: random.Random, kind: str | None = No
             choices = choices_for(view, function, body, mutation)
             rng.shuffle(choices)
             for edits in choices:
+                # Clang's statement extents can exclude a pragma between an if
+                # header and its body. Never consume one while replacing text.
+                if any(re.search(r"(?m)^[ \t]*#[ \t]*pragma\b", ast[a:b]) for a, b, _ in edits):
+                    continue
                 candidate = apply(ast, edits, view.span(body))
                 if candidate == ast:
                     continue
                 try:
                     # C++ has overload resolution, value categories and lifetime
                     # rules absent from C. Never retain a recovery/invalid AST.
-                    Program.parse(candidate, program.targets, program.source)
+                    Program.parse(candidate, program.targets, program.source, profile=program.profile)
                 except CppError:
                     continue
                 return candidate, f"{target}:{mutation}"
