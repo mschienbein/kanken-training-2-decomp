@@ -2567,7 +2567,8 @@ def main(argv: list[str] | None = None) -> int:
             evidence = {**evidence, "revision": closure_evidence["revision"],
                         "literal_encodings": evidence.get("literal_encodings", []) + closure_evidence["literal_encodings"],
                         "provenance": {**evidence["provenance"], "catalogue_v10": closure_evidence["provenance"],
-                                       "catalogue_v10_r3": closure_evidence["library_provenance"]}}
+                                       "catalogue_v10_r3": closure_evidence["library_provenance"],
+                                       "catalogue_v10_r4": closure_evidence["library_extension_provenance"]}}
             # A reviewed reclassification cannot silently outrank an accepted or
             # in-flight complete record. Explicit classification inputs instead
             # reach build_catalogue's final invariant and fail on any conflict.

@@ -801,6 +801,35 @@ def _validate_library_evidence(records: list[dict], library: dict, image_sha256:
             raise ValueError("proposed library name has no authenticated same-object definition")
 
 
+def _validate_declared_extents(records: list[dict], extension: dict) -> None:
+    """Admit only unchanged declared bodies, never their foreign section tails."""
+    by_address = {row["address"]: row for row in records}
+    adjudications = extension["extent_adjudication"]["adjudications"]
+    if extension["extent_adjudication"]["image_sha256"] != extension["image_sha256"]:
+        raise ValueError("declared-body adjudication belongs to a different image")
+    if ({row["address"] for row in adjudications} != set(extension["pool_qualified_record_addresses"])
+            or len({row["address"] for row in adjudications}) != len(adjudications)):
+        raise ValueError("pool-qualified declarations require unique exact extent adjudications")
+    for row in adjudications:
+        record = by_address.get(row["address"])
+        if (record is None or any(row[key] != record["size"] for key in (
+                "old_catalogue_size", "recommended_catalogue_size", "elf_declared_size"))
+                or row["isa"] != record["isa"] or row["image_body_sha256"] != record["original_extent_sha256"]
+                or row["symbol"] != record["library_witness"]["symbol"]
+                or row["elf_symbol_kind"] != "STT_FUNC"
+                or not row["whole_declared_body_masked_equal"] or not row["whole_declared_body_reencoded_equal"]
+                or row["rejected_growth_size"] <= record["size"]
+                or row["rejected_growth_delta"] != row["rejected_growth_size"] - record["size"]):
+            raise ValueError("pool-qualified identity cannot grow beyond its unchanged complete declaration")
+        end = row["address"] + record["size"]
+        for reader in row["all_foreign_tail_readers"]:
+            if reader.get("target_start", reader.get("target", -1)) < end:
+                raise ValueError("foreign tail reference does not establish outside-only ownership")
+    unresolved = {row["address"] for row in extension["scope_and_dispositions"] if not row["r7_authenticated"]}
+    if unresolved & by_address.keys():
+        raise ValueError("unresolved runtime identities must retain ordinary C eligibility")
+
+
 def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     """Load immutable metadata witnesses, never changing author directories."""
     path = root / "research/catalogue_v10_evidence.json"
@@ -843,6 +872,29 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     evidence["library_provenance"] = revision["provenance"]
     evidence["revision"] = "catalogue-v10-r4"
     inputs[str(revision_path.relative_to(root))] = hashlib.sha256(revision_path.read_bytes()).hexdigest()
+    extension_path = root / "research/catalogue_v10_r4_evidence.json"
+    extension = json.loads(extension_path.read_bytes())
+    descriptor = extension["parent_evidence"]
+    if (root / descriptor["path"] != revision_path
+            or descriptor["sha256"] != inputs[str(revision_path.relative_to(root))]
+            or extension["image_sha256"] != evidence["image_sha256"]):
+        raise ValueError("v10-r4 evidence differs from its frozen parent/image")
+    additions = extension["classification_records"]
+    _validate_declared_extents(additions, extension)
+    library = {
+        **library, "source_revision": extension["source_revision"],
+        "authenticated_owners": library["authenticated_owners"] + extension["authenticated_owners"],
+        "source_sha256": {**library.get("source_sha256", {}), **extension["source_sha256"]},
+        "summary": extension["summary"],
+        "r7_extension": {**{key: value for key, value in extension.items()
+                           if key not in ("classification_records", "authenticated_owners")},
+                         "prior_summary": library.get("summary", {})},
+    }
+    _validate_library_evidence(revision["classification_records"] + additions, library, evidence["image_sha256"])
+    evidence["classification_records"] += additions
+    evidence["library_identification"] = library
+    evidence["library_extension_provenance"] = extension["qualification"]
+    inputs[str(extension_path.relative_to(root))] = hashlib.sha256(extension_path.read_bytes()).hexdigest()
     return evidence, prior, inputs
 
 
@@ -964,6 +1016,8 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
         "authenticated_prior_owners_preserved": len(prior_authentication),
         "protected_coincidences_flag_only": len(library["protected_collisions"]),
         "proposed_names": len(library["names_proposal"]["symbols"]), "canonical_names_applied": 0,
+        "checkpoint_name_proposals": library["r7_extension"]["names_handoff"]["proposed_names"],
+        "new_name_bindings_embedded": library["r7_extension"]["names_handoff"]["new_name_bindings_embedded"],
     }
     candidate["revision_review"]["raw_svc_contracts"] = {
         "sources": _RAW_SVC_SOURCES,

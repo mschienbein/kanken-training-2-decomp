@@ -485,8 +485,10 @@ reviewed image it includes the immutable, image/extent/ISA-bound classification
 records, reviewed UTF-16 object references, the section-authenticated `.init_array`
 table and the immutable protected-checkpoint blob list in
 `research/catalogue_v9_r2_evidence.json`, together with the next proposal's
-`research/catalogue_v10_evidence.json` and the digest-bound child
-`research/catalogue_v10_r3_evidence.json`. V10 pins the adopted v9-r2 baseline by
+`research/catalogue_v10_evidence.json` and the digest-bound children
+`research/catalogue_v10_r3_evidence.json` / `research/catalogue_v10_r4_evidence.json`.
+The r3 metadata is immutable; the r4 child contains only the bounded r7 extension.
+V10 pins the adopted v9-r2 baseline by
 immutable Git blob and separately preserves the original v9 proposal's complete
 entry/identity metadata. It recomputes ownership, anomalies, per-old-range accounting
 and pointer evidence. The output records source/input hashes; neither output path
@@ -593,16 +595,21 @@ three v9 witnesses. Their finite 90-cell mismatch grid is **not** universal
 impossibility of C, nor proof that raw r0-r3 syscall interfaces are unrepresentable.
 They remain separate from topology exclusions and ordinary recovered leaves.
 
-The v10-r4 SVC checkpoint remains partial: 360 unknown bytes in 36 intervals and ten
-unresolved anomalies. Its separate licensed Arm Compiler 5.04u2 b82 r6 evidence
-classifies 68 exact whole-owner library bodies (9,284 B), with no geometry/entry
-changes. All 206 protected tiny-body coincidences remain flags only; all 87
-vendor-backed proposed names remain metadata, with zero canonical names applied.
+The v10-r4 candidate remains partial: 360 unknown bytes in 36 intervals and ten
+unresolved anomalies. Its separate licensed Arm Compiler 5.04u2 b82 r7 evidence
+classifies 80 exact whole-owner library bodies (10,098 B), with no geometry/entry
+changes. The three pool-qualified declarations stay 22/10/620 B, never 26/20/632;
+foreign-tail readers and physical ownership remain intact. All ten unresolved
+r7 owners and all 206 protected tiny-body coincidences remain unchanged.
+R7's 100 names stay in the separate checkpoint-integration proposal: this child
+embeds zero new name bindings and applies zero canonical names. The earlier 87
+review-only bindings remain frozen in r3 metadata.
 Wrong image/extent/ISA/digest, unsupported same-byte aliases, duplicate identities
 and protected-coincidence collisions are rejected. Prior authenticated runtime
 records remain unchanged; vendor naming does not close unknown pools or dispatch.
-`docs/catalogue/REPORT-v10-r4.md` records the isolated raw-kernel ABI repair and
-the reproducible 293-site / 25-service audit. `docs/catalogue/REPORT-v10-r3.md`
+`docs/catalogue/REPORT-v10-r4.md` records the isolated raw-kernel ABI repair,
+reproducible 293-site / 25-service audit, separate r7 classification delta and
+combined requested analyze-module checks. `docs/catalogue/REPORT-v10-r3.md`
 preserves the earlier register-effect, library-classification and residue history.
 `docs/catalogue/REPORT-v10-r2.md` preserves the earlier guard history;
 `docs/catalogue/REPORT-v10.md` preserves the original interval/accounting history.

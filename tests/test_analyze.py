@@ -50,7 +50,19 @@ def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dic
         "library_identification": {"authenticated_owners": [], "protected_collisions": [],
                                    "prior_classification_authentication": [], "names_proposal": {"symbols": {}}},
     }
-    (root / "research/catalogue_v10_r3_evidence.json").write_text(json.dumps(revision))
+    revision_path = root / "research/catalogue_v10_r3_evidence.json"
+    revision_path.write_text(json.dumps(revision))
+    extension = {
+        "revision": "catalogue-v10-r4", "image_sha256": image_sha256,
+        "parent_evidence": {"path": str(revision_path.relative_to(root)),
+                            "sha256": hashlib.sha256(revision_path.read_bytes()).hexdigest()},
+        "classification_records": [], "authenticated_owners": [], "pool_qualified_record_addresses": [],
+        "extent_adjudication": {"image_sha256": image_sha256, "adjudications": []},
+        "scope_and_dispositions": [], "source_revision": "synthetic-r7", "source_sha256": {},
+        "summary": {}, "qualification": "synthetic unchanged-extent library extension",
+        "names_handoff": {"proposed_names": 0, "new_name_bindings_embedded": 0},
+    }
+    (root / "research/catalogue_v10_r4_evidence.json").write_text(json.dumps(extension))
     return revision
 
 
@@ -1426,6 +1438,7 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v10_r4_evidence.json", result["generator"]["input_sha256"])
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
@@ -1720,7 +1733,7 @@ class CatalogueTests(unittest.TestCase):
         for address, expected in protected.items():
             self.assertEqual(functions[expected["address"]], expected, f"{address:#x}")
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
-                          first["stats"]["creditable_bytes"]), (4743, 4594, 1124038))
+                          first["stats"]["creditable_bytes"]), (4743, 4582, 1123224))
         self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
                           first["stats"]["anomalies"]), (360, 36, 10))
         self.assertEqual(sum(first["stats"][key] for key in ("code_bytes", "pool_bytes", "literal_bytes")),
@@ -1772,9 +1785,19 @@ class CatalogueTests(unittest.TestCase):
         self.assertTrue(first["revision_review"]["raw_svc_contracts"]["sources"])
         library_review = first["revision_review"]["library_identification"]
         self.assertEqual((library_review["proposed_classifications"], library_review["applied_classifications"],
-                          library_review["applied_extent_bytes"]), (68, 68, 9284))
+                          library_review["applied_extent_bytes"]), (80, 80, 10098))
         self.assertEqual((library_review["protected_coincidences_flag_only"], library_review["proposed_names"],
                           library_review["canonical_names_applied"]), (206, 87, 0))
+        self.assertEqual((library_review["checkpoint_name_proposals"], library_review["new_name_bindings_embedded"]),
+                         (100, 0))
+        extension = library_review["r7_extension"]
+        self.assertEqual({row["address"]: functions[row["address"]]["size"]
+                          for row in extension["extent_adjudication"]["adjudications"]},
+                         {0x1005A6: 22, 0x100AD0: 10, 0x19FAA8: 620})
+        unresolved = [row for row in extension["scope_and_dispositions"] if not row["r7_authenticated"]]
+        self.assertEqual(len(unresolved), 10)
+        for row in unresolved:
+            self.assertEqual(functions[row["address"]], adopted_functions[row["address"]])
         authenticated_prior = {row["address"] for row in library_review["prior_classification_authentication"] if row["authenticated"]}
         for address in (0x1008AC, 0x100C80, 0x100C9E, 0x19F6B4):
             self.assertIn(address, authenticated_prior)
@@ -1830,12 +1853,12 @@ class CatalogueTests(unittest.TestCase):
         }
         resolved_residue = {address for address, owner in source_owners.items() if owner in classified_owners}
         self.assertEqual(len(source_owners), 56)
-        self.assertEqual((len(resolved_residue), len(residue)), (36, 20))
+        self.assertEqual((len(resolved_residue), len(residue)), (45, 11))
         self.assertEqual({row["address"] for row in residue}, source_owners.keys() - resolved_residue)
         self.assertEqual(len(source_owners) - len(residue), len(resolved_residue))
         self.assertTrue(all(row["candidate_owner"] not in classified_owners for row in residue))
         self.assertFalse(any(row["ownership_classified"] for row in residue))
-        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 18)
+        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 9)
         self.assertEqual({row["address"]: row["candidate_owner"] for row in residue
                           if row["candidate_owner_kind"] == "multi_entry"},
                          {0x1000A0: 0x100084, 0x10030C: 0x10030C})
@@ -2384,6 +2407,33 @@ class CatalogueClosureTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             catalogue_closure._validate_library_evidence(records + records, library, "synthetic")
 
+    def test_pool_qualified_identity_cannot_claim_foreign_tail_or_grow_its_declaration(self) -> None:
+        records, _ = self.library_evidence()
+        declaration = {
+            "address": BASE, "isa": "arm", "old_catalogue_size": 4,
+            "recommended_catalogue_size": 4, "elf_declared_size": 4, "elf_symbol_kind": "STT_FUNC",
+            "image_body_sha256": "a" * 64, "symbol": "synthetic_library",
+            "whole_declared_body_masked_equal": True, "whole_declared_body_reencoded_equal": True,
+            "rejected_growth_size": 8, "rejected_growth_delta": 4,
+            "all_foreign_tail_readers": [{"target_start": BASE + 4, "target_end": BASE + 8}],
+        }
+        extension = {
+            "image_sha256": "synthetic", "pool_qualified_record_addresses": [BASE],
+            "extent_adjudication": {"image_sha256": "synthetic", "adjudications": [declaration]},
+            "scope_and_dispositions": [],
+        }
+        catalogue_closure._validate_declared_extents(records, extension)
+        for change in ({"recommended_catalogue_size": 8}, {"elf_declared_size": 8},
+                       {"elf_symbol_kind": "STT_OBJECT"}, {"whole_declared_body_reencoded_equal": False},
+                       {"all_foreign_tail_readers": [{"target": BASE + 2}]}):
+            altered = json.loads(json.dumps(extension))
+            altered["extent_adjudication"]["adjudications"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                catalogue_closure._validate_declared_extents(records, altered)
+        extension["scope_and_dispositions"] = [{"address": BASE, "r7_authenticated": False}]
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_declared_extents(records, extension)
+
     def test_frozen_baseline_and_parent_are_independently_authenticated(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
@@ -2404,6 +2454,7 @@ class CatalogueClosureTests(unittest.TestCase):
                 self.assertEqual(prior["revision"], "prior")
                 self.assertIn("research/catalogue_v10_evidence.json", inputs)
                 self.assertIn("research/catalogue_v10_r3_evidence.json", inputs)
+                self.assertIn("research/catalogue_v10_r4_evidence.json", inputs)
                 for field in ("parent_evidence", "baseline_catalogue"):
                     changed = json.loads(json.dumps(evidence))
                     changed[field]["sha256"] = "0" * 64
@@ -2416,6 +2467,14 @@ class CatalogueClosureTests(unittest.TestCase):
                 for change in ({"image_sha256": "wrong"}, {"parent_evidence": {**revision["parent_evidence"], "sha256": "0" * 64}}):
                     revision_path.write_text(json.dumps({**revision, **change}))
                     with self.subTest(revision_change=change), self.assertRaises(ValueError):
+                        catalogue_closure.load_inputs(root, parent)
+                library_revision_fixture(root, path, "synthetic")
+                extension_path = root / "research/catalogue_v10_r4_evidence.json"
+                extension = json.loads(extension_path.read_text())
+                for change in ({"image_sha256": "wrong"},
+                               {"parent_evidence": {**extension["parent_evidence"], "sha256": "0" * 64}}):
+                    extension_path.write_text(json.dumps({**extension, **change}))
+                    with self.subTest(extension_change=change), self.assertRaisesRegex(ValueError, "v10-r4 evidence"):
                         catalogue_closure.load_inputs(root, parent)
 
 
