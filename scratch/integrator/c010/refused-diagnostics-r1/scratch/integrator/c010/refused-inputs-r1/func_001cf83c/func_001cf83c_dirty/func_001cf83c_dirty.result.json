@@ -1,0 +1,10 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001cf83c/func_001cf83c_dirty.cpp",
+ "profile": "game",
+ "linker_model": "armlink5-inline-branchnop-v2",
+ "literal_model": "none",
+ "status": "refused",
+ "reason": "armcc failed (1) on func_001cf83c_dirty.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001cf83c/func_001cf83c_dirty.cpp\", line 3: Error:  #256: invalid redeclaration of type name \"FontVTable\" (declared at line 72 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/font.h\")\n  struct FontVTable {\n         ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001cf83c/func_001cf83c_dirty.cpp\", line 41: Error:  #135: class \"FontVTable\" has no member \"kind\"\n      if (!font || font->vtable->kind(font) == 1) {\n                                 ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001cf83c/func_001cf83c_dirty.cpp\", line 45: Error:  #135: class \"FontVTable\" has no member \"width\"\n                      static_cast<float>(state->font->vtable->width(state->font)),\n                                                              ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001cf83c/func_001cf83c_dirty.cpp: 0 warnings, 3 errors\n",
+ "error_type": "ToolchainError",
+ "functions": []
+}

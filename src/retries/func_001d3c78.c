@@ -5,11 +5,12 @@
 
 
 struct SoundWaveReader *func_001d3c78(struct SoundWaveReader *reader,
-                                    const struct SoundWaveFile *file, unsigned char relocated)
+                                    const struct SoundWaveFile *file, int relocated)
 {
+    reader->relocated = relocated;
     reader->file = 0;
     reader->info = 0;
-    if (!(reader->relocated = relocated) && file->signature == 0x56415743 &&
+    if (!relocated && file->signature == 0x56415743 &&
         file->version - 0x02000000u <= 0x00010100u) {
         const struct ArchiveBlockHeader *info;
         const struct ArchiveBlockHeader *data;

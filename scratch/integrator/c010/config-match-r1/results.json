@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/owner-cutover/config-scope-r1.json",
+  "scope_sha256": "2e4ee23d4461a38db404e70015b06b852b642235ca91b421476f3207facf96dd",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "expected_units": 1,
+  "completed_units": 1,
+  "paused": false,
+  "match_units": 0,
+  "exit_counts": {
+    "1": 1
+  },
+  "rows": [
+    {
+      "source": "src/wave13/func_001719f4.c",
+      "profile": "game",
+      "functions": [
+        "func_001719f4"
+      ],
+      "author": "w13f",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave13/func_001719f4.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/config-match-r1/wave13/func_001719f4"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "output": "MISMATCH func_001719f4 @ 0x1719f4 size 0x40/0x40 first difference at +0x1c [armlink5-inline-branchnop-v2: 1 branchnop]\n",
+      "receipt": "scratch/integrator/c010/config-match-r1/wave13/func_001719f4/func_001719f4.result.json",
+      "source_sha256": "4a112f86071e2ef0304d9ffbe3e1906771723bd30559111ff27e99da50332a90"
+    }
+  ]
+}

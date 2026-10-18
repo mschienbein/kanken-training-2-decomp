@@ -4,7 +4,147 @@ This is an integrator working record, not acceptance or an independent review.
 No full build, full suite, prepare, finalize, history edit or push has run here.
 All counts below are candidate scope/evidence, never accepted credit.
 
-## Current milestone 3 — owner moves and priority-width correction, not review-ready
+## Current milestone 4 — remaining collection and audio contracts, not review-ready
+
+Merged finalized main (c008-r3 seq8) and c009 through
+`90cc196cb7107f5c79424d721ec4730b74323495`, then main
+`85fd18dc7173e0542d8c33db157d03b7910c18c5`. The latter includes the model
+checkpoint proposal and GATES v1.19 tooling, not c010 adoption. **C010 still
+selects v2/none.** All merges completed without source/header conflict resolution.
+The higher-priority heavy slot remains with FinishC009b; no c010 broad audit,
+full build, suite or prepare has run.
+
+The source proposal is now **538 units / 553 claimed identities**:
+**548 new functions / 56,380 B**, plus **five moved accepted identities**.
+The dry parent is 2,205 units / 2,279 functions after c009's additional reader
+deferral; applying all five moves gives **2,738 units / 2,827 functions**.
+There are **11 directly revised accepted source units** in the final scope.
+**253 candidate units remain marked**; moving declarations into headers is not
+itself typed-contract or interface signoff.
+
+### Every remaining collection row measured or explicitly deferred
+
+The bounded `collect-r2` processed all **181 source units / 183 functions**
+previously uncollected, under the verified v2/none defaults. Collector exit 0
+included **109 units / 110 functions collected** and **72 units / 73 functions
+refused**. A subsequent explicit-profile, v2/none, `--show 0` sweep of all
+109 collected units produced **109 exits 0 / all claimed functions MATCH**.
+Original source/receipt and canonical-variant bindings are retained in
+`COLLECTION-CLOSURE-r2.json`; no completed author search was restarted.
+
+The reviewed **0019ecf8 SVC caller is now collected and MATCH**. Its redundant
+00115b0c declaration was removed in favor of applet.h. The reviewed svc.h ABI
+qualifications remain unchanged: pinned ARMCC marshalling, initialized aligned
+low carrier/signed high split, unrecovered historical ownership, and an explicit
+QUALIFIED review row. The seven reviewed mismatching callers remain uncredited.
+
+All 72 collector refusals received complete individual diagnostics from exact
+immutable integration snapshots: **72 exits 2**, not false MATCH or score results.
+Thirty require unadmitted constructor/destructor/vtable/runtime identities;
+42 expose concrete canonical declaration/receiver/field conflicts. The first-line
+collector diagnostics were not treated as sufficient diagnoses. Function-level
+`contract-deferrals-r2.json` records all 73 rows with exact reasons, full output
+and receipt paths, original source hashes and re-entry requirements. These are
+current contract/identity deferrals, not claims that the preserved author
+sources never MATCHed or can never be reconciled.
+
+The scope is now **649 functions**: 548 collected, 95 contract-deferred,
+five c009-owned and one steering-deferred. The 95 include c009's newly withdrawn
+0013156c reader identity. The additional near-miss 0010c138 witness is an exact
+132-byte game/v2/none MATCH, but its author explicitly classifies redundant `!!`
+normalization as steering; it is recorded, **not adopted**. It has no published
+RESULT at the announced sweep roots, so the exact supplied source/verification/
+classification paths bind the late publication. `scope-dispositions-r3.json`,
+`SCOPE-SUPPLEMENT-r4.json` and `POLICY-DEFERRALS-r1.json` preserve this boundary.
+The separate 46 later-model witnesses remain outside c010's selected model.
+
+### Complete emitted ownership of the new collection
+
+The new objects exposed three extra defining identities:
+
+- 00151b04 now lives only with new 00151a74 in `collect-r2/aux_commands.cpp`;
+  its superseded new singleton is deleted, not double-counted.
+- Accepted 001dc574 and 001dc90c now live with new 001dc4a4 in the complete
+  three-function completion TU. Both v1.16 moves are recorded and old accepted
+  singleton definitions are deleted, with preserved source/profile/hash evidence.
+- The two complete owner units rematch **2/2 exits 0, all five identities MATCH**.
+  `owner-cutover/collected-owner-moves-r2.json` records these moves and retired
+  sources. Historical receipts predating complete ownership remain preserved.
+
+### Task cancellation is an address-token ID protocol
+
+Original 001d32e4 compares its unchanged r1 word with the task's word at +0x14;
+it does not dereference r1. The pinned API distinguishes `CancelTask(Task*)`
+from `CancelTaskById(u32)`. The two accepted 24-byte wrappers forward their
+entry word unchanged. Shared 001d32e0/001d32e4/001d6b24/001d6678 declarations
+now consistently take **unsigned IDs**, not fake RegistryEntry pointers.
+
+001d3230 uses its real +0x2314 member address as a 32-bit task identity, with
+the explicit pinned-ARM pointer-to-ID conversion. Opaque member storage makes
+no invented Task/RegistryEntry class claim. 001d7e6c's loaded identity is an
+unsigned word, and its group pointer now has the actual AudioVoiceGroup owner.
+Both control prefixes are shared; the obsolete local views/markers are removed.
+**All five task-family units MATCH**, including all three revised accepted
+wrappers. Actual initial C++ flexible-tail compile failure and the incorrect
+byte-versus-bool lifecycle mismatch remain retained. Existing C-only-tail
+convention and the original/native bool lifecycle/accessors resolve them.
+`TASK-CANCELLATION-ADJUDICATION-r1.json` records the facts and qualifications;
+this is not a completed all-producer/indirect task audit.
+
+### Main-requested accepted audio corrections
+
+`AUDIO-CONTRACT-ADJUDICATION-r1.json` binds these corrections alongside the
+earlier 0016a87c priority fix. Both model rows **remain deferred in cmodels**;
+neither is re-adopted merely because these prerequisites are corrected.
+
+- **001d3c78** now takes full `int` mode, stores its byte separately and tests
+  the unchanged full word. Original facts independently prove the byte store
+  and full-word zero comparison. Restoring natural original initialization
+  chronology gives **176-byte MATCH**; both earlier ordering mismatches remain.
+- **001d9198** now returns the actual canonical AudioVoice and takes
+  `(int channels, int priority, typed callback, void *context)`. Its original
+  r2/r3 reach 001d96e8, which stores them at +0x1a0/+0x1a4. Original 0018290c
+  invokes that stored callback on the same receiver, and 001d5bf4 dereferences
+  the context at +0x9c. The factory, accepted callback and new recycler use the
+  shared AudioVoice (including its real +0x1b0 link): **3/3 units MATCH**.
+  No global SoundTrack rename, common complete-class fiction or callback cast
+  is introduced. The lower AudioVoiceGroup callback remains distinct. Pinned
+  Channel's generic u32 user token does not override the actual pointer-context
+  evidence, and no native mangled identity is inferred from that SDK spelling.
+- **001719f4 / 00171a34** use the actual partial ItemPageSet/content relationship:
+  kind/index/content are exposed in reserved bytes/word, content is the same
+  W11SingleState receiver used by status/reset consumers, and category/enabled
+  are full `int` words. The old ConfigState/ConfigTarget shadow views are removed.
+  Signed variant/group storage is retained. Original 00171a34 forwards category
+  unchanged to 00168670; original 001dc390 returns precisely 0/1. Retaining that
+  predicate's unsigned-byte lifetime preserves the observed storage sequence:
+  accepted **001719f4 MATCHes all 64 B**. Earlier mismatch/C89-refusal receipts
+  remain visible; no narrowed category, volatile or register forcing was used.
+- Two further initializer units, 001d38ac/001d9a0c, now reuse the spelling-
+  equivalent shared SequenceSoundControl/WaveSoundControl records and three
+  shared declarations: **2/2 units MATCH**, completing two more marked blocks.
+
+These are per-touched-unit results, not final dependent-header closure. The
+latest parent/model merge introduces additional canonical headers; all affected
+accepted/new consumers, canonical signatures, G3, callback/indirect consumers,
+argcheck and all seven pre-review steps still need stable-ledger evidence.
+`FAILED-ATTEMPTS-r2.json` preserves actual failures and analysis limitations.
+
+### Exact continuation and cross-checkpoint ownership
+
+`HANDOFF.json`, `dry-matches-r4.json` and `match-scope-r4.json` supersede the
+milestone-3 live state; its prior handoff remains preserved. No compiler jobs
+remain running at this seal. The static inventory still reports substantial
+different-definition/forward owner leads; no whole G3 success is inferred from it.
+C011 additionally reserves 00155ab4 and the parent lookup/archive units for
+forward moves only after c010 finalization. In particular, **0014fe14 now has a
+c010 owner** at `collect-r2/cutoff.cpp`, profile middleware, and has MATCHed.
+The previously reserved four linked/list/native-pair source identities remain
+untouched. C011 must preserve the full-word archive helper contract and all
+identity qualifications rather than resurrect its author's narrow formal.
+
+
+## Historical milestone 3 — owner moves and priority-width correction, not review-ready
 
 Milestone 2 is preserved below as a historical snapshot. The preserving c008-r3
 follow-up `b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b` is merged, retaining

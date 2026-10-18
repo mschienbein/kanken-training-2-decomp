@@ -1,6 +1,7 @@
 #ifndef GAME_AUDIO_VOICE_H
 #define GAME_AUDIO_VOICE_H
 
+struct ObjectPool;
 struct AnimationTrack;
 struct AudioBiquadCoefficients;
 struct HandleManager;
@@ -10,8 +11,6 @@ struct AudioLinearRamp;
 struct AudioSlotBufferDescriptor001d9580;
 struct AudioVoiceOwner001d9580;
 struct ByteCursor001db068;
-struct ConfigState001719f4;
-struct ConfigTarget001719f4;
 struct FloatState001d4ad4;
 struct FloatState001d4b70;
 struct FloatState001d4cec;
@@ -130,6 +129,27 @@ struct AudioVoiceGroup {
     struct PoolLink link;
 };
 
+/* [INFERENCE] Observed operation/entry prefixes; task_id is the full word
+ * passed to cancellation, not an invented RegistryEntry pointer contract. */
+struct SoundOperationEntry {
+    unsigned char reserved00[8];
+    struct AudioVoiceGroup *group;
+    unsigned char reserved0c[0x3c8 - 0x0c];
+};
+struct SoundOperation {
+    unsigned char reserved00[0x0d];
+    unsigned char registered;
+    unsigned char reserved0e[0x44 - 0x0e];
+    struct RegistryEntry entry;
+    unsigned char reserved50[0x10];
+    unsigned task_id;
+    unsigned char reserved64[0x220 - 0x64];
+    unsigned count;
+#ifndef __cplusplus
+    struct SoundOperationEntry entries[];
+#endif
+};
+
 struct AudioEnvelope {
     unsigned char state;
     unsigned char reserved01[3];
@@ -206,6 +226,7 @@ struct AudioVoice {
     void *callback_data;
     struct AudioVoiceGroup *group;
     struct AudioVoice *next;
+    struct PoolLink link;
 };
 
 struct AudioControlBase {
@@ -255,6 +276,15 @@ extern "C" {
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
 extern void func_001d9178(struct AudioVoice *voice, int increment);
 extern void func_001d9530(struct AudioVoice *voice);
+extern void func_001d7e6c(struct SoundOperation *operation);
+/* [INFERENCE] Factory channel/priority words and callback/context are distinct
+ * from the lower AudioVoiceGroup allocator's callback. The context remains a
+ * pointer because the original delivered callback dereferences it. */
+extern struct AudioVoice *func_001d5528(struct ObjectPool *pool);
+extern struct AudioVoice *func_001d9198(int channels, int priority,
+    void (*callback)(struct AudioVoice *, int, void *), void *context);
+extern void func_001d96e8(struct AudioVoice *voice,
+    void (*callback)(struct AudioVoice *, int, void *), void *context);
 extern void func_0017da08(struct AudioVoiceGroup *group, int index,
                           struct RecordState *record, int remember);
 extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,
@@ -298,15 +328,6 @@ struct SequenceEnabledState {
 };
 
 
-struct ConfigState001719f4 {
-    unsigned char kind;
-    unsigned char complex_format;
-    unsigned char option;
-    unsigned char reserved03;
-    int index;
-    unsigned char reserved08[0x10];
-    struct ConfigTarget001719f4 *target;
-};
 
 struct ResourceState001d0164 {
     const void *vtable;
@@ -398,8 +419,6 @@ extern void func_00145da8(struct StreamCriticalSection *critical);
 extern void func_00145d3c(struct StreamCriticalSection *critical);
 extern void func_00183900(struct StreamQueue *queue, struct StreamEvent *event);
 extern int func_001dc390(int format);
-extern void func_00171a34(struct ConfigTarget001719f4 *target, unsigned char option,
-                          int index, unsigned flags);
 extern unsigned char func_001f2f2c(const struct AudioVoiceGroup *group);
 extern unsigned func_001d4864(unsigned samples, int format);
 extern void func_001835b8(struct AudioVoiceGroup *group);
@@ -431,8 +450,6 @@ extern int func_00148988(struct ServiceCoordinator *context, unsigned int value)
 extern void func_001489e8(struct ServiceCoordinator *context, unsigned int value);
 extern void func_001526e0(struct AudioChannelState *state, int mode);
 extern unsigned int func_00155d24(unsigned int bits);
-extern void func_001719f4(struct ConfigState001719f4 *state, unsigned char kind, int format,
-                  unsigned char option, int index, unsigned flags);
 extern void func_001d4ad4(struct FloatState001d4ad4 *state, float value);
 extern void func_001d4b70(struct FloatState001d4b70 *state, float value);
 extern void func_001d4cec(struct FloatState001d4cec *state, float value);

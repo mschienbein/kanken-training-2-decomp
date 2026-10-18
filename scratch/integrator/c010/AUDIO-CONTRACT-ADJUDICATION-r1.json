@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "status": "accepted-touched-units-match-dependent-gates-pending",
+  "model_deferred_rows": [
+    "func_001d5864",
+    "func_001ab680"
+  ],
+  "model_deferral_record": "scratch/integrator/cmodels/CONTRACT-DEFERRALS.json",
+  "reader_mode": {
+    "endpoint": "func_001d3c78",
+    "formal": "int",
+    "storage": "unsigned char",
+    "condition": "test full unchanged formal, not its byte assignment",
+    "original_facts": "owner-cutover/reader-mode-facts-r1.json",
+    "chronology": "owner-cutover/reader-order-facts-r1.json",
+    "match": "reader-mode-match-r3/results.json",
+    "target_bytes": 176,
+    "historical_mismatches": [
+      "reader-mode-match-r1/results.json",
+      "reader-mode-match-r2/results.json"
+    ]
+  },
+  "factory": {
+    "endpoint": "func_001d9198",
+    "formal": "AudioVoice*(int channels,int priority,void(*callback)(AudioVoice*,int,void*),void*context)",
+    "initialization_endpoint": "func_001d96e8(AudioVoice*,typed callback,void*)",
+    "allocation_endpoint": "func_001d5528(ObjectPool*) -> AudioVoice*",
+    "original_facts": "owner-cutover/factory-facts-r3.json",
+    "callback_field": 416,
+    "context_field": 420,
+    "group_field": 424,
+    "link_field": 432,
+    "proof": [
+      "Original factory forwards its entry r2/r3 unchanged as callback/context to001d96e8.",
+      "Original001d96e8 stores r1/r2 at receiver+0x1a0/+0x1a4.",
+      "Original0018290c calls the stored callback with the same actual allocated receiver, signed event and stored context;001d5bf4 dereferences the delivered context at+0x9c.",
+      "Original factory/allocation/callback chain and the r4040 caller identify the same actual AudioVoice view. The existing AudioVoiceGroup lower allocator has a distinct callback type and receiver.",
+      "Only the actual factory family migrated: accepted factory001d9198, callback0018290c and new recycler00182994. Unrelated legacy SoundTrack owners were not globally equated or renamed."
+    ],
+    "matches": "factory-match-r1/results.json",
+    "all3_match": true,
+    "qualification": "Pinned Channel uses a generic u32 user token, whereas the actual delivered callback dereferences its word as a pointer. The shared C endpoint therefore uses void* for the evidenced pointer-context protocol, not a guessed native mangled name or assertion that every SDK callback uses pointers."
+  },
+  "page_configuration": {
+    "endpoint": "func_001719f4(ItemPageSet*,uchar kind,int format,int category,int index,int enabled)",
+    "content_endpoint": "func_00171a34(W11SingleState*,int category,int index,int enabled)",
+    "canonical_headers": [
+      "include/game/item_pages.h",
+      "include/game/command_state.h"
+    ],
+    "removed_shadows": [
+      "ConfigState001719f4",
+      "ConfigTarget001719f4"
+    ],
+    "content_binding_offset": 24,
+    "original_facts": "owner-cutover/factory-facts-config-r1.json",
+    "proof": [
+      "Original719f4 writes kind byte+0, format predicate byte+1, category byte+2 and full index+4, then reads content+0x18.",
+      "Original71a34 forwards its unchanged entry r1 as the full category word to168670; the reported1ab680 caller also supplies a full int.",
+      "The natural page-set caller binds the same content receiver used by accepted status/reset consumers. This establishes the partial receiver relationship without asserting common complete class identity.",
+      "Accepted001dc390 returns exactly0 or1. The stored predicate retains its original unsigned-byte lifetime before assignment to the existing signed variant view; no Boolean normalization, register forcing, narrowed category or flag shim is added."
+    ],
+    "match": "config-match-r4/results.json",
+    "target_bytes": 64,
+    "historical_results": [
+      "config-match-r1/results.json",
+      "config-match-r2/results.json",
+      "config-match-r3/results.json"
+    ],
+    "qualification": "ItemPageSet retains signed variant/group storage interpretations used by existing readers. Only reserved kind/index/content fields are exposed. W11SingleState remains a partial prefix, not a recovered complete original object."
+  },
+  "priority": "owner-cutover/priority-contract-r1.json",
+  "still_required": [
+    "Fresh dependent accepted-header consumer rematches after the final shared header cutovers and latest parent/model merge.",
+    "Canonical actual C/C++ signatures, stable whole-ledger G3, complete indirect callback-slot consumer sweep and argcheck adjudication.",
+    "Independent review and a separately model-selected checkpoint for both deferred model rows; c010 remains frozen v2/none."
+  ],
+  "adoption_authorized": false,
+  "new_native_aliases": 0
+}

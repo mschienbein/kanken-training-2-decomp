@@ -1,6 +1,7 @@
 #ifndef GAME_SOUND_RUNTIME_H
 #define GAME_SOUND_RUNTIME_H
 
+#include <stdbool.h>
 struct PoolLink;
 struct PoolList;
 
@@ -74,6 +75,22 @@ struct WaveSoundControl {
     struct SoundInstancePool *pool;
     unsigned char active;
     unsigned char enabled;
+};
+
+/* [INFERENCE] The member address at +0x2314 is used as a 32-bit task ID.
+ * Its original class is unrecovered; opaque storage does not assert a Task
+ * or RegistryEntry owner. Pointer-to-ID conversion is the pinned ARM ABI. */
+struct SequencePoolSound {
+    struct SoundInstance sound;
+    unsigned char reserved118[0x2314 - 0x118];
+    unsigned char task_identity[0x3044 - 0x2314];
+    struct SoundInstancePool *pool;
+    unsigned char reserved3048[0x328e - 0x3048];
+    bool active;
+#ifdef __cplusplus
+    bool isActive() const { return active; }
+    void setInactive() { active = 0; }
+#endif
 };
 
 struct SoundFileGroup {
@@ -194,6 +211,10 @@ extern void func_00143328(struct SoundPlayer *player, struct SoundInstance *soun
 extern void func_0016a3e0(struct SoundInstance *sound);
 extern void func_001d3bcc(struct SequenceSoundControl *sound);
 extern void func_001d9c14(struct WaveSoundControl *sound);
+extern void func_001d3230(struct SequencePoolSound *sound);
+extern void func_0016a560(struct SoundInstance *sound);
+extern void func_001d38ac(struct SequenceSoundControl *sound);
+extern void func_001d9a0c(struct WaveSoundControl *sound);
 extern int func_001d2cb4(const struct SoundPriorityHook *hook, unsigned sound_id);
 extern const unsigned data_0022459c[];
 extern const unsigned data_002245d8[];

@@ -52,10 +52,11 @@ def main() -> int:
     excluded.update(row["function"] for row in json.loads((OUT / "contract-exclusions-r1.json").read_text()))
     for deferrals in OUT.glob("contract-deferrals-*.json"):
         excluded.update(row["function"] for row in json.loads(deferrals.read_text()))
+    for policy_deferrals in sorted(OUT.glob("POLICY-DEFERRALS-*.json")):
+        excluded.update(row["function"] for row in json.loads(policy_deferrals.read_text())["rows"])
     closure = json.loads((ROOT / "scratch/integrator/c009/collection-closure-r1.json").read_text())
     excluded.update(row["function"] for row in closure["rows"] if row["classification"].startswith("deferred"))
-    parent_interface_deferrals = ROOT / "scratch/integrator/c009/interface-deferrals-r1.json"
-    if parent_interface_deferrals.exists():
+    for parent_interface_deferrals in sorted((ROOT / "scratch/integrator/c009").glob("interface-deferrals-*.json")):
         excluded.update(row["function"] for row in json.loads(parent_interface_deferrals.read_text())["rows"])
     grouped: dict[str, dict] = {}
     for evidence in selected.values():
@@ -97,7 +98,9 @@ def main() -> int:
         output = directory / f"candidates-part{part}.json"
         destination = f"src/checkpoint10/{args.run}" + (f"-alternate{part}" if part else "")
         command = [str(PYTHON), "tools/collect.py", "--dest", destination,
-                   "--candidates", str(output.relative_to(ROOT)), *inputs]
+                   "--candidates", str(output.relative_to(ROOT)),
+                   "--linker-model", "armlink5-inline-branchnop-v2",
+                   "--literal-model", "none", *inputs]
         proc = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         run = {"command": command, "exit_code": proc.returncode, "stdout": proc.stdout, "stderr": proc.stderr}
         save(directory / f"command-part{part}.json", run)

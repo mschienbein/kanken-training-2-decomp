@@ -1,11 +1,16 @@
 #include "game/audio_voice.h"
-/* [INFERENCE] Kind, option and flags roles are opaque; callers evidence six inputs. */
-void func_001719f4(struct ConfigState001719f4 *state, unsigned char kind, int format,
-                  unsigned char option, int index, unsigned flags)
+#include "game/item_pages.h"
+#include "game/command_state.h"
+/* [INFERENCE] Shared page-set and content prefixes, not complete native classes.
+ * The category is stored as a byte but forwarded as the original full word. */
+void func_001719f4(struct ItemPageSet *state, unsigned char kind, int format,
+                  int category, int index, int enabled)
 {
+    unsigned char complex_format;
     state->kind = kind;
-    state->complex_format = func_001dc390(format);
+    complex_format = func_001dc390(format);
     state->index = index;
-    state->option = option;
-    func_00171a34(state->target, option, index, flags);
+    state->variant = complex_format;
+    state->group = category;
+    func_00171a34(state->content, category, index, enabled);
 }

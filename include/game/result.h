@@ -11,6 +11,15 @@ struct Result {
 #endif
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* [INFERENCE] Possible erased failure-bit accessor, not a recovered historical identity. */
+unsigned result_failure_bits(struct Result result);
+#ifdef __cplusplus
+}
+#endif
+
 
 
 

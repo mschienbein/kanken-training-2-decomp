@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "function": "func_001d3c78",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "entry_mode_byte_stores": [
+    {
+      "site_offset": 12,
+      "stored_bits": 8,
+      "field_offset": 12
+    }
+  ],
+  "entry_mode_word_comparisons": [
+    {
+      "site_offset": 20,
+      "compares_unchanged_entry_word": true,
+      "other_is_zero": true
+    }
+  ],
+  "decision": "Keep byte storage, widen the formal to int, and test the untruncated formal separately from its byte assignment.",
+  "qualification": "[INFERENCE] Exact historical mode spelling is unrecovered. This callee-only scoped CFG evidence proves storage width separately from the preserved word test, not a general caller or native identity audit. The reported signed-byte-to-int caller is preserved as ground truth."
+}
