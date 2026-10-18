@@ -147,8 +147,21 @@ _ARM_CALLER_SAVED = frozenset((cs_arm.ARM_REG_R1, cs_arm.ARM_REG_R2, cs_arm.ARM_
 _ARM_RESULTS = frozenset((cs_arm.ARM_REG_R0, cs_arm.ARM_REG_R1))
 
 
-def _arm_call_flow(insn) -> str:
-    """Classify only control flow whose successors the ARM-only R1 filter can prove."""
+def _arm_call_flow(insn, *, bounded_switches: bool = False) -> str:
+    """R1 flow classification; v4 models effects without reinterpreting frozen v3."""
+    if bounded_switches:
+        effects = _arm_switch_effects(insn)
+        if effects is None:
+            return "unknown"
+        if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
+            return "call"
+        if insn.id == cs_arm.ARM_INS_B:
+            return "branch"
+        word = _arm_word(insn)
+        if (word & 0x0FFFFFFF in (0x012FFF1E, 0x01A0F00E)
+                or word & 0x0FFF8000 == 0x08BD8000):
+            return "return"
+        return "unknown" if cs_arm.ARM_REG_PC in effects[0] else "other"
     if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
         return "call"
     if insn.id == cs_arm.ARM_INS_B and insn.operands[0].type == cs_arm.ARM_OP_IMM:
@@ -180,14 +193,327 @@ def _arm_successors(instructions: dict, insn, flow: str) -> list[int]:
     return successors
 
 
+# -- ARMCC bounded jump tables (docs/LINKER.md, "Jump tables in the call-context CFG") ----------
+
+_ARM_NUMBERED = (*(getattr(cs_arm, f"ARM_REG_R{n}") for n in range(13)),
+                 cs_arm.ARM_REG_SP, cs_arm.ARM_REG_LR, cs_arm.ARM_REG_PC)
+# The two encodings armcc 5.04 emits for a dense switch, both with the index scaled LSL #2:
+#   LDR<cc> pc, [pc, rM, lsl #2]  (word table: absolute target addresses, in the caller's pool)
+#   ADD<cc> pc, pc, rM, lsl #2    (branch table: one unconditional B per entry, in the code)
+# Each is taken only when its condition is LO (rM <  N) or LS (rM <= N) after `cmp rM, #N`.
+_SWITCH_ENCODINGS = {0x079FF100: "words", 0x008FF100: "branches"}
+_SWITCH_EXTRA_ENTRIES = {0x3: 0, 0x9: 1}  # condition field -> entries beyond N
+_SWITCH_BASE = 8  # the PC reads as the writer + 8: entry 0 is two words after the writer
+
+# Explicit ARM instruction classes whose core-register/NZCV/processor-state effects are modeled.
+# Membership is necessary, not sufficient: each encoding below is also validated. Decoder
+# regs_access/update_flags/groups are deliberately NOT evidence for either switch proof.
+_ARM_SWITCH_DP_OPS = {
+    getattr(cs_arm, "ARM_INS_" + name): (opcode,)
+    for opcode, name in enumerate(("AND", "EOR", "SUB", "RSB", "ADD", "ADC", "SBC", "RSC",
+                                  "TST", "TEQ", "CMP", "CMN", "ORR", "MOV", "BIC", "MVN"))
+}
+_ARM_SWITCH_DP_OPS.update({getattr(cs_arm, "ARM_INS_" + name): (13,)
+                           for name in ("ASR", "LSL", "LSR", "ROR", "RRX")})
+_ARM_SWITCH_DP_OPS[cs_arm.ARM_INS_ADR] = (2, 4)
+_ARM_SWITCH_SINGLE_MEMORY = {
+    cs_arm.ARM_INS_LDR: (1, 0), cs_arm.ARM_INS_STR: (0, 0),
+    cs_arm.ARM_INS_LDRB: (1, 1), cs_arm.ARM_INS_STRB: (0, 1),
+}
+_ARM_SWITCH_EXTRA_MEMORY = {
+    cs_arm.ARM_INS_LDRH: (1, 1), cs_arm.ARM_INS_STRH: (0, 1),
+    cs_arm.ARM_INS_LDRSB: (1, 2), cs_arm.ARM_INS_LDRSH: (1, 3),
+    cs_arm.ARM_INS_LDRD: (0, 2), cs_arm.ARM_INS_STRD: (0, 3),
+}
+_ARM_SWITCH_MULTI_MEMORY = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "PUSH", "POP", "LDM", "LDMDA", "LDMDB", "LDMIB", "STM", "STMDA", "STMDB", "STMIB"))
+_ARM_SWITCH_VFP_DATA = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "VABS", "VADD", "VCMP", "VCMPE", "VCVT", "VCVTR", "VDIV", "VMLA", "VMLS",
+    "VMUL", "VNEG", "VNMLA", "VNMLS", "VNMUL", "VSQRT", "VSUB"))
+_ARM_SWITCH_VFP_MEMORY = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "VLDR", "VSTR", "VPUSH", "VPOP", "VLDMIA", "VLDMDB", "VSTMIA", "VSTMDB"))
+_ARM_SWITCH_MULTIPLY = frozenset(getattr(cs_arm, "ARM_INS_" + name) for name in (
+    "MUL", "MLA", "UMULL", "UMLAL", "SMULL", "SMLAL"))
+_ARM_SWITCH_CONTROL = frozenset((cs_arm.ARM_INS_B, cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX, cs_arm.ARM_INS_BX))
+_ARM_SWITCH_HINTS = frozenset((cs_arm.ARM_INS_NOP, cs_arm.ARM_INS_HINT))
+_ARM_SWITCH_MODELED_IDS = frozenset(_ARM_SWITCH_DP_OPS) | frozenset(_ARM_SWITCH_SINGLE_MEMORY) | frozenset(
+    _ARM_SWITCH_EXTRA_MEMORY) | _ARM_SWITCH_MULTI_MEMORY | _ARM_SWITCH_VFP_DATA | _ARM_SWITCH_VFP_MEMORY | (
+    _ARM_SWITCH_MULTIPLY | _ARM_SWITCH_CONTROL | _ARM_SWITCH_HINTS
+    | {cs_arm.ARM_INS_VMOV, cs_arm.ARM_INS_VMRS, cs_arm.ARM_INS_FMSTAT})
+
+
+def _arm_switch_effects(insn) -> tuple[frozenset[int], bool] | None:
+    """Complete possible core writes and NZCV writes for allowed A32 classes; None is refusal.
+
+    Only validated, ordinary encodings with known processor-state effects are admitted.
+    In particular, no exception return, status restore, coprocessor/exclusive instruction
+    or unknown/new decoder class is inferred harmless from an empty decoder access list.
+    VFP data/FP-status writes do not change core registers, CPSR.NZCV or CPSR.E; VMOV/VMRS
+    core transfers and scalar/multiple load/writeback destinations are decoded explicitly.
+    Calls retain the existing LE entry/ABI-conforming-return contract, not a callee-state proof.
+    """
+    if insn.id not in _ARM_SWITCH_MODELED_IDS:
+        return None
+    word = _arm_word(insn)
+    condition, rn, rd = word >> 28, (word >> 16) & 15, (word >> 12) & 15
+    written = set()
+    flags = False
+    if insn.id in _ARM_SWITCH_CONTROL:
+        if (word >> 25) & 7 == 5:
+            if (condition == 15) != (insn.id == cs_arm.ARM_INS_BLX):
+                return None
+            if condition != 15 and bool(word & (1 << 24)) != (insn.id == cs_arm.ARM_INS_BL):
+                return None
+        elif (condition == 15 or insn.id not in (cs_arm.ARM_INS_BX, cs_arm.ARM_INS_BLX)
+              or word & 0x0FFFFFF0 != (0x012FFF30 if insn.id == cs_arm.ARM_INS_BLX else 0x012FFF10)
+              or word & 15 == 15):
+            return None
+        written.add(cs_arm.ARM_REG_PC)
+        if insn.id in (cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX):
+            written.add(cs_arm.ARM_REG_LR)
+    elif condition == 15:
+        return None  # unconditional system/exception/NEON encodings are not ordinary A32
+    elif insn.id in _ARM_SWITCH_HINTS:
+        if word & 0x0FFFFFFF != 0x0320F000:
+            return None  # only the compiler's actual NOP, not arbitrary hints
+    elif insn.id in _ARM_SWITCH_DP_OPS:
+        opcode = (word >> 21) & 15
+        if (word & 0x0C000000 or opcode not in _ARM_SWITCH_DP_OPS[insn.id]
+                or not word & (1 << 25) and word & (1 << 4)):
+            return None
+        flags = bool(word & (1 << 20))
+        if 8 <= opcode <= 11:
+            if not flags or rd:
+                return None
+        else:
+            if rd == 15 and (flags or not (
+                    word & 0x0FFFFFFF == 0x01A0F00E
+                    or word & 0x0FFFFFF0 == 0x008FF100 and condition in _SWITCH_EXTRA_ENTRIES)):
+                return None
+            written.add(_ARM_NUMBERED[rd])
+    elif insn.id in _ARM_SWITCH_SINGLE_MEMORY or insn.id in _ARM_SWITCH_EXTRA_MEMORY:
+        if insn.id in _ARM_SWITCH_SINGLE_MEMORY:
+            if (word & 0x0C000000 != 0x04000000
+                    or word & (1 << 25) and (word & (1 << 4) or word & 15 == 15)
+                    or ((word >> 20) & 1, (word >> 22) & 1) != _ARM_SWITCH_SINGLE_MEMORY[insn.id]):
+                return None
+        elif (word & 0x0E000090 != 0x00000090
+              or ((word >> 20) & 1, (word >> 5) & 3) != _ARM_SWITCH_EXTRA_MEMORY[insn.id]
+              or not word & (1 << 22) and (word & 0xF00 or word & 15 == 15)):
+            return None
+        double = insn.id in (cs_arm.ARM_INS_LDRD, cs_arm.ARM_INS_STRD)
+        if double and (rd & 1 or rd > 12):
+            return None
+        load = bool(word & (1 << 20)) or insn.id == cs_arm.ARM_INS_LDRD
+        destinations = {rd, rd + 1} if double else {rd}
+        if not load and rd == 15 and insn.id != cs_arm.ARM_INS_STR:
+            return None
+        if load:
+            if rd == 15 and not (
+                    insn.id == cs_arm.ARM_INS_LDR and word & 0x0FFFFFF0 == 0x079FF100
+                    and condition in _SWITCH_EXTRA_ENTRIES):
+                return None
+            written.update(_ARM_NUMBERED[register] for register in destinations)
+        if not word & (1 << 24) or word & (1 << 21):
+            if rn == 15 or rn in destinations:
+                return None  # reserved/unpredictable writeback is not a preservation proof
+            written.add(_ARM_NUMBERED[rn])
+    elif insn.id in _ARM_SWITCH_MULTI_MEMORY:
+        registers = word & 0xFFFF
+        if (word & 0x0E000000 != 0x08000000 or word & (1 << 22) or not registers or rn == 15
+                or word & (1 << 21) and registers & (1 << rn)):
+            return None
+        if word & (1 << 20):
+            if registers & (1 << 15) and word & 0x0FFF8000 != 0x08BD8000:
+                return None  # only the ordinary SP-based POP return, never CPSR-restoring LDM
+            written.update(_ARM_NUMBERED[register] for register in range(16) if registers & (1 << register))
+        if word & (1 << 21):
+            written.add(_ARM_NUMBERED[rn])
+    elif insn.id in _ARM_SWITCH_MULTIPLY:
+        if insn.id in (cs_arm.ARM_INS_MUL, cs_arm.ARM_INS_MLA):
+            if word & 0x0FC000F0 != 0x00000090 or bool(word & (1 << 21)) != (insn.id == cs_arm.ARM_INS_MLA):
+                return None
+            if (insn.id == cs_arm.ARM_INS_MUL and rd
+                    or insn.id == cs_arm.ARM_INS_MLA and rd in (13, 15)):
+                return None
+            destinations = {rn}
+        else:
+            if word & 0x0F8000F0 != 0x00800090 or rn == rd:
+                return None
+            destinations = {rn, rd}
+        if destinations & {13, 15} or (word & 15) in (13, 15) or ((word >> 8) & 15) in (13, 15):
+            return None
+        written.update(_ARM_NUMBERED[register] for register in destinations)
+        flags = bool(word & (1 << 20))
+    elif insn.id in _ARM_SWITCH_VFP_MEMORY:
+        if word & 0x0E000E00 != 0x0C000A00:
+            return None
+        pre, up, writeback, load = ((word >> bit) & 1 for bit in (24, 23, 21, 20))
+        if insn.id in (cs_arm.ARM_INS_VLDR, cs_arm.ARM_INS_VSTR):
+            if not pre or writeback or load != (insn.id == cs_arm.ARM_INS_VLDR):
+                return None
+        else:
+            decrement = insn.id in (cs_arm.ARM_INS_VPUSH, cs_arm.ARM_INS_VLDMDB, cs_arm.ARM_INS_VSTMDB)
+            loading = insn.id in (cs_arm.ARM_INS_VPOP, cs_arm.ARM_INS_VLDMIA, cs_arm.ARM_INS_VLDMDB)
+            if (pre != decrement or up == decrement or load != loading or rn == 15
+                    or decrement and not writeback
+                    or insn.id in (cs_arm.ARM_INS_VPUSH, cs_arm.ARM_INS_VPOP) and (rn != 13 or not writeback)):
+                return None
+            count = word & 0xFF
+            double = bool(word & (1 << 8))
+            first = rd + (((word >> 22) & 1) << 4) if double else rd * 2 + ((word >> 22) & 1)
+            if (not count or double and count & 1
+                    or first + (count // 2 if double else count) > (16 if double else 32)):
+                return None
+        if word & (1 << 21):
+            if rn == 15:
+                return None
+            written.add(_ARM_NUMBERED[rn])
+    elif insn.id in (cs_arm.ARM_INS_VMRS, cs_arm.ARM_INS_FMSTAT):
+        if word & 0x0FFF0FFF != 0x0EF10A10 or insn.id == cs_arm.ARM_INS_FMSTAT and rd != 15:
+            return None  # only FPSCR, not an arbitrary processor/system-register transfer
+        if rd == 15:
+            flags = True
+        else:
+            written.add(_ARM_NUMBERED[rd])
+    elif insn.id == cs_arm.ARM_INS_VMOV:
+        if word & 0x0F000E10 == 0x0E000A00:
+            pass  # VFP register/immediate data move: no core destination or CPSR update
+        elif word & 0x0FE00F7F == 0x0E000A10:
+            if rd in (13, 15):
+                return None
+            if word & (1 << 20):
+                written.add(_ARM_NUMBERED[rd])
+        elif word & 0x0FE00EF0 == 0x0C400A10:
+            if rn in (13, 15) or rd in (13, 15) or rn == rd:
+                return None
+            if word & (1 << 20):
+                written.update((_ARM_NUMBERED[rn], _ARM_NUMBERED[rd]))
+        else:
+            return None
+    elif insn.id in _ARM_SWITCH_VFP_DATA:
+        if word & 0x0F000E10 != 0x0E000A00:
+            return None
+    else:
+        return None
+    return frozenset(written), flags
+
+
+def _arm_word(insn) -> int:
+    return struct.unpack("<I", insn.bytes)[0]
+
+
+def _arm_compare_bound(insn) -> tuple[int, int] | None:
+    """(register number, value) of an unconditional `cmp rN, #immediate`, else None."""
+    word = _arm_word(insn)
+    if word >> 28 != _COND_AL or word & 0x0FF0F000 != 0x03500000:
+        return None
+    rotate, value = (word >> 7) & 0x1E, word & 0xFF
+    if rotate:
+        value = (value >> rotate | value << (32 - rotate)) & 0xFFFFFFFF
+    return (word >> 16) & 0xF, value
+
+
+def _arm_may_change(insn, register: int) -> bool:
+    """An unmodeled instruction is never evidence that the index or NZCV is preserved."""
+    effects = _arm_switch_effects(insn)
+    return effects is None or register in effects[0] or effects[1]
+
+
+def _arm_switch_guard(instructions: dict, flows: dict, writer: int, index: int) -> tuple[int, int] | None:
+    """(address, value) of the `cmp rIndex, #value` that bounds the index at `writer`: the nearest
+    earlier word in straight-line code, with nothing between that can change the index or the
+    flags (every word between must be a plain, non-transferring instruction)."""
+    register = _ARM_NUMBERED[index]
+    address = writer
+    while True:
+        address -= 4
+        insn = instructions.get(address)
+        if insn is None or flows[address] != "other":
+            return None
+        bound = _arm_compare_bound(insn)
+        if bound is not None and bound[0] == index:
+            return address, bound[1]
+        if _arm_may_change(insn, register):
+            return None
+
+
+
+
+def _arm_jump_tables(instructions: dict, flows: dict, entries: set[int], words: dict[int, int]) -> dict[int, list[int]]:
+    """Successors of every ARMCC jump-table writer whose bound and every target are proven.
+
+    The bound comes from the guarding `cmp rM, #N` (see `_arm_switch_guard`) and the writer's own
+    LO/LS condition, so exactly N (LO) or N + 1 (LS) entries are reachable: no inference from the
+    table's contents or length. Entry i is the word at writer + 8 + 4i: an absolute address in
+    `words` (the caller's own pool, never an instruction) for the word-table form, or an
+    unconditional direct B for the branch-table form. Every target must be a decoded instruction
+    of this caller (never outside its catalogue extent, never Thumb), and the conditional-false
+    fall-through must be an unconditional transfer that cannot run into the table. The writer may
+    be reached only by falling through from the guard: no branch, call, entry or other table
+    target may land in (compare, writer]. Anything else stays unknown and the caller fails closed.
+    V4 resolves no table unless every decoded owner instruction has a modeled ordinary
+    processor-state effect, even when unreachable. Incomplete/unknown classes and exception
+    returns cannot establish preserved state; the target's LE entry/call ABI remains required.
+    """
+    if any(_arm_switch_effects(insn) is None for insn in instructions.values()):
+        return {}
+    candidates = {}
+    for address, insn in instructions.items():
+        if flows[address] != "unknown":
+            continue
+        word = _arm_word(insn)
+        form = _SWITCH_ENCODINGS.get(word & 0x0FFFFFF0)
+        extra = _SWITCH_EXTRA_ENTRIES.get(word >> 28)
+        if form is None or extra is None or word & 0xF == 15:
+            continue
+        guard = _arm_switch_guard(instructions, flows, address, word & 0xF)
+        fall = instructions.get(address + 4)
+        if (guard is None or guard[1] + extra < 1 or fall is None
+                or fall.cc not in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID)
+                or flows[address + 4] not in ("branch", "return")
+                or flows[address + 4] == "branch" and fall.operands[0].imm not in instructions):
+            continue
+        count = guard[1] + extra
+        if count > len(words if form == "words" else instructions):
+            continue  # the complete bounded table must fit in the supplied caller ranges
+        targets = []
+        for slot in range(count):
+            entry = address + _SWITCH_BASE + 4 * slot
+            if form == "words":
+                target = words.get(entry) if entry not in instructions else None
+            else:
+                branch = instructions.get(entry)
+                unconditional = (branch is not None and flows[entry] == "branch"
+                                 and branch.cc in (cs_arm.ARM_CC_AL, cs_arm.ARM_CC_INVALID))
+                target = entry if unconditional and branch.operands[0].imm in instructions else None
+            if target not in instructions:
+                break
+            targets.append(target)
+        else:
+            candidates[address] = guard[0], [address + 4, *dict.fromkeys(targets)]
+    # Every address entered other than by falling through, tentatively including all table targets.
+    entered = set(entries)
+    for insn in instructions.values():
+        if insn.id in (cs_arm.ARM_INS_B, cs_arm.ARM_INS_BL, cs_arm.ARM_INS_BLX) and insn.operands[0].type == cs_arm.ARM_OP_IMM:
+            entered.add(insn.operands[0].imm)
+    for _, successors in candidates.values():
+        entered.update(successors[1:])
+    return {address: successors for address, (guard, successors) in candidates.items()
+            if not any(window in entered for window in range(guard + 4, address + 4, 4))}
+
+
 def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], condition: int,
-                         entries: set[int] | None = None, call_sites: set[int] | None = None) -> str:
+                         entries: set[int] | None = None, call_sites: set[int] | None = None,
+                         words: dict[int, int] | None = None, *, bounded_switches: bool = False) -> str:
     """Conservative whole-caller CFG filter, not evidence of a historical helper's identity.
 
     An input is defined in the preceding four straight-line words on every incoming path,
     is an unmodified incoming argument, or is an unmodified r0/r1 result of an unconditional
     preceding call on that path. Conditional definitions/calls alone do not establish inputs.
     Both conditional successors are checked; unresolved indirect transfers fail closed.
+    Only the explicit `bounded_switches` policy (v4/v6) enables `_arm_jump_tables`, with
+    `words` limited to this caller's own original pools. The default retains frozen v3 behavior.
     Afterwards, follow every successor until a call/return or unconditional definitions of all
     caller-saved registers/flags. r0 may be a result. Candidate removed calls are call barriers.
     """
@@ -195,9 +521,12 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
         return "arguments_not_materialised"
     entries = set(entries) if entries is not None else {min(instructions)}
     call_sites = call_sites or set()
-    flows = {address: _arm_call_flow(insn) for address, insn in instructions.items()}
-    successors = {address: _arm_successors(instructions, insn, flows[address])
+    flows = {address: _arm_call_flow(insn, bounded_switches=bounded_switches)
+             for address, insn in instructions.items()}
+    tables = _arm_jump_tables(instructions, flows, entries, words or {}) if bounded_switches else {}
+    successors = {address: tables[address] if address in tables else _arm_successors(instructions, insn, flows[address])
                   for address, insn in instructions.items()}
+    flows.update(dict.fromkeys(tables, "switch"))
     reachable, pending = set(), list(entries)
     while pending:
         address = pending.pop()
@@ -272,6 +601,18 @@ def arm_call_abi_context(instructions: dict, site: int, arguments: set[int], con
     return "consistent"
 
 
+def arm_pool_words(image, fn: dict) -> dict[int, int]:
+    """The original 32-bit words of one catalogued function's pools/literals, inside its own extent:
+    the only data `arm_call_abi_context` lets a jump table name targets from."""
+    words = {}
+    for lo, hi in (*fn.get("pools", ()), *fn.get("literals", ())):
+        lo, hi = (max(lo, fn["address"]) + 3) & ~3, min(hi, fn["address"] + fn["size"])
+        data = image.read(lo, hi - lo) if lo < hi else b""
+        for offset in range(0, len(data) - 3, 4):
+            words[lo + offset] = struct.unpack_from("<I", data, offset)[0]
+    return words
+
+
 @dataclass
 class Symbol:
     name: str
@@ -305,6 +646,9 @@ class Section:
     merge_strings: bool = False  # both SHF_MERGE and SHF_STRINGS, not merely a familiar section name
     entsize: int = 0
     retention: tuple[str, ...] = ()  # explicit roots and uninterpreted retention metadata: never R1
+    elf_type: str = "SHT_PROGBITS"
+    link_order: bool = False
+    linked_section: int | str = 0  # sh_link for SHF_LINK_ORDER; remapped with candidate ownership
 
 
 class ObjectFile:
@@ -317,7 +661,13 @@ class ObjectFile:
             if elf["e_machine"] != "EM_ARM" or elf["e_type"] != "ET_REL":
                 raise LinkError(f"{path}: not an ARM relocatable object")
             self.sections: dict[int, Section] = {}
+            # Keep even zero-sized allocated group members as closure witnesses. They do not
+            # enter the frozen placement model, but v8 must not silently discard their group.
+            allocated_indices: set[int] = set()
+            self.section_groups: list[tuple[int, str, set[int | str]]] = []
             for i, s in enumerate(elf.iter_sections()):
+                if s["sh_flags"] & SH_FLAGS.SHF_ALLOC:
+                    allocated_indices.add(i)
                 if s["sh_flags"] & SH_FLAGS.SHF_ALLOC and s["sh_size"]:
                     nobits = s["sh_type"] == "SHT_NOBITS"
                     self.sections[i] = Section(
@@ -327,6 +677,8 @@ class ObjectFile:
                         merge_strings=(s["sh_flags"] & (SH_FLAGS.SHF_MERGE | SH_FLAGS.SHF_STRINGS)
                                        == SH_FLAGS.SHF_MERGE | SH_FLAGS.SHF_STRINGS),
                         entsize=s["sh_entsize"],
+                        elf_type=s["sh_type"], link_order=bool(s["sh_flags"] & SH_FLAGS.SHF_LINK_ORDER),
+                        linked_section=s["sh_link"] if s["sh_flags"] & SH_FLAGS.SHF_LINK_ORDER else 0,
                         retention=tuple(reason for flag, reason in (
                             (0x10000000, "ARM entry section"), (0x200000, "GNU retain"),
                             (SH_FLAGS.SHF_MASKOS | SH_FLAGS.SHF_MASKPROC, "OS/processor section flags"),
@@ -357,11 +709,15 @@ class ObjectFile:
             for s in elf.iter_sections():
                 if s["sh_type"] == "SHT_GROUP":
                     words = struct.unpack(f"<{s['sh_size'] // 4}I", s.data())
-                    if words and words[0] & 1:  # GRP_COMDAT: one entity, deduplicated by the linker
-                        signature = self.symbols[s["sh_info"]].name
-                        for member in words[1:]:
-                            if member in self.sections:
-                                self.sections[member].comdat = signature
+                    if words:
+                        flags = words[0]
+                        signature = self.symbols[s["sh_info"]].name if flags & 1 else ""
+                        self.section_groups.append((
+                            flags, signature, {member for member in words[1:] if member in allocated_indices}))
+                        if flags & 1:  # Frozen COMDAT identity; other group semantics are not modeled.
+                            for member in words[1:]:
+                                if member in self.sections:
+                                    self.sections[member].comdat = signature
             for s in elf.iter_sections():
                 if not isinstance(s, RelocationSection):
                     continue
@@ -390,6 +746,7 @@ class ObjectFile:
         merged = cls.__new__(cls)
         merged.sections, merged.symbols = {}, []
         merged.section_owners, merged.section_objects = {}, {}
+        merged.section_groups = []
         symbols_by_object, indices_by_object = [], []
         definitions = {}
         for owner, obj in enumerate(objects):
@@ -403,9 +760,14 @@ class ObjectFile:
                 symbols[id(sym)] = replace(sym, shndx=shndx)
             symbols_by_object.append(symbols)
             merged.symbols.extend(symbols.values())
+            for flags, signature, members in getattr(obj, "section_groups", ()):
+                merged.section_groups.append((
+                    flags, signature, {indices.get(index, f"UNALLOCATED_{owner}_{index}") for index in members}))
             for index, section in obj.sections.items():
                 new_index = indices[index]
-                merged.sections[new_index] = replace(section, index=new_index, relocs=[])
+                linked = (indices.get(section.linked_section, f"UNALLOCATED_{owner}_{section.linked_section}")
+                          if section.link_order else 0)
+                merged.sections[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked)
                 merged.section_owners[new_index] = owner
                 merged.section_objects[new_index] = labels[owner] if labels is not None else str(getattr(obj, "path", f"object[{owner}]"))
             for sym in obj.defined_globals():
@@ -533,6 +895,28 @@ def _symbol_offset(sym: Symbol) -> int:
     return sym.value & ~1 if sym.kind == "STT_FUNC" else sym.value
 
 
+def function_aliases(obj: ObjectFile) -> dict[int, list[Symbol]]:
+    """Proven full-section entry aliases, without changing the ELF symbols.
+
+    ARMCC gives C1/C2 and D1/D2 aliases the same section and value, but may give only
+    one the function's size. A zero size alone proves nothing: require an executable
+    section, a full-sized sibling and identical entry/ISA for every function symbol.
+    Data symbols and interior labels never acquire a function's address or extent.
+    """
+    by_section: dict[int, list[Symbol]] = {}
+    for sym in obj.defined_functions():
+        by_section.setdefault(sym.shndx, []).append(sym)
+    return {
+        index: symbols for index, symbols in by_section.items()
+        if obj.sections[index].executable and not obj.sections[index].nobits
+        and obj.sections[index].size == len(obj.sections[index].data)
+        and symbols[0].value in (0, 1)
+        and all(sym.value == symbols[0].value and sym.size in (0, obj.sections[index].size)
+                for sym in symbols)
+        and any(sym.size == obj.sections[index].size for sym in symbols)
+    }
+
+
 def reject_overlaps(spans: list[tuple[int, int, str, tuple[str, str] | None]]) -> None:
     """Distinct sections can never share storage, and one COMDAT entity has one address.
 
@@ -607,6 +991,7 @@ class InPlaceLinker:
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
         self._removed_sections: dict[int, dict] = {}
+        self._removed_unwind: dict[int, int] = {}  # companion section -> its removed code section
 
     def __repr__(self) -> str:
         return f"InPlaceLinker(functions={len(self.functions)}, bss=({self.bss[0]:#x}, {self.bss[1]:#x}))"
@@ -616,10 +1001,29 @@ class InPlaceLinker:
     def place(self, obj: ObjectFile, names_to_address: dict[str, int]) -> dict[int, Placement]:
         placements: dict[int, Placement] = {}
         offsets: dict[int, set[int]] = {}
+        aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
+        alias_addresses: dict[int, int] = {}
+        for index, symbols in aliases.items():
+            if index in self._removed_sections:
+                continue
+            for sym in symbols:
+                address = names_to_address.get(sym.name)
+                if address is None and self.resolver.lookup(sym.name) is not None:
+                    address = self._address_for(sym.name)
+                if address is None:
+                    continue
+                prior = alias_addresses.setdefault(index, address)
+                if prior != address:
+                    raise LinkError(f"{obj.sections[index].name}: aliases resolve to different addresses")
         for fn in obj.defined_functions():
             if fn.shndx in self._removed_sections:
                 continue
-            address = names_to_address.get(fn.name)
+            # Full-section proof is required to borrow a sibling's binding, not to
+            # place independently bound names through the frozen extent checks.
+            if (self.model.function_entry_aliases and fn.size == 0 and fn.shndx not in aliases
+                    and fn.name not in names_to_address and self.resolver.lookup(fn.name) is None):
+                raise LinkError(f"{fn.name}: zero-size function is not a full-section entry alias")
+            address = names_to_address.get(fn.name, alias_addresses.get(fn.shndx))
             if address is None:
                 address = self._address_for(fn.name)
             sec = obj.sections[fn.shndx]
@@ -699,6 +1103,8 @@ class InPlaceLinker:
                 continue  # checked globally after every reference has been inlined
             placed = placements.get(sym.shndx)
             bound = self.resolver.lookup(sym.name)
+            if bound is None and sym.kind == "STT_FUNC" and sym.shndx in alias_addresses:
+                bound = Target(alias_addresses[sym.shndx], _is_thumb_function(sym))
             if bound is None:
                 raise LinkError(
                     f"global {sym.name!r} has no address binding: name it func_/data_/bss_XXXXXXXX, "
@@ -1082,17 +1488,33 @@ class InPlaceLinker:
         by_section: dict[int, list[Symbol]] = {}
         for sym in obj.defined_functions():
             by_section.setdefault(sym.shndx, []).append(sym)
-        removed = {}
-        for index, aliases in by_section.items():
-            section = obj.sections[index]
-            bound = []
+        entry_aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
+        non_function_globals = ({sym.shndx for sym in obj.defined_globals() if sym.kind != "STT_FUNC"}
+                                if self.model.function_entry_aliases else set())
+        # V6 resolves every copy before selecting any removal. A section-local alias binding
+        # cannot turn another copy into an unbound R1 entity; older models keep their scan below.
+        bindings: dict[int, list[int]] = {}
+        if self.model.function_entry_aliases:
             for sym in obj.symbols:
-                if sym.shndx != index or not sym.name or sym.name.startswith("$"):
+                if sym.shndx not in obj.sections or not sym.name or sym.name.startswith("$"):
                     continue
                 target = self.resolver.lookup(sym.name)
                 address = names_to_address.get(sym.name, target.address if target else None)
                 if address is not None:
-                    bound.append(address - _symbol_offset(sym))
+                    bindings.setdefault(sym.shndx, []).append(address - _symbol_offset(sym))
+        removed = {}
+        for index, aliases in by_section.items():
+            section = obj.sections[index]
+            bound = bindings.get(index, ())
+            if not self.model.function_entry_aliases:
+                bound = []
+                for sym in obj.symbols:
+                    if sym.shndx != index or not sym.name or sym.name.startswith("$"):
+                        continue
+                    target = self.resolver.lookup(sym.name)
+                    address = names_to_address.get(sym.name, target.address if target else None)
+                    if address is not None:
+                        bound.append(address - _symbol_offset(sym))
             # A binding is a claim about an extant function, not licence to erase it. Include
             # interior entries/extents, so an alias cannot disguise a catalogued counterpart.
             if any(lo < address + section.size and address < lo + fn["size"]
@@ -1102,7 +1524,10 @@ class InPlaceLinker:
                 raise LinkError(f"{section.name}: removed callee must have no original address binding")
             if (not section.executable or section.nobits or section.size != len(section.data)
                     or section.size not in (4, 8) or section.align < 4
-                    or any(sym.value != 0 or sym.size != section.size for sym in aliases)
+                    or (index not in entry_aliases or any(sym.value != 0 for sym in aliases)
+                        if self.model.function_entry_aliases
+                        else any(sym.value != 0 or sym.size != section.size for sym in aliases))
+                    or index in non_function_globals
                     or any(kind != "$a" or offset != 0 for offset, kind in section.mapping)
                     or any(rel.type != R_ARM_V4BX for rel in section.relocs)
                     or inline_arm_call(0xEB000000, section.data) is None):
@@ -1122,15 +1547,167 @@ class InPlaceLinker:
             }
             if section.comdat:
                 removed[index]["comdat"] = section.comdat
+        removed_comdats = {comdat_key(obj.sections[index]) for index in removed} - {None}
         comdats = {}
-        for index in removed:
-            section = obj.sections[index]
+        copies = (obj.sections.items() if self.model.function_entry_aliases
+                  else ((index, obj.sections[index]) for index in removed))
+        for index, section in copies:
             key = comdat_key(section)
             if key is not None:
+                if key not in removed_comdats:
+                    continue
+                if bindings.get(index):
+                    raise LinkError(f"COMDAT {key[0]} {key[1]} mixes original-bound and removable callee copies")
+                if index not in removed:
+                    raise LinkError(f"COMDAT {key[0]} {key[1]} has an unsupported retained callee copy")
                 prior = comdats.setdefault(key, section)
                 if section.data != prior.data or section.mapping != prior.mapping:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory removed-callee copies")
         return removed
+
+    @staticmethod
+    def _compact_unwind_prefix_size(word: int) -> int | None:
+        """Header plus compact unwind words only; an out-of-line descriptor terminator follows."""
+        personality = word >> 24
+        if personality == 0x80:
+            return 4
+        if personality in (0x81, 0x82):
+            return 4 * (1 + ((word >> 16) & 0xFF))
+        return None
+
+    def _removed_unwind_sections(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, int]:
+        """V8: an exclusive SHF_LINK_ORDER companion dies only with its complete R1/group closure.
+
+        This is not general unwind-table placement or exception-table stripping. In particular,
+        kept code's entries, shared extab data, roots and original-bound metadata never disappear.
+        """
+        if not self.model.removed_unwind or not self._removed_sections:
+            return {}
+        companions: dict[int, int] = {}
+        exidx_by_owner: dict[int, int] = {}
+        incoming: dict[int, list[tuple[Section, Reloc]]] = {}
+        for section in obj.sections.values():
+            for rel in section.relocs:
+                if rel.type != R_ARM_V4BX:
+                    incoming.setdefault(rel.symbol.shndx, []).append((section, rel))
+
+        def private_data(section: Section, owner: int, kind: str) -> None:
+            if (not section.name.startswith(f".ARM.{kind}") or section.nobits or section.executable
+                    or section.writable or section.size != len(section.data) or section.align < 4
+                    or section.size % 4 or section.merge_strings
+                    or section.comdat != obj.sections[owner].comdat
+                    or section.index in self._retained_sections):
+                raise LinkError(f"{section.name}: not an exclusive unrooted {kind} companion")
+            for sym in obj.symbols:
+                if sym.shndx != section.index:
+                    continue
+                if sym.name and (sym.name in names or self.resolver.lookup(sym.name) is not None):
+                    raise LinkError(f"{section.name}: unwind companion has an original address binding")
+                if not (sym.bind == "STB_LOCAL" and sym.value == 0 and sym.size == 0
+                        and (sym.kind == "STT_SECTION" or sym.kind == "STT_NOTYPE" and sym.name == "$d")):
+                    raise LinkError(f"{section.name}: unwind companion has an independently named entity")
+
+        def dependencies(section: Section, personality: int, structural: list[Reloc]) -> None:
+            for rel in section.relocs:
+                if any(rel is known for known in structural):
+                    continue
+                if (rel.type != R_ARM_NONE or rel.offset != 0
+                        or rel.symbol.shndx != "SHN_UNDEF"
+                        or rel.symbol.name != f"__aeabi_unwind_cpp_pr{personality}"):
+                    raise LinkError(f"{section.name}: unsupported unwind relocation or dependency")
+
+        for section in obj.sections.values():
+            references = [rel for rel in section.relocs
+                          if rel.type != R_ARM_V4BX and rel.symbol.shndx in self._removed_sections]
+            linked_owner = section.linked_section if section.link_order else None
+            if not references and linked_owner not in self._removed_sections:
+                continue
+            # Ordinary call/data references still go through the unchanged R1 all-reference test.
+            if not (section.name.startswith(".ARM.exidx") or section.elf_type == "SHT_ARM_EXIDX"
+                    or linked_owner in self._removed_sections):
+                continue
+            owner = linked_owner
+            if (owner not in self._removed_sections or section.elf_type != "SHT_ARM_EXIDX"
+                    or section.size != 8 or section.entsize not in (0, 8)
+                    or owner in exidx_by_owner):
+                raise LinkError(f"{section.name}: shared, combined or unassociated unwind index")
+            private_data(section, owner, "exidx")
+            first, second = struct.unpack("<2I", section.data)
+            keys = [rel for rel in section.relocs if rel.offset == 0 and rel.type == R_ARM_PREL31]
+            if (len(keys) != 1 or keys[0].symbol.shndx != owner or first & 0x80000000
+                    or keys[0].symbol.kind not in ("STT_SECTION", "STT_FUNC")
+                    or _symbol_offset(keys[0].symbol) + self._addend(keys[0], section) != 0):
+                raise LinkError(f"{section.name}: unwind key is not the removed helper's exact entry")
+            if incoming.get(section.index):
+                raise LinkError(f"{section.name}: unwind index has another incoming reference")
+            structural = [keys[0]]
+            tails = [rel for rel in section.relocs if rel.offset == 4 and rel.type == R_ARM_PREL31]
+            if tails:
+                tail = tails[0]
+                extab = obj.sections.get(tail.symbol.shndx)
+                if (len(tails) != 1 or second & 0x80000000 or extab is None
+                        or _symbol_offset(tail.symbol) + self._addend(tail, section) != 0
+                        or extab.index in companions):
+                    raise LinkError(f"{section.name}: shared or interior exception table")
+                private_data(extab, owner, "extab")
+                if extab.elf_type != "SHT_PROGBITS" or extab.link_order or extab.size < 8 or extab.entsize:
+                    raise LinkError(f"{extab.name}: unsupported exception-table section metadata")
+                header = struct.unpack_from("<I", extab.data)[0]
+                prefix_size = self._compact_unwind_prefix_size(header)
+                if (prefix_size is None or extab.size != prefix_size + 4
+                        or struct.unpack_from("<I", extab.data, prefix_size)[0] != 0):
+                    raise LinkError(f"{extab.name}: truncated, combined or nonempty-descriptor exception-table entry")
+                if incoming.get(extab.index) != [(section, tail)]:
+                    raise LinkError(f"{extab.name}: exception table has another incoming reference")
+                dependencies(extab, (header >> 24) & 0xF, [])
+                companions[extab.index] = owner
+                structural.append(tail)
+                # Personality dependence lives in extab, never an unrelated exidx dependency.
+                if len(section.relocs) != 2:
+                    raise LinkError(f"{section.name}: unsupported unwind relocation or dependency")
+            else:
+                if second != 1 and second >> 24 != 0x80:
+                    raise LinkError(f"{section.name}: unsupported inline unwind entry")
+                dependencies(section, 0, structural)
+                if second == 1 and len(section.relocs) != 1:
+                    raise LinkError(f"{section.name}: CANTUNWIND entry has an unexpected dependency")
+            companions[section.index] = owner
+            exidx_by_owner[owner] = section.index
+
+        # Section links are dependencies too, even without an allocated relocation.
+        for section in obj.sections.values():
+            if (section.link_order and section.linked_section in (self._removed_sections | companions)
+                    and section.index not in companions):
+                raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")
+        # A group is indivisible, including all supplied copies and allocated members that
+        # placement would otherwise ignore. Only already-selected R1 code and validated own
+        # unwind sections have a removal proof; do not infer general unused-data elimination.
+        groups = {obj.sections[owner].comdat for owner in exidx_by_owner} - {None}
+        group_members = {
+            signature: {index for index, section in obj.sections.items() if section.comdat == signature}
+            for signature in groups
+        }
+        exempt = companions.keys() | exidx_by_owner.keys()
+        for flags, signature, members in getattr(obj, "section_groups", ()):
+            if (flags & 1 and signature in groups) or members & exempt:
+                if flags != 1:
+                    raise LinkError("unwind companion belongs to an unsupported section group")
+                group_members.setdefault(signature, set()).update(members)
+        for signature, members in sorted(group_members.items()):
+            for index in sorted(members, key=str):
+                member = obj.sections.get(index)
+                if (member is None or member.comdat != signature
+                        or index not in self._removed_sections and index not in companions):
+                    name = member.name if member is not None else "unrepresented allocated member"
+                    raise LinkError(f"COMDAT {signature}: {name} has no complete group-removal proof")
+        for owner in exidx_by_owner:
+            self._removed_sections[owner]["unwind_sections"] = [
+                {"section": obj.sections[index].name, "section_index": index,
+                 "size": obj.sections[index].size, "kind": "exidx" if index == exidx_by_owner[owner] else "extab",
+                 "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate")))}
+                for index in sorted(companions) if companions[index] == owner
+            ]
+        return companions
 
     def _removed_call_rewrites(self, obj: ObjectFile, placements: dict[int, Placement]) -> dict[tuple[int, int], Rewrite]:
         """Inline every reference to candidate-only callees, or refuse the entire link.
@@ -1145,6 +1722,8 @@ class InPlaceLinker:
         used = set()
         contexts = {}
         for section in obj.sections.values():
+            if section.index in self._removed_unwind:
+                continue
             for rel in section.relocs:
                 index = rel.symbol.shndx
                 if index not in self._removed_sections or rel.type == R_ARM_V4BX:
@@ -1164,23 +1743,35 @@ class InPlaceLinker:
                     if placed.base not in contexts:
                         instructions = {}
                         for lo, hi in fn.get("code_ranges", [(placed.base, placed.base + fn["size"])]):
+                            if self.model.bounded_switches:
+                                lo, hi = max(lo, fn["address"]), min(hi, fn["address"] + fn["size"])
+                                if lo >= hi:
+                                    continue
                             original = self._read_original(lo, hi - lo, f"{section.name}: removed-call context")
                             for insn in _ARM.disasm(original, lo):
-                                if not any(a <= insn.address < b for a, b in (*fn.get("pools", ()), *fn.get("literals", ()))):
-                                    instructions[insn.address] = insn
+                                if self.model.bounded_switches:
+                                    if (insn.address % 4 or insn.size != 4 or insn.address + 4 > hi
+                                            or any(a < insn.address + 4 and insn.address < b
+                                                   for a, b in (*fn.get("pools", ()), *fn.get("literals", ())))):
+                                        continue
+                                elif any(a <= insn.address < b
+                                         for a, b in (*fn.get("pools", ()), *fn.get("literals", ()))):
+                                    continue
+                                instructions[insn.address] = insn
+                        words = arm_pool_words(self.image, fn) if self.model.bounded_switches else None
                         call_sites = {
                             placed.base + relocation.offset for relocation in section.relocs
                             if relocation.symbol.shndx in self._removed_sections
                             and relocation.type in (R_ARM_CALL, R_ARM_JUMP24, R_ARM_PC24)
                         }
-                        contexts[placed.base] = instructions, call_sites
-                    instructions, call_sites = contexts[placed.base]
+                        contexts[placed.base] = instructions, call_sites, words
+                    instructions, call_sites, words = contexts[placed.base]
                     replacement = next(_ARM.disasm(struct.pack("<I", decision[1]), site, 1), None)
                     arguments = set(replacement.regs_access()[0]) & _ARM_ARGUMENTS if obj.sections[index].size == 8 else set()
                     if (fn["isa"] != "arm" or site not in instructions
                             or arm_call_abi_context(instructions, site, arguments, replacement.cc,
                                                     {placed.base, *(entry["address"] for entry in fn.get("entries", ()))},
-                                                    call_sites) != "consistent"
+                                                    call_sites, words, bounded_switches=self.model.bounded_switches) != "consistent"
                             or next((kind for offset, kind in reversed(section.mapping) if offset <= rel.offset), "$a") != "$a"):
                         decision = None
                 if decision is None:
@@ -1212,8 +1803,10 @@ class InPlaceLinker:
         """
         self.literal_rebindings = []
         self.rewrites, self.removed_callees = [], []
+        self._removed_unwind = {}
         self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
+        self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {})
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
         linked: dict[int, LinkedSection] = {}

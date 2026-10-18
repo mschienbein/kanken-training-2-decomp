@@ -172,7 +172,7 @@ struct SceneToggle {
     unsigned char reserved00[14];
     bool enabled;
     unsigned char reserved0f[0x8d];
-    struct SceneChild *child;
+    struct SoundTrack *child;
 };
 
 extern "C" {

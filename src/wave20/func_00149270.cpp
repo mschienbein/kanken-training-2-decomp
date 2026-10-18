@@ -4,11 +4,11 @@
 
 
 
-extern "C" void func_00149270(struct DispatcherWorker *worker)
+extern "C" void func_00149270(struct WorkerThread *worker)
 {
-    while (!worker->stopped) {
+    while (!worker->stop_requested) {
         func_0014b7a0(func_00185de4());
-        if (worker->stopped)
+        if (worker->stop_requested)
             break;
         struct StreamMutex *lock = &worker->lock;
         func_00192bd8(lock);

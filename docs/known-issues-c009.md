@@ -2,22 +2,23 @@
 
 ## Status
 
-**Readiness resumed on prepared main f8adff4; not review-ready or accepted.**
-Includes complete c008-r3 successor `b5e8b8a`, preserving c009's typed slot13/14 work.
-The original sixteen-address boundary is closed by six canonical MATCH destinations
-and ten recorded deferrals. Three further interface/tooling deferrals are below.
+**Readiness on finalized main bb60cd7; not review-ready or accepted.**
+Includes finalized c008-r3 (sequence 8), preserving c009's typed slot13/14 work.
+The original sixteen-address boundary currently retains five canonical destinations
+and eleven recorded deferrals: the earlier collected `0013156c` was withdrawn
+on a native C++ API qualification. Three other interface/tooling deferrals remain.
 `docs/GATES.md` stays v1.16. Main owns full builds/suite and acceptance.
-Main resumed the committed continuation without restarting searches. Final checks
-run nice'd and sequentially in the c009 worktree. No merged-tree gate success or
-pre-review PASS is claimed yet; Main alone owns full builds/suite/prepare.
+Main resumed the committed continuation without restarting searches. Checks run
+nice'd and sequentially. Stable merged-tree G3 r3 exits0, but later canonical
+repairs need a new final gate/sweep. Thirteen byte mismatches remain; no pre-review PASS.
 
-`config/candidates/c009.json` lists **679 units / 679 functions / 57,276 target
+`config/candidates/c009.json` lists **678 units / 678 functions / 57,212 target
 bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:
 
 | Frozen profile | Units/functions | Target bytes |
 | --- | ---: | ---: |
 | game | 616 | 51,528 |
-| middleware | 38 | 4,064 |
+| middleware | 37 | 4,000 |
 | sdk | 25 | 1,684 |
 
 Previous collect inputs, successful destination receipts, dirty sources and author results
@@ -27,24 +28,47 @@ results are not silently admitted into this default-model checkpoint.
 
 ## Blocking evidence
 
+* The full final MATCH sweep measured all **801 required units / 805 functions**:
+  **772 MATCH units, 16 compiler-failure units, 13 byte-mismatch units**.
+  All sixteen compilation failures subsequently MATCH after canonical repairs
+  (`compile-repair-r1.json`, `compile-repair-r2.json`). Earlier failed results stay
+  intact, and the changed headers require a fresh final whole-scope sweep.
+  Native/signature probes did not run because the dependent shell stopped at matching.
+
+* The stable merged-tree `interfaces-stable-r1.json` exited **1**: 2,206 units,
+  1,704 checked, one Heap ODR disagreement, one duplicate-local-prototype policy
+  finding and 502 unchecked C++ units, with **zero unchecked C**. Both findings
+  were fixed afterward, followed by the native reader correction/withdrawal below.
+  Corrected stable `interfaces-stable-r2.json` exits **0**: 2,205 units,
+  1,704 checked, zero disagreements, zero policy findings, 501 unchecked C++
+  and zero unchecked C. Its exact dry input snapshot is retained. Finalized Main
+  `bb60cd7` is merged and stable r3 also exits0. Later compilation repairs require
+  a new final gate on their changed-header tree.
+
 * The intermediate whole-ledger `interfaces --allow-unchecked-cpp` remediation run
   exited **1**: 2,205 units, 1,705 checked, 48 disagreements, 28 inline-declaration
   findings, 500 unchecked (498 C++ and the two ARMCC varargs parser failures).
-  Remediation continued while that audit ran. It is not a current final count,
-  and no exit-zero G3 report exists.
+  Remediation continued while that audit ran. These counts are historical,
+  not the corrected stable r2 verdict recorded above.
 * The prior **166-game-header C++ co-inclusion probe exited 0** before the
   collection milestone's header changes. It is historical compile-only evidence,
   not a current native-unit, actual-signature or indirect-consumer sweep.
   Those c009-wide probes using c008-r2's reusable helpers remain unexercised.
 * The catalogue recheck intersection was `00214580` (MATCH, exit 0) and
   `00203810` (compile exit 2, then deferred on concrete owner-contract evidence).
+* Remaining byte mismatches: `00113c0c`, `0018ee88`, `001c1d4c`, `001865ec`,
+  `0011db78`, `0012ccd8`, `00141514`, `001c20e8`, `001eb1cc`, `001105c0`,
+  `001eb190`, `001c4494`, `0019eb24`. Four queue-tail shadow records incorrectly
+  extend the already-complete canonical CommandQueue. Other fixes require actual
+  width/offset/ABI provenance; no steering is admitted. Exact rows remain in HANDOFF.
 * Final all-new/revised matching, complete argcheck adjudication and the seven-step
   pre-review have **not** run after these changes. No full build, suite, prepare,
   finalize, history edit or push was performed.
-* Collection closure is recorded in `collection-closure-r1.json`: canonical
-  ResourceDescriptor/index-list initializers, member-array construction, style
-  owner and both typed reader setups are collected; ten contract blockers are
-  explicitly deferred. Every original author source matches its retained receipt hash.
+* Collection closure is recorded in `collection-closure-r1.json`; its six original
+  MATCH measurements remain historical. Current scope retains five: the game reader
+  now uses the genuine native API, while the separate middleware reader is withdrawn.
+  Eleven collection addresses therefore have exact current deferral reasons.
+  Every original author source still matches its retained receipt hash.
 
 Private exact evidence and source bindings are recorded in the worktree's
 `scratch/integrator/c009/HANDOFF.json`, `UNRESOLVED-SCOPE.json`,
@@ -85,27 +109,28 @@ or acceptance claims.
 ## Predecessor boundary and newer pending remediation
 
 c008-r2 `38b4c01` was merged at `9218542`; the dry ledger no longer uses failed
-original c008. The current dry ledger has **2,206 units / 2,280 functions**:
-1,601 predecessor functions plus 679 c009 functions. The additional `0016b6a4`
+original c008. The current dry ledger has **2,205 units / 2,279 functions**:
+1,601 predecessor functions plus 678 c009 functions. The additional `0016b6a4`
 deferral remains excluded.
 
-The source delta against c008-r3 revises **122 predecessor units / 126 functions**,
+The source delta against c008-r3 revises **123 predecessor units / 127 functions**,
 including shared-header migrations and caller-evidenced constructor/callback input/result
 retention. Every revised unit is listed in HANDOFF and still needs fresh final
 byte/review closure. Header-only dependents need the complete canonical contract sweep.
 
-Merged c008-r3 `642d725079b6a2154bc6f06fa554dcbeb063bcea`, retaining c009's channel
-fields and adopting corrected service slots 11/13/15 plus AuxCallback's scalar
-sample-count chain. Original `00115000` also proves slot14's context-taking tail
-consumer (`service-notify-r1.json`); c009 keeps its before/after names and correct
-types. FixC008R3 acknowledged that missed disposition and is preparing a preserving
-follow-up/audit correction. Final c009 checks must include that follow-up.
+Complete c008-r3 `b5e8b8a` is merged through prepared main `f8adff4`, retaining
+c009's channel fields and before/after names while adopting all corrected service
+slot and AuxCallback contracts. Original `00115000` proves slot14's context-taking
+tail consumer (`service-notify-r1.json`). The complete predecessor follow-up also
+corrects slots0/1/2 and the callback-state notification-node prefix. Its authoritative
+evidence is main-root `scratch/integrator/c008-r3/complete/`; no known fix is unmerged.
 
 ## Additional collection-scope deferrals
 
-The original sixteen-address collection boundary is closed by six new canonical
-MATCH destinations and the following ten explicit deferrals. No destructor, runtime
-or duplicate native-class aliases were adopted to conceal these contracts.
+The original sixteen-address collection boundary currently retains five canonical
+destinations and eleven explicit deferrals, including the post-collection reader
+withdrawal described below. Earlier MATCH evidence is preserved, not overwritten.
+No destructor, runtime or duplicate native-class alias conceals these contracts.
 
 | Function(s) | Exact unresolved contract |
 | --- | --- |
@@ -126,9 +151,24 @@ recorded-reason option, not approval of a false match or accepted credit.
 | --- | --- |
 | `0015e5d4` | The definition takes DisplayPaneLink with a material-bearing DisplayPane, while accepted `0015e5c4` forwards DisplaySurface containing a different partial text-field owner. A common concrete owner or subobject relationship is not proven; no cast/shadow type is used to erase it. |
 | `00190d0c`, `00190d68` | Their standard-C `va_arg(values,int)` expansion is unsupported by the frozen G3 C parser. The retained audit records both as unchecked C, not waived C++; source correctness is not faulted. No parser suppression, hand-coded va_list ABI or language-waiver conversion is substituted for the missing tool support. |
+| `0013156c` | The middleware reader's distinct full native version/namespace and result/receiver/unused-input API are unresolved. Its mutable CodeUnitReader/EncodingSource shadows duplicate the frozen Font/CharStrmReader family physically, but that resemblance does not justify binding the already-owned native member name at a second address or guessing another overload. Original collected MATCH/source/receipt evidence remains preserved; current credit is withdrawn. |
 
 Exact sources and original author receipts remain in private
-`interface-deferrals-r1.json`. The shared SurfaceTextState used by the retained
+`interface-deferrals-r2.json`, retaining the previous `interface-deferrals-r1.json`.
+The shared SurfaceTextState used by the retained
 spacing/size wrappers is a qualified partial field view, not a complete recovered
 native class or an alias of DisplayPane. Its actual allocation and native identity
 remain unrecovered.
+
+## Native reader API correction
+
+`001f4cf8` now defines the frozen native
+`nw::font::Font::GetCharStrmReader(wchar_t) const` signature rather than an
+explicit-output mutable shadow: the const aggregate result, const receiver and
+unused dummy remain present. Its native definition MATCHes all 64 bytes (exit0),
+with the same-address own-definition name adopted. The original method-pointer
+table remains external data; no read-method aliases or data credit are added.
+`native-reader-attempts-r1.json` preserves the initial missing-NW_RELEASE compile
+failure and successful corrected invocation. The frozen native headers and profiles
+are unchanged. This scoped success is not a final checkpoint-wide MATCH claim.
+

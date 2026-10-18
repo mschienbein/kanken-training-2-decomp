@@ -1,6 +1,128 @@
 # C009 recovered integration handoff
 
-## Readiness resumed from 1f66a8a on main f8adff4
+## Full MATCH coverage recorded; compilation repair slice closes
+
+At `c43d995`, finalized-predecessor **G3 r3 exits 0**: 2,205 units,
+1,704 checked, zero disagreements/policy findings, 501 unchecked C++ and
+zero unchecked C. The sequential final match sweep then measured **all
+801 required units / 805 functions**, explicitly v2/none and `--show 0`:
+**772 units MATCH, 16 compiler failures, 13 byte mismatches**. The shell
+stopped there, so native/signature probes did **not** run. Exact per-unit
+commands, exits, source hashes and failure output remain in `final-match-r1.json`.
+
+All **16 compiler failures** now have scoped MATCH evidence:
+`compile-repair-r1.json` records 14 MATCH plus two remaining mismatches;
+`compile-repair-r2.json` records both corrected units MATCH. Fixes reuse actual
+canonical members/prototypes: service flag bytes, nested heap/material/buffer
+owners, SoundTrack child/task, and the real WorkerThread mutex/stop fields.
+No DispatcherWorker or SceneChild shadow was restored. Playback original facts
+prove transition +0x34, count +0x9c, handle +0x98, and tail slot byte offset
+0x20 (`callback8`), not slot2. The signed-byte IPC wrapper retains signed storage
+through a standard unsigned-char object-representation view of its raw-byte output.
+Its original uninitialized-error-path bug stays explicit.
+
+These repairs change four headers, so **neither the earlier 772 MATCH rows nor
+G3 r3 is a final verdict on the later changed-header tree**. Thirteen original
+byte mismatches remain: `00113c0c`, `0018ee88`, `001c1d4c`, `001865ec`,
+`0011db78`, `0012ccd8`, `00141514`, `001c20e8`, `001eb1cc`, `001105c0`,
+`001eb190`, `001c4494`, `0019eb24`. HANDOFF retains every exact row/output.
+The four ExtendedCommandQueue/W19aWritableQueue shadows incorrectly append a
+prefix onto the now-complete 0x44-byte CommandQueue and need canonical migration.
+The other mismatches require real width/offset/ABI evidence; no dead/register/
+volatile steering or guessed aliases are permitted.
+
+Scope remains **678 new / 57,212 B**, **123 revised units / 127 functions**,
+dry **2,205 / 2,279**, required union **801 / 805**. The requested
+`scratch/integrator/c009/candidates.json` exists but is **not review-ready**.
+After the remaining repairs: fresh stable G3 and complete MATCH, native/signature/
+co-inclusion/indirect/forwarding sweeps, full argcheck adjudication and seven-step
+pre-review are still required. `names-review-r1.json` inventories all 30 c009
+name additions, zero modified bindings and two removed obsolete descriptor aliases.
+Main currently holds the isolated heavy slot; wait for its explicit
+**"slot returned"** before another full audit/build/suite. Static work is allowed.
+
+
+## Historical finalized predecessor merge at d4f52d9
+
+Merged Main **`bb60cd7`** at **`d4f52d963cae908de5207bb320b2e7cee3a6299a`**.
+C008-r3 is finalized, sequence 8, with **1,527 units / 1,601 accepted functions**.
+The merge is clean and changes only accepted records, config/matches.json and docs;
+no source, header, tool or linker-model adoption arrived. The dry ledger now uses
+that finalized canonical predecessor. `readiness-scope-r3.json` binds the
+**801-unit / 805-function** final new/revised union with canonical credit names.
+
+The requested `candidates.json` proposal is present; it remains unaccepted and
+not yet review-ready. Next is stable G3 r3, then the final MATCH and canonical
+checks, complete argcheck adjudication and seven-step pre-review, all nice'd
+and sequential. Source-level G3 r2's PASS and all earlier failed evidence remain
+preserved under their actual input snapshots. C009 remains explicit v2/none.
+
+
+## Historical milestone: stable G3 r2 exits zero
+
+`interfaces-stable-r2.json` exits **0** with `--allow-unchecked-cpp`:
+**2,205 units, 1,704 checked, zero disagreements, zero policy findings,
+501 unchecked C++ units and zero unchecked C**. The exact input ledger is
+preserved as `dry-matches-g3-r2.json`. All prior failures remain intact.
+The native member's ledger credit identifier was then normalized back to
+catalogue `func_001f4cf8`; the genuine own-definition alias stays in names.json.
+This label normalization does not change any source, profile or address.
+
+Main subsequently finalized c008-r3 (sequence 8, 1,601 accepted functions) at
+`bb60cd7`. Merge that exact main commit next; incoming changes are only accepted
+records, config/matches.json and documentation. Then repeat stable G3 on the
+finalized successor ledger before the final MATCH/canonical/argcheck/pre-review
+checks. C009 stays explicitly **armlink5-inline-branchnop-v2 / none**; do not
+merge the parallel adopt-models branch or select v4/v6.
+
+Main's requested manifest is `scratch/integrator/c009/candidates.json`, with the
+same schema and canonical credit identifiers as the tracked candidate manifest.
+Scope remains **678 new / 57,212 B**, **123 revised units / 127 functions**;
+the required final union is **801 units / 805 functions**. This is a completed
+G3 remediation milestone, not yet a review-ready checkpoint.
+
+
+## Earlier stable G3 remediation and native reader contract
+
+Continued merge `b6bfcec` without restarting any completed author search.
+Stable `interfaces-stable-r1.json` exited **1**: 2,206 units, 1,704 checked,
+one Heap ODR disagreement, one duplicated-local-prototype policy finding,
+and 502 unchecked C++ units (**zero unchecked C**). The exact failed report
+is retained. `pilot/game_heap.cpp` now includes the canonical Heap definition;
+the two redundant `func_0016fca0` declarations were removed because
+`game/functions.h` already supplies the shared declaration.
+
+Manual C++ inspection found that both mutable CodeUnitReader reconstructions
+duplicated the native character-reader layout without preserving its full API.
+`001f4cf8` now defines the frozen
+`nw::font::Font::GetCharStrmReader(wchar_t) const` interface: a by-value const
+CharStrmReader result, const receiver, and the unused dummy all remain explicit.
+The genuine private constructor initializes its const method-pointer member.
+This complete native definition is **MATCH 64/64 B, exit 0** in
+`native-reader-r2/func_001f4cf8.result.json`; its own same-address mangled name
+is adopted. The initial missing-NW_RELEASE compile failure is preserved in
+`native-reader-attempts-r1.json`; only the existing upstream release-header
+configuration was added, with no frozen header/profile change.
+
+The separate middleware `0013156c` identity/API is not established by that
+physical resemblance. Its distinct table/version/namespace cannot be replaced
+by the already-bound native member name, a guessed overload, or a shadow class.
+It is withdrawn with source and original collection receipt preserved in
+`interface-deferrals-r2.json`. Both mutable reader shadows are removed.
+The original sixteen-address boundary now retains **five** current destinations
+and **eleven** exact deferrals; the earlier six MATCH measurements stay historical.
+
+Current scope: **678 new units/functions / 57,212 B** (game 616/51,528 B,
+middleware 37/4,000 B, sdk 25/1,684 B), **123 revised predecessor units /
+127 functions**, dry **2,205 units / 2,279 functions**. The final required union
+is **801 units / 805 functions**, bound in `readiness-scope-r2.json`.
+Stable G3 r2, the final MATCH sweep, canonical probes, full argcheck adjudication
+and seven-step pre-review remain required; no review-ready claim is made here.
+Checks remain nice'd and sequential. C010's agreed five-unit window has finished
+and no peer compiler/audit process remains in the slot.
+
+
+## Historical initial readiness resume from 1f66a8a on main f8adff4
 
 Main explicitly resumed c009 readiness. Merged prepared main `f8adff4`,
 including complete c008-r3 successor `b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b`.

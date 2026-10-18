@@ -1,0 +1,263 @@
+{
+  "basis": "Current config/names.json relative to finalized main bb60cd7; static identity inventory, not a final MATCH verdict",
+  "added_count": 30,
+  "modified_count": 0,
+  "removed": {
+    "_ZN7S2073fc18WindowLabelBindingC1EiiPKc": {
+      "address": 1461156,
+      "evidence": "c008: src/solo/func_002073fc.cpp whole-function MATCH emits an external _ZN7S2073fc18WindowLabelBindingC1EiiPKc reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
+    },
+    "_ZN7S2073fc18WindowLabelBindingC1Ev": {
+      "address": 1461116,
+      "evidence": "c008: src/solo/func_002073fc.cpp whole-function MATCH emits an external _ZN7S2073fc18WindowLabelBindingC1Ev reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
+    }
+  },
+  "added": [
+    {
+      "name": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+      "address": "001f4cf8",
+      "kind": "function",
+      "credited_source": "src/wave20/func_001f4cf8.cpp",
+      "evidence": "c009: src/wave20/func_001f4cf8.cpp defines the frozen native nw::font::Font::GetCharStrmReader(wchar_t) const API at this address; whole-function 64-byte MATCH under the frozen game profile is scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json. The hidden aggregate result, const Font receiver and unused wchar_t dummy are retained. This is a same-address own definition, not an external callee alias; original private identity remains qualified.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14W17TexturePane7destroyEv",
+      "address": "001cfc7c",
+      "kind": "function",
+      "credited_source": "src/wave17/func_001cfc7c.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. The original nondeleting texture-pane destructor assigns its class dispatch table and returns the result of base destruction; method naming is [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ScrollPositionC1Ev",
+      "address": "0010ce30",
+      "kind": "function",
+      "credited_source": "src/wave18/func_0010ce30.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Caller 0x00103c88 allocates a 0x64-byte object, invokes this initializer and retains its pointer; [INFERENCE] descriptive class name.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ScrollPositionC2Ev",
+      "address": "0010ce30",
+      "kind": "function",
+      "credited_source": "src/wave18/func_0010ce30.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object constructor alias for the same 0x64-byte initializer.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN10MotionPairC1Ev",
+      "address": "00170da0",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00170da0.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Callers initialize consecutive two-float members and reuse the returned this pointer; [INFERENCE] descriptive class name.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN10MotionPairC2Ev",
+      "address": "00170da0",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00170da0.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object constructor alias for the two-float member initializer.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ControlTriplet5clearEv",
+      "address": "001670a8",
+      "kind": "function",
+      "credited_source": "src/wave18/func_001670a8.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Callers 0x001e8b10/0x001e9ea4 reset the same 0x24-byte member constructed by 0x00170388; [INFERENCE] descriptive class/method names.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ControlTripletC1Ev",
+      "address": "00170388",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00170388.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Callers initialize a separate 0x24-byte byte-and-float member; [INFERENCE] descriptive class name.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ControlTripletC2Ev",
+      "address": "00170388",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00170388.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object constructor alias for the separate 0x24-byte member initializer.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN15TextDecoderBaseC1Ev",
+      "address": "001db104",
+      "kind": "function",
+      "credited_source": "src/wave18/func_001db104.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. func_001db104 initializes a decoder dispatch-table pointer and is called as the base construction step by func_001daf74; reconstructed class name.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN15TextDecoderBaseC2Ev",
+      "address": "001db104",
+      "kind": "function",
+      "credited_source": "src/wave18/func_001db104.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC emits the C2 alias of the same reconstructed decoder base constructor as C1 at func_001db104.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV15TextDecoderBase",
+      "address": "00224cb8",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. The original base constructor writes data_00224cc0; ARMCC's native virtual constructor references its vtable with addend 8, fixing the symbol base at 0x00224cb8.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN13DisplayTargetC1Ev",
+      "address": "00117854",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00117854.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Natural C++ constructor binding for the catalogued display-target initializer; class name is inferred.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN13DisplayTargetC2Ev",
+      "address": "00117854",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00117854.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC complete/base constructor alias for the same catalogued display-target initializer; class name is inferred.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV13DisplayTarget",
+      "address": "00224ddc",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. Observed display-target vtable prefix immediately precedes its sole retained virtual entry at data_00224de4; class name is inferred.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN12SlotBitOwnerD1Ev",
+      "address": "001c51d0",
+      "kind": "function",
+      "credited_source": "src/wave18/func_001c51d0.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. func_002136d0 registers this object callback as an ObjectDestructor; it releases the TLS-sized bitmask slot indexed by the object's leading unsigned word. Class identity is inferred.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN12SlotBitOwnerD2Ev",
+      "address": "001c51d0",
+      "kind": "function",
+      "credited_source": "src/wave18/func_001c51d0.cpp",
+      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object and complete-object destructor symbols alias the same generated section.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV17HeapAllocatorDcb0",
+      "address": "00223ee0",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. Constructor at 0x0010dcb0 stores the vtable address point 0x00223ee8; ARM C++ ABI table base is address point minus eight; class name [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV17HeapAllocatorDce8",
+      "address": "00223ef0",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010dce8 sets vtable address point data_00223ef8; ARM C++ ABI table base is address point minus eight; class name [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV17HeapAllocatorDd20",
+      "address": "00223f00",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010dd20 sets vtable address point data_00223f08; ARM C++ ABI table base is address point minus eight; class name [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV17HeapAllocatorD500",
+      "address": "00223e24",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010d500 sets vtable address point data_00223e2c; ARM C++ ABI table base is address point minus eight; class name [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV17HeapAllocator6be4",
+      "address": "00223f7c",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_00116be4 sets vtable address point data_00223f84; ARM C++ ABI table base is address point minus eight; class name [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ResourceObjectC1Ev",
+      "address": "00143318",
+      "kind": "function",
+      "credited_source": "src/wave15/func_00143318.cpp",
+      "evidence": "[INFERENCE] Native ResourceObject identity; c009 constructor own definition rederived at func_00143318.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN14ResourceObjectC2Ev",
+      "address": "00143318",
+      "kind": "function",
+      "credited_source": "src/wave15/func_00143318.cpp",
+      "evidence": "ARMCC base/complete constructor aliases emitted by the same matching c009 definition.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZTV14ResourceObject",
+      "address": "002240d4",
+      "kind": "vtable-addresspoint",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Native vtable identity; constructor stores address point data_002240dc, eight bytes after its ABI symbol base.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN18ResourceDescriptorC2EiiPKc",
+      "address": "00164ba4",
+      "kind": "function",
+      "credited_source": "src/wave18/func_00164ba4.cpp",
+      "evidence": "Own native c009 ResourceDescriptor complete/base constructor definition is matched at func_00164ba4; descriptive identity [INFERENCE].",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN13PaneIndexListC1Eiz",
+      "address": "00164b34",
+      "kind": "function",
+      "credited_source": null,
+      "evidence": "[INFERENCE] Compact index-list identity. Natural non-inlined constructor reference in the full 002095c0 initializer; the allocation is 20 bytes and the variadic inputs are integer indices. Preserved author receipt: scratch/authors/L046/match/func_002095c0/final/func_002095c0.result.json. Canonical caller is rederived in c009/collection-r1.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN18RuntimeMemberOwnerC1Ev",
+      "address": "0014d2e4",
+      "kind": "function",
+      "credited_source": "src/wave18/func_0014d2e4.cpp",
+      "evidence": "[INFERENCE] Native member-array owner identity; its own c009 definition is rederived at func_0014d2e4, constructing 32 24-byte members after an eight-byte prefix.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN18RuntimeMemberOwnerC2Ev",
+      "address": "0014d2e4",
+      "kind": "function",
+      "credited_source": "src/wave18/func_0014d2e4.cpp",
+      "evidence": "ARMCC complete/base aliases emitted by the same c009 native owner-constructor definition.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    },
+    {
+      "name": "_ZN13RuntimeMemberC1Ev",
+      "address": "0014de8c",
+      "kind": "function",
+      "credited_source": "src/wave2/func_0014de8c.c",
+      "evidence": "[INFERENCE] Native member identity; compiler-produced callback reference in matching 0014d2e4 supplies an element this pointer. Canonical func_0014de8c preserves and returns that pointer; no unused-input erasure.",
+      "latest_final_match_status": "pending final-match-r1; no prior receipt silently reattributed"
+    }
+  ],
+  "qualifications": [
+    "Descriptive/private class and method spellings remain INFERENCE.",
+    "Function names need own emitted same-address definitions or surviving non-erased natural caller proof; no byte-only empty-callee alias is accepted.",
+    "Vtable bindings identify existing original data address points, not newly credited data.",
+    "Final receipt and relocation evidence must be linked after the current final sweep completes."
+  ]
+}

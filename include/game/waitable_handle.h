@@ -7,6 +7,7 @@ struct JoinedHandleOwner18;
 struct JoinedHandleOwnerC20;
 
 #include "ctr/svc.h"
+#include "game/stream_manager.h"
 
 /* The common wait-once prefix is read at +0 and +4 by func_0019df84. */
 struct WaitableHandle {
@@ -17,8 +18,7 @@ struct WaitableHandle {
 };
 struct WorkerThread {
     struct WaitableHandle thread;
-    unsigned char reserved08[8];
-    int thread_id;
+    struct StreamMutex lock;
     unsigned char stop_requested;
     unsigned char running;
 };
@@ -39,6 +39,7 @@ extern "C" {
 extern void func_0019df84(struct WaitableHandle *completion);
 extern void func_0019dfbc(CtrResult result);
 extern void func_00185d74(struct WorkerThread *worker);
+extern void func_00149270(struct WorkerThread *worker);
 extern struct WorkerThread *func_00143ac8(struct WorkerThread *worker);
 extern struct WaitableHandle *func_001c52bc(struct WaitableHandle *object);
 extern struct LargeResourceElement *func_001c3100(struct LargeResourceElement *element);

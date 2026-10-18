@@ -3,7 +3,6 @@
 #include "game/selection.h"
 #include "game/input.h"
 #include "game/runtime.h"
-#include <string.h>
 #include "game/playback_screen.h"
 
 /* [INFERENCE] Virtual slot names; byte offsets are fixed by the callback and tail dispatch. */
@@ -12,12 +11,12 @@ extern "C" void func_001e84ec(struct ScreenInitializationState *state)
 {
     switch (state->mode) {
     case 0: {
-        const L043PlaybackEntry *entry = &data_0023f068[state->entry];
+        const L043PlaybackEntry *entry = &data_0023f068[state->count];
         func_0017a6f4(state->selection, entry->selection);
         func_00168118(state->first_options, entry->first);
         func_001795cc(state->alternate, entry->alternate, -1);
         func_00167f7c(state->second_options, entry->second);
-        state->milliseconds = entry->seconds * 1000.0f;
+        state->elapsed = entry->seconds * 1000.0f;
         func_0017abf8(0, 0x01000000);
         func_00181b68(7, 0, 1);
         state->mode = 1;
@@ -25,28 +24,26 @@ extern "C" void func_001e84ec(struct ScreenInitializationState *state)
     }
     case 1:
         if (!func_00177124(7)) {
-            unsigned buttons;
-            /* The canonical input layout leaves this button word opaque. */
-            memcpy(&buttons, bss_004972d8.reserved10, sizeof(buttons));
+            unsigned buttons = bss_004972d8.buttons;
             if (buttons & 0x204000) {
                 state->transition = 2;
                 func_001e9818(state->actions, 0, 0, 1);
-                state->handle = func_0015e31c(-1u, 0x01000016);
+                state->selected = func_0015e31c(-1u, 0x01000016);
                 state->mode = 2;
             }
         }
         break;
     case 2:
-        if (!func_0015e2b4(state->handle)) {
-            state->handle = -1;
+        if (!func_0015e2b4(state->selected)) {
+            state->selected = -1;
             func_00181b68(7, 1, 1);
             state->mode = 3;
         }
         break;
     case 3:
         if (!func_00177124(7)) {
-            ++state->entry;
-            if (state->entry >= 1) {
+            ++state->count;
+            if (state->count >= 1) {
                 func_00177b10(state, data_002188e0);
                 return;
             }
@@ -61,5 +58,5 @@ extern "C" void func_001e84ec(struct ScreenInitializationState *state)
         func_00175ab8(state->screen, 0, 79, 79, 79, alpha);
         func_0016e924(&state->animation, -1.0f);
     }
-    state->slot08();
+    state->callback8();
 }

@@ -8,6 +8,6 @@ void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,
                    const struct DisplayTexCoords *coordinates)
 {
     func_0014e65c(&pane->vertices, index, coordinates);
-    if (pane->material != 0)
-        pane->material->flags &= 0xfbu;
+    if (pane->pane.material != 0)
+        pane->pane.material->flags &= 0xfbu;
 }

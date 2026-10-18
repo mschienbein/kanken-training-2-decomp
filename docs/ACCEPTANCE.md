@@ -104,8 +104,19 @@ the linker does not claim a recovered per-function literal-reference graph. Thes
 join new/revised functions and R1 helper/header dependencies; R1 provenance rows remain QUALIFIED.
 Inspect both full receipts, not only the summary. A selector is not gate adoption: L1/R1 still
 require their independently reviewed, frozen gate revisions before a real prepare uses them.
-The combined proposal is `scratch/integrator/adopt-r1-l1/GATES-DRAFT.md`; `docs/GATES.md` is not
-changed by implementing the selection path.
+The adopted L1/R1 rules and selection obligations are frozen in `docs/GATES.md`
+(v1.14/v1.15); implementing the selection path alone never authorized their use.
+
+The bounded-switch CFG policy has the distinct identifier
+`armlink5-inline-branchnop-v4`, adopted by GATES v1.17; it does not broaden frozen v3.
+GATES v1.18 separately adopts `armlink5-inline-branchnop-v6`, composing the same bounded
+CFG/state proof with proven entry aliases and preservation of independently bound legacy
+placements. V5 is retired, never adopted. Both revisions follow finalized `c008-r3` (sequence 8)
+and precede the code merge. Select v4 or v6 explicitly for a new checkpoint: both fresh receipts,
+prepare and history must bind that identifier, and a transition reopens all affected R1 callers
+through the existing model-transition machinery. Default v2 and every older recorded model
+retain their meaning. The exact accepted texts and independent seals are recorded in
+`docs/GATES.md`; no old or in-flight checkpoint is retroactively selected.
 
 ### Rehoming accepted functions
 

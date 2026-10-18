@@ -6,7 +6,6 @@
 extern int func_00172994(int index);
 extern void func_0017433c(int index, int ticks);
 extern int func_0017abf8(int index, int resource);
-extern void func_0016fca0(int mode);
 
 
 

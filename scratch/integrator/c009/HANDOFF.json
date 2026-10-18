@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "status": "resumed-readiness-checks-pending-main-f8adff4",
+  "status": "final-G3-r3-exit0-full-match-measured-16-compile-failures-repaired-13-mismatches-open",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.16 unchanged",
-  "candidate_units": 679,
-  "candidate_functions": 679,
-  "target_bytes_from_author_records": 57276,
+  "candidate_units": 678,
+  "candidate_functions": 678,
+  "target_bytes_from_author_records": 57212,
   "profiles": {
     "game": {
       "units": 616,
@@ -14,9 +14,9 @@
       "target_bytes": 51528
     },
     "middleware": {
-      "units": 38,
-      "functions": 38,
-      "target_bytes": 4064
+      "units": 37,
+      "functions": 37,
+      "target_bytes": 4000
     },
     "sdk": {
       "units": 25,
@@ -24,8 +24,8 @@
       "target_bytes": 1684
     }
   },
-  "dry_ledger_units": 2206,
-  "dry_ledger_basis": "Prepared main-root accept/c008-r3/matches.json (1527 units/1601 functions) plus679 c009 additions",
+  "dry_ledger_units": 2205,
+  "dry_ledger_basis": "Finalized c008-r3 config/matches.json (1527units/1601functions) plus678 c009 additions",
   "revised_predecessor_units": [
     {
       "source": "src/pilot/pilot_b.c",
@@ -48,6 +48,13 @@
       "profile": "game",
       "functions": [
         "func_00105fa8"
+      ]
+    },
+    {
+      "source": "src/pilot/game_heap.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0010d604"
       ]
     },
     {
@@ -1006,8 +1013,8 @@
     }
   ],
   "source_sha256": {
-    "config/candidates/c009.json": "038b8a9537b408e11a33404ef6249567b882d495903624e6a40acb6259978463",
-    "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
+    "config/candidates/c009.json": "7b3a07a05ea334f7bbc951f13f7a2cd2801a0f6a624ffe72e349ab2c491d9eb1",
+    "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
     "include/game/adjusted_callbacks.h": "2071245cda5e2b18f35e61014afe62bab4e64bfa5a62ab239d9d3639a3185074",
     "include/game/animation.h": "e6dc76dc1e76ad9699e45a9226691db74672bb2f2bc5003dfbd9095da815b94d",
     "include/game/applet.h": "13b4f47f23fe6a40ba7c822366d2e04a8f5605f4cda13e720128cd9d09daaf62",
@@ -1044,7 +1051,7 @@
     "include/game/drawing.h": "ef49c29c611048c20ce76e0ad36c3575e3928cb4574237975acbb8c04f0a32b1",
     "include/game/drawing_system.h": "1c9eb4968841b51114300cf9008bfb0908d24ddb7afffee48387bdf388927487",
     "include/game/event_route.h": "90a28e34b8cc078dca248b1889467275623969f77c03d419fecfd2c0c43bb84f",
-    "include/game/exp_heap.h": "bf7936b07ccbc8446ac2ab1fb31eab2363cded58e42abf92871e7636523f5c32",
+    "include/game/exp_heap.h": "6ef080b93b1bd90c69749e943e6cb60e7bfaf00e42007a1f85694368c69395bd",
     "include/game/file_handle.h": "500580391c3b9c950c002aa00580a2e99142796770da1571557d7751bd58d5d1",
     "include/game/file_session.h": "62191bef07832cf6cc1547c6b7594b508170625a57ea0f8aa5331ba073c4f9dc",
     "include/game/file_stream.h": "f143447b46e7b707bb3a7c1187bbc667200437e7f02c86571e42ce7dc0133284",
@@ -1095,7 +1102,7 @@
     "include/game/packed_records.h": "e35c4a2f8fae4c3da428e53640dd17e75b10384e93511920a2b62694f07bea9e",
     "include/game/pane_descriptors.h": "161239abdfbc484921a6085af11850550e9361607d95b8f7d07f33e47654408a",
     "include/game/parameter_descriptor.h": "2ece6b9168ee6c666f6e5e83a42c6fc77ac05f07946f972974c534942a46aba8",
-    "include/game/playback_screen.h": "0098a0b3fba613aac93f5934314db2f539fd8b510a8616ec479bcfdf0ca01e4b",
+    "include/game/playback_screen.h": "e8ba103c31b8e4ac6764b43dda5032adb060e15c88b8f7a6162d43686117dfae",
     "include/game/pool_list.h": "ec9237bf4c3af19e70cdca06d1a1210635498d59d7870e1a100513aa5361ccd7",
     "include/game/prefetch_stream.h": "40f466c147d528e23e8c01b3923c2160ad71a352e7873f1940d3e1b6283a91b3",
     "include/game/prompt.h": "552283a75d0a6503a104d18af12e3708b9d488ec82dbb6a12bb3392eb23138f2",
@@ -1123,7 +1130,7 @@
     "include/game/runtime.h": "1a17d594929bb2ccfb7f77d3f71b56d25f57ed539159f7aa165aa931fd62ad71",
     "include/game/runtime_hooks.h": "629c60b7e54ce4efa45579b4952e78674c6a3ebaa83a2a621ba258a5cc102aeb",
     "include/game/scene_dispatch.h": "be830c0053ef38e77e5c5f1898d97ec61dcc65177dab6afd22fb61b3cb966492",
-    "include/game/scene_lifecycle.h": "1aff056542e2fc82e1c867655e9919acff7d636277be5faf02638f6489e10543",
+    "include/game/scene_lifecycle.h": "2804bd8ca669280b61f3b9a2bcc086b7ed4d3f908d69e5e8627aef49ffd08d06",
     "include/game/scene_runtime.h": "de7086ea74d689242604711acf8e30c1a96921da6bbf0ba5192735e4c154f323",
     "include/game/scheduler.h": "c4a9266502d11bb085a8493bad437790536aa87db330c3639b2177a2617e2fbc",
     "include/game/screen.h": "9598091e52612bb642e85dccea8fe7bcc105b80a393991c94c64eb45377f94d9",
@@ -1165,12 +1172,12 @@
     "include/game/synchronization.h": "53af5d1b6f86dc5982aa3fddf4c9e48504bf5db6ef568420c0b53ce660a6cd92",
     "include/game/task_dispatcher.h": "0708e62557068b012885fc7841f984a755284d0a0eec2912ca981ad3c1069320",
     "include/game/task_runtime.h": "1772a0b58d98d9f9dd0a953dcba14f2c86e5571cc5b1029c9d9695964cff8ca1",
-    "include/game/text.h": "7eb793698dcd2dab5b13ba76789860ca7b540479fd5b9b02c301a8f9d951fc3a",
+    "include/game/text.h": "57c986c7b8488e6d6ee9ae0aa7908a29ef58226168e0e0f5353ce0decb9901a9",
     "include/game/text_renderer.h": "fd26b4f316be5e1183351b4c54827c1ba054b25740f57f3b14900780a406f273",
     "include/game/text_writer.h": "45171408c7ec964b165845160e8a17451f74a4632254959bbe57b7214493f257",
     "include/game/timed_screen.h": "362d40038ff105a1902d27ce27e2d49aa27838b5390f066b53cca6766572d389",
     "include/game/w11_control.h": "e0e089f1ff040662fd8ae6b0aa7d358da5ad269da4d346b58e23a4848a8df8ce",
-    "include/game/waitable_handle.h": "6c88a71eb725c84ac0cea8625603dab1281f13db61c524302c065fcf81196d6e",
+    "include/game/waitable_handle.h": "84d4aa7a0a9dbc8bbe4e84fbe56838beb01ed79ce7ac5059623032730d60a71b",
     "include/game/wave_player.h": "f50fdd0c9f14bf9bb525fbbb2a33a4e4143771b52fa22b6000107c5fdd608a21",
     "include/game/widget_animation.h": "e2e188a724a87a3a0d75c26de4fb6dac668a7ca52c382e94d5585058b9d563e8",
     "include/game/window_configuration.h": "a8c99da0b0415895f21b830f45cf786c6c13c0ab24a96a1c9f8f227d26ff3d08",
@@ -1182,7 +1189,7 @@
     "src/large/func_0017d67c.c": "68ac332f5e98551d91e1e3d2433e3cc1ff41f9c53e6d6f477be505a8cfa6f1cd",
     "src/large/func_001e3af4.cpp": "185e828ef5ebcf5adebd082d389c9b91c52a235c2129003727b525d700983e02",
     "src/large/func_001e81fc.cpp": "416bf00fceca48a96a963a4179261315fade81286b36ec4c95d109105d0901a6",
-    "src/large/func_001e84ec.cpp": "bf0547ef0f2a6f62b01556fb4d6e95c6cd1fdcf0d197c6c2a92ebf8f216fb846",
+    "src/large/func_001e84ec.cpp": "ebbe7679f3742b5c5999b802d0d737ca186d98032be3eb3808a3ca77cd37b5e0",
     "src/large/func_001f206c.c": "49683aa3b2b3e947de85018cabad38f6fb13c2d8d85d4637c516a7305054291d",
     "src/large/func_00205380.cpp": "ca5dc9909301206824a446b2e27361b433e8e1319c00e2ba095e68076014dc3b",
     "src/large/func_00206afc.cpp": "e14a2f9b4319a0a5e7ab3aad9a7b75d81d6dd733ee1a173fe221ab93c5113a7b",
@@ -1258,7 +1265,7 @@
     "src/nw4c/ut_BinaryFileFormat.cpp": "ba4781bc8546c7eb8a01e2e84f69c0061a4b8efbb151a76678a2d20f93fcfc19",
     "src/nw4c/ut_HeapBase.cpp": "60ff73b6d300cb04e212b05081e48ec546a438197ba392345ea06ccad8477d27",
     "src/pilot/game_enum_switch.c": "7c691962bee1ed8e5a2bc793a6915ca3ad02a9b1d61813192019fa05a4076bb3",
-    "src/pilot/game_heap.cpp": "86404a7354aadb31a0e78eb4343cc95b73baf42023f45d1f467cb5e4f9965cdd",
+    "src/pilot/game_heap.cpp": "0ba7c6c9cd78c0fa12d7f71ec6ada5d86fd7d3eb78276df533ff59c0f429b611",
     "src/pilot/loop_cleanup.c": "7b81ffeff17fe7505f3ae87571c79da60ddb7bb65b13cf0804d03a55063f5a44",
     "src/pilot/loop_resources.c": "351698086f70dd04d70f343a50bb4a6341e48b7bf483d74236e998778bc2b829",
     "src/pilot/loop_state.c": "95e71bd3139b9bbf24a1cb6b1199b115c8c411bb9b1db4b627e3b32db9db10eb",
@@ -1489,7 +1496,7 @@
     "src/wave1/func_0012f50c.c": "cdff29146f04b04146d63b110828b4b3bc2bc2ac855382a01dac9779c02d6d38",
     "src/wave1/func_00134f04.c": "9ea81a12f2fb16ea5ae20c561c65e6c8903f5757fe0d6ebefac60caec91a6da2",
     "src/wave1/func_00135a28.c": "bac5884b5f57c77a18b7f5259950acbd987a3264820de19e96fddd57ab98b952",
-    "src/wave1/func_00135a58.c": "086cad3abd03229ad889bdd88ccf3fd8a60a7f4c221d7a0513e5c86b763128ba",
+    "src/wave1/func_00135a58.c": "76dcaa6993eb33ec59a70059335496304c3f4a5258639366ff3f753dec467fbc",
     "src/wave1/func_00135a88.c": "844f0586303522bc8f987c56db83f17c949a2292bfee42735bede651a95a8d39",
     "src/wave1/func_00135ab8.c": "0847e7f7755120c616d0ba424274376ebf9a17e2fda5f57959fc002323f674c9",
     "src/wave1/func_001360a4.c": "cfaa0b50eb90541c7db5f7bc51299b24c666144a81b5fe26357e0e50a6acab08",
@@ -1597,7 +1604,7 @@
     "src/wave10/func_00180344.c": "73d8f9155cdf6c0f1a25c529c677be3db8c5c98ac3ee4cf91e868a97fb6aa7c6",
     "src/wave10/func_00180358.c": "3c3d7e5bf61916fc03eb70add11a516a286ab7aec77c23e2154b624009e5678f",
     "src/wave10/func_001963f8.c": "d001bb2bde5516ffbc7d2aaf0e94e6890fc5ba55a87fdd79ad04dd49ac146f6b",
-    "src/wave10/func_001b06a4.c": "a382b273846588a0b74508a89546c5be1069923d081bc6f54b70fef33cad7bfd",
+    "src/wave10/func_001b06a4.c": "8b2850ace7c9b38ec15c29721b6b2c2f564bff4fadf47f1800012aeff95263ee",
     "src/wave10/func_001b5ddc.c": "e89818258b59dcbb7251b444f523838faad8a605abd63303515dc055bce82030",
     "src/wave10/func_001b5ff0.c": "4a21e6831dfa697773e69192debe8f4e454b53ac433733a1b9d567a1c968d45c",
     "src/wave10/func_001dbcec.c": "dae967406afa4c16781b389ae2ae27dd18fc7fcc861864eb82fccae56dbd0bdb",
@@ -1605,7 +1612,7 @@
     "src/wave10/func_001dc160.c": "2b49563b5dd49d54ef8269f10d0f69c3f8f97011d912cbce5583174962d2b010",
     "src/wave10/func_001dc170.c": "75ec84a44215fa2728104d9bcece17141a1725c9954a491f4a1d8e633a0a0ae4",
     "src/wave10/func_001dc230.c": "51ad02575f7a366c91dc742010444885709802500ab3877bd5d5e467b3ed824b",
-    "src/wave10/func_001dd6c8.c": "7a4b13f54d556003d4d4fec6bab6950dd28b893fdb4c15278e42a02d078b0b1f",
+    "src/wave10/func_001dd6c8.c": "5b18a478a49148b72f3d9970fc32244d14f681d5e434c8b954e318b1f662e94f",
     "src/wave10/func_001e9944.c": "b52039b707e8947f6b34dbbebe3944fee621d99ea3670021f38d9e128addff3a",
     "src/wave10/func_001f4fb0.cpp": "e171ba245cd57164e60d8f908a344a40e5bf029a31f110e3b9d97c44fbf713dc",
     "src/wave10/func_002059b8.cpp": "64423286f6261924a37851145fb83adbf884a3648c59f4ea8e146c2e3ac678b1",
@@ -2123,7 +2130,7 @@
     "src/wave15/func_0010bc70.c": "28537c4cea67a0e6019085bdad70c4867ca9e9e9ac1e44f7e1f8d7bcf9a28a58",
     "src/wave15/func_0010bccc.c": "2382e91efbd1ccaef4052a9351de0eb67e1cd0e1bf239fa5b66f2704abe117f1",
     "src/wave15/func_0010d0ac.c": "e4ffbed8b5d5382d6b3c30a49eabfab5da3d215d163d573f73f3afa695bd0552",
-    "src/wave15/func_0010d26c.c": "670f556cd07d3fa37b3e3baa202d65a8fafd8d99ee09e28d288bc9a51b5324da",
+    "src/wave15/func_0010d26c.c": "90c6dcc7c6ab0e271191e5f1da8c0508b05d8a494858987beb2e83ca21bd4cdc",
     "src/wave15/func_0010dd58.c": "3d3765da570d61dea382cb6c7ae1d403b438e86f8917b2b25a4393fddbc662cc",
     "src/wave15/func_0010e818.c": "8a90ecca67a486b21143e1dd0e60e36d5406e7809893f73e28291b5022b42e95",
     "src/wave15/func_0011121c.c": "f896eb0da4bdf6b478942dc14a955d1c7de8bb773d5f93f8e632f3a1f09c3d40",
@@ -2136,7 +2143,7 @@
     "src/wave15/func_00115138.c": "8db6fb365889be7fa139108a020c8c5057a289606a93bcc9ef8370d26b4abcb6",
     "src/wave15/func_00116ca4.c": "887ef85d1288ab7f32fd0a3848185ef74eaa3123dbdec0dc3721753087234bf5",
     "src/wave15/func_00116cd8.c": "2ac608419d2b96e1995e8a1d95cef0178856e983d55fdee1cc3d52363f1e2432",
-    "src/wave15/func_00120eb8.cpp": "6c5f9a6a7f1aed82bc4e3445da797c2e474f847bb6454a561d7265e37dda02cc",
+    "src/wave15/func_00120eb8.cpp": "adab1609de54eb4ff0126dfa0cbe3dc2d046138734e4ec4f4848aadedcd88a11",
     "src/wave15/func_001228c0.c": "30092ca9e83d3d84042f44265399ef245016eba0e822bbc872958274ec2d234b",
     "src/wave15/func_001228d4.c": "4033d62e0f334273d678a7d86fd9ff2e8cd8de483a2d37d96e252b31b9740264",
     "src/wave15/func_00122a20.c": "d74333dbdda598394a89f62a5474831b164bfb0e3998f9ba427e334fb2f4cb4b",
@@ -2275,13 +2282,13 @@
     "src/wave16/func_00126f44.c": "6adad141b2911257f46c1d3fbc11244814b5a1ebb896c14fb162726200a09d60",
     "src/wave16/func_0012d0a4.c": "4006d3156c1be22cf87b61a3351f5f3eb4c0c04d8587fae938fb44a2ef1d1278",
     "src/wave16/func_0012d37c.c": "92bf8004bd79f8f06b3ca30c28a35ecba2a1ba88ea16af1d811d324c83201d62",
-    "src/wave16/func_0012fb64.c": "967c9fb3ea1eefdd7c0f0913ed7f4ac3c39ed954e90bfe52252a19882368e3b0",
-    "src/wave16/func_0012fb88.c": "acb62c936fb09374d013621cf6836a01025c5e001162e4a88fbaab32be83ab00",
-    "src/wave16/func_0012fb9c.c": "8a897c23c9e155da475e02b6d068d9547cd2fa3f7b1d3a2a031ae2b14d103b76",
-    "src/wave16/func_0012fbc0.c": "c063810b2c050d49c0b5e786b3189190cb8908ec44dd1ab5d02db874f930c34b",
+    "src/wave16/func_0012fb64.c": "a058b6f020a6472d42038258130a369a8c31c565b8e2d3e6f5285ff2d2865416",
+    "src/wave16/func_0012fb88.c": "2c190c30b2002af5d8274e9fccdbbbeef5ded05fc63bdb52764e75c5de168d2e",
+    "src/wave16/func_0012fb9c.c": "82244a4a69e41ec7e069184189e60146fd2381ccda48078a5cc090d9a640d5d1",
+    "src/wave16/func_0012fbc0.c": "5c971b42412cf3e4e83a886ce6f99a71f7d1c5e9558a522a354a7fece68ef4cc",
     "src/wave16/func_0012fd88.c": "d140c30edc697028418a13ad852b6ffc62915f49d4bcef2c7c1cf5beeee489da",
-    "src/wave16/func_0012fe54.c": "b50882b05704d1ad5725c100ef37af4602eff912472622a420b09f1603332b82",
-    "src/wave16/func_0012fe78.c": "2eb6422906be9c7948ed7805c6df390032c93985e664e279f32292b002166fe0",
+    "src/wave16/func_0012fe54.c": "74ab1d0547e56d585d7d56c912dc838168bbc512105ea770e645c839d1d1578b",
+    "src/wave16/func_0012fe78.c": "7d64856c85ad951c81c66864bfec0d06036e2768a3e94de7d40661319f855ae6",
     "src/wave16/func_00135268.c": "6c6e390eb48bdae2f4abc59a29cea9c563d1f86681360053b8b93b2a6aa01df1",
     "src/wave16/func_00135ae8.c": "433ea17720724296cf689cee92a8c1028a3024913b3f8bbc45e929d8f86bf3e7",
     "src/wave16/func_00135b34.c": "36c1d0172167a64df54185905204ca6ea4351ffc2baf00b3a3de749ab3176634",
@@ -2441,7 +2448,7 @@
     "src/wave17/func_00194d80.cpp": "e408f5945dd8f236f243c962d55766e9a3ff4c17dc1cd9dbdd95bc4445ccc3a6",
     "src/wave17/func_0019b988.c": "a6a829acc4baf65ad7a12b9da226fe5e4a34f2a2b4a82ec8459e486f39826284",
     "src/wave17/func_0019d95c.c": "ee3383106a5f95d1bfef24361d1ec81626c2f3ca16d0e67002b4bb0fa8198d07",
-    "src/wave17/func_0019dd28.cpp": "a7ee62ca3651eae1406db08bf4ed2910bae6835020cb20b762a2cbc060904c0a",
+    "src/wave17/func_0019dd28.cpp": "222d0f53d910e0a1952779ad9270d8739c8b4ae0b5382bf05139d6c63bb26db7",
     "src/wave17/func_001acc1c.c": "f3076d99cdbb38d9c79abd7df6ac5480c0e1a216b5a84ac510ae70253fdd5ce0",
     "src/wave17/func_001acebc.c": "7859594abe704fd262b6c1bdf63c2e223a8c8d04ff722c3c5adbcd7320209b9c",
     "src/wave17/func_001ad134.c": "452209c13453af79da228afbf5f93bfc53d855c6461cd0518cd7e18c8ec8f8e2",
@@ -2616,7 +2623,7 @@
     "src/wave18/func_001cbfdc.cpp": "810b14fa9928307922f39975462c5b4bd385ea7a47ff682da42b502a5c66f805",
     "src/wave18/func_001ccfcc.cpp": "05525c56bdb0032e02d44ddd38d4372f16f2af0bf5fd139b147436f5dde4200c",
     "src/wave18/func_001d2be8.c": "4a3776184a0dff2a3cb9b5b6ffe7c446dbcfc7104facc6be86ef4493241b86dc",
-    "src/wave18/func_001d5c50.cpp": "583b222f56529291e54404a67bd0b4c01bc43d9e3e06ffee2beba54ebe36f9b5",
+    "src/wave18/func_001d5c50.cpp": "0c69737c04d3a9c07e0cee0a7ec058fece290a9b28abb0dc318f852cc92797e3",
     "src/wave18/func_001d94a0.c": "c17e53ff9733c4f61e8aa7cf576fc87cf2029790c90add1b3b80197b677007b3",
     "src/wave18/func_001d98f4.c": "802099a25403d5d216486a50edff877b69e0483549025aedff78d2a0b34b2f19",
     "src/wave18/func_001db104.cpp": "662ea59efb65e940b7e20eb865c4be629e072af84fd8ed31367452de0e030cba",
@@ -2702,7 +2709,7 @@
     "src/wave19/func_001dcecc.c": "c092d53e8acc93133a1cbb15c00ad14f3ad087eacbead0e040bb11f96aaf8f68",
     "src/wave19/func_001dcf0c.c": "1478a8374942ed8ef1514707560bbb246f5f6f9dde1654eb2265b864662540f9",
     "src/wave19/func_001e3050.cpp": "5aeb0583dacb3aeecb86aa8c2547bc6cff87d50904e6fcee8b32fadecf3a9a19",
-    "src/wave19/func_001e387c.cpp": "cb33f66455b83da23bd2b9599f255975e183a9b7e0377bffdcda84ef45c797ac",
+    "src/wave19/func_001e387c.cpp": "306c6fa0971d2911cfcd4efe971db0ded28f8daeea8fe8ed51ee1e8ca83d072f",
     "src/wave19/func_001e716c.cpp": "0359c8720570eaf6cf278df44cd83ed8609d3cf235efdde957ae3edb20a10aff",
     "src/wave19/func_001e74b8.c": "20aec48ae79d9a032d85bc37ec8634995b6920037f7b453862a3707b27c1c76f",
     "src/wave19/func_001e759c.cpp": "77f70eb0752b71329d51d15747c825162546ace10770b4ddc8b233c76fc53fc1",
@@ -2771,12 +2778,12 @@
     "src/wave20/func_001378d8.c": "1e36d346509effa8b9101b2ba4679c4a96d3d2881ef145fc4ca7b3adecbb6495",
     "src/wave20/func_00144738.c": "639f716a8cff375b1238fc7d557dbd1ff05905e4207cd860b3e543609a05f594",
     "src/wave20/func_00147998.c": "3a5d60fcf1c29571cff5779a8e79501f451deea790791f5cad9dd84639f55277",
-    "src/wave20/func_00149270.cpp": "53bee199026e3b1708843089db2a8ccc009ca6627436b730de8582cfaec3702c",
+    "src/wave20/func_00149270.cpp": "317fbc5bf8c697907affbca8b301bf44b6ab3254e7657369d897d4f7ac8fd2df",
     "src/wave20/func_001493c4.c": "851c2a5266f125b56398f4d3e06623d31bcdedfe879dc3ebfa3a8db1f7063afb",
     "src/wave20/func_0014b2b0.c": "11641412f522d817c62e58b499c6da78284370fcef01bd2c555b9294825fc6fc",
     "src/wave20/func_0014b7a0.cpp": "5ae0ee58a5ba77233455b23b84f29242a9a328f050b4d5f53af26e7ff5fbef8b",
     "src/wave20/func_0014c4cc.c": "908a0cb2ff2e939b9b551e72fb5c903b3c1fdc9462338b03a43ca5ca6ffad7f9",
-    "src/wave20/func_0014d02c.c": "8f15edf7e49ebfb0a41e02ce72274370882b7e442f019b9df4365b308c73ab23",
+    "src/wave20/func_0014d02c.c": "2745ff92a8a62e45a3416503eec8620236e8ca7e319042c7a7de5370e1357f8c",
     "src/wave20/func_0014dfa8.c": "e76f6a4bbf11b81614c8a582116bca37b5d27c6c5636517a88356ed5ec14d56e",
     "src/wave20/func_0014f6dc.c": "276094327ceaeef2eae2382a7771ba813c965b59fe9e448b0db55dc0322939df",
     "src/wave20/func_0014f74c.c": "4b1258a094352f94083969e07144c7510cc3f09fd9d25b3b694a2d808ccfdafc",
@@ -3377,8 +3384,7 @@
     "src/wave18/func_001eade0.cpp": "0e2a8309b58afc2fb4803baefaf565c92728baa127b8629143bcd916f80e6ed7",
     "src/large/func_002095c0.cpp": "e65e16c9cab9a1725027f7b9cd2780ab66b32346ae2d2504236818826f6315aa",
     "src/large/func_002102b4.cpp": "9306a0ace6ba7e770017ef885d3bb2a6f55f6ec105d0c8d457ba2322efbd6109",
-    "src/wave20/func_0013156c.cpp": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b",
-    "src/wave20/func_001f4cf8.cpp": "7a181f50d5cd052087019ef7adc5a6a99c44dd6295097f2d46bd1f6cca17ad66",
+    "src/wave20/func_001f4cf8.cpp": "8100060ef4e1b2417b04aaafe65927cea03e3159253726dfff2cac63c5f3dea8",
     "src/wave18/func_0014d2e4.cpp": "5a9a9891dea0b065390d0e2c5e71f46dc13d6d9020e74be311da0b37344c5406"
   },
   "approved_contract_deferrals": [
@@ -3748,13 +3754,17 @@
         "_ZN14CodeUnitReader12readVariant1Ev",
         "_ZN14CodeUnitReader12readVariant2Ev"
       ],
-      "classification": "collected-canonical-destination-MATCH",
+      "classification": "withdrawn-after-collected-MATCH-contract-unresolved",
       "destination": "src/wave20/func_0013156c.cpp",
       "collection_evidence": "scratch/integrator/c009/collection-r1.json",
-      "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "reason": "The reconstructed mutable CodeUnitReader/EncodingSource classes duplicate the physical native Font/CharStrmReader family without establishing its real API. The frozen native factory returns const CharStrmReader by value, takes a const Font receiver and retains an unused wchar_t dummy; the same-address native definition now MATCHes at 001f4cf8. The separate 0013156c factory uses method table 0021c5e0 under the middleware profile. Its distinct version/namespace, result/receiver and unused-input contracts remain unresolved. Binding the already-owned native member name at a second address, assuming another overload, or retaining a shadow reader is refused. Original collected MATCH/source/receipt evidence is preserved; this row is withdrawn from current credit.",
       "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
       "author_source_current_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7",
-      "author_receipt_source_hash_agrees": true
+      "author_receipt_source_hash_agrees": true,
+      "prior_collection_reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
+      "current_credit": false,
+      "deferral_report": "scratch/integrator/c009/interface-deferrals-r2.json",
+      "preserved_canonical_source": "scratch/integrator/c009/deferred-contract/func_0013156c.cpp"
     },
     {
       "author": "w20b",
@@ -3769,13 +3779,16 @@
         "_ZN17CodeUnitReaderAlt12readVariant1Ev",
         "_ZN17CodeUnitReaderAlt12readVariant2Ev"
       ],
-      "classification": "collected-canonical-destination-MATCH",
+      "classification": "collected-native-definition-MATCH",
       "destination": "src/wave20/func_001f4cf8.cpp",
       "collection_evidence": "scratch/integrator/c009/collection-r1.json",
       "reason": "Canonical destination matches the complete catalogue extent; original delivery and receipt preserved. No duplicate credit for the alternate delivery.",
       "author_receipt_sha256": "2002e94154b5c5ba7cb7d9e1e3692153ccf76783c543b1d68dc7297c783f6e7f",
       "author_source_current_sha256": "e3767c0d1fa069d0869e90cb86c833248fb00509763ce6c79c5b0376737ec49b",
-      "author_receipt_source_hash_agrees": true
+      "author_receipt_source_hash_agrees": true,
+      "native_definition": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+      "native_evidence": "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+      "native_reason": "Frozen native wchar_t factory API replaces the mutable reader shadow: by-value const aggregate result, const Font receiver, unused dummy and private const method-pointer initialization are retained. Whole 64-byte native definition MATCH, exit0; proposed own-definition name adopted."
     },
     {
       "author": "w20e",
@@ -3920,11 +3933,90 @@
     "cpp_compat_r5": {
       "path": "scratch/integrator/c009/cpp-compat-r5.json",
       "exit_code": 0
+    },
+    "interfaces_stable_r1": {
+      "path": "scratch/integrator/c009/interfaces-stable-r1.json",
+      "exit_code": 1,
+      "units": 2206,
+      "checked": 1704,
+      "disagreements": 1,
+      "policy": 1,
+      "unchecked": 502,
+      "unchecked_c": 0,
+      "findings": [
+        "Heap shadow in pilot/game_heap.cpp migrated to canonical heap_interface.h",
+        "Two legacy local func_0016fca0 declarations removed; functions.h already provides the canonical declaration"
+      ],
+      "note": "Exact failed stable snapshot preserved. Both findings fixed afterward; native reader correction and one withdrawal also follow this run."
+    },
+    "native_reader_r2": {
+      "path": "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+      "attempts": "scratch/integrator/c009/native-reader-attempts-r1.json",
+      "exit_code": 0,
+      "status": "MATCH",
+      "address": "001f4cf8",
+      "target_bytes": 64,
+      "definition": "_ZNK2nw4font4Font17GetCharStrmReaderEw",
+      "note": "Native API preserves hidden aggregate result, const receiver and unused wchar_t dummy; both mutable reader shadows were removed. First compile exit2 for missing required NW_RELEASE is retained, not overwritten."
+    },
+    "interfaces_stable_r2": {
+      "path": "scratch/integrator/c009/interfaces-stable-r2.json",
+      "exit_code": 0,
+      "units": 2205,
+      "checked": 1704,
+      "disagreements": 0,
+      "policy": 0,
+      "unchecked_cpp": 501,
+      "unchecked_c": 0,
+      "input_ledger": "scratch/integrator/c009/dry-matches-g3-r2.json",
+      "input_ledger_sha256": "0a8355e20937566e726f740a6341b1d9ac30585ff9096a7e35278de73813b994",
+      "note": "Stable source/profile snapshot passes with --allow-unchecked-cpp. Native member credit label was subsequently normalized back to canonical func_001f4cf8 without source/profile changes. Main finalized bb60cd7 afterward; merge it and repeat G3 on the final successor ledger before final MATCH."
+    },
+    "interfaces_stable_r3": {
+      "path": "scratch/integrator/c009/interfaces-stable-r3.json",
+      "exit_code": 0,
+      "units": 2205,
+      "checked": 1704,
+      "disagreements": 0,
+      "policy": 0,
+      "unchecked_cpp": 501,
+      "unchecked_c": 0,
+      "basis_commit": "c43d995",
+      "note": "Actual sequential shell reached final-match-r1 after this check, establishing exit0. Later compilation repairs change four canonical headers and sixteen sources; final G3 must be repeated after remaining source fixes."
+    },
+    "final_match_r1": {
+      "path": "scratch/integrator/c009/final-match-r1.json",
+      "exit_code": 1,
+      "units": 801,
+      "completed": 801,
+      "matched_units": 772,
+      "credited_functions": 805,
+      "compiler_failure_units": 16,
+      "mismatch_units": 13,
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "note": "Every required unit was measured with --show0 and per-unit exits. Native/signature stages did not run because the shell stopped on this match failure. Preserve this whole actual failed snapshot."
+    },
+    "compile_repairs": {
+      "reports": [
+        "scratch/integrator/c009/compile-repair-r1.json",
+        "scratch/integrator/c009/compile-repair-r2.json"
+      ],
+      "original_failure_units": 16,
+      "repaired_match_units": 16,
+      "r1_exit_counts": {
+        "0": 14,
+        "1": 2
+      },
+      "r2_exit_counts": {
+        "0": 2
+      },
+      "note": "All sixteen original compiler-failure units now have scoped MATCH evidence after real canonical member/prototype fixes. This does not reattribute earlier 772 MATCH results to the later changed-header tree."
     }
   },
   "not_exercised": [
     "final sequential match sweep of all current new/revised units",
-    "final tools/interfaces.py check on stable successor-based dry ledger",
+    "post-bb60cd7 final tools/interfaces.py check on stable successor-based dry ledger",
     "c009-wide native/signature/forwarding same-class probes using c008-r2 script API",
     "complete argcheck run and individual adjudication",
     "complete seven-step pre-review",
@@ -3936,18 +4028,19 @@
     "push"
   ],
   "resumed_from": "9d6f0515230d641f51d91dc9ab4b3ffb14011c05",
-  "main_merged": "f8adff4",
+  "main_merged": "bb60cd7",
   "c008_r2_merged": "38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac",
   "c008_r2_merge_commit": "9218542",
-  "target_bytes_current_catalogue": 57276,
-  "dry_ledger_functions": 2280,
-  "revised_predecessor_functions": 126,
-  "revised_predecessor_basis": "Source delta against main f8adff4, before fresh merged-tree verification",
+  "target_bytes_current_catalogue": 57212,
+  "dry_ledger_functions": 2279,
+  "revised_predecessor_functions": 127,
+  "revised_predecessor_basis": "Source delta against finalized main bb60cd7; all changed predecessor units remain review-required.",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
     "src/large/func_00203810.cpp",
     "src/wave12/func_0016b6a4.c",
-    "src/wave18/func_0010cc94.cpp"
+    "src/wave18/func_0010cc94.cpp",
+    "src/wave20/func_0013156c.cpp"
   ],
   "hash_inventory_method": "SHA-256 from current merged live inputs only; no compilation/acceptance claim. Removed deferred source paths are retained in their explicit deferral records.",
   "additional_contract_deferrals": [
@@ -4001,10 +4094,14 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Main explicitly resumed readiness. Main f8adff4 / complete c008-r3 b5e8b8a is merged with slots0/1/2/14 corrected and before/after names preserved.",
-    "Run stable-ledger G3 to exit0; preserve exact reports/exits. Then final new/revised MATCH sweep, native/signature/indirect/forwarding consumers, complete argcheck adjudication and seven-step pre-review.",
-    "Use main-root scratch/integrator/c008-r3/complete/ as authoritative predecessor evidence. All observed canonical-contract consumers must be adjudicated irrespective of selected source rows.",
-    "Keep checks nice'd and sequential; no full suite/build/prepare/finalize/history edit/push. Coordinate finite toolchain slot with c010/Main."
+    "Current committed predecessor is finalized Main bb60cd7, merged at d4f52d963cae908de5207bb320b2e7cee3a6299a. C009 remains explicit armlink5-inline-branchnop-v2 / none; no model adoption.",
+    "Stable G3 r3 actually exited0 at c43d995:2205units,1704checked,0disagreements,0policy,501unchecked C++,0unchecked C. Four canonical-header/sixteen-source repairs afterward require a final G3 rerun once remaining mismatches are fixed.",
+    "Full final-match-r1 completed all801required units/805functions:772MATCH,16compiler failures,13MISMATCH. All16 compiler failures are now repaired and individually MATCH in compile-repair-r1/r2. The13 original mismatches are enumerated verbatim in pending_match_failures; do not rerun unchanged failures merely to confirm.",
+    "Next static corrections: four obsolete ExtendedCommandQueue/W19aWritableQueue extensions append a prefix onto the now-complete canonical0x44-byte CommandQueue. Migrate their actual tail fields into the canonical record and remove shadow structs; inspect all users of state30/state34/reserved3c before refining.",
+    "Other remaining mismatches require original-safe width/offset/register provenance, not asm/register/volatile steering: WorkQueue ring writes, W10DrawingInput fields, service status prefix/global flag, ResourceFile result boundary, NameTable consumer, display-counter reset. func001c20e8 currently returns10 (8B) versus original20B; recover actual behavior or defer with exact policy reason, never add dead steering.",
+    "Main requested a short isolated full-suite window and was told free now; no c009 heavy job currently runs. Wait for Main release before beginning another whole audit/match/probe batch. Static analysis/edits may continue.",
+    "After all fixes: final stable G3, fresh all801 MATCH sweep on stable headers, native/signature/co-inclusion/indirect/forwarding sweeps, all argcheck candidates/notes and C++ caller contracts adjudicated, seven-step pre-review. No c009 native/signature probe has run yet; the dependent shell stopped after matching.",
+    "Main manifest is scratch/integrator/c009/candidates.json (678new/57212B;123revised predecessor units/127functions). It remains unaccepted and not review-ready. No suite/build/prepare/finalize/history edits/push here."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4016,11 +4113,11 @@
       "slot 15 context, saved arguments and result",
       "same-class indirect-consumer audit"
     ],
-    "status": "in progress; no successor commit merged; c008-r2 remains unfinalized",
+    "status": "Complete successor b5e8b8a merged via prepared main f8adff4; no known unmerged c008-r3 fix. Main owns independent review/finalization.",
     "do_not_duplicate": true
   },
   "names_adopted_in_continuation": [],
-  "wrap_up_reason": "User explicitly requested wrapping up the current step and reporting; review-ready acceptance criteria remain unmet.",
+  "wrap_up_reason": "Previous user wrap-up was superseded by Main explicitly resuming readiness; current work continues from the preserved milestone.",
   "handoff_documents": {
     "docs/known-issues-c009.md": "9ddd2555b626bbf1b5084c3e280aa750cefbc3972f2d79554828848ff8ff6261",
     "scratch/integrator/c009-NOTES.md": "af18cbaeebb7d53c9f02ff1d721eaa2acccdeb3a8a63703ab1445886823e207b"
@@ -4030,8 +4127,8 @@
     "include/ctr/ipc.h": "cfd1a67d3912536c18a34a93cab3cbd1ebbb12254d034fcc86a5ad261ea679e1",
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
-    "config/names.json": "691148acb47de7b6289414022a6a2d8edb08d7081ffa6a0e74a59b047f72e023",
-    "scratch/integrator/c009/dry-matches.json": "8063013743bf951a9f66e26b023c595585c8ca3ebf90c351dd4d025a023d28ce",
+    "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
+    "scratch/integrator/c009/dry-matches.json": "568d1a5086d5fb6830216061be72be56a15654396ac5d33d8d3b6af7070f42b3",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec",
@@ -4046,7 +4143,27 @@
     "scratch/integrator/c009/scheduler-bindings-r1.json": "049bc8fd9b5b7a7f8d698669008e6e57626f9e633cd5f5fca2a67d66e15d8e54",
     "scratch/integrator/c009/scheduler-bindings-acyclic-r1.json": "f02b5e0075c264f5841eb68dd6a0b8911625a297c3e9b528522a577ec6dc13b4",
     "scratch/integrator/c009/merge-c008-r3-r1.json": "7a4752c9211891b8b0412abe358fdee191a5dd2656719bc019e00355c896503a",
-    "scratch/integrator/c009/service-notify-r1.json": "96c94805174f6a227505b4085abba78224aaa27d6083bc970dcd49a5598bd7a3"
+    "scratch/integrator/c009/service-notify-r1.json": "96c94805174f6a227505b4085abba78224aaa27d6083bc970dcd49a5598bd7a3",
+    "include/nw/font/font_Font.h": "c1da6dcb284bc9bc233737cfd24a8c74ed407291dd5a46ef00c90fb120455134",
+    "include/nw/font/font_CharStrmReader.h": "3dd3b434f7f17d87872e0f2371e0b580516d4dc6c21e3392b532c4cffee79704",
+    "include/nw/font/font_ResourceFormat.h": "24be15cc1eba0b7cb693bcbb41639de3745344b0c809f7c078855c1a20e12a8e",
+    "include/nw/assert.h": "c9cf614a50090fa3d6cfe66c21019cb6d9e97937e0de718734c1b61013400f8b",
+    "scratch/integrator/c009/interface-deferrals-r2.json": "21b934c2902ab21d336c3c293c7c09cbf3cdb05042cf881c90f6c5d2b36164f1",
+    "scratch/integrator/c009/interfaces-stable-r1.json": "1f761cb0b666d0b5013032ef33abad635c790135954b584903e51ac739d43eef",
+    "scratch/integrator/c009/native-reader-attempts-r1.json": "df03d0f7fcd23f226e9b5c1bcc8f80df5e4ff7598e40f26b2e8d9d4ac33d6cd2",
+    "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json": "b27af3703648b95f7f2b030578102550b5dd1f714e26fb868af2d920903c182b",
+    "scratch/integrator/c009/interfaces-stable-r2.json": "92c23f77f1c0ac317dbc6d1b274d10ab4b1c4d81f8f13ed1bbb6ef62520d2f8a",
+    "scratch/integrator/c009/dry-matches-g3-r2.json": "0a8355e20937566e726f740a6341b1d9ac30585ff9096a7e35278de73813b994",
+    "scratch/integrator/c009/candidates.json": "bc01f6d3e0b4d4bcdf8951ea0ad3241016231a3cdf1254409fa2e54c0ccf04ee",
+    "scratch/integrator/c009/sweep.py": "0cd2c77f7b4251ec826a13912dd0282845f9c67972f0aaf9874eaa5461b259a2",
+    "config/matches.json": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
+    "scratch/integrator/c009/readiness-scope-r3.json": "35636249e86e6072e300966ff80cbbccb054af1e6a95d204351f165135b72e7f",
+    "scratch/integrator/c009/interfaces-stable-r3.json": "92c23f77f1c0ac317dbc6d1b274d10ab4b1c4d81f8f13ed1bbb6ef62520d2f8a",
+    "scratch/integrator/c009/final-match-r1.json": "9e41b4f20eb2699da60e309913c20f98b560ef05438df99272a37ab9c56ae400",
+    "scratch/integrator/c009/compile-repair-r1.json": "e449ae108d1cc27a93c3976182581c301cb02424130a537785aa0ac66b49ab80",
+    "scratch/integrator/c009/compile-repair-r2.json": "b7a609896a08d2f6abc28de1572c13b81c8012476060b3b26ae008544d4f719e",
+    "scratch/integrator/c009/stale-field-facts-r1.json": "c20f8d162676442e6df327a11003c98de37a69f00098dabe5c59d55b65ee1165",
+    "scratch/integrator/c009/names-review-r1.json": "8c72e0edc0c2f30ab184d4b6f0fa0c9660cd3cc6282ef84ff2f4f8e08671dfd9"
   },
   "collection_milestone": {
     "original_unique_new_scope": 16,
@@ -4057,13 +4174,18 @@
       "scratch/integrator/c009/collection-r1.json",
       "scratch/integrator/c009/collection-r2.json"
     ],
-    "final_style_owner_match": "scratch/integrator/c009/collection-r3.json"
+    "final_style_owner_match": "scratch/integrator/c009/collection-r3.json",
+    "current_retained_unique": 5,
+    "current_deferred_unique": 11,
+    "post_collection_withdrawal": "0013156c; exact canonical API identity reason in interface-deferrals-r2.json",
+    "native_definition_correction": "001f4cf8; native-reader-r2 MATCH, replacing the incomplete explicit-output shadow API"
   },
   "names_adopted_this_continuation": [
     "_ZN13PaneIndexListC1Eiz",
     "_ZN18RuntimeMemberOwnerC1Ev",
     "_ZN18RuntimeMemberOwnerC2Ev",
-    "_ZN13RuntimeMemberC1Ev"
+    "_ZN13RuntimeMemberC1Ev",
+    "_ZNK2nw4font4Font17GetCharStrmReaderEw"
   ],
   "additional_interface_deferrals": [
     {
@@ -4127,6 +4249,29 @@
       "author_receipt": "scratch/authors/w19i/match/final/func_00190d68/func_00190d68.result.json",
       "author_receipt_sha256": "64a079762991fbd07853a49c3da434b0275014fb7e07433533c5f1f3eb6994a6",
       "author_receipt_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29"
+    },
+    {
+      "source": "src/wave20/func_0013156c.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_0013156c"
+      ],
+      "author": "w20b",
+      "function": "func_0013156c",
+      "target_size": 64,
+      "reason": "The reconstructed mutable CodeUnitReader/EncodingSource classes duplicate the physical native Font/CharStrmReader family without establishing its real API. The frozen native factory returns const CharStrmReader by value, takes a const Font receiver and retains an unused wchar_t dummy; the same-address native definition now MATCHes at 001f4cf8. The separate 0013156c factory uses method table 0021c5e0 under the middleware profile. Its distinct version/namespace, result/receiver and unused-input contracts remain unresolved. Binding the already-owned native member name at a second address, assuming another overload, or retaining a shadow reader is refused. Original collected MATCH/source/receipt evidence is preserved; this row is withdrawn from current credit.",
+      "evidence": [
+        "include/nw/font/font_Font.h",
+        "include/nw/font/font_CharStrmReader.h",
+        "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+        "scratch/integrator/c009/collection-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_0013156c.cpp",
+      "integration_source_sha256": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b",
+      "author_source": "scratch/authors/w20b/src/func_0013156c.cpp",
+      "author_receipt": "scratch/authors/w20b/match/func_0013156c/final/func_0013156c.result.json",
+      "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
+      "author_receipt_source_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7"
     }
   ],
   "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3",
@@ -4147,5 +4292,181 @@
     "path": "/home/michael/code/kanken-training-2-decomp/accept/c008-r3/matches.json",
     "sha256": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
     "owners_profiles_unchanged": true
-  }
+  },
+  "candidate_manifest_for_main": "scratch/integrator/c009/candidates.json",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none",
+    "status": "explicit in final sweep driver; v4/v6 adoption excluded from c009"
+  },
+  "main_finalized_merge_commit": "d4f52d963cae908de5207bb320b2e7cee3a6299a",
+  "accepted_predecessor_input": {
+    "path": "config/matches.json",
+    "sha256": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
+    "units": 1527,
+    "functions": 1601,
+    "finalize_record": {
+      "checkpoint": "c008-r3",
+      "finalized_utc": "2026-10-17T23:52:32Z",
+      "entry_sha256": "1ce759c53c4ec8c74b87e78c5920f8f0dd0ffe95c817ca5464df5d33c6669407"
+    }
+  },
+  "pending_match_failures": [
+    {
+      "source": "src/wave15/func_00113c0c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00113c0c"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_00113c0c @ 0x113c0c size 0x68/0x68 first difference at +0x25\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave15/func_00113c0c/func_00113c0c.result.json",
+      "source_sha256": "0b2081b69e6a7415e144321eb3c1250746b9b80079ada485a1f5b7ddb00c8363"
+    },
+    {
+      "source": "src/wave15/func_0018ee88.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0018ee88"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_0018ee88 @ 0x18ee88 size 0x34/0x38 first difference at +0x4\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave15/func_0018ee88/func_0018ee88.result.json",
+      "source_sha256": "0707f877180912a9ce87d971ee03610f6d67771fe6f9040c27543167cbdab9c2"
+    },
+    {
+      "source": "src/wave16/func_001c1d4c.c",
+      "profile": "game",
+      "functions": [
+        "func_001c1d4c"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001c1d4c @ 0x1c1d4c size 0x78/0x78 first difference at +0x2d\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave16/func_001c1d4c/func_001c1d4c.result.json",
+      "source_sha256": "eb65d2cd00c94a7f2ffea41eebdcdaa9f66048fea251809fd00033968a98e8e6"
+    },
+    {
+      "source": "src/wave17/func_001865ec.c",
+      "profile": "game",
+      "functions": [
+        "func_001865ec"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001865ec @ 0x1865ec size 0x44/0x50 first difference at +0x0\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave17/func_001865ec/func_001865ec.result.json",
+      "source_sha256": "bb2444cc3e1d1b824117951bb0ec133850d0f47eab1474e70a5e67702a14adc7"
+    },
+    {
+      "source": "src/wave18/func_0011db78.c",
+      "profile": "game",
+      "functions": [
+        "func_0011db78"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_0011db78 @ 0x11db78 size 0x3c/0x3c first difference at +0x18\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave18/func_0011db78/func_0011db78.result.json",
+      "source_sha256": "95bfa3f89c8cd4fd754a89450c6a8cd8be2b15b87a8a7946fd845f39d8aa32f3"
+    },
+    {
+      "source": "src/wave18/func_0012ccd8.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0012ccd8"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_0012ccd8 @ 0x12ccd8 size 0x58/0x58 first difference at +0x14\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave18/func_0012ccd8/func_0012ccd8.result.json",
+      "source_sha256": "0455e62ed526e383d2f49df86fb38cb9cb328820f45e7db298cfa93c5973062a"
+    },
+    {
+      "source": "src/wave18/func_00141514.c",
+      "profile": "game",
+      "functions": [
+        "func_00141514"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_00141514 @ 0x141514 size 0x40/0x40 first difference at +0x14\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave18/func_00141514/func_00141514.result.json",
+      "source_sha256": "63e2aac2fdbccf89a139ae22e782466d82b79bc0b6c2c935c6914d05c94a13ec"
+    },
+    {
+      "source": "src/wave18/func_001c20e8.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c20e8"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001c20e8 @ 0x1c20e8 size 0x8/0x14 first difference at +0x0\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave18/func_001c20e8/func_001c20e8.result.json",
+      "source_sha256": "94a0f9ab1bf03ae01d68e0e253e6b89d9db4e8a27e5b01dc52d25eacc4dfe077"
+    },
+    {
+      "source": "src/wave18/func_001eb1cc.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001eb1cc"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001eb1cc @ 0x1eb1cc size 0x2c/0x2c first difference at +0x18\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave18/func_001eb1cc/func_001eb1cc.result.json",
+      "source_sha256": "0a964286a9db84a34160ae7390c9506f6833b8293846829f1178e9d81493700b"
+    },
+    {
+      "source": "src/wave19/func_001105c0.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001105c0"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001105c0 @ 0x1105c0 size 0x40/0x40 first difference at +0x14\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave19/func_001105c0/func_001105c0.result.json",
+      "source_sha256": "700ddbaf90546c5d839dbe08ab9b4ec9cb93a3f1bcd42109a46d2d315cedcab2"
+    },
+    {
+      "source": "src/wave20/func_001eb190.c",
+      "profile": "game",
+      "functions": [
+        "func_001eb190"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001eb190 @ 0x1eb190 size 0x3c/0x3c first difference at +0x30\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave20/func_001eb190/func_001eb190.result.json",
+      "source_sha256": "1064573430cac4ba77655664db00425dd53613cdb42cc301a477e41a928b9c22"
+    },
+    {
+      "source": "src/wave9/func_001c4494.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c4494"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_001c4494 @ 0x1c4494 size 0x2c/0x2c first difference at +0x18\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave9/func_001c4494/func_001c4494.result.json",
+      "source_sha256": "719b662f0730c33d5a54d7120a6308702b65589b7358c8339b0437df8961ef9f"
+    },
+    {
+      "source": "src/wave11/func_0019eb24.c",
+      "profile": "game",
+      "functions": [
+        "func_0019eb24"
+      ],
+      "exit_code": 1,
+      "output": "MISMATCH func_0019eb24 @ 0x19eb24 size 0x14/0x14 first difference at +0x8\n",
+      "receipt": "scratch/integrator/c009/final-match-r1/wave11/func_0019eb24/func_0019eb24.result.json",
+      "source_sha256": "97d4cd6bd5cb28d10c16b3ace15b571a4480dda94d455f264c44ae97c873e36e"
+    }
+  ],
+  "pending_native_cpp_analysis": [
+    "The native own-definition/name source inventory is names-review-r1.json:30 additions,0 modifications,2 removed obsolete WindowLabelBinding aliases. No live source/header WindowLabelBinding reference remains.",
+    "Original-only C++ member APIs without C declarations require manual caller-ABI coverage (implicit this, constructor/destructor pointer-result ABI, hidden aggregate result and unused dummy); compile probes alone do not establish unused inputs or result contracts.",
+    "No ABI-only prototype overrides have been created or run yet. The existing full argcheck and complete C++/callback adjudication remain required."
+  ],
+  "repair_findings": [
+    "Playback original field facts prove transition+0x34,count+0x9c,handle+0x98 and a surviving virtual tail at byte offset0x20 (callback8), not callback2. Canonical record refined without changing extent; scoped full MATCH.",
+    "Service byte users now name canonical flag_02/03/05/07/08 instead of removed padding aliases.",
+    "IPC signed-byte wrapper uses a standard unsigned-char object-representation view for the canonical raw-byte output API, preserving its signed result and original uninitialized-error bug; no owner/type erasure.",
+    "SceneToggle child is the canonical SoundTrack (enabled+0x138,active+0x139,task+0x1a8), not an incomplete SceneChild. Full scoped MATCH after migration.",
+    "WorkerThread now exposes its real StreamMutex at+8; stop_requested remains+0x14 and running+0x15. Unused speculative thread_id/reserved member names were removed; DispatcherWorker shadow was not restored. Worker loop scoped full MATCH.",
+    "Nested ManagedExpHeap ownership, DisplayVertexPane.pane.material and BufferState accesses corrected to real canonical members; missing allocator-base declaration shared in exp_heap.h; existing callback declaration imported via functions.h."
+  ]
 }

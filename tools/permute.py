@@ -169,16 +169,16 @@ class Program:
 
     @classmethod
     def parse(cls, text: str, targets: tuple[str, ...], source: Path,
-              original: str | None = None) -> Program | cpp.Program:
+              original: str | None = None, *, profile: toolchain.Profile | None = None) -> Program | cpp.Program:
         if source.suffix.lower() in CPP_SUFFIXES:
             try:
-                return cpp.Program.parse(text, targets, source, original)
+                return cpp.Program.parse(text, targets, source, original, profile=profile)
             except cpp.CppError as exc:
                 raise PermuteError(str(exc)) from exc
         # Let the interface auditor recognize approved SVC/result/CP15 declarations.
         # Their raw spelling is retained; target-body annotations still fail closed.
         try:
-            prepared = interfaces.prepare(text, source)
+            prepared = interfaces.prepare(text, source, profile=profile, preserve_pragmas=True)
         except interfaces.InterfaceError as exc:
             raise PermuteError(str(exc)) from exc
         try:
@@ -213,7 +213,7 @@ class Program:
             raise PermuteError("the permuter accepts .c, .cpp, .cc or .cxx source files")
         # This is exactly the interface auditor's launcher, flags and include path.
         text = interfaces.preprocess(interfaces.Unit(source, profile))
-        return cls.parse(text, targets, source, source.read_text(encoding="utf-8"))
+        return cls.parse(text, targets, source, source.read_text(encoding="utf-8"), profile=profile)
 
     def functions(self, ast: c_ast.FileAST | None = None) -> dict[str, c_ast.FuncDef]:
         return {n.decl.name: n for n in (ast or self.ast).ext if isinstance(n, c_ast.FuncDef) and n.decl.name in self.targets}

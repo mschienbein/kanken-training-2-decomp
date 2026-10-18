@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/animation.h"
 #include "game/deferred_callback.h"
 #include "game/controller_transitions.h"
