@@ -486,7 +486,7 @@ extern struct WordPair *func_00126988(struct WordPair *out,
                                          void *destination, unsigned count,
                                          unsigned offset);
 extern struct SoundWaveReader *func_001d3c78(struct SoundWaveReader *reader,
-                                    const struct SoundWaveFile *file, unsigned char relocated);
+                                    const struct SoundWaveFile *file, int relocated);
 extern struct WordPair *func_00194a34(struct WordPair *out, unsigned code);
 #ifdef __cplusplus
 }

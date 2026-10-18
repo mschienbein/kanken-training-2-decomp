@@ -53,6 +53,10 @@ extern struct W11HandleB *func_001748ac(struct W11HandleB *object);
 extern struct ArrayOwner *func_00174cb0(struct ArrayOwner *object);
 extern void func_00186598(void);
 extern void func_00181a4c(int kind, int first, int second, int value, unsigned flags);
+/* [INFERENCE] Same bound content receiver used by status/reset consumers;
+ * category and enabled are full words even though the parent stores a byte. */
+extern void func_00171a34(struct W11SingleState *content, int category,
+                        int index, int enabled);
 #ifdef __cplusplus
 }
 #endif

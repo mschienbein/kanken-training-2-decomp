@@ -1,0 +1,10 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001ec074/func_001ec074.cpp",
+ "profile": "game",
+ "linker_model": "armlink5-inline-branchnop-v2",
+ "literal_model": "none",
+ "status": "refused",
+ "reason": "armcc failed (1) on func_001ec074.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001ec074/func_001ec074.cpp\", line 5: Error:  #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\")\n  class CallbackTarget {\n        ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001ec074/func_001ec074.cpp\", line 33: Error:  #135: class \"TouchDeviceState\" has no member \"reserved10\"\n      return (input->reserved10[0] & 0x10) != 0;\n                     ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001ec074/func_001ec074.cpp\", line 50: Error:  #167: argument of type \"StagedDepartureState *\" is incompatible with parameter of type \"CallbackTarget *\"\n          func_00177b10(screen, &CallbackTarget::complete_transition);\n                        ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001ec074/func_001ec074.cpp\", line 50: Error:  #167: argument of type \"void (CallbackTarget::*)()\" is incompatible with parameter of type \"MemberCallback\"\n          func_00177b10(screen, &CallbackTarget::complete_transition);\n                                ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001ec074/func_001ec074.cpp: 0 warnings, 4 errors\n",
+ "error_type": "ToolchainError",
+ "functions": []
+}
