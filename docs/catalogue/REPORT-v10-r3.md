@@ -1,6 +1,64 @@
 # Catalogue v10-r3 — register-effect repair and authenticated-library proposal
 
-## Final combined proposal: separate authenticated-library change
+## Current correction: owner-based unresolved residue
+
+This discrete fix is directly atop library commit
+`df361b947c5b3a31b265c93535bb6d53c729742e`; that commit and the isolated guard
+repair `7750dfca…` remain unchanged. Main's clean-checkout full-suite failure was
+a stale residue invariant, not a new ownership or geometry failure. The reported
+failure was accepted as fact and not replayed before the correction.
+
+The retained source ledger contains 56 Thumb residue rows. The derived unresolved
+queue must exclude rows whose **current owner** has admitted classification
+evidence, including an interior row whose own address is not a primary classified
+address. Exactly **36** source rows now belong to authenticated library owners;
+they leave the unresolved queue. The remaining **20** rows comprise **18 ordinary
+owners and two multi-entry rows**, still including `001000a0` within owner
+`00100084` and the `0010030c` owner. The immutable 56-row historical source and all
+classification records remain unchanged. This is queue derivation, not erasing an
+entry or granting additional non-C ownership. Unowned rows, protected/withheld
+classifications and topology-only exclusions are not filtered away.
+
+The original-image invariant now independently resolves each retained source row
+to its current owner, checks the exact retained-address complement, asserts that
+no classified owner occurs in residue, and equates the 36-row count reduction to
+the classified-source intersection. The synthetic CLI regression also covers a
+classified primary, an interior row, an unrelated unowned row, and the protected
+case where classification is withheld. Its complete-output stability assertion
+remains in place.
+
+Requested commands, captured without piped gates:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python -m unittest tests.test_analyze
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python tools/analyze.py catalogue --out scratch/analyze/catalogue-v10-r3-residue-fix.json
+```
+
+**Module exit 0: 192 tests, OK**, 151.794 s unittest-reported. Regeneration exits
+**0**, with an **8,292,844-B** candidate, SHA-256
+`d1af9a71e983fbe06867e972875e8dfc9d5f735d9e89f695e78892f267f69d5c`.
+Captured generation wall time: 52.567 s. The original-image module test also
+regenerates twice and asserts byte-identical complete outputs. No full suite,
+build, compiler/matcher, linter or formatter was run here.
+
+Against the `846ee2e6…` library checkpoint, exactly three JSON paths change:
+
+1. `generator.source_sha256.tools/catalogue_review.py`
+2. `revision_review.input_sha256.tools/catalogue_review.py`
+3. `revision_review.thumb_v9_residue` — 56 → 20 rows, removing exactly the 36
+   classified-owner rows; all 20 retained records are otherwise identical.
+
+**All function records, physical ranges, anomalies, statistics and closure
+evidence are identical.** Final totals therefore remain **4,743 owners; 4,594
+ordinary / 1,124,038 ordinary extent B; 360 unknown B / 36 intervals; 10 unresolved
+anomalies**. The SHA changes because residue metadata is part of the output and
+the producer's source hashes must change. Exact receipts and every removed row:
+`scratch/closure/v10-r3-residue-test-analyze.json`,
+`v10-r3-residue-generation.json`, and `v10-r3-residue-differences.json`.
+Main owns the full-suite rerun and independent review; this correction does not
+adopt the proposal or claim zero-unknown closure.
+
+## Authenticated-library checkpoint (`df361b9`)
 
 The isolated register-effect repair is commit `7750dfcab25110fbb60dac92d50cf09e95b19381`,
 directly atop `6dd9832fcd2d0e35a40d85f37ff1c79b7075bf73`. The next discrete commit

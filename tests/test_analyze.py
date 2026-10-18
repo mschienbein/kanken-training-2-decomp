@@ -1383,6 +1383,8 @@ class CatalogueTests(unittest.TestCase):
                "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper"}
         evidence = {"revision": "catalogue-v9-r2", "image_sha256": baseline["image_sha256"],
                     "classification_records": [row], "thumb_dispositions": [], "author_dispositions": [],
+                    "thumb_v9_residue": [{"address": address}
+                                         for address in (BASE, BASE + 2, BASE + 4)],
                     "provenance": {"proof_status": "synthetic"}, "source_candidate_sha256": "synthetic",
                     "source_input_sha256": {}}
         scratch = ROOT / "scratch"
@@ -1426,6 +1428,15 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
+                residue = result["revision_review"]["thumb_v9_residue"]
+                classified = {item["address"] for item in result["revision_review"]["classifications"]}
+                self.assertEqual({item["address"] for item in residue},
+                                 {BASE, BASE + 2, BASE + 4} if protect else {BASE + 4})
+                self.assertTrue(all(item["candidate_owner"] not in classified for item in residue))
+                self.assertFalse(any(item["ownership_classified"] for item in residue))
+                # A classified owner's interior row leaves too; unrelated unowned
+                # rows and protected/withheld classifications must remain.
+                self.assertEqual(len(evidence["thumb_v9_residue"]) - len(residue), 0 if protect else 2)
 
     def test_ordinary_library_identity_is_not_just_a_semantic_name(self) -> None:
         result = self.catalogue([0xE12FFF1E])
@@ -1797,9 +1808,20 @@ class CatalogueTests(unittest.TestCase):
         self.assertTrue(all((row["address"], row["isa"]) in entries for row in table_targets))
         self.assertEqual(len(evidence["initializer_targets_previously_unknown"]), 93)
         residue = review["thumb_v9_residue"]
-        self.assertEqual(len(residue), 56)
+        classified_owners = {row["address"] for row in review["classifications"]}
+        source_owners = {
+            row["address"]: next((function["address"] for function in functions.values()
+                                  if function["address"] <= row["address"] < function["address"] + function["size"]), None)
+            for row in evidence["thumb_v9_residue"]
+        }
+        resolved_residue = {address for address, owner in source_owners.items() if owner in classified_owners}
+        self.assertEqual(len(source_owners), 56)
+        self.assertEqual((len(resolved_residue), len(residue)), (36, 20))
+        self.assertEqual({row["address"] for row in residue}, source_owners.keys() - resolved_residue)
+        self.assertEqual(len(source_owners) - len(residue), len(resolved_residue))
+        self.assertTrue(all(row["candidate_owner"] not in classified_owners for row in residue))
         self.assertFalse(any(row["ownership_classified"] for row in residue))
-        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 54)
+        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 18)
         self.assertEqual({row["address"]: row["candidate_owner"] for row in residue
                           if row["candidate_owner_kind"] == "multi_entry"},
                          {0x1000A0: 0x100084, 0x10030C: 0x10030C})
