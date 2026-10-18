@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "checkpoint": "cmodels",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "functions": [
+    {
+      "function": "func_001d5864",
+      "size": 348,
+      "status": "deferred-typed-contract",
+      "source": "scratch/authors/r4040/recovery/variants/d586_min_tie_v3/func_001d5864.c",
+      "matching_receipt": "scratch/integrator/cmodels/original/func_001d5864/func_001d5864.result.json",
+      "model_outcome": "MATCH; exit 0; full 348-byte catalogue extent",
+      "conflicts": [
+        {
+          "function": "func_001d3c78",
+          "accepted_contract": "SoundWaveReader *(SoundWaveReader *, const SoundWaveFile *, unsigned char)",
+          "candidate_contract": "SoundWaveReader *(SoundWaveReader *, const SoundWaveFile *, int)",
+          "evidence": "The matching caller promotes NotePlayer.wave_kind from signed char to int rather than narrowing to unsigned char. include/game/archive.h and src/retries/func_001d3c78.c currently declare the narrower unsigned parameter."
+        },
+        {
+          "function": "func_001d9198",
+          "accepted_contract": "SoundTrack *(unsigned, unsigned, unsigned, unsigned)",
+          "candidate_contract": "AudioVoice *(int channels, int priority, void (*callback)(AudioVoice *, int, void *), void *context)",
+          "evidence": "The matching caller supplies func_001d5bf4 and NotePlayer * in the last two argument registers, then accesses the returned object's AudioVoice envelope, group and flag13c members. include/game/sound_track.h and src/wave13/func_001d9198.cpp instead use four unsigned arguments and a SoundTrack return."
+        }
+      ],
+      "decision": "Main explicitly directed withholding this row to keep cmodels narrow; accepted-audio reconciliation belongs to the c010/c011 integration line. Do not force the candidate through pointer-as-integer declarations or invent a common complete object type.",
+      "resumption": "A later model checkpoint may reconsider the retained immutable author source and receipts after the shared signed-kind, callback/context and receiver-view contracts are reconciled. No audio header or accepted audio source is revised by cmodels."
+    },
+    {
+      "function": "func_001ab680",
+      "size": 2212,
+      "status": "deferred-typed-contract",
+      "source": "scratch/authors/r4052/src/func_001ab680_removed_setter.c",
+      "matching_receipt": "scratch/integrator/cmodels/original/func_001ab680/func_001ab680_removed_setter.result.json",
+      "integrated_matching_receipt": "scratch/integrator/cmodels/final/func_001ab680/func_001ab680_removed_setter/func_001ab680_removed_setter.result.json",
+      "model_outcome": "MATCH; exit 0; full 2212-byte catalogue extent under v6 and L1",
+      "conflicts": [
+        {
+          "function": "func_00171a34",
+          "accepted_contract": "void(ConfigTarget001719f4 *, unsigned char option, int index, unsigned flags)",
+          "candidate_contract": "void(W11SingleState *, int category, int item, int enabled)",
+          "evidence": "The exact matching caller forwards screen->category as a full int, whereas include/game/audio_voice.h declares a narrowed unsigned-char option. The pointer receiver also has a different accepted partial view. Do not silently narrow the argument or assert common complete-class identity."
+        },
+        {
+          "function": "func_001719f4",
+          "accepted_contract": "void(ConfigState001719f4 *, unsigned char kind, int format, unsigned char option, int index, unsigned flags)",
+          "candidate_contract": "void(ItemPageSet *, unsigned char kind, int mode, int category, int item, int enabled)",
+          "evidence": "The accepted ConfigState001719f4 target pointer at +0x18 coincides with the candidate's appended ItemPageSet content binding, but the receiver-view and option/flags contracts must be reconciled rather than copied as incompatible declarations."
+        }
+      ],
+      "decision": "Main explicitly directed withholding this row. audio_voice.h also belongs to c010's accepted-audio reconciliation, so revising it here would create a cross-branch header conflict.",
+      "resumption": "IntegrateC010 owns the shared correction. Preserve the raw and integrated MATCH witnesses; a later model checkpoint may reconsider the exact natural source after receiver and argument contracts are reconciled. The provisional source/helper and now-unused item_page_binding.h were removed from this candidate."
+    }
+  ]
+}

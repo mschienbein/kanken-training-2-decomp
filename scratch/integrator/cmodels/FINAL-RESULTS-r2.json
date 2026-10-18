@@ -1,0 +1,930 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "units": [
+    {
+      "source": "src/models/func_0010be58/func_0010be58.c",
+      "functions": [
+        "func_0010be58"
+      ],
+      "extra_sources": [
+        "src/models/func_0010be58/result_failure_bits.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_0010be58/func_0010be58.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_0010be58/func_0010be58",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_0010be58/result_failure_bits.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_0010be58 @ 0x10be58 size 0x3c/0x3c [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  result_failure_bits (8 bytes; i.result_failure_bits)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_0010be58/func_0010be58/func_0010be58.result.json",
+      "receipt_sha256": "7ea789dbc760d59d5ec3199b2401cd42c1b4c873612bfa0b55cc43ed5b81606f",
+      "source_sha256": "eb9f07d402e029e66ff5b8e72981005f6af1098f5cd4f3143a153106110728bf",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_0010be58",
+          "address": 1097304,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+      "functions": [
+        "func_0013f06c"
+      ],
+      "extra_sources": [
+        "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_0013f06c/func_0013f06c_unbound",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    _ZN2nw2ut9FrameHeap11FreeByStateEj @ 0x13f06c size 0xa4/0xa4 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  frame_heap_release_lock (4 bytes; i.frame_heap_release_lock)\nREMOVED  frame_heap_release_unlock (4 bytes; i.frame_heap_release_unlock)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_0013f06c/func_0013f06c_unbound/func_0013f06c_unbound.result.json",
+      "receipt_sha256": "5901562d90cdb893a984fe94888cb26b9980999afc0663496b233a36531f0690",
+      "source_sha256": "fa93eae81600402323869190c29d3f4545d143d792bde5b9c1ffcd7402618472",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "_ZN2nw2ut9FrameHeap11FreeByStateEj",
+          "address": 1306732,
+          "size": 164,
+          "candidate_size": 164,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 2
+    },
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "functions": [
+        "func_0015f890"
+      ],
+      "extra_sources": [
+        "src/models/func_0015f890/text_base_destruction.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_0015f890/func_0015f890.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_0015f890/func_0015f890",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_0015f890/text_base_destruction.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_0015f890 @ 0x15f890 size 0x2c/0x2c [armlink5-inline-branchnop-v6: 1 inline_nop]\nREMOVED  completeTextResourceDestruction (4 bytes; i.completeTextResourceDestruction)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_0015f890/func_0015f890/func_0015f890.result.json",
+      "receipt_sha256": "42adf9dd68e9c65cdb82060d85fb1e5576f70a0191908901f4f65655c2424f8e",
+      "source_sha256": "8fc747a274e476f700fb2d44d0332e248e52cbd0181e328c7f40d6f9a2ac0c14",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_0015f890",
+          "address": 1439888,
+          "size": 44,
+          "candidate_size": 44,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_00168d14/func_00168d14.c",
+      "functions": [
+        "func_00168d14"
+      ],
+      "extra_sources": [
+        "src/models/func_00168d14/character_panel_minimum.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_00168d14/func_00168d14.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_00168d14/func_00168d14",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_00168d14/character_panel_minimum.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_00168d14 @ 0x168d14 size 0xa8/0xa8 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  set_character_panel_minimum (8 bytes; i.set_character_panel_minimum)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_00168d14/func_00168d14/func_00168d14.result.json",
+      "receipt_sha256": "02bb41818b6d134ee8234ae082f96d7af34ab42c690122292f9e1a39148e71b4",
+      "source_sha256": "53900e2ed903c52ece66852cd7190a44049fbe43be7d974c1421bb0114c54bc9",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_00168d14",
+          "address": 1477908,
+          "size": 168,
+          "candidate_size": 168,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "functions": [
+        "func_00172e00"
+      ],
+      "extra_sources": [
+        "src/models/func_00172e00/transition-C-setter.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_00172e00/transition-qualified-removed.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_00172e00/transition-qualified-removed",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_00172e00/transition-C-setter.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_00172e00 @ 0x172e00 size 0x60/0x60 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  set_completion (8 bytes; i.set_completion)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_00172e00/transition-qualified-removed/transition-qualified-removed.result.json",
+      "receipt_sha256": "fc1270041a0faf19707ebadf5509b0979a3d8ef36e982f5b8ce7e96e8d795354",
+      "source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_00172e00",
+          "address": 1519104,
+          "size": 96,
+          "candidate_size": 96,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_001730ec/func_001730ec_removed.c",
+      "functions": [
+        "func_001730ec"
+      ],
+      "extra_sources": [
+        "src/models/func_001730ec/item_accessors.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001730ec/func_001730ec_removed.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001730ec/func_001730ec_removed",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001730ec/item_accessors.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001730ec @ 0x1730ec size 0x74/0x74 [armlink5-inline-branchnop-v6: 2 inline_insn]\nREMOVED  w19_item_category (8 bytes; i.w19_item_category)\nREMOVED  w19_item_value (8 bytes; i.w19_item_value)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001730ec/func_001730ec_removed/func_001730ec_removed.result.json",
+      "receipt_sha256": "33b32e2de4e6057fbbe6c6d44db9f84a7cf5cb072d5f25ed3aee778de2224e5a",
+      "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001730ec",
+          "address": 1519852,
+          "size": 116,
+          "candidate_size": 116,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 2
+    },
+    {
+      "source": "src/models/func_001a00f8/func_001a00f8.c",
+      "functions": [
+        "func_001a00f8"
+      ],
+      "extra_sources": [
+        "src/models/func_001a00f8/transition_active.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001a00f8/func_001a00f8.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001a00f8/func_001a00f8",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001a00f8/transition_active.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001a00f8 @ 0x1a00f8 size 0x108/0x108 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  r4040_transition_active (8 bytes; i.r4040_transition_active)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001a00f8/func_001a00f8/func_001a00f8.result.json",
+      "receipt_sha256": "7fbe217d19fd63bfe825d8a41b3aa3c45e0d3e768d3a4ed49a6b6f99550f7f86",
+      "source_sha256": "8761a5835f925eb3407e5b9bd9690a094e692766396841fff7e3a9c9e75598af",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001a00f8",
+          "address": 1704184,
+          "size": 264,
+          "candidate_size": 264,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "functions": [
+        "func_001a2814",
+        "func_001a3ee0"
+      ],
+      "extra_sources": [
+        "src/models/func_001a2814/tu441_removed_helpers.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001a2814/func_001a2814_tu.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001a2814/func_001a2814_tu",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001a2814/tu441_removed_helpers.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001a2814 @ 0x1a2814 size 0x1e0/0x1e0 [armlink5-inline-branchnop-v6: 1 inline_nop]\nMATCH    func_001a3ee0 @ 0x1a3ee0 size 0x19c/0x19c [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  tu441_transition_active (8 bytes; i.tu441_transition_active)\nREMOVED  tu441_update_secondary (4 bytes; i.tu441_update_secondary)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001a2814/func_001a2814_tu/func_001a2814_tu.result.json",
+      "receipt_sha256": "fd2d98c26a44fe19130df0d780b0273552972107d40573fbda51c29e5b3fa9ef",
+      "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001a2814",
+          "address": 1714196,
+          "size": 480,
+          "candidate_size": 480,
+          "status": "match",
+          "first_diff": null
+        },
+        {
+          "name": "func_001a3ee0",
+          "address": 1720032,
+          "size": 412,
+          "candidate_size": 412,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 2
+    },
+    {
+      "source": "src/models/func_001b8908/func_001b8908_removed.cpp",
+      "functions": [
+        "func_001b8908"
+      ],
+      "extra_sources": [
+        "src/models/func_001b8908/panel_accessors.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001b8908/func_001b8908_removed.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001b8908/func_001b8908_removed",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001b8908/panel_accessors.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001b8908 @ 0x1b8908 size 0x298/0x298 [armlink5-inline-branchnop-v6: 4 inline_insn]\nREMOVED  L034_get_selected (8 bytes; i.L034_get_selected)\nREMOVED  L034_set_input_enabled (8 bytes; i.L034_set_input_enabled)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001b8908/func_001b8908_removed/func_001b8908_removed.result.json",
+      "receipt_sha256": "805a3c9431546077022d7120420302613a1c3ee9aa28018624a028d4df76938c",
+      "source_sha256": "c3afe300b1f62a3eb53372dc00b6721b044641b494e73ad981e5834ac4bca7dd",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001b8908",
+          "address": 1804552,
+          "size": 664,
+          "candidate_size": 664,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 2
+    },
+    {
+      "source": "src/models/func_001b9f18/func_001b9f18.cpp",
+      "functions": [
+        "func_001b9f18"
+      ],
+      "extra_sources": [
+        "src/models/func_001b9f18/drawing_state.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001b9f18/func_001b9f18.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001b9f18/func_001b9f18",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001b9f18/drawing_state.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001b9f18 @ 0x1b9f18 size 0x2bc/0x2bc [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  scene_drawing_state (8 bytes; i.scene_drawing_state)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001b9f18/func_001b9f18/func_001b9f18.result.json",
+      "receipt_sha256": "fe0a29b897fd8871bd757ad6c410e8f8a97d5bfd3ef65446052950016dd85a8d",
+      "source_sha256": "94c67dabe1fa64a26abc442d1925cd8706334ea6bf8f740ac8250ca4be238a77",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001b9f18",
+          "address": 1810200,
+          "size": 700,
+          "candidate_size": 700,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_001bd68c/func_001bd68c.cpp",
+      "functions": [
+        "func_001bd68c"
+      ],
+      "extra_sources": [
+        "src/models/func_001bd68c/drawing_state.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001bd68c/func_001bd68c.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001bd68c/func_001bd68c",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001bd68c/drawing_state.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001bd68c @ 0x1bd68c size 0x2b8/0x2b8 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  r41262_drawing_state (8 bytes; i.r41262_drawing_state)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001bd68c/func_001bd68c/func_001bd68c.result.json",
+      "receipt_sha256": "f64fa431578b57b3460c9192d6a85a5ac05d9b77610fd93fa03b3e2c2029e8ac",
+      "source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001bd68c",
+          "address": 1824396,
+          "size": 696,
+          "candidate_size": 696,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/func_001ddde4/func_001ddde4.c",
+      "functions": [
+        "func_001ddde4"
+      ],
+      "extra_sources": [
+        "src/models/func_001ddde4/item_accessors.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001ddde4/func_001ddde4.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001ddde4/func_001ddde4",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001ddde4/item_accessors.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001ddde4 @ 0x1ddde4 size 0x1d0/0x1d0 [armlink5-inline-branchnop-v6: 3 inline_insn]\nREMOVED  r41279_item_category (8 bytes; i.r41279_item_category)\nREMOVED  r41279_item_identifier (8 bytes; i.r41279_item_identifier)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001ddde4/func_001ddde4/func_001ddde4.result.json",
+      "receipt_sha256": "b793d6c76b3756f5f07abb7dfb4edc64791213a3b1f1af4c0685853fbc08f4cf",
+      "source_sha256": "9c8f69bf4894e894a266a7104d0c591e246c61ac8a4425d61877c6a5499c39b1",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001ddde4",
+          "address": 1957348,
+          "size": 464,
+          "candidate_size": 464,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 2
+    },
+    {
+      "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+      "functions": [
+        "func_001e0afc"
+      ],
+      "extra_sources": [
+        "src/models/func_001e0afc/removed_initializers.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001e0afc/training_initialize_grouped_reset",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001e0afc/removed_initializers.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001e0afc @ 0x1e0afc size 0x6cc/0x6cc [armlink5-inline-branchnop-v6: 1 inline_insn, 2 inline_nop]\nREMOVED  TU924_page_count (8 bytes; i.TU924_page_count)\nREMOVED  TU924_reset_optional (4 bytes; i.TU924_reset_optional)\nREMOVED  TU924_reset_prompts (4 bytes; i.TU924_reset_prompts)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001e0afc/training_initialize_grouped_reset/training_initialize_grouped_reset.result.json",
+      "receipt_sha256": "4fa68f9c436915963f87cbb2bb49513161a9dbd56718edc459e95d6d6be1347c",
+      "source_sha256": "87b9a124b781b4636851933192805c3e838ae7e7cf82afb1221ebfd83f516817",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001e0afc",
+          "address": 1968892,
+          "size": 1740,
+          "candidate_size": 1740,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 3
+    },
+    {
+      "source": "src/models/func_001ed874/func_001ed874.cpp",
+      "functions": [
+        "func_001ed874"
+      ],
+      "extra_sources": [
+        "src/models/func_001ed874/category_initializers.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_001ed874/func_001ed874.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_001ed874/func_001ed874",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/func_001ed874/category_initializers.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001ed874 @ 0x1ed874 size 0x33c/0x33c [armlink5-inline-branchnop-v6: 3 inline_nop]\nREMOVED  initialize_category_panel (4 bytes; i.initialize_category_panel)\nREMOVED  initialize_handle_panel (4 bytes; i.initialize_handle_panel)\nREMOVED  initialize_selector (4 bytes; i.initialize_selector)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_001ed874/func_001ed874/func_001ed874.result.json",
+      "receipt_sha256": "cec1b60cab348cf23e29197a809c3b17d5f4dc820d8ff5cb1b0c62ed79849a3d",
+      "source_sha256": "69430bf33dcb7f11310ab3c3f9beeb0b578a16a57579b72dbd8190994b1834c0",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001ed874",
+          "address": 2021492,
+          "size": 828,
+          "candidate_size": 828,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 3
+    },
+    {
+      "source": "src/models/func_00203a68/func_00203a68.cpp",
+      "functions": [
+        "func_00203a68"
+      ],
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/func_00203a68/func_00203a68.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/func_00203a68/func_00203a68"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_00203a68 @ 0x203a68 size 0x9ec/0x9ec\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/func_00203a68/func_00203a68/func_00203a68.result.json",
+      "receipt_sha256": "0770a2970d6c8870c2448e85d237e6be8fc7574621863b46c8e7f4fb36e1532c",
+      "source_sha256": "0550634bf729b8f7bebd2e150b641ca6bfbf2c3a452783f1e7b41da2696ab1ff",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_00203a68",
+          "address": 2112104,
+          "size": 2540,
+          "candidate_size": 2540,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 1,
+      "removed_callee_count": 0
+    },
+    {
+      "source": "src/models/linear_buffer/func_00112628.c",
+      "functions": [
+        "func_00112628"
+      ],
+      "extra_sources": [
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/linear_buffer/func_00112628.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/linear_buffer/func_00112628",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_00112628 @ 0x112628 size 0x24/0x24 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  InitializeLinearBufferAllocator (8 bytes; i.InitializeLinearBufferAllocator)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/linear_buffer/func_00112628/func_00112628.result.json",
+      "receipt_sha256": "74ff66f8d48da935afe1d3aa47b730a5785399911a4c00232bd3957d38eed6af",
+      "source_sha256": "9d21e6a10d2780c4d22e01f78725432fec3d45172ad6727f149eb1e21a3e87e5",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_00112628",
+          "address": 1123880,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/linear_buffer/func_00112b5c.c",
+      "functions": [
+        "func_00112b5c"
+      ],
+      "extra_sources": [
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/linear_buffer/func_00112b5c.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/linear_buffer/func_00112b5c",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_00112b5c @ 0x112b5c size 0x24/0x24 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  InitializeLinearBufferAllocator (8 bytes; i.InitializeLinearBufferAllocator)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/linear_buffer/func_00112b5c/func_00112b5c.result.json",
+      "receipt_sha256": "eb90cd58680bac5a8c21ed437b063a0eb084ab0f47dc23fecf6258cc915622d4",
+      "source_sha256": "7c57da5c03b0eceb191c76f7d7ee1586d65b9b77f7022272ef4dacd1e5d0034c",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_00112b5c",
+          "address": 1125212,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/linear_buffer/func_001131d4.c",
+      "functions": [
+        "func_001131d4"
+      ],
+      "extra_sources": [
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/linear_buffer/func_001131d4.c",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/linear_buffer/func_001131d4",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001131d4 @ 0x1131d4 size 0x24/0x24 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  InitializeLinearBufferAllocator (8 bytes; i.InitializeLinearBufferAllocator)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/linear_buffer/func_001131d4/func_001131d4.result.json",
+      "receipt_sha256": "79d4ae302ebc5326806af7dc74a65e74f2012169ca66249294d5b360eb99cf0e",
+      "source_sha256": "a159c7d18afa5ee5671fbe783f523edae1b765b6694b3185f66ff2f4c8f8d3db",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001131d4",
+          "address": 1126868,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    },
+    {
+      "source": "src/models/transition_setters/func_001a8048_value_setter.c",
+      "functions": [
+        "func_001a8048"
+      ],
+      "extra_sources": [
+        "src/models/transition_setters/transition_active.c"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/models/transition_setters/func_001a8048_value_setter.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/final/transition_setters/func_001a8048_value_setter",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/src/models/transition_setters/transition_active.c"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001a8048 @ 0x1a8048 size 0x19c/0x19c [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  transition_active (8 bytes; i.transition_active)\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/cmodels/final/transition_setters/func_001a8048_value_setter/func_001a8048_value_setter.result.json",
+      "receipt_sha256": "6ef912da1bae29337cb6a97bf0e1f8ef3a5f810c3e3665460286c37f82ca05dd",
+      "source_sha256": "4163d4a549b8d9eb174f76dfed879b9422f10a8cf9d1fd32e1bd56a08ba6e4c8",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001a8048",
+          "address": 1736776,
+          "size": 412,
+          "candidate_size": 412,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "literal_pool_count": 0,
+      "removed_callee_count": 1
+    }
+  ],
+  "withdrawn_typed_contract_rows": [
+    "func_001ab680"
+  ],
+  "preserved_prewithdrawal_results": "scratch/integrator/cmodels/FINAL-RESULTS.json"
+}

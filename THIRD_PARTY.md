@@ -14,6 +14,13 @@ including GLES2 declarations and GLES/GL legacy constants attested in
 `src/nw4c/FACTS-KHRONOS.json`. Its license text is preserved in
 `src/nw4c/LICENSE-KHRONOS.txt`. Lowercase `include/gles2/` headers are
 project-owned include adapters, not an OpenGL implementation.
+
+The unaccepted model-qualified `src/models/func_0013f06c/func_0013f06c_unbound.cpp`
+adapts `ut_FrameHeap.cpp` from the same pinned NintendoWare4Ctr commit and license.
+It selects `FrameHeap::FreeByState` and externalizes two release-mode hooks; their
+erased historical identities are explicitly inferred. Its per-file notice is retained,
+and the upstream license remains in `src/nw4c/LICENSE.txt`. The hooks and model selection
+grant no library/helper credit.
 Policy: only sources whose license is compatible with GPL-3.0 are copied; attribution, the
 upstream license and modification notices stay with the copied code. Public repositories without a
 license grant (inspected 2026-10-17: standalone nnsdk, LibMessageStudio, 3DS sead) are not copied.

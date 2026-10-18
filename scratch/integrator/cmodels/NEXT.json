@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "checkpoint_candidate": "cmodels",
+  "current_selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "later_selection": "armlink5-inline-branchnop-v8",
+  "decision": "Main directed v8-only source witnesses to a separate later model checkpoint after cmodels finalizes. This inventory grants no credit and selects no model.",
+  "source_inventory": "scratch/integrator/cmodels/RESULT-INVENTORY.json",
+  "witnesses": [
+    {
+      "function": "func_001a77d4",
+      "target_bytes": 208,
+      "author": "tu917",
+      "result": "scratch/authors/tu917/RESULT.json",
+      "row_index": 2,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu917/src/selection_screens_final.cpp",
+      "source_sha256": "579c9f9598819c51042b0c18a5f29868d6ed7e0d66aedca6e0811002de810821",
+      "profile": "game",
+      "literal_model": "none",
+      "extra_sources": [
+        {
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu917/src/parameter_destructors_final.cpp",
+          "source_sha256": "6023c06405ed62bfab3fccc53c37d3b0f3542e76adef27f3b0444732a4af2933",
+          "object_sha256": "26293fbe1bea5fb408186652a88c364eac24594ae3c94c4d32df90ce9800175d"
+        }
+      ],
+      "receipt": "scratch/authors/tu917/match/42-delivery-v8/selection_screens_final.result.json",
+      "receipt_sha256": "c5aac6179b012786d697bb8604b96c919d8560b361506a87635cac5741c73611",
+      "category": "future-v8-model-candidate",
+      "predecessor_reservations": [],
+      "qualification": "Historical author witness only; not remeasured here under v8, not admitted under cmodels v6/L1. Distinct native/helper identities and typed contracts require independent review."
+    }
+  ],
+  "already_scoped_v6_identities_note": "func_0013f06c and func_001bd68c already have exact v6/L1 C-helper witnesses in cmodels. A later v8 native-source replacement must not credit either identity twice; it needs the applicable revised-source/rehoming and model-transition gates."
+}

@@ -31,6 +31,7 @@ extern const unsigned short *func_00170c00(const struct W11TextResource *resourc
 extern const unsigned short *func_001dcbd4(const struct W11TextResource *resource, int index);
 extern void func_0017a43c(struct MessageLayout *layout, const unsigned short *left,
                           const unsigned short *right, int index);
+extern float func_0017a424(const struct MessageLayout *layout);
 extern const unsigned short data_002276bc[];
 #ifdef __cplusplus
 }
