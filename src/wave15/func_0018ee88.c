@@ -5,28 +5,13 @@
 
 
 
-/* [INFERENCE] Compiler-inlined mode operation shared with func_00115040. */
-static __inline void set_mode(unsigned mode)
-{
-    switch (mode) {
-    case 0:
-        func_00192400(3);
-        break;
-    case 1:
-        func_00192400(2);
-        break;
-    case 2:
-        func_00192400(1);
-        return;
-    default:
-        return;
-    }
-    func_001923d4(mode);
-}
 
 void func_0018ee88(unsigned char notify)
 {
-    data_00242a6c.status = 0;
-    if (notify)
-        set_mode(0);
+    unsigned char mode = 0;
+    data_00242a6c.status = mode;
+    if (notify) {
+        func_00192400(3);
+        func_001923d4(mode);
+    }
 }

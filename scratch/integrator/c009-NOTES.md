@@ -1,6 +1,68 @@
 # C009 recovered integration handoff
 
-## Full MATCH coverage recorded; compilation repair slice closes
+## Main f24fa0b merged; three mismatches remain
+
+Merged current Main **`f24fa0b`** cleanly at
+**`90cc196cb7107f5c79424d721ec4730b74323495`**. Gates are now frozen **v1.19**.
+This brings reviewed tools/model availability, not a c009 model transition:
+c009 stays explicitly **armlink5-inline-branchnop-v2 / none**.
+
+Evidence-backed semantic repairs close **nine** of the thirteen original byte
+mismatches (`semantic-repair-r1.json` and `semantic-repair-r2.json`); the ruled
+counter-loop restoration below closes the tenth. All sixteen prior compilation
+failures are also repaired. The actual canonical CommandQueue
+now contains its 0x44-byte tail (patch/captured size/complete/flush); five
+ExtendedCommandQueue/W19aWritableQueue/CommandQueueDetail shadows are removed.
+The query unit also MATCHes after that migration. Actual signed ring-producer
+modulo, drawing scale +0x8bc, finished byte +0x8b9 and counter-enabled +8 fields
+are restored. The display setup keeps the original unchecked-null bug and
+proven first-member DisplayObject prefix.
+
+**Three** last-observed mismatches remain, all exact extents:
+`00113c0c` 104/104 B, `0018ee88` 56/56 B, `001c4494` 44/44 B.
+These are result-check/default-mode/register-scheduling differences, not an
+excuse to change canonical provider contracts, hard-code an instruction address,
+or add volatile/register/dead steering. Nine bounded natural source forms
+failed; their sources, actual exits and receipts are preserved under
+`natural-forms-r1/`. One initial C90 declaration-placement compile failure and
+its changed-source correction are both retained. Do not restart those forms.
+
+Stable G3 r4 on the corrected main1.19 tree **exits 0**:
+2,204 units, 1,704 checked, zero disagreements/policy findings, 500 unchecked C++
+and zero unchecked C. Its exact ledger is `dry-matches-g3-r4.json`; it excludes
+the temporarily withdrawn counter loop described below. **G3 r5 also exits 0**
+on the restored **2,205-unit** scope: **1,704 checked, zero disagreements,
+zero policy findings, 501 unchecked C++ and zero unchecked C**. This is the
+current gate verdict; the final all-MATCH/sweep/argcheck/pre-review work below
+is still incomplete. No background measurement remains running.
+
+### Main ruling: retain the original counted loop, qualified
+
+Main explicitly ruled that `001c20e8`'s observed counted backedge is faithful
+original control flow, not an absent construct added for codegen. Its plain
+loop is restored without volatile, asm, artificial uses or register forcing,
+and **MATCHes 20/20 B, exit0** (`counter-loop-ruled-r1.json`). The visible
+`[INFERENCE]` note preserves its unknown purpose (delay or leftover loop).
+The eventual pre-review and independent review row **MUST be QUALIFIED**;
+`pre-review-required-qualifications-r1.json` records that mandatory disposition.
+`interface-deferrals-r3.json` remains the superseded policy concern/history of
+the loop and 8-byte constant form, not a current deferral.
+
+Current scope remains **678 new units/functions / 57,212 B**, **123 revised
+predecessor units / 127 functions**, dry **2,205 units / 2,279 functions**.
+`readiness-scope-r5.json` binds the required **801-unit / 805-function** union.
+Main's manifest is `scratch/integrator/c009/candidates.json`; it is **not ready
+for prepare**. After the three fixes: stable whole-scope MATCH, native/signature/
+co-inclusion/indirect/forwarding consumers, complete argcheck adjudication and
+seven-step pre-review still remain. No full build/suite/prepare/history/push ran.
+
+Main may land cmodels first. The sole overlapping revised accepted source is
+`src/wave10/func_0017a424.c`; c009 does not revise `00172c04` or `00173f9c`.
+Shared-header overlap is broader: merge/reconcile cmodels if it lands, then
+recompute scopes/dry ledger and final input-bound evidence.
+
+
+## Historical full MATCH coverage and compilation repair slice
 
 At `c43d995`, finalized-predecessor **G3 r3 exits 0**: 2,205 units,
 1,704 checked, zero disagreements/policy findings, 501 unchecked C++ and
