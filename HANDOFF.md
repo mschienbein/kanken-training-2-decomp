@@ -1,239 +1,229 @@
-# exidx-removal: final v7 handoff
+# exidx-removal — corrected v8 handoff
 
-## Commits, base and non-adoption
+## Identity and discrete commits
 
-- Worktree/branch: `scratch/worktrees/exidx-removal`, `exidx-removal`.
-- **Final implementation commit: `b72126ebc55984ed231f8698a87417c284a63271`.**
-- **Integration base: `5bb20a9a3251e83cddc37d6b64a166679ebd8e51`**, the synced
-  `models-integration` tip = corrected-v6 commit `d525edd6d9e17675d770781b9df4d7d6d8bd17a5`
-  plus frozen prepared main `f8adff48098a77057e13a50657b2722655469227`.
-- New immutable identity: **`armlink5-inline-branchnop-v7` = corrected v6 + exclusive
-  removed-helper EHABI companion elimination only**. V5 stays retired, never adopted.
-  Defaults remain v2 / literal `none`.
+- Branch/worktree: `exidx-removal`, `scratch/worktrees/exidx-removal`.
+- Given corrected-v6 base: **`5bb20a9a3251e83cddc37d6b64a166679ebd8e51`**.
+- **P1/group-closure and v8/retirement commit:**
+  `d64767e71760c7e6337fe40a0bc3f398c78aa360`.
+- **P2/complete compact-extab implementation commit:**
+  **`75c4aa51fdc2a00e82ce5b60a6552ff6904eb50b`**.
+- New immutable identity: **`armlink5-inline-branchnop-v8` = v6 + corrected complete
+  own-exidx/extab elimination**. V7 is retired, never adopted; its rules are not edited under
+  the same selectable name. V5 remains retired. Defaults remain v2 / literal `none`.
 - Author: `mschienbein <mschienbein@users.noreply.github.com>`.
 
-The assignment initially used `22cb05b` and an unpublished unwind-prototype v6 name. Main
-explicitly reassigned that extension to **v7** when corrected alias v6 was introduced. The
-branch merges both the corrected base and its prepared-input sync; integrate the final branch
-or the final delta against `5bb20a9`, **not prototype commit `2580770` alone**. Historical private
-prototype records remain unchanged under `scratch/exidx/`; their old v6 label must never be
-reinterpreted as corrected alias v6 or final v7 evidence.
+The sealed v7 review (`scratch/review/exidx-v7/REVIEW.md`, `SEAL.json`) is **FAIL**. Its two
+counterexamples are ground truth, not rerun to reconfirm them. The old v7 receipts, rejected
+exact draft (`scratch/exidx/GATES-DRAFT.md`) and review are unchanged. Historical v7 handoff
+text remains in commit `88f5c38f4b014817cbcd2c64eebc710e4f3f8dc9`; no v7 record is relabeled
+as v8 evidence or approval.
 
-No adoption, prepare/finalize, full suite, full build or push was performed by this worker.
-`docs/GATES.md` is untouched by the extension. The requested input-sync merge inherits Main's
-prepared c008-r3 artifacts/source/header changes; this worker did not author or rewrite them.
-No author directory was edited and no `packets/` was read. No ROM bytes or original disassembly
-were printed or committed. `orig` / `.cache/toolchain` are symlinked to main; all Python commands
-use main's `.venv`.
+**New exact gate draft:** `scratch/exidx/v8/GATES-DRAFT.md` (proposed v1.19, unreviewed).
+**New compact evidence ledger:** `scratch/exidx/v8/EVIDENCE.json`.
+Complete new private commands, receipts, objects and reproduction drivers are under
+`scratch/exidx/v8/`. Implementation documentation is `docs/LINKER.md`.
 
-Implementation files: `tools/inplace.py`, `tools/linker_models.py`, `tests/test_inplace.py`,
-`research/linker/exidx_census.py`, `docs/LINKER.md`. Exact proposed gate text:
-**`scratch/exidx/GATES-DRAFT.md`** (proposed v1.19, not adopted). Main must run the full suite
-and obtain independent composite/exact-text review before any later adoption, after the active
-frozen checkpoint closes. V4 and corrected-v6 prerequisites/qualifications remain mandatory.
+No active GATES edit, adoption, full suite, full build, prepare/finalize or push was performed.
+The given v6 base and all its qualifications remain prerequisites, not independently approved
+by this work. Main must obtain a fresh independent v8 implementation/exact-text review and run
+the full suite after integration; activation waits for the active frozen checkpoint to close.
+No author directory or copied author source was edited, no `packets/` was read, and no ROM
+payload or original disassembly was printed or committed. Main's `.venv` and the existing
+symlinked private inputs/toolchain were used.
 
-## Rule text and refusal boundary
+## P1: complete group/copy closure, not matching signatures alone
 
-Only v7 permits an R1-removed helper's exclusive unwind companions to disappear with it.
-The helper must **first** satisfy every unchanged corrected-v6 condition: complete eligible
-4/8-byte ARM code, no original binding through any alias/copy, no roots, full alias/COMDAT
-proof where required, I1–I3, all original call-site ABI/CFG checks, every other reference checked,
-and at least one actual successfully inlined call per removed entity. Independently bound
-retained names keep v6's corrected legacy placement; unwind ownership grants no binding waiver.
+**Before (sealed v7 F01):** a surviving catalogued caller, the removed helper and the helper's
+own exidx could share one COMDAT group. V7 discarded the helper/index while keeping the caller
+and issued successful exact caller output. Matching companion/text group signatures did not
+prove that the group was removable.
 
-1. The helper's own index is readonly, allocated, non-executable, non-NOBITS `.ARM.exidx*`,
-   type SHT_ARM_EXIDX, SHF_LINK_ORDER, sh_link to that exact defining text section. ELF reading
-   preserves these fields and object combination remaps the link within its owning object.
-   The complete section is one eight-byte entry, aligned at least four, entry size zero/eight.
-   Exactly one offset-zero PREL31 key targets the helper's section/function entry, zero effective
-   addend, bit 31 clear. No combined/shared index, duplicate fragment, interior/kept-function key,
-   missing ownership metadata or name-only proof.
-2. The second word is CANTUNWIND, a one-word compact personality-0 entry, or exactly one
-   offset-four PREL31 to the beginning of an exclusive readonly, non-executable SHT_PROGBITS
-   `.ARM.extab*`. Extab has no link-order/fixed-entry metadata. Only frame-only compact
-   personality 0 (exactly four bytes) or 1/2 (exactly `4 * (1 + extra_word_count)`) is modeled.
-   Generic personalities, scope descriptors, combined/trailing data and interior extab references
-   fail closed. Nothing is synthesized or copied from the original.
-3. Only those structural PREL31s and offset-zero NONE dependencies on the matching undefined
-   `__aeabi_unwind_cpp_pr0/1/2` are understood in eliminated metadata. CANTUNWIND permits no extra
-   dependency. An extab-pointing index has exactly its two structural relocations. Any other
-   relocation/dependency, including arbitrary NONE markers or V4BX in metadata, refuses removal.
-4. Companions cannot be rooted, independently named/exported, original-address-bound or
-   differently COMDAT-owned from the text. Only local zero-size offset-zero section/data-mapping
-   symbols are permitted. Exidx has no incoming allocated reference. Extab's sole incoming
-   reference is its own exidx's offset-four PREL31. Census all allocated sections, even unplaced,
-   and link-order dependencies. Shared extab, other incoming references or required original
-   placement refuse removal. Every other reference to the helper still passes unchanged R1;
-   pointers, tail calls, dependencies and inadmissible calls cannot vanish.
-5. A kept function's separate unwind entry is **never selected for elimination**. No original
-   unwind bytes are added, removed, rebound or rewritten. An unbound helper cannot receive an
-   invented original table key. This is not general exception-table stripping/placement, a
-   complete standalone link, or proof of the original unwind/exception regime.
+**Corrected v8 rule:** before any own-unwind reference is exempted, every allocated member of
+each affected COMDAT group and every supplied same-signature copy must already be independently
+selected v6-eligible R1 code or a fully validated own-exidx/extab companion. A kept caller,
+different kept function, bound entity, ordinary placed/unplaced data/BSS, unsupported code or
+unrepresented allocated member prevents the entire exemption. No arbitrary unused member is
+swept into general dead-code/data elimination. All selected code entities still need an actual
+eligible inlined call, or the unchanged identical-used-copy proof.
 
-Removed helper records and per-call target-null rewrites expose `unwind_sections`, naming each
-companion's section/index/kind/size/object. Existing complete source/object/profile hashes bind
-contents. Helpers/metadata earn no catalogue credit. Every typed-contract, manual ABI, visible
-[INFERENCE] and explicit QUALIFIED historical-identity obligation remains mandatory.
+ELF reading now preserves complete allocated section-group membership separately from the
+frozen section-placement set, including zero-sized allocated witnesses that placement omits.
+Object combination remaps every witness within its object, preserving absent-section witnesses
+rather than dropping them. Both the ELF membership and all visible same-signature sections
+are checked; all supplied copies are included. Unsupported non-COMDAT/unknown group semantics
+fail closed. This guard applies to the new unwind exemption, not a reinterpretation of v6 R1.
 
-## Evidence: specifications and original image
+Coverage includes kept callers/functions, bound and unplaced data/BSS, unsupported and uncalled
+helper members, a live member hidden in another copy in both object orders, missing witnesses,
+unknown/non-COMDAT flags, valid complete groups and multiple independently used helpers. A real
+ARMCC COMDAT template fixture is linked successfully, then a zero-size allocated group member
+is appended by changing **only ELF metadata**; the reader preserves it and v8 refuses the group
+in both combined-object orders. No instruction/unwind payload or relocation is patched.
 
-Primary references, also linked in `docs/LINKER.md`:
+## P2: complete compact extab, with a separate descriptor terminator
 
-- [ARM DUI0474K §§4.12 and 4.3](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2):
-  inlining precedes unused-section elimination; elimination removes whole unreachable sections
-  and preserves roots/used sections. §3.7 separately says exception tables are silently discarded
-  if no code throws. V7 does **not** implement that general stripping rule.
-- [Arm EHABI32: object-producer Sections / Index table entries](https://github.com/ARM-software/abi-aa/blob/main/ehabi32/ehabi32.rst):
-  index fragment per code section; SHT_ARM_EXIDX, SHF_LINK_ORDER, sh_link to code; two-word
-  PREL31 function key plus compact/extab/CANTUNWIND format.
-- [ELF gABI SHF_LINK_ORDER](https://gabi.xinuos.com/elf/03-sheader.html#section-flags): described
-  section and metadata are retained/discarded together; metadata back-references do not establish
-  liveness of the described section.
+**Before (sealed v7 F02):** v7 accepted truncated personality-0/1/2 extab of 4/8/8 bytes while
+refusing complete 8/12/12-byte examples. The size rule counted only header/unwind words and
+omitted the empty descriptor list's mandatory zero terminator.
 
-[INFERENCE] Applying these documented semantics to armlink drops an eliminated function's
-exclusive exidx fragment and then exclusively reached extab. No armlink is available in the
-supplied toolchain, so no fresh native-armlink execution is claimed.
+**Corrected v8 rule:** `_compact_unwind_prefix_size` counts only the header/unwind words. The
+out-of-line entry must have exactly one further zero word, whose value is checked independently
+at the end of that prefix. Complete size is:
 
-`research/linker/exidx_census.py` against the synced branch exited **0**. It emits counts,
-addresses and candidate ELF metadata only, not bytes or disassembly. Command/output:
-`scratch/exidx/v7/image-census-command.json` / `image-census.json`.
+| Personality | Header/unwind prefix | Complete empty-descriptor extab |
+|---|---:|---:|
+| 0 | 4 bytes | **8 bytes** |
+| 1 or 2 | `4 * (1 + N)` | **`4 * (2 + N)`** |
 
-| Original-image structural observation | Count |
-|---|---:|
-| Word-aligned PREL31-to-text first-word candidates: text / rodata / data | 2,921 / 1 / 0 |
-| Those with a loose possible EHABI second word: text / rodata / data | 47 / 0 / 0 |
-| Loose non-code candidates targeting a catalogued function/entry start | 0 |
-| Loose adjacent increasing-key pairs outside catalogued code | 1 |
+N is the encoded count of **additional unwind words**, not including the descriptor terminator.
+For N=1 the long examples are 12 bytes. Missing/partial/nonzero terminators, incomplete/excess
+unwind words, nonempty descriptors, descriptor relocations, combined/trailing entries, generic
+formats and interior targets remain refusals. A one-word compact personality-0 entry directly
+inside exidx is separate and remains supported without an extab/descriptor word.
 
-The only rodata key candidate (`0x00229b18`) is not followed by an EHABI second word. The loose
-text pair at `0x0015c57c` / `0x0015c584` lies in an existing function's non-code extent; both decoded
-keys are halfword-offset **ARM** interior addresses, not valid ARM entries. Classification is
-recorded in `image-census-pair-classification.json`. **No authenticated original EHABI table was
-identified.** [INFERENCE] The image is consistent with discarded tables, but the flat `code.bin`
-has no ELF section headers or authenticated exidx bounds: absence and original exception-link
-flags cannot be proved from it alone. This inference never authorizes blanket removal.
+Fixtures and exact GATES text are corrected with the implementation. Positives cover all three
+personalities, long counts 0/1/3/255, exact NONE dependencies, and the unchanged inline-index
+case. Negatives cover the complete class of framing errors above, not just the three reported
+sizes.
 
-Candidate relation: the final census records **13** allocated exidx fragments from copied
-r4026 hooks (2), r41154 destructors (9) and tu659 destructors (2). All are eight-byte
-SHF_LINK_ORDER/SHT_ARM_EXIDX sections linked to their own text, with PREL31 back to that text.
-`candidate-entry-forms.json` classifies all **13 as CANTUNWIND**, without payload. Candidate
-compiler emission does not establish original image entries. Real compact-extab elimination is
-not claimed from these objects; that coverage is synthetic.
+Primary framing source: [EHABI32 personality routine exception-handling entries](https://github.com/ARM-software/abi-aa/blob/main/ehabi32/ehabi32.rst#personality-routine-exception-handling-table-entries).
+The [ELF section-group unit rule](https://gabi.xinuos.com/elf/03-sheader.html#section-groups)
+requires interrelated group sections to be included/omitted together. [LLVM's ARM ELF producer](https://github.com/llvm/llvm-project/blob/main/llvm/lib/Target/ARM/MCTargetDesc/ARMELFStreamer.cpp)
+also emits the zero when no handler data is provided. The armlink-specific elimination argument
+remains the documented/inferred one in `docs/LINKER.md`; no native armlink execution is claimed.
 
-## Focused tests and regression coverage
+## All other own-unwind constraints remain mandatory
 
-Final synced implementation command, **exit 0, 215 tests, OK**:
+V8 first requires every unchanged corrected-v6 R1 condition: a complete source-defined eligible
+4/8-byte ARM helper, no original binding through aliases/copies, no roots, correct entry/COMDAT
+proof, I1–I3, original call-site ABI/CFG consistency and elimination of every other reference.
+Only its own readonly allocated non-executable SHT_ARM_EXIDX/SHF_LINK_ORDER section may be
+removed: sh_link to the exact text section, one complete eight-byte index, exact entry-only
+PREL31 key, no shared/combined/duplicate entry and no kept-function key. Extab must be exclusive
+readonly SHT_PROGBITS, exact complete supported compact form, and reached only by its own
+index's offset-four PREL31. The index has no other incoming allocated reference.
+
+Every supplied allocated section, even unplaced, is censused. Other incoming references,
+required original placement, unsupported outgoing relocations/dependencies, independent names,
+roots, bindings, foreign ownership and link-order dependencies refuse removal. Only structural
+PREL31 and the exact matching offset-zero undefined personality NONE dependency are modeled in
+metadata. No original unwind bytes or fabricated original helper address is introduced. A kept
+function's separate index is never selected for elimination.
+
+Receipts retain `unwind_sections` and target-null per-call rewrites with complete defining
+source/object/profile binding and object-local ownership. Helpers and metadata earn no credit.
+All typed-contract, manual ABI, source-policy, visible [INFERENCE] and explicit QUALIFIED R1
+historical-identity obligations remain mandatory. Group closure and valid table framing do not
+recover the original helper's identity or call graph.
+
+## Exercised correction and focused regressions
+
+Requested focused command, **exit 0, 226 tests, OK** (no full suite):
 
 ```text
 /home/michael/code/kanken-training-2-decomp/.venv/bin/python -m unittest \
   tests.test_inplace tests.test_match tests.test_literal_pools
 ```
 
-Receipt: `scratch/exidx/v7/focused-tests.json`. No full suite was run.
+Receipt: `scratch/exidx/v8/focused-tests.json`. This includes eleven additional test methods
+beyond the previous 215-test run, including the actual ELF zero-size group witness. Existing
+alias/CFG/effect/placement/literal-model regressions remain active. V7 is explicitly tested as
+retired and absent from selectable models, with the F01/F02 reason; no v7 rule is executed.
 
-`RemovedUnwindModelTest` covers fail-before/pass-after **v6/v7** behavior for CANTUNWIND,
-compact inline/extab entries and zero-size aliases; personalities 0/1/2 and exact dependencies;
-real frozen-game D1/D2 ELF metadata in both combined-object orders; malformed type/flags/link/
-extent/alignment, shared/combined/duplicate indexes, kept/interior keys, every other incoming
-reference even from unplaced sections, unknown outgoing relocations/dependencies, shared/
-interior/combined/generic extab, roots, independently named/original-bound metadata and extra
-link-order dependencies. A kept caller's separate index is never selected. The new explicit-
-binding regression confirms v7 inherits corrected v6/v4 placement without requiring a borrowed
-full-section identity. Existing composite switch/effect/alias tests remain active.
+`scratch/exidx/v8/corrections.py` exercises **22 new-v8-only cases**, all expected outcomes:
+**5 exact caller links and 17 fail-closed refusals**. Command exited **0**. The program binds the
+sealed review/report hashes as the before evidence and explicitly records `v7_rerun: false`.
+Outputs: `corrections.json`, `corrections-command.json`.
 
-A first new explicit-binding fixture mistakenly supplied an unregistered **global** through only
-`names_to_address`; v4, v6 and v7 all correctly rejected it at the inherited global-definition
-binding guard (215 tests, three subcase errors). `focused-tests-fixture-failure.json` preserves
-that exit-1 result. The API-only subcase was corrected to a local symbol, without changing any
-model behavior. Corrected pre-sync and final post-sync runs both passed 215 tests. This is not
-an unchanged-input rerun-to-hide a model failure.
+| Sealed counterexample/class | Before, v7 review | After, v8 |
+|---|---|---|
+| Kept caller shares helper/index COMDAT group | Incorrect success | Refused before rewrite/removal publication |
+| Another copy contains a different kept member | Missing whole-group guarantee | Refused in both object orders |
+| Ordinary bound/unplaced data or missing allocated member | Signature-only proof insufficient | Refused |
+| Complete removable helper/own-index group | Positive control | Exact caller link |
+| Personality-0 complete 8 B | Incorrect refusal | Exact caller link |
+| Personality-1/2 complete 12 B (N=1) | Incorrect refusal | Exact caller links |
+| Personality-0/1/2 truncated 4/8/8 B | Incorrect success | Refused |
+| Nonempty descriptors or trailing zero/combined data | Unsupported | Refused |
+| Direct compact personality-0 inside exidx | Positive control | Exact caller link |
 
-## Exact smoke input context
+## Re-smoke input context and every natural outcome
 
-Use **`scratch/exidx/v7/`** for final evidence; the outer `scratch/exidx/` contains historical
-prototype records that must not be relabeled. `inputs.json` binds 27 complete copied source/
-profile cases, covering every named author. No author source was edited. Tu659/r41307/r41103
-RESULT.json files were absent at initial scope; their available refusal receipts and compiled
-companion filenames supplied the recorded closure. R41307's complete cases include the actual
-`parameter_lifetime_nothrow.cpp` companion.
+The same 27 frozen copied source/profile cases cover all named authors. Sources/helpers/names
+remain those bound in `scratch/exidx/v7/inputs.json`; v8's `inputs.json` preserves the closure
+and source hashes. Current worktree config and all **471 headers** exactly equal the reviewed
+v7 frozen context (`v8/context.json`); no runtime include override, compiler/profile/flag change,
+source shim or new original binding was used. All executed commands use this worktree's matcher
+and explicit v6/v8 with `--show 0`.
 
-Every final smoke uses **this worktree's matcher**, frozen profiles/executables/flags and main's
-current canonical config/includes. Config hashes matched main. The first integration tip had
-three stale headers (`aux_effect.h`, `service_callbacks.h`, `service_runtime.h`), so the smoke
-runner froze all **471** current-main headers under `v7/context/include` and selected only that
-compiler include root. The requested `5bb20a9` sync then brought tracked headers to the same
-frozen main inputs, without tool-code changes. `context-manifest.json` and `context-synced.json`
-bind the snapshots, initial drift and its resolution. No canonical header edit or source shim
-was used to force a result; proposed author names remain unadopted.
+The two r41224 source/profile cases already have reported current-header compiler failures
+(`PaneMaterialView` undefined). They were **not rerun merely to confirm that failure**. Their
+four historical v6/v7 exit-2 receipts remain explicitly referenced, never relabeled as v8
+receipts or assigned invented fresh exits. All other 25 source/profile cases were re-smoked
+under both selectors: **50 fresh commands**.
 
-## Every natural-source outcome
+Exits: 0 = every surviving function MATCH; 1 = completed comparison differs; 2 = compile/link
+refusal. Sizes are candidate/target bytes; `+0x...` is first differing offset.
 
-Exits: 0 = all surviving functions MATCH; 1 = completed comparison differs; 2 = compile/link
-refusal. Sizes are candidate/target bytes; `+0x...` is first differing offset. These are private,
-unaccepted author-loop results, not checkpoint credit.
-
-| Copied case ID | Profile | V6 exit/outcome | V7 exit/outcome |
+| Frozen case | Profile | V6 fresh result | V8 fresh result |
 |---|---|---|---|
-| `tu659-final` | game | 2: exidx live ref | 1: MISMATCH 2444/2444; +0x39d |
-| `r41103-game` | game | 2: exidx live ref | 1: MISMATCH 1236/1248; +0x10 |
-| `r41154-game` | game | 2: exidx live ref | 1: MISMATCH 12320/12292; +0x24 |
-| `r41103-sdk` | sdk | 2: exidx live ref | 1: MISMATCH 1204/1248; +0x4 |
+| `tu659-final` | game | 2: exidx reference | 1: MISMATCH 2444/2444; +0x39d |
+| `r41103-game` | game | 2: exidx reference | 1: MISMATCH 1236/1248; +0x10 |
+| `r41154-game` | game | 2: exidx reference | 1: MISMATCH 12320/12292; +0x24 |
+| `r41103-sdk` | sdk | 2: exidx reference | 1: MISMATCH 1204/1248; +0x4 |
 | `r41154-sdk` | sdk | 2: call-ABI refusal | 2: call-ABI refusal |
-| `r41103-middleware` | middleware | 2: exidx live ref | 1: MISMATCH 1244/1248; +0x4 |
-| `r41154-middleware` | middleware | 2: exidx live ref | 1: MISMATCH 12416/12292; +0x5 |
-| `r41128-early` | game | 2: exidx live ref | 1: MISMATCH 5236/5180; +0x29 |
+| `r41103-middleware` | middleware | 2: exidx reference | 1: MISMATCH 1244/1248; +0x4 |
+| `r41154-middleware` | middleware | 2: exidx reference | 1: MISMATCH 12416/12292; +0x5 |
+| `r41128-early` | game | 2: exidx reference | 1: MISMATCH 5236/5180; +0x29 |
 | `r41128-final` | game | 2: call-ABI refusal | 2: call-ABI refusal |
-| `r4026-member-hooks` | middleware | 2: exidx live ref | **0: MATCH 164/164** |
-| `r4076-middleware` | middleware | 2: exidx live ref | 1: MISMATCH 140/140; +0x14 |
-| `r4076-game` | game | 2: exidx live ref | 1: MISMATCH 140/140; +0x5 |
-| `r4088-cpp-hook` | game | 2: exidx live ref | 1: MISMATCH 804/808; +0x30 |
-| `r41207-cpp-result` | game | 2: exidx live ref | 1: MISMATCH 60/60; +0x2f |
-| `r41224-game` | game | 2: compile / header drift | 2: compile / header drift |
-| `r41224-middleware` | middleware | 2: compile / header drift | 2: compile / header drift |
-| `r41234-game` | game | 2: exidx live ref | 1: MISMATCH 188/192; +0x0 |
-| `r41234-sdk` | sdk | 2: exidx live ref | 1: MISMATCH 176/192; +0x0 |
-| `r41234-middleware` | middleware | 2: exidx live ref | 1: MISMATCH 188/192; +0x0 |
-| `r41262-001bd68c` | game | 2: exidx live ref | **0: MATCH 696/696** |
-| `r41262-001c09e8` | game | 2: exidx live ref | 1: MISMATCH 840/840; +0xa8 |
-| `r41275-cpp-predicate` | middleware | 2: exidx live ref | 1: MISMATCH 640/636; +0x24 |
+| `r4026-member-hooks` | middleware | 2: exidx reference | **0: MATCH 164/164** |
+| `r4076-middleware` | middleware | 2: exidx reference | 1: MISMATCH 140/140; +0x14 |
+| `r4076-game` | game | 2: exidx reference | 1: MISMATCH 140/140; +0x5 |
+| `r4088-cpp-hook` | game | 2: exidx reference | 1: MISMATCH 804/808; +0x30 |
+| `r41207-cpp-result` | game | 2: exidx reference | 1: MISMATCH 60/60; +0x2f |
+| `r41224-game` | game | Not rerun; reported compiler failure | Not run; same unresolved prerequisite |
+| `r41224-middleware` | middleware | Not rerun; reported compiler failure | Not run; same unresolved prerequisite |
+| `r41234-game` | game | 2: exidx reference | 1: MISMATCH 188/192; +0x0 |
+| `r41234-sdk` | sdk | 2: exidx reference | 1: MISMATCH 176/192; +0x0 |
+| `r41234-middleware` | middleware | 2: exidx reference | 1: MISMATCH 188/192; +0x0 |
+| `r41262-001bd68c` | game | 2: exidx reference | **0: MATCH 696/696** |
+| `r41262-001c09e8` | game | 2: exidx reference | 1: MISMATCH 840/840; +0xa8 |
+| `r41275-cpp-predicate` | middleware | 2: exidx reference | 1: MISMATCH 640/636; +0x24 |
 | `r3L25-game` | game | 2: call-ABI refusal | 2: call-ABI refusal |
-| `r3L25-middleware` | middleware | 2: exidx live ref | 1: MISMATCH 3332/3340; +0xc |
-| `r41307-001e722c-complete` | game | 2: exidx live ref | 1: MISMATCH 360/364; +0x18 |
-| `r41307-001e7db0-complete` | game | 2: exidx live ref | 1: MISMATCH 344/348; +0x9 |
-| `r41307-001e395c-complete` | game | 2: exidx live ref | 1: MISMATCH 440/408; +0x38 |
+| `r3L25-middleware` | middleware | 2: exidx reference | 1: MISMATCH 3332/3340; +0xc |
+| `r41307-001e722c-complete` | game | 2: exidx reference | 1: MISMATCH 360/364; +0x18 |
+| `r41307-001e7db0-complete` | game | 2: exidx reference | 1: MISMATCH 344/348; +0x9 |
+| `r41307-001e395c-complete` | game | 2: exidx reference | 1: MISMATCH 440/408; +0x38 |
 
-**54 final natural commands**: v6 = 27 exit-2; v7 = **2 exit-0, 20 exit-1, 5 exit-2**. R41224's
-unchanged historical source fails compilation because `PaneMaterialView` is undefined against
-current headers; no helper/header workaround was introduced. Those two cases do not demonstrate
-v7 linking. Still-refused ABI sites remain r41154/sdk `+0x7f8`, r41128/final `+0x35c` and
-r3L25/game `+0x668`, unchanged by v7.
+Fresh v6: **25 exit-2**. Fresh v8: **2 exit-0, 20 exit-1, 3 exit-2**. The same independent
+ABI blockers remain r41154/sdk `+0x7f8`, r41128/final `+0x35c`, r3L25/game `+0x668`; neither
+correction bypasses them. Every executed command/exit and actual receipt/hash is recorded in
+`v8/summary.json` and `v8/EVIDENCE.json`, with logs under `v8/smoke/CASE/{v6,v8}/`.
 
-Every command, exit, stdout/stderr and actual receipt is under
-`v7/smoke/CASE/{v6,v7}/`. `v7/summary.json` and the committed **`v7/EVIDENCE.json`** list every
-receipt path/SHA-256, outcome, complete extent and removal count.
+### Fresh v8 MATCH receipts — no acceptance claim
 
-### MATCH receipts (not acceptance)
+- `func_0013f06c`, middleware, 164/164:
+  `scratch/exidx/v8/smoke/r4026-member-hooks/v8/func_0013f06c_v3.result.json`, SHA-256
+  **`d5327a047a905e8860d9a46f6961fb0c3abb1913b444e5826c74fd282b643814`**.
+- `func_001bd68c`, game, 696/696:
+  `scratch/exidx/v8/smoke/r41262-001bd68c/v8/func_001bd68c.result.json`, SHA-256
+  **`da529546074c412bdb545d544aaaed14527cbbbfba05fe04737c8c9bd3240ac2`**.
 
-- r4026 `func_0013f06c`, middleware, 164/164:
-  `scratch/exidx/v7/smoke/r4026-member-hooks/v7/func_0013f06c_v3.result.json`, SHA-256
-  **`1ee546f54b5107d1215db6c1bddf5449b467eaa83d93269a9820f89357a75278`**.
-- r41262 `func_001bd68c`, game, 696/696:
-  `scratch/exidx/v7/smoke/r41262-001bd68c/v7/func_001bd68c.result.json`, SHA-256
-  **`adff2973069cece6784544286f922826a5b50a92ff6097c3f004ba9cffa399c8`**.
+These are the same private identity witnesses already independently confirmed by the v7 review,
+not new accepted functions. Historical helper identity remains [INFERENCE]/QUALIFIED. Full typed
+contract and source review remains mandatory; in particular the pre-existing drawing-screen
+INTEGRATOR markers/unintegrated declarations are not a G3/G6 pass.
 
-Both identities already had separately reported C-helper/v3 witnesses; these natural C++ helper
-results are not two newly accepted functions. [INFERENCE] Historical helper identity/call
-provenance remains qualified, and typed/source review remains mandatory.
+## Accepted-function regressions
 
-## Fifteen supplied accepted-regression rows
+Every one of the **15 supplied command rows** was rerun under v6 and v8: **30 commands, all
+exit 0**, complete exact extents, zero rewrites and zero removed helpers. The input manifest
+is `scratch/worktrees/r1-jumptables/scratch/integrator/r1-jumptables/r3/regression-commands.json`.
+It contains five unique functions repeated under three historical selectors; execution did
+not deduplicate the rows.
 
-Input: `scratch/worktrees/r1-jumptables/scratch/integrator/r1-jumptables/r3/regression-commands.json`.
-All **15 rows** ran under both v6 and v7 with distinct directories: **30 commands, every exit 0**.
-The file contains five unique functions repeated under three historical selectors; execution did
-not silently deduplicate the rows. Only the selected linker identity/output path and explicit
-main-header context wrapper changed; compiler/profile/flags remained frozen.
-
-| Function | Input rows | Exact bytes | V6 exits | V7 exits |
+| Function | Original rows | Exact bytes | V6 exits | V8 exits |
 |---|---|---:|---|---|
 | `func_00105084` | 1, 6, 11 | 64 | 0, 0, 0 | 0, 0, 0 |
 | `func_0010d604` | 2, 7, 12 | 64 | 0, 0, 0 | 0, 0, 0 |
@@ -241,41 +231,44 @@ main-header context wrapper changed; compiler/profile/flags remained frozen.
 | `func_0018fdd4` | 4, 9, 14 | 40 | 0, 0, 0 | 0, 0, 0 |
 | `func_00195254` | 5, 10, 15 | 224 | 0, 0, 0 | 0, 0, 0 |
 
-Each receipt has exact complete extent, zero rewrites and zero removed helpers. Commands and
-MATCH receipts: `scratch/exidx/v7/accepted/rowNN-func_XXXXXXXX/{v6,v7}/`; every receipt hash and
-exit is in `v7/EVIDENCE.json`.
+Commands/receipts: `scratch/exidx/v8/accepted/rowNN-func_XXXXXXXX/{v6,v8}/`; every receipt path,
+SHA-256 and exit is in `v8/EVIDENCE.json`.
 
-## Frozen-model equivalence against the synced base
+## Frozen-model equivalence
 
-The snapshot of `5bb20a9` linker/registry blobs is byte-identical to the corrected-v6 `d525edd`
-blobs. `fingerprint_frozen.py` loads the base and current implementation in separate processes
-and links identical already-compiled objects/image/catalogue/names plus synthetic fixtures.
-No compilation is involved.
+Extracted linker/registry source blobs directly from given base `5bb20a9`; the fingerprint
+program loads that base and current code in separate processes and links identical already
+compiled inputs. **40 cases × five active frozen models = 200 outcomes compare byte-identically**
+for **strict-v1 / v2 / v3 / v4 / v6**. Both commands exit **0**. V5's retirement refusal remains
+unchanged. V7 retirement is tested separately, not falsely compared as an active old policy.
 
-**40 cases × 5 active frozen models = 200 linker outcomes compare byte-identically as serialized
-records**, for **strict-v1 / v2 / v3 / v4 / v6**. Both commands exited **0**. Records include hashes
-of every placed byte buffer, placement metadata, full rewrites, removed-helper metadata and
-literal rebindings, or exact refusal type/reason. Frozen policy flags agree, and the v5 retirement
-refusal is unchanged. Coverage: 25 compiled natural cases, five accepted functions, eight
-plain/alias/unwind/pointer/root synthetic cases and two independently-bound partial-symbol cases.
-The two current-header compile refusals have no object and are not counted as linker cases.
+Records include placed-byte hashes, placement metadata, full rewrites, removed entities and
+literal rebindings, or exact refusal type/reason. Coverage is 25 compiled natural cases, five
+accepted functions and ten synthetic full/alias/unwind/pointer/root/explicit-binding cases.
+The known compiler-failure cases have no objects and are not counted as linker cases.
 
-Evidence: `v7/frozen-synced-equivalence.json`, `frozen-synced-baseline.json`,
-`frozen-candidate.json`. Both serialized output SHA-256 values are:
+Both serialized fingerprints have SHA-256:
 **`f4fa701d4bc700e043263be45e95dfe6310eebe6d50950bd226d4af5fbc788bc`**.
-`v7/EVIDENCE.json` binds commands, code/blob hashes and all supporting artifact hashes. This is
-finite regression evidence, not a mathematical proof for every malformed object. Older active
-models never enter the new companion rule; v5 remains retired and inline v1 remains retired.
+Artifacts: `v8/frozen-equivalence.json`, `frozen-baseline.json`, `frozen-current.json`, including
+exact commands and base-code hashes. This is finite evidence, not a mathematical proof over all
+malformed objects. Frozen selectors do not enter the new companion/group/descriptor logic.
 
-## Historical records and delivery artifacts
+## Original-image inference and remaining limits
 
-The original assignment's v5/prototype-v6 smokes and 15-row regressions were also executed and
-are retained under the outer `scratch/exidx/`. Initial r41307 runner omissions and the corrected
-complete closures are explicitly recorded there, not erased or blamed on authors. Those records
-are historical only after Main's model-name/base change. The final corrected-base evidence is
-exclusively under **`scratch/exidx/v7/`**.
+The existing structural census and its inference were independently reproduced/confirmed by the
+sealed review and are retained unchanged at `scratch/exidx/v7/image-census.json`, SHA-256
+`65cd4894320bc457706cbb4c333f0104c94fdab71f7559f5c8fb1df7279d4afe`. It was not rerun solely
+to reconfirm a reported observation. No authenticated original exidx table is identified;
+absence and original exception-link flags remain **[INFERENCE]**, never a stripping premise.
+A flat image lacks original section headers/table bounds. Candidate CANTUNWIND fragments do
+not establish corresponding original entries, and group/format corrections do not change that.
 
-Committed handoff artifacts are this file, `scratch/exidx/GATES-DRAFT.md` and the compact
-payload-free `scratch/exidx/v7/EVIDENCE.json`. Complete receipts, copied sources, objects,
-header snapshots and reproduction drivers stay private in the worktree. No ROM payload,
-disassembly, packet, compiler or author candidate source is committed.
+No native armlink execution, complete standalone all-source link, full original unwind-table
+placement or exception-behavior proof is claimed. Exact caller bytes, group closure and complete
+compact framing do not recover historical helper identity. Independent v8 review, Main's full
+suite and the explicit frozen adoption path remain required.
+
+Committed artifacts are this updated handoff, `docs/LINKER.md`, the new exact v8 gate proposal
+and compact evidence ledger. Old v7 evidence and rejected text remain unchanged. Complete new
+private receipts/objects/header-bound input records and reproduction drivers stay in the
+worktree; no compiler, ROM payload, packet, disassembly or author candidate source is committed.
