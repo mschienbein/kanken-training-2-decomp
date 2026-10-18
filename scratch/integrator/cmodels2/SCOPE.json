@@ -137,6 +137,8 @@
       ],
       "receipt": "scratch/cm2/final/menu_teardown.result.json",
       "receipt_sha256": "0b91da2ef8719d6a09403ed7c982b07bfbba2188a0a08cfa5b134ca3cfa1bf10",
+      "public_metadata": "scratch/integrator/cmodels2/CANDIDATE-WITNESS.metadata.json",
+      "public_metadata_sha256": "1b7fdc277053e2f5d23fa271bfed61f38b8f66e7d468471a59e6a61acc16a050",
       "exit_code": 0,
       "status": "match",
       "emitted_catalogued_functions": [
@@ -276,7 +278,9 @@
       "functions": 1621,
       "bytes": 195908,
       "all_exit_zero": true,
-      "at_risk_units": [],
+      "selected_model_byte_risk_units": [],
+      "pending_typed_contract_risk_units": ["src/models/func_001b8908/func_001b8908_removed.cpp"],
+      "pending_typed_contract_risk_record": "scratch/integrator/cmodels2/ACCEPTED-TYPE-RISKS.json",
       "headers_harness_config_unchanged_during_measurements": true,
       "record": "scratch/integrator/cmodels2/ACCEPTED-V8.json",
       "record_sha256": "31400f7a3aa534e903df366872291e6179ba4ca8771265e783c2f0202a90770f"
@@ -292,7 +296,7 @@
       "independent checkpoint review",
       "finalize"
     ],
-    "risk_assessment": "No observed selected-model byte/extent/compile regression in any prior accepted or prepared-cmodels credited unit. This is per-unit evidence only; whole-build equality/overlap/COMDAT ownership and independent typed/unwind reviews remain Main gates after cmodels finalizes."
+    "risk_assessment": "No observed selected-model byte/extent/compile regression in any prior accepted or prepared-cmodels credited unit. One pending typed receiver fork affects prepared func_001b8908 versus the c009 func_00177b84 definition and the deferred late func_00169018; Main was notified and the fork was not coerced away. This is per-unit evidence only; whole-build equality/overlap/COMDAT ownership and independent typed/unwind reviews remain Main gates after cmodels finalizes."
   },
   "handoff_merge": "Pending Main notification of finalized cmodels main tip; must merge before handoff, retaining this exact v8/L1 selection."
 }

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "classification": "pending typed integration risk, not an observed selected-model byte mismatch",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "risks": [
+    {
+      "callee": "func_00177b84",
+      "prepared_cmodels_caller": "func_001b8908",
+      "caller_source": "src/models/func_001b8908/func_001b8908_removed.cpp",
+      "caller_line": 29,
+      "prepared_header": "include/game/training_screen.h:80",
+      "prepared_parameter": "MessageLayout*",
+      "prepared_layout": "MessageEntry* entries[3] at +0; x/y at +0xc/+0x10; reserved bytes +0x14..+0x1f; lines at +0x20",
+      "other_owner": "c009",
+      "other_definition": "scratch/worktrees/c009/src/wave19/func_00177b84.c:3-19",
+      "other_parameter": "WidgetActivity*",
+      "other_layout": "DisplayHandle* handles[7] at +0; state at +0x1c",
+      "late_caller": "scratch/research/residual-families/signed-byte/erased-property-getter/func_00169018.c",
+      "late_parameter": "WidgetContainer*; canonical view contains DisplayHandle* handle at +8",
+      "observation": "All separately measured body bytes may MATCH while their complete receiver contracts remain inconsistent. These layouts may be partial overlapping views, but no common complete owner or identity has been proven in cmodels2.",
+      "disposition": "Main notified twice, including the exact prepared caller. New func_00169018 deferred; neither prepared cmodels nor c009 contracts changed in this branch. The prepared caller remains a pending typed-contract review item and cannot be advertised as ABI-cleared merely because its v8 comparison passed.",
+      "responsibility": "Main coordinates the prepared cmodels/c009 integration adjudication before accepting the affected contracts. This file does not retract or rewrite any immutable MATCH receipt."
+    }
+  ],
+  "selected_model_byte_risk_units": [],
+  "full_G3_argcheck_manual_ABI_verification_run": false
+}

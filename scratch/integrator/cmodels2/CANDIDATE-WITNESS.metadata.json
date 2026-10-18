@@ -1,0 +1,151 @@
+{
+  "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/menu_resources/menu_teardown.cpp",
+  "source_sha256": "0d10940a421d8caa12ba6c5b13a21dcdf25aad0f504121ce84010ebd4fee0f8b",
+  "profile": "game",
+  "compiler": "armcc_504_82",
+  "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+  "flags": [
+    "--cpu=MPCore",
+    "--fpmode=fast",
+    "--apcs=/interwork",
+    "--arm",
+    "--split_sections",
+    "--signed_chars",
+    "-O3",
+    "-Otime"
+  ],
+  "object_sha256": "c2e325d2bbe51fb5abf254261c6f2fa5e6853a922174bb210f32b6cfe40fbfbd",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+  "linker_model": "armlink5-inline-branchnop-v8",
+  "literal_model": "anonymous-string-records-v1",
+  "literal_rebindings": [],
+  "proposed_names": null,
+  "extra_sources": [
+    {
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models2/menu_resources/ui_geometry.cpp",
+      "source_sha256": "3aec912a174809659a0038220c41d8d3c717eb3ad46bbc7bc3f9725222ff46ea",
+      "object_sha256": "22477f299de8283bd8ac22db005616c05cde5930a006832e49b92fcbfc7baf98"
+    }
+  ],
+  "removed_callees": [
+    {
+      "symbols": [
+        "_ZN13MenuResources5PointD1Ev",
+        "_ZN13MenuResources5PointD2Ev"
+      ],
+      "section": "i._ZN13MenuResources5PointD1Ev",
+      "size": 4,
+      "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+      "unwind_sections": [
+        {
+          "section": ".ARM.exidx",
+          "section_index": 5,
+          "size": 8,
+          "kind": "exidx",
+          "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+        }
+      ]
+    },
+    {
+      "symbols": [
+        "_ZN13MenuResources9RectangleD1Ev",
+        "_ZN13MenuResources9RectangleD2Ev"
+      ],
+      "section": "i._ZN13MenuResources9RectangleD1Ev",
+      "size": 4,
+      "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+      "unwind_sections": [
+        {
+          "section": ".ARM.exidx",
+          "section_index": 6,
+          "size": 8,
+          "kind": "exidx",
+          "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "func_001e958c",
+      "address": 2004364,
+      "size": 296,
+      "candidate_size": 296,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": [
+        {
+          "offset": 116,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "_ZN13MenuResources9RectangleD1Ev",
+              "_ZN13MenuResources9RectangleD2Ev"
+            ],
+            "section": "i._ZN13MenuResources9RectangleD1Ev",
+            "size": 4,
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 6,
+                "size": 8,
+                "kind": "exidx",
+                "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+              }
+            ]
+          }
+        },
+        {
+          "offset": 200,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "_ZN13MenuResources5PointD1Ev",
+              "_ZN13MenuResources5PointD2Ev"
+            ],
+            "section": "i._ZN13MenuResources5PointD1Ev",
+            "size": 4,
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 5,
+                "size": 8,
+                "kind": "exidx",
+                "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+              }
+            ]
+          }
+        },
+        {
+          "offset": 212,
+          "rule": "inline_nop",
+          "target": null,
+          "removed_callee": {
+            "symbols": [
+              "_ZN13MenuResources5PointD1Ev",
+              "_ZN13MenuResources5PointD2Ev"
+            ],
+            "section": "i._ZN13MenuResources5PointD1Ev",
+            "size": 4,
+            "object": "scratch/cm2/final/extra-0-ui_geometry.o",
+            "unwind_sections": [
+              {
+                "section": ".ARM.exidx",
+                "section_index": 5,
+                "size": 8,
+                "kind": "exidx",
+                "object": "scratch/cm2/final/extra-0-ui_geometry.o"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "publication_policy": "Instruction words omitted; no ROM bytes, hex dumps, disassembly or instruction packets are published. The exact private/local receipt is bound by SHA-256 in SCOPE.json."
+}

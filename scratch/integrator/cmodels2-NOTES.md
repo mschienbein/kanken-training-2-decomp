@@ -130,11 +130,19 @@ adds its own typed CFG/helper/complete-unwind obligations. `MODEL-TRANSITION.jso
 existing affected source, helper closure and receipt. Passing per-unit checks do not prove a
 joint whole build's overlap/unique-owner/full-image gates and do not waive independent review.
 
+There is one separately reported **typed integration risk**, not a byte regression:
+`func_001b8908` calls `00177b84` with the prepared MessageLayout view, while c009's matching
+callee defines WidgetActivity. It is the same fork that defers the late `00169018` caller.
+`ACCEPTED-TYPE-RISKS.json` records the exact fields and owner paths. Main was notified of the
+specific prepared caller; no all-consumer ABI clearance is claimed here.
+
 Records:
 
 - `scratch/integrator/cmodels2/SCOPE.json`
 - `scratch/integrator/cmodels2/ACCEPTED-V8.json`
+- `scratch/integrator/cmodels2/ACCEPTED-TYPE-RISKS.json`
 - `scratch/integrator/cmodels2/SOURCE-PROVENANCE.json`
+- `scratch/integrator/cmodels2/CANDIDATE-WITNESS.metadata.json` (no instruction words)
 - `scratch/integrator/cmodels2/MODEL-TRANSITION.json`
 - `scratch/integrator/cmodels2/POOL-ROUTING.metadata.json`
 - `scratch/integrator/cmodels2/CONTRACT-DEFERRALS.json`
