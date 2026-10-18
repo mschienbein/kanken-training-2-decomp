@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c011/canonical-inputs/material_partial_lifecycle-r3.cpp",
+    "--profile",
+    "sdk",
+    "--names",
+    "/home/michael/code/kanken-training-2-decomp/scratch/authors/r41406/names-material.json",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/c011/material-partial-native-r3"
+  ],
+  "exit_code": 1,
+  "elapsed_seconds": 0.1887660026550293,
+  "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/authors/r41406/names-material.json (not config/names.json); a MATCH here needs those bindings adopted\nMISMATCH func_001cfe24 @ 0x1cfe24 size 0x44/0x44 first difference at +0x2d\nMATCH    _ZN14MaterialObjectD1Ev @ 0x1cfe68 size 0x40/0x40\n",
+  "stderr": "",
+  "qualification": "The public native Material RTTI placement refusal is retained separately. This is one shared retail partial owner from the exact new destructor and the already collected deleting wrapper, not a second alias for the public native class."
+}

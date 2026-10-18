@@ -9,6 +9,16 @@ pass the normal checkpoint review before it is credited.
 | [ctrdecomp/NintendoWare4Ctr](https://github.com/ctrdecomp/NintendoWare4Ctr) | GPL-3.0-only | `15ddb5632db5a6f0d2f46e3827fc78df468684bd` (2026-10-11) | NW4C layout, sound, font, graphics and utility code (upstream 3.7.4; target 3.7.5) | `src/nw4c/`, curated `include/nw/`, project-owned `include/nn/` adapters and `include/preinclude.h`; per-file notices, `src/nw4c/LICENSE.txt`, `PROVENANCE.json` and `PROVENANCE-round3.json` preserve supplied origin/modifications; integration hashes are recorded with c007. c011 additionally adapts `src/checkpoint11/func_001809f4.cpp`, `src/checkpoint11/func_001c7fa0.cpp` and `src/checkpoint11/lyt_delete_animation.cpp`, with hash-bound provenance in `scratch/integrator/c011/`. |
 | [devkitPro/libctru](https://github.com/devkitPro/libctru) | zlib | `9b55eda44cf80b971503991e0c78f9bc8fe50425` (2026-09-29) | The 160-sample DSP frame length published by `ndspSync` in `libctru/source/ndsp/ndsp.c`; no implementation copied | Project-owned `NN_SND_SAMPLES_PER_FRAME` declaration in `include/nn/snd.h`; numeric-source hashes in `src/nw4c/FACTS-HEADER-GAPS.json`, license notice in `src/nw4c/LICENSE-LIBCTRU.txt`. |
 
+c011's resumed source milestone additionally adapts the pinned NW4C delay
+constructor (`src/checkpoint11/fx_delay-r3.cpp`), sound scalar helpers
+(`sound_scale_lookup-r3.cpp`) and native shape setup (`shape_setup-r6.cpp`).
+Their GPL-3.0-only notices and modification notes remain in each source;
+`include/nw/snd/snd_FxDelay.h` records the measured retail damping-default
+correction. Archive, material, DSP and text-flow reconstruction uses the
+canonical declarations and retains source-bound matching/provenance receipts
+under `scratch/integrator/c011/`; it is not a claim of recovered original
+translation-unit boundaries or Nintendo SDK source.
+
 The public Khronos GLES declaration/constant subsets in `include/GLES2/` use the
 MIT license from [OpenGL-Registry](https://github.com/KhronosGroup/OpenGL-Registry),
 including GLES2 declarations and GLES/GL legacy constants attested in

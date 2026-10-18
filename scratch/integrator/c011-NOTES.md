@@ -1,5 +1,74 @@
 # c011 — default-model author MATCH integration milestone
 
+## Resumed source milestone — 1,081-manifest publication seal
+
+This continuation supersedes the first milestone totals below; its immutable
+inventory additions are `c011/SCOPE-SUPPLEMENT-r3.json` and
+`c011/SCOPE-SUPPLEMENT-r4.json`. `c011/DISPOSITIONS-r2.json` dispositions every
+one of **85 default-model identities / 14,448 target bytes**:
+
+| Disposition | Units | Functions | Target bytes |
+|---|---:|---:|---:|
+| New collected canonical targets | 42 source units total | 45 | 5,660 |
+| Explicit contract deferrals | — | 40 | 8,788 |
+| Rehomed context, no new progress | included above | 10 | 984 |
+| Candidate manifest, including context | 42 | 55 | 6,644 |
+
+The profiles remain frozen: 22 game, 5 sdk and 15 middleware units, all
+**armlink5-inline-branchnop-v2 / none**. Main's tools-only v8 adoption
+`f24fa0b2982069c227ceb1c0111248acca55c1d5` is merged; it does not change this
+checkpoint's selected model. The newer c010 source milestone `c407dda` is the
+next required parent merge; its nine context owners are explicitly reserved.
+The heavy readiness slot remains after c010.
+
+- Collected the canonical FxDelay constructor with the measured retail 0.5f
+  damping default, the whole three-function scalar lookup TU, seven archive
+  queries with the parent's full-word finder type, and the directory opener.
+- Replaced this checkpoint's obsolete ResourceCollection/MaterialObject split
+  with one partial `MaterialObject` owner, a typed C virtual-call view, the
+  sdk destructor and the game deleting wrapper. Both whole functions MATCH;
+  no public `nw::lyt::Material` alias or duplicate vtable owner was introduced.
+- Shared the actual DSP auxiliary control union: its byte enable publication,
+  halfword mask and signed count now use one canonical block. `00152560` is
+  accepted context moved into the two-function auxiliary TU, not new credit.
+  Nine further forward moves rehome c010 contexts into whole matching TUs.
+- Unified application configuration, file-open options, resource cache,
+  notification history, text-flow, shape setup and choice activation contracts.
+  The text-flow receiver is the actual native print context and writer; both
+  directions MATCH without aliasing that writer to a second flow-state record.
+  Natural independent splits retain each complete MATCH function and its real
+  helpers; unrelated nonmatching recreation/cleanup/native functions are not
+  silently credited or given duplicate owners.
+- Canonical registration uses the existing complete PendingState and its +3
+  byte; it does not replace the accepted object with the author's four-byte
+  view or remove its pointer field.
+- Seven resumed names plus three later native self-definitions/zero-size aliases
+  are proved in `NAMES-PROVENANCE-r3.json` / `NAMES-PROVENANCE-r5.json`.
+  Three Layout names are proved but deliberately not imported: its native
+  AppendChild call conflicts with accepted `001822fc` RegistrationOwner.
+- Main's conditional math cutover is **not performed**: c010 overlaps the
+  accessor definitions in `c5f4_final2.cpp` and `func_0010dd88.cpp`.
+  `MATH-ACCESSOR-DEFERRAL-r2.json` records both affected default targets and
+  TU952's mutable/const transform return-type interaction. No cast, second
+  accessor or further MatrixIdentityW8C identity was introduced.
+- The two selector callback/factory MATCHes remain explicit lifecycle deferrals:
+  the unified actual native destructor measured 68/72 bytes, while the factory
+  MATCHed. Their author witnesses are retained, not converted to a shadow
+  destructor alias. All other accepted owner/signature conflicts have exact
+  per-row reasons in `DISPOSITIONS-r2.json`.
+- The verified `0010c138` permuter witness is separately recorded as
+  **steering-qualified**, not silently admitted as unqualified natural C.
+  Model-qualified rows remain outside this checkpoint.
+
+Collection-r4 through r8 rederive the destination copies. `POST-CUTOVER-r4.json`
+records the earlier 49 sequential unit MATCHes; `INTERFACES-r4.json` is a clean
+53-unit bounded interface check, not whole-ledger G3. The latest native text
+receiver reconciliation independently MATCHed (`TEXT-FLOW-Y-NATIVE-r8.json`).
+Final bounded dependency/interface closure follows the latest parent merge.
+No full build, suite, prepare, whole-ledger audit, argcheck or pre-review has run.
+
+## First milestone — f751f8f (historical record)
+
 **State:** committed source milestone, not accepted progress and not review-ready.
 Branch `c011-integrate`, worktree `scratch/worktrees/c011`; main was not edited.
 Started from c010 `36924e7`, then merged `9fc2592` and the final handoff tip

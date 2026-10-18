@@ -1,0 +1,11 @@
+#include "game/resource_cache.h"
+
+extern "C" ResourceCache *func_001c19e0(ResourceCache *cache)
+{
+    cache->vtable = &data_00223778;
+    cache->active = 0;
+    cache->count = 0;
+    for (unsigned i = 0; i < 4; ++i)
+        cache->entries[i] = CacheEntry(0, 0, 0, 0);
+    return cache;
+}

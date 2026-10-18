@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/text_flow_y-r5.cpp",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v2",
+    "--literal-model",
+    "none",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/c011/text-flow-y-native-r6"
+  ],
+  "exit_code": 2,
+  "elapsed_seconds": 0.20414280891418457,
+  "stdout": "",
+  "stderr": "error: armcc failed (1) on text_flow_y-r5.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/include/nw/font/../ut/../../nn/math.h\", line 64: Warning:  #1165-D: types cannot be declared in anonymous unions\n  struct MTX23 { union { f32 m[2][3]; f32 a[6]; struct { f32 _00,_01,_02,_10,_11,_12; } f; }; };\n                                                       ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/include/nw/font/../ut/../../nn/math.h\", line 65: Warning:  #1165-D: types cannot be declared in anonymous unions\n  struct MTX33 { union { f32 m[3][3]; f32 a[9]; struct { f32 _00,_01,_02,_10,_11,_12,_20,_21,_22; } f; }; };\n                                                       ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/include/nw/font/../ut/../../nn/math.h\", line 67: Warning:  #1165-D: types cannot be declared in anonymous unions\n      union { f32 m[3][4]; f32 a[12]; struct { f32 _00,_01,_02,_03,_10,_11,_12,_13,_20,_21,_22,_23; } f; };\n                                             ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/include/nw/font/../ut/../../nn/math.h\", line 80: Warning:  #1165-D: types cannot be declared in anonymous unions\n      union { f32 m[4][4]; f32 a[16]; struct { f32 _00,_01,_02,_03,_10,_11,_12,_13,_20,_21,_22,_23,_30,_31,_32,_33; } f; };\n                                             ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/include/nw/assert.h\", line 11: Error:  #35: #error directive: \"The imported NW4C candidates require the upstream release assertion configuration\"\n  #error \"The imported NW4C candidates require the upstream release assertion configuration\"\n   ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/src/checkpoint11/text_flow_y-r5.cpp: 4 warnings, 1 error\n\n"
+}

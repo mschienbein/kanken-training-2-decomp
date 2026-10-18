@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "note": "c011: collected through tools/collect.py; frozen v2/none; scope and deferrals in scratch/integrator/c011/SCOPE.json and DISPOSITIONS-r1.json.",
+ "note": "c011: collect.py only; v2/none; versioned scope/dispositions in scratch/integrator/c011. Context-only forward moves activate after the parent checkpoints finalize; they are not new credit.",
  "units": [
   {
    "source": "src/checkpoint11/func_00117684.cpp",
@@ -51,7 +51,7 @@
    "author": "c011-integration"
   },
   {
-   "source": "src/checkpoint11/func_001cfe24.cpp",
+   "source": "src/checkpoint11/material_deleting-r3.c",
    "profile": "game",
    "functions": [
     "func_001cfe24"
@@ -139,6 +139,78 @@
     "func_001809f4"
    ],
    "author": "c011-integration"
-  }
+  },
+  {
+   "source": "src/checkpoint11/archive_block_queries-r3.c",
+   "profile": "middleware",
+   "functions": ["func_001650f8", "func_001f1ebc", "func_001f1ed8", "func_001f1f08", "func_001f1f20", "func_001f1f34", "func_001f1f4c"],
+   "author": "c011-integration"
+  },
+  {
+   "source": "src/checkpoint11/archive_external-r3.cpp",
+   "profile": "middleware",
+   "functions": ["func_00143df4"],
+   "author": "c011-integration"
+  },
+  {
+   "source": "src/checkpoint11/aux_channel_publication-r3.c",
+   "profile": "middleware",
+   "functions": ["func_00155a44", "func_00155ab4"],
+   "author": "c011-integration"
+  },
+  {
+   "source": "src/checkpoint11/func_0010bed4.c",
+   "profile": "game",
+   "functions": ["func_0010bed4"],
+   "author": "c011-integration"
+  },
+  {
+   "source": "src/checkpoint11/fx_delay-r3.cpp",
+   "profile": "middleware",
+   "functions": ["func_001d23b4"],
+   "author": "c011-integration"
+  },
+  {
+   "source": "src/checkpoint11/material_dtor-r3.cpp",
+   "profile": "sdk",
+   "functions": ["func_001cfe68"],
+   "author": "c011-integration"
+  },
+  {
+   "source": "src/checkpoint11/sound_scale_lookup-r3.cpp",
+   "profile": "middleware",
+   "functions": ["func_0014fe14", "func_0014feac", "func_0014ffd8"],
+   "author": "c011-integration"
+  },
+  {"source": "src/checkpoint11/func_00185a88.cpp", "profile": "middleware", "functions": ["func_00185a88"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/fatal_header.c", "profile": "sdk", "functions": ["func_00192afc"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/guard_09-pool-first.cpp", "profile": "game", "functions": ["func_001c46c0"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/animation_binding_storage-r5.cpp", "profile": "game", "functions": ["func_001c5dd8"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/application_configuration-r5.cpp", "profile": "middleware", "functions": ["func_0010bff4", "func_0010c0a4"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/display_labels-r5.cpp", "profile": "game", "functions": ["func_00170e58"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/dsp_auxiliary-r5.cpp", "profile": "middleware", "functions": ["func_001524ec", "func_00152560"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/file_open-r5.cpp", "profile": "sdk", "functions": ["func_00112ae0"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/notification_history-r5.c", "profile": "middleware", "functions": ["func_001dbb70"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/resource_cache-r5.cpp", "profile": "middleware", "functions": ["func_001c19e0"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/service_registration-r5.cpp", "profile": "middleware", "functions": ["func_00101714"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/sound_archive_header-r5.cpp", "profile": "middleware", "functions": ["func_00147054"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/text_flow_y-r5.cpp", "profile": "sdk", "functions": ["func_0017a5f0"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/texture_upload-r5.c", "profile": "game", "functions": ["func_00137154"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/archive_stream_property-r6.cpp", "profile": "middleware", "functions": ["func_00139174"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/shape_setup-r6.cpp", "profile": "game", "functions": ["func_001c8894"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/text_flow_x-r6.cpp", "profile": "middleware", "functions": ["func_001af59c"], "author": "c011-integration"},
+  {"source": "src/checkpoint11/choice_activation-r8.cpp", "profile": "game", "functions": ["func_001b376c"], "author": "c011-integration"}
+ ],
+ "moves": [
+  {"function": "func_00152560", "from": "src/wave13/func_00152560.c", "to": "src/checkpoint11/dsp_auxiliary-r5.cpp"},
+  {"function": "func_0014fe14", "from": "src/checkpoint10/collect-r2/cutoff.cpp", "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"},
+  {"function": "func_0014feac", "from": "src/checkpoint10/func_0014feac.cpp", "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"},
+  {"function": "func_00155ab4", "from": "src/checkpoint10/func_00155ab4.c", "to": "src/checkpoint11/aux_channel_publication-r3.c"},
+  {"function": "func_001650f8", "from": "src/checkpoint10/alternate1/func_001650f8.c", "to": "src/checkpoint11/archive_block_queries-r3.c"},
+  {"function": "func_001f1ebc", "from": "src/checkpoint10/alternate1/func_001650f8.c", "to": "src/checkpoint11/archive_block_queries-r3.c"},
+  {"function": "func_001f1ed8", "from": "src/checkpoint10/alternate1/func_001650f8.c", "to": "src/checkpoint11/archive_block_queries-r3.c"},
+  {"function": "func_001f1f20", "from": "src/checkpoint10/alternate1/func_001650f8.c", "to": "src/checkpoint11/archive_block_queries-r3.c"},
+  {"function": "func_001f1f34", "from": "src/checkpoint10/alternate1/func_001650f8.c", "to": "src/checkpoint11/archive_block_queries-r3.c"},
+  {"function": "func_001f1f4c", "from": "src/checkpoint10/alternate1/func_001650f8.c", "to": "src/checkpoint11/archive_block_queries-r3.c"}
  ]
 }

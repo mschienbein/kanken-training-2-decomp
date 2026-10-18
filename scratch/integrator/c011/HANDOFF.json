@@ -1,61 +1,78 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "checkpoint": "c011",
-  "status": "source-milestone-unaccepted-not-review-ready",
+  "status": "resumed-source-milestone-parent-merge-and-bounded-closure-pending",
   "branch": "c011-integrate",
   "worktree": "scratch/worktrees/c011",
   "initial_base": "36924e7c42eed98ee07bb8ed72a6bb0c945912dc",
-  "latest_c010_tip_merged": "beec234b77c92634aaddea024805ecd83471e852",
-  "gate_revision": "v1.16 unchanged",
+  "latest_c010_tip_merged": "eabf1d5e36d02f545f67fbc609c5b301c042902d",
+  "gate_revision": "v1.19; default checkpoint remains v2/none",
   "models": {
     "linker_model": "armlink5-inline-branchnop-v2",
     "literal_model": "none"
   },
   "summary": {
-    "scope_functions": 45,
-    "scope_target_bytes": 7780,
-    "collected_units": 17,
-    "collected_functions": 19,
-    "collected_target_bytes": 2064,
-    "deferred_functions": 26,
-    "deferred_target_bytes": 5716,
+    "scope_functions": 85,
+    "scope_target_bytes": 14448,
+    "collected_units": 42,
+    "collected_functions": 45,
+    "collected_target_bytes": 5660,
+    "deferred_functions": 40,
+    "deferred_target_bytes": 8788,
+    "context_rehomed_functions": 10,
+    "context_rehomed_target_bytes": 984,
+    "candidate_claimed_functions": 55,
+    "candidate_claimed_target_bytes": 6644,
     "unowned_or_unresolved_dispositions": 0
   },
   "publication_snapshot": {
-    "author_manifests": 906,
+    "author_manifests": 1081,
     "scope_records": [
       "SCOPE.json",
-      "SCOPE-SUPPLEMENT-r2.json"
+      "SCOPE-SUPPLEMENT-r2.json",
+      "SCOPE-SUPPLEMENT-r3.json",
+      "SCOPE-SUPPLEMENT-r4.json"
     ],
-    "cutoff_epoch": 1792281646.3301518,
-    "predecessor_identities_excluded": 2928,
-    "c010_scope_excluded": 648
+    "last_scope_record": "SCOPE-SUPPLEMENT-r4.json",
+    "default_model_identities": 85,
+    "qualified_steering_witnesses_separate": 1,
+    "later_publications": "Outside this immutable publication seal; no silent completeness claim for future publications."
   },
   "candidate_manifest": "config/candidates/c011.json",
   "candidate_profiles": {
-    "game": 15,
-    "sdk": 1,
-    "middleware": 1
+    "game": 22,
+    "sdk": 5,
+    "middleware": 15
   },
-  "dispositions": "DISPOSITIONS-r1.json",
-  "source_cutovers": "SOURCE-CUTOVERS-r1.json",
+  "dispositions": "DISPOSITIONS-r2.json",
+  "source_cutovers": [
+    "SOURCE-CUTOVERS-r1.json",
+    "MATH-ACCESSOR-DEFERRAL-r2.json"
+  ],
   "name_proofs": [
     "NAMES-PROVENANCE-r1.json",
-    "NAMES-PROVENANCE-r2.json"
+    "NAMES-PROVENANCE-r2.json",
+    "NAMES-PROVENANCE-r3.json",
+    "NAMES-PROVENANCE-r5.json"
   ],
   "collection_evidence": [
     "COLLECT-r1.json",
     "COLLECT-r2.json",
-    "COLLECT-r3.json"
+    "COLLECT-r3.json",
+    "COLLECT-r4.json",
+    "COLLECT-r5.json",
+    "COLLECT-r6.json",
+    "COLLECT-r7.json",
+    "COLLECT-r8.json"
   ],
   "per_unit_evidence": {
-    "post_cutover": "POST-CUTOVER-r1.json",
-    "units": 20,
-    "new_target_functions": 18,
-    "reserved_c010_target_functions": 4,
+    "post_cutover": "POST-CUTOVER-r4.json",
+    "units": 49,
     "all_targets_match": true,
-    "late_unchanged_native_heap_unit": "COLLECT-r3.json",
-    "new_target_total_including_late_collection": 19
+    "bounded_interface": "INTERFACES-r4.json",
+    "bounded_interface_units": 53,
+    "final_native_text_receiver": "TEXT-FLOW-Y-NATIVE-r8.json",
+    "qualification": "Earlier bounded dependency closure plus destination rederivations; final closure after parent merge not yet claimed."
   },
   "accepted_source_revisions": [],
   "unexercised": [
@@ -72,9 +89,10 @@
   ],
   "serialization": "No heavy slot was requested or used. Main grants readiness work only after c010. All collection/match compilations here were sequential and nice10.",
   "remaining_blockers": [
-    "26 scoped MATCHes retain explicit accepted owner/signature/layout conflicts; no aliases or casts were adopted to suppress them. See each exact source/receipt/evidence row in DISPOSITIONS-r1.json.",
-    "The inherited c009/c010 pipeline is not yet review-ready; parent heavy gates and native/caller-contract integration remain authoritative.",
-    "The candidate plus revised parent new units and shared-header dependency closure need main-owned G3, argcheck, ownership audit and pre-review in the serialized slot before any prepare."
+    "40 scoped default MATCHes have exact contract-resolution deferrals, not rejected witnesses.",
+    "One separately recorded default permuter witness is steering-qualified and not natural-C adoption.",
+    "Merge the latest c010 tip and retire its superseded cutoff/context owners in c011.",
+    "Final bounded interface/header-dependent unit closure after parent merge; whole-ledger readiness remains Main-owned after c010."
   ],
   "next_main_checks": [
     "Merge c011 only after normal isolated integration of the predecessor checkpoints; main was not edited here.",
@@ -82,8 +100,73 @@
     "After the c010 heavy slot, run whole-ledger interfaces, argcheck/adjudication, emitted-owner closure and pre-review; prepare only with an explicitly frozen v2/none selection after those pass."
   ],
   "qualifications": [
-    "Candidate totals are not accepted progress.",
-    "All45 inventoried default-model identities have a disposition:19 collected,26 deferred; future publications after the closed snapshot are not silently claimed.",
-    "Private match objects, packets, ROM data and disassembly are not part of the commit."
-  ]
+    "45 new collected defaults/5660B,40 deferrals/8788B;10 context moves/984B carry no new progress.",
+    "Source candidates are unaccepted; no heavy gates, prepare, review or acceptance claim.",
+    "Math overlap and TU952 return-type interaction are retained as explicit deferrals."
+  ],
+  "main_tip_merged": "f24fa0b2982069c227ceb1c0111248acca55c1d5",
+  "next_c010_tip": "c407dda52e3816e5bab2e21d9ee57fb43c258cc3",
+  "context_moves": [
+    {
+      "function": "func_00152560",
+      "from": "src/wave13/func_00152560.c",
+      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp"
+    },
+    {
+      "function": "func_0014fe14",
+      "from": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_0014feac",
+      "from": "src/checkpoint10/func_0014feac.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_00155ab4",
+      "from": "src/checkpoint10/func_00155ab4.c",
+      "to": "src/checkpoint11/aux_channel_publication-r3.c"
+    },
+    {
+      "function": "func_001650f8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r3.c"
+    },
+    {
+      "function": "func_001f1ebc",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r3.c"
+    },
+    {
+      "function": "func_001f1ed8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r3.c"
+    },
+    {
+      "function": "func_001f1f20",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r3.c"
+    },
+    {
+      "function": "func_001f1f34",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r3.c"
+    },
+    {
+      "function": "func_001f1f4c",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r3.c"
+    }
+  ],
+  "revised_units": [
+    {
+      "from": "src/wave13/func_00152560.c",
+      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp",
+      "functions": [
+        "func_00152560"
+      ],
+      "reason": "Accepted context rehome into the complete auxiliary-operation TU; exact destination MATCH, no new credit."
+    }
+  ],
+  "accepted_math_revision_performed": false
 }

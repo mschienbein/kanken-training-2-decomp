@@ -20,8 +20,13 @@ struct AudioDspParameterBlock {
     unsigned char reserved1e[4];
     unsigned short value22;
     unsigned char reserved24[0x7c];
-    unsigned short valuea0;
-    unsigned char reserveda2[0x1a];
+    /* Byte publication and halfword masks share the same auxiliary control. */
+    union {
+        unsigned short value;
+        struct { unsigned char enabled, reserved; } bytes;
+    } auxiliary_control;
+    short auxiliary_count;
+    unsigned char reserveda4[0x18];
     unsigned short valuebc;
     unsigned char reservedbe[2];
     unsigned int flagsc0;
