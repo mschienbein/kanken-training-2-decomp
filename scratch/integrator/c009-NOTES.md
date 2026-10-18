@@ -1,6 +1,24 @@
 # C009 recovered integration handoff
 
-## Main f24fa0b merged; three mismatches remain
+## Handoff boundary after 600f734
+
+Current corrected G3 r5 is **exit0** on the f24fa0b-based c009 tree, with
+**26 of the 29** originally failed units now scoped MATCH; **three** byte
+mismatches remain, detailed below. This is a committed continuation, **not
+review-ready**: the final passing full sweep/canonical probes/argcheck/pre-review
+are still required. No background measurements remain.
+
+At the boundary, Main advanced to **`85fd18dc7173e0542d8c33db157d03b7910c18c5`**
+with cmodels code/shared headers. That newer main is **not merged** into the
+audited tree here. The explicitly requested
+`git merge-tree --write-tree main c009-integrate` nevertheless **exits0** for
+`600f734be5d1327edfd9b2cd6994f905af472f00`; exact evidence is
+`merge-feasibility-r1.json`. Coordinate Main's cmodels preparation, merge/reconcile
+its later inputs, then redo affected final evidence. Do not misattribute r5's
+current gate PASS or earlier scoped matches to unmerged cmodels headers.
+
+
+## Audited Main f24fa0b milestone: three mismatches remain
 
 Merged current Main **`f24fa0b`** cleanly at
 **`90cc196cb7107f5c79424d721ec4730b74323495`**. Gates are now frozen **v1.19**.
