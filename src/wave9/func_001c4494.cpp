@@ -1,5 +1,5 @@
 #include "game/resource_stream.h"
-static inline void check_result(Result result, unsigned pc)
+static inline void check_result(unsigned pc, Result result)
 {
     switch (result.failed()) {
     case 0: break;
@@ -9,8 +9,8 @@ static inline void check_result(Result result, unsigned pc)
 
 extern "C" int func_001c4494(ResourceFile *file, void *buffer, unsigned size)
 {
-    unsigned count;
+    int count;
     Result result = func_0019d5e4(&file->stream, &count, buffer, size);
-    check_result(result, __current_pc());
+    check_result(__current_pc(), result);
     return count;
 }

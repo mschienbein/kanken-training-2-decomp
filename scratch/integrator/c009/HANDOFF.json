@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "status": "committed-milestone-current-G3-r5-exit0-three-MATCH-blockers-not-review-ready",
+  "status": "committed-bounded-mismatch-closure-676-new-functions-no-known-byte-mismatch-current-full-gates-pending",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "v1.19 from main f24fa0b; frozen v2 semantics unchanged; c009 explicit v2/none only",
-  "candidate_units": 678,
-  "candidate_functions": 678,
-  "target_bytes_from_author_records": 57212,
+  "candidate_units": 676,
+  "candidate_functions": 676,
+  "target_bytes_from_author_records": 57052,
   "profiles": {
     "game": {
-      "units": 616,
-      "functions": 616,
-      "target_bytes": 51528
+      "units": 615,
+      "functions": 615,
+      "target_bytes": 51424
     },
     "middleware": {
-      "units": 37,
-      "functions": 37,
-      "target_bytes": 4000
+      "units": 36,
+      "functions": 36,
+      "target_bytes": 3944
     },
     "sdk": {
       "units": 25,
@@ -24,8 +24,8 @@
       "target_bytes": 1684
     }
   },
-  "dry_ledger_units": 2205,
-  "dry_ledger_basis": "Finalized c008-r3 config/matches.json (1527units/1601functions) plus678 current c009 additions including the Main-ruled original counter loop",
+  "dry_ledger_units": 2203,
+  "dry_ledger_basis": "Accepted c008-r3 config/matches.json (1527units/1601functions) plus676 current c009 additions; cmodels finalization merge pending",
   "revised_predecessor_units": [
     {
       "source": "src/pilot/pilot_b.c",
@@ -828,14 +828,6 @@
       "author": "w9a"
     },
     {
-      "source": "src/wave9/func_001c4494.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001c4494"
-      ],
-      "author": "w9j"
-    },
-    {
       "source": "src/wave9/func_001e358c.c",
       "profile": "game",
       "functions": [
@@ -1013,7 +1005,7 @@
     }
   ],
   "source_sha256": {
-    "config/candidates/c009.json": "7b3a07a05ea334f7bbc951f13f7a2cd2801a0f6a624ffe72e349ab2c491d9eb1",
+    "config/candidates/c009.json": "aeddf59f0d3f795e05fe398ddad385e133d70d35bf9262f9e9532855b66133fe",
     "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
     "include/game/adjusted_callbacks.h": "2071245cda5e2b18f35e61014afe62bab4e64bfa5a62ab239d9d3639a3185074",
     "include/game/animation.h": "e6dc76dc1e76ad9699e45a9226691db74672bb2f2bc5003dfbd9095da815b94d",
@@ -1124,7 +1116,7 @@
     "include/game/resource_objects.h": "8664a19652b93081faede1beb1ac7c75cf22cf7082e2a419faf97f0baa156932",
     "include/game/resource_owner.h": "73662d2bd1e863a66499f34c19755975557914e8134727c4e94b62764a8a8547",
     "include/game/resource_runtime.h": "b68fd128d3c7d3cc90acb996d5cb5e87d0caa8445c0911aab59241141390517b",
-    "include/game/resource_stream.h": "942cdb5746409c62d5d3a4bcc7b05014a25ce221d02a7a6fb4ec9697bc12f551",
+    "include/game/resource_stream.h": "de6590e6ce7a344bc89461f11ae2746a306c478a7ef943ed22cb7717964e2eae",
     "include/game/resource_tables.h": "214dfca11309255a6c2cfc1f32e080d461e8ba909725c7ade10cb2e916cfeecd",
     "include/game/result.h": "2f20e4aecaf4165af81926ea1f83242e29b00756423d25201b931f75befc640a",
     "include/game/runtime.h": "1a17d594929bb2ccfb7f77d3f71b56d25f57ed539159f7aa165aa931fd62ad71",
@@ -2136,7 +2128,6 @@
     "src/wave15/func_0011121c.c": "f896eb0da4bdf6b478942dc14a955d1c7de8bb773d5f93f8e632f3a1f09c3d40",
     "src/wave15/func_00112558.cpp": "dd0edc6dc171d7660e0e7f46ee6539ac8162d7d2150726c0830e65363b3765eb",
     "src/wave15/func_00113630.c": "36169c91496cbea6ed2805728d017aa2163f9aef2ce3c820924adac1190db4b3",
-    "src/wave15/func_00113c0c.cpp": "7f081529690f4197b85afd8c801fc6fd649e61b99f8fc3b6d654b62634c23615",
     "src/wave15/func_00115000.c": "8f0f0b9ea217f51116c6fa2ec3ba465bb583aaa20c44b67967fa712819a61006",
     "src/wave15/func_00115118.c": "318aa0c1a8477cdd05efe4d6d9f7c536688c3901469aa5858eccf8cc1ae099a1",
     "src/wave15/func_00115128.c": "99998cf417e996dcd71904467b11007235803ecf559a4f4011fb3750c81c90d6",
@@ -2206,11 +2197,10 @@
     "src/wave15/func_0018d8c4.c": "8bd87c2d60426975c9c5ceec25ecf3c31c4e81615233244f3d09568f6448caed",
     "src/wave15/func_0018d8d4.c": "cf0433642a306b39ed8add2510fa3c970283729bc787e19dec1d7f3ad3c1da69",
     "src/wave15/func_0018dc38.c": "b564521faa0dab8995976431c407de5ab856f4accaf58fd1aa1c49b35e37d068",
-    "src/wave15/func_0018ee88.c": "94201f3d2152b3963b951cc1ed448fcae4f409bda81ccf369b235c0d74014b54",
     "src/wave15/func_00191d34.c": "ccdd40f55381bc506200abf9dedf122b50d50c9e79e4f25fe0db66747f8f00a3",
     "src/wave15/func_001923c4.c": "f01d2d37cc1bfe23809a584a9c7c0014607a6557d2aac1dda68fd463c1f0e067",
     "src/wave15/func_00195ea4.c": "c077ef74b7f601a6a07be590b4423047cf56981c5bc07acf032eef685a829c68",
-    "src/wave15/func_0019d5dc.cpp": "3b4f77a90f434d5a3968d208d8a45be274b439ca1fd2a56a77a57b87cb503fba",
+    "src/wave15/func_0019d5dc.cpp": "dcf5d314b38e94bd3aac79c924ea40a0ceea273b5603dc4e85461a9549fd68c8",
     "src/wave15/func_0019df5c.cpp": "7df71757d87d360cbd10c086176166ddc8a9628e4ac86e28e3f4482000427bbd",
     "src/wave15/func_0019eb38.c": "8b6eb10180addea023c5f21bbc91f8f8a811a7de4881b5dc65fc7c612f551aa0",
     "src/wave15/func_0019eb60.c": "4c34c7ca5fce7c274048e930c7f5e10dc9c4aca39206ac83092d87bf956134c3",
@@ -3362,7 +3352,7 @@
     "src/wave9/func_0019d8c4.c": "5efbe31658c60225f11314ed8ac48a10afc1ed8b7d91b34c9341afb1f7a9d262",
     "src/wave9/func_0019dbec.c": "a19afdcfd9ed82a6c123de49f1395b500e2ff85047dbd5adff80e9825ce46959",
     "src/wave9/func_0019e564.cpp": "e5b7e544fad302117dec4cb83c40f23700c90f8cc2a8f458c0e033ee6d022210",
-    "src/wave9/func_001c4494.cpp": "70912c39d8e85279b0b0783305b5ad6c2e51ea86e16cdbd676b5fd3924382135",
+    "src/wave9/func_001c4494.cpp": "657f41248d5c563f61e747c163085a13d20e9115cc27f96c34b48661c51afbc7",
     "src/wave9/func_001c44c0.cpp": "331a9cc2b9e1e37ba6e60d519d9308e407cfe1ab19794b4cf81917da2ed85355",
     "src/wave9/func_001cff34.c": "3c78a99fea5ad1e2a234518ff7b376c20773a814b7a0667a09d19196715c56fa",
     "src/wave9/func_001e358c.c": "34d158538e277317f0cc721d086a2ef54106c0c673deed718f090b79e0ef6eae",
@@ -4073,32 +4063,45 @@
       "required_scope": "scratch/integrator/c009/readiness-scope-r5.json",
       "selection": "armlink5-inline-branchnop-v2 / none",
       "note": "Actual current main1.19 tool run after all canonical field/prototype repairs and Main-ruled original loop restoration; native/signature/indirect/argcheck/manual C++ closure is not implied by unchecked waiver."
+    },
+    "timeboxed_mismatch_closure": {
+      "report": "scratch/integrator/c009/timebox-r1/results.json",
+      "deferrals": "scratch/integrator/c009/interface-deferrals-r4.json",
+      "accepted_reader": "001c4494 restored accepted Result/int* API, MATCH44/44 exit0",
+      "new_forwarder": "0019d5dc migrated to same canonical Result/int* API, MATCH8/8 exit0",
+      "withdrawn_new": [
+        "00113c0c",
+        "0018ee88"
+      ],
+      "not_withdrawn_accepted": true,
+      "note": "No accepted identity removed. Exact accepted1c4494 source hash is restored; it no longer appears in revised-unit source delta.",
+      "all_source_callers_updated": "Exact src/include grep found only provider consumers001c4494 and0019d5dc, both canonical Result/int*. No source/header callers of new0019d5dc need migration; original caller graph remains for final argcheck."
     }
   },
   "not_exercised": [
-    "passing final stable whole801-unit/805-function MATCH sweep (last whole attempt failed, scoped fixes measured)",
-    "c009-wide native/signature/co-inclusion/indirect/forwarding canonical consumers on current headers",
-    "complete argcheck run and individual issue/note/C++/callback/unused-input adjudication",
-    "complete seven-step pre-review including mandatory001c20e8 QUALIFIED row",
+    "post-closure current required798-unit/802-function complete MATCH sweep; historical whole attempt failed and focused repairs are not current whole coverage",
+    "post-closure stable G3 on exact current dry ledger/header hashes; historical r5 PASS remains intact",
+    "c009-wide native/signature/co-inclusion/indirect/forwarding canonical consumer sweeps",
+    "complete argcheck issue/note/C++/callback/unused-input adjudication",
+    "complete seven-step integrator pre-review with mandatory001c20e8 QUALIFIED row",
     "full build (Main owned)",
     "full suite (Main owned)",
-    "prepare (Main owned)",
-    "finalize (Main owned)",
-    "history edits",
-    "push"
+    "prepare/finalize/history/push (Main owned)"
   ],
-  "resumed_from": "9d6f0515230d641f51d91dc9ab4b3ffb14011c05",
+  "resumed_from": "66ae9935979611ba916910d0217376dbb6ee3fda",
   "main_merged": "f24fa0b",
   "c008_r2_merged": "38b4c01cdabd94141f5d00c74c49ac8e1c5d9eac",
   "c008_r2_merge_commit": "9218542",
-  "target_bytes_current_catalogue": 57212,
-  "dry_ledger_functions": 2279,
-  "revised_predecessor_functions": 127,
-  "revised_predecessor_basis": "Source delta against current main f24fa0b;123units/127functions",
+  "target_bytes_current_catalogue": 57052,
+  "dry_ledger_functions": 2277,
+  "revised_predecessor_functions": 126,
+  "revised_predecessor_basis": "Source delta against audited accepted main f24fa0b:122units/126functions; restored accepted001c4494 no longer differs. Recompute after Main supplies finalized cmodels hash and merge.",
   "removed_source_inventory_paths": [
     "include/game/entry_object.h",
     "src/large/func_00203810.cpp",
     "src/wave12/func_0016b6a4.c",
+    "src/wave15/func_00113c0c.cpp",
+    "src/wave15/func_0018ee88.c",
     "src/wave18/func_0010cc94.cpp",
     "src/wave20/func_0013156c.cpp"
   ],
@@ -4154,16 +4157,14 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
-    "Continue current c009-integrate; Main f24fa0b is merged cleanly at90cc196, GATESv1.19. Explicit c009 armlink5-inline-branchnop-v2 / none; no new-model adoption.",
-    "At handoff boundary main advanced to85fd18d with cmodels code/shared headers (not merged here). git merge-tree --write-tree main c009-integrate exited0 for600f734. Reconcile that new main with Main cmodels preparation before final checks; current G3-r5 binds f24fa0b-based c009 only.",
-    "Current scope678new/57212B plus123revised predecessor units/127functions; dry2205units/2279functions. Required union801units/805functions in readiness-scope-r5.json. Main manifest scratch/integrator/c009/candidates.json remains not review-ready.",
-    "Current G3-r5 exited0 on restored2205-unit ledger under main1.19 tooling:1704checked,0disagreements,0policy,501unchecked C++,0unchecked C. Evidence interfaces-stable-r5.json. No background measurement remains. A source/header change after this milestone needs its own final gate recheck.",
-    "Full final-match-r1 measured801units:772MATCH/16compilefailures/13mismatches. All16 compile failures and9 original non-counter mismatches now scoped MATCH; an additional previously-MATCH query unit canonicalizes and MATCHes. Main-ruled counter-loop restoration MATCH20/20 closes the tenth original mismatch, leaving3. Its eventual review row MUST be QUALIFIED; preserve all failed forms.",
-    "Canonical CommandQueue now owns the actual0x44-byte tail fields; ExtendedCommandQueue/W19aWritableQueue/CommandQueueDetail shadows removed. Actual signed WorkQueue writeIndex modulo, W10.scale+8bc,finished+8b9 and DisplayQueueCounter.enabled+8 corrections MATCH. NameTable display setup retains the original unchecked-null bug and proven first-member display prefix.",
-    "After three mismatches resolve: full801-unit/805-function MATCH sweep on stable headers; native/signature/co-inclusion/indirect/forwarding consumers; complete argcheck candidates/notes and C++/unused/core+VFP contracts; seven-step pre-review. None of those final closure claims is complete. Carry the mandatory counter-loop QUALIFIED row from pre-review-required-qualifications-r1.json.",
-    "Reused main-root scratch/integrator/c008-r3/complete/ remains authoritative predecessor consumer evidence. All observed canonical-contract consumers must be adjudicated irrespective of selected source scope. Existing c009 probe_interfaces.py is staged but unexercised; prior dependent shell stopped at matching.",
-    "All original delivery sources/receipts, failed actual results and hashes are retained. No original bytes/disassembly/packets in outputs/Git. No asm, fabricated aliases/callees, dead/volatile/register forcing, tests/full builds/suite/prepare/finalize/history edits/push.",
-    "Main can prepare cmodels first; accepted-source overlap only src/wave10/func_0017a424.c, but shared headers overlap broadly. If cmodels lands, merge/reconcile then recompute all current scopes and final evidence."
+    "Main resumed from66ae993; continue without restarting completed searches. Explicit c009 v2/none only. Main f24fa0b remains current audited base; wait for explicit cmodels-finalized hash before merging newer main.",
+    "Bounded mismatch slice is closed: accepted1c4494 restored canonical Result/int-output API and MATCH44B; new1d5dc migrated to same contract and MATCH8B. Neither an accepted identity nor a correct API is removed.",
+    "New00113c0c and0018ee88 withdrawn per Main ruling with exact real-contract reasons, preserved sources/author receipts/all failed variants in interface-deferrals-r4.json. Do not keep experimenting on withdrawn definitions or restore shadow callee returns/scalar globals.",
+    "Current candidate scope676new/57052B plus122revised predecessor units/126functions; dry2203units/2277functions. Required union798units/802functions. Updated scoped proof is not a full current-tree all-MATCH claim.",
+    "Run current-tree native and actual-C-signature probes now to remediate canonical conflicts; cmodels headers will later require final rebindings/probes after Main supplies finalized hash. No full build or suite.",
+    "After finalized cmodels merge: reconcile accepted0017a424 overlap; recompute dry ledger and exact new/revised scope; final all-MATCH, G3, native/signature/co-inclusion/indirect/forwarding, complete argcheck candidate+note+C++/callback/unused-input audit, seven-step pre-review.",
+    "Original001c20e8 counted loop stays plain/retained, MATCH20B, mandatory QUALIFIED pre-review/review row per Main ruling; no volatile/register/artificial uses. Historical deferral-r3 concern remains superseded.",
+    "No full build/suite/prepare/finalize/history changes/push here; Main owns those. All original sources/receipts/failures remain preserved, no original bytes/disassembly/packets in output or Git."
   ],
   "pending_predecessor_remediation": {
     "branch": "c008-r3",
@@ -4175,11 +4176,11 @@
       "slot 15 context, saved arguments and result",
       "same-class indirect-consumer audit"
     ],
-    "status": "Complete successor b5e8b8a merged via prepared main f8adff4; no known unmerged c008-r3 fix. Main owns independent review/finalization.",
+    "status": "c008-r3 finalized sequence8 and merged via main; no pending c008 fix. Subsequent cmodels finalized-main merge is the current coordination dependency.",
     "do_not_duplicate": true
   },
   "names_adopted_in_continuation": [],
-  "wrap_up_reason": "Previous user wrap-up was superseded by Main explicitly resuming readiness; current work continues from the preserved milestone.",
+  "wrap_up_reason": "User requested finish current step and deliver a committed exact handoff. Bounded mismatch closure completed: accepted reader restored/MATCH, new forwarder migrated/MATCH, two new definitions withdrawn with exact recorded reasons. No final readiness PASS is claimed.",
   "handoff_documents": {
     "docs/known-issues-c009.md": "9ddd2555b626bbf1b5084c3e280aa750cefbc3972f2d79554828848ff8ff6261",
     "scratch/integrator/c009-NOTES.md": "af18cbaeebb7d53c9f02ff1d721eaa2acccdeb3a8a63703ab1445886823e207b"
@@ -4190,7 +4191,7 @@
     "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
     "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
     "config/names.json": "f1ccb4fe97f1309b865e4db5643fea23384a8cd556b53cdc1d2388de25e264b1",
-    "scratch/integrator/c009/dry-matches.json": "b06fd5ad422db36944abafcacad05234fcb9d936cabbb6436ea76d81a1657cd3",
+    "scratch/integrator/c009/dry-matches.json": "a1739abe15fef3e930c93e81aef594eb429abaff59bc9e466d03fed397994f79",
     "scratch/integrator/c009/cpp-compat-r3.cpp": "198af42de5f68f084a2db23ee65273aa83f7229efd8ca2f635f126e8df343dbd",
     "scratch/integrator/c009/cpp-compat-r5.json": "c22a2edd939e34c48151d65f86700618bf883f724f2aed2691055b2ac37ac7b8",
     "scratch/integrator/c009/contract-deferrals.json": "02fa84d259f5d2a807bdea55455002fc19ab3b4f7a184e49cd5994d5b21ee0ec",
@@ -4216,7 +4217,7 @@
     "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json": "b27af3703648b95f7f2b030578102550b5dd1f714e26fb868af2d920903c182b",
     "scratch/integrator/c009/interfaces-stable-r2.json": "92c23f77f1c0ac317dbc6d1b274d10ab4b1c4d81f8f13ed1bbb6ef62520d2f8a",
     "scratch/integrator/c009/dry-matches-g3-r2.json": "0a8355e20937566e726f740a6341b1d9ac30585ff9096a7e35278de73813b994",
-    "scratch/integrator/c009/candidates.json": "ca27c6594972c083bdfc8da4214996209a903e2bdabc1caecb1565ca5eedd2a7",
+    "scratch/integrator/c009/candidates.json": "2c74621257a004b6e31a9875917bd1250a5401c784ea81512aa8038975ac6522",
     "scratch/integrator/c009/sweep.py": "0cd2c77f7b4251ec826a13912dd0282845f9c67972f0aaf9874eaa5461b259a2",
     "config/matches.json": "55eca45f3589f639236129bcb461ba9c0791aa94ff324a0c6752c9a9708f3b21",
     "scratch/integrator/c009/readiness-scope-r3.json": "35636249e86e6072e300966ff80cbbccb054af1e6a95d204351f165135b72e7f",
@@ -4246,7 +4247,16 @@
     "scratch/integrator/c009/natural-forms-r1/results.json": "d15a6ec38b7b7085397a2376c8213b4187717186203dee87cdecb6a133785394",
     "scratch/integrator/c009/natural-forms-r1/c90-correction.json": "07a6e1a1c204f4fe9c0ecddb996aec77712cfd5853b4fd2a533ffc5f472345a1",
     "scratch/integrator/c009/interfaces-stable-r5.json": "e0e23a062f2df6ec3a3e48a7e489887c25bda420e650997462cbb3d8641430d8",
-    "scratch/integrator/c009/merge-feasibility-r1.json": "1a06138ba01feb03a785e4b7f7957c734b54d8584fc2577601b00860bc0c909b"
+    "scratch/integrator/c009/merge-feasibility-r1.json": "1a06138ba01feb03a785e4b7f7957c734b54d8584fc2577601b00860bc0c909b",
+    "scratch/integrator/c009/timebox-r1/results.json": "08f6784ad28dd031aa6427ea50881724d964efbe7460a7ce5e82d918deb2ba5b",
+    "scratch/integrator/c009/interface-deferrals-r4.json": "5ac1eec9e5fd72498fe3bf302d0ceda3a608a9b6df708a952d240d9c018c35ba",
+    "scratch/integrator/c009/readiness-scope-r6.json": "794a3c07947c3f727f2c8b19e5533005c4e09f106dcc991cadbda67219359baf",
+    "include/game/resource_stream.h": "de6590e6ce7a344bc89461f11ae2746a306c478a7ef943ed22cb7717964e2eae",
+    "src/wave9/func_001c4494.cpp": "657f41248d5c563f61e747c163085a13d20e9115cc27f96c34b48661c51afbc7",
+    "src/wave15/func_0019d5dc.cpp": "dcf5d314b38e94bd3aac79c924ea40a0ceea273b5603dc4e85461a9549fd68c8",
+    "config/candidates/c009.json": "aeddf59f0d3f795e05fe398ddad385e133d70d35bf9262f9e9532855b66133fe",
+    "docs/known-issues-c009.md": "c3628bfe2e4a85180dff91de503194e35df587b4bb8e2fdb9bb60b1d609c1682",
+    "scratch/integrator/c009-NOTES.md": "290cb819b64723998288839d0eed4228fb71de55e10fad94e447372eea58e122"
   },
   "collection_milestone": {
     "original_unique_new_scope": 16,
@@ -4355,6 +4365,110 @@
       "author_receipt": "scratch/authors/w20b/match/func_0013156c/final/func_0013156c.result.json",
       "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
       "author_receipt_source_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7"
+    },
+    {
+      "source": "src/wave15/func_00113c0c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00113c0c"
+      ],
+      "author": "w15b",
+      "function": "func_00113c0c",
+      "target_size": 104,
+      "reason": "Main authorized withdrawal of remaining new mismatches after a bounded closure pass. The original author MATCH declares both0019edcc and00192b44 as Result-returning functions, but the surviving canonical API and accepted C definition00192b44 return raw scalar status. Correct explicit Result conversions preserve behavior but this unit still mismatches104/104 bytes at+0x25. Multiple natural switch/if/result-lifetime forms are preserved; no shadow return types, call aliases, register/volatile/dead steering, or instruction-address literals are introduced. The real canonical Result wrapper declaration remains because retained0010b8b8 calls it. This new definition is withdrawn, not accepted identity credit.",
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_00113c0c.cpp",
+      "integration_source_sha256": "7f081529690f4197b85afd8c801fc6fd649e61b99f8fc3b6d654b62634c23615",
+      "author_source": "scratch/authors/w15b/src/func_00113c0c.cpp",
+      "author_source_sha256": "c35be01ca626a87fe367aa14cff93d4f5f394c0a1f7cb826a8d93bc9bd9c4e0c",
+      "author_receipt": "scratch/authors/w15b/match/func_00113c0c/final/func_00113c0c.result.json",
+      "author_receipt_sha256": "0195be0fbff76581d21863740804cc0810d2247ab9b9f335d05f806d797e8561",
+      "author_receipt_source_sha256": "c35be01ca626a87fe367aa14cff93d4f5f394c0a1f7cb826a8d93bc9bd9c4e0c",
+      "last_failed": {
+        "source": "src/wave15/func_00113c0c.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00113c0c"
+        ],
+        "author": "c009-wave15",
+        "command": [
+          "nice",
+          "-n",
+          "10",
+          "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+          "tools/match.py",
+          "src/wave15/func_00113c0c.cpp",
+          "--profile",
+          "game",
+          "--linker-model",
+          "armlink5-inline-branchnop-v2",
+          "--literal-model",
+          "none",
+          "--show",
+          "0",
+          "--out",
+          "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009/scratch/integrator/c009/semantic-repair-r2/wave15/func_00113c0c"
+        ],
+        "exit_code": 1,
+        "source_sha256": "7f081529690f4197b85afd8c801fc6fd649e61b99f8fc3b6d654b62634c23615",
+        "output": "MISMATCH func_00113c0c @ 0x113c0c size 0x68/0x68 first difference at +0x25\n",
+        "receipt": "scratch/integrator/c009/semantic-repair-r2/wave15/func_00113c0c/func_00113c0c.result.json"
+      },
+      "evidence": [
+        "scratch/integrator/c009/natural-forms-r1/results.json",
+        "scratch/integrator/c009/timebox-r1/results.json"
+      ]
+    },
+    {
+      "source": "src/wave15/func_0018ee88.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0018ee88"
+      ],
+      "author": "w15c",
+      "function": "func_0018ee88",
+      "target_size": 56,
+      "reason": "Main authorized withdrawal of remaining new mismatches after a bounded closure pass. Original author MATCH shadows the complete canonical ServiceCallbackState global as a signed byte and declares001923d4 with a full unsigned formal instead of the canonical byte-mode API. Correct status-member and byte-mode consumers are retained, but natural source forms under the actual frozen middleware profile still mismatch56/56 bytes at+8. Exact failed52/56 and56/56 variants are preserved; no scalar shadow global, widened alternative callee declaration, volatile/register/dead steering, or fake identity is used. This new definition is withdrawn; original function consumers remain for future qualified implementation.",
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_0018ee88.c",
+      "integration_source_sha256": "94201f3d2152b3963b951cc1ed448fcae4f409bda81ccf369b235c0d74014b54",
+      "author_source": "scratch/authors/w15c/src/func_0018ee88.c",
+      "author_source_sha256": "9b4939fd94d864a19499e00824f406db40ad9c622d34e63bc85901598149d24b",
+      "author_receipt": "scratch/authors/w15c/match/func_0018ee88/final/func_0018ee88.result.json",
+      "author_receipt_sha256": "8384d7ce92face2bc6dbfe5ebb704727028bc705d811bb254b2cec6182f693a0",
+      "author_receipt_source_sha256": "9b4939fd94d864a19499e00824f406db40ad9c622d34e63bc85901598149d24b",
+      "last_failed": {
+        "source": "src/wave15/func_0018ee88.c",
+        "profile": "middleware",
+        "functions": [
+          "func_0018ee88"
+        ],
+        "author": "w15c",
+        "command": [
+          "nice",
+          "-n",
+          "10",
+          "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+          "tools/match.py",
+          "src/wave15/func_0018ee88.c",
+          "--profile",
+          "middleware",
+          "--linker-model",
+          "armlink5-inline-branchnop-v2",
+          "--literal-model",
+          "none",
+          "--show",
+          "0",
+          "--out",
+          "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009/scratch/integrator/c009/semantic-repair-r2/wave15/func_0018ee88"
+        ],
+        "exit_code": 1,
+        "source_sha256": "94201f3d2152b3963b951cc1ed448fcae4f409bda81ccf369b235c0d74014b54",
+        "output": "MISMATCH func_0018ee88 @ 0x18ee88 size 0x38/0x38 first difference at +0x8\n",
+        "receipt": "scratch/integrator/c009/semantic-repair-r2/wave15/func_0018ee88/func_0018ee88.result.json"
+      },
+      "evidence": [
+        "scratch/integrator/c009/natural-forms-r1/results.json",
+        "scratch/integrator/c009/timebox-r1/results.json"
+      ]
     }
   ],
   "c008_r3_artifact_root": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3",
@@ -4394,98 +4508,7 @@
       "entry_sha256": "1ce759c53c4ec8c74b87e78c5920f8f0dd0ffe95c817ca5464df5d33c6669407"
     }
   },
-  "pending_match_failures": [
-    {
-      "source": "src/wave15/func_00113c0c.cpp",
-      "profile": "game",
-      "functions": [
-        "func_00113c0c"
-      ],
-      "author": "c009-wave15",
-      "command": [
-        "nice",
-        "-n",
-        "10",
-        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
-        "tools/match.py",
-        "src/wave15/func_00113c0c.cpp",
-        "--profile",
-        "game",
-        "--linker-model",
-        "armlink5-inline-branchnop-v2",
-        "--literal-model",
-        "none",
-        "--show",
-        "0",
-        "--out",
-        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009/scratch/integrator/c009/semantic-repair-r2/wave15/func_00113c0c"
-      ],
-      "exit_code": 1,
-      "source_sha256": "7f081529690f4197b85afd8c801fc6fd649e61b99f8fc3b6d654b62634c23615",
-      "output": "MISMATCH func_00113c0c @ 0x113c0c size 0x68/0x68 first difference at +0x25\n",
-      "receipt": "scratch/integrator/c009/semantic-repair-r2/wave15/func_00113c0c/func_00113c0c.result.json"
-    },
-    {
-      "source": "src/wave15/func_0018ee88.c",
-      "profile": "middleware",
-      "functions": [
-        "func_0018ee88"
-      ],
-      "author": "w15c",
-      "command": [
-        "nice",
-        "-n",
-        "10",
-        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
-        "tools/match.py",
-        "src/wave15/func_0018ee88.c",
-        "--profile",
-        "middleware",
-        "--linker-model",
-        "armlink5-inline-branchnop-v2",
-        "--literal-model",
-        "none",
-        "--show",
-        "0",
-        "--out",
-        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009/scratch/integrator/c009/semantic-repair-r2/wave15/func_0018ee88"
-      ],
-      "exit_code": 1,
-      "source_sha256": "94201f3d2152b3963b951cc1ed448fcae4f409bda81ccf369b235c0d74014b54",
-      "output": "MISMATCH func_0018ee88 @ 0x18ee88 size 0x38/0x38 first difference at +0x8\n",
-      "receipt": "scratch/integrator/c009/semantic-repair-r2/wave15/func_0018ee88/func_0018ee88.result.json"
-    },
-    {
-      "source": "src/wave9/func_001c4494.cpp",
-      "profile": "game",
-      "functions": [
-        "func_001c4494"
-      ],
-      "author": "w9j",
-      "command": [
-        "nice",
-        "-n",
-        "10",
-        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
-        "tools/match.py",
-        "src/wave9/func_001c4494.cpp",
-        "--profile",
-        "game",
-        "--linker-model",
-        "armlink5-inline-branchnop-v2",
-        "--literal-model",
-        "none",
-        "--show",
-        "0",
-        "--out",
-        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009/scratch/integrator/c009/semantic-repair-r2/wave9/func_001c4494"
-      ],
-      "exit_code": 1,
-      "source_sha256": "70912c39d8e85279b0b0783305b5ad6c2e51ea86e16cdbd676b5fd3924382135",
-      "output": "MISMATCH func_001c4494 @ 0x1c4494 size 0x2c/0x2c first difference at +0x18\n",
-      "receipt": "scratch/integrator/c009/semantic-repair-r2/wave9/func_001c4494/func_001c4494.result.json"
-    }
-  ],
+  "pending_match_failures": [],
   "pending_native_cpp_analysis": [
     "The native own-definition/name source inventory is names-review-r1.json:30 additions,0 modifications,2 removed obsolete WindowLabelBinding aliases. No live source/header WindowLabelBinding reference remains.",
     "Original-only C++ member APIs without C declarations require manual caller-ABI coverage (implicit this, constructor/destructor pointer-result ABI, hidden aggregate result and unused dummy); compile probes alone do not establish unused inputs or result contracts.",
@@ -4500,32 +4523,10 @@
     "Nested ManagedExpHeap ownership, DisplayVertexPane.pane.material and BufferState accesses corrected to real canonical members; missing allocator-base declaration shared in exp_heap.h; existing callback declaration imported via functions.h."
   ],
   "main_f24fa0b_merge_commit": "90cc196cb7107f5c79424d721ec4730b74323495",
-  "current_required_scope": "scratch/integrator/c009/readiness-scope-r5.json",
-  "current_required_units": 801,
-  "current_required_functions": 805,
-  "remaining_byte_mismatch_notes": [
-    {
-      "source": "src/wave15/func_00113c0c.cpp",
-      "last_exit": 1,
-      "size": "104/104",
-      "first_diff": 37,
-      "reason": "Two initialization Result lifetimes preserve canonical scalar provider types. Residual signed-bit switch scratch-register allocation differs from original. Do not change shared providers to fake struct returns or introduce register/dead/volatile steering. Prior direct signed-comparison form also mismatched and is preserved."
-    },
-    {
-      "source": "src/wave15/func_0018ee88.c",
-      "last_exit": 1,
-      "size": "56/56",
-      "first_diff": 8,
-      "reason": "Typed default mode shared between status reset and real mode calls restores full size. Remaining original/candidate setup/prologue scheduling differs. Both the previous52/56 helper form and current56/56 form are preserved."
-    },
-    {
-      "source": "src/wave9/func_001c4494.cpp",
-      "last_exit": 1,
-      "size": "44/44",
-      "first_diff": 24,
-      "reason": "Canonical provider returns int, interpreted via the shared Result failure predicate. Current-PC/result-check scheduling differs; direct signed-negative check also mismatched. Preserve canonical provider type and actual __current_pc intrinsic, not a fixed original instruction address."
-    }
-  ],
+  "current_required_scope": "scratch/integrator/c009/readiness-scope-r6.json",
+  "current_required_units": 798,
+  "current_required_functions": 802,
+  "remaining_byte_mismatch_notes": [],
   "cmodels_overlap": {
     "scope": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/SCOPE.json",
     "revised_accepted_overlap": [
@@ -4535,7 +4536,8 @@
       "src/wave8/func_00172c04.c",
       "src/wave8/func_00173f9c.c"
     ],
-    "note": "Main may prepare cmodels first; reconcile its committed source/header changes and recompute scopes/dry ledger if it lands. Header overlap is broader than the one source."
+    "note": "Main may prepare cmodels first; reconcile its committed source/header changes and recompute scopes/dry ledger if it lands. Header overlap is broader than the one source.",
+    "status": "Main instructed wait for explicit cmodels-finalized hash before merge; perform independent current-tree probes meanwhile."
   },
   "historical_superseded_policy_deferral": {
     "function": "func_001c20e8",
@@ -4549,38 +4551,32 @@
   "next_actions": [
     {
       "order": 1,
-      "action": "Resolve exactly three byte mismatches from current sources; do not repeat failed natural-forms-r1 inputs.",
-      "sources": [
-        "src/wave15/func_00113c0c.cpp",
-        "src/wave15/func_0018ee88.c",
-        "src/wave9/func_001c4494.cpp"
-      ],
+      "action": "Do not restart the closed mismatch search. Wait for Main explicit cmodels-finalized hash, then merge current main into c009-integrate, reconcile source0017a424 plus shared headers, recompute current accepted/new/revised/dry ledger and source/header hashes. Keep c009 explicit v2/none. Only pre-finalization independent probes/static work are allowed until that notice.",
       "evidence": [
-        "semantic-repair-r1.json",
-        "semantic-repair-r2.json",
-        "natural-forms-r1/results.json",
-        "natural-forms-r1/c90-correction.json"
+        "timebox-r1/results.json",
+        "interface-deferrals-r4.json",
+        "readiness-scope-r6.json"
       ]
     },
     {
       "order": 2,
-      "action": "After stable fixes, nice10 sequential full MATCH sweep using sweep.py new exclusive phase, explicit v2/none and --show0; then stable G3 only if current audited inputs changed."
+      "action": "Run nice10 sequential sweep.py with a new exclusive final-MATCH phase, explicit v2/none and --show0. Required current pre-cmodels union798units/802functions; recompute after merge. Run stable tools/interfaces.py --allow-unchecked-cpp on the exact dry ledger to exit0; preserve failures and remediate from evidence."
     },
     {
       "order": 3,
-      "action": "Run probe_interfaces.py --mode native --run NEW and --mode signatures --run NEW sequentially; failures/warnings are findings, not suppressed. New complete C/C++ co-inclusion and current alias/ODR/function identity closure still required."
+      "action": "Run probe_interfaces.py --mode native --run NEW and --mode signatures --run NEW sequentially, original C bodies in C and actual compiler-preprocessed C signatures in canonical C++ C linkage. Adjudicate/fix every diagnostic and extraction failure without suppressions. Run fresh whole canonical co-inclusion and alias/ODR/function-identity closure."
     },
     {
       "order": 4,
-      "action": "Reuse main-root c008-r3 complete indirect/source-slot-map and sweep_forwarding.py over all current required units and every observed canonical-contract consumer. Include globals, tail slots, stack/VFP, source callback storage, unused inputs/results; selected-source scope never waives an outside consumer."
+      "action": "Reuse main-root c008-r3 complete/source-slot-map.json, audit_indirect.py and sweep_forwarding.py over all selected new/revised units and every observed canonical-contract consumer, including outside selected scope. Build honest match-index/compiler-probes indexes from actual current evidence. Audit typed callback/global storage, tail returns, stack/core/VFP inputs/results and unused parameters; do not infer no-warning means proof."
     },
     {
       "order": 5,
-      "action": "Run tools/argcheck.py on current dry ledger with current rewrite evidence; adjudicate every issue/note plus C++ parsed-by-hand caller contracts (hidden aggregate result, receiver/dummy, constructors/destructors, member/callback pointers, return-only bodies). No warning is not proof."
+      "action": "Run tools/argcheck.py on exact dry ledger with all current linker-rewrite receipts. Adjudicate every candidate and note plus manually unchecked C++ callers: hidden aggregate results, const receiver/dummy, constructor/destructor returns, method/callback pointers, return-only/empty functions. Preserve actual exit2 for uncheckedCpp or issue exits, never claim a parser waiver as compatibility."
     },
     {
       "order": 6,
-      "action": "Complete all seven docs/REVIEWING.md preflight steps with per-function rows and qualifications. Counter001c20e8 MUST stay QUALIFIED per explicit Main ruling. Commit review-ready result and report candidates.json; Main owns suite/build/prepare."
+      "action": "Complete all seven docs/REVIEWING.md integrator pre-review steps with exact coverage/input hashes/per-function dispositions. Original001c20e8 counted loop MUST stay QUALIFIED per explicit Main ruling; purpose remains INFERENCE. Commit review-ready tree and report hash plus candidates.json and counts. Main alone owns full suite/build/prepare/finalize/history/push."
     }
   ],
   "handoff_boundary_main_advance": {
