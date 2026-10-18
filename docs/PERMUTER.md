@@ -43,6 +43,16 @@ Clang receives a parser-only prototype for ARMCC's documented
 `__schedule_barrier` intrinsic, keeping it an opaque effectful call. That prototype
 never enters candidate text, object generation, or symbol binding.
 
+ARMCC itself enforces `#pragma once` file identity, recursive/repeated includes and
+fresh once-only state for every translation unit; the permuter does not expand
+includes or maintain an independent include cache. Its parser accepts the retained
+`once`, diagnostic and explicit anonymous-union/format pragmas. Other pragmas are
+accepted only if an isolated probe with the selected ARMCC/profile confirms the
+compiler ignores them (unrecognized-pragma diagnostics 161/1067); recognized,
+unmodeled codegen/layout pragmas such as `pack` still fail closed. Probe results
+are cached by directive, profile and language. All accepted pragmas remain in the
+real compiler input, including C target-body pragmas; C++ edits that would consume
+an intervening pragma are not proposed.
 
 Other functions, declarations, included headers and ABI annotations remain
 verbatim. `__svc`, `__declspec`, `__packed`, `__int64` and `__value_in_regs` use the
@@ -154,8 +164,10 @@ new floating temporaries.
 
 The modules test reparsing, target-only edits, overlapping function names,
 prepared/raw/UTF-8 offset separation, multiline macros and continued comments with
-LF/CRLF, approved extension headers, namespaces/templates/classes/methods,
-constructors/destructors, overload selection and C++ semantic safety guards.
+LF/CRLF, approved extension headers, once-only header identity/recursive inclusion
+and per-unit reset, retained/ignored pragmas and refused layout pragmas,
+namespaces/templates/classes/methods, constructors/destructors, overload selection
+and C++ semantic safety guards.
 Coverage also includes deterministic hill-climbing and bounded multiprocessing,
 distinct aligned/positional byte counts (including unequal extents), complete C++
 candidate/hint emission, synthetic real-compiler mutations/scoring, and optional
