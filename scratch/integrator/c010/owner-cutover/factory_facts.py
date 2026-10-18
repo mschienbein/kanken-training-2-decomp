@@ -104,6 +104,10 @@ def inspect(original, function):
                               "target": f"func_{event['target']:08x}" if event["target"] is not None else "indirect",
                               "arguments": {f"r{i}": describe(event["registers"].get(f"r{i}")) for i in range(4)},
                               "live_registers_do_not_prove_arity": True})
+                if event["target"] == 0x0019CECC:
+                    size = event["registers"].get("r1")
+                    if size and size[0] == "constant":
+                        calls[-1]["cleared_byte_count"] = size[1]
     return {"function": f"func_{owner:08x}", "memory_facts": accesses, "calls": calls}
 
 

@@ -2,7 +2,6 @@
 
 struct Framebuffer;
 
-extern void (*data_002429f8)(unsigned module, unsigned kind, unsigned id, void *memory);
 extern void func_00140fd8(int width, int height, unsigned format, unsigned type,
                           unsigned levels, unsigned parameter, struct Renderbuffer *renderbuffer);
 

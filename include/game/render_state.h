@@ -46,6 +46,10 @@ struct AllocationSystem {
     void *memory;
 };
 extern struct AllocationSystem data_002429f4;
+/* Interior symbol for AllocationSystem.release at data_002429f4 + 4;
+ * this names the callback word itself, not a second storage allocation. */
+extern void (*data_002429f8)(unsigned module, unsigned kind,
+                           unsigned id, void *memory);
 
 struct SubmissionState {
     unsigned command_mode;
@@ -77,12 +81,28 @@ struct PipelineConfiguration {
     struct VertexRange ranges[16];
 };
 
+/* [INFERENCE] Hash-bucket buffer prefix observed by the original teardown
+ * consumer. Opaque payload pointers do not assert a recovered native class. */
+struct W6eGpuBufferPayload;
+struct W6eGpuBuffer {
+    unsigned handle;
+    int kind;
+    union {
+        struct W6eGpuBufferPayload *buffer;
+        struct PipelineConfiguration *configuration;
+    } payload;
+    struct W6eGpuBuffer *next;
+};
+/* The original initializer clears this fixed extent; sizeof the partial
+ * PipelineStorage view below is not the historical allocation size. */
+enum { PIPELINE_STORAGE_INITIALIZED_BYTES = 0x854 };
+
 struct PipelineSnapshot {
     unsigned value;
 };
 
 struct PipelineStorage {
-    unsigned char reserved00[0x800];
+    struct W6eGpuBuffer *buckets[512];
     struct PipelineConfiguration *configuration;
     unsigned reserved804;
     unsigned current;
@@ -97,6 +117,7 @@ struct PipelineOwner {
     unsigned ready;
 };
 extern struct PipelineOwner data_00242a14;
+extern void func_0018c784(struct W6eGpuBuffer *object);
 
 extern void func_00126f5c(unsigned *state);
 extern void func_00127294(unsigned *state);

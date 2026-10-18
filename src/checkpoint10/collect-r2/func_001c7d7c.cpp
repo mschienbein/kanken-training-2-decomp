@@ -27,10 +27,6 @@ public:
         return ResPixelBasedImage(ref().toImagesTables[face].to_ptr());
     }
 };
-/* INTEGRATOR: move this existing src/wave2/func_0011d260.c contract
- * to include/game/render_state.h; the target addresses the callback itself. */
-extern "C" { extern void (*data_002429f8)(unsigned module, unsigned kind,
-    unsigned id, void *memory); }
 static void DeleteImage2D( u32 texID, ResPixelBasedImage resImage )
 {
     GLuint area = resImage.ref().m_MemoryArea;

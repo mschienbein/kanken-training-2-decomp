@@ -10,10 +10,6 @@
 #include <nw/gfx/res/gfx_ResVertex.h>
 #include <game/render_state.h>
 namespace nw { namespace gfx { namespace res {
-/* INTEGRATOR: move this existing src/wave2/func_0011d260.c contract
- * to include/game/render_state.h; the target addresses the callback itself. */
-extern "C" { extern void (*data_002429f8)(unsigned module, unsigned kind,
-    unsigned id, void *memory); }
 static void DeleteBuffer(u32 bufferID, ResVertexStreamBase stream)
 {
     GLuint area = stream.ref().m_MemoryArea;
