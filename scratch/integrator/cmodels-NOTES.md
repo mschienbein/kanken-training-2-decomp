@@ -1,9 +1,14 @@
 # cmodels — model-qualified integration milestone
 
 This is an **unaccepted checkpoint candidate**, not a prepared/finalized checkpoint. It lives on
-`cmodels-integrate` in `scratch/worktrees/cmodels`, based on main `045a47d` and frozen GATES v1.18.
+`cmodels-integrate` in `scratch/worktrees/cmodels`, originally based on main `045a47d` / GATES v1.18.
 Main retains the serialized c009 → c010 → c011 checkpoint order and owns the later heavy slot.
 No accepted ledger, acceptance record or historical receipt was changed.
+The source milestone is `a7762e2`. As subsequently requested, main `f24fa0b` (v8 adoption /
+GATES v1.19) was merged as `daa067b7bbea80b9e7763308815b4c0a09c6a199` after
+`git merge-tree --write-tree HEAD f24fa0b` exited 0. `MERGE.json` records that closure.
+Main attested, and merged GATES states, that the relied-on v6 rules are unchanged. The existing
+measurements precede this merge; they were not rerun simply to confirm that observation.
 
 ## One global selection
 
@@ -176,6 +181,8 @@ Commands were sequential and nice'd. Public summaries:
 - `scratch/integrator/cmodels/ACCEPTED-RESULTS-r2.json`
 - `scratch/integrator/cmodels/STANDARD-REGRESSIONS.json`
 - `scratch/integrator/cmodels/RESULT-INVENTORY.json` (1,002 author RESULT manifests; no packet search)
+- `scratch/integrator/cmodels/MERGE.json` (requested main adoption merge, selector unchanged)
+- `scratch/integrator/cmodels/NEXT.json` (later v8 witness; no new credit or v8 selection)
 
 Not exercised: full build, full suite, G3 interfaces, argcheck/manual ABI audit, prepare,
 independent checkpoint review or finalize. Main must merge the serialized predecessor states
