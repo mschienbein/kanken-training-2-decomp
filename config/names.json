@@ -1761,6 +1761,34 @@
     "_ZN16ScalarCollectionD2Ev": {
       "address": 1797020,
       "evidence": "c011: same-entry base-destructor alias of the native ScalarCollection definition, exact MATCH in scratch/integrator/c011/native-collection-lifetimes-r1/func_001b6904.result.json. The natural singleton caller independently fixes the D1 registration address."
+    },
+    "strncat": {
+      "address": 1050580,
+      "evidence": "c011: retained direct-call relocation in the hash-bound whole-function MATCH of00143df4 using the canonical bounded-concatenation helper; scratch/integrator/c011/NAMES-PROVENANCE-r3.json. Runtime classification earns no C credit here."
+    },
+    "_ZN2nw3snd7FxDelayC1Ev": {
+      "address": 1909684,
+      "evidence": "c011: same-address canonical FxDelay constructor MATCH with retail0.5f damping; scratch/integrator/c011/fx-delay-native-r3/fx_delay-r3.result.json. [INFERENCE] Historical native spelling."
+    },
+    "_ZN2nw3snd7FxDelayC2Ev": {
+      "address": 1909684,
+      "evidence": "c011: emitted zero-size same-entry C2 alias of the whole-function MATCH canonical FxDelay constructor; scratch/integrator/c011/NAMES-PROVENANCE-r3.json."
+    },
+    "_ZTVN2nw3snd7FxDelayE": {
+      "address": 2245972,
+      "evidence": "c011: retained canonical FxDelay constructor relocation reproduces the vptr address point0x22455c, eight bytes after this native symbol; scratch/integrator/c011/NAMES-PROVENANCE-r3.json. [INFERENCE] Historical class spelling."
+    },
+    "_ZN14MaterialObjectD1Ev": {
+      "address": 1900136,
+      "evidence": "c011: same-address sdk-profile whole-function MATCH of the shared partial retail material destructor; scratch/integrator/c011/material-dtor-shared-r3/material_dtor-r3.result.json. [INFERENCE] Descriptive owner, not a rebind of public nw::lyt::Material."
+    },
+    "_ZN14MaterialObjectD2Ev": {
+      "address": 1900136,
+      "evidence": "c011: emitted zero-size same-entry D2 alias of the whole-function MATCH partial retail material destructor; scratch/integrator/c011/NAMES-PROVENANCE-r3.json."
+    },
+    "_ZTV14MaterialObject": {
+      "address": 2245752,
+      "evidence": "c011: retained destructor reset references the shared retail material vtable address pointdata_00224480, eight bytes after this symbol; scratch/integrator/c011/NAMES-PROVENANCE-r3.json. [INFERENCE] Descriptive owner identity."
     }
   }
 }
