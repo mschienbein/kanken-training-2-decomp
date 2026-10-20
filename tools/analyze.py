@@ -2400,6 +2400,9 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         current_entries = {(entry["address"], entry["isa"]) for function in result["functions"] for entry in function["entries"]}
         if prior_entries - current_entries:
             raise ValueError("runtime closure loses a deferred prior entry")
+    if closure is not None:
+        catalogue_closure.check_entry_revision(
+            result, analyzer, closure, protected_functions, classifications or [])
     check_protected_functions(result, protected_functions or {})
     return result
 
@@ -2646,7 +2649,7 @@ def main(argv: list[str] | None = None) -> int:
                    for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v11-r2",
+            "revision": "catalogue-v11-r3",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

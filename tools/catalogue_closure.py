@@ -1212,6 +1212,169 @@ def resolve_protected_records(protected: dict[int, dict], analyzer, evidence: di
     return resolved, receipts
 
 
+def load_entry_revision_inputs(root: Path, parent_path: Path, runtime: dict, adopted: dict) -> tuple[dict, dict]:
+    """Authenticate the explicit reassessment of unadopted, not accepted, entries."""
+    path = root / "research/catalogue_v11_r3_evidence.json"
+    content = path.read_bytes()
+    revision = json.loads(content)
+    parent = revision["parent_evidence"]
+    if (root / parent["path"] != parent_path
+            or hashlib.sha256(parent_path.read_bytes()).hexdigest() != parent["sha256"]
+            or revision["image_sha256"] != runtime["image_sha256"]
+            or revision["revision"] != "catalogue-v11-r3" or revision["new_C_credit"] != 0
+            or revision["adoption"] or revision["prior_proposal"]["sha256"] != runtime["prior_proposal"]["sha256"]):
+        raise ValueError("v11-r3 entry evidence differs from its immutable parent/image/proposal")
+    owners = {row["address"]: row for row in revision["prior_owners"]}
+    entries = {(row["address"], row["isa"]): row for row in revision["prior_entries"]}
+    withdrawals = revision["withdrawn_entry_proposals"]
+    adopted_entries = {(entry["address"], entry["isa"]) for function in adopted.get("functions", [])
+                       for entry in function["entries"]}
+    if (len(owners) != len(revision["prior_owners"]) or len(entries) != len(revision["prior_entries"])
+            or len({row["address"] for row in withdrawals}) != len(withdrawals)
+            or not adopted_entries <= entries.keys()):
+        raise ValueError("v11-r3 reference loses or duplicates a prior/adopted identity")
+    for row in withdrawals:
+        before = row["prior_function"]
+        entry = entries.get((row["address"], before["isa"]))
+        if (before["address"] != row["address"] or _metadata_sha(before) != row["prior_record_sha256"]
+                or owners.get(row["address"]) != {key: before[key] for key in ("address", "size", "isa", "kind")}
+                or before["kind"] != "function" or len(before["entries"]) != 1
+                or before["entries"][0]["evidence"] != ["pointer"] or before["entries"][0]["sources"]
+                or entry != {"owner": row["address"], **before["entries"][0]}
+                or (row["address"], before["isa"]) in adopted_entries
+                or row["prior_witness"]["target"] != row["address"]):
+            raise ValueError("v11-r3 withdrawal is not an exact unadopted pointer-only proposal")
+    return revision, {str(path.relative_to(root)): hashlib.sha256(content).hexdigest()}
+
+
+def _remaining_intervals(spans: list[list[int]], removed: list[list[int]]) -> list[list[int]]:
+    parts = []
+    for first, end in spans:
+        cuts = sorted({first, end} | {max(first, lo) for lo, hi in removed if lo < end and first < hi}
+                      | {min(end, hi) for lo, hi in removed if lo < end and first < hi})
+        for lo, hi in zip(cuts, cuts[1:]):
+            if not any(start <= lo < hi <= stop for start, stop in removed):
+                parts.append((lo, hi))
+    merged = []
+    for first, end in sorted(parts):
+        if merged and first <= merged[-1][1]:
+            merged[-1][1] = max(merged[-1][1], end)
+        else:
+            merged.append([first, end])
+    return merged
+
+
+def check_entry_revision(catalogue: dict, analyzer, evidence: dict, protected: dict[int, dict],
+                         classifications: list[dict]) -> None:
+    """Require the exact reference delta and real negative certificates, not counts.
+
+    This does not change discovery or permit losing an adopted/protected entry.
+    A withdrawn proposal must remain wholly unknown and have its original failed
+    pointer witness refused by the unchanged whole-catalogue endian certificate.
+    """
+    revision = evidence.get("entry_revision")
+    if revision is None:
+        return
+    if catalogue["image_sha256"] != revision["image_sha256"]:
+        raise ValueError("v11-r3 entry reassessment belongs to another original image")
+    functions = {row["address"]: row for row in catalogue["functions"]}
+    entries = {(entry["address"], entry["isa"]): {"owner": row["address"], **entry}
+               for row in functions.values() for entry in row["entries"]}
+    if (len(functions) != len(catalogue["functions"])
+            or len(entries) != sum(len(row["entries"]) for row in functions.values())):
+        raise ValueError("v11-r3 cannot hide duplicate owner/entry identities")
+    expected = {row["address"]: dict(row) for row in revision["prior_owners"]}
+    withdrawn = revision["withdrawn_entry_proposals"]
+    closure = catalogue["closure_evidence"]
+    vetoes = {(row["function"], row["site"], row["evidence"]) for row in closure["read_vetoes"]}
+    unknown = [[row["start"], row["end"]] for row in catalogue["ranges"] if row["kind"] == "unknown"]
+    reopened = []
+    source_addresses = {row["prior_witness"]["function"] for row in withdrawn}
+    if not source_addresses <= functions.keys():
+        raise ValueError("v11-r3 withdrawal loses its unchanged pointer-source owner")
+    decoded = dict((function["address"], instructions) for function, instructions in _decoded_functions(
+        {"functions": [functions[address] for address in sorted(source_addresses)]}, analyzer))
+    for row in withdrawn:
+        address, before, witness = row["address"], row["prior_function"], row["prior_witness"]
+        end = address + before["size"]
+        if (address in functions or (address, before["isa"]) in entries
+                or any(owner["address"] < end and address < owner["address"] + owner["size"]
+                       for owner in protected.values())
+                or hashlib.sha256(analyzer.text[address - analyzer.base:end - analyzer.base]).hexdigest()
+                != row["original_extent_sha256"]
+                or _metadata_sha(functions[witness["function"]]) != row["source_record_sha256"]
+                or (witness["function"], witness["definition_site"],
+                    "unproved_data_endian_pool_value_veto_only") not in vetoes
+                or any(item["target"] == address for item in catalogue["pc_relative_pointer_witnesses"])
+                or sum(max(0, min(end, hi) - max(address, lo)) for lo, hi in unknown) != before["size"]):
+            raise ValueError(f"v11-r3 withdrawal {address:#x} lacks its exact negative/unknown protection")
+        reasons = []
+        for site, instruction in decoded[witness["function"]].items():
+            flow = analyzer.decode(site, functions[witness["function"]]["isa"])
+            if _data_endian_effect(instruction, functions[witness["function"]]["isa"]) is None:
+                reasons.append({"site": site, "reason": "uncertified_processor_effect"})
+            if flow is None:
+                reasons.append({"site": site, "reason": "missing_flow"})
+            elif flow.switch is not None or flow.indirect and not flow.call:
+                reasons.append({"site": site, "reason": "unresolved_computed_transfer"})
+        if reasons != row["negative_certificate_reasons"]:
+            raise ValueError("v11-r3 negative certificate reasons changed; reassessment is required")
+        del expected[address]
+        reopened.append([address, end])
+    for row in classifications:
+        if row["address"] in expected and expected[row["address"]]["kind"] == "function":
+            expected[row["address"]]["kind"] = row["kind"]
+    runtime = closure.get("exact_runtime_data", {})
+    for row in runtime.get("extent_repairs", []):
+        expected[row["address"]]["size"] = row["size"]
+    for row in closure["closed_leaves"]:
+        expected.setdefault(row["start"], {"address": row["start"], "size": row["end"] - row["start"],
+                                          "isa": "arm", "kind": "function"})
+    for row in runtime.get("entry_fragments", []):
+        expected[row["address"]] = {"address": row["address"], "size": row["size"],
+                                    "isa": row["isa"], "kind": "library"}
+    prior_addresses = {row["address"] for row in revision["prior_owners"]}
+    new_owners = expected.keys() - prior_addresses
+    actual = {address: {key: row[key] for key in ("address", "size", "isa", "kind")}
+              for address, row in functions.items()}
+    if actual != expected:
+        raise ValueError("v11-r3 owner identities differ from the exact authenticated delta")
+    lost = {(row["address"], row["prior_function"]["isa"]) for row in withdrawn}
+    prior_entries = {(row["address"], row["isa"]): row for row in revision["prior_entries"]}
+    if (any(entries.get(key) != row for key, row in prior_entries.items() if key not in lost)
+            or entries.keys() != prior_entries.keys() - lost
+            | {(address, expected[address]["isa"]) for address in new_owners}):
+        raise ValueError("v11-r3 entry delta differs from the exact unadopted withdrawals/new proofs")
+    closed = [[row["start"], row["end"]] for row in runtime.get("sections", [])]
+    closed += [[row["address"], row["address"] + row["size"]] for row in runtime.get("entry_fragments", [])]
+    closed += [[row["start"], row["end"]] for key in ("closed_leaves", "owner_merges", "read_footprints", "alignment")
+               for row in closure[key]]
+    closed += [[row["target"], (row["end"] + 3) & ~3]
+               for row in analyzer.literal_encodings.values() if "end" in row]
+    expected_unknown = _remaining_intervals(revision["prior_unknown_ranges"] + reopened, closed)
+    if unknown != expected_unknown:
+        raise ValueError("v11-r3 unknown ranges differ from separately proved closure/reopened proposals")
+    resolved_anomalies = {(row["descriptor_range"][0], "undecodable_reachable_code")
+                          for row in runtime.get("sections", []) if "descriptor_range" in row}
+    expected_anomalies = {(row["address"], row["issue"]) for row in revision["prior_anomalies"]} - resolved_anomalies
+    if {(row["address"], row["issue"]) for row in catalogue["anomalies"]} != expected_anomalies:
+        raise ValueError("v11-r3 anomaly delta differs from the exact descriptor proof")
+    computed = {"functions": len(expected), "creditable_functions": sum(row["kind"] == "function" for row in expected.values()),
+                "creditable_bytes": sum(row["size"] for row in expected.values() if row["kind"] == "function"),
+                "unknown_bytes": sum(end - first for first, end in expected_unknown),
+                "unknown_ranges": len(expected_unknown), "anomalies": len(expected_anomalies)}
+    if (any(catalogue["stats"][key] != value for key, value in computed.items() if key != "unknown_bytes")
+            or catalogue["stats"]["bytes_by_range_kind"].get("unknown", 0) != computed["unknown_bytes"]):
+        raise ValueError("v11-r3 statistics do not equal the authenticated identity/range delta")
+    closure["provisional_entry_reassessment"] = {
+        "reference_proposal": revision["prior_proposal"], "withdrawn_proposals": [
+            {key: row[key] for key in ("address", "prior_record_sha256", "prior_witness", "negative_certificate_reasons")}
+            for row in withdrawn],
+        "prior_entries": len(prior_entries), "retained_prior_entries": len(prior_entries) - len(lost),
+        "new_entries": len(new_owners), "computed_statistics": computed, "adoption": False, "new_C_credit": 0,
+    }
+
+
 def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     """Load immutable metadata witnesses, never changing author directories."""
     path = root / "research/catalogue_v10_evidence.json"
@@ -1295,7 +1458,11 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
         root, root / "research/catalogue_v11_evidence.json", runtime_data)
     evidence["protection_revision"] = protection
     evidence["runtime_data"] = runtime_data
-    evidence["revision"] = protection["revision"]
+    entry_revision, entry_inputs = load_entry_revision_inputs(
+        root, root / "research/catalogue_v11_r2_evidence.json", runtime_data, prior)
+    evidence["entry_revision"] = entry_revision
+    evidence["revision"] = entry_revision["revision"]
+    inputs.update(entry_inputs)
     inputs.update(protection_inputs)
     inputs.update(runtime_inputs)
     return evidence, prior, inputs
@@ -1472,3 +1639,5 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     candidate["revision_review"]["data_endian_repair"] = evidence["endian_repair"]
     candidate["revision_review"]["protected_metadata_transitions"] = candidate["closure_evidence"].get(
         "protected_metadata_transitions", [])
+    candidate["revision_review"]["provisional_entry_reassessment"] = candidate["closure_evidence"].get(
+        "provisional_entry_reassessment", {})

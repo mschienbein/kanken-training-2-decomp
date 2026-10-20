@@ -114,6 +114,17 @@ def synthetic_project(root: Path) -> dict:
     successor.update(parent_evidence=descriptor(root, "research/catalogue_v11_evidence.json"),
                      prepared_protection=runtime["prepared_protection"], protected_record_transitions=[transition])
     write_json(successor_path, successor)
+    entry_path = root / "research/catalogue_v11_r3_evidence.json"
+    entry_revision = json.loads(entry_path.read_bytes())
+    entry_revision["parent_evidence"] = descriptor(root, "research/catalogue_v11_r2_evidence.json")
+    # Like the real r4 reference, this prior proposal already contains the typed
+    # metadata repair, while the adopted catalogue intentionally still does not.
+    entry_revision.update(
+        prior_owners=[{key: row[key] for key in ("address", "size", "isa", "kind")} for row in after["functions"]],
+        prior_entries=[{"owner": row["address"], **entry} for row in after["functions"] for entry in row["entries"]],
+        prior_unknown_ranges=[[row["start"], row["end"]] for row in after["ranges"] if row["kind"] == "unknown"],
+        prior_anomalies=after["anomalies"])
+    write_json(entry_path, entry_revision)
     (root / "orig/code.bin").write_bytes(image)
     exheader = bytearray(0x200)
     for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):

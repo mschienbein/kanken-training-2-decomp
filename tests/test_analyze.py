@@ -90,6 +90,23 @@ def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dic
         "prepared_protection": None, "protected_record_transitions": [],
     }
     (root / "research/catalogue_v11_r2_evidence.json").write_text(json.dumps(protection))
+    protection_path = root / "research/catalogue_v11_r2_evidence.json"
+    baseline_path = root / "config/catalogue.json"
+    baseline = json.loads(baseline_path.read_bytes()) if baseline_path.is_file() else {}
+    entry_revision = {
+        "revision": "catalogue-v11-r3", "image_sha256": image_sha256, "new_C_credit": 0, "adoption": False,
+        "parent_evidence": {"path": str(protection_path.relative_to(root)),
+                            "sha256": hashlib.sha256(protection_path.read_bytes()).hexdigest()},
+        "prior_proposal": runtime["prior_proposal"],
+        "prior_owners": [{key: row[key] for key in ("address", "size", "isa", "kind")}
+                         for row in baseline.get("functions", [])],
+        "prior_entries": [{"owner": row["address"], **entry}
+                          for row in baseline.get("functions", []) for entry in row["entries"]],
+        "prior_unknown_ranges": [[row["start"], row["end"]] for row in baseline.get("ranges", [])
+                                 if row["kind"] == "unknown"],
+        "prior_anomalies": baseline.get("anomalies", []), "withdrawn_entry_proposals": [],
+    }
+    (root / "research/catalogue_v11_r3_evidence.json").write_text(json.dumps(entry_revision))
     return revision
 
 
@@ -1460,8 +1477,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v11-r2")
-                self.assertEqual(result["generator"]["revision"], "catalogue-v11-r2")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v11-r3")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v11-r3")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
@@ -1469,6 +1486,7 @@ class CatalogueTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v10_r5_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_r2_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_r3_evidence.json", result["generator"]["input_sha256"])
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
@@ -1775,10 +1793,50 @@ class CatalogueTests(unittest.TestCase):
         for row in prepared["identities"]:
             self.assertEqual(hashlib.sha256(analyze.serialize_catalogue(functions[row["owner"]])).hexdigest(),
                              row["proposal_record_sha256"])
+        reference = closure["entry_revision"]
+        withdrawn = {row["address"]: row for row in reference["withdrawn_entry_proposals"]}
+        self.assertEqual(set(withdrawn), {0x1005C0, 0x1005FA, 0x1009D4})
+        expected_ordinary = {row["address"]: row["size"] for row in reference["prior_owners"]
+                             if row["kind"] == "function" and row["address"] not in withdrawn}
+        self.assertEqual({row["address"]: row["size"] for row in functions.values() if row["kind"] == "function"},
+                         expected_ordinary)
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
-                          first["stats"]["creditable_bytes"]), (4744, 4582, 1123224))
-        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
-                          first["stats"]["anomalies"]), (142, 32, 9))
+                          first["stats"]["creditable_bytes"]),
+                         (len(reference["prior_owners"]) - len(withdrawn) + len(closure["runtime_data"]["entry_fragments"]),
+                          len(expected_ordinary), sum(expected_ordinary.values())))
+        expected_unknown = {address for lo, hi in reference["prior_unknown_ranges"] for address in range(lo, hi)}
+        for row in withdrawn.values():
+            expected_unknown.update(range(row["address"], row["address"] + row["prior_function"]["size"]))
+        for row in closure["runtime_data"]["sections"]:
+            expected_unknown.difference_update(range(*row["claim"]))
+        for row in closure["runtime_data"]["entry_fragments"]:
+            expected_unknown.difference_update(range(row["address"], row["address"] + row["classification_record"]["size"]))
+        self.assertEqual({address for row in first["ranges"] if row["kind"] == "unknown"
+                          for address in range(row["start"], row["end"])}, expected_unknown)
+        self.assertEqual(first["stats"]["bytes_by_range_kind"]["unknown"], len(expected_unknown))
+        self.assertEqual(first["stats"]["unknown_ranges"], sum(address - 1 not in expected_unknown for address in expected_unknown))
+        reassessment = first["revision_review"]["provisional_entry_reassessment"]
+        self.assertEqual({row["address"] for row in reassessment["withdrawn_proposals"]}, withdrawn.keys())
+        self.assertEqual(reassessment["retained_prior_entries"], len(reference["prior_entries"]) - len(withdrawn))
+        self.assertEqual(reassessment["new_entries"], len(closure["runtime_data"]["entry_fragments"]))
+        proposed_entries = {(row["address"], row["isa"]) for row in reference["prior_entries"]}
+        expected_entries = (proposed_entries - {(row["address"], row["prior_function"]["isa"])
+                                                for row in withdrawn.values()}
+                            | {(row["address"], row["isa"]) for row in closure["runtime_data"]["entry_fragments"]})
+        self.assertEqual({(entry["address"], entry["isa"]) for row in functions.values() for entry in row["entries"]},
+                         expected_entries)
+        self.assertTrue(all(row["address"] not in protected for row in withdrawn.values()))
+        vetoes = {(row["function"], row["site"], row["evidence"]) for row in first["closure_evidence"]["read_vetoes"]}
+        for row in withdrawn.values():
+            witness = row["prior_witness"]
+            self.assertIn((witness["function"], witness["definition_site"],
+                           "unproved_data_endian_pool_value_veto_only"), vetoes)
+        resolved_anomalies = {(row["claim"][0], "undecodable_reachable_code")
+                              for row in closure["runtime_data"]["sections"]
+                              if row["closure_kind"] == "descriptor_continuation"}
+        expected_anomalies = {(row["address"], row["issue"]) for row in reference["prior_anomalies"]} - resolved_anomalies
+        self.assertEqual({(row["address"], row["issue"]) for row in first["anomalies"]}, expected_anomalies)
+        self.assertEqual(first["stats"]["anomalies"], len(expected_anomalies))
         self.assertEqual(sum(first["stats"][key] for key in ("code_bytes", "pool_bytes", "literal_bytes")),
                          first["stats"]["bytes_by_range_kind"]["function"])
         runtime = first["closure_evidence"]["exact_runtime_data"]
@@ -1826,7 +1884,7 @@ class CatalogueTests(unittest.TestCase):
         self.assertFalse(first["closure_evidence"]["owner_merges"][0]["ownership_classified"])
         self.assertEqual(len(first["closure_evidence"]["closed_leaves"]), 42)
         self.assertEqual(sum(row["end"] - row["start"] for row in first["closure_evidence"]["closed_leaves"]), 2560)
-        self.assertEqual(len(first["pc_relative_pointer_witnesses"]), 3)
+        self.assertEqual(first["pc_relative_pointer_witnesses"], [])
         raw_sites = first["closure_evidence"]["raw_svc_sites"]
         expected_services = {0x01: 1, 0x02: 1, 0x03: 3, 0x08: 1, 0x09: 1, 0x0A: 5,
                              0x14: 1, 0x17: 1, 0x18: 5, 0x19: 5, 0x1E: 1, 0x1F: 3,
@@ -2515,6 +2573,7 @@ class CatalogueClosureTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v10_r5_evidence.json", inputs)
                 self.assertIn("research/catalogue_v11_evidence.json", inputs)
                 self.assertIn("research/catalogue_v11_r2_evidence.json", inputs)
+                self.assertIn("research/catalogue_v11_r3_evidence.json", inputs)
                 for field in ("parent_evidence", "baseline_catalogue"):
                     changed = json.loads(json.dumps(evidence))
                     changed[field]["sha256"] = "0" * 64
