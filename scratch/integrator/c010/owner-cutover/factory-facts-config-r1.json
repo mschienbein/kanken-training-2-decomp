@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "analysis_script_sha256": "64e4da6054972c20550a1e03d82c1a53a748d52af61dba3992e15f5c2679bf37",
+  "functions": [
+    {
+      "function": "func_001719f4",
+      "memory_facts": [
+        {
+          "site_offset": 16,
+          "base": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r0"
+          },
+          "field_offset": 0,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r1"
+          }
+        },
+        {
+          "site_offset": 28,
+          "base": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r0"
+          },
+          "field_offset": 4,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "word-read",
+            "from": {
+              "kind": "stack"
+            }
+          }
+        },
+        {
+          "site_offset": 32,
+          "base": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r0"
+          },
+          "field_offset": 1,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "prior-call-register",
+            "target": "func_001dc390",
+            "meaningful_result_requires_use_evidence": true
+          }
+        },
+        {
+          "site_offset": 36,
+          "base": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r0"
+          },
+          "field_offset": 2,
+          "writes_memory": true,
+          "bits": 8,
+          "stored_value": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r3"
+          }
+        },
+        {
+          "site_offset": 40,
+          "base": {
+            "kind": "entry",
+            "function": "func_001719f4",
+            "register": "r0"
+          },
+          "field_offset": 24,
+          "writes_memory": false,
+          "bits": 32,
+          "stored_value": null
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 24,
+          "target": "func_001dc390",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_001719f4",
+              "register": "r2"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_001719f4",
+              "register": "r1"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_001719f4",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_001719f4",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    },
+    {
+      "function": "func_00171a34",
+      "memory_facts": [
+        {
+          "site_offset": 44,
+          "base": {
+            "kind": "entry",
+            "function": "func_00171a34",
+            "register": "r0"
+          },
+          "field_offset": 4,
+          "writes_memory": true,
+          "bits": 32,
+          "stored_value": {
+            "kind": "prior-call-register",
+            "target": "func_00168670",
+            "meaningful_result_requires_use_evidence": true
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 24,
+          "target": "func_00168670",
+          "arguments": {
+            "r0": {
+              "kind": "entry",
+              "function": "func_00171a34",
+              "register": "r1"
+            },
+            "r1": {
+              "kind": "entry",
+              "function": "func_00171a34",
+              "register": "r2"
+            },
+            "r2": {
+              "kind": "entry",
+              "function": "func_00171a34",
+              "register": "r2"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_00171a34",
+              "register": "r1"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        },
+        {
+          "site_offset": 72,
+          "target": "func_00181a4c",
+          "arguments": {
+            "r0": {
+              "kind": "unknown"
+            },
+            "r1": {
+              "kind": "unknown"
+            },
+            "r2": {
+              "kind": "unknown"
+            },
+            "r3": {
+              "kind": "entry",
+              "function": "func_00171a34",
+              "register": "r3"
+            }
+          },
+          "live_registers_do_not_prove_arity": true
+        }
+      ]
+    }
+  ],
+  "qualification": "Original scoped CFG facts only. A memory read through a returned value supports that value's pointer use, but does not recover original class or native mangled identity. No common complete object type is inferred solely from offsets, SDK spelling or live incoming register presence. Indirect slots and all other consumers still need final audit."
+}

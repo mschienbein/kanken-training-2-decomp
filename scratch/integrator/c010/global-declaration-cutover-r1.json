@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "plan": "global-declaration-plan-r1.json",
+  "declarations_removed": 65,
+  "units": 59,
+  "include_edits": [
+    {
+      "source": "src/checkpoint10/func_00172994.c",
+      "headers_added": [
+        "game/task_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00172994.c#224E]\n1:#include \"game/task_runtime.h\"\n2:struct PlaybackSlot {\n3:    int resource;\n\n5:};"
+    },
+    {
+      "source": "src/checkpoint10/func_0010a814.c",
+      "headers_added": [
+        "game/screen.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0010a814.c#BE92]\n1:#include \"game/screen.h\"\n2:/* INTEGRATOR: differs from include/game/screen.h: the global's partial\n3: * DisplayQueueCounter layout also has an enable word at +0x0c. */"
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "headers_added": [
+        "game/render_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0011d12c.c#FA84]\n1:#include \"game/render_state.h\"\n2:struct PipelineConfiguration;\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_00104804.cpp",
+      "headers_added": [
+        "game/graphics_resources.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00104804.cpp#FA10]\n1:#include \"game/graphics_resources.h\"\n2:#include \"game/runtime.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_00181a4c.c",
+      "headers_added": [
+        "game/service_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00181a4c.c#8238]\n1:#include \"game/service_state.h\"\n2:/* [INFERENCE] Role names. The queue lives at bss_004990d0 (256 records of 32\n3: * bytes starting at +0x102c, write index at +0x1024); the sibling\n\n7: * (e.g. 4), so the one-word union below is [INFERENCE], not a recovered type. */"
+    },
+    {
+      "source": "src/checkpoint10/func_00155dec.c",
+      "headers_added": [
+        "game/service_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00155dec.c#6A52]\n1:#include \"game/service_runtime.h\"\n2:struct AudioChannelState;\n3:/* INTEGRATOR: differs from include/game/audio_voice.h: the reserved00 region\n\n5: * into the channel, with the clamped value also forwarded to func_00156484). */"
+    },
+    {
+      "source": "src/checkpoint10/func_001811b8.c",
+      "headers_added": [
+        "game/service_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001811b8.c#4A2B]\n1:#include \"game/service_state.h\"\n2:#include \"ctr/svc.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001f5780.cpp",
+      "headers_added": [
+        "game/graphics_resources.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001f5780.cpp#B1F4]\n1:#include \"game/graphics_resources.h\"\n2:#include \"game/functions.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001306c8.c",
+      "headers_added": [
+        "game/command_buffer.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001306c8.c#C900]\n1:#include \"game/command_buffer.h\"\n2:#include \"game/material.h\"\n3:/* [INFERENCE] Shader/draw-list layouts recovered from this function's field accesses only. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001273a0.c",
+      "headers_added": [
+        "game/command_buffer.h",
+        "game/material.h",
+        "game/render_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001273a0.c#14BD]\n1:#include \"game/command_buffer.h\"\n2:#include \"game/material.h\"\n3:#include \"game/render_state.h\"\n4:/* INTEGRATOR: differs from include/game/render_state.h: reserved ranges\n5: * contain the capability flags and force-update flag named below. */"
+    },
+    {
+      "source": "src/checkpoint10/resume_binding_insertposition.cpp",
+      "headers_added": [
+        "game/resource_instance.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/resume_binding_insertposition.cpp#C312]\n1:#include \"game/resource_instance.h\"\n2:#include \"game/layout_binding.h\"\n3:#include \"game/pool_list.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_0020f858.cpp",
+      "headers_added": [
+        "game/runtime.h",
+        "game/screen.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0020f858.cpp#32F2]\n1:#include \"game/runtime.h\"\n2:#include \"game/screen.h\"\n3:#include <stddef.h>\n4:"
+    },
+    {
+      "source": "src/checkpoint10/func_00196114.c",
+      "headers_added": [
+        "game/bss_0049ecf0.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00196114.c#509B]\n1:#include \"game/bss_0049ecf0.h\"\n2:/* INTEGRATOR: differs from include/game/bss_0049ecf0.h: its reserveda4\n3: * span contains the writable selected-resource index at aggregate offset 0x124. */"
+    },
+    {
+      "source": "src/checkpoint10/func_0012e8a4.c",
+      "headers_added": [
+        "game/service_runtime.h",
+        "game/service_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0012e8a4.c#6B66]\n1:#include \"game/service_runtime.h\"\n2:#include \"game/service_state.h\"\n3:#include \"ctr/svc.h\"\n4:#include \"game/applet.h\""
+    },
+    {
+      "source": "src/checkpoint10/publication_signed.c",
+      "headers_added": [
+        "game/service_runtime.h",
+        "game/service_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/publication_signed.c#0901]\n1:#include \"game/service_runtime.h\"\n2:#include \"game/service_state.h\"\n3:#include \"game/applet.h\"\n4:#include \"ctr/svc.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_001425bc.c",
+      "headers_added": [
+        "game/service_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001425bc.c#00BD]\n1:#include \"game/service_runtime.h\"\n2:/* Caller contract: func_0013dec8 consumes bit 31 of this returned result;\n3: * the previous void declaration dropped an observed return value. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001ae00c.c",
+      "headers_added": [
+        "game/resource_descriptors.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001ae00c.c#BE8D]\n1:#include \"game/resource_descriptors.h\"\n2:#include \"game/playback_screen.h\"\n3:#include \"game/screen.h\""
+    },
+    {
+      "source": "src/checkpoint10/positions.cpp",
+      "headers_added": [
+        "game/pane_descriptors.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/positions.cpp#9528]\n1:#include \"game/pane_descriptors.h\"\n2:#include \"game/character_panel.h\"\n3:#include \"game/selection.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_0010239c.c",
+      "headers_added": [
+        "game/scheduler.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0010239c.c#7918]\n1:#include \"game/scheduler.h\"\n2:/* INTEGRATOR: differs from include/game/scheduler.h: the dispatcher loads\n3: * enabled as a signed halfword and reads a scheduling-mode word at 0x60c. */"
+    },
+    {
+      "source": "src/checkpoint10/func_00190b1c.c",
+      "headers_added": [
+        "game/selection.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00190b1c.c#089B]\n1:#include \"game/selection.h\"\n2:/* INTEGRATOR: differs from include/game/selection.h: stores prove four signed\n3: * halfword values in W6CategoryItem's previously opaque eight-byte payload. */"
+    },
+    {
+      "source": "src/checkpoint10/func_00190c1c.c",
+      "headers_added": [
+        "game/selection.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00190c1c.c#A18B]\n1:#include \"game/selection.h\"\n2:#include <stdarg.h>\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_00185f70.c",
+      "headers_added": [
+        "game/service_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00185f70.c#DA52]\n1:#include \"game/service_state.h\"\n2:#include \"game/service_runtime.h\"\n3:/* INTEGRATOR: differs from include/game/service_state.h: PendingState also has a writable completion flag at +4. */"
+    },
+    {
+      "source": "src/checkpoint10/func_0019e414.c",
+      "headers_added": [
+        "game/render_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0019e414.c#21A2]\n1:#include \"game/render_state.h\"\n2:#include \"game/screen.h\"\n3:struct GpuVertexAttribute {\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_00148040.cpp",
+      "headers_added": [
+        "game/service_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00148040.cpp#7055]\n1:#include \"game/service_runtime.h\"\n2:#include \"ctr/svc.h\"\n3:#include \"game/result.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_00148094.cpp",
+      "headers_added": [
+        "game/service_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00148094.cpp#A25B]\n1:#include \"game/service_runtime.h\"\n2:#include \"ctr/svc.h\"\n3:#include \"game/result.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_001dc100.c",
+      "headers_added": [
+        "game/notification.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001dc100.c#37A4]\n1:#include \"game/notification.h\"\n2:struct NotificationKeyEntry {\n3:    unsigned char enabled;\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_00214e40.cpp",
+      "headers_added": [
+        "game/layout_draw.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00214e40.cpp#CDDE]\n1:#include \"game/layout_draw.h\"\n2:#include <new>\n3:#include \"game/functions.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_0010b5cc.c",
+      "headers_added": [
+        "game/service_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0010b5cc.c#2DBF]\n1:#include \"game/service_state.h\"\n2:#include \"game/synchronization.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001af00c.cpp",
+      "headers_added": [
+        "game/pane_descriptors.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001af00c.cpp#A5A1]\n1:#include \"game/pane_descriptors.h\"\n2:#include \"game/screen.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_0013cfdc.c",
+      "headers_added": [
+        "game/render_state.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0013cfdc.c#06C8]\n1:#include \"game/render_state.h\"\n2:/* INTEGRATOR: differs from include/game/render_state.h: the word at +4 is a control-flag field, not opaque padding. */\n3:struct GpuFlushState {\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001acb90.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001acb90.cpp#4B60]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001b325c.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001b325c.cpp#1CE1]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001be104.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001be104.cpp#3E45]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001e744c.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001e744c.cpp#5C6C]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001e7c4c.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001e7c4c.cpp#7723]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001e7fb8.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001e7fb8.cpp#FAE1]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001ec128.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001ec128.cpp#A63A]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_001ef790.cpp",
+      "headers_added": [
+        "game/scene_lifecycle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001ef790.cpp#67C9]\n1:#include \"game/scene_lifecycle.h\"\n2:#include \"game/cleanup.h\"\n3:"
+    },
+    {
+      "source": "src/checkpoint10/func_00104fc4.c",
+      "headers_added": [
+        "game/material.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00104fc4.c#5B32]\n1:#include \"game/material.h\"\n2:#include \"game/exp_heap.h\"\n3:#include \"game/runtime.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_00135c10.c",
+      "headers_added": [
+        "game/render_resource.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00135c10.c#63C4]\n1:#include \"game/render_resource.h\"\n2:#include \"game/exp_heap.h\"\n3:#include \"game/runtime.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_00103978.c",
+      "headers_added": [
+        "game/resource_tables.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00103978.c#01CA]\n1:#include \"game/resource_tables.h\"\n2:#include <stdint.h>\n3:#include \"game/shared_memory.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_0019f0c4.cpp",
+      "headers_added": [
+        "game/drawing_system.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0019f0c4.cpp#D7A8]\n1:#include \"game/drawing_system.h\"\n2:#include \"game/functions.h\"\n3:#include \"game/runtime.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_001dc180.c",
+      "headers_added": [
+        "game/notification.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001dc180.c#7CC4]\n1:#include \"game/notification.h\"\n2:struct W23JProgressDay {\n3:    unsigned char flags;\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc1ac.c",
+      "headers_added": [
+        "game/notification.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001dc1ac.c#DBE2]\n1:#include \"game/notification.h\"\n2:struct W23JProgressDay {\n3:    unsigned char flags;\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc1d8.c",
+      "headers_added": [
+        "game/notification.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001dc1d8.c#0898]\n1:#include \"game/notification.h\"\n2:struct W23JProgressDay {\n3:    unsigned char flags;\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc8e0.c",
+      "headers_added": [
+        "game/notification.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001dc8e0.c#4B41]\n1:#include \"game/notification.h\"\n2:struct W23JProgressDay {\n3:    unsigned char flags;\n\n6:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001d3c2c.cpp",
+      "headers_added": [
+        "game/sound_task.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d3c2c.cpp#21D6]\n1:#include \"game/sound_task.h\"\n2:#include <stddef.h>\n3:#include \"game/sound_runtime.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_001c1600.cpp",
+      "headers_added": [
+        "game/property_descriptor.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001c1600.cpp#B9CD]\n1:#include \"game/property_descriptor.h\"\n2:#include \"game/command_state.h\"\n3:#include \"game/resource_runtime.h\""
+    },
+    {
+      "source": "src/checkpoint10/func_0010a704.c",
+      "headers_added": [
+        "game/task_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0010a704.c#62C6]\n1:#include \"game/task_runtime.h\"\n2:#include \"game/synchronization.h\"\n3:#include \"game/region_heap.h\""
+    }
+  ],
+  "qualification": "A canonical import exposes conflicting source-local record definitions; it is not a native compiler/signature or pointer-contract pass."
+}

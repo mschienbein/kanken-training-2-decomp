@@ -43,4 +43,40 @@ struct FramebufferRenderTarget {
     struct RenderTargetConfiguration configuration;
 };
 
+struct OffscreenColor { float red, green, blue, alpha; };
+struct OffscreenState {
+    unsigned char reserved00, enabled, changed, reserved03;
+    unsigned framebuffer, renderbuffer, texture, width, height;
+    unsigned color_format, depth_format;
+    struct OffscreenColor border_color;
+};
+
+#ifdef __cplusplus
+/* [INFERENCE] Separate viewport target protocol, not a FramebufferRenderTarget
+ * alias. Only the descriptor-returning slot used by this wrapper is recovered. */
+class ViewportRenderTarget {
+public:
+    virtual ~ViewportRenderTarget();
+    virtual void reserved08();
+    virtual const RenderTargetConfiguration *description();
+};
+struct ViewportState;
+struct ViewportRectangle {
+    float left, bottom, right, top, near_depth, far_depth;
+};
+extern "C" {
+void func_00116400(ViewportState *state, ViewportRenderTarget *target,
+                    const ViewportRectangle *viewport);
+void func_0010d644(ViewportState *state, ViewportRenderTarget *target);
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct OffscreenState bss_00495c04;
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,0 +1,51 @@
+#ifndef GAME_COMMAND_BUFFER_H
+#define GAME_COMMAND_BUFFER_H
+
+struct MatrixObject;
+/* [INFERENCE] Observed cache and renderer prefixes; the cursor callbacks are
+ * not aliases for W19CommandBuffer's size-oriented native interface. */
+struct RenderCache { unsigned values[11]; };
+struct W15iRenderer;
+struct W15iRendererVtable {
+    unsigned char reserved00[0x10];
+    unsigned char *(*begin)(struct W15iRenderer *, unsigned char *, unsigned flags);
+    unsigned reserved14;
+    unsigned char *(*end)(struct W15iRenderer *, unsigned char *, unsigned flags);
+};
+struct W15iRenderer {
+    const struct W15iRendererVtable *vtable;
+};
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+class W19CommandBuffer;
+
+class W19CommandBuffer {
+public:
+    virtual void reserved00();
+    virtual void reserved01();
+    virtual void reserved02();
+    virtual void reserved03();
+    virtual unsigned char *commit(unsigned char *cursor, unsigned size);
+    virtual void reserved05();
+    virtual unsigned char *reserve(unsigned char *cursor, unsigned size);
+};
+
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern unsigned char *data_00242fc8;
+extern unsigned char *data_00242fcc;
+extern unsigned char *func_0018d8d4(void);
+extern void func_0018d8c4(unsigned char *cursor);
+extern void func_00191c94(struct RenderCache *cache, unsigned flags);
+extern void func_0018d894(struct W15iRenderer *renderer,
+                          struct MatrixObject *render_info, unsigned flags);
+#ifdef __cplusplus
+}
+#endif
+
+#endif

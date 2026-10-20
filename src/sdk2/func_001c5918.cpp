@@ -7,8 +7,8 @@ static inline T maximum(T left, T right)
     return left;
 }
 
-extern "C" void func_001c5918(struct Pane *pane, int extent)
+extern "C" void func_001c5918(struct AudioChannel *channel, int extent)
 {
-    pane->extent = maximum(extent, 0);
-    func_001c5930(pane->style, extent);
+    channel->extent = maximum(extent, 0);
+    func_001c5930(channel->state, extent);
 }

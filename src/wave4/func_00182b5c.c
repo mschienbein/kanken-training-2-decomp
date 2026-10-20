@@ -1,11 +1,6 @@
 #include "game/functions.h"
+#include "game/sdk_init.h"
 
-struct TranslationOffsets {
-    unsigned first;
-    unsigned second;
-};
-
-extern struct TranslationOffsets data_00243798;
 
 static int ContainsRange(unsigned base, unsigned size, unsigned start, unsigned end)
 {

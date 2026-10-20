@@ -1,0 +1,20 @@
+#include "game/functions.h"
+#include "game/reset_reference.h"
+
+struct ArrayElement {
+    unsigned char reserved00[0xd4];
+};
+
+struct ElementArray {
+    unsigned reserved00;
+    struct ArrayElement elements[8];
+};
+
+
+
+struct ElementArray *func_001ef960(struct ElementArray *array)
+{
+    unsigned *elements = __aeabi_vec_ctor_nocookie_nodtor(array->elements, func_001c0e44,
+                                                        sizeof(struct ArrayElement), 8);
+    return (struct ElementArray *)(elements - 1);
+}

@@ -1,7 +1,7 @@
 #include "game/functions.h"
+#include "game/hwr_runtime.h"
 
 extern unsigned char bss_004de5cc[];
-extern unsigned char *data_00243830;
 
 int func_0014db18(void)
 {

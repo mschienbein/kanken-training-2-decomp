@@ -1,0 +1,23 @@
+[
+  {
+    "function": "func_001db404",
+    "profile": "game",
+    "original_source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r301/src/func_001db404.cpp",
+    "original_receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r301/match/func_001db404/final-game/func_001db404.result.json",
+    "original_source_sha256": "71d004eb0142b7dae8eedd4d3a30855721a617a85b6b66f5869cb5cdf330eada",
+    "integration_source": "src/checkpoint10/func_001db404.cpp",
+    "integration_source_sha256": "71d004eb0142b7dae8eedd4d3a30855721a617a85b6b66f5869cb5cdf330eada",
+    "preserved_integration_source": "scratch/integrator/c010/deferred-contract/func_001db404.cpp",
+    "reason": "The delivered ResourceFont/ResourceFontVTable is an independent local owner/vtable identity. The same data_00224d30 is already the canonical FontVTable, while func_001daefc is the accepted native nw::font::ResFontBase::RemoveResourceBuffer definition, not a C ResourceFont endpoint. Importing that canonical vtable without reconciling the full native/C font owner and lifecycle identities would repeat the c008 contradictory-owner/definition failure. No ResourceFont-to-FontResource cast, guessed native destructor alias or shadow extern-C method is admitted. The accepted func_001db130 wrapper remains unchanged. Re-entry requires an actual canonical native/C font lifecycle cutover and exact match, not only moving the opaque declarations.",
+    "evidence": [
+      "include/game/font.h",
+      "include/game/font_resource.h",
+      "src/nw4c/font_ResFontBase.cpp",
+      "src/nw4c/font_ResFontBase_ctor.cpp",
+      "include/nw/font/font_ResFontBase.h",
+      "src/wave4/func_001db130.c",
+      "config/names.json"
+    ],
+    "classification": "contract-resolution-deferred-not-rejected-match"
+  }
+]

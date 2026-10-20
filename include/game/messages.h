@@ -1,6 +1,7 @@
 #ifndef GAME_MESSAGES_H
 #define GAME_MESSAGES_H
 #include "game/screen.h"
+#include "game/text_choices.h"
 struct MessageEntry {
     struct DisplayObject *object;
     unsigned short *output;
@@ -29,6 +30,7 @@ struct W11TextResource { unsigned char reserved00[0x10]; const struct W11TextEnt
 extern "C" {
 #endif
 extern const unsigned short *func_00170c00(const struct W11TextResource *resource, int index);
+extern int func_001dd3a4(int category, int kind);
 /* [INFERENCE] The secondary relative pointer is forwarded through the same
  * UTF-16 pointer contract as MessageLayout's existing assignment routine;
  * its author-proposed attribute semantics are not independently recovered. */
@@ -36,6 +38,7 @@ extern const unsigned short *func_001dcbd4(const struct W11TextResource *resourc
 extern void func_0017a43c(struct MessageLayout *layout, const unsigned short *left,
                           const unsigned short *right, int index);
 extern float func_0017a424(const struct MessageLayout *layout);
+extern void func_00177198(struct MessageLayout *layout, const struct W11TextResource *archive, int index);
 extern void func_00177520(struct MessageLayout *layout);
 extern void func_00177598(struct MessageLayout *layout, float x, float y);
 extern void func_001ad3c8(struct MessageLayout *layout, int index,
@@ -52,4 +55,6 @@ extern const unsigned short data_002276bc[];
 #ifdef __cplusplus
 }
 #endif
+
+
 #endif

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/character_panel.h"
 
 int func_0016dc50(struct CharacterPanel *controller, int index)

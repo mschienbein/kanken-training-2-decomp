@@ -1,20 +1,19 @@
 #include "game/render_state.h"
 
-extern struct SlotList *data_002426d8;
 
-int func_00118074(struct SlotList *list)
+int func_00118074(struct FramebufferManager *list)
 {
-    struct SlotBlock *block;
+    struct Framebuffer *block;
     int result;
     data_002426d8 = list;
     block = func_0018ce64();
     if (block) {
         block->next = 0;
         block->previous = 0;
-        data_002426d8->head = block;
-        data_002426d8->head_count = 0;
-        data_002426d8->tail = block;
-        data_002426d8->tail_count = 0;
+        data_002426d8->framebuffers = block;
+        data_002426d8->renderbuffers = 0;
+        data_002426d8->bound_framebuffer = block;
+        data_002426d8->bound_renderbuffer = 0;
         result = 0;
     } else {
         result = -1;

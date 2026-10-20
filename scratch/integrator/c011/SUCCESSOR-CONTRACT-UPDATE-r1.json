@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "function": "func_00107f0c",
+  "status": "contract-resolution-deferred-not-rejected-match",
+  "previous_disposition": "DISPOSITIONS-r5.json",
+  "current_facts_source": "Direct final handoff from FixC009R3Codex; Main takeover instruction for c010.",
+  "scheduler_source_contract": {
+    "state": "frozen corrected r3 source, pending Main heavy gates/acceptance",
+    "callback": "C-language linkage ScheduledTaskCallback = int (*)(void)",
+    "scheduler": "int func_0019f338(int index, ScheduledTaskCallback callback, unsigned priority); mutation result must be discarded",
+    "procedure_rule": "Effect-procedure definitions stay C unless they have real defined returns; C++ fallthrough is not a valid replacement.",
+    "adoption": "No callback cast, noinline workaround, fake visibility stub or competing scheduler definition authorized."
+  },
+  "retained_author_contract": "np039 exact C++ TU supplies void procedure callbacks and a void scheduler, requires genuine mismatching scheduler plus all five inherited mismatching bodies. It is not reconciled merely because the successor ABI is now frozen.",
+  "current_disposition_reason": "The earlier intake snapshot correctly recorded then-unfrozen successor work. Freezing the corrected C/int ABI does not make the delivered C++/void TU compatible; admission still requires a complete source/header/language-linkage reconciliation, preserving the genuine same-TU definition and every companion status. No re-investigation or compiler rerun was performed.",
+  "current_parent_owner": "Main directly owns c010-integrate after a3062ee; completed C010Codex must not receive further file-edit requests.",
+  "parent_archive_import_commit": "1947019",
+  "parent_archive_application": "PARENT-ARCHIVE-TOKEN-APPLICATION-r1.json",
+  "qualification": "Metadata-only successor-state update. Peer-reported frozen source facts are not independent local verification or checkpoint acceptance. Candidate/source/moves and all five new MATCH witnesses remain unchanged."
+}

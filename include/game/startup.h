@@ -7,6 +7,7 @@ struct StartupCommandPool;
 struct StartupResources;
 
 #include "game/runtime.h"
+#include "game/scheduler.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct ApplicationControl {
@@ -17,13 +18,29 @@ struct ApplicationControl {
     void (*callback)(void);
 };
 
+struct ResourceEvent;
 struct ResourceOptions {
-    unsigned char reserved00[0x18];
+    unsigned active;
+    unsigned pending;
+    unsigned reserved08[2];
+    void *allocation;
+    struct ResourceEvent *event;
     int enabled;
     int group;
     int count;
     int option_a;
     int option_b;
+};
+/* [INFERENCE] Command allocation/count and 0x300 initialized entries are
+ * evidenced by the startup initializer; historical owner identity is unknown. */
+struct StartupCommandEntry {
+    unsigned command;
+    void *argument;
+};
+struct StartupCommandPool {
+    unsigned count;
+    struct StartupCommandEntry entries[0x300];
+    void *storage;
 };
 
 struct StartupResources {
@@ -35,31 +52,55 @@ struct StartupResources {
     struct StartupCommandPool *commands;
 };
 
+struct RestorableState { unsigned current, saved; };
+
+struct StartupItem { int value, flags, id; };
+/* Callback storage is established by 00195b6c and exact 0049c87c/0049c880
+ * indirect consumers in 00105444, not inferred from zero initialization. */
+struct StartupState {
+    int a;
+    void (*b)(void);
+    void (*c)(void);
+    unsigned char enabled, active, ready;
+    char reserved;
+    int position, step;
+    struct StartupItem items[8];
+    int count;
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern unsigned char func_001081ec(void);
 extern void func_0019f324(unsigned char mode, unsigned char option);
-extern void func_001070e8(void);
-extern void func_00107140(void);
-extern void func_00107a88(void (*callback)(void));
+extern int func_001070e8(void);
+extern int func_00107140(void);
+/* C mutation procedure: its unspecified result MUST be discarded. */
+extern int func_00107a88(ScheduledTaskCallback callback);
 extern struct ApplicationControl bss_0049629c;
-extern void func_001906b8(int suspended);
+extern struct RestorableState data_0023fdc8;
+/* C mutation procedure: its unspecified result MUST be discarded. */
+extern int func_001906b8(int suspended);
 extern void func_001906a8(void (*callback)(void));
-extern void func_00190688(int index, void (*callback)(void));
+/* C registration procedures: unspecified results MUST be discarded. */
+extern int func_00190688(int index, ScheduledTaskCallback callback);
+extern int func_0019f338(int index, ScheduledTaskCallback callback, unsigned priority);
+extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(void),
+                          void (*complete)(void), void (*finish)(void));
+extern struct StartupState bss_0049c878;
 extern void func_0011ef60(void);
-extern void func_0011f234(void);
+extern int func_0011f234(void);
 extern unsigned char func_00190678(void);
 extern void func_00195a50(void);
-extern void func_0011f3a8(void);
+extern int func_0011f3a8(void);
 extern struct ResourceOptions bss_0049db78;
 extern struct StartupResources bss_0028d944;
 extern void func_00141944(void);
 extern int func_00145adc(void);
-extern void func_0010433c(void);
+extern int func_0010433c(void);
 extern int func_00107130(void);
-extern void func_001109fc(void);
-extern void func_00110a28(void);
+extern int func_001109fc(void);
+extern int func_00110a28(void);
 extern void func_0013604c(int group);
 extern void func_0013605c(int count);
 extern void func_0013606c(int option);
@@ -67,7 +108,21 @@ extern void func_0013607c(int option);
 extern void func_001360dc(int enabled);
 extern void func_0013de78(int initialized);
 extern void func_0013deb4(void);
-extern void func_0014562c(void);
+/* C procedure: the unspecified result MUST be discarded. */
+extern int func_0014562c(void);
+extern unsigned data_0023eeb4, data_0023eeb8, data_0023eebc;
+extern void func_00135268(unsigned heap, int capacity);
+extern void func_00135128(int capacity);
+extern void func_00135f1c(int capacity);
+extern void func_00135c74(int capacity, int mode, unsigned option);
+extern void func_00135c10(int capacity);
+extern void func_00135bb0(int capacity);
+extern void func_00135b4c(int capacity);
+extern void func_00145afc(unsigned mode);
+extern void func_0019f450(float rate);
+extern void func_00145690(void);
+extern void func_00145658(unsigned status);
+extern void func_001415b0(void);
 #ifdef __cplusplus
 }
 #endif

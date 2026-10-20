@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011-parent-prerequisite",
+  "status": "must-import-before-c010-G3-prepare",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "scope": [
+    "include/game/archive_ipc.h",
+    "src/checkpoint10/func_0011f6a8.c"
+  ],
+  "scope_sha256": {
+    "include/game/archive_ipc.h": "1f5d4be574f6dc02d0df94a8d6b53b979ed015fefedd8f879ac03fd8c71cf291",
+    "src/checkpoint10/func_0011f6a8.c": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183"
+  },
+  "patch": "scratch/integrator/c011/parent-archive-token-r1/CUTOVER.patch",
+  "patch_sha256": "5f2591082bfe86354e7c4be8869a84addbc942c5dfabc1d7b8f6b84176b0b776",
+  "canonical_contract": "CtrResult(unsigned *count, struct ArchiveInfo *entries, unsigned capacity, unsigned char mode, unsigned long long token, unsigned index); input order, widths, token alignment, writable outputs and all three trailing stack words preserved.",
+  "terminal_source": "src/retries/func_0012d550.c",
+  "terminal_source_sha256": "4d9556498c6b032686c6cecb3d4ef5af4dd24db85a15ec359bb52f24a4eba202",
+  "wrapper_witness": {
+    "source": "src/checkpoint10/func_0011f6a8.c",
+    "profile": "game",
+    "targets": [
+      "func_0011f6a8"
+    ],
+    "dependency": true,
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+      "tools/match.py",
+      "src/checkpoint10/func_0011f6a8.c",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--show",
+      "0",
+      "--out",
+      "scratch/integrator/c011/destination-v6-l1-r24-parent-only/func_0011f6a8"
+    ],
+    "exit_code": 0,
+    "source_sha256": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183",
+    "receipt": "scratch/integrator/c011/destination-v6-l1-r24-parent-only/func_0011f6a8/func_0011f6a8.result.json",
+    "receipt_sha256": "f7d21665081db9e1d1f93f2ba53dff17eafb22a7f1b2cecbef3bbe27f559806f",
+    "observed": [
+      {
+        "address": 1177256,
+        "name": "func_0011f6a8",
+        "status": "match",
+        "size": 32,
+        "candidate_size": 32,
+        "first_diff": null
+      }
+    ],
+    "header_sha256": "1f5d4be574f6dc02d0df94a8d6b53b979ed015fefedd8f879ac03fd8c71cf291"
+  },
+  "terminal_witness": {
+    "source": "src/retries/func_0012d550.c",
+    "profile": "sdk",
+    "targets": [
+      "func_0012d550"
+    ],
+    "dependency": true,
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+      "tools/match.py",
+      "src/retries/func_0012d550.c",
+      "--profile",
+      "sdk",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--show",
+      "0",
+      "--out",
+      "scratch/integrator/c011/destination-v6-l1-r24-parent-only/func_0012d550"
+    ],
+    "exit_code": 0,
+    "source_sha256": "4d9556498c6b032686c6cecb3d4ef5af4dd24db85a15ec359bb52f24a4eba202",
+    "receipt": "scratch/integrator/c011/destination-v6-l1-r24-parent-only/func_0012d550/func_0012d550.result.json",
+    "receipt_sha256": "1a6190a2fb412279b5b3f6fb070148d3c812c178991bee8e7fa1e30e87dbdd17",
+    "observed": [
+      {
+        "address": 1234256,
+        "name": "func_0012d550",
+        "status": "match",
+        "size": 112,
+        "candidate_size": 112,
+        "first_diff": null
+      }
+    ],
+    "header_sha256": "1f5d4be574f6dc02d0df94a8d6b53b979ed015fefedd8f879ac03fd8c71cf291"
+  },
+  "credited_child_functions": [],
+  "accepted_moves": [],
+  "candidate_manifest_changes": false,
+  "authorization": "Main explicitly requires isolated source/header correction before c010 G3/prepare. C010 confirms frozena3062ee retains the seven-split-word/void* conflict; no competing parent contract was introduced.",
+  "qualification": "Two bounded exact MATCH witnesses only: wrapper32B/game and terminal112B/sdk under v6/L1. This resolves the actual shared signature, not by cast, adapter, alias or changed wire words. No child00117ad8 credit, candidate scope, unfinished branch merge, G3 audit, full build/test or gate is included. Later child-only header additions must not be imported with this patch."
+}

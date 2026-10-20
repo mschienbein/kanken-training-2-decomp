@@ -7,11 +7,15 @@ struct HwrImageSource {
     unsigned option_a;
     unsigned option_b;
 };
+struct HwrOutputState {
+    unsigned short mode, reserved02;
+    unsigned count;
+};
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern unsigned short data_00243818;
+extern struct HwrOutputState data_00243818;
 extern unsigned char *data_00243890;
 extern struct HwrImage *data_00243854;
 extern int func_0014a98c(unsigned width, unsigned height, struct HwrImage *image);

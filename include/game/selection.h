@@ -9,6 +9,7 @@ struct SelectionHintPanel;
 struct W8DisplaySet;
 
 #include "game/category_pattern.h"
+#include "game/w11_control.h"
 
 #include <stdint.h>
 
@@ -16,7 +17,8 @@ struct W8DisplaySet;
 struct SelectionState {
     unsigned char reserved00[0x4c];
     short selection4c;
-    unsigned char reserved4e[4];
+    short previous;                     /* 0x4e; also queried as limit kind */
+    short category;                     /* 0x50 */
     short selection;
     short mode;
     unsigned char reserved56[2];
@@ -24,8 +26,15 @@ struct SelectionState {
     short successes;
 };
 
+/* [INFERENCE] The list setter refines the former +0x12-only item prefix.
+ * This is not an alias of the independently named W22UiItem/InputItem. */
 struct W6ListItem {
-    unsigned char reserved00[0x12];
+    struct DisplayObject *object;
+    const struct NameTable *table;
+    short label_index, identifier;
+    unsigned short flags;
+    unsigned char active;
+    signed char countdown, initial, text_index;
     short value;
 };
 
@@ -125,11 +134,40 @@ extern void func_001e9944(struct W6ListController *controller);
 extern void func_001e9950(struct W6ListController *controller);
 extern void func_00179600(struct W6ListController *controller, int index, int active);
 extern void func_001e9818(void *screen, int index, int first, int second);
+extern void func_001e981c(void *screen, int group_index, int index, int value);
 extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
+extern void func_00190b1c(int category, int kind, int x, int y, int width, int height);
+extern void func_00190c1c(int category, int kind, int count, ...);
 #ifdef __cplusplus
 }
 #endif
 
+
+/* [INFERENCE] The dispatcher selects a pair slot at +0x90; the reset helper
+ * independently reads the first current/previous words, not the active index. */
+struct W6DisplayHandle;
+struct W6SelectionReset {
+    unsigned char reserved00[0x4c];
+    struct W6ListController *list;
+    unsigned char reserved50[0x0c];
+    struct W6HandlePanel10 *panel;
+    unsigned char reserved60[0x30];
+    int stack_index;
+    int modes[2];
+    int previous_modes[2];
+    unsigned char reserveda4[8];
+    struct W6DisplayHandle **handles;
+};
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_0016c55c(struct W6SelectionReset *state);
+extern void func_001bdb70(struct W6SelectionReset *state);
+extern void func_001bda14(struct W6SelectionReset *state);
+extern void func_001bd9f0(struct W6SelectionReset *state);
+#ifdef __cplusplus
+}
+#endif
 
 struct SelectionCallbacks {
     const void *reserved00[6];
@@ -156,7 +194,7 @@ extern int func_001dd44c(int category, int kind, int mode);
 extern int func_001dd61c(int category);
 extern void func_00190dc0(int category);
 extern int func_00171bf0(int category, int kind);
-extern int func_00173350(int sound);
+extern void func_00173350(int sound);
 extern void func_00173408(struct SelectionHintPanel *panel, int state);
 extern int func_00173608(void);
 extern void func_00173630(struct W6ListController *controller, int list, int resource);
@@ -167,7 +205,7 @@ extern void func_00173ef4(struct Screen *screen);
 extern void func_00173fb4(struct Screen *screen);
 extern int func_00174444(void);
 extern int func_00174470(void);
-extern void func_0017a034(struct Screen *screen, int index, int value);
+extern void func_0017a034(struct W11jVisualOwner *owner, int index, int value);
 extern void func_001a2a78(struct W6SelectionScreen *screen, int from_list);
 extern void func_001a2e6c(struct W6SelectionScreen *screen, int from_list);
 extern void func_001b472c(void *screen, int index);

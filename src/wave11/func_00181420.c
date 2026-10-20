@@ -1,4 +1,5 @@
 #include "game/screen.h"
+#include "game/display_depth.h"
 
 
 

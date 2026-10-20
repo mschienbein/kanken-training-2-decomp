@@ -13,7 +13,6 @@
 #include "game/transition_controller.h"
 
 /* [INFERENCE] Separate receiver views, not a claim of common historical class identity. */
-#ifdef __cplusplus
 struct ColorPanel;
 struct TextPanel;
 struct FooterPanel;
@@ -26,7 +25,12 @@ union TrainingControls {
     struct AnimationOwner *animation;
     struct W6ListController *list;
 };
+#ifdef __cplusplus
 struct TrainingScreen : CallbackTarget {
+#else
+struct TrainingScreen {
+    const void *vtable;
+#endif
     unsigned char reserved04[0x10];
     struct W10DrawingInput *drawing;
     unsigned char reserved18[0x24];
@@ -70,12 +74,27 @@ struct TrainingScreen : CallbackTarget {
     unsigned char reserved4b2[0x1e];
     struct SelectionGrid *grid;
 };
+#ifdef __cplusplus
 extern "C" {
+#endif
 void func_001b8908(struct TrainingScreen *screen);
 void func_001b9f18(struct TrainingScreen *screen);
+#ifdef __cplusplus
 extern const MemberCallback data_002184b0;
+#endif
 void func_0016d6dc(struct TrainingScreen *screen, int enabled);
 void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);
+void func_0016dae8(struct TrainingScreen *screen, int mode, int reset);
+void func_0016c60c(struct TrainingScreen *screen, int mode);
+void func_001bbdd4(struct TrainingScreen *screen);
+void func_001bbc1c(struct TrainingScreen *screen);
+void func_001bc2a0(struct TrainingScreen *screen);
+void func_001bbfc4(struct TrainingScreen *screen);
+int func_00172994(int channel);
+int func_0017abf8(int channel, int sound);
+void func_0017433c(int channel, int duration);
+void func_0016fca0(int enabled);
+#ifdef __cplusplus
 }
 #endif
 struct L041Dialog;
@@ -88,23 +107,16 @@ union L041InitializeControls {
     struct InputOwner *input;
     struct W6ListController *list;
 };
-union L041InitializeSelection {
-    struct SelectionList *list;
-    struct Screen *screen;
-};
-union L041InitializeAlternate {
-    struct AlternateSelectionList *list;
-    struct Screen *screen;
-};
+
 struct L041InitializeScreen {
     unsigned char reserved00[0x44];
     struct L041Accessory *accessory;
-    struct Screen *clock;
+    struct W11jVisualOwner *clock;
     union L041InitializeControls controls;
     struct W8DisplaySet *display;
-    union L041InitializeSelection selection;
+    struct Screen *selection;
     unsigned char reserved58[8];
-    union L041InitializeAlternate alternate;
+    struct Screen *alternate;
     struct L041Dialog *dialog;
     struct R41169OptionalPanel *optional_panel;
     struct AnimationState *scroll;
@@ -151,10 +163,21 @@ struct L041InitializeScreen {
     bool free_mode;
     unsigned char reserved3ee[2];
     int identifier;
+#ifdef __cplusplus
+    void set_entry(unsigned index, unsigned value)
+    {
+        states[index] = value;
+    }
+#endif
 };
 #ifdef __cplusplus
 extern "C" {
 extern const MemberCallback data_00218718;
+}
+#endif
+#ifdef __cplusplus
+extern "C" {
+#endif
 extern void func_001dc170(int value);
 extern void func_001dc230(int value);
 extern struct TransformEntry *func_00174454(int group, int index);
@@ -178,6 +201,7 @@ extern void func_00175a5c(struct AnimationOwner *owner, int index,
 extern void func_001758e4(struct L041Accessory *accessory);
 extern int func_0017abf8(int channel, int sound);
 void func_001e0afc(struct L041InitializeScreen *screen);
+#ifdef __cplusplus
 }
 #endif
 
@@ -190,6 +214,13 @@ extern "C" {
  * slot reaches the shared MessageLayout positioning and visibility family.
  * L041InitializeScreen is a partial view, not a complete historical class. */
 void func_00169018(struct L041InitializeScreen *screen, int enabled);
+void func_001690a8(struct L041InitializeScreen *screen, int enabled);
+void func_001de2c0(struct L041InitializeScreen *screen);
+void func_00168dd0(struct L041InitializeScreen *screen, int enabled);
+/* The same +0x6c animation object is passed to positioning and hint control. */
+void func_0016f174(struct AnimationState *state, int enabled);
+void func_00179d48(struct AnimationOwner *owner, int panel_index,
+                  int element_index, int enabled);
 /* [INFERENCE] Erased accessor/lifecycle identities are not recovered. */
 int TU924_page_count(const struct ItemPageSet *set);
 void TU924_reset_prompts(struct L041PromptTable *table);

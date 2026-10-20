@@ -8,15 +8,16 @@
 #include "game/deferred_callback.h"
 #include "game/screen_operations.h"
 
-#ifdef __cplusplus
 struct L044TrainingFrame;
 struct L044StatisticsPanel;
 struct L044ProgressPanel;
 struct CategoryScreen {
-    unsigned char reserved00[0x40];
+    unsigned char reserved00[0x34];
+    int transition_mode;
+    unsigned char reserved38[8];
     struct RecordSet *records;
     unsigned char reserved44[4];
-    struct Screen *numbers;
+    struct W11jVisualOwner *numbers;
     struct W6ListController *choices;
     struct W8DisplaySet *display;
     struct Screen *buttons;
@@ -54,8 +55,14 @@ struct CategoryScreen {
     int total_value;
     struct L044TrainingFrame *frame;
 };
+#ifdef __cplusplus
 extern "C" {
 extern const MemberCallback data_00218860;
+}
+#endif
+#ifdef __cplusplus
+extern "C" {
+#endif
 extern void func_00166ae8(struct CategoryScreen *screen, int state, int transition);
 extern void func_001c144c(struct L044TrainingFrame *frame);
 extern void func_00170298(struct L044ProgressPanel *panel);
@@ -64,6 +71,7 @@ extern void func_001ec1b8(struct CategoryScreen *screen, int reset);
 extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);
 void func_001ed874(struct CategoryScreen *screen);
+#ifdef __cplusplus
 }
 #endif
 

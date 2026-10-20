@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/item_pages.h"
 
 struct NavigationState {

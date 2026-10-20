@@ -1,0 +1,878 @@
+{
+  "schema_version": 1,
+  "status": "explicit-deferrals-with-native-animation-link-contract-resolved-awaiting-main-gates",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_001c2f10.c",
+      "functions": [
+        "func_001c2f10"
+      ],
+      "profile": "game",
+      "source_sha256": "458aaa91fdef56982fe2c3ff82753e82da62327bae6b226b4660d518eb30b7ce",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c2f10.c",
+      "category": "shared-contract-gap",
+      "reason": "The timer slot also reaches accepted func_0016f534(BoundDisplayObject*). Cleanup requires ResourceEvent*, while the current display operation uses only ResourceEvent.base (DisplayObject*). No actual ResourceEvent/BoundDisplayObject containment or tag-specific owner is proved. Retain the independent ResourceEvent cleanup witness for001c3010, but do not invent a bound-display downcast or publish this incompatible caller.",
+      "evidence": [
+        "src/wave18/func_0016f534.c",
+        "include/game/screen_transition.h",
+        "src/wave15/func_00183208.c",
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001d3c2c.cpp",
+      "functions": [
+        "func_001d3c2c"
+      ],
+      "profile": "game",
+      "source_sha256": "9169ba43f4acde809930cff3e40ef62d65e38857d1605d782c8a8c907eb33be2",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001d3c2c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The returned cleanup receiver is a PlaybackCleanupState with registry subobjects at+0x44/+0x50, embedded in its complete owner at+0x128. Current shared WaveSound exposes a SoundPlaybackState at that offset, whereas the related wave-player lifecycle uses a distinct synchronization/registry-containing W15iWavePlayer. The actual1d9050 provider is absent, so no nominal owner/returned-subobject identity can be established. Do not replace the returned pointer with the input or cast one canonical class into the other.",
+      "evidence": [
+        "include/game/sound_runtime.h",
+        "include/game/wave_player.h",
+        "src/wave15/func_001d9c74.cpp",
+        "scratch/integrator/c010/owner-cutover/factory-facts-remaining-audio-r9.json"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001d65e0.cpp",
+      "functions": [
+        "func_001d65e0"
+      ],
+      "profile": "middleware",
+      "source_sha256": "5ac62fa6142e91459ca56401a21cf990c57e480e15abcafc90bbeda5bb3c6a2d",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001d65e0.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Recover the exact original receiver projection at func_001d6094 -> func_001d65e0 and reconcile it with the canonical aggregate engine. Establish renderer-slot result and entry-reset result from their original consumers/providers before publishing callback contracts. Establish allocation bounds separately before exposing any entry array capacity.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "include/game/scene_lifecycle.h",
+        "src/wave8/func_0017f4f4.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001d6ab8.cpp",
+      "functions": [
+        "func_001d6ab8"
+      ],
+      "profile": "middleware",
+      "source_sha256": "fa7b53e6dda45f4529cc681a2702f8a34dbedea37542faea148a9457814659cc",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001d6ab8.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The same-receiver engine relationship and callback result contracts required by the preceding engine row. Do not choose the private synchronization definition merely because this particular body does not access its second word.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "include/game/synchronization.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/scene_method_byte.cpp",
+      "functions": [
+        "func_001d80b0"
+      ],
+      "profile": "middleware",
+      "source_sha256": "848d1eaff60506b14090596a55228974f4e1c665979a96c8671923c4696aa74d",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/scene_method_byte.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Original surviving target and receiver relationship of func_001d80a8, excluding its erased branch as name proof. Actual func_001d7b6c receiver, work argument, result and work-record bounds. Original notify slot arguments/result and the relationship of the +0x44 callback/registry subobject. A coherent current whole-header hash binding after writer changes.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "include/game/adjusted_callbacks.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/scene_targets.cpp",
+      "functions": [
+        "func_001d7f5c",
+        "func_001d81ec"
+      ],
+      "profile": "middleware",
+      "source_sha256": "b69c24ed150f88f603e5b90b05210c94de5d239ca897c2adccd1c8745262c271",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/scene_targets.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Original group receiver loads and the complete initialized/read descriptor fields at func_001d7f5c -> func_001d48d4. Canonical func_001d48d4 definition or bounded original argument/result/storage facts. Same-owner controller relationship, fixed member extent and work-record capacity. No safe rewrite is authorized merely by renaming the pane records.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "src/wave8/func_001d4aac.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001e37b8.cpp",
+      "functions": [
+        "func_001e37b8"
+      ],
+      "profile": "game",
+      "source_sha256": "5fe0b957731efedd0b8513922b5809f0bc02fccaa208038131d0fa4c0bbd9549",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e37b8.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Services-memory's final canonical HeapManager and singleton declaration. Original func_001e35e4 full input/result semantics and allocation-slot owner; no canonical definition was located.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "include/game/heap_interface.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "functions": [
+        "func_001a2d9c"
+      ],
+      "profile": "game",
+      "source_sha256": "c73fdd63485256b654130ecfdc2e168b2c4559f3ea010f13bc606fd87b2cefe4",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Original +0x90/+0x94/+0xb0 state roles and same-receiver relationship to finalized MenuControllerState. Actual func_001a3978 contract and the selector/list/animation receiver projection. The existing selection-provider deferral must be resolved, not hidden.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "src/models/func_001a2814/func_001a2814_tu.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "functions": [
+        "func_001a77d4"
+      ],
+      "profile": "game",
+      "source_sha256": "fe8a4c7eedf44d00fd1f84d8b0c49352f66b7a5dfcdfd6e3bab63e7af0589313",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Original receiver/state roles, stage bounds and the +0xb0 store's actual member identity. Real func_001a7b54 and func_00171268 input/result contracts. No C++ fixed-array completion is justified by the current local record.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+        "src/models/transition_setters/func_001a8048_value_setter.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "functions": [
+        "func_00175ab8"
+      ],
+      "profile": "game",
+      "source_sha256": "1dff078e98dffbf09e0756201011f0f15b7f9ae8af807b96e64a6f66765fa85e",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "category": "shared-contract-gap",
+      "reason": "Close original incoming color-domain/ABI proof and the70030/167e08 receiver contract; then obtain a cast-free canonical destination witness. Byte stores alone do not prove byte formals.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "include/game/screen.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001e5194.cpp",
+      "functions": [
+        "func_001e5194"
+      ],
+      "profile": "game",
+      "source_sha256": "7bbe3123704ef92e1d852e15255c3c3670c3b3cc9c7ec3cb2c22eb52cbac52ce",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e5194.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Resolve tagged color receiver representations and full parameter contracts with75ab8/70030/70088/70014/6fff8. Prove update/finish contracts; uncalled slots describe layout only.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "include/game/controller.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00196144.cpp",
+      "functions": [
+        "func_00196144"
+      ],
+      "profile": "game",
+      "source_sha256": "0fe6c18120a60708bd8c3dfd854356ffdc44325db597a1edd467b8b75cab36dc",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00196144.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Prove group/resource/binding/entry identities and typed822fc argument flow without new pointer-pair casts/unions that conceal incompatible owners. Preserve c0111822fc reservation.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "src/wave6/func_001822fc.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/positions.cpp",
+      "functions": [
+        "func_001b5a34",
+        "func_001b5cc0"
+      ],
+      "profile": "game",
+      "source_sha256": "c0d8752569725e688fda9bc864d5d3842f65e20836a2eaa6423bfcc8ad166c04",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/positions.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Close6e300 full caller/callee width contract jointly with the color family; do not treat current local byte prototype as independent proof.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "include/game/pane_descriptors.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001af00c.cpp",
+      "functions": [
+        "func_001af00c"
+      ],
+      "profile": "game",
+      "source_sha256": "ad4f4cce0e6e9eb700284c99af3e977d50e0adfe1cde84c99f177af0dfedd6c1",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001af00c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "WidgetSlot.object is DisplayObject*, but00181700/0015e684 currently require BoundDisplayObject*. Prove the tag-specific concrete owner or correct those APIs and all consumers; no two-step void* cast, alias or geometry-only identity assumption. Current source was restored; no successful canonical af00c MATCH is claimed.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "include/game/screen.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00168cec.cpp",
+      "functions": [
+        "func_00168cec"
+      ],
+      "profile": "game",
+      "source_sha256": "94cc4aab73486350a5e48cb9d35f169c5cc6edea827ea66f6fa387fd0a569a2f",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00168cec.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Close6e300 parameter-width contract with the color family before adopting a narrowed local prototype.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "include/game/screen.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00174d9c.cpp",
+      "functions": [
+        "func_00174d9c"
+      ],
+      "profile": "game",
+      "source_sha256": "42e1c1308c0ef2f0800b03bbd066459a75eaf8ec2588d14d202f2eaf445a2077",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_00174d9c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Need a natural full-int constructor witness or independent original caller/ABI evidence for a justified contract revision. Preserve the current private MATCH as deferred, not accepted.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "include/game/command_state.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001ae9e4.cpp",
+      "functions": [
+        "func_001ae9e4"
+      ],
+      "profile": "game",
+      "source_sha256": "b54fef4127479f7c014ddd478deee681dd7bae4737c7d75995569b574769414e",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001ae9e4.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Canonical func_00183208 takes ResourceEvent*, not DisplayObject*. Prove the actual slot-pointee resource relationship through constructor/assignment/callback flow. If ResourceEvent is established, type slot.object accordingly and pass its.base only to display operations. Four-byte slot extent alone is insufficient, and no cast/alias may conceal the conflict.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+        "src/checkpoint10/collect-r2/func_001ae9e4.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001e3700_array_loop.cpp",
+      "functions": [
+        "func_001e3700"
+      ],
+      "profile": "game",
+      "source_sha256": "b6735620db9304bdb85ea0e29968bec2ffca88b34604012ddeae12f75ec5086a",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e3700_array_loop.cpp",
+      "category": "shared-contract-gap",
+      "reason": "001176e0 still declares 0019f518/0011774c as pointer-key void functions, while their live providers use scalar keys and 0011774c returns int. Resolve the real address-token/list-key protocol and both result contracts first; no union or casts. The fatal 0019f568 family used by the allocator remains contradictory; fixing only the manager layout is not completion of this unit family.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/exp_heap.h",
+        "include/game/runtime.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0019f568.cpp",
+      "functions": [
+        "func_0019f568"
+      ],
+      "profile": "game",
+      "source_sha256": "6ca3af1b9f5e586120723ce9b257354389ba34b1de1acb90a6e3adaf67db7468",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0019f568.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Recover whether the original handler has a true va_list formal, another machine-word protocol, or a deliberate implementation-defined ABI entry. Re-entry requires safe typed semantics for the no-argument calls as well as callback consumers; the current split is a blocker, not a qualification. Determine actual return use on the Break path and in 0011774c before choosing int, void or noreturn. The current conflicting definition is not waived by an old private MATCH.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/runtime.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00181a4c.c",
+      "functions": [
+        "func_00181a4c"
+      ],
+      "profile": "game",
+      "source_sha256": "b9c8255b9f396549b26aaaa97d81cebf6afdd613bd8010529f7559ed55d77081",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00181a4c.c",
+      "category": "shared-contract-gap",
+      "reason": "Establish whether arguments2/3 are scalar indices, real pointers, or operation-dependent tokens and how the fifth stacked word is represented without a type-punning shim. Recover the operation3 consumer fields and the rest of the canonical command variants before replacing WorkCommand. Keep the current failed typed family deferred rather than narrowing the caller scope.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/service_state.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00120eec_step2_typed_factory_record.cpp",
+      "functions": [
+        "func_00120eec"
+      ],
+      "profile": "game",
+      "source_sha256": "eee3ba3a2547cdfa8bfe1cba48952e68a7864c2b9cb6785396b9cb88a24124b7",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00120eec_step2_typed_factory_record.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Resolve/admit the actual0012e0e0 provider and all its object-lifecycle names without aliases, then migrate both sides of the descriptor in one change. Until then, the union wrapper remains deferred. Provider byte extraction must preserve the original reserved archive-path-byte bug and full-word incoming kind lifetime. A byte-only wrapper store or casted pointer does not meet that condition.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r341/src/func_0012e0e0.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001e87c8_snapshot.cpp",
+      "functions": [
+        "func_001e87c8"
+      ],
+      "profile": "game",
+      "source_sha256": "248468e59ffc56cda92c790db183eae3230de9ad7f4c6e25acad3a37020ce5df",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e87c8_snapshot.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Recover001cecb8's actual return value and base receiver, its pool-list teardown fields and the natural owner/slot evidence for data_00224e44. Re-entry requires this provider closure, not another private same-layout type.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/runtime.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "functions": [
+        "func_001f580c"
+      ],
+      "profile": "middleware",
+      "source_sha256": "d576cb01f04da198979a522c18dab34e001186a648f0bec53b9ce5391377df90",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001f580c_default.c",
+      "category": "shared-contract-gap",
+      "reason": "Find a preserved natural registration/call or pinned destructor ABI proving the ignored object argument and its actual receiver. If identity is only erased, retain an explicit qualification and obtain the required policy/manual review rather than presenting it as proven. Recover001135cc's lock result and001c5530's event callback arity/return from their real providers before claiming the entire initializer family closed.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "src/wave3/func_001c51a0.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0010239c.c",
+      "functions": [
+        "func_0010239c"
+      ],
+      "profile": "game",
+      "source_sha256": "057af4e57acee927b58497a945c04386910ab2009a90fa4d8577995ae4c8883d",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0010239c.c",
+      "category": "shared-contract-gap",
+      "reason": "Recover all original callback registrations and establish whether this is a truly mixed-return machine protocol needing an explicit reviewed qualification, or whether a single accurate C/C++ callback type is recoverable. No wrapper/adapter, union, erased result or function-pointer cast is proposed. Signed enabled/mode refinement is not permission to adopt the dispatcher while the callback family remains contradictory. Main reports sealed c009-r2 FAIL on scheduler callback casts and vector214580 callable casts; a separate c009-r3 owner is fixing both callable contracts and the same-class sweep. Re-entry is the granted frozen-r3 canonical dependency, not a competing c010 repair.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/scheduler.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001ceca8.cpp",
+      "functions": [
+        "func_001ceca8"
+      ],
+      "profile": "game",
+      "source_sha256": "56f8207feb9a1c1273b83c52a239a01a9ff7a25e2c05142b88269b8b5458d0b5",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001ceca8.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Same exact001cecb8 receiver/result/teardown closure as row20; keep both dependent wrappers deferred rather than make a fake no-argument destructor alias.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/runtime.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001176e0.cpp",
+      "functions": [
+        "func_001176e0"
+      ],
+      "profile": "game",
+      "source_sha256": "ec89ccea2b9c070d0f2d8972fa16f2234fbe6df8353d331e367f4034158b94df",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001176e0.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Identify actual list insertion/key writers and their original full-width storage: address used as a scalar ID versus a pointer object. Re-entry requires producer and consumer proof, not a cast at this release caller. Resolve0019f568's no-arg/va_list and int-result conflicts; all currently unused size/flags inputs must remain on the wrapper.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "src/wave19/func_0011774c.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0012f84c.cpp",
+      "functions": [
+        "func_0012f84c"
+      ],
+      "profile": "game",
+      "source_sha256": "61538e48237a7c09c37dcdd61b6c35afed125030cc2356d9bd7cc9836692c59e",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0012f84c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Recover all real buffer indices and initializer writes to prove which +0x5c/+0x60 slots are pointers and whether any later location has a different lifecycle. Do not choose two versus six from available padding alone.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+        "include/game/graphics_state.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0013888c.cpp",
+      "functions": [
+        "func_0013888c"
+      ],
+      "profile": "middleware",
+      "source_sha256": "59303f4bd37a8412df8af7099cf65bfe0b447dd630c06d1aafaf591c51b359ab",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0013888c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Current shared callback storage has incompatible nominal function-pointer declarations: ResLookupTable-by-value[2] versus ResourceCallbacks(ResourceHeader*) in c009-proposed00182ae4. This cannot be solved by a typedef or cast. Re-entry: migrate00182ae4 and every actual data_002434e4 consumer to one native value-wrapper callback contract after importing/reconciling the frozen c009 state; retain same original two storage words/targets.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "src/wave18/func_00182ae4.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00176c6c.c",
+      "functions": [
+        "func_00176c6c"
+      ],
+      "profile": "game",
+      "source_sha256": "ca1ea44e81a815e3ab84b3e8fd5cf988d0658fbf63160670d2e8efea74890788",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00176c6c.c",
+      "category": "shared-contract-gap",
+      "reason": "Decoder00192c20 third input is genuinely ambiguous: these callers compute/pass count, but the original decoder can ignore it and shared eager parsing is an alternative. Retain the3-input qualification until a natural independent consumer/provider resolves it; no2-input shim or overload. Canonical MessageLayout now names activity_state@0x1c. Refine that record instead of keeping a ResourceMessageLayout cast; the old state name is obsolete.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/game/messages.h",
+        "include/game/messages.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001775e0.c",
+      "functions": [
+        "func_001775e0"
+      ],
+      "profile": "game",
+      "source_sha256": "cfab7701c29bccf32f9f7e2b314e0e9ad18ed318eabf23c0c3e6f51586b10d11",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001775e0.c",
+      "category": "shared-contract-gap",
+      "reason": "Decoder00192c20 third input is genuinely ambiguous: these callers compute/pass count, but the original decoder can ignore it and shared eager parsing is an alternative. Retain the3-input qualification until a natural independent consumer/provider resolves it; no2-input shim or overload. Canonical MessageLayout now names activity_state@0x1c. Refine that record instead of keeping a ResourceMessageLayout cast; the old state name is obsolete.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/game/messages.h",
+        "include/game/messages.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00196c04-renderer-before-info.cpp",
+      "functions": [
+        "func_00196c04"
+      ],
+      "profile": "game",
+      "source_sha256": "45a6805123ac807680094e90613b4f2f20d185d6cb1b12c9c13356169b0ef1c1",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00196c04-renderer-before-info.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Original00117ea8 is implemented by the self-bound native PaneCommandTraversal::DrawCommands, not the local C declaration. Its receiver/slot contract is still cast-based in that provider. Re-entry: unify the target-version pane traversal and root owner, then call that actual method with a naturally typed receiver. Never add a C alias forwarding shim or cast LayoutDrawPane* into the derived traversal merely for matching.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "src/checkpoint10/collect-r2/func_00117ea8_native_lazy.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001c7760.cpp",
+      "functions": [
+        "func_001c7760"
+      ],
+      "profile": "game",
+      "source_sha256": "6ca3a01c9ac026963a558b0fcd1c3954005dae48c8e49366d793b9f816a5b83c",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c7760.cpp",
+      "category": "child-reserved-new-unit",
+      "reason": "c011 owns the1c7760/1c7fa0 native-pair migration. Do not edit/rebind/retype it independently. Re-entry requires child-supplied exact native declaration, hash-bound emitted same-address self-definition and native pair return-ABI proof.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "scratch/integrator/c010/HANDOFF.json"
+      ],
+      "accepted_identity_removed": false,
+      "retained_in_src_for_reservation": true,
+      "reservation": "C011 retains ownership; no native-pair cutover or ownership release is asserted."
+    },
+    {
+      "source": "src/checkpoint10/func_001c8a40.cpp",
+      "functions": [
+        "func_001c8a40"
+      ],
+      "profile": "game",
+      "source_sha256": "7a65a8c02c2ac77d4627733b70bc59347c6199d2567c4e650bc4144ed4afd663",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c8a40.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The cube callee001c8244 is actually self-bound native SetupTextureMapperCommand(ResPixelBasedTextureMapper,ResCubeTexture), not a C function definition. Replace the C shadow only via its real native declaration/call. 001c7760 is c011-reserved: wait for the child's approved native-pair contract, do not redesign it here. Original001c8424/001c857c lack accepted/native defining evidence in this scope. Preserve exact native wrapper input types but do not invent native overload bindings from edited calls.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "src/checkpoint10/collect-r2/func_001c8244.cpp"
+      ],
+      "accepted_identity_removed": false,
+      "retained_in_src_for_reservation": true,
+      "reservation": "C011 retains ownership; no native-pair cutover or ownership release is asserted."
+    },
+    {
+      "source": "src/checkpoint10/func_001c93c8_result.cpp",
+      "functions": [
+        "func_001c93c8"
+      ],
+      "profile": "game",
+      "source_sha256": "aa7df652a4048084e86398b0e475e0ce0e34be280c2de33294b7f3b59234a166",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c93c8_result.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The old missing-PivotDirection blocker is STALE: CURRENT include/nn/math.h14-20 supplies a minimal qualified PIVOT_NONE enum. Do not retain the old missing-type claim. The real remaining blocker is owner/call identity:001c65ac is accepted protected TransformNode::Initialize, not a free C function taking R41270CameraStorage*. Native Camera::Initialize/StoreOriginal/CreateAnimGroup require real same-address emitted self definitions/name evidence and coherent native owners before cutover. Do not expose protected base access via a fake subclass/thunk, Result cast, extern-C shadow or an edited caller as identity proof.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "src/nw4c/gfx_TransformNode.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001cceb8.cpp",
+      "functions": [
+        "func_001cceb8"
+      ],
+      "profile": "game",
+      "source_sha256": "8d665f92f8ece45d51a427c8abcb72f283074382b52fcde6f2f1569e3e526d51",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001cceb8.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Current entry and cache lookup are explicit-output C spellings of hidden aggregate results, while ResourceAccessor::GetTexture/LoadTexture and TextureContainer::FindTextureByName return real const TextureInfo values. Do not bless those spellings as the native virtual source contract. Re-entry requires same-address self-definition/identity proof for the native aggregate provider(s), and actual method/caller/vtable cutover with no output-pointer/value cast bridge. FindTextureByName is nonconst on TextureContainer in the pinned header, despite this local const cache pointer. The two cache owners have different offsets and must remain distinct.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/nw/lyt/lyt_TextureContainer.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001cd008.cpp",
+      "functions": [
+        "func_001cd008"
+      ],
+      "profile": "game",
+      "source_sha256": "c45943e8e7e93fd2f3dee9eb214a106b4c6eaa70c758c8f7a7fc631a1afc8748",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001cd008.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Current entry and cache lookup are explicit-output C spellings of hidden aggregate results, while ResourceAccessor::GetTexture/LoadTexture and TextureContainer::FindTextureByName return real const TextureInfo values. Do not bless those spellings as the native virtual source contract. Re-entry requires same-address self-definition/identity proof for the native aggregate provider(s), and actual method/caller/vtable cutover with no output-pointer/value cast bridge. FindTextureByName is nonconst on TextureContainer in the pinned header, despite this local const cache pointer. The two cache owners have different offsets and must remain distinct.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/nw/lyt/lyt_TextureContainer.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001c5e4c.cpp",
+      "functions": [
+        "func_001c5e4c"
+      ],
+      "profile": "game",
+      "source_sha256": "9db634f238f4a53633526718682fb63cd2745e0700d904710eb202c829998081",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c5e4c.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Global ::Result is a distinct C++ class from nw::gfx::Result; same one-word storage does not close the return contract. SceneAllocator is not the canonical nw::os::IAllocator. The only actual accepted001c65ac provider is protected native TransformNode::Initialize. A free C shadow cannot legally invoke it with an unrelated opaque SceneResource receiver. Re-entry: recover/bind the real derived owner of001c5e4c and native helper identities001c5f70/001c8e10, then implement its genuine native member/base chain with nw::gfx::Result and nw::os::IAllocator. Do not guess FragmentLight/Light/Camera identity from adjacency or offsets.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "src/nw4c/gfx_TransformNode.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00117ea8_native_lazy.cpp",
+      "functions": [
+        "func_00117ea8"
+      ],
+      "profile": "game",
+      "source_sha256": "d665f023b605b6c9f643c80447710b83a541f181666a053b92cb786bc4a1a130",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_00117ea8_native_lazy.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Current source uses reinterpret_cast<PaneCommandPrefix*>(this), reinterpret_cast<LayoutPane*>(this) and unchecked child downcast. It is a native self-name witness, NOT a coherent callback/receiver proof. Public Pane::Draw/DrawSelf take const nw::lyt::DrawInfo& and return void; the target slot0x68 instead returns a byte cursor and takes cursor,target-info,target-renderer. The public virtual cannot be substituted by a cast. Re-entry: recover/share one actual target-version command-pane virtual/child-list owner with caller00196c04 and base-slot001f01b0, then implement the real typed traversal with no nominal receiver casts.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/nw/lyt/lyt_Pane.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001387f4.cpp",
+      "functions": [
+        "func_001387f4"
+      ],
+      "profile": "game",
+      "source_sha256": "ce08ba6e9356a5e3cd31961a0179ec33a2ef0eb145d3c93fc0bb20470db13df9",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001387f4.cpp",
+      "category": "shared-contract-gap",
+      "reason": "00140298 result remains unclosed: local int is ignored; original field/call facts establish buffer/index/bool inputs, not a native result contract. Require a natural result-consuming caller or same-address native provider before signoff. Current c010 caller001306c8.c declares C001387f4(RenderDrawList**,int), whereas actual provider is native ResPrimitive::SetupDrawCommand(bool). That nominal wrapper/this contract must migrate genuinely, not via RenderDrawList** cast or C shim.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/nw/gfx/gfx_CommandUtil.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00104804.cpp",
+      "functions": [
+        "func_00104804"
+      ],
+      "profile": "game",
+      "source_sha256": "c2468cca45d30de549a87a78c7178e8a2257c406c4d66878c4b2e38515477a78",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00104804.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The actual bss_0049da58 declaration is GraphicsResources, NOT ResourceResetState: its field is buffers (plural), slot+0x10 is GraphicsRenderer*,+0x14..0x24 are currently unsigned words,tail+0x28..0x30 are GraphicsResource*. The present source refers to nonexistent buffer/element fields. Original reset uses cleanup/allocator ownership protocols in+0x10..0x30, but offsets/protocol similarity alone do not establish all9 slots as CleanupElement* or GraphicsResource*. Recover actual producers/owner identity before refining earlier scalar/renderer fields. Reachable now: canonical buffers cleanup and real resources[0..2] can reuse GraphicsResource destroy/GraphicsHeap release without casts. Earlier slot identity closure is still required for a complete reset cutover.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/game/graphics_resources.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0016a104.cpp",
+      "functions": [
+        "func_0016a104"
+      ],
+      "profile": "middleware",
+      "source_sha256": "b9a4037ed19753293c736392a22a777c5e542c6fbd997189edfed8e9a90edabf",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0016a104.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Native SoundLoaderState/SoundArchive fork conflicts with accepted001d4174(SoundArchiveRequestState*,ArchiveHandle*). Erased/inlined calls do not supply an independent owner/callee identity proof. No archive/receiver/vtable cast closes that gap.",
+      "evidence": [
+        "include/game/sound_loader.h",
+        "src/wave8/func_001d4174.c",
+        "scratch/integrator/c010/owner-cutover/factory-facts-loader-r9.json"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0018d728_recovered.cpp",
+      "functions": [
+        "func_0018d728"
+      ],
+      "profile": "middleware",
+      "source_sha256": "6a654c2147064ce4fa3533737f4f89cfa365830de0178cc529d15b1eb354712c",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0018d728_recovered.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Native SoundArchiveLoader/SoundArchive owners disagree with the current C archive/loader endpoints and the accepted request-state/archive-handle family. Original call/field facts are retained, not a sealed same-owner proof. No C-shadow, alias or pointer cast is admitted.",
+      "evidence": [
+        "include/game/sound_loader.h",
+        "include/game/archive.h",
+        "scratch/integrator/c010/owner-cutover/factory-facts-loader-r9.json"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00214e40.cpp",
+      "functions": [
+        "func_00214e40"
+      ],
+      "profile": "game",
+      "source_sha256": "fdf916f4f9c9f3e069607bc168a7c94fa36b20d244a89d61a17479c574fa5377",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00214e40.cpp",
+      "category": "shared-contract-gap",
+      "reason": "Registration casts actual00216ba4(unsigned,unsigned) and00216e4c(void) to ObjectDestructor(void*), without an independently proved typed object-input protocol. The writable TextTagProcessor root at2438dc also conflicts with the current read-only table declaration; complete object/consumer ownership remains unproved.",
+      "evidence": [
+        "src/wave4/func_00216ba4.c",
+        "src/wave4/func_00216e4c.c",
+        "include/game/layout_draw.h",
+        "src/wave14/func_0011eec4.cpp"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_00167cfc.c",
+      "functions": [
+        "func_00167cfc"
+      ],
+      "profile": "game",
+      "source_sha256": "fe2d7656c4fa34436968368fc1f758537c0d17a78355023cc4a9cf96b4fea895",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00167cfc.c",
+      "category": "shared-contract-gap",
+      "reason": "The tag5 branch reinterprets BoundDisplayObject as DisplayData for0015e5c4. Its canonical interfaces are distinct, with no actual containing-object/tag-specific producer proof. The independent canonical bound-display setters do not authorize this cast.",
+      "evidence": [
+        "include/game/screen.h",
+        "src/wave10/func_0015e5c4.c",
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_0013db40.c",
+      "functions": [
+        "func_0013db40"
+      ],
+      "profile": "game",
+      "source_sha256": "b0abcdf96b40ab602fc619ecf6065f17e935ec1f15e1f386f85fb70c4fe7c416",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0013db40.c",
+      "category": "predecessor-r3-contract-gap",
+      "reason": "Current scheduler registration casts int(void)001415e8 to void(void). The callable result protocol is the explicitly blocked c009-r3 same-class sweep; no result erasure, uniform-int rewrite or adapter is authorized here. Preserve this NEW unit pending the frozen predecessor contract.",
+      "evidence": [
+        "include/game/scheduler.h",
+        "include/game/startup.h",
+        "src/wave17/func_00190688.c"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001ce8b8.cpp",
+      "functions": [
+        "func_001ce8b8"
+      ],
+      "profile": "game",
+      "source_sha256": "e4ff3406041c55d8dd43e8bf61efe08c2d5cd346516bd9177e58c66403253506",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001ce8b8.cpp",
+      "category": "canonicalization-byte-mismatch",
+      "reason": "Canonical native AnimResource/Layout pointer-result overload is implemented without a shadow receiver or C reader shim, but destination game witnesses r56 and r60 both emit56/60B. Preserve the original private MATCH and correct typed variants; this is canonicalization byte-match residue, not a claim of exhausted search.",
+      "evidence": [
+        "scratch/integrator/c010/graphics-storage-match-r56/results.json",
+        "scratch/integrator/c010/animation-reader-match-r60/func_001ce8b8.result.json",
+        "include/game/layout.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/vertex_array.cpp",
+      "functions": [
+        "func_0017f7f8"
+      ],
+      "profile": "game",
+      "source_sha256": "ec43d771d68590f16e245b9e0af43f609b4ede4ca5f1b5aceba523bd5f0fcfff",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/vertex_array.cpp",
+      "category": "canonicalization-byte-mismatch",
+      "reason": "Actual DisplayTexCoords allocation/default lifetime construction preserves uninitialized32-byte quad storage and full-word requested capacity, without the old VEC2-to-quad nominal cast. The fresh game witness r56 emits84/128B. Do not invent empty constructors/loops solely to restore code shape; no exhausted-search claim.",
+      "evidence": [
+        "scratch/integrator/c010/graphics-storage-match-r56/results.json",
+        "include/game/screen.h",
+        "include/nw/lyt/lyt_Layout.h"
+      ],
+      "accepted_identity_removed": false
+    },
+    {
+      "source": "src/checkpoint10/func_001273a0.c",
+      "functions": [
+        "func_001273a0"
+      ],
+      "profile": "middleware",
+      "source_sha256": "d2094168ba3beb1b6f227db6dee36d6e132e48c0e0486264c20c260afe2fbaee",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001273a0.c",
+      "category": "canonicalization-byte-mismatch",
+      "reason": "Canonical byte-cursor command serialization is semantically explicit, but middleware witnesses differ: r63 word-store helper1224/1044B, r65 reserve-before-write1152/1044B, r66 value/header packet988/1044B. Keep original byte/word protocol, corrected GPU fields and all true consumers; do not retag the shared global merely to recover the private word-pointer witness. This is non-exhausted canonicalization residue.",
+      "evidence": [
+        "scratch/integrator/c010/gpu-state-match-r63/results.json",
+        "scratch/integrator/c010/gpu-words-match-r65/func_001273a0.result.json",
+        "scratch/integrator/c010/gpu-packets-match-r66/func_001273a0.result.json",
+        "include/game/command_buffer.h",
+        "include/game/render_state.h"
+      ],
+      "accepted_identity_removed": false
+    }
+  ],
+  "resolved_reentries": [
+    {
+      "source": "src/checkpoint10/wave_native_table.cpp",
+      "functions": [
+        "func_00140dd4"
+      ],
+      "profile": "sdk",
+      "source_sha256": "baf51f7f7b948e8a891af428a990500a474d457e8129fd04155c73b882a4dfd6",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/wave_native_table.cpp",
+      "category": "canonicalization-byte-mismatch",
+      "reason": "The canonical serialized table is coherent, but exact destination witnesses still differ: r44 68/64B, r45 64/64B first+0x20, r46 60/64B. The historical native-view MATCH is preserved; no pointer reinterpretation to a separate native table is reintroduced solely to recover allocation/code shape. This is a canonicalization byte-match deferral, not a claim of exhausted compiler search or a rejected original match.",
+      "evidence": [
+        "scratch/integrator/c010/audio-match-r44/results.json",
+        "scratch/integrator/c010/serialized-match-r45/results.json",
+        "scratch/integrator/c010/wave-table-match-r46/wave_native_table.result.json",
+        "src/checkpoint10/func_00183bfc.c",
+        "include/game/archive.h"
+      ],
+      "accepted_identity_removed": false,
+      "resolution": "Exact sdk-profile canonical getter MATCH in wave-table-match-r53; r46 game mismatch was not the candidate profile. Initial r44/r45 failures remain immutable."
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001cff58.cpp",
+      "functions": [
+        "func_001cff58"
+      ],
+      "profile": "game",
+      "source_sha256": "6cf12c8a3f9aa0d538bdfd5bdd2f997616ee5f128d1b5c438fd765a5700aec02",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001cff58.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The native provider is sound/self-bound, but current canonical game/layout.h declares a C-linkage const-pointer helper of the same address. This is not solved by an alias or const_cast. Real cutover must include both accepted lookup callers AND accepted001cfd94/legacy0016b5fc unbind consumers before changing shared list/member types. No new const overload or duplicate native FindAnimationLink definition is authorized.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "include/nw/lyt/lyt_Animation.h"
+      ],
+      "accepted_identity_removed": false,
+      "resolution": "Complete native list/member/return cutover across both accepted lookups, accepted material unbind and candidate0016b58c; unchanged legacy0016b5fc address identity now accepts the actual native list/transform. All five destinations plus every direct game/layout.h dependent MATCH at exact extents under frozen profiles and v6/L1. Only then added001cff58 to c010 candidates.",
+      "resolution_evidence": "scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json",
+      "fresh_witnesses": "scratch/integrator/c010/NATIVE-LINKS-WITNESSES-r1.json"
+    }
+  ],
+  "prior_contract_reentries": [
+    {
+      "function": "func_001685c0",
+      "profile": "game",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/src/func_001685c0.cpp",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/match/func_001685c0/final/func_001685c0.result.json",
+      "status": "contract-resolution-deferred",
+      "reason": "Canonical source/header contract conflict: #167: argument of type \"ResourceEvent *\" is incompatible with parameter of type \"DisplayObject *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "deferral_record": "contract-deferrals-r2.json"
+    },
+    {
+      "function": "func_00168618",
+      "profile": "game",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/src/func_00168618.cpp",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/match/func_00168618/final/func_00168618.result.json",
+      "status": "contract-resolution-deferred",
+      "reason": "Canonical source/header contract conflict: #167: argument of type \"ResourceEvent *\" is incompatible with parameter of type \"DisplayObject *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "deferral_record": "contract-deferrals-r2.json"
+    }
+  ],
+  "qualification": "Three canonicalization byte gaps are measured residue, not exhausted searches. All original/private witnesses remain intact. Reserved source files are kept byte-identical but uncredited. Native-links-r1 resolves only001cff58. All other48 original rows, including the texture aggregate and c011 reservations, remain unchanged and uncredited. No accepted identity is withdrawn.",
+  "parent_record": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/NEW-DEFERRALS-r67.json",
+    "sha256": "6d7cdc5f04faa5f94845dcc111544b8e8b8dc9477ac325993195af82d3c6b091",
+    "unchanged": true
+  },
+  "counts": {
+    "remaining_units": 48,
+    "remaining_functions": 50,
+    "remaining_target_bytes": 9196,
+    "resolved_this_revision_units": 1,
+    "resolved_this_revision_functions": 1,
+    "resolved_this_revision_bytes": 56
+  }
+}

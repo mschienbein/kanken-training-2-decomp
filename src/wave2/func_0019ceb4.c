@@ -1,3 +1,4 @@
+#include "game/functions.h"
 extern int data_002426d4;
 
 int func_0019ceb4(void)

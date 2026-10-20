@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status": "complete-metadata-projection-not-accepted",
+  "method": "tools.accept.compose_units twice: canonical+config/candidates/c009.json, then complete provisional predecessor+config/candidates/c010.json; uniqueness via tools.accept.function_sources.",
+  "counts": {
+    "accepted_units": 1562,
+    "accepted_functions": 1621,
+    "accepted_bytes": 195908,
+    "predecessor_units": 2243,
+    "predecessor_functions": 2296,
+    "predecessor_bytes": 252692,
+    "predecessor_new_functions": 675,
+    "candidate_units": 498,
+    "candidate_claims": 511,
+    "new_functions": 501,
+    "new_target_bytes": 47420,
+    "accepted_moves": 10,
+    "moved_target_bytes": 240,
+    "complete_units": 2731,
+    "complete_functions": 2797,
+    "complete_bytes": 300112,
+    "helper_only_units": 22
+  },
+  "predecessor_exact_recipe_match_to_frozen_r3": true,
+  "predecessor_move": [
+    {
+      "function": "func_0014de8c",
+      "from": "src/wave2/func_0014de8c.c",
+      "to": "src/wave2/func_0014de8c.cpp",
+      "checkpoint": "c009-r3"
+    }
+  ],
+  "predecessor_removed_units": [
+    "src/wave2/func_0014de8c.c"
+  ],
+  "c010_moves": [
+    {
+      "function": "func_0018d868",
+      "from": "src/wave7/func_0018d868.c",
+      "to": "src/checkpoint10/ut_LinkList.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_00191154",
+      "from": "src/wave6/func_00191154.c",
+      "to": "src/checkpoint10/ut_LinkList.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_00191178",
+      "from": "src/wave6/func_00191178.c",
+      "to": "src/checkpoint10/ut_LinkList.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001dc574",
+      "from": "src/wave12/func_001dc574.c",
+      "to": "src/checkpoint10/collect-r2/func_001dc4a4.c",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001dc90c",
+      "from": "src/wave12/func_001dc90c.c",
+      "to": "src/checkpoint10/collect-r2/func_001dc4a4.c",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001f014c",
+      "from": "src/wave14/func_001f014c.c",
+      "to": "src/wave14/func_001f014c.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001f0158",
+      "from": "src/wave14/func_001f0158.c",
+      "to": "src/wave14/func_001f0158.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001f017c",
+      "from": "src/wave14/func_001f017c.c",
+      "to": "src/wave14/func_001f017c.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001f0188",
+      "from": "src/wave14/func_001f0188.c",
+      "to": "src/wave14/func_001f0188.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001f0194",
+      "from": "src/wave14/func_001f0194.c",
+      "to": "src/wave14/func_001f0194.cpp",
+      "checkpoint": "c010"
+    }
+  ],
+  "c010_removed_units": [
+    "src/wave6/func_00191154.c",
+    "src/wave6/func_00191178.c",
+    "src/wave7/func_0018d868.c",
+    "src/wave12/func_001dc574.c",
+    "src/wave12/func_001dc90c.c",
+    "src/wave14/func_001f014c.c",
+    "src/wave14/func_001f0158.c",
+    "src/wave14/func_001f017c.c",
+    "src/wave14/func_001f0188.c",
+    "src/wave14/func_001f0194.c"
+  ],
+  "missing_accepted": [],
+  "missing_c010_claims": [],
+  "inputs": {
+    "config/matches.json": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4",
+    "docs/progress-history.jsonl": "e1d8b255f8687e1ed85a4f2786e8648cb32e4ce288984359c1ed0774857b6d5d",
+    "config/candidates/c009.json": "35213b4c93c355b79c9c1b0f34df8f3daed3857d082f163ad667ce285f15fb72",
+    "config/candidates/c010.json": "2f1aaabd9e6eda02997e8be195a65281aaa4de1756fa1b765cb512379d5d5c6b",
+    "config/names.json": "f4e79b3c0c6d25e2bc5f68ed79598b7eee64bcf139572d04586fb4f4911edb95",
+    "config/catalogue.json": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64"
+  },
+  "canonical_acceptance_history": "Unchanged; Main-only finalization remains a prerequisite before C010 prepare.",
+  "source_field_reconciliations": {
+    "src/checkpoint10/func_0010b5cc.c": {
+      "canonical_field": "AppletStartupState.requested at+1",
+      "retained_interior": "data_0023fde0 is event.signal at data_0023fdd8+8; signaling API remainsvoid",
+      "source_sha256": "7362ffc98a51c73a0ca13c06d234fc28d49eecb15f1ec4c5732bd7a4e2458ae0"
+    },
+    "src/checkpoint10/func_001811b8.c": {
+      "canonical_fields": [
+        "WorkQueue.enabled at+0",
+        "WorkQueue.active at+8"
+      ],
+      "source_sha256": "2aa37e3dd01c056dc61f39ae79396566c2fd2afb5b1ffb2198a1909205b96d86"
+    }
+  },
+  "supersedes": "composition-r3-closure-r1.json source inventories, retained unchanged"
+}

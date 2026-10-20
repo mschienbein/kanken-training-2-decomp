@@ -11,6 +11,13 @@
 #include "../nw/types.h"
 #define NN_MATH_RAD_TO_FIDX(value) ((value) * (128.0f / 3.14159265358979323846f))
 namespace nn { namespace math {
+/* [INFERENCE] Minimal projection selector, not a recovered complete SDK enum.
+ * func_001246a4 initializes the one-byte pivot field at +0x08 to zero before
+ * the dynamic flag at +0x09 and four 0.5f texture coordinates at +0x0c.
+ * Public gfx_CameraProjectionUpdater.h names that default PIVOT_NONE and
+ * nw/math/math_Types.h imports nn::math. See src/nw4c/FACTS-HEADER-GAPS.json.
+ */
+enum PivotDirection { PIVOT_NONE = 0 };
 struct VEC2 {
     f32 x, y;
     VEC2();

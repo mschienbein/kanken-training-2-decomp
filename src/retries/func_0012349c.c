@@ -11,7 +11,7 @@ CtrResult func_0012349c(CtrHandle *handle, struct SharedMemory **address)
     int failure;
 
     command[0] = 0x00440000u;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = (int)((unsigned)result & 0x80000000u);
     if (failure >= 0) {
         *address = (struct SharedMemory *)command[2];

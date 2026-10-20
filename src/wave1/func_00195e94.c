@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/service_state.h"
 
 int func_00195e94(void)

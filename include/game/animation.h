@@ -64,6 +64,12 @@ typedef struct FrameTiming {
     float nominalFrames;
     unsigned char reserved10[0x0c];
     float interval;
+    unsigned char reserved20[9];
+    unsigned char flag29;
+    unsigned char reserved2a;
+    unsigned char flag2b;
+    unsigned char reserved2c;
+    unsigned char flag2d;
 } FrameTiming;
 
 #ifdef __cplusplus

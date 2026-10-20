@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "basis": [
+    {
+      "kind": "accepted",
+      "path": "config/matches.json",
+      "sha256": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4"
+    },
+    {
+      "kind": "c009-candidates",
+      "path": "scratch/worktrees/c009/config/candidates/c009.json",
+      "sha256": "58e16539243fcb470c0a61db54d36f8b08b89b2ffe407bcc9610b0168278849f"
+    },
+    {
+      "kind": "c009-handoff",
+      "path": "scratch/worktrees/c009/scratch/integrator/c009/HANDOFF.json",
+      "sha256": "49daaea355477d7edabcf2984c58a680918361d2a6c116929eb1dc8a03a7ecc9"
+    },
+    {
+      "kind": "c010-candidates",
+      "path": "scratch/worktrees/c010/config/candidates/c010.json",
+      "sha256": "97b031be047f12fa2f44d1745999c1a1e4edc46ac78e7c97abee57e6acaddd1f"
+    },
+    {
+      "kind": "c010-dispositions",
+      "path": "scratch/worktrees/c010/scratch/integrator/c010/scope-dispositions-r3.json",
+      "sha256": "ef1f01cd3ab2155b081c0924b835aca81072e22015a8ee4405d7dba54fada28e"
+    },
+    {
+      "kind": "c010-handoff",
+      "path": "scratch/worktrees/c010/scratch/integrator/c010/HANDOFF.json",
+      "sha256": "d8a7db495b9f95d85dac71ce56789ba5c7e7d8d841b394bb9ea3585d7dd62894"
+    },
+    {
+      "kind": "cmodels2-candidates",
+      "path": "scratch/worktrees/cmodels2/config/candidates/cmodels2.json",
+      "sha256": "2c40ae7950bb7c41f6b6a874b053ce5f8aa9cb834faa0cbbb1a80c82b63285bb"
+    }
+  ],
+  "preserved_exclusions_from": "SCOPE.json",
+  "exclusion_qualification": "Previously reserved c009/c010 scope identities stay excluded even where a candidate was deferred or withdrawn; no release inferred from absence. Approved context moves are the only overlap exceptions.",
+  "approved_moves": [
+    {
+      "function": "func_00152560",
+      "from": "src/wave13/func_00152560.c",
+      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp"
+    },
+    {
+      "function": "func_0014fe14",
+      "from": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_0014feac",
+      "from": "src/checkpoint10/func_0014feac.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_00155ab4",
+      "from": "src/checkpoint10/func_00155ab4.c",
+      "to": "src/checkpoint11/aux_channel_publication-r3.c"
+    },
+    {
+      "function": "func_001650f8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1ebc",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1ed8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f20",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f34",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f4c",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    }
+  ],
+  "reserved_parent_revisions": [
+    {
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0014cc9c"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001d31cc.cpp",
+      "profile": "sdk",
+      "functions": [
+        "func_001d31cc"
+      ]
+    },
+    {
+      "source": "src/checkpoint10/func_001d0348.c",
+      "profile": "game",
+      "functions": [
+        "func_001d0348"
+      ],
+      "author": "v9a00"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2234.c",
+      "profile": "game",
+      "functions": [
+        "func_001d2234"
+      ],
+      "author": "v9a00"
+    },
+    {
+      "source": "src/checkpoint10/func_001f478c.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001f478c"
+      ],
+      "author": "v9a00"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7760.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c7760"
+      ],
+      "author": "r41267"
+    }
+  ],
+  "candidate_manifest_sha256": "4faa4dd4550853bf6037c90a0920600868af0009497082e19586f17e0ab4a389",
+  "counts": {
+    "accepted": 1621,
+    "c009": 676,
+    "c010": 558
+  }
+}

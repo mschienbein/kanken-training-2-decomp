@@ -1,21 +1,6 @@
 #include "game/service_state.h"
 
-struct RequestRecord {
-    unsigned kind;
-    unsigned flags;
-    unsigned short count;
-    unsigned short length;
-    unsigned short text[0x76c];
-    unsigned char flag_ee4;
-    unsigned char flag_ee5;
-    unsigned char flag_ee6;
-    unsigned char auxiliary[0x89];
-    int handle;
-    unsigned short status;
-    unsigned char reservedf76[10]; /* synchronization storage initialized by func_0019051c */
-};
-extern void func_0019051c(struct RequestRecord *record);
-extern void func_00190450(unsigned char *output, struct RequestRecord *record);
+#include "game/request_exchange.h"
 
 static void copyText(unsigned short *destination, const unsigned short *text,
                      unsigned remaining)

@@ -25,20 +25,40 @@ struct W10CourseProgress {
     short progress;
 };
 
+struct NotificationDayEntry {
+    unsigned char flags;
+    unsigned char reserved01[3];
+    int day;
+};
+struct NotificationHistoryEntry {
+    signed char status;
+    unsigned char kind, category, reserved03;
+    short x, y;
+};
+struct NotificationHistoryTrack {
+    int current;
+    struct NotificationHistoryEntry entries[10];
+};
+
 struct NotificationFields {
     unsigned char reserved00[0x32];
     unsigned char flags;
     unsigned char reserved33;
     signed char selection;
     signed char mode;
-    unsigned char reserved36[0x25a2];
+    unsigned char reserved36[2];
+    int history_enabled;
+    unsigned char reserved3c[0x0c];
+    unsigned char saved_flag;
+    unsigned char reserved49[0x258f];
     struct W10HistoryGrade history[12];
-    unsigned char reserved61d8[0x660];
+    unsigned char reserved61d8[0xc0];
+    struct NotificationDayEntry days[180];
     unsigned char result_flags[12][0x640];
-    unsigned char reservedb338[0x3f0];
-    struct W10CourseProgress primary;
-    struct W10CourseProgress secondary;
-    unsigned char reservedb730[0x10];
+    struct NotificationHistoryTrack tracks[12];
+    struct W10CourseProgress courses[2];
+    signed char channels[12];
+    unsigned char reservedb73c[4];
 };
 
 /* UTF-16 and word-copy clients address one serialized storage object. */
@@ -93,6 +113,22 @@ extern unsigned short *func_00172008(int index);
 extern void func_00172d48(int index);
 extern void func_0016fccc(int selection);
 extern int func_001758d4(void);
+extern void func_001dbb70(int track, unsigned char category, unsigned short x,
+                         unsigned short y, unsigned char kind);
+/* [INFERENCE] Calendar key is a full word, compared with the serialized day. */
+extern int func_00183070(int year, int month, int day);
+extern unsigned char func_001dc100(int year, int month, int day);
+extern void func_001dc180(void);
+extern void func_001dc1ac(void);
+extern void func_001dc1d8(void);
+extern void func_001dc8e0(void);
+extern struct TransformEntry *func_00174454(int group, int index);
+extern void func_001dc918(int grade, int index, int value);
+extern void func_001dc744(int grade, int index, int value);
+extern void func_001dc170(int value);
+extern void func_001dc230(int value);
+extern void func_001dbcec(int grade, int category, int value);
+extern void func_001dbfdc(int grade, int category, int value);
 #ifdef __cplusplus
 }
 #endif
@@ -103,6 +139,25 @@ extern "C" {
 #endif
 extern const short data_002181b4[5];
 extern void func_001dbbd4(int mode);
+#ifdef __cplusplus
+}
+#endif
+
+
+struct NotificationCache {
+    unsigned char reserved00[0x748];
+    unsigned generation;
+    unsigned char reserved74c[0xdc];
+    unsigned char active;
+    unsigned char reserved829[3];
+    unsigned count;
+};
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern struct NotificationCache bss_0028baf0;
+/* [INFERENCE] Shared word result used as an index and cached unchanged. */
+extern int func_001699b8(void);
 #ifdef __cplusplus
 }
 #endif

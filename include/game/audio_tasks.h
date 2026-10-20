@@ -69,8 +69,12 @@ extern void func_00131304(struct ObjectManager *manager);
 extern void func_00148210(void);
 extern void func_001838ec(struct AudioTaskManager *manager);
 extern void func_00183f08(struct AudioTaskManager *manager);
-extern void func_001d32e0(struct AudioTaskManager *manager, int index);
-extern void func_001d32e4(struct AudioTaskManager *manager, int index);
+/* Cancellation compares the full word with Task::m_Id; it does not
+ * dereference a Task or RegistryEntry receiver or narrow to an index. */
+extern void func_001d32e0(struct AudioTaskManager *manager, unsigned id);
+extern void func_001d32e4(struct AudioTaskManager *manager, unsigned id);
+extern void func_001d6b24(unsigned id);
+extern void func_001d6678(unsigned id);
 extern void func_0017df84(struct AudioTaskManager *manager,
                           struct AudioWorkRequest *request, unsigned category);
 #ifdef __cplusplus

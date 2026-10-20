@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "release_macro_corrections": [
+    {
+      "source": "src/checkpoint10/func_0015e3f4.cpp",
+      "line": 2,
+      "macro": "#define NW_RELEASE"
+    }
+  ],
+  "preinclude_corrections": [
+    {
+      "source": "src/checkpoint10/func_001d2c44.cpp",
+      "line": 2,
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d2c44.cpp#9CC6]\n1:#include <preinclude.h>\n2:#include \"game/font_resource.h\"\n3:#include <cstddef>\n4:#include <nw/ut/ut_LinkList.h>"
+    },
+    {
+      "source": "src/checkpoint10/func_0018d728_recovered.cpp",
+      "line": 8,
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0018d728_recovered.cpp#DFBC]\n1:#include <preinclude.h>\n2:#include \"game/archive.h\"\n3:/* SPDX-License-Identifier: GPL-3.0-only\n7: * address-named callees preserve the currently evidenced image contracts.\n8: */\n9:#include <nw/snd/snd_SoundArchiveLoader.h>\n10:#include <nw/snd/snd_SoundMemoryAllocatable.h>"
+    },
+    {
+      "source": "src/checkpoint10/func_001cf338_material.cpp",
+      "line": 2,
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001cf338_material.cpp#88CC]\n1:#include <preinclude.h>\n2:#include \"game/layout_lifecycle.h\"\n3:#include <nw/lyt/lyt_Material.h>\n4:#include <nw/lyt/lyt_Layout.h>"
+    },
+    {
+      "source": "src/checkpoint10/func_0016a888.cpp",
+      "line": 2,
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0016a888.cpp#35BC]\n1:#include <preinclude.h>\n2:#include \"game/sound_loader.h\"\n3:#include <nw/snd/snd_SoundArchive.h>\n4:#include <nw/snd/snd_WaveSoundFileReader.h>"
+    }
+  ],
+  "reason": "Keep the authors existing release/platform macro setup ahead of newly imported canonical headers; no flags, macro values, source-language waiver or codegen steering was added."
+}

@@ -1,3 +1,4 @@
+#include "game/command_state.h"
 #include <stddef.h>
 
 struct W11QueueTail {

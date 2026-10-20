@@ -23,6 +23,10 @@ extern "C" {
 #endif
 extern void func_0019ea6c(struct SignalState *state);
 extern void func_00195d94(struct SignalState *state);
+extern void func_0019ea64(struct SynchronizationOwner *object);
+/* [INFERENCE] Signed exclusive-state word and scalar success result,
+ * evidenced by the recursive-mutex consumer and the emitted definition. */
+extern int func_0011359c(int *state);
 #ifdef __cplusplus
 }
 #endif
@@ -35,5 +39,12 @@ extern struct SignalState data_0024301c;
 #ifdef __cplusplus
 }
 #endif
+
+
+union SynchronizationStorage {
+    struct StreamSemaphore semaphore;
+    unsigned words[2];
+    struct SignalState signal;
+};
 
 #endif

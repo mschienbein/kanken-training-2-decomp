@@ -11,6 +11,14 @@ typedef union ByteCommandWord {
     unsigned short halfword;
     unsigned char byte;
 } CtrIpcWord;
+/* [INFERENCE] Static wrapper construction and every session consumer share
+ * this one scalar member; no second storage allocation or alias is created. */
+struct StaticHandle {
+    CtrHandle handle;
+#ifdef __cplusplus
+    StaticHandle() : handle(0) {}
+#endif
+};
 
 struct IdentifierCommand {
     unsigned int header;
@@ -112,6 +120,11 @@ static inline void ctrMarshalValue(unsigned char &output, const unsigned char &i
     output = input;
 }
 
+static inline void ctrMarshalValue(unsigned char &output, const signed char &input)
+{
+    output = input;
+}
+
 static inline void ctrMarshalValue(unsigned short &output, const unsigned short &input)
 {
     output = input;
@@ -138,10 +151,12 @@ extern unsigned int func_001363b4(unsigned char *out, unsigned char mode,
                          unsigned long long id);
 extern unsigned int func_00136408(unsigned char *out);
 extern CtrResult func_001365f8(const CtrHandle *session, unsigned int *out);
+extern CtrResult func_00137c5c(const CtrHandle *session);
 extern unsigned func_00137070(unsigned *out);
 extern CtrResult func_001380c8(unsigned int value0, unsigned int value1,
                          unsigned int value2, unsigned int value3, unsigned char *out);
 extern CtrResult func_001382f8(unsigned char *out);
+extern CtrResult func_00138274(void *buffer, unsigned int size);
 extern CtrResult func_00138334(unsigned char value);
 extern CtrResult func_00138370(unsigned char *output);
 extern CtrResult func_001383ac(unsigned char value);
@@ -160,12 +175,29 @@ extern CtrResult func_001481cc(const CtrHandle *session, unsigned short identifi
                         unsigned short *output);
 extern CtrResult func_001c500c(const CtrHandle *session, unsigned long long *size);
 extern CtrResult func_001c5044(const CtrHandle *session, unsigned long long size);
-extern CtrHandle data_00243040;
+extern struct StaticHandle data_00243040;
+extern struct StaticHandle data_0024376c;
+extern struct StaticHandle data_00243794;
+extern struct StaticHandle data_00242d8c;
+extern CtrResult func_001235a8(unsigned selector, const void *buffer,
+                              unsigned size, CtrHandle handle);
 extern CtrResult func_0010d418(unsigned char value);
 extern CtrResult func_00115a98(unsigned char value);
 extern CtrResult func_001235f8(unsigned char selector);
 extern CtrResult func_00148118(const CtrHandle *session, unsigned short identifier);
 extern CtrResult func_0014aed0(const CtrHandle *session, unsigned short identifier);
+/* [INFERENCE] Publication callers pass an unchanged sign-extended byte mode;
+ * its low-byte marshalling stays distinct from the full-word return status. */
+extern CtrResult func_00136878(const CtrHandle *session, signed char mode);
+extern CtrResult func_0014af08(const CtrHandle *session, unsigned value,
+                             unsigned reserved, void *buffer,
+                             unsigned short capacity, unsigned short *output);
+extern CtrResult func_0014af70(const CtrHandle *session, unsigned value, unsigned *output);
+extern CtrResult func_001863fc(const CtrHandle *session);
+extern CtrResult func_00137c20(const CtrHandle *session, CtrHandle handle,
+                             const void *buffer, unsigned size);
+extern unsigned func_00121764(void *buffer, unsigned size, unsigned handle);
+extern struct StaticHandle data_002430d8;
 #ifdef __cplusplus
 }
 #endif

@@ -8,6 +8,7 @@ struct ResourceDispatch;
 #include "game/runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
+
 #ifdef __cplusplus
 class LayoutDescriptor {
 public:
@@ -17,23 +18,33 @@ public:
     int options[4];
     float coordinates[6];
 
-    LayoutDescriptor(int category, int resource, int option0, int option1,
-                     int option2, int option3, float x0, float x1, float x2,
-                     float x3, float x4, float x5);
+    LayoutDescriptor(int category, int resource, int option0, int option1, int option2, int option3,
+                     float x0, float x1, float x2, float x3, float x4, float x5);
 };
 #endif
 
 #ifdef __cplusplus
-class ResourceDescriptor {
-public:
+extern "C" { extern const struct ResourceDispatch data_002234f4; }
+struct ResourceDescriptorBase {
     const ResourceDispatch *dispatch;
-    int state;
+    unsigned state;
+    ResourceDescriptorBase() : dispatch(&data_002234f4), state(0) {}
+};
+class ResourceDescriptor : public ResourceDescriptorBase {
+public:
     int category;
     int resource;
     const char *name;
 
     ResourceDescriptor();
     ResourceDescriptor(int category, int resource, const char *name);
+};
+
+/* [INFERENCE] Compact index-list constructor witnessed by 002095c0. */
+struct PaneIndexList {
+    int count;
+    unsigned char indices[16];
+    PaneIndexList(int count, ...);
 };
 #endif
 
@@ -44,8 +55,14 @@ extern struct LayoutDescriptor *func_00164b14(struct LayoutDescriptor *object,
     int category, int resource, int option0, int option1, int option2, int option3,
     float x0, float x1, float x2, float x3, float x4, float x5);
 extern struct LayoutDescriptor *bss_00246748[18];
+extern const struct ResourceDispatch data_002234f4;
 extern struct ResourceDescriptor *bss_00246790[31];
 extern struct ResourceDescriptor *bss_0024680c[31];
+extern struct ResourceDescriptor *bss_00247098[13];
+extern struct ResourceDescriptor *bss_002471f8[14];
+extern struct PaneIndexList *bss_002470cc[12];
+extern void func_002095c0(void);
+extern void func_002102b4(void);
 extern void func_0020e460(void);
 #ifdef __cplusplus
 }

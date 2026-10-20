@@ -3,6 +3,7 @@
 
 
 #include "game/runtime.h"
+#include "game/resource_descriptors.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 #ifdef __cplusplus
@@ -19,17 +20,7 @@ private:
     float offsets[5];
 };
 
-class WindowLabelBinding {
-public:
-    WindowLabelBinding();
-    WindowLabelBinding(int mode, int index, const char *name);
-    virtual ~WindowLabelBinding();
-private:
-    void *pane;
-    int mode;
-    int index;
-    const char *name;
-};
+
 
 }
 #endif
@@ -38,8 +29,8 @@ private:
 extern "C" {
 #endif
 extern S2073fc::WindowMotion *data_002468c4[41];
-extern S2073fc::WindowLabelBinding *data_00246968[48];
-extern S2073fc::WindowLabelBinding *data_00246a28[48];
+extern ResourceDescriptor *data_00246968[48];
+extern ResourceDescriptor *data_00246a28[48];
 extern void func_002073fc(void);
 #ifdef __cplusplus
 }

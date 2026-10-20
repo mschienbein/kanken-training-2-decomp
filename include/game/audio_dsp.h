@@ -9,18 +9,25 @@ struct AudioDspReply;
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct AudioDspParameterBlock {
     unsigned int flags;
-    unsigned char reserved04[0x0c];
+    float master_volume;
+    unsigned char reserved08[8];
     unsigned short value10;
     unsigned char reserved12[4];
     unsigned short value16;
     unsigned short value18;
     unsigned short value1a;
     unsigned short value1c;
-    unsigned char reserved1e[4];
+    unsigned short value1e;
+    unsigned short reserved20;
     unsigned short value22;
     unsigned char reserved24[0x7c];
-    unsigned short valuea0;
-    unsigned char reserveda2[0x1a];
+    /* Byte publication and halfword masks share the same auxiliary control. */
+    union {
+        unsigned short value;
+        struct { unsigned char enabled, reserved; } bytes;
+    } auxiliary_control;
+    short auxiliary_count;
+    unsigned char reserveda4[0x18];
     unsigned short valuebc;
     unsigned char reservedbe[2];
     unsigned int flagsc0;

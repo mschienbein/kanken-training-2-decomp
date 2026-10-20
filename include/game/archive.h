@@ -1,7 +1,7 @@
 #ifndef GAME_ARCHIVE_H
 #define GAME_ARCHIVE_H
-struct SoundType1Details;
 
+struct SoundType1Details;
 struct ArchiveAccess;
 struct ArchiveProvider;
 struct ArchiveProviderVTable;
@@ -15,6 +15,25 @@ struct SoundType3Info;
 struct SoundWaveFile;
 struct SoundWaveInfo;
 struct SoundWaveReader;
+struct ArchiveHandleVTable;
+struct BankFile;
+struct SoundArchiveAddon;
+struct SoundLookupProvider;
+struct SoundBasicInfo;
+struct SoundArchiveWaveInfo;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include "game/archive_resource.h"
 
@@ -34,11 +53,29 @@ struct ArchiveBlockReference {
 
 struct ArchiveFile {
     unsigned signature;                    /* 0x00 */
-    unsigned char reserved04[4];
+    unsigned short byte_order, header_size;
     unsigned version;                      /* 0x08 */
-    unsigned char reserved0c[8];
-    struct ArchiveBlockReference blocks[2]; /* 0x14; references at 0x14 and 0x20 */
+    unsigned file_size;
+    unsigned short block_count, reserved12;
+#ifdef __cplusplus
+    /* The existing C++ clients use these two CWAR references only. This is
+     * an observed prefix, not the complete extent of every resource file. */
+    struct ArchiveBlockReference blocks[2];
+#else
+    /* Serialized files supply block_count records after the fixed header. */
+    struct ArchiveBlockReference blocks[];
+#endif
 };
+
+/* [INFERENCE] The stored tag is 16-bit, but the original comparisons consume
+ * the full incoming core word. Do not truncate it at the shared endpoint. */
+extern const struct ArchiveBlockReference *func_001650f8(
+    const struct ArchiveFile *file, unsigned type);
+extern unsigned func_001f1f20(const struct ArchiveFile *file);
+extern unsigned func_001f1f34(const struct ArchiveFile *file);
+extern unsigned func_001f1f4c(const struct ArchiveFile *file);
+extern bool func_001f1ebc(const struct ArchiveFile *file);
+extern bool func_001f1ed8(const struct ArchiveFile *file);
 
 struct SoundContainerFile {
     unsigned char reserved00[0x14];
@@ -50,8 +87,25 @@ struct ArchiveBlockHeader {
     unsigned char reserved04[4];
 };
 
+/* Serialized CWAR table entries share the same sized-reference format used by
+ * the original wave lookup and the canonical cache reader. */
+struct ArchiveSizedFileReference {
+    unsigned short type, reserved02;
+    unsigned offset, size;
+};
 struct ArchiveInfoTable {
     unsigned count;
+#ifdef __cplusplus
+    /* ORIGINAL BUG: the native serialized table indexes its one-element tail
+     * beyond the C++ bound. The file count, not this spelling, supplies extent. */
+    struct ArchiveSizedFileReference entries[1];
+    unsigned GetOffsetFromFileBlockBody(unsigned index) const
+    {
+        return entries[index].offset;
+    }
+#else
+    struct ArchiveSizedFileReference entries[];
+#endif
 };
 struct ArchiveReader {
     const struct ArchiveFile *file;         /* 0x00 */
@@ -59,6 +113,8 @@ struct ArchiveReader {
     const void **cache;                     /* 0x08 */
     unsigned char initialized;             /* 0x0c */
 };
+extern unsigned func_00140dd4(const struct ArchiveReader *reader, int index);
+extern const void *func_00183bfc(const struct ArchiveReader *reader, unsigned index);
 
 /* A typed, self-relative resource reference; unsupported types resolve to null. */
 struct RelativeReference {
@@ -89,7 +145,7 @@ struct ArchiveIndex {
     const struct ArchiveResourceTable *table;
 };
 
-struct ArchiveHandleVTable;
+
 struct ArchiveHandle {
     const struct ArchiveHandleVTable *vtable;
     struct ArchiveIndex *index;
@@ -135,7 +191,7 @@ struct ArchiveFileInfo {
 #endif
 };
 
-struct BankFile;
+
 struct SoundReference {
     unsigned short type;
     unsigned short reserved02;
@@ -186,10 +242,13 @@ struct SoundArchiveInfo {
     int range_table_offset;
     unsigned reserved10;
     int third_table_offset;
-    unsigned char reserved18[0x14];
+    unsigned char reserved18[0x0c];
+    unsigned stream_table_offset;
+    unsigned reserved28;
     unsigned file_table_offset;
     unsigned reserved30;
-    unsigned count_table_offset;
+    /* [INFERENCE] Both count and location consumers reach this same file table. */
+    unsigned location_table_offset;
     unsigned reserved38;
     unsigned player_info_offset;
 };
@@ -198,11 +257,12 @@ struct SoundArchiveReader {
     const void *vtable;
     unsigned reserved04;
     unsigned version;
-    unsigned char reserved0c[0x30];
+    unsigned char reserved0c[0x2c];
+    const struct RelativeReference *lookup_reference;
     const struct SoundArchiveInfo *info;
 };
 
-struct SoundArchiveAddon;
+
 struct SoundArchive {
     const void *vtable;
     const struct SoundArchiveReader *reader;
@@ -244,11 +304,23 @@ struct SoundPlayerResult {
     unsigned stream_buffer_times;
 };
 
+
+
+struct ArchiveFileLocation;
 struct SoundArchiveAddonVTable {
-    unsigned char reserved00[0x20];
+    unsigned char reserved00[0x18];
+    bool (*read_sound)(struct SoundArchiveAddon *, unsigned, struct SoundBasicInfo *);
+    unsigned char reserved1c[4];
     bool (*read_file)(struct SoundArchiveAddon *, unsigned, struct SoundFileResult *);
-    unsigned char reserved24[0x10];
+    unsigned char reserved24[4];
+    bool (*read_wave_archive)(struct SoundArchiveAddon *, unsigned, struct SoundArchiveWaveInfo *);
+    bool (*read_file_group)(struct SoundArchiveAddon *, unsigned, struct ArchiveResourceInfo *);
+    void (*read_file_location)(struct SoundArchiveAddon *, unsigned, struct ArchiveFileLocation *, int);
     bool (*read_player)(struct SoundArchiveAddon *, struct SoundPlayerResult *);
+    unsigned char reserved38[4];
+    bool (*read_sequence)(struct SoundArchiveAddon *, unsigned, struct SoundType1Info *);
+    unsigned char reserved40[8];
+    bool (*read_wave_sound)(struct SoundArchiveAddon *, unsigned, struct SoundType3Info *);
 };
 struct SoundArchiveAddon {
     const struct SoundArchiveAddonVTable *vtable;
@@ -266,9 +338,33 @@ struct SoundArchiveAddon {
             return false;
         return vtable->read_player(this, out);
     }
+    bool read_sequence(unsigned id, SoundType1Info *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_sequence(this, id, out);
+    }
+    bool read_wave_sound(unsigned id, SoundType3Info *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_wave_sound(this, id, out);
+    }
+    bool read_sound(unsigned id, SoundBasicInfo *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_sound(this, id, out);
+    }
+    bool read_wave_archive(unsigned id, SoundArchiveWaveInfo *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_wave_archive(this, id, out);
+    }
+    void read_file_location(unsigned id, ArchiveFileLocation *out, int mode)
+    {
+        if (enabled) vtable->read_file_location(this, id, out, mode);
+    }
 #endif
 };
-struct SoundLookupProvider;
+
 struct SoundLookupVTable {
     unsigned char reserved00[0x0c];
     const void *(*lookup)(struct SoundLookupProvider *provider, unsigned int sound_id);
@@ -312,6 +408,8 @@ extern int func_0018279c(const unsigned *packed, unsigned *out, unsigned index);
 extern int func_00131928(const struct SoundArchiveReader *reader, unsigned int sound_id);
 extern const void *func_0016a938(const struct SoundArchivePlayerView *player, unsigned int sound_id);
 extern const void *func_001f2ac8(const struct SoundArchiveReader *reader, unsigned int sound_id);
+extern unsigned func_001f206c(const struct SoundArchiveInfo *info, unsigned sound_id);
+extern const void *func_001f2308(const struct RelativeReference *reference, int index);
 
 /* [INFERENCE] Natural callers consume the returned result-object pointer. */
 extern struct WordPair *func_00194a34(struct WordPair *out, unsigned result);
@@ -323,6 +421,11 @@ extern unsigned func_00183c54(const struct ArchiveFile *file);
 extern struct ArchiveReader *func_00183c84(struct ArchiveReader *reader,
                                           const struct ArchiveFile *file, int use_table);
 extern void func_00140970(struct ArchiveReader *reader);
+extern const void *func_00183bc8(const struct ArchiveReader *reader, unsigned index,
+                                const void *replacement);
+extern const void *func_00183bfc(const struct ArchiveReader *reader, unsigned index);
+extern int func_001391d8(const struct ArchiveReader *reader);
+extern const unsigned data_00220b58;
 
 #ifdef __cplusplus
 }
@@ -408,6 +511,14 @@ extern unsigned func_00140c98(const struct SoundType1Details *details);
 extern void func_00140bf0(const struct SoundType1Details *details, unsigned *output);
 extern bool func_00139358(const struct SoundArchiveReader *reader, unsigned item_id,
                   struct SoundType1Info *output);
+extern bool func_0013923c(const struct SoundArchiveReader *reader, unsigned id,
+                        struct SoundBasicInfo *out);
+extern bool func_001858dc(const struct SoundArchive *archive, unsigned id,
+                        struct SoundBasicInfo *out);
+extern bool func_001f2b04(const struct SoundArchiveReader *reader, unsigned id,
+                        struct SoundArchiveWaveInfo *out);
+extern bool func_001f16f8(const struct SoundArchive *archive, unsigned id,
+                        struct SoundArchiveWaveInfo *out);
 extern unsigned func_0012d4d0(void *destination, unsigned char mode,
                               unsigned long long handle,
                               const unsigned short *source, unsigned count);
@@ -429,9 +540,24 @@ extern struct WordPair *func_00126988(struct WordPair *out,
                                          void *destination, unsigned count,
                                          unsigned offset);
 extern struct SoundWaveReader *func_001d3c78(struct SoundWaveReader *reader,
-                                    const struct SoundWaveFile *file, unsigned char relocated);
+                                    const struct SoundWaveFile *file, int relocated);
 extern struct WordPair *func_00194a34(struct WordPair *out, unsigned code);
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+
+
+
+extern "C" {
+bool func_00140e14(const SoundArchiveReader *reader, unsigned file_id, ArchiveFileLocation *out, unsigned flags);
+bool func_00138edc(const SoundArchive *archive, unsigned file_id, ArchiveFileLocation *out);
+bool func_00185884(const SoundArchive *archive, unsigned sound_id, SoundType3Info *out);
+bool func_00185b44(const SoundArchive *archive, unsigned sound_id, SoundType1Info *out);
 }
 #endif
 

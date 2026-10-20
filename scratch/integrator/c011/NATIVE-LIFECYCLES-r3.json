@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "rows": [
+    {
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c011/canonical-inputs/material_lifecycle-r3.cpp",
+        "--profile",
+        "sdk",
+        "--names",
+        "scratch/integrator/c011/NAMES-NATIVE-PROPOSED-r3.json",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/material-native-r3"
+      ],
+      "profile": "sdk",
+      "exit_code": 2,
+      "elapsed_seconds": 0.27413392066955566,
+      "stdout": "note: proposed names overlay scratch/integrator/c011/NAMES-NATIVE-PROPOSED-r3.json (not config/names.json); a MATCH here needs those bindings adopted\n",
+      "stderr": "error: .constdata__ZTIN2nw3lyt8MaterialE+0x4: placement reference to '_ZTSN2nw3lyt8MaterialE': original 0x4-byte span is outside the image (witness address redacted)\n"
+    },
+    {
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c011/canonical-inputs/fx_delay-r3.cpp",
+        "--profile",
+        "middleware",
+        "--names",
+        "scratch/integrator/c011/NAMES-NATIVE-PROPOSED-r3.json",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/fx-delay-native-r3"
+      ],
+      "profile": "middleware",
+      "exit_code": 0,
+      "elapsed_seconds": 0.2995586395263672,
+      "stdout": "note: proposed names overlay scratch/integrator/c011/NAMES-NATIVE-PROPOSED-r3.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN2nw3snd7FxDelayC1Ev @ 0x1d23b4 size 0xa8/0xa8\n",
+      "stderr": ""
+    }
+  ]
+}

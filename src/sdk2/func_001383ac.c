@@ -7,7 +7,7 @@ struct ByteInputCommand {
         unsigned char value;
     } body;
 };
-extern CtrHandle data_0024376c;
+
 
 CtrResult func_001383ac(unsigned char value)
 {
@@ -18,7 +18,7 @@ CtrResult func_001383ac(unsigned char value)
 
     command->header = ctrIpcHeader(19u, 1u, 0u);
     ctrIpcMarshalByte(&command->body.value, &value);
-    result = svcSendSyncRequest(data_0024376c);
+    result = svcSendSyncRequest(data_0024376c.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure >= 0)
         result = command->body.result;

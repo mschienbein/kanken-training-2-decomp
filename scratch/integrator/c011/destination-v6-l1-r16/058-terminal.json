@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/audio_coefficients_submit-r12.c",
+  "source_sha256": "011b2eed145173e1cdd92b4e5a136a2e14719263309d67edb956d7639b316ac4",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_0014cd18"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/audio_coefficients_submit-r12.c",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/058-audio_coefficients_submit-r12"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.126856,
+  "stdout": "MATCH    func_0014cd18 @ 0x14cd18 size 0x8c/0x8c\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/058-audio_coefficients_submit-r12/audio_coefficients_submit-r12.result.json",
+  "result_sha256": "c4303ecf0f4a8b3df6bdf15a1053b329fd590a0afb294ef30b60728ff0936543",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_0014cd18",
+      "status": "match",
+      "size": 140,
+      "candidate_size": 140,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

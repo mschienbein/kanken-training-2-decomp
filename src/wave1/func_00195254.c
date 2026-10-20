@@ -1,6 +1,6 @@
 #include "game/bss_0049ecf0.h"
 
-extern unsigned char *data_00242fc8;
+#include "game/command_buffer.h"
 extern void func_00192720(void *destination, const void *source, unsigned size);
 extern void func_00195f7c(void);
 extern void func_00190878(void);

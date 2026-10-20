@@ -1,6 +1,8 @@
 #ifndef GAME_SEQUENCE_H
 #define GAME_SEQUENCE_H
 
+#include "game/audio_voice.h"
+
 struct AnimationTrack;
 struct AnimationTrackVTable;
 struct ArchiveReader;
@@ -48,7 +50,9 @@ struct AnimationTrack {
     unsigned char reserved79[3];
     int delay;
     unsigned char waiting;
-    unsigned char reserved81[0x0b];
+    unsigned char reserved81;
+    unsigned char suppress_stop;
+    unsigned char reserved83[9];
     struct Progress progress[5];
     unsigned char reservedaa[0x62];
     short variables[16];
@@ -120,6 +124,7 @@ extern "C" {
 #endif
 extern void func_00155148(struct AudioVoiceGroup *group, int mode);
 extern void func_0017db3c(struct AnimationTrack *track);
+extern void func_001d4e2c(struct AnimationTrack *track);
 extern void func_0017daf8(struct AudioVoice *voice);
 extern void func_0017dae0(struct AudioVoice *voice);
 extern void func_0017e35c(struct SequencePlayer *player);
@@ -136,6 +141,22 @@ extern void func_001d4cb8(struct AnimationTrack *track);
 extern void func_001d5bf4(struct AudioVoice *voice, int event, void *context);
 extern short bss_004b8984[];
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+
+
+
+extern "C" {
+struct AnimationTrack;
+void func_0017db3c(AnimationTrack *track);
+void func_0016a204(AudioEnvelope *envelope, int value);
+void func_0017daf8(AudioVoice *voice);
+void func_001d4d5c(AnimationTrack *track, int release);
 }
 #endif
 

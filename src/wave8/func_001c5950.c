@@ -2,7 +2,7 @@
 
 #include "game/command_group.h"
 
-void func_001c5950(struct Pane *pane, unsigned mode)
+void func_001c5950(struct AudioChannel *channel, unsigned mode)
 {
-    func_001c5958(pane->style, mode);
+    func_001c5958(channel->state, mode);
 }

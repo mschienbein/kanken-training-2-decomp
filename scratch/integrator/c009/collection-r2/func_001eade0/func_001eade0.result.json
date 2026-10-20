@@ -1,0 +1,50 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009/src/wave18/func_001eade0.cpp",
+ "source_sha256": "4ea5432f76d1ca6e2d1d8cc3b2cf6369c75178af4ffd60e473eb10158d0327a0",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "37b9cdffd34ca38c761b46bcc0075ada16ebaadcbeb6a213cbaf9d8d099692db",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v2",
+ "literal_model": "none",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "func_001eade0",
+   "address": 2010592,
+   "size": 248,
+   "candidate_size": 244,
+   "status": "mismatch",
+   "first_diff": 4,
+   "linker_rewrites": [
+    {
+     "offset": 188,
+     "rule": "inline_nop",
+     "target": 2187584,
+     "word": "0xe1a00000"
+    },
+    {
+     "offset": 200,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

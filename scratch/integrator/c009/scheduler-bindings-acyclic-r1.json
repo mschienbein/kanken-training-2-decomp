@@ -1,0 +1,168 @@
+{
+  "facts": [
+    {
+      "function": "0x0010239c",
+      "stores": [],
+      "calls": [
+        {
+          "site": "0x001023f4",
+          "target": null,
+          "target_pointer": null,
+          "core_inputs": {}
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x0010239c",
+          "site": "0x001023f4",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r0"
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x001023f4",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "base": {
+                  "indexed_base": {
+                    "address_or_scalar": "0x495c8c"
+                  },
+                  "element_width": 24
+                },
+                "offset": 8
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "base": {
+                    "indexed_base": {
+                      "address_or_scalar": "0x495c8c"
+                    },
+                    "element_width": 24
+                  },
+                  "offset": 8
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "indexed_base": {
+                    "address_or_scalar": "0x495c8c"
+                  },
+                  "element_width": 24
+                }
+              },
+              "r3": {
+                "parameter_of": "func_0010239c",
+                "register": "r3"
+              },
+              "s0": {
+                "parameter_of": "func_0010239c",
+                "register": "s0"
+              },
+              "s1": {
+                "parameter_of": "func_0010239c",
+                "register": "s1"
+              },
+              "s2": {
+                "parameter_of": "func_0010239c",
+                "register": "s2"
+              },
+              "s3": {
+                "parameter_of": "func_0010239c",
+                "register": "s3"
+              },
+              "s4": {
+                "parameter_of": "func_0010239c",
+                "register": "s4"
+              },
+              "s5": {
+                "parameter_of": "func_0010239c",
+                "register": "s5"
+              },
+              "s6": {
+                "parameter_of": "func_0010239c",
+                "register": "s6"
+              },
+              "s7": {
+                "parameter_of": "func_0010239c",
+                "register": "s7"
+              },
+              "s8": {
+                "parameter_of": "func_0010239c",
+                "register": "s8"
+              },
+              "s9": {
+                "parameter_of": "func_0010239c",
+                "register": "s9"
+              },
+              "s10": {
+                "parameter_of": "func_0010239c",
+                "register": "s10"
+              },
+              "s11": {
+                "parameter_of": "func_0010239c",
+                "register": "s11"
+              },
+              "s12": {
+                "parameter_of": "func_0010239c",
+                "register": "s12"
+              },
+              "s13": {
+                "parameter_of": "func_0010239c",
+                "register": "s13"
+              },
+              "s14": {
+                "parameter_of": "func_0010239c",
+                "register": "s14"
+              },
+              "s15": {
+                "parameter_of": "func_0010239c",
+                "register": "s15"
+              }
+            },
+            "stack": {}
+          }
+        ],
+        "storage": [
+          {
+            "location": {
+              "address_or_scalar": "0x49628c"
+            },
+            "value": {
+              "loaded_from": {
+                "address_or_scalar": "0x496294"
+              }
+            }
+          },
+          {
+            "location": {
+              "address_or_scalar": "0x496290"
+            },
+            "value": {
+              "loaded_from": {
+                "base": {
+                  "indexed_base": {
+                    "address_or_scalar": "0x495c8c"
+                  },
+                  "element_width": 24
+                },
+                "offset": 2
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "coverage": "Emit scoped original address/register/storage facts, never instruction text or bytes.",
+  "acyclic_only": true,
+  "reused_helper": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py",
+  "reused_helper_sha256": "6df413333b0056d015ce836e79345d1a254ad18ef43dec18dc33d77faa5bb59e"
+}

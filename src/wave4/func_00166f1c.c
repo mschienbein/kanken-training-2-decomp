@@ -1,8 +1,6 @@
-/* [INFERENCE] Signature: Callee packet uses r0 as screen base, r1 as slot index and r2 as enabled/mode for widget-update helpers. */
-
-extern void func_00166f20(void *screen, int index, int enabled);
-
-void func_00166f1c(void *screen, int index, int enabled)
+#include "game/w11_control.h"
+/* The natural wrapper forwards the same numeric/visual owner unchanged. */
+void func_00166f1c(struct W11jVisualOwner *screen, int index, int enabled)
 {
     func_00166f20(screen, index, enabled);
 }

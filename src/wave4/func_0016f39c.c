@@ -1,8 +1,6 @@
-/* [INFERENCE] Signature: Callee packet uses r0 as screen base and scaled r1 as an index into widget and label entries. */
-
-extern void func_0016f3a0(void *screen, int index);
-
-void func_0016f39c(void *screen, int index)
+#include "game/screen_transition.h"
+/* The actual receiver owns indexed fixed-stride animation entries. */
+void func_0016f39c(struct TransitionScene *screen, int index)
 {
     func_0016f3a0(screen, index);
 }

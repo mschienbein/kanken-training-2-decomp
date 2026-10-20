@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "preserved-predecessor-lesson-not-current-C010-audit",
+  "predecessor_records": {
+    "main-argcheck-r1.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/main-argcheck-r1.json",
+      "sha256": "f369e1c95a08571755dbda10b3e1969895ed1934b6a76fc56a31d73ad73b5181"
+    },
+    "main-argcheck-r2.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/main-argcheck-r2.json",
+      "sha256": "bfd07c463a68b79f6b04c613bfdd6060a6cd2f4644983239ceb9e96193c00765"
+    },
+    "main-linker-rewrites-r1.json": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/main-linker-rewrites-r1.json",
+      "sha256": "2c5930a6790c0d060f1aba6535df8c9a11a68e99eafc032b254a5c13f5a786b3"
+    }
+  },
+  "observed_predecessor_summaries": {
+    "main-argcheck-r1": {
+      "callback_sites": 9,
+      "direct_sites": 12168,
+      "elapsed_seconds": 182.525,
+      "flagged_functions": 52,
+      "functions": 2296,
+      "issues": 80,
+      "notes": 412,
+      "rewrite_sites": 0,
+      "tail_sites": 605,
+      "unchecked_functions": 389,
+      "unresolved_indirect_sites": 1046
+    },
+    "main-argcheck-r2": {
+      "callback_sites": 9,
+      "direct_sites": 12168,
+      "elapsed_seconds": 185.285,
+      "flagged_functions": 52,
+      "functions": 2296,
+      "issues": 80,
+      "notes": 412,
+      "rewrite_sites": 38,
+      "tail_sites": 605,
+      "unchecked_functions": 389,
+      "unresolved_indirect_sites": 1046
+    }
+  },
+  "retained_first_attempt_exit": {
+    "exit_code": 2,
+    "evidence": "main-linker-rewrites-r1.json prior_incomplete_audit explicitly records retained exit2 and zero rewrite_sites from unsupported sweep input"
+  },
+  "corrected_projection_basis": "Fresh required844 plus supplementary148 source-bound receipts; main-argcheck-r2 records38 rewrite sites. This does not cure80 issues/389 unchecked ABI obligations or confer predecessor acceptance.",
+  "supported_input_shapes": [
+    "units[].linker_rewrites",
+    "root linker_rewrites"
+  ],
+  "current_bounded_input": "linker-rewrites-bounded-r3-closure-r2.json",
+  "current_bounded_input_warning": "Correct schema but only63 current units; not complete C010 closure.",
+  "remaining_Main_input": "main-complete-r3-closure-r1/linker-rewrites.json, only after all2709 primary recipes succeed and source/header hashes remain bound",
+  "forbidden_substitutes": [
+    "Sweep results.json index",
+    "Stale default accept/*/receipts/*.json history",
+    "An invented empty rewrite projection",
+    "Historical predecessor projection relabeled current after C010 source/header changes"
+  ],
+  "target_null_qualification": "Source-only helper rewrites have no original callee address; argcheck intentionally skips that original-call edge. Every typed non-invoking helper and its R1 provenance still requires independent review."
+}

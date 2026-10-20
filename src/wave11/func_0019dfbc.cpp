@@ -11,7 +11,8 @@ extern "C" void func_0019dfbc(CtrResult result)
     if (!(configuration->environment & 1) && !data_00242d64) {
         if (level == (unsigned)-1)
             func_001219bc(result, 0, __return_address());
-        return func_0019f568();
+        func_0019f568();
+        return;
     }
     if (level != (unsigned)-7 && level != 1)
         return func_001219bc(result, 0, __return_address());

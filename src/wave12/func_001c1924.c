@@ -7,11 +7,11 @@
 
 int func_001c1924(const struct PromptManager *manager)
 {
-    if (manager->objects != 0) {
-        struct DisplayObject *object = manager->objects[0];
+    if (manager->handles[0] != 0) {
+        struct ResourceEvent *event = manager->handles[0]->objects[0];
         const struct NameTable *table = data_0023f004[0];
-        if (object != 0 && table->count > 0) {
-            if (func_00195874(object, 0) != 0)
+        if (event != 0 && table->count > 0) {
+            if (func_00195874(&event->base, 0) != 0)
                 return 0;
         }
     }

@@ -1,28 +1,8 @@
+#include "game/playback_screen.h"
 #include "game/deferred_callback.h"
 #include "game/selection.h"
 #include "game/screen.h"
 #include "game/runtime.h"
-
-
-struct ScreenInitializationState {
-    unsigned char reserved00[0x4c];
-    struct W6ListController *actions;
-    struct W8DisplaySet *screen;
-    struct SelectionList *selection;
-    unsigned char reserved58[8];
-    struct AlternateSelectionList *alternate;
-    unsigned char reserved64[0x24];
-    struct WidgetActionState *action;
-    unsigned reserved8c;
-    int mode;
-    float elapsed;
-    int selected;
-    int count;
-    struct MenuOptionGroup *first_options;
-    struct MenuOptionGroup *second_options;
-    struct MotionState animation;
-};
-
 
 extern "C" void func_001e807c(struct ScreenInitializationState *state)
 {
@@ -61,6 +41,6 @@ extern "C" void func_001e807c(struct ScreenInitializationState *state)
     }
     /* [INFERENCE] The opaque callback receiver is this state object; the
      * member-function identity is retained in its named original descriptor. */
-    func_00177b10(reinterpret_cast<CallbackTarget *>(state), data_002188d8);
+    func_00177b10(state, data_002188d8);
     func_00175848();
 }

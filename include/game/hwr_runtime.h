@@ -24,6 +24,11 @@ struct RecognitionList {
     struct RecognitionEntry *entries;
     unsigned short capacity, count, worst_score, worst_index;
 };
+/* [INFERENCE] Candidate workspace carved from the existing byte-storage root. */
+struct HwrCandidateStorage {
+    struct RecognitionEntry entries[32][16];
+    struct RecognitionList lists[32];
+};
 struct RecognitionState {
     unsigned char point_data[0x40];
     unsigned char *points;
@@ -55,23 +60,66 @@ struct HwrStrokeGeometry {
     unsigned short offsets[];
 #endif
 };
+struct HwrStrokeLengths {
+    unsigned char reserved00[0x148a];
+#ifndef __cplusplus
+    unsigned short lengths[];
+#endif
+};
 /* [INFERENCE] The same workspace base is used with indexed tree and stroke
  * geometry views. The union expresses overlapping representation, not two
  * allocations or a recovered phase/lifetime rule. Both following vectors are
  * variable-length; no bound is invented for the tree or offset table. */
+struct HwrDictionaryHeader {
+    unsigned short field00, field02, field04, field06, field08;
+};
 union HwrWorkspace {
     struct HwrTree tree;
     struct HwrStrokeGeometry geometry;
+    struct HwrDictionaryHeader header;
+    struct HwrStrokeLengths lengths;
 };
 struct HwrCachedBounds { unsigned short max_y, max_x, min_y, min_x; };
+
+/* The reset/configuration/state-machine consumers use the same halfwords.
+ * Current/previous are phase-dependent words, not separate shadow owners. */
+struct HwrConfiguration {
+    unsigned short state, current, previous;
+    short width, height;
+    unsigned short reserved0a;
+    int area;
+    unsigned short flags, mode_b, mode_a, limit_a, limit_b;
+};
+struct HwrContext {
+    unsigned short reserved00, strokes, points;
+    unsigned char reserved06[0x16];
+    unsigned short encoded_size;
+    unsigned char reserved1e[0xa];
+    unsigned short *group_count;
+};
+struct HwrCandidate {
+    unsigned reserved00;
+    unsigned short score, identifier;
+    unsigned reserved08;
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern union HwrWorkspace *data_0024385c;
+extern unsigned char *data_00243830;
+extern unsigned char *data_00243864;
 extern union HwrWorkspace bss_004e07f0;
 extern unsigned short *data_00243888;
 extern struct HwrCachedBounds bss_004e1e04[];
 extern struct RecognitionState bss_004e071c;
+extern struct HwrConfiguration bss_004bfce0;
+extern struct HwrContext data_00243834;
+extern int func_00159e94(struct HwrCandidate *output, int capacity);
+extern void func_0015b950(unsigned short group_count, int option);
+extern void func_0017d8a8(unsigned short index);
+extern void func_0015c5a4(struct RecognitionList *candidates);
+extern void func_0015c734(unsigned int unused_mode, unsigned int mode);
+extern void func_0017b4ac(struct RecognitionList *candidates, short first, short last);
 #ifdef __cplusplus
 }
 #endif

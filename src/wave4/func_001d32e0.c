@@ -1,8 +1,9 @@
 #include "game/audio_tasks.h"
-/* [INFERENCE] Signature: Callee packet accesses object members through r0, compares r1 as a selector and locks the object mutex. */
+/* [INFERENCE] Full-word task identity, corroborated by the original ID
+ * comparison and the pinned TaskManager::CancelTaskById(u32) contract. */
 
 
-void func_001d32e0(struct AudioTaskManager *object, int index)
+void func_001d32e0(struct AudioTaskManager *object, unsigned id)
 {
-    func_001d32e4(object, index);
+    func_001d32e4(object, id);
 }

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/service_state.h"
 
 /* func_00122b30 supplies the stored context word registered through func_0010ce58.

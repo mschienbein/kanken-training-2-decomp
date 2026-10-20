@@ -4,11 +4,10 @@
 #include "game/selection.h"
 #include "game/notification.h"
 struct W8DisplaySet;
-struct W8EffectState;
 
 struct W8ScreenState {
     unsigned char reserved00[0x14];
-    struct W8EffectState *effects;
+    struct W10DrawingInput *effects;
     unsigned char reserved18[0x34];
     struct W6ListController *choices;
     struct W8DisplaySet *display;
@@ -29,7 +28,6 @@ struct W8ScreenState {
     struct DisplayObject *cursor;
 };
 
-extern void func_0016dc94(struct W8EffectState *effects, int index);
 
 static __forceinline void set_active(struct DisplayObject *object, int active)
 {

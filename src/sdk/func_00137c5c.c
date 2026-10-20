@@ -1,5 +1,6 @@
 #include "ctr/cp15.h"
 #include "ctr/svc.h"
+#include "ctr/ipc.h"
 
 CtrResult func_00137c5c(const CtrHandle *session)
 {

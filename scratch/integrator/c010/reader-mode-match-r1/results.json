@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/owner-cutover/reader-mode-scope-r1.json",
+  "scope_sha256": "d7c08531638acba450cd1ed64d5dbeaeb94e9d975de1572117421ba0ddd05e82",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "expected_units": 1,
+  "completed_units": 1,
+  "paused": false,
+  "match_units": 0,
+  "exit_counts": {
+    "1": 1
+  },
+  "rows": [
+    {
+      "source": "src/retries/func_001d3c78.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001d3c78"
+      ],
+      "author": "r327",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/retries/func_001d3c78.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/reader-mode-match-r1/retries/func_001d3c78"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "output": "MISMATCH func_001d3c78 @ 0x1d3c78 size 0xb0/0xb0 first difference at +0xc\n",
+      "receipt": "scratch/integrator/c010/reader-mode-match-r1/retries/func_001d3c78/func_001d3c78.result.json",
+      "source_sha256": "242487a4aadc8cd29094450a29f8fd4a19c8567943fd2843ef668af322dc72fc"
+    }
+  ]
+}

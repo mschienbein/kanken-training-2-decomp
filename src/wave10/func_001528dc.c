@@ -1,32 +1,4 @@
-struct PrefetchBlockReference {
-    unsigned short type;
-    unsigned short reserved02;
-    int offset;
-    unsigned size;
-};
-struct PrefetchFileHeader {
-    unsigned signature;
-    unsigned short byte_order;
-    unsigned short header_size;
-    unsigned version;
-    unsigned file_size;
-    unsigned short block_count;
-    unsigned short reserved12;
-    struct PrefetchBlockReference blocks[];
-};
-struct PrefetchInfoBlock;
-struct PrefetchDataBlock;
-struct PrefetchFileBlock {
-    unsigned signature;
-    unsigned size;
-};
-struct PrefetchFileReader {
-    const struct PrefetchFileHeader *file;
-    const struct PrefetchInfoBlock *info;
-    const struct PrefetchDataBlock *data;
-};
-extern const struct PrefetchFileBlock *func_00153ebc(const struct PrefetchFileHeader *file);
-extern const struct PrefetchFileBlock *func_00153f28(const struct PrefetchFileHeader *file);
+#include "game/prefetch_stream.h"
 
 void func_001528dc(struct PrefetchFileReader *reader, const struct PrefetchFileHeader *file)
 {

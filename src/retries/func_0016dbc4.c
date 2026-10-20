@@ -16,7 +16,8 @@ void func_0016dbc4(struct W10DrawingInput *input)
     active = 1;
     input->active = active;
     func_00180344();
-    func_001826fc(input->display, 1);
+    /* ORIGINAL BUG: the leading drawing display is used without a null check. */
+    func_001826fc(&input->displays[0]->base, 1);
     func_00166d5c(input, 0, 0.0f, 0.0f);
     input->state = active;
     input->finished = active;

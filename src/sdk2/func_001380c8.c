@@ -10,7 +10,7 @@ struct ServiceIpcPacket {
     union ServiceWord words[4];
 };
 
-extern CtrHandle data_00243040;
+
 
 CtrResult func_001380c8(unsigned int value0, unsigned int value1,
                          unsigned int value2, unsigned int value3, unsigned char *out)
@@ -25,7 +25,7 @@ CtrResult func_001380c8(unsigned int value0, unsigned int value1,
     command->words[1].word = value1;
     memcpy(&command->words[2].byte, &value2, 1);
     command->words[3].word = value3;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure < 0)
         return result;

@@ -7,11 +7,11 @@
  * evidenced. Distinct object identities are not equated just for sharing offsets. */
 struct W11HandleA { int id; };
 struct W11HandleB { int id; };
-struct W11HandleC { int id; unsigned first; unsigned second; };
+struct ArrayOwner { int index, count; void *elements; };
 struct W11SingleState { int status; };
 struct W11ControlState { unsigned char reserved00[8]; int status08; int status0c; };
 struct ParameterValue { int value; };
-struct VectorParameter { int kind, first, second; float x, y, z; int extra; };
+struct VectorParameter { int kind, first, second; float x, y, z; const wchar_t *extra; };
 struct ParameterRecord { int kind, first, second, third; float x, y, z; };
 
 struct CommandResetContext;
@@ -23,6 +23,10 @@ extern "C" {
  * Descriptor category/identifier words are read; wrappers ignore the result. */
 extern void func_0017a7e4(const struct NameTable *const *table, int count,
                           int mode, unsigned flags);
+extern void func_0017a938(const struct NameTable *const *table, int count,
+                          unsigned option);
+extern void func_001670ec(int operation, const struct NameTable *const *table,
+                          int count, int selection, int transition, unsigned option);
 #ifdef __cplusplus
 }
 #endif
@@ -46,9 +50,13 @@ extern "C" {
 #endif
 extern struct W11HandleA *func_001721d8(struct W11HandleA *object);
 extern struct W11HandleB *func_001748ac(struct W11HandleB *object);
-extern struct W11HandleC *func_00174cb0(struct W11HandleC *object);
+extern struct ArrayOwner *func_00174cb0(struct ArrayOwner *object);
 extern void func_00186598(void);
 extern void func_00181a4c(int kind, int first, int second, int value, unsigned flags);
+/* [INFERENCE] Same bound content receiver used by status/reset consumers;
+ * category and enabled are full words even though the parent stores a byte. */
+extern void func_00171a34(struct W11SingleState *content, int category,
+                        int index, int enabled);
 #ifdef __cplusplus
 }
 #endif

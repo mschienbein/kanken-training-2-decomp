@@ -1,23 +1,16 @@
+#include "game/functions.h"
 #include "game/selection.h"
 #include "game/notification.h"
 #include "game/animation.h"
-struct SettingsScreen {
-    unsigned char reserved00[0x34];
-    int next_state;
-    unsigned char reserved38[0x14];
-    struct W6ListController *controls;
-};
+#include "game/screen_transition.h"
 extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);
 extern void func_0017433c(int channel, int duration);
-extern void func_0016fca0(int enabled);
-extern void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition);
-extern void func_0016fa58(struct SettingsScreen *screen, int enabled);
-extern void func_001dc3a4(int enabled);
-extern void func_001dc084(int enabled);
-extern void func_001dc064(int enabled);
-extern void func_0016fa38(int enabled);
-extern void func_0016fa18(int enabled);
+
+
+
+
+
 
 void func_001b06a4(struct SettingsScreen *screen)
 {

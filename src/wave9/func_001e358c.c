@@ -1,3 +1,5 @@
+#include "game/functions.h"
+#include "game/screen.h"
 #include "game/selection.h"
 #include "game/resource_tables.h"
 struct DeferredRequest {
@@ -5,7 +7,7 @@ struct DeferredRequest {
     int resourceIndex;
     unsigned char *data;
 };
-extern int func_0019efd0(void);
+
 
 void func_001e358c(struct DeferredRequest *request)
 {

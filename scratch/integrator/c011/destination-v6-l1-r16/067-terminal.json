@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/sequence_auxiliary_command-r14.cpp",
+  "source_sha256": "67c4b8822463d047bde1451782412c77ebb6ee30f656736496fee48fbd778275",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_001d2f90"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/sequence_auxiliary_command-r14.cpp",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/067-sequence_auxiliary_command-r14"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.129607,
+  "stdout": "MATCH    func_001d2f90 @ 0x1d2f90 size 0x58/0x58\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/067-sequence_auxiliary_command-r14/sequence_auxiliary_command-r14.result.json",
+  "result_sha256": "9f042e16bbb8ee0a1b84aa83801a3ce38b87aeed20b9ee0406cf64977c940259",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001d2f90",
+      "status": "match",
+      "size": 88,
+      "candidate_size": 88,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

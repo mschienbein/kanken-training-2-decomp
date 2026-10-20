@@ -1,6 +1,5 @@
 #include "game/render_state.h"
 
-extern void func_001272bc(unsigned index);
 void func_00193b2c(unsigned index, unsigned components, unsigned format,
                    unsigned normalized, unsigned stride, unsigned offset)
 {

@@ -30,24 +30,40 @@ struct X07NarrowCommand;
 struct ServiceState {
     signed char flag_00;
     signed char active;
-    unsigned char reserved02[3];
+    unsigned char flag_02;
+    unsigned char flag_03;
+    unsigned char flag_04;
     unsigned char flag_05;
     unsigned char mode;
-    unsigned char reserved07[2];
+    signed char flag_07;
+    signed char flag_08;
     signed char flag;
     unsigned char flag_0a;
     unsigned char option;
     unsigned char flag_0c;
     unsigned char flag_0d;
-    unsigned char reserved0e[6];
+    unsigned char reserved0e[2];
+    unsigned value10;
     unsigned applet_id;
     volatile unsigned state;
+};
+
+struct AppletStartupState {
+    signed char ready;
+    unsigned char requested;
+    unsigned char reserved02[2];
+    unsigned reasons;
+    union SynchronizationStorage event;
 };
 
 struct PendingState {
     unsigned char reserved00;
     unsigned char pending;
     signed char blocking;
+    unsigned char graphics_active;
+    unsigned char completion;
+    unsigned char reserved05[3];
+    struct ServiceWaitObject *wait_object;
 };
 
 /* The handle-bearing object at 0x002430e0 is not the flag block above. */
@@ -79,6 +95,9 @@ extern unsigned func_00191de8(void);
 extern void func_00192400(unsigned option);
 extern void func_00192484(unsigned char value);
 extern unsigned func_00192794(void);
+extern int func_00195e84(void);
+extern void func_00185f70(int enabled);
+extern void func_0018ef74(void);
 #ifdef __cplusplus
 }
 #endif
@@ -179,12 +198,21 @@ struct X07NarrowCommand {
     void *buffer;
 };
 
+struct WorkCommand {
+    unsigned operation, flags, reserved08;
+    int first, second;
+    unsigned reserved14[3];
+};
 struct WorkQueue {
     int enabled;
-    int reserved04;
+    int current;
     int active;
     unsigned char reserved0c[0x1018];
-    unsigned writeIndex, readIndex;
+    int writeIndex;                         /* signed modulo-256 producer arithmetic */
+    unsigned readIndex;
+#ifndef __cplusplus
+    struct WorkCommand commands[];
+#endif
 };
 
 #ifdef __cplusplus
@@ -202,7 +230,7 @@ extern void func_001008ac(void);
 extern void func_0010163c(void);
 extern void func_001016c4(void);
 __declspec(noreturn) extern void func_00100d74(void);
-extern signed char data_0023fdd8;
+extern struct AppletStartupState data_0023fdd8;
 extern struct ServiceRegistration bss_004b1c88;
 extern unsigned func_0019ed2c(struct ServiceRegistration *entry, unsigned event);
 extern int func_00113ddc(unsigned value);
@@ -212,7 +240,6 @@ extern void func_001233c0(ServicePollCallback callback, void *context);
 extern unsigned data_00243030;
 extern struct ServicePollRegistration data_00243008;
 extern CtrHandle data_00242ff8;
-extern CtrHandle data_00243040;
 extern struct LifecycleCallbackTables bss_0049eee4;
 extern unsigned short data_00243124;
 extern void (*bss_004b51e8[16])(void *value);
@@ -228,6 +255,9 @@ extern void func_00106fac(unsigned char value);
 extern void func_0010ba4c(void *context);
 extern void func_0010ba9c(void *context);
 extern int func_0010d0c0(void);
+extern struct ServiceRegistration bss_0049ee7c;
+extern unsigned func_0010d0d0(unsigned parameter, unsigned flags, unsigned workers);
+extern unsigned func_00101714(unsigned flags);
 extern void func_00114f90(void);
 extern int func_00114fd0(void);
 extern void func_00114ff0(unsigned state);

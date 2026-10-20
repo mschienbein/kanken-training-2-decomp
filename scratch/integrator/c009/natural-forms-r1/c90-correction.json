@@ -1,0 +1,25 @@
+{
+  "basis": "Failed early-return trial was C99-style declaration after executable code under the frozen C90 profile; preserve its compile exit2 and put the same live default-mode local into an ordinary compound scope.",
+  "source": "scratch/integrator/c009/natural-forms-r1/0018ee88/early_return_c90.c",
+  "source_sha256": "bb76e64838b4414ae6b8001e607bc1b21766a7bf8e298c38836b4b4f4b1eb301",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c009/natural-forms-r1/0018ee88/early_return_c90.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v2",
+    "--literal-model",
+    "none",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/c009/natural-forms-r1/measurements/8"
+  ],
+  "exit_code": 1,
+  "output": "MISMATCH func_0018ee88 @ 0x18ee88 size 0x38/0x38 first difference at +0x8\n"
+}
