@@ -46,13 +46,14 @@ is explicit rather than inferred from author receipts or optional manifest metad
   R1 identity provenance, original counted loops, ARMCC extensions, original bugs and
   native ABI limitations remain explicit qualifications for independent reviewers.
 
-Current private binding: `scratch/integrator/c009/PRE-REVIEW-resume-r1.json` and
-`readiness-scope-r10.json`. No full build, test suite, prepare, finalize, accepted
-record write or push was run here. Main owns those gates and both independent reviews.
+Private binding is under `scratch/worktrees/c009/scratch/integrator/c009/`:
+`PRE-REVIEW-resume-r1.json` and current `readiness-scope-r11.json`; audited r10 is
+retained separately. The integration agent ran no full build, test suite, prepare,
+finalize, accepted-record write or push. Main owns those gates and both independent reviews.
 
 The final **ccddf12** correction changes only `001e3050`'s last store to the
 named `phase` member instead of indexing beyond `states[0..7]`. It MATCHes all
-50 bytes in `phase-store-r1.json`. Headers and callers are unchanged. The full
+80 bytes in `phase-store-r1.json`. Headers and callers are unchanged. The full
 audit results above remain bound to the **56c333e** boundary; Main performs the
 integrated full gates on the correction, with no blanket reattribution of old hashes.
 
