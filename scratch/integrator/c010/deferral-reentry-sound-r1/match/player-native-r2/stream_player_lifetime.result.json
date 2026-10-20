@@ -1,0 +1,40 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sound/scratch/integrator/c010/deferral-reentry-sound-r1/proposals/stream_player_lifetime.cpp",
+ "source_sha256": "ca3611ab65a62e72adcfdba4d9ee7a72b96afb0f42bde35145f1fedbf43f1a05",
+ "profile": "middleware",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "19c1965343096dd3dca5446f90abf5d0e1bcfe115027a1a39ac8b41918d08235",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": {
+  "path": "scratch/integrator/c010/deferral-reentry-sound-r1/proposals/embedded_names.json",
+  "sha256": "f282481a92e2718491190694a5bab02729b4090afb3f872348d28472e77cf1ad"
+ },
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "_ZN17SoundStreamPlayerD1Ev",
+   "address": 1937488,
+   "size": 64,
+   "candidate_size": 72,
+   "status": "mismatch",
+   "first_diff": 0,
+   "linker_rewrites": []
+  }
+ ]
+}

@@ -1,0 +1,49 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sound/scratch/integrator/c010/deferral-reentry-sound-r1/proposals/embedded_sound_lifetime.cpp",
+ "source_sha256": "81f2c7c6dbc0348be6c4639337ef79173494b28991ac6b17966b632b928241ff",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "9033c5b744d579a36373711893da30631b29340e21b3cbbd75ed1c0e2112f244",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": {
+  "path": "scratch/integrator/c010/deferral-reentry-sound-r1/proposals/embedded_names.json",
+  "sha256": "f282481a92e2718491190694a5bab02729b4090afb3f872348d28472e77cf1ad"
+ },
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "_ZN21EmbeddedSoundInstanceD1Ev",
+   "address": 1915948,
+   "size": 44,
+   "candidate_size": 108,
+   "status": "mismatch",
+   "first_diff": 0,
+   "linker_rewrites": []
+  },
+  {
+   "name": "_ZN17SoundStreamPlayerD1Ev",
+   "address": 1937488,
+   "size": 64,
+   "candidate_size": 72,
+   "status": "mismatch",
+   "first_diff": 0,
+   "linker_rewrites": []
+  }
+ ]
+}
