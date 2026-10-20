@@ -1098,10 +1098,6 @@
       "address": 1636448,
       "evidence": "0x18f860 is a bounded NUL-terminated string comparison with aligned word and byte fallback paths; callers compare fixed names and string prefixes."
     },
-    "_ZN14W17TexturePane7destroyEv": {
-      "address": 1899644,
-      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. The original nondeleting texture-pane destructor assigns its class dispatch table and returns the result of base destruction; method naming is [INFERENCE]."
-    },
     "_ZN14ScrollPositionC1Ev": {
       "address": 1101360,
       "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. Caller 0x00103c88 allocates a 0x64-byte object, invokes this initializer and retains its pointer; [INFERENCE] descriptive class name."
@@ -1233,6 +1229,42 @@
     "_ZN2nw3lyt7Picture11SetMaterialEPNS0_8MaterialE": {
       "address": 1572260,
       "evidence": "Own native provider MATCH at accepted0017fda4, scratch/integrator/types-fontgfx/match/picture-material-r1. Retail Picture constructor/table and material+13c storage proven by fontgfx L01/L03; actual virtual complete destruction and layout deallocation are retained."
+    },
+    "_ZN2nw3lyt7TextBox16FreeStringBufferEv": {
+      "address": 1898108,
+      "evidence": "Own native provider MATCH at001cf67c, scratch/integrator/types-fontgfx/match/textbox-lifecycle-r8; real TextBox buffer/length/DispStringBuffer members, not W17 peer state."
+    },
+    "_ZN2nw3lyt7TextBoxD0Ev": {
+      "address": 1899468,
+      "evidence": "Own native deleting destructor MATCH176B at001cfbcc; native destructor pair from the same source and original TextBox vtable slots0/4, receipt textbox-lifecycle-r8."
+    },
+    "_ZN2nw3lyt7TextBoxD1Ev": {
+      "address": 1899644,
+      "evidence": "Own native complete destructor MATCH168B at001cfc7c; same real TextBox source and original vtable slot0, receipt textbox-lifecycle-r8. Replaces the inferred W17TexturePane::destroy method, not an alias."
+    },
+    "_ZN2nw3lyt7TextBoxD2Ev": {
+      "address": 1899644,
+      "evidence": "Compiler-emitted complete/base destructor aliases from the same exact native TextBox provider; v6 native alias proof."
+    },
+    "_ZTVN2nw3lyt7TextBoxE": {
+      "address": 2245480,
+      "evidence": "Original TextBox address-point224370 equals native symbol+8 in the independently matching destructor pair. The removed RTTI entry has no invented callable body."
+    },
+    "_ZN2nw3lyt4PaneD1Ev": {
+      "address": 1485208,
+      "evidence": "[INFERENCE] Native base destructor identity: constructor/table family L01 and same base teardown target0016a998 in independently matching TextBox D1/D0. No Pane credit or native list cutover is claimed."
+    },
+    "_ZN2nw3lyt4PaneD2Ev": {
+      "address": 1485208,
+      "evidence": "[INFERENCE] Complete/base Pane destructor ABI names for the same actual terminal base teardown in the matching TextBox destructor pair; no extra body emitted or credited."
+    },
+    "_ZdlPv": {
+      "address": 1594100,
+      "evidence": "Standard void(void*) delete role: the independently matching native TextBox D0 deallocates its complete object through001852f4, preserving the existing deleting teardown target."
+    },
+    "_ZN2nw3lyt7TextBox4InitEtj": {
+      "address": 1898416,
+      "evidence": "Own native retail initializer MATCH140B under frozen sdk profile, receipt textbox-init-r1. Both u16 length and unsigned format are passed to the original virtual allocation operation at+70."
     }
   }
 }
