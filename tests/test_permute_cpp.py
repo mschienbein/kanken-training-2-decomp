@@ -34,6 +34,11 @@ extern "C" int target(int x, int y, int *p, Pair<int> *s) {
 }
 """
 
+RESTRICT_SOURCE = """
+extern "C" void copy(int *__restrict dst, const int *__restrict src);
+extern "C" int target(int *__restrict p, int x) { *p = x; return x + 1; }
+"""
+
 
 def program(text=SOURCE, targets=("target",), original=None):
     return permute.Program.parse(text, targets, Path("fixture.cpp"), original)
@@ -148,6 +153,33 @@ int Thing::target(int x) const { return value + x; }
                      "int target(int x){ return x + ; }"):
             with self.subTest(text=text):
                 with self.assertRaises(permute.PermuteError):
+                    program(text)
+
+    def test_prepared_restrict_parses_and_preserves_original_spelling(self):
+        for spelling in ("restrict", "__restrict", "__restrict__"):
+            with self.subTest(spelling=spelling):
+                text = RESTRICT_SOURCE.replace("__restrict", spelling)
+                prepared = interfaces.prepare(text, Path("fixture.cpp")).text
+                self.assertIn("restrict", prepared)
+                self.assertNotIn("__restrict", prepared)
+                source = program(text)
+                self.assertEqual(source.render(source.ast), text)
+                changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+                self.assertIsNotNone(changed)
+                rendered = source.render(changed[0])
+                self.assertNotEqual(rendered, text)
+                _, body, end = source.spans["target"]
+                self.assertEqual(rendered[:body], text[:body])
+                self.assertTrue(rendered.endswith(text[end:]))
+                reparsed = program(rendered)
+                self.assertEqual(reparsed.render(reparsed.ast), rendered)
+                self.assertEqual(reparsed.oracle_targets, source.oracle_targets)
+
+    def test_restrict_parser_still_refuses_invalid_cpp(self):
+        for expression in ("missing + x", "x +"):
+            with self.subTest(expression=expression):
+                text = RESTRICT_SOURCE.replace("x + 1", expression)
+                with self.assertRaisesRegex(permute.PermuteError, "unsupported C\\+\\+ input"):
                     program(text)
 
     def test_utf8_and_int64_offsets_preserve_armcc_extensions_and_other_bodies(self):
@@ -315,6 +347,22 @@ class CppCompilerTest(ScratchTest):
         path = self.directory / "emitted.cpp"
         path.write_text(rendered, encoding="utf-8")
         toolchain.compile_source(PROFILE, path, path.with_suffix(".o"), cache=False)
+
+    def test_restrict_candidates_keep_armcc_spelling_and_compile_without_parser_macro(self):
+        path = self.directory / "restrict.cpp"
+        path.write_text(RESTRICT_SOURCE, encoding="utf-8")
+        source = permute.Program.preprocess(path, ("target",), PROFILE)
+        changed = permute.mutate(source, source.ast, random.Random(0), "commute")
+        self.assertIsNotNone(changed)
+        rendered = source.render(changed[0])
+        self.assertEqual([t.word for t in cpp.tokens(rendered) if "restrict" in t.word],
+                         ["__restrict"] * 3)
+        output = self.directory / "restrict-emitted.cpp"
+        output.write_text(rendered, encoding="utf-8")
+        self.assertEqual(output.read_text(encoding="utf-8"), rendered)
+        with mock.patch.object(toolchain.subprocess, "run", wraps=subprocess.run) as compile_process:
+            toolchain.compile_source(PROFILE, output, output.with_suffix(".o"), cache=False)
+        self.assertNotIn("-Drestrict=__restrict", compile_process.call_args.args[0])
 
 
 @unittest.skipUnless(HAVE_COMPILER, "pinned compiler/launcher not installed (tools/setup.py)")

@@ -183,10 +183,15 @@ def parse_tree(text: str, source: Path, profile: toolchain.Profile | None = None
     clang = clang_api()
     view = View(text, source, profile)
     intrinsic_header = str(Path(__file__).resolve().with_name(".permute-cpp-intrinsics.h"))
+    # prepare() normalizes ARMCC's __restrict spellings to C99 restrict. C++98
+    # needs Clang's extension spelling, but only while parsing: keep prepared
+    # offsets and emitted ARMCC source untouched.
     try:
         tree = clang.Index.create().parse(
             str(source.resolve()),
-            args=["-x", "c++", "-std=c++98", "-target", "armv6k-none-eabi", "-fsigned-char", "-fms-extensions", "-Wno-everything", "-include", intrinsic_header],
+            args=["-x", "c++", "-std=c++98", "-target", "armv6k-none-eabi",
+                  "-fsigned-char", "-fms-extensions", "-Wno-everything",
+                  "-Drestrict=__restrict", "-include", intrinsic_header],
             unsaved_files=[(str(source.resolve()), view.prepared.text), (intrinsic_header, PARSER_INTRINSICS)],
         )
     except (clang.LibclangError, clang.TranslationUnitLoadError) as exc:
