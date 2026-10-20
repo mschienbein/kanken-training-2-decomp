@@ -32,6 +32,7 @@ struct ItemPageSet {
 extern "C" {
 #endif
 extern struct ItemPageSet *data_0023ecf4;
+extern int func_0015f6ec(const struct ItemPage *page);
 extern struct ItemPage *func_0017a4e8(struct ItemPageSet *set, int index);
 extern void func_001719f4(struct ItemPageSet *set, unsigned char kind, int format,
                         int category, int index, int enabled);

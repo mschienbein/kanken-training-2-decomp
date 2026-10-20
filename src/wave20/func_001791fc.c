@@ -18,7 +18,7 @@ void func_001791fc(struct CarouselScreen *screen, int enabled)
     screen->position = 0;
     screen->selection = -1;
     func_001b4ec8(screen, 0, 0);
-    object = slot->object;
+    object = widget_display(slot);
     if (object == 0)
         return;
     {

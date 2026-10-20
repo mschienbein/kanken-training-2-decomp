@@ -17,6 +17,6 @@ void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled)
         slot->state.label.enabled = enabled;
         if (enabled == 0)
             slot->state.label.label_index = -1;
-        set_object_active(slot->object, enabled);
+        set_object_active(widget_display(slot), enabled);
     }
 }

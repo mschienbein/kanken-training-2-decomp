@@ -91,6 +91,7 @@ extern struct AnimationState *func_001b44e8(struct AnimationState *state);
  * +0x38/+0x3c/+0x40 owned allocations inside this partial animation owner. */
 extern void func_001b3c64(struct AnimationState *state);
 extern void func_001b0600(struct W11ControlScreen *screen);
+extern void func_001b0188(struct W11ControlScreen *screen);
 extern void func_0016d554(struct W11ControlScreen *screen, int state);
 extern void func_001741f8(struct W11jVisualOwner *owner, int index, float x, float y);
 extern void func_0016f9a8(struct W11jVisualOwner *owner, int index, float x, float y);

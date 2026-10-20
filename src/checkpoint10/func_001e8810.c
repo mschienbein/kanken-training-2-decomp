@@ -10,7 +10,7 @@ struct W24Float4 { float x, y, width, height; };
 struct W24Transform { float values[9]; };
 struct W24ElementExtra;
 struct W24CollectionElement {
-    struct DisplayObject *object;
+    struct ResourceEvent *object;
     unsigned int flags;
     unsigned short reserved08;
     short index;

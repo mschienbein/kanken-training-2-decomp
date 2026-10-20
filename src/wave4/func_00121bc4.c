@@ -2,7 +2,7 @@
 
 #include "game/exp_heap.h"
 
-void func_00121bc4(void *object)
+void func_00121bc4(struct ExpHeap *object)
 {
-    func_00121bc8(object);
+    func_00121bc8(&object->base);
 }

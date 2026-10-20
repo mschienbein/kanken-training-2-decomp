@@ -18,6 +18,11 @@ Current entry on top; older entries are kept as history.
   six such functions matches. A residual-family study found validated idioms (typed storage
   accessors, genuine same-TU callee visibility, helper argument order) and precise negatives
   (VFP load writeback, exclusive-store status register).
+- **c010 interface cutover (candidate only):** shared headers replace local declarations,
+  retain caller-evidenced inputs, and expose real initial subobjects instead of receiver casts.
+  `scratch/integrator/c010/g3-unify/G3-UNIFY-r1.json` records the reconciliations and source-bound
+  v6/L1 witnesses. The modal/phase dispatchers `001debb4`/`001e42fc` and the overlapping indexed
+  owner in `00172994` remain explicitly deferred; no common owner, union or array bound is invented.
 - **Next:** c009 (~678 functions), c010 (~548), c011 and a v8-selected model checkpoint;
   catalogue v10-r4 (raw-SVC repair plus 12 more runtime-library owners) is in review.
 

@@ -2,7 +2,7 @@
 #include "game/runtime.h"
 #include "ctr/svc.h"
 
-extern int func_00195e84(void);
+#include "game/service_state.h"
 /* [INFERENCE] Buffer/size are forwarded to an IPC static-buffer descriptor;
  * the third input is marshalled in the handle-transfer descriptor. */
 extern void func_0010d2b8(const void *buffer, unsigned int size, CtrHandle handle);

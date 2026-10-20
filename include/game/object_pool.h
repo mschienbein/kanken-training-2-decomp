@@ -12,11 +12,17 @@ struct SizedBuffer;
 struct SizedBufferHandle;
 
 #include "game/pool_list.h"
+#include "game/functions.h"
 #include "game/runtime.h"
 #include "game/property_descriptor.h"
 #include "game/sound_runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
+struct RegisteredObject {
+    unsigned char reserved[0x88];
+    struct RegistryEntry entry;
+};
+
 struct ObjectPool {
     struct FreeListPool free_list;
     struct PoolList active;
@@ -42,6 +48,7 @@ extern "C" {
 #endif
 extern volatile unsigned data_00243718;
 extern struct ObjectPool bss_004b8420;
+extern struct RegisteredObject *func_0014d784(struct RegisteredObject *object);
 extern struct ObjectPool *func_00185cc0(void);
 extern void func_00147264(struct ObjectPool *pool, void *storage, unsigned size);
 extern int func_0019107c(const struct DateTime *time);

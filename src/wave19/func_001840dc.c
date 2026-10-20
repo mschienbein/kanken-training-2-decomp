@@ -1,10 +1,5 @@
 #include "game/functions.h"
-struct BinaryResourceHeader {
-    int type;
-};
-struct BinaryResourceReference {
-    struct BinaryResourceHeader *resource;
-};
+#include "game/binary_resource.h"
 struct ResourceDispatchHooks {
     void (*texture)(void *reference);
     void (*shader)(void *reference);

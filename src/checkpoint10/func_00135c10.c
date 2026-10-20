@@ -13,9 +13,9 @@ void func_00135c10(int count)
 {
     struct RuntimeRecord88 *records = func_0019d798(1, 4, count * sizeof(*records));
     int i;
-    bss_0049d93c.buffer = records;
-    bss_0049d93c.count = count;
-    bss_0049d93c.capacity = 0;
+    bss_0049d93c.allocation.buffer = records;
+    bss_0049d93c.allocation.count = count;
+    bss_0049d93c.allocation.capacity = 0;
     for (i = 0; i < count; ++i)
         records[i].active = 0;
 }

@@ -63,6 +63,20 @@ struct W17PrimaryState {
     unsigned value;
     unsigned active;
 };
+/* This cleanup owns resource events; compatible slot offsets alone do not
+ * establish identity with the generic display-handle class. */
+struct W24TextSlot {
+    struct ResourceEvent *object;
+    struct WidgetPosition position;
+    struct WidgetPosition scale;
+    unsigned char color[4];
+    unsigned short text[64];
+};
+struct W24TextScreen {
+    unsigned char reserved00[0x1300];
+    struct W24TextSlot *slots[32];
+};
+
 struct ScreenResourceManager {
     const struct W17SceneVTable *vtable;
     unsigned reserved04;
@@ -80,7 +94,7 @@ struct ScreenResourceManager {
     struct Component001b3434 *component01;
     struct Component001ea87c *component02;
     struct Component001e9cdc *component03;
-    struct Component001eaed8 *component04;
+    struct W24TextScreen *component04;
     struct Component00168454 *component05;
     struct Component001af424 *component06;
     struct Component001acff0 *component07;
@@ -178,6 +192,7 @@ extern void func_0019d3b4(struct ResourceEvent *event);
 extern void func_00183208(struct ResourceEvent *event);
 extern void func_0018663c(struct ResourceEvent *event);
 extern void func_00176e24(struct ScreenResourceManager *manager);
+extern void func_001eaed8(struct W24TextScreen *screen);
 extern void func_001e3548(struct W17SelectionOwner *component);
 extern void func_00179a48(struct TrainingMenuScene *scene, int active);
 extern void func_00161650(struct TrainingMenuScene *scene);
@@ -185,6 +200,11 @@ extern void func_001a7444(struct ScreenResourceManager *scene);
 extern void func_001ab540(struct ScreenResourceManager *scene);
 extern void func_001b6db4(struct ScreenResourceManager *scene);
 extern void func_001b72b8(struct ScreenResourceManager *scene);
+extern void func_001a407c(struct ScreenResourceManager *scene);
+extern void func_001a81e4(struct ScreenResourceManager *scene);
+extern void func_001e7134(struct ScreenResourceManager *scene);
+extern void func_001e7cb8(struct ScreenResourceManager *scene);
+extern void func_001ebe20(struct ScreenResourceManager *scene);
 extern void func_00168454(struct Component00168454 *component);
 extern void func_001682e8(struct Component001682e8 *component);
 extern void func_001e381c(struct GridCleanupScreen *screen);

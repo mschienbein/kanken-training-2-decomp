@@ -3,10 +3,6 @@
 #include "game/resource_runtime.h"
 #include "game/scene_lifecycle.h"
 #include "game/screen.h"
-struct SceneTransitionState {
-    unsigned char reserved00[0x34];
-    int next_scene;
-};
 
 
 
@@ -14,12 +10,12 @@ struct SceneTransitionState {
 
 
 
-void func_001e7134(struct SceneTransitionState *state)
+void func_001e7134(struct ScreenResourceManager *state)
 {
     if (!func_00177124(7)) {
         func_00177084();
         func_00176e24(state);
         func_00176df4();
-        func_00176dc8(state->next_scene);
+        func_00176dc8(state->index);
     }
 }

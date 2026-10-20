@@ -41,6 +41,21 @@ struct ServiceStringCounts {
     int group_count;
 };
 
+struct RequestRecord {
+    unsigned kind;
+    unsigned flags;
+    unsigned short count;
+    unsigned short length;
+    unsigned short text[0x76c];
+    unsigned char flag_ee4;
+    unsigned char flag_ee5;
+    unsigned char flag_ee6;
+    unsigned char auxiliary[0x89];
+    int handle;
+    unsigned short status;
+    unsigned char reservedf76[10];
+};
+
 /* Partial state at 0x00242a50. The signed flag is read by func_00195e84;
  * the status word at 0x18 is shared by the service-state predicates. */
 struct ServiceState {
@@ -69,7 +84,7 @@ struct AppletStartupState {
     unsigned char requested;
     unsigned char reserved02[2];
     unsigned reasons;
-    union SynchronizationStorage event;
+    struct SignalState event;
 };
 
 struct PendingState {
@@ -97,6 +112,8 @@ extern struct PendingState data_00242a28;
 extern int func_001927a8(void);
 extern int func_00192c10(void);
 extern void func_00115040(unsigned char mode);
+extern void func_00192458(unsigned value);
+extern void func_0019051c(struct RequestRecord *record);
 extern unsigned char func_00122af0(void);
 extern void func_00122fe8(unsigned char value);
 extern void func_00122ff8(void);

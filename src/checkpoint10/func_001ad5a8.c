@@ -2,8 +2,6 @@
 
 extern int func_00170c20(struct TrainingWidget *widget, int mode,
                          const unsigned short *text, unsigned short *output, int reset);
-extern void func_0015e780(struct TrainingWidget *widget, unsigned value);
-extern void func_0015e824(struct TrainingWidget *widget, unsigned value);
 
 static void set_alignment(struct DisplayObject *object, signed char horizontal,
                           signed char vertical)

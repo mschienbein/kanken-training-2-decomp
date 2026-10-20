@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "deferrals": [
+    {
+      "function": "func_001debb4",
+      "source": "scratch/integrator/c010/g3-unify/deferred/func_001debb4.c",
+      "source_sha256": "8b20b78438ff129c3f9bdf9d73b29897a7688aacb5d9d5450d898fb2d89705d7",
+      "status": "explicitly_deferred",
+      "reason": "Original modal dispatcher passes its whole scene to 001dd6c8 but exposes +0x4c as AnimationOwner*. Accepted 001dd6c8 uses W6SelectionScreen.list/W6ListController*. No constructor, allocation extent or vtable binding proves those competing vector/element owners to be one class or a genuine embedded base. Preserve the accepted endpoint, defer only this new dispatcher.",
+      "accepted_callers_retained": true,
+      "approval": "Main IRC explicitly allowed the two phase/modal deferrals, then separately approved 00172994 with this affine/overlap evidence.",
+      "private_packet_sha256": "cdcbcbc0016e9de5d4052d78e662bf8e070a3178a6b90c82767780f18a8cc45b",
+      "catalogue_entry_evidence": [
+        {
+          "address": 1960884,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": []
+        }
+      ]
+    },
+    {
+      "function": "func_001e42fc",
+      "source": "scratch/integrator/c010/g3-unify/deferred/func_001e42fc.c",
+      "source_sha256": "56fb87636200cc5882584fe69349078e5c2ad10c05e2eb386e6752e41e6875e6",
+      "status": "explicitly_deferred",
+      "reason": "Phase dispatcher exposes +0x4c as AnimationOwner* and casts the whole scene to accepted W8ScreenState for 001e403c, whose +0x4c is W6ListController*. Matching scalar offsets and forwarding a receiver do not establish a shared allocation/constructor relation. Do not credit the cast or invent an owner bridge.",
+      "accepted_callers_retained": true,
+      "approval": "Main IRC explicitly allowed the two phase/modal deferrals, then separately approved 00172994 with this affine/overlap evidence.",
+      "private_packet_sha256": "8ed57c40cf7d27f45272712a877a2b4964804f273c385c3af7921e5bdf59bc55",
+      "catalogue_entry_evidence": [
+        {
+          "address": 1983228,
+          "evidence": [
+            "tail_call"
+          ],
+          "isa": "arm",
+          "kind": "entry",
+          "sources": [
+            1982292
+          ]
+        }
+      ]
+    },
+    {
+      "function": "func_00172994",
+      "source": "scratch/integrator/c010/g3-unify/deferred/func_00172994.c",
+      "source_sha256": "2e326963d5fc0456cfcba78a3e2349b0ddc591826f3163260a7db2a936c85314",
+      "status": "explicitly_deferred",
+      "reason": "Original nonzero-active branch reads base 0x0029f540 and an unchecked stride-8 resource vector at 0x002cebc0 (base+0x2f680). Index 5 overlaps the worker sound/heap pointer fields at +0x2f6a8/+0x2f6ac. No constructor/extent or distinct-owner/union evidence proves a bound or legal shared representation. Do not invent a five-entry bound or pun the fields.",
+      "accepted_callers_retained": true,
+      "approval": "Main IRC explicitly allowed the two phase/modal deferrals, then separately approved 00172994 with this affine/overlap evidence.",
+      "original_affine_reads": [
+        {
+          "constant_address": "0x0029f540",
+          "argument_strides": {}
+        },
+        {
+          "constant_address": "0x002cebc0",
+          "argument_strides": {
+            "0": 8
+          }
+        }
+      ],
+      "failed_witness": "scratch/integrator/c010/g3-unify/c010-bounded-r1/results.json"
+    }
+  ]
+}

@@ -58,6 +58,7 @@ extern "C" {
 extern struct GlobalSoundState data_00242fb8;
 extern struct SoundSubsystem bss_004b32c0;
 extern struct AudioTaskManager *func_00185de4(void);
+extern struct StreamQueue *func_00181328(struct StreamQueue *queue);
 extern struct WorkerThread *func_00140700(void);
 extern struct ObjectPool *func_00185cc0(void);
 extern void func_00131398(struct ObjectPool *pool);

@@ -1,6 +1,5 @@
 #include "game/audio_voice.h"
 
-extern void func_00155dec(struct AudioChannel *channel, int priority);
 
 void func_0015643c(struct AudioVoiceGroup *group)
 {

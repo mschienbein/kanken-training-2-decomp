@@ -3,20 +3,6 @@
 #include "game/runtime.h"
 #include "game/screen.h"
 
-/* [INFERENCE] Text display slot and owner layout. */
-struct W24TextSlot {
-    struct DisplayObject *object;
-    struct WidgetPosition position;
-    struct WidgetPosition scale;
-    unsigned char color[4];
-    unsigned short text[64];
-};
-struct W24TextScreen {
-    unsigned char reserved00[0x1300];
-    struct W24TextSlot *slots[32];
-};
-
-extern void *func_0019df08(void *destination, unsigned int size);
 
 
 static void reset_text_slot(struct W24TextSlot *slot)

@@ -1,7 +1,6 @@
 #include "game/w11_control.h"
 
 extern void func_001b0058(struct W11ControlScreen *screen);
-extern void func_001b0188(struct W11ControlScreen *screen);
 
 /* [INFERENCE] The local settling helper's historical identity is unrecovered.
  * The grouped layout-switch form matched middleware but not game or sdk.

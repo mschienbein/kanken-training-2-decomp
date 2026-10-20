@@ -3,30 +3,7 @@
 #include "game/screen.h"
 #include "game/selection.h"
 #include "game/notification.h"
-struct W8DisplaySet;
-
-struct W8ScreenState {
-    unsigned char reserved00[0x14];
-    struct W10DrawingInput *effects;
-    unsigned char reserved18[0x34];
-    struct W6ListController *choices;
-    struct W8DisplaySet *display;
-    struct Screen *buttons;
-    struct W6Selector *first_resource;
-    struct W6HandlePanel10 *second_resource;
-    struct Screen *selector;
-    struct Screen *other;
-    unsigned char reserved68[0x2c];
-    int phase;
-    unsigned char reserved98[4];
-    int previous_phase;
-    unsigned char reserveda0[0x10];
-    int text_length;
-    unsigned char reservedb4[0x0c];
-    unsigned short text[25];
-    unsigned char reservedf2[0x8e];
-    struct DisplayObject *cursor;
-};
+#include "game/choice_screen.h"
 
 
 static __forceinline void set_active(struct DisplayObject *object, int active)

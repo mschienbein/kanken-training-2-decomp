@@ -19,14 +19,15 @@ struct StreamEvent {
     void *object;
 };
 
-struct StreamSemaphore {
-    int value;
-    short waiters;
-    short limit;
-};
 
 struct StreamCriticalSection {
     unsigned int state;
+};
+/* Both the original initializer and signal/wait operations use the same
+ * state word followed by the light critical-section word. */
+struct SignalState {
+    unsigned state;
+    struct StreamCriticalSection critical;
 };
 
 struct StreamMutex {
@@ -37,8 +38,8 @@ struct StreamMutex {
 
 struct StreamQueue {
     struct StreamEvent **slots;
-    struct StreamSemaphore readable;
-    struct StreamSemaphore available;
+    struct SignalState readable;
+    struct SignalState available;
     struct StreamMutex mutex;
     unsigned int capacity;
     unsigned int read_index;
@@ -84,7 +85,7 @@ extern void func_00180884(struct StreamQueue *queue, struct StreamEvent **storag
                           unsigned int capacity);
 extern struct StreamManager *func_00143d1c(struct StreamManager *manager);
 extern void func_001812f8(struct StreamManager *manager);
-extern int func_00181280(struct StreamSemaphore *semaphore, int amount);
+extern int func_00181280(struct SignalState *semaphore, int amount);
 extern struct StreamManager *func_001916e8(void);
 extern void *func_0019147c(struct StreamManager *manager, unsigned words);
 extern unsigned func_00191458(struct StreamManager *manager, struct StreamEvent *event);

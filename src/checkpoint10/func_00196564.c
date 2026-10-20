@@ -1,8 +1,4 @@
 #include "game/shader.h"
-struct ShaderProgramSet {
-    unsigned programs[6];
-    int current;
-};
 
 
 

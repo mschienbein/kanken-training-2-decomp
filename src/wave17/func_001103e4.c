@@ -9,7 +9,6 @@ struct CommandQueue;
 
 extern void func_0011cc30(void);
 extern void func_001181fc(void);
-extern void func_0011d12c(void);
 extern void func_00117f2c(void);
 
 

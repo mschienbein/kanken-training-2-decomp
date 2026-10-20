@@ -1,14 +1,6 @@
 #include "game/graphics_state.h"
 
-struct DisplayFramebuffer {
-    void *left;
-    void *right;
-    unsigned format;
-    unsigned stride;
-};
-struct DisplayFramebufferPair {
-    struct DisplayFramebuffer display[2];
-};
+#include "game/framebuffer.h"
 extern int func_0013ed44(const struct GraphicsMutex *session, struct DisplayFramebufferPair *output);
 
 void func_00137b84(struct DisplayFramebufferPair *output)

@@ -4,8 +4,7 @@ struct ServiceFallbackState {
     unsigned char enabled;
 };
 extern struct ServiceFallbackState data_00243044;
-extern CtrResult func_001383ac(unsigned char identifier);
-extern CtrResult func_00138334(unsigned char identifier);
+#include "game/service_protocol.h"
 
 CtrResult func_00130308(void)
 {

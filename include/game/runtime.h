@@ -104,6 +104,10 @@ extern "C" {
 /* ARM EABI's four-byte-aligned copy helper; the bound identity is already proven. */
 extern void __aeabi_memcpy4(void *destination, const void *source, size_t size);
 extern void func_00192720(void *destination, const void *source, unsigned size);
+extern int func_00122350(int index);
+extern const char *func_0012142c(unsigned region);
+extern int func_0012251c(char *destination, const char *format, ...);
+extern void *func_0019df08(void *destination, unsigned size);
 extern void func_0016ee38(struct MotionState *state);
 extern int func_0016ece8(struct MotionState *state, const struct MotionKey *keys, int heap);
 extern void func_0016ec84(struct MotionState *state, int first, int last);

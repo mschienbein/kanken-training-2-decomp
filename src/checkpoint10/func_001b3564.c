@@ -1,7 +1,6 @@
-struct ChoiceController;
-extern void func_001b38c4(struct ChoiceController *controller, int index);
+#include "game/selection_components.h"
 
-void func_001b3564(struct ChoiceController *controller)
+void func_001b3564(struct Component001b3564 *controller)
 {
     int index;
     for (index = 0; index < 23; ++index)

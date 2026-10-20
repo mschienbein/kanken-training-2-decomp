@@ -35,12 +35,12 @@ extern "C" void func_00196c04(LayoutRenderContext *renderer,
 #endif
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
-#ifdef __cplusplus
 struct LayoutColorWord {
     unsigned int word;
+#ifdef __cplusplus
     LayoutColorWord();
-};
 #endif
+};
 
 struct LayoutGeometryData {
     unsigned int reserved00;
@@ -66,41 +66,43 @@ struct LayoutSurfaceVTable {
 
 struct LayoutSurface { const struct LayoutSurfaceVTable *vtable; };
 
-#ifdef __cplusplus
 struct LayoutParameterBase {
     unsigned int color0;
     unsigned int color1;
-    LayoutColorWord current[4];
-    LayoutColorWord colors[2];
+    struct LayoutColorWord current[4];
+    struct LayoutColorWord colors[2];
     unsigned char mode;
     unsigned char reserved21[3];
     float scale_x;
     float scale_y;
-    float offset_x;
-    float offset_y;
+    struct WidgetPosition position;
     float offset_z;
     float value38;
-    LayoutSurface *surface;
+    struct LayoutSurface *surface;
     unsigned int value40;
-    LayoutGeometryData *geometry;
+    struct LayoutGeometryData *geometry;
     unsigned char enabled;
     unsigned char alpha;
     unsigned short reserved4a;
-    LayoutParameterBase();
-};
-#endif
-
 #ifdef __cplusplus
-struct LayoutDrawState : LayoutParameterBase {
+    LayoutParameterBase();
+#endif
+};
+
+/* The complete writer retains its constructor-initialized common prefix.
+ * Named composition exposes the same physical prefix to C and C++ consumers. */
+struct LayoutDrawState {
+    struct LayoutParameterBase base;
     float max_depth;
     float value50;
     float value54;
     unsigned int kind;
     unsigned int flags;
     const unsigned int *table;
+#ifdef __cplusplus
     LayoutDrawState();
-};
 #endif
+};
 
 #ifdef __cplusplus
 struct LayoutAuxEntry {
@@ -147,7 +149,7 @@ struct LayoutDrawPane {
     unsigned char origin;
     unsigned char flags;
     unsigned char reservedb8[0x1c];
-    const void *source;
+    const unsigned short *source;
     unsigned int colors[2];
     struct LayoutSurface *surface;
     struct WidgetPosition surface_size;
@@ -191,7 +193,8 @@ extern "C" {
 extern const unsigned int data_002438dc[];
 extern void func_001cf504(const struct LayoutDrawPane *pane, struct LayoutDrawState *state);
 extern void func_001da0e0(struct LayoutDrawState *state);
-extern void func_00216670(struct LayoutDrawState *state, const void *source, unsigned short id);
+extern float func_00216670(struct LayoutDrawState *state, const unsigned short *text, int length);
+extern float func_002166cc(struct LayoutDrawState *state, const unsigned short *text, int length);
 extern void func_001da51c(struct LayoutRenderContext *context, struct LayoutDrawState *state);
 extern void *func_00125b50(void *object);
 extern struct WidgetPosition func_0016637c(const struct LayoutDrawPane *pane);

@@ -1,18 +1,14 @@
 #include "game/random.h"
 #include "game/screen.h"
 
-struct W24BDecorationPanel {
-    struct WidgetSlot *slots[17];
-};
+#include "game/category_progress.h"
 
-extern void func_0016bf90(struct W24BDecorationPanel *panel, int index, int kind);
-
-extern struct DisplayObject *func_0016eea4(
+extern struct ResourceEvent *func_0016eea4(
     unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha,
     int layer, int active, int kind,
     float width, float height, float x, float y, float z);
 
-static void create_bar(struct W24BDecorationPanel *panel, int index)
+static void create_bar(struct L044TrainingFrame *panel, int index)
 {
     struct WidgetSlot *slot = panel->slots[index];
     if (slot != 0 && slot->object == 0) {
@@ -21,14 +17,14 @@ static void create_bar(struct W24BDecorationPanel *panel, int index)
         float z = 1.0f;
         float width = (float)func_0018ffac(224);
         float height = 11.0f;
-        struct DisplayObject *object = func_0016eea4(
+        struct ResourceEvent *object = func_0016eea4(
             81, 212, 204, 255, 4, 0, 2, width, height, x, y, z);
-        func_00180358(object, -1, 0);
+        func_00180358(object != 0 ? &object->base : 0, -1, 0);
         slot->object = object;
     }
 }
 
-void func_001c144c(struct W24BDecorationPanel *panel)
+void func_001c144c(struct L044TrainingFrame *panel)
 {
     int i;
     func_0016bf90(panel, 0, 0);

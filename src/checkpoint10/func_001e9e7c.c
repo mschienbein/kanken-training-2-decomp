@@ -1,7 +1,6 @@
-struct ElementCollection;
-extern void func_001e8c74(struct ElementCollection *collection, int index);
+#include "game/selection_components.h"
 
-void func_001e9e7c(struct ElementCollection *collection)
+void func_001e9e7c(struct Component001e9e7c *collection)
 {
     int index;
     for (index = 0; index < 20; ++index)

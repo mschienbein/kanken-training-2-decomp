@@ -21,7 +21,6 @@ struct W24eSoundManagerView {
     unsigned char reserved00[0x1fc];
     unsigned voice_requests;
 };
-extern int func_0018d850(const struct SoundArchivePlayerView *player);
 extern struct SoundInstance *func_001f2f60(struct SoundHandle *handle,
     const struct W24eNoteRecord *note, const struct W24eBankRecord *bank,
     const struct W24eVoiceParameters *parameters);

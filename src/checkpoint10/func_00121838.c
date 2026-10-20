@@ -11,7 +11,7 @@ static struct ShutdownTimeSpan milliseconds(int value)
 }
 extern int func_00186424(struct StreamCriticalSection *lock);
 extern void func_001863b0(struct StreamCriticalSection *lock);
-extern CtrResult func_001863fc(const CtrHandle *session);
+#include "game/service_protocol.h"
 CtrResult func_00121838(void)
 {
     struct ResourceServiceState *state = &data_00242afc;

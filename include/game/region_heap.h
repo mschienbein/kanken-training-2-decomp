@@ -64,6 +64,8 @@ extern "C" {
 void frame_heap_release_lock(void *heap);
 void frame_heap_release_unlock(void *heap);
 extern int func_00125a5c(struct HeapStorage *storage);
+extern int func_00116ce8(struct RegionHeapOwner *owner);
+extern void func_0017f4f4(struct FreeLink **head, struct FreeLink *node);
 extern int func_0013f110(struct RegionHeap *heap, unsigned tag);
 extern int func_0013f06c(struct RegionHeap *heap, unsigned tag);
 /* Native FrameHeap::Free(int) and every recovered consumer discard r0.

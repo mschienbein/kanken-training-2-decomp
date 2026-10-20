@@ -11,7 +11,6 @@ struct SoundBankListRecord {
     int list_offset;
 };
 
-extern const struct SoundReferenceTable *func_0014417c(const struct SoundArchiveInfo *info);
 
 static const struct SoundGroupListReference *range_details(const struct SoundRangeRecord *record)
 {

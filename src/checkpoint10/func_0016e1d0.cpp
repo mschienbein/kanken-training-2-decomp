@@ -2,7 +2,7 @@
 
 inline void WidgetSlot::set_active(int enabled)
 {
-    struct DisplayObject *object = this->object;
+    struct DisplayObject *object = widget_display(this);
     if (object == 0)
         return;
     switch (func_0017a9a0(object, 0)) {

@@ -2,9 +2,7 @@
 #include "ctr/svc.h"
 #include "game/applet.h"
 
-/* Same declaration as src/sdk2/func_001380c8.c. */
-extern CtrResult func_001380c8(unsigned int value0, unsigned int value1,
-                              unsigned int value2, unsigned int value3, unsigned char *out);
+#include "game/service_protocol.h"
 
 static __forceinline bool result_failed(unsigned result)
 {

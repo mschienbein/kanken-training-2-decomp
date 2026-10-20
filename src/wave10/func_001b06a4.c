@@ -3,7 +3,6 @@
 #include "game/notification.h"
 #include "game/animation.h"
 #include "game/screen_transition.h"
-extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);
 extern void func_0017433c(int channel, int duration);
 

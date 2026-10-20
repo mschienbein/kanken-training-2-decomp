@@ -1,4 +1,4 @@
-extern int func_0013e734(unsigned char *region);
+#include "game/service_protocol.h"
 
 unsigned char func_0013685c(void)
 {

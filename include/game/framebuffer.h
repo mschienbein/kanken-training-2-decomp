@@ -1,6 +1,16 @@
 #ifndef GAME_FRAMEBUFFER_H
 #define GAME_FRAMEBUFFER_H
 
+struct DisplayFramebuffer {
+    void *left;
+    void *right;
+    unsigned format;
+    unsigned stride;
+};
+struct DisplayFramebufferPair {
+    struct DisplayFramebuffer display[2];
+};
+
 struct FramebufferResource {
     const void *vtable;
     void *allocator;
@@ -75,6 +85,7 @@ void func_0010d644(ViewportState *state, ViewportRenderTarget *target);
 extern "C" {
 #endif
 extern struct OffscreenState bss_00495c04;
+extern void func_00137b84(struct DisplayFramebufferPair *output);
 #ifdef __cplusplus
 }
 #endif

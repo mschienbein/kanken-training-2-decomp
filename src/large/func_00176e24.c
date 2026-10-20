@@ -7,7 +7,6 @@
 extern void func_001b3434(struct Component001b3434 *component);
 extern void func_001ea87c(struct Component001ea87c *component);
 extern void func_001e9cdc(struct Component001e9cdc *component);
-extern void func_001eaed8(struct Component001eaed8 *component);
 extern void func_001af424(struct Component001af424 *component);
 extern void func_001acff0(struct Component001acff0 *component);
 extern void func_001b6a0c(struct Component001b6a0c *component);

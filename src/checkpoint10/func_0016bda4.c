@@ -1,11 +1,6 @@
-struct W24BPositionPanel;
+#include "game/selection_components.h"
 
-extern void func_001c3d14(struct W24BPositionPanel *panel, int index,
-                          int selection, int detail);
-extern void func_0016bde0(struct W24BPositionPanel *panel, int index,
-                          int mode, float x, float y);
-
-void func_0016bda4(struct W24BPositionPanel *panel, int index,
+void func_0016bda4(struct TransformTarget *const *panel, int index,
                    int selection, int detail, float x, float y)
 {
     func_001c3d14(panel, index, selection, detail);

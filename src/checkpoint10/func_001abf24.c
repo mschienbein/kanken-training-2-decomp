@@ -2,13 +2,7 @@
 #include "game/playback_screen.h"
 #include "game/scene_lifecycle.h"
 #include "game/screen_transition.h"
-struct W23FlowScreen {
-    unsigned char reserved00[0x90];
-    int stack_index;
-    int modes[2];
-    int previous_modes[2];
-};
-extern void func_001737c0(struct W23FlowScreen *screen, int enabled);
+#include "game/selection_components.h"
 
 
 

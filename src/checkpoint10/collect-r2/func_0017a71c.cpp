@@ -4,7 +4,7 @@
 
 static bool set_slot_active(WidgetSlot *slot, int enabled)
 {
-    DisplayObject *object = slot->object;
+    DisplayObject *object = widget_display(slot);
     if (object == 0)
         return false;
     switch (func_0017a9a0(object, 0)) {
@@ -28,7 +28,7 @@ extern "C" void func_0017a71c(Screen *screen, int index, int enabled)
         return;
     if (!set_slot_active(slot, enabled))
         return;
-    DisplayObject *object = slot->object;
+    DisplayObject *object = widget_display(slot);
     if (object != 0) {
         const NameTable *table = bss_0024445c[index];
         if (table->count > 0)

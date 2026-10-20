@@ -38,6 +38,9 @@ public:
 extern "C" {
 #endif
 extern unsigned char *data_00242fc8;
+extern int func_00122988(unsigned register_address, const void *source,
+    const void *mask, unsigned size);
+extern void func_00141560(unsigned mode, float value);
 extern unsigned char *data_00242fcc;
 extern unsigned char *func_0018d8d4(void);
 extern void func_0018d8c4(unsigned char *cursor);

@@ -1,16 +1,6 @@
 #include "game/animation.h"
 #include "game/screen.h"
 
-struct AnimationResetSlot {
-    unsigned char reserved00[0x14];
-    int state;
-    float progress;
-};
-
-struct AnimationDisplayObject {
-    struct DisplayObject base;
-    struct AnimationResetSlot *slots[];
-};
 
 struct TimedAnimation {
     float remaining;
@@ -23,7 +13,6 @@ struct TimedAnimationList {
 };
 
 
-extern void func_0015eaa8(struct AnimationDisplayObject *object, int index);
 
 void func_001c2e98(struct TimedAnimationList *list)
 {

@@ -1,13 +1,4 @@
-struct DisplayFramebuffer {
-    void *left;
-    void *right;
-    unsigned format;
-    unsigned stride;
-};
-struct DisplayFramebufferPair {
-    struct DisplayFramebuffer display[2];
-};
-extern void func_00137b84(struct DisplayFramebufferPair *output);
+#include "game/framebuffer.h"
 
 void func_00142b8c(struct DisplayFramebufferPair *output)
 {

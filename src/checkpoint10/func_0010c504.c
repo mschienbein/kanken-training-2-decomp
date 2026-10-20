@@ -1,5 +1,4 @@
-/* Matches the declaration in src/pilot/pilot_a.c. */
-extern int func_00122350(int i);
+#include "game/runtime.h"
 
 static unsigned align_up_4(unsigned value)
 {

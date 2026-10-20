@@ -1,5 +1,5 @@
 /* Recovered tail partition; the target's existing definition takes no inputs. */
-extern void func_001135e8(void);
+#include "game/sdk_init.h"
 
 void func_0010bef4(void)
 {

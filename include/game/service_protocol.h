@@ -24,6 +24,18 @@ struct ServiceReport;
 extern "C" {
 #endif
 extern unsigned func_0019058c(const struct ServiceObject *object);
+extern void func_001217b4(void);
+extern void func_001224a4(void);
+extern void func_0012f51c(void);
+extern unsigned char func_0013685c(void);
+extern unsigned func_00137770(void *buffer, unsigned size);
+extern CtrResult func_0012e7b4(CtrHandle *handle);
+extern CtrResult func_001380c8(unsigned value0, unsigned value1,
+    unsigned value2, unsigned value3, unsigned char *out);
+extern CtrResult func_001383ac(unsigned char identifier);
+extern CtrResult func_00138334(unsigned char identifier);
+extern CtrResult func_0013e734(unsigned char *region);
+extern CtrResult func_001863fc(const CtrHandle *session);
 extern unsigned func_00136510(const struct ServiceConfiguration *configuration);
 extern unsigned func_001365e0(const struct ServiceConfiguration *configuration);
 extern unsigned func_001375b0(unsigned char *out, const struct ServiceReport *report, const char *text);

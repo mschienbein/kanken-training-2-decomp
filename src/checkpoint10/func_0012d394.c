@@ -1,7 +1,7 @@
 #include "game/service_clients.h"
 
 extern int func_001367d8(void);
-extern void func_001217b4(void);
+#include "game/service_protocol.h"
 extern unsigned func_0013614c(const char *name, unsigned *handle);
 
 unsigned func_0012d394(const char *name, unsigned *handle)

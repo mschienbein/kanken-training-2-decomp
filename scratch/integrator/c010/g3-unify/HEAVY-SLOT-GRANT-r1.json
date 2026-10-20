@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "authority": "Main IRC",
+  "part": 1,
+  "class": "non-exclusive strictly sequential single-process bounded reproof",
+  "requirements": [
+    "Commit first; run against that frozen committed tree.",
+    "Do not edit source, headers, profiles, names or match scope read by the sweep while it runs.",
+    "Record every exit."
+  ],
+  "part2": "Full-ledger interfaces remains queued; message Main when sweep finishes for explicit exclusive GRANT."
+}

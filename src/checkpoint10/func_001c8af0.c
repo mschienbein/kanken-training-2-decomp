@@ -1,14 +1,9 @@
 #include "game/functions.h"
-struct RelativeCallbackOwner {
-    unsigned char reserved00[8];
-    int offset;
-    unsigned char reserved0c[0x20];
-    unsigned state;
-};
+#include "game/binary_resource.h"
 
 
 
-static void *ResolveRelative(int *relative)
+static struct BinaryResourceHeader *ResolveRelative(int *relative)
 {
     void *object = 0;
     if (*relative != 0)
@@ -16,11 +11,11 @@ static void *ResolveRelative(int *relative)
     return object;
 }
 
-void func_001c8af0(struct RelativeCallbackOwner *owner)
+void func_001c8af0(struct RelativeBinaryResource *owner)
 {
-    void *object;
+    struct BinaryResourceReference reference;
     owner->state = 0;
-    object = ResolveRelative(&owner->offset);
-    if (object != 0)
-        func_001840dc(&object);
+    reference.resource = ResolveRelative(&owner->offset);
+    if (reference.resource != 0)
+        func_001840dc(&reference);
 }

@@ -2,7 +2,7 @@
 
 static __forceinline void set_widget_active(struct WidgetSlot *slot, int active)
 {
-    struct DisplayObject *object = slot->object;
+    struct DisplayObject *object = widget_display(slot);
     if (object == 0)
         return;
     switch (func_0017a9a0(object, 0)) {

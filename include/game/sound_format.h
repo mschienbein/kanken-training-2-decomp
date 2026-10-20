@@ -184,6 +184,7 @@ struct SoundRegionFixed;
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern const struct SoundReferenceTable *func_0014417c(const struct SoundArchiveInfo *info);
 extern const struct WaveSoundData *func_00138fb0(const struct WaveSoundInfoBlock *info, unsigned index);
 extern const struct WaveNoteInfo *func_00138fe4(const struct WaveSoundData *data, unsigned index);
 extern const struct WaveIdentifierTable *func_00138fa4(const struct WaveSoundInfoBlock *info);

@@ -2,7 +2,7 @@
 #include "game/stream_manager.h"
 
 
-extern CtrResult func_0012e7b4(CtrHandle *handle);
+#include "game/service_protocol.h"
 extern int data_00243770;
 extern CtrHandle data_002438a4;
 extern CtrHandle data_002438a8;

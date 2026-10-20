@@ -2,7 +2,7 @@
 #include "game/stream_manager.h"
 
 
-extern CtrResult func_0012e7b4(CtrHandle *handle);
+#include "game/service_protocol.h"
 struct ServiceReleaseState {
     unsigned char active;
     unsigned char reserved01[3];

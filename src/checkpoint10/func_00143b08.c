@@ -1,7 +1,6 @@
 #include <stddef.h>
 #include "game/audio_tasks.h"
 
-extern struct StreamQueue *func_00181328(struct StreamQueue *queue);
 
 struct AudioTaskManager *func_00143b08(struct AudioTaskManager *manager)
 {

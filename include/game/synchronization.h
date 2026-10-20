@@ -6,10 +6,6 @@ struct StreamCriticalSection;
 
 #include "game/stream_manager.h"
 
-struct SignalState {
-    unsigned int state;
-    struct StreamCriticalSection critical;
-};
 struct SynchronizationOwner {
     const void *vtable;
     struct SignalState synchronization;
@@ -41,10 +37,5 @@ extern struct SignalState data_0024301c;
 #endif
 
 
-union SynchronizationStorage {
-    struct StreamSemaphore semaphore;
-    unsigned words[2];
-    struct SignalState signal;
-};
 
 #endif

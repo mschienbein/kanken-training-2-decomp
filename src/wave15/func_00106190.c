@@ -5,7 +5,7 @@
 
 
 
-extern void func_0010a814(void);
+#include "game/screen.h"
 
 
 

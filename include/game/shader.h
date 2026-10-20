@@ -24,6 +24,7 @@ struct ShaderConfiguration {
 struct ShaderRegistry {
     unsigned programs[3];
     unsigned shaders[3];
+    int current;
 };
 #ifdef __cplusplus
 extern "C" {

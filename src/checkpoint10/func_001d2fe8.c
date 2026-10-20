@@ -1,23 +1,6 @@
 #include <stdbool.h>
 
-struct TimedCounter {
-    unsigned int reserved00[2];
-    int limit, current;
-};
-struct ExtendedTimedState {
-    unsigned char reserved00[0x68];
-    struct TimedCounter first;
-    unsigned char reserved78[0x10];
-    struct TimedCounter second;
-    unsigned char reserved98[0x20];
-    struct TimedCounter third;
-    unsigned char reservedc8[0x3048 - 0xc8];
-    struct TimedCounter channels[4];
-    unsigned char reserved3088[0x328c - 0x3088];
-    unsigned short enabled;
-};
-
-extern void func_001d2be8(struct ExtendedTimedState *state);
+#include "game/progress_counters.h"
 
 static __forceinline void advance_counter(struct TimedCounter *counter)
 {

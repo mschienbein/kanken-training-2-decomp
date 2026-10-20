@@ -1,8 +1,7 @@
 #include <string.h>
 
-extern const char *func_0012142c(unsigned region);
+#include "game/runtime.h"
 extern const char *func_00121414(unsigned language);
-extern int func_0012251c(char *destination, const char *format, ...);
 
 void func_001932e8(char *destination, unsigned kind, unsigned language, unsigned region)
 {

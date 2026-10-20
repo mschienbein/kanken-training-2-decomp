@@ -61,6 +61,7 @@ struct StartupState {
 extern "C" {
 #endif
 extern unsigned char func_001081ec(void);
+extern void func_00135c10(int count);
 extern void func_0019f324(unsigned char mode, unsigned char option);
 extern int func_001070e8(void);
 extern int func_00107140(void);

@@ -35,6 +35,6 @@ extern "C" void func_001b4ec8(struct CarouselScreen *screen, int index, int posi
     struct DisplayObject *object;
     if (slot == 0 || slot->object == 0)
         return;
-    object = slot->object;
+    object = widget_display(slot);
     position_display(object, screen->offset(position));
 }

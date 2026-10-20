@@ -407,6 +407,7 @@ extern bool func_00181334(const struct SoundArchive *archive, struct SoundPlayer
 extern int func_0018279c(const unsigned *packed, unsigned *out, unsigned index);
 extern int func_00131928(const struct SoundArchiveReader *reader, unsigned int sound_id);
 extern const void *func_0016a938(const struct SoundArchivePlayerView *player, unsigned int sound_id);
+extern int func_0018d850(const struct SoundArchivePlayerView *player);
 extern const void *func_001f2ac8(const struct SoundArchiveReader *reader, unsigned int sound_id);
 extern unsigned func_001f206c(const struct SoundArchiveInfo *info, unsigned sound_id);
 extern const void *func_001f2308(const struct RelativeReference *reference, int index);

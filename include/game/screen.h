@@ -341,7 +341,7 @@ union WidgetSlotState {
 };
 
 struct WidgetSlot {
-    struct DisplayObject *object;
+    struct ResourceEvent *object;
     union WidgetSlotState state;
     unsigned short text[2];
     unsigned short output[16];
@@ -351,6 +351,13 @@ struct WidgetSlot {
     void set_active(int enabled);
 #endif
 };
+/* Resource slots own the full event, while display operations consume its
+ * genuine initial subobject. Preserve null when taking that base view. */
+static __forceinline struct DisplayObject *widget_display(struct WidgetSlot *slot)
+{
+    return slot->object != 0 ? &slot->object->base : 0;
+}
+
 
 /* Shared fixed prefix of widget controllers. The following pointer-vector has
  * a different extent in menu screens and character panels. */

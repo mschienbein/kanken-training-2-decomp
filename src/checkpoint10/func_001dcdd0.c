@@ -2,17 +2,7 @@
 #include "game/screen.h"
 #include "game/resource_tables.h"
 
-struct DeferredResourceEntry16 {
-    unsigned int key;
-    unsigned int fields[3];
-};
-
-struct DeferredResourceList16 {
-    unsigned char reserved00[0x0c];
-    int state;
-    struct DeferredResourceEntry16 *entries;
-    int count;
-};
+#include "game/selection_components.h"
 
 
 

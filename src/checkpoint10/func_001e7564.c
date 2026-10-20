@@ -3,13 +3,8 @@
 #include "game/resource_runtime.h"
 #include "game/scene_lifecycle.h"
 #include "game/screen.h"
-struct SceneTransitionState {
-    unsigned char reserved00[0x34];
-    int next_scene;
-};
 struct SceneTransitionSelection {
-    struct SceneTransitionState common;
-    unsigned char reserved38[0x58];
+    struct ScreenResourceManager common;
     int next_scene;
 };
 

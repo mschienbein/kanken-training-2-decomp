@@ -81,6 +81,7 @@ extern struct IntrusiveList bss_004b96ec;
 extern struct HeapBase *func_00186224(const struct IntrusiveList *list, const void *memory);
 extern void func_0012edd4(struct IntrusiveList *list, void *object);
 extern void func_00121bc8(struct HeapBase *heap);
+extern void func_00121bc4(struct ExpHeap *heap);
 extern struct LockedExpHeap *data_00242c54;
 #ifdef __cplusplus
 }
@@ -134,7 +135,6 @@ extern void func_001e37e0(struct AllocatorInterface *interface, void *allocation
 
 extern "C" {
 extern const unsigned data_00223c98[];
-void func_00121bc4(struct ExpHeap *heap);
 }
 #endif
 

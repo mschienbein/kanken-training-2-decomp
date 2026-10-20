@@ -5,8 +5,7 @@
 
 
 
-extern void func_001811b8(void);
-extern unsigned func_0019d8c4(const struct FontFile *file);
+#include "game/font.h"
 
 
 void func_001458b8(uintptr_t resource, int index)

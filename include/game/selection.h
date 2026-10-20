@@ -195,6 +195,8 @@ extern int func_00171bf0(int category, int kind);
 extern void func_00173350(int sound);
 extern void func_00173408(struct SelectionHintPanel *panel, int state);
 extern int func_00173608(void);
+extern int func_00172994(int channel);
+extern void func_001dd6c8(struct W6SelectionScreen *screen);
 extern void func_00173630(struct W6ListController *controller, int list, int resource);
 extern void func_0017365c(struct W6ListController *controller, int list, int resource,
                           unsigned preserve, int source_list, int select);
