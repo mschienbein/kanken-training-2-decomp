@@ -50,6 +50,12 @@ Current private binding: `scratch/integrator/c009/PRE-REVIEW-resume-r1.json` and
 `readiness-scope-r10.json`. No full build, test suite, prepare, finalize, accepted
 record write or push was run here. Main owns those gates and both independent reviews.
 
+The final **ccddf12** correction changes only `001e3050`'s last store to the
+named `phase` member instead of indexing beyond `states[0..7]`. It MATCHes all
+50 bytes in `phase-store-r1.json`. Headers and callers are unchanged. The full
+audit results above remain bound to the **56c333e** boundary; Main performs the
+integrated full gates on the correction, with no blanket reattribution of old hashes.
+
 
 ## Preserved historical failure evidence
 

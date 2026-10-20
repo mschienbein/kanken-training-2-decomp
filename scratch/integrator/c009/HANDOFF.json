@@ -4769,7 +4769,17 @@
       "receipt": "scratch/integrator/c009/phase-store-r1/func_001e3050.result.json",
       "exit": 0,
       "status": "MATCH",
-      "reason": "Direct named phase member store avoids transient states[8] out-of-bounds alias; same natural0x50extent matches."
+      "reason": "Direct named phase member store avoids transient states[8] out-of-bounds alias; same natural0x50extent matches.",
+      "source_commit": "ccddf12",
+      "headers_changed": [],
+      "affected_unit_scope": [
+        "src/wave19/func_001e3050.cpp"
+      ],
+      "canonical_callers_unchanged": [
+        "src/models/func_001e0afc/training_initialize_grouped_reset.cpp"
+      ],
+      "R1_helper_or_header_dependency_delta": [],
+      "heavy_gates_after_correction": "Not rerun; Main owns released heavy slot. Prior full-audit results remain bound to their exact pre-correction input hashes."
     }
   },
   "not_exercised": [
@@ -5205,7 +5215,7 @@
     "Nested ManagedExpHeap ownership, DisplayVertexPane.pane.material and BufferState accesses corrected to real canonical members; missing allocator-base declaration shared in exp_heap.h; existing callback declaration imported via functions.h."
   ],
   "main_f24fa0b_merge_commit": "90cc196cb7107f5c79424d721ec4730b74323495",
-  "current_required_scope": "scratch/integrator/c009/readiness-scope-r10.json",
+  "current_required_scope": "scratch/integrator/c009/readiness-scope-r10.json plus explicit phase-store-r1 correction",
   "current_required_units": 832,
   "current_required_functions": 838,
   "remaining_byte_mismatch_notes": [],
@@ -5232,7 +5242,7 @@
   },
   "next_actions": [
     {
-      "action": "Main integrates1851bf3 in isolated integration tree; runs own fullsuite/twofreshbuilds/prepare with explicitv6+L1 andallowuncheckedcpp; independent reviewers discharge every QUALIFIED row and fullreceipt/mapping obligations."
+      "action": "Main integrates ccddf12 (canonical source/header contract boundary plus final phase member correction) in isolated integration tree. Heavy fullsuite/twofreshbuilds/prepare with explicitv6+L1 andC++waiver; independent reviews cover838requiredrows and exact fullreceipt closure."
     }
   ],
   "handoff_boundary_main_advance": {
@@ -5242,6 +5252,7 @@
     "resolution": "Preserved accepted0017a424 exact const MessageLayout API; canonicalized message/reset/visual-owner headers and cmodels consumers",
     "historical_unmerged_claims": "HANDOFF-before-resume-20261020.json retains stale prior boundary fields as historical evidence only"
   },
-  "ready_commit": "1851bf3",
-  "pre_review": "scratch/integrator/c009/PRE-REVIEW-resume-r1.json"
+  "ready_commit": "ccddf12",
+  "pre_review": "scratch/integrator/c009/PRE-REVIEW-resume-r1.json",
+  "audit_boundary_commit": "56c333e"
 }

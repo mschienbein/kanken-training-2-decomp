@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "READY_FOR_MAIN_PREPARE_AND_INDEPENDENT_REVIEW_WITH_QUALIFICATIONS",
-  "ready_source_commit": "56c333e + final explicit-phase correction",
+  "ready_source_commit": "ccddf12",
   "base_main": "261fdc9",
   "selection": {
     "linker_model": "armlink5-inline-branchnop-v6",
@@ -2928,6 +2928,17 @@
     "receipt": "scratch/integrator/c009/phase-store-r1/func_001e3050.result.json",
     "exit": 0,
     "status": "MATCH",
-    "reason": "Direct named phase member store avoids transient states[8] out-of-bounds alias; same natural0x50extent matches."
-  }
+    "reason": "Direct named phase member store avoids transient states[8] out-of-bounds alias; same natural0x50extent matches.",
+    "source_commit": "ccddf12",
+    "headers_changed": [],
+    "affected_unit_scope": [
+      "src/wave19/func_001e3050.cpp"
+    ],
+    "canonical_callers_unchanged": [
+      "src/models/func_001e0afc/training_initialize_grouped_reset.cpp"
+    ],
+    "R1_helper_or_header_dependency_delta": [],
+    "heavy_gates_after_correction": "Not rerun; Main owns released heavy slot. Prior full-audit results remain bound to their exact pre-correction input hashes."
+  },
+  "audit_boundary_commit": "56c333e"
 }
