@@ -22,12 +22,15 @@ struct FontBlock {
 #endif
 };
 
-struct FontGlyphData {
-    unsigned char cellWidth, cellHeight, baseline, maximumWidth;
-    unsigned sheetSize;
-    unsigned short sheetCount, sheetFormat;
-    unsigned short sheetRows, sheetColumns, sheetWidth, sheetHeight;
-    void *sheetImages;
+/* Shared serialized format; this does not identify either runtime font class. */
+struct FontGlyphInfo {
+    unsigned char cell_width, cell_height;
+    signed char baseline;
+    unsigned char max_width;
+    unsigned sheet_size;
+    unsigned short sheet_count, format;
+    unsigned short columns, rows, width, height;
+    unsigned char *sheet_image;
 };
 
 
@@ -47,7 +50,7 @@ struct FontResource {
     struct FontInformation *information;
     struct FontTexture *textures;
     unsigned flags;
-    unsigned short reserved14, reserved16;
+    unsigned short cached_character, cached_index;
 };
 
 #ifdef __cplusplus
@@ -67,5 +70,12 @@ extern void *func_0019d9d8(struct FontResource *font, void *textureSheets);
 /* FontVTable intentionally remains incomplete, as in the accepted interface.
  * Its concrete table providers have distinct receiver/result contracts; no
  * callable members are exposed before the coordinated font-family recovery. */
+
+/* Serialized width triple shared by FontInformation, not a callable table. */
+struct GlyphWidths {
+    signed char left;
+    unsigned char glyph_width;
+    signed char advance;
+};
 
 #endif

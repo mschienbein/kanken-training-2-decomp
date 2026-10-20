@@ -1,7 +1,7 @@
 #include "game/font_resource.h"
-void func_001dae98(struct FontReader *reader, struct BinaryFileHeader *file,
-                   struct FontInfo *info)
+void func_001dae98(struct FontResource *reader, struct FontFile *file,
+                   struct FontInformation *information)
 {
     reader->file = file;
-    reader->info = info;
+    reader->information = information;
 }

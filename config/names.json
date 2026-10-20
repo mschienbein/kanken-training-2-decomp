@@ -1225,6 +1225,18 @@
     "_ZN2nw3lyt7TextBox4InitEtj": {
       "address": 1898416,
       "evidence": "Own native retail initializer MATCH140B under frozen sdk profile, receipt textbox-init-r1. Both u16 length and unsigned format are passed to the original virtual allocation operation at+70."
+    },
+    "_ZN2nw3lyt13DeleteTextureERKNS0_11TextureInfoE": {
+      "address": 1884124,
+      "evidence": "Own native DeleteTexture(const TextureInfo&) provider MATCH116B at001cbfdc, scratch/integrator/types-fontgfx/match/texture-delete-r1. The actual TextureContainer allocation constructs TextureInfo at entry+88; no first-word complete-object alias is retained."
+    },
+    "_ZN18DisplayFramebufferC1Ev": {
+      "address": 1321556,
+      "evidence": "Genuine native empty constructor MATCH4B at accepted00142a54; original001233d0 array construction proves the writable receiver,stride16,count2. Receipt display-framebuffer-ctor-r1; accepted C owner explicitly moves to C++."
+    },
+    "_ZN18DisplayFramebufferC2Ev": {
+      "address": 1321556,
+      "evidence": "Compiler-emitted complete/base aliases of the same genuine DisplayFramebuffer constructor, not an invented callback result or unrelated alias."
     }
   }
 }

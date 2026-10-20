@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "note": "Types-display proposal relative to be8aa40; original c009 manifest is immutable. Retains the c009 candidate identities and existing five moves, migrates display/native dependency destinations without re-awarding accepted identities, and adds restored func_0015e5d4 (28 B). This is a candidate composition, not accepted credit. HANDOFF.json isolates the theme delta for rebasing onto finalized c009-r4.",
+ "note": "C009t fontgfx successor with the independent Display source dependency e2afd4d4 composed. All original c009-r4 identities preserved; fontgfx owns its three accepted moves and native lifecycle consolidation, Display owns its separate native attachment moves and restored0015e5d4. Main composes remaining theme deltas before preparing; v6/L1 unchanged.",
  "units": [
   {
    "source": "src/large/func_00163488.c",
@@ -2955,7 +2955,7 @@
     "func_001cfbcc",
     "func_001cfc7c"
    ],
-   "author": "c009-wave17"
+   "author": "types-fontgfx"
   },
   {
    "source": "src/wave17/func_001d2dd8.c",
@@ -5318,6 +5318,30 @@
    "functions": []
   },
   {
+   "source": "src/wave13/func_001db054.cpp",
+   "profile": "game",
+   "functions": [
+    "func_001db054"
+   ],
+   "author": "types-fontgfx"
+  },
+  {
+   "source": "src/wave13/func_001db068.cpp",
+   "profile": "game",
+   "functions": [
+    "func_001db068"
+   ],
+   "author": "types-fontgfx"
+  },
+  {
+   "source": "src/wave13/func_0014d254.cpp",
+   "profile": "game",
+   "functions": [
+    "func_0014d254"
+   ],
+   "author": "types-fontgfx"
+  },
+  {
    "source": "src/wave6/func_001826fc.cpp",
    "profile": "game",
    "functions": [
@@ -5470,30 +5494,7 @@
    "author": "types-display"
   },
   {
-   "source": "src/wave13/func_0014d254.cpp",
-   "profile": "game",
-   "functions": [
-    "func_0014d254"
-   ],
-   "author": "types-fontgfx-dependency"
-  },
-  {
-   "source": "src/wave13/func_001db054.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001db054"
-   ],
-   "author": "types-fontgfx-dependency"
-  },
-  {
-   "source": "src/wave13/func_001db068.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001db068"
-   ],
-   "author": "types-fontgfx-dependency"
-  },
-  {
+
    "source": "src/types/display/func_0015e5d4.cpp",
    "profile": "game",
    "functions": [
@@ -5501,6 +5502,14 @@
    ],
    "author": "types-display",
    "notes": "Restored c009 carried deferral: D08 proves ResourceEntry->native TextBox->real Pane base; canonical rotation operation MATCH28 B under explicit v6/L1."
+  },
+  {
+   "source": "src/wave2/func_00142a54.cpp",
+   "profile": "game",
+   "functions": [
+    "func_00142a54"
+   ],
+   "author": "types-fontgfx"
   }
  ],
  "moves": [
@@ -5528,6 +5537,21 @@
    "function": "func_001c8990",
    "from": "src/wave3/func_001c8990.c",
    "to": "src/wave3/func_001c8990.cpp"
+  },
+  {
+   "function": "func_001db054",
+   "from": "src/wave13/func_001db054.c",
+   "to": "src/wave13/func_001db054.cpp"
+  },
+  {
+   "function": "func_001db068",
+   "from": "src/wave13/func_001db068.c",
+   "to": "src/wave13/func_001db068.cpp"
+  },
+  {
+   "function": "func_0014d254",
+   "from": "src/wave13/func_0014d254.c",
+   "to": "src/wave13/func_0014d254.cpp"
   },
   {
    "function": "func_001826fc",
@@ -5605,124 +5629,9 @@
    "to": "src/wave13/func_0014ab30.cpp"
   },
   {
-   "function": "func_0014d254",
-   "from": "src/wave13/func_0014d254.c",
-   "to": "src/wave13/func_0014d254.cpp"
-  },
-  {
-   "function": "func_001db054",
-   "from": "src/wave13/func_001db054.c",
-   "to": "src/wave13/func_001db054.cpp"
-  },
-  {
-   "function": "func_001db068",
-   "from": "src/wave13/func_001db068.c",
-   "to": "src/wave13/func_001db068.cpp"
-  }
- ],
- "deferrals": [
-  {
-   "function": "func_0011f3a8",
-   "kind": "NEW-only code generation",
-   "evidence": "docs/known-issues-c009-r2.md: Explicit NEW-only code-generation deferral"
-  },
-  {
-   "function": "func_001acb04",
-   "kind": "NEW-only callable contract",
-   "finding": "c009-r3 codex-b F02",
-   "reason": "The +0x18 DispatchStateA and +0x20 DisplayUpdateManager receiver relations to W18SceneA are unrecovered; partial offset-zero layouts do not justify incompatible calls.",
-   "evidence": "scratch/integrator/c009-r4/scene-deferrals-r1.json"
-  },
-  {
-   "function": "func_001be0c0",
-   "kind": "NEW-only callable contract",
-   "finding": "c009-r3 codex-b F02",
-   "reason": "The +0x18 DispatchStateB and +0x20 DisplayUpdateManager receiver relations to W18SceneB are unrecovered; partial offset-zero layouts do not justify incompatible calls.",
-   "evidence": "scratch/integrator/c009-r4/scene-deferrals-r1.json"
-  },
-  {
-   "function": "func_001ef704",
-   "kind": "NEW-only callable contract",
-   "finding": "c009-r3 codex-b F02",
-   "reason": "The +0x18 ModeDispatchObject and +0x20 DisplayUpdateManager receiver relations to the timed-screen partial owner are unrecovered; no native virtual lowering is established.",
-   "evidence": "scratch/integrator/c009-r4/scene-deferrals-r1.json"
-  },
-  {
-   "function": "func_00162f0c",
-   "kind": "NEW-only callable contract",
-   "group": "G04",
-   "reason": "ScreenController update/finish receivers disagree with AnimationScene/DisplayUpdateManager. A shared native scene base requires a dedicated accepted-type migration.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001b7dac",
-   "kind": "NEW-only callable contract",
-   "group": "G04",
-   "reason": "Registered member descriptors reach distinct scene provider types; CallbackTarget inheritance has not been recovered for the actual free definitions.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001e3af4",
-   "kind": "NEW-only callable contract",
-   "group": "G04",
-   "reason": "CallbackTarget::callback8 reaches DisplayUpdateManager; a nominal derived scene does not establish a compatible real provider receiver.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001e84ec",
-   "kind": "NEW-only callable contract",
-   "group": "G04",
-   "reason": "ScreenInitializationState callback8 reaches DisplayUpdateManager; the common complete scene owner remains unrecovered.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001eb7a4",
-   "kind": "NEW-only provider contract",
-   "group": "G04",
-   "reason": "The new DisplayUpdateManager definition contradicts five pre-existing accepted receiver models. Main authorizes deferral rather than a broad accepted scene-base cutover.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001b7fc0",
-   "kind": "NEW-only provider contract",
-   "group": "G04",
-   "reason": "TrainingScreen provider receiver contradicts accepted W11AnimatedScreenA invocation. A genuine native override or common receiver is not recovered.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001bbc1c",
-   "kind": "NEW-only provider contract",
-   "group": "G04",
-   "reason": "SecondModeController provider receiver contradicts accepted W11AnimatedScreenB invocation. Preserve the accepted caller and defer this new provider.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001cfdb4",
-   "kind": "NEW-only callable contract",
-   "group": "G07",
-   "reason": "The actual selector takes const LayoutMaterial/const LayoutAnimationTransform and returns LayoutAnimationLink, not an integer-selected W19Child. Fixing it requires accepted material-family migration.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001dacc0",
-   "kind": "NEW-only callable contract",
-   "group": "G08",
-   "reason": "The actual reserve provider takes const MemoryWriteStream; the invented command-buffer virtual receiver is not a recovered shared type.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001dadc4",
-   "kind": "NEW-only callable contract",
-   "group": "G08",
-   "reason": "The actual commit declaration takes DrawCommandState and unsigned-word cursors, not W19CommandBuffer and byte cursors. A shared accepted stream/global-cursor cutover is outside this checkpoint.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
-  },
-  {
-   "function": "func_001d3e90",
-   "kind": "NEW-only callable contract",
-   "group": "G09",
-   "reason": "The actual size provider is unsigned(const ForwardingFileStream*), not int(W20SeekStream*); the complete shared forwarding/buffered stream interface is unrecovered.",
-   "evidence": "scratch/integrator/c009-r4/contract-deferrals-r3.json"
+   "function": "func_00142a54",
+   "from": "src/wave2/func_00142a54.c",
+   "to": "src/wave2/func_00142a54.cpp"
   }
  ]
 }

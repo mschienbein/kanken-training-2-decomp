@@ -7,7 +7,6 @@ struct ForwardedFileStream;
 struct ForwardingFileStream;
 struct InputSessionContext;
 struct ResetState001d4850;
-struct ResourceFontView;
 struct ResourceOwner;
 struct ResourceState001d0164;
 struct StreamCriticalSection;
@@ -103,10 +102,6 @@ extern void func_00180860(struct AudioTaskManager *manager);
 extern bool func_001f1fe0(const struct ForwardingFileStream *object);
 extern bool func_001f1ff0(const struct ForwardingFileStream *object);
 extern unsigned func_001f2000(const struct ForwardingFileStream *object);
-extern int func_001f4b2c(const struct ResourceFontView *font);
-extern int func_001f4b48(const struct ResourceFontView *font);
-extern bool func_001f4cb4(const struct ResourceFontView *font);
-extern bool func_001f4cc4(const struct ResourceFontView *font);
 extern void func_001d01cc(struct FileSoundController001d40a8 *state);
 #ifdef __cplusplus
 }
