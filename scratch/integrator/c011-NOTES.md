@@ -44,13 +44,19 @@ merged. **This is source-ready intake, not checkpoint readiness.**
   np030 native/C font and texture APIs, np021's genuine texture dispatcher and
   separate callback(int)/callback(void) gap, constructor callback contracts and
   scene/native singleton lifetimes remain explicit, not erased or cast.
-- Ran only **32 sequential bounded `match.py --show 0` invocations** under
+- Ran only **35 sequential bounded `match.py --show 0` invocations** under
   explicit **v6/L1** and the exact frozen per-unit profile. The final fresh scope
   has **22 matching candidate targets plus 6 matching direct dependency targets**;
   rejected intermediate sources and the mixed-TU exit 1 are retained.
+- Before delivery, recovered the preexisting `text_writer.h` declarations from
+  preserved tip `1814a725`: its `TextWriterState`, `TextBounds`, four prototypes
+  and C++ guard all survive alongside the new native getters. The intermediate
+  shortened header and original receipts remain in immutable history.
+  `HEADER-PRESERVATION-r7.json` records the correction; all three newly added
+  native consumers MATCH after the changed header input (`DESTINATION-MATCH-r22`).
 
-`HANDOFF.json`, `DESTINATION-SOURCE-SCOPE-r7.json`, `CONSUMED-RESULTS-r7.json`
-and `DESTINATION-CLOSURE-r7.json` are the current handoff. All prior math,
+`HANDOFF.json`, `DESTINATION-SOURCE-SCOPE-r8.json`, `CONSUMED-RESULTS-r7.json`
+and `DESTINATION-CLOSURE-r8.json` are the current handoff. All prior math,
 accepted-layout, stream, parent and native-pair holds survive. C010's planned
 deferral of its unaccepted `001c7760/001c8a40` pair is not an ownership release.
 Main must refresh shared-header dependencies after c009-r3/c010 finalize, then

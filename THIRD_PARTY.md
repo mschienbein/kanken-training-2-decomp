@@ -33,7 +33,7 @@ Voice refresh/update helper layering (`intake-r7/nf176/audio_sync.cpp` and
 `intake-r7/nf176/func_0014f114.cpp`). Their supplied GPL-3.0-only notices,
 modification notes and unrecovered historical-identity qualifications remain
 in source. Exact delivery and destination bindings are recorded in
-`scratch/integrator/c011/INTAKE-r7.json` and `DESTINATION-CLOSURE-r7.json`;
+`scratch/integrator/c011/INTAKE-r7.json` and `DESTINATION-CLOSURE-r8.json`;
 they grant no library/helper or accepted credit.
 
 

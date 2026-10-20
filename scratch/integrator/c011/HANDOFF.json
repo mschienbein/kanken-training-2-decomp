@@ -43,7 +43,7 @@
     "fresh_collected_target_bytes": 3640,
     "fresh_contract_deferred_functions": 10,
     "fresh_contract_deferred_target_bytes": 1212,
-    "fresh_isolated_runs": 32,
+    "fresh_isolated_runs": 35,
     "fresh_terminal_ready_sources": 26,
     "fresh_terminal_matched_targets": 28,
     "published_result_manifests": 109,
@@ -70,7 +70,7 @@
   ],
   "scope_sha256": "c0e6c59f852476f5604f52afb1e82c53ac2760059fd2c616867cd1cfdac4279c",
   "ownership_basis": "OWNERSHIP-INPUTS-r7.json",
-  "contract_reconciliation": "CONTRACT-RECONCILIATION-r7.json",
+  "contract_reconciliation": "CONTRACT-RECONCILIATION-r8.json",
   "permuter_classification": "PERMUTER-CLASSIFICATION-r1.json",
   "name_proofs": [
     "NAMES-PROVENANCE-r1.json",
@@ -82,7 +82,8 @@
   "names_adopted_this_resume": ["_ZN16InputDeviceStateC1Ev", "_ZN16InputDeviceStateC2Ev", "_ZN16InputBufferStateC1Ev"],
   "intake_record": "INTAKE-r7.json",
   "intake_record_sha256": "b67cdebf55b1f4b2ae59f9c95fd0f4dd5feda8ab78905ee82db35f69559de96a",
-  "exact_source_scope": "DESTINATION-SOURCE-SCOPE-r7.json",
+  "exact_source_scope": "DESTINATION-SOURCE-SCOPE-r8.json",
+  "header_preservation": "HEADER-PRESERVATION-r7.json",
   "preserved_source_complete_tip": "1814a725881a752f69c4c20ecff1bbfa12fbad7e",
   "collection_evidence": [
     "COLLECT-r1.json",
@@ -102,9 +103,9 @@
     "COLLECT-r15.json"
   ],
   "current_destination_evidence": {
-    "path": "DESTINATION-CLOSURE-r7.json",
-    "sha256": "e271fe20ea1831f172a3a943c5164406b10d53ecb0c2ed73accfce60d734347c",
-    "sequential_invocations": 32,
+    "path": "DESTINATION-CLOSURE-r8.json",
+    "sha256": "40ea93c278d1b0b06a1df041bb2b102a2c33fd59bcc1bd225be53c6da1d3a24d",
+    "sequential_invocations": 35,
     "fresh_candidate_units": 20,
     "fresh_candidate_targets": 22,
     "directly_revised_dependency_units": 6,
@@ -115,7 +116,7 @@
       "linker_model": "armlink5-inline-branchnop-v6",
       "literal_model": "anonymous-string-records-v1"
     },
-    "qualification": "Fresh targets and six directly revised dependencies only; r19/r20 native-pane attempts are rejected. Prior r16 is historical. Full shared-header dependency refresh waits for finalized c009-r3/c010; no readiness claim."
+    "qualification": "Fresh targets and six directly revised dependencies only; r19/r20 native-pane attempts are rejected. r22 rebinds three native-writer targets after restoring every preexisting text_writer.h contract. Prior r16/r7 bindings are historical. Full shared-header dependency refresh waits for finalized c009-r3/c010; no readiness claim."
   },
   "context_moves": [
     {
@@ -241,11 +242,11 @@
     "finalize",
     "push"
   ],
-  "serialization": "No heavy job, full audit, build, tests, prepare or finalize run. Only32 sequential nice10 match.py --show0 invocations, with explicit v6/L1 and unchanged frozen profiles. Main owns integration and heavy gates.",
+  "serialization": "No heavy job, full audit, build, tests, prepare or finalize run. Only35 sequential nice10 match.py --show0 invocations, including three after preserving the original shared-writer contract, with explicit v6/L1 and unchanged frozen profiles. Main owns integration and heavy gates.",
   "next_main_checks": [
     "After c009-r3 and c010 finalize, compose accepted seq9 with their final inventories, then c011 additions and exactly ten preserved context moves. No accepted identity may disappear or acquire a second emitted owner.",
     "Retain prior source/hash-bound parent reservations0014cc9c/001d31cc and001d0348/001d2234/001f478c. C010 now plans to defer unaccepted001c7760/001c8a40: preserve the pair reservation, refresh its final ownership, and never infer release or promote an unproved pair cast.",
-    "Propagate the two source-bound native writer getter revisions to c009 integration and the exact RequestRecord initializer include to c010; six direct revision witnesses are in DESTINATION-CLOSURE-r7.json. No unfinished predecessor changes were merged.",
+    "Propagate the two source-bound native writer getter revisions to c009 integration and the exact RequestRecord initializer include to c010; six direct revision witnesses are in DESTINATION-CLOSURE-r8.json. Preserve original TextWriterState/TextBounds/prototypes alongside new native getters. No unfinished predecessor changes were merged.",
     "Refresh shared-header dependencies across accepted/final parent/c011 units only after the predecessors settle. Current source-ready witnesses cover22 fresh targets and6 direct dependency targets, not the complete dependency closure.",
     "Run whole-ledger G3, argcheck/manual incoming-outgoing/lifetime adjudication, emitted-owner closure, seven-step pre-review and integrated builds/suite once when composed sources settle. Main alone prepares with explicit v6/L1, reviews, finalizes and pushes.",
     "Preserve82 genuine contract deferrals and the model-only0017a49c exclusion. The actual RequestRecord is shared but191e18 five-vs-six inputs remains blocked; np030 native/C APIs and np021 callback(int)/callback(void) remain real gaps, never casts or aliases.",
