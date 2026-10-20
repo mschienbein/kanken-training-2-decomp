@@ -16,7 +16,7 @@ struct CategoryScreen {
     unsigned char reserved00[0x40];
     struct RecordSet *records;
     unsigned char reserved44[4];
-    struct Screen *numbers;
+    struct W11jVisualOwner *numbers;
     struct W6ListController *choices;
     struct W8DisplaySet *display;
     struct Screen *buttons;
