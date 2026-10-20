@@ -15,9 +15,10 @@ at 32 and 16 remain historical evidence, not a permanent cap. Available credits
 are separate from per-minute throughput. Resume preserved work and avoid
 duplicate assignments; the current queue and any new errors live in private state.
 
-Every subagent remains `azure-foundry/gpt-6.1-sol:max`. Heavy jobs remain
-serialized; single-writer ownership, frozen gates and independent reviews are
-unchanged.
+The user subsequently switched the entire worker pool to Codex
+`openai-codex/gpt-6.1-sol:max` until Codex usage runs out; see
+`2026-10-20-subagent-codex.md`. Heavy jobs remain serialized; single-writer ownership,
+frozen gates and independent reviews are unchanged.
 
 ## Earlier ruling — 32 maximum
 

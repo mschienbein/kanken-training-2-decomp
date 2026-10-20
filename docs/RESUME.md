@@ -13,9 +13,10 @@ into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pu
 Restart sequence: linker models v4/v6/v8 are adopted. The finalized ledger selects linker v6
 plus literal L1, so later checkpoints explicitly select at least that pair. Frozen profiles:
 game/sdk/middleware. Resume preserved work rather than restarting completed batches.
-The user-set maximum and active target are 64 subagents; keep useful slots full and back off
-only if fresh provider throttling recurs (`docs/rulings/2026-10-20-subagent-concurrency.md`).
-Current throttling, queue and ownership live in the private pipeline file.
+The user-set maximum and active target are 64 **Codex `gpt-6.1-sol:max`** subagents;
+keep useful slots full and pause dispatch if Codex usage is exhausted, without silently
+switching providers (`docs/rulings/2026-10-20-subagent-codex.md`). Current queue and ownership
+live in the private pipeline file.
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules
