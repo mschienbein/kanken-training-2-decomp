@@ -23,6 +23,8 @@ struct MotionScreen {
 extern "C" {
 #endif
 extern void func_0017457c(struct MotionScreen *screen);
+extern void func_001e9754(struct MotionScreen *screen, int index,
+                        float start, float finish, float duration);
 #ifdef __cplusplus
 }
 #endif

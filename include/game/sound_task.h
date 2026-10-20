@@ -146,6 +146,14 @@ struct SoundTaskBase {
     unsigned char reserved15[3];
     void *owner;
 };
+struct SoundQueuedTask {
+    struct SoundTaskBase base;
+    unsigned arguments[11];
+    unsigned char option;
+    unsigned char reserved49[3];
+    void *source;
+    struct PoolLink queue_link;
+};
 
 #ifdef __cplusplus
 extern "C" {
@@ -161,6 +169,8 @@ extern struct EmbeddedSoundInstance *func_0014b824(struct EmbeddedSoundInstance 
 extern struct SoundRegularInstance *func_0014bd78(struct SoundRegularInstance *object,
                                               struct SoundPoolStorage *owner);
 extern struct SoundTaskBase *func_00180510(struct SoundTaskBase *task);
+extern const unsigned data_00224978[];
+extern struct SoundQueuedTask *func_0014d664(struct SoundQueuedTask *task);
 #ifdef __cplusplus
 }
 #endif

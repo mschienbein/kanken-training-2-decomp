@@ -1,6 +1,4 @@
 #include "game/screen.h"
-/* INTEGRATOR: move to include/game/screen.h; revise src/wave4/func_001b54e8.c's void* wrapper declaration to Screen*. */
-extern "C" { void func_001b54ec(Screen *screen, int enabled); }
 static __forceinline int widget_has_flag(struct Screen *screen, int index, unsigned int mask)
 {
     struct WidgetSlot *slot = screen->slots[index];

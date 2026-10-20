@@ -1,22 +1,7 @@
 /* [INFERENCE] The pointer callback follows the neighboring character-cursor
  * callbacks. The stream object and 16-bit result mirror the native font reader;
  * historical class identity is not established. */
-struct ShiftJisCursorState {
-    const void *current;
-    template<typename T> T get(int offset = 0) const
-    {
-        return static_cast<const T *>(current)[offset];
-    }
-    template<typename T> void step(int count = 1)
-    {
-        const T *&text = reinterpret_cast<const T *&>(current);
-        text += count;
-    }
-};
-/* INTEGRATOR: move to include/game/audio_voice.h */
-extern "C" {
-unsigned short func_001dafb0(ShiftJisCursorState *cursor);
-}
+#include "game/audio_voice.h"
 unsigned short func_001dafb0(ShiftJisCursorState *cursor)
 {
     unsigned short character = cursor->get<unsigned char>();

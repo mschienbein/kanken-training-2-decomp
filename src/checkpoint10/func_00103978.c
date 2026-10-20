@@ -2,31 +2,6 @@
 #include <stdint.h>
 #include "game/shared_memory.h"
 
-struct ResourceTableEntry;
-struct FontResource;
-/* INTEGRATOR: differs from include/game/resource_tables.h: the four words at
- * 0x10..0x1c inside reserved0c are independently reset by this function. */
-struct ResourceTable {
-    struct ResourceTableEntry *entries;
-    int count;
-    int activeCount;
-    unsigned char reserved0c[4];
-    unsigned field10, field14, field18, field1c;
-    unsigned char reserved20[0x14];
-    struct FontResource *font;
-    unsigned char reserved38[0x14];
-    void *defaultSheets;
-    unsigned char firstEnabled;
-    unsigned char reserved51[3];
-    void *firstSheets;
-    uintptr_t firstResource;
-    int firstIndex;
-    unsigned char secondEnabled;
-    unsigned char reserved61[3];
-    void *secondSheets;
-    uintptr_t secondResource;
-    int secondIndex;
-};
 
 
 void func_00103978(void)

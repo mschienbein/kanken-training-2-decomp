@@ -1,5 +1,4 @@
-extern unsigned func_0012e930(unsigned short *destination, int *destination_count,
-                              const char *source, int *source_count, unsigned newline);
+#include "game/text.h"
 
 unsigned func_001949e4(unsigned short *destination, int *destination_count,
                        const char *source, int *source_count)

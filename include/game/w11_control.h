@@ -31,7 +31,9 @@ struct W11jWidgetGroup {
 struct AnimationState {
     unsigned char reserved00[0x10];
     void *primary;
-    unsigned char reserved14[0x30];
+    unsigned char reserved14[0x20];
+    unsigned char disabled, has_secondary;
+    unsigned char reserved36[0x0e];
     float start, finish;
     unsigned char reserved4c[8];
     int enabled;
@@ -81,6 +83,8 @@ extern void func_0016f9a8(struct W11jVisualOwner *owner, int index, float x, flo
 extern void func_00175d90(struct W11jVisualOwner *owner);
 extern void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled);
 extern void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y);
+extern void func_0016de28(struct AnimationState *state, int enabled);
+extern void func_0016f208(struct AnimationState *state, int index, int enabled);
 #ifdef __cplusplus
 }
 #endif

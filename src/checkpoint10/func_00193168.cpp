@@ -1,14 +1,6 @@
 #include "game/runtime.h"
 
-/* INTEGRATOR: move to include/game/package_text.h */
-extern "C" {
-extern unsigned func_001949e4(unsigned short *destination, int *destination_count,
-                              const char *source, int *source_count);
-extern unsigned short *func_0018651c(unsigned short *destination,
-                                    const unsigned short *source, unsigned count);
-extern void func_0019e08c(void *allocation);
-unsigned func_00193168(unsigned short *destination, unsigned capacity, const char *source);
-}
+#include "game/text.h"
 
 /* Reference-selecting minimum: the address of the first operand stays the default. */
 static inline unsigned minimum(const unsigned &a, const unsigned &b)

@@ -27,7 +27,13 @@ struct SelectionState {
 };
 
 struct W6ListItem {
-    unsigned char reserved00[0x12];
+    struct DisplayObject *object;
+    const struct NameTable *table;
+    unsigned short reserved08;
+    short id;
+    unsigned short flags;
+    unsigned char reserved0e, state;
+    signed char frame, saved_frame;
     short value;
 };
 
@@ -134,6 +140,32 @@ extern void func_00190c1c(int category, int kind, int count, ...);
 }
 #endif
 
+
+/* [INFERENCE] The dispatcher selects a pair slot at +0x90; the reset helper
+ * independently reads the first current/previous words, not the active index. */
+struct W6DisplayHandle;
+struct W6SelectionReset {
+    unsigned char reserved00[0x4c];
+    struct W6ListController *list;
+    unsigned char reserved50[0x0c];
+    struct W6HandlePanel10 *panel;
+    unsigned char reserved60[0x30];
+    int stack_index;
+    int modes[2];
+    int previous_modes[2];
+    unsigned char reserveda4[8];
+    struct W6DisplayHandle **handles;
+};
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_0016c55c(struct W6SelectionReset *state);
+extern void func_001bdb70(struct W6SelectionReset *state);
+extern void func_001bda14(struct W6SelectionReset *state);
+extern void func_001bd9f0(struct W6SelectionReset *state);
+#ifdef __cplusplus
+}
+#endif
 
 struct SelectionCallbacks {
     const void *reserved00[6];

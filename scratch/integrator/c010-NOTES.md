@@ -4,6 +4,38 @@ This is an integrator working record, not acceptance or an independent review.
 No full build, full suite, prepare, finalize, history edit or push has run here.
 All counts below are candidate scope/evidence, never accepted credit.
 
+## Continuing source contracts — 173 markers remain
+
+Continued directly from `6f919ff`, keeping all previous witnesses. An additional
+33 marked source units now use coherent canonical audio/callback/UI interfaces.
+Channel state uses the actual pending-slot pointer at+0x30, dirty byte at+0x6f
+and full-int priority at+0x20. The voice-pool iterator uses the existing
+AudioVoice.link subobject rather than appending a second link after its complete view.
+Addon sound/wave callbacks occupy slots0x18/0x28; the 0/1 basic-info provider
+has a consistent bool contract. Sound-player detach retains both actual inputs,
+and the stored player word is a pointer, not an integer shadow.
+
+Cleanup releases retain all memory/size/context inputs and the actual cleanup
+allocator subobject. Original double recursive locking is preserved. Member
+callback table widths/arity, queued-task constructor result and cursor helper
+lifetimes remain explicit. UI provider changes include the actual list/animation
+prefix, MotionKey value, SettingsScreen/selection-reset layouts, DrawingSystem
+ready pointer with a separate full-word token API, real RelativeReference* lookup,
+text-resource destructor and existing text-surface colors.
+
+All changed-source MATCHes and actual intermediate refusals/mismatches are recorded
+in `LOCAL-CONTRACT-CUTOVERS-r2.json`. No unchanged failure was retried. The UI
+af00c generic-to-bound object conversion was rejected/restored before compilation;
+Main's proposals-r2 records that concrete tagged-owner deferral. No174d9c
+narrowing, new native alias or accepted credit withdrawal occurred.
+
+Git refused importing frozen c009 `0a8b64d` over local canonical header changes;
+commit this measured boundary first, then merge/reconcile. That predecessor already
+supplies the correct C TrainingScreen exposure and6d600 provider, which must be
+reused before remaining6dae8/bbc1c/bbdd4 migration. Source work remains open;
+173 markers are not independently reviewed or fully dispositioned yet. No heavy
+whole-ledger/G3/argcheck/build/suite/prepare/finalize operation ran.
+
 ## Resumed boundary — canonical contract cutovers, 206 markers remain
 
 Preserved observed `dcbdda2`, merged accepted main `261fdc9`, then coherent

@@ -103,8 +103,15 @@ struct PrefetchChannelInfo {
     unsigned size;
     const void *data;
 };
+struct PrefetchChannelReference {
+    unsigned short type, reserved02;
+    int offset;
+};
 struct PrefetchReferenceTable {
     unsigned count;
+#ifndef __cplusplus
+    struct PrefetchChannelReference entries[];
+#endif
 };
 struct StreamBufferState {
     unsigned request_id;
@@ -157,6 +164,8 @@ extern int func_001533e0(const struct PrefetchFileReader *reader, struct Prefetc
 extern const void *func_00153f90(const struct PrefetchChannelEntry *entry);
 extern unsigned func_0017e184(unsigned encoding);
 extern void func_0015475c(struct StreamChannel *stream, struct RecordState *block, int update);
+extern const struct PrefetchChannelReference *func_00154804(
+    const struct PrefetchReferenceTable *table, unsigned index);
 #ifdef __cplusplus
 }
 #endif

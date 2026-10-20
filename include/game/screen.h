@@ -9,6 +9,7 @@ struct Material;
 /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */
 
 #ifdef __cplusplus
+#include <nw/ut/ut_Color.h>
 extern "C" {
 #endif
 
@@ -106,11 +107,17 @@ struct SurfaceSize {
     bool operator!=(const SurfaceSize &other) const { return !(*this == other); }
 };
 struct SurfaceTextState {
-    unsigned char reserved00[0xe4];
+    unsigned char reserved00[0xd8];
+    nw::ut::Color8 colors[2];
+    unsigned char reservede0[4];
     SurfaceSize size;
     float line_spacing, character_spacing;
     unsigned char reservedf4[0x0a];
     unsigned char dirty;
+    void SetTextColor(unsigned index, nw::ut::Color8 value)
+    {
+        colors[index] = value;
+    }
     bool update_dirty(bool changed) { dirty |= changed; return changed; }
     void set_size(const SurfaceSize &value)
     {
@@ -386,6 +393,10 @@ extern struct DisplayQueueCounter bss_00495c70;
 extern void func_0010a814(void);
 extern void func_0017a9b4(struct Screen *screen, int value);
 extern void func_0017a71c(struct Screen *screen, int index, int enabled);
+extern void func_001b54ec(struct Screen *screen, int enabled);
+extern void func_001b54e8(struct Screen *screen, int enabled);
+extern void func_0015e3f4(struct DisplaySurface *surface, unsigned char red,
+                        unsigned char green, unsigned char blue, unsigned char alpha);
 extern int func_0019efd0(void);
 extern void func_001b6c90(struct MenuOptionGroup *options);
 extern void func_001b7e9c(struct MenuOptionGroup *options);

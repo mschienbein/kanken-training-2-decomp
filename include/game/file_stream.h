@@ -22,6 +22,25 @@ struct FileHandleObject {
     /* [INFERENCE] The factory maps priority classes to -16, -8 and 8. */
     virtual Result set_priority(int priority);
 };
+
+/* [INFERENCE] This actual seek/write interface is distinct from FileHandleObject
+ * and FileStreamView. Uncalled slots describe layout, not callable contracts. */
+class PositionedOutputStream {
+public:
+    virtual void slot00();
+    virtual void slot04();
+    virtual void slot08();
+    virtual void slot0c();
+    virtual void slot10();
+    virtual void slot14();
+    virtual int seek(long long offset);
+    virtual void slot1c();
+    virtual void slot20();
+    virtual void slot24();
+    virtual int write(int *written, const void *buffer, unsigned size, bool flush);
+};
+extern "C" bool func_0018ff34(PositionedOutputStream *stream,
+    const unsigned char *buffer, int position, int buffer_offset, unsigned size);
 #endif
 
 #ifdef __cplusplus

@@ -1,14 +1,4 @@
-struct PrefetchChannelReference {
-    unsigned short type;
-    unsigned short reserved02;
-    int offset;
-};
-/* INTEGRATOR: differs from include/game/prefetch_stream.h: the reference table
- * has an indexed trailing array of eight-byte channel references after count. */
-struct PrefetchReferenceTable {
-    unsigned count;
-    struct PrefetchChannelReference entries[];
-};
+#include "game/prefetch_stream.h"
 
 const struct PrefetchChannelReference *func_00154804(const struct PrefetchReferenceTable *table,
                                                     unsigned index)

@@ -19,6 +19,8 @@ struct ArchiveHandleVTable;
 struct BankFile;
 struct SoundArchiveAddon;
 struct SoundLookupProvider;
+struct SoundBasicInfo;
+struct SoundArchiveWaveInfo;
 
 
 
@@ -233,7 +235,8 @@ struct SoundArchiveReader {
     const void *vtable;
     unsigned reserved04;
     unsigned version;
-    unsigned char reserved0c[0x30];
+    unsigned char reserved0c[0x2c];
+    const struct RelativeReference *lookup_reference;
     const struct SoundArchiveInfo *info;
 };
 
@@ -282,9 +285,12 @@ struct SoundPlayerResult {
 
 
 struct SoundArchiveAddonVTable {
-    unsigned char reserved00[0x20];
+    unsigned char reserved00[0x18];
+    bool (*read_sound)(struct SoundArchiveAddon *, unsigned, struct SoundBasicInfo *);
+    unsigned char reserved1c[4];
     bool (*read_file)(struct SoundArchiveAddon *, unsigned, struct SoundFileResult *);
-    unsigned char reserved24[8];
+    unsigned char reserved24[4];
+    bool (*read_wave_archive)(struct SoundArchiveAddon *, unsigned, struct SoundArchiveWaveInfo *);
     bool (*read_file_group)(struct SoundArchiveAddon *, unsigned, struct ArchiveResourceInfo *);
     void (*read_file_location)(struct SoundArchiveAddon *, unsigned, struct ArchiveFileLocation *, int);
     bool (*read_player)(struct SoundArchiveAddon *, struct SoundPlayerResult *);
@@ -318,6 +324,16 @@ struct SoundArchiveAddon {
     {
         if (!enabled) return false;
         return vtable->read_wave_sound(this, id, out);
+    }
+    bool read_sound(unsigned id, SoundBasicInfo *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_sound(this, id, out);
+    }
+    bool read_wave_archive(unsigned id, SoundArchiveWaveInfo *out)
+    {
+        if (!enabled) return false;
+        return vtable->read_wave_archive(this, id, out);
     }
     void read_file_location(unsigned id, ArchiveFileLocation *out, int mode)
     {
@@ -369,6 +385,8 @@ extern int func_0018279c(const unsigned *packed, unsigned *out, unsigned index);
 extern int func_00131928(const struct SoundArchiveReader *reader, unsigned int sound_id);
 extern const void *func_0016a938(const struct SoundArchivePlayerView *player, unsigned int sound_id);
 extern const void *func_001f2ac8(const struct SoundArchiveReader *reader, unsigned int sound_id);
+extern unsigned func_001f206c(const struct SoundArchiveInfo *info, unsigned sound_id);
+extern const void *func_001f2308(const struct RelativeReference *reference, int index);
 
 /* [INFERENCE] Natural callers consume the returned result-object pointer. */
 extern struct WordPair *func_00194a34(struct WordPair *out, unsigned result);
@@ -465,6 +483,14 @@ extern unsigned func_00140c98(const struct SoundType1Details *details);
 extern void func_00140bf0(const struct SoundType1Details *details, unsigned *output);
 extern bool func_00139358(const struct SoundArchiveReader *reader, unsigned item_id,
                   struct SoundType1Info *output);
+extern bool func_0013923c(const struct SoundArchiveReader *reader, unsigned id,
+                        struct SoundBasicInfo *out);
+extern bool func_001858dc(const struct SoundArchive *archive, unsigned id,
+                        struct SoundBasicInfo *out);
+extern bool func_001f2b04(const struct SoundArchiveReader *reader, unsigned id,
+                        struct SoundArchiveWaveInfo *out);
+extern bool func_001f16f8(const struct SoundArchive *archive, unsigned id,
+                        struct SoundArchiveWaveInfo *out);
 extern unsigned func_0012d4d0(void *destination, unsigned char mode,
                               unsigned long long handle,
                               const unsigned short *source, unsigned count);

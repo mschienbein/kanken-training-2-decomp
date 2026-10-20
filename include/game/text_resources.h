@@ -3,7 +3,15 @@
 
 #include "game/runtime.h"
 
+#ifdef __cplusplus
+/* [INFERENCE] Only the destructor slot used by resource teardown is recovered. */
+class W22TextReleasable {
+public:
+    virtual ~W22TextReleasable();
+};
+#else
 struct W22TextReleasable;
+#endif
 struct W22TextResources {
     const void *vtable;
     short identifier;

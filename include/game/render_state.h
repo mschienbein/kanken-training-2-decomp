@@ -83,7 +83,17 @@ struct PipelineConfiguration {
 
 /* [INFERENCE] Hash-bucket buffer prefix observed by the original teardown
  * consumer. Opaque payload pointers do not assert a recovered native class. */
-struct W6eGpuBufferPayload;
+/* [INFERENCE] Buffer payload prefix observed by the mode-dependent release
+ * consumer. Usage and reserved words are retained without native class claims. */
+struct W6eGpuBufferPayload {
+    void *device_memory;
+    void *host_memory;
+    unsigned size;
+    unsigned reserved0c;
+    unsigned usage;
+    unsigned module;
+    int mode;
+};
 struct W6eGpuBuffer {
     unsigned handle;
     int kind;

@@ -12,10 +12,6 @@
 /* [INFERENCE] The 432-byte payload and following intrusive link agree with the
  * channel-manager iteration; descriptive project type names are retained. */
 
-struct AudioPooledVoice {
-    AudioVoice voice;
-    PoolLink link;
-};
 
 class PoolIterator {
     PoolLink *node;
@@ -33,8 +29,8 @@ class VoiceIterator {
 public:
     explicit VoiceIterator(PoolLink *p) : iterator(p) {}
     AudioVoice *operator->() const {
-        return &reinterpret_cast<AudioPooledVoice *>(
-            reinterpret_cast<char *>(iterator.get()) - offsetof(AudioPooledVoice, link))->voice;
+        return reinterpret_cast<AudioVoice *>(
+            reinterpret_cast<char *>(iterator.get()) - offsetof(AudioVoice, link));
     }
     VoiceIterator &operator++() { ++iterator; return *this; }
     VoiceIterator operator++(int) { const VoiceIterator old(*this); ++*this; return old; }
@@ -52,13 +48,6 @@ static VoiceIterator voices_end(ObjectPool *pool)
     return VoiceIterator(&pool->active.sentinel);
 }
 
-/* INTEGRATOR: move to include/game/audio_voice.h. */
-extern "C" {
-void func_0014d308(ObjectPool *pool);
-/* [INFERENCE] Boolean update role is corroborated by Channel::Update(bool) in
- * the pinned public source; the image alone does not distinguish bool from int. */
-void func_0014f304(AudioVoice *voice, bool update);
-}
 
 void func_0014d308(ObjectPool *pool)
 {

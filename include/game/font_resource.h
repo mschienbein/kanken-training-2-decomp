@@ -16,7 +16,6 @@ struct P1179b4;
 struct S1179b4;
 struct SoundFileBuffer;
 struct SoundRecord;
-struct SoundState001d2c78;
 struct SoundUpdateFlag;
 struct ValuePresence;
 struct VramAllocator;
@@ -78,10 +77,6 @@ struct BinaryFileHeader {
 #endif
 };
 
-struct SoundState001d2c78 {
-    unsigned char reserved00[0x10];
-    unsigned state;
-};
 
 struct SoundUpdateFlag {
     unsigned char reserved00[0x0d];
@@ -164,7 +159,6 @@ extern const struct BankInstrumentInfo *func_001f23f8(const struct SoundRecord *
 extern void *func_001177fc(struct VramAllocator *allocator, unsigned size, unsigned alignment);
 extern int func_00149494(struct VramAllocator *allocator, unsigned size, unsigned alignment);
 extern int func_001494b8(struct VramAllocator *allocator, unsigned size, unsigned alignment);
-extern void func_001d2c78(struct SoundState001d2c78 *object);
 extern void func_001d2e04(struct SoundFileBuffer *buffer);
 extern void func_001d5c8c(struct SoundUpdateFlag *object);
 extern void func_001d89a0(struct SoundUpdateFlag *object);

@@ -1,18 +1,4 @@
-#include "game/screen.h"
-
-struct ScreenAnimation {
-    int mode;
-    unsigned char reserved04[0x1c];
-    const struct NameTable *table;
-    unsigned char reserved24[0x10];
-    struct BoundDisplayObject *objects[5];
-    unsigned char reserved48[0xc];
-};
-struct TransitionScene {
-    unsigned char reserved00[0x18];
-    struct ScreenAnimation animations[];
-};
-extern void func_0016f534(struct BoundDisplayObject *object, int index, float duration);
+#include "game/screen_transition.h"
 
 static __forceinline void set_active(struct BoundDisplayObject *object, int active)
 {
@@ -29,8 +15,6 @@ static __forceinline void set_active(struct BoundDisplayObject *object, int acti
     }
 }
 
-/* INTEGRATOR: differs from src/wave4/func_0016f39c.c: the writable screen
- * argument is a TransitionScene containing fixed-stride animation entries. */
 void func_0016f3a0(struct TransitionScene *scene, int index)
 {
     struct ScreenAnimation *animation = &scene->animations[index];
