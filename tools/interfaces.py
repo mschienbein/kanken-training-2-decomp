@@ -24,9 +24,10 @@ heap aliases, pointer arithmetic, interprocedural/branch-sensitive propagation a
 writes performed by called functions/assembly are NOT covered. Coverage and all
 unchecked units are always included in the JSON and human reports. Unsupported
 syntax/extensions fail closed instead of being silently stripped into a PASS.
-Documented __svc declarations, compiler intrinsic calls and CP15 named-register
-declarations are C; other assembly remains refused. Unit-source INTEGRATOR: marker
-comments are refused before preprocessing can erase them.
+Standard va_arg type operands are normalized only for parsing, retaining their
+types and argument expressions. Documented __svc declarations, compiler intrinsic
+calls and CP15 named-register declarations are C; other assembly remains refused.
+Unit-source INTEGRATOR: marker comments are refused before preprocessing can erase them.
 """
 from __future__ import annotations
 
@@ -202,6 +203,47 @@ def ignored_pragma(directive: str, profile: toolchain.Profile, suffix: str) -> b
         re.search(r"#(?:161-D: unrecognized #pragma|1067-D: unrecognized STDC pragma)\s*$", line)
         for line in diagnostics
     )
+
+
+def normalize_va_args(text: str) -> str:
+    """Represent __va_arg(ap, TYPE) as __va_arg(ap, (TYPE)0) for parsing only.
+
+    Keep both operands and every newline: the analyzer retains the result type,
+    visits writes in the argument expression, and keeps declaration origins.
+    """
+    if "__va_arg" not in text:
+        return text
+    tokens = [t for t in PREPARE_TOKEN.finditer(text)
+              if not t[0].startswith(("/*", "//"))]
+    insertions = []
+    for i, token in enumerate(tokens):
+        if token[0] != "__va_arg" or i + 1 >= len(tokens) or tokens[i + 1][0] != "(":
+            continue
+        depth, commas = 0, []
+        for end in range(i + 1, len(tokens)):
+            word = tokens[end][0]
+            if word in ("(", "[", "{"):
+                depth += 1
+            elif word in (")", "]", "}"):
+                depth -= 1
+                if depth == 0:
+                    break
+            elif word == "," and depth == 1:
+                commas.append(end)
+        else:
+            raise InterfaceError("unbalanced ARMCC __va_arg")
+        if (
+            tokens[end][0] != ")" or len(commas) != 1
+            or commas[0] == i + 2 or commas[0] + 1 == end
+        ):
+            raise InterfaceError("malformed ARMCC __va_arg")
+        insertions.extend(((tokens[commas[0]].end(), "("), (tokens[end].start(), ")0")))
+    pieces, start = [], 0
+    for position, value in sorted(insertions):
+        pieces.extend((text[start:position], value))
+        start = position
+    pieces.append(text[start:])
+    return "".join(pieces)
 
 
 def prepare(text: str, source: Path, *, profile: toolchain.Profile | None = None,
@@ -727,6 +769,9 @@ class Analyzer(c_ast.NodeVisitor):
             return self.scope.lookup("variables", node.name)
         if isinstance(node, c_ast.Cast):
             return self.ctype(node.to_type)
+        if isinstance(node, c_ast.FuncCall) and isinstance(node.name, c_ast.ID) and node.name.name == "__va_arg":
+            if node.args and len(node.args.exprs) == 2 and isinstance(node.args.exprs[1], c_ast.Cast):
+                return self.ctype(node.args.exprs[1].to_type)
         if isinstance(node, c_ast.UnaryOp):
             t = self.expr_type(node.expr)
             if t and node.op == "&":
@@ -1071,7 +1116,7 @@ def audit(units: list[Unit], root: Path = ROOT, names: set[str] | None = None) -
                 continue
             if unit.source.suffix.lower() != ".c":
                 raise InterfaceError("expected a .c or .cpp translation unit")
-            prepared = prepare(preprocess(unit, root), unit.source)
+            prepared = prepare(normalize_va_args(preprocess(unit, root)), unit.source)
             tree = c_parser.CParser().parse(prepared.text, filename=source)
             analyzer = Analyzer(prepared, unit.source, root, names)
             analyzer.bind_annotations(tree)

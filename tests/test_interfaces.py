@@ -304,6 +304,79 @@ void local(void) {
         self.assert_checked(report)
         self.assertEqual(report["disagreements"], [])
 
+    def test_armcc_va_arg_type_operands_keep_declarations_and_policy(self):
+        self.add("a.c", """typedef struct { void *cursor; } va_list;
+typedef const char *Text;
+int func_00100000(int count, ...) {
+    va_list arguments, copy;
+    __va_start(arguments, count);
+    (void)(copy = arguments);
+    int value = __va_arg(/* argument */ arguments, int);
+    Text text = __va_arg(copy,
+                        Text);
+    __va_end(copy);
+    __va_end(arguments);
+    return value + *text;
+}
+__softfp int func_00100010(int value);
+""")
+        self.add("b.c", "__softfp int func_00100010(int value) { return value; }\n")
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertFalse(interfaces.failed(report))
+        self.assertEqual([(d["name"], d["kind"]) for d in report["policy"]],
+                         [("func_00100010", "inline-declaration")])
+        self.source("b.c", "__softfp int func_00100010(unsigned value) { return value; }\n")
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertTrue(interfaces.failed(report))
+        self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]],
+                         [("func_00100010", "declaration")])
+        self.assertTrue(any(site["source"] == "a.c" and site["line"] == 14
+                            for site in report["disagreements"][0]["sites"]))
+
+    def test_armcc_va_arg_retains_const_types_and_argument_writes(self):
+        self.add("a.c", """typedef struct { void *cursor; } va_list;
+const int data_00200000 = 0;
+void local(va_list *arguments) {
+    const char *text = "__va_arg(arguments, int)";
+    /* __va_arg(unbalanced comment */
+    *__va_arg(arguments[(0, 0)], const int *) = 1;
+    int value = __va_arg(arguments[data_00200000++], int);
+}
+""")
+        report = self.audit()
+        self.assert_checked(report)
+        self.assertTrue(interfaces.failed(report))
+        self.assertEqual(len(report["disagreements"]), 2)
+        self.assertTrue(all(d["kind"] == "const-write" for d in report["disagreements"]))
+        self.assertEqual({site["line"] for d in report["disagreements"] for site in d["sites"]}, {6, 7})
+        self.assertIn("data_00200000", {d["name"] for d in report["disagreements"]})
+
+    def test_malformed_armcc_va_arg_fails_closed(self):
+        for expression in ("__va_arg(ap)", "__va_arg(ap,)", "__va_arg(, int)",
+                           "__va_arg(ap, int, int)", "__va_arg(ap, int",
+                           "__va_arg(ap, this is not a type)"):
+            with self.subTest(expression=expression):
+                self.units.clear()
+                self.add("a.c", f"void local(int ap) {{ int value = {expression}; }}\n")
+                report = self.audit()
+                self.assertFalse(report["units"][0]["checked"])
+                self.assertEqual(len(report["unchecked"]), 1)
+                self.assertTrue(interfaces.failed(report, allow_unchecked_cpp=True))
+
+    def test_unparseable_varargs_c_keeps_cli_nonzero(self):
+        path = self.add("a.c", "void local(int ap) { int value = __va_arg(ap, int); this is not C; }\n")
+        output = self.root / "report.json"
+        with patch.object(interfaces, "preprocess", side_effect=lambda unit, root: unit.source.read_text(encoding="utf-8")):
+            with contextlib.redirect_stdout(io.StringIO()):
+                code = interfaces.main(["check", str(path), "--json", str(output), "--allow-unchecked-cpp"])
+        self.assertEqual(code, 1)
+        report = json.loads(output.read_text(encoding="utf-8"))
+        self.assertFalse(report["units"][0]["checked"])
+        self.assertEqual(len(report["unchecked"]), 1)
+        self.assertEqual(report["unchecked"][0]["kind"], "c")
+
     def test_softfp_is_retained_as_the_aapcs_function_abi(self):
         self.add("a.c", '__softfp float func_00100000(float value);\n')
         self.add("b.c", 'float func_00100000(float value) __attribute__((__pcs__("aapcs")));\n')
@@ -754,6 +827,38 @@ class ArmccIntegrationTest(unittest.TestCase):
             self.assertEqual(len(report["policy"]), 1)
             sites = report["disagreements"][0]["sites"]
             self.assertTrue(any(site["source"] == "include/shared.h" and site["line"] == 4 for site in sites))
+
+    @unittest.skipUnless(toolchain.armcc_exe(PROFILE.compiler).is_file(), "pinned ARMCC not installed")
+    def test_standard_varargs_usage_is_checked_and_disagreements_remain_errors(self):
+        with tempfile.TemporaryDirectory(prefix="interfaces-varargs-") as temp:
+            root = Path(temp)
+            a, b = root / "a.c", root / "b.c"
+            a.write_text("""#include <stdarg.h>
+int func_00100000(int count, ...) {
+    va_list arguments, copy;
+    va_start(arguments, count);
+    va_copy(copy, arguments);
+    int value = va_arg(arguments, int);
+    const char *text = va_arg(copy, const char *);
+    va_end(copy);
+    va_end(arguments);
+    return value + *text;
+}
+extern int func_00100010(int value);
+""", encoding="utf-8")
+            b.write_text("int func_00100010(int value) { return value; }\n", encoding="utf-8")
+            units = [interfaces.Unit(path, PROFILE) for path in (a, b)]
+            report = interfaces.audit(units, root, set())
+            self.assertEqual(report["unchecked"], [])
+            self.assertTrue(all(unit["checked"] for unit in report["units"]))
+            self.assertFalse(interfaces.failed(report))
+            b.write_text("int func_00100010(unsigned value) { return value; }\n", encoding="utf-8")
+            report = interfaces.audit(units, root, set())
+            self.assertEqual(report["unchecked"], [])
+            self.assertTrue(all(unit["checked"] for unit in report["units"]))
+            self.assertTrue(interfaces.failed(report))
+            self.assertEqual([(d["name"], d["kind"]) for d in report["disagreements"]],
+                             [("func_00100010", "declaration")])
 
     @unittest.skipUnless(toolchain.armcc_exe(PROFILE.compiler).is_file(), "pinned ARMCC not installed")
     def test_shared_extension_headers_compile_in_c_and_cpp_and_audit_in_c(self):
