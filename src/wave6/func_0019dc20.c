@@ -1,19 +1,4 @@
-#include "game/exp_heap.h"
-#include "game/runtime.h"
-struct HeapRange {
-    unsigned char *lower;
-    unsigned size;
-};
-
-struct HeapManager {
-    unsigned char reserved00[0x640];
-    struct HeapArena primary[3];
-    unsigned reserved760[2];
-    struct HeapRange ranges[3];
-    struct HeapArena extra[2];
-};
-
-extern struct HeapManager bss_004952f0;
+#include "game/heap_manager.h"
 extern struct HeapArena bss_00495930;
 extern struct HeapArena bss_00495990;
 extern struct HeapArena bss_004959f0;
