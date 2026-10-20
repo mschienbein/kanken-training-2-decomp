@@ -47,6 +47,8 @@ public:
 public: 
     virtual void MakeUniformDataSelf( DrawInfo* pDrawInfo, Drawer* pDrawer ) const;
 protected:
+    /* Retail Picture owns this prefix; Pane tail padding remains reusable. */
+    u8 m_ReservedD2[2];
     mutable bool m_IsTexCoordInited;
     mutable u32 m_UniformTexCoordNum;
     mutable math::VEC4 m_UniformTexCoords[TexMapMax * 2];
@@ -55,7 +57,7 @@ protected:
     virtual void DrawSelf(const DrawInfo& drawInfo);
     void Init(u8 texNum);
 
-protected:
+public:
     Material* m_pMaterial;
     ut::Color8 m_VtxColors[VERTEXCOLOR_MAX];
     internal::TexCoordAry m_TexCoordAry;
