@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "attempts": [
+    {
+      "run": "native-reader-r1",
+      "exit": 2,
+      "phase": "compiler",
+      "diagnostic_code": 35,
+      "reason": "Pinned nw/assert.h requires NW_RELEASE; no measurement was produced. The input was then changed to the established imported-source release configuration."
+    },
+    {
+      "run": "native-reader-r2",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave20/func_001f4cf8.cpp",
+        "--profile",
+        "game",
+        "--names",
+        "scratch/integrator/c009/reader-names-proposal-r1.json",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c009/native-reader-r2"
+      ],
+      "source_sha256": "8100060ef4e1b2417b04aaafe65927cea03e3159253726dfff2cac63c5f3dea8",
+      "exit": 0,
+      "stdout": "note: proposed names overlay scratch/integrator/c009/reader-names-proposal-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZNK2nw4font4Font17GetCharStrmReaderEw @ 0x1f4cf8 size 0x40/0x40\n",
+      "stderr": ""
+    }
+  ]
+}

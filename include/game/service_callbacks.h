@@ -41,7 +41,8 @@ struct ServiceCallbacks {
     ServiceNotifyCallback complete;
     ServiceNotifyCallback reserved_callback;
     ServiceNotifyCallback ready;
-    /* func_00115000 invokes both slots; the second is an indirect tail call. */
+    /* Original 00115000 invokes slots 13/14 with contexts[13]/contexts[14].
+     * The second invocation is an indirect tail exit, not an unobserved slot. */
     ServiceNotifyCallback before;
     ServiceNotifyCallback after;
     ServiceMessageCallback shutdown;

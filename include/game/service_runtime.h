@@ -1,25 +1,38 @@
 #ifndef GAME_SERVICE_RUNTIME_H
 #define GAME_SERVICE_RUNTIME_H
 
+#include "ctr/ipc.h"
 struct AudioDspParameterBlock;
 struct AudioDspReply;
 struct SignalState;
 struct StreamCriticalSection;
 struct StreamMutex;
+struct ResourceServiceEvent;
+struct ChannelWorkspace;
+struct ExtendedWorkspace;
+struct AudioChannel;
+
+#include <stdint.h>
+#include "game/result.h"
+
+
+
+
+
 
 #include "game/aux_effect.h"
 #include "game/stream_manager.h"
 #include "ctr/svc.h"
 #include "game/synchronization.h"
 typedef void (*LifecycleCallback)(void);
-struct ResourceServiceEvent;
 
 /* Callback pending and resource busy are distinct fields of this state object. */
+struct ServiceHandle { unsigned handle; };
 struct ResourceServiceState {
     unsigned char reserved00[2];
     unsigned char pending;
     unsigned char reserved03[5];
-    unsigned int initialized;
+    const struct ServiceHandle *initialized;
     unsigned int busy;
     unsigned char lock_storage[8];
     CtrHandle handle;
@@ -31,24 +44,33 @@ struct SharedPublicationState {
     unsigned char pending;
     unsigned char stopped;
     signed char shared_status;
-    unsigned char reserved05[3];
+    unsigned char ready;
+    unsigned char reserved06[2];
     struct SignalState event;
+};
+
+
+struct WorkspacePair {
+    struct ChannelWorkspace *channels;
+    struct ExtendedWorkspace *extended;
 };
 struct ServiceOutput {
     unsigned char active;
-    unsigned char reserved01[2];
+    unsigned char enabled;
+    unsigned char output_mode;
     unsigned char flag03;
-    unsigned reserved04;
+    float first_gain;
     float volume;
-    unsigned char reserved0c[8];
+    float channels[2];
     AuxCallback callbacks[2];
     void *contexts[2];
-    unsigned char reserved24[2];
+    unsigned char flag24, flag25;
     signed char shared_status;
-    unsigned char reserved27[9];
+    unsigned char reserved27;
+    float scale28, scale2c;
     int consumed_samples;
-    unsigned char reserved34[0x18];
-    int selected;
+    struct WorkspacePair workspaces[2];
+    struct StreamMutex mutex;
 };
 struct ServiceWorker {
     long long elapsed;
@@ -99,7 +121,7 @@ struct HandleManager {
     unsigned char reserved1c[0x18dc - 0x1c];
     struct AudioChannel *channels[24];
 };
-struct AudioChannel;
+
 struct SharedConfiguration {
     unsigned char reserved00[0xc0];
     signed char shared_status;
@@ -149,6 +171,32 @@ extern void func_001521dc(struct HandleManager *manager, struct AudioChannel *ha
 extern "C" {
 #endif
 extern void func_00180558(const struct ServiceOutput *state, int index, AuxCallback *first, void **second);
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+
+
+
+extern "C" {
+extern Result func_00145e84(uint16_t flags);
+extern Result func_00145eb0(unsigned int *output);
+extern Result func_00148014(uint16_t flags);
+Result func_00145e08(unsigned short id, unsigned char *value);
+Result func_00146008(unsigned short id, unsigned short *value);
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_00195ea4(struct HandleManager *state);
+extern void func_00146070(struct ServiceOutput *state);
 #ifdef __cplusplus
 }
 #endif

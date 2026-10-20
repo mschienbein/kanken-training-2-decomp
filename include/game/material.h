@@ -55,6 +55,14 @@ struct ResourceArray {
     unsigned int state;
 };
 
+/* The same 28-byte record is queried for metadata and releases its first handle. */
+struct ResourceRecord {
+    unsigned present;
+    unsigned reserved04[2];
+    unsigned info[3];
+    int format;
+};
+
 struct ResourceDimensions {
     void *resource;
     int width;

@@ -9,6 +9,6 @@ int func_0014a98c(unsigned width, unsigned height, struct HwrImage *image)
     source.option_a = 0;
     source.option_b = 0;
     result = func_0014c360(width, height, 1, 4, source);
-    data_00243818 = 0x1fff;
+    data_00243818.mode = 0x1fff;
     return result;
 }

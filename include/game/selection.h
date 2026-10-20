@@ -9,6 +9,7 @@ struct SelectionHintPanel;
 struct W8DisplaySet;
 
 #include "game/category_pattern.h"
+#include "game/w11_control.h"
 
 #include <stdint.h>
 
@@ -16,7 +17,8 @@ struct W8DisplaySet;
 struct SelectionState {
     unsigned char reserved00[0x4c];
     short selection4c;
-    unsigned char reserved4e[4];
+    short previous;                     /* 0x4e; also queried as limit kind */
+    short category;                     /* 0x50 */
     short selection;
     short mode;
     unsigned char reserved56[2];
@@ -156,7 +158,7 @@ extern int func_001dd44c(int category, int kind, int mode);
 extern int func_001dd61c(int category);
 extern void func_00190dc0(int category);
 extern int func_00171bf0(int category, int kind);
-extern int func_00173350(int sound);
+extern void func_00173350(int sound);
 extern void func_00173408(struct SelectionHintPanel *panel, int state);
 extern int func_00173608(void);
 extern void func_00173630(struct W6ListController *controller, int list, int resource);
@@ -167,7 +169,7 @@ extern void func_00173ef4(struct Screen *screen);
 extern void func_00173fb4(struct Screen *screen);
 extern int func_00174444(void);
 extern int func_00174470(void);
-extern void func_0017a034(struct Screen *screen, int index, int value);
+extern void func_0017a034(struct W11jVisualOwner *owner, int index, int value);
 extern void func_001a2a78(struct W6SelectionScreen *screen, int from_list);
 extern void func_001a2e6c(struct W6SelectionScreen *screen, int from_list);
 extern void func_001b472c(void *screen, int index);

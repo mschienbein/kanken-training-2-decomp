@@ -1,6 +1,7 @@
+#include "game/item_text.h"
 #include "game/archive.h"
 
-extern unsigned func_001f2b98(struct ArchiveIndex *index);
+
 
 unsigned func_001f2b90(struct ArchiveHandle *handle)
 {

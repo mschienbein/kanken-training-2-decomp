@@ -1,18 +1,12 @@
+#include "game/functions.h"
+#include "game/screen.h"
 #include "game/scheduler.h"
+#include "game/startup.h"
 
-struct TransitionState {
-    unsigned char reserved00[0x18];
-    int active;
-};
-extern struct TransitionState bss_00290c90;
-extern int func_0019efd0(void);
+
 extern void func_0012d18c(void);
-extern void func_00136104(void);
-extern void func_0019f338(int task, void (*callback)(void), unsigned priority);
-extern void func_00195b6c(int mode, void (*initialize)(void), void (*callback)(void),
-                         void (*complete)(void), int argument);
-extern void func_00190688(int task, void (*callback)(void));
-extern void func_00186944(int task, int wait);
+
+
 
 void func_0011f234(void)
 {

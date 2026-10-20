@@ -1,13 +1,8 @@
 #include "ctr/cp15.h"
 
-struct MainThreadRecord {
-    unsigned int state;
-    unsigned char *owner;
-};
-
-extern struct MainThreadRecord data_00242d78;
+#include "game/command_group.h"
 
 void func_0010bf74(void)
 {
-    data_00242d78.owner = ctrGetThreadLocalStorage();
+    data_00242d78.thread_local_storage = ctrGetThreadLocalStorage();
 }

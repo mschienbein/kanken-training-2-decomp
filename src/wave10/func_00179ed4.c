@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/character_panel.h"
 
 static int has_character(struct CharacterPanel *screen, int index)

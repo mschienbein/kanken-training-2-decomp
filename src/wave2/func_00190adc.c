@@ -1,4 +1,5 @@
-extern int func_0012f9fc(unsigned register_address, const void *source, unsigned size);
+#include "game/functions.h"
+
 
 int func_00190adc(unsigned register_address, const void *source, unsigned size)
 {

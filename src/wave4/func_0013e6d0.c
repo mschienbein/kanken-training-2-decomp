@@ -1,11 +1,6 @@
 #include "game/functions.h"
+#include "game/sdk_init.h"
 
-struct TranslationOffsets {
-    unsigned first;
-    unsigned second;
-};
-
-extern struct TranslationOffsets data_00243798;
 
 unsigned func_0013e6d0(unsigned address, unsigned size)
 {

@@ -1,0 +1,35 @@
+[
+  {
+    "function": "func_0010cc94",
+    "source": "src/wave18/func_0010cc94.cpp",
+    "preserved_source": "scratch/integrator/c009/deferred-contract/func_0010cc94.cpp",
+    "reason": "Native callee func_00113e78 is the accepted nw::font::ResFontBase C1/C2 constructor (licensed src/nw4c/font_ResFontBase_ctor.cpp), not an extern-C EntryObject constructor. The proposed EntryObject wrapper also redeclares canonical FontVTable data_00223d98 as unsigned[]. Its actual derived owner/vtable relation is not recovered; replacing the accepted constructor declaration, inventing a C ABI alias, or asserting it is canonical ResFont (whose configured ctor is 001db3ec) would be false. Preserve exact candidate privately; remove the shadow header and defer until native derived identity is established.",
+    "evidence": [
+      "src/nw4c/font_ResFontBase_ctor.cpp",
+      "include/nw/font/font_ResFont.h",
+      "config/names.json",
+      "scratch/integrator/c009/cpp-includes-r2.json"
+    ],
+    "original_source_at_git": "1cc9f60:src/wave18/func_0010cc94.cpp",
+    "original_source_sha256": "29024eb17edac0b304fbe49529c0d1d143d5026fc8e59e7d90a6a7ed1286609a",
+    "preserved_variant_sha256": "29024eb17edac0b304fbe49529c0d1d143d5026fc8e59e7d90a6a7ed1286609a",
+    "preserved_variant_note": "Pre-deferral integration variant, not an accepted implementation; original source remains available at the recorded Git object."
+  },
+  {
+    "function": "func_00203810",
+    "source": "src/large/func_00203810.cpp",
+    "preserved_source": "scratch/integrator/c009/deferred-contract/func_00203810.cpp",
+    "reason": "v9-r2 recheck was exercised (--show 0, exit 2) and exposed incompatible L045SceneN global/constructor/destructor declarations. Existing credited/new native lifecycle definitions such as 001e7470, 001ec14c and 001e7fdc take the concrete shared manager prefix, while other scene destructors take distinct extended owners; a common virtual-dispatch prefix does not establish those full constructor/destructor identities. The attempted SceneObject erasure was not accepted: all 42 constructor/destructor shadow prototypes and the initializer credit claim were removed. Completing this row requires a coherent per-global concrete owner/derived-object initialization model plus the changed v9-r2 extent match, not a C-linkage signature alias.",
+    "evidence": [
+      "scratch/integrator/c009/catalogue-rechecks.json",
+      "src/wave17/func_001e7470.cpp",
+      "src/wave17/func_001ec14c.cpp",
+      "src/wave17/func_001e7fdc.cpp",
+      "src/wave18/func_001ef7b4.cpp"
+    ],
+    "original_source_at_git": "1cc9f60:src/large/func_00203810.cpp",
+    "original_source_sha256": "8a3761aae6b8032dce25a2914074f533da2553069dbdd567ea8bd7d2d7448603",
+    "preserved_variant_sha256": "08c4e289e40e5dde7f5b7885482143febdb18bf21bdd1ba344a22c8dbfb4d9cb",
+    "preserved_variant_note": "Pre-deferral integration variant, not an accepted implementation; original source remains available at the recorded Git object."
+  }
+]

@@ -1,6 +1,7 @@
 #ifndef GAME_RUNTIME_H
 #define GAME_RUNTIME_H
 #include <stddef.h>
+#include "game/input.h"
 
 /* Process-wide helpers used across subsystems. */
 
@@ -10,16 +11,45 @@ typedef struct BufferState {
     unsigned int capacity;
 } BufferState;
 
+struct TaggedBufferState {
+    BufferState allocation;
+    unsigned state;
+};
+struct ExtendedBufferState {
+    BufferState allocation;
+    unsigned state;
+    unsigned first, second;
+};
+struct BufferOwner {
+    unsigned char reserved[0xc08];
+    void *buffer;
+    unsigned count, owned, state, active;
+};
+
 struct ByteWriter { unsigned char *data; unsigned position; };
 struct Allocation {
     void *pointer;
     unsigned int count;
 };
 
+/* The allocation and optional-value fields share the address-rooted owner. */
+struct OptionalAllocation {
+    struct Allocation allocation;
+    int value;
+    unsigned reserved0c;
+    unsigned state;
+};
+
 struct AllocationRecord {
     void *allocation;
     int count;
     int reserved[2];
+};
+
+struct AllocationRecordTable {
+    struct AllocationRecord records[8];
+    unsigned reserved80[2];
+    unsigned mode;
 };
 
 struct BitmapPool {
@@ -39,7 +69,7 @@ struct MotionKey {
     unsigned char reserved08[0x10];
 };
 struct MotionState {
-    int mode;
+    struct InputMode mode;
     unsigned key_flags;
     unsigned flags;
     float time;
@@ -82,10 +112,12 @@ extern void func_0016e924(struct MotionState *state, float delta);
 extern const struct MotionKey data_002188e8[4];
 extern unsigned char *func_00152d48(struct BitmapPool *pool);
 extern void func_0017e5f4(struct BitmapPool *pool, const void *element);
-extern BufferState bss_0049da8c;
-extern BufferState bss_0049cbc0;
+extern struct BufferOwner bss_002d4270;
+extern struct ExtendedBufferState bss_0049da8c;
+extern struct TaggedBufferState bss_0049cbc0;
 extern struct Allocation bss_0049cbb4;
-extern struct AllocationRecord bss_0049cb24[8];
+extern struct OptionalAllocation bss_002d2138;
+extern struct AllocationRecordTable bss_0049cb24;
 extern int data_0024223c;
 extern const char data_002232d5[];
 extern void *func_0019cff8(unsigned region);
@@ -104,7 +136,7 @@ extern void *func_00137150(void *object);      /* preserves the allocation point
 extern void func_001852f4(void *allocation);   /* releases a heap allocation */
 extern void *func_0018f7f0(void *object);      /* preserves the allocation pointer */
 extern void func_0019d6c4(unsigned result, unsigned instruction_address);
-extern void func_0019f568(void);               /* fatal-error / assertion handler */
+extern int func_0019f568(void);               /* fatal-error / assertion handler */
 extern void *func_001ef880(void *object);      /* array-element destroy callback */
 extern void *func_001ef884(void *object);      /* preserves the element pointer */
 extern void func_001ef888(void *allocation);   /* releases an array allocation */

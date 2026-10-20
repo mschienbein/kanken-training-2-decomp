@@ -1,19 +1,11 @@
-#include "game/result.h"
+#include "game/file_handle.h"
 
-struct Interface;
-
-struct InterfaceVTable {
-    unsigned char reserved[0x30];
-    void (*release)(Interface *);
-};
-
-struct Interface {
-    const InterfaceVTable *vtable;
-};
-
-extern "C" Result func_0018fdd4(Interface *object)
+/* [INFERENCE] Callers forward both aggregate words. The reserved word is unused
+ * by this release implementation and remains part of its caller contract. */
+extern "C" Result func_0018fdd4(FileHandle handle)
 {
     Result result;
+    Interface *object = handle.object;
     if (object != 0) {
         object->vtable->release(object);
         result = Result(0);

@@ -1,18 +1,9 @@
+#include "game/memory_arena.h"
 #include "ctr/svc.h"
 
-struct MemoryBlock {
-    struct MemoryBlock *next;
-    struct MemoryBlock *previous;
-    unsigned int address;
-    unsigned int size;
-    unsigned int reserved10;
-    CtrHandle handle;
-    unsigned char mapped;
-};
 
-extern void func_00148004(struct MemoryBlock *block);
 
-void func_00182198(struct MemoryBlock *block)
+void func_00182198(struct MappedMemoryBlock *block)
 {
     CtrHandle *handle;
     if (block->handle == 0)
@@ -22,7 +13,7 @@ void func_00182198(struct MemoryBlock *block)
             block->address = 0;
             block->size = 0;
         } else {
-            svcUnmapMemoryBlock(block->handle, block->address);
+            svcUnmapMemoryBlock(block->handle, (unsigned)block->address);
             func_00148004(block);
         }
     }

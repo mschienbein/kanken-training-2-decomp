@@ -1,12 +1,5 @@
-struct AnimationState {
-    unsigned char reserved00[0x44];
-    float start;
-    float finish;
-    unsigned char reserved4c[0x0c];
-    float lower;
-    float upper;
-    float current;
-};
+#include "game/controller.h"
+#include "game/w11_control.h"
 
 int func_0017a210(const struct AnimationState *state)
 {

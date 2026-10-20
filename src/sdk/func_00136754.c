@@ -1,20 +1,8 @@
+#include "game/memory_arena.h"
 #include "ctr/svc.h"
 
-struct MappedMemoryBlock {
-    struct MappedMemoryBlock *next;
-    struct MappedMemoryBlock *previous;
-    void *address;
-    unsigned int size;
-    unsigned char read_only;
-    unsigned char reserved[3];
-    CtrHandle handle;
-    unsigned char mapped;
-};
-
 struct MemoryArena;
-extern struct MemoryArena bss_004b51d0;
-extern void *func_001906c8(struct MemoryArena *arena, struct MappedMemoryBlock *block,
-                           unsigned int size, unsigned int alignment);
+
 
 static __forceinline void publishMapping(CtrResult result, struct MappedMemoryBlock *block)
 {

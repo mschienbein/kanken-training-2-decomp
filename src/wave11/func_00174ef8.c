@@ -1,6 +1,6 @@
 #include "game/command_state.h"
-struct ParameterValue *func_00174ef8(struct ParameterValue *parameter)
+struct VectorParameter *func_00174ef8(struct VectorParameter *parameter)
 {
-    parameter->value = -1;
+    parameter->kind = -1;
     return parameter;
 }

@@ -1,24 +1,5 @@
-#include "game/screen.h"
+#include "game/messages.h"
 
-struct MessageEntry {
-    struct DisplayObject *object;
-    unsigned short *output;
-    float width;
-    float spacing;
-    float x, y;
-    float animation_x, animation_y;
-};
-struct MessageLayout {
-    struct MessageEntry *entries[3];
-    float x, y;
-    unsigned char reserved14[0xc];
-    int lines;
-    unsigned char reserved24[4];
-    unsigned short *text;
-};
-extern void func_001ad3c8(struct MessageLayout *layout, int index,
-                          const unsigned short *left, const unsigned short *right);
-extern void func_001ad5a8(struct MessageLayout *layout, int index);
 
 static void set_animation(struct MessageEntry *entry, float x, float y)
 {

@@ -1,8 +1,7 @@
-#include "game/screen.h"
+#include "game/messages.h"
 
-extern void func_00170dc0(struct DisplayHandle **handles, int index, int enabled);
 
-void func_00170db4(struct DisplayHandle **handles, int enabled)
+void func_00170db4(struct MessageLayout *layout, int enabled)
 {
-    func_00170dc0(handles, 0, enabled);
+    func_00170dc0(layout, 0, enabled);
 }

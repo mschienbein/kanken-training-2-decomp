@@ -1,3 +1,4 @@
+#include "game/scene_lifecycle.h"
 #include "game/screen.h"
 
 void func_00176df4(void)

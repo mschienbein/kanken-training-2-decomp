@@ -1,6 +1,7 @@
+#include "game/service_state.h"
 #include "game/runtime.h"
 extern void *bss_00497574;
-extern void func_0010c1c8(void);
+
 
 void func_00102cb0(void)
 {

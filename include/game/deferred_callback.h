@@ -31,4 +31,16 @@ extern void func_00177b10(CallbackTarget *object, MemberCallback method);
 }
 #endif
 
+
+#ifdef __cplusplus
+/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+
+
+
+
+extern "C" {
+extern MemberCallback data_0023efb4;
+}
+#endif
+
 #endif

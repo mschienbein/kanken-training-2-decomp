@@ -8,11 +8,19 @@ struct ShaderConfiguration {
     unsigned char initialized;
     unsigned char reserveded[0x43];
 };
+struct ShaderRegistry {
+    unsigned programs[3];
+    unsigned shaders[3];
+};
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern void func_00116f40(struct ShaderConfiguration *state, const void *binary, unsigned size);
+extern struct ShaderRegistry bss_002d4250;
+extern void func_0019b3b0(unsigned program, unsigned shader);
+extern void func_0019b344(unsigned program);
 extern void *func_00191968(unsigned size, unsigned char alignment);
+extern void func_0018f0dc(int count, const unsigned *handles);
 extern unsigned func_0019b13c(void);
 extern unsigned func_0019b01c(unsigned kind);
 extern void func_00199e10(int count, const unsigned *shaders, unsigned format,

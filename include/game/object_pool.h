@@ -13,6 +13,7 @@ struct SizedBufferHandle;
 
 #include "game/pool_list.h"
 #include "game/runtime.h"
+#include "game/property_descriptor.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct ObjectPool {
@@ -44,7 +45,6 @@ extern int func_00190fcc(const struct DateTime *time);
 extern unsigned char func_001efb68(const struct DateTime *time);
 extern int func_001efb00(const struct DateTime *time);
 extern void func_0018d074(int *year_out, int *month_out, int *day_out, int days);
-extern const struct NameTable *bss_00290e2c[];
 extern void func_001c229c(struct CalendarState *calendar, int mode, int year, int month);
 extern unsigned int func_00181384(const struct ObjectPool *pool, unsigned int count);
 extern struct PoolLink *func_00191144(struct ObjectPool *pool, struct PoolLink *node);

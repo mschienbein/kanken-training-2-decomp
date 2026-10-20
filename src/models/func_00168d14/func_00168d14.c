@@ -2,6 +2,7 @@
 #include "game/w11_control.h"
 #include "game/messages.h"
 #include "game/screen_operations.h"
+#include "game/controller.h"
 /* [INFERENCE] The minimum setter may have been armlink-inlined and removed;
  * the inferred field operation does not establish historical helper identity. */
 
@@ -17,10 +18,6 @@ struct DetailController {
     struct Screen *indicators;
 };
 
-extern void func_0017a164(struct Screen *screen, int state);
-extern int func_00179ed4(struct CharacterPanel *menu, int active);
-extern void func_001b5ddc(struct WidgetController *menu);
-extern int func_0016dc50(struct CharacterPanel *menu, int selected);
 
 
 

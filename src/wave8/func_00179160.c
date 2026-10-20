@@ -7,8 +7,8 @@ void func_00179160(struct W8DisplaySet *set, int index, float x, float y)
     struct DisplayObject *object;
     if (handle == 0)
         return;
-    handle->scale_x = x;
-    handle->scale_y = y;
+    handle->scale.x = x;
+    handle->scale.y = y;
     object = handle->object;
     /* ORIGINAL BUG: a non-null handle is assumed to contain a non-null object. */
     object->scale[0] = x;

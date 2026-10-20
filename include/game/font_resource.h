@@ -22,6 +22,32 @@ struct ValuePresence;
 struct VramAllocator;
 struct VramNode;
 struct WordProperty;
+struct FontManager;
+
+#include <stddef.h>
+#include "game/pool_list.h"
+#include "game/font.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #include "game/runtime.h"
 
@@ -111,7 +137,8 @@ struct FontInformation {
     signed char field01;
     unsigned char reserved02[5];
     unsigned char field07;
-    unsigned char reserved08[0x0c];
+    struct FontGlyphInfo *glyphs;
+    unsigned char reserved0c[8];
     unsigned char field14;
     unsigned char field15;
     unsigned char field16;
@@ -157,6 +184,32 @@ extern int func_001f4cd4(const struct FontResourceReader *reader);
 extern int func_001f4ce0(const struct FontResourceReader *reader);
 extern int func_001f4cec(const struct FontResourceReader *reader);
 #ifdef __cplusplus
+}
+#endif
+
+
+#include "game/render_state.h"
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+struct FontManager {
+    const void *vtable;
+    unsigned char reserved04[0x20];
+    PoolList fonts;
+    PoolList textures;
+};
+
+extern "C" {
+extern unsigned char data_00242f8c;
+extern void func_0018f0dc(int count, const unsigned *handles);
+extern const unsigned data_00224128[];
+extern PoolList *func_001cc4cc(PoolList *list);
+extern PoolList *func_001cc12c(PoolList *list);
+
+extern void func_001daea4(FontResource *font);
+extern void func_001dae08(FontResource *font);
+extern FontResource *func_001daf74(FontResource *font);
+extern const FontVTable data_00224d30;
 }
 #endif
 

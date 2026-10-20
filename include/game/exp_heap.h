@@ -1,5 +1,8 @@
 #ifndef GAME_EXP_HEAP_H
 #define GAME_EXP_HEAP_H
+
+#include <stddef.h>
+#include "game/runtime.h"
 #include <stdarg.h>
 
 struct AllocatorInterface;
@@ -46,6 +49,17 @@ struct ManagedExpHeap {
     unsigned allocations;
 };
 struct LockedExpHeap { struct ManagedExpHeap base; struct StreamMutex mutex; };
+struct AllocatorLink {
+    struct AllocatorLink *previous;
+    struct AllocatorLink *next;
+};
+struct AllocatorBase {
+    const unsigned *vtable;
+    unsigned char reserved04[8];
+    unsigned outstanding;
+    struct AllocatorLink *children;
+    unsigned reserved14;
+};
 struct HeapArena {
     struct ManagedExpHeap base;
     unsigned char *lower;
@@ -102,6 +116,7 @@ extern struct ResourceEntry *func_0015d798(struct ResourceEntry *entry, int scre
 extern void func_00121a88(struct ExpHeap *heap, void *allocation);
 extern struct HeapArena bss_00495ad0;
 extern void func_00193a6c(struct ManagedExpHeap *heap, void *allocation);
+extern struct AllocatorBase *func_00183234(struct AllocatorBase *allocator);
 extern struct RuntimeTypeInfo data_00242da8;
 extern struct RuntimeTypeInfo data_00242e2c;
 extern struct RuntimeTypeInfo data_00243494;
@@ -122,6 +137,19 @@ extern struct RuntimeTypeInfo *func_001f017c(const struct RuntimeTypedObject *ob
 extern struct RuntimeTypeInfo *func_001f0188(const struct RuntimeTypedObject *object);
 extern struct RuntimeTypeInfo *func_001f0194(const struct RuntimeTypedObject *object);
 #ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+
+
+
+
+extern "C" {
+extern const unsigned data_00223c98[];
+void func_00121bc4(struct ExpHeap *heap);
 }
 #endif
 

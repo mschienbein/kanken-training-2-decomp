@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "game/service_state.h"
 
 /* func_00122b30 supplies the registered context. [INFERENCE] Opaque pointee type. */

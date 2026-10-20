@@ -1,12 +1,5 @@
+#include "game/functions.h"
 #include "game/runtime.h"
-typedef struct BufferOwner {
-    unsigned char reserved[0xc08];
-    void *buffer;
-    unsigned int count;
-    unsigned int owned;
-} BufferOwner;
-
-extern BufferOwner bss_002d4270;
 
 void func_001360a4(void)
 {

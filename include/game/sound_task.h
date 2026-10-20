@@ -10,7 +10,7 @@ struct SoundPlaybackState;
 struct SoundPlayerBase;
 struct SoundPoolStorage;
 struct SoundRegularInstance;
-union SoundSemaphore;
+union SynchronizationStorage;
 struct SoundShortBufferDescriptor;
 struct SoundSmallDescriptor;
 struct SoundStreamPlayer;
@@ -28,15 +28,11 @@ struct TimingState;
 #include "game/synchronization.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
-union SoundSemaphore {
-    struct StreamSemaphore semaphore;
-    unsigned words[2];
-    struct SignalState signal;
-};
+
 
 struct SoundPlayerBase {
     const void *vtable;
-    union SoundSemaphore state;
+    union SynchronizationStorage state;
     unsigned char flags[5];
     unsigned char reserved11[3];
     float volume;
@@ -145,7 +141,7 @@ struct SoundRegularInstance {
 struct SoundTaskBase {
     const void *vtable;
     struct PoolLink link;
-    union SoundSemaphore state;
+    union SynchronizationStorage state;
     unsigned char active;
     unsigned char reserved15[3];
     void *owner;

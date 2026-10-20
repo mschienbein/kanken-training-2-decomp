@@ -14,7 +14,7 @@ struct DisplayState {
 
 inline void DisplayHandle::set_active(int active)
 {
-    DisplayObject *display = object;
+    DisplayObject *display = object ? &object->base : 0;
     if (display == 0)
         return;
     switch (func_0017a9a0(display, 0)) {
@@ -42,7 +42,7 @@ extern "C" void func_00179298(DisplayState *state, int active,
         state->active = 1;
         length = func_0017adc4(text);
         state->length = length;
-        func_0017a968(handle->object, bss_00246b48.table, length, 0);
+        func_0017a968(&handle->object->base, bss_00246b48.table, length, 0);
         handle->set_active(1);
     } else {
         state->active = 0;

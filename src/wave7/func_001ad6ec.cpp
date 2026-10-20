@@ -1,11 +1,11 @@
-#include "game/screen.h"
+#include "game/messages.h"
 
 
-void func_001ad6ec(struct WidgetContainer *container, WidgetPosition position)
+void func_001ad6ec(struct MessageLayout *layout, WidgetPosition position)
 {
-    struct DisplayHandle *handle = container->handle;
-    if (handle != 0 && handle->object != 0) {
-        handle->x = position.x;
-        handle->y = position.y;
+    struct MessageEntry *entry = layout->entries[2];
+    if (entry != 0 && entry->object != 0) {
+        entry->animation_x = position.x;
+        entry->animation_y = position.y;
     }
 }

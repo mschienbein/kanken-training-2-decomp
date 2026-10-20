@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "function": "func_001c20e8",
+  "authority": "Main ruling delivered directly to FinishC009b",
+  "decision": "RESTORE_AUTHOR_MATCH_WITH_QUALIFICATION",
+  "reason": "The original machine code contains the counted-loop backedge and executes the no-memory-effect loop returning its final count. Faithfully reproducing observed original control flow is not an absent construct added to force codegen. The simplified return10 emits8bytes and cannot credit the20-byte original.",
+  "conditions": [
+    "Plain natural counted loop; no volatile, asm, artificial uses, register forcing or barriers.",
+    "Visible INFERENCE note: purpose unknown (delay or leftover loop), compiler retains it.",
+    "Pre-review/review function row QUALIFIED for explicit independent adjudication.",
+    "Preserve interface-deferrals-r3.json as historical evidence of both forms and the integrator's superseded policy concern."
+  ],
+  "original_source": "scratch/authors/w18d/src/func_001c20e8.cpp",
+  "original_receipt": "scratch/authors/w18d/match/func_001c20e8/final-game/func_001c20e8.result.json",
+  "original_safe_CFG_evidence": "scratch/integrator/c009/mismatch-contract-facts-r1.json",
+  "implementation_status": "Restored after G3-r4 completed, native destination MATCH20/20 exit0; candidate and dry ledger re-admitted. Historical deferral-r3 remains preserved, not current. Mandatory QUALIFIED pre-review/review row is in pre-review-required-qualifications-r1.json."
+}

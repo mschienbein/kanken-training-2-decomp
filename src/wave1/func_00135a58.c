@@ -1,5 +1,5 @@
+#include "game/functions.h"
 #include "game/graphics_resources.h"
-
 
 void func_00135a58(void)
 {

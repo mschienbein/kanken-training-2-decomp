@@ -1,29 +1,9 @@
+#include "game/drawing_system.h"
 #include "game/render_state.h"
 #include "game/runtime.h"
 
 struct RenderTarget;
 
-struct RenderTargetVTable {
-    void (*reserved[4])();
-    const unsigned *(*handle)(RenderTarget *target);
-};
-
-struct RenderTarget {
-    const RenderTargetVTable *vtable;
-};
-
-struct DrawingSystem {
-    unsigned char reserved00[4];
-    unsigned char initialized;
-    unsigned char reserved05[7];
-    unsigned mode;
-    unsigned ready;
-    unsigned char reserved14[0x90];
-    RenderTarget *target;
-};
-
-extern DrawingSystem bss_002d3dd0;
-extern "C" void func_0011d330(unsigned flags);
 
 extern "C" void func_0019f170(unsigned red, unsigned green, unsigned blue)
 {

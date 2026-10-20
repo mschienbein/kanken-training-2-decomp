@@ -1,7 +1,6 @@
 #include "game/screen.h"
 
 
-extern void func_0015e4a8(struct DisplaySurface *surface, float x, float y);
 
 void func_0015e49c(struct DisplayData *object, float x, float y)
 {

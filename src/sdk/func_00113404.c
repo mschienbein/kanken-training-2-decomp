@@ -1,3 +1,4 @@
+#include "game/functions.h"
 #include "ctr/cp15.h"
 #include "ctr/svc.h"
 

@@ -138,6 +138,7 @@ extern unsigned int func_001363b4(unsigned char *out, unsigned char mode,
                          unsigned long long id);
 extern unsigned int func_00136408(unsigned char *out);
 extern CtrResult func_001365f8(const CtrHandle *session, unsigned int *out);
+extern CtrResult func_00137c5c(const CtrHandle *session);
 extern unsigned func_00137070(unsigned *out);
 extern CtrResult func_001380c8(unsigned int value0, unsigned int value1,
                          unsigned int value2, unsigned int value3, unsigned char *out);

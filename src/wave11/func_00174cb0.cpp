@@ -1,8 +1,8 @@
 #include "game/command_state.h"
-W11HandleC *func_00174cb0(W11HandleC *object)
+ArrayOwner *func_00174cb0(ArrayOwner *object)
 {
-    object->id = -1;
-    object->first = 0;
-    object->second = 0;
+    object->index = -1;
+    object->count = 0;
+    object->elements = 0;
     return object;
 }

@@ -73,8 +73,14 @@ struct AuxEffectNode {
 };
 
 struct AuxFrameState {
-    unsigned char reserved00[0x1d];
+    unsigned char reserved00[0x1c];
+    unsigned char active;
     unsigned char frame;
+};
+
+struct AudioReadiness {
+    unsigned char reserved00[0x0e];
+    unsigned char ready, generation;
 };
 
 #ifdef __cplusplus

@@ -1,3 +1,4 @@
+#include "game/functions.h"
 struct MemorySpan {
     unsigned base;
     unsigned size;

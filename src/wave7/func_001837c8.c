@@ -1,8 +1,6 @@
 #include "game/stream_manager.h"
+#include "game/exp_heap.h"
 
-struct StreamLockGuard {
-    struct StreamMutex *mutex;
-};
 
 static __forceinline void acquire_guard(struct StreamLockGuard *guard,
                                        struct StreamMutex *mutex)

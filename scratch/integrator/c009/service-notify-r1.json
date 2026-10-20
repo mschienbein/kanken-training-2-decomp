@@ -1,0 +1,212 @@
+{
+  "facts": [
+    {
+      "function": "0x00115000",
+      "stores": [],
+      "calls": [
+        {
+          "site": "0x00115008",
+          "target": "0x00122ad0",
+          "target_pointer": null,
+          "core_inputs": {
+            "r0": {
+              "function": "0x00115000",
+              "register": "r0"
+            },
+            "r1": {
+              "function": "0x00115000",
+              "register": "r1"
+            },
+            "r2": {
+              "function": "0x00115000",
+              "register": "r2"
+            },
+            "r3": {
+              "function": "0x00115000",
+              "register": "r3"
+            }
+          }
+        },
+        {
+          "site": "0x0011501c",
+          "target": null,
+          "target_pointer": {
+            "loaded_from": {
+              "address": "0x00242aac"
+            }
+          },
+          "core_inputs": {
+            "r1": {
+              "loaded_from": {
+                "address": "0x00242aac"
+              }
+            }
+          }
+        }
+      ],
+      "sites": [
+        {
+          "caller": "0x00115000",
+          "site": "0x00115008",
+          "kind": "direct",
+          "target": 1190608,
+          "arguments": [],
+          "results": [],
+          "target_register": null
+        },
+        {
+          "caller": "0x00115000",
+          "site": "0x0011501c",
+          "kind": "indirect",
+          "target": null,
+          "arguments": [],
+          "results": [],
+          "target_register": "r1"
+        }
+      ],
+      "enhanced": {
+        "calls": [
+          {
+            "site": "0x00115008",
+            "target": "0x00122ad0",
+            "pointer": {
+              "kind": "unknown"
+            },
+            "registers": {
+              "r0": {
+                "parameter_of": "func_00115000",
+                "register": "r0"
+              },
+              "r1": {
+                "parameter_of": "func_00115000",
+                "register": "r1"
+              },
+              "r2": {
+                "parameter_of": "func_00115000",
+                "register": "r2"
+              },
+              "r3": {
+                "parameter_of": "func_00115000",
+                "register": "r3"
+              },
+              "s0": {
+                "parameter_of": "func_00115000",
+                "register": "s0"
+              },
+              "s1": {
+                "parameter_of": "func_00115000",
+                "register": "s1"
+              },
+              "s2": {
+                "parameter_of": "func_00115000",
+                "register": "s2"
+              },
+              "s3": {
+                "parameter_of": "func_00115000",
+                "register": "s3"
+              },
+              "s4": {
+                "parameter_of": "func_00115000",
+                "register": "s4"
+              },
+              "s5": {
+                "parameter_of": "func_00115000",
+                "register": "s5"
+              },
+              "s6": {
+                "parameter_of": "func_00115000",
+                "register": "s6"
+              },
+              "s7": {
+                "parameter_of": "func_00115000",
+                "register": "s7"
+              },
+              "s8": {
+                "parameter_of": "func_00115000",
+                "register": "s8"
+              },
+              "s9": {
+                "parameter_of": "func_00115000",
+                "register": "s9"
+              },
+              "s10": {
+                "parameter_of": "func_00115000",
+                "register": "s10"
+              },
+              "s11": {
+                "parameter_of": "func_00115000",
+                "register": "s11"
+              },
+              "s12": {
+                "parameter_of": "func_00115000",
+                "register": "s12"
+              },
+              "s13": {
+                "parameter_of": "func_00115000",
+                "register": "s13"
+              },
+              "s14": {
+                "parameter_of": "func_00115000",
+                "register": "s14"
+              },
+              "s15": {
+                "parameter_of": "func_00115000",
+                "register": "s15"
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x0011501c",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "address_or_scalar": "0x242aac"
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x242aec"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x242aac"
+                }
+              }
+            },
+            "stack": {}
+          },
+          {
+            "site": "0x00115034",
+            "target": null,
+            "pointer": {
+              "loaded_from": {
+                "address_or_scalar": "0x242ab0"
+              }
+            },
+            "registers": {
+              "r0": {
+                "loaded_from": {
+                  "address_or_scalar": "0x242af0"
+                }
+              },
+              "r1": {
+                "loaded_from": {
+                  "address_or_scalar": "0x242ab0"
+                }
+              }
+            },
+            "stack": {}
+          }
+        ],
+        "storage": []
+      }
+    }
+  ],
+  "coverage": "Emit scoped original address/register/storage facts, never instruction text or bytes.",
+  "acyclic_only": false,
+  "reused_helper": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py",
+  "reused_helper_sha256": "9c2ba58f31b1701cc81c6593682e6e1293484e85c7a8225550d9946526a1aadd"
+}

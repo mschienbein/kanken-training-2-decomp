@@ -1,0 +1,91 @@
+{
+  "basis": "User-authorized defer-with-recorded-reason during whole-ledger G3 remediation; no accepted identity is removed.",
+  "predecessor_report": "scratch/integrator/c009/interface-deferrals-r1.json",
+  "rows": [
+    {
+      "source": "src/wave17/func_0015e5d4.c",
+      "profile": "game",
+      "functions": [
+        "func_0015e5d4"
+      ],
+      "author": "c009-wave17",
+      "function": "func_0015e5d4",
+      "target_size": 28,
+      "reason": "The new definition takes DisplayPaneLink* and accesses a material-bearing DisplayPane. Accepted 0015e5c4 forwards DisplayPart.surface, whose canonical C++ owner is DisplaySurface containing SurfaceTextState*. These are different concrete pointer/subobject contracts, not interchangeable names for a proven base. A cast, alias or fabricated common owner is refused; both independent surface wrappers remain in scope with explicit partial-view qualifications.",
+      "evidence": [
+        "scratch/integrator/c009/interfaces-remediation-r1.json",
+        "src/wave10/func_0015e5c4.c",
+        "include/game/screen.h"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_0015e5d4.c",
+      "integration_source_sha256": "13b1b9e079f6160a93baad94d54404b7dd76b574e8e154e0ac78cbb95c25561d",
+      "author_source": "scratch/authors/w17a/src/func_0015e5d4.c",
+      "author_receipt": "scratch/authors/w17a/match/func_0015e5d4/final/func_0015e5d4.result.json",
+      "author_receipt_sha256": "0c9bb085c06268a0a9c1d7d71947c45fe3dfc836b8aea9419144d8d878c2b1d4",
+      "author_receipt_source_sha256": "13b1b9e079f6160a93baad94d54404b7dd76b574e8e154e0ac78cbb95c25561d"
+    },
+    {
+      "source": "src/wave19/func_00190d0c.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d0c"
+      ],
+      "author": "c009-wave19",
+      "function": "func_00190d0c",
+      "target_size": 92,
+      "reason": "Valid standard-C variadic source uses ARMCC va_arg(values,int), whose compiler-preprocessed type-argument builtin is not parsed by the frozen G3 C parser. The saved whole-ledger audit marks this C unit unchecked (parse before int), which --allow-unchecked-cpp does not waive. No hand-written va_list representation, parser-suppression macro, C++ waiver conversion, or frozen tooling change is introduced merely to evade that failure.",
+      "evidence": [
+        "scratch/integrator/c009/interfaces-remediation-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_00190d0c.c",
+      "integration_source_sha256": "eb8a8878d734d2445d879c37287b357718590a68ecdbeee085e3cc05797856af",
+      "author_source": "scratch/authors/w19i/src/func_00190d0c.c",
+      "author_receipt": "scratch/authors/w19i/match/final/func_00190d0c/func_00190d0c.result.json",
+      "author_receipt_sha256": "879e3b76d0f2fafc153693b298491c8220d596bcf91cc9d0b26aafa2f1024134",
+      "author_receipt_source_sha256": "bc94ea8e306948e140741f39586bff8ce2d0ae27a46eeef623dac34e1df6fd11"
+    },
+    {
+      "source": "src/wave19/func_00190d68.c",
+      "profile": "game",
+      "functions": [
+        "func_00190d68"
+      ],
+      "author": "c009-wave19",
+      "function": "func_00190d68",
+      "target_size": 88,
+      "reason": "Valid standard-C variadic source uses ARMCC va_arg(values,int), whose compiler-preprocessed type-argument builtin is not parsed by the frozen G3 C parser. The saved whole-ledger audit marks this C unit unchecked (parse before int), which --allow-unchecked-cpp does not waive. No hand-written va_list representation, parser-suppression macro, C++ waiver conversion, or frozen tooling change is introduced merely to evade that failure.",
+      "evidence": [
+        "scratch/integrator/c009/interfaces-remediation-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_00190d68.c",
+      "integration_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29",
+      "author_source": "scratch/authors/w19i/src/func_00190d68.c",
+      "author_receipt": "scratch/authors/w19i/match/final/func_00190d68/func_00190d68.result.json",
+      "author_receipt_sha256": "64a079762991fbd07853a49c3da434b0275014fb7e07433533c5f1f3eb6994a6",
+      "author_receipt_source_sha256": "d55a28bf4016bde0d66f63ecffa0c2b78bfc2cfbe153a7d7b15a66049c48af29"
+    },
+    {
+      "source": "src/wave20/func_0013156c.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_0013156c"
+      ],
+      "author": "w20b",
+      "function": "func_0013156c",
+      "target_size": 64,
+      "reason": "The reconstructed mutable CodeUnitReader/EncodingSource classes duplicate the physical native Font/CharStrmReader family without establishing its real API. The frozen native factory returns const CharStrmReader by value, takes a const Font receiver and retains an unused wchar_t dummy; the same-address native definition now MATCHes at 001f4cf8. The separate 0013156c factory uses method table 0021c5e0 under the middleware profile. Its distinct version/namespace, result/receiver and unused-input contracts remain unresolved. Binding the already-owned native member name at a second address, assuming another overload, or retaining a shadow reader is refused. Original collected MATCH/source/receipt evidence is preserved; this row is withdrawn from current credit.",
+      "evidence": [
+        "include/nw/font/font_Font.h",
+        "include/nw/font/font_CharStrmReader.h",
+        "scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json",
+        "scratch/integrator/c009/collection-r1.json"
+      ],
+      "preserved_source": "scratch/integrator/c009/deferred-contract/func_0013156c.cpp",
+      "integration_source_sha256": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b",
+      "author_source": "scratch/authors/w20b/src/func_0013156c.cpp",
+      "author_receipt": "scratch/authors/w20b/match/func_0013156c/final/func_0013156c.result.json",
+      "author_receipt_sha256": "29e4d3ec2d8df1d367328163c4801b3bc1dbeacd05e3bf31b65e8ca045856e30",
+      "author_receipt_source_sha256": "2aacba33e8192b88a317ac137d0d8bf41925fc6ee1e4821b8216b1d0e814c7f7"
+    }
+  ]
+}
