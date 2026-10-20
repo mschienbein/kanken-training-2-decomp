@@ -76,9 +76,8 @@ void func_001b9f18(struct TrainingScreen *screen);
 extern const MemberCallback data_002184b0;
 void func_0016d6dc(struct TrainingScreen *screen, int enabled);
 void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);
-void func_00177520(struct MessageLayout *layout);
-void func_00177b84(struct MessageLayout *layout, int enabled);
 }
+#endif
 struct L041Dialog;
 struct L041HandwritingPanel;
 struct L041PromptTable;
@@ -88,10 +87,6 @@ union L041InitializeControls {
     struct AnimationOwner *animation;
     struct InputOwner *input;
     struct W6ListController *list;
-};
-union L041InitializeMessage {
-    struct MessageLayout *layout;
-    struct DisplayHandle **handles;
 };
 union L041InitializeSelection {
     struct SelectionList *list;
@@ -114,7 +109,7 @@ struct L041InitializeScreen {
     struct R41169OptionalPanel *optional_panel;
     struct AnimationState *scroll;
     unsigned char reserved70[8];
-    union L041InitializeMessage message;
+    struct MessageLayout *message;
     struct WidgetController *answer_panel;
     struct L041HandwritingPanel *handwriting;
     struct Screen *action_panel;
@@ -157,6 +152,7 @@ struct L041InitializeScreen {
     unsigned char reserved3ee[2];
     int identifier;
 };
+#ifdef __cplusplus
 extern "C" {
 extern const MemberCallback data_00218718;
 extern void func_001dc170(int value);
@@ -166,7 +162,6 @@ extern void func_001dbc84(void);
 extern void func_001e3050(struct L041InitializeScreen *screen);
 extern int func_00173620(void);
 extern void func_00176c6c(struct MessageLayout *layout);
-extern void func_00170db4(struct DisplayHandle **handles, int enabled);
 extern void func_00176ae8(struct Screen *screen, int first, int second);
 extern void func_0017673c(struct AnimationState *state);
 extern void func_001762ac(struct Screen *screen, int mode);
@@ -191,6 +186,10 @@ struct R41169OptionalPanel;
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* [INFERENCE] This receiver is forwarded unchanged by 00168dd0; its +0x78
+ * slot reaches the shared MessageLayout positioning and visibility family.
+ * L041InitializeScreen is a partial view, not a complete historical class. */
+void func_00169018(struct L041InitializeScreen *screen, int enabled);
 /* [INFERENCE] Erased accessor/lifecycle identities are not recovered. */
 int TU924_page_count(const struct ItemPageSet *set);
 void TU924_reset_prompts(struct L041PromptTable *table);

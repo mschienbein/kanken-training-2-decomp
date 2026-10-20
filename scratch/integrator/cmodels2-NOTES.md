@@ -1,5 +1,76 @@
 # cmodels2 — v8 / L1 static integration
 
+## 2026-10-20 — resumed local integration complete
+
+Current authority: `scratch/integrator/cmodels2/SCOPE-r2.json`. Main **261fdc9** was merged in
+this worktree as **64c7cab4d334b82c63a1b9e13f590b99c99541c8**. **cmodels is finalized seq 9**
+(1,621 functions / 195,908 B), not pending. Its immutable selection remains v6 + L1; this
+candidate explicitly targets **`armlink5-inline-branchnop-v8` + `anonymous-string-records-v1`**.
+Denominator and frozen gates stay v9-r2 / v1.19. Nothing under `accept/`, the accepted ledger,
+names, compiler profiles or denominator was edited by this resumed work.
+
+Candidate manifest `config/candidates/cmodels2.json`: **3 functions / 680 B**, three credited
+units plus two new helper-only units. All three require explicit **QUALIFIED R1 identity
+provenance**, never a claim of recovered original helper existence/call graph:
+
+- **001e958c / 296 B:** preserve the complete isolated nf045 v8/L1 witness and its unchanged
+  Point/Rectangle helper. The relevant include/input/runtime/menu_resources dependencies are
+  unchanged; no completed comparison was repeated. Two exclusive eight-byte own-exidx
+  companions are recorded in `MENU-V8-OBJECT-CLOSURE-r1.json`; helper/metadata credit stays zero.
+- **001456e4 / 240 B:** discharge only the stale private W16SystemDisplay global declaration
+  using finalized DisplayQueueFlags.object at +8. Natural source/helper semantics stay intact;
+  central contracts are in `game/display_initializer.h`. Isolated **v8/L1 MATCH, exit 0**;
+  `DISPLAY-001456E4-r1.json`. This already had historical v3/none evidence, not a v8-only claim.
+- **00169018 / 144 B:** real same-entry/same-field forwarding proves the existing
+  L041InitializeScreen receiver and one direct MessageLayout pointer. No WidgetContainer or
+  WidgetActivity alias/cast/union survives. `L041-C-EXPOSURE-r1.json` exposes the existing plain
+  layout in C and adds one shared prototype. Reuse finalized `r41279_item_category` and its
+  helper-only unit; supply its existing caller to retain the full helper-use closure. Isolated
+  **v8/L1 MATCH, exit 0** for both new 00169018 and unchanged 001ddde4 context; only the former
+  is new credit. `VISIBILITY-00169018-r2.json` binds c009/c010 bounded original-safe facts.
+
+Canonical receiver core from ResumeC009-2's **b8f15ed** was applied surgically, not by merging
+that candidate branch. Five accepted wrappers plus the direct-message 001e0afc consumer were
+revised in place; **001b8908 stays source-identical**. Seven bounded receiver dependency commands
+all exit 0 and MATCH **7 functions / 2,580 B**, recorded in `RECEIVER-MATCH-r2.json`. Shared
+messages/screen/training_screen/sound_controller contracts have explicit revision fingerprints.
+**Reset/clock/number-owner normalization is still owned by c009/Main** and intentionally not
+duplicated here; Main's integration must retain that coherent c009 patch alongside this C guard
+delta. No accepted identity or helper definition was removed or re-collected.
+
+`MODEL-TRANSITION-r2.json` binds both finalized cmodels full receipts, every prior **19 R1
+callers** (18 source-identical), the conservative **one L1 owner**, all **16 existing helper-only
+units** and every caller/helper relation. New rows make the projected base-261fdc9 set **22 R1
+callers + 1 L1 owner, 18 helper-only units**. Changed shared headers reopen those existing
+callers too. This metadata inventory does not stand in for Main's final receipt-generated
+`model_uses`, `model_reviews` and `dependency_reviews` after the other checkpoint merges.
+
+Refresh snapshot **c7d21959**: all **30 model-qualified identities / 56,788 B** reconciled
+against the preserved 132-row sweep. Seventeen source hashes are identical, eight are distinct
+alternate evidence and five are out-of-pool identities. All five reported MATCHes are accounted
+for; completed mismatches/refusals were not rerun merely because accounting called them pending.
+`RESIDUE-REFRESH-RECONCILIATION-r1.json` distinguishes already measured results from unmeasured
+named requests; `OWNERSHIP-INVENTORY-r2.json` preserves all **137 unique inventory identities /
+150,300 B** without equating that inventory to candidate credit.
+
+- **001ed874:** finalized cmodels identity; no new collection. Its later c009 consumer/header
+  correction is an accepted revision, not re-awarded credit.
+- **001a77d4:** ResumeC010 retains the tu604 game/v2/none complete witness; no tu917 context
+  variant or unrelated unwind-helper set was imported.
+- **001d5864 / 001ab680:** ResumeC010 reconfirmed the audio deferrals. Source-backed prerequisite
+  fixes do not release adoption; all-consumer/G3/argcheck and independent selected-model review
+  remain open. The font/base allocator 001db404/001ef89c and c011 001d5694 lifecycle deferrals
+  also stay explicit. `CONTRACT-DEFERRALS.json` records the now-resolved 00169018 separately.
+
+No heavy sweep, G3, argcheck, full suite/build, prepare/finalize or push was run. Main explicitly
+retained the heavy slot for ResumeC009-2/Main after the post-edit request. This completes the
+local-integration assignment, **not checkpoint readiness**: Main schedules integration at its
+dependency boundary and refreshes the final projection after c009/c010/c011 finalize. Every
+preserved source, receipt and failed result remains available; the pre-restart notes below are
+historical.
+
+## Pre-restart preserved integration notes
+
 Branch `cmodels2-integrate`, worktree `scratch/worktrees/cmodels2`, initially based on
 `85fd18dc7173e0542d8c33db157d03b7910c18c5`. GATES v1.19 authorizes the selected v8 rule.
 This is an **unaccepted candidate**, not a prepared/finalized checkpoint. No acceptance record,

@@ -52,7 +52,7 @@
       "reason": "The accepted func_001d4124 CachedSoundLoaderState lifecycle conflicts with the natural PlayerHeapDataManager/SoundArchiveLoader view; c010's helper/destructor keep separate C loader views. Four name proposals await the accepted lifecycle cutover. The row is not an opt-in-only function and remains excluded rather than double-owned."
     }
   ],
-  "late_model_contract_deferrals": [
+  "resolved_late_model_contract_deferrals": [
     {
       "function": "func_00169018",
       "size": 144,
@@ -60,9 +60,13 @@
       "extra_source": "scratch/research/residual-families/signed-byte/erased-property-getter/signed_key.c",
       "selected_model_receipt": "scratch/cm2/late-00169018/func_00169018.result.json",
       "observed_outcome": "MATCH; exit 0; full 144-byte catalogue extent under v8+L1",
-      "reason": "The late caller passes its WidgetContainer pointer to func_00177b84. Prepared cmodels training_screen.h declares that function with MessageLayout*, while c009's matching definition uses WidgetActivity (seven DisplayHandle pointers and state at +0x1c). Canonical WidgetContainer is another partial view with a DisplayHandle pointer at +8. These views may overlap, but neither caller bytes nor matching callee bytes establish one complete common class. No cast, private conflicting declaration, or invented union was introduced to suppress that integration fork.",
-      "disposition": "Typed-contract deferred. Main was notified of the cmodels/c009 receiver fork. The erased signed-property helper identity remains [INFERENCE]; no source/helper was collected into the candidate."
+      "historical_reason": "The preserved WidgetContainer/WidgetActivity drafts disagreed with the finalized MessageLayout caller. Those private views are historical evidence only; no cast, fake common owner or union was used to suppress the disagreement.",
+      "disposition": "Resolved for the bounded candidate from c009 same-field forwarding and c010 unchanged-entry L041 caller facts. src/models2/training_visibility/func_00169018.c uses the existing L041InitializeScreen with a direct MessageLayout pointer and reuses the accepted r41279_item_category helper. Fresh selected-model isolated witness MATCHes both the 144-byte new caller and the existing helper-owning caller; no accepted identity/helper is recollected.",
+      "resolution_record": "scratch/integrator/cmodels2/VISIBILITY-00169018-r2.json",
+      "final_integration_review_required": true
     }
   ],
-  "coordination": "IntegrateC010 correction milestone c407dda52e3816e5bab2e21d9ee57fb43c258cc3 supplies source-backed audio/page prerequisites, but explicitly leaves all-consumer/G3/argcheck pending. cmodels2 does not merge that branch or clear its holds."
+  "coordination": "ResumeC010 reconfirmed on 2026-10-20 that func_001d5864 and func_001ab680 stay deferred: c010 owns prerequisite corrections, not either model candidate adoption. Evidence remains in its AUDIO-CONTRACT-ADJUDICATION-r1.json, owner-cutover/priority-contract-r1.json, factory-facts-r3.json and factory-facts-config-r1.json; all-consumer/G3/argcheck and independent model review closure remain open. No audio branch merged or hold cleared.",
+  "current_audio_owner": "ResumeC010",
+  "preserved_pre_restart_scope": "scratch/integrator/cmodels2/SCOPE.json"
 }

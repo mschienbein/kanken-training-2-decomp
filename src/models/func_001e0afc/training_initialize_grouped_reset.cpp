@@ -64,11 +64,11 @@ extern "C" void func_001e0afc(struct L041InitializeScreen *screen)
     case 4: screen->duration = 20; break;
     }
     TU924_reset_prompts(screen->prompts);
-    if (screen->message.layout) {
-        func_00176c6c(screen->message.layout);
-        func_0017a43c(screen->message.layout, reinterpret_cast<const unsigned short *>(L"\x3000"),
+    if (screen->message) {
+        func_00176c6c(screen->message);
+        func_0017a43c(screen->message, reinterpret_cast<const unsigned short *>(L"\x3000"),
                      reinterpret_cast<const unsigned short *>(L"\x3000"), 0);
-        func_00170db4(screen->message.handles, 1);
+        func_00170db4(screen->message, 1);
     }
     if (screen->selection.list) {
         func_00176b24(screen->selection.list);

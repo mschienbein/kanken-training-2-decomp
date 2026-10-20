@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "basis": "c009 b8f15ed canonical receiver cutover; distinct cmodels2 C exposure, not reset/clock/number owner normalization.",
+  "header": "include/game/training_screen.h",
+  "edits": [
+    {
+      "operation": "insert-after",
+      "anchor": "void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);\n}",
+      "text": "\n#endif",
+      "purpose": "End C++-only TrainingScreen block before plain L041 forward declarations/layout."
+    },
+    {
+      "operation": "insert-before",
+      "anchor": "extern \"C\" {\nextern const MemberCallback data_00218718;",
+      "text": "#ifdef __cplusplus\n",
+      "purpose": "Keep MemberCallback initializer endpoint declarations C++-only after exposing L041 layout."
+    },
+    {
+      "operation": "insert-after",
+      "anchor": "struct R41169OptionalPanel;\n#ifdef __cplusplus\nextern \"C\" {\n#endif",
+      "text": "\n/* [INFERENCE] This receiver is forwarded unchanged by 00168dd0; its +0x78\n * slot reaches the shared MessageLayout positioning and visibility family.\n * L041InitializeScreen is a partial view, not a complete historical class. */\nvoid func_00169018(struct L041InitializeScreen *screen, int enabled);",
+      "purpose": "One C/C++ cross-unit incoming contract."
+    }
+  ],
+  "unchanged": "L041 offsets, bool field widths, existing controls union and the c009 direct MessageLayout/selection/alternate/clock contracts. No TrainingScreen, MenuTransitionState, callback-base or complete-class alias."
+}

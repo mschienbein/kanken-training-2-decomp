@@ -204,12 +204,8 @@ struct AnimationContext {
     const struct NameTable *table;
 };
 
-struct WidgetContainer {
-    unsigned char reserved00[8];
-    struct DisplayHandle *handle;
-};
 
-/* [INFERENCE] Value object passed in s0/s1 by the container's position setter. */
+/* [INFERENCE] Value object passed in s0/s1 by the message-layout position setter. */
 struct WidgetPosition {
     float x;
     float y;
@@ -317,7 +313,6 @@ extern void func_00181700(struct BoundDisplayObject *object, float x, float y, f
 extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
 extern void func_001826fc(struct DisplayObject *object, int active);
 extern void func_00195a08(struct DisplayObject *object, int index, int active);
-extern void func_001ad6ec(struct WidgetContainer *container, struct WidgetPosition position);
 extern void func_0016de90(struct Screen *screen, int index);
 extern void func_0016e1d0(struct Screen *screen, int index, int enabled);
 extern unsigned char func_0017a9a0(const struct DisplayObject *object, int index);
