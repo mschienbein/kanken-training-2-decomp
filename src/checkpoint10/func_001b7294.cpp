@@ -1,15 +1,9 @@
-#include "game/cleanup.h"
+#include "game/scene_lifecycle.h"
 
-/* [INFERENCE] The base constructor's three configuration words are integer
- * state fields; all three are zero in this static object's initializer. */
-/* INTEGRATOR: move to include/game/controller_construction.h */
-extern "C" {
-BaseObject *func_00174484(BaseObject *object, int first, int second, int third);
-extern const ConstructedVtable data_00223638;
-BaseObject *func_001b7294(BaseObject *object);
-}
+/* [INFERENCE] Common resource constructor for its exact initializer-linked global;
+ * no complete derived class or native historical name is asserted. */
 
-BaseObject *func_001b7294(BaseObject *object)
+ScreenResourceManager *func_001b7294(ScreenResourceManager *object)
 {
     object = func_00174484(object, 0, 0, 0);
     object->vtable = &data_00223638;

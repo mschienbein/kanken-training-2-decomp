@@ -17,7 +17,8 @@ struct AudioDspParameterBlock {
     unsigned short value18;
     unsigned short value1a;
     unsigned short value1c;
-    unsigned char reserved1e[4];
+    unsigned short value1e;
+    unsigned short reserved20;
     unsigned short value22;
     unsigned char reserved24[0x7c];
     unsigned short valuea0;

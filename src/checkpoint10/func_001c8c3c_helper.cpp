@@ -5,11 +5,8 @@
  */
 #include <preinclude.h>
 #include <nw/gfx/res/gfx_ResTextureMapper.h>
+#include "game/graphics_resource_abi.h"
 using namespace nw::gfx;
-/* INTEGRATOR: move to include/game/texture_mapper.h */
-extern "C" {
-ResTexture func_001c7828(nw::os::IAllocator *allocator, ResTexture texture);
-}
 static void destroy_dynamic(ResTextureMapper mapper, nw::os::IAllocator *allocator)
 {
     ResProceduralTextureMapper procedural = nw::ut::ResStaticCast<ResProceduralTextureMapper>(mapper);

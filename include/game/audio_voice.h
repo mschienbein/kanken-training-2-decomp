@@ -302,6 +302,8 @@ extern void func_001563a0(struct AudioChannelState *state, struct RecordState *r
 extern void func_001c5994(struct AudioChannel *channel, const struct AudioSlot *slot);
 extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *slot);
 extern void func_001d49e8(struct AudioVoiceGroup *group, int index, const struct AudioSlot *slot);
+extern const unsigned short data_0021dfcc[];
+extern unsigned func_0014fe14(float value);
 #ifdef __cplusplus
 }
 #endif

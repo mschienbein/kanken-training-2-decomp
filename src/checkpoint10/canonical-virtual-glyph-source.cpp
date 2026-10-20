@@ -1,42 +1,6 @@
 #include "game/item_text.h"
 
-class W12cFont {
-public:
-    virtual void slot00();
-    virtual void slot01();
-    virtual void slot02();
-    virtual void slot03();
-    virtual void slot04();
-    virtual void slot05();
-    virtual void slot06();
-    virtual void slot07();
-    virtual void slot08();
-    virtual void slot09();
-    virtual void slot10();
-    virtual void slot11();
-    virtual void slot12();
-    virtual void slot13();
-    virtual void slot14();
-    virtual void slot15();
-    virtual void get_glyph(W12cGlyphMetrics *glyph, unsigned short code);
-};
-
-struct W12cGlyphWriter {
-    unsigned char reserved00[0x24];
-    float scale_x;
-    float scale_y;
-    float cursor_x;
-    unsigned char reserved30[8];
-    float fixed_advance;
-    W12cFont *font;
-    unsigned char reserved40[8];
-    unsigned char fixed_width;
-};
-
-/* INTEGRATOR: move to include/game/font.h */
-extern "C" {
-void func_001d9e0c(W12cGlyphWriter *writer, const W12cGlyphMetrics *metrics, float x);
-}
+#include "game/font.h"
 
 extern "C" float func_001da39c(W12cGlyphWriter *renderer, unsigned short codepoint)
 {

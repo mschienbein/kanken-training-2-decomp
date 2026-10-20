@@ -88,6 +88,11 @@ extern void func_001c6adc(void);
 extern void func_001db134(void *object);
 extern void func_00215ec4(volatile unsigned int *guard);
 extern void func_00216140(void *object, ObjectDestructor destroy, void (*image_base)(void));
+extern void func_00164ebc(void *object, ObjectDestructor destroy, void (*image_base)(void));
+/* [INFERENCE] Registration supplies one opaque object argument to each empty
+ * destructor; no erased call establishes a more specific native class name. */
+extern void func_001e3818(void *object);
+extern void func_001e37dc(void *object);
 
 extern void func_001091d4(int, int, int, int);
 extern void func_0010920c(int);
@@ -157,7 +162,6 @@ extern void func_0015cab4(void);
 extern void func_0015ea60(struct FlagDisplayObject *, int, int);
 extern int func_0015eb90(struct Component0015eb90 *);
 extern int func_0015f5b0(const struct CountedResource *);
-extern void func_00166f1c(void *, int, int);
 extern int func_00169974(void);
 extern void func_00169b58(void);
 extern int func_0016d000(int);

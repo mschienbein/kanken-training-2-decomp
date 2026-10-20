@@ -1,7 +1,4 @@
-struct ShaderGeometryBuffers {
-    unsigned char reserved00[0x194];
-    unsigned buffers[2];
-};
+#include "game/shader.h"
 
 extern const unsigned short data_0021c744[6];
 extern const float data_0021c750[4];
@@ -9,7 +6,7 @@ extern void func_0018da44(int count, unsigned *handles);
 extern void func_00193d64(unsigned target, unsigned handle);
 extern void func_0018d8e4(unsigned target, unsigned size, const void *source, unsigned usage);
 
-void func_00116c1c(struct ShaderGeometryBuffers *state)
+void func_00116c1c(struct RendererState *state)
 {
     func_0018da44(2, state->buffers);
     func_00193d64(0x8893, state->buffers[0]);

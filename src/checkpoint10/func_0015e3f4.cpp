@@ -1,6 +1,6 @@
-#define NW_RELEASE
+#include <preinclude.h>
 #include "game/screen.h"
-#include "nw/ut/ut_Color.h"
+#include "game/text_renderer.h"
 
 
 static __inline void set_top(struct DisplaySurface *surface, unsigned char red,

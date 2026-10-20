@@ -1,15 +1,4 @@
-/* INTEGRATOR: differs from src/wave4/func_0019d048.c and func_0019d058.c:
- * this state view includes the writable linear_size word at +8; it does not
- * change the unrelated two-word MemorySpan type. */
-struct LinearMemoryState {
-    unsigned base;
-    unsigned size;
-    unsigned linear_size;
-};
-extern struct LinearMemoryState data_00242d68;
-extern int func_00195cd8(unsigned *address, unsigned requested_address,
-                        unsigned physical_address, unsigned size,
-                        unsigned operation, unsigned permissions);
+#include "game/memory_arena.h"
 
 int func_0010bd7c(unsigned size)
 {

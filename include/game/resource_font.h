@@ -56,6 +56,29 @@ struct U8DirectoryEntry {
     bool is_directory;
 };
 
+/* [INFERENCE] Non-owning target archive accessor, not a native-class alias. */
+struct ArchiveResourceAccessor {
+    const void *vtable;
+    struct U8Archive archive;
+    void *archive_buffer;
+    struct PoolList fonts;
+    struct PoolList textures;
+    wchar_t root_path[64];
+    wchar_t file_name[64];
+};
+
+#ifdef __cplusplus
+#include <preinclude.h>
+#include <nw/lyt/lyt_Arc.h>
+/* Separate enclosing view: native archive at +8 and a bounded wide name. */
+struct NamedArchive {
+    unsigned char reserved00[8];
+    nw::lyt::ARCHandle view;
+    wchar_t name[64];
+};
+extern "C" bool func_00140490(NamedArchive *archive, void *file, const char *name);
+#endif
+
 #ifdef __cplusplus
 class StreamSizeBackend {
 public:
@@ -183,6 +206,10 @@ extern void func_001cf1cc(struct LayoutColors140 *self, unsigned index,
 extern struct PoolLink *func_001cfd9c(struct AnimationMaterial *material,
                                 struct AnimationBinding *binding);
 extern bool func_001d3a10(const struct LayoutMember118 *self);
+extern void *func_001cdb10(struct U8Archive *archive, const wchar_t *root,
+                           unsigned type, const wchar_t *name, unsigned *size);
+extern void *func_001ccf20(struct ArchiveResourceAccessor *accessor, unsigned type,
+                           const char *name, unsigned *size);
 #ifdef __cplusplus
 }
 #endif

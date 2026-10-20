@@ -191,6 +191,35 @@ struct SequenceStartOptions {
     unsigned limit;
 };
 
+#ifdef __cplusplus
+/* [INFERENCE] Command-owner/binding views retain the natural preparation
+ * receiver and start-options contract; no historical complete class is named. */
+struct SequenceDataBinding {
+    unsigned reserved00[5];
+    const void *data;
+};
+struct SequenceCommandSound : SequenceSound {
+    unsigned char reserved230[0x20e4];
+    SequenceDataBinding binding;
+};
+struct SequenceStartEvent : StreamEvent {
+    unsigned reserved14;
+    SequenceStartOptions options;
+    SequenceDataBinding *binding;
+    StreamEvent *initialize(SoundPlaybackState *player, SequenceDataBinding *new_binding,
+                            const SequenceStartOptions &new_options)
+    {
+        opcode = 0x28;
+        object = player;
+        binding = new_binding;
+        options = new_options;
+        return this;
+    }
+};
+extern "C" void func_001d31cc(SequenceCommandSound *sound, const void *data,
+                             const SequenceStartOptions *options);
+#endif
+
 struct SoundParameterTarget {
     unsigned char reserved00[0x83];
     unsigned char flag83;

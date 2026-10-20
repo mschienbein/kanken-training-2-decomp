@@ -1,19 +1,13 @@
+#define NW_RELEASE
 #include "game/property_descriptor.h"
 #include "game/command_state.h"
 #include "game/resource_runtime.h"
 #include "game/screen.h"
-
-struct PairedDisplayHandle {
-    DisplayObject *objects[2];
-};
-
-struct PairedDisplayOwner {
-    unsigned reserved00;
-    PairedDisplayHandle *handles[1];
-};
+#include "game/prompt.h"
 
 
-static inline void release_pair(PairedDisplayHandle *handle)
+
+static inline void release_pair(PromptObjects *handle)
 {
     if (handle) {
         for (int i = 0; i < 2; ++i) {
@@ -23,7 +17,7 @@ static inline void release_pair(PairedDisplayHandle *handle)
     }
 }
 
-static inline void reset_pair(PairedDisplayHandle *handle)
+static inline void reset_pair(PromptObjects *handle)
 {
     if (handle) {
         handle->objects[0] = 0;
@@ -31,7 +25,7 @@ static inline void reset_pair(PairedDisplayHandle *handle)
     }
 }
 
-extern "C" void func_001c1600(PairedDisplayOwner *owner)
+extern "C" void func_001c1600(PromptManager *owner)
 {
     for (int i = 0; i < 1; ++i) {
         if (owner->handles[i]) {

@@ -1,22 +1,6 @@
 #include <preinclude.h>
 
-struct TextureBufferOwnerVTable;
-/* [INFERENCE] Handle-owner class identity; the three handle fields and
- * destruction order are recovered from the body and calls. */
-struct TextureBufferOwner {
-    const TextureBufferOwnerVTable *vtable;
-    unsigned reserved04;
-    GLuint first_texture;
-    GLuint second_texture;
-    GLuint buffer;
-    ~TextureBufferOwner();
-};
-/* INTEGRATOR: move to include/game/texture_buffer.h. */
-extern "C" {
-extern const TextureBufferOwnerVTable data_00223ecc;
-void func_0016cbf4(GLsizei count, const GLuint *textures);
-void func_00215cb0(GLsizei count, const GLuint *buffers);
-}
+#include "game/render_resource.h"
 
 TextureBufferOwner::~TextureBufferOwner()
 {

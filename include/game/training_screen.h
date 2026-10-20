@@ -84,6 +84,16 @@ extern const MemberCallback data_002184b0;
 #endif
 void func_0016d6dc(struct TrainingScreen *screen, int enabled);
 void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);
+void func_0016dae8(struct TrainingScreen *screen, int mode, int reset);
+void func_0016c60c(struct TrainingScreen *screen, int mode);
+void func_001bbdd4(struct TrainingScreen *screen);
+void func_001bbc1c(struct TrainingScreen *screen);
+void func_001bc2a0(struct TrainingScreen *screen);
+void func_001bbfc4(struct TrainingScreen *screen);
+int func_00172994(int channel);
+int func_0017abf8(int channel, int sound);
+void func_0017433c(int channel, int duration);
+void func_0016fca0(int enabled);
 #ifdef __cplusplus
 }
 #endif

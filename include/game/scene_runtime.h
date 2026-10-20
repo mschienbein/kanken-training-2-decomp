@@ -12,6 +12,7 @@ struct SceneRecord;
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+namespace nw { namespace gfx { class FragmentLight; } }
 
 
 
@@ -54,6 +55,8 @@ extern "C" {
 extern const void *const data_002243f8[];
 struct SceneNode *func_0016b120(struct SceneNode *node, const struct SceneRecord *record);
 struct SceneNode *func_001cfd24(struct SceneNode *node, const struct SceneRecord *record);
+void func_001c5ea0(nw::gfx::FragmentLight *node);
+void func_001405f4(struct SceneNode *node);
 }
 #endif
 

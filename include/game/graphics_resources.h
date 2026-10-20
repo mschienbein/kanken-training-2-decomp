@@ -98,6 +98,7 @@ extern "C" {
 extern struct GraphicsResources bss_0049da58;
 extern struct GraphicsResourceTable *data_00242a0c;
 extern struct GraphicsHeap data_002426d0;
+extern const struct GraphicsHeapVTable data_00224db4;
 extern struct GraphicsResource *func_001936a0(struct GraphicsDescription *description, struct GraphicsHeap *heap);
 extern void func_00108f94(void);
 #ifdef __cplusplus

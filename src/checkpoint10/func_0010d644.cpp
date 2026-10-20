@@ -1,22 +1,5 @@
 #include "game/framebuffer.h"
 
-class ViewportRenderTarget {
-public:
-    virtual ~ViewportRenderTarget();
-    virtual void reserved08();
-    virtual const RenderTargetConfiguration *description();
-};
-struct ViewportState;
-struct ViewportRectangle {
-    float left, bottom, right, top, near_depth, far_depth;
-};
-
-/* INTEGRATOR: move to include/game/viewport.h */
-extern "C" {
-extern void func_00116400(ViewportState *state, ViewportRenderTarget *target,
-                          const ViewportRectangle *viewport);
-void func_0010d644(ViewportState *state, ViewportRenderTarget *target);
-}
 
 void func_0010d644(ViewportState *state, ViewportRenderTarget *target)
 {

@@ -27,15 +27,23 @@ struct AudioChannel;
 typedef void (*LifecycleCallback)(void);
 
 /* Callback pending and resource busy are distinct fields of this state object. */
-struct ServiceHandle { unsigned handle; };
 struct ResourceServiceState {
-    unsigned char reserved00[2];
+    unsigned char deferred;
+    signed char published;
     unsigned char pending;
-    unsigned char reserved03[5];
-    const struct ServiceHandle *initialized;
+    signed char acquired;
+    unsigned short first, second;
+    const CtrHandle *session;
     unsigned int busy;
     unsigned char lock_storage[8];
     CtrHandle handle;
+    const void *source;
+    unsigned size;
+};
+/* [INFERENCE] Startup only exposes the result subobject, not a complete class. */
+struct ServiceStartupState {
+    unsigned char reserved00[0x24];
+    struct Result result;
 };
 struct InvalidHandleRecord { unsigned int reserved; CtrHandle handle; };
 struct SharedPublicationState {
@@ -149,14 +157,14 @@ struct ServiceCoordinator {
     CtrHandle ready_event, completion_event;
     struct StreamMutex mutex;
     unsigned char reserved14[0x109c - 0x14];
-    union {
-        unsigned short *completion_slots[150];
+    struct {
         struct {
-            unsigned short *reserved109c[2];
+            unsigned char reserved109c[8];
             struct AudioDspParameterBlock *voice_parameters[2];
             struct AudioDspReply *replies[2];
             struct AudioDspParameterBlock *auxiliary_parameters[2][24];
         } audio;
+        unsigned char reserved1174[0x180];
     } storage;
     struct ServiceBufferPair buffers[5];
     unsigned char enabled, pending;
@@ -219,6 +227,8 @@ extern CtrHandle data_00242b14;
 extern const struct InvalidHandleRecord data_0021abd0;
 extern struct SharedPublicationState data_00242d90;
 extern struct ServiceOutput bss_004b5234;
+extern struct ServiceStartupState bss_0049f000;
+extern void func_0020e32c(void);
 extern struct ServiceCoordinator bss_004b5284;
 extern struct HandleManager bss_004b6888;
 extern void func_0012fbd4(struct ResourceServiceEvent *event);
@@ -226,6 +236,8 @@ extern void func_0012e620(struct StreamCriticalSection *lock);
 extern int func_0012e854(LifecycleCallback first, LifecycleCallback second,
     LifecycleCallback third);
 extern void func_0013e84c(void);
+extern int func_00148a9c(struct ServiceCoordinator *state, unsigned short value);
+extern int func_00155e20(struct ServiceCoordinator *state, int channel);
 extern void func_0013e9d8(void);
 extern void func_0013e810(void);
 extern int func_0012f1c0(struct ServiceOutput *state);
@@ -253,6 +265,15 @@ extern int func_001534e0(struct ServiceOutput *owner, unsigned index,
 extern void func_0017e8fc(struct ChannelWorkspace *workspace);
 extern int func_00154438(struct ChannelWorkspace *workspace);
 extern int func_001544e0(struct ExtendedWorkspace *workspace);
+extern const unsigned char data_00229aa0[];
+extern CtrResult func_00185050(const void *source, unsigned size,
+                             unsigned short first, unsigned short second);
+extern CtrResult func_001425bc(void);
+extern CtrResult func_001368b0(void);
+extern void func_0012e8a4(void);
+extern struct Result func_00148040(unsigned value, void *buffer,
+                                 unsigned short capacity, unsigned short *output);
+extern struct Result func_00148094(unsigned value, unsigned *output);
 extern int func_0014cc9c(struct ServiceCommandQueueW22E *queue, int channel, float value);
 #ifdef __cplusplus
 }

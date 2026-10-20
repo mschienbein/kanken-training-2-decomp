@@ -1,10 +1,7 @@
 #define NW_RELEASE
 #include <nw/font/font_Font.h>
 
-/* INTEGRATOR: move to include/game/render_state.h; matches src/wave2/func_0018f0ac.c. */
-extern "C" {
-unsigned func_0018f0ac(const void *address);
-}
+#include "game/render_state.h"
 
 namespace nw { namespace font { namespace internal {
 void TextureObject::Set(u32 name, const Font *font, const void *image,

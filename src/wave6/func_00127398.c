@@ -1,4 +1,4 @@
-extern void func_001273a0(unsigned capability, int enabled);
+#include "game/render_state.h"
 
 void func_00127398(unsigned capability)
 {

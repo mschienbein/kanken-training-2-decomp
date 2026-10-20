@@ -4,6 +4,7 @@
 #ifdef __cplusplus
 #include <nw/ut/ut_RuntimeTypeInfo.h>
 #include <nn/math/math_Vector3.h>
+#include <nn/math/math_Vector4.h>
 
 /* [INFERENCE] Original class identities and initializer spellings are not
  * recovered. These declarations retain the canonical one-parent RTTI and
@@ -63,6 +64,7 @@ extern const nw::ut::internal::RuntimeTypeInfo data_002437d4;
 extern const nw::ut::internal::RuntimeTypeInfo data_002438ac;
 extern nn::math::VEC3 bss_004b97ec;
 extern nn::math::VEC3 bss_004b97f8[2];
+extern nn::math::VEC4 bss_004b2aa4;
 struct RuntimeTypedObject;
 /* [INFERENCE] These accessors retain the unused object input; descriptor
  * ancestry is read-only native metadata, not a parallel global C record. */

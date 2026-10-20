@@ -4,16 +4,6 @@
 #include <nw/snd/snd_WaveSoundFileReader.h>
 #include "game/archive.h"
 
-struct SoundLoaderState;
-/* INTEGRATOR: move to include/game/sound_loader.h.
- * Native WaveArchiveFileReader is 12 bytes; game/archive.h's 16-byte
- * ArchiveReader has an additional field not present in the frozen native type. */
-extern "C" {
-const void *func_0016a29c(SoundLoaderState *loader, unsigned id);
-const void *func_00183bfc(const ArchiveReader *reader, unsigned index);
-const void *func_0016a888(const void *file, unsigned index,
-                        const nw::snd::SoundArchive *archive, SoundLoaderState *loader);
-}
 
 const void *func_0016a888(const void *file, unsigned index,
                         const nw::snd::SoundArchive *archive, SoundLoaderState *loader)

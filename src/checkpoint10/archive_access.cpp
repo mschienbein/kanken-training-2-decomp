@@ -10,30 +10,8 @@
 #include "game/resource_font.h"
 #include "game/pool_list.h"
 
-/* [INFERENCE] Non-owning layout view of nw::lyt::ArcResourceAccessor.
- * Original image and canonical archive/list layouts agree on these fields.
- */
-struct ArchiveResourceAccessor {
-    const void *vtable;
-    U8Archive archive;
-    void *archive_buffer;
-    PoolList fonts;
-    PoolList textures;
-    wchar_t root_path[64];
-    wchar_t file_name[64];
-};
-
-/* INTEGRATOR: move to include/game/layout_resources.h */
-/* INTEGRATOR: differs from scratch/authors/w12g/src/func_001ccf20.c:
- * ResourceAccessor::GetResource and the ARC API return writable resource
- * storage; preserve that canonical return contract instead of const void *.
- */
-extern "C" {
-void *func_001cdb10(U8Archive *archive, const wchar_t *root,
-                         unsigned type, const wchar_t *name, unsigned *size);
-void *func_001ccf20(ArchiveResourceAccessor *accessor, unsigned type,
-                         const char *name, unsigned *size);
-}
+/* [INFERENCE] The shared non-owning accessor preserves the canonical writable
+ * resource result without asserting native ArcResourceAccessor identity. */
 
 static size_t copy_resource_name(wchar_t *destination, const char *source,
                                  size_t capacity)

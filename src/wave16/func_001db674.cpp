@@ -7,6 +7,6 @@
 
 extern "C" void func_001db674(void)
 {
-    SceneObject *scene = &bss_0028f200;
+    ScreenResourceManager *scene = &bss_0028f200;
     scene->vtable->slot02(scene);
 }

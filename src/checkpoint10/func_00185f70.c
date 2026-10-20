@@ -1,17 +1,5 @@
 #include "game/service_state.h"
 #include "game/service_runtime.h"
-/* INTEGRATOR: differs from include/game/service_state.h: PendingState also has a writable completion flag at +4. */
-struct PendingState {
-    unsigned char reserved00;
-    unsigned char pending;
-    signed char blocking;
-    unsigned char reserved03;
-    unsigned char completion;
-};
-
-extern void func_001368b0(void);
-
-extern void func_0018ef74(void);
 
 void func_00185f70(int enabled)
 {

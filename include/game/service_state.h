@@ -61,7 +61,8 @@ struct PendingState {
     unsigned char pending;
     signed char blocking;
     unsigned char graphics_active;
-    unsigned char reserved04[4];
+    unsigned char completion;
+    unsigned char reserved05[3];
     struct ServiceWaitObject *wait_object;
 };
 
@@ -95,6 +96,8 @@ extern void func_00192400(unsigned option);
 extern void func_00192484(unsigned char value);
 extern unsigned func_00192794(void);
 extern int func_00195e84(void);
+extern void func_00185f70(int enabled);
+extern void func_0018ef74(void);
 #ifdef __cplusplus
 }
 #endif
@@ -237,7 +240,6 @@ extern void func_001233c0(ServicePollCallback callback, void *context);
 extern unsigned data_00243030;
 extern struct ServicePollRegistration data_00243008;
 extern CtrHandle data_00242ff8;
-extern CtrHandle data_00243040;
 extern struct LifecycleCallbackTables bss_0049eee4;
 extern unsigned short data_00243124;
 extern void (*bss_004b51e8[16])(void *value);

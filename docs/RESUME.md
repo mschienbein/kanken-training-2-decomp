@@ -2,6 +2,35 @@
 
 Current entry on top.
 
+## 2026-10-20 — c010 source-contract handoff (unaccepted)
+
+The `c010-integrate` draft contains **496 units / 509 claims**: **499 proposed new
+functions / 47,304 B** and **10 explicit accepted-identity moves / 240 B**. Accepted
+credit is unchanged. Two earlier contract deferrals, `001685c0` and `00168618`,
+have bounded canonical witnesses. Another **49 new units / 51 functions / 9,252 B**
+are explicitly deferred with their source, prior receipts and exact re-entry
+conditions preserved privately; no accepted identity is withdrawn.
+
+The source cutovers cover the shared resource-constructor/dispatch prefix,
+full-width constructor counts and returned receiver, canonical audio and session
+lifecycles, static handle subobjects, DSP pointer banks, publication globals,
+numeric owners and native resource-wrapper interfaces. Native glyph output and
+the target glyph format remain distinct; font caches are at `+0x14/+0x16`.
+`PIPELINE_STORAGE_INITIALIZED_BYTES = 0x854` and its flexible snapshot tail remain
+unchanged. Erased identities and partial native ownership remain qualified.
+
+Private `scratch/integrator/c010/SOURCE-READY-r68.json` and its inventory bind the
+current proposal and bounded observations, including preserved failures. The
+typed canonical variants of `001273a0`, `0017f7f8` and `001ce8b8` remain measured
+byte-match residue, not exhausted searches or accepted implementations.
+
+Next import only Main's frozen c009-r3 correction, reconcile its callable and
+native-constructor dependencies, then obtain Main's heavy slot for the complete
+header-dependent MATCH/helper closure, G3, native/signature probes, original
+callback audit, argcheck, fresh full builds and independent checkpoint reviews.
+No full build, suite, prepare, finalize or acceptance claim follows from this
+source-only handoff. Selection remains explicit linker **v6 + literal L1**.
+
 ## 2026-10-20 — resumed WSL desktop (current)
 
 **State:** `docs/STATUS.md` top entry. Accepted 1,621 functions / 195,908 B (seq 9, cmodels);
@@ -13,9 +42,9 @@ into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pu
 Restart sequence: linker models v4/v6/v8 are adopted. The finalized ledger selects linker v6
 plus literal L1, so later checkpoints explicitly select at least that pair. Frozen profiles:
 game/sdk/middleware. Resume preserved work rather than restarting completed batches.
-The user-set maximum is 32 subagents; run fewer when provider rate limits require it
-(`docs/rulings/2026-10-20-subagent-concurrency.md`). Current throttling and ownership live in
-the private pipeline file.
+The user-set maximum and active target are 64 subagents; keep useful slots full and back off
+only if fresh provider throttling recurs (`docs/rulings/2026-10-20-subagent-concurrency.md`).
+Current throttling, queue and ownership live in the private pipeline file.
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules

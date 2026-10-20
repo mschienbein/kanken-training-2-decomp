@@ -19,10 +19,7 @@ static void inherit_direction(nw::gfx::FragmentLight *node,
     }
 }
 
-/* INTEGRATOR: move to include/game/model_transform.h */
-extern "C" {
-void func_001c5ea0(nw::gfx::FragmentLight *node);
-}
+#include "game/scene_runtime.h"
 
 void func_001c5ea0(nw::gfx::FragmentLight *node)
 {

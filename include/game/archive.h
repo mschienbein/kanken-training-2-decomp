@@ -87,8 +87,25 @@ struct ArchiveBlockHeader {
     unsigned char reserved04[4];
 };
 
+/* Serialized CWAR table entries share the same sized-reference format used by
+ * the original wave lookup and the canonical cache reader. */
+struct ArchiveSizedFileReference {
+    unsigned short type, reserved02;
+    unsigned offset, size;
+};
 struct ArchiveInfoTable {
     unsigned count;
+#ifdef __cplusplus
+    /* ORIGINAL BUG: the native serialized table indexes its one-element tail
+     * beyond the C++ bound. The file count, not this spelling, supplies extent. */
+    struct ArchiveSizedFileReference entries[1];
+    unsigned GetOffsetFromFileBlockBody(unsigned index) const
+    {
+        return entries[index].offset;
+    }
+#else
+    struct ArchiveSizedFileReference entries[];
+#endif
 };
 struct ArchiveReader {
     const struct ArchiveFile *file;         /* 0x00 */
@@ -96,6 +113,8 @@ struct ArchiveReader {
     const void **cache;                     /* 0x08 */
     unsigned char initialized;             /* 0x0c */
 };
+extern unsigned func_00140dd4(const struct ArchiveReader *reader, int index);
+extern const void *func_00183bfc(const struct ArchiveReader *reader, unsigned index);
 
 /* A typed, self-relative resource reference; unsupported types resolve to null. */
 struct RelativeReference {

@@ -1,16 +1,16 @@
 #include "ctr/cp15.h"
 #include "ctr/svc.h"
 
-CtrResult func_00137c20(const CtrHandle *session, unsigned int handle,
-                         unsigned long long token)
+CtrResult func_00137c20(const CtrHandle *session, CtrHandle handle,
+                       const void *buffer, unsigned size)
 {
     unsigned int *command = (unsigned int *)(ctrGetThreadLocalStorage() + 0x80);
     CtrResult result;
     int failure;
 
     command[0] = 0x001f0082u;
-    command[1] = (unsigned int)token;
-    command[2] = (unsigned int)(token >> 32);
+    command[1] = (unsigned int)buffer;
+    command[2] = size;
     command[3] = 0;
     command[4] = handle;
     result = svcSendSyncRequest(*session);

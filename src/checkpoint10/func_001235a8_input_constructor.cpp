@@ -17,11 +17,6 @@ struct R4023BufferCommand {
     R4023StaticInputBuffer input;
 };
 
-/* INTEGRATOR: move to include/ctr/ipc.h */
-extern "C" {
-CtrResult func_001235a8(unsigned int selector, const void *buffer,
-                       unsigned int size, CtrHandle handle);
-}
 
 /* Qualifications: ctr/cp15.h TLS read and ctr/svc.h svcSendSyncRequest. */
 CtrResult func_001235a8(unsigned int selector, const void *buffer,
@@ -37,7 +32,7 @@ CtrResult func_001235a8(unsigned int selector, const void *buffer,
     command->handle_descriptor = 0;
     ctrIpcMarshal(command->handle, handle);
     command->input = R4023StaticInputBuffer(size, buffer);
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     if (ctrIpcTransportFailure(result) >= 0)
         result = static_cast<CtrResult>(command->selector);
     return result;

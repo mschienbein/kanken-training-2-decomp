@@ -1,3 +1,4 @@
+#define NW_RELEASE
 #include "game/functions.h"
 #include "game/playback_screen.h"
 #include "game/resource_runtime.h"
@@ -6,39 +7,6 @@
 #include "game/screen.h"
 #include "game/selection.h"
 
-/* [INFERENCE] Recovered partial menu-scene layout; names describe observed roles. */
-struct MenuScenePanel;
-struct MenuChannelA;
-struct MenuChannelB;
-struct MenuSceneBase {
-    const void *vtable;
-    unsigned char reserved04[0x10];
-    MenuScenePanel *panel;
-    unsigned char reserved18[0x1c];
-    int next_scene;
-    MenuChannelA *channel_a;
-    MenuChannelB *channel_b;
-    unsigned char reserved40[0x50];
-};
-struct TrainingMenuTransient;
-struct TrainingMenuScene : MenuSceneBase {
-    unsigned char reserved90[0x20];
-    int selection;
-    unsigned char reservedb4[0x20];
-    int overlay_active;
-    unsigned char reservedd8[0x2b0];
-    TrainingMenuTransient *transient;
-};
-
-/* INTEGRATOR: move to include/game/menu_scene.h */
-extern "C" {
-
-
-
-
-void func_00179a48(TrainingMenuScene *scene, int active);
-void func_00161650(TrainingMenuScene *scene);
-}
 
 static void close_overlay(TrainingMenuScene *scene)
 {
@@ -57,13 +25,13 @@ void func_00161650(TrainingMenuScene *scene)
         /* [INFERENCE] callee identity: inlined by armlink; transient-object cleanup. */
         func_00174480(scene->transient);
         switch (scene->selection) {
-        case 0: scene->next_scene = 7; break;
-        case 1: scene->next_scene = 9; break;
-        case 2: scene->next_scene = 8; break;
-        case 3: scene->next_scene = 10; break;
+        case 0: scene->base.index = 7; break;
+        case 1: scene->base.index = 9; break;
+        case 2: scene->base.index = 8; break;
+        case 3: scene->base.index = 10; break;
         }
-        func_00176e24(scene);
+        func_00176e24(&scene->base);
         func_00176df4();
-        func_00176dc8(scene->next_scene);
+        func_00176dc8(scene->base.index);
     }
 }

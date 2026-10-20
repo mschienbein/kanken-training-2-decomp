@@ -6,15 +6,26 @@ struct W11ControlScreen {
     struct WidgetSlot *slots[10];
     int layout, active, selection;
 };
+/* [INFERENCE] Numeric format roles follow the actual renderer dispatcher.
+ * This is the physical prefix before the shared node vector, not proof of a
+ * complete native owner or validation of arbitrary indices. */
+struct W11jNumberFormat {
+    unsigned kind;
+    unsigned reserved04[6];
+};
 struct W11jVisualNode {
-    unsigned char reserved00[0x80];
+    unsigned reserved00;
+    struct DisplayObject *objects[10];
+    short count;
+    unsigned char reserved2e[0x52];
     float position[2];
     unsigned char reserved88[8];
     float scale_x, scale_y;
     unsigned char color[4];
 };
 struct W11jVisualOwner {
-    unsigned char reserved00[0x7ec];
+    unsigned char reserved00[0x0c];
+    struct W11jNumberFormat formats[72];
 #ifndef __cplusplus
     struct W11jVisualNode *nodes[];
 #endif
@@ -76,11 +87,22 @@ extern struct AnimationState bss_0024424c;
 extern volatile unsigned data_0023ecc0;
 extern struct AnimationState *func_001b43bc(struct AnimationState *state);
 extern struct AnimationState *func_001b44e8(struct AnimationState *state);
+/* [INFERENCE] The original initializer/teardown share the +0xc slot and
+ * +0x38/+0x3c/+0x40 owned allocations inside this partial animation owner. */
+extern void func_001b3c64(struct AnimationState *state);
 extern void func_001b0600(struct W11ControlScreen *screen);
 extern void func_0016d554(struct W11ControlScreen *screen, int state);
 extern void func_001741f8(struct W11jVisualOwner *owner, int index, float x, float y);
 extern void func_0016f9a8(struct W11jVisualOwner *owner, int index, float x, float y);
 extern void func_00175d90(struct W11jVisualOwner *owner);
+extern void func_00166f1c(struct W11jVisualOwner *owner, int index, int enabled);
+extern void func_00166f20(struct W11jVisualOwner *owner, int index, int enabled);
+extern void func_001ea314(struct W11jVisualOwner *owner, int index,
+                          const struct W11jNumberFormat *format, int value);
+extern void func_001ea1cc(struct W11jVisualOwner *owner, int index,
+                          const struct W11jNumberFormat *format, int value);
+extern void func_001ea0cc(struct W11jVisualOwner *owner, int index,
+                          const struct W11jNumberFormat *format, int value);
 extern void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled);
 extern void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y);
 extern void func_0016de28(struct AnimationState *state, int enabled);

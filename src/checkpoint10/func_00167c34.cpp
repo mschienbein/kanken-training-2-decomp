@@ -2,11 +2,7 @@
 #include "nw/lyt/lyt_Pane.h"
 #include "nw/ut/ut_Color.h"
 
-/* INTEGRATOR: move to include/game/layout_color.h; native Pane/Color8 ABI. */
-extern "C" {
-void func_00167c34(nw::lyt::Pane *pane, unsigned char red,
-    unsigned char green, unsigned char blue, unsigned char alpha);
-}
+#include "game/screen.h"
 
 void func_00167c34(nw::lyt::Pane *pane, unsigned char red,
     unsigned char green, unsigned char blue, unsigned char alpha)

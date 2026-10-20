@@ -9,7 +9,7 @@ struct StreamMutex;
 
 #include "game/pool_list.h"
 
-#include "game/object_manager.h"
+#include "game/stream_manager.h"
 
 struct FreeLink {
     struct FreeLink *next;

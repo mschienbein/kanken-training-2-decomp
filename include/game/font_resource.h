@@ -126,14 +126,42 @@ struct FontResourceHeader {
     unsigned char reserved00[0x0c];
     int data_offset;
 };
+/* Serialized width/map tails; access follows the actual record stride, not
+ * an invented complete font or an alternative glyph-information pointee. */
+struct FontWidthBlock {
+    unsigned short first, last;
+    const struct FontWidthBlock *next;
+#ifdef __cplusplus
+    const GlyphWidths *entries() const
+    {
+        return reinterpret_cast<const GlyphWidths *>(this + 1);
+    }
+#else
+    struct GlyphWidths entries[];
+#endif
+};
+struct FontCodeMap {
+    unsigned short first, last, method, reserved06;
+    const struct FontCodeMap *next;
+#ifdef __cplusplus
+    const unsigned short *table() const
+    {
+        return reinterpret_cast<const unsigned short *>(this + 1);
+    }
+#else
+    unsigned short table[];
+#endif
+};
 
 struct FontInformation {
     unsigned char reserved00;
     signed char field01;
-    unsigned char reserved02[5];
+    unsigned short alternate_index;
+    struct GlyphWidths default_widths;
     unsigned char field07;
     struct FontGlyphInfo *glyphs;
-    unsigned char reserved0c[8];
+    const struct FontWidthBlock *widths;
+    const struct FontCodeMap *maps;
     unsigned char field14;
     unsigned char field15;
     unsigned char field16;

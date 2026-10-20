@@ -7,10 +7,6 @@
 #include <nw/ut/ut_LinkList.h>
 #include "game/object_manager.h"
 #include "game/functions.h"
-struct ResourceRecord { unsigned amount; unsigned char reserved04[0x4c]; PoolLink link; };
-struct ResourceRecordList { unsigned reserved00; nw::ut::LinkList<ResourceRecord, offsetof(ResourceRecord, link)> records; };
-/* INTEGRATOR: move this recovered list interface to game/object_manager.h. */
-extern "C" { unsigned func_0014d7a0(ResourceRecordList *list); }
 static unsigned resource_sum(ResourceRecordList *list)
 {
     unsigned total = 0;

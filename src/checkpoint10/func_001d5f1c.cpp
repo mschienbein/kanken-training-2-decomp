@@ -3,36 +3,7 @@
 #include "game/command_group.h"
 #include "game/sequence.h"
 
-/* [INFERENCE] Wave-player and pool roles; the embedded interfaces use the
- * canonical registry, synchronization and pending-task layouts. */
-struct W15iSoundPool {
-    unsigned char reserved00[0x14];
-    PoolList playing;
-    PoolList available;
-};
-struct W15iWavePlayer : SynchronizationOwner {
-    unsigned char registered;
-    unsigned char flag0d;
-    unsigned char flag0e;
-    unsigned char stopping;
-    unsigned char reserved10[0x34];
-    RegistryEntry entry;
-    RegistryEntry managed_entry;
-    unsigned char reserved5c[0x40];
-    AudioVoice *voice;
-    unsigned char reserveda0;
-    unsigned char event_active;
-    unsigned char managed;
-    unsigned char reserveda3;
-    W15iSoundPool *pool;
-    PendingTask68 *item;
-};
-
-/* INTEGRATOR: move to include/game/wave_player.h */
-extern "C" {
-extern void func_001d59c0(W15iWavePlayer *player);
-extern void func_0019ea64(SynchronizationOwner *object);
-}
+#include "game/wave_player.h"
 
 static void append_item(PoolList *list, PoolLink *position, PendingTask68 *item)
 {

@@ -7,11 +7,7 @@
 #include <nw/lyt/lyt_Arc.h>
 #include <cstddef>
 
-struct NamedArchive {
-    unsigned char reserved00[8];
-    nw::lyt::ARCHandle view;
-    wchar_t name[64];
-};
+#include "game/resource_font.h"
 
 static std::size_t copy_archive_name(wchar_t *destination, std::size_t capacity,
                                    const char *source)
@@ -28,8 +24,6 @@ static std::size_t copy_archive_name(wchar_t *destination, std::size_t capacity,
     return length;
 }
 
-/* INTEGRATOR: move to include/game/named_archive.h */
-extern "C" bool func_00140490(NamedArchive *archive, void *file, const char *name);
 
 bool func_00140490(NamedArchive *archive, void *file, const char *name)
 {

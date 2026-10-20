@@ -152,12 +152,6 @@ struct W18SceneA {
     unsigned char reserved90[0x24];
     W18DisplayCollection *objects;
 };
-struct W17SceneVTable {
-    unsigned char reserved00[0x18];
-    void (*prepare)(ScreenResourceManager *scene);
-    unsigned int reserved1c;
-    void (*finish)(ScreenResourceManager *scene);
-};
 struct W18SceneB {
     ScreenResourceManager base;
     unsigned char reserved90[0x1c];
@@ -197,6 +191,9 @@ extern const W17SceneVTable data_0022380c;
 extern const W17SceneVTable data_00223838;
 extern const W17SceneVTable data_00223864;
 extern const W17SceneVTable data_00223908;
+extern const W17SceneVTable data_00223570;
+extern const W17SceneVTable data_0022359c;
+extern const W17SceneVTable data_00223638;
 
 int func_00171e30(void);
 void func_00170f6c(W18DisplayCollection *collection);

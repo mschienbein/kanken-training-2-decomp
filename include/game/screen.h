@@ -1,6 +1,7 @@
 #ifndef GAME_SCREEN_H
 #define GAME_SCREEN_H
 
+#include "game/matrix.h"
 struct PairStorage;
 struct W10DrawingInput;
 struct Material;
@@ -9,7 +10,10 @@ struct Material;
 /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */
 
 #ifdef __cplusplus
-#include <nw/ut/ut_Color.h>
+struct SurfaceTextState;
+namespace nw { namespace lyt { class Pane; } }
+extern "C" void func_00167c34(nw::lyt::Pane *pane, unsigned char red,
+                              unsigned char green, unsigned char blue, unsigned char alpha);
 extern "C" {
 #endif
 
@@ -95,49 +99,12 @@ struct DisplayPaneLink {
 };
 
 #ifdef __cplusplus
-/* [INFERENCE] Shared partial text-field view used by application wrappers.
- * Complete native class identity/allocation is not established, and this view
- * is not equated to the material-bearing DisplayPane or DisplayPaneLink. */
-struct SurfaceSize {
-    float width, height;
-    SurfaceSize(float w, float h) : width(w), height(h) {}
-    SurfaceSize(const SurfaceSize &other) : width(other.width), height(other.height) {}
-    bool operator==(const SurfaceSize &other) const
-    { return width == other.width && height == other.height; }
-    bool operator!=(const SurfaceSize &other) const { return !(*this == other); }
-};
-struct SurfaceTextState {
-    unsigned char reserved00[0xd8];
-    nw::ut::Color8 colors[2];
-    unsigned char reservede0[4];
-    SurfaceSize size;
-    float line_spacing, character_spacing;
-    unsigned char reservedf4[0x0a];
-    unsigned char dirty;
-    void SetTextColor(unsigned index, nw::ut::Color8 value)
-    {
-        colors[index] = value;
-    }
-    bool update_dirty(bool changed) { dirty |= changed; return changed; }
-    void set_size(const SurfaceSize &value)
-    {
-        if (update_dirty(!(size == value)))
-            size = value;
-    }
-    void set_character_spacing(float value)
-    {
-        if (update_dirty(character_spacing != value))
-            character_spacing = value;
-    }
-    void set_line_spacing(float value)
-    {
-        if (update_dirty(line_spacing != value))
-            line_spacing = value;
-    }
-};
+/* [INFERENCE] Application wrapper and target-version text-field prefix.
+ * Native TextBox color offsets agree, but its dirty-bit protocol differs;
+ * do not equate the complete classes or reinterpret their pointers. */
 struct DisplaySurface {
     unsigned char reserved00[8];
-    SurfaceTextState *text;
+    struct SurfaceTextState *text;
 };
 #endif
 
@@ -238,6 +205,25 @@ struct DisplayVertexArray {
     struct DisplayTexCoords *entries;
 };
 
+struct UpdateVec2 { float x, y; };
+/* [INFERENCE] Partial deferred-update record; its context input remains
+ * supplied even though this entry does not inspect it. */
+struct PendingDisplayUpdate {
+    struct BoundDisplayObject *object;
+    struct Vector3 position;
+    struct Vector3 rotation;
+    struct UpdateVec2 scale;
+    unsigned char reserved24[4];
+    int screen;
+    unsigned dirty;
+    unsigned char reserved30[4];
+    struct UpdateVec2 size;
+    struct DisplayTexCoords coordinates;
+    unsigned char color[4];
+    unsigned char reserved60[8];
+    int animation;
+};
+
 struct Material;
 struct DisplayVertexPane {
     struct DisplayPane pane;
@@ -316,8 +302,9 @@ struct StyleOwner {
 #endif
 
 struct AnimationContext {
-    unsigned int reserved00;
+    const struct NameTable *first;
     const struct NameTable *table;
+    const struct NameTable *terminator;
 };
 
 
@@ -431,11 +418,19 @@ extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
 extern void func_0016e648(struct WidgetController *controller, int index, int character);
+extern void func_0020f858(void);
 extern struct AnimationContext bss_00246b48;
 extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,
                          const struct DisplayTexCoords *coordinates);
 extern void func_0014e504(struct DisplayVertexPane *pane, unsigned count);
 extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
+extern void func_0017f7f8(struct DisplayVertexArray *vertices, unsigned capacity);
+extern void func_001ebca0(void *owner, struct PendingDisplayUpdate *update);
+extern void func_001815a8(struct BoundDisplayObject *object, int screen, int index);
+extern void func_001816c0(struct BoundDisplayObject *object, float x, float y, float z);
+extern void func_0014d000(struct BoundDisplayObject *object, const struct DisplayTexCoords *coordinates);
+extern void func_00181620(struct BoundDisplayObject *object, unsigned char red,
+                          unsigned char green, unsigned char blue, unsigned char alpha);
 extern void func_0015e948(struct DisplayObject *object, int active);
 extern void func_0015e954(struct DisplayPaneLink *link, int active);
 extern void func_0015e4a8(struct DisplaySurface *surface, float character_spacing, float line_spacing);

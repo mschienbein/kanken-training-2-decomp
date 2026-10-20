@@ -1,6 +1,17 @@
 #ifndef GAME_LAYOUT_H
 #define GAME_LAYOUT_H
 
+#ifdef __cplusplus
+namespace nw { namespace lyt {
+class Layout;
+class AnimTransform;
+class ResourceAccessor;
+} }
+/* [INFERENCE] The original pointer-result slot matches native Layout's
+ * AnimResource overload; no placeholder virtual owner or erased return. */
+extern "C" nw::lyt::AnimTransform *func_001ce8b8(nw::lyt::Layout *layout,
+    const void *file, nw::lyt::ResourceAccessor *accessor);
+#endif
 #include "game/matrix.h"
 
 #include "game/audio_voice.h"

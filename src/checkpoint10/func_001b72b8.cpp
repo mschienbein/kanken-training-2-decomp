@@ -1,3 +1,4 @@
+#define NW_RELEASE
 #include "game/functions.h"
 #include "game/playback_screen.h"
 #include "game/prompt.h"
@@ -6,46 +7,16 @@
 #include "game/screen.h"
 #include "game/selection.h"
 #include "game/text_writer.h"
-/* [INFERENCE] Recovered partial menu-scene layout; names describe observed roles. */
-struct MenuScenePanel;
-struct MenuChannelA;
-struct MenuChannelB;
-struct MenuSceneBase {
-    const void *vtable;
-    unsigned char reserved04[0x10];
-    MenuScenePanel *panel;
-    unsigned char reserved18[0x1c];
-    int next_scene;
-    MenuChannelA *channel_a;
-    MenuChannelB *channel_b;
-    unsigned char reserved40[0x50];
-};
-struct MenuPairManager;
 
-/* INTEGRATOR: move to include/game/menu_scene.h */
-extern "C" {
-
-
-
-
-
-
-
-
-void func_001c1600(MenuPairManager *manager);
-extern const unsigned data_00223638[];
-void func_001b72b8(MenuSceneBase *scene);
-}
-
-void func_001b72b8(MenuSceneBase *scene)
+void func_001b72b8(ScreenResourceManager *scene)
 {
-    scene->vtable = data_00223638;
+    scene->vtable = &data_00223638;
     if (!func_00177124(7)) {
         func_00177084();
         func_001c1600(func_0016e270());
         func_00176e24(scene);
         func_00176df4();
-        func_00176dc8(scene->next_scene);
+        func_00176dc8(scene->index);
     }
     func_00174480(scene);
 }

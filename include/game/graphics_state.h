@@ -34,6 +34,7 @@ extern "C" {
 extern void func_00122a6c(void);
 extern int func_0012f570(const void *buffer, unsigned size);
 extern int func_0018f6c4(const void *buffer, unsigned size);
+extern CtrHandle data_0021c608;
 extern struct GraphicsState data_002430f0;
 extern struct GraphicsMutex data_00243104;
 extern struct GraphicsContext *func_001861c4(void);

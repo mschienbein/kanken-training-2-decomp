@@ -2,31 +2,6 @@
 #include "game/material.h"
 #include "game/matrix.h"
 
-struct UpdateVec2 { float x, y; };
-struct PendingDisplayUpdate {
-    BoundDisplayObject *object;
-    Vector3 position;
-    Vector3 rotation;
-    UpdateVec2 scale;
-    unsigned char reserved24[4];
-    int screen;
-    unsigned dirty;
-    unsigned char reserved30[4];
-    UpdateVec2 size;
-    DisplayTexCoords coordinates;
-    unsigned char color[4];
-    unsigned char reserved60[8];
-    int animation;
-};
-/* INTEGRATOR: move to include/game/display_transform.h */
-extern "C" {
-void func_001ebca0(void *owner, PendingDisplayUpdate *update);
-void func_001815a8(BoundDisplayObject *object, int screen, int index);
-void func_001816c0(BoundDisplayObject *object, float x, float y, float z);
-void func_0014d000(BoundDisplayObject *object, const DisplayTexCoords *coordinates);
-void func_00181620(BoundDisplayObject *object, unsigned char red,
-                   unsigned char green, unsigned char blue, unsigned char alpha);
-}
 static inline void set_size(BoundDisplayObject *object, UpdateVec2 size)
 {
     func_00181734(object, size.x, size.y);

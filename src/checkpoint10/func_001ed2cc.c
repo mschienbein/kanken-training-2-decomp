@@ -5,7 +5,7 @@
 
 struct W24eCategoryState {
     unsigned char reserved00[0x48];
-    struct Screen *numbers;
+    struct W11jVisualOwner *numbers;
     struct W6ListController *list;
     unsigned char reserved50[8];
     struct W6Selector *selector;
@@ -14,7 +14,6 @@ struct W24eCategoryState {
     int secondary;
 };
 
-extern void func_001741f8(struct Screen *screen, int index, float x, float y);
 
 
 void func_001ed2cc(struct W24eCategoryState *state)

@@ -2,18 +2,6 @@
 #include "game/file_session.h"
 #include "game/stream_manager.h"
 
-struct FileSessionVTable {
-    void (*reserved00[13])(void);
-    FileSessionObject *(*reset)(FileSessionObject *object);
-};
-struct FileFreeEntry { FileFreeEntry *next; };
-struct FileObjectPool {
-    unsigned char reserved00[0x24];
-    FileFreeEntry *free;
-    unsigned reserved28;
-    unsigned allocated;
-    StreamMutex mutex;
-};
 
 
 
@@ -25,6 +13,8 @@ extern "C" void func_001c4bdc(FileSessionObject *object)
     }
     object->vtable->reset(object);
     StreamLockGuard guard(&bss_004b1d28.mutex);
+    /* The allocator reuses the reset object's first storage word as a free
+     * link; this is a pool-storage transition, not a different active receiver. */
     FileFreeEntry *entry = reinterpret_cast<FileFreeEntry *>(object);
     entry->next = bss_004b1d28.free;
     bss_004b1d28.free = entry;

@@ -9,23 +9,8 @@
 #include <preinclude.h>
 #include <nw/gfx/res/gfx_ResTextureMapper.h>
 #include <game/render_state.h>
+#include "game/graphics_resource_abi.h"
 namespace nw { namespace gfx { namespace res {
-/* INTEGRATOR: move the existing src/wave2/func_0018f0ac.c contract
- * to include/game/texture_resource.h. */
-extern "C" { unsigned func_0018f0ac(const void *address); }
-/* INTEGRATOR: differs from include/nw/gfx/res/gfx_ResTexture.h:
- * assigned target accesses the six cube image offsets at 0x38, whereas the
- * pinned public ResCubeTextureData::toImagesTables starts at 0x50. This is a
- * partial target-version view, not a recovered complete serialized type. */
-struct CubeImageSlotsR41268 : ResPixelBasedTextureData {
-    nw::ut::Offset toImages[ResCubeTexture::MAX_CUBE_FACE];
-};
-static inline ResPixelBasedImage TargetCubeImage(ResCubeTexture texture,
-    ResCubeTexture::CubeFace face)
-{
-    CubeImageSlotsR41268 *data = reinterpret_cast<CubeImageSlotsR41268 *>(texture.ptr());
-    return ResPixelBasedImage(data->toImages[face].to_ptr());
-}
 enum
 {
     HEIGHT_SHIFT = 0,
@@ -90,7 +75,7 @@ void SetupTextureMapperCommand(ResPixelBasedTextureMapper mapper, ResCubeTexture
     
     for (int face = 0; face < ResCubeTexture::MAX_CUBE_FACE; ++face)
     {
-        ResPixelBasedImage resImage = TargetCubeImage(texture, static_cast<ResCubeTexture::CubeFace>(face));
+        ResPixelBasedImage resImage = target_cube_image(texture, static_cast<ResCubeTexture::CubeFace>(face));
         u32 addr = resImage.GetImageAddress();
         
         if (face == 0)

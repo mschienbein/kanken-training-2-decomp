@@ -2,11 +2,7 @@
  * Arithmetic follows NintendoWare4Ctr snd_Util.cpp / ut_Inlines.h,
  * commit 15ddb5632db5a6f0d2f46e3827fc78df468684bd (THIRD_PARTY.md).
  */
-/* INTEGRATOR: move the cutoff/table interface to game/audio_voice.h. */
-extern "C" {
-extern const unsigned short data_0021dfcc[];
-unsigned func_0014fe14(float value);
-}
+#include "game/audio_voice.h"
 static float clamp_scalar(float value, float minimum, float maximum);
 
 unsigned func_0014fe14(float value)

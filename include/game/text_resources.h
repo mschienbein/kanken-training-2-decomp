@@ -12,6 +12,25 @@ public:
 #else
 struct W22TextReleasable;
 #endif
+#ifdef __cplusplus
+/* [INFERENCE] Separate owned-element class; only its destructor slot is used. */
+class OwnedElementW22E {
+public:
+    virtual ~OwnedElementW22E();
+};
+#else
+struct OwnedElementW22E;
+#endif
+struct OwnedElementListW22E {
+    unsigned char active;
+    signed char kind;
+    unsigned char reserved02[6];
+    unsigned short first, second;
+    int selected;
+    int count;
+    struct OwnedElementW22E **entries;
+    unsigned remaining;
+};
 struct W22TextResources {
     const void *vtable;
     short identifier;
@@ -31,6 +50,7 @@ void func_0015f5e4(struct W22TextResources *resources);
 void func_0015f890(struct W22TextResources *resources);
 /* [INFERENCE] Armlink-inlined empty base-destruction identity remains unknown. */
 struct W22TextResources *completeTextResourceDestruction(struct W22TextResources *resources);
+void func_00172f50(struct OwnedElementListW22E *list);
 #ifdef __cplusplus
 }
 #endif
