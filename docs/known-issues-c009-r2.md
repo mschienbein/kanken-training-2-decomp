@@ -316,3 +316,375 @@ this worker.
 `001e3050.phase` store, the previous `00113c0c`/`0018ee88` deferrals and every
 other retained qualification remain unchanged.
 
+## C009-r3 sealed review FAIL; C009-r4 callable-contract remediation
+
+This section supersedes the earlier prospective c009-r3 status, without
+rewriting its evidence. **C009-r3 prepared PASS** at `dcff700`, with prepare
+SHA-256 `9685e51d700e4654a47ac6a9eeff878c570e521ec1c830458cc55486878ef86e`.
+Both independent reviews are sealed and registered in
+`accept/c009-r3/reviews/`: **codex-a PASS_WITH_QUALIFICATIONS, zero findings;
+codex-b FAIL, exactly F01/F02**. The latter seal is
+`0055a37c1011ec80e2e246051543da9ff00132114731d1ec5a817256c38443c5`.
+The registered history was merged from Main's `00eb9ba`; neither failed
+checkpoint nor either review is retried or edited.
+
+### F01: actual native resource values, not incompatible pointer views
+
+Original table cells, discriminants, provider bodies and the pinned NW4C
+resource definitions establish three separate one-pointer resource-value
+protocols:
+
+| Table | Compatible callable input | Actual supplied provider(s) |
+| --- | --- | --- |
+| `002437e0` | `nw::gfx::res::ResTextureMapper` by value | `001c8b1c`; the other slot remains an external typed counterpart |
+| `002434e4` | `nw::gfx::res::ResLookupTable` by value | `001c6a34`, `001c7f10` |
+| `00243510` | `nw::gfx::res::ResTexture` by value | `001c8984`, `001c8990`; the other slots remain external typed counterparts |
+
+The dispatchers now define the actual `ResTextureMapper::Cleanup`,
+`ResLookupTable::Cleanup` and `ResTexture::Cleanup` methods. Their callers pass
+the native resource value directly. `001c8b1c` reads the mapper's serialized
+texture reference and invokes `ResTexture::Cleanup` only when valid.
+`001c7f10` clears the reference lookup table's `toTargetLut`;
+`001c8984` clears the reference texture's `toTargetTexture`. These are not
+audio objects, integer-selected materials, `void*` callbacks or aliases.
+The original native discriminants distinguish cube `0x20000009` from shadow
+`0x20000021`; the old descriptive field names did not establish those roles.
+
+`include/game/resource_dispatch.h` declares every slot and provider with the
+same real native value type. The obsolete C pointer declarations and two
+misclassified audio records are removed. No function-pointer cast, erased
+object view, union, invoking adapter, compiler/profile change or data credit
+is introduced. The original table objects remain external.
+
+Four accepted identities explicitly move from their `.c` files to the same
+basename `.cpp` destinations: `001c6a34`, `001c7f10`, `001c8984`, `001c8990`.
+Their old definitions are absent. Together with the retained earlier
+`0014de8c` move, the candidate declares exactly five accepted moves.
+C010's separately recovered `0013888c` must reuse these owners when Main
+rebases that checkpoint; its earlier lookup-provider moves are superseded,
+not duplicated.
+
+### F02: explicit NEW-only deferrals, true table tails
+
+The providers' own field accesses do not establish a shared complete scene
+receiver: `DispatchStateA`, `DispatchStateB` and `ModeDispatchObject` read
+mode at `+0x90`, while `DisplayUpdateManager` traverses its actual component
+and entry families. The installers and offset-zero resemblance do not make
+those free-function types compatible with every partial scene view.
+
+Main explicitly chose a bounded checkpoint correction: do not start a broad
+accepted scene-base/native-header migration. Defer the NEW invocation owners
+and NEW providers whose credit introduces or keeps a contradiction; retain
+every accepted identity and record pre-existing accepted issues for a later
+dedicated type-model checkpoint. This is a source-contract deferral, not an
+exhausted code-generation classification or a callable-type waiver.
+
+`scene_lifecycle.h` no longer declares one fictitious common prepare receiver.
+Its noninvoked `W17SceneVTable` data prefix permits typed lifecycle table-address
+stores; separate concrete table tails declare the actual
+`DispatchStateA*`, `DispatchStateB*`, `ModeDispatchObject*` or
+`W6SelectionScreen*` prepare inputs and `DisplayUpdateManager*` finish input.
+No invocation through the prefix is permitted. The unused wrong timed-screen
+and command-buffer headers are removed with their only invocation owners.
+No native virtual-override relationship is invented.
+
+Every codex-b failed row has an explicit disposition:
+
+| Finding | Required function | C009-r4 disposition |
+| --- | --- | --- |
+| F01 | `00143190` | Native mapper Cleanup and value-typed table |
+| F01 | `00182ae4` | Native lookup Cleanup and real native providers |
+| F01 | `001840dc` | Native texture Cleanup and value-typed table |
+| F01 | `001c8b1c` | Actual mapper-value provider; typed texture Cleanup |
+| F02 | `001acb04` | NEW invocation owner deferred |
+| F02 | `001be0c0` | NEW invocation owner deferred |
+| F02 | `001ef704` | NEW invocation owner deferred |
+| F02 | `001eb7a4` | NEW provider deferred; accepted invocation issues carried |
+| F02 | `001ab65c` | Correct isolated provider retained; incompatible NEW caller absent |
+| F02 | `001bd9f0` | Correct isolated provider retained; incompatible NEW caller absent |
+| F02 | `001ec194` | Correct isolated provider retained; incompatible NEW caller absent |
+
+### Complete same-class census and carried accepted issues
+
+The final physical-slot census covers **2,296 c009-r3 functions / 2,243 units,
+231 original indirect sites, with declared source types for all 231**.
+Its **333 rows** comprise **35 proven incompatible, 10 compatible and
+288 unresolved**, across nine correction groups. Sixteen TLS destructor-array
+cells are represented separately. Unresolved populations remain unresolved,
+never assumed compatible. Final inventory SHA-256:
+`08dfcf03312060010e9ac77a83ed655fe2c36aa904a7a008ac57ff31deef50ff`.
+
+| Group | Proven incompatible rows | Disposition |
+| --- | ---: | --- |
+| G01 mapper | 1 | Genuine native value protocol |
+| G02 lookup | 2 | Genuine native value protocol and explicit accepted moves |
+| G03 texture | 1 | Genuine native value protocol and explicit accepted moves |
+| G04 scene/member callbacks | 20 | 13 NEW-invocation rows deferred; 7 rows defer NEW providers and carry accepted sites |
+| G05 native Pane providers | 6 | Entirely pre-existing accepted source contracts; carried unchanged |
+| G06 resource accessor | 1 | Both caller and provider already accepted; carried unchanged |
+| G07 material selector | 1 | NEW caller deferred; real selector is a transform pointer, not an integer |
+| G08 command stream | 2 | NEW callers deferred; accepted stream/word-cursor migration required |
+| G09 seek stream | 1 | NEW caller deferred; unsigned const forwarding-size contract required |
+
+Thus all 35 rows are dispositioned: **4 fixed, 17 NEW-invocation deferrals,
+7 NEW-provider deferrals with carried accepted sites, and 7 wholly pre-existing
+accepted issues**. Metadata receipt comparison establishes that every carried
+accepted caller/provider source below is unchanged from accepted cmodels.
+This does not declare their callable contracts correct.
+
+All pre-existing accepted invocation sites are explicitly retained:
+
+| Accepted owner | Original site(s) | Actual incompatible target(s) | Census row(s) |
+| --- | --- | --- | --- |
+| `001a2814` | `001a2868` | `001eb7a4` | I0121 |
+| `001a73e8` | `001a741c` | `001eb7a4` | I0125 |
+| `001ab4e4` | `001ab518` | `001eb7a4` | I0129 |
+| `001b9ebc` | `001b9ed0`, `001b9f14` | `001b7fc0`, `001eb7a4` | I0149, I0151 |
+| `001bd630` | `001bd644`, `001bd688` | `001bbc1c`, `001eb7a4` | I0153, I0155 |
+| `001cd2f0` | `001cd31c` | `001cc2e8` | I0174 |
+| `001cd884` | `001cd898` | `001cdaa0`, `001cf1dc` | I0178, I0180 |
+| `001cd914` | `001cd930`, `001cd950` | `001f01a8`, `001f1184`, `001f01a0`, `001f1174` | I0191, I0192, I0196, I0197 |
+
+The first five owners still need a genuine shared scene/override model.
+Pane needs real native provider receivers, `u8` material-count results and
+`Material*` results; the return-only color setter must retain all actual inputs.
+The resource-accessor wrapper needs the real `ResourceAccessor` receiver and
+`Font*` result. Those accepted identities are not withdrawn, relabeled or
+silently fixed by omitting a new provider. Main explicitly carries these issues
+to a dedicated later type-model checkpoint, not as new c009 regressions.
+
+Private evidence is `scratch/research/indirect-callable-types/` and this
+worktree's `scratch/integrator/c009-r4/same-class-disposition-r1.json`.
+The latter binds every row, original site/cell, differing types, source hashes,
+authority and disposition. The final census correctly classifies I0147 as
+unresolved: a source receiver spelling alone did not prove that table.
+
+### Exact C009-r4 deferrals and proposal
+
+All fourteen additional deferrals were NEW in c009-r3. Their exact sources,
+hashes, original cells/types and original matching evidence are preserved;
+they are absent from the proposed ledger and canonical source tree.
+
+| Function | Target bytes | Reason/group |
+| --- | ---: | --- |
+| `001acb04` | 52 | Scene A prepare/finish receiver, G04/F02 |
+| `001be0c0` | 68 | Scene B prepare/finish receiver, G04/F02 |
+| `001ef704` | 140 | Timed-scene prepare/finish receiver, G04/F02 |
+| `00162f0c` | 108 | Animation-scene update/finish receiver, G04 |
+| `001b7dac` | 84 | Registered member receiver hierarchy, G04 |
+| `001e3af4` | 944 | Scene callback8 receiver, G04 |
+| `001e84ec` | 552 | Initialization-scene callback8 receiver, G04 |
+| `001eb7a4` | 440 | NEW finish provider contradicting accepted receiver models, G04 |
+| `001b7fc0` | 52 | NEW TrainingScreen provider versus accepted animated receiver, G04 |
+| `001bbc1c` | 52 | NEW mode provider versus accepted animated receiver, G04 |
+| `001cfdb4` | 36 | Actual material/animation-transform selector, G07 |
+| `001dacc0` | 40 | Actual const MemoryWriteStream receiver, G08 |
+| `001dadc4` | 40 | Actual DrawCommandState/word-cursor contract, G08 |
+| `001d3e90` | 120 | Unsigned const forwarding-size contract, G09 |
+
+Total additional deferral: **14 functions / 2,728 B**. The prior explicitly
+authorized `0011f3a8` deferral remains separate: together these r3/r4 boundary
+deferrals are **15 functions / 2,996 B**. Earlier historical contract deferrals
+also remain unchanged; this is not a new denominator classification.
+
+Pure composition now proposes **2,229 units / 2,282 functions / 249,964 B**:
+all **1,621 accepted identities / 195,908 B**, plus **661 NEW functions /
+54,056 B**. The candidate has **672 units**: 661 new destinations, six
+helper-only destinations and five explicit accepted move destinations.
+New profiles: game **601 / 48,548 B**, middleware **35 / 3,824 B**,
+sdk **25 / 1,684 B**.
+
+Relative to accepted cmodels, 151 surviving accepted units revise 156 functions /
+21,664 B; the five explicit moved accepted functions add 36 B to the affected
+review scope, not new credit. Thus accepted affected destinations total
+156 units / 161 functions / 21,700 B. Main must still prove unique emitted
+ownership in both full builds; metadata composition is not a substitute.
+
+Header changes are exactly: modified `game/audio.h`, `game/functions.h`,
+`game/scene_lifecycle.h`; added `game/resource_dispatch.h`; removed
+`game/timed_screen.h` and `game/command_buffer.h`.
+Frozen profiles, GATES v1.19, denominator v9-r2 and explicit
+`armlink5-inline-branchnop-v6` + `anonymous-string-records-v1` remain unchanged.
+The qualified C scheduler, typed no-op registration helpers, original counted
+loop, ARMCC extensions, L1/R1 provenance and all earlier retained qualifications
+remain mandatory. No c009-r4 prepare or acceptance credit is claimed here.
+
+### C009-r4 measured evidence and remaining gates
+
+The authorized sequential bounded closure completed with **actual exit 0**:
+**1,345 credited units / 1,360 credited functions**, every required function
+present and MATCH, with zero profile/model disagreements and zero failed units.
+It covers all candidate destinations, all revised accepted source units,
+all R1 callers, the retained F02 providers, and **947 transitive changed-header
+units**. All **22 actual helper-only source units** are supplied through their
+receipt-derived `--extra-source` caller combinations; fourteen of those helper
+units are direct members of the affected-header scope. The one additional
+emitted MATCH row is the uncredited 24-byte runtime
+`__ARM_common_memset4_5`, not another credited function.
+
+Every command uses its frozen unit profile, `tools/match.py --show 0`,
+`armlink5-inline-branchnop-v6` and `anonymous-string-records-v1`, one compiler
+at a time. The dependency graph uses cycle-safe conservative literal-include
+reachability. Scope SHA-256:
+`71487344e07429dd00bc9b51bea06d1988bd7ace621c70e520a6163ea33990cc`.
+The full per-run exit/result/hash closure is
+`scratch/integrator/c009-r4/header-closure-r1/RESULTS.json`, SHA-256
+`b4618be578d6e9edb91872e3c69d34fc512e17aba41ee3d1d8f4adf2e3166a50`.
+Main's author-scale matching grant and actual release are retained alongside it.
+
+The eight native resource units also have independent bounded author-loop
+witnesses, all MATCH/exit 0 in their final contexts. The failed initial
+procedural-header compilation (exit 2) and two incorrect cube/shadow tag
+associations (exit 1 each) are kept under `resource-native-r1/r2/r3`;
+the corrected tag association is `resource-native-r4`, exit 0. The signed-tag
+control did not fix the mismatch and is not represented as a successful
+correction. Exact failed-source hashes bind the two emitted mismatch receipts.
+The earlier bounded table-metadata script's KeyError and corrected new revision
+are also retained, not hidden or attributed to a source defect.
+
+`HANDOFF.json`, `same-class-disposition-r1.json`,
+`contract-deferrals-r3.json`, `witness-summary-r1.json` and
+`REMAINING-HEAVY-COMMANDS.json` in the worktree's integrator directory contain
+the exact scope, every finding-row disposition, accepted moves, native APIs,
+carried accepted sites, exits and hashes.
+
+No full build, suite, whole-ledger G3/argcheck, prepare, finalize or independent
+review was run by this worker. Main still owns the integrated typed/native/
+signature/header readiness work, once-only argcheck adjudication, G3, the
+prepare-owned suite and two fresh full builds, followed by two fresh
+independent reviews. The carried accepted type issues and 288 open original
+target populations must remain visible; MATCH does not close them.
+
+## C009-r4 pre-review FAIL and bounded static-table correction
+
+The independent source pre-review of **`be8aa40` FAILED** with PF01–PF06:
+**23 incompatible static callable/PMF slots across 11 NEW functions / 780 B**.
+Its immutable records are
+`scratch/prereview/c009-r4/{PREREVIEW.json,PREREVIEW.md,TABLES.json}`.
+This is not a registered acceptance review, and the freeze must not be
+prepared unchanged. The earlier 231-site census covered original indirect
+invocations, not every stored PMF or uninvoked installed-table declaration.
+Its scope is not silently broadened to claim that pre-review found no gap.
+
+Main authorized local corrections only inside already-NEW/revised units and
+narrow headers, with fresh exact witnesses. A correct local noninvoked table
+may stay honestly forward-only; it must not claim native virtual/destructor
+identity. Otherwise only the affected NEW functions defer until the canonical
+models under `scratch/research/type-models/` land. No accepted identity,
+provider signature or accepted native class is withdrawn or changed.
+
+### PF01 and PF05: honest noninvoked under-specifications
+
+**PF01 — `001cfbcc`, `001cfc7c`: retained and MATCH.**
+`W17LayoutVTable` is now forward-declared only. The two texture-pane operations
+store the independently evidenced address **`00224370`** into their existing
+first-word table pointer, but no operation reads/invokes a member of that
+table. No callable slots, zero-entry table, native Pane/TextBox subclass,
+complete original table extent or receiver conversion is claimed.
+The native providers named by the original cells remain unchanged.
+The separate dynamically invoked `W17MaterialVTable` is not falsely given
+this table's population.
+
+**PF05 — `001db104`: retained and MATCH.**
+`TextDecoderBase` is an ordinary descriptive storage record with exactly one
+explicit `const TextDecoderDispatch*` member. `TextDecoderDispatch` is
+forward-only; its sole source use stores the original address **`00224cc0`**.
+There are no virtual members, no compiler vptr plus another dispatch field,
+no destructor declaration, no invoked slot and no native-destructor claim
+over accepted `001db134(void*)`. The actual constructor and its qualified
+two-unsigned diagnostic operation remain; C1/C2 are its own constructor
+entries, not destructor aliases.
+
+These are deliberate, documented **under-specifications**, not recovered
+complete native types or source-callable interface approvals. The original
+address stores and exact object-prefix effects are retained without claiming
+the uninvoked cells have a compatible callable population.
+
+The `_ZTV15TextDecoderBase` and five allocator `_ZTV` bindings were c009-only
+inferred names: none exists in accepted cmodels' source commit
+`85fd18dc7173e0542d8c33db157d03b7910c18c5`, and `heap_allocators.h` was not an
+accepted header. Their provenance is preserved privately. No accepted native
+form was replaced. Unsupported c009-only ResourceObject constructor/vtable
+and deferred reader-getter own-definition names are also removed; the
+decoder's actual ordinary constructor bindings remain with corrected evidence.
+
+### PF02/PF03/PF04/PF06: eight further NEW-only deferrals
+
+| Finding | NEW function | Target bytes | Concrete reason and re-entry requirement |
+| --- | --- | ---: | --- |
+| PF02 | `001db3ec` | 24 | Height/texture-count providers have different actual font receivers. Land the coordinated retail/native font constructor, provider, registry and accessor-return model from `type-models/fontgfx/`, then migrate all users. |
+| PF03 | `0010d500` | 64 | Its native destructor slot contradicts accepted `001c5e48(void)`. A genuine one-opaque-pointer record emits 64 B but mismatches at `+0x28`, actual exit 1. |
+| PF03 | `0010dcb0` | 56 | Accepted target `001c6ad0(void)` is not a receiver-taking destructor; the honest opaque control emits 52/56 B, mismatches at `+0x24`, exit 1. |
+| PF03 | `0010dce8` | 56 | Same issue with accepted `001c6ad4(void)`; opaque control 52/56 B, `+0x24`, exit 1. |
+| PF03 | `0010dd20` | 56 | Same issue with accepted `001c6ae0(void)`; opaque control 52/56 B, `+0x24`, exit 1. |
+| PF03 | `00116be4` | 56 | Same issue with accepted `001c6ad8(void)`; opaque control 52/56 B, `+0x24`, exit 1. |
+| PF04 | `00143318` | 16 | The guessed 30-slot ResourceObject shape crosses distinct installed address points. Land the coordinated resource/accessor, layout-binding, animation and font-manager ownership/interface/extent model before restoring its constructor. |
+| PF06 | `001f4cf8` | 64 | Its u16 native-reader PMFs contradict accepted plain C byte/halfword cursor providers. Land genuine native CP1252/UTF16 definitions and all accepted moves/cursor-user migrations with the canonical font/reader model first. |
+
+The PF03 re-entry condition is the canonical allocator/heap and lifetime
+cutover from `type-models/services/` and coordinated type-model families,
+including actual destructor contracts and preserved accepted-provider
+migrations, followed by an exact natural constructor. Their valid opaque
+controls and every failed result are kept; no padding, ABI-prefix arithmetic,
+fake virtual receiver, alias or allocation/code-generation steering is adopted.
+The five NEW units and now-unused allocator header are absent.
+
+The three other deferred source units are absent too. The new
+`data_00224d30` declaration and `data_0021c64c` PMF-array claim are removed.
+The unused ResourceObject constructor declaration/bindings are removed;
+the accepted dynamic release/delete consumer stays intact and remains an
+unresolved population, not evidence of a complete 30-slot physical table.
+No accepted font, resource, cursor or empty C provider loses credit.
+
+All eight exact pre-review sources, source hashes, findings, slot evidence,
+failed controls and explicit re-entry conditions are in
+`scratch/integrator/c009-r4/prereview-fixes-r1/DEFERRALS.json` and the candidate.
+These are checkpoint-only NEW deferrals, not exhausted-residue classifications.
+
+### Bounded static-class sweep and current counts
+
+The bounded follow-through dispositions all **61** pre-review static/context
+tables and all **23** blocking cells: eight false callable claims are withdrawn
+by the two honest opaque models; fifteen cells' NEW constructor/getter claims
+are explicitly deferred. In function terms, **3 / 388 B are fixed and retained;
+8 / 392 B defer**. Dynamic/opaque tables are not recorded as zero-entry tables
+or as compatible simply because their members are unspecified.
+
+Fresh sequential v6/L1 `match.py --show 0` closure gives **50 units /
+62 credited functions, all MATCH, actual exit 0**. It includes all three
+retained owners, **34 transitive changed-header dependents**, nineteen actual
+provider units and the accepted resource-accessor caller. The nineteen
+provider-source bindings are unchanged, including every accepted provider.
+No expected credited row is missing. Scope SHA-256:
+`2204543cc85387fa11d251c600f0403dffd1901f5db5629602955c83a10fe0fa`.
+Full bounded result SHA-256:
+`bd58294af28a5fe8d42f884d9984d6f4a36cf01a4290f71ae5bef7e44b322b30`.
+The prior be8aa40-wide witness remains historical rather than being relabeled
+as a fresh post-pre-review whole-ledger audit.
+
+**PN01 stays explicitly carried/nonblocking by Main:** `data_00223d98` has
+two real font receiver disagreements and only the unchanged accepted
+`001c5b8c` installer. Its callable FontVTable completion was introduced during
+c009, **not** accepted in cmodels. Neither the unchanged installer source nor
+withdrawal of `001db3ec` makes that completion correct or historically accepted.
+The fourteen carried accepted invocation/target rows and all 288 unresolved
+original target-population rows also remain visible and unresolved.
+
+The current proposal is **2,221 units / 2,274 functions / 249,572 B**:
+all **1,621 accepted functions / 195,908 B** plus **653 NEW / 53,664 B**.
+New profiles are game **593 / 48,156 B**, middleware **35 / 3,824 B**,
+sdk **25 / 1,684 B**. The candidate has **664 units**.
+Additional r4 deferrals now total **22 / 3,120 B**; including the earlier
+`0011f3a8`, the r3/r4 boundary total is **23 / 3,388 B**.
+The five explicit accepted moves and accepted affected scope remain
+**156 destinations / 161 functions / 21,700 B**; no further accepted source
+unit is revised by this correction.
+
+This correction modifies only the narrow `layout_lifecycle.h`,
+`font_resource.h`, `resource_objects.h` headers and removes unused
+`heap_allocators.h`; names are cleaned of the unsupported c009-only claims.
+No accepted source/type-family cutover, heavy job, integrated suite,
+whole-ledger gate, prepare or acceptance review was run here. Main owns the
+fresh integrated readiness and prepare boundary. Exact current handoff,
+remaining commands and the archived `HANDOFF-be8aa40.json` preserve both states.
+

@@ -23,6 +23,11 @@ struct W6DisplayCollection;
 struct W17WideCollection;
 struct W18DisplayCollection;
 struct W18WideDisplayCollection;
+struct DispatchStateA;
+struct DispatchStateB;
+struct ModeDispatchObject;
+struct DisplayUpdateManager;
+struct W6SelectionScreen;
 
 #include "game/notification.h"
 #include "game/scene_dispatch.h"
@@ -152,11 +157,37 @@ struct W18SceneA {
     unsigned char reserved90[0x24];
     W18DisplayCollection *objects;
 };
+/* The noninvoked prefix permits lifecycle installers to retain the actual
+ * table address without claiming a common callable receiver. Concrete table
+ * tails below state the real providers' types. No call through this prefix
+ * is valid: the corresponding complete scene-owner relation is unrecovered. */
 struct W17SceneVTable {
     unsigned char reserved00[0x18];
-    void (*prepare)(ScreenResourceManager *scene);
-    unsigned int reserved1c;
-    void (*finish)(ScreenResourceManager *scene);
+};
+struct W17InactiveSceneVTable : W17SceneVTable {
+    unsigned reserved18;
+    unsigned reserved1c;
+    void (*finish)(DisplayUpdateManager *scene);
+};
+struct W18SceneAVTable : W17SceneVTable {
+    void (*prepare)(DispatchStateA *scene);
+    unsigned reserved1c;
+    void (*finish)(DisplayUpdateManager *scene);
+};
+struct W18SceneBVTable : W17SceneVTable {
+    void (*prepare)(DispatchStateB *scene);
+    unsigned reserved1c;
+    void (*finish)(DisplayUpdateManager *scene);
+};
+struct W18SceneCVTable : W17SceneVTable {
+    void (*prepare)(ModeDispatchObject *scene);
+    unsigned reserved1c;
+    void (*finish)(DisplayUpdateManager *scene);
+};
+struct W17SelectionSceneVTable : W17SceneVTable {
+    void (*prepare)(W6SelectionScreen *scene);
+    unsigned reserved1c;
+    void (*finish)(DisplayUpdateManager *scene);
 };
 struct W18SceneB {
     ScreenResourceManager base;
@@ -191,21 +222,21 @@ void func_001dc240(unsigned int mask);
 void func_00170f20(int index);
 TransformEntry *func_00174454(int index, int part);
 void func_00176df4(void);
-extern const W17SceneVTable data_0022360c;
+extern const W17InactiveSceneVTable data_0022360c;
 void func_00174480(void *object);
-extern const W17SceneVTable data_0022380c;
-extern const W17SceneVTable data_00223838;
-extern const W17SceneVTable data_00223864;
-extern const W17SceneVTable data_00223908;
+extern const W17InactiveSceneVTable data_0022380c;
+extern const W17SelectionSceneVTable data_00223838;
+extern const W17InactiveSceneVTable data_00223864;
+extern const W17InactiveSceneVTable data_00223908;
 
 int func_00171e30(void);
 void func_00170f6c(W18DisplayCollection *collection);
 int func_001c20e8(W18DisplayCollection *collection);
-extern const W17SceneVTable data_002235c8;
-extern const W17SceneVTable data_00223720;
+extern const W18SceneAVTable data_002235c8;
+extern const W18SceneBVTable data_00223720;
 
 void func_001c13f4(W18WideDisplayCollection *collection);
-extern const W17SceneVTable data_00223934;
+extern const W18SceneCVTable data_00223934;
 
 
 

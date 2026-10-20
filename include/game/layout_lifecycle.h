@@ -38,19 +38,9 @@ struct W17Material {
     unsigned char reserved04[0x49];
     unsigned char flags;
 };
-struct W17LayoutVTable {
-    void (*destroy)(W17Layout *);
-    void (*reserved04)(W17Layout *);
-    void (*reserved08)(W17Layout *);
-    void (*reserved0c)(W17Layout *);
-    void (*reserved10)(W17Layout *);
-    void (*reserved14)(W17Layout *);
-    void (*reserved18)(W17Layout *);
-    void (*reserved1c)(W17Layout *);
-    void (*reserved20)(W17Layout *);
-    unsigned char (*material_count)(W17Layout *);
-    W17Material *(*material)(W17Layout *, unsigned char);
-};
+/* Only table-address stores are recovered for this layout family. Keep the
+ * table forward-only: no callable shape or complete original extent is
+ * claimed, and no operation through this table is modeled here. */
 struct W17Layout {
     const W17LayoutVTable *vtable;
     unsigned char reserved04[0x0c];
