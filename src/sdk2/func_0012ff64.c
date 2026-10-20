@@ -5,7 +5,7 @@ union IpcWord {
     unsigned char byte;
 };
 
-extern CtrHandle data_00243040;
+
 
 CtrResult func_0012ff64(unsigned int value, unsigned char *out)
 {
@@ -15,7 +15,7 @@ CtrResult func_0012ff64(unsigned int value, unsigned char *out)
 
     command[0].word = ctrIpcHeader(11u, 1u, 0u);
     command[1].word = value;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure >= 0) {
         *out = command[2].byte;

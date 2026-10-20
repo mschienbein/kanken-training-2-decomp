@@ -40,7 +40,6 @@ extern int func_00142718(const void *text, unsigned size);
 extern "C" {
 #endif
 extern CtrResult func_0012f170(struct ServiceConfigurationWords *out);
-extern CtrHandle data_002430d8;
 #ifdef __cplusplus
 }
 #endif

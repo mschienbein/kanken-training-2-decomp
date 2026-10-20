@@ -10,6 +10,7 @@ struct PoolList;
 
 #include "game/pool_list.h"
 #include "game/runtime.h"
+#include "game/stream_manager.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 typedef void (*CleanupCallback)(void *memory, unsigned size, void *cookie);
@@ -38,12 +39,22 @@ struct CleanupContext {
     struct PoolList groups;
 };
 
+/* [INFERENCE] Original allocator entry forwards its real cleanup subobject;
+ * two recursive lock acquisitions are preserved by the outer/inner wrappers. */
+struct AsyncHeap {
+    unsigned reserved00;
+    struct StreamMutex mutex;
+    struct CleanupContext allocator;
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 void *func_001383e8(struct FrameHeap *heap, unsigned size, int alignment);
 extern void *func_001d995c(struct CleanupContext *context, unsigned size,
                   CleanupCallback callback, void *cookie);
+extern void func_001d9ca0(void *memory, unsigned size, void *cookie);
+extern void *func_001d9ce4(struct AsyncHeap *heap, unsigned size);
 #ifdef __cplusplus
 }
 #endif

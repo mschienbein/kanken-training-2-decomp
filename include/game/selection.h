@@ -136,10 +136,38 @@ extern void func_00179600(struct W6ListController *controller, int index, int ac
 extern void func_001e9818(void *screen, int index, int first, int second);
 extern void func_001e981c(void *screen, int group_index, int index, int value);
 extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
+extern void func_00190b1c(int category, int kind, int x, int y, int width, int height);
+extern void func_00190c1c(int category, int kind, int count, ...);
 #ifdef __cplusplus
 }
 #endif
 
+
+/* [INFERENCE] The dispatcher selects a pair slot at +0x90; the reset helper
+ * independently reads the first current/previous words, not the active index. */
+struct W6DisplayHandle;
+struct W6SelectionReset {
+    unsigned char reserved00[0x4c];
+    struct W6ListController *list;
+    unsigned char reserved50[0x0c];
+    struct W6HandlePanel10 *panel;
+    unsigned char reserved60[0x30];
+    int stack_index;
+    int modes[2];
+    int previous_modes[2];
+    unsigned char reserveda4[8];
+    struct W6DisplayHandle **handles;
+};
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void func_0016c55c(struct W6SelectionReset *state);
+extern void func_001bdb70(struct W6SelectionReset *state);
+extern void func_001bda14(struct W6SelectionReset *state);
+extern void func_001bd9f0(struct W6SelectionReset *state);
+#ifdef __cplusplus
+}
+#endif
 
 struct SelectionCallbacks {
     const void *reserved00[6];

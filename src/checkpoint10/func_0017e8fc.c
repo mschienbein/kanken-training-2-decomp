@@ -1,26 +1,5 @@
 #include <string.h>
-struct ChannelParameters {
-    unsigned samples;
-    unsigned reserved04;
-    unsigned reserved08;
-    unsigned char mode;
-    unsigned char reserved0d[3];
-};
-struct ChannelWorkspace {
-    unsigned reserved00;
-    struct ChannelParameters parameters;
-    void *memory;
-    unsigned memory_size;
-    void *buffers[4];
-    unsigned indices[4];
-    unsigned frames;
-    unsigned current;
-    unsigned reserved44[3];
-    unsigned saved_samples;
-    unsigned char saved_mode;
-    unsigned char channels;
-    unsigned char initialized;
-};
+#include "game/service_runtime.h"
 static void clear_parameters(struct ChannelParameters *parameters)
 {
     memset(parameters, 0, sizeof(*parameters));

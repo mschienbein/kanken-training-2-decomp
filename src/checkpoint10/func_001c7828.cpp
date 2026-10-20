@@ -7,6 +7,7 @@
 #include <nw/gfx/res/gfx_ResTexture.h>
 #include <nw/os/os_Memory.h>
 #include <new>
+#include "game/graphics_resource_abi.h"
 
 extern "C" nw::gfx::res::ResTexture func_001c7828(nw::os::IAllocator *allocator,
     nw::gfx::res::ResTexture source)

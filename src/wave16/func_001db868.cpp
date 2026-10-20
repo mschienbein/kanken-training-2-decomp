@@ -7,5 +7,6 @@
 
 extern "C" void func_001db868(void)
 {
-    bss_0028e27c.invoke_slot05();
+    ScreenResourceManager *scene = &bss_0028e27c;
+    scene->vtable->slot05(scene);
 }

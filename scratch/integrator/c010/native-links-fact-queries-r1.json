@@ -1,0 +1,809 @@
+{
+  "schema_version": 1,
+  "query_exits": [
+    {
+      "query": "bounded-six-function-linear-storage",
+      "exit_code": 0,
+      "limitations": [
+        "Linear register tracking only; conditional joins and loops are not control-flow proofs.",
+        "calls_or_direct_branches includes intra-function transfers; those numeric destinations are not recovered function identities."
+      ]
+    },
+    {
+      "query": "six-address-incoming-control-reference",
+      "exit_code": 0
+    },
+    {
+      "query": "original-cleanup-unbind-projection",
+      "exit_code": 0
+    }
+  ],
+  "diagnostic_linear_storage": {
+    "method": "Bounded exact-function symbolic storage/call facts, linear register tracking only; joins/loops are not a control-flow proof. No original text/bytes retained.",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "rows": [
+      {
+        "function": "func_001cff58",
+        "size": 56,
+        "member_projections": [
+          {
+            "offset": 8,
+            "base": "input.receiver",
+            "member_offset": 4
+          },
+          {
+            "offset": 36,
+            "base": "input.receiver",
+            "member_offset": 4
+          }
+        ],
+        "memory_reads": [
+          {
+            "base": "input.receiver",
+            "member_offset": 4,
+            "width": 4,
+            "offset": 4
+          },
+          {
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 8,
+            "width": 4,
+            "offset": 20
+          },
+          {
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 32
+          }
+        ],
+        "memory_writes": [],
+        "calls_or_direct_branches": [
+          {
+            "offset": 16,
+            "tail": true,
+            "target": {
+              "function": "func_001cff88"
+            },
+            "first_input": "memory32(input.receiver+4)",
+            "second_input": "input.animation"
+          },
+          {
+            "offset": 28,
+            "tail": true,
+            "target": {
+              "function": "func_001cff8c"
+            },
+            "first_input": "memory32(input.receiver+4)",
+            "second_input": "input.animation"
+          },
+          {
+            "offset": 44,
+            "tail": true,
+            "target": {
+              "function": "func_001cff6c"
+            },
+            "first_input": "memory32(memory32(input.receiver+4)+0)",
+            "second_input": "input.animation"
+          }
+        ],
+        "comparisons": [
+          {
+            "offset": 12,
+            "operands": [
+              "memory32(input.receiver+4)",
+              "input.receiver+4"
+            ]
+          },
+          {
+            "offset": 24,
+            "operands": [
+              "input.animation",
+              "memory32(memory32(input.receiver+4)+8)"
+            ]
+          },
+          {
+            "offset": 40,
+            "operands": [
+              "memory32(memory32(input.receiver+4)+0)",
+              "input.receiver+4"
+            ]
+          }
+        ],
+        "linear_terminal_result_origin": {
+          "constant": 0
+        }
+      },
+      {
+        "function": "func_0016b5fc",
+        "size": 96,
+        "member_projections": [
+          {
+            "offset": 80,
+            "base": "input.receiver",
+            "member_offset": 4
+          }
+        ],
+        "memory_reads": [
+          {
+            "base": "input.receiver",
+            "member_offset": 4,
+            "width": 4,
+            "offset": 12
+          },
+          {
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 8,
+            "width": 4,
+            "offset": 36
+          },
+          {
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 40
+          }
+        ],
+        "memory_writes": [
+          {
+            "offset": 68,
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 14,
+            "width": 1,
+            "value_origin": {
+              "constant": 0
+            }
+          },
+          {
+            "offset": 72,
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 8,
+            "width": 4,
+            "value_origin": {
+              "constant": 0
+            }
+          },
+          {
+            "offset": 76,
+            "base": "memory32(input.receiver+4)",
+            "member_offset": 12,
+            "width": 2,
+            "value_origin": {
+              "constant": 0
+            }
+          }
+        ],
+        "calls_or_direct_branches": [
+          {
+            "offset": 24,
+            "tail": true,
+            "target": {
+              "function": "func_0016b658"
+            },
+            "first_input": "unresolved",
+            "second_input": "input.animation"
+          },
+          {
+            "offset": 48,
+            "tail": true,
+            "target": {
+              "function": "func_0016b64c"
+            },
+            "first_input": "memory32(memory32(input.receiver+4)+8)",
+            "second_input": "memory32(input.receiver+4)"
+          },
+          {
+            "offset": 60,
+            "tail": false,
+            "target": {
+              "function": "func_00191178"
+            },
+            "first_input": "input.receiver",
+            "second_input": "memory32(input.receiver+4)"
+          },
+          {
+            "offset": 88,
+            "tail": true,
+            "target": {
+              "function": "func_0016b618"
+            },
+            "first_input": "input.receiver+4",
+            "second_input": "unresolved"
+          }
+        ],
+        "comparisons": [
+          {
+            "offset": 20,
+            "operands": [
+              "memory32(input.receiver+4)",
+              "unresolved"
+            ]
+          },
+          {
+            "offset": 32,
+            "operands": [
+              "input.animation",
+              {
+                "constant": 0
+              }
+            ]
+          },
+          {
+            "offset": 44,
+            "operands": [
+              "memory32(memory32(input.receiver+4)+8)",
+              "input.animation"
+            ]
+          },
+          {
+            "offset": 84,
+            "operands": [
+              "memory32(memory32(input.receiver+4)+0)",
+              "input.receiver+4"
+            ]
+          }
+        ],
+        "linear_terminal_result_origin": "input.receiver+4"
+      },
+      {
+        "function": "func_0016b58c",
+        "size": 112,
+        "member_projections": [
+          {
+            "offset": 84,
+            "base": {
+              "constant": 0
+            },
+            "member_offset": 1
+          },
+          {
+            "offset": 100,
+            "base": "input.receiver",
+            "member_offset": 28
+          }
+        ],
+        "memory_reads": [
+          {
+            "base": "input.receiver",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 12
+          },
+          {
+            "base": "memory32(input.receiver+0)",
+            "member_offset": 36,
+            "width": 4,
+            "offset": 16
+          },
+          {
+            "base": "input.receiver",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 40
+          },
+          {
+            "base": "memory32(input.receiver+0)",
+            "member_offset": 40,
+            "width": 4,
+            "offset": 48
+          },
+          {
+            "base": "call-result@56",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 68
+          },
+          {
+            "base": "memory32(call-result@56+0)",
+            "member_offset": 12,
+            "width": 4,
+            "offset": 72
+          }
+        ],
+        "memory_writes": [],
+        "calls_or_direct_branches": [
+          {
+            "offset": 24,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(input.receiver+0)+36)"
+            },
+            "first_input": "input.receiver",
+            "second_input": "memory32(memory32(input.receiver+0)+36)"
+          },
+          {
+            "offset": 36,
+            "tail": true,
+            "target": {
+              "function": "func_0016b5ec"
+            },
+            "first_input": "call-result@24",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 56,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(input.receiver+0)+40)"
+            },
+            "first_input": "input.receiver",
+            "second_input": {
+              "constant": 0
+            }
+          },
+          {
+            "offset": 64,
+            "tail": true,
+            "target": {
+              "function": "func_0016b5e0"
+            },
+            "first_input": "call-result@56",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 80,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(call-result@56+0)+12)"
+            },
+            "first_input": "call-result@56",
+            "second_input": "input.animation"
+          },
+          {
+            "offset": 92,
+            "tail": true,
+            "target": {
+              "function": "func_0016b5b4"
+            },
+            "first_input": "call-result@80",
+            "second_input": "unresolved"
+          }
+        ],
+        "comparisons": [
+          {
+            "offset": 60,
+            "operands": [
+              "call-result@56",
+              {
+                "constant": 0
+              }
+            ]
+          },
+          {
+            "offset": 88,
+            "operands": [
+              "{'constant': 0}+1",
+              "call-result@24"
+            ]
+          }
+        ],
+        "linear_terminal_result_origin": "input.receiver+28"
+      },
+      {
+        "function": "func_001cff50",
+        "size": 8,
+        "member_projections": [
+          {
+            "offset": 0,
+            "base": "input.receiver",
+            "member_offset": 28
+          }
+        ],
+        "memory_reads": [],
+        "memory_writes": [],
+        "calls_or_direct_branches": [],
+        "comparisons": [],
+        "linear_terminal_result_origin": "input.receiver+28"
+      },
+      {
+        "function": "func_001cfdac",
+        "size": 8,
+        "member_projections": [
+          {
+            "offset": 0,
+            "base": "input.receiver",
+            "member_offset": 4
+          }
+        ],
+        "memory_reads": [],
+        "memory_writes": [],
+        "calls_or_direct_branches": [
+          {
+            "offset": 4,
+            "tail": true,
+            "target": {
+              "function": "func_001cff58"
+            },
+            "first_input": "input.receiver+4",
+            "second_input": "input.animation"
+          }
+        ],
+        "comparisons": [],
+        "linear_terminal_result_origin": "input.receiver+4"
+      },
+      {
+        "function": "func_001cfd94",
+        "size": 8,
+        "member_projections": [
+          {
+            "offset": 0,
+            "base": "input.receiver",
+            "member_offset": 4
+          }
+        ],
+        "memory_reads": [],
+        "memory_writes": [],
+        "calls_or_direct_branches": [
+          {
+            "offset": 4,
+            "tail": true,
+            "target": {
+              "function": "func_0016b5fc"
+            },
+            "first_input": "input.receiver+4",
+            "second_input": "input.animation"
+          }
+        ],
+        "comparisons": [],
+        "linear_terminal_result_origin": "input.receiver+4"
+      }
+    ]
+  },
+  "bounded_incoming_references": {
+    "method": "Bounded incoming direct-control-reference query for exactly six named addresses over catalogue ARM code ranges; terminal fallthrough detected only at an exact catalogue boundary. This is not a whole-ledger audit; indirect/data references are not exhaustively recovered.",
+    "targets": [
+      "func_0016b58c",
+      "func_0016b5fc",
+      "func_001cfd94",
+      "func_001cfdac",
+      "func_001cff50",
+      "func_001cff58"
+    ],
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "direct_incoming": [
+      {
+        "source_function": "func_0016a998",
+        "offset": 204,
+        "target_function": "func_0016b5fc",
+        "kind": "direct-call"
+      },
+      {
+        "source_function": "func_001cfd94",
+        "offset": 4,
+        "target_function": "func_0016b5fc",
+        "kind": "direct-tail"
+      },
+      {
+        "source_function": "func_001cfdac",
+        "offset": 4,
+        "target_function": "func_001cff58",
+        "kind": "direct-tail"
+      }
+    ],
+    "terminal_fallthrough": [
+      {
+        "source_function": "func_0016b58c",
+        "offset": 108,
+        "target_function": "func_0016b5fc",
+        "kind": "terminal-fallthrough",
+        "terminal_has_no_control_transfer": true
+      },
+      {
+        "source_function": "func_001cff50",
+        "offset": 4,
+        "target_function": "func_001cff58",
+        "kind": "terminal-fallthrough",
+        "terminal_has_no_control_transfer": true
+      }
+    ]
+  },
+  "additional_original_cleanup_query": {
+    "method": "Bounded exact-function symbolic storage/call facts, linear register tracking only; joins/loops are not a control-flow proof. No original text/bytes retained.",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "rows": [
+      {
+        "function": "func_0016a998",
+        "size": 220,
+        "member_projections": [
+          {
+            "offset": 20,
+            "base": "input.receiver",
+            "member_offset": 20
+          },
+          {
+            "offset": 40,
+            "base": "input.receiver",
+            "member_offset": 16
+          },
+          {
+            "offset": 64,
+            "base": "memory32(input.receiver+20)",
+            "member_offset": -4
+          },
+          {
+            "offset": 96,
+            "base": "input.receiver",
+            "member_offset": 20
+          },
+          {
+            "offset": 184,
+            "base": {
+              "constant": 0
+            },
+            "member_offset": 1
+          },
+          {
+            "offset": 200,
+            "base": "input.receiver",
+            "member_offset": 28
+          }
+        ],
+        "memory_reads": [
+          {
+            "base": "unresolved",
+            "member_offset": 200,
+            "width": 4,
+            "offset": 8
+          },
+          {
+            "base": "input.receiver",
+            "member_offset": 20,
+            "width": 4,
+            "offset": 16
+          },
+          {
+            "base": "memory32(input.receiver+20)",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 36
+          },
+          {
+            "base": "memory32(input.receiver+20)",
+            "member_offset": 179,
+            "width": 1,
+            "offset": 52
+          },
+          {
+            "base": "memory32(input.receiver+20)-4",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 72
+          },
+          {
+            "base": "memory32(memory32(input.receiver+20)-4+0)",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 76
+          },
+          {
+            "base": "input.receiver",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 108
+          },
+          {
+            "base": "memory32(input.receiver+0)",
+            "member_offset": 36,
+            "width": 4,
+            "offset": 116
+          },
+          {
+            "base": "input.receiver",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 140
+          },
+          {
+            "base": "memory32(input.receiver+0)",
+            "member_offset": 40,
+            "width": 4,
+            "offset": 148
+          },
+          {
+            "base": "call-result@156",
+            "member_offset": 0,
+            "width": 4,
+            "offset": 168
+          },
+          {
+            "base": "memory32(call-result@156+0)",
+            "member_offset": 12,
+            "width": 4,
+            "offset": 172
+          }
+        ],
+        "memory_writes": [
+          {
+            "offset": 12,
+            "base": "input.receiver",
+            "member_offset": 0,
+            "width": 4,
+            "value_origin": "memory32(unresolved+200)"
+          }
+        ],
+        "calls_or_direct_branches": [
+          {
+            "offset": 28,
+            "tail": true,
+            "target": {
+              "function": "func_0016aa04"
+            },
+            "first_input": "input.receiver+20",
+            "second_input": "input.animation"
+          },
+          {
+            "offset": 48,
+            "tail": false,
+            "target": {
+              "function": "func_00191178"
+            },
+            "first_input": "input.receiver+16",
+            "second_input": "memory32(input.receiver+20)"
+          },
+          {
+            "offset": 60,
+            "tail": true,
+            "target": {
+              "function": "func_0016a9f8"
+            },
+            "first_input": "memory8(memory32(input.receiver+20)+179)",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 68,
+            "tail": true,
+            "target": {
+              "function": "func_0016a9f8"
+            },
+            "first_input": "memory8(memory32(input.receiver+20)+179)",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 84,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(memory32(input.receiver+20)-4+0)+0)"
+            },
+            "first_input": "memory32(input.receiver+20)-4",
+            "second_input": "memory32(memory32(memory32(input.receiver+20)-4+0)+0)"
+          },
+          {
+            "offset": 92,
+            "tail": false,
+            "target": {
+              "function": "func_00191aec"
+            },
+            "first_input": "memory32(input.receiver+20)-4",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 104,
+            "tail": true,
+            "target": {
+              "function": "func_0016a9b8"
+            },
+            "first_input": "input.receiver+20",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 124,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(input.receiver+0)+36)"
+            },
+            "first_input": "input.receiver",
+            "second_input": "memory32(memory32(input.receiver+0)+36)"
+          },
+          {
+            "offset": 136,
+            "tail": true,
+            "target": {
+              "function": "func_0016aa5c"
+            },
+            "first_input": "call-result@124",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 156,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(input.receiver+0)+40)"
+            },
+            "first_input": "input.receiver",
+            "second_input": {
+              "constant": 0
+            }
+          },
+          {
+            "offset": 164,
+            "tail": true,
+            "target": {
+              "function": "func_0016aa50"
+            },
+            "first_input": "call-result@156",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 180,
+            "tail": false,
+            "target": {
+              "indirect_origin": "memory32(memory32(call-result@156+0)+12)"
+            },
+            "first_input": "call-result@156",
+            "second_input": {
+              "constant": 0
+            }
+          },
+          {
+            "offset": 192,
+            "tail": true,
+            "target": {
+              "function": "func_0016aa24"
+            },
+            "first_input": "call-result@180",
+            "second_input": "unresolved"
+          },
+          {
+            "offset": 204,
+            "tail": false,
+            "target": {
+              "function": "func_0016b5fc"
+            },
+            "first_input": "input.receiver+28",
+            "second_input": {
+              "constant": 0
+            }
+          }
+        ],
+        "comparisons": [
+          {
+            "offset": 24,
+            "operands": [
+              "memory32(input.receiver+20)",
+              "input.receiver+20"
+            ]
+          },
+          {
+            "offset": 100,
+            "operands": [
+              "memory32(memory32(input.receiver+20)+0)",
+              "input.receiver+20"
+            ]
+          },
+          {
+            "offset": 160,
+            "operands": [
+              "call-result@156",
+              {
+                "constant": 0
+              }
+            ]
+          },
+          {
+            "offset": 188,
+            "operands": [
+              "{'constant': 0}+1",
+              "call-result@124"
+            ]
+          }
+        ],
+        "linear_terminal_result_origin": "input.receiver"
+      }
+    ]
+  },
+  "metadata_scope_preparation_attempts": [
+    {
+      "attempt": 1,
+      "actual_exit": 1,
+      "reason": "KeyError: src/wave17/func_0016f4ec.c is in predecessor c009, not accepted/c010."
+    },
+    {
+      "attempt": 2,
+      "actual_exit": 0,
+      "resolution": "Included exact frozen c009 candidate metadata for direct header dependents; no profile guessing."
+    }
+  ],
+  "qualification": "These original metadata queries neither execute the game nor establish historical native spellings. Native lookup identity uses the pre-existing same-address self-definition only."
+}

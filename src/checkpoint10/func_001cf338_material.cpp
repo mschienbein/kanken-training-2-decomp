@@ -5,23 +5,6 @@
 #include <nw/lyt/lyt_Common.h>
 #include "game/runtime.h"
 
-struct MaterialPane {
-    const void *const *vtable;
-    unsigned char reserved04[0x138];
-    nw::lyt::Material *resource;
-    unsigned char reserved140[0x10];
-    nw::lyt::internal::TexCoordAry vertices;
-};
-
-/* INTEGRATOR: move to include/game/layout_lifecycle.h. */
-extern "C" {
-extern const void *const data_002242f0[];
-/* INTEGRATOR: differs from src/wave4/func_0016a994.c: the base destructor
- * returns its input object, as evidenced by deleting-destructor chaining. */
-
-void *func_001cf3a4(MaterialPane *pane);
-void func_001cf338(MaterialPane *pane);
-}
 
 void *func_001cf3a4(MaterialPane *pane)
 {

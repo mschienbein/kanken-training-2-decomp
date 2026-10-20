@@ -3,24 +3,8 @@
  * the previous void declaration dropped an observed return value. */
 #include "ctr/svc.h"
 
-struct ServicePublicationState {
-    unsigned char deferred, published, pending, acquired;
-    unsigned short first, second;
-    CtrHandle *session;
-    unsigned busy;
-    unsigned char lock_storage[8];
-    CtrHandle handle;
-    const void *source;
-    unsigned size;
-};
-/* INTEGRATOR: differs from include/game/service_runtime.h: +8 is a session pointer and +4/+6 are halfword publication parameters. */
 
-extern const unsigned char data_00229aa0[];
-/* INTEGRATOR: move to include/game/service_runtime.h */
-CtrResult func_00185050(const void *source, unsigned size,
-    unsigned short first, unsigned short second);
-
-static __inline void configure_defaults(struct ServicePublicationState *state,
+static __inline void configure_defaults(struct ResourceServiceState *state,
                                         const void *source, unsigned size)
 {
     state->source = source;

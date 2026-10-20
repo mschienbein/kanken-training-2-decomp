@@ -2,31 +2,81 @@
 
 ## Status
 
-**Readiness on main f24fa0b / frozen GATES v1.19; not review-ready or accepted.**
-Includes finalized c008-r3 (sequence 8), preserving c009's typed slot13/14 work.
-The original sixteen-address boundary currently retains five canonical destinations
-and eleven recorded deferrals: the earlier collected `0013156c` was withdrawn
-on a native C++ API qualification. Five other later interface/scope deferrals remain.
-Main owns full builds/suite and acceptance. Audited main f24fa0b is merged; cmodels
-finalization must be merged after Main supplies its finalized hash. C009 remains
-explicitly **armlink5-inline-branchnop-v2 / none**, with no model transition.
-G3 r5 is historical to its prior hashes/scope. No current pre-review PASS is claimed.
+**Prepare FAIL; retained as immutable history.** Both fresh builds stopped because
+accepted `func_0011d260` emitted 112 bytes instead of 116. The suite (806 tests,
+one skip) and G3 passed; no independent acceptance review or finalization occurred.
+The corrected attempt **c009-r2** subsequently SEALED FAIL in both independent
+reviews. Its source successor c009-r3 corrects all five reported units with a
+qualified C-only discard-result scheduler protocol and typed no-op registration
+helpers (`docs/known-issues-c009-r2.md`). Its 32 final bounded smoke combinations
+all MATCH; Main still owns integrated gates and fresh independent review. No
+failed checkpoint is retried under its old name. Finalized main 261fdc9 / cmodels
+sequence 9 remains the accepted base; GATES v1.19 and v9-r2 are unchanged.
+Every current isolated match and the eventual Main prepare explicitly select
+**armlink5-inline-branchnop-v6 + anonymous-string-records-v1** (the accepted
+cmodels pair, so no model transition). Earlier v2/none instructions are superseded;
+historical receipts retain their original selections and failed evidence.
+The canonical MessageLayout receiver is cast-free and is never aliased to
+DisplayHandle. Accepted `001b8908`, `001e0afc` and `001ed874` have scoped MATCH
+with their supplied helper closure after receiver/reset/visual-owner reconciliation.
+Main alone owns full builds, the suite, prepare/finalize and accepted-record writes.
 
-`config/candidates/c009.json` lists **676 units / 676 functions / 57,052 target
-bytes**. These are unaccepted scope totals; the final current-tree sweep is pending:
+`config/candidates/c009.json` retains **675 new functions / 56,784 target bytes**.
+C009-r3 has 682 candidate units: those 675 destinations, six uncredited typed
+registration helpers and one explicit accepted native-constructor destination.
+Pure metadata composition preserves all 1,621 accepted identities uniquely and
+proposes 2,296 functions / 252,692 B. Main explicitly authorized only NEW
+`0011f3a8` (268 B) as a non-exhausted code-generation deferral; its valid candidate
+and every failed context remain private. No accepted identity is withdrawn and
+no other proposed identity is dropped.
 
-| Frozen profile | Units/functions | Target bytes |
+| Frozen profile | New functions | New target bytes |
 | --- | ---: | ---: |
-| game | 615 | 51,424 |
+| game | 614 | 51,156 |
 | middleware | 36 | 3,944 |
 | sdk | 25 | 1,684 |
 
 Previous collect inputs, successful destination receipts, dirty sources and author results
 were recovered rather than restarted. L042's recovered `func_001e3af4` is included. Both
-w17h SDK alternate MATCH rows (`00190688`, `001dbaac`) are included. v3/literal-record
-results are not silently admitted into this default-model checkpoint.
+w17h SDK alternate MATCH rows (`00190688`, `001dbaac`) are included. Model selection
+is explicit rather than inferred from author receipts or optional manifest metadata.
 
-## Blocking evidence
+## Pre-C009-r3 pre-review evidence
+
+The following measurements bind their historical source boundaries, not the
+changed c009-r3 tree and not a source-level callback approval. Main must rerun
+the required integrated closure on the committed r3 source freeze.
+
+- Exact required sweep: **832 units / 838 functions, all MATCH, exit 0**.
+- Whole proposed ledger G3: **2,238 units**, 1,728 checked C units, **zero
+  disagreements/policy items/unchecked C**, 510 explicitly waived C++ units; exit 0.
+- Native canonical probes: **1,940 units, zero compilation failures**. Exit 1
+  reports ten nonfatal diagnostic units, all individually qualified (signed raw
+  error constants, natural assignment-in-condition, and public imported-header warnings).
+- Actual C signatures: **1,500**, zero failures/diagnostics, exit 0; whole **174
+  game-header** C++ co-inclusion also exits 0 with no diagnostics.
+- Argcheck: **2,297 functions**, 78 reported issues and 412 notes all adjudicated;
+  actual exit 2 retains 389 mechanically unchecked function ABIs, not a false parser PASS.
+- Complete original indirect inventory: 1,212 sites; zero untyped callable-storage
+  candidates and zero required callback-object gaps. All sites dispositioned;
+  85 forwarded-type candidates individually adjudicated.
+- All **seven integrator pre-review steps** have **838 destination-bound rows**.
+  R1 identity provenance, original counted loops, ARMCC extensions, original bugs and
+  native ABI limitations remain explicit qualifications for independent reviewers.
+
+Private binding is under `scratch/worktrees/c009/scratch/integrator/c009/`:
+`PRE-REVIEW-resume-r1.json` and current `readiness-scope-r11.json`; audited r10 is
+retained separately. The integration agent ran no full build, test suite, prepare,
+finalize, accepted-record write or push. Main owns those gates and both independent reviews.
+
+The final **ccddf12** correction changes only `001e3050`'s last store to the
+named `phase` member instead of indexing beyond `states[0..7]`. It MATCHes all
+80 bytes in `phase-store-r1.json`. Headers and callers are unchanged. The full
+audit results above remain bound to the **56c333e** boundary; Main performs the
+integrated full gates on the correction, with no blanket reattribution of old hashes.
+
+
+## Preserved historical failure evidence
 
 * The full final MATCH sweep measured all **801 required units / 805 functions**:
   **772 MATCH units, 16 compiler-failure units, 13 byte-mismatch units**.
@@ -71,9 +121,12 @@ results are not silently admitted into this default-model checkpoint.
   No shadow global/return type, call alias or steering recovers the missing bytes.
   Current revised scope is **122 units / 126 functions**; required union is
   **798 units / 802 functions**, dry ledger **2,203 units / 2,277 functions**.
-* Final all-new/revised matching, complete argcheck adjudication and the seven-step
-  pre-review have **not** run after these changes. No full build, suite, prepare,
-  finalize, history edit or push was performed.
+* The earlier resumed r7 snapshot had 819 required units / 824 functions and
+  127 revised accepted units / 131 functions. Subsequent compiler-probe caller
+  reconciliation expands the final required scope to **832 units / 838 functions**
+  and **142 revised accepted units / 147 functions**. All 1,621 accepted identities
+  survive in the 2,238-unit / 2,297-function dry ledger; no owner moves or retirements.
+  Current exact inputs are `readiness-scope-r10.json`; earlier inputs/failures remain intact.
 * Collection closure is recorded in `collection-closure-r1.json`; its six original
   MATCH measurements remain historical. Current scope retains five: the game reader
   now uses the genuine native API, while the separate middleware reader is withdrawn.
@@ -96,7 +149,8 @@ The remaining integration state is described in `scratch/integrator/c009-NOTES.m
 Main explicitly approved these as `contract-resolution`. Resolve the owner group
 in a dedicated reviewed pass; do not invent a common owner merely to combine the rows.
 The source/receipt paths and failed natural cutover evidence are in private NOTES/HANDOFF.
-L034 `001b8908` remains selected-model/v3 scope, not a default C009 addition.
+L034 `001b8908` is accepted cmodels material, retained at its accepted source and
+reopened for shared-header review; it is not a C009 addition.
 
 ## Preserved C008 deferrals
 
@@ -116,7 +170,7 @@ Both are recorded under step 3's defer-with-reason option, with private sources
 and exact evidence retained in `contract-deferrals.json`. They are not MATCH
 or acceptance claims.
 
-## Predecessor boundary and newer pending remediation
+## Historical predecessor boundary and remediation
 
 c008-r2 `38b4c01` was merged at `9218542`; the dry ledger no longer uses failed
 original c008. The current dry ledger has **2,205 units / 2,279 functions**:

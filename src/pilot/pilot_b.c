@@ -1,7 +1,6 @@
 #include "game/functions.h"
 #include "game/runtime.h"
-struct G103798 { void *p; int n; };
-extern struct G103798 data_00242220;
+#include "game/exp_heap.h"
 void func_00103798(void) {
     if (data_00242220.p) {
         func_0019dc20(data_00242220.p);

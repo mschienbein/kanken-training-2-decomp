@@ -5,28 +5,6 @@
 #include "game/stream_manager.h"
 
 
-struct SequenceDataBinding {
-    unsigned reserved00[5];
-    const void *data;
-};
-struct SequenceCommandSound : SequenceSound {
-    unsigned char reserved230[0x20e4];
-    SequenceDataBinding binding;
-};
-struct SequenceStartEvent : StreamEvent {
-    unsigned reserved14;
-    SequenceStartOptions options;
-    SequenceDataBinding *binding;
-    StreamEvent *initialize(SoundPlaybackState *player, SequenceDataBinding *new_binding,
-                            const SequenceStartOptions &new_options)
-    {
-        opcode = 0x28;
-        object = player;
-        binding = new_binding;
-        options = new_options;
-        return this;
-    }
-};
 
 template <class Command>
 static Command *allocate_command(StreamManager *manager)
@@ -36,9 +14,6 @@ static Command *allocate_command(StreamManager *manager)
     return command;
 }
 
-/* INTEGRATOR: move the entry prototype and command types to include/game/sound_commands.h. */
-extern "C" void func_001d31cc(SequenceCommandSound *sound, const void *data,
-                                 const SequenceStartOptions *options);
 void func_001d31cc(SequenceCommandSound *sound, const void *data,
                        const SequenceStartOptions *options)
 {

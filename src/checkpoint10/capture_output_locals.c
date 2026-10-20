@@ -21,7 +21,7 @@ CtrResult func_00123538(unsigned char selector, unsigned char *enabled,
 
     command->header = ctrIpcHeader(5u, 1u, 0u);
     ctrIpcMarshalByte(&command->status.selector, &selector);
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure < 0)
         return result;

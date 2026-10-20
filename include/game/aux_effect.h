@@ -2,14 +2,14 @@
 #define GAME_AUX_EFFECT_H
 
 struct AudioRecord12;
-struct AuxDelayProcessor;
+struct ChannelWorkspace;
 struct AuxEffectNode;
 struct AuxEffectSlot;
 struct AuxEffectState;
 struct AuxEffectVTable;
 struct AuxFloatRamp;
 struct AuxFrameState;
-struct AuxReverbProcessor;
+struct ExtendedWorkspace;
 struct InputLatchSnapshot;
 struct PoolLink;
 struct PoolList;
@@ -94,8 +94,8 @@ extern void func_0014c930(struct ServiceOutput *manager, signed char channel);
 extern void func_0014c990(struct ServiceOutput *manager, signed char channel);
 extern void func_0017e654(struct AuxFloatRamp *ramp, int duration, float target);
 extern void func_0017e848(int index, float value);
-extern int func_001525c8(signed char channel, struct AuxDelayProcessor *effect);
-extern int func_001525dc(signed char channel, struct AuxReverbProcessor *effect);
+extern int func_001525c8(signed char channel, struct ChannelWorkspace *workspace);
+extern int func_001525dc(signed char channel, struct ExtendedWorkspace *workspace);
 extern void func_00152c88(int **channels, unsigned sample_count, void *context);
 extern struct AuxFrameState bss_004b6584;
 extern int func_0014c90c(struct InputLatchSnapshot *flags, int kind, int channel);
@@ -108,9 +108,9 @@ extern void func_0014b078(signed char channel);
 extern void func_0014b234(signed char channel);
 extern struct AudioRecord12 *func_0014ee30(struct AudioRecord12 *record);
 extern int func_001504a8(struct SoundSubsystem *manager, unsigned char channel,
-                  struct AuxDelayProcessor *effect);
+                  struct ChannelWorkspace *workspace);
 extern int func_0015050c(struct SoundSubsystem *manager, unsigned char channel,
-                  struct AuxReverbProcessor *effect);
+                  struct ExtendedWorkspace *workspace);
 extern int func_00150570(struct SoundSubsystem *manager, unsigned char channel,
                   struct AuxEffectNode *effect);
 extern int func_00151d50(struct AuxEffectState *effect, int enabled);

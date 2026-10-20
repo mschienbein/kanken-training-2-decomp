@@ -2,8 +2,6 @@
 #include "game/audio_voice.h"
 #include "nw/ut/ut_Inlines.h"
 
-/* INTEGRATOR: move this recovered declaration into game/audio_voice.h. */
-extern "C" void func_001500bc(AudioVoiceGroup *group, int type, float factor);
 
 void func_001500bc(AudioVoiceGroup *group, int type, float factor)
 {

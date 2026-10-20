@@ -12,7 +12,9 @@ extern void func_00135c10(int count);
 
 
 
-void func_00107140(void)
+/* C-only procedure callback: every caller discards its value (C11 6.9.1p12).
+ * Do not consume the result or compile this definition as C++. */
+int func_00107140(void)
 {
     func_00195b6c(0, 0, 0, 0, 0);
     func_00110ed8(1024);

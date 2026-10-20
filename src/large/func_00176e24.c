@@ -8,10 +8,8 @@ extern void func_001b3434(struct Component001b3434 *component);
 extern void func_001ea87c(struct Component001ea87c *component);
 extern void func_001e9cdc(struct Component001e9cdc *component);
 extern void func_001eaed8(struct Component001eaed8 *component);
-extern void func_00168454(struct Component00168454 *component);
 extern void func_001af424(struct Component001af424 *component);
 extern void func_001acff0(struct Component001acff0 *component);
-extern void func_001682e8(struct Component001682e8 *component);
 extern void func_001b6a0c(struct Component001b6a0c *component);
 extern void func_001b45ac(struct Component001b45ac *component);
 extern void func_001b41b8(struct Component001b41b8 *component);
@@ -30,8 +28,8 @@ void func_00176e24(struct ScreenResourceManager *manager)
 {
     int i;
     /* [INFERENCE] callee identity: inlined by armlink. */
-    if (manager->preliminary[0]) func_00174480(manager->preliminary[0]);
-    if (manager->preliminary[1]) func_00174480(manager->preliminary[1]);
+    if (manager->secondary) func_00174480(manager->secondary);
+    if (manager->primary) func_00174480(manager->primary);
     if (manager->component00) func_001e3548(manager->component00);
     if (manager->component01) func_001b3434(manager->component01);
     if (manager->component02) func_001ea87c(manager->component02);

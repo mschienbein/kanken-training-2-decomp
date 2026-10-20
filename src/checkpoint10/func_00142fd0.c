@@ -34,7 +34,7 @@ CtrResult func_00142fd0(unsigned int value, const void *buffer,
     memcpy(&command->handle, &handle, sizeof(handle));
     command->input.descriptor = ctrIpcStaticBufferDescriptor(size, 0);
     command->input.buffer = buffer;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure >= 0)
         result = (CtrResult)command->parameter;

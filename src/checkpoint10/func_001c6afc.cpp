@@ -1,20 +1,7 @@
 #include <preinclude.h>
 #include <nw/os/os_Memory.h>
 
-struct OwnedBufferVTable;
-/* [INFERENCE] Partial ABI view; allocator is the canonical native interface. */
-struct OwnedBufferState {
-    const OwnedBufferVTable *vtable;
-    nw::os::IAllocator *allocator;
-    bool owns;
-    unsigned char reserved09[3];
-    void *buffer;
-    ~OwnedBufferState();
-};
-/* INTEGRATOR: move to include/game/buffer_owner.h. */
-extern "C" {
-extern const OwnedBufferVTable data_00223f3c;
-}
+#include "game/render_resource.h"
 
 inline OwnedBufferState::~OwnedBufferState()
 {

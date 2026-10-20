@@ -59,6 +59,16 @@ It selects `FrameHeap::FreeByState` and externalizes two release-mode hooks; the
 erased historical identities are explicitly inferred. Its per-file notice is retained,
 and the upstream license remains in `src/nw4c/LICENSE.txt`. The hooks and model selection
 grant no library/helper credit.
+
+The unaccepted c010 candidate
+`src/checkpoint10/collect-r2/func_001cff58.cpp` adapts the same pinned
+`lyt_Animation.cpp` lookup algorithm. Its sole native definition and the existing
+native animation-list contract are shared by the pane/material lookup and unbind
+consumers; target owner prefixes remain separate from native pane/material classes.
+The same-address name proof, bounded destination receipts and limitations are in
+`scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json`; neither this cutover nor its
+private matches grants accepted credit.
+
 Policy: only sources whose license is compatible with GPL-3.0 are copied; attribution, the
 upstream license and modification notices stay with the copied code. Public repositories without a
 license grant (inspected 2026-10-17: standalone nnsdk, LibMessageStudio, 3DS sead) are not copied.

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "base_commit": "0f282a0006564fb054d47c37c1c7f9e93188f66e",
+  "branch": "c010-r3-closure",
+  "preflight_status": "clean",
+  "preflight_exit": 0,
+  "source_integration": "b7bb6d9a0687f5080167297fab08cac78a792cdf",
+  "merge_command": [
+    "git",
+    "merge",
+    "--no-commit",
+    "--no-ff",
+    "b7bb6d9"
+  ],
+  "merge_exit": 1,
+  "conflicts": [
+    "docs/RESUME.md",
+    "include/game/functions.h",
+    "include/game/render_state.h"
+  ],
+  "resolution": {
+    "docs/RESUME.md": "Retain frozen Codex gpt-6.1-sol:max/no-fallback requirement.",
+    "include/game/functions.h": "Keep concrete typed non-invoking R3 registration helpers and C010 generic graphics cleanup/empty void destructor APIs needed by func_001f5780.",
+    "include/game/render_state.h": "Keep concrete C010 W6eGpuBufferPayload/W6eGpuBuffer layouts consumed by selected teardown func_0011d12c and native-link closure."
+  },
+  "canonical_acceptance": "Main-only; not imported or finalized here"
+}

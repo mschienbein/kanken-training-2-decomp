@@ -4,22 +4,6 @@
 #include "game/screen_transition.h"
 #include "game/selection.h"
 
-struct W6HandlePanel10;
-struct W6DisplayHandle;
-/* INTEGRATOR: differs from src/wave6/func_0016c55c.c: index at 0x90 selects two current/previous state slots. */
-struct W6SelectionReset {
-    unsigned char reserved00[0x4c];
-    struct W6ListController *list;
-    unsigned char reserved50[0x0c];
-    struct W6HandlePanel10 *panel;
-    unsigned char reserved60[0x30];
-    int stack_index;
-    int modes[2];
-    int previous_modes[2];
-    unsigned char reserveda4[8];
-    struct W6DisplayHandle **handles;
-};
-extern void func_0016c55c(struct W6SelectionReset *state);
 
 
 

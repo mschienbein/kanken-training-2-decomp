@@ -16,8 +16,8 @@ static __forceinline void prepare_channel(struct SoundSubsystem *manager, unsign
 }
 
 int func_0015050c(struct SoundSubsystem *manager, unsigned char channel,
-                  struct AuxReverbProcessor *effect)
+                  struct ExtendedWorkspace *workspace)
 {
     prepare_channel(manager, channel);
-    return func_001525dc(channel, effect);
+    return func_001525dc(channel, workspace);
 }

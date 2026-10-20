@@ -3,13 +3,10 @@
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * GNU GPL version 3; see LICENSE.txt.
  *
- * [INFERENCE] Identity: nw::lyt::internal::FindAnimationLink(AnimationList*,
- * AnimTransform*), declared in include/nw/lyt/lyt_Animation.h. The bytes confirm
- * the LinkList layout (count at +0, sentinel at +4, link node at +0, transform
- * at +8). Needs the proposed binding in names.json (mangled name -> 0x001cff58);
- * INTEGRATOR: differs from include/game/layout.h: migrate the C-linkage,
- * const-qualified LayoutAnimationList/LayoutAnimationTransform declaration
- * and its callers to this existing namespaced NW4C contract before adoption.
+ * [INFERENCE] Native spelling and role follow the already-admitted same-address
+ * emitted self-definition, not the edited callers. The native list, transform
+ * and returned link are shared with lookup and unbind consumers in game/layout.h.
+ * The target owner prefixes are not aliases of native Pane or Material.
  */
 #include <preinclude.h>
 #include <nw/lyt/lyt_Animation.h>

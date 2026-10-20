@@ -1,9 +1,4 @@
-struct ReadinessState {
-    unsigned char reserved00[0x300];
-    void *resource;
-};
-
-extern struct ReadinessState bss_00296758;
+#include "game/resource_publication.h"
 
 int func_001043c8(void)
 {

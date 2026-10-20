@@ -2,19 +2,6 @@
 #include "ctr/svc.h"
 #include "game/waitable_handle.h"
 
-/* Shared mapped-block layout copied exactly from src/sdk/func_00136754.c. */
-struct MappedMemoryBlock {
-    struct MappedMemoryBlock *next;
-    struct MappedMemoryBlock *previous;
-    void *address;
-    unsigned int size;
-    unsigned char read_only;
-    unsigned char reserved[3];
-    CtrHandle handle;
-    unsigned char mapped;
-};
-struct MemoryArena;
-extern unsigned char data_00242d74;
 
 
 

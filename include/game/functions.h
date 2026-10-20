@@ -34,6 +34,10 @@ struct W10DrawingInput;
 struct NotificationPayload;
 struct Heap;
 struct ServiceCoordinator;
+struct AnimationState;
+struct PromptManager;
+struct StreamManager;
+struct StyleOwner;
 
 /* Domain entries use the same count-and-sentinel intrusive list as pool users. */
 
@@ -53,9 +57,9 @@ struct TimingState {
     unsigned char complete;
 };
 
-/* Generic destructor registration erases the concrete object-pointer type.
- * Typed destructor callbacks are converted explicitly at the registration site;
- * all object pointers use the same single-word AAPCS parameter ABI. */
+/* Generic signatures on the retained empty registration entries are not a
+ * license to convert incompatible callbacks. Erased registration calls below
+ * use a source-defined protocol retaining each concrete callable type. */
 typedef void (*ObjectDestructor)(void *object);
 
 #ifdef __cplusplus
@@ -88,6 +92,28 @@ extern void func_001c6adc(void);
 extern void func_001db134(void *object);
 extern void func_00215ec4(volatile unsigned int *guard);
 extern void func_00216140(void *object, ObjectDestructor destroy, void (*image_base)(void));
+extern void func_00164ebc(void *object, ObjectDestructor destroy, void (*image_base)(void));
+/* [INFERENCE] Registration supplies one opaque object argument to each empty
+ * destructor; no erased call establishes a more specific native class name. */
+extern void func_001e3818(void *object);
+extern void func_001e37dc(void *object);
+/* [INFERENCE] Source-only typed no-op registration protocols. The original call
+ * identities were erased; these helpers neither store nor invoke callbacks. */
+extern void register_drawing_input_cleanup(struct W10DrawingInput *object,
+    struct W10DrawingInput *(*destroy)(struct W10DrawingInput *),
+    void (*image_base)(void));
+extern void register_style_owner_cleanup(struct StyleOwner *object,
+    struct StyleOwner *(*destroy)(struct StyleOwner *), void (*image_base)(void));
+extern void register_animation_state_cleanup(struct AnimationState *object,
+    struct AnimationState *(*destroy)(struct AnimationState *),
+    void (*image_base)(void));
+extern void register_object_manager_cleanup(struct ObjectManager *object,
+    void (*destroy)(struct ObjectManager *), void (*image_base)(void));
+extern void register_stream_manager_cleanup(struct StreamManager *object,
+    void (*destroy)(struct StreamManager *), void (*image_base)(void));
+extern void register_prompt_manager_cleanup(struct PromptManager *object,
+    struct PromptManager *(*destroy)(struct PromptManager *),
+    void (*image_base)(void));
 
 extern void func_001091d4(int, int, int, int);
 extern void func_0010920c(int);
@@ -119,7 +145,7 @@ extern void func_00122a68(void);
 extern void func_00122ad0(void);
 extern void func_0012d2bc(void);
 extern void func_0012d2e8(void);
-extern void func_0012d328(void);
+extern int func_0012d328(void);
 extern int func_0012f980(void);
 extern int func_0012f9fc(unsigned int, const void *, unsigned int);
 extern void func_001351bc(void);
@@ -128,7 +154,7 @@ extern void func_00135a28(void);
 extern void func_00135a58(void);
 extern void func_00135a88(void);
 extern void func_00135ab8(void);
-extern void func_00135ae8(void);
+extern int func_00135ae8(void);
 extern void func_00135b4c(int);
 extern void func_00135bb0(int);
 extern void func_0013608c(unsigned char, unsigned char, unsigned char);
@@ -157,7 +183,6 @@ extern void func_0015cab4(void);
 extern void func_0015ea60(struct FlagDisplayObject *, int, int);
 extern int func_0015eb90(struct Component0015eb90 *);
 extern int func_0015f5b0(const struct CountedResource *);
-extern void func_00166f1c(void *, int, int);
 extern int func_00169974(void);
 extern void func_00169b58(void);
 extern int func_0016d000(int);
@@ -183,7 +208,8 @@ extern void func_001840dc(struct BinaryResourceReference *);
 extern struct DetailEntry *func_001851f0(int, int);
 extern void func_001864cc(unsigned char);
 extern void func_001865ec(int, int);
-extern void func_00186944(int, int);
+/* C mutation procedure: its unspecified result MUST be discarded. */
+extern int func_00186944(int, int);
 extern int func_001869d0(int);
 extern void func_001869f0(void);
 extern unsigned char func_001923c4(void);
@@ -228,6 +254,7 @@ extern int func_00177124(int mode);
 extern void func_0016d4f8(struct W10DrawingInput *controller);
 extern void func_0016fca0(int mode);
 extern unsigned int func_0016b404(const unsigned int *source);
+extern void func_00174480(void *object);
 
 #ifdef __cplusplus
 }

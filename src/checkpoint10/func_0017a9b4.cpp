@@ -1,10 +1,6 @@
 #include "game/screen.h"
+#include "game/property_descriptor.h"
 
-/* INTEGRATOR: move to include/game/screen.h */
-extern "C" {
-extern const struct NameTable *data_0024445c[];
-void func_0017a9b4(struct Screen *screen, int value);
-}
 
 static inline void set_active(struct WidgetSlot *slot, int active)
 {
@@ -24,7 +20,7 @@ static inline void set_entry_active(struct Screen *screen, int value, int index)
     if (slot != 0) {
         set_active(slot, value);
         if (slot->object != 0) {
-            const struct NameTable *table = data_0024445c[index];
+            const struct NameTable *table = bss_0024445c[index];
             /* ORIGINAL BUG: the table pointer is used without a null check. */
             if (table->count > 0)
                 func_0017a968(slot->object, table, 0, 0);

@@ -1,6 +1,6 @@
 #include "game/sound_format.h"
 
-int func_0013923c(const struct SoundArchiveReader *reader, unsigned item_id,
+bool func_0013923c(const struct SoundArchiveReader *reader, unsigned item_id,
                   struct SoundBasicInfo *output)
 {
     const struct SoundRecord *record = func_0018341c(reader->info, item_id);

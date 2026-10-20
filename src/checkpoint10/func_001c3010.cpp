@@ -1,19 +1,4 @@
-#include "game/screen.h"
-#include "game/runtime.h"
-
-/* INTEGRATOR: move to include/game/selection_cleanup.h */
-extern "C" { void func_00183208(DisplayObject *object); }
-
-/* [INFERENCE] Shared eleven-slot timer/display controller prefix. */
-struct TimedDisplaySlot {
-    float elapsed;
-    struct DisplayObject *object;
-};
-
-struct TimedDisplayController {
-    int selected;
-    struct TimedDisplaySlot *slots[11];
-};
+#include "game/selection_cleanup.h"
 
 static __inline void release_slot(struct TimedDisplaySlot *slot)
 {

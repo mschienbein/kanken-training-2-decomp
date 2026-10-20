@@ -1,27 +1,6 @@
 #include "game/screen.h"
 
-/* INTEGRATOR: share the numeric-display types in include/game/number_display.h. */
-struct W15gNumberFormat {
-    unsigned kind;
-    unsigned reserved04[6];
-};
-struct W15gNumberGroup {
-    unsigned reserved00;
-    struct DisplayObject *objects[10];
-    short count;
-    unsigned char reserved2e[0x52];
-    float position[2];
-    unsigned char reserved88[8];
-    float scale[2];
-    unsigned char color[4];
-};
-struct W15gNumberController {
-    unsigned char reserved00[0xc];
-    struct W15gNumberFormat formats[72];
-    struct W15gNumberGroup *groups[];
-};
-
-/* INTEGRATOR: differs from src/wave4/func_00166f1c.c: the group-array access proves a typed numeric controller, not void *. */
+#include "game/w11_control.h"
 static void set_active(int enabled, struct DisplayObject *object)
 {
     if (object == 0)
@@ -33,9 +12,9 @@ static void set_active(int enabled, struct DisplayObject *object)
     }
 }
 
-void func_00166f20(struct W15gNumberController *controller, int index, int enabled)
+void func_00166f20(struct W11jVisualOwner *controller, int index, int enabled)
 {
-    struct W15gNumberGroup *group = controller->groups[index];
+    struct W11jVisualNode *group = controller->nodes[index];
     int count;
     int i;
     if (group == 0)

@@ -9,10 +9,8 @@
 #include <preinclude.h>
 #include <nw/gfx/res/gfx_ResTexture.h>
 #include <game/render_state.h>
+#include "game/graphics_resource_abi.h"
 namespace nw { namespace gfx { namespace res {
-/* INTEGRATOR: move to include/game/texture_initialization.h. This typed
- * by-value resource contract supersedes the earlier opaque pointer drafts. */
-extern "C" { void func_0016bbdc(u32 texID, ResPixelBasedImage image, u32 flags); }
 static inline void SetTexImage2D( u32 texID, ResPixelBasedImage resImage, u32 loadFlag )
 {
     /* ORIGINAL BUG: an absent serialized image is unchecked in release. */

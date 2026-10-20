@@ -9,13 +9,8 @@
 #include <preinclude.h>
 #include <nw/gfx/res/gfx_ResTexture.h>
 #include <game/render_state.h>
+#include "game/graphics_resource_abi.h"
 namespace nw { namespace gfx { namespace res {
-/* INTEGRATOR: move to include/game/texture_initialization.h. This typed
- * by-value resource contract supersedes the earlier opaque pointer drafts. */
-extern "C" { void func_0016bbdc(u32 texID, ResPixelBasedImage image, u32 flags); }
-/* INTEGRATOR: move to include/game/texture_initialization.h. This
- * declaration matches this batch's native cube-setup resource value contract. */
-extern "C" { void func_001c7b30(ResTexture texture); }
 static inline void SetTexImage2D( u32 texID, ResPixelBasedImage resImage, u32 loadFlag )
 {
     /* ORIGINAL BUG: an absent serialized image is unchecked in release. */
@@ -37,7 +32,7 @@ static inline void SetTexImage2D( u32 texID, ResPixelBasedImage resImage, u32 lo
     func_0016bbdc(texID, resImage, loadFlag);
 }
 extern "C" {
-static void func_001c7d00(ResTexture resTex)
+static void setup_image_texture(ResTexture resTex)
 {
     ResImageTexture resImgTex = ResDynamicCast<ResImageTexture>( resTex );
     
@@ -57,7 +52,7 @@ static void func_001c7d00(ResTexture resTex)
     
     SetTexImage2D(texID, resImage, loadFlag);
 }
-static void func_001c7e1c(ResTexture resTex)
+static void setup_shadow_texture(ResTexture resTex)
 {
     ResShadowTexture resSdwTex = ResDynamicCast<ResShadowTexture>( resTex );
     
@@ -91,7 +86,7 @@ void func_001c80cc(ResTexture resTex)
     switch (resRefTex.GetTargetTexture().ref().typeInfo)
     {
     case ResImageTexture::TYPE_INFO:{
-            func_001c7d00(resRefTex.GetTargetTexture());
+            setup_image_texture(resRefTex.GetTargetTexture());
             break;
 
         }
@@ -111,7 +106,7 @@ void func_001c80cc(ResTexture resTex)
 
         }
     case ResShadowTexture::TYPE_INFO:{
-            func_001c7e1c(resRefTex.GetTargetTexture());
+            setup_shadow_texture(resRefTex.GetTargetTexture());
             break;
 
         }

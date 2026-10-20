@@ -15,14 +15,6 @@ static __forceinline void release_guard(struct StreamLockGuard *guard)
     func_00195d74(guard->mutex);
 }
 
-struct ChannelWorkspace;
-struct ExtendedWorkspace;
-struct InputSessionContext;
-
-extern struct InputSessionContext bss_004b97ac;
-extern void func_0017e8fc(struct ChannelWorkspace *workspace);
-
-extern void func_0017e858(struct InputSessionContext *coordinator, unsigned index, unsigned char enabled);
 
 void func_0014c930(struct ServiceOutput *owner, signed char index)
 {

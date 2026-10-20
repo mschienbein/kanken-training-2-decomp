@@ -1,23 +1,9 @@
-struct ArchiveResourceReference {
-    unsigned short type;
-    unsigned short reserved02;
-    int offset;
-};
-struct ArchiveReferenceTable {
-    unsigned count;
-    struct ArchiveResourceReference entries[];
-};
-struct ArchiveInfoBlock {
-    unsigned char reserved00[36];
-    unsigned stream_table_offset;
-    unsigned char reserved28[12];
-    unsigned file_table_offset;
-};
+#include "game/archive_resource.h"
 struct ArchiveStreamInfo {
     unsigned file_id;
 };
 
-const struct ArchiveStreamInfo *func_001f2030(const struct ArchiveInfoBlock *info,
+const struct ArchiveStreamInfo *func_001f2030(const struct SoundArchiveInfo *info,
                                             unsigned resource_id)
 {
     const struct ArchiveReferenceTable *table;

@@ -21,10 +21,24 @@ struct ServiceContext {
 #endif
 };
 
+/* The array constructor proves sixty-four eight-byte elements. No fields are
+ * initialized by the callback and no historical element identity is asserted. */
+struct StaticServiceEntry {
+    unsigned char reserved00[8];
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern struct ServiceList bss_004b47d0;
+extern struct StaticServiceEntry bss_004b45d0[64];
+extern struct StaticServiceEntry *func_001c4490(struct StaticServiceEntry *entry);
+/* [INFERENCE] Typed instance of the ARM array-construction veneer's ABI. */
+extern struct StaticServiceEntry *func_001911c4(
+    struct StaticServiceEntry *entries,
+    struct StaticServiceEntry *(*constructor)(struct StaticServiceEntry *),
+    unsigned element_size, unsigned element_count);
+extern void func_00214138(void);
 #ifdef __cplusplus
 }
 #endif

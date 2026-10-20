@@ -1,7 +1,4 @@
 #include "game/memory_arena.h"
-/* Declarations match src/sdk/func_00136754.c (the accepted caller of the same allocator). */
-struct MappedMemoryBlock;
-struct MemoryArena;
 
 
 

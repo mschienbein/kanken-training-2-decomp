@@ -1,9 +1,4 @@
-struct RenderCache { unsigned values[11]; };
-
-/* INTEGRATOR: move to include/game/render_commands.h */
-extern "C" {
-void func_00191c94(struct RenderCache *cache, unsigned flags);
-}
+#include "game/command_buffer.h"
 
 static __forceinline bool renderAllFlags(unsigned flags, unsigned mask)
 {

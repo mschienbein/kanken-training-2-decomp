@@ -1,10 +1,6 @@
 #include "game/runtime.h"
 
-struct MotionPair {
-    float x;
-    float y;
-    MotionPair();
-};
+#include "game/screen.h"
 
 struct LayerSlot {
     unsigned int reserved00;

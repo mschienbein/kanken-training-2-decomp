@@ -10,7 +10,7 @@ CtrResult func_001159e8(register CtrHandle *handle, unsigned int flags,
 
     command[0] = ctrIpcHeader(1u, 1u, 0u);
     command[1] = flags;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure >= 0) {
         *attributes = command[2];

@@ -1,11 +1,6 @@
 #include "game/service_lifetime.h"
 #include "game/service_availability.h"
 #include "game/result.h"
-/* INTEGRATOR: move to include/game/service_lifetime.h */
-extern "C" {
-unsigned func_0013e7d0(void);
-CtrResult func_00136d4c(void);
-}
 CtrResult func_0012d478(void)
 {
     ScopedServiceLock guard(&bss_0049ee70);

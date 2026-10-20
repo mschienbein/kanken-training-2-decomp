@@ -7,6 +7,7 @@ struct ServiceReferenceState;
 struct StreamMutex;
 
 #include "game/runtime.h"
+#include "ctr/ipc.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 struct ServiceReferenceState {
@@ -32,6 +33,14 @@ void func_0012d0a4(void);
 int func_00112518(unsigned limit);
 extern struct Result func_0010b628(void);
 extern struct Result func_00121e80(struct ServiceConfigurationWords *information);
+extern struct StreamMutex bss_004b4fb4;
+extern int data_00243120;
+extern const char data_0021c61c[];
+extern struct Result func_0012ef30(void);
+extern unsigned func_0010c33c(void);
+extern void func_0010c338(void);
+extern unsigned func_00121ddc(unsigned value);
+extern unsigned func_00121da0(unsigned value);
 #ifdef __cplusplus
 }
 #endif

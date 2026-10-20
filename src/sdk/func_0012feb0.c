@@ -1,7 +1,6 @@
 #include "ctr/cp15.h"
-#include "ctr/svc.h"
+#include "ctr/ipc.h"
 
-extern CtrHandle data_00243040;
 
 CtrResult func_0012feb0(unsigned int selector, unsigned int limit)
 {
@@ -12,7 +11,7 @@ CtrResult func_0012feb0(unsigned int selector, unsigned int limit)
     command[0] = (0x42u << 16) | (2u << 6);
     command[1] = selector;
     command[2] = limit;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = (int)((unsigned int)result & 0x80000000u);
     __schedule_barrier();
     if (failure >= 0)

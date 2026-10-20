@@ -1,9 +1,6 @@
 #include "game/screen.h"
+#include "game/property_descriptor.h"
 
-/* INTEGRATOR: move to include/game/screen.h. */
-extern "C" {
-extern struct NameTable *bss_0024445c[];
-}
 
 static bool set_slot_active(WidgetSlot *slot, int enabled)
 {

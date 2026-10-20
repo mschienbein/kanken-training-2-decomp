@@ -6,7 +6,6 @@ struct FileSoundController001d40a8;
 struct ForwardedFileStream;
 struct ForwardingFileStream;
 struct InputSessionContext;
-struct PositionPair;
 struct ResetState001d4850;
 struct ResourceFontView;
 struct ResourceOwner;
@@ -84,11 +83,6 @@ struct FileSoundController001d40a8 {
     unsigned char active;
 };
 
-struct PositionPair {
-    unsigned char reserved00[0xc];
-    float x;
-    float y;
-};
 
 #ifdef __cplusplus
 extern "C" {
@@ -98,6 +92,7 @@ extern unsigned func_001362f0(struct X03PendingCommand *command);
 extern void func_0012e560(struct StreamCriticalSection *critical);
 extern struct FileSoundController001d40a8 *func_001d40a8(struct FileSoundController001d40a8 *state);
 extern const unsigned data_002247f0[];
+extern const unsigned data_002244b4[];
 extern void func_001d2da4(struct ResourceOwner *owner);
 extern struct ResourceState001d0164 *func_001d017c(struct ResourceState001d0164 *state);
 extern unsigned func_0012d40c(unsigned *detail);
@@ -113,7 +108,6 @@ extern int func_001f4b48(const struct ResourceFontView *font);
 extern bool func_001f4cb4(const struct ResourceFontView *font);
 extern bool func_001f4cc4(const struct ResourceFontView *font);
 extern void func_001d01cc(struct FileSoundController001d40a8 *state);
-extern void func_00177598(struct PositionPair *position, float x, float y);
 #ifdef __cplusplus
 }
 #endif

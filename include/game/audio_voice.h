@@ -65,7 +65,7 @@ struct AudioChannelState {
     float value24;
     unsigned char reserved28[4];
     unsigned int value2c;
-    unsigned int value30;
+    struct AudioSlot *pending;
     unsigned short value34;
     unsigned short value36;
     float value38;
@@ -74,7 +74,7 @@ struct AudioChannelState {
     float value68;
     unsigned short flags;
     unsigned char flag6e;
-    unsigned char flag6f;
+    unsigned char dirty;
     struct StreamMutex mutex;
     struct AdpcmCoefficients coefficients;
 };
@@ -90,7 +90,8 @@ struct AudioChannel {
     unsigned char reserved16[2];
     int extent;
     float volume;
-    unsigned char reserved20[0x44];
+    int priority;
+    unsigned char reserved24[0x40];
     float gain;
     struct AudioChannelState *state;
 };
@@ -303,6 +304,8 @@ extern void func_001563a0(struct AudioChannelState *state, struct RecordState *r
 extern void func_001c5994(struct AudioChannel *channel, const struct AudioSlot *slot);
 extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *slot);
 extern void func_001d49e8(struct AudioVoiceGroup *group, int index, const struct AudioSlot *slot);
+extern const unsigned short data_0021dfcc[];
+extern unsigned func_0014fe14(float value);
 #ifdef __cplusplus
 }
 #endif
@@ -387,6 +390,22 @@ struct HalfwordCursor001db054 {
 struct ByteCursor001db068 {
     const unsigned char *current;
 };
+/* [INFERENCE] Separate copy of the two-byte cursor callback; this shares no
+ * complete native CharStrmReader identity merely because its first word is a pointer. */
+struct ShiftJisCursorState {
+    const void *current;
+#ifdef __cplusplus
+    template<typename T> T get(int offset = 0) const
+    {
+        return static_cast<const T *>(current)[offset];
+    }
+    template<typename T> void step(int count = 1)
+    {
+        const T *&text = reinterpret_cast<const T *&>(current);
+        text += count;
+    }
+#endif
+};
 
 struct PackedPointer001f15fc {
     unsigned char reserved00[0x2c];
@@ -457,6 +476,17 @@ extern int func_0014891c(struct ServiceCoordinator *context, unsigned int value)
 extern int func_00148988(struct ServiceCoordinator *context, unsigned int value);
 extern void func_001489e8(struct ServiceCoordinator *context, unsigned int value);
 extern void func_001526e0(struct AudioChannelState *state, int mode);
+extern void func_0014fc98(struct AudioChannelState *state);
+extern void func_001526b4(struct AudioChannel *channel, int mode);
+extern void func_00155dec(struct AudioChannel *channel, int priority);
+extern void func_00156484(struct HandleManager *manager,
+                        struct AudioChannel *channel, int priority);
+extern void func_001500bc(struct AudioVoiceGroup *group, int type, float factor);
+extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *notification);
+/* [INFERENCE] The update consumes the same factory/callback AudioVoice receiver;
+ * pinned Channel::Update(bool) corroborates, but does not recover its native name. */
+extern void func_0014f304(struct AudioVoice *voice, bool update);
+extern void func_0014d308(struct ObjectPool *pool);
 extern unsigned int func_00155d24(unsigned int bits);
 extern void func_001d4ad4(struct FloatState001d4ad4 *state, float value);
 extern void func_001d4b70(struct FloatState001d4b70 *state, float value);
@@ -468,6 +498,7 @@ extern void func_001d9580(struct AudioVoiceOwner001d9580 *owner,
                              const unsigned char *first, const unsigned char *last);
 extern unsigned short func_001db054(struct HalfwordCursor001db054 *cursor);
 extern unsigned char func_001db068(struct ByteCursor001db068 *cursor);
+extern unsigned short func_001dafb0(struct ShiftJisCursorState *cursor);
 extern void *func_001f15fc(const struct PackedPointer001f15fc *state);
 extern unsigned func_001f2ef8(const struct AudioVoiceGroup *group);
 extern void func_001d4adc(struct AudioFadeController *controller, bool muted,

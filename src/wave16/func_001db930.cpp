@@ -5,5 +5,6 @@
 
 void func_001db930(void)
 {
-    bss_0028fd24.invoke_slot02();
+    ScreenResourceManager *scene = &bss_0028fd24;
+    scene->vtable->slot02(scene);
 }

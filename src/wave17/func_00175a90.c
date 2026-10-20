@@ -1,15 +1,8 @@
-struct W17FlagWord {
-    unsigned int flags;
-};
+#include "game/training_screen.h"
 
-struct W17FlagOwner {
-    unsigned int reserved00[8];
-    struct W17FlagWord *items[];
-};
-
-void func_00175a90(struct W17FlagOwner *owner, int index, int enabled)
+void func_00175a90(struct InputOwner *owner, int index, int enabled)
 {
-    struct W17FlagWord *item = owner->items[index];
+    struct InputGroup *item = owner->groups[index];
     if (item) {
         if (enabled)
             item->flags |= 8;

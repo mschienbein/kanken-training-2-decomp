@@ -1,5 +1,46 @@
 # C009 recovered integration handoff
 
+## Current resumed boundary: cmodels seq9 merged, explicit v6 + L1
+
+Finalized main **261fdc9** is merged at **b8f15ed**, preserving the saved receiver
+patch from **a3122a6** rather than reapplying older work. Current selection is
+**armlink5-inline-branchnop-v6 + anonymous-string-records-v1**. All older v2/none
+readiness instructions below are superseded, not a reinterpretation of their receipts.
+Frozen GATES v1.19 and catalogue v9-r2 remain unchanged.
+
+Canonical `MessageLayout` supplies the cast-free `00177b84`/`00170db4`/`00170dc0`
+receiver; `001ad6d0/ec` use `MessageEntry` at `entries[2]`. `MessageEntry` is not
+`DisplayHandle`, and the obsolete WidgetContainer/WidgetActivity shadows are removed.
+`00177598` now updates layout x/y under the same receiver. The cmodels height getter
+`0017a424` keeps its exact accepted const-layout API and source.
+
+The incoming cmodels consumers exposed conflicting reset/number owner declarations.
+Original-safe `00175d18` first-iteration facts identify the +0x7ec visual-node vector;
+clock/number fields and render entry now use canonical `W11jVisualOwner`. Reset
+callers use the existing coherent Screen family without SelectionList casts/unions.
+Scoped **001b8908**, **001e0afc**, **001ed874** all MATCH with the supplied original
+helper closure under v6+L1 (`widget-receiver-match-r3.json`). The earlier failed
+merged-header witness is kept in `widget-receiver-match-r2.json`.
+
+Current candidate scope **676 new functions / 57,052 B**; **142 revised accepted
+units / 147 functions**, plus remaining header-reopened R1 functions, give **832
+required units / 838 functions**. Dry ledger **2,238 units / 2,297 functions** retains
+all **1,621 accepted identities**. `readiness-scope-r10.json` is current authority.
+`00113c0c`/`0018ee88` stay evidenced new-function deferrals; accepted `001c4494`
+Result/int-output and migrated `0019d5dc` remain intact. Plain original `001c20e8`
+retains its `[INFERENCE]` note and mandatory **QUALIFIED** pre-review/review row.
+
+**Ready source boundary 1851bf3.** Final matching **832/832 units MATCH**;
+G3 **zero errors/policy items/unchecked C**, 510 explicitly waived C++ units;
+1,500 actual C signatures and 174-header co-inclusion both clean. Native 1,940
+units have zero compiler failures and ten nonfatal diagnostic units, all qualified.
+Final argcheck exit2 is retained: 78 issues / 412 notes all individually adjudicated,
+389 mechanical ABI gaps explicitly supplemented by native/source/indirect evidence.
+All seven integrator pre-review steps have 838 exact destination-bound rows;
+`PRE-REVIEW-resume-r1.json` binds manifests, source/header hashes and exercised exits.
+No full build, suite, prepare, finalize, accepted-record write or push was run here.
+Main alone owns full gates and independent reviews. Heavy slot is released on handoff.
+
 ## Bounded mismatch closure after 66ae993
 
 Main authorized a bounded pass over the three remaining mismatches, then withdrawal

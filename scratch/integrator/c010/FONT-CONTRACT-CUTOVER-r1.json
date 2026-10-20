@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "status": "natural-native-caller-contract-match-not-independent-review",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "new_source": "src/checkpoint10/func_0010e230.cpp",
+  "old_source": "src/checkpoint10/func_0010e230.c",
+  "preserved_before": "before-font-r1/",
+  "source_sha256": "b96d7de7abdfab1a48c8b16119a51db0367bb75bcdaa21211120f0958e6af251",
+  "object_sha256": "1f7f8f1ae80f2683edd91c1c7d65c35276705474ff6ee9dd244e6f904656cdfc",
+  "receipt": "font-native-r3/func_0010e230.result.json",
+  "receipt_sha256": "1fa4a64fd3272911a385c650b8923ac38785c687a8fc7c9234e7f84283640f79",
+  "match_extent": 152,
+  "process_exit_code": 0,
+  "native_header": "include/nw/font/font_RectDrawer.h",
+  "native_header_sha256": "6622c59045bbd8cd7371d0b44180106ba621ab3dd5422497f2ad29d1f71535cc",
+  "base_layout_witness": "font-base-layout-r2/result.json",
+  "base_extent": 1672,
+  "original_facts": "owner-cutover/factory-facts-font-receiver-r7.json",
+  "object_metadata": "font-native-r1/object-metadata.json",
+  "names_admitted": [
+    {
+      "name": "_ZN2nw4font10RectDrawer20GetCommandBufferSizeEPKvj",
+      "address": 1142320,
+      "caller_offset": 20,
+      "proof": "Complete natural compiled caller MATCH; unrewritten actual BL relocation matches original call target and canonical static public contract."
+    },
+    {
+      "name": "_ZN2nw4font10RectDrawer10InitializeEPvPKvj",
+      "address": 1142040,
+      "caller_offset": 136,
+      "proof": "Complete natural compiled caller MATCH; unrewritten actual BL relocation matches original call target, same unchanged receiver as already-bound canonical RectDrawer overload at00116dc0."
+    }
+  ],
+  "qualifications": [
+    "TargetLayoutDrawer is an evidenced partial target-version extension after native RectDrawer, not a claim of the public nw::lyt::Drawer layout or complete target native class identity.",
+    "ShaderBinaryInput describes actual binary pointer/length, not unrelated ResourceFile/ResourceDescriptor aliases.",
+    "Historical mangled spelling remains INFERENCE; name admission uses natural non-erased caller references, no alias of ret-only or fabricated address.",
+    "No native source policy, all-source/header-dependent or whole-ledger acceptance claim."
+  ],
+  "preserved_failures": [
+    "font-base-layout-r1/result.json: pinned C++03 compiler refuses static_assert syntax; r2 uses standard negative-array compile-time condition",
+    "font-native-r1/func_0010e230.result.json: unresolved canonical native symbol before proposed names",
+    "owner-cutover font-receiver-r6 command exit1: call-site00104c94 mistaken for catalogue entry; corrected catalogue owner00104b48 for changed-r7 evidence"
+  ]
+}

@@ -2,24 +2,6 @@
 #include "game/screen.h"
 #include <stddef.h>
 
-struct NameTableVTable;
-/* Canonical NameTable from include/game/screen.h. */
-
-/* INTEGRATOR: differs from include/game/screen.h: this initializer writes
- * descriptor pointers in all three slots at +0/+4/+8. */
-struct AnimationContext {
-    const NameTable *first;
-    const NameTable *table;
-    const NameTable *terminator;
-};
-void *operator new(size_t size, const void *tag) throw();
-/* INTEGRATOR: move to include/game/property_descriptor.h after correcting
- * AnimationContext in include/game/screen.h. */
-extern "C" {
-
-
-void func_0020f858(void);
-}
 
 void func_0020f858(void)
 {

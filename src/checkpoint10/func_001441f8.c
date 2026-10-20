@@ -1,13 +1,4 @@
-struct ArchiveResourceReference {
-    unsigned short type;
-    unsigned short reserved02;
-    int offset;
-};
-struct ArchiveInternalFile {
-    unsigned group;
-    unsigned offset;
-    unsigned size;
-};
+#include "game/archive_resource.h"
 
 const struct ArchiveInternalFile *func_001441f8(const struct ArchiveResourceReference *reference)
 {

@@ -1,7 +1,6 @@
 #include "ctr/cp15.h"
-#include "ctr/svc.h"
+#include "ctr/ipc.h"
 
-extern CtrHandle data_00243040;
 
 CtrResult func_00123634(void)
 {
@@ -10,7 +9,7 @@ CtrResult func_00123634(void)
     int failure;
 
     command[0] = 43u << 16;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = (int)((unsigned int)result & 0x80000000u);
     __schedule_barrier();
     if (failure >= 0)

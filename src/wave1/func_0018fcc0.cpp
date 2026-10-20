@@ -1,6 +1,5 @@
 #include "game/resource.h"
 
-extern "C" void func_001211b8(int mode);
 
 extern "C" unsigned func_0018fcc0(unsigned *transferred, Resource *resource,
                                   unsigned long long offset, void *buffer,

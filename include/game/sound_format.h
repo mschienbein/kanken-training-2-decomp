@@ -102,6 +102,11 @@ struct SoundEnvelope {
     unsigned char sustain;
     unsigned char hold;
     unsigned char release;
+#ifdef __cplusplus
+    SoundEnvelope(unsigned char a = 0, unsigned char d = 0, unsigned char s = 0,
+                  unsigned char h = 0, unsigned char r = 0)
+        : attack(a), decay(d), sustain(s), hold(h), release(r) {}
+#endif
 };
 
 struct WaveSoundReader {

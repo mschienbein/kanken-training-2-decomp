@@ -1,13 +1,5 @@
 #include "game/archive.h"
 
-struct ArchiveSizedFileReference {
-    unsigned short type, reserved02;
-    unsigned offset, size;
-};
-struct ArchiveInfoEntries {
-    struct ArchiveInfoTable header;
-    struct ArchiveSizedFileReference entries[];
-};
 struct ArchiveDataSpan { const unsigned char *data; };
 
 static struct ArchiveDataSpan file_data(const struct ArchiveFile *file)
@@ -19,11 +11,11 @@ static struct ArchiveDataSpan file_data(const struct ArchiveFile *file)
 
 const void *func_00183bfc(const struct ArchiveReader *reader, unsigned index)
 {
-    const struct ArchiveInfoEntries *table;
+    const struct ArchiveInfoTable *table;
     if (!reader->initialized)
         return 0;
-    table = (const struct ArchiveInfoEntries *)reader->info;
-    if (index >= table->header.count)
+    table = reader->info;
+    if (index >= table->count)
         return 0;
     if (reader->cache)
         return reader->cache[index];

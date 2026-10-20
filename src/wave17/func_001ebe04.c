@@ -7,6 +7,6 @@ struct LookupContext;
 const unsigned short *func_001ebe04(const struct LookupContext *context,
                                   unsigned group, unsigned index)
 {
-    const struct CategoryValues *entry = bss_00290ec4[group];
-    return entry->values[index];
+    const struct TextChoices *entry = bss_00290ec4[group];
+    return entry->entries[index];
 }

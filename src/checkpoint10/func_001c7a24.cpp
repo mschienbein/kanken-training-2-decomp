@@ -9,10 +9,8 @@
 #include <preinclude.h>
 #include <nw/gfx/res/gfx_ResVertex.h>
 #include <game/render_state.h>
+#include "game/graphics_resource_abi.h"
 namespace nw { namespace gfx { namespace res {
-/* INTEGRATOR: move to include/game/vertex_initialization.h. Native
- * resource-wrapper value replaces the earlier pointer-only draft contract. */
-extern "C" { void func_001c73cc(u32 bufferID, ResVertexStreamBase stream, u32 loadFlag); }
 inline void ResVertexStream::Setup()
 {
     if (this->ref().m_BufferObject) return;

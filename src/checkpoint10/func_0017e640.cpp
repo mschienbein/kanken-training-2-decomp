@@ -1,15 +1,4 @@
-#include "game/functions.h"
-
-struct ManagerLock {
-    unsigned int state;
-};
-/* INTEGRATOR: differs from src/wave4/func_001470c8.c: active registry is evidenced at 0x1dc beyond its partial manager layout. */
-struct ObjectManager {
-    unsigned char reserved00[0x1c4];
-    struct ManagerLock lock;
-    unsigned char reserved1c8[0x14];
-    struct PoolList active;
-};
+#include "game/object_manager.h"
 
 
 struct RegistryIterator {

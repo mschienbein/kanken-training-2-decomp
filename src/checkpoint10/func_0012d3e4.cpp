@@ -10,11 +10,6 @@ public:
     operator CtrResult() const { return value; }
 };
 
-/* INTEGRATOR: move to include/game/service_runtime.h */
-extern "C" {
-extern CtrResult func_00136278(void);
-
-}
 
 extern "C" CtrResult func_0012d3e4(void)
 {

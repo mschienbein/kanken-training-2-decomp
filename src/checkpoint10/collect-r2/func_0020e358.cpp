@@ -1,15 +1,5 @@
-#include "game/exp_heap.h"
+#include "game/runtime_type_initializers.h"
 
-/* INTEGRATOR: complete RuntimeTypeInfo in include/game/exp_heap.h.
- * [INFERENCE] The one-word base-type link follows its runtime-type accessors. */
-struct RuntimeTypeInfo {
-    RuntimeTypeInfo *base;
-    explicit RuntimeTypeInfo(RuntimeTypeInfo *parent) : base(parent) {}
-};
-
-/* INTEGRATOR: move to include/game/exp_heap.h. */
-extern "C" {
-extern struct RuntimeTypeInfo data_00242f90;
-}
-
-RuntimeTypeInfo data_00242f94(&data_00242f90);
+/* [INFERENCE] Runtime metadata ancestry is read-only; the initializer
+ * establishes the parent link, not a recoverable historical class name. */
+const nw::ut::internal::RuntimeTypeInfo data_00242f94(&data_00242f90);

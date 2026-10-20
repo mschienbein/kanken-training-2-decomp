@@ -1,18 +1,6 @@
 #include "game/service_runtime.h"
 #include "ctr/svc.h"
 #include "game/result.h"
-struct ResourceServiceSessionState {
-    unsigned char reserved00[8];
-    const CtrHandle *session;
-};
-/* INTEGRATOR: differs from include/game/service_runtime.h: +8 is a session
- * pointer passed to func_0014af70, which dereferences it, not a scalar flag. */
-/* INTEGRATOR: move to include/game/service_runtime.h */
-extern "C" {
-
-extern CtrResult func_0014af70(const CtrHandle *session, unsigned int value,
-                            unsigned int *output);
-}
 
 extern "C" Result func_00148094(unsigned int value, unsigned int *output)
 {

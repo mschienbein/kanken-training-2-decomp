@@ -1,23 +1,4 @@
-class OwnedElementW22E {
-public:
-    virtual ~OwnedElementW22E();
-};
-
-struct OwnedElementListW22E {
-    unsigned char active;
-    signed char kind;
-    unsigned char reserved02[6];
-    unsigned short first, second;
-    int selected;
-    int count;
-    OwnedElementW22E **entries;
-    unsigned remaining;
-};
-
-/* INTEGRATOR: move to include/game/owned_element_list.h */
-extern "C" {
-extern void func_0019e08c(void *allocation);
-}
+#include "game/text_resources.h"
 
 extern "C" void func_00172f50(OwnedElementListW22E *list)
 {

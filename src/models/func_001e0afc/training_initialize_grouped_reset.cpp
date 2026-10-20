@@ -64,19 +64,19 @@ extern "C" void func_001e0afc(struct L041InitializeScreen *screen)
     case 4: screen->duration = 20; break;
     }
     TU924_reset_prompts(screen->prompts);
-    if (screen->message.layout) {
-        func_00176c6c(screen->message.layout);
-        func_0017a43c(screen->message.layout, reinterpret_cast<const unsigned short *>(L"\x3000"),
+    if (screen->message) {
+        func_00176c6c(screen->message);
+        func_0017a43c(screen->message, reinterpret_cast<const unsigned short *>(L"\x3000"),
                      reinterpret_cast<const unsigned short *>(L"\x3000"), 0);
-        func_00170db4(screen->message.handles, 1);
+        func_00170db4(screen->message, 1);
     }
-    if (screen->selection.list) {
-        func_00176b24(screen->selection.list);
-        func_00176ae8(screen->selection.screen, 4, 8);
+    if (screen->selection) {
+        func_00176b24(screen->selection);
+        func_00176ae8(screen->selection, 4, 8);
     }
-    if (screen->alternate.list) {
-        func_0017697c(screen->alternate.list);
-        func_001795cc(screen->alternate.screen, 7, -1);
+    if (screen->alternate) {
+        func_0017697c(screen->alternate);
+        func_001795cc(screen->alternate, 7, -1);
         hide_alternate_item(screen, 8);
         hide_alternate_item(screen, 9);
         hide_alternate_item(screen, 13);
@@ -184,6 +184,6 @@ static void clear_control_input(L041InitializeScreen *screen, int index)
 
 static void hide_alternate_item(L041InitializeScreen *screen, int index)
 {
-    func_00170e50(screen->alternate.screen, index);
+    func_00170e50(screen->alternate, index);
 }
 

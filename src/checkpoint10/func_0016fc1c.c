@@ -2,20 +2,6 @@
 #include "game/screen_transition.h"
 #include "game/selection.h"
 
-/* INTEGRATOR: differs from src/wave10/func_001b06a4.c: the same object has
- * transition state fields at +0x90 through +0xa4; retain its established prefix. */
-struct SettingsScreen {
-    unsigned char reserved00[0x34];
-    int next_state;
-    unsigned char reserved38[0x14];
-    struct W6ListController *controls;
-    unsigned char reserved50[0x40];
-    int state;
-    unsigned char reserved94[8];
-    int pending_state;
-    int previous_state;
-    int transition;
-};
 
 
 void func_0016fc1c(struct SettingsScreen *screen, int state, int flags, int transition)

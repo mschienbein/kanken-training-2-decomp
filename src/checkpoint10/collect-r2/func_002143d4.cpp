@@ -1,10 +1,5 @@
-#include "game/exp_heap.h"
+#include "game/runtime_type_initializers.h"
 
-/* [INFERENCE] NintendoWare-style runtime ancestry record; the canonical
- * declaration is opaque and the initializer establishes its sole pointer. */
-struct RuntimeTypeInfo {
-    const RuntimeTypeInfo *parent;
-    explicit RuntimeTypeInfo(const RuntimeTypeInfo *value) : parent(value) {}
-};
-
-RuntimeTypeInfo data_00242e2c(&data_00242e24);
+/* [INFERENCE] Original class names are unrecovered; this native metadata
+ * descriptor retains its exact initialized parent. */
+const nw::ut::internal::RuntimeTypeInfo data_00242e2c(&data_00242e24);

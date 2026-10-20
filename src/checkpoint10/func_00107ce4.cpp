@@ -1,31 +1,4 @@
-#include "game/synchronization.h"
-
-struct W22Stream;
-struct W22StreamVTable {
-    const void *reserved00[3];
-    void (*seek)(W22Stream *stream, long long position, int mode);
-    const void *reserved10[7];
-    void (*transfer)(W22Stream *stream, int destination, int size);
-};
-struct W22Stream { const W22StreamVTable *vtable; };
-struct W22StreamJob {
-    unsigned char reserved00[12];
-    unsigned cancelled;
-    W22Stream *stream;
-    unsigned char reserved14[0x44];
-    int destination, length, source;
-};
-struct W22StreamWorker {
-    unsigned char reserved00[12];
-    unsigned pending, stopping;
-    unsigned char reserved14[0x1014];
-    W22StreamJob *job;
-};
-/* INTEGRATOR: move to include/game/stream_worker.h */
-extern "C" {
-extern W22StreamWorker bss_004962a8;
-void func_00107ce4(SignalState *wake);
-}
+#include "game/stream_worker.h"
 
 void func_00107ce4(SignalState *wake)
 {

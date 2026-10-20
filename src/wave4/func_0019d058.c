@@ -1,11 +1,4 @@
-#include "game/functions.h"
-
-struct MemorySpan {
-    unsigned base;
-    unsigned size;
-};
-
-extern struct MemorySpan data_00242d68;
+#include "game/memory_arena.h"
 
 unsigned func_0019d058(void)
 {

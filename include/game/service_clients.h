@@ -13,9 +13,9 @@
 
 
 
+struct HardwareInfo { unsigned flags; unsigned reserved04[47]; };
 extern "C" {
 extern unsigned char data_00242be0;
-extern unsigned data_002430d8;
 extern const char data_0021ac13[];
 void func_0010b98c(void);
 void func_0019df5c(void);
@@ -28,6 +28,7 @@ extern unsigned char data_002430dc;
 unsigned func_00192a7c(void);
 void func_0019d6c4(unsigned result, unsigned address);
 Result func_00121444(void);
+bool func_0010c06c(void);
 }
 #endif
 

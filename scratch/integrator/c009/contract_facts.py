@@ -65,8 +65,30 @@ def transfer(insn, fact, state: dict, image):
     return event
 
 
+def memory_location(instruction, fact, state: dict):
+    """Describe indexed storage using the same roots as the enhanced transfer."""
+    operand = next((op for op in instruction.operands
+                    if op.type == capstone.arm.ARM_OP_MEM), None)
+    if operand is None or operand.shift.type not in (0, capstone.arm.ARM_SFT_LSL):
+        return None
+    condition = instruction.cc if fact.conditional else None
+    get = lambda register: indirect.plain(state.get(
+        ac.canonical(instruction.reg_name(register))), condition)
+    base = (("constant", fact.pc) if operand.mem.base == capstone.arm.ARM_REG_PC
+            else get(operand.mem.base))
+    displacement = operand.mem.disp
+    if operand.mem.index:
+        index = get(operand.mem.index)
+        scale = operand.mem.scale * (1 << operand.shift.value)
+        if index is not None and index[0] == "constant":
+            displacement += index[1] * scale
+        elif base is not None:
+            base = ("indexed", base, scale)
+    return indirect.add(base, displacement)
+
+
 def enhanced(function: dict, blocks: list, successors: list, decoder, image,
-             acyclic: bool) -> dict:
+             acyclic: bool, known_entries: set[int]) -> dict:
     """Reuse r3's CFG transfer, including stack and multiple-register storage."""
     instructions = {insn.address: insn for start, stop in function["code_ranges"]
                     for insn in decoder.disasm(image.read(start, stop - start), start)}
@@ -116,17 +138,59 @@ def enhanced(function: dict, blocks: list, successors: list, decoder, image,
             if access is not None:
                 accesses.append({"site": ac.address(fact.address), "operation": access[0],
                                  "bits": access[1], "signed_load": access[2],
-                                 "location": indirect.describe(ac.memory_value(fact, state))})
+                                 "location": indirect.describe(memory_location(
+                                     instruction, fact, state))})
+            elif instruction.id in (capstone.arm.ARM_INS_LDRD, capstone.arm.ARM_INS_STRD):
+                location = memory_location(instruction, fact, state)
+                operation = "read" if instruction.id == capstone.arm.ARM_INS_LDRD else "write"
+                for offset in (0, 4):
+                    accesses.append({"site": ac.address(fact.address), "operation": operation,
+                                     "bits": 32, "signed_load": False,
+                                     "location": indirect.describe(indirect.add(location, offset))})
+            elif instruction.id in (capstone.arm.ARM_INS_VSTMIA, capstone.arm.ARM_INS_VSTMDB,
+                                     capstone.arm.ARM_INS_VLDMIA, capstone.arm.ARM_INS_VLDMDB):
+                operands = instruction.operands
+                base = indirect.plain(state.get(ac.canonical(
+                    instruction.reg_name(operands[0].reg))),
+                    instruction.cc if fact.conditional else None)
+                registers = [instruction.reg_name(op.reg) for op in operands[1:]
+                             if op.type == capstone.arm.ARM_OP_REG]
+                width = sum(8 if register.startswith("d") else 4 for register in registers)
+                decrement = instruction.id in (capstone.arm.ARM_INS_VSTMDB,
+                                                capstone.arm.ARM_INS_VLDMDB)
+                offset = -width if decrement else 0
+                operation = "write" if instruction.id in (
+                    capstone.arm.ARM_INS_VSTMIA, capstone.arm.ARM_INS_VSTMDB) else "read"
+                for register in registers:
+                    bits = 64 if register.startswith("d") else 32
+                    accesses.append({"site": ac.address(fact.address), "operation": operation,
+                                     "bits": bits, "signed_load": False,
+                                     "location": indirect.describe(indirect.add(base, offset))})
+                    offset += bits // 8
             if instruction.id == capstone.arm.ARM_INS_ASR or any(
                     op.shift.type == capstone.arm.ARM_SFT_ASR for op in instruction.operands):
                 signed_shifts.append(ac.address(fact.address))
-            event = transfer(instruction, fact, state, image)
+            if (fact.flow == "branch" and fact.target in known_entries
+                    and fact.target not in instructions):
+                condition = instruction.cc if fact.conditional else None
+                get = lambda register: indirect.plain(state.get(register), condition)
+                event = {
+                    "site": fact.address, "target": fact.target, "tail": True,
+                    "pointer": None,
+                    "registers": {register: get(register) for register in
+                                  sorted(ac.ARGUMENTS, key=ac.reg_order)},
+                    "stack": {offset: state.get(("memory", indirect.add(get("sp"), offset)))
+                              for offset in range(0, 32, 4)},
+                }
+            else:
+                event = transfer(instruction, fact, state, image)
             if fact.flow == "return":
                 returns.append({"site": ac.address(fact.address),
                                 "registers": {reg: indirect.describe(state.get(reg))
                                               for reg in ("r0", "r1", "s0")}})
             if event:
                 calls.append({"site": ac.address(event["site"]),
+                              "tail": event.get("tail", False),
                               "target": ac.address(event["target"]) if event["target"] else None,
                               "pointer": indirect.describe(event["pointer"]),
                               "registers": {reg: indirect.describe(value)
@@ -179,7 +243,7 @@ def main() -> int:
         rows.append({"function": ac.address(address), "stores": stores, "calls": calls,
                      "sites": ac.call_sites(function, blocks, entries, {}),
                      "enhanced": enhanced(function, blocks, successors,
-                                          decoders[function["isa"]], image, args.acyclic)})
+                                          decoders[function["isa"]], image, args.acyclic, entries)})
     args.out.write_text(json.dumps({"facts": rows, "coverage": __doc__,
                                    "acyclic_only": args.acyclic,
                                    "reused_helper": str(REUSED),

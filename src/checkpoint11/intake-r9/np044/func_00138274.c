@@ -32,7 +32,7 @@ CtrResult func_00138274(void *buffer, unsigned int size)
     command->request.descriptor =
         ctrIpcStaticBufferDescriptor(size, options.static_buffer_index);
     command->request.buffer = buffer;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     if (ctrIpcTransportFailure(result) >= 0)
         result = command->response.result;
     return result;

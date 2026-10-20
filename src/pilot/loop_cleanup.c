@@ -1,11 +1,6 @@
 #include "game/runtime.h"
+#include "game/resource_tables.h"
 
-struct Entry { int id; struct ResourceHandle *resource; };
-struct EntryList { struct Entry *entries; int count; };
-extern struct EntryList data_0024225c;
-struct DetailEntry { int id; int value; int flags; int length; struct ResourceHandle *resource; };
-struct DetailList { struct DetailEntry *entries; int count; };
-extern struct DetailList data_00242264;
 
 void func_00103358(void)
 {

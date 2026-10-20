@@ -1,14 +1,5 @@
-#include "game/exp_heap.h"
+#include "game/runtime_type_initializers.h"
 
-/* [INFERENCE] Runtime ancestry record, matching the canonical opaque type. */
-struct RuntimeTypeInfo {
-    const RuntimeTypeInfo *parent;
-    explicit RuntimeTypeInfo(const RuntimeTypeInfo *value) : parent(value) {}
-};
-
-/* INTEGRATOR: move to include/game/exp_heap.h */
-extern "C" {
-extern RuntimeTypeInfo data_00243490;
-}
-
-RuntimeTypeInfo data_00243490(&data_00243494);
+/* [INFERENCE] Original class names are unrecovered; this native metadata
+ * descriptor retains its exact initialized parent. */
+const nw::ut::internal::RuntimeTypeInfo data_00243490(&data_00243494);

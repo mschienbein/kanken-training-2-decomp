@@ -43,7 +43,7 @@ void func_001ed874(struct CategoryScreen *screen)
     screen->selected_category = screen->category;
     func_001c144c(screen->frame);
     if (screen->buttons)
-        func_00176b24(reinterpret_cast<SelectionList *>(screen->buttons));
+        func_00176b24(screen->buttons);
     /* [INFERENCE] callee identity: inlined by armlink; these receiver-only
      * no-op initializers use distinct typed source definitions. Their original
      * callee identities are not observable at the rewritten call sites. */
@@ -54,7 +54,7 @@ void func_001ed874(struct CategoryScreen *screen)
     if (screen->progress)
         func_00170298(screen->progress);
     if (screen->navigation)
-        func_0017697c(reinterpret_cast<AlternateSelectionList *>(screen->navigation));
+        func_0017697c(screen->navigation);
     if (screen->other_panel) {
         func_00172b38(screen->other_panel);
         func_00172a14(screen->other_panel, 4);

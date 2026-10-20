@@ -87,6 +87,50 @@ struct MainThreadRecord {
 };
 
 #ifdef __cplusplus
+/* [INFERENCE] This serialized member table supplies native callback records.
+ * Keep each callback's actual arity, width and signedness; the receiver remains
+ * opaque rather than being equated with an unrelated padded sound class. */
+class CommandTarget;
+struct CommandCallbacks {
+    void (CommandTarget::*mode)(unsigned char);
+    void (CommandTarget::*fade)(signed char, int);
+    void (CommandTarget::*value08)(float);
+    void (CommandTarget::*value0c)(float);
+    void (CommandTarget::*value10)(float);
+    void (CommandTarget::*value14)(float);
+    void (CommandTarget::*value104)(float);
+    void (CommandTarget::*value108)(float, int);
+    void (CommandTarget::*value18)(float);
+    void (CommandTarget::*flag83)(unsigned char);
+    void (CommandTarget::*flagf4)(signed char);
+    void (CommandTarget::*flagf0)(unsigned char);
+};
+struct CommandGate {
+    unsigned values[2];
+    unsigned char enabled;
+    unsigned char reserved[3];
+};
+struct CommandGroup {
+    unsigned char reserved0[0x90];
+    CommandTarget *children[16];
+    unsigned char reserved1[0x134 - 0xd0];
+    CommandGate gates[4];
+    CommandTarget *child(int index) const
+    {
+        /* ORIGINAL BUG: negative indices are not rejected. */
+        if (index > 15) return 0;
+        return children[index];
+    }
+};
+extern "C" {
+extern const CommandCallbacks data_0021df3c;
+void func_0015121c(CommandGroup *group, unsigned mask, unsigned char value);
+void func_00151458(CommandGroup *group, unsigned mask, signed char value);
+void func_00151584(CommandGroup *group, unsigned mask, unsigned char value);
+}
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif
 extern struct InputRegistrationState bss_004b4fc0;

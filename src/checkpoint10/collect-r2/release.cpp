@@ -18,11 +18,6 @@ static void initialize_event(StreamEvent *event, unsigned char opcode, void *obj
 }
 }
 
-/* INTEGRATOR: move to include/game/stream_commands.h. The complete signature
- * follows CleanupCallback in game/cleanup_registry.h and its allocator. */
-extern "C" {
-void func_001d9ca0(void *buffer, unsigned size, void *context);
-}
 
 void func_001d9ca0(void *buffer, unsigned size, void *context)
 {
