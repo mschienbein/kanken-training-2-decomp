@@ -1,5 +1,46 @@
 # cmodels2 — v8 / L1 static integration
 
+## 2026-10-20 — fresh qualified intake under v8/L1
+
+Current authority: `scratch/integrator/cmodels2/SCOPE-r3.json`, with every disposition in
+`FRESH-INTAKE-r3.json`. Continue existing **8dd4d016** work without a predecessor merge.
+Candidate scope is now **5 functions / 892 B / 7 units**: the three preserved r2 candidates
+plus **00171208 / 96 B** and **001e5d38 / 116 B**. No new helper definition or accepted credit.
+
+- **00171208:** retain np017's direct/default mismatch and separate v3/v6 MATCHes. Reuse the
+  accepted completion setter with one full `MenuTransitionState` input/result contract.
+  Actual member-callback dispatch supplies its `CallbackTarget` interface; the old partial
+  `TransitionCompletion` shadow and both callers' receiver/callback casts are removed.
+  New 00171208 and revised accepted 00172e00 MATCH together under explicit **v8/L1**.
+- **001e5d38:** retain nf217's direct/default mismatch and mixed-TU v3 target witness.
+  Both real callers, 00163770 and 00178154, forward the same unchanged saved list to accepted
+  001730ec and this target. That establishes one actual list/entry contract, not equality
+  inferred from offsets. Reuse accepted `w19_item_category`; no `nf217_resource_category`
+  definition is copied. Canonical signed count/weight and value-sequence fields, existing
+  0015f5b0/001743d8 source owners, accepted 001730ec and the 00167860 allocator all MATCH.
+- **001bc5ac:** fresh nf203 v3 MATCH supersedes only the refreshed ledger's older proof choice,
+  not its historical failures. The exact author source/helper **compile-refuses** against
+  current local contracts; it is not a measured v8 linker refusal or MATCH. C010 confirms
+  unresolved field-producer/all-consumer and `CharacterPanel`/`QueuedDisplayState` relationships.
+  Do not replace fields, introduce aliases or cast away those gaps. No source/helper collected.
+- **0017a49c:** preserve r41414's exact v3-only MATCH and existing **v6/v8 refusals**.
+  No unchanged refusal rerun. Fresh nf135 001acc88 is default context in a mixed mismatch TU;
+  nf197 001acf28 is a complete default MATCH, but native selection/component/name closure is
+  still unadopted. Neither fresh source requests a D2 alias; stale queue labels are not proof.
+
+Fresh exercised evidence: **three sequential bounded v8/L1 commands, exit 0, seven functions /
+660 B MATCH** (two new / 212 B; five context / 448 B), plus the one compile refusal above.
+`MODEL-TRANSITION-r3.json` projects **24 R1 + 1 L1**, **18 helper-only units**, all 19 prior
+R1 callers reopened (17 bodies unchanged). The inventory preserves all old failures and now
+covers **155 unique identities / 153,824 B**, not candidate credit.
+
+Main integration must remove only the obsolete `CountedResource` forward/prototype from its
+newer `functions.h`, using `game/item_entries.h` as authority alongside the two existing
+`src/wave19` provider migrations. Keep all newer unrelated declarations, canonical receiver/
+reset/clock/number corrections, C010's 001a77d4 ownership, accepted 001e0afc/001ed874 identities
+and explicit audio/font/allocator/c011 holds. No heavy audit, build, tests, prepare, finalize
+or push; Main refreshes actual dependencies after predecessor finalization. **Not checkpoint-ready.**
+
 ## 2026-10-20 — resumed local integration complete
 
 Current authority: `scratch/integrator/cmodels2/SCOPE-r2.json`. Main **261fdc9** was merged in

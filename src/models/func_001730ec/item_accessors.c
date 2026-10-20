@@ -11,5 +11,5 @@ int w19_item_category(const struct W8ItemEntry *entry)
  * identity inferred from the word read of the item value. */
 unsigned w19_item_value(const struct W8ItemEntry *entry)
 {
-    return entry->value0c;
+    return (unsigned)entry->count;
 }
