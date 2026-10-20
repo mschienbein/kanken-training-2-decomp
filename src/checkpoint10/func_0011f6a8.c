@@ -1,11 +1,10 @@
-/* The IPC callee writes through both output pointers; the buffer descriptor scales count by the record size. */
-extern int func_0012d550(unsigned *output, void *buffer, unsigned count,
-                        unsigned char mode, unsigned first, unsigned second,
-                        unsigned third);
+#include "game/archive_ipc.h"
 
-int func_0011f6a8(unsigned *output, void *buffer, unsigned count,
-                  unsigned char mode, unsigned first, unsigned second,
-                  unsigned third)
+/* The terminal operation consumes one complete 64-bit token, not three
+ * independently typed trailing words. Writable outputs retain their types. */
+CtrResult func_0011f6a8(unsigned *output, struct ArchiveInfo *buffer, unsigned count,
+                        unsigned char mode, unsigned long long token,
+                        unsigned index)
 {
-    return func_0012d550(output, buffer, count, mode, first, second, third);
+    return func_0012d550(output, buffer, count, mode, token, index);
 }
