@@ -10,7 +10,7 @@ denominator v7; gates v1.10. Host: WSL2 Ubuntu on the Windows desktop
 into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pushes through
 `gh auth setup-git`.
 
-Restart sequence (accepted now: 1,601 functions / 185,952 B, seq 8 c008-r3; denominator v9-r2; gates v1.16, with reviewed linker models v4/v6 awaiting adoption; profiles game/sdk/middleware):
+Restart sequence (accepted now: 1,621 functions / 195,908 B, seq 9 cmodels; denominator v9-r2; gates v1.19, linker models v4/v6/v8 adopted; the finalized ledger is selected as linker v6 + literal L1, so later checkpoints select at least that pair; profiles game/sdk/middleware):
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules
@@ -23,10 +23,11 @@ Restart sequence (accepted now: 1,601 functions / 185,952 B, seq 8 c008-r3; deno
    `--min-reviews 2`; `accept.py verify`; known issues + STATUS/RESUME; commit; push.
 3. Authoring: `tools/triage.py --exclude scratch/integrator/exclude.json --avoid svc,thumb,exclusive
    batches`; functions >512 B in focused batches, >2 KB solo; ARMCC-extension functions use
-   `include/ctr/`. Near misses go through `tools/permute.py` (CPU only) before another model pass.
-4. Next: adopt v4 then v6 (each a GATES revision + isolated full suite); c009 prepare and reviews,
-   then c010, c011 and a model-qualified checkpoint; catalogue v10 (runtime-library classification
-   from the Arm 5.04u2 b82 libraries, unknown bytes/anomalies); residue table in STATUS.
+   `include/ctr/`. Near misses go through `tools/permute.py` (CPU only) and step-5 near-miss
+   finishing (a fresh author diagnoses the residual) before they enter the residue table.
+4. Next: c009 prepare and reviews (selection linker v6 + literal L1, the finalized ledger's pair),
+   then c010, c011 and a v8-selected model checkpoint (cmodels2); catalogue v10-r4 review and
+   adoption (runtime-library classification, raw-SVC repair); residue table in STATUS.
 
 
 ## 2026-10-16 (night) — hand-off from the Mac to the desktop
