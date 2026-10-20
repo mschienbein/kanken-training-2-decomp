@@ -200,8 +200,11 @@ def descriptor_paths(analyzer, start: int, size: int, descriptor: int) -> dict:
     queue = [(start, registers, FLAGS, False, False, frozenset())]
     targets, read_sites, restore_sites, transfer_sites, visited = set(), set(), set(), set(), set()
     categories = set()
-    terminal_paths = 0
+    terminal_paths = processed = 0
     while queue:
+        processed += 1
+        if processed > 4096:
+            raise ValueError("descriptor complete-path bound exceeded")
         site, registers, flags, read, restored, history = queue.pop()
         if site in history or site not in instructions:
             raise ValueError("unbounded or escaping descriptor control flow")
@@ -306,6 +309,7 @@ def descriptor_paths(analyzer, start: int, size: int, descriptor: int) -> dict:
         "descriptor_width": 4, "return_address_delta": 4,
         "all_incoming_core_register_values": True, "abstract_domain": "finite sets / sound unsigned intervals",
         "conditional_flags": "all possible incoming NZCV; exact where modeled finite operands allow",
+        "entry_data_endian": "little", "unmodeled_state_or_endian_effects": "refused",
         "category_values": sorted(categories), "continuation_targets": sorted(targets),
         "descriptor_read_sites": sorted(read_sites), "saved_pair_restore_sites": sorted(restore_sites),
         "continuation_transfer_sites": sorted(transfer_sites), "visited_instruction_sites": sorted(visited),
@@ -572,7 +576,11 @@ def _caller_prefix(analyzer, start: int, code: list[list[int]], descriptor: dict
     visited, returns, called = set(), set(), False
     scalar = {arm.ARM_INS_ASR, arm.ARM_INS_LSL, arm.ARM_INS_LSR, arm.ARM_INS_ORR,
               arm.ARM_INS_RSB, arm.ARM_INS_SUB, arm.ARM_INS_CMP, arm.ARM_INS_MOV}
+    processed = 0
     while queue:
+        processed += 1
+        if processed > 4096:
+            raise ValueError("runtime caller prefix exceeds its complete-path bound")
         site, saved, history = queue.pop()
         if site in history or site not in sites:
             raise ValueError("runtime caller prefix loops, crosses data or escapes its section")

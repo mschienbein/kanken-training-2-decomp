@@ -130,6 +130,47 @@ alias or whole-body coincidence as sole historical API identity is introduced.
 The dispatcher itself's old code/data hole remains outside this narrow physical
 delta; complete section authentication is not permission to change its owner
 record without separate accounting.
+## Supplemental33-interval evidence intake
+
+The payload-free scout report `scratch/integrator/catalogue-v11/ALIGNMENT-FACTS-r1.json`
+SHA `5cf178ac2aa6a255d1ee0e43802199acd234b0f255b6f0557301478d48dbeb4b`
+is an evidence intake, not a classification grant. A bounded13-member ELF metadata
+probe extracted actual declarations, mapping offsets, section sizes and alignment
+for all12 strong leads. A separate two-member probe reencoded only the complete
+`_printf_fp_dec.o`1040B and `rt_ctype_table.o`20B sections at already referenced
+placements. Both probes exited0; no exhaustive archive/image scan or source/packet
+search was used.
+
+`scratch/runtime-data-v11/alignment-closure-findings.json`, SHA
+`19d7ccbe9f217a686babdd91c31c7909f6222313fe103c928787b0ca10ad9656`,
+explicitly accounts for all33 intervals. The two-byte `0019f910–0019f912` selector
+now has **fully evidenced independent-entry findings**, not yet an applied rule:
+actual global `STT_FUNC __lib_sel_fp_printf`, offset0, declared2B, `$t` mapping;
+complete1040B exact relocation closure; independent same-section references at
+`0019fb22/0019fb44/0019fb84` bind offset2 to`0019f912`; the authenticated620B
+owner at`0019faa8` is at offset408. Its2B fragment is an unconditional normal
+return. This supplies a real declaration/placement witness, not generic return
+similarity. The existing620B owner and rejected632B growth remain unchanged.
+The new entry is recorded as a separately reviewable finding, not silently added
+to the three-interval proposal or transferred to the ambiguous`00100c9c` stub.
+
+The other32 intervals remain open. Nine restored halfword holes have actual
+4-aligned `$d` section mappings, but **no data-object declarations and no complete
+negative-reference/fill proof**; historical broad read vetoes still bar padding.
+The48B allocation/free fragment has exact26/22B declarations in a66B Thumb section,
+but no independently authenticated original entry/caller placement: the18B
+initializer's malloc import remains unproved. The4B ctype tail has a complete20B
+declared mapped section and exact reencoding, but no direct original architectural
+PC-addressed read; its relative computed-transfer contract/API identity is unproved.
+No unsupported padding, rodata, API rename or extent rule is installed for them.
+
+Metadata artifacts: `alignment-object-metadata.json` SHA
+`c3b89be37226dc2c5922b8c0581f679953a8ecf1f1cb67dcb0e3f7db51f61008`;
+the exact supplemental section hashes and every checked relocation are in
+`alignment-supplement-measurements.json`. These findings extend intake only;
+the isolated proposal still leaves144B/33 intervals until the separate2B-entry
+integration is independently reviewed.
+
 
 ## Artifacts and exercised investigation
 
@@ -154,6 +195,8 @@ Private bounded proof receipts under
 | `descriptor-paths-command.json` | `127bf290c204bb337e4ca2eb1aabd51858c45d4df9957cb020c0b09bbddb45c1` | exit0; sound all-path category/continuation overapproximation |
 | `initial-object-inspection.json` | `b29dadda18b57a421595a20e0775a07fa8b3f9fdf21aec674051bb875b489b4d` | initial independently selected section/symbol/relocation metadata |
 | `closure-findings.json` | `229a4c051bb4bba790587b2e0bcf600ce174b873ef29b58a28ce306f01792bef` | all three target dispositions and every other still-open interval; no generation claim |
+| `caller-prefix-paths.json` | `2fd7b75aedc678e797d1eb7732141a38e4f74c64e8e1b695987775854ce44292` | complete80B owned prefix; original saved pair dominates both exceptional paths |
+| `caller-prefix-command.json` | `5cf7209b312213ee0e1cd16005c0ad5791a4ba789f2673dc80e32ea7b90eaf99` | exit0; bounded20-instruction original caller probe only |
 
 All executable evidence-probe outputs contain addresses, bounds, safe semantic
 facts and hashes only. Their private scripts are research scaffolding, not

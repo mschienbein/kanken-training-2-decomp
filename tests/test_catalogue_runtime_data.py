@@ -34,6 +34,7 @@ class RuntimeDescriptorTests(unittest.TestCase):
             self.assertEqual(proof["descriptor_read_sites"], [BASE])
             self.assertEqual(proof["saved_pair_restore_sites"], [BASE + 8])
             self.assertTrue(proof["all_incoming_core_register_values"])
+            self.assertEqual(proof["entry_data_endian"], "little")
             self.assertFalse(proof["global_noreturn_inferred"])
 
     def test_unknown_predicate_cannot_hide_an_invalid_continuation(self) -> None:
