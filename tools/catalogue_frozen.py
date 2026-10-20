@@ -40,9 +40,7 @@ def resolve(root: Path, label: str) -> Path:
     if descriptor is None:
         if label in manifest.get("absent_paths", []):
             return root / PREFIX / "absent" / label
-        if label.startswith(("config/", "accept/", "src/")):
-            raise ValueError(f"v13 has no immutable copy for frozen input: {label}")
-        return root / label
+        raise ValueError(f"v13 has no immutable copy for frozen input: {label}")
     path = descriptor["path"]
     if not path.startswith(PREFIX) or ".." in Path(path).parts:
         raise ValueError("v13 frozen input points at a live mutable path")

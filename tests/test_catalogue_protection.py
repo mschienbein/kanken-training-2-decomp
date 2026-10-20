@@ -286,6 +286,12 @@ class CatalogueProtectionTests(unittest.TestCase):
             synthetic_project(root)
             write_json(root / "extra.json", {"units": [{"source": "src/second.c", "profile": "game",
                                                        "functions": [f"func_{BASE + 32:08x}"]}]})
+            # Explicit additions are inputs too: freeze before consumption.
+            manifest = catalogue_frozen.load(root)
+            retained = catalogue_frozen.PREFIX + "extra.json"
+            (root / retained).write_bytes((root / "extra.json").read_bytes())
+            manifest["inputs"]["extra.json"] = descriptor(root, retained)
+            write_json(root / catalogue_frozen.MANIFEST, manifest)
             result = run_catalogue(root, "proposal.json", "--protect-manifest", "extra.json")
             self.assertEqual(result.returncode, 0, result.stderr)
             candidate = json.loads((root / "proposal.json").read_bytes())

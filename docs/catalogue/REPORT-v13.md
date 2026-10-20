@@ -297,3 +297,21 @@ test and frozen-path regression were run **only as a bounded correction**:
 successful full-suite rerun. The original failed suite record and release remain
 immutable. The separate generation/merge/adoption sequence requires its own
 explicit heavy-slot grant.
+
+Main accepted that failed-suite/bounded-correction disposition with an explicit
+condition: an empty map is valid only if no mutable input is consumed. The final
+resolver therefore refuses **every unregistered consumed input**, including an
+explicit extra protection manifest, not only conventional `config/accept/src`
+paths. Explicit extra manifests still work when first registered with an exact
+retained copy. No mutable-path fallback remains when the v13 manifest exists.
+
+Two additional regressions prove both directions: empty map with no consumption
+passes; empty/partial map plus any attempted unregistered consumption refuses.
+They also test registered-copy deletion and digest/size corruption through both
+the loader and resolver. Together with the protection CLI tests and original
+failed synthetic metadata test, the final bounded correction exercised
+**21 tests, exit 0**, 1.649691 s captured wall. Its exact argv is retained in
+`full-suite/r2/bounded-correction-r2.json`. Main explicitly prohibited a second
+worker full suite and will run the final committed source's full suite in the
+adoption merge before recording acceptance. **No final-source full-suite PASS
+is claimed here.**

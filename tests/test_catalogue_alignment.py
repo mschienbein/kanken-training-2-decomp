@@ -266,6 +266,48 @@ class CatalogueAlignmentTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "complete section"):
             non_c.apply(deepcopy(original), analyzer, revision, {})
 
+    def test_empty_manifest_accepts_no_consumption_but_refuses_every_unbound_input(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "research").mkdir()
+            manifest = {"revision": "catalogue-v13", "inputs": {}, "absent_paths": []}
+            (root / catalogue_frozen.MANIFEST).write_text(json.dumps(manifest))
+            self.assertEqual(catalogue_frozen.load(root), manifest)
+            # A live file, even an explicitly requested extra manifest, must not
+            # become a fallback simply because the retained input map is empty.
+            for label in ("config/names.json", "accept/checkpoint.json", "src/proof.c", "extra.json"):
+                (root / label).parent.mkdir(parents=True, exist_ok=True)
+                (root / label).write_text("live mutable content")
+                with self.subTest(label=label), self.assertRaisesRegex(ValueError, "no immutable copy"):
+                    catalogue_frozen.resolve(root, label)
+
+    def test_partial_missing_and_hash_mismatched_retained_inputs_fail_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            target = catalogue_frozen.PREFIX + "config/names.json"
+            (root / target).parent.mkdir(parents=True)
+            content = b'{"symbols":{}}\n'
+            (root / target).write_bytes(content)
+            manifest = {"revision": "catalogue-v13", "inputs": {
+                "config/names.json": {"path": target, "size": len(content), "sha256": sha(content)}}}
+            (root / catalogue_frozen.MANIFEST).write_text(json.dumps(manifest))
+            catalogue_frozen.load(root)
+            self.assertEqual(catalogue_frozen.resolve(root, "config/names.json").read_bytes(), content)
+            (root / "config").mkdir()
+            (root / "config/matches.json").write_text('{"units":[]}')
+            with self.assertRaisesRegex(ValueError, "no immutable copy"):
+                catalogue_frozen.resolve(root, "config/matches.json")
+            (root / target).write_bytes(content + b"changed")
+            for operation in (lambda: catalogue_frozen.load(root),
+                              lambda: catalogue_frozen.resolve(root, "config/names.json")):
+                with self.assertRaisesRegex(ValueError, "frozen input differs"):
+                    operation()
+            (root / target).unlink()
+            for operation in (lambda: catalogue_frozen.load(root),
+                              lambda: catalogue_frozen.resolve(root, "config/names.json")):
+                with self.assertRaises(OSError):
+                    operation()
+
     def test_frozen_generator_inputs_never_resolve_to_live_mutable_paths(self) -> None:
         manifest = catalogue_frozen.load(ROOT)
         snapshot = json.loads((ROOT / "research/catalogue_v11_protection.json").read_bytes())
