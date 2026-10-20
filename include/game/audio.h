@@ -6,7 +6,6 @@ struct DisplayAnimationTrack;
 struct DisplayObject;
 struct Handle1c4478;
 struct Handle1c4484;
-struct Object1c7f10;
 struct Object1c8984;
 struct PromptManager;
 struct SoundStarter;
@@ -37,10 +36,6 @@ struct Handle1c4484 {
     int slot;
 };
 
-struct Object1c7f10 {
-    unsigned char reserved00[0x0c];
-    unsigned value;
-};
 
 struct Object1c8984 {
     unsigned char reserved00[0x1c];
@@ -67,7 +62,6 @@ extern int func_001c1924(const struct PromptManager *manager);
 extern int func_001ace94(const struct Widget1ace94 *widget);
 extern struct Handle1c4478 *func_001c4478(struct Handle1c4478 *handle);
 extern struct Handle1c4484 *func_001c4484(struct Handle1c4484 *handle);
-extern void func_001c7f10(struct Object1c7f10 *object);
 extern void func_001c8984(struct Object1c8984 *object);
 extern unsigned char func_001d018c(struct SoundStarter *starter, struct SoundTrack **track,
                                      unsigned resource, unsigned flags);
