@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "READY-FOR-MAIN-PREPARE-INDEPENDENT-REVIEW-v6-L1",
+  "status": "READY-v6-L1-with-final-explicit-phase-member-MATCH",
   "branch": "c009-integrate",
   "original_base": "11e1992",
   "gate_revision": "frozenv1.19/main261fdc9,denominatorv9-r2",
@@ -3330,7 +3330,7 @@
     "src/wave19/func_001dc318.c": "9f7684b389e6b36b2e644ea25ec4451f070439547769a35708e4dd650cb369a0",
     "src/wave19/func_001dcecc.c": "c092d53e8acc93133a1cbb15c00ad14f3ad087eacbead0e040bb11f96aaf8f68",
     "src/wave19/func_001dcf0c.c": "1478a8374942ed8ef1514707560bbb246f5f6f9dde1654eb2265b864662540f9",
-    "src/wave19/func_001e3050.cpp": "dd7b3c864028e18e8a628b1a25253b5cd74c65f97c115fd2fad4bedd035798fe",
+    "src/wave19/func_001e3050.cpp": "599bdd66b0f51c5f080268101735d674c05183c44b61a2fa15d0226a384a0074",
     "src/wave19/func_001e387c.cpp": "306c6fa0971d2911cfcd4efe971db0ded28f8daeea8fe8ed51ee1e8ca83d072f",
     "src/wave19/func_001e716c.cpp": "0359c8720570eaf6cf278df44cd83ed8609d3cf235efdde957ae3edb20a10aff",
     "src/wave19/func_001e74b8.c": "20aec48ae79d9a032d85bc37ec8634995b6920037f7b453862a3707b27c1c76f",
@@ -4762,6 +4762,14 @@
         "moves": [],
         "removed_accepted_units": []
       }
+    },
+    "explicit_phase_member": {
+      "source": "src/wave19/func_001e3050.cpp",
+      "source_sha256": "599bdd66b0f51c5f080268101735d674c05183c44b61a2fa15d0226a384a0074",
+      "receipt": "scratch/integrator/c009/phase-store-r1/func_001e3050.result.json",
+      "exit": 0,
+      "status": "MATCH",
+      "reason": "Direct named phase member store avoids transient states[8] out-of-bounds alias; same natural0x50extent matches."
     }
   },
   "not_exercised": [
@@ -4841,6 +4849,7 @@
     "evidence": "scratch/integrator/c009/declaration-plan.json"
   },
   "resume_critical": [
+    "Finalexplicitphasememberstore001e3050 overrides earlier state[8] temporary alias;phase-store-r1MATCH50B,sourcehashandperfunctionreceiptbound. Noheavyjobafterrelease.",
     "Ready canonical source commit1851bf3; finalMODEL v6+L1 explicitly required; frozenv9-r2/GATESv1.19.",
     "All832requiredunits/838functions MATCH; wholeledger G3zeroerrors/policy/uncheckedC with explicit510Cppwaiver.",
     "Argcheck reported78issues/412notes alladjudicated; actualexit2,389mechanicalABIgaps retain explicitnative/aggregate/callback qualifications.",

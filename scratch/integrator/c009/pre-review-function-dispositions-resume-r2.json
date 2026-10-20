@@ -3,7 +3,7 @@
     "linker_model": "armlink5-inline-branchnop-v6",
     "literal_model": "anonymous-string-records-v1"
   },
-  "required_scope": "readiness-scope-r10.json",
+  "required_scope": "readiness-scope-r10.json plus phase-store-r1 correction",
   "rows": [
     {
       "function": "func_00163488",
@@ -15217,15 +15217,16 @@
     {
       "function": "func_001e3050",
       "source": "src/wave19/func_001e3050.cpp",
-      "source_sha256": "dd7b3c864028e18e8a628b1a25253b5cd74c65f97c115fd2fad4bedd035798fe",
+      "source_sha256": "599bdd66b0f51c5f080268101735d674c05183c44b61a2fa15d0226a384a0074",
       "profile": "game",
       "verdict": "QUALIFIED",
       "qualifications": [
-        "G3 explicit unchecked-C++ waiver; native canonical compile and manual aggregate/receiver/callback contracts supplement, no automatic C++ ABI proof."
+        "G3 explicit unchecked-C++ waiver; native canonical compile and manual aggregate/receiver/callback contracts supplement, no automatic C++ ABI proof.",
+        "Explicit phase member store replaces prior temporary out-of-bounds state alias; scoped finalMATCH."
       ],
       "scope_kind": "new",
       "method": "Integrator pre-review: exact isolated match; canonical source and compiled interface probes; preserved original register/storage/indirect evidence; caller candidate dispositions. Not an independent acceptance review.",
-      "match_receipt": "scratch/integrator/c009/final-match-r4/wave19/func_001e3050/func_001e3050.result.json",
+      "match_receipt": "scratch/integrator/c009/phase-store-r1/func_001e3050.result.json",
       "match_exit": 0,
       "steps": {
         "1_exactness": "Complete catalogue extent MATCH; explicit v6+L1 and helper compilation closure.",
@@ -18418,5 +18419,5 @@
     }
   ],
   "functions": 838,
-  "status": "Complete integrator pre-review dispositions; independent acceptance reviews Main-owned"
+  "status": "Complete integrator prereview + explicit phase member correction isolatedMATCH"
 }

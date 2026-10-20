@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "READY_FOR_MAIN_PREPARE_AND_INDEPENDENT_REVIEW_WITH_QUALIFICATIONS",
-  "ready_source_commit": "1851bf3",
+  "ready_source_commit": "56c333e + final explicit-phase correction",
   "base_main": "261fdc9",
   "selection": {
     "linker_model": "armlink5-inline-branchnop-v6",
@@ -147,8 +147,9 @@
     "scratch/integrator/c009/forwarding/resume-r2/results.json": "a7263629f4c10468fc35caca1d1ecab68599183f216504b31468c1b2e0faaad7",
     "scratch/integrator/c009/forwarding-adjudications-resume-r2.json": "2782b5b5ec07a6f8fba36c8a83550fb68de4b803ecf502daba165fb9724c38cc",
     "scratch/integrator/c009/co-inclusion-resume-r2.json": "2e3cbb90d0c71e9df6ce43e7ce8c9f1aeb90c19cb647120ed8f40ea70d545f37",
-    "scratch/integrator/c009/pre-review-function-dispositions-resume-r2.json": "eca12004b41b8394ca55a56410214efff348a5594f6f75a272ceda67468f976c",
-    "scratch/integrator/c009/native-diagnostic-adjudications-resume-r4.json": "586c8859b97fed506c25101fa91728a8c92903c996ce020d153e2f2d64f09d59"
+    "scratch/integrator/c009/pre-review-function-dispositions-resume-r2.json": "32ed65db0ea5e1833957d379b3925f9a8cca20dd334285b4a722a01452ab1a68",
+    "scratch/integrator/c009/native-diagnostic-adjudications-resume-r4.json": "586c8859b97fed506c25101fa91728a8c92903c996ce020d153e2f2d64f09d59",
+    "scratch/integrator/c009/phase-store-r1.json": "7c85ff3ee52a58c1d84f01163551aae2ff37734fd8ef215a8d7c6c2d2fd29048"
   },
   "source_sha256": {
     "src/pilot/pilot_a.c": "a363a225f4731f450e6cafa8556ef0e7ab04af9556d63056aa62694f5accd763",
@@ -2316,7 +2317,7 @@
     "src/wave19/func_001dc318.c": "9f7684b389e6b36b2e644ea25ec4451f070439547769a35708e4dd650cb369a0",
     "src/wave19/func_001dcecc.c": "c092d53e8acc93133a1cbb15c00ad14f3ad087eacbead0e040bb11f96aaf8f68",
     "src/wave19/func_001dcf0c.c": "1478a8374942ed8ef1514707560bbb246f5f6f9dde1654eb2265b864662540f9",
-    "src/wave19/func_001e3050.cpp": "dd7b3c864028e18e8a628b1a25253b5cd74c65f97c115fd2fad4bedd035798fe",
+    "src/wave19/func_001e3050.cpp": "599bdd66b0f51c5f080268101735d674c05183c44b61a2fa15d0226a384a0074",
     "src/wave19/func_001e387c.cpp": "306c6fa0971d2911cfcd4efe971db0ded28f8daeea8fe8ed51ee1e8ca83d072f",
     "src/wave19/func_001e716c.cpp": "0359c8720570eaf6cf278df44cd83ed8609d3cf235efdde957ae3edb20a10aff",
     "src/wave19/func_001e74b8.c": "20aec48ae79d9a032d85bc37ec8634995b6920037f7b453862a3707b27c1c76f",
@@ -2920,5 +2921,13 @@
     "include/nw/version.h": "6aea6b7fa65037753f4104543daca6a8a815f5943eb9760f90dae42b9cc898ce",
     "include/preinclude.h": "7e97b53a88d2fa4dadae21dcd1f5ba29c37e5154172e811b4402328f3ba0ac10"
   },
-  "remaining_blockers": []
+  "remaining_blockers": [],
+  "post_sweep_changed_source_witness": {
+    "source": "src/wave19/func_001e3050.cpp",
+    "source_sha256": "599bdd66b0f51c5f080268101735d674c05183c44b61a2fa15d0226a384a0074",
+    "receipt": "scratch/integrator/c009/phase-store-r1/func_001e3050.result.json",
+    "exit": 0,
+    "status": "MATCH",
+    "reason": "Direct named phase member store avoids transient states[8] out-of-bounds alias; same natural0x50extent matches."
+  }
 }

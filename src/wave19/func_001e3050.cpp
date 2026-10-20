@@ -11,5 +11,5 @@ void func_001e3050(L041InitializeScreen *state)
     state->set_entry(6, 0x27);
     state->current = 0;
     state->set_entry(7, 0x2a);
-    state->set_entry(8, 0);
+    state->phase = 0;
 }
