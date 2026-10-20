@@ -23,6 +23,12 @@ struct ArchiveOutputCommand {
 extern "C" {
 #endif
 extern CtrHandle data_0024377c;
+extern CtrResult func_0012d550(unsigned *count, struct ArchiveInfo *entries,
+    unsigned capacity, unsigned char mode, unsigned long long token,
+    unsigned index);
+extern CtrResult func_0011f6a8(unsigned *count, struct ArchiveInfo *entries,
+    unsigned capacity, unsigned char mode, unsigned long long token,
+    unsigned index);
 #ifdef __cplusplus
 }
 #endif

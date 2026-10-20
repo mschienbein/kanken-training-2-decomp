@@ -24,6 +24,14 @@ current proposal and bounded observations, including preserved failures. The
 typed canonical variants of `001273a0`, `0017f7f8` and `001ce8b8` remain measured
 byte-match residue, not exhausted searches or accepted implementations.
 
+Main subsequently imported the isolated `0011f6a8` archive-wrapper prerequisite
+from child commit `f5c402a`, without child candidate credit or unrelated header
+declarations. The wrapper now preserves the terminal's six-input contract,
+including the complete 64-bit token and typed writable outputs. Fresh parent-tree
+v6/L1 witnesses MATCH: wrapper 32 B / game, terminal `0012d550` 112 B / sdk.
+`scratch/integrator/c010/PARENT-ARCHIVE-IMPORT-r69.json` binds this addendum;
+the r67/r68 snapshots remain historical and must be refreshed before heavy gates.
+
 Next import only Main's frozen c009-r3 correction, reconcile its callable and
 native-constructor dependencies, then obtain Main's heavy slot for the complete
 header-dependent MATCH/helper closure, G3, native/signature probes, original
