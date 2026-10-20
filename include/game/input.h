@@ -2,6 +2,8 @@
 #define GAME_INPUT_H
 
 #include <stdbool.h>
+#include "ctr/svc.h"
+#include "game/memory_arena.h"
 
 struct InputController;
 
@@ -13,9 +15,38 @@ struct InputCalibration {
 };
 
 struct ButtonRing;
+struct TouchRing;
+struct SensorRing;
+struct MotionRing;
+struct AuxiliaryInputRing;
+struct MotionInputVTable;
+struct TouchInputService {
+    CtrHandle handle;
+    const volatile struct TouchRing *ring;
+};
+struct SensorInputService {
+    CtrHandle handle;
+    const volatile struct SensorRing *ring;
+};
+struct MotionInputService {
+    const struct MotionInputVTable *vtable;
+    CtrHandle handle;
+    const volatile struct MotionRing *ring;
+};
+struct AuxiliaryInputService {
+    CtrHandle handle;
+    const volatile struct AuxiliaryInputRing *ring;
+};
+/* Initializer001f58d4 and cleanup001c5690 establish this complete aggregate;
+ * getter0010c12c returns its actual touch subobject at +8. */
 struct InputService {
-    unsigned handle;
+    CtrHandle handle;
     const volatile struct ButtonRing *ring;
+    struct TouchInputService touch;
+    struct SensorInputService sensor;
+    struct MotionInputService motion;
+    struct AuxiliaryInputService auxiliary;
+    struct MappedMemoryBlock mapping;
 };
 
 struct InputReader {

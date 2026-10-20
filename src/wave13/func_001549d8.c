@@ -12,7 +12,7 @@ int func_001549d8(struct ServiceCoordinator *context)
 
     func_00182210();
     if (func_0018f018()) {
-        result = context->storage.audio.replies[context->current_buffer]->value;
+        result = context->replies[context->current_buffer]->value;
         func_00182204();
         return result;
     } else {

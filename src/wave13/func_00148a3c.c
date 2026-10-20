@@ -8,13 +8,13 @@
 
 int func_00148a3c(struct ServiceCoordinator *context, unsigned int value)
 {
-    struct AudioDspParameterBlock *parameters;
+    struct VoiceDspParameters *parameters;
 
     func_00182210();
     if (func_0018f018()) {
         parameters =
-            context->storage.audio.voice_parameters[context->completion_slot];
-        parameters->value1a = value;
+            context->voice[context->completion_slot];
+        parameters->parameters.value1a = value;
         parameters->flags |= 0x10000000u;
         func_00182204();
         return 1;

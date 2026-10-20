@@ -17,7 +17,9 @@ struct InputSessionContext {
     float channels[2];
     AuxCallback callbacks[2];
     void *contexts[2];
-    unsigned char reserved24[0x10];
+    unsigned char reserved24[0x0c];
+    signed char fallback[2];
+    unsigned char reserved32[2];
     struct StreamMutex mutex;
 };
 struct ShortInputUpdate {

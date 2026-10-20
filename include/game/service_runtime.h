@@ -2,7 +2,10 @@
 #define GAME_SERVICE_RUNTIME_H
 
 #include "ctr/ipc.h"
-struct AudioDspParameterBlock;
+struct VoiceDspParameters;
+struct ChannelDspParameters;
+struct ChannelDescriptor;
+struct AdpcmCoefficients;
 struct AudioDspReply;
 struct SignalState;
 struct StreamCriticalSection;
@@ -95,15 +98,12 @@ struct ServiceCoordinator {
     CtrHandle ready_event, completion_event;
     struct StreamMutex mutex;
     unsigned char reserved14[0x109c - 0x14];
-    union {
-        unsigned short *completion_slots[150];
-        struct {
-            unsigned short *reserved109c[2];
-            struct AudioDspParameterBlock *voice_parameters[2];
-            struct AudioDspReply *replies[2];
-            struct AudioDspParameterBlock *auxiliary_parameters[2][24];
-        } audio;
-    } storage;
+    unsigned short *status_records[2];
+    struct VoiceDspParameters *voice[2];
+    struct AudioDspReply *replies[2];
+    struct ChannelDspParameters *channels[2][24];
+    struct ChannelDescriptor *descriptors[2][24];
+    struct AdpcmCoefficients *coefficient_destinations[2][24];
     struct ServiceBufferPair buffers[5];
     unsigned char enabled, pending;
     unsigned short serial, current_buffer, completion_slot;
@@ -150,6 +150,8 @@ extern void func_0013e810(void);
 extern int func_0012f1c0(struct ServiceOutput *state);
 extern void func_0012f1b4(struct HandleManager *state);
 extern void func_0013e894(struct ServiceCoordinator *worker, int preserve);
+extern int func_00180c84(struct ServiceCoordinator *state, int channel, short value);
+extern int func_00180d10(struct ServiceCoordinator *state, int channel, short value);
 extern CtrResult func_00142838(struct ServiceCoordinator *state, int enabled);
 extern CtrResult func_001821f4(struct ServiceOutput *thread, int status);
 extern struct ServiceWorker *func_00182f88(void);
