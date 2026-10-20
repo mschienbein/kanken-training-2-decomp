@@ -1,0 +1,32 @@
+{
+  "source": "src/pilot/loop_state.c",
+  "profile": "game",
+  "functions": [
+    "func_00105fa8"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/pilot/loop_state.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-r6/008"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "95e71bd3139b9bbf24a1cb6b1199b115c8c411bb9b1db4b627e3b32db9db10eb",
+  "receipt": "scratch/g3u-r6/008/loop_state.result.json",
+  "receipt_sha256": "59fe44a9ffe4d9e62b16cc4a1df41636d6abb8f785a1948d79b0d7a6d69f110a",
+  "extra_source_sha256": {},
+  "output": "MATCH    func_00105fa8 @ 0x105fa8 size 0x64/0x64\n"
+}
