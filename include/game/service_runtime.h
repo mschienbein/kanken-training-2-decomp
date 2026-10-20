@@ -50,6 +50,60 @@ struct SharedPublicationState {
 };
 
 
+struct ChannelParameters {
+    unsigned samples;
+    unsigned reserved04;
+    unsigned reserved08;
+    unsigned char mode;
+    unsigned char reserved0d[3];
+};
+struct ChannelWorkspace {
+    unsigned reserved00;
+    struct ChannelParameters parameters;
+    void *memory;
+    unsigned memory_size;
+    void *buffers[4];
+    unsigned indices[4];
+    unsigned frames;
+    unsigned current;
+    unsigned reserved44[3];
+    unsigned saved_samples;
+    unsigned char saved_mode;
+    unsigned char channels;
+    unsigned char initialized;
+};
+struct ExtendedWorkspace {
+    unsigned reserved00;
+    unsigned first_duration;
+    unsigned reserved08;
+    unsigned second_duration;
+    unsigned reserved10[6];
+    void *memory;
+    unsigned reserved2c;
+    unsigned first_count;
+    unsigned second_count;
+    unsigned third_count;
+    unsigned char *buffer;
+    unsigned char *second_buffer;
+    unsigned reserved44[2];
+    unsigned char *first;
+    unsigned char *second_first;
+    unsigned reserved54[2];
+    unsigned *second;
+    unsigned *third;
+    unsigned *second_second;
+    unsigned *second_third;
+    unsigned reserved6c[4];
+    unsigned *fourth;
+    unsigned *second_fourth;
+    unsigned char reserved84[0x6c];
+    unsigned saved_first_duration;
+    unsigned saved_second_duration;
+    unsigned saved_first_count;
+    unsigned saved_second_count;
+    unsigned saved_third_count;
+    unsigned char initialized;
+};
 struct WorkspacePair {
     struct ChannelWorkspace *channels;
     struct ExtendedWorkspace *extended;
@@ -163,6 +217,15 @@ extern void func_0014b224(struct ServiceWorker *state, unsigned char value);
 /* [INFERENCE] The wrapper forwards this word; the worker body does not read it. */
 extern void func_0014fa48(struct ServiceWorker *backend, unsigned argument);
 extern void func_001521dc(struct HandleManager *manager, struct AudioChannel *handle);
+/* These publishers store the unchanged workspace argument in the actual
+ * ServiceOutput slots at +0x34/+0x38 before the matching initializer call. */
+extern int func_0015343c(struct ServiceOutput *owner, unsigned index,
+                        struct ChannelWorkspace *workspace);
+extern int func_001534e0(struct ServiceOutput *owner, unsigned index,
+                        struct ExtendedWorkspace *workspace);
+extern void func_0017e8fc(struct ChannelWorkspace *workspace);
+extern int func_00154438(struct ChannelWorkspace *workspace);
+extern int func_001544e0(struct ExtendedWorkspace *workspace);
 #ifdef __cplusplus
 }
 #endif

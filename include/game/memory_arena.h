@@ -22,6 +22,8 @@ struct MemoryArena {
 extern "C" {
 #endif
 extern struct MemoryArena bss_004b51d0, bss_004b204c;
+extern unsigned char data_00242d74;
+extern void func_0011073c(struct MappedMemoryBlock *block, unsigned size);
 extern void func_001927b8(struct MemoryArena *arena, void *memory, unsigned size);
 extern void func_00148004(struct MappedMemoryBlock *block);
 extern void func_0014ae4c(struct MemoryArena *arena, struct MappedMemoryBlock *block);

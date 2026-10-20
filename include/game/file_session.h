@@ -17,6 +17,10 @@ extern struct FileSessionObject *func_00192978(struct FileObjectPool *pool);
 extern struct FileSessionObject *func_001c4d1c(struct FileSessionObject *object);
 extern CtrResult func_001c4d9c(struct FileService *service,
     struct FileSessionObject **output, CtrHandle handle);
+/* The checked-handle getter receives the same factory-backed session object;
+ * its first word is the canonical vtable, not an unrelated integer prefix. */
+extern unsigned func_0016bd7c(struct FileSessionObject *object);
+extern CtrResult func_001c4f80(const CtrHandle *session);
 #ifdef __cplusplus
 }
 #endif

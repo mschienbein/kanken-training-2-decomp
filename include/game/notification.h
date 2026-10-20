@@ -111,6 +111,13 @@ extern unsigned short *func_00172008(int index);
 extern void func_00172d48(int index);
 extern void func_0016fccc(int selection);
 extern int func_001758d4(void);
+/* [INFERENCE] Calendar key is a full word, compared with the serialized day. */
+extern int func_00183070(int year, int month, int day);
+extern unsigned char func_001dc100(int year, int month, int day);
+extern void func_001dc180(void);
+extern void func_001dc1ac(void);
+extern void func_001dc1d8(void);
+extern void func_001dc8e0(void);
 #ifdef __cplusplus
 }
 #endif

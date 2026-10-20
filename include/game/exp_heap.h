@@ -10,8 +10,6 @@ struct FormattedText;
 struct G103798;
 struct ResourceEntry;
 struct ResourceObject;
-struct RuntimeTypeInfo;
-struct RuntimeTypedObject;
 struct StreamMutex;
 
 
@@ -65,13 +63,6 @@ struct HeapArena {
     unsigned char *lower;
     unsigned size;
 };
-struct StreamLockGuard {
-    struct StreamMutex *mutex;
-#ifdef __cplusplus
-    explicit StreamLockGuard(struct StreamMutex *value) : mutex(value) { func_00192bd8(mutex); }
-    ~StreamLockGuard() { func_00195d74(mutex); }
-#endif
-};
 
 #ifdef __cplusplus
 extern "C" {
@@ -117,11 +108,6 @@ extern void func_00121a88(struct ExpHeap *heap, void *allocation);
 extern struct HeapArena bss_00495ad0;
 extern void func_00193a6c(struct ManagedExpHeap *heap, void *allocation);
 extern struct AllocatorBase *func_00183234(struct AllocatorBase *allocator);
-extern struct RuntimeTypeInfo data_00242da8;
-extern struct RuntimeTypeInfo data_00242e2c;
-extern struct RuntimeTypeInfo data_00243494;
-extern struct RuntimeTypeInfo data_00242da4;
-extern struct RuntimeTypeInfo data_00242e24;
 extern unsigned short func_001f15e0(const struct FormattedText *text);
 extern void func_001037c0(void);
 extern void func_00110eac(unsigned count);
@@ -131,11 +117,6 @@ extern struct ResourceEntry *func_0015db7c(int screen, unsigned char flag,
     const unsigned short *format, ...);
 extern void func_0015e3b4(void);
 extern void func_001e37e0(struct AllocatorInterface *interface, void *allocation);
-extern struct RuntimeTypeInfo *func_001f014c(const struct RuntimeTypedObject *object);
-extern struct RuntimeTypeInfo *func_001f0158(const struct RuntimeTypedObject *object);
-extern struct RuntimeTypeInfo *func_001f017c(const struct RuntimeTypedObject *object);
-extern struct RuntimeTypeInfo *func_001f0188(const struct RuntimeTypedObject *object);
-extern struct RuntimeTypeInfo *func_001f0194(const struct RuntimeTypedObject *object);
 #ifdef __cplusplus
 }
 #endif

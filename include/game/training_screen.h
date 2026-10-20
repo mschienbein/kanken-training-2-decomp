@@ -77,6 +77,7 @@ extern const MemberCallback data_002184b0;
 void func_0016d6dc(struct TrainingScreen *screen, int enabled);
 void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);
 }
+#endif
 struct L041Dialog;
 struct L041HandwritingPanel;
 struct L041PromptTable;
@@ -143,6 +144,7 @@ struct L041InitializeScreen {
     unsigned char reserved3ee[2];
     int identifier;
 };
+#ifdef __cplusplus
 extern "C" {
 extern const MemberCallback data_00218718;
 extern void func_001dc170(int value);
@@ -176,6 +178,17 @@ struct R41169OptionalPanel;
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* [INFERENCE] This receiver is forwarded unchanged by 00168dd0; its +0x78
+ * slot reaches the shared MessageLayout positioning and visibility family.
+ * L041InitializeScreen is a partial view, not a complete historical class. */
+void func_00169018(struct L041InitializeScreen *screen, int enabled);
+void func_001690a8(struct L041InitializeScreen *screen, int enabled);
+void func_001de2c0(struct L041InitializeScreen *screen);
+void func_00168dd0(struct L041InitializeScreen *screen, int enabled);
+/* The same +0x6c animation object is passed to positioning and hint control. */
+void func_0016f174(struct AnimationState *state, int enabled);
+void func_00179d48(struct AnimationOwner *owner, int panel_index,
+                  int element_index, int enabled);
 /* [INFERENCE] Erased accessor/lifecycle identities are not recovered. */
 int TU924_page_count(const struct ItemPageSet *set);
 void TU924_reset_prompts(struct L041PromptTable *table);

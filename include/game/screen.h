@@ -383,6 +383,9 @@ struct Screen {
 extern struct ResourceRegistrationState bss_0049cbd0;
 extern struct DisplayQueueFlags data_0023ee9c;
 extern struct DisplayQueueCounter bss_00495c70;
+extern void func_0010a814(void);
+extern void func_0017a9b4(struct Screen *screen, int value);
+extern void func_0017a71c(struct Screen *screen, int index, int enabled);
 extern int func_0019efd0(void);
 extern void func_001b6c90(struct MenuOptionGroup *options);
 extern void func_001b7e9c(struct MenuOptionGroup *options);

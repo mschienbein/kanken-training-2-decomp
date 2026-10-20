@@ -1,7 +1,7 @@
 """Sequential nice-able per-unit MATCH evidence, with a clean pause boundary.
 
 No whole image is linked. Every invocation has --show 0 and explicit frozen
-v2/none choices; all exits and metadata-only receipts are retained.
+v6/L1 choices; all exits and metadata-only receipts are retained.
 """
 from __future__ import annotations
 
@@ -33,7 +33,7 @@ def main() -> int:
         source = unit["source"]
         output = directory / source.removeprefix("src/").rsplit(".", 1)[0]
         command = [str(PYTHON), "tools/match.py", source, "--profile", unit["profile"],
-                   "--linker-model", "armlink5-inline-branchnop-v2", "--literal-model", "none",
+                   "--linker-model", "armlink5-inline-branchnop-v6", "--literal-model", "anonymous-string-records-v1",
                    "--show", "0", "--out", str(output)]
         proc = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
         receipt = output / (Path(source).stem + ".result.json")
@@ -48,7 +48,7 @@ def main() -> int:
         with (directory / "exits.jsonl").open("a") as stream:
             stream.write(json.dumps(row) + "\n")
     summary = {"schema_version": 1, "scope": str(args.scope), "scope_sha256": hashlib.sha256((ROOT / args.scope).read_bytes()).hexdigest(),
-               "selection": {"linker_model": "armlink5-inline-branchnop-v2", "literal_model": "none"},
+               "selection": {"linker_model": "armlink5-inline-branchnop-v6", "literal_model": "anonymous-string-records-v1"},
                "expected_units": len(units), "completed_units": len(rows), "paused": paused,
                "match_units": sum(row["exit_code"] == 0 and row["credited_functions_match"] for row in rows),
                "exit_counts": {str(code): sum(row["exit_code"] == code for row in rows) for code in sorted({row["exit_code"] for row in rows})},

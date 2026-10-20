@@ -100,6 +100,13 @@ extern int func_001837c8(struct StreamQueue *queue, struct StreamEvent **output)
 #ifdef __cplusplus
 }
 #endif
+struct StreamLockGuard {
+    struct StreamMutex *mutex;
+#ifdef __cplusplus
+    explicit StreamLockGuard(struct StreamMutex *value) : mutex(value) { func_00192bd8(mutex); }
+    ~StreamLockGuard() { func_00195d74(mutex); }
+#endif
+};
 
 
 struct RenderResource {

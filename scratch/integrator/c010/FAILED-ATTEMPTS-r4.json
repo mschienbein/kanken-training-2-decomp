@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "preserved-actual-runs-not-harness-success",
+  "records": [
+    "guard-match-r6/results.json",
+    "font-base-layout-r1/result.json",
+    "font-native-r1/func_0010e230.result.json"
+  ],
+  "analysis_incidents": [
+    {
+      "operation": "Eval factory_facts import",
+      "exit_code": 1,
+      "reason": "Eval Python lacked capstone; no original facts produced, no candidate check ran. Reused main venv for subsequent bounded fact commands."
+    },
+    {
+      "operation": "factory_facts --run font-receiver-r6",
+      "exit_code": 1,
+      "reason": "KeyError1068180: catalogue source is call-site not owner. New-r7 request used actual containing owner1067848 and produced metadata-only facts."
+    }
+  ],
+  "tool_incidents": [
+    "edit struct block cut on preprocessor header required displayed exact range; reported via xd://report_issue.",
+    "edit syntax warnings afterC->C++MV use old language parser; displayed C++ source re-read; actual isolated compile/MATCH41 RTTI and native font152B succeeded."
+  ],
+  "checks_never_run": [
+    "G3",
+    "argcheck",
+    "whole-ledger MATCH sweep",
+    "full build",
+    "suite",
+    "prepare",
+    "finalize",
+    "push"
+  ]
+}

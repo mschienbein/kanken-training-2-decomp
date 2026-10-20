@@ -3,9 +3,6 @@
 #include "game/input_runtime.h"
 #include "game/stream_manager.h"
 
-struct StreamLockGuard {
-    struct StreamMutex *mutex;
-};
 
 static __forceinline void acquire_guard(struct StreamLockGuard *guard,
                                        struct StreamMutex *mutex)
@@ -19,38 +16,22 @@ static __forceinline void release_guard(struct StreamLockGuard *guard)
     func_00195d74(guard->mutex);
 }
 
-struct ChannelWorkspace;
-struct ExtendedWorkspace;
-struct WorkspaceCoordinator;
 
-
-struct WorkspaceOwner {
-    unsigned char reserved00[0x34];
-    struct WorkspacePair slots[2];
-    struct StreamMutex mutex;
-};
-
-
-extern void func_0017e8fc(struct ChannelWorkspace *workspace);
-
-
-extern int func_001544e0(struct ExtendedWorkspace *workspace);
-
-static __forceinline void release_workspace(struct WorkspaceOwner *owner, unsigned index)
+static __forceinline void release_workspace(struct ServiceOutput *owner, unsigned index)
 {
     struct StreamLockGuard guard;
     acquire_guard(&guard, &owner->mutex);
-    if (owner->slots[index].channels)
-        func_0017e8fc(owner->slots[index].channels);
-    if (owner->slots[index].extended)
-        func_0017e8bc(owner->slots[index].extended);
-    owner->slots[index].channels = 0;
-    owner->slots[index].extended = 0;
+    if (owner->workspaces[index].channels)
+        func_0017e8fc(owner->workspaces[index].channels);
+    if (owner->workspaces[index].extended)
+        func_0017e8bc(owner->workspaces[index].extended);
+    owner->workspaces[index].channels = 0;
+    owner->workspaces[index].extended = 0;
     func_0017e858(&bss_004b97ac, index, 0);
     release_guard(&guard);
 }
 
-int func_001534e0(struct WorkspaceOwner *owner, unsigned index, struct ExtendedWorkspace *workspace)
+int func_001534e0(struct ServiceOutput *owner, unsigned index, struct ExtendedWorkspace *workspace)
 {
     struct StreamLockGuard guard;
     struct ExtendedWorkspace *new_workspace;
@@ -59,7 +40,7 @@ int func_001534e0(struct WorkspaceOwner *owner, unsigned index, struct ExtendedW
     new_workspace = workspace;
     release_workspace(owner, index);
     acquire_guard(&guard, &owner->mutex);
-    owner->slots[index].extended = new_workspace;
+    owner->workspaces[index].extended = new_workspace;
     func_001544e0(new_workspace);
     func_0017e858(&bss_004b97ac, index, 1);
     release_guard(&guard);

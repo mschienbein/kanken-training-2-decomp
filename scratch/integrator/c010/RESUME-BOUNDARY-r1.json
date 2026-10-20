@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "status": "resumed-local-reconciliation-open",
+  "preserved_tip": "dcbdda299",
+  "merged_main": "261fdc9804c2ff34eaa224f30142d2b2f23e8ff2",
+  "merge_commit": "4138720f91f749c36872404050ae7aef7831cbc6",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "denominator": "v9-r2",
+  "gate_revision": "v1.19",
+  "accepted_functions": 1621,
+  "accepted_target_bytes": 195908,
+  "candidate_units": 538,
+  "candidate_functions": 553,
+  "candidate_new_functions": 548,
+  "candidate_moved_accepted_functions": 5,
+  "direct_revised_predecessor_units": 14,
+  "proposed_dry_units": 2771,
+  "proposed_dry_functions": 2845,
+  "helper_slices": [
+    {
+      "name": "lifecycle",
+      "units": 47,
+      "required_output": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+      "preserved_output_exists": false
+    },
+    {
+      "name": "native-graphics",
+      "units": 49,
+      "required_output": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals.json",
+      "preserved_output_exists": false
+    },
+    {
+      "name": "audio-archive",
+      "units": 28,
+      "required_output": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/audio-archive/proposals.json",
+      "preserved_output_exists": false
+    },
+    {
+      "name": "services-memory",
+      "units": 45,
+      "required_output": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals.json",
+      "preserved_output_exists": false
+    },
+    {
+      "name": "runtime-initializers",
+      "units": 42,
+      "required_output": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/runtime-initializers/proposals.json",
+      "preserved_output_exists": false
+    },
+    {
+      "name": "ui-state",
+      "units": 37,
+      "required_output": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals.json",
+      "preserved_output_exists": false
+    }
+  ],
+  "immutable_input_sha256": {
+    "scratch/integrator/c010/helper-briefs-r1/lifecycle.json": "b19d128d1402d2e0ea57ac82d6ffad0595449984175c88cba4e800da0736a8e2",
+    "scratch/integrator/c010/helper-briefs-r1/native-graphics.json": "e96e1bd90a00f0352ef616a7db28cc4c874419a05c253968b3bbcb004b4d5342",
+    "scratch/integrator/c010/helper-briefs-r1/audio-archive.json": "a7fbe723a70df9b1dda57adfb50aa51edc5277c6010c69fb90d453135b80af07",
+    "scratch/integrator/c010/helper-briefs-r1/services-memory.json": "90362b689da9fcef8092fb7d3e18eca5a766c02a6ba6c7ddee9a0cd7378babd4",
+    "scratch/integrator/c010/helper-briefs-r1/runtime-initializers.json": "f3cdf9129a92ebbbdcb9ee97c4eb197868bdffe28bd7b5b7d0f7f9ffa0aa9896",
+    "scratch/integrator/c010/helper-briefs-r1/ui-state.json": "8fb9cb1ae75ac1fe3e90bd5f22036c9d6ba35f924405a09f807e2c31c1e10800",
+    "scratch/integrator/c010/HELPER-SLICES-r1.json": "d588c78c11cb8fc589f1055784d6bdfa848052f79302782b5b0ba64663283248",
+    "scratch/integrator/c010/HANDOFF.json": "9737a03c83c06883523e4abe5894e2dd2d2737437253c4615a1be04eb345fd71",
+    "scratch/integrator/c010/dry-matches-r5.json": "06a66ea3a8e2fd07ede9cb16e7c1df964b2649e8bc7d578b67bd2b898f58c253",
+    "scratch/integrator/c010/scope-dispositions-r3.json": "ef1f01cd3ab2155b081c0924b835aca81072e22015a8ee4405d7dba54fada28e",
+    "scratch/integrator/c010/names-admitted-r1.json": "9c983d0dcd50570f337edb431e80e25cb6d38b2b92d43231834c0a256f64c733",
+    "scratch/integrator/c010/type-inventory-r3.json": "0d38cfddb88b4d6c2505dc850424e676e7b87d7c5f92464c877fce6e7a7602f7",
+    "scratch/integrator/c010/AUDIO-CONTRACT-ADJUDICATION-r1.json": "5ee1d5bf15da7d86f3189f2584405ebbfa3a2c747718bf53a935e41661a22106",
+    "scratch/integrator/c010/TASK-CANCELLATION-ADJUDICATION-r1.json": "f9442f89d67d5815bb59a0e870f236c0fed8a9af3937747634bbb4c6060ee42d",
+    "scratch/integrator/c010/CALLBACK-ATOMIC-ADJUDICATION-r1.json": "14c13fef5bcaa9b264a030c3d27711435472c4481dd81fd6d2e0f3b64629c148",
+    "config/candidates/c010.json": "8c1fa8129fd9bd8528c0538e2cf5db2dae74062330aabacd90f671cef314423d",
+    "config/candidates/c009.json": "aeddf59f0d3f795e05fe398ddad385e133d70d35bf9262f9e9532855b66133fe",
+    "config/matches.json": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4"
+  },
+  "heavy_slot_owner": "ResumeC009-2 until Main release",
+  "checks_exercised": [
+    "git merge main: conflict-free, ort completed",
+    "in-memory tools.accept.compose_units for preserved c009 then c010; no accepted identity removed"
+  ],
+  "checks_not_run": [
+    "MATCH on current resumed selection",
+    "G3",
+    "argcheck",
+    "full build",
+    "full suite",
+    "prepare",
+    "finalize",
+    "push"
+  ],
+  "untracked_symlink": {
+    "path": ".venv",
+    "target": "/home/michael/code/kanken-training-2-decomp/.venv",
+    "disposition": "preserved; directory-only ignore does not match symlink; not staged"
+  }
+}

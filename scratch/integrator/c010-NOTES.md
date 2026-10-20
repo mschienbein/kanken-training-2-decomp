@@ -4,7 +4,51 @@ This is an integrator working record, not acceptance or an independent review.
 No full build, full suite, prepare, finalize, history edit or push has run here.
 All counts below are candidate scope/evidence, never accepted credit.
 
-## Current milestone 5 — shared callback/atomic family, not review-ready
+## Resumed boundary — canonical contract cutovers, 206 markers remain
+
+Preserved observed `dcbdda2`, merged accepted main `261fdc9`, then coherent
+c009 receiver milestone `b8f15ed` without conflicts. All new measurements use
+explicit **armlink5-inline-branchnop-v6 + anonymous-string-records-v1**;
+historical v2/none receipts and records retain their original meaning.
+
+Current candidate: **543 units / 558 identities**, **548 new functions / 56,380 B**
+plus **10 explicit accepted moves / 240 B**. Five additional moves migrate the
+accepted runtime-type getters from C to real native C++ metadata contracts.
+No accepted identity is removed. Proposed dry ledger: **2,771 units / 2,845 functions**,
+with c009 still unaccepted. **206 candidate units remain marked**.
+
+Bounded witnessed source changes:
+- Original audio/task/SVC prerequisites: 15/15 MATCH, preserving collected 0019ecf8.
+- Equivalent archive/mapped-block/prefetch/MotionPair declarations: 6/6 MATCH.
+- Shared mutex guard: first scoped run 10 MATCH / one real file-owner compile refusal;
+  canonical FileSessionObject getter and four callers then 9/9 MATCH.
+- InputController canonical descriptor/tail migration: 00146188 MATCH96/96 B.
+- Real ServiceOutput and ChannelWorkspace/ExtendedWorkspace family: 9/9 MATCH.
+- Actual L041 caller 00168dd0: MATCH176/176 B after natural same-receiver proof,
+  direct MessageLayout and distinct C exposure coordinated with cmodels2.
+- Native RTTI descriptor cutover and five accepted getter moves: 41/41 MATCH.
+- Native RectDrawer base/caller correction: 0010e230 MATCH152/152 B; two new
+  canonical native names admitted only from unrewritten natural caller relocations.
+- Eleven stale UI storage/type markers resolved against existing providers: 11/11 MATCH.
+
+Exact before sources, failures, receipts, explicit move provenance and manual
+qualifications are in LOCAL-CONTRACT-CUTOVERS-r1.json, RTTI-CONTRACT-CUTOVER-r1.json,
+FONT-CONTRACT-CUTOVER-r1.json, UI-MECHANICAL-CUTOVER-r1.json and FAILED-ATTEMPTS-r4.json.
+dry-matches-r7.json, match-scope-r7.json and CURRENT-MARKER-SCOPE-r7.json define
+the current boundary; original248 marker paths in the old handoff remain historical.
+
+The six helper proposals were absent at restart. Main owns their saved-context
+revival; lifecycle is active, five are paused on TPM429 and UI is being recovered
+inline. Uncompleted typed migrations include narrowed174d9c, remaining callbacks,
+font/resource/native layouts and manual C++ interfaces. Do not replace them with
+casts, aliases, no-input callbacks or historical stale proposals. Models2 retains
+001d5864/001ab680 deferrals until all-consumer typed closure and ownership release.
+
+Heavy slot still belongs to ResumeC009-2. No whole-ledger sweep, G3, argcheck,
+full build, suite, prepare, finalize or push ran here. Request the slot only when
+the remaining local canonical reconciliation is closed; this is not review-ready.
+
+## Historical milestone 5 — shared callback/atomic family, not review-ready
 
 Milestone 4 is committed at `c407dda52e3816e5bab2e21d9ee57fb43c258cc3`.
 C009 is now merged through `66ae9935979611ba916910d0217376dbb6ee3fda`;

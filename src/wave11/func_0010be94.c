@@ -1,7 +1,4 @@
 #include "game/memory_arena.h"
-/* Only the allocator address is used here; its lock/layout is not recovered. */
-struct MemoryArena;
-extern unsigned char data_00242d74;
 
 
 void func_0010be94(void *memory, unsigned size)

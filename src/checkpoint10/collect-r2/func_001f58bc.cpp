@@ -1,11 +1,5 @@
-#include "game/exp_heap.h"
+#include "game/runtime_type_initializers.h"
 
-/* [INFERENCE] The original class name is unrecovered.  The canonical interface
- * already identifies these single-parent descriptors as RuntimeTypeInfo.
- * INTEGRATOR: share this complete definition with the other type initializers. */
-struct RuntimeTypeInfo {
-    const RuntimeTypeInfo *parent;
-    explicit RuntimeTypeInfo(const RuntimeTypeInfo *base) : parent(base) {}
-};
-
-RuntimeTypeInfo data_00243488(&data_00242e2c);
+/* [INFERENCE] The original class is unrecovered; the existing native
+ * one-parent metadata constructor describes this initializer. */
+const nw::ut::internal::RuntimeTypeInfo data_00243488(&data_00242e2c);

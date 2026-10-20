@@ -1,19 +1,19 @@
 {
-  "schema_version": 5,
-  "status": "milestone-5-shared-callback-atomic-pipeline-resolved-not-review-ready",
+  "schema_version": 6,
+  "status": "resumed-bounded-contract-cutovers-remaining206-markers-not-review-ready",
   "branch": "c010-integrate",
   "worktree": "scratch/worktrees/c010",
   "initial_committed_milestone": "3a09a67",
   "parent_branch": "c009-integrate",
-  "parent_tip_merged": "66ae9935979611ba916910d0217376dbb6ee3fda",
+  "parent_tip_merged": "b8f15ed",
   "parent_source_milestone": "1d10b1d6ab522bf1ea4abbb2d14cb527303ea21b",
   "inherited_c008_r3": "642d725079b6a2154bc6f06fa554dcbeb063bcea",
   "parent_review_ready": false,
   "selection": {
-    "linker_model": "armlink5-inline-branchnop-v2",
-    "literal_model": "none"
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
   },
-  "gate_revision": "v1.19; frozen v2/none unchanged",
+  "gate_revision": "v1.19; final c010 selection v6/L1; preserved v2/none evidence unchanged",
   "scope": {
     "functions": 649,
     "published_result_manifests": 374,
@@ -37,13 +37,13 @@
     "qualification": "All previously183 uncollected functions are now110 collected or73 contract-deferred after full diagnostics. Late10c138 steering witness is preserved but not adopted. No newest-global-publication completeness claim."
   },
   "candidate_manifest": "config/candidates/c010.json",
-  "candidate_units": 538,
-  "candidate_functions": 553,
+  "candidate_units": 543,
+  "candidate_functions": 558,
   "candidate_target_bytes": 56380,
   "candidate_profiles": {
     "middleware": 90,
     "sdk": 47,
-    "game": 401
+    "game": 406
   },
   "changed_collected_source_units": 177,
   "changed_collected_sources": [
@@ -225,14 +225,14 @@
     "src/checkpoint10/scene_method_byte.cpp",
     "src/checkpoint10/scene_targets.cpp"
   ],
-  "units_with_remaining_integrator_markers": 248,
+  "units_with_remaining_integrator_markers": 206,
   "dry_ledger": {
-    "path": "scratch/integrator/c010/dry-matches-r5.json",
-    "units": 2738,
-    "functions": 2827,
-    "parent_units": 2205,
-    "parent_functions": 2279,
-    "construction": "Remove all5 accepted moved singleton owners before appending538 complete c010 units.",
+    "path": "scratch/integrator/c010/dry-matches-r7.json",
+    "units": 2771,
+    "functions": 2845,
+    "parent_units": 2238,
+    "parent_functions": 2297,
+    "construction": "Compose accepted cmodels ledger with preserved c009 candidates, then all ten c010 moves and 543 complete c010 units.",
     "warning": "Static proposal, not current whole-ledger G3/emitted-owner/signature/argcheck/pre-review success."
   },
   "revised_predecessor_units": [
@@ -571,10 +571,10 @@
   },
   "serialization": {
     "active_c010_checks": false,
-    "next_heavy_slot_owner": "FinishC009b until c009 prepared, then c010 per Main",
-    "allowed_current_work": "Non-heavy canonical migration, bounded remaining collection and sequential nice per-unit matches.",
+    "next_heavy_slot_owner": "ResumeC009-2 until explicit Main release",
+    "allowed_current_work": "Canonical migration and sequential nice per-unit v6/L1 matches only; six Main-owned read-only analysis slices.",
     "not_run": "Broad G3/argcheck/pre-review/full build/suite/prepare",
-    "selection": "Explicit v2/none, irrespective of adopted v4/v6/v8 tooling and model checkpoint proposal."
+    "selection": "Explicit armlink5-inline-branchnop-v6 plus anonymous-string-records-v1 for new measurements; historical v2/none records remain immutable."
   },
   "observed_checks": [
     {
@@ -852,25 +852,25 @@
     }
   ],
   "unexercised": [
-    "248 marked-unit canonical migrations and the residual differing-definition/nominal owner leads; concrete incoherent rows may be deferred with evidence, never hidden behind casts/shims.",
-    "Final current-header explicit v2/none --show0 matching of all538 complete candidate units plus14 directly revised accepted units and all affected accepted header consumers.",
-    "Stable2738-unit dry-ledger G3 to exit0, canonical actual C/C++ signatures and native probes once the heavy slot is released.",
+    "206 marked-unit canonical migrations; exact current paths in CURRENT-MARKER-SCOPE-r7.json. Concrete incoherent rows may be deferred with evidence, never hidden behind casts/shims.",
+    "Final current-header explicit v6/L1 --show0 matching of all complete candidate units, revised accepted units and affected accepted header consumers.",
+    "Stable current dry-ledger G3 to exit0, canonical actual C/C++ signatures and native probes once the heavy slot is released.",
     "Complete original indirect/callback-slot consumer sweep and all unresolved callable storage provenance adjudicated, including the revised AudioVoice factory/callback family.",
     "Complete argcheck adjudication, qualifications and all7 integrator pre-review steps; independent checkpoint review/prepare remains Main-owned.",
     "Newest global author/permuter publication reconciliation; current649-row seal includes the exact late steering witness but is not a claim of a final current-world inventory.",
     "Complete original data_002429f8 callback-object consumer sweep, and final header-dependent consumers of typed bucket/atomic refinements. Existing implemented callers are coherent, but that does not adjudicate all original sites."
   ],
   "continuation_order": [
-    "Merge c009-integrate at each next milestone and its final tip when supplied. Keep main mergeable while preserving c010 v2/none.",
+    "Merge c009-integrate coherent milestones when supplied. Main 261fdc9 is merged; use explicit v6/L1 without rewriting historical records.",
     "Keep all649 c010-owned scope identities (collected/deferrals/policy witness) excluded from c011; honor recorded source reservations and forward-move ownership dependencies.",
-    "Continue248 marked units using canonical provider definitions and natural caller evidence. Constructor174d9c still narrows private parameters against the canonical int declaration; do not blindly change the header to reproduce save order.",
+    "Continue remaining206 marked units using canonical providers and Main-owned helper proposals. Constructor174d9c still narrows private parameters against canonical int; never narrow the header to reproduce save order.",
     "Use recorded complete diagnostics/deferrals rather than restarting immutable searches. Remaining collection is fully dispositioned; re-enter specific rows only after an actual typed/identity prerequisite is resolved.",
     "After c009 prepare and explicit heavy-slot release, expand stable affected-header scope and run G3/native/signature/MATCH/indirect/argcheck/seven-step closure once, retaining all actual failures."
   ],
   "staged_check_commands": [
-    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run native-r1 --manifest scratch/integrator/c010/match-scope-r5.json",
-    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run signatures-r1 --signatures --manifest scratch/integrator/c010/match-scope-r5.json",
-    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/match_scope.py --run match-r1 --scope scratch/integrator/c010/match-scope-r5.json"
+    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run native-r6 --manifest scratch/integrator/c010/match-scope-r6.json",
+    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/probe_scope.py --run signatures-r6 --signatures --manifest scratch/integrator/c010/match-scope-r6.json",
+    "nice -n 10 /home/michael/code/kanken-training-2-decomp/.venv/bin/python scratch/integrator/c010/match_scope.py --run final-match-r6 --scope scratch/integrator/c010/match-scope-r6.json"
   ],
   "indirect_auditor": {
     "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c008-r3/audit_indirect.py",
@@ -4181,8 +4181,8 @@
   "milestone_base_commit": "b3c001ae7a7b12fc50b100e0c0490f72f0b6b06f",
   "inherited_c008_r3_preserving_followup": "b5e8b8abffe6d2e2d3f259920aa9426bd9c1ca0b",
   "candidate_new_functions": 548,
-  "candidate_moved_accepted_functions": 5,
-  "candidate_all_claimed_target_bytes": 56560,
+  "candidate_moved_accepted_functions": 10,
+  "candidate_all_claimed_target_bytes": 56620,
   "remaining_integrator_marker_sources": [
     "src/checkpoint10/func_0017e640.cpp",
     "src/checkpoint10/func_0017a9b4.cpp",
@@ -4445,7 +4445,7 @@
     "src/wave12/func_001dc90c.c": "647cc177ed9e93178989854a1ab564507a728b1e8c66f2ef402b25c6f4ca2013",
     "src/wave20/func_0013156c.cpp": "d67f475805539555ff179124073c40d12764d8ba59e5a085e845bed72277bb7b"
   },
-  "notes_sha256": "8cf7b1b9e1397b37dd5734fb3c95894dfcae31833bb220f5fd7c3a23f6d142a4",
+  "notes_sha256": "79ddb6639a6862527d6a6caed3bccfee2f3f82f37735c106bae65a4701e3ffcd",
   "cross_checkpoint_reservations": {
     "agent": "IntegrateC011",
     "functions": [
@@ -4485,7 +4485,7 @@
       "func_001ef89c": "Explicit c010 unadmitted AllocatorBaseD1Ev identity deferral; cmodels2 may integrate a separately proven alternate, not a guessed alias."
     }
   },
-  "main_tip_merged": "85fd18dc7173e0542d8c33db157d03b7910c18c5",
+  "main_tip_merged": "261fdc9804c2ff34eaa224f30142d2b2f23e8ff2",
   "collection": {
     "record": "COLLECTION-CLOSURE-r2.json",
     "input_units": 181,
@@ -4516,6 +4516,20 @@
   },
   "audio_contract_adjudication": "AUDIO-CONTRACT-ADJUDICATION-r1.json",
   "task_contract_adjudication": "TASK-CANCELLATION-ADJUDICATION-r1.json",
-  "input_hash_scope": "Previous complete source/header/config binding set, current proposed dry-ledger sources and the10 new project headers explicitly listed by the merged model commit. No compiler or whole-audit success is implied.",
-  "callback_atomic_adjudication": "CALLBACK-ATOMIC-ADJUDICATION-r1.json"
+  "input_hash_scope": "live_input_sha256 is the preserved milestone5 binding set, not a claim of current-source hashes. Resume-boundary and per-cutover records bind current input revisions; final closure remains pending.",
+  "callback_atomic_adjudication": "CALLBACK-ATOMIC-ADJUDICATION-r1.json",
+  "resume_boundary_record": "RESUME-BOUNDARY-r1.json",
+  "historical_handoff": "HANDOFF-milestone5-c04b055.json",
+  "match_scope": "scratch/integrator/c010/match-scope-r7.json",
+  "helper_allocation": "Main owns helper revival/proposals; lifecycle running, five paused under TPM429 with saved transcripts; UI inline recovery by Main. No source edits by helpers.",
+  "current_marker_scope": "CURRENT-MARKER-SCOPE-r7.json",
+  "historical_marker_list": "remaining_integrator_marker_sources retains original248 paths; current206 paths are in current_marker_scope.",
+  "current_cutover_records": ["LOCAL-CONTRACT-CUTOVERS-r1.json", "RTTI-CONTRACT-CUTOVER-r1.json", "FONT-CONTRACT-CUTOVER-r1.json", "UI-MECHANICAL-CUTOVER-r1.json"],
+  "current_failure_record": "FAILED-ATTEMPTS-r4.json",
+  "direct_revised_accepted_vs_cmodels": 144,
+  "direct_scope_units": 688,
+  "heavy_slot_requested": false,
+  "heavy_slot_request_condition": "Local canonical reconciliation remains open; request only after remaining marker/helper/typed conflicts are dispositioned, not at this preserved boundary.",
+  "current_resume_result": "RESUME-RESULT-r1.json",
+  "boundary_qualification": "Current source cutovers are complete and individually witnessed; full c010 assignment still has206 source markers and provider-paused helper/G3/argcheck closure blockers. No checkpoint review readiness is claimed."
 }

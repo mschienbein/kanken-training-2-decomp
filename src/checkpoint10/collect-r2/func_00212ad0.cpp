@@ -1,10 +1,5 @@
-#include "game/exp_heap.h"
+#include "game/runtime_type_initializers.h"
 
-/* [INFERENCE] Original runtime descriptor/class names are unrecovered.
- * The one-word parent layout agrees with the canonical opaque identity. */
-struct RuntimeTypeInfo {
-    const RuntimeTypeInfo *parent;
-    explicit RuntimeTypeInfo(const RuntimeTypeInfo *value) : parent(value) {}
-};
-
-RuntimeTypeInfo data_002434d8(&data_00243494);
+/* [INFERENCE] Original class names are unrecovered; this native metadata
+ * descriptor retains its exact initialized parent. */
+const nw::ut::internal::RuntimeTypeInfo data_002434d8(&data_00243494);

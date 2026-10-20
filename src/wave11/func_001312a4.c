@@ -1,6 +1,5 @@
 #include "game/audio_tasks.h"
 
-struct StreamLockGuard { struct StreamMutex *mutex; };
 static __forceinline void release_guard(struct StreamLockGuard *guard)
 {
     func_00195d74(guard->mutex);

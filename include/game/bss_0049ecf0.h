@@ -88,6 +88,7 @@ extern "C" {
 extern void func_0012fb38(void);              /* lock the command mutex */
 extern void func_0012fb48(void);              /* unlock the command mutex */
 extern void func_0012ccd8(struct CommandQueue *queue, struct Command *command);
+extern void func_00196114(unsigned mode);
 
 #ifdef __cplusplus
 }

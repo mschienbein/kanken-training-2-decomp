@@ -1,9 +1,4 @@
-#include "nw/ut/ut_RuntimeTypeInfo.h"
-
-/* INTEGRATOR: move to include/game/runtime_type_init.h */
-extern "C" {
-extern const nw::ut::internal::RuntimeTypeInfo data_002437c4;
-}
+#include "game/runtime_type_initializers.h"
 
 /* [INFERENCE] The class identity is unrecovered. The relative init-array
  * target initializes this type descriptor's parent link. */

@@ -128,6 +128,8 @@ extern void func_001e9950(struct W6ListController *controller);
 extern void func_00179600(struct W6ListController *controller, int index, int active);
 extern void func_001e9818(void *screen, int index, int first, int second);
 extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
+extern void func_00190b1c(int category, int kind, int x, int y, int width, int height);
+extern void func_00190c1c(int category, int kind, int count, ...);
 #ifdef __cplusplus
 }
 #endif

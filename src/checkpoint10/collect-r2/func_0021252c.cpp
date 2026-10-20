@@ -1,13 +1,5 @@
-/* [INFERENCE] One-parent runtime-type metadata; original class name unrecovered. */
-struct RuntimeTypeInfo {
-    const RuntimeTypeInfo *parent;
+#include "game/runtime_type_initializers.h"
 
-    explicit RuntimeTypeInfo(const RuntimeTypeInfo *value) : parent(value) {}
-};
-
-/* INTEGRATOR: move to include/game/runtime_type_info.h */
-extern "C" {
-extern RuntimeTypeInfo data_00243814;
-}
-
-RuntimeTypeInfo data_00243810(&data_00243814);
+/* [INFERENCE] Original runtime class names are unrecovered. The native
+ * one-parent metadata contract preserves this exact ancestry link. */
+const nw::ut::internal::RuntimeTypeInfo data_00243810(&data_00243814);
