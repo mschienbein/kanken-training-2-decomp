@@ -4,7 +4,7 @@
 namespace nw { namespace font {
 u16 CharStrmReader::ReadNextCharUTF16()
 {
-    const u16 *current = static_cast<const u16 *>(m_CharStrm);
+    const wchar_t *current = static_cast<const wchar_t *>(m_CharStrm);
     u16 value = *current++;
     m_CharStrm = current;
     return value;

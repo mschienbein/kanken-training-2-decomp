@@ -1,8 +1,6 @@
-#include "game/resource_font.h"
-#include "game/sound_controller.h"
-/* Partial views agree with public NintendoWare4Ctr ResFontBase resource fields. */
+#include "game/font_resource.h"
 
-extern "C" int func_001f4b2c(const ResourceFontView *font)
+extern "C" int func_001f4b2c(const FontResource *font)
 {
-    return font->information->sheet->baseline;
+    return font->information->glyphs->baseline;
 }

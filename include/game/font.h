@@ -22,12 +22,15 @@ struct FontBlock {
 #endif
 };
 
-struct FontGlyphData {
-    unsigned char cellWidth, cellHeight, baseline, maximumWidth;
-    unsigned sheetSize;
-    unsigned short sheetCount, sheetFormat;
-    unsigned short sheetRows, sheetColumns, sheetWidth, sheetHeight;
-    void *sheetImages;
+/* Shared serialized format; this does not identify either runtime font class. */
+struct FontGlyphInfo {
+    unsigned char cell_width, cell_height;
+    signed char baseline;
+    unsigned char max_width;
+    unsigned sheet_size;
+    unsigned short sheet_count, format;
+    unsigned short columns, rows, width, height;
+    unsigned char *sheet_image;
 };
 
 
@@ -47,7 +50,7 @@ struct FontResource {
     struct FontInformation *information;
     struct FontTexture *textures;
     unsigned flags;
-    unsigned short reserved14, reserved16;
+    unsigned short cached_character, cached_index;
 };
 
 #ifdef __cplusplus
@@ -70,9 +73,11 @@ struct GlyphWidths {
     signed char advance;
 };
 struct FontVTable {
-    void (*destroy)(struct FontResource *font);
-    unsigned char reserved04[0x0c];
+    void (*destroy_complete)(struct FontResource *font);
+    void (*destroy_delete)(struct FontResource *font);
+    int (*width)(const struct FontResource *font);
     int (*height)(const struct FontResource *font);
+    int (*ascent)(const struct FontResource *font);
     unsigned char reserved14[0x28];
     struct GlyphWidths (*get_widths)(const struct FontResource *font, unsigned short character);
     unsigned char reserved40[0x28];

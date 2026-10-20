@@ -1265,6 +1265,10 @@
     "_ZN2nw3lyt7TextBox4InitEtj": {
       "address": 1898416,
       "evidence": "Own native retail initializer MATCH140B under frozen sdk profile, receipt textbox-init-r1. Both u16 length and unsigned format are passed to the original virtual allocation operation at+70."
+    },
+    "_ZN2nw3lyt13DeleteTextureERKNS0_11TextureInfoE": {
+      "address": 1884124,
+      "evidence": "Own native DeleteTexture(const TextureInfo&) provider MATCH116B at001cbfdc, scratch/integrator/types-fontgfx/match/texture-delete-r1. The actual TextureContainer allocation constructs TextureInfo at entry+88; no first-word complete-object alias is retained."
     }
   }
 }

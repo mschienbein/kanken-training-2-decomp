@@ -5,12 +5,9 @@ struct BankInstrumentInfo;
 struct BinaryBlockHeader;
 struct BinaryFileHeader;
 struct FontGlyphInfo;
-struct FontInfo;
 struct FontInformation;
-struct FontReader;
 struct FontResource;
 struct FontResourceHeader;
-struct FontResourceReader;
 struct FontVTable;
 struct P1179b4;
 struct S1179b4;
@@ -22,12 +19,11 @@ struct ValuePresence;
 struct VramAllocator;
 struct VramNode;
 struct WordProperty;
-struct FontManager;
 
 #include <stddef.h>
-#include "game/pool_list.h"
 #include "game/font.h"
 
+#include <stdbool.h>
 
 
 
@@ -88,31 +84,12 @@ struct SoundUpdateFlag {
     unsigned char pending;
 };
 
-struct FontReader {
-    const void *vtable;
-    struct BinaryFileHeader *file;
-    struct FontInfo *info;
-};
 
 struct BinaryBlockHeader {
     unsigned signature;
     unsigned size;
 };
 
-struct FontGlyphInfo {
-    unsigned char cell_width;
-    unsigned char cell_height;
-    unsigned char baseline;
-    unsigned char max_width;
-    unsigned sheet_size;
-    unsigned short sheet_count;
-    unsigned short format;
-    unsigned short columns;
-    unsigned short rows;
-    unsigned short width;
-    unsigned short height;
-    unsigned char *sheet_image;
-};
 
 struct WordProperty {
     unsigned value;
@@ -133,22 +110,20 @@ struct FontResourceHeader {
 };
 
 struct FontInformation {
-    unsigned char reserved00;
-    signed char field01;
-    unsigned char reserved02[5];
-    unsigned char field07;
+    unsigned char type;
+    signed char line_feed;
+    unsigned short alternate_index;
+    struct GlyphWidths default_widths;
+    unsigned char encoding;
     struct FontGlyphInfo *glyphs;
-    unsigned char reserved0c[8];
-    unsigned char field14;
-    unsigned char field15;
-    unsigned char field16;
+    struct FontWidthBlock *widths;
+    struct FontCodeMap *code_map;
+    unsigned char height;
+    unsigned char width;
+    unsigned char ascent;
+    unsigned char reserved17;
 };
 
-struct FontResourceReader {
-    const void *vtable;
-    const unsigned char *resource;
-    const struct FontInformation *information;
-};
 
 #ifdef __cplusplus
 extern "C" {
@@ -168,8 +143,8 @@ extern void func_001d2c78(struct SoundState001d2c78 *object);
 extern void func_001d2e04(struct SoundFileBuffer *buffer);
 extern void func_001d5c8c(struct SoundUpdateFlag *object);
 extern void func_001d89a0(struct SoundUpdateFlag *object);
-extern void func_001dae98(struct FontReader *reader, struct BinaryFileHeader *file,
-                   struct FontInfo *info);
+extern void func_001dae98(struct FontResource *reader, struct FontFile *file,
+                   struct FontInformation *information);
 extern unsigned func_001db354(const struct BinaryFileHeader *file);
 extern void func_001107b4(const struct WordProperty *property, unsigned *output);
 extern int func_001179c4(struct S1179b4 *object);
@@ -178,11 +153,15 @@ extern void func_0011e97c(const struct WordProperty *property, unsigned *output)
 extern int func_001266d4(const struct ValuePresence *object);
 extern void func_0012cebc(const struct WordProperty *property, unsigned *output);
 extern const unsigned char *func_001f4888(const struct FontResourceHeader *header);
-extern int func_001f4988(const struct FontResourceReader *reader);
-extern int func_001f4b3c(const struct FontResourceReader *reader);
-extern int func_001f4cd4(const struct FontResourceReader *reader);
-extern int func_001f4ce0(const struct FontResourceReader *reader);
-extern int func_001f4cec(const struct FontResourceReader *reader);
+extern int func_001f4988(const struct FontResource *reader);
+extern int func_001f4b3c(const struct FontResource *reader);
+extern int func_001f4cd4(const struct FontResource *reader);
+extern int func_001f4ce0(const struct FontResource *reader);
+extern int func_001f4cec(const struct FontResource *reader);
+extern int func_001f4b2c(const struct FontResource *font);
+extern int func_001f4b48(const struct FontResource *font);
+extern bool func_001f4cb4(const struct FontResource *font);
+extern bool func_001f4cc4(const struct FontResource *font);
 #ifdef __cplusplus
 }
 #endif
@@ -190,21 +169,11 @@ extern int func_001f4cec(const struct FontResourceReader *reader);
 
 #include "game/render_state.h"
 #ifdef __cplusplus
-/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
-
-struct FontManager {
-    const void *vtable;
-    unsigned char reserved04[0x20];
-    PoolList fonts;
-    PoolList textures;
-};
 
 extern "C" {
 extern unsigned char data_00242f8c;
 extern void func_0018f0dc(int count, const unsigned *handles);
 extern const unsigned data_00224128[];
-extern PoolList *func_001cc4cc(PoolList *list);
-extern PoolList *func_001cc12c(PoolList *list);
 
 extern void func_001daea4(FontResource *font);
 extern void func_001dae08(FontResource *font);

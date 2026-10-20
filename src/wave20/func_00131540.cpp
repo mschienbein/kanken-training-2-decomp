@@ -3,5 +3,5 @@
 
 extern "C" float func_00131540(const TextWriterState *writer)
 {
-    return (float)writer->font->vtable->height(writer->font) * writer->scale_y;
+    return (float)writer->font->vtable->ascent(writer->font) * writer->scale_y;
 }
