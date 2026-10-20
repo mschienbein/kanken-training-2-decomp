@@ -2360,6 +2360,14 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         catalogue_closure.close_catalogue(result, analyzer, closure, protected_functions or {})
     preserve_prior_entries(result, prior_functions or [])
     apply_classifications(result, classifications or [])
+    if closure is not None and "runtime_data" in closure:
+        if __package__:
+            from . import catalogue_runtime_data
+        else:
+            import catalogue_runtime_data
+        catalogue_runtime_data.close_catalogue(result, analyzer, closure["runtime_data"], protected_functions or {})
+        apply_classifications(result, catalogue_runtime_data.classification_records(
+            classifications or [], closure["runtime_data"]))
     check_protected_functions(result, protected_functions or {})
     return result
 
@@ -2568,7 +2576,8 @@ def main(argv: list[str] | None = None) -> int:
                         "literal_encodings": evidence.get("literal_encodings", []) + closure_evidence["literal_encodings"],
                         "provenance": {**evidence["provenance"], "catalogue_v10": closure_evidence["provenance"],
                                        "catalogue_v10_r3": closure_evidence["library_provenance"],
-                                       "catalogue_v10_r4": closure_evidence["library_extension_provenance"]}}
+                                       "catalogue_v10_r4": closure_evidence["library_extension_provenance"],
+                                       "catalogue_v11": closure_evidence["runtime_data"]["qualification"]}}
             # A reviewed reclassification cannot silently outrank an accepted or
             # in-flight complete record. Explicit classification inputs instead
             # reach build_catalogue's final invariant and fail on any conflict.
@@ -2592,10 +2601,10 @@ def main(argv: list[str] | None = None) -> int:
         inputs[classification_label] = catalogue_review.digest(classification_input)
         source_root = Path(__file__).resolve().parent
         sources = {f"tools/{name}": catalogue_review.digest(source_root / name)
-                   for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py")}
+                   for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v10-r4",
+            "revision": "catalogue-v11",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

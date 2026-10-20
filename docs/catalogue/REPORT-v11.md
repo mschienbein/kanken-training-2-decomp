@@ -1,0 +1,167 @@
+# Catalogue v11 — exact-build runtime data and exceptional continuation
+
+## Proposal boundary
+
+This is a new, unadopted closure proposal based on fixed `3de76111a448dfaca260fab5630762edb27feb0c`.
+The v10-r4 proposal remains immutable at
+`scratch/review/catalogue-v10-r4/proposal.json`, SHA-256
+`dacef0040a70f33bf8ec9c2f2a427a02624dcd55e960ea0844c1717321294bda`.
+It contains **360 unknown B / 36 intervals / 10 anomalies**. The independent
+restart review sealed **FAIL V10R4-R01**: fixed-width pool reads did not maintain
+an all-path little-endian interpretation after SETEND BE. Its failed records
+remain in `scratch/review/catalogue-v10-r4/restart-20261020/`. There is no claim of
+an occurrence of that defect in this image, and the defect is not suppressed here.
+The separate source-only v10-r5 endian repair must precede new proposal generation
+and independent review. V10-r4 is never adopted by this report.
+
+The authoritative adopted state is main's **v9-r2 / GATES v1.19**, including the
+finalized cmodels identities; this feature parent's older gates/accepted files are
+not copied over main. No main merge, gate revision, canonical catalogue/config/name
+change, prepare/finalize/adoption or history operation is authorized. The existing
+accepted `00203a68` and c009 `001e81fc` records are untouched by this delta.
+
+## Exact target dispositions
+
+| Investigated half-open interval | B | Proposed disposition | Complete evidence, not byte appearance |
+| --- | ---: | --- | --- |
+| `0x001569b0–0x00156a30` | 128 | **Resolved: unowned rodata** | `btod.o`, complete section `CL$$btod_div_common`, 840 B at independently bound `001566e8`; ARM code `[0,712)`, complete `$d` object `[712,840)`. Authenticated `_btod_ediv` at `00156b0c` binds section placement through its actual R_ARM_CALL at `00156b2c`. All 840 B and all 128 data B equal exactly. Keep the existing ordinary owner at **712 B**, with no new library/API classification. |
+| `0x001944ac–0x001944e8` | 60 | **Resolved: unowned rodata** | `lludiv5.o`, complete 752-B `.text` at independently bound `001941f8`; code `[0,688)`, complete `$d` object `[688,752)` = 64 B at `001944a8`. Original compiler/ABI identity and the independently owned signed-division caller `0018d204` / call `0018d22c` bind the entry. Full752B relocation reencoding and full64B data equality pass. The existing first4B owned literal and **692-B runtime identity remain unchanged**. |
+| `0x001964e8–0x00196504` | 28 | **Resolved: existing runtime owner's descriptor4B + continuation24B** | `ffixull.o`, complete108B section at independently bound `00196498`; mapping code `[0,80)`, data `[80,84)`, code `[84,108)`. Complete108B reencoding includes its actual R_ARM_CALL at `001964e4` to authenticated160B `__fpl_fnaninf` at `00145570`. The descriptor's exact4B read and every-path adjusted-LR continuation are independently proved; no normal-case behavior test substitutes for this. |
+
+All three target intervals total **216 B**. The intended isolated delta is
+unknown **360 → 144 B**, intervals **36 → 33**, anomalies **10 → 9**. These are
+**proposal accounting**, not exercised generation results. Owners and ordinary
+creditable denominator stay **4,743 / 4,582 / 1,123,224 B**; the runtime owner's
+new physical extent adds no ordinary C credit. **This is not zero-unknown closure.**
+The other33 intervals/144B remain open unless separately witnessed by the alignment
+investigation and integrated under the same proof standard.
+
+## Exact private inputs and inherited metadata
+
+Licensed **Arm Compiler 5.04 update 2 build82 only**. Objects are read privately in
+memory with the existing archive/ELF parser; no extracted object, ROM payload,
+instruction word/text, disassembly or vendor source is published. The bounded
+probe selects four pre-existing member offsets, not an arbitrary data search or
+an exhaustive archive/image rescan. Prior r5/r7 identity and relocation rows are
+reused unchanged. Whole-body coincidence alone is not promoted to API identity.
+
+| Member / selected archive | Member offset | Member SHA-256 | Complete placed section SHA-256 |
+| --- | ---: | --- | --- |
+| `btod.o` / `c_4.l` | 851118 | `b01721e5e77675da3c41315bd8e735210918c96aae839686ed97d5d6dd333dd0` | `9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384` |
+| `lludiv5.o` / `c_4.l` | 325602 | `fd4702498a2fdaa48bbc212a859dc5436f5eb54e3e2a10fc3d11a50c38ab6d30` | `fdcdb4aafd4ee9fde2b607ee93543a02e05db75189adb76a35a0c3f2def02709` |
+| `ffixull.o` / `fz_4m.l` | 104744 | `86ef9bc7d935c7e447318f05a0dd747f7f9994e216706303adb24d5d248ecfd2` | `2b63549d8c7ae77399b093bf1b38e813ae7a7f516d9f50993c9bfc9567ce6c89` |
+| `fnaninf_ofz.o` / `fz_4m.l` | 118400 | `0ceae8da0432f81eba7d3cc814df3d8026c3a18910d2f1be9491c87ce6da4275` | `35f37e26b387197bd6786a836291ce2d5154d47c257d35eaeb84759d05e0ea0e` |
+
+Archive SHA-256: `c_4.l`
+`595f005c9a8b73bea5d437e7f1392569d0bd25f12feb04aab2a31629c2c86fb2`;
+`fz_4m.l`
+`73ae2afb134975f5d46e76740e4786253c11568dac94bdbfcd7a59363a534689`.
+Data object digests are exact, unmasked:
+128B `82f10a50950cb56a154a587c5c03b40c9e66c251600d7b631f0f56dea736183b`;
+64B `d438dff34172d789f6ecc54f3ffd16323a223b0c1aa817564d29ff25be0a136d`;
+descriptor4B `2d26b36b04043ffabec88eadc26b2102c6accfd7321a7264eb8b79ed8c88f4df`.
+
+The unsigned division helper's sole ordinary relocation resolves to original
+`00144220`, but its spelling `__aeabi_ldiv0` is explicitly
+**observed external target, not authenticated API identity**. This qualification
+is not erased by exact reencoding. Complete data bounds do not require asserting
+that external target's source name or behavior. The other call relocation targets
+a separately authenticated complete dispatcher body; the inherited `_frem`
+caller (`0014a860`, R_ARM_CALL at `0014a960`) supplies its independent identity.
+
+Inherited identities: `scratch/libid/proposal-504b82-r7/handoff.json`, research
+commit `c80a50e37e74eb1d50bc0b9e9500d7a7fb8f0663`; source match indices
+17539,19647,21764,21766,21770,26107,28901,28905 are copied as metadata with their
+retained relocation checks. No previous scan is rerun. The r7 final
+`scratch/libid/followup-r7/extent-adjudication.json` remains authoritative for the
+three unrelated Thumb declarations **22/10/620 B**, never26/20/632. Their extents,
+foreign-reference sites, classifications and all failed/provisional evidence are
+untouched.
+
+## Descriptor and continuation proof
+
+The authenticated dispatcher performs exactly **one4B read at its incoming LR**
+and advances LR by4. A bounded finite-set/unsigned-interval abstract proof starts
+with **every possible incoming core register value and NZCV flag combination**,
+not a single emulator path. It models only the observed ordinary integer effects,
+exact flags when operands are finite, and all predicates otherwise. Unknown
+instructions, memory/side effects, state restoration, loops, unsupported shifts,
+internal computed dispatch and escaping transfers fail closed. Register shifts
+use ARM's low-byte amount semantics. The public little-endian ARM entry contract
+is explicit; caller and dispatcher paths admit no SETEND or state-restoring effect.
+
+All nine descriptor category values0–8 are conservatively covered. For this exact
+caller's descriptor, **every path** restores the saved original r4/LR pair and
+resumes only `001964ec` or `001964f8`; no path resumes at descriptor data or escapes
+the108B section. Each target owns a complete bounded12B normal-return continuation,
+returning via the restored original LR. The exact entry-to-call prefix separately
+proves that the one saved r4/LR pair dominates every exceptional call. Every
+newly owned24B instruction is covered by those two continuations. No global
+`noreturn` property is inferred: this dispatcher redirects to caller-specific
+continuations, and other descriptors can select different behavior.
+
+The `undecodable_reachable_code` anomaly at `001964e8` is explicitly reopened and
+resolved by data-format/continuation evidence, not deleted because adjacent bytes
+look plausible. No independent callable entry is invented at `001964ec` or
+`001964f8`; they remain internal continuations of the existing `00196498` identity.
+Its sole existing entry and every incoming caller source remain unchanged.
+
+The historical **80B / 404 normal f2ul cases** classification remains nested,
+unchanged, as historical evidence. It is not retroactively described as a108B
+whole-body proof. A **new108B compiler-generated runtime record** binds the
+complete exact section, descriptor and continuation contract. The first two
+intervals become unowned data only: neither preceding function is grown.
+
+## Preserved negative measurements
+
+Old indexed-read probes remain immutable, both investigation commands exit0 but
+leave their bounds unproved. `bounded-index-probe.json` records the btod read
+starting from base `00156930`, index range0–16777215 and access end18180400;
+its unsigned division bound records index0–4294967295 and access end4296623275.
+Neither was bounded within the image. The exact-build section metadata now gives
+an independent complete data-object bound; these old approximate indices are not
+silently marked proven. The btod incoming mantissa index safety is **still not
+claimed**. `indexed-read-bound-census.json` retains the real indexed-read sites,
+widths and biased bases. Those negative measurements are bound in the new evidence.
+The old normal f2ul cases still exclude exceptional paths.
+
+No byte-value-based padding/table rule, foreign-tail extent borrow, fabricated
+alias or whole-body coincidence as sole historical API identity is introduced.
+The dispatcher itself's old code/data hole remains outside this narrow physical
+delta; complete section authentication is not permission to change its owner
+record without separate accounting.
+
+## Artifacts and exercised investigation
+
+Tracked evidence: `research/catalogue_v11_evidence.json`; generic fail-closed
+implementation: `tools/catalogue_runtime_data.py`. `tools/analyze.py` applies the
+new closure after existing classifications, then replaces only the separately
+proved runtime extent record. Parent/child hashes, every existing protected
+record, unknown-byte accounting and changed-extent evidence are checked by the
+existing generation pipeline. No generator reads licensed archive contents or
+live author directories. New regression coverage is in
+`tests/test_catalogue_runtime_data.py`; mandatory fixture and exact current-image
+expectations in `tests/test_analyze.py` are updated. **These tests are authored,
+not run.**
+
+Private bounded proof receipts under
+`scratch/worktrees/catalogue-v11/scratch/runtime-data-v11/`:
+
+| Artifact | SHA-256 | Exercised result |
+| --- | --- | --- |
+| `object-witnesses.json` | `ab198cc89b94edb9c87bc59bf66b9ecf1e190fd140501ab4776f3c58aa6a4b96` | four complete placed sections and reference/partition metadata |
+| `object-witnesses-command.json` | `7b3bbe3dd5a0ce49654756020ce9d186520d85291a6247d007ea341191ff840f` | exit0; bounded four-member evidence probe only |
+| `descriptor-paths-command.json` | `127bf290c204bb337e4ca2eb1aabd51858c45d4df9957cb020c0b09bbddb45c1` | exit0; sound all-path category/continuation overapproximation |
+| `initial-object-inspection.json` | `b29dadda18b57a421595a20e0775a07fa8b3f9fdf21aec674051bb875b489b4d` | initial independently selected section/symbol/relocation metadata |
+| `closure-findings.json` | `229a4c051bb4bba790587b2e0bcf600ce174b873ef29b58a28ce306f01792bef` | all three target dispositions and every other still-open interval; no generation claim |
+
+All executable evidence-probe outputs contain addresses, bounds, safe semantic
+facts and hashes only. Their private scripts are research scaffolding, not
+published vendor code or source-match candidates. The immutable receipts remain
+available even after scaffolding removal.
+
+**Not run:** tests, suite, build, compilation/matcher, linter, formatter or full
+catalogue generation. Main performs final source-stack integration (including the
+mandatory v10-r5 repair), clean suite, generation, exact delta/protected-identity
+checks and fresh independent review. No adoption or C credit follows from these
+findings or the authored proposal.

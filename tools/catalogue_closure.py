@@ -895,6 +895,14 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     evidence["library_identification"] = library
     evidence["library_extension_provenance"] = extension["qualification"]
     inputs[str(extension_path.relative_to(root))] = hashlib.sha256(extension_path.read_bytes()).hexdigest()
+    if __package__:
+        from . import catalogue_runtime_data
+    else:
+        import catalogue_runtime_data
+    runtime_data, runtime_inputs = catalogue_runtime_data.load_inputs(root, extension_path)
+    evidence["runtime_data"] = runtime_data
+    evidence["revision"] = runtime_data["revision"]
+    inputs.update(runtime_inputs)
     return evidence, prior, inputs
 
 
@@ -910,6 +918,7 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     new_identities = {(function["address"], function["size"], function["isa"]) for function in candidate["functions"]}
     extent_changes = []
     current = {function["address"]: function for function in candidate["functions"]}
+    runtime_repairs = {row["address"]: row for row in candidate["closure_evidence"].get("exact_runtime_data", {}).get("extent_repairs", [])}
     for address, size, isa in sorted(old_identities - new_identities):
         after = current.get(address)
         merge = next((row for row in candidate["closure_evidence"]["owner_merges"] if address in row["legacy_owners"]), None)
@@ -923,6 +932,13 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
                                    "size": replacement["size"], "isa": isa, "entry_preserved": True,
                                    "basis": "entry_connected_closed_cfg_with_retained_legacy_prologue"})
             continue
+        runtime = runtime_repairs.get(address)
+        if runtime is not None:
+            if (after is None or (size, isa, after["size"]) != (runtime["old_size"], runtime["isa"], runtime["size"])
+                    or not runtime["entries_unchanged"]):
+                raise ValueError("runtime extent repair loses its independently witnessed identity")
+            extent_changes.append(runtime)
+            continue
         bounds = [((row["end"] + 3) & ~3) for row in evidence["literal_encodings"] if row["function"] == address]
         if (after is None or after["isa"] != isa or not bounds
                 or address + after["size"] != max(address + size, *bounds)):
@@ -933,6 +949,7 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
         raise ValueError("closure loses a prior proposed entry")
     unknown_rows, anomaly_rows = catalogue_review.accounting(prior, candidate, image, layout)
     closure = candidate["closure_evidence"]
+    runtime_sections = closure.get("exact_runtime_data", {}).get("sections", [])
     old_unknown = [row for row in prior["ranges"] if row["kind"] == "unknown"]
     for row in candidate["ranges"]:
         if row["kind"] == "unknown" and sum(max(0, min(row["end"], old["end"]) - max(row["start"], old["start"]))
@@ -942,6 +959,13 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     for row in unknown_rows:
         for part in row["parts"]:
             first, end = part["start"], part["end"]
+            runtime = next((item for item in runtime_sections if item["start"] <= first < end <= item["end"]), None)
+            if runtime is not None:
+                part["reason"] = ("Complete independently placed exact-build section/data partition; unowned data, no function extent growth"
+                                  if runtime["kind"] == "rodata" else
+                                  "Complete independently bound runtime section plus exact one-word descriptor and every-path original continuation; no C credit")
+                part["runtime_witness"] = runtime["id"]
+                continue
             if part["owner"] in leaves:
                 part["reason"] = "Complete closed symbolic leaf with exact fixed memory effects, preserved callee registers and stack; ordinary denominator candidate, not library ownership"
             elif part["owner"] in {row["start"] for row in closure["owner_merges"]}:
@@ -965,6 +989,8 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
             proof = next((item for item in closure["extent_explanations"] if item["function"] == row["address"]), None)
             row["reason"] = (proof["evidence"] if proof else
                              "Exact shared read footprint, typed inline object, aligned hole or closed tagged-pointer CFG resolves this issue")
+            if any(item.get("descriptor_range", [None])[0] == row["address"] for item in runtime_sections):
+                row["reason"] = "Exact dispatcher descriptor width and all-path continuation targets close the exceptional reachable-code anomaly"
     old_records = {function["address"]: function for function in prior["functions"]}
     changed_records = []
     for function in candidate["functions"]:
@@ -1006,6 +1032,11 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     prior_authentication = [row for row in library["prior_classification_authentication"] if row["authenticated"]]
     for row in prior_authentication:
         function = current.get(row["address"])
+        if row["address"] in runtime_repairs:
+            historical = current[row["address"]].get("runtime_extent_evidence", {}).get("historical_classification", {})
+            if (historical.get("size"), row["isa"], row["kind"]) != (row["size"], current[row["address"]]["isa"], current[row["address"]]["kind"]):
+                raise ValueError("historical runtime authentication is not retained at its original extent")
+            continue
         if function is None or (function["size"], function["isa"], function["kind"]) != (row["size"], row["isa"], row["kind"]):
             raise ValueError("supplemental vendor authentication cannot replace prior ownership/provenance")
     proposed = [row for row in evidence["classification_records"] if row["kind"] == "library"]
@@ -1019,6 +1050,13 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
         "checkpoint_name_proposals": library["r7_extension"]["names_handoff"]["proposed_names"],
         "new_name_bindings_embedded": library["r7_extension"]["names_handoff"]["new_name_bindings_embedded"],
     }
+    if "runtime_data" in evidence:
+        candidate["revision_review"]["exact_runtime_data"] = {
+            **closure.get("exact_runtime_data", {}), "prior_unadopted_proposal": evidence["runtime_data"]["prior_proposal"],
+            "historical_negative_measurements": evidence["runtime_data"]["historical_negative_measurements"],
+            "adoption": False, "remaining_unknown_bytes": candidate["stats"]["bytes_by_range_kind"].get("unknown", 0),
+            "remaining_unknown_intervals": candidate["stats"]["unknown_ranges"],
+        }
     candidate["revision_review"]["raw_svc_contracts"] = {
         "sources": _RAW_SVC_SOURCES,
         "documented_service_policy": "Invalidate r0-r7, IP, LR and flags, unioned with decoded writes and complete documented outputs.",
