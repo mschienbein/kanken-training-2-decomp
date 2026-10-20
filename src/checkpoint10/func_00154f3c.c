@@ -14,8 +14,7 @@ struct ChannelPlayback {
     unsigned short dirty;
 };
 
-extern int func_00155ab4(struct ServiceCoordinator *coordinator, int channel,
-    short count);
+#include "game/audio_dsp.h"
 
 void func_00154f3c(struct ChannelPlayback *playback)
 {

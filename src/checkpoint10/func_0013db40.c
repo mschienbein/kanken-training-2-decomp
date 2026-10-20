@@ -2,8 +2,6 @@
 #include "game/startup.h"
 #include "game/scheduler.h"
 
-extern int func_001415d0(void);
-extern int func_001415e8(void);
 
 /* C-only procedure callback: the dispatcher MUST discard its unspecified
  * result (C11 6.9.1p12). Do not compile this definition as C++. */

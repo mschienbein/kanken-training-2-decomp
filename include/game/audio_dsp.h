@@ -3,6 +3,7 @@
 
 struct AudioDspParameterBlock;
 struct AudioDspReply;
+struct ServiceCoordinator;
 
 #include "game/runtime.h"
 
@@ -37,5 +38,14 @@ struct AudioDspReply {
     unsigned short reserved00;
     unsigned short value;
 };
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern int func_00155ab4(struct ServiceCoordinator *coordinator, int channel,
+    short count);
+#ifdef __cplusplus
+}
+#endif
 
 #endif
