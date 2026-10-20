@@ -1,25 +1,32 @@
-#include <stddef.h>
-#include "game/pool_list.h"
-#include "game/runtime.h"
-#include "game/screen.h"
+#include <preinclude.h>
+#include <nw/lyt/lyt_TextBox.h>
+#include <nw/lyt/lyt_Material.h>
+#include <nw/lyt/lyt_Layout.h>
 #include "game/layout_lifecycle.h"
 
-
-
-void func_001cf67c(W17TexturePane *pane)
+namespace nw { namespace lyt {
+void TextBox::FreeStringBuffer()
 {
-    if (pane->text) {
-        func_00191aec(pane->text);
-        pane->text = 0;
-        pane->length = 0;
-        pane->capacity = 0;
+    if (m_pTextBuf) {
+        Layout::FreeMemory(m_pTextBuf);
+        m_pTextBuf = 0;
+        m_TextBufBytes = 0;
+        m_TextLen = 0;
     }
-    if (pane->storage) {
-        W17StorageHeader *header = static_cast<W17StorageHeader *>(pane->storage);
-        if (header->flags & 8)
-            func_0016b260(header);
+    if (m_pDispStringBuf) {
+        if (m_pDispStringBuf->allocationFlags & 8)
+            func_0016b260(m_pDispStringBuf);
         else
-            func_00191aec(header);
-        pane->storage = 0;
+            Layout::FreeMemory(m_pDispStringBuf);
+        m_pDispStringBuf = 0;
     }
 }
+TextBox::~TextBox()
+{
+    if (m_pMaterial && !m_pMaterial->IsUserAllocated()) {
+        Layout::DeleteObj(m_pMaterial);
+        m_pMaterial = 0;
+    }
+    FreeStringBuffer();
+}
+} }
