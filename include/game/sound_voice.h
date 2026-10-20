@@ -9,12 +9,12 @@ struct SoundStreamBase;
 struct SoundStreamInstance;
 struct SoundVoiceBase;
 struct SoundVoiceBuffer;
-struct SoundVoiceElement;
 struct SoundVoiceObject;
 
 #include <stdbool.h>
 #include "game/runtime.h"
 #include "game/sound_runtime.h"
+#include "game/prefetch_stream.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 #ifdef __cplusplus
@@ -45,12 +45,6 @@ public:
 };
 #endif
 
-#ifdef __cplusplus
-struct SoundVoiceElement {
-    SoundVoiceElement();
-    unsigned char reserved00[0x3c8];
-};
-#endif
 
 #ifdef __cplusplus
 class SoundVoiceObject : public SoundVoiceBase, public SoundVoiceBuffer {
@@ -64,7 +58,7 @@ public:
     unsigned char reserved110[0x110];
     unsigned field220;
     unsigned field224;
-    SoundVoiceElement elements[8];
+    StreamChannel elements[8];
 };
 #endif
 

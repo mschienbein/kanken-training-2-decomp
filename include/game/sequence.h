@@ -2,12 +2,14 @@
 #define GAME_SEQUENCE_H
 
 #include "game/audio_voice.h"
+#ifdef __cplusplus
+#include <preinclude.h>
+#include "nw/snd/snd_WaveArchiveFileReader.h"
+#endif
 
 struct AnimationTrack;
 struct AnimationTrackVTable;
-struct ArchiveReader;
 struct AudioVoice;
-struct AudioVoiceGroup;
 struct BankReader;
 struct Progress;
 struct RegistryEntry;
@@ -75,6 +77,7 @@ struct SequenceTrackAllocator {
     const struct SequenceTrackAllocatorVTable *vtable;
 };
 
+#ifdef __cplusplus
 struct SequencePlayer {
     const struct SequencePlayerVTable *vtable;
     unsigned char reserved04[8];
@@ -88,10 +91,11 @@ struct SequencePlayer {
     struct AnimationTrack *tracks[16];
     short variables[16];
     unsigned char reservedef4[4];
-    struct ArchiveReader wave_archives[4];
+    nw::snd::internal::WaveArchiveFileReader wave_archives[4];
     struct BankReader banks[4];
     unsigned char state, reserved165, registered;
 };
+#endif
 
 struct TrackVoiceOwnerVTable {
     unsigned char reserved00[0x20];
@@ -122,7 +126,9 @@ struct AnimationTrackVTable {
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern void func_00155148(struct AudioVoiceGroup *group, int mode);
+#ifdef __cplusplus
+extern void func_00155148(nw::snd::internal::driver::Voice *group, int mode);
+#endif
 extern void func_0017db3c(struct AnimationTrack *track);
 extern void func_0017daf8(struct AudioVoice *voice);
 extern void func_0017dae0(struct AudioVoice *voice);
@@ -153,7 +159,6 @@ extern short bss_004b8984[];
 extern "C" {
 struct AnimationTrack;
 void func_0017db3c(AnimationTrack *track);
-void func_0016a204(AudioEnvelope *envelope, int value);
 void func_0017daf8(AudioVoice *voice);
 void func_001d4d5c(AnimationTrack *track, int release);
 }

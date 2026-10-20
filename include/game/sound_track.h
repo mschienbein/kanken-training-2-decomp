@@ -1,7 +1,6 @@
 #ifndef GAME_SOUND_TRACK_H
 #define GAME_SOUND_TRACK_H
 
-struct AudioVoiceGroup;
 struct BufferPosition;
 struct BufferedMemoryStream;
 struct DecoderState;
@@ -23,13 +22,17 @@ struct SoundTrack;
 struct SoundTrackPool;
 struct StorageArena;
 struct StreamRange;
-struct TaskPool;
 
 #include <stdbool.h>
+#ifdef __cplusplus
+#include <preinclude.h>
+#include "nw/snd/snd_VoiceManager.h"
+#endif
 #include "game/pool_list.h"
 #include "game/runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
+#ifdef __cplusplus
 struct SoundTrack {
     const void *vtable;
     unsigned char reserved04[0x94];
@@ -42,10 +45,11 @@ struct SoundTrack {
     unsigned char reserved13b[0x65];
     void (*callback)(struct SoundTrack *, unsigned event, void *context);
     void *callback_data;
-    struct AudioVoiceGroup *task;
+    nw::snd::internal::driver::Voice *task;
     struct SoundTrack *next;
     struct PoolLink link;
 };
+#endif
 
 struct BufferedMemoryStream {
     unsigned char reserved00[0x678];
@@ -151,11 +155,11 @@ extern const unsigned data_00224964[];
 extern struct SoundTrack *func_001d540c(struct SoundTrack *track);
 extern struct FreeListNode *func_0017dfdc(struct FreeListNode **head);
 extern struct SoundTrack *func_001d607c(struct SoundTrack *track);
-extern struct SoundTrack *func_001d5528(struct ObjectPool *pool);
-extern struct AudioVoiceGroup *func_0017e500(struct TaskPool *pool, unsigned first, unsigned second,
-                                     void (*callback)(struct AudioVoiceGroup *, int, void *),
+#ifdef __cplusplus
+extern nw::snd::internal::driver::Voice *func_0017e500(nw::snd::internal::driver::VoiceManager *pool, int channels, int priority,
+                                     void (*callback)(nw::snd::internal::driver::Voice *, int, void *),
                                      void *context);
-extern void func_001d96e8(struct SoundTrack *track, unsigned first, unsigned second);
+#endif
 extern void func_0016b248(struct BufferedMemoryStream *stream);
 extern unsigned int func_001d3f08(struct ForwardingStream *object);
 extern bool func_001d9b9c(const struct InitializedState *state);
@@ -178,8 +182,6 @@ extern unsigned char *func_001cfd40(const struct ModeTableState *state);
 extern int func_001d3150(const struct ExtendedState *state);
 extern void func_001d3d30(struct StreamRange *range, void *buffer, unsigned size);
 extern void func_001d9090(struct SoundTrackPool *pool, void *resource);
-extern struct SoundTrack *func_001d9198(unsigned first, unsigned second,
-                                     unsigned third, unsigned fourth);
 #ifdef __cplusplus
 }
 #endif

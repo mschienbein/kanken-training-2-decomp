@@ -68,15 +68,6 @@ struct ArchiveBlockHeader {
     unsigned char reserved04[4];
 };
 
-struct ArchiveInfoTable {
-    unsigned count;
-};
-struct ArchiveReader {
-    const struct ArchiveFile *file;         /* 0x00 */
-    const struct ArchiveInfoTable *info;    /* 0x04 */
-    const void **cache;                     /* 0x08 */
-    unsigned char initialized;             /* 0x0c */
-};
 
 /* A typed, self-relative resource reference; unsupported types resolve to null. */
 struct RelativeReference {
@@ -363,10 +354,6 @@ extern void func_00136448(struct WordPair *pair, unsigned int first, unsigned in
 extern const void *func_0017ded4(const struct RelativeReference *reference);
 
 extern const struct ArchiveBlockHeader *func_0014a2f0(const struct ArchiveFile *file);
-extern unsigned func_00183c54(const struct ArchiveFile *file);
-extern struct ArchiveReader *func_00183c84(struct ArchiveReader *reader,
-                                          const struct ArchiveFile *file, int use_table);
-extern void func_00140970(struct ArchiveReader *reader);
 
 #ifdef __cplusplus
 }

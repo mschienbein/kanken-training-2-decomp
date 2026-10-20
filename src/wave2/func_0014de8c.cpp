@@ -1,7 +1,6 @@
-#include "game/reset_reference.h"
+#include "game/audio_voice.h"
 
-/* [INFERENCE] Native member constructor identity; its emitted definition, rather
- * than an external alias over a C function, owns the return-this entry. */
-RuntimeMember::RuntimeMember()
+/* S03/S08: the original array-element constructor constructs RecordState. */
+RecordState::RecordState()
 {
 }

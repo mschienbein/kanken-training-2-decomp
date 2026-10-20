@@ -2,7 +2,6 @@
 #define GAME_INPUT_DEVICE_H
 
 struct DirtyValueObject;
-struct DisplayBufferState;
 struct InputBufferState;
 struct InputCoordinates;
 struct InputDeviceState;
@@ -77,13 +76,6 @@ struct ThreadStartContext {
     void *termination_argument;
 };
 
-struct DisplayBufferState {
-    void *storage;
-    unsigned count;
-    unsigned capacity;
-    unsigned char enabled;
-    unsigned char reserved0d[3];
-};
 
 struct PackedPosition {
     short x;
@@ -118,7 +110,6 @@ extern struct InputBufferState *func_00123b38(struct InputBufferState *buffer);
 extern void func_0012d104(struct ThreadStartContext *start);
 extern struct PoolList *func_001342f4(struct PoolList *list);
 extern struct PoolList *func_00144970(struct PoolList *list);
-extern struct DisplayBufferState *func_0014ee44(struct DisplayBufferState *buffer);
 extern void func_00152624(struct DirtyValueObject *object, const struct PackedPosition *value);
 #ifdef __cplusplus
 }

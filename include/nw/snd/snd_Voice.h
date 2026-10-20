@@ -3,6 +3,8 @@
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Modified 2026-10-17: standalone UTF-8 and relative include normalization.
+ * Modified 2026-10-20: target-version Voice/AudioChannel, RecordState and waveform
+ * contracts; byte-sized pan/format storage and one C-linkage callback protocol.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #ifndef NW_SND_VOICE_H_
@@ -12,15 +14,22 @@
 #include "../../nn/snd/CTR/Common/snd_Adpcm.h"
 #include "snd_Global.h"
 #include "../ut/ut_LinkList.h"
+#include "game/voice_wave_info.h"
+
+struct AudioChannel;
+struct RecordState;
 
 namespace nw {
 namespace snd {
 namespace internal {
 namespace driver {
 
-typedef nn::snd::CTR::Voice HardwareChannel;
 
 class VoiceManager;
+class Voice;
+extern "C" {
+    typedef void VoiceCallbackFunction(Voice*, int, void*);
+}
 
 class Voice
 {
@@ -43,7 +52,7 @@ public:
         CALLBACK_STATUS_DROP_DSP
     };
 
-    typedef void (*VoiceCallback)(Voice* voice, VoiceCallbackStatus status, void* callbackData);
+    typedef VoiceCallbackFunction* VoiceCallback;
 
     static const int CHANNEL_MAX = nw::snd::internal::WAVE_CHANNEL_MAX;
 
@@ -78,7 +87,7 @@ public:
 
     bool Alloc(int channelCount, int priority, Voice::VoiceCallback callback, void* callbackData);
     void Free();
-    void Initialize( const WaveInfo& waveInfo, u32 startOffset );
+    void Initialize(const ::VoiceWaveInfo& waveInfo, u32 startOffset);
 
     void Start();
     void Stop();
@@ -88,56 +97,56 @@ public:
     void Calc();
     void Update();
 
-    bool IsActive() const { return m_pHardwareChannel[0] != NULL; }
-    bool IsRun()    const;
-    bool IsPause()  const { return m_IsPause == true; }
+    bool IsActive() const { return channels[0] != NULL; }
+    bool IsRun() const;
+    bool IsPause() const { return flag17 != 0; }
     bool IsPlayFinished() const;
 
-    f32 GetVolume() const { return m_Volume; }
+    f32 GetVolume() const { return value24; }
     void SetVolume(f32 volume);
 
-    f32 GetPitch() const { return m_Pitch; }
+    f32 GetPitch() const { return value28; }
     void SetPitch(f32 pitch);
 
     void SetPanMode(PanMode panMode);
     void SetPanCurve(PanCurve panCurve);
 
-    f32 GetPan() const { return m_Pan; }
+    f32 GetPan() const { return value30; }
     void SetPan(f32 pan);
 
-    f32 GetSurroundPan() const { return m_SurroundPan; }
+    f32 GetSurroundPan() const { return value34; }
     void SetSurroundPan(f32 span);
 
-    f32 GetLpfFreq() const { return m_LpfFreq; }
+    f32 GetLpfFreq() const { return value38; }
     void SetLpfFreq(f32 lpfFreq);
 
-    int GetBiquadType() const { return m_BiquadType; }
-    f32 GetBiquadValue() const { return m_BiquadValue; }
+    int GetBiquadType() const { return reserved22; }
+    f32 GetBiquadValue() const { return value3c; }
     void SetBiquadFilter(int type, f32 value);
 
-    int GetPriority() const { return m_Priority; }
+    int GetPriority() const { return priority; }
     void SetPriority(int priority);
 
     void SetFrontBypass(bool isFrontBypass);
     void SetInterpolationType(u8 interpolationType);
 
-    int GetPhysicalVoiceCount() const { return m_ChannelCount; }
-    int GetChannelCount() const { return m_ChannelCount; }
-    const HardwareChannel* GetHardwareChannel(int channelIndex) const;
+    int GetPhysicalVoiceCount() const { return count; }
+    int GetChannelCount() const { return count; }
+    const ::AudioChannel* GetHardwareChannel(int channelIndex) const;
 
     void UpdateVoicesPriority();
 
-    f32 GetMainSend() const { return m_MainSend; }
+    f32 GetMainSend() const { return value44; }
     void SetMainSend(f32 send);
 
-    f32 GetFxSend(AuxBus bus) const { return m_FxSend[bus]; }
+    f32 GetFxSend(AuxBus bus) const { return sends[bus]; }
     void SetFxSend(AuxBus bus, f32 send);
 
     u32 GetCurrentPlayingSample() const;
     nw::snd::SampleFormat GetFormat() const;
 private:
-    static void SdkVoiceDropCallbackFunc(nn::snd::CTR::Voice* pDropVoice,uptr userArg);
-    static void SdkVoiceDropCallbackFuncMulti(nn::snd::CTR::Voice* pDropVoice,uptr userArg);
+    static void SdkVoiceDropCallbackFunc(::AudioChannel* channel, Voice* voice);
+    static void SdkVoiceDropCallbackFuncMulti(::AudioChannel* channel, Voice* voice);
 
     void InitParam(int channelCount, Voice::VoiceCallback callback,void* callbackData);
 
@@ -155,44 +164,39 @@ private:
 
     /* Hack to make --gnu work */
 public:
-    HardwareChannel* m_pHardwareChannel[CHANNEL_MAX];
-    int m_ChannelCount;
-    VoiceCallback m_Callback;
-    void* m_pCallbackData;
-    bool m_IsActive;
-    bool m_IsStart;
-    bool m_IsStarted;
-    bool m_IsPause;
-    bool m_IsPausing;
-    bool m_IsInitialized;
-    bool m_IsAllocating;
-    bool m_AllocateErrorFlag;
-    nn::snd::CTR::WaveBuffer* m_pLastWaveBuffer;
-    u16 m_SyncFlag;
-    u8 m_BiquadType;
-    f32 m_Volume;
-    f32 m_Pitch;
-    PanMode m_PanMode;
-    PanCurve m_PanCurve;
-    f32 m_Pan;
-    f32 m_SurroundPan;
-    f32 m_LpfFreq;
-    f32 m_BiquadValue;
-    int m_Priority;
-    f32 m_MainSend;
-    f32 m_FxSend[AUX_BUS_NUM];
-
-    nw::snd::SampleFormat m_Format;
-    uptr m_VoiceUser;
+    /* Target S01/S02/S14: one 0x60-byte voice, with byte-sized format/pan
+     * controls. HardwareChannel and the high-level Voice are different owners. */
+    ::AudioChannel* channels[CHANNEL_MAX];
+    int count;
+    VoiceCallback callback;
+    void* context;
+    unsigned char active;
+    unsigned char flag15, flag16;
+    signed char flag17;
+    unsigned char flag18, reserved19, allocating, allocation_failed;
+    ::RecordState* record;
+    u16 dirty;
+    u8 reserved22;
+    s8 mode23;
+    f32 value24, value28;
+    u8 option2c, option2d;
+    u8 reserved2e[2];
+    f32 value30, value34, value38, value3c;
+    int priority;
+    f32 value44;
+    f32 sends[AUX_BUS_NUM];
+    u8 format;
+    u8 reserved51[3];
+    u32 user_word;
 
 public:
     static u32 FrameToByte(u32 sample, nw::snd::SampleFormat format);
 
-    void AppendWaveBuffer(int channelIndex,nn::snd::CTR::WaveBuffer* pBuffer,bool lastFlag);
-    void SetAdpcmParam(int channelIndex,const nn::snd::CTR::AdpcmParam& param);
+    void AppendWaveBuffer(int channelIndex, ::RecordState* buffer, bool lastFlag);
+    void SetAdpcmParam(int channelIndex, const ::AdpcmCoefficients& param);
 
 public:
-    ut::LinkListNode    m_LinkNode;
+    ut::LinkListNode link;
 };
 
 } // namespace driver

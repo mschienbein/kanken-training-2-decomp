@@ -2,12 +2,13 @@
 #define GAME_AUDIO_VOICE_H
 
 struct AnimationTrack;
+struct AudioChannel;
+struct AudioVoice;
 struct AudioBiquadCoefficients;
 struct HandleManager;
 struct AudioCounter;
 struct AudioFadeController;
 struct AudioLinearRamp;
-struct AudioSlotBufferDescriptor001d9580;
 struct AudioVoiceOwner001d9580;
 struct ConfigState001719f4;
 struct ConfigTarget001719f4;
@@ -31,21 +32,31 @@ struct StreamQueue;
 #include "game/audio_filter.h"
 #include "game/pool_list.h"
 #include "game/stream_manager.h"
+#include "game/voice_wave_info.h"
 
 #include <stdbool.h>
 #include "game/functions.h"
+#ifdef __cplusplus
+#include <preinclude.h>
+#include "nw/snd/snd_VoiceManager.h"
+#include "nw/snd/snd_CurveAdshr.h"
+#endif
 
-struct AdpcmLoopState;
+/* S03: the four status bytes and the next-buffer pointer are separate fields. */
 struct RecordState {
-    unsigned words[4];
-    union {
-        unsigned word;
-        struct { unsigned char first, second, third, fourth; } bytes;
-    } flags;
-    unsigned value;
-};
-struct AdpcmCoefficients {
-    short pairs[8][2];
+    const void *data;
+    unsigned sample_count;
+    /* 00153bd8 stores the actual destination of ADPCM loop-state copy. */
+    const struct AdpcmLoopState *loop_context;
+    unsigned sample_limit;
+    /* Original 001d914c sign-extends this byte; other reads use truncation. */
+    signed char loop;
+    unsigned char status;
+    unsigned short generation;
+    struct RecordState *next;
+#ifdef __cplusplus
+    RecordState();
+#endif
 };
 
 struct AudioChannelState {
@@ -64,9 +75,9 @@ struct AudioChannelState {
     float value24;
     unsigned char reserved28[4];
     unsigned int value2c;
-    unsigned int value30;
-    unsigned short value34;
-    unsigned short value36;
+    struct RecordState *pending;
+    short value34;
+    short value36;
     float value38;
     float value3c;
     float values40[10];
@@ -78,8 +89,12 @@ struct AudioChannelState {
     struct AdpcmCoefficients coefficients;
 };
 
+#ifdef __cplusplus
+extern "C" {
+    typedef void AudioChannelCallback(struct AudioChannel*, nw::snd::internal::driver::Voice*);
+}
 struct AudioChannel {
-    unsigned char reserved00[4];
+    unsigned index;
     unsigned char mode;
     unsigned char alignment;
     unsigned char reserved06;
@@ -89,68 +104,19 @@ struct AudioChannel {
     unsigned char reserved16[2];
     int extent;
     float volume;
-    unsigned char reserved20[0x44];
+    int priority;
+    struct AudioChannel *previous, *next;
+    AudioChannelCallback *callback;
+    nw::snd::internal::driver::Voice *callback_context;
+    float mix_values[12];
     float gain;
     struct AudioChannelState *state;
 };
+#endif
 
-struct RecordState;
-struct AudioVoiceGroup {
-    struct AudioChannel *channels[2];
-    int count;
-    void (*callback)(struct AudioVoiceGroup *group, int event, void *context);
-    void *context;
-    unsigned char active;
-    unsigned char flag15;
-    unsigned char flag16;
-    signed char flag17;
-    unsigned char flag18;
-    unsigned char reserved19;
-    unsigned char allocating;
-    unsigned char allocation_failed;
-    struct RecordState *record;
-    unsigned short dirty;
-    unsigned char reserved22;
-    signed char mode23;
-    float value24, value28;
-    unsigned char option2c;
-    unsigned char option2d;
-    unsigned char reserved2e[2];
-    float value30;
-    float value34;
-    float value38;
-    float value3c;
-    int priority;
-    float value44;
-    float sends[2];
-    unsigned char format;
-    unsigned char reserved51[7];
-    struct PoolLink link;
-};
 
-struct AudioEnvelope {
-    unsigned char state;
-    unsigned char reserved01[3];
-    float sweep;
-    float attack;
-    float release;
-    float sustain;
-    unsigned short decay;
-    unsigned char reserved16[2];
-    unsigned char hold;
-};
 
-struct AudioSlot {
-    unsigned char reserved00[0x10];
-    signed char mode;
-    unsigned char state;
-    unsigned char reserved12[2];
-    struct AudioSlot *next;
-    unsigned char reserved18[0x18];
-};
 
-struct AudioVector4 { float x, y, z, w; };
-struct AudioWords4 { unsigned int words[4]; };
 struct AudioByteRamp {
     unsigned char start;
     unsigned char end;
@@ -158,18 +124,26 @@ struct AudioByteRamp {
     unsigned short elapsed;
 };
 
+struct AudioModulationState {
+    unsigned char reserved00[0x10];
+    unsigned elapsed;
+    float value;
+    float scale;
+    unsigned char active;
+    unsigned char pending;
+    unsigned char reserved1e[2];
+};
+
+#ifdef __cplusplus
+extern "C" {
+    typedef void AudioVoiceCallback(struct AudioVoice*, int, void*);
+}
 struct AudioVoice {
-    struct AudioSlot slots[2];
+    AudioVoice();
+    struct RecordState wave_buffers[2][2];
     unsigned char reserved60[0x38];
-    struct AudioEnvelope envelope;
-    struct AudioVector4 vectorb4;
-    unsigned char reservedc4[0x10];
-    struct AudioVector4 vectord4;
-    unsigned char reservede4[0x10];
-    struct AudioVector4 vectorf4;
-    unsigned char reserved104[0x10];
-    struct AudioWords4 words114;
-    unsigned char reserved124[0x10];
+    nw::snd::internal::CurveAdshr envelope;
+    struct AudioModulationState modulation[4];
     unsigned char flags134[4];
     unsigned char flag138;
     unsigned char flag139;
@@ -198,13 +172,16 @@ struct AudioVoice {
     unsigned char note194;
     unsigned char reserved195;
     unsigned char group196;
-    unsigned char reserved197[5];
+    unsigned char mode197;
+    unsigned char reserved198[4];
     float value19c;
-    void (*callback)(struct AudioVoice *, int, void *);
+    AudioVoiceCallback *callback;
     void *callback_data;
-    struct AudioVoiceGroup *group;
+    nw::snd::internal::driver::Voice *group;
     struct AudioVoice *next;
+    struct PoolLink pool_link;
 };
+#endif
 
 struct AudioControlBase {
     unsigned char reserved00[0x14];
@@ -246,13 +223,14 @@ struct AudioTrackControl {
     struct AudioVoiceAllocator *allocator;
 };
 struct RecordState;
-struct TaskPool;
 #ifdef __cplusplus
 extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
-extern void func_0017da08(struct AudioVoiceGroup *group, int index,
+#ifdef __cplusplus
+extern void func_0017da08(nw::snd::internal::driver::Voice *group, int index,
                           struct RecordState *record, int remember);
+#endif
 extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,
     unsigned char index, const struct AudioVoiceStartArgs *arguments);
 extern void func_0014e20c(struct AudioChannelState *state);
@@ -261,14 +239,22 @@ extern void func_001545f4(struct AudioChannelState *state, int mode);
 extern void func_00154608(struct AudioChannel *channel, unsigned int value);
 extern void func_00154610(struct AudioChannelState *state, unsigned int value);
 extern void func_001550e0(struct AudioChannel *channel, const struct AdpcmCoefficients *coefficients);
-extern struct TaskPool *func_00185c58(void);
-extern void func_0017e764(struct TaskPool *pool, struct AudioVoiceGroup *group);
+#ifdef __cplusplus
+extern nw::snd::internal::driver::VoiceManager *func_00185c58(void);
+extern void func_0017e764(nw::snd::internal::driver::VoiceManager *pool,
+                         nw::snd::internal::driver::Voice *group);
+#endif
 extern void func_001550e8(struct AudioChannelState *state,
                          const struct AdpcmCoefficients *coefficients);
 extern void func_001563a0(struct AudioChannelState *state, struct RecordState *record);
-extern void func_001c5994(struct AudioChannel *channel, const struct AudioSlot *slot);
-extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *slot);
-extern void func_001d49e8(struct AudioVoiceGroup *group, int index, const struct AudioSlot *slot);
+extern void func_001c5994(struct AudioChannel *channel, const struct RecordState *slot);
+extern void func_001c599c(struct AudioChannelState *state, const struct RecordState *slot);
+#ifdef __cplusplus
+extern void func_001d48d4(nw::snd::internal::driver::Voice *voice, const struct VoiceWaveInfo *info, unsigned sample_offset);
+extern void func_001d9238(struct AudioVoice *voice, const struct VoiceWaveInfo *info, unsigned sample_offset);
+extern void func_001d49e8(nw::snd::internal::driver::Voice *group, int index,
+                          const struct RecordState *slot);
+#endif
 #ifdef __cplusplus
 }
 #endif
@@ -347,13 +333,6 @@ struct AudioVoiceOwner001d9580 {
     struct AudioVoice *voice;
 };
 
-struct AudioSlotBufferDescriptor001d9580 {
-    const unsigned char *address;
-    unsigned sample_count;
-    unsigned char reserved08[9];
-    unsigned char state;
-    unsigned char reserved12[6];
-};
 
 
 struct PackedPointer001f15fc {
@@ -403,23 +382,31 @@ extern void func_00183900(struct StreamQueue *queue, struct StreamEvent *event);
 extern int func_001dc390(int format);
 extern void func_00171a34(struct ConfigTarget001719f4 *target, unsigned char option,
                           int index, unsigned flags);
-extern unsigned char func_001f2f2c(const struct AudioVoiceGroup *group);
+#ifdef __cplusplus
+extern unsigned char func_001f2f2c(const nw::snd::internal::driver::Voice *group);
+#endif
 extern unsigned func_001d4864(unsigned samples, int format);
-extern void func_001835b8(struct AudioVoiceGroup *group);
+#ifdef __cplusplus
+extern void func_001835b8(nw::snd::internal::driver::Voice *group);
+#endif
 extern unsigned func_001efcd0(const struct AudioChannel *channel);
 extern void func_001d4850(struct ResetState001d4850 *state);
 extern void func_001d0164(struct ResourceState001d0164 *state);
 extern int func_00148a3c(struct ServiceCoordinator *context, unsigned value);
 extern int func_001549d8(struct ServiceCoordinator *context);
 extern float func_00149388(float phase);
-extern void func_0014ee5c(struct AudioVoiceGroup *group);
+#ifdef __cplusplus
+extern void func_0014ee5c(nw::snd::internal::driver::Voice *group);
+#endif
 extern void func_0014fc78(struct AudioChannel *channel, float volume);
 extern float func_00151a1c(const struct AudioLinearRamp *ramp);
 extern void func_00152610(struct AudioChannelState *state, unsigned char value);
 extern void func_0014fbcc(struct AudioChannel *channel, int enabled);
 extern void func_001525f0(struct AudioChannel *channel, int enabled);
-extern void func_001d4a48(struct AudioVoiceGroup *group, unsigned mode);
-extern void func_001d4aac(struct AudioVoiceGroup *group);
+#ifdef __cplusplus
+extern void func_001d4a48(nw::snd::internal::driver::Voice *group, unsigned mode);
+extern void func_001d4aac(nw::snd::internal::driver::Voice *group);
+#endif
 extern void func_0015274c(struct AudioChannel *channel, float gain);
 extern void func_00154224(struct HandleManager *array);
 extern void func_0014603c(struct HandleManager *owner);
@@ -445,10 +432,69 @@ extern void func_001d5404(struct FloatState001d5404 *state, float value);
 extern void func_001d9580(struct AudioVoiceOwner001d9580 *owner,
                              const unsigned char *first, const unsigned char *last);
 extern void *func_001f15fc(const struct PackedPointer001f15fc *state);
-extern unsigned func_001f2ef8(const struct AudioVoiceGroup *group);
+#ifdef __cplusplus
+extern unsigned func_001f2ef8(const nw::snd::internal::driver::Voice *group);
+#endif
 extern void func_001d4adc(struct AudioFadeController *controller, bool muted,
                    unsigned int milliseconds);
 #ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+void func_00150030(nw::snd::internal::driver::Voice *group, float value);
+void func_0015643c(nw::snd::internal::driver::Voice *group);
+struct AudioChannel *func_00153fec(int priority,
+    void (*callback)(struct AudioChannel *, nw::snd::internal::driver::Voice *),
+    nw::snd::internal::driver::Voice *group);
+int func_0015477c(nw::snd::internal::driver::VoiceManager *pool, int priority);
+void func_001d94a0(struct AudioVoice *voice, const struct VoiceWaveInfo *info,
+                   unsigned id, unsigned sample_offset);
+void func_00150098(nw::snd::internal::driver::Voice *group, float value);
+void func_001501ec(nw::snd::internal::driver::Voice *group, float value);
+void func_0017e6a4(nw::snd::internal::driver::Voice *group, float value);
+void func_00150210(nw::snd::internal::driver::Voice *group, int index, float value);
+void func_00154624(struct AudioChannel *element, nw::snd::internal::driver::Voice *group);
+void func_0017e47c(nw::snd::internal::driver::Voice *group, unsigned int value);
+void func_0017e4bc(nw::snd::internal::driver::Voice *group, int mode);
+void func_001d49a8(nw::snd::internal::driver::Voice *group, unsigned char value);
+void func_001d49c8(nw::snd::internal::driver::Voice *group, unsigned char value);
+void func_001d9178(struct AudioVoice *voice, int increment);
+void func_001d9530(struct AudioVoice *voice);
+void func_0015263c(struct AudioChannel *channel,
+                   const struct AudioBiquadCoefficients *coefficients);
+void func_001551fc(struct AudioVoice *voice, float value, int mode);
+void func_001d911c(struct AudioVoice *voice, signed char mode);
+void func_001d9220(struct AudioVoice *voice, float value, int duration, unsigned char enabled);
+void func_001c5950(struct AudioChannel *channel, unsigned mode);
+void func_001c5970(struct AudioChannel *channel, unsigned direction);
+void func_001c59fc(struct AudioChannel *channel, unsigned alignment);
+void func_0017e470(nw::snd::internal::driver::Voice *group, unsigned int index,
+                  const struct AdpcmCoefficients *source);
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+extern nw::snd::internal::driver::Voice *func_00138cb0(nw::snd::internal::driver::Voice *resource);
+extern void func_00152f10(nw::snd::internal::driver::Voice *resource, int event, void *context);
+extern void func_0018290c(nw::snd::internal::driver::Voice *resource, int event, void *context);
+extern void func_00183550(nw::snd::internal::driver::Voice *group);
+extern void func_0016a27c(nw::snd::internal::driver::Voice *resource, int enabled);
+extern struct AudioVoice *func_001d5528(struct ObjectPool *pool);
+extern struct AudioVoice *func_001d9198(int channels, int priority,
+    void (*callback)(struct AudioVoice *, int, void *), void *context);
+extern void func_001d96e8(struct AudioVoice *voice,
+                         void (*callback)(struct AudioVoice *, int, void *), void *context);
+extern nw::snd::internal::driver::Voice *func_0017e500(nw::snd::internal::driver::VoiceManager *pool, int channels, int priority,
+                                     void (*callback)(nw::snd::internal::driver::Voice *, int, void *),
+                                     void *context);
+extern struct AudioChannel *func_00154838(struct HandleManager *pool,
+    int priority, void (*callback)(struct AudioChannel *, nw::snd::internal::driver::Voice *),
+    nw::snd::internal::driver::Voice *group);
+extern void func_00155d68(nw::snd::internal::driver::VoiceManager *pool, nw::snd::internal::driver::Voice *group);
+extern void func_00155dec(struct AudioChannel *channel, int priority);
 }
 #endif
 

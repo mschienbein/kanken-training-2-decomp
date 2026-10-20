@@ -8,7 +8,6 @@ struct PoolList;
 struct StreamEvent;
 struct StreamMutex;
 struct StreamQueue;
-struct TaskPool;
 struct WorkerThread;
 
 #include "game/pool_list.h"
@@ -61,7 +60,9 @@ extern struct AudioTaskManager *func_00185de4(void);
 extern struct WorkerThread *func_00140700(void);
 extern struct ObjectPool *func_00185cc0(void);
 extern void func_00131398(struct ObjectPool *pool);
-extern void func_00131464(struct TaskPool *pool);
+#ifdef __cplusplus
+extern void func_00131464(nw::snd::internal::driver::VoiceManager *pool);
+#endif
 extern void func_001313f4(struct SoundSubsystem *subsystem);
 extern void func_00131330(struct ObjectManager *manager);
 extern void func_001312a4(struct ObjectManager *manager);

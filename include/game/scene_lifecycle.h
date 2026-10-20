@@ -2,7 +2,6 @@
 #define GAME_SCENE_LIFECYCLE_H
 
 struct AudioChannel;
-struct AudioVoiceGroup;
 struct PoolLink;
 struct PoolList;
 struct SceneAggregate;
@@ -65,20 +64,29 @@ struct SceneEngine {
 };
 
 
-struct ResourceCallbackState { unsigned state, completion; };
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct AudioVoiceGroup *func_00138cb0(struct AudioVoiceGroup *resource);
-extern void func_00152f10(struct AudioVoiceGroup *resource, int event, void *context);
-extern void func_0018290c(struct AudioVoiceGroup *resource, int event, void *context);
+#ifdef __cplusplus
+extern nw::snd::internal::driver::Voice *func_00138cb0(nw::snd::internal::driver::Voice *resource);
+#endif
+#ifdef __cplusplus
+extern void func_00152f10(nw::snd::internal::driver::Voice *resource, int event, void *context);
+#endif
+#ifdef __cplusplus
+extern void func_0018290c(nw::snd::internal::driver::Voice *resource, int event, void *context);
+#endif
 
 extern struct ObjectPool *func_00185cc0(void);
 extern void func_00182994(struct ObjectPool *pool, void *object);
 extern void func_001829d0(struct AudioChannel *channel);
-extern void func_00183550(struct AudioVoiceGroup *group);
-extern void func_0016a27c(struct AudioVoiceGroup *resource, int enabled);
+#ifdef __cplusplus
+extern void func_00183550(nw::snd::internal::driver::Voice *group);
+#endif
+#ifdef __cplusplus
+extern void func_0016a27c(nw::snd::internal::driver::Voice *resource, int enabled);
+#endif
 extern void func_001d4cf4(struct SoundTrack *parent, bool enabled);
 #ifdef __cplusplus
 }

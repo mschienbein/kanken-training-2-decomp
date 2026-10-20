@@ -154,10 +154,6 @@
       "address": 1106300,
       "evidence": "scratch/integrator/c008/match-pre-merge/func_0010e17c/func_0010e17c.result.json: native definition MATCH at the bound address; class name [INFERENCE]. C1/C2 aliases denote the compiler-emitted complete/base definition at this same entry."
     },
-    "_ZN17SoundVoiceElementC1Ev": {
-      "address": 1364708,
-      "evidence": "c008: src/retries/func_0014bd20.cpp whole-function MATCH emits an external _ZN17SoundVoiceElementC1Ev reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
-    },
     "_ZN18ResourceDescriptorC1EiiPKc": {
       "address": 1461156,
       "evidence": "c008: src/solo/func_0020e460.cpp whole-function MATCH emits an external _ZN18ResourceDescriptorC1EiiPKc reference; isolated removal is unresolved (exit2). Natural caller witness is retained in scratch/integrator/c008/names and names-caller-versus-definition.json; descriptive class identity [INFERENCE]."
@@ -1158,22 +1154,6 @@
       "address": 1461044,
       "evidence": "[INFERENCE] Compact index-list identity. Natural non-inlined constructor reference in the full 002095c0 initializer; the allocation is 20 bytes and the variadic inputs are integer indices. Preserved author receipt: scratch/authors/L046/match/func_002095c0/final/func_002095c0.result.json. Canonical caller is rederived in c009/collection-r1."
     },
-    "_ZN18RuntimeMemberOwnerC1Ev": {
-      "address": 1364708,
-      "evidence": "[INFERENCE] Native member-array owner identity; its own c009 definition is rederived at func_0014d2e4, constructing 32 24-byte members after an eight-byte prefix."
-    },
-    "_ZN18RuntimeMemberOwnerC2Ev": {
-      "address": 1364708,
-      "evidence": "ARMCC complete/base aliases emitted by the same c009 native owner-constructor definition."
-    },
-    "_ZN13RuntimeMemberC1Ev": {
-      "address": 1367692,
-      "evidence": "[INFERENCE] Native member identity; compiler-produced callback reference in matching 0014d2e4 supplies an element this pointer. The owning c009-r3 source defines RuntimeMember::RuntimeMember at the same entry."
-    },
-    "_ZN13RuntimeMemberC2Ev": {
-      "address": 1367692,
-      "evidence": "[INFERENCE] Native member identity; complete/base constructor aliases emitted by the same c009-r3 source definition at src/wave2/func_0014de8c.cpp."
-    },
     "_ZN2nw4font14CharStrmReader17ReadNextCharUTF16Ev": {
       "address": 1945684,
       "evidence": "Original data_0021c64c PMF element3 and own native provider MATCH at accepted001db054; scratch/integrator/types-fontgfx/match/reader-utf16-r2. Replaces the unrelated HalfwordCursor peer, with explicit accepted-owner move."
@@ -1237,6 +1217,50 @@
     "_ZN18DisplayFramebufferC2Ev": {
       "address": 1321556,
       "evidence": "Compiler-emitted complete/base aliases of the same genuine DisplayFramebuffer constructor, not an invented callback result or unrelated alias."
+    },
+    "_ZN2nw3snd8internal21WaveArchiveFileReaderC1Ev": {
+      "address": 1371716,
+      "evidence": "S15 target CWAR cutover: actual native self-definition in src/wave13/func_0014ee44.cpp; source name [INFERENCE] where newly chosen. Final frozen-profile MATCH witness recorded in types-sound WITNESS-INDEX."
+    },
+    "_ZN2nw3snd8internal21WaveArchiveFileReaderC2Ev": {
+      "address": 1371716,
+      "evidence": "S15 target CWAR cutover: actual native self-definition in src/wave13/func_0014ee44.cpp; source name [INFERENCE] where newly chosen. Final frozen-profile MATCH witness recorded in types-sound WITNESS-INDEX."
+    },
+    "_ZN2nw3snd8internal21WaveArchiveFileReader5ResetEv": {
+      "address": 1856524,
+      "evidence": "S15 target CWAR cutover: actual native self-definition in src/wave13/func_001c540c.cpp; source name [INFERENCE] where newly chosen. Final frozen-profile MATCH witness recorded in types-sound WITNESS-INDEX."
+    },
+    "_ZN2nw3snd8internal21WaveArchiveFileReader11SetWaveFileEjPKv": {
+      "address": 1588168,
+      "evidence": "S15 target CWAR cutover: actual native self-definition in src/wave8/func_00183bc8.cpp; source name [INFERENCE] where newly chosen. Final frozen-profile MATCH witness recorded in types-sound WITNESS-INDEX."
+    },
+    "_ZNK2nw3snd8internal15WaveArchiveFile10FileHeader18GetFileBlockOffsetEv": {
+      "address": 1588308,
+      "evidence": "S15 target CWAR cutover: actual native self-definition in src/wave4/func_00183c54.cpp; source name [INFERENCE] where newly chosen. Final frozen-profile MATCH witness recorded in types-sound WITNESS-INDEX."
+    },
+    "_ZNK2nw3snd8internal21WaveArchiveFileReader22HasIndividualLoadTableEv": {
+      "address": 1282520,
+      "evidence": "S15 target CWAR cutover: actual native self-definition in src/wave4/func_001391d8.cpp; source name [INFERENCE] where newly chosen. Final frozen-profile MATCH witness recorded in types-sound WITNESS-INDEX."
+    },
+    "_ZN11RecordStateC1Ev": {
+      "address": 1367692,
+      "evidence": "S03/S08 actual constructor self-definition in src/wave2/func_0014de8c.cpp; one original RecordState/StreamChannel family, native complete/base entry aliases emitted by ARMCC. Frozen-profile exact witness retained in types-sound."
+    },
+    "_ZN11RecordStateC2Ev": {
+      "address": 1367692,
+      "evidence": "S03/S08 actual constructor self-definition in src/wave2/func_0014de8c.cpp; one original RecordState/StreamChannel family, native complete/base entry aliases emitted by ARMCC. Frozen-profile exact witness retained in types-sound."
+    },
+    "_ZN13StreamChannelC1Ev": {
+      "address": 1364708,
+      "evidence": "S03/S08 actual constructor self-definition in src/wave18/func_0014d2e4.cpp; one original RecordState/StreamChannel family, native complete/base entry aliases emitted by ARMCC. Frozen-profile exact witness retained in types-sound."
+    },
+    "_ZN13StreamChannelC2Ev": {
+      "address": 1364708,
+      "evidence": "S03/S08 actual constructor self-definition in src/wave18/func_0014d2e4.cpp; one original RecordState/StreamChannel family, native complete/base entry aliases emitted by ARMCC. Frozen-profile exact witness retained in types-sound."
+    },
+    "_ZNK2nw4font4Font17GetCharStrmReaderEw": {
+      "address": 2051320,
+      "evidence": "c009: src/wave20/func_001f4cf8.cpp defines the frozen native nw::font::Font::GetCharStrmReader(wchar_t) const API at this address; whole-function 64-byte MATCH under the frozen game profile is scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json. The hidden aggregate result, const Font receiver and unused wchar_t dummy are retained. This is a same-address own definition, not an external callee alias; original private identity remains qualified."
     }
   }
 }
