@@ -2,15 +2,20 @@
 
 Current entry on top.
 
-## 2026-10-17 — WSL desktop (current)
+## 2026-10-20 — resumed WSL desktop (current)
 
-**State:** `docs/STATUS.md` top entry. Accepted 299 functions / 7,620 B (seq 4, c004-r3);
-denominator v7; gates v1.10. Host: WSL2 Ubuntu on the Windows desktop
+**State:** `docs/STATUS.md` top entry. Accepted 1,621 functions / 195,908 B (seq 9, cmodels);
+denominator v9-r2; gates v1.19. Host: WSL2 Ubuntu on the Windows desktop
 (`~/code/kanken-training-2-decomp`; private inputs in `~/code/3ds-experiments/inputs/`, imported
 into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pushes through
 `gh auth setup-git`.
 
-Restart sequence (accepted now: 1,621 functions / 195,908 B, seq 9 cmodels; denominator v9-r2; gates v1.19, linker models v4/v6/v8 adopted; the finalized ledger is selected as linker v6 + literal L1, so later checkpoints select at least that pair; profiles game/sdk/middleware):
+Restart sequence: linker models v4/v6/v8 are adopted. The finalized ledger selects linker v6
+plus literal L1, so later checkpoints explicitly select at least that pair. Frozen profiles:
+game/sdk/middleware. Resume preserved work rather than restarting completed batches.
+The user-set maximum is 32 subagents; run fewer when provider rate limits require it
+(`docs/rulings/2026-10-20-subagent-concurrency.md`). Current throttling and ownership live in
+the private pipeline file.
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules
