@@ -422,36 +422,276 @@ def _instruction_reads(instruction, before: dict, site: int, pc: int) -> tuple[l
     return [(first, first + width, origin, basis)], False
 
 
+_ENDIAN_DP_OPS = {getattr(arm, f"ARM_INS_{name}"): (opcode,) for opcode, name in enumerate(
+    ("AND", "EOR", "SUB", "RSB", "ADD", "ADC", "SBC", "RSC", "TST", "TEQ", "CMP", "CMN", "ORR", "MOV", "BIC", "MVN"))}
+_ENDIAN_DP_OPS.update({getattr(arm, f"ARM_INS_{name}"): (13,) for name in ("ASR", "LSL", "LSR", "ROR", "RRX")})
+_ENDIAN_DP_OPS[arm.ARM_INS_ADR] = (2, 4)
+_ENDIAN_SINGLE_MEMORY = {getattr(arm, f"ARM_INS_{name}"): (load, byte) for name, load, byte in (
+    ("LDR", 1, 0), ("LDRT", 1, 0), ("LDRB", 1, 1), ("LDRBT", 1, 1),
+    ("STR", 0, 0), ("STRT", 0, 0), ("STRB", 0, 1), ("STRBT", 0, 1))}
+_ENDIAN_EXTRA_MEMORY = {getattr(arm, f"ARM_INS_{name}"): (load, operation) for name, load, operation in (
+    ("LDRH", 1, 1), ("LDRHT", 1, 1), ("STRH", 0, 1), ("STRHT", 0, 1),
+    ("LDRSB", 1, 2), ("LDRSBT", 1, 2), ("LDRSH", 1, 3), ("LDRSHT", 1, 3),
+    ("LDRD", 0, 2), ("STRD", 0, 3))}
+_ENDIAN_MULTI_MEMORY = {getattr(arm, f"ARM_INS_{name}") for name in (
+    "PUSH", "POP", "LDM", "LDMDA", "LDMDB", "LDMIB", "STM", "STMDA", "STMDB", "STMIB")}
+_ENDIAN_MULTIPLY = {getattr(arm, f"ARM_INS_{name}") for name in ("MUL", "MLA", "UMULL", "UMLAL", "SMULL", "SMLAL")}
+_ENDIAN_VFP_DATA = {getattr(arm, f"ARM_INS_{name}") for name in (
+    "VABS", "VADD", "VCMP", "VCMPE", "VCVT", "VCVTR", "VDIV", "VMLA", "VMLS", "VMUL", "VNEG",
+    "VNMLA", "VNMLS", "VNMUL", "VSQRT", "VSUB")}
+_ENDIAN_VFP_MEMORY = {getattr(arm, f"ARM_INS_{name}") for name in (
+    "VLDR", "VSTR", "VPUSH", "VPOP", "VLDMIA", "VLDMDB", "VSTMIA", "VSTMDB")}
+_ENDIAN_THUMB16_IDS = set(_ENDIAN_DP_OPS) | set(_ENDIAN_SINGLE_MEMORY) | set(_ENDIAN_EXTRA_MEMORY) | (
+    _ENDIAN_MULTI_MEMORY | {getattr(arm, f"ARM_INS_{name}") for name in (
+        "MUL", "NEG", "REV", "REV16", "REVSH", "SXTB", "SXTH", "UXTB", "UXTH", "B", "BX", "BLX", "CBZ", "CBNZ", "NOP")})
+
+
+def _data_endian_effect(instruction, isa: str) -> int | None:
+    """0 preserves E, 1 establishes LE, 2 establishes BE; None refuses the owner.
+
+    This is deliberately narrower than a processor model. Validate ordinary
+    encodings independently of decoder writes/groups, including PC/CPSR restores.
+    Unknown classes, status/coprocessor writes, raw SVC and Thumb IT are refusals,
+    even when unreachable or apparently followed by an endian restoration.
+    """
+    raw = instruction.bytes
+    if isa == "thumb":
+        if len(raw) == 2:
+            half = int.from_bytes(raw, "little")
+            if instruction.id == arm.ARM_INS_SETEND and half & ~8 == 0xB650:
+                return 2 if half & 8 else 1
+            if instruction.id not in _ENDIAN_THUMB16_IDS:
+                return None
+            ordinary = (half < 0xB000 or half & 0xF000 == 0xC000
+                        or half & 0xFE00 in (0xB400, 0xBC00)
+                        or half & 0xF000 == 0xD000 and (half >> 8) & 15 < 14
+                        or half & 0xF800 == 0xE000 or half & 0xFF00 in (0xB000, 0xB200, 0xBA00)
+                        or half & 0xF500 == 0xB100 or half == 0xBF00)
+            if not ordinary:
+                return None
+            if (instruction.id in (arm.ARM_INS_ADD, arm.ARM_INS_MOV) and instruction.operands
+                    and instruction.operands[0].reg == arm.ARM_REG_PC
+                    and not (instruction.id == arm.ARM_INS_MOV and len(instruction.operands) == 2
+                             and instruction.operands[1].reg == arm.ARM_REG_LR)):
+                return None
+            return 0
+        if len(raw) == 4 and instruction.id in (arm.ARM_INS_BL, arm.ARM_INS_BLX):
+            first, second = int.from_bytes(raw[:2], "little"), int.from_bytes(raw[2:], "little")
+            return 0 if first & 0xF800 == 0xF000 and second & 0xC000 == 0xC000 else None
+        return None
+    if isa != "arm" or len(raw) != 4:
+        return None
+    word = int.from_bytes(raw, "little")
+    condition, rn, rd = word >> 28, (word >> 16) & 15, (word >> 12) & 15
+    if instruction.id == arm.ARM_INS_SETEND:
+        return (2 if word & 0x200 else 1) if word & ~0x200 == 0xF1010000 else None
+    if instruction.id in (arm.ARM_INS_B, arm.ARM_INS_BL, arm.ARM_INS_BLX):
+        if word & 0x0E000000 == 0x0A000000:
+            valid = ((condition == 15) == (instruction.id == arm.ARM_INS_BLX)
+                     and (condition == 15 or bool(word & 0x01000000) == (instruction.id == arm.ARM_INS_BL)))
+            return 0 if valid else None
+        return 0 if (instruction.id == arm.ARM_INS_BLX and condition != 15
+                     and word & 0x0FFFFFF0 == 0x012FFF30 and word & 15 != 15) else None
+    if condition == 15:
+        return None
+    if instruction.id == arm.ARM_INS_BX:
+        return 0 if word & 0x0FFFFFFF == 0x012FFF1E else None
+    if instruction.id in _ENDIAN_DP_OPS:
+        opcode, flags = (word >> 21) & 15, bool(word & 0x00100000)
+        if (word & 0x0C000000 or opcode not in _ENDIAN_DP_OPS[instruction.id]
+                or not word & 0x02000000 and word & 0x90 == 0x90):
+            return None
+        if 8 <= opcode <= 11:
+            return 0 if flags and rd == 0 else None
+        return 0 if rd != 15 or word & 0x0FFFFFFF == 0x01A0F00E else None
+    if instruction.id in (arm.ARM_INS_MOVW, arm.ARM_INS_MOVT):
+        return 0 if word & 0x0FF00000 == (0x03000000 if instruction.id == arm.ARM_INS_MOVW else 0x03400000) and rd != 15 else None
+    if instruction.id == arm.ARM_INS_MRS:
+        return 0 if word & 0x0FBF0FFF == 0x010F0000 and rd != 15 else None
+    if instruction.id in _ENDIAN_SINGLE_MEMORY or instruction.id in _ENDIAN_EXTRA_MEMORY:
+        if instruction.id in _ENDIAN_SINGLE_MEMORY:
+            valid = (word & 0x0C000000 == 0x04000000
+                     and ((word >> 20) & 1, (word >> 22) & 1) == _ENDIAN_SINGLE_MEMORY[instruction.id]
+                     and not (word & 0x02000000 and word & 0x10))
+        else:
+            valid = (word & 0x0E000090 == 0x00000090
+                     and ((word >> 20) & 1, (word >> 5) & 3) == _ENDIAN_EXTRA_MEMORY[instruction.id]
+                     and (word & 0x00400000 or not word & 0xF00))
+        double = instruction.id in (arm.ARM_INS_LDRD, arm.ARM_INS_STRD)
+        if not valid or double and (rd & 1 or rd > 12):
+            return None
+        if bool(word & 0x00100000) and rd == 15:
+            return None  # A computed transfer cannot borrow a lexical E-state proof.
+        if (not word & 0x01000000 or word & 0x00200000) and (rn == 15 or rn in ({rd, rd + 1} if double else {rd})):
+            return None
+        return 0
+    if instruction.id in _ENDIAN_MULTI_MEMORY:
+        if (word & 0x0E400000 != 0x08000000 or not word & 0xFFFF or rn == 15
+                or word & 0x00200000 and word & (1 << rn)):
+            return None  # The S bit includes CPSR-restoring LDM, regardless of decoder effects.
+        if word & 0x00108000 == 0x00108000 and word & 0x0FFF8000 != 0x08BD8000:
+            return None
+        return 0
+    if instruction.id in _ENDIAN_MULTIPLY:
+        if instruction.id in (arm.ARM_INS_MUL, arm.ARM_INS_MLA):
+            valid = (word & 0x0FC000F0 == 0x00000090
+                     and bool(word & 0x00200000) == (instruction.id == arm.ARM_INS_MLA) and rn not in (13, 15))
+        else:
+            valid = word & 0x0F8000F0 == 0x00800090 and rn != rd and rn not in (13, 15) and rd not in (13, 15)
+        return 0 if valid and word & 15 not in (13, 15) and (word >> 8) & 15 not in (13, 15) else None
+    if instruction.id in _ENDIAN_VFP_DATA:
+        return 0 if word & 0x0F000E10 == 0x0E000A00 else None
+    if instruction.id in _ENDIAN_VFP_MEMORY:
+        if word & 0x0E000E00 != 0x0C000A00:
+            return None
+        pre, up, writeback, load = ((word >> bit) & 1 for bit in (24, 23, 21, 20))
+        if instruction.id in (arm.ARM_INS_VLDR, arm.ARM_INS_VSTR):
+            return 0 if pre and not writeback and load == (instruction.id == arm.ARM_INS_VLDR) else None
+        decrement = instruction.id in (arm.ARM_INS_VPUSH, arm.ARM_INS_VLDMDB, arm.ARM_INS_VSTMDB)
+        loading = instruction.id in (arm.ARM_INS_VPOP, arm.ARM_INS_VLDMIA, arm.ARM_INS_VLDMDB)
+        if (pre != decrement or up == decrement or load != loading or rn == 15
+                or decrement and not writeback
+                or instruction.id in (arm.ARM_INS_VPUSH, arm.ARM_INS_VPOP) and (rn != 13 or not writeback)):
+            return None
+        count, double = word & 0xFF, bool(word & 0x100)
+        first = rd + (((word >> 22) & 1) << 4) if double else rd * 2 + ((word >> 22) & 1)
+        return 0 if count and not (double and count & 1) and first + (count // 2 if double else count) <= (16 if double else 32) else None
+    if instruction.id in (arm.ARM_INS_VMRS, arm.ARM_INS_FMSTAT):
+        return 0 if word & 0x0FFF0FFF == 0x0EF10A10 else None  # FPSCR -> core/NZCV, not CPSR.E.
+    if instruction.id == arm.ARM_INS_VMOV:
+        if word & 0x0F000E10 == 0x0E000A00:
+            return 0
+        if word & 0x0FE00F7F == 0x0E000A10 and rd not in (13, 15):
+            return 0
+        if word & 0x0FE00EF0 == 0x0C400A10 and rn != rd and rn not in (13, 15) and rd not in (13, 15):
+            return 0
+        return None
+    if instruction.id in (arm.ARM_INS_NOP, arm.ARM_INS_HINT):
+        return 0 if word & 0x0FFFFFFF == 0x0320F000 else None
+    return None
+
+
+def _decoded_functions(catalogue: dict, analyzer) -> list[tuple[dict, dict]]:
+    functions = []
+    for function in catalogue["functions"]:
+        decoded = {}
+        for first, end in function["code_ranges"]:
+            cursor = first
+            while cursor < end:
+                instruction = (analyzer.detailed(cursor) if function["isa"] == "arm" else next(
+                    analyzer.thumb.disasm(analyzer.text[cursor - analyzer.base:cursor - analyzer.base + 4], cursor, 1), None))
+                if instruction is None or cursor + instruction.size > end:
+                    break
+                decoded[cursor] = instruction
+                cursor += instruction.size
+        functions.append((function, decoded))
+    return functions
+
+
+def _little_endian_sites(functions: list[tuple[dict, dict]], analyzer) -> set[int]:
+    """All-path LE before a reachable instruction; values still do not cross joins.
+
+    Only primary public entries have the target's LE ABI assumption. Secondary
+    labels start unknown, and actual direct edges (including back/cross-owner
+    edges) join that assumption, never reset it. Ordinary calls preserve LE only
+    when it was established at their entry; an unknown/BE call cannot restore it.
+    No switch/computed/exception control-flow or opaque processor effect is proved.
+    """
+    nodes = {site: (function, instruction) for function, decoded in functions for site, instruction in decoded.items()}
+    effects, flows, successors, called = {}, {}, {}, {}
+    opaque = {function["address"] for function, decoded in functions
+              if sum(instruction.size for instruction in decoded.values())
+              != sum(end - first for first, end in function["code_ranges"])}
+    for site, (function, instruction) in nodes.items():
+        effect = _data_endian_effect(instruction, function["isa"])
+        flow = analyzer.decode(site, function["isa"])
+        effects[site], flows[site] = effect, flow
+        successors[site] = []
+        if effect is None or flow is None or flow.switch is not None or flow.indirect and not flow.call:
+            opaque.add(function["address"])
+        if flow is None:
+            continue
+        if flow.target and (flow.branch or flow.call or flow.stop) and flow.target[0] in nodes:
+            target = flow.target[0]
+            if nodes[target][0]["isa"] != flow.target[1]:
+                opaque.add(function["address"])
+            elif flow.call:
+                called[site] = target
+            else:
+                successors[site].append(target)
+        if function["kind"] == "veneer" and site == function["address"]:
+            target = analyzer.veneer(function["address"], function["isa"])
+            if target is not None and target[0] in nodes:
+                # Do not lose a possible changed-state ingress merely because
+                # the footprint reader skips veneer owners. Opaque state flows
+                # to its known destination as a refusal, never a value proof.
+                successors[site].append(target[0])
+        following = site + instruction.size
+        if (flow.call or not (flow.branch or flow.stop) or flow.conditional) and following in nodes:
+            successors[site].append(following)
+    states, work = {}, []
+
+    def merge(site: int, state: int) -> None:
+        if site not in nodes:
+            return
+        state = 3 if nodes[site][0]["address"] in opaque else state
+        combined = states.get(site, 0) | state
+        if combined != states.get(site, 0):
+            states[site] = combined
+            work.append(site)
+
+    for function, _ in functions:
+        merge(function["address"], 1)
+        for entry in function["entries"]:
+            if entry["address"] != function["address"]:
+                merge(entry["address"], 3)
+    for site, target in called.items():
+        if target != nodes[target][0]["address"]:
+            merge(target, 3)  # A secondary public ingress is unknown even before entry recording.
+    for site, targets in successors.items():
+        for target in targets:
+            if (target != nodes[target][0]["address"]
+                    and nodes[site][0]["address"] != nodes[target][0]["address"]):
+                merge(target, 3)
+    while work:
+        site = work.pop()
+        function, instruction = nodes[site]
+        before, effect, flow = states[site], effects[site], flows[site]
+        after = before if effect == 0 else effect or 3
+        if flow is not None and flow.conditional:
+            after |= before
+        if function["address"] in opaque or flow is not None and flow.call and before != 1:
+            after = 3
+        for target in successors[site]:
+            merge(target, after)
+        if site in called:
+            merge(called[site], before)
+    return {site for site, state in states.items() if state == 1}
+
+
 def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] | None = None,
                     include_reads: bool = True, read_vetoes: list[dict] | None = None,
                     raw_svc_sites: list[dict] | None = None) -> list[dict]:
     """Enumerate actual fixed-width reads from locally proved image addresses.
 
     ADR alone is not a read. Values do not flow through a join, conditional
-    definition, unknown arithmetic or a call-clobbered register. Reading a pool
-    pointer does not grant ownership of its pointee; only a later actual read
-    contributes that exact span. Unmodeled reads, unbounded statically formed
-    addresses and conditional reads can veto alignment, never create data ownership.
+    definition, unknown arithmetic or a call-clobbered register. Pool values
+    require all-path LE at the reachable load, in ARM and Thumb alike; a later
+    restoration cannot repair a previously unproved value. Only a later actual
+    read contributes the pointee's exact span. Unmodeled reads, unbounded static
+    addresses and conditional reads can veto alignment, never create ownership.
     No payload or pointer value is serialized.
     """
     rows = []
-    for function in catalogue["functions"]:
+    functions = _decoded_functions(catalogue, analyzer)
+    little_endian = _little_endian_sites(functions, analyzer)
+    incoming_targets = {ins.target[0] for function, decoded in functions for site in decoded
+                        for ins in [analyzer.decode(site, function["isa"])] if ins and ins.target}
+    for function, decoded in functions:
         if function["kind"] == "veneer":
             continue
         isa = function["isa"]
-        decoded = {}
-        for first, end in function["code_ranges"]:
-            cursor = first
-            while cursor < end:
-                instruction = (analyzer.detailed(cursor) if isa == "arm" else next(
-                    analyzer.thumb.disasm(analyzer.text[cursor - analyzer.base:cursor - analyzer.base + 4], cursor, 1), None))
-                if instruction is None:
-                    break
-                decoded[cursor] = instruction
-                cursor += instruction.size
-        joins = {entry["address"] for entry in function["entries"]}
-        joins.update(ins.target[0] for site in decoded
-                     for ins in [analyzer.decode(site, isa)] if ins.branch and ins.target)
+        joins = {entry["address"] for entry in function["entries"]} | incoming_targets
         known = {}
         previous_end = None
         for site, instruction in decoded.items():
@@ -472,6 +712,11 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
                     "invalidation": "all_address_facts" if writes is None else "r0-r7_ip_lr_flags",
                 })
             before = dict(known)
+            if (read_vetoes is not None and instruction.id == arm.ARM_INS_LDR
+                    and ins.pools and site not in little_endian):
+                read_vetoes.append({"function": function["address"], "site": site,
+                                   "start": analyzer.base, "end": analyzer.end,
+                                   "evidence": "unproved_data_endian_pool_value_veto_only"})
             if writes is None:
                 known.clear()
             else:
@@ -507,13 +752,19 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
                 elif ins.pc_add_register is not None and ins.pc_add_register in before:
                     value, origin, _ = before[ins.pc_add_register]
                     known[destination] = ((site + 4 + value) & 0xFFFFFFFF, origin, "constant_plus_thumb_pc")
-                elif ins.register_constant is not None:
+                elif instruction.id in (arm.ARM_INS_MOV, arm.ARM_INS_MOVW) and ins.register_constant is not None:
                     register, value = ins.register_constant
                     known[register] = (value, site, "literal_or_immediate")
-                elif instruction.id == arm.ARM_INS_LDR and ins.pools:
+                elif (instruction.id == arm.ARM_INS_LDR and ins.pools and site in little_endian
+                      and len(operands) == 2 and operands[1].type == arm.ARM_OP_MEM
+                      and operands[1].mem.base == arm.ARM_REG_PC and not operands[1].mem.index
+                      and not instruction.writeback):
                     first, end = ins.pools[0]
-                    if end - first == 4 and analyzer.base <= first <= analyzer.end - 4:
-                        known[destination] = (analyzer.word(first), site, "loaded_pool_pointer")
+                    pc = site + 8 if isa == "arm" else (site + 4) & ~3
+                    if (end - first == 4 and first == pc + operands[1].mem.disp and first % 4 == 0
+                            and analyzer.base <= first <= analyzer.end - 4):
+                        basis = "literal_or_immediate" if isa == "thumb" else "loaded_pool_pointer"
+                        known[destination] = (analyzer.word(first), site, basis)
                 elif (instruction.id == arm.ARM_INS_MOV and len(operands) == 2 and operands[1].type == arm.ARM_OP_REG
                       and not any(operand.shift.type for operand in operands)):
                     if operands[1].reg in before:
@@ -523,7 +774,7 @@ def read_footprints(catalogue: dict, analyzer, *, address_witnesses: list[dict] 
                       and operands[2].type == arm.ARM_OP_IMM and not any(op.shift.type for op in operands)):
                     value, origin, basis = before[operands[1].reg]
                     known[destination] = (value + operands[2].imm * (-1 if instruction.id == arm.ARM_INS_SUB else 1), origin, basis)
-                if address_witnesses is not None and (ins.address_target is not None or ins.pc_add_register is not None):
+                if address_witnesses is not None and isa == "thumb" and (ins.address_target is not None or ins.pc_add_register is not None):
                     formed = known.get(destination)
                     if formed is not None and formed[0] & 1 and analyzer.inside(formed[0] & ~1, "thumb"):
                         address_witnesses.append({"function": function["address"], "site": site,
@@ -870,7 +1121,6 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     evidence["classification_records"] = evidence.get("classification_records", []) + revision["classification_records"]
     evidence["library_identification"] = library
     evidence["library_provenance"] = revision["provenance"]
-    evidence["revision"] = "catalogue-v10-r4"
     inputs[str(revision_path.relative_to(root))] = hashlib.sha256(revision_path.read_bytes()).hexdigest()
     extension_path = root / "research/catalogue_v10_r4_evidence.json"
     extension = json.loads(extension_path.read_bytes())
@@ -895,6 +1145,17 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     evidence["library_identification"] = library
     evidence["library_extension_provenance"] = extension["qualification"]
     inputs[str(extension_path.relative_to(root))] = hashlib.sha256(extension_path.read_bytes()).hexdigest()
+    repair_path = root / "research/catalogue_v10_r5_evidence.json"
+    repair = json.loads(repair_path.read_bytes())
+    descriptor = repair["parent_evidence"]
+    if (root / descriptor["path"] != extension_path
+            or descriptor["sha256"] != inputs[str(extension_path.relative_to(root))]
+            or repair["image_sha256"] != evidence["image_sha256"]
+            or repair["revision"] != "catalogue-v10-r5"):
+        raise ValueError("v10-r5 evidence differs from its frozen parent/image/revision")
+    evidence["revision"] = repair["revision"]
+    evidence["endian_repair"] = repair
+    inputs[str(repair_path.relative_to(root))] = hashlib.sha256(repair_path.read_bytes()).hexdigest()
     return evidence, prior, inputs
 
 
@@ -1030,3 +1291,4 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
             for service, (name, outputs) in sorted(_RAW_SVC_CONTRACTS.items())
         ],
     }
+    candidate["revision_review"]["data_endian_repair"] = evidence["endian_repair"]

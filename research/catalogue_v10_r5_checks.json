@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "revision": "catalogue-v10-r5",
+  "author_checks_only": true,
+  "independent_review": false,
+  "base_commit": "3de76111a448dfaca260fab5630762edb27feb0c",
+  "source_sha256": {
+    "tools/analyze.py": "d1d299a01a43a458c53fc92adc885062b9b5ee801d2d65a2d79c8af7f9710a27",
+    "tools/catalogue_closure.py": "e67f9fd41038b2ca9db32f2c1471a7cdb3c87e30cd6b0b18e77ff121ee658f77",
+    "tests/test_analyze.py": "e16e8fa6fd9a0cf9e93ddc23033e4c3ec593f9ca27e05ebf15390d89353906a4",
+    "tests/test_catalogue_endian.py": "f28b970cb5f57ef7ab3caa42790d0e8ac0321adfadafb669dd55adb12a412c9b",
+    "tests/test_catalogue_endian_cli.py": "1ca1d26b0153dcde35ffe14dc6d4746300363c6873ff79fd3a2b6410ffdeed2f"
+  },
+  "executed_checks": [
+    {
+      "command": ".venv/bin/python -B -m unittest tests.test_catalogue_endian",
+      "receipt": "scratch/closure/v10-r5/endian-tests-r1-command.json",
+      "receipt_sha256": "99632654f406b052eb866d49c549e83acbe781293123b67d31075adca20f9c43",
+      "returncode": 1,
+      "tests_run": 17,
+      "failures": 7,
+      "disposition": "Retained initial author fixture failures: four positive PC-relative cases were already function-owned by existing pool/address guards; two secondary-entry cases lacked a real rooted caller; a forward callback was swallowed by preexisting addressed-data ownership. Corrected real fixtures/root placement, not production proof or acceptance assertions. No source change or unchanged failing-head retry."
+    },
+    {
+      "command": ".venv/bin/python -B -m unittest tests.test_catalogue_endian",
+      "receipt": "scratch/closure/v10-r5/endian-tests-r2-command.json",
+      "receipt_sha256": "cfecadef2a67b76250840f9a35281b21d300e333c1c1a4da9f84ccf568503410",
+      "returncode": 0,
+      "tests_run": 17,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.3032657659787219
+    },
+    {
+      "command": ".venv/bin/python -B -m unittest tests.test_catalogue_endian_cli",
+      "receipt": "scratch/closure/v10-r5/endian-cli-r1-command.json",
+      "receipt_sha256": "d829148e192d2ebb41eefcf0a6b9241815942dc23dd4f7e16a05a46c22a60fba",
+      "returncode": 0,
+      "tests_run": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.4462483850074932,
+      "coverage": "Actual tools/analyze.py catalogue subprocess with real synthetic Git blob/child inputs writes r5, preserves the unread target as unknown, and keeps the existing nonzero stderr refusal for a changed child hash."
+    },
+    {
+      "command": ".venv/bin/python -B scratch/closure/v10-r5/endian-public-probe.py",
+      "receipt": "scratch/closure/v10-r5/endian-public-r1-command.json",
+      "receipt_sha256": "98b21297aaca27bcce5536f3797a3f9a8c5ccab8da4102dc671b3d4633a44abe",
+      "probe_sha256": "8d095f887fd05b20d1bde1836d0259c2711bb050de5fb82195f6854662991a99",
+      "returncode": 0,
+      "seconds": 0.5767310560040642,
+      "result": "scratch/closure/v10-r5/endian-public.json",
+      "result_sha256": "842cd08796afce04cb3f30bdb42a0f96265325d35573307526a03aaa1950a838",
+      "result_bytes": 1132,
+      "finding": "V10R4-R01",
+      "candidate_kind_at_0x0010002c": "unknown",
+      "false_positive_reads": 0,
+      "executed_byte_read": "0x2c001000",
+      "callee_saved_and_sp_lr_preserved": true,
+      "little_endian_return": true,
+      "structural_issues": []
+    },
+    {
+      "command": ".venv/bin/python -B -m unittest tests.test_catalogue_endian tests.test_catalogue_endian_cli",
+      "receipt": "scratch/closure/v10-r5/endian-tests-r3-command.json",
+      "receipt_sha256": "c89685b9ac9d83b65e94af7dc76a84137b1c194147c8aa4936e21c01730566ff",
+      "returncode": 0,
+      "tests_run": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.5536446319893003,
+      "coverage": "Final source revision includes veneer ingress and pre-entry-recording secondary ingress, plus four additional consumer methods for veneer paths, service-output regression, ordinary pair/multiple/VFP state preservation and branch-join restoration."
+    },
+    {
+      "command": ".venv/bin/python -B scratch/closure/v10-r5/endian-public-final-probe.py",
+      "receipt": "scratch/closure/v10-r5/endian-public-final-command.json",
+      "receipt_sha256": "c1ad2ce7c53169007807d3cee5d10d8ccfafcaf10459289e08fe4f1fc2f53fae",
+      "probe_sha256": "2b5ef2c0547f59a0e809397209c8b70a5d8d4b13938201e56099877fdac5189c",
+      "returncode": 0,
+      "seconds": 0.16612743100267835,
+      "result": "scratch/closure/v10-r5/endian-public-final.json",
+      "result_sha256": "91683b25d23f39aa57c8c0fc4e31984f14216682d2204d36f580cb6e35687c89",
+      "result_bytes": 1132,
+      "finding": "V10R4-R01",
+      "candidate_kind_at_0x0010002c": "unknown",
+      "false_positive_reads": 0,
+      "executed_byte_read": "0x2c001000",
+      "callee_saved_and_sp_lr_preserved": true,
+      "little_endian_return": true,
+      "structural_issues": [],
+      "qualification": "One final-head synthetic probe after substantive ingress guard source edits, with a fresh exclusive result name. The earlier source-version probe is retained; no unchanged failure retry or real-image generation occurred."
+    }
+  ],
+  "verification_not_run": [
+    "Integrated full suite or original-image invariant test",
+    "Current-image catalogue generation or unchanged-image delta check",
+    "Fresh compilation, matching, full build, lint or formatter",
+    "Current Main accepted/c009/c010 protection/accounting compatibility",
+    "Fresh independent review or adoption"
+  ],
+  "qualification": "Only hand-encoded synthetic instructions were executed, decoded or serialized here. The sealed failing r4 head was not rerun. No original executable bytes/disassembly, packets or licensed library payloads are included. Prior failed/sealed records and accepted/model identities are untouched; v11 runtime closures are not included."
+}
