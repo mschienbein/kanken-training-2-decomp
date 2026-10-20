@@ -1081,6 +1081,137 @@ def _validate_declared_extents(records: list[dict], extension: dict) -> None:
         raise ValueError("unresolved runtime identities must retain ordinary C eligibility")
 
 
+def _metadata_sha(value: dict | list) -> str:
+    return hashlib.sha256((json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode()).hexdigest()
+
+
+def load_protection_inputs(root: Path, parent_path: Path, runtime: dict) -> tuple[dict, dict[str, str]]:
+    """Bind the successor's exact metadata transitions and the live prepared ledger."""
+    path = root / "research/catalogue_v11_r2_evidence.json"
+    payload = path.read_bytes()
+    revision = json.loads(payload)
+    parent = revision["parent_evidence"]
+    literal = revision["literal_evidence"]
+    if (root / parent["path"] != parent_path
+            or hashlib.sha256(parent_path.read_bytes()).hexdigest() != parent["sha256"]
+            or revision["image_sha256"] != runtime["image_sha256"]
+            or revision["revision"] != "catalogue-v11-r2" or revision["new_C_credit"] != 0
+            or revision["prepared_protection"] != runtime.get("prepared_protection")):
+        raise ValueError("v11-r2 protection evidence differs from its immutable parent/image")
+    inputs = {str(path.relative_to(root)): hashlib.sha256(payload).hexdigest()}
+    literal_path = root / literal["path"]
+    if (literal_path != root / "research/catalogue_v10_evidence.json"
+            or hashlib.sha256(literal_path.read_bytes()).hexdigest() != literal["sha256"]):
+        raise ValueError("v11-r2 literal evidence differs from its frozen input")
+    inputs[literal["path"]] = literal["sha256"]
+    snapshot = runtime.get("_prepared_protection")
+    if snapshot is not None:
+        identities = snapshot["identities"]
+        if (len(identities) != snapshot["identity_count"]
+                or len({row["address"] for row in identities}) != len(identities)):
+            raise ValueError("v11-r2 prepared identity snapshot has duplicate or missing identities")
+        for field in ("adopted_catalogue", "ledger", "names", "prepare", "selection"):
+            descriptor = snapshot[field]
+            content = (root / descriptor["path"]).read_bytes()
+            if len(content) != descriptor["size"] or hashlib.sha256(content).hexdigest() != descriptor["sha256"]:
+                raise ValueError(f"v11-r2 prepared {field} differs from its frozen input")
+            inputs[descriptor["path"]] = descriptor["sha256"]
+        ledger = json.loads((root / snapshot["ledger"]["path"]).read_bytes())
+        names = json.loads((root / snapshot["names"]["path"]).read_bytes())["symbols"]
+        claims = [(name, (names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1,
+                   unit["source"], unit["profile"]) for unit in ledger["units"] for name in unit["functions"]]
+        if (len(claims) != len(identities) or set(claims) != {
+                (row["name"], row["address"], row["source"], row["profile"]) for row in identities}):
+            raise ValueError("v11-r2 prepared snapshot does not describe the complete ledger")
+        changed = {row["owner"]: row for row in identities if row["previous_metadata_changed"]}
+        transitions = revision["protected_record_transitions"]
+        if (len(transitions) != len(changed) or {row["address"] for row in transitions} != changed.keys()
+                or any((row["before_sha256"], row["after_sha256"]) != (
+                    changed[row["address"]]["adopted_record_sha256"],
+                    changed[row["address"]]["proposal_record_sha256"]) for row in transitions)):
+            raise ValueError("v11-r2 transitions do not bind every exact inherited metadata repair")
+    for row in revision["protected_record_transitions"]:
+        descriptor = row["source"]
+        content = (root / descriptor["path"]).read_bytes()
+        if hashlib.sha256(content).hexdigest() != descriptor["sha256"]:
+            raise ValueError("v11-r2 metadata repair source differs from its retained compatibility proof")
+        inputs[descriptor["path"]] = descriptor["sha256"]
+    return revision, inputs
+
+
+def resolve_protected_records(protected: dict[int, dict], analyzer, evidence: dict,
+                              literal_encodings: list[dict]) -> tuple[dict[int, dict], list[dict]]:
+    """Derive only approved inline-literal repairs before any complete-record guard.
+
+    Never import proposed records into the recovered catalogue. Old/new complete
+    records are comparison witnesses; the expected successor is independently
+    derived from the old record and exact original typed-object bounds. Discovery,
+    partitioning, classifications and the final check must reproduce it themselves.
+    """
+    revision = evidence.get("protection_revision")
+    if revision is None:
+        return dict(protected), []
+    if hashlib.sha256(analyzer.image).hexdigest() != revision["image_sha256"]:
+        raise ValueError("protected metadata transition belongs to another image")
+    resolved, receipts, seen = dict(protected), [], set()
+    for row in revision["protected_record_transitions"]:
+        address, before, after = row["address"], row["before"], row["after"]
+        if (address in seen or before["address"] != address or before["kind"] != "function"
+                or _metadata_sha(before) != row["before_sha256"] or _metadata_sha(after) != row["after_sha256"]
+                or before == after or {key: value for key, value in before.items() if key != "literals"}
+                != {key: value for key, value in after.items() if key != "literals"}):
+            raise ValueError("protected metadata transition changes an unapproved complete record")
+        seen.add(address)
+        compatibility = row["retained_compatibility"]
+        if (compatibility["status"] != "match" or compatibility["size"] != before["size"]
+                or compatibility["before_outcome_sha256"] != compatibility["after_outcome_sha256"]
+                or compatibility["linker_model"] != "armlink5-inline-branchnop-v6"
+                or compatibility["literal_model"] != "anonymous-string-records-v1"):
+            raise ValueError("protected metadata transition changes its retained source/object contract")
+        end = address + before["size"]
+        if (not analyzer.base <= address < end <= analyzer.end
+                or hashlib.sha256(analyzer.text[address - analyzer.base:end - analyzer.base]).hexdigest()
+                != row["original_extent_sha256"]):
+            raise ValueError("protected metadata transition lacks its unchanged original extent")
+        literals = [item for item in literal_encodings if item["function"] == address]
+        if (not literals or _metadata_sha(literals) != row["literal_witnesses_sha256"]
+                or len({item["target"] for item in literals}) != len(literals)):
+            raise ValueError("protected metadata transition lacks its exact typed literal witnesses")
+        spans = [tuple(span) for span in before["literals"]]
+        for literal in literals:
+            first, stop = literal["target"], literal["end"]
+            aligned_end = (stop + 3) & ~3
+            if (literal["encoding"] != "utf-16le" or not literal["references"]
+                    or not address <= first < stop <= aligned_end <= end
+                    or analyzer._utf16_string_end(first) != stop
+                    or hashlib.sha256(analyzer.text[first - analyzer.base:stop - analyzer.base]).hexdigest()
+                    != literal["image_interval_sha256"]
+                    or any(analyzer.text[stop - analyzer.base:aligned_end - analyzer.base])
+                    or any(first < hi and lo < aligned_end for lo, hi in before["code_ranges"] + before["pools"])
+                    or any(first <= entry["address"] < aligned_end for entry in before["entries"])
+                    or any(not any(lo <= site < hi for lo, hi in before["code_ranges"])
+                           for site in literal["references"])):
+                raise ValueError("protected metadata transition has an unproved inline literal bound")
+            spans.append((first, aligned_end))
+        merged = []
+        for first, stop in sorted(spans):
+            if merged and first <= merged[-1][1]:
+                merged[-1][1] = max(merged[-1][1], stop)
+            else:
+                merged.append([first, stop])
+        derived = {**before, "literals": merged}
+        if derived != after:
+            raise ValueError("protected metadata transition does not equal the derived complete successor")
+        for identity, expected in protected.items():
+            if expected["address"] == address:
+                if expected != before and expected != derived:
+                    raise ValueError(f"protected function {identity:#x} differs from both approved metadata records")
+                resolved[identity] = derived
+        receipts.append({key: row[key] for key in (
+            "address", "before_sha256", "after_sha256", "original_extent_sha256", "literal_witnesses_sha256")})
+    return resolved, receipts
+
+
 def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     """Load immutable metadata witnesses, never changing author directories."""
     path = root / "research/catalogue_v10_evidence.json"
@@ -1160,8 +1291,12 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     else:
         import catalogue_runtime_data
     runtime_data, runtime_inputs = catalogue_runtime_data.load_inputs(root, repair_path)
+    protection, protection_inputs = load_protection_inputs(
+        root, root / "research/catalogue_v11_evidence.json", runtime_data)
+    evidence["protection_revision"] = protection
     evidence["runtime_data"] = runtime_data
-    evidence["revision"] = runtime_data["revision"]
+    evidence["revision"] = protection["revision"]
+    inputs.update(protection_inputs)
     inputs.update(runtime_inputs)
     return evidence, prior, inputs
 
@@ -1335,3 +1470,5 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
         ],
     }
     candidate["revision_review"]["data_endian_repair"] = evidence["endian_repair"]
+    candidate["revision_review"]["protected_metadata_transitions"] = candidate["closure_evidence"].get(
+        "protected_metadata_transitions", [])

@@ -2186,6 +2186,15 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
                     closure: dict | None = None) -> dict:
     """Return deterministic schema-v1 metadata, preserving ambiguity as anomalies/unknown."""
     analyzer = Analyzer(image, layout)
+    protected_functions = protected_functions or {}
+    metadata_transitions = []
+    if closure is not None:
+        if __package__:
+            from . import catalogue_closure
+        else:
+            import catalogue_closure
+        protected_functions, metadata_transitions = catalogue_closure.resolve_protected_records(
+            protected_functions, analyzer, closure, literal_encodings or [])
     for record in classifications or []:
         if "original_extent_sha256" in record:
             first = layout.file_offset(record["address"])
@@ -2371,11 +2380,8 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
     }
     result = _split_linker_tail_extents(result, analyzer, protected_functions or {})
     if closure is not None:
-        if __package__:
-            from . import catalogue_closure
-        else:
-            import catalogue_closure
         catalogue_closure.close_catalogue(result, analyzer, closure, protected_functions or {})
+        result["closure_evidence"]["protected_metadata_transitions"] = metadata_transitions
     deferred_entries = ({record["address"] for record in closure["runtime_data"].get("entry_fragments", [])}
                         if closure is not None and "runtime_data" in closure else set())
     preserve_prior_entries(result, [function for function in prior_functions or [] if function["address"] not in deferred_entries])
@@ -2582,12 +2588,12 @@ def main(argv: list[str] | None = None) -> int:
         layout = ctrfmt.parse_exheader(exheader)
         evidence_path = ROOT / "research/catalogue_v9_r2_evidence.json"
         evidence = catalogue_review.load(evidence_path)
-        protected, protected_summary, inputs = load_protected_functions(
-            ROOT, baseline, args.protect_manifest, git_blobs=evidence.get("protected_git_blobs", []))
         bundled = args.classifications is None and hashlib.sha256(image).hexdigest() == evidence["image_sha256"]
         records = (catalogue_review.load(args.classifications) if args.classifications
                    else evidence["classification_records"] if bundled else [])
         withheld = []
+        inputs = {}
+        manifests = list(args.protect_manifest)
         if bundled:
             if __package__:
                 from . import catalogue_closure
@@ -2597,6 +2603,9 @@ def main(argv: list[str] | None = None) -> int:
             if closure_evidence["image_sha256"] != evidence["image_sha256"]:
                 raise ValueError("closure evidence image differs from its parent")
             inputs.update(closure_inputs)
+            snapshot = closure_evidence["runtime_data"].get("_prepared_protection")
+            if snapshot is not None:
+                manifests.append(ROOT / snapshot["ledger"]["path"])
             records = records + closure_evidence.get("classification_records", [])
             evidence = {**evidence, "revision": closure_evidence["revision"],
                         "literal_encodings": evidence.get("literal_encodings", []) + closure_evidence["literal_encodings"],
@@ -2605,6 +2614,12 @@ def main(argv: list[str] | None = None) -> int:
                                        "catalogue_v10_r4": closure_evidence["library_extension_provenance"],
                                        "catalogue_v10_r5": closure_evidence["endian_repair"]["provenance"],
                                        "catalogue_v11": closure_evidence["runtime_data"]["qualification"]}}
+        protected, protected_summary, protected_inputs = load_protected_functions(
+            ROOT, baseline, manifests, git_blobs=evidence.get("protected_git_blobs", []))
+        inputs.update(protected_inputs)
+        if bundled:
+            protected, _ = catalogue_closure.resolve_protected_records(
+                protected, Analyzer(image, layout), closure_evidence, evidence["literal_encodings"])
             # A reviewed reclassification cannot silently outrank an accepted or
             # in-flight complete record. Explicit classification inputs instead
             # reach build_catalogue's final invariant and fail on any conflict.
@@ -2631,7 +2646,7 @@ def main(argv: list[str] | None = None) -> int:
                    for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v11",
+            "revision": "catalogue-v11-r2",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

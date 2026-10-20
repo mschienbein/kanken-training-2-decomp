@@ -79,7 +79,17 @@ def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dic
         "sections": [], "new_C_credit": 0, "qualification": "synthetic complete-section closure",
         "historical_negative_measurements": {},
     }
-    (root / "research/catalogue_v11_evidence.json").write_text(json.dumps(runtime))
+    runtime_path = root / "research/catalogue_v11_evidence.json"
+    runtime_path.write_text(json.dumps(runtime))
+    protection = {
+        "revision": "catalogue-v11-r2", "image_sha256": image_sha256, "new_C_credit": 0,
+        "parent_evidence": {"path": str(runtime_path.relative_to(root)),
+                            "sha256": hashlib.sha256(runtime_path.read_bytes()).hexdigest()},
+        "literal_evidence": {"path": str(parent.relative_to(root)),
+                             "sha256": hashlib.sha256(parent.read_bytes()).hexdigest()},
+        "prepared_protection": None, "protected_record_transitions": [],
+    }
+    (root / "research/catalogue_v11_r2_evidence.json").write_text(json.dumps(protection))
     return revision
 
 
@@ -1450,14 +1460,15 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v11")
-                self.assertEqual(result["generator"]["revision"], "catalogue-v11")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v11-r2")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v11-r2")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r4_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r5_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_r2_evidence.json", result["generator"]["input_sha256"])
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
@@ -1735,8 +1746,15 @@ class CatalogueTests(unittest.TestCase):
         adopted = json.loads((ROOT / "config/catalogue.json").read_bytes())
         evidence = json.loads((ROOT / "research/catalogue_v9_r2_evidence.json").read_bytes())
         closure, _, _ = catalogue_closure.load_inputs(ROOT, ROOT / "research/catalogue_v9_r2_evidence.json")
+        prepared = closure["runtime_data"]["_prepared_protection"]
         protected, _, _ = analyze.load_protected_functions(
-            ROOT, adopted, [], git_blobs=evidence["protected_git_blobs"])
+            ROOT, adopted, [ROOT / prepared["ledger"]["path"]], git_blobs=evidence["protected_git_blobs"])
+        protected, transitions = catalogue_closure.resolve_protected_records(
+            protected, analyze.Analyzer(image, layout), closure,
+            evidence["literal_encodings"] + closure["literal_encodings"])
+        self.assertEqual({row["address"] for row in transitions}, {0x203A68, 0x1E81FC})
+        self.assertEqual(prepared["identity_count"], 2297)
+        self.assertLessEqual({row["address"] for row in prepared["identities"]}, protected.keys())
         adopted_functions = {function["address"]: function for function in adopted["functions"]}
         scratch = ROOT / "scratch"
         scratch.mkdir(exist_ok=True)
@@ -1751,6 +1769,12 @@ class CatalogueTests(unittest.TestCase):
         functions = {function["address"]: function for function in first["functions"]}
         for address, expected in protected.items():
             self.assertEqual(functions[expected["address"]], expected, f"{address:#x}")
+        self.assertEqual({row["address"] for row in first["revision_review"]["protected_metadata_transitions"]},
+                         {0x203A68, 0x1E81FC})
+        self.assertEqual(first["revision_review"]["protected_metadata_transitions"], transitions)
+        for row in prepared["identities"]:
+            self.assertEqual(hashlib.sha256(analyze.serialize_catalogue(functions[row["owner"]])).hexdigest(),
+                             row["proposal_record_sha256"])
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
                           first["stats"]["creditable_bytes"]), (4744, 4582, 1123224))
         self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
@@ -2490,6 +2514,7 @@ class CatalogueClosureTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v10_r4_evidence.json", inputs)
                 self.assertIn("research/catalogue_v10_r5_evidence.json", inputs)
                 self.assertIn("research/catalogue_v11_evidence.json", inputs)
+                self.assertIn("research/catalogue_v11_r2_evidence.json", inputs)
                 for field in ("parent_evidence", "baseline_catalogue"):
                     changed = json.loads(json.dumps(evidence))
                     changed[field]["sha256"] = "0" * 64
