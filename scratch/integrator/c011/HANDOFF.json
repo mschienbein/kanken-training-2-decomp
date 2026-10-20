@@ -1,60 +1,72 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "checkpoint": "c011",
-  "status": "resumed-source-milestone-parent-merge-and-bounded-closure-pending",
+  "status": "committed-source-collection-current-pair-isolated-witnesses-not-gated",
   "branch": "c011-integrate",
   "worktree": "scratch/worktrees/c011",
-  "initial_base": "36924e7c42eed98ee07bb8ed72a6bb0c945912dc",
-  "latest_c010_tip_merged": "eabf1d5e36d02f545f67fbc609c5b301c042902d",
-  "gate_revision": "v1.19; default checkpoint remains v2/none",
+  "recovered_tip": "76f628fd46017d1ce7aea59f8d6532db17937f8a",
+  "preservation_commit": "dafd2b23855914d5b01ef5f9eb70122dd6c92058",
+  "main_tip_merged": "261fdc9804c2ff34eaa224f30142d2b2f23e8ff2",
+  "main_merge_commit": "058cf28f796bccaee75d6de9360168a288210b22",
+  "latest_c010_tip_merged": "4138720f91f749c36872404050ae7aef7831cbc6",
+  "c010_merge_commit": "fc65c3a34b16bc5db2bbef665ad00e758f4d3fe1",
+  "c009_tip_already_ancestor": "444fc847ef9247ca0ecf23e22a0299dd2841fe82",
+  "gate_revision": "v1.19 unchanged",
+  "denominator": "v9-r2 unchanged",
+  "accepted_baseline": {
+    "sequence": 9,
+    "checkpoint": "cmodels",
+    "functions": 1621,
+    "target_bytes": 195908
+  },
   "models": {
-    "linker_model": "armlink5-inline-branchnop-v2",
-    "literal_model": "none"
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
   },
+  "historical_model_qualification": "Previous v2/none witnesses and scope records stay unchanged and do not select current c011. Accepted ledger requires explicit v6/L1. cmodels2 alone targets v8/L1.",
   "summary": {
-    "scope_functions": 85,
-    "scope_target_bytes": 14448,
-    "collected_units": 42,
-    "collected_functions": 45,
-    "collected_target_bytes": 5660,
-    "deferred_functions": 40,
-    "deferred_target_bytes": 8788,
-    "context_rehomed_functions": 10,
-    "context_rehomed_target_bytes": 984,
-    "candidate_claimed_functions": 55,
-    "candidate_claimed_target_bytes": 6644,
-    "unowned_or_unresolved_dispositions": 0
-  },
-  "publication_snapshot": {
-    "author_manifests": 1081,
-    "scope_records": [
-      "SCOPE.json",
-      "SCOPE-SUPPLEMENT-r2.json",
-      "SCOPE-SUPPLEMENT-r3.json",
-      "SCOPE-SUPPLEMENT-r4.json"
-    ],
-    "last_scope_record": "SCOPE-SUPPLEMENT-r4.json",
-    "default_model_identities": 85,
-    "qualified_steering_witnesses_separate": 1,
-    "later_publications": "Outside this immutable publication seal; no silent completeness claim for future publications."
+    "scope_functions": 148,
+    "scope_target_bytes": 25920,
+    "collected_units": 70,
+    "collected_new_functions": 76,
+    "collected_new_target_bytes": 10092,
+    "contract_deferred_functions": 72,
+    "contract_deferred_target_bytes": 15828,
+    "context_move_functions": 10,
+    "context_move_target_bytes": 984,
+    "candidate_claimed_functions": 86,
+    "candidate_claimed_target_bytes": 11076,
+    "isolated_destination_runs": 76,
+    "isolated_target_matches": 92
   },
   "candidate_manifest": "config/candidates/c011.json",
+  "candidate_manifest_sha256": "4faa4dd4550853bf6037c90a0920600868af0009497082e19586f17e0ab4a389",
   "candidate_profiles": {
-    "game": 22,
-    "sdk": 5,
-    "middleware": 15
+    "game": 39,
+    "sdk": 9,
+    "middleware": 22
   },
-  "dispositions": "DISPOSITIONS-r2.json",
-  "source_cutovers": [
-    "SOURCE-CUTOVERS-r1.json",
-    "MATH-ACCESSOR-DEFERRAL-r2.json"
+  "dispositions": "DISPOSITIONS-r3.json",
+  "consumed_results": "CONSUMED-RESULTS-r6.json",
+  "scope_records": [
+    "SCOPE.json",
+    "SCOPE-SUPPLEMENT-r2.json",
+    "SCOPE-SUPPLEMENT-r3.json",
+    "SCOPE-SUPPLEMENT-r4.json",
+    "SCOPE-SUPPLEMENT-r5.json",
+    "SCOPE-SUPPLEMENT-r6.json"
   ],
+  "scope_sha256": "c6c66c4b2434cb4de1b8e53ee9e3674590e10b07902e0d658055ca0fdae77cdb",
+  "ownership_basis": "OWNERSHIP-INPUTS-r6.json",
+  "contract_reconciliation": "CONTRACT-RECONCILIATION-r6.json",
+  "permuter_classification": "PERMUTER-CLASSIFICATION-r1.json",
   "name_proofs": [
     "NAMES-PROVENANCE-r1.json",
     "NAMES-PROVENANCE-r2.json",
     "NAMES-PROVENANCE-r3.json",
     "NAMES-PROVENANCE-r5.json"
   ],
+  "names_adopted_this_resume": [],
   "collection_evidence": [
     "COLLECT-r1.json",
     "COLLECT-r2.json",
@@ -63,49 +75,31 @@
     "COLLECT-r5.json",
     "COLLECT-r6.json",
     "COLLECT-r7.json",
-    "COLLECT-r8.json"
+    "COLLECT-r8.json",
+    "COLLECT-r9.json",
+    "COLLECT-r10.json",
+    "COLLECT-r11.json",
+    "COLLECT-r12.json",
+    "COLLECT-r13.json",
+    "COLLECT-r14.json",
+    "COLLECT-r15.json"
   ],
-  "per_unit_evidence": {
-    "post_cutover": "POST-CUTOVER-r4.json",
-    "units": 49,
+  "current_destination_evidence": {
+    "path": "DESTINATION-MATCH-r16.json",
+    "sha256": "fc5f96f7af8f407808f1cd56ffb76a0e4ae4dfcc82066320b5d4127472ae3367",
+    "isolated_runs": 76,
+    "candidate_units": 70,
+    "dependency_units": 6,
+    "targets": 92,
     "all_targets_match": true,
-    "bounded_interface": "INTERFACES-r4.json",
-    "bounded_interface_units": 53,
-    "final_native_text_receiver": "TEXT-FLOW-Y-NATIVE-r8.json",
-    "qualification": "Earlier bounded dependency closure plus destination rederivations; final closure after parent merge not yet claimed."
+    "exit_codes": {
+      "0": 76
+    },
+    "explicit_models": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    }
   },
-  "accepted_source_revisions": [],
-  "unexercised": [
-    "G3 whole-ledger interfaces",
-    "argcheck and adjudication",
-    "whole emitted-owner audit",
-    "pre-review",
-    "full build",
-    "full test suite",
-    "prepare",
-    "independent checkpoint reviews",
-    "finalize",
-    "push"
-  ],
-  "serialization": "No heavy slot was requested or used. Main grants readiness work only after c010. All collection/match compilations here were sequential and nice10.",
-  "remaining_blockers": [
-    "40 scoped default MATCHes have exact contract-resolution deferrals, not rejected witnesses.",
-    "One separately recorded default permuter witness is steering-qualified and not natural-C adoption.",
-    "Merge the latest c010 tip and retire its superseded cutoff/context owners in c011.",
-    "Final bounded interface/header-dependent unit closure after parent merge; whole-ledger readiness remains Main-owned after c010."
-  ],
-  "next_main_checks": [
-    "Merge c011 only after normal isolated integration of the predecessor checkpoints; main was not edited here.",
-    "Build the proposed ledger from the current accepted ledger, c008-r3/c009/c010 including c010 moves, and c011 additions without duplicating function owners.",
-    "After the c010 heavy slot, run whole-ledger interfaces, argcheck/adjudication, emitted-owner closure and pre-review; prepare only with an explicitly frozen v2/none selection after those pass."
-  ],
-  "qualifications": [
-    "45 new collected defaults/5660B,40 deferrals/8788B;10 context moves/984B carry no new progress.",
-    "Source candidates are unaccepted; no heavy gates, prepare, review or acceptance claim.",
-    "Math overlap and TU952 return-type interaction are retained as explicit deferrals."
-  ],
-  "main_tip_merged": "f24fa0b2982069c227ceb1c0111248acca55c1d5",
-  "next_c010_tip": "c407dda52e3816e5bab2e21d9ee57fb43c258cc3",
   "context_moves": [
     {
       "function": "func_00152560",
@@ -130,43 +124,103 @@
     {
       "function": "func_001650f8",
       "from": "src/checkpoint10/alternate1/func_001650f8.c",
-      "to": "src/checkpoint11/archive_block_queries-r3.c"
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
     },
     {
       "function": "func_001f1ebc",
       "from": "src/checkpoint10/alternate1/func_001650f8.c",
-      "to": "src/checkpoint11/archive_block_queries-r3.c"
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
     },
     {
       "function": "func_001f1ed8",
       "from": "src/checkpoint10/alternate1/func_001650f8.c",
-      "to": "src/checkpoint11/archive_block_queries-r3.c"
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
     },
     {
       "function": "func_001f1f20",
       "from": "src/checkpoint10/alternate1/func_001650f8.c",
-      "to": "src/checkpoint11/archive_block_queries-r3.c"
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
     },
     {
       "function": "func_001f1f34",
       "from": "src/checkpoint10/alternate1/func_001650f8.c",
-      "to": "src/checkpoint11/archive_block_queries-r3.c"
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
     },
     {
       "function": "func_001f1f4c",
       "from": "src/checkpoint10/alternate1/func_001650f8.c",
-      "to": "src/checkpoint11/archive_block_queries-r3.c"
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
     }
   ],
-  "revised_units": [
+  "parent_revised_sources": [
     {
-      "from": "src/wave13/func_00152560.c",
-      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp",
-      "functions": [
-        "func_00152560"
-      ],
-      "reason": "Accepted context rehome into the complete auxiliary-operation TU; exact destination MATCH, no new credit."
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "source_sha256": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33"
+    },
+    {
+      "source": "src/checkpoint10/func_001d31cc.cpp",
+      "source_sha256": "e84ff629ac70b5998c151bcdf7153eb64ea01e0543155c433467fd920219f26f"
     }
   ],
-  "accepted_math_revision_performed": false
+  "accepted_source_revisions": [
+    "src/wave13/func_00152560.c -> src/checkpoint11/dsp_auxiliary-r5.cpp (previously authorized move, no new credit)"
+  ],
+  "accepted_math_revision_performed": false,
+  "mandatory_deferrals": [
+    {
+      "function": "func_00116064",
+      "reason": "Main conditionally authorized a single native math accessor only if predecessor branches did not touch the accepted transform/accessor family. The observed c010 diff includes MatrixIdentityW8C/matrix34Identity definitions in c5f4_final2.cpp and func_0010dd88.cpp, so the overlap condition stops the cutover. Accepted00180234 is unchanged; no cast, second helper or legacy-identity extension is imported. TU952 separately proposes const nw::gfx::CalculatedTransform* for00180234 versus the current mutable TransformComponentsW8C*; the same64-byte identity/return-type family must be reconciled with the accessor cutover."
+    },
+    {
+      "function": "func_001ce9e8",
+      "reason": "The whole native Layout::Build MATCH proves its own body and natural AppendChild/group calls, but001822fc is an accepted RegistrationOwner*/RegistrationEntry* C definition, not Pane::AppendChild(Pane*). This actual receiver/argument contract needs an accepted-unit migration not planned by c010. Three proven native name proposals are retained in provenance but are not admitted for this deferred row."
+    },
+    {
+      "function": "func_001d67c8",
+      "reason": "Dispatcher helper001d7318 is declared unsigned-char(StreamVoice*,StreamVoiceEvent*,const StreamVoiceSetup*,const void*,int,int), while decoded definition is int(StreamLoadState*,StreamLoadResult*,void**,unsigned,unsigned,int). Partial kind/priority/active and codec state layouts do not prove common owner. Preserve sixth input; no aliases/casts promoted."
+    },
+    {
+      "function": "func_001d7318",
+      "reason": "Decoded loader MATCH preserves real six-input and int result contract plus original unbounded eight-channel copy bug, but incoming dispatcher exposes incompatible state/result/pointer/capacity formals. Canonicalize dispatcher and loader with actual typed prefixes and ABI evidence before collection; never alias StreamSound or StreamVoice by offsets."
+    }
+  ],
+  "publication_snapshot": {
+    "step5_input": "STEP5-INPUT-r6.json",
+    "step5_input_sha256": "b9e567112b3c11dd2bcc776c64693f61a6084eb38b940ee55efb796c88e7ff11",
+    "upstream_intake_sha256": "42dcee0f2972181104e94e97b7b217f15aa073332ceb27563c2fa346b00bc149",
+    "metadata_snapshot_sha256": "4b7a16b61ca56ff41b3fa615d221d45b40eca414999e1309774140ff3cb0b5c7",
+    "intake_rows": 110,
+    "intake_unique_functions": 106,
+    "scoped_identities": 148,
+    "explicit_late_manifests": [
+      "scratch/authors/tu1095/RESULT.json",
+      "scratch/authors/np015/RESULT.json"
+    ],
+    "qualification": "Exact bounded snapshot; no claim of future/all-publication completeness. Every named RESULT row has consumed hash/key; predecessor exclusions remain reserved."
+  },
+  "unexercised": [
+    "G3 whole-ledger interfaces",
+    "argcheck and adjudication",
+    "whole emitted-owner audit",
+    "complete shared-header dependent match closure",
+    "seven-step pre-review",
+    "full integrated builds",
+    "full test suite",
+    "prepare",
+    "independent checkpoint review",
+    "finalize",
+    "push"
+  ],
+  "serialization": "No heavy job run or slot used. Only sequential nice10 per-unit collection/match witnesses under main interpreter; ResumeC009 retains heavy slot until Main releases it.",
+  "next_main_checks": [
+    "Main composes current accepted seq9 ledger with finalized c009 and c010, then applies c011 additions and exactly ten recorded context moves; nine parent moves activate only after c010 finalizes. No function may disappear or have two emitted owners.",
+    "Propagate source/hash-bound reserved refinements0014cc9c and001d31cc to predecessor integration rather than losing them in a later parent merge. Four older paired parent targets001d0348/001d2234/001f478c/001c7760 retain existing reservations and destination proof.",
+    "After heavy-slot release, recompute header-dependent accepted/parent-unit closure for all revised shared headers. Current76 isolated runs prove their listed targets only, not whole-ledger G3 or dependency completeness.",
+    "Run whole-ledger interfaces(G3), caller contracts(argcheck), manual C++ incoming/outgoing/lifetime adjudication and emitted-owner closure; retain exact source/receipt hashes and immutable -rN failures.",
+    "Run seven-step pre-review and full integrated suite/builds once when sources settle. Prepare explicitly with --linker-model armlink5-inline-branchnop-v6 --literal-model anonymous-string-records-v1; Main alone prepares/finalizes/pushes.",
+    "Future publication refresh deduplicates CONSUMED-RESULTS-r6.json row/function keys and preserves DISPOSITIONS-r3.json deferrals. Reopen only with evidence-backed accepted owner/signature moves; tu1014/00116064 and001ce9e8 remain blocked.",
+    "PERMUTER-CLASSIFICATION-r1.json steering-qualified001ad708/001ae140 remain unadmitted;001ea6d8 remains its prior real ownership deferral. Do not rerun searches or turn the exact byte witness into an unqualified natural-source claim."
+  ],
+  "historical_handoff": "HANDOFF-before-resume-r6.json",
+  "qualification": "Candidate collection only:70units/86claims includes10context moves;76new identities/10092B are unaccepted.72contract deferrals/15828B preserve original witnesses. No accepted identity disappears, no accepted-record writes, no gate/model/denominator reinterpretation."
 }

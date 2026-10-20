@@ -112,6 +112,33 @@ struct ServiceCoordinator {
     unsigned char reserved132c[0x15b0 - 0x132c];
     unsigned char publish;
 };
+/* [INFERENCE] Command-queue view starts at +0x10b4, distinct from
+ * ServiceCoordinator.storage at +0x109c. The coefficient-copy consumer
+ * establishes the destination pointee; no native owner equivalence is claimed. */
+struct ServiceCommandW22E {
+    unsigned flags;
+    unsigned char reserved04[0x34 - 4];
+    float value;
+    unsigned char reserved38[0xb0 - 0x38];
+    unsigned parameter;
+    unsigned char reservedb4[8];
+    unsigned short options, identifier;
+};
+struct ServiceCommandDescriptorW22E {
+    unsigned char reserved00[8];
+    unsigned short identifier;
+};
+struct AdpcmCoefficients;
+struct ServiceCommandQueueW22E {
+    unsigned char reserved00[0x10b4];
+    struct ServiceCommandW22E *commands[2][24];
+    struct ServiceCommandDescriptorW22E *descriptors[2][24];
+    struct AdpcmCoefficients *destinations[2][24];
+    unsigned char reserved12f4[0x131e - 0x12f4];
+    unsigned short command_buffer;
+    unsigned short descriptor_buffer;
+    unsigned short destination_buffer;
+};
 struct AudioChannel;
 struct HandleManager {
     unsigned pending, queued, completed;
@@ -156,6 +183,10 @@ extern struct ServiceWorker *func_00182f88(void);
 extern void func_00182210(void);
 extern void func_00182204(void);
 extern int func_0018f018(void);
+extern int func_0014cc9c(struct ServiceCommandQueueW22E *queue, int channel,
+    float value);
+extern int func_0014cd18(struct ServiceCommandQueueW22E *queue, int channel,
+    const struct AdpcmCoefficients *source);
 extern void func_0017e7a0(struct ServiceOutput *output, int channel, unsigned value);
 extern void func_0014fa0c(struct ServiceOutput *output, int channel, float value);
 extern void func_00148220(struct ServiceWorker *backend);

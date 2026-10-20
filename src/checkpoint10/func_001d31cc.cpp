@@ -4,13 +4,6 @@
 #include "game/sound_runtime.h"
 #include "game/stream_manager.h"
 
-struct SequenceStartOptions {
-    unsigned char paused;
-    unsigned char reserved01[3];
-    unsigned position;
-    unsigned offset;
-    unsigned limit;
-};
 
 struct SequenceDataBinding {
     unsigned reserved00[5];

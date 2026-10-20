@@ -61,6 +61,21 @@ struct InputSnapshot {
     struct InputRectangle rectangle;
     unsigned int state;
 };
+/* [INFERENCE] UI updater item is distinct from InputItem. Its containing
+ * display/table/input roles are qualified; no same-offset alias is asserted. */
+struct W22UiItem {
+    struct DisplayObject *object;
+    const struct NameTable *table;
+    unsigned short reserved08;
+    short identifier;
+    unsigned short flags;
+    signed char behavior, countdown, initial, current;
+    short state;
+    unsigned parameter;
+    float value;
+    struct InputRectangle bounds;
+    struct InputRectangle *hit_bounds;
+};
 
 struct InputMode {
     unsigned int value;
@@ -132,6 +147,7 @@ extern struct TouchDeviceState bss_004972d8;
 extern void func_00170418(struct InputSnapshot *input);
 extern int func_0016ec14(const struct InputMode *mode);
 extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
+extern int func_001e9af8(struct W22UiItem *item, const struct InputSnapshot *input);
 #ifdef __cplusplus
 }
 #endif

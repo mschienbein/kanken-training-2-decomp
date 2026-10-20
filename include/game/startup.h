@@ -30,6 +30,17 @@ struct ResourceOptions {
     int option_a;
     int option_b;
 };
+/* [INFERENCE] Command allocation/count and 0x300 initialized entries are
+ * evidenced by the startup initializer; historical owner identity is unknown. */
+struct StartupCommandEntry {
+    unsigned command;
+    void *argument;
+};
+struct StartupCommandPool {
+    unsigned count;
+    struct StartupCommandEntry entries[0x300];
+    void *storage;
+};
 
 struct StartupResources {
     int initialized;
@@ -94,6 +105,19 @@ extern void func_001360dc(int enabled);
 extern void func_0013de78(int initialized);
 extern void func_0013deb4(void);
 extern void func_0014562c(void);
+extern unsigned data_0023eeb4, data_0023eeb8, data_0023eebc;
+extern void func_00135268(unsigned heap, int capacity);
+extern void func_00135128(int capacity);
+extern void func_00135f1c(int capacity);
+extern void func_00135c74(int capacity, int mode, unsigned option);
+extern void func_00135c10(int capacity);
+extern void func_00135bb0(int capacity);
+extern void func_00135b4c(int capacity);
+extern void func_00145afc(unsigned mode);
+extern void func_0019f450(float rate);
+extern void func_00145690(void);
+extern void func_00145658(unsigned status);
+extern void func_001415b0(void);
 #ifdef __cplusplus
 }
 #endif

@@ -1,0 +1,103 @@
+{
+  "source": "src/checkpoint11/archive_block_queries-r10.c",
+  "source_sha256": "46e381de939dd756d6ba1d0f82354c6394784f95d417a80d5fb31bbcaf10d9cd",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_001650f8",
+    "func_001f1ebc",
+    "func_001f1ed8",
+    "func_001f1ef4",
+    "func_001f1f08",
+    "func_001f1f20",
+    "func_001f1f34",
+    "func_001f1f4c"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/archive_block_queries-r10.c",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/017-archive_block_queries-r10"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.132295,
+  "stdout": "MATCH    func_001650f8 @ 0x1650f8 size 0xc0/0xc0\nMATCH    func_001f1ebc @ 0x1f1ebc size 0x1c/0x1c\nMATCH    func_001f1ed8 @ 0x1f1ed8 size 0x1c/0x1c\nMATCH    func_001f1ef4 @ 0x1f1ef4 size 0x14/0x14\nMATCH    func_001f1f08 @ 0x1f1f08 size 0x18/0x18\nMATCH    func_001f1f20 @ 0x1f1f20 size 0x14/0x14\nMATCH    func_001f1f34 @ 0x1f1f34 size 0x18/0x18\nMATCH    func_001f1f4c @ 0x1f1f4c size 0x18/0x18\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/017-archive_block_queries-r10/archive_block_queries-r10.result.json",
+  "result_sha256": "6b19221bb2f87e39d5194f5e3719d5be0eb23036e6026bf338cddcea33ab7fde",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001650f8",
+      "status": "match",
+      "size": 192,
+      "candidate_size": 192,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1ebc",
+      "status": "match",
+      "size": 28,
+      "candidate_size": 28,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1ed8",
+      "status": "match",
+      "size": 28,
+      "candidate_size": 28,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1ef4",
+      "status": "match",
+      "size": 20,
+      "candidate_size": 20,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1f08",
+      "status": "match",
+      "size": 24,
+      "candidate_size": 24,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1f20",
+      "status": "match",
+      "size": 20,
+      "candidate_size": 20,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1f34",
+      "status": "match",
+      "size": 24,
+      "candidate_size": 24,
+      "first_diff": null
+    },
+    {
+      "function": "func_001f1f4c",
+      "status": "match",
+      "size": 24,
+      "candidate_size": 24,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

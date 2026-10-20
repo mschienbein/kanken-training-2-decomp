@@ -170,6 +170,14 @@ struct StreamSound {
     unsigned char reserved00[0x124];
     struct SoundPlaybackState playback;
 };
+/* [INFERENCE] Options copied by the two sequence-start command paths. */
+struct SequenceStartOptions {
+    unsigned char paused;
+    unsigned char reserved01[3];
+    unsigned position;
+    unsigned offset;
+    unsigned limit;
+};
 
 struct SoundParameterTarget {
     unsigned char reserved00[0x83];
@@ -212,6 +220,8 @@ extern void func_0016a3e0(struct SoundInstance *sound);
 extern void func_001d3bcc(struct SequenceSoundControl *sound);
 extern void func_001d9c14(struct WaveSoundControl *sound);
 extern void func_001d3230(struct SequencePoolSound *sound);
+extern void func_001d2f90(struct SequenceSound *sound, const void *data,
+    const struct SequenceStartOptions *options);
 extern void func_0016a560(struct SoundInstance *sound);
 extern void func_001d38ac(struct SequenceSoundControl *sound);
 extern void func_001d9a0c(struct WaveSoundControl *sound);

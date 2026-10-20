@@ -1,5 +1,79 @@
 # c011 — default-model author MATCH integration milestone
 
+## 2026-10-20 resume — explicit v6/L1 destination evidence
+
+The current branch is **c011-integrate**, recovered at `76f628fd`, not the stale
+`c011` branch. Interrupted collection-r9/r11 sources and header changes were
+preserved in `dafd2b2` before merging accepted main `261fdc9` (`058cf28`) and
+current c010 `4138720` (`fc65c3a`, already containing c009 `444fc847`). Main's
+working tree and accepted records were not edited.
+
+**Current checkpoint selection is armlink5-inline-branchnop-v6 plus
+anonymous-string-records-v1.** All older v2/none scope, receipts and notes below
+are immutable historical evidence, not current checkpoint-selection authority.
+The accepted seq9 ledger requires this explicit pair. Gate v1.19 and denominator
+v9-r2 are unchanged; c011 does not select v8.
+
+| Current disposition | Units | Functions | Target bytes |
+|---|---:|---:|---:|
+| New collected canonical targets | 70 total | 76 | 10,092 |
+| Evidence-backed contract deferrals | — | 72 | 15,828 |
+| Context moves, no new credit | included above | 10 | 984 |
+| Candidate manifest including context | 70 | 86 | 11,076 |
+
+The inventory is 148 scoped identities/25,920 bytes. It retains every one of the
+old 45 collected and 40 deferred targets, unions the pending successful r9/r11
+copies, and adds 15 source units from collection-r12–r15. The fullword archive
+finder/query TU now has eight functions at `archive_block_queries-r10.c`; its
+obsolete seven-function source was moved to private `obsolete-sources/`, and
+all six existing reserved archive moves point to the complete new destination.
+No additional accepted or c009/c010 identity is claimed.
+
+`SCOPE-SUPPLEMENT-r6.json` freezes Main's refreshed 110-row/106-identity step5
+metadata input and the late exact publications **tu1095/0018c784** and
+**np015/0016337c**. `CONSUMED-RESULTS-r6.json` names every exact author RESULT,
+manifest hash, row index, source hash and receipt hash consumed; it also gives
+all 110 refreshed rows a disposition. Only named rows are consumed, never an
+entire RESULT implicitly. Changed publications cannot recollect owned identities.
+
+Canonical reconciliation uses existing shared types: the +0x10b4 service command
+queue's destination is `AdpcmCoefficients*`, not an artificial union or alias of
+`ServiceCoordinator`; identical sequence-start options are shared without
+equating sequence owners. Two reserved parent sources (`0014cc9c`, `001d31cc`)
+remove only their duplicate declarations. The guarded GPU release reuses the
+existing bucket/callback owner and refines only its opaque payload prefix.
+Target-only alignment, input-item, texture setup, startup, active slots, archive
+IPC, child-text and command-key sources retain their real helper/caller contracts.
+No new names were adopted. Exact details: `CONTRACT-RECONCILIATION-r6.json`.
+
+`DESTINATION-MATCH-r16.json` records **76 sequential isolated runs**, all exit0:
+70 candidate units (86 claimed targets) and six reserved parent/dependency units
+(six targets), all **92 targets MATCH** under explicit v6/L1. Every invocation
+uses Main's interpreter, existing toolchain/orig, nice10 and `match.py --show 0`.
+Earlier collection-r12 compile refusals are preserved; repaired sources use new
+r13 names. There was no whole-ledger sweep, full build/test, G3, argcheck or gate.
+
+Deferrals remain real owner/signature blockers, not rejected matches. In
+particular, **tu1014/00116064** still overlaps c010 math accessors and
+**Layout::Build/001ce9e8** still conflicts with accepted001822fc ownership.
+The typed stream dispatcher001d67c8 and loader001d7318 are retained separately;
+no StreamVoice/StreamSound equivalence is inferred from offsets. Callback-table,
+font/material, pool, scene, input-mapping, global-signedness and resource/display
+forks are individually bound in `DISPOSITIONS-r3.json`.
+
+`PERMUTER-CLASSIFICATION-r1.json` statically classifies retained sweep4 witnesses
+001ad708 and001ae140 as **steering-qualified**, not natural-C admissions; artificial
+copy/redundant predicate mutations and independent accepted owner conflicts are
+explicit. No search or old verification was rerun.001ea6d8 stays its existing
+contract deferral, without duplicate collection.
+
+Main's next work, after serialized predecessor integration/heavy-slot release:
+compose the accepted+c009+c010+c011 ledger with exact move owners, incorporate
+the two reserved parent-source refinements, recompute header-dependent closure,
+run G3/argcheck and adjudicate C++/emitted owners, then pre-review and the full
+integrated gates. Prepare must explicitly select v6/L1; no prepare/finalize,
+independent review, acceptance credit or push is claimed by this collection.
+
 ## Resumed source milestone — 1,081-manifest publication seal
 
 This continuation supersedes the first milestone totals below; its immutable

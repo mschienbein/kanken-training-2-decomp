@@ -26,6 +26,8 @@ struct ServiceDescription {
     unsigned char kind, option, mode, reserved;
 };
 struct ServiceConfigurationData;
+/* [INFERENCE] Read-only operation options; the wrapper never accesses them. */
+struct W23JOpenOptions;
 
 #ifdef __cplusplus
 extern "C" {
@@ -54,6 +56,10 @@ extern struct ServiceResult func_001209bc(struct ServiceObject *object,
 extern struct ServiceResult func_00112f10(struct ServiceObject *object,
     const struct ServiceDescription *specification,
     const struct ServiceConfigurationData *configuration);
+extern struct Result func_0011f6e8(struct ServiceObject *object, unsigned offset,
+    unsigned size, const struct W23JOpenOptions *options);
+extern struct ServiceResult func_001125ac(struct ServiceObject *object,
+    unsigned offset, unsigned size, const struct W23JOpenOptions *options);
 #ifdef __cplusplus
 }
 #endif

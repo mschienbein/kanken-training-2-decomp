@@ -421,6 +421,8 @@ extern void func_00176df4(void);
 extern void func_00181448(struct BoundDisplayObject *object);
 extern void func_0019637c(struct BoundDisplayObject *object,
                           struct BoundDisplayObject **head, int primary);
+extern void func_0018528c(struct BoundDisplayObject *object);
+extern void func_001af258(struct Screen *screen, int enabled);
 extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);

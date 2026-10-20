@@ -18,6 +18,16 @@ correction. Archive, material, DSP and text-flow reconstruction uses the
 canonical declarations and retains source-bound matching/provenance receipts
 under `scratch/integrator/c011/`; it is not a claim of recovered original
 translation-unit boundaries or Nintendo SDK source.
+The resumed c011 collection also adapts the pinned native texture image command
+(`texture_image_command-r9.cpp`), primitive/index-stream cleanup
+(`primitive_set_cleanup-r9.cpp`), group cleanup (`group_ownership_cleanup-r9.cpp`)
+and texture setup dispatch (`texture_setup_dispatch-r12.cpp`). Their original
+GPL-3.0-only notices remain in each source. The sequence auxiliary command
+(`sequence_auxiliary_command-r14.cpp`) retains its supplied reconstruction notice.
+Exact author/source/receipt bindings and current explicit v6/L1 destination
+evidence are in `scratch/integrator/c011/CONSUMED-RESULTS-r6.json` and
+`DESTINATION-MATCH-r16.json`; they grant no new library/data or accepted credit.
+
 
 The public Khronos GLES declaration/constant subsets in `include/GLES2/` use the
 MIT license from [OpenGL-Registry](https://github.com/KhronosGroup/OpenGL-Registry),
