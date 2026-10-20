@@ -175,6 +175,14 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "literal_rebindings": [row for row in linker.literal_rebindings
                                    if combined.section_owners[row["section_index"]] == owner],
             "removed_callees": [row for row in linker.removed_callees if row["object"] == unit["source"]],
+            **({
+                "removed_special_members": [row for row in linker.removed_special_members
+                                            if combined.section_owners[row["section_index"]] == owner],
+                "linker_section_rewrites": [w.record() for w in linker.rewrites
+                                            if isinstance(w, inplace.SectionElimination)
+                                            and combined.section_owners[w.section] == owner],
+            } if any(combined.section_owners[row["section_index"]] == owner
+                     for row in linker.removed_special_members) else {}),
         })
     try:
         inplace.reject_overlaps(occupied)

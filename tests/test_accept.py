@@ -543,6 +543,51 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(accept.finalize("c015", 1)["seq"], 2)
         accept.verify_history()
 
+    def test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions(self):
+        previous = "armlink5-inline-branchnop-v8"
+        selected = "armlink5-inline-branchnop-v9"
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c014", units, linker_model=previous)
+        self.review(name="c014")
+        accept.finalize("c014", 1)
+        member = {"section": "i._ZN6WidgetD0Ev", "section_index": 2, "symbols": ["_ZN6WidgetD0Ev"],
+                  "size": 12, "object": "src/a.c", "evidence": {"d0_slot_is_null": True}}
+        action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
+        receipts = [{"source": "src/a.c", "functions": ["func_00100000"], "removed_special_members": [member],
+                     "linker_section_rewrites": [action]}]
+        record = self.stubbed_prepare("c015", [], receipt_units=receipts, linker_model=selected)
+        out = self.root / "accept/c015"
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["model_changes"], {"linker_model": {"previous": previous, "selected": selected}})
+        self.assertEqual(record["model_reviews"], {"func_00100000": {"source": "src/a.c", "rules": ["U1"]}})
+        self.assertEqual(record["model_uses"]["src/a.c"]["removed_special_members"], [member])
+        self.assertEqual(record["linker_section_rewrites"], {"src/a.c": [action]})
+        self.assertEqual(accept.new_functions(out, record), {"func_00100000": "src/a.c"})
+        empty = {"reviewer": "empty", "family": "openai", "verdict": "PASS", "functions": [],
+                 "findings": [], "qualifications": []}
+        path = self.root / "empty-u1-review.json"
+        path.write_text(json.dumps(empty), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "does not cover"):
+            accept.review("c015", path)
+        for suffix, summary in zip(("a", "b"), record["builds"]):
+            receipt_path = out / "receipts" / f"c015-{suffix}.json"
+            self.assertEqual(accept.load_json(receipt_path)["units"][0]["linker_section_rewrites"], [action])
+            self.assertEqual(summary["receipt_sha256"], accept.sha256_file(receipt_path))
+        self.review("PASS_WITH_QUALIFICATIONS", name="c015", row="QUALIFIED",
+                    qualifications=["U1 null-slot and class spelling are bounded witnesses, not original link provenance"])
+        self.assertEqual(accept.finalize("c015", 1)["linker_model"], selected)
+        accept.verify_history()
+
+    def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
+        member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}
+        action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
+        uses = accept.model_use_summary({"units": [{
+            "source": "src/helper.cpp", "functions": [], "removed_special_members": [member],
+            "linker_section_rewrites": [action]}]})
+        self.assertEqual(uses["src/helper.cpp"]["u1_functions"], [])
+        self.assertEqual(uses["src/helper.cpp"]["removed_special_members"], [member])
+        self.assertEqual(uses["src/helper.cpp"]["linker_section_rewrites"], [action])
+
     def test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers(self):
         receipt_units, rewrite = self.removed_helper_baseline(linker_model="armlink5-inline-branchnop-v2")
         # Exercise a default-model transition rather than a helper/source edit.

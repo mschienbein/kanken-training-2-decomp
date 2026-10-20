@@ -22,6 +22,7 @@ class LinkerModel:
     bounded_switches: bool = False  # v4: bounded ARM jump-table CFG with fail-closed endian state
     function_entry_aliases: bool = False  # v6: proven aliases plus independently bound legacy placement
     removed_unwind: bool = False  # v8: eliminate only complete, exclusive EHABI/group closures
+    unreferenced_destructors: bool = False  # v9: witnessed, unbound D0 sections with no live references
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -34,6 +35,9 @@ LINKER_MODELS = {m.name: m for m in (
                 bounded_switches=True, function_entry_aliases=True),
     LinkerModel("armlink5-inline-branchnop-v8", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True, removed_unwind=True),
+    LinkerModel("armlink5-inline-branchnop-v9", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).

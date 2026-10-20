@@ -266,10 +266,10 @@ def linker_review_summary(receipt: dict, changed_units: set[str], revised_header
 
 
 def model_use_summary(receipt: dict) -> dict:
-    """Expose every R1/L1 use, not only sources changed in this checkpoint.
+    """Expose every R1/L1/U1 use, not only sources changed in this checkpoint.
 
-    A pool can be referenced through local tables, so conservatively review every credited
-    function in its owning unit rather than claiming a recovered function-to-record graph.
+    Pools and U1 removals conservatively reopen their owning unit's credited functions,
+    rather than claiming recovered per-function dependencies on either kind of section.
     """
     uses = {}
     for unit in receipt.get("units", []):
@@ -277,12 +277,16 @@ def model_use_summary(receipt: dict) -> dict:
                          if any(row.get("removed_callee") for row in rows))
         pools = unit.get("literal_rebindings", [])
         removed = unit.get("removed_callees", [])
-        if callers or pools or removed:
+        special = unit.get("removed_special_members", [])
+        if callers or pools or removed or special:
             uses[unit["source"]] = {
                 "r1_callers": callers,
                 "l1_functions": sorted(unit.get("functions", [])) if pools else [],
                 "literal_rebindings": pools,
                 "removed_callees": removed,
+                **({"u1_functions": sorted(unit.get("functions", [])),
+                    "removed_special_members": special,
+                    "linker_section_rewrites": unit.get("linker_section_rewrites", [])} if special else {}),
             }
     return uses
 
@@ -420,10 +424,11 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
                      for key, value in selection.items() if previous_models[key] != value}
     model_uses = model_use_summary(builds[0])
     model_reviews = {
-        fn: {"source": source, "rules": [rule for rule, functions in
-                                       (("R1", use["r1_callers"]), ("L1", use["l1_functions"])) if fn in functions]}
+        fn: {"source": source, "rules": [
+            rule for rule, functions in (("R1", use["r1_callers"]), ("L1", use["l1_functions"]),
+                                         ("U1", use.get("u1_functions", []))) if fn in functions]}
         for source, use in model_uses.items() if model_changes
-        for fn in sorted(set(use["r1_callers"]) | set(use["l1_functions"]))
+        for fn in sorted(set(use["r1_callers"]) | set(use["l1_functions"]) | set(use.get("u1_functions", [])))
     }
     changed_units = set(candidates_sources) | set(revised_units)
     linker_rewrites, dependency_reviews = linker_review_summary(
@@ -470,6 +475,10 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
             if (u.get("source") in changed_units or model_changes) and u.get("literal_rebindings")
         },
         "linker_rewrites": linker_rewrites,
+        **({"linker_section_rewrites": {
+            unit["source"]: unit["linker_section_rewrites"] for unit in builds[0].get("units", [])
+            if unit.get("linker_section_rewrites") and (unit["source"] in changed_units or model_changes)
+        }} if any(unit.get("linker_section_rewrites") for unit in builds[0].get("units", [])) else {}),
         "dependency_reviews": dependency_reviews,
         "builds": [
             {**build_summary(b), "receipt_sha256": sha256_file(out / "receipts" / f"{name}-{suffix}.json")}

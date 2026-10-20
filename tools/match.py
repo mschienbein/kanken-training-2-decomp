@@ -110,6 +110,8 @@ class Context:
         self.literal_model = literal_model
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
+        self.removed_special_members: list[dict] = []
+        self.section_rewrites: list[dict] = []
 
     def __repr__(self) -> str:
         return f"Context(functions={len(self.functions)})"
@@ -125,6 +127,8 @@ class Context:
         linked = linker.link(obj)
         self.literal_rebindings = linker.literal_rebindings
         self.removed_callees = linker.removed_callees
+        self.removed_special_members = linker.removed_special_members
+        self.section_rewrites = [w.record() for w in linker.rewrites if isinstance(w, inplace.SectionElimination)]
         results = []
         for placed, data in linked.values():
             if placed.origin != "catalogue":
@@ -196,6 +200,8 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
                 print("   " + line)
     for callee in ctx.removed_callees:
         print(f"REMOVED  {', '.join(callee['symbols'])} ({callee['size']} bytes; {callee['section']})")
+    for member in ctx.removed_special_members:
+        print(f"REMOVED  {', '.join(member['symbols'])} ({member['size']} bytes; U1 {member['section']})")
     record = {
         "source": source.as_posix(), "source_sha256": sha256(source), "profile": profile.name,
         "compiler": profile.compiler, "compiler_sha256": sha256(toolchain.armcc_exe(profile.compiler)),
@@ -208,6 +214,8 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
                            "object_sha256": sha256(obj)} for path, obj in zip(extra_sources or [], companions)],
         "removed_callees": ctx.removed_callees,
         "functions": [{k: v for k, v in r.items() if not k.startswith("_")} for r in results],
+        **({"removed_special_members": ctx.removed_special_members, "linker_rewrites": ctx.section_rewrites}
+           if ctx.removed_special_members else {}),
     }
     (out_dir / (source.stem + ".result.json")).write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n")
     return 0 if all(r["status"] == "match" for r in results) else 1

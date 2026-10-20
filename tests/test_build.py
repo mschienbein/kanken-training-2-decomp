@@ -25,13 +25,17 @@ BASE = inplace_tests.BASE
 
 class BuildRemovedCalleeModelTest(unittest.TestCase):
     def synthetic_build(self, model="armlink5-inline-branchnop-v3", retained=False, reverse=False,
-                        comdat_alias=None, credit_helper=False):
+                        comdat_alias=None, credit_helper=False, unreferenced=False):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         fixture = inplace_tests.RemovedCalleeModelTest()
         names = {}
-        if comdat_alias is not None:
+        if unreferenced:
+            caller, memory, functions, names = inplace_tests.UnreferencedDestructorModelTest().fixture()
+            helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
+            helper.sections, helper.symbols = {}, []
+        elif comdat_alias is not None:
             (caller, helper), memory, functions, names = fixture.comdat_alias_fixture(
                 contradictory=comdat_alias == "contradictory",
                 original_size=12 if comdat_alias == "wrong_original" else 8)
@@ -196,6 +200,22 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 rewrites = units["src/caller.c"]["linker_rewrites"]["func_00100000"]
                 self.assertEqual([row["target"] for row in rewrites], [None, None])
                 self.assertTrue(all(row["removed_callee"]["object"] == "src/caller.c" for row in rewrites))
+
+    def test_v9_section_eliminations_are_owned_hashed_and_reported_without_extra_credit(self):
+        model = inplace_tests.UnreferencedDestructorModelTest.MODEL
+        for reverse in (False, True):
+            receipt, root = self.synthetic_build(model=model, reverse=reverse, unreferenced=True)
+            self.assertEqual(receipt["result"], "PASS")
+            self.assertEqual((receipt["credited"]["functions"], receipt["credited"]["bytes"]), (1, 4))
+            units = {unit["source"]: unit for unit in receipt["units"]}
+            owner = units["src/caller.c"]
+            member, = owner["removed_special_members"]
+            self.assertEqual(member["object"], "src/caller.c")
+            self.assertEqual(owner["linker_section_rewrites"], [{
+                "rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}])
+            self.assertEqual(owner["linker_rewrites"], {})
+            self.assertEqual(owner["object_sha256"], build.sha256_file(root / "build/synthetic-removed/obj/src/caller.o"))
+            self.assertNotIn("removed_special_members", units["src/helper.c"])
 
 PROFILE = toolchain.Profile(
     "game", "armcc_504_82",

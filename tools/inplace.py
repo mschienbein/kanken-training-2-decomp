@@ -99,6 +99,18 @@ class Rewrite:
         return row
 
 
+@dataclass(frozen=True)
+class SectionElimination:
+    """A whole-section action, with no original address or replacement instruction."""
+
+    section: int
+    removed_special_member: dict
+
+    def record(self) -> dict:
+        return {"rule": "unused_deleting_destructor", "target": None,
+                "removed_special_member": self.removed_special_member}
+
+
 def inlinable_arm_instruction(word: int) -> bool:
     """May armlink copy this callee instruction into the caller? (docs/LINKER.md, rule I2)
 
@@ -917,6 +929,24 @@ def function_aliases(obj: ObjectFile) -> dict[int, list[Symbol]]:
     }
 
 
+def deleting_destructor_class(name: str) -> str | None:
+    """The length-checked simple/nested class encoding of an ABI D0, never a suffix guess."""
+    if not name.startswith("_ZN") or not name.endswith("D0Ev"):
+        return None
+    encoded = name[3:-4]
+    offset = 0
+    while offset < len(encoded):
+        length = re.match(r"[1-9][0-9]*", encoded[offset:])
+        if length is None:
+            return None
+        start = offset + len(length[0])
+        end = start + int(length[0])
+        if end > len(encoded) or re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]*", encoded[start:end]) is None:
+            return None
+        offset = end
+    return encoded or None
+
+
 def reject_overlaps(spans: list[tuple[int, int, str, tuple[str, str] | None]]) -> None:
     """Distinct sections can never share storage, and one COMDAT entity has one address.
 
@@ -987,11 +1017,13 @@ class InPlaceLinker:
         self.literal_model = literal_model
         self.retention_roots = retention_roots or {}
         self._retained_sections: dict[int, tuple[str, ...]] = {}
-        self.rewrites: list[Rewrite] = []
+        self.rewrites: list[Rewrite | SectionElimination] = []
         self.literal_rebindings: list[dict] = []
         self.removed_callees: list[dict] = []
         self._removed_sections: dict[int, dict] = {}
         self._removed_unwind: dict[int, int] = {}  # companion section -> its removed code section
+        self.removed_special_members: list[dict] = []
+        self._unreferenced_sections: dict[int, dict] = {}
 
     def __repr__(self) -> str:
         return f"InPlaceLinker(functions={len(self.functions)}, bss=({self.bss[0]:#x}, {self.bss[1]:#x}))"
@@ -1004,7 +1036,7 @@ class InPlaceLinker:
         aliases = function_aliases(obj) if self.model.function_entry_aliases else {}
         alias_addresses: dict[int, int] = {}
         for index, symbols in aliases.items():
-            if index in self._removed_sections:
+            if index in self._removed_sections or index in self._unreferenced_sections:
                 continue
             for sym in symbols:
                 address = names_to_address.get(sym.name)
@@ -1016,7 +1048,7 @@ class InPlaceLinker:
                 if prior != address:
                     raise LinkError(f"{obj.sections[index].name}: aliases resolve to different addresses")
         for fn in obj.defined_functions():
-            if fn.shndx in self._removed_sections:
+            if fn.shndx in self._removed_sections or fn.shndx in self._unreferenced_sections:
                 continue
             # Full-section proof is required to borrow a sibling's binding, not to
             # place independently bound names through the frozen extent checks.
@@ -1073,8 +1105,8 @@ class InPlaceLinker:
                         continue
                     if sym.shndx in literal_sections:
                         continue  # a mergeable pool has record addresses, not one affine section base
-                    if sym.shndx in self._removed_sections:
-                        continue  # no original address exists; only a removable call may name it
+                    if sym.shndx in self._removed_sections or sym.shndx in self._unreferenced_sections:
+                        continue  # no original address exists; removal is checked before relocation
                     implied = self._original_value(rel, placed.base + rel.offset, placed.section)
                     if implied is None:
                         continue
@@ -1099,8 +1131,8 @@ class InPlaceLinker:
         # reached through a section symbol and an extern reference by name always resolve to one
         # address. (Static definitions are local to the unit and need no binding.)
         for sym in obj.defined_globals():
-            if sym.shndx in self._removed_sections:
-                continue  # checked globally after every reference has been inlined
+            if sym.shndx in self._removed_sections or sym.shndx in self._unreferenced_sections:
+                continue  # every remaining reference is checked before relocation
             placed = placements.get(sym.shndx)
             bound = self.resolver.lookup(sym.name)
             if bound is None and sym.kind == "STT_FUNC" and sym.shndx in alias_addresses:
@@ -1505,6 +1537,8 @@ class InPlaceLinker:
         removed = {}
         for index, aliases in by_section.items():
             section = obj.sections[index]
+            if index in self._unreferenced_sections:
+                continue  # U1 has a separate no-live-reference proof, not R1's inlined-call proof
             bound = bindings.get(index, ())
             if not self.model.function_entry_aliases:
                 bound = []
@@ -1564,6 +1598,158 @@ class InPlaceLinker:
                 if section.data != prior.data or section.mapping != prior.mapping:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory removed-callee copies")
         return removed
+
+    def _unreferenced_destructors(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, dict]:
+        """U1 preflight: recognize D0 metadata and original null-slot evidence, never infer liveness."""
+        if not self.model.unreferenced_destructors:
+            return {}
+        by_section: dict[int, list[Symbol]] = {}
+        for sym in obj.symbols:
+            if sym.shndx in obj.sections:
+                by_section.setdefault(sym.shndx, []).append(sym)
+        catalogued_names = {
+            row.get(key) for fn in self.functions.values() for row in (fn, *fn.get("entries", ()))
+            for key in ("name", "symbol") if row.get(key)
+        }
+        removed = {}
+        owners = getattr(obj, "section_owners", {})
+        for index, symbols in by_section.items():
+            functions = [sym for sym in symbols if sym.kind == "STT_FUNC"]
+            candidates = [sym for sym in functions if deleting_destructor_class(sym.name) is not None]
+            if not candidates:
+                continue
+            section = obj.sections[index]
+            # An original identity is retained and judged by the ordinary placement/equality path.
+            if any(sym.name in names or self.resolver.lookup(sym.name) is not None for sym in symbols if sym.name):
+                continue
+            if any(sym.name in catalogued_names for sym in symbols):
+                raise LinkError(f"{section.name}: U1 cannot remove a catalogued symbol or entry")
+            if index in self._retained_sections:
+                raise LinkError(f"{section.name}: U1 deleting destructor is retained")
+            destructor = candidates[0]
+            if (len(functions) != 1 or section.name != f"i.{destructor.name}"
+                    or section.elf_type != "SHT_PROGBITS" or not section.executable or section.writable
+                    or section.nobits or section.link_order or section.merge_strings or section.entsize
+                    or not section.size or section.size != len(section.data) or section.align < 4
+                    or destructor.bind not in ("STB_GLOBAL", "STB_WEAK")
+                    or _symbol_offset(destructor) != 0 or not 0 < destructor.size <= section.size
+                    or not section.mapping or section.mapping[0] != (0, "$t" if _is_thumb_function(destructor) else "$a")
+                    or section.mapping != sorted(set(section.mapping))
+                    or len({offset for offset, _ in section.mapping}) != len(section.mapping)
+                    or any(not 0 <= offset < section.size or kind not in ("$a", "$t", "$d")
+                           for offset, kind in section.mapping)):
+                raise LinkError(f"{section.name}: unsupported U1 deleting-destructor section metadata")
+            for sym in symbols:
+                if sym is destructor:
+                    continue
+                if (sym.bind == "STB_LOCAL" and sym.value == 0 and sym.size in (0, section.size)
+                        and sym.kind == "STT_SECTION"):
+                    continue
+                if (sym.bind == "STB_LOCAL" and sym.kind == "STT_NOTYPE" and sym.size == 0
+                        and (sym.value, sym.name) in section.mapping):
+                    continue
+                raise LinkError(f"{section.name}: U1 section defines an independent symbol or alias")
+            encoded = deleting_destructor_class(destructor.name)
+            complete_name = f"_ZN{encoded}D1Ev"
+            complete = [sym for sym in obj.defined_functions() if sym.name == complete_name
+                        and sym.shndx != index and _symbol_offset(sym) == 0
+                        and owners.get(sym.shndx) == owners.get(index)]
+            complete_target = self.resolver.lookup(complete_name)
+            complete_address = names.get(complete_name, complete_target.address if complete_target else None)
+            if (not complete or complete_address not in self.functions
+                    or complete_target is not None and complete_target.address != complete_address
+                    or self.functions[complete_address].get("kind", "function") != "function"):
+                raise LinkError(f"{section.name}: U1 needs a same-object bound, catalogued D1 entry")
+            for sym in obj.defined_functions():
+                if sym.name not in (complete_name, f"_ZN{encoded}D2Ev"):
+                    continue
+                target = self.resolver.lookup(sym.name)
+                bound = names.get(sym.name, target.address if target else None)
+                if bound is not None and bound != complete_address:
+                    raise LinkError(f"{section.name}: U1 complete/base destructor bindings disagree")
+            first_length = re.match(r"[1-9][0-9]*", encoded)[0]
+            class_name = encoded if len(first_length) + int(first_length) == len(encoded) else f"N{encoded}E"
+            table_name = f"_ZTV{class_name}"
+            table_target = self.resolver.lookup(table_name)
+            table_address = names.get(table_name, table_target.address if table_target else None)
+            if (table_address is None or table_address % 4
+                    or table_target is not None and table_target.address != table_address
+                    or self.bss[0] < table_address + 16 and table_address < self.bss[1]
+                    or any(lo < table_address + 16 and table_address < lo + fn["size"]
+                           for lo, fn in self.functions.items())):
+                raise LinkError(f"{section.name}: U1 needs a bound primary vtable outside code and BSS")
+            header, rtti, first, deleting = struct.unpack(
+                "<4I", self._read_original(table_address, 16, f"{section.name}: U1 primary-vtable witness"))
+            rtti_name = f"_ZTI{class_name}"
+            rtti_target = self.resolver.lookup(rtti_name)
+            rtti_address = names.get(rtti_name, rtti_target.address if rtti_target else None)
+            isa = self.functions[complete_address]["isa"]
+            if (header != 0 or rtti != 0 and rtti != rtti_address
+                    or rtti_target is not None and rtti_address != rtti_target.address
+                    or any(_is_thumb_function(sym) != (isa == "thumb") for sym in complete)
+                    or first != (complete_address | (isa == "thumb")) or deleting != 0):
+                raise LinkError(f"{section.name}: U1 primary-vtable D1/null-D0 evidence disagrees")
+            row = {
+                "symbols": [destructor.name], "section": section.name, "section_index": index,
+                "size": section.size,
+                "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate"))),
+                "evidence": {"vtable": table_name, "vtable_address": table_address,
+                             "complete_destructor": complete_name, "complete_destructor_address": complete_address,
+                             "d0_slot_offset": 12, "d0_slot_is_null": True, "d1_slot_agrees": True},
+            }
+            if section.comdat:
+                row["comdat"] = section.comdat
+            removed[index] = row
+        return removed
+
+    def _check_unreferenced_destructors(self, obj: ObjectFile) -> None:
+        """U1 has no exidx/table exemption: check every still-live allocated reference and group."""
+        if not self._unreferenced_sections:
+            return
+        dead = self._removed_sections.keys() | self._removed_unwind.keys()
+        names = {name: index for index, row in self._unreferenced_sections.items() for name in row["symbols"]}
+        for section in obj.sections.values():
+            if section.index in dead:
+                continue  # existing R1/v8 rules have already proved this source absent
+            if section.link_order and section.linked_section in self._unreferenced_sections:
+                raise LinkError(f"{section.name}: linked metadata keeps a U1 deleting destructor live")
+            for rel in section.relocs:
+                if (rel.type == R_ARM_V4BX and section.executable and section.elf_type == "SHT_PROGBITS"
+                        and not section.link_order):
+                    continue  # ordinary-code architecture marker, not a target reference
+                index = rel.symbol.shndx
+                if index not in self._unreferenced_sections:
+                    index = names.get(rel.symbol.name)
+                if index in self._unreferenced_sections:
+                    raise LinkError(
+                        f"{section.name}+{rel.offset:#x}: U1 deleting destructor "
+                        f"{obj.sections[index].name} is still referenced (relocation type {rel.type})")
+        removable = dead | self._unreferenced_sections.keys()
+        groups = {obj.sections[index].comdat for index in self._unreferenced_sections} - {None}
+        members = {signature: {index for index, sec in obj.sections.items() if sec.comdat == signature}
+                   for signature in groups}
+        for flags, signature, indices in getattr(obj, "section_groups", ()):
+            if signature in groups or indices & self._unreferenced_sections.keys():
+                if flags != 1 or signature not in groups:
+                    raise LinkError("U1 deleting destructor belongs to an unsupported section group")
+                members[signature].update(indices)
+        for signature, indices in members.items():
+            for index in indices:
+                member = obj.sections.get(index)
+                if member is None or member.comdat != signature or index not in removable:
+                    raise LinkError(f"COMDAT {signature}: U1 lacks a complete allocated group/copy removal proof")
+        copies = {}
+        for index in self._unreferenced_sections:
+            section = obj.sections[index]
+            key = comdat_key(section)
+            if key is None:
+                continue
+            prior = copies.setdefault(key, section)
+            relocations = lambda sec: [(rel.offset, rel.type, rel.symbol.name, rel.symbol.value, rel.symbol.kind)
+                                       for rel in sec.relocs]
+            if (section.data != prior.data or section.mapping != prior.mapping
+                    or relocations(section) != relocations(prior)):
+                raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory U1 deleting-destructor copies")
 
     @staticmethod
     def _compact_unwind_prefix_size(word: int) -> int | None:
@@ -1804,11 +1990,14 @@ class InPlaceLinker:
         self.literal_rebindings = []
         self.rewrites, self.removed_callees = [], []
         self._removed_unwind = {}
+        self._unreferenced_sections, self.removed_special_members = {}, []
         self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
+        self._unreferenced_sections = self._unreferenced_destructors(obj, names_to_address or {})
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
         self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {})
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
+        self._check_unreferenced_destructors(obj)
         linked: dict[int, LinkedSection] = {}
         for idx, placed in placements.items():
             sec = placed.section
@@ -1856,4 +2045,6 @@ class InPlaceLinker:
                         f"{sec.name}: placed from its references, but its bytes differ from "
                         f"the original at +{first:#x} (witness address redacted)"
                     )
+        self.removed_special_members = [self._unreferenced_sections[index] for index in sorted(self._unreferenced_sections)]
+        self.rewrites.extend(SectionElimination(row["section_index"], row) for row in self.removed_special_members)
         return linked

@@ -15,6 +15,10 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
+The experimental opt-in **`armlink5-inline-branchnop-v9`** composes v8 with U1, witnessed
+unreferenced deleting-destructor removal. It is **not adopted**: its proposed gate revision is
+`scratch/integrator/linker-unref/GATES-DRAFT.md`, pending independent implementation/exact-text
+review. `docs/GATES.md` remains frozen v1.19; no checkpoint may select v9 before adoption.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -63,6 +67,7 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
 | `armlink5-inline-branchnop-v7` (88f5c38) | **retired**, never adopted | its own-exidx exception could partially remove a live COMDAT group and accepted truncated compact extab while rejecting complete zero-terminated entries; sealed review `scratch/review/exidx-v7/REVIEW.md`, FAIL |
 | `armlink5-inline-branchnop-v8` | frozen opt-in, adopted gates v1.19; PASS_WITH_QUALIFICATIONS | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
+| `armlink5-inline-branchnop-v9` | experimental opt-in, **not adopted** | v8 plus U1: unbound, witnessed, compiler-generated D0 sections with no live allocated reference or partial-group removal; no vtable/exidx exemption |
 
 ## Function-entry alias identity (v6 only)
 
@@ -258,6 +263,98 @@ frozen-model comparisons and exact exits are under `scratch/exidx/v8/`; v7 evide
 unchanged. No author source/receipt or `docs/GATES.md` is modified. Independent composite
 review and an explicit gate revision after the active frozen checkpoint closes are required
 before adoption; a private MATCH does not grant credit.
+
+## Unreferenced deleting destructors (experimental v9, rule U1)
+
+V9 is **v8 plus U1**, not a change to any recorded model. Extending v8 preserves its adopted
+R1 own-unwind/group closure instead of silently dropping cmodels2's v8 behavior. U1 does not
+reuse that exception for a destructor: its own live exidx reference still prevents removal.
+The default remains v2; every frozen model still refuses an otherwise unbound, non-R1 D0.
+
+ARMCC emits a distinct D0 deleting-destructor entry when a native virtual destructor is
+defined; the observed MenuScene/MenuResetScene objects also have retained D1/D2 entries.
+The [Itanium ABI destructor variants](https://itanium-cxx-abi.github.io/cxx-abi/abi.html#mangling-special-ctor-dtor)
+identify D0 as deleting destruction, while D1/D2 are complete/base destruction.
+[DUI0474K §4.3](https://documentation-service.arm.com/static/5ea19ea09931941038de96d2)
+describes unused-section elimination separately from virtual-function elimination.
+[INFERENCE] Original primary tables with a bound D1 and null D0 are consistent with virtual
+function elimination followed by removal of an unreachable D0. This is not proof of the
+original flags, original class spelling, or absence of an unidentified same-body function
+elsewhere in a sectionless image. No native armlink execution is claimed.
+
+U1 requires **all** of the following; unsupported/missing/contradictory evidence fails closed:
+
+1. A complete, readonly executable `SHT_PROGBITS` section, not NOBITS/link-ordered/merged,
+   named ARMCC's `i.<D0-symbol>`, aligned at least four. Its only function is an offset-zero,
+   nonzero-size global/weak `STT_FUNC` with a length-checked `_ZN...D0Ev` name. Accepted class
+   encodings contain ordinary length-prefixed identifiers, including namespace/nested-class
+   components; substitutions, templates, thunks and suffix lookalikes are not recognized.
+   Only local section symbols and valid local code/data mapping markers may accompany it.
+   Its function size may exclude a trailing owned literal pool; the whole section is removed.
+2. No symbol in that section has any canonical, proposed-overlay, explicit per-link or
+   catalogued name/entry binding. A bound D0 retains ordinary placement/comparison, never U1.
+   No entry, KEEP/export/used marker, unknown retention directive or rooted group can disappear.
+   Every supplied affected COMDAT copy and allocated group member needs an independent U1 or
+   already-proved v8 removal proof; live/unrepresented members, unknown group flags and
+   contradictory copies refuse the link. No arbitrary data/group member is swept along.
+3. The same defining object emits the same class's retained D1 entry, explicitly bound to a
+   catalogued ordinary function start. Its `_ZTV` has an explicit original binding outside
+   catalogued code and BSS. The primary-table header's offset-to-top is zero, RTTI is null
+   or agrees with an explicitly bound `_ZTI`, the slot at `_ZTV + 8` equals the D1 binding
+   including the ISA bit, and `_ZTV + 12` is null. Any missing/unreadable/misaligned/overlapping
+   witness or disagreeing D1/D2/RTTI binding refuses removal. This supports destructor-first
+   primary tables only, not a scan for a convenient null cell or an assumed secondary layout.
+4. After existing R1/v8 removals actually pass their checks, **every** remaining supplied
+   allocated section is checked, placed or not. No relocation may target the section, one
+   of its aliases, or its unresolved external name: code, data, tables, exidx/extab, NONE
+   dependencies and unknown relocation types all keep it live. `SHF_LINK_ORDER` is also a
+   dependency. V4BX remains nonreferencing in ordinary code only. Self-references and
+   references from another U1 candidate are conservatively refused; no dead cycle is inferred.
+   In particular, U1 never nulls an emitted vtable slot, drops a live referring table or
+   grants an own-exidx exemption. V8's old R1 proofs are unchanged.
+
+**Why not D2/C2?** A zero-size D2/C2 is commonly the same-section alias of a source-defined
+D1/C1, not a separately removable implementation. Entry alias identity already has its
+v6 proof. Removing the shared section could delete a required original destructor/constructor;
+U1 neither discards aliases independently nor guesses unreferenced source-authored bodies.
+Only the ABI deleting wrapper D0 is admitted, without claiming metadata proves source provenance.
+
+Each elimination is a `SectionElimination` in `InPlaceLinker.rewrites`, with
+`rule: "unused_deleting_destructor"`, `target: null`, and `removed_special_member` identity,
+complete size/index, defining object and primary-table/D1 witness metadata; no replacement
+instruction or private payload is invented. Match results expose these actions in top-level
+`linker_rewrites` and `removed_special_members`. Build units expose `linker_section_rewrites`
+and `removed_special_members`, since no surviving function owns a discarded section.
+Existing per-function branch rewrite fields are unchanged. Source/object/image/names/overlay,
+catalogue, profile and harness hashes bind the action; nothing discarded earns credit.
+
+Prepare exposes every U1 owner (including `functions: []`) in `model_uses` and binds the
+complete fresh receipts/actions. A model transition reopens every current R1 caller, existing
+L1-owning-unit function, and conservatively every credited function in a U1-owning unit with
+review rule `U1`. A v6→v9 transition also selects the separately adopted v8 baseline; a
+v8→v9 transition preserves it. c009-r4/c010/c011 and cmodels2 selections are not rewritten.
+Independent reviewers must re-derive every U1 action, class/table bindings from constructor
+stores and virtual consumers, group/root/reference exclusions, and retained source contracts.
+The draft requires adoption after active frozen checkpoints close and before any new prepare;
+an author MATCH alone never authorizes the model.
+
+Focused synthetic coverage is `UnreferencedDestructorModelTest`,
+`UnreferencedDestructorCompareTest`, the U1 receipt test in `BuildRemovedCalleeModelTest`,
+and U1 transition/zero-credit-owner tests in `AcceptGateTest`.
+The bounded real fixture is types-menu snapshot `d8aef63a`, attempt008
+`src/wave18/func_001acbb4.cpp`. It still has allocated own-exidx metadata referencing D0,
+despite emitting no vtable. Attempt006 additionally emits a live table→D0 reference.
+U1 must refuse these cases rather than silently implement another elimination rule.
+
+Executed on this proposal: **126 focused regressions, exit 0, OK** (U1, frozen v2/v4/R1/v6/v8,
+alias comparison, synthetic receipts and model-transition closure). The bounded attempt008
+`tools/match.py` run selected v9/L1 with `--show 0` and the snapshot names overlay:
+**exit 2**, `.ARM.exidx: linked metadata keeps a U1 deleting destructor live`.
+Only the compiler include root was redirected to the immutable snapshot; frozen `game`
+flags/compiler and this branch's matcher/linker were unchanged. Commands, source hash and
+exact exits are recorded in `scratch/integrator/linker-unref/evidence.json`; the refusal is
+`scratch/integrator/linker-unref/real-menu-reset-v9/func_001acbb4.result.json`.
+No full build, whole-ledger audit, adoption or new credit is claimed.
 
 ## Sources
 
