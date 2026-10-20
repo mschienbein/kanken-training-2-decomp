@@ -1,0 +1,349 @@
+{
+  "adoption": false,
+  "baseline": {
+    "adopted": false,
+    "field_sha256": {
+      "anomalies": "5b945609a3c5d0a04b630b9c87698babb274ab2083813a336ba1dbf1cb628a73",
+      "boundary_merges": "30d809170ec8fae3b03454790b62a7a4c70603466b8e39fe0781c9c13257a746",
+      "closure_evidence": "be31d98ee249a31dc4edb9d86b8c8defc35abd7662d71352457c94f8e64f53da",
+      "entry_groups": "4eae2807c4d2b741718e90c1c6bf8418fe627e0e387948e87bb7dcc46d82b1e6",
+      "functions": "ab8b72dc735670a30f45c2d12a86123eb9b4a1aa8e0b12727015e2bb9b974774",
+      "image": "1104eaae8df9a61a24a2576e4d99669b19441f802dfdf765c97f7d9af6f67b14",
+      "image_sha256": "a973d2c72d0e6955266f6ee64a98d4ba59f9863a69e40dfc9540fef9f3933cd7",
+      "leading_instruction_inventory": "b30e65b8c3bfe0f1f6c474f975646ad94ede092f263f0c16fc41a85236b7d686",
+      "leading_instruction_repairs": "1fbb5d06dd39986cedeac5791dd69d9b5d8b9013e15bf725da0dc74b39ee3c57",
+      "legacy_entry_preservation": "977b7c3e55c975f32fce7871b60b5d56574763bb8be83f62809c547de040ef78",
+      "linker_nop_inventory": "aa7d0b93e2100aac63a5931b76d37fa6fa6103041cb5c2760c64ffc3cd88ec3d",
+      "linker_tail_extent_splits": "a4126b1be3f49577e9ced07f4778e9460419631e600402865c17603568e65006",
+      "linker_tail_inventory": "35de3ae220e86364d33e4f260fbb499052673f56657d4d28eaadcb5c7e36deb6",
+      "linker_tail_splits": "2fc65b64b473f1ed91862bacc560f04da98139700b236354bb0e5c66f31b0d22",
+      "literal_conflicts": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "pc_relative_pointer_witnesses": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "pointer_entry_inventory": "10ded4dbbdfa2115dc7c0a09e2ae78ce3c873e249614945593459425fbf15ced",
+      "pointer_prefix_wrappers": "8260c6c2c5570a99de1b2ddd9790a4774658c50deb289494b985d2ce1fefd22b",
+      "pointer_target_repairs": "073ad9162a22a76878947ab147bc30c2f11b35094cbcbf6b6cfd4a496a932d36",
+      "protected_entry_observations": "49b460564d52a568c33185fd53e7cef6b49cd64b35ce9a11daa3a75e79866e2f",
+      "protected_start_observations": "96acf8a2888393d2f6325f8b0756b0553dbb03820eec1a81ebb031a255068df4",
+      "ranges": "1dbaaa2a7ca5f81120eee5924d2fede700da9a248eeee49ae758fdef7f906eca",
+      "relative_pointer_tables": "e7be8de7b44e42d24144efb519af6c801e5f8744a606eba5494a9c1900a94ee7",
+      "schema_version": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "segments": "d8e1d63cddad7fdf580db2c8ba9952df7ca064053261f139feda793de565fe6f",
+      "shared_literals": "f3c9fa204a6ee12db491d86244285562568b6c1e861d18fcface87d13bed72e3",
+      "stats": "0d94150820ef55b63105e5d67b5a89d3096cfe0c93b2b83edaf2d1ed096c0a93",
+      "tail_target_repairs": "e2210ebf81e6b52861fac5888828d2c73611dbc4dd6e7926d4a8582970912003"
+    },
+    "proposal_sha256": "ee64b7d69bf5b96fe26a8ada241a59eca2924ac4ab9a376a5fc449e2d1e5a942",
+    "range_kinds": [
+      "data",
+      "function",
+      "padding",
+      "rodata",
+      "segment_padding",
+      "unknown"
+    ],
+    "revision": "catalogue-v12-r2"
+  },
+  "exheader_sha256": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "new_C_credit": 0,
+  "non_c_proof": {
+    "path": "research/catalogue_v13_non_c_proof.json",
+    "sha256": "7fce05061046376bbc42d3cefe31214a1f6bd5f1b9fa361fa67ca8e618378f2a"
+  },
+  "parent_evidence": {
+    "path": "research/catalogue_v12_evidence.json",
+    "sha256": "a7e134f1c4e83f3171f9ee472478e5acd4520edd9144fd2a4aed6c3ff782c7d8"
+  },
+  "policy": "complete_sections_exact_alignment_uniform_image_fill_v1",
+  "qualification": "Distinct unadopted successor. Exact section association, not function extent/code ownership. All 15 observed halfwords must agree; 13 have complete predecessor proof including newly rechecked wcslen geometry without its API identity. No runtime endian policy relaxation. Eight additional exact non-C certificates grant no C credit or canonical aliases.",
+  "remaining_unknown_ranges": [
+    {
+      "end": 1048612,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1048608
+    },
+    {
+      "end": 1048926,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1048878
+    },
+    {
+      "end": 1050122,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1050106
+    },
+    {
+      "end": 1050948,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1050946
+    },
+    {
+      "end": 1051432,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1051430
+    },
+    {
+      "end": 1052020,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1052016
+    },
+    {
+      "end": 1102768,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1102760
+    },
+    {
+      "end": 1316280,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1316276
+    },
+    {
+      "end": 1704120,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1704116
+    },
+    {
+      "end": 1865564,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1865544
+    },
+    {
+      "end": 1889000,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1888998
+    }
+  ],
+  "residue": {
+    "path": "research/catalogue_v13_residue.json",
+    "sha256": "d51a4e9feae710c6ad5358b16b87507276eb016b232605b1766d23271c81491b"
+  },
+  "resolved_anomalies": [
+    {
+      "address": 1049440,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1050058,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1050188,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1050796,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1051102,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1051568,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1701316,
+      "issue": "unexplained_function_bytes"
+    },
+    {
+      "address": 1701436,
+      "issue": "unexplained_function_bytes"
+    }
+  ],
+  "revision": "catalogue-v13",
+  "schema_version": 1,
+  "section_proof": {
+    "path": "research/catalogue_v13_section_proof.json",
+    "sha256": "2333ab0635582e8b5ccc800083d3f6014eac6d3d2168addd661fc0ec45eb6cc3"
+  },
+  "transitions": [
+    {
+      "end": 1048696,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "0010006e:1:strtoull.o",
+      "start": 1048694
+    },
+    {
+      "end": 1049496,
+      "kind": "padding",
+      "owner": 1049440,
+      "rule": "in_section_zero_alignment",
+      "section": "00100360:1:__0snprintf.o",
+      "start": 1049494
+    },
+    {
+      "end": 1049888,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "00100446:1:_strtoull.o",
+      "start": 1049886
+    },
+    {
+      "end": 1050092,
+      "kind": "padding",
+      "owner": 1050058,
+      "rule": "in_section_zero_alignment",
+      "section": "001005c0:1:_printf_char_common.o",
+      "start": 1050090
+    },
+    {
+      "end": 1050576,
+      "kind": "padding",
+      "owner": 1050188,
+      "rule": "in_section_zero_alignment",
+      "section": "0010064c:1:__printf_flags_ss_wp.o",
+      "start": 1050574
+    },
+    {
+      "end": 1050824,
+      "kind": "padding",
+      "owner": 1050796,
+      "rule": "in_section_zero_alignment",
+      "section": "001008ac:4:init_aeabi.o",
+      "start": 1050822
+    },
+    {
+      "end": 1050892,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "001008e4:1:_printf_charcount.o",
+      "start": 1050890
+    },
+    {
+      "end": 1051136,
+      "kind": "padding",
+      "owner": 1051102,
+      "rule": "in_section_zero_alignment",
+      "section": "001009d4:1:_printf_wchar_common.o",
+      "start": 1051134
+    },
+    {
+      "end": 1051244,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "00100a14:1:_printf_wc.o",
+      "start": 1051242
+    },
+    {
+      "end": 1051356,
+      "kind": "padding",
+      "owner": 1051344,
+      "rule": "in_section_zero_alignment",
+      "section": "00100a74:1:_printf_oct_int_ll.o",
+      "start": 1051354
+    },
+    {
+      "end": 1051772,
+      "kind": "padding",
+      "owner": 1051568,
+      "rule": "in_section_zero_alignment",
+      "section": "00100bb0:1:bigflt0.o",
+      "start": 1051770
+    },
+    {
+      "end": 1051796,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "00100c80:1:aeabi_vec_dtor_cookie.o",
+      "start": 1051794
+    },
+    {
+      "end": 1488548,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "0016b678:1:wcscasecmp.o",
+      "start": 1488546
+    },
+    {
+      "end": 1580716,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "00181e94:1:_rserrno.o",
+      "start": 1580714
+    },
+    {
+      "end": 1642992,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "001911cc:1:aeabi_vec_ctor_nocookie_nodtor.o",
+      "start": 1642990
+    },
+    {
+      "end": 1645716,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "00191c80:1:cxa_guard_acquire.o",
+      "start": 1645714
+    },
+    {
+      "end": 1693124,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "0019d5b0:1:wcslen.o",
+      "start": 1693122
+    },
+    {
+      "end": 1701412,
+      "kind": "padding",
+      "owner": 1701316,
+      "rule": "in_section_zero_alignment",
+      "section": "0019f5c4:1:_printf_longlong_dec.o",
+      "start": 1701410
+    },
+    {
+      "end": 1701528,
+      "kind": "padding",
+      "owner": 1701436,
+      "rule": "in_section_zero_alignment",
+      "section": "0019f63c:1:_printf_dec.o",
+      "start": 1701526
+    },
+    {
+      "end": 1701592,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "0019f6b4:1:aeabi_vec_dtor_noexceptions.o",
+      "start": 1701590
+    },
+    {
+      "end": 1703276,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "0019fd50:1:tolower.o",
+      "start": 1703274
+    },
+    {
+      "end": 1703844,
+      "kind": "padding",
+      "owner": null,
+      "rule": "linker_alignment_fill",
+      "section": "0019fef2:1:_printf_intcommon.o",
+      "start": 1703842
+    }
+  ]
+}

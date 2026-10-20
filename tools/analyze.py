@@ -2407,6 +2407,12 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         else:
             import catalogue_local_entries
         catalogue_local_entries.close_catalogue(result, analyzer, closure, protected_functions)
+    if closure is not None and "alignment_revision" in closure:
+        if __package__:
+            from . import catalogue_alignment
+        else:
+            import catalogue_alignment
+        catalogue_alignment.close_catalogue(result, analyzer, closure, protected_functions or {})
     if closure is not None and ("runtime_data" in closure or "local_entry_revision" in closure):
         prior_entries = {(entry["address"], entry["isa"]) for function in prior_functions or [] for entry in function["entries"]}
         current_entries = {(entry["address"], entry["isa"]) for function in result["functions"] for entry in function["entries"]}
@@ -2537,19 +2543,23 @@ def serialize_catalogue(catalogue: dict) -> bytes:
 def load_protected_functions(root: Path, baseline: dict, manifests: list[Path], *,
                              git_blobs: list[dict] | None = None) -> tuple[dict, dict, dict]:
     """Resolve whole adopted records; remote checkpoint inputs are immutable blobs."""
+    if __package__:
+        from . import catalogue_frozen
+    else:
+        import catalogue_frozen
     adopted = sorted(baseline["functions"], key=lambda function: function["address"])
     starts = [function["address"] for function in adopted]
-    names_path = root / "config/names.json"
+    names_path = catalogue_frozen.resolve(root, "config/names.json")
     names = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
     inputs = {"config/names.json": hashlib.sha256(names_path.read_bytes()).hexdigest()} if names_path.is_file() else {}
     sources = {}
     paths = [root / "config/matches.json"]
     paths.extend(path for name in ("c004", "c005", "c006", "c007", "c008")
-                 if (path := root / f"config/candidates/{name}.json").is_file())
+                 if catalogue_frozen.resolve(root, str((path := root / f"config/candidates/{name}.json").relative_to(root))).is_file())
     paths.extend(manifests)
     for path in paths:
         label = str(path.relative_to(root)) if path.is_relative_to(root) else str(path)
-        sources[label] = path.read_bytes()
+        sources[label] = catalogue_frozen.resolve(root, label).read_bytes()
     for row in git_blobs or []:
         blob = row["blob"]
         if len(blob) != 40 or any(character not in "0123456789abcdef" for character in blob):
@@ -2592,9 +2602,11 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if __package__:
             from . import catalogue_review
+            from . import catalogue_frozen
         else:
             import catalogue_review
-        baseline_path = ROOT / "config/catalogue.json"
+            import catalogue_frozen
+        baseline_path = catalogue_frozen.resolve(ROOT, "config/catalogue.json")
         baseline = catalogue_review.load(baseline_path)
         image, exheader = args.image.read_bytes(), args.exheader.read_bytes()
         layout = ctrfmt.parse_exheader(exheader)
@@ -2656,10 +2668,10 @@ def main(argv: list[str] | None = None) -> int:
         source_root = Path(__file__).resolve().parent
         sources = {f"tools/{name}": catalogue_review.digest(source_root / name)
                    for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py",
-                                "catalogue_local_entries.py")}
+                                "catalogue_local_entries.py", "catalogue_alignment.py", "catalogue_non_c.py", "catalogue_frozen.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v12",
+            "revision": "catalogue-v13",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

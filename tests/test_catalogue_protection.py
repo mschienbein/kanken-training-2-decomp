@@ -12,7 +12,7 @@ import sys
 import tempfile
 import unittest
 
-from tools import analyze
+from tools import analyze, catalogue_frozen
 from tests.test_analyze import BASE, ROOT, fixture, freeze_local_fixture, library_revision_fixture, literal_words
 
 
@@ -62,7 +62,7 @@ def synthetic_project(root: Path) -> dict:
     for directory in ("tools", "config", "orig", "research", "src", "accept/c009-r2"):
         (root / directory).mkdir(parents=True, exist_ok=True)
     for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py",
-                 "catalogue_local_entries.py", "ctrfmt.py"):
+                 "catalogue_local_entries.py", "catalogue_alignment.py", "catalogue_non_c.py", "catalogue_frozen.py", "ctrfmt.py"):
         shutil.copyfile(ROOT / "tools" / name, root / "tools" / name)
     subprocess.run(["git", "init", "-q", str(root)], capture_output=True, check=True)
     write_json(root / "config/catalogue.json", before)
@@ -248,9 +248,9 @@ class CatalogueProtectionTests(unittest.TestCase):
                 elif change == "drop_snapshot":
                     revision["prepared_protection"] = None
                 elif change == "source":
-                    (root / "src/first.c").write_bytes(b"unreviewed source\n")
+                    catalogue_frozen.resolve(root, "src/first.c").write_bytes(b"unreviewed retained source\n")
                 elif change == "prepared_ledger":
-                    write_json(root / "accept/c009-r2/matches.json", {"units": []})
+                    write_json(catalogue_frozen.resolve(root, "accept/c009-r2/matches.json"), {"units": []})
                 elif change == "literal_evidence":
                     revision["literal_evidence"]["sha256"] = "0" * 64
                 elif change in ("unrelated_record", "old_record"):
@@ -263,6 +263,22 @@ class CatalogueProtectionTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 1, result.stderr)
                 self.assertTrue(result.stderr.startswith("catalogue: "), result.stderr)
                 self.assertFalse((root / "refused.json").exists())
+
+    def test_live_names_ledger_source_and_adoption_do_not_change_frozen_generation(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            synthetic_project(root)
+            first = run_catalogue(root, "first.json")
+            self.assertEqual(first.returncode, 0, first.stderr)
+            proposal = (root / "first.json").read_bytes()
+            (root / "config/catalogue.json").write_bytes(proposal)
+            write_json(root / "config/names.json", {"symbols": {"new_live_alias": {"address": BASE}}})
+            write_json(root / "config/matches.json", {"units": []})
+            write_json(root / "accept/c009-r2/matches.json", {"units": []})
+            (root / "src/first.c").write_bytes(b"later main source\n")
+            second = run_catalogue(root, "second.json")
+            self.assertEqual(second.returncode, 0, second.stderr)
+            self.assertEqual((root / "second.json").read_bytes(), proposal)
 
     def test_real_cli_keeps_explicit_protection_manifests(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

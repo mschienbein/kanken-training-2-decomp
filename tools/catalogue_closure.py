@@ -1086,7 +1086,7 @@ def _metadata_sha(value: dict | list) -> str:
 
 
 def load_protection_inputs(root: Path, parent_path: Path, runtime: dict) -> tuple[dict, dict[str, str]]:
-    """Bind the successor's exact metadata transitions and the live prepared ledger."""
+    """Bind exact metadata transitions and the immutable prepared ledger snapshot."""
     path = root / "research/catalogue_v11_r2_evidence.json"
     payload = path.read_bytes()
     revision = json.loads(payload)
@@ -1105,6 +1105,10 @@ def load_protection_inputs(root: Path, parent_path: Path, runtime: dict) -> tupl
         raise ValueError("v11-r2 literal evidence differs from its frozen input")
     inputs[literal["path"]] = literal["sha256"]
     snapshot = runtime.get("_prepared_protection")
+    if __package__:
+        from . import catalogue_frozen
+    else:
+        import catalogue_frozen
     if snapshot is not None:
         identities = snapshot["identities"]
         if (len(identities) != snapshot["identity_count"]
@@ -1112,12 +1116,12 @@ def load_protection_inputs(root: Path, parent_path: Path, runtime: dict) -> tupl
             raise ValueError("v11-r2 prepared identity snapshot has duplicate or missing identities")
         for field in ("adopted_catalogue", "ledger", "names", "prepare", "selection"):
             descriptor = snapshot[field]
-            content = (root / descriptor["path"]).read_bytes()
+            content = catalogue_frozen.resolve(root, descriptor["path"]).read_bytes()
             if len(content) != descriptor["size"] or hashlib.sha256(content).hexdigest() != descriptor["sha256"]:
                 raise ValueError(f"v11-r2 prepared {field} differs from its frozen input")
             inputs[descriptor["path"]] = descriptor["sha256"]
-        ledger = json.loads((root / snapshot["ledger"]["path"]).read_bytes())
-        names = json.loads((root / snapshot["names"]["path"]).read_bytes())["symbols"]
+        ledger = json.loads(catalogue_frozen.resolve(root, snapshot["ledger"]["path"]).read_bytes())
+        names = json.loads(catalogue_frozen.resolve(root, snapshot["names"]["path"]).read_bytes())["symbols"]
         claims = [(name, (names[name]["address"] if name in names else int(name.removeprefix("func_"), 16)) & ~1,
                    unit["source"], unit["profile"]) for unit in ledger["units"] for name in unit["functions"]]
         if (len(claims) != len(identities) or set(claims) != {
@@ -1132,7 +1136,7 @@ def load_protection_inputs(root: Path, parent_path: Path, runtime: dict) -> tupl
             raise ValueError("v11-r2 transitions do not bind every exact inherited metadata repair")
     for row in revision["protected_record_transitions"]:
         descriptor = row["source"]
-        content = (root / descriptor["path"]).read_bytes()
+        content = catalogue_frozen.resolve(root, descriptor["path"]).read_bytes()
         if hashlib.sha256(content).hexdigest() != descriptor["sha256"]:
             raise ValueError("v11-r2 metadata repair source differs from its retained compatibility proof")
         inputs[descriptor["path"]] = descriptor["sha256"]
@@ -1486,6 +1490,22 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     evidence["local_entry_revision"] = local_revision
     evidence["revision"] = local_revision["revision"]
     inputs.update(local_inputs)
+    if __package__:
+        from . import catalogue_alignment
+    else:
+        import catalogue_alignment
+    alignment_revision, alignment_inputs = catalogue_alignment.load_inputs(
+        root, root / "research/catalogue_v12_evidence.json", evidence)
+    evidence["alignment_revision"] = alignment_revision
+    evidence["revision"] = alignment_revision["revision"]
+    inputs.update(alignment_inputs)
+    if __package__:
+        from . import catalogue_frozen
+    else:
+        import catalogue_frozen
+    frozen_path = root / catalogue_frozen.MANIFEST
+    catalogue_frozen.load(root)
+    inputs[catalogue_frozen.MANIFEST] = hashlib.sha256(frozen_path.read_bytes()).hexdigest()
     return evidence, prior, inputs
 
 
@@ -1544,6 +1564,14 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     for row in unknown_rows:
         for part in row["parts"]:
             first, end = part["start"], part["end"]
+            alignment = next((item for item in closure.get("section_alignment_v13", {}).get("transitions", [])
+                              if item["start"] <= first < end <= item["end"]), None)
+            if alignment is not None:
+                part["reason"] = ("Complete predecessor end, proven successor alignment and image-wide unanimous fill; no owner or C credit"
+                                  if alignment["rule"] == "linker_alignment_fill" else
+                                  "Zero section-internal alignment between a complete sized declaration and an aligned field; extent unchanged")
+                part["alignment_witness"] = alignment
+                continue
             local = next((item for item in local_entries if item["address"] <= first < end <= item["address"] + item["size"]), None)
             if local is not None:
                 part["reason"] = "Exact sized local Thumb definition in independently authenticated complete runtime section, with static same-section relocation; no runtime pool-value assumption or C credit"
@@ -1586,6 +1614,8 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
                              "Exact shared read footprint, typed inline object, aligned hole or closed tagged-pointer CFG resolves this issue")
             if any(item.get("descriptor_range", [None])[0] == row["address"] for item in runtime_sections):
                 row["reason"] = "Exact dispatcher descriptor width and all-path continuation targets close the exceptional reachable-code anomaly"
+            if row["address"] in {item["address"] for item in closure.get("section_alignment_v13", {}).get("resolved_anomalies", [])}:
+                row["reason"] = "Complete reencoded section: exact zero alignment hole explains every previously uncovered extent byte; no function record/extent change"
     old_records = {function["address"]: function for function in prior["functions"]}
     changed_records = []
     for function in candidate["functions"]:
@@ -1671,3 +1701,6 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     candidate["revision_review"]["leaf_mode_repair"] = evidence["leaf_mode_repair"]
     if "local_entry_revision" in evidence:
         candidate["revision_review"]["local_runtime_entries"] = closure.get("local_runtime_entries", {})
+    if "alignment_revision" in evidence:
+        candidate["revision_review"]["section_alignment_v13"] = closure.get("section_alignment_v13", {})
+        candidate["revision_review"]["non_c_v13"] = closure.get("non_c_v13", {})

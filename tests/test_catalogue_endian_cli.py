@@ -27,7 +27,7 @@ class CatalogueEndianCliTests(unittest.TestCase):
             for directory in ("tools", "config", "orig", "research"):
                 (root / directory).mkdir()
             for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py",
-                         "catalogue_local_entries.py", "ctrfmt.py"):
+                         "catalogue_local_entries.py", "catalogue_alignment.py", "catalogue_non_c.py", "catalogue_frozen.py", "ctrfmt.py"):
                 shutil.copyfile(ROOT / "tools" / name, root / "tools" / name)
             subprocess.run(["git", "init", "-q", str(root)], capture_output=True, check=True)
             baseline_payload = analyze.serialize_catalogue(baseline)
@@ -62,8 +62,8 @@ class CatalogueEndianCliTests(unittest.TestCase):
             result = subprocess.run(command, cwd=root, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             candidate = json.loads(output.read_bytes())
-            self.assertEqual(candidate["generator"]["revision"], "catalogue-v12")
-            self.assertEqual(candidate["revision_review"]["name"], "catalogue-v12")
+            self.assertEqual(candidate["generator"]["revision"], "catalogue-v13")
+            self.assertEqual(candidate["revision_review"]["name"], "catalogue-v13")
             self.assertIn("research/catalogue_v10_r5_evidence.json", candidate["generator"]["input_sha256"])
             self.assertIn("research/catalogue_v11_evidence.json", candidate["generator"]["input_sha256"])
             self.assertIn("research/catalogue_v11_r2_evidence.json", candidate["generator"]["input_sha256"])
