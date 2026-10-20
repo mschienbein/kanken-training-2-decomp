@@ -36,7 +36,10 @@ class TextBox : public Pane
     typedef Pane Base;
 
 public:
-    NW_UT_RUNTIME_TYPEINFO;
+    /* The retail table retains no callable RTTI slot. Keep the declaration,
+     * not an inferred out-of-line implementation or replacement target. */
+    virtual const nw::ut::internal::RuntimeTypeInfo* GetRuntimeTypeInfo() const;
+    static const nw::ut::internal::RuntimeTypeInfo s_TypeInfo;
 
     typedef font::TagProcessorBase<wchar_t> TagProcessor;
 
