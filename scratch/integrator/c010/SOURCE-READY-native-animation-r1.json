@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "status": "native-animation-destination-collected-and-matched-awaiting-main-predecessor-import-and-integrated-closure",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-native-animation",
+  "branch": "c010-native-animation",
+  "base_commit": "30b1017f941b9ba01b067dcdbd18d5f7c32674b4",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "counts": {
+    "candidate_units": 498,
+    "candidate_claims": 511,
+    "new_functions": 501,
+    "new_target_bytes": 47420,
+    "accepted_moves": 10,
+    "moved_target_bytes": 240,
+    "new_deferred_units": 47,
+    "new_deferred_functions": 49,
+    "new_deferred_target_bytes": 9136
+  },
+  "candidate_manifest": "config/candidates/c010.json",
+  "candidate_manifest_sha256": "2f1aaabd9e6eda02997e8be195a65281aaa4de1756fa1b765cb512379d5d5c6b",
+  "parent_source_ready": {
+    "path": "scratch/integrator/c010/SOURCE-READY-native-links-r1.json",
+    "sha256": "78cd90cc5cecdcf97ca3703a20d4bdf8f85ad03c2e43df9ed0b8f9230b83a5c0",
+    "historical_unchanged": true
+  },
+  "bounded_scope_and_witnesses": {
+    "path": "scratch/integrator/c010/NATIVE-ANIMATION-CLOSURE-r1.json",
+    "sha256": "86e830f4a250ca0c6fc232dba2515503a10800ec7aa0e31922ca5052c6ed6221",
+    "fresh_units": 1
+  },
+  "deferrals": "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+  "deferrals_sha256": "344ee699b6e6c70f9dbfc0c33a6a88c021f8c138f284c9b4e23fcbf845995352",
+  "newly_closed": [
+    "func_001ce8b8"
+  ],
+  "newly_closed_target_bytes": 60,
+  "new_moves": [],
+  "unchanged": {
+    "prior500_new_functions": true,
+    "prior10_accepted_moves": true,
+    "native_links_cutover": true,
+    "parent_archive_prerequisite": true,
+    "accepted_ledger_and_history": true,
+    "native_headers_and_names": true,
+    "catalogue_review_inputs_and_c009_r3": true
+  },
+  "global_input_freshness": "Inherited complete-ledger/header scopes and inventories remain historical and stale. This singleton destination witness does not replace or narrow Main complete closure after frozen predecessor integration.",
+  "remaining_heavy_command_record": "scratch/integrator/c010/REMAINING-HEAVY-COMMANDS-native-links-r1.json",
+  "verification_boundary": "Five sequential trial match.py --show0 invocations (four real exit1 mismatches and one exit0 MATCH), successful destination collect, then one destination match.py --show0 exit0 MATCH. Models explicitly v6/L1 and profile game throughout. No builds, tests, whole-ledger audits, interfaces, argcheck, generation, prepare, reviews, finalize, verify or parent writes."
+}

@@ -2,6 +2,32 @@
 
 Current entry on top.
 
+## 2026-10-20 — c010 native animation lifetime re-entry (unaccepted)
+
+`001ce8b8` now has a **60/60 B game MATCH** at its collected destination under
+explicit linker **v6 + literal L1**. A `const nw::lyt::AnimResource&` bound directly
+to `nw::lyt::AnimResource(file)` keeps that native temporary alive through the
+reference scope and the actual `Layout::CreateAnimTransform` virtual call. Its
+inline constructor still calls the retained same-address native `Set`; the
+original receiver/accessor and returned `AnimTransform*` are preserved. This is
+a natural matching lifetime form, not proof of the historical source spelling.
+No headers, native identities, profiles, helper owners or accepted context changed.
+
+The singleton collection appends one claim while preserving all previous **500
+new functions and ten accepted moves**: **498 units / 511 claims**, comprising
+**501 proposed new functions / 47,420 B** and the unchanged **ten moves / 240 B**.
+The new deferral revision retires only `001ce8b8`; **47 units / 49 functions /
+9,136 B** remain deferred without an exhausted-search claim. The frozen seed,
+r56/r60 failures, four new trial mismatches and both exact lifetime/destination
+witnesses are retained by private `NATIVE-ANIMATION-CLOSURE-r1.json`.
+
+The native-links cutover and parent archive prerequisite remain intact. Main
+imports this re-entry only after the frozen c009-r3 closure, then refreshes the
+complete inventories and runs the integrated heavy gates. Only five sequential
+trial matches, destination collection and its retained match were exercised here;
+accepted credit is unchanged. Current pointers are in private `HANDOFF.json`,
+`SOURCE-READY-native-animation-r1.json` and `NEW-DEFERRALS-native-animation-r1.json`.
+
 ## 2026-10-20 — c010 source-contract handoff (unaccepted)
 
 The `c010-integrate` draft contains **496 units / 509 claims**: **499 proposed new
