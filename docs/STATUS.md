@@ -2,6 +2,25 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-18 (later) — cmodels accepted (linker v6 + L1); linker model v8 adopted
+
+**Accepted:** 1,621 functions / 195,908 B (seq 9: … c008-r3, cmodels). Denominator **v9-r2**:
+4,624 creditable functions / 1,131,454 B (17.31%). Gates **v1.19**. CI green.
+
+- **cmodels** (20 functions + 3 revised accepted units, 16 helper-only units): the first
+  checkpoint selecting opt-in models, `armlink5-inline-branchnop-v6` plus L1 string-record
+  placement. Both reviews PASS_WITH_QUALIFICATIONS, no findings (`docs/known-issues-cmodels.md`).
+- **Linker models:** v4 (bounded switch tables, GATES v1.17) and v6 (entry aliases, v1.18) were
+  adopted; v8 (v6 plus removal of a removed helper's own exception-index entry with its complete
+  COMDAT group, v1.19) was adopted after v7 failed review. Default stays v2/none.
+- **Escalation step 5 (near-miss finishing):** a fresh author diagnoses each unmatched function
+  within a few bytes of the original and makes the smallest natural change; so far roughly one in
+  six such functions matches. A residual-family study found validated idioms (typed storage
+  accessors, genuine same-TU callee visibility, helper argument order) and precise negatives
+  (VFP load writeback, exclusive-store status register).
+- **Next:** c009 (~678 functions), c010 (~548), c011 and a v8-selected model checkpoint;
+  catalogue v10-r4 (raw-SVC repair plus 12 more runtime-library owners) is in review.
+
 ## 2026-10-18 — c008-r3 accepted; denominator v9-r2; runtime libraries identified
 
 **Accepted:** 1,601 functions / 185,952 B (seq 8: … c007, c008-r3). Denominator **v9-r2**: 4,624
