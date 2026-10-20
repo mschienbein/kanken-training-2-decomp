@@ -1,9 +1,10 @@
-#include "game/w11_control.h"
-extern "C" void func_001bd630(W11AnimatedScreenB *screen)
+#include "game/drawing_screen.h"
+void TrainingScreenB::update()
 {
-    screen->vtable->begin_frame(screen);
-    func_001b0600(screen->controls);
-    if (screen->controls != 0 && screen->animation != 0)
-        func_0016d554(screen->controls, func_0017a210(screen->animation));
-    screen->vtable->end_frame(screen);
+    TrainingScreenB *screen = this;
+    screen->prepare();
+    func_001b0600(screen->small_controls);
+    if (screen->small_controls != 0 && screen->animation != 0)
+        func_0016d554(screen->small_controls, func_0017a210(screen->animation));
+    screen->finish();
 }

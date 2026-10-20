@@ -1,5 +1,7 @@
 #ifndef GAME_TRAINING_SCREEN_H
 #define GAME_TRAINING_SCREEN_H
+struct TrainingScreenA;
+struct SummaryTrainingScene;
 
 #include "game/animation.h"
 #include "game/input.h"
@@ -16,42 +18,23 @@
 struct ColorPanel;
 struct TextPanel;
 struct FooterPanel;
-struct TransitionController;
+struct PairCollection;
 struct SelectionGrid {
     unsigned char reserved00[0x3c];
     int selected;
 };
-union TrainingControls {
-    struct AnimationOwner *animation;
-    struct W6ListController *list;
-};
 #ifdef __cplusplus
-struct TrainingScreen : CallbackTarget {
-#else
-struct TrainingScreen {
-    const void *vtable;
-#endif
-    unsigned char reserved04[0x10];
-    struct W10DrawingInput *drawing;
-    unsigned char reserved18[0x24];
-    int resource;
-    unsigned char reserved40[4];
-    struct Screen *title;
-    struct TextPanel *text;
-    union TrainingControls controls;
-    struct ColorPanel *colors;
-    struct Screen *menu;
-    struct W6Selector *selector;
-    struct PassivePanel *auxiliary;
-    struct Screen *information;
-    struct FooterPanel *footer;
-    struct PassivePanel *secondary_footer;
-    struct AnimationState *navigation;
-    unsigned char reserved70[8];
-    struct MessageLayout *message;
-    struct CharacterPanel *characters;
-    unsigned char reserved80[0xc];
-    struct TransitionController *transition;
+struct TrainingScreenA : MenuScene {
+    virtual void build();
+    virtual ~TrainingScreenA();
+    virtual void activate();
+    virtual void update();
+    virtual void depart();
+    virtual void prepare();
+    /* [INFERENCE] func_001ba1d4 constructs this concrete class.
+     * Slot 7 override was eliminated (null cell); its signature is
+     * unrecoverable beyond the root placeholder. Never call or bind it. */
+    virtual void reserved_slot7();
     int layer;
     int previous_layer;
     int states[3];
@@ -68,53 +51,47 @@ struct TrainingScreen {
     unsigned char reservedcc[0x384];
     int drawing_state;
     unsigned short character;
-    unsigned char reserved456[0x56];
+    unsigned char reserved456[0x1e];
+    W11ControlScreen *small_controls;
+    unsigned char reserved478[0x34];
     int alternate_drawing_state;
     unsigned short alternate_character;
     unsigned char reserved4b2[0x1e];
     struct SelectionGrid *grid;
 };
+#endif
 #ifdef __cplusplus
 extern "C" {
 #endif
-void func_001b8908(struct TrainingScreen *screen);
-void func_001b9f18(struct TrainingScreen *screen);
+void func_001b8908(struct TrainingScreenA *screen);
+void func_001b8238(struct TrainingScreenA *screen);
+void func_001b8424(struct TrainingScreenA *screen);
+void func_001b9f18(struct TrainingScreenA *screen);
 #ifdef __cplusplus
-extern const MemberCallback data_002184b0;
+extern const SceneMemberCallback data_002184b0;
 #endif
-void func_0016d6dc(struct TrainingScreen *screen, int enabled);
-void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);
+void func_0016d6dc(struct TrainingScreenA *screen, int enabled);
+void func_0016d600(struct TrainingScreenA *screen, int mode, int enabled);
 #ifdef __cplusplus
 }
 #endif
-struct L041Dialog;
+struct ScalarCollection;
 struct L041HandwritingPanel;
 struct L041PromptTable;
-struct L041Accessory;
+struct MenuOptionGroup;
 struct R41169OptionalPanel;
-union L041InitializeControls {
-    struct AnimationOwner *animation;
-    struct InputOwner *input;
-    struct W6ListController *list;
-};
-struct L041InitializeScreen {
-    unsigned char reserved00[0x44];
-    struct L041Accessory *accessory;
-    struct W11jVisualOwner *clock;
-    union L041InitializeControls controls;
-    struct W8DisplaySet *display;
-    struct Screen *selection;
-    unsigned char reserved58[8];
-    struct Screen *alternate;
-    struct L041Dialog *dialog;
-    struct R41169OptionalPanel *optional_panel;
-    struct AnimationState *scroll;
-    unsigned char reserved70[8];
-    struct MessageLayout *message;
-    struct WidgetController *answer_panel;
-    struct L041HandwritingPanel *handwriting;
-    struct Screen *action_panel;
-    unsigned char reserved88[8];
+#ifdef __cplusplus
+struct SummaryTrainingScene : MenuScene {
+    virtual void build();
+    virtual ~SummaryTrainingScene();
+    virtual void activate();
+    virtual void update();
+    virtual void depart();
+    virtual void prepare();
+    /* [INFERENCE] func_001e3270 constructs this concrete class.
+     * Slot 7 override was eliminated (null cell); its signature is
+     * unrecoverable beyond the root placeholder. Never call or bind it. */
+    virtual void reserved_slot7();
     int current, previous;
     int states[8];
     int phase;
@@ -159,9 +136,10 @@ struct L041InitializeScreen {
     }
 #endif
 };
+#endif
 #ifdef __cplusplus
 extern "C" {
-extern const MemberCallback data_00218718;
+extern const SceneMemberCallback data_00218718;
 }
 #endif
 #ifdef __cplusplus
@@ -171,25 +149,24 @@ extern void func_001dc170(int value);
 extern void func_001dc230(int value);
 extern struct TransformEntry *func_00174454(int group, int index);
 extern void func_001dbc84(void);
-extern void func_001e3050(struct L041InitializeScreen *screen);
+extern void func_001e3050(struct SummaryTrainingScene *screen);
 extern int func_00173620(void);
 extern void func_00176c6c(struct MessageLayout *layout);
-extern void func_00176ae8(struct Screen *screen, int first, int second);
+extern void func_00176ae8(struct SelectionList24 *screen, int first, int second);
 extern void func_0017673c(struct AnimationState *state);
 extern void func_001762ac(struct Screen *screen, int mode);
 extern void func_0016e1c8(struct Screen *screen, int index, int enabled);
 extern void func_0017a164(struct Screen *screen, int state);
 extern void func_00175dcc(struct WidgetController *panel);
 extern void func_001b4aa0(struct L041HandwritingPanel *panel);
-extern void func_00179d48(struct AnimationOwner *owner, int panel_index, int element_index, int enabled);
-extern void func_00177c58(struct L041InitializeScreen *screen, int selection);
-extern void func_0016f930(const struct InputOwner *owner, int index);
-extern void func_00175a90(struct InputOwner *owner, int index, int active);
-extern void func_00175a5c(struct AnimationOwner *owner, int index,
+extern void func_00179d48(struct MenuControlSet *owner, int panel_index, int element_index, int enabled);
+extern void func_00177c58(struct SummaryTrainingScene *screen, int selection);
+extern void func_0016f930(const struct MenuControlSet *owner, int index);
+extern void func_00175a90(struct MenuControlSet *owner, int index, int active);
+extern void func_00175a5c(struct MenuControlSet *owner, int index,
                           float x, float y, float width, float height);
-extern void func_001758e4(struct L041Accessory *accessory);
+extern void func_001758e4(struct MenuOptionGroup *accessory);
 extern int func_0017abf8(int channel, int sound);
-void func_001e0afc(struct L041InitializeScreen *screen);
 #ifdef __cplusplus
 }
 #endif

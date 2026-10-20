@@ -8,8 +8,8 @@ struct W15gFiveColumnScreen {
     unsigned char reserved00[0x3c];
     struct W11TextResource *dictionary;
     unsigned char reserved40[8];
-    struct W11jVisualOwner *numbers;
-    struct W6ListController *lists;
+    struct VisualLabelSet72 *numbers;
+    struct MenuControlSet *lists;
     void *text;
     unsigned char reserved54[0x68];
     int page;

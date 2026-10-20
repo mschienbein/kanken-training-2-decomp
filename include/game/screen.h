@@ -1,5 +1,8 @@
 #ifndef GAME_SCREEN_H
 #define GAME_SCREEN_H
+struct SelectionList24;
+struct SelectionList29;
+struct ScalarCollection;
 
 struct PairStorage;
 struct W10DrawingInput;
@@ -386,8 +389,8 @@ extern struct DisplayQueueCounter bss_00495c70;
 extern int func_0019efd0(void);
 extern void func_001b6c90(struct MenuOptionGroup *options);
 extern void func_001b7e9c(struct MenuOptionGroup *options);
-extern void func_00176b24(struct Screen *selection);
-extern void func_0017697c(struct Screen *selection);
+extern void func_00176b24(struct SelectionList24 *selection);
+extern void func_0017697c(struct SelectionList29 *selection);
 extern void func_0015eac8(struct DisplayObject *object, int index, float value);
 extern void func_001701b4(struct WidgetController *controller, int index, int enabled);
 extern void func_00175b8c(void *screen);
@@ -403,7 +406,6 @@ extern void func_00175ab8(void *screen, int index,
                          int red, int green, int blue, int alpha);
 extern void func_00166eac(struct W8DisplaySet *screen, int index, float x, float y);
 extern void func_00175848(void);
-extern void func_001e807c(struct ScreenInitializationState *state);
 extern void func_001adabc(struct WidgetActionState *state);
 extern void func_00196230(int screen, int index);
 extern void func_00196144(int screen, int index);
@@ -440,15 +442,15 @@ extern void func_00181700(struct BoundDisplayObject *object, float x, float y, f
 extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
 extern void func_001826fc(struct DisplayObject *object, int active);
 extern void func_00195a08(struct DisplayObject *object, int index, int active);
-extern void func_0016de90(struct Screen *screen, int index);
+extern void func_0016de90(struct ScalarCollection *screen, int index);
 extern void func_0016e1d0(struct Screen *screen, int index, int enabled);
 extern unsigned char func_0017a9a0(const struct DisplayObject *object, int index);
 extern void func_0017a968(struct DisplayObject *object, const struct NameTable *table, int index, int mode);
 extern void func_001b7c9c(struct Screen *screen, int index, int value, const struct NameTable *const *labels);
-extern void func_0017a9ac(struct Screen *screen);
-extern void func_00170e50(struct Screen *screen, int index);
-extern void func_0017a6f4(struct Screen *screen, int index);
-extern void func_001795cc(struct Screen *screen, int first, int second);
+extern void func_0017a9ac(struct SelectionList24 *screen);
+extern void func_00170e50(struct SelectionList29 *screen, int index);
+extern void func_0017a6f4(struct SelectionList24 *screen, int index);
+extern void func_001795cc(struct SelectionList29 *screen, int first, int second);
 extern void func_0017a0e0(struct W8DisplaySet *set, int index, int active);
 extern void func_001816e0(struct BoundDisplayObject *object, float x, float y);
 extern void func_0015e474(struct DisplayObject *object, int index, float x, float y, float z);
@@ -461,7 +463,7 @@ extern struct BoundDisplayObject *data_00242250;
 extern void func_0018695c(struct BoundDisplayObject *object,
                           struct BoundDisplayObject **head, int primary);
 extern void func_001eafa0(void *screen, int index, const unsigned short *text);
-extern void func_0016de90(struct Screen *screen, int index);
+extern void func_0016de90(struct ScalarCollection *screen, int index);
 
 #ifdef __cplusplus
 }

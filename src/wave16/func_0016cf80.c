@@ -9,12 +9,12 @@ extern void func_0016ec84(struct MotionState *state, int first, int last);
 
 
 
-void func_0016cf80(struct MotionScreen *screen, int index, const struct MotionKey *keys)
+void func_0016cf80(struct MenuControlSet *screen, int index, const struct MotionKey *keys)
 {
-    struct AnimatedWidget *widget = screen->widgets[index];
+    struct MenuGroup *widget = screen->groups[index];
     if (widget) {
         widget->flags |= 0x20;
-        widget->base[1] = 0.0f;
+        widget->velocity.y = 0.0f;
         func_0016ee38(&widget->motion);
         if (func_0016ece8(&widget->motion, keys, 1)) {
             func_0016ec84(&widget->motion, 0, -1);

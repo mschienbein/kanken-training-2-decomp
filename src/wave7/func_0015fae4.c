@@ -6,7 +6,7 @@
 
 struct W7dSelectionState {
     unsigned char reserved00[0x4c];
-    struct W7dMenuControl *control;
+    struct MenuControlSet *control;
     unsigned char reserved50[0x64];
     int item_index;
     unsigned reservedb8;

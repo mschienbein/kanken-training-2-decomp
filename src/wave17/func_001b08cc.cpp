@@ -3,8 +3,9 @@
 
 
 
-extern "C" void func_001b08cc(W17CompositeScene *scene)
+void CalendarScene::depart()
 {
+    CalendarScene *scene = this;
     if (func_00177124(7) != 0)
         return;
     func_00177084();

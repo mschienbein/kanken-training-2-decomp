@@ -4,15 +4,16 @@
 
 
 
-static inline void initialize_overlay(struct CategoryScreen *screen, int layer, int state)
+static inline void initialize_overlay(struct CategoryScene *screen, int layer, int state)
 {
     screen->active_layer = layer;
     screen->states[layer] = state;
     screen->phase = 0;
 }
 
-void func_001ed874(struct CategoryScreen *screen)
+void CategoryScene::activate()
 {
+    CategoryScene *screen = this;
     if (func_0019efd0())
         return;
     func_00176d98();
@@ -42,8 +43,8 @@ void func_001ed874(struct CategoryScreen *screen)
         screen->category = 11;
     screen->selected_category = screen->category;
     func_001c144c(screen->frame);
-    if (screen->buttons)
-        func_00176b24(screen->buttons);
+    if (screen->primary_list)
+        func_00176b24(screen->primary_list);
     /* [INFERENCE] callee identity: inlined by armlink; these receiver-only
      * no-op initializers use distinct typed source definitions. Their original
      * callee identities are not observable at the rewritten call sites. */
@@ -51,47 +52,47 @@ void func_001ed874(struct CategoryScreen *screen)
         initialize_selector(screen->selector);
     if (screen->handle_panel)
         initialize_handle_panel(screen->handle_panel);
-    if (screen->progress)
-        func_00170298(screen->progress);
+    if (screen->record_selection)
+        func_00170298(screen->record_selection);
     if (screen->navigation)
         func_0017697c(screen->navigation);
-    if (screen->other_panel) {
-        func_00172b38(screen->other_panel);
-        func_00172a14(screen->other_panel, 4);
+    if (screen->scalar) {
+        func_00172b38(screen->scalar);
+        func_00172a14(screen->scalar, 4);
     }
-    if (screen->category_panel)
-        initialize_category_panel(screen->category_panel);
-    if (screen->statistics)
-        func_001ae2e4(screen->statistics);
-    if (screen->numbers) {
-        func_00175d90(screen->numbers);
-        func_00175d18(screen->numbers, bss_00291244);
+    if (screen->controller68)
+        initialize_category_panel(screen->controller68);
+    if (screen->controller88)
+        func_001ae2e4(screen->controller88);
+    if (screen->labels) {
+        func_00175d90(screen->labels);
+        func_00175d18(screen->labels, bss_00291244);
     }
-    if (screen->display) {
-        func_00175b8c(screen->display);
-        func_00179160(screen->display, 0, 0.8f, 1.0f);
-        func_00175ab8(screen->display, 0, 79, 79, 79, 255);
-        func_00179160(screen->display, 1, 0.5f, 0.5f);
-        func_00175ab8(screen->display, 1, 79, 79, 79, 255);
-        func_00179160(screen->display, 2, 0.5f, 0.5f);
-        func_00175ab8(screen->display, 2, 79, 79, 79, 255);
-        func_00179160(screen->display, 3, 0.5f, 0.5f);
-        func_00175ab8(screen->display, 3, 79, 79, 79, 255);
+    if (screen->style) {
+        func_00175b8c(&screen->style->base);
+        func_00179160(&screen->style->base, 0, 0.8f, 1.0f);
+        func_00175ab8(&screen->style->base, 0, 79, 79, 79, 255);
+        func_00179160(&screen->style->base, 1, 0.5f, 0.5f);
+        func_00175ab8(&screen->style->base, 1, 79, 79, 79, 255);
+        func_00179160(&screen->style->base, 2, 0.5f, 0.5f);
+        func_00175ab8(&screen->style->base, 2, 79, 79, 79, 255);
+        func_00179160(&screen->style->base, 3, 0.5f, 0.5f);
+        func_00175ab8(&screen->style->base, 3, 79, 79, 79, 255);
     }
-    if (screen->choices) {
-        func_001e9944(screen->choices);
-        func_00179600(screen->choices, 0, 0);
-        func_00179600(screen->choices, 1, 0);
-        func_00179600(screen->choices, 2, 0);
-        func_00179600(screen->choices, 3, 0);
-        func_00179600(screen->choices, 4, 0);
-        func_00179600(screen->choices, 5, 0);
+    if (screen->controls) {
+        func_001e9944(screen->controls);
+        func_00179600(screen->controls, 0, 0);
+        func_00179600(screen->controls, 1, 0);
+        func_00179600(screen->controls, 2, 0);
+        func_00179600(screen->controls, 3, 0);
+        func_00179600(screen->controls, 4, 0);
+        func_00179600(screen->controls, 5, 0);
     }
     func_001ec1b8(screen, 1);
     if (func_00172994(0) != 0x1000002)
         func_0017abf8(0, 0x1000002);
     /* [INFERENCE] The callback receiver is this state; its member identity is
      * retained by the original, typed member-function descriptor. */
-    func_00177b10(reinterpret_cast<CallbackTarget *>(screen), data_00218860);
+    func_00177b10(screen, data_00218860);
     func_00175848();
 }

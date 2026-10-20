@@ -1,8 +1,8 @@
 #include "game/animation.h"
 
-void func_001770cc(struct AnimationOwner *owner, int index, int enabled)
+void func_001770cc(struct MenuControlSet *owner, int index, int enabled)
 {
-    struct Animation *animation = owner->animations[index];
+    struct MenuGroup *animation = owner->animations[index];
     if (animation != 0) {
         if (enabled) {
             animation->flags |= 2;

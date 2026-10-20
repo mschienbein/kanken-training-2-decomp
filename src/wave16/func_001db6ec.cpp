@@ -1,4 +1,4 @@
-#include "game/scene_lifecycle.h"
+#include "game/scene_dispatch.h"
 
 /* [INFERENCE] Scene lifecycle type and operation names. The callback table at
  * data_0023ef14 is invoked without arguments at func_00135450 + 0x44;
@@ -6,6 +6,6 @@
 
 extern "C" void func_001db6ec(void)
 {
-    SceneObject *scene = &bss_0028f080;
-    scene->vtable->slot05(scene);
+    MenuScene *scene = &bss_0028f080;
+    scene->depart();
 }

@@ -7,69 +7,69 @@
 
 
 
-extern "C" void func_001bd68c(L035DrawingScreen *screen)
+extern "C" void func_001bd68c(TrainingScreenB *screen)
 {
-    switch (func_0017710c(reinterpret_cast<AnimationOwner *>(screen->list), 2)) {
+    switch (func_0017710c(reinterpret_cast<MenuControlSet *>(screen->controls), 2)) {
     case 0:
-        if (func_0016e03c(screen->panel, 0)) {
-            func_0016dbc4(screen->input);
-            func_0016d4f8(screen->input);
+        if (func_0016e03c(screen->characters, 0)) {
+            func_0016dbc4(screen->drawing);
+            func_0016d4f8(screen->drawing);
             screen->set_state(5);
         }
         return;
     case 1:
         if (screen->phase != 2) {
-            screen->selected = func_00179ed4(screen->panel, 1);
-            func_0016dc50(screen->panel, screen->selected);
+            screen->selected = func_00179ed4(screen->characters, 1);
+            func_0016dc50(screen->characters, screen->selected);
         }
         screen->phase = 0;
         break;
     case 2:
-        func_001770cc(reinterpret_cast<AnimationOwner *>(screen->list), 0, 0);
-        func_001770cc(reinterpret_cast<AnimationOwner *>(screen->list), 1, 0);
-        func_001770cc(reinterpret_cast<AnimationOwner *>(screen->list), 2, 0);
-        func_001780c4(screen->list, 2, 0, 0);
-        func_001780c4(screen->list, 2, 1, 0);
+        func_001770cc(reinterpret_cast<MenuControlSet *>(screen->controls), 0, 0);
+        func_001770cc(reinterpret_cast<MenuControlSet *>(screen->controls), 1, 0);
+        func_001770cc(reinterpret_cast<MenuControlSet *>(screen->controls), 2, 0);
+        func_001780c4(screen->controls, 2, 0, 0);
+        func_001780c4(screen->controls, 2, 1, 0);
         screen->set_state(1);
         func_0017433c(0, (int)func_0017adb4() * 60);
         func_00181b68(7, 1, 1);
-        func_00177b10(reinterpret_cast<CallbackTarget *>(screen), data_00218498);
+        func_00177b10(screen, data_00218498);
         return;
     }
 
     switch (screen->phase) {
     case 0:
-        func_00178e98(screen->list, 2);
-        if (func_0016e03c(screen->panel, 0)) {
-            func_001780c4(screen->list, 2, 0, 1);
-            func_001780c4(screen->list, 2, 1, 1);
+        func_00178e98(screen->controls, 2);
+        if (func_0016e03c(screen->characters, 0)) {
+            func_001780c4(screen->controls, 2, 0, 1);
+            func_001780c4(screen->controls, 2, 1, 1);
 begin_drawing:
-            func_0016dbc4(screen->input);
+            func_0016dbc4(screen->drawing);
             screen->phase = 1;
         } else {
-            func_001780c4(screen->list, 2, 0, 0);
-            func_001780c4(screen->list, 2, 1, 0);
+            func_001780c4(screen->controls, 2, 0, 0);
+            func_001780c4(screen->controls, 2, 1, 0);
             goto begin_drawing;
         }
         break;
     case 1:
-        if (r41262_drawing_state(screen->input) == 2) {
+        if (r41262_drawing_state(screen->drawing) == 2) {
             screen->phase = 2;
-            func_001780c4(screen->list, 2, 1, 1);
+            func_001780c4(screen->controls, 2, 1, 1);
         }
         break;
     case 2:
-        if (func_0016d2fc(screen->input)) {
-            screen->recognized = func_0016d2dc(screen->input);
+        if (func_0016d2fc(screen->drawing)) {
+            screen->recognized = func_0016d2dc(screen->drawing);
             if (screen->recognized) {
-                func_0016e61c(screen->panel, screen->selected, screen->recognized);
+                func_0016e61c(screen->characters, screen->selected, screen->recognized);
                 if (++screen->selected >= screen->count)
                     --screen->selected;
-                screen->selected = func_0016dc50(screen->panel, screen->selected);
+                screen->selected = func_0016dc50(screen->characters, screen->selected);
             }
             screen->phase = 0;
         }
         break;
     }
-    func_0016d038(screen->input);
+    func_0016d038(screen->drawing);
 }

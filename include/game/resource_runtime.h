@@ -1,5 +1,6 @@
 #ifndef GAME_RESOURCE_RUNTIME_H
 #define GAME_RESOURCE_RUNTIME_H
+#include "game/menu_scene.h"
 #include "game/runtime.h"
 #include "game/screen.h"
 
@@ -25,7 +26,6 @@ struct ResourceControlState {
 };
 
 struct AssetSlot { struct ResourceEvent *asset; };
-struct W17SceneVTable;
 struct DisplayResource4c {
     struct ResourceEvent *object;
     unsigned char reserved04[0x48];
@@ -41,59 +41,10 @@ struct DisplayResource6c {
     unsigned char reserved04[0x64];
     int texture_slot;
 };
-struct ScreenResourceManager {
-    const struct W17SceneVTable *vtable;
-    unsigned reserved04;
-    struct DisplayResource4c *first;
-    struct DisplayResource50 *second;
-    struct DisplayResource6c *third;
-    struct W10DrawingInput *controller;
-    unsigned char reserved18[8];
-    int first_count, second_count, third_count;
-    unsigned char reserved2c[8];
-    int index;
-    void *preliminary[2];
-    struct W17SelectionOwner *component00;
-    struct Component001b3434 *component01;
-    struct Component001ea87c *component02;
-    struct Component001e9cdc *component03;
-    struct Component001eaed8 *component04;
-    struct Component00168454 *component05;
-    struct Component001af424 *component06;
-    struct Component001acff0 *component07;
-    struct Component001682e8 *component08;
-    struct Component001b6a0c *component09;
-    struct Component001b45ac *component10;
-    struct Component001b41b8 *component11;
-    struct Component001aeb30 *component12;
-    struct Component001acd38 *component13;
-    struct Component001ad708 *component14;
-    struct Component001b5e44 *component15;
-    struct Component001b494c *component16;
-    struct Component001b7604 *component17;
-    struct Component001ae140 *component18;
-    struct Component001b64b0 *component19;
-};
+/* Common scene storage and native dispatch live in MenuScene. */
 struct GeometryAssetSlot;
-struct ReviewScreenState {
-    struct ScreenResourceManager resources;
-    unsigned char reserved90[0x14];
-    int index;
-    unsigned char reserveda8[0x10];
-    int option;
-    unsigned char reservedbc[0x38];
-    struct ResourceEvent *first_asset;
-    unsigned char reservedf8[0xc0];
-    struct ResourceEvent *second_asset;
-    unsigned char reserved1bc[0x20];
-    struct MotionState motion;
-    struct AssetSlot **slots19;
-    struct AssetSlot **slots18;
-    unsigned char reserved218[0x1c];
-    struct AssetSlot **slots3;
-    struct AssetSlot **slots5;
-    struct GeometryAssetSlot **geometry;
-};
+#ifdef __cplusplus
+#endif
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -102,8 +53,42 @@ extern struct ResourceControlState bss_00495c34, bss_00495c48, bss_00495c5c;
 extern void func_0019d3b4(struct ResourceEvent *event);
 extern void func_00183208(struct ResourceEvent *event);
 extern void func_0018663c(struct ResourceEvent *event);
-extern void func_00176e24(struct ScreenResourceManager *manager);
-extern void func_001e3548(struct W17SelectionOwner *component);
+extern void func_00176e24(struct MenuScene *manager);
+extern void func_001e3548(struct DeferredRequest *component);
+void func_001c3c50(struct GeometryAssetSlot **slots);
+extern void func_001b3434(struct MenuOptionGroup *component);
+extern void func_001ea87c(struct VisualLabelSet72 *component);
+extern void func_001e9cdc(struct MenuControlSet *component);
+extern void func_001eaed8(struct StyleOwner *component);
+extern void func_00168454(struct SelectionList24 *component);
+extern void func_001af424(struct W6Selector *component);
+extern void func_001acff0(struct W6HandlePanel10 *component);
+extern void func_001682e8(struct SelectionList29 *component);
+extern void func_001b6a0c(struct ScalarCollection *component);
+extern void func_001b45ac(struct R41169OptionalPanel *component);
+extern void func_001b41b8(struct AnimationState *component);
+extern void func_001aeb30(struct RecordSelection4 *component);
+extern void func_001acd38(struct SelectionSet2 *component);
+extern void func_001ad708(struct MessageLayout *component);
+extern void func_001b5e44(struct CharacterPanel *component);
+extern void func_001b494c(struct L041HandwritingPanel *component);
+extern void func_001b7604(struct Screen *component);
+extern void func_001ae140(struct WidgetActionState *component);
+extern void func_001b64b0(struct PairCollection *component);
+extern void func_001dcf4c(struct BufferedSceneState *component);
+extern void func_001dcdd0(struct IndexedSceneState *component);
+extern void func_001b3564(struct MenuOptionGroup *component);
+extern void func_001e9e7c(struct MenuControlSet *component);
+extern void func_001b4310(struct AnimationState *component);
+extern void func_001ad7a0(struct MessageLayout *component);
+extern void func_001b6098(struct CharacterPanel *component);
+extern void func_001b4d58(struct L041HandwritingPanel *component);
+extern int func_001b6604(struct PairCollection *collection);
+extern void func_001ebb14(struct MenuScene *scene, struct DisplayResource4c *entry);
+extern void func_001eb95c(struct MenuScene *scene, struct DisplayResource50 *entry);
+extern void func_001ebca0(struct MenuScene *scene, struct DisplayResource6c *entry);
+void finish_scene_buffer(struct BufferedSceneState *component);
+void finish_scene_indexed(struct IndexedSceneState *component);
 #ifdef __cplusplus
 }
 #endif

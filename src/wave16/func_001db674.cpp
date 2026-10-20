@@ -1,4 +1,4 @@
-#include "game/scene_lifecycle.h"
+#include "game/scene_dispatch.h"
 
 /* [INFERENCE] Scene lifecycle type and operation names. func_00141cd8 selects
  * this callback from data_0023eec0 into data_0023eeb0. func_0013db7c + 0x180
@@ -7,6 +7,6 @@
 
 extern "C" void func_001db674(void)
 {
-    SceneObject *scene = &bss_0028f200;
-    scene->vtable->slot02(scene);
+    MenuScene *scene = &bss_0028f200;
+    scene->build();
 }

@@ -1,5 +1,8 @@
 #ifndef GAME_SCENE_LIFECYCLE_H
 #define GAME_SCENE_LIFECYCLE_H
+#include "game/menu_controller.h"
+#include "game/category_progress.h"
+#include "game/controller_transitions.h"
 
 struct AudioChannel;
 struct AudioVoiceGroup;
@@ -11,26 +14,24 @@ struct SceneController;
 struct SceneGroup;
 struct SoundPlaybackState;
 struct ObjectPool;
-struct W17CompositeScene;
-struct W17ExtendedScene;
-struct W18SceneA;
-struct W17SceneVTable;
-struct W18SceneB;
-struct W18SceneC;
+struct CalendarScene;
+struct DetailedTransitionScene;
+struct MenuResetScene;
+struct ExitSelectionScene;
+struct CategoryScene;
 struct SceneToggle;
 struct W17SmallCollection;
 struct W6DisplayCollection;
 struct W17WideCollection;
 struct W18DisplayCollection;
-struct W18WideDisplayCollection;
-struct DispatchStateA;
-struct DispatchStateB;
-struct ModeDispatchObject;
-struct DisplayUpdateManager;
-struct W6SelectionScreen;
+struct L044TrainingFrame;
+struct MenuResetScene;
+struct ExitSelectionScene;
+struct CategoryScene;
+struct MenuScene;
 
 #include "game/notification.h"
-#include "game/scene_dispatch.h"
+#include "game/menu_scenes.h"
 #include "game/selection.h"
 #include "game/resource_runtime.h"
 
@@ -141,64 +142,6 @@ extern void func_001d8960(struct SceneGroup *group, bool enabled);
 
 
 
-struct W17CompositeScene {
-    ScreenResourceManager base;
-    unsigned char reserved90[0x190];
-    W17SmallCollection *small;
-    W6DisplayCollection *display;
-    W17WideCollection *wide;
-};
-struct W17ExtendedScene {
-    ScreenResourceManager base;
-    int selection;
-};
-struct W18SceneA {
-    ScreenResourceManager base;
-    unsigned char reserved90[0x24];
-    W18DisplayCollection *objects;
-};
-/* The noninvoked prefix permits lifecycle installers to retain the actual
- * table address without claiming a common callable receiver. Concrete table
- * tails below state the real providers' types. No call through this prefix
- * is valid: the corresponding complete scene-owner relation is unrecovered. */
-struct W17SceneVTable {
-    unsigned char reserved00[0x18];
-};
-struct W17InactiveSceneVTable : W17SceneVTable {
-    unsigned reserved18;
-    unsigned reserved1c;
-    void (*finish)(DisplayUpdateManager *scene);
-};
-struct W18SceneAVTable : W17SceneVTable {
-    void (*prepare)(DispatchStateA *scene);
-    unsigned reserved1c;
-    void (*finish)(DisplayUpdateManager *scene);
-};
-struct W18SceneBVTable : W17SceneVTable {
-    void (*prepare)(DispatchStateB *scene);
-    unsigned reserved1c;
-    void (*finish)(DisplayUpdateManager *scene);
-};
-struct W18SceneCVTable : W17SceneVTable {
-    void (*prepare)(ModeDispatchObject *scene);
-    unsigned reserved1c;
-    void (*finish)(DisplayUpdateManager *scene);
-};
-struct W17SelectionSceneVTable : W17SceneVTable {
-    void (*prepare)(W6SelectionScreen *scene);
-    unsigned reserved1c;
-    void (*finish)(DisplayUpdateManager *scene);
-};
-struct W18SceneB {
-    ScreenResourceManager base;
-    unsigned char reserved90[0x1c];
-    W18DisplayCollection *objects;
-};
-struct W18SceneC {
-    ScreenResourceManager base;
-    unsigned char reserved90[0xec];
-    W18WideDisplayCollection *objects;
-};
 struct SceneToggle {
     unsigned char reserved00[14];
     bool enabled;
@@ -222,21 +165,12 @@ void func_001dc240(unsigned int mask);
 void func_00170f20(int index);
 TransformEntry *func_00174454(int index, int part);
 void func_00176df4(void);
-extern const W17InactiveSceneVTable data_0022360c;
-void func_00174480(void *object);
-extern const W17InactiveSceneVTable data_0022380c;
-extern const W17SelectionSceneVTable data_00223838;
-extern const W17InactiveSceneVTable data_00223864;
-extern const W17InactiveSceneVTable data_00223908;
 
 int func_00171e30(void);
 void func_00170f6c(W18DisplayCollection *collection);
 int func_001c20e8(W18DisplayCollection *collection);
-extern const W18SceneAVTable data_002235c8;
-extern const W18SceneBVTable data_00223720;
 
-void func_001c13f4(W18WideDisplayCollection *collection);
-extern const W18SceneCVTable data_00223934;
+void func_001c13f4(L044TrainingFrame *collection);
 
 
 

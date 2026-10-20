@@ -3,7 +3,7 @@
 
 struct W6PagedScreen {
     unsigned char reserved00[0x4c];
-    struct W6ListController *list;
+    struct MenuControlSet *list;
     unsigned char reserved50[0x60];
     int mode;
     int item;
