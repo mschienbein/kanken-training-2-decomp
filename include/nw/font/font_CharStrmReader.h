@@ -17,6 +17,7 @@ class CharStrmReader
 {
     friend class Font;
 public:
+    typedef u16 (CharStrmReader::*ReadNextCharFunc)();
     CharStrmReader(const CharStrmReader& rhs):
         m_CharStrm(rhs.m_CharStrm),
         m_ReadFunc(rhs.m_ReadFunc) {}
@@ -35,7 +36,6 @@ public:
     const void* GetCurrentPos() const { return m_CharStrm; }
     u16 Next() { return (this->*m_ReadFunc)(); }
 private:
-    typedef u16 (CharStrmReader::*ReadNextCharFunc)();
 
     const void* m_CharStrm;
     const ReadNextCharFunc m_ReadFunc;
@@ -62,8 +62,16 @@ private:
     u16 ReadNextCharUTF16();
     u16 ReadNextCharCP1252();
     u16 ReadNextCharSJIS();
+
+    /* [INFERENCE] Distinct emitted copies selected by data_0021c64c.
+     * These are genuine members of this owner, not free-function facades. */
+    u16 ReadNextCharUTF8Copy();
+    u16 ReadNextCharSJISCopy();
 };
 
 }
 }
+
+/* The original descriptor uses this exact native member-pointer protocol. */
+extern "C" const nw::font::CharStrmReader::ReadNextCharFunc data_0021c64c[4];
 

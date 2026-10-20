@@ -2,6 +2,22 @@
   "schema_version": 1,
   "note": "Names overlay: real names for catalogued addresses. Identity is the address; renaming never changes the catalogue.",
   "symbols": {
+    "_ZN2nw4font14CharStrmReader20ReadNextCharUTF8CopyEv": {
+      "address": 1945576,
+      "evidence": "c010 prereview F05: data_0021c64c selects this separate original CharStrmReader member copy; emitted symbol is observed in F05-COMPILE-r1.json. [INFERENCE] Copy suffix distinguishes this body from the primary native emitted address, not a free-function/member-pointer conversion."
+    },
+    "_ZN2nw4font14CharStrmReader20ReadNextCharSJISCopyEv": {
+      "address": 1945520,
+      "evidence": "c010 prereview F05: the second descriptor entry at data_0021c64c+8 selects this separately emitted genuine CharStrmReader member. [INFERENCE] Copy suffix; native owner and u16 callable contract follow the exact returned-reader descriptor."
+    },
+    "_ZN2nw4font14CharStrmReader18ReadNextCharCP1252Ev": {
+      "address": 1945704,
+      "evidence": "c010 prereview F05: the exact canonical native member selected by data_0021c64c+0x10, aligned with types-fontgfx70ac3e9. Accepted identity moves to src/wave13/func_001db068.cpp; no Copy alias or duplicate emission remains."
+    },
+    "_ZN2nw4font14CharStrmReader17ReadNextCharUTF16Ev": {
+      "address": 1945684,
+      "evidence": "c010 prereview F05: the exact canonical native member selected by data_0021c64c+0x18, aligned with types-fontgfxa14c1f61 and its actual wchar_t stream. Accepted identity moves to src/wave13/func_001db054.cpp; no Copy alias or duplicate emission remains."
+    },
     "_ZN2nw4font10RectDrawer20GetCommandBufferSizeEPKvj": {
       "address": 1142320,
       "evidence": "c010 natural canonical caller src/checkpoint10/func_0010e230.cpp MATCH152/152 with unchanged BL relocation at+20 to original00116e30; exact source/object/receipt hashes and public header contracts in scratch/integrator/c010/FONT-CONTRACT-CUTOVER-r1.json. [INFERENCE] Historical source name not recovered; no erased call/alias or byte masking."

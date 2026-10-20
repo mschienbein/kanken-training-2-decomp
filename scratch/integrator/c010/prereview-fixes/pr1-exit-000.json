@@ -1,0 +1,39 @@
+{
+  "source": "src/checkpoint10/copy-view.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001dafb0",
+    "func_001dafe8",
+    "func_001db054",
+    "func_001db068"
+  ],
+  "author": "r4007",
+  "qualifications": [
+    "[INFERENCE] Copy member suffixes distinguish the original secondary descriptor entries from the primary native CharStrmReader methods; no free-function/member-pointer conversion."
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/copy-view.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr1/000"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "145e401fa3ce460794c2df5c667d605c1dd309ce98322f5fc8fcf388d597bb0b",
+  "receipt": "scratch/g3u-pr1/000/copy-view.result.json",
+  "receipt_sha256": "fcdd31c543efaa4dc590c0761716558629845ac15af29c06e628ce479d24d7c4",
+  "extra_source_sha256": {},
+  "output": "MATCH    _ZN2nw4font14CharStrmReader20ReadNextCharSJISCopyEv @ 0x1dafb0 size 0x38/0x38\nMATCH    _ZN2nw4font14CharStrmReader20ReadNextCharUTF8CopyEv @ 0x1dafe8 size 0x6c/0x6c\nMATCH    _ZN2nw4font14CharStrmReader21ReadNextCharUTF16CopyEv @ 0x1db054 size 0x14/0x14\nMATCH    _ZN2nw4font14CharStrmReader20ReadNextCharByteCopyEv @ 0x1db068 size 0x14/0x14\n"
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "base_commit": "297ad17",
+  "F05": {
+    "status": "GENUINE_NATIVE_MEMBER_CUTOVER",
+    "native_accepted_moves": [
+      {
+        "function": "func_001db054",
+        "from": "src/wave13/func_001db054.c",
+        "to": "src/wave13/func_001db054.cpp",
+        "checkpoint": "c010"
+      },
+      {
+        "function": "func_001db068",
+        "from": "src/wave13/func_001db068.c",
+        "to": "src/wave13/func_001db068.cpp",
+        "checkpoint": "c010"
+      }
+    ],
+    "canonical_member_names": [
+      "nw::font::CharStrmReader::ReadNextCharUTF16",
+      "nw::font::CharStrmReader::ReadNextCharCP1252"
+    ],
+    "distinct_copy_members": [
+      "nw::font::CharStrmReader::ReadNextCharUTF8Copy",
+      "nw::font::CharStrmReader::ReadNextCharSJISCopy"
+    ],
+    "all_results": "u16",
+    "owner_evidence": "Original0021c64c descriptor, Font::GetCharStrmReader constructor literal reference, and Next native member invocation from PREREVIEW.json. Not inferred from equivalent pointer layout.",
+    "peer_alignment": "Canonical accepted provider bodies/paths match types-fontgfx70ac3e9/a14c1f61. Existing frozen native byte-stream helper bodies are retained verbatim; the unrelated alias-free helper rewrite changed codegen and its failed attempts are kept. No function-pointer cast, native-owner alias or duplicate accepted Copy symbol remains.",
+    "witnesses": [
+      "pr2-results.json",
+      "pr3-results.json",
+      "pr4-results.json"
+    ]
+  },
+  "F08": {
+    "status": "TYPED_NONINVOKING_REGISTRATION",
+    "header": "include/game/sound_cache_registration.h",
+    "helper": "src/models/object_registration/sound_resource_cache.c",
+    "witness": "pr2-results.json",
+    "qualification": "[INFERENCE] original erased registration identity; exact void(SoundResourceCache*) destructor retained, helper never stores/invokes/adapts it and receives zero credit."
+  },
+  "F10": {
+    "status": "QUALIFICATION_PUBLISHED",
+    "source": "src/checkpoint10/alternate1/func_001650f8.c",
+    "all_functions": [
+      "func_001650f8",
+      "func_001f1ebc",
+      "func_001f1ed8",
+      "func_001f1f20",
+      "func_001f1f34",
+      "func_001f1f4c"
+    ],
+    "qualification": "[INFERENCE] noinline is a descriptive/code-generation qualification preserving the outlined shared search, not a recovered attribute spelling. It remains unchanged, not added/removed to force bytes.",
+    "witness": "pr2-results.json"
+  },
+  "F11": {
+    "status": "CURRENT_MANIFEST_NOTE_REFRESHED",
+    "counts": {
+      "candidate_units": 442,
+      "candidate_claims": 456,
+      "new_functions": 441,
+      "moves": 15,
+      "new_bytes": 42444,
+      "NEW_units_deferred": 65,
+      "NEW_functions_deferred": 66,
+      "dry_units": 2670,
+      "dry_functions": 2737
+    },
+    "historical_failure_records_unchanged": true
+  }
+}

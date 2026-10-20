@@ -1,44 +1,36 @@
 #define NW_RELEASE
-#include <nw/types.h>
+#include <nw/font/font_CharStrmReader.h>
 
-/* [INFERENCE] This image holds a second copy of nw::font::CharStrmReader's UTF-8 reader
- * (entry reached only through a pointer-to-member table). The copy cannot take the
- * canonical mangled name, which is bound to 0x001c5ad4, so it is authored as a free function
- * over an equivalent single-pointer stream view. */
-struct CharStreamView {
-    const void *m_CharStrm;
-
-    template<typename CharType>
-    CharType GetChar(int offset = 0) const
-    {
-        const CharType *charStrm = reinterpret_cast<const CharType *>(m_CharStrm);
-        return *(charStrm + offset);
-    }
-
-    template<typename CharType>
-    void StepStrm(int step = 1)
-    {
-        const CharType *&charStrm = reinterpret_cast<const CharType *&>(m_CharStrm);
-        charStrm += step;
-    }
-};
-
-extern "C" u16 func_001dafe8(CharStreamView *reader)
+/* [INFERENCE] The original secondary descriptor selects these two distinct
+ * emitted members. Canonical UTF16/CP1252 providers retain their own owners;
+ * Copy suffixes distinguish only these UTF8/SJIS bodies from the primary ones. */
+u16 nw::font::CharStrmReader::ReadNextCharUTF8Copy()
 {
     u16 code;
-
     /* ORIGINAL BUG: continuation bytes, truncation and four-byte UTF-8 are not validated. */
-    if (!(reader->GetChar<u8>(0) & 0x80)) {
-        code = reader->GetChar<u8>(0);
-        reader->StepStrm<u8>(1);
-    } else if ((reader->GetChar<u8>(0) & 0xE0) == 0xC0) {
-        code = ((reader->GetChar<u8>(0) & 0x1F) << 6) | (reader->GetChar<u8>(1) & 0x3F);
-        reader->StepStrm<u8>(2);
+    if (!(GetChar<u8>(0) & 0x80)) {
+        code = GetChar<u8>(0);
+        StepStrm<u8>(1);
+    } else if ((GetChar<u8>(0) & 0xe0) == 0xc0) {
+        code = ((GetChar<u8>(0) & 0x1f) << 6) | (GetChar<u8>(1) & 0x3f);
+        StepStrm<u8>(2);
     } else {
-        code = ((reader->GetChar<u8>(0) & 0x1F) << 12) | ((reader->GetChar<u8>(1) & 0x3F) << 6) |
-               (reader->GetChar<u8>(2) & 0x3F);
-        reader->StepStrm<u8>(3);
+        code = ((GetChar<u8>(0) & 0x1f) << 12) | ((GetChar<u8>(1) & 0x3f) << 6) |
+               (GetChar<u8>(2) & 0x3f);
+        StepStrm<u8>(3);
     }
-
     return code;
 }
+
+u16 nw::font::CharStrmReader::ReadNextCharSJISCopy()
+{
+    u16 character = GetChar<u8>();
+    if (static_cast<unsigned int>(character - 0x81) < 0x1f || character >= 0xe0) {
+        character = (character << 8) | GetChar<u8>(1);
+        StepStrm<u8>(2);
+    } else {
+        StepStrm<u8>();
+    }
+    return character;
+}
+

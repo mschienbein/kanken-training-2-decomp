@@ -1,7 +1,8 @@
 #include "game/archive.h"
 
 
-/* The block search is an outlined leaf shared by the adjacent block queries. */
+/* [INFERENCE] noinline is a descriptive code-generation qualification preserving
+ * the shared outlined search, not a recovered original attribute spelling. */
 /* [INFERENCE] Preserve the full incoming tag word. The original core-word
  * comparisons do not establish a narrowing conversion or a historical
  * unsigned-short formal merely because the serialized field is 16-bit. */

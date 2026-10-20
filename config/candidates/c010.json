@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "note": "C010 source-contract handoff:496 units/509 claims;499 proposed new functions/47304B plus10 explicit accepted moves/240B.49 new units/51 functions/9252B have explicit preserved deferrals (NEW-DEFERRALS-r67.json); two native-pair sources remain unchanged/uncredited for C011. No acceptance or whole-ledger closure; frozen c009-r3 and Main heavy slot remain prerequisites. Explicit v6/L1.",
+ "note": "C010 prereview reconciliation from297ad17: 442 units / 456 claims, 441 NEW functions and 15 explicit moves. 66 additional NEW functions in 65 units are explicitly deferred by prereview-fixes/NEW-DEFERRALS-r1.json; all accepted identities and original ten moves are retained. Scheduler/resource/native/display re-entry records supersede older deferral prose; this later reconciliation is current authority. Provisional until finalized c009-r4 rebase, harness correction and integrated prepare gates.",
  "units": [
   {
    "source": "src/checkpoint10/ut_LinkList.cpp",
@@ -313,9 +313,13 @@
    "source": "src/checkpoint10/copy-view.cpp",
    "profile": "game",
    "functions": [
+    "func_001dafb0",
     "func_001dafe8"
    ],
-   "author": "r4007"
+   "author": "r4007",
+   "qualifications": [
+    "[INFERENCE] Copy member suffixes distinguish the original secondary descriptor entries from the primary native CharStrmReader methods; no free-function/member-pointer conversion."
+   ]
   },
   {
    "source": "src/checkpoint10/capture_output_locals.c",
@@ -598,38 +602,6 @@
    "author": "r4028"
   },
   {
-   "source": "src/checkpoint10/func_0015121c.cpp",
-   "profile": "middleware",
-   "functions": [
-    "func_0015121c"
-   ],
-   "author": "r4029"
-  },
-  {
-   "source": "src/checkpoint10/func_00151458.cpp",
-   "profile": "middleware",
-   "functions": [
-    "func_00151458"
-   ],
-   "author": "r4029"
-  },
-  {
-   "source": "src/checkpoint10/func_00151584.cpp",
-   "profile": "middleware",
-   "functions": [
-    "func_00151584"
-   ],
-   "author": "r4029"
-  },
-  {
-   "source": "src/checkpoint10/func_001f5780.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001f5780"
-   ],
-   "author": "r4029"
-  },
-  {
    "source": "src/checkpoint10/func_001224a4.c",
    "profile": "game",
    "functions": [
@@ -718,14 +690,6 @@
    "author": "r4035"
   },
   {
-   "source": "src/checkpoint10/func_001f4eb4.cpp",
-   "profile": "middleware",
-   "functions": [
-    "func_001f4eb4"
-   ],
-   "author": "r4035"
-  },
-  {
    "source": "src/checkpoint10/func_001306c8.c",
    "profile": "game",
    "functions": [
@@ -806,15 +770,6 @@
    "author": "r4066"
   },
   {
-   "source": "src/checkpoint10/func_001cf338_material.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001cf338",
-    "func_001cf3a4"
-   ],
-   "author": "r4067"
-  },
-  {
    "source": "src/checkpoint10/canonical-virtual-glyph-source.cpp",
    "profile": "middleware",
    "functions": [
@@ -851,14 +806,6 @@
    "profile": "middleware",
    "functions": [
     "func_00153f28"
-   ],
-   "author": "r4073"
-  },
-  {
-   "source": "src/checkpoint10/func_001dafb0_cursor.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001dafb0"
    ],
    "author": "r4073"
   },
@@ -1035,14 +982,6 @@
    "profile": "game",
    "functions": [
     "func_0015eba4"
-   ],
-   "author": "r41233"
-  },
-  {
-   "source": "src/checkpoint10/func_00161650.cpp",
-   "profile": "game",
-   "functions": [
-    "func_00161650"
    ],
    "author": "r41233"
   },
@@ -1339,14 +1278,6 @@
    "profile": "sdk",
    "functions": [
     "func_001d31cc"
-   ],
-   "author": "r41273"
-  },
-  {
-   "source": "src/checkpoint10/func_001d3230.cpp",
-   "profile": "sdk",
-   "functions": [
-    "func_001d3230"
    ],
    "author": "r41273"
   },
@@ -1679,30 +1610,6 @@
    "author": "w21c"
   },
   {
-   "source": "src/checkpoint10/func_001efd08.cpp",
-   "profile": "middleware",
-   "functions": [
-    "func_001efd08"
-   ],
-   "author": "w21c"
-  },
-  {
-   "source": "src/checkpoint10/func_001efeac.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001efeac"
-   ],
-   "author": "w21c"
-  },
-  {
-   "source": "src/checkpoint10/func_001f4b58.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001f4b58"
-   ],
-   "author": "w21c"
-  },
-  {
    "source": "src/checkpoint10/func_0019e414.c",
    "profile": "game",
    "functions": [
@@ -1715,14 +1622,6 @@
    "profile": "middleware",
    "functions": [
     "func_0010c498"
-   ],
-   "author": "w21f"
-  },
-  {
-   "source": "src/checkpoint10/func_0016b58c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_0016b58c"
    ],
    "author": "w21f"
   },
@@ -1871,26 +1770,10 @@
    "author": "w22b"
   },
   {
-   "source": "src/checkpoint10/func_001c8af0.c",
-   "profile": "game",
-   "functions": [
-    "func_001c8af0"
-   ],
-   "author": "w22b"
-  },
-  {
    "source": "src/checkpoint10/func_001cf418.c",
    "profile": "game",
    "functions": [
     "func_001cf418"
-   ],
-   "author": "w22b"
-  },
-  {
-   "source": "src/checkpoint10/func_001d2c84.c",
-   "profile": "game",
-   "functions": [
-    "func_001d2c84"
    ],
    "author": "w22b"
   },
@@ -1971,14 +1854,6 @@
    "profile": "game",
    "functions": [
     "func_001dc100"
-   ],
-   "author": "w22c"
-  },
-  {
-   "source": "src/checkpoint10/func_001e3794.c",
-   "profile": "game",
-   "functions": [
-    "func_001e3794"
    ],
    "author": "w22c"
   },
@@ -2367,14 +2242,6 @@
    "author": "w23d"
   },
   {
-   "source": "src/checkpoint10/func_00162f78.cpp",
-   "profile": "game",
-   "functions": [
-    "func_00162f78"
-   ],
-   "author": "w23d"
-  },
-  {
    "source": "src/checkpoint10/func_00192410.c",
    "profile": "game",
    "functions": [
@@ -2389,166 +2256,6 @@
     "func_0019edbc"
    ],
    "author": "w23d"
-  },
-  {
-   "source": "src/checkpoint10/func_001a29f4.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001a29f4"
-   ],
-   "author": "w23d"
-  },
-  {
-   "source": "src/checkpoint10/func_001a7420.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001a7420"
-   ],
-   "author": "w23d"
-  },
-  {
-   "source": "src/checkpoint10/func_001ab51c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001ab51c"
-   ],
-   "author": "w23d"
-  },
-  {
-   "source": "src/checkpoint10/func_001acb90.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001acb90"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001b325c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001b325c"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001b7294.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001b7294"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001ba1d4.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001ba1d4"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001bb8c0.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001bb8c0"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001bd944.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001bd944"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001be104.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001be104"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001c0d30.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001c0d30"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e3270.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e3270"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e3ea4.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e3ea4"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e5658.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e5658"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e744c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e744c"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e7c4c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e7c4c"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e7fb8.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e7fb8"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e8714.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e8714"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001ec128.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001ec128"
-   ],
-   "author": "w23e"
-  },
-  {
-   "source": "src/checkpoint10/func_001ef790.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001ef790"
-   ],
-   "author": "w23e"
   },
   {
    "source": "src/checkpoint10/func_00104fc4.c",
@@ -2599,42 +2306,10 @@
    "author": "w23h"
   },
   {
-   "source": "src/checkpoint10/func_001d38ac.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001d38ac"
-   ],
-   "author": "w23h"
-  },
-  {
-   "source": "src/checkpoint10/func_001d3bcc.cpp",
-   "profile": "sdk",
-   "functions": [
-    "func_001d3bcc"
-   ],
-   "author": "w23h"
-  },
-  {
    "source": "src/checkpoint10/func_001d7e6c.c",
    "profile": "middleware",
    "functions": [
     "func_001d7e6c"
-   ],
-   "author": "w23h"
-  },
-  {
-   "source": "src/checkpoint10/func_001d9a0c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001d9a0c"
-   ],
-   "author": "w23h"
-  },
-  {
-   "source": "src/checkpoint10/func_001d9c14.cpp",
-   "profile": "sdk",
-   "functions": [
-    "func_001d9c14"
    ],
    "author": "w23h"
   },
@@ -2775,22 +2450,6 @@
    "author": "w24b"
   },
   {
-   "source": "src/checkpoint10/func_001a0200.c",
-   "profile": "game",
-   "functions": [
-    "func_001a0200"
-   ],
-   "author": "w24b"
-  },
-  {
-   "source": "src/checkpoint10/func_001a2a18.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001a2a18"
-   ],
-   "author": "w24b"
-  },
-  {
    "source": "src/checkpoint10/func_001c0f5c.c",
    "profile": "game",
    "functions": [
@@ -2815,50 +2474,10 @@
    "author": "w24b"
   },
   {
-   "source": "src/checkpoint10/func_001b6db4.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001b6db4"
-   ],
-   "author": "w24c"
-  },
-  {
    "source": "src/checkpoint10/func_001c1600.cpp",
    "profile": "game",
    "functions": [
     "func_001c1600"
-   ],
-   "author": "w24c"
-  },
-  {
-   "source": "src/checkpoint10/func_001e381c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e381c"
-   ],
-   "author": "w24c"
-  },
-  {
-   "source": "src/checkpoint10/func_001e3ec8.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e3ec8"
-   ],
-   "author": "w24c"
-  },
-  {
-   "source": "src/checkpoint10/func_001e8024.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e8024"
-   ],
-   "author": "w24c"
-  },
-  {
-   "source": "src/checkpoint10/func_001e8738.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e8738"
    ],
    "author": "w24c"
   },
@@ -2895,14 +2514,6 @@
    "author": "w24e"
   },
   {
-   "source": "src/checkpoint10/func_001a407c.c",
-   "profile": "game",
-   "functions": [
-    "func_001a407c"
-   ],
-   "author": "w24e"
-  },
-  {
    "source": "src/checkpoint10/func_001a79fc.c",
    "profile": "game",
    "functions": [
@@ -2911,50 +2522,10 @@
    "author": "w24e"
   },
   {
-   "source": "src/checkpoint10/func_001a81e4.c",
-   "profile": "game",
-   "functions": [
-    "func_001a81e4"
-   ],
-   "author": "w24e"
-  },
-  {
    "source": "src/checkpoint10/func_001d1c10.c",
    "profile": "middleware",
    "functions": [
     "func_001d1c10"
-   ],
-   "author": "w24e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e7134.c",
-   "profile": "game",
-   "functions": [
-    "func_001e7134"
-   ],
-   "author": "w24e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e7564.c",
-   "profile": "game",
-   "functions": [
-    "func_001e7564"
-   ],
-   "author": "w24e"
-  },
-  {
-   "source": "src/checkpoint10/func_001e7cb8.c",
-   "profile": "game",
-   "functions": [
-    "func_001e7cb8"
-   ],
-   "author": "w24e"
-  },
-  {
-   "source": "src/checkpoint10/func_001ebe20.c",
-   "profile": "game",
-   "functions": [
-    "func_001ebe20"
    ],
    "author": "w24e"
   },
@@ -2975,94 +2546,6 @@
    "author": "w24e"
   },
   {
-   "source": "src/checkpoint10/func_001a7444.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001a7444"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001ab540.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001ab540"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001b72b8.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001b72b8"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001b8ba0.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001b8ba0"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001ba1f8.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001ba1f8"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001bb8e4.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001bb8e4"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001bc538.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001bc538"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001bd968.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001bd968"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001c0d54.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001c0d54"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001e440c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e440c"
-   ],
-   "author": "w25a"
-  },
-  {
-   "source": "src/checkpoint10/func_001e567c.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e567c"
-   ],
-   "author": "w25a"
-  },
-  {
    "source": "src/checkpoint10/func_001efcd0_01.c",
    "profile": "game",
    "functions": [
@@ -3081,7 +2564,10 @@
     "func_001f1f34",
     "func_001f1f4c"
    ],
-   "author": "w22a"
+   "author": "w22a",
+   "qualifications": [
+    "[INFERENCE] noinline is a descriptive/code-generation choice preserving the outlined shared search, not recovered original attribute syntax; applies to every function in this unit."
+   ]
   },
   {
    "source": "src/checkpoint10/collect-r2/func_001d860c.cpp",
@@ -3978,25 +3464,36 @@
   {
    "source": "src/checkpoint10/func_0013db40.c",
    "profile": "game",
-   "functions": ["func_0013db40"],
+   "functions": [
+    "func_0013db40"
+   ],
    "author": "C010DefSchedCodex"
   },
   {
    "source": "src/checkpoint10/func_0010239c.c",
    "profile": "game",
-   "functions": ["func_0010239c"],
+   "functions": [
+    "func_0010239c"
+   ],
    "author": "C010DefSchedCodex"
   },
   {
    "source": "src/checkpoint10/func_0013888c.cpp",
    "profile": "middleware",
-   "functions": ["func_0013888c", "func_00182ae4", "func_001c6a34", "func_001c7f10"],
+   "functions": [
+    "func_0013888c",
+    "func_00182ae4",
+    "func_001c6a34",
+    "func_001c7f10"
+   ],
    "author": "C010DefSchedCodex"
   },
   {
    "source": "src/checkpoint10/func_001f580c_default.c",
    "profile": "middleware",
-   "functions": ["func_001f580c"],
+   "functions": [
+    "func_001f580c"
+   ],
    "author": "C010DefSchedCodex"
   },
   {
@@ -4030,20 +3527,40 @@
    "author": "C010DefResourceCodex"
   },
   {
-   "source": "src/checkpoint10/func_001e37b8.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001e37b8"
-   ],
-   "author": "C010DefResourceCodex"
-  },
-  {
    "source": "src/checkpoint10/func_00168cec.cpp",
    "profile": "game",
    "functions": [
     "func_00168cec"
    ],
    "author": "C010DefDisplayCodex"
+  },
+  {
+   "source": "src/models/object_registration/sound_resource_cache.c",
+   "profile": "game",
+   "functions": [],
+   "author": "C010G3UnifyCodex-prereview-F08"
+  },
+  {
+   "source": "src/wave13/func_001db054.cpp",
+   "profile": "game",
+   "functions": [
+    "func_001db054"
+   ],
+   "author": "C010G3UnifyCodex-prereview-F05",
+   "qualifications": [
+    "Genuine canonical CharStrmReader member, aligned with types-fontgfx70ac3e9/a14c1f61; no duplicate Copy alias."
+   ]
+  },
+  {
+   "source": "src/wave13/func_001db068.cpp",
+   "profile": "game",
+   "functions": [
+    "func_001db068"
+   ],
+   "author": "C010G3UnifyCodex-prereview-F05",
+   "qualifications": [
+    "Genuine canonical CharStrmReader member, aligned with types-fontgfx70ac3e9/a14c1f61; no duplicate Copy alias."
+   ]
   }
  ],
  "moves": [
@@ -4111,6 +3628,16 @@
    "function": "func_001c7f10",
    "from": "src/wave12/func_001c7f10.c",
    "to": "src/checkpoint10/func_0013888c.cpp"
+  },
+  {
+   "function": "func_001db054",
+   "from": "src/wave13/func_001db054.c",
+   "to": "src/wave13/func_001db054.cpp"
+  },
+  {
+   "function": "func_001db068",
+   "from": "src/wave13/func_001db068.c",
+   "to": "src/wave13/func_001db068.cpp"
   }
  ]
 }
