@@ -26,8 +26,15 @@ struct SelectionState {
     short successes;
 };
 
+/* [INFERENCE] The list setter refines the former +0x12-only item prefix.
+ * This is not an alias of the independently named W22UiItem/InputItem. */
 struct W6ListItem {
-    unsigned char reserved00[0x12];
+    struct DisplayObject *object;
+    const struct NameTable *table;
+    short label_index, identifier;
+    unsigned short flags;
+    unsigned char active;
+    signed char countdown, initial, text_index;
     short value;
 };
 
@@ -127,6 +134,7 @@ extern void func_001e9944(struct W6ListController *controller);
 extern void func_001e9950(struct W6ListController *controller);
 extern void func_00179600(struct W6ListController *controller, int index, int active);
 extern void func_001e9818(void *screen, int index, int first, int second);
+extern void func_001e981c(void *screen, int group_index, int index, int value);
 extern void func_00173d8c(struct W6HandlePanel10 *panel, int resource);
 #ifdef __cplusplus
 }

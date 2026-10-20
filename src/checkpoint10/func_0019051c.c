@@ -1,21 +1,7 @@
 #include "game/screen.h"
 #include <string.h>
 
-/* Layout shared with src/wave5/func_00145840.c. */
-struct RequestRecord {
-    unsigned kind;
-    unsigned flags;
-    unsigned short count;
-    unsigned short length;
-    unsigned short text[0x76c];
-    unsigned char flag_ee4;
-    unsigned char flag_ee5;
-    unsigned char flag_ee6;
-    unsigned char auxiliary[0x89];
-    int handle;
-    unsigned short status;
-    unsigned char reservedf76[10];
-};
+#include "game/request_exchange.h"
 extern void func_001847c8(void *storage, int initial);
 
 void func_0019051c(struct RequestRecord *record)

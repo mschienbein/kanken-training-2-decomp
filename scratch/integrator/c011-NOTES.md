@@ -1,5 +1,65 @@
 # c011 — default-model author MATCH integration milestone
 
+## Codex named-intake source milestone (2026-10-20, r7)
+
+Preserved source-complete tip `1814a725` and every earlier candidate, attempt,
+receipt, reservation and disposition. No unfinished c009-r3/c010 changes were
+merged. **This is source-ready intake, not checkpoint readiness.**
+
+- Consumed the 32-row `CODEX-MATCH-INTAKE-r2.json` and every newer existing exact
+  RESULT path named by the bounded escalation-ledger scope: **109 manifests,
+  336 publication rows**. Every row has an explicit disposition in
+  `c011/INTAKE-r7.json` and `DISPOSITIONS-r4.json`; all source/receipt hashes,
+  co-defined statuses, ownership and outstanding author obligations are retained.
+- Added **20 units / 22 new functions / 3,640 B**. Cumulative source proposal:
+  **90 units / 98 new functions / 13,732 B**, plus the same **10 context moves /
+  984 B**. The candidate contains 108 identities; no accepted receipt or ledger
+  was changed and no context match was counted again.
+- Kept **10 fresh default-contract deferrals / 1,212 B**, including the newly
+  published nf206 singleton's forbidden callback-erasure cast. Total genuine
+  deferrals are now **82 / 17,040 B**. `0017a49c` is separately excluded: its
+  current exact witness is v3-only, not v6/L1 or new default credit.
+- Reused the actual canonical input constructor/member layouts; adopted only
+  their source-backed native constructor bindings. Shared the render descriptor,
+  audio mode/filter contracts, runtime playback records, depth tables, native
+  writer getters, read-only material storage and actual W6 list-item prefix.
+  The W6 prefix is not a nominal alias of the independently named W22 item.
+- Shared the **actual wave5/00145840 RequestRecord** with c010/0019051c.
+  Both directly revised bodies MATCH. The separate `00191e18` five-input
+  RequestWait versus six-input/by-value-timeout conflict remains blocked, as
+  C010 confirmed; no adapter, retag or conflicting receive prototype was added.
+- Reconciled both c009 writer getters with the actual const native writer
+  interface, without a W20/native class alias. Their source-bound revisions and
+  all six directly revised dependency witnesses are explicit in
+  `CONTRACT-RECONCILIATION-r7.json`.
+- Remeasured target-only projections before admitting them: nf194 does not emit
+  accepted `00195254`; nf218 does not duplicate c011's existing `001e9af8`;
+  nf176's refresh projection omits the unrelated pending-queue mismatch, and its
+  update file is the sole fresh `0014f114` owner. The full immutable author TUs,
+  mismatches and context owners remain documented. np032 retains the real
+  `001dc400` mismatch in its destination; only its two MATCH targets are claimed.
+- Native pane unification candidates did not preserve their target extents.
+  Their sources and failed receipts remain immutable; neither a private
+  LayoutTreeHeader alias nor a c009 dimension-query ownership move was admitted.
+  np030 native/C font and texture APIs, np021's genuine texture dispatcher and
+  separate callback(int)/callback(void) gap, constructor callback contracts and
+  scene/native singleton lifetimes remain explicit, not erased or cast.
+- Ran only **32 sequential bounded `match.py --show 0` invocations** under
+  explicit **v6/L1** and the exact frozen per-unit profile. The final fresh scope
+  has **22 matching candidate targets plus 6 matching direct dependency targets**;
+  rejected intermediate sources and the mixed-TU exit 1 are retained.
+
+`HANDOFF.json`, `DESTINATION-SOURCE-SCOPE-r7.json`, `CONSUMED-RESULTS-r7.json`
+and `DESTINATION-CLOSURE-r7.json` are the current handoff. All prior math,
+accepted-layout, stream, parent and native-pair holds survive. C010's planned
+deferral of its unaccepted `001c7760/001c8a40` pair is not an ownership release.
+Main must refresh shared-header dependencies after c009-r3/c010 finalize, then
+run integrated ownership/interfaces/caller checks and the heavy gates.
+
+Older milestones below are immutable history; their v2/none selections and
+earlier counts are not the current c011 proposal.
+
+
 ## 2026-10-20 resume — explicit v6/L1 destination evidence
 
 The current branch is **c011-integrate**, recovered at `76f628fd`, not the stale

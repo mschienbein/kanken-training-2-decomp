@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "runs": [
+    {
+      "source": "src/wave5/func_00145840.c",
+      "profile": "game",
+      "targets": [
+        "func_00145840"
+      ],
+      "dependency": true,
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/wave5/func_00145840.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r21/func_00145840"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r21/func_00145840/func_00145840.result.json",
+      "receipt_sha256": "9e6f732dadea88f8c7427170d2904ceb422cf8ff062dc33650fa3cbd633b4bbe",
+      "source_sha256": "0aa7fe1cfddabc0c1439c37fd3ee1896fb532fc05e8cc8ec78bba9f875c6eb96",
+      "observed": [
+        {
+          "name": "func_00145840",
+          "address": 1333312,
+          "status": "match",
+          "size": 120,
+          "candidate_size": 120,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    },
+    {
+      "source": "src/checkpoint10/func_0019051c.c",
+      "profile": "game",
+      "targets": [
+        "func_0019051c"
+      ],
+      "dependency": true,
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_0019051c.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r21/func_0019051c"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r21/func_0019051c/func_0019051c.result.json",
+      "receipt_sha256": "625365bf9b939d675452418e241525d92061c5db6d524c7f1e7377b2060860c3",
+      "source_sha256": "2b619847dc5758522513873e5dd2b61407d0135159e1970884f571a66b9b916e",
+      "observed": [
+        {
+          "name": "func_0019051c",
+          "address": 1639708,
+          "status": "match",
+          "size": 112,
+          "candidate_size": 112,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    }
+  ]
+}

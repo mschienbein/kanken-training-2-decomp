@@ -27,6 +27,15 @@ GPL-3.0-only notices remain in each source. The sequence auxiliary command
 Exact author/source/receipt bindings and current explicit v6/L1 destination
 evidence are in `scratch/integrator/c011/CONSUMED-RESULTS-r6.json` and
 `DESTINATION-MATCH-r16.json`; they grant no new library/data or accepted credit.
+The r7 intake additionally adapts the pinned public ResFontBase texture-name
+cleanup organization (`src/checkpoint11/intake-r7/nf169/func_0013ea40.cpp`) and
+Voice refresh/update helper layering (`intake-r7/nf176/audio_sync.cpp` and
+`intake-r7/nf176/func_0014f114.cpp`). Their supplied GPL-3.0-only notices,
+modification notes and unrecovered historical-identity qualifications remain
+in source. Exact delivery and destination bindings are recorded in
+`scratch/integrator/c011/INTAKE-r7.json` and `DESTINATION-CLOSURE-r7.json`;
+they grant no library/helper or accepted credit.
+
 
 
 The public Khronos GLES declaration/constant subsets in `include/GLES2/` use the

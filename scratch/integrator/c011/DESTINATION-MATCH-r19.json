@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "runs": [
+    {
+      "source": "src/checkpoint11/intake-r7/nf186/func_0017053c.cpp",
+      "profile": "game",
+      "targets": [
+        "func_0017053c"
+      ],
+      "author_source": "scratch/authors/nf186/src/func_0017053c.cpp",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint11/intake-r7/nf186/func_0017053c.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r19/func_0017053c"
+      ],
+      "exit_code": 1,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r19/func_0017053c/func_0017053c.result.json",
+      "receipt_sha256": "19f017114851191cd07f98a370b919225342d086f3989b1edd73a4ecaa4d7a0f",
+      "source_sha256": "be8258b24d7fc5210deaab32e3249cfb3b2728ef9c45963dab76c7375028feea",
+      "observed": [
+        {
+          "name": "func_0017053c",
+          "address": 1508668,
+          "status": "mismatch",
+          "size": 108,
+          "candidate_size": 124,
+          "first_diff": 16
+        }
+      ],
+      "reason": null
+    },
+    {
+      "source": "src/checkpoint11/intake-r7/nf186/pane_dimensions.cpp",
+      "profile": "game",
+      "targets": [
+        "func_0016f4ec"
+      ],
+      "pending_forward_move_from": "src/wave17/func_0016f4ec.c",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint11/intake-r7/nf186/pane_dimensions.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r19/pane_dimensions"
+      ],
+      "exit_code": 1,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r19/pane_dimensions/pane_dimensions.result.json",
+      "receipt_sha256": "400710faf1ad133d60061cc37603658913ecdf100beb3a93ad7692751582bdc4",
+      "source_sha256": "15b0b86374224e3c816f483181a75e9ae4a5e3f2e5a90908f381d00252703f40",
+      "observed": [
+        {
+          "name": "func_0016f4ec",
+          "address": 1504492,
+          "status": "mismatch",
+          "size": 72,
+          "candidate_size": 84,
+          "first_diff": 4
+        }
+      ],
+      "reason": null
+    }
+  ]
+}
