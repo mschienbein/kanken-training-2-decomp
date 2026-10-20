@@ -206,5 +206,41 @@ class RuntimeObjectWitnessTests(unittest.TestCase):
             runtime.classification_records([], evidence)
 
 
+class RuntimeEntryProtectionTests(unittest.TestCase):
+    def test_actual_global_entry_declaration_and_complete_section_are_required(self) -> None:
+        image, layout = fixture([0x47704770, 0xE12FFF1E])
+        analyzer = analyze.Analyzer(image, layout)
+        anchor = {"address": BASE + 4, "size": 4, "isa": "arm", "kind": "library",
+                  "code_ranges": [[BASE + 4, BASE + 8]], "entries": [],
+                  "classification_evidence": {"identity": "synthetic_anchor"}}
+        catalogue = {"image_sha256": hashlib.sha256(image).hexdigest(), "functions": [anchor],
+                     "ranges": [{"start": BASE, "end": BASE + 4, "kind": "unknown", "owner": None}],
+                     "stats": {}, "closure_evidence": {"exact_runtime_data": {}}}
+        section = {"section_base": BASE, "section_size": 8, "alignment": 4,
+                   "whole_section_reencoded_equal": True, "image_section_sha256": hashlib.sha256(analyzer.text).hexdigest(),
+                   "symbols": [{"name": "synthetic_selector", "kind": "STT_FUNC", "bind": "STB_LOCAL", "offset": 0, "size": 2}]}
+        record = {"address": BASE, "size": 2, "isa": "thumb", "symbol": "synthetic_selector", "symbol_offset": 0,
+                  "section": section, "anchor": {"address": BASE + 4, "size": 4, "isa": "arm", "symbol": "synthetic_anchor",
+                                                "symbol_offset": 4, "record_sha256": runtime._record_sha(anchor),
+                                                "image_sha256": hashlib.sha256(analyzer.text[4:8]).hexdigest()}}
+        with self.assertRaisesRegex(ValueError, "global function declaration"):
+            runtime.close_entry_fragments(catalogue, analyzer, {"entry_fragments": [record]}, {})
+        section["whole_section_reencoded_equal"] = False
+        with self.assertRaisesRegex(ValueError, "complete independently bound"):
+            runtime.close_entry_fragments(catalogue, analyzer, {"entry_fragments": [record]}, {})
+
+    def test_prepared_protection_checks_complete_metadata_not_only_extent(self) -> None:
+        function = {"address": BASE, "size": 4, "isa": "arm", "entries": [], "literals": []}
+        evidence = {"_prepared_protection": {"identity_count": 1, "identities": [
+            {"name": "synthetic", "owner": BASE, "size": 4, "isa": "arm", "entries": [],
+             "proposal_record_sha256": runtime._record_sha(function)}]}}
+        catalogue = {"functions": [function]}
+        runtime.check_prepared_protection(catalogue, evidence)
+        function["literals"] = [[BASE, BASE + 4]]
+        with self.assertRaisesRegex(ValueError, "prepared identity"):
+            runtime.check_prepared_protection(catalogue, evidence)
+
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -417,7 +417,16 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict[str, str]]:
                     or classification["historical_classification_evidence"] != historical
                     or classification["image_sha256"] != evidence["image_sha256"]):
                 raise ValueError("runtime new extent cannot borrow its historical shorter proof")
-    return evidence, {str(path.relative_to(root)): _sha(payload)}
+    inputs = {str(path.relative_to(root)): _sha(payload)}
+    if "prepared_protection" in evidence:
+        descriptor = evidence["prepared_protection"]
+        protection_path = root / descriptor["path"]
+        content = protection_path.read_bytes()
+        if _sha(content) != descriptor["sha256"]:
+            raise ValueError("v11 prepared identity snapshot differs from its frozen input")
+        evidence["_prepared_protection"] = json.loads(content)
+        inputs[descriptor["path"]] = descriptor["sha256"]
+    return evidence, inputs
 
 
 def _check_binding(catalogue: dict, analyzer, record: dict) -> None:
@@ -753,4 +762,121 @@ def classification_records(records: list[dict], evidence: dict) -> list[dict]:
             raise ValueError("runtime extent repair cannot rewrite a different historical identity")
     if replacements.keys() - {row["address"] for row in result}:
         raise ValueError("runtime extent repair lost its prior classification record")
+    result.extend(record["classification_record"] for record in evidence.get("entry_fragments", []))
     return result
+
+
+def close_entry_fragments(catalogue: dict, analyzer, evidence: dict, protected: dict[int, dict]) -> list[dict]:
+    """Admit real global declarations only at independently bound section offsets."""
+    functions = {function["address"]: function for function in catalogue["functions"]}
+    replacements, applied = [], []
+    for record in evidence.get("entry_fragments", []):
+        address, size = record["address"], record["size"]
+        section, anchor = record["section"], record["anchor"]
+        bound = functions.get(anchor["address"])
+        base = anchor["address"] - anchor["symbol_offset"]
+        if (record["isa"] != "thumb" or size != 2 or address != base + record["symbol_offset"]
+                or section["section_base"] != base or base % section["alignment"]
+                or not section["whole_section_reencoded_equal"] or bound is None
+                or (bound["size"], bound["isa"]) != (anchor["size"], anchor["isa"])
+                or _record_sha(bound) != anchor["record_sha256"]
+                or bound.get("classification_evidence", {}).get("identity") != anchor["symbol"]
+                or _sha(_read(analyzer, base, base + section["section_size"])) != section["image_section_sha256"]
+                or _sha(_read(analyzer, anchor["address"], anchor["address"] + anchor["size"])) != anchor["image_sha256"]):
+            raise ValueError("selector entry lacks complete independently bound section/anchor equality")
+        declaration = [symbol for symbol in section["symbols"] if symbol["name"] == record["symbol"]]
+        if (len(declaration) != 1 or declaration[0]["kind"] != "STT_FUNC" or declaration[0]["bind"] != "STB_GLOBAL"
+                or declaration[0]["offset"] != record["symbol_offset"] or declaration[0]["size"] != size):
+            raise ValueError("selector entry has no actual exact-sized global function declaration")
+        classification = record["classification_record"]
+        if (classification["address"] != address or classification["size"] != size
+                or classification["isa"] != record["isa"] or classification["kind"] != "library"
+                or classification["basis"] != "known_library" or classification["identity"] != record["symbol"]
+                or classification["image_sha256"] != catalogue["image_sha256"]
+                or classification["original_extent_sha256"] != record["fragment_sha256"]):
+            raise ValueError("selector classification is not its independent complete declaration")
+        offset = address - base
+        mapping = section["mapping"]
+        selected = next(((first, mapping[index + 1][0] if index + 1 < len(mapping) else section["section_size"], kind)
+                         for index, (first, kind) in enumerate(mapping)
+                         if first <= offset < (mapping[index + 1][0] if index + 1 < len(mapping) else section["section_size"])), None)
+        if selected is None or selected[2] != "$t" or offset + size > selected[1]:
+            raise ValueError("selector entry is not fully covered by actual Thumb section mapping")
+        for relocation in section["relocations"]:
+            if relocation["type"] != 10:
+                raise ValueError("selector full-section proof contains an unsupported relocation")
+            instruction = analyzer.decode(base + relocation["offset"], "thumb")
+            if instruction is None or not instruction.call or instruction.target != (
+                    relocation["target"], "thumb" if relocation["thumb"] else "arm"):
+                raise ValueError("selector full-section original call relocation differs")
+        expected_references = [row for row in section["relocations"] if row["agreement"] == "same_section_definition"]
+        if not expected_references or record["placement_references"] != expected_references:
+            raise ValueError("selector placement omits its independent same-section references")
+        for reference in expected_references:
+            site = base + reference["offset"]
+            if (reference["symbol_section"] != section["section_index"]
+                    or reference["target"] - reference["symbol_offset"] != base
+                    or not any(first <= site < end for first, end in bound["code_ranges"])):
+                raise ValueError("selector same-section reference is not owned authenticated caller code")
+        if (address in functions or any(function["address"] < address + size
+                                      and address < function["address"] + function["size"] for function in functions.values())
+                or any(function["address"] < address + size and address < function["address"] + function["size"]
+                       for function in protected.values())):
+            raise ValueError("selector entry would replace a protected or existing identity")
+        if sum(min(address + size, row["end"]) - max(address, row["start"])
+               for row in catalogue["ranges"] if row["kind"] == "unknown"
+               and row["start"] < address + size and address < row["end"]) != size:
+            raise ValueError("selector entry does not cover an exact independently unknown interval")
+        instruction = analyzer.decode(address, "thumb")
+        detail = next(analyzer.thumb.disasm(_read(analyzer, address, address + size), address, count=1), None)
+        if (instruction is None or detail is None or instruction.size != size or instruction.conditional
+                or not instruction.returns or detail.id != arm.ARM_INS_BX
+                or detail.operands[0].reg != arm.ARM_REG_LR
+                or _sha(_read(analyzer, address, address + size)) != record["fragment_sha256"]):
+            raise ValueError("selector declaration is not a complete exact normal-return body")
+        function = {"address": address, "size": size, "code_size": size, "isa": "thumb", "kind": "library",
+                    "pools": [], "literals": [], "code_ranges": [[address, address + size]],
+                    "evidence": ["exact_bound_global_section_entry"],
+                    "entries": [{"address": address, "isa": "thumb", "kind": "entry",
+                                 "evidence": ["exact_bound_global_section_entry"], "sources": []}],
+                    "noreturn": False, "noreturn_reasons": [],
+                    "classification_evidence": record["classification_record"]}
+        catalogue["functions"].append(function)
+        functions[address] = function
+        replacements.append((address, address + size, "function", address))
+        applied.append({"id": record["id"], "address": address, "size": size, "isa": "thumb",
+                        "symbol": record["symbol"], "section_base": base,
+                        "section_size": section["section_size"], "whole_section_sha256": section["image_section_sha256"],
+                        "anchor_unchanged": anchor, "same_section_references": expected_references,
+                        "new_C_credit": 0, "qualification": record["qualification"]})
+    catalogue["functions"].sort(key=lambda function: function["address"])
+    _replace_unknown_ranges(catalogue, replacements)
+    stats = catalogue["stats"]
+    added_bytes = sum(row["size"] for row in applied)
+    stats["functions"] = len(catalogue["functions"])
+    stats["functions_by_isa"] = dict(sorted(Counter(function["isa"] for function in catalogue["functions"]).items()))
+    stats["starts_by_evidence"] = dict(sorted(Counter(item for function in catalogue["functions"]
+                                                     for item in function["evidence"]).items()))
+    stats["code_bytes"] += added_bytes
+    stats["decoded_instructions"] += len(applied)
+    stats["bytes_by_range_kind"]["unknown"] -= added_bytes
+    stats["bytes_by_range_kind"]["function"] += added_bytes
+    stats["unknown_ranges"] = sum(row["kind"] == "unknown" for row in catalogue["ranges"])
+    catalogue["closure_evidence"]["exact_runtime_data"]["entry_fragments"] = applied
+    return applied
+
+
+def check_prepared_protection(catalogue: dict, evidence: dict) -> None:
+    """Bind every currently prepared identity, including inherited literal metadata."""
+    snapshot = evidence.get("_prepared_protection")
+    if snapshot is None:
+        return
+    functions = {function["address"]: function for function in catalogue["functions"]}
+    if len(snapshot["identities"]) != snapshot["identity_count"]:
+        raise ValueError("prepared runtime protection identity count differs")
+    for row in snapshot["identities"]:
+        function = functions.get(row["owner"])
+        if (function is None or (function["size"], function["isa"], function["entries"]) != (
+                row["size"], row["isa"], row["entries"])
+                or _record_sha(function) != row["proposal_record_sha256"]):
+            raise ValueError(f"v11 closure changes prepared identity {row['name']}")

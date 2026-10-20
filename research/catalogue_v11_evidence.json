@@ -53,6 +53,316 @@
     },
     "whole_section_reencoded_equal": true
   },
+  "combined_accounting": {
+    "anomalies": 9,
+    "generated": false,
+    "library_functions": 81,
+    "ordinary_extent_bytes": 1123224,
+    "ordinary_functions": 4582,
+    "owners": 4744,
+    "separate_entry_unknown_delta": -2,
+    "three_interval_unknown_delta": -216,
+    "unknown_bytes": 142,
+    "unknown_intervals": 32
+  },
+  "entry_fragments": [
+    {
+      "address": 1702160,
+      "anchor": {
+        "address": 1702568,
+        "image_sha256": "708a87c20812d930ad7d018d219b08979ceedfb876eaaa6d9d39db1a40d81ad9",
+        "isa": "thumb",
+        "record_sha256": "8ae9d10d4aa64a290c8a967257cd11dfc465ac6b0f736cfe7328b3403238b01b",
+        "size": 620,
+        "symbol": "_printf_fp_dec_real",
+        "symbol_offset": 408
+      },
+      "classification_record": {
+        "address": 1702160,
+        "basis": "known_library",
+        "evidence": "research/catalogue_v11_evidence.json: lib-sel-fp-printf-entry-v1",
+        "identity": "__lib_sel_fp_printf",
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "isa": "thumb",
+        "kind": "library",
+        "known_library_identity": "Real global2B STT_FUNC at offset0 in complete exact5.04-b82 _printf_fp_dec.o section, original placement independently fixed by authenticated620B offset408 owner and three same-section relocated references; complete original section reencodes exactly.",
+        "original_extent_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "qualification": "New separately evidenced unadopted library entry, no C credit. Existing620B owner, every prior identity/entry and foreign-tail ownership stay unchanged; no alias/name transfer to00100c9c or claimed historical archive uniqueness.",
+        "size": 2
+      },
+      "fragment_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+      "id": "lib-sel-fp-printf-entry-v1",
+      "isa": "thumb",
+      "mapping_kind": "$t",
+      "placement_references": [
+        {
+          "agreement": "same_section_definition",
+          "offset": 530,
+          "symbol": "_fp_digits",
+          "symbol_offset": 2,
+          "symbol_section": 1,
+          "target": 1702162,
+          "thumb": true,
+          "type": 10
+        },
+        {
+          "agreement": "same_section_definition",
+          "offset": 564,
+          "symbol": "_fp_digits",
+          "symbol_offset": 2,
+          "symbol_section": 1,
+          "target": 1702162,
+          "thumb": true,
+          "type": 10
+        },
+        {
+          "agreement": "same_section_definition",
+          "offset": 628,
+          "symbol": "_fp_digits",
+          "symbol_offset": 2,
+          "symbol_section": 1,
+          "target": 1702162,
+          "thumb": true,
+          "type": 10
+        }
+      ],
+      "qualification": "Independent global selector declaration and bound complete section, not padding or inferred return-only API identity. Whole-section imported target qualifications remain in frozen metadata.",
+      "section": {
+        "alignment": 4,
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "fragment_is_unconditional_normal_return": true,
+        "fragment_sha256": "c7dfbb7d02759eacb64dbc916c1bb6f21eabaff1c1032ea5c9176abf7fd28df8",
+        "image_section_sha256": "993363ad426a59f7ec6b2ad5ebc8ca791324705a3004503125ea9d1fe3fe5586",
+        "mapping": [
+          [
+            0,
+            "$t"
+          ],
+          [
+            1028,
+            "$d"
+          ]
+        ],
+        "member": "_printf_fp_dec.o",
+        "member_offset": 651562,
+        "member_sha256": "5a715fc6e22b9aceb7d8d3501612137a9c153e65ab25250130afe7991149726a",
+        "object_section_sha256": "605a7937e57bfccf656afae9096356040fbf1bb9a8606de6cb9a89b5cf1b2c66",
+        "read_metadata": [],
+        "relocations": [
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 28,
+            "symbol": "__ieee_status",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 2192876,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 164,
+            "symbol": "_btod_etento",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1051568,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "external_binding_inferred",
+            "offset": 180,
+            "symbol": "_btod_d2e",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1402356,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 216,
+            "symbol": "_btod_ediv",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1403660,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 234,
+            "symbol": "_btod_emul",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1703200,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 274,
+            "symbol": "_ll_udiv10",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1703276,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 322,
+            "symbol": "_ll_udiv10",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1703276,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 428,
+            "symbol": "__ARM_fpclassify",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 2051948,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 476,
+            "symbol": "_printf_fp_infnan",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1051432,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "same_section_definition",
+            "offset": 530,
+            "symbol": "_fp_digits",
+            "symbol_offset": 2,
+            "symbol_section": 1,
+            "target": 1702162,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "same_section_definition",
+            "offset": 564,
+            "symbol": "_fp_digits",
+            "symbol_offset": 2,
+            "symbol_section": 1,
+            "target": 1702162,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "same_section_definition",
+            "offset": 628,
+            "symbol": "_fp_digits",
+            "symbol_offset": 2,
+            "symbol_section": 1,
+            "target": 1702162,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 784,
+            "symbol": "__rt_udiv10",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1402312,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 878,
+            "symbol": "_printf_pre_padding",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1703544,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 908,
+            "symbol": "_printf_pre_padding",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1703544,
+            "thumb": true,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 960,
+            "symbol": "__rt_locale",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1702148,
+            "thumb": false,
+            "type": 10
+          },
+          {
+            "agreement": "whole_body_library_symbol_candidate",
+            "offset": 1020,
+            "symbol": "_printf_post_padding",
+            "symbol_offset": 0,
+            "symbol_section": "SHN_UNDEF",
+            "target": 1703588,
+            "thumb": true,
+            "type": 10
+          }
+        ],
+        "section_base": 1702160,
+        "section_index": 1,
+        "section_size": 1040,
+        "symbols": [
+          {
+            "bind": "STB_LOCAL",
+            "kind": "STT_SECTION",
+            "name": ".text",
+            "offset": 0,
+            "size": 0
+          },
+          {
+            "bind": "STB_LOCAL",
+            "kind": "STT_FUNC",
+            "name": "_fp_digits",
+            "offset": 2,
+            "size": 406
+          },
+          {
+            "bind": "STB_GLOBAL",
+            "kind": "STT_FUNC",
+            "name": "__lib_sel_fp_printf",
+            "offset": 0,
+            "size": 2
+          },
+          {
+            "bind": "STB_GLOBAL",
+            "kind": "STT_FUNC",
+            "name": "_printf_fp_dec_real",
+            "offset": 408,
+            "size": 620
+          }
+        ],
+        "whole_section_reencoded_equal": true
+      },
+      "size": 2,
+      "symbol": "__lib_sel_fp_printf",
+      "symbol_binding": "STB_GLOBAL",
+      "symbol_kind": "STT_FUNC",
+      "symbol_offset": 0
+    }
+  ],
   "historical_negative_measurements": {
     "bounded_index_probe": {
       "path": "scratch/worktrees/catalogue-v10/scratch/closure/bounded-index-probe.json",
@@ -70,8 +380,13 @@
   "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
   "new_C_credit": 0,
   "parent_evidence": {
-    "path": "research/catalogue_v10_r4_evidence.json",
-    "sha256": "4db813af5c65a7018633080901fa3d556afcd1a1ce577fae93001eea5a83879e"
+    "path": "research/catalogue_v10_r5_evidence.json",
+    "sha256": "b758574088ae4a9c85f8dd89548066dec48d060d622aa43dcef36707827d2f52"
+  },
+  "prepared_protection": {
+    "path": "research/catalogue_v11_protection.json",
+    "sha256": "1c2cf1bf6396f5a78251cb9ef0f1a5b59eff1c77517341b47399143caf6df415",
+    "size": 1803150
   },
   "prior_proposal": {
     "adopted": false,
@@ -125,7 +440,7 @@
       "size": 15432
     }
   ],
-  "qualification": "All equality/bounds derive from complete independently placed runtime sections, no heuristic padding/table rule or archive variant uniqueness. Remaining33 intervals144B remain outside this data closure unless separately evidenced. Source-only r5 endian repair is a required integration prerequisite, not performed here.",
+  "qualification": "Three exact object-backed intervals close216B; a separately evidenced global2B Thumb selector entry closes2B more, with no C credit. Combined proposed remainder142B/32 intervals/9 anomalies, not generated. Source-only r5 endian repair88ae992f75eb4195e5eef19fc9c5feef5bd5ca04 and immutable r4→r5→v11 evidence are preserved. All2297 preparedc009-r2 identities are explicitly protected. No tests/build/generation or independent review performed by the closure author.",
   "rejected_runtime_extent_growth_retained": {
     "addresses": [
       1050022,

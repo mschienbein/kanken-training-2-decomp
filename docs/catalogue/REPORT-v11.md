@@ -11,8 +11,15 @@ restart review sealed **FAIL V10R4-R01**: fixed-width pool reads did not maintai
 an all-path little-endian interpretation after SETEND BE. Its failed records
 remain in `scratch/review/catalogue-v10-r4/restart-20261020/`. There is no claim of
 an occurrence of that defect in this image, and the defect is not suppressed here.
-The separate source-only v10-r5 endian repair must precede new proposal generation
-and independent review. V10-r4 is never adopted by this report.
+The separate source-only v10-r5 repair
+**`88ae992f75eb4195e5eef19fc9c5feef5bd5ca04`** is now source-merged into this
+worktree before any new generation. The immutable evidence chain is
+**r4 → r5 → v11**, with r5 child SHA
+`b758574088ae4a9c85f8dd89548066dec48d060d622aa43dcef36707827d2f52`.
+Only loader/provenance/fixture conflicts were reconciled; the repaired reader
+and new endian regression bodies were not changed. The combined generator is
+v11 and explicitly preserves r5 repair provenance. No checks or generation were
+rerun during this integration. V10-r4 is never adopted by this report.
 
 The authoritative adopted state is main's **v9-r2 / GATES v1.19**, including the
 finalized cmodels identities; this feature parent's older gates/accepted files are
@@ -33,8 +40,8 @@ unknown **360 → 144 B**, intervals **36 → 33**, anomalies **10 → 9**. Thes
 **proposal accounting**, not exercised generation results. Owners and ordinary
 creditable denominator stay **4,743 / 4,582 / 1,123,224 B**; the runtime owner's
 new physical extent adds no ordinary C credit. **This is not zero-unknown closure.**
-The other33 intervals/144B remain open unless separately witnessed by the alignment
-investigation and integrated under the same proof standard.
+This three-interval delta is kept separate from the subsequently authorized2B
+selector entry below; it is not silently changed to218B.
 
 ## Exact private inputs and inherited metadata
 
@@ -144,15 +151,17 @@ search was used.
 `scratch/runtime-data-v11/alignment-closure-findings.json`, SHA
 `19d7ccbe9f217a686babdd91c31c7909f6222313fe103c928787b0ca10ad9656`,
 explicitly accounts for all33 intervals. The two-byte `0019f910–0019f912` selector
-now has **fully evidenced independent-entry findings**, not yet an applied rule:
-actual global `STT_FUNC __lib_sel_fp_printf`, offset0, declared2B, `$t` mapping;
+was first sealed as **fully evidenced independent-entry findings**. Main then
+explicitly authorized its separate source-only integration. It is now a new
+unadopted library entry, based on actual global
+`STT_FUNC __lib_sel_fp_printf`, offset0, declared2B, `$t` mapping;
 complete1040B exact relocation closure; independent same-section references at
 `0019fb22/0019fb44/0019fb84` bind offset2 to`0019f912`; the authenticated620B
 owner at`0019faa8` is at offset408. Its2B fragment is an unconditional normal
 return. This supplies a real declaration/placement witness, not generic return
 similarity. The existing620B owner and rejected632B growth remain unchanged.
-The new entry is recorded as a separately reviewable finding, not silently added
-to the three-interval proposal or transferred to the ambiguous`00100c9c` stub.
+The new entry is separately accounted, never transferred to the ambiguous
+`00100c9c` stub or used to grow the620B owner.
 
 The other32 intervals remain open. Nine restored halfword holes have actual
 4-aligned `$d` section mappings, but **no data-object declarations and no complete
@@ -167,9 +176,23 @@ No unsupported padding, rodata, API rename or extent rule is installed for them.
 Metadata artifacts: `alignment-object-metadata.json` SHA
 `c3b89be37226dc2c5922b8c0581f679953a8ecf1f1cb67dcb0e3f7db51f61008`;
 the exact supplemental section hashes and every checked relocation are in
-`alignment-supplement-measurements.json`. These findings extend intake only;
-the isolated proposal still leaves144B/33 intervals until the separate2B-entry
-integration is independently reviewed.
+`alignment-supplement-measurements.json`. Separate entry delta: owners **+1**,
+library owners **+1**, ordinary functions/bytes **0**, unknown **−2B/−1interval**.
+Combined source-only proposal: **4,744 owners /81library /4,582ordinary /
+1,123,224ordinary B;142unknown B/32intervals/9anomalies**. No whole-image generation
+has been run. Bounded application of only these four exact intervals to the fixed
+proposal metadata measured those totals, retained all4,776 prior entries, added
+only`0019f910/Thumb`, and checked all **2,297 c009-r2 prepared identities**.
+Its receipt `scratch/runtime-data-v11/source-integration-bounded-evidence.json`
+SHA `24903c7deae02f4d6fbda44a802e1bf2b7c7dd06d7be3c1d65fd740e45760a10`
+records exit0; this is not generation, suite or independent review.
+
+Prepared protection is frozen in `research/catalogue_v11_protection.json`, SHA
+`1c2cf1bf6396f5a78251cb9ef0f1a5b59eff1c77517341b47399143caf6df415`.
+Generation compares every complete proposal record/entry/extent for those2297
+identities, not merely the old1602 protection count. The inherited separately
+reviewed literal metadata at`00203a68` and`001e81fc` is explicitly pinned, not
+reinterpreted or changed by v11. Main's source/header/harness freeze is untouched.
 
 
 ## Artifacts and exercised investigation
@@ -204,7 +227,21 @@ published vendor code or source-match candidates. The immutable receipts remain
 available even after scaffolding removal.
 
 **Not run:** tests, suite, build, compilation/matcher, linter, formatter or full
-catalogue generation. Main performs final source-stack integration (including the
-mandatory v10-r5 repair), clean suite, generation, exact delta/protected-identity
-checks and fresh independent review. No adoption or C credit follows from these
-findings or the authored proposal.
+catalogue generation. Main performs clean suite, generation, exact
+delta/protected-identity checks and fresh independent review of the combined
+repaired source stack. No adoption or C credit follows from these findings.
+
+## Main-only readiness commands
+
+After granting the heavy slot, from `scratch/worktrees/catalogue-v11`:
+
+```sh
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python -B -m unittest tests.test_catalogue_runtime_data tests.test_catalogue_endian tests.test_catalogue_endian_cli tests.test_analyze
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python -B -m unittest discover -s tests -t .
+/home/michael/code/kanken-training-2-decomp/.venv/bin/python -B tools/analyze.py catalogue --out scratch/analyze/catalogue-v11.json
+```
+
+The first command's original-image stability test includes two generations and
+must not run before that slot is granted. No command above was run by this author.
+The ordinary generator always binds r4/r5/v11 evidence and the2297-identity
+prepared snapshot; no main merge, adoption or gate revision is implied.

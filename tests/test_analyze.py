@@ -64,10 +64,16 @@ def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dic
     }
     extension_path = root / "research/catalogue_v10_r4_evidence.json"
     extension_path.write_text(json.dumps(extension))
+    repair = {"revision": "catalogue-v10-r5", "image_sha256": image_sha256,
+              "parent_evidence": {"path": str(extension_path.relative_to(root)),
+                                  "sha256": hashlib.sha256(extension_path.read_bytes()).hexdigest()},
+              "provenance": "synthetic endian repair"}
+    repair_path = root / "research/catalogue_v10_r5_evidence.json"
+    repair_path.write_text(json.dumps(repair))
     runtime = {
         "revision": "catalogue-v11", "image_sha256": image_sha256,
-        "parent_evidence": {"path": str(extension_path.relative_to(root)),
-                            "sha256": hashlib.sha256(extension_path.read_bytes()).hexdigest()},
+        "parent_evidence": {"path": str(repair_path.relative_to(root)),
+                            "sha256": hashlib.sha256(repair_path.read_bytes()).hexdigest()},
         "prior_proposal": {"sha256": "a" * 64, "commit": "1" * 40, "unknown_bytes": 4,
                            "unknown_intervals": 1, "adopted": False},
         "sections": [], "new_C_credit": 0, "qualification": "synthetic complete-section closure",
@@ -1450,6 +1456,7 @@ class CatalogueTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r4_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v10_r5_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_evidence.json", result["generator"]["input_sha256"])
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
@@ -1745,12 +1752,14 @@ class CatalogueTests(unittest.TestCase):
         for address, expected in protected.items():
             self.assertEqual(functions[expected["address"]], expected, f"{address:#x}")
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
-                          first["stats"]["creditable_bytes"]), (4743, 4582, 1123224))
+                          first["stats"]["creditable_bytes"]), (4744, 4582, 1123224))
         self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
-                          first["stats"]["anomalies"]), (144, 33, 9))
+                          first["stats"]["anomalies"]), (142, 32, 9))
         self.assertEqual(sum(first["stats"][key] for key in ("code_bytes", "pool_bytes", "literal_bytes")),
                          first["stats"]["bytes_by_range_kind"]["function"])
         runtime = first["closure_evidence"]["exact_runtime_data"]
+        self.assertEqual([(row["address"], row["size"]) for row in runtime["entry_fragments"]], [(0x19F910, 2)])
+        self.assertEqual((functions[0x19F910]["kind"], functions[0x19F910]["size"]), ("library", 2))
         self.assertEqual([(row["start"], row["end"], row["kind"]) for row in runtime["sections"]],
                          [(0x1569B0, 0x156A30, "rodata"), (0x1944AC, 0x1944E8, "rodata"),
                           (0x1964E8, 0x196504, "function")])
@@ -2479,6 +2488,7 @@ class CatalogueClosureTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v10_evidence.json", inputs)
                 self.assertIn("research/catalogue_v10_r3_evidence.json", inputs)
                 self.assertIn("research/catalogue_v10_r4_evidence.json", inputs)
+                self.assertIn("research/catalogue_v10_r5_evidence.json", inputs)
                 self.assertIn("research/catalogue_v11_evidence.json", inputs)
                 for field in ("parent_evidence", "baseline_catalogue"):
                     changed = json.loads(json.dumps(evidence))
@@ -2500,6 +2510,14 @@ class CatalogueClosureTests(unittest.TestCase):
                                {"parent_evidence": {**extension["parent_evidence"], "sha256": "0" * 64}}):
                     extension_path.write_text(json.dumps({**extension, **change}))
                     with self.subTest(extension_change=change), self.assertRaisesRegex(ValueError, "v10-r4 evidence"):
+                        catalogue_closure.load_inputs(root, parent)
+                library_revision_fixture(root, path, "synthetic")
+                repair_path = root / "research/catalogue_v10_r5_evidence.json"
+                repair = json.loads(repair_path.read_text())
+                for change in ({"image_sha256": "wrong"}, {"revision": "catalogue-v10-r4"},
+                               {"parent_evidence": {**repair["parent_evidence"], "sha256": "0" * 64}}):
+                    repair_path.write_text(json.dumps({**repair, **change}))
+                    with self.subTest(repair_change=change), self.assertRaisesRegex(ValueError, "v10-r5 evidence"):
                         catalogue_closure.load_inputs(root, parent)
                 library_revision_fixture(root, path, "synthetic")
                 runtime_path = root / "research/catalogue_v11_evidence.json"

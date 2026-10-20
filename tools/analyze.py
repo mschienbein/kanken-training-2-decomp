@@ -103,6 +103,7 @@ class Instruction:
     address_target: int | None = None
     pc_add_register: int | None = None
     register_constant: tuple[int, int] | None = None
+    register_pool: tuple[int, int] | None = None
 
 
 @dataclass(slots=True)
@@ -315,9 +316,8 @@ class Analyzer:
                     literal = ((address + 4) & ~3) + op.mem.disp
                     width = 8 if ops[0].type == arm.ARM_OP_REG and arm.ARM_REG_D0 <= ops[0].reg <= arm.ARM_REG_D31 else 4
                     ins.pools = ((literal, literal + width),)
-                    if (decoded.id == arm.ARM_INS_LDR and width == 4 and ops[0].type == arm.ARM_OP_REG
-                            and literal % 4 == 0 and self.base <= literal <= self.end - 4):
-                        ins.register_constant = (ops[0].reg, self.word(literal))
+                    if decoded.id == arm.ARM_INS_LDR and width == 4 and ops[0].type == arm.ARM_OP_REG:
+                        ins.register_pool = (ops[0].reg, literal)
             if ops and ops[0].reg == arm.ARM_REG_PC:
                 ins.stop = ins.indirect = True
         elif decoded.id == arm.ARM_INS_ADR and len(ops) == 2:
@@ -958,7 +958,7 @@ class Analyzer:
             {"address": trace.address, "isa": trace.isa, "kind": trace.kind,
              "code_ranges": _merge([(site, site + size) for site, size in trace.code.items()]),
              "entries": list(trace.entries.values())}
-            for trace in traces if trace.isa == "thumb"]}, self,
+            for trace in traces]}, self,
             address_witnesses=self.formed_code_pointers, include_reads=False)
         targets.update((row["target"], row["isa"]) for row in self.formed_code_pointers)
         return targets
@@ -1327,6 +1327,15 @@ class Analyzer:
         addressed word span already evidenced by v2, not a guessed array length.
         References into string suffixes and external pointer tables count as shared.
         """
+        if __package__:
+            from . import catalogue_closure
+        else:
+            import catalogue_closure
+        functions = [{"address": trace.address, "isa": trace.isa, "kind": trace.kind,
+                      "code_ranges": _merge([(site, site + size) for site, size in trace.code.items()]),
+                      "entries": list(trace.entries.values())} for trace in traces]
+        little_endian = catalogue_closure._little_endian_sites(
+            catalogue_closure._decoded_functions({"functions": functions}, self), self)
         self.literal_conflicts = []
         self.shared_literals = []
         self.literal_extent_changes.clear()
@@ -1371,8 +1380,14 @@ class Analyzer:
                     ins = self.decode(address, trace.isa)
                     target = ins.address_target
                     if (ins.pc_add_register is not None and address not in branch_targets
-                            and previous is not None and previous[0] + previous[1].size == address):
+                            and previous is not None and not previous[1].conditional and not ins.conditional
+                            and previous[0] + previous[1].size == address):
                         constant = previous[1].register_constant
+                        pool_constant = previous[1].register_pool
+                        if pool_constant is not None and previous[0] in little_endian:
+                            register, pool = pool_constant
+                            if pool % 4 == 0 and self.base <= pool <= self.end - 4:
+                                constant = (register, self.word(pool))
                         if constant is not None and constant[0] == ins.pc_add_register:
                             target = (address + 4 + constant[1]) & 0xFFFFFFFF
                     if target is not None:
@@ -2358,7 +2373,9 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         else:
             import catalogue_closure
         catalogue_closure.close_catalogue(result, analyzer, closure, protected_functions or {})
-    preserve_prior_entries(result, prior_functions or [])
+    deferred_entries = ({record["address"] for record in closure["runtime_data"].get("entry_fragments", [])}
+                        if closure is not None and "runtime_data" in closure else set())
+    preserve_prior_entries(result, [function for function in prior_functions or [] if function["address"] not in deferred_entries])
     apply_classifications(result, classifications or [])
     if closure is not None and "runtime_data" in closure:
         if __package__:
@@ -2366,8 +2383,14 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         else:
             import catalogue_runtime_data
         catalogue_runtime_data.close_catalogue(result, analyzer, closure["runtime_data"], protected_functions or {})
+        catalogue_runtime_data.close_entry_fragments(result, analyzer, closure["runtime_data"], protected_functions or {})
         apply_classifications(result, catalogue_runtime_data.classification_records(
             classifications or [], closure["runtime_data"]))
+        catalogue_runtime_data.check_prepared_protection(result, closure["runtime_data"])
+        prior_entries = {(entry["address"], entry["isa"]) for function in prior_functions or [] for entry in function["entries"]}
+        current_entries = {(entry["address"], entry["isa"]) for function in result["functions"] for entry in function["entries"]}
+        if prior_entries - current_entries:
+            raise ValueError("runtime closure loses a deferred prior entry")
     check_protected_functions(result, protected_functions or {})
     return result
 
@@ -2577,6 +2600,7 @@ def main(argv: list[str] | None = None) -> int:
                         "provenance": {**evidence["provenance"], "catalogue_v10": closure_evidence["provenance"],
                                        "catalogue_v10_r3": closure_evidence["library_provenance"],
                                        "catalogue_v10_r4": closure_evidence["library_extension_provenance"],
+                                       "catalogue_v10_r5": closure_evidence["endian_repair"]["provenance"],
                                        "catalogue_v11": closure_evidence["runtime_data"]["qualification"]}}
             # A reviewed reclassification cannot silently outrank an accepted or
             # in-flight complete record. Explicit classification inputs instead
