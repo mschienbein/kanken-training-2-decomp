@@ -118,6 +118,14 @@ through the existing model-transition machinery. Default v2 and every older reco
 retain their meaning. The exact accepted texts and independent seals are recorded in
 `docs/GATES.md`; no old or in-flight checkpoint is retroactively selected.
 
+`collect.py` accepts the same explicit `--linker-model` and `--literal-model` choices when
+re-deriving copied candidates; omission retains v2 / `none`. Repeatable `--extra-source FILE`
+copies and compiles helper translation units at the destination and compares them with each
+caller through the matcher's existing combined-object path. All callers in such a collection
+must share one frozen profile. Successful helpers are recorded once as `functions: []` units,
+not credited functions; if no caller is taken their copies are removed. Collection neither
+freezes nor authorizes a checkpoint selection: pass both choices explicitly to `prepare`.
+
 ### Rehoming accepted functions
 
 Credit belongs to the stable function identity, not its filename. A candidate may explicitly move

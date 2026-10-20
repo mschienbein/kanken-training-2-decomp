@@ -65,6 +65,28 @@ def transfer(insn, fact, state: dict, image):
     return event
 
 
+def memory_location(instruction, fact, state: dict):
+    """Describe indexed storage using the same roots as the enhanced transfer."""
+    operand = next((op for op in instruction.operands
+                    if op.type == capstone.arm.ARM_OP_MEM), None)
+    if operand is None or operand.shift.type not in (0, capstone.arm.ARM_SFT_LSL):
+        return None
+    condition = instruction.cc if fact.conditional else None
+    get = lambda register: indirect.plain(state.get(
+        ac.canonical(instruction.reg_name(register))), condition)
+    base = (("constant", fact.pc) if operand.mem.base == capstone.arm.ARM_REG_PC
+            else get(operand.mem.base))
+    displacement = operand.mem.disp
+    if operand.mem.index:
+        index = get(operand.mem.index)
+        scale = operand.mem.scale * (1 << operand.shift.value)
+        if index is not None and index[0] == "constant":
+            displacement += index[1] * scale
+        elif base is not None:
+            base = ("indexed", base, scale)
+    return indirect.add(base, displacement)
+
+
 def enhanced(function: dict, blocks: list, successors: list, decoder, image,
              acyclic: bool, known_entries: set[int]) -> dict:
     """Reuse r3's CFG transfer, including stack and multiple-register storage."""
@@ -116,7 +138,8 @@ def enhanced(function: dict, blocks: list, successors: list, decoder, image,
             if access is not None:
                 accesses.append({"site": ac.address(fact.address), "operation": access[0],
                                  "bits": access[1], "signed_load": access[2],
-                                 "location": indirect.describe(ac.memory_value(fact, state))})
+                                 "location": indirect.describe(memory_location(
+                                     instruction, fact, state))})
             if instruction.id == capstone.arm.ARM_INS_ASR or any(
                     op.shift.type == capstone.arm.ARM_SFT_ASR for op in instruction.operands):
                 signed_shifts.append(ac.address(fact.address))

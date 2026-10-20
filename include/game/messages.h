@@ -44,6 +44,10 @@ extern int func_001dd3a4(int category, int kind);
 extern const unsigned short *func_001dcbd4(const struct W11TextResource *resource, int index);
 extern void func_0017a43c(struct MessageLayout *layout, const unsigned short *left,
                           const unsigned short *right, int index);
+extern float func_0017a424(const struct MessageLayout *layout);
+extern void func_00177198(struct MessageLayout *layout, const struct W11TextResource *archive, int index);
+extern void func_00177520(struct MessageLayout *layout);
+extern void func_00177598(struct MessageLayout *layout, float x, float y);
 extern void func_001ad3c8(struct MessageLayout *layout, int index,
                           const unsigned short *left, const unsigned short *right);
 extern void func_001ad5a8(struct MessageLayout *layout, int index);
@@ -59,13 +63,5 @@ extern const unsigned short data_002276bc[];
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-extern float func_0017a424(const struct MessageLayout *layout);
-extern void func_00177198(struct MessageLayout *layout, const struct W11TextResource *archive, int index);
-#ifdef __cplusplus
-}
-#endif
 
 #endif

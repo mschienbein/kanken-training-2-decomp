@@ -7,6 +7,7 @@ from contextlib import redirect_stderr, redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
+from tests import test_inplace
 from tests.test_build import HAVE_COMPILER, SyntheticBuildFixture
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
@@ -101,6 +102,94 @@ class CollectTest(SyntheticBuildFixture, unittest.TestCase):
         self.assertEqual(code, 1)
         self.assertIsNone(record)
         self.assertIn("not accepted", output)
+
+    def test_explicit_models_reach_the_existing_matcher_context(self):
+        source = "scratch/new.c"
+        self.write_source(source, "int func_00100010(void) { return 2; }\n")
+        result = self.author_result("author", source, ["func_00100010"])
+        with patch.object(collect.match, "Context", wraps=collect.match.Context) as context:
+            code, record, _ = self.run_collect(
+                [result], "--linker-model", "armlink5-inline-branchnop-v6",
+                "--literal-model", "anonymous-string-records-v1")
+        self.assertEqual(code, 0)
+        self.assertEqual(len(record["units"]), 1)
+        context.assert_called_once_with(
+            self.root / "config/catalogue.json", model="armlink5-inline-branchnop-v6",
+            literal_model="anonymous-string-records-v1")
+
+    def removed_helper_inputs(self, helper=None):
+        fixture = test_inplace.SwitchRemovedCalleeTest().fixture()
+        original = fixture.original + self.image.code[len(fixture.original):]
+        memory = collect.match.image_mod.Image(original, self.image.layout)
+        catalogue = {"image_sha256": memory.sha256, "functions": list(fixture.catalogue.values())}
+        for target, method, value in (
+            (collect.match.image_mod.Image, "load", memory),
+            (collect.match.image_mod, "load_catalogue", catalogue),
+        ):
+            patcher = patch.object(target, method, return_value=value)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        self.write_source("scratch/caller.c", test_inplace.SwitchRemovedCalleeTest.CALLER)
+        self.write_source("scratch/helper.c", helper or test_inplace.SwitchRemovedCalleeTest.HELPER)
+        return self.author_result("author", "scratch/caller.c", ["func_00100000"])
+
+    def test_extra_source_is_rederived_and_kept_as_a_zero_credit_unit(self):
+        result = self.removed_helper_inputs()
+        code, record, output = self.run_collect(
+            [result], "--rehome", "func_00100000", "--extra-source", "scratch/helper.c",
+            "--linker-model", "armlink5-inline-branchnop-v6",
+            "--literal-model", "anonymous-string-records-v1")
+        self.assertEqual(code, 0)
+        self.assertNotIn("refused", output)
+        self.assertEqual(record["units"], [
+            {**self.unit("src/native/caller.c", "func_00100000"), "author": "author"},
+            self.unit("src/native/helper.c"),
+        ])
+        self.assertEqual((self.root / "src/native/helper.c").read_text(), test_inplace.SwitchRemovedCalleeTest.HELPER)
+        self.assertEqual(record["moves"], [
+            {"function": "func_00100000", "from": "src/old.c", "to": "src/native/caller.c"}])
+
+    def test_extra_source_does_not_enable_removed_callees_under_the_default_model(self):
+        result = self.removed_helper_inputs()
+        code, record, output = self.run_collect(
+            [result], "--rehome", "func_00100000", "--extra-source", "scratch/helper.c")
+        self.assertEqual(code, 0)
+        self.assertEqual(record["units"], [])
+        self.assertIn("unresolved symbol", output)
+        self.assertFalse((self.root / "src/native/caller.c").exists())
+        self.assertFalse((self.root / "src/native/helper.c").exists())
+
+    def test_wrong_extra_source_is_not_credited_and_both_copies_are_removed(self):
+        result = self.removed_helper_inputs("void set_field18(unsigned *p, unsigned v) { p[7] = v; }\n")
+        code, record, output = self.run_collect(
+            [result], "--rehome", "func_00100000", "--extra-source", "scratch/helper.c",
+            "--linker-model", "armlink5-inline-branchnop-v6")
+        self.assertEqual(code, 0)
+        self.assertEqual(record["units"], [])
+        self.assertIn("does not re-derive MATCH", output)
+        self.assertFalse((self.root / "src/native/caller.c").exists())
+        self.assertFalse((self.root / "src/native/helper.c").exists())
+
+    def test_extra_source_cannot_depend_on_an_author_local_header(self):
+        result = self.removed_helper_inputs('#include "private_helper.h"\n')
+        self.write_source("scratch/private_helper.h", test_inplace.SwitchRemovedCalleeTest.HELPER)
+        code, record, output = self.run_collect(
+            [result], "--rehome", "func_00100000", "--extra-source", "scratch/helper.c",
+            "--linker-model", "armlink5-inline-branchnop-v6")
+        self.assertEqual(code, 1)
+        self.assertIsNone(record)
+        self.assertIn("helper compilation refused", output)
+        self.assertFalse((self.root / "src/native/helper.c").exists())
+
+    def test_extra_source_name_clash_is_refused_before_copying(self):
+        result = self.removed_helper_inputs()
+        self.write_source("scratch/other/helper.c", test_inplace.SwitchRemovedCalleeTest.HELPER)
+        code, record, output = self.run_collect(
+            [result], "--extra-source", "scratch/helper.c", "--extra-source", "scratch/other/helper.c")
+        self.assertEqual(code, 1)
+        self.assertIsNone(record)
+        self.assertIn("destination name clashes", output)
+        self.assertFalse((self.root / "src/native/helper.c").exists())
 
 
 if __name__ == "__main__":

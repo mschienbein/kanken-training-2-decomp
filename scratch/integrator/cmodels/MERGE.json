@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "candidate_milestone": "a7762e2",
+  "collection_tool_commit": "11afde0",
+  "requested_main_commit": "f24fa0b",
+  "merge_tree": {
+    "command": "git merge-tree --write-tree HEAD f24fa0b",
+    "head_at_command": "a7762e2",
+    "exit_code": 0,
+    "tree": "cacdc87f40e3356079aacf09ffe21889bb57dcf0"
+  },
+  "merge": {
+    "command": "git -c user.name=mschienbein -c user.email=mschienbein@users.noreply.github.com merge --no-ff --no-edit f24fa0b",
+    "exit_code": 0,
+    "commit": "daa067b7bbea80b9e7763308815b4c0a09c6a199",
+    "conflicts": false
+  },
+  "current_gates": "v1.19",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "boundary": "Main explicitly attested that the relied-on v6 code is unchanged by f24fa0b. Merged GATES v1.19 likewise states that active v6 rules remain unchanged. No v8 source was admitted and no selector was changed.",
+  "measurement_timing": "The source/accepted-ledger/standard/tool-test witnesses recorded in SCOPE.json precede this main merge. They were not rerun merely to confirm Main's unchanged-v6 observation. No full build, full suite, prepare or acceptance operation ran.",
+  "later_v8_inventory": "scratch/integrator/cmodels/NEXT.json"
+}

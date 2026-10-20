@@ -55,6 +55,9 @@ struct RegionHeapOwner {
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* [INFERENCE] Candidate-only release hooks; no historical identity/address is proved. */
+void frame_heap_release_lock(void *heap);
+void frame_heap_release_unlock(void *heap);
 extern int func_00125a5c(struct HeapStorage *storage);
 extern int func_0013f110(struct RegionHeap *heap, unsigned tag);
 extern int func_0013f06c(struct RegionHeap *heap, unsigned tag);

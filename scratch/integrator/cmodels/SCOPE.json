@@ -1,0 +1,3129 @@
+{
+  "schema_version": 1,
+  "checkpoint_candidate": "cmodels",
+  "status": "collected-unaccepted-not-prepared",
+  "branch": "cmodels-integrate",
+  "base_branch": "main",
+  "base_commit": "045a47d",
+  "base_gates": "v1.18",
+  "collection_tool_commit": "11afde0",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/cmodels.json",
+    "sha256": "5d5fb0519f67ba4fd4ca7680afb9a27a26f30b74a239da57c6029b4b405f1cf8"
+  },
+  "scope_functions": 20,
+  "scope_sources": 35,
+  "credited_source_units": 19,
+  "helper_only_units": 16,
+  "scope_target_bytes": 9956,
+  "accepted_credit_added": false,
+  "selection_basis": {
+    "original_sweep": "scratch/model-sweep/RESULTS.json",
+    "original_sweep_sha256": "70611153d012ec1f99ab1cce065028d4cefc024c0da4badc43360d89f6514d64",
+    "historical_v3_l1": {
+      "functions": 23,
+      "bytes": 8376
+    },
+    "historical_v4_l1": {
+      "functions": 24,
+      "bytes": 10588
+    },
+    "scope_exclusions": {
+      "functions": 4,
+      "bytes": 512
+    },
+    "fresh_v6_l1_eligible_sweep": {
+      "functions": 20,
+      "bytes": 10076
+    },
+    "additional_tu924": {
+      "function": "func_001e0afc",
+      "bytes": 1740
+    },
+    "additional_tu970": {
+      "function": "func_001b9f18",
+      "bytes": 700
+    },
+    "authorized_v3_expansion_admitted": 0,
+    "chosen_selection_reason": "The adopted v6 composite reproduces every eligible v4/L1 sweep positive and both additional adopted-model witnesses under one exact explicit selection. Two byte-matching rows are withheld separately for typed contracts, not papered over by declarations or casts. The surviving 20 rows all MATCH v6/L1; no v8-only witness, retired model, per-unit selector or fabricated alias is used.",
+    "typed_contract_deferrals": [
+      {
+        "function": "func_001d5864",
+        "bytes": 348
+      },
+      {
+        "function": "func_001ab680",
+        "bytes": 2212
+      }
+    ]
+  },
+  "inventory": {
+    "result_files": 1002,
+    "manifest": "scratch/integrator/cmodels/RESULT-INVENTORY.json",
+    "manifest_sha256": "cbc1429c96e356e3bb54ca929f61095c4f10e0aacbd5e7fb246a8af68882c977",
+    "restriction": "Only author RESULT.json files searched; named source/receipt paths then followed. Packets/disassembly/original buffers were neither searched nor printed.",
+    "predecessor_inputs": [
+      {
+        "checkpoint": "c009",
+        "kind": "candidates",
+        "path": "scratch/worktrees/c009/config/candidates/c009.json",
+        "sha256": "7b3a07a05ea334f7bbc951f13f7a2cd2801a0f6a624ffe72e349ab2c491d9eb1"
+      },
+      {
+        "checkpoint": "c010",
+        "kind": "candidates",
+        "path": "scratch/worktrees/c010/config/candidates/c010.json",
+        "sha256": "cb09fed2f7acd7a5394709e415d4c5b7d434d5a84e7bd7ec450ab502d37862df"
+      },
+      {
+        "checkpoint": "c010",
+        "kind": "scope",
+        "path": "scratch/worktrees/c010/scratch/integrator/c010/SCOPE.json",
+        "sha256": "b4dfdb9545bf0007aceb919b25317c7062e4c769921fae912f19168034f9f81e"
+      },
+      {
+        "checkpoint": "c011",
+        "kind": "candidates",
+        "path": "scratch/worktrees/c011/config/candidates/c011.json",
+        "sha256": "79ae4fb2aef996129c0b0bfb95c6a571c58cea7f968cec4b4229e0e18e8d87f7"
+      },
+      {
+        "checkpoint": "c011",
+        "kind": "scope",
+        "path": "scratch/worktrees/c011/scratch/integrator/c011/SCOPE.json",
+        "sha256": "4199c7f52ccd40b7e8c02ca8306a0068aeef4d3f613ec0615bb77c75369ac887"
+      }
+    ],
+    "current_scope_intersections": [],
+    "pool_accounting": {
+      "functions": 77,
+      "bytes": 94996,
+      "not_measured_predecessor_scoped_functions": 4,
+      "measured_functions": 73,
+      "selected_model_matches_before_typed_deferral": 22,
+      "admitted_functions": 20,
+      "typed_contract_deferrals": 2,
+      "mismatches": 43,
+      "matcher_refusals": 8
+    }
+  },
+  "selected": [
+    {
+      "function": "func_0010be58",
+      "address": "0x0010be58",
+      "target_bytes": 60,
+      "author": "r41207",
+      "original_source": "scratch/authors/r41207/qualified/func_0010be58.c",
+      "original_source_sha256": "4f5c12d33cded76b97df567b9723c7e9eb5938f0058a4a362729d27936d835d1",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "540d28dafc06a8d8a4e3f0c7a00c56949278353df65777f6e6a44373acfa9f13",
+          "profile": "game",
+          "source": "scratch/authors/r41207/qualified/result_failure_bits.c",
+          "source_sha256": "540d28dafc06a8d8a4e3f0c7a00c56949278353df65777f6e6a44373acfa9f13"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_0010be58/func_0010be58.result.json",
+      "original_receipt_sha256": "263831098c0f828974559b5a983ce8be6db8cd6830870287911b83fba1eed09b",
+      "source": "src/models/func_0010be58/func_0010be58.c",
+      "profile": "game",
+      "source_sha256": "eb9f07d402e029e66ff5b8e72981005f6af1098f5cd4f3143a153106110728bf",
+      "extra_sources": [
+        "src/models/func_0010be58/result_failure_bits.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_0010be58/func_0010be58/func_0010be58.result.json",
+      "receipt_sha256": "7ea789dbc760d59d5ec3199b2401cd42c1b4c873612bfa0b55cc43ed5b81606f",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_00112628",
+      "address": "0x00112628",
+      "target_bytes": 36,
+      "author": "r41208",
+      "original_source": "scratch/authors/r41208/src/func_00112628.c",
+      "original_source_sha256": "1abfb2aed1e3018a58c929bbb871922c61b30a63b505e427f24d4517caf4139a",
+      "original_profile": "sdk",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "b50ef83b1b0f6e55cd5c6551c29767a630b32a399d9cd775c9715cc63a50dc1a",
+          "profile": "sdk",
+          "source": "scratch/authors/r41208/variants/linear_buffer_allocator/01-natural-initializer/linear_buffer_allocator.c",
+          "source_sha256": "b50ef83b1b0f6e55cd5c6551c29767a630b32a399d9cd775c9715cc63a50dc1a"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_00112628/func_00112628.result.json",
+      "original_receipt_sha256": "28e47b0d245ce99beaf3746d54f132b2de4070914d41317af89868279ac34891",
+      "source": "src/models/linear_buffer/func_00112628.c",
+      "profile": "sdk",
+      "source_sha256": "9d21e6a10d2780c4d22e01f78725432fec3d45172ad6727f149eb1e21a3e87e5",
+      "extra_sources": [
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/linear_buffer/func_00112628/func_00112628.result.json",
+      "receipt_sha256": "74ff66f8d48da935afe1d3aa47b730a5785399911a4c00232bd3957d38eed6af",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_00112b5c",
+      "address": "0x00112b5c",
+      "target_bytes": 36,
+      "author": "r41208",
+      "original_source": "scratch/authors/r41208/src/func_00112b5c.c",
+      "original_source_sha256": "4d952660f83190a3ea6b37bedee96f95cbdbfea832821dfd72444e7778fccdce",
+      "original_profile": "sdk",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "b50ef83b1b0f6e55cd5c6551c29767a630b32a399d9cd775c9715cc63a50dc1a",
+          "profile": "sdk",
+          "source": "scratch/authors/r41208/variants/linear_buffer_allocator/01-natural-initializer/linear_buffer_allocator.c",
+          "source_sha256": "b50ef83b1b0f6e55cd5c6551c29767a630b32a399d9cd775c9715cc63a50dc1a"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_00112b5c/func_00112b5c.result.json",
+      "original_receipt_sha256": "64c25211063346e2e12ae237ed800fcd0afc67048c92551ba7012190cead9bb8",
+      "source": "src/models/linear_buffer/func_00112b5c.c",
+      "profile": "sdk",
+      "source_sha256": "7c57da5c03b0eceb191c76f7d7ee1586d65b9b77f7022272ef4dacd1e5d0034c",
+      "extra_sources": [
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/linear_buffer/func_00112b5c/func_00112b5c.result.json",
+      "receipt_sha256": "eb90cd58680bac5a8c21ed437b063a0eb084ab0f47dc23fecf6258cc915622d4",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001131d4",
+      "address": "0x001131d4",
+      "target_bytes": 36,
+      "author": "r41209",
+      "original_source": "scratch/authors/r41209/src/func_001131d4.c",
+      "original_source_sha256": "47413a6b61ea6e13207174820c58d23b66408aedbbe3c20cfcc27be77fa8c9da",
+      "original_profile": "sdk",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "7cfcc5b0eb48e5fe80e84e47952cc474d4d45b3e13fe23a77a648690c1f84cb9",
+          "profile": "sdk",
+          "source": "scratch/authors/r41209/src/func_001131d4/allocator_initializer.c",
+          "source_sha256": "7cfcc5b0eb48e5fe80e84e47952cc474d4d45b3e13fe23a77a648690c1f84cb9"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001131d4/func_001131d4.result.json",
+      "original_receipt_sha256": "fef2ee8bdc85a115f83d00fe2b320f4670452cb4cb428428de31a4845681a5ce",
+      "source": "src/models/linear_buffer/func_001131d4.c",
+      "profile": "sdk",
+      "source_sha256": "a159c7d18afa5ee5671fbe783f523edae1b765b6694b3185f66ff2f4c8f8d3db",
+      "extra_sources": [
+        "src/models/linear_buffer/linear_buffer_allocator.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/linear_buffer/func_001131d4/func_001131d4.result.json",
+      "receipt_sha256": "79d4ae302ebc5326806af7dc74a65e74f2012169ca66249294d5b360eb99cf0e",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_0013f06c",
+      "address": "0x0013f06c",
+      "target_bytes": 164,
+      "author": "r4026",
+      "original_source": "scratch/authors/r4026/src/func_0013f06c_unbound.cpp",
+      "original_source_sha256": "5175d78b5430e17d8c1dcc05acfb81317ebea3ca445c96085a20f709a400dfab",
+      "original_profile": "middleware",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "2e43a91ac39471ed9cd6762a6eb6c0d814eb468619aea3eeee040b8e1d346a31",
+          "profile": "middleware",
+          "source": "scratch/authors/r4026/src/frame_heap_unbound_hooks.c",
+          "source_sha256": "2e43a91ac39471ed9cd6762a6eb6c0d814eb468619aea3eeee040b8e1d346a31"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_0013f06c/func_0013f06c_unbound.result.json",
+      "original_receipt_sha256": "21b4d91348bba3b48ae681885eaeb06984e132c6d8fdd22b4c29ce844c8f43f3",
+      "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+      "profile": "middleware",
+      "source_sha256": "fa93eae81600402323869190c29d3f4545d143d792bde5b9c1ffcd7402618472",
+      "extra_sources": [
+        "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_0013f06c/func_0013f06c_unbound/func_0013f06c_unbound.result.json",
+      "receipt_sha256": "5901562d90cdb893a984fe94888cb26b9980999afc0663496b233a36531f0690",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_0015f890",
+      "address": "0x0015f890",
+      "target_bytes": 44,
+      "author": "w22g",
+      "original_source": "scratch/authors/w22g/src/func_0015f890.cpp",
+      "original_source_sha256": "8819507a3d0d97fdcd0e86a5a7366e609c989e0e95e58072c8fb6552a98ec9a1",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "9c8de701e345f476df7ecff07ff74ef584ca65aa36ccbcd638d13b49549cf616",
+          "profile": "game",
+          "source": "scratch/authors/w22g/src/text_base_destruction.c",
+          "source_sha256": "9c8de701e345f476df7ecff07ff74ef584ca65aa36ccbcd638d13b49549cf616"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_0015f890/func_0015f890.result.json",
+      "original_receipt_sha256": "3b4f72aa63850d3e04d1a720db8408b5fa443c234f6410ca3b879a1b93d19f50",
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "profile": "game",
+      "source_sha256": "8fc747a274e476f700fb2d44d0332e248e52cbd0181e328c7f40d6f9a2ac0c14",
+      "extra_sources": [
+        "src/models/func_0015f890/text_base_destruction.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_0015f890/func_0015f890/func_0015f890.result.json",
+      "receipt_sha256": "42adf9dd68e9c65cdb82060d85fb1e5576f70a0191908901f4f65655c2424f8e",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_00168d14",
+      "address": "0x00168d14",
+      "target_bytes": 168,
+      "author": "r4005",
+      "original_source": "scratch/authors/r4005/variants/func_00168d14/removed-minimum-setter/func_00168d14.c",
+      "original_source_sha256": "5418df3d30f8d925933784b6c9215a8a1be6dd40625740d0af63665187fd077b",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "bf5936bcf02d89654a1d274eb60cf6e59354c345dedbd1537021c05abc407ab8",
+          "profile": "game",
+          "source": "scratch/authors/r4005/helpers/character_panel_minimum.c",
+          "source_sha256": "bf5936bcf02d89654a1d274eb60cf6e59354c345dedbd1537021c05abc407ab8"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_00168d14/func_00168d14.result.json",
+      "original_receipt_sha256": "a1bbab04ddcb7bacc49d939f1a15c6f9bf0cec2f8d8770af6f42779b3bb1efa1",
+      "source": "src/models/func_00168d14/func_00168d14.c",
+      "profile": "game",
+      "source_sha256": "53900e2ed903c52ece66852cd7190a44049fbe43be7d974c1421bb0114c54bc9",
+      "extra_sources": [
+        "src/models/func_00168d14/character_panel_minimum.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_00168d14/func_00168d14/func_00168d14.result.json",
+      "receipt_sha256": "02bb41818b6d134ee8234ae082f96d7af34ab42c690122292f9e1a39148e71b4",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_00172e00",
+      "address": "0x00172e00",
+      "target_bytes": 96,
+      "author": "r41240",
+      "original_source": "scratch/authors/r41240/variants/transition-qualified-removed.cpp",
+      "original_source_sha256": "f918608c20ff961f62f5a3ff77746c536f58368d44aef57a0ca3f6b8a4999232",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "fec38a8e4a31cd7fc9384398a61cd0f7608daa0daf0f4885292f164cba215f1b",
+          "profile": "game",
+          "source": "scratch/authors/r41240/variants/transition-C-setter.c",
+          "source_sha256": "fec38a8e4a31cd7fc9384398a61cd0f7608daa0daf0f4885292f164cba215f1b"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_00172e00/transition-qualified-removed.result.json",
+      "original_receipt_sha256": "fb168cb842943a06325645a790965e45d5b34dc2d0f77f1b590ff428c50ffe5b",
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "profile": "game",
+      "source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+      "extra_sources": [
+        "src/models/func_00172e00/transition-C-setter.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_00172e00/transition-qualified-removed/transition-qualified-removed.result.json",
+      "receipt_sha256": "fc1270041a0faf19707ebadf5509b0979a3d8ef36e982f5b8ce7e96e8d795354",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001730ec",
+      "address": "0x001730ec",
+      "target_bytes": 116,
+      "author": "w19j",
+      "original_source": "scratch/authors/w19j/src/func_001730ec_removed.c",
+      "original_source_sha256": "9223261ee4b5665c13b5b805a5c713bf25f2febcbd878d83334b6c1fdd4fc5b7",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3",
+          "profile": "game",
+          "source": "scratch/authors/w19j/src/item_accessors.c",
+          "source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001730ec/func_001730ec_removed.result.json",
+      "original_receipt_sha256": "eeb252bd9effd44d56ed6256a88db7aa5b7cb3b2b39ab2b0a8a60294d725ac3e",
+      "source": "src/models/func_001730ec/func_001730ec_removed.c",
+      "profile": "game",
+      "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+      "extra_sources": [
+        "src/models/func_001730ec/item_accessors.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001730ec/func_001730ec_removed/func_001730ec_removed.result.json",
+      "receipt_sha256": "33b32e2de4e6057fbbe6c6d44db9f84a7cf5cb072d5f25ed3aee778de2224e5a",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001a00f8",
+      "address": "0x001a00f8",
+      "target_bytes": 264,
+      "author": "r4040",
+      "original_source": "scratch/authors/r4040/v3/func_001a00f8.c",
+      "original_source_sha256": "08eb838f153d8324022fd24827aacd9d4ef3499e3e757ae9abbc25144871ae79",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "dbc3e3d55c6ccfdf463faeb77a6bbcfa562c4b53554094ab742f32728c9ba548",
+          "profile": "game",
+          "source": "scratch/authors/r4040/v3/transition_active.c",
+          "source_sha256": "dbc3e3d55c6ccfdf463faeb77a6bbcfa562c4b53554094ab742f32728c9ba548"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001a00f8/func_001a00f8.result.json",
+      "original_receipt_sha256": "9d0e239c1bc7aa1081fa8b1ab70f0a833efc66fc4c47b834fdaa78def692fd12",
+      "source": "src/models/func_001a00f8/func_001a00f8.c",
+      "profile": "game",
+      "source_sha256": "8761a5835f925eb3407e5b9bd9690a094e692766396841fff7e3a9c9e75598af",
+      "extra_sources": [
+        "src/models/func_001a00f8/transition_active.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001a00f8/func_001a00f8/func_001a00f8.result.json",
+      "receipt_sha256": "7fbe217d19fd63bfe825d8a41b3aa3c45e0d3e768d3a4ed49a6b6f99550f7f86",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001a2814",
+      "address": "0x001a2814",
+      "target_bytes": 480,
+      "author": "tu441",
+      "original_source": "scratch/authors/tu441/src/func_001a2814_tu.cpp",
+      "original_source_sha256": "c6ed4dea1e3c8be7c3b543e75d98c00cc9ce88b3199c019bf914b3f37a738886",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "e0691e9b01d138542b96cc0e0a730f7ca7705b3a398db627901fdfc588ed82db",
+          "profile": "game",
+          "source": "scratch/authors/tu441/src/tu441_removed_helpers.c",
+          "source_sha256": "e0691e9b01d138542b96cc0e0a730f7ca7705b3a398db627901fdfc588ed82db"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001a2814/func_001a2814_tu.result.json",
+      "original_receipt_sha256": "ca2eaffe53b86e53eaaf569b67d2e464e1db1389f91b821a584c7f05a0463f6c",
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "profile": "game",
+      "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+      "extra_sources": [
+        "src/models/func_001a2814/tu441_removed_helpers.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001a2814/func_001a2814_tu/func_001a2814_tu.result.json",
+      "receipt_sha256": "fd2d98c26a44fe19130df0d780b0273552972107d40573fbda51c29e5b3fa9ef",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001a3ee0",
+      "address": "0x001a3ee0",
+      "target_bytes": 412,
+      "author": "r4044",
+      "original_source": "scratch/authors/r4044/resume/func_001a3ee0_value_setter.c",
+      "original_source_sha256": "2958bd62f502efcb5de0ff9e1e70e59c7a700d2912833a002f4e63c07c551c2b",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "b3e2e4b5f2b82777aeb6b5f9b737865e36ac269dd91c253d211954e1d2254a2a",
+          "profile": "game",
+          "source": "scratch/authors/r4044/resume/transition_active.c",
+          "source_sha256": "b3e2e4b5f2b82777aeb6b5f9b737865e36ac269dd91c253d211954e1d2254a2a"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001a3ee0/func_001a3ee0_value_setter.result.json",
+      "original_receipt_sha256": "4682a140acdd33de647e754bdbfea25e00623edd78c9acec70803fbc54d6477e",
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "profile": "game",
+      "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+      "extra_sources": [
+        "src/models/func_001a2814/tu441_removed_helpers.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001a2814/func_001a2814_tu/func_001a2814_tu.result.json",
+      "receipt_sha256": "fd2d98c26a44fe19130df0d780b0273552972107d40573fbda51c29e5b3fa9ef",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review.",
+      "ownership_note": "Use the fully matching tu441 native TU, shared with func_001a2814, not the separately collected r4044 duplicate. No accepted identity is moved."
+    },
+    {
+      "function": "func_001a8048",
+      "address": "0x001a8048",
+      "target_bytes": 412,
+      "author": "r4044",
+      "original_source": "scratch/authors/r4044/resume/func_001a8048_value_setter.c",
+      "original_source_sha256": "9eed8913d2344fa386b64b260f71ac90ae3924febeed55bfc399e9d741b2eae2",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "b3e2e4b5f2b82777aeb6b5f9b737865e36ac269dd91c253d211954e1d2254a2a",
+          "profile": "game",
+          "source": "scratch/authors/r4044/resume/transition_active.c",
+          "source_sha256": "b3e2e4b5f2b82777aeb6b5f9b737865e36ac269dd91c253d211954e1d2254a2a"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001a8048/func_001a8048_value_setter.result.json",
+      "original_receipt_sha256": "3916fc574a680630b614eded27d69067771d3dae65bf19293904d65afe073afa",
+      "source": "src/models/transition_setters/func_001a8048_value_setter.c",
+      "profile": "game",
+      "source_sha256": "4163d4a549b8d9eb174f76dfed879b9422f10a8cf9d1fd32e1bd56a08ba6e4c8",
+      "extra_sources": [
+        "src/models/transition_setters/transition_active.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/transition_setters/func_001a8048_value_setter/func_001a8048_value_setter.result.json",
+      "receipt_sha256": "6ef912da1bae29337cb6a97bf0e1f8ef3a5f810c3e3665460286c37f82ca05dd",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001b8908",
+      "address": "0x001b8908",
+      "target_bytes": 664,
+      "author": "L034",
+      "original_source": "scratch/authors/L034/src/func_001b8908_removed.cpp",
+      "original_source_sha256": "545bd0e657590180d02962621b821378924c67e70662d1c7b47383d255677ba7",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "ca01937f3a2a4aabcc8ff96937e9b834d9886dbbccfabbdeee9c6ea38c99656a",
+          "profile": "game",
+          "source": "scratch/authors/L034/src/panel_accessors.c",
+          "source_sha256": "ca01937f3a2a4aabcc8ff96937e9b834d9886dbbccfabbdeee9c6ea38c99656a"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001b8908/func_001b8908_removed.result.json",
+      "original_receipt_sha256": "a23436038118ed957a9f1d87a792af4bfc2be3b4c51e646a24e6470f90729c8e",
+      "source": "src/models/func_001b8908/func_001b8908_removed.cpp",
+      "profile": "game",
+      "source_sha256": "c3afe300b1f62a3eb53372dc00b6721b044641b494e73ad981e5834ac4bca7dd",
+      "extra_sources": [
+        "src/models/func_001b8908/panel_accessors.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001b8908/func_001b8908_removed/func_001b8908_removed.result.json",
+      "receipt_sha256": "805a3c9431546077022d7120420302613a1c3ee9aa28018624a028d4df76938c",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001b9f18",
+      "address": "0x001b9f18",
+      "target_bytes": 700,
+      "author": "tu970",
+      "original_source": "scratch/authors/tu970/src/func_001b9f18.cpp",
+      "original_source_sha256": "9ae7b320c236add2422e9f701cb72c77d8c872da1f83f9c37d8dd0379cb994d8",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "source": "scratch/authors/tu970/src/drawing_state.c"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001b9f18/func_001b9f18.result.json",
+      "original_receipt_sha256": "68aaff01226dbebe71baf2e652086ad2bf2eecfa9f54fba43ebd05bd7154417d",
+      "source": "src/models/func_001b9f18/func_001b9f18.cpp",
+      "profile": "game",
+      "source_sha256": "94c67dabe1fa64a26abc442d1925cd8706334ea6bf8f740ac8250ca4be238a77",
+      "extra_sources": [
+        "src/models/func_001b9f18/drawing_state.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001b9f18/func_001b9f18/func_001b9f18.result.json",
+      "receipt_sha256": "fe0a29b897fd8871bd757ad6c410e8f8a97d5bfd3ef65446052950016dd85a8d",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001bd68c",
+      "address": "0x001bd68c",
+      "target_bytes": 696,
+      "author": "r41262",
+      "original_source": "scratch/authors/r41262/src/v3/func_001bd68c.cpp",
+      "original_source_sha256": "6a1b545ba20c37359f486d64b1f9f0801e51759bfbbd6931e9676a2cfb292081",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "c0f117af49831008daf1cd77e2a632ba2976df4fbda09eb17d63013d095a29df",
+          "profile": "game",
+          "source": "scratch/authors/r41262/helpers/drawing_state.c",
+          "source_sha256": "c0f117af49831008daf1cd77e2a632ba2976df4fbda09eb17d63013d095a29df"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001bd68c/func_001bd68c.result.json",
+      "original_receipt_sha256": "7c91a5720c8f1bdfa0bd9e8b0c4cadfd7e2ce26c11cf7e57e6277e8c188db786",
+      "source": "src/models/func_001bd68c/func_001bd68c.cpp",
+      "profile": "game",
+      "source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+      "extra_sources": [
+        "src/models/func_001bd68c/drawing_state.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001bd68c/func_001bd68c/func_001bd68c.result.json",
+      "receipt_sha256": "f64fa431578b57b3460c9192d6a85a5ac05d9b77610fd93fa03b3e2c2029e8ac",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001ddde4",
+      "address": "0x001ddde4",
+      "target_bytes": 464,
+      "author": "r41279",
+      "original_source": "scratch/authors/r41279/variants/func_001ddde4/14-v3-page-snapshot/func_001ddde4.c",
+      "original_source_sha256": "f33aa9ce84ec4161e96045afd8efd4acbab15c224912b09f9e971dd6e6f2e104",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+          "profile": "game",
+          "source": "scratch/authors/r41279/helpers/item_accessors.c",
+          "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001ddde4/func_001ddde4.result.json",
+      "original_receipt_sha256": "2930fcc0e823e2081ea96b32f92729b93558ebd4259c7404cb5e55cad0d1be1e",
+      "source": "src/models/func_001ddde4/func_001ddde4.c",
+      "profile": "game",
+      "source_sha256": "9c8f69bf4894e894a266a7104d0c591e246c61ac8a4425d61877c6a5499c39b1",
+      "extra_sources": [
+        "src/models/func_001ddde4/item_accessors.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001ddde4/func_001ddde4/func_001ddde4.result.json",
+      "receipt_sha256": "b793d6c76b3756f5f07abb7dfb4edc64791213a3b1f1af4c0685853fbc08f4cf",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001e0afc",
+      "address": "0x001e0afc",
+      "target_bytes": 1740,
+      "author": "tu924",
+      "original_source": "scratch/authors/tu924/src/training_initialize_grouped_reset.cpp",
+      "original_source_sha256": "7f669b833a07c5981babe6035b60d26d21b03cf5a760e561a1a2ff55bbfbe08d",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "source": "scratch/authors/tu924/src/removed_initializers.c",
+          "source_sha256": "a979ccc015538dbe026fc8aa38eda7ff716e08d77b5709bbed568af78bbaa958",
+          "functions": [
+            "TU924_page_count",
+            "TU924_reset_prompts",
+            "TU924_reset_optional"
+          ]
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001e0afc/training_initialize_grouped_reset.result.json",
+      "original_receipt_sha256": "fc91bb6229cb138afcdd4e418eb51b8ebd1dd215e2c7f29b71930b899c2836c7",
+      "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+      "profile": "game",
+      "source_sha256": "87b9a124b781b4636851933192805c3e838ae7e7cf82afb1221ebfd83f516817",
+      "extra_sources": [
+        "src/models/func_001e0afc/removed_initializers.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001e0afc/training_initialize_grouped_reset/training_initialize_grouped_reset.result.json",
+      "receipt_sha256": "4fa68f9c436915963f87cbb2bb49513161a9dbd56718edc459e95d6d6be1347c",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_001ed874",
+      "address": "0x001ed874",
+      "target_bytes": 828,
+      "author": "r41282",
+      "original_source": "scratch/authors/r41282/src/func_001ed874.cpp",
+      "original_source_sha256": "9162a59ff7f7aed4dd213fcf90febb303caf04126c7292ee085ac866f8252aad",
+      "original_profile": "game",
+      "original_extra_sources": [
+        {
+          "current_source_sha256": "c24a60c752a3ba41e8b3c4e45b065d198896e4fedd40bc848ce8f2532c5e6ec2",
+          "profile": "game",
+          "source": "scratch/authors/r41282/helpers/category_initializers.c",
+          "source_sha256": "c24a60c752a3ba41e8b3c4e45b065d198896e4fedd40bc848ce8f2532c5e6ec2"
+        }
+      ],
+      "original_receipt": "scratch/integrator/cmodels/original/func_001ed874/func_001ed874.result.json",
+      "original_receipt_sha256": "716d89cd1bbff34ae6c2961480dcb676666525b4eec1019b5a5552244d798929",
+      "source": "src/models/func_001ed874/func_001ed874.cpp",
+      "profile": "game",
+      "source_sha256": "69430bf33dcb7f11310ab3c3f9beeb0b578a16a57579b72dbd8190994b1834c0",
+      "extra_sources": [
+        "src/models/func_001ed874/category_initializers.c"
+      ],
+      "receipt": "scratch/integrator/cmodels/final/func_001ed874/func_001ed874/func_001ed874.result.json",
+      "receipt_sha256": "cec1b60cab348cf23e29197a809c3b17d5f4dc820d8ff5cb1b0c62ed79849a3d",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "[INFERENCE] Candidate-only helper identity, historical outlining and original call graph are not proved; R1 provenance requires QUALIFIED independent review."
+    },
+    {
+      "function": "func_00203a68",
+      "address": "0x00203a68",
+      "target_bytes": 2540,
+      "author": "s203a68",
+      "original_source": "scratch/authors/s203a68/src/func_00203a68.cpp",
+      "original_source_sha256": "a51054e168ed05dc4a23594ee1728a698a4bdd893f5d0c507a4a6448601e3829",
+      "original_profile": "game",
+      "original_extra_sources": [],
+      "original_receipt": "scratch/integrator/cmodels/original/func_00203a68/func_00203a68.result.json",
+      "original_receipt_sha256": "d9dea7887e73e13bfc3fcfa70c729bd0e1cee1115a208e3608c95f33cfa5523e",
+      "source": "src/models/func_00203a68/func_00203a68.cpp",
+      "profile": "game",
+      "source_sha256": "0550634bf729b8f7bebd2e150b641ca6bfbf2c3a452783f1e7b41da2696ab1ff",
+      "extra_sources": [],
+      "receipt": "scratch/integrator/cmodels/final/func_00203a68/func_00203a68/func_00203a68.result.json",
+      "receipt_sha256": "0770a2970d6c8870c2448e85d237e6be8fc7574621863b46c8e7f4fb36e1532c",
+      "status": "match",
+      "exit_code": 0,
+      "qualification": "L1 anonymous string-record placement; candidate span completeness is proved, not original pool ownership/extent."
+    }
+  ],
+  "scope_excluded": [
+    {
+      "function": "func_001c6a68",
+      "target_bytes": 104,
+      "reason": "Already reserved by a predecessor checkpoint scope; not a model-only addition.",
+      "predecessor_scopes": [
+        "c010 scope"
+      ]
+    },
+    {
+      "function": "func_001db404",
+      "target_bytes": 48,
+      "reason": "Already reserved by a predecessor checkpoint scope; not a model-only addition.",
+      "predecessor_scopes": [
+        "c010 scope"
+      ]
+    },
+    {
+      "function": "func_001ef89c",
+      "target_bytes": 196,
+      "reason": "Already reserved by a predecessor checkpoint scope; not a model-only addition.",
+      "predecessor_scopes": [
+        "c010 scope"
+      ]
+    },
+    {
+      "function": "func_00214d9c",
+      "target_bytes": 164,
+      "reason": "Already reserved by a predecessor checkpoint scope; not a model-only addition.",
+      "predecessor_scopes": [
+        "c010 scope"
+      ]
+    }
+  ],
+  "not_matching_under_selection": [
+    {
+      "function": "func_00100d74",
+      "address": "0x00100d74",
+      "target_bytes": 2248,
+      "source": "scratch/authors/xL01/src/func_00100d74.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00100d74",
+        "address": 1052020,
+        "size": 2248,
+        "candidate_size": 2228,
+        "status": "mismatch",
+        "first_diff": 24,
+        "linker_rewrites": [
+          {
+            "offset": 96,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 100,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 108,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 112,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 116,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 120,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 132,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 136,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 140,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 148,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 160,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 180,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 184,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 188,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 196,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 200,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 208,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 252,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 256,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 260,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 264,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 268,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 492,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1072,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1084,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1096,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1108,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1120,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1304,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1440,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1700,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1832,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1856,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1892,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1916,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1976,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2012,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2036,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2048,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2060,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2096,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2108,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2120,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2132,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2144,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2156,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2168,
+            "rule": "inline_nop",
+            "target": 1316272,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00100d74/func_00100d74.result.json",
+      "receipt_sha256": "2e693d8e891ef96f9791f67cf32146a00510d1e6ce3ade3c4bf2ae04538ed893"
+    },
+    {
+      "function": "func_00101c58",
+      "address": "0x00101c58",
+      "target_bytes": 644,
+      "source": "scratch/authors/L007/src/func_00101c58.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00101c58",
+        "address": 1055832,
+        "size": 644,
+        "candidate_size": 616,
+        "status": "mismatch",
+        "first_diff": 20,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00101c58/func_00101c58.result.json",
+      "receipt_sha256": "174b7c9414337012659bfb0373aebad38f5b6995383f0a0ff6aad1de35522491"
+    },
+    {
+      "function": "func_00103c88",
+      "address": "0x00103c88",
+      "target_bytes": 1420,
+      "source": "scratch/authors/r4051/work/v01.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00103c88",
+        "address": 1064072,
+        "size": 1420,
+        "candidate_size": 1412,
+        "status": "mismatch",
+        "first_diff": 4,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00103c88/v01.result.json",
+      "receipt_sha256": "0ba26b4be8bf84bfc4a26aeea4dddf5565befa2590e12d389fc2b93f77b6a1fc"
+    },
+    {
+      "function": "func_00107a9c",
+      "address": "0x00107a9c",
+      "target_bytes": 584,
+      "source": "scratch/authors/r4048/trials/func_00107a9c_t014.cpp",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00107a9c",
+        "address": 1079964,
+        "size": 584,
+        "candidate_size": 520,
+        "status": "mismatch",
+        "first_diff": 9,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00107a9c/func_00107a9c_t014.result.json",
+      "receipt_sha256": "c273177679309592eb60d45100db012d7d48f6f610bb324a1b41286f454d20ad"
+    },
+    {
+      "function": "func_0010921c",
+      "address": "0x0010921c",
+      "target_bytes": 1516,
+      "source": "scratch/authors/r4051/work/camera_final.cpp",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0010921c",
+        "address": 1085980,
+        "size": 1516,
+        "candidate_size": 1516,
+        "status": "mismatch",
+        "first_diff": 1,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0010921c/camera_final.result.json",
+      "receipt_sha256": "40a9e8cd1774cbd63b7eb8194a425f5fb44f9283bee5e3946e675880ef08cd88"
+    },
+    {
+      "function": "func_0010a838",
+      "address": "0x0010a838",
+      "target_bytes": 388,
+      "source": "scratch/authors/r41206/src/func_0010a838.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0010a838",
+        "address": 1091640,
+        "size": 388,
+        "candidate_size": 212,
+        "status": "mismatch",
+        "first_diff": 1,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0010a838/func_0010a838.result.json",
+      "receipt_sha256": "60552cd656ad8824e5398b0297cc5d6f8cf663ad7ff24ecabea41c2138fdc536"
+    },
+    {
+      "function": "func_001184f8",
+      "address": "0x001184f8",
+      "target_bytes": 2120,
+      "source": "scratch/authors/s1184f8/src/func_001184f8.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001184f8",
+        "address": 1148152,
+        "size": 2120,
+        "candidate_size": 2120,
+        "status": "mismatch",
+        "first_diff": 5,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001184f8/func_001184f8.result.json",
+      "receipt_sha256": "f4162c52c9782114efc1475997b24d614a155943bfdef65c587fb0c823543268"
+    },
+    {
+      "function": "func_0012cedc",
+      "address": "0x0012cedc",
+      "target_bytes": 456,
+      "source": "scratch/authors/w20c/src/func_0012cedc.cpp",
+      "profile": "sdk",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0012cedc",
+        "address": 1232604,
+        "size": 456,
+        "candidate_size": 456,
+        "status": "mismatch",
+        "first_diff": 1,
+        "linker_rewrites": [
+          {
+            "offset": 120,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0012cedc/func_0012cedc.result.json",
+      "receipt_sha256": "f124c67da70efc94f255fe6043767bf1b98bf57b790513c892ec8006a5874640"
+    },
+    {
+      "function": "func_0013196c",
+      "address": "0x0013196c",
+      "target_bytes": 2268,
+      "source": "scratch/authors/s13196c/src/func_0013196c.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0013196c",
+        "address": 1251692,
+        "size": 2268,
+        "candidate_size": 2224,
+        "status": "mismatch",
+        "first_diff": 8,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0013196c/func_0013196c.result.json",
+      "receipt_sha256": "f645952ea236fc17593d3975a696d288cc0dba414e77b300b5db630826107f7e"
+    },
+    {
+      "function": "func_0013fd88",
+      "address": "0x0013fd88",
+      "target_bytes": 408,
+      "source": "scratch/authors/r4043/src/func_0013fd88.cpp",
+      "profile": "sdk",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0013fd88",
+        "address": 1310088,
+        "size": 408,
+        "candidate_size": 412,
+        "status": "mismatch",
+        "first_diff": 9,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0013fd88/func_0013fd88.result.json",
+      "receipt_sha256": "0a289d8f7f2bc0dcca1d538300e30fb5bac85d5dfffb1cb8669274bbdf70e50f"
+    },
+    {
+      "function": "func_00144460",
+      "address": "0x00144460",
+      "target_bytes": 728,
+      "source": "scratch/authors/L017/src/func_00144460.c",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00144460",
+        "address": 1328224,
+        "size": 728,
+        "candidate_size": 728,
+        "status": "mismatch",
+        "first_diff": 26,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00144460/func_00144460.result.json",
+      "receipt_sha256": "31af90150aa3f8352cccd6dbba9d6c5b4edf921612d37f145345a0da89dae749"
+    },
+    {
+      "function": "func_001456e4",
+      "address": "0x001456e4",
+      "target_bytes": 240,
+      "source": "scratch/authors/w16d/v3/func_001456e4.c",
+      "profile": "game",
+      "extra_sources": [
+        {
+          "current_source_sha256": "741268db3866768ffd0b4649251f55aefccbc3639ce7d60bac98f0f908a9bed4",
+          "profile": "game",
+          "source": "scratch/authors/w16d/v3/display_metadata.c",
+          "source_sha256": "741268db3866768ffd0b4649251f55aefccbc3639ce7d60bac98f0f908a9bed4"
+        }
+      ],
+      "status": "refused",
+      "exit_code": 2,
+      "reason": "\"/home/michael/code/kanken-training-2-decomp/scratch/authors/w16d/v3/func_001456e4.c\", line 9: Error:  #147: declaration is incompatible with \"struct DisplayQueueFlags data_0023ee9c\" (declared at line 279 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/include/game/screen.h\")",
+      "target": null,
+      "receipt": "scratch/integrator/cmodels/original/func_001456e4/func_001456e4.result.json",
+      "receipt_sha256": "04783188776687a23cf4bc70388d6acf1b504fb940fe8a3b3220b379d6686790"
+    },
+    {
+      "function": "func_0014ffd8",
+      "address": "0x0014ffd8",
+      "target_bytes": 88,
+      "source": "scratch/authors/r41227/src/func_0014ffd8.cpp",
+      "profile": "sdk",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0014ffd8",
+        "address": 1376216,
+        "size": 88,
+        "candidate_size": 88,
+        "status": "mismatch",
+        "first_diff": 56,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0014ffd8/func_0014ffd8.result.json",
+      "receipt_sha256": "9114ff2e8680730e2a25fb867909b87ffd0a2dbeadf0aa654b56e2601b956f33"
+    },
+    {
+      "function": "func_0015918c",
+      "address": "0x0015918c",
+      "target_bytes": 2080,
+      "source": "scratch/authors/r4053/recovered/func_0015918c.c",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0015918c",
+        "address": 1413516,
+        "size": 2080,
+        "candidate_size": 2080,
+        "status": "mismatch",
+        "first_diff": 56,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0015918c/func_0015918c.result.json",
+      "receipt_sha256": "04c57dea61dbb725210892fa4d32a854817cf03e3005c139accfe3c4ff435628"
+    },
+    {
+      "function": "func_00159e94",
+      "address": "0x00159e94",
+      "target_bytes": 3808,
+      "source": "scratch/authors/s159e94/src/func_00159e94.c",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00159e94",
+        "address": 1416852,
+        "size": 3808,
+        "candidate_size": 3784,
+        "status": "mismatch",
+        "first_diff": 4,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00159e94/func_00159e94.result.json",
+      "receipt_sha256": "c0ed2d70d2d05d204e96f7a8af8a7395bad95833485294ed9dbc09e0d0ab61b2"
+    },
+    {
+      "function": "func_00161ad0",
+      "address": "0x00161ad0",
+      "target_bytes": 5180,
+      "source": "scratch/authors/s161ad0/src/func_00161ad0.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00161ad0",
+        "address": 1448656,
+        "size": 5180,
+        "candidate_size": 5224,
+        "status": "mismatch",
+        "first_diff": 124,
+        "linker_rewrites": [
+          {
+            "offset": 28,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 296,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 484,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 740,
+            "rule": "inline_insn",
+            "target": 2031616,
+            "word": "0xe5900010"
+          },
+          {
+            "offset": 796,
+            "rule": "inline_insn",
+            "target": 2031616,
+            "word": "0xe5900010"
+          },
+          {
+            "offset": 852,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1024,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1316,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2836,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 5136,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00161ad0/func_00161ad0.result.json",
+      "receipt_sha256": "4b2fb5c058981757d20ac16d8c9e477adfdceaf3584b5141fd838d894bf4194c"
+    },
+    {
+      "function": "func_001721e4",
+      "address": "0x001721e4",
+      "target_bytes": 620,
+      "source": "scratch/authors/tu172/src/func_0016fcdc.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "refused",
+      "exit_code": 2,
+      "reason": "\"/home/michael/code/kanken-training-2-decomp/scratch/authors/tu172/src/func_0016fcdc.cpp\", line 169: Error:  #338: more than one instance of overloaded function \"func_00173fb4\" has \"C\" linkage\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/tu172/src/func_0016fcdc.cpp\", line 174: Error:  #338: more than one instance of overloaded function \"func_00173408\" has \"C\" linkage\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/tu172/src/func_0016fcdc.cpp\", line 175: Error:  #311: cannot overload functions distinguished by return type alone\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/tu172/src/func_0016fcdc.cpp\", line 177: Error:  #338: more than one instance of overloaded function \"func_0017a034\" has \"C\" linkage\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/tu172/src/func_0016fcdc.cpp\", line 183: Error:  #338: more than one instance of overloaded function \"func_001a78a4\" has \"C\" linkage\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/tu172/src/func_0016fcdc.cpp\", line 184: Error:  #338: more than one instance of overloaded function \"func_0017365c\" has \"C\" linkage",
+      "target": null,
+      "receipt": "scratch/integrator/cmodels/original/func_001721e4/func_0016fcdc.result.json",
+      "receipt_sha256": "db4f29db3974f377d9462712f8a2b976d382acb497f0b0ca87a9faf7f1252482"
+    },
+    {
+      "function": "func_00172d9c",
+      "address": "0x00172d9c",
+      "target_bytes": 100,
+      "source": "scratch/authors/r4015/src/func_00172d9c.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00172d9c",
+        "address": 1519004,
+        "size": 100,
+        "candidate_size": 100,
+        "status": "mismatch",
+        "first_diff": 4,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00172d9c/func_00172d9c.result.json",
+      "receipt_sha256": "d456c33b4095f4c2603e1e50db6c2e9a97399b0a20da9ef5c91ad3a929283cbe"
+    },
+    {
+      "function": "func_00175dcc",
+      "address": "0x00175dcc",
+      "target_bytes": 1248,
+      "source": "scratch/authors/L026/src/func_00175dcc.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00175dcc",
+        "address": 1531340,
+        "size": 1248,
+        "candidate_size": 1248,
+        "status": "mismatch",
+        "first_diff": 17,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00175dcc/func_00175dcc.result.json",
+      "receipt_sha256": "63fa3bce31a2c1194db4fbce966f35e7c933a75516585e13e3868d358d60f6ee"
+    },
+    {
+      "function": "func_001762ac",
+      "address": "0x001762ac",
+      "target_bytes": 1168,
+      "source": "scratch/authors/r41136/variants/037-complete-panel-slot-vector.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001762ac",
+        "address": 1532588,
+        "size": 1168,
+        "candidate_size": 1168,
+        "status": "mismatch",
+        "first_diff": 29,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001762ac/037-complete-panel-slot-vector.result.json",
+      "receipt_sha256": "f4888e053740aabcb1cb1710d157c16b8bea7efe05ee31372453faa8f99bad8c"
+    },
+    {
+      "function": "func_001812f8",
+      "address": "0x001812f8",
+      "target_bytes": 48,
+      "source": "scratch/authors/r4013/src/func_001812f8.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001812f8",
+        "address": 1577720,
+        "size": 48,
+        "candidate_size": 48,
+        "status": "mismatch",
+        "first_diff": 0,
+        "linker_rewrites": [
+          {
+            "offset": 44,
+            "rule": "branchnop",
+            "target": 1577768,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001812f8/func_001812f8.result.json",
+      "receipt_sha256": "e3b70c77dab1b4319f9d8b0eb4c034f840c8788b0949d91538317a788875f0a5"
+    },
+    {
+      "function": "func_0018c784",
+      "address": "0x0018c784",
+      "target_bytes": 240,
+      "source": "scratch/authors/w6e/src/func_0018c784.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_0018c784",
+        "address": 1623940,
+        "size": 240,
+        "candidate_size": 240,
+        "status": "mismatch",
+        "first_diff": 12,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_0018c784/func_0018c784.result.json",
+      "receipt_sha256": "54f644c8c0e68a7005a014a2b53359d2ce968b195dea9b0fb1febe30d9fd426c"
+    },
+    {
+      "function": "func_001a43b8",
+      "address": "0x001a43b8",
+      "target_bytes": 12336,
+      "source": "scratch/authors/s1a43b8/src/func_001a43b8.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "refused",
+      "exit_code": 2,
+      "reason": "\"/home/michael/code/kanken-training-2-decomp/scratch/authors/s1a43b8/src/func_001a43b8.cpp\", line 124: Error:  #147: declaration is incompatible with \"const char data_002232d5[]\" (declared at line 90 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/include/game/runtime.h\")",
+      "target": null,
+      "receipt": "scratch/integrator/cmodels/original/func_001a43b8/func_001a43b8.result.json",
+      "receipt_sha256": "69738a1afe09911614e70c4b3b304c9f74501eae3052e317273ca3f008ea3210"
+    },
+    {
+      "function": "func_001ac200",
+      "address": "0x001ac200",
+      "target_bytes": 2308,
+      "source": "scratch/authors/s1ac200/src/func_001ac200.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001ac200",
+        "address": 1753600,
+        "size": 2308,
+        "candidate_size": 2308,
+        "status": "mismatch",
+        "first_diff": 1,
+        "linker_rewrites": [
+          {
+            "offset": 168,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 356,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 908,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1040,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1172,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1360,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1648,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1820,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001ac200/func_001ac200.result.json",
+      "receipt_sha256": "1c93038a33bc11499dad65f85208df9058079a18d60289e556b7be3540b9906c"
+    },
+    {
+      "function": "func_001ad2e0",
+      "address": "0x001ad2e0",
+      "target_bytes": 232,
+      "source": "scratch/authors/r4038/recovery/variants/ad2e0_reference.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001ad2e0",
+        "address": 1757920,
+        "size": 232,
+        "candidate_size": 232,
+        "status": "mismatch",
+        "first_diff": 49,
+        "linker_rewrites": [
+          {
+            "offset": 176,
+            "rule": "inline_nop",
+            "target": 1461948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 188,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001ad2e0/ad2e0_reference.result.json",
+      "receipt_sha256": "e874c210aaeb7b8ff0bae2bc58fca296832038daa7d7b611af4562fc56827383"
+    },
+    {
+      "function": "func_001af304",
+      "address": "0x001af304",
+      "target_bytes": 108,
+      "source": "scratch/authors/r41257/attempts/func_001af304/01-late-inline-record/func_001af304.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001af304",
+        "address": 1766148,
+        "size": 108,
+        "candidate_size": 108,
+        "status": "mismatch",
+        "first_diff": 5,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001af304/func_001af304.result.json",
+      "receipt_sha256": "238d7c31d73388466fe0f9afc8a3f1a465fa8f066f92e50a7edc004bc24f34ee"
+    },
+    {
+      "function": "func_001af554",
+      "address": "0x001af554",
+      "target_bytes": 72,
+      "source": "scratch/authors/w15h/src/func_001af554.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001af554",
+        "address": 1766740,
+        "size": 72,
+        "candidate_size": 68,
+        "status": "mismatch",
+        "first_diff": 0,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001af554/func_001af554.result.json",
+      "receipt_sha256": "0c68e1c2a3462eaa00230f76c16b4854cccfa90085d0db0d45dbbbd65148460c"
+    },
+    {
+      "function": "func_001b0d34",
+      "address": "0x001b0d34",
+      "target_bytes": 4588,
+      "source": "scratch/authors/s1b0d34/src/func_001b0d34.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "_ZN10SetupScene9configureEv",
+        "address": 1772852,
+        "size": 4588,
+        "candidate_size": 4604,
+        "status": "mismatch",
+        "first_diff": 413,
+        "linker_rewrites": [
+          {
+            "offset": 224,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 356,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 572,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 732,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 892,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1064,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1240,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 4380,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 4512,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001b0d34/func_001b0d34.result.json",
+      "receipt_sha256": "1976d6956c40496519023ddc2121b43e42052ecf4d3e389735e2e1947b12b0b5"
+    },
+    {
+      "function": "func_001b6ec4",
+      "address": "0x001b6ec4",
+      "target_bytes": 588,
+      "source": "scratch/authors/L033/src/func_001b6ec4.cpp",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "refused",
+      "exit_code": 2,
+      "reason": "unresolved symbol '_ZN16PrimaryParameterC1Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)",
+      "target": null,
+      "receipt": "scratch/integrator/cmodels/original/func_001b6ec4/func_001b6ec4.result.json",
+      "receipt_sha256": "6f7f9c21717080462c4ff2a79018a0202b07f8f72bb7079ed4c90a7a2b250172"
+    },
+    {
+      "function": "func_001b8fa0",
+      "address": "0x001b8fa0",
+      "target_bytes": 3868,
+      "source": "scratch/authors/s1b8fa0/src/func_001b8fa0.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001b8fa0",
+        "address": 1806240,
+        "size": 3868,
+        "candidate_size": 3868,
+        "status": "mismatch",
+        "first_diff": 133,
+        "linker_rewrites": [
+          {
+            "offset": 204,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 336,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 468,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 712,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 844,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 976,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1972,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 2260,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001b8fa0/func_001b8fa0.result.json",
+      "receipt_sha256": "56dd5f83d5faa19799c198f896173e6ee06bf598e81c5050f0c5921556470e1a"
+    },
+    {
+      "function": "func_001ba5b8",
+      "address": "0x001ba5b8",
+      "target_bytes": 1532,
+      "source": "scratch/authors/L006/src/func_001ba5b8.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001ba5b8",
+        "address": 1811896,
+        "size": 1532,
+        "candidate_size": 1532,
+        "status": "mismatch",
+        "first_diff": 77,
+        "linker_rewrites": [
+          {
+            "offset": 172,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 304,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1252,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1460,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001ba5b8/func_001ba5b8.result.json",
+      "receipt_sha256": "2336d1c0c20f53a5877021a726bffa606feb34abc0a2ceb2a944196f57509554"
+    },
+    {
+      "function": "func_001babb4",
+      "address": "0x001babb4",
+      "target_bytes": 3340,
+      "source": "scratch/authors/r4057/src/trial086.cpp",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001babb4",
+        "address": 1813428,
+        "size": 3340,
+        "candidate_size": 3344,
+        "status": "mismatch",
+        "first_diff": 12,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001babb4/trial086.result.json",
+      "receipt_sha256": "2aca08fe5ceeeb3f9c03095032281815ab4054a93c235e2997152dc90b3ee7dc"
+    },
+    {
+      "function": "func_001bc2a0",
+      "address": "0x001bc2a0",
+      "target_bytes": 664,
+      "source": "scratch/authors/L034/src/func_001bc2a0.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001bc2a0",
+        "address": 1819296,
+        "size": 664,
+        "candidate_size": 644,
+        "status": "mismatch",
+        "first_diff": 28,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001bc2a0/func_001bc2a0.result.json",
+      "receipt_sha256": "9850d5f91edf851c35202bb300ff3d291df7da261f9af4e097e67d5c21979702"
+    },
+    {
+      "function": "func_001bdd78",
+      "address": "0x001bdd78",
+      "target_bytes": 840,
+      "source": "scratch/authors/L035/src/func_001bdd78.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001bdd78",
+        "address": 1826168,
+        "size": 840,
+        "candidate_size": 840,
+        "status": "mismatch",
+        "first_diff": 632,
+        "linker_rewrites": [
+          {
+            "offset": 128,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 260,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 420,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 552,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001bdd78/func_001bdd78.result.json",
+      "receipt_sha256": "51db2cce55f17833e3c0e982e10d4421a28cce8a9adcee3d083185fb897669dc"
+    },
+    {
+      "function": "func_001ca104",
+      "address": "0x001ca104",
+      "target_bytes": 404,
+      "source": "scratch/authors/w14c/src/func_001ca104.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "refused",
+      "exit_code": 2,
+      "reason": "\"/home/michael/code/kanken-training-2-decomp/scratch/authors/w14c/src/func_001ca104.c\", line 3: Error:  #101: \"Vector3\" has already been declared in the current scope",
+      "target": null,
+      "receipt": "scratch/integrator/cmodels/original/func_001ca104/func_001ca104.result.json",
+      "receipt_sha256": "34bdf98eeb7eeb3bcf46778f0abb670cf59fb897a222d3605f465e0e19c43d29"
+    },
+    {
+      "function": "func_001ca298",
+      "address": "0x001ca298",
+      "target_bytes": 3568,
+      "source": "scratch/authors/r4059/src/func_001ca298_canonical.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001ca298",
+        "address": 1876632,
+        "size": 3568,
+        "candidate_size": 3572,
+        "status": "mismatch",
+        "first_diff": 8,
+        "linker_rewrites": [
+          {
+            "offset": 392,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 404,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 476,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 488,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 564,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 576,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 652,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 664,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 740,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 752,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 828,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 840,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 912,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 924,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 988,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1000,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1072,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1084,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1156,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1168,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1240,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1252,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1336,
+            "rule": "inline_nop",
+            "target": 2187584,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1348,
+            "rule": "inline_nop",
+            "target": 2186948,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001ca298/func_001ca298_canonical.result.json",
+      "receipt_sha256": "32eba9d8f19e93ad2303b2c5e2b2f6f9593d728a1214320b8ba66c438ba61e86"
+    },
+    {
+      "function": "func_001cfe68",
+      "address": "0x001cfe68",
+      "target_bytes": 64,
+      "source": "scratch/authors/w20e/src/func_001cfe68.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "_ZN14MaterialObjectD1Ev",
+        "address": 1900136,
+        "size": 64,
+        "candidate_size": 68,
+        "status": "mismatch",
+        "first_diff": 0,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001cfe68/func_001cfe68.result.json",
+      "receipt_sha256": "ffac4c50238bcebcfcdb0df19c3b0c2877fe1665dfbe30f52100809c2fafb9c4"
+    },
+    {
+      "function": "func_001d5694",
+      "address": "0x001d5694",
+      "target_bytes": 284,
+      "source": "scratch/authors/r4040/recovery/variants/d569_common_finish/func_001d5694.cpp",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001d5694",
+        "address": 1922708,
+        "size": 284,
+        "candidate_size": 276,
+        "status": "mismatch",
+        "first_diff": 1,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001d5694/func_001d5694.result.json",
+      "receipt_sha256": "3ad4cc928e9113c4cab03ec9271425952c8401963ed88ac62af4cb1f59087ffa"
+    },
+    {
+      "function": "func_001e11c8",
+      "address": "0x001e11c8",
+      "target_bytes": 7472,
+      "source": "scratch/authors/r4060/src/func_001e11c8_callback_descriptor.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001e11c8",
+        "address": 1970632,
+        "size": 7472,
+        "candidate_size": 7472,
+        "status": "mismatch",
+        "first_diff": 8,
+        "linker_rewrites": [
+          {
+            "offset": 28,
+            "rule": "inline_nop",
+            "target": 1274192,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 296,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 540,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 672,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 804,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1188,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1360,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1712,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 3492,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 7324,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001e11c8/func_001e11c8_callback_descriptor.result.json",
+      "receipt_sha256": "f212399130fd3373a529b87f4fa30856e42e997087ba689ca5a510dea37011c2"
+    },
+    {
+      "function": "func_001e3294",
+      "address": "0x001e3294",
+      "target_bytes": 236,
+      "source": "scratch/authors/r41279/variants/func_001e3294/06-overlay-state-helper/func_001e3294.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001e3294",
+        "address": 1979028,
+        "size": 236,
+        "candidate_size": 232,
+        "status": "mismatch",
+        "first_diff": 5,
+        "linker_rewrites": [
+          {
+            "offset": 96,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001e3294/func_001e3294.result.json",
+      "receipt_sha256": "669e2bb0692057fc5370d0550f44fbea2a7541b06a02d33f4af2c9a5f70c2ba3"
+    },
+    {
+      "function": "func_001e7748",
+      "address": "0x001e7748",
+      "target_bytes": 1188,
+      "source": "scratch/authors/L043/src/func_001e7748.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001e7748",
+        "address": 1996616,
+        "size": 1188,
+        "candidate_size": 1192,
+        "status": "mismatch",
+        "first_diff": 36,
+        "linker_rewrites": [
+          {
+            "offset": 148,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 288,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 596,
+            "rule": "inline_nop",
+            "target": 2029700,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001e7748/func_001e7748.result.json",
+      "receipt_sha256": "1b21f575561bd4ad467cd6a786dca13de1b1cbd58188f394f20dec2edd8ab9a0"
+    },
+    {
+      "function": "func_001e958c",
+      "address": "0x001e958c",
+      "target_bytes": 296,
+      "source": "scratch/authors/r41280/src/func_001e958c_native_inline.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001e958c",
+        "address": 2004364,
+        "size": 296,
+        "candidate_size": 256,
+        "status": "mismatch",
+        "first_diff": 9,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001e958c/func_001e958c_native_inline.result.json",
+      "receipt_sha256": "d36e3a4b262490879a081aa8ac7038d61d9865d6218cea494a5720e8d9fb4f3e"
+    },
+    {
+      "function": "func_001ea314",
+      "address": "0x001ea314",
+      "target_bytes": 964,
+      "source": "scratch/authors/L043/src/func_001ea314.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001ea314",
+        "address": 2007828,
+        "size": 964,
+        "candidate_size": 972,
+        "status": "mismatch",
+        "first_diff": 5,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001ea314/func_001ea314.result.json",
+      "receipt_sha256": "70b25814a35e5e07ca44d3b1da99bd9e15872bbbbc6551feccbb23107c1d5b89"
+    },
+    {
+      "function": "func_001eb0d0",
+      "address": "0x001eb0d0",
+      "target_bytes": 192,
+      "source": "scratch/authors/w24d/src/func_001eb0d0.c",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001eb0d0",
+        "address": 2011344,
+        "size": 192,
+        "candidate_size": 192,
+        "status": "mismatch",
+        "first_diff": 4,
+        "linker_rewrites": [
+          {
+            "offset": 128,
+            "rule": "inline_nop",
+            "target": 1636336,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 140,
+            "rule": "inline_nop",
+            "target": 1636336,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001eb0d0/func_001eb0d0.result.json",
+      "receipt_sha256": "21ca060e0a9e7b3d5d43d811aaceb408aabcda7f800581ac02fc3fc7b4d2effb"
+    },
+    {
+      "function": "func_001edbb0",
+      "address": "0x001edbb0",
+      "target_bytes": 6996,
+      "source": "scratch/authors/r4054/src/func_001edbb0.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_001edbb0",
+        "address": 2022320,
+        "size": 6996,
+        "candidate_size": 6988,
+        "status": "mismatch",
+        "first_diff": 148,
+        "linker_rewrites": [
+          {
+            "offset": 168,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 608,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 768,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 940,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1072,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 1288,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 5396,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          },
+          {
+            "offset": 5760,
+            "rule": "inline_nop",
+            "target": 1524864,
+            "word": "0xe1a00000"
+          }
+        ]
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_001edbb0/func_001edbb0.result.json",
+      "receipt_sha256": "f990bbea55fd3e9702da0901c1d0ec69d433fe58a33507e652642cc8e92beadf"
+    },
+    {
+      "function": "func_00210834",
+      "address": "0x00210834",
+      "target_bytes": 56,
+      "source": "scratch/authors/v9a03/src/func_00210834.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00210834",
+        "address": 2164788,
+        "size": 56,
+        "candidate_size": 56,
+        "status": "mismatch",
+        "first_diff": 0,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00210834/func_00210834.result.json",
+      "receipt_sha256": "20bafd1db51e4eac1bd0fbf4bbde768a61a86aaaa428ed28b23b36900992959f"
+    },
+    {
+      "function": "func_00215990",
+      "address": "0x00215990",
+      "target_bytes": 56,
+      "source": "scratch/authors/v9a08/src/constructors/func_00215990.c",
+      "profile": "middleware",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "func_00215990",
+        "address": 2185616,
+        "size": 56,
+        "candidate_size": 56,
+        "status": "mismatch",
+        "first_diff": 1,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00215990/func_00215990.result.json",
+      "receipt_sha256": "a86a92231e7ca8b0afdeff7e178fe730454a2a2de09860ac32b18471724e327c"
+    },
+    {
+      "function": "func_00216144",
+      "address": "0x00216144",
+      "target_bytes": 168,
+      "source": "scratch/authors/r41284/src/func_00216144_cursor.cpp",
+      "profile": "game",
+      "extra_sources": [],
+      "status": "mismatch",
+      "exit_code": 1,
+      "reason": null,
+      "target": {
+        "name": "_ZN14DetachedVectorD1Ev",
+        "address": 2187588,
+        "size": 168,
+        "candidate_size": 172,
+        "status": "mismatch",
+        "first_diff": 4,
+        "linker_rewrites": []
+      },
+      "receipt": "scratch/integrator/cmodels/original/func_00216144/func_00216144_cursor.result.json",
+      "receipt_sha256": "594627e8219c13f11eaedac3f3de3170071610338a18261d4c4a884fa2c5f97d"
+    },
+    {
+      "function": "func_002166cc",
+      "address": "0x002166cc",
+      "target_bytes": 1240,
+      "source": "scratch/authors/L047/src/func_002166cc.cpp",
+      "profile": "middleware",
+      "extra_sources": [
+        {
+          "current_source_sha256": "13e24870b2dc612a3c69fea49fd42b95a28c6b9ed88d40e6d00dfe9bee0c181e",
+          "profile": "middleware",
+          "source": "scratch/authors/L047/src/text_character_writer_destructor.cpp",
+          "source_sha256": null
+        }
+      ],
+      "status": "refused",
+      "exit_code": 2,
+      "reason": "i._ZN15TextWriterState5printEPKwi+0x1cc: removed callee i._ZN19TextCharacterWriterD1Ev is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "target": null,
+      "receipt": "scratch/integrator/cmodels/original/func_002166cc/func_002166cc.result.json",
+      "receipt_sha256": "b8f2a271d50bc2a0e1d4344f66eaa0f91cd7dc4e4a8a4e68bc18d00aca3d2981"
+    }
+  ],
+  "authorized_expansion_outcomes": [
+    {
+      "function": "func_001e30a0",
+      "author": "r342",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/func_001e30a0_removed_state.c",
+      "profile": "game",
+      "extra_sources": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/drawing_input_state.c"
+      ],
+      "status": "out-of-pool-selected-model-refusal",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/func_001e30a0_removed_state.c",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/authorized-expansion/func_001e30a0",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/drawing_input_state.c"
+      ],
+      "exit_code": 2,
+      "reason": "armcc failed (1) on func_001e30a0_removed_state.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/func_001e30a0_removed_state.c\", line 7: Error:  #101: \"W10DrawingInput\" has already been declared in the current scope\n  struct W10DrawingInput {\n         ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/func_001e30a0_removed_state.c\", line 60: Error:  #147-D: declaration is incompatible with \"void func_0016dbc4(struct W10DrawingInput *)\" (declared at line 378 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/include/game/screen.h\")\n  extern void func_0016dbc4(struct W10DrawingInput *input);\n              ^\n/home/michael/code/kanken-training-2-decomp/scratch/authors/r342/src/func_001e30a0_removed_state.c: 0 warnings, 2 errors\n",
+      "receipt": "scratch/integrator/cmodels/authorized-expansion/func_001e30a0/func_001e30a0_removed_state.result.json",
+      "receipt_sha256": "5483903708d240983b962afcf03d2272b75c93102858afe3fdaf39c60b507e11",
+      "historical_receipt": "scratch/authors/r342/match/func_001e30a0/final-v3-game/func_001e30a0_removed_state.result.json",
+      "historical_warning": null
+    },
+    {
+      "function": "func_00151724",
+      "author": "r4039",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4039/variants/func_00151724/oop-getter2/func_00151724.cpp",
+      "profile": "middleware",
+      "extra_sources": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4039/helpers/sequence_commands.c"
+      ],
+      "status": "out-of-pool-selected-model-refusal",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4039/variants/func_00151724/oop-getter2/func_00151724.cpp",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels/scratch/integrator/cmodels/authorized-expansion/func_00151724",
+        "--extra-source",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4039/helpers/sequence_commands.c"
+      ],
+      "exit_code": 2,
+      "reason": "i.func_00151724+0x3c: removed callee i.sequence_commands is still referenced (requires an entry-only ARM BL, I1-I3 eligibility and call-ABI data-flow)",
+      "receipt": "scratch/integrator/cmodels/authorized-expansion/func_00151724/func_00151724.result.json",
+      "receipt_sha256": "665e6d388b28b57ed17192794fd130084fadf6dc6d8db2bec2a6e8e88f007c53",
+      "historical_receipt": "scratch/authors/r4039/match/func_00151724/oop-patch-middleware/func_00151724.result.json",
+      "historical_warning": "r4039 RESULT explicitly identifies the prior oop-patch-middleware MATCH as classifier-monkeypatched and invalid frozen-harness evidence."
+    }
+  ],
+  "typed_contract_deferrals": {
+    "path": "scratch/integrator/cmodels/CONTRACT-DEFERRALS.json",
+    "sha256": "587834c23ee821df9f07bc49729f01d0a9bbb2ba08f9ce588f067170591ab8ae",
+    "functions": [
+      "func_001d5864",
+      "func_001ab680"
+    ],
+    "bytes": 2560
+  },
+  "unselected_v8_only": [
+    {
+      "function": "func_001a77d4",
+      "author": "tu917",
+      "result": "scratch/authors/tu917/RESULT.json",
+      "row_index": 2,
+      "model": "armlink5-inline-branchnop-v8",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu917/src/selection_screens_final.cpp",
+      "profile": "game",
+      "receipt": "scratch/authors/tu917/match/42-delivery-v8/selection_screens_final.result.json",
+      "target_bytes": 208,
+      "reason": "Only v8 has a positive witness in the RESULT-only inventory; v8 is outside this checkpoint-global v6/L1 selection and was unadopted at base 045a47d."
+    }
+  ],
+  "default_model_positive_not_eligible": {
+    "function": "func_001d5694",
+    "author": "tu900",
+    "source": "scratch/authors/tu900/src/direct_native_wave.cpp",
+    "reason": "The separate v6 witness is also a default-v2 MATCH according to RESULT.json; a preview MATCH alone does not make it an opt-in-only row. The older model-sweep source remains a mismatch and is reported separately."
+  },
+  "integration": {
+    "collection": "Every new source/helper unit came through tools/collect.py with the exact selection; helper-only units remain in the manifest. No source was hand-copied into src/.",
+    "single_owner_resolution": "func_001a3ee0 is credited only in the tu441 native TU with func_001a2814. The separately collected r4044 definition was deleted; this moves no accepted identity.",
+    "helper_deduplication": "The three linear-buffer callers share one collected InitializeLinearBufferAllocator source; the two original r4044 callers shared one accessor, and the surviving r4044 caller retains it.",
+    "new_headers": [
+      {
+        "path": "include/game/linear_buffer.h",
+        "sha256": "2261d2a4f3e767beaba94887aadfac82ed494072b749d449807187c55d9e230e"
+      },
+      {
+        "path": "include/game/transition_controller.h",
+        "sha256": "99aae303bd2466dbf2c6c43fd27d43432d532eb5084434c188815f15d23b8d31"
+      },
+      {
+        "path": "include/game/menu_controller.h",
+        "sha256": "ce3571c0b51822b13490e832c37ddc812585f2616e655a14c26a37ea39af73e4"
+      },
+      {
+        "path": "include/game/screen_operations.h",
+        "sha256": "7ce03f9dfe2589f1074992243b0c515570036eeb9a19eac535d3b1358c6438f6"
+      },
+      {
+        "path": "include/game/training_screen.h",
+        "sha256": "19191b2840a4731e50f751e6da1ddd5350ee08de23a4dcc6ed6a8bebf05211dd"
+      },
+      {
+        "path": "include/game/transition.h",
+        "sha256": "c27d3aeb6b938185f5ddc4dc27bff4c5289477cf3f06d9047f44d7518d50e88b"
+      },
+      {
+        "path": "include/game/text_resources.h",
+        "sha256": "2252a22f4286b6fb02a5ee77143f82456bcde2a631f20a040fa12d8e0e1ad98f"
+      },
+      {
+        "path": "include/game/text_choices.h",
+        "sha256": "0e9845340f2cfb06e8155b57da1ff88a12fe1fca44542f1ec2a02890661c703b"
+      },
+      {
+        "path": "include/game/drawing_screen.h",
+        "sha256": "b590e28e2515cb29805256bb0c295b70e2931fa50219352a59ed62591fbd4119"
+      },
+      {
+        "path": "include/game/category_progress.h",
+        "sha256": "5fa12fc0e32052d119c126298326e31a04ad2e75c870471786572b6c2f791039"
+      }
+    ],
+    "revised_headers": [
+      {
+        "path": "include/game/character_panel.h",
+        "base_sha256": "54da58fb36fed0a1fe0e36d47641e91172b2390671da9b55cd930d73a3ac49dc",
+        "sha256": "d99fecfb7dbd7f28c698c6f499e6709900be40f0f57e834d74f9ea7e4ef3994d"
+      },
+      {
+        "path": "include/game/deferred_callback.h",
+        "base_sha256": "8c5610fb656d47711603cb8d1b025d29dc8160d0cee214b1bf32f152dc6f1aaa",
+        "sha256": "e03b8e352db94801d51ebeb9201fd899e5c08a1b0dbc523fc564f6dbec0cfe0f"
+      },
+      {
+        "path": "include/game/item_entries.h",
+        "base_sha256": "91b0cf98d1a4964818068bb42769e61bfa79913c9b2ddec1f0493bddd752e36f",
+        "sha256": "e896ea52323aed796dec57ba92155fc71257d842aa647a6d4a7dc677e13f209c"
+      },
+      {
+        "path": "include/game/messages.h",
+        "base_sha256": "23bbfc602ca9a0b5fa35061a1d9279e7a2e3ed66ccf42d071d19b202d241245a",
+        "sha256": "9bf2902f7cb8b21b8b83b8ca1a88277b9ff6a1dcfd5b78b054d76f90602f7bb0"
+      },
+      {
+        "path": "include/game/region_heap.h",
+        "base_sha256": "6a865533d3c22e8e62546d9fd818b5132dc8bdc9200ca500fb14a37859868128",
+        "sha256": "6404a7f584a3b255a9107b3a0303405721f8ed6e4e5034fb7731ebe7f3dda090"
+      },
+      {
+        "path": "include/game/result.h",
+        "base_sha256": "2f20e4aecaf4165af81926ea1f83242e29b00756423d25201b931f75befc640a",
+        "sha256": "39a8c7080a9d28cb7cf5afaeb6255cf3f55feda8c6fb1acf71acf38b8e2fe973"
+      },
+      {
+        "path": "include/game/text.h",
+        "base_sha256": "57c986c7b8488e6d6ee9ae0aa7908a29ef58226168e0e0f5353ce0decb9901a9",
+        "sha256": "b763ab0418759fb66cd04da407f267bfad04b87687cb502aca6d4ffe5b33979e"
+      }
+    ],
+    "revised_accepted_units": [
+      {
+        "source": "src/wave8/func_00172c04.c",
+        "functions": [
+          "func_00172c04"
+        ],
+        "base_sha256": "c85179ae36c87818ee73c4ed0692dc85f772ff332eb311805a82189485a77d3a",
+        "sha256": "ed099bf14f7ab87ac96ce29581520de4318ee033b94a5b33706ec7c48980255b",
+        "receipt": "scratch/integrator/cmodels/accepted/src/wave8/func_00172c04/func_00172c04.result.json",
+        "receipt_sha256": "91098978b9977f862c85e323f796aebc75da85fecaceaa1006e58cf3543922a5",
+        "status": "match"
+      },
+      {
+        "source": "src/wave8/func_00173f9c.c",
+        "functions": [
+          "func_00173f9c"
+        ],
+        "base_sha256": "cf2fa5c17ab13922e31dc37b56ef4cd8a7d47ba6443f3f4f13a201779d79171e",
+        "sha256": "1cb0105036c78d181ca6af105905912855e016d529d9b29677ff918cde0f8fdb",
+        "receipt": "scratch/integrator/cmodels/accepted/src/wave8/func_00173f9c/func_00173f9c.result.json",
+        "receipt_sha256": "3b2fa1b6c6b9c0b13d8f9a96aa12184f22beb01f7934b2880a9e69b0cfd028c7",
+        "status": "match"
+      },
+      {
+        "source": "src/wave10/func_0017a424.c",
+        "functions": [
+          "func_0017a424"
+        ],
+        "base_sha256": "122b31bdd7e04737dc969e61679ab9c075a14719c535173282c5e25951d3908a",
+        "sha256": "58517b5d07845f77ffa4d70fa72dea31a779644ef505775f2de5decb65b0d77b",
+        "receipt": "scratch/integrator/cmodels/accepted/src/wave10/func_0017a424/func_0017a424.result.json",
+        "receipt_sha256": "bd16ba0aac78d25a7da77f1488a4815c81489699a492aa7c14f62ab37b6044b2",
+        "status": "match"
+      }
+    ],
+    "integrator_markers": "Resolved in all collected sources; cross-unit helper declarations now live in shared headers.",
+    "name_additions": [
+      {
+        "symbol": "_ZN11TextChoicesC1Eiz",
+        "address": 1461224,
+        "evidence": "func_00203a68 allocates 52-byte objects and passes this, counted UTF-16 text arguments to 0x00164be8; the callee copies count strings and returns this. Class identity is inferred.",
+        "evidence_record": "config/names.json"
+      }
+    ],
+    "name_policy": "Only the emitted C1 constructor binding needed by the measured caller was added. Unrelated overlay names, C2/vtable aliases and unbound-helper address bindings were not adopted."
+  },
+  "model_qualifications": {
+    "r1_functions": 19,
+    "helper_definitions": 25,
+    "helper_only_units": 16,
+    "helpers": [
+      {
+        "symbols": [
+          "result_failure_bits"
+        ],
+        "section": "i.result_failure_bits",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "frame_heap_release_lock"
+        ],
+        "section": "i.frame_heap_release_lock",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "frame_heap_release_unlock"
+        ],
+        "section": "i.frame_heap_release_unlock",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "completeTextResourceDestruction"
+        ],
+        "section": "i.completeTextResourceDestruction",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "set_character_panel_minimum"
+        ],
+        "section": "i.set_character_panel_minimum",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "set_completion"
+        ],
+        "section": "i.set_completion",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "w19_item_category"
+        ],
+        "section": "i.w19_item_category",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "w19_item_value"
+        ],
+        "section": "i.w19_item_value",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "r4040_transition_active"
+        ],
+        "section": "i.r4040_transition_active",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "tu441_transition_active"
+        ],
+        "section": "i.tu441_transition_active",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "tu441_update_secondary"
+        ],
+        "section": "i.tu441_update_secondary",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "L034_get_selected"
+        ],
+        "section": "i.L034_get_selected",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "L034_set_input_enabled"
+        ],
+        "section": "i.L034_set_input_enabled",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "scene_drawing_state"
+        ],
+        "section": "i.scene_drawing_state",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "r41262_drawing_state"
+        ],
+        "section": "i.r41262_drawing_state",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "r41279_item_category"
+        ],
+        "section": "i.r41279_item_category",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "r41279_item_identifier"
+        ],
+        "section": "i.r41279_item_identifier",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "TU924_page_count"
+        ],
+        "section": "i.TU924_page_count",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "TU924_reset_optional"
+        ],
+        "section": "i.TU924_reset_optional",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "TU924_reset_prompts"
+        ],
+        "section": "i.TU924_reset_prompts",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "initialize_category_panel"
+        ],
+        "section": "i.initialize_category_panel",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "initialize_handle_panel"
+        ],
+        "section": "i.initialize_handle_panel",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "initialize_selector"
+        ],
+        "section": "i.initialize_selector",
+        "size": 4
+      },
+      {
+        "symbols": [
+          "InitializeLinearBufferAllocator"
+        ],
+        "section": "i.InitializeLinearBufferAllocator",
+        "size": 8
+      },
+      {
+        "symbols": [
+          "transition_active"
+        ],
+        "section": "i.transition_active",
+        "size": 8
+      }
+    ],
+    "literal_owning_functions": [
+      "func_00203a68"
+    ],
+    "literal_span_bytes": 7284,
+    "literal_records": 49,
+    "data_bytes_credited": 0,
+    "required_review": "R1 identity/historical outlining remains [INFERENCE] and requires QUALIFIED typed incoming/outgoing/reference/CFG review. L1 proves the candidate span and mapping, not complete original pool extent, surrounding records, sharing, ownership or a standalone original all-source link."
+  },
+  "verification": {
+    "tool_tests": {
+      "command": "nice -n 10 .venv/bin/python -m unittest tests.test_collect tests.test_match",
+      "tests": 48,
+      "failures": 0,
+      "result": "OK",
+      "commit": "11afde0"
+    },
+    "final_candidate_units": {
+      "checked": 19,
+      "functions": 20,
+      "bytes": 9956,
+      "all_exit_zero": true,
+      "manifest": "scratch/integrator/cmodels/FINAL-RESULTS-r2.json",
+      "manifest_sha256": "504fc8a604a21b9f93085bfd3edb6309507aaaff19374e59749e28c766e52c0c",
+      "evidence_note": "The remaining 19 units are unchanged from their final MATCH measurements; removal of the disjoint typed-contract-deferred source/helper does not rerun or rewrite those witnesses."
+    },
+    "standard_regressions": {
+      "prescribed_entries": 15,
+      "passed": 15,
+      "unique_sources": 5,
+      "chosen_selection_coverage": "All five sources additionally MATCH v6/L1 in the accepted-ledger sweep; the 15 original v2/v3/v4 baselines also passed.",
+      "manifest": "scratch/integrator/cmodels/STANDARD-REGRESSIONS.json",
+      "manifest_sha256": "873c38de6a06fc032b0c0363e312b1043feafb50c59c7e95e3b054d1710da7c4"
+    },
+    "accepted_ledger": {
+      "units": 1527,
+      "functions": 1601,
+      "bytes": 185952,
+      "matched_units": 1527,
+      "matcher_invocations": 1529,
+      "initial_path_length_refusals": 2,
+      "resolution": "Both original dependency-output failures are preserved. The same sources/headers/profile/models MATCH with shorter output paths. [INFERENCE] The long-path dependency-output limit caused the failures; no comparison was evaded.",
+      "model_transition_uses": 0,
+      "at_risk_units": [],
+      "manifest": "scratch/integrator/cmodels/ACCEPTED-RESULTS-r2.json",
+      "manifest_sha256": "fd4a046e78d457fc556dddf3e3498a613e1bf93d64d6bcbccad5501e4f11bb95",
+      "scope": "Entire existing accepted ledger, conservatively covering every accepted unit sharing any candidate header/helper."
+    },
+    "not_run": [
+      "full build",
+      "full suite",
+      "G3 interfaces",
+      "argcheck/manual ABI audit",
+      "prepare",
+      "independent checkpoint review",
+      "finalize",
+      "post-c009/c010/c011 merge readiness gates"
+    ],
+    "risk_assessment": "No accepted unit has an observed selected-model byte/extent/compile regression after resolving the two path-only incidents. All three revised accepted units MATCH. This is not full-build equality or independent typed review. Before prepare, merge the serialized predecessor checkpoints and rebuild/review the then-current complete ledger under the same explicit selection."
+  },
+  "notes": "scratch/integrator/cmodels-NOTES.md"
+}
