@@ -5,7 +5,6 @@
 /* [INFERENCE] Resource class identity; destructor/release slots follow the matching consumer. */
 class ResourceObject {
 public:
-    ResourceObject();
     virtual ~ResourceObject();
     virtual void reserved02();
     virtual void reserved03();

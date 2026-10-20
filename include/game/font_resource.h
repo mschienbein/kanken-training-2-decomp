@@ -209,7 +209,6 @@ extern PoolList *func_001cc12c(PoolList *list);
 extern void func_001daea4(FontResource *font);
 extern void func_001dae08(FontResource *font);
 extern FontResource *func_001daf74(FontResource *font);
-extern const FontVTable data_00224d30;
 }
 #endif
 

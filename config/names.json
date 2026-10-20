@@ -954,10 +954,6 @@
       "address": 2031640,
       "evidence": "Unique relocation-masked fingerprint under the frozen middleware profile of sources/libraries/font/font_ResFontBase.cpp at NintendoWare4Ctr 15ddb5632db5a6f0d2f46e3827fc78df468684bd; source confirmation in RESULT.json. Font filter targets additionally agree with the constructor's original vtable slots."
     },
-    "_ZNK2nw4font4Font17GetCharStrmReaderEw": {
-      "address": 2051320,
-      "evidence": "c009: src/wave20/func_001f4cf8.cpp defines the frozen native nw::font::Font::GetCharStrmReader(wchar_t) const API at this address; whole-function 64-byte MATCH under the frozen game profile is scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json. The hidden aggregate result, const Font receiver and unused wchar_t dummy are retained. This is a same-address own definition, not an external callee alias; original private identity remains qualified."
-    },
     "_ZTV14W11BaseCommand": {
       "address": 2242904,
       "evidence": "Matching base constructor at 0x0017a508 installs this ARM ABI vtable address plus eight."
@@ -1132,15 +1128,11 @@
     },
     "_ZN15TextDecoderBaseC1Ev": {
       "address": 1945860,
-      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. func_001db104 initializes a decoder dispatch-table pointer and is called as the base construction step by func_001daf74; reconstructed class name."
+      "evidence": "[INFERENCE] Descriptive C++ storage constructor; its own definition at func_001db104 explicitly stores opaque address data_00224cc0 and preserves the diagnostic operation. c009-r4 pre-review repair asserts no native virtual/destructor class identity or callable table shape. Bounded exact proof is scratch/integrator/c009-r4/prereview-fixes-r1/matches."
     },
     "_ZN15TextDecoderBaseC2Ev": {
       "address": 1945860,
-      "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC emits the C2 alias of the same reconstructed decoder base constructor as C1 at func_001db104."
-    },
-    "_ZTV15TextDecoderBase": {
-      "address": 2247864,
-      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. The original base constructor writes data_00224cc0; ARMCC's native virtual constructor references its vtable with addend 8, fixing the symbol base at 0x00224cb8."
+      "evidence": "C2 is emitted by the same ordinary storage constructor definition as C1 at func_001db104; c009-r4 retains only its own constructor entry identity, not a native vtable/destructor identity."
     },
     "_ZN13DisplayTargetC1Ev": {
       "address": 1144916,
@@ -1161,38 +1153,6 @@
     "_ZN12SlotBitOwnerD2Ev": {
       "address": 1855952,
       "evidence": "[INFERENCE] Native C++ name; Own emitted definition is rederived at its bound catalogue identity for c009. ARMCC base-object and complete-object destructor symbols alias the same generated section."
-    },
-    "_ZTV17HeapAllocatorDcb0": {
-      "address": 2244320,
-      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. Constructor at 0x0010dcb0 stores the vtable address point 0x00223ee8; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
-    },
-    "_ZTV17HeapAllocatorDce8": {
-      "address": 2244336,
-      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010dce8 sets vtable address point data_00223ef8; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
-    },
-    "_ZTV17HeapAllocatorDd20": {
-      "address": 2244352,
-      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010dd20 sets vtable address point data_00223f08; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
-    },
-    "_ZTV17HeapAllocatorD500": {
-      "address": 2244132,
-      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_0010d500 sets vtable address point data_00223e2c; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
-    },
-    "_ZTV17HeapAllocator6be4": {
-      "address": 2244476,
-      "evidence": "[INFERENCE] Native C++ name; data address-point binding used by the matching constructor. func_00116be4 sets vtable address point data_00223f84; ARM C++ ABI table base is address point minus eight; class name [INFERENCE]."
-    },
-    "_ZN14ResourceObjectC1Ev": {
-      "address": 1323800,
-      "evidence": "[INFERENCE] Native ResourceObject identity; c009 constructor own definition rederived at func_00143318."
-    },
-    "_ZN14ResourceObjectC2Ev": {
-      "address": 1323800,
-      "evidence": "ARMCC base/complete constructor aliases emitted by the same matching c009 definition."
-    },
-    "_ZTV14ResourceObject": {
-      "address": 2244820,
-      "evidence": "[INFERENCE] Native vtable identity; constructor stores address point data_002240dc, eight bytes after its ABI symbol base."
     },
     "_ZN18ResourceDescriptorC2EiiPKc": {
       "address": 1461156,

@@ -555,3 +555,136 @@ prepare-owned suite and two fresh full builds, followed by two fresh
 independent reviews. The carried accepted type issues and 288 open original
 target populations must remain visible; MATCH does not close them.
 
+## C009-r4 pre-review FAIL and bounded static-table correction
+
+The independent source pre-review of **`be8aa40` FAILED** with PF01–PF06:
+**23 incompatible static callable/PMF slots across 11 NEW functions / 780 B**.
+Its immutable records are
+`scratch/prereview/c009-r4/{PREREVIEW.json,PREREVIEW.md,TABLES.json}`.
+This is not a registered acceptance review, and the freeze must not be
+prepared unchanged. The earlier 231-site census covered original indirect
+invocations, not every stored PMF or uninvoked installed-table declaration.
+Its scope is not silently broadened to claim that pre-review found no gap.
+
+Main authorized local corrections only inside already-NEW/revised units and
+narrow headers, with fresh exact witnesses. A correct local noninvoked table
+may stay honestly forward-only; it must not claim native virtual/destructor
+identity. Otherwise only the affected NEW functions defer until the canonical
+models under `scratch/research/type-models/` land. No accepted identity,
+provider signature or accepted native class is withdrawn or changed.
+
+### PF01 and PF05: honest noninvoked under-specifications
+
+**PF01 — `001cfbcc`, `001cfc7c`: retained and MATCH.**
+`W17LayoutVTable` is now forward-declared only. The two texture-pane operations
+store the independently evidenced address **`00224370`** into their existing
+first-word table pointer, but no operation reads/invokes a member of that
+table. No callable slots, zero-entry table, native Pane/TextBox subclass,
+complete original table extent or receiver conversion is claimed.
+The native providers named by the original cells remain unchanged.
+The separate dynamically invoked `W17MaterialVTable` is not falsely given
+this table's population.
+
+**PF05 — `001db104`: retained and MATCH.**
+`TextDecoderBase` is an ordinary descriptive storage record with exactly one
+explicit `const TextDecoderDispatch*` member. `TextDecoderDispatch` is
+forward-only; its sole source use stores the original address **`00224cc0`**.
+There are no virtual members, no compiler vptr plus another dispatch field,
+no destructor declaration, no invoked slot and no native-destructor claim
+over accepted `001db134(void*)`. The actual constructor and its qualified
+two-unsigned diagnostic operation remain; C1/C2 are its own constructor
+entries, not destructor aliases.
+
+These are deliberate, documented **under-specifications**, not recovered
+complete native types or source-callable interface approvals. The original
+address stores and exact object-prefix effects are retained without claiming
+the uninvoked cells have a compatible callable population.
+
+The `_ZTV15TextDecoderBase` and five allocator `_ZTV` bindings were c009-only
+inferred names: none exists in accepted cmodels' source commit
+`85fd18dc7173e0542d8c33db157d03b7910c18c5`, and `heap_allocators.h` was not an
+accepted header. Their provenance is preserved privately. No accepted native
+form was replaced. Unsupported c009-only ResourceObject constructor/vtable
+and deferred reader-getter own-definition names are also removed; the
+decoder's actual ordinary constructor bindings remain with corrected evidence.
+
+### PF02/PF03/PF04/PF06: eight further NEW-only deferrals
+
+| Finding | NEW function | Target bytes | Concrete reason and re-entry requirement |
+| --- | --- | ---: | --- |
+| PF02 | `001db3ec` | 24 | Height/texture-count providers have different actual font receivers. Land the coordinated retail/native font constructor, provider, registry and accessor-return model from `type-models/fontgfx/`, then migrate all users. |
+| PF03 | `0010d500` | 64 | Its native destructor slot contradicts accepted `001c5e48(void)`. A genuine one-opaque-pointer record emits 64 B but mismatches at `+0x28`, actual exit 1. |
+| PF03 | `0010dcb0` | 56 | Accepted target `001c6ad0(void)` is not a receiver-taking destructor; the honest opaque control emits 52/56 B, mismatches at `+0x24`, exit 1. |
+| PF03 | `0010dce8` | 56 | Same issue with accepted `001c6ad4(void)`; opaque control 52/56 B, `+0x24`, exit 1. |
+| PF03 | `0010dd20` | 56 | Same issue with accepted `001c6ae0(void)`; opaque control 52/56 B, `+0x24`, exit 1. |
+| PF03 | `00116be4` | 56 | Same issue with accepted `001c6ad8(void)`; opaque control 52/56 B, `+0x24`, exit 1. |
+| PF04 | `00143318` | 16 | The guessed 30-slot ResourceObject shape crosses distinct installed address points. Land the coordinated resource/accessor, layout-binding, animation and font-manager ownership/interface/extent model before restoring its constructor. |
+| PF06 | `001f4cf8` | 64 | Its u16 native-reader PMFs contradict accepted plain C byte/halfword cursor providers. Land genuine native CP1252/UTF16 definitions and all accepted moves/cursor-user migrations with the canonical font/reader model first. |
+
+The PF03 re-entry condition is the canonical allocator/heap and lifetime
+cutover from `type-models/services/` and coordinated type-model families,
+including actual destructor contracts and preserved accepted-provider
+migrations, followed by an exact natural constructor. Their valid opaque
+controls and every failed result are kept; no padding, ABI-prefix arithmetic,
+fake virtual receiver, alias or allocation/code-generation steering is adopted.
+The five NEW units and now-unused allocator header are absent.
+
+The three other deferred source units are absent too. The new
+`data_00224d30` declaration and `data_0021c64c` PMF-array claim are removed.
+The unused ResourceObject constructor declaration/bindings are removed;
+the accepted dynamic release/delete consumer stays intact and remains an
+unresolved population, not evidence of a complete 30-slot physical table.
+No accepted font, resource, cursor or empty C provider loses credit.
+
+All eight exact pre-review sources, source hashes, findings, slot evidence,
+failed controls and explicit re-entry conditions are in
+`scratch/integrator/c009-r4/prereview-fixes-r1/DEFERRALS.json` and the candidate.
+These are checkpoint-only NEW deferrals, not exhausted-residue classifications.
+
+### Bounded static-class sweep and current counts
+
+The bounded follow-through dispositions all **61** pre-review static/context
+tables and all **23** blocking cells: eight false callable claims are withdrawn
+by the two honest opaque models; fifteen cells' NEW constructor/getter claims
+are explicitly deferred. In function terms, **3 / 388 B are fixed and retained;
+8 / 392 B defer**. Dynamic/opaque tables are not recorded as zero-entry tables
+or as compatible simply because their members are unspecified.
+
+Fresh sequential v6/L1 `match.py --show 0` closure gives **50 units /
+62 credited functions, all MATCH, actual exit 0**. It includes all three
+retained owners, **34 transitive changed-header dependents**, nineteen actual
+provider units and the accepted resource-accessor caller. The nineteen
+provider-source bindings are unchanged, including every accepted provider.
+No expected credited row is missing. Scope SHA-256:
+`2204543cc85387fa11d251c600f0403dffd1901f5db5629602955c83a10fe0fa`.
+Full bounded result SHA-256:
+`bd58294af28a5fe8d42f884d9984d6f4a36cf01a4290f71ae5bef7e44b322b30`.
+The prior be8aa40-wide witness remains historical rather than being relabeled
+as a fresh post-pre-review whole-ledger audit.
+
+**PN01 stays explicitly carried/nonblocking by Main:** `data_00223d98` has
+two real font receiver disagreements and only the unchanged accepted
+`001c5b8c` installer. Its callable FontVTable completion was introduced during
+c009, **not** accepted in cmodels. Neither the unchanged installer source nor
+withdrawal of `001db3ec` makes that completion correct or historically accepted.
+The fourteen carried accepted invocation/target rows and all 288 unresolved
+original target-population rows also remain visible and unresolved.
+
+The current proposal is **2,221 units / 2,274 functions / 249,572 B**:
+all **1,621 accepted functions / 195,908 B** plus **653 NEW / 53,664 B**.
+New profiles are game **593 / 48,156 B**, middleware **35 / 3,824 B**,
+sdk **25 / 1,684 B**. The candidate has **664 units**.
+Additional r4 deferrals now total **22 / 3,120 B**; including the earlier
+`0011f3a8`, the r3/r4 boundary total is **23 / 3,388 B**.
+The five explicit accepted moves and accepted affected scope remain
+**156 destinations / 161 functions / 21,700 B**; no further accepted source
+unit is revised by this correction.
+
+This correction modifies only the narrow `layout_lifecycle.h`,
+`font_resource.h`, `resource_objects.h` headers and removes unused
+`heap_allocators.h`; names are cleaned of the unsupported c009-only claims.
+No accepted source/type-family cutover, heavy job, integrated suite,
+whole-ledger gate, prepare or acceptance review was run here. Main owns the
+fresh integrated readiness and prepare boundary. Exact current handoff,
+remaining commands and the archived `HANDOFF-be8aa40.json` preserve both states.
+
