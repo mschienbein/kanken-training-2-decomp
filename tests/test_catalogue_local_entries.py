@@ -273,6 +273,36 @@ class CatalogueLocalEntryTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     local.check_catalogue(candidate, analyze.Analyzer(data["image"], data["layout"]), data["closure"])
 
+    def test_public_consumer_projects_only_the_exact_ten_byte_entry(self) -> None:
+        data = local_fixture()
+        candidate = build(data)
+        base = BASE + 32
+        self.assertEqual([row for row in candidate["ranges"] if row["owner"] == base],
+                         [{"start": base, "end": base + 10, "kind": "function", "owner": base}])
+        restored = local.check_catalogue(candidate, analyze.Analyzer(data["image"], data["layout"]), data["closure"])
+        self.assertEqual({key: restored[key] for key in local.BASELINE_FIELDS},
+                         {key: data["baseline"][key] for key in local.BASELINE_FIELDS})
+
+    def test_public_consumer_refuses_extra_entry_owned_unknown_intervals(self) -> None:
+        data = local_fixture()
+        actual = build(data)
+        base = BASE + 32
+        for interval in ((BASE + 74, BASE + 76), (BASE + 80, BASE + 96)):
+            for kind in ("function", "unknown"):
+                with self.subTest(interval=interval, kind=kind):
+                    candidate = deepcopy(actual)
+                    row = next(row for row in candidate["ranges"] if (row["start"], row["end"]) == interval)
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    row.update(kind=kind, owner=base)
+                    # Keep the real ten-byte span, every complete record and all
+                    # statistics unchanged: projection must not erase this fraud.
+                    self.assertEqual(candidate["functions"], actual["functions"])
+                    self.assertEqual(candidate["stats"], actual["stats"])
+                    self.assertIn({"start": base, "end": base + 10, "kind": "function", "owner": base},
+                                  candidate["ranges"])
+                    with self.assertRaisesRegex(ValueError, "ownership outside its exact declared span"):
+                        local.check_catalogue(candidate, analyze.Analyzer(data["image"], data["layout"]), data["closure"])
+
     def test_inherited_refusal_is_checked_before_new_entries_and_protected_entries_cannot_be_replaced(self) -> None:
         data = local_fixture()
         data["closure"]["entry_revision"]["withdrawn_entry_proposals"][0]["negative_certificate_reasons"].append(

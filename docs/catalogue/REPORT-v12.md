@@ -134,20 +134,75 @@ The exact delta relative to the retained r4 stage is two library owners/entries,
 retained metadata are not a fresh unchanged-image claim; a current v12 generation
 and independent review are still Main-only acceptance gates.
 
+## Independent review finding -> strict physical-span successor
+
+The independent reviewer found a **major fail-open consumer projection** in
+`fdcc391`; that commit and its original receipts are preserved, not amended or
+rewritten. The sealed synthetic public-producer/consumer observations are
+`scratch/review/catalogue-v12/codex/consumer-projection-probe.json` and
+`consumer-projection-probe-receipt.json` in Main's repository. The probe itself
+exited **0** and recorded **three unexpected acceptances**. The known failure
+was accepted as ground truth, not rerun against the unchanged failed source.
+
+The consumer reversed **every** physical range naming a new entry as its owner.
+Consequently a separate unknown halfword could acquire that owner, either with
+`kind=function` or still `kind=unknown`, and another unresolved interval could
+be attributed as extra function bytes. All complete function records, the real
+10-byte span and statistics remained unchanged. Projection erased the forged
+ownership and recovered the committed r4 hashes, so hash equality alone did
+not establish the claimed exact physical delta. The original smoke did not
+cover this owner-injection case.
+
+The successor first requires each freshly derived entry's exact single
+`[address,address+10)` function-owned span. It reverses **only that complete
+range record**. Any other range naming either new entry as owner is refused
+before projection, regardless of its kind. Every unaffected range is carried
+through unchanged; complete old records, statistics, anomalies, pointer
+witnesses and the negative closure stage must still equal their committed r4
+hashes. No ancestor evidence, declared extent, object proof, source profile,
+endian rule, unresolved interval or C credit is changed.
+
+New public-consumer regressions include an exact positive projection control
+and unchanged-record/statistic owner injections into both a separate halfword
+and another unresolved interval, with both `function` and `unknown` kinds.
+The bounded successor smoke also checks both actual halfword holes and the
+remaining 16-byte proposal against both new owner identities. These checks
+consume retained metadata; they do not discover or generate a current-image
+catalogue.
+
+Successor checks actually exercised after source completion:
+
+- `focused-projection-tests-r1.json`: exit **0**, **8 tests** in 1.097 seconds
+  (1.174983 seconds captured wall), including the new exact positive control
+  and all four halfword/other-interval owner-injection variants.
+- `public-consumer-smoke-r4.json`: exit **0**, 2.991994 seconds captured wall;
+  the original bounded smoke was reexercised against the fixed source, then
+  **four synthetic and twelve retained-metadata owner injections** were all
+  refused, with exact synthetic and retained-r4 positive controls passing.
+- `complete-section-proof-r2.json`: the enclosed public CLI actually exited
+  **0** and rechecked both complete private sections, **96 B** in total,
+  against the same hash-bound unadopted r4 baseline.
+
+`research/catalogue_v12_projection_checks.json` binds this successor's exact
+sources, sealed review evidence, new commands and receipts. Every old receipt
+is unchanged. No full suite, current-image generation, build, matcher, ledger
+audit, linter, formatter or adoption was performed.
+
 ## Regressions and remaining Main checks
 
-`tests/test_catalogue_local_entries.py` authors six public-consumer regression
+The original `tests/test_catalogue_local_entries.py` authored six public-consumer
 methods, including a real minimal synthetic ELF/archive, independent source
 placement, unchanged negative-stage retention, complete-object rechecking,
 misbound/incomplete certificates, old positive record substitution, unrelated
-changes/protected replacement and real CLI parent/proof/baseline refusals.
+changes/protected replacement and real CLI parent/proof/baseline refusals. The
+projection successor adds the two explicit positive/negative methods above.
 Existing synthetic revision/CLI fixtures now freeze their independently produced
 predecessor rather than skipping the new baseline guard. The original-image
 acceptance test derives its exact extra identities/unknown subtraction from the
 new certificates while retaining the ordinary address/extent set and every
 prepared complete-record check.
 
-The final bounded smoke (`public-consumer-smoke-r3.json`) actually exited **0**
+The initial source-`fdcc391` bounded smoke (`public-consumer-smoke-r3.json`) exited **0**
 in **1.507727 seconds**. It exercised the synthetic public producer/consumer,
 real minimal ELF/archive rechecking, twelve certificate/candidate refusals, and
 a real synthetic CLI (valid exit **0**, changed-child exit **1**, no refused
@@ -169,9 +224,10 @@ The historical exact-range guard rejected that extra reopening. The synthetic
 fixture was corrected to use a nonzero mapped-data halfword, retaining unknown
 ownership in both stages; **no production guard was relaxed**.
 
-No unittest method/module/full suite, current-image generation,
-build/compiler/matcher, whole-ledger source audit, linter or formatter was run.
-`research/catalogue_v12_checks.json` binds the exact exercised sources, inputs,
+Before the projection successor, no unittest method/module/full suite,
+current-image generation, build/compiler/matcher, whole-ledger source audit,
+linter or formatter had been run. The unchanged
+`research/catalogue_v12_checks.json` binds that stage's exact sources, inputs,
 actual exits, retained failures and scoped results.
 
 After integration and a serialized heavy-slot grant, Main should run the full

@@ -1,0 +1,84 @@
+{
+  "adoption": false,
+  "ancestor_checks": {
+    "changed": false,
+    "path": "research/catalogue_v12_checks.json",
+    "sha256": "a6d1e4bcfaed8743657b39f16b16e3a7784096a2edd504dcf84868ad51be83c6"
+  },
+  "checks": [
+    {
+      "actual_exit_code": 0,
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_catalogue_local_entries"
+      ],
+      "receipt": "scratch/closure/v12-local-entries/focused-projection-tests-r1.json",
+      "test_count": 8,
+      "test_seconds": 1.097,
+      "wall_seconds": 1.1749825379811227
+    },
+    {
+      "actual_exit_code": 0,
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "scratch/closure/v12-local-entries/public-consumer-smoke-r4.py"
+      ],
+      "receipt": "scratch/closure/v12-local-entries/public-consumer-smoke-r4.json",
+      "retained_extra_owner_refusals": 12,
+      "retained_r4_positive_control": true,
+      "synthetic_extra_owner_refusals": 4,
+      "synthetic_positive_control": true,
+      "wall_seconds": 2.9919942709966563
+    },
+    {
+      "actual_exit_code": 0,
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "tools/catalogue_local_entries.py",
+        "--baseline",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v11-r4/scratch/analyze/catalogue-v11-r4.json",
+        "--prove-objects"
+      ],
+      "complete_section_bytes": 96,
+      "receipt": "scratch/closure/v12-local-entries/complete-section-proof-r2.json"
+    }
+  ],
+  "finding": {
+    "accepted_as_ground_truth": true,
+    "cause": "Owner-based projection erased forged ownership outside the exact 10-byte entry spans, allowing three sealed unexpected acceptances with unchanged records and statistics.",
+    "repo_relative_evidence_sha256": {
+      "scratch/review/catalogue-v12/codex/consumer-projection-probe-receipt.json": "f98518df123ac48de5383fc8b91566048f9f9d1b2118928bca23e335dd053127",
+      "scratch/review/catalogue-v12/codex/consumer-projection-probe.json": "552c145dcefe5af036808e3f5de72e72e0ba86636d452d596033d5f2a77402f9"
+    },
+    "severity": "major",
+    "unchanged_failed_source_rerun": false
+  },
+  "fix": "Require each exact single freshly derived 10-byte physical span; reject every other range naming a new entry owner; reverse only the exact span and retain complete committed r4 equality for all remaining metadata.",
+  "main_remaining_checks": [
+    "Integrate this successor commit without rewriting fdcc391",
+    "Run the serialized integrated full suite",
+    "Generate one fresh current-image v12 proposal",
+    "Run public retained-proposal consumer and complete-object proof against the fresh proposal",
+    "Obtain independent review of the strict projection fix, complete evidence and fresh proposal"
+  ],
+  "new_C_credit": 0,
+  "not_run": [
+    "full suite",
+    "current-image generation",
+    "build/compiler/matcher",
+    "whole-ledger audit",
+    "lint/formatter"
+  ],
+  "parent_source_commit": "fdcc391",
+  "qualification": "The failure and all old receipts are preserved. Bounded retained-metadata checks do not constitute fresh current-image generation or adoption.",
+  "revision": "catalogue-v12-strict-span-projection",
+  "source_sha256": {
+    "tests/test_catalogue_local_entries.py": "841bd229cfa00c8d51a064fbb0ccab6be8ff3a299c843900c76d511463ded28c",
+    "tools/catalogue_local_entries.py": "26d2df18b084799dd1a6972453165440369613674e2c006be994f3d26a862eb6"
+  }
+}

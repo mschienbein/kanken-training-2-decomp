@@ -301,18 +301,28 @@ def check_catalogue(catalogue: dict, analyzer, evidence: dict) -> dict:
     if len(functions) != len(catalogue["functions"]):
         raise ValueError("v12 successor duplicates a complete owner")
     instruction_count = sum(_check_record(catalogue, analyzer, revision, row) for row in records)
+    entry_spans = {}
     for record in records:
         address = record["address"]
         if functions.get(address) != _function(record, revision):
             raise ValueError("v12 successor entry is not the freshly derived exact local declaration")
         span = {"start": address, "end": address + record["size"], "kind": "function", "owner": address}
+        entry_spans[address] = span
         if catalogue["ranges"].count(span) != 1:
             raise ValueError("v12 successor does not have the exact unknown-to-library physical transition")
+    projected_ranges = []
+    for row in catalogue["ranges"]:
+        span = entry_spans.get(row["owner"])
+        if span is None:
+            projected_ranges.append(row)
+        elif row != span:
+            raise ValueError("v12 successor assigns entry ownership outside its exact declared span")
+        else:
+            projected_ranges.append({**row, "kind": "unknown", "owner": None})
     baseline = {key: catalogue[key] for key in BASELINE_FIELDS}
     baseline["image_sha256"] = catalogue["image_sha256"]
     baseline["functions"] = [row for row in catalogue["functions"] if row["address"] not in addresses]
-    baseline["ranges"] = [{**row, "kind": "unknown", "owner": None} if row["owner"] in addresses else row
-                          for row in catalogue["ranges"]]
+    baseline["ranges"] = projected_ranges
     baseline["stats"] = _statistics(catalogue["stats"], records, instruction_count, -1)
     baseline["closure_evidence"] = {key: value for key, value in catalogue["closure_evidence"].items()
                                     if key != "local_runtime_entries"}
