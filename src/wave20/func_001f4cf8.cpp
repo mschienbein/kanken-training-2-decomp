@@ -2,8 +2,6 @@
 #define NW_RELEASE
 #include <nw/font/font_Font.h>
 
-typedef unsigned short (nw::font::CharStrmReader::*ReaderMethod)();
-extern "C" const ReaderMethod data_0021c64c[4];
 
 namespace nw {
 namespace font {
