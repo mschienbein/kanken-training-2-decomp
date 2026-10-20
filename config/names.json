@@ -1208,7 +1208,11 @@
     },
     "_ZN13RuntimeMemberC1Ev": {
       "address": 1367692,
-      "evidence": "[INFERENCE] Native member identity; compiler-produced callback reference in matching 0014d2e4 supplies an element this pointer. Canonical func_0014de8c preserves and returns that pointer; no unused-input erasure."
+      "evidence": "[INFERENCE] Native member identity; compiler-produced callback reference in matching 0014d2e4 supplies an element this pointer. The owning c009-r3 source defines RuntimeMember::RuntimeMember at the same entry."
+    },
+    "_ZN13RuntimeMemberC2Ev": {
+      "address": 1367692,
+      "evidence": "[INFERENCE] Native member identity; complete/base constructor aliases emitted by the same c009-r3 source definition at src/wave2/func_0014de8c.cpp."
     }
   }
 }
