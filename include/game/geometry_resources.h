@@ -6,5 +6,6 @@ extern "C" {
 void func_001c7560(nw::gfx::ResPrimitive *primitive, nw::os::IAllocator *allocator);
 void func_001c7a24(nw::gfx::ResVertexAttribute *attribute);
 void func_001c8894(nw::os::IAllocator *allocator, nw::gfx::ResShape shape);
+void func_001c78f8(nw::gfx::ResPrimitiveSet *primitive_set);
 }
 #endif

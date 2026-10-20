@@ -113,6 +113,8 @@ extern void func_0016fccc(int selection);
 extern int func_001758d4(void);
 extern void func_001dbb70(int track, unsigned char category, unsigned short x,
                          unsigned short y, unsigned char kind);
+extern void func_001dc744(int grade, int index, int value);
+extern void func_001dc918(int grade, int index, int value);
 #ifdef __cplusplus
 }
 #endif
