@@ -1,19 +1,14 @@
-#include "game/screen.h"
+#include "game/messages.h"
 
-struct WidgetActivity {
-    struct DisplayHandle *handles[7];
-    int state;
-};
-extern void func_00170dc0(struct DisplayHandle **handles, int index, int enabled);
 
-void func_00177b84(struct WidgetActivity *widget, int enabled)
+void func_00177b84(struct MessageLayout *layout, int enabled)
 {
     if (enabled) {
-        if (widget->state == 2)
-            widget->state = 1;
-    } else if (widget->state == 1) {
-        widget->state = 2;
+        if (layout->activity_state == 2)
+            layout->activity_state = 1;
+    } else if (layout->activity_state == 1) {
+        layout->activity_state = 2;
     }
-    if (widget->state != 0)
-        func_00170dc0(widget->handles, 2, enabled);
+    if (layout->activity_state != 0)
+        func_00170dc0(layout, 2, enabled);
 }

@@ -66,7 +66,7 @@ def transfer(insn, fact, state: dict, image):
 
 
 def enhanced(function: dict, blocks: list, successors: list, decoder, image,
-             acyclic: bool) -> dict:
+             acyclic: bool, known_entries: set[int]) -> dict:
     """Reuse r3's CFG transfer, including stack and multiple-register storage."""
     instructions = {insn.address: insn for start, stop in function["code_ranges"]
                     for insn in decoder.disasm(image.read(start, stop - start), start)}
@@ -120,13 +120,27 @@ def enhanced(function: dict, blocks: list, successors: list, decoder, image,
             if instruction.id == capstone.arm.ARM_INS_ASR or any(
                     op.shift.type == capstone.arm.ARM_SFT_ASR for op in instruction.operands):
                 signed_shifts.append(ac.address(fact.address))
-            event = transfer(instruction, fact, state, image)
+            if (fact.flow == "branch" and fact.target in known_entries
+                    and fact.target not in instructions):
+                condition = instruction.cc if fact.conditional else None
+                get = lambda register: indirect.plain(state.get(register), condition)
+                event = {
+                    "site": fact.address, "target": fact.target, "tail": True,
+                    "pointer": None,
+                    "registers": {register: get(register) for register in
+                                  sorted(ac.ARGUMENTS, key=ac.reg_order)},
+                    "stack": {offset: state.get(("memory", indirect.add(get("sp"), offset)))
+                              for offset in range(0, 32, 4)},
+                }
+            else:
+                event = transfer(instruction, fact, state, image)
             if fact.flow == "return":
                 returns.append({"site": ac.address(fact.address),
                                 "registers": {reg: indirect.describe(state.get(reg))
                                               for reg in ("r0", "r1", "s0")}})
             if event:
                 calls.append({"site": ac.address(event["site"]),
+                              "tail": event.get("tail", False),
                               "target": ac.address(event["target"]) if event["target"] else None,
                               "pointer": indirect.describe(event["pointer"]),
                               "registers": {reg: indirect.describe(value)
@@ -179,7 +193,7 @@ def main() -> int:
         rows.append({"function": ac.address(address), "stores": stores, "calls": calls,
                      "sites": ac.call_sites(function, blocks, entries, {}),
                      "enhanced": enhanced(function, blocks, successors,
-                                          decoders[function["isa"]], image, args.acyclic)})
+                                          decoders[function["isa"]], image, args.acyclic, entries)})
     args.out.write_text(json.dumps({"facts": rows, "coverage": __doc__,
                                    "acyclic_only": args.acyclic,
                                    "reused_helper": str(REUSED),
