@@ -9,7 +9,7 @@ int func_0011d260(struct PipelineStorage *storage)
     struct PipelineConfiguration *configuration;
     int result;
     data_00242a14.storage = storage;
-    func_0019cecc(storage, sizeof(*storage));
+    func_0019cecc(storage, PIPELINE_STORAGE_INITIALIZED_BYTES);
     configuration = func_0018c6d4();
     data_00242a14.storage->configuration = configuration;
     if (configuration) {

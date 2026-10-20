@@ -2,8 +2,12 @@
 
 ## Status
 
-**Ready for Main prepare and independent review with qualifications.** Finalized
-main 261fdc9 / cmodels sequence 9 is merged; frozen GATES v1.19 and v9-r2 unchanged.
+**Prepare FAIL; retained as immutable history.** Both fresh builds stopped because
+accepted `func_0011d260` emitted 112 bytes instead of 116. The suite (806 tests,
+one skip) and G3 passed; no independent acceptance review or finalization occurred.
+The corrected attempt is **c009-r2** (`docs/known-issues-c009-r2.md`), never a
+same-name retry. Finalized main 261fdc9 / cmodels sequence 9 was the accepted base;
+frozen GATES v1.19 and v9-r2 are unchanged.
 Every current isolated match and the eventual Main prepare explicitly select
 **armlink5-inline-branchnop-v6 + anonymous-string-records-v1** (the accepted
 cmodels pair, so no model transition). Earlier v2/none instructions are superseded;

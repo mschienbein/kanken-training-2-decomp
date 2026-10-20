@@ -80,6 +80,10 @@ struct PipelineConfiguration {
     struct VertexRange ranges[16];
 };
 
+/* The original initializer clears this fixed extent; sizeof the partial
+ * PipelineStorage view below is not the historical allocation size. */
+enum { PIPELINE_STORAGE_INITIALIZED_BYTES = 0x854 };
+
 struct PipelineSnapshot {
     unsigned value;
 };
