@@ -15,7 +15,7 @@ PREFIX = "research/catalogue_v13_frozen/"
 
 def load(root: Path) -> dict:
     manifest = json.loads((root / MANIFEST).read_bytes())
-    if manifest["revision"] != "catalogue-v13" or not manifest["inputs"]:
+    if manifest["revision"] != "catalogue-v13" or not isinstance(manifest["inputs"], dict):
         raise ValueError("v13 requires a complete immutable generator input manifest")
     seen = set()
     for label, descriptor in manifest["inputs"].items():

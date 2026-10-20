@@ -262,7 +262,38 @@ Focused regression receipts r1/r2/r3/r4 have actual exits **1/1/1/0**. The
 failures and corrections are retained: misalignment test accidentally changed
 the sealed interval list; generic fixtures initially committed the pre-v12
 rather than actual post-v12 baseline; old tamper tests still modified now-ignored
-live sources/ledgers instead of the retained snapshots. The final focused run
+live sources/ledgers instead of the retained snapshots. The r4 focused run
 exercised **26 tests**, exit **0**, 3.076523 s captured wall. No failed receipt is
 rewritten. All exact argv, cwd, source/output hashes and safe error text are under
 `scratch/closure/v13-alignment/` and bound by the final check record.
+
+The additional r5 focused run exercised **15 tests**, exit **0**, 1.017589 s
+captured wall, including the new uncertified-predecessor control: its gap stays
+unknown yet a disagreeing fill value there still vetoes every otherwise complete
+external placement. The bounded complete-metadata projection also exited **0**,
+1.367378 s, conserving the full v12 commitment while deriving exactly
+114 unknown bytes / 11 intervals / one anomaly and the eight non-C deltas.
+
+## Granted full suite and exact correction
+
+Main granted the default-sharded `tools/test_suite.py` invocation in
+`full-suite/r2/HEAVY-SLOT-REQUEST.json`. Its **actual exit was 1**:
+**912 tests, one skip, one failed module**, 273.54 s captured wall. All other
+modules passed. The original-image invariants/stability test, including its two
+independent public generations and complete protected-record assertions, passed.
+
+The sole error was the metadata-only synthetic
+`CatalogueClosureTests.test_frozen_baseline_and_parent_are_independently_authenticated`:
+that fixture has no mutable config/ledger/source files and correctly produced an
+empty retained-input map. The new loader incorrectly required a nonempty map.
+The correction accepts a dict, including that legitimately empty map; every
+actual requested input still requires its exact retained path/size/hash.
+No changed live input, missing retained input, mutable path or digest mismatch
+is accepted, and no live-path fallback is added.
+
+After releasing the heavy slot immediately with the actual exit, the failed
+test and frozen-path regression were run **only as a bounded correction**:
+**two tests, exit 0**, 0.093081 s captured wall. This is not relabelled as a
+successful full-suite rerun. The original failed suite record and release remain
+immutable. The separate generation/merge/adoption sequence requires its own
+explicit heavy-slot grant.

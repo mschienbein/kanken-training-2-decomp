@@ -140,6 +140,24 @@ class CatalogueAlignmentTests(unittest.TestCase):
             alignment.close_catalogue(baseline, analyzer, evidence, {})
         self.assertFalse(any(row["kind"] == "padding" for row in baseline["ranges"]))
 
+    def test_uncertified_predecessor_stays_unknown_but_still_participates_in_uniformity_veto(self) -> None:
+        for disagree in (False, True):
+            with self.subTest(disagree=disagree):
+                baseline, analyzer, evidence = alignment_fixture(disagree=disagree)
+                revision = evidence["alignment_revision"]
+                proof = revision["_section_proof"]
+                proof["external_census"][1]["predecessor_section"] = None
+                revision["transitions"] = [row for row in revision["transitions"] if row["start"] != BASE + 10]
+                rebind(evidence)
+                if disagree:
+                    with self.assertRaisesRegex(ValueError, "disagreement"):
+                        alignment.close_catalogue(baseline, analyzer, evidence, {})
+                else:
+                    alignment.close_catalogue(baseline, analyzer, evidence, {})
+                    self.assertIn({"start": BASE + 10, "end": BASE + 12, "kind": "unknown", "owner": None},
+                                  baseline["ranges"])
+                    alignment.check_catalogue(baseline, analyzer, evidence)
+
     def test_misaligned_successor_refuses_before_any_mutation(self) -> None:
         baseline, analyzer, evidence = alignment_fixture()
         evidence["alignment_revision"]["_section_proof"]["external_census"][0]["successor_alignment"] = 8
