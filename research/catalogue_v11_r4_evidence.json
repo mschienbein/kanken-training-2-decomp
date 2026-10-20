@@ -1,0 +1,27 @@
+{
+  "revision": "catalogue-v11-r4",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "parent_evidence": {
+    "path": "research/catalogue_v11_r3_evidence.json",
+    "sha256": "7a1a2aa5e5344061fe2d4be7a82e55a726723c295f6c065d3d5623263f2d39e4"
+  },
+  "policy": "reject_user_bank_transfers_before_leaf_effects",
+  "new_C_credit": 0,
+  "adoption": false,
+  "finding": {
+    "id": "V11R3-CODEX-R01",
+    "source_commit": "f000c86be44aa2f02f5ea17ca851ea2dc9fa6724",
+    "proposal_sha256": "172ba50aef9b656fee046ed2d347923fd4a487769f69b7b99cde08a1071ce463",
+    "review_sha256": "4acbf3acb54b0b93781e9c02a6023aad044a77b72c05dd3aa06d81b98497110d",
+    "seal_sha256": "747b9b9c3fff04b35d3df826d87ad4fbc26eb35871cb5b1c1cf1555353ed84ac",
+    "finding_sha256": "22508da5a4ed24d55c21c6e5c4f47efb27e7a27d1b3091e3ab5c0315b5e361f4",
+    "observed_failure": "The actual public synthetic consumer created a12-byte ordinary owner from a decoder-marked user-bank transfer; no structural issue was raised.",
+    "current_image_occurrence": false,
+    "current_image_scope": "The independent review found no user-bank transfer among42 recovered real-image closed leaves; this repair does not claim a fresh unchanged-image result."
+  },
+  "architectural_sources": [
+    "https://support.arm.com/documentation/dui0801/i/A32-and-T32-Instructions/LDM",
+    "https://mikhailarkhipov.github.io/ARM-doc/A32/ldm_u.html"
+  ],
+  "qualification": "The leaf certificate models only ordinary current-bank effects. User-bank transfers have mode-dependent architectural semantics and are refused before issuing any closed-copy/record certificate. This narrows proof admission, not the endian policy, protected records, historical evidence, source profile or gate design. No source/data/denominator credit follows without fresh integrated verification and independent review."
+}

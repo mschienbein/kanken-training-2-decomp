@@ -106,7 +106,16 @@ def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dic
                                  if row["kind"] == "unknown"],
         "prior_anomalies": baseline.get("anomalies", []), "withdrawn_entry_proposals": [],
     }
-    (root / "research/catalogue_v11_r3_evidence.json").write_text(json.dumps(entry_revision))
+    entry_path = root / "research/catalogue_v11_r3_evidence.json"
+    entry_path.write_text(json.dumps(entry_revision))
+    leaf_repair = {
+        "revision": "catalogue-v11-r4", "image_sha256": image_sha256,
+        "parent_evidence": {"path": str(entry_path.relative_to(root)),
+                            "sha256": hashlib.sha256(entry_path.read_bytes()).hexdigest()},
+        "policy": "reject_user_bank_transfers_before_leaf_effects",
+        "new_C_credit": 0, "adoption": False,
+    }
+    (root / "research/catalogue_v11_r4_evidence.json").write_text(json.dumps(leaf_repair))
     return revision
 
 
@@ -1477,8 +1486,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v11-r3")
-                self.assertEqual(result["generator"]["revision"], "catalogue-v11-r3")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v11-r4")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v11-r4")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
@@ -1487,6 +1496,7 @@ class CatalogueTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v11_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_r2_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_r3_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_r4_evidence.json", result["generator"]["input_sha256"])
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
@@ -2203,6 +2213,35 @@ class CatalogueClosureTests(unittest.TestCase):
         self.assertIsNotNone(catalogue_closure.constant_copy_leaf(analyze.Analyzer(image, layout), BASE + 4, BASE + 16))
         result = analyze.build_catalogue(image, layout, closure={})
         self.assertIn(BASE + 4, {function["address"] for function in result["functions"]})
+
+    def test_user_bank_transfers_cannot_create_closed_leaf_owners(self) -> None:
+        # Hand-encoded synthetic LDM/STM differ only by the user-bank S bit.
+        for user_load, user_store in ((False, False), (True, False),
+                                      (False, True), (True, True)):
+            with self.subTest(user_load=user_load, user_store=user_store):
+                image, layout = fixture([
+                    0xE12FFF1E,
+                    0xE8910004 | (0x00400000 if user_load else 0),
+                    0xE8800004 | (0x00400000 if user_store else 0),
+                    0xE12FFF1E,
+                ])
+                result = analyze.build_catalogue(image, layout, closure={})
+                functions = {row["address"]: row for row in result["functions"]}
+                if user_load or user_store:
+                    self.assertNotIn(BASE + 4, functions)
+                    unknown = [row for row in result["ranges"] if row["kind"] == "unknown"]
+                    self.assertEqual(sum(max(0, min(BASE + 16, row["end"])
+                                             - max(BASE + 4, row["start"]))
+                                         for row in unknown), 12)
+                    self.assertFalse(any(row["start"] == BASE + 4
+                                         for row in result["closure_evidence"]["closed_leaves"]))
+                else:
+                    self.assertEqual((functions[BASE + 4]["kind"], functions[BASE + 4]["size"]),
+                                     ("function", 12))
+                    leaf = next(row for row in result["closure_evidence"]["closed_leaves"]
+                                if row["start"] == BASE + 4)
+                    self.assertEqual(leaf["write_spans"], [[0, 4]])
+                self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
 
     def test_signed_byte_and_halfword_reads_veto_alignment(self) -> None:
         for instruction, width in ((0xE1DF10BE, 2), (0xE1DF10FE, 2), (0xE5DF100E, 1), (0xE1DF10DE, 1)):

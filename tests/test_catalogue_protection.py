@@ -125,6 +125,10 @@ def synthetic_project(root: Path) -> dict:
         prior_unknown_ranges=[[row["start"], row["end"]] for row in after["ranges"] if row["kind"] == "unknown"],
         prior_anomalies=after["anomalies"])
     write_json(entry_path, entry_revision)
+    leaf_path = root / "research/catalogue_v11_r4_evidence.json"
+    leaf_repair = json.loads(leaf_path.read_bytes())
+    leaf_repair["parent_evidence"] = descriptor(root, "research/catalogue_v11_r3_evidence.json")
+    write_json(leaf_path, leaf_repair)
     (root / "orig/code.bin").write_bytes(image)
     exheader = bytearray(0x200)
     for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):

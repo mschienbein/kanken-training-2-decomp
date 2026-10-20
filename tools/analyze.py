@@ -2649,7 +2649,7 @@ def main(argv: list[str] | None = None) -> int:
                    for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v11-r3",
+            "revision": "catalogue-v11-r4",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

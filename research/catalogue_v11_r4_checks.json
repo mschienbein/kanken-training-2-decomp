@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "revision": "catalogue-v11-r4",
+  "source_parent_commit": "f000c86be44aa2f02f5ea17ca851ea2dc9fa6724",
+  "finding": "V11R3-CODEX-R01",
+  "checks": [
+    {
+      "path": "scratch/closure/v11-r4/focused-r1.json",
+      "sha256": "27b05ab6b7b97fada82a2aca5eade9b0d91accaa15c10a71ea815a952e5833a9",
+      "actual_exit_code": 0,
+      "tests": 54
+    },
+    {
+      "path": "scratch/closure/v11-r4/public-smoke-r1.json",
+      "sha256": "594fc077667823e058afbeeb53bd8fe59330f93702bc7e1d4e6bd9764c85eb39",
+      "actual_exit_code": 0,
+      "ordinary_owner_bytes": 12,
+      "user_load_unknown_bytes": 12,
+      "user_store_unknown_bytes": 12
+    }
+  ],
+  "not_run": [
+    "Integrated full suite",
+    "Current-image r4 generation",
+    "Independent r4 review",
+    "Adoption or credit"
+  ],
+  "qualification": "Only synthetic public consumers/CLI exercised; no native/emulated execution or unchanged-image claim."
+}

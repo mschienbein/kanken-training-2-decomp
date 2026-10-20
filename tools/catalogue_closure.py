@@ -95,7 +95,7 @@ def constant_copy_leaf(analyzer, start: int, limit: int, *, allow_record_layout:
         decoded = analyzer.detailed(cursor)
         ins = analyzer.decode(cursor, "arm")
         if (decoded is None or ins is None or ins.conditional or ins.call or ins.branch or ins.pools
-                or ins.address_target is not None or decoded.update_flags):
+                or ins.address_target is not None or decoded.update_flags or decoded.usermode):
             return None
         instructions += 1
         operands = decoded.operands
@@ -1461,7 +1461,20 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     entry_revision, entry_inputs = load_entry_revision_inputs(
         root, root / "research/catalogue_v11_r2_evidence.json", runtime_data, prior)
     evidence["entry_revision"] = entry_revision
-    evidence["revision"] = entry_revision["revision"]
+    leaf_path = root / "research/catalogue_v11_r4_evidence.json"
+    leaf_content = leaf_path.read_bytes()
+    leaf_repair = json.loads(leaf_content)
+    descriptor = leaf_repair["parent_evidence"]
+    if (root / descriptor["path"] != root / "research/catalogue_v11_r3_evidence.json"
+            or descriptor["sha256"] != entry_inputs["research/catalogue_v11_r3_evidence.json"]
+            or leaf_repair["image_sha256"] != evidence["image_sha256"]
+            or leaf_repair["revision"] != "catalogue-v11-r4"
+            or leaf_repair["policy"] != "reject_user_bank_transfers_before_leaf_effects"
+            or leaf_repair["new_C_credit"] != 0 or leaf_repair["adoption"] is not False):
+        raise ValueError("v11-r4 leaf evidence differs from its immutable parent/image/policy")
+    evidence["leaf_mode_repair"] = leaf_repair
+    evidence["revision"] = leaf_repair["revision"]
+    inputs[str(leaf_path.relative_to(root))] = hashlib.sha256(leaf_content).hexdigest()
     inputs.update(entry_inputs)
     inputs.update(protection_inputs)
     inputs.update(runtime_inputs)
@@ -1641,3 +1654,4 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
         "protected_metadata_transitions", [])
     candidate["revision_review"]["provisional_entry_reassessment"] = candidate["closure_evidence"].get(
         "provisional_entry_reassessment", {})
+    candidate["revision_review"]["leaf_mode_repair"] = evidence["leaf_mode_repair"]

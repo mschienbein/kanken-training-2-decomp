@@ -150,7 +150,7 @@ class CatalogueEntryReassessmentTests(unittest.TestCase):
             passed = run_catalogue(root)
             self.assertEqual(passed.returncode, 0, passed.stderr)
             candidate = json.loads((root / "proposal.json").read_bytes())
-            self.assertEqual(candidate["generator"]["revision"], "catalogue-v11-r3")
+            self.assertEqual(candidate["generator"]["revision"], "catalogue-v11-r4")
             self.assertIn("research/catalogue_v11_r3_evidence.json", candidate["generator"]["input_sha256"])
             path = root / "research/catalogue_v11_r3_evidence.json"
             revision = json.loads(path.read_bytes())
@@ -160,6 +160,25 @@ class CatalogueEntryReassessmentTests(unittest.TestCase):
             self.assertEqual(refused.returncode, 1)
             self.assertIn("v11-r3 entry evidence differs", refused.stderr)
             self.assertFalse((root / "refused.json").exists())
+
+    def test_real_cli_refuses_unbound_leaf_repair_policy(self) -> None:
+        for change in ("parent", "policy"):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                synthetic_project(root)
+                passed = run_catalogue(root)
+                self.assertEqual(passed.returncode, 0, passed.stderr)
+                path = root / "research/catalogue_v11_r4_evidence.json"
+                revision = json.loads(path.read_bytes())
+                if change == "parent":
+                    revision["parent_evidence"]["sha256"] = "0" * 64
+                else:
+                    revision["policy"] = "permit_user_bank_transfers"
+                write_json(path, revision)
+                refused = run_catalogue(root, "refused.json")
+                self.assertEqual(refused.returncode, 1)
+                self.assertIn("v11-r4 leaf evidence differs", refused.stderr)
+                self.assertFalse((root / "refused.json").exists())
 
 
 if __name__ == "__main__":
