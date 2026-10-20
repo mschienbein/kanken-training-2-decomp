@@ -34,9 +34,11 @@ Cumulative proposal: **95 units / 103 new functions / 14,776 B**, plus the same
 - np038's private volatile counters still conflict with canonical nonvolatile
   counters; no unproved asynchronous retag or volatile-only steering was added.
   np039 requires a genuine mismatching scheduler and five other mismatching
-  bodies. FixC009R3Codex's unfrozen C/int-callback trial is not this C++/void
-  contract: no competing scheduler, callback cast, visibility stub or source cut
-  was adopted. All full-TU statuses and author obligations remain explicit.
+  bodies. The initial intake recorded an unfrozen C/int-callback trial; the
+  subsequently frozen r3 source still uses genuine C/int procedures, not the
+  delivered C++/void contract. No competing scheduler, callback cast, C++
+  fallthrough, visibility stub or source cut was adopted. The unchanged
+  deferral and frozen-contract update are in `SUCCESSOR-CONTRACT-UPDATE-r1.json`.
 - Only **ten sequential bounded v6/L1 `match.py --show 0` runs** were used:
   five new targets and three direct dependencies MATCH in r23, plus two separate
   parent-only header witnesses in r24. The mixed-TU exit 1 is retained. Main's
@@ -47,6 +49,9 @@ Current records: `INTAKE-r9.json`, `DISPOSITIONS-r5.json`,
 `DESTINATION-CLOSURE-r9.json`. All prior holds/reservations remain. Main still
 owns final-parent/header dependency closure, interfaces/callers/emitted ownership,
 full builds/tests, prepare, review, finalize and push. No heavy closure was run.
+Main directly owns c010 after `a3062ee`; its isolated archive-token import is
+committed as `1947019`. Additional parent prerequisites go to Main, not the
+completed C010Codex session; all remaining child changes stay in c011.
 
 Earlier milestones below are preserved history, not the current counts.
 
