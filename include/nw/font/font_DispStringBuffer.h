@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/font/font_DispStringBuffer.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: name the retail allocation flag byte used by TextBox
+ * cleanup; retain the remaining unresolved padding.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -32,7 +33,8 @@ struct DispStringBuffer
     u16 charCount;
     u16 drawCharCount;
     u8 generatedCommand;
-    u8 padding[3];
+    u8 allocationFlags;
+    u8 padding[2];
     u8* drawFlags;
     u32* commandBuffer;
     u32 commandBufferSize;
