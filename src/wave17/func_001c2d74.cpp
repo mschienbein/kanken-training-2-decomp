@@ -8,7 +8,7 @@ extern "C" void func_001c2d74(W17WideCollection *collection)
     for (int i = 0; i < 11; ++i) {
         W17WideHandle *handle = collection->at(i);
         if (handle != 0) {
-            ResourceEvent *object = handle->get_object();
+            DisplayObject *object = handle->get_object();
             if (object != 0)
                 func_00183208(object);
             handle = collection->at(i);

@@ -3,6 +3,5 @@
 
 void func_0015e948(struct DisplayObject *object, int active)
 {
-    struct BoundDisplayObject *display = (struct BoundDisplayObject *)object;
-    func_0015e954(display->bindings[0]->link, active);
+    func_0015e954(display_text_attachment(object, 0)->surface, active);
 }

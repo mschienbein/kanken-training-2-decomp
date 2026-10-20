@@ -6,20 +6,20 @@
 
 int func_00195874(const struct DisplayObject *object, int index)
 {
-    const struct DisplayAnimationTrack *track =
-        ((const struct AnimatedObject *)object)->tracks[index];
+    const struct DisplayTimedAttachment *track =
+        display_timed_attachment_const(object, index);
     switch (track->mode) {
     case 1:
-        if (track->rate < 0.0f) {
-            if (track->position >= track->end)
+        if (track->common.rate < 0.0f) {
+            if (track->duration >= track->common.value)
                 return 0;
-        } else if (track->rate > 0.0f) {
-            if (track->position <= track->end)
+        } else if (track->common.rate > 0.0f) {
+            if (track->duration <= track->common.value)
                 return 0;
         }
         break;
     case 2:
-        if (track->flags & 0x10)
+        if (track->common.flags & 0x10)
             return 0;
         break;
     }

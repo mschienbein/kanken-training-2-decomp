@@ -1,7 +1,7 @@
 #include "game/screen.h"
 
 
-void func_001963f8(struct BoundDisplayObject *event)
+void func_001963f8(struct DisplayObject *event)
 {
     if (event->queued) {
         if (event->screen == 7) {

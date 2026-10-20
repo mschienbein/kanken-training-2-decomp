@@ -14,11 +14,11 @@ void func_00171db8(struct AnimationOwner *owner, int index, int child_index, flo
             object->position[1] = y;
             switch (func_0017a9a0(object, 0)) {
             case 5:
-                func_0015e684((struct BoundDisplayObject *)object, 0,
+                func_0015e684(object, 0,
                               object->position[0], object->position[1], object->position[2]);
                 break;
             case 6:
-                func_00181700((struct BoundDisplayObject *)object,
+                func_00181700(object,
                               object->position[0], object->position[1], object->position[2]);
                 break;
             }

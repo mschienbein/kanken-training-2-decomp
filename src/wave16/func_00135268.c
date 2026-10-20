@@ -5,7 +5,7 @@
 
 void func_00135268(unsigned heap, int capacity)
 {
-    struct ResourceEvent *entry;
+    struct DisplayObject *entry;
     int i;
     struct ResourceEventPool *const pool = &data_00242238;
 

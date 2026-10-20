@@ -9,7 +9,6 @@ struct AllocatorInterface;
 struct FormattedText;
 struct G103798;
 struct ResourceEntry;
-struct ResourceObject;
 struct RuntimeTypeInfo;
 struct RuntimeTypedObject;
 struct StreamMutex;
@@ -93,14 +92,19 @@ extern struct LockedExpHeap *data_00242c54;
 
 struct G103798 { void *p; int n; };
 
+#ifdef __cplusplus
+namespace nw { namespace lyt { class TextBox; } }
+/* D08: 0015d798 constructs a native 0x108-byte TextBox, not ResourceObject. */
 struct ResourceEntry {
     int active;
     void *allocation;
-    struct ResourceObject *object;
-    unsigned char reserved[3];
+    nw::lyt::TextBox *object;
+    unsigned char state;
+    unsigned char reserved[2];
     unsigned char flag;
     unsigned char tail[8];
 };
+#endif
 
 #ifdef __cplusplus
 extern "C" {

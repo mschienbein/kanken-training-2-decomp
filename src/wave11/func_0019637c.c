@@ -1,13 +1,13 @@
 #include "game/screen.h"
 
 
-void func_0019637c(struct BoundDisplayObject *event, struct BoundDisplayObject **head,
+void func_0019637c(struct DisplayObject *event, struct DisplayObject **head,
                    int primary)
 {
-    struct BoundDisplayObject *current = *head;
-    struct BoundDisplayObject *previous = 0;
+    struct DisplayObject *current = *head;
+    struct DisplayObject *previous = 0;
 
-    while (current && current->base.position[2] < event->base.position[2]) {
+    while (current && current->position[2] < event->position[2]) {
         previous = current;
         if (primary)
             current = previous->next;

@@ -5,7 +5,7 @@
 
 struct EventResource;
 
-extern void func_0019d3b4(struct ResourceEvent *event);
+extern void func_0019d3b4(struct DisplayObject *event);
 
 void func_001869f0(void)
 {
