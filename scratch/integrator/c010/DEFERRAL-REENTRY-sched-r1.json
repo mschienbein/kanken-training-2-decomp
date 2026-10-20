@@ -1,0 +1,724 @@
+{
+  "schema_version": 1,
+  "family": "sched",
+  "author": "C010DefSchedCodex",
+  "model": "openai-codex/gpt-6.1-sol",
+  "branch": "c010-def-sched",
+  "base_commit": "8575e16",
+  "status": "four-new-source-contracts-closed-four-still-deferred; not checkpoint acceptance",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "input_deferrals": {
+    "path": "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+    "sha256": "344ee699b6e6c70f9dbfc0c33a6a88c021f8c138f284c9b4e23fcbf845995352",
+    "prior_contract_reentries_read": [
+      {
+        "function": "func_001685c0",
+        "profile": "game",
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/src/func_001685c0.cpp",
+        "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/match/func_001685c0/final/func_001685c0.result.json",
+        "status": "contract-resolution-deferred",
+        "reason": "Canonical source/header contract conflict: #167: argument of type \"ResourceEvent *\" is incompatible with parameter of type \"DisplayObject *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+        "deferral_record": "contract-deferrals-r2.json"
+      },
+      {
+        "function": "func_00168618",
+        "profile": "game",
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/src/func_00168618.cpp",
+        "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24c/match/func_00168618/final/func_00168618.result.json",
+        "status": "contract-resolution-deferred",
+        "reason": "Canonical source/header contract conflict: #167: argument of type \"ResourceEvent *\" is incompatible with parameter of type \"DisplayObject *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+        "deferral_record": "contract-deferrals-r2.json"
+      }
+    ],
+    "resolved_reentries_read": [
+      {
+        "functions": [
+          "func_00140dd4"
+        ],
+        "resolution": "Exact sdk-profile canonical getter MATCH in wave-table-match-r53; r46 game mismatch was not the candidate profile. Initial r44/r45 failures remain immutable."
+      },
+      {
+        "functions": [
+          "func_001cff58"
+        ],
+        "resolution": "Complete native list/member/return cutover across both accepted lookups, accepted material unbind and candidate0016b58c; unchanged legacy0016b5fc address identity now accepts the actual native list/transform. All five destinations plus every direct game/layout.h dependent MATCH at exact extents under frozen profiles and v6/L1. Only then added001cff58 to c010 candidates."
+      },
+      {
+        "functions": [
+          "func_001ce8b8"
+        ],
+        "resolution": "A const reference bound directly to an AnimResource(file) temporary extends that native temporary through the reference scope. The inline native constructor calls the existing same-address Set entry. Layout::CreateAnimTransform receives that live native resource reference and the original accessor; its actual AnimTransform pointer result is returned unchanged. This natural lifetime form rederives MATCH at the 60-byte destination under the unchanged game profile and explicit v6/L1. No native class/header, helper owner, name binding or accepted context changed."
+      }
+    ]
+  },
+  "counts": {
+    "assigned_functions": 8,
+    "assigned_target_bytes": 936,
+    "closed_new_functions": 4,
+    "closed_new_target_bytes": 416,
+    "still_deferred_functions": 4,
+    "still_deferred_target_bytes": 520,
+    "retained_or_predecessor_functions_moved": 3,
+    "retained_or_predecessor_bytes_moved": 68,
+    "new_helper_only_units": 1
+  },
+  "closed_rows": [
+    {
+      "function": "func_0013db40",
+      "target_bytes": 60,
+      "source": "src/checkpoint10/func_0013db40.c",
+      "source_sha256": "a4d01424ec18b2e4d93a653556e0cdbcf7a58028d113686580d627d31a4dd942",
+      "profile": "game",
+      "prior_row": {
+        "source": "src/checkpoint10/func_0013db40.c",
+        "functions": [
+          "func_0013db40"
+        ],
+        "profile": "game",
+        "source_sha256": "b0abcdf96b40ab602fc619ecf6065f17e935ec1f15e1f386f85fb70c4fe7c416",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0013db40.c",
+        "category": "predecessor-r3-contract-gap",
+        "reason": "Current scheduler registration casts int(void)001415e8 to void(void). The callable result protocol is the explicitly blocked c009-r3 same-class sweep; no result erasure, uniform-int rewrite or adapter is authorized here. Preserve this NEW unit pending the frozen predecessor contract.",
+        "evidence": [
+          "include/game/scheduler.h",
+          "include/game/startup.h",
+          "src/wave17/func_00190688.c"
+        ],
+        "accepted_identity_removed": false
+      },
+      "closure": "Uses the prepared c009-r3 int(void) slot directly for both actual callbacks. Its own C-only procedure result is never produced or consumed; no callback cast, fabricated result or unspecified-callee return is present. The dispatcher discards the value.",
+      "destination_witness": {
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/327-func_0013db40/func_0013db40.result.json",
+        "receipt_sha256": "9c84e7d481b8ef99bfc080769082be1bc3d3faba3fe29c068932dc176964f2ad",
+        "exit_code": 0,
+        "credited_functions_match": true,
+        "extra_sources": [],
+        "extra_source_sha256": {}
+      }
+    },
+    {
+      "function": "func_0010239c",
+      "target_bytes": 116,
+      "source": "src/checkpoint10/func_0010239c.c",
+      "source_sha256": "55c70e33188a4d2969012251c6bb1252e8ac82f8922f01d6f47b075a8f119d42",
+      "profile": "game",
+      "prior_row": {
+        "source": "src/checkpoint10/func_0010239c.c",
+        "functions": [
+          "func_0010239c"
+        ],
+        "profile": "game",
+        "source_sha256": "057af4e57acee927b58497a945c04386910ab2009a90fa4d8577995ae4c8883d",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0010239c.c",
+        "category": "shared-contract-gap",
+        "reason": "Recover all original callback registrations and establish whether this is a truly mixed-return machine protocol needing an explicit reviewed qualification, or whether a single accurate C/C++ callback type is recoverable. No wrapper/adapter, union, erased result or function-pointer cast is proposed. Signed enabled/mode refinement is not permission to adopt the dispatcher while the callback family remains contradictory. Main reports sealed c009-r2 FAIL on scheduler callback casts and vector214580 callable casts; a separate c009-r3 owner is fixing both callable contracts and the same-class sweep. Re-entry is the granted frozen-r3 canonical dependency, not a competing c010 repair.",
+        "evidence": [
+          "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+          "include/game/scheduler.h"
+        ],
+        "accepted_identity_removed": false
+      },
+      "closure": "Uses canonical binding.callback and the one existing pending mode word, with signed enabled. The int(void) indirect result is discarded as required by prepared c009-r3; private duplicate Scheduler/ScheduledTask definitions are gone.",
+      "destination_witness": {
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/328-func_0010239c/func_0010239c.result.json",
+        "receipt_sha256": "e6e980f4f2fd8f8fa790f677c114af1adf3d3566ab3f7698b76bba1e33a624e9",
+        "exit_code": 0,
+        "credited_functions_match": true,
+        "extra_sources": [],
+        "extra_source_sha256": {}
+      }
+    },
+    {
+      "function": "func_0013888c",
+      "target_bytes": 144,
+      "source": "src/checkpoint10/func_0013888c.cpp",
+      "source_sha256": "ffc2d4fe62859d245c64ebe68a2ffc706f24fa4b475a4d238f3831fb6c1976c0",
+      "profile": "middleware",
+      "prior_row": {
+        "source": "src/checkpoint10/func_0013888c.cpp",
+        "functions": [
+          "func_0013888c"
+        ],
+        "profile": "middleware",
+        "source_sha256": "59303f4bd37a8412df8af7099cf65bfe0b447dd630c06d1aafaf591c51b359ab",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0013888c.cpp",
+        "category": "shared-contract-gap",
+        "reason": "Current shared callback storage has incompatible nominal function-pointer declarations: ResLookupTable-by-value[2] versus ResourceCallbacks(ResourceHeader*) in c009-proposed00182ae4. This cannot be solved by a typedef or cast. Re-entry: migrate00182ae4 and every actual data_002434e4 consumer to one native value-wrapper callback contract after importing/reconciling the frozen c009 state; retain same original two storage words/targets.",
+        "evidence": [
+          "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+          "src/wave18/func_00182ae4.c"
+        ],
+        "accepted_identity_removed": false
+      },
+      "closure": "One natural native TU owns ResLookupTableSet::Cleanup and ResLookupTable::Cleanup plus both actual callback providers. Both original table words and tag-specific original payloads are retained. Image callback explicitly constructs the native image view; reference callback clears its actual native toTargetLut offset. No callback or object-pointer cast, native alias, geometry-only identity or duplicate emitted owner is introduced.",
+      "destination_witness": {
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/329-func_0013888c/func_0013888c.result.json",
+        "receipt_sha256": "66cc6e3312b0e984046d429d3a9acb2c8eb9a958e50e6534d1c61c074cf6abc0",
+        "exit_code": 0,
+        "credited_functions_match": true,
+        "extra_sources": [],
+        "extra_source_sha256": {}
+      }
+    },
+    {
+      "function": "func_001f580c",
+      "target_bytes": 96,
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "source_sha256": "b9305eb528169ab06c9246db42bd0c76b02005bfd3407201f0db65a845163637",
+      "profile": "middleware",
+      "prior_row": {
+        "source": "src/checkpoint10/func_001f580c_default.c",
+        "functions": [
+          "func_001f580c"
+        ],
+        "profile": "middleware",
+        "source_sha256": "d576cb01f04da198979a522c18dab34e001186a648f0bec53b9ce5391377df90",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001f580c_default.c",
+        "category": "shared-contract-gap",
+        "reason": "Find a preserved natural registration/call or pinned destructor ABI proving the ignored object argument and its actual receiver. If identity is only erased, retain an explicit qualification and obtain the required policy/manual review rather than presenting it as proven. Recover001135cc's lock result and001c5530's event callback arity/return from their real providers before claiming the entire initializer family closed.",
+        "evidence": [
+          "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+          "src/wave3/func_001c51a0.c"
+        ],
+        "accepted_identity_removed": false
+      },
+      "closure": "Keeps actual001c51a0 void(void), does not invent an ignored lock input or a destructor ABI, and uses the existing source-only typed non-invoking R1 helper pattern. Actual provider001135cc preserves its lock receiver, with a real original result consumer0010d0d0->00136714. The event consumer00122d94 supplies event+0xc and discards the result, so the event callback retains one opaque context input, not the prior false no-argument declaration.",
+      "destination_witness": {
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/330-func_001f580c_default/func_001f580c_default.result.json",
+        "receipt_sha256": "341f962731165f85a47776cffd83e8546727581fdb79c554534f1d419dc9129e",
+        "exit_code": 0,
+        "credited_functions_match": true,
+        "extra_sources": [
+          "src/models/object_registration/resource_service_lock.c"
+        ],
+        "extra_source_sha256": {
+          "src/models/object_registration/resource_service_lock.c": "4499f8723cd2be7305ee603b13650665e79ca6621ee412fd137e9356292fcdb6"
+        }
+      }
+    }
+  ],
+  "still_deferred_rows": [
+    {
+      "function": "func_001176e0",
+      "gap": "The same list storage is still declared as scalar-key int nodes in live0019f518/0011774c but as allocation-pointer nodes in the preserved wrapper.0011774c has a real int count-result and returns the unresolved fatal endpoint on missing-key. No producer-side nominal allocation-key contract or fatal typed entry is established. All five wrapper inputs, including unused size/flags, must remain.",
+      "next_supported_step": "Trace original insertion/key writers and full-width stored key provenance, including original release caller00108f24 and allocator-facing001177a0/001177fc where relevant; choose one shared real node/key type and preserve0011774c int result only after resolving0019f568. Consume the resource-family canonical HeapManager migration, not another private HeapArena.",
+      "target_bytes": 108,
+      "prior_row": {
+        "source": "src/checkpoint10/func_001176e0.cpp",
+        "functions": [
+          "func_001176e0"
+        ],
+        "profile": "game",
+        "source_sha256": "ec89ccea2b9c070d0f2d8972fa16f2234fbe6df8353d331e367f4034158b94df",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001176e0.cpp",
+        "category": "shared-contract-gap",
+        "reason": "Identify actual list insertion/key writers and their original full-width storage: address used as a scalar ID versus a pointer object. Re-entry requires producer and consumer proof, not a cast at this release caller. Resolve0019f568's no-arg/va_list and int-result conflicts; all currently unused size/flags inputs must remain on the wrapper.",
+        "evidence": [
+          "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+          "src/wave19/func_0011774c.c"
+        ],
+        "accepted_identity_removed": false
+      },
+      "status": "still-deferred-no-candidate-added"
+    },
+    {
+      "function": "func_001e3700",
+      "gap": "The preserved constructor still duplicates HeapArena instead of the canonical ManagedExpHeap embedding and reconstructs its parent from a generic subobject return with pointer reinterpretation. Closing only the manager prefix would not resolve the dependent list-key/fatal contracts above.",
+      "next_supported_step": "Use the resource-family one-owner HeapManager and canonical ManagedExpHeap storage, recover the actual +4 list initialization receiver/result contract without parent-pointer reconstruction, then migrate the two list endpoints and001176e0 atomically after their fatal endpoint is sound.",
+      "target_bytes": 148,
+      "prior_row": {
+        "source": "src/checkpoint10/func_001e3700_array_loop.cpp",
+        "functions": [
+          "func_001e3700"
+        ],
+        "profile": "game",
+        "source_sha256": "b6735620db9304bdb85ea0e29968bec2ffca88b34604012ddeae12f75ec5086a",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e3700_array_loop.cpp",
+        "category": "shared-contract-gap",
+        "reason": "001176e0 still declares 0019f518/0011774c as pointer-key void functions, while their live providers use scalar keys and 0011774c returns int. Resolve the real address-token/list-key protocol and both result contracts first; no union or casts. The fatal 0019f568 family used by the allocator remains contradictory; fixing only the manager layout is not completion of this unit family.",
+        "evidence": [
+          "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+          "include/game/exp_heap.h",
+          "include/game/runtime.h"
+        ],
+        "accepted_identity_removed": false
+      },
+      "status": "still-deferred-no-candidate-added"
+    },
+    {
+      "function": "func_0019f568",
+      "gap": "Original handler reads incoming entry r1 at0019f58c before defining it and forwards that word on the optional callback path.73 original caller owners/152 direct transfer sites include no-argument calls; the current accepted0011774c also consumes the handler int result on failure. A true constructed va_list cannot be assumed, an uninitialized local/zero va_list/ellipsis shim is forbidden, and the final branch to00134e7c does not establish a legitimate int/void/noreturn contract for all paths.",
+      "next_supported_step": "Recover the actual registration/writer and full callable contract of data00242af8, valid argument construction on every callback-reachable fatal path, and Break return behavior plus0011774c result consumption. If this is an intentionally implementation-defined machine entry, obtain an explicit reviewed policy rather than silently publishing incompatible prototypes.",
+      "target_bytes": 84,
+      "prior_row": {
+        "source": "src/checkpoint10/func_0019f568.cpp",
+        "functions": [
+          "func_0019f568"
+        ],
+        "profile": "game",
+        "source_sha256": "6ca3af1b9f5e586120723ce9b257354389ba34b1de1acb90a6e3adaf67db7468",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_0019f568.cpp",
+        "category": "shared-contract-gap",
+        "reason": "Recover whether the original handler has a true va_list formal, another machine-word protocol, or a deliberate implementation-defined ABI entry. Re-entry requires safe typed semantics for the no-argument calls as well as callback consumers; the current split is a blocker, not a qualification. Determine actual return use on the Break path and in 0011774c before choosing int, void or noreturn. The current conflicting definition is not waived by an old private MATCH.",
+        "evidence": [
+          "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+          "include/game/runtime.h"
+        ],
+        "accepted_identity_removed": false
+      },
+      "status": "still-deferred-no-candidate-added"
+    },
+    {
+      "function": "func_00214e40",
+      "gap": "Typed non-invoking helpers can preserve the actual void(unsigned,unsigned)00216ba4 and void(void)00216e4c callback types without asserting a destructor invocation, but that alone does not identify a coherent native text-tag processor owner. The writer initializes mutable singleton vptrs at002438d4/002438dc while layout_draw.h still exposes002438dc as a read-only word array used by LayoutDrawState::table. No whole native owner/consumer migration or sound non-punning guard representation was established.",
+      "next_supported_step": "Establish the target-version text-writer/tag-processor relationship from real +0x58 consumers and vtable methods00216ba8/00216c74, reconcile the actual writable singleton and LayoutDrawState field in one owner contract, and preserve actual guard acquire/release storage. Only then supply C typed non-invoking R1 registration helpers retaining both real callback signatures and re-MATCH every dependent unit.",
+      "target_bytes": 180,
+      "prior_row": {
+        "source": "src/checkpoint10/func_00214e40.cpp",
+        "functions": [
+          "func_00214e40"
+        ],
+        "profile": "game",
+        "source_sha256": "fdf916f4f9c9f3e069607bc168a7c94fa36b20d244a89d61a17479c574fa5377",
+        "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00214e40.cpp",
+        "category": "shared-contract-gap",
+        "reason": "Registration casts actual00216ba4(unsigned,unsigned) and00216e4c(void) to ObjectDestructor(void*), without an independently proved typed object-input protocol. The writable TextTagProcessor root at2438dc also conflicts with the current read-only table declaration; complete object/consumer ownership remains unproved.",
+        "evidence": [
+          "src/wave4/func_00216ba4.c",
+          "src/wave4/func_00216e4c.c",
+          "include/game/layout_draw.h",
+          "src/wave14/func_0011eec4.cpp"
+        ],
+        "accepted_identity_removed": false
+      },
+      "status": "still-deferred-no-candidate-added"
+    }
+  ],
+  "header_changes": [
+    {
+      "path": "include/game/scheduler.h",
+      "change": "ScheduledTask.enabled is signed short, matching the original dispatcher signed halfword read; callback binding, int(void) protocol and pending word remain unchanged.",
+      "old_sha256": "269fa4f1a5451ab5a3b84040c8038f9ead6619a91c6dbd4f31378fdfb381c399",
+      "new_sha256": "16977f0ff8d60dea7bf6f79de0201793aea88d0040db9f8dd50196b87cae78dd"
+    },
+    {
+      "path": "include/game/graphics_resource_abi.h",
+      "change": "Includes the canonical ResLookupTable header and owns the single two-slot ResLookupTable-by-value callback table plus the exact native-value signatures of both actual providers. Native ResLookupTable::Cleanup remains declared by its native class, not a second C alias.",
+      "old_sha256": "e230e07fbf0627bd0bebaf1f65ab6d2c2906a95200a0292af22125721a29cc25",
+      "new_sha256": "1467e3be63248e8d6cac53c45e123f409bab50f75a7a8313c53d357bc1eadacc"
+    },
+    {
+      "path": "include/game/audio.h",
+      "change": "Removes obsolete Object1c7f10 forward/layout and pointer-form func_001c7f10 declaration after its actual reference-resource callback migrates to the native provider. No remaining source consumes that erased object type.",
+      "old_sha256": "87f5dfd5a05f48b0738db866f6d4d1c88e3d841094a79bdc94371f53dcf90347",
+      "new_sha256": "45f7132a86a7264a6a577e23b30e4d1bad453531f20543d27430a198281e118e"
+    }
+  ],
+  "moves": [
+    {
+      "function": "func_00182ae4",
+      "from": "src/wave18/func_00182ae4.c",
+      "to": "src/checkpoint10/func_0013888c.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001c6a34",
+      "from": "src/wave4/func_001c6a34.c",
+      "to": "src/checkpoint10/func_0013888c.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001c7f10",
+      "from": "src/wave12/func_001c7f10.c",
+      "to": "src/checkpoint10/func_0013888c.cpp",
+      "checkpoint": "c010"
+    }
+  ],
+  "move_precondition": "func00182ae4 is in the prepared c009-r3 predecessor, not the base accepted ledger. Its explicit c010 move is applied only after c009-r3 finalizes; no c009 manifest, receipt, review or prepared source snapshot was rewritten.",
+  "retired_sources": [
+    {
+      "source": "src/wave18/func_00182ae4.c",
+      "sha256": "3143335a40d648f73cf18fd90338e8c34718277981ffc91ed68187c56f638c4c",
+      "destination": "src/checkpoint10/func_0013888c.cpp"
+    },
+    {
+      "source": "src/wave4/func_001c6a34.c",
+      "sha256": "c6fc4e8d732ba3dfa81a68d7026965bb52f691e40066d0795870bf44694a8740",
+      "destination": "src/checkpoint10/func_0013888c.cpp"
+    },
+    {
+      "source": "src/wave12/func_001c7f10.c",
+      "sha256": "7d49efdbbc45bec484f0db084b611b02febf708d195f36c63ce8e8735560d42b",
+      "destination": "src/checkpoint10/func_0013888c.cpp"
+    }
+  ],
+  "helper": {
+    "source": "src/models/object_registration/resource_service_lock.c",
+    "source_sha256": "4499f8723cd2be7305ee603b13650665e79ca6621ee412fd137e9356292fcdb6",
+    "profile": "middleware",
+    "functions": [],
+    "removed_extent": 4,
+    "callback_type": "void(*)(void)",
+    "object_type": "struct StreamCriticalSection*",
+    "invokes_callback": false,
+    "stores_callback": false,
+    "qualification": "[INFERENCE] R1 source-only erased identity; helper earns zero credit and does not claim invocation-compatible destructor input/result types."
+  },
+  "witnesses": {
+    "path": "scratch/integrator/c010/sched-reentry-r1/WITNESSES-sched-r1.json",
+    "sha256": "f349bd346f4a10196da6c32fa46211d40b39c179b5d14c142a27114f17ac9dc1",
+    "initial_attempts": 12,
+    "initial_exit_counts": {
+      "0": 10,
+      "1": 2
+    },
+    "destination_and_header_dependency_commands": 331,
+    "exit_counts": {
+      "0": 322,
+      "2": 9
+    },
+    "all_four_collected_destination_units_exit_zero_match": true,
+    "all_56_scheduler_header_dependents_match": true,
+    "all_9_graphics_resource_abi_header_dependents_match": true,
+    "changed_header_helper_only_units": 7,
+    "changed_header_helper_only_units_covered_by_caller_combinations": true,
+    "transitive_audio_header_refusals": [
+      {
+        "source": "src/checkpoint10/func_001ae00c.c",
+        "profile": "game",
+        "functions": [
+          "func_001ae00c"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/263-func_001ae00c/func_001ae00c.result.json",
+        "receipt_sha256": "cc779fc2b3a2b79fe973d821057eb2e150b74a8d2dac4495908233709dca7a3c",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001ae00c.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ae00c.c\", line 26: Error:  #120: return value type does not match the function type\n      return bss_002470cc[panel->selected];\n             ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ae00c.c\", line 58: Warning:  #223-D: function \"func_0015e31c\" declared implicitly\n                      func_0015e31c(1, 0x01000015);\n                      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ae00c.c: 1 warning, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "901ece60e52762bce7288b57fb830444e540857d830e458e0d2ce1523a5a89f9",
+          "current_sha256": "901ece60e52762bce7288b57fb830444e540857d830e458e0d2ce1523a5a89f9",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001dd884.c",
+        "profile": "game",
+        "functions": [
+          "func_001dd884"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/271-func_001dd884/func_001dd884.result.json",
+        "receipt_sha256": "c5122d6736fa3a46e7349849433c17ea20ecb8d18b2869c234c7249f9152bdc6",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001dd884.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001dd884.c\", line 30: Error:  #147-D: declaration is incompatible with \"void func_0016dc94(struct W10DrawingInput *, int)\" (declared at line 512 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/include/game/screen.h\")\n  extern void func_0016dc94(struct W8EffectState *effects, int index);\n              ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001dd884.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "1284123176cdeb0b88d6dc6b0100f0182134bb3303a7776f30999bf4a2d10618",
+          "current_sha256": "1284123176cdeb0b88d6dc6b0100f0182134bb3303a7776f30999bf4a2d10618",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_00173630.c",
+        "profile": "game",
+        "functions": [
+          "func_00173630"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/276-func_00173630/func_00173630.result.json",
+        "receipt_sha256": "6ceb057ee38a71818823b329acede7991e94362a1992dfc2993fe7a2b6a1c720",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_00173630.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_00173630.c\", line 6: Error:  #147-D: declaration is incompatible with \"void func_00173630(struct W6ListController *, int, int)\" (declared at line 198 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/include/game/selection.h\")\n  void func_00173630(struct TransformOwner *owner, int index, int group)\n       ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_00173630.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "d8d83945967fbad876e6df5f18b59508aacd8a327f6bb2b5c826b7543e877dc3",
+          "current_sha256": "d8d83945967fbad876e6df5f18b59508aacd8a327f6bb2b5c826b7543e877dc3",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001a407c.c",
+        "profile": "game",
+        "functions": [
+          "func_001a407c"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/303-func_001a407c/func_001a407c.result.json",
+        "receipt_sha256": "6974bbca17859028ea2dd8133e3a00891aaa69e0e5a86aefe500beaf5690f5b5",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001a407c.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a407c.c\", line 24: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a407c.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "863b5f4a381d73ea6f257d1c11292f408cb8309590d935c86a5dc1632d96db6f",
+          "current_sha256": "863b5f4a381d73ea6f257d1c11292f408cb8309590d935c86a5dc1632d96db6f",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001a81e4.c",
+        "profile": "game",
+        "functions": [
+          "func_001a81e4"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/305-func_001a81e4/func_001a81e4.result.json",
+        "receipt_sha256": "4e41d4cdfb16b31eaaad85b859eecc934bf34e67e0cc9c93d8ddde78a9c44bcd",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001a81e4.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a81e4.c\", line 24: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a81e4.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "e08a7dd6551b2e2c16026e1f87b1f668e289a7611f6f92ddb7b902345faf125a",
+          "current_sha256": "e08a7dd6551b2e2c16026e1f87b1f668e289a7611f6f92ddb7b902345faf125a",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001e7134.c",
+        "profile": "game",
+        "functions": [
+          "func_001e7134"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/307-func_001e7134/func_001e7134.result.json",
+        "receipt_sha256": "4c94ad3692ce07444b4da1be424a029cfc326d5ba306e6dd5078686c9fb1f691",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001e7134.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7134.c\", line 21: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7134.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "3e0c5c37cdded86618cf2f431aa6e0bc291a601b15ecaf8e5423e35b742e217b",
+          "current_sha256": "3e0c5c37cdded86618cf2f431aa6e0bc291a601b15ecaf8e5423e35b742e217b",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001e7564.c",
+        "profile": "game",
+        "functions": [
+          "func_001e7564"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/308-func_001e7564/func_001e7564.result.json",
+        "receipt_sha256": "44ac1ed3785d1eb9d97055d018225b64ae6c6a8c54702625dbebe9c84cb26d4f",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001e7564.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7564.c\", line 26: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(&state->common);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7564.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "c0a2eb0f83c691bdbfbd079a1fe6c564cd2dd21b2975bea2f56d5cfe75a6b2c8",
+          "current_sha256": "c0a2eb0f83c691bdbfbd079a1fe6c564cd2dd21b2975bea2f56d5cfe75a6b2c8",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001e7cb8.c",
+        "profile": "game",
+        "functions": [
+          "func_001e7cb8"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/309-func_001e7cb8/func_001e7cb8.result.json",
+        "receipt_sha256": "a0571f33aef3f4dad36edd5ec7d293224b64b4541e9462428414e4eb32a76a7d",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001e7cb8.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7cb8.c\", line 21: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7cb8.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "aec333044fc2239393b646552ec25260b0a4d4c9443d4ce1e74fbaad65912959",
+          "current_sha256": "aec333044fc2239393b646552ec25260b0a4d4c9443d4ce1e74fbaad65912959",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      },
+      {
+        "source": "src/checkpoint10/func_001ebe20.c",
+        "profile": "game",
+        "functions": [
+          "func_001ebe20"
+        ],
+        "receipt": "scratch/integrator/c010/sched-reentry-r1/dependencies-r1/310-func_001ebe20/func_001ebe20.result.json",
+        "receipt_sha256": "4d913f5fd8cd97d281b825cd6b7fb8ec7df823f5e292f548bbee03b51c1c1a84",
+        "exit_code": 2,
+        "reason": "armcc failed (1) on func_001ebe20.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ebe20.c\", line 21: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ebe20.c: 0 warnings, 1 error\n",
+        "baseline_source_equality": {
+          "baseline_sha256": "a0d5465b9851a4ca6ffe1d68e38eb75744d45cd7521a09f95245e1db05414705",
+          "current_sha256": "a0d5465b9851a4ca6ffe1d68e38eb75744d45cd7521a09f95245e1db05414705",
+          "equal": true
+        },
+        "removed_lookup_declarations_used": false
+      }
+    ],
+    "refusal_boundary": "These nine unchanged c010 sources fail on existing screen/selection nominal contracts, not any removed lookup type/callback declaration. They are retained, not rerun unchanged, silently dropped, or claimed MATCH. They remain Main integration blockers; no full c010 readiness or acceptance claim follows."
+  },
+  "abstract_original_facts": {
+    "scheduler": {
+      "dispatcher_signed_enabled_read_site": "0x001023c8",
+      "field_offset": 0,
+      "dispatch_callback_site": "0x001023f4",
+      "callback_result": "discarded",
+      "binding_protocol": "prepared c009-r3 ScheduledTaskCallback int(*)(void); procedure bodies C-only with unspecified results discarded"
+    },
+    "lookup": {
+      "original_storage": "data_002434e4[2]",
+      "targets": [
+        "func_001c6a34",
+        "func_001c7f10"
+      ],
+      "storage_word_reference_sites": [
+        "0x00138918",
+        "0x00182b14"
+      ],
+      "target_word_reference_locations": [
+        "0x002434e4",
+        "0x002434e8"
+      ],
+      "other_direct_callback_entry_callers": [],
+      "dispatcher_direct_caller_facts": [
+        {
+          "caller": "func_0013891c",
+          "site": "0x00138940",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00138948",
+          "site": "0x00138994",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00138948",
+          "site": "0x001389c8",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00146824",
+          "site": "0x00146868",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00146824",
+          "site": "0x001468a4",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00146824",
+          "site": "0x001468e0",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00146824",
+          "site": "0x0014691c",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00146824",
+          "site": "0x00146958",
+          "callee": "func_00182ae4",
+          "tail": false
+        },
+        {
+          "caller": "func_00146824",
+          "site": "0x00146990",
+          "callee": "func_00182ae4",
+          "tail": false
+        }
+      ],
+      "dispatcher_pointer_references": [],
+      "reference_payload_write_offset": "0x0c"
+    },
+    "service": {
+      "lock_constructor": "func_001135cc",
+      "lock_initializer_preserves_entry_receiver": true,
+      "lock_result_consuming_caller": "func_0010d0d0",
+      "lock_result_use_site": "0x0010d160",
+      "lock_result_consumer": "func_00136714",
+      "consumer_dereferences_receiver_offset": 0,
+      "independent_known_lock_root": "data_00242b0c",
+      "event_invocation": "0x00122d94",
+      "event_callback_load_site": "0x00122d88",
+      "event_callback_field": 8,
+      "event_argument_load_site": "0x00122d90",
+      "event_argument_field": 12,
+      "event_return_first_effect_site": "0x00122da4",
+      "event_return_discarded": true,
+      "event_provider": "func_001c5530",
+      "event_provider_reads_entry_core_arguments": false,
+      "event_context_pointee": "[INFERENCE] opaque; initialized null and only forwarded by the callback boundary",
+      "cleanup_original_literal_reference": "0x001f585c",
+      "cleanup_direct_entry_callers": [],
+      "registration": "source-only non-invoking typed C R1 helper, not a recovered destructor invocation protocol"
+    },
+    "fatal": {
+      "original_caller_owners": 73,
+      "original_direct_transfers": 152,
+      "original_tail_transfers": 10,
+      "incoming_r1_read_before_definition_site": "0x0019f58c",
+      "last_direct_transfer": "func_00134e7c"
+    },
+    "list_release": {
+      "original_direct_transfers": [
+        {
+          "caller": "func_00108f24",
+          "site": "0x00108f7c",
+          "callee": "func_0019f518",
+          "tail": true
+        },
+        {
+          "caller": "func_00108f24",
+          "site": "0x00108f8c",
+          "callee": "func_0011774c",
+          "tail": true
+        },
+        {
+          "caller": "func_001176e0",
+          "site": "0x00117738",
+          "callee": "func_0019f518",
+          "tail": true
+        }
+      ]
+    },
+    "processor": {
+      "mutable_root_reference_sites": [
+        "0x00214ee8",
+        "0x0011ef04"
+      ],
+      "first_registration_target_references": [
+        "0x00214ee0",
+        "0x00224c90"
+      ],
+      "second_registration_target_references": [
+        "0x00214ef0",
+        "0x00224ca8"
+      ],
+      "actual_declared_callback_types": {
+        "func_00216ba4": "void(unsigned int,unsigned int)",
+        "func_00216e4c": "void(void)"
+      },
+      "method_slot_targets": [
+        "func_00216ba8",
+        "func_00216c74"
+      ]
+    }
+  },
+  "qualifications": [
+    "c009-r3 remains provisional until Main finalizes it; its int scheduler protocol is binding for this branch.",
+    "0013db40 is a C-only procedure with an unspecified result that every dispatcher must discard; its int-result callees retain their genuine results.",
+    "The service no-op registration follows the existing R1 pattern; target:null provenance must receive manual QUALIFIED review, not a claimed recovered registration identity.",
+    "Opaque event context pointee type is [INFERENCE], but one prepared input and discarded result are established from the real dispatch.",
+    "The complete lookup family uses native value wrappers and exact original tag-specific payloads; the three owner transitions preserve all predecessor identities and add no credit for them.",
+    "Two native C-entry dispatcher allocation variants MISMATCH at52B; both failed sources and exits are retained. The final natural native complete unit and all its destinations MATCH.",
+    "No model/profile definitions, catalogue, names bindings, gates or acceptance evidence were changed. No assembly, function-pointer casts, object-pointer casts, fabricated result, unspecified-callee return, alias, volatile steering, union shim, barrier or extra runtime validation was introduced."
+  ],
+  "not_run": [
+    "full build",
+    "test suite",
+    "whole-ledger interface audit",
+    "prepare",
+    "review",
+    "finalize",
+    "push"
+  ],
+  "main_required_checks": [
+    "Resolve or reconcile the nine already-existing c010 nominal declaration refusals before claiming checkpoint readiness.",
+    "After c009-r3 finalizes, compose its accepted ledger with this explicit c010 move manifest and the sibling-family branches sequentially.",
+    "Perform Main-owned independent/manual callable/R1 review and the ordinary full checkpoint gates; this family record does not authorize acceptance."
+  ]
+}

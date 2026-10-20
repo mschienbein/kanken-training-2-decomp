@@ -6,6 +6,7 @@
 #include <nw/gfx/res/gfx_ResTexture.h>
 #include <nw/gfx/res/gfx_ResTextureMapper.h>
 #include <nw/gfx/res/gfx_ResVertex.h>
+#include <nw/gfx/res/gfx_ResLookupTable.h>
 #include <nw/os/os_Memory.h>
 #include "game/render_state.h"
 
@@ -52,6 +53,11 @@ nw::gfx::res::ResTexture func_001c7828(nw::os::IAllocator *allocator,
                                       nw::gfx::res::ResTexture texture);
 nw::gfx::res::ResTextureMapper func_001c8c3c(nw::gfx::res::ResTextureMapper mapper,
                                             nw::os::IAllocator *allocator);
+/* Both original lookup dispatchers use these same two native-value slots.
+ * The tag selects an image or reference payload, not a new callback context. */
+extern void (*data_002434e4[2])(nw::gfx::res::ResLookupTable object);
+void func_001c6a34(nw::gfx::res::ResLookupTable object);
+void func_001c7f10(nw::gfx::res::ResLookupTable object);
 }
 #endif
 
