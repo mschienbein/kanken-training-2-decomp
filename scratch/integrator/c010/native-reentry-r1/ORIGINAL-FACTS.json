@@ -1,0 +1,124 @@
+{
+  "method": "Read-only bounded decoding and original read-only pointer metadata; no bytes, instruction text, instruction words, packet text or payload retained.",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "traversal_identity": {
+    "function": "func_00117ea8",
+    "size": 132,
+    "facts": [
+      "The original unchanged receiver is used for a vptr-based call through slot +0x68 with cursor, draw-info and renderer arguments. The call result becomes the running byte cursor.",
+      "The original child-list walk follows the native Pane link offset and visible child flag. Each child is passed unchanged into the same traversal, not downcast to a synthetic derived owner.",
+      "Native virtual-call probes distinguish DrawSelf (+0x64) from MakeUniformDataSelf (+0x68). The former hypothesis mismatched only at code offset +0x2c; the correctly slotted native call MATCHes the complete 132-byte function."
+    ],
+    "native_slot_anchors": [
+      {
+        "candidate_address_point": "0x00224170",
+        "known_native_slots": [
+          {
+            "slot_offset": 24,
+            "function": "_ZN2nw3lyt4Pane15SetColorElementEjh"
+          },
+          {
+            "slot_offset": 44,
+            "function": "_ZN2nw3lyt4Pane14FindPaneByNameEPKcb"
+          },
+          {
+            "slot_offset": 48,
+            "function": "_ZN2nw3lyt4Pane18FindMaterialByNameEPKcb"
+          },
+          {
+            "slot_offset": 52,
+            "function": "_ZN2nw3lyt4Pane7AnimateEj"
+          },
+          {
+            "slot_offset": 60,
+            "function": "_ZN2nw3lyt4Pane13BindAnimationEPNS0_13AnimTransformEbb"
+          },
+          {
+            "slot_offset": 64,
+            "function": "_ZN2nw3lyt4Pane15UnbindAnimationEPNS0_13AnimTransformEb"
+          }
+        ],
+        "base_cursor_callback_offset": 104
+      },
+      {
+        "candidate_address_point": "0x002243f8",
+        "known_native_slots": [
+          {
+            "slot_offset": 24,
+            "function": "_ZN2nw3lyt4Pane15SetColorElementEjh"
+          },
+          {
+            "slot_offset": 44,
+            "function": "_ZN2nw3lyt4Pane14FindPaneByNameEPKcb"
+          },
+          {
+            "slot_offset": 48,
+            "function": "_ZN2nw3lyt4Pane18FindMaterialByNameEPKcb"
+          },
+          {
+            "slot_offset": 52,
+            "function": "_ZN2nw3lyt4Pane7AnimateEj"
+          },
+          {
+            "slot_offset": 60,
+            "function": "_ZN2nw3lyt4Pane13BindAnimationEPNS0_13AnimTransformEbb"
+          },
+          {
+            "slot_offset": 64,
+            "function": "_ZN2nw3lyt4Pane15UnbindAnimationEPNS0_13AnimTransformEb"
+          }
+        ],
+        "base_cursor_callback_offset": 104
+      }
+    ],
+    "all_anchored_family_slot_providers": [
+      {
+        "address_point": "0x00224170",
+        "slot_68_function": "func_001f01b0",
+        "active_source": "src/wave8/func_001f01b0.cpp"
+      },
+      {
+        "address_point": "0x00224268",
+        "slot_68_function": "func_001f0330",
+        "active_source": null
+      },
+      {
+        "address_point": "0x002242f0",
+        "slot_68_function": "func_001f1194",
+        "active_source": null
+      },
+      {
+        "address_point": "0x00224370",
+        "slot_68_function": "func_001f153c",
+        "active_source": null
+      },
+      {
+        "address_point": "0x002243f8",
+        "slot_68_function": "func_001f01b0",
+        "active_source": "src/wave8/func_001f01b0.cpp"
+      }
+    ],
+    "limits": "Only the two original native-Pane-family tables with the base return-only slot establish that base provider. The other original slot providers have no active accepted/candidate defining units in this branch; no new credit or complete derived-class identity is claimed for them."
+  },
+  "root_identity": {
+    "function": "func_00196c04",
+    "size": 76,
+    "facts": [
+      "Original entry order is renderer, root, draw-info. The root +0x10 pointer, after null/visibility checks, is passed unchanged as the traversal receiver.",
+      "The same running byte cursor comes from 0018d8d4 and is returned to 0018d8c4. The natural native Pane member caller MATCHes the complete 76-byte original."
+    ],
+    "direct_original_callers": [
+      "func_00105444",
+      "func_00196784"
+    ],
+    "limits": "LayoutCommandRoot is a descriptive prefix, not an alias or claim of equality with nw::lyt::Layout or LayoutDrawPane. Only the actual original traversal member is typed nw::lyt::Pane*."
+  },
+  "base_identity": {
+    "function": "func_001f01b0",
+    "size": 8,
+    "facts": [
+      "Both independently anchored original Pane-family tables designate this function at +0x68. The real const native Pane::MakeUniformDataSelf definition preserves all cursor/draw-info/renderer inputs in its declaration and returns the unchanged cursor. Its exact complete 8-byte emitted body MATCHes."
+    ],
+    "limits": "Native endpoint spelling and const receiver follow the pinned native slot declaration plus original slot ownership; no C shadow or function-pointer cast remains."
+  }
+}

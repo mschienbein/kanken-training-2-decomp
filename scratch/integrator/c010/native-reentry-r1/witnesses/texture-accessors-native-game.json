@@ -1,0 +1,55 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-game/texture_accessors.result.json",
+  "private_receipt_sha256": "381f5ced724230525c170a213db304ca7113a79f8bc9455c88d33d5125922061",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/texture_accessors.cpp",
+    "source_sha256": "6dc9f5501774c50b374d370a5a5e665fb8931f902267fe2470180f39cace2d63",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "9140f2b27388de95f20185d9e133c3be1288d1fc02e0c3006fbcac1ebd61266c",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": {
+      "path": "scratch/integrator/c010/native-reentry-r1/texture-accessor-names-proposed.json",
+      "sha256": "ea4410f1f6a05b188ded41e7e00873863bbb84499f6680e596a8dc4ac7c94340"
+    },
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "_ZN2nw3lyt19ArcResourceAccessor10GetTextureEPKc",
+        "address": 1887928,
+        "size": 104,
+        "candidate_size": 116,
+        "status": "mismatch",
+        "first_diff": 36,
+        "linker_rewrites": []
+      },
+      {
+        "name": "_ZN22TextureCacheAccessor2810GetTextureEPKc",
+        "address": 1888264,
+        "size": 104,
+        "candidate_size": 116,
+        "status": "mismatch",
+        "first_diff": 36,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

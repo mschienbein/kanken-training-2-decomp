@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "symbols": {
+    "_ZN2nw3lyt19ArcResourceAccessor10GetTextureEPKc": {
+      "address": 1887928,
+      "evidence": "PROPOSAL ONLY: real ArcResourceAccessor native GetTexture definition; requires same-address body and independently evidenced owner, not merely its +0x30 cache geometry."
+    },
+    "_ZN22TextureCacheAccessor2810GetTextureEPKc": {
+      "address": 1888264,
+      "evidence": "DIAGNOSTIC ONLY: descriptive native virtual self-definition, owner remains unrecovered. No alias to ArcResourceAccessor or admission is asserted."
+    },
+    "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc": {
+      "address": 1885252,
+      "evidence": "DIAGNOSTIC ONLY: native provider self-definitions measured separately but no full MATCH yet; caller matches cannot admit this binding."
+    },
+    "_ZN2nw3lyt16TextureContainer13RegistTextureEPKcRKNS0_11TextureInfoE": {
+      "address": 1885084,
+      "evidence": "DIAGNOSTIC ONLY: original registration call's scalar TextureKey contract agrees with the pinned declaration; emitted native self-definition proof still required before admission."
+    }
+  }
+}

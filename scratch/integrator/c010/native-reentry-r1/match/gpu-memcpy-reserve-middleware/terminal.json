@@ -1,0 +1,24 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_reserve.c",
+  "source_sha256": "f3146c4b070478337bb194e6a3bb7913974fc88697712459a468bc0eb07293f5",
+  "profile": "middleware",
+  "exit_code": 1,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_reserve.c",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-reserve-middleware"
+  ],
+  "stdout": "MISMATCH func_001273a0 @ 0x1273a0 size 0x480/0x414 first difference at +0x0\n",
+  "stderr": "",
+  "label": "gpu-memcpy-reserve-middleware"
+}

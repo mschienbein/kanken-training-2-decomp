@@ -1,0 +1,46 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/texture-find-single-game/texture_find_single.result.json",
+  "private_receipt_sha256": "7e6783c545abedf6ff549d1e387da52a0d518174944fbf5bc72d61d8d9316e6b",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/texture_find_single.cpp",
+    "source_sha256": "deb3a5dc748874e74381041d4d504c4d2faa0e1c8ac7d8743b2a0b8cd685c7ba",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "fb3e3ac79281edd5bac2c1d635e33fa61b5c4f19668bd0d6b6f6453c48f81710",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": {
+      "path": "scratch/integrator/c010/native-reentry-r1/texture-names-proposed.json",
+      "sha256": "161be32ce492cbfcc44cff2aac471080a43d0f4e9db68309d84202892d6e6c1d"
+    },
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+        "address": 1885252,
+        "size": 136,
+        "candidate_size": 168,
+        "status": "mismatch",
+        "first_diff": 4,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

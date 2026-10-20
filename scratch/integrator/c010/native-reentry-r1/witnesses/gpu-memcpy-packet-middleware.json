@@ -1,0 +1,16 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-middleware/gpu_memcpy_packet.result.json",
+  "private_receipt_sha256": "48f46861fdbe8fc55d99965fe16c70ab693aafc198fb3113525d9c3d51bccdee",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c",
+    "profile": "middleware",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "status": "refused",
+    "reason": "armcc failed (1) on gpu_memcpy_packet.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c\", line 10: Error:  #28: expression must have a constant value\n      const struct GpuCommandPacket packet = { value, header };\n                                               ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c\", line 10: Error:  #28: expression must have a constant value\n      const struct GpuCommandPacket packet = { value, header };\n                                                      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet.c: 0 warnings, 2 errors\n",
+    "error_type": "ToolchainError",
+    "functions": []
+  }
+}
