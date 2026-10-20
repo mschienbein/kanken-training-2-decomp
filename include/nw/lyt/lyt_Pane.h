@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_Pane.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: preserve the retail base's two owned tail bytes; expose
+ * recovered storage to the target-version game consumers.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -233,7 +234,7 @@ protected:
 
     void Init();
 
-protected:
+public:
     Pane* m_pParent;
     PaneList m_ChildList;
     AnimationList m_AnimList;
@@ -252,6 +253,8 @@ protected:
     char m_UserData[UserDataStrMax + 1];
 
 private:
+    /* Retail constructors own these bytes; derived panes start at 0xd4. */
+    u8 m_ReservedD2[2];
     Pane(const Pane& other);
     Pane& operator=(const Pane& other);
 };

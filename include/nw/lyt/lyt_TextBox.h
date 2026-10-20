@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_TextBox.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: model the retail 0x108-byte object, its independent
+ * alignment/dirty bytes, and the format argument of string allocation.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -39,7 +40,7 @@ public:
 
     typedef font::TagProcessorBase<wchar_t> TagProcessor;
 
-    explicit TextBox(u16 allocStrLen = 0);
+    explicit TextBox(u16 allocStrLen = 0, unsigned format = 0);
     TextBox(u16 allocStrLen, const wchar_t* str, const font::Font* pFont);
     TextBox(u16 allocStrLen, const wchar_t* str, u16 strLen, const font::Font* pFont);
     TextBox(const res::TextBox* pBlock, const ResBlockSet& resBlockSet);
@@ -51,7 +52,7 @@ public:
     u16 GetStringLength() const { return m_TextLen; }
     u16 GetStringBufferLength() const;
 
-    virtual void AllocStringBuffer(u16 minLen);
+    virtual void AllocStringBuffer(u16 minLen, unsigned format);
     virtual void FreeStringBuffer();
     virtual u16  SetString(const wchar_t* str, u16 dstIdx = 0);
     virtual u16  SetString(const wchar_t* str, u16 dstIdx, u16 strLen);
@@ -110,11 +111,11 @@ public:
             internal::SetVerticalPosition(&m_TextPosition, u8(val));
     }
 
-    TextAlignment GetTextAlignment() const { return static_cast<TextAlignment>(m_Bits.textAlignment); }
+    TextAlignment GetTextAlignment() const { return static_cast<TextAlignment>(m_TextAlignment); }
     void SetTextAlignment(TextAlignment val)
     {
         if (UpdatePTDirty(GetTextAlignment() != val))
-            m_Bits.textAlignment = val;
+            m_TextAlignment = val;
     }
 
     TagProcessor* GetTagProcessor() const { return m_pTagProcessor; }
@@ -153,26 +154,26 @@ protected:
     void SetFontInfo(font::WideTextWriter* pWriter) const;
     void SetTextPos(font::WideTextWriter* pWriter) const;
     math::VEC2 AdjustTextPos(const Size& size, bool isCeil) const;
-    void Init(u16 allocStrLen);
+    void Init(u16 allocStrLen, unsigned format);
     void InitMaterial();
     u16  SetStringImpl(const wchar_t* str, u16 dstIdx, u32 strLen);
 
     bool UpdatePTDirty(bool isChanged)
     {
-        m_Bits.isPTDirty |= isChanged ? 1 : 0;
+        m_IsPTDirty |= isChanged ? 1 : 0;
         return isChanged;
     }
 
     void UpdateDrawCharDataImpl(Drawer* pDrawer)
     {
-        if (m_Bits.isPTDirty || (!m_pDispStringBuf->IsGeneratedCommand() && pDrawer))
+        if (m_IsPTDirty || (!m_pDispStringBuf->IsGeneratedCommand() && pDrawer))
             SetupDrawCharData(pDrawer);
     }
 
     void SetupDrawCharData(Drawer* pDrawer);
     void SetupTextWriter(font::WideTextWriter* pWriter);
 
-private:
+public:
     wchar_t*                m_pTextBuf;
     ut::Color8              m_TextColors[TEXTCOLOR_MAX];
     const font::Font*       m_pFont;
@@ -184,12 +185,8 @@ private:
     u16                     m_TextLen;
     u8                      m_TextPosition;
 
-    struct Bits
-    {
-        u8 textAlignment : 2;
-        u8 isPTDirty     : 1;
-    };
-    Bits m_Bits;
+    u8 m_TextAlignment;
+    u8 m_IsPTDirty;
     Material* m_pMaterial;
     font::DispStringBuffer* m_pDispStringBuf;
 };
