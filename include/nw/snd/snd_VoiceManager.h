@@ -3,6 +3,7 @@
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Modified 2026-10-17: standalone UTF-8 and relative include normalization.
+ * Modified 2026-10-20: target Voice link and one shared native manager storage.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #ifndef NW_SND_VOICE_MANAGER_H
@@ -20,7 +21,7 @@ class VoiceManager
     friend class Voice;
     
 public:
-    typedef ut::LinkList<Voice, offsetof(Voice, m_LinkNode)> VoiceList;
+    typedef ut::LinkList<Voice, offsetof(Voice, link)> VoiceList;
 
     static VoiceManager& GetInstance();
 
@@ -51,6 +52,7 @@ private:
     void AppendVoiceList(Voice* voice);
     void RemoveVoiceList(Voice* voice);
 
+public:
     bool m_Initialized;
     VoiceList m_PrioVoiceList;
     VoiceList m_FreeVoiceList;

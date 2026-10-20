@@ -10,23 +10,23 @@ struct PrefetchDataBlock {
 #endif
 };
 
-struct AdpcmLoopState {
-    short predictor_scale;
-    short history1;
-    short history2;
-};
 struct AdpcmChannelParameters {
     short coefficients[16];
     short predictor_scale;
     short history1;
     short history2;
 };
+#ifdef __cplusplus
 struct StreamChannel {
+#ifdef __cplusplus
+    StreamChannel();
+#endif
     void *allocation;
-    struct AudioVoiceGroup *channel;
+    nw::snd::internal::driver::Voice *channel;
     struct RecordState blocks[32];
     struct AdpcmLoopState loop_states[32];
 };
+#endif
 struct PrefetchTrackInfo {
     unsigned char volume;
     unsigned char pan;
@@ -110,6 +110,7 @@ struct StreamBufferState {
     unsigned request_id;
     unsigned context;
 };
+#ifdef __cplusplus
 struct StreamPlayer {
     const void *vtable;
     unsigned char reserved04[8];
@@ -147,6 +148,7 @@ struct StreamPlayer {
     struct StreamTrack tracks[4];
     struct StreamBufferState buffer_states[32];
 };
+#endif
 
 
 #ifdef __cplusplus

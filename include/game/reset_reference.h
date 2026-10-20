@@ -5,21 +5,6 @@
  * itself has that exact API; its body recovers the concrete element type. */
 struct ResetReference { unsigned value; };
 struct InitialRegisterState { unsigned values[6]; };
-/* [INFERENCE] The native member-array constructor supplies each 24-byte
- * element's address to the return-this constructor callback. */
-struct RuntimeMember {
-    unsigned words[6];
-#ifdef __cplusplus
-    RuntimeMember();
-#endif
-};
-struct RuntimeMemberOwner {
-    unsigned prefix[2];
-    struct RuntimeMember members[32];
-#ifdef __cplusplus
-    RuntimeMemberOwner();
-#endif
-};
 #ifdef __cplusplus
 extern "C" {
 #endif

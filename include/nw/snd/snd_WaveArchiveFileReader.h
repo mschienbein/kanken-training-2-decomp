@@ -2,7 +2,9 @@
  * NintendoWare4Ctr contributors; upstream include/nw/snd/snd_WaveArchiveFileReader.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-17: standalone relative include paths.
+ * Modified 2026-10-20: target 16-byte reader, full-width mode input, native
+ * default construction/reset and shared C/C++ client storage.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #ifndef NW_SND_WAVE_ARCHIVE_FILE_READER_H_
@@ -21,7 +23,9 @@ public:
     static const u32 SIGNATURE_FILE = NW_UT_MAKE_SIGWORD('C', 'W', 'A', 'R');
     static const u32 SIGNATURE_WARC_TABLE;
 
-    WaveArchiveFileReader(const void* pWaveArchiveFile, bool isIndividual = false);
+    WaveArchiveFileReader();
+    WaveArchiveFileReader(const void* pWaveArchiveFile, int individualMode = 0);
+    void Reset();
 
     void InitializeFileTable();
     bool IsAvailable() const { return m_pHeader != NULL; }
@@ -62,9 +66,13 @@ private:
         return m_pLoadTable->waveFile[ waveIndex ];
     }
 
+public:
     const WaveArchiveFile::FileHeader*      m_pHeader;
     const WaveArchiveFile::InfoBlockBody*   m_pInfoBlockBody;
     IndividualLoadTable*                    m_pLoadTable;
+    /* S15: target reader constructors and the sequence array use stride 0x10. */
+    u8 m_Initialized;
+    u8 reserved0d[3];
 };
 
 } // namespace internal

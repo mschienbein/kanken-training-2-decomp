@@ -35,13 +35,13 @@ extern "C" void func_001d9580(struct AudioVoiceOwner001d9580 *owner,
     overlap = 0;
     for (channel = 0; count > channel; ++channel) {
         for (buffer = 0; buffer < 2; ++buffer) {
-            struct AudioSlotBufferDescriptor001d9580 *descriptor =
-                &((struct AudioSlotBufferDescriptor001d9580 *)&owner->voice->slots[channel])[buffer];
-            if (descriptor->state != 0 && descriptor->state != 3) {
-                const unsigned char *begin = descriptor->address;
+            const struct RecordState *descriptor =
+                &owner->voice->wave_buffers[channel][buffer];
+            if (descriptor->status != 0 && descriptor->status != 3) {
+                const unsigned char *begin = static_cast<const unsigned char *>(descriptor->data);
                 unsigned char format = func_001f2f2c(owner->voice->group);
                 const unsigned char *end = begin + func_001d4864(descriptor->sample_count, format);
-                if (first <= end && descriptor->address <= last) {
+                if (first <= end && static_cast<const unsigned char *>(descriptor->data) <= last) {
                     overlap = 1;
                     break;
                 }

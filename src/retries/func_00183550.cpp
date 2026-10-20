@@ -3,7 +3,7 @@
 
 
 
-void func_00183550(struct AudioVoiceGroup *group)
+void func_00183550(nw::snd::internal::driver::Voice *group)
 {
     if (group->active) {
         for (int i = 0; i < group->count; ++i) {

@@ -1,7 +1,6 @@
 #ifndef GAME_COMMAND_GROUP_H
 #define GAME_COMMAND_GROUP_H
 
-struct ArchiveReader;
 struct AudioChannelState;
 struct AudioParameterState;
 struct AudioTransitionState;
@@ -100,7 +99,6 @@ extern void func_00141560(unsigned index, float value);
 extern void func_0010bec8(void);
 extern struct TouchInputService *func_0010c12c(void);
 extern void func_001950ec(struct ReadResultState *state);
-extern void func_001c540c(struct ArchiveReader *reader);
 extern void func_001c5958(struct AudioChannelState *state, unsigned int mode);
 extern void func_001cf1dc(struct VoiceByteParameters140 *voice,
                               unsigned int index, unsigned char value);

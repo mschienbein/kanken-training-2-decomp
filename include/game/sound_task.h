@@ -4,7 +4,6 @@
 struct EmbeddedSoundInstance;
 struct PoolLink;
 struct SignalState;
-struct SoundBufferDescriptor;
 struct SoundByteRamp;
 struct SoundPlaybackState;
 struct SoundPlayerBase;
@@ -26,6 +25,10 @@ struct TimingState;
 #include "game/sound_runtime.h"
 #include "game/stream_manager.h"
 #include "game/synchronization.h"
+#ifdef __cplusplus
+#include <preinclude.h>
+#include "nw/snd/snd_WaveArchiveFileReader.h"
+#endif
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 
@@ -56,13 +59,6 @@ struct SoundByteRamp {
     unsigned short elapsed;
 };
 
-struct SoundBufferDescriptor {
-    void *data;
-    unsigned length;
-    unsigned position;
-    unsigned char active;
-    unsigned char reserved0d[3];
-};
 
 struct SoundShortBufferDescriptor {
     void *data;
@@ -76,6 +72,7 @@ struct SoundSmallDescriptor {
     unsigned field04;
 };
 
+#ifdef __cplusplus
 struct SoundStreamPlayer {
     struct SoundPlayerBase base;
     const void *control_vtable;
@@ -87,7 +84,7 @@ struct SoundStreamPlayer {
     unsigned char reserved7e[0x12];
     void *buffers[16];
     unsigned char reservedd0[0x24];
-    struct SoundBufferDescriptor descriptors[4];
+    nw::snd::internal::WaveArchiveFileReader wave_archives[4];
     struct SoundShortBufferDescriptor short_descriptors[4];
     unsigned char reserved164;
     unsigned char flags165[2];
@@ -98,12 +95,14 @@ struct SoundStreamPlayer {
     unsigned field18c;
     struct SoundSmallDescriptor small_descriptors[4];
 };
+#endif
 
 struct SoundPoolStorage {
     void *begin;
     unsigned size;
 };
 
+#ifdef __cplusplus
 struct EmbeddedSoundInstance {
     struct SoundPlaybackState base;
     unsigned char reserved118[4];
@@ -112,6 +111,7 @@ struct EmbeddedSoundInstance {
     unsigned char reserved122[6];
     struct SoundStreamPlayer player;
 };
+#endif
 
 struct SoundSubPlayer {
     struct SoundPlayerBase base;

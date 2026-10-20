@@ -1,11 +1,12 @@
 #include "game/audio_voice.h"
+#include <string.h>
 void func_0017da3c(struct RecordState *state)
 {
-    state->words[0] = 0;
-    state->words[1] = 0;
-    state->words[2] = 0;
-    state->words[3] = 0;
-    state->flags.word = 0;
-    state->value = 0;
-    state->flags.bytes.second = 0;
+    state->data = 0;
+    state->sample_count = 0;
+    state->loop_context = 0;
+    state->sample_limit = 0;
+    memset(&state->loop, 0, 4);
+    state->next = 0;
+    state->status = 0;
 }

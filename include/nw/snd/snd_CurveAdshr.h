@@ -3,6 +3,7 @@
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Modified 2026-10-17: retain public layouts and inline definitions; normalize types/assertion include paths for standalone release compilation.
+ * Modified 2026-10-20: shared target byte-status storage for channel release.
  * This file is free software under GNU GPL version 3; see LICENSE.txt.
  */
 #ifndef NW_SND_CURVE_ADSHR_H_
@@ -46,7 +47,7 @@ public:
     void Update(int msec);
     f32  GetValue() const;
 
-    Status GetStatus() const { return m_Status; }
+    Status GetStatus() const { return static_cast<Status>(m_Status); }
     void SetStatus(Status status) { m_Status = status; }
 
     void SetAttack(int attack);
@@ -59,7 +60,10 @@ private:
     static f32 CalcRelease(int release);
     static s16 CalcDecibelSquare(int scale);
 
-    Status m_Status;
+public:
+    /* Target byte storage: 0017db00/0017db2c and001d9544/001d9570. */
+    u8 m_Status;
+private:
     f32 m_Value;
     f32 m_Decay;
     f32 m_Release;

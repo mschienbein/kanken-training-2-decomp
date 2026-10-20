@@ -555,3 +555,33 @@ prepare-owned suite and two fresh full builds, followed by two fresh
 independent reviews. The carried accepted type issues and 288 open original
 target populations must remain visible; MATCH does not close them.
 
+
+## Sound type foundation — types-sound (2026-10-20)
+
+This separate foundation branch completes the reachable native Voice/VoiceManager,
+hardware channel, RecordState/ADPCM/waveform/envelope, StreamChannel-constructor
+and target16-byte CWAR reader cutovers. It revises **58 accepted source units /
+58 functions** and **17 c009 NEW source units /17 functions**, without adding
+credit. `c009t.json` declares **52 accepted moves**; fourteen c009 candidate
+source paths change to C++. Existing c009 moves remain in force.
+
+All **672 affected units /684 credited identities** match sequentially under
+their original profiles and explicit v6/L1. Their673 objects, including the
+receipt-derived R1 helper context, have exactly one affected-scope emitted
+owner for every684 credited identities inspected. The **17 header** hunk/hash
+closure, full receipts, every failed exit and blocked-family disposition are
+recorded in `scratch/integrator/types-sound/`. No heavy acceptance gate or
+independent review was run by this worker.
+
+The dated `MODEL-AMENDMENT-2026-10-20.md` corrects RecordState+8 from an inferred
+integer to `const AdpcmLoopState*`: original00153bd8 stores the exact destination
+of the preceding ADPCM copy. It also records the directly evidenced signed
+loop byte and shared native envelope byte-status storage. No pointer/integer
+cast or record overlay implements those facts.
+
+Complete archive/hook producers, native null-D0/key-function ownership, the
+remaining sequence/player/decoder families and G09 forwarding-stream protocol
+remain open. Main explicitly authorized leaving their accepted models
+unchanged rather than landing a partial native alias. **Zero deferred
+functions /zero bytes are restored**. Later-checkpoint re-entry prerequisites
+are enumerated in `REMAINING.json`; local loader-only MATCHes are not admission.
