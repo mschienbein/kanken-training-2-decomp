@@ -1,0 +1,24 @@
+{
+  "source": "scratch/integrator/c010/display-reentry-r1/drafts/position_full_word.cpp",
+  "source_sha256": "d65bf71219c9d88cc3aa5d49137d8e0a9066c352cd0b45403db761c744450d3c",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/display-reentry-r1/drafts/position_full_word.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-display/scratch/integrator/c010/display-reentry-r1/match/constructor-full-word-stored-ids-r1",
+    "--names",
+    "scratch/integrator/c010/display-reentry-r1/constructor-names.json"
+  ],
+  "exit_code": 1,
+  "stdout": "note: proposed names overlay scratch/integrator/c010/display-reentry-r1/constructor-names.json (not config/names.json); a MATCH here needs those bindings adopted\nMISMATCH _ZN18W11PositionCommandC1Eiijfff @ 0x174d9c size 0x54/0x54 first difference at +0x5\n",
+  "stderr": ""
+}
