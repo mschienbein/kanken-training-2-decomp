@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "owned-source-contract-phase-closed-with-explicit-deferrals-awaiting-main-prerequisites-and-heavy-closure",
+  "status": "native-links-and-parent-archive-prerequisite-integrated-awaiting-frozen-c009-r3-and-complete-closure",
   "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010",
   "branch": "c010-integrate",
   "selection": {
@@ -9,19 +9,19 @@
   },
   "gate_revision": "v1.19",
   "candidate_manifest": "config/candidates/c010.json",
-  "candidate_manifest_sha256": "5f0ea8fe65607d09cb8e24b1ad51d69df31a6ce5eec128fc42c5884cf604acc3",
-  "candidate_units": 496,
-  "candidate_functions": 509,
-  "candidate_new_functions": 499,
-  "candidate_target_bytes": 47304,
+  "candidate_manifest_sha256": "b159999ba9360bc4a2a6ab799d842fc3c6a1edf4aa54c1312d8f485384bfc809",
+  "candidate_units": 497,
+  "candidate_functions": 510,
+  "candidate_new_functions": 500,
+  "candidate_target_bytes": 47360,
   "candidate_moved_accepted_functions": 10,
   "dry_ledger": {
-    "path": "scratch/integrator/c010/dry-matches-r67.json",
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/dry-matches-r67.json",
     "units": 2724,
     "functions": 2796,
-    "qualification": "Unaccepted metadata projection; regenerate after frozenr3."
+    "qualification": "Historical r67 complete projection, now stale after the native-links cutover. Regenerate only after Main integrates the approved frozen predecessor and this source change."
   },
-  "match_scope": "scratch/integrator/c010/match-scope-r67.json",
+  "match_scope": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/match-scope-r67.json",
   "direct_scope_units": 782,
   "new_headers": [
     "include/GLES2/gl2dmpconstants.h",
@@ -169,18 +169,18 @@
     "include/nn/snd.h"
   ],
   "removed_headers": [],
-  "source_ready_record": "scratch/integrator/c010/SOURCE-READY-r68.json",
-  "current_inventory": "scratch/integrator/c010/CURRENT-INVENTORY-r67.json",
-  "witness_index": "scratch/integrator/c010/MATCH-WITNESS-INDEX-r67.json",
-  "deferrals": "scratch/integrator/c010/NEW-DEFERRALS-r67.json",
-  "new_deferred_units": 49,
-  "new_deferred_functions": 51,
+  "source_ready_record": "scratch/integrator/c010/SOURCE-READY-native-links-r1.json",
+  "current_inventory": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/CURRENT-INVENTORY-r67.json",
+  "witness_index": "scratch/integrator/c010/NATIVE-LINKS-WITNESSES-r1.json",
+  "deferrals": "scratch/integrator/c010/NEW-DEFERRALS-native-links-r1.json",
+  "new_deferred_units": 48,
+  "new_deferred_functions": 50,
   "candidate_marker_units": 0,
   "reserved_uncredited_sources": [
     "src/checkpoint10/func_001c7760.cpp",
     "src/checkpoint10/func_001c8a40.cpp"
   ],
-  "remaining_heavy_commands": "scratch/integrator/c010/REMAINING-HEAVY-COMMANDS-r68.json",
+  "remaining_heavy_commands": "scratch/integrator/c010/REMAINING-HEAVY-COMMANDS-native-links-r1.json",
   "dependencies": [
     {
       "owner": "FixC009R3Codex/Main",
@@ -229,5 +229,47 @@
   "heavy_slot_status": "Main has not granted C010 closure; no heavy job started.",
   "historical_handoff": "scratch/integrator/c010/HANDOFF-before-codex-r67.json",
   "historical_handoff_sha256": "b88835851e6016a1b3eb23789f61c527ff7688b76274fb253159165f93e747a3",
-  "no_accepted_record_or_history_changes": true
+  "no_accepted_record_or_history_changes": true,
+  "base_commit": "a3062ee4a9e71bf1bf5913eb07748ab0750a5238",
+  "native_links_contract": "scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json",
+  "native_links_bounded_scope": "scratch/integrator/c010/native-links-scope-r1.json",
+  "native_links_bounded_scope_units": 16,
+  "native_links_bounded_matches": 16,
+  "witness_index_qualification": "Fresh sixteen-unit slice index plus explicit historical complete-index reference; not a whole-ledger/header closure claim.",
+  "global_input_freshness": "Parent full-ledger/source/header inventory and scopes are historical and stale after this cutover. Main must regenerate under a new immutable revision after integrating the approved frozen predecessor; the bounded16-unit scope does not replace or narrow them.",
+  "original_candidate_composition": {
+    "original_units": 496,
+    "original_claims": 509,
+    "current_units": 497,
+    "current_claims": 510,
+    "original_units_preserved_verbatim": true,
+    "original_moves_preserved_verbatim": true,
+    "original_move_count": 10,
+    "accepted_manifest_unchanged": true,
+    "names_manifest_unchanged": true,
+    "qualification": "Structural candidate/immutable-file bookkeeping only, not a whole-ledger ownership or semantic audit."
+  },
+  "newly_closed_deferral": "func_001cff58",
+  "parent_current_handoff": {
+    "path": "scratch/integrator/c010/HANDOFF-parent-before-native-r69.json",
+    "sha256": "54fb83751e208a9231f91ec20ec41b912bf829509c107729705f99e93c040d5a",
+    "snapshot_commit": "68f736d",
+    "unchanged": true
+  },
+  "previous_worktree_handoff": {
+    "commit": "a3062ee4a9e71bf1bf5913eb07748ab0750a5238",
+    "path": "scratch/integrator/c010/HANDOFF.json",
+    "sha256": "b88835851e6016a1b3eb23789f61c527ff7688b76274fb253159165f93e747a3",
+    "preservation": "Immutable original remains in the base commit; current pointer is synchronized with the parent r68 handoff and this new revision."
+  },
+  "native_links_remaining_deferral_target_bytes": 9196,
+  "parent_archive_prerequisite": {
+    "commit": "1947019",
+    "origin_commit": "f5c402ae65b6464fb4bbac6d8975d224a025bc56",
+    "receipt": "scratch/integrator/c010/PARENT-ARCHIVE-IMPORT-r69.json",
+    "wrapper_match_bytes": 32,
+    "terminal_match_bytes": 112,
+    "child_credit_imported": false,
+    "qualification": "Only the two source/header files were imported; global source/header/ledger inventories remain stale until complete predecessor reconciliation."
+  }
 }

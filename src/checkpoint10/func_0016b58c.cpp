@@ -5,7 +5,7 @@ public:
     virtual void slot00();
     virtual void slot01();
     virtual void slot02();
-    virtual void detach(const LayoutAnimationTransform *animation);
+    virtual void detach(nw::lyt::AnimTransform *animation);
 };
 class LayoutAnimationOwner {
 public:
@@ -21,11 +21,11 @@ public:
     virtual unsigned childCount() const;
     virtual LayoutAnimationChild *child(unsigned index);
     unsigned char reserved04[0x18];
-    LayoutAnimationList animations;
+    nw::lyt::AnimationList animations;
 };
 
 extern "C" void func_0016b58c(LayoutAnimationOwner *owner,
-                              const LayoutAnimationTransform *animation)
+                              nw::lyt::AnimTransform *animation)
 {
     unsigned count = owner->childCount();
     for (unsigned index = 0; index < count; ++index) {

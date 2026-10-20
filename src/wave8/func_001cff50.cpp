@@ -1,7 +1,7 @@
 #include "game/layout.h"
 
-extern "C" LayoutAnimationLink *func_001cff50(
-    const LayoutPane *pane, const LayoutAnimationTransform *animation)
+extern "C" nw::lyt::AnimationLink *func_001cff50(
+    LayoutPane *pane, nw::lyt::AnimTransform *animation)
 {
-    return func_001cff58(&pane->animation_links, animation);
+    return nw::lyt::internal::FindAnimationLink(&pane->animation_links, animation);
 }
