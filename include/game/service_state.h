@@ -61,7 +61,8 @@ struct PendingState {
     unsigned char pending;
     signed char blocking;
     unsigned char graphics_active;
-    unsigned char reserved04[4];
+    unsigned char completion;
+    unsigned char reserved05[3];
     struct ServiceWaitObject *wait_object;
 };
 

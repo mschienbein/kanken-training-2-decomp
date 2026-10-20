@@ -1,48 +1,21 @@
 #include "game/service_runtime.h"
-struct DriverPayload {
-    float master_volume;
-    unsigned char reserved04[0x1c];
-    short route[2];
-    short gain[2];
-};
-struct DriverCommand {
-    unsigned flags;
-    struct DriverPayload parameters;
-};
+#include "game/audio_dsp.h"
 
-struct DriverSelection {
-    unsigned char reserved00[0x1322];
-    unsigned short command_index;
-};
-struct DriverCommandTable {
-    unsigned char reserved00[0x10a4];
-    struct DriverCommand *commands[];
-};
-/* The indexed table has no recovered bound; the selector is a second typed view. */
-union DriverContext {
-    struct DriverSelection selection;
-    struct DriverCommandTable table;
-};
-
-
-
-
-
-static __forceinline void set_gain(struct DriverPayload *parameters,
+static __forceinline void set_gain(struct VoiceDspPayload *parameters,
                                    int channel, short value)
 {
     parameters->gain[channel] = value;
 }
 
-int func_00180d10(union DriverContext *driver, int channel, short value)
+int func_00180d10(struct ServiceCoordinator *driver, int channel, short value)
 {
-    struct DriverCommand *command;
+    struct VoiceDspParameters *command;
     func_00182210();
     if (!func_0018f018()) {
         func_00182204();
         return 0;
     }
-    command = driver->table.commands[driver->selection.command_index];
+    command = driver->voice[driver->completion_slot];
     /* ORIGINAL BUG: the channel is used for the write before the switch. */
     set_gain(&command->parameters, channel, value);
     switch (channel) {

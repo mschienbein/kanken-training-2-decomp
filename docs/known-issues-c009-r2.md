@@ -832,4 +832,32 @@ successful r4 proofs are history, not relabeled as these r5 measurements.
 findings, four new deferrals, preserved identities, actual float protocol and
 the completed reproof. No heavy gate or heavy-slot request was run; Main's
 go-ahead is still required before interfaces/argcheck/prepare/suite.
+### Services type-model foundation (types-services; not acceptance)
+
+The services foundation applies complete current-ledger cuts for the input-service
+aggregate and its real touch subobject, the typed coordinator/voice/channel DSP
+tables, the driver payload and signed fallback bytes, the graphics relay/context,
+the filesystem runtime owner, signed scheduler enable state, and pending completion.
+The relay header is one real word; representation-copy publication replaces its
+union without changing the exclusive-access protocol. Native RectDrawer keeps its
+accepted identity and layout, with the target-evidenced byte-cursor virtual slots
+added alongside the existing public void flag methods.
+
+Three ownership groups are explicitly **not** claimed closed. ResourceServiceState
+and SharedMemoryMapping are restored as complete groups to their prior accepted
+forms after natural aggregate/member projections failed exact matching. The resource
+cleanup requires both a separately materialized member address and base-relative
+access to the same handle: its likely aggregate needs an exact natural source-form
+witness before the scalar-session migration can land. G08 additionally lacks a
+proved relationship between the six-word constructor and accepted native
+`nw::font::RectDrawer::Finalize`; constructor zero stores are not capacity/count
+or hierarchy evidence. No second native name, alias, cast, or replacement provider
+is admitted. The original c009 G08 deferrals therefore remain deferred.
+
+The dated model amendments, complete reverted-unit lists, exact failed attempts,
+header hunks, fresh dependency witnesses, and later-checkpoint re-entry conditions
+are recorded in `scratch/integrator/types-services/AMENDMENTS-2026-10-20.json`,
+`HANDOFF.json`, `WITNESS-INDEX.json`, and `REMAINING.json`. No full build, suite,
+whole-ledger interface/argument audit, prepare, independent review, or acceptance
+credit is asserted by this foundation.
 

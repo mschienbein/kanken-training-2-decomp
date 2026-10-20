@@ -2,7 +2,7 @@
  * NintendoWare4Ctr contributors; upstream include/nw/font/font_RectDrawer.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: standalone include paths; evidence-backed byte-cursor virtual overloads.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -70,7 +70,12 @@ public:
     virtual ~RectDrawer();
     virtual void Finalize();
     virtual void DrawBegin(u32 flag = 0);
+    /* [INFERENCE] This game's library revision adds byte-cursor overloads.
+     * Table224bf8 slots4/6 and callers001dadc4/001dacc0 evidence the
+     * consumed pointer result and full-width flags; public flag methods stay void. */
+    virtual u8* DrawBegin(u8* cursor, u32 flag);
     virtual void DrawEnd(u32 flag = 0);
+    virtual u8* DrawEnd(u8* cursor, u32 flag);
 protected:
     u32 GetVertexIndexAddressOffset(u32 vtxNum) const;
     const u32* GetDrawCommands() const;

@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-20",
+  "theme": "services",
+  "base": "be8aa40",
+  "authority": "Main explicit ownership-group deferral and native virtual-slot decisions during TypesServicesCodex assignment; no gate/profile/model changes.",
+  "original_research_binding": {
+    "model_document": {
+      "path": "scratch/research/type-models/services/MODEL.md",
+      "sha256": "bbd3ba001fffbbbf647ae13afeac8edf47f9116574df1a601da7d55a082fce26"
+    },
+    "evidence_document": {
+      "path": "scratch/research/type-models/services/EVIDENCE.json",
+      "sha256": "86af86804e6e068d488fedbdefafffc80953257a5e4c5adb00ade39ecfa60500"
+    }
+  },
+  "current_research_bindings": [
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/research/type-models/services/MODEL.md",
+      "sha256": "1ab586397625744aa8abf46827e538d1257380dad4a80b9a00d2d791dc10686e"
+    },
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/research/type-models/services/EVIDENCE.json",
+      "sha256": "6d07311e947cbd19bed5164d942bf9415db6f5e70872bd14b0d2fb8f4c486b93"
+    },
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/research/type-models/services/MIGRATION.json",
+      "sha256": "94313596d46ede99f11cf76c2f5365732de5a2c9b72c141ee7fe24220803402f"
+    }
+  ],
+  "amendments": [
+    {
+      "subject": "G08 / P03 native RectDrawer identity",
+      "disposition": "complete proposed family migration withdrawn; existing source families retained, except authorized native virtual declaration refinement",
+      "canonical_provider": {
+        "source": "src/nw4c/font_RectDrawer.cpp",
+        "function": "func_001dace8",
+        "native_name": "_ZN2nw4font10RectDrawer8FinalizeEv",
+        "effects": [
+          "clear pointer m_CommandBuffer at+0x678",
+          "clear pointer m_VertexBufferArray at+0x67c"
+        ]
+      },
+      "supporting_hierarchy_evidence": [
+        "table00224bf8+8 names accepted native RectDrawer::Finalize001dace8",
+        "compatible prefix and+0x678/+0x67c pointer locations",
+        "zero-word at+0x684 may cover native bool plus padding, not an unsigned active field"
+      ],
+      "contradicting_or_unclosed_evidence": [
+        "00116eb0 installs00224bf8 and calls member initializer00123b38 twice; it does not call out-of-line three-tail constructor0010cc0c",
+        "0010cc0c installs00223d4c and calls001149a8 twice",
+        "00116eb0 zero stores at+0x688/+0x68c and byte+0x690 need a target-version owner; zero stores do not prove counts, capacity, or hierarchy"
+      ],
+      "withdrawn_claims": [
+        "new canonical InputStorageBase class distinct from RectDrawer",
+        "InputDeviceState->DrawCommandState native hierarchy asserted from prefix alone",
+        "capacity at+0x67c",
+        "unsigned active object at+0x684",
+        "nonvoid flag-dispatcher result assumption overriding canonical public void methods"
+      ],
+      "deciding_evidence": [
+        "exact natural00116eb0 witness under the proposed native owner while preserving canonical RectDrawer and constructor/member calls",
+        "or independent proof of folded helper/constructor identities"
+      ],
+      "new_native_bindings": [],
+      "native_constructor_experiment_executed": false,
+      "authorized_header_refinement": {
+        "header": "include/nw/font/font_RectDrawer.h",
+        "slots": [
+          "D1/D0 unchanged",
+          "Finalize unchanged",
+          "public void DrawBegin(u32) unchanged",
+          "byte-cursor DrawBegin(u8*,u32) added",
+          "public void DrawEnd(u32) unchanged",
+          "byte-cursor DrawEnd(u8*,u32) added"
+        ],
+        "qualification": "[INFERENCE] Game library revision; consumed cursor results and full-width flags are evidenced by table/dispatcher/provider accesses. No emitted vtable or absent destructor binding is introduced."
+      }
+    },
+    {
+      "subject": "P01 ResourceServiceState",
+      "disposition": "complete family restored to existing accepted forms under Main authority",
+      "physical_fact_retained": "session publication stores pointer00242b10, a copied scalar handle, into00242b04; this does not admit a cast or second native wrapper.",
+      "source_form_evidence": [
+        "single0x24 aggregate direct projections:132/144B,+0x4",
+        "aggregate held member-pointer forms:140/144B or136/144B",
+        "0x10 prefix plus separate objects:144/144B,+0x49, still not exact",
+        "single aggregate held member read plus base-relative write:136/144B,+0x0",
+        "single aggregate natural typed close helper:132/144B,+0x4"
+      ],
+      "interpretation": "[INFERENCE] The aggregate remains likely right. Original cleanup needs an independently materialized interior handle address at base+0x18 and base-relative access to the same storage. Both aggregate and split-prefix experiments leave a source-form gap; they do not establish separate ownership.",
+      "reverted_sources": [
+        "src/sdk/func_0012192c.c",
+        "src/wave13/func_00182204.c",
+        "src/wave13/func_00182210.c",
+        "src/wave13/func_0018f018.c",
+        "src/wave18/func_00145e08.cpp",
+        "src/wave18/func_00145e84.cpp",
+        "src/wave18/func_00145eb0.cpp",
+        "src/wave18/func_00146008.cpp",
+        "src/wave18/func_00148014.cpp",
+        "src/retries/func_0013e770.c"
+      ],
+      "reverted_source_functions": 10,
+      "reverted_source_target_bytes": 516,
+      "reverted_header_hunks": [
+        "ResourceServiceState/ServiceHandle and data00242b0c/data00242b14 declarations in service_runtime.h",
+        "0013e770 publication-output byte declaration in service_state.h"
+      ],
+      "reentry_condition": "Fresh exact0012192c under one canonical aggregate using actual member addresses and base-relative member writes, with no separate interior-symbol declaration, cast, alias, qualifier/profile/model change, or steering; then reprove every family provider and consumer atomically."
+    },
+    {
+      "subject": "P10 SharedMemoryMapping handle ownership",
+      "disposition": "complete group restored unchanged",
+      "reverted_sources": [
+        "src/sdk/func_0010bf88.c"
+      ],
+      "reverted_headers": [
+        "include/game/shared_memory.h"
+      ],
+      "failed_forms": [
+        "direct actual-member pointer:76/80B,+0x9",
+        "held actual-member pointer:80/80B,+0x8",
+        "scoped actual-member pointer:76/80B,+0x9"
+      ],
+      "reentry_condition": "Resolve natural actual-member construction and obtain exact0010bf88 while atomically removing the standalone interior-symbol access. Existing scalar/native initializer ownership may not be replaced merely from equal size."
+    }
+  ],
+  "record_only": [
+    {
+      "subject": "svcWaitSynchronization1 reserved-r1 spelling",
+      "change_authorized": false,
+      "changes_made": false
+    },
+    {
+      "subject": "CommandSystem counters",
+      "decision": "retain nonvolatile signed counters and void(int) callbacks; no concurrency proof supplied"
+    }
+  ]
+}

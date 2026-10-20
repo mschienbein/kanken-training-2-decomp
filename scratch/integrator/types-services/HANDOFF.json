@@ -1,0 +1,979 @@
+{
+  "schema_version": 1,
+  "theme": "services",
+  "branch": "types-services",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-services",
+  "base_commit": "be8aa40",
+  "status": "complete-within-Main-authorized-family-landing-boundary; ownership deferrals explicit",
+  "model": "openai-codex/gpt-6.1-sol; no fallback",
+  "commit_author": "mschienbein <mschienbein@users.noreply.github.com>",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gates": "docs/GATES.md frozen v1.19 unchanged",
+  "counts": {
+    "source_edited_units": 15,
+    "source_edited_functions": 15,
+    "source_edited_accepted_units": 10,
+    "source_edited_accepted_functions": 10,
+    "accepted_dependent_units": 825,
+    "accepted_dependent_functions": 854,
+    "candidate_dependent_functions": 366,
+    "witness_primary_units": 1191,
+    "witness_helper_only_units": 9,
+    "required_units": 1200,
+    "required_functions": 1220,
+    "restored_functions": 0,
+    "restored_bytes": 0,
+    "changed_headers": 10,
+    "source_edited_target_bytes": 1344,
+    "source_edited_accepted_target_bytes": 864,
+    "header_hunks": 15,
+    "required_target_bytes": 192960,
+    "final_actual_exit": 0,
+    "final_match_primary_units": 1191,
+    "final_required_match_functions": 1220,
+    "distinct_extra_source_units": 16,
+    "all_recorded_commands": 2436,
+    "all_recorded_exit_counts": {
+      "0": 2418,
+      "1": 16,
+      "2": 2
+    }
+  },
+  "landed_models": [
+    {
+      "family": "InputService",
+      "change": "One0x48 service aggregate with actual touch/sensor/motion/auxiliary subobjects and canonical MappedMemoryBlock; accepted touch getter returns real .touch, not an overlapping global."
+    },
+    {
+      "family": "ServiceCoordinator / DSP",
+      "change": "One aggregate with typed status/voice/reply/channel/descriptor/coefficient tables, distinct VoiceDspParameters and ChannelDspParameters, actual embedded driver payload; no150-pointer or DriverContext union. Full public integer/short/result contracts and write-before-channel-switch bug preserved."
+    },
+    {
+      "family": "InputSessionContext",
+      "change": "Expose signed fallback bytes+0x30 and preserve mutex+0x34 and signed-char public index."
+    },
+    {
+      "family": "GraphicsContext / relay",
+      "change": "Actual relay+0x30, mapping+0x38, two display pointers+0x5c and completion+0x64; actual word header and union-free representation-copy exclusive-access publication. Scalar reset result / full int relay formal published."
+    },
+    {
+      "family": "FilesystemGlobals",
+      "change": "One runtime global with activity bytes, distinct opaque factory-pool pointer+4, current device+8, guard+0xc, scalar session+0x10 and interval+0x18. Only current-ledger consumer migrated; pool lifetime/generic result remains deferred."
+    },
+    {
+      "family": "ScheduledTask / PendingState",
+      "change": "Signed enabled halfword; existing binding and int(void) C callback protocol intentionally retained. Completion byte+4 exposed in PendingState."
+    },
+    {
+      "family": "Native RectDrawer declaration",
+      "change": "Canonical native identity/layout preserved; evidenced byte-cursor virtual overload slots added, existing public void flag methods preserved. No new name, provider, destructor body, or hierarchy admitted."
+    }
+  ],
+  "source_edited_units": [
+    {
+      "source": "src/wave13/func_00148800.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148800"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00148854.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148854"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_001488bc.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001488bc"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_0014891c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0014891c"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00148988.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148988"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_001489e8.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001489e8"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00148a3c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148a3c"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00152560.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00152560"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_001549d8.c",
+      "profile": "game",
+      "functions": [
+        "func_001549d8"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_0010c12c.c",
+      "profile": "game",
+      "functions": [
+        "func_0010c12c"
+      ],
+      "author": "w13i",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/command_group.h",
+        "include/game/input.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/sdk/func_00137b48.c",
+      "profile": "game",
+      "functions": [
+        "func_00137b48"
+      ],
+      "author": "c009-sdk",
+      "origin": "candidate",
+      "reasons": [
+        "include/game/graphics_state.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave15/func_0010bc70.c",
+      "profile": "game",
+      "functions": [
+        "func_0010bc70"
+      ],
+      "author": "c009-wave15",
+      "origin": "candidate",
+      "reasons": [
+        "include/game/filesystem.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave15/func_00180c84.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00180c84"
+      ],
+      "author": "c009-wave15",
+      "origin": "candidate",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave15/func_00180d10.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00180d10"
+      ],
+      "author": "c009-wave15",
+      "origin": "candidate",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave15/func_00180e14.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00180e14"
+      ],
+      "author": "c009-wave15",
+      "origin": "candidate",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    }
+  ],
+  "revised_accepted_source_units": [
+    {
+      "source": "src/wave13/func_00148800.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148800"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00148854.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148854"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_001488bc.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001488bc"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_0014891c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0014891c"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00148988.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148988"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_001489e8.c",
+      "profile": "middleware",
+      "functions": [
+        "func_001489e8"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00148a3c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00148a3c"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_00152560.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00152560"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_001549d8.c",
+      "profile": "game",
+      "functions": [
+        "func_001549d8"
+      ],
+      "author": "w13d",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/audio_dsp.h",
+        "include/game/input.h",
+        "include/game/service_runtime.h"
+      ],
+      "source_edited": true
+    },
+    {
+      "source": "src/wave13/func_0010c12c.c",
+      "profile": "game",
+      "functions": [
+        "func_0010c12c"
+      ],
+      "author": "w13i",
+      "origin": "accepted",
+      "reasons": [
+        "include/game/command_group.h",
+        "include/game/input.h"
+      ],
+      "source_edited": true
+    }
+  ],
+  "revised_accepted_dependency_scope": {
+    "units": 825,
+    "functions": 854,
+    "scope_record": "WITNESS-INDEX.json:required_scope"
+  },
+  "headers": [
+    {
+      "header": "include/game/audio_dsp.h",
+      "base_sha256": "b4ad34fc22440904a3562de6b434304cb3c4bd65b9a15254ceb496004bcaedee",
+      "sha256": "939b4cb53bd9bb77e4637c25d47a8da3a562ff7401620aef88c63a9f98620bc4",
+      "hunks": [
+        {
+          "range": "@@ -1,30 +1,49 @@\n",
+          "lines": [
+            " #ifndef GAME_AUDIO_DSP_H",
+            " #define GAME_AUDIO_DSP_H",
+            " ",
+            "-struct AudioDspParameterBlock;",
+            "+struct VoiceDspParameters;",
+            "+struct ChannelDspParameters;",
+            " struct AudioDspReply;",
+            " ",
+            " #include \"game/runtime.h\"",
+            " ",
+            " /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */",
+            "-struct AudioDspParameterBlock {",
+            "-    unsigned int flags;",
+            "+/* [INFERENCE] Source representation of the address-taken parameter body at",
+            "+ * voice+0x04; route/gain retain body offsets+0x20/+0x24. */",
+            "+struct VoiceDspPayload {",
+            "     float master_volume;",
+            "     unsigned char reserved08[8];",
+            "     unsigned short value10;",
+            "     unsigned char reserved12[4];",
+            "-    unsigned short value16;",
+            "-    unsigned short value18;",
+            "-    unsigned short value1a;",
+            "-    unsigned short value1c;",
+            "-    unsigned char reserved1e[4];",
+            "+    unsigned short value16, value18, value1a, value1c, value1e;",
+            "+    unsigned char reserved20[2];",
+            "     unsigned short value22;",
+            "-    unsigned char reserved24[0x7c];",
+            "-    unsigned short valuea0;",
+            "-    unsigned char reserveda2[0x1a];",
+            "+    short route[2], gain[2];",
+            "+};",
+            "+struct VoiceDspParameters {",
+            "+    unsigned flags;",
+            "+    struct VoiceDspPayload parameters;",
+            "+    unsigned char reserved2c[0xbc - 0x2c];",
+            "     unsigned short valuebc;",
+            "     unsigned char reservedbe[2];",
+            "     unsigned int flagsc0;",
+            "+};",
+            "+",
+            "+/* These are channel-table pointees, not the voice-table object above. */",
+            "+struct ChannelDspParameters {",
+            "+    unsigned flags;",
+            "+    unsigned char reserved04[0x30];",
+            "+    float value;",
+            "+    unsigned char mode, option;",
+            "+    short value3a, first, second;",
+            "+    short coefficients[5];",
+            "+    unsigned char reserved4a[0xa0 - 0x4a];",
+            "+    unsigned char enabled, control_high;",
+            "+    short count;",
+            "+    unsigned char reserveda4[0xb0 - 0xa4];",
+            "+    unsigned parameter;",
+            "+    unsigned char reservedb4[8];",
+            "+    unsigned short options, identifier;",
+            " };",
+            " ",
+            " struct AudioDspReply {"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/command_group.h",
+      "base_sha256": "c0bfc31f9b58ea1459935431b4a91a73882d0c7fef6cb90afec37589de1519c3",
+      "sha256": "7d01e4b6d86fbd023a9ea715daebb42ed2c9447bc4593157caaaa4cbe379ced6",
+      "hunks": [
+        {
+          "range": "@@ -92,7 +92,6 @@\n",
+          "lines": [
+            " extern struct InputRegistrationState bss_004b4fc0;",
+            " extern void func_00113630(struct InputRegistrationState *state);",
+            " extern struct MainThreadRecord data_00242d78;",
+            "-extern struct TouchInputService bss_004b1fb8;",
+            " extern int func_0019ec14(struct SignalState *state);",
+            " extern struct PoolLink *func_0016a0d0(struct TaskQueueContext *context,",
+            "                                      struct TaskQueueNode *node);"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/graphics_state.h",
+      "base_sha256": "67b719b44e5cee45cf3bb0114d96a87b9883911d04bab98c61f99d0a6ff4fea0",
+      "sha256": "8489cfa660e379cbb4c40a535562a4a8d0992f70eb658d81427f1f925ac6fa9f",
+      "hunks": [
+        {
+          "range": "@@ -1,19 +1,32 @@\n",
+          "lines": [
+            " #ifndef GAME_GRAPHICS_STATE_H",
+            " #define GAME_GRAPHICS_STATE_H",
+            " #include \"ctr/svc.h\"",
+            "+#include \"game/memory_arena.h\"",
+            "+#include \"game/synchronization.h\"",
+            " ",
+            " struct DisplayBuffer {",
+            "     unsigned char reserved00;",
+            "     signed char active;",
+            " };",
+            " ",
+            "+/* [INFERENCE] Relay roles; constructor0012f65c installs this subobject at+30. */",
+            "+struct GraphicsRelayHeader { unsigned word; };",
+            "+struct GraphicsRelayRing {",
+            "+    unsigned reserved;",
+            "+    struct GraphicsRelayHeader *header;",
+            "+};",
+            " struct GraphicsContext {",
+            "-    unsigned char reserved00[0x5c];",
+            "-    /* Six pointer-sized storage slots fit before the status field. This bounds",
+            "-     * the recovered view, not the runtime's unrecovered logical buffer count. */",
+            "-    struct DisplayBuffer *buffers[6];",
+            "+    struct StreamMutex mutex;",
+            "+    unsigned char reserved0c[0x30 - 0x0c];",
+            "+    struct GraphicsRelayRing relay;",
+            "+    struct MappedMemoryBlock mapping;",
+            "+    unsigned char reserved54[8];",
+            "+    struct DisplayBuffer *buffers[2];",
+            "+    struct SignalState completion;",
+            "+    unsigned char reserved6c[8];",
+            "     unsigned char reserved74;",
+            "     signed char status;",
+            "+    unsigned char state, initialized;",
+            " };",
+            " ",
+            " struct GraphicsMutex { CtrHandle handle; };"
+          ]
+        },
+        {
+          "range": "@@ -39,6 +52,8 @@\n",
+          "lines": [
+            " extern struct GraphicsContext *func_001861c4(void);",
+            " extern struct GraphicsMutex *func_001861d4(void);",
+            " extern unsigned func_0012fab0(const struct GraphicsMutex *mutex);",
+            "+extern void func_00137b48(struct GraphicsRelayRing *ring, int enabled);",
+            "+extern CtrResult func_0012f5a0(void);",
+            " extern int func_001847f8(void);",
+            " extern int func_00187818(void);",
+            " #ifdef __cplusplus"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/input.h",
+      "base_sha256": "9fba515101802e867a68b8153432a535e10534662623e98601c5330ed5fa2951",
+      "sha256": "1521b2188661c710338335bf47f2cbd5d42d672fa73a1f10c373087dc6e6aab8",
+      "hunks": [
+        {
+          "range": "@@ -2,6 +2,8 @@\n",
+          "lines": [
+            " #define GAME_INPUT_H",
+            " ",
+            " #include <stdbool.h>",
+            "+#include \"ctr/svc.h\"",
+            "+#include \"game/memory_arena.h\"",
+            " ",
+            " struct InputController;",
+            " "
+          ]
+        },
+        {
+          "range": "@@ -13,9 +15,38 @@\n",
+          "lines": [
+            " };",
+            " ",
+            " struct ButtonRing;",
+            "+struct TouchRing;",
+            "+struct SensorRing;",
+            "+struct MotionRing;",
+            "+struct AuxiliaryInputRing;",
+            "+struct MotionInputVTable;",
+            "+struct TouchInputService {",
+            "+    CtrHandle handle;",
+            "+    const volatile struct TouchRing *ring;",
+            "+};",
+            "+struct SensorInputService {",
+            "+    CtrHandle handle;",
+            "+    const volatile struct SensorRing *ring;",
+            "+};",
+            "+struct MotionInputService {",
+            "+    const struct MotionInputVTable *vtable;",
+            "+    CtrHandle handle;",
+            "+    const volatile struct MotionRing *ring;",
+            "+};",
+            "+struct AuxiliaryInputService {",
+            "+    CtrHandle handle;",
+            "+    const volatile struct AuxiliaryInputRing *ring;",
+            "+};",
+            "+/* Initializer001f58d4 and cleanup001c5690 establish this complete aggregate;",
+            "+ * getter0010c12c returns its actual touch subobject at +8. */",
+            " struct InputService {",
+            "-    unsigned handle;",
+            "+    CtrHandle handle;",
+            "     const volatile struct ButtonRing *ring;",
+            "+    struct TouchInputService touch;",
+            "+    struct SensorInputService sensor;",
+            "+    struct MotionInputService motion;",
+            "+    struct AuxiliaryInputService auxiliary;",
+            "+    struct MappedMemoryBlock mapping;",
+            " };",
+            " ",
+            " struct InputReader {"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/input_runtime.h",
+      "base_sha256": "770fe4990b9c268785433e93fcd3b574cac096aecf66f88306f9ddfc7f063087",
+      "sha256": "f8a9519d29a22c62a4606c2e82c6e536355982d75c44adc21018d1688089ad7a",
+      "hunks": [
+        {
+          "range": "@@ -17,7 +17,9 @@\n",
+          "lines": [
+            "     float channels[2];",
+            "     AuxCallback callbacks[2];",
+            "     void *contexts[2];",
+            "-    unsigned char reserved24[0x10];",
+            "+    unsigned char reserved24[0x0c];",
+            "+    signed char fallback[2];",
+            "+    unsigned char reserved32[2];",
+            "     struct StreamMutex mutex;",
+            " };",
+            " struct ShortInputUpdate {"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/scheduler.h",
+      "base_sha256": "269fa4f1a5451ab5a3b84040c8038f9ead6619a91c6dbd4f31378fdfb381c399",
+      "sha256": "16977f0ff8d60dea7bf6f79de0201793aea88d0040db9f8dd50196b87cae78dd",
+      "hunks": [
+        {
+          "range": "@@ -15,7 +15,7 @@\n",
+          "lines": [
+            " typedef int (*ScheduledTaskCallback)(void);",
+            " struct ScheduledTaskBinding { ScheduledTaskCallback callback; int wait; };",
+            " struct ScheduledTask {",
+            "-    unsigned short enabled;",
+            "+    short enabled;",
+            "     short previous, next;",
+            "     unsigned short priority;",
+            "     struct ScheduledTaskBinding binding;"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/service_runtime.h",
+      "base_sha256": "2e19ea4fccbb5cccc760e875d63f98d3a71ad46fa2d37c904eb09365a22bae00",
+      "sha256": "606a843b0704f167974cc459f4ed435f81160ec9917578f796c695674a4983f7",
+      "hunks": [
+        {
+          "range": "@@ -2,7 +2,10 @@\n",
+          "lines": [
+            " #define GAME_SERVICE_RUNTIME_H",
+            " ",
+            " #include \"ctr/ipc.h\"",
+            "-struct AudioDspParameterBlock;",
+            "+struct VoiceDspParameters;",
+            "+struct ChannelDspParameters;",
+            "+struct ChannelDescriptor;",
+            "+struct AdpcmCoefficients;",
+            " struct AudioDspReply;",
+            " struct SignalState;",
+            " struct StreamCriticalSection;"
+          ]
+        },
+        {
+          "range": "@@ -95,15 +98,12 @@\n",
+          "lines": [
+            "     CtrHandle ready_event, completion_event;",
+            "     struct StreamMutex mutex;",
+            "     unsigned char reserved14[0x109c - 0x14];",
+            "-    union {",
+            "-        unsigned short *completion_slots[150];",
+            "-        struct {",
+            "-            unsigned short *reserved109c[2];",
+            "-            struct AudioDspParameterBlock *voice_parameters[2];",
+            "-            struct AudioDspReply *replies[2];",
+            "-            struct AudioDspParameterBlock *auxiliary_parameters[2][24];",
+            "-        } audio;",
+            "-    } storage;",
+            "+    unsigned short *status_records[2];",
+            "+    struct VoiceDspParameters *voice[2];",
+            "+    struct AudioDspReply *replies[2];",
+            "+    struct ChannelDspParameters *channels[2][24];",
+            "+    struct ChannelDescriptor *descriptors[2][24];",
+            "+    struct AdpcmCoefficients *coefficient_destinations[2][24];",
+            "     struct ServiceBufferPair buffers[5];",
+            "     unsigned char enabled, pending;",
+            "     unsigned short serial, current_buffer, completion_slot;"
+          ]
+        },
+        {
+          "range": "@@ -150,6 +150,8 @@\n",
+          "lines": [
+            " extern int func_0012f1c0(struct ServiceOutput *state);",
+            " extern void func_0012f1b4(struct HandleManager *state);",
+            " extern void func_0013e894(struct ServiceCoordinator *worker, int preserve);",
+            "+extern int func_00180c84(struct ServiceCoordinator *state, int channel, short value);",
+            "+extern int func_00180d10(struct ServiceCoordinator *state, int channel, short value);",
+            " extern CtrResult func_00142838(struct ServiceCoordinator *state, int enabled);",
+            " extern CtrResult func_001821f4(struct ServiceOutput *thread, int status);",
+            " extern struct ServiceWorker *func_00182f88(void);"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/service_state.h",
+      "base_sha256": "2bcf65e41800b0fce596a0834f2deb04435c2e2df0396b38fe06d382c1698c96",
+      "sha256": "6bbbc6dffe71a9de04396a7c5491d6932a6a4657a92337d563fdf21b4c16f902",
+      "hunks": [
+        {
+          "range": "@@ -61,7 +61,8 @@\n",
+          "lines": [
+            "     unsigned char pending;",
+            "     signed char blocking;",
+            "     unsigned char graphics_active;",
+            "-    unsigned char reserved04[4];",
+            "+    unsigned char completion;",
+            "+    unsigned char reserved05[3];",
+            "     struct ServiceWaitObject *wait_object;",
+            " };",
+            " "
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/nw/font/font_RectDrawer.h",
+      "base_sha256": "6622c59045bbd8cd7371d0b44180106ba621ab3dd5422497f2ad29d1f71535cc",
+      "sha256": "069d2549583c9c590979527a1f968e66541175dce12f9d7d59e511e02ce1db62",
+      "hunks": [
+        {
+          "range": "@@ -2,7 +2,7 @@\n",
+          "lines": [
+            "  * NintendoWare4Ctr contributors; upstream include/nw/font/font_RectDrawer.h",
+            "  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+            "  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+            "- * Modified 2026-10-17: public header unchanged except standalone relative include paths",
+            "+ * Modified 2026-10-20: standalone include paths; evidence-backed byte-cursor virtual overloads.",
+            "  * GNU GPL version 3; see LICENSE.txt.",
+            "  */",
+            " #pragma once"
+          ]
+        },
+        {
+          "range": "@@ -70,7 +70,12 @@\n",
+          "lines": [
+            "     virtual ~RectDrawer();",
+            "     virtual void Finalize();",
+            "     virtual void DrawBegin(u32 flag = 0);",
+            "+    /* [INFERENCE] This game's library revision adds byte-cursor overloads.",
+            "+     * Table224bf8 slots4/6 and callers001dadc4/001dacc0 evidence the",
+            "+     * consumed pointer result and full-width flags; public flag methods stay void. */",
+            "+    virtual u8* DrawBegin(u8* cursor, u32 flag);",
+            "     virtual void DrawEnd(u32 flag = 0);",
+            "+    virtual u8* DrawEnd(u8* cursor, u32 flag);",
+            " protected:",
+            "     u32 GetVertexIndexAddressOffset(u32 vtxNum) const;",
+            "     const u32* GetDrawCommands() const;"
+          ]
+        }
+      ]
+    },
+    {
+      "header": "include/game/filesystem.h",
+      "base_sha256": null,
+      "sha256": "121c36eadb458fb96297d7f59d01dcee138e609b3b687035d3d74cc0591a4f5c",
+      "hunks": [
+        {
+          "range": "@@ -0,0 +1,30 @@\n",
+          "lines": [
+            "+#ifndef GAME_FILESYSTEM_H",
+            "+#define GAME_FILESYSTEM_H",
+            "+",
+            "+#include \"ctr/svc.h\"",
+            "+",
+            "+struct FilesystemFactoryPool;",
+            "+struct MountedDevice;",
+            "+",
+            "+/* [INFERENCE] Field roles. Initializer0012e29c publishes factory pool004b1cb0",
+            "+ * at+4; the file-session and mounted-device pools are separate objects. */",
+            "+struct FilesystemGlobals {",
+            "+    unsigned char active, latched;",
+            "+    unsigned char reserved02[2];",
+            "+    struct FilesystemFactoryPool *pool;",
+            "+    struct MountedDevice *current;",
+            "+    volatile unsigned guard;",
+            "+    CtrHandle session;",
+            "+    unsigned reserved14;",
+            "+    long long interval;",
+            "+};",
+            "+",
+            "+#ifdef __cplusplus",
+            "+extern \"C\" {",
+            "+#endif",
+            "+extern struct FilesystemGlobals data_00242c18;",
+            "+#ifdef __cplusplus",
+            "+}",
+            "+#endif",
+            "+",
+            "+#endif"
+          ]
+        }
+      ]
+    }
+  ],
+  "shared_header_merge_notes": [
+    "input.h: only includes and InputService/touch/sensor/motion/auxiliary service declarations changed; preserve TypesMenuCodex InputOwner/InputGroup/PointerSample changes.",
+    "command_group.h: only bss_004b1fb8 declaration removed; preserve TypesSoundCodex ArchiveReader/001c540c native reader cleanup.",
+    "audio_voice.h, functions.h, scene_lifecycle.h, event_route.h, sound_track.h, heap_objects.h and input_device.h have no delivered services edits; preserve all sibling changes.",
+    "font_RectDrawer.h only modification notice and two virtual-cursor declarations; TypesFontGfxCodex confirmed no overlap.",
+    "service_runtime.h ResourceServiceState and its three address declarations remain exactly the old family contract; only coordinator tables/forwards and real driver declarations change."
+  ],
+  "restored_functions": [],
+  "restored_target_bytes": 0,
+  "candidate_rows_added": [],
+  "candidate_manifest_decision": "No c009t rows/file are created: neither current c009 G08 deferral nor the two older service carries is closed; c010/c011/cmodels2/c012 sources were intentionally untouched.",
+  "moves": [],
+  "new_names": [],
+  "ledger_changes": false,
+  "accepted_ownership_statement": "Every source definition retains its existing stable identity and ledger owner; no definition was added, removed or moved. No full emitted-owner audit was run here; Main must enforce it in integrated gates.",
+  "verification": {
+    "actual_exit": 0,
+    "method": "1191 sequential bounded tools/match.py --show0 primary invocations under each frozen unit profile, with explicit v6/L1 and inherited helper contexts; every one exits0.",
+    "required_scope_units": 1200,
+    "required_functions": 1220,
+    "affected_helper_only_units": 9,
+    "distinct_explicit_extra_source_files": 16,
+    "all_expected_functions_observed_MATCH": true,
+    "witness_index": {
+      "path": "scratch/integrator/types-services/WITNESS-INDEX.json",
+      "sha256": "bfdf4aefffc5c7e2a173033b0ebe5be60e5000fc739477edc4e41f12debf493f"
+    },
+    "historical_attempts": {
+      "commands": 2436,
+      "exit_counts": {
+        "0": 2418,
+        "1": 16,
+        "2": 2
+      },
+      "all_retained": true,
+      "final_and_historical_contexts_separated": true
+    },
+    "no_full_build_suite_interface_argcheck_prepare_finalize_or_review": true
+  },
+  "amendments": {
+    "path": "scratch/integrator/types-services/AMENDMENTS-2026-10-20.json",
+    "sha256": "ce0e26bfdd4d6c11bf5a63104972eec081b76a2de7c82ebf55ae9a9a7734616a"
+  },
+  "remaining": {
+    "path": "scratch/integrator/types-services/REMAINING.json",
+    "sha256": "bd3b450ccca56bfd0aaf61fc94d1be7c0c5ecb960188531b0ab7cbfa42f4d95a"
+  },
+  "reverted_resource_family_sources": [
+    "src/sdk/func_0012192c.c",
+    "src/wave13/func_00182204.c",
+    "src/wave13/func_00182210.c",
+    "src/wave13/func_0018f018.c",
+    "src/wave18/func_00145e08.cpp",
+    "src/wave18/func_00145e84.cpp",
+    "src/wave18/func_00145eb0.cpp",
+    "src/wave18/func_00146008.cpp",
+    "src/wave18/func_00148014.cpp",
+    "src/retries/func_0013e770.c"
+  ],
+  "reverted_resource_family_bytes": 516,
+  "still_blocked_current_c009_functions": [
+    {
+      "function": "func_001dacc0",
+      "size": 40
+    },
+    {
+      "function": "func_001dadc4",
+      "size": 40
+    },
+    {
+      "function": "func_00113c0c",
+      "size": 104
+    },
+    {
+      "function": "func_0018ee88",
+      "size": 56
+    }
+  ],
+  "later_reentry_summary": {
+    "c010_type_gaps_closable": [
+      "func_00141c74",
+      "func_001461e8",
+      "func_00135f1c"
+    ],
+    "c011_type_gaps_closable": [
+      "func_0012f5a0",
+      "func_001137c4",
+      "func_0014b244"
+    ],
+    "c012_initial_holds_covered_by_same_models": [
+      "func_001137c4",
+      "func_0014b244"
+    ],
+    "cmodels2_deferrals_closed": [],
+    "partial_only": [
+      "func_001c4de8 global owner; pool lifecycle/provider still blocked"
+    ],
+    "resource_and_G08_deferrals_closed": []
+  },
+  "main_required_checks": [
+    "Merge sibling type branches while preserving minimal shared-header hunks and c009-r4 additive fixes.",
+    "Run integrated required native/signature/header/interface/argument and unique emitted-owner checks.",
+    "Run the checkpoint-owned suite/two fresh full builds and independent reviews with explicit unchanged v6/L1; no acceptance credit follows from this branch alone."
+  ]
+}
