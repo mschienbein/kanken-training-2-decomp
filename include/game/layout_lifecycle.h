@@ -87,7 +87,6 @@ void func_0016b260(void *allocation);
 
 void func_00191aec(void *allocation);
 void *func_0016a998(void *object);
-void func_0016aa74(DisplayVertexArray *buffer);
 void func_001cf67c(W17TexturePane *pane);
 extern const W17LayoutVTable data_00224370;
 void func_001cfbcc(W17TexturePane *pane);
