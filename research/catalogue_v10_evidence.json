@@ -1,0 +1,1650 @@
+{
+  "baseline_catalogue": {
+    "blob": "babbff6901bbcaeb388cf305623aba587db5ad50",
+    "reference": "959311b:config/catalogue.json",
+    "revision": "catalogue-v9-r2",
+    "role": "adopted_baseline",
+    "sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64"
+  },
+  "closed_graph_owners": [
+    {
+      "behavior_cases": 1156,
+      "behavior_copy_and_abi_passes": 1156,
+      "behavior_witness": {
+        "report": "scratch/worktrees/catalogue-v10/scratch/closure/memory-graph-behavior-expanded.json",
+        "retained_harness": "scratch/integrator/thumb/abi_behavior.py",
+        "retained_harness_sha256": "431f870a7e32c56f3cde7004d839b7ae2927cbbf974f88b7c2d83120b39da4d5",
+        "script": "scratch/worktrees/catalogue-v10/scratch/closure/memory_graph_behavior.py",
+        "script_sha256": "f849715965974e77290c683325482036e18a66c6d200e398ed46e20afdc2710a",
+        "sha256": "c20d52b560c10fd9a8339945e714ec7924c389850c651359f04dfeecf723f583"
+      },
+      "closed_cfg_witness": {
+        "calls": 0,
+        "code_bytes": 924,
+        "end": 1633928,
+        "instructions": 231,
+        "issues": [],
+        "old_prologues_reached": {
+          "0x18ebf8": true,
+          "0x18ec7c": true
+        },
+        "open_exits": [],
+        "original_interval_sha256": "17211eaaaf8e9f5ca38b139f3d930ce0633000f771cc82387202a857bb6fd0e4",
+        "pool_bytes": 0,
+        "start": 1633004,
+        "tails": [
+          {
+            "address": 1632100,
+            "isa": "arm",
+            "site": 1633012
+          }
+        ]
+      },
+      "end": 1633928,
+      "image_interval_sha256": "17211eaaaf8e9f5ca38b139f3d930ce0633000f771cc82387202a857bb6fd0e4",
+      "legacy_owners": [
+        1633272,
+        1633404
+      ],
+      "original_entry_contract": "Original ARM entry at 0x0018eaec, incoming r0 destination/r1 source/r2 byte count: all 460 disjoint and 696 overlapping buffer cases return with exact memmove effects and preserved stack/callee-saved registers. Parameter/source/library identity remains [INFERENCE].",
+      "qualification": "All prior prologue labels survive as legacy secondary entries. The single recovered owner is conservatively multi_entry (topology-excluded), not proven non-C or library-owned. No accepted/proposed protected record changes; no matching source or C credit.",
+      "rule": "entry_connected_weak_prologue_group_v1",
+      "start": 1633004
+    }
+  ],
+  "classification_records": [
+    {
+      "address": 1116596,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "Bounded no-LR-save evidence under the inherited v8 standard: this original has no LR save; all 18 natural-source/profile outputs save LR and differ at +0. Raw r0-r3 C interfaces are representable. This is NOT a universal C-impossibility or authenticated SDK/library-identity proof.",
+      "evidence": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/{REPORT.md,positive-abi.json,compiler-grid.json,RESULTS.json}; exact function-specific raw service/output semantics and no LR save, with retained 18-cell natural shared-header C grid.",
+      "identity": "CreateAddressArbiter kernel output adapter",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "original_extent_sha256": "c0fb6bd4f95429c174695a1377282c1d10f50a56c73c20827ba8f8616f5908e2",
+      "positive_constraints": {
+        "callee_saved_core_preserved": true,
+        "external_word_stores": [
+          {
+            "bytes": 4,
+            "destination": "entry.r0+0",
+            "value": "svc.handle"
+          }
+        ],
+        "final_stack_delta": 0,
+        "lr_saved_to_stack": false,
+        "maximum_stack_bytes": 4,
+        "original_extent_sha256": "c0fb6bd4f95429c174695a1377282c1d10f50a56c73c20827ba8f8616f5908e2",
+        "returned_r0": "svc.result",
+        "returns_to_entry_lr": true,
+        "service": "0x21",
+        "svc_inputs": {
+          "r0": "entry.r0",
+          "r1": "entry.r1",
+          "r2": "entry.r2",
+          "r3": "entry.r3"
+        }
+      },
+      "proof_status": "Retained KernelStubProof ABI/compiler research, not rerun by CatalogueClosure. Unadopted function-specific proposal; independent review required. Historical SDK/handwritten authorship remains [INFERENCE].",
+      "qualification": "The original's exact no-LR-save constraint and complete output semantics are positive evidence. The finite source/profile grid does not prove that every possible approved C spelling/compiler setting fails. Until independent review and integrator adoption, retain ordinary creditability, original identity/extent/ranges and all caller evidence.",
+      "retained_compiler_cells": [
+        {
+          "candidate_size": 32,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O0-time/func_001109b4.o",
+          "object_sha256": "a2f689e9823dc04d2a290586d47ad89f3a676df1edcf84a6da9443775d43bedc",
+          "profile": "proof-armcc_40_821-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O0-time/func_001109b4.result.json",
+          "receipt_sha256": "93ecbbc03233bd9553bdeb09b8ee44090dcabc021bef039b1bfe4c2d8429dd82",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O2-time/func_001109b4.o",
+          "object_sha256": "9b8d4596ae81549303a4ef9ff752bc3f9d58c4c60cf931c27988858383203238",
+          "profile": "proof-armcc_40_821-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O2-time/func_001109b4.result.json",
+          "receipt_sha256": "33d77e857e6a5a43655415f9e280621731d631cf4943bdeded43277bff81cf8e",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O3-space/func_001109b4.o",
+          "object_sha256": "84ee6b88d65369a0f27fc3fddec231eac9ff49faeb592fcf477293d9bcb72a6d",
+          "profile": "proof-armcc_40_821-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O3-space/func_001109b4.result.json",
+          "receipt_sha256": "5c04b97483cade6b7af16f27f141d2dab44328c8c106f32ce71cc0ac3bdf4e11",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O3-time/func_001109b4.o",
+          "object_sha256": "7c4b12ca121b753e4044f64e005977e253c39e8614063914338a5812c6ca4681",
+          "profile": "proof-armcc_40_821-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_40_821-O3-time/func_001109b4.result.json",
+          "receipt_sha256": "cc2ca2c976158b20dee0b6967220706736c1759a77a89dfff2240255cdaaa456",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 32,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O0-time/func_001109b4.o",
+          "object_sha256": "aa25674fa50c662e19fd8bc087e773423d0434f68f3ecf052fd065f4f1217c67",
+          "profile": "proof-armcc_41_1049-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O0-time/func_001109b4.result.json",
+          "receipt_sha256": "fa11a8946222879069accfa9be7231de5e8771ce7174d56a80a23a947e711f19",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O2-time/func_001109b4.o",
+          "object_sha256": "0ef02f1c9d047ae28d060e2b43f81147e7606e93f3b8434bcbf55f0c28e2a997",
+          "profile": "proof-armcc_41_1049-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O2-time/func_001109b4.result.json",
+          "receipt_sha256": "59a8227ce22db2e5ef01339110b426f8e03482e84f1c441886c37f27d732b342",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O3-space/func_001109b4.o",
+          "object_sha256": "53c08abb5222775405d4f7b8e7d424f4df87db8d313bc79610612212af3781e2",
+          "profile": "proof-armcc_41_1049-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O3-space/func_001109b4.result.json",
+          "receipt_sha256": "6902593094a94dbbb44ba5b907ac1e52f59f9f3a5dd1981076b30ec8790124f8",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O3-time/func_001109b4.o",
+          "object_sha256": "4c87e6c9d876279870b6c0db66f3c6f4419de13b4c9d5ae0ea95f3465fbe003e",
+          "profile": "proof-armcc_41_1049-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1049-O3-time/func_001109b4.result.json",
+          "receipt_sha256": "c527c7c33bac7ec4eddf2de7fc6e6c367a964ee9d76b8847a23ba1dac6daa3bf",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 32,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O0-time/func_001109b4.o",
+          "object_sha256": "05d45822b10677a61ea311c9f40f40dc7a116c53e19204f60e35980eb889f8ce",
+          "profile": "proof-armcc_41_1440-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O0-time/func_001109b4.result.json",
+          "receipt_sha256": "a79ff8dda79c46fbd0a1d4b50f840747cc128691cea1321d6631c6741dcadaed",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O2-time/func_001109b4.o",
+          "object_sha256": "10ad9fe7a0913ebf46c88eb8956654f9ca921a9fbdd0f927d45b48aa58ce7485",
+          "profile": "proof-armcc_41_1440-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O2-time/func_001109b4.result.json",
+          "receipt_sha256": "bf5fad4f8f447e602a6119d26e096e1c6e13edbb8596232d693b58a7a1c56235",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O3-space/func_001109b4.o",
+          "object_sha256": "09388ffa82b24811aca4d6a3f153bd7efa296d54a58da5bdafc4b8e174d24a03",
+          "profile": "proof-armcc_41_1440-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O3-space/func_001109b4.result.json",
+          "receipt_sha256": "bfb955695f01c90ea0a48cd9e2cc398b8af1fc697f449e5216c800dca81e1a39",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O3-time/func_001109b4.o",
+          "object_sha256": "c3bd29955ed0a2ca2104db6a19e54771dfd7f113256e00976bc89c34bb7dec84",
+          "profile": "proof-armcc_41_1440-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_41_1440-O3-time/func_001109b4.result.json",
+          "receipt_sha256": "d8145725550e693933fa914c95d548e48d7333f3d48033982046254df989e9ef",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 32,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_504_82-O0-time/func_001109b4.o",
+          "object_sha256": "0c2c6fd7ec3fa38076b3c7a60c23a645bbb8b4bed562f7f374369dae916d4b70",
+          "profile": "proof-armcc_504_82-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_504_82-O0-time/func_001109b4.result.json",
+          "receipt_sha256": "347a087447bfbd344ff7f4907e0b8ecb00123b3caeaad2e69f8e4159221671b8",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_504_82-O2-time/func_001109b4.o",
+          "object_sha256": "4ff58455c13a16ddb708a3cc0324ea4462e3884bb769af3e4fe84b4eff9ab206",
+          "profile": "proof-armcc_504_82-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_504_82-O2-time/func_001109b4.result.json",
+          "receipt_sha256": "b41164be4203ba73acda313ba8f1d058210ae09382cf9df9eff935acdbb6cdac",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_504_82-O3-space/func_001109b4.o",
+          "object_sha256": "b105b62ade5ee6c7dfd1d4b2ab1857fcc6df3adef17f45208a6a1870fc0be358",
+          "profile": "proof-armcc_504_82-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/proof-armcc_504_82-O3-space/func_001109b4.result.json",
+          "receipt_sha256": "ae055c0a3df492a336a0db45409422dc662aedda8cc71881a98876bb443d2f6c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/game/func_001109b4.o",
+          "object_sha256": "cc1095c238750f106ce064e279a6bef83d644e14b9255d0a8091a11ebfff789b",
+          "profile": "game",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/game/func_001109b4.result.json",
+          "receipt_sha256": "1c68ab4d76f2d57ed9d90ffcfc970085ab7169bdc3f575b3a468990b5f3a2ba0",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/sdk/func_001109b4.o",
+          "object_sha256": "b9a18108ea6c46e50a865c30fc387de49b4fb6c35feecb26340832b142c1d4af",
+          "profile": "sdk",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/sdk/func_001109b4.result.json",
+          "receipt_sha256": "841e865492a9c8d4fabe6fd17a0ec691d92ca65cd3aa636712da2e477cdc9ef4",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 20,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/middleware/func_001109b4.o",
+          "object_sha256": "e24494123d65ec97eed1f4e35c9b85e7f6a081a02b0fe35cd2038818afb4191a",
+          "profile": "middleware",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_001109b4/middleware/func_001109b4.result.json",
+          "receipt_sha256": "27b04b02c48641762c796dc51ae2c707bbcc79a975a3c6dcccfef20ae64c558b",
+          "status": "mismatch"
+        }
+      ],
+      "size": 24,
+      "source": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/src/func_001109b4.c",
+      "source_sha256": "6df2ab114f15bc867de89cd61a14fcbbb2538cd6d7b656f1a25019f5a037ceb5"
+    },
+    {
+      "address": 1175384,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "Bounded no-LR-save evidence under the inherited v8 standard: this original has no LR save; all 18 natural-source/profile outputs save LR and differ at +0. Raw r0-r3 C interfaces are representable. This is NOT a universal C-impossibility or authenticated SDK/library-identity proof.",
+      "evidence": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/{REPORT.md,positive-abi.json,compiler-grid.json,RESULTS.json}; exact function-specific raw service/output semantics and no LR save, with retained 18-cell natural shared-header C grid.",
+      "identity": "SleepThread kernel no-LR-frame entry",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "original_extent_sha256": "a424f8b938aa4919842c18cf173c854c6412bacc5bf48ff0abbb7164e69ec507",
+      "positive_constraints": {
+        "callee_saved_core_preserved": true,
+        "external_word_stores": [],
+        "final_stack_delta": 0,
+        "lr_saved_to_stack": false,
+        "maximum_stack_bytes": 0,
+        "original_extent_sha256": "a424f8b938aa4919842c18cf173c854c6412bacc5bf48ff0abbb7164e69ec507",
+        "returned_r0": "void contract; scratch output unspecified",
+        "returns_to_entry_lr": true,
+        "service": "0x0a",
+        "svc_inputs": {
+          "r0": "entry.r0",
+          "r1": "entry.r1",
+          "r2": "entry.r2",
+          "r3": "entry.r3"
+        }
+      },
+      "proof_status": "Retained KernelStubProof ABI/compiler research, not rerun by CatalogueClosure. Unadopted function-specific proposal; independent review required. Historical SDK/handwritten authorship remains [INFERENCE].",
+      "qualification": "The original's exact no-LR-save constraint and complete output semantics are positive evidence. The finite source/profile grid does not prove that every possible approved C spelling/compiler setting fails. Until independent review and integrator adoption, retain ordinary creditability, original identity/extent/ranges and all caller evidence.",
+      "retained_compiler_cells": [
+        {
+          "candidate_size": 40,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O0-time/func_0011ef58.o",
+          "object_sha256": "a36087e8fbbc0bccf99d3aa59782b3a839a4164cdb77a07c2a968e0efe53b984",
+          "profile": "proof-armcc_40_821-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O0-time/func_0011ef58.result.json",
+          "receipt_sha256": "715e4c0b1c003397ef33a277c636194cc0652512c0a36fd002bebe3940936463",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O2-time/func_0011ef58.o",
+          "object_sha256": "333d448b88cfa02fed5cd0b3f608283f419954ed65431c7b71b32d1764e79b5b",
+          "profile": "proof-armcc_40_821-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O2-time/func_0011ef58.result.json",
+          "receipt_sha256": "8e162835cc02b0629f6e5b9b33a6cb91139e207ba2681cdaf49a028dafa19fb0",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O3-space/func_0011ef58.o",
+          "object_sha256": "9a4643c3cc3932df3cc03c7f1eff0cb9e9a838c662ab195b7e470f9ca4cd3e66",
+          "profile": "proof-armcc_40_821-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O3-space/func_0011ef58.result.json",
+          "receipt_sha256": "f4b5ce50a420eac56b1366b883996a970afa581dbd2d6947b943fc2ecc945d16",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O3-time/func_0011ef58.o",
+          "object_sha256": "3a047091d173c7812125e6b50a9f0e5b0876a8a767670cdee096f496b0f6e431",
+          "profile": "proof-armcc_40_821-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_40_821-O3-time/func_0011ef58.result.json",
+          "receipt_sha256": "ba8488949b564df9b31b4c417e71cd8057bd3108c553f842a1bab840602ed3ab",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 28,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O0-time/func_0011ef58.o",
+          "object_sha256": "bfa59d6781ed09ef243c9417fce3f604421c3cbd87ec9cfea0b3cf242a1908c5",
+          "profile": "proof-armcc_41_1049-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O0-time/func_0011ef58.result.json",
+          "receipt_sha256": "3aa4ddefffa8d5163b0474d2d31d6ee4c29b4e50927c74c79fcc5820ba8f7a2c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O2-time/func_0011ef58.o",
+          "object_sha256": "d46a9389b7d75ab65a3ddd1fb27dcb73f4e45d3e685d3adf23407daf85c17cad",
+          "profile": "proof-armcc_41_1049-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O2-time/func_0011ef58.result.json",
+          "receipt_sha256": "97aeb102e5fca53835ef1c86ed348916e834c064e0d371faad038203306bce3e",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O3-space/func_0011ef58.o",
+          "object_sha256": "f9701de293263b9ec4aef98941669856de1b1df9185320378e3b4017218d8777",
+          "profile": "proof-armcc_41_1049-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O3-space/func_0011ef58.result.json",
+          "receipt_sha256": "e701e8099327d3cddceeb87dac469e2bacdc89deaea4edcd84c5c0a17c28e011",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O3-time/func_0011ef58.o",
+          "object_sha256": "d69532cd05b0a72af435621335e63b1ee17d799769ab464e5134d28473fbca38",
+          "profile": "proof-armcc_41_1049-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1049-O3-time/func_0011ef58.result.json",
+          "receipt_sha256": "5ae9f56512661b1f606c75bc4a83af177375a28481c0b134914d2bd5fc1b802e",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 28,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O0-time/func_0011ef58.o",
+          "object_sha256": "8145dc7bd5692f8828590c27779a12d444f1ac038f3e06d36702ef08e4cdc105",
+          "profile": "proof-armcc_41_1440-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O0-time/func_0011ef58.result.json",
+          "receipt_sha256": "8a3569975d33a26f4076349df63e9ca826a7a3d45020adf05d4804cecca38b64",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O2-time/func_0011ef58.o",
+          "object_sha256": "2417ceba587d43311fba317b4081b7ab6a7c1944da8aa5866a69bb610d145804",
+          "profile": "proof-armcc_41_1440-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O2-time/func_0011ef58.result.json",
+          "receipt_sha256": "7715d49e1849cef3d5795e475ffeb95062f258b91cf2efa229b35de794ef241b",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O3-space/func_0011ef58.o",
+          "object_sha256": "a0eb877d50bf86a1a6c40396b6a2097427eab9630379c324dd903cbad67f8ec6",
+          "profile": "proof-armcc_41_1440-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O3-space/func_0011ef58.result.json",
+          "receipt_sha256": "641461e045805bcd84fcbcb08ed823070a35c039cb625a1633fb343deb3d3c74",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O3-time/func_0011ef58.o",
+          "object_sha256": "ca546c755158a32a8981c9538fce8e20a430b2469e5e9bb18fbb11f4ae164d7e",
+          "profile": "proof-armcc_41_1440-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_41_1440-O3-time/func_0011ef58.result.json",
+          "receipt_sha256": "e6b50cefebad3dd4db4661296fbb5ffeeb15fc72e4b17ecddc8cad91d8d2c475",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 28,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_504_82-O0-time/func_0011ef58.o",
+          "object_sha256": "d0ab748661946d801229d846320e4a91cb282e029302da6930ae10637a6be1b1",
+          "profile": "proof-armcc_504_82-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_504_82-O0-time/func_0011ef58.result.json",
+          "receipt_sha256": "824febcadc1a25717c2fca7f1b571a3f7abbee757b28709af98014c1db4af43e",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_504_82-O2-time/func_0011ef58.o",
+          "object_sha256": "7003095d2e6619e7caf993db4da0df9bf53d28f02afc1413003b6483632576be",
+          "profile": "proof-armcc_504_82-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_504_82-O2-time/func_0011ef58.result.json",
+          "receipt_sha256": "d0d88e0b5765563c95282efa9676acf439dd120d5d00fbc0c96a45d5be291847",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_504_82-O3-space/func_0011ef58.o",
+          "object_sha256": "527901597eea399a6d36f2c0818ea00b8edf08674d4e1834dcb2bf2210d8685e",
+          "profile": "proof-armcc_504_82-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/proof-armcc_504_82-O3-space/func_0011ef58.result.json",
+          "receipt_sha256": "00b5fa3f2efa363650746a56fd22b360267cbcfb28dc22a04e91f3ff5113f9a9",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/game/func_0011ef58.o",
+          "object_sha256": "27c3aef88ff2b8617b8e162f52f0bdc61c66afdc5d6c736e66e0d665705f8cd7",
+          "profile": "game",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/game/func_0011ef58.result.json",
+          "receipt_sha256": "8b195a64ee6fec2da06a8d753557a81f50fee399450c60075e8a944c3000702a",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/sdk/func_0011ef58.o",
+          "object_sha256": "7b5cd8167584a8d1aa234ce632f8c2990f162bed126cc1056846b24f2c287626",
+          "profile": "sdk",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/sdk/func_0011ef58.result.json",
+          "receipt_sha256": "3aaaef6f6628c3e875bf7095b1ef075de922203e2015d9eb61ad478a7c587d8f",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 12,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/middleware/func_0011ef58.o",
+          "object_sha256": "63865ebe1ef3ba63a64e2a5ff9c3d7a8ae8d9097f59dbe15acb88d0cd8cf33a0",
+          "profile": "middleware",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0011ef58/middleware/func_0011ef58.result.json",
+          "receipt_sha256": "cad3345ddfa10e06c86e73831a82fc842bb686e59eb46e3ec11bca93725f099b",
+          "status": "mismatch"
+        }
+      ],
+      "size": 8,
+      "source": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/src/func_0011ef58.c",
+      "source_sha256": "66c07e3cd9644aead93610c52e8234e16d63c4c766e19a33541bfe4f3704d9b4"
+    },
+    {
+      "address": 1233132,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "Bounded no-LR-save evidence under the inherited v8 standard: this original has no LR save; all 18 natural-source/profile outputs save LR and differ at +0. Raw r0-r3 C interfaces are representable. This is NOT a universal C-impossibility or authenticated SDK/library-identity proof.",
+      "evidence": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/{REPORT.md,positive-abi.json,compiler-grid.json,RESULTS.json}; exact function-specific raw service/output semantics and no LR save, with retained 18-cell natural shared-header C grid.",
+      "identity": "ConnectToPort kernel output adapter",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "original_extent_sha256": "64a052c8f577f2b6810b6bc488bb14e745f1066195dc14f498aea8e82245b0c4",
+      "positive_constraints": {
+        "callee_saved_core_preserved": true,
+        "external_word_stores": [
+          {
+            "bytes": 4,
+            "destination": "entry.r0+0",
+            "value": "svc.handle"
+          }
+        ],
+        "final_stack_delta": 0,
+        "lr_saved_to_stack": false,
+        "maximum_stack_bytes": 4,
+        "original_extent_sha256": "64a052c8f577f2b6810b6bc488bb14e745f1066195dc14f498aea8e82245b0c4",
+        "returned_r0": "svc.result",
+        "returns_to_entry_lr": true,
+        "service": "0x2d",
+        "svc_inputs": {
+          "r0": "entry.r0",
+          "r1": "entry.r1",
+          "r2": "entry.r2",
+          "r3": "entry.r3"
+        }
+      },
+      "proof_status": "Retained KernelStubProof ABI/compiler research, not rerun by CatalogueClosure. Unadopted function-specific proposal; independent review required. Historical SDK/handwritten authorship remains [INFERENCE].",
+      "qualification": "The original's exact no-LR-save constraint and complete output semantics are positive evidence. The finite source/profile grid does not prove that every possible approved C spelling/compiler setting fails. Until independent review and integrator adoption, retain ordinary creditability, original identity/extent/ranges and all caller evidence.",
+      "retained_compiler_cells": [
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O0-time/func_0012d0ec.o",
+          "object_sha256": "f00f6a384fdfc6aed3bcd12cce13b7c603ceb3157a978b7976e8b733d4443ee4",
+          "profile": "proof-armcc_40_821-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O0-time/func_0012d0ec.result.json",
+          "receipt_sha256": "680325c170d621bcc88e2939308a6f413eb94af3baa41d4cfd74377d81bb751e",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O2-time/func_0012d0ec.o",
+          "object_sha256": "2f64a361768b9fd29da549f610d02496c79ea8498fe26253e6b199115ef6d7da",
+          "profile": "proof-armcc_40_821-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O2-time/func_0012d0ec.result.json",
+          "receipt_sha256": "4c06ece5c2d750f4e77892a985708369d635aa8d9a4ae1ed0e9c2c731be2760c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O3-space/func_0012d0ec.o",
+          "object_sha256": "b4b1e4cadf7c2e3f975fe6afc987cea9bb1ff42b3019bd96573a2e69ba77673b",
+          "profile": "proof-armcc_40_821-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O3-space/func_0012d0ec.result.json",
+          "receipt_sha256": "938302727b8a1f45f64d86fd22cfba7b44ec12319897ccd9c030cdaa6d23b061",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O3-time/func_0012d0ec.o",
+          "object_sha256": "f341a5d82875b9a0b4b4bdf4a4a4b5b904ff8aff97f8692fa586e3c0efc03ad5",
+          "profile": "proof-armcc_40_821-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_40_821-O3-time/func_0012d0ec.result.json",
+          "receipt_sha256": "1dc1324d6f9c8007065b7503aee811c2a54df8c15bd9ee9bf223b25d3abcd1eb",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O0-time/func_0012d0ec.o",
+          "object_sha256": "b384ae3ca46115fa1563505f2615733b3ad12d4596e3a4412359656c4b83adb9",
+          "profile": "proof-armcc_41_1049-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O0-time/func_0012d0ec.result.json",
+          "receipt_sha256": "f6310028c3ad922d7b53613e080fea061189219d9ac03d9426e15810165e6f4d",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O2-time/func_0012d0ec.o",
+          "object_sha256": "1deeea216eb71bd581ad134a7de9a48e5bd94e71d50560922fec43d9190d1c12",
+          "profile": "proof-armcc_41_1049-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O2-time/func_0012d0ec.result.json",
+          "receipt_sha256": "cdfdc21d0a77fa07a223c230e7ca7364d51c6d9d4de06fa9b8930235fce3478c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O3-space/func_0012d0ec.o",
+          "object_sha256": "8a267a6e1934f5d9a2920c135b1501e7cdaf40fd660454c6123977d527e52fe8",
+          "profile": "proof-armcc_41_1049-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O3-space/func_0012d0ec.result.json",
+          "receipt_sha256": "0aeaa0b70c57cead1eefa9061c1f4bf3219b8b5789ec1d3c6655aadb37f6cd30",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O3-time/func_0012d0ec.o",
+          "object_sha256": "f7f7b4b8ac16c3933c3874e5bfc5a054aa1117d088832f7b3ac3b8fcecc4955a",
+          "profile": "proof-armcc_41_1049-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1049-O3-time/func_0012d0ec.result.json",
+          "receipt_sha256": "f3180d8b4afa1f4dc94f98557bd74fa561a0826ddcfacf43fd469812eebeb426",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O0-time/func_0012d0ec.o",
+          "object_sha256": "4271c24437d70b1f477fac12fbb0ee8947b42f741afb815b2f55bec88bb6ac15",
+          "profile": "proof-armcc_41_1440-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O0-time/func_0012d0ec.result.json",
+          "receipt_sha256": "acd1ad6b14cac488fa2460a1cf0f1d22e644a126f225676b8d11f2d213e73e30",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O2-time/func_0012d0ec.o",
+          "object_sha256": "3c82ad6d510a5d40d3699ea15d925bf3306a9dbfc34414b21c775c3896a37136",
+          "profile": "proof-armcc_41_1440-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O2-time/func_0012d0ec.result.json",
+          "receipt_sha256": "d51aaab41eb4b310f572243674a4ec09155844a5cb112fac789d048fc467c0c3",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O3-space/func_0012d0ec.o",
+          "object_sha256": "747a0803d7c01bc42cfc0c69d1596fc1bbb8b72a3a8b9da1cf10827ea85d8211",
+          "profile": "proof-armcc_41_1440-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O3-space/func_0012d0ec.result.json",
+          "receipt_sha256": "abd192e2a09c41032c2a7267cdfc4f0cab54070b96337cf7a0eec746972edd3c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O3-time/func_0012d0ec.o",
+          "object_sha256": "b348fd2b82aa25b40fd458180f380d163e89376701d2801d5ca390d57d2c0b84",
+          "profile": "proof-armcc_41_1440-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_41_1440-O3-time/func_0012d0ec.result.json",
+          "receipt_sha256": "0ef35f5b52823c4cc886055901c75524e2c6750d393d764e83c6457d35520327",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_504_82-O0-time/func_0012d0ec.o",
+          "object_sha256": "47cf497f39dccf6e492687be2fcb1a58f5bb9d3acff6c19e56f31e1abcc69487",
+          "profile": "proof-armcc_504_82-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_504_82-O0-time/func_0012d0ec.result.json",
+          "receipt_sha256": "5b66f8a6ca8747781b630e13e013e9e113b96086e885019bcc57ac437c3e98a1",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_504_82-O2-time/func_0012d0ec.o",
+          "object_sha256": "769738ab2e6b2848c6413d3dbfc6c70528d799e9a8c66a61c3c374786dbf2e08",
+          "profile": "proof-armcc_504_82-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_504_82-O2-time/func_0012d0ec.result.json",
+          "receipt_sha256": "470170a6d662d9f0b4fb1fee8a8cc7ecc5bb2ef405f0c6c6c85098fce38c8628",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_504_82-O3-space/func_0012d0ec.o",
+          "object_sha256": "1d5e9fc53d8d506a2fbfe136838196dce839ddc2e0cd1adc9ee18761b307bd5a",
+          "profile": "proof-armcc_504_82-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/proof-armcc_504_82-O3-space/func_0012d0ec.result.json",
+          "receipt_sha256": "aee81fe7c462c9f5848058a131c16bc38d564c85f29758eeb5bffa62deab1dec",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/game/func_0012d0ec.o",
+          "object_sha256": "a6677232d593eebbe61dc7f4f3533e9d69d0c11b6991da3f9eb44886237c53f3",
+          "profile": "game",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/game/func_0012d0ec.result.json",
+          "receipt_sha256": "da929d1e6a48670db976fcae705194799f04543ae2cc21ed9bb12123d9ded177",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/sdk/func_0012d0ec.o",
+          "object_sha256": "b17c642437146b99f4755cb174e8dbff90893886f266d59cd59b802ab6540f5c",
+          "profile": "sdk",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/sdk/func_0012d0ec.result.json",
+          "receipt_sha256": "4c77d0518535de407d7a6e823e01f2e37f18dc87477ff5f80b5d6db66ad6cb75",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/middleware/func_0012d0ec.o",
+          "object_sha256": "49e06117002f4b04039f08a9656b01655cf35310e47eb43e8b4ba1df22a8f842",
+          "profile": "middleware",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d0ec/middleware/func_0012d0ec.result.json",
+          "receipt_sha256": "f38bfaff077c9cf0280856235f2dd34fd6b787ddd51445de8c12dbde941870a7",
+          "status": "mismatch"
+        }
+      ],
+      "size": 24,
+      "source": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/src/func_0012d0ec.c",
+      "source_sha256": "2320e6b27f1a7afec0d27b896f775346ce12d3c6ad9a95f9a095e2699b4e6418"
+    },
+    {
+      "address": 1233232,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "Bounded no-LR-save evidence under the inherited v8 standard: this original has no LR save; all 18 natural-source/profile outputs save LR and differ at +0. Raw r0-r3 C interfaces are representable. This is NOT a universal C-impossibility or authenticated SDK/library-identity proof.",
+      "evidence": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/{REPORT.md,positive-abi.json,compiler-grid.json,RESULTS.json}; exact function-specific raw service/output semantics and no LR save, with retained 18-cell natural shared-header C grid.",
+      "identity": "GetProcessId kernel output adapter",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "original_extent_sha256": "429c407642c36bdf169d167bf3efc7a0eb4cf5052a08a97fc56ecbcfdb96f1b8",
+      "positive_constraints": {
+        "callee_saved_core_preserved": true,
+        "external_word_stores": [
+          {
+            "bytes": 4,
+            "destination": "entry.r0+0",
+            "value": "svc.process_id"
+          }
+        ],
+        "final_stack_delta": 0,
+        "lr_saved_to_stack": false,
+        "maximum_stack_bytes": 4,
+        "original_extent_sha256": "429c407642c36bdf169d167bf3efc7a0eb4cf5052a08a97fc56ecbcfdb96f1b8",
+        "returned_r0": "svc.result",
+        "returns_to_entry_lr": true,
+        "service": "0x35",
+        "svc_inputs": {
+          "r0": "entry.r0",
+          "r1": "entry.r1",
+          "r2": "entry.r2",
+          "r3": "entry.r3"
+        }
+      },
+      "proof_status": "Retained KernelStubProof ABI/compiler research, not rerun by CatalogueClosure. Unadopted function-specific proposal; independent review required. Historical SDK/handwritten authorship remains [INFERENCE].",
+      "qualification": "The original's exact no-LR-save constraint and complete output semantics are positive evidence. The finite source/profile grid does not prove that every possible approved C spelling/compiler setting fails. Until independent review and integrator adoption, retain ordinary creditability, original identity/extent/ranges and all caller evidence.",
+      "retained_compiler_cells": [
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O0-time/func_0012d150.o",
+          "object_sha256": "bad904dd54164e651f3708f5d5db7c815ec6a3e24b0a7497d3f9f676239c6749",
+          "profile": "proof-armcc_40_821-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O0-time/func_0012d150.result.json",
+          "receipt_sha256": "0a1fb9a9270d19e46d4511d7e3f6fd7d5bd3d412f205ef9c7b32abb9571fb492",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O2-time/func_0012d150.o",
+          "object_sha256": "d01b5c0e5e32f7e8fa34c5e76ff8da8a7ad3556c6e813dfa88986c469e7b5457",
+          "profile": "proof-armcc_40_821-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O2-time/func_0012d150.result.json",
+          "receipt_sha256": "8a6e3f3266636e7dfa14ff213349f240a6577864d27c78e3c17bbde87862eebf",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O3-space/func_0012d150.o",
+          "object_sha256": "36d614e550a3c336f18bde794e5e990c37a6008df0dfd836c0152910aa2a8f48",
+          "profile": "proof-armcc_40_821-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O3-space/func_0012d150.result.json",
+          "receipt_sha256": "b2f8b5fbfc1cc7bc16827547adb928412342b67c4a4d12601a1504e6e9e5a627",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O3-time/func_0012d150.o",
+          "object_sha256": "89f725253f972b943e066b5b2b817c50e8617e60f158a368215d522de7ec1bda",
+          "profile": "proof-armcc_40_821-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_40_821-O3-time/func_0012d150.result.json",
+          "receipt_sha256": "5287fc4a3d31bf5eff42a41c4428129761c460021dc3628327477c9c41a66f6a",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O0-time/func_0012d150.o",
+          "object_sha256": "076e2a1e457b22ac35c4c4b8c21d040b07deb582b6f7b7bfe70c17c7efdc1f9c",
+          "profile": "proof-armcc_41_1049-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O0-time/func_0012d150.result.json",
+          "receipt_sha256": "a2d56b8b217850aad61dfdeb56ea388463669225bb4e47f15606aa32ef54868b",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O2-time/func_0012d150.o",
+          "object_sha256": "43bec694da358e560e374a628d38181faea60ed81e7f6772f0f7236e89bffec1",
+          "profile": "proof-armcc_41_1049-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O2-time/func_0012d150.result.json",
+          "receipt_sha256": "b6fad355e118084d41b39889cc605cce7006e4c16ba607e584b9ef3b761c05f8",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O3-space/func_0012d150.o",
+          "object_sha256": "af31d4aa2ade305140e7b599aed75cf17b74178c1cd717b5733f7a8eb96988ba",
+          "profile": "proof-armcc_41_1049-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O3-space/func_0012d150.result.json",
+          "receipt_sha256": "8103774967ac5a40ae7bd56a7251eed94d0e0e9f5384f7ffd45cf3f580ae44d6",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O3-time/func_0012d150.o",
+          "object_sha256": "5f3212e08d7c268e406472bb3fadfdfc4271676d9cc40ada6cd2258b0ef44e15",
+          "profile": "proof-armcc_41_1049-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1049-O3-time/func_0012d150.result.json",
+          "receipt_sha256": "b6eba54d602643d325cec519252695197d651f5f674184fe11f2c154fd0831c3",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O0-time/func_0012d150.o",
+          "object_sha256": "6b638888355557cb82a893d1f7eed2d6ab7d8d856b66f967246609edf963059f",
+          "profile": "proof-armcc_41_1440-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O0-time/func_0012d150.result.json",
+          "receipt_sha256": "de7b24834dbb2fbf92dad3aa7d7c5580ffde487f6437d7a1177f72af5eb7cca1",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O2-time/func_0012d150.o",
+          "object_sha256": "84d0082ba10f4107091bcfcb0c11f028b8bca4fa87a85fa785840c88c3498f21",
+          "profile": "proof-armcc_41_1440-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O2-time/func_0012d150.result.json",
+          "receipt_sha256": "ec7e0c500633ce31f17d2169d8a349ddfdc279e2ce6e93f1c8783f15c61ade6e",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O3-space/func_0012d150.o",
+          "object_sha256": "cb89eca08ccc7c897f34933ea07f6722a0881b1d866b9068bcb5ce2e7b94234b",
+          "profile": "proof-armcc_41_1440-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O3-space/func_0012d150.result.json",
+          "receipt_sha256": "75410a216795db4be6208ee95e676d31ce4f67f71f32fc394be75abe8c02eaae",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O3-time/func_0012d150.o",
+          "object_sha256": "cafe3355c6ed65e5f9f1cd0187f0564f472ba0f7812f615a27a5b22abe35c94e",
+          "profile": "proof-armcc_41_1440-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_41_1440-O3-time/func_0012d150.result.json",
+          "receipt_sha256": "f175c990aeda2f9024470e001623d5b055cd5325218fb641a197f23868442ff7",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_504_82-O0-time/func_0012d150.o",
+          "object_sha256": "a1ea34896a76aa7b0e8185e912586fd048d4aa49c126d1c0cdbfa4d7bc795787",
+          "profile": "proof-armcc_504_82-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_504_82-O0-time/func_0012d150.result.json",
+          "receipt_sha256": "2f67732090ac11294394e67321b7f8d9d475df874542bf5f23bc9182a537b5ca",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_504_82-O2-time/func_0012d150.o",
+          "object_sha256": "b90d5895393b1a80566c3d9b6c5932c7bd2d4f3824f9c289d81928ce24b21e1c",
+          "profile": "proof-armcc_504_82-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_504_82-O2-time/func_0012d150.result.json",
+          "receipt_sha256": "e542190558f7d32c2e9cbede769d449752aa8e4530567a90903118f897c6c659",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_504_82-O3-space/func_0012d150.o",
+          "object_sha256": "e5d96cfae318f15b56c66c2a522a3382046ef0bf48953d334e438bbe3ca12046",
+          "profile": "proof-armcc_504_82-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/proof-armcc_504_82-O3-space/func_0012d150.result.json",
+          "receipt_sha256": "4cf84b648dad5cf1d78f55989a4b0228e6b28c8ce8d35a97c6a269036affb008",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/game/func_0012d150.o",
+          "object_sha256": "f63ae038e15930e3601db4471f1a14a697351a2336a8b6af591501898ad796b3",
+          "profile": "game",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/game/func_0012d150.result.json",
+          "receipt_sha256": "18ec33d920944e22190eb06d16e2e7b1e062e2f9e21575cde4c3bff0c65b168f",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/sdk/func_0012d150.o",
+          "object_sha256": "14712fbd396f472877e52e7e56b674958dd1a13f90954bc435549bdf88f7117b",
+          "profile": "sdk",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/sdk/func_0012d150.result.json",
+          "receipt_sha256": "77a541ecdf9a91c198bfd6a50d386ac8fe70e242df225bf8c3d423e81b827a4c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/middleware/func_0012d150.o",
+          "object_sha256": "eae97d0eaf172253c71a1a60e9c1c2514ad740248465474319599cf0d79e14e6",
+          "profile": "middleware",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0012d150/middleware/func_0012d150.result.json",
+          "receipt_sha256": "f19ab86bc8712b9e94ec9698bfd2cf340d02a606a99dffc6768d6ed026835578",
+          "status": "mismatch"
+        }
+      ],
+      "size": 24,
+      "source": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/src/func_0012d150.c",
+      "source_sha256": "936b312caef188ceeabb75e8585bcfef5d0bb7e1a25375a5ffe48f6515ea5574"
+    },
+    {
+      "address": 1636308,
+      "basis": "unrepresentable_abi",
+      "compiler_limit": "Bounded no-LR-save evidence under the inherited v8 standard: this original has no LR save; all 18 natural-source/profile outputs save LR and differ at +0. Raw r0-r3 C interfaces are representable. This is NOT a universal C-impossibility or authenticated SDK/library-identity proof.",
+      "evidence": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/{REPORT.md,positive-abi.json,compiler-grid.json,RESULTS.json}; exact function-specific raw service/output semantics and no LR save, with retained 18-cell natural shared-header C grid.",
+      "identity": "CreateEvent kernel output adapter",
+      "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+      "isa": "arm",
+      "kind": "assembly",
+      "original_extent_sha256": "ca5f39acca1fe6afe3d2fedc7021c58bea44eaac69e60f7ca5acd54765d1a594",
+      "positive_constraints": {
+        "callee_saved_core_preserved": true,
+        "external_word_stores": [
+          {
+            "bytes": 4,
+            "destination": "entry.r0+0",
+            "value": "svc.handle"
+          }
+        ],
+        "final_stack_delta": 0,
+        "lr_saved_to_stack": false,
+        "maximum_stack_bytes": 4,
+        "original_extent_sha256": "ca5f39acca1fe6afe3d2fedc7021c58bea44eaac69e60f7ca5acd54765d1a594",
+        "returned_r0": "svc.result",
+        "returns_to_entry_lr": true,
+        "service": "0x17",
+        "svc_inputs": {
+          "r0": "entry.r0",
+          "r1": "entry.r1",
+          "r2": "entry.r2",
+          "r3": "entry.r3"
+        }
+      },
+      "proof_status": "Retained KernelStubProof ABI/compiler research, not rerun by CatalogueClosure. Unadopted function-specific proposal; independent review required. Historical SDK/handwritten authorship remains [INFERENCE].",
+      "qualification": "The original's exact no-LR-save constraint and complete output semantics are positive evidence. The finite source/profile grid does not prove that every possible approved C spelling/compiler setting fails. Until independent review and integrator adoption, retain ordinary creditability, original identity/extent/ranges and all caller evidence.",
+      "retained_compiler_cells": [
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O0-time/func_0018f7d4.o",
+          "object_sha256": "4c12e8c64c1b5e3c7ef65de299251714f50c1fe4129fb70185b6f440452af3e5",
+          "profile": "proof-armcc_40_821-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O0-time/func_0018f7d4.result.json",
+          "receipt_sha256": "d715b12556c63323406cf83d758b50c980e254b0eb4ab0d53b0e39b38fd5e055",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O2-time/func_0018f7d4.o",
+          "object_sha256": "1199884a180614ecee716377d74606d313ccc8214ff8c9beec3bc8baec8e5865",
+          "profile": "proof-armcc_40_821-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O2-time/func_0018f7d4.result.json",
+          "receipt_sha256": "571bd7e8cda2a1b298327ffefbb2898d2bed7270deec56d82f28f2398a844e85",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O3-space/func_0018f7d4.o",
+          "object_sha256": "d282e2ef7ab25682dbcedd36710e143e58e76b125ac5b0e1e1dded7ffe65ac60",
+          "profile": "proof-armcc_40_821-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O3-space/func_0018f7d4.result.json",
+          "receipt_sha256": "08e3b30319083c3ba7236de13d24b742017c7bd9de7792403ed87e7964e17ae2",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O3-time/func_0018f7d4.o",
+          "object_sha256": "fef11efdf7908f926e8232d1efd15b193f5a61589788ccd736158a3a593293a7",
+          "profile": "proof-armcc_40_821-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_40_821-O3-time/func_0018f7d4.result.json",
+          "receipt_sha256": "70f66c6996cdd83ca965d04d2c0e2abd7fa25073333d9ed58766247a038f33cf",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O0-time/func_0018f7d4.o",
+          "object_sha256": "027ba3f9da19086b8d06968ec862b2afd6c60e4f40a833c25af0bb8bbe120cac",
+          "profile": "proof-armcc_41_1049-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O0-time/func_0018f7d4.result.json",
+          "receipt_sha256": "db65aa4a3337d2cc1aa144bac7e4181a011a39fae2a002685659d8d4aefcda17",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O2-time/func_0018f7d4.o",
+          "object_sha256": "2c3f9346f103a7abfe0caeb3d0ea711fb433984f0d5a700a1969db38f28f3723",
+          "profile": "proof-armcc_41_1049-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O2-time/func_0018f7d4.result.json",
+          "receipt_sha256": "d20aa26ae6f0ce21bca0e6f89f72fae103500dfb59c35bed293419931d222b2f",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O3-space/func_0018f7d4.o",
+          "object_sha256": "a5b5586a045ed5cd0d239845c6340b65ed893ba4ccf622fde2bae4abc55a2c45",
+          "profile": "proof-armcc_41_1049-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O3-space/func_0018f7d4.result.json",
+          "receipt_sha256": "6d064321c3a75e7817be3a102dc619eb723612a8dfd0c7376086d620c0ea321c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O3-time/func_0018f7d4.o",
+          "object_sha256": "0c2508e9f2ca68c79f4486680714871ada6ba97277791f22d8179dc3007ddcc0",
+          "profile": "proof-armcc_41_1049-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1049-O3-time/func_0018f7d4.result.json",
+          "receipt_sha256": "25f5c2301feae18f1c64560e17103fa83d2b7b218b78bb75f71398f85cbf0d1b",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O0-time/func_0018f7d4.o",
+          "object_sha256": "2bb3db61226d84f56cc3b67d37e9e310bb45b40ef7383cb84bbcaee1c33cef20",
+          "profile": "proof-armcc_41_1440-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O0-time/func_0018f7d4.result.json",
+          "receipt_sha256": "b75eb850aecbf51eb1d52c6d41a3550dfebff2d30bce3b7dcbd97cf48aba8143",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O2-time/func_0018f7d4.o",
+          "object_sha256": "261575dabae6fff3637000b5bb8071143d6f3b8bb974f2a5e2874c5e4cb14c77",
+          "profile": "proof-armcc_41_1440-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O2-time/func_0018f7d4.result.json",
+          "receipt_sha256": "b59b5bcd6e3f9e58d456f9f14840cd3fa9979585e707ce2c70d1c40795f6547c",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O3-space/func_0018f7d4.o",
+          "object_sha256": "8e319c8ba0e0321e8e48af8816302225b828bc498f87a18e4ef5473911ba9e1f",
+          "profile": "proof-armcc_41_1440-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O3-space/func_0018f7d4.result.json",
+          "receipt_sha256": "0803eca95ec09a92de3fa6293bbf8ce5b04a771935f6889f93b11b1f73e91181",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O3-time/func_0018f7d4.o",
+          "object_sha256": "82b19921dfd92091d0b7b4f5af3ad33839023338a8116972523305bf3fef5388",
+          "profile": "proof-armcc_41_1440-O3-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_41_1440-O3-time/func_0018f7d4.result.json",
+          "receipt_sha256": "a1177a8777ed6af6bcebfa9e78481e17e6d363f6e7d75224e1295bdca733425d",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 44,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_504_82-O0-time/func_0018f7d4.o",
+          "object_sha256": "076ebc8a32cb5414a5408009448d2f7bb72dfa489a4db591dbab5f4df1fa2a5c",
+          "profile": "proof-armcc_504_82-O0-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_504_82-O0-time/func_0018f7d4.result.json",
+          "receipt_sha256": "a130a7b9f1ee1f694ddaeb67153f73d9e4f893caa167844f3323a13bf4372760",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_504_82-O2-time/func_0018f7d4.o",
+          "object_sha256": "667ac7b65d0481ac5998c858ef227d0f060db46323231250b6c07764803bdbac",
+          "profile": "proof-armcc_504_82-O2-time",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_504_82-O2-time/func_0018f7d4.result.json",
+          "receipt_sha256": "e845857c87749edabab1f7ebcb8120450202ff08723e7138c8d8cb627d651073",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_504_82-O3-space/func_0018f7d4.o",
+          "object_sha256": "28224a02dc311a9ce69cf27d53d142c3f2ae702ea7710fc800c1f27a2fe7bbfa",
+          "profile": "proof-armcc_504_82-O3-space",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/proof-armcc_504_82-O3-space/func_0018f7d4.result.json",
+          "receipt_sha256": "cc5d5a9e9be82e0dd01916151d35193060f0924c1f61cec075549f0946661ab8",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/game/func_0018f7d4.o",
+          "object_sha256": "6097ae1e17bad01774a0ca6b9625c7d24cf2445f970abf0886e27164bbe710ed",
+          "profile": "game",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/game/func_0018f7d4.result.json",
+          "receipt_sha256": "a23d18741c2c0beb7681bbcd72e9917a3ae48ebdd7073c9320fbbd9270715dea",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/sdk/func_0018f7d4.o",
+          "object_sha256": "8201ea1b7b787fee9ceb73b6863092d8f5c1280eb2f70ceef6a8ced5155a374d",
+          "profile": "sdk",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/sdk/func_0018f7d4.result.json",
+          "receipt_sha256": "f957fd398c30e377541490a1756106ca1e33aef80ef43d33c662efb121a00924",
+          "status": "mismatch"
+        },
+        {
+          "candidate_size": 24,
+          "exit_code": 1,
+          "first_diff": 0,
+          "object": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/middleware/func_0018f7d4.o",
+          "object_sha256": "d4712411fd3e24a48f0c8d7f089c541d0a7026ec17d69d248ed07fd741eb7d1f",
+          "profile": "middleware",
+          "receipt": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/match/func_0018f7d4/middleware/func_0018f7d4.result.json",
+          "receipt_sha256": "cf8d42b747b9eaba05c21eadff73a0e16505f59e2a15eba07a57dc89b6d66dc4",
+          "status": "mismatch"
+        }
+      ],
+      "size": 24,
+      "source": "scratch/worktrees/kernel-stub-proof/scratch/kernel-stub-proof/src/func_0018f7d4.c",
+      "source_sha256": "8004a36623594a7122346cbbe50d0d37143c8bba21911b822d9600f956d954c1"
+    }
+  ],
+  "kernel_stub_witness": {
+    "extent_bytes": 104,
+    "fresh_catalogue_author_compilations": 0,
+    "functions": 5,
+    "inputs": {
+      "scratch/kernel-stub-proof/REPORT.md": "3ba1b23c4d8d83bd5c2c86cb21238208fd27d1d8b451b22d57203023f067bdfe",
+      "scratch/kernel-stub-proof/RESULTS.json": "b1ae17a6f987ca77479e65a4d725c0456d6a6a4ba66a3f7cb34d48744f4d198e",
+      "scratch/kernel-stub-proof/archived-attempts.json": "65f6ba8ff49a3f0a1c0e0e9c98ee243c58b42a10a33afe95ea596f1750596832",
+      "scratch/kernel-stub-proof/classification-proposal.json": "c685a595a337f5d8aac4787ff2fa2ab6994856ad460fa224d5189ca82be5ccf6",
+      "scratch/kernel-stub-proof/compiler-grid.json": "c097624b78d259dcf70cb63f1c4d01523b7c45f85b7e084ac555c5441f8e4e71",
+      "scratch/kernel-stub-proof/derive_abi.py": "a250f22c9655e4fe8f7fd440ad28024386fb3fe563b68214061381a0fa5091a4",
+      "scratch/kernel-stub-proof/positive-abi.json": "3e0dab3a6867bd937f7c9dc94fcbb99a1e0dd6108094bb81fd7b1da4c4650b0d",
+      "scratch/kernel-stub-proof/provenance.json": "098a4588e28cb593d11c51ce9be8b4d7136f12818617b28848049aa4a9445491",
+      "scratch/kernel-stub-proof/trial-profiles.json": "8fb72045eca4ecf4a25c73f46475a58719339033f03d1851440cd48ff5698de9"
+    },
+    "retained_compiler_cells": 90,
+    "root": "scratch/worktrees/kernel-stub-proof",
+    "standard": "Same individually adjudicated v8 no-frame standard as the three v9 output adapters; no blanket SVC exclusion and no accepted source credit."
+  },
+  "classification_policy": "Five function-specific kernel no-LR-frame assembly proposals are included only for independent review under the inherited v8 standard. No new runtime or known-library exclusion. New semantic leaves remain ordinary denominator candidates; topology exclusions remain separate from ownership.",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "literal_encodings": [
+    {
+      "encoding": "utf-16le",
+      "end": 2112784,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "8cdd860167f6fe6336c7a0893185048baef1f8da24aae7d4808779fc5ddf8df6",
+      "object_span_equal": true,
+      "object_span_offset": 624,
+      "overlapping_relocations": 0,
+      "references": [
+        2112140,
+        2112252
+      ],
+      "target": 2112728
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2112846,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "b622576dca838f76479f745b897f069f2acf52233b32297f212104585f070808",
+      "object_span_equal": true,
+      "object_span_offset": 680,
+      "overlapping_relocations": 0,
+      "references": [
+        2112144,
+        2112256
+      ],
+      "target": 2112784
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2112902,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "9c9fc3c579a28093ac82ed46eefbc72976e4631729b63b52e45b67bdb246d926",
+      "object_span_equal": true,
+      "object_span_offset": 744,
+      "overlapping_relocations": 0,
+      "references": [
+        2112148,
+        2112260
+      ],
+      "target": 2112848
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2112948,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "c2af7e1a2d691ac27662966314d85e7f4730417d88bf228965d849d8fdd648bb",
+      "object_span_equal": true,
+      "object_span_offset": 808,
+      "overlapping_relocations": 0,
+      "references": [
+        2112160
+      ],
+      "target": 2112912
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113020,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "a210044375bb993ba09ff9f1e2f4d81ce11b5ee7a23c5ea6c716be124a20e1d8",
+      "object_span_equal": true,
+      "object_span_offset": 852,
+      "overlapping_relocations": 0,
+      "references": [
+        2112180
+      ],
+      "target": 2112956
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113070,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "c934ea79701be7c44b756e1b3b3fb80123e10ce48a813c458c5dd50fa25ed738",
+      "object_span_equal": true,
+      "object_span_offset": 916,
+      "overlapping_relocations": 0,
+      "references": [
+        2112188
+      ],
+      "target": 2113020
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113122,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "6d1cbf9e77356026ad61355aaf9e5c685da60f7e9486c3b29e69b0cb1c03c711",
+      "object_span_equal": true,
+      "object_span_offset": 968,
+      "overlapping_relocations": 0,
+      "references": [
+        2112192,
+        2112268
+      ],
+      "target": 2113072
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113174,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "0e3044113ea3ccfbda71761df311ed216d8f941385a3466135e0f45883cb90a7",
+      "object_span_equal": true,
+      "object_span_offset": 1020,
+      "overlapping_relocations": 0,
+      "references": [
+        2112196,
+        2112312
+      ],
+      "target": 2113124
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113250,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "7449ba4f59b8b366e0b84b20be0b1744bd2d91904265952bdc6826658e03aa05",
+      "object_span_equal": true,
+      "object_span_offset": 1096,
+      "overlapping_relocations": 0,
+      "references": [
+        2112376,
+        2112380,
+        2112460,
+        2112464,
+        2112540,
+        2112620
+      ],
+      "target": 2113200
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113320,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "ff8f73d678500372127796913132fbb49ef17c85ede7a13c3d3623c6589cd020",
+      "object_span_equal": true,
+      "object_span_offset": 1152,
+      "overlapping_relocations": 0,
+      "references": [
+        2112384
+      ],
+      "target": 2113256
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113380,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "d45bcbeac9ae72831ccbfd5f5d0e636a3bff4da325f643244060961f45cd3ae5",
+      "object_span_equal": true,
+      "object_span_offset": 1224,
+      "overlapping_relocations": 0,
+      "references": [
+        2112392,
+        2112472
+      ],
+      "target": 2113328
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113438,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "f5cf1cd512e4786d354e20ca6a5406c2f401fd52ad51899b2f8433f1c0c61c47",
+      "object_span_equal": true,
+      "object_span_offset": 1276,
+      "overlapping_relocations": 0,
+      "references": [
+        2112396,
+        2112476,
+        2112552,
+        2112632
+      ],
+      "target": 2113380
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113498,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "41c013084bc903b76a7b4c8f1f75b83d537fdb42c7c8d6164cdd52f9c2e2d2f3",
+      "object_span_equal": true,
+      "object_span_offset": 1352,
+      "overlapping_relocations": 0,
+      "references": [
+        2112544,
+        2112624
+      ],
+      "target": 2113456
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113572,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "52cd4ec419d0ca9122af67ce2983ac5abbbe6f07f260ae3eddcf243d1c43e886",
+      "object_span_equal": true,
+      "object_span_offset": 1408,
+      "overlapping_relocations": 0,
+      "references": [
+        2112688,
+        2112692,
+        2113724,
+        2113728
+      ],
+      "target": 2113512
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2113638,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "a63f80af65617c0cdde49e1dfc68b97ade84d72425a1b1b2cae46d1c59b14971",
+      "object_span_equal": true,
+      "object_span_offset": 1480,
+      "overlapping_relocations": 0,
+      "references": [
+        2112700,
+        2113764
+      ],
+      "target": 2113584
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114174,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "93c3b6c1efedb6fcf881a8bb9b0b78e665a7226322682440c4a551606b9b7ec9",
+      "object_span_equal": true,
+      "object_span_offset": 2008,
+      "overlapping_relocations": 0,
+      "references": [
+        2113664
+      ],
+      "target": 2114112
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114240,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "e543a22db735a58a99b0d2a1a8e0bfa26d40528cd554e97e18a37cd93017cef2",
+      "object_span_equal": true,
+      "object_span_offset": 2072,
+      "overlapping_relocations": 0,
+      "references": [
+        2113672,
+        2113776,
+        2113872,
+        2113880
+      ],
+      "target": 2114176
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114298,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "5242ec9b814ad37f9613e3785da1f127e24a180d176e56a3bf423e0a5d8e87cb",
+      "object_span_equal": true,
+      "object_span_offset": 2152,
+      "overlapping_relocations": 0,
+      "references": [
+        2113736
+      ],
+      "target": 2114256
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114396,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "a30777ab3d938a12e61b25f76b180089d7c3c32f3737665465311f13193c1abe",
+      "object_span_equal": true,
+      "object_span_offset": 2228,
+      "overlapping_relocations": 0,
+      "references": [
+        2113844
+      ],
+      "target": 2114332
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114444,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "6d2dcbc90b9ea88ca1a3c1437ca7dc4a304688a0e2805f2d7a3a93ec30f81ae9",
+      "object_span_equal": true,
+      "object_span_offset": 2292,
+      "overlapping_relocations": 0,
+      "references": [
+        2113928,
+        2113936
+      ],
+      "target": 2114396
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114504,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "7f5a1e4034ea11d201e037f9eb14669b6b469052a63c1771f1cdc3d410432f19",
+      "object_span_equal": true,
+      "object_span_offset": 2340,
+      "overlapping_relocations": 0,
+      "references": [
+        2113932,
+        2113948
+      ],
+      "target": 2114444
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114544,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "cedb9a8dcf8611b02cc12db668bd2bb84b9a2625ff71b7df87827f1153cd616d",
+      "object_span_equal": true,
+      "object_span_offset": 2404,
+      "overlapping_relocations": 0,
+      "references": [
+        2113940
+      ],
+      "target": 2114508
+    },
+    {
+      "encoding": "utf-16le",
+      "end": 2114628,
+      "evidence": "Retained ordinary C++ wchar_t literal emission has the exact complete inline bytes at the same function-relative offset; no linker permutation, source reauthoring or compilation.",
+      "function": 2112104,
+      "image_interval_sha256": "5739d64bbd4ac3f572314ed6dae4bf424a1f8aa902c1f355f350ff7443a837d9",
+      "object_span_equal": true,
+      "object_span_offset": 2468,
+      "overlapping_relocations": 0,
+      "references": [
+        2114072,
+        2114076
+      ],
+      "target": 2114572
+    },
+    {"encoding":"utf-16le","end":1066816,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1066072,"image_interval_sha256":"4e7a71a59e21c8390faf370f8b05601055bff6e03cb2cdad8c626f7e75a03aee","references":[1066144],"source":"scratch/authors/r4050/src/func_00104458.cpp","source_record_equal":true,"source_sha256":"e756e69c9412e3142bb52bea5519c5316a25d6657a977c8d9173595853ef1b62","target":1066780},
+    {"encoding":"utf-16le","end":1443460,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1442900,"image_interval_sha256":"d2918c5075fd8807763e2f7181bc0112c9ffb712d4cf41a7f32ae21cf98df4e2","references":[1442964],"source":"scratch/authors/L021/src/func_00160454.cpp","source_record_equal":true,"source_sha256":"7bc1ce465e37eba320e64c715723131a8c2d21a01aa6d38418d8d7f0a4aff07d","target":1443448},
+    {"encoding":"utf-16le","end":1758620,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1758152,"image_interval_sha256":"8558a0a68c932cadb38b0646fdbd2ef0c7726298ec29608c3cfe9680d8440268","references":[1758184],"source":"scratch/authors/r342/src/func_001ad3c8.c","source_record_equal":true,"source_sha256":"c611794e500b13f327f41c78b98078312052392bdb7858d226a8b5ccb0f31cf4","target":1758612},
+    {"encoding":"utf-16le","end":1792544,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1791480,"image_interval_sha256":"73a7203cadf67c7dbb8d1456295e66fcacd18a5808237d2524a2da0383a5b4e0","references":[1792200],"source":"scratch/authors/L033/src/func_001b55f8.c","source_record_equal":true,"source_sha256":"95af192bbd950480c07168fc5c3a841238a859a66aeae11f74e439b8dca1e371","target":1792536},
+    {"encoding":"utf-16le","end":1792552,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1791480,"image_interval_sha256":"9f1137c7c4e5b80b757fbfd41d151ed110bb85dbda19645db6b25327fe452ede","references":[1792220],"source":"scratch/authors/L033/src/func_001b55f8.c","source_record_equal":true,"source_sha256":"95af192bbd950480c07168fc5c3a841238a859a66aeae11f74e439b8dca1e371","target":1792544},
+    {"encoding":"utf-16le","end":1850440,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1850048,"image_interval_sha256":"f898b3fe8dac4e0b426e20058073141fe0415c5de4659b0489df7b2cbd610737","references":[1850144],"source":"scratch/authors/r339/src/func_001c3ac0.c","source_record_equal":true,"source_sha256":"dd88aeb113a6a32b5636a8b116073f0d05f20b969c1041aa77b88d9aca33c97e","target":1850416},
+    {"encoding":"utf-16le","end":1959144,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1958592,"image_interval_sha256":"d2918c5075fd8807763e2f7181bc0112c9ffb712d4cf41a7f32ae21cf98df4e2","references":[1958656],"source":"scratch/authors/L041/src/func_001de2c0.c","source_record_equal":true,"source_sha256":"d6d4bbadfe69bd5a0d6b3c59fcd9a5c12097646dc1f426fc417f8cc13df3d886","target":1959132},
+    {"encoding":"utf-16le","end":2000104,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":1999356,"image_interval_sha256":"07778fd76502dd5da230fd3db42591926c920eee37ddf1b4bc6f3d013ea326db","references":[1999928],"source":"scratch/authors/L043/src/func_001e81fc.cpp","source_record_equal":true,"source_sha256":"96de7e36d37cc42eeea7defa5f4dd2c3c7217dd847fbdad5ec1431ca3589e526","target":2000088},
+    {"encoding":"utf-16le","end":2028884,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":2022320,"image_interval_sha256":"0c4fa4fc15e0af39694f9c19a3b4827f54a74fda69378dab89d6960cae4c3f83","references":[2027948],"source":"scratch/authors/r4054/src/func_001edbb0.cpp","source_record_equal":true,"source_sha256":"72fd213668dca6b1bd51fdb81873836baf10a48a2689e10d15efc2f860bbc076","target":2028876},
+    {"encoding":"utf-16le","end":2028894,"evidence":"Exact executable address/reference sites; retained natural wide literal and typed halfword consumer contract; complete UTF-16 terminator and zero alignment. Not a whole-function MATCH or original TU identity.","function":2022320,"image_interval_sha256":"9e166af98d70d70d525f23cf7cdf6d68b7f7f2985f4daf5a22c83022a25e7b6a","references":[2028004],"source":"scratch/authors/r4054/src/func_001edbb0.cpp","source_record_equal":true,"source_sha256":"72fd213668dca6b1bd51fdb81873836baf10a48a2689e10d15efc2f860bbc076","target":2028884}
+  ],
+  "parent_evidence": {
+    "path": "research/catalogue_v9_r2_evidence.json",
+    "sha256": "e12b5df4381185f4e61bf34bccd025a41a752f3977a6e96051808a4669c34a28"
+  },
+  "earlier_proposal": {
+    "catalogue_sha256": "9b13a770438c91b48ea34d8b2445f41c87ae2543a696618360a0ff550ddfe460",
+    "path": "research/catalogue_v10_v9_proposal.json",
+    "sha256": "fb00daec963de92200b57fd5ec075ccb7b7471f97e1a9f86206f0b4d6858f72b"
+  },
+  "provenance": "Existing sources/objects and v9 machinery reused. New compiler/matcher probes, tests, builds and acceptance operations are not part of this author task.",
+  "revision": "catalogue-v10",
+  "schema_version": 1,
+  "wide_literal_witness": {
+    "catalogue_extent": 2540,
+    "complete_record_bytes": 1234,
+    "object": "scratch/authors/s203a68/match/018-final-game/func_00203a68.o",
+    "object_sha256": "4500343aac7981469da56b2c17e098b7dbb424cb4fabaa3563b068531732f9c7",
+    "qualification": "Retained source is not an accepted match; its external pool permutation remains separately qualified. Only exact inline object encoding/bounds are used for catalogue data ownership.",
+    "record_count": 23,
+    "section": "i.func_00203a68",
+    "source": "scratch/authors/s203a68/src/func_00203a68.cpp",
+    "source_sha256": "a51054e168ed05dc4a23594ee1728a698a4bdd893f5d0c507a4a6448601e3829",
+    "symbol_size": 2540
+  }
+}

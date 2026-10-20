@@ -936,15 +936,21 @@ Reviewers see each rewrite in the match result, build receipt or compid record. 
 qualifications, and the manual-only basis of I3 for non-empty callees (below), belong in every
 checkpoint that credits a function through a rewrite (review F03).
 
-## Catalogue recovery safeguards (candidate v9-r2)
+## Catalogue recovery safeguards (candidate v10-r4)
 
 `tools/analyze.py catalogue --out X` is the single candidate generator. For the
 reviewed image it includes the immutable, image/extent/ISA-bound classification
 records, reviewed UTF-16 object references, the section-authenticated `.init_array`
 table and the immutable protected-checkpoint blob list in
-`research/catalogue_v9_r2_evidence.json`, and recomputes the revision's
-ownership, anomaly and pointer evidence. The output records the command, source
-hashes and input hashes; neither output path nor elapsed time changes its bytes.
+`research/catalogue_v9_r2_evidence.json`, together with the next proposal's
+`research/catalogue_v10_evidence.json` and the digest-bound children
+`research/catalogue_v10_r3_evidence.json` / `research/catalogue_v10_r4_evidence.json`.
+The r3 metadata is immutable; the r4 child contains only the bounded r7 extension.
+V10 pins the adopted v9-r2 baseline by
+immutable Git blob and separately preserves the original v9 proposal's complete
+entry/identity metadata. It recomputes ownership, anomalies, per-old-range accounting
+and pointer evidence. The output records source/input hashes; neither output path
+nor elapsed time changes its bytes. It does not adopt a catalogue or award C credit.
 The former separate `research/catalogue_v8.py` generator has been replaced by
 `tools/catalogue_review.py`; no active author-result directory is scanned.
 
@@ -1000,6 +1006,72 @@ V9-R01 fixes three typed shared objects at `0x001b54e4`, `0x001b8234` and
 `0x001bc29c`: each complete UTF-16 record is four bytes, not one byte of an
 empty narrow string. The natural r4023 wide-literal EXTENT witness is 128/124 B,
 with no rewrites; its full object does not establish exclusive ownership.
+
+V10's bounded closure rules live in `tools/catalogue_closure.py`:
+
+- Complete straight-line scalar/multiple-register/caller-saved-VFP copy leaves
+  require enumerated fixed memory effects, balanced stack, preserved callee
+  registers and an ordinary LR return. Explicit fixed-record contracts also
+  permit bounded field permutations/subsets and immediate/r2/r3 fields, not
+  arithmetic computation, predicates, calls or unbounded accesses. These are
+  **ordinary uncredited denominator candidates**, not inferred library owners.
+- A dominated odd PC-relative Thumb value needs a complete closed callback CFG;
+  a plausible halfword or unreferenced return alone is insufficient. Exact
+  architectural reads may explain cross-owner references without enlarging the
+  loading owner or stealing a neighboring pool. A bounded addressed string outside
+  its sole owner's extent may likewise become unowned rodata only after full-span
+  code/pool/entry-overlap vetoes. ADR alone is not a memory-read footprint.
+- Explicit source/object-typed UTF-16 bounds additionally bind the complete original
+  terminated interval's digest and require zero alignment. This is separate from
+  exclusive ownership. An unreferenced zero halfword after a Thumb terminal can
+  align an evidenced word-aligned pool/literal/entry; nonzero fill is not guessed
+  to be padding.
+  The read inventory covers signed/unprivileged/atomic/doubleword and block-load
+  forms as well as ordinary scalar/VFP loads. Conditional, partially mapped,
+  unmodeled or unbounded statically formed reads can veto alignment without
+  creating data ownership; an incomplete inventory is never proof of no reference.
+  Decoded explicit/implicit writes, operand WRITE flags, register pairs/lists and
+  every writeback base invalidate tracked values before any conditional exit.
+  Ordinary BL/BLX invalidate r0-r3/r12/LR while preserving callee-saved facts.
+  Raw SVC uses a separately cited service/output table, never the ordinary-call
+  ABI: complete documented services invalidate r0-r7/IP/LR/flags conservatively;
+  unknown numbers, unlisted services and incomplete outputs discard every fact.
+  This includes QueryMemory r4/r5 and conditional SVC. No flag fact proves a
+  predicate. Unmodeled destination effects likewise discard stale pointer facts;
+  shifted MOV values are not mistaken for unshifted copies. Fixed-copy terminals
+  must be non-flag-setting, unshifted ordinary LR returns.
+- A frozen original-entry/behavior witness can join only unprotected, single-entry,
+  prologue-only weak owners when one connected normal ARM CFG from the new entry
+  covers the entire bounded span without calls, pools, unknown exits or
+  unbound/noreturn tails. Every prior weak label remains a legacy secondary entry.
+  The recovered owner is conservatively **multi-entry/topology-excluded**; no
+  runtime/library identity or non-C ownership is claimed.
+
+The five additional kernel-wrapper assembly classifications are individually
+reviewable no-LR-frame proposals under the same compiler-limit standard as the
+three v9 witnesses. Their finite 90-cell mismatch grid is **not** universal
+impossibility of C, nor proof that raw r0-r3 syscall interfaces are unrepresentable.
+They remain separate from topology exclusions and ordinary recovered leaves.
+
+The v10-r4 candidate remains partial: 360 unknown bytes in 36 intervals and ten
+unresolved anomalies. Its separate licensed Arm Compiler 5.04u2 b82 r7 evidence
+classifies 80 exact whole-owner library bodies (10,098 B), with no geometry/entry
+changes. The three pool-qualified declarations stay 22/10/620 B, never 26/20/632;
+foreign-tail readers and physical ownership remain intact. All ten unresolved
+r7 owners and all 206 protected tiny-body coincidences remain unchanged.
+R7's 100 names stay in the separate checkpoint-integration proposal: this child
+embeds zero new name bindings and applies zero canonical names. The earlier 87
+review-only bindings remain frozen in r3 metadata.
+Wrong image/extent/ISA/digest, unsupported same-byte aliases, duplicate identities
+and protected-coincidence collisions are rejected. Prior authenticated runtime
+records remain unchanged; vendor naming does not close unknown pools or dispatch.
+`docs/catalogue/REPORT-v10-r4.md` records the isolated raw-kernel ABI repair,
+reproducible 293-site / 25-service audit, separate r7 classification delta and
+combined requested analyze-module checks. `docs/catalogue/REPORT-v10-r3.md`
+preserves the earlier register-effect, library-classification and residue history.
+`docs/catalogue/REPORT-v10-r2.md` preserves the earlier guard history;
+`docs/catalogue/REPORT-v10.md` preserves the original interval/accounting history.
+Neither unresolved data nor exceptional dispatch is hidden as padding.
 
 
 A reviewed `.init_array` table is accepted only as a bounded, aligned, self-relative

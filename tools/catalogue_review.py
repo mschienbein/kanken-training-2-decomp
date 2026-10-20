@@ -231,6 +231,7 @@ def enrich_catalogue(candidate: dict, baseline: dict, image: bytes, layout: ctrf
     losses = sorted(old_entries - new_entries)
     split_parents = {row["owner"] for row in candidate["linker_tail_extent_splits"]}
     typed_owners = {row["function"] for row in evidence.get("literal_encodings", [])}
+    runtime_repairs = {row["address"]: row for row in candidate.get("closure_evidence", {}).get("exact_runtime_data", {}).get("extent_repairs", [])}
     extent_changes, unexpected = [], []
     for address in sorted(old.keys() & new.keys()):
         before, after = old[address], new[address]
@@ -238,6 +239,10 @@ def enrich_catalogue(candidate: dict, baseline: dict, image: bytes, layout: ctrf
             continue
         basis = ("linker_tail_partition" if address in split_parents
                  else "reviewed_utf16_object_bound" if address in typed_owners and before["isa"] == after["isa"]
+                 else "exact_runtime_section_and_descriptor_continuation" if address in runtime_repairs
+                 and (before["size"], after["size"], after["isa"]) == (
+                     runtime_repairs[address]["old_size"], runtime_repairs[address]["size"], runtime_repairs[address]["isa"])
+                 and runtime_repairs[address]["entries_unchanged"]
                  else "canonical_interworking_veneer" if after["kind"] == "veneer" and after["size"] == 8
                  and analyzer.veneer(address, after["isa"]) is not None else None)
         extent_changes.append({"address": address, "old_size": before["size"], "size": after["size"], "basis": basis})
@@ -295,9 +300,10 @@ def enrich_catalogue(candidate: dict, baseline: dict, image: bytes, layout: ctrf
         "thumb_v9_residue": [
             {**row, "candidate_owner": current["address"] if current else None,
              "candidate_owner_kind": current["kind"] if current else None,
-             "ownership_classified": row["address"] in classified}
+             "ownership_classified": current is not None and current["address"] in classified}
             for row in evidence.get("thumb_v9_residue", [])
-            for current in [owner(candidate["functions"], starts, row["address"])]],
+            for current in [owner(candidate["functions"], starts, row["address"])]
+            if current is None or current["address"] not in classified],
         "kernel_adapter_dispositions": evidence.get("kernel_adapter_dispositions", []),
         "boundary_queue": evidence.get("boundary_queue", []),
         "boundary_repairs": boundary_repairs,
