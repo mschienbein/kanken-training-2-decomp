@@ -169,11 +169,23 @@ extern bool func_001f4cc4(const struct FontResource *font);
 
 #include "game/render_state.h"
 #ifdef __cplusplus
+#include "game/pool_list.h"
+
+/* Existing partial teardown owner. Its native container-destructor/return
+ * contracts remain an explicit prerequisite; no new native alias is claimed. */
+struct FontManager {
+    const void *vtable;
+    unsigned char reserved04[0x20];
+    PoolList fonts;
+    PoolList textures;
+};
 
 extern "C" {
 extern unsigned char data_00242f8c;
 extern void func_0018f0dc(int count, const unsigned *handles);
 extern const unsigned data_00224128[];
+extern PoolList *func_001cc4cc(PoolList *list);
+extern PoolList *func_001cc12c(PoolList *list);
 
 extern void func_001daea4(FontResource *font);
 extern void func_001dae08(FontResource *font);

@@ -1,6 +1,22 @@
 #ifndef GAME_FRAMEBUFFER_H
 #define GAME_FRAMEBUFFER_H
 
+/* Display-service values, distinct from every GL/native graphics owner below.
+ * Original 001233d0 constructs two 16-byte elements through 00142a54. */
+struct DisplayFramebuffer {
+#ifdef __cplusplus
+    DisplayFramebuffer();
+#endif
+    void *left;
+    void *right;
+    unsigned format;
+    unsigned stride;
+};
+
+struct DisplayFramebufferPair {
+    struct DisplayFramebuffer frames[2];
+};
+
 struct FramebufferResource {
     const void *vtable;
     void *allocator;
