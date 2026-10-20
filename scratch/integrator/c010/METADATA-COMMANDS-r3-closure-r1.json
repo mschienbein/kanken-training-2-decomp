@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "operations": [
+    {
+      "tool": "functions.eval",
+      "operation": "tools.accept.compose_units twice, function_sources, source_hashes and header_hashes; metadata-only",
+      "observed": "2731units/2797functions/300112B; all501 C010 new/47420B and ten moves/240B; no missing sources or identities"
+    },
+    {
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/plan_header_closure.py",
+        "--run",
+        "source-r3-closure-r1"
+      ],
+      "exit_code": 0,
+      "outputs": [
+        "affected-header-plan-source-r3-closure-r1.json",
+        "affected-header-match-scope-source-r3-closure-r1.json"
+      ],
+      "qualification": "Historical successful metadata attempt; source hashes predate two reachable field reconciliations and this planner version omitted per-caller extra_sources. Superseded, not current closure."
+    },
+    {
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/match_scope.py",
+        "--run",
+        "bounded-r3-closure-r1",
+        "--scope",
+        "scratch/integrator/c010/bounded-scope-r3-closure-r1.json"
+      ],
+      "exit_code": 1,
+      "matcher_exits": {
+        "0": 61,
+        "2": 2
+      },
+      "qualification": "Both real compiler failures retained unchanged; neither selected identity was withdrawn."
+    }
+  ]
+}

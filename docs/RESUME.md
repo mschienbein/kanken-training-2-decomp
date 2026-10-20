@@ -2,6 +2,50 @@
 
 Current entry on top.
 
+## 2026-10-20 — c010 frozen R3 source reconciliation (unaccepted)
+
+The isolated `c010-r3-closure` branch reconciles frozen R3 source `7e74f95`
+through Main's source integration `b7bb6d9`, preserving both registered c009-r2
+**FAIL** reviews and every R3 qualification. Its provisional predecessor remains
+**2,296 functions / 252,692 B**; canonical acceptance/history are still Main-only.
+The complete C010 projection is **2,731 units / 2,797 functions / 300,112 B**,
+retaining **all 501 new functions / 47,420 B and ten accepted moves / 240 B**.
+No further identity was withdrawn and none was accepted here.
+
+Scheduler storage uses the real C `int(void)` callback contract. Genuine integer
+providers retain their returns; only actual C procedure definitions use the
+qualified MUST-discard unspecified-result rule. The queue `00186598` and signaling
+`0019ea6c` remain void. The genuine generic vector entry, unique native
+`RuntimeMember` constructor owner/move and typed non-invoking registrations are
+retained. Old incompatible `0010239c`/`0013db40` routes remain deferred, not
+silently re-entered. The archive `1947019`, native-links `05a0669` and native
+animation `0f282a0` closures remain intact.
+
+Two selected callers required real canonical-owner field reconciliation:
+`0010b5cc` now writes `AppletStartupState.requested` and retains the correctly
+typed interior event binding; `001811b8` uses `WorkQueue.enabled/active`.
+The final bounded set covers **63 current source/dependency combinations**:
+**66 sequential matcher invocations**, **63 actual exit 0**, two retained compiler
+exit 2 failures and one retained exit 1 mismatch. Every call used explicit
+**v6 + L1** and `--show 0`; no full suite/build, whole-ledger compiler/audit,
+prepare, review or finalization ran here.
+
+Private `HANDOFF.json` now selects fresh `r3-closure-r2` complete inventories,
+the **1,444-unit direct scope**, **2,568-unit header scope**, all **22 helper-only
+units**, **25 explicit helper recipes**, and the rebound original-slot hint map.
+The header planner and sequential matcher preserve per-caller helper contexts;
+older scopes and every failed attempt remain unchanged. The 29 slot hints are
+not a complete original-consumer audit: Main must still enumerate and adjudicate
+all original slots and the `data_002429f8`/`data_002429f4` object consumers.
+
+Main must run the exact remaining serialized gates in
+`REMAINING-HEAVY-COMMANDS-r3-closure-r2.json`. In particular, argcheck `--rewrites`
+requires a fresh complete receipt projection using `units[].linker_rewrites`
+or root `linker_rewrites`: a sweep index, this bounded rewrite subset or the stale
+all-history default is not current closure. Predecessor acceptance, complete
+source/header/R1/L1 diagnostics and unique emitted ownership, full builds/tests,
+two fresh reviews, final acceptance and push remain Main-only.
+
 ## 2026-10-20 — c010 native animation lifetime re-entry (unaccepted)
 
 `001ce8b8` now has a **60/60 B game MATCH** at its collected destination under
@@ -76,9 +120,10 @@ into `orig/`; `baserom.3ds` is an ignored symlink to the decrypted dump). Git pu
 Restart sequence: linker models v4/v6/v8 are adopted. The finalized ledger selects linker v6
 plus literal L1, so later checkpoints explicitly select at least that pair. Frozen profiles:
 game/sdk/middleware. Resume preserved work rather than restarting completed batches.
-The user-set maximum and active target are 64 subagents; keep useful slots full and back off
-only if fresh provider throttling recurs (`docs/rulings/2026-10-20-subagent-concurrency.md`).
-Current throttling, queue and ownership live in the private pipeline file.
+The user-set maximum and active target are 64 **Codex `gpt-6.1-sol:max`** subagents;
+keep useful slots full and pause dispatch if Codex usage is exhausted, without silently
+switching providers (`docs/rulings/2026-10-20-subagent-codex.md`). Current queue and ownership
+live in the private pipeline file.
 
 1. Read the integrator's private live state, `scratch/integrator/PIPELINE.md` (checkpoint stage,
    agents in flight, batch queue, exclusions, retry pool, residue), and the author rules

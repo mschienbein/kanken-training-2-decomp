@@ -2,8 +2,16 @@
 
 ## Status
 
-**Ready for Main prepare and independent review with qualifications.** Finalized
-main 261fdc9 / cmodels sequence 9 is merged; frozen GATES v1.19 and v9-r2 unchanged.
+**Prepare FAIL; retained as immutable history.** Both fresh builds stopped because
+accepted `func_0011d260` emitted 112 bytes instead of 116. The suite (806 tests,
+one skip) and G3 passed; no independent acceptance review or finalization occurred.
+The corrected attempt **c009-r2** subsequently SEALED FAIL in both independent
+reviews. Its source successor c009-r3 corrects all five reported units with a
+qualified C-only discard-result scheduler protocol and typed no-op registration
+helpers (`docs/known-issues-c009-r2.md`). Its 32 final bounded smoke combinations
+all MATCH; Main still owns integrated gates and fresh independent review. No
+failed checkpoint is retried under its old name. Finalized main 261fdc9 / cmodels
+sequence 9 remains the accepted base; GATES v1.19 and v9-r2 are unchanged.
 Every current isolated match and the eventual Main prepare explicitly select
 **armlink5-inline-branchnop-v6 + anonymous-string-records-v1** (the accepted
 cmodels pair, so no model transition). Earlier v2/none instructions are superseded;
@@ -13,12 +21,18 @@ DisplayHandle. Accepted `001b8908`, `001e0afc` and `001ed874` have scoped MATCH
 with their supplied helper closure after receiver/reset/visual-owner reconciliation.
 Main alone owns full builds, the suite, prepare/finalize and accepted-record writes.
 
-`config/candidates/c009.json` lists **676 units / 676 functions / 57,052 target
-bytes**. These are unaccepted totals; final required-source sweep is complete.
+`config/candidates/c009.json` retains **675 new functions / 56,784 target bytes**.
+C009-r3 has 682 candidate units: those 675 destinations, six uncredited typed
+registration helpers and one explicit accepted native-constructor destination.
+Pure metadata composition preserves all 1,621 accepted identities uniquely and
+proposes 2,296 functions / 252,692 B. Main explicitly authorized only NEW
+`0011f3a8` (268 B) as a non-exhausted code-generation deferral; its valid candidate
+and every failed context remain private. No accepted identity is withdrawn and
+no other proposed identity is dropped.
 
-| Frozen profile | Units/functions | Target bytes |
+| Frozen profile | New functions | New target bytes |
 | --- | ---: | ---: |
-| game | 615 | 51,424 |
+| game | 614 | 51,156 |
 | middleware | 36 | 3,944 |
 | sdk | 25 | 1,684 |
 
@@ -27,7 +41,11 @@ were recovered rather than restarted. L042's recovered `func_001e3af4` is includ
 w17h SDK alternate MATCH rows (`00190688`, `001dbaac`) are included. Model selection
 is explicit rather than inferred from author receipts or optional manifest metadata.
 
-## Current pre-review evidence
+## Pre-C009-r3 pre-review evidence
+
+The following measurements bind their historical source boundaries, not the
+changed c009-r3 tree and not a source-level callback approval. Main must rerun
+the required integrated closure on the committed r3 source freeze.
 
 - Exact required sweep: **832 units / 838 functions, all MATCH, exit 0**.
 - Whole proposed ledger G3: **2,238 units**, 1,728 checked C units, **zero
@@ -46,13 +64,14 @@ is explicit rather than inferred from author receipts or optional manifest metad
   R1 identity provenance, original counted loops, ARMCC extensions, original bugs and
   native ABI limitations remain explicit qualifications for independent reviewers.
 
-Current private binding: `scratch/integrator/c009/PRE-REVIEW-resume-r1.json` and
-`readiness-scope-r10.json`. No full build, test suite, prepare, finalize, accepted
-record write or push was run here. Main owns those gates and both independent reviews.
+Private binding is under `scratch/worktrees/c009/scratch/integrator/c009/`:
+`PRE-REVIEW-resume-r1.json` and current `readiness-scope-r11.json`; audited r10 is
+retained separately. The integration agent ran no full build, test suite, prepare,
+finalize, accepted-record write or push. Main owns those gates and both independent reviews.
 
 The final **ccddf12** correction changes only `001e3050`'s last store to the
 named `phase` member instead of indexing beyond `states[0..7]`. It MATCHes all
-50 bytes in `phase-store-r1.json`. Headers and callers are unchanged. The full
+80 bytes in `phase-store-r1.json`. Headers and callers are unchanged. The full
 audit results above remain bound to the **56c333e** boundary; Main performs the
 integrated full gates on the correction, with no blanket reattribution of old hashes.
 

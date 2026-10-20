@@ -1,6 +1,8 @@
 #include "game/scheduler.h"
 #include "game/startup.h"
-void func_00110a28(void)
+/* C-only procedure callback: every caller discards its value (C11 6.9.1p12).
+ * Do not consume the result or compile this definition as C++. */
+int func_00110a28(void)
 {
     func_001906b8(0);
     func_00190678();

@@ -41,7 +41,8 @@ def main() -> int:
     dry = json.loads(dry_path.read_text())
     direct_path = ROOT / handoff["match_scope"]
     direct = json.loads(direct_path.read_text())
-    required = {row["source"] for row in direct["units"]}
+    direct_by_source = {row["source"]: row for row in direct["units"]}
+    required = set(direct_by_source)
     header_paths = sorted(set(handoff["new_headers"] + handoff["revised_headers"]))
     texts = interfaces.project_headers(ROOT)
     changed = {}
@@ -68,8 +69,14 @@ def main() -> int:
                                 "address_reference_hits": address_hits,
                                 "named_record_reference_hits": record_hits})
         if row["source"] in required or reasons:
-            selected.append(dict(row))
-            consumers.append(dict(row, source_sha256=sha256(source),
+            recipe = dict(row)
+            extra_sources = direct_by_source.get(row["source"], {}).get("extra_sources", [])
+            if extra_sources:
+                recipe["extra_sources"] = list(extra_sources)
+            selected.append(recipe)
+            consumers.append(dict(recipe, source_sha256=sha256(source),
+                                  extra_source_sha256={path: sha256(ROOT / path)
+                                                       for path in extra_sources},
                                   directly_required=row["source"] in required,
                                   header_reasons=reasons))
         else:
