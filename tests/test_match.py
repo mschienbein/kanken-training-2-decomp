@@ -588,6 +588,19 @@ class UnreferencedDestructorCompareTest(unittest.TestCase):
         self.assertIn("original address binding", record["reason"])
         self.assertNotIn("removed_special_members", record)
 
+    def test_v10_matcher_serializes_the_complete_own_unwind_closure(self):
+        from tests.test_inplace import UnreferencedDestructorUnwindModelTest
+
+        fixture = UnreferencedDestructorUnwindModelTest()
+        obj, image, catalogue, names = fixture.fixture("extab")
+        code, record, error = self.invoke(obj, image, catalogue, fixture.MODEL, names)
+        self.assertEqual((code, error), (0, ""))
+        self.assertEqual(record["linker_model"], fixture.MODEL)
+        member, = record["removed_special_members"]
+        self.assertEqual([row["kind"] for row in member["unwind_sections"]], ["exidx", "extab"])
+        self.assertEqual(record["linker_rewrites"][0]["removed_special_member"], member)
+        self.assertEqual([row["name"] for row in record["functions"]], [fixture.D1])
+
 
 if __name__ == "__main__":
     unittest.main()

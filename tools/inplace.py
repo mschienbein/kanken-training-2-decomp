@@ -1703,26 +1703,30 @@ class InPlaceLinker:
         return removed
 
     def _check_unreferenced_destructors(self, obj: ObjectFile) -> None:
-        """U1 has no exidx/table exemption: check every still-live allocated reference and group."""
+        """Check every live allocated reference/group; v10 alone admits proven own-unwind closure."""
         if not self._unreferenced_sections:
             return
         dead = self._removed_sections.keys() | self._removed_unwind.keys()
+        targets = self._unreferenced_sections.keys()
+        if self.model.unreferenced_destructor_unwind:
+            targets |= {index for index, owner in self._removed_unwind.items() if owner in self._unreferenced_sections}
         names = {name: index for index, row in self._unreferenced_sections.items() for name in row["symbols"]}
         for section in obj.sections.values():
             if section.index in dead:
                 continue  # existing R1/v8 rules have already proved this source absent
-            if section.link_order and section.linked_section in self._unreferenced_sections:
+            if section.link_order and section.linked_section in targets:
                 raise LinkError(f"{section.name}: linked metadata keeps a U1 deleting destructor live")
             for rel in section.relocs:
                 if (rel.type == R_ARM_V4BX and section.executable and section.elf_type == "SHT_PROGBITS"
                         and not section.link_order):
                     continue  # ordinary-code architecture marker, not a target reference
                 index = rel.symbol.shndx
-                if index not in self._unreferenced_sections:
+                if index not in targets:
                     index = names.get(rel.symbol.name)
-                if index in self._unreferenced_sections:
+                if index in targets:
+                    kind = "deleting destructor" if index in self._unreferenced_sections else "unwind companion"
                     raise LinkError(
-                        f"{section.name}+{rel.offset:#x}: U1 deleting destructor "
+                        f"{section.name}+{rel.offset:#x}: U1 {kind} "
                         f"{obj.sections[index].name} is still referenced (relocation type {rel.type})")
         removable = dead | self._unreferenced_sections.keys()
         groups = {obj.sections[index].comdat for index in self._unreferenced_sections} - {None}
@@ -1761,13 +1765,15 @@ class InPlaceLinker:
             return 4 * (1 + ((word >> 16) & 0xFF))
         return None
 
-    def _removed_unwind_sections(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, int]:
-        """V8: an exclusive SHF_LINK_ORDER companion dies only with its complete R1/group closure.
+    def _removed_unwind_sections(self, obj: ObjectFile, names: dict[str, int],
+                                 removed: dict[int, dict] | None = None) -> dict[int, int]:
+        """V8's exclusive unwind/group proof; v10 may supply independently eligible U1 owners too.
 
         This is not general unwind-table placement or exception-table stripping. In particular,
         kept code's entries, shared extab data, roots and original-bound metadata never disappear.
         """
-        if not self.model.removed_unwind or not self._removed_sections:
+        removed = self._removed_sections if removed is None else removed
+        if not self.model.removed_unwind or not removed:
             return {}
         companions: dict[int, int] = {}
         exidx_by_owner: dict[int, int] = {}
@@ -1804,16 +1810,16 @@ class InPlaceLinker:
 
         for section in obj.sections.values():
             references = [rel for rel in section.relocs
-                          if rel.type != R_ARM_V4BX and rel.symbol.shndx in self._removed_sections]
+                          if rel.type != R_ARM_V4BX and rel.symbol.shndx in removed]
             linked_owner = section.linked_section if section.link_order else None
-            if not references and linked_owner not in self._removed_sections:
+            if not references and linked_owner not in removed:
                 continue
             # Ordinary call/data references still go through the unchanged R1 all-reference test.
             if not (section.name.startswith(".ARM.exidx") or section.elf_type == "SHT_ARM_EXIDX"
-                    or linked_owner in self._removed_sections):
+                    or linked_owner in removed):
                 continue
             owner = linked_owner
-            if (owner not in self._removed_sections or section.elf_type != "SHT_ARM_EXIDX"
+            if (owner not in removed or section.elf_type != "SHT_ARM_EXIDX"
                     or section.size != 8 or section.entsize not in (0, 8)
                     or owner in exidx_by_owner):
                 raise LinkError(f"{section.name}: shared, combined or unassociated unwind index")
@@ -1862,11 +1868,11 @@ class InPlaceLinker:
 
         # Section links are dependencies too, even without an allocated relocation.
         for section in obj.sections.values():
-            if (section.link_order and section.linked_section in (self._removed_sections | companions)
+            if (section.link_order and section.linked_section in (removed | companions)
                     and section.index not in companions):
                 raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")
         # A group is indivisible, including all supplied copies and allocated members that
-        # placement would otherwise ignore. Only already-selected R1 code and validated own
+        # placement would otherwise ignore. Only already-selected R1/U1 code and validated own
         # unwind sections have a removal proof; do not infer general unused-data elimination.
         groups = {obj.sections[owner].comdat for owner in exidx_by_owner} - {None}
         group_members = {
@@ -1883,11 +1889,11 @@ class InPlaceLinker:
             for index in sorted(members, key=str):
                 member = obj.sections.get(index)
                 if (member is None or member.comdat != signature
-                        or index not in self._removed_sections and index not in companions):
+                        or index not in removed and index not in companions):
                     name = member.name if member is not None else "unrepresented allocated member"
                     raise LinkError(f"COMDAT {signature}: {name} has no complete group-removal proof")
         for owner in exidx_by_owner:
-            self._removed_sections[owner]["unwind_sections"] = [
+            removed[owner]["unwind_sections"] = [
                 {"section": obj.sections[index].name, "section_index": index,
                  "size": obj.sections[index].size, "kind": "exidx" if index == exidx_by_owner[owner] else "extab",
                  "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate")))}
@@ -1994,7 +2000,9 @@ class InPlaceLinker:
         self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
         self._unreferenced_sections = self._unreferenced_destructors(obj, names_to_address or {})
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
-        self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {})
+        unwind_owners = (self._removed_sections | self._unreferenced_sections
+                         if self.model.unreferenced_destructor_unwind else self._removed_sections)
+        self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {}, unwind_owners)
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
         self._check_unreferenced_destructors(obj)

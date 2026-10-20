@@ -15,10 +15,12 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The experimental opt-in **`armlink5-inline-branchnop-v9`** composes v8 with U1, witnessed
-unreferenced deleting-destructor removal. It is **not adopted**: its proposed gate revision is
+The recorded experimental **`armlink5-inline-branchnop-v9`** retains its strict no-own-exidx
+U1 rule and receipt as unadopted history. The new experimental opt-in
+**`armlink5-inline-branchnop-v10`** adds v8's exclusive own-unwind closure for U1 D0 owners;
+it does not alter v9 or any adopted model. Its proposed gate revision is
 `scratch/integrator/linker-unref/GATES-DRAFT.md`, pending independent implementation/exact-text
-review. `docs/GATES.md` remains frozen v1.19; no checkpoint may select v9 before adoption.
+review. `docs/GATES.md` remains frozen v1.19; implementation availability is not adoption.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -67,7 +69,8 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
 | `armlink5-inline-branchnop-v7` (88f5c38) | **retired**, never adopted | its own-exidx exception could partially remove a live COMDAT group and accepted truncated compact extab while rejecting complete zero-terminated entries; sealed review `scratch/review/exidx-v7/REVIEW.md`, FAIL |
 | `armlink5-inline-branchnop-v8` | frozen opt-in, adopted gates v1.19; PASS_WITH_QUALIFICATIONS | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
-| `armlink5-inline-branchnop-v9` | experimental opt-in, **not adopted** | v8 plus U1: unbound, witnessed, compiler-generated D0 sections with no live allocated reference or partial-group removal; no vtable/exidx exemption |
+| `armlink5-inline-branchnop-v9` | recorded unadopted history, selectable | v8 plus U1: unbound, witnessed, compiler-generated D0 sections with no live allocated reference or partial-group removal; no vtable/exidx exemption |
+| `armlink5-inline-branchnop-v10` | experimental opt-in, **not adopted** | v9 plus v8's exclusive own-exidx/extab closure for independently eligible U1 D0 owners; all other live references still refuse |
 
 ## Function-entry alias identity (v6 only)
 
@@ -344,9 +347,9 @@ and U1 transition/zero-credit-owner tests in `AcceptGateTest`.
 The bounded real fixture is types-menu snapshot `d8aef63a`, attempt008
 `src/wave18/func_001acbb4.cpp`. It still has allocated own-exidx metadata referencing D0,
 despite emitting no vtable. Attempt006 additionally emits a live table→D0 reference.
-U1 must refuse these cases rather than silently implement another elimination rule.
+V9 must refuse these cases rather than silently implement another elimination rule.
 
-Executed on this proposal: **126 focused regressions, exit 0, OK** (U1, frozen v2/v4/R1/v6/v8,
+Executed on the recorded v9 proposal: **126 focused regressions, exit 0, OK** (U1, frozen v2/v4/R1/v6/v8,
 alias comparison, synthetic receipts and model-transition closure). The bounded attempt008
 `tools/match.py` run selected v9/L1 with `--show 0` and the snapshot names overlay:
 **exit 2**, `.ARM.exidx: linked metadata keeps a U1 deleting destructor live`.
@@ -355,6 +358,77 @@ flags/compiler and this branch's matcher/linker were unchanged. Commands, source
 exact exits are recorded in `scratch/integrator/linker-unref/evidence.json`; the refusal is
 `scratch/integrator/linker-unref/real-menu-reset-v9/func_001acbb4.result.json`.
 No full build, whole-ledger audit, adoption or new credit is claimed.
+
+## Deleting-destructor own-unwind closure (experimental v10)
+
+V9's real MenuResetScene receipt records a strict own-exidx refusal. It remains a valid
+historical identity, not an adopted model or a rule amended under its recorded name.
+Only **`armlink5-inline-branchnop-v10`** adds the following U1 companion rule. V10 preserves
+all v9 D0 recognition, bindings, original null-vtable/D1 witnesses, root exclusions and
+ordinary retained-code comparisons, while retaining the adopted v8 R1 behavior.
+
+An independently U1-eligible D0 may lose **only its exclusive own** unwind closure:
+
+1. Its readonly allocated `SHT_ARM_EXIDX`, with `SHF_LINK_ORDER` and `sh_link` to that
+   exact D0 section, is one complete eight-byte entry. Its offset-zero `R_ARM_PREL31`
+   targets exactly the D0 entry with zero effective addend; combined/interior/foreign
+   keys, duplicate index owners and unsupported section metadata refuse elimination.
+2. The second word is CANTUNWIND, an inline compact personality-0 entry, or a structural
+   PREL31 to the beginning of one exclusive readonly frame-only compact extab. Out-of-line
+   personalities 0/1/2 require the complete encoded unwind prefix **plus exactly one final
+   zero descriptor-list terminator**. Nonempty descriptors, truncated/trailing data,
+   generic personalities and unsupported relocations/dependencies fail closed. Only the
+   matching undefined `__aeabi_unwind_cpp_pr0/1/2` NONE marker is understood.
+3. The index has no other incoming reference; extab is referenced only by its own index's
+   structural PREL31. Neither companion is rooted, original-bound or independently named,
+   and both satisfy v8's exact section/group constraints. Before an exemption, every
+   allocated member of every affected group/copy must be selected eligible R1/U1 code or
+   a validated own-unwind companion. Kept/unrepresented/unsupported members, unknown group
+   flags and contradictory code copies refuse the link. No arbitrary group member is swept in.
+4. Every **other** live relocation/link-order dependency still refuses, whether from code,
+   data, tables, foreign exidx/extab, aliases or dependency markers, placed or unplaced.
+   This includes references to an eliminated companion, not only to D0. Ordinary-code
+   V4BX stays nonreferencing; markers in unwind/data do not receive that exemption.
+   A bound/retained D1's entry is never selected. No vtable cell is nulled or discarded.
+
+`_removed_unwind_sections` applies its existing v8 structural/group proof to an explicitly
+supplied union of independently selected R1 and U1 owners **only under v10**. Older models
+pass precisely their old R1 owner set. All-reference checks run after that proof and R1's
+actual inlined-call checks; U1 alone never proves an R1 helper removable.
+
+Every U1 action still records `unused_deleting_destructor` with `target: null`; its nested
+`unwind_sections` separately identifies each eliminated index/extab's name/index, kind,
+complete size and defining object, exactly as v8 reports R1 companions. Match/build/prepare
+retain those complete actions in existing U1 receipt/model-use closure. A v9→v10 or
+v8/v6→v10 transition reopens current R1/L1 review dependencies and every credited function
+of each U1-owning unit. Companion sections earn no credit. The revised draft requires
+independent exact-text/implementation review and a recorded gate revision before any
+checkpoint selects v10; all current checkpoint selections remain unchanged.
+
+The rationale is the same documented
+[ELF `SHF_LINK_ORDER` ownership rule](https://gabi.xinuos.com/elf/03-sheader.html#section-flags)
+and [EHABI32 index ownership/format](https://github.com/ARM-software/abi-aa/blob/main/ehabi32/ehabi32.rst)
+used by v8. [INFERENCE] armlink discards a proven eliminated section's exclusive own
+link-order index and exclusively reached extab together, rather than treating their
+structural back-reference as independent liveness. This is not proof of original
+linker flags, original unwind-table bounds or a fresh native armlink execution.
+
+Synthetic U1 closure coverage is `UnreferencedDestructorUnwindModelTest`, the v10
+matcher/build receipt tests, and the v9→v10 transition test in `AcceptGateTest`.
+The recorded v9 tests/receipt remain unchanged evidence; v10 has its own bounded results.
+
+Executed v10 evidence: **138 focused tests, exit 0, OK**, covering own-companion removal,
+frame-only/zero-terminator limits, foreign/shared/live references, complete groups/copies,
+receipt attribution and v9→v10 transition closure, alongside the frozen-model regressions.
+The bounded d8aef63a MenuResetScene attempt008 comparison selected v10/L1: **exit 0**,
+`_ZN14MenuResetSceneD1Ev` matched all **100 bytes** at `0x001acbb4`.
+Its only rewrite action is `unused_deleting_destructor`, `target: null`, eliminating
+`i._ZN14MenuResetSceneD0Ev` (section 1, **108 bytes**) plus its exclusive `.ARM.exidx`
+(section 4, **8 bytes**). No extab or per-function branch rewrite was eliminated/applied.
+The same immutable snapshot/include-root override as v9 was used; no source flags changed.
+Commands and every action are recorded in `scratch/integrator/linker-unref/evidence-v10.json`;
+the full result is `scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.result.json`.
+This private MATCH does not adopt v10, grant credit, or replace independent gate review.
 
 ## Sources
 

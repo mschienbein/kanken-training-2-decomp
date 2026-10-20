@@ -2358,7 +2358,7 @@ class UnreferencedDestructorModelTest(unittest.TestCase):
                 self.assertEqual(getattr(selected, key), value)
         self.assertTrue(selected.unreferenced_destructors)
         for model in inplace.LINKER_MODELS:
-            if model == self.MODEL:
+            if model in (self.MODEL, "armlink5-inline-branchnop-v10"):
                 continue
             self.assertFalse(inplace.linker_model(model).unreferenced_destructors)
             obj, mem, catalogue, names = self.fixture()
@@ -2371,6 +2371,229 @@ class UnreferencedDestructorModelTest(unittest.TestCase):
         self.assertEqual(set(linker.link(obj)), {1})
         self.assertEqual(len(linker.removed_callees[0]["unwind_sections"]), 2)
         self.assertEqual(linker.removed_special_members, [])
+
+
+class UnreferencedDestructorUnwindModelTest(unittest.TestCase):
+    """V10 composes the unchanged U1 witness with v8's exclusive own-unwind/group proof."""
+
+    MODEL = "armlink5-inline-branchnop-v10"
+    D0 = UnreferencedDestructorModelTest.D0
+    D1 = UnreferencedDestructorModelTest.D1
+    D2 = UnreferencedDestructorModelTest.D2
+    VTABLE = UnreferencedDestructorModelTest.VTABLE
+    linker = UnreferencedDestructorModelTest.linker
+    refuse = UnreferencedDestructorModelTest.refuse
+
+    def fixture(self, form="cant", group=False):
+        obj, mem, catalogue, names = UnreferencedDestructorModelTest.fixture(self)
+        second = 0x80B0B0B0 if form == "inline" else 1
+        obj.sections[3] = inplace.Section(
+            3, ".ARM.exidx.D0", struct.pack("<2I", 0, second), 8, False, False, False,
+            [inplace.Reloc(0, inplace.R_ARM_PREL31, obj.symbols[3])],
+            align=4, elf_type="SHT_ARM_EXIDX", link_order=True, linked_section=2)
+        if form == "extab":
+            extab = inplace.Symbol(".ARM.extab.D0", 0, 0, "STT_SECTION", "STB_LOCAL", 4)
+            obj.symbols.append(extab)
+            obj.sections[3].data = bytes(8)
+            obj.sections[3].relocs.append(inplace.Reloc(4, inplace.R_ARM_PREL31, extab))
+            obj.sections[4] = inplace.Section(
+                4, ".ARM.extab.D0", struct.pack("<2I", 0x80B0B0B0, 0), 8, False, False, False, align=4)
+        if group:
+            members = {2, 3, *([4] if form == "extab" else [])}
+            for index in members:
+                obj.sections[index].comdat = "D0_group"
+            obj.section_groups = [(1, "D0_group", members)]
+        return obj, mem, catalogue, names
+
+    def test_own_exidx_and_exclusive_extab_die_with_d0_and_every_section_is_reported(self):
+        for form in ("cant", "inline", "extab"):
+            for group in (False, True):
+                with self.subTest(form=form, group=group):
+                    obj, mem, catalogue, names = self.fixture(form, group)
+                    linker = self.linker(mem, catalogue, names)
+                    self.assertEqual(set(linker.link(obj)), {1})
+                    self.assertEqual(linker.removed_callees, [])
+                    member, = linker.removed_special_members
+                    self.assertEqual([row["kind"] for row in member["unwind_sections"]],
+                                     ["exidx", "extab"] if form == "extab" else ["exidx"])
+                    self.assertEqual(set(linker._removed_unwind), {3, *([4] if form == "extab" else [])})
+                    self.assertEqual(linker.rewrites[0].record()["removed_special_member"], member)
+                    self.assertTrue(all(row["object"] == "destructor.o" for row in member["unwind_sections"]))
+                    self.assertTrue(all("data" not in row for row in member["unwind_sections"]))
+
+    def test_compact_personalities_require_complete_prefix_and_separate_zero_terminator(self):
+        for personality in (0, 1, 2):
+            for count in ((0,) if personality == 0 else (0, 1, 3)):
+                for malformed in (None, "missing_zero", "nonzero_descriptor", "trailing_word", "short_prefix"):
+                    with self.subTest(personality=personality, count=count, malformed=malformed):
+                        obj, mem, catalogue, names = self.fixture("extab")
+                        header = 0x80B0B0B0 if personality == 0 else ((0x80 + personality) << 24) | (count << 16) | 0xB0B0
+                        prefix = struct.pack("<I", header) + struct.pack("<I", 0xB0B0B0B0) * count
+                        data = prefix + bytes(4)
+                        if malformed == "missing_zero":
+                            data = prefix
+                        elif malformed == "nonzero_descriptor":
+                            data = prefix + struct.pack("<I", 1)
+                        elif malformed == "trailing_word":
+                            data += bytes(4)
+                        elif malformed == "short_prefix":
+                            data = data[:-4] if count else data[:2]
+                        obj.sections[4].data, obj.sections[4].size = data, len(data)
+                        routine = inplace.Symbol(f"__aeabi_unwind_cpp_pr{personality}", 0, 0,
+                                                 "STT_NOTYPE", "STB_GLOBAL", "SHN_UNDEF")
+                        obj.symbols.append(routine)
+                        obj.sections[4].relocs.append(inplace.Reloc(0, inplace.R_ARM_NONE, routine))
+                        if malformed is not None:
+                            self.refuse(obj, mem, catalogue, names)
+                        else:
+                            self.assertEqual(set(self.linker(mem, catalogue, names).link(obj)), {1})
+
+    def test_foreign_exidx_extab_code_data_and_tables_still_keep_d0_live(self):
+        for kind, executable, relocation in (
+                ("code", True, inplace.R_ARM_CALL), ("data", False, inplace.R_ARM_ABS32),
+                ("table", False, inplace.R_ARM_TARGET1), ("ARM.extab.foreign", False, inplace.R_ARM_PREL31),
+                ("dependency", False, inplace.R_ARM_NONE), ("ARM.exidx.foreign", False, inplace.R_ARM_PREL31)):
+            obj, mem, catalogue, names = self.fixture()
+            foreign_index = kind == "ARM.exidx.foreign"
+            obj.sections[5] = inplace.Section(
+                5, f".{kind}", bytes(8), 8, False, executable, False,
+                [inplace.Reloc(0, relocation, obj.symbols[3])], align=4,
+                elf_type="SHT_ARM_EXIDX" if foreign_index else "SHT_PROGBITS",
+                link_order=foreign_index, linked_section=1 if foreign_index else 0)
+            self.refuse(obj, mem, catalogue, names)
+
+    def test_shared_extab_and_incoming_references_to_either_companion_refuse(self):
+        for target in (3, 4):
+            for relocation in (inplace.R_ARM_ABS32, inplace.R_ARM_NONE, inplace.R_ARM_V4BX):
+                obj, mem, catalogue, names = self.fixture("extab")
+                reference = inplace.Symbol("companion", 0, 0, "STT_SECTION", "STB_LOCAL", target)
+                obj.symbols.append(reference)
+                obj.sections[5] = inplace.Section(
+                    5, ".unplaced.data", bytes(4), 4, False, False, False, [inplace.Reloc(0, relocation, reference)])
+                self.refuse(obj, mem, catalogue, names)
+        obj, mem, catalogue, names = self.fixture("extab")
+        own = inplace.Symbol("kept", 0, 0, "STT_SECTION", "STB_LOCAL", 1)
+        obj.symbols.append(own)
+        obj.sections[5] = inplace.Section(
+            5, ".ARM.exidx.kept", bytes(8), 8, False, False, False,
+            [inplace.Reloc(0, inplace.R_ARM_PREL31, own),
+             inplace.Reloc(4, inplace.R_ARM_PREL31, obj.symbols[-2])],
+            align=4, elf_type="SHT_ARM_EXIDX", link_order=True, linked_section=1)
+        self.refuse(obj, mem, catalogue, names, "another incoming reference")
+
+    def test_unassociated_combined_interior_and_duplicate_exidx_are_never_swept_in(self):
+        for case in ("no_link_order", "foreign_owner", "combined", "interior_key", "wrong_key_type",
+                     "duplicate", "dependency", "wrong_second_word", "wrong_elf_type"):
+            obj, mem, catalogue, names = self.fixture()
+            section = obj.sections[3]
+            if case == "no_link_order":
+                section.link_order = False
+            elif case == "foreign_owner":
+                section.linked_section = 1
+            elif case == "combined":
+                section.data += section.data
+                section.size *= 2
+            elif case == "interior_key":
+                section.data = struct.pack("<2I", 4, 1)
+            elif case == "wrong_key_type":
+                section.relocs[0].type = inplace.R_ARM_ABS32
+            elif case == "duplicate":
+                obj.sections[5] = inplace.replace(section, index=5)
+            elif case == "dependency":
+                section.relocs.append(inplace.Reloc(0, inplace.R_ARM_NONE, obj.symbols[0]))
+            elif case == "wrong_second_word":
+                section.data = bytes(8)
+            else:
+                section.elf_type = "SHT_PROGBITS"
+            self.refuse(obj, mem, catalogue, names)
+
+    def test_rooted_bound_named_or_partial_group_companions_refuse(self):
+        for target in (3, 4):
+            for case in ("root", "binding", "named", "live_member", "unrepresented", "unknown_flags"):
+                obj, mem, catalogue, names = self.fixture("extab", group=True)
+                section = obj.sections[target]
+                if case == "root":
+                    section.retention = ("KEEP",)
+                elif case in ("binding", "named"):
+                    alias = inplace.Symbol("unwind_alias", 0, 0, "STT_OBJECT", "STB_GLOBAL", target)
+                    obj.symbols.append(alias)
+                    if case == "binding":
+                        names[alias.name] = {"address": TABLE_AT + 0x100}
+                elif case == "live_member":
+                    obj.sections[1].comdat = "D0_group"
+                    obj.section_groups[0][2].add(1)
+                elif case == "unrepresented":
+                    obj.section_groups[0][2].add(99)
+                else:
+                    obj.section_groups[0] = (3, "D0_group", obj.section_groups[0][2])
+                self.refuse(obj, mem, catalogue, names)
+
+    def test_all_group_copies_need_independent_own_closure_in_both_object_orders(self):
+        for case in ("valid", "foreign_owner", "live_member", "unrepresented"):
+            for reverse in (False, True):
+                with self.subTest(case=case, reverse=reverse):
+                    first, mem, catalogue, names = self.fixture("extab", group=True)
+                    second, _, _, _ = self.fixture("extab", group=True)
+                    for obj in (first, second):
+                        obj.sections[1].comdat = "D1_group"
+                        obj.section_groups.append((1, "D1_group", {1}))
+                    if case == "foreign_owner":
+                        second.sections[3].linked_section = 1
+                    elif case == "live_member":
+                        second.sections[5] = inplace.Section(
+                            5, ".data", bytes(4), 4, False, False, False, comdat="D0_group")
+                        second.section_groups[0][2].add(5)
+                    elif case == "unrepresented":
+                        second.section_groups[0][2].add(99)
+                    objects, labels = [first, second], ["first.cpp", "second.cpp"]
+                    if reverse:
+                        objects.reverse()
+                        labels.reverse()
+                    obj = inplace.ObjectFile.combine(objects, labels)
+                    if case != "valid":
+                        self.refuse(obj, mem, catalogue, names)
+                    else:
+                        linker = self.linker(mem, catalogue, names)
+                        self.assertEqual(len(linker.link(obj)), 2)
+                        self.assertEqual({row["object"] for row in linker.removed_special_members}, set(labels))
+                        for row in linker.removed_special_members:
+                            self.assertEqual({part["object"] for part in row["unwind_sections"]}, {row["object"]})
+
+    def test_kept_d1_index_is_not_selected_and_bound_d0_is_never_eliminated(self):
+        obj, mem, catalogue, names = self.fixture()
+        key = inplace.Symbol("kept", 0, 0, "STT_SECTION", "STB_LOCAL", 1)
+        obj.symbols.append(key)
+        obj.sections[5] = inplace.Section(
+            5, ".ARM.exidx.kept", struct.pack("<2I", 0, 1), 8, False, False, False,
+            [inplace.Reloc(0, inplace.R_ARM_PREL31, key)],
+            align=4, elf_type="SHT_ARM_EXIDX", link_order=True, linked_section=1)
+        linker = self.linker(mem, catalogue, names)
+        linker.link(obj)
+        self.assertEqual(linker._removed_unwind, {3: 2})
+        address = BASE + 0x100
+        names[self.D0] = {"address": address}
+        catalogue[address] = {"address": address, "size": obj.sections[2].size, "isa": "arm"}
+        mem.write(address, obj.sections[2].data)
+        linker = self.linker(mem, catalogue, names)
+        self.assertEqual(set(linker.link(obj)), {1, 2})
+        self.assertEqual((linker.removed_special_members, linker._removed_unwind), ([], {}))
+
+    def test_v10_is_new_identity_and_v9_keeps_its_recorded_own_exidx_refusal(self):
+        previous, selected = inplace.linker_model(UnreferencedDestructorModelTest.MODEL), inplace.linker_model(self.MODEL)
+        for key, value in vars(previous).items():
+            if key not in ("name", "unreferenced_destructor_unwind"):
+                self.assertEqual(getattr(selected, key), value)
+        self.assertFalse(previous.unreferenced_destructor_unwind)
+        self.assertTrue(selected.unreferenced_destructor_unwind)
+        obj, mem, catalogue, names = self.fixture()
+        with self.assertRaisesRegex(inplace.LinkError, "linked metadata"):
+            self.linker(mem, catalogue, names, model=previous.name).link(obj)
+        obj, mem, catalogue, names = UnreferencedDestructorModelTest.fixture(self)
+        self.assertEqual(set(self.linker(mem, catalogue, names).link(obj)), {1})
+        obj, mem, catalogue = RemovedUnwindModelTest().fixture("extab")
+        linker = self.linker(mem, catalogue, {})
+        self.assertEqual(set(linker.link(obj)), {1})
+        self.assertEqual(len(linker.removed_callees[0]["unwind_sections"]), 2)
 
 
 class RemovedUnwindModelTest(unittest.TestCase):

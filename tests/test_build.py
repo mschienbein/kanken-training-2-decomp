@@ -32,7 +32,10 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
         fixture = inplace_tests.RemovedCalleeModelTest()
         names = {}
         if unreferenced:
-            caller, memory, functions, names = inplace_tests.UnreferencedDestructorModelTest().fixture()
+            if unreferenced == "unwind":
+                caller, memory, functions, names = inplace_tests.UnreferencedDestructorUnwindModelTest().fixture("extab")
+            else:
+                caller, memory, functions, names = inplace_tests.UnreferencedDestructorModelTest().fixture()
             helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
             helper.sections, helper.symbols = {}, []
         elif comdat_alias is not None:
@@ -216,6 +219,19 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
             self.assertEqual(owner["linker_rewrites"], {})
             self.assertEqual(owner["object_sha256"], build.sha256_file(root / "build/synthetic-removed/obj/src/caller.o"))
             self.assertNotIn("removed_special_members", units["src/helper.c"])
+
+    def test_v10_receipts_bind_every_owned_unwind_companion_without_crediting_it(self):
+        model = inplace_tests.UnreferencedDestructorUnwindModelTest.MODEL
+        for reverse in (False, True):
+            receipt, root = self.synthetic_build(model=model, reverse=reverse, unreferenced="unwind")
+            self.assertEqual(receipt["result"], "PASS")
+            self.assertEqual((receipt["credited"]["functions"], receipt["credited"]["bytes"]), (1, 4))
+            owner = next(unit for unit in receipt["units"] if unit["source"] == "src/caller.c")
+            member, = owner["removed_special_members"]
+            self.assertEqual([row["kind"] for row in member["unwind_sections"]], ["exidx", "extab"])
+            self.assertEqual({row["object"] for row in member["unwind_sections"]}, {"src/caller.c"})
+            self.assertEqual(owner["linker_section_rewrites"][0]["removed_special_member"], member)
+            self.assertEqual(owner["object_sha256"], build.sha256_file(root / "build/synthetic-removed/obj/src/caller.o"))
 
 PROFILE = toolchain.Profile(
     "game", "armcc_504_82",

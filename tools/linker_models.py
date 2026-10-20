@@ -23,6 +23,7 @@ class LinkerModel:
     function_entry_aliases: bool = False  # v6: proven aliases plus independently bound legacy placement
     removed_unwind: bool = False  # v8: eliminate only complete, exclusive EHABI/group closures
     unreferenced_destructors: bool = False  # v9: witnessed, unbound D0 sections with no live references
+    unreferenced_destructor_unwind: bool = False  # v10: U1 owners receive v8's exclusive own-unwind closure
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -38,6 +39,9 @@ LINKER_MODELS = {m.name: m for m in (
     LinkerModel("armlink5-inline-branchnop-v9", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
                 unreferenced_destructors=True),
+    LinkerModel("armlink5-inline-branchnop-v10", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).

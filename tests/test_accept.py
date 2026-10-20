@@ -543,15 +543,16 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(accept.finalize("c015", 1)["seq"], 2)
         accept.verify_history()
 
-    def test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions(self):
-        previous = "armlink5-inline-branchnop-v8"
-        selected = "armlink5-inline-branchnop-v9"
+    def u1_model_transition(self, previous, selected, own_unwind=False):
         units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
         self.stubbed_prepare("c014", units, linker_model=previous)
         self.review(name="c014")
         accept.finalize("c014", 1)
         member = {"section": "i._ZN6WidgetD0Ev", "section_index": 2, "symbols": ["_ZN6WidgetD0Ev"],
                   "size": 12, "object": "src/a.c", "evidence": {"d0_slot_is_null": True}}
+        if own_unwind:
+            member["unwind_sections"] = [{
+                "section": ".ARM.exidx.D0", "section_index": 3, "kind": "exidx", "size": 8, "object": "src/a.c"}]
         action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
         receipts = [{"source": "src/a.c", "functions": ["func_00100000"], "removed_special_members": [member],
                      "linker_section_rewrites": [action]}]
@@ -577,6 +578,12 @@ class AcceptGateTest(unittest.TestCase):
                     qualifications=["U1 null-slot and class spelling are bounded witnesses, not original link provenance"])
         self.assertEqual(accept.finalize("c015", 1)["linker_model"], selected)
         accept.verify_history()
+
+    def test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v8", "armlink5-inline-branchnop-v9")
+
+    def test_v9_to_v10_transition_reopens_u1_owner_and_binds_every_unwind_companion(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v9", "armlink5-inline-branchnop-v10", own_unwind=True)
 
     def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
         member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}
