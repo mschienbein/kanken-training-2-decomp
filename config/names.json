@@ -1217,6 +1217,22 @@
     "_ZN13RuntimeMemberC2Ev": {
       "address": 1367692,
       "evidence": "[INFERENCE] Native member identity; complete/base constructor aliases emitted by the same c009-r3 source definition at src/wave2/func_0014de8c.cpp."
+    },
+    "_ZN2nw4font14CharStrmReader17ReadNextCharUTF16Ev": {
+      "address": 1945684,
+      "evidence": "Original data_0021c64c PMF element3 and own native provider MATCH at accepted001db054; scratch/integrator/types-fontgfx/match/reader-utf16-r2. Replaces the unrelated HalfwordCursor peer, with explicit accepted-owner move."
+    },
+    "_ZN2nw4font14CharStrmReader18ReadNextCharCP1252Ev": {
+      "address": 1945704,
+      "evidence": "Original data_0021c64c PMF element2 and own native provider MATCH at accepted001db068; scratch/integrator/types-fontgfx/match/reader-cp1252-r1. Returns the real shared u16 decoder result, not an incompatible byte callback."
+    },
+    "_ZN2nw3lyt8Material18GetAlphaComparePtrEv": {
+      "address": 1364564,
+      "evidence": "Own native provider MATCH at accepted0014d254, scratch/integrator/types-fontgfx/match/material-get-alpha-r1. The pinned Material::ReserveMem constructs AlphaCompare after TexMap/TexSRT/TexCoordGen arrays; this replaces the old MaterialPair/getter peer with the real object contract."
+    },
+    "_ZN2nw3lyt7Picture11SetMaterialEPNS0_8MaterialE": {
+      "address": 1572260,
+      "evidence": "Own native provider MATCH at accepted0017fda4, scratch/integrator/types-fontgfx/match/picture-material-r1. Retail Picture constructor/table and material+13c storage proven by fontgfx L01/L03; actual virtual complete destruction and layout deallocation are retained."
     }
   }
 }

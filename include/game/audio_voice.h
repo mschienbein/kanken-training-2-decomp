@@ -9,7 +9,6 @@ struct AudioFadeController;
 struct AudioLinearRamp;
 struct AudioSlotBufferDescriptor001d9580;
 struct AudioVoiceOwner001d9580;
-struct ByteCursor001db068;
 struct ConfigState001719f4;
 struct ConfigTarget001719f4;
 struct FloatState001d4ad4;
@@ -18,7 +17,6 @@ struct FloatState001d4cec;
 struct FloatState001d51b8;
 struct FloatState001d5284;
 struct FloatState001d5404;
-struct HalfwordCursor001db054;
 struct PackedPointer001f15fc;
 struct PoolLink;
 struct ResetState001d4850;
@@ -357,13 +355,6 @@ struct AudioSlotBufferDescriptor001d9580 {
     unsigned char reserved12[6];
 };
 
-struct HalfwordCursor001db054 {
-    const unsigned short *current;
-};
-
-struct ByteCursor001db068 {
-    const unsigned char *current;
-};
 
 struct PackedPointer001f15fc {
     unsigned char reserved00[0x2c];
@@ -439,8 +430,6 @@ extern void func_001d5284(struct FloatState001d5284 *state, float value);
 extern void func_001d5404(struct FloatState001d5404 *state, float value);
 extern void func_001d9580(struct AudioVoiceOwner001d9580 *owner,
                              const unsigned char *first, const unsigned char *last);
-extern unsigned short func_001db054(struct HalfwordCursor001db054 *cursor);
-extern unsigned char func_001db068(struct ByteCursor001db068 *cursor);
 extern void *func_001f15fc(const struct PackedPointer001f15fc *state);
 extern unsigned func_001f2ef8(const struct AudioVoiceGroup *group);
 extern void func_001d4adc(struct AudioFadeController *controller, bool muted,

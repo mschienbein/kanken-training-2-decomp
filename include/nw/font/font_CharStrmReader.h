@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/font/font_CharStrmReader.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: retain public layouts; normalize assertion includes and remove unused SDK/module and graphics-type dependencies.
+ * Modified 2026-10-20: share the real decoder member-pointer table contract;
+ * advance the stream value without reference punning.
  * This file is free software under GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -17,6 +18,7 @@ class CharStrmReader
 {
     friend class Font;
 public:
+    typedef u16 (CharStrmReader::*ReadNextCharFunc)();
     CharStrmReader(const CharStrmReader& rhs):
         m_CharStrm(rhs.m_CharStrm),
         m_ReadFunc(rhs.m_ReadFunc) {}
@@ -35,7 +37,6 @@ public:
     const void* GetCurrentPos() const { return m_CharStrm; }
     u16 Next() { return (this->*m_ReadFunc)(); }
 private:
-    typedef u16 (CharStrmReader::*ReadNextCharFunc)();
 
     const void* m_CharStrm;
     const ReadNextCharFunc m_ReadFunc;
@@ -47,15 +48,15 @@ private:
     template<typename CharType>
     CharType GetChar(int offset = 0) const
     {
-        const CharType* charStrm = reinterpret_cast<const CharType*>(m_CharStrm);
+        const CharType* charStrm = static_cast<const CharType*>(m_CharStrm);
         return *(charStrm + offset);
     }
 
     template<typename CharType>
     void StepStrm(int step = 1)
     {
-        const CharType*& charStrm = reinterpret_cast<const CharType*&>(m_CharStrm);
-        charStrm += step;
+        const CharType* charStrm = static_cast<const CharType*>(m_CharStrm);
+        m_CharStrm = charStrm + step;
     }
 
     u16 ReadNextCharUTF8();
@@ -67,3 +68,6 @@ private:
 }
 }
 
+
+/* The original array holds four nonvirtual reader member pointers. */
+extern "C" const nw::font::CharStrmReader::ReadNextCharFunc data_0021c64c[4];
