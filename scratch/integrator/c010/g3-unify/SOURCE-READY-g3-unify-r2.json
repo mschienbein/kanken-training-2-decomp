@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "supersedes": "SOURCE-READY-g3-unify-r1.json",
+  "status": "scoped-declaration-and-MATCH-closure-complete; harness-prerequisite-for-prepare",
+  "branch": "c010-g3-unify",
+  "final_source_commit": "e1283c7",
+  "metadata_commit": "ef70be1",
+  "summary": "G3-UNIFY-r1.json",
+  "dry_ledger": "scratch/integrator/c010/g3-unify/dry-matches-r2.json",
+  "candidate_units": 505,
+  "candidate_claims": 520,
+  "new_functions": 507,
+  "new_bytes": 47612,
+  "moves": 13,
+  "original_ten_moves_preserved": true,
+  "explicit_NEW_deferrals": [
+    "func_00172994",
+    "func_001debb4",
+    "func_001e42fc"
+  ],
+  "credited_MATCH_units": 2712,
+  "credited_MATCH_functions": 2803,
+  "helper_only_units": 23,
+  "helper_contexts": 26,
+  "final_interfaces": {
+    "path": "scratch/integrator/c010/g3-unify/interfaces-r2.json",
+    "exit": 1,
+    "disagreements": 0,
+    "policy": 0,
+    "unchecked_CPP": 782,
+    "unchecked_C": 1
+  },
+  "harness_prerequisite": {
+    "evidence": "scratch/integrator/c010/g3-unify/VARARGS-AUDIT-GAP-r1.json",
+    "source": "src/checkpoint10/func_00190c1c.c",
+    "reason": "ARMCC __va_arg type operand cannot currently be parsed by the C audit adapter. Matching standard variadic C remains unchanged and remains in candidates.",
+    "owner": "Main / InterfacesVaArgFixCodex on tools-interfaces-vaarg",
+    "disposition": "Main explicitly accepts this scoped declaration-unification handoff with the actual exit 1. Harness correction lands through Main suite; c010 rebases onto finalized c009-r4 and reruns G3 in its own prepare sequence.",
+    "not_a_deferral": true
+  },
+  "qualification": "No prepare, suite, fresh two-build equality, independent review or acceptance credit is claimed."
+}
