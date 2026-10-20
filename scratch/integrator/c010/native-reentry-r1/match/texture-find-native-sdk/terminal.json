@@ -1,0 +1,26 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/texture_find.cpp",
+  "source_sha256": "cb85f26925882d91b3338fb425f627ff642a56e45b8edf24763bd996b91d9b30",
+  "profile": "sdk",
+  "exit_code": 1,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/texture_find.cpp",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/texture-find-native-sdk",
+    "--names",
+    "scratch/integrator/c010/native-reentry-r1/texture-names-proposed.json"
+  ],
+  "stdout": "note: proposed names overlay scratch/integrator/c010/native-reentry-r1/texture-names-proposed.json (not config/names.json); a MATCH here needs those bindings adopted\nMISMATCH _ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc @ 0x1cc444 size 0xc4/0x88 first difference at +0x1\n",
+  "stderr": "",
+  "label": "texture-find-native-sdk"
+}

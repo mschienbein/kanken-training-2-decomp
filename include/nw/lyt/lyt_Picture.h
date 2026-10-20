@@ -45,7 +45,9 @@ public:
     void SetMaterial(Material* pMaterial);
 
 public: 
-    virtual void MakeUniformDataSelf( DrawInfo* pDrawInfo, Drawer* pDrawer ) const;
+    /* Target-version override of Pane's byte-cursor uniform-command slot. */
+    virtual unsigned char* MakeUniformDataSelf(unsigned char* cursor,
+        ::LayoutDrawInfo* info, ::LayoutRenderContext* renderer) const;
 protected:
     mutable bool m_IsTexCoordInited;
     mutable u32 m_UniformTexCoordNum;

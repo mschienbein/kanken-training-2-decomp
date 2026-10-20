@@ -1,0 +1,24 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet_assign.c",
+  "source_sha256": "efc606f08c0c641c161307dcb2e70856b6705ff8f739b2834a4a05714865fabe",
+  "profile": "middleware",
+  "exit_code": 2,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet_assign.c",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-assign-middleware"
+  ],
+  "stdout": "",
+  "stderr": "error: unresolved symbol '__ARM_common_memcpy4_8' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+  "label": "gpu-memcpy-packet-assign-middleware"
+}

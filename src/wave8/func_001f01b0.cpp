@@ -1,11 +1,12 @@
-#include "game/layout.h"
+#include <preinclude.h>
+#include <nw/lyt/lyt_Pane.h>
 
-/* [INFERENCE] Vtable slot 0x68: func_00117ea8 forwards the command-buffer
- * cursor, draw-info pointer and renderer; the base pane emits no commands. */
-extern "C" unsigned char *func_001f01b0(LayoutPane *pane,
-                                       unsigned char *cursor,
-                                       LayoutDrawInfo *draw_info,
-                                       LayoutRenderContext *renderer)
+namespace nw { namespace lyt {
+/* Original native Pane-family vtables independently anchor this +0x68 slot.
+ * The base pane emits no uniform commands and preserves the byte cursor. */
+unsigned char* Pane::MakeUniformDataSelf(unsigned char* cursor,
+    LayoutDrawInfo* info, LayoutRenderContext* renderer) const
 {
     return cursor;
 }
+} }
