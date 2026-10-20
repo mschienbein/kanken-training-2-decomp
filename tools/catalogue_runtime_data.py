@@ -849,6 +849,9 @@ def close_entry_fragments(catalogue: dict, analyzer, evidence: dict, protected: 
                         "section_size": section["section_size"], "whole_section_sha256": section["image_section_sha256"],
                         "anchor_unchanged": anchor, "same_section_references": expected_references,
                         "new_C_credit": 0, "qualification": record["qualification"]})
+    if not applied:
+        catalogue["closure_evidence"]["exact_runtime_data"]["entry_fragments"] = []
+        return applied
     catalogue["functions"].sort(key=lambda function: function["address"])
     _replace_unknown_ranges(catalogue, replacements)
     stats = catalogue["stats"]

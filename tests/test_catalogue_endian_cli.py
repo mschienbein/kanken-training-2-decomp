@@ -26,7 +26,7 @@ class CatalogueEndianCliTests(unittest.TestCase):
             root = Path(temporary)
             for directory in ("tools", "config", "orig", "research"):
                 (root / directory).mkdir()
-            for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "ctrfmt.py"):
+            for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py", "ctrfmt.py"):
                 shutil.copyfile(ROOT / "tools" / name, root / "tools" / name)
             subprocess.run(["git", "init", "-q", str(root)], capture_output=True, check=True)
             baseline_payload = analyze.serialize_catalogue(baseline)
