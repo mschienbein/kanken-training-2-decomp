@@ -2,7 +2,7 @@
 
 
 
-void func_0015e5c4(struct DisplayData *object, int index, float x, float y, float z)
+void func_0015e5c4(struct DisplayObject *object, int index, float x, float y, float z)
 {
-    func_0015e5d4(object->parts[index]->surface, x, y, z);
+    func_0015e5d4(display_text_attachment(object, index)->surface, x, y, z);
 }

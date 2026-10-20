@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_Pane.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: expose recovered storage to target-version consumers.
+ * Keep the native tail padding reusable: Window's original colors prove it.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -233,7 +234,7 @@ protected:
 
     void Init();
 
-protected:
+public:
     Pane* m_pParent;
     PaneList m_ChildList;
     AnimationList m_AnimList;

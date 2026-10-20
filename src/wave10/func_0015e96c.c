@@ -2,9 +2,9 @@
 
 
 
-void func_0015e96c(struct DisplayData *object, int index, unsigned char alpha)
+void func_0015e96c(struct DisplayObject *object, int index, unsigned char alpha)
 {
-    struct DisplayPart *part = object->parts[index];
-    part->alpha = alpha;
-    func_0015e3f4(part->surface, part->red, part->green, part->blue, alpha);
+    struct TextDisplayAttachment *part = display_text_attachment(object, index);
+    part->timed.common.alpha = alpha;
+    func_0015e3f4(part->surface, part->timed.common.red, part->timed.common.green, part->timed.common.blue, alpha);
 }

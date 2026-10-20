@@ -1,43 +1,23 @@
-#include "game/resource_font.h"
-/* [INFERENCE] Partial NW4C text-box state and its allocation callback. */
-struct LayoutFont;
-struct LayoutTextBox;
+#include <preinclude.h>
+#include <nw/lyt/lyt_TextBox.h>
 
-struct LayoutTextBoxVTable {
-    const void *reserved00[28];
-    void (*allocate_string)(LayoutTextBox *, unsigned short length, unsigned int format);
-};
-struct LayoutTextBox {
-    const LayoutTextBoxVTable *vtable;
-    unsigned char reserved04[0xd0];
-    unsigned short *text;
-    LayoutColor colors[2];
-    LayoutFont *font;
-    float width, height;
-    float line_spacing, character_spacing;
-    void *tag_processor;
-    unsigned short buffer_bytes;
-    unsigned short text_length;
-    unsigned char position, alignment, dirty, reservedff;
-    void *material;
-    void *display_buffer;
-};
-
-extern "C" void func_001cf7b0(LayoutTextBox *object, unsigned short length, unsigned int format)
+namespace nw { namespace lyt {
+void TextBox::Init(u16 length, unsigned format)
 {
-    object->text = 0;
-    object->buffer_bytes = 0;
-    object->text_length = 0;
-    object->font = 0;
-    object->width = 0.0f;
-    object->height = 0.0f;
-    object->position = (unsigned char)(object->position / 3 * 3 + 1);
-    object->position = (unsigned char)(object->position % 3 + 3);
-    object->line_spacing = 0.0f;
-    object->character_spacing = 0.0f;
-    object->tag_processor = 0;
-    object->display_buffer = 0;
-    object->alignment = 0;
-    object->dirty = 0;
-    object->vtable->allocate_string(object, length, format);
+    m_pTextBuf = 0;
+    m_TextBufBytes = 0;
+    m_TextLen = 0;
+    m_pFont = 0;
+    m_FontSize.width = 0.0f;
+    m_FontSize.height = 0.0f;
+    m_TextPosition = u8(m_TextPosition / 3 * 3 + 1);
+    m_TextPosition = u8(m_TextPosition % 3 + 3);
+    m_LineSpace = 0.0f;
+    m_CharSpace = 0.0f;
+    m_pTagProcessor = 0;
+    m_pDispStringBuf = 0;
+    m_TextAlignment = 0;
+    m_IsPTDirty = 0;
+    AllocStringBuffer(length, format);
 }
+} }

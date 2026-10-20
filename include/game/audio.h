@@ -1,8 +1,6 @@
 #ifndef GAME_AUDIO_H
 #define GAME_AUDIO_H
 
-struct AnimatedObject;
-struct DisplayAnimationTrack;
 struct DisplayObject;
 struct Handle1c4478;
 struct Handle1c4484;
@@ -14,13 +12,6 @@ struct Widget1ace94;
 #include "game/runtime.h"
 #include "game/screen.h"
 
-/* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
-struct AnimatedObject {
-    struct DisplayObject base;
-#ifndef __cplusplus
-    struct DisplayAnimationTrack *tracks[];
-#endif
-};
 
 struct Widget1ace94 {
     unsigned char reserved00[0x0c];

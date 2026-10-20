@@ -1,0 +1,29 @@
+{
+  "source": "src/models/func_001a00f8/func_001a00f8.c",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001a00f8/func_001a00f8.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_001a00f8",
+    "--extra-source",
+    "src/models/func_001a00f8/transition_active.c"
+  ],
+  "exit": 0,
+  "seconds": 0.193,
+  "output": "MATCH    func_001a00f8 @ 0x1a00f8 size 0x108/0x108 [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  r4040_transition_active (8 bytes; i.r4040_transition_active)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_001a00f8",
+  "extra_sources": [
+    "src/models/func_001a00f8/transition_active.c"
+  ],
+  "source_sha256": "8761a5835f925eb3407e5b9bd9690a094e692766396841fff7e3a9c9e75598af"
+}

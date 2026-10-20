@@ -1,7 +1,6 @@
 #ifndef GAME_INPUT_DEVICE_H
 #define GAME_INPUT_DEVICE_H
 
-struct AlignmentHandle;
 struct DirtyValueObject;
 struct DisplayBufferState;
 struct InputBufferState;

@@ -1,9 +1,10 @@
 #ifndef GAME_SCREEN_H
 #define GAME_SCREEN_H
 
+#include "game/display_object.h"
+
 struct PairStorage;
 struct W10DrawingInput;
-struct Material;
 
 
 /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */
@@ -12,169 +13,22 @@ struct Material;
 extern "C" {
 #endif
 
-struct DisplayObject {
-    float position[3];
-    float rotation[3];
-    float scale[3];
-    unsigned char reserved24[0x6e];
-    unsigned char types[2];                 /* 0x92 */
-};
-
-/* Resource-pool entries expose the same display prefix used by handle clients.
- * The cleanup/allocation paths establish the containing record, not just padding. */
-struct EventResource;
-struct ResourceEvent {
-    struct DisplayObject base;
-    struct EventResource *resources[2];
-    unsigned reserved9c;
-    unsigned active;
-    float reserveda4;
-    unsigned paira8[2];
-    unsigned char reservedb0[0x10];
-    unsigned char cleanupc0;
-    unsigned char reservedc1[0xb];
-};
-
-struct DisplaySurface;
-struct LayoutContainer;
-struct LayoutPane;
-struct DisplayPart {
-    unsigned char reserved00[0x10];
-    unsigned char alpha, red, green, blue;
-    unsigned char reserved14[8];
-    struct LayoutContainer *container;
-    unsigned char reserved20[8];
-    struct DisplaySurface *surface;
-    unsigned char reserved2c[8];
-    struct LayoutPane *pane;
-};
-
-struct DisplayData {
-    struct DisplayObject base;
-#ifndef __cplusplus
-    struct DisplayPart *parts[];
-#endif
-};
-
-struct PackedTextState;
-struct WidgetBinding {
-    unsigned char reserved00[0x28];
-    struct AlignmentHandle *alignment;
-    unsigned char reserved2c[8];
-    struct PackedTextState *text;
-};
-
-struct TrainingWidget {
-    struct DisplayObject base;
-#ifndef __cplusplus
-    struct WidgetBinding *bindings[];
-#endif
-};
+struct ResourceEntry;
 
 
-struct DisplayPane {
-    const void *vtable;
-    unsigned char reserved04[0x24];
-    float position[3];
-    float rotation[3];
-    float scale[2];
-    float size[2];
-    unsigned char reserved50[0x64];
-    unsigned char alpha;                    /* 0xb4 */
-    unsigned char reservedb5[2];
-    unsigned char flags;
-    /* Material-bearing pane extent, evidenced by the direct material clients. */
-    unsigned char reservedb8[0x84];
-    struct Material *material;
-};
 
-struct DisplayPaneLink {
-    unsigned char reserved00[8];
-    struct DisplayPane *pane;
-};
 
-#ifdef __cplusplus
-/* [INFERENCE] Shared partial text-field view used by application wrappers.
- * Complete native class identity/allocation is not established, and this view
- * is not equated to the material-bearing DisplayPane or DisplayPaneLink. */
-struct SurfaceSize {
-    float width, height;
-    SurfaceSize(float w, float h) : width(w), height(h) {}
-    SurfaceSize(const SurfaceSize &other) : width(other.width), height(other.height) {}
-    bool operator==(const SurfaceSize &other) const
-    { return width == other.width && height == other.height; }
-    bool operator!=(const SurfaceSize &other) const { return !(*this == other); }
-};
-struct SurfaceTextState {
-    unsigned char reserved00[0xe4];
-    SurfaceSize size;
-    float line_spacing, character_spacing;
-    unsigned char reservedf4[0x0a];
-    unsigned char dirty;
-    bool update_dirty(bool changed) { dirty |= changed; return changed; }
-    void set_size(const SurfaceSize &value)
-    {
-        if (update_dirty(!(size == value)))
-            size = value;
-    }
-    void set_character_spacing(float value)
-    {
-        if (update_dirty(character_spacing != value))
-            character_spacing = value;
-    }
-    void set_line_spacing(float value)
-    {
-        if (update_dirty(line_spacing != value))
-            line_spacing = value;
-    }
-};
-struct DisplaySurface {
-    unsigned char reserved00[8];
-    SurfaceTextState *text;
-};
-#endif
-
-struct DisplayBindingTarget {
-    unsigned char reserved00[0x10];
-    float value;
-};
-struct DisplayBinding {
-    unsigned char reserved00[8];
-    float value;
-    unsigned char reserved0c[8];
-    int mode;
-    float duration;
-    unsigned reserved1c;
-    struct DisplayBindingTarget *target;
-    unsigned reserved24;
-    struct DisplayPaneLink *link;
-    unsigned char reserved2c[8];
-    struct DisplayPane *pane;
-};
-
-struct BoundDisplayObject {
-    struct DisplayObject base;
-    struct DisplayBinding *bindings[5];
-    int screen;
-    int index;
-    struct BoundDisplayObject *next;
-    struct BoundDisplayObject *next_secondary;
-    unsigned char reservedb8[8];
-    unsigned char queued;
-};
 
 struct DisplayObjectList {
     unsigned char reserved00[0x2c];
-    struct BoundDisplayObject *head;
+    struct DisplayObject *head;
 };
 
-/* A resource slot contains a leading resource pointer and the queue object
- * prefix at +4. The minimum queue prefix is 0xc4 bytes, not a guessed 0xd0.
- * The final 12 slot bytes stay reserved until their users are integrated. */
+/* D04: static registrations initialize the complete owner at +4, stride 0xd4. */
 struct ResourceRegistrationSlot {
     void *resource;
-    struct BoundDisplayObject display;
-    unsigned char reservedc8[0x0c];
+    struct DisplayObject display;
+    unsigned char reservedd0[4];
 };
 struct ResourceRegistrationGroup {
     unsigned reserved;
@@ -220,39 +74,10 @@ struct DisplayQueueCounter {
     int counter;
     unsigned capacity;
 };
-struct DisplayTexCoords {
-    float uv[4][2];
-};
 
-struct DisplayVertexArray {
-    unsigned char capacity;
-    unsigned char count;
-    unsigned short reserved02;
-    struct DisplayTexCoords *entries;
-};
-
-struct Material;
-struct DisplayVertexPane {
-    struct DisplayPane pane;
-
-    unsigned char reserved140[0x10];
-    struct DisplayVertexArray vertices;
-};
-
-struct DisplayFlagSlot {
-    unsigned int reserved00;
-    unsigned int flags;
-};
-
-struct FlagDisplayObject {
-    struct DisplayObject base;
-#ifndef __cplusplus
-    struct DisplayFlagSlot *slots[];
-#endif
-};
 
 struct DisplayHandle {
-    struct ResourceEvent *object;
+    struct DisplayObject *object;
     unsigned char reserved04[0x14];
     float x;
     float y;
@@ -397,9 +222,9 @@ extern unsigned data_0023ecdc;
 extern struct StyleOwner bss_00245364;
 extern struct StyleOwner *func_001eb0d0(struct StyleOwner *owner);
 extern struct StyleOwner *func_001eade0(void);
-extern struct ResourceEvent *func_0017a818(const struct NameTable *table,
+extern struct DisplayObject *func_0017a818(const struct NameTable *table,
     int screen, int active, float x, float y, float z);
-extern void func_00175ab8(void *screen, int index,
+extern void func_00175ab8(struct W8DisplaySet *screen, int index,
                          int red, int green, int blue, int alpha);
 extern void func_00166eac(struct W8DisplaySet *screen, int index, float x, float y);
 extern void func_00175848(void);
@@ -410,34 +235,40 @@ extern void func_00196144(int screen, int index);
 extern void func_00176d98(void);
 extern void func_00177084(void);
 extern void func_00176df4(void);
-extern void func_00181448(struct BoundDisplayObject *object);
-extern void func_0019637c(struct BoundDisplayObject *object,
-                          struct BoundDisplayObject **head, int primary);
+extern void func_00181448(struct DisplayObject *object);
+extern void func_0019637c(struct DisplayObject *object,
+                          struct DisplayObject **head, int primary);
 extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
 extern void func_0016e648(struct WidgetController *controller, int index, int character);
 extern struct AnimationContext bss_00246b48;
-extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,
-                         const struct DisplayTexCoords *coordinates);
-extern void func_0014e504(struct DisplayVertexPane *pane, unsigned count);
-extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
 extern void func_0015e948(struct DisplayObject *object, int active);
-extern void func_0015e954(struct DisplayPaneLink *link, int active);
-extern void func_0015e4a8(struct DisplaySurface *surface, float character_spacing, float line_spacing);
-extern void func_0015e634(struct DisplaySurface *surface, float width, float height);
-extern void func_0015e5d4(struct DisplaySurface *surface, float x, float y, float z);
-extern void func_0015e3f4(struct DisplaySurface *surface, unsigned char red,
-                          unsigned char green, unsigned char blue, unsigned char alpha);
-extern void func_0015e534(struct DisplaySurface *surface, unsigned char red,
-                          unsigned char green, unsigned char blue, unsigned char alpha);
-extern void func_0015e57c(struct DisplaySurface *surface, unsigned char red,
-                          unsigned char green, unsigned char blue, unsigned char alpha);
+extern void func_0015e60c(const struct ResourceEntry *entry, float *width, float *height);
+extern void func_0015e78c(struct ResourceEntry *entry, unsigned value);
+extern void func_0015e830(struct ResourceEntry *entry, unsigned value);
+extern void func_0015e5c4(struct DisplayObject *object, int index, float x, float y, float z);
+extern void func_0016f534(struct DisplayObject *object, int index, float duration);
+extern void func_0016e300(struct WidgetController *controller, int slot_index,
+                          int red, int green, int blue, int alpha);
+extern void func_00170030(struct DisplayObject *object, int red, int green, int blue, int alpha);
+extern void func_00170088(struct DisplayObject *object, int red, int green, int blue, int alpha);
+extern void func_00167e08(struct DisplayObject *object, int vertex_index,
+                          int red, int green, int blue, int alpha);
+extern void func_0016fff8(struct DisplayObject *object, int red, int green, int blue, int alpha);
+extern void func_00170014(struct DisplayObject *object, int red, int green, int blue, int alpha);
+extern void func_0015e954(struct ResourceEntry *link, int active);
+extern void func_0015e4a8(struct ResourceEntry *surface, float character_spacing, float line_spacing);
+extern void func_0015e634(struct ResourceEntry *surface, float width, float height);
+extern void func_0015e5d4(struct ResourceEntry *surface, float x, float y, float z);
+extern void func_0015e3f4(struct ResourceEntry *surface, int red, int green, int blue, int alpha);
+extern void func_0015e534(struct ResourceEntry *surface, int red, int green, int blue, int alpha);
+extern void func_0015e57c(struct ResourceEntry *surface, int red, int green, int blue, int alpha);
 extern void func_00180358(struct DisplayObject *object, int first, int second);
-extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
-extern void func_0018271c(void *object, unsigned char alpha);
-extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
-extern void func_00181734(struct BoundDisplayObject *object, float width, float height);
+extern void func_0015e684(struct DisplayObject *object, int index, float x, float y, float z);
+extern void func_0018271c(struct DisplayObject *object, unsigned char alpha);
+extern void func_00181700(struct DisplayObject *object, float x, float y, float z);
+extern void func_00181734(struct DisplayObject *object, float width, float height);
 extern void func_001826fc(struct DisplayObject *object, int active);
 extern void func_00195a08(struct DisplayObject *object, int index, int active);
 extern void func_0016de90(struct Screen *screen, int index);
@@ -450,16 +281,16 @@ extern void func_00170e50(struct Screen *screen, int index);
 extern void func_0017a6f4(struct Screen *screen, int index);
 extern void func_001795cc(struct Screen *screen, int first, int second);
 extern void func_0017a0e0(struct W8DisplaySet *set, int index, int active);
-extern void func_001816e0(struct BoundDisplayObject *object, float x, float y);
+extern void func_001816e0(struct DisplayObject *object, float x, float y);
 extern void func_0015e474(struct DisplayObject *object, int index, float x, float y, float z);
-extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
-extern void func_001963f8(struct BoundDisplayObject *object);
-extern struct BoundDisplayObject *func_00145b5c(int screen, int index);
-extern struct BoundDisplayObject *data_00242248;
-extern struct BoundDisplayObject *data_0024224c;
-extern struct BoundDisplayObject *data_00242250;
-extern void func_0018695c(struct BoundDisplayObject *object,
-                          struct BoundDisplayObject **head, int primary);
+extern void func_0015e684(struct DisplayObject *object, int index, float x, float y, float z);
+extern void func_001963f8(struct DisplayObject *object);
+extern struct DisplayObject *func_00145b5c(int screen, int index);
+extern struct DisplayObject *data_00242248;
+extern struct DisplayObject *data_0024224c;
+extern struct DisplayObject *data_00242250;
+extern void func_0018695c(struct DisplayObject *object,
+                          struct DisplayObject **head, int primary);
 extern void func_001eafa0(void *screen, int index, const unsigned short *text);
 extern void func_0016de90(struct Screen *screen, int index);
 
@@ -471,7 +302,7 @@ extern void func_0016de90(struct Screen *screen, int index);
 struct W10DrawingInput {
     unsigned char reserved00[4];
     int identifiers[2];
-    struct ResourceEvent *displays[3];
+    struct DisplayObject *displays[3];
     unsigned char notification_active, reserved19;
     unsigned short characters[0x440];
     short field89a;
@@ -493,7 +324,7 @@ struct W10DrawingInput {
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern void func_0015e698(struct DisplayPaneLink *link, float x, float y, float z);
+extern void func_0015e698(struct ResourceEntry *link, float x, float y, float z);
 extern void func_0019cecc(void *destination, unsigned int size);
 extern void func_00180344(void);
 extern void func_00166d5c(struct W10DrawingInput *input, int active, float x, float y);

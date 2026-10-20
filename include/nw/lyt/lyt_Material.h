@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_Material.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-20: expose the recovered retail storage and parameter
+ * accessors to game consumers instead of a second complete Material class.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -192,7 +193,7 @@ public:
     bool IsTextureDirty() const { return !internal::TestBit(m_Flag, FLAG_TEXTURE_CLEAN); }
     void SetTextureDirty(bool bDirty = true) { internal::SetBit(&m_Flag, FLAG_TEXTURE_CLEAN, !bDirty); }
 
-protected:
+public:
     const TexMap* GetTexMapAry() const;
     TexMap* GetTexMapAry();
     const TexSRT* GetTexSRTAry() const;
@@ -210,6 +211,7 @@ private:
     void Init();
     void InitMatMemNums(internal::MatMemNums* ptr);
 
+public:
     AnimationList m_AnimList;
     ut::Color8 m_Colors[MatColorMax];
     internal::MatMemNums m_MemCap;

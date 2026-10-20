@@ -6,7 +6,7 @@
 
 
 
-struct BoundDisplayObject *func_00145b5c(int screen, int index)
+struct DisplayObject *func_00145b5c(int screen, int index)
 {
     int group = -1;
     struct ResourceRegistrationSlot *entry;

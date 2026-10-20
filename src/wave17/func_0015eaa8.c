@@ -1,19 +1,8 @@
 #include "game/screen.h"
 
-struct AnimationResetSlot {
-    unsigned char reserved00[0x14];
-    int state;
-    float progress;
-};
-
-struct AnimationDisplayObject {
-    struct DisplayObject base;
-    struct AnimationResetSlot *slots[];
-};
-
-void func_0015eaa8(struct AnimationDisplayObject *object, int index)
+void func_0015eaa8(struct DisplayObject *object, int index)
 {
-    struct AnimationResetSlot *slot = object->slots[index];
-    slot->state = 0;
-    slot->progress = 0.0f;
+    struct DisplayTimedAttachment *slot = display_timed_attachment(object, index);
+    slot->mode = 0;
+    slot->duration = 0.0f;
 }

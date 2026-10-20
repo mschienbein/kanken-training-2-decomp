@@ -1,6 +1,7 @@
 #ifndef GAME_ANIMATION_H
 #define GAME_ANIMATION_H
 
+/* Opaque intrusive-registry receiver; its +0x100 link is not in the 0xcc display pool owner. */
 struct AnimatedObject;
 struct AnimationIterator;
 struct AnimationLinkPrefix;
