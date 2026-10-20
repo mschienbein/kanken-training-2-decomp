@@ -1,0 +1,103 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/models/func_001ddde4/func_001ddde4.c",
+ "source_sha256": "a98c10266ad8d600832f4e93a063ca736908f139b7a351896dd182b794d8e661",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "33a62135ab369da2aa95e79a8eeb7ca8b29aeaa5680c0adacda8ef69dd983d81",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/models/func_001ddde4/item_accessors.c",
+   "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+   "object_sha256": "6c281664443280701c02d9aca3af4c18cc183ff336e7f88bc4bfaa7dd6c045f4"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r41279_item_category"
+   ],
+   "section": "i.r41279_item_category",
+   "size": 8,
+   "object": "scratch/integrator/types-display/match/final-r1/func_001ddde4/extra-0-item_accessors.o"
+  },
+  {
+   "symbols": [
+    "r41279_item_identifier"
+   ],
+   "section": "i.r41279_item_identifier",
+   "size": 8,
+   "object": "scratch/integrator/types-display/match/final-r1/func_001ddde4/extra-0-item_accessors.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001ddde4",
+   "address": 1957348,
+   "size": 464,
+   "candidate_size": 464,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 104,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe590000c",
+     "removed_callee": {
+      "symbols": [
+       "r41279_item_identifier"
+      ],
+      "section": "i.r41279_item_identifier",
+      "size": 8,
+      "object": "scratch/integrator/types-display/match/final-r1/func_001ddde4/extra-0-item_accessors.o"
+     }
+    },
+    {
+     "offset": 296,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d001d0",
+     "removed_callee": {
+      "symbols": [
+       "r41279_item_category"
+      ],
+      "section": "i.r41279_item_category",
+      "size": 8,
+      "object": "scratch/integrator/types-display/match/final-r1/func_001ddde4/extra-0-item_accessors.o"
+     }
+    },
+    {
+     "offset": 356,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d001d0",
+     "removed_callee": {
+      "symbols": [
+       "r41279_item_category"
+      ],
+      "section": "i.r41279_item_category",
+      "size": 8,
+      "object": "scratch/integrator/types-display/match/final-r1/func_001ddde4/extra-0-item_accessors.o"
+     }
+    }
+   ]
+  }
+ ]
+}

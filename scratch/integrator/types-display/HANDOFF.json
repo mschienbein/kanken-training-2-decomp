@@ -1,0 +1,2609 @@
+{
+  "schema_version": 1,
+  "theme": "display",
+  "branch": "types-display",
+  "base": "be8aa40",
+  "worktree": "scratch/worktrees/types-display",
+  "source_commit": "e2afd4d4",
+  "status": "implementation-and-required-bounded-matches-complete-not-a-checkpoint-acceptance",
+  "model_inputs": [
+    {
+      "path": "scratch/research/type-models/display/MODEL.md",
+      "sha256": "0e5e4b1beec577293b7ca4eafcf99bc7826d13a725a8278887f49669a548aed8"
+    },
+    {
+      "path": "scratch/research/type-models/display/EVIDENCE.json",
+      "sha256": "fd9d38500aa8729596a200248dde6ded7930766dcdecfdc65d360a2f088d3155"
+    },
+    {
+      "path": "scratch/research/type-models/display/MIGRATION.json",
+      "sha256": "d1f5848b7e2a60ae76e21f00f6a0500211e0c0644ca23d0b92070c43fa00e5a0"
+    }
+  ],
+  "authority": "Main explicitly clarified that producer/tag-proven casts to the actual concrete attachment are valid; incompatible callable types, unrelated-object punning, fake owners, unions and byte-offset payload projections remain forbidden.",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19 unchanged",
+  "counts": {
+    "live_source_units_revised": 80,
+    "functions_in_revised_live_units": 82,
+    "display_owned_revised_source_units": 73,
+    "revised_accepted_units_including_native_dependency": 49,
+    "revised_accepted_functions_including_native_dependency": 49,
+    "display_owned_revised_accepted_units": 45,
+    "display_owned_revised_accepted_functions": 45,
+    "revised_c009_candidate_units_including_native_dependency": 30,
+    "revised_c009_candidate_functions_including_native_dependency": 32,
+    "restored_functions": 1,
+    "restored_bytes": 28,
+    "still_blocked_theme_restorations": 1,
+    "headers_including_native_dependency": 21,
+    "header_hunks": 55,
+    "witness_defining_units": 1208,
+    "witness_functions": 1236,
+    "witness_helper_only_inputs": 15,
+    "latest_failed_required_units": 0,
+    "failed_match_attempts_preserved": 19
+  },
+  "display_delta": {
+    "accepted_moves": [
+      {
+        "function": "func_001826fc",
+        "from": "src/wave6/func_001826fc.c",
+        "to": "src/wave6/func_001826fc.cpp"
+      },
+      {
+        "function": "func_001816c0",
+        "from": "src/wave7/func_001816c0.c",
+        "to": "src/wave7/func_001816c0.cpp"
+      },
+      {
+        "function": "func_001816e0",
+        "from": "src/wave7/func_001816e0.c",
+        "to": "src/wave7/func_001816e0.cpp"
+      },
+      {
+        "function": "func_00181700",
+        "from": "src/wave7/func_00181700.c",
+        "to": "src/wave7/func_00181700.cpp"
+      },
+      {
+        "function": "func_00181734",
+        "from": "src/wave7/func_00181734.c",
+        "to": "src/wave7/func_00181734.cpp"
+      },
+      {
+        "function": "func_0015e954",
+        "from": "src/wave13/func_0015e954.c",
+        "to": "src/wave13/func_0015e954.cpp"
+      },
+      {
+        "function": "func_0018271c",
+        "from": "src/wave11/func_0018271c.c",
+        "to": "src/wave11/func_0018271c.cpp"
+      },
+      {
+        "function": "func_0015eac8",
+        "from": "src/wave11/func_0015eac8.c",
+        "to": "src/wave11/func_0015eac8.cpp"
+      },
+      {
+        "function": "func_00180404",
+        "from": "src/wave13/func_00180404.c",
+        "to": "src/wave13/func_00180404.cpp"
+      },
+      {
+        "function": "func_001810e4",
+        "from": "src/wave14/func_001810e4.c",
+        "to": "src/wave14/func_001810e4.cpp"
+      },
+      {
+        "function": "func_0014d000",
+        "from": "src/wave7/func_0014d000.c",
+        "to": "src/wave7/func_0014d000.cpp"
+      },
+      {
+        "function": "func_0014e504",
+        "from": "src/wave7/func_0014e504.c",
+        "to": "src/wave7/func_0014e504.cpp"
+      },
+      {
+        "function": "func_0015e9dc",
+        "from": "src/wave13/func_0015e9dc.c",
+        "to": "src/wave13/func_0015e9dc.cpp"
+      },
+      {
+        "function": "func_0014aaf4",
+        "from": "src/wave13/func_0014aaf4.c",
+        "to": "src/wave13/func_0014aaf4.cpp"
+      },
+      {
+        "function": "func_0014ab30",
+        "from": "src/wave13/func_0014ab30.c",
+        "to": "src/wave13/func_0014ab30.cpp"
+      }
+    ],
+    "candidate_source_moves_to_upgrade_after_c009_finalizes": [
+      {
+        "function": "func_0015e480",
+        "from": "src/wave17/func_0015e480.c",
+        "to": "src/wave17/func_0015e480.cpp"
+      },
+      {
+        "function": "func_0015e698",
+        "from": "src/wave17/func_0015e698.c",
+        "to": "src/wave17/func_0015e698.cpp"
+      },
+      {
+        "function": "func_0014d02c",
+        "from": "src/wave20/func_0014d02c.c",
+        "to": "src/wave20/func_0014d02c.cpp"
+      },
+      {
+        "function": "func_0016f4ec",
+        "from": "src/wave17/func_0016f4ec.c",
+        "to": "src/wave17/func_0016f4ec.cpp"
+      }
+    ],
+    "restored_units": [
+      {
+        "source": "src/types/display/func_0015e5d4.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0015e5d4"
+        ],
+        "author": "types-display",
+        "notes": "Restored c009 carried deferral: D08 proves ResourceEntry->native TextBox->real Pane base; canonical rotation operation MATCH28 B under explicit v6/L1."
+      }
+    ],
+    "restored_provenance": [
+      {
+        "function": "func_0015e5d4",
+        "prior_record": "scratch/integrator/c009/interface-deferrals-r4.json",
+        "preserved_source": "scratch/integrator/c009/deferred-contract/func_0015e5d4.c",
+        "preserved_source_sha256": "13b1b9e079f6160a93baad94d54404b7dd76b574e8e154e0ac78cbb95c25561d",
+        "new_source": "src/types/display/func_0015e5d4.cpp",
+        "closure": "D08 producer chain to actual TextBox and its real Pane base; no DisplaySurface/DisplayPaneLink nominal split."
+      }
+    ],
+    "revised_accepted_units": [
+      {
+        "source": "src/wave2/func_00179298.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00179298"
+        ],
+        "accepted_functions": [
+          "func_00179298"
+        ]
+      },
+      {
+        "source": "src/wave4/func_00182718.c",
+        "profile": "game",
+        "functions": [
+          "func_00182718"
+        ],
+        "accepted_functions": [
+          "func_00182718"
+        ]
+      },
+      {
+        "source": "src/wave6/func_0015e948.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e948"
+        ],
+        "accepted_functions": [
+          "func_0015e948"
+        ]
+      },
+      {
+        "source": "src/wave6/func_00195a08.c",
+        "profile": "game",
+        "functions": [
+          "func_00195a08"
+        ],
+        "accepted_functions": [
+          "func_00195a08"
+        ]
+      },
+      {
+        "source": "src/wave7/func_001815a8.c",
+        "profile": "game",
+        "functions": [
+          "func_001815a8"
+        ],
+        "accepted_functions": [
+          "func_001815a8"
+        ]
+      },
+      {
+        "source": "src/wave7/func_001e5718.c",
+        "profile": "game",
+        "functions": [
+          "func_001e5718"
+        ],
+        "accepted_functions": [
+          "func_001e5718"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e49c.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e49c"
+        ],
+        "accepted_functions": [
+          "func_0015e49c"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e5c4.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e5c4"
+        ],
+        "accepted_functions": [
+          "func_0015e5c4"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e5f0.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e5f0"
+        ],
+        "accepted_functions": [
+          "func_0015e5f0"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e624.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e624"
+        ],
+        "accepted_functions": [
+          "func_0015e624"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e780.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e780"
+        ],
+        "accepted_functions": [
+          "func_0015e780"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e824.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e824"
+        ],
+        "accepted_functions": [
+          "func_0015e824"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0015e96c.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e96c"
+        ],
+        "accepted_functions": [
+          "func_0015e96c"
+        ]
+      },
+      {
+        "source": "src/wave10/func_0016fff8.c",
+        "profile": "game",
+        "functions": [
+          "func_0016fff8"
+        ],
+        "accepted_functions": [
+          "func_0016fff8"
+        ]
+      },
+      {
+        "source": "src/wave10/func_00170014.c",
+        "profile": "game",
+        "functions": [
+          "func_00170014"
+        ],
+        "accepted_functions": [
+          "func_00170014"
+        ]
+      },
+      {
+        "source": "src/wave10/func_001793e4.c",
+        "profile": "game",
+        "functions": [
+          "func_001793e4"
+        ],
+        "accepted_functions": [
+          "func_001793e4"
+        ]
+      },
+      {
+        "source": "src/wave10/func_001963f8.c",
+        "profile": "game",
+        "functions": [
+          "func_001963f8"
+        ],
+        "accepted_functions": [
+          "func_001963f8"
+        ]
+      },
+      {
+        "source": "src/wave8/func_00179160.c",
+        "profile": "game",
+        "functions": [
+          "func_00179160"
+        ],
+        "accepted_functions": [
+          "func_00179160"
+        ]
+      },
+      {
+        "source": "src/wave8/func_001e403c.c",
+        "profile": "game",
+        "functions": [
+          "func_001e403c"
+        ],
+        "accepted_functions": [
+          "func_001e403c"
+        ]
+      },
+      {
+        "source": "src/wave11/func_0016ff08.c",
+        "profile": "game",
+        "functions": [
+          "func_0016ff08"
+        ],
+        "accepted_functions": [
+          "func_0016ff08"
+        ]
+      },
+      {
+        "source": "src/wave11/func_00145b5c.c",
+        "profile": "game",
+        "functions": [
+          "func_00145b5c"
+        ],
+        "accepted_functions": [
+          "func_00145b5c"
+        ]
+      },
+      {
+        "source": "src/wave11/func_00181420.c",
+        "profile": "game",
+        "functions": [
+          "func_00181420"
+        ],
+        "accepted_functions": [
+          "func_00181420"
+        ]
+      },
+      {
+        "source": "src/wave11/func_00181448.c",
+        "profile": "game",
+        "functions": [
+          "func_00181448"
+        ],
+        "accepted_functions": [
+          "func_00181448"
+        ]
+      },
+      {
+        "source": "src/wave11/func_0019637c.c",
+        "profile": "game",
+        "functions": [
+          "func_0019637c"
+        ],
+        "accepted_functions": [
+          "func_0019637c"
+        ]
+      },
+      {
+        "source": "src/wave12/func_00195874.c",
+        "profile": "game",
+        "functions": [
+          "func_00195874"
+        ],
+        "accepted_functions": [
+          "func_00195874"
+        ]
+      },
+      {
+        "source": "src/wave12/func_001c1bf0.c",
+        "profile": "game",
+        "functions": [
+          "func_001c1bf0"
+        ],
+        "accepted_functions": [
+          "func_001c1bf0"
+        ]
+      },
+      {
+        "source": "src/wave13/func_0017fda4.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0017fda4"
+        ],
+        "accepted_functions": [
+          "func_0017fda4"
+        ]
+      },
+      {
+        "source": "src/wave13/func_00181100.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00181100"
+        ],
+        "accepted_functions": [
+          "func_00181100"
+        ]
+      },
+      {
+        "source": "src/wave14/func_0016bf80.c",
+        "profile": "game",
+        "functions": [
+          "func_0016bf80"
+        ],
+        "accepted_functions": [
+          "func_0016bf80"
+        ]
+      },
+      {
+        "source": "src/retries/func_0015e684.c",
+        "profile": "game",
+        "functions": [
+          "func_0015e684"
+        ],
+        "accepted_functions": [
+          "func_0015e684"
+        ]
+      },
+      {
+        "source": "src/retries/func_0016dbc4.c",
+        "profile": "sdk",
+        "functions": [
+          "func_0016dbc4"
+        ],
+        "accepted_functions": [
+          "func_0016dbc4"
+        ]
+      },
+      {
+        "source": "src/wave6/func_001826fc.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001826fc"
+        ],
+        "accepted_functions": [
+          "func_001826fc"
+        ]
+      },
+      {
+        "source": "src/wave7/func_001816c0.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001816c0"
+        ],
+        "accepted_functions": [
+          "func_001816c0"
+        ]
+      },
+      {
+        "source": "src/wave7/func_001816e0.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001816e0"
+        ],
+        "accepted_functions": [
+          "func_001816e0"
+        ]
+      },
+      {
+        "source": "src/wave7/func_00181700.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00181700"
+        ],
+        "accepted_functions": [
+          "func_00181700"
+        ]
+      },
+      {
+        "source": "src/wave7/func_00181734.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00181734"
+        ],
+        "accepted_functions": [
+          "func_00181734"
+        ]
+      },
+      {
+        "source": "src/wave13/func_0015e954.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0015e954"
+        ],
+        "accepted_functions": [
+          "func_0015e954"
+        ]
+      },
+      {
+        "source": "src/wave11/func_0018271c.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0018271c"
+        ],
+        "accepted_functions": [
+          "func_0018271c"
+        ]
+      },
+      {
+        "source": "src/wave11/func_0015eac8.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0015eac8"
+        ],
+        "accepted_functions": [
+          "func_0015eac8"
+        ]
+      },
+      {
+        "source": "src/wave13/func_00180404.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00180404"
+        ],
+        "accepted_functions": [
+          "func_00180404"
+        ]
+      },
+      {
+        "source": "src/wave14/func_001810e4.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001810e4"
+        ],
+        "accepted_functions": [
+          "func_001810e4"
+        ]
+      },
+      {
+        "source": "src/wave7/func_0014d000.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0014d000"
+        ],
+        "accepted_functions": [
+          "func_0014d000"
+        ]
+      },
+      {
+        "source": "src/wave7/func_0014e504.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0014e504"
+        ],
+        "accepted_functions": [
+          "func_0014e504"
+        ]
+      },
+      {
+        "source": "src/wave13/func_0015e9dc.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0015e9dc"
+        ],
+        "accepted_functions": [
+          "func_0015e9dc"
+        ]
+      },
+      {
+        "source": "src/wave13/func_0014aaf4.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0014aaf4"
+        ],
+        "accepted_functions": [
+          "func_0014aaf4"
+        ]
+      },
+      {
+        "source": "src/wave13/func_0014ab30.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0014ab30"
+        ],
+        "accepted_functions": [
+          "func_0014ab30"
+        ]
+      },
+      {
+        "source": "src/wave13/func_0014d254.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0014d254"
+        ],
+        "accepted_functions": [
+          "func_0014d254"
+        ]
+      },
+      {
+        "source": "src/wave13/func_001db054.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001db054"
+        ],
+        "accepted_functions": [
+          "func_001db054"
+        ]
+      },
+      {
+        "source": "src/wave13/func_001db068.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001db068"
+        ],
+        "accepted_functions": [
+          "func_001db068"
+        ]
+      }
+    ],
+    "revised_live_sources": [
+      "src/wave2/func_00179298.cpp",
+      "src/wave4/func_00182718.c",
+      "src/wave6/func_0015e948.c",
+      "src/wave6/func_00195a08.c",
+      "src/wave7/func_001815a8.c",
+      "src/wave7/func_001e5718.c",
+      "src/wave10/func_0015e49c.c",
+      "src/wave10/func_0015e5c4.c",
+      "src/wave10/func_0015e5f0.c",
+      "src/wave10/func_0015e624.c",
+      "src/wave10/func_0015e780.c",
+      "src/wave10/func_0015e824.c",
+      "src/wave10/func_0015e96c.c",
+      "src/wave10/func_0016fff8.c",
+      "src/wave10/func_00170014.c",
+      "src/wave10/func_001793e4.c",
+      "src/wave10/func_001963f8.c",
+      "src/wave8/func_00179160.c",
+      "src/wave8/func_001e403c.c",
+      "src/wave11/func_0016ff08.c",
+      "src/wave11/func_00145b5c.c",
+      "src/wave11/func_00181420.c",
+      "src/wave11/func_00181448.c",
+      "src/wave11/func_0019637c.c",
+      "src/wave12/func_00195874.c",
+      "src/wave12/func_001c1bf0.c",
+      "src/wave13/func_00181100.cpp",
+      "src/wave14/func_0016bf80.c",
+      "src/retries/func_0015e684.c",
+      "src/retries/func_0016dbc4.c",
+      "src/wave15/func_0010264c.c",
+      "src/wave15/func_001351bc.c",
+      "src/wave15/func_00183208.c",
+      "src/wave15/func_001869f0.c",
+      "src/wave16/func_00135268.c",
+      "src/wave16/func_00181724.c",
+      "src/wave16/func_001c1d4c.c",
+      "src/wave17/func_0015eaa8.c",
+      "src/wave17/func_00171db8.c",
+      "src/wave17/func_001c29ac.cpp",
+      "src/wave17/func_001c2d74.cpp",
+      "src/wave18/func_0015ea60.c",
+      "src/wave18/func_0016d4f8.c",
+      "src/wave18/func_0016f534.c",
+      "src/wave18/func_001af154.c",
+      "src/wave18/func_001c3988.c",
+      "src/wave19/func_0016c020.c",
+      "src/wave19/func_00170fc4.c",
+      "src/wave20/func_0015e4a8.cpp",
+      "src/wave20/func_0015e634.cpp",
+      "src/wave20/func_00166eb0.c",
+      "src/wave20/func_001c1ddc.c",
+      "src/wave20/func_001eb190.c",
+      "src/wave6/func_001826fc.cpp",
+      "src/wave7/func_001816c0.cpp",
+      "src/wave7/func_001816e0.cpp",
+      "src/wave7/func_00181700.cpp",
+      "src/wave7/func_00181734.cpp",
+      "src/wave13/func_0015e954.cpp",
+      "src/wave17/func_0015e480.cpp",
+      "src/wave17/func_0015e698.cpp",
+      "src/wave11/func_0018271c.cpp",
+      "src/wave11/func_0015eac8.cpp",
+      "src/wave13/func_00180404.cpp",
+      "src/wave14/func_001810e4.cpp",
+      "src/wave7/func_0014d000.cpp",
+      "src/wave7/func_0014e504.cpp",
+      "src/wave20/func_0014d02c.cpp",
+      "src/wave17/func_0016f4ec.cpp",
+      "src/wave13/func_0015e9dc.cpp",
+      "src/wave13/func_0014aaf4.cpp",
+      "src/wave13/func_0014ab30.cpp",
+      "src/types/display/func_0015e5d4.cpp"
+    ],
+    "retired_complete_owner_shells": [
+      "ResourceEvent",
+      "BoundDisplayObject",
+      "DisplayData",
+      "TrainingWidget",
+      "FlagDisplayObject",
+      "indexed AnimatedObject (not the unrelated opaque registry receiver)"
+    ],
+    "candidate_composition": "config/candidates/c009t.json (full be8aa40+c009 successor proposal; original c009.json immutable)"
+  },
+  "native_fontgfx_dependency": {
+    "commits": [
+      {
+        "original": "19152ca",
+        "adopted": "ccb771e",
+        "note": "Initial target native headers; the claimed universally owned Pane tail is superseded by the corrected later concrete-prefix model."
+      },
+      {
+        "original": "70ac3e9",
+        "adopted": "9e19375",
+        "note": "Native material and reader providers/names; no native Material constructor name was fabricated."
+      },
+      {
+        "original": "cdb348d",
+        "adopted": "403dbbe",
+        "note": "Native lifecycle declaration cleanup and declaration-only TextBox RTTI slot."
+      },
+      {
+        "original": "093618e",
+        "adopted": "385f6b0",
+        "note": "Correct reusable Pane tail and exact real native TextBox lifecycle/Init; all inherited target profiles preserved."
+      }
+    ],
+    "shared_display_commits": [
+      "5f2f299",
+      "5588089"
+    ],
+    "accepted_moves": [
+      {
+        "function": "func_0014d254",
+        "from": "src/wave13/func_0014d254.c",
+        "to": "src/wave13/func_0014d254.cpp"
+      },
+      {
+        "function": "func_001db054",
+        "from": "src/wave13/func_001db054.c",
+        "to": "src/wave13/func_001db054.cpp"
+      },
+      {
+        "function": "func_001db068",
+        "from": "src/wave13/func_001db068.c",
+        "to": "src/wave13/func_001db068.cpp"
+      }
+    ],
+    "candidate_coalescences": [
+      {
+        "from": [
+          "src/wave17/func_001cf67c.cpp",
+          "src/wave17/func_001cfbcc.cpp",
+          "src/wave17/func_001cfc7c.cpp"
+        ],
+        "to": "src/wave17/func_001cf67c.cpp",
+        "functions": [
+          "func_001cf67c",
+          "func_001cfbcc",
+          "func_001cfc7c"
+        ],
+        "owner": "fontgfx"
+      }
+    ],
+    "source_units": [
+      "src/wave13/func_0014d254.cpp",
+      "src/wave13/func_0017fda4.cpp",
+      "src/wave13/func_001db054.cpp",
+      "src/wave13/func_001db068.cpp",
+      "src/wave17/func_001cf67c.cpp",
+      "src/wave20/func_001cf7b0.cpp",
+      "src/wave20/func_001f4cf8.cpp"
+    ],
+    "count_policy": "Four revised accepted units/functions and three revised c009 units/five functions are font-gfx-owned dependency work, not claimed as display-owned output. Compose once with sibling delta, never duplicate credit or definitions."
+  },
+  "header_hunks": [
+    {
+      "path": "include/game/animation.h",
+      "old_start": 1,
+      "old_count": 6,
+      "new_start": 1,
+      "new_count": 7,
+      "context": "",
+      "diff_lines": [
+        " #ifndef GAME_ANIMATION_H",
+        " #define GAME_ANIMATION_H",
+        " ",
+        "+/* Opaque intrusive-registry receiver; its +0x100 link is not in the 0xcc display pool owner. */",
+        " struct AnimatedObject;",
+        " struct AnimationIterator;",
+        " struct AnimationLinkPrefix;"
+      ]
+    },
+    {
+      "path": "include/game/audio.h",
+      "old_start": 1,
+      "old_count": 8,
+      "new_start": 1,
+      "new_count": 6,
+      "context": "",
+      "diff_lines": [
+        " #ifndef GAME_AUDIO_H",
+        " #define GAME_AUDIO_H",
+        " ",
+        "-struct AnimatedObject;",
+        "-struct DisplayAnimationTrack;",
+        " struct DisplayObject;",
+        " struct Handle1c4478;",
+        " struct Handle1c4484;"
+      ]
+    },
+    {
+      "path": "include/game/audio.h",
+      "old_start": 14,
+      "old_count": 13,
+      "new_start": 12,
+      "new_count": 6,
+      "context": "struct Widget1ace94;",
+      "diff_lines": [
+        " #include \"game/runtime.h\"",
+        " #include \"game/screen.h\"",
+        " ",
+        "-/* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */",
+        "-struct AnimatedObject {",
+        "-    struct DisplayObject base;",
+        "-#ifndef __cplusplus",
+        "-    struct DisplayAnimationTrack *tracks[];",
+        "-#endif",
+        "-};",
+        " ",
+        " struct Widget1ace94 {",
+        "     unsigned char reserved00[0x0c];"
+      ]
+    },
+    {
+      "path": "include/game/audio_voice.h",
+      "old_start": 9,
+      "old_count": 7,
+      "new_start": 9,
+      "new_count": 6,
+      "context": "struct AudioFadeController;",
+      "diff_lines": [
+        " struct AudioLinearRamp;",
+        " struct AudioSlotBufferDescriptor001d9580;",
+        " struct AudioVoiceOwner001d9580;",
+        "-struct ByteCursor001db068;",
+        " struct ConfigState001719f4;",
+        " struct ConfigTarget001719f4;",
+        " struct FloatState001d4ad4;"
+      ]
+    },
+    {
+      "path": "include/game/audio_voice.h",
+      "old_start": 18,
+      "old_count": 7,
+      "new_start": 17,
+      "new_count": 6,
+      "context": "struct FloatState001d4cec;",
+      "diff_lines": [
+        " struct FloatState001d51b8;",
+        " struct FloatState001d5284;",
+        " struct FloatState001d5404;",
+        "-struct HalfwordCursor001db054;",
+        " struct PackedPointer001f15fc;",
+        " struct PoolLink;",
+        " struct ResetState001d4850;"
+      ]
+    },
+    {
+      "path": "include/game/audio_voice.h",
+      "old_start": 357,
+      "old_count": 13,
+      "new_start": 355,
+      "new_count": 6,
+      "context": "struct AudioSlotBufferDescriptor001d9580 {",
+      "diff_lines": [
+        "     unsigned char reserved12[6];",
+        " };",
+        " ",
+        "-struct HalfwordCursor001db054 {",
+        "-    const unsigned short *current;",
+        "-};",
+        "-",
+        "-struct ByteCursor001db068 {",
+        "-    const unsigned char *current;",
+        "-};",
+        " ",
+        " struct PackedPointer001f15fc {",
+        "     unsigned char reserved00[0x2c];"
+      ]
+    },
+    {
+      "path": "include/game/audio_voice.h",
+      "old_start": 439,
+      "old_count": 8,
+      "new_start": 430,
+      "new_count": 6,
+      "context": "extern void func_001d5284(struct FloatState001d5284 *state, float value);",
+      "diff_lines": [
+        " extern void func_001d5404(struct FloatState001d5404 *state, float value);",
+        " extern void func_001d9580(struct AudioVoiceOwner001d9580 *owner,",
+        "                              const unsigned char *first, const unsigned char *last);",
+        "-extern unsigned short func_001db054(struct HalfwordCursor001db054 *cursor);",
+        "-extern unsigned char func_001db068(struct ByteCursor001db068 *cursor);",
+        " extern void *func_001f15fc(const struct PackedPointer001f15fc *state);",
+        " extern unsigned func_001f2ef8(const struct AudioVoiceGroup *group);",
+        " extern void func_001d4adc(struct AudioFadeController *controller, bool muted,"
+      ]
+    },
+    {
+      "path": "include/game/display_animation.h",
+      "old_start": 8,
+      "old_count": 11,
+      "new_start": 8,
+      "new_count": 6,
+      "context": "struct AudioChannel;",
+      "diff_lines": [
+        " struct AudioChannelPacket;",
+        " struct AudioChannelState;",
+        " struct HandleManager;",
+        "-struct BoundDisplayObject;",
+        "-struct DisplayAnimationController;",
+        "-struct DisplayAnimationNode;",
+        "-struct DisplayAnimationSlot;",
+        "-struct DisplayAnimationTrack;",
+        " struct DisplayObject;",
+        " struct DisplayRegistration;",
+        " struct InputSessionContext;"
+      ]
+    },
+    {
+      "path": "include/game/display_animation.h",
+      "old_start": 28,
+      "old_count": 16,
+      "new_start": 23,
+      "new_count": 6,
+      "context": "struct StreamMutex;",
+      "diff_lines": [
+        " #include \"game/runtime.h\"",
+        " ",
+        " /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */",
+        "-struct DisplayAnimationTrack {",
+        "-    unsigned reserved00;",
+        "-    unsigned char flags;",
+        "-    unsigned char reserved05[3];",
+        "-    float end;",
+        "-    float rate;",
+        "-    unsigned reserved10;",
+        "-    int mode;",
+        "-    float position;",
+        "-};",
+        " ",
+        " struct PositionableStreamVTable {",
+        "     unsigned int reserved00[4];"
+      ]
+    },
+    {
+      "path": "include/game/display_animation.h",
+      "old_start": 68,
+      "old_count": 24,
+      "new_start": 53,
+      "new_count": 6,
+      "context": "struct QuestionTable {",
+      "diff_lines": [
+        "     const struct QuestionRecord *records;",
+        " };",
+        " ",
+        "-struct DisplayAnimationSlot {",
+        "-    unsigned int in_use;",
+        "-    int kind;",
+        "-    unsigned int field08;",
+        "-    float speed;",
+        "-    unsigned char alpha;",
+        "-    unsigned char reserved11[3];",
+        "-    int field14;",
+        "-    int field18;",
+        "-    int field1c;",
+        "-    int field20;",
+        "-    int field24;",
+        "-    int playback_state;",
+        "-    int animation_id;",
+        "-    unsigned int field30;",
+        "-    struct DisplayAnimationController *controller;",
+        "-    struct DisplayAnimationNode **reference;",
+        "-};",
+        " ",
+        " struct DisplayRegistration {",
+        "     struct DisplayObject *object;"
+      ]
+    },
+    {
+      "path": "include/game/display_animation.h",
+      "old_start": 115,
+      "old_count": 10,
+      "new_start": 82,
+      "new_count": 10,
+      "context": "extern void func_0015434c(struct ServiceOutput *renderer);",
+      "diff_lines": [
+        " extern void func_00154f78(struct HandleManager *router, int index,",
+        "                    const struct AudioChannelPacket *packet);",
+        " extern int func_001672dc(const struct QuestionTable *table, int index);",
+        "-extern void func_0016bf80(struct BoundDisplayObject *object, int index, float speed);",
+        "+extern void func_0016bf80(struct DisplayObject *object, int index, float speed);",
+        " extern void func_00173d90(struct DisplayRegistration *const *slots, int index, int active);",
+        " extern void func_00177740(const struct MenuItem *metadata, int *first, int *second);",
+        "-extern void func_001810e4(struct BoundDisplayObject *object, int index);",
+        "+extern void func_001810e4(struct DisplayObject *object, int index);",
+        " #ifdef __cplusplus",
+        " }",
+        " #endif"
+      ]
+    },
+    {
+      "path": "include/game/display_groups.h",
+      "old_start": 33,
+      "old_count": 12,
+      "new_start": 33,
+      "new_count": 12,
+      "context": "struct W17SmallCollection {",
+      "diff_lines": [
+        " };",
+        " struct W6DisplayCollection {",
+        "     unsigned char reserved00[0x18];",
+        "-    struct ResourceEvent **objects[1];",
+        "+    struct DisplayObject **objects[1];",
+        " };",
+        " struct W17WideHandle {",
+        "     unsigned int reserved00;",
+        "-    ResourceEvent *object;",
+        "-    ResourceEvent *get_object() { return object; }",
+        "+    DisplayObject *object;",
+        "+    DisplayObject *get_object() { return object; }",
+        " };",
+        " struct W17WideCollection {",
+        "     unsigned int reserved00;"
+      ]
+    },
+    {
+      "path": "include/game/display_native.h",
+      "old_start": 0,
+      "old_count": 0,
+      "new_start": 1,
+      "new_count": 19,
+      "context": "",
+      "diff_lines": [
+        "+#ifndef GAME_DISPLAY_NATIVE_H",
+        "+#define GAME_DISPLAY_NATIVE_H",
+        "+",
+        "+#include \"game/screen.h\"",
+        "+#include \"nw/lyt/lyt_Picture.h\"",
+        "+#include \"nw/lyt/lyt_TextBox.h\"",
+        "+#include \"nw/lyt/lyt_Layout.h\"",
+        "+",
+        "+extern \"C\" {",
+        "+void func_0014d000(DisplayObject *object, const nw::math::VEC2 *coordinates);",
+        "+void func_0014d02c(nw::lyt::Picture *pane, unsigned index,",
+        "+                   const nw::math::VEC2 *coordinates);",
+        "+void func_0014e504(nw::lyt::Picture *pane, unsigned count);",
+        "+void func_0014e50c(nw::lyt::internal::TexCoordAry *vertices, unsigned count);",
+        "+void func_0014e65c(nw::lyt::internal::TexCoordAry *vertices, unsigned index,",
+        "+                   const nw::math::VEC2 *coordinates);",
+        "+}",
+        "+",
+        "+#endif"
+      ]
+    },
+    {
+      "path": "include/game/display_object.h",
+      "old_start": 0,
+      "old_count": 0,
+      "new_start": 1,
+      "new_count": 125,
+      "context": "",
+      "diff_lines": [
+        "+#ifndef GAME_DISPLAY_OBJECT_H",
+        "+#define GAME_DISPLAY_OBJECT_H",
+        "+",
+        "+struct ResourceEntry;",
+        "+struct DisplayObject;",
+        "+",
+        "+/* Display-model D01-D04: 00135268 allocates 0xcc-byte pool entries,",
+        "+ * 00183168 returns them, and 00183208/0019d3b4 release the same owners. */",
+        "+struct DisplayAttachmentCommon {",
+        "+    unsigned in_use;",
+        "+    unsigned flags;",
+        "+    float value;",
+        "+    float rate;",
+        "+    unsigned char alpha, red, green, blue;",
+        "+};",
+        "+",
+        "+/* Real initial record shared by the timed tag-3/5/6 payloads, not tag 1. */",
+        "+struct DisplayTimedAttachment {",
+        "+    struct DisplayAttachmentCommon common;",
+        "+    int mode;",
+        "+    float duration;",
+        "+};",
+        "+",
+        "+struct DisplayObject {",
+        "+    float position[3];",
+        "+    float rotation[3];",
+        "+    float scale[3];",
+        "+    unsigned char unknown24[0x20];",
+        "+    unsigned state44;",
+        "+    int kind_identifier;",
+        "+    unsigned char unknown4c[0x40];",
+        "+    unsigned char ordering_a[3];",
+        "+    unsigned char ordering_b[3];",
+        "+    unsigned char types[2];",
+        "+    struct DisplayAttachmentCommon *attachments[2];",
+        "+    unsigned state9c;",
+        "+    unsigned active;",
+        "+    unsigned statea4;",
+        "+    int screen;",
+        "+    int index;",
+        "+    struct DisplayObject *next;",
+        "+    struct DisplayObject *next_secondary;",
+        "+    unsigned stateb8;",
+        "+    unsigned statebc;",
+        "+    unsigned char queued;",
+        "+    unsigned char unknownc1[3];",
+        "+    int pool_index;",
+        "+    unsigned generation;",
+        "+};",
+        "+",
+        "+struct TextDisplayAttachment {",
+        "+    struct DisplayTimedAttachment timed;",
+        "+    unsigned state1c, state20, state24;",
+        "+    struct ResourceEntry *surface;",
+        "+};",
+        "+",
+        "+/* Tags 3/5/6: 0013566c/0015e0c8/00181748 allocate 0x58/0x2c/0x3c",
+        "+ * payloads with this real initial record (display-model D05-D07). */",
+        "+#define display_timed_attachment(object, index) \\",
+        "+    ((struct DisplayTimedAttachment *)(object)->attachments[index])",
+        "+",
+        "+static __inline const struct DisplayTimedAttachment *display_timed_attachment_const(",
+        "+    const struct DisplayObject *object, int index)",
+        "+{",
+        "+    /* Same producer-established timed-prefix precondition as above. */",
+        "+    return (const struct DisplayTimedAttachment *)object->attachments[index];",
+        "+}",
+        "+",
+        "+static __inline struct TextDisplayAttachment *display_text_attachment(",
+        "+    const struct DisplayObject *object, int index)",
+        "+{",
+        "+    /* Tag 5: 0015e0c8 allocates a 0x2c-byte text payload and installs",
+        "+     * 0015db7c's ResourceEntry at +0x28 (display-model D07). */",
+        "+    return (struct TextDisplayAttachment *)object->attachments[index];",
+        "+}",
+        "+",
+        "+#ifdef __cplusplus",
+        "+namespace nw { namespace lyt {",
+        "+class Layout;",
+        "+class AnimTransform;",
+        "+class ResourceAccessor;",
+        "+class Picture;",
+        "+class Material;",
+        "+} }",
+        "+",
+        "+struct LayoutDisplayAttachment {",
+        "+    DisplayTimedAttachment timed;",
+        "+    nw::lyt::Layout *layout;",
+        "+    nw::lyt::AnimTransform *target;",
+        "+    nw::lyt::AnimTransform **animations;",
+        "+    int state28, state2c, count;",
+        "+    nw::lyt::ResourceAccessor *accessor;",
+        "+    int resource_count;",
+        "+    void *resource_storage; /* Allocated pointer-vector storage; element contract unresolved. */",
+        "+    unsigned state40, state44, state48, state4c, state50, state54;",
+        "+};",
+        "+",
+        "+struct PaneDisplayAttachment {",
+        "+    DisplayTimedAttachment timed;",
+        "+    unsigned state1c, state20, state24;",
+        "+    int mode;",
+        "+    int resource;",
+        "+    unsigned state30;",
+        "+    nw::lyt::Picture *picture;",
+        "+    nw::lyt::Material **material;",
+        "+};",
+        "+",
+        "+static __inline LayoutDisplayAttachment *display_layout_attachment(",
+        "+    const DisplayObject *object, int index)",
+        "+{",
+        "+    /* Tag 3: 0013566c allocates a 0x58-byte layout payload, constructs",
+        "+     * Layout at +0x1c and ResourceAccessor at +0x34 (display-model D05). */",
+        "+    return (LayoutDisplayAttachment *)object->attachments[index];",
+        "+}",
+        "+",
+        "+static __inline PaneDisplayAttachment *display_pane_attachment(",
+        "+    const DisplayObject *object, int index)",
+        "+{",
+        "+    /* Tag 6: 00181748 allocates a 0x3c-byte pane payload; 0014b4b0",
+        "+     * constructs its 0x158-byte Picture at +0x34 (display-model D06). */",
+        "+    return (PaneDisplayAttachment *)object->attachments[index];",
+        "+}",
+        "+#endif",
+        "+",
+        "+#endif"
+      ]
+    },
+    {
+      "path": "include/game/exp_heap.h",
+      "old_start": 9,
+      "old_count": 7,
+      "new_start": 9,
+      "new_count": 6,
+      "context": "struct AllocatorInterface;",
+      "diff_lines": [
+        " struct FormattedText;",
+        " struct G103798;",
+        " struct ResourceEntry;",
+        "-struct ResourceObject;",
+        " struct RuntimeTypeInfo;",
+        " struct RuntimeTypedObject;",
+        " struct StreamMutex;"
+      ]
+    },
+    {
+      "path": "include/game/exp_heap.h",
+      "old_start": 93,
+      "old_count": 14,
+      "new_start": 92,
+      "new_count": 19,
+      "context": "extern struct LockedExpHeap *data_00242c54;",
+      "diff_lines": [
+        " ",
+        " struct G103798 { void *p; int n; };",
+        " ",
+        "+#ifdef __cplusplus",
+        "+namespace nw { namespace lyt { class TextBox; } }",
+        "+/* D08: 0015d798 constructs a native 0x108-byte TextBox, not ResourceObject. */",
+        " struct ResourceEntry {",
+        "     int active;",
+        "     void *allocation;",
+        "-    struct ResourceObject *object;",
+        "-    unsigned char reserved[3];",
+        "+    nw::lyt::TextBox *object;",
+        "+    unsigned char state;",
+        "+    unsigned char reserved[2];",
+        "     unsigned char flag;",
+        "     unsigned char tail[8];",
+        " };",
+        "+#endif",
+        " ",
+        " #ifdef __cplusplus",
+        " extern \"C\" {"
+      ]
+    },
+    {
+      "path": "include/game/functions.h",
+      "old_start": 25,
+      "old_count": 7,
+      "new_start": 25,
+      "new_count": 7,
+      "context": "struct CountedResource;",
+      "diff_lines": [
+        " struct DeferredRequest;",
+        " struct DetailEntry;",
+        " struct ExtendedWorkspace;",
+        "-struct FlagDisplayObject;",
+        "+struct DisplayObject;",
+        " struct KernelHandleOwner;",
+        " struct MotionState;",
+        " struct NavigationState;"
+      ]
+    },
+    {
+      "path": "include/game/functions.h",
+      "old_start": 174,
+      "old_count": 7,
+      "new_start": 174,
+      "new_count": 7,
+      "context": "extern int func_001549c8(void);",
+      "diff_lines": [
+        " extern int func_00156f04(void);",
+        " extern int func_00156f50(void);",
+        " extern void func_0015cab4(void);",
+        "-extern void func_0015ea60(struct FlagDisplayObject *, int, int);",
+        "+extern void func_0015ea60(struct DisplayObject *, int, int);",
+        " extern int func_0015eb90(struct Component0015eb90 *);",
+        " extern int func_0015f5b0(const struct CountedResource *);",
+        " extern void func_00166f1c(void *, int, int);"
+      ]
+    },
+    {
+      "path": "include/game/input_device.h",
+      "old_start": 1,
+      "old_count": 7,
+      "new_start": 1,
+      "new_count": 6,
+      "context": "",
+      "diff_lines": [
+        " #ifndef GAME_INPUT_DEVICE_H",
+        " #define GAME_INPUT_DEVICE_H",
+        " ",
+        "-struct AlignmentHandle;",
+        " struct DirtyValueObject;",
+        " struct DisplayBufferState;",
+        " struct InputBufferState;"
+      ]
+    },
+    {
+      "path": "include/game/layout_lifecycle.h",
+      "old_start": 1,
+      "old_count": 96,
+      "new_start": 1,
+      "new_count": 14,
+      "context": "",
+      "diff_lines": [
+        " #ifndef GAME_LAYOUT_LIFECYCLE_H",
+        " #define GAME_LAYOUT_LIFECYCLE_H",
+        " ",
+        "-struct W17MaterialVTable;",
+        "-struct W17Material;",
+        "-struct W17LayoutVTable;",
+        "-struct W17Layout;",
+        "-struct W17LayoutChild;",
+        "-struct W17TexturePane;",
+        "-struct W17StorageHeader;",
+        "-",
+        "-#include <stddef.h>",
+        "-#include \"game/pool_list.h\"",
+        "-#include \"game/runtime.h\"",
+        "-#include \"game/screen.h\"",
+        "+#include \"game/heap_interface.h\"",
+        " #include \"game/resource_instance.h\"",
+        " ",
+        " #ifdef __cplusplus",
+        "-/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-struct W17MaterialVTable {",
+        "-    void (*destroy)(W17Material *);",
+        "-    void (*reserved04)(W17Material *);",
+        "-    void (*reserved08)(W17Material *);",
+        "-    void (*unbind)(W17Material *, void *animation);",
+        "-};",
+        "-struct W17Material {",
+        "-    const W17MaterialVTable *vtable;",
+        "-    unsigned char reserved04[0x49];",
+        "-    unsigned char flags;",
+        "-};",
+        "-struct W17LayoutVTable {",
+        "-    void (*destroy)(W17Layout *);",
+        "-    void (*reserved04)(W17Layout *);",
+        "-    void (*reserved08)(W17Layout *);",
+        "-    void (*reserved0c)(W17Layout *);",
+        "-    void (*reserved10)(W17Layout *);",
+        "-    void (*reserved14)(W17Layout *);",
+        "-    void (*reserved18)(W17Layout *);",
+        "-    void (*reserved1c)(W17Layout *);",
+        "-    void (*reserved20)(W17Layout *);",
+        "-    unsigned char (*material_count)(W17Layout *);",
+        "-    W17Material *(*material)(W17Layout *, unsigned char);",
+        "-};",
+        "-struct W17Layout {",
+        "-    const W17LayoutVTable *vtable;",
+        "-    unsigned char reserved04[0x0c];",
+        "-    PoolList children;",
+        "-    PoolList links;",
+        "-};",
+        "-struct W17LayoutChild {",
+        "-    const W17LayoutVTable *vtable;",
+        "-    PoolLink link;",
+        "-    unsigned char reserved0c[0xab];",
+        "-    unsigned char flags;",
+        "-};",
+        "-struct W17TexturePane {",
+        "-    void *destroy();",
+        "-    W17Layout base;",
+        "-    unsigned char reserved28[0xac];",
+        "-    void *text;",
+        "-    unsigned char reservedd8[0x20];",
+        "-    unsigned short length;",
+        "-    unsigned short capacity;",
+        "-    unsigned reservedfc;",
+        "-    W17Material *resource;",
+        "-    void *storage;",
+        "-};",
+        "-struct W17StorageHeader {",
+        "-    unsigned char reserved00[9];",
+        "-    unsigned char flags;",
+        "-};",
+        "-",
+        " extern \"C\" {",
+        "-",
+        "+#endif",
+        " void func_0016b260(void *allocation);",
+        "-",
+        "-",
+        "-void func_00191aec(void *allocation);",
+        "-void *func_0016a998(void *object);",
+        "-void func_0016aa74(DisplayVertexArray *buffer);",
+        "-void func_001cf67c(W17TexturePane *pane);",
+        "-extern const W17LayoutVTable data_00224370;",
+        "-void func_001cfbcc(W17TexturePane *pane);",
+        "+#ifdef __cplusplus",
+        " }",
+        " #endif",
+        " "
+      ]
+    },
+    {
+      "path": "include/game/material.h",
+      "old_start": 1,
+      "old_count": 52,
+      "new_start": 1,
+      "new_count": 18,
+      "context": "",
+      "diff_lines": [
+        " #ifndef GAME_MATERIAL_H",
+        " #define GAME_MATERIAL_H",
+        " ",
+        "-struct BoundDisplayObject;",
+        "-struct ColoredDisplayBinding;",
+        "-struct DisplayPaneHolder;",
+        "-struct DisplayPane;",
+        "-struct Material;",
+        "-struct MaterialPair;",
+        "-struct MaterialVTable;",
+        "-struct MaterialWord;",
+        "+struct DisplayObject;",
+        " struct PaneColor;",
+        " struct ResourceArray;",
+        " struct ResourceDimensions;",
+        "-struct TextureDisplayBinding;",
+        " ",
+        " #include \"game/runtime.h\"",
+        " #include \"game/screen.h\"",
+        " ",
+        " /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */",
+        "-struct MaterialPair {",
+        "-    unsigned int mode : 8;",
+        "-    unsigned int reserved : 24;",
+        "-    float value;",
+        "-};",
+        " ",
+        "-struct MaterialWord { unsigned int value; };",
+        " ",
+        "-struct Material {",
+        "-    const struct MaterialVTable *vtable;",
+        "-    unsigned char reserved04[0x28];",
+        "-    unsigned int capacity;",
+        "-    unsigned int count;",
+        "-    unsigned char *parameters;",
+        "-    unsigned char reserved38[0x15];",
+        "-    unsigned char flags;",
+        "-};",
+        " ",
+        "-struct DisplayPaneHolder {",
+        "-    unsigned char reserved00[0x10];",
+        "-    struct DisplayPane *pane;",
+        "-};",
+        "-",
+        "-struct ColoredDisplayBinding {",
+        "-    unsigned char reserved00[0x10];",
+        "-    unsigned char alpha, red, green, blue;",
+        "-    unsigned char reserved14[8];",
+        "-    struct DisplayPaneHolder *holder;",
+        "-};",
+        " ",
+        " struct ResourceArray {",
+        "     void *buffer;"
+      ]
+    },
+    {
+      "path": "include/game/material.h",
+      "old_start": 75,
+      "old_count": 47,
+      "new_start": 41,
+      "new_count": 31,
+      "context": "struct PaneColor {",
+      "diff_lines": [
+        " };",
+        " ",
+        " ",
+        "-struct MaterialVTable {",
+        "-    void (*destroy)(struct Material *);",
+        "-    void (*destroy_delete)(struct Material *);",
+        "-};",
+        " ",
+        "-struct TextureDisplayBinding {",
+        "-    unsigned char reserved00[0x28];",
+        "-    int mode;",
+        "-    int resource;",
+        "-    unsigned char reserved30[4];",
+        "-    struct DisplayPane *pane;",
+        "-    struct Material **material;",
+        "-};",
+        " ",
+        " #ifdef __cplusplus",
+        "+#include <preinclude.h>",
+        "+#include \"nw/lyt/lyt_Picture.h\"",
+        " extern \"C\" {",
+        "+void func_0017aa90(nw::lyt::Pane *pane, unsigned char red, unsigned char green,",
+        "+                   unsigned char blue, unsigned char alpha);",
+        "+void func_0014c5c4(nw::lyt::Picture *pane, nw::lyt::Material **material, int resource, int replace);",
+        "+nw::lyt::BlendMode *func_0014d1ec(nw::lyt::Material *material);",
+        "+nw::lyt::Material *func_0017fe04(nw::lyt::Material *material);",
+        "+void func_0017fc7c(nw::lyt::Material *material, unsigned char count);",
+        " #endif",
+        "-extern struct Material *func_0017fd68(struct DisplayPane *pane);",
+        "-extern struct MaterialPair *func_0014d254(struct Material *material);",
+        "-extern struct MaterialWord *func_0014d1ec(struct Material *material);",
+        "-extern void func_0017aa90(struct DisplayPane *pane, unsigned char red,",
+        "-                        unsigned char green, unsigned char blue,",
+        "-                        unsigned char alpha);",
+        " extern struct ResourceArray bss_002d5ea0;",
+        "-struct Material *func_0017fe04(struct Material *material);",
+        "-extern void func_0017fda4(struct DisplayPane *pane, struct Material *material);",
+        "-void func_0017fd0c(struct Material *material, unsigned char count);",
+        "-void func_0017fc7c(struct Material *material, unsigned char count);",
+        "-void func_0014c5c4(struct DisplayPane *pane, struct Material **material,",
+        "-                  int resource, int replace);",
+        " extern unsigned char *data_00242fc8;",
+        " extern const unsigned data_00243148[0x5c];",
+        " extern void func_0018e764(void *destination, const void *source, unsigned size);",
+        "-extern void func_00181100(struct BoundDisplayObject *object, int resource, int replace);",
+        "-extern void func_0014aaf4(struct BoundDisplayObject *object, int mode, float value);",
+        "-extern void func_0014ab30(struct BoundDisplayObject *object, unsigned int value);",
+        "-extern void func_0015e9dc(struct BoundDisplayObject *object, int index,",
+        "+extern void func_00181100(struct DisplayObject *object, int resource, int replace);",
+        "+extern void func_0014aaf4(struct DisplayObject *object, int mode, float value);",
+        "+extern void func_0014ab30(struct DisplayObject *object, unsigned int value);",
+        "+extern void func_0015e9dc(struct DisplayObject *object, int index,",
+        "                    unsigned char alpha);",
+        " extern int func_0017e948(int index);",
+        " extern int func_0017e970(int index);",
+        "-extern void func_00180404(struct BoundDisplayObject *object, int index);",
+        "+extern void func_00180404(struct DisplayObject *object, int index);",
+        " extern void func_00130f04(void);",
+        " extern void func_00182744(const void *source, void *destination, unsigned size);",
+        " #ifdef __cplusplus"
+      ]
+    },
+    {
+      "path": "include/game/resource_runtime.h",
+      "old_start": 8,
+      "old_count": 7,
+      "new_start": 8,
+      "new_count": 7,
+      "context": "",
+      "diff_lines": [
+        " struct ResourceNode;",
+        " struct ResourceEventPool {",
+        "     unsigned reserved00[3];",
+        "-    struct ResourceEvent *events;",
+        "+    struct DisplayObject *events;",
+        "     struct ResourceNode *first;",
+        "     struct ResourceNode *second;",
+        "     struct ResourceNode *third;"
+      ]
+    },
+    {
+      "path": "include/game/resource_runtime.h",
+      "old_start": 24,
+      "old_count": 20,
+      "new_start": 24,
+      "new_count": 20,
+      "context": "struct ResourceControlState {",
+      "diff_lines": [
+        "     int value;",
+        " };",
+        " ",
+        "-struct AssetSlot { struct ResourceEvent *asset; };",
+        "+struct AssetSlot { struct DisplayObject *asset; };",
+        " struct W17SceneVTable;",
+        " struct DisplayResource4c {",
+        "-    struct ResourceEvent *object;",
+        "+    struct DisplayObject *object;",
+        "     unsigned char reserved04[0x48];",
+        " };",
+        " struct DisplayResource50 {",
+        "-    struct ResourceEvent *object;",
+        "+    struct DisplayObject *object;",
+        "     unsigned char reserved04[0x2c];",
+        "     void *allocation;",
+        "     unsigned char reserved34[0x1c];",
+        " };",
+        " struct DisplayResource6c {",
+        "-    struct ResourceEvent *object;",
+        "+    struct DisplayObject *object;",
+        "     unsigned char reserved04[0x64];",
+        "     int texture_slot;",
+        " };"
+      ]
+    },
+    {
+      "path": "include/game/resource_runtime.h",
+      "old_start": 82,
+      "old_count": 9,
+      "new_start": 82,
+      "new_count": 9,
+      "context": "struct ReviewScreenState {",
+      "diff_lines": [
+        "     unsigned char reserveda8[0x10];",
+        "     int option;",
+        "     unsigned char reservedbc[0x38];",
+        "-    struct ResourceEvent *first_asset;",
+        "+    struct DisplayObject *first_asset;",
+        "     unsigned char reservedf8[0xc0];",
+        "-    struct ResourceEvent *second_asset;",
+        "+    struct DisplayObject *second_asset;",
+        "     unsigned char reserved1bc[0x20];",
+        "     struct MotionState motion;",
+        "     struct AssetSlot **slots19;"
+      ]
+    },
+    {
+      "path": "include/game/resource_runtime.h",
+      "old_start": 99,
+      "old_count": 9,
+      "new_start": 99,
+      "new_count": 9,
+      "context": "extern \"C\" {",
+      "diff_lines": [
+        " #endif",
+        " extern struct ResourceEventPool data_00242238;",
+        " extern struct ResourceControlState bss_00495c34, bss_00495c48, bss_00495c5c;",
+        "-extern void func_0019d3b4(struct ResourceEvent *event);",
+        "-extern void func_00183208(struct ResourceEvent *event);",
+        "-extern void func_0018663c(struct ResourceEvent *event);",
+        "+extern void func_0019d3b4(struct DisplayObject *event);",
+        "+extern void func_00183208(struct DisplayObject *event);",
+        "+extern void func_0018663c(struct DisplayObject *event);",
+        " extern void func_00176e24(struct ScreenResourceManager *manager);",
+        " extern void func_001e3548(struct W17SelectionOwner *component);",
+        " #ifdef __cplusplus"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 1,
+      "old_count": 9,
+      "new_start": 1,
+      "new_count": 10,
+      "context": "",
+      "diff_lines": [
+        " #ifndef GAME_SCREEN_H",
+        " #define GAME_SCREEN_H",
+        " ",
+        "+#include \"game/display_object.h\"",
+        "+",
+        " struct PairStorage;",
+        " struct W10DrawingInput;",
+        "-struct Material;",
+        " ",
+        " ",
+        " /* Menu screen with widget slots (partial). Offsets are fixed by the original code. */"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 12,
+      "old_count": 169,
+      "new_start": 13,
+      "new_count": 22,
+      "context": "struct Material;",
+      "diff_lines": [
+        " extern \"C\" {",
+        " #endif",
+        " ",
+        "-struct DisplayObject {",
+        "-    float position[3];",
+        "-    float rotation[3];",
+        "-    float scale[3];",
+        "-    unsigned char reserved24[0x6e];",
+        "-    unsigned char types[2];                 /* 0x92 */",
+        "-};",
+        "-",
+        "-/* Resource-pool entries expose the same display prefix used by handle clients.",
+        "- * The cleanup/allocation paths establish the containing record, not just padding. */",
+        "-struct EventResource;",
+        "-struct ResourceEvent {",
+        "-    struct DisplayObject base;",
+        "-    struct EventResource *resources[2];",
+        "-    unsigned reserved9c;",
+        "-    unsigned active;",
+        "-    float reserveda4;",
+        "-    unsigned paira8[2];",
+        "-    unsigned char reservedb0[0x10];",
+        "-    unsigned char cleanupc0;",
+        "-    unsigned char reservedc1[0xb];",
+        "-};",
+        "-",
+        "-struct DisplaySurface;",
+        "-struct LayoutContainer;",
+        "-struct LayoutPane;",
+        "-struct DisplayPart {",
+        "-    unsigned char reserved00[0x10];",
+        "-    unsigned char alpha, red, green, blue;",
+        "-    unsigned char reserved14[8];",
+        "-    struct LayoutContainer *container;",
+        "-    unsigned char reserved20[8];",
+        "-    struct DisplaySurface *surface;",
+        "-    unsigned char reserved2c[8];",
+        "-    struct LayoutPane *pane;",
+        "-};",
+        "-",
+        "-struct DisplayData {",
+        "-    struct DisplayObject base;",
+        "-#ifndef __cplusplus",
+        "-    struct DisplayPart *parts[];",
+        "-#endif",
+        "-};",
+        "-",
+        "-struct PackedTextState;",
+        "-struct WidgetBinding {",
+        "-    unsigned char reserved00[0x28];",
+        "-    struct AlignmentHandle *alignment;",
+        "-    unsigned char reserved2c[8];",
+        "-    struct PackedTextState *text;",
+        "-};",
+        "+struct ResourceEntry;",
+        " ",
+        "-struct TrainingWidget {",
+        "-    struct DisplayObject base;",
+        "-#ifndef __cplusplus",
+        "-    struct WidgetBinding *bindings[];",
+        "-#endif",
+        "-};",
+        " ",
+        " ",
+        "-struct DisplayPane {",
+        "-    const void *vtable;",
+        "-    unsigned char reserved04[0x24];",
+        "-    float position[3];",
+        "-    float rotation[3];",
+        "-    float scale[2];",
+        "-    float size[2];",
+        "-    unsigned char reserved50[0x64];",
+        "-    unsigned char alpha;                    /* 0xb4 */",
+        "-    unsigned char reservedb5[2];",
+        "-    unsigned char flags;",
+        "-    /* Material-bearing pane extent, evidenced by the direct material clients. */",
+        "-    unsigned char reservedb8[0x84];",
+        "-    struct Material *material;",
+        "-};",
+        " ",
+        "-struct DisplayPaneLink {",
+        "-    unsigned char reserved00[8];",
+        "-    struct DisplayPane *pane;",
+        "-};",
+        "-",
+        "-#ifdef __cplusplus",
+        "-/* [INFERENCE] Shared partial text-field view used by application wrappers.",
+        "- * Complete native class identity/allocation is not established, and this view",
+        "- * is not equated to the material-bearing DisplayPane or DisplayPaneLink. */",
+        "-struct SurfaceSize {",
+        "-    float width, height;",
+        "-    SurfaceSize(float w, float h) : width(w), height(h) {}",
+        "-    SurfaceSize(const SurfaceSize &other) : width(other.width), height(other.height) {}",
+        "-    bool operator==(const SurfaceSize &other) const",
+        "-    { return width == other.width && height == other.height; }",
+        "-    bool operator!=(const SurfaceSize &other) const { return !(*this == other); }",
+        "-};",
+        "-struct SurfaceTextState {",
+        "-    unsigned char reserved00[0xe4];",
+        "-    SurfaceSize size;",
+        "-    float line_spacing, character_spacing;",
+        "-    unsigned char reservedf4[0x0a];",
+        "-    unsigned char dirty;",
+        "-    bool update_dirty(bool changed) { dirty |= changed; return changed; }",
+        "-    void set_size(const SurfaceSize &value)",
+        "-    {",
+        "-        if (update_dirty(!(size == value)))",
+        "-            size = value;",
+        "-    }",
+        "-    void set_character_spacing(float value)",
+        "-    {",
+        "-        if (update_dirty(character_spacing != value))",
+        "-            character_spacing = value;",
+        "-    }",
+        "-    void set_line_spacing(float value)",
+        "-    {",
+        "-        if (update_dirty(line_spacing != value))",
+        "-            line_spacing = value;",
+        "-    }",
+        "-};",
+        "-struct DisplaySurface {",
+        "-    unsigned char reserved00[8];",
+        "-    SurfaceTextState *text;",
+        "-};",
+        "-#endif",
+        "-",
+        "-struct DisplayBindingTarget {",
+        "-    unsigned char reserved00[0x10];",
+        "-    float value;",
+        "-};",
+        "-struct DisplayBinding {",
+        "-    unsigned char reserved00[8];",
+        "-    float value;",
+        "-    unsigned char reserved0c[8];",
+        "-    int mode;",
+        "-    float duration;",
+        "-    unsigned reserved1c;",
+        "-    struct DisplayBindingTarget *target;",
+        "-    unsigned reserved24;",
+        "-    struct DisplayPaneLink *link;",
+        "-    unsigned char reserved2c[8];",
+        "-    struct DisplayPane *pane;",
+        "-};",
+        "-",
+        "-struct BoundDisplayObject {",
+        "-    struct DisplayObject base;",
+        "-    struct DisplayBinding *bindings[5];",
+        "-    int screen;",
+        "-    int index;",
+        "-    struct BoundDisplayObject *next;",
+        "-    struct BoundDisplayObject *next_secondary;",
+        "-    unsigned char reservedb8[8];",
+        "-    unsigned char queued;",
+        "-};",
+        " ",
+        " struct DisplayObjectList {",
+        "     unsigned char reserved00[0x2c];",
+        "-    struct BoundDisplayObject *head;",
+        "+    struct DisplayObject *head;",
+        " };",
+        " ",
+        "-/* A resource slot contains a leading resource pointer and the queue object",
+        "- * prefix at +4. The minimum queue prefix is 0xc4 bytes, not a guessed 0xd0.",
+        "- * The final 12 slot bytes stay reserved until their users are integrated. */",
+        "+/* D04: static registrations initialize the complete owner at +4, stride 0xd4. */",
+        " struct ResourceRegistrationSlot {",
+        "     void *resource;",
+        "-    struct BoundDisplayObject display;",
+        "-    unsigned char reservedc8[0x0c];",
+        "+    struct DisplayObject display;",
+        "+    unsigned char reservedd0[4];",
+        " };",
+        " struct ResourceRegistrationGroup {",
+        "     unsigned reserved;"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 220,
+      "old_count": 39,
+      "new_start": 74,
+      "new_count": 10,
+      "context": "struct DisplayQueueCounter {",
+      "diff_lines": [
+        "     int counter;",
+        "     unsigned capacity;",
+        " };",
+        "-struct DisplayTexCoords {",
+        "-    float uv[4][2];",
+        "-};",
+        " ",
+        "-struct DisplayVertexArray {",
+        "-    unsigned char capacity;",
+        "-    unsigned char count;",
+        "-    unsigned short reserved02;",
+        "-    struct DisplayTexCoords *entries;",
+        "-};",
+        "-",
+        "-struct Material;",
+        "-struct DisplayVertexPane {",
+        "-    struct DisplayPane pane;",
+        "-",
+        "-    unsigned char reserved140[0x10];",
+        "-    struct DisplayVertexArray vertices;",
+        "-};",
+        "-",
+        "-struct DisplayFlagSlot {",
+        "-    unsigned int reserved00;",
+        "-    unsigned int flags;",
+        "-};",
+        "-",
+        "-struct FlagDisplayObject {",
+        "-    struct DisplayObject base;",
+        "-#ifndef __cplusplus",
+        "-    struct DisplayFlagSlot *slots[];",
+        "-#endif",
+        "-};",
+        " ",
+        " struct DisplayHandle {",
+        "-    struct ResourceEvent *object;",
+        "+    struct DisplayObject *object;",
+        "     unsigned char reserved04[0x14];",
+        "     float x;",
+        "     float y;"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 397,
+      "old_count": 9,
+      "new_start": 222,
+      "new_count": 9,
+      "context": "extern unsigned data_0023ecdc;",
+      "diff_lines": [
+        " extern struct StyleOwner bss_00245364;",
+        " extern struct StyleOwner *func_001eb0d0(struct StyleOwner *owner);",
+        " extern struct StyleOwner *func_001eade0(void);",
+        "-extern struct ResourceEvent *func_0017a818(const struct NameTable *table,",
+        "+extern struct DisplayObject *func_0017a818(const struct NameTable *table,",
+        "     int screen, int active, float x, float y, float z);",
+        "-extern void func_00175ab8(void *screen, int index,",
+        "+extern void func_00175ab8(struct W8DisplaySet *screen, int index,",
+        "                          int red, int green, int blue, int alpha);",
+        " extern void func_00166eac(struct W8DisplaySet *screen, int index, float x, float y);",
+        " extern void func_00175848(void);"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 410,
+      "old_count": 34,
+      "new_start": 235,
+      "new_count": 40,
+      "context": "extern void func_00196144(int screen, int index);",
+      "diff_lines": [
+        " extern void func_00176d98(void);",
+        " extern void func_00177084(void);",
+        " extern void func_00176df4(void);",
+        "-extern void func_00181448(struct BoundDisplayObject *object);",
+        "-extern void func_0019637c(struct BoundDisplayObject *object,",
+        "-                          struct BoundDisplayObject **head, int primary);",
+        "+extern void func_00181448(struct DisplayObject *object);",
+        "+extern void func_0019637c(struct DisplayObject *object,",
+        "+                          struct DisplayObject **head, int primary);",
+        " extern const struct NameTable *bss_00246f4c[];",
+        " extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);",
+        " extern void func_0016e3e0(struct WidgetController *controller, int index, int value);",
+        " extern void func_0016e648(struct WidgetController *controller, int index, int character);",
+        " extern struct AnimationContext bss_00246b48;",
+        "-extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,",
+        "-                         const struct DisplayTexCoords *coordinates);",
+        "-extern void func_0014e504(struct DisplayVertexPane *pane, unsigned count);",
+        "-extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);",
+        " extern void func_0015e948(struct DisplayObject *object, int active);",
+        "-extern void func_0015e954(struct DisplayPaneLink *link, int active);",
+        "-extern void func_0015e4a8(struct DisplaySurface *surface, float character_spacing, float line_spacing);",
+        "-extern void func_0015e634(struct DisplaySurface *surface, float width, float height);",
+        "-extern void func_0015e5d4(struct DisplaySurface *surface, float x, float y, float z);",
+        "-extern void func_0015e3f4(struct DisplaySurface *surface, unsigned char red,",
+        "-                          unsigned char green, unsigned char blue, unsigned char alpha);",
+        "-extern void func_0015e534(struct DisplaySurface *surface, unsigned char red,",
+        "-                          unsigned char green, unsigned char blue, unsigned char alpha);",
+        "-extern void func_0015e57c(struct DisplaySurface *surface, unsigned char red,",
+        "-                          unsigned char green, unsigned char blue, unsigned char alpha);",
+        "+extern void func_0015e60c(const struct ResourceEntry *entry, float *width, float *height);",
+        "+extern void func_0015e78c(struct ResourceEntry *entry, unsigned value);",
+        "+extern void func_0015e830(struct ResourceEntry *entry, unsigned value);",
+        "+extern void func_0015e5c4(struct DisplayObject *object, int index, float x, float y, float z);",
+        "+extern void func_0016f534(struct DisplayObject *object, int index, float duration);",
+        "+extern void func_0016e300(struct WidgetController *controller, int slot_index,",
+        "+                          int red, int green, int blue, int alpha);",
+        "+extern void func_00170030(struct DisplayObject *object, int red, int green, int blue, int alpha);",
+        "+extern void func_00170088(struct DisplayObject *object, int red, int green, int blue, int alpha);",
+        "+extern void func_00167e08(struct DisplayObject *object, int vertex_index,",
+        "+                          int red, int green, int blue, int alpha);",
+        "+extern void func_0016fff8(struct DisplayObject *object, int red, int green, int blue, int alpha);",
+        "+extern void func_00170014(struct DisplayObject *object, int red, int green, int blue, int alpha);",
+        "+extern void func_0015e954(struct ResourceEntry *link, int active);",
+        "+extern void func_0015e4a8(struct ResourceEntry *surface, float character_spacing, float line_spacing);",
+        "+extern void func_0015e634(struct ResourceEntry *surface, float width, float height);",
+        "+extern void func_0015e5d4(struct ResourceEntry *surface, float x, float y, float z);",
+        "+extern void func_0015e3f4(struct ResourceEntry *surface, int red, int green, int blue, int alpha);",
+        "+extern void func_0015e534(struct ResourceEntry *surface, int red, int green, int blue, int alpha);",
+        "+extern void func_0015e57c(struct ResourceEntry *surface, int red, int green, int blue, int alpha);",
+        " extern void func_00180358(struct DisplayObject *object, int first, int second);",
+        "-extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);",
+        "-extern void func_0018271c(void *object, unsigned char alpha);",
+        "-extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);",
+        "-extern void func_00181734(struct BoundDisplayObject *object, float width, float height);",
+        "+extern void func_0015e684(struct DisplayObject *object, int index, float x, float y, float z);",
+        "+extern void func_0018271c(struct DisplayObject *object, unsigned char alpha);",
+        "+extern void func_00181700(struct DisplayObject *object, float x, float y, float z);",
+        "+extern void func_00181734(struct DisplayObject *object, float width, float height);",
+        " extern void func_001826fc(struct DisplayObject *object, int active);",
+        " extern void func_00195a08(struct DisplayObject *object, int index, int active);",
+        " extern void func_0016de90(struct Screen *screen, int index);"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 450,
+      "old_count": 16,
+      "new_start": 281,
+      "new_count": 16,
+      "context": "extern void func_00170e50(struct Screen *screen, int index);",
+      "diff_lines": [
+        " extern void func_0017a6f4(struct Screen *screen, int index);",
+        " extern void func_001795cc(struct Screen *screen, int first, int second);",
+        " extern void func_0017a0e0(struct W8DisplaySet *set, int index, int active);",
+        "-extern void func_001816e0(struct BoundDisplayObject *object, float x, float y);",
+        "+extern void func_001816e0(struct DisplayObject *object, float x, float y);",
+        " extern void func_0015e474(struct DisplayObject *object, int index, float x, float y, float z);",
+        "-extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);",
+        "-extern void func_001963f8(struct BoundDisplayObject *object);",
+        "-extern struct BoundDisplayObject *func_00145b5c(int screen, int index);",
+        "-extern struct BoundDisplayObject *data_00242248;",
+        "-extern struct BoundDisplayObject *data_0024224c;",
+        "-extern struct BoundDisplayObject *data_00242250;",
+        "-extern void func_0018695c(struct BoundDisplayObject *object,",
+        "-                          struct BoundDisplayObject **head, int primary);",
+        "+extern void func_0015e684(struct DisplayObject *object, int index, float x, float y, float z);",
+        "+extern void func_001963f8(struct DisplayObject *object);",
+        "+extern struct DisplayObject *func_00145b5c(int screen, int index);",
+        "+extern struct DisplayObject *data_00242248;",
+        "+extern struct DisplayObject *data_0024224c;",
+        "+extern struct DisplayObject *data_00242250;",
+        "+extern void func_0018695c(struct DisplayObject *object,",
+        "+                          struct DisplayObject **head, int primary);",
+        " extern void func_001eafa0(void *screen, int index, const unsigned short *text);",
+        " extern void func_0016de90(struct Screen *screen, int index);",
+        " "
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 471,
+      "old_count": 7,
+      "new_start": 302,
+      "new_count": 7,
+      "context": "extern void func_0016de90(struct Screen *screen, int index);",
+      "diff_lines": [
+        " struct W10DrawingInput {",
+        "     unsigned char reserved00[4];",
+        "     int identifiers[2];",
+        "-    struct ResourceEvent *displays[3];",
+        "+    struct DisplayObject *displays[3];",
+        "     unsigned char notification_active, reserved19;",
+        "     unsigned short characters[0x440];",
+        "     short field89a;"
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "old_start": 493,
+      "old_count": 7,
+      "new_start": 324,
+      "new_count": 7,
+      "context": "struct W10DrawingInput {",
+      "diff_lines": [
+        " #ifdef __cplusplus",
+        " extern \"C\" {",
+        " #endif",
+        "-extern void func_0015e698(struct DisplayPaneLink *link, float x, float y, float z);",
+        "+extern void func_0015e698(struct ResourceEntry *link, float x, float y, float z);",
+        " extern void func_0019cecc(void *destination, unsigned int size);",
+        " extern void func_00180344(void);",
+        " extern void func_00166d5c(struct W10DrawingInput *input, int active, float x, float y);"
+      ]
+    },
+    {
+      "path": "include/game/startup.h",
+      "old_start": 18,
+      "old_count": 13,
+      "new_start": 18,
+      "new_count": 13,
+      "context": "struct ApplicationControl {",
+      "diff_lines": [
+        "     void (*callback)(void);",
+        " };",
+        " ",
+        "-struct ResourceEvent;",
+        "+struct DisplayObject;",
+        " struct ResourceOptions {",
+        "     unsigned active;",
+        "     unsigned pending;",
+        "     unsigned reserved08[2];",
+        "     void *allocation;",
+        "-    struct ResourceEvent *event;",
+        "+    struct DisplayObject *event;",
+        "     int enabled;",
+        "     int group;",
+        "     int count;"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "old_start": 2,
+      "old_count": 7,
+      "new_start": 2,
+      "new_count": 8,
+      "context": "",
+      "diff_lines": [
+        "  * NintendoWare4Ctr contributors; upstream include/nw/font/font_CharStrmReader.h",
+        "  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "- * Modified 2026-10-17: retain public layouts; normalize assertion includes and remove unused SDK/module and graphics-type dependencies.",
+        "+ * Modified 2026-10-20: share the real decoder member-pointer table contract;",
+        "+ * advance the stream value without reference punning.",
+        "  * This file is free software under GNU GPL version 3; see LICENSE.txt.",
+        "  */",
+        " #pragma once"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "old_start": 17,
+      "old_count": 6,
+      "new_start": 18,
+      "new_count": 7,
+      "context": "class CharStrmReader",
+      "diff_lines": [
+        " {",
+        "     friend class Font;",
+        " public:",
+        "+    typedef u16 (CharStrmReader::*ReadNextCharFunc)();",
+        "     CharStrmReader(const CharStrmReader& rhs):",
+        "         m_CharStrm(rhs.m_CharStrm),",
+        "         m_ReadFunc(rhs.m_ReadFunc) {}"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "old_start": 35,
+      "old_count": 7,
+      "new_start": 37,
+      "new_count": 6,
+      "context": "public:",
+      "diff_lines": [
+        "     const void* GetCurrentPos() const { return m_CharStrm; }",
+        "     u16 Next() { return (this->*m_ReadFunc)(); }",
+        " private:",
+        "-    typedef u16 (CharStrmReader::*ReadNextCharFunc)();",
+        " ",
+        "     const void* m_CharStrm;",
+        "     const ReadNextCharFunc m_ReadFunc;"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "old_start": 47,
+      "old_count": 15,
+      "new_start": 48,
+      "new_count": 15,
+      "context": "private:",
+      "diff_lines": [
+        "     template<typename CharType>",
+        "     CharType GetChar(int offset = 0) const",
+        "     {",
+        "-        const CharType* charStrm = reinterpret_cast<const CharType*>(m_CharStrm);",
+        "+        const CharType* charStrm = static_cast<const CharType*>(m_CharStrm);",
+        "         return *(charStrm + offset);",
+        "     }",
+        " ",
+        "     template<typename CharType>",
+        "     void StepStrm(int step = 1)",
+        "     {",
+        "-        const CharType*& charStrm = reinterpret_cast<const CharType*&>(m_CharStrm);",
+        "-        charStrm += step;",
+        "+        const CharType* charStrm = static_cast<const CharType*>(m_CharStrm);",
+        "+        m_CharStrm = charStrm + step;",
+        "     }",
+        " ",
+        "     u16 ReadNextCharUTF8();"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "old_start": 67,
+      "old_count": 3,
+      "new_start": 68,
+      "new_count": 6,
+      "context": "private:",
+      "diff_lines": [
+        " }",
+        " }",
+        " ",
+        "+",
+        "+/* The original array holds four nonvirtual reader member pointers. */",
+        "+extern \"C\" const nw::font::CharStrmReader::ReadNextCharFunc data_0021c64c[4];"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_DispStringBuffer.h",
+      "old_start": 2,
+      "old_count": 7,
+      "new_start": 2,
+      "new_count": 8,
+      "context": "",
+      "diff_lines": [
+        "  * NintendoWare4Ctr contributors; upstream include/nw/font/font_DispStringBuffer.h",
+        "  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "- * Modified 2026-10-17: public header unchanged except standalone relative include paths",
+        "+ * Modified 2026-10-20: name the retail allocation flag byte used by TextBox",
+        "+ * cleanup; retain the remaining unresolved padding.",
+        "  * GNU GPL version 3; see LICENSE.txt.",
+        "  */",
+        " #pragma once"
+      ]
+    },
+    {
+      "path": "include/nw/font/font_DispStringBuffer.h",
+      "old_start": 32,
+      "old_count": 7,
+      "new_start": 33,
+      "new_count": 8,
+      "context": "struct DispStringBuffer",
+      "diff_lines": [
+        "     u16 charCount;",
+        "     u16 drawCharCount;",
+        "     u8 generatedCommand;",
+        "-    u8 padding[3];",
+        "+    u8 allocationFlags;",
+        "+    u8 padding[2];",
+        "     u8* drawFlags;",
+        "     u32* commandBuffer;",
+        "     u32 commandBufferSize;"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Material.h",
+      "old_start": 2,
+      "old_count": 7,
+      "new_start": 2,
+      "new_count": 8,
+      "context": "",
+      "diff_lines": [
+        "  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_Material.h",
+        "  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "- * Modified 2026-10-17: public header unchanged except standalone relative include paths",
+        "+ * Modified 2026-10-20: expose the recovered retail storage and parameter",
+        "+ * accessors to game consumers instead of a second complete Material class.",
+        "  * GNU GPL version 3; see LICENSE.txt.",
+        "  */",
+        " #pragma once"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Material.h",
+      "old_start": 192,
+      "old_count": 7,
+      "new_start": 193,
+      "new_count": 7,
+      "context": "public:",
+      "diff_lines": [
+        "     bool IsTextureDirty() const { return !internal::TestBit(m_Flag, FLAG_TEXTURE_CLEAN); }",
+        "     void SetTextureDirty(bool bDirty = true) { internal::SetBit(&m_Flag, FLAG_TEXTURE_CLEAN, !bDirty); }",
+        " ",
+        "-protected:",
+        "+public:",
+        "     const TexMap* GetTexMapAry() const;",
+        "     TexMap* GetTexMapAry();",
+        "     const TexSRT* GetTexSRTAry() const;"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Material.h",
+      "old_start": 210,
+      "old_count": 6,
+      "new_start": 211,
+      "new_count": 7,
+      "context": "private:",
+      "diff_lines": [
+        "     void Init();",
+        "     void InitMatMemNums(internal::MatMemNums* ptr);",
+        " ",
+        "+public:",
+        "     AnimationList m_AnimList;",
+        "     ut::Color8 m_Colors[MatColorMax];",
+        "     internal::MatMemNums m_MemCap;"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Pane.h",
+      "old_start": 2,
+      "old_count": 7,
+      "new_start": 2,
+      "new_count": 8,
+      "context": "",
+      "diff_lines": [
+        "  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_Pane.h",
+        "  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "- * Modified 2026-10-17: public header unchanged except standalone relative include paths",
+        "+ * Modified 2026-10-20: expose recovered storage to target-version consumers.",
+        "+ * Keep the native tail padding reusable: Window's original colors prove it.",
+        "  * GNU GPL version 3; see LICENSE.txt.",
+        "  */",
+        " #pragma once"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Pane.h",
+      "old_start": 233,
+      "old_count": 7,
+      "new_start": 234,
+      "new_count": 7,
+      "context": "protected:",
+      "diff_lines": [
+        " ",
+        "     void Init();",
+        " ",
+        "-protected:",
+        "+public:",
+        "     Pane* m_pParent;",
+        "     PaneList m_ChildList;",
+        "     AnimationList m_AnimList;"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Picture.h",
+      "old_start": 47,
+      "old_count": 6,
+      "new_start": 47,
+      "new_count": 8,
+      "context": "public:",
+      "diff_lines": [
+        " public: ",
+        "     virtual void MakeUniformDataSelf( DrawInfo* pDrawInfo, Drawer* pDrawer ) const;",
+        " protected:",
+        "+    /* Retail Picture owns this prefix; Pane tail padding remains reusable. */",
+        "+    u8 m_ReservedD2[2];",
+        "     mutable bool m_IsTexCoordInited;",
+        "     mutable u32 m_UniformTexCoordNum;",
+        "     mutable math::VEC4 m_UniformTexCoords[TexMapMax * 2];"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Picture.h",
+      "old_start": 55,
+      "old_count": 7,
+      "new_start": 57,
+      "new_count": 7,
+      "context": "protected:",
+      "diff_lines": [
+        "     virtual void DrawSelf(const DrawInfo& drawInfo);",
+        "     void Init(u8 texNum);",
+        " ",
+        "-protected:",
+        "+public:",
+        "     Material* m_pMaterial;",
+        "     ut::Color8 m_VtxColors[VERTEXCOLOR_MAX];",
+        "     internal::TexCoordAry m_TexCoordAry;"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_TextBox.h",
+      "old_start": 2,
+      "old_count": 7,
+      "new_start": 2,
+      "new_count": 8,
+      "context": "",
+      "diff_lines": [
+        "  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_TextBox.h",
+        "  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd",
+        "- * Modified 2026-10-17: public header unchanged except standalone relative include paths",
+        "+ * Modified 2026-10-20: model the retail 0x108-byte object, its independent",
+        "+ * alignment/dirty bytes, and the format argument of string allocation.",
+        "  * GNU GPL version 3; see LICENSE.txt.",
+        "  */",
+        " #pragma once"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_TextBox.h",
+      "old_start": 35,
+      "old_count": 11,
+      "new_start": 36,
+      "new_count": 14,
+      "context": "class TextBox : public Pane",
+      "diff_lines": [
+        "     typedef Pane Base;",
+        " ",
+        " public:",
+        "-    NW_UT_RUNTIME_TYPEINFO;",
+        "+    /* The retail table retains no callable RTTI slot. Keep the declaration,",
+        "+     * not an inferred out-of-line implementation or replacement target. */",
+        "+    virtual const nw::ut::internal::RuntimeTypeInfo* GetRuntimeTypeInfo() const;",
+        "+    static const nw::ut::internal::RuntimeTypeInfo s_TypeInfo;",
+        " ",
+        "     typedef font::TagProcessorBase<wchar_t> TagProcessor;",
+        " ",
+        "-    explicit TextBox(u16 allocStrLen = 0);",
+        "+    explicit TextBox(u16 allocStrLen = 0, unsigned format = 0);",
+        "     TextBox(u16 allocStrLen, const wchar_t* str, const font::Font* pFont);",
+        "     TextBox(u16 allocStrLen, const wchar_t* str, u16 strLen, const font::Font* pFont);",
+        "     TextBox(const res::TextBox* pBlock, const ResBlockSet& resBlockSet);"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_TextBox.h",
+      "old_start": 51,
+      "old_count": 7,
+      "new_start": 55,
+      "new_count": 7,
+      "context": "public:",
+      "diff_lines": [
+        "     u16 GetStringLength() const { return m_TextLen; }",
+        "     u16 GetStringBufferLength() const;",
+        " ",
+        "-    virtual void AllocStringBuffer(u16 minLen);",
+        "+    virtual void AllocStringBuffer(u16 minLen, unsigned format);",
+        "     virtual void FreeStringBuffer();",
+        "     virtual u16  SetString(const wchar_t* str, u16 dstIdx = 0);",
+        "     virtual u16  SetString(const wchar_t* str, u16 dstIdx, u16 strLen);"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_TextBox.h",
+      "old_start": 110,
+      "old_count": 11,
+      "new_start": 114,
+      "new_count": 11,
+      "context": "public:",
+      "diff_lines": [
+        "             internal::SetVerticalPosition(&m_TextPosition, u8(val));",
+        "     }",
+        " ",
+        "-    TextAlignment GetTextAlignment() const { return static_cast<TextAlignment>(m_Bits.textAlignment); }",
+        "+    TextAlignment GetTextAlignment() const { return static_cast<TextAlignment>(m_TextAlignment); }",
+        "     void SetTextAlignment(TextAlignment val)",
+        "     {",
+        "         if (UpdatePTDirty(GetTextAlignment() != val))",
+        "-            m_Bits.textAlignment = val;",
+        "+            m_TextAlignment = val;",
+        "     }",
+        " ",
+        "     TagProcessor* GetTagProcessor() const { return m_pTagProcessor; }"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_TextBox.h",
+      "old_start": 153,
+      "old_count": 26,
+      "new_start": 157,
+      "new_count": 26,
+      "context": "protected:",
+      "diff_lines": [
+        "     void SetFontInfo(font::WideTextWriter* pWriter) const;",
+        "     void SetTextPos(font::WideTextWriter* pWriter) const;",
+        "     math::VEC2 AdjustTextPos(const Size& size, bool isCeil) const;",
+        "-    void Init(u16 allocStrLen);",
+        "+    void Init(u16 allocStrLen, unsigned format);",
+        "     void InitMaterial();",
+        "     u16  SetStringImpl(const wchar_t* str, u16 dstIdx, u32 strLen);",
+        " ",
+        "     bool UpdatePTDirty(bool isChanged)",
+        "     {",
+        "-        m_Bits.isPTDirty |= isChanged ? 1 : 0;",
+        "+        m_IsPTDirty |= isChanged ? 1 : 0;",
+        "         return isChanged;",
+        "     }",
+        " ",
+        "     void UpdateDrawCharDataImpl(Drawer* pDrawer)",
+        "     {",
+        "-        if (m_Bits.isPTDirty || (!m_pDispStringBuf->IsGeneratedCommand() && pDrawer))",
+        "+        if (m_IsPTDirty || (!m_pDispStringBuf->IsGeneratedCommand() && pDrawer))",
+        "             SetupDrawCharData(pDrawer);",
+        "     }",
+        " ",
+        "     void SetupDrawCharData(Drawer* pDrawer);",
+        "     void SetupTextWriter(font::WideTextWriter* pWriter);",
+        " ",
+        "-private:",
+        "+public:",
+        "     wchar_t*                m_pTextBuf;",
+        "     ut::Color8              m_TextColors[TEXTCOLOR_MAX];",
+        "     const font::Font*       m_pFont;"
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_TextBox.h",
+      "old_start": 184,
+      "old_count": 12,
+      "new_start": 188,
+      "new_count": 8,
+      "context": "private:",
+      "diff_lines": [
+        "     u16                     m_TextLen;",
+        "     u8                      m_TextPosition;",
+        " ",
+        "-    struct Bits",
+        "-    {",
+        "-        u8 textAlignment : 2;",
+        "-        u8 isPTDirty     : 1;",
+        "-    };",
+        "-    Bits m_Bits;",
+        "+    u8 m_TextAlignment;",
+        "+    u8 m_IsPTDirty;",
+        "     Material* m_pMaterial;",
+        "     font::DispStringBuffer* m_pDispStringBuf;",
+        " };"
+      ]
+    }
+  ],
+  "header_purposes": {
+    "include/game/animation.h": "Explicitly separate opaque intrusive registry receiver from display pool; no false owner merge.",
+    "include/game/audio.h": "Delete indexed AnimatedObject complete shell; preserve unrelated sound declarations.",
+    "include/game/audio_voice.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses.",
+    "include/game/display_animation.h": "Delete conflicting DisplayAnimationTrack/Slot shells; common/timed/Picture payload accesses replace them.",
+    "include/game/display_groups.h": "Collection/handle display pointees become the one complete owner.",
+    "include/game/display_native.h": "Actual Picture/TexCoordAry/VEC2 coordinate endpoints; no peer casts.",
+    "include/game/display_object.h": "Complete DisplayObject0xcc, genuine common/timed prefixes, distinct text/layout/pane payloads and producer-cited projections. Callback complete type deliberately unpublished until exact provider contracts close.",
+    "include/game/exp_heap.h": "Real ResourceEntry native TextBox pointer+8, separately retained state byte+c and flag byte+f; C clients have only opaque wrapper pointers.",
+    "include/game/functions.h": "Flag operation receiver is complete DisplayObject, not a false indexed shell.",
+    "include/game/input_device.h": "Remove obsolete unused AlignmentHandle forward declaration; remaining header owned by services.",
+    "include/game/layout_lifecycle.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses.",
+    "include/game/material.h": "Remove peer Material/Pane/texture/layout records and obsolete native aliases; retain real native endpoint types and proven address-named external contracts.",
+    "include/game/resource_runtime.h": "Complete DisplayObject pointers for pool elements, resource records, asset slots and cleanup/reset endpoints; preserve pool/manager storage.",
+    "include/game/screen.h": "Remove split complete owner and payload/wrapper/Pane/vertex peers, use complete owner in queues/static registrations/handles/cleanup/factory signatures, ResourceEntry wrappers and coherent full-word colors.",
+    "include/game/startup.h": "ResourceOptions.event is the complete DisplayObject.",
+    "include/nw/font/font_CharStrmReader.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses.",
+    "include/nw/font/font_DispStringBuffer.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses.",
+    "include/nw/lyt/lyt_Material.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses.",
+    "include/nw/lyt/lyt_Pane.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses.",
+    "include/nw/lyt/lyt_Picture.h": "Retail concrete Picture prefix owns its own two-byte region; expose recovered native storage for typed callers, without occupying universal Pane tail padding.",
+    "include/nw/lyt/lyt_TextBox.h": "Imported font-gfx native/model dependency; retain exact sibling source/slot evidence and final native witnesses."
+  },
+  "header_sha256": {
+    "include/game/animation.h": "4cc5f16d6d3d89b7cf6e82d2240d5b00ddde3506d1932b1781fc41fa5e69e941",
+    "include/game/audio.h": "475ba39bb0efe723678c9f1d7a655070782f39a905be2620bb9a247c31d42b76",
+    "include/game/audio_voice.h": "d1ba6cd060b658389014df2f608f317319e007172a5bbf0a306abe0cebc3e471",
+    "include/game/display_animation.h": "c9163319ab5471e30493f984f9aa4de34f241cea1dfd2a702b4a7236d7ab0e5c",
+    "include/game/display_groups.h": "de850b0951c4d85555f353999449ab64231f9f7123a325bebc8ef5a510e1f535",
+    "include/game/display_native.h": "8d4931d51404e297700d1446e32fe7d80564c05c36477cf43aeb04431bd1ddf5",
+    "include/game/display_object.h": "2bb86fe0ed953c36ed8ca87128fa736d5f3a4859c7b7f44005c60374b9bbabb2",
+    "include/game/exp_heap.h": "48c3c90f704092fd7e579f3db70ba9b29a99243d0493de4d5ff9382ae919f4ca",
+    "include/game/functions.h": "23a2193d2d23383a1ec6ecf8b731b05047e801eb834d74f4cfeb7ff9a4819cd3",
+    "include/game/input_device.h": "0f5d9db65ff16ab43f0d2893938af6f6b168280d3972c19fb5427a023d03e81b",
+    "include/game/layout_lifecycle.h": "712b73c91812f59190eeb03654bb8d0ba019f09899641967e41415a5c64e72c7",
+    "include/game/material.h": "0a2b879ea761ed25cc0b7e8a5efa9a02e82f269add2fd72f431d0620cfc618aa",
+    "include/game/resource_runtime.h": "db7ce66fa9b296af4c540e8e5d9b2082cd7692e2b8fa748a690a145bc1870733",
+    "include/game/screen.h": "7fc7b62a25e4d19108e98a0ff12e1e1480354f4a5d8faa2b51e989c897263484",
+    "include/game/startup.h": "8fe90d3385a186bebcaeb9a0168364159ab646f2d3eac246b7e10b86d5479901",
+    "include/nw/font/font_CharStrmReader.h": "4e8b72b42565f345123a30fc8be0ed5914ab6ddff7561a6497c4eba921e07f8a",
+    "include/nw/font/font_DispStringBuffer.h": "adc40faaace93fac1d7e8e955fd25aa70792663ccf8309a96fab1486b44625bc",
+    "include/nw/lyt/lyt_Material.h": "15f3e4f6ddd3acd76403d81fda5adeb8505e72419696355c459b0ff79715b798",
+    "include/nw/lyt/lyt_Pane.h": "d47f01bb9a6d5828d978a5acb01975de79a4e871b3a37b34f084be0f74ed2dca",
+    "include/nw/lyt/lyt_Picture.h": "17e992e673d78287bd1632b84650922ddeada7208b52666cdab213b5b96a793d",
+    "include/nw/lyt/lyt_TextBox.h": "5617234e46ef1ff99afc85e2d37fe73a1c4fd30d0c1322750dd96990d98e34a9"
+  },
+  "witness_index": "scratch/integrator/types-display/WITNESS-INDEX.json",
+  "remaining": "scratch/integrator/types-display/REMAINING.json",
+  "qualifications": [
+    "One0xcc owner is established by real allocator/initializer/factory/queue/cleanup provenance, never matching geometry.",
+    "The physical two attachment cells end before state9c; legal index domains remain caller obligations. No extra initialized pointer or silently repaired byte store was invented.",
+    "Layout animation/resource vector element completion remains qualified where the report qualifies it; unused resource vector storage is kept as untyped owned storage, not published as void** semantic elements.",
+    "High-level color int signedness follows the existing convention [INFERENCE]; full words are forwarded, and narrowing occurs only at byte caches/native Color8 storage boundaries.",
+    "func0014ab30 uses memcpy to copy the incoming packed word into the actual four-byte BlendMode object; no unrelated object pointer/union access is introduced.",
+    "Existing R1 identity, L1 span, original bugs and ARMCC-extension qualifications survive. Unit MATCH is not source-policy review, full-build equality or accepted progress.",
+    "The independent intrusive-registry recovery and the still-mismatching float size query remain explicit; no accepted identity was withdrawn to hide a type/codegen problem."
+  ],
+  "not_exercised": [
+    "full builds",
+    "full suite",
+    "whole-ledger interfaces",
+    "whole-ledger argcheck",
+    "independent checkpoint review",
+    "accept prepare/finalize"
+  ],
+  "main_rebase_contract": [
+    "Rebase the theme deltas after separately finalized c009-r4, upgrade the four c009-new source moves to accepted moves against that final ledger, and deduplicate imported font-gfx moves/coalescences.",
+    "Whole-ledger interfaces/argcheck and manual unchecked-C++/native slot-provider review.",
+    "Both fresh complete builds, suite, single emitted-owner audit, independent checkpoint reviews and prepare/finalize under frozen v1.19 v6+L1."
+  ]
+}
