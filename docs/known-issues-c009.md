@@ -6,19 +6,19 @@
 Includes finalized c008-r3 (sequence 8), preserving c009's typed slot13/14 work.
 The original sixteen-address boundary currently retains five canonical destinations
 and eleven recorded deferrals: the earlier collected `0013156c` was withdrawn
-on a native C++ API qualification. Three other interface/tooling deferrals remain.
-Main owns full builds/suite and acceptance. Current main tooling is merged, but
-c009 stays explicitly **armlink5-inline-branchnop-v2 / none**; no model transition.
-Corrected current G3 r5 exits0. Three byte mismatches remain.
-No pre-review PASS is claimed.
+on a native C++ API qualification. Five other later interface/scope deferrals remain.
+Main owns full builds/suite and acceptance. Audited main f24fa0b is merged; cmodels
+finalization must be merged after Main supplies its finalized hash. C009 remains
+explicitly **armlink5-inline-branchnop-v2 / none**, with no model transition.
+G3 r5 is historical to its prior hashes/scope. No current pre-review PASS is claimed.
 
-`config/candidates/c009.json` lists **678 units / 678 functions / 57,212 target
-bytes**. These are unaccepted scope totals; newer source remediation is not yet rematched:
+`config/candidates/c009.json` lists **676 units / 676 functions / 57,052 target
+bytes**. These are unaccepted scope totals; the final current-tree sweep is pending:
 
 | Frozen profile | Units/functions | Target bytes |
 | --- | ---: | ---: |
-| game | 616 | 51,528 |
-| middleware | 37 | 4,000 |
+| game | 615 | 51,424 |
+| middleware | 36 | 3,944 |
 | sdk | 25 | 1,684 |
 
 Previous collect inputs, successful destination receipts, dirty sources and author results
@@ -59,11 +59,18 @@ results are not silently admitted into this default-model checkpoint.
   Those c009-wide probes using c008-r2's reusable helpers remain unexercised.
 * The catalogue recheck intersection was `00214580` (MATCH, exit 0) and
   `00203810` (compile exit 2, then deferred on concrete owner-contract evidence).
-* Remaining byte mismatches: **`00113c0c`, `0018ee88`, `001c4494`**.
-  Canonical queue-tail shadows are removed; their actual field/width repairs MATCH.
-  Nine bounded natural error-check/early-return source forms did not close the
-  three remaining scheduling/register differences. Exact source/exit/receipt evidence
-  is preserved; do not change provider types or add steering for those bytes.
+* The last three-mismatch slice is closed without removing an accepted identity.
+  Accepted **`001c4494`** restores its exact accepted **Result/int-output** API and
+  source: **MATCH44/44 B, exit0**. New **`0019d5dc`** forwards that same contract:
+  **MATCH8/8 B, exit0**. The reader drops naturally from revised-source scope.
+  New **`00113c0c`** and **`0018ee88`** are withdrawn per Main's bounded-search
+  ruling. Their author MATCH forms conflict with canonical raw-status provider
+  returns and structured callback-state/byte-mode contracts respectively. Exact
+  author sources/receipts, canonical failed variants and measured exits are preserved
+  in **`interface-deferrals-r4.json`** and **`timebox-r1/results.json`**.
+  No shadow global/return type, call alias or steering recovers the missing bytes.
+  Current revised scope is **122 units / 126 functions**; required union is
+  **798 units / 802 functions**, dry ledger **2,203 units / 2,277 functions**.
 * Final all-new/revised matching, complete argcheck adjudication and the seven-step
   pre-review have **not** run after these changes. No full build, suite, prepare,
   finalize, history edit or push was performed.

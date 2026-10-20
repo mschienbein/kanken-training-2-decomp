@@ -1,5 +1,42 @@
 # C009 recovered integration handoff
 
+## Bounded mismatch closure after 66ae993
+
+Main authorized a bounded pass over the three remaining mismatches, then withdrawal
+of unmatched **new** definitions rather than delaying the other 676 functions.
+The accepted reader **`001c4494` is resolved, not withdrawn**: restoring its exact
+accepted **`Result(ResourceStream *, int *, void *, unsigned)`** provider contract
+and source gives **MATCH44/44 B, exit0**. New forwarder **`0019d5dc`** now uses the
+same canonical Result/int-output API and **MATCHes8/8 B, exit0**. There is no cast,
+fake provider, alternate callee identity or accepted credit removal. The accepted
+reader no longer differs from its source baseline; it drops naturally from revisions.
+
+New definitions **`00113c0c`** and **`0018ee88`** are withdrawn with exact source,
+author receipt, failed variants, real-contract conflicts and measured exits preserved
+in **`interface-deferrals-r4.json`**. Their author MATCH forms respectively declare
+raw-status providers as Result-returning, and shadow the complete callback-state
+global as a scalar byte while widening a canonical byte-mode parameter. Correct
+canonical consumers still fail byte matching; no shadow type or codegen steering
+is introduced to recover those bytes. The Result wrapper declaration remains
+because retained `0010b8b8` really calls that uncredited original function.
+
+Current scope: **676 new units/functions / 57,052 B**, **122 revised predecessor
+units / 126 functions**, required union **798 units / 802 functions**, dry ledger
+**2,203 units / 2,277 functions**. Exact current inputs are in
+**`readiness-scope-r6.json`**, **`HANDOFF.json`** and **`candidates.json`**.
+The four earlier current interface deferrals remain, making six later deferrals;
+historical `interface-deferrals-r3.json` is still superseded for the counted loop.
+`001c20e8` stays MATCH with the mandatory **QUALIFIED** review row.
+
+This closes the known mismatch slice, **not the final readiness gates**. G3 r5 is
+historical to its prior scope/header hashes, and no current whole-scope all-MATCH,
+native/signature/co-inclusion/indirect/forwarding/argcheck/pre-review PASS is claimed.
+Main instructed us to wait for its explicit **cmodels-finalized hash** before
+merging newer main, then reconcile accepted `0017a424`, recompute scopes and run
+the final merged-tree evidence. Independent canonical probes can proceed now.
+All following milestone sections are retained history; their old counts/blockers
+are superseded by this section. No full build/suite/prepare/history/push was run.
+
 ## Handoff boundary after 600f734
 
 Current corrected G3 r5 is **exit0** on the f24fa0b-based c009 tree, with
