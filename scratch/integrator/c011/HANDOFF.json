@@ -69,7 +69,7 @@
     "SCOPE-SUPPLEMENT-r7.json"
   ],
   "scope_sha256": "c0e6c59f852476f5604f52afb1e82c53ac2760059fd2c616867cd1cfdac4279c",
-  "ownership_basis": "OWNERSHIP-INPUTS-r7.json",
+  "ownership_basis": "OWNERSHIP-INPUTS-r8.json",
   "contract_reconciliation": "CONTRACT-RECONCILIATION-r8.json",
   "permuter_classification": "PERMUTER-CLASSIFICATION-r1.json",
   "name_proofs": [
@@ -85,6 +85,7 @@
   "exact_source_scope": "DESTINATION-SOURCE-SCOPE-r8.json",
   "header_preservation": "HEADER-PRESERVATION-r7.json",
   "preserved_source_complete_tip": "1814a725881a752f69c4c20ecff1bbfa12fbad7e",
+  "parent_ownership_update": "PARENT-OWNERSHIP-UPDATE-r1.json",
   "collection_evidence": [
     "COLLECT-r1.json",
     "COLLECT-r2.json",
@@ -245,7 +246,7 @@
   "serialization": "No heavy job, full audit, build, tests, prepare or finalize run. Only35 sequential nice10 match.py --show0 invocations, including three after preserving the original shared-writer contract, with explicit v6/L1 and unchanged frozen profiles. Main owns integration and heavy gates.",
   "next_main_checks": [
     "After c009-r3 and c010 finalize, compose accepted seq9 with their final inventories, then c011 additions and exactly ten preserved context moves. No accepted identity may disappear or acquire a second emitted owner.",
-    "Retain prior source/hash-bound parent reservations0014cc9c/001d31cc and001d0348/001d2234/001f478c. C010 now plans to defer unaccepted001c7760/001c8a40: preserve the pair reservation, refresh its final ownership, and never infer release or promote an unproved pair cast.",
+    "Retain prior source/hash-bound parent reservations0014cc9c/001d31cc and001d0348/001d2234/001f478c. C010 r67 now explicitly retains uncredited001c7760/001c8a40 in src; preserve their child reservations and both distinct parent/child source hashes. No native-pair cutover, re-entry or release follows.",
     "Propagate the two source-bound native writer getter revisions to c009 integration and the exact RequestRecord initializer include to c010; six direct revision witnesses are in DESTINATION-CLOSURE-r8.json. Preserve original TextWriterState/TextBounds/prototypes alongside new native getters. No unfinished predecessor changes were merged.",
     "Refresh shared-header dependencies across accepted/final parent/c011 units only after the predecessors settle. Current source-ready witnesses cover22 fresh targets and6 direct dependency targets, not the complete dependency closure.",
     "Run whole-ledger G3, argcheck/manual incoming-outgoing/lifetime adjudication, emitted-owner closure, seven-step pre-review and integrated builds/suite once when composed sources settle. Main alone prepares with explicit v6/L1, reviews, finalizes and pushes.",

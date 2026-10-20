@@ -57,8 +57,13 @@ merged. **This is source-ready intake, not checkpoint readiness.**
 
 `HANDOFF.json`, `DESTINATION-SOURCE-SCOPE-r8.json`, `CONSUMED-RESULTS-r7.json`
 and `DESTINATION-CLOSURE-r8.json` are the current handoff. All prior math,
-accepted-layout, stream, parent and native-pair holds survive. C010's planned
-deferral of its unaccepted `001c7760/001c8a40` pair is not an ownership release.
+accepted-layout, stream, parent and native-pair holds survive. C010's final r67
+source inventory has 496 units / 509 claims, with both `001c7760/001c8a40`
+reservation files retained in src but uncredited. The parent and child
+`001c7760` source hashes differ and remain distinct preserved snapshots; no
+cutover, re-entry or release is inferred. `PARENT-OWNERSHIP-UPDATE-r1.json`
+records the exact final parent paths/hashes: no fresh c011 claim overlaps,
+and all nine pending-parent move identities still have their named owners.
 Main must refresh shared-header dependencies after c009-r3/c010 finalize, then
 run integrated ownership/interfaces/caller checks and the heavy gates.
 
