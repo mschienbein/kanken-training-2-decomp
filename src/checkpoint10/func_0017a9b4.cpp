@@ -4,13 +4,13 @@
 
 static inline void set_active(struct WidgetSlot *slot, int active)
 {
-    struct DisplayObject *object = widget_display(slot);
+    struct ResourceEvent *object = slot->object;
     if (object == 0)
         return;
-    switch (func_0017a9a0(object, 0)) {
-    case 3: func_00195a08(object, 0, active); break;
-    case 6: func_001826fc(object, active); break;
-    case 5: func_0015e948(object, active); break;
+    switch (func_0017a9a0(&object->base, 0)) {
+    case 3: func_00195a08(&object->base, 0, active); break;
+    case 6: func_001826fc(&object->base, active); break;
+    case 5: func_0015e948(&object->base, active); break;
     }
 }
 
@@ -23,7 +23,7 @@ static inline void set_entry_active(struct Screen *screen, int value, int index)
             const struct NameTable *table = bss_0024445c[index];
             /* ORIGINAL BUG: the table pointer is used without a null check. */
             if (table->count > 0)
-                func_0017a968(widget_display(slot), table, 0, 0);
+                func_0017a968(&slot->object->base, table, 0, 0);
         }
     }
 }

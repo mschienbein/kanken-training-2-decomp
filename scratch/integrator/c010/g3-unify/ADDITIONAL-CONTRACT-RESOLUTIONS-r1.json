@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "c010_failure_run": "scratch/integrator/c010/g3-unify/c010-bounded-r1/results.json",
+  "failure_count": 12,
+  "additional_resolutions": [
+    {
+      "sources": [
+        "src/checkpoint10/func_0015eba4.c",
+        "src/checkpoint10/func_001ad288.c",
+        "src/checkpoint10/func_001c0f5c.c",
+        "src/checkpoint10/func_001c1cfc.c"
+      ],
+      "headers": [
+        "include/game/screen.h"
+      ],
+      "resolution": "WidgetSlot owns ResourceEvent, whose accepted cleanup reads active at +0xa0 and whose factory returns the full event. Display operations use its real DisplayObject initial member through the nullable widget_display accessor. Migrate all affected accepted/new display consumers; no receiver cast or union is introduced."
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_001e8810.c"
+      ],
+      "headers": [
+        "include/game/resource_runtime.h"
+      ],
+      "resolution": "The collection element is only cleared/released here and its release consumes ResourceEvent; type its object as that full resource rather than the display prefix."
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_001c8af0.c",
+        "src/wave19/func_001840dc.c",
+        "src/wave19/func_001c8b1c.c"
+      ],
+      "headers": [
+        "include/game/binary_resource.h"
+      ],
+      "resolution": "Use a real BinaryResourceReference containing a typed BinaryResourceHeader*. Preserve self-relative encoded-offset resolution and pass &reference rather than void**. Share the complete relative-owner state prefix without adding a cast."
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_0014cda4.c",
+        "src/checkpoint10/func_0014ce14.c",
+        "src/checkpoint10/func_00155ab4.c"
+      ],
+      "headers": [
+        "include/game/audio_dsp.h"
+      ],
+      "resolution": "The +0x10b4 two-by-24 vector is ServiceCoordinator.storage.audio.auxiliary_parameters; its selection word is at +0x131e, the existing serial field, not current_buffer at +0x1320. Refine reserved DSP parameter bytes into the short fields at +0x3a/+0x3c/+0x3e/+0xa2, retain the existing flags word, and remove all three view casts/local ChannelParameters collisions."
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_0013e84c.c",
+        "src/wave13/func_00180510.cpp",
+        "src/wave16/func_00106a50.c"
+      ],
+      "headers": [
+        "include/game/stream_manager.h",
+        "include/game/synchronization.h",
+        "include/game/service_state.h",
+        "include/game/sound_task.h"
+      ],
+      "resolution": "Original 0019df28 initializes the critical-section member at +4 through 0012e560 and updates state at +0. Both initializer and signal/wait clients use one eight-byte SignalState. Remove obsolete StreamSemaphore and SynchronizationStorage, retain the full initializer input, and migrate all storage uses to that real struct.",
+      "original_evidence": "scratch/integrator/c010/g3-unify/SYNCHRONIZATION-ORIGINAL-CALL-FACTS-r1.json"
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_00135c10.c"
+      ],
+      "headers": [
+        "include/game/render_resource.h"
+      ],
+      "resolution": "The three initialized words are the actual RendererShutdownState.allocation subobject. Use its buffer/count/capacity fields instead of a facade on the enclosing object."
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_0010a704.c"
+      ],
+      "headers": [
+        "include/game/task_runtime.h"
+      ],
+      "resolution": "Refine the one TaskRuntime owner with the count/tag vector, sound/heap pointer fields at +0x2f6a8/+0x2f6ac, exit word at +0x31710 and read/release indices after the existing 48-word submission vector. Use canonical values/write_index/read_index; do not adopt the unproved overlapping playback vector."
+    },
+    {
+      "sources": [
+        "src/checkpoint10/func_00196564.c",
+        "src/checkpoint10/func_001965a4.c"
+      ],
+      "headers": [
+        "include/game/shader.h"
+      ],
+      "resolution": "Retain the accepted three program/three shader arrays and name the current-index word at +0x18. Remove the unused six-program local facade; both lookup callers now compile against the actual registry."
+    },
+    {
+      "sources": [
+        "src/wave4/func_00121bc4.c"
+      ],
+      "headers": [
+        "include/game/exp_heap.h"
+      ],
+      "resolution": "Retain the accepted native ExpHeap receiver from 0019dd28 and pass its genuine HeapBase initial member to 00121bc8. Publish the wrapper in C and C++ instead of keeping an opaque C signature."
+    }
+  ],
+  "unreconciled_failure": "func_00172994 is explicitly deferred in DEFERRED-r1.json; no accepted caller is removed.",
+  "local_cohort_failures": "The four compile exits in bounded-r1 are separately retained and covered by these canonical TaskRuntime/ShaderRegistry/ResourceEvent refinements."
+}

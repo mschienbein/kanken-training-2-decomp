@@ -2,9 +2,11 @@
 
 static __forceinline void set_slot_active(struct WidgetSlot *slot, int active)
 {
-    struct DisplayObject *object = widget_display(slot);
-    if (!object)
+    struct ResourceEvent *event = slot->object;
+    struct DisplayObject *object;
+    if (!event)
         return;
+    object = &event->base;
     switch (func_0017a9a0(object, 0)) {
     case 3:
         func_00195a08(object, 0, active);

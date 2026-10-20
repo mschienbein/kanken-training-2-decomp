@@ -1,4 +1,4 @@
-#include "game/stream_manager.h"
+#include "game/service_lock.h"
 
 /* [INFERENCE] Source-only typed no-op registration. The original call identity
  * was erased; no callback is stored or invoked and no helper earns credit.

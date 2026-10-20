@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/models/func_0010be58/func_0010be58.c",
+ "source_sha256": "eb9f07d402e029e66ff5b8e72981005f6af1098f5cd4f3143a153106110728bf",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "77dfbbc91ec9531bf48af646109236014731347ac25b0acc965528c25cd0f45e",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/models/func_0010be58/result_failure_bits.c",
+   "source_sha256": "540d28dafc06a8d8a4e3f0c7a00c56949278353df65777f6e6a44373acfa9f13",
+   "object_sha256": "cb79e4f68b1d035a9faaebd37a07262f91d278a9dec0592ad732d20a406edb16"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "result_failure_bits"
+   ],
+   "section": "i.result_failure_bits",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/integrator/c010/g3-unify/complete-bounded-r1/models/func_0010be58/func_0010be58/extra-0-result_failure_bits.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_0010be58",
+   "address": 1097304,
+   "size": 60,
+   "candidate_size": 60,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 36,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe2000102",
+     "removed_callee": {
+      "symbols": [
+       "result_failure_bits"
+      ],
+      "section": "i.result_failure_bits",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/integrator/c010/g3-unify/complete-bounded-r1/models/func_0010be58/func_0010be58/extra-0-result_failure_bits.o"
+     }
+    }
+   ]
+  }
+ ]
+}

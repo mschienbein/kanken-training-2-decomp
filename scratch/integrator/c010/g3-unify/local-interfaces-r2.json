@@ -1,0 +1,48 @@
+{
+  "coverage": {
+    "const_writes": "typed lvalues, const-address casts and simple local pointer aliases",
+    "cpp": "qualified class-definition agreement across units and project headers (ODR, token-level; namespaces, enclosing classes and template specializations; unnamed namespaces unit-local), no forward declaration of a header-defined qualified class without that header, and no local extern \"C\" redeclaration of a symbol shared with another unit; declaration types and const writes unchecked; --allow-unchecked-cpp waives C++ only",
+    "not_covered": [
+      "whole-program/heap alias analysis and pointer arithmetic",
+      "interprocedural or branch-sensitive alias propagation",
+      "writes inside called functions or assembly"
+    ]
+  },
+  "disagreements": [],
+  "policy": [],
+  "schema_version": 1,
+  "unchecked": [
+    {
+      "kind": "cpp",
+      "reason": "C++ parser unavailable; only class-definition (ODR) agreement checked",
+      "source": "src/solo/func_00210964.cpp"
+    }
+  ],
+  "units": [
+    {
+      "checked": true,
+      "sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+      "source": "src/checkpoint10/func_001f580c_default.c"
+    },
+    {
+      "checked": true,
+      "sha256": "3f5b2311d8af64bab6e18a40ec0d897f47c8ee8ebabd65878d09ffee01d5537b",
+      "source": "src/models/object_registration/resource_service_lock.c"
+    },
+    {
+      "checked": true,
+      "sha256": "8fb696c25068981441f4db73dd3bf51c03c7b450c82fe6f94ad2467736757507",
+      "source": "src/wave3/func_001c51a0.c"
+    },
+    {
+      "checked": false,
+      "sha256": "4752712e8b80b70ff64ed9fe7f4ace6f2ed8f3b1c47602fb98e3e684cd0ee413",
+      "source": "src/solo/func_00210964.cpp"
+    },
+    {
+      "checked": true,
+      "sha256": "82e93333a947f768df7898aca325ef0ee0e1d827d9ad14da05da725c45a8b31c",
+      "source": "src/wave14/func_00100000.c"
+    }
+  ]
+}
