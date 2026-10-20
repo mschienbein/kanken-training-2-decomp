@@ -10,6 +10,7 @@ struct WaitableHandle;
 #include "game/waitable_handle.h"
 #include "ctr/svc.h"
 
+#ifdef __cplusplus
 struct ScopedKernelHandle {
     CtrHandle handle;
 
@@ -31,6 +32,7 @@ struct DualHandleState {
 
 
 extern "C" DualHandleState *func_001c58d0(DualHandleState *object);
+#endif
 
 #ifdef __cplusplus
 struct EventOwner {

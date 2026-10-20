@@ -35,6 +35,8 @@ extern struct ItemPageSet *data_0023ecf4;
 extern struct ItemPage *func_0017a4e8(struct ItemPageSet *set, int index);
 extern void func_001719f4(struct ItemPageSet *set, unsigned char kind, int format,
                         int category, int index, int enabled);
+extern void func_0015f724(struct ItemPage *page, int index, int column, int value);
+extern void func_0015f840(struct ItemPage *page, int index, unsigned char flags);
 #ifdef __cplusplus
 }
 #endif

@@ -24,6 +24,8 @@ int func_0016dc50(struct CharacterPanel *panel, int index);
 int func_0016e03c(const struct CharacterPanel *panel, int index);
 void func_0016e61c(struct CharacterPanel *panel, int selected, int character);
 int func_00179ed4(struct CharacterPanel *panel, int compact);
+void func_0017a164(struct Screen *screen, int state);
+void func_001b5ddc(struct WidgetController *controller);
 #ifdef __cplusplus
 }
 #endif

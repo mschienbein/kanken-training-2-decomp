@@ -4,6 +4,7 @@
 #include "game/text.h"
 #include "game/notification.h"
 #include "game/character_panel.h"
+#include "game/screen_operations.h"
 /* [INFERENCE] The item identifier/category accessors may have been armlink-inlined
  * and removed; these supplied operations do not establish historical identities. */
 
@@ -37,19 +38,6 @@ struct W10ExerciseState {
     int phase;
 };
 
-extern struct TransformEntry *func_00174454(int group, int index);
-extern void func_001dc918(int grade, int index, int value);
-extern void func_001dc744(int grade, int index, int value);
-extern void func_0015f840(struct ItemPage *page, int index, unsigned char flags);
-extern int func_001dc150(void);
-extern int func_001dc160(void);
-extern void func_001dc170(int value);
-extern void func_001dc230(int value);
-extern void func_001dbcec(int grade, int category, int value);
-extern void func_001dbfdc(int grade, int category, int value);
-extern void func_001dbbd4(int mode);
-extern int func_0016e03c(const struct CharacterPanel *controller, int index);
-extern void func_0015f724(struct ItemPage *page, int index, int column, int value);
 
 
 static struct ItemPage *current_page(const struct W10ExerciseState *state)

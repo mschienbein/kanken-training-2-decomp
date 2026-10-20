@@ -1,4 +1,5 @@
 #include "game/stream_manager.h"
+#include "game/exp_heap.h"
 
 
 static __forceinline void acquire_guard(struct StreamLockGuard *guard,

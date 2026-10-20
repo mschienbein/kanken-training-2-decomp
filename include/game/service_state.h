@@ -94,6 +94,7 @@ extern unsigned func_00191de8(void);
 extern void func_00192400(unsigned option);
 extern void func_00192484(unsigned char value);
 extern unsigned func_00192794(void);
+extern int func_00195e84(void);
 #ifdef __cplusplus
 }
 #endif

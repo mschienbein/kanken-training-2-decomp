@@ -76,7 +76,7 @@ struct InputItem {
 };
 
 struct InputGroup {
-    unsigned int reserved00;
+    unsigned int flags;
     int count;
     struct InputItem **items;
     struct InputSnapshot input;

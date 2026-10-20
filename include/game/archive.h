@@ -223,10 +223,13 @@ struct SoundArchiveInfo {
     int range_table_offset;
     unsigned reserved10;
     int third_table_offset;
-    unsigned char reserved18[0x14];
+    unsigned char reserved18[0x0c];
+    unsigned stream_table_offset;
+    unsigned reserved28;
     unsigned file_table_offset;
     unsigned reserved30;
-    unsigned count_table_offset;
+    /* [INFERENCE] Both count and location consumers reach this same file table. */
+    unsigned location_table_offset;
     unsigned reserved38;
     unsigned player_info_offset;
 };
@@ -284,6 +287,7 @@ struct SoundPlayerResult {
 
 
 
+struct ArchiveFileLocation;
 struct SoundArchiveAddonVTable {
     unsigned char reserved00[0x18];
     bool (*read_sound)(struct SoundArchiveAddon *, unsigned, struct SoundBasicInfo *);
@@ -526,7 +530,7 @@ extern struct WordPair *func_00194a34(struct WordPair *out, unsigned code);
 
 
 extern "C" {
-bool func_00140e14(const SoundArchiveReader *reader, unsigned file_id, ArchiveFileLocation *out, int mode);
+bool func_00140e14(const SoundArchiveReader *reader, unsigned file_id, ArchiveFileLocation *out, unsigned flags);
 bool func_00138edc(const SoundArchive *archive, unsigned file_id, ArchiveFileLocation *out);
 bool func_00185884(const SoundArchive *archive, unsigned sound_id, SoundType3Info *out);
 bool func_00185b44(const SoundArchive *archive, unsigned sound_id, SoundType1Info *out);

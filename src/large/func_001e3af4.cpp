@@ -46,8 +46,8 @@ extern void func_0015e260(void);
 extern int func_00169974(void);
 extern int func_001682b4(void);
 extern void func_0015d770(void);
-extern void func_001b6d44(MenuOptionGroup *options);
-extern void func_001b7f50(MenuOptionGroup *options);
+extern int func_001b6d44(MenuOptionGroup *options);
+extern int func_001b7f50(MenuOptionGroup *options);
 }
 
 static __forceinline void schedule_transition(CallbackTarget *scene)

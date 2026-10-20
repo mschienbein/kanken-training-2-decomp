@@ -12,6 +12,13 @@ struct Interface;
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
 
 
+struct InterfaceVTable {
+    unsigned char reserved[0x30];
+    void (*release)(Interface *object);
+};
+struct Interface {
+    const InterfaceVTable *vtable;
+};
 struct FileHandle {
     Interface *object;
     unsigned reserved;

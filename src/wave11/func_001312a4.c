@@ -1,4 +1,5 @@
 #include "game/audio_tasks.h"
+#include "game/exp_heap.h"
 
 static __forceinline void release_guard(struct StreamLockGuard *guard)
 {

@@ -13,18 +13,8 @@ struct ArchiveReferenceTable {
     struct ArchiveResourceReference entries[];
 #endif
 };
-struct ArchiveInfoBlock {
-    unsigned char reserved00[0x24];
-    unsigned stream_table_offset;
-    unsigned char reserved28[0x0c];
-    unsigned file_table_offset;
-};
-/* [INFERENCE] This location reader is not equated with ArchiveIndex merely
- * because both metadata pointers occupy +0x3c: the file tables differ. */
-struct ArchiveLocationReader {
-    unsigned char reserved00[0x3c];
-    const struct ArchiveInfoBlock *info;
-};
+struct SoundArchiveInfo;
+struct SoundArchiveReader;
 struct ArchiveInternalFile { unsigned group, offset, size; };
 struct ArchiveFileLocation { unsigned size, offset; const char *path; };
 struct ArchiveResourceInfo { unsigned file_id, size; unsigned char external; };
@@ -33,7 +23,7 @@ extern "C" {
 #endif
 extern bool func_00140e88(const struct ArchiveIndex *index, unsigned resource_id,
                            struct ArchiveResourceInfo *out);
-extern const struct ArchiveResourceReference *func_00144114(const struct ArchiveInfoBlock *info,
+extern const struct ArchiveResourceReference *func_00144114(const struct SoundArchiveInfo *info,
                                                             unsigned resource_id);
 extern unsigned func_001441d4(const struct ArchiveResourceReference *reference);
 extern const struct ArchiveInternalFile *func_001441f8(const struct ArchiveResourceReference *reference);

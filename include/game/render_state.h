@@ -38,6 +38,8 @@ struct FramebufferManager {
     struct Renderbuffer *bound_renderbuffer;
 };
 
+typedef void *(*AllocationCallback)(unsigned module, unsigned kind, unsigned id, unsigned size);
+typedef void (*ReleaseCallback)(unsigned module, unsigned kind, unsigned id, void *memory);
 struct AllocationSystem {
     void *(*allocate)(unsigned module, unsigned kind, unsigned id, unsigned size);
     void (*release)(unsigned module, unsigned kind, unsigned id, void *memory);
@@ -50,6 +52,7 @@ extern struct AllocationSystem data_002429f4;
  * this names the callback word itself, not a second storage allocation. */
 extern void (*data_002429f8)(unsigned module, unsigned kind,
                            unsigned id, void *memory);
+extern void func_00215e88(AllocationCallback *allocate, ReleaseCallback *release);
 
 struct SubmissionState {
     unsigned command_mode;

@@ -1,0 +1,1560 @@
+{
+  "all_candidates_adjudicated": true,
+  "candidate_count": 85,
+  "rows": [
+    {
+      "index": 0,
+      "caller": "func_00114fa8",
+      "callee": "func_00122a30",
+      "site": "0x114fc0",
+      "parameter": 0,
+      "actual": "pointer to (struct GraphicsMutex)",
+      "expected": "pointer to (const unsigned int)",
+      "provenance": {
+        "global": "data_00243104",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Canonical GraphicsMutex leading handle member address is passed to raw const-handle SVC wrapper; offsetzero common member, not whole-owner alias."
+    },
+    {
+      "index": 1,
+      "caller": "func_0012f980",
+      "callee": "func_00137c5c",
+      "site": "0x12f99c",
+      "parameter": 0,
+      "actual": "pointer to (struct GraphicsMutex)",
+      "expected": "pointer to (const unsigned int)",
+      "provenance": {
+        "return_of": "func_001861d4",
+        "site": "0x12f994"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Canonical GraphicsMutex leading handle member address is passed to raw const-handle SVC wrapper; offsetzero common member, not whole-owner alias."
+    },
+    {
+      "index": 2,
+      "caller": "func_001378d8",
+      "callee": "func_00182b5c",
+      "site": "0x1378e4",
+      "parameter": 0,
+      "actual": "pointer to (const void)",
+      "expected": "unsigned int",
+      "provenance": {
+        "parameter_of": "func_001378d8",
+        "index": 0
+      },
+      "candidate": "pointer_value_role_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source explicitly converts pointer to word-address for range/translation arithmetic; arithmetic ABI contract not a pointer-owner alias."
+    },
+    {
+      "index": 3,
+      "caller": "func_001378d8",
+      "callee": "func_0013e6d0",
+      "site": "0x13792c",
+      "parameter": 0,
+      "actual": "pointer to (const void)",
+      "expected": "unsigned int",
+      "provenance": {
+        "parameter_of": "func_001378d8",
+        "index": 0
+      },
+      "candidate": "pointer_value_role_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source explicitly converts pointer to word-address for range/translation arithmetic; arithmetic ABI contract not a pointer-owner alias."
+    },
+    {
+      "index": 4,
+      "caller": "func_0014c930",
+      "callee": "func_0017e858",
+      "site": "0x14c97c",
+      "parameter": 1,
+      "actual": "signed char",
+      "expected": "unsigned int",
+      "provenance": {
+        "parameter_of": "func_0014c930",
+        "index": 1
+      },
+      "candidate": "forwarded_scalar_width_change",
+      "disposition": "REJECTED",
+      "adjudication": "Explicit ordinary integer promotion (signed byte workspace index or unsigned-short character/int formal) is in the natural source. Correct signedness/width declarations remain; no mismatched alternate API."
+    },
+    {
+      "index": 5,
+      "caller": "func_001685c0",
+      "callee": "func_0017a938",
+      "site": "0x168610",
+      "parameter": 0,
+      "actual": "pointer to (array[5] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290d28",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 6,
+      "caller": "func_00168618",
+      "callee": "func_0017a938",
+      "site": "0x168668",
+      "parameter": 0,
+      "actual": "pointer to (array[7] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290d54",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 7,
+      "caller": "func_0016d600",
+      "callee": "func_001780c4",
+      "site": "0x16d6b8",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_0016d600",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 8,
+      "caller": "func_0016d600",
+      "callee": "func_001780c4",
+      "site": "0x16d6cc",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_0016d600",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 9,
+      "caller": "func_0016dbc4",
+      "callee": "func_001826fc",
+      "site": "0x16dc20",
+      "parameter": 0,
+      "actual": "pointer to (struct ResourceEvent)",
+      "expected": "pointer to (struct DisplayObject)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_0016dbc4",
+            "index": 0
+          },
+          "offset": 12
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 10,
+      "caller": "func_00170f6c",
+      "callee": "func_0017a938",
+      "site": "0x170fbc",
+      "parameter": 0,
+      "actual": "pointer to (array[] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290e98",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 11,
+      "caller": "func_00176c6c",
+      "callee": "func_001971a0",
+      "site": "0x176c8c",
+      "parameter": 1,
+      "actual": "unsigned char",
+      "expected": "int",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_00176c6c",
+            "index": 0
+          },
+          "offset": 20
+        }
+      },
+      "candidate": "forwarded_scalar_width_change",
+      "disposition": "REJECTED",
+      "adjudication": "Explicit ordinary integer promotion (signed byte workspace index or unsigned-short character/int formal) is in the natural source. Correct signedness/width declarations remain; no mismatched alternate API."
+    },
+    {
+      "index": 12,
+      "caller": "func_00176c6c",
+      "callee": "func_00180314",
+      "site": "0x176cf8",
+      "parameter": 0,
+      "actual": "unsigned char",
+      "expected": "int",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_00176c6c",
+            "index": 0
+          },
+          "offset": 24
+        }
+      },
+      "candidate": "forwarded_scalar_width_change",
+      "disposition": "REJECTED",
+      "adjudication": "Explicit ordinary integer promotion (signed byte workspace index or unsigned-short character/int formal) is in the natural source. Correct signedness/width declarations remain; no mismatched alternate API."
+    },
+    {
+      "index": 13,
+      "caller": "func_00176c6c",
+      "callee": "func_0019d95c",
+      "site": "0x176d24",
+      "parameter": 1,
+      "actual": "unsigned char",
+      "expected": "int",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_00176c6c",
+            "index": 0
+          },
+          "offset": 20
+        }
+      },
+      "candidate": "forwarded_scalar_width_change",
+      "disposition": "REJECTED",
+      "adjudication": "Explicit ordinary integer promotion (signed byte workspace index or unsigned-short character/int formal) is in the natural source. Correct signedness/width declarations remain; no mismatched alternate API."
+    },
+    {
+      "index": 14,
+      "caller": "func_00177198",
+      "callee": "func_0017a43c",
+      "site": "0x1771f4",
+      "parameter": 1,
+      "actual": "pointer to (array[] of (const unsigned short))",
+      "expected": "pointer to (const unsigned short)",
+      "provenance": {
+        "global": "data_002276bc",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 15,
+      "caller": "func_00179ed4",
+      "callee": "func_0016e648",
+      "site": "0x179fa8",
+      "parameter": 0,
+      "actual": "pointer to (struct CharacterPanel)",
+      "expected": "pointer to (struct WidgetController)",
+      "provenance": {
+        "parameter_of": "func_00179ed4",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 16,
+      "caller": "func_00179ed4",
+      "callee": "func_0016e648",
+      "site": "0x179fe0",
+      "parameter": 0,
+      "actual": "pointer to (struct CharacterPanel)",
+      "expected": "pointer to (struct WidgetController)",
+      "provenance": {
+        "parameter_of": "func_00179ed4",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 17,
+      "caller": "func_00179ed4",
+      "callee": "func_0016e648",
+      "site": "0x179ff0",
+      "parameter": 0,
+      "actual": "pointer to (struct CharacterPanel)",
+      "expected": "pointer to (struct WidgetController)",
+      "provenance": {
+        "parameter_of": "func_00179ed4",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 18,
+      "caller": "func_00179ed4",
+      "callee": "func_0016e648",
+      "site": "0x17a01c",
+      "parameter": 0,
+      "actual": "pointer to (struct CharacterPanel)",
+      "expected": "pointer to (struct WidgetController)",
+      "provenance": {
+        "parameter_of": "func_00179ed4",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 19,
+      "caller": "func_001a2e6c",
+      "callee": "func_00166f1c",
+      "site": "0x1a2eb8",
+      "parameter": 0,
+      "actual": "unsigned char",
+      "expected": "pointer to (void)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001a2e6c",
+            "index": 0
+          },
+          "offset": 72
+        }
+      },
+      "candidate": "pointer_value_role_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Symbolic propagation loses type through incomplete reserved-byte owner prefix. Original source has concrete pointer/receiver and compiler proves actual call conversion; no confirmed scalar passed as pointer."
+    },
+    {
+      "index": 20,
+      "caller": "func_001a2e6c",
+      "callee": "func_001741f8",
+      "site": "0x1a2efc",
+      "parameter": 0,
+      "actual": "unsigned char",
+      "expected": "pointer to (struct W11jVisualOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001a2e6c",
+            "index": 0
+          },
+          "offset": 72
+        }
+      },
+      "candidate": "pointer_value_role_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Symbolic propagation loses type through incomplete reserved-byte owner prefix. Original source has concrete pointer/receiver and compiler proves actual call conversion; no confirmed scalar passed as pointer."
+    },
+    {
+      "index": 21,
+      "caller": "func_001a2e6c",
+      "callee": "func_001741f8",
+      "site": "0x1a2f5c",
+      "parameter": 0,
+      "actual": "unsigned char",
+      "expected": "pointer to (struct W11jVisualOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001a2e6c",
+            "index": 0
+          },
+          "offset": 72
+        }
+      },
+      "candidate": "pointer_value_role_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Symbolic propagation loses type through incomplete reserved-byte owner prefix. Original source has concrete pointer/receiver and compiler proves actual call conversion; no confirmed scalar passed as pointer."
+    },
+    {
+      "index": 22,
+      "caller": "func_001a2e6c",
+      "callee": "func_001741f8",
+      "site": "0x1a2f90",
+      "parameter": 0,
+      "actual": "unsigned char",
+      "expected": "pointer to (struct W11jVisualOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001a2e6c",
+            "index": 0
+          },
+          "offset": 72
+        }
+      },
+      "candidate": "pointer_value_role_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Symbolic propagation loses type through incomplete reserved-byte owner prefix. Original source has concrete pointer/receiver and compiler proves actual call conversion; no confirmed scalar passed as pointer."
+    },
+    {
+      "index": 23,
+      "caller": "func_001a3ee0",
+      "callee": "func_00171c7c",
+      "site": "0x1a4058",
+      "parameter": 0,
+      "actual": "pointer to (struct MenuControllerState)",
+      "expected": "pointer to (struct W6SelectionScreen)",
+      "provenance": {
+        "parameter_of": "func_001a3ee0",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Previously accepted partial receiver-view transition cast retained under its explicit cmodels qualification; no newly invented owner alias. Complete historical class identity is not claimed."
+    },
+    {
+      "index": 24,
+      "caller": "func_001a8048",
+      "callee": "func_001718ec",
+      "site": "0x1a81c0",
+      "parameter": 0,
+      "actual": "pointer to (struct W11jTransitionScreen)",
+      "expected": "pointer to (struct W6SelectionScreen)",
+      "provenance": {
+        "parameter_of": "func_001a8048",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Previously accepted partial receiver-view transition cast retained under its explicit cmodels qualification; no newly invented owner alias. Complete historical class identity is not claimed."
+    },
+    {
+      "index": 25,
+      "caller": "func_001b6d2c",
+      "callee": "func_0017a7e4",
+      "site": "0x1b6d3c",
+      "parameter": 0,
+      "actual": "pointer to (array[7] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290d54",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 26,
+      "caller": "func_001b7f38",
+      "callee": "func_0017a7e4",
+      "site": "0x1b7f48",
+      "parameter": 0,
+      "actual": "pointer to (array[5] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290d28",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 27,
+      "caller": "func_001b8908",
+      "callee": "func_00178f84",
+      "site": "0x1b8b44",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b8908",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 28,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba020",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 29,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba034",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 30,
+      "caller": "func_001b9f18",
+      "callee": "func_00178e98",
+      "site": "0x1ba094",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 31,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba0bc",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 32,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba0d0",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 33,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba0f4",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 34,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba108",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 35,
+      "caller": "func_001b9f18",
+      "callee": "func_001780c4",
+      "site": "0x1ba144",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001b9f18",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 36,
+      "caller": "func_001b9f18",
+      "callee": "func_0016e61c",
+      "site": "0x1ba190",
+      "parameter": 2,
+      "actual": "unsigned short",
+      "expected": "int",
+      "provenance": {
+        "return_of": "func_0016d2dc",
+        "site": "0x1ba16c"
+      },
+      "candidate": "forwarded_scalar_width_change",
+      "disposition": "REJECTED",
+      "adjudication": "Explicit ordinary integer promotion (signed byte workspace index or unsigned-short character/int formal) is in the natural source. Correct signedness/width declarations remain; no mismatched alternate API."
+    },
+    {
+      "index": 37,
+      "caller": "func_001bd68c",
+      "callee": "func_0016e61c",
+      "site": "0x1bd904",
+      "parameter": 2,
+      "actual": "unsigned short",
+      "expected": "int",
+      "provenance": {
+        "return_of": "func_0016d2dc",
+        "site": "0x1bd8e0"
+      },
+      "candidate": "forwarded_scalar_width_change",
+      "disposition": "REJECTED",
+      "adjudication": "Explicit ordinary integer promotion (signed byte workspace index or unsigned-short character/int formal) is in the natural source. Correct signedness/width declarations remain; no mismatched alternate API."
+    },
+    {
+      "index": 38,
+      "caller": "func_001c0f5c",
+      "callee": "func_0017a938",
+      "site": "0x1c0fb0",
+      "parameter": 0,
+      "actual": "pointer to (array[4] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290e60",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 39,
+      "caller": "func_001c1068",
+      "callee": "func_0017a7e4",
+      "site": "0x1c1078",
+      "parameter": 0,
+      "actual": "pointer to (array[4] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290e60",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 40,
+      "caller": "func_001c13f4",
+      "callee": "func_0017a938",
+      "site": "0x1c1444",
+      "parameter": 0,
+      "actual": "pointer to (array[6] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290f60",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 41,
+      "caller": "func_001c1578",
+      "callee": "func_0017a7e4",
+      "site": "0x1c1588",
+      "parameter": 0,
+      "actual": "pointer to (array[6] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290f60",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 42,
+      "caller": "func_001c1600",
+      "callee": "func_0017a938",
+      "site": "0x1c1660",
+      "parameter": 0,
+      "actual": "pointer to (array[2] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "data_0023f004",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 43,
+      "caller": "func_001c16e8",
+      "callee": "func_0017a7e4",
+      "site": "0x1c16f8",
+      "parameter": 0,
+      "actual": "pointer to (array[2] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "data_0023f004",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 44,
+      "caller": "func_001c1abc",
+      "callee": "func_0017a938",
+      "site": "0x1c1b0c",
+      "parameter": 0,
+      "actual": "pointer to (array[10] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290e2c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 45,
+      "caller": "func_001c1bc4",
+      "callee": "func_0017a7e4",
+      "site": "0x1c1bd4",
+      "parameter": 0,
+      "actual": "pointer to (array[10] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290e2c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 46,
+      "caller": "func_001c1cfc",
+      "callee": "func_0017a938",
+      "site": "0x1c1d44",
+      "parameter": 0,
+      "actual": "pointer to (array[2] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "data_0023efdc",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 47,
+      "caller": "func_001c1d4c",
+      "callee": "func_0017a968",
+      "site": "0x1c1dac",
+      "parameter": 0,
+      "actual": "pointer to (struct ResourceEvent)",
+      "expected": "pointer to (struct DisplayObject)",
+      "provenance": {
+        "return_of": "func_0017a818",
+        "site": "0x1c1d88"
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 48,
+      "caller": "func_001c1dc4",
+      "callee": "func_0017a7e4",
+      "site": "0x1c1dd4",
+      "parameter": 0,
+      "actual": "pointer to (array[2] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "data_0023efdc",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 49,
+      "caller": "func_001c20d0",
+      "callee": "func_0017a7e4",
+      "site": "0x1c20e0",
+      "parameter": 0,
+      "actual": "pointer to (array[] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290e98",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 50,
+      "caller": "func_001c29ac",
+      "callee": "func_0017a938",
+      "site": "0x1c2a2c",
+      "parameter": 0,
+      "actual": "pointer to (array[7] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290d8c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 51,
+      "caller": "func_001c2b84",
+      "callee": "func_0017a7e4",
+      "site": "0x1c2b94",
+      "parameter": 0,
+      "actual": "pointer to (array[7] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290d8c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 52,
+      "caller": "func_001c2d74",
+      "callee": "func_0017a938",
+      "site": "0x1c2dc8",
+      "parameter": 0,
+      "actual": "pointer to (array[12] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290dd8",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 53,
+      "caller": "func_001c2e80",
+      "callee": "func_0017a7e4",
+      "site": "0x1c2e90",
+      "parameter": 0,
+      "actual": "pointer to (array[12] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290dd8",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 54,
+      "caller": "func_001c31c0",
+      "callee": "func_0017a938",
+      "site": "0x1c3210",
+      "parameter": 0,
+      "actual": "pointer to (array[4] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290fc4",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 55,
+      "caller": "func_001c32c8",
+      "callee": "func_0017a7e4",
+      "site": "0x1c32d8",
+      "parameter": 0,
+      "actual": "pointer to (array[4] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290fc4",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 56,
+      "caller": "func_001c3618",
+      "callee": "func_0017a938",
+      "site": "0x1c3668",
+      "parameter": 0,
+      "actual": "pointer to (array[6] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290f8c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 57,
+      "caller": "func_001c3730",
+      "callee": "func_0017a7e4",
+      "site": "0x1c3740",
+      "parameter": 0,
+      "actual": "pointer to (array[6] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_00290f8c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 58,
+      "caller": "func_001c3854",
+      "callee": "func_0017a938",
+      "site": "0x1c38a4",
+      "parameter": 0,
+      "actual": "pointer to (array[20] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_002910b4",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 59,
+      "caller": "func_001c395c",
+      "callee": "func_0017a7e4",
+      "site": "0x1c396c",
+      "parameter": 0,
+      "actual": "pointer to (array[20] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_002910b4",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 60,
+      "caller": "func_001c3c50",
+      "callee": "func_0017a938",
+      "site": "0x1c3cd4",
+      "parameter": 0,
+      "actual": "pointer to (array[2] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "data_0023f014",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 61,
+      "caller": "func_001c3ce0",
+      "callee": "func_0017a7e4",
+      "site": "0x1c3cf0",
+      "parameter": 0,
+      "actual": "pointer to (array[2] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "data_0023f014",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 62,
+      "caller": "func_001c42e8",
+      "callee": "func_0017a938",
+      "site": "0x1c4338",
+      "parameter": 0,
+      "actual": "pointer to (array[19] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_0029101c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 63,
+      "caller": "func_001c43f0",
+      "callee": "func_0017a7e4",
+      "site": "0x1c4400",
+      "parameter": 0,
+      "actual": "pointer to (array[19] of (pointer to (struct NameTable)))",
+      "expected": "pointer to (const pointer to (const struct NameTable))",
+      "provenance": {
+        "global": "bss_0029101c",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 64,
+      "caller": "func_001d40a8",
+      "callee": "func_001d017c",
+      "site": "0x1d411c",
+      "parameter": 0,
+      "actual": "pointer to (struct FileSoundController001d40a8)",
+      "expected": "pointer to (struct ResourceState001d0164)",
+      "provenance": {
+        "parameter_of": "func_001d40a8",
+        "index": 0
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Actual source passes &controller/base subobject at offsetzero. Whole-object symbolic provenance is not evidence of incompatible concrete-pointer cast; canonical named member and exact native/MATCH witness retained."
+    },
+    {
+      "index": 65,
+      "caller": "func_001e0afc",
+      "callee": "func_00175d18",
+      "site": "0x1e0e04",
+      "parameter": 1,
+      "actual": "pointer to (array[5] of (pointer to (struct RenderParameter)))",
+      "expected": "pointer to (const pointer to (struct RenderParameter))",
+      "provenance": {
+        "global": "bss_00291230",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    },
+    {
+      "index": 66,
+      "caller": "func_001e0afc",
+      "callee": "func_001e9944",
+      "site": "0x1e0f78",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 67,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e0fa8",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 68,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e0fb8",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 69,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e0fd4",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 70,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e0fe4",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 71,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e0ff4",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 72,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e1004",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 73,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e1014",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 74,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e1024",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 75,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e1034",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 76,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e1044",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 77,
+      "caller": "func_001e0afc",
+      "callee": "func_00179600",
+      "site": "0x1e1054",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct W6ListController)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 78,
+      "caller": "func_001e0afc",
+      "callee": "func_0016f930",
+      "site": "0x1e1080",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (const struct InputOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 79,
+      "caller": "func_001e0afc",
+      "callee": "func_0016f930",
+      "site": "0x1e108c",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (const struct InputOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 80,
+      "caller": "func_001e0afc",
+      "callee": "func_0016f930",
+      "site": "0x1e1098",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (const struct InputOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 81,
+      "caller": "func_001e0afc",
+      "callee": "func_0016f930",
+      "site": "0x1e10a4",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (const struct InputOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 82,
+      "caller": "func_001e0afc",
+      "callee": "func_00175a90",
+      "site": "0x1e10e4",
+      "parameter": 0,
+      "actual": "pointer to (struct AnimationOwner)",
+      "expected": "pointer to (struct InputOwner)",
+      "provenance": {
+        "loaded_from": {
+          "base": {
+            "parameter_of": "func_001e0afc",
+            "index": 0
+          },
+          "offset": 76
+        }
+      },
+      "candidate": "nominal_owner_mismatch",
+      "disposition": "QUALIFIED",
+      "adjudication": "Frozen accepted controls union exposes animation/list/input contract views. Symbolic model follows first union member regardless of the actual selected source expression; native probes compile the exact list/input view and preserved accepted qualifications are retained."
+    },
+    {
+      "index": 83,
+      "caller": "func_001eade0",
+      "callee": "func_00191c80",
+      "site": "0x1eadfc",
+      "parameter": 0,
+      "actual": "pointer to (unsigned int)",
+      "expected": "pointer to (volatile unsigned int)",
+      "provenance": {
+        "global": "data_0023ecdc",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Adding volatile at guard callee does not remove const or mutate object representation; actual declared source argument is valid. No qualifier suppression."
+    },
+    {
+      "index": 84,
+      "caller": "func_001ed874",
+      "callee": "func_00175d18",
+      "site": "0x1eda00",
+      "parameter": 1,
+      "actual": "pointer to (array[64] of (pointer to (struct RenderParameter)))",
+      "expected": "pointer to (const pointer to (struct RenderParameter))",
+      "provenance": {
+        "global": "bss_00291244",
+        "form": "address"
+      },
+      "candidate": "pointee_value_type_mismatch",
+      "disposition": "REJECTED",
+      "adjudication": "Array expression decays to pointer-to-first element under actual C/C++ source; matcher and canonical native compile confirm conversion. Symbolic audit intentionally retains array-address type."
+    }
+  ],
+  "coverage": {
+    "selected_functions": 838,
+    "canonical_functions": 1403,
+    "canonical_globals": 214,
+    "catalogue_functions": 4699
+  },
+  "limits": [
+    "C++ methods/native names are not parsed by this C type model; canonical compile probes and retained independent manual reviews cover them",
+    "Scalar register dataflow does not track stack spills, arbitrary arithmetic, narrow memory loads, or virtual calls",
+    "A candidate is not a confirmed defect: validated first-member subobjects and explicit numeric conversions can differ nominally",
+    "No candidate and no observed typed edge do not establish missing caller contracts",
+    "Const writes in C are separately checked by tools/interfaces.py; indirect/C++ mutation remains manual"
+  ],
+  "open_confirmed_defects": []
+}
