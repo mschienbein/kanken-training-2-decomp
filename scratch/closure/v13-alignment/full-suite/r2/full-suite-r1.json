@@ -1,0 +1,272 @@
+{
+ "modules": [
+  {
+   "module": "tests.test_accept",
+   "returncode": 0,
+   "tests_run": 61,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 1.961,
+   "output": ""
+  },
+  {
+   "module": "tests.test_analyze",
+   "returncode": 1,
+   "tests_run": 198,
+   "skipped": 0,
+   "summary": "FAILED (errors=1)",
+   "seconds": 273.493,
+   "output": "............E.........................................................................................................................................................................................\n======================================================================\nERROR: test_frozen_baseline_and_parent_are_independently_authenticated (tests.test_analyze.CatalogueClosureTests.test_frozen_baseline_and_parent_are_independently_authenticated)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/tests/test_analyze.py\", line 2709, in test_frozen_baseline_and_parent_are_independently_authenticated\n    _, prior, inputs = catalogue_closure.load_inputs(root, parent)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/tools/catalogue_closure.py\", line 1507, in load_inputs\n    catalogue_frozen.load(root)\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/tools/catalogue_frozen.py\", line 19, in load\n    raise ValueError(\"v13 requires a complete immutable generator input manifest\")\nValueError: v13 requires a complete immutable generator input manifest\n\n----------------------------------------------------------------------\nRan 198 tests in 273.280s\n\nFAILED (errors=1)\n"
+  },
+  {
+   "module": "tests.test_argcheck",
+   "returncode": 0,
+   "tests_run": 36,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.234,
+   "output": ""
+  },
+  {
+   "module": "tests.test_build",
+   "returncode": 0,
+   "tests_run": 18,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.801,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_alignment",
+   "returncode": 0,
+   "tests_run": 9,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.337,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_endian",
+   "returncode": 0,
+   "tests_run": 21,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.375,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_endian_cli",
+   "returncode": 0,
+   "tests_run": 1,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.623,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_entry_reassessment",
+   "returncode": 0,
+   "tests_run": 6,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 1.359,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_local_entries",
+   "returncode": 0,
+   "tests_run": 8,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 1.889,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_protection",
+   "returncode": 0,
+   "tests_run": 9,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 2.332,
+   "output": ""
+  },
+  {
+   "module": "tests.test_catalogue_runtime_data",
+   "returncode": 0,
+   "tests_run": 13,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.204,
+   "output": ""
+  },
+  {
+   "module": "tests.test_collect",
+   "returncode": 0,
+   "tests_run": 12,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 1.041,
+   "output": ""
+  },
+  {
+   "module": "tests.test_compid",
+   "returncode": 0,
+   "tests_run": 7,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.772,
+   "output": ""
+  },
+  {
+   "module": "tests.test_ctrfmt",
+   "returncode": 0,
+   "tests_run": 9,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 1.989,
+   "output": ""
+  },
+  {
+   "module": "tests.test_decompile",
+   "returncode": 0,
+   "tests_run": 22,
+   "skipped": 1,
+   "summary": "OK (skipped=1)",
+   "seconds": 0.324,
+   "output": ""
+  },
+  {
+   "module": "tests.test_denominator",
+   "returncode": 0,
+   "tests_run": 4,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.053,
+   "output": ""
+  },
+  {
+   "module": "tests.test_fingerprint",
+   "returncode": 0,
+   "tests_run": 40,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.292,
+   "output": ""
+  },
+  {
+   "module": "tests.test_inplace",
+   "returncode": 0,
+   "tests_run": 159,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 3.159,
+   "output": ""
+  },
+  {
+   "module": "tests.test_interfaces",
+   "returncode": 0,
+   "tests_run": 71,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 2.236,
+   "output": ""
+  },
+  {
+   "module": "tests.test_literal_pools",
+   "returncode": 0,
+   "tests_run": 31,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.19,
+   "output": ""
+  },
+  {
+   "module": "tests.test_match",
+   "returncode": 0,
+   "tests_run": 36,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.298,
+   "output": ""
+  },
+  {
+   "module": "tests.test_packet",
+   "returncode": 0,
+   "tests_run": 18,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.141,
+   "output": ""
+  },
+  {
+   "module": "tests.test_permute",
+   "returncode": 0,
+   "tests_run": 56,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 11.794,
+   "output": ""
+  },
+  {
+   "module": "tests.test_permute_cpp",
+   "returncode": 0,
+   "tests_run": 23,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 3.524,
+   "output": ""
+  },
+  {
+   "module": "tests.test_progress",
+   "returncode": 0,
+   "tests_run": 4,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.198,
+   "output": ""
+  },
+  {
+   "module": "tests.test_repr_guard",
+   "returncode": 0,
+   "tests_run": 6,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.24,
+   "output": ""
+  },
+  {
+   "module": "tests.test_rom",
+   "returncode": 0,
+   "tests_run": 3,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.217,
+   "output": ""
+  },
+  {
+   "module": "tests.test_toolchain",
+   "returncode": 0,
+   "tests_run": 7,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 0.369,
+   "output": ""
+  },
+  {
+   "module": "tests.test_triage",
+   "returncode": 0,
+   "tests_run": 24,
+   "skipped": 0,
+   "summary": "OK",
+   "seconds": 1.892,
+   "output": ""
+  }
+ ],
+ "tests_run": 912,
+ "skipped": 1,
+ "failed_modules": [
+  "tests.test_analyze"
+ ],
+ "returncode": 1,
+ "seconds": 273.495
+}

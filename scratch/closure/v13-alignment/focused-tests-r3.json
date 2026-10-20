@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_catalogue_alignment",
+    "tests.test_catalogue_local_entries",
+    "tests.test_catalogue_endian_cli",
+    "tests.test_catalogue_protection"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13",
+  "exit_code": 1,
+  "seconds": 2.8141429829993285,
+  "stderr": "......................FF..\n======================================================================\nFAIL: test_real_cli_fails_closed_on_invalid_transition_or_evidence_handoff (tests.test_catalogue_protection.CatalogueProtectionTests.test_real_cli_fails_closed_on_invalid_transition_or_evidence_handoff) (change='source')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/tests/test_catalogue_protection.py\", line 263, in test_real_cli_fails_closed_on_invalid_transition_or_evidence_handoff\n    self.assertEqual(result.returncode, 1, result.stderr)\nAssertionError: 0 != 1 : \n\n======================================================================\nFAIL: test_real_cli_fails_closed_on_invalid_transition_or_evidence_handoff (tests.test_catalogue_protection.CatalogueProtectionTests.test_real_cli_fails_closed_on_invalid_transition_or_evidence_handoff) (change='prepared_ledger')\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/tests/test_catalogue_protection.py\", line 263, in test_real_cli_fails_closed_on_invalid_transition_or_evidence_handoff\n    self.assertEqual(result.returncode, 1, result.stderr)\nAssertionError: 0 != 1 : \n\n----------------------------------------------------------------------\nRan 25 tests in 2.674s\n\nFAILED (failures=2)\n",
+  "stdout": ""
+}

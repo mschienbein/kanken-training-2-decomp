@@ -315,3 +315,122 @@ failed synthetic metadata test, the final bounded correction exercised
 worker full suite and will run the final committed source's full suite in the
 adoption merge before recording acceptance. **No final-source full-suite PASS
 is claimed here.**
+
+## Fresh generation, current-Main merge and throwaway adoption
+
+Main separately granted exactly three sequential public generator executions,
+bound to source **`8a66a55`** and isolated merge
+`64c1b442f7269f46250abe357d3e98b61ac1e642`. That merge includes current Main
+`6c9990ec2e863aead9953cc8adf9c0ed3aff7800`; a recorded ancestry check confirms
+that it includes Main's required `00eb9ba` as well. This is an isolated worktree
+inside this assignment's directory, not a change to canonical Main.
+
+Every execution actually exited **0** and produced the same **9,587,032-byte**
+proposal, SHA-256:
+
+`e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743`
+
+| Execution | Actual exit | Captured generator seconds | Proposal SHA-256 |
+|---|---:|---:|---|
+| Own `catalogue-v13` branch | 0 | 92.503700 | `e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743` |
+| Isolated merge of current Main | 0 | 95.374315 | `e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743` |
+| Same isolated worktree after copying this proposal to its live `config/catalogue.json` | 0 | 93.435394 | `e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743` |
+
+The isolated live catalogue changed from the original v9-r2 hash
+`d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64`
+to the proposed v13 hash only for this reproduction. **Canonical Main was never
+written or adopted.** Generation remained independent of its live names/ledger/
+catalogue state, with identical historical input labels and exact retained input
+hashes in all three outputs. The slot release was written by an atomic rename
+with `"released": true` and every actual exit **before adjudication**.
+
+The review proposal is `scratch/analyze/catalogue-v13-r1.json`. Per-execution
+argv, cwd, exits, hashes, complete statistics and unknown/anomaly intervals are
+retained under `scratch/closure/v13-alignment/generation/`; the successful runner
+exit was **0**, 281.57 s captured wall. The fresh-proposal public CLI
+`tools/catalogue_alignment.py --proposal scratch/analyze/catalogue-v13-r1.json --prove-objects`
+then independently consumed the generated metadata and reopened the exact
+private members: **exit 0**, 0.713495 s. It did not regenerate the catalogue.
+
+## Exact deltas against both baselines
+
+The final metadata-only adjudication exited **0**, 0.398078 s, without generation,
+compilation, matching, source/ABI checking or a whole-ledger compatibility audit.
+`research/catalogue_v13_adjudication.json` records every common complete-record
+change, new/absorbed owner, preserved/new entry, classification certificate and
+selected accepted/candidate intersection. It includes **all 93 same-address
+classification changes since v9-r2 with their complete bound certificates**;
+the three added library owners have their own certificates. The connected-graph
+topology certificate is recorded separately, explicitly not as non-C proof.
+
+| Metric | Adopted v9-r2 | Reviewed v12-r2 | Generated v13 | v13 − v12-r2 | v13 − v9-r2 |
+|---|---:|---:|---:|---:|---:|
+| Function owners | 4,699 | 4,743 | 4,743 | 0 | +44 |
+| Entry identities | 4,730 | 4,776 | 4,776 | 0 | +46 |
+| Ordinary / creditable functions | 4,624 | 4,579 | 4,571 | −8 | −53 |
+| Ordinary / creditable extent B | 1,131,454 | 1,123,188 | 1,121,674 | −1,514 | −9,780 |
+| Physical function B | 1,139,722 | 1,143,812 | 1,143,812 | 0 | +4,090 |
+| Decoded code B | 1,057,946 | 1,060,872 | 1,060,872 | 0 | +2,926 |
+| Pool B | 40,792 | 40,792 | 40,792 | 0 | 0 |
+| Literal B | 40,984 | 42,148 | 42,148 | 0 | +1,164 |
+| Padding B | 76 | 24 | 68 | +44 | −8 |
+| Rodata B | 123,166 | 123,378 | 123,378 | 0 | +212 |
+| Unknown B | 4,408 | 158 | 114 | −44 | −4,294 |
+| Unknown intervals | 84 | 33 | 11 | −22 | −73 |
+| Anomalies | 37 | 9 | 1 | −8 | −36 |
+
+Relative to v12-r2, the **only changed complete function records** are exactly:
+`00100cd8/144`, `00107078/72`, `0012d0c4/40`, `00134128/72`,
+`001565f4/244`, `001566e8/712`, `00156a30/220`, `00181e94/10`.
+Only `kind` and the new `classification_evidence` field change; all **4,735
+other complete records are identical**. No entry, extent or physical function
+span changes. The exact 22 padding transitions and eight anomaly removals are
+the tables above and the frozen revision evidence.
+
+Relative to v9-r2, 103 same-address complete records differ: **87 library-kind
+changes, six assembly-kind changes**, and ten inherited same-kind metadata/
+extent changes. There are **46 added owners** (42 ordinary closed leaves, three
+library entries, one connected multi-entry owner) and **two absorbed old
+owners**, `0018ebf8` and `0018ec7c`, whose original labels survive as secondary
+entries of `0018eaec`. Every one of the **4,730 old entry identities survives**.
+The ten inherited same-kind changes are `00104458`, `00160454`, `00196498`,
+`001ad3c8`, `001b55f8`, `001c3ac0`, `001de2c0`, `001e81fc`, `001edbb0`,
+`00203a68`; exact field/extent deltas and source-stage certificates are retained
+in the adjudication. These are inherited reviewed changes, not new v13 rules.
+
+## Accepted and active-candidate identities touched
+
+The adjudication takes **selected-address intersections only**, binding each
+manifest and names snapshot by path, size and SHA-256. Exact retained copies
+are in `research/catalogue_v13_review_inputs/` or reuse an identical historical
+frozen copy. This is not a fresh source/object/ABI/compatibility audit and does
+not approve later active-branch edits.
+
+**None of the eight new v13 complete-function classification changes appears in
+any of the following snapshots. None of the new internal-padding owner
+associations appears there either.**
+
+| Snapshot | Claims | Inherited v9-r2 complete-record changes present |
+|---|---:|---|
+| Canonical accepted `config/matches.json` | 1,621 | `00203a68`, literals only |
+| Terminal prepared `accept/c009-r3/matches.json` | 2,296 | `00203a68` and `001e81fc`, literals only |
+| Current c009-r4 `config/candidates/c009.json` | 658 | `001e81fc`, literals only |
+| Current c010-g3-unify `config/candidates/c010.json` | 520 | none |
+| Current c011-r3-closure `config/candidates/c011.json` | 113 | none |
+| Current cmodels2-r3-closure `config/candidates/cmodels2.json` | 5 | none |
+| Current c012 `config/candidates/c012.json` | 69 | none |
+
+The two literals-only identities retain **2,540 B** and **752 B** extents and the
+already reviewed v11-r2 metadata-repair certificates; v13 makes no additional
+change to either. Candidate counts above are actual bound snapshots, not old
+510/24-row handoff counts. Main alone will run the final-source full suite,
+obtain a fresh independent v13 review, reconcile later checkpoint changes, and
+adopt **between checkpoints after c009-r4 finalizes**. No adoption or acceptance
+record is performed by this work.
+
+`research/catalogue_v13_checks.json` is the review-ready source/evidence/receipt
+binding manifest. It records the three equal generated hashes, the failed suite
+and exact bounded-correction argv, the fresh public object proof, predecessor
+review bindings, and all exact v13 transition/residue counts. Generated proposals
+remain scratch artifacts; the committed proof, retained review-input snapshots,
+adjudication and report contain the reviewable metadata, not licensed payload.
