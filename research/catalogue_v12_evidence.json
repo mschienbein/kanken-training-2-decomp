@@ -1,0 +1,82 @@
+{
+  "adoption": false,
+  "architectural_sources": [
+    "https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst#symbol-values",
+    "https://github.com/ARM-software/abi-aa/blob/main/aaelf32/aaelf32.rst#relocation-types"
+  ],
+  "baseline": {
+    "adopted": false,
+    "field_sha256": {
+      "anomalies": "5b945609a3c5d0a04b630b9c87698babb274ab2083813a336ba1dbf1cb628a73",
+      "closure_evidence": "1002abcce01146cf5ff06e7ba155c3c27bac5dafe66b881698f9470a19dffd3b",
+      "functions": "8704f4425d76e8faf972b34e39b904e9b6447e648355698fc7b451cbed30cf5b",
+      "pc_relative_pointer_witnesses": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "ranges": "ae5d7357a76cd2dfb5883ab494de12a39bf3a366e88951a152df30133214a126",
+      "stats": "77f9434efa879614a951cfa70d51336f860233ad74bc19a7e9f30cfdb617b32c"
+    },
+    "independent_r3_consumer": true,
+    "proposal_sha256": "55168a79db0d76debddd3b55cf62beed6ab29dc73396d2d3dd29e882ac6e3451",
+    "r4_source_and_input_binding": true,
+    "revision": "catalogue-v11-r4"
+  },
+  "exheader_sha256": "0c43847e321bb81809c7f01489f6f321695646f6ec8e7131936b2eea9b75c6d8",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "new_C_credit": 0,
+  "object_proof": {
+    "path": "research/catalogue_v12_object_proof.json",
+    "sha256": "94285fdfb00e542d3fe478cbedf75d36828a4a176cb464a9e390a50cc87fb4c8"
+  },
+  "parent_evidence": {
+    "path": "research/catalogue_v11_r4_evidence.json",
+    "sha256": "fdea763821a532e594e142768804ab8d9d989870b6886457061f6b0816d627e1"
+  },
+  "policy": "validate_frozen_r4_before_exact_same_section_local_entries",
+  "preserved_unknown_ranges": [
+    [
+      1050090,
+      1050092
+    ],
+    [
+      1050106,
+      1050122
+    ],
+    [
+      1051134,
+      1051136
+    ]
+  ],
+  "qualification": "Two explicit local Thumb declarations only, admitted from complete independently placed exact-build sections and same-section relative relocations. No runtime pool-value assumption, general local-symbol admission, external API identity, declared-function growth, canonical name binding or C credit. R3 withdrawals and R5 negative certificates remain historical stages; the 16-byte proposal and both halfword holes remain unknown.",
+  "revision": "catalogue-v12",
+  "transitions": [
+    {
+      "address": 1050048,
+      "from": {
+        "kind": "unknown",
+        "owner": null
+      },
+      "isa": "thumb",
+      "size": 10,
+      "symbol": "_printf_input_char",
+      "to": {
+        "kind": "library",
+        "owner": 1050048,
+        "physical_kind": "function"
+      }
+    },
+    {
+      "address": 1051092,
+      "from": {
+        "kind": "unknown",
+        "owner": null
+      },
+      "isa": "thumb",
+      "size": 10,
+      "symbol": "_printf_input_wchar",
+      "to": {
+        "kind": "library",
+        "owner": 1051092,
+        "physical_kind": "function"
+      }
+    }
+  ]
+}

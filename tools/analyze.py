@@ -2384,6 +2384,8 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         result["closure_evidence"]["protected_metadata_transitions"] = metadata_transitions
     deferred_entries = ({record["address"] for record in closure["runtime_data"].get("entry_fragments", [])}
                         if closure is not None and "runtime_data" in closure else set())
+    if closure is not None and "local_entry_revision" in closure:
+        deferred_entries.update(row["address"] for row in closure["local_entry_revision"]["transitions"])
     preserve_prior_entries(result, [function for function in prior_functions or [] if function["address"] not in deferred_entries])
     apply_classifications(result, classifications or [])
     if closure is not None and "runtime_data" in closure:
@@ -2396,13 +2398,20 @@ def build_catalogue(image: bytes, layout: ctrfmt.CodeLayout, image_name: str = "
         apply_classifications(result, catalogue_runtime_data.classification_records(
             classifications or [], closure["runtime_data"]))
         catalogue_runtime_data.check_prepared_protection(result, closure["runtime_data"])
+    if closure is not None:
+        catalogue_closure.check_entry_revision(
+            result, analyzer, closure, protected_functions, classifications or [])
+    if closure is not None and "local_entry_revision" in closure:
+        if __package__:
+            from . import catalogue_local_entries
+        else:
+            import catalogue_local_entries
+        catalogue_local_entries.close_catalogue(result, analyzer, closure, protected_functions)
+    if closure is not None and ("runtime_data" in closure or "local_entry_revision" in closure):
         prior_entries = {(entry["address"], entry["isa"]) for function in prior_functions or [] for entry in function["entries"]}
         current_entries = {(entry["address"], entry["isa"]) for function in result["functions"] for entry in function["entries"]}
         if prior_entries - current_entries:
             raise ValueError("runtime closure loses a deferred prior entry")
-    if closure is not None:
-        catalogue_closure.check_entry_revision(
-            result, analyzer, closure, protected_functions, classifications or [])
     check_protected_functions(result, protected_functions or {})
     return result
 
@@ -2646,10 +2655,11 @@ def main(argv: list[str] | None = None) -> int:
         inputs[classification_label] = catalogue_review.digest(classification_input)
         source_root = Path(__file__).resolve().parent
         sources = {f"tools/{name}": catalogue_review.digest(source_root / name)
-                   for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py")}
+                   for name in ("analyze.py", "catalogue_review.py", "catalogue_closure.py", "catalogue_runtime_data.py",
+                                "catalogue_local_entries.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v11-r4",
+            "revision": "catalogue-v12",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

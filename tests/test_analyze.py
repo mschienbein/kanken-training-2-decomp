@@ -13,7 +13,7 @@ from types import SimpleNamespace
 import unittest
 from unittest import mock
 
-from tools import analyze, catalogue_closure, ctrfmt
+from tools import analyze, catalogue_closure, catalogue_local_entries, ctrfmt
 
 BASE = 0x100000
 ROOT = Path(__file__).resolve().parents[1]
@@ -38,6 +38,42 @@ def fixture(words: list[int], *, rodata: list[int] | None = None, data: list[int
 def literal_words(value: bytes) -> list[int]:
     padded = value + b"\0" * (-len(value) % 4)
     return list(struct.unpack(f"<{len(padded) // 4}I", padded))
+
+
+def local_revision_fixture(root: Path, image_sha256: str, baseline: dict | None = None) -> None:
+    """Freeze an independently built synthetic baseline, never bypass its checks."""
+    baseline = baseline or {key: {} if key in ("stats", "closure_evidence") else []
+                            for key in catalogue_local_entries.BASELINE_FIELDS}
+    baseline_descriptor = {"revision": "catalogue-v11-r4", "adopted": False,
+                           "proposal_sha256": catalogue_local_entries.metadata_sha(baseline),
+                           "field_sha256": catalogue_local_entries.baseline_hashes(baseline)}
+    exheader = root / "orig/exheader.bin"
+    exheader_sha = hashlib.sha256(exheader.read_bytes()).hexdigest() if exheader.is_file() else hashlib.sha256(b"").hexdigest()
+    proof = {"image_sha256": image_sha256, "exheader_sha256": exheader_sha,
+             "baseline": baseline_descriptor, "records": []}
+    proof_path = root / "research/catalogue_v12_object_proof.json"
+    proof_path.write_bytes(analyze.serialize_catalogue(proof))
+    parent = root / "research/catalogue_v11_r4_evidence.json"
+    revision = {"revision": "catalogue-v12", "image_sha256": image_sha256, "exheader_sha256": exheader_sha,
+                "parent_evidence": {"path": str(parent.relative_to(root)), "sha256": hashlib.sha256(parent.read_bytes()).hexdigest()},
+                "object_proof": {"path": str(proof_path.relative_to(root)), "sha256": hashlib.sha256(proof_path.read_bytes()).hexdigest()},
+                "baseline": baseline_descriptor, "transitions": [], "preserved_unknown_ranges": [],
+                "new_C_credit": 0, "adoption": False, "policy": catalogue_local_entries.POLICY}
+    (root / "research/catalogue_v12_evidence.json").write_bytes(analyze.serialize_catalogue(revision))
+
+
+def freeze_local_fixture(root: Path, image: bytes, layout, *, classifications: list[dict] | None = None,
+                         protected: dict[int, dict] | None = None) -> None:
+    """Run the ordinary public predecessor pipeline before adding an empty child."""
+    closure = json.loads((root / "research/catalogue_v10_evidence.json").read_bytes())
+    closure.update(runtime_data=json.loads((root / "research/catalogue_v11_evidence.json").read_bytes()),
+                   protection_revision=json.loads((root / "research/catalogue_v11_r2_evidence.json").read_bytes()),
+                   entry_revision=json.loads((root / "research/catalogue_v11_r3_evidence.json").read_bytes()))
+    adopted = json.loads((root / "config/catalogue.json").read_bytes())
+    baseline = analyze.build_catalogue(image, layout, classifications=classifications or [], protected_functions=protected or {},
+                                       literal_encodings=closure.get("literal_encodings", []),
+                                       prior_functions=adopted["functions"], closure=closure)
+    local_revision_fixture(root, baseline["image_sha256"], baseline)
 
 
 def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dict:
@@ -116,6 +152,7 @@ def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dic
         "new_C_credit": 0, "adoption": False,
     }
     (root / "research/catalogue_v11_r4_evidence.json").write_text(json.dumps(leaf_repair))
+    local_revision_fixture(root, image_sha256)
     return revision
 
 
@@ -1478,6 +1515,8 @@ class CatalogueTests(unittest.TestCase):
                 for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
                     struct.pack_into("<III", exheader, offset, segment.address, 1, segment.size)
                 (root / "orig/exheader.bin").write_bytes(exheader)
+                freeze_local_fixture(root, image, layout, classifications=[] if protect else [row],
+                                     protected={BASE: baseline["functions"][0]} if protect else {})
                 with mock.patch.object(analyze, "ROOT", root), mock.patch.object(
                     analyze.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, baseline_payload, b"")
                 ), redirect_stdout(io.StringIO()):
@@ -1486,8 +1525,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v11-r4")
-                self.assertEqual(result["generator"]["revision"], "catalogue-v11-r4")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v12")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v12")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
@@ -1497,6 +1536,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertIn("research/catalogue_v11_r2_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_r3_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v11_r4_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v12_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v12_object_proof.json", result["generator"]["input_sha256"])
                 self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
@@ -1806,13 +1847,17 @@ class CatalogueTests(unittest.TestCase):
         reference = closure["entry_revision"]
         withdrawn = {row["address"]: row for row in reference["withdrawn_entry_proposals"]}
         self.assertEqual(set(withdrawn), {0x1005C0, 0x1005FA, 0x1009D4})
+        local_entries = closure["local_entry_revision"]["transitions"]
+        self.assertEqual([(row["address"], row["size"]) for row in local_entries],
+                         [(0x1005C0, 10), (0x1009D4, 10)])
         expected_ordinary = {row["address"]: row["size"] for row in reference["prior_owners"]
                              if row["kind"] == "function" and row["address"] not in withdrawn}
         self.assertEqual({row["address"]: row["size"] for row in functions.values() if row["kind"] == "function"},
                          expected_ordinary)
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
                           first["stats"]["creditable_bytes"]),
-                         (len(reference["prior_owners"]) - len(withdrawn) + len(closure["runtime_data"]["entry_fragments"]),
+                         (len(reference["prior_owners"]) - len(withdrawn)
+                          + len(closure["runtime_data"]["entry_fragments"]) + len(local_entries),
                           len(expected_ordinary), sum(expected_ordinary.values())))
         expected_unknown = {address for lo, hi in reference["prior_unknown_ranges"] for address in range(lo, hi)}
         for row in withdrawn.values():
@@ -1821,6 +1866,8 @@ class CatalogueTests(unittest.TestCase):
             expected_unknown.difference_update(range(*row["claim"]))
         for row in closure["runtime_data"]["entry_fragments"]:
             expected_unknown.difference_update(range(row["address"], row["address"] + row["classification_record"]["size"]))
+        for row in local_entries:
+            expected_unknown.difference_update(range(row["address"], row["address"] + row["size"]))
         self.assertEqual({address for row in first["ranges"] if row["kind"] == "unknown"
                           for address in range(row["start"], row["end"])}, expected_unknown)
         self.assertEqual(first["stats"]["bytes_by_range_kind"]["unknown"], len(expected_unknown))
@@ -1832,10 +1879,20 @@ class CatalogueTests(unittest.TestCase):
         proposed_entries = {(row["address"], row["isa"]) for row in reference["prior_entries"]}
         expected_entries = (proposed_entries - {(row["address"], row["prior_function"]["isa"])
                                                 for row in withdrawn.values()}
-                            | {(row["address"], row["isa"]) for row in closure["runtime_data"]["entry_fragments"]})
+                            | {(row["address"], row["isa"]) for row in closure["runtime_data"]["entry_fragments"]}
+                            | {(row["address"], row["isa"]) for row in local_entries})
         self.assertEqual({(entry["address"], entry["isa"]) for row in functions.values() for entry in row["entries"]},
                          expected_entries)
         self.assertTrue(all(row["address"] not in protected for row in withdrawn.values()))
+        for row in local_entries:
+            self.assertEqual((functions[row["address"]]["kind"], functions[row["address"]]["size"]), ("library", row["size"]))
+        self.assertTrue(all(address in expected_unknown for first_address, end in
+                            closure["local_entry_revision"]["preserved_unknown_ranges"]
+                            for address in range(first_address, end)))
+        reconstructed_r4 = catalogue_local_entries.check_catalogue(first, analyze.Analyzer(image, layout), closure)
+        self.assertEqual(catalogue_local_entries.baseline_hashes(reconstructed_r4),
+                         closure["local_entry_revision"]["baseline"]["field_sha256"])
+        self.assertEqual(first["revision_review"]["local_runtime_entries"]["new_C_credit"], 0)
         vetoes = {(row["function"], row["site"], row["evidence"]) for row in first["closure_evidence"]["read_vetoes"]}
         for row in withdrawn.values():
             witness = row["prior_witness"]

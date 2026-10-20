@@ -150,8 +150,10 @@ class CatalogueEntryReassessmentTests(unittest.TestCase):
             passed = run_catalogue(root)
             self.assertEqual(passed.returncode, 0, passed.stderr)
             candidate = json.loads((root / "proposal.json").read_bytes())
-            self.assertEqual(candidate["generator"]["revision"], "catalogue-v11-r4")
+            self.assertEqual(candidate["generator"]["revision"], "catalogue-v12")
             self.assertIn("research/catalogue_v11_r3_evidence.json", candidate["generator"]["input_sha256"])
+            self.assertIn("research/catalogue_v12_evidence.json", candidate["generator"]["input_sha256"])
+            self.assertIn("research/catalogue_v12_object_proof.json", candidate["generator"]["input_sha256"])
             path = root / "research/catalogue_v11_r3_evidence.json"
             revision = json.loads(path.read_bytes())
             revision["parent_evidence"]["sha256"] = "0" * 64

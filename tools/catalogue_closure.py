@@ -1478,6 +1478,14 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     inputs.update(entry_inputs)
     inputs.update(protection_inputs)
     inputs.update(runtime_inputs)
+    if __package__:
+        from . import catalogue_local_entries
+    else:
+        import catalogue_local_entries
+    local_revision, local_inputs = catalogue_local_entries.load_inputs(root, leaf_path, evidence)
+    evidence["local_entry_revision"] = local_revision
+    evidence["revision"] = local_revision["revision"]
+    inputs.update(local_inputs)
     return evidence, prior, inputs
 
 
@@ -1526,6 +1534,7 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     closure = candidate["closure_evidence"]
     runtime_sections = closure.get("exact_runtime_data", {}).get("sections", [])
     runtime_entries = closure.get("exact_runtime_data", {}).get("entry_fragments", [])
+    local_entries = closure.get("local_runtime_entries", {}).get("entries", [])
     old_unknown = [row for row in prior["ranges"] if row["kind"] == "unknown"]
     for row in candidate["ranges"]:
         if row["kind"] == "unknown" and sum(max(0, min(row["end"], old["end"]) - max(row["start"], old["start"]))
@@ -1535,6 +1544,11 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     for row in unknown_rows:
         for part in row["parts"]:
             first, end = part["start"], part["end"]
+            local = next((item for item in local_entries if item["address"] <= first < end <= item["address"] + item["size"]), None)
+            if local is not None:
+                part["reason"] = "Exact sized local Thumb definition in independently authenticated complete runtime section, with static same-section relocation; no runtime pool-value assumption or C credit"
+                part["runtime_witness"] = local["symbol"]
+                continue
             entry = next((item for item in runtime_entries if item["address"] <= first < end <= item["address"] + item["size"]), None)
             if entry is not None:
                 part["reason"] = "Actual global exact-sized Thumb declaration in independently bound complete runtime section; new library entry, no C credit"
@@ -1655,3 +1669,5 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     candidate["revision_review"]["provisional_entry_reassessment"] = candidate["closure_evidence"].get(
         "provisional_entry_reassessment", {})
     candidate["revision_review"]["leaf_mode_repair"] = evidence["leaf_mode_repair"]
+    if "local_entry_revision" in evidence:
+        candidate["revision_review"]["local_runtime_entries"] = closure.get("local_runtime_entries", {})

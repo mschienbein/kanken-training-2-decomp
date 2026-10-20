@@ -12,7 +12,7 @@ import tempfile
 import unittest
 
 from tools import analyze
-from tests.test_analyze import fixture, library_revision_fixture
+from tests.test_analyze import fixture, freeze_local_fixture, library_revision_fixture
 from tests.test_catalogue_endian import SEALED_ENDIAN_WORDS
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,7 +26,8 @@ class CatalogueEndianCliTests(unittest.TestCase):
             root = Path(temporary)
             for directory in ("tools", "config", "orig", "research"):
                 (root / directory).mkdir()
-            for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py", "ctrfmt.py"):
+            for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py",
+                         "catalogue_local_entries.py", "ctrfmt.py"):
                 shutil.copyfile(ROOT / "tools" / name, root / "tools" / name)
             subprocess.run(["git", "init", "-q", str(root)], capture_output=True, check=True)
             baseline_payload = analyze.serialize_catalogue(baseline)
@@ -55,18 +56,21 @@ class CatalogueEndianCliTests(unittest.TestCase):
             for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
                 struct.pack_into("<III", exheader, offset, segment.address, 1, segment.size)
             (root / "orig/exheader.bin").write_bytes(exheader)
+            freeze_local_fixture(root, image, layout)
             output = root / "proposal-v10-r5.json"
             command = [sys.executable, "-B", "tools/analyze.py", "catalogue", "--out", str(output)]
             result = subprocess.run(command, cwd=root, capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stderr)
             candidate = json.loads(output.read_bytes())
-            self.assertEqual(candidate["generator"]["revision"], "catalogue-v11-r4")
-            self.assertEqual(candidate["revision_review"]["name"], "catalogue-v11-r4")
+            self.assertEqual(candidate["generator"]["revision"], "catalogue-v12")
+            self.assertEqual(candidate["revision_review"]["name"], "catalogue-v12")
             self.assertIn("research/catalogue_v10_r5_evidence.json", candidate["generator"]["input_sha256"])
             self.assertIn("research/catalogue_v11_evidence.json", candidate["generator"]["input_sha256"])
             self.assertIn("research/catalogue_v11_r2_evidence.json", candidate["generator"]["input_sha256"])
             self.assertIn("research/catalogue_v11_r3_evidence.json", candidate["generator"]["input_sha256"])
             self.assertIn("research/catalogue_v11_r4_evidence.json", candidate["generator"]["input_sha256"])
+            self.assertIn("research/catalogue_v12_evidence.json", candidate["generator"]["input_sha256"])
+            self.assertIn("research/catalogue_v12_object_proof.json", candidate["generator"]["input_sha256"])
             self.assertEqual(candidate["revision_review"]["data_endian_repair"]["revision"], "catalogue-v10-r5")
             target = layout.text.address + 44
             physical = next(row for row in candidate["ranges"] if row["start"] <= target < row["end"])

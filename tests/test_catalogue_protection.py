@@ -13,7 +13,7 @@ import tempfile
 import unittest
 
 from tools import analyze
-from tests.test_analyze import BASE, ROOT, fixture, library_revision_fixture, literal_words
+from tests.test_analyze import BASE, ROOT, fixture, freeze_local_fixture, library_revision_fixture, literal_words
 
 
 def metadata_sha(value: dict | list) -> str:
@@ -61,7 +61,8 @@ def synthetic_project(root: Path) -> dict:
     image, layout, before, after, literals, transition = synthetic_inputs()
     for directory in ("tools", "config", "orig", "research", "src", "accept/c009-r2"):
         (root / directory).mkdir(parents=True, exist_ok=True)
-    for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py", "ctrfmt.py"):
+    for name in ("analyze.py", "catalogue_closure.py", "catalogue_review.py", "catalogue_runtime_data.py",
+                 "catalogue_local_entries.py", "ctrfmt.py"):
         shutil.copyfile(ROOT / "tools" / name, root / "tools" / name)
     subprocess.run(["git", "init", "-q", str(root)], capture_output=True, check=True)
     write_json(root / "config/catalogue.json", before)
@@ -134,6 +135,7 @@ def synthetic_project(root: Path) -> dict:
     for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
         struct.pack_into("<III", exheader, offset, segment.address, 1, segment.size)
     (root / "orig/exheader.bin").write_bytes(exheader)
+    freeze_local_fixture(root, image, layout, protected={row["address"]: row for row in before["functions"]})
     return {"before": before, "after": after, "successor": successor, "snapshot": snapshot}
 
 
