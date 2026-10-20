@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "family": "resource",
+  "agent": "C010DefResourceCodex",
+  "model": "openai-codex/gpt-6.1-sol:max",
+  "branch": "c010-def-resource",
+  "baseline_commit": "8575e16",
+  "status": "complete-family-reentry-two-closures-eleven-explicit-deferrals-not-acceptance",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "scope": {
+    "functions": [
+      "func_001e37b8",
+      "func_001a2d9c",
+      "func_001a77d4",
+      "func_00196144",
+      "func_00120eec",
+      "func_001e87c8",
+      "func_001ceca8",
+      "func_0012f84c",
+      "func_00176c6c",
+      "func_001775e0",
+      "func_001387f4",
+      "func_00104804",
+      "func_00181a4c"
+    ],
+    "target_functions": 13,
+    "target_bytes": 2348
+  },
+  "counts": {
+    "closed_functions": 2,
+    "closed_bytes": 108,
+    "still_deferred_functions": 11,
+    "still_deferred_bytes": 2240
+  },
+  "parent_record": {
+    "path": "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+    "sha256": "344ee699b6e6c70f9dbfc0c33a6a88c021f8c138f284c9b4e23fcbf845995352",
+    "modified": false
+  },
+  "prior_parent_record": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/NEW-DEFERRALS-r67.json",
+    "sha256": "6d7cdc5f04faa5f94845dcc111544b8e8b8dc9477ac325993195af82d3c6b091",
+    "modified": false
+  },
+  "prior_reentries": [
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/lifecycle/proposals.json",
+      "sha256": "af4c9181938249660fb7dd1f6b2f0bfc14f5935862f4a4014bdc1626a4b2c627",
+      "family_functions": [
+        "func_001e37b8",
+        "func_001a2d9c",
+        "func_001a77d4"
+      ]
+    },
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/services-memory/proposals-codex-r2.json",
+      "sha256": "f548eac73dcd63f3d5419a48c3b7fd162768add28f94508eb36426ffe0360912",
+      "family_functions": [
+        "func_00181a4c",
+        "func_00120eec",
+        "func_001e87c8",
+        "func_001ceca8",
+        "func_0012f84c"
+      ]
+    },
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/ui-state/proposals-r3.json",
+      "sha256": "3445a43a8b9c1a0fe23206975c05ab53a05d4f41924f3a80e0eea8aa7964ebd6",
+      "family_functions": [
+        "func_00196144"
+      ]
+    },
+    {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+      "sha256": "01f748692ed2fccbfcfc17c3a19a12eaeef7638d32becdcf205a8cfd53538d7b",
+      "family_functions": [
+        "func_00176c6c",
+        "func_001775e0",
+        "func_001387f4",
+        "func_00104804"
+      ]
+    }
+  ],
+  "closed_rows": [
+    {
+      "function": "func_001e37b8",
+      "bytes": 36,
+      "status": "contract-closed-exact-match-not-accepted",
+      "source": "src/checkpoint10/func_001e37b8.cpp",
+      "source_sha256": "f39e76b95ca6b36cb38d3087be3fc5dae2d08933ecb20adb4fb16a131a33b6ce",
+      "profile": "game",
+      "receipt": "scratch/integrator/c010/resource-reentry-r1/destination/func_001e37b8/func_001e37b8.result.json",
+      "receipt_sha256": "811f2684bd1ceef52d73e3db6b0178e18b8448a0c33f3c142a2b85e2ec337666",
+      "facts": [
+        "R01"
+      ],
+      "qualification": "Selector names and unused input roles remain descriptive; the canonical Heap interface and accepted manager layout are preserved."
+    },
+    {
+      "function": "func_0012f84c",
+      "bytes": 72,
+      "status": "contract-closed-exact-match-not-accepted",
+      "source": "src/checkpoint10/func_0012f84c.cpp",
+      "source_sha256": "50b0c24decd70ad8d61408139c27679e5542d356db78eb1ab0750e7cd79a64c8",
+      "profile": "game",
+      "receipt": "scratch/integrator/c010/resource-reentry-r1/destination/func_0012f84c/func_0012f84c.result.json",
+      "receipt_sha256": "e36ad19bbc3e3932b29a60c1d96ce24a64e153bf6108ddccad546007becd9d27",
+      "facts": [
+        "R02"
+      ],
+      "qualification": "Observed partial context only; existing unchecked indexed entrypoints retain full unsigned inputs."
+    }
+  ],
+  "still_deferred_rows": [
+    {
+      "function": "func_001a2d9c",
+      "bytes": 208,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "preserved_source_sha256": "c73fdd63485256b654130ecfdc2e168b2c4559f3ea010f13bc606fd87b2cefe4",
+      "prior_declared_source_sha256": "c73fdd63485256b654130ecfdc2e168b2c4559f3ea010f13bc606fd87b2cefe4",
+      "remaining_evidence_gap": "The original001a3978 provider is now bounded and reaches larger state (+0xb4), but the historical three-phase shadow still has no natural relationship to canonical MenuControllerState.stages[19] or to the deferred selector001a2fc4 receiver. The +0xb0 store cannot be published as an arbitrary stages[7] alias or independent member before the true stage/selection boundary is proved.",
+      "next_supported_step": "Recover the actual001a2a78/001a2e6c/001a2fc4 producer/selector chain and all writes to depth/stages/selection; establish its AnimationOwner/list and MenuControllerState base relationship, then migrate the accepted two-function owner and re-prove its complete dependency set.",
+      "new_facts": [
+        "R03"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_001a77d4",
+      "bytes": 208,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "preserved_source_sha256": "fe8a4c7eedf44d00fd1f84d8b0c49352f66b7a5dfcdfd6e3bab63e7af0589313",
+      "prior_declared_source_sha256": "fe8a4c7eedf44d00fd1f84d8b0c49352f66b7a5dfcdfd6e3bab63e7af0589313",
+      "remaining_evidence_gap": "The real001a7b54 provider reaches+0xb4/+0x388;00171268 consumes+0x94/+0xa0/+0xb4 and crosses screen/animation helpers. Neither the true variable-stage extent nor a same-object Screen/W11jTransitionScreen projection is established. Fixed phases[3] and a new C++ array completion remain unsupported.",
+      "next_supported_step": "Recover001a7494/001a78a4/001a79fc state initialization and the actual00171268 base receiver; close its full inputs/result and the +0xb0 role before refining W11jTransitionScreen or re-entering this C++ dispatcher.",
+      "new_facts": [
+        "R03"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_00196144",
+      "bytes": 236,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_00196144.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00196144.cpp",
+      "preserved_source_sha256": "0fe6c18120a60708bd8c3dfd854356ffdc44325db597a1edd467b8b75cab36dc",
+      "prior_declared_source_sha256": "0fe6c18120a60708bd8c3dfd854356ffdc44325db597a1edd467b8b75cab36dc",
+      "remaining_evidence_gap": "The original argument paths are recovered, but native Pane/list ownership remains incompatible with the retained RegistrationOwner/RegistrationEntry and DisplayPane/DisplayBinding declarations. The C011 owner independently confirms001ce9e8 is still deferred on this same native-versus-C boundary.",
+      "next_supported_step": "Preserve C011001822fc reservation. Establish and match the actual native AppendChild provider against the original, then jointly migrate the group-resource owner, binding pane projections, registration slot tail and every dependent accepted consumer; never cast the existing C entries into native panes.",
+      "new_facts": [
+        "R04"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_00120eec",
+      "bytes": 88,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_00120eec_step2_typed_factory_record.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00120eec_step2_typed_factory_record.cpp",
+      "preserved_source_sha256": "eee3ba3a2547cdfa8bfe1cba48952e68a7864c2b9cb6785396b9cb88a24124b7",
+      "prior_declared_source_sha256": "eee3ba3a2547cdfa8bfe1cba48952e68a7864c2b9cb6785396b9cb88a24124b7",
+      "remaining_evidence_gap": "Descriptor full-word kind versus byte extraction is understood, but the required provider cutover includes0012e29c ->00192978 on bss_004b1cb0. The shared00192978 declaration currently returns FileSessionObject* for its separate pool; publishing the0x130-byte factory owner through that declaration would be a false nominal identity. Actual0012dce0/0012e384 lifecycle/header and factory-provider admission remain absent.",
+      "next_supported_step": "Recover the generic pool allocation and actual factory object lifecycle without aliases; preserve the constructor vtable and the backing FileSessionObject distinction. Then migrate0012e0e0 and wrapper to one full-word descriptor, narrowing only at the archive path byte while preserving its uninitialized reserved bytes; match both destinations and every affected pool/session consumer.",
+      "new_facts": [
+        "R05"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_001e87c8",
+      "bytes": 72,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_001e87c8_snapshot.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e87c8_snapshot.cpp",
+      "preserved_source_sha256": "248468e59ffc56cda92c790db183eae3230de9ad7f4c6e25acad3a37020ce5df",
+      "prior_declared_source_sha256": "248468e59ffc56cda92c790db183eae3230de9ad7f4c6e25acad3a37020ce5df",
+      "remaining_evidence_gap": "Original001cecb8 pointer-result and native Layout base identity are now recovered, so another PoolOwner header is specifically wrong. The actual48-byte derived owner at data_00224e44, its+0x20 member, owned allocation at+0x24/byte+0x28 and native deleting-destructor ownership have not been migrated to canonical Layout.",
+      "next_supported_step": "Use00135c74/00197220 natural constructor/lifetime evidence to recover the real Layout-derived owner, bind only its genuine native destructor identities, and implement the Layout/derived teardown chain without C destructor aliases or object-pointer casts. Match the base provider and both dependent wrappers together.",
+      "new_facts": [
+        "R06"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_001ceca8",
+      "bytes": 16,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_001ceca8.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001ceca8.cpp",
+      "preserved_source_sha256": "56f8207feb9a1c1273b83c52a239a01a9ff7a25e2c05142b88269b8b5458d0b5",
+      "prior_declared_source_sha256": "56f8207feb9a1c1273b83c52a239a01a9ff7a25e2c05142b88269b8b5458d0b5",
+      "remaining_evidence_gap": "The result is not unknown anymore:001cecb8 restores its input pointer and the original vtable identifies the native Layout destructor pair. What remains is the native destructor/provider source and binding cutover; the existing PoolOwner C deletion wrapper is not an admissible nominal repair.",
+      "next_supported_step": "Close the same canonical native Layout teardown/destructor family as001e87c8, then let the real C++ deleting-destructor implementation establish this16-byte entry. No void(void) destructor alias or invented D1/D2 entry alias.",
+      "new_facts": [
+        "R06"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_00176c6c",
+      "bytes": 300,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_00176c6c.c",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00176c6c.c",
+      "preserved_source_sha256": "ca1ea44e81a815e3ab84b3e8fd5cf988d0658fbf63160670d2e8efea74890788",
+      "prior_declared_source_sha256": "ca1ea44e81a815e3ab84b3e8fd5cf988d0658fbf63160670d2e8efea74890788",
+      "remaining_evidence_gap": "The four original decoder callers are now enumerated, including the two independent0010aa28/00111114 consumers, but none supplies a recovered typed provider declaration resolving whether the payload count is an unused third formal or eager header parsing. The preserved source also still has a ResourceMessageLayout cast and obsolete state naming.",
+      "next_supported_step": "Recover an independent natural decoder provider/signature (including actual result semantics), keeping the existing three-input qualification until then. Only with that closure refine canonical MessageLayout resource_index/texture/loaded/decoded fields, use activity_state, and re-prove every existing MessageLayout consumer.",
+      "new_facts": [
+        "R07"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_001775e0",
+      "bytes": 316,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_001775e0.c",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001775e0.c",
+      "preserved_source_sha256": "cfab7701c29bccf32f9f7e2b314e0e9ad18ed318eabf23c0c3e6f51586b10d11",
+      "prior_declared_source_sha256": "cfab7701c29bccf32f9f7e2b314e0e9ad18ed318eabf23c0c3e6f51586b10d11",
+      "remaining_evidence_gap": "Same decoder formal-count gap as00176c6c; additionally the preserved source still passes a cast entries-array owner to canonical00170dc0(MessageLayout*,int,int). The cast cannot be restored to the candidate ledger.",
+      "next_supported_step": "Close the decoder/provider contract first, then perform the same MessageLayout field cutover and replace the obsolete entries cast with the actual layout receiver. Re-prove both resource consumers and all message-header dependents.",
+      "new_facts": [
+        "R07"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_001387f4",
+      "bytes": 152,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/collect-r2/func_001387f4.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001387f4.cpp",
+      "preserved_source_sha256": "ce08ba6e9356a5e3cd31961a0179ec33a2ef0eb145d3c93fc0bb20470db13df9",
+      "prior_declared_source_sha256": "ce08ba6e9356a5e3cd31961a0179ec33a2ef0eb145d3c93fc0bb20470db13df9",
+      "remaining_evidence_gap": "The pinned native source now supplies a concrete signed command-size result and original00140298 returns112, but this is not yet a uniquely matched/admitted same-address native provider. Its proper ABI uses CommandBufferInfo& and a real ResIndexStream value. Current001306c8 still uses C RenderDrawList** to call the native ResPrimitive method.",
+      "next_supported_step": "Bind/prove the actual native SetupDrawIndexStreamCommand provider under a frozen profile, then replace the001306c8 callsite with a real ResPrimitive value over its proved resource payload and invoke SetupDrawCommand(bool). Re-prove both units and all affected native boundary declarations without raw-pointer wrapper aliases.",
+      "new_facts": [
+        "R08"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_00104804",
+      "bytes": 548,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_00104804.cpp",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00104804.cpp",
+      "preserved_source_sha256": "c2468cca45d30de549a87a78c7178e8a2257c406c4d66878c4b2e38515477a78",
+      "prior_declared_source_sha256": "c2468cca45d30de549a87a78c7178e8a2257c406c4d66878c4b2e38515477a78",
+      "remaining_evidence_gap": "The actual00104a28 producer mapping now identifies four distinct HeapAllocator result types at+0x14/+0x1c/+0x20/+0x24, rather than scalar words or one CleanupElement*. However0010d6d8 renderer construction/ownership and the static Heap-factory versus retained GraphicsHeap storage boundary remain unclosed. Existing tail GraphicsResource* slots cannot justify flattening all earlier fields.",
+      "next_supported_step": "Recover/migrate the real renderer/config producer and static allocator construction contract; type the four factory-produced slots from their actual providers, re-prove initializer and all consumers, then restore the full reset with per-type destructor/owner release. Preserve the wrong+0x24 release followed by a second+0x24 test.",
+      "new_facts": [
+        "R09"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    },
+    {
+      "function": "func_00181a4c",
+      "bytes": 96,
+      "status": "still-deferred",
+      "category": "shared-contract-gap",
+      "original_source": "src/checkpoint10/func_00181a4c.c",
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_00181a4c.c",
+      "preserved_source_sha256": "b9c8255b9f396549b26aaaa97d81cebf6afdd613bd8010529f7559ed55d77081",
+      "prior_declared_source_sha256": "b9c8255b9f396549b26aaaa97d81cebf6afdd613bd8010529f7559ed55d77081",
+      "remaining_evidence_gap": "The real001900ac operation3 consumer now establishes scalar resource/index fields and operation-dependent offsets, not the scratch pointer first/last API. But variants1/4 are not a complete typed protocol, and the original stacked fifth word still lacks a natural cast-free producer form that both preserves integer semantics and rederives the floating copy.",
+      "next_supported_step": "Recover typed command variants1/4 and their producers together with operation2/3; represent only a genuine operation-tagged payload union, not float/word punning. Then try a natural bit-preserving word-copy producer and re-prove all six direct callers, actual consumer and queue trigger while keeping00186598/0019ea6c void.",
+      "new_facts": [
+        "R10"
+      ],
+      "new_match_attempts": 0,
+      "reason_no_compile": "A new source contract is not yet established; repeating an already rejected cast/union/private-type form would not be evidence."
+    }
+  ],
+  "header_changes": [
+    {
+      "path": "include/game/graphics_state.h",
+      "before_sha256": "7402cea810caa86c617f09daaef1fa9056614a25478f03c3ab8ed76faca6f04e",
+      "after_sha256": "7924b47a7a458840f9d9c187f38856cc0ede1d6fc21c441a5e32ad4c614c3c80",
+      "change": "Import existing synchronization types; expose StreamMutex+0, exactly two actual buffers+0x5c/+0x60, SignalState+0x64 and state byte+0x76. Preserve signed status+0x75 and every existing public function signature.",
+      "dependent_witnesses": "resource-reentry-r1/DEPENDENT-WITNESSES.json",
+      "existing_dependent_units": 26
+    },
+    {
+      "path": "include/game/heap_manager.h",
+      "before_sha256": null,
+      "after_sha256": "5e495bfbe806e3266fb4ee3dde20d6707d9946ca4d467baa3458ea938ce54be3",
+      "change": "Extract exactly the accepted HeapRange/HeapManager layout and singleton declaration; share the five-word allocation ABI and three-/two-input canonical Heap allocation/release slot declarations. The +0..0x640 allocation-list prefix remains opaque and unchanged.",
+      "dependent_witnesses": "resource-reentry-r1/DEPENDENT-WITNESSES.json",
+      "existing_dependent_units": 2
+    }
+  ],
+  "source_revisions": [
+    {
+      "source": "src/wave6/func_0019dc20.c",
+      "status": "accepted-source-revised-declarations-only",
+      "functions": [
+        "func_0019dc20"
+      ],
+      "before_sha256": "e0d6afb871766c31d68c073a6e08f2bf16aebbd1f7143b80543d06850150a8a5",
+      "after_sha256": "bed93e58eb5b2e25552a31cf734f6cada54e0b57fe68c51bd6c26bb14ad66e41",
+      "witness": "resource-reentry-r1/match/accepted-deallocator-r1/func_0019dc20.result.json"
+    },
+    {
+      "source": "src/checkpoint10/func_001e3794.c",
+      "status": "existing-c010-candidate-revised-canonical-Heap-receiver",
+      "functions": [
+        "func_001e3794"
+      ],
+      "before_sha256": "7e32eae90a0e1b4a23223572f9acb51e822df3228b783d82d6836fc57ebeff02",
+      "after_sha256": "185bcee4111a384a841495a21e6b6b7c88304bf8771f30458e32ff3933989d34",
+      "witness": "resource-reentry-r1/match/canonical-release-wrapper-r1/func_001e3794.result.json"
+    }
+  ],
+  "collection": {
+    "command_log": "resource-reentry-r1/commands.jsonl",
+    "inputs": "resource-reentry-r1/RESULT.json",
+    "collected": "resource-reentry-r1/collected.json",
+    "destination": "src/checkpoint10",
+    "candidate_manifest": "config/candidates/c010.json",
+    "candidate_manifest_sha256": "e389b501829272fef75d0cc6e20107249265af0d76641f7850f521ce1951d320",
+    "manifest_change": "Append only the two genuinely closed restored units. Existing units/moves remain unchanged."
+  },
+  "evidence": {
+    "facts": "resource-reentry-r1/CONTRACT-FACTS.json",
+    "facts_sha256": "634f683390a25bd41531c37d7d657c1bdf9941a8217e92a18ef92e9a212e7490",
+    "dependent_witnesses": "resource-reentry-r1/DEPENDENT-WITNESSES.json",
+    "dependent_witnesses_sha256": "348b2e12592a760762e0963d219fc9b3049b1da1bf947073b316d6db771fd774",
+    "bounded_match_runs": 32,
+    "collect_runs": 1,
+    "exits_retained": 33,
+    "failed_match_attempts": 0,
+    "failed_analysis_attempts": [
+      {
+        "exit": 1,
+        "error": "Capstone CS_ERR_DETAIL on packet-created instruction objects",
+        "resolution": "Re-decoded only the selected function spans with detailed Capstone enabled; no instruction text emitted."
+      },
+      {
+        "exit": 1,
+        "error": "TypeError on an unresolved integer base in reset metadata filtering",
+        "resolution": "Retried only the failed reset metadata filter with a tuple guard."
+      }
+    ],
+    "all_exercised_match_runs_exact": true,
+    "tests_builds_prepares_reviews_finalizes_exercised": false
+  },
+  "identity_accounting": {
+    "accepted_identities_dropped": [],
+    "accepted_identities_duplicated": [],
+    "accepted_identity_moves": [],
+    "new_name_bindings": [],
+    "profile_changes": [],
+    "model_changes": [],
+    "c011_001822fc_reservation": "preserved unchanged; no native equality or credit asserted"
+  },
+  "integration_notes": [
+    "Source-only result; c009-r3 predecessor remains provisional until Main finalizes it. No checkpoint prepare/review/finalize or push performed.",
+    "The two resource additions total108B; candidate-source revision001e3794 and accepted declaration-only revision0019dc20 earn no additional identities or bytes.",
+    "All26 direct graphics_state.h dependents and both existing heap-header consumers have fresh sequential exact MATCH receipts under their original frozen profiles and explicit v6/L1.",
+    "No original bytes, instruction words, disassembly, packets, keys or licensed payload are included in these records. All historical deferrals remain immutable; only this new outcome and selected candidate additions describe the re-entry."
+  ]
+}

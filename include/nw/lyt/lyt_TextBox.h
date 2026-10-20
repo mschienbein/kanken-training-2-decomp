@@ -145,7 +145,9 @@ public:
     font::DispStringBuffer* GetDispStringBuffer() const { return m_pDispStringBuf; }
     void GetTextGlobalMtx(nw::math::MTX34* pMtx) const;
 
-    virtual void MakeUniformDataSelf(DrawInfo* pDrawInfo, Drawer* pDrawer) const;
+    /* Target-version override of Pane's byte-cursor uniform-command slot. */
+    virtual unsigned char* MakeUniformDataSelf(unsigned char* cursor,
+        ::LayoutDrawInfo* info, ::LayoutRenderContext* renderer) const;
 protected:
     virtual void DrawSelf(const DrawInfo& drawInfo);
     virtual void LoadMtx(const DrawInfo& drawInfo);

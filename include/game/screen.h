@@ -418,6 +418,11 @@ extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
 extern void func_0016e648(struct WidgetController *controller, int index, int character);
+/* The widget color dispatcher forwards all four full-word color values.
+ * Byte storage in concrete displays does not narrow this incoming contract. */
+extern void func_0016e300(struct WidgetController *controller, int index,
+                         int red, int green, int blue, int alpha);
+extern void func_00168cec(struct WidgetController *controller, int alpha);
 extern void func_0020f858(void);
 extern struct AnimationContext bss_00246b48;
 extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,

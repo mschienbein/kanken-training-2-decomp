@@ -32,6 +32,17 @@ The same-address name proof, bounded destination receipts and limitations are in
 `scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json`; neither this cutover nor its
 private matches grants accepted credit.
 
+The unaccepted c010 native re-entry
+`src/checkpoint10/native/pane_uniform_commands.cpp` adapts the same pinned
+`lyt_Pane.cpp` traversal using the actual native `Pane` child list, without a
+derived-owner cast. Original vtable anchors establish the target-version
+byte-cursor `MakeUniformDataSelf` slot; `Pane`, `Picture`, `TextBox` and `Window`
+declarations retain its native const receiver and share the recovered cursor,
+draw-info and renderer contract. Public `Draw`/`DrawSelf` remain unchanged.
+`scratch/integrator/c010/DEFERRAL-REENTRY-native-r1.json` binds the source,
+header changes, original ownership facts and bounded witnesses; no accepted
+credit or complete identity for the target root prefix follows from this re-entry.
+
 Policy: only sources whose license is compatible with GPL-3.0 are copied; attribution, the
 upstream license and modification notices stay with the copied code. Public repositories without a
 license grant (inspected 2026-10-17: standalone nnsdk, LibMessageStudio, 3DS sead) are not copied.

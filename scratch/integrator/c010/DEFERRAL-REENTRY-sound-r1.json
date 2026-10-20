@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "family": "sound",
+  "agent": "C010DefSoundCodex",
+  "model": "openai-codex/gpt-6.1-sol:max",
+  "baseline_commit": "8575e16",
+  "branch": "c010-def-sound",
+  "status": "bounded-reentry-complete-no-false-closure",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "target_function_count": 8,
+  "target_bytes": 1528,
+  "closed": [],
+  "closed_bytes": 0,
+  "still_deferred": [
+    {
+      "function": "func_001d3c2c",
+      "target_bytes": 44,
+      "profile": "game",
+      "status": "still-deferred",
+      "category": "native-provider-byte-closure-gap",
+      "resolved_evidence": [
+        "The original func_0014b824 constructs the canonical EmbeddedSoundInstance: its +0x128 member is passed to func_0014d690. The owner type table data_002246b8 independently names func_001d3c2c at +4 and getter func_001d3a08 at +0x20. This is a constructor/table/getter owner proof, not an offset-only identity guess.",
+        "Original func_001d9050 writes the primary/interface tables at player+0/+0x44/+0x50, calls func_001d8d7c with that same player, and its sole observed return preserves entry r0. It is the canonical SoundStreamPlayer member, not SoundPlaybackState or W15iWavePlayer.",
+        "A native EmbeddedSoundInstance destructor with actual implicit member/base cleanup matches all 44 target bytes without pointer casts, replacing a returned subobject with the input, or a C result shim. The corresponding EmbeddedSoundInstance -> SoundPlayerBase getter also matches its 8 accepted bytes."
+      ],
+      "private_matches": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/match/embedded-native-r2/embedded_sound_lifetime.result.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/match/getter-native-r1/func_001d3a08.result.json"
+      ],
+      "remaining_gap": "The required native SoundStreamPlayer destructor self-definition at func_001d9050 has not matched. Separate-table source emits 72/64 bytes; the natural aggregate-table forms emit 64/64 but differ from +0x0c (direct) or +0x0 (installer), under the frozen game/middleware profiles tried. Therefore no new destructor name is adopted, and the 44-byte caller-only MATCH is not promoted as closure. Its proposed shared base destructor also needs every accepted header-dependent lifetime re-proved before adoption.",
+      "next_supported_step": "Continue the cast-free SoundStreamPlayer native provider from the preserved aggregate-table proposal, using the constructor/type-table facts to recover a natural source form; obtain its complete 64-byte self-MATCH, then re-prove the actual affected sound header consumers and collect the 44-byte caller. The old missing-provider/nominal-owner gap is narrowed by real evidence; do not reintroduce WaveSound/PlaybackCleanupState casts.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_0016a104",
+      "target_bytes": 84,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "native-vtable-and-shared-owner-contract-gap",
+      "resolved_evidence": [
+        "The existing native PlayerHeapDataManager constructor (001d4510), native Finalize (001d44e4), and SoundArchiveLoader native declaration provide a real typed hierarchy. config/names.json already binds native SetSoundArchive(const nw::snd::SoundArchive*) to 001d4174.",
+        "The original func_0016a104 forwards owner+0x0c to 001d4324; 001d4324 returns its entry receiver. The cached primary type table data_00224854 names 0016a104 at +0. Its next slot and the corresponding base table slot are actually null, not surviving deletion-destructor identities."
+      ],
+      "remaining_gap": "A genuine native PlayerHeapDataManager destructor proposal is refused (exit 2) because emitting the native key-function vtable references PlayerHeapDataManagerD0Ev. No original callable identity exists in the inspected null deletion slot to bind that reference to. Independently, accepted 001d4174 still defines SoundArchiveRequestState*/ArchiveHandle*, conflicting with both native SetSoundArchive and sound_loader.h. A zero/made-up D0 binding, archive cast, or C-shadow destructor cannot close either issue.",
+      "failed_witness": "scratch/integrator/c010/deferral-reentry-sound-r1/match/loader-native-r1/player_heap_destructor.result.json",
+      "next_supported_step": "Recover the target-native key-function/vtable ownership and actual removed/retained destructor relationship without a new profile/model or invented alias; then perform the real native loader/001d4174 cutover with all accepted C request-state/archive consumers in one change. Keep the refusal rather than bypassing vtable emission.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_0018d728",
+      "target_bytes": 296,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "target-native-archive-owner-gap",
+      "resolved_evidence": [
+        "Original LoadImpl loads its archive receiver from loader+4 and passes that actual pointer, a file ID and an output record to 00138edc; it passes its unchanged loader receiver to 001839cc. The existing native LoadImpl name binding is retained, not reinvented.",
+        "The accepted 00138edc provider reads SoundArchive.reader and SoundArchive.addon and invokes the addon file-location hook. The pinned native 3.7.4 SoundArchive instead declares m_ExtFileRoot character storage after m_pFileReader; it does not supply this target +8 addon owner."
+      ],
+      "remaining_gap": "The real target SoundArchive version/extension relationship is not represented by the pinned native class. Native LoadImpl cannot pass its native archive to the accepted C 00138edc(SoundArchive*,ArchiveFileLocation*) without a nominal bridge or a real provider/owner migration. The same loader/001d4174 contradiction as 0016a104 also remains. Matching offsets or the three-word file record do not establish this cross-unit type identity.",
+      "next_supported_step": "Recover the target-native archive extension producer and its file-location provider, migrate that real owner and every relevant accepted consumer together, and implement LoadImpl against its true native declarations. Do not remove the observed addon merely to fit the older public header, and do not add an extern-C shadow or pointer cast.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_001d65e0",
+      "target_bytes": 152,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "aggregate-decoder-and-task-lifetime-contract-gap",
+      "resolved_evidence": [
+        "Original func_001d6094 passes exactly its entry receiver, with no base adjustment, to 001d65e0. Its decoder fields and the aggregate engine cleanup therefore refer to the same actual address.",
+        "Original aggregate engine destructor 001d773c also forwards its unchanged receiver to 001d65e0, then uses the freelist/arena at +0x90/+0x94 and a subobject at +0x64. Cleanup uses synchronization +0x70, active list +0x84, task link-to-owner subtraction 0x50, and a loaded service at +0x14.",
+        "Pinned nw::io::IOStream and the canonical ForwardedFileStream both declare Close() as void; this is a supported slot+0x38 result lead, not proof that an unrelated SceneRenderer owner is that class."
+      ],
+      "remaining_gap": "A coherent target owner still has to reconcile SceneEngine (currently treating word 0 as a vtable) with the actual decoder/AudioDecodeState service/source roles. The +0x14 producer and actual service class are not bound, and the entry reset slot has not been tied to its real task destructor/provider ABI. The arena lifetime facts do not independently prove the old entries[32] completion. Replacing either owner with an equal-offset prefix would conceal these gaps.",
+      "next_supported_step": "Follow the decoder/service and task initialization producers from the recorded same-receiver graph; establish the actual Close and task-destructor callable providers and allocation bounds, then share one real target decoder/engine record and re-prove 001d6094, 001d773c/aggregate consumers, 001f2f40 and both cleanup bodies.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_001d6ab8",
+      "target_bytes": 108,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "aggregate-task-lifetime-contract-gap",
+      "resolved_evidence": [
+        "Original 001d80b0 loads this receiver from controller+0x60; this body recycles the same +0x84 list and +0x90 free-list protocol as 001d65e0. Canonical SignalState is eight bytes and SynchronizationOwner twelve; the historical four-byte volatile state/eight-byte owner is not restored."
+      ],
+      "remaining_gap": "The actual entry task owner, virtual reset/destructor result/argument protocol, and decoder/SceneEngine owner migration remain unresolved together with 001d65e0. A byte-identical list loop or an unused synchronization word is not enough to publish a second owner or void callback.",
+      "next_supported_step": "Resolve the shared native engine/task lifetime contract described for 001d65e0, then compile both cleanup units and their accepted owner/decoder consumers using the same declaration; do not repeat the old private synchronization definition.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_001d80b0",
+      "target_bytes": 316,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "callback-host-and-stream-track-owner-gap",
+      "resolved_evidence": [
+        "Original 001d80b0 loads the engine at controller+0x60 and forwards the unchanged controller to 001d7b6c. The latter actually reads work bytes at +0,+0x0c..+0x15 and a word at +0x18; the old opaque SceneWork[0x24] does not recover those fields.",
+        "The existing prefetch_stream.h StreamPlayer/StreamTrack/StreamChannel family exposes the matching channel/track protocols as a new dependency lead. That family cannot be made the SceneController merely by an alias; the canonical aggregate fixes a 0x21fc controller member while the current stream prefix has a separate trailing-storage interpretation.",
+        "Scoped original 001d80a8 has no surviving direct call event; its accepted source/branchnop therefore remains insufficient to prove the target spelling or complete callback host."
+      ],
+      "remaining_gap": "The actual +0x44 callback/registry host, target-version controller/stream owner relationship and fixed member/work bounds are not closed. The notify slot arguments/result and 001d7b6c result protocol have no independently sealed provider contract; terminal r0 values are not promoted into meaningful C++ results.",
+      "next_supported_step": "Recover target controller construction, callback-table assignments and the original track-count/channel-count producers, tie them to the real slot providers, and migrate the adjusted callback and aggregate owner together. Preserve the explicit native/prefetch dependency rather than inventing CallbackHost68 or StreamPlayer aliases.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_001d7f5c",
+      "target_bytes": 332,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "voice-wave-descriptor-and-controller-owner-gap",
+      "resolved_evidence": [
+        "Original 001d48d4 demonstrably consumes a format byte at descriptor+0 and a full rate word at +8 and writes the real AudioVoiceGroup format/flags. Natural accepted 001d94a0 passes the actual VoiceWaveInfo descriptor to both 001d48d4 and 001d9238, then calls 001d4aac with that same AudioVoiceGroup.",
+        "Original controller fields +0x220/+0x224 are the count words used by these loops; StreamChannel/StreamTrack in prefetch_stream.h is the relevant natural storage family, not PaneGroup/PaneSettings."
+      ],
+      "remaining_gap": "The full initialized/read VoiceWaveInfo channel, sample and ADPCM fields at the controller call are still not closed. The preserved three-field PaneSettings source cannot become VoiceWaveInfo just by renaming, zero-initializing the rest or casting it. The controller containing-owner and work/track capacities remain the same unresolved dependency as 001d80b0.",
+      "next_supported_step": "Trace the controller start path and 001d48d4 descriptor use across its format-dependent branches to account for every initialized/read field (and any genuine original uninitialized-field bug). Share the actual VoiceWaveInfo provider and controller track owner only after that proof, re-proving 001d94a0 and 001d4aac.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    },
+    {
+      "function": "func_001d81ec",
+      "target_bytes": 196,
+      "profile": "middleware",
+      "status": "still-deferred",
+      "category": "controller-aggregate-and-channel-owner-gap",
+      "resolved_evidence": [
+        "Original 001d81ec uses the pool at controller+0x64, resource/allocation words in channel-stride records and unchanged controller as the 0019ea64 synchronization owner. Original accepted aggregate-bound destructor 001d82b0 repeats this cleanup protocol before its base/type cleanup.",
+        "The actual existing StreamChannel carries allocation and AudioVoiceGroup* plus 32 record/loop-state blocks; the historical PaneGroup private records are not needed as a substitute for that storage family."
+      ],
+      "remaining_gap": "The same concrete controller has not been reconciled with the existing StreamPlayer declaration and the canonical fixed 0x21fc SceneController member. Original producers must establish the real channel capacity and target extension/tail, not a sizeof-based or same-stride identity. Publishing this row alone would leave two incompatible complete-owner models used by its destructor, start/update and accepted prefetch consumers.",
+      "next_supported_step": "Recover the original controller initialization/allocation and count writes, establish the target-version stream/controller tail and actual synchronization base, then migrate the aggregate/destructor/prefetch consumers to that one owner and prove the full dependent units. Do not shrink the fixed aggregate member or introduce a layout alias.",
+      "evidence_files": [
+        "scratch/integrator/c010/deferral-reentry-sound-r1/original-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/vtable-facts.json",
+        "scratch/integrator/c010/deferral-reentry-sound-r1/input-bindings.json"
+      ]
+    }
+  ],
+  "still_deferred_bytes": 1528,
+  "canonical_header_changes": [],
+  "canonical_source_changes": [],
+  "candidate_changes": [],
+  "names_adopted": [],
+  "accepted_identity_moves": [],
+  "accepted_identities_removed": [],
+  "private_proposal_boundary": "No collection/candidate append was performed because no row has its complete dependency closure. The two private MATCHes do not authorize a new native provider binding or accepted-header cutover. The temporary sound_runtime.h/sound_task.h/getter edits were restored byte-for-byte to the baseline; their exact unadopted variants remain only under proposals/ and attempt-inputs/.",
+  "bounded_matches": {
+    "count": 11,
+    "exit_counts": {
+      "0": 2,
+      "1": 8,
+      "2": 1
+    },
+    "log": "scratch/integrator/c010/deferral-reentry-sound-r1/exits.json",
+    "log_sha256": "41fed1c22438b8934ea46754d3cbfe532049170c9ee62da302f01d2be9815702",
+    "positive_witnesses": [
+      {
+        "function": "func_001d3c2c",
+        "target_bytes": 44,
+        "receipt": "scratch/integrator/c010/deferral-reentry-sound-r1/match/embedded-native-r2/embedded_sound_lifetime.result.json",
+        "source": "scratch/integrator/c010/deferral-reentry-sound-r1/proposals/embedded_sound_lifetime.cpp",
+        "adopted": false
+      },
+      {
+        "function": "func_001d3a08",
+        "target_bytes": 8,
+        "receipt": "scratch/integrator/c010/deferral-reentry-sound-r1/match/getter-native-r1/func_001d3a08.result.json",
+        "source": "scratch/integrator/c010/deferral-reentry-sound-r1/proposals/player_getter.cpp",
+        "adopted": false
+      }
+    ]
+  },
+  "evidence_binding_note": "input-bindings.json compares source hashes for ten completed comparisons. The eleventh is the link-refusal schema, which omits source_sha256: null/false there means absent receipt metadata, not a mismatched preserved source. Its exact source and proposed-names hashes are separately bound by that manifest and exits.json.",
+  "prior_records_read": [
+    "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+    "c010 read-only worktree: NEW-DEFERRALS-native-links-r1.json sound rows",
+    "c010 read-only worktree: contract-deferrals-r2.json sound filter (no additional rows)",
+    "c010 read-only worktree: LOCAL-CONTRACT-CUTOVERS-r2.json sound markers/blockers",
+    "c010 read-only worktree: SOURCE-OVERRIDES-r1.json sound filter (no additional rows)",
+    "scratch/integrator/c010/helpers/lifecycle/proposals.json sound rows and cross-unit contracts",
+    "c010 read-only worktree: owner-cutover/factory-facts-loader-r9.json",
+    "c010 read-only worktree: owner-cutover/factory-facts-remaining-audio-r9.json",
+    "c010 read-only worktree: AUDIO-CONTRACT-ADJUDICATION-r1.json"
+  ],
+  "not_run": [
+    "full builds",
+    "test suites",
+    "whole-ledger audits",
+    "prepare",
+    "review",
+    "finalize",
+    "push",
+    "any profile/model change",
+    "any repeated unchanged-input retry"
+  ],
+  "handoff": "Main may merge this evidence-only commit without changing c010 candidates or accepted sources. A later sound re-entry must retain the failed/refused receipts and these exact resolved-vs-unresolved boundaries; it must not count the private 44-byte caller witness as a closed row."
+}

@@ -1,0 +1,26 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/texture_accessors_copy.cpp",
+  "source_sha256": "4c64faeadcfee5e6f386a6e63063081271fe79072d513b33a2a9349c174bdbd3",
+  "profile": "game",
+  "exit_code": 0,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/texture_accessors_copy.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/texture-accessors-native-copy-game",
+    "--names",
+    "scratch/integrator/c010/native-reentry-r1/texture-accessor-names-proposed.json"
+  ],
+  "stdout": "note: proposed names overlay scratch/integrator/c010/native-reentry-r1/texture-accessor-names-proposed.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN2nw3lyt19ArcResourceAccessor10GetTextureEPKc @ 0x1cceb8 size 0x68/0x68\nMATCH    _ZN22TextureCacheAccessor2810GetTextureEPKc @ 0x1cd008 size 0x68/0x68\n",
+  "stderr": "",
+  "label": "texture-accessors-native-copy-game"
+}

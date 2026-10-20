@@ -1,0 +1,43 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/dependent-09-lyt_Layout__Animate/lyt_Layout__Animate.result.json",
+  "private_receipt_sha256": "8714ab6627b0e318833ec53a901bc4c25f284f3d9e2dde15e7b69bbc1ce30052",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/src/nw4c/lyt_Layout__Animate.cpp",
+    "source_sha256": "0569630e91e01b92b1048a91e68809280c84868a3aa4542df08e56782d3a1a55",
+    "profile": "middleware",
+    "compiler": "armcc_41_791",
+    "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "deaf89da4afb0a77ba04ba061a73bdf5d35d7af1f1f34fc40cdceb4221a6db1e",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "_ZN2nw3lyt6Layout7AnimateEj",
+        "address": 1895564,
+        "size": 28,
+        "candidate_size": 28,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

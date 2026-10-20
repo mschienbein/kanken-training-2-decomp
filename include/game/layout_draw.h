@@ -21,6 +21,19 @@ struct WidgetPosition;
 #include "game/runtime.h"
 #include "game/screen.h"
 
+#ifdef __cplusplus
+#include <preinclude.h>
+#include <nw/lyt/lyt_Pane.h>
+/* [INFERENCE] Target root prefix only, not a complete native Layout alias.
+ * The original +0x10 member is passed unchanged to Pane::DrawCommands. */
+struct LayoutCommandRoot {
+    unsigned char reserved00[0x10];
+    nw::lyt::Pane *root;
+};
+extern "C" void func_00196c04(LayoutRenderContext *renderer,
+    LayoutCommandRoot *root, LayoutDrawInfo *info);
+#endif
+
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 #ifdef __cplusplus
 struct LayoutColorWord {

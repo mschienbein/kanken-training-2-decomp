@@ -100,7 +100,9 @@ protected:
     void InitFrame(u8 frameNum);
 
 public:
-    virtual void MakeUniformDataSelf( DrawInfo* pDrawInfo, Drawer* pDrawer ) const;
+    /* Target-version override of Pane's byte-cursor uniform-command slot. */
+    virtual unsigned char* MakeUniformDataSelf(unsigned char* cursor,
+        ::LayoutDrawInfo* info, ::LayoutRenderContext* renderer) const;
 
 protected:
     mutable bool m_IsTexCoordInited;

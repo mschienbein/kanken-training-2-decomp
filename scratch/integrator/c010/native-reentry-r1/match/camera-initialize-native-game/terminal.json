@@ -1,0 +1,26 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/camera_initialize.cpp",
+  "source_sha256": "ad447673f68053737d337f8b079fd8934fa395cd0380f9e6a443330810a9441b",
+  "profile": "game",
+  "exit_code": 0,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/camera_initialize.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/camera-initialize-native-game",
+    "--names",
+    "scratch/integrator/c010/native-reentry-r1/initializer-names-proposed.json"
+  ],
+  "stdout": "note: proposed names overlay scratch/integrator/c010/native-reentry-r1/initializer-names-proposed.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN2nw3gfx6Camera10InitializeEPNS_2os10IAllocatorE @ 0x1c93c8 size 0x48/0x48\n",
+  "stderr": "",
+  "label": "camera-initialize-native-game"
+}
