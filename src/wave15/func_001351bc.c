@@ -4,9 +4,9 @@
 
 struct EventResource;
 
-extern void func_0019d3b4(struct ResourceEvent *event);
+extern void func_0019d3b4(struct DisplayObject *event);
 
-static __inline void release_event(struct ResourceEvent *event)
+static __inline void release_event(struct DisplayObject *event)
 {
     if (event->active) {
         func_0019d3b4(event);
@@ -16,7 +16,7 @@ static __inline void release_event(struct ResourceEvent *event)
 
 void func_001351bc(void)
 {
-    struct ResourceEvent *event = data_00242238.events;
+    struct DisplayObject *event = data_00242238.events;
     if (event) {
         int i = 0;
         if (data_00242238.count > 0) {

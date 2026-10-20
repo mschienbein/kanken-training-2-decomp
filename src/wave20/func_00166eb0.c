@@ -13,10 +13,10 @@ void func_00166eb0(struct W8DisplaySet *set, int index, float x, float y)
         object->position[1] = y;
         type = func_0017a9a0(object, 0);
         if (type == 5)
-            func_0015e684((struct BoundDisplayObject *)object, 0,
+            func_0015e684(object, 0,
                          object->position[0], object->position[1], object->position[2]);
         else if (type == 6)
-            func_00181700((struct BoundDisplayObject *)object,
+            func_00181700(object,
                          object->position[0], object->position[1], object->position[2]);
     }
 }

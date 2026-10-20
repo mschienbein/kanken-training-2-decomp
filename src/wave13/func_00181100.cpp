@@ -1,31 +1,29 @@
+#include <preinclude.h>
 #include "game/material.h"
 #include "game/runtime.h"
-#include "game/screen.h"
+#include "game/display_native.h"
 
-
-
-extern "C" void func_00181100(BoundDisplayObject *object, int resource, int replace)
+extern "C" void func_00181100(DisplayObject *object, int resource, int replace)
 {
-    TextureDisplayBinding *binding =
-        reinterpret_cast<TextureDisplayBinding *>(object->bindings[0]);
+    PaneDisplayAttachment *binding = display_pane_attachment(object, 0);
     binding->resource = resource;
     if (resource != -1) {
-        func_0014c5c4(binding->pane, binding->material, resource, replace);
+        func_0014c5c4(binding->picture, binding->material, resource, replace);
         return;
     }
-    Material **slot = binding->material;
-    DisplayPane *pane = binding->pane;
+    nw::lyt::Material **slot = binding->material;
+    nw::lyt::Picture *pane = binding->picture;
     if (*slot) {
-        (*slot)->vtable->destroy_delete(*slot);
-        Material *material = static_cast<Material *>(
-            func_0019ffa4(sizeof(Material), data_002232d5));
+        delete *slot;
+        nw::lyt::Material *material = static_cast<nw::lyt::Material *>(
+            func_0019ffa4(sizeof(nw::lyt::Material), data_002232d5));
         if (material)
             material = func_0017fe04(material);
         *slot = material;
         /* ORIGINAL BUG: allocation failure is not checked before this access. */
-        material->flags = (material->flags & 0xfe) | 1;
-        func_0017fda4(pane, *slot);
+        material->SetUserAllocated();
+        pane->SetMaterial(*slot);
     }
-    func_0017fd0c(func_0017fd68(binding->pane), 0);
-    func_0017fc7c(func_0017fd68(binding->pane), 0);
+    binding->picture->GetMaterial()->SetTexMapNum(0);
+    func_0017fc7c(binding->picture->GetMaterial(), 0);
 }

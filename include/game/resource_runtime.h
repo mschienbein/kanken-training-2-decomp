@@ -8,7 +8,7 @@
 struct ResourceNode;
 struct ResourceEventPool {
     unsigned reserved00[3];
-    struct ResourceEvent *events;
+    struct DisplayObject *events;
     struct ResourceNode *first;
     struct ResourceNode *second;
     struct ResourceNode *third;
@@ -24,20 +24,20 @@ struct ResourceControlState {
     int value;
 };
 
-struct AssetSlot { struct ResourceEvent *asset; };
+struct AssetSlot { struct DisplayObject *asset; };
 struct W17SceneVTable;
 struct DisplayResource4c {
-    struct ResourceEvent *object;
+    struct DisplayObject *object;
     unsigned char reserved04[0x48];
 };
 struct DisplayResource50 {
-    struct ResourceEvent *object;
+    struct DisplayObject *object;
     unsigned char reserved04[0x2c];
     void *allocation;
     unsigned char reserved34[0x1c];
 };
 struct DisplayResource6c {
-    struct ResourceEvent *object;
+    struct DisplayObject *object;
     unsigned char reserved04[0x64];
     int texture_slot;
 };
@@ -82,9 +82,9 @@ struct ReviewScreenState {
     unsigned char reserveda8[0x10];
     int option;
     unsigned char reservedbc[0x38];
-    struct ResourceEvent *first_asset;
+    struct DisplayObject *first_asset;
     unsigned char reservedf8[0xc0];
-    struct ResourceEvent *second_asset;
+    struct DisplayObject *second_asset;
     unsigned char reserved1bc[0x20];
     struct MotionState motion;
     struct AssetSlot **slots19;
@@ -99,9 +99,9 @@ extern "C" {
 #endif
 extern struct ResourceEventPool data_00242238;
 extern struct ResourceControlState bss_00495c34, bss_00495c48, bss_00495c5c;
-extern void func_0019d3b4(struct ResourceEvent *event);
-extern void func_00183208(struct ResourceEvent *event);
-extern void func_0018663c(struct ResourceEvent *event);
+extern void func_0019d3b4(struct DisplayObject *event);
+extern void func_00183208(struct DisplayObject *event);
+extern void func_0018663c(struct DisplayObject *event);
 extern void func_00176e24(struct ScreenResourceManager *manager);
 extern void func_001e3548(struct W17SelectionOwner *component);
 #ifdef __cplusplus

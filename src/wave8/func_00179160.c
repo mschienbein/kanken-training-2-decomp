@@ -19,7 +19,7 @@ void func_00179160(struct W8DisplaySet *set, int index, float x, float y)
         func_0015e474(object, 0, object->scale[0], object->scale[1], object->scale[2]);
         break;
     case 6:
-        func_001816e0((struct BoundDisplayObject *)object, object->scale[0], object->scale[1]);
+        func_001816e0(object, object->scale[0], object->scale[1]);
         break;
     }
 }

@@ -33,12 +33,12 @@ struct W17SmallCollection {
 };
 struct W6DisplayCollection {
     unsigned char reserved00[0x18];
-    struct ResourceEvent **objects[1];
+    struct DisplayObject **objects[1];
 };
 struct W17WideHandle {
     unsigned int reserved00;
-    ResourceEvent *object;
-    ResourceEvent *get_object() { return object; }
+    DisplayObject *object;
+    DisplayObject *get_object() { return object; }
 };
 struct W17WideCollection {
     unsigned int reserved00;
