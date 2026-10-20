@@ -10,10 +10,9 @@ StyleOwner *func_001eade0(void)
             if (owner->slots[i] == 0)
                 owner->slots[i] = new (data_002232d5) W8DisplayHandle;
         }
-        /* [INFERENCE] Registration/release call identities were erased by armlink;
-         * the concrete callback still receives this owner, and its result is ignored. */
-        func_00216140(owner, reinterpret_cast<ObjectDestructor>(func_001eb0d0),
-                      func_00100000);
+        /* [INFERENCE] Typed source-only no-op registration; original call
+         * identity is erased. It neither stores nor invokes this callback. */
+        register_style_owner_cleanup(owner, func_001eb0d0, func_00100000);
         func_00215ec4(&data_0023ecdc);
     }
     return &bss_00245364;

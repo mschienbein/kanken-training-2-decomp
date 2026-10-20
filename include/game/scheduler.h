@@ -5,9 +5,15 @@ struct W19aScheduledTask;
 struct W19aScheduler;
 struct W19aTaskSelection;
 #include "game/service_state.h"
-/* Original 0010239c invokes the bound slot without consuming its result.
- * Existing int-returning callbacks are explicitly converted when registered. */
-struct ScheduledTaskBinding { void (*callback)(void); int wait; };
+/* One call-compatible C callback type, including the real int-result providers.
+ * Procedure callbacks have unspecified results that MUST be discarded. Their C
+ * definitions may fall through (C11 6.9.1p12); they must not become C++ bodies.
+ * Real result providers keep their returns. No machine-scratch result is inferred. */
+#ifdef __cplusplus
+extern "C" {
+#endif
+typedef int (*ScheduledTaskCallback)(void);
+struct ScheduledTaskBinding { ScheduledTaskCallback callback; int wait; };
 struct ScheduledTask {
     unsigned short enabled;
     short previous, next;
@@ -30,15 +36,13 @@ struct TransitionState {
     unsigned enabled;
     int active;
 };
-#ifdef __cplusplus
-extern "C" {
-#endif
 extern struct Scheduler bss_00495c8c;
 extern struct TransitionState bss_00290c90;
 extern int func_0019b54c(int task);
 extern int func_0019b564(void);
 extern void func_00195ad0(unsigned int index);
-extern void func_00190688(int index, void (*callback)(void));
+/* C mutation procedure: its unspecified result MUST be discarded. */
+extern int func_00190688(int index, ScheduledTaskCallback callback);
 extern void func_001071cc(void);
 extern void func_001074d0(void);
 extern void func_00107dbc(void);
@@ -51,21 +55,11 @@ extern void func_0012ced8(void);
 extern void func_001951dc(unsigned int handle);
 extern void func_0012d1c8(void);
 extern int func_00141c70(void);
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
-
-
-
-extern "C" {
-
-
 extern int func_001900a8(void);
-void func_00110a70(void);
+extern int func_00110a70(void);
+#ifdef __cplusplus
 }
 #endif
+
 
 #endif

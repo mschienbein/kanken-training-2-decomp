@@ -2,10 +2,12 @@
 #include "game/scheduler.h"
 
 
-extern void func_0013db40(void);
+extern int func_0013db40(void);
 
 
-void func_00135ae8(void)
+/* C-only procedure callback: every caller discards its value (C11 6.9.1p12).
+ * Do not consume the result or compile this definition as C++. */
+int func_00135ae8(void)
 {
     int slot = func_0019b564();
 

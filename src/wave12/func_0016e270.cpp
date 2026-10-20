@@ -19,8 +19,9 @@ extern "C" PromptManager *func_0016e270(void)
             }
             manager->objects = objects;
         }
-        /* [INFERENCE] callee identity: inlined by armlink */
-        func_00216140(manager, (ObjectDestructor)func_001c1970, func_00100000);
+        /* [INFERENCE] Typed source-only no-op registration; original call
+         * identity is erased. It neither stores nor invokes this callback. */
+        register_prompt_manager_cleanup(manager, func_001c1970, func_00100000);
         /* [INFERENCE] callee identity: inlined by armlink */
         func_00215ec4(&data_0023eff8.word);
     }
