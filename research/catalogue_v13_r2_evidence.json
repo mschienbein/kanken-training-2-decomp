@@ -1,0 +1,80 @@
+{
+  "adoption": false,
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "new_C_credit": 0,
+  "parent_evidence": {
+    "path": "research/catalogue_v13_evidence.json",
+    "sha256": "f27a8669ab8c48bf4682fc4bd2f6ae0cb342deedad45793d01a7b5c98eea4b3e"
+  },
+  "policy": "refuse_absent_consumption_and_bounded_read_veto_padding",
+  "qualification": "Distinct successor; no old report, proof or sealed FAIL is reinterpreted. Current-image geometry is not claimed unchanged before a granted fresh generation.",
+  "repairs": [
+    {
+      "finding": "V13-CODEX-F01",
+      "rule": "Declared absence is a confined relative assertion checked against original and historical sentinel locations. Optional presence probing returns only a boolean; resolve always refuses consumption of an absent label, including absolute or relative extra manifests."
+    },
+    {
+      "finding": "V13-CODEX-F02",
+      "rule": "Every intersecting bounded read veto excludes padding, including conditional and partially mapped reads; only the two explicitly broad endian/unbounded categories retain their prior qualification."
+    }
+  ],
+  "reviewed_failure": {
+    "path": "research/catalogue_v13_r2_review.json",
+    "sha256": "5b767baaf4965659e1e4c16e945ba3ead76e346420243348c8199d8d240a0b03"
+  },
+  "revision": "catalogue-v13-r2",
+  "schema_version": 1,
+  "sealed_failure": {
+    "bindings": [
+      {
+        "path": "scratch/review/catalogue-v13/codex/REPORT.md",
+        "sha256": "c000c2ff66ea3d63d86eb8e0bdb2fb5558194acfceade2f1bde8a05f90ae835b",
+        "size": 12311
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/REVIEW.json",
+        "sha256": "5b767baaf4965659e1e4c16e945ba3ead76e346420243348c8199d8d240a0b03",
+        "size": 46509
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/SEAL.json",
+        "sha256": "5e46697794546a96c57ab5284068e3e407e1bdd042596f757f9c706ccb7c98f3",
+        "size": 10483
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/frozen_absence_probe.py",
+        "sha256": "592f33135104ade84d9e16b29b03a9aebbe390689dab228284f5191dae0356f2",
+        "size": 1968
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/frozen-absence-probe.json",
+        "sha256": "cdbd94bebe552f6bc795344df12c4375034138807b18fdc41f8cbc86817c4673",
+        "size": 1034
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/frozen_absolute_probe_r2.py",
+        "sha256": "2953aeec4afdda203c7b2ab8284df7b3496ab76fd5387336a3cb1043de63ea36",
+        "size": 2188
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/frozen-absolute-probe-r2.json",
+        "sha256": "fc701317080957566c6e1eb56afbd3863b76d0b8957dc300eed8c80ff3987844",
+        "size": 814
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/padding_veto_probe.py",
+        "sha256": "99d90f738fe80846f802edaeda0acb788b5a850135f76285526d2cd017a887c9",
+        "size": 2387
+      },
+      {
+        "path": "scratch/review/catalogue-v13/codex/padding-veto-probe.json",
+        "sha256": "e3aa0408e761bbc57476fb91241f2ba42c197cc7635c7ccdd0bf6025e3b2b7c6",
+        "size": 925
+      }
+    ],
+    "proposal_sha256": "e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743",
+    "seal_sha256": "5e46697794546a96c57ab5284068e3e407e1bdd042596f757f9c706ccb7c98f3",
+    "source_commit": "0c3fd934009d50c18306d54df82abd5ac0da6d94",
+    "verdict": "FAIL"
+  }
+}

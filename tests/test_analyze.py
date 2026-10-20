@@ -96,6 +96,18 @@ def local_revision_fixture(root: Path, image_sha256: str, baseline: dict | None 
         inputs[label] = {"path": target, "size": len(content), "sha256": hashlib.sha256(content).hexdigest()}
     (root / catalogue_frozen.MANIFEST).write_bytes(analyze.serialize_catalogue(
         {"revision": "catalogue-v13", "inputs": inputs, "absent_paths": absent}))
+    review = {"verdict": "FAIL", "source_commit": "synthetic-v13",
+              "findings": [{"id": "V13-CODEX-F01"}, {"id": "V13-CODEX-F02"}]}
+    review_path = root / "research/catalogue_v13_r2_review.json"
+    review_path.write_bytes(analyze.serialize_catalogue(review))
+    repair = {"revision": "catalogue-v13-r2", "image_sha256": image_sha256,
+              "policy": "refuse_absent_consumption_and_bounded_read_veto_padding",
+              "parent_evidence": {"path": "research/catalogue_v13_evidence.json",
+                                  "sha256": hashlib.sha256((root / "research/catalogue_v13_evidence.json").read_bytes()).hexdigest()},
+              "reviewed_failure": {"path": str(review_path.relative_to(root)),
+                                   "sha256": hashlib.sha256(review_path.read_bytes()).hexdigest()},
+              "sealed_failure": {"source_commit": "synthetic-v13"}, "new_C_credit": 0, "adoption": False}
+    (root / "research/catalogue_v13_r2_evidence.json").write_bytes(analyze.serialize_catalogue(repair))
 
 
 def freeze_local_fixture(root: Path, image: bytes, layout, *, classifications: list[dict] | None = None,
@@ -1561,8 +1573,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v13")
-                self.assertEqual(result["generator"]["revision"], "catalogue-v13")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v13-r2")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v13-r2")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
                 self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
                 self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])

@@ -13,10 +13,29 @@ MANIFEST = "research/catalogue_v13_frozen.json"
 PREFIX = "research/catalogue_v13_frozen/"
 
 
-def load(root: Path) -> dict:
+def _manifest(root: Path) -> dict:
     manifest = json.loads((root / MANIFEST).read_bytes())
     if manifest["revision"] != "catalogue-v13" or not isinstance(manifest["inputs"], dict):
         raise ValueError("v13 requires a complete immutable generator input manifest")
+    absent = manifest.get("absent_paths", [])
+    if (not isinstance(absent, list) or any(not isinstance(label, str) for label in absent)
+            or len(set(absent)) != len(absent)):
+        raise ValueError("v13 declared absent paths must be a unique list")
+    for label in absent:
+        path = Path(label)
+        if (not label or path.is_absolute() or ".." in path.parts or not path.parts
+                or path.as_posix() != label or label in manifest["inputs"]):
+            raise ValueError("v13 declared absent path is not a confined exclusive relative label")
+        # No sentinel is ever returned. Check the historical sentinel as well
+        # so a materialized file or dangling symlink cannot masquerade as absence.
+        for candidate in (root / path, root / PREFIX / "absent" / path):
+            if candidate.exists() or candidate.is_symlink():
+                raise ValueError(f"v13 declared absent path is materialized: {label}")
+    return manifest
+
+
+def load(root: Path) -> dict:
+    manifest = _manifest(root)
     seen = set()
     for label, descriptor in manifest["inputs"].items():
         path = descriptor["path"]
@@ -35,11 +54,11 @@ def resolve(root: Path, label: str) -> Path:
     manifest_path = root / MANIFEST
     if not manifest_path.is_file():
         return root / label
-    manifest = json.loads(manifest_path.read_bytes())
+    manifest = _manifest(root)
     descriptor = manifest["inputs"].get(label)
+    if label in manifest.get("absent_paths", []):
+        raise ValueError(f"v13 declared absent input cannot be consumed: {label}")
     if descriptor is None:
-        if label in manifest.get("absent_paths", []):
-            return root / PREFIX / "absent" / label
         raise ValueError(f"v13 has no immutable copy for frozen input: {label}")
     path = descriptor["path"]
     if not path.startswith(PREFIX) or ".." in Path(path).parts:
@@ -48,3 +67,13 @@ def resolve(root: Path, label: str) -> Path:
     if len(content) != descriptor["size"] or hashlib.sha256(content).hexdigest() != descriptor["sha256"]:
         raise ValueError(f"v13 frozen input differs: {label}")
     return root / path
+
+
+def is_present(root: Path, label: str) -> bool:
+    """Probe optional inputs without manufacturing a consumable absence path."""
+    if not (root / MANIFEST).is_file():
+        return (root / label).is_file()
+    manifest = _manifest(root)
+    if label in manifest.get("absent_paths", []):
+        return False
+    return resolve(root, label).is_file()

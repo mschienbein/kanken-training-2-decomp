@@ -2549,13 +2549,13 @@ def load_protected_functions(root: Path, baseline: dict, manifests: list[Path], 
         import catalogue_frozen
     adopted = sorted(baseline["functions"], key=lambda function: function["address"])
     starts = [function["address"] for function in adopted]
-    names_path = catalogue_frozen.resolve(root, "config/names.json")
-    names = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path.is_file() else {}
-    inputs = {"config/names.json": hashlib.sha256(names_path.read_bytes()).hexdigest()} if names_path.is_file() else {}
+    names_path = catalogue_frozen.resolve(root, "config/names.json") if catalogue_frozen.is_present(root, "config/names.json") else None
+    names = json.loads(names_path.read_text(encoding="utf-8"))["symbols"] if names_path is not None else {}
+    inputs = {"config/names.json": hashlib.sha256(names_path.read_bytes()).hexdigest()} if names_path is not None else {}
     sources = {}
     paths = [root / "config/matches.json"]
     paths.extend(path for name in ("c004", "c005", "c006", "c007", "c008")
-                 if catalogue_frozen.resolve(root, str((path := root / f"config/candidates/{name}.json").relative_to(root))).is_file())
+                 if catalogue_frozen.is_present(root, str((path := root / f"config/candidates/{name}.json").relative_to(root))))
     paths.extend(manifests)
     for path in paths:
         label = str(path.relative_to(root)) if path.is_relative_to(root) else str(path)
@@ -2671,7 +2671,7 @@ def main(argv: list[str] | None = None) -> int:
                                 "catalogue_local_entries.py", "catalogue_alignment.py", "catalogue_non_c.py", "catalogue_frozen.py")}
         result["generator"] = {
             "command": "tools/analyze.py catalogue --out X",
-            "revision": "catalogue-v13",
+            "revision": "catalogue-v13-r2",
             "source_sha256": sources,
             "classification_input": classification_label,
             "bundled_review_applied": bundled,

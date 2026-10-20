@@ -1506,6 +1506,31 @@ def load_inputs(root: Path, parent_path: Path) -> tuple[dict, dict, dict]:
     frozen_path = root / catalogue_frozen.MANIFEST
     catalogue_frozen.load(root)
     inputs[catalogue_frozen.MANIFEST] = hashlib.sha256(frozen_path.read_bytes()).hexdigest()
+    repair_path = root / "research/catalogue_v13_r2_evidence.json"
+    repair_content = repair_path.read_bytes()
+    repair = json.loads(repair_content)
+    parent = repair["parent_evidence"]
+    if (parent["path"] != "research/catalogue_v13_evidence.json"
+            or hashlib.sha256((root / parent["path"]).read_bytes()).hexdigest() != parent["sha256"]
+            or repair["revision"] != "catalogue-v13-r2"
+            or repair["policy"] != "refuse_absent_consumption_and_bounded_read_veto_padding"
+            or repair["image_sha256"] != evidence["image_sha256"]
+            or repair["new_C_credit"] != 0 or repair["adoption"] is not False):
+        raise ValueError("v13-r2 fail-closed repair differs from its immutable v13 parent/image/policy")
+    review = repair["reviewed_failure"]
+    review_content = (root / review["path"]).read_bytes()
+    if (review["path"] != "research/catalogue_v13_r2_review.json"
+            or hashlib.sha256(review_content).hexdigest() != review["sha256"]):
+        raise ValueError("v13-r2 reviewed failure binding differs")
+    reviewed = json.loads(review_content)
+    if (reviewed["verdict"] != "FAIL"
+            or {row["id"] for row in reviewed["findings"]} != {"V13-CODEX-F01", "V13-CODEX-F02"}
+            or reviewed["source_commit"] != repair["sealed_failure"]["source_commit"]):
+        raise ValueError("v13-r2 does not bind both exact sealed fail-closed findings")
+    evidence["fail_closed_revision_v13_r2"] = repair
+    evidence["revision"] = repair["revision"]
+    inputs[str(repair_path.relative_to(root))] = hashlib.sha256(repair_content).hexdigest()
+    inputs[review["path"]] = review["sha256"]
     return evidence, prior, inputs
 
 
@@ -1704,3 +1729,5 @@ def enrich_review(candidate: dict, prior: dict, image: bytes, layout, evidence: 
     if "alignment_revision" in evidence:
         candidate["revision_review"]["section_alignment_v13"] = closure.get("section_alignment_v13", {})
         candidate["revision_review"]["non_c_v13"] = closure.get("non_c_v13", {})
+    if "fail_closed_revision_v13_r2" in evidence:
+        candidate["revision_review"]["fail_closed_revision_v13_r2"] = evidence["fail_closed_revision_v13_r2"]

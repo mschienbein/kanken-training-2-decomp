@@ -146,6 +146,14 @@ def _no_reference(catalogue: dict, sections: list[dict], first: int, end: int, *
     for row in catalogue.get("closure_evidence", {}).get("read_footprints", []):
         if _overlap(first, end, row["start"], row["end"]):
             raise ValueError("v13 alignment interval overlaps an exact architectural read")
+    # Conditional/partially mapped fixed-width reads remain exact exclusions.
+    # Only the two explicitly broad, non-address-certified veto categories keep
+    # v13's reviewed qualification; they are not evidence of an actual gap read.
+    broad_vetoes = {"unproved_data_endian_pool_value_veto_only",
+                    "unmodeled_or_unbounded_static_read_veto_only"}
+    for row in catalogue.get("closure_evidence", {}).get("read_vetoes", []):
+        if row["evidence"] not in broad_vetoes and _overlap(first, end, row["start"], row["end"]):
+            raise ValueError("v13 alignment interval overlaps an exact bounded read veto")
     for row in catalogue.get("pc_relative_pointer_witnesses", []):
         if first <= row["target"] < end:
             raise ValueError("v13 alignment interval has an incoming pointer reference")
