@@ -1,0 +1,21 @@
+{
+  "authority": "Main direct authorization2026-10-20; both headers introduced only inside c009 scratch worktree, absent from main, all users migrated and isolatedMATCH",
+  "headers": {
+    "include/game/menu_sequence.h": {
+      "sha256": "a0cca428be4368092b97cb3f0a261dd68b411f64abb39f2da46c387789238b14",
+      "content": "#ifndef GAME_MENU_SEQUENCE_H\n#define GAME_MENU_SEQUENCE_H\n\n\n\n#ifdef __cplusplus\n/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */\nstruct W19aMenuSequence;\n\nstruct W19aMenuSequence {\n    unsigned char reserved00[0x90];\n    unsigned current;\n    unsigned reserved94;\n    unsigned entries[9];\n\n    void set_entry(unsigned index, unsigned value)\n    {\n        entries[index] = value;\n    }\n};\n\nextern \"C\" {\nvoid func_001e3050(W19aMenuSequence *state);\n}\n#endif\n\n#endif\n"
+    },
+    "include/game/sound_types.h": {
+      "sha256": "8de65601da37969b5c307727ef1d38e1b4e8e5043380da6a3200507d0e7a6a13",
+      "content": "#ifndef GAME_SOUND_TYPES_H\n#define GAME_SOUND_TYPES_H\n\n\n\n#ifdef __cplusplus\n/* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */\nstruct W15iSoundType;\n\nstruct W15iSoundType {\n    const unsigned *vtable;\n};\n\nextern \"C\" {\nextern const unsigned data_002244b4[];\n}\n#endif\n\n#endif\n"
+    }
+  },
+  "replacement_contracts": {
+    "menu_sequence.h": "game/training_screen.h L041InitializeScreen current/states/phase and native set_entry",
+    "sound_types.h": "game/sound_controller.h ResourceState001d0164 caller-derived base"
+  },
+  "match_evidence": [
+    "scratch/integrator/c009/probe-owner-match-r1.json",
+    "scratch/integrator/c009/probe-owner-match-r2.json"
+  ]
+}

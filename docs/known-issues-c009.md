@@ -2,8 +2,8 @@
 
 ## Status
 
-**Current continuation: finalized main 261fdc9 / cmodels sequence 9 is merged at
-b8f15ed; frozen GATES v1.19 and denominator v9-r2. Not accepted.**
+**Ready for Main prepare and independent review with qualifications.** Finalized
+main 261fdc9 / cmodels sequence 9 is merged; frozen GATES v1.19 and v9-r2 unchanged.
 Every current isolated match and the eventual Main prepare explicitly select
 **armlink5-inline-branchnop-v6 + anonymous-string-records-v1** (the accepted
 cmodels pair, so no model transition). Earlier v2/none instructions are superseded;
@@ -14,7 +14,7 @@ with their supplied helper closure after receiver/reset/visual-owner reconciliat
 Main alone owns full builds, the suite, prepare/finalize and accepted-record writes.
 
 `config/candidates/c009.json` lists **676 units / 676 functions / 57,052 target
-bytes**. These are unaccepted scope totals; the final current-tree sweep is pending:
+bytes**. These are unaccepted totals; final required-source sweep is complete.
 
 | Frozen profile | Units/functions | Target bytes |
 | --- | ---: | ---: |
@@ -26,6 +26,30 @@ Previous collect inputs, successful destination receipts, dirty sources and auth
 were recovered rather than restarted. L042's recovered `func_001e3af4` is included. Both
 w17h SDK alternate MATCH rows (`00190688`, `001dbaac`) are included. Model selection
 is explicit rather than inferred from author receipts or optional manifest metadata.
+
+## Current pre-review evidence
+
+- Exact required sweep: **832 units / 838 functions, all MATCH, exit 0**.
+- Whole proposed ledger G3: **2,238 units**, 1,728 checked C units, **zero
+  disagreements/policy items/unchecked C**, 510 explicitly waived C++ units; exit 0.
+- Native canonical probes: **1,940 units, zero compilation failures**. Exit 1
+  reports ten nonfatal diagnostic units, all individually qualified (signed raw
+  error constants, natural assignment-in-condition, and public imported-header warnings).
+- Actual C signatures: **1,500**, zero failures/diagnostics, exit 0; whole **174
+  game-header** C++ co-inclusion also exits 0 with no diagnostics.
+- Argcheck: **2,297 functions**, 78 reported issues and 412 notes all adjudicated;
+  actual exit 2 retains 389 mechanically unchecked function ABIs, not a false parser PASS.
+- Complete original indirect inventory: 1,212 sites; zero untyped callable-storage
+  candidates and zero required callback-object gaps. All sites dispositioned;
+  85 forwarded-type candidates individually adjudicated.
+- All **seven integrator pre-review steps** have **838 destination-bound rows**.
+  R1 identity provenance, original counted loops, ARMCC extensions, original bugs and
+  native ABI limitations remain explicit qualifications for independent reviewers.
+
+Current private binding: `scratch/integrator/c009/PRE-REVIEW-resume-r1.json` and
+`readiness-scope-r10.json`. No full build, test suite, prepare, finalize, accepted
+record write or push was run here. Main owns those gates and both independent reviews.
+
 
 ## Preserved historical failure evidence
 
@@ -72,13 +96,12 @@ is explicit rather than inferred from author receipts or optional manifest metad
   No shadow global/return type, call alias or steering recovers the missing bytes.
   Current revised scope is **122 units / 126 functions**; required union is
   **798 units / 802 functions**, dry ledger **2,203 units / 2,277 functions**.
-* The resumed final audits use **819 required units / 824 functions**, comprising
-  676 additions, **127 source-revised accepted units / 131 functions**, and the
-  other **17 accepted functions** reopened by changed R1 header contracts.
-  The exact dry ledger is **2,238 units / 2,297 functions** and preserves every
-  one of the **1,621 accepted identities**. No move or withdrawal of accepted credit.
-  `readiness-scope-r7.json` binds the current scope, headers and explicit models;
-  the current final matching/G3/native/signature/argcheck/pre-review audits are pending.
+* The earlier resumed r7 snapshot had 819 required units / 824 functions and
+  127 revised accepted units / 131 functions. Subsequent compiler-probe caller
+  reconciliation expands the final required scope to **832 units / 838 functions**
+  and **142 revised accepted units / 147 functions**. All 1,621 accepted identities
+  survive in the 2,238-unit / 2,297-function dry ledger; no owner moves or retirements.
+  Current exact inputs are `readiness-scope-r10.json`; earlier inputs/failures remain intact.
 * Collection closure is recorded in `collection-closure-r1.json`; its six original
   MATCH measurements remain historical. Current scope retains five: the game reader
   now uses the genuine native API, while the separate middleware reader is withdrawn.

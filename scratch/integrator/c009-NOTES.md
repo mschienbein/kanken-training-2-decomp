@@ -22,17 +22,24 @@ Scoped **001b8908**, **001e0afc**, **001ed874** all MATCH with the supplied orig
 helper closure under v6+L1 (`widget-receiver-match-r3.json`). The earlier failed
 merged-header witness is kept in `widget-receiver-match-r2.json`.
 
-Current candidate scope **676 new functions / 57,052 B**; **127 revised accepted
-units / 131 functions**, plus remaining header-reopened R1 functions, give **819
-required units / 824 functions**. Dry ledger **2,238 units / 2,297 functions** retains
-all **1,621 accepted identities**. `readiness-scope-r7.json` is current authority.
+Current candidate scope **676 new functions / 57,052 B**; **142 revised accepted
+units / 147 functions**, plus remaining header-reopened R1 functions, give **832
+required units / 838 functions**. Dry ledger **2,238 units / 2,297 functions** retains
+all **1,621 accepted identities**. `readiness-scope-r10.json` is current authority.
 `00113c0c`/`0018ee88` stay evidenced new-function deferrals; accepted `001c4494`
 Result/int-output and migrated `0019d5dc` remain intact. Plain original `001c20e8`
 retains its `[INFERENCE]` note and mandatory **QUALIFIED** pre-review/review row.
 
-The exclusive sequential matching/G3/native/signature audits are running or queued.
-No full build, suite, prepare, finalize, accepted-record write or push occurs here.
-No current full pre-review PASS is claimed before those audits/adjudications close.
+**Ready source boundary 1851bf3.** Final matching **832/832 units MATCH**;
+G3 **zero errors/policy items/unchecked C**, 510 explicitly waived C++ units;
+1,500 actual C signatures and 174-header co-inclusion both clean. Native 1,940
+units have zero compiler failures and ten nonfatal diagnostic units, all qualified.
+Final argcheck exit2 is retained: 78 issues / 412 notes all individually adjudicated,
+389 mechanical ABI gaps explicitly supplemented by native/source/indirect evidence.
+All seven integrator pre-review steps have 838 exact destination-bound rows;
+`PRE-REVIEW-resume-r1.json` binds manifests, source/header hashes and exercised exits.
+No full build, suite, prepare, finalize, accepted-record write or push was run here.
+Main alone owns full gates and independent reviews. Heavy slot is released on handoff.
 
 ## Bounded mismatch closure after 66ae993
 
