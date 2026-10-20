@@ -13,7 +13,6 @@
 #include "game/transition_controller.h"
 
 /* [INFERENCE] Separate receiver views, not a claim of common historical class identity. */
-#ifdef __cplusplus
 struct ColorPanel;
 struct TextPanel;
 struct FooterPanel;
@@ -26,7 +25,12 @@ union TrainingControls {
     struct AnimationOwner *animation;
     struct W6ListController *list;
 };
+#ifdef __cplusplus
 struct TrainingScreen : CallbackTarget {
+#else
+struct TrainingScreen {
+    const void *vtable;
+#endif
     unsigned char reserved04[0x10];
     struct W10DrawingInput *drawing;
     unsigned char reserved18[0x24];
@@ -70,13 +74,19 @@ struct TrainingScreen : CallbackTarget {
     unsigned char reserved4b2[0x1e];
     struct SelectionGrid *grid;
 };
+#ifdef __cplusplus
 extern "C" {
+#endif
 void func_001b8908(struct TrainingScreen *screen);
 void func_001b9f18(struct TrainingScreen *screen);
+#ifdef __cplusplus
 extern const MemberCallback data_002184b0;
+#endif
 void func_0016d6dc(struct TrainingScreen *screen, int enabled);
 void func_0016d600(struct TrainingScreen *screen, int mode, int enabled);
+#ifdef __cplusplus
 }
+#endif
 struct L041Dialog;
 struct L041HandwritingPanel;
 struct L041PromptTable;
@@ -142,9 +152,21 @@ struct L041InitializeScreen {
     bool free_mode;
     unsigned char reserved3ee[2];
     int identifier;
+#ifdef __cplusplus
+    void set_entry(unsigned index, unsigned value)
+    {
+        states[index] = value;
+    }
+#endif
 };
+#ifdef __cplusplus
 extern "C" {
 extern const MemberCallback data_00218718;
+}
+#endif
+#ifdef __cplusplus
+extern "C" {
+#endif
 extern void func_001dc170(int value);
 extern void func_001dc230(int value);
 extern struct TransformEntry *func_00174454(int group, int index);
@@ -168,6 +190,7 @@ extern void func_00175a5c(struct AnimationOwner *owner, int index,
 extern void func_001758e4(struct L041Accessory *accessory);
 extern int func_0017abf8(int channel, int sound);
 void func_001e0afc(struct L041InitializeScreen *screen);
+#ifdef __cplusplus
 }
 #endif
 

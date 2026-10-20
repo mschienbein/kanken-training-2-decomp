@@ -16,6 +16,13 @@ struct FileHandleOwner {
     unsigned reserved00;
     unsigned handle;
 };
+struct InterfaceVTable {
+    unsigned char reserved[0x30];
+    void (*release)(Interface *object);
+};
+struct Interface {
+    const InterfaceVTable *vtable;
+};
 struct FileHandle {
     Interface *object;
     unsigned reserved;

@@ -48,7 +48,9 @@ struct NotificationFields {
     signed char mode;
     unsigned char reserved36[2];
     int history_enabled;
-    unsigned char reserved3c[0x259c];
+    unsigned char reserved3c[0x0c];
+    unsigned char saved_flag;
+    unsigned char reserved49[0x258f];
     struct W10HistoryGrade history[12];
     unsigned char reserved61d8[0xc0];
     struct NotificationDayEntry days[180];
@@ -111,6 +113,13 @@ extern unsigned short *func_00172008(int index);
 extern void func_00172d48(int index);
 extern void func_0016fccc(int selection);
 extern int func_001758d4(void);
+extern struct TransformEntry *func_00174454(int group, int index);
+extern void func_001dc918(int grade, int index, int value);
+extern void func_001dc744(int grade, int index, int value);
+extern void func_001dc170(int value);
+extern void func_001dc230(int value);
+extern void func_001dbcec(int grade, int category, int value);
+extern void func_001dbfdc(int grade, int category, int value);
 #ifdef __cplusplus
 }
 #endif

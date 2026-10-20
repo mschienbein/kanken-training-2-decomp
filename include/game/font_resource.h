@@ -188,6 +188,7 @@ extern int func_001f4cec(const struct FontResourceReader *reader);
 #endif
 
 
+#include "game/render_state.h"
 #ifdef __cplusplus
 /* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
 
@@ -199,13 +200,8 @@ struct FontManager {
 };
 
 extern "C" {
-typedef void *(*AllocationCallback)(unsigned module, unsigned kind,
-                                    unsigned id, unsigned size);
-typedef void (*ReleaseCallback)(unsigned module, unsigned kind,
-                                unsigned id, void *memory);
 extern unsigned char data_00242f8c;
 extern void func_0018f0dc(int count, const unsigned *handles);
-extern void func_00215e88(AllocationCallback *allocate, ReleaseCallback *release);
 extern const unsigned data_00224128[];
 extern PoolList *func_001cc4cc(PoolList *list);
 extern PoolList *func_001cc12c(PoolList *list);

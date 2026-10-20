@@ -38,6 +38,8 @@ struct FramebufferManager {
     struct Renderbuffer *bound_renderbuffer;
 };
 
+typedef void *(*AllocationCallback)(unsigned module, unsigned kind, unsigned id, unsigned size);
+typedef void (*ReleaseCallback)(unsigned module, unsigned kind, unsigned id, void *memory);
 struct AllocationSystem {
     void *(*allocate)(unsigned module, unsigned kind, unsigned id, unsigned size);
     void (*release)(unsigned module, unsigned kind, unsigned id, void *memory);
@@ -46,6 +48,7 @@ struct AllocationSystem {
     void *memory;
 };
 extern struct AllocationSystem data_002429f4;
+extern void func_00215e88(AllocationCallback *allocate, ReleaseCallback *release);
 
 struct SubmissionState {
     unsigned command_mode;

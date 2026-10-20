@@ -140,6 +140,33 @@ def enhanced(function: dict, blocks: list, successors: list, decoder, image,
                                  "bits": access[1], "signed_load": access[2],
                                  "location": indirect.describe(memory_location(
                                      instruction, fact, state))})
+            elif instruction.id in (capstone.arm.ARM_INS_LDRD, capstone.arm.ARM_INS_STRD):
+                location = memory_location(instruction, fact, state)
+                operation = "read" if instruction.id == capstone.arm.ARM_INS_LDRD else "write"
+                for offset in (0, 4):
+                    accesses.append({"site": ac.address(fact.address), "operation": operation,
+                                     "bits": 32, "signed_load": False,
+                                     "location": indirect.describe(indirect.add(location, offset))})
+            elif instruction.id in (capstone.arm.ARM_INS_VSTMIA, capstone.arm.ARM_INS_VSTMDB,
+                                     capstone.arm.ARM_INS_VLDMIA, capstone.arm.ARM_INS_VLDMDB):
+                operands = instruction.operands
+                base = indirect.plain(state.get(ac.canonical(
+                    instruction.reg_name(operands[0].reg))),
+                    instruction.cc if fact.conditional else None)
+                registers = [instruction.reg_name(op.reg) for op in operands[1:]
+                             if op.type == capstone.arm.ARM_OP_REG]
+                width = sum(8 if register.startswith("d") else 4 for register in registers)
+                decrement = instruction.id in (capstone.arm.ARM_INS_VSTMDB,
+                                                capstone.arm.ARM_INS_VLDMDB)
+                offset = -width if decrement else 0
+                operation = "write" if instruction.id in (
+                    capstone.arm.ARM_INS_VSTMIA, capstone.arm.ARM_INS_VSTMDB) else "read"
+                for register in registers:
+                    bits = 64 if register.startswith("d") else 32
+                    accesses.append({"site": ac.address(fact.address), "operation": operation,
+                                     "bits": bits, "signed_load": False,
+                                     "location": indirect.describe(indirect.add(base, offset))})
+                    offset += bits // 8
             if instruction.id == capstone.arm.ARM_INS_ASR or any(
                     op.shift.type == capstone.arm.ARM_SFT_ASR for op in instruction.operands):
                 signed_shifts.append(ac.address(fact.address))
