@@ -1,5 +1,56 @@
 # c011 — default-model author MATCH integration milestone
 
+## Authorized seven-target increment (2026-10-20, r9)
+
+Consumed exactly the new np038/039/040/044/050/060/062 rows from
+`CODEX-DEFAULT-UNRESERVED-r1.json`: **five units / five new functions / 1,044 B**
+collected, **two new contract deferrals / 188 B** retained. The other ten rows
+are existing deferrals and were explicitly carried without renewed investigation.
+The prior **98-function / 13,732 B** source scope and **82 deferrals** survive.
+Cumulative proposal: **95 units / 103 new functions / 14,776 B**, plus the same
+**10 context moves / 984 B**; **84 contract deferrals / 17,228 B**.
+
+- The full-width filesystem token now has one actual six-input
+  `CtrResult(unsigned *, ArchiveInfo *, unsigned, unsigned char,
+  unsigned long long, unsigned)` contract. Parent `0011f6a8` had still forwarded
+  three independently typed words and a `void *`; this was a real parent conflict.
+- Per Main's priority instruction, that correction was isolated in
+  **`f5c402ae65b6464fb4bbac6d8975d224a025bc56`**, containing only the two parent
+  code files plus their standalone patch/receipt/witnesses. No child `00117ad8`
+  declaration, credit or manifest was included. `PARENT-ARCHIVE-TOKEN-CUTOVER-r1.json`
+  binds the exact parent-only header and wrapper hashes.
+- **Main applied the two-file correction surgically before c010 G3/prepare.**
+  Its actual parent header differs from the child header; the recorded r69
+  parent-directory witnesses both exit 0 (wrapper 32 B/game, terminal 112 B/sdk).
+  `PARENT-ARCHIVE-TOKEN-APPLICATION-r1.json` binds Main's receipt. No blanket
+  predecessor/child merge or child credit followed.
+- Shared the handwriting candidate/length views through the existing workspace
+  header, retaining both original pointer ABIs. The destination keeps genuine
+  `0015ad74` mismatch **284/288 B**; only `0015b950` is claimed.
+- Reused the initialized-byte `ArchiveReader`, not the incompatible three-pointer
+  native reader. The sound loader adds only its real native self-definition name.
+  The channel command retains both unsigned-word inputs and its existing typed
+  manager/packet operations.
+- np038's private volatile counters still conflict with canonical nonvolatile
+  counters; no unproved asynchronous retag or volatile-only steering was added.
+  np039 requires a genuine mismatching scheduler and five other mismatching
+  bodies. FixC009R3Codex's unfrozen C/int-callback trial is not this C++/void
+  contract: no competing scheduler, callback cast, visibility stub or source cut
+  was adopted. All full-TU statuses and author obligations remain explicit.
+- Only **ten sequential bounded v6/L1 `match.py --show 0` runs** were used:
+  five new targets and three direct dependencies MATCH in r23, plus two separate
+  parent-only header witnesses in r24. The mixed-TU exit 1 is retained. Main's
+  later two parent-directory runs are external evidence, not rerun here.
+
+Current records: `INTAKE-r9.json`, `DISPOSITIONS-r5.json`,
+`CONSUMED-RESULTS-r9.json`, `DESTINATION-SOURCE-SCOPE-r9.json` and
+`DESTINATION-CLOSURE-r9.json`. All prior holds/reservations remain. Main still
+owns final-parent/header dependency closure, interfaces/callers/emitted ownership,
+full builds/tests, prepare, review, finalize and push. No heavy closure was run.
+
+Earlier milestones below are preserved history, not the current counts.
+
+
 ## Codex named-intake source milestone (2026-10-20, r7)
 
 Preserved source-complete tip `1814a725` and every earlier candidate, attempt,

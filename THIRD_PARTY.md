@@ -35,6 +35,14 @@ modification notes and unrecovered historical-identity qualifications remain
 in source. Exact delivery and destination bindings are recorded in
 `scratch/integrator/c011/INTAKE-r7.json` and `DESTINATION-CLOSURE-r8.json`;
 they grant no library/helper or accepted credit.
+The r9 intake adapts the pinned sound archive loader's embedded-group wave-table
+setup in `src/checkpoint11/intake-r9/np060/archive_loader.cpp`, retaining its
+GPL-3.0-only source/modification notice and original missing-file behavior.
+It uses the actual canonical initialized-byte reader instead of aliasing the
+older public reader layout. `INTAKE-r9.json` and `DESTINATION-CLOSURE-r9.json`
+under `scratch/integrator/c011/` bind this reconstruction; no library/data or
+accepted credit is implied.
+
 
 
 

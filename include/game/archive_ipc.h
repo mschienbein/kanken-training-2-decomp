@@ -3,6 +3,11 @@
 
 struct ArchiveInfo;
 struct ArchiveOutputCommand;
+struct WordPair;
+
+/* [INFERENCE] Filesystem token, distinct from the sound ArchiveHandle.
+ * Both consecutive words are forwarded to the terminal IPC operation. */
+struct FileArchiveHandle { unsigned long long value; };
 
 #include "ctr/svc.h"
 #include "game/runtime.h"
@@ -33,6 +38,9 @@ extern CtrResult func_0012d550(unsigned *count, struct ArchiveInfo *entries,
 extern CtrResult func_0011f6a8(unsigned *count, struct ArchiveInfo *entries,
     unsigned capacity, unsigned char mode, unsigned long long token,
     unsigned index);
+extern struct WordPair *func_00117ad8(struct WordPair *result,
+    const struct FileArchiveHandle *archive, unsigned *count,
+    struct ArchiveInfo *entries, unsigned capacity, unsigned index);
 #ifdef __cplusplus
 }
 #endif

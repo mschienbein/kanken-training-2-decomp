@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "previous_ownership_basis": "OWNERSHIP-INPUTS-r8.json",
+  "basis": [
+    {
+      "kind": "accepted",
+      "path": "config/matches.json",
+      "sha256": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4",
+      "functions": 1621,
+      "authority": "accepted"
+    },
+    {
+      "kind": "c009",
+      "path": "config/candidates/c009.json",
+      "sha256": "58e16539243fcb470c0a61db54d36f8b08b89b2ffe407bcc9610b0168278849f",
+      "functions": 676,
+      "authority": "unaccepted source proposal"
+    },
+    {
+      "kind": "c010",
+      "path": "scratch/worktrees/c010/config/candidates/c010.json",
+      "sha256": "5f0ea8fe65607d09cb8e24b1ad51d69df31a6ce5eec128fc42c5884cf604acc3",
+      "functions": 509,
+      "authority": "unaccepted source proposal"
+    },
+    {
+      "kind": "cmodels2",
+      "path": "scratch/worktrees/cmodels2/config/candidates/cmodels2.json",
+      "sha256": "78b1507e214381e03549ccba70d6441e2ac77bd94b1d7a97db32e7e33d4458e6",
+      "functions": 5,
+      "authority": "unaccepted source proposal"
+    },
+    {
+      "kind": "c011",
+      "path": "scratch/worktrees/c011/config/candidates/c011.json",
+      "sha256": "66880cecfd42a8b959545dc32df2b667d52dc8e5e6392c1df0e6305dc223a97a",
+      "functions": 113,
+      "authority": "unaccepted source proposal"
+    }
+  ],
+  "new_identity_owners": {
+    "func_00106fe8": [],
+    "func_00107f0c": [],
+    "func_00117ad8": [],
+    "func_00138274": [],
+    "func_0015b950": [],
+    "func_00185934": [],
+    "func_001911f0": []
+  },
+  "preserved_moves": [
+    {
+      "function": "func_00152560",
+      "from": "src/wave13/func_00152560.c",
+      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp"
+    },
+    {
+      "function": "func_0014fe14",
+      "from": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_0014feac",
+      "from": "src/checkpoint10/func_0014feac.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_00155ab4",
+      "from": "src/checkpoint10/func_00155ab4.c",
+      "to": "src/checkpoint11/aux_channel_publication-r3.c"
+    },
+    {
+      "function": "func_001650f8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1ebc",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1ed8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f20",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f34",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f4c",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    }
+  ],
+  "prior_reservations": "PARENT-OWNERSHIP-UPDATE-r1.json",
+  "parent_archive_token_prerequisite": {
+    "commit": "f5c402ae65b6464fb4bbac6d8975d224a025bc56",
+    "record": "PARENT-ARCHIVE-TOKEN-CUTOVER-r1.json",
+    "must_land": "before c010 G3/prepare, without child credit"
+  },
+  "qualification": "Ownership metadata only, not an emitted-owner audit. No prior accepted identity, context move or reservation released. No predecessor branch merged."
+}
