@@ -1,0 +1,35 @@
+{
+  "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_00113e78",
+    "func_001f0008",
+    "func_001f0018"
+  ],
+  "author": "nw4c",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/font_ResFontBase_ctor.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/093"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "e96372bf88b46931821c73415df2f9ed5c1c00e725431710dd8f4fc0f914e035",
+  "receipt": "scratch/g3u-pr5/093/font_ResFontBase_ctor.result.json",
+  "receipt_sha256": "a0e8279dfd10fea6e3bcf84b8a7d69493a91293b86700d86dcd60ec7b7515e74",
+  "extra_source_sha256": {},
+  "output": "MATCH    _ZN2nw4font11ResFontBaseC1Ev @ 0x113e78 size 0x34/0x34\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv @ 0x1f0008 size 0x10/0x10\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv @ 0x1f0018 size 0x10/0x10\n"
+}

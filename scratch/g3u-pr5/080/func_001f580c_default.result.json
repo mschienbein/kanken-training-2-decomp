@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/checkpoint10/func_001f580c_default.c",
+ "source_sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+ "profile": "middleware",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "04f8b8cdb3ef1eb7cae9f7d0abf651cdcff703971524fb26af1276b770fecac3",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/models/object_registration/resource_service_lock.c",
+   "source_sha256": "3f5b2311d8af64bab6e18a40ec0d897f47c8ee8ebabd65878d09ffee01d5537b",
+   "object_sha256": "c6d45c008486d8ce634448621c93331f215427d974e756c53fb4d8b6827af275"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_resource_service_lock_cleanup"
+   ],
+   "section": "i.register_resource_service_lock_cleanup",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/080/extra-0-resource_service_lock.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001f580c",
+   "address": 2054156,
+   "size": 96,
+   "candidate_size": 96,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 20,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_resource_service_lock_cleanup"
+      ],
+      "section": "i.register_resource_service_lock_cleanup",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/080/extra-0-resource_service_lock.o"
+     }
+    }
+   ]
+  }
+ ]
+}

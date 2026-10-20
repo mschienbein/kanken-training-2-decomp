@@ -1,0 +1,41 @@
+{
+  "source": "src/checkpoint10/alternate1/func_001650f8.c",
+  "profile": "middleware",
+  "functions": [
+    "func_001650f8",
+    "func_001f1ebc",
+    "func_001f1ed8",
+    "func_001f1f20",
+    "func_001f1f34",
+    "func_001f1f4c"
+  ],
+  "author": "w22a",
+  "qualifications": [
+    "[INFERENCE] noinline is a descriptive/code-generation choice preserving the outlined shared search, not recovered original attribute syntax; applies to every function in this unit."
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/alternate1/func_001650f8.c",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/000"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "a419a52ddf5e188188a89603846e5fe964805cc6f0803a0802b4f1a92f8ac823",
+  "receipt": "scratch/g3u-pr5/000/func_001650f8.result.json",
+  "receipt_sha256": "51a4a282e27386238a9ef16c84e25d8c943c0509ab330413c96a8262a9d0af2a",
+  "extra_source_sha256": {},
+  "output": "MATCH    func_001650f8 @ 0x1650f8 size 0xc0/0xc0\nMATCH    func_001f1ebc @ 0x1f1ebc size 0x1c/0x1c\nMATCH    func_001f1ed8 @ 0x1f1ed8 size 0x1c/0x1c\nMATCH    func_001f1f20 @ 0x1f1f20 size 0x14/0x14\nMATCH    func_001f1f34 @ 0x1f1f34 size 0x18/0x18\nMATCH    func_001f1f4c @ 0x1f1f4c size 0x18/0x18\n"
+}

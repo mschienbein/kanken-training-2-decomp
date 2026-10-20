@@ -1,0 +1,33 @@
+{
+  "source": "src/checkpoint10/collect-r2/nw-reader.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001c5ad4"
+  ],
+  "author": "r4007",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/collect-r2/nw-reader.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/g3u-pr5/011"
+  ],
+  "exit_code": 0,
+  "credited_functions_match": true,
+  "source_sha256": "81f49008201f5ea001aa729bdc34fe5f4f733f808ccd35050fce45a7a81f12bd",
+  "receipt": "scratch/g3u-pr5/011/nw-reader.result.json",
+  "receipt_sha256": "ca55ba690c3509cf56b2ad949f6ec8bc2c9cfd364fe38b6019cf08e15c048030",
+  "extra_source_sha256": {},
+  "output": "MATCH    _ZN2nw4font14CharStrmReader16ReadNextCharUTF8Ev @ 0x1c5ad4 size 0x6c/0x6c\n"
+}
