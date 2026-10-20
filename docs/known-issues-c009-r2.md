@@ -2,12 +2,13 @@
 
 ## Status
 
-Remediated; awaiting a fresh prepare and two independent reviews. No new credit is
-claimed by this document. Selection remains `armlink5-inline-branchnop-v6` plus
+**FAIL — both independent Codex reviews found incompatible callback erasure.**
+The preparation passed, but this checkpoint is not finalized and grants no new
+credit. Selection remains `armlink5-inline-branchnop-v6` plus
 `anonymous-string-records-v1`, frozen GATES v1.19 and denominator v9-r2.
-The candidate manifest still contains 676 new functions / 57,052 B; all 1,621
-previously accepted identities remain present. The retry also reopens the corrected
-accepted `src/wave2/func_0011d260.c`.
+The proposed ledger contains 676 additions / 57,052 B and preserves all 1,621
+accepted identities. Remediation continues under the distinct `c009-r3` name;
+neither failed checkpoint nor either review is rewritten.
 
 ## Preserved failed checkpoint
 
@@ -43,9 +44,36 @@ Private provenance:
 - Its `snapshot-consumer-r1/` gives `func_001272bc` MATCH of 28/28 B, exit 0,
   retaining the flexible-tail consumer's behavior.
 
-These are bounded remediation witnesses, not two fresh whole-ledger builds. The new
-prepare must recompile the complete ledger, run G3 and the suite, and bind all current
-source/header hashes. Its actual required review set is authoritative.
+The subsequent c009-r2 preparation at source `f904980` passed all six checks with
+actual exit 0. Both fresh builds reproduced the complete original `code.bin`
+and compressed image for 2,297 functions / 252,960 B. G3 and the 806-test suite
+passed (one skip). The authoritative independent review scope was 839 functions
+across 833 units; exact bytes did not close the source-level callable contracts.
+
+## Independent review failures
+
+Both reviews are sealed and registered under `accept/c009-r2/reviews/`.
+Each independently re-derived every required function, inspected both complete
+receipts, and adjudicated argcheck's actual exit 2, including 78 issues and
+412 notes. The 389 mechanically unchecked ABIs remain explicit qualifications.
+
+- **codex-b F01:** `func_00110a70` stores the int-returning `func_001900a8`
+  through a `void (*)(void)` cast. The scheduler actually invokes that slot;
+  ignoring a result does not make the function types call-compatible.
+- **codex-b F02 / codex-a F01:** `func_00214580` converts
+  `ResetReference *(*)(ResetReference *)` to the vector runtime's
+  `void *(*)(void *)` callback. The runtime actually invokes it. Equal pointer
+  representation alone is not a compatible C function type.
+- **codex-a F01** also blocks the new singleton/destructor erasure casts in
+  `func_001819f4`, `func_001eade0` and `func_00167284`. The other reviewer
+  qualified those three because their inferred registration callee is empty;
+  that difference does not waive the blocking source-policy finding.
+
+All five units and the same class of callback contracts must be reconciled
+before the successor is prepared. No callback cast, declaration-only erasure,
+synthetic invoking trampoline, invented return value or dropped accepted
+identity is an approved correction. Fresh successor gates and independent
+reviews remain required.
 
 ## Qualifications retained
 
