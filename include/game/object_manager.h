@@ -35,14 +35,14 @@ struct ResourceRecordList;
 #ifdef __cplusplus
 /* [INFERENCE] Independent resource-list prefix; its link is at +0x50, not
  * RegistryEntry.link and not the manager's own registry. */
-struct ResourceRecord {
+struct ResourceAmountEntry {
     unsigned amount;
     unsigned char reserved04[0x4c];
     PoolLink link;
 };
 struct ResourceRecordList {
     unsigned reserved00;
-    nw::ut::LinkList<ResourceRecord, offsetof(ResourceRecord, link)> records;
+    nw::ut::LinkList<ResourceAmountEntry, offsetof(ResourceAmountEntry, link)> records;
 };
 #endif
 

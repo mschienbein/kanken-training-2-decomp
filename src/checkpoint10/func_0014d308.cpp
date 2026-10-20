@@ -8,21 +8,12 @@
 #include <stddef.h>
 #include "game/audio_voice.h"
 #include "game/object_pool.h"
+#include "game/sound.h"
 
 /* [INFERENCE] The 432-byte payload and following intrusive link agree with the
  * channel-manager iteration; descriptive project type names are retained. */
 
 
-class PoolIterator {
-    PoolLink *node;
-public:
-    explicit PoolIterator(PoolLink *p) : node(p) {}
-    PoolLink *get() const { return node; }
-    PoolIterator &operator++() { node = node->next; return *this; }
-    PoolIterator operator++(int) { const PoolIterator old(*this); ++*this; return old; }
-    friend bool operator==(PoolIterator a, PoolIterator b) { return a.node == b.node; }
-    friend bool operator!=(PoolIterator a, PoolIterator b) { return !(a == b); }
-};
 
 class VoiceIterator {
     PoolIterator iterator;

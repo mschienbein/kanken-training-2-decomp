@@ -26,6 +26,7 @@ struct StreamRange;
 struct TaskPool;
 
 #include <stdbool.h>
+#include "ctr/svc.h"
 #include "game/pool_list.h"
 #include "game/runtime.h"
 
@@ -145,7 +146,7 @@ extern void func_001dace8(struct BufferedMemoryStream *stream);
 extern void func_0016b260(void *allocation);
 extern struct StorageArena *func_001db07c(struct StorageArena *arena,
                                         unsigned int capacity);
-extern unsigned func_00130308(void);
+extern CtrResult func_00130308(void);
 extern void func_0018ef04(void);
 extern const unsigned data_00224964[];
 extern struct SoundTrack *func_001d540c(struct SoundTrack *track);

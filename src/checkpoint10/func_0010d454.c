@@ -9,7 +9,6 @@ struct AppletTimeout {
 extern struct AppletTimeout data_00242a40;
 
 
-extern CtrResult func_00115ad4(unsigned state);
 
 
 

@@ -110,7 +110,7 @@ extern int func_001dd504(int group, int index, int variant);
 extern const unsigned *func_001f22ac(const struct ArchiveResourceTable *info);
 extern const struct W12cSoundDetail *func_001f23ec(const struct SoundRecord *record);
 extern const struct W12cSoundOption *func_001f22e0(const struct W12cSoundDetail *detail);
-extern int func_001f23b8(const struct BankInstrumentInfo *info);
+extern bool func_001f23b8(const struct BankInstrumentInfo *info);
 extern unsigned func_001f2354(const struct BankInstrumentInfo *info);
 extern unsigned func_001f2334(const struct BankInstrumentInfo *info);
 extern unsigned short *func_00168e80(struct W12cAlternateTextState *state);

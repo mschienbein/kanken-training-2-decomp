@@ -10,7 +10,7 @@
 static unsigned resource_sum(ResourceRecordList *list)
 {
     unsigned total = 0;
-    for (nw::ut::LinkList<ResourceRecord, offsetof(ResourceRecord, link)>::Iterator i = list->records.GetBeginIter(); i != list->records.GetEndIter(); ++i) total += i->amount;
+    for (nw::ut::LinkList<ResourceAmountEntry, offsetof(ResourceAmountEntry, link)>::Iterator i = list->records.GetBeginIter(); i != list->records.GetEndIter(); ++i) total += i->amount;
     return total;
 }
 unsigned func_0014d7a0(ResourceRecordList *list)

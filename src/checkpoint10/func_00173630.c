@@ -1,9 +1,9 @@
 #include "game/scene_lifecycle.h"
 #include "game/notification.h"
 
-struct TransformOwner;
+#include "game/selection.h"
 /* The owner is retained for the common transform-operation interface. */
-void func_00173630(struct TransformOwner *owner, int index, int group)
+void func_00173630(struct W6ListController *owner, int index, int group)
 {
     struct TransformEntry *entry = func_00174454(group, index);
     entry->x = 0.0f;

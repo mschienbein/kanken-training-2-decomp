@@ -1,4 +1,4 @@
-struct SoundArchiveAccessors;
+#include "game/sound_archive.h"
 class SoundFileProvider;
 struct SoundPreparationInfo;
 struct SoundWaveInfo;

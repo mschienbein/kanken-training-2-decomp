@@ -35,6 +35,9 @@ extern "C" {
 #endif
 
 extern int func_0017adc4(const unsigned short *text);   /* length in code units */
+/* Search compares the full incoming word against zero-extended code units. */
+extern const unsigned short *func_0015dd5c(const unsigned short *text, unsigned character);
+extern int func_0016e5cc(const unsigned short *left, const unsigned short *right, int count);
 extern const unsigned short *func_00179090(const struct MenuItem *item);
 extern const unsigned short *func_001791e0(const struct TextTable *table, int index);
 extern unsigned short *func_00178f28(unsigned short *destination, unsigned byte_limit,

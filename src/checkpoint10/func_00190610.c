@@ -1,8 +1,7 @@
 /* [INFERENCE] The inputs are raw command words; the helper copies three words. */
-extern void func_00127ddc(unsigned register_address, const unsigned *values,
-                          unsigned count, unsigned flags);
+#include "game/shader.h"
 
-void func_00190610(unsigned register_address, unsigned first,
+void func_00190610(int register_address, unsigned first,
                    unsigned second, unsigned third)
 {
     unsigned values[3];

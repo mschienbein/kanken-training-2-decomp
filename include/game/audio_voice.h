@@ -289,6 +289,8 @@ extern void func_0017da08(struct AudioVoiceGroup *group, int index,
 extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,
     unsigned char index, const struct AudioVoiceStartArgs *arguments);
 extern void func_0014e20c(struct AudioChannelState *state);
+extern void func_0014e218(struct AudioChannelState *state);
+extern unsigned func_001efcd8(const struct AudioChannelState *state);
 extern void func_001545ec(struct AudioChannel *channel, int mode);
 extern void func_001545f4(struct AudioChannelState *state, int mode);
 extern void func_00154608(struct AudioChannel *channel, unsigned int value);

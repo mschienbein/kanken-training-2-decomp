@@ -95,6 +95,9 @@ extern void func_0016d554(struct W11ControlScreen *screen, int state);
 extern void func_001741f8(struct W11jVisualOwner *owner, int index, float x, float y);
 extern void func_0016f9a8(struct W11jVisualOwner *owner, int index, float x, float y);
 extern void func_00175d90(struct W11jVisualOwner *owner);
+extern void func_001eaac0(struct W11jVisualOwner *owner, int index);
+extern void func_001b3c0c(struct AnimationState *state, int delta);
+extern void func_0016f288(struct AnimationState *state, float value);
 extern void func_00166f1c(struct W11jVisualOwner *owner, int index, int enabled);
 extern void func_00166f20(struct W11jVisualOwner *owner, int index, int enabled);
 extern void func_001ea314(struct W11jVisualOwner *owner, int index,

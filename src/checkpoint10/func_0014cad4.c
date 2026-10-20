@@ -1,7 +1,6 @@
 #include "game/service_runtime.h"
 
-struct FrameTime { long long ticks; };
-extern void func_0014caf0(struct FrameTime *destination, const long long *source);
+#include "game/frame_timing.h"
 
 void func_0014cad4(struct FrameTime *elapsed)
 {

@@ -19,11 +19,27 @@ struct StreamMutex;
 struct WorkQueue;
 struct X07NarrowCommand;
 
+#include <stdbool.h>
 #include "ctr/svc.h"
 #include "game/pool_list.h"
 #include "game/service_callbacks.h"
 #include "game/service_runtime.h"
 #include "game/shared_memory.h"
+
+/* The activity flags, client handle (+0x10), and interval (+0x18) belong
+ * to the same published service state at 0x00242c18. */
+struct ServiceClientState {
+    bool active;
+    bool latched;
+    unsigned char reserved02[0x0e];
+    unsigned handle;
+    unsigned reserved14;
+    long long interval;
+};
+struct ServiceStringCounts {
+    int single_count;
+    int group_count;
+};
 
 /* Partial state at 0x00242a50. The signed flag is read by func_00195e84;
  * the status word at 0x18 is shared by the service-state predicates. */
@@ -73,6 +89,9 @@ struct ServiceContext;
 extern "C" {
 #endif
 extern struct ServiceState data_00242a50;
+extern struct ServiceClientState data_00242c18;
+extern struct ServiceStringCounts data_002430e4;
+extern void func_0010b5cc(void *context);
 extern struct ServiceContext data_002430e0;
 extern struct PendingState data_00242a28;
 extern int func_001927a8(void);

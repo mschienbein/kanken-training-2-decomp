@@ -485,7 +485,8 @@ struct W10DrawingInput {
     unsigned short characters[0x440];
     short field89a;
     short count;
-    unsigned char reserved89e[0x1a];
+    unsigned short effect_mask;
+    unsigned char reserved8a0[0x18];
     unsigned char active;
     unsigned char finished;
     unsigned char reserved8ba[2];
@@ -505,6 +506,7 @@ extern "C" {
 extern void func_0015e698(struct DisplayPaneLink *link, float x, float y, float z);
 extern void func_0019cecc(void *destination, unsigned int size);
 extern void func_00180344(void);
+extern void func_0014a9d8(unsigned flags);
 extern void func_00166d5c(struct W10DrawingInput *input, int active, float x, float y);
 extern struct NameTable *bss_00245344[8];
 extern void func_00202ca8(void);

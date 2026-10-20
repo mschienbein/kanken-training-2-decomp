@@ -5,7 +5,6 @@ struct ShaderProgramSet {
 };
 
 
-extern void func_0011da50(int location, unsigned count, int transpose, const float *values);
 
 void func_00196564(const float *values)
 {

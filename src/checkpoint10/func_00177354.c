@@ -1,7 +1,5 @@
 #include "game/messages.h"
 
-extern int func_00181aac(int selection);
-extern void func_00170dc0(struct DisplayHandle **handles, int index, int enabled);
 
 static void format_label(unsigned short *text, int character)
 {
@@ -22,5 +20,5 @@ void func_00177354(struct MessageLayout *layout, int character)
     func_00181aac(2);
     format_label(text, character);
     func_0017a43c(layout, text, 0, 1);
-    func_00170dc0((struct DisplayHandle **)layout->entries, 1, 1);
+    func_00170dc0(layout, 1, 1);
 }

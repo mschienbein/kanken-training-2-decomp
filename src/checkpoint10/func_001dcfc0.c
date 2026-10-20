@@ -16,8 +16,6 @@ struct L041ReadingDictionary {
     const struct L041ReadingEntry *entries;
 };
 
-extern int func_0016e5cc(const unsigned short *left, const unsigned short *right, int count);
-extern const unsigned short *func_0015dd5c(const unsigned short *text, unsigned short character);
 extern void func_0019e08c(void *allocation);
 
 static __forceinline int append_identifier(unsigned short *results, int capacity, unsigned short identifier)

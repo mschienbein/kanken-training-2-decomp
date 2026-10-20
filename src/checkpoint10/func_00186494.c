@@ -1,7 +1,6 @@
 #include <stddef.h>
 
-struct ServiceStringCounts { int single_count; int group_count; };
-extern struct ServiceStringCounts data_002430e4;
+#include "game/service_state.h"
 extern char bss_004b486c[];
 extern size_t func_0019de40(char *destination, const char *source, size_t capacity);
 

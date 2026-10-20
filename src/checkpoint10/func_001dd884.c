@@ -2,11 +2,10 @@
 #include "game/text.h"
 #include "game/selection.h"
 
-struct W8EffectState;
 
 struct W19PracticeScreen {
     unsigned char reserved00[0x14];
-    struct W8EffectState *effects;
+    struct W10DrawingInput *effects;
     unsigned char reserved18[0x34];
     struct W7dMenuControl *control;
     unsigned char reserved50[0x7c];
@@ -27,7 +26,6 @@ struct W19PracticeScreen {
 
 
 
-extern void func_0016dc94(struct W8EffectState *effects, int index);
 
 void func_001dd884(struct W19PracticeScreen *screen)
 {

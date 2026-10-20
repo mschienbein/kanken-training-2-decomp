@@ -1,7 +1,4 @@
-struct W8EffectState {
-    unsigned char reserved00[0x89e];
-    unsigned short mask;
-};
+#include "game/screen.h"
 
 struct EffectPresetMasks {
     unsigned packed_masks[3];
@@ -14,15 +11,14 @@ struct W19EffectPresetBlock {
 };
 
 extern const struct W19EffectPresetBlock data_002181c0;
-extern void func_0014a9d8(unsigned flags);
 
-static __inline void apply_mask(struct W8EffectState *effects, unsigned short mask)
+static __inline void apply_mask(struct W10DrawingInput *effects, unsigned short mask)
 {
-    effects->mask = mask;
+    effects->effect_mask = mask;
     func_0014a9d8(mask);
 }
 
-void func_0016dc94(struct W8EffectState *effects, int index)
+void func_0016dc94(struct W10DrawingInput *effects, int index)
 {
     struct EffectPresetMasks presets = data_002181c0.masks;
     unsigned short mask = presets.fallback;

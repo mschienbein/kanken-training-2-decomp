@@ -77,6 +77,10 @@ extern void *func_00195104(struct ManagedExpHeap *heap, unsigned size, int align
                           int group, int direction, int mode);
 extern void *func_0019ffa8(unsigned size);
 extern void *func_0018627c(const struct IntrusiveList *list, const void *object);
+extern struct IntrusiveList bss_004b96ec;
+extern struct HeapBase *func_00186224(const struct IntrusiveList *list, const void *memory);
+extern void func_0012edd4(struct IntrusiveList *list, void *object);
+extern void func_00121bc8(struct HeapBase *heap);
 extern struct LockedExpHeap *data_00242c54;
 #ifdef __cplusplus
 }

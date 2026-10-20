@@ -33,6 +33,8 @@ struct ServiceManagerState {
 extern "C" {
 #endif
 extern struct SharedAppletState data_00243034;
+extern void func_0010d454(bool notify);
+extern CtrResult func_00115ad4(unsigned state);
 extern unsigned char bss_004b35c4[0x1000];
 extern struct AppletServiceNames data_00243000;
 extern void func_0012fd88(const char *name);

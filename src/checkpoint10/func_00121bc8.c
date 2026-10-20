@@ -1,8 +1,5 @@
 #include "game/exp_heap.h"
 
-extern struct IntrusiveList bss_004b96ec;
-extern struct HeapBase *func_00186224(const struct IntrusiveList *list, const void *memory);
-extern void func_0012edd4(struct IntrusiveList *list, void *object);
 
 /* One level of the heap-containment search, inlined into its caller; the
  * recursion into child heaps is the out-of-line func_00186224. */

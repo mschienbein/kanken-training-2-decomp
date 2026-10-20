@@ -1,18 +1,5 @@
 #include "game/screen.h"
-struct TransitionDisplayLink {
-    unsigned reserved00;
-    struct DisplayObject *object;
-};
-struct TransitionDisplay {
-    unsigned reserved00;
-    unsigned state;
-    unsigned reserved08;
-    float elapsed;
-    unsigned char reserved10[12];
-    float previous;
-    struct TransitionDisplayLink *link;
-};
-extern struct TransitionDisplay bss_0028d95c[];
+#include "game/transition_state.h"
 
 static void reset_transition(int index, float previous)
 {

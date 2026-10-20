@@ -1,27 +1,18 @@
-struct OffsetListLink {
-    void *previous;
-    void *next;
-};
-struct OffsetList {
-    void *head;
-    void *tail;
-    unsigned short count;
-    unsigned short link_offset;
-};
+#include "game/exp_heap.h"
 
-void func_0012edd4(struct OffsetList *list, void *object)
+void func_0012edd4(struct IntrusiveList *list, void *object)
 {
-    struct OffsetListLink *link = (struct OffsetListLink *)
+    struct IntrusiveLink *link = (struct IntrusiveLink *)
         ((unsigned char *)object + list->link_offset);
     if (link->previous == 0) {
         list->head = link->next;
     } else {
-        struct OffsetListLink *previous = (struct OffsetListLink *)
+        struct IntrusiveLink *previous = (struct IntrusiveLink *)
             ((unsigned char *)link->previous + list->link_offset);
         previous->next = link->next;
     }
     if (link->next != 0) {
-        struct OffsetListLink *next = (struct OffsetListLink *)
+        struct IntrusiveLink *next = (struct IntrusiveLink *)
             ((unsigned char *)link->next + list->link_offset);
         next->previous = link->previous;
     } else {

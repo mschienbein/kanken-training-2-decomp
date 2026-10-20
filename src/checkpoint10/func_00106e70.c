@@ -1,12 +1,4 @@
-#include <stdbool.h>
-
-struct W23JActivityState {
-    bool active;
-    bool latched;
-    unsigned char reserved02[0x16];
-    long long interval;
-};
-extern struct W23JActivityState data_00242c18;
+#include "game/service_state.h"
 extern int func_0010c0a4(void);
 extern int func_0010bff4(void);
 

@@ -2,18 +2,17 @@
 #include "game/sound_task.h"
 #include "game/object_manager.h"
 #include "game/service_state.h"
-
-
-
-extern void func_0010b5cc(void *context);
-
+#include "game/applet.h"
 
 
 
 
 
 
-extern void func_0010d454(int mode);
+
+
+
+
 
 
 
