@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "note": "C009-r4 post-prereview callable-contract scope: 653 NEW functions / 53,664 B; proposed 2,274 functions / 249,572 B in 2,221 units. All 1,621 accepted identities / 195,908 B survive, with five explicit moves. Relative to c009-r3, 22 NEW identities / 3,120 B defer under Main's bounded type-model scope decision; prior NEW 0011f3a8 / 268 B remains deferred. F01's native resource-value fixes and the qualified C scheduler/typed no-op helpers remain. Pre-review PF01/PF05 use honest forward-only, noninvoked table representations with fresh exact MATCH; PF02/PF03/PF04/PF06 defer eight additional NEW owners / 392 B, with canonical type-model landing required for re-entry. Pre-existing accepted-only table/type issues remain explicit carried issues, never silently fixed. Details and immutable failed attempts are in docs/known-issues-c009-r2.md and scratch/integrator/c009-r4/HANDOFF.json. Selection remains armlink5-inline-branchnop-v6 + anonymous-string-records-v1. Main alone owns integrated gates, prepare and acceptance.",
+ "note": "C009-r5 opaque-font and float-converter correction after both c009-r4 independent reviews sealed FAIL. Proposed 649 NEW functions / 53,520 B, preserving all 1,621 accepted / 195,908 B: 2,270 functions / 249,428 B in 2,217 units. A-F01 restores the accepted opaque FontVTable and explicitly defers four NEW height/width completion consumers / 144 B; no accepted identity is deferred. B-F01 genuinely migrates the converter table, identity provider and random provider to one float(float) protocol, preserving the supplied phase and actual result. Five accepted moves remain; mandatory-discard scheduler, typed no-op helpers and prior explicit deferrals/qualifications remain. Total post-r3 NEW deferrals are 26 / 3,264 B, plus prior0011f3a8 / 268 B; older historical deferrals are separate. Selection remains armlink5-inline-branchnop-v6 + anonymous-string-records-v1. Evidence is scratch/integrator/c009-r5/HANDOFF.json and docs/known-issues-c009-r2.md; Main alone owns integrated gates, prepare and acceptance.",
  "units": [
   {
    "source": "src/large/func_00163488.c",
@@ -4765,26 +4765,10 @@
    "author": "w19g"
   },
   {
-   "source": "src/wave19/func_001efcec.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001efcec"
-   ],
-   "author": "c009-wave19"
-  },
-  {
    "source": "src/wave19/func_001f27c0.c",
    "profile": "middleware",
    "functions": [
     "func_001f27c0"
-   ],
-   "author": "c009-wave19"
-  },
-  {
-   "source": "src/wave19/func_001f4994.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001f4994"
    ],
    "author": "c009-wave19"
   },
@@ -4801,14 +4785,6 @@
    "profile": "game",
    "functions": [
     "func_0011e8e4"
-   ],
-   "author": "c009-wave20"
-  },
-  {
-   "source": "src/wave20/func_00131540.cpp",
-   "profile": "game",
-   "functions": [
-    "func_00131540"
    ],
    "author": "c009-wave20"
   },
@@ -5165,14 +5141,6 @@
    "author": "c009-wave20"
   },
   {
-   "source": "src/wave20/func_001f4920.cpp",
-   "profile": "game",
-   "functions": [
-    "func_001f4920"
-   ],
-   "author": "c009-wave20"
-  },
-  {
    "source": "src/wave20/func_00214580.c",
    "profile": "sdk",
    "functions": [
@@ -5486,6 +5454,42 @@
    "reason": "The new native destructor table contradicts accepted void(void) provider 001c6ad8. The truthful single opaque dispatch-pointer control emits 52/56 B and mismatches at +0x24, exit 1.",
    "reentry_condition": "Land the canonical allocator/heap and lifetime model from scratch/research/type-models/services/ and coordinated type-model families, including actual destructor contracts and accepted-provider migrations; then recover an exact natural constructor.",
    "evidence": "scratch/integrator/c009-r4/prereview-fixes-r1/DEFERRALS.json"
+  },
+  {
+   "function": "func_00131540",
+   "kind": "NEW-only opaque font contract",
+   "finding": "c009-r4 codex-a F01 (A-F01)",
+   "target_bytes": 44,
+   "reason": "The height wrapper requires the introduced FontVTable completion, whose concrete installed providers disagree in receiver and result types. The accepted forward-only table cannot be invoked through an invented replacement interface.",
+   "reentry_condition": "Land the coordinated canonical retail/native font receiver, result, table and provider migration from scratch/research/type-models/fontgfx/ and migrate every actual user before recovering this wrapper.",
+   "evidence": "scratch/integrator/c009-r5/FONT-DEFERRALS-r1.json"
+  },
+  {
+   "function": "func_001f4920",
+   "kind": "NEW-only opaque font contract",
+   "finding": "c009-r4 codex-a F01 (A-F01)",
+   "target_bytes": 44,
+   "reason": "The height wrapper requires the introduced FontVTable completion, whose concrete installed providers disagree in receiver and result types. Preserve the accepted opaque table rather than casting or duplicating its callable view.",
+   "reentry_condition": "Land the coordinated canonical retail/native font receiver, result, table and provider migration from scratch/research/type-models/fontgfx/ and migrate every actual user before recovering this wrapper.",
+   "evidence": "scratch/integrator/c009-r5/FONT-DEFERRALS-r1.json"
+  },
+  {
+   "function": "func_001efcec",
+   "kind": "NEW-only opaque font dependent",
+   "finding": "c009-r4 codex-a F01 dependent completion consumer (A-F01)",
+   "target_bytes": 28,
+   "reason": "Search finds this additional get_widths consumer of the removed completion. No callable member is available through accepted opaque FontVTable; a shadow definition or erased adapter would recreate the blocked contract.",
+   "reentry_condition": "Land the canonical font-family table, glyph-width aggregate and provider/user model from scratch/research/type-models/fontgfx/ before reintroducing this dispatching width wrapper.",
+   "evidence": "scratch/integrator/c009-r5/FONT-DEFERRALS-r1.json"
+  },
+  {
+   "function": "func_001f4994",
+   "kind": "NEW-only opaque font dependent",
+   "finding": "c009-r4 codex-a F01 dependent completion consumer (A-F01)",
+   "target_bytes": 28,
+   "reason": "Search finds this additional get_widths consumer of the removed completion. Preserve the opaque static table and its accepted providers instead of inventing a callable aggregate interface.",
+   "reentry_condition": "Land the canonical font-family table, glyph-width aggregate and provider/user model from scratch/research/type-models/fontgfx/ before reintroducing this dispatching width wrapper.",
+   "evidence": "scratch/integrator/c009-r5/FONT-DEFERRALS-r1.json"
   }
  ]
 }

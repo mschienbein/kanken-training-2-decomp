@@ -688,3 +688,148 @@ whole-ledger gate, prepare or acceptance review was run here. Main owns the
 fresh integrated readiness and prepare boundary. Exact current handoff,
 remaining commands and the archived `HANDOFF-be8aa40.json` preserve both states.
 
+## C009-r4 sealed independent FAIL; C009-r5 font/converter correction
+
+Both independent reviews of the prepared c009-r4 source
+`82d9cf76762071930f0e5a493241efeb87ad5043` **SEALED FAIL**.
+Its prepare was PASS, SHA-256
+`c3a9015884a6edc0c21950ed11316898d1aa9850eb9ed37481f4b434bc7c894d`.
+Codex-a has exactly **A-F01**, review SHA-256
+`45a5577f392c607763391e90acdcd9a5a84f70ad180b36ccd2a063b17a8f3cd8`;
+codex-b has exactly **B-F01**, review SHA-256
+`97d93877adb9059b844ffd0022624b1b9aa0f3d22e7f63f495116bd01bd1387e`.
+The original records/seals under `scratch/review/c009-r4/` remain immutable.
+These findings supersede the earlier PN01 carry decision: an introduced
+callable completion cannot be grandfathered by an unchanged accepted installer.
+The successor is **c009-r5**, on a fresh branch/worktree from Main `83b2a22d`;
+neither c009-r4 nor any earlier checkpoint name is retried.
+
+### A-F01 — restore the accepted opaque font table
+
+Accepted cmodels only forward-declared `FontVTable`. C009 introduced its
+callable completion, thereby declaring `data_00223d98+0x10` as
+`int(const FontResource*)` over accepted
+`unsigned func_001f0034(const W12cRegionReader*)`, and `+0x68` with that same
+declared type over accepted
+`unsigned short func_001efe9c(const ResourceFontView*)`.
+No equal-width/offset argument or documented carry made those function types
+compatible. Both failed height wrappers invoked the introduced completion.
+
+`game/font.h` now leaves `FontVTable` **incomplete again**. The unused
+`GlyphWidths` record and completion-dependent prototypes are removed.
+The unrelated recovered `FontResource` fields remain unchanged; this is not a
+rollback of the texture/flag model. The accepted `001c5b8c` table-address
+installer remains, but no static callable population, zero-slot table or
+native font hierarchy is claimed for its opaque table.
+
+The search also finds two NEW glyph-width consumers of the same completion.
+All four functions are absent from the accepted ledger, so Main explicitly
+authorized these checkpoint-only deferrals:
+
+| Finding | NEW function | Target bytes | Reason |
+| --- | --- | ---: | --- |
+| A-F01 | `00131540` | 44 | Height invocation requires the incompatible completed table |
+| A-F01 | `001f4920` | 44 | Height invocation requires the incompatible completed table |
+| A-F01 dependent | `001efcec` | 28 | `get_widths` invocation cannot use the restored incomplete table |
+| A-F01 dependent | `001f4994` | 28 | Same completion-dependent glyph-width contract |
+
+Total: **4 NEW functions / 144 B**. Their exact matching predecessors, source
+hashes, review finding IDs, reasons and re-entry conditions are preserved in
+`scratch/integrator/c009-r5/FONT-DEFERRALS-r1.json`.
+Re-entry requires the coordinated canonical receiver/result/table/provider
+and glyph-width-user migration from `scratch/research/type-models/fontgfx/`.
+No replacement private completion, accessor adapter, erased pointer,
+function-pointer cast, alias or newly guessed native identity is substituted.
+No accepted provider or identity is removed.
+
+### B-F01 — one real float-to-float converter protocol
+
+The actual original dispatcher `0017e6c8` supplies the phase in s0 and consumes
+the selected float result. For selector 2, phase setup at `0017e714` precedes
+the call at `0017e718`; selector 4's uncached phase setup at `0017e730`
+precedes its call at `0017e734`. The previous `void(void)` identity slot and
+`float(void)` random slot dropped these real source-level contracts.
+
+`GraphicsConverters` now has **five `float(float)` fields** in the shared
+`audio_voice.h`, including `identity` and `random`. Its C-language callable
+types and external BSS declaration agree with every supplied provider.
+`00149424` is the genuine identity function
+`float func_00149424(float phase) { return phase; }`;
+it is not a void no-op relying on residual VFP register state.
+`00149388(float phase)` retains the supplied input even though the random
+generator does not use it. Its actual returned float computation is unchanged.
+Both shared prototypes and the initializer are migrated without casts,
+synthetic adapters or invented values.
+
+The initializer's observed 0x200-byte clear and exact five pointer stores
+remain. The shared partial record retains its trailing storage rather than
+inventing new flags or validation. Role names remain `[INFERENCE]`.
+There is no credited source for consumer `0017e6c8` in this checkpoint to
+rewrite; the original dispatcher evidence is retained explicitly, not replaced
+with a fictitious source consumer.
+
+The three niced, sequential local witnesses all MATCH/exit 0:
+`00147478` **88 B**, accepted `00149424` **4 B** and accepted `00149388`
+**32 B**. The identity provider was already revised in the r4 proposal;
+the random provider adds one revised accepted unit, never new function credit.
+
+### Current successor scope and remaining boundary
+
+Pure composition proposes **2,217 units / 2,270 functions / 249,428 B**:
+all **1,621 accepted identities / 195,908 B**, plus **649 NEW / 53,520 B**.
+New profiles: game **589 / 48,012 B**, middleware **35 / 3,824 B**,
+sdk **25 / 1,684 B**. The candidate has **660 units** and the same five
+explicit accepted moves. Surviving accepted source revisions are
+**152 units / 157 functions / 21,696 B**; including the five move destinations,
+accepted affected scope is **157 units / 162 functions / 21,732 B**.
+
+Relative to r4, only the four newly authorized font consumers defer:
+**4 / 144 B**. Relative to r3, r4/r5 contract deferrals total **26 / 3,264 B**;
+including earlier `0011f3a8`, the r3–r5 boundary total is **27 / 3,532 B**.
+Older `00113c0c`/`0018ee88` and historical deferrals remain separate, unchanged.
+No accepted identity loses credit and no new move or denominator change occurs.
+
+The only changed headers in r5 are `game/font.h`, `game/functions.h` and
+`game/audio_voice.h`. The required reproof includes every transitive
+dependent of all three, the affected providers, the opaque accepted font
+installer, and every receipt-bound R1 helper/caller combination.
+This work is explicitly non-exclusive, niced and one compiler process at a
+time. No interfaces, argcheck, suite, prepare, full build, heavy-slot request
+or acceptance step is authorized or run by this worker at this boundary.
+Main owns the next integrated gate decision; the recorded r4 PN01 carry is
+history, not a continuing waiver of the now-removed callable completion.
+
+### C009-r5 exercised reproof
+
+The complete assigned bounded dependency closure finished with **actual
+exit 0: 860 sequential units / 878 credited functions, all MATCH**, with every
+expected result present, exact catalogue extent, frozen profile and explicit
+v6/L1 model. There are no uncredited extra result rows, failed units, changed
+source/header inputs or profile/model disagreements. The inherited process
+niceness is **10**; only one compiler process runs at a time.
+
+All **48 `font.h` dependents**, **808 `functions.h` dependents** and
+**445 `audio_voice.h` dependents** are included: **849 distinct touched-header
+units**. The additional required union includes all affected providers, the
+accepted opaque font installer and every receipt-derived R1 caller closure,
+with **22 supplied helper sources** through exact `--extra-source` combinations.
+The six converter definition/initializer units independently MATCH in this
+closure; accepted font providers `001f0034`/`001efe9c` and installer `001c5b8c`
+remain byte-identical accepted sources and MATCH unchanged.
+
+Exact scope SHA-256:
+`6568e398eded359fd0cc17c97feb977e0d13ceb8a24e20bef9806ec5b81a4f27`.
+Full `scratch/integrator/c009-r5/match-r1/RESULTS.json` SHA-256:
+`2fa0c785f5f00d68c3f30ca2a16c58a8394b5edd2fb76bf695bbbf0e866cea92`.
+Per-command exits, input source snapshots, source/object/result hashes,
+helper combinations and unchanged-input bindings are retained. Earlier
+successful r4 proofs are history, not relabeled as these r5 measurements.
+
+`HANDOFF.json`, `REMAINING-HEAVY-COMMANDS.json`,
+`FONT-DEFERRALS-r1.json`, `CONVERTER-RESOLUTION-r1.json`,
+`ACCEPTED-FONT-PROOF-r1.json`, `CALLABLE-SCOPE-r1.json` and
+`WITNESS-SUMMARY-r1.json` under `scratch/integrator/c009-r5/` bind the exact
+findings, four new deferrals, preserved identities, actual float protocol and
+the completed reproof. No heavy gate or heavy-slot request was run; Main's
+go-ahead is still required before interfaces/argcheck/prepare/suite.
+
