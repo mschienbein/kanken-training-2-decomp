@@ -30,8 +30,31 @@
     "stderr": ".............................................\n----------------------------------------------------------------------\nRan 45 tests in 4.779s\n\nOK\n",
     "stdout": ""
   },
-  "fresh_generations_executed": 0,
+  "fresh_generations_executed": 1,
   "full_suite": false,
+  "generation": {
+    "actual_generator_exit": 0,
+    "actual_runner_exit": 0,
+    "comparison": {
+      "path": "research/catalogue_v13_r2_generation.json",
+      "sha256": "e0d26ce029c33ae79d8c8b9f85768a2a6adb336b53558c5f74b7b427332ac27c"
+    },
+    "function_range_order_unchanged": true,
+    "function_record_changes": 0,
+    "other_metadata_changes": 15,
+    "range_record_changes": 0,
+    "released_atomically_before_adjudication": true,
+    "runner_wall_seconds": 105.32,
+    "seconds": 105.10119744201074,
+    "statistics_and_anomalies_unchanged": true
+  },
+  "generation_artifact_sha256": {
+    "scratch/closure/v13-r2/generation/HEAVY-SLOT-GRANTED.json": "6f0a02eb82d8405e95ae1fc1da1aebbaf6572c01e1c79147073d24ca38b24bcc",
+    "scratch/closure/v13-r2/generation/HEAVY-SLOT-RELEASED.json": "97e4cc7260fff4c54513636d337622bcc5baf7516ac230595c5298141737e231",
+    "scratch/closure/v13-r2/generation/HEAVY-SLOT-REQUEST.json": "02456ed3eca6d013d2d5ad94f18b73d093cf259da21ae9be49322585ac98555b",
+    "scratch/closure/v13-r2/generation/comparison-r1.json": "e0d26ce029c33ae79d8c8b9f85768a2a6adb336b53558c5f74b7b427332ac27c",
+    "scratch/closure/v13-r2/generation/generation-receipt-r1.json": "1521edc5391d7532e1960e3521ec5f04a09139fad62348ad54ef23218504e22d"
+  },
   "generation_request": {
     "path": "scratch/closure/v13-r2/generation/HEAVY-SLOT-REQUEST.json",
     "sha256": "02456ed3eca6d013d2d5ad94f18b73d093cf259da21ae9be49322585ac98555b"
@@ -48,12 +71,25 @@
   },
   "new_C_credit": 0,
   "new_counterexample_methods": 9,
-  "new_current_image_proposal_claimed": false,
+  "new_current_image_proposal_claimed": true,
   "old_v13_and_sealed_fail_unchanged": true,
+  "proposal": {
+    "path": "scratch/analyze/catalogue-v13-r2-r1.json",
+    "sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+    "size": 9591326
+  },
+  "remaining_anomalies": [
+    {
+      "address": 1102520,
+      "issue": "unexplained_function_bytes"
+    }
+  ],
+  "remaining_unknown_bytes": 114,
+  "remaining_unknown_intervals": 11,
   "repair_evidence_sha256": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
   "report": {
     "path": "docs/catalogue/REPORT-v13-r2.md",
-    "sha256": "33d9f9cf7dfda5ce0bb6f0d24bab726e54633318bd183d2c0ced4e81902af644"
+    "sha256": "dc1cdd83d97e0f8c53c55f1814db21453b23202f29e58cddcd0efabc8e9ae73c"
   },
   "review_binding": {
     "path": "research/catalogue_v13_r2_review.json",
@@ -61,5 +97,7 @@
   },
   "revision": "catalogue-v13-r2",
   "schema_version": 1,
-  "sealed_failure_sha256": "5e46697794546a96c57ab5284068e3e407e1bdd042596f757f9c706ccb7c98f3"
+  "sealed_failure_sha256": "5e46697794546a96c57ab5284068e3e407e1bdd042596f757f9c706ccb7c98f3",
+  "source_commit": "701ee0b16bc3d13f8a15d69e2aca6f9a7d6735b6",
+  "status": "REVIEW_READY_WITH_ONE_FRESH_GENERATION_AND_45_FOCUSED_TESTS"
 }

@@ -1,0 +1,362 @@
+{
+  "actual_generator_exit": 0,
+  "baseline": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/scratch/analyze/catalogue-v13-r1.json",
+    "sha256": "e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743"
+  },
+  "canonical_adoption": false,
+  "function_order_changed": false,
+  "function_record_changes": [],
+  "new_C_credit": 0,
+  "other_metadata_changes": [
+    {
+      "after": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
+      "before": {
+        "missing_record": true
+      },
+      "path": "/generator/input_sha256/research/catalogue_v13_r2_evidence.json"
+    },
+    {
+      "after": "5b767baaf4965659e1e4c16e945ba3ead76e346420243348c8199d8d240a0b03",
+      "before": {
+        "missing_record": true
+      },
+      "path": "/generator/input_sha256/research/catalogue_v13_r2_review.json"
+    },
+    {
+      "after": "catalogue-v13-r2",
+      "before": "catalogue-v13",
+      "path": "/generator/revision"
+    },
+    {
+      "after": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
+      "before": "490d6f5adfeee03bba171cd3b79b41a8ce8a2d281621026adab87380d9429a9a",
+      "path": "/generator/source_sha256/tools/analyze.py"
+    },
+    {
+      "after": "766ec7da1e4a46df5db065db4207c0a5de898b3780c2d827d054ad39a33c9726",
+      "before": "8f94c2b75f3f21e0878b42c5918edf0a56a84ea5131a28b275ffc0c7fd082b07",
+      "path": "/generator/source_sha256/tools/catalogue_alignment.py"
+    },
+    {
+      "after": "0739bc685e3071a2249e6684e73bee84416b0a616b4659569baf3a4d2933a32d",
+      "before": "f0da2c5b4248d09e5e27189ca44264ef546a51125b26c7f6ca62bcd30dcbc07b",
+      "path": "/generator/source_sha256/tools/catalogue_closure.py"
+    },
+    {
+      "after": "44814fa56c0e90f6cc0e47286161347081c3addfa44cae4c6f3215a2f54ffcd0",
+      "before": "0d4e6a6db8101463d3b1887b666224d9733fdb38a1e5f4713eefc3b231bfe189",
+      "path": "/generator/source_sha256/tools/catalogue_frozen.py"
+    },
+    {
+      "after": {
+        "adoption": false,
+        "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+        "new_C_credit": 0,
+        "parent_evidence": {
+          "path": "research/catalogue_v13_evidence.json",
+          "sha256": "f27a8669ab8c48bf4682fc4bd2f6ae0cb342deedad45793d01a7b5c98eea4b3e"
+        },
+        "policy": "refuse_absent_consumption_and_bounded_read_veto_padding",
+        "qualification": "Distinct successor; no old report, proof or sealed FAIL is reinterpreted. Current-image geometry is not claimed unchanged before a granted fresh generation.",
+        "repairs": [
+          {
+            "finding": "V13-CODEX-F01",
+            "rule": "Declared absence is a confined relative assertion checked against original and historical sentinel locations. Optional presence probing returns only a boolean; resolve always refuses consumption of an absent label, including absolute or relative extra manifests."
+          },
+          {
+            "finding": "V13-CODEX-F02",
+            "rule": "Every intersecting bounded read veto excludes padding, including conditional and partially mapped reads; only the two explicitly broad endian/unbounded categories retain their prior qualification."
+          }
+        ],
+        "reviewed_failure": {
+          "path": "research/catalogue_v13_r2_review.json",
+          "sha256": "5b767baaf4965659e1e4c16e945ba3ead76e346420243348c8199d8d240a0b03"
+        },
+        "revision": "catalogue-v13-r2",
+        "schema_version": 1,
+        "sealed_failure": {
+          "bindings": [
+            {
+              "path": "scratch/review/catalogue-v13/codex/REPORT.md",
+              "sha256": "c000c2ff66ea3d63d86eb8e0bdb2fb5558194acfceade2f1bde8a05f90ae835b",
+              "size": 12311
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/REVIEW.json",
+              "sha256": "5b767baaf4965659e1e4c16e945ba3ead76e346420243348c8199d8d240a0b03",
+              "size": 46509
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/SEAL.json",
+              "sha256": "5e46697794546a96c57ab5284068e3e407e1bdd042596f757f9c706ccb7c98f3",
+              "size": 10483
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/frozen_absence_probe.py",
+              "sha256": "592f33135104ade84d9e16b29b03a9aebbe390689dab228284f5191dae0356f2",
+              "size": 1968
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/frozen-absence-probe.json",
+              "sha256": "cdbd94bebe552f6bc795344df12c4375034138807b18fdc41f8cbc86817c4673",
+              "size": 1034
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/frozen_absolute_probe_r2.py",
+              "sha256": "2953aeec4afdda203c7b2ab8284df7b3496ab76fd5387336a3cb1043de63ea36",
+              "size": 2188
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/frozen-absolute-probe-r2.json",
+              "sha256": "fc701317080957566c6e1eb56afbd3863b76d0b8957dc300eed8c80ff3987844",
+              "size": 814
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/padding_veto_probe.py",
+              "sha256": "99d90f738fe80846f802edaeda0acb788b5a850135f76285526d2cd017a887c9",
+              "size": 2387
+            },
+            {
+              "path": "scratch/review/catalogue-v13/codex/padding-veto-probe.json",
+              "sha256": "e3aa0408e761bbc57476fb91241f2ba42c197cc7635c7ccdd0bf6025e3b2b7c6",
+              "size": 925
+            }
+          ],
+          "proposal_sha256": "e333779b6f2272c70cc166f915aa925abbcb06641a11f62f4443368ab847e743",
+          "seal_sha256": "5e46697794546a96c57ab5284068e3e407e1bdd042596f757f9c706ccb7c98f3",
+          "source_commit": "0c3fd934009d50c18306d54df82abd5ac0da6d94",
+          "verdict": "FAIL"
+        }
+      },
+      "before": {
+        "missing_record": true
+      },
+      "path": "/revision_review/fail_closed_revision_v13_r2"
+    },
+    {
+      "after": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
+      "before": {
+        "missing_record": true
+      },
+      "path": "/revision_review/input_sha256/research/catalogue_v13_r2_evidence.json"
+    },
+    {
+      "after": "5b767baaf4965659e1e4c16e945ba3ead76e346420243348c8199d8d240a0b03",
+      "before": {
+        "missing_record": true
+      },
+      "path": "/revision_review/input_sha256/research/catalogue_v13_r2_review.json"
+    },
+    {
+      "after": "39edac788a92878e5d91f69fcafbec1df13f7fb12dccbdb73942975f5caf52ad",
+      "before": "490d6f5adfeee03bba171cd3b79b41a8ce8a2d281621026adab87380d9429a9a",
+      "path": "/revision_review/input_sha256/tools/analyze.py"
+    },
+    {
+      "after": "766ec7da1e4a46df5db065db4207c0a5de898b3780c2d827d054ad39a33c9726",
+      "before": "8f94c2b75f3f21e0878b42c5918edf0a56a84ea5131a28b275ffc0c7fd082b07",
+      "path": "/revision_review/input_sha256/tools/catalogue_alignment.py"
+    },
+    {
+      "after": "0739bc685e3071a2249e6684e73bee84416b0a616b4659569baf3a4d2933a32d",
+      "before": "f0da2c5b4248d09e5e27189ca44264ef546a51125b26c7f6ca62bcd30dcbc07b",
+      "path": "/revision_review/input_sha256/tools/catalogue_closure.py"
+    },
+    {
+      "after": "44814fa56c0e90f6cc0e47286161347081c3addfa44cae4c6f3215a2f54ffcd0",
+      "before": "0d4e6a6db8101463d3b1887b666224d9733fdb38a1e5f4713eefc3b231bfe189",
+      "path": "/revision_review/input_sha256/tools/catalogue_frozen.py"
+    },
+    {
+      "after": "catalogue-v13-r2",
+      "before": "catalogue-v13",
+      "path": "/revision_review/name"
+    }
+  ],
+  "proposal": {
+    "path": "scratch/analyze/catalogue-v13-r2-r1.json",
+    "sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+    "size": 9591326
+  },
+  "proposal_bytes_equal": false,
+  "range_order_changed": false,
+  "range_record_changes": [],
+  "released_before_adjudication": true,
+  "remaining_anomalies": [
+    {
+      "address": 1102520,
+      "issue": "unexplained_function_bytes"
+    }
+  ],
+  "remaining_unknown_ranges": [
+    {
+      "end": 1048612,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1048608
+    },
+    {
+      "end": 1048926,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1048878
+    },
+    {
+      "end": 1050122,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1050106
+    },
+    {
+      "end": 1050948,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1050946
+    },
+    {
+      "end": 1051432,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1051430
+    },
+    {
+      "end": 1052020,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1052016
+    },
+    {
+      "end": 1102768,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1102760
+    },
+    {
+      "end": 1316280,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1316276
+    },
+    {
+      "end": 1704120,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1704116
+    },
+    {
+      "end": 1865564,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1865544
+    },
+    {
+      "end": 1889000,
+      "kind": "unknown",
+      "owner": null,
+      "start": 1888998
+    }
+  ],
+  "stats": {
+    "absorbed_function_starts": 15,
+    "anomalies": 1,
+    "anomalies_by_issue": {
+      "unexplained_function_bytes": 1
+    },
+    "bytes_by_range_kind": {
+      "data": 51464,
+      "function": 1143812,
+      "padding": 68,
+      "rodata": 123378,
+      "segment_padding": 8268,
+      "unknown": 114
+    },
+    "classified_functions": 131,
+    "closed_graph_absorbed_owners": 2,
+    "closed_graph_owner_merges": 1,
+    "code_bytes": 1060872,
+    "creditable_bytes": 1121674,
+    "creditable_functions": 4571,
+    "decoded_instructions": 266377,
+    "direct_calls": 19999,
+    "discovery_rounds": 7,
+    "fallthrough_groups": 15,
+    "functions": 4743,
+    "functions_by_isa": {
+      "arm": 4663,
+      "thumb": 80
+    },
+    "functions_by_kind": {
+      "assembly": 17,
+      "function": 4571,
+      "library": 90,
+      "multi_entry": 25,
+      "runtime": 22,
+      "veneer": 18
+    },
+    "functions_with_literals": 98,
+    "indirect_exits": 145,
+    "linker_nop_words": 776,
+    "linker_tail_census": {
+      "call:in_frame": 505,
+      "tail:after_epilogue": 23,
+      "tail:before_prologue": 20,
+      "tail:falls_into_entry": 86,
+      "tail:in_leaf": 54,
+      "tail:nop_entry": 86,
+      "tail:outside_catalogue": 1
+    },
+    "linker_tail_extent_splits": 143,
+    "linker_tail_wrappers": 86,
+    "literal_bytes": 42148,
+    "literal_conflicts": 0,
+    "literal_extent_changes": {
+      "extent_bytes_grown": 440,
+      "extent_bytes_shrunk": 24,
+      "functions_grown": 36,
+      "functions_shrunk": 4
+    },
+    "literal_objects_by_kind": {
+      "addressed_words": 1,
+      "runtime_descriptor": 1,
+      "string": 2091,
+      "utf16_string": 40
+    },
+    "merged_starts": 78,
+    "merges_by_reason": {
+      "branch_into_body": 38,
+      "fallthrough_without_return": 34,
+      "section_literal": 48
+    },
+    "nop_entries": 0,
+    "noreturn_functions": 7,
+    "pool_bytes": 40792,
+    "prologue_only_starts": 67,
+    "protected_pointer_table_starts": 666,
+    "rejected_raw_call_seeds": 0,
+    "repaired_pointer_targets": 19,
+    "repaired_tail_targets": 1,
+    "secondary_entries": 33,
+    "starts_by_evidence": {
+      "bl_target": 3350,
+      "blx_target": 42,
+      "closed_constant_copy_leaf": 15,
+      "closed_entry_cfg": 1,
+      "closed_fixed_record_leaf": 27,
+      "entry": 1,
+      "exact_bound_global_section_entry": 1,
+      "exact_bound_local_section_entry": 2,
+      "leading_instructions": 7,
+      "linker_branchnop": 204,
+      "pointer": 807,
+      "prologue": 182,
+      "relative_init_array": 108,
+      "tail_call": 429,
+      "veneer_pattern": 18,
+      "veneer_target": 18
+    },
+    "switch_tables": 142,
+    "tail_calls": 1446,
+    "unknown_ranges": 11
+  }
+}
