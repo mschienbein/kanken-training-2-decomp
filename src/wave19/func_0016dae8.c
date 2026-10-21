@@ -6,7 +6,7 @@ struct W19TrainingScreen {
     unsigned char reserved00[0x14];
     struct W10DrawingInput *effects;
     unsigned char reserved18[0x34];
-    struct W6ListController *choices;
+    struct MenuControlSet *choices;
     unsigned char reserved50[0x2c];
     struct CharacterPanel *panel;
     unsigned char reserved80[0x10];

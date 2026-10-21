@@ -9,22 +9,23 @@
 
 
 
-extern "C" void func_001e81fc(struct ScreenInitializationState *state)
+void ScreenInitializationState::build()
 {
+    ScreenInitializationState *state = this;
     int i;
     func_0019eb48();
     state->first_options = func_001b6bf4();
     state->second_options = func_001b7e00();
     func_001b6d2c(state->first_options);
     func_001b7f38(state->second_options);
-    if (state->selection) {
+    if (state->primary_list) {
         ParameterValue *values[2];
         ParameterValue *value = static_cast<ParameterValue *>(::operator new(sizeof(ParameterValue), data_002232d5));
         if (value) value->value = 20;
         values[0] = value;
         value = static_cast<ParameterValue *>(::operator new(sizeof(ParameterValue), data_002232d5));
         values[1] = value ? func_001757d0(value) : 0;
-        func_00175654(state->selection, values);
+        func_00175654(state->primary_list, values);
         ParameterValue **array = values;
         for (i = 0; i < 2; ++i) {
             if (array[i]) {
@@ -34,14 +35,14 @@ extern "C" void func_001e81fc(struct ScreenInitializationState *state)
             }
         }
     }
-    if (state->alternate) {
+    if (state->navigation) {
         ParameterValue *values[2];
         ParameterValue *value = static_cast<ParameterValue *>(::operator new(sizeof(ParameterValue), data_002232d5));
         if (value) value->value = 25;
         values[0] = value;
         value = static_cast<ParameterValue *>(::operator new(sizeof(ParameterValue), data_002232d5));
         values[1] = value ? func_00175648(value) : 0;
-        func_001754d0(state->alternate, values);
+        func_001754d0(state->navigation, values);
         ParameterValue **array = values;
         for (i = 0; i < 2; ++i) {
             if (array[i]) {
@@ -51,7 +52,7 @@ extern "C" void func_001e81fc(struct ScreenInitializationState *state)
             }
         }
     }
-    if (state->actions) {
+    if (state->controls) {
         ArrayOwner *values[2];
         ArrayOwner *owner = static_cast<ArrayOwner *>(::operator new(sizeof(ArrayOwner), data_002232d5));
         ArrayOwner *first = owner;
@@ -63,7 +64,7 @@ extern "C" void func_001e81fc(struct ScreenInitializationState *state)
         values[0] = first;
         owner = static_cast<ArrayOwner *>(::operator new(sizeof(ArrayOwner), data_002232d5));
         values[1] = owner ? func_00174cb0(owner) : 0;
-        func_001748ec(state->actions, values);
+        func_001748ec(state->controls, values);
         ArrayOwner **array = values;
         for (i = 0; i < 2; ++i) {
             if (array[i]) {
@@ -72,13 +73,13 @@ extern "C" void func_001e81fc(struct ScreenInitializationState *state)
             }
         }
     }
-    if (state->screen) {
+    if (state->style) {
         VectorParameter *values[2];
         VectorParameter *value = static_cast<VectorParameter *>(::operator new(sizeof(VectorParameter), data_002232d5));
         values[0] = value ? func_00174f04(value, L"Ver 1.1", 16, 3, 0.0f, 0.0f, 1.0f) : 0;
         value = static_cast<VectorParameter *>(::operator new(sizeof(VectorParameter), data_002232d5));
         values[1] = value ? func_00174ef8(value) : 0;
-        func_00174df0(state->screen, values);
+        func_00174df0(&state->style->base, values);
         VectorParameter **array = values;
         for (i = 0; i < 2; ++i) {
             if (array[i]) {

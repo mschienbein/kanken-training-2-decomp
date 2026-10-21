@@ -3,8 +3,8 @@
 
 struct GradeOptionScreen {
     unsigned char reserved00[0x48];
-    struct W11jVisualOwner *panel;
-    struct W6ListController *list;
+    struct VisualLabelSet72 *panel;
+    struct MenuControlSet *list;
     unsigned char reserved50[8];
     struct W6Selector *selector;
 };

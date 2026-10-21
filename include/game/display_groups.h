@@ -6,7 +6,7 @@ struct W6DisplayCollection;
 struct W17WideHandle;
 struct W17WideCollection;
 struct W18DisplayCollection;
-struct W18WideDisplayCollection;
+struct L044TrainingFrame;
 struct W17Panel1068;
 struct W17DisplayGroup;
 struct W17Panel1578;
@@ -48,7 +48,7 @@ struct W17WideCollection {
 struct W18DisplayCollection {
     DisplayHandle *handles[10];
 };
-struct W18WideDisplayCollection {
+struct L044TrainingFrame {
     DisplayHandle *handles[27];
 };
 

@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/transition_setters/func_001a8048_value_setter.cpp",
+ "source_sha256": "59bb4865e016f99d3ad9e93f87477f863f49be773ec0c1d0f5c4c1b30da17bca",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "ab2b474c4986371c88600f6171a146c15eee70425bf11b0871724c1803b6aaa9",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/transition_setters/transition_active.c",
+   "source_sha256": "fbe776aa095f77873c802a75e1ca5a07ada7232e5c276119871b20dad849b5e4",
+   "object_sha256": "265b5bb5183679b7e2e592e9e6f6acf5f59abe6d046ca746b87c62d656fd690d"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "transition_active"
+   ],
+   "section": "i.transition_active",
+   "size": 8,
+   "object": "scratch/integrator/types-menu/matches/attempt-040-func_001a8048_value_setter/extra-0-transition_active.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001a8048",
+   "address": 1736776,
+   "size": 412,
+   "candidate_size": 412,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 40,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d003d4",
+     "removed_callee": {
+      "symbols": [
+       "transition_active"
+      ],
+      "section": "i.transition_active",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-040-func_001a8048_value_setter/extra-0-transition_active.o"
+     }
+    }
+   ]
+  }
+ ]
+}

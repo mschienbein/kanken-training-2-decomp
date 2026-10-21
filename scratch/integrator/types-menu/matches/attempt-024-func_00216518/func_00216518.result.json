@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/wave20/func_00216518.cpp",
+ "source_sha256": "69aac9a5079552cfb07abd7c4f8a8d0f030f67d179cf18bc7a8f8116627861d7",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "347fad690ccf82e818799504d0a4377c8cb10d0fb4551337d2401a8d91b80dd8",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/menu/text_writer_erased_lifetime.c",
+   "source_sha256": "417abe5674d5cb55bbd5451ac1b4e160903ff0f88bb767e3780c3b6ccce171af",
+   "object_sha256": "a67a21f03ad17bd28c64de6211d39a53217efb9f8d541d3a6b84452cd0df3988"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "finish_text_writer_copy"
+   ],
+   "section": "i.finish_text_writer_copy",
+   "size": 4,
+   "object": "scratch/integrator/types-menu/matches/attempt-024-func_00216518/extra-0-text_writer_erased_lifetime.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00216518",
+   "address": 2188568,
+   "size": 124,
+   "candidate_size": 124,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 96,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "finish_text_writer_copy"
+      ],
+      "section": "i.finish_text_writer_copy",
+      "size": 4,
+      "object": "scratch/integrator/types-menu/matches/attempt-024-func_00216518/extra-0-text_writer_erased_lifetime.o"
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -2,12 +2,12 @@
 
 #include "game/animation.h"
 
-void func_00178fb0(const struct AnimationOwner *owner, int index,
+void func_00178fb0(const struct MenuControlSet *owner, int index,
                    float *width, float *height)
 {
-    const struct Animation *animation = owner->animations[index];
+    const struct MenuGroup *animation = owner->groups[index];
     if (animation != 0) {
-        memcpy(width, &animation->width, sizeof *width);
-        memcpy(height, &animation->height, sizeof *height);
+        memcpy(width, &animation->scroll.x, sizeof *width);
+        memcpy(height, &animation->scroll.y, sizeof *height);
     }
 }

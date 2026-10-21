@@ -4,24 +4,25 @@
 
 /* [INFERENCE] Virtual member names are unrecovered; the callback uses slot 4. */
 
-extern "C" void func_001e7cf0(TransitionScreenW19G *state)
+void ReturnScene::activate()
 {
+    ReturnScene *state = this;
     if (func_0019efd0() == 0) {
         func_00176d98();
         state->phase = 0;
         state->progress = 0.0f;
         state->previous_phase = -1;
-        if (state->buttons != 0) {
-            func_00176b24(state->buttons);
-            func_0017a6f4(state->buttons, 0);
+        if (state->primary_list != 0) {
+            func_00176b24(state->primary_list);
+            func_0017a6f4(state->primary_list, 0);
         }
-        if (state->selector != 0) {
-            func_0017697c(state->selector);
-            func_001795cc(state->selector, 0, -1);
+        if (state->navigation != 0) {
+            func_0017697c(state->navigation);
+            func_001795cc(state->navigation, 0, -1);
         }
         if (func_00170234(0) > 0)
             func_0017433c(0, (int)func_0017adb4() * 15);
-        func_00177b10(state, &CallbackTarget::callback4);
+        func_00177b10(state, &MenuScene::update);
         func_00175848();
     }
 }

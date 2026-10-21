@@ -1,14 +1,14 @@
 #include "game/animation.h"
 
-void func_00171db8(struct AnimationOwner *owner, int index, int child_index, float x, float y)
+void func_00171db8(struct MenuControlSet *owner, int index, int child_index, float x, float y)
 {
-    struct Animation *animation = owner->animations[index];
+    struct MenuGroup *animation = owner->groups[index];
     if (animation) {
-        struct AnimationChild *child = animation->children[child_index];
+        struct MenuControlItem *child = animation->items[child_index];
         if (child) {
             struct DisplayObject *object;
-            child->width = x;
-            child->height = y;
+            child->position.x = x;
+            child->position.y = y;
             object = child->object;
             object->position[0] = x;
             object->position[1] = y;

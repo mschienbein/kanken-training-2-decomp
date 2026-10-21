@@ -1,5 +1,5 @@
-#include "game/screen.h"
-static inline void set_active(struct WidgetSlot *slot, int active)
+#include "game/selection_collections.h"
+static inline void set_active(struct ScalarHandle *slot, int active)
 {
     struct DisplayObject *object = slot->object;
     if (object == 0)
@@ -11,14 +11,14 @@ static inline void set_active(struct WidgetSlot *slot, int active)
     }
 }
 
-static inline void set_entry_active(struct Screen *screen, int index, int active)
+static inline void set_entry_active(struct ScalarCollection *screen, int index, int active)
 {
-    struct WidgetSlot *slot = screen->slots[index];
+    struct ScalarHandle *slot = screen->entries[index];
     if (slot != 0 && slot->object != 0)
         set_active(slot, active);
 }
 
-void func_0016de90(struct Screen *screen, int index)
+void func_0016de90(struct ScalarCollection *screen, int index)
 {
     set_entry_active(screen, index, 0);
 }

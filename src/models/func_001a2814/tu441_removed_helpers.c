@@ -10,7 +10,7 @@ void tu441_update_secondary(struct Tu441SecondaryController *controller)
 
 /* [INFERENCE] The signed-byte state getter is inferred from the caller's
  * receiver setup, result test and absent retained getter. Identity is unknown. */
-signed char tu441_transition_active(const struct TransitionController *controller)
+signed char tu441_transition_active(const struct PairCollectionData *controller)
 {
     return (signed char)controller->active;
 }

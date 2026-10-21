@@ -5,7 +5,7 @@
 #include "game/render_parameter.h"
 #include "game/character_panel.h"
 
-struct L041Dialog;
+struct ScalarCollection;
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -13,9 +13,9 @@ void func_0017433c(int channel, int duration);
 void func_00181b68(int transition, int direction, int enabled);
 int func_00177124(int transition);
 void func_0017a258(struct AnimationState *state, float finish, float start);
-void func_00175d18(struct W11jVisualOwner *owner, struct RenderParameter *const *parameters);
-void func_00172b38(struct L041Dialog *dialog);
-void func_00172a14(struct L041Dialog *dialog, int mode);
+void func_00175d18(struct VisualLabelSet72 *owner, struct RenderParameter *const *parameters);
+void func_00172b38(struct ScalarCollection *dialog);
+void func_00172a14(struct ScalarCollection *dialog, int mode);
 void func_0016d038(struct W10DrawingInput *input);
 unsigned short func_0016d2dc(const struct W10DrawingInput *input);
 int func_0016d2fc(const struct W10DrawingInput *input);

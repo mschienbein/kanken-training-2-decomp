@@ -1,11 +1,11 @@
-#include "game/selection.h"
+#include "game/menu_controller.h"
 
 
 
-extern "C" void func_001a73e8(W6SelectionScreen *screen)
+void SelectionMenuScene::update()
 {
-    SelectionInterface *interface = reinterpret_cast<SelectionInterface *>(screen);
-    interface->vtable->begin(screen);
+    SelectionMenuScene *screen = this;
+    screen->prepare();
     func_00171a98(screen, 1);
-    interface->vtable->end(screen);
+    screen->finish();
 }

@@ -9,28 +9,20 @@
 #include "game/screen_operations.h"
 
 struct L044TrainingFrame;
-struct L044StatisticsPanel;
-struct L044ProgressPanel;
-struct CategoryScreen {
-    unsigned char reserved00[0x34];
-    int transition_mode;
-    unsigned char reserved38[8];
-    struct RecordSet *records;
-    unsigned char reserved44[4];
-    struct W11jVisualOwner *numbers;
-    struct W6ListController *choices;
-    struct W8DisplaySet *display;
-    struct Screen *buttons;
-    struct W6Selector *selector;
-    struct W6HandlePanel10 *handle_panel;
-    struct Screen *navigation;
-    struct L041Dialog *other_panel;
-    void *category_panel;
-    unsigned char reserved6c[4];
-    struct L044ProgressPanel *progress;
-    unsigned char reserved74[0x14];
-    struct L044StatisticsPanel *statistics;
-    unsigned char reserved8c[4];
+struct WidgetActionState;
+struct RecordSelection4;
+#ifdef __cplusplus
+struct CategoryScene : MenuScene {
+    virtual void build();
+    virtual ~CategoryScene();
+    virtual void activate();
+    virtual void update();
+    virtual void depart();
+    virtual void prepare();
+    /* [INFERENCE] func_001ef790 constructs this concrete class.
+     * Slot 7 override was eliminated (null cell); its signature is
+     * unrecoverable beyond the root placeholder. Never call or bind it. */
+    virtual void reserved_slot7();
     int active_layer;
     int states[2];
     int previous_states[2];
@@ -55,22 +47,24 @@ struct CategoryScreen {
     int total_value;
     struct L044TrainingFrame *frame;
 };
+#endif
 #ifdef __cplusplus
 extern "C" {
-extern const MemberCallback data_00218860;
+extern const SceneMemberCallback data_00218860;
 }
 #endif
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern void func_00166ae8(struct CategoryScreen *screen, int state, int transition);
+extern void func_00166ae8(struct CategoryScene *screen, int state, int transition);
 extern void func_001c144c(struct L044TrainingFrame *frame);
-extern void func_00170298(struct L044ProgressPanel *panel);
-extern void func_001ae2e4(struct L044StatisticsPanel *panel);
-extern void func_001ec1b8(struct CategoryScreen *screen, int reset);
+void func_001c1590(struct L044TrainingFrame *frame);
+void func_001dbf40(unsigned *value, unsigned *minutes, unsigned *seconds, unsigned *milliseconds);
+extern void func_00170298(struct RecordSelection4 *panel);
+extern void func_001ae2e4(struct WidgetActionState *panel);
+extern void func_001ec1b8(struct CategoryScene *screen, int reset);
 extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);
-void func_001ed874(struct CategoryScreen *screen);
 #ifdef __cplusplus
 }
 #endif

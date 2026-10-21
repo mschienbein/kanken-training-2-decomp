@@ -1,0 +1,1659 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED_NATIVE_FAMILY_DO_NOT_PREPARE",
+  "base": "be8aa40",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "native_destructor_prerequisite": {
+    "evidence_snapshot_commit": "d8aef63a",
+    "reason": "Actual native C++ virtual destructor definitions automatically emit extra D0 bodies; original scene tables have null D0 cells. Frozen v6 has no legal original-unbound D0 elimination. The derived D0 also has exclusive own .ARM.exidx. No model/flag/profile was changed; no D0 name was bound.",
+    "reference_attempt": 8,
+    "elf_metadata": "attempts/attempt-008-readelf.txt",
+    "final_refusals": [
+      {
+        "source": "src/wave17/func_001b3280.cpp",
+        "attempt": 1746,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN13CalendarSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave17/func_001e7470.cpp",
+        "attempt": 1747,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN14DepartureSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave17/func_001e7c70.cpp",
+        "attempt": 1748,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN23DetailedTransitionSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave17/func_001e7fdc.cpp",
+        "attempt": 1749,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN11ReturnSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave17/func_001ec14c.cpp",
+        "attempt": 1750,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN15CompletionSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave18/func_001acbb4.cpp",
+        "attempt": 1751,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN14MenuResetSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave18/func_001be128.cpp",
+        "attempt": 1752,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN18ExitSelectionSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave18/func_001ef7b4.cpp",
+        "attempt": 1753,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN13CategorySceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      },
+      {
+        "source": "src/wave2/func_00174480.cpp",
+        "attempt": 1754,
+        "exit": 2,
+        "diagnostic": "error: unresolved symbol '_ZN9MenuSceneD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)"
+      }
+    ],
+    "original_matching_sources": [
+      {
+        "function": "func_001b3280",
+        "baseline_source": "src/wave17/func_001b3280.cpp",
+        "source_sha256": "0580d56768396ccf87c5e59c9cc1f7c1ff3fee9a0b42c0367c973f5abbb3f2c0",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave17/func_001b3280.cpp",
+        "native_source": "src/wave17/func_001b3280.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001e7470",
+        "baseline_source": "src/wave17/func_001e7470.cpp",
+        "source_sha256": "f5a2b933b92ea532f9208e771f06a4c52cf8be873a9698b813f2fac48e450a59",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave17/func_001e7470.cpp",
+        "native_source": "src/wave17/func_001e7470.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001e7c70",
+        "baseline_source": "src/wave17/func_001e7c70.cpp",
+        "source_sha256": "9def5cfdc76b3e586ed61b8f431971624c23d1eeac654504d6a43b9616dae661",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave17/func_001e7c70.cpp",
+        "native_source": "src/wave17/func_001e7c70.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001e7fdc",
+        "baseline_source": "src/wave17/func_001e7fdc.cpp",
+        "source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave17/func_001e7fdc.cpp",
+        "native_source": "src/wave17/func_001e7fdc.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001ec14c",
+        "baseline_source": "src/wave17/func_001ec14c.cpp",
+        "source_sha256": "461f09264dd4f91b3350f089154638e766966fcbdb8bbc3337f6dafa546d9cc7",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave17/func_001ec14c.cpp",
+        "native_source": "src/wave17/func_001ec14c.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001acbb4",
+        "baseline_source": "src/wave18/func_001acbb4.cpp",
+        "source_sha256": "e59fe1345c5354540843fc7c54d647c9fed7e75047e91ec6de40796a50514cb9",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave18/func_001acbb4.cpp",
+        "native_source": "src/wave18/func_001acbb4.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001be128",
+        "baseline_source": "src/wave18/func_001be128.cpp",
+        "source_sha256": "bb511d54ec590b3c7b362a57c7139fce37ac4639e33040e69449086ede2195ea",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave18/func_001be128.cpp",
+        "native_source": "src/wave18/func_001be128.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_001ef7b4",
+        "baseline_source": "src/wave18/func_001ef7b4.cpp",
+        "source_sha256": "e958d868ae728e2a5c87240c33cdc145d659f575d35b888eb33af95b949187bb",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave18/func_001ef7b4.cpp",
+        "native_source": "src/wave18/func_001ef7b4.cpp",
+        "ledger_kind": "c009"
+      },
+      {
+        "function": "func_00174480",
+        "baseline_source": "src/wave2/func_00174480.c",
+        "source_sha256": "05e5c3a44e9a92c9b2370d6d655953d2face42516f4a1a5a59db6112b2a89389",
+        "preserved_source": "scratch/integrator/types-menu/blocked/original-destructors/src/wave2/func_00174480.c",
+        "native_source": "src/wave2/func_00174480.cpp",
+        "ledger_kind": "accepted"
+      }
+    ],
+    "policy_decision": "Main explicitly authorizes blocking the native family on an adopted independently reviewed harness/GATES prerequisite. An all-C replacement is not natural source for the evidenced native pointer-to-member consumer001b7dac and is forbidden.",
+    "accepted_and_candidate_units_waiting": [
+      {
+        "source": "src/large/func_00176e24.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_00176e24"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/large/func_001e3af4.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001e3af4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/large/func_001e81fc.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e81fc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/func_001a00f8/func_001a00f8.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001a00f8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001a2814",
+          "func_001a3ee0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/func_001a2814/tu441_removed_helpers.c",
+        "kind": "accepted",
+        "functions": [],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/func_001ddde4/func_001ddde4.c",
+        "kind": "accepted",
+        "functions": [
+          "func_001ddde4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001e0afc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/func_001ed874/func_001ed874.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001ed874"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/models/transition_setters/func_001a8048_value_setter.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001a8048"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/pilot/game_enum_switch.c",
+        "kind": "accepted",
+        "functions": [
+          "func_001718ec",
+          "func_00171c7c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave10/func_00177b10.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_00177b10"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave10/func_001e9944.c",
+        "kind": "accepted",
+        "functions": [
+          "func_001e9944"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave11/func_00179068.c",
+        "kind": "accepted",
+        "functions": [
+          "func_00179068"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave11/func_001b9ebc.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001b9ebc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave11/func_001bd630.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001bd630"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave11/func_001e807c.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001e807c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave13/func_001a73e8.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001a73e8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave13/func_001ab4e4.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001ab4e4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave15/func_001ef704.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001ef704"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_00162f0c.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_00162f0c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001732b4.c",
+        "kind": "c009",
+        "functions": [
+          "func_001732b4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001ab65c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ab65c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001bd9f0.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001bd9f0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db610.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db610"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db624.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db624"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db638.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db638"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db64c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db64c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db660.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db660"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db674.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db674"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db688.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db688"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db69c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db69c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db6b0.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db6b0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db6c4.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db6c4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db6d8.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db6d8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db6ec.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db6ec"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db700.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db700"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db714.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db714"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db728.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db728"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db73c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db73c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db750.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db750"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db764.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db764"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db778.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db778"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db78c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db78c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db7a0.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db7a0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db7b4.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db7b4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db7c8.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db7c8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db7dc.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db7dc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db7f0.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db7f0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db804.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db804"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db818.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db818"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db82c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db82c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db840.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db840"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db854.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db854"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db868.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db868"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db87c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db87c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db890.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db890"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db8a4.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db8a4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db8b8.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db8b8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db8cc.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db8cc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db8e0.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db8e0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db8f4.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db8f4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db908.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db908"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db91c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db91c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db930.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db930"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001db944.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001db944"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave16/func_001ec194.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ec194"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_0015f8bc.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_0015f8bc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001b08cc.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001b08cc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001b3280.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001b3280"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001e7470.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e7470"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001e7c70.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e7c70"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001e7fdc.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e7fdc"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001eb7a4.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001eb7a4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave17/func_001ec14c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ec14c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001abfec.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001abfec"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001acb04.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001acb04"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001acbb4.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001acbb4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001b7fc0.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001b7fc0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001ba280.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ba280"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001bbc1c.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001bbc1c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001bdc34.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001bdc34"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001be0c0.cpp",
+        "kind": "restored",
+        "functions": [
+          "func_001be0c0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001be128.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001be128"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001be180.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001be180"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001ed820.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ed820"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave18/func_001ef7b4.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ef7b4"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_00166ae8.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_00166ae8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_001e387c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e387c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_001e716c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e716c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_001e74b8.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e74b8"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_001e759c.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e759c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_001e7cf0.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001e7cf0"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave19/func_001ebe58.cpp",
+        "kind": "c009",
+        "functions": [
+          "func_001ebe58"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave2/func_00174480.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_00174480"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave6/func_00160298.c",
+        "kind": "accepted",
+        "functions": [
+          "func_00160298"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave6/func_0016c55c.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_0016c55c"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave6/func_00174160.c",
+        "kind": "accepted",
+        "functions": [
+          "func_00174160"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave6/func_00178e98.c",
+        "kind": "accepted",
+        "functions": [
+          "func_00178e98"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave6/func_001a2a78.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001a2a78"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave6/func_001a7494.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_001a7494"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      },
+      {
+        "source": "src/wave8/func_00178f84.cpp",
+        "kind": "accepted",
+        "functions": [
+          "func_00178f84"
+        ],
+        "dependency": "Native MenuScene family cannot be integrated as a whole until all original accepted/c009 destructor owners are available under an adopted D0/VFE model."
+      }
+    ]
+  },
+  "other_blocked": [
+    {
+      "function": "func_001e84ec",
+      "status": "NEW_SOURCE_NOT_ADMITTED",
+      "source": "scratch/integrator/types-menu/blocked/native-playback/func_001e84ec.cpp",
+      "required_bytes": 552,
+      "candidate_bytes": 548,
+      "evidence_attempt": 245,
+      "reason": "Natural canonical native update is4B short at final color-call scheduling: original two32-bit outgoing stores versus one candidate64-bit pair store. Earlier normalized operations/field offsets agree. Both perform float-to-u32 and byte normalization. No narrow public color formal, artificial helper, barrier, volatile or profile change is used.",
+      "variants": [
+        {
+          "source": "scratch/integrator/types-menu/blocked/native-playback/variant-a37e20b227b0.cpp",
+          "source_sha256": "a37e20b227b00cb6fd9f63994a6a55ba10c5a034b26f6adfbe89d84806c9b9ef",
+          "attempts": [
+            29
+          ]
+        },
+        {
+          "source": "scratch/integrator/types-menu/blocked/native-playback/variant-162f9d69e03d.cpp",
+          "source_sha256": "162f9d69e03dedd9204710934233849116cd9c0574b306a6f403cfe1c6b44c23",
+          "attempts": [
+            237
+          ]
+        },
+        {
+          "source": "scratch/integrator/types-menu/blocked/native-playback/variant-ec59737757f4.cpp",
+          "source_sha256": "ec59737757f4f06975885f9a3effdc3743e8d4564cf4f31689153dc8ef3d7ae1",
+          "attempts": [
+            242,
+            243
+          ]
+        },
+        {
+          "source": "scratch/integrator/types-menu/blocked/native-playback/variant-7693c78c2346.cpp",
+          "source_sha256": "7693c78c2346bc840d48af6ed74e01a295fc21a871f1d855c935f715399507e4",
+          "attempts": [
+            244,
+            245
+          ]
+        }
+      ]
+    }
+  ],
+  "later_checkpoint_deferrals": [
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+      "function": "func_001a2d9c",
+      "source": "src/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "historical_status": "shared-contract-gap",
+      "historical_reason": "Original +0x90/+0x94/+0xb0 state roles and same-receiver relationship to finalized MenuControllerState. Actual func_001a3978 contract and the selector/list/animation receiver projection. The existing selection-provider deferral must be resolved, not hidden.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+      "function": "func_001a77d4",
+      "source": "src/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "historical_status": "shared-contract-gap",
+      "historical_reason": "Original receiver/state roles, stage bounds and the +0xb0 store's actual member identity. Real func_001a7b54 and func_00171268 input/result contracts. No C++ fixed-array completion is justified by the current local record.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+      "function": "func_001e5194",
+      "source": "src/checkpoint10/func_001e5194.cpp",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e5194.cpp",
+      "historical_status": "shared-contract-gap",
+      "historical_reason": "Resolve tagged color receiver representations and full parameter contracts with75ab8/70030/70088/70014/6fff8. Prove update/finish contracts; uncalled slots describe layout only.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M05"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001b0978",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4018/src/func_001b0978.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #20: identifier \"SelectionList\" is undefined; #20: identifier \"AlternateSelectionList\" is undefined. The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M06",
+        "M07"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001e489c",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4021/final/func_001e489c.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #256: invalid redeclaration of type name \"ArrayOwner\" (declared at line 10 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/command_state.h\"); #338: more than one instance of overloaded function \"func_0016dc94\" has \"C\" linkage. The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M05"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001ec1b8",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r41172/src/func_001ec1b8.c",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #167: argument of type \"struct Screen *\" is incompatible with parameter of type \"struct W11jVisualOwner *\"; #167: argument of type \"struct Screen *\" is incompatible with parameter of type \"struct W11jVisualOwner *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M06",
+        "M07"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001dd638",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w23c/src/func_001dd638.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\"); #167: argument of type \"AnimatedDepartureState *\" is incompatible with parameter of type \"CallbackTarget *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001e7bec",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w23c/src/func_001e7bec.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\"); #167: argument of type \"SceneDepartureState *\" is incompatible with parameter of type \"CallbackTarget *\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001ec074",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w23c/src/func_001ec074.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\"); #135: class \"TouchDeviceState\" has no member \"reserved10\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Also replace private TouchDeviceState::reserved10[0] shadow with actual existing+10 buttons field under its real width; preserve bit0x10 test. Callback type correction alone does not fix this independent diagnostic.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001e7398",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w23d/src/func_001e7398.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\"); #135: class \"TouchDeviceState\" has no member \"reserved10\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Also replace private TouchDeviceState::reserved10[0] shadow with actual existing+10 buttons field under its real width; preserve bit0x10 test. Callback type correction alone does not fix this independent diagnostic.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001e7f0c",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w23d/src/func_001e7f0c.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #256: invalid redeclaration of type name \"CallbackTarget\" (declared at line 6 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/deferred_callback.h\"); #135: class \"TouchDeviceState\" has no member \"reserved10\". The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Also replace private TouchDeviceState::reserved10[0] shadow with actual existing+10 buttons field under its real width; preserve bit0x10 test. Callback type correction alone does not fix this independent diagnostic.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001689c8",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24a/src/func_001689c8.c",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #147-D: declaration is incompatible with \"void func_0016dbc4(struct W10DrawingInput *)\" (declared at line 506 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/screen.h\"). The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M05"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/contract-deferrals-r2.json",
+      "function": "func_001a2e6c",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/w24e/src/func_001a2e6c.c",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred",
+      "historical_reason": "Canonical source/header contract conflict: #147-D: declaration is incompatible with \"void func_001741f8(struct W11jVisualOwner *, int, float, float)\" (declared at line 79 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/w11_control.h\"); #147-D: declaration is incompatible with \"void func_0017a034(struct W11jVisualOwner *, int, int)\" (declared at line 172 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/selection.h\"). The immutable author MATCH remains valid in its original context. Do not mask this with a local shadow, cast, narrowed parameter or altered callback; re-entry needs an evidence-backed coherent contract migration.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M06",
+        "M07"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_00174484",
+      "source": "scratch/authors/r41387/final/src/func_00174484.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The constructor imports independent singleton receiver classes instead of the canonical owner contracts:001eade0 is StyleOwner*, not W8DisplaySet*, and001b695c now has the proven native ScalarCollection lifetime rather than the delivered Screen* declaration. The controller also spans previously deferred singleton contracts. Resolve the accepted getter/controller ownership family, not opaque return-type aliases or vtable-name additions.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M06",
+        "M07",
+        "M11",
+        "M13"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001a8224",
+      "source": "scratch/authors/r41390/delivery/func_001a8224.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The source crosses W6ListController/W7dMenuControl/AnimationOwner through reinterpret_casts and declares several canonical screen endpoints using WidgetController/SelectionList views. This repeats the predecessor AnimationOwner versus W6ListController ownership boundary; accepted screen/animation consumers must be migrated under one real contract before adding this state machine.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001aff94",
+      "source": "scratch/authors/tu862/src/func_001aff94_final.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The native singleton allocates eight-byte handles and registers a distinct destructor, while accepted W11ControlScreen contains pointers to the larger WidgetSlot view. The author explicitly requires reconciliation with that shared owner. A new SelectionPool class plus an address alias would not migrate the accepted control consumers or establish their full allocation identity.",
+      "identity_or_prototype_causes_closed_by": [
+        "M06"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001e3f38",
+      "source": "scratch/authors/r41307/src/func_001e3f38_force_phase_switch_1.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The candidate expands W8ScreenState but changes the accepted effects owner from W10DrawingInput* to W8EffectState*, casts W6ListController* to AnimationOwner*, and declares001e42fc with W8ScreenState* although the c010 definition uses W24ePhaseState*. A shared accepted screen/effects/animation cutover is needed; padding refinement alone does not settle these receiver contracts.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M05"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001ea6d8",
+      "source": "scratch/permute/sweep-2/src/func_001ea6d8_01.c",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The verified target-only permuter source casts BoundDisplayObject* to the accepted DisplayData* size-query view and uses a separate72-entry HorizontalLabelLayout/Group owner where accepted w11_control.h exposes W11jVisualOwner/Node storage. Its preprocessed TU also emits two mismatching uncredited context functions. The accepted visual/layout and size-query relationship needs a true shared contract before extracting this body; no preprocessed header copies or view casts are adopted.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M06",
+        "M07"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001af370",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf034/src/func_001af370.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The matching singleton and cleanup use different private owner/reference views: construction describes DisplayObject*, cleanup requires the canonical ResourceEvent* endpoint. A single real W6Selector owner was tried with the actual ResourceEvent cleanup. Its factory retained MATCH, but the actual native destructor emitted68 versus72bytes. The separate72byte author callback MATCH is preserved, not promoted to an unproved native destructor alias or a second shadow owner. Reconcile the lifecycle/registration contract before collecting this pair.",
+      "identity_or_prototype_causes_closed_by": [
+        "M06"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Preserve original72-byte callback MATCH and68-byte canonical native-destructor attempt as distinct witnesses; callback/native destructor entry/lifetime code shape is not settled by this model.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001af554",
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf034/src/func_001af554.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "The author72byte callback MATCH is retained. Unifying it with the matching singleton under one real ResourceEvent-backed W6Selector yielded a native destructor68/72bytes while the factory still MATCHed. Do not import the incompatible private callback class or bind a native destructor to a differently declared wrapper. The real shared lifetime/registered-callback contract remains unresolved.",
+      "identity_or_prototype_causes_closed_by": [
+        "M06"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Preserve original72-byte callback MATCH and68-byte canonical native-destructor attempt as distinct witnesses; callback/native destructor entry/lifetime code shape is not settled by this model.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001ab590",
+      "source": "scratch/authors/nf076/src/menu_modes.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "MenuResetStateTu605 crosses CallbackTarget via reinterpret_cast and duplicates c010001abf24 owner/formal plus accepted control callbacks. The callback registration cannot prove aggregate owner from offsets. Shared menu scene/control lifetime cutover is required.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001af424",
+      "source": "scratch/authors/nf137/final/selection-buffer/func_001aeb30.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "Target cleanup invokes00183208 with DisplayObject* from ResourceEvent-backed DisplayHandle and introduces TU607::SelectionScreen where accepted ScreenResourceManager declares Component001af424. Native bitset extent alone does not prove owner. Keep whole MATCH receipt; defer genuine accepted owner/resource endpoint cutover.",
+      "identity_or_prototype_causes_closed_by": [
+        "M06"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001bdc7c",
+      "source": "scratch/authors/nf139/variants/func_001bdc7c/phase-before-primary-slot/func_001bdc7c.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "W24eExitState is cast to different W6SelectionReset and CallbackTarget receivers, interacting with canonical W6Selector/handle/list and existing scene callbacks. Reconcile shared actual scene/registration owner; no inferred overlapping partial views or erased helper aliases substitute.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M08",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001e3294",
+      "source": "scratch/authors/nf089/src/summary_menu.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "SummaryMenuScene/MenuSceneBase partial class conflicts with accepted ScreenResourceManager*00176e24 and native constructor00174484 deferral; helper00169018 is reserved model2 MessageLayout owner, not SummaryMenuScene*. Do not claim model2 or parent001e3270 identities or cast shared scene.",
+      "identity_or_prototype_causes_closed_by": [
+        "M03"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Reserved model2 helper00169018 is MessageLayout-owned; this menu identity proof does not authorize passing SummaryTrainingScene* to that signature or claiming its identity.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_0016337c",
+      "source": "scratch/authors/np015/src/23-height-before-width-staging/func_0016337c.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "Natural MenuExtentRequest staging matches but casts canonical AnimationOwner* to W6ListController* for active setters. Accepted owners have distinct array types/layout contracts; common actual UI owner relationship is unproven. Retain matching staging witness without admitting cast or disturbing accepted00168d14 model owner.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c011-r3-closure/scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "function": "func_001acf28",
+      "source": "scratch/authors/nf197/final/selection_pool.cpp",
+      "preserved_source": null,
+      "historical_status": "contract-resolution-deferred-not-rejected-match",
+      "historical_reason": "Guarded SelectionSet10Tu605 object, destructor, guard and shared selection callbacks require one proven native owner/lifetime. Current Component001acff0 and related Component001acd38/C-cell views are not proven aliases. Do not bind an unseen private destructor or merge separately placed singleton guards; preserve current c011 small-cell owners and author context statuses.",
+      "identity_or_prototype_causes_closed_by": [
+        "M06"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No merger of separately placed native singleton guards, unseen destructor identity, or Component001acd38/C-cell owner is authorized. Guarded native10-reference lifetime still needs canonical qualification.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-display-r1.json",
+      "function": "func_001e5194",
+      "source": "src/checkpoint10/func_001e5194.cpp",
+      "preserved_source": "scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001e5194.cpp",
+      "historical_status": "still-deferred",
+      "historical_reason": "Resolve tagged color receiver representations and full parameter contracts with75ab8/70030/70088/70014/6fff8. Prove update/finish contracts; uncalled slots describe layout only.",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M05"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "Apply display-theme complete pointee/attachment and real StyleOwner prefix contracts jointly; the menu model does not separately resolve all private parameter constructors, tags, or native lifetimes.",
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-resource-r1.json",
+      "function": "func_001a2d9c",
+      "source": null,
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a2d9c.cpp",
+      "historical_status": "still-deferred",
+      "historical_reason": null,
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-resource-r1.json",
+      "function": "func_001a77d4",
+      "source": null,
+      "preserved_source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/collect-r2/func_001a77d4.cpp",
+      "historical_status": "still-deferred",
+      "historical_reason": null,
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02",
+        "M03",
+        "M04"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001dd884",
+      "source": "src/checkpoint10/func_001dd884.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001dd884.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001dd884.c\", line 30: Error:  #147-D: declaration is incompatible with \"void func_0016dc94(struct W10DrawingInput *, int)\" (declared at line 512 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/include/game/screen.h\")\n  extern void func_0016dc94(struct W8EffectState *effects, int index);\n              ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001dd884.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M03",
+        "M05"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_00173630",
+      "source": "src/checkpoint10/func_00173630.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_00173630.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_00173630.c\", line 6: Error:  #147-D: declaration is incompatible with \"void func_00173630(struct W6ListController *, int, int)\" (declared at line 198 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/include/game/selection.h\")\n  void func_00173630(struct TransformOwner *owner, int index, int group)\n       ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_00173630.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M01",
+        "M02"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001a407c",
+      "source": "src/checkpoint10/func_001a407c.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001a407c.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a407c.c\", line 24: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a407c.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001a81e4",
+      "source": "src/checkpoint10/func_001a81e4.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001a81e4.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a81e4.c\", line 24: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001a81e4.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001e7134",
+      "source": "src/checkpoint10/func_001e7134.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001e7134.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7134.c\", line 21: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7134.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001e7564",
+      "source": "src/checkpoint10/func_001e7564.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001e7564.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7564.c\", line 26: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(&state->common);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7564.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001e7cb8",
+      "source": "src/checkpoint10/func_001e7cb8.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001e7cb8.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7cb8.c\", line 21: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001e7cb8.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    },
+    {
+      "record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/DEFERRAL-REENTRY-sched-r1.json",
+      "function": "func_001ebe20",
+      "source": "src/checkpoint10/func_001ebe20.c",
+      "preserved_source": null,
+      "historical_status": null,
+      "historical_reason": "armcc failed (1) on func_001ebe20.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ebe20.c\", line 21: Error:  #167: argument of type \"struct SceneTransitionState *\" is incompatible with parameter of type \"struct ScreenResourceManager *\"\n          func_00176e24(state);\n                        ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-sched/src/checkpoint10/func_001ebe20.c: 0 warnings, 1 error\n",
+      "identity_or_prototype_causes_closed_by": [
+        "M03",
+        "M09"
+      ],
+      "whole_function_admitted": false,
+      "remaining_conditions": [
+        "No new admission or byte-equality claim; canonical destination source and main-agent qualification still required."
+      ]
+    }
+  ],
+  "later_cmodels2": {
+    "review": "scratch/prereview/cmodels2/PREREVIEW.json",
+    "CM2-F01": "Native providers, constructors, scene wrappers and finish now share the genuine MenuScene hierarchy; all reachable current providers/callers have MATCH witnesses. Global admission still blocked by D0 family.",
+    "CM2-F02": "Published single func_001e9ea4(MenuControlSet*,int) and func_001e958c(MenuControlSet*) in menu_controls.h; later MenuResources::State/Panel/Item and W24CollectionScreen must migrate to MenuControlSet/MenuGroup/MenuControlItem. Later bodies/lifetimes were not touched or proved.",
+    "CM2-F03": "TrainingScreenB, SummaryTrainingScene and CategoryScene now genuinely derive MenuScene. Registering calls use natural derived-to-base conversion; SceneMemberCallback is void(MenuScene::*)(); original native member invocation retained. Current exact R1 caller proofs are included. No ABI descriptor hand-decoding."
+  },
+  "later_c012": "No c012 menu-specific deferral was identified in the supplied menu research inventory; no c012 source or credit was touched.",
+  "carried_00113c0c_0018ee88": "Not menu closures; retained from c009 records. Neither is silently admitted.",
+  "retained_independent_qualifications": [
+    "Existing widget_slots(WidgetController*) fixed-owner/pointer-vector qualification is not solved by menu/display producer proofs; unrelated WidgetSlot/Text MenuItem remain distinct.",
+    "Selector native destructor68/72 residue and guarded001acf28 lifetime remain explicitly unresolved as in research.",
+    "Descriptive names, unobserved signedness and historical R1/L1 provenance remain qualified.",
+    "Later PairCollection/ScalarCollection native singleton bodies are not re-entered; PairCollection now owns actual offset-zero PairCollectionData to keep typed C R1 accessors under v6.",
+    "Source is a blocked integration proposal, not a prepared or accepted checkpoint."
+  ]
+}

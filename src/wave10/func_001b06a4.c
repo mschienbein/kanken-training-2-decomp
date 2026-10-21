@@ -6,7 +6,7 @@ struct SettingsScreen {
     unsigned char reserved00[0x34];
     int next_state;
     unsigned char reserved38[0x14];
-    struct W6ListController *controls;
+    struct MenuControlSet *controls;
 };
 extern int func_00172994(int channel);
 extern int func_0017abf8(int channel, int sound);

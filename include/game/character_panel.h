@@ -18,6 +18,7 @@ struct CharacterPanel {
 extern "C" {
 #endif
 extern void func_00179724(struct CharacterPanel *panel, int primary, int secondary);
+void func_0016e798(struct CharacterPanel *panel, int mode);
 extern void func_001b5cc0(struct CharacterPanel *panel, int slot, int row);
 /* [INFERENCE] Possible erased minimum setter; no historical helper identity is proved. */
 void set_character_panel_minimum(struct CharacterPanel *panel, int minimum);
