@@ -64,26 +64,8 @@ extern void *func_0019d9d8(struct FontResource *font, void *textureSheets);
 #endif
 
 
-struct GlyphWidths {
-    signed char left;
-    unsigned char glyph_width;
-    signed char advance;
-};
-struct FontVTable {
-    void (*destroy)(struct FontResource *font);
-    unsigned char reserved04[0x0c];
-    int (*height)(const struct FontResource *font);
-    unsigned char reserved14[0x28];
-    struct GlyphWidths (*get_widths)(const struct FontResource *font, unsigned short character);
-    unsigned char reserved40[0x28];
-    int (*texture_count)(const struct FontResource *font);
-};
-
-#ifdef __cplusplus
-extern "C" {
-int func_001efcec(const FontResource *font, unsigned short character);
-int func_001f4994(const FontResource *font, unsigned short character);
-}
-#endif
+/* FontVTable intentionally remains incomplete, as in the accepted interface.
+ * Its concrete table providers have distinct receiver/result contracts; no
+ * callable members are exposed before the coordinated font-family recovery. */
 
 #endif
