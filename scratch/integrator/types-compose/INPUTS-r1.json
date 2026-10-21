@@ -1,0 +1,638 @@
+{
+  "base": "83b2a22d",
+  "inputs": [
+    {
+      "theme": "display",
+      "commit": "ebae797b",
+      "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display"
+    },
+    {
+      "theme": "fontgfx",
+      "commit": "fd94c5e6",
+      "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-fontgfx"
+    },
+    {
+      "theme": "services",
+      "commit": "859fc2db",
+      "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-services"
+    },
+    {
+      "theme": "sound",
+      "commit": "5d26a3a3",
+      "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-sound"
+    }
+  ],
+  "checkpoint_name": "ctypes1",
+  "name_rule": "^[a-z0-9][a-z0-9.-]{2,63}$",
+  "conflicts": [
+    {
+      "merge": "display",
+      "path": "include/game/layout_lifecycle.h",
+      "resolution": "Use witnessed native TextBox/Pane/Material providers and retire the now-obsolete W17 facade; the prepared opaque-only table facet had no invocation to retain."
+    },
+    {
+      "merge": "display",
+      "path": "src/wave20/func_001f4cf8.cpp",
+      "resolution": "Explicit NEW re-entry from prepared PF06 exclusion, approved by Main: actual native reader PMFs plus native CP1252/UTF16 providers and accepted moves close that precise blocker."
+    },
+    {
+      "merge": "fontgfx",
+      "path": "src/wave13/func_001db054.cpp",
+      "resolution": "Choose wchar_t UTF16 pointer from witnessed native provider because CharStrmReader::Set(const wchar_t*) is the actual producer API; retain u16 result."
+    },
+    {
+      "merge": "fontgfx",
+      "path": "config/names.json",
+      "resolution": "Retain additive genuine DeleteTexture and DisplayFramebuffer self-definition bindings."
+    },
+    {
+      "merge": "fontgfx",
+      "path": "config/candidates/c009t.json",
+      "resolution": "Use full native/display proposal as intermediate only; final manifest reconstructed against the prepared baseline."
+    },
+    {
+      "merge": "services",
+      "path": "docs/known-issues-c009-r2.md",
+      "resolution": "Preserve both independent historical/pre-review and services appendices."
+    },
+    {
+      "merge": "sound",
+      "path": "config/names.json",
+      "resolution": "Semantic common-origin delta union; preserve Main removals and all genuine branch additions. No address conflict."
+    },
+    {
+      "merge": "sound",
+      "path": "config/candidates/c009t.json",
+      "resolution": "Reconstruct a delta against prepared identities, upgrading all former c009 candidate moves explicitly."
+    },
+    {
+      "merge": "sound",
+      "path": "docs/known-issues-c009-r2.md",
+      "resolution": "Preserve all independent appendices."
+    },
+    {
+      "path": "include/game/font.h",
+      "finding": "c009-r4 reviewer F01",
+      "resolution": "Incoming fontgfx completion does not close+10/+68 provider disagreements. Will retain the remediated c009-r5 form; no callable completion or wrapper re-entry on this evidence."
+    }
+  ],
+  "owner_decisions": [
+    {
+      "theme": "display",
+      "function": "func_001826fc",
+      "from": "src/wave6/func_001826fc.c",
+      "to": "src/wave6/func_001826fc.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0014d000",
+      "from": "src/wave7/func_0014d000.c",
+      "to": "src/wave7/func_0014d000.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0014e504",
+      "from": "src/wave7/func_0014e504.c",
+      "to": "src/wave7/func_0014e504.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001816c0",
+      "from": "src/wave7/func_001816c0.c",
+      "to": "src/wave7/func_001816c0.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001816e0",
+      "from": "src/wave7/func_001816e0.c",
+      "to": "src/wave7/func_001816e0.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_00181700",
+      "from": "src/wave7/func_00181700.c",
+      "to": "src/wave7/func_00181700.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_00181734",
+      "from": "src/wave7/func_00181734.c",
+      "to": "src/wave7/func_00181734.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0018271c",
+      "from": "src/wave11/func_0018271c.c",
+      "to": "src/wave11/func_0018271c.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0015eac8",
+      "from": "src/wave11/func_0015eac8.c",
+      "to": "src/wave11/func_0015eac8.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0014aaf4",
+      "from": "src/wave13/func_0014aaf4.c",
+      "to": "src/wave13/func_0014aaf4.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0014ab30",
+      "from": "src/wave13/func_0014ab30.c",
+      "to": "src/wave13/func_0014ab30.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0014d254",
+      "from": "src/wave13/func_0014d254.c",
+      "to": "src/wave13/func_0014d254.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0015e9dc",
+      "from": "src/wave13/func_0015e9dc.c",
+      "to": "src/wave13/func_0015e9dc.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_00180404",
+      "from": "src/wave13/func_00180404.c",
+      "to": "src/wave13/func_00180404.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001db054",
+      "from": "src/wave13/func_001db054.c",
+      "to": "src/wave13/func_001db054.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001db068",
+      "from": "src/wave13/func_001db068.c",
+      "to": "src/wave13/func_001db068.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0015e954",
+      "from": "src/wave13/func_0015e954.c",
+      "to": "src/wave13/func_0015e954.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001810e4",
+      "from": "src/wave14/func_001810e4.c",
+      "to": "src/wave14/func_001810e4.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0015e480",
+      "from": "src/wave17/func_0015e480.c",
+      "to": "src/wave17/func_0015e480.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0015e698",
+      "from": "src/wave17/func_0015e698.c",
+      "to": "src/wave17/func_0015e698.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0016f4ec",
+      "from": "src/wave17/func_0016f4ec.c",
+      "to": "src/wave17/func_0016f4ec.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001cfbcc",
+      "from": "src/wave17/func_001cfbcc.cpp",
+      "to": "src/wave17/func_001cf67c.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_001cfc7c",
+      "from": "src/wave17/func_001cfc7c.cpp",
+      "to": "src/wave17/func_001cf67c.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0014d02c",
+      "from": "src/wave20/func_0014d02c.c",
+      "to": "src/wave20/func_0014d02c.cpp"
+    },
+    {
+      "theme": "display",
+      "function": "func_0015e5d4",
+      "from": null,
+      "to": "src/types/display/func_0015e5d4.cpp"
+    },
+    {
+      "theme": "fontgfx",
+      "function": "func_00142a54",
+      "from": "src/wave2/func_00142a54.c",
+      "to": "src/wave2/func_00142a54.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017e358",
+      "from": "src/wave4/func_0017e358.c",
+      "to": "src/wave4/func_0017e358.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001391d8",
+      "from": "src/wave4/func_001391d8.c",
+      "to": "src/wave4/func_001391d8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00183c54",
+      "from": "src/wave4/func_00183c54.c",
+      "to": "src/wave4/func_00183c54.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00150030",
+      "from": "src/wave7/func_00150030.c",
+      "to": "src/wave7/func_00150030.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001545ec",
+      "from": "src/wave7/func_001545ec.c",
+      "to": "src/wave7/func_001545ec.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00154608",
+      "from": "src/wave7/func_00154608.c",
+      "to": "src/wave7/func_00154608.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00154624",
+      "from": "src/wave7/func_00154624.c",
+      "to": "src/wave7/func_00154624.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001550e0",
+      "from": "src/wave7/func_001550e0.c",
+      "to": "src/wave7/func_001550e0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001551fc",
+      "from": "src/wave7/func_001551fc.c",
+      "to": "src/wave7/func_001551fc.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00156398",
+      "from": "src/wave7/func_00156398.c",
+      "to": "src/wave7/func_00156398.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0016a158",
+      "from": "src/wave7/func_0016a158.c",
+      "to": "src/wave7/func_0016a158.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0016a178",
+      "from": "src/wave7/func_0016a178.c",
+      "to": "src/wave7/func_0016a178.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0016a204",
+      "from": "src/wave7/func_0016a204.c",
+      "to": "src/wave7/func_0016a204.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017e470",
+      "from": "src/wave7/func_0017e470.c",
+      "to": "src/wave7/func_0017e470.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017e47c",
+      "from": "src/wave7/func_0017e47c.c",
+      "to": "src/wave7/func_0017e47c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017e4bc",
+      "from": "src/wave7/func_0017e4bc.c",
+      "to": "src/wave7/func_0017e4bc.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d49a8",
+      "from": "src/wave7/func_001d49a8.c",
+      "to": "src/wave7/func_001d49a8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d49c8",
+      "from": "src/wave7/func_001d49c8.c",
+      "to": "src/wave7/func_001d49c8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d49e8",
+      "from": "src/wave7/func_001d49e8.c",
+      "to": "src/wave7/func_001d49e8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d911c",
+      "from": "src/wave7/func_001d911c.c",
+      "to": "src/wave7/func_001d911c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d9220",
+      "from": "src/wave7/func_001d9220.c",
+      "to": "src/wave7/func_001d9220.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0015475c",
+      "from": "src/wave10/func_0015475c.c",
+      "to": "src/wave10/func_0015475c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00138cb0",
+      "from": "src/wave8/func_00138cb0.c",
+      "to": "src/wave8/func_00138cb0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00152f10",
+      "from": "src/wave8/func_00152f10.c",
+      "to": "src/wave8/func_00152f10.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0016a27c",
+      "from": "src/wave8/func_0016a27c.c",
+      "to": "src/wave8/func_0016a27c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0018290c",
+      "from": "src/wave8/func_0018290c.c",
+      "to": "src/wave8/func_0018290c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001829d0",
+      "from": "src/wave8/func_001829d0.c",
+      "to": "src/wave8/func_001829d0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00183bc8",
+      "from": "src/wave8/func_00183bc8.c",
+      "to": "src/wave8/func_00183bc8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001c5950",
+      "from": "src/wave8/func_001c5950.c",
+      "to": "src/wave8/func_001c5950.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001c5970",
+      "from": "src/wave8/func_001c5970.c",
+      "to": "src/wave8/func_001c5970.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001c59fc",
+      "from": "src/wave8/func_001c59fc.c",
+      "to": "src/wave8/func_001c59fc.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d4a48",
+      "from": "src/wave8/func_001d4a48.c",
+      "to": "src/wave8/func_001d4a48.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d4aac",
+      "from": "src/wave8/func_001d4aac.c",
+      "to": "src/wave8/func_001d4aac.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0014603c",
+      "from": "src/sdk2/func_0014603c.c",
+      "to": "src/sdk2/func_0014603c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017da08",
+      "from": "src/sdk2/func_0017da08.c",
+      "to": "src/sdk2/func_0017da08.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00124a20",
+      "from": "src/wave11/func_00124a20.c",
+      "to": "src/wave11/func_00124a20.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d2b80",
+      "from": "src/wave12/func_001d2b80.c",
+      "to": "src/wave12/func_001d2b80.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017dae0",
+      "from": "src/wave12/func_0017dae0.c",
+      "to": "src/wave12/func_0017dae0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017daf8",
+      "from": "src/wave12/func_0017daf8.c",
+      "to": "src/wave12/func_0017daf8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017deec",
+      "from": "src/wave12/func_0017deec.c",
+      "to": "src/wave12/func_0017deec.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d4cb8",
+      "from": "src/wave12/func_001d4cb8.c",
+      "to": "src/wave12/func_001d4cb8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0014ee5c",
+      "from": "src/wave13/func_0014ee5c.c",
+      "to": "src/wave13/func_0014ee5c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0014fc78",
+      "from": "src/wave13/func_0014fc78.c",
+      "to": "src/wave13/func_0014fc78.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0015274c",
+      "from": "src/wave13/func_0015274c.c",
+      "to": "src/wave13/func_0015274c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00154224",
+      "from": "src/wave13/func_00154224.c",
+      "to": "src/wave13/func_00154224.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0016504c",
+      "from": "src/wave13/func_0016504c.c",
+      "to": "src/wave13/func_0016504c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d88f0",
+      "from": "src/wave13/func_001d88f0.c",
+      "to": "src/wave13/func_001d88f0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001f2ef8",
+      "from": "src/wave13/func_001f2ef8.c",
+      "to": "src/wave13/func_001f2ef8.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001f2f2c",
+      "from": "src/wave13/func_001f2f2c.c",
+      "to": "src/wave13/func_001f2f2c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0014ee44",
+      "from": "src/wave13/func_0014ee44.c",
+      "to": "src/wave13/func_0014ee44.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001c540c",
+      "from": "src/wave13/func_001c540c.c",
+      "to": "src/wave13/func_001c540c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00154f78",
+      "from": "src/wave14/func_00154f78.c",
+      "to": "src/wave14/func_00154f78.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0014fbcc",
+      "from": "src/wave15/func_0014fbcc.c",
+      "to": "src/wave15/func_0014fbcc.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001525f0",
+      "from": "src/wave15/func_001525f0.c",
+      "to": "src/wave15/func_001525f0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00155148",
+      "from": "src/wave15/func_00155148.c",
+      "to": "src/wave15/func_00155148.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0015643c",
+      "from": "src/wave15/func_0015643c.c",
+      "to": "src/wave15/func_0015643c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d9178",
+      "from": "src/wave15/func_001d9178.c",
+      "to": "src/wave15/func_001d9178.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d9530",
+      "from": "src/wave15/func_001d9530.c",
+      "to": "src/wave15/func_001d9530.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0015263c",
+      "from": "src/wave16/func_0015263c.c",
+      "to": "src/wave16/func_0015263c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00153fec",
+      "from": "src/wave16/func_00153fec.c",
+      "to": "src/wave16/func_00153fec.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0015477c",
+      "from": "src/wave16/func_0015477c.c",
+      "to": "src/wave16/func_0015477c.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001d94a0",
+      "from": "src/wave18/func_001d94a0.c",
+      "to": "src/wave18/func_001d94a0.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00150098",
+      "from": "src/wave19/func_00150098.c",
+      "to": "src/wave19/func_00150098.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_001501ec",
+      "from": "src/wave19/func_001501ec.c",
+      "to": "src/wave19/func_001501ec.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_0017e6a4",
+      "from": "src/wave19/func_0017e6a4.c",
+      "to": "src/wave19/func_0017e6a4.cpp"
+    },
+    {
+      "theme": "sound",
+      "function": "func_00150210",
+      "from": "src/wave20/func_00150210.c",
+      "to": "src/wave20/func_00150210.cpp"
+    }
+  ],
+  "new_reentries": [
+    "func_0015e5d4",
+    "func_001f4cf8"
+  ],
+  "prepared_identities_preserved": 2274
+}
