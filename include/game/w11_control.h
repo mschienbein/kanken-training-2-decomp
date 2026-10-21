@@ -50,10 +50,6 @@ struct AnimationState {
 };
 struct TrainingScreenA;
 struct TrainingScreenB;
-/* W11AnimatedScreenAVTable is represented by the real training scene class. */
-/* W11AnimatedScreenBVTable is represented by the real training scene class. */
-/* TrainingScreenA is represented by the real training scene class. */
-/* TrainingScreenB is represented by the real training scene class. */
 #ifdef __cplusplus
 extern "C" {
 #endif

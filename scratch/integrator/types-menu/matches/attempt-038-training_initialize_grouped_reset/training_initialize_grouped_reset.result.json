@@ -1,0 +1,111 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+ "source_sha256": "559e18c178c49cde384fd9df8f7ebd9f40de07341ff976562eda9a4cebcea6a4",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "1549a9fe3852a4e86bdd417903e318e3c209651ea08ea937d9731bba027d1c35",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001e0afc/removed_initializers.c",
+   "source_sha256": "6eecbf5ad825ff2dbfd0820d2eadd5873a134673d4c6e4f9e9920f8afdae32d0",
+   "object_sha256": "a8b0779aa6d2a3f678fbaf83ce84861818174f21af291442d17d3f6d4f738796"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "TU924_page_count"
+   ],
+   "section": "i.TU924_page_count",
+   "size": 8,
+   "object": "scratch/integrator/types-menu/matches/attempt-038-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+  },
+  {
+   "symbols": [
+    "TU924_reset_optional"
+   ],
+   "section": "i.TU924_reset_optional",
+   "size": 4,
+   "object": "scratch/integrator/types-menu/matches/attempt-038-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+  },
+  {
+   "symbols": [
+    "TU924_reset_prompts"
+   ],
+   "section": "i.TU924_reset_prompts",
+   "size": 4,
+   "object": "scratch/integrator/types-menu/matches/attempt-038-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "_ZN20SummaryTrainingScene8activateEv",
+   "address": 1968892,
+   "size": 1740,
+   "candidate_size": 1740,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 176,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5900010",
+     "removed_callee": {
+      "symbols": [
+       "TU924_page_count"
+      ],
+      "section": "i.TU924_page_count",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-038-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+     }
+    },
+    {
+     "offset": 368,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "TU924_reset_prompts"
+      ],
+      "section": "i.TU924_reset_prompts",
+      "size": 4,
+      "object": "scratch/integrator/types-menu/matches/attempt-038-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+     }
+    },
+    {
+     "offset": 552,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "TU924_reset_optional"
+      ],
+      "section": "i.TU924_reset_optional",
+      "size": 4,
+      "object": "scratch/integrator/types-menu/matches/attempt-038-training_initialize_grouped_reset/extra-0-removed_initializers.o"
+     }
+    }
+   ]
+  }
+ ]
+}

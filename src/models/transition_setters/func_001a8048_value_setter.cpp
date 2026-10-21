@@ -33,7 +33,7 @@ extern "C" void func_001a8048(struct InitializationMenuScene *screen)
     case 14:
         /* [INFERENCE] callee identity: active-field getter inlined by armlink
          * and removed after every reference was inlined. */
-        if (transition_active(screen->transition) == 0) {
+        if (transition_active(&screen->transition->data) == 0) {
             func_00172c28(screen->transition);
             func_001770cc(screen->controls, 13, 1);
             switch (screen->stages[0]) {

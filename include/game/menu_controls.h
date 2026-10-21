@@ -44,4 +44,15 @@ struct MenuControlSet {
     uint8_t reserved75[3];
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* One shared owner contract for the retained C cleanup and later native
+ * teardown; c010/cmodels2 bodies re-enter only after their own fresh proof. */
+void func_001e9ea4(struct MenuControlSet *controls, int index);
+void func_001e958c(struct MenuControlSet *controls);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

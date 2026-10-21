@@ -402,7 +402,7 @@ extern struct StyleOwner *func_001eb0d0(struct StyleOwner *owner);
 extern struct StyleOwner *func_001eade0(void);
 extern struct ResourceEvent *func_0017a818(const struct NameTable *table,
     int screen, int active, float x, float y, float z);
-extern void func_00175ab8(void *screen, int index,
+extern void func_00175ab8(struct W8DisplaySet *screen, int index,
                          int red, int green, int blue, int alpha);
 extern void func_00166eac(struct W8DisplaySet *screen, int index, float x, float y);
 extern void func_00175848(void);

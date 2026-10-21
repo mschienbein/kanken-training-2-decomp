@@ -19,10 +19,6 @@ struct ColorPanel;
 struct TextPanel;
 struct FooterPanel;
 struct PairCollection;
-struct SelectionGrid {
-    unsigned char reserved00[0x3c];
-    int selected;
-};
 #ifdef __cplusplus
 struct TrainingScreenA : MenuScene {
     virtual void build();
@@ -53,11 +49,6 @@ struct TrainingScreenA : MenuScene {
     unsigned short character;
     unsigned char reserved456[0x1e];
     W11ControlScreen *small_controls;
-    unsigned char reserved478[0x34];
-    int alternate_drawing_state;
-    unsigned short alternate_character;
-    unsigned char reserved4b2[0x1e];
-    struct SelectionGrid *grid;
 };
 #endif
 #ifdef __cplusplus
@@ -150,6 +141,7 @@ extern void func_001dc230(int value);
 extern struct TransformEntry *func_00174454(int group, int index);
 extern void func_001dbc84(void);
 extern void func_001e3050(struct SummaryTrainingScene *screen);
+void func_001dd6c8(struct SummaryTrainingScene *screen);
 extern int func_00173620(void);
 extern void func_00176c6c(struct MessageLayout *layout);
 extern void func_00176ae8(struct SelectionList24 *screen, int first, int second);
@@ -167,6 +159,7 @@ extern void func_00175a5c(struct MenuControlSet *owner, int index,
                           float x, float y, float width, float height);
 extern void func_001758e4(struct MenuOptionGroup *accessory);
 extern int func_0017abf8(int channel, int sound);
+int func_00172994(int channel);
 #ifdef __cplusplus
 }
 #endif

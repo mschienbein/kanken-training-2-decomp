@@ -109,10 +109,14 @@ extern "C" {
 #endif
 /* [INFERENCE] Erased secondary update and state-accessor identities remain unknown. */
 void tu441_update_secondary(struct Tu441SecondaryController *controller);
-signed char tu441_transition_active(const struct PairCollection *controller);
+signed char tu441_transition_active(const struct PairCollectionData *controller);
 int func_00171e30(void);
 void func_001c1080(void *object);
 void func_0016337c(struct MenuExtentScene *state, int current);
+void func_001a3978(struct SelectionMenuScene *scene);
+void func_001a7b54(struct InitializationMenuScene *scene);
+void func_00171268(struct InitializationMenuScene *scene, int mode);
+void func_001a7494(struct InitializationMenuScene *scene, int from_list);
 int func_00171d88(const struct MenuControlSet *owner, int index, int child_index);
 void func_00171d40(struct MenuControlSet *owner, int index, int child_index, int text);
 void func_00171db8(struct MenuControlSet *owner, int index, int child_index, float x, float y);

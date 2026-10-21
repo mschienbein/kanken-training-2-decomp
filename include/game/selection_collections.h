@@ -2,6 +2,7 @@
 #define GAME_SELECTION_COLLECTIONS_H
 #include "game/runtime.h"
 #include "game/menu_collections.h"
+#include "game/pair_collection_data.h"
 
 #ifdef __cplusplus
 /* These native owner/template identities are preserved from the c011 model.
@@ -34,11 +35,16 @@ struct HandleCollection : MaskDimensions {
                 entries[i] = new (data_002232d5) Handle;
     }
 };
-struct PairCollection : HandleCollection<PairHandle, 10> {
-    /* Transition consumers use this same factory-fed complete owner. */
-    unsigned char active, paused, reserved36[2];
-    float elapsed, duration;
-    int mode;
+struct PairCollection {
+    PairCollectionData data;
+    PairCollection() {
+        data.dimensions.bits_per_word = 32;
+        data.dimensions.word_count = 1;
+        data.mask = 0;
+        for (int i = 0; i < 10; ++i)
+            if (!data.entries[i])
+                data.entries[i] = new (data_002232d5) PairHandle;
+    }
     ~PairCollection();
 };
 struct ScalarCollection : HandleCollection<ScalarHandle, 20> {

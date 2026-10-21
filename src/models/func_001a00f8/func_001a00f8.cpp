@@ -17,7 +17,7 @@ extern "C" void func_001a00f8(struct MenuExtentScene *screen)
         screen->stages[screen->depth] = 20;
         break;
     case 20:
-        if (r4040_transition_active(screen->transition) == 0) {
+        if (r4040_transition_active(&screen->transition->data) == 0) {
             func_00172c28(screen->transition);
             func_001770cc(screen->controls, 0, 1);
             func_001770cc(screen->controls, 2, 1);

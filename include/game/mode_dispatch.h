@@ -6,7 +6,6 @@
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
-struct CategoryScene;
 
 /* CategoryScene is defined in category_progress.h. */
 

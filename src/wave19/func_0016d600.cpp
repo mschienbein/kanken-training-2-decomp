@@ -4,7 +4,6 @@
 #include "game/training_screen.h"
 
 
-extern void func_0016e798(struct CharacterPanel *panel, int mode);
 
 extern "C" void func_0016d600(struct TrainingScreenA *screen, int mode, int reset)
 {

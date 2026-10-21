@@ -19,8 +19,8 @@ void func_001b6788(struct PairCollection *controller, int mode);
 void func_001a00f8(struct MenuExtentScene *screen);
 void func_001a8048(struct InitializationMenuScene *screen);
 /* [INFERENCE] Candidate-only active-byte accessor identities are not recovered. */
-int transition_active(const struct PairCollection *controller);
-signed char r4040_transition_active(const struct PairCollection *controller);
+int transition_active(const struct PairCollectionData *controller);
+signed char r4040_transition_active(const struct PairCollectionData *controller);
 #ifdef __cplusplus
 }
 #endif

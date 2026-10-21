@@ -61,7 +61,7 @@ void func_001a3ee0(struct SelectionMenuScene *screen)
     case 14:
         /* [INFERENCE] The result/receiver contract is evidenced, but the
          * identity of this armlink-inlined, removed accessor is unknown. */
-        if (tu441_transition_active(transition_group(screen)) == 0) {
+        if (tu441_transition_active(&transition_group(screen)->data) == 0) {
             func_00172c28(transition_group(screen));
             func_001770cc(screen->controls, 14, 1);
             switch (screen->stages[0]) {
