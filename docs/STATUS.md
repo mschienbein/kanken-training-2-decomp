@@ -2,6 +2,28 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-23 (night) — denominator v14 adopted; resumed with 2 subagents
+
+**Accepted:** 2,770 functions / 301,020 B (seq 12, unchanged). Denominator **v14** (history v11):
+4,546 creditable functions / 1,120,094 B (**26.88%**). Gates **v1.20**.
+
+- **Catalogue v14** classifies 25 functions as non-C, so the creditable count drops by
+  25 functions / 1,580 B. Their extents, entries and every accepted record are unchanged.
+  - Vendor library, proven against the ARM Compiler 5.04/5.06 runtime archives: `_snputwc`,
+    `strcat`, `wcsncpy`, `__cxa_guard_acquire` and `wcslen`.
+  - Handwritten assembly: the 20-member NW4C `FastWordCopyAsm_*` family. Each member's operation
+    trace matches the public macro expansion.
+  - Review: r1 FAIL on one finding (tests pinned totals). r2 PASS_WITH_QUALIFICATIONS with no
+    open findings, including a fresh regeneration byte-identical to the proposal
+    (`docs/catalogue/REVIEW-v14-r1.md`, `REVIEW-v14-r2.md`). Full suite: 1,109 tests passing on
+    the adopted tree.
+  - Unknown bytes (114 B in 11 intervals) and the single anomaly are unchanged.
+- **Resumed** at the user's request with a cap of **2 concurrent subagents**.
+  - c012-r5 combines ctypes1 r4 and c012 r4, merged onto main with their conflicts resolved.
+    About 29 new functions / 4.8 KB and 31 moves; closure re-proof in progress.
+  - The residue generator (`residue-table` branch) now reads permuter sweep-11. The draft table
+    `RESIDUE-r4` lists 115 functions still missing step 4, down from 162.
+
 ## 2026-10-23 (evening) — c011-r11 accepted (+88 functions); pipeline paused
 
 **Accepted:** 2,770 functions / 301,020 B (seq 12: … c010-r8, c011-r11). Denominator **v13-r2**:
