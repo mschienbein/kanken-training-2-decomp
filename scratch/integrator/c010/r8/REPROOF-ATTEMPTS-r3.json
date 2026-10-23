@@ -1,0 +1,314 @@
+{
+  "schema_version": 1,
+  "source_commit": "102a6d8078f745e193e6db4fd258d4add1192b7e",
+  "commands": [
+    {
+      "kind": "original_graph_census",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/runtime_graph.py",
+        "--out",
+        "scratch/integrator/c010/r8/original-runtime-graph-r1.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/original-runtime-graph-r1.json"
+    },
+    {
+      "kind": "original_graph_census",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/runtime_graph.py",
+        "--out",
+        "scratch/integrator/c010/r8/original-runtime-graph-r2.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/original-runtime-graph-r2.json"
+    },
+    {
+      "kind": "original_graph_census",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/runtime_graph.py",
+        "--out",
+        "scratch/integrator/c010/r8/original-runtime-graph-r3.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/original-runtime-graph-r3.json"
+    },
+    {
+      "kind": "focused_declaration_census_not_gate",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/callback_types.py",
+        "--graph",
+        "scratch/integrator/c010/r8/original-runtime-graph-r3.json",
+        "--prior-scope",
+        "scratch/integrator/c010/r7/complete-match-scope-r2.json",
+        "--out",
+        "scratch/integrator/c010/r8/callback-types-r1.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/callback-types-r1.json"
+    },
+    {
+      "kind": "focused_declaration_census_not_gate",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/callback_types.py",
+        "--graph",
+        "scratch/integrator/c010/r8/original-runtime-graph-r3.json",
+        "--prior-scope",
+        "scratch/integrator/c010/r7/complete-match-scope-r2.json",
+        "--out",
+        "scratch/integrator/c010/r8/callback-types-r2.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/callback-types-r2.json"
+    },
+    {
+      "kind": "focused_declaration_census_not_gate",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/callback_types.py",
+        "--graph",
+        "scratch/integrator/c010/r8/original-runtime-graph-r3.json",
+        "--prior-scope",
+        "scratch/integrator/c010/r7/complete-match-scope-r2.json",
+        "--out",
+        "scratch/integrator/c010/r8/callback-types-r3.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/callback-types-r3.json"
+    },
+    {
+      "kind": "focused_declaration_census_not_gate",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/callback_types.py",
+        "--graph",
+        "scratch/integrator/c010/r8/original-runtime-graph-r3.json",
+        "--prior-scope",
+        "scratch/integrator/c010/r7/complete-match-scope-r2.json",
+        "--source-census",
+        "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE-r1.json",
+        "--out",
+        "scratch/integrator/c010/r8/callback-types-r4.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/callback-types-r4.json"
+    },
+    {
+      "kind": "callback_contract_join",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/close_runtime_callbacks.py",
+        "--out",
+        "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE-r1.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 1,
+      "output": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE-r1.json"
+    },
+    {
+      "kind": "callback_contract_join",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/close_runtime_callbacks.py",
+        "--out",
+        "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE-r2.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE-r2.json"
+    },
+    {
+      "kind": "callback_contract_join",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/r8/close_runtime_callbacks.py",
+        "--out",
+        "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "output": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json"
+    },
+    {
+      "kind": "sequential_niced_single_process_match",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/match_scope.py",
+        "--run",
+        "match-r8-focused-r1",
+        "--scope",
+        "scratch/integrator/c010/r8/focused-scope-r1.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 1,
+      "result": "scratch/integrator/c010/match-r8-focused-r1/results.json",
+      "unit_exit_counts": {
+        "0": 6,
+        "1": 1
+      },
+      "matched_units": 6,
+      "completed_units": 7
+    },
+    {
+      "kind": "sequential_niced_single_process_match",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/match_scope.py",
+        "--run",
+        "match-r8-focused-r2",
+        "--scope",
+        "scratch/integrator/c010/r8/focused-scope-r1.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 1,
+      "result": "scratch/integrator/c010/match-r8-focused-r2/results.json",
+      "unit_exit_counts": {
+        "0": 6,
+        "1": 1
+      },
+      "matched_units": 6,
+      "completed_units": 7
+    },
+    {
+      "kind": "sequential_niced_single_process_match",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/match_scope.py",
+        "--run",
+        "match-r8-r1",
+        "--scope",
+        "scratch/integrator/c010/r8/complete-match-scope-r3.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 1,
+      "result": "scratch/integrator/c010/match-r8-r1/results.json",
+      "unit_exit_counts": {
+        "0": 2594,
+        "1": 1
+      },
+      "matched_units": 2594,
+      "completed_units": 2595
+    },
+    {
+      "kind": "sequential_niced_single_process_match",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "scratch/integrator/c010/match_scope.py",
+        "--run",
+        "match-r8-r2",
+        "--scope",
+        "scratch/integrator/c010/r8/complete-match-scope-r4.json"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0,
+      "result": "scratch/integrator/c010/match-r8-r2/results.json",
+      "unit_exit_counts": {
+        "0": 2594
+      },
+      "matched_units": 2594,
+      "completed_units": 2594
+    }
+  ],
+  "honest_failed_match_sources": [
+    {
+      "source": "scratch/integrator/c010/r8/TevStage-generic-recovery.cpp",
+      "source_sha256": "d67ae7ab3f49592cc1df1f90485be85419dc2cb6973288ea29527f63487f39d7",
+      "result": "scratch/integrator/c010/match-r8-focused-r1/results.json",
+      "exit_code": 1,
+      "output": "MISMATCH func_0014b54c @ 0x14b54c size 0xac/0x40 first difference at +0x0\n"
+    },
+    {
+      "source": "scratch/integrator/c010/r8/TevStage-native-placement.cpp",
+      "source_sha256": "0eaadbe19c6dcfee8d289aff9bf7cf64329a24e9c8cdc11f431e11e8c6057b53",
+      "result": "scratch/integrator/c010/match-r8-focused-r2/results.json",
+      "exit_code": 1,
+      "output": "MISMATCH func_0014b54c @ 0x14b54c size 0xb4/0x40 first difference at +0x0\n"
+    }
+  ],
+  "metadata_setup_notes": [
+    {
+      "kind": "host_kernel_import",
+      "exit_code": 1,
+      "detail": "capstone was absent from the host interpreter search path. Reused the existing project venv site-packages; installed nothing."
+    },
+    {
+      "kind": "native_receipt_status_assertion",
+      "exit_code": 1,
+      "detail": "Metadata assertion expected uppercase MATCH; matcher receipts use lowercase match. Observed all13 native receipts match and the emitted symbols agree; no source/build retry or verification failure."
+    }
+  ],
+  "additional_fact_commands": [
+    {
+      "argv": [
+        ".venv/bin/python",
+        "-c",
+        "import site; print(site.getsitepackages())"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "git",
+        "show",
+        "819edc6f3d81142a97e06b1b057f563040d5fc4d:src/checkpoint10/collect-r2/func_0014b54c.cpp"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+      "exit_code": 0
+    }
+  ],
+  "boundary": "All nonzero exits retained. No whole-ledger interfaces/argcheck command, full build, suite, prepare, review registration, finalize or push executed."
+}

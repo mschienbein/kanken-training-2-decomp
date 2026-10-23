@@ -32,7 +32,7 @@ struct W22StreamWorker {
 extern "C" {
 #endif
 extern struct W22StreamWorker bss_004962a8;
-extern void func_00107ce4(struct SignalState *wake);
+extern void func_00107ce4(void *argument, void *context);
 #ifdef __cplusplus
 }
 #endif

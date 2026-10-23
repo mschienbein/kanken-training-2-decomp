@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "status": "C010_R8_EXHAUSTIVE_RUNTIME_CALLBACK_CLOSURE_COMPLETE_PROPOSED_LEDGER_MATCH_MAIN_GATES_PENDING",
+  "checkpoint": "c010-r8",
+  "branch": "c010-r7",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+  "source_commit": "102a6d8078f745e193e6db4fd258d4add1192b7e",
+  "immutable_prior_tip": "819edc6f3d81142a97e06b1b057f563040d5fc4d",
+  "registered_review_main": "8725b134",
+  "source_commits": [
+    "92f3cc4ea82c3722d4ff1f3c71e0b4a6d6f46d7d",
+    "102a6d8078f745e193e6db4fd258d4add1192b7e"
+  ],
+  "integration": "Integrate the entire819edc6f..c010-r7 delta. The handoff/evidence commit descends from the source commits and changes no compiler input. Main alone writes main/acceptance records.",
+  "accepted_predecessor": "c009-r6 finalized",
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2 inherited",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "counts": {
+    "candidate_units": 414,
+    "candidate_claims": 425,
+    "NEW_functions": 413,
+    "NEW_bytes": 39208,
+    "moves": 12,
+    "moved_bytes": 192,
+    "deferral_units": 93,
+    "deferral_functions": 94,
+    "deferral_bytes": 8404,
+    "proposed_units": 2618,
+    "proposed_functions": 2682,
+    "proposed_bytes": 288580,
+    "accepted_predecessor_functions": 2269,
+    "accepted_predecessor_bytes": 249372,
+    "preserved_accepted_identities": 2269,
+    "helper_only_units": 24,
+    "proof_primary_units": 2594
+  },
+  "all_2269_accepted_identities_preserved": true,
+  "source_binding_matches_every_final_proof_row": true,
+  "folded_review": {
+    "codex_b": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/review/c010-r7/codex-b/REVIEW.json",
+      "sha256": "5673e6fe5dbead722b5890cfa7aa69a6582987b48cfe712f16c0ee18804fff42",
+      "verdict": "FAIL",
+      "finding": "F01",
+      "disposition": "Genuine generic void*(void*) repairs for0014d664/001c4b10; NEW-only defer0014b54c after two honest generic/native-construction failures. No cast/specialized runtime/shadow interface/codegen forcing."
+    },
+    "codex_a": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/review/c010-r7/codex-a/REVIEW.json",
+      "sha256": "b3721b9a4c97c59bca0f1088b1c94e75e77faef72924f68d53abb0b116bd83de",
+      "verdict": "PASS_WITH_QUALIFICATIONS",
+      "findings": 0,
+      "disposition": "Preserve inherited qualifications and historical review; exhaustive additional callback class sweep is new bound evidence, not a replacement verdict."
+    }
+  },
+  "current_repaired_NEW_providers": [
+    "func_0014d664",
+    "func_001c4b10",
+    "func_0010a704",
+    "func_001c5764",
+    "func_001c588c",
+    "func_001db960"
+  ],
+  "new_r8_deferrals": {
+    "functions": 5,
+    "bytes": 572,
+    "names": [
+      "func_00107ce4",
+      "func_0014b54c",
+      "func_0014b85c",
+      "func_001d4078",
+      "func_001e5a20"
+    ],
+    "authority": "scratch/integrator/c010/r8/NEW-DEFERRALS-r4.json",
+    "dependent_boundary": "The five direct/address consumers in the complete original graph are uncredited; no current NEW dependent remains. Accepted identities are never deferred."
+  },
+  "runtime_callback_census": {
+    "catalogue_functions": 4743,
+    "decoded_functions": 4743,
+    "decode_errors": 0,
+    "original_call_sites_scanned": 20327,
+    "source_files_scanned": 3228,
+    "callback_runtime_entries": 53,
+    "array_entrypoints_including_veneers": 5,
+    "array_original_call_sites": 70,
+    "array_provider_addresses": 45,
+    "original_callback_parameter_rows": 272,
+    "source_api_mentions": 141,
+    "explicit_source_calls": 70,
+    "passed_code_candidates_classified": 308,
+    "indirect_parameter_candidates_retained": 547,
+    "unique_provider_contract_rows": 157,
+    "NEW_provider_addresses": 17,
+    "revised_provider_addresses": 7,
+    "accepted_attention_rows": 55,
+    "source_only_noninvoking_helpers": 8,
+    "native_member_callback_families": 4,
+    "native_member_provider_addresses": 6,
+    "unmodeled_existing_passed_code_candidates": 26,
+    "source_scan_errors": 0,
+    "unresolved_NEW_or_revised_rows": 0
+  },
+  "callback_contract_result": "Zero unresolved NEW/revised rows across17 NEW and7 revised/moved provider addresses, including all six genuine native character-reader methods.157 provider-contract rows;5 array entrypoints/veneers,70 original array sites,45 array provider addresses. Source-only no-op helpers remain distinct from generic invoking runtimes and from erased original identities.",
+  "inherited_accepted_attention_for_Main": {
+    "definite_type_or_role_mismatch_rows": 48,
+    "nominal_custom_family_qualification_rows": 7,
+    "all_unchanged_accepted": true,
+    "unmodeled_passed_code_candidate_rows": 26,
+    "unmodeled_candidate_states": {
+      "ACCEPTED_UNCHANGED": 24,
+      "UNCLAIMED": 2
+    },
+    "authority": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json",
+    "disposition": "Explicit separate obligations for Main; no accepted provider was changed or silently declared ABI-safe. These counts are rows, not unique function counts."
+  },
+  "final_reproof": {
+    "schema_version": 1,
+    "source_commit": "102a6d8078f745e193e6db4fd258d4add1192b7e",
+    "status": "COMPLETE_PROPOSED_LEDGER_MATCH",
+    "scope": "scratch/integrator/c010/r8/complete-match-scope-r4.json",
+    "scope_sha256": "08b4c579158e89ae02e1766a533ce6146e61e6a8fb8d7b0012e2b92fb8c57da4",
+    "context": "scratch/integrator/c010/r8/SOURCE-CONTEXT-r4.json",
+    "context_sha256": "43b867a360868e379b789a64beecaf132279f55e6307f3c9f01dcb32d82bd806",
+    "result": "scratch/integrator/c010/match-r8-r2/results.json",
+    "result_sha256": "680b97d55ce94ec44e4da5e89d51cadc6f52c2ca69ead76371f344e8622e37e0",
+    "exit_code": 0,
+    "expected_units": 2594,
+    "completed_units": 2594,
+    "MATCH_units": 2594,
+    "exit_counts": {
+      "0": 2594
+    },
+    "required_functions_MATCH": 2682,
+    "all_credited_functions_match": true,
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "linker_rewrites": "scratch/integrator/c010/match-r8-r2/linker-rewrites.json",
+    "linker_rewrites_sha256": "ad85bb3bed0e9c13d183a0b38c87a3d9ff3a070ecd75912c65ec71f9dd6ce24f",
+    "scope_complete": true,
+    "helper_only_units": 24,
+    "runner_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+    "source_context_policy": "Compiler inputs are pinned to102a6d80. Later work is docs/evidence only. Main must reprove after any source/header/profile/name/catalogue/composition drift."
+  },
+  "failed_attempt_boundary": "Both TevStage variants fail and are hash-exact source snapshots. First complete proof found generic stream-thread220/216B; that NEW provider is withdrawn. All failed/partial outputs and actual exit codes are retained in REPROOF-ATTEMPTS-r3.json. Final proof is the entire proposed ledger, not a passing subset of its required scope.",
+  "c009_owned_deferrals_unchanged": [
+    "func_00131540",
+    "func_001f4920",
+    "func_001efcec",
+    "func_001f4994",
+    "func_00117854"
+  ],
+  "preserved_interface_rulings": [
+    "opaque FontVTable",
+    "float(float) converter protocol",
+    "accepted scene/allocator/Pane-Material/sound/legacy-retail-font interfaces",
+    "accepted native dispatch/owner cutover",
+    "native pointer-to-member owners, not C descriptor decoding"
+  ],
+  "authority_sha256": {
+    "config/candidates/c010.json": "45a029c5b5e9dc00cfd701b091659182bbb32ed417dcacd4d4f3209ac819da53",
+    "docs/known-issues-c010.md": "652166889b3e52cd3170c8dd3b53e23f24f8b39a5beb86e17e8ad389df1947ce",
+    "scratch/integrator/c010/r8/dry-matches-r4.json": "e57cedce04efa1c7352ca4aecdb973f395a3269b37ace9f30946d1e538a7f367",
+    "scratch/integrator/c010/r8/complete-match-scope-r4.json": "08b4c579158e89ae02e1766a533ce6146e61e6a8fb8d7b0012e2b92fb8c57da4",
+    "scratch/integrator/c010/r8/SOURCE-CONTEXT-r4.json": "43b867a360868e379b789a64beecaf132279f55e6307f3c9f01dcb32d82bd806",
+    "scratch/integrator/c010/r8/NEW-DEFERRALS-r4.json": "417714b63c1c8c596dd69ca3340c7e0e503dafee2ce2f5545c487e2177ddfdeb",
+    "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json": "a9bbac9992ea67218441d6918899d69029b286897d5de0662df7e13e680fd13e",
+    "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CONSUMERS.json": "1fefc4d1c7d3f5d4367df290f78325ae312ed057c53e6d7538ce0cf9773c5511",
+    "scratch/integrator/c010/r8/NATIVE-SYMBOL-WITNESSES.json": "608b9c93ae40dc485281d07e94639942a5ae0c05f9c9834d3ecce606486f27e7",
+    "scratch/integrator/c010/r8/REPROOF-SUMMARY-r3.json": "e1df77756ca39d8920a4b56fe664881ee1069529db460cec2f1a0680f7ac905d",
+    "scratch/integrator/c010/r8/REPROOF-ATTEMPTS-r3.json": "1ac7aa08b563d9d1a26d1c6fe84d514c9fcaab1d8630433974d780d74193a4ae",
+    "scratch/integrator/c010/r8/REMAINING-HEAVY-COMMANDS-r3.json": "4e0ae969c977f6a447a9f0b6a5151e3275d0938ee1fddd65e165b2d0f15f0ebe",
+    "scratch/integrator/c010/r8/original-runtime-graph-r3.json": "1461d12a3b54ef1a0eb07048643f495ade5d159f99537f1f0b1db8c56304e820",
+    "scratch/integrator/c010/r8/callback-types-r4.json": "1dd541c8a43a84d11ff31dabda065ee2d098349dcbcf1da6fb25faf627a3e910",
+    "scratch/integrator/c010/r8/SOURCE-FILES.json": "20b3106f38da3f4a9f29b732ef9d104aac623ff2cad0b5fbf460043ad94d474a",
+    "scratch/integrator/c010/match-r8-r2/results.json": "680b97d55ce94ec44e4da5e89d51cadc6f52c2ca69ead76371f344e8622e37e0",
+    "scratch/integrator/c010/match-r8-r2/linker-rewrites.json": "ad85bb3bed0e9c13d183a0b38c87a3d9ff3a070ecd75912c65ec71f9dd6ce24f"
+  },
+  "not_run": [
+    "whole-ledger interfaces gate",
+    "whole-ledger argcheck gate",
+    "full build",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "remaining_blockers": [
+    "Main integrates complete source/manifest/deferral/docs/evidence cutover without compiler-input drift.",
+    "Main resolves/adjudicates explicit unchanged accepted attention; no blanket waiver or source-type aliasing.",
+    "Main runs current whole-ledger interfaces and argcheck under exclusive heavy slot using REMAINING-HEAVY-COMMANDS-r3.json.",
+    "Main prepares unused c010-r8 from clean committed integrated source: two fresh full builds plus suite, then two independent bound reviews before finalize/push."
+  ],
+  "cleanup": "No new production adapters, callback casts, shims, fake callees, asm, volatile/barriers or forcing. Evidence scripts and immutable failed source snapshots are intentional reproducibility records. Private compiler intermediates are not delivery artifacts."
+}
