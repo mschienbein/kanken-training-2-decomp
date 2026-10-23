@@ -5,7 +5,7 @@
 
 static const struct TextTable *text_names(const struct W8TextTable *table)
 {
-    return (const struct TextTable *)(table + 1);
+    return &table->names;
 }
 
 static int text_count(const struct W8TextTable *table)

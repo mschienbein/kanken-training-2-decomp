@@ -1,4 +1,4 @@
-# c011-r9 candidate — canonical interfaces and folded c013/c014 intake
+# c011-r11 candidate — source-policy remediation and folded c013/c014 intake
 
 This is an **unaccepted single candidate** descending from c011-r8 `f9ea308e`.
 It retains c013's earlier fold and now merges **c014 `479eb7f4`** into c011.
@@ -15,27 +15,64 @@ v1.20 files; no U1/v18 selection or gate-design change is proposed here. The
 interfaces checker used here is byte-identical to Main's failed-merge checker.
 Denominator remains **v13-r2**.
 
+## R11 source-policy remediation
+
+Both independent r10 reviews FAILed despite exact matcher proofs. Codex-a's
+three findings are the same AnimationChild, HWR-root and names-table issues
+as codex-b F01, F03 and F02 respectively; codex-b F04 adds the packet overlap.
+R11 changes no acceptance records, frozen gates or linker/literal selection.
+
+- **F01 fixed, 72 B:** `00171d40` reads the canonical `AnimationChild.object`
+  and `.table` members directly; no memcpy prefix view remains.
+- **F02 fixed, 40 B:** `W8TextTable` owns its real `TextTable names` member at
+  `+0x84`; the accessor returns `&table->names`, not a one-past-object cast.
+- **F03 fixed, 456 B:** `data_00243830` is one `HwrCandidateStorage *` root.
+  The accepted `0014db18` initializer publishes the canonical typed
+  `bss_004de5cc` object; all selected users share that declaration. Its 36-B
+  accepted body and the new consumer both re-prove MATCH. The candidate
+  explicitly records it in `revised_accepted_units` metadata, not as NEW
+  credit or a move; prepare's normal source-hash detection reopens its review.
+- **F04 held, 276 B:** three compliant bank-owned packet representations
+  produce 268/272/272 B rather than the required 276 B (matcher exits 1/1/1).
+  The NEW singleton is removed from the manifest, and its source, exclusive
+  types and declarations are deleted. `graphics_address.h` retains its other
+  live descriptor/address interfaces. No accepted declaration is weakened.
+  The manifest's hold names F04 and `scratch/c011-r11/F04/DISPOSITION.json`.
+
+All failed attempts retain source/header snapshots, commands, exits and matcher
+receipts under `scratch/c011-r11/`. The integrated-base dependent closure,
+including the conservative shared-header R1 expansion, is **78 sequential
+matcher commands, all exit 0: 81 credited functions MATCH**, with all
+**24 helper-only definitions** supplied in their natural caller contexts.
+`CLOSURE-PLAN.json`, `CLOSURE-RESULTS.json` and `MATCH-COMMANDS.json` record
+the scope and every exit. R11's separately granted whole-ledger interfaces
+check ran **once, exit 0: 2,694 units, 0 disagreements, 0 policy items**.
+Its **733 unchecked C++ units** retain the explicit parser-coverage waiver;
+1,961 units are checked. `INTERFACES.json`, the exact request/grant, captured
+output and immediate atomic heavy-slot release are retained in the same
+directory. No full build, suite or acceptance operation was run for r11.
+
 ## Current combined scope
 
-- **81 candidate units / 98 claims:** **89 NEW functions / 12,716 B**, plus
+- **80 candidate units / 97 claims:** **88 NEW functions / 12,440 B**, plus
   **9 explicit stable-identity moves / 872 B**. All claims are ordinary creditable
   functions, not classified runtime or library credit.
-- The current proposal is **2,695 units / 2,771 functions / 301,296 B**, including
+- The current proposal is **2,694 units / 2,770 functions / 301,020 B**, including
   all **24 helper-only units**. Every accepted identity survives. Four emptied
   move-source paths are absent; `00155ab4` stays at its accepted c010 owner.
 - C013 contributes **3 NEW / 908 B**; C014 contributes **10 NEW / 1,636 B** with
   no extra moves. Existing `src/checkpoint13/` and `src/checkpoint14/` paths are
   owned only by the combined c011 manifest, not separate checkpoints.
-- C011 has **116 distinct holds / 22,532 B**. C014's three holds / 604 B add only
+- C011 has **117 distinct holds / 22,808 B**. C014's three holds / 604 B add only
   **two distinct holds / 184 B**, because `001ae140` was already held. C009's
   **28 / 3,588 B** and c010-r8's **94 / 8,404 B** remain predecessor-owned:
-  **238 combined distinct holds**. No rejected body or speculative name overlay
+  **239 combined distinct holds**. No rejected body or speculative name overlay
   is reintroduced.
 
-Current entry point: `scratch/integrator/c011/r9/HANDOFF.json`. **Use
-`PROPOSED-LEDGER-r2.json` and the r2 complete proof/rewrite scope.** The earlier
-`PROPOSED-LEDGER.json` and `PRE-C014-REPROOF-r1.json` preserve the smaller scope
-before Main added the c014 fold; they must not drive combined gates.
+R11 entry point: `scratch/c011-r11/`. Its composed ledger and dependent
+closure supersede the affected r10 inputs. The complete r9 baseline evidence
+is retained at `scratch/integrator/c011/r9/HANDOFF.json`; earlier unfurled or
+pre-c014 ledgers must not drive combined gates.
 
 ## Main interfaces FAIL remediation
 
@@ -79,7 +116,9 @@ body token hashes remain identical and each re-proves MATCH. The old local
 header returns unsigned. The accepted forwarding caller keeps its own public
 int result while using the correct callee declaration and still MATCHes.
 Including c014's coherent field/type cutovers, **31 surviving accepted source
-units / 31 functions** are revised and require renewed acceptance review.
+units / 31 functions** were revised in r9. R11 additionally revises accepted
+`0014db18`, so **32 surviving accepted source units / 32 functions** require
+renewed acceptance review.
 
 The final scoped sweep covers **410 qualified class/struct/union identities**
 from c011/c014 sources and changed headers, compared against every project
@@ -88,7 +127,7 @@ respected. It finds no differing definitions or remaining local C++ declarations
 of c011-credited functions. The source declaration search has only an unselected
 old texture attempt and two ordinary call statements, not live declarations.
 
-## Exercised whole-ledger interfaces gate
+## Earlier r9 whole-ledger interfaces gate
 
 Main granted the exclusive heavy slot for **exactly one combined run**:
 
@@ -176,9 +215,9 @@ SDK/middleware profiles are byte witnesses, not historic ownership certificates.
 Helper/type/TU names and incomplete dynamic populations remain `[INFERENCE]`.
 No accepted family is declared recovered merely because a NEW caller is held.
 
-## Complete proof and remaining Main work
+## Earlier r9 complete proof and remaining Main work
 
-The final **combined** proposal ran **2,671 sequential niced single-process
+The r9 **combined** proposal ran **2,671 sequential niced single-process
 `tools/match.py --show 0` commands, all exit 0**; all **2,771 required functions
 MATCH**, with all **24 helper-only definitions** supplied in natural contexts.
 No `0017e764` body is supplied or compared. The earlier 2,661-command r9 pass

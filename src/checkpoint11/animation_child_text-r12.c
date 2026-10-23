@@ -1,4 +1,3 @@
-#include <string.h>
 #include "game/animation.h"
 #include "game/menu_controller.h"
 
@@ -18,9 +17,7 @@ static void update_text(struct AnimationOwner *owner, int index, int child_index
     struct AnimationChild *child;
     find_child(owner, index, child_index, &child);
     if (child) {
-        struct { struct DisplayObject *object; const struct NameTable *table; } binding;
-        memcpy(&binding, child, sizeof(binding));
-        func_0017a968(binding.object, binding.table, text, mode);
+        func_0017a968(child->object, child->table, text, mode);
         child->text_index = text;
     }
 }
