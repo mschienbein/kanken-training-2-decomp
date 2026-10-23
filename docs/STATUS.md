@@ -27,7 +27,10 @@ Current entry on top; older entries are kept as history.
   1. **Catalogue v14:** reclassifies 5 vendor-library functions (`_snputwc`, `strcat`, `wcsncpy`,
      `__cxa_guard_acquire`, `wcslen`) and the 20-function NW4C `FastWordCopyAsm_*` assembly family
      as non-C. That is −25 creditable functions / −1,580 B, with accepted records unchanged.
-     The full suite passes (1,104 tests); the independent review is in progress.
+     The full suite passes (1,104 tests). The r1 review FAILed on one major finding: its new
+     tests pin aggregate totals instead of testing behaviour. Its accounting, protection and
+     metadata checks all pass, and its fresh assembly-trace and regeneration replay is still
+     incomplete. Revision v14-r2 and a second review come next.
   2. **Combined checkpoint c012-r5:** ctypes1 r4 (pre-review PASS) plus c012 r4 (29 new functions
      / 4,856 B and 30 moves, with cmodels2 folded in). ctypes1 merges cleanly; c012 r4 conflicts
      in about 70 files and needs a merge pass.

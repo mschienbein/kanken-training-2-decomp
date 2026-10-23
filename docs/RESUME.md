@@ -13,10 +13,15 @@ agents included. Ask the user what cap applies before resuming.
 Resume in this order. The live detail is in `scratch/integrator/PIPELINE-LIVE-20261023.md`; see
 its PAUSE section and checkpoint table.
 1. **Catalogue v14** (branch `catalogue-v14` at 5b8f88dd, worktree `scratch/worktrees/catalogue-v14`).
-   The independent review goes in `scratch/review/catalogue-v14/codex/`.
-   - If it PASSes, adopt between checkpoints: merge the branch, check `tools/denominator.py
-     verify` and the suite, then update STATUS.
-   - If it FAILs, revise with CatalogueV14Codex.
+   - The r1 review (`scratch/review/catalogue-v14/codex/`) FAILed on one major finding, F01:
+     `tests/test_catalogue_v14.py` pins 11 aggregate totals and 2 prose strings. Accounting,
+     protection, metadata consumers, input refusals and history reachability all passed.
+   - Its single replay stopped on a reviewer-side script assertion, so the fresh assembly-trace
+     comparisons and the public regeneration are still owed.
+   - Next: revive CatalogueV14Codex for v14-r2 (behavioural tests), then an r2 review that
+     completes the replay with one new heavy grant.
+   - On PASS, adopt between checkpoints: merge the branch, check `tools/denominator.py verify`
+     and the suite, then update STATUS.
 2. **Combined checkpoint c012-r5** = main + ctypes1 r4 (`types-compose-r3` at 93921aa2, merges
    cleanly) + c012 r4 (`c012-r4` at 4a9cf7b5, about 70 conflicts against main).
    - Revive C012R3Codex to merge, resolve semantically, combine the candidate JSON, and re-prove
