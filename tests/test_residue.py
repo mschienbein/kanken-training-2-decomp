@@ -45,6 +45,13 @@ class ResidueTest(unittest.TestCase):
                 "status": "mismatch", "profile": "game",
                 "residual": {"target_size": 32, "differing_bytes": count}, **extra}
 
+    def census(self, indices: list[int], steps: list[str]) -> None:
+        self.put("scratch/integrator/census-20261021-r3/LADDER.json", {
+            "denominator": {"revision": "v9-r2"},
+            "rows": [{"function": self.names[index], "target_bytes": 32,
+                      "completed_steps": steps, "completion_evidence": {}}
+                     for index in indices]})
+
     def report(self) -> dict:
         return residue.generate(self.root, pending=[])
 
@@ -72,6 +79,7 @@ class ResidueTest(unittest.TestCase):
         self.author("nm01", [exact, header, intake])
         for batch in ("r301", "r4001", "tu001", "nf001", "np001", "nm02"):
             self.author(batch, [self.row(6, 12), self.row(7, 80)])
+        self.census([6, 7], ["initial", "2", "3"])
         self.put("scratch/permute/sweep-10/summary.json", {
             "policy": {"operational_differing_byte_cap": 32},
             "rows": {self.names[6]: {"function": self.names[6], "state": "plateau"}}})
@@ -90,7 +98,7 @@ class ResidueTest(unittest.TestCase):
         self.assertFalse(by_name[self.names[7]]["permuter"]["search_completed"])
         self.assertEqual(by_name[self.names[8]]["status_class"], "awaits_user_ruling")
         self.assertEqual(by_name[self.names[9]]["status_class"], "ladder_incomplete")
-        self.assertIn("5c", by_name[self.names[9]]["missing_steps"])
+        self.assertNotIn("5c", by_name[self.names[9]]["missing_steps"])
         self.assertIn("4", by_name[self.names[9]]["missing_steps"])
         self.assertEqual(report["denominator"]["functions"], 15)
         self.assertEqual(report["accepted"]["functions"] + report["pending_checkpoint"]["functions"] +
@@ -179,13 +187,20 @@ class ResidueTest(unittest.TestCase):
         self.assertEqual(by_name[self.names[5]]["status_class"], "held_contract")
         self.assertEqual(by_name[self.names[6]]["status_class"], "held_contract")
 
-    def test_explicit_batch_rung_handles_nonstandard_retry_family(self) -> None:
+    def test_early_rung_completion_uses_census_not_batch_prefixes(self) -> None:
+        for batch in ("r301", "r4001", "tu001", "w01"):
+            self.author(batch, [self.row(5, 8)])
         self.author("rl283", [self.row(5, 8)])
         self.put("scratch/integrator/batches/rl283.json", {
             "step": "2", "functions": [{"function": self.names[5]}]})
         row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
-        self.assertTrue(row["ladder"]["2"]["completed"])
-        self.assertEqual(row["ladder"]["2"]["attempted_batches"], ["rl283"])
+        self.assertFalse(any(row["ladder"][step]["completed"] for step in ("1", "2", "3")))
+        self.assertEqual(row["ladder"]["2"]["assigned_batches"], ["rl283"])
+        self.census([5], ["initial", "2", "3"])
+        row = next(row for row in self.report()["rows"] if row["function"] == self.names[5])
+        self.assertTrue(all(row["ladder"][step]["completed"] for step in ("1", "2", "3")))
+        self.assertEqual(row["census"]["completed_steps"], ["initial", "2", "3"])
+        self.assertTrue(row["ladder"]["1"]["evidence"])
 
     def test_resolved_extension_ruling_is_not_an_open_user_question(self) -> None:
         self.put("docs/rulings/2026-10-17-armcc-extensions.md", "Documented extensions are approved.\n")
@@ -235,6 +250,88 @@ class ResidueTest(unittest.TestCase):
                          residue.digest((self.root / "scratch/authors/nm08/RESULT.json").read_bytes()))
         self.put("scratch/integrator/batches/nm09.json", {"functions": [{"function": self.names[5]}]})
         self.assertNotEqual(first["input_manifest_sha256"], self.report()["input_manifest_sha256"])
+
+    def test_extra_passes_are_not_exhaustion_prerequisites(self) -> None:
+        self.census([5, 6], ["initial", "2", "3"])
+        self.author("w01", [self.row(5, 12), self.row(6, 80)])
+        self.put("scratch/permute/sweep-10/summary.json", {
+            "policy": {"operational_differing_byte_cap": 32},
+            "rows": {self.names[5]: {"function": self.names[5], "state": "exhausted"}}})
+        by_name = {row["function"]: row for row in self.report()["rows"]}
+        self.assertEqual(by_name[self.names[5]]["status_class"], "near_miss_exhausted")
+        self.assertEqual(by_name[self.names[6]]["status_class"], "never_matched_exhausted")
+        for index in (5, 6):
+            row = by_name[self.names[index]]
+            self.assertEqual(row["missing_steps"], [])
+            self.assertTrue(all(not row["ladder"][step]["required"] for step in ("5", "5b", "5c")))
+            self.assertTrue(all(not row["ladder"][step]["completed"] for step in ("5", "5b", "5c")))
+            self.assertTrue(row["ladder"]["4"]["completed"])
+        self.assertEqual(by_name[self.names[5]]["permuter"]["disposition"], "completed")
+        self.assertEqual(by_name[self.names[6]]["permuter"]["disposition"], "not_applicable")
+
+    def test_census_identity_reconciliation_preserves_mapping_gaps(self) -> None:
+        self.put("scratch/integrator/census-20261021-r3/LADDER.json", {
+            "rows": [
+                {"function": self.names[1], "target_bytes": 32, "completed_steps": ["initial"]},
+                {"function": self.names[5], "target_bytes": 28, "completed_steps": ["initial", "2", "3"]},
+                {"function": self.names[6], "target_bytes": 32, "completed_steps": ["initial", "2", "3"]}]})
+        report = self.report()
+        mapping = report["census_reconciliation"]
+        self.assertEqual(mapping["exact_identity_matches"], 1)
+        self.assertEqual(mapping["census_identities_no_longer_creditable"][0]["current_kind"], "library")
+        self.assertEqual(mapping["extent_changed_requires_mapping_review"][0]["function"], self.names[5])
+        self.assertIn(self.names[7], [r["function"] for r in mapping["current_identities_missing_from_census"]])
+        by_name = {row["function"]: row for row in report["rows"]}
+        self.assertTrue(all(by_name[self.names[6]]["ladder"][step]["completed"] for step in ("1", "2", "3")))
+        self.assertFalse(any(by_name[self.names[5]]["ladder"][step]["completed"] for step in ("1", "2", "3")))
+        self.assertFalse(by_name[self.names[5]]["census"]["extent_agrees"])
+
+    def test_structured_and_documented_user_dependencies_are_not_contract_holds(self) -> None:
+        self.put("scratch/integrator/escalation/LEDGER.json", {"functions": [
+            {"function": self.names[5], "size": 32, "blockers": [
+                {"category": "user-ruling", "code": "thumb_identity_standard",
+                 "detail": "Standalone runtime identity needs a ruling."}]},
+            {"function": self.names[1], "size": 32, "blockers": [
+                {"category": "user-ruling", "detail": "Already classified non-C."}]}]})
+        self.put("docs/RESUME.md",
+                 f"{self.names[6]} needs the user-provided ARMCC 4.1 b791 runtime library.\n")
+        report = self.report()
+        by_name = {row["function"]: row for row in report["rows"]}
+        for index in (5, 6):
+            self.assertEqual(by_name[self.names[index]]["status_class"], "awaits_user_ruling")
+            self.assertIn("user_prerequisite", by_name[self.names[index]]["blocker_classes"])
+        self.assertIn("docs/RESUME.md#L1-L1", by_name[self.names[6]]["evidence"])
+        self.assertNotIn(self.names[1], by_name)
+        self.assertIn("docs/RESUME.md", report["input_hashes"])
+
+    def test_residual_bands_account_for_unknown_and_pending_exact_bodies(self) -> None:
+        self.assertEqual([residue.residual_band(v) for v in (0, 1, 16, 17, 64, 65, 256, 257, None)],
+                         ["0 (held)", "1-16", "1-16", "17-64", "17-64",
+                          "65-256", "65-256", ">256", "unknown"])
+        self.author("nm01", [self.row(5, 0, status="match"), self.row(6, 16),
+                              self.row(7, 64), self.row(8, 256), self.row(9, 257)])
+        report = self.report()
+        self.assertEqual(sum(v["functions"] for v in report["summary_by_residual_band"].values()),
+                         report["residue"]["functions"])
+        for value in report["summary_by_class"].values():
+            self.assertEqual(sum(v["bytes"] for v in value["residual_bands"].values()), value["bytes"])
+        self.assertEqual(report["summary_by_residual_band"]["0 (held)"]["functions"], 1)
+        self.assertIn("Residual bands", residue.markdown(report))
+
+    def test_revision_two_output_preserves_history_and_refuses_overwrite(self) -> None:
+        report = self.report()
+        directory = self.root / "scratch/integrator/residue"
+        self.put("scratch/integrator/residue/RESIDUE-r1.json", "immutable r1\n")
+        with patch.object(residue, "generate", return_value=report), patch("builtins.print"):
+            self.assertEqual(residue.main(["--root", str(self.root)]), 0)
+            self.assertEqual(residue.main(["--root", str(self.root)]), 0)
+        self.assertEqual((directory / "RESIDUE-r1.json").read_text(), "immutable r1\n")
+        expected = (directory / "RESIDUE-r2.json").read_bytes()
+        self.assertIn("RESIDUE-r2.json", (directory / "RESIDUE-r2.md").read_text())
+        with patch.object(residue, "generate", return_value={**report, "evidence_scope": "changed"}):
+            with self.assertRaises(SystemExit):
+                residue.main(["--root", str(self.root)])
+        self.assertEqual((directory / "RESIDUE-r2.json").read_bytes(), expected)
 
     def test_missing_required_metadata_refuses_instead_of_silent_empty_residue(self) -> None:
         (self.root / "scratch/integrator/census-20261021-r3/LADDER.json").unlink()

@@ -5,7 +5,7 @@ private scratch records::
 
     .venv/bin/python scratch/worktrees/residue-table/tools/residue.py --root .
 
-Only scratch/integrator/residue/RESIDUE-r1.{json,md} is written. No compiler,
+Only scratch/integrator/residue/RESIDUE-r2.{json,md} is written by default. No compiler,
 matcher, ROM, packet, diff, source, or disassembly input is opened. The JSON binds
 all consumed inputs by SHA-256 and pins branch manifests to immutable commits.
 The same input bytes and branch tips produce identical output bytes; filesystem
@@ -15,10 +15,13 @@ Accepted ledger ownership precedes pending checkpoint manifests, which precede
 residue. A batch assignment is NOT an attempted/completed ladder rung: a published
 target result or an explicit census completion witness is required. Context-only
 rows can improve a reported residual but cannot complete an assigned target rung.
-All six author rungs (1, 2, 3, 5, 5b, 5c) are required for unmatched exhaustion.
-Step 4 is either a completed bounded search or an evidenced adapter/operational
-boundary, never a claim that natural C is impossible. An improved <=32-byte seed
-reopens an older above-bound refusal. Unknown residuals do not waive step 4.
+Only objective steps 1, 2, 3 and dispositioned step 4 are required for exhaustion.
+Steps 5/5b/5c remain evidence-bearing extra passes. The census completed_steps is
+the authority for steps 1-3; its initial/svc-initial/svc-retry labels map to the
+objective's first rung. Batch-name prefixes never establish those three rungs.
+Step 4 dispositions are completed search, not_applicable above the bound, or an
+evidenced adapter_refused attempt. An improved seed inside the bound reopens an
+older above-bound refusal. Unknown residuals do not waive step 4.
 
 Free-form author/hold text is used ONLY to assign a small diagnosis/blocker
 vocabulary. It is never copied into outputs. Evidence paths/pointers, hashes,
@@ -41,8 +44,11 @@ import subprocess
 from typing import Any, Iterator
 
 
-AUTHOR_STEPS = ("1", "2", "3", "5", "5b", "5c")
-STEPS = (*AUTHOR_STEPS, "4")
+AUTHOR_STEPS = ("1", "2", "3")
+REQUIRED_STEPS = (*AUTHOR_STEPS, "4")
+EXTRA_STEPS = ("5", "5b", "5c")
+STEPS = (*REQUIRED_STEPS, *EXTRA_STEPS)
+BANDS = ("0 (held)", "1-16", "17-64", "65-256", ">256", "unknown")
 CLASSES = ("held_contract", "header_blocked", "near_miss_exhausted",
            "never_matched_exhausted", "awaits_user_ruling", "ladder_incomplete",
            "pending_intake")
@@ -119,15 +125,31 @@ def identity(value: Any) -> str | None:
 
 
 def batch_step(batch: str) -> str | None:
-    if batch.startswith("r4"):
-        return "2"
-    for prefix, step in (("tu", "3"), ("nf", "5"), ("ns", "5"),
-                         ("np", "5b"), ("nm", "5c")):
+    """Recognize extra author passes only, never infer objective rungs 1-3."""
+    for prefix, step in (("nf", "5"), ("ns", "5"), ("np", "5b"), ("nm", "5c")):
         if batch.startswith(prefix):
             return step
-    if re.match(r"r[123]", batch):
-        return "1"
     return None
+
+
+def census_step(step: str) -> str | None:
+    if step in ("initial", "svc-initial", "svc-retry"):
+        return "1"
+    return step if step in STEPS else None
+
+
+def residual_band(count: int | None) -> str:
+    if count is None:
+        return "unknown"
+    if count == 0:
+        return "0 (held)"
+    if count <= 16:
+        return "1-16"
+    if count <= 64:
+        return "17-64"
+    if count <= 256:
+        return "65-256"
+    return ">256"
 
 
 def residual(row: dict) -> tuple[int | None, str | None, int | None]:
@@ -287,6 +309,7 @@ class Function:
     permuter: list[dict] = field(default_factory=list)
     harvest: list[dict] = field(default_factory=list)
     stale_evidence: set[str] = field(default_factory=set)
+    census: dict | None = None
 
 
 class Joiner:
@@ -299,6 +322,8 @@ class Joiner:
         self.pending_sources: list[dict] = []
         self.pending: dict[str, list[str]] = {}
         self.rulings: dict[str, str] = {}
+        self.catalogue_rows: dict[str, dict] = {}
+        self.census_reconciliation: dict = {}
 
     def observe(self, name: str, row: dict, evidence: str, batch: str | None,
                 origin: str, default_status: str | None = None) -> None:
@@ -344,11 +369,15 @@ class Joiner:
                 self.add_hold(name, need_text, evidence, "author_integration_need", blocked)
 
     def add_hold(self, name: str, prose: str, evidence: str, basis: str,
-                 blocks_authoring: bool = False) -> None:
+                 blocks_authoring: bool = False, user_blocked: bool = False) -> None:
         classes = sorted(k for k, pattern in BLOCKER_PATTERNS.items() if re.search(pattern, prose, re.I))
         if not classes:
             classes = ["contract_type"]
-        awaiting = bool(re.search(r"await(?:s|ing)? (?:a |the )?(?:user )?(?:ruling|decision)|user (?:ruling|decision) (?:required|needed)", prose, re.I))
+        awaiting = user_blocked or bool(re.search(
+            r"await(?:s|ing)? (?:a |the )?(?:user )?(?:ruling|decision)|user (?:ruling|decision) (?:required|needed)",
+            prose, re.I))
+        if user_blocked:
+            classes = sorted(set(classes) | {"user_prerequisite"})
         resolved_by = []
         if awaiting and re.search(r"__svc|cp15|named.register|armcc.extension|compiler.intrinsic", prose, re.I):
             resolved_by = [p for p in self.rulings if "armcc-extensions" in p]
@@ -408,26 +437,51 @@ class Joiner:
         label = "scratch/integrator/census-20261021-r3/LADDER.json"
         doc = self.inputs.load(label, required=True)
         self.inputs.load("scratch/integrator/census-20261021-r3/REPORT.md", required=True)
+        known = {}
+        retired = []
+        changed = []
+        exact = 0
         for index, row in enumerate(doc["rows"]):
             name = identity(row)
-            if name not in self.functions:
-                continue
+            if not name or name in known:
+                raise ValueError("census has an invalid/duplicate identity")
+            known[name] = row
             evidence = f"{label}#/rows/{index}"
+            if name not in self.functions:
+                current = self.catalogue_rows.get(name, {})
+                retired.append({"function": name, "census_size": row.get("target_bytes"),
+                                "current_kind": current.get("kind", "absent"),
+                                "current_size": current.get("size"), "evidence": evidence})
+                continue
             target = self.functions[name]
             target.evidence.add(evidence)
+            target.census = {"completed_steps": row.get("completed_steps", []),
+                             "evidence": evidence, "extent_agrees": True}
             if integer(row.get("target_bytes")) != target.size:
+                target.census["extent_agrees"] = False
                 target.stale_evidence.add(evidence)
+                changed.append({"function": name, "census_size": row.get("target_bytes"),
+                                "current_size": target.size, "evidence": evidence})
                 continue
-            for step, entries in row.get("completion_evidence", {}).items():
-                if step not in STEPS:
-                    continue
-                if step in row.get("completed_steps", []):
+            exact += 1
+            # Completion flags stand alone: an absent/empty evidence array does not
+            # erase an authoritative completed_steps entry.
+            for original in row.get("completed_steps", []):
+                step = census_step(original)
+                if step:
                     target.completed.add(step)
+                    target.step_evidence[step].add(f"{evidence}/completed_steps")
+            for original, entries in row.get("completion_evidence", {}).items():
+                step = census_step(original)
+                if not step:
+                    continue
                 for entry in entries:
                     batch = entry.get("batch")
                     if isinstance(batch, str) and BATCH_RE.fullmatch(batch):
                         target.attempts[step].add(batch)
-                    target.step_evidence[step].add(evidence)
+                        if self.batch_steps.get(batch) is None:
+                            self.batch_steps[batch] = step
+                    target.step_evidence[step].add(f"{evidence}/completion_evidence/{original}")
             for key in ("best_bound_mismatch", "best_reported_mismatch"):
                 best = row.get(key)
                 if isinstance(best, dict):
@@ -437,6 +491,18 @@ class Joiner:
                                  f"{evidence}/{key}", batch, "census")
             for hold in row.get("current_checkpoint_deferrals", []):
                 self.add_hold(name, relevant_text(hold), evidence, "census_contract_deferral")
+        missing = [{"function": name, "current_size": target.size}
+                   for name, target in sorted(self.functions.items()) if name not in known]
+        self.census_reconciliation = {
+            "census_revision": doc.get("denominator", {}).get("revision"),
+            "census_identities": len(known), "current_creditable_identities": len(self.functions),
+            "exact_identity_matches": exact,
+            "current_identities_missing_from_census": missing,
+            "extent_changed_requires_mapping_review": changed,
+            "census_identities_no_longer_creditable": retired,
+            "mapping_gap_count": len(missing) + len(changed),
+            "step_label_map": {"initial": "1", "svc-initial": "1", "svc-retry": "1"},
+            "no_nearest_address_or_containment_mapping_inferred": True}
         for label in ("scratch/integrator/escalation/RESIDUE_READY.json",
                       "scratch/integrator/escalation/QUEUES.json"):
             doc = self.inputs.load(label, required=True)
@@ -453,9 +519,10 @@ class Joiner:
                     if not match or not isinstance(info, dict):
                         continue
                     step = match[1]
-                    if info.get("completed") and step != "4":
+                    # Older escalation rows supply provenance, not an override of
+                    # the later census's objective-rung completion decision.
+                    if info.get("completed") and step in EXTRA_STEPS:
                         self.functions[name].completed.add(step)
-                        self.functions[name].step_evidence[step].add(evidence)
                     for entry in info.get("evidence", []):
                         if not entry.get("completed") or entry.get("context_only"):
                             continue
@@ -491,7 +558,7 @@ class Joiner:
                 if needs:
                     row = {**row, "integration_needs": [row.get("integration_needs"), *needs]}
                 self.observe(name, row, evidence, batch, "author")
-                if step and name in targets and row.get("status") in ("match", "mismatch", "library_candidate", "extent"):
+                if step in EXTRA_STEPS and name in targets and row.get("status") in ("match", "mismatch", "library_candidate", "extent"):
                     size = integer(row.get("size"))
                     if size is None or size == self.functions[name].size:
                         self.functions[name].completed.add(step)
@@ -563,6 +630,14 @@ class Joiner:
                             (HOLD_RE.search(key) and not CLOSED_RE.search(key))):
                         if isinstance(values, list):
                             names.extend(identity(v) for v in values if not isinstance(v, dict))
+                    if (HOLD_RE.search(key) and not CLOSED_RE.search(key) and
+                            not CLOSED_RE.search(pointer) and isinstance(values, list)):
+                        for index, val in enumerate(values):
+                            name = identity(val) if not isinstance(val, dict) else None
+                            if name in self.functions:
+                                self.add_hold(name, f"{key} {contextual}",
+                                              f"{label}#{pointer}/{key}/{index}",
+                                              "checkpoint_deferral")
                 is_hold = bool(HOLD_RE.search(contextual + " " + label))
                 if is_hold and not CLOSED_RE.search(pointer) and not re.search(r"^(?:collected|closed|resolved|accepted)", str(value.get("status", "")), re.I):
                     for name in set(names):
@@ -598,6 +673,53 @@ class Joiner:
                 if path.endswith(".json") and HOLD_NAME_RE.search(Path(path).name):
                     label, doc = self.inputs.branch_json(selected["commit"], path)
                     self.holds_from(label, doc)
+
+    def load_user_holds(self) -> None:
+        # Structured policy categories cannot be recovered from contract keywords.
+        for label in ("scratch/integrator/escalation/LEDGER.json",
+                      "scratch/integrator/escalation/MODEL_QUEUES.json",
+                      "scratch/integrator/escalation/GATE_HOLDS.json",
+                      "scratch/integrator/escalation/ROUND5_SCOPE.json"):
+            doc = self.inputs.load(label)
+            if doc is None:
+                continue
+            for row, pointer in walk_rows(doc):
+                name = identity(row)
+                if name not in self.functions:
+                    continue
+                if (size := integer(row.get("size"))) is not None and size != self.functions[name].size:
+                    continue
+                for index, blocker in enumerate(row.get("blockers", [])):
+                    if not isinstance(blocker, dict):
+                        continue
+                    if blocker.get("category") in ("user-ruling", "user-prerequisite", "user-input"):
+                        self.add_hold(name, text(blocker), f"{label}#{pointer}/blockers/{index}",
+                                      "recorded_user_prerequisite", user_blocked=True)
+                if row.get("awaits_user_ruling") is True or row.get("awaits_user_input") is True:
+                    self.add_hold(name, relevant_text(row), f"{label}#{pointer}",
+                                  "recorded_user_prerequisite", user_blocked=True)
+        documents = dict(self.rulings)
+        for label in ("docs/RESUME.md", "docs/STATUS.md",
+                      "scratch/integrator/escalation/SUMMARY.md"):
+            if (document := self.inputs.load(label)) is not None:
+                documents[label] = document
+        user_cue = re.compile(
+            r"await.{0,80}user|user.{0,80}(?:ruling|decision|required|needed|provided|supplied)|"
+            r"(?:need|require|missing).{0,80}(?:user|licen[cs])", re.I)
+        resolved_cue = re.compile(r"already (?:provided|obtained|resolved)|no longer (?:await|blocked)|"
+                                  r"(?:ruling|decision).{0,20}(?:superseded|resolved)", re.I)
+        for label, document in sorted(documents.items()):
+            lines = document.splitlines()
+            for index, line in enumerate(lines):
+                if not user_cue.search(line) or resolved_cue.search(line):
+                    continue
+                first, last = max(0, index - 1), min(len(lines), index + 2)
+                context = " ".join(lines[first:last])
+                tokens = re.findall(r"func_[0-9a-fA-F]{8}|0x[0-9a-fA-F]{6,8}\b", context)
+                for name in sorted({name for token in tokens if (name := identity(token))}):
+                    if name in self.functions:
+                        self.add_hold(name, context, f"{label}#L{first + 1}-L{last}",
+                                      "documented_user_prerequisite", user_blocked=True)
 
     def load_harvest(self) -> None:
         label = "scratch/integrator/HARVEST-LIST.json"
@@ -646,16 +768,22 @@ class Joiner:
                 {"match": 0, "exhausted": 1, "plateau": 2, "adapter_refused": 3,
                  "not_applicable_operational_boundary": 4}.get(p["state"], 5), p["evidence"]))
             state = permuter[0]["state"] if permuter else "not_recorded"
-            bounded_complete = "4" in target.completed
-            boundary = state == "adapter_refused"
-            boundary_basis = "adapter_refusal" if boundary else None
-            if not bounded_complete and not boundary and current is not None and current > self.permuter_bound:
-                boundary, boundary_basis = True, "current_residual_above_bound"
+            search_completed = "4" in target.completed
+            boundary_basis = None
+            if search_completed:
+                disposition = "completed"
+            elif state == "adapter_refused":
+                disposition, boundary_basis = "adapter_refused", "adapter_refusal"
+            elif current is not None and current > self.permuter_bound:
+                disposition, boundary_basis = "not_applicable", "current_residual_above_bound"
                 state = "operational_boundary"
-            elif state == "not_applicable_operational_boundary":
-                state = "reopened_inside_bound" if current is not None and current <= self.permuter_bound else "unknown_residual_boundary"
+            else:
+                disposition = None
+                if state == "not_applicable_operational_boundary":
+                    state = ("reopened_inside_bound" if current is not None
+                             else "unknown_residual_boundary")
             missing = [step for step in AUTHOR_STEPS if step not in target.completed]
-            if not bounded_complete and not boundary:
+            if disposition is None:
                 missing.append("4")
             if body_exact:
                 missing = []  # Exact bodies need integration/contract work, not more search.
@@ -673,7 +801,7 @@ class Joiner:
                 status = "header_blocked"
             elif missing or body_exact:
                 status = "ladder_incomplete"
-            elif current is not None and current <= 64:
+            elif current is not None and current <= self.permuter_bound:
                 status = "near_miss_exhausted"
             else:
                 status = "never_matched_exhausted"
@@ -682,17 +810,24 @@ class Joiner:
                 actions.append("checkpoint_intake")
             elif body_exact and status == "ladder_incomplete":
                 actions.append("context_match_contract_review")
+            ladder = {s: {"completed": s in target.completed,
+                          "required": s in REQUIRED_STEPS,
+                          "attempted_batches": sorted(target.attempts[s]),
+                          "assigned_batches": sorted(target.assignments[s]),
+                          "evidence": sorted(target.step_evidence[s])} for s in STEPS}
+            ladder["4"]["completed"] = disposition is not None
+            ladder["4"]["disposition"] = disposition
             row = {"function": name, "address": f"0x{name[5:]}", "size": target.size,
-                   "best": best, "status_class": status, "blocker_classes": blocker_classes,
+                   "best": best, "residual_band": residual_band(current),
+                   "status_class": status, "blocker_classes": blocker_classes,
                    "diagnosis_families": sorted(target.families),
                    "diagnosis_basis": "INFERENCE: keyword families; see evidence, not an independent code diagnosis",
-                   "ladder": {s: {"completed": s in target.completed,
-                                  "attempted_batches": sorted(target.attempts[s]),
-                                  "assigned_batches": sorted(target.assignments[s]),
-                                  "evidence": sorted(target.step_evidence[s])} for s in STEPS},
+                   "ladder": ladder, "census": target.census,
                    "missing_steps": missing, "actionable_items": actions,
-                   "permuter": {"state": state, "search_completed": bounded_complete,
-                                "boundary_not_search": boundary, "boundary_basis": boundary_basis,
+                   "permuter": {"state": state, "disposition": disposition,
+                                "search_completed": search_completed,
+                                "boundary_not_search": disposition in ("adapter_refused", "not_applicable"),
+                                "boundary_basis": boundary_basis,
                                 "bound_bytes": self.permuter_bound, "evidence": permuter},
                    "holds": sorted(active_holds, key=lambda h: (h["evidence"], h["basis"])),
                    "historical_integration_needs": sorted(
@@ -714,13 +849,16 @@ def default_pending() -> list[tuple[tuple[str, ...], str]]:
             (("cmodels2-r5",), "config/candidates/cmodels2.json")]
 
 
-def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = None) -> dict:
+def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = None,
+             revision: int = 2) -> dict:
     join = Joiner(root.resolve())
     catalogue = join.inputs.load("config/catalogue.json", required=True)
     ledger = join.inputs.load("config/matches.json", required=True)
     join.inputs.load("config/compiler_profiles.json", required=True)
     join.inputs.load("tools/denominator.py")
     for row in catalogue["functions"]:
+        if name := identity(row):
+            join.catalogue_rows[name] = row
         if row.get("kind") != "function":
             continue
         name = identity(row)
@@ -739,22 +877,33 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
     join.load_permuter()
     join.load_holds()
     join.load_harvest()
+    join.load_user_holds()
     rows, actionable = join.rows(accepted)
     pending_names = set(join.pending) - accepted
-    summary = {state: {"functions": sum(r["status_class"] == state for r in rows),
-                       "bytes": sum(r["size"] for r in rows if r["status_class"] == state)} for state in CLASSES}
+    def tally(selected: list[dict]) -> dict:
+        return {"functions": len(selected), "bytes": sum(r["size"] for r in selected)}
+    summary = {}
+    for state in CLASSES:
+        selected = [r for r in rows if r["status_class"] == state]
+        summary[state] = {**tally(selected), "residual_bands": {
+            band: tally([r for r in selected if r["residual_band"] == band]) for band in BANDS}}
+    bands = {band: tally([r for r in rows if r["residual_band"] == band]) for band in BANDS}
     missing_counts = Counter(step for r in actionable for step in r["missing_steps"])
     action_counts = Counter(step for r in actionable for step in r["actionable_items"])
     hashes = dict(sorted(join.inputs.hashes.items()))
     def total(names: set[str]) -> dict:
         return {"functions": len(names), "bytes": sum(join.functions[n].size for n in names)}
-    return {"schema_version": 1, "evidence_scope": "metadata join only; no new matches, classification, acceptance or impossibility proof",
-            "policy": {"creditable_kind": "function", "author_steps_required": list(AUTHOR_STEPS),
+    return {"schema_version": 2, "revision": revision,
+            "evidence_scope": "metadata join only; no new matches, classification, acceptance or impossibility proof",
+            "policy": {"creditable_kind": "function", "required_steps": list(REQUIRED_STEPS),
+                       "author_steps_required": list(AUTHOR_STEPS),
+                       "extra_passes_not_required": list(EXTRA_STEPS),
+                       "rungs_1_to_3_authority": "census completed_steps, not batch-name prefixes",
                        "permuter_bound_bytes": join.permuter_bound,
                        "boundary_is_not_completed_search": True,
                        "assignment_is_not_attempt": True,
                        "context_result_does_not_complete_target_rung": True,
-                       "missing_step5c_is_not_waived_above_64_bytes": True,
+                       "step4_dispositions": ["completed", "not_applicable", "adapter_refused"],
                        "pending_intake_requires": "direct author status match, zero residual, frozen profile, no recorded hold",
                        "incomplete_list_includes": "all missing search rungs plus pending intake/context-only contract review"},
             "denominator": total(set(join.functions)), "accepted": total(accepted),
@@ -762,8 +911,10 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
                 "rows": [{"function": n, "size": join.functions[n].size,
                                "status": "pending checkpoint", "evidence": sorted(join.pending[n])} for n in sorted(pending_names)]},
             "residue": {"functions": len(rows), "bytes": sum(r["size"] for r in rows)},
-            "summary_by_class": summary, "incomplete_ladder_count": len(actionable),
-            "incomplete_by_missing_step": {s: missing_counts[s] for s in STEPS},
+            "summary_by_class": summary, "summary_by_residual_band": bands,
+            "census_reconciliation": join.census_reconciliation,
+            "incomplete_ladder_count": len(actionable),
+            "incomplete_by_missing_step": {s: missing_counts[s] for s in REQUIRED_STEPS},
             "actionable_by_item": dict(sorted(action_counts.items())),
             "incomplete_ladder": actionable, "rows": rows,
             "user_rulings": sorted(join.rulings), "input_hashes": hashes,
@@ -772,22 +923,42 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
 
 
 def markdown(report: dict) -> str:
-    lines = ["# Residue draft r1", "", "Metadata join only: not checkpoint acceptance, non-C classification, or proof that natural C is impossible.", "",
+    filename = f"RESIDUE-r{report['revision']}.json"
+    lines = [f"# Residue draft r{report['revision']}", "", "Metadata join only: not checkpoint acceptance, non-C classification, or proof that natural C is impossible.", "",
              "## Accounting", "", "| Bucket | Functions | Bytes |", "|---|---:|---:|"]
     for key, label in (("denominator", "Current creditable denominator"), ("accepted", "Accepted"),
                        ("pending_checkpoint", "Pending checkpoint (not residue)"), ("residue", "Residue")):
         value = report[key]
         lines.append(f"| {label} | {value['functions']:,} | {value['bytes']:,} |")
-    lines += ["", "## Residue by class", "", "| Class | Functions | Bytes |", "|---|---:|---:|"]
+    lines += ["", "## Residue by class", "", "| Class | Functions | Bytes | Residual bands (functions / target bytes) |", "|---|---:|---:|---|"]
     for state, value in report["summary_by_class"].items():
-        lines.append(f"| {state} | {value['functions']:,} | {value['bytes']:,} |")
+        band_summary = "; ".join(
+            f"{band}: {v['functions']} / {v['bytes']} B"
+            for band, v in value["residual_bands"].items() if v["functions"])
+        lines.append(f"| {state} | {value['functions']:,} | {value['bytes']:,} | {band_summary or '—'} |")
+    lines += ["", "The zero-residual band includes held and pending-intake exact bodies; unknown residuals are never guessed.", "",
+              "| Residual band | Functions | Target bytes |", "|---|---:|---:|"]
+    for band, value in report["summary_by_residual_band"].items():
+        lines.append(f"| {band} | {value['functions']:,} | {value['bytes']:,} |")
     lines += ["", "## Pending manifest snapshots", "", "| Branch | Commit | Manifest | Fallback from |", "|---|---|---|---|"]
     for row in report["pending_checkpoint"]["sources"]:
         lines.append(f"| {row['branch']} | `{row['commit']}` | `{row['path']}` | {', '.join(row['fallback_from']) or '—'} |")
+    mapping = report["census_reconciliation"]
+    lines += ["", "## Census-to-current identity reconciliation", "",
+              "| Mapping | Functions |", "|---|---:|",
+              f"| Exact address/extent identities | {mapping['exact_identity_matches']} |",
+              f"| Current identities absent from census | {len(mapping['current_identities_missing_from_census'])} |",
+              f"| Changed extents requiring mapping review | {len(mapping['extent_changed_requires_mapping_review'])} |",
+              f"| Census identities no longer creditable | {len(mapping['census_identities_no_longer_creditable'])} |",
+              "", "No nearest-address or containing-function mapping is inferred. Gaps remain explicit; stale extents supply neither current residuals nor completed objective rungs.",
+              "", "| Mapping gap | Current bytes | Census bytes |", "|---|---:|---:|"]
+    for gap in (*mapping["current_identities_missing_from_census"],
+                *mapping["extent_changed_requires_mapping_review"]):
+        lines.append(f"| `{gap['function']}` | {gap['current_size']} | {gap.get('census_size', 'absent')} |")
     lines += ["", "## Interpretation", "",
-              "- All six author rungs are required for unmatched exhaustion. An assignment without a delivered target RESULT does not complete a rung; context-only rows do not complete target rungs.",
-              "- Step 4 separates actual completed search from adapter refusal and above-bound operational exclusion. A current improved seed inside the bound reopens an older above-bound exclusion. Unknown residuals never waive step 4.",
-              "- Missing step 5c is reported even above the current 64-byte dispatch pool: there is no blanket waiver for those functions.",
+              "- Exhaustion requires only objective steps 1 (retry pool), 2 (fresh author with best attempt/diff), 3 (whole-TU neighbours), and dispositioned step 4. Steps 5/5b/5c are recorded extras, not prerequisites.",
+              "- Census `completed_steps` is authoritative through its cut, independently of whether a completion-evidence array exists. Census `initial`/`svc-initial`/`svc-retry` map to objective step 1. No early-rung completion is inferred from a batch prefix.",
+              "- Step 4 is dispositioned by a completed search, an evidenced adapter refusal, or a current best residual above the frozen permuter bound. Refusal/exclusion is not a search. An improved seed inside the bound reopens an old above-bound exclusion; unknown residuals do not waive step 4.",
               "- `held_contract` means an exact reported body plus a recorded contract/type/policy hold, not accepted C. `header_blocked` requires an explicit authoring/compile block, not an ordinary adoption-time header request; it may still have missing ladder rungs. Only the selected best author's integration needs remain active, while older needs stay in historical evidence.",
               "- `pending_intake` is a direct unheld author MATCH under a frozen profile, outside all pending manifests. It is actionable collection work, not an exhausted search or accepted credit.",
               "- Free-form source/author/hold text is not copied. Diagnosis/blocker families are [INFERENCE] keyword labels; the evidence pointers are the authority. Residuals are selected reported outcomes, not remeasured. Old-extent observations are excluded.",
@@ -800,20 +971,20 @@ def markdown(report: dict) -> str:
     for row in report["incomplete_ladder"]:
         lines.append(f"| `{row['function']}` | {row['size']} | {row['status_class']} | {', '.join(row['actionable_items'])} |")
     lines += ["", "## Per-function residue", "",
-              "Complete evidence/assigned-batch/hold/hash detail is in the corresponding `RESIDUE-r1.json` row. Each evidence input is SHA-256-bound by that file's `input_hashes` map.", "",
-              "| Function / address | Bytes | Best residual / batch | Attempted ladder steps and batches | Permuter state | Class / missing steps | Diagnosis families | Primary evidence |",
-              "|---|---:|---|---|---|---|---|---|"]
+              f"Complete evidence/assigned-batch/hold/hash detail is in the corresponding `{filename}` row. Each evidence input is SHA-256-bound by that file's `input_hashes` map.", "",
+              "| Function / address | Bytes | Best residual / batch | Residual band | Attempted ladder steps and batches | Permuter disposition / state | Class / missing steps | Diagnosis families | Primary evidence |",
+              "|---|---:|---|---|---|---|---|---|---|"]
     for index, row in enumerate(report["rows"]):
         best = row["best"]
         metric = f"{best['residual_bytes']} / {best['batch'] or 'recorded'}" if best else "unknown"
         steps = "; ".join(f"{s}: {','.join(v['attempted_batches']) or 'recorded'}" for s, v in row["ladder"].items() if v["completed"] or v["attempted_batches"])
         state = row["status_class"] + (" / " + ",".join(row["missing_steps"]) if row["missing_steps"] else "")
         evidence = best["evidence"] if best else (row["evidence"][0] if row["evidence"] else "none")
-        lines.append(f"| `{row['function']}` / `{row['address']}` | {row['size']} | {metric} | {steps} | {row['permuter']['state']} | {state} | {', '.join(row['diagnosis_families']) or '—'} | `{evidence}`; [all evidence](RESIDUE-r1.json#/rows/{index}) |")
+        lines.append(f"| `{row['function']}` / `{row['address']}` | {row['size']} | {metric} | {row['residual_band']} | {steps} | {row['permuter']['disposition'] or 'missing'} / {row['permuter']['state']} | {state} | {', '.join(row['diagnosis_families']) or '—'} | `{evidence}`; [all evidence]({filename}#/rows/{index}) |")
     lines += ["", "## Reproduction and input hashes", "", "```sh",
-              ".venv/bin/python scratch/worktrees/residue-table/tools/residue.py --root .", "```", "",
+              f".venv/bin/python scratch/worktrees/residue-table/tools/residue.py --root . --revision {report['revision']}", "```", "",
               f"Input manifest SHA-256: `{report['input_manifest_sha256']}` ({len(report['input_hashes']):,} consumed inputs).",
-              "All exact input hashes and absent optional branch/file probes are recorded in `RESIDUE-r1.json`. No timestamps or absolute checkout paths enter the report.", "",
+              f"All exact input hashes and absent optional branch/file probes are recorded in `{filename}`. No timestamps or absolute checkout paths enter the report.", "",
               "| Input | SHA-256 |", "|---|---|"]
     for path in ("generator:tools/residue.py", "config/catalogue.json", "config/matches.json", "config/compiler_profiles.json"):
         lines.append(f"| `{path}` | `{report['input_hashes'][path]}` |")
@@ -825,18 +996,27 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--output", type=Path, help="output directory, restricted to ROOT/scratch/integrator/residue")
+    parser.add_argument("--revision", type=int, default=2, help="immutable draft revision (default: 2)")
     args = parser.parse_args(argv)
+    if args.revision < 1:
+        parser.error("--revision must be positive")
     root = args.root.resolve()
     output = (args.output or root / "scratch/integrator/residue").resolve()
     if not output.is_relative_to(root / "scratch/integrator/residue"):
         parser.error("draft output must stay under scratch/integrator/residue/")
     try:
-        report = generate(root)
+        report = generate(root, revision=args.revision)
     except (ValueError, OSError, KeyError, TypeError) as exc:
         parser.exit(1, f"residue metadata join failed: {exc}\n")
     output.mkdir(parents=True, exist_ok=True)
-    (output / "RESIDUE-r1.json").write_bytes(canonical(report))
-    (output / "RESIDUE-r1.md").write_text(markdown(report), encoding="utf-8", newline="\n")
+    outputs = {output / f"RESIDUE-r{args.revision}.json": canonical(report),
+               output / f"RESIDUE-r{args.revision}.md": markdown(report).encode("utf-8")}
+    for path, data in outputs.items():
+        if path.exists() and path.read_bytes() != data:
+            parser.exit(1, f"refusing to overwrite different immutable draft: {path.name}\n")
+    for path, data in outputs.items():
+        if not path.exists():
+            path.write_bytes(data)
     print(json.dumps({"summary_by_class": report["summary_by_class"],
                       "incomplete_ladder_count": report["incomplete_ladder_count"],
                       "incomplete_by_missing_step": report["incomplete_by_missing_step"],
