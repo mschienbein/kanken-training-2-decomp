@@ -1,6 +1,7 @@
 #ifndef GAME_SERVICE_LIST_H
 #define GAME_SERVICE_LIST_H
 #include "game/service_protocol.h"
+#include "game/reset_reference.h"
 
 struct ServiceContext;
 struct ServiceList;
@@ -32,12 +33,7 @@ extern "C" {
 #endif
 extern struct ServiceList bss_004b47d0;
 extern struct StaticServiceEntry bss_004b45d0[64];
-extern struct StaticServiceEntry *func_001c4490(struct StaticServiceEntry *entry);
-/* [INFERENCE] Typed instance of the ARM array-construction veneer's ABI. */
-extern struct StaticServiceEntry *func_001911c4(
-    struct StaticServiceEntry *entries,
-    struct StaticServiceEntry *(*constructor)(struct StaticServiceEntry *),
-    unsigned element_size, unsigned element_count);
+extern void *func_001c4490(void *storage);
 extern void func_00214138(void);
 #ifdef __cplusplus
 }
