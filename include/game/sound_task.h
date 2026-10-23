@@ -169,7 +169,7 @@ extern struct SoundRegularInstance *func_0014bd78(struct SoundRegularInstance *o
                                               struct SoundPoolStorage *owner);
 extern struct SoundTaskBase *func_00180510(struct SoundTaskBase *task);
 extern const unsigned data_00224978[];
-extern struct SoundQueuedTask *func_0014d664(struct SoundQueuedTask *task);
+extern void *func_0014d664(void *storage);
 #ifdef __cplusplus
 }
 #endif

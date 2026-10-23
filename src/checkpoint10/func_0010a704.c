@@ -15,8 +15,9 @@ struct W24eSoundLoadContext {
 extern int func_00192ec8(struct W24eSoundLoader *loader, unsigned sound,
                          struct RegionHeapOwner *heap, int offset, int flags);
 
-void func_0010a704(struct SignalState *signal)
+void func_0010a704(void *argument, void *context)
 {
+    struct SignalState *signal = argument;
     for (;;) {
         func_00195d94(signal);
         if (bss_0029f540.exiting)
