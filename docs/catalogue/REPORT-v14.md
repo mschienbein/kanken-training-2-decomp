@@ -268,3 +268,33 @@ adoption-merge checks required by the existing process.
 - `research/catalogue_v14_checks.json`: actual commands, exits and captured
   outputs/timings, source/test/proposal/history hashes. This is author evidence,
   never a passing independent review seal.
+
+## r2 — behavioural-test repair and finalized Main merge
+
+The sealed r1 **FAIL/F01** is accepted: aggregate totals and explanation prose
+were not adequate regression assertions. The tests now derive exact transition,
+extent/ISA/entry, creditable and classification sets from the parent and evidence;
+they check complete records against the **live** accepted ledger and candidate
+manifests. Source/object/whole-receipt binding refusals replace the prose-only
+test. Every retained input is tested for missing/tampered content and missing/extra
+roles; an uncertified non-family neighbour must remain unchanged and cannot gain
+a classification through an added certificate alone. Existing mutation refusals
+remain. This is an author repair, not an independent closure seal for F01.
+
+Main `69854e8ef7989eb1431f56ffed1d41dc930f4def` was merged as
+`88ab1ecf18bb52a81a38c30c08b02e592063866c`; `5b8f88dd` was not amended.
+All **2,770** live accepted identities and all **16** tracked candidate manifests
+were reconciled to that exact Main commit: none claims an evidenced v14 owner,
+and every claimed complete function record equals the parent. The original
+frozen ledger/names, generator inputs, catalogue and denominator history remain
+unchanged; the earlier 2,682-function snapshot above is historical r1 evidence,
+not the live protection population after this merge.
+
+The focused unittest command above, with the rewritten v14 module, exited **0**:
+**42 tests passed**, 53.921 s unittest / 54.230725 s captured wall time.
+`tools/denominator.py verify` exited **0**, still binding history sequence 11.
+Exact commands, exits, hashes and Main-claim reconciliation are retained in
+`research/catalogue_v14_r2_checks.json`. No full suite, regeneration, compilation
+or private replay was run for r2. The reviewer-only r1 harness assertion is not a
+patch finding and was not rerun; fresh independent replay remains the r2 reviewer's
+work. Main retains the full-suite gate on this r2 head and adoption.

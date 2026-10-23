@@ -1,0 +1,244 @@
+{
+  "adoption": false,
+  "author_repair": true,
+  "changed_files_sha256": {
+    "docs/catalogue/REPORT-v14.md": "65a41d0c215e6a99680781dce1592309e24fb3c9cd62f2ee871abd3a40fff213",
+    "tests/test_catalogue_v14.py": "6e86226671fee1ea1139ce7ed2a6caef720ee596e4cd828aa8adf4e42efd7934"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.test_catalogue_v14",
+        "tests.test_catalogue_alignment",
+        "tests.test_catalogue_v13_r2",
+        "tests.test_analyze.CatalogueTests.test_reviewed_classification_retains_extent_and_physical_ownership",
+        "tests.test_analyze.CatalogueTests.test_classification_requires_identity_proofs_and_is_transactional",
+        "tests.test_analyze.CatalogueTests.test_classification_cannot_mutate_a_complete_protected_record",
+        "tests.test_analyze.CatalogueClosureTests.test_classification_checks_the_entire_original_extent_identity",
+        "tests.test_analyze.CatalogueClosureTests.test_frozen_baseline_and_parent_are_independently_authenticated"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v14",
+      "exit_code": 0,
+      "stderr": "..........................................\n----------------------------------------------------------------------\nRan 42 tests in 53.921s\n\nOK\n",
+      "stdout": "",
+      "wall_seconds": 54.230725
+    },
+    {
+      "argv": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "-B",
+        "tools/denominator.py",
+        "verify"
+      ],
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v14",
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "ok: denominator v11 matches config/catalogue.json\n",
+      "wall_seconds": 0.051076
+    }
+  ],
+  "denominator_verify_exit_code": 0,
+  "focused_tests": {
+    "exit_code": 0,
+    "tests_run": 42,
+    "unittest_seconds": 53.921,
+    "wall_seconds": 54.230725
+  },
+  "immutable_r1_commit": "5b8f88dddd987cff94dc03bca6291b5c9ce7b585",
+  "independent_review": false,
+  "limits": [
+    "No full suite, regeneration, compiler, matcher, build, acceptance operation or adoption was run.",
+    "The generator frozen inputs are unchanged, including the original accepted-ledger/names snapshot. Live acceptance and all tracked candidate manifests are tested independently, not substituted into that snapshot.",
+    "The reviewer-only r1 replay assertion is not a patch defect. It was not rerun here; the r2 reviewer must complete fresh independent library/assembly/generator replay."
+  ],
+  "main_reconciliation": {
+    "accepted_and_candidate_manifests": [
+      {
+        "identities": 2770,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/matches.json"
+      },
+      {
+        "identities": 17,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c001-pilot.json"
+      },
+      {
+        "identities": 38,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c002-wave1.json"
+      },
+      {
+        "identities": 48,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c003-wave2.json"
+      },
+      {
+        "identities": 66,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c004-wave3.json"
+      },
+      {
+        "identities": 130,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c004-wave4.json"
+      },
+      {
+        "identities": 196,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c004.json"
+      },
+      {
+        "identities": 190,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c005.json"
+      },
+      {
+        "identities": 381,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c006.json"
+      },
+      {
+        "identities": 297,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c007.json"
+      },
+      {
+        "identities": 434,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c008-r2.json"
+      },
+      {
+        "identities": 434,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c008-r3.json"
+      },
+      {
+        "identities": 435,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c008.json"
+      },
+      {
+        "identities": 653,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c009.json"
+      },
+      {
+        "identities": 425,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c010.json"
+      },
+      {
+        "identities": 97,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/c011.json"
+      },
+      {
+        "identities": 20,
+        "nonprimary_labels": [],
+        "overlap": [],
+        "path": "config/candidates/cmodels.json"
+      }
+    ],
+    "claim_inputs_identical_to_main_commit": true,
+    "evidenced_owner_addresses": [
+      1051140,
+      1582892,
+      1589764,
+      1589792,
+      1589820,
+      1589848,
+      1589880,
+      1589928,
+      1589976,
+      1590024,
+      1590076,
+      1590144,
+      1590212,
+      1590280,
+      1590352,
+      1590440,
+      1590528,
+      1590616,
+      1590708,
+      1590816,
+      1590924,
+      1591032,
+      1598748,
+      1645696,
+      1693104
+    ],
+    "frozen_inputs_unchanged": {
+      "docs/catalogue/REVIEW-v13-r2.md": "47fb9d1b2c04b26f3fd1baf97f47e17e139a46a6ee61b25f07800662553dad25",
+      "include/nw/gfx/gfx_MemoryUtil.h": "a47b62ee44c7db5268dd13abf4c0439812debb77d70953feed67c760ef206427",
+      "research/catalogue_v13_r2_evidence.json": "2adf68b043881412092ce23c8c89ba43e64d47061e4f05ca100e45dfa15b86c0",
+      "research/catalogue_v14_assembly_evidence.json": "e627682c82cd3dd966076368016c41f6618231e36dcb0a252e0728f0c1329c6c",
+      "research/catalogue_v14_callers.json": "a82ba9ac958daa4a246a5d332a6a125b5600e611d8ababdb7369efc2779f1666",
+      "research/catalogue_v14_frozen/config/matches.json": "da285c365ea7c9b584b83041a3721a9c8364be8d575b138edbc915fe1edcdaaa",
+      "research/catalogue_v14_frozen/config/names.json": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+      "research/catalogue_v14_library_evidence.json": "d52d5eb07945e932d55e7596ee611f384b8a43213c8dc625fa320f6d169b6c0f",
+      "research/catalogue_v14_non_c_proof.json": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24"
+    },
+    "input_sha256": {
+      "config/candidates/c001-pilot.json": "3c756a0c52aa66425b135679f5458827241fe971b2a8251e488c87c8891938f3",
+      "config/candidates/c002-wave1.json": "cd3177795cd261fa1bef3d967569f33eabea3490823f67d3fe09fa3202afa1b1",
+      "config/candidates/c003-wave2.json": "0a8ac21d992e9bb7e1ddce41e9f5cbd14dba41cc52b1c7cf3cca2152493b6c63",
+      "config/candidates/c004-wave3.json": "3e222a38d47d3cdbd90fb9ee6b6ff36ad7aa6263e4ca5ef6e23ac99aa78db52a",
+      "config/candidates/c004-wave4.json": "a363c28c14da05109d3159f120c9068f091ecc97f23956cffba774fdd2d1d1e3",
+      "config/candidates/c004.json": "2626c2911fae00d433e162c87b8835cac0415fd0baf6e406610cd96666130af8",
+      "config/candidates/c005.json": "514701fedc425d536f37fed07472173d99e5fd0015d837265ca3fcd04dff7df5",
+      "config/candidates/c006.json": "b760840461a9a00f239e55b277799222c2203a7b4ff972e051aaf217690c5781",
+      "config/candidates/c007.json": "d2ca1af4874f59745376a5b1524fbaf1d4fa5bed9c6ada25e3fab4f7f90a90dc",
+      "config/candidates/c008-r2.json": "7a858e75ad98347701734cbe410da2ecf75b56e31cd82b548c9a2c5aad61e80e",
+      "config/candidates/c008-r3.json": "201a7407f6b9573f1202e24a7df325a0ce107e04fb6c5d13784dcdf32c6ecd71",
+      "config/candidates/c008.json": "d8f49a991dde5c659f76f833de228342ff8fce9726288f55abae3f27055596b2",
+      "config/candidates/c009.json": "15ee87d1a2b8480fb4efbd5e392fb0e1ab32edf0f14ba8f405868558faf8746c",
+      "config/candidates/c010.json": "45a029c5b5e9dc00cfd701b091659182bbb32ed417dcacd4d4f3209ac819da53",
+      "config/candidates/c011.json": "3e0ba63635d3909e8a161f9494b177d8b21a0534b16b85a4fcf67895bfb564e8",
+      "config/candidates/cmodels.json": "5d5fb0519f67ba4fd4ca7680afb9a27a26f30b74a239da57c6029b4b405f1cf8",
+      "config/matches.json": "4330cce9b9bdb086d1b3ef80d68c5bcdb8d0a8c99aab489aa44fc4827b9b2896",
+      "config/names.json": "c0aabfd04f4aab5888895d607c5c12d0a87bee0e41e1b7e961f5996af15e8fb8"
+    },
+    "main_commit": "69854e8ef7989eb1431f56ffed1d41dc930f4def",
+    "merge_commit": "88ab1ecf18bb52a81a38c30c08b02e592063866c",
+    "overlap": [],
+    "proposal_sha256": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff"
+  },
+  "new_C_credit": 0,
+  "retained_artifacts": {
+    "config/catalogue.json": "add2952983f72625f2d990605864b4389889da11dd413f09bd040ccbaa012eff",
+    "docs/denominator-history.jsonl": "179e8b3835969b3117d99e69b59b1153796c194090c67a811f58614e14ff43f3",
+    "research/catalogue_v14_checks.json": "d0d5ad074dc9706d5e718c04057877516af791ac6e3f2897a08a6a1b7088b256",
+    "research/catalogue_v14_evidence.json": "c654518aaebe6eaade5ee968e877155892d4f3ee7312414ab5f7c30a3c126827",
+    "research/catalogue_v14_non_c_proof.json": "66484a91ccd9f6fb5e90aaaf7e7793101af40112eeecb4f0399653d01c0afe24",
+    "tools/catalogue_non_c.py": "d35211db73fc51e64c0cd6a501c024ec26229be4763c940a92c09dc9fe209918"
+  },
+  "reviewed_failure": {
+    "disposition": "Accepted; replace pinned totals and explanation prose with derived exact transition/protection sets and input-binding/refusal behaviour. Independent re-review remains required.",
+    "finding": "F01",
+    "path": "scratch/review/catalogue-v14/codex/REVIEW.json",
+    "sha256": "4815a1370d57931f7e1761f605a370aa4872a5c3471a45aed836079c39a7717d"
+  },
+  "revision": "catalogue-v14-r2",
+  "schema_version": 1
+}
