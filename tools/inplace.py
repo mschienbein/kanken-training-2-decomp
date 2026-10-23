@@ -729,6 +729,8 @@ class ObjectFile:
             self.dependency_sections: dict[int, Section] = {}
             allocated_indices: set[int] = set()
             self.section_groups: list[tuple[int, str, set[int | str]]] = []
+            self.group_issues: list[tuple[str, str]] = []
+            self.group_copies: list[tuple[str, int, bool, tuple[int, ...]]] = []
             for i, s in enumerate(elf.iter_sections()):
                 if s["sh_flags"] & SH_FLAGS.SHF_ALLOC:
                     allocated_indices.add(i)
@@ -790,12 +792,17 @@ class ObjectFile:
                         flags = words[0]
                         signature = self.symbols[s["sh_info"]].name if flags & 1 else ""
                         symbol = self.symbols[s["sh_info"]] if s["sh_info"] < len(self.symbols) else None
+                        declared = symbol.name if symbol is not None else ""
+                        if (any(not 0 < member < elf.num_sections() for member in words[1:])
+                                or len(set(words[1:])) != len(words[1:])):
+                            self.group_issues.append((declared, "unrepresented or duplicate group member index"))
                         membership = GroupMembership(
                             flags, signature, s.name, s["sh_flags"], s["sh_addr"], s["sh_size"],
                             s["sh_addralign"], s["sh_entsize"],
                             s["sh_link"] == elf.get_section_index(".symtab") and symbol is not None,
                             (symbol.name, symbol.value, symbol.size, symbol.kind, symbol.bind) if symbol else None,
                         )
+                        self.group_copies.append((declared, flags, membership.canonical_symbol_table, tuple(words[1:])))
                         self.section_groups.append((
                             flags, signature, {member for member in words[1:] if member in allocated_indices}))
                         for member in words[1:]:
@@ -838,6 +845,8 @@ class ObjectFile:
         merged.sections, merged.symbols = {}, []
         merged.dependency_sections = {}
         merged.section_owners, merged.section_objects = {}, {}
+        merged.section_input_indices = {}
+        merged.group_issues = [issue for obj in objects for issue in getattr(obj, "group_issues", [])]
         merged.section_groups = []
         merged.origin = None
         merged.combination_depth = 1 + max((getattr(obj, "combination_depth", 0) for obj in objects), default=0)
@@ -893,6 +902,7 @@ class ObjectFile:
                 destination[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked,
                                                  metadata=metadata)
                 merged.section_owners[new_index] = owner
+                merged.section_input_indices[new_index] = (owner, index)
                 merged.section_objects[new_index] = labels[owner] if labels is not None else str(getattr(obj, "path", f"object[{owner}]"))
             for sym in obj.defined_globals():
                 new_sym = symbols[id(sym)]
@@ -1245,6 +1255,8 @@ class InPlaceLinker:
                        for section in allocated.values() for relocation in section.relocs
                        for reference in (relocation.symbol, relocation.reference) if reference is not None)):
             raise LinkError("U1 refused by scope: requires one directly supplied, non-nested object with complete identity")
+        if self.model.closed_u1_composition and getattr(obj, "group_issues", []):
+            raise LinkError("U1 group has unrepresented or duplicate member indices")
 
     # -- placement -----------------------------------------------------------------------------
 
@@ -2086,6 +2098,8 @@ class InPlaceLinker:
                              "complete_destructor": complete_name, "complete_destructor_address": complete_address,
                              "d0_slot_offset": 12, "d0_slot_is_null": True, "d1_slot_agrees": True},
             }
+            if self.model.closed_u1_composition:
+                row["evidence"]["complete_destructor_size"] = self.functions[complete_address]["size"]
             if section.comdat:
                 row["comdat"] = section.comdat
             removed[index] = row

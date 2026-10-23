@@ -63,6 +63,11 @@ def fixture(unit=2, alignment=4, order=(2, 0, 1), lengths=(4, 6, 8),
     functions = {BASE: {"address": BASE, "size": 16, "isa": "arm", "code_ranges": []}}
     linker = inplace.InPlaceLinker(memory, functions, inplace.Resolver(functions),
                                    (0x200000, 0x201000), model, literal_model=MODEL)
+    if linker.model.complete_symbol_resolution:
+        from tests.elf_fixture import serialize_object
+        raw = inplace.ObjectFile.__new__(inplace.ObjectFile)
+        raw.sections, raw.symbols, raw.section_groups = obj.sections, obj.symbols, []
+        obj = inplace.ObjectFile(Path("synthetic-literal.o"), data=serialize_object(raw), input_kind="object")
     return obj, memory, linker, offsets, output_offsets, original
 
 

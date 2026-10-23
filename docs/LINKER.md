@@ -15,14 +15,14 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9–v15** implementations remain selectable, immutable and
-**unadopted**. Sealed FAILs v10–v14 remain under `scratch/review/`; v15 narrows U1 to
-one direct object but deliberately cannot authorize it inside an aggregate builder.
-The new experimental opt-in **`armlink5-inline-branchnop-v16`** integrates that same
-direct-unit proof before aggregation, with separate composition vetoes and full receipt
-closure. Aggregation itself never authorizes U1. The proposed v1.20 gate text is under
-`scratch/integrator/linker-unref/`, pending independent review. Frozen GATES remains
-v1.19 and defaults remain v2/none.
+The recorded experimental **v9–v16** implementations remain selectable, immutable and
+**unadopted**. Sealed FAILs v10–v16 remain under `scratch/review/`; v15 narrows U1 to
+one direct object and v16 stages that proof before aggregation but omits global COMDAT
+copy closure and permits covered-only receipt laundering.
+The new experimental opt-in **`armlink5-inline-branchnop-v17`** adds all-original-copy
+composition vetoes and positive full-image receipt scope. Aggregation itself never
+authorizes U1. The historical proposed v1.20 text under `scratch/integrator/linker-unref/`
+has not been amended for v17. Frozen GATES remains v1.19 and defaults remain v2/none.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -73,7 +73,9 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v8` | frozen opt-in, adopted gates v1.19; PASS_WITH_QUALIFICATIONS | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
 | `armlink5-inline-branchnop-v9` | recorded unadopted history, selectable; review FAIL | v8 plus U1: unbound, witnessed D0 removal without own-unwind exemption; recorded implementation omits zero-sized dependency sources, exact mapping alignment and relocation-target identity |
 | `armlink5-inline-branchnop-v10` | recorded unadopted history, selectable; review FAIL | v9 plus v8's own-exidx/extab closure for U1 owners; inherits F01/F02/F05 and incomplete matcher/grid reporting closure (F03/F04) |
-| `armlink5-inline-branchnop-v11` | experimental opt-in, **not adopted** | v10 U1/own-companion design plus complete allocated dependency/root witnesses, exact mapping ranges, normalized copy-target identity, matcher hashes and explicit action reporting/refusal in every consumer |
+| `armlink5-inline-branchnop-v11` | recorded unadopted history, selectable; review FAIL | v10 U1/own-companion design plus allocated dependency/root witnesses, mapping checks, normalized copy targets, matcher hashes and explicit action reporting; complete raw ELF metadata gaps remain |
+| `armlink5-inline-branchnop-v16` | recorded unadopted history, selectable; review FAIL | direct-unit U1 preparation before aggregation; missing foreign same-signature COMDAT closure and positive full-build receipt scope |
+| `armlink5-inline-branchnop-v17` | experimental opt-in, **not adopted** | v16 direct-unit proofs plus all-original allocated COMDAT member/copy vetoes; positive full-image receipt/schema/action/witness closure |
 
 ## Function-entry alias identity (v6 only)
 
@@ -786,7 +788,7 @@ The current builder always supplies an aggregate, so v15 **does not authorize U1
 builds**, even with one wrapped unit. No per-unit removal workaround or future broader model is
 implicit. The v1.20 draft for that historical proposal named v15; no adoption, full suite/build, subagents or new credit.
 
-## Direct-unit U1 in full builds (experimental v16)
+## Direct-unit U1 in full builds (recorded v16; review FAIL)
 
 V15's aggregate refusal remains immutable. Only
 **`armlink5-inline-branchnop-v16`** adds a builder stage that authorizes U1 on each ledger
@@ -824,8 +826,8 @@ L1 owner functions and credited U1-owner functions; zero-credit owners/actions r
 composition/relocation/receipt path but writes **metadata only**: no hybrid allocation,
 `code.bin`/BLZ output or recompression. It records `covered` counts and span hashes, not
 accepted credit or whole-image equality. A proposed `--names` overlay is allowed only in
-this mode and is hash-bound with the canonical/merged names. Bounded receipts are explicitly
-rejected by checkpoint preparation/verification.
+this mode and is hash-bound with the canonical/merged names. V16 intended to reject
+bounded receipts at acceptance; its sealed review demonstrates omission/summary bypasses.
 
 Executed focused selection: **238 tests, exit 0, OK**, plus **13 checkpoint-binding tests,
 exit 0, OK**. New synthetic full-path tests cover per-unit action/companion/witness receipts,
@@ -851,6 +853,68 @@ Fixture ledger/helper and exact commands/exits/actions are bound in
 Direct matcher re-runs preserve MenuResetScene **exit 0 / MATCH 100 B** with the same one
 action, and MenuScene **exit 2 / live vtable refusal** without actions.
 No whole-ledger production build, full suite, adoption, subagents or new credit is claimed.
+
+## Global composition and positive receipt scope (experimental v17)
+
+The sealed v16 review (`scratch/review/linker-v16/codex/SEAL.json`, **FAIL**) reproduces
+two independent holes. A foreign same-signature COMDAT group containing kept code,
+unplaced data or a zero-sized allocated member did not veto a local D0/own-unwind removal,
+in either object order (**V16-F01**). Deleting `mode` from a bounded receipt, or passing it
+through the old `build_summary` filter, could misrepresent covered-only evidence as a
+successful fresh build (**V16-F02**). V16 and all prior evidence remain historical.
+
+Only **`armlink5-inline-branchnop-v17`** enables `closed_u1_composition`:
+
+- The builder collects affected signatures from the staged local removals, then inspects
+  **every original unit**, before combining prepared views. Every positive- or zero-sized
+  allocated member of every affected copy needs that unit's own removal proof. Kept code,
+  unplaced data, zero-sized members and unproved members veto the entire operation.
+- Original group flags, signature/table provenance and raw member indices remain visible;
+  unknown semantics or unrepresented/contradictory membership refuse. A metadata-only
+  combined view remaps original section identities to compare complete proved copy roles,
+  contents, ELF/group metadata and relocation-target identities. It never links that view,
+  creates a removal or supplies a cross-unit D1 witness. Existing foreign-reference and
+  supplied-personality-definition vetoes still run over the originals.
+- Same-stem C/C++ units receive distinct object paths, so staging and object/dependency
+  hashes cannot silently describe the other unit's compiler output.
+
+New build receipts explicitly identify `schema_version: 2`, `record_kind: build-receipt`
+and `mode: full` or `bounded`. Every per-unit U1 row includes an explicit authorization
+count and all three action/member/witness lists, including empty lists. Retained D1
+witness records include their full expected extent and equal candidate/original hashes.
+
+Acceptance now requires **positive full-image evidence for every new prepare**, not just
+the absence of `mode: bounded`: the full receipt identity/scope, passing fresh status,
+matching complete image and BLZ input/output hashes, exact whole-image checks, credited
+counts, unit/compiler/source/object/config/harness provenance and the complete selected
+U1 schema. Covered counts/spans are forbidden there. `build_summary` now marks itself
+`build-summary` and preserves scope metadata; it remains deliberately insufficient as a
+receipt. Review, finalize and history re-open the hash-bound complete receipts.
+Historical verification has an explicit legacy path only for already-recorded non-v17
+schema-1 full evidence; it still requires actual complete image/BLZ hashes/checks and
+units. Historical summary formatting cannot authorize covered evidence. Failed legacy
+postmortems may still be reviewed, but their failed prepare cannot finalize.
+
+Executed **507 tests, exit 0, OK** across every linker test module plus the build/accept
+modules (not the full suite). Exact regressions reproduce all six F01 permutations,
+different-signature controls, complete agreeing/contradictory copies, group provenance,
+the bounded/missing-mode/relabelled/summary F02 variants, isolated prepare/selection
+attacks and positive full-receipt controls. Missing scope, image, unit, action, witness
+or provenance fields refuse. Earlier unsuccessful runs and their fixture corrections
+are retained in the evidence rather than overwritten.
+
+A fresh two-unit bounded real build writes only metadata under
+`build/linker-unref-v17-bounded-r5/`: **exit 0, PASS**, D1 **100 B at `0x001acbb4`**,
+with exactly one target-null U1 action for D0 **108 B** plus its own exidx **8 B**.
+The independent empty unit remains visible with explicit empty U1 lists/count zero.
+Direct matcher controls give MenuResetScene attempt008 **exit 0 / MATCH 100 B**, and
+MenuScene attempt006 **exit 2 / live vtable reference**, with no elimination action.
+Commands, exits, source/object/header hashes and complete actions are in
+`scratch/integrator/linker-unref/evidence-v17.json`; the systematic closure/absence/
+consumer sweep is `scratch/integrator/linker-unref/AUDIT-v17.json`.
+
+Neither `docs/GATES.md` nor `GATES-DRAFT.md` is changed. No whole-ledger production/full
+build, full suite, adoption, checkpoint mutation, subagent or new credit is claimed.
 
 ## Sources
 

@@ -268,6 +268,7 @@ class SyntheticBuildFixture:
             "config/catalogue.json": json.dumps(catalogue),
             "config/compiler_profiles.json": "{}",
             "toolchain.lock.json": "{}",
+            "tools/linker_models.py": Path(inplace.__file__).with_name("linker_models.py").read_text(),
         }.items():
             self.write_source(rel, text)
         (self.root / "docs").mkdir()
@@ -276,7 +277,7 @@ class SyntheticBuildFixture:
         (self.root / "orig/exheader.bin").write_bytes(b"synthetic exheader hash input")
         for module, attr, value in (
             (build, "ROOT", self.root), (build, "MATCHES", self.root / "config/matches.json"),
-            (build, "HARNESS", ()), (image, "CATALOGUE", self.root / "config/catalogue.json"),
+            (build, "HARNESS", ("tools/linker_models.py",)), (image, "CATALOGUE", self.root / "config/catalogue.json"),
             (image, "NAMES", self.root / "config/names.json"),
             (toolchain, "ROOT", self.root), (toolchain, "PROFILES", self.root / "config/compiler_profiles.json"),
             (toolchain, "CACHE", self.root / ".cache/objcache"),

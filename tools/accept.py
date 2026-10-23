@@ -292,27 +292,95 @@ def model_use_summary(receipt: dict) -> dict:
     return uses
 
 
-def build_receipt_scope_valid(receipt: dict, model: str) -> bool:
-    """Bounded comparisons are not checkpoint builds; v16 must carry every staged unit action."""
-    if receipt.get("mode") == "bounded":
+def build_receipt_scope_valid(receipt: dict, model: str, *, allow_legacy_full: bool = False) -> bool:
+    """Require positive full-image evidence; summaries/covered comparisons never upgrade by omission."""
+    if not isinstance(receipt, dict) or receipt.get("result") != "PASS" or receipt.get("fresh") is not True:
+        return False
+    legacy = (allow_legacy_full and not linker_models.LINKER_MODELS[model].closed_u1_composition
+              and receipt.get("schema_version", 1) == 1 and "mode" not in receipt
+              and "record_kind" not in receipt)
+    if not legacy and (receipt.get("schema_version") != 2 or receipt.get("record_kind") != "build-receipt"
+                       or receipt.get("mode") != "full"):
+        return False
+    inputs, outputs, checks = (receipt.get(key) for key in ("inputs", "outputs", "checks"))
+    credited, units = receipt.get("credited"), receipt.get("units")
+    if (not all(isinstance(value, dict) for value in (inputs, outputs, checks, credited))
+            or not isinstance(units, list) or "covered" in receipt
+            or any(key in outputs for key in ("covered_spans", "covered_bytes"))):
+        return False
+
+    def digest(value) -> bool:
+        return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+    if not legacy:
+        if (inputs.get("linker_model") != model or inputs.get("literal_model") not in linker_models.LITERAL_MODELS
+                or not all(digest(inputs.get(key)) for key in
+                           ("catalogue_sha256", "profiles_sha256", "toolchain_lock_sha256",
+                            "exheader_sha256", "matches_sha256"))
+                or not isinstance(inputs.get("harness_sha256"), dict) or not inputs["harness_sha256"]
+                or not all(digest(value) for value in inputs["harness_sha256"].values())
+                or not isinstance(inputs.get("compilers"), dict)
+                or not all(digest(value) for value in inputs["compilers"].values())):
+            return False
+
+    for output, original in (("code_bin_sha256", "code_bin_sha256"), ("exefs_code_sha256", "exefs_code_sha256")):
+        if not digest(outputs.get(output)) or outputs[output] != inputs.get(original):
+            return False
+    if any(checks.get(key) is not True for key in
+           ("credited_functions_exact", "code_bin_identical", "exefs_code_identical")):
+        return False
+    if any(type(credited.get(key)) is not int or credited[key] < 0 for key in ("functions", "bytes")):
+        return False
+    functions_seen, sources_seen = set(), set()
+    for unit in units:
+        if (not isinstance(unit, dict) or not isinstance(unit.get("source"), str)
+                or not isinstance(unit.get("functions"), list) or not isinstance(unit.get("linker_rewrites"), dict)):
+            return False
+        if not legacy:
+            if (not unit["source"] or unit["source"] in sources_seen
+                    or not digest(unit.get("source_sha256")) or not digest(unit.get("object_sha256"))
+                    or not isinstance(unit.get("profile"), str) or not unit["profile"]
+                    or not isinstance(unit.get("compiler"), str) or unit["compiler"] not in inputs["compilers"]
+                    or not isinstance(unit.get("flags"), list)
+                    or not all(isinstance(flag, str) for flag in unit["flags"])
+                    or not all(isinstance(fn, str) and fn for fn in unit["functions"])
+                    or len(set(unit["functions"])) != len(unit["functions"])
+                    or functions_seen.intersection(unit["functions"])):
+                return False
+            sources_seen.add(unit["source"])
+            functions_seen.update(unit["functions"])
+    if not legacy and len(functions_seen) != credited["functions"]:
         return False
     if not linker_models.LINKER_MODELS[model].per_unit_u1:
         return True
-    if receipt.get("inputs", {}).get("u1_stage") != "per-unit-direct-before-aggregation":
+    if inputs.get("u1_stage") != "per-unit-direct-before-aggregation":
         return False
-    for unit in receipt.get("units", []):
-        members = unit.get("removed_special_members", [])
-        actions = unit.get("linker_section_rewrites", [])
-        expected = [{"rule": "unused_deleting_destructor", "target": None,
-                     "removed_special_member": member} for member in members]
-        if actions != expected:
+    for unit in units:
+        if not legacy:
+            if (not all(isinstance(unit.get(key), list) for key in
+                        ("removed_special_members", "linker_section_rewrites", "u1_witness_comparisons"))
+                    or type(unit.get("u1_authorization_count")) is not int
+                    or not digest(unit.get("dependency_manifest_sha256"))
+                    or not isinstance(unit.get("headers_sha256"), dict)
+                    or not all(digest(value) for value in unit["headers_sha256"].values())):
+                return False
+        members, actions = unit.get("removed_special_members", []), unit.get("linker_section_rewrites", [])
+        if not legacy and unit["u1_authorization_count"] != len(members):
             return False
-        witnesses = {row.get("address") for row in unit.get("u1_witness_comparisons", [])
-                     if row.get("status") == "match" and row.get("size", 0) > 0}
-        if any(member.get("unit") != unit["source"] or member.get("input_kind") != "object"
-               or member.get("evidence", {}).get("complete_destructor_address") not in witnesses
-               for member in members):
+        if actions != [{"rule": "unused_deleting_destructor", "target": None,
+                        "removed_special_member": member} for member in members]:
             return False
+        witnesses = unit.get("u1_witness_comparisons", [])
+        for member in members:
+            evidence = member.get("evidence", {})
+            matching = [row for row in witnesses if row.get("address") == evidence.get("complete_destructor_address")]
+            if (member.get("unit") != unit["source"] or member.get("input_kind") != "object"
+                    or len(matching) != 1 or matching[0].get("status") != "match"
+                    or type(matching[0].get("size")) is not int or matching[0]["size"] <= 0):
+                return False
+            if not legacy and (matching[0]["size"] != evidence.get("complete_destructor_size")
+                               or not digest(matching[0].get("sha256"))
+                               or matching[0]["sha256"] != matching[0].get("original_sha256")):
+                return False
     return True
 
 
@@ -332,9 +400,14 @@ def recorded_models(record: dict) -> dict:
     }
 
 
-def build_summary(receipt: dict) -> dict:
-    return {k: receipt[k] for k in ("name", "result", "fresh", "inputs", "outputs", "credited", "checks", "error")
-            if k in receipt}
+def build_summary(receipt: dict, *, legacy: bool = False) -> dict:
+    keys = ("name", "result", "fresh", "inputs", "outputs", "credited", "checks", "error")
+    if legacy:
+        return {key: receipt[key] for key in keys if key in receipt}
+    return {"record_kind": "build-summary",
+            **{key: receipt[key] for key in (*keys, "schema_version", "mode", "covered") if key in receipt
+               and key != "record_kind"},
+            "unit_count": len(receipt["units"]) if isinstance(receipt.get("units"), list) else None}
 
 
 def verify_selection(out: Path, record: dict, *, required: bool = False) -> bool:
@@ -355,8 +428,12 @@ def verify_selection(out: Path, record: dict, *, required: bool = False) -> bool
             receipt_path = out / "receipts" / f"{out.name}-{suffix}.json"
             if not receipt_path.is_file():
                 raise AcceptError(f"{out.name}: build {suffix} receipt missing")
-            if recorded_models(load_json(receipt_path).get("inputs", {})) != models:
+            receipt = load_json(receipt_path)
+            if recorded_models(receipt.get("inputs", {})) != models:
                 raise AcceptError(f"{out.name}: build {suffix} models differ from the prepared models")
+            failed_postmortem = record.get("result") == "FAIL" and receipt.get("result") == "FAIL"
+            if not failed_postmortem and not build_receipt_scope_valid(receipt, models["linker_model"], allow_legacy_full=True):
+                raise AcceptError(f"{out.name}: legacy receipt lacks full-image build evidence")
         return False
     if record.get("schema_version", 1) < 2:
         raise AcceptError(f"{out.name}: selected checkpoint lacks its selection binding")
@@ -372,13 +449,14 @@ def verify_selection(out: Path, record: dict, *, required: bool = False) -> bool
         if not receipt_path.is_file() or sha256_file(receipt_path) != summary.get("receipt_sha256"):
             raise AcceptError(f"{out.name}: build {suffix} receipt changed since prepare")
         receipt = load_json(receipt_path)
-        if summary != {**build_summary(receipt), "receipt_sha256": sha256_file(receipt_path)}:
+        legacy_scope = record.get("build_evidence_version") != 2
+        if summary != {**build_summary(receipt, legacy=legacy_scope), "receipt_sha256": sha256_file(receipt_path)}:
             raise AcceptError(f"{out.name}: build {suffix} summary differs from its receipt")
         if receipt.get("result") != "PASS" or receipt.get("fresh") is not True:
             raise AcceptError(f"{out.name}: build {suffix} is not a passing fresh build")
         if any(receipt.get("inputs", {}).get(key) != value for key, value in selection.items()):
             raise AcceptError(f"{out.name}: build {suffix} models differ from the frozen selection")
-        if not build_receipt_scope_valid(receipt, selection["linker_model"]):
+        if not build_receipt_scope_valid(receipt, selection["linker_model"], allow_legacy_full=legacy_scope):
             raise AcceptError(f"{out.name}: build {suffix} lacks its required full per-unit U1 receipt")
     if not builds[0].get("outputs") or builds[0]["outputs"] != builds[1].get("outputs"):
         raise AcceptError(f"{out.name}: selected build outputs differ")
@@ -469,14 +547,13 @@ def prepare(name: str, candidates_path: Path, allow_unchecked_cpp: bool = False,
         == builds[1].get("inputs", {}).get("literal_model", "none"),
         "models_selected": all(
             all(b.get("inputs", {}).get(key) == value for key, value in selection.items()) for b in builds),
-        **({"build_scope_valid": all(build_receipt_scope_valid(b, selection["linker_model"]) for b in builds)}
-           if linker_models.LINKER_MODELS[selection["linker_model"]].per_unit_u1
-           or any(b.get("mode") == "bounded" for b in builds) else {}),
+        "build_scope_valid": all(build_receipt_scope_valid(b, selection["linker_model"]) for b in builds),
         "suite_pass": suite["returncode"] == 0,
         "interfaces_pass": iface_ok,
     }
     record = {
         "schema_version": 2,
+        "build_evidence_version": 2,
         "checkpoint": name,
         "prepared_utc": now(),
         "commit": commit,

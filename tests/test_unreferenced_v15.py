@@ -182,7 +182,7 @@ class SingleDirectObjectScopeTest(unittest.TestCase):
                 self.assertEqual(getattr(selected, key), value)
         self.assertTrue(selected.single_object_u1)
         self.assertTrue(all(not model.single_object_u1 for name, model in inplace.LINKER_MODELS.items()
-                            if name not in (MODEL, "armlink5-inline-branchnop-v16")))
+                            if name not in (MODEL, "armlink5-inline-branchnop-v16", "armlink5-inline-branchnop-v17")))
         self.assertEqual(inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
 
 

@@ -241,7 +241,8 @@ class CompleteSectionMetadataTest(unittest.TestCase):
         self.assertTrue(selected.complete_section_metadata)
         self.assertTrue(all(not model.complete_section_metadata for name, model in inplace.LINKER_MODELS.items()
                             if name not in (MODEL, "armlink5-inline-branchnop-v13", "armlink5-inline-branchnop-v14",
-                                            "armlink5-inline-branchnop-v15", "armlink5-inline-branchnop-v16")))
+                                            "armlink5-inline-branchnop-v15", "armlink5-inline-branchnop-v16",
+                                            "armlink5-inline-branchnop-v17")))
         self.assertEqual(inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
         self.assertEqual(inplace.DEFAULT_LITERAL_MODEL, "none")
 

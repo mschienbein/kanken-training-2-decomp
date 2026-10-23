@@ -56,19 +56,60 @@ class BuildError(RuntimeError):
     pass
 
 
-def compile_units(units: list[dict], profiles: dict, out: Path, fresh: bool, jobs: int) -> dict[str, bool]:
+def unit_object_path(out: Path, source: str, distinct: bool = False) -> Path:
+    relative = Path(source + ".o") if distinct else Path(source).with_suffix(".o")
+    return out / "obj" / relative
+
+
+def compile_units(units: list[dict], profiles: dict, out: Path, fresh: bool, jobs: int,
+                  distinct_paths: bool = False) -> dict[str, bool]:
     """Compile every unit in parallel (armcc runs as separate processes). Returns source -> cache hit."""
     for unit in units:
         if unit["profile"] not in profiles:
             raise BuildError(f"{unit['source']}: unknown profile {unit['profile']!r}")
 
     def one(unit: dict) -> tuple[str, bool]:
-        obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
+        obj = unit_object_path(out, unit["source"], distinct_paths)
         hit = toolchain.compile_source(profiles[unit["profile"]], ROOT / unit["source"], obj, cache=not fresh)
         return unit["source"], hit
 
     with ThreadPoolExecutor(max_workers=max(1, jobs)) as pool:
         return dict(pool.map(one, units))
+
+def check_u1_group_closure(objects: list, units: list[dict], plans: list[dict], image,
+                           functions: dict, resolver, model, literal_model: str) -> None:
+    """Negative all-original-copy proof; never lend eligibility or decide aggregate U1."""
+    affected = {original.sections[index].comdat for original, plan in zip(objects, plans)
+                for index in plan["removed"] if index in original.sections} - {None}
+    if not affected:
+        return
+    for original, plan in zip(objects, plans):
+        if any(signature in affected for signature, _ in getattr(original, "group_issues", [])):
+            raise BuildError("affected U1 COMDAT copy has unrepresented group members")
+        for signature, flags, canonical, _ in getattr(original, "group_copies", []):
+            if signature in affected and (flags != 1 or not canonical):
+                raise BuildError("affected U1 COMDAT copy has unsupported group semantics")
+        for index, section in (original.sections | getattr(original, "dependency_sections", {})).items():
+            memberships = section.metadata.groups if section.metadata is not None else ()
+            declared = {group.signature_symbol[0] for group in memberships if group.signature_symbol}
+            if section.comdat not in affected and not declared & affected:
+                continue
+            if (section.comdat not in affected or index not in plan["removed"]
+                    or len(memberships) != 1 or memberships[0].flags != 1
+                    or memberships[0].signature != section.comdat
+                    or not memberships[0].canonical_symbol_table):
+                raise BuildError("affected U1 COMDAT copy lacks complete allocated member removal proof")
+    original_combined = inplace.ObjectFile.combine(objects, [unit["source"] for unit in units])
+    remap = {source: index for index, source in original_combined.section_input_indices.items()}
+    checker = inplace.InPlaceLinker(image, functions, resolver, image.bss, model, literal_model)
+    for owner, plan in enumerate(plans):
+        for member in plan["members"]:
+            index = remap[(owner, member["section_index"])]
+            checker._unreferenced_sections[index] = member
+            for companion in member.get("unwind_sections", []):
+                checker._removed_unwind[remap[(owner, companion["section_index"])]] = index
+    checker._check_destructor_group_copies(original_combined, affected)
+
 
 def prepare_unit_objects(objects: list, units: list[dict], image, functions: dict, resolver,
                          model, literal_model: str) -> tuple[list, list[dict]]:
@@ -83,6 +124,9 @@ def prepare_unit_objects(objects: list, units: list[dict], image, functions: dic
                                 (view.sections | getattr(view, "dependency_sections", {}))}
         local = inplace.InPlaceLinker(image, functions, resolver, image.bss, model, literal_model)
         output, removed = local.prepare_unit_u1(view)
+        for member in local.removed_special_members:
+            address = member["evidence"]["complete_destructor_address"]
+            member["evidence"]["complete_destructor_size"] = functions[address]["size"]
         prepared.append(output)
         plans.append({"source": unit["source"], "removed": removed,
                       "members": local.removed_special_members,
@@ -111,6 +155,8 @@ def prepare_unit_objects(objects: list, units: list[dict], image, functions: dic
                 if (relocation.type == inplace.R_ARM_NONE and relocation.symbol.shndx == "SHN_UNDEF"
                         and relocation.symbol.name in defined_names):
                     raise BuildError("per-unit U1 personality marker has a supplied ledger definition")
+    if model.closed_u1_composition:
+        check_u1_group_closure(objects, units, plans, image, functions, resolver, model, literal_model)
     return prepared, plans
 
 
@@ -125,8 +171,10 @@ def u1_witness_comparisons(plan: dict, linked: dict, functions: dict, image) -> 
         size = functions[address]["size"]
         if len(candidates) != 1 or len(candidates[0]) != size or candidates[0] != image.read(address, size):
             raise BuildError("per-unit U1 retained D1 witness does not match its complete catalogue extent")
+        original = image.read(address, size)
         results[address] = {"name": evidence["complete_destructor"], "address": address, "size": size,
-                            "status": "match", "sha256": sha256_bytes(candidates[0])}
+                            "status": "match", "sha256": sha256_bytes(candidates[0]),
+                            "original_sha256": sha256_bytes(original)}
     return list(results.values())
 
 
@@ -159,7 +207,9 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     linker = inplace.InPlaceLinker(image, functions, resolver, image.bss, linker_model, literal_model)
     matches = json.loads(matches_path.read_text(encoding="utf-8"))
     profiles = toolchain.load_profiles()
-    hits = compile_units(matches["units"], profiles, out, fresh or linker.model.per_unit_u1, jobs or os.cpu_count() or 1)
+    compile_options = {"distinct_paths": True} if linker.model.closed_u1_composition else {}
+    hits = compile_units(matches["units"], profiles, out, fresh or linker.model.per_unit_u1,
+                         jobs or os.cpu_count() or 1, **compile_options)
 
     hybrid = None if bounded else bytearray(image.code)
     covered_spans = []
@@ -176,7 +226,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
     function_definitions: dict[int, str] = {}  # credited stable identity -> emitted defining unit
     provenance = {"input_kind": "object"} if linker.model.single_object_u1 else {}
-    objects = [inplace.ObjectFile(out / "obj" / Path(unit["source"]).with_suffix(".o"), **provenance)
+    objects = [inplace.ObjectFile(unit_object_path(out, unit["source"], linker.model.closed_u1_composition), **provenance)
                for unit in matches["units"]]
     # Inspect the original objects before combining/linking can coalesce COMDAT copies. Removing
     # an old credit claim must never hide an emitted body, even under another bound symbol name.
@@ -213,7 +263,7 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
     for owner, unit in enumerate(matches["units"]):
         src = ROOT / unit["source"]
         profile = profiles[unit["profile"]]
-        obj = out / "obj" / Path(unit["source"]).with_suffix(".o")
+        obj = unit_object_path(out, unit["source"], linker.model.closed_u1_composition)
         linked = {index: value for index, value in all_linked.items() if combined.section_owners[index] == owner}
         witness_rows = u1_witness_comparisons(plans[owner], linked, functions, image) if linker.model.per_unit_u1 else []
         compile_inputs = {}
@@ -275,6 +325,11 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             **({"removed_special_members": plans[owner]["members"],
                 "linker_section_rewrites": plans[owner]["actions"]}
                if plans[owner]["members"] else {}),
+            **({"u1_authorization_count": len(plans[owner]["members"]),
+                "u1_witness_comparisons": witness_rows,
+                "removed_special_members": plans[owner]["members"],
+                "linker_section_rewrites": plans[owner]["actions"]}
+               if linker.model.per_unit_u1 else {}),
             **({
                 "removed_special_members": [row for row in linker.removed_special_members
                                             if combined.section_owners[row["section_index"]] == owner],
@@ -305,12 +360,13 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
 
     used = sorted({u["compiler"] for u in units})
     receipt = {
-        "schema_version": 1,
+        "schema_version": 2,
         "name": name,
         "created_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "host": f"{platform.system()}-{platform.machine()}",
         "fresh": fresh or linker.model.per_unit_u1,
-        **({"mode": "bounded"} if bounded else {}),
+        "record_kind": "build-receipt",
+        "mode": "bounded" if bounded else "full",
         "inputs": {
             "code_bin_sha256": image.sha256,
             **({"exefs_code_sha256": sha256_bytes(stored)} if not bounded else {}),

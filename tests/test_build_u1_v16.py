@@ -191,4 +191,5 @@ class PerUnitU1BuildTest(unittest.TestCase):
             if key not in ("name", "per_unit_u1"):
                 self.assertEqual(getattr(selected, key), value)
         self.assertTrue(selected.per_unit_u1)
-        self.assertTrue(all(not model.per_unit_u1 for name, model in inplace.LINKER_MODELS.items() if name != MODEL))
+        self.assertTrue(all(not model.per_unit_u1 for name, model in inplace.LINKER_MODELS.items()
+                            if name not in (MODEL, "armlink5-inline-branchnop-v17")))

@@ -53,9 +53,12 @@ class AcceptGateTest(unittest.TestCase):
         builds = []
         for suffix in ("a", "b"):
             receipt = {
-                "name": f"{name}-{suffix}", "result": result, "fresh": True, "inputs": {},
+                "name": f"{name}-{suffix}", "result": result, "fresh": True,
+                "inputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
                 "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80},
-                "outputs": {"code_bin_sha256": "x"},
+                "outputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
+                "checks": {"credited_functions_exact": True, "code_bin_identical": True, "exefs_code_identical": True},
+                "units": [{**unit, "linker_rewrites": {}} for unit in units],
             }
             accept.write_exclusive(out / "receipts" / f"{name}-{suffix}.json", receipt)
             builds.append({key: receipt[key] for key in ("name", "result", "credited", "outputs")})
@@ -176,13 +179,31 @@ class AcceptGateTest(unittest.TestCase):
                         linker_model="armlink5-inline-branchnop-v2", literal_model="none", linker_models=None):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
-        receipt = {"result": "PASS", "outputs": {"code_bin_sha256": "x"},
+        receipt = {"schema_version": 2, "record_kind": "build-receipt", "mode": "full", "result": "PASS",
+                   "outputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
+                   "checks": {"credited_functions_exact": True, "code_bin_identical": True, "exefs_code_identical": True},
                    "units": [{"source": u["source"], "functions": u["functions"],
                               "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []},
                               "literal_rebindings": list(literal_rebindings)} for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
         if receipt_units is not None:
             receipt["units"] = receipt_units
+        for unit in receipt["units"]:
+            unit.setdefault("linker_rewrites", {})
+            unit.setdefault("source_sha256", "c" * 64)
+            unit.setdefault("object_sha256", "d" * 64)
+            unit.setdefault("profile", "game")
+            unit.setdefault("compiler", "synthetic")
+            unit.setdefault("flags", [])
+            if accept.linker_models.LINKER_MODELS[linker_model].per_unit_u1:
+                unit.setdefault("removed_special_members", [])
+                unit.setdefault("linker_section_rewrites", [])
+                unit.setdefault("u1_witness_comparisons", [])
+                unit["u1_authorization_count"] = len(unit["removed_special_members"])
+                unit["dependency_manifest_sha256"] = "c" * 64
+                unit["headers_sha256"] = {}
+        receipt["credited"]["functions"] = sum(len(unit["functions"]) for unit in receipt["units"])
+        receipt["credited"]["bytes"] = 8 * receipt["credited"]["functions"]
         literal_choices = iter(literal_models) if literal_models is not None else None
         linker_choices = iter(linker_models) if linker_models is not None else None
         self.build_calls = []
@@ -193,6 +214,10 @@ class AcceptGateTest(unittest.TestCase):
             self.assertEqual(frozen, {"linker_model": kwargs["linker_model"], "literal_model": kwargs["literal_model"]})
             self.build_calls.append((name, kwargs))
             return {**receipt, "name": name, "fresh": kwargs["fresh"], "inputs": {
+                "code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64,
+                **{key: "c" * 64 for key in ("catalogue_sha256", "profiles_sha256",
+                                             "toolchain_lock_sha256", "exheader_sha256", "matches_sha256")},
+                "harness_sha256": {"synthetic": "d" * 64}, "compilers": {"synthetic": "e" * 64},
                 "linker_model": next(linker_choices) if linker_choices is not None else kwargs["linker_model"],
                 "literal_model": next(literal_choices) if literal_choices is not None else kwargs["literal_model"],
                 **({"u1_stage": "per-unit-direct-before-aggregation"}
@@ -228,7 +253,7 @@ class AcceptGateTest(unittest.TestCase):
         """The prepare record must show each gate's outcome, not only the overall result."""
         record = self.stubbed_prepare("c009", [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}])
         self.assertEqual(set(record["checks"]), {
-            "build_a_pass", "build_b_pass", "builds_identical", "models_selected", "suite_pass", "interfaces_pass",
+            "build_a_pass", "build_b_pass", "builds_identical", "models_selected", "build_scope_valid", "suite_pass", "interfaces_pass",
         })
         self.assertEqual(record["result"], "PASS")
         self.assertEqual(record["commit"], "0" * 40)
@@ -558,11 +583,13 @@ class AcceptGateTest(unittest.TestCase):
         if accept.linker_models.LINKER_MODELS[selected].per_unit_u1:
             member.update(unit="src/a.c", input_kind="object")
             member["evidence"]["complete_destructor_address"] = 0x100000
+            member["evidence"]["complete_destructor_size"] = 4
         action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
         receipts = [{"source": "src/a.c", "functions": ["func_00100000"], "removed_special_members": [member],
                      "linker_section_rewrites": [action]}]
         if accept.linker_models.LINKER_MODELS[selected].per_unit_u1:
-            receipts[0]["u1_witness_comparisons"] = [{"address": 0x100000, "size": 4, "status": "match"}]
+            receipts[0]["u1_witness_comparisons"] = [{"address": 0x100000, "size": 4, "status": "match",
+                                                   "sha256": "c" * 64, "original_sha256": "c" * 64}]
         record = self.stubbed_prepare("c015", [], receipt_units=receipts, linker_model=selected)
         out = self.root / "accept/c015"
         self.assertEqual(record["revised_units"], [])
@@ -609,6 +636,9 @@ class AcceptGateTest(unittest.TestCase):
 
     def test_v15_to_v16_transition_binds_per_unit_actions_witnesses_and_review_scope(self):
         self.u1_model_transition("armlink5-inline-branchnop-v15", "armlink5-inline-branchnop-v16", own_unwind=True)
+
+    def test_v16_to_v17_transition_binds_closed_groups_and_positive_full_receipts(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v16", "armlink5-inline-branchnop-v17", own_unwind=True)
 
     def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
         member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}
