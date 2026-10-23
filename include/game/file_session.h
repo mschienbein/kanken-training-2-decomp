@@ -9,7 +9,7 @@ struct FileSessionObject {
     union {
         const struct FileSessionVTable *vtable;
         struct FileSessionObject *next_free;
-    };
+    } storage;
     CtrHandle handle;
 };
 /* Original vtable entries identify these two distinct lifecycle protocols.

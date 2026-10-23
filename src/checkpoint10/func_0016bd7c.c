@@ -5,6 +5,7 @@
 /* [INFERENCE] Role names: the SDK's checked-result helper reports a failing
  * result together with the address of the check (__current_pc). The
  * "no handle" result code and its symbolic name are unknown. */
+
 static __forceinline void CheckResult(unsigned result, unsigned address)
 {
     if (result)

@@ -5,7 +5,7 @@ extern "C" CtrResult func_001c4d9c(FileService *service,
 {
     FileSessionObject *object = func_00192978(&bss_004b1d28);
     if (object != 0) {
-        object->vtable = &data_00223af4;
+        object->storage.vtable = &data_00223af4;
         object->handle = handle;
         *output = object;
         return 0;

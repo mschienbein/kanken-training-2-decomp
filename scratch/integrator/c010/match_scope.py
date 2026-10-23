@@ -27,12 +27,12 @@ def main() -> int:
     rows = []
     rewrite_units = []
     paused = False
-    for unit in units:
+    for index, unit in enumerate(units):
         if (OUT / "PAUSE").exists():
             paused = True
             break
         source = unit["source"]
-        output = directory / source.removeprefix("src/").rsplit(".", 1)[0]
+        output = directory / f"u{index:04d}"
         command = [str(PYTHON), "tools/match.py", source, "--profile", unit["profile"],
                    "--linker-model", "armlink5-inline-branchnop-v6", "--literal-model", "anonymous-string-records-v1",
                    "--show", "0", "--out", str(output)]
