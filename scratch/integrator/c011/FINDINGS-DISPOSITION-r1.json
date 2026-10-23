@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "prereview_sha256": "90e5dc1e8137022c7dbef10b5b6a70b87e859cc23638c6e5817acb358ea50365",
+  "summary": {
+    "new_deferral_functions": 15,
+    "new_deferral_bytes": 2532,
+    "inherited_c011_deferrals": 84,
+    "inherited_c011_deferral_bytes": 17228,
+    "total_c011_deferrals": 99,
+    "total_c011_deferral_bytes": 19760,
+    "c009_owned_font_deferrals": 4,
+    "c009_owned_font_deferral_bytes": 144,
+    "c009_font_deferrals_counted_as_new_c011": false,
+    "retained_new_functions": 88,
+    "retained_new_bytes": 12244,
+    "preserved_moves": 10,
+    "move_bytes": 984,
+    "candidate_units": 80,
+    "candidate_claims": 98,
+    "candidate_bytes_including_moves": 13228,
+    "reproof_runs": 61,
+    "reproof_exit_0": 61,
+    "reproof_functions_match": 61,
+    "reproof_matched_bytes": 5028
+  },
+  "findings": [
+    {
+      "id": "C011-F01",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_001c74e8"
+      ],
+      "deferred_function_count": 1,
+      "deferred_bytes": 120,
+      "action": "Remove the NEW dispatcher and its five-cell typed table declaration. The accepted void(void*) provider is unchanged; no procedural ResTexture-by-value invocation is admitted.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F01",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": null,
+      "reproof_exits": [],
+      "reproof_note": "Pure NEW-only hold: no revised implementation remains for this finding. The complete affected retained-closure reproof is separately recorded (61 commands, all exit 0)."
+    },
+    {
+      "id": "C011-F02",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_001cfe24",
+        "func_001cfe68"
+      ],
+      "deferred_function_count": 2,
+      "deferred_bytes": 132,
+      "action": "Remove both NEW destruction paths and the MaterialObject/material-lifecycle shadow header and native name proposals. The real LayoutMaterial/AnimTransform providers remain unchanged.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F02",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": null,
+      "reproof_exits": [],
+      "reproof_note": "Pure NEW-only hold: no revised implementation remains for this finding. The complete affected retained-closure reproof is separately recorded (61 commands, all exit 0)."
+    },
+    {
+      "id": "C011-F03",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_0013ea40",
+        "func_001af644"
+      ],
+      "deferred_function_count": 2,
+      "deferred_bytes": 364,
+      "action": "Hold the NEW texture cleanup and the NEW native-writer caller. Restore the two protected writer getter definitions byte-for-byte to the prepared c009-r5 W20 declarations; remove the new native-WideTextWriter prototypes. FontVTable is opaque; no new native font-family relationship is asserted.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F03",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/retries/func_001c5b8c.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/024-func_001c5b8c/func_001c5b8c.result.json",
+          "result_sha256": "ed4d77526c0396022e0c7aa2e805e5af430dcae5c4db109a328b5df1e26a5d64"
+        },
+        {
+          "source": "src/wave20/func_0017a690.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/048-func_0017a690/func_0017a690.result.json",
+          "result_sha256": "50c583fa07c3cbeb9d7f9d9aac36ff1a5b30cdaf109af956ee3d91431b9a9468"
+        },
+        {
+          "source": "src/wave20/func_0017a6c8.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/049-func_0017a6c8/func_0017a6c8.result.json",
+          "result_sha256": "b2e047dbc12112b803d4ab14b9932c6003955712d371cf31a72b25421bfc36f6"
+        }
+      ],
+      "reproof_note": "All retained affected closure runs exit 0; the held implementation is not compiled/admitted."
+    },
+    {
+      "id": "C011-F04",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_001c46c0"
+      ],
+      "deferred_function_count": 1,
+      "deferred_bytes": 80,
+      "action": "Hold the NEW pool release and withdraw its native-name proposal. The accepted empty no-argument reset provider is not changed or newly invoked with a receiver.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F04",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": null,
+      "reproof_exits": [],
+      "reproof_note": "Pure NEW-only hold: no revised implementation remains for this finding. The complete affected retained-closure reproof is separately recorded (61 commands, all exit 0)."
+    },
+    {
+      "id": "C011-F05",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_001c5dd8",
+        "func_001c6440",
+        "func_001c19e0",
+        "func_00143df4"
+      ],
+      "deferred_function_count": 4,
+      "deferred_bytes": 808,
+      "action": "Hold all four NEW owners/consumers. ArchiveStream table completion, the new cache-owner completion and their declarations are withdrawn; animation/UI headers are quarantined with the held sources. The existing ArchiveHandle table stays incomplete, never newly invoked.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F05",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/wave13/func_001cd2f0.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/040-func_001cd2f0/func_001cd2f0.result.json",
+          "result_sha256": "7197ea107c476da62b95ebec88c30dd4487c657e6fcdc26675a495e1e8406b3b"
+        }
+      ],
+      "reproof_note": "All retained affected closure runs exit 0; the held implementation is not compiled/admitted."
+    },
+    {
+      "id": "C011-F06",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_00116eb0"
+      ],
+      "deferred_function_count": 1,
+      "deferred_bytes": 144,
+      "action": "Hold the NEW native constructor; remove only its c011-added competing data_00224bf8 declaration, native constructors and bindings. Retain the inherited ordinary C constructor endpoint/caller without claiming an InputDeviceState/HeapObject/RectDrawer hierarchy.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F06",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/wave13/func_0010e2c8.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/028-func_0010e2c8/func_0010e2c8.result.json",
+          "result_sha256": "d33ab1463bad2a274bc2fe6fe422e6533d2908e2ad68b9c32302214aea78d4e5"
+        },
+        {
+          "source": "src/wave13/func_00123b38.c",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/032-func_00123b38/func_00123b38.result.json",
+          "result_sha256": "30db6e1c5b2d80f9d4bce507be2518806a26f3742d1437bdbc6f5c8d4cef682d"
+        }
+      ],
+      "reproof_note": "All retained affected closure runs exit 0; the held implementation is not compiled/admitted."
+    },
+    {
+      "id": "C011-F07",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_001d7780"
+      ],
+      "deferred_function_count": 1,
+      "deferred_bytes": 228,
+      "action": "Hold the NEW independent CompositeState provider; no new native alias or slot implementation is admitted. The accepted SoundVoiceObject constructor is unchanged.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F07",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": null,
+      "reproof_exits": [],
+      "reproof_note": "Pure NEW-only hold: no revised implementation remains for this finding. The complete affected retained-closure reproof is separately recorded (61 commands, all exit 0)."
+    },
+    {
+      "id": "C011-F08",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_0014eec8"
+      ],
+      "deferred_function_count": 1,
+      "deferred_bytes": 588,
+      "action": "Hold the NEW AudioAuxCalculatorTU856 invocation. The erased manager registrations and native preset providers remain unreconciled; no target population or common hierarchy is invented.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F08",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": null,
+      "reproof_exits": [],
+      "reproof_note": "Pure NEW-only hold: no revised implementation remains for this finding. The complete affected retained-closure reproof is separately recorded (61 commands, all exit 0)."
+    },
+    {
+      "id": "C011-F09",
+      "disposition": "NEW-only-deferral",
+      "status": "closed-for-this-candidate-with-contract-hold-preserved",
+      "functions_deferred": [
+        "func_001d90c8",
+        "func_001f4784"
+      ],
+      "deferred_function_count": 2,
+      "deferred_bytes": 68,
+      "action": "Hold the NEW release/count providers; quarantine the partial native pool header/binding and remove the CountedList owner declaration. Keep only the separately evidenced CountedNode traversal for the retained c010 body. No allocator-table population is claimed.",
+      "evidence": [
+        "scratch/prereview/c011/PREREVIEW.json#C011-F09",
+        "config/candidates/c011.json",
+        "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+      ],
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/checkpoint10/func_001f478c.c",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/reproof-r4-r1/020-func_001f478c/func_001f478c.result.json",
+          "result_sha256": "6db074b42a201d3f3de06414eaea7697b3f4398f39f9feb70e5a18829456a5e7"
+        }
+      ],
+      "reproof_note": "All retained affected closure runs exit 0; the held implementation is not compiled/admitted."
+    }
+  ]
+}

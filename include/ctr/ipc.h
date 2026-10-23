@@ -156,6 +156,7 @@ extern unsigned func_00137070(unsigned *out);
 extern CtrResult func_001380c8(unsigned int value0, unsigned int value1,
                          unsigned int value2, unsigned int value3, unsigned char *out);
 extern CtrResult func_001382f8(unsigned char *out);
+extern CtrResult func_00138274(void *buffer, unsigned int size);
 extern CtrResult func_00138334(unsigned char value);
 extern CtrResult func_00138370(unsigned char *output);
 extern CtrResult func_001383ac(unsigned char value);

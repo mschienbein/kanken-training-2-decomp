@@ -1,0 +1,55 @@
+{
+  "source": "src/checkpoint11/date_minute_second.cpp",
+  "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_001efbf8",
+    "func_001efc64"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/date_minute_second.cpp",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/043-date_minute_second"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.142527,
+  "stdout": "MATCH    func_001efbf8 @ 0x1efbf8 size 0x6c/0x6c\nMATCH    func_001efc64 @ 0x1efc64 size 0x6c/0x6c\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/043-date_minute_second/date_minute_second.result.json",
+  "result_sha256": "3e5a64901a3b866c57e98ee5977dd86759bf69b94c9aa2e8a23a62150adeb363",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001efbf8",
+      "status": "match",
+      "size": 108,
+      "candidate_size": 108,
+      "first_diff": null
+    },
+    {
+      "function": "func_001efc64",
+      "status": "match",
+      "size": 108,
+      "candidate_size": 108,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

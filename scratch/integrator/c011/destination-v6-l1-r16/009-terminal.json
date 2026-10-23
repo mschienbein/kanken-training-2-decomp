@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/slot_teardown.cpp",
+  "source_sha256": "8e40e3b137ddaef39bda7a3600c841d9d94157f81527ed03fbfc75c04a812434",
+  "profile": "game",
+  "credited_functions": [
+    "func_001aced0"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/slot_teardown.cpp",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/009-slot_teardown"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.151617,
+  "stdout": "MATCH    func_001aced0 @ 0x1aced0 size 0x58/0x58\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/009-slot_teardown/slot_teardown.result.json",
+  "result_sha256": "311b0d221c76814d091c5442924332d9bb370db154b3693d1f6fb87e9201a170",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001aced0",
+      "status": "match",
+      "size": 88,
+      "candidate_size": 88,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

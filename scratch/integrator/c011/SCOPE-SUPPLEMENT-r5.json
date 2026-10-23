@@ -1,0 +1,3523 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "previous_scope": "SCOPE-SUPPLEMENT-r4.json",
+  "inventory_epoch": 1792285364.882147,
+  "explicit_parent_intake": "scratch/integrator/step5-matches.json",
+  "intake_sha256": "3c5872cf69d8ac7241b7ba279711d99b24cbe48d61277f0af49f4b01ca8b2993",
+  "intake_rows": 58,
+  "new_default_rows": [
+    {
+      "function": "func_001c8424",
+      "address": "0x001c8424",
+      "size": 344,
+      "author": "nf038",
+      "manifest": "scratch/authors/nf038/RESULT.json",
+      "manifest_sha256": "26fb479ab37c790782dcd20735d5301c23ad7bb0ca310b6e4ed9a77fa8876867",
+      "row_index": 2,
+      "row": {
+        "name": "func_001c8424",
+        "address": "0x001c8424",
+        "size": 344,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf038/attempts/11-texture-final-natural/texture_commands.cpp",
+        "source_sha256": "e89b021d68cf766d7f98ad7021142438fcf08df45ded2465d9951d773f3545b5",
+        "profile": "game",
+        "receipt": "scratch/authors/nf038/match/11-texture-final-natural/texture_commands.result.json",
+        "receipt_sha256": "019f3204d36df23fdc8e1dc00f1ce35fa9fc53294573f1d73674924af822d22e",
+        "exit_code": 1,
+        "function_status": "match",
+        "attempts": 11,
+        "minutes": 0.0957,
+        "residual": {
+          "compiled_size": 344,
+          "target_size": 344,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null
+        },
+        "notes": "step5: Fixed the original four-byte residual across the width mask, dimension-word combination and store at instruction offsets 208, 212 and 216. The baseline allocated fresh temporaries instead of updating the width and cached dimension accumulators in place. A natural static append_texture_width(command, texture) helper containing the complete width-field update restores both lifetimes; extracting only the width value fixed the mask but left a two-byte combination/store allocation residual. The native GetWidth() remains signed 32-bit; conversion to unsigned before the 11-bit mask and shift preserves the original bit semantics without changing headers. Final exact delivered source MATCHes all 344 bytes under game/default v2, with no linker rewrites or names overlay. The complete baseline TU is retained: shadow-command func_001c857c and mapper-clone func_001c8b44 remain unchanged mismatches, so the whole-TU invocation exits 1 despite the target MATCH. No new original callee or alias was introduced.",
+        "needs_names": [],
+        "needs_headers": [
+          "include/game/graphics_address.h",
+          "include/game/texture_mapper.h"
+        ],
+        "previous_evidence": {
+          "source": "scratch/authors/tu617/selected/texture_commands.cpp",
+          "profile": "game",
+          "receipt": "scratch/authors/tu617/match/38-final-texture-commands-game/texture_commands.result.json",
+          "differing_bytes": 4
+        }
+      },
+      "step_row_index": 22,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf038/attempts/11-texture-final-natural/texture_commands.cpp",
+      "source_sha256": "e89b021d68cf766d7f98ad7021142438fcf08df45ded2465d9951d773f3545b5",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf038/match/11-texture-final-natural/texture_commands.result.json",
+      "receipt_sha256": "019f3204d36df23fdc8e1dc00f1ce35fa9fc53294573f1d73674924af822d22e",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001c8424",
+          "address": 1868836,
+          "size": 344,
+          "candidate_size": 344,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c857c",
+          "address": 1869180,
+          "size": 788,
+          "candidate_size": 776,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c8b44",
+          "address": 1870660,
+          "size": 248,
+          "candidate_size": 248,
+          "status": "mismatch",
+          "first_diff": 52,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "include/game/graphics_address.h",
+        "include/game/texture_mapper.h"
+      ]
+    },
+    {
+      "function": "func_001d01dc",
+      "address": "0x001d01dc",
+      "size": 328,
+      "author": "nf041",
+      "manifest": "scratch/authors/nf041/RESULT.json",
+      "manifest_sha256": "5acb80346cb876b1a0a0afefefec9129eebad7376c3104ebf2a89d4a7b674099",
+      "row_index": 1,
+      "row": {
+        "address": "0x001d01dc",
+        "name": "func_001d01dc",
+        "size": 328,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf041/src/func_001ceeac.cpp",
+        "source_sha256": "d267f8310d973c1059a02a4b754a4dacfdbb17b525f75983489fee065d939951",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf041/match/invalidate/025-final-selected-whole-tu/func_001ceeac.result.json",
+        "receipt_sha256": "513fbc002818dcca65a026b874951b1cc9588cf5ca26f276a2f155980bb3bb58",
+        "terminal_record": "scratch/authors/nf041/match/invalidate/025-final-selected-whole-tu/terminal.json",
+        "final_exit_code": 1,
+        "residual": {
+          "candidate_size": 328,
+          "target_size": 328,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "last_difference_offset": null
+        },
+        "attempts": 25,
+        "minutes": 0.13958,
+        "minutes_basis": "Observed sequential matcher subprocess wall time only; source diagnosis and reading excluded.",
+        "notes": "step5: MATCH, 328/328 B. The previous 8-byte/5-word residual was solely cyclic allocation of the first file-table loop index, table pointer and scaled index (original ip/r2/r3 versus candidate r2/r3/ip) at +0x30/+0x38/+0x3c/+0x44/+0x50; all instruction classes and nonregister operands already agreed. Moving only the existing const-void-pointer address declaration to the enclosing file-table block, while retaining its assignment inside the loop, reproduces those roles and the entire function. [INFERENCE] declaration scope/order affects ARMCC allocation; this does not recover the historical spelling. Canonical types, unsigned table count, inclusive range predicate and all later archive loops are unchanged. Final whole-TU exit is 1 only because the retained Tu1007Window constructor remains mismatched; the target itself is MATCH.",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": "scratch/authors/nf041/invalidate-names.json",
+        "previous_source": "scratch/authors/tu1007/src/func_001ceeac.cpp",
+        "previous_profile": "middleware",
+        "previous_receipt": "scratch/authors/tu1007/match/035-final-native-tu-middleware/func_001ceeac.result.json",
+        "previous_result": "scratch/authors/tu1007/RESULT.json",
+        "needs_names": [
+          "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+          "_ZNK2nw3snd12SoundArchive19GetWaveArchiveCountEv"
+        ]
+      },
+      "step_row_index": 24,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf041/src/func_001ceeac.cpp",
+      "source_sha256": "d267f8310d973c1059a02a4b754a4dacfdbb17b525f75983489fee065d939951",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf041/match/invalidate/025-final-selected-whole-tu/func_001ceeac.result.json",
+      "receipt_sha256": "513fbc002818dcca65a026b874951b1cc9588cf5ca26f276a2f155980bb3bb58",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "_ZN12Tu1007WindowC1EPKN2nw3lyt3res6WindowERKNS1_11ResBlockSetE",
+          "address": 1896108,
+          "size": 600,
+          "candidate_size": 600,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+          "address": 1901020,
+          "size": 328,
+          "candidate_size": 328,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [
+        "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+        "_ZNK2nw3snd12SoundArchive19GetWaveArchiveCountEv"
+      ],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001d47c8",
+      "address": "0x001d47c8",
+      "size": 84,
+      "author": "nf042",
+      "manifest": "scratch/authors/nf042/RESULT.json",
+      "manifest_sha256": "31ab2768a98b2e1b7471e51f40dd7104e3a9046d58b11b9a3e7084df49aa218d",
+      "row_index": 0,
+      "row": {
+        "address": "0x001d47c8",
+        "name": "func_001d47c8",
+        "size": 84,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf042/src/022-final-stream-header.cpp",
+        "source_sha256": "1d29fba69e1a5bd72c29060837aa09d66599ab2f320b3d4c92ede8b16fc00644",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf042/match/022-final-stream-header/022-final-stream-header.result.json",
+        "receipt_sha256": "33078abacf85c8c35a53fec6a3ac3acea18e26bde490df2d1d0ea04306da045e",
+        "exit_code": 1,
+        "attempts": 17,
+        "minutes": null,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "candidate_size": 84,
+          "target_size": 84,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_diff": null,
+          "differing_word_offsets": []
+        },
+        "prior_residual": {
+          "differing_bytes": 3,
+          "differing_words": 2,
+          "offsets": [
+            44,
+            48
+          ]
+        },
+        "notes": "step5: The residual was the two file-pointer copies at +0x2c/+0x30: the original prepares the offset-query argument from the incoming file pointer before preserving that pointer, whereas the previous byte-pointer expression routes the argument through the saved copy. Reusing existing nw::ut::AddOffsetToPtr for the file-block offset produces the exact 84-byte target. The typed block-local variant alone remained three bytes different, isolating the canonical helper effect. [INFERENCE] Helper/integer-address expression lifetime explains the scheduling; historical helper spelling and TU membership are not recovered. Existing func_001d60dc remains byte-for-byte unchanged and mismatched.",
+        "qualifications": [
+          "[INFERENCE] Historical C++ class/helper identity and TU membership remain unresolved."
+        ],
+        "integration_needs": [
+          "Existing canonical nw/ut/ut_Inlines.h and preinclude.h are reused; no new header or names overlay is needed for this witness.",
+          "Move the pre-existing marked func_001f1f20 and stream-header-loader C-linkage declarations into integrator-owned shared headers before prepare; reconcile ResourceData/DspAdpcmData/StreamHeaderLoader/StreamHeaderResult/StreamChannelTable with the other loader views.",
+          "The retained TU also emits unmatched func_001d60dc (804 versus 800 bytes); do not credit it. Any integration-time extraction or TU change must reproduce func_001d47c8 again."
+        ],
+        "needs_names": [],
+        "evidence": [
+          "include/game/archive.h:35-41,70-73",
+          "include/nw/ut/ut_Inlines.h:271-295",
+          "include/nw/snd/snd_StreamSoundFile.h:44-47",
+          "scratch/authors/nf042/packets/func_001d4554.md",
+          "scratch/authors/nf042/packets/func_001f1f20.md"
+        ],
+        "prior": {
+          "prev_source": "scratch/authors/tu620/src/final_stream_header.cpp",
+          "prev_profile": "middleware",
+          "prev_receipt": "scratch/authors/tu620/match/038-final-stream_header-middleware/final_stream_header.result.json",
+          "prev_result": "scratch/authors/tu620/RESULT.json"
+        }
+      },
+      "step_row_index": 25,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf042/src/022-final-stream-header.cpp",
+      "source_sha256": "1d29fba69e1a5bd72c29060837aa09d66599ab2f320b3d4c92ede8b16fc00644",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf042/match/022-final-stream-header/022-final-stream-header.result.json",
+      "receipt_sha256": "33078abacf85c8c35a53fec6a3ac3acea18e26bde490df2d1d0ea04306da045e",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001d47c8",
+          "address": 1918920,
+          "size": 84,
+          "candidate_size": 84,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001d60dc",
+          "address": 1925340,
+          "size": 800,
+          "candidate_size": 804,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001d67c8",
+      "address": "0x001d67c8",
+      "size": 248,
+      "author": "nf042",
+      "manifest": "scratch/authors/nf042/RESULT.json",
+      "manifest_sha256": "31ab2768a98b2e1b7471e51f40dd7104e3a9046d58b11b9a3e7084df49aa218d",
+      "row_index": 1,
+      "row": {
+        "address": "0x001d67c8",
+        "name": "func_001d67c8",
+        "size": 248,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf042/src/023-final-stream-commands.cpp",
+        "source_sha256": "77ebc85fa9c3cf921325f97f372730d4c2fd3b008b44980af061c53ab24360c7",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf042/match/023-final-stream-commands/023-final-stream-commands.result.json",
+        "receipt_sha256": "68611d4ed8f9022839afabb9b712816117b49c72c3631bb7cb1204f9d1614a97",
+        "exit_code": 1,
+        "attempts": 3,
+        "minutes": null,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "candidate_size": 248,
+          "target_size": 248,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_diff": null,
+          "differing_word_offsets": []
+        },
+        "prior_residual": {
+          "differing_bytes": 6,
+          "differing_words": 2,
+          "offsets": [
+            28,
+            32
+          ]
+        },
+        "notes": "step5: The two residual reads at +0x1c/+0x20 were reversed request-field captures: the original reloads the state/voice pointer at request+0x4c before capturing the buffer word at request+0x3c; the previous compound helper call captured the buffer first, using post-index address formation. Introducing the natural local StreamVoice *voice after the priority store fixes evaluation/lifetime ordering and exactly matches all 248 target bytes. Existing func_001d9a34 remains byte-for-byte unchanged and mismatched. Both dispatch arms prepare two outgoing stack words; the delivered loop target now preserves its previously omitted sixth input. The inherited private loader declaration still requires typed-interface reconciliation before prepare.",
+        "qualifications": [
+          "[INFERENCE] The historical StreamVoice/Setup/Buffer names and semantic field roles are partial views, not recovered class identities."
+        ],
+        "integration_needs": [
+          "Move the pre-existing marked C-linkage declarations and StreamVoice/Setup/Buffer/Request/Event plus StreamLoadRequest/Event/SoundPlayOptions/SoundDataPair views into appropriate shared audio headers before prepare.",
+          "Contract conflict: this historical dispatcher declares func_001d7318 as unsigned char(StreamVoice *, StreamVoiceEvent *, const StreamVoiceSetup *, const void *, int, int); the decoded loader definition uses int(StreamLoadState *, StreamLoadResult *, void **, unsigned, unsigned, int). Unify compatible state/result layouts, channel-pointer setup, integer capacity/advance words and result type; do not adopt the conflicting declarations unchanged.",
+          "The retained TU also emits unmatched func_001d9a34 (132 versus 128 bytes); do not credit it. Any integration-time extraction or TU change must reproduce func_001d67c8 again."
+        ],
+        "needs_names": [],
+        "evidence": [
+          "include/game/stream_manager.h:13-20,50-66,88-96",
+          "scratch/authors/nf042/packets/func_001d67c8.md",
+          "scratch/authors/nf042/packets/func_001d6b3c.md",
+          "scratch/authors/nf042/ABI-EVIDENCE.json"
+        ],
+        "prior": {
+          "prev_source": "scratch/authors/tu621/src/final/stream_commands.cpp",
+          "prev_profile": "middleware",
+          "prev_receipt": "scratch/authors/tu621/match/final-stream_commands-middleware/stream_commands.result.json",
+          "prev_result": "scratch/authors/tu621/RESULT.json"
+        }
+      },
+      "step_row_index": 26,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf042/src/023-final-stream-commands.cpp",
+      "source_sha256": "77ebc85fa9c3cf921325f97f372730d4c2fd3b008b44980af061c53ab24360c7",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf042/match/023-final-stream-commands/023-final-stream-commands.result.json",
+      "receipt_sha256": "68611d4ed8f9022839afabb9b712816117b49c72c3631bb7cb1204f9d1614a97",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001d67c8",
+          "address": 1927112,
+          "size": 248,
+          "candidate_size": 248,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001d9a34",
+          "address": 1940020,
+          "size": 128,
+          "candidate_size": 132,
+          "status": "mismatch",
+          "first_diff": 37,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001d7318",
+      "address": "0x001d7318",
+      "size": 1060,
+      "author": "nf042",
+      "manifest": "scratch/authors/nf042/RESULT.json",
+      "manifest_sha256": "31ab2768a98b2e1b7471e51f40dd7104e3a9046d58b11b9a3e7084df49aa218d",
+      "row_index": 2,
+      "row": {
+        "address": "0x001d7318",
+        "name": "func_001d7318",
+        "size": 1060,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf042/src/024-final-stream-block.cpp",
+        "source_sha256": "03066e8ed6b07e79a9aef6973a2e692bbf4e7b5e8c3916fbd8278562fb24a17a",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf042/match/024-final-stream-block/024-final-stream-block.result.json",
+        "receipt_sha256": "f35ff50ec5704580723f41a1cc2871e2167b3a61580134758878d37823af1a49",
+        "exit_code": 0,
+        "attempts": 4,
+        "minutes": null,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "candidate_size": 1060,
+          "target_size": 1060,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_diff": null,
+          "differing_word_offsets": []
+        },
+        "prior_residual": {
+          "differing_bytes": 6,
+          "differing_words": 3,
+          "offsets": [
+            448,
+            456,
+            460
+          ]
+        },
+        "notes": "step5: This was not merely register allocation: the three residual operations at +0x1c0/+0x1c8/+0x1cc load the sample, multiply a block count by block_samples, and subtract it. The original multiplication consumes the current state->block bound already loaded for the final loop comparison; the previous source instead multiplied its local traversal counter i. Returning state->sample - state->block * state->info->block_samples exactly matches all 1060 bytes and retains the 44-byte local frame. The comparison reloads the bound after each virtual skip, so replacing it with the traversal counter is not justified by a source invariant. Caller inspection additionally found two outgoing stack words; the otherwise unused sixth request-option word is now preserved without changing generated bytes. ORIGINAL BUG comment documents the unbounded eight-slot channel-buffer copy.",
+        "qualifications": [
+          "[INFERENCE] Descriptive loader/decoder class and inline-method identities remain unrecovered.",
+          "[INFERENCE] The caller-evidenced sixth request option is unused on this codec path and has no recovered semantic role.",
+          "ORIGINAL BUG: channel count is trusted for eight local buffer slots."
+        ],
+        "integration_needs": [
+          "Move the pre-existing marked func_001d6690 and data_00243804 declarations and StreamLoadState/Result/DecodedBlock/CodecChannel/BlockDecoder views into shared stream-loading headers before prepare; existing nw::io::FileStream and nn::snd::CTR::AdpcmContext are reused.",
+          "Reconcile the dispatcher prototype and partial state/result views with the delivered command TU; the sixth int request_option is retained from the caller but its semantic role is [INFERENCE]. The current pointer/capacity and return-type differences are explicit integration blockers.",
+          "Reconcile the StreamLoadState prefix with the header-loader StreamHeaderLoader view without inventing aliases or weakening canonical native stream contracts."
+        ],
+        "needs_names": [],
+        "evidence": [
+          "include/nw/io/io_FileStream.h:27-35",
+          "include/nn/snd.h:18",
+          "scratch/authors/nf042/packets/func_001d7318.md",
+          "scratch/authors/nf042/packets/func_001d6690.md",
+          "scratch/authors/nf042/ABI-EVIDENCE.json"
+        ],
+        "prior": {
+          "prev_source": "scratch/authors/r41166/sources/s33-shared-loop-position-update-method.cpp",
+          "prev_profile": "middleware",
+          "prev_receipt": "scratch/authors/r41166/match/s33-shared-loop-position-update-method/s33-shared-loop-position-update-method.result.json",
+          "prev_result": "scratch/authors/r41166/RESULT.json"
+        }
+      },
+      "step_row_index": 27,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf042/src/024-final-stream-block.cpp",
+      "source_sha256": "03066e8ed6b07e79a9aef6973a2e692bbf4e7b5e8c3916fbd8278562fb24a17a",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf042/match/024-final-stream-block/024-final-stream-block.result.json",
+      "receipt_sha256": "f35ff50ec5704580723f41a1cc2871e2167b3a61580134758878d37823af1a49",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001d7318",
+          "address": 1930008,
+          "size": 1060,
+          "candidate_size": 1060,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001dc744",
+      "address": "0x001dc744",
+      "size": 60,
+      "author": "nf044",
+      "manifest": "scratch/authors/nf044/RESULT.json",
+      "manifest_sha256": "b5876470e18a2d58313aef432d68ed7a3379a940d878249fb738743a455a5129",
+      "row_index": 0,
+      "row": {
+        "address": "0x001dc744",
+        "name": "func_001dc744",
+        "size": 60,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf044/src/func_001dc744_storage.c",
+        "profile": "game",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "receipt": "scratch/authors/nf044/match/27-flags-storage-accessor-composed/func_001dc744_storage.result.json",
+        "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+        "receipt_sha256": "7bdb71c5094ace8380d1d9ff80ed7c98982b00281829dabbc1207b5999079989",
+        "object_sha256": "04ff3f1a1927718c12eb34bfc763015524d064d1387a8a85327ffd7d43113d3d",
+        "attempts": 26,
+        "minutes": 0.13119,
+        "final_exit_code": 0,
+        "residual": {
+          "candidate_size": 60,
+          "target_size": 60,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null
+        },
+        "notes": "step5: MATCH 60/60 bytes under the frozen game profile and default v2 linker model. The exact predecessor differed only in four bytes across address-setup words +0x04, +0x08 and +0x10: the scaled-grade intermediate and global-root literal used opposite r0/r2 roles, with the combining operands correspondingly exchanged. The signed index division, byte access widths and even/odd masks were already identical. Adding the naturally used result_storage() accessor to the existing grade-row/packed-byte helper chain reproduces every instruction without register forcing, dead code, volatile, barriers, aliases or profile changes. Both target definitions in the delivered TU MATCH together. The canonical caller func_001ddde4 passes grade, identifier and -1, so the unused third int is retained. [INFERENCE] Reconstructed helper factoring is not a claim of the historical getter name or TU boundary.",
+        "needs_headers": [],
+        "needs_names": [],
+        "contract_evidence": [
+          "include/game/notification.h",
+          "src/models/func_001ddde4/func_001ddde4.c:40-42,85-89"
+        ],
+        "predecessor_residual": {
+          "differing_bytes": 4,
+          "differing_words": 3,
+          "word_offsets": [
+            4,
+            8,
+            16
+          ],
+          "first_difference_offset": 5
+        }
+      },
+      "step_row_index": 28,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf044/src/func_001dc744_storage.c",
+      "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf044/match/27-flags-storage-accessor-composed/func_001dc744_storage.result.json",
+      "receipt_sha256": "7bdb71c5094ace8380d1d9ff80ed7c98982b00281829dabbc1207b5999079989",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001dc744",
+          "address": 1951556,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001dc918",
+          "address": 1952024,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": []
+    },
+    {
+      "function": "func_001dc918",
+      "address": "0x001dc918",
+      "size": 60,
+      "author": "nf044",
+      "manifest": "scratch/authors/nf044/RESULT.json",
+      "manifest_sha256": "b5876470e18a2d58313aef432d68ed7a3379a940d878249fb738743a455a5129",
+      "row_index": 1,
+      "row": {
+        "address": "0x001dc918",
+        "name": "func_001dc918",
+        "size": 60,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf044/src/func_001dc744_storage.c",
+        "profile": "game",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "receipt": "scratch/authors/nf044/match/27-flags-storage-accessor-composed/func_001dc744_storage.result.json",
+        "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+        "receipt_sha256": "7bdb71c5094ace8380d1d9ff80ed7c98982b00281829dabbc1207b5999079989",
+        "object_sha256": "04ff3f1a1927718c12eb34bfc763015524d064d1387a8a85327ffd7d43113d3d",
+        "attempts": 26,
+        "minutes": 0.13119,
+        "final_exit_code": 0,
+        "residual": {
+          "candidate_size": 60,
+          "target_size": 60,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null
+        },
+        "notes": "step5: MATCH 60/60 bytes under the frozen game profile and default v2 linker model. The exact predecessor differed only in four bytes across address-setup words +0x04, +0x08 and +0x10: the scaled-grade intermediate and global-root literal used opposite r0/r2 roles, with the combining operands correspondingly exchanged. The signed index division, byte access widths and even/odd masks were already identical. Adding the naturally used result_storage() accessor to the existing grade-row/packed-byte helper chain reproduces every instruction without register forcing, dead code, volatile, barriers, aliases or profile changes. Both target definitions in the delivered TU MATCH together. The canonical caller func_001ddde4 passes grade, identifier and -1, so the unused third int is retained. [INFERENCE] Reconstructed helper factoring is not a claim of the historical getter name or TU boundary.",
+        "needs_headers": [],
+        "needs_names": [],
+        "contract_evidence": [
+          "include/game/notification.h",
+          "src/models/func_001ddde4/func_001ddde4.c:40-42,85-89"
+        ],
+        "predecessor_residual": {
+          "differing_bytes": 4,
+          "differing_words": 3,
+          "word_offsets": [
+            4,
+            8,
+            16
+          ],
+          "first_difference_offset": 5
+        }
+      },
+      "step_row_index": 29,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf044/src/func_001dc744_storage.c",
+      "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf044/match/27-flags-storage-accessor-composed/func_001dc744_storage.result.json",
+      "receipt_sha256": "7bdb71c5094ace8380d1d9ff80ed7c98982b00281829dabbc1207b5999079989",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001dc744",
+          "address": 1951556,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001dc918",
+          "address": 1952024,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": []
+    },
+    {
+      "function": "func_001efbf8",
+      "address": "0x001efbf8",
+      "size": 108,
+      "author": "nf046",
+      "manifest": "scratch/authors/nf046/RESULT.json",
+      "manifest_sha256": "e50ffc31da405c8e6737b91565618613a4726d936b53a72d34ba11ac26dbb787",
+      "row_index": 0,
+      "row": {
+        "address": "0x001efbf8",
+        "name": "func_001efbf8",
+        "size": 108,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf046/src/date_minute_second.cpp",
+        "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+        "profile": "middleware",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "receipt": "scratch/authors/nf046/match/date-final/date_minute_second.result.json",
+        "receipt_sha256": "fe8dd06396553a25f3d8702d10a5f14083b609601ef69e4d03b54f00e4b7c439",
+        "match_exit": 0,
+        "attempts": 14,
+        "minutes": 0.0572,
+        "residual": {
+          "compiled_size": 108,
+          "target_size": 108,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "word_offsets": []
+        },
+        "notes": "step5: Resolved the inherited 8-byte / 3-word residual at +0x28, +0x30 and +0x40. The inherited scalar-return helper prepared the zero low accumulator before the reciprocal literal, opposite the target, and consequently exchanged r2/r3 in the signed widening accumulation. Returning the signed 64-bit day remainder in an 8-byte DayRemainder result and explicitly narrowing at the accessor preserves the arithmetic but fixes that lowering/lifetime difference. Both accessors in the delivered TU now match their exact 108-byte extents under the frozen middleware profile and default v2 model, with no linker rewrites. Canonical DateTime and the int result contract agree with include/game/date_time.h and caller func_0015dc70. [INFERENCE] The private helper/result identity and historical TU organization remain unrecovered; the aggregate-return form is a natural matching witness, not a claim of recovered source spelling.",
+        "needs_names": []
+      },
+      "step_row_index": 30,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf046/src/date_minute_second.cpp",
+      "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf046/match/date-final/date_minute_second.result.json",
+      "receipt_sha256": "fe8dd06396553a25f3d8702d10a5f14083b609601ef69e4d03b54f00e4b7c439",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001efbf8",
+          "address": 2030584,
+          "size": 108,
+          "candidate_size": 108,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001efc64",
+          "address": 2030692,
+          "size": 108,
+          "candidate_size": 108,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001efc64",
+      "address": "0x001efc64",
+      "size": 108,
+      "author": "nf046",
+      "manifest": "scratch/authors/nf046/RESULT.json",
+      "manifest_sha256": "e50ffc31da405c8e6737b91565618613a4726d936b53a72d34ba11ac26dbb787",
+      "row_index": 1,
+      "row": {
+        "address": "0x001efc64",
+        "name": "func_001efc64",
+        "size": 108,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf046/src/date_minute_second.cpp",
+        "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+        "profile": "middleware",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "receipt": "scratch/authors/nf046/match/date-final/date_minute_second.result.json",
+        "receipt_sha256": "fe8dd06396553a25f3d8702d10a5f14083b609601ef69e4d03b54f00e4b7c439",
+        "match_exit": 0,
+        "attempts": 14,
+        "minutes": 0.0572,
+        "residual": {
+          "compiled_size": 108,
+          "target_size": 108,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "word_offsets": []
+        },
+        "notes": "step5: Resolved the same shared-TU 8-byte / 3-word residual at +0x28, +0x30 and +0x40: the reciprocal-literal and zero-low-accumulator preparations were scheduled in the opposite order, exchanging r2/r3 at the signed widening accumulation. An 8-byte signed DayRemainder return with explicit int narrowing at this accessor fixes the temporary lifetimes without altering the signed calendar computation. The final delivered TU matches both minute and second functions at 108 bytes each under middleware/default v2; no helper survives as an additional catalogued definition and no linker rewrite is required. Canonical date_time.h and caller func_0015dc70 establish the readonly DateTime input and int output. [INFERENCE] The private normalization helper/result identity is descriptive rather than historically authenticated.",
+        "needs_names": []
+      },
+      "step_row_index": 31,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf046/src/date_minute_second.cpp",
+      "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf046/match/date-final/date_minute_second.result.json",
+      "receipt_sha256": "fe8dd06396553a25f3d8702d10a5f14083b609601ef69e4d03b54f00e4b7c439",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001efbf8",
+          "address": 2030584,
+          "size": 108,
+          "candidate_size": 108,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001efc64",
+          "address": 2030692,
+          "size": 108,
+          "candidate_size": 108,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001f1ef4",
+      "address": "0x001f1ef4",
+      "size": 20,
+      "author": "nf047",
+      "manifest": "scratch/authors/nf047/RESULT.json",
+      "manifest_sha256": "11c15668bc8f334184f5f90cfacdf8edfec41ffb96a16f2344e296b44ce5998d",
+      "row_index": 0,
+      "row": {
+        "address": "0x001f1ef4",
+        "name": "func_001f1ef4",
+        "size": 20,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf047/src/func_001f1ef4/func_001efee4.cpp",
+        "source_sha256": "c231f4fa542f9aa0120d575a5443c14f7ae6cf3bcc35046d564a4f15cb9bb43d",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf047/match/func_001f1ef4/99-delivery/func_001efee4.result.json",
+        "receipt_sha256": "de45edcab1e0331b8c0f79bb50500e34a767a0bd62bf9c5b7f8d641854e578eb",
+        "exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 25,
+        "minutes": null,
+        "residual": {
+          "candidate_size": 20,
+          "target_size": 20,
+          "first_difference_offset": null,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "extent_delta": 0
+        },
+        "notes": "step5: MATCH. The inherited seven-byte/two-word residue was exclusively the call frame: the target saves only the link register in four bytes, while an external-only declaration made ARMCC save an unused r4 as well and allocate eight bytes. Defining the genuine counted block-reference lookup together with four genuine size/offset callers naturally retains the leaf out of line and exposes its four-byte alignment requirement; no noinline, fake call or instruction steering is used. The final middleware TU matches this 20-byte target, the actual 192-byte lookup and three neighboring offset readers. Native u16 type-ID/count fields agree with snd_Util.h; the caller-evidenced unchecked missing-reference dereference remains ORIGINAL BUG. Historical TU/class grouping is [INFERENCE]. Game also matches the four callers but leaves three differing bytes in the lookup; middleware reproduces the complete five-function local group.",
+        "names": "scratch/authors/nf047/names/func_001f1ef4.json",
+        "needs_names": [
+          "_ZNK2nw3lyt6Window12GetFrameSizeEhPKNS1_5FrameE",
+          "_ZNK2nw4font11ResFontBase17GetGlyphFromIndexEPNS0_5GlyphEt"
+        ],
+        "previous": {
+          "prev_source": "scratch/authors/tu979/final/shared/func_001efee4.cpp",
+          "prev_profile": "game",
+          "prev_receipt": "scratch/authors/tu979/match/36-retained-seven-function-tu/func_001efee4.result.json",
+          "prev_result": "scratch/authors/tu979/RESULT.json",
+          "residual_differing_bytes": 7
+        },
+        "evidence": "scratch/authors/nf047/EVIDENCE.json"
+      },
+      "step_row_index": 32,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf047/src/func_001f1ef4/func_001efee4.cpp",
+      "source_sha256": "c231f4fa542f9aa0120d575a5443c14f7ae6cf3bcc35046d564a4f15cb9bb43d",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf047/match/func_001f1ef4/99-delivery/func_001efee4.result.json",
+      "receipt_sha256": "de45edcab1e0331b8c0f79bb50500e34a767a0bd62bf9c5b7f8d641854e578eb",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001650f8",
+          "address": 1462520,
+          "size": 192,
+          "candidate_size": 192,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw4font11ResFontBase17GetGlyphFromIndexEPNS0_5GlyphEt",
+          "address": 2031332,
+          "size": 284,
+          "candidate_size": 284,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw3lyt6Window12GetFrameSizeEhPKNS1_5FrameE",
+          "address": 2032112,
+          "size": 304,
+          "candidate_size": 324,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw3lyt7TextBox13AdjustTextPosERKNS0_4SizeEb",
+          "address": 2036668,
+          "size": 184,
+          "candidate_size": 176,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f1ef4",
+          "address": 2039540,
+          "size": 20,
+          "candidate_size": 20,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f1f20",
+          "address": 2039584,
+          "size": 20,
+          "candidate_size": 20,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f1f34",
+          "address": 2039604,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f1f4c",
+          "address": 2039628,
+          "size": 24,
+          "candidate_size": 24,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f2b04",
+          "address": 2042628,
+          "size": 140,
+          "candidate_size": 136,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f30ec",
+          "address": 2044140,
+          "size": 3428,
+          "candidate_size": 3416,
+          "status": "mismatch",
+          "first_diff": 12,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f4b90",
+          "address": 2050960,
+          "size": 284,
+          "candidate_size": 280,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [
+        "_ZNK2nw3lyt6Window12GetFrameSizeEhPKNS1_5FrameE",
+        "_ZNK2nw4font11ResFontBase17GetGlyphFromIndexEPNS0_5GlyphEt"
+      ],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001f49b0",
+      "address": "0x001f49b0",
+      "size": 124,
+      "author": "nf047",
+      "manifest": "scratch/authors/nf047/RESULT.json",
+      "manifest_sha256": "11c15668bc8f334184f5f90cfacdf8edfec41ffb96a16f2344e296b44ce5998d",
+      "row_index": 2,
+      "row": {
+        "address": "0x001f49b0",
+        "name": "func_001f49b0",
+        "size": 124,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf047/src/func_001f49b0/func_001f49b0.cpp",
+        "source_sha256": "8e7eb94f9a826966c181e22efc3949a06c292d14230d5c8bdce6d7492afb7ccb",
+        "profile": "game",
+        "receipt": "scratch/authors/nf047/match/func_001f49b0/99-delivery/func_001f49b0.result.json",
+        "receipt_sha256": "c65e402709743415d5b6592b21fc878b2ea765ebaef1e5303a9c3a1cc4368f1d",
+        "exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 28,
+        "minutes": null,
+        "residual": {
+          "candidate_size": 124,
+          "target_size": 124,
+          "first_difference_offset": null,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "extent_delta": 0
+        },
+        "notes": "step5: MATCH. The inherited two-byte/two-word residue was only the prologue and epilogue save masks: the candidate saved unused r5, making a 16-byte frame, while the target uses twelve bytes; the intervening 116 bytes already agreed. Defining the genuine cached lookup and its second genuine glyph-wrapper caller keeps the leaf out of line without noinline or dummy calls and removes only the unnecessary alignment save. The final 124-byte target matches under game. Canonical CharCode is u16 and the const resource readers update only mutable cache fields. The added lookup and glyph-wrapper definitions are genuine but still mismatch (24 and 20 bytes respectively) and are explicitly uncredited context; no whole-TU MATCH is claimed. Descriptive cached-resource/class ownership remains [INFERENCE].",
+        "names": null,
+        "needs_names": [],
+        "previous": {
+          "prev_source": "scratch/authors/tu628/src/font-width-v02/func_001f49b0.cpp",
+          "prev_profile": "game",
+          "prev_receipt": "scratch/authors/tu628/match/03-font-width-late-game/func_001f49b0.result.json",
+          "prev_result": "scratch/authors/tu628/RESULT.json",
+          "residual_differing_bytes": 2
+        },
+        "evidence": "scratch/authors/nf047/EVIDENCE.json"
+      },
+      "step_row_index": 33,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf047/src/func_001f49b0/func_001f49b0.cpp",
+      "source_sha256": "8e7eb94f9a826966c181e22efc3949a06c292d14230d5c8bdce6d7492afb7ccb",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf047/match/func_001f49b0/99-delivery/func_001f49b0.result.json",
+      "receipt_sha256": "c65e402709743415d5b6592b21fc878b2ea765ebaef1e5303a9c3a1cc4368f1d",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001f49b0",
+          "address": 2050480,
+          "size": 124,
+          "candidate_size": 124,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f4a2c",
+          "address": 2050604,
+          "size": 256,
+          "candidate_size": 256,
+          "status": "mismatch",
+          "first_diff": 101,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001f4b58",
+          "address": 2050904,
+          "size": 56,
+          "candidate_size": 56,
+          "status": "mismatch",
+          "first_diff": 20,
+          "linker_rewrites": [
+            {
+              "offset": 52,
+              "rule": "branchnop",
+              "target": 2050960,
+              "word": "0xe1a00000"
+            }
+          ]
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_00112bf8",
+      "address": "0x00112bf8",
+      "size": 136,
+      "author": "nf052",
+      "manifest": "scratch/authors/nf052/RESULT.json",
+      "manifest_sha256": "b5cc21dd240f667ed1819754d80874830edc7caf13aaf2ad5586f55bfd5094f7",
+      "row_index": 1,
+      "row": {
+        "address": "0x00112bf8",
+        "name": "func_00112bf8",
+        "size": 136,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf052/src/func_00112bf8.cpp",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf052/match/func_00112bf8/final-middleware/func_00112bf8.result.json",
+        "source_sha256": "f1faa79520b91ca981bea9722277f4e4650f23d8e2aaf9be7435011f0b7d1753",
+        "receipt_sha256": "00143bcdc6666d1615fd758be26e3177da7de8826733ee8fe941c034bda4842b",
+        "object_sha256": "b3a16d9cb491c4fdbde1c353df7f62e78eb667ccff0b276958d83c7c5d418406",
+        "exit_code": 0,
+        "attempts": 11,
+        "attempts_scope": "This nf052 pass only; every sequential match.py invocation, including refusals and final binding, is preserved in ATTEMPTS.json.",
+        "minutes": 0.0495,
+        "minutes_kind": "Summed matcher wall time only; author reading/reasoning time is not represented.",
+        "residual": {
+          "compiled_size": 136,
+          "target_size": 136,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: MATCH, 136/136 bytes under frozen middleware. The prior 13-byte/eight-word residual was solely an 80-versus-72-byte frame and configuration/result slot placement (+16/+8 versus +0/+64), not signedness or call choice. A natural static query/copy helper using the existing Result as an output parameter recovers the local lifetimes and all eight words while retaining the complete canonical 64-byte query object. Both helpers inline; no new external binding, dead storage, barrier or alias. [INFERENCE] Original helper spelling and middleware ownership are not proven.",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_headers": [
+          "Add ServiceResult func_00112bf8(ServiceObject *, void *) to include/game/service_result.h, then remove the local INTEGRATOR extern-C block before prepare. Existing Result, ServiceResult and 64-byte ServiceConfigurationWords definitions are reused without changes."
+        ],
+        "needs_names": [],
+        "contract_conflicts": [],
+        "previous": {
+          "source": "scratch/authors/tu413/src/final/func_00112bf8.cpp",
+          "profile": "middleware",
+          "receipt": "scratch/authors/tu413/match/a34-final-query/func_00112bf8.result.json",
+          "result": "scratch/authors/tu413/RESULT.json",
+          "residual_differing_bytes": 13
+        },
+        "diagnosis": "scratch/authors/nf052/DIAGNOSIS.json",
+        "context_matches": [],
+        "translation_unit_status": "Final receipt emits only this catalogued function; no sibling catalogue definitions were removed or regressed.",
+        "search_exhausted": false
+      },
+      "step_row_index": 34,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf052/src/func_00112bf8.cpp",
+      "source_sha256": "f1faa79520b91ca981bea9722277f4e4650f23d8e2aaf9be7435011f0b7d1753",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf052/match/func_00112bf8/final-middleware/func_00112bf8.result.json",
+      "receipt_sha256": "00143bcdc6666d1615fd758be26e3177da7de8826733ee8fe941c034bda4842b",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00112bf8",
+          "address": 1125368,
+          "size": 136,
+          "candidate_size": 136,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "Add ServiceResult func_00112bf8(ServiceObject *, void *) to include/game/service_result.h, then remove the local INTEGRATOR extern-C block before prepare. Existing Result, ServiceResult and 64-byte ServiceConfigurationWords definitions are reused without changes."
+      ]
+    },
+    {
+      "function": "func_00112f10",
+      "address": "0x00112f10",
+      "size": 152,
+      "author": "nf053",
+      "manifest": "scratch/authors/nf053/RESULT.json",
+      "manifest_sha256": "67f6053e1bb7905b4fa4a3c71f9ea7107081f2a13060c76ac64b2b9e5a15b2eb",
+      "row_index": 0,
+      "row": {
+        "address": "0x00112f10",
+        "function": "func_00112f10",
+        "size": 152,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf053/src/func_00112f10.cpp",
+        "source_sha256": "d6a128016aae429994d60b9d8a8ead814c7c97434861d960b537f4e08d01505d",
+        "profile": "game",
+        "receipt": "scratch/authors/nf053/match/func_00112f10/007-final/game/func_00112f10.result.json",
+        "final_exit_code": 0,
+        "attempts": 7,
+        "minutes": 0.0304,
+        "minutes_kind": "summed sequential matcher wall time only; reasoning and packet inspection are not represented",
+        "residual": {
+          "candidate_size": 152,
+          "target_size": 152,
+          "first_difference_offset": null,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: Resolved the inherited 9-byte/7-word residual as input-preservation and later call-argument register allocation only. The hidden ServiceResult destination remains in r4; target object/specification/configuration roles use r5/r6/r7. Reordering the existing private counted-operation helper parameters to configuration, specification, object, count preserves the public ABI and every live argument while restoring the entry-copy order and downstream uses. Final delivered file MATCHes all 152 bytes under game/default v2. Caller func_0010b320 and callees func_0018fb88/func_001209bc corroborate the native aggregate return, three input roles and count-one operation. [INFERENCE] Historical private helper identity and parameter grouping are unrecovered; no external alias or removed-callee model is claimed.",
+        "needs_names": [],
+        "previous_attempt": {
+          "source": "scratch/authors/r41289/selected/func_00112f10.cpp",
+          "profile": "game",
+          "receipt": "scratch/authors/r41289/match/func_00112f10/selected-game/func_00112f10.result.json",
+          "residual_differing_bytes": 9
+        },
+        "qualifications": [
+          "[INFERENCE] Private helper identity/grouping is not historically established."
+        ]
+      },
+      "step_row_index": 35,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf053/src/func_00112f10.cpp",
+      "source_sha256": "d6a128016aae429994d60b9d8a8ead814c7c97434861d960b537f4e08d01505d",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf053/match/func_00112f10/007-final/game/func_00112f10.result.json",
+      "receipt_sha256": "a082d1dbea7490a228630b39a360d816147076b7d6e7e242c015aba5974c3b1a",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00112f10",
+          "address": 1126160,
+          "size": 152,
+          "candidate_size": 152,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001223c0",
+      "address": "0x001223c0",
+      "size": 60,
+      "author": "nf056",
+      "manifest": "scratch/authors/nf056/RESULT.json",
+      "manifest_sha256": "31a50b100f8310aa4d546de709eb80c53edc62be463fdb3bd4e1a446808cd5d4",
+      "row_index": 0,
+      "row": {
+        "address": "0x001223c0",
+        "name": "func_001223c0",
+        "size": 60,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf056/src/func_001223c0.c",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf056/match/d12-final-middleware/func_001223c0.result.json",
+        "source_sha256": "84d4e1fccf2159e1da5562aea6f7365b50a9683d66dc1945d12e7d689f5d8a9e",
+        "receipt_sha256": "b7f4180aa2296bb827caa475851cf468feefb5cebf231f0ea1d55153b225776b",
+        "exit_code": 0,
+        "attempts": 12,
+        "minutes": null,
+        "residual": {
+          "compiled_size": 60,
+          "target_size": 60,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "word_offsets": []
+        },
+        "notes": "step5: MATCH under the frozen middleware profile, 60/60 bytes. The inherited 10-byte residual was a scheduling permutation of the physical-address word store and height/format narrow stores, not a width or signedness error. Assigning address_units directly in the address/non-null branches, then assigning format, height and width, resolves it naturally. The intermediate branch form reduced the residual to six bytes; ordering format before height completed equality. Destination remains writable and all scalar arguments retain their full-width contract. func_0018f0ac(const void *) agrees exactly with src/wave2/func_0018f0ac.c; caller 0x0018f634 and the inherited field layout were checked. Descriptor field names remain [INFERENCE]. No names overlay or nondefault linker model is needed.",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "previous": {
+          "prev_source": "scratch/authors/r4013/src/func_001223c0_perm_AHFW_after_owner.c",
+          "prev_profile": "middleware",
+          "prev_receipt": "scratch/authors/r4013/match/func_001223c0/perm_AHFW_after_owner-middleware/func_001223c0_perm_AHFW_after_owner.result.json",
+          "residual_differing_bytes": 10
+        }
+      },
+      "step_row_index": 36,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf056/src/func_001223c0.c",
+      "source_sha256": "84d4e1fccf2159e1da5562aea6f7365b50a9683d66dc1945d12e7d689f5d8a9e",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf056/match/d12-final-middleware/func_001223c0.result.json",
+      "receipt_sha256": "b7f4180aa2296bb827caa475851cf468feefb5cebf231f0ea1d55153b225776b",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001223c0",
+          "address": 1188800,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": null,
+      "header_requirements": null
+    },
+    {
+      "function": "func_00131464",
+      "address": "0x00131464",
+      "size": 160,
+      "author": "nf057",
+      "manifest": "scratch/authors/nf057/RESULT.json",
+      "manifest_sha256": "f23714005875b2402ae7742ec2fdc1055fbd6449ef7b1a0023d0aa558fa618be",
+      "row_index": 2,
+      "row": {
+        "address": "0x00131464",
+        "name": "func_00131464",
+        "size": 160,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf057/src/func_00131464.cpp",
+        "source_sha256": "102f710c457b6e45cd7966c8a4d8625e55965845d69c206e19f724d1519e9b87",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf057/match/00131464-14-delivered-middleware/func_00131464.result.json",
+        "receipt_sha256": "e564d0e4b69c8157f8622d3dd55c1a47893312f52ff978a9259d4dba77eab8eb",
+        "object_sha256": "3ab22361d1ff059aaa531a9dac502c7e0d422ef511d7b391faf8bd1be5107862",
+        "exit_code": 0,
+        "attempts": 14,
+        "minutes": 0.064,
+        "residual": {
+          "target_size": 160,
+          "candidate_size": 160,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: Fixed the six-word/16-byte residual by spelling each drain as for (;;) with an explicit zero-count break at its head. The inherited while loops were rotated into repeated bottom count-load/tests and conditional backedges. The explicit head tests instead produce the original unconditional backedges to those tests and the four architectural-hint slots automatically; there are no source nops, barriers or padding. The complete 160-byte target now MATCHes under middleware. Canonical PoolList/PoolLink and AudioVoiceGroup fields, callback(group, 1, context), erase(list, link), stop and destruction signatures are unchanged. The exact delivered file was confirmed by a final --show 0 matcher run.",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_names": [],
+        "header_needs": []
+      },
+      "step_row_index": 37,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf057/src/func_00131464.cpp",
+      "source_sha256": "102f710c457b6e45cd7966c8a4d8625e55965845d69c206e19f724d1519e9b87",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf057/match/00131464-14-delivered-middleware/func_00131464.result.json",
+      "receipt_sha256": "e564d0e4b69c8157f8622d3dd55c1a47893312f52ff978a9259d4dba77eab8eb",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00131464",
+          "address": 1250404,
+          "size": 160,
+          "candidate_size": 160,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_0014b244",
+      "address": "0x0014b244",
+      "size": 108,
+      "author": "nf062",
+      "manifest": "scratch/authors/nf062/RESULT.json",
+      "manifest_sha256": "7bc639d8a773612324c0118df7bbbcf876c50f4d73dee1c7797630f305b3d902",
+      "row_index": 1,
+      "row": {
+        "address": "0x0014b244",
+        "name": "func_0014b244",
+        "size": 108,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf062/src/func_001494dc.cpp",
+        "source_sha256": "fabd18e97dd682c0b34285670c8ac75e1ba23532c1df09efce48528a9c87d902",
+        "profile": "game",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "receipt": "scratch/authors/nf062/match/channel/final_corrected_layout/func_001494dc.result.json",
+        "receipt_sha256": "fc32827453075d32b47015489d162e2def42538109196a46c2ba6d696b8e30ff",
+        "final_exit_code": 1,
+        "residual": {
+          "compiled_size": 108,
+          "target_size": 108,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "word_offsets": []
+        },
+        "attempts": 29,
+        "minutes": null,
+        "matcher_seconds": 27.426,
+        "notes": "step5: MATCH, 108/108 bytes. The inherited residual was not only register allocation: the callback store uses writeback, so the following context store addresses owner+0x1c+4*channel, not owner+0x08+4*channel. Corrected the partial owner layout to callbacks+0x14 and contexts+0x1c; reused canonical AuxCallback and void* context from the two callers, rather than the prior void* resource/unsigned value placeholders. With this semantic correction, a natural channel-first locked-transaction helper also restores the saved-input order and resolves the final two-word scheduling residual. func_00146150 forwards callback/context unchanged and func_0014c990 clears both. [INFERENCE] Field names, two-entry array bounds and channel signedness are not authenticated by the matching body alone.",
+        "names": "scratch/authors/nf062/channel_names.json",
+        "needs_names": [
+          "_ZN22DisplayMaterialSettingC1Ev",
+          "_ZNK2nw3gfx15SkeletonUpdater11UpdateWorldEPNS0_8SkeletonERKNS0_18WorldMatrixUpdaterE",
+          "_ZN2nn4math14MTX34MultScaleEPNS0_5MTX34ERKS1_RKNS0_4VEC3E",
+          "_ZNK2nw3gfx18WorldMatrixUpdater17CalculateWorldXsiEPN2nn4math5MTX34EPNS3_4VEC3ERKNS0_19CalculatedTransformESA_SA_",
+          "_ZNK2nw3gfx18WorldMatrixUpdater19CalculateWorldBasicEPN2nn4math5MTX34EPNS3_4VEC3ERKNS0_19CalculatedTransformESA_SA_",
+          "_ZNK2nw3gfx18WorldMatrixUpdater21CalculateWorldMayaSscEPN2nn4math5MTX34EPNS3_4VEC3ERKNS0_19CalculatedTransformESA_SA_"
+        ],
+        "prior_frontier": {
+          "address": "0x0014b244",
+          "name": "func_0014b244",
+          "size": 108,
+          "prev_author": "scratch/authors/tu952",
+          "prev_result": "scratch/authors/tu952/RESULT.json",
+          "prev_row_index": 2,
+          "prev_source": "scratch/authors/tu952/src/func_001494dc.cpp",
+          "prev_profile": "game",
+          "prev_receipt": "scratch/authors/tu952/match/final-game/func_001494dc.result.json",
+          "prev_names": "scratch/authors/tu952/names.json",
+          "residual_differing_bytes": 11,
+          "compiled_size": 108,
+          "target_size": 108
+        },
+        "diagnosis": "scratch/authors/nf062/DIAGNOSIS.json"
+      },
+      "step_row_index": 38,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf062/src/func_001494dc.cpp",
+      "source_sha256": "fabd18e97dd682c0b34285670c8ac75e1ba23532c1df09efce48528a9c87d902",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf062/match/channel/final_corrected_layout/func_001494dc.result.json",
+      "receipt_sha256": "fc32827453075d32b47015489d162e2def42538109196a46c2ba6d696b8e30ff",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001494dc",
+          "address": 1348828,
+          "size": 1104,
+          "candidate_size": 1104,
+          "status": "mismatch",
+          "first_diff": 64,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZNK2nw3gfx15SkeletonUpdater11UpdateWorldEPNS0_8SkeletonERKNS0_18WorldMatrixUpdaterE",
+          "address": 1350432,
+          "size": 1912,
+          "candidate_size": 1912,
+          "status": "mismatch",
+          "first_diff": 24,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_0014b244",
+          "address": 1356356,
+          "size": 108,
+          "candidate_size": 108,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [
+        "_ZN22DisplayMaterialSettingC1Ev",
+        "_ZNK2nw3gfx15SkeletonUpdater11UpdateWorldEPNS0_8SkeletonERKNS0_18WorldMatrixUpdaterE",
+        "_ZN2nn4math14MTX34MultScaleEPNS0_5MTX34ERKS1_RKNS0_4VEC3E",
+        "_ZNK2nw3gfx18WorldMatrixUpdater17CalculateWorldXsiEPN2nn4math5MTX34EPNS3_4VEC3ERKNS0_19CalculatedTransformESA_SA_",
+        "_ZNK2nw3gfx18WorldMatrixUpdater19CalculateWorldBasicEPN2nn4math5MTX34EPNS3_4VEC3ERKNS0_19CalculatedTransformESA_SA_",
+        "_ZNK2nw3gfx18WorldMatrixUpdater21CalculateWorldMayaSscEPN2nn4math5MTX34EPNS3_4VEC3ERKNS0_19CalculatedTransformESA_SA_"
+      ],
+      "header_requirements": null
+    },
+    {
+      "function": "func_0014fbec",
+      "address": "0x0014fbec",
+      "size": 140,
+      "author": "nf062",
+      "manifest": "scratch/authors/nf062/RESULT.json",
+      "manifest_sha256": "7bc639d8a773612324c0118df7bbbcf876c50f4d73dee1c7797630f305b3d902",
+      "row_index": 2,
+      "row": {
+        "address": "0x0014fbec",
+        "name": "func_0014fbec",
+        "size": 140,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf062/src/func_0014fbec.c",
+        "source_sha256": "32b58797c1cad76905c64701eeccd56d27e93ebb5d739bb43152c96aa4196d9d",
+        "profile": "game",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "receipt": "scratch/authors/nf062/match/filter/final_selected/func_0014fbec.result.json",
+        "receipt_sha256": "355754bb7477a251e4f131dffc94d99a42f9b60b122fa73e168609296c6fd249",
+        "final_exit_code": 0,
+        "residual": {
+          "compiled_size": 140,
+          "target_size": 140,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "word_offsets": []
+        },
+        "attempts": 17,
+        "minutes": null,
+        "matcher_seconds": 4.641,
+        "notes": "step5: MATCH, 140/140 bytes. All 14 inherited differing bytes in 11 words were VFP temporary-register allocation. Naming the actual discriminant reduced the residual to seven bytes; computing the scaled-feedback product and direct term before either integer conversion gives the observed value lifetimes and resolves every byte. Arithmetic, unsigned frequency clamp, signed-halfword coefficient stores and integer negation after feedback truncation are preserved. Canonical PackedPosition/DirtyValueObject contracts and the accepted float cosine callee are reused. [INFERENCE] The prefix record is a filter-coefficient pair, not asserted spatial data.",
+        "names": null,
+        "needs_names": [],
+        "prior_frontier": {
+          "address": "0x0014fbec",
+          "name": "func_0014fbec",
+          "size": 140,
+          "prev_author": "scratch/authors/r41294",
+          "prev_result": "scratch/authors/r41294/RESULT.json",
+          "prev_row_index": 8,
+          "prev_source": "scratch/authors/r41294/final/src/func_0014fbec.c",
+          "prev_profile": "game",
+          "prev_receipt": "scratch/authors/r41294/match/func_0014fbec/final-selected/func_0014fbec.result.json",
+          "prev_names": null,
+          "residual_differing_bytes": 14,
+          "compiled_size": null,
+          "target_size": null
+        },
+        "diagnosis": "scratch/authors/nf062/DIAGNOSIS.json"
+      },
+      "step_row_index": 39,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf062/src/func_0014fbec.c",
+      "source_sha256": "32b58797c1cad76905c64701eeccd56d27e93ebb5d739bb43152c96aa4196d9d",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf062/match/filter/final_selected/func_0014fbec.result.json",
+      "receipt_sha256": "355754bb7477a251e4f131dffc94d99a42f9b60b122fa73e168609296c6fd249",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_0014fbec",
+          "address": 1375212,
+          "size": 140,
+          "candidate_size": 140,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001551a0",
+      "address": "0x001551a0",
+      "size": 92,
+      "author": "nf063",
+      "manifest": "scratch/authors/nf063/RESULT.json",
+      "manifest_sha256": "85e499e29883afc69ed18c97994e33da9eab57e1b1f18aec43d07bca0afd27cd",
+      "row_index": 2,
+      "row": {
+        "address": "0x001551a0",
+        "name": "func_001551a0",
+        "emitted_symbol": "_ZN2nw3snd8internal6driver12VoiceManager15AppendVoiceListEPNS2_5VoiceE",
+        "size": 92,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf063/variants/vm09-local-receivers/voice.cpp",
+        "source_sha256": "896a9b8e905f71d02d9aa45895869e49ef1aaca8d4fab5b1b6150964c39e2f9e",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf063/match/vm09-local-receivers/voice.result.json",
+        "attempts": 9,
+        "minutes": null,
+        "isolated_match_seconds": 3.142,
+        "final_exit_code": 1,
+        "residual": {
+          "address": "0x001551a0",
+          "status": "match",
+          "compiled_size": 92,
+          "target_size": 92,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "word_offsets": []
+        },
+        "names": "scratch/authors/nf063/names.json",
+        "needs_names": [
+          "_ZN2nw3snd8internal6driver12VoiceManager15AppendVoiceListEPNS2_5VoiceE"
+        ],
+        "notes": "step5: MATCH, 92/92 B and zero differing bytes, confirmed on the exact delivered vm09 source. The inherited 12-byte/four-word residual was only two reversed address-formation pairs: manager free-list versus voice-node addresses at +0xc/+0x10, and manager priority-list versus voice-node addresses at +0x4c/+0x50. Binding each list receiver to a natural local VoiceList reference immediately before its Erase/Insert call reproduces both original schedules without changing operations, operands, traversal or callee identity. Native VoiceManager/Voice/LinkList headers establish the typed member contract; caller func_00155d68 discards the void result, and accepted func_0018d868/func_00191154 establish the same erase/insert primitive contracts. The names overlay binds this emitted native self-definition only, not an invented callee. The matcher command exits 1 solely because the unchanged co-defined func_00154674 remains its inherited 19-byte mismatch; this target reports MATCH in that receipt. Search stopped after the ninth compile produced the exact target.",
+        "contract_evidence": {
+          "caller_functions": [
+            "func_00155d68",
+            "func_0017e500"
+          ],
+          "direct_catalogued_callees": [
+            "func_0018d868",
+            "func_00191154"
+          ]
+        }
+      },
+      "step_row_index": 40,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf063/variants/vm09-local-receivers/voice.cpp",
+      "source_sha256": "896a9b8e905f71d02d9aa45895869e49ef1aaca8d4fab5b1b6150964c39e2f9e",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf063/match/vm09-local-receivers/voice.result.json",
+      "receipt_sha256": "f2abb58d18a3969426557b7d4e48dcc387584283a35c66f5dd75dea4385d81e5",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00154674",
+          "address": 1394292,
+          "size": 232,
+          "candidate_size": 232,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3snd8internal6driver12VoiceManager15AppendVoiceListEPNS2_5VoiceE",
+          "address": 1397152,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [
+        "_ZN2nw3snd8internal6driver12VoiceManager15AppendVoiceListEPNS2_5VoiceE"
+      ],
+      "header_requirements": null
+    },
+    {
+      "function": "func_00155d68",
+      "address": "0x00155d68",
+      "size": 116,
+      "author": "nf064",
+      "manifest": "scratch/authors/nf064/RESULT.json",
+      "manifest_sha256": "8e36c1227de8e11328770aa3ef6cb0d9ba6139bb58cbfeed33078410b6fcb990",
+      "row_index": 0,
+      "row": {
+        "address": "0x00155d68",
+        "name": "func_00155d68",
+        "size": 116,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf064/src/allocators.cpp",
+        "source_sha256": "94b8d7d6224f4392c9aeacd7e194444e5ce593aeb64290d87a7c4e64875d2fcf",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf064/match/final-allocators-middleware/allocators.result.json",
+        "exit_code": 1,
+        "terminal": "scratch/authors/nf064/match/final-allocators-middleware/terminal.json",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 21,
+        "minutes": 0.0927,
+        "timing_basis": "Sum of measured matcher subprocess wall seconds; investigation time is excluded.",
+        "residual": {
+          "compiled_size": 116,
+          "target_size": 116,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null
+        },
+        "previous_residual": {
+          "compiled_size": 116,
+          "target_size": 116,
+          "differing_bytes": 12,
+          "differing_words": 4,
+          "first_difference_offset": 12
+        },
+        "notes": "step5: MATCH at the full 116-byte extent. The inherited residual was four address-preparation words: active-list versus node evaluation at +0x0c/+0x10 and pending-list versus node evaluation at +0x18/+0x20. Small natural erase_group(list, group) and insert_group(list, position, group) adapters defer only the intrusive-node conversion, reproducing the original argument-address order while retaining all existing callees, field types and priority traversal. The helpers are compiler-inlined; no linker rewrite, removed-callee model, new name, assembly or steering is used. Caller func_00155148 supplies the singleton pool and original group. The other defined function, func_00154838, retains its existing mismatch status (396/400 bytes); that is why the complete-TU matcher exits 1.",
+        "needs_names": []
+      },
+      "step_row_index": 41,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf064/src/allocators.cpp",
+      "source_sha256": "94b8d7d6224f4392c9aeacd7e194444e5ce593aeb64290d87a7c4e64875d2fcf",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf064/match/final-allocators-middleware/allocators.result.json",
+      "receipt_sha256": "2795ed93527e798e1d601dd6752e6c8240dc03e2a099e1386465d6bc98a18050",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00154838",
+          "address": 1394744,
+          "size": 400,
+          "candidate_size": 396,
+          "status": "mismatch",
+          "first_diff": 25,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_00155d68",
+          "address": 1400168,
+          "size": 116,
+          "candidate_size": 116,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_0016b404",
+      "address": "0x0016b404",
+      "size": 40,
+      "author": "nf065",
+      "manifest": "scratch/authors/nf065/RESULT.json",
+      "manifest_sha256": "77027b47777e6161dffa03bc069f0b5dd54469afbe58e9ef7fee311398aef72b",
+      "row_index": 2,
+      "row": {
+        "address": "0x0016b404",
+        "name": "func_0016b404",
+        "size": 40,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf065/variants/0016b404-a05-byte-helper.c",
+        "source_sha256": "19121dd95c20a9d0bfddee04b1be567d8531654a057bd0323d7bb3d7c850cc24",
+        "profile": "game",
+        "receipt": "scratch/authors/nf065/match/0016b404/final-selected/0016b404-a05-byte-helper.result.json",
+        "match_exit_code": 0,
+        "attempts": 11,
+        "minutes": 0.048,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "needs_names": [],
+        "residual": {
+          "compiled_size": 40,
+          "target_size": 40,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: MATCH, 40/40 bytes under the default game/v2 model. The inherited rolling accumulator loop fused shifts across OR operations, differing in five words (+0x08,+0x10,+0x14,+0x18,+0x1c). A natural static byte_at(value,index) helper, four constant-index calls and explicit unsigned widening make each byte-position term independent before OR combination, reproducing the original extraction/combination tree and register allocation exactly. A separate full-width masked helper also MATCHes. The helper is compiler-inlined with no surviving unbound function, linker rewrite, alias, extra TU or names overlay. The read-only word-pointer/unsigned-word return contract is unchanged; four original caller bodies (20 direct callsites) were privately inspected."
+      },
+      "step_row_index": 42,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf065/variants/0016b404-a05-byte-helper.c",
+      "source_sha256": "19121dd95c20a9d0bfddee04b1be567d8531654a057bd0323d7bb3d7c850cc24",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf065/match/0016b404/final-selected/0016b404-a05-byte-helper.result.json",
+      "receipt_sha256": "4ef44f731e2c112dbd64dbf47174375eb8c4fce758177e4b56f7d0c149d54563",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_0016b404",
+          "address": 1487876,
+          "size": 40,
+          "candidate_size": 40,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_00178f5c",
+      "address": "0x00178f5c",
+      "size": 40,
+      "author": "nf069",
+      "manifest": "scratch/authors/nf069/RESULT.json",
+      "manifest_sha256": "0c12334957b443f94ff6df2c158cac8193282d4eba5637303458b8650531b6cc",
+      "row_index": 1,
+      "row": {
+        "address": "0x00178f5c",
+        "name": "func_00178f5c",
+        "size": 40,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf069/src/func_00178f5c.c",
+        "profile": "game",
+        "receipt": "scratch/authors/nf069/match/final-text/game/func_00178f5c.result.json",
+        "source_sha256": "e793da9576e26da83e7f78461e119e4b615278e591609d6e10df2149c9be3e46",
+        "receipt_sha256": "b09edde773988df023b38dd189acc8a53d49e0a8055181ba9a1fb8fe2616d373",
+        "object_sha256": "5f550548e1014084ca00431030d62e8d9423b6ed16da4496c557e7f2db1737a7",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "match_exit_code": 0,
+        "attempts": 7,
+        "minutes": 0.0345,
+        "minutes_basis": "Measured matcher subprocess wall time only; excludes source analysis and packet generation.",
+        "residual": {
+          "candidate_size": 40,
+          "target_size": 40,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null
+        },
+        "diagnostic": "scratch/authors/nf069/diagnostics/final-text.json",
+        "notes": "step5: MATCH, 40/40 B, resolving the inherited 10-byte/four-word residual at +0x8,+0xc,+0x10,+0x14. The original forms the names-prefix pointer before reading the signed byte count and retains those values in different core temporaries; the inherited source schedules the count read first. A natural text_count(table) helper using the original table receiver, separate from text_names(table), recovers that pointer/count lifetime and instruction ordering. Passing the already-adjusted names receiver to the count helper does not fix it. The final source removes the duplicate W8TextNames layout, reuses canonical TextTable and text_table_entries from game/text.h, preserves signed count/negative-index rejection and nullable UTF-16 pointer return, and has an exact final-file receipt under game/default v2. [INFERENCE] The static accessor boundaries and historical TU membership are reconstruction hypotheses; no names overlay or removed-helper model is used.",
+        "needs_names": [],
+        "integration_needs": {
+          "headers": [],
+          "names": [],
+          "contract_conflicts": [],
+          "private_types": [
+            "W8TextTable is a fixed 0x84-byte prefix; the canonical TextTable header and its counted pointer vector follow it."
+          ],
+          "notes": [
+            "No header edit is required for the standalone C unit. If callers are integrated into a shared interface, share the const W8TextTable*, int -> nullable const unsigned short* contract with them rather than restoring the duplicate W8TextNames view."
+          ]
+        }
+      },
+      "step_row_index": 43,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf069/src/func_00178f5c.c",
+      "source_sha256": "e793da9576e26da83e7f78461e119e4b615278e591609d6e10df2149c9be3e46",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf069/match/final-text/game/func_00178f5c.result.json",
+      "receipt_sha256": "b09edde773988df023b38dd189acc8a53d49e0a8055181ba9a1fb8fe2616d373",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00178f5c",
+          "address": 1544028,
+          "size": 40,
+          "candidate_size": 40,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_00179e5c",
+      "address": "0x00179e5c",
+      "size": 120,
+      "author": "nf070",
+      "manifest": "scratch/authors/nf070/RESULT.json",
+      "manifest_sha256": "0ba5cf16a47984bddb1e23941fc403fcfa087debc75231cccdcdbb6153f5a55b",
+      "row_index": 0,
+      "row": {
+        "address": "0x00179e5c",
+        "name": "func_00179e5c",
+        "size": 120,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf070/src/final/func_00179e5c.c",
+        "source_sha256": "8ac6a329d398664177d4b47737fcf26fc1c8f334e568bd347521e588712f6d7f",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf070/match/75-00179e5c-final-middleware/func_00179e5c.result.json",
+        "receipt_sha256": "3f7e9f13dd15b2d4c258c8be58345c4ceb2c9eeb726e29a0ccdae278286e0050",
+        "attempts": 26,
+        "minutes": null,
+        "measured_matcher_seconds": 6.795973,
+        "final_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "candidate_size": 120,
+          "target_size": 120,
+          "compared_bytes": 120,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_diff": null
+        },
+        "previous_residual": {
+          "differing_bytes": 10,
+          "differing_words": 9,
+          "instruction_offsets": [
+            8,
+            16,
+            32,
+            40,
+            48,
+            52,
+            60,
+            96,
+            100
+          ]
+        },
+        "notes": "step5: the inherited 120-byte middleware candidate differs only in nine instruction words (+0x08, +0x10, +0x20, +0x28, +0x30, +0x34, +0x3c, +0x60, +0x64): the screen and slot index occupy exchanged callee-saved registers; operation kinds, conditions, immediates and shifts already agree. Assigning navigation.side directly in the two direction branches removes the temporary side lifetime and restores the original allocation, yielding a final exact 120/120-byte MATCH. Declaration reordering, screen aliases, aggregate choice and grouped action helpers were measured without steering. [INFERENCE] the original source used branch-local stores or an equivalent lifetime. Profile witness: only middleware matches this delivered source; middleware ownership is inferred. The existing navigation overlay at +0x78 remains an explicit type-identity qualification, not a newly invented native alias.",
+        "needs_names": [],
+        "needs_headers": [
+          "Shared declaration gap: func_001b5b60(struct Screen *, int, int) exists only as a local C declaration in this delivered unit; no existing include/game or src declaration was found.",
+          "NavigationScreenView uses the inherited Screen union overlay; canonical shared ownership/layout must be adjudicated before moving the definition."
+        ],
+        "contract_conflicts": [
+          "The original +0x78 byte store overlaps canonical Screen.slots[27]. The inherited union documents a navigation-specific view, but the subtype identity is [INFERENCE]; do not silently turn the overlay into an ordinary Screen field."
+        ]
+      },
+      "step_row_index": 44,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf070/src/final/func_00179e5c.c",
+      "source_sha256": "8ac6a329d398664177d4b47737fcf26fc1c8f334e568bd347521e588712f6d7f",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf070/match/75-00179e5c-final-middleware/func_00179e5c.result.json",
+      "receipt_sha256": "3f7e9f13dd15b2d4c258c8be58345c4ceb2c9eeb726e29a0ccdae278286e0050",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00179e5c",
+          "address": 1547868,
+          "size": 120,
+          "candidate_size": 120,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "Shared declaration gap: func_001b5b60(struct Screen *, int, int) exists only as a local C declaration in this delivered unit; no existing include/game or src declaration was found.",
+        "NavigationScreenView uses the inherited Screen union overlay; canonical shared ownership/layout must be adjudicated before moving the definition."
+      ]
+    },
+    {
+      "function": "func_00180388",
+      "address": "0x00180388",
+      "size": 72,
+      "author": "nf070",
+      "manifest": "scratch/authors/nf070/RESULT.json",
+      "manifest_sha256": "0ba5cf16a47984bddb1e23941fc403fcfa087debc75231cccdcdbb6153f5a55b",
+      "row_index": 1,
+      "row": {
+        "address": "0x00180388",
+        "name": "func_00180388",
+        "size": 72,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf070/src/final/func_00180388.c",
+        "source_sha256": "29ddbf0d2230783f0ae66f34e00cf82271735d3a9dd44c0987fb47e13bd21c91",
+        "profile": "game",
+        "receipt": "scratch/authors/nf070/match/76-00180388-final-game/func_00180388.result.json",
+        "receipt_sha256": "640f7404a80cc205dc535a76d4ed47b58dd70f90c7b30198610d6e28e87c4802",
+        "attempts": 25,
+        "minutes": null,
+        "measured_matcher_seconds": 6.560346,
+        "final_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "candidate_size": 72,
+          "target_size": 72,
+          "compared_bytes": 72,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_diff": null
+        },
+        "previous_residual": {
+          "differing_bytes": 11,
+          "differing_words": 6,
+          "instruction_offsets": [
+            16,
+            20,
+            24,
+            28,
+            52,
+            56
+          ]
+        },
+        "notes": "step5: the inherited 72-byte game candidate has eleven differing bytes in six instruction words (+0x10, +0x14, +0x18, +0x1c, +0x34, +0x38), all pointer/flag/result register allocation; operation kinds, conditions, immediates and shifts already agree. Byte-sized flags/origin/selection snapshots, direct initialization of the packed selection and delaying the high-nibble merge until the final store produce a final exact 72/72-byte MATCH. Ablations show that narrowing variables while retaining the old in-place flags-clear order does not match, so this is a combined byte-width/lifetime correction rather than an arithmetic or signed-division fix. Existing DisplayObject and TrainingWidget types and unsigned-char alignment contract are retained. Profile witness: only game matches this delivered source.",
+        "needs_names": [],
+        "needs_headers": [
+          "Both delivered alignment units define the same struct PackedTextState: unsigned-char prefix[0xb6] followed by unsigned-char alignment. include/game/screen.h currently only forward-declares it; integration may centralize this identical definition."
+        ],
+        "contract_conflicts": []
+      },
+      "step_row_index": 45,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf070/src/final/func_00180388.c",
+      "source_sha256": "29ddbf0d2230783f0ae66f34e00cf82271735d3a9dd44c0987fb47e13bd21c91",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf070/match/76-00180388-final-game/func_00180388.result.json",
+      "receipt_sha256": "640f7404a80cc205dc535a76d4ed47b58dd70f90c7b30198610d6e28e87c4802",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_00180388",
+          "address": 1573768,
+          "size": 72,
+          "candidate_size": 72,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "Both delivered alignment units define the same struct PackedTextState: unsigned-char prefix[0xb6] followed by unsigned-char alignment. include/game/screen.h currently only forward-declares it; integration may centralize this identical definition."
+      ]
+    },
+    {
+      "function": "func_001803d0",
+      "address": "0x001803d0",
+      "size": 52,
+      "author": "nf070",
+      "manifest": "scratch/authors/nf070/RESULT.json",
+      "manifest_sha256": "0ba5cf16a47984bddb1e23941fc403fcfa087debc75231cccdcdbb6153f5a55b",
+      "row_index": 2,
+      "row": {
+        "address": "0x001803d0",
+        "name": "func_001803d0",
+        "size": 52,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf070/src/final/func_001803d0.c",
+        "source_sha256": "700c8e85fae767cbed92ddb0373338e0c1a6866402e9a931aa813bf91c376c26",
+        "profile": "sdk",
+        "receipt": "scratch/authors/nf070/match/77-001803d0-final-sdk/func_001803d0.result.json",
+        "receipt_sha256": "4c26f87b3bac1a3a3ed40f09e025020d0e4a88a8b4a318510a16a7e8937416df",
+        "attempts": 26,
+        "minutes": null,
+        "measured_matcher_seconds": 7.044225,
+        "final_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "candidate_size": 52,
+          "target_size": 52,
+          "compared_bytes": 52,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_diff": null
+        },
+        "previous_residual": {
+          "differing_bytes": 11,
+          "differing_words": 6,
+          "instruction_offsets": [
+            8,
+            12,
+            16,
+            20,
+            40,
+            44
+          ]
+        },
+        "notes": "step5: the inherited 52-byte SDK candidate has eleven differing bytes in six instruction words (+0x08, +0x0c, +0x10, +0x14, +0x28, +0x2c), all pointer/flag/result register allocation; operation kinds, conditions, immediates and shifts already agree. An ordinary static byte-returning preserve_vertical helper computes the retained row multiple; separate byte snapshots for flags and the completed selection reproduce the original pointer/flag lifetimes and yield a final exact 52/52-byte MATCH under SDK. A byte row-quotient snapshot and a single packed-return helper do not match; the natural helper was not forced inline or assigned any address. Existing DisplayObject and TrainingWidget types and unsigned-char alignment contract are retained. Profile witness: only sdk matches this delivered source among measured game/sdk; middleware was not measured on this exact delivered spelling. SDK ownership is inferred.",
+        "needs_names": [],
+        "needs_headers": [
+          "Same PackedTextState definition as the delivered vertical unit; no declaration conflict was introduced."
+        ],
+        "contract_conflicts": []
+      },
+      "step_row_index": 46,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf070/src/final/func_001803d0.c",
+      "source_sha256": "700c8e85fae767cbed92ddb0373338e0c1a6866402e9a931aa813bf91c376c26",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf070/match/77-001803d0-final-sdk/func_001803d0.result.json",
+      "receipt_sha256": "4c26f87b3bac1a3a3ed40f09e025020d0e4a88a8b4a318510a16a7e8937416df",
+      "profile": "sdk",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001803d0",
+          "address": 1573840,
+          "size": 52,
+          "candidate_size": 52,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "Same PackedTextState definition as the delivered vertical unit; no declaration conflict was introduced."
+      ]
+    },
+    {
+      "function": "func_001ab590",
+      "address": "0x001ab590",
+      "size": 204,
+      "author": "nf076",
+      "manifest": "scratch/authors/nf076/RESULT.json",
+      "manifest_sha256": "af19625aa65a2f95222783d5e6d60d4475d1a34e422444a94c15f8f6e3351a25",
+      "row_index": 1,
+      "row": {
+        "address": "0x001ab590",
+        "name": "func_001ab590",
+        "size": 204,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf076/src/menu_modes.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nf076/match/menu-03-final-canonical-contracts/menu_modes.result.json",
+        "exit_code": 1,
+        "attempts": 3,
+        "minutes": 0.0153,
+        "minutes_basis": "Observed sequential matcher subprocess runtime only, excluding active diagnosis time.",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "source_sha256": "4108a1040bd7affbae8fc7fc5f859523fdfe5a9c0da769e348391b4bb9210206",
+        "residual": {
+          "target_size": 204,
+          "compiled_size": 204,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "extent_delta": 0,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: Fixed a semantic omission rather than steering register allocation. In the next_state==4 branch, a nonzero word output from func_001db964 must normalize next_state to 3 before the shared transition finish. The inherited source skipped the duration call but incorrectly retained 4. The missing conditional assignment explains the omitted operation at +0xbc, the two displaced tail branches and the shifted PC-relative pool reference at +0x74. Adding that assignment gives a complete 204-byte MATCH under game/default v2. The caller func_001ab680 forwards the owner and full-word requests 11/+0x724 and 4/+0x89c; func_001db964 writes a full word through its third argument. The canonical float-duration, MemberCallback and signed transition interfaces are preserved. The final whole-TU matcher exits 1 solely because the inherited func_001acb38 remains mismatched; func_001abf24 still MATCHes and its emitted body is unchanged.",
+        "needs_names": []
+      },
+      "step_row_index": 47,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf076/src/menu_modes.cpp",
+      "source_sha256": "4108a1040bd7affbae8fc7fc5f859523fdfe5a9c0da769e348391b4bb9210206",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf076/match/menu-03-final-canonical-contracts/menu_modes.result.json",
+      "receipt_sha256": "a4d96cbb4536755abc43ccbfe27d998d7025d1dbfd64d0df7174e4ee4fe18259",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001ab590",
+          "address": 1750416,
+          "size": 204,
+          "candidate_size": 204,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001abf24",
+          "address": 1752868,
+          "size": 200,
+          "candidate_size": 200,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001acb38",
+          "address": 1755960,
+          "size": 88,
+          "candidate_size": 84,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001c2cd4",
+      "address": "0x001c2cd4",
+      "size": 160,
+      "author": "nf081",
+      "manifest": "scratch/authors/nf081/RESULT.json",
+      "manifest_sha256": "75bf6c7546b2eb843175605d12094dc22527a15587aa08158f77949363b5d0c4",
+      "row_index": 2,
+      "row": {
+        "address": "0x001c2cd4",
+        "name": "func_001c2cd4",
+        "size": 160,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf081/attempts/func_001c2cd4/08-returned-owner-clean-final/func_001c2cd4.cpp",
+        "source_sha256": "bd242fe0bcc7c88b5369000f2d9bbf8e003c7e35125b2b8ad12367ab79ff6467",
+        "profile": "game",
+        "receipt": "scratch/authors/nf081/match/func_001c2cd4/08-returned-owner-clean-final-game/func_001c2cd4.result.json",
+        "receipt_sha256": "dec8601d199770c283872dfd1c61e13d6a3461d0742eb1b4bac91646d6e61c26",
+        "terminal": "scratch/authors/nf081/match/func_001c2cd4/08-returned-owner-clean-final-game/terminal.json",
+        "final_exit_code": 1,
+        "attempts": 8,
+        "minutes": 0.04474,
+        "residual": {
+          "address": 1846484,
+          "status": "match",
+          "size": 160,
+          "candidate_size": 160,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "extent_delta": 0,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: MATCH under game and default v2, exact 160-byte extent. The starting 13-byte/9-word residual at offsets 40, 44, 48, 52, 56, 84, 88, 96 and 112 was entirely bound materialization and receiver/selected-slot lifetime: a saved runtime count displaced the original zero/owner roles and the original immediate signed comparison. ensure_timed_slot now returns its controller, and the native constructor threads that returned receiver through a fixed signed 11-entry loop; the obsolete runtime-count helper was removed. This natural owner-result form reproduces all bytes, retaining the slot object at +4 and leaving elapsed/selected initialization unchanged. Every other emitted function retains its previous match/mismatch status, including the 176-byte func_001c3218 context MATCH. [INFERENCE] Receiver-preserving source helper spelling is explanatory, not a recovered historical helper identity. Canonical erased registration/release identities remain explicitly inferred in source.",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_names": [],
+        "source_provenance": {
+          "previous_source": "scratch/authors/tu614/src/func_001c20fc.cpp",
+          "previous_profile": "game",
+          "previous_receipt": "scratch/authors/tu614/match/36-final-selection-game/func_001c20fc.result.json",
+          "previous_result": "scratch/authors/tu614/RESULT.json",
+          "selected_step5_attempt": 8,
+          "selected_step5_label": "returned-owner-clean-final"
+        }
+      },
+      "step_row_index": 48,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf081/attempts/func_001c2cd4/08-returned-owner-clean-final/func_001c2cd4.cpp",
+      "source_sha256": "bd242fe0bcc7c88b5369000f2d9bbf8e003c7e35125b2b8ad12367ab79ff6467",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf081/match/func_001c2cd4/08-returned-owner-clean-final-game/func_001c2cd4.result.json",
+      "receipt_sha256": "dec8601d199770c283872dfd1c61e13d6a3461d0742eb1b4bac91646d6e61c26",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001c20fc",
+          "address": 1843452,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c21c8",
+          "address": 1843656,
+          "size": 184,
+          "candidate_size": 184,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": [
+            {
+              "offset": 140,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 152,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            }
+          ]
+        },
+        {
+          "name": "func_001c2a34",
+          "address": 1845812,
+          "size": 336,
+          "candidate_size": 344,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c2c44",
+          "address": 1846340,
+          "size": 144,
+          "candidate_size": 136,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c2cd4",
+          "address": 1846484,
+          "size": 160,
+          "candidate_size": 160,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 116,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 128,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            }
+          ]
+        },
+        {
+          "name": "func_001c2dd0",
+          "address": 1846736,
+          "size": 176,
+          "candidate_size": 176,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c3218",
+          "address": 1847832,
+          "size": 176,
+          "candidate_size": 176,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c3520",
+          "address": 1848608,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c3670",
+          "address": 1848944,
+          "size": 192,
+          "candidate_size": 192,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c375c",
+          "address": 1849180,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001c3670",
+      "address": "0x001c3670",
+      "size": 192,
+      "author": "nf083",
+      "manifest": "scratch/authors/nf083/RESULT.json",
+      "manifest_sha256": "0d3fea81c07f08a537ee8de170a9aa41b419b22d0313be92d7f9e4977d2d9a2b",
+      "row_index": 0,
+      "row": {
+        "address": "0x001c3670",
+        "name": "func_001c3670",
+        "size": 192,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf083/src/func_001c20fc.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nf083/match/func_001c3670/10-final-selected/func_001c20fc.result.json",
+        "source_sha256": "d2d53a0dbef33c8be5c10c13a6ee9f703b7039c95e06bc2c84b405b155e37599",
+        "final_exit_code": 1,
+        "attempts": 10,
+        "minutes": 0.05856,
+        "timing_scope": "Sequential matcher subprocess wall time only; authoring/reasoning time not measured.",
+        "residual": {
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "instruction_offsets": [],
+          "compiled_size": 192,
+          "target_size": 192
+        },
+        "differing_bytes": 0,
+        "candidate_size": 192,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_names": [],
+        "notes": "step5: Baseline residual combined a real extra factory-result guard with allocation/scheduling differences. At +0x70/+0x74/+0x78 the baseline set flags from the returned object and conditionally read/compared table->count; the original reads the count unconditionally and binds a nonempty table even on factory failure. Removing that extra guard preserves the observed failure path (ORIGINAL BUG comment). A called static five-slot initialization helper then restores the receiver-save-before-index order and table/result/VFP-constant live ranges, producing an exact 192-byte default-model game MATCH. [INFERENCE] The descriptive helper name and historical TU boundary are unrecovered. The full TU exits 1 solely because eight inherited non-target functions remain mismatches; its existing func_001c3218 context still MATCHes.",
+        "provenance": {
+          "prev_source": "scratch/authors/tu614/src/func_001c20fc.cpp",
+          "prev_profile": "game",
+          "prev_receipt": "scratch/authors/tu614/match/36-final-selection-game/func_001c20fc.result.json",
+          "prev_result": "scratch/authors/tu614/RESULT.json",
+          "prev_residual_differing_bytes": 15,
+          "exact_baseline_receipt": "scratch/authors/nf083/match/func_001c3670/01-exact-baseline/func_001c20fc.result.json"
+        },
+        "attempt_receipts": [
+          "scratch/authors/nf083/match/func_001c3670/01-exact-baseline/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/02-unconditional-table-count/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/03-do-loop/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/04-commuted-depth/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/05-ternary-depth/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/06-unsigned-index/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/07-depth-before-owner/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/08-depth-helper/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/09-loop-helper/func_001c20fc.result.json",
+          "scratch/authors/nf083/match/func_001c3670/10-final-selected/func_001c20fc.result.json"
+        ]
+      },
+      "step_row_index": 49,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf083/src/func_001c20fc.cpp",
+      "source_sha256": "d2d53a0dbef33c8be5c10c13a6ee9f703b7039c95e06bc2c84b405b155e37599",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf083/match/func_001c3670/10-final-selected/func_001c20fc.result.json",
+      "receipt_sha256": "4d24c69ad1d5fc0fbdcbb9e72a18adac89106230a3a88d2e1e5800541bdea282",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001c20fc",
+          "address": 1843452,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c21c8",
+          "address": 1843656,
+          "size": 184,
+          "candidate_size": 184,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": [
+            {
+              "offset": 140,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 152,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            }
+          ]
+        },
+        {
+          "name": "func_001c2a34",
+          "address": 1845812,
+          "size": 336,
+          "candidate_size": 344,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c2c44",
+          "address": 1846340,
+          "size": 144,
+          "candidate_size": 136,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c2cd4",
+          "address": 1846484,
+          "size": 160,
+          "candidate_size": 160,
+          "status": "mismatch",
+          "first_diff": 41,
+          "linker_rewrites": [
+            {
+              "offset": 116,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 128,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            }
+          ]
+        },
+        {
+          "name": "func_001c2dd0",
+          "address": 1846736,
+          "size": 176,
+          "candidate_size": 176,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c3218",
+          "address": 1847832,
+          "size": 176,
+          "candidate_size": 176,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c3520",
+          "address": 1848608,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c3670",
+          "address": 1848944,
+          "size": 192,
+          "candidate_size": 192,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c375c",
+          "address": 1849180,
+          "size": 92,
+          "candidate_size": 92,
+          "status": "mismatch",
+          "first_diff": 5,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001c78f8",
+      "address": "0x001c78f8",
+      "size": 292,
+      "author": "nf084",
+      "manifest": "scratch/authors/nf084/RESULT.json",
+      "manifest_sha256": "913bcb678cc0e832885ab519b87756784766cf80c579eb2ac1d1254bf5afa795",
+      "row_index": 1,
+      "row": {
+        "address": "0x001c78f8",
+        "name": "func_001c78f8",
+        "size": 292,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf084/delivery/primitive_cleanup.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nf084/match/func_001c78f8/final-game/primitive_cleanup.result.json",
+        "receipt_exit_code": 0,
+        "attempts": 18,
+        "minutes": 9.66,
+        "timing_basis": "Elapsed wall time between own baseline and final receipts; target work was interleaved.",
+        "residual": {
+          "differing_bytes": 0,
+          "differing_instructions": 0,
+          "instruction_offsets": [],
+          "compiled_size": 292,
+          "target_size": 292
+        },
+        "residual_differing_bytes": 0,
+        "baseline_receipt": "scratch/authors/nf084/match/func_001c78f8/00-baseline/primitive_cleanup.result.json",
+        "previous_source": "scratch/authors/tu617/selected/primitive_cleanup.cpp",
+        "previous_residual_differing_bytes": 10,
+        "notes": "step5: The initial residual had two independent causes. Defining the canonical inline ResPrimitive::Cleanup member instead of a standalone by-value cleanup helper restores the count/buffer-pointer lifetimes and r10/r9 allocation, eliminating eight differing bytes. The remaining differences at +0xc8 and literal +0x11c are the callback load displacement and callback-slot address: the target materializes data_002429f8 directly rather than AllocationSystem base plus its release-field offset. Using the exact data_002429f8 declaration already present in src/wave2/func_0011d260.c fixes both remaining bytes. Final default-game receipt is an exact 292-byte MATCH. Canonical resource, allocator and field types are retained, as is the documented original null-index-stream dereference."
+      },
+      "step_row_index": 50,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf084/delivery/primitive_cleanup.cpp",
+      "source_sha256": "0b86baa8d08e276d60afaef30ee2f53c67468ad763df66a818ade1897bbee541",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf084/match/func_001c78f8/final-game/primitive_cleanup.result.json",
+      "receipt_sha256": "40bb0942491803a9fe121f92c27b4899143f93371c513abfd18d54ab4a10ce02",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001c78f8",
+          "address": 1865976,
+          "size": 292,
+          "candidate_size": 292,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": null,
+      "header_requirements": null
+    },
+    {
+      "function": "func_001cc1e4",
+      "address": "0x001cc1e4",
+      "size": 104,
+      "author": "nf084",
+      "manifest": "scratch/authors/nf084/RESULT.json",
+      "manifest_sha256": "913bcb678cc0e832885ab519b87756784766cf80c579eb2ac1d1254bf5afa795",
+      "row_index": 2,
+      "row": {
+        "address": "0x001cc1e4",
+        "name": "func_001cc1e4",
+        "size": 104,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf084/delivery/func_001c8e10.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nf084/match/func_001cc1e4/final-game/func_001c8e10.result.json",
+        "receipt_exit_code": 1,
+        "attempts": 3,
+        "minutes": 9.66,
+        "timing_basis": "Elapsed wall time between own baseline and final receipts; target work was interleaved.",
+        "residual": {
+          "differing_bytes": 0,
+          "differing_instructions": 0,
+          "instruction_offsets": [],
+          "compiled_size": 104,
+          "target_size": 104
+        },
+        "residual_differing_bytes": 0,
+        "baseline_receipt": "scratch/authors/nf084/match/func_001cc1e4/00-baseline/func_001c8e10.result.json",
+        "previous_source": "scratch/authors/tu972/delivery/func_001c8e10.cpp",
+        "previous_residual_differing_bytes": 11,
+        "notes": "step5: All eleven residual bytes were receiver/next-iterator r4/r5 allocation differences, not field types, list semantics or control flow. Moving the unchanged canonical erase/delete ownership loop into a static void release_groups helper separates its iterator lifetime from the receiver retained by the returning wrapper and yields an exact 104-byte MATCH. [INFERENCE] The helper is source-level factorization only, with no claimed out-of-line identity or new symbol binding. Kept the frozen LinkList header and all other definitions unchanged: all nine other catalogued definitions retain their original mismatch status and no context function becomes MATCH. Overall matcher exit remains 1 because those preserved context functions are unmatched.",
+        "names": "scratch/authors/nf084/names.json",
+        "needs_names": [
+          "_ZTV21R41163RecoveredCamera",
+          "_ZTVN2nw3gfx13TransformNodeE",
+          "_ZTVN2nw3gfx9SceneNodeE",
+          "_ZN2nw3gfx5Light15CreateAnimGroupEPNS_2os10IAllocatorE",
+          "_ZN2nw3gfx9AnimGroupC1ENS_4anim3res12ResAnimGroupEPNS0_9SceneNodeEPNS_2os10IAllocatorE",
+          "_ZN2nw3gfx9AnimGroup10InitializeEb",
+          "_ZTV13DefaultState0",
+          "_ZTV13DefaultState1",
+          "_ZTV13DefaultState2",
+          "_ZTV13DefaultState3",
+          "_ZTV13DefaultState4",
+          "_ZTV13DefaultState5",
+          "_ZTV13DefaultState6",
+          "_ZTV13DefaultState7",
+          "_ZTV13DefaultState8",
+          "_ZTV13DefaultState9",
+          "_ZTV14DefaultState10",
+          "_ZTV14DefaultState11",
+          "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "_ZN2nw3lyt4Pane12CalculateMtxERKNS0_8DrawInfoE",
+          "_ZN2nn4math9MTX34MultEPNS0_5MTX34EPKS1_S4_",
+          "_ZN2nn4math10SinCosFIdxEPfS1_f",
+          "_ZN2nw3lyt18AnimTransformBasic7AnimateEjPNS0_4PaneE"
+        ]
+      },
+      "step_row_index": 51,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf084/delivery/func_001c8e10.cpp",
+      "source_sha256": "c995d12f54329c5db6483c6c8f90840945b312a8d0d6711bcc7a597e3c60b348",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf084/match/func_001cc1e4/final-game/func_001c8e10.result.json",
+      "receipt_sha256": "f5a66c3effb94548e932e679cfc10b431e418b8557cb4ba6361d20fe0e29b628",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "_ZN2nw3gfx5Light15CreateAnimGroupEPNS_2os10IAllocatorE",
+          "address": 1871376,
+          "size": 580,
+          "candidate_size": 580,
+          "status": "mismatch",
+          "first_diff": 17,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001c99f4",
+          "address": 1874420,
+          "size": 1044,
+          "candidate_size": 1056,
+          "status": "mismatch",
+          "first_diff": 8,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001ca298",
+          "address": 1876632,
+          "size": 3568,
+          "candidate_size": 3564,
+          "status": "mismatch",
+          "first_diff": 8,
+          "linker_rewrites": [
+            {
+              "offset": 400,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 412,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 484,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 496,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 572,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 584,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 660,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 672,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 748,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 760,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 836,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 848,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 916,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 928,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 996,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1008,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1080,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1092,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1164,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1176,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1248,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1260,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1344,
+              "rule": "inline_nop",
+              "target": 2187584,
+              "word": "0xe1a00000"
+            },
+            {
+              "offset": 1356,
+              "rule": "inline_nop",
+              "target": 2186948,
+              "word": "0xe1a00000"
+            }
+          ]
+        },
+        {
+          "name": "func_001cbc10",
+          "address": 1883152,
+          "size": 804,
+          "candidate_size": 808,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001cc1e4",
+          "address": 1884644,
+          "size": 104,
+          "candidate_size": 104,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+          "address": 1885252,
+          "size": 136,
+          "candidate_size": 140,
+          "status": "mismatch",
+          "first_diff": 112,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3lyt18AnimTransformBasic7AnimateEjPNS0_4PaneE",
+          "address": 1886208,
+          "size": 728,
+          "candidate_size": 728,
+          "status": "mismatch",
+          "first_diff": 24,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001cd070",
+          "address": 1888368,
+          "size": 628,
+          "candidate_size": 624,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN2nw3lyt4Pane12CalculateMtxERKNS0_8DrawInfoE",
+          "address": 1889344,
+          "size": 940,
+          "candidate_size": 940,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001ce2b4",
+          "address": 1893044,
+          "size": 896,
+          "candidate_size": 872,
+          "status": "mismatch",
+          "first_diff": 4,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [
+        "_ZTV21R41163RecoveredCamera",
+        "_ZTVN2nw3gfx13TransformNodeE",
+        "_ZTVN2nw3gfx9SceneNodeE",
+        "_ZN2nw3gfx5Light15CreateAnimGroupEPNS_2os10IAllocatorE",
+        "_ZN2nw3gfx9AnimGroupC1ENS_4anim3res12ResAnimGroupEPNS0_9SceneNodeEPNS_2os10IAllocatorE",
+        "_ZN2nw3gfx9AnimGroup10InitializeEb",
+        "_ZTV13DefaultState0",
+        "_ZTV13DefaultState1",
+        "_ZTV13DefaultState2",
+        "_ZTV13DefaultState3",
+        "_ZTV13DefaultState4",
+        "_ZTV13DefaultState5",
+        "_ZTV13DefaultState6",
+        "_ZTV13DefaultState7",
+        "_ZTV13DefaultState8",
+        "_ZTV13DefaultState9",
+        "_ZTV14DefaultState10",
+        "_ZTV14DefaultState11",
+        "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+        "_ZN2nw3lyt4Pane12CalculateMtxERKNS0_8DrawInfoE",
+        "_ZN2nn4math9MTX34MultEPNS0_5MTX34EPKS1_S4_",
+        "_ZN2nn4math10SinCosFIdxEPfS1_f",
+        "_ZN2nw3lyt18AnimTransformBasic7AnimateEjPNS0_4PaneE"
+      ],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001d2f90",
+      "address": "0x001d2f90",
+      "size": 88,
+      "author": "nf085",
+      "manifest": "scratch/authors/nf085/RESULT.json",
+      "manifest_sha256": "b572e95379f5502356c39d971d504d1429d6a7ff24b6d19c7b85e9a6247e156e",
+      "row_index": 2,
+      "row": {
+        "address": "0x001d2f90",
+        "name": "func_001d2f90",
+        "size": 88,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf085/src/sequence_commands.cpp",
+        "source_sha256": "0bad92205a36942f68778781b00ef8681d8c67abdd3728b063e6ce019dd657ad",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf085/match/func_001d2f90/11-final-header-marker/sequence_commands.result.json",
+        "receipt_sha256": "bf36a2b9808935554b127e8a528ca5363f194e0ae20f3ab9cbeb1f142647503a",
+        "final_exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 12,
+        "minutes": 0.057,
+        "minutes_basis": "Matcher subprocess wall time only; shared author diagnosis time is not allocated per target.",
+        "residual": {
+          "compiled_size": 88,
+          "target_size": 88,
+          "size_delta": 0,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "differing_word_offsets": []
+        },
+        "notes": "step5: MATCH 88/88 B under the default linker model and frozen middleware profile. Moving event->data = data between opcode and object initialization fixes the reordered opcode-constant/embedded-playback-address materialization at +0x24/+0x30 and the resulting store-register differences at +0x34/+0x38. The obsolete unused sequence-header helper was removed. The final exact file is confirmed by the selected receipt; its two non-target definitions retain byte-identical compiled outputs and their previous mismatch status. The direct caller func_001d15d8 overwrites the incidental queue result before reading it, supporting the retained void contract. [INFERENCE] TU subdivision and recovered option/event roles are not authenticated historical class identities.",
+        "needs_names": [],
+        "needs_headers": [
+          "Move the single local extern-C block (func_001d29c8, func_001d2ec8, func_001d2f90, func_001d38d4) and required recovered command/render layouts to include/game/sound_commands.h before adoption."
+        ],
+        "contract_conflicts": [
+          "Canonical nw::snd::internal::SequenceSound::StartInfo has three words (12 B); this retained retail SequenceStartOptions is four words (16 B), with a byte flag and three word fields. Do not substitute the native type or conflate the native namespaced class with game/sound_runtime.h SequenceSound without caller/layout reconciliation."
+        ],
+        "integration_caution": "Whole-TU witness: do not credit the two non-target mismatches or drop/split their definitions without re-deriving the matched target under its changed inlining context. Whole-unit matcher exit 1 is expected solely because these siblings remain mismatched."
+      },
+      "step_row_index": 52,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf085/src/sequence_commands.cpp",
+      "source_sha256": "0bad92205a36942f68778781b00ef8681d8c67abdd3728b063e6ce019dd657ad",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf085/match/func_001d2f90/11-final-header-marker/sequence_commands.result.json",
+      "receipt_sha256": "bf36a2b9808935554b127e8a528ca5363f194e0ae20f3ab9cbeb1f142647503a",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001d2ec8",
+          "address": 1912520,
+          "size": 200,
+          "candidate_size": 200,
+          "status": "mismatch",
+          "first_diff": 124,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001d2f90",
+          "address": 1912720,
+          "size": 88,
+          "candidate_size": 88,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001d38d4",
+          "address": 1915092,
+          "size": 168,
+          "candidate_size": 172,
+          "status": "mismatch",
+          "first_diff": 97,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "Move the single local extern-C block (func_001d29c8, func_001d2ec8, func_001d2f90, func_001d38d4) and required recovered command/render layouts to include/game/sound_commands.h before adoption."
+      ]
+    },
+    {
+      "function": "func_001d603c",
+      "address": "0x001d603c",
+      "size": 64,
+      "author": "nf087",
+      "manifest": "scratch/authors/nf087/RESULT.json",
+      "manifest_sha256": "0a70bcb3f10d0a1b7da9da6a3c4d45cf39311d20bbb1acafb18613f6b1e9faab",
+      "row_index": 0,
+      "row": {
+        "address": "0x001d603c",
+        "name": "func_001d603c",
+        "size": 64,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf087/src/sound_destruction_tu29.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nf087/match/func_001d603c-final/sound_destruction_tu29.result.json",
+        "terminal_receipt": "scratch/authors/nf087/match/func_001d603c-final/terminal.json",
+        "attempts": 4,
+        "minutes": 0.019859,
+        "notes": "step5: MATCH, 64/64 B under frozen game. The exact inherited source reproduced a 14-byte/5-word scheduling residual (the batch's 13-byte figure refers to an older historical witness). Only resetPlayerTypes' independent assignments were reordered from primary/registry/manager to registry/manager/primary. This changes address preparation and store scheduling at +0x0c/+0x10/+0x14/+0x18/+0x20 so the emitted writes occur registry, primary, manager, exactly as the original. All field widths, address points, finalization call, and returned receiver are unchanged. [INFERENCE] The original helper spelling/group ownership is not recovered historical identity. The two accepted native destructor contexts remain MATCH; the retained SceneEngine destructor remains its unchanged 4-byte mismatch.",
+        "residual": {
+          "candidate_size": 64,
+          "target_size": 64,
+          "first_difference_offset": null,
+          "overlap_differing_bytes": 0,
+          "overlap_differing_words": 0,
+          "size_delta": 0,
+          "differing_bytes_with_extent": 0,
+          "word_offsets": []
+        },
+        "baseline": {
+          "source": "scratch/authors/nf087/src/sound_destruction_tu29_baseline.cpp",
+          "receipt": "scratch/authors/nf087/match/func_001d603c-00-baseline/sound_destruction_tu29_baseline.result.json",
+          "residual": {
+            "candidate_size": 64,
+            "target_size": 64,
+            "first_difference_offset": 12,
+            "overlap_differing_bytes": 14,
+            "overlap_differing_words": 5,
+            "size_delta": 0,
+            "differing_bytes_with_extent": 14,
+            "word_offsets": [
+              12,
+              16,
+              20,
+              24,
+              32
+            ]
+          }
+        },
+        "source_sha256": "1a34e030e035f3cebc79577ac0124545e4e5d9a8a7f14831060b5a1fd485d43e",
+        "object_sha256": "44c9c9623014858126058c1dd756f24dd5ff4c61f47ac6510e9baefdac405c98",
+        "receipt_sha256": "f26df1f5e9ec0178c36db339725037459743be61db3a4c916fabe7c9f81a5a92",
+        "final_exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_names": [
+          "_ZN11SceneEngineD2Ev",
+          "_ZN10SceneEntryD1Ev",
+          "_ZN10SceneEntryD2Ev",
+          "_ZN15PolymorphicBaseD1Ev",
+          "_ZN15PolymorphicBaseD2Ev",
+          "__aeabi_vec_dtor"
+        ],
+        "names": "scratch/authors/nf087/names.json",
+        "extra_sources": [
+          "scratch/authors/nf087/src/polymorphic_base.cpp"
+        ],
+        "names_qualification": "Inherited exact same-address native self-definitions/runtime witness from tu842; no new name or alias proposed."
+      },
+      "step_row_index": 53,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf087/src/sound_destruction_tu29.cpp",
+      "source_sha256": "1a34e030e035f3cebc79577ac0124545e4e5d9a8a7f14831060b5a1fd485d43e",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf087/match/func_001d603c-final/sound_destruction_tu29.result.json",
+      "receipt_sha256": "f26df1f5e9ec0178c36db339725037459743be61db3a4c916fabe7c9f81a5a92",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "_ZN10SceneEntryD1Ev",
+          "address": 1596316,
+          "size": 4,
+          "candidate_size": 4,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 0,
+              "rule": "branchnop",
+              "target": 1596320,
+              "word": "0xe1a00000"
+            }
+          ]
+        },
+        {
+          "name": "_ZN15PolymorphicBaseD1Ev",
+          "address": 1596320,
+          "size": 16,
+          "candidate_size": 16,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001d603c",
+          "address": 1925180,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "_ZN11SceneEngineD1Ev",
+          "address": 1931068,
+          "size": 68,
+          "candidate_size": 68,
+          "status": "mismatch",
+          "first_diff": 16,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [
+        "_ZN11SceneEngineD2Ev",
+        "_ZN10SceneEntryD1Ev",
+        "_ZN10SceneEntryD2Ev",
+        "_ZN15PolymorphicBaseD1Ev",
+        "_ZN15PolymorphicBaseD2Ev",
+        "__aeabi_vec_dtor"
+      ],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001d8638",
+      "address": "0x001d8638",
+      "size": 220,
+      "author": "nf087",
+      "manifest": "scratch/authors/nf087/RESULT.json",
+      "manifest_sha256": "0a70bcb3f10d0a1b7da9da6a3c4d45cf39311d20bbb1acafb18613f6b1e9faab",
+      "row_index": 1,
+      "row": {
+        "address": "0x001d8638",
+        "name": "func_001d8638",
+        "size": 220,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf087/src/sequence_reset.cpp",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nf087/match/func_001d8638-final/sequence_reset.result.json",
+        "terminal_receipt": "scratch/authors/nf087/match/func_001d8638-final/terminal.json",
+        "attempts": 4,
+        "minutes": 0.017389,
+        "notes": "step5: MATCH, 220/220 B under frozen middleware. The 15-byte/9-word residual at +0x3c/+0x40/+0x50/+0x54/+0x58/+0x5c/+0x60/+0x68/+0x70 was default-constant temporary allocation and scheduling: tempo/timebase constants exchanged temporary roles, followed by a displaced timebase write and different 127/64 temporary lifetimes. The two bytes at +0x78/+0x79 followed by halfwords +0x7a/+0x7c are represented by canonical nw::snd::internal::MoveValue<unsigned char, short>; InitValue(127) replaces four independent assignments and yields the exact original schedule. The old names misidentified ramp origin/target as independent volume/priority defaults. Both delivered SequenceTiming definitions are identical; the byte at +0x74 is named channel_priority [INFERENCE]. The existing vs16/vu32 shared-member volatility remains explicitly [INFERENCE] from the pinned public player header and was not added to locals/parameters for steering. No callee contract or numerical default changed.",
+        "residual": {
+          "candidate_size": 220,
+          "target_size": 220,
+          "first_difference_offset": null,
+          "overlap_differing_bytes": 0,
+          "overlap_differing_words": 0,
+          "size_delta": 0,
+          "differing_bytes_with_extent": 0,
+          "word_offsets": []
+        },
+        "baseline": {
+          "source": "scratch/authors/nf087/src/sequence_reset_baseline.cpp",
+          "receipt": "scratch/authors/nf087/match/func_001d8638-00-baseline/sequence_reset_baseline.result.json",
+          "residual": {
+            "candidate_size": 220,
+            "target_size": 220,
+            "first_difference_offset": 60,
+            "overlap_differing_bytes": 15,
+            "overlap_differing_words": 9,
+            "size_delta": 0,
+            "differing_bytes_with_extent": 15,
+            "word_offsets": [
+              60,
+              64,
+              80,
+              84,
+              88,
+              92,
+              96,
+              104,
+              112
+            ]
+          }
+        },
+        "source_sha256": "5007716a808607dce21356e271b5821dc976729d0e33f04ac49a987b32d14135",
+        "object_sha256": "3a6814700b081b9dd7a4b5b75fa7c17216af14ca5b82120d4cdc1bc4c5f1e35b",
+        "receipt_sha256": "7fc26a105034b870d71478d278a517a2ba519905b1c69efd6e68ab6b70535145",
+        "final_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_names": []
+      },
+      "step_row_index": 54,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf087/src/sequence_reset.cpp",
+      "source_sha256": "5007716a808607dce21356e271b5821dc976729d0e33f04ac49a987b32d14135",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf087/match/func_001d8638-final/sequence_reset.result.json",
+      "receipt_sha256": "7fc26a105034b870d71478d278a517a2ba519905b1c69efd6e68ab6b70535145",
+      "profile": "middleware",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001d8638",
+          "address": 1934904,
+          "size": 220,
+          "candidate_size": 220,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001d9050",
+      "address": "0x001d9050",
+      "size": 64,
+      "author": "nf087",
+      "manifest": "scratch/authors/nf087/RESULT.json",
+      "manifest_sha256": "0a70bcb3f10d0a1b7da9da6a3c4d45cf39311d20bbb1acafb18613f6b1e9faab",
+      "row_index": 2,
+      "row": {
+        "address": "0x001d9050",
+        "name": "func_001d9050",
+        "size": 64,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf087/src/sequence_loading.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nf087/match/func_001d9050-final/sequence_loading.result.json",
+        "terminal_receipt": "scratch/authors/nf087/match/func_001d9050-final/terminal.json",
+        "attempts": 8,
+        "minutes": 0.040513,
+        "notes": "step5: MATCH, 64/64 B under frozen game. The inherited 12-byte/6-word residual was type-group address-base selection and primary/manager store scheduling, not a field-width or value error. Its first literal selected the registry address point instead of the primary group base; primary was stored after both secondary address points. A natural resetSequencePlayerTypes helper taking the existing typed group, with registry/manager/primary assignments, makes the compiler retain the primary group base and emit registry/primary/manager stores at the original positions. Five direct statement-order alternatives did not fix it; the first grouped-helper form did. [INFERENCE] The historical helper name/source structure is unproved. The same canonical volume-ramp declaration was copied here to keep SequenceTiming identical across delivered TUs; the retained func_001d89e4 remains exactly its inherited 708-byte mismatch.",
+        "residual": {
+          "candidate_size": 64,
+          "target_size": 64,
+          "first_difference_offset": null,
+          "overlap_differing_bytes": 0,
+          "overlap_differing_words": 0,
+          "size_delta": 0,
+          "differing_bytes_with_extent": 0,
+          "word_offsets": []
+        },
+        "baseline": {
+          "source": "scratch/authors/nf087/src/sequence_loading_baseline.cpp",
+          "receipt": "scratch/authors/nf087/match/func_001d9050-00-baseline/sequence_loading_baseline.result.json",
+          "residual": {
+            "candidate_size": 64,
+            "target_size": 64,
+            "first_difference_offset": 12,
+            "overlap_differing_bytes": 12,
+            "overlap_differing_words": 6,
+            "size_delta": 0,
+            "differing_bytes_with_extent": 12,
+            "word_offsets": [
+              12,
+              16,
+              20,
+              24,
+              32,
+              56
+            ]
+          }
+        },
+        "source_sha256": "87d6592913ea47fc10a6140924615b0cd0bb5d43578cb408fdb26bff42aa7ff6",
+        "object_sha256": "e8efae77b543f9bddb5783071a410217a6e0cff0ad6fc6a8fe44980114821c54",
+        "receipt_sha256": "eda02946087057ee16628518ad64e6525401638af74df53de1d45e47723cae43",
+        "final_exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "needs_names": []
+      },
+      "step_row_index": 55,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf087/src/sequence_loading.cpp",
+      "source_sha256": "87d6592913ea47fc10a6140924615b0cd0bb5d43578cb408fdb26bff42aa7ff6",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf087/match/func_001d9050-final/sequence_loading.result.json",
+      "receipt_sha256": "eda02946087057ee16628518ad64e6525401638af74df53de1d45e47723cae43",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001d89e4",
+          "address": 1935844,
+          "size": 920,
+          "candidate_size": 920,
+          "status": "mismatch",
+          "first_diff": 1,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001d9050",
+          "address": 1937488,
+          "size": 64,
+          "candidate_size": 64,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001e3294",
+      "address": "0x001e3294",
+      "size": 236,
+      "author": "nf089",
+      "manifest": "scratch/authors/nf089/RESULT.json",
+      "manifest_sha256": "c99cc569ca6c6ac72f1ad244fbef23a8913ed575bfe2ad68ded8d551bcad7826",
+      "row_index": 1,
+      "row": {
+        "address": "0x001e3294",
+        "name": "func_001e3294",
+        "size": 236,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf089/src/summary_menu.cpp",
+        "source_sha256": "300b4dc99ebeb0ff695aa9ce7a4fdf14023b2498b6ea5048e9cd3800954e3a6a",
+        "profile": "game",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "receipt": "scratch/authors/nf089/match/final-func_001e3294/summary_menu.result.json",
+        "exit_code": 0,
+        "attempts": 9,
+        "minutes": 0.041106,
+        "residual": {
+          "target_size": 236,
+          "compiled_size": 236,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "word_offsets": [],
+          "first_difference_offset": null
+        },
+        "notes": "step5: MATCH, reduced from 11 differing bytes in five words to zero. The entry discrepancy at +0x8/+0xc/+0x10 was literal/vtable installation versus this-pointer-preservation scheduling: installing the class table in the outer lifecycle wrapper, before its natural finish_scene call, removes all three words. Factoring the complete conditional overlay visibility-call/flag-clear operation into hide_overlay then removes the two zero-temporary register differences at +0x58/+0x5c. This natural helper boundary preserves the original call order and all branches without volatile, barriers, register forcing or aliases. The constructor context remains MATCH. Default-model empty-transient-cleanup rewrite through func_00174480 remains explicitly [INFERENCE] in source; historical callee identity and concrete class/TU identities are not established by matching bytes.",
+        "needs_names": []
+      },
+      "step_row_index": 56,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf089/src/summary_menu.cpp",
+      "source_sha256": "300b4dc99ebeb0ff695aa9ce7a4fdf14023b2498b6ea5048e9cd3800954e3a6a",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf089/match/final-func_001e3294/summary_menu.result.json",
+      "receipt_sha256": "d3cb3678289bff23080041dbc6b1eff4de4d90c06a329de8d2c0880b3d4c307a",
+      "profile": "game",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001e3270",
+          "address": 1978992,
+          "size": 36,
+          "candidate_size": 36,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        },
+        {
+          "name": "func_001e3294",
+          "address": 1979028,
+          "size": 236,
+          "candidate_size": 236,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": [
+            {
+              "offset": 100,
+              "rule": "inline_nop",
+              "target": 1524864,
+              "word": "0xe1a00000"
+            }
+          ]
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": null
+    },
+    {
+      "function": "func_001137c4",
+      "address": "0x001137c4",
+      "size": 296,
+      "author": "nf099",
+      "manifest": "scratch/authors/nf099/RESULT.json",
+      "manifest_sha256": "dda9a88863ec89be61d0330034245ebd51a890b4c2e157648f3ab0be01e3071b",
+      "row_index": 1,
+      "row": {
+        "address": "0x001137c4",
+        "name": "func_001137c4",
+        "size": 296,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nf099/final/func_001137c4.c",
+        "source_sha256": "353adaef049186e4b78a203e44dad50ab74593d250d2c723790fcf6d46172934",
+        "profile": "sdk",
+        "attempts": 24,
+        "minutes": 0.0928,
+        "timing_basis": "Summed measured matcher wall time; excludes source analysis and packet generation.",
+        "receipt": "scratch/authors/nf099/match/func_001137c4-final/func_001137c4.result.json",
+        "receipt_sha256": "fd5bd2039d29cf910e292b8c5eb28feb96df7c499c70c90f301be38567274152",
+        "exit_code": 0,
+        "residual": {
+          "compiled_size": 296,
+          "target_size": 296,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "size_delta": 0
+        },
+        "notes": "step5: MATCH, 296/296 bytes under sdk and default v2. Naming the retained initialization-byte address removes the flag/name saved-register swap; precomputing real view pointers and declaring them motion/touch/sensor/auxiliary reproduces the mapped-pointer store pipeline. Baseline 29 differing bytes becomes 20, then 8, then 0. Canonical service-manager prototypes replace conflicting local copies. [INFERENCE] Historical source spelling and complete service-state nominal identity are not recovered.",
+        "diagnosis": "scratch/authors/nf099/DIAGNOSIS.json",
+        "needs_headers": [
+          "Expand include/game/input.h from the InputService two-field prefix to the complete evidenced service-owned state before adoption; current candidate embeds the exact canonical prefix in InputServiceState, with mapping at +0x2c and mapped address at +0x34.",
+          "Unify the exact copied MappedMemoryBlock declaration from src/sdk/func_00136754.c and add the shared func_0013672c/func_00121d28/global declarations to integrator-owned headers as needed."
+        ],
+        "needs_names": [],
+        "names": null,
+        "needs_harness": [],
+        "contract_conflicts": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "predecessor": {
+          "prev_source": "scratch/authors/r41289/selected/func_001137c4.c",
+          "prev_profile": "sdk",
+          "prev_receipt": "scratch/authors/r41289/match/func_001137c4/selected-sdk/func_001137c4.result.json",
+          "prev_result": "scratch/authors/r41289/RESULT.json",
+          "prev_names": null,
+          "residual_differing_bytes": 29
+        },
+        "attempt_evidence": "scratch/authors/nf099/ATTEMPTS.json"
+      },
+      "step_row_index": 57,
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf099/final/func_001137c4.c",
+      "source_sha256": "353adaef049186e4b78a203e44dad50ab74593d250d2c723790fcf6d46172934",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf099/match/func_001137c4-final/func_001137c4.result.json",
+      "receipt_sha256": "fd5bd2039d29cf910e292b8c5eb28feb96df7c499c70c90f301be38567274152",
+      "profile": "sdk",
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "functions": [
+        {
+          "name": "func_001137c4",
+          "address": 1128388,
+          "size": 296,
+          "candidate_size": 296,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ],
+      "names_requirements": [],
+      "header_requirements": [
+        "Expand include/game/input.h from the InputService two-field prefix to the complete evidenced service-owned state before adoption; current candidate embeds the exact canonical prefix in InputServiceState, with mapping at +0x2c and mapped address at +0x34.",
+        "Unify the exact copied MappedMemoryBlock declaration from src/sdk/func_00136754.c and add the shared func_0013672c/func_00121d28/global declarations to integrator-owned headers as needed."
+      ]
+    }
+  ],
+  "already_owned_or_dispositioned": [
+    {
+      "function": "func_00101714",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 0
+    },
+    {
+      "function": "func_0010e2e0",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 1
+    },
+    {
+      "function": "func_00112ae0",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 2
+    },
+    {
+      "function": "func_00137154",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 3
+    },
+    {
+      "function": "func_00139174",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 4
+    },
+    {
+      "function": "func_00143328",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 5
+    },
+    {
+      "function": "func_00147054",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 6
+    },
+    {
+      "function": "func_001470d0",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 7
+    },
+    {
+      "function": "func_0014a7e0",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 8
+    },
+    {
+      "function": "func_001524ec",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 9
+    },
+    {
+      "function": "func_0015ea0c",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 10
+    },
+    {
+      "function": "func_00170e58",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 11
+    },
+    {
+      "function": "func_0017a5f0",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 12
+    },
+    {
+      "function": "func_0017e764",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 13
+    },
+    {
+      "function": "func_00185a88",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 14
+    },
+    {
+      "function": "func_00192afc",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 15
+    },
+    {
+      "function": "func_001af370",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 16
+    },
+    {
+      "function": "func_001af554",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 17
+    },
+    {
+      "function": "func_001af59c",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 18
+    },
+    {
+      "function": "func_001b376c",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 19
+    },
+    {
+      "function": "func_001b4f58",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 20
+    },
+    {
+      "function": "func_001c46c0",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 21
+    },
+    {
+      "function": "func_001c8894",
+      "reason": "Already dispositioned by c011",
+      "step_row_index": 23
+    }
+  ],
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "qualification": "Matching definitions only: whole-file exit1 does not reject an actual whole-function MATCH. Independent nonmatching functions are not imported or credited. No accepted/predecessor identity is duplicated."
+}

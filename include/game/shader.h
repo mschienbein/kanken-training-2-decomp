@@ -30,6 +30,8 @@ struct ShaderRegistry {
 extern "C" {
 #endif
 extern void func_00116f40(struct ShaderConfiguration *state, const void *binary, unsigned size);
+extern struct ShaderConfiguration *func_00117684(struct ShaderConfiguration *state);
+extern void func_00193af4(unsigned index);
 extern struct ShaderRegistry bss_002d4250;
 extern void func_0019b3b0(unsigned program, unsigned shader);
 extern void func_0019b344(unsigned program);

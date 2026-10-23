@@ -124,6 +124,7 @@ extern "C" {
 #endif
 extern void func_00155148(struct AudioVoiceGroup *group, int mode);
 extern void func_0017db3c(struct AnimationTrack *track);
+extern void func_001d4e2c(struct AnimationTrack *track);
 extern void func_0017daf8(struct AudioVoice *voice);
 extern void func_0017dae0(struct AudioVoice *voice);
 extern void func_0017e35c(struct SequencePlayer *player);

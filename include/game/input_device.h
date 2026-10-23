@@ -31,9 +31,6 @@ struct ResetStateOwner {
 };
 
 struct InputBufferState {
-#ifdef __cplusplus
-    InputBufferState();
-#endif
     void *storage;
     unsigned count, capacity;
     unsigned char enabled;
@@ -53,7 +50,6 @@ struct InputCoordinates {
 
 #ifdef __cplusplus
 struct InputDeviceState {
-    InputDeviceState();
     const InputDeviceVTable *vtable;
     InputBufferState first;
     InputBufferState second;
@@ -97,6 +93,20 @@ struct DirtyValueObject {
     unsigned char reserved14[0x58];
     unsigned short dirty;
 };
+/* [INFERENCE] Alignment handle/state prefix from the two widget tail callers;
+ * this is not an alias of the independently owned PackedTextState record. */
+struct W19AlignmentState {
+    unsigned char reserved00[0xb6];
+    unsigned char text_alignment;
+    unsigned char reservedb7[0x45];
+    unsigned char alignment;
+    unsigned char reservedfd;
+    unsigned char dirty;
+};
+struct AlignmentHandle {
+    unsigned reserved00[2];
+    struct W19AlignmentState *state;
+};
 
 
 
@@ -121,6 +131,8 @@ extern struct PoolList *func_001342f4(struct PoolList *list);
 extern struct PoolList *func_00144970(struct PoolList *list);
 extern struct DisplayBufferState *func_0014ee44(struct DisplayBufferState *buffer);
 extern void func_00152624(struct DirtyValueObject *object, const struct PackedPosition *value);
+extern void func_0015e78c(struct AlignmentHandle *alignment, unsigned value);
+extern void func_0015e830(struct AlignmentHandle *alignment, unsigned value);
 #ifdef __cplusplus
 }
 #endif

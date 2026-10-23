@@ -202,6 +202,8 @@ extern void func_0017a558(struct LayoutParameterBase *state);
 extern void func_001c5978(struct AudioChannelState *state, unsigned int value);
 extern void func_001da0fc(struct LayoutParameterBase *state, float width, float height);
 extern void func_001cf6dc(struct LayoutDrawPane *pane, struct LayoutRenderContext *context);
+extern unsigned int *func_001c5140(unsigned int *output, unsigned int **patch,
+                                  const void *source, unsigned int bytes);
 #ifdef __cplusplus
 }
 #endif

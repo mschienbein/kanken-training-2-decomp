@@ -4,6 +4,9 @@
 #include "game/font.h"
 
 #ifdef __cplusplus
+#include <preinclude.h>
+#include <nw/font/font_WideTextWriter.h>
+
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
 struct TextWriterState;
 struct TextBounds;

@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "branch": "c011-r4",
+  "base_commit": "cee741947e3b073b352d171059096197f37037cb",
+  "status": "all-nine-prereview-findings-closed-by-NEW-only-deferral; awaits-finalized-predecessor-rebase-and-Main-gates",
+  "candidate_manifest": "config/candidates/c011.json",
+  "summary": {
+    "new_deferral_functions": 15,
+    "new_deferral_bytes": 2532,
+    "inherited_c011_deferrals": 84,
+    "inherited_c011_deferral_bytes": 17228,
+    "total_c011_deferrals": 99,
+    "total_c011_deferral_bytes": 19760,
+    "c009_owned_font_deferrals": 4,
+    "c009_owned_font_deferral_bytes": 144,
+    "c009_font_deferrals_counted_as_new_c011": false,
+    "retained_new_functions": 88,
+    "retained_new_bytes": 12244,
+    "preserved_moves": 10,
+    "move_bytes": 984,
+    "candidate_units": 80,
+    "candidate_claims": 98,
+    "candidate_bytes_including_moves": 13228,
+    "reproof_runs": 61,
+    "reproof_exit_0": 61,
+    "reproof_functions_match": 61,
+    "reproof_matched_bytes": 5028
+  },
+  "findings_disposition": "scratch/integrator/c011/FINDINGS-DISPOSITION-r1.json",
+  "new_deferrals": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json",
+  "reproof": "scratch/integrator/c011/r4/REPROOF-r1.json",
+  "remaining_heavy_commands": "scratch/integrator/c011/r4/REMAINING-HEAVY-COMMANDS.json",
+  "previous_handoff": "scratch/integrator/c011/HANDOFF.json",
+  "previous_handoff_immutable": true,
+  "protected_identity_deferrals": [],
+  "predecessor_form_changes": [
+    "Opaque FontVTable; data_00223d98 retains that opaque type.",
+    "All GraphicsConverters slots/providers/initializer use float(float).",
+    "Prepared c009-r5 W20 getter source forms restored; no native-WideTextWriter callable declaration retained.",
+    "Four c009-r5 font holds removed from the inherited stale c009 manifest, quarantined here only to avoid resurrecting them; they are NOT c011 deferrals."
+  ],
+  "dependencies_on_unfinalized_contracts": [
+    "Rebase the candidate transaction on finalized c009-r5 and corrected/finalized c010; do not merge the stale ancestor wholesale.",
+    "Reconcile the separately owned c010 font GlyphWidths/FontResource cache fields against the final c010 source; FontVTable/data_00223d98 must stay opaque.",
+    "Four c009-r5 NEW font-wrapper holds (144 B) remain c009-owned; do not re-add or charge them to c011.",
+    "Recompute candidate ledger, moves, R1/header dependencies and unique emitted owners on the actual finalized predecessor."
+  ],
+  "unexercised": [
+    "whole-ledger G3/argcheck",
+    "full emitted ownership",
+    "two fresh builds",
+    "suite",
+    "prepare",
+    "independent acceptance reviews",
+    "finalize",
+    "push"
+  ],
+  "source_policy": "Held sources/headers retain their original content under scratch/integrator/c011/deferred-r4 and are absent from the candidate compilation tree. Contract recovery is explicitly not claimed for any held family."
+}

@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/func_0010bed4.c",
+  "source_sha256": "62e0f084508ac18377a7267da1306e6c0d63344ae02fa55150c256e8a8bedfa6",
+  "profile": "game",
+  "credited_functions": [
+    "func_0010bed4"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/func_0010bed4.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/020-func_0010bed4"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.145575,
+  "stdout": "MATCH    func_0010bed4 @ 0x10bed4 size 0x20/0x20 [armlink5-inline-branchnop-v6: 1 branchnop]\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/020-func_0010bed4/func_0010bed4.result.json",
+  "result_sha256": "15c13958eb23ab4f38494e1bc97da89eb39f297f2b5416a3b0c604abda0fb79c",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_0010bed4",
+      "status": "match",
+      "size": 32,
+      "candidate_size": 32,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

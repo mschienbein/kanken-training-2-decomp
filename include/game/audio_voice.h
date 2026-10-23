@@ -253,6 +253,9 @@ struct TaskPool;
 extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
+extern void func_001d9178(struct AudioVoice *voice, int increment);
+extern void func_001d9530(struct AudioVoice *voice);
+
 /* [INFERENCE] Factory channel/priority words and callback/context are distinct
  * from the lower AudioVoiceGroup allocator's callback. The context remains a
  * pointer because the original delivered callback dereferences it. */
@@ -390,7 +393,6 @@ struct GraphicsConverters {
     float (*random)(float phase);
     unsigned char reserved14[0x1ec];
 };
-
 extern struct GraphicsConverters bss_004b8440;
 extern struct AudioCounter *func_00156dac(struct AudioCounter *counter);
 extern unsigned int func_00180418(void);
@@ -424,6 +426,14 @@ extern void func_001525f0(struct AudioChannel *channel, int enabled);
 extern void func_001d4a48(struct AudioVoiceGroup *group, unsigned mode);
 extern void func_001d4aac(struct AudioVoiceGroup *group);
 extern void func_0015274c(struct AudioChannel *channel, float gain);
+extern void func_00150124(struct AudioVoiceGroup *group);
+extern unsigned func_0014fe14(float value);
+extern void func_0014fbec(struct AudioChannel *channel, unsigned frequency);
+extern void func_0015263c(struct AudioChannel *channel,
+                          const struct AudioBiquadCoefficients *parameters);
+extern void func_001526b4(struct AudioChannel *channel, int mode);
+extern void func_0014eec8(struct AudioVoiceGroup *group);
+extern void func_0014f114(struct AudioVoiceGroup *group);
 extern void func_00154224(struct HandleManager *array);
 extern void func_0014603c(struct HandleManager *owner);
 extern short *func_0016504c(struct SequencePlayer *player, int index);

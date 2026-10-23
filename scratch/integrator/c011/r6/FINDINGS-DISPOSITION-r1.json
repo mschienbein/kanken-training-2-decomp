@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "review_record": "scratch/prereview/c011-r5/PREREVIEW.json",
+  "review_sha256": "2e86c2c168b1da85858f3698d8ab55f12c12915e87d22f2aafa621d42f6b3a37",
+  "review_verdict": "FAIL (unregistered prereview; immutable)",
+  "seal": "scratch/prereview/c011-r5/SEAL.json",
+  "seal_sha256": "fd241311833edc3479ddf0075abdd2f3b58c9cea08e16958a5b98cfbf3ab8c7d",
+  "findings": [
+    {
+      "id": "C011R5-F01",
+      "disposition": "NEW-only-deferral",
+      "function": "func_00185934",
+      "deferred_bytes": 312,
+      "action": "The new native loader virtual lookup reaches accepted C func_001f27c0 through the real secondary-base address point and thunk. PlayerHeapDataManager const/unsigned/const-void* and ObjectLookupW19G/signed/mutable-void* are not a genuine shared contract. Hold the NEW caller and remove its c011-only native binding; accepted providers and canonical native headers stay unchanged.",
+      "retained_provider_reproof": [
+        {
+          "source": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_PlayerHeapDataManager.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/r6/matches-r1/3540-snd_PlayerHeapDataManager__PlayerHeapDataManager_PlayerHeapDataManager/snd_PlayerHeapDataManager__PlayerHeapDataManager_PlayerHeapDataManager.result.json",
+          "result_sha256": "ad0ca5ff7133ffb14f362a77a5c880b64e99d538e7474b1c924a179d611e123d"
+        },
+        {
+          "source": "src/wave19/func_001f27c0.c",
+          "exit_code": 0,
+          "result": "scratch/integrator/c011/r6/matches-r1/4792-func_001f27c0/func_001f27c0.result.json",
+          "result_sha256": "358ad28a90fe303d2ffd84092f71ff4f6f882c5400b07c2239de458e8896c256"
+        }
+      ],
+      "reproof_exit": null,
+      "reproof_note": "The withdrawn NEW caller is not claimed re-proved; all current required functions, including unchanged real provider/constructor owners, MATCH in the final complete sweep. No accepted contract recovery is claimed.",
+      "evidence": [
+        "scratch/prereview/c011-r5/NATIVE-RECEIVER-FLOW-r4.json",
+        "scratch/prereview/c011-r5/CALLABLE-EVIDENCE.json",
+        "config/candidates/c011.json",
+        "config/names.json",
+        "scratch/integrator/c011/r6/NEW-DEFERRALS-r1.json"
+      ]
+    },
+    {
+      "id": "C011R5-F02",
+      "disposition": "NEW-only-deferral",
+      "function": "func_00137154",
+      "deferred_bytes": 408,
+      "action": "The new upload calls func_00182d9c, an explicitly contract-resolution-held texture-parameter endpoint. Exclusion of the wrapper alone does not isolate its unresolved binding/catalog contract. Hold the NEW upload and quarantine its now-unused upload facade; do not cast or revive old texture shadows.",
+      "reproof_exit": null,
+      "reproof_note": "The removed upload and its held dependency stay uncredited; final metadata inspection proves no remaining candidate reference to the combined224 holds. Final complete current-scope reproof is2667 exit0.",
+      "evidence": [
+        "scratch/prereview/c011-r5/OWNERSHIP-AND-HOLDS-r3.json",
+        "scratch/integrator/c011/r6/CONTRACT-DEPENDENCIES-r1.json",
+        "scratch/integrator/c011/r6/NEW-DEFERRALS-r1.json"
+      ]
+    }
+  ],
+  "additional_Main_approved_sweep_dispositions": [
+    {
+      "id": "C011R6-SWEEP-01",
+      "function": "func_001911f0",
+      "disposition": "NEW-only-deferral",
+      "deferred_bytes": 92,
+      "action": "The new ChannelCommand writes a byte through reinterpret_cast<unsigned char*>(&StreamEvent::object). Main explicitly forbids this byte-storage access and approves a NEW-only hold, not an out-of-scope variant overlay or accepted hierarchy rewrite.",
+      "actual_reproof_exit": null
+    },
+    {
+      "id": "C011R6-SWEEP-02",
+      "function": "func_001d2f90",
+      "disposition": "NEW-only-deferral",
+      "deferred_bytes": 88,
+      "action": "Following the c010-r7 real-derived-event repair, placement-construct the real SequenceAuxiliaryEvent directly in correctly sized arena storage instead of downcasting a StreamEvent view. The honest form exits1 (candidate92/catalogue88 bytes; first semantic offset+0x25). Main explicitly authorizes a NEW-only hold when this genuine repair is not exact; no steering or unchanged retry.",
+      "actual_reproof_exit": 1
+    }
+  ],
+  "current_source_admission_status": "Both sealed blockers isolated by NEW-only holds; original accepted provider disagreements are not declared repaired. No current predecessor-retained identity is withdrawn."
+}
