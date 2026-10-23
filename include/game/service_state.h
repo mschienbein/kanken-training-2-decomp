@@ -21,6 +21,7 @@ struct X07NarrowCommand;
 struct MountedDevice;
 
 #include <stdbool.h>
+#include <stddef.h>
 #include "ctr/svc.h"
 #include "game/pool_list.h"
 #include "game/service_callbacks.h"
@@ -109,6 +110,10 @@ extern "C" {
 extern struct ServiceState data_00242a50;
 extern struct ServiceClientState data_00242c18;
 extern struct ServiceStringCounts data_002430e4;
+extern char bss_004b4a6c[][0x40];
+extern size_t func_0019de40(char *destination, const char *source, size_t capacity);
+extern void func_00136450(const char *first, const char *second, const char *third,
+    const char *fourth, const char *fifth);
 extern void func_0010b5cc(void *context);
 extern struct ServiceContext data_002430e0;
 extern struct PendingState data_00242a28;

@@ -1,153 +1,196 @@
-# c011-r8 candidate — folded intake, callback closure and qualifications
+# c011-r9 candidate — canonical interfaces and folded c013/c014 intake
 
-This is an **unaccepted candidate** based on **c010-r8 `f78df906`**, merging
-c011-r7 `8359b859` and intake branch c013 `6b438040`. **C013 is folded into c011;
-there will be no separate c013 checkpoint.** Its active manifest and standalone
-known-issues document are removed. Its immutable evidence and original document
-are archived under `scratch/integrator/c011/r8/folded-c013/`; their old internal
-paths describe the historical intake context, not current gate inputs.
+This is an **unaccepted single candidate** descending from c011-r8 `f9ea308e`.
+It retains c013's earlier fold and now merges **c014 `479eb7f4`** into c011.
+**No separate c013 or c014 checkpoint exists.** Historical intake manifests,
+documents, agreements and proof records are archived unchanged under the r8/r9
+fold directories; their old internal paths and checkpoint order are provenance,
+not current gate inputs.
 
-Finalized c009-r6, denominator **v13-r2**, frozen gates **v1.19**, and explicit
-**armlink5-inline-branchnop-v6 / anonymous-string-records-v1** remain. Main must
-finalize the applicable c010-r8 and recheck the exact source composition before
-preparing this single c011 candidate. No acceptance record or history is revised.
+The accepted predecessor is finalized **c010-r8: 2,682 functions / 288,580 B**.
+Main has adopted **GATES v1.20**. This author branch leaves its historical gate
+files untouched and selects only the unchanged **armlink5-inline-branchnop-v6 /
+anonymous-string-records-v1** algorithms. Integration must retain Main's adopted
+v1.20 files; no U1/v18 selection or gate-design change is proposed here. The
+interfaces checker used here is byte-identical to Main's failed-merge checker.
+Denominator remains **v13-r2**.
 
-## Current scope and ownership
+## Current combined scope
 
-- **71 candidate units / 88 claims:** **79 NEW functions / 11,080 B**, plus
+- **81 candidate units / 98 claims:** **89 NEW functions / 12,716 B**, plus
   **9 explicit stable-identity moves / 872 B**. All claims are ordinary creditable
-  functions under the frozen catalogue.
-- All **2,682 c010-r8 retained predecessor identities / 288,580 B** survive.
-  The proposed ledger contains **2,685 units / 2,761 functions / 299,660 B**,
-  including all **24 helper-only units**. These are proposed figures, not credit.
-- Folded intake adds **3 NEW / 908 B**: `0012e68c` (296 B, middleware),
-  `0010aa28` (280 B, game), `001c65e4` (332 B, game). Existing source paths under
-  `src/checkpoint13/` are retained as provenance; they are owned only by the c011
-  manifest. There are no intake moves or new name bindings.
-- Prior **111 c011 holds / 21,832 B** survive. Four intake holds / 844 B add only
-  **3 distinct holds / 516 B**, because `001d01dc` was already held. Current
-  **c011: 114 holds / 22,348 B**. With **94 c010-r8 holds / 8,404 B** and
-  **28 c009 holds / 3,588 B**, there are **236 distinct combined holds**.
-- The nine move origins match current c010-r8 owners; four emptied source paths
-  stay absent. `00155ab4` remains at its prepared c010 owner. Accepted bank
-  accessor `001f4500` remains solely at `src/wave9/func_001f4500.c`; no nm01 TU,
-  native duplicate, speculative bank overlay or implicit move is admitted.
+  functions, not classified runtime or library credit.
+- The current proposal is **2,695 units / 2,771 functions / 301,296 B**, including
+  all **24 helper-only units**. Every accepted identity survives. Four emptied
+  move-source paths are absent; `00155ab4` stays at its accepted c010 owner.
+- C013 contributes **3 NEW / 908 B**; C014 contributes **10 NEW / 1,636 B** with
+  no extra moves. Existing `src/checkpoint13/` and `src/checkpoint14/` paths are
+  owned only by the combined c011 manifest, not separate checkpoints.
+- C011 has **116 distinct holds / 22,532 B**. C014's three holds / 604 B add only
+  **two distinct holds / 184 B**, because `001ae140` was already held. C009's
+  **28 / 3,588 B** and c010-r8's **94 / 8,404 B** remain predecessor-owned:
+  **238 combined distinct holds**. No rejected body or speculative name overlay
+  is reintroduced.
 
-Current evidence entry point: `scratch/integrator/c011/r8/HANDOFF.json`.
-`FOLD-C013-r1.json` maps every archived intake record without rewriting its bytes.
-Only the r8 proposed ledger, source bindings, matcher/rewrite closure and Main
-commands are current; old c013/c011-r7 proposals are not standalone gate inputs.
+Current entry point: `scratch/integrator/c011/r9/HANDOFF.json`. **Use
+`PROPOSED-LEDGER-r2.json` and the r2 complete proof/rewrite scope.** The earlier
+`PROPOSED-LEDGER.json` and `PRE-C014-REPROOF-r1.json` preserve the smaller scope
+before Main added the c014 fold; they must not drive combined gates.
 
-## C010-r8 rebase and exact callback repair
+## Main interfaces FAIL remediation
 
-The generic array callbacks `0014d664`/`001c4b10`, sound-loader thread entry and
-three generic atexit callbacks retain c010-r8's exact invoking protocols. Its
-five additional NEW-only holds (`0014b54c`, `00107ce4`, `0014b85c`, `001d4078`,
-`001e5a20`) remain excluded. No c011 object references a held identity or any
-of the six revised c010-r8 provider bodies. All inherited predecessor bindings
-and current canonical declarations remain.
+The immutable merge-main result reported **one ODR disagreement and eight
+inline-declaration policy items**. It was not rerun unchanged to challenge it.
 
-The parent `RUNTIME-CALLBACK-CLOSURE.json` exposed a real intake mismatch:
-original caller `00104e9c`, site `00104f3c`, registers `0010aa28` through runtime
-`0019dd50`, whose callback type is **`void(void *, void *)`**. The delivered
-one-input declaration was not sufficient. The actual worker definition and
-`game/runtime.h` now retain **both argument and context**, with the unused second
-input explicit. The accepted `ThreadStartContext.entry` and `0012d104` invoker
-supply those same two inputs. A bounded preprocessed C type comparison proves
-both declaration and definition exactly equal the runtime's structural type key.
-Focused and final complete byte proofs **MATCH 280/280**, exit 0. No alternate
-thread runtime, callback cast or fabricated return is introduced.
+### Distinct choice objects, not a layout alias
 
-The worker still uses the canonical completed BufferOwner ring: signed indices,
-256 CopyRequest entries, existing buffer/count/owned/state/active fields, stop
-flag and WorkerThread tail. It clears active only after draining and returns on
-stop without clearing it. Captured SignalState and field roles remain
-`[INFERENCE]`; signed-length copying and existing invalid-input behavior are not
-changed by added validation or synchronization.
+C011's data record is now **ChoiceGridState**, with the same fields and offsets;
+only its descriptive type name and matching function declaration/definition
+change. The accepted polymorphic **ChoiceController** in
+`src/checkpoint10/func_0015e8c4.cpp` is untouched.
 
-## Callback/slot providers: exact where known, qualified where opaque
+The distinction has actual receiver-role evidence: in original context
+`001b3434`, word zero of the incoming data receiver is loaded at `001b34fc` and
+supplied as the scalar divisor to `__aeabi_idivmod` at `001b3504`; the table
+pointer is read at `+0x7a4`. C011 `001b376c` accesses the 23-entry, 0x54-stride
+array at `+0x18`. The accepted ChoiceBinding consumer instead dereferences the
+controller's word zero as its virtual table and calls setActive. A generic
+invented name never established one object identity. No base/derived relation,
+vptr reinterpretation, cast or second model of the accepted class is asserted.
+The grid name/roles remain `[INFERENCE]`; the uncredited context is semantic
+field evidence, not a claimed full-function MATCH or CFG proof.
 
-Main explicitly ruled that an unrecovered invoker alone does **not** require a
-hold when the table remains opaque, no selected source invokes through its
-storage, no provider native identity is claimed, body/direct-caller types are
-evidenced, and no new integer/function-pointer initializer cast is introduced.
-These three rows therefore remain credited **QUALIFIED**, not silently compatible:
+### One canonical declaration per credited interface
 
-| Provider | Storage | Per-row qualification |
+All nine reported local-declaration sites were removed in favor of existing
+canonical headers, except the missing `00138274` declaration, which is now in
+`game/applet.h` and included by its definition. Exact normalized types agree.
+
+The required whole-scope sweep also found **six additional declaration sites**
+whose providers are C++ and therefore escaped the C-only definition check:
+`0010bff4`, `0010c0a4`, `0015e830`, `00139174`, `001835b8`, and folded getter
+`00192a7c`. Their callers now use the canonical headers too. The application
+configuration and service-client headers expose only their real shared scalar
+C APIs to C, keeping C++ implementation declarations guarded.
+
+**13 accepted caller units** have declaration-only revisions; their function
+body token hashes remain identical and each re-proves MATCH. The old local
+`00139174` declaration incorrectly returned int; the actual provider/shared
+header returns unsigned. The accepted forwarding caller keeps its own public
+int result while using the correct callee declaration and still MATCHes.
+Including c014's coherent field/type cutovers, **31 surviving accepted source
+units / 31 functions** are revised and require renewed acceptance review.
+
+The final scoped sweep covers **410 qualified class/struct/union identities**
+from c011/c014 sources and changed headers, compared against every project
+header and selected C/C++ source. Namespace/template/local identities are
+respected. It finds no differing definitions or remaining local C++ declarations
+of c011-credited functions. The source declaration search has only an unselected
+old texture attempt and two ordinary call statements, not live declarations.
+
+## Exercised whole-ledger interfaces gate
+
+Main granted the exclusive heavy slot for **exactly one combined run**:
+
+**Exit 0 — 0 disagreements, 0 policy items, 2,695 units.**
+
+All 734 unchecked entries are the explicitly allowed C++ coverage limitation;
+there is no C parse/preprocess error. This is a real whole-ledger result, not the
+bounded pre-review or the scoped metadata sweeps. The request, grant, command,
+output hashes and immediate atomic release are retained in r9. No second heavy
+command was run and no failing result was overwritten.
+
+## Folded c014 integration and TaskPool ownership
+
+The ten units retain their frozen profiles and natural partitions:
+`001f29b4`, `00122360`, `00154674`, `00136450`, `00192a7c`, `00157500`,
+`0018191c`, `001acb38`, `0014cc1c`, `0014242c`.
+
+- Serialized byte parameters use the pinned typed Util::Table/reference
+  interfaces, not a synthesized indexed byte displacement. Seven-byte output,
+  narrowed count and original unchecked reference behavior remain qualified.
+- Aligned spans share AlignedBuffer; the unrelated LinearBuffer allocator is
+  not aliased to it. Service string records/copy declarations and the real
+  handle-bearing object plus checked `+4` handle word are shared.
+- HWR records are canonical, preserving the invalid-template sentinel and
+  fixed 32-slot backshift. Image activation uses canonical W10DrawingInput,
+  unsigned shared fields and a signed local snapshot; Resource(1,3) reaches the
+  actual image initializer. Menu modes extend only the evidenced W23FlowScreen
+  prefix, not a private replacement class.
+- DSP settings are the **real AudioDspSettings subobject at parent +4**. Every
+  prior width/offset and the volume subobject survive; all fourteen typed users
+  migrate coherently, including the c011 moved helper destination. No cast to
+  an AuxiliaryFilterMode shadow or changed access width is used.
+- Mapped memory uses the actual writable MappedMemoryBlock and all five raw
+  service inputs. The borrowed operation is not another mapping-record model;
+  numeric mapping-address conversion is intentional.
+
+The exact shared **`game/task_pool.h`** model agreed with c012-r4 remains
+byte-identical (SHA-256 `fdecc7599595eac61674d0984c21cb87d742d9cac4a8cd9b068972daf404115c`):
+initialized byte, padding, active list at `+4`, available list at `+0x10`.
+**0x1c is only the known prefix, not an allocation extent.** Both old accepted C
+prefix copies are removed; canonical PoolList/PoolLink and actual
+AudioVoiceGroup.link entries are used, never a native-list alias.
+
+**`0017e764` remains c012-owned: no active c011 definition, extra source or
+credit.** Its previously held *interface* is now closed by this shared prefix,
+the two accepted-client type migrations, explicit Main/peer agreement and the
+historical private 44-B witness. Its body/credit remain external. This is the
+one explicitly adjudicated credit-held external call, not a silently unresolved
+contract-held dependency. `0017df84` remains held for the separate unresolved
+queue/signal contract.
+
+Accepted `0015477c` retains its old offsetof/byte-subtraction owner recovery;
+its body is unchanged. This is separately recorded inherited attention, not a
+new approval or a reason to overwrite a later ctypes1 correction. The private
+archived pool witness is evidence only, never a combined matcher input.
+
+C014 holds remain: `001ae140` (420 B, descriptor/NameTable hierarchy; deduped),
+`0014aa94` (96 B, game/native Material bridge plus unmatched context), and
+`0017df84` (88 B, unresolved held queue endpoint/signal family). No matching
+companion is duplicated. Accepted `001f4500` retains its sole original C owner.
+
+## Callback and source qualifications retained
+
+The worker `0010aa28` keeps the exact **void(void*,void*)** runtime protocol,
+including its unused context. The folded channel callback `00154674` implements
+**void(AudioChannel*,AudioVoiceGroup*)** and invokes the nested group callback as
+**void(AudioVoiceGroup*,int,void*)**. Native Signal2/Slot2 factories construct
+empty canonical storage; no concrete slot provider or erased callback is added.
+Compiler-generated native static lifetimes remain distinct from hand-cast C
+callbacks, with their R1 provenance qualified.
+
+Main's honest-under-specification ruling remains per row:
+
+| Provider | Storage | Qualification |
 | --- | --- | --- |
-| `001d033c` | `002245ec + 0x1c` (`00224608`) | **Invoking population and protocol unrecovered; address stored only.** Storage stays the existing opaque unsigned array. The own C body is `void(LinkedOwner *)`, forwarding its actual OwnedLink field to the matching C helper. No callable slot completion, selected typed invocation, native alias or new function-address initializer is introduced. |
-| `001d222c` | `002246b8 + 0x1c` (`002246d4`) | **Invoking population and protocol unrecovered; address stored only.** The own C body/direct helper share LinkedView pointers and void result; the existing table stays opaque. No native identity, callable table completion, selected invocation or pointer/integer cast is added. |
-| `001c8894` | `002434ec` | **Invoking population and protocol unrecovered; address stored only.** The provider's actual body uses `IAllocator *`, a real ResShape value and void result. No source table declaration/completion, selected table invocation, native provider alias or new function-address initializer is introduced. |
+| `001d033c` | `002245ec+0x1c` | **Invoking population and protocol unrecovered; address stored only.** Existing opaque array; body/direct C helper types evidenced; no callable completion, selected table invocation, native identity or new integer/function-pointer initializer cast. |
+| `001d222c` | `002246b8+0x1c` | **Invoking population and protocol unrecovered; address stored only.** Same explicit conditions; LinkedView body/helper protocol is not guessed from a virtual slot. |
+| `001c8894` | `002434ec` | **Invoking population and protocol unrecovered; address stored only.** Real allocator/resource-value body, no source table completion or native provider alias. |
 
-A fresh allocated-data function-address census finds exactly these three scoped
-storage candidates, with only addresses and hashes recorded. It does not infer
-neighboring extents, homogeneous slot signatures or a native class from proximity.
-The original storage is unchanged. Each condition and body/direct-helper witness
-is explicit in `CALLBACK-SLOT-CONTRACTS-r1.json`.
+All previous bank/list/result/native-facade, texture, event, pool, font and audio
+holds remain. The language/service-handle `__current_pc` uses remain approved
+intrinsic qualifications; the language-below-32 assumption, fixed string-table
+capacity, discarded history and other `ORIGINAL BUG:` behavior are preserved.
+SDK/middleware profiles are byte witnesses, not historic ownership certificates.
+Helper/type/TU names and incomplete dynamic populations remain `[INFERENCE]`.
+No accepted family is declared recovered merely because a NEW caller is held.
 
-Other known callable interfaces retain their actual types: the four-input release
-callback, genuine native allocator calls and FxDelay methods, and native static
-Pair/Scalar lifetime registration on their real classes. Compiler-generated
-native constructor/destructor ABI is distinguished from ordinary C callback
-providers; no source-level callback conversion or guessed class is used. Native
-R1 lifetime/registration provenance remains qualified.
+## Complete proof and remaining Main work
 
-## Folded native signal and language integration
+The final **combined** proposal ran **2,671 sequential niced single-process
+`tools/match.py --show 0` commands, all exit 0**; all **2,771 required functions
+MATCH**, with all **24 helper-only definitions** supplied in natural contexts.
+No `0017e764` body is supplied or compared. The earlier 2,661-command r9 pass
+predates the c014 scope addition and is preserved as such; **5,332 actual matcher
+commands total, all exit 0**. The current complete rewrite projection uses only
+the final combined receipts and has `scope_complete=true`.
 
-`TransformNode::CreateCallbacks` uses canonical Signal2/Slot2 types. The known
-slot protocol is **`void(TransformNode *, SceneContext *)`** on its genuine native
-Slot2 receiver. No concrete slot provider or function-address array is imported:
-the new factory creates empty canonical signal storage, using its existing
-allocator and slot-list interfaces. The wrapped/variable MoveArray constructors
-initialize fresh capacity storage before their existing setters; there is no
-source-local specialization or second Signal/TransformNode model. Eventual
-external provider populations remain unrecovered, not declared compatible.
-
-The language selector uses `game/language.h` for the existing constant byte,
-actual shared result/service interfaces and source-level regional masks. Approved
-`__current_pc` use remains explicit. **`ORIGINAL BUG:`** the configured language
-is assumed below 32. Region/helper/TU identity and middleware ownership remain
-`[INFERENCE]`; other compiler profiles are not claimed remeasured.
-
-## Folded intake holds
-
-| Identity | Bytes | Preserved boundary |
-| --- | ---: | --- |
-| `001d9820` | 156 | Competing ConstructedPaneObject/AudioVoice construction and member/registration/timing owner models; no allocation-result cast or native alias. |
-| `001d01dc` | 328 | Already a c011 hold. Native SoundArchive count/reader would alias a retained C ArchiveHandle provider; Window context also remains unreconciled. Counted once. |
-| `001f4408` | 180 | Bank chunk/reference decoder still uses forbidden byte-offset resolution and unproved serialized array extents. No nm01 overlay or accessor duplicate admitted. |
-| `001f46d0` | 180 | Same unresolved bank decoder; tag-evidenced casts do not waive its separate storage/extent obligations. |
-
-All earlier bank/list/result/native-facade, font, texture, event, owner, pool and
-audio exclusions remain. Genuine canonical ServiceResult attempts that failed
-in r7 stay failed evidence; no held implementation or alias is reintroduced.
-
-## Exercised complete proof and Main boundary
-
-The final complete proposal ran **2,661 sequential, niced, single-process
-`tools/match.py --show 0` commands**, all **exit 0**. All **2,761 required functions
-MATCH**, with all **24 helper-only definitions** supplied in natural contexts,
-under frozen profiles and explicit v6/L1. The separate exact-worker focus also
-exited 0: **2,662 actual matcher commands, all exit 0**. The final source-bound
-rewrite projection is **`scope_complete=true`**; this is not a two-fresh-build G4
-certificate. Every runtime.h/MoveArray dependent is covered by the full sweep.
-
-Fresh object inspection finds no new defined vtable, no C/native facade edge and
-no candidate references to any of the 236 holds or revised parent provider
-bodies. Known runtime provider contracts are compared against the frozen parent
-closure; opaque rows retain Main's exact qualification above. Published metadata
-omits fixed instruction encodings and retains untouched raw receipt hashes.
-
-R1 helper identity/call graph remains `[INFERENCE]` with QUALIFIED review rows.
-L1 proves only its witnessed literal span, not complete historical pool extent,
-order, ownership or data credit. Native aliases, partial extents, preserved bugs,
-ARMCC extensions and C-only MUST-discard callback qualifications remain. No
-accepted bank/list/result/scene/font family is declared recovered by exclusion.
-
-No whole-ledger interfaces/argcheck, full build, suite, prepare, review registration,
-finalize, push, subagent or task tool ran here. Main must finalize the applicable
-c010-r8, integrate this complete single-candidate transaction, run/adjudicate
-serialized whole-ledger gates including unchecked C++ and unique emitted
-ownership, prepare with two fresh builds/the suite, and obtain two independent
-bound reviews. Exact commands are in `r8/REMAINING-HEAVY-COMMANDS.json`. Input or
-composition drift requires fresh affected proof under unused immutable names.
+The requested one interfaces check was exercised as reported above. No argcheck,
+full build, suite, prepare, review registration, finalize, push, subagent or task
+tool ran here. Main must integrate the complete committed source, retain adopted
+gates/tools, adjudicate the C++/opaque/inherited attention, run complete-rewrite
+argcheck, prepare with two fresh complete builds/the suite, and obtain two
+independent bound reviews. Exact current commands and immutable paths are in
+`r9/REMAINING-HEAVY-COMMANDS.json`; any compiler-input or composition drift needs
+new affected proof and, for another heavy run, a new Main grant.

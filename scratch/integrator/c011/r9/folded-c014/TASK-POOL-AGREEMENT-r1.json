@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "main_authority": "Main explicitly agrees 0017e764 stays c012-owned, 0017df84 stays held, and c014 TaskPool lands before c012-r4; require one model and both handoffs to record agreement.",
+  "checkpoint_order": [
+    "c011",
+    "ctypes1",
+    "c014",
+    "c012"
+  ],
+  "coordinating_agent": "C012R3Codex",
+  "peer_worktree": "scratch/worktrees/c012-r4",
+  "peer_base": "main 5820254f",
+  "model_path": "include/game/task_pool.h",
+  "model_sha256": "fdecc7599595eac61674d0984c21cb87d742d9cac4a8cd9b068972daf404115c",
+  "identical_to_existing_c012_header": true,
+  "full_definition": "struct TaskPool {\n    unsigned char initialized;\n    unsigned char reserved01[3];\n    struct PoolList active;\n    struct PoolList available;\n};",
+  "layout": {
+    "initialized": 0,
+    "active": 4,
+    "available": 16,
+    "known_prefix_bytes": 28,
+    "allocation_extent_claimed": false
+  },
+  "list_contract": "Canonical PoolList: unsigned count@0, PoolLink sentinel@4; PoolLink has next/previous. Entries are the real AudioVoiceGroup.link subobject at +0x58, never a native Voice/LinkList alias.",
+  "migrated_C_prefix_definitions": [
+    "src/wave16/func_00153fec.c: removed former local TaskPool lines6-9, now obtains model through audio_voice.h -> task_pool.h",
+    "src/wave16/func_0015477c.c: removed former local TaskPool lines6-9, body unchanged, now obtains the same model transitively"
+  ],
+  "required_context_ownership": [
+    {
+      "checkpoint": "main",
+      "commit": "b79fdeb4203280011efe12c7279645dbfa508d1e",
+      "manifest_sha256": "803a40239d6b1081ba75df8739cd94ff213669da55bf9c1f2426af14cec6585a",
+      "owners": []
+    },
+    {
+      "checkpoint": "c010-r8",
+      "commit": "f78df90632d86c1f48eb90b4ca2aacc5a23b50bc",
+      "manifest_sha256": "45a029c5b5e9dc00cfd701b091659182bbb32ed417dcacd4d4f3209ac819da53",
+      "owners": []
+    },
+    {
+      "checkpoint": "c011-r8",
+      "commit": "f9ea308e21e3d9faa439631ac56189e3b28e62d2",
+      "manifest_sha256": "5fd539085d5b40fa7e28f784a108a37d78e0b61d4ce46da96ca0444d16c20b43",
+      "owners": []
+    },
+    {
+      "checkpoint": "c012",
+      "commit": "25dec8449af91cc2416c44027dd5b85e4e6123de",
+      "manifest_sha256": "0c53238d0b6b647a47a32da41dc8be873c4c65a63fb80fbda71793f05045f786",
+      "owners": [
+        "src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp"
+      ]
+    },
+    {
+      "checkpoint": "cmodels2-r4",
+      "commit": "62f3ff4b8cad28d0d47c3b03c8a070e6068983f6",
+      "manifest_sha256": "f333c30a2705591c1f7aa941540edfadd4c0122275d661582ab0c802da23e123",
+      "owners": []
+    },
+    {
+      "checkpoint": "types-compose",
+      "commit": "38b101bbcb3a041ab1cfb05a0c7074c38807271c",
+      "manifest_sha256": "b66c66ed15055645e2bda74e3d72f8baa9aaa1bde7f528ab603eb5cd6c0d1544",
+      "owners": []
+    },
+    {
+      "checkpoint": "types-compose-r2",
+      "commit": "f7ca72c56e3ebb9095e2f9b5c6def9d77f2ae30f",
+      "manifest_sha256": "1d05ec1fa5ed1905ea50721a29975df802fa134a160f005d4d5def9f8ab5ad3d",
+      "owners": []
+    }
+  ],
+  "context_source_owner": "c012: src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp",
+  "context_c014_definition_or_credit": false,
+  "interface_witness": {
+    "source": "scratch/integrator/c014/witnesses/pool_release.cpp",
+    "source_sha256": "5d143acb214764954d6b571a61e0285355376be237aa2ebbb2cb2296fd13e7f2",
+    "profile": "game",
+    "receipt": "scratch/integrator/c014/match-r2/pool-interface-witness/pool_release.result.json",
+    "receipt_sha256": "d4764d0ce7fe7729c10590da4f5f545c551e372c3c14f4e61018fd395ac0bb16",
+    "exit_code": 0,
+    "MATCH_bytes": 44,
+    "in_candidate_or_extra_sources": false
+  },
+  "canonical_fix": "The actual old 0017e764 hold was the unshared TaskPool definitions. One shared prefix and removal of both accepted C copies closes that interface gap; its body/credit remains external/c012-owned. The unrelated 0014a7e0 queue and AudioWorkRequest signal issues are not claimed repaired.",
+  "inherited_owner_recovery_attention": "Accepted 0015477c retains its pre-existing offsetof/byte-subtraction recovery. Only the type-definition source changed; this is not a new approval of that expression. Main was explicitly notified, and the c012 NEW drain must use a compliant iterator or hold.",
+  "agreement_sent_to_peer": true,
+  "agreement_acknowledgment": "Pending peer acknowledgment; record a separate immutable confirmation before commit."
+}

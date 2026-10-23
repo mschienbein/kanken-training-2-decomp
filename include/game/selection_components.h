@@ -19,6 +19,8 @@ struct W23FlowScreen {
     int stack_index;
     int modes[2];
     int previous_modes[2];
+    unsigned char reserveda4[8];
+    int mode;
 };
 struct DeferredResourceEntry16 {
     unsigned key;
@@ -50,6 +52,7 @@ extern void func_001c3d14(struct TransformTarget *const *objects, int index,
 extern void func_001adff8(struct W19SelectionPanel *panel);
 extern void func_001ae00c(struct W19SelectionPanel *panel, int count);
 extern void func_001abf24(struct W23FlowScreen *screen);
+extern void func_001acb38(struct W23FlowScreen *screen);
 extern void func_001ab680(struct W23FlowScreen *screen);
 extern void func_001737c0(struct W23FlowScreen *screen, int enabled);
 extern void func_001dcdd0(struct DeferredResourceList16 *list);

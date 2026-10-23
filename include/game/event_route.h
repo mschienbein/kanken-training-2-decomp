@@ -76,6 +76,22 @@ struct BinaryTableBlock {
     struct RelativeReference table;
 };
 
+/* Serialized byte-parameter records returned by the typed table lookup. */
+struct BinaryParameterReader {
+    unsigned reserved00;
+    const struct BinaryTableBlock *block;
+};
+struct BinaryByteParameters {
+    unsigned char channels[4];
+    unsigned reserved04;
+    int values_offset;
+};
+struct ByteParameterValue {
+    unsigned char channels[4];
+    unsigned char count;
+    unsigned char values[2];
+};
+
 
 struct BinaryVersionReader {
     const struct ArchiveFile *file;
@@ -133,6 +149,8 @@ extern unsigned *func_00165684(struct DrawCommandState *state, unsigned *command
 extern unsigned *func_001dacf8(struct DrawCommandState *state, unsigned *commands, unsigned flags);
 extern const struct BinaryReferenceTable *func_001f1f64(const struct BinaryTableBlock *block);
 extern const struct BinaryByteParameters *func_001f1f80(const struct BinaryReferenceTable *table, unsigned index);
+extern int func_001f29b4(const struct BinaryParameterReader *reader,
+    struct ByteParameterValue *output, int index);
 extern const void *func_001f22c4(const struct W12cSoundDetail *block);
 extern const void *func_001f239c(const struct BankInstrumentInfo *block);
 extern bool func_001f2a58(const struct BinaryVersionReader *reader);

@@ -1,0 +1,1194 @@
+{
+  "schema_version": 1,
+  "summary": {
+    "candidate_units": 81,
+    "candidate_claims": 98,
+    "NEW_functions": 89,
+    "NEW_bytes": 12716,
+    "moves": 9,
+    "moved_bytes": 872,
+    "folded_c014_NEW_functions": 10,
+    "folded_c014_NEW_bytes": 1636,
+    "folded_c014_holds": 3,
+    "folded_c014_hold_bytes": 604,
+    "distinct_added_c014_holds": 2,
+    "distinct_added_c014_hold_bytes": 184,
+    "current_c011_holds": 116,
+    "current_c011_hold_bytes": 22532,
+    "combined_distinct_holds": 238,
+    "accepted_predecessor_functions": 2682,
+    "accepted_predecessor_bytes": 288580,
+    "proposed_units": 2695,
+    "proposed_functions": 2771,
+    "proposed_bytes": 301296,
+    "helper_only_units": 24,
+    "retired_old_owners": 4,
+    "declaration_only_accepted_caller_units": 13,
+    "canonicalized_credited_symbols": 14,
+    "canonicalized_local_declaration_sites": 15,
+    "all_revised_accepted_source_units": 31,
+    "all_revised_accepted_functions": 31,
+    "final_combined_match_commands": 2671,
+    "final_combined_match_exit_0": 2671,
+    "required_functions_MATCH": 2771,
+    "earlier_pre_c014_match_commands": 2661,
+    "all_actual_match_commands": 5332,
+    "all_actual_match_exit_0": 5332,
+    "interfaces_commands": 1,
+    "interfaces_exit_code": 0,
+    "interfaces_units": 2695,
+    "interfaces_disagreements": 0,
+    "interfaces_policy_items": 0,
+    "interfaces_unchecked_cpp": 734
+  },
+  "rows": [
+    {
+      "function": "func_0012f5a0",
+      "target_size": 104,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The delivered Result-return wrapper and GraphicsResetState*/bool relay call conflict with the inherited scalar-return caller00191d34 and the accepted GraphicsRelayRing*/int definition00137b48. GraphicsContext also has an unresolved c010 mutex/completion view. Resolve those accepted caller/relay/context contracts together; do not cast a new reset owner or silently narrow the relay argument.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00145e3c",
+      "target_size": 72,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source reinterprets ResourceServiceState.initialized (const ServiceHandle*) as const CtrHandle*. The service session/active-byte refinement is explicitly unresolved in c010, not an adopted pointer retag. A shared service-state and accepted-consumer migration is needed before admitting this cast-free contract.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0015ebfc",
+      "target_size": 248,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The former W20TextWriter accessors have been migrated, but their real current receiver is const nw::font::WideTextWriter*, while this author still supplies nw::font::CharWriter*. The base pointer is not an authorized downcast to the actual wide-writer object; full-TU mismatching scene/glyph contracts remain. No shadow getter or cast is adopted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00170088",
+      "target_size": 300,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source locally declares00167c34(LayoutPane*) although c010 defines its native nw::lyt::Pane* contract, then casts the same child/root through both identities. It also treats LayoutContainer+0x10 as a native pane root where accepted0016f4ec describes a LayoutDimensionList*. A true accepted container/layout migration is required; matching offsets alone do not prove native owner identity.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00174484",
+      "target_size": 248,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The constructor imports independent singleton receiver classes instead of the canonical owner contracts:001eade0 is StyleOwner*, not W8DisplaySet*, and001b695c now has the proven native ScalarCollection lifetime rather than the delivered Screen* declaration. The controller also spans previously deferred singleton contracts. Resolve the accepted getter/controller ownership family, not opaque return-type aliases or vtable-name additions.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0018362c",
+      "target_size": 240,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source reinterprets canonical SoundSubsystem::effects (PoolList) as a native LinkList<AuxEffectObject>, introducing a virtual owner distinct from AuxEffectNode/AuxEffectVTable. Whole-function MATCH proves the bytes, not that these accepted C/native list and effect identities are interchangeable. A shared accepted SoundSubsystem/effect-node/native-list interface cutover is required; the finalization prototypes alone are not sufficient.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00183ff8",
+      "target_size": 228,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The delivered data_002426d8 declaration uses a new FramebufferContext whose+8 pointer is a two-attachment record. The canonical FramebufferManager+8 is Framebuffer* bound_framebuffer, with an already accepted Framebuffer layout. c010 explicitly has no framebuffer cutover or settled indirection proof. Reconcile accepted manager/framebuffer consumers before selecting the field owner.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0018ef74",
+      "target_size": 164,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The delivered ResourceServiceState replaces canonical reserved bytes with active/pending fields and replaces const ServiceHandle* initialized with const CtrHandle* session. c010 explicitly leaves that global ownership refinement unresolved. It requires the accepted service-state/consumer migration, not a duplicate same-named record.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001a8224",
+      "target_size": 700,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source crosses W6ListController/W7dMenuControl/AnimationOwner through reinterpret_casts and declares several canonical screen endpoints using WidgetController/SelectionList views. This repeats the predecessor AnimationOwner versus W6ListController ownership boundary; accepted screen/animation consumers must be migrated under one real contract before adding this state machine.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001acc30",
+      "target_size": 88,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The 29-slot cleanup uses canonical WidgetSlot::object (DisplayObject*) while the established cleanup endpoint00183208 takes ResourceEvent*. Unlike the separately integrated two-cell/collection allocations, this target cannot retag its existing shared WidgetSlot without changing accepted users. c010 explicitly leaves that endpoint/owner family unresolved.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001ae140",
+      "target_size": 420,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The verified permuter body invokes00183208 with WidgetSlot::object (DisplayObject*) while the canonical endpoint takes ResourceEvent*. It also uses Grid25 rather than the accepted manager Component001ae140 owner. Renaming the opaque component alone would not fix the accepted slot/cleanup contract. Preserve the exact search result and its original allocation-failure/loop-cap bug annotations for a real accepted-owner cutover.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "folded_c014_evidence": {
+        "record": "scratch/integrator/c011/r9/folded-c014/HOLD-DISPOSITIONS-r1.json",
+        "reason": "The real producer constructs ResourceDescriptor objects, but the retained dispatcher/wrapper family accepts const NameTable* const*. ResourceDescriptorBase/ResourceDescriptor and NameTable are distinct complete definitions with different dispatch/table tails and no evidenced common base relationship. A prototype-only retag, pointer-table cast or invented shared descriptor alias would not migrate the real providers and every accepted caller. The old ResourceEvent cleanup and Component001ae140 nominal issues are corrected by the author; the independent descriptor boundary remains."
+      }
+    },
+    {
+      "function": "func_001aff94",
+      "target_size": 196,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The native singleton allocates eight-byte handles and registers a distinct destructor, while accepted W11ControlScreen contains pointers to the larger WidgetSlot view. The author explicitly requires reconciliation with that shared owner. A new SelectionPool class plus an address alias would not migrate the accepted control consumers or establish their full allocation identity.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001b7e9c",
+      "target_size": 156,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The candidate redeclares0017a818 as returning DisplayObject* while its canonical contract returns ResourceEvent*; canonical DisplayHandle::object also has ResourceEvent* type, whereas label endpoint0017a968 takes DisplayObject*. Resolve the accepted creation/label/resource relationship instead of weakening the prototype or inserting pointer casts.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c4de8",
+      "target_size": 84,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The release method invents SelectedPoolContext at data_00242c18. Inherited c010 consumers already describe that same global as FilesystemGlobals and W23JActivityState, and their ownership has not been unified. The full filesystem global/pool/vtable consumers must be reconciled before a canonical SelectedObjectPool receiver can be adopted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c5530",
+      "target_size": 172,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The candidate accesses the canonical reserved active/status bytes but casts initialized from const ServiceHandle* to const CtrHandle*. That does not settle the shared session ownership issue explicitly left open by c010. Re-entry needs the accepted service-state/consumer cutover, not just removal of local markers.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001cf1f4",
+      "target_size": 324,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The whole-function MATCH uses a private R41304Picture with retail offsets0xd4/0x13c/0x140/0x150, explicitly different from canonical nw::lyt::Picture0xd2/0x138/0x13c/0x14c. Publishing the private class/vtable aliases would preserve the contradiction. The accepted Pane/Picture layout and constructor consumers need a real coordinated native cutover.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001cfb24",
+      "target_size": 168,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The candidate introduces NativePane/NativeTextBox/LayoutRenderMaterial and calls001cf7b0(NativeTextBox*), whereas its accepted definition takes LayoutTextBox*. The material constructor also has an existing distinct same-address inferred identity. Resolve the accepted textbox/material class/layout contracts before adopting new constructor aliases.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d48d4",
+      "target_size": 212,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The delivered PaneGroup/PaneSettings contract contradicts the accepted001d94a0 caller, which passes AudioVoiceGroup*/VoiceWaveInfo*, and the accepted001c5950/001c5970/001c5918 AudioChannel* endpoints. VoiceWaveInfo is defined locally in an accepted unit, so a true shared waveform-record/header cutover requires revising that accepted source, not another Pane shadow. The TU additionally duplicates accepted001d4a48 and couples the unresolved controller pause view.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d540c",
+      "target_size": 160,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The native Tu864Track reinterprets this as canonical SoundTrack*, and the TU emits the already credited timing constructor001d3898 again. Accepted001d607c and sound_track.h still use the C SoundTrack constructor contract. Re-entry requires the actual accepted track/timing native lifecycle cutover and explicit ownership, not duplicate aliases or a receiver cast.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d5694",
+      "target_size": 284,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The natural caller uses canonical native PlayerHeapDataManager/SoundArchiveLoader, while accepted001d4124 defines the same initialize address with CachedSoundLoaderState* and the inherited0016a104 destructor/0016a888 helper retain C loader views. Adopting four call-target aliases without the actual accepted loader/archive lifecycle cutover would conceal those nominal receiver and result contracts. No proposed name is imported for this deferred row.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d7edc",
+      "target_size": 128,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The delivered SceneController/Pause slot view is a new complete same-named definition, not the canonical scene_lifecycle.h owner. Its shared TU also uses the contradictory Pane/AudioChannel parameter interfaces and emits accepted001d4a48. The accepted controller/voice lifecycle and aggregate extent must be unified before exposing this pause prefix.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d82b0",
+      "target_size": 232,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The native SceneController destructor uses SoundVoiceBase/SoundVoiceBuffer and shares vtable address points with the already accepted SoundVoiceObject constructor, but canonical SceneController reserves0x21fc versus SoundVoiceObject0x2068. The TU also emits c010-owned001d81ec. The author explicitly requires reconciling accepted class/aggregate ownership before collection; no duplicate destructor class/vtable alias is adopted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001dac54",
+      "target_size": 48,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The wrapper reinterprets a DrawCommandState receiver as MemoryWriteStream to call accepted001dac84. The cached_commands/cached_size fields agree with the stream offsets, but no real common-prefix interface is declared and the accepted endpoint retains a separate local MemoryWriteStream definition. Reconcile that accepted stream/draw interface rather than publishing the cast as an ownership proof.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001daf74",
+      "target_size": 60,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source defines a private ResourceFontState/FontObjectBase constructor family at the same addresses that canonical font_resource.h exposes as FontResource endpoints. The matching accepted001db3ec caller still uses FontResource*. Native spelling/vtable aliases cannot substitute for migrating the accepted font ownership and lifecycle family.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001e3f38",
+      "target_size": 260,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The candidate expands W8ScreenState but changes the accepted effects owner from W10DrawingInput* to W8EffectState*, casts W6ListController* to AnimationOwner*, and declares001e42fc with W8ScreenState* although the c010 definition uses W24ePhaseState*. A shared accepted screen/effects/animation cutover is needed; padding refinement alone does not settle these receiver contracts.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001ea6d8",
+      "target_size": 420,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The verified target-only permuter source casts BoundDisplayObject* to the accepted DisplayData* size-query view and uses a separate72-entry HorizontalLabelLayout/Group owner where accepted w11_control.h exposes W11jVisualOwner/Node storage. Its preprocessed TU also emits two mismatching uncredited context functions. The accepted visual/layout and size-query relationship needs a true shared contract before extracting this body; no preprocessed header copies or view casts are adopted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001ce9e8",
+      "target_size": 676,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The whole native Layout::Build MATCH proves its own body and natural AppendChild/group calls, but001822fc is an accepted RegistrationOwner*/RegistrationEntry* C definition, not Pane::AppendChild(Pane*). This actual receiver/argument contract needs an accepted-unit migration not planned by c010. Three proven native name proposals are retained in provenance but are not admitted for this deferred row.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00116064",
+      "target_size": 664,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Main conditionally authorized a single native math accessor only if predecessor branches did not touch the accepted transform/accessor family. The observed c010 diff includes MatrixIdentityW8C/matrix34Identity definitions in c5f4_final2.cpp and func_0010dd88.cpp, so the overlap condition stops the cutover. Accepted00180234 is unchanged; no cast, second helper or legacy-identity extension is imported. TU952 separately proposes const nw::gfx::CalculatedTransform* for00180234 versus the current mutable TransformComponentsW8C*; the same64-byte identity/return-type family must be reconciled with the accessor cutover.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001af370",
+      "target_size": 180,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The matching singleton and cleanup use different private owner/reference views: construction describes DisplayObject*, cleanup requires the canonical ResourceEvent* endpoint. A single real W6Selector owner was tried with the actual ResourceEvent cleanup. Its factory retained MATCH, but the actual native destructor emitted68 versus72bytes. The separate72byte author callback MATCH is preserved, not promoted to an unproved native destructor alias or a second shadow owner. Reconcile the lifecycle/registration contract before collecting this pair.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001af554",
+      "target_size": 72,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The author72byte callback MATCH is retained. Unifying it with the matching singleton under one real ResourceEvent-backed W6Selector yielded a native destructor68/72bytes while the factory still MATCHed. Do not import the incompatible private callback class or bind a native destructor to a differently declared wrapper. The real shared lifetime/registered-callback contract remains unresolved.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001b4f58",
+      "target_size": 196,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "MaskDimensions and ControlTriplet already have canonical definitions, but the delivered SlotBank native owner conflicts with c010 getter001b48c8 SoundResourceCache*, and its TouchBounds constructor proposal binds accepted001670e4, whose actual definition/formal is float* rather than TouchBounds*. Resolving the latter requires a real accepted geometry constructor/caller migration; do not substitute a nominal alias merely because the four floats agree. Unrelated mismatching controller/input neighbors are not evidence for such a migration.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0017e764",
+      "target_size": 44,
+      "status": "EXTERNAL_C012_OWNED_CREDIT_HOLD_INTERFACE_CLOSED",
+      "reason": "No active definition, extra source or credit in c011. Main/c012 agreed one TaskPool0x1c known prefix; both accepted C prefix definitions migrated, exact private44B type/interface witness and immutable agreement close the formerly unshared interface. Body/credit remain c012-owned; this is an explicitly closed ordinary external-call boundary, not unresolved held-contract invocation.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "previous_contract_hold_reason": "The target dereferences a new complete TaskPool with initialized byte, active/available lists and capacity, whereas accepted00153fec/0015477c define their own partial TaskPool locally. A canonical complete pool requires removing/migrating those accepted definitions; c010 task-ID cancellation adjudication does not authorize this distinct pool lifetime cutover. The co-emitted nonmatching queue task additionally uses the unresolved0014a7e0 queue contract.",
+      "interface_evidence": [
+        "include/game/task_pool.h",
+        "scratch/integrator/c011/r9/folded-c014/TASK-POOL-AGREEMENT-r1.json",
+        "scratch/integrator/c011/r9/folded-c014/TASK-POOL-CONFIRMATION-r1.json"
+      ]
+    },
+    {
+      "function": "func_00143328",
+      "target_size": 40,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The canonical endpoint and retained sound-priority caller use SoundPlayer*, while the author target accesses SoundFileGroup::pending through a SoundFileGroup* formal. Identical list offsets are not proof that those owner classes are identical. c010 audio priority width fixes leave the SoundPlayer receiver relationship unchanged; migrate that accepted player/list contract rather than changing the formal locally. The co-emitted matching texture setter remains predecessor-owned context.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0010e2e0",
+      "target_size": 192,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "This constructor duplicates MatrixIdentityW8C/matrix34Identity, the same accepted helper family as deferred00116064 and TU95200180234 return-type reconciliation. Main requires one native accessor and removal of the legacy identity, not another shared shadow. c010 actually owns two current accessor definitions, so the overlap condition forbids the bounded accepted cutover here.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001470d0",
+      "target_size": 84,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The native partial view stores void* at ObjectManager+0x1b8 and tests mode at+0x1f6, while the accepted canonical and retained c010 definitions expose the first as unsigned field1b8 and reserve/locally redeclare later fields. A canonical pointer/manager refinement needs the accepted and local manager consumers migrated together; no reinterpret owner or pointer-to-word store shim is admitted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0015ea0c",
+      "target_size": 84,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The target reinterprets BoundDisplayObject::bindings DisplayBinding* as ColoredDisplayBinding*. The shared alpha/RGB bytes and holder pointer are only reserved/weak fields in the accepted DisplayBinding owner. Resolve that accepted binding and existing color/position consumers under one real record before importing this view cast; do not use the matching offsets as nominal identity proof.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0014a7e0",
+      "target_size": 128,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The actual native WordQueue target retains volatile unsigned count/waiting_readers, whereas accepted StreamQueue has a signed nonvolatile count and a differently described+0x2c field. Volatility is a real access/concurrency qualification, not an integration alias or source-order fix. The accepted producer/consumer owner and qualified accesses need coordinated proof/migration before adopting this method.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0010cc0c",
+      "target_size": 136,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The matching native InputStorageBase constructor uses data_00223d4c as InputDeviceVTable, but that same address point is accepted HeapObjectVTable used by LargeHeapObject teardown001c5b68. Exposing the three-count input prefix alone would leave the shared vtable/receiver identities contradictory. Reconcile the accepted aggregate/lifetime views, without a second typed global at the same address.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00185050",
+      "target_size": 184,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source explicitly reinterprets ResourceServiceState.initialized from const ServiceHandle* into const CtrHandle* and reuses a reserved result byte. c010 confirms this service-session/active-state contract is still unresolved, including in its publication callers. The author retained four-function TU also has three mismatching companions and says not to silently split its publication MATCH; neither a cast nor isolated credit resolves the accepted session contract.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0014077c",
+      "target_size": 392,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The source privately redefines canonical nw::snd::internal::WaveArchiveFileReader with an initialized byte at+0x0c (16byte object), while the accepted imported reader class is12bytes. The C ArchiveReader view does not by itself prove all native reader constructors/consumers share this corrected complete class. This requires the accepted native reader/layout migration; c010 reader-mode1d3c78 scalar-width adjudication is a separate contract.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001137c4",
+      "target_size": 296,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "InputServiceState suffix and copied MappedMemoryBlock duplicate the canonical owner. The expanded InputService would overlap separately accepted bss_004b1fb8 TouchInputService at +8; c010 initializer data_0024311c also has a distinct native handle owner and func00121d28 unsigned return vs author CtrResult. No accepted aggregate/global/signature cutover is performed.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001233d0",
+      "target_size": 204,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Author uses constructor-bearing DisplayFramebuffer[2] pointer and long-long data00242a40, while parent00142b8c/00137b84 expose DisplayFramebufferPair* and0010d454 AppletTimeout aggregate. Writable constructor callback at accepted00142a54 is unresolved too. Do not import private frame classes/names or reinterpret timeout without coordinated exact owner/constructor/aggregate cutovers.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00131464",
+      "target_size": 160,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "TaskPool initialized/active/inactive record duplicates accepted local partial TaskPool definitions00153fec/0015477c and intersects native VoiceManager/AudioVoiceGroup lifetime. Identical intrusive layouts do not settle that full shared pool owner. Same pool boundary as historical0017e764.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00135908",
+      "target_size": 288,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The target interprets data0023fdc8 as signed int frame advance, while accepted startup consumers bind RestorableState{unsigned current,saved}. It also duplicates accepted local AnimationResource/Header. Signed conversion must not be silently changed or aliased to the unsigned global just for bytes; shared global/consumer ownership requires an explicit accepted cutover.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0014b244",
+      "target_size": 108,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Author keeps unsigned channel versus canonical signed-char index, local InputSessionFields fallback bytes, and int(ServiceCoordinator*,unsigned,int) call00180d10 whereas accepted body uses int(DriverContext*,int,short). A real accepted driver/context/width cutover is needed; no source view cast or local divergent prototype is admitted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0014fbec",
+      "target_size": 140,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Filter target casts AudioChannel to ChannelFilterPrefix and AudioChannelState to DirtyValueObject; accepted shared biquad, coefficient and dirty endpoints use distinct real records. Reconcile shared channel/state and input-device coefficient contracts rather than publishing coincident offsets.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001512fc",
+      "target_size": 136,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The native member-template loop requires CommandGroup/AnimationTrack callback identity and bool,int method-table data0021df3c. Parent command wrappers keep separate CommandGroup/CommandTarget and complete byte-method table views; canonical SequencePlayer does not declare those methods. Do not silently equate owners or add a shorter table shadow.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001532e8",
+      "target_size": 208,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Natural author uses polymorphic StreamPlayer::Stop(+0x14) while accepted prefetch_stream.h has void*vtable complete record. The __aeabi_uldivmod overlay at runtime001941f8 has catalogue ABI classification (530 cases), but preserved runtime report explicitly lacks whole-helper/caller binding proof at its seal. Record remains deferred pending typed Stop contract and independently bound runtime provenance; no guessed symbol adoption.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001551a0",
+      "target_size": 92,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Native VoiceManager::AppendVoiceList/Voice owner conflicts with partial TaskPool/AudioVoiceGroup and accepted channel callback views. The same-address self-definition does not unify native and C owners or unused return contract. Coordinate the whole pool/voice registration family with c010; no shadow alias.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00155d68",
+      "target_size": 116,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Target invokes native void001551a0 with local TaskPool/AudioVoiceGroup and performs real priority traversal; author TU also duplicates uncollected allocator00154838 and shared AudioChannel/HandleManager differing records. Retire local blocks only with genuine shared pool/voice/priority cutover, not second matching owner.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00169fb0",
+      "target_size": 184,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "AudioDecodeState includes PackedRecordSource prefix and ADPCM tail, but parent decoder_command has a different same-named AudioDecodeState starting with AudioReadStream*, and accepted decoder helpers retain further local views. No same-offset alias or flexible-tail retag without decoder state/record/ADPCM ownership reconciliation.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0016e47c",
+      "target_size": 336,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Canonical WidgetSlot::object is DisplayObject*, but target reinterprets it as TrainingWidget to call typed text formatter00170c20. Retagging shared slot or text runtime would affect accepted users. Preserve author bytes; reconcile the real widget/base relationship rather than retaining receiver cast.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00173e48",
+      "target_size": 172,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Target reads canonical DisplayHandle::object(ResourceEvent*) as DisplayObject* and dispatches activation APIs; private SelectionHintPanel ten-handle prefix cannot resolve accepted resource/display owner relationship. Same lifecycle boundary as historical selector and display-handle deferrals.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00179e5c",
+      "target_size": 120,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "NavigationScreenView overlays side byte at Screen+0x78 with the canonical WidgetSlot pointer vector, without evidence of union variant ownership. Shared001b5b60 formal also has a declaration gap. Do not publish the nominal Screen overlay as a common record or overwrite accepted pointer storage.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0017e6c8",
+      "target_size": 156,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "One-float ScalarUpdate[] declaration for bss004b8440 conflicts with accepted GraphicsConverters table containing float(float), void(void), and float(void) entries (reset/random). Preserve mixed callback arities and canonical initializer; homogeneous array cannot be admitted on an index alone.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0017fc7c",
+      "target_size": 144,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Native nw::lyt::Material::SetTexCoordGenNum self-definition conflicts with canonical game Material* endpoint used by accepted00181100; m_MemNum bitfields/native extent are not the shared C count record. Requires true material/getter/caller cutover, not name alias.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001814e8",
+      "target_size": 56,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "MATCH relies on same-TU genuine but mismatching definitions of accepted resource lookups0018269c/001851f0/001971a0 with explicit noinline, and a local00196e14 binding signature. Removing/replacing those definitions needs destination witness and accepted owner moves; do not carry duplicate accepted bodies or claim target-only extraction preserves match.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001ab590",
+      "target_size": 204,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "MenuResetStateTu605 crosses CallbackTarget via reinterpret_cast and duplicates c010001abf24 owner/formal plus accepted control callbacks. The callback registration cannot prove aggregate owner from offsets. Shared menu scene/control lifetime cutover is required.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001af424",
+      "target_size": 304,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Target cleanup invokes00183208 with DisplayObject* from ResourceEvent-backed DisplayHandle and introduces TU607::SelectionScreen where accepted ScreenResourceManager declares Component001af424. Native bitset extent alone does not prove owner. Keep whole MATCH receipt; defer genuine accepted owner/resource endpoint cutover.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001bdc7c",
+      "target_size": 252,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "W24eExitState is cast to different W6SelectionReset and CallbackTarget receivers, interacting with canonical W6Selector/handle/list and existing scene callbacks. Reconcile shared actual scene/registration owner; no inferred overlapping partial views or erased helper aliases substitute.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c2cd4",
+      "target_size": 160,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Natural factory matches, but registered TimedDisplayController callback001c3010 currently has parent-local DisplayObject* release via00183208, conflicting with canonical ResourceEvent* endpoint; parent001c2f10 has same local timer owner. Owner/cleanup registration must migrate together rather than instantiate a private shadow constructor.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c3670",
+      "target_size": 192,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "PanelCollection5 constructor path assigns canonical ResourceEvent* create0017a818 to private DisplayObject* owner and then labels it with DisplayObject APIs. Matching body does not resolve native resource/display ownership; no competing object record/callee prototype imported.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c3ac0",
+      "target_size": 400,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Void* screen target reinterprets its vector simultaneously as ListEntry** and TransformTarget*const*, and DisplayObject* as TrainingWidget for formatter00170c20. The table/text/position relationship needs one real typed owner and base/subobject bridge; raw vector casts cannot stand as shared canonical declarations.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d01dc",
+      "target_size": 328,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Native SoundDataManager target is natural, but count callee name maps accepted001f2b90 whose actual ArchiveHandle*/ArchiveIndex caller is not canonical nw::snd::SoundArchive*. An accepted count-owner cutover and proven aliases are required; unrelated Window constructor mismatches must stay uncredited.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json",
+      "folded_intake_additional_evidence": {
+        "record": "scratch/integrator/c011/r8/folded-c013/HOLD-DISPOSITIONS-r1.json",
+        "reason": "The native SoundArchive::GetWaveArchiveCount() const reference at 001f2b90 would alias the retained C provider unsigned func_001f2b90(ArchiveHandle*), whose index is ArchiveIndex*. Native SoundArchive instead owns SoundArchiveFileReader*. The input overlay does not reconcile the receiver, constness or downstream reader contract. The delivered TU also contains a nonmatching partial Window reconstruction with unreconciled retail offsets."
+      }
+    },
+    {
+      "function": "func_001d603c",
+      "target_size": 64,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Wave-player target uses local W15iWavePlayer/W15iWaveItem and three WavePlayerType address points while parent001d5f1c derives SynchronizationOwner with PendingTask68*. Shared wave_player.h has another partial pointer/type. Natural cleanup wrapper needs actual player/item/vtable group contract, not new opaque pointer alias.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d67c8",
+      "target_size": 248,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Dispatcher helper001d7318 is declared unsigned-char(StreamVoice*,StreamVoiceEvent*,const StreamVoiceSetup*,const void*,int,int), while decoded definition is int(StreamLoadState*,StreamLoadResult*,void**,unsigned,unsigned,int). Partial kind/priority/active and codec state layouts do not prove common owner. Preserve sixth input; no aliases/casts promoted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d7318",
+      "target_size": 1060,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Decoded loader MATCH preserves real six-input and int result contract plus original unbounded eight-channel copy bug, but incoming dispatcher exposes incompatible state/result/pointer/capacity formals. Canonicalize dispatcher and loader with actual typed prefixes and ABI evidence before collection; never alias StreamSound or StreamVoice by offsets.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d8638",
+      "target_size": 220,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "SequenceTiming/Flags/VariableState reinterpret SequencePlayer into competing records; tick_count overlaps canonically reserved storage and variables require volatile qualification unlike accepted field. BaseState reset0016a068 and native parser/allocator consumers require shared lifecycle/extent/volatility migration.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d9050",
+      "target_size": 64,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Natural SequencePlayer cleanup conflicts with parent001d3c2c declaration returning PlaybackCleanupState* and use at embedded WaveSoundCleanup+0x128. Canonical SequencePlayer, member vtable group, and underlying001d8d7c must be reconciled; no pointer retag or secondary-vtable shadow.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001e3294",
+      "target_size": 236,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "SummaryMenuScene/MenuSceneBase partial class conflicts with accepted ScreenResourceManager*00176e24 and native constructor00174484 deferral; helper00169018 is reserved model2 MessageLayout owner, not SummaryMenuScene*. Do not claim model2 or parent001e3270 identities or cast shared scene.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001f49b0",
+      "target_size": 124,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "FontCachedResource readonly/u16 lookup001f4a2c and glyph helper001f4b90 conflict with parent FontMapResource mutable/full-word contracts; target relies on genuine but mismatching co-emitted helper/glyph wrapper. Shared native FontInformation/FontResource identity and accepted helper owners must migrate together; no noinline or shadow class alias added.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0016337c",
+      "target_size": 268,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Natural MenuExtentRequest staging matches but casts canonical AnimationOwner* to W6ListController* for active setters. Accepted owners have distinct array types/layout contracts; common actual UI owner relationship is unproven. Retain matching staging witness without admitting cast or disturbing accepted00168d14 model owner.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0014b4b0",
+      "target_size": 156,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The genuine vector runtime contract is void*(void*) and existing provider00156da0 constructs its own actual reset-reference element. This author erases different HwrIndexValue/SoundQueuedTask constructor callbacks0014b438/0014d664 to void(*)(void*), so neither the callback casts nor the separate drawing/task owner gaps are resolved by the predecessor reset-reference provider. No replacement provider is invented.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0015072c",
+      "target_size": 76,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Native TaskPool child traversal uses enabled+0, flags+0xc and link+0x44, while existing C TaskPool partial owners traverse AudioVoiceGroup links at+0x58. A common list prefix does not establish one owner/class. Complete the actual shared pool/child contract, not a same-name nominal alias, before admitting MarkDirty or its self-name.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0017053c",
+      "target_size": 108,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Delivered LayoutTreeHeader* search conflicts with already-collected native nw::lyt::Pane* func_00167ee4. LayoutContainer also conflicts with c009 dimension-list view. Natural native Pane/GetFirstChild/GetSize candidates measured124/108 and84/72 bytes (r19/r20), so neither private alias nor c009 owner move was admitted. Original source and c00916f4ec remain intact; typed root/lifetime and source factoring need reconciliation.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001acf28",
+      "target_size": 200,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Guarded SelectionSet10Tu605 object, destructor, guard and shared selection callbacks require one proven native owner/lifetime. Current Component001acff0 and related Component001acd38/C-cell views are not proven aliases. Do not bind an unseen private destructor or merge separately placed singleton guards; preserve current c011 small-cell owners and author context statuses.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c21c8",
+      "target_size": 184,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The predecessor typed non-invoking R1 registrations are reused only for their actual evidenced owners. They do not establish CalendarGlyphOwner/63-pointer-set identity or authorize erasing func001c2c44 to ObjectDestructor. The returned cleanup/void callback conflict and original companions remain; no generic invoking adapter, guessed destructor or fake result is adopted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00182d9c",
+      "target_size": 24,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The24-byte scalar wrapper needs genuine mismatching0014a4ac dispatcher. Parameter/default-object/catalog and GPU bound-texture views conflict with canonical TextureResource/GraphicsResourceTable and initialization clients. No common-offset alias or visibility stub admitted. Separately this RESULT retains00186ef0 mismatch and callback(int) versus canonical callback(void) as an explicit real gap; it is not credited or cast.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00190450",
+      "target_size": 144,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Actual wave5/00145840 and c010/0019051c RequestRecord are now shared exactly through game/request_exchange.h and match120/112 bytes. Proposed receive call still has five inputs with RequestWait*, versus c0100010d454 six-input bool protocol with void**, unsigned* and AppletTimeout by value. C010 confirms no defining-source evidence closes gap. No adapter, alias, timeout retag or five-input prototype promoted.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001cc12c",
+      "target_size": 168,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Complete font TU retains native FontContainer::RegistFont(FontKey/font::Font*/bool) versus canonical C-view PoolList/NamedResourceEntry*/void*/unsigned-char operation at same address. Real container/resource/lifetime gap, not permission to weaken native API or alias FontResource and font::Font. Uncredited registration stays in author TU; no native/C cast imported.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001cc4cc",
+      "target_size": 84,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Complete texture TU retains native RegistTexture reference ABI versus c010 address-named pointer API, and proposes DeleteTexture(const TextureInfo&) against c009 const-unsigned-handle view. Real native defining owners/callers must migrate together with exact name proofs. No unrelated AnimTransform overlay rows adopted or mismatching registration companion erased to hide outstanding native/C contract.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d773c",
+      "target_size": 68,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Native SceneEngine destruction requires embedded base+0x64, synchronization+0x70, pool+0x90 and32 SceneEntry objects+0x94, unlike canonical partial owner. Existing accepted destructors00185b9c/00185ba0 must survive uniquely with explicit moves and separate base TU;001d603c remains mismatch. No duplicate accepted destructor, private base alias or prefix-size allocation imported.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00106fe8",
+      "target_size": 144,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "Author MATCH retains volatile signed begin/counter fields in a private CommandSystem, while the canonical shared global and both counter writers use nonvolatile signed fields. Independent reloads alone do not prove an asynchronous/volatile storage contract. No second global type, volatile-only steering, qualifier cast or unproved retag of accepted writers is admitted; the real writer/callback concurrency contract must close first.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00107f0c",
+      "target_size": 44,
+      "status": "unchanged-inherited-NEW-only-hold",
+      "reason": "The frozen int(void) scheduler and C-only mandatory-discard procedure ABI is now available and was used without casts or invented results. A genuine same-TU C scheduler body emits the wrapper at296/44B (exit1); the natural external-contract control emits44/44B but differs at+12 (exit1). The original C++ full-TU work-queue/controller, destruction callback, ResourceSet/ResourceResult and rendering obligations remain unresolved. Therefore the old unfrozen-contract rationale is retired, but source admission is still not justified.",
+      "historical_record": "scratch/integrator/c011-r3/DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00116eb0",
+      "target_size": 144,
+      "source": "src/checkpoint11/intake-r7/nf158/func_00116eb0.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_00116eb0.cpp",
+      "profile": "game",
+      "source_sha256": "ac6546421ed9a06afb37f2998eab850cdf8e603bf7e7b2654a772d9b7b0ade9d",
+      "finding_ids": [
+        "C011-F06"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0013ea40",
+      "target_size": 116,
+      "source": "src/checkpoint11/intake-r7/nf169/func_0013ea40.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_0013ea40.cpp",
+      "profile": "game",
+      "source_sha256": "17f7888dd95fa26e7d50ac94ab0deeb03fdb8c6171b95b714536eb28af2c1554",
+      "finding_ids": [
+        "C011-F03"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00143df4",
+      "target_size": 272,
+      "source": "src/checkpoint11/archive_external-r3.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/archive_external-r3.cpp",
+      "profile": "middleware",
+      "source_sha256": "a5d69994a63ca2746b3ad58f83a28ddf7303111179faef7f717d513369138e9f",
+      "finding_ids": [
+        "C011-F05"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_0014eec8",
+      "target_size": 588,
+      "source": "src/checkpoint11/intake-r7/nf176/audio_sync.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/audio_sync.cpp",
+      "profile": "middleware",
+      "source_sha256": "ca2ec47b81e154ee92294e9c2bdceb0924a4b022c49c0fce3badec4bc576fde9",
+      "finding_ids": [
+        "C011-F08"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001af644",
+      "target_size": 248,
+      "source": "src/checkpoint11/intake-r7/nf198/func_001af644.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_001af644.cpp",
+      "profile": "game",
+      "source_sha256": "361b744b6ebf22bb660c46752e7021bac1b3999471bf3ecc6adffa93026ad66d",
+      "finding_ids": [
+        "C011-F03"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c19e0",
+      "target_size": 64,
+      "source": "src/checkpoint11/resource_cache-r5.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/resource_cache-r5.cpp",
+      "profile": "middleware",
+      "source_sha256": "b62c25998ddea00ef7fbb0158a3f1798483fb6bcd683ae39e9656ddc524f8ae0",
+      "finding_ids": [
+        "C011-F05"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c46c0",
+      "target_size": 80,
+      "source": "src/checkpoint11/guard_09-pool-first.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/guard_09-pool-first.cpp",
+      "profile": "game",
+      "source_sha256": "243ce664f1d507005a42104d9252dc313b16e8ab085ed267451191e2a8128cb6",
+      "finding_ids": [
+        "C011-F04"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c5dd8",
+      "target_size": 112,
+      "source": "src/checkpoint11/animation_binding_storage-r5.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/animation_binding_storage-r5.cpp",
+      "profile": "game",
+      "source_sha256": "10c4fb0ba6de5fe97c440379445557323642bb62a5fa4d8a8fd2f5f4f9fd80b5",
+      "finding_ids": [
+        "C011-F05"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c6440",
+      "target_size": 360,
+      "source": "src/checkpoint11/func_001c6440.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_001c6440.cpp",
+      "profile": "game",
+      "source_sha256": "de00b95618d4fffbbd4ceeb5621cd3828d44b1f2e0e30487bd40f7e3e05f886f",
+      "finding_ids": [
+        "C011-F05"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001c74e8",
+      "target_size": 120,
+      "source": "src/checkpoint11/texture_setup_dispatch-r12.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/texture_setup_dispatch-r12.cpp",
+      "profile": "game",
+      "source_sha256": "e4569d651fb36fbfdd17d6ecc98551d1ec581d7a7aa8ed8384c917252f54f095",
+      "finding_ids": [
+        "C011-F01"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001cfe24",
+      "target_size": 68,
+      "source": "src/checkpoint11/material_deleting-r3.c",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/material_deleting-r3.c",
+      "profile": "game",
+      "source_sha256": "584671c2bc045b824e26761e67956231c39777f2113a56e7314d83d9d7712207",
+      "finding_ids": [
+        "C011-F02"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001cfe68",
+      "target_size": 64,
+      "source": "src/checkpoint11/material_dtor-r3.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/material_dtor-r3.cpp",
+      "profile": "sdk",
+      "source_sha256": "3029d01d149713dc7aea4b0be6907128eef21b24627c339f539dc4d0f106a26a",
+      "finding_ids": [
+        "C011-F02"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d7780",
+      "target_size": 228,
+      "source": "src/checkpoint11/intake-r7/nf213/func_001d7780.c",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_001d7780.c",
+      "profile": "middleware",
+      "source_sha256": "8f1924397dce10881a11fb4137893d92ca57bbfc8d2e852f1c0b61ad69f452f9",
+      "finding_ids": [
+        "C011-F07"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001d90c8",
+      "target_size": 60,
+      "source": "src/checkpoint11/func_001d90c8-native.cpp",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_001d90c8-native.cpp",
+      "profile": "game",
+      "source_sha256": "bbaf3bcbaba796c0a42258833c39fe98e88a09bf68c5409368714b6efd7aba03",
+      "finding_ids": [
+        "C011-F09"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_001f4784",
+      "target_size": 8,
+      "source": "src/checkpoint11/func_001f4784.c",
+      "preserved_source": "scratch/integrator/c011/deferred-r4/func_001f4784.c",
+      "profile": "game",
+      "source_sha256": "4248813cbc4d8c71ee668001ba59a8bc4a195fbac05ee17c9e271011661a6d08",
+      "finding_ids": [
+        "C011-F09"
+      ],
+      "uncredited": true,
+      "accepted_or_prepared_identity": false,
+      "status": "unchanged-r4-NEW-only-hold",
+      "historical_record": "scratch/integrator/c011/r4/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "function": "func_00155a44",
+      "target_size": 112,
+      "source": "src/checkpoint11/aux_channel_publication-r3.c",
+      "preserved_source": "scratch/integrator/c011/r5/deferred/aux_channel_publication-r3.c",
+      "source_sha256": "8fbf2e0276c483b78761921c64d8c878d36a51df27f2b7c4cf1573542f8dd47a",
+      "accepted_or_prepared_identity": false,
+      "authority": "Main explicitly approved NEW-only deferral in this assignment.",
+      "reason": "The prepared AudioDspParameterBlock.valuea0 is a halfword; the new low-byte publication required the rejected ushort/byte union. Preserve the actual access width and withdraw the NEW definition rather than punning or changing the store width.",
+      "evidence": [
+        "include/game/audio_dsp.h",
+        "src/checkpoint10/func_00155ab4.c"
+      ]
+    },
+    {
+      "function": "func_00170e58",
+      "target_size": 200,
+      "source": "src/checkpoint11/display_labels-r5.cpp",
+      "preserved_source": "scratch/integrator/c011/r5/deferred/display_labels-r5.cpp",
+      "source_sha256": "90ebf0be814201fc496a8829ee4e3bf9c95b518b2f17d9e08c325e1f58fbf5fb",
+      "accepted_or_prepared_identity": false,
+      "authority": "Main explicitly approved NEW-only deferral in this assignment.",
+      "reason": "Prepared WidgetSlot.object is ResourceEvent*. The NEW consumer assumes DisplayObject/BoundDisplayObject without a producer/tag witness. Preserve the prepared slot type; do not introduce a cast or a second owner.",
+      "evidence": [
+        "include/game/screen.h",
+        "scratch/integrator/c011/r5/REPROOF-ATTEMPTS-r1.json"
+      ]
+    },
+    {
+      "function": "func_001af258",
+      "target_size": 172,
+      "source": "src/checkpoint11/record_slots_active-r13.cpp",
+      "preserved_source": "scratch/integrator/c011/r5/deferred/record_slots_active-r13.cpp",
+      "source_sha256": "abc8f23eb71b95bcef4b3b792f3862a496a0b1918c0b278286a40e6fe6ef50c9",
+      "accepted_or_prepared_identity": false,
+      "authority": "Main explicitly approved NEW-only deferral in this assignment.",
+      "reason": "Prepared WidgetSlot.object is ResourceEvent*. The NEW consumer assumes DisplayObject/BoundDisplayObject without a producer/tag witness. Preserve the prepared slot type; do not introduce a cast or a second owner.",
+      "evidence": [
+        "include/game/screen.h",
+        "scratch/integrator/c011/r5/REPROOF-ATTEMPTS-r1.json"
+      ]
+    },
+    {
+      "function": "func_001b5b60",
+      "target_size": 296,
+      "source": "src/checkpoint11/intake-r7/r41414/func_001b5b60.cpp",
+      "preserved_source": "scratch/integrator/c011/r5/deferred/func_001b5b60.cpp",
+      "source_sha256": "1b0a93f7feff544bfa923fb12e7c4c9ca9870c3228491907b9ef2d2ff7eac6b5",
+      "accepted_or_prepared_identity": false,
+      "authority": "Main explicitly approved NEW-only deferral in this assignment.",
+      "reason": "Prepared WidgetSlot.object is ResourceEvent*. The NEW consumer assumes DisplayObject/BoundDisplayObject without a producer/tag witness. Preserve the prepared slot type; do not introduce a cast or a second owner.",
+      "evidence": [
+        "include/game/screen.h",
+        "scratch/integrator/c011/r5/REPROOF-ATTEMPTS-r1.json"
+      ]
+    },
+    {
+      "function": "func_00137154",
+      "target_size": 408,
+      "source": "src/checkpoint11/texture_upload-r5.c",
+      "preserved_source": "scratch/integrator/c011/r6/deferred/texture_upload-r5.c",
+      "source_sha256": "fe35566fb40ff988ce8eb1642064a465cd2b1d8f2dd214ce4732f360391d7d8d",
+      "profile": "game",
+      "accepted_or_current_predecessor_retained_identity": false,
+      "finding": "C011R5-F02",
+      "reason": "The new upload calls func_00182d9c, an explicitly contract-resolution-held texture-parameter endpoint. Exclusion of the wrapper alone does not isolate its unresolved binding/catalog contract. Hold the NEW upload and quarantine its now-unused upload facade; do not cast or revive old texture shadows.",
+      "status": "NEW-only-contract-resolution-hold",
+      "authority": "Assignment authorizes exactly witnessed repair or NEW-only deferral for the sealed blocker."
+    },
+    {
+      "function": "func_00185934",
+      "target_size": 312,
+      "source": "src/checkpoint11/intake-r9/np060/archive_loader.cpp",
+      "preserved_source": "scratch/integrator/c011/r6/deferred/archive_loader.cpp",
+      "source_sha256": "e5895494833533964bee6e7062d4c9adf7987ee73e0f0ca8fcdaf4b7fb1f0aec",
+      "profile": "middleware",
+      "accepted_or_current_predecessor_retained_identity": false,
+      "finding": "C011R5-F01",
+      "reason": "The new native loader virtual lookup reaches accepted C func_001f27c0 through the real secondary-base address point and thunk. PlayerHeapDataManager const/unsigned/const-void* and ObjectLookupW19G/signed/mutable-void* are not a genuine shared contract. Hold the NEW caller and remove its c011-only native binding; accepted providers and canonical native headers stay unchanged.",
+      "status": "NEW-only-contract-resolution-hold",
+      "authority": "Assignment authorizes exactly witnessed repair or NEW-only deferral for the sealed blocker."
+    },
+    {
+      "function": "func_001911f0",
+      "target_size": 92,
+      "source": "src/checkpoint11/intake-r9/np062/commands_final.cpp",
+      "preserved_source": "scratch/integrator/c011/r6/deferred/commands_final.cpp",
+      "source_sha256": "2fdf1cedbf0fb8550ee01bdc4dbc39a01d35c03b5efdfc2e7553de75d7efbcc2",
+      "profile": "middleware",
+      "accepted_or_current_predecessor_retained_identity": false,
+      "finding": "C011R6-SWEEP-01",
+      "reason": "The new ChannelCommand writes a byte through reinterpret_cast<unsigned char*>(&StreamEvent::object). Main explicitly forbids this byte-storage access and approves a NEW-only hold, not an out-of-scope variant overlay or accepted hierarchy rewrite.",
+      "status": "NEW-only-contract-resolution-hold",
+      "authority": "Assignment authorizes NEW-only dependent holds; Main additionally explicitly approved both event-sweep dispositions."
+    },
+    {
+      "function": "func_001d2f90",
+      "target_size": 88,
+      "source": "src/checkpoint11/sequence_auxiliary_command-r14.cpp",
+      "preserved_source": "scratch/integrator/c011/r6/deferred/sequence_auxiliary_command-r14.cpp",
+      "source_sha256": "3a8632b3c355c4902386cd433a6c323d1712e4091596a82550c24904b8cd14ca",
+      "profile": "middleware",
+      "accepted_or_current_predecessor_retained_identity": false,
+      "finding": "C011R6-SWEEP-02",
+      "reason": "Following the c010-r7 real-derived-event repair, placement-construct the real SequenceAuxiliaryEvent directly in correctly sized arena storage instead of downcasting a StreamEvent view. The honest form exits1 (candidate92/catalogue88 bytes; first semantic offset+0x25). Main explicitly authorizes a NEW-only hold when this genuine repair is not exact; no steering or unchanged retry.",
+      "status": "NEW-only-contract-resolution-hold",
+      "authority": "Assignment authorizes NEW-only dependent holds; Main additionally explicitly approved both event-sweep dispositions."
+    },
+    {
+      "function": "func_00185a88",
+      "target_size": 100,
+      "source": "src/checkpoint11/func_00185a88.cpp",
+      "preserved_source": "scratch/integrator/c011/r7/deferred/func_00185a88.cpp",
+      "preserved_source_sha256": "d2bd1b6efcdaf951c56d86b96410bdc441bc64f01be0e60ef50754d17605b2e5",
+      "profile": "middleware",
+      "finding": "C011R6-F01",
+      "reason": "The actual native BankFile::FileHeader::GetInfoBlock const member/InfoBlock result is called through an independent C BankFile/BankBlock facade. Shared BankReader has accepted C initializer/reference consumers and is not the public native BankFileReader extent. No local cast, returned-object alias or second reader model is admitted; the NEW path is held instead.",
+      "evidence": [
+        "include/nw/snd/snd_BankFile.h",
+        "src/nw4c/snd_BankFile.cpp",
+        "include/game/archive.h",
+        "src/sdk2/func_0015276c.cpp",
+        "src/wave7/func_00185a6c.c"
+      ],
+      "status": "NEW-only-contract-resolution-hold",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_001ce998",
+      "target_size": 80,
+      "source": "src/checkpoint11/lyt_delete_animation.cpp",
+      "preserved_source": "scratch/integrator/c011/r7/deferred/lyt_delete_animation.cpp",
+      "preserved_source_sha256": "e0c1cbb4615955fdf87b32936108c9631ce4a9090848bd9c1496ef2e94b1b7e5",
+      "profile": "game",
+      "finding": "C011R7-SWEEP-F01",
+      "reason": "New genuine Layout::DeleteAnimTransform invokes native LinkListImpl::erase(LinkListNode*) but its original-bound target0018d868 remains the actual C PoolLink*(PoolList*,PoolLink*) provider. Native receiver/node/iterator result and C record/pointer result differ. Main approves a NEW-only hold and retention of the prepared C provider.",
+      "evidence": [
+        "src/wave7/func_0018d868.c",
+        "include/game/pool_list.h",
+        "include/nw/ut/ut_LinkList.h"
+      ],
+      "status": "NEW-only-contract-resolution-hold",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_001cc1e4",
+      "target_size": 104,
+      "source": "src/checkpoint11/group_ownership_cleanup-r9.cpp",
+      "preserved_source": "scratch/integrator/c011/r7/deferred/group_ownership_cleanup-r9.cpp",
+      "preserved_source_sha256": "9361fcfc1c833a6d621b338b7e72ad39d7d8ed296956b66c4cc6bdfd09fe26ce",
+      "profile": "game",
+      "finding": "C011R7-SWEEP-F02",
+      "reason": "The new GroupContainer cleanup invokes native erase(iterator) at actual C provider00191178. Its native implicit receiver/by-value iterator/iterator result do not match PoolLink*(PoolList*,PoolLink*). Main approves a NEW-only hold, not a reinterpretation or accepted-provider rehome.",
+      "evidence": [
+        "src/wave6/func_00191178.c",
+        "include/game/pool_list.h",
+        "include/nw/ut/ut_LinkList.h"
+      ],
+      "status": "NEW-only-contract-resolution-hold",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_00117ad8",
+      "target_size": 108,
+      "source": "src/checkpoint11/intake-r9/np040/func_00117ad8.c",
+      "preserved_source": "scratch/integrator/c011/r7/deferred/func_00117ad8-legacy.c",
+      "preserved_source_sha256": "9b684a5173f6baf3f427e8991f539a6595bdf52e9737b993dcf203137b9c38fa",
+      "profile": "sdk",
+      "finding": "C011R7-SWEEP-F03",
+      "reason": "The NEW WordPair*/unsigned facade conflicts with the existing accepted ServiceResult(Result) constructor declaration/caller at the same address. Provider absence is not a waiver. Genuine aggregate-result and genuine typed-storage placement-construction forms both mismatch, so Main's fix-or-hold rule selects the NEW hold. No actual uncompiled body or original historical class is fabricated.",
+      "evidence": [
+        "include/game/service_result.h",
+        "include/game/result.h",
+        "src/wave14/func_0010b92c.cpp",
+        "scratch/integrator/c011/r7/attempts/func_00117ad8-value.cpp",
+        "scratch/integrator/c011/r7/deferred/func_00117ad8-placement.cpp"
+      ],
+      "status": "NEW-only-contract-resolution-hold",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_001d9820",
+      "author": "np272",
+      "size": 156,
+      "profile": "sdk",
+      "status": "HELD_UNCREDITED",
+      "reason": "The matching ConstructedPaneObject/TimingConstructor model describes the very pool allocation that canonical func_001d5528 exposes as AudioVoice*. Its RuntimeMember[4], registration and timing storage compete with the existing AudioVoice slots/envelope/vector model. Equal offsets and a names overlay do not establish a second complete object identity. A local native constructor alias or a cast of the allocation result would violate the one-model rule.",
+      "evidence": [
+        "scratch/authors/np272/RESULT.json#integration_needs.contract_conflicts",
+        "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+        "include/game/audio_voice.h"
+      ],
+      "required_cutover": "Recover and migrate the actual AudioVoice construction/member family and every affected accepted caller together, retaining one typed receiver. Only then adopt required native names and move data_00224a80 to its actual shared owner header.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+        "observed_source_sha256": "6b2dc6e75f1347d4464e9fa4eb283c383f1e7c7bb9c00aefd48b2f30fb397fb8",
+        "receipt": "scratch/authors/np272/match/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.result.json",
+        "observed_receipt_sha256": "d752174f984b5d6927a7fbf8c46fe87409f80bcc2e3bce4d243ded6d2ca85cb0",
+        "names": "scratch/authors/np272/names/func_001d9820.json",
+        "names_sha256": "4134f8d2826895b8b9c2c4e5b0373a397f6df47ce7e6819188f5781b55fbb6bf"
+      },
+      "target_size": 156,
+      "folded_from": "c013 6b438040",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_001f4408",
+      "native_name": "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+      "author": "nm01",
+      "size": 180,
+      "profile": "middleware",
+      "status": "HELD_UNCREDITED",
+      "reason": "The shared decoder resolves chunk roots with AddOffsetToPtr and synthesizes a byte displacement sizeof(u32)+RoundUp(count,4)+index*sizeof(Reference) before dereferencing a selected Reference. Hiding this address arithmetic in the existing offset helper does not remove the assignment's prohibition on byte-offset access. Its private one-entry serialized tails also do not supply an actual array extent. The tag-evidenced chunk downcasts alone do not discharge these separate source rules.",
+      "evidence": [
+        "scratch/authors/nm01/src/bank_regions_tu.cpp:14-83",
+        "scratch/authors/nm01/EVIDENCE.json#diagnosis",
+        "scratch/authors/nm01/RESULT.json#integration_needs"
+      ],
+      "required_cutover": "Provide a compliant canonical serialized-table representation without forbidden byte-offset/object-representation access or invented fixed extent. If the native accessor remains in an admitted TU, explicitly move 001f4500 and delete its emptied C owner; otherwise do not emit it. Retain 001f44bc as uncredited until exact.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+        "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+        "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+        "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+        "names": "scratch/authors/nm01/names/bank.json",
+        "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+      },
+      "target_size": 180,
+      "folded_from": "c013 6b438040",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_001f46d0",
+      "native_name": "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj",
+      "author": "nm01",
+      "size": 180,
+      "profile": "middleware",
+      "status": "HELD_UNCREDITED",
+      "reason": "Uses the same split/direct/range decoder and forbidden byte-offset reference resolution as 001f4408; matching native method spelling and tag-selected casts are not an exception to the storage-access rule. No second BankFile/resource model or shadow lookup is added.",
+      "evidence": [
+        "scratch/authors/nm01/src/bank_regions_tu.cpp:14-83,115-118",
+        "scratch/authors/nm01/EVIDENCE.json#diagnosis"
+      ],
+      "required_cutover": "The same compliant canonical decoder and explicit unique accessor ownership decision as 001f4408.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+        "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+        "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+        "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+        "names": "scratch/authors/nm01/names/bank.json",
+        "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+      },
+      "target_size": 180,
+      "folded_from": "c013 6b438040",
+      "accepted_or_current_predecessor_retained_identity": false
+    },
+    {
+      "function": "func_0014aa94",
+      "size": 96,
+      "profile": "middleware",
+      "batch": "nm29",
+      "reason": "The matching body reinterprets the current game Material* returned by the canonical pane getter as a distinct nw::lyt::Material* to call SetTevStageNum. The author explicitly requires the complete Material/native pointer-view cutover; its native setter companion is still nonmatching. Equal offsets and a self-name proposal do not justify this bridge or a C facade at the native member address.",
+      "evidence": [
+        "scratch/authors/nm29/src/func_0014aa94.cpp",
+        "scratch/authors/nm29/RESULT.json",
+        "include/game/material.h",
+        "include/nw/lyt/lyt_Material.h",
+        "include/game/screen.h"
+      ],
+      "reentry": "A coherent pane/material producer, getter, setter and every affected accepted consumer migration, followed by exact source proof; no cast, second Material model or duplicate native setter.",
+      "already_inherited_hold": false,
+      "status": "HELD_UNCREDITED",
+      "author_source": "scratch/authors/nm29/src/func_0014aa94.cpp",
+      "author_source_sha256": "c70a2cd69fdd6caace690b93217cb8f8b3113e03add0c7b4d3614e5be222273c",
+      "author_receipt": "scratch/authors/nm29/match/final-material/func_0014aa94.result.json",
+      "author_receipt_sha256": "8665f7d8fb07a08cb43b37579edea75e6b262996ce990ef3bb695dada1ccef57",
+      "current_integrated_MATCH_claimed": false,
+      "unchanged_failed_or_type_invalid_input_rerun": false,
+      "target_size": 96,
+      "folded_from": "c014479eb7f4"
+    },
+    {
+      "function": "func_0017df84",
+      "size": 88,
+      "profile": "game",
+      "batch": "nm32",
+      "reason": "The new request submitter directly invokes the existing contract-resolution-held 0014a7e0 queue endpoint with canonical StreamQueue*. The known native WordQueue boundary has volatile unsigned count/waiting-reader contracts unlike the accepted signed nonvolatile StreamQueue view. Fixing only the inherited SignalState reinterpretation or publishing a C prototype cannot close that endpoint/owner relation. Its source also requires one shared TaskPool layout and a genuine embedded SignalState, not a second owner projection.",
+      "evidence": [
+        "scratch/authors/nm32/CONTRACTS.json",
+        "scratch/authors/nm32/RESULT.json",
+        "scratch/integrator/c011/r8/NEW-DEFERRALS-r1.json",
+        "include/game/audio_tasks.h",
+        "include/game/stream_manager.h"
+      ],
+      "reentry": "First reconcile the accepted queue producer/consumer/native access qualifications, then publish TaskPool and a typed AudioWorkRequest signal member with all users migrated. If the 0017e764 context is retained in the TU, explicitly rehome it and remove its old defining owner; otherwise keep that context single-owner.",
+      "already_inherited_hold": false,
+      "status": "HELD_UNCREDITED",
+      "author_source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+      "author_source_sha256": "22a6dfdd79c79c2eda2ead677f28304c43e18e0547c0ba08b7b3588e3b46c5fc",
+      "author_receipt": "scratch/authors/nm32/match/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.result.json",
+      "author_receipt_sha256": "0e86d6718bcc2a6e2ca683dcceff2cbcd10bf97067acce97b0691fe2367c8f94",
+      "current_integrated_MATCH_claimed": false,
+      "unchanged_failed_or_type_invalid_input_rerun": false,
+      "target_size": 88,
+      "folded_from": "c014479eb7f4"
+    }
+  ],
+  "folded_c014_intake_holds": "scratch/integrator/c011/r9/folded-c014/HOLD-DISPOSITIONS-r1.json",
+  "new_distinct_hold_functions": [
+    "func_0014aa94",
+    "func_0017df84"
+  ],
+  "deduplicated_function": "func_001ae140",
+  "special_external_credit_boundary": "func_0017e764 retains c012-only credit ownership and no active definition; its shared interface is explicitly closed, not unresolved contract invocation.",
+  "all_holds_uncredited": true,
+  "accepted_identities_withdrawn": []
+}

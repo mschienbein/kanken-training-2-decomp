@@ -43,7 +43,7 @@ static AudioDspParameterBlock *auxiliary_parameters(ServiceCoordinator *context,
 
 static void update_parameters(AudioDspParameterBlock *parameters, unsigned clear_control, unsigned flags)
 {
-    unsigned short &control = parameters->valuea0;
+    unsigned short &control = parameters->settings.valuea0;
     if (clear_control)
         control &= ~clear_control;
     parameters->flags |= flags;

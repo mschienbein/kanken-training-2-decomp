@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "authority": "Assignment permits explicit holds when a source cannot integrate cleanly; no accepted identity is withdrawn.",
+  "counts": {
+    "intake_functions": 3,
+    "intake_bytes": 604,
+    "already_inherited_functions": 1,
+    "already_inherited_bytes": 420,
+    "additional_distinct_functions": 2,
+    "additional_distinct_bytes": 184,
+    "combined_distinct_holds": 238
+  },
+  "rows": [
+    {
+      "function": "func_001ae140",
+      "size": 420,
+      "profile": "game",
+      "batch": "nm20",
+      "reason": "The real producer constructs ResourceDescriptor objects, but the retained dispatcher/wrapper family accepts const NameTable* const*. ResourceDescriptorBase/ResourceDescriptor and NameTable are distinct complete definitions with different dispatch/table tails and no evidenced common base relationship. A prototype-only retag, pointer-table cast or invented shared descriptor alias would not migrate the real providers and every accepted caller. The old ResourceEvent cleanup and Component001ae140 nominal issues are corrected by the author; the independent descriptor boundary remains.",
+      "evidence": [
+        "scratch/authors/nm20/CONTRACTS.json",
+        "include/game/resource_descriptors.h",
+        "include/game/screen.h",
+        "include/game/command_state.h",
+        "src/large/func_002095c0.cpp",
+        "src/wave20/func_0017a938.c"
+      ],
+      "reentry": "Recover and migrate the genuine common descriptor/dispatch hierarchy and all constructors, typed tables, wrappers and callers together. Preserve the original allocation-failure, cap and partial-mask qualifications.",
+      "already_inherited_hold": true,
+      "status": "HELD_UNCREDITED",
+      "author_source": "scratch/authors/nm20/src/func_001ae140.c",
+      "author_source_sha256": "9ba0772733beaf0de3a640d9d7c879913ce1de3684df8a986efc9f5f0d98818a",
+      "author_receipt": "scratch/authors/nm20/match/final-grid-exact-delivery/func_001ae140.result.json",
+      "author_receipt_sha256": "fc104a0b6e155e325d717e3c87495dec6d421286e10881f18e2e28c6d2a7d8a4",
+      "current_integrated_MATCH_claimed": false,
+      "unchanged_failed_or_type_invalid_input_rerun": false
+    },
+    {
+      "function": "func_0014aa94",
+      "size": 96,
+      "profile": "middleware",
+      "batch": "nm29",
+      "reason": "The matching body reinterprets the current game Material* returned by the canonical pane getter as a distinct nw::lyt::Material* to call SetTevStageNum. The author explicitly requires the complete Material/native pointer-view cutover; its native setter companion is still nonmatching. Equal offsets and a self-name proposal do not justify this bridge or a C facade at the native member address.",
+      "evidence": [
+        "scratch/authors/nm29/src/func_0014aa94.cpp",
+        "scratch/authors/nm29/RESULT.json",
+        "include/game/material.h",
+        "include/nw/lyt/lyt_Material.h",
+        "include/game/screen.h"
+      ],
+      "reentry": "A coherent pane/material producer, getter, setter and every affected accepted consumer migration, followed by exact source proof; no cast, second Material model or duplicate native setter.",
+      "already_inherited_hold": false,
+      "status": "HELD_UNCREDITED",
+      "author_source": "scratch/authors/nm29/src/func_0014aa94.cpp",
+      "author_source_sha256": "c70a2cd69fdd6caace690b93217cb8f8b3113e03add0c7b4d3614e5be222273c",
+      "author_receipt": "scratch/authors/nm29/match/final-material/func_0014aa94.result.json",
+      "author_receipt_sha256": "8665f7d8fb07a08cb43b37579edea75e6b262996ce990ef3bb695dada1ccef57",
+      "current_integrated_MATCH_claimed": false,
+      "unchanged_failed_or_type_invalid_input_rerun": false
+    },
+    {
+      "function": "func_0017df84",
+      "size": 88,
+      "profile": "game",
+      "batch": "nm32",
+      "reason": "The new request submitter directly invokes the existing contract-resolution-held 0014a7e0 queue endpoint with canonical StreamQueue*. The known native WordQueue boundary has volatile unsigned count/waiting-reader contracts unlike the accepted signed nonvolatile StreamQueue view. Fixing only the inherited SignalState reinterpretation or publishing a C prototype cannot close that endpoint/owner relation. Its source also requires one shared TaskPool layout and a genuine embedded SignalState, not a second owner projection.",
+      "evidence": [
+        "scratch/authors/nm32/CONTRACTS.json",
+        "scratch/authors/nm32/RESULT.json",
+        "scratch/integrator/c011/r8/NEW-DEFERRALS-r1.json",
+        "include/game/audio_tasks.h",
+        "include/game/stream_manager.h"
+      ],
+      "reentry": "First reconcile the accepted queue producer/consumer/native access qualifications, then publish TaskPool and a typed AudioWorkRequest signal member with all users migrated. If the 0017e764 context is retained in the TU, explicitly rehome it and remove its old defining owner; otherwise keep that context single-owner.",
+      "already_inherited_hold": false,
+      "status": "HELD_UNCREDITED",
+      "author_source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+      "author_source_sha256": "22a6dfdd79c79c2eda2ead677f28304c43e18e0547c0ba08b7b3588e3b46c5fc",
+      "author_receipt": "scratch/authors/nm32/match/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.result.json",
+      "author_receipt_sha256": "0e86d6718bcc2a6e2ca683dcceff2cbcd10bf97067acce97b0691fe2367c8f94",
+      "current_integrated_MATCH_claimed": false,
+      "unchanged_failed_or_type_invalid_input_rerun": false
+    }
+  ],
+  "all_predecessor_holds_preserved": true,
+  "accepted_or_predecessor_functions_withdrawn": [],
+  "moves": []
+}
