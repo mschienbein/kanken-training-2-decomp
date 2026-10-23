@@ -1,0 +1,1793 @@
+{
+  "schema_version": 1,
+  "status": "ALL_NEW_ISSUES_ADJUDICATED_FALSE_POSITIVE_NOTES_RETAINED_NO_SOURCE_CHANGE",
+  "agent": "C011CmodelsFixCodex",
+  "source_subject": {
+    "merged_source": "c2606cfd",
+    "Main_base": "5820254f",
+    "candidate_commit": "a72b9d45aa94d2df8a311fee64a0a0c4da54c48a",
+    "candidate_branch": "c011-r9",
+    "adjudication_branch": "c011-r10",
+    "adjudication_base": "a72b9d45aa94d2df8a311fee64a0a0c4da54c48a",
+    "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r10",
+    "source_changed": false,
+    "headers_changed": false,
+    "candidate_or_proposed_ledger_changed": false,
+    "c011_r9_worktree_changed": false,
+    "Main_worktree_changed": false,
+    "current_source_ledger": "scratch/integrator/c011/r9/PROPOSED-LEDGER-r2.json",
+    "current_source_handoff": "scratch/integrator/c011/r9/HANDOFF.json",
+    "fresh_proposed_ledger_or_handoff_required": false,
+    "reason": "This r10 commit adds only the requested adjudication record. No contract or source correction was justified, so the complete r9 source transaction, counts and proof inputs remain current."
+  },
+  "input_binding": {
+    "new_facts": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/merge-main/scratch/integrator/c011-r9/main-argcheck-new-facts-r1.json",
+      "sha256": "0995d5866faf5b43d70179d60143843e87cb05b12795d2ca88bb08f5dcecabec"
+    },
+    "argcheck": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/merge-main/scratch/integrator/c011-r9/main-argcheck-r1.json",
+      "sha256": "576990c48cb04f82d7375b9ae8973ad941d6e3e190245f13788d58e54eb7768b",
+      "actual_exit_code": 2,
+      "summary": {
+        "callback_sites": 10,
+        "direct_sites": 13326,
+        "elapsed_seconds": 1030.088,
+        "flagged_functions": 58,
+        "functions": 2771,
+        "issues": 99,
+        "notes": 528,
+        "rewrite_sites": 58,
+        "tail_sites": 731,
+        "unchecked_functions": 547,
+        "unresolved_indirect_sites": 1045
+      }
+    },
+    "baseline": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/merge-main/scratch/integrator/c010-r8/main-argcheck-r1.json",
+      "sha256": "c7718cc8e2da3db6822bd9beb8259c661e7bfc68f30c769cb8c17699211b6201",
+      "summary": {
+        "callback_sites": 10,
+        "direct_sites": 13115,
+        "elapsed_seconds": 643.437,
+        "flagged_functions": 56,
+        "functions": 2682,
+        "issues": 90,
+        "notes": 513,
+        "rewrite_sites": 58,
+        "tail_sites": 703,
+        "unchecked_functions": 524,
+        "unresolved_indirect_sites": 1045
+      },
+      "adjudication_chain": "c010-r8 289e656a (no new facts vs c010-r7; chain 456bfc8e, 5f581fc7)"
+    },
+    "method_precedent": {
+      "branch": "c010-r6",
+      "commit": "5f581fc7",
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6/scratch/integrator/c010/r6/ARGCHECK-ADJUDICATIONS-r1.json",
+      "sha256": "7dd5e3cf1b982c3774b609cdc669f3a1ab8790a5084cbefb5d2b1544cee96da7"
+    },
+    "original_image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+    "complete_rewrite_projection": {
+      "path": "scratch/integrator/c011/r9/LINKER-REWRITES-r2.json",
+      "sha256": "36f9e89360ac3caf4030ef06faced73e99168b2440dcdfffcf3a110462415578",
+      "scope_complete": true
+    },
+    "source_headers_tools_sha256": {
+      "config/catalogue.json": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+      "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
+      "config/names.json": "c0aabfd04f4aab5888895d607c5c12d0a87bee0e41e1b7e961f5996af15e8fb8",
+      "include/game/applet.h": "5a1d3c20fdce196c5b113b3688a7090d15ba2187d329f8700523d76a4165a6ca",
+      "include/game/archive.h": "dae64bd8108d2f1a05e743d77fc82d1a71b37be25804a6df389fd391c0d4c938",
+      "include/game/archive_ipc.h": "8418f270155313dd1740e2165893f50336ce0677d65a9ba20bf89cd3108ab14e",
+      "include/game/archive_queries.h": "4354eb2f393137453c70ae4ed44c1fb8b110150382f2944af2cd3b00f6ba5eee",
+      "include/game/audio_dsp.h": "7ef979b7bd537bb497dd93b4c969ce468b544148e6de5cbb44e7c0f261c12694",
+      "include/game/audio_voice.h": "ac92a65985610684e4f9a55f1dce6c1e100505c7771753d94d5e9f946459ec3e",
+      "include/game/graphics_address.h": "ca5fd1a3aba1ed09d10a1f658f7de61c23acf10b318d7f29e9606fce3f58414d",
+      "include/game/hwr_image.h": "7203a4c9aeee74e06d2bd513cd20bccacb44f8848792931c915bb299a113b567",
+      "include/game/input.h": "5b35bf7fba9caa98474cf666b577c05486ce27fc60d68293c8bd1b8e0ba2b67b",
+      "include/game/menu_controller.h": "ce3571c0b51822b13490e832c37ddc812585f2616e655a14c26a37ea39af73e4",
+      "include/game/service_availability.h": "c8cf85d87b38d9bb902252272ab6b45890564a95b3a9b2ca258571f8d02625b7",
+      "include/game/service_runtime.h": "0685aa25abb98a834d41e09feff84ef265c5a1b45c7fd4b5e73505ec06e886a8",
+      "include/game/startup.h": "f2f9a8bf29d24de24932ae98bb7683f51f59315a3fb53034f46309a466724816",
+      "src/checkpoint10/func_0014cc9c.c": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33",
+      "src/checkpoint10/func_0019edbc.c": "8eb3fbfa9334e50f9b0a754dde89e5738a99e64b679b8dfa1695dd33d764ce01",
+      "src/checkpoint11/archive_application_buffer-r12.c": "7b568b8e20c6d37969d9d9eb3a3de26ea6e937d1ea2cd97775dccb6dc770c4e9",
+      "src/checkpoint11/archive_block_queries-r10.c": "46e381de939dd756d6ba1d0f82354c6394784f95d417a80d5fb31bbcaf10d9cd",
+      "src/checkpoint11/archive_mapped_descriptors-r12.c": "78d1b530b35f21b3612d04ea8135d1b2c554ef096d6e87f0899fadaee79cf58c",
+      "src/checkpoint11/archive_stream_property-r6.cpp": "48093bfbc9c942603f9fd3ee912d5b344fdcd63a2cc743bc09deed14a3ebd6cf",
+      "src/checkpoint11/batch_texture_keys-r13.cpp": "9f0eed0f5d8f5daee90e6c3e9340816bdb17bbc9501eb7893bc62f2bfcd32d0d",
+      "src/checkpoint11/fatal_header.c": "9f23ad0444955619a6c1a8a3683d322f4798663d97d9e0d9641e4f34e6897e96",
+      "src/checkpoint11/func_0010bed4.c": "62e0f084508ac18377a7267da1306e6c0d63344ae02fa55150c256e8a8bedfa6",
+      "src/checkpoint11/intake-r7/np020/func_00181994.c": "77345d0dfde77d7ac44388d762fc90a77f7fa188c528015ac4ec1d09bc73857c",
+      "src/checkpoint11/startup_command_pool-r14.c": "ae2577e8d1da79f7df7023a5f10baf66d59baf72d7dffedc34a3b1809239881e",
+      "src/checkpoint11/ui_item_update-r12.c": "ad6505333bdc798a95a7e004e444a816f37cbffb95c459da5ab7c9b19f969b68",
+      "src/checkpoint14/auxiliary_mode.c": "9066aee1ff2e0b2047454c4084ee03ad3ed57d62a5252a8ed9c66049851096ed",
+      "src/checkpoint14/image_activation.cpp": "4fcee8d05dbef81f9b2cb287d5a9f3d2adea16a542fad14af9ed99df1a312ccc",
+      "src/models/func_001a2814/func_001a2814_tu.cpp": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+      "src/sdk/func_0011516c.c": "df3d0702e8d434691310a58bf5d1503b9f43010bd86a7bfdadf6cf74e7e75872",
+      "src/wave1/func_0012d4f0.c": "4aa3e60361641967402ea8b213c3b1e57133b7ea27c17a465441d2b29e4728c1",
+      "src/wave10/func_0014a98c.c": "b62f4ced999b2be14c2da5ec9f9b66aee3e96bf1b0e8bd745acbc970592aaa9d",
+      "src/wave11/func_0012d4d0.c": "9d83abab17d05c300c45910e6f76bde3bd5fc4b8fe49204e8ccaae32ac6cf3f7",
+      "src/wave14/func_0019ec64.c": "0ffb10550f0f55cc9a2e78519306abce3d692f6b10d72f5d8da103c8920ffaba",
+      "src/wave15/func_00131950.c": "caa452e470ef2aa8c0f6dbe451f1221edcb442d0113a5f509b1be5557c128d86",
+      "src/wave15/func_001d9530.c": "5a81b0bea2584c1a1200e0be6ddf6ad935b4815db79b9b321cf41ec847bbe531",
+      "src/wave16/func_0012d0a4.c": "4006d3156c1be22cf87b61a3351f5f3eb4c0c04d8587fae938fb44a2ef1d1278",
+      "src/wave16/func_00145690.c": "954f8b94bb83d5821c5ca6f90c0f3e07ebabb8a53346e197539512def62d42ed",
+      "src/wave18/func_00145658.c": "263d4804f99561675af3de68b03da234f36294da801cd58fb8d739ff7426e8c1",
+      "src/wave4/func_0014a988.c": "abafc311b0d7647a2806d7d9b0c89e74f72cf7f51debe881f61bebad23ac2a96",
+      "tools/argcheck.py": "44b9f788099c5bf5086749145f2ed21ad0eba7b305964db036b01f64e2851a00",
+      "tools/image.py": "69cdbd8985a19f274fd587c347ed1673762d07953f76596194760ca07f65f79c"
+    },
+    "all44_inspected_paths_equal_Main_merged_source": true,
+    "all44_inspected_paths_equal_adjudication_branch_base": true
+  },
+  "scope": {
+    "new_issue_facts": 9,
+    "distinct_new_issue_targets": 5,
+    "adjudicated_false_positive_facts": 9,
+    "genuine_c011_contract_errors": 0,
+    "genuine_untouched_accepted_contract_errors_established": 0,
+    "prototype_changes": 0,
+    "NEW_deferrals_added": 0,
+    "NEW_deferral_bytes_added": 0,
+    "new_unique_note_facts": 17,
+    "distinct_new_note_targets": 13,
+    "all13_note_targets_original_and_source_inspected": true,
+    "removed_note_facts": 3,
+    "additional_existing_note_multiplicity_increase": 1,
+    "baseline_issue_count": 90,
+    "reported_issue_count": 99,
+    "baseline_note_count": 513,
+    "reported_note_count": 528,
+    "new_note_occurrences_including_multiplicity": 18
+  },
+  "result": "All nine new issue facts are conservative-scanner false positives: five identity-no-op facts, two caller-condition-temporary facts and two mixed identity/same-predicate-redefinition facts. Keep all existing prototypes and every reported input. All17 new note keys are retained; the three removed keys reappear at explicit accepted-owner move destinations. A further existing float-note occurrence explains the report-count delta without hiding a warning. The actual whole-ledger exit2 and99 issues/528 notes are preserved, not converted into a mechanical PASS.",
+  "new_issues": [
+    {
+      "function": "func_0010bed4",
+      "c011_claim": true,
+      "declaration": {
+        "line": 26,
+        "source": "include/game/service_availability.h"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x0019edc0"
+      ],
+      "fact_index": 1,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The only alleged result read after the call at0x0019edc0 is the value-preserving identity at0x0019edc8. It changes neither the value nor condition flags, accesses no memory, and performs no semantic result use.",
+          "The identity is the recorded branch-to-next rewrite of the source call to0019edcc; it does not establish a non-void result for0010bed4. Original bounded provider inspection and the source retain the sequence of five calls followed by0010bef4, with no invented return value."
+        ],
+        "caller": "func_0019edbc",
+        "signature_kept": "void func_0010bed4(void)",
+        "evidence": [
+          "identity_no_op_checks",
+          "provider_semantics",
+          "recorded_rewrites"
+        ]
+      }
+    },
+    {
+      "function": "func_0010bed4",
+      "c011_claim": true,
+      "declaration": {
+        "line": 3,
+        "source": "src/checkpoint11/func_0010bed4.c"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x0019edc0"
+      ],
+      "fact_index": 2,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The only alleged result read after the call at0x0019edc0 is the value-preserving identity at0x0019edc8. It changes neither the value nor condition flags, accesses no memory, and performs no semantic result use.",
+          "The identity is the recorded branch-to-next rewrite of the source call to0019edcc; it does not establish a non-void result for0010bed4. Original bounded provider inspection and the source retain the sequence of five calls followed by0010bef4, with no invented return value."
+        ],
+        "caller": "func_0019edbc",
+        "signature_kept": "void func_0010bed4(void)",
+        "evidence": [
+          "identity_no_op_checks",
+          "provider_semantics",
+          "recorded_rewrites"
+        ]
+      }
+    },
+    {
+      "function": "func_0012d0a4",
+      "c011_claim": false,
+      "declaration": {
+        "line": 32,
+        "source": "include/game/service_availability.h"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x0010bee8"
+      ],
+      "fact_index": 3,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The alleged result read after the call at0x0010bee8 is the identity at0x0010bef0. It preserves the core value and condition flags and performs no memory access or semantic result use.",
+          "The source0010bed4 discards0012d0a4 and calls0010bef4. The latter is the recorded branch-to-next rewrite at0x0010bef0. The new fact is a shared-declaration occurrence of an already reported accepted-provider result diagnostic, not an accepted contract repair."
+        ],
+        "caller": "func_0010bed4",
+        "signature_kept": "void func_0012d0a4(void)",
+        "accepted_provider_unchanged": true,
+        "evidence": [
+          "identity_no_op_checks",
+          "provider_semantics",
+          "recorded_rewrites"
+        ]
+      }
+    },
+    {
+      "function": "func_00145658",
+      "c011_claim": false,
+      "declaration": {
+        "line": 125,
+        "source": "include/game/startup.h"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00141a3c"
+      ],
+      "fact_index": 4,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The alleged read at0x00141a58 after the call at0x00141a3c is a value-preserving identity, with no flag modification or memory access.",
+          "This position is the second recorded R1 inline_nop of001415b0 in00141944. Its selected historical callee identity remains INFERENCE/QUALIFIED, but the no-op cannot consume a return value from the status setter.",
+          "The accepted provider stores its incoming status into global notification state; source and original positive incoming-r0 witness at0x00145668 agree with the unchanged one-input void contract."
+        ],
+        "caller": "func_00141944",
+        "signature_kept": "void func_00145658(unsigned status)",
+        "accepted_provider_unchanged": true,
+        "evidence": [
+          "identity_no_op_checks",
+          "provider_semantics",
+          "recorded_rewrites"
+        ]
+      }
+    },
+    {
+      "function": "func_00145690",
+      "c011_claim": false,
+      "declaration": {
+        "line": 124,
+        "source": "include/game/startup.h"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00141a30"
+      ],
+      "fact_index": 5,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_NO_OP",
+        "observations": [
+          "The alleged incoming-r0 preparation at0x00141a24 is a value-preserving identity with no flag modification or memory access. It does not construct or forward an argument for the call at0x00141a30.",
+          "The position is the first recorded R1 inline_nop of001415b0 in00141944. The local argument scanner treats the no-op write as a pending input. This does not warrant adding a formal to the accepted global-status reset.",
+          "The accepted provider and source retain the no-argument global status clear. No arity inference is drawn solely from the absence of an incoming-register read."
+        ],
+        "caller": "func_00141944",
+        "signature_kept": "void func_00145690(void)",
+        "accepted_provider_unchanged": true,
+        "evidence": [
+          "identity_no_op_checks",
+          "provider_semantics",
+          "recorded_rewrites"
+        ]
+      }
+    },
+    {
+      "function": "func_00192afc",
+      "c011_claim": true,
+      "declaration": {
+        "line": 44,
+        "source": "include/game/applet.h"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r2"
+      ],
+      "sites": [
+        "0x0010b910",
+        "0x0010d214",
+        "0x0010d47c",
+        "0x001151a0",
+        "0x00115220",
+        "0x0011525c",
+        "0x001152fc",
+        "0x00115398",
+        "0x00115c28",
+        "0x00122e88",
+        "0x0012307c",
+        "0x00123304",
+        "0x0012e8e4",
+        "0x0012fdc0",
+        "0x0012fe10",
+        "0x0012fea4",
+        "0x001368e4",
+        "0x00185f24",
+        "0x00192024",
+        "0x00192294",
+        "0x001922d8",
+        "0x001923f4",
+        "0x00194ad4",
+        "0x0019ec7c",
+        "0x0019ecb8"
+      ],
+      "fact_index": 6,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_CALLER_CONDITION_TEMPORARY",
+        "observations": [
+          "All25 flagged sites have the same witnessed semantic relationship: the r2 write immediately preceding the conditional reporter call extracts bit31 of the existing result inr0 and defines the condition flags used by that call.",
+          "The scalar inr2 is a caller-side failure-test temporary, not a third supplied reporter argument. Each flagged site is independently recorded in fatal_guard_checks; no site is dismissed by extrapolation from a single caller.",
+          "The original72-byte provider consumes the result inr0 and address inr1; its own r2 value is defined before any r2 use. The canonical source initializes the fatal payload from those two inputs. Keep both declared formals and do not invent a third one."
+        ],
+        "signature_kept": "void func_00192afc(int result, const void *address)",
+        "evidence": [
+          "fatal_guard_checks",
+          "provider_semantics",
+          "src/checkpoint11/fatal_header.c",
+          "src/sdk/func_0011516c.c"
+        ]
+      }
+    },
+    {
+      "function": "func_00192afc",
+      "c011_claim": true,
+      "declaration": {
+        "line": 44,
+        "source": "include/game/applet.h"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00185f24",
+        "0x0019ec7c"
+      ],
+      "fact_index": 7,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_AND_SAME_PREDICATE_REDEFINITION",
+        "observations": [
+          "At callsite0x0019ec7c the alleged read at0x0019ec84 is the recorded branch-to-next rewrite of0019ec88: a value-preserving identity that changes neither condition flags nor memory.",
+          "At callsite0x00185f24, the alleged later read at0x00185f3c stores a caller-stack word loaded freshly intor0 at0x00185f38. That load and the adjacent store have the same nontrivial condition, with no intervening flag modification. Whenever the store executes, the load must execute first; when the load is skipped, the store is skipped too.",
+          "The guard at0x00185f34 does not readr0 or any other core result register. Thus no path represented by the alleged read consumes the reporter return. The local scanner conservatively ignores conditional overwrites and misses this same-predicate dominance.",
+          "The uncredited private00185e94 source hypothesis was not adopted, compiled, or treated as exactness evidence; this disposition rests on the bounded original predicate/load/store relationship."
+        ],
+        "signature_kept": "void func_00192afc(int result, const void *address)",
+        "evidence": [
+          "identity_no_op_checks",
+          "same_predicate_redefinition",
+          "recorded_rewrites"
+        ]
+      }
+    },
+    {
+      "function": "func_00192afc",
+      "c011_claim": true,
+      "declaration": {
+        "line": 17,
+        "source": "src/checkpoint11/fatal_header.c"
+      },
+      "kind": "missing_core_parameters",
+      "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+      "registers": [
+        "r2"
+      ],
+      "sites": [
+        "0x0010b910",
+        "0x0010d214",
+        "0x0010d47c",
+        "0x001151a0",
+        "0x00115220",
+        "0x0011525c",
+        "0x001152fc",
+        "0x00115398",
+        "0x00115c28",
+        "0x00122e88",
+        "0x0012307c",
+        "0x00123304",
+        "0x0012e8e4",
+        "0x0012fdc0",
+        "0x0012fe10",
+        "0x0012fea4",
+        "0x001368e4",
+        "0x00185f24",
+        "0x00192024",
+        "0x00192294",
+        "0x001922d8",
+        "0x001923f4",
+        "0x00194ad4",
+        "0x0019ec7c",
+        "0x0019ecb8"
+      ],
+      "fact_index": 8,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_CALLER_CONDITION_TEMPORARY",
+        "observations": [
+          "All25 flagged sites have the same witnessed semantic relationship: the r2 write immediately preceding the conditional reporter call extracts bit31 of the existing result inr0 and defines the condition flags used by that call.",
+          "The scalar inr2 is a caller-side failure-test temporary, not a third supplied reporter argument. Each flagged site is independently recorded in fatal_guard_checks; no site is dismissed by extrapolation from a single caller.",
+          "The original72-byte provider consumes the result inr0 and address inr1; its own r2 value is defined before any r2 use. The canonical source initializes the fatal payload from those two inputs. Keep both declared formals and do not invent a third one."
+        ],
+        "signature_kept": "void func_00192afc(int result, const void *address)",
+        "evidence": [
+          "fatal_guard_checks",
+          "provider_semantics",
+          "src/checkpoint11/fatal_header.c",
+          "src/sdk/func_0011516c.c"
+        ]
+      }
+    },
+    {
+      "function": "func_00192afc",
+      "c011_claim": true,
+      "declaration": {
+        "line": 17,
+        "source": "src/checkpoint11/fatal_header.c"
+      },
+      "kind": "void_result_consumed",
+      "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+      "registers": [
+        "r0"
+      ],
+      "sites": [
+        "0x00185f24",
+        "0x0019ec7c"
+      ],
+      "fact_index": 9,
+      "adjudication": {
+        "verdict": "FALSE_POSITIVE_IDENTITY_AND_SAME_PREDICATE_REDEFINITION",
+        "observations": [
+          "At callsite0x0019ec7c the alleged read at0x0019ec84 is the recorded branch-to-next rewrite of0019ec88: a value-preserving identity that changes neither condition flags nor memory.",
+          "At callsite0x00185f24, the alleged later read at0x00185f3c stores a caller-stack word loaded freshly intor0 at0x00185f38. That load and the adjacent store have the same nontrivial condition, with no intervening flag modification. Whenever the store executes, the load must execute first; when the load is skipped, the store is skipped too.",
+          "The guard at0x00185f34 does not readr0 or any other core result register. Thus no path represented by the alleged read consumes the reporter return. The local scanner conservatively ignores conditional overwrites and misses this same-predicate dominance.",
+          "The uncredited private00185e94 source hypothesis was not adopted, compiled, or treated as exactness evidence; this disposition rests on the bounded original predicate/load/store relationship."
+        ],
+        "signature_kept": "void func_00192afc(int result, const void *address)",
+        "evidence": [
+          "identity_no_op_checks",
+          "same_predicate_redefinition",
+          "recorded_rewrites"
+        ]
+      }
+    }
+  ],
+  "issue_class_summary": {
+    "identity_no_op_facts": 5,
+    "caller_condition_temporary_facts": 2,
+    "mixed_identity_and_same_predicate_redefinition_facts": 2,
+    "individually_checked_fatal_condition_temporary_sites": 25,
+    "mechanical_exit_2_retained": true,
+    "baseline90_issues_not_readjudicated_as_new": true,
+    "no_provider_signature_inferred_from_unused_inputs_or_MATCH_alone": true
+  },
+  "identity_no_op_checks": [
+    {
+      "target": "func_0010bed4",
+      "callsite": "0x0019edc0",
+      "owner": "func_0019edbc",
+      "address": "0x0019edc8",
+      "value_preserving_identity": true,
+      "touched_core_registers": [
+        "r0"
+      ],
+      "frame_access": false,
+      "call_or_transfer": false,
+      "conditional": false,
+      "condition_flags_unchanged": true,
+      "memory_access": false
+    },
+    {
+      "target": "func_0012d0a4",
+      "callsite": "0x0010bee8",
+      "owner": "func_0010bed4",
+      "address": "0x0010bef0",
+      "value_preserving_identity": true,
+      "touched_core_registers": [
+        "r0"
+      ],
+      "frame_access": false,
+      "call_or_transfer": false,
+      "conditional": false,
+      "condition_flags_unchanged": true,
+      "memory_access": false
+    },
+    {
+      "target": "func_00145658",
+      "callsite": "0x00141a3c",
+      "owner": "func_00141944",
+      "address": "0x00141a58",
+      "value_preserving_identity": true,
+      "touched_core_registers": [
+        "r0"
+      ],
+      "frame_access": false,
+      "call_or_transfer": false,
+      "conditional": false,
+      "condition_flags_unchanged": true,
+      "memory_access": false
+    },
+    {
+      "target": "func_00145690",
+      "callsite": "0x00141a30",
+      "owner": "func_00141944",
+      "address": "0x00141a24",
+      "value_preserving_identity": true,
+      "touched_core_registers": [
+        "r0"
+      ],
+      "frame_access": false,
+      "call_or_transfer": false,
+      "conditional": false,
+      "condition_flags_unchanged": true,
+      "memory_access": false
+    },
+    {
+      "target": "func_00192afc",
+      "callsite": "0x0019ec7c",
+      "owner": "func_0019ec64",
+      "address": "0x0019ec84",
+      "value_preserving_identity": true,
+      "touched_core_registers": [
+        "r0"
+      ],
+      "frame_access": false,
+      "call_or_transfer": false,
+      "conditional": false,
+      "condition_flags_unchanged": true,
+      "memory_access": false
+    }
+  ],
+  "fatal_guard_checks": [
+    {
+      "callsite": "0x0010b910",
+      "caller": "func_0010b8b8",
+      "temporary_write": "0x10b90c",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0010d214",
+      "caller": "func_0010d0d0",
+      "temporary_write": "0x10d210",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0010d47c",
+      "caller": "func_0010d454",
+      "temporary_write": "0x10d478",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x001151a0",
+      "caller": "func_0011516c",
+      "temporary_write": "0x11519c",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00115220",
+      "caller": "func_001151e4",
+      "temporary_write": "0x11521c",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0011525c",
+      "caller": "func_001151e4",
+      "temporary_write": "0x115258",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x001152fc",
+      "caller": "func_001151e4",
+      "temporary_write": "0x1152f8",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00115398",
+      "caller": "func_00115354",
+      "temporary_write": "0x115394",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00115c28",
+      "caller": "func_00115b0c",
+      "temporary_write": "0x115c24",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00122e88",
+      "caller": "func_00122b30",
+      "temporary_write": "0x122e84",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0012307c",
+      "caller": "func_0012300c",
+      "temporary_write": "0x123078",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00123304",
+      "caller": "func_0012300c",
+      "temporary_write": "0x123300",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0012e8e4",
+      "caller": "func_0012e8a4",
+      "temporary_write": "0x12e8e0",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0012fdc0",
+      "caller": "func_0012fda0",
+      "temporary_write": "0x12fdbc",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0012fe10",
+      "caller": "func_0012fdd0",
+      "temporary_write": "0x12fe0c",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0012fea4",
+      "caller": "func_0012fe8c",
+      "temporary_write": "0x12fea0",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x001368e4",
+      "caller": "func_001368b0",
+      "temporary_write": "0x1368e0",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00185f24",
+      "caller": "func_00185e94",
+      "temporary_write": "0x185f20",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00192024",
+      "caller": "func_00191e18",
+      "temporary_write": "0x192020",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00192294",
+      "caller": "func_00192250",
+      "temporary_write": "0x192290",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x001922d8",
+      "caller": "func_00192250",
+      "temporary_write": "0x1922d4",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x001923f4",
+      "caller": "func_001923d4",
+      "temporary_write": "0x1923f0",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x00194ad4",
+      "caller": "func_001949f8",
+      "temporary_write": "0x194ad0",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0019ec7c",
+      "caller": "func_0019ec64",
+      "temporary_write": "0x19ec78",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    },
+    {
+      "callsite": "0x0019ecb8",
+      "caller": "func_0019ec88",
+      "temporary_write": "0x19ecb4",
+      "sign_bit_extraction": true,
+      "updates_condition_flags": true,
+      "call_conditional": true,
+      "no_intervening_r2_read": true
+    }
+  ],
+  "same_predicate_redefinition": {
+    "caller": "func_00185e94",
+    "extent": 204,
+    "reporter_call": "0x00185f24",
+    "r0_redefinition": "0x00185f38",
+    "r0_use": "0x00185f3c",
+    "redefinition_loads_caller_stack_word": true,
+    "use_stores_word": true,
+    "same_nontrivial_condition": true,
+    "condition_unchanged_between": true,
+    "use_takes_redefined_word_as_store_value": true,
+    "definition_and_use_adjacent": true,
+    "prior_flag_test_reads_only_non_result_core_inputs": true,
+    "guard_address": "0x185f34",
+    "guard_reads_r0": false
+  },
+  "provider_semantics": [
+    {
+      "function": "func_0010bed4",
+      "extent": 32,
+      "linear_entry_core_read_witnesses": {},
+      "direct_call_targets": [
+        "0x10be58",
+        "0x10bf74",
+        "0x10bf60",
+        "0x10bef8",
+        "0x12d0a4"
+      ],
+      "declared_inputs": [],
+      "interpretation": "Positive local witnesses only; no missing read proves an absent formal."
+    },
+    {
+      "function": "func_0012d0a4",
+      "extent": 20,
+      "linear_entry_core_read_witnesses": {},
+      "direct_call_targets": [
+        "0x121364",
+        "0x1213b0"
+      ],
+      "declared_inputs": [],
+      "interpretation": "Positive local witnesses only; no missing read proves an absent formal."
+    },
+    {
+      "function": "func_00145658",
+      "extent": 56,
+      "linear_entry_core_read_witnesses": {
+        "r0": "0x145668"
+      },
+      "direct_call_targets": [],
+      "declared_inputs": [
+        "r0"
+      ],
+      "interpretation": "Positive local witnesses only; no missing read proves an absent formal."
+    },
+    {
+      "function": "func_00145690",
+      "extent": 20,
+      "linear_entry_core_read_witnesses": {},
+      "direct_call_targets": [],
+      "declared_inputs": [],
+      "interpretation": "Positive local witnesses only; no missing read proves an absent formal."
+    },
+    {
+      "function": "func_00192afc",
+      "extent": 72,
+      "linear_entry_core_read_witnesses": {
+        "r0": "0x192afc",
+        "r1": "0x192b2c"
+      },
+      "direct_call_targets": [],
+      "declared_inputs": [
+        "r0",
+        "r1"
+      ],
+      "interpretation": "Positive local witnesses only; no missing read proves an absent formal."
+    }
+  ],
+  "recorded_rewrites": {
+    "qualification": "These are source-receipt rewrite names, not independently recovered erased historical callee identities. The original value-preserving identities were checked separately. No new callee or function model is introduced. Fixed instruction replacement words are omitted.",
+    "units": [
+      {
+        "source": "src/wave4/func_0014a988.c",
+        "profile": "game",
+        "source_sha256": "abafc311b0d7647a2806d7d9b0c89e74f72cf7f51debe881f61bebad23ac2a96",
+        "extra_source_sha256": {},
+        "receipt": "scratch/integrator/c011/r9/matches-r2/0191-func_0014a988/func_0014a988.result.json",
+        "receipt_sha256": "79a05d493064b5750a3f2e44882c7fbfe9e8a63b4e16057f4b5f558f09b5c78f",
+        "linker_rewrites": {
+          "func_0014a988": [
+            {
+              "offset": 0,
+              "rule": "branchnop",
+              "target": 1354124
+            }
+          ]
+        }
+      },
+      {
+        "source": "src/wave14/func_0019ec64.c",
+        "profile": "sdk",
+        "source_sha256": "0ffb10550f0f55cc9a2e78519306abce3d692f6b10d72f5d8da103c8920ffaba",
+        "extra_source_sha256": {},
+        "receipt": "scratch/integrator/c011/r9/matches-r2/1339-func_0019ec64/func_0019ec64.result.json",
+        "receipt_sha256": "a5502ee3b05bf06270f5b91ae480271a9fdcaf9bd34aed7290160cf66a7cd7ee",
+        "linker_rewrites": {
+          "func_0019ec64": [
+            {
+              "offset": 32,
+              "rule": "branchnop",
+              "target": 1698952
+            }
+          ]
+        }
+      },
+      {
+        "source": "src/checkpoint10/func_0019edbc.c",
+        "profile": "game",
+        "source_sha256": "8eb3fbfa9334e50f9b0a754dde89e5738a99e64b679b8dfa1695dd33d764ce01",
+        "extra_source_sha256": {},
+        "receipt": "scratch/integrator/c011/r9/matches-r2/2445-func_0019edbc/func_0019edbc.result.json",
+        "receipt_sha256": "49e244f4fa1320e4d90049b9ea5672568e7d07812c5160a007fa9f86ec1f86ed",
+        "linker_rewrites": {
+          "func_0019edbc": [
+            {
+              "offset": 12,
+              "rule": "branchnop",
+              "target": 1699276
+            }
+          ]
+        }
+      },
+      {
+        "source": "src/checkpoint11/func_0010bed4.c",
+        "profile": "game",
+        "source_sha256": "62e0f084508ac18377a7267da1306e6c0d63344ae02fa55150c256e8a8bedfa6",
+        "extra_source_sha256": {},
+        "receipt": "scratch/integrator/c011/r9/matches-r2/2603-func_0010bed4/func_0010bed4.result.json",
+        "receipt_sha256": "c815ef2d426c17571a67fa4221aaf6c365dad6e8562510a462baff2b8aded8ef",
+        "linker_rewrites": {
+          "func_0010bed4": [
+            {
+              "offset": 28,
+              "rule": "branchnop",
+              "target": 1097460
+            }
+          ]
+        }
+      },
+      {
+        "source": "src/checkpoint11/startup_command_pool-r14.c",
+        "profile": "game",
+        "source_sha256": "ae2577e8d1da79f7df7023a5f10baf66d59baf72d7dffedc34a3b1809239881e",
+        "extra_source_sha256": {},
+        "receipt": "scratch/integrator/c011/r9/matches-r2/2640-startup_command_pool-r14/startup_command_pool-r14.result.json",
+        "receipt_sha256": "6569ed5648c59d409178b3d2681e7afdb1432a1a6a215c1feb8109441553922b",
+        "linker_rewrites": {
+          "func_00141944": [
+            {
+              "offset": 224,
+              "rule": "inline_nop",
+              "target": 1316272
+            },
+            {
+              "offset": 276,
+              "rule": "inline_nop",
+              "target": 1316272
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "new_notes": [
+    {
+      "function": "func_0012d5c4",
+      "c011_claim": true,
+      "declaration": {
+        "line": 30,
+        "source": "include/game/archive_ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "fact_index": 1,
+      "group": "IPC_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "All four core inputs are preserved at entry and used to marshal output, byte mode, ID-buffer pointer and count. The sole wrapper0012d4f0 tail-forwardsr0-r3 without modifying them, so its empty pending-write set is expected. Retain all four formals.",
+      "provider_evidence": "func_0012d5c4"
+    },
+    {
+      "function": "func_0012d5c4",
+      "c011_claim": true,
+      "declaration": {
+        "line": 12,
+        "source": "src/checkpoint11/archive_mapped_descriptors-r12.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "fact_index": 2,
+      "group": "IPC_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "All four core inputs are preserved at entry and used to marshal output, byte mode, ID-buffer pointer and count. The sole wrapper0012d4f0 tail-forwardsr0-r3 without modifying them, so its empty pending-write set is expected. Retain all four formals.",
+      "provider_evidence": "func_0012d5c4"
+    },
+    {
+      "function": "func_00136340",
+      "c011_claim": true,
+      "declaration": {
+        "line": 32,
+        "source": "include/game/archive_ipc.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "fact_index": 3,
+      "group": "IPC_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "All four core input registers are preserved at entry. The body marshals output, byte mode and the64-bit ID, while input/count remain the two stack formals. Wrapper0012d4d0 forwardsr0-r3 unmodified and preserves the complete five-input call. Retain the64-bit and stack inputs.",
+      "provider_evidence": "func_00136340"
+    },
+    {
+      "function": "func_00136340",
+      "c011_claim": true,
+      "declaration": {
+        "line": 20,
+        "source": "src/checkpoint11/archive_application_buffer-r12.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "fact_index": 4,
+      "group": "IPC_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "All four core input registers are preserved at entry. The body marshals output, byte mode and the64-bit ID, while input/count remain the two stack formals. Wrapper0012d4d0 forwardsr0-r3 unmodified and preserves the complete five-input call. Retain the64-bit and stack inputs.",
+      "provider_evidence": "func_00136340"
+    },
+    {
+      "function": "func_00139174",
+      "c011_claim": true,
+      "declaration": {
+        "line": 7,
+        "source": "include/game/archive_queries.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "fact_index": 5,
+      "group": "PRESERVED_OR_CONSUMED_SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The identifier inr1 is consumed at provider entry to choose the high-byte kind and low24-bit reference index. Accepted relay00131950 replaces onlyr0 with reader->info and forwards the sound ID unchanged. The absent fresh r1 write cannot erase the identifier.",
+      "provider_evidence": "func_00139174"
+    },
+    {
+      "function": "func_0014a988",
+      "c011_claim": false,
+      "declaration": {
+        "line": 21,
+        "source": "include/game/hwr_image.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1",
+        "r2"
+      ],
+      "fact_index": 6,
+      "group": "PRESERVED_OR_CONSUMED_SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The original4-byte wrapper is a value-preserving identity that falls through into adjacent accepted0014a98c without changing core inputs; the recorded branchnop names that same target. Original0014a98c positively consumesr1 andr2. Caller0018191c supplies height127, copies it to width, and preserves its allocation pointer inr2 across the predecessor-block boundary. The scanner losesr1 when the width copy reads it and losesr2 across the block boundary; neither input is absent.",
+      "provider_evidence": "func_0014a988"
+    },
+    {
+      "function": "func_0014cc1c",
+      "c011_claim": true,
+      "declaration": {
+        "line": 57,
+        "source": "include/game/audio_dsp.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r2",
+        "r3"
+      ],
+      "fact_index": 7,
+      "group": "PRESERVED_OR_CONSUMED_SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The incoming mode and option are read/preserved at0x0014cc28 and0x0014cc2c before service calls, then set the real AudioDspSettings fields. A caller pending-write window omittingr2/r3 is not permission to remove either formal. No new contract is assigned to intervening callees merely because their registers remain live.",
+      "provider_evidence": "func_0014cc1c"
+    },
+    {
+      "function": "func_0014cc1c",
+      "c011_claim": true,
+      "declaration": {
+        "line": 12,
+        "source": "src/checkpoint14/auxiliary_mode.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r2",
+        "r3"
+      ],
+      "fact_index": 8,
+      "group": "PRESERVED_OR_CONSUMED_SETUP",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The incoming mode and option are read/preserved at0x0014cc28 and0x0014cc2c before service calls, then set the real AudioDspSettings fields. A caller pending-write window omittingr2/r3 is not permission to remove either formal. No new contract is assigned to intervening callees merely because their registers remain live.",
+      "provider_evidence": "func_0014cc1c"
+    },
+    {
+      "function": "func_001650f8",
+      "c011_claim": true,
+      "declaration": {
+        "line": 5,
+        "source": "src/checkpoint11/archive_block_queries-r10.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 9,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The file receiver is read at0x001650fc, and its block count/table drive the search. The lookup wrappers forward their unchanged incoming file pointer while supplying only a new type value. This definition was explicitly moved from the accepted old owner; the diagnostic was not eliminated.",
+      "provider_evidence": "func_001650f8"
+    },
+    {
+      "function": "func_00181994",
+      "c011_claim": true,
+      "declaration": {
+        "line": 15,
+        "source": "src/checkpoint11/intake-r7/np020/func_00181994.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 10,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The actual provider reads state->enabled; the original incoming-r0 read at0x0018199c establishes a genuine receiver input. No local fresh caller write is required for a preserved receiver, and the input remains typed and unchanged.",
+      "provider_evidence": "func_00181994"
+    },
+    {
+      "function": "func_001a3ee0",
+      "c011_claim": false,
+      "declaration": {
+        "line": 47,
+        "source": "include/game/menu_controller.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 11,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The accepted provider reads the state-stack receiver at0x001a3ee4; its existing source uses depth/stages, animations and transition group. Retain MenuControllerState* rather than treating a tail caller with no new pending write as no-argument evidence. No inherited native/callback model is repaired or newly approved here.",
+      "provider_evidence": "func_001a3ee0"
+    },
+    {
+      "function": "func_001ce05c",
+      "c011_claim": true,
+      "declaration": {
+        "line": 42,
+        "source": "include/game/graphics_address.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r1"
+      ],
+      "fact_index": 12,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The original preserves the output pointer fromr1 at0x001ce060. The body writes command words, advances the pointer and returns it. The caller-window absence of a fresh unconsumedr1 write does not justify removing the output cursor.",
+      "provider_evidence": "func_001ce05c"
+    },
+    {
+      "function": "func_001d9530",
+      "c011_claim": false,
+      "declaration": {
+        "line": 259,
+        "source": "include/game/audio_voice.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 13,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The accepted provider reads the incoming voice receiver at0x001d9534 and updates envelope/group/voice flags. Retain AudioVoice*; no callback protocol or accepted implementation is changed by adjudicating the additional header-declaration occurrence.",
+      "provider_evidence": "func_001d9530"
+    },
+    {
+      "function": "func_001e9af8",
+      "c011_claim": true,
+      "declaration": {
+        "line": 150,
+        "source": "include/game/input.h"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 14,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The original reads the item receiver at0x001e9afc. Source uses item flags/state/countdown/table and the independent InputSnapshot* input. Retain both inputs. The separate types-compose worktree migration is not part of, or proof for, this source context.",
+      "provider_evidence": "func_001e9af8"
+    },
+    {
+      "function": "func_001e9af8",
+      "c011_claim": true,
+      "declaration": {
+        "line": 5,
+        "source": "src/checkpoint11/ui_item_update-r12.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 15,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "The original reads the item receiver at0x001e9afc. Source uses item flags/state/countdown/table and the independent InputSnapshot* input. Retain both inputs. The separate types-compose worktree migration is not part of, or proof for, this source context.",
+      "provider_evidence": "func_001e9af8"
+    },
+    {
+      "function": "func_001f1ebc",
+      "c011_claim": true,
+      "declaration": {
+        "line": 15,
+        "source": "src/checkpoint11/archive_block_queries-r10.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 16,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "Incomingr0 reaches the original direct call001650f8 at0x001f1ec4 unchanged, with only the lookup type supplied freshly inr1. The called provider consumes the file. The existing bool(const ArchiveFile*) contract and moved definition remain intact.",
+      "provider_evidence": "func_001f1ebc"
+    },
+    {
+      "function": "func_001f1ed8",
+      "c011_claim": true,
+      "declaration": {
+        "line": 20,
+        "source": "src/checkpoint11/archive_block_queries-r10.c"
+      },
+      "kind": "declared_inputs_not_observed",
+      "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+      "registers": [
+        "r0"
+      ],
+      "fact_index": 17,
+      "group": "RECEIVER_AND_LOOKUP_FORWARDING",
+      "disposition": "RETAIN_DECLARED_INPUTS_NO_SOURCE_CHANGE",
+      "rationale": "Incomingr0 reaches the original direct call001650f8 at0x001f1ee0 unchanged, with only the lookup type supplied freshly inr1. The called provider consumes the file. The existing bool(const ArchiveFile*) contract and moved definition remain intact.",
+      "provider_evidence": "func_001f1ed8"
+    }
+  ],
+  "note_groups": {
+    "IPC_FORWARDING": {
+      "functions": [
+        "func_0012d5c4",
+        "func_00136340"
+      ],
+      "fact_count": 4,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS"
+    },
+    "PRESERVED_OR_CONSUMED_SETUP": {
+      "functions": [
+        "func_00139174",
+        "func_0014a988",
+        "func_0014cc1c"
+      ],
+      "fact_count": 4,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS"
+    },
+    "RECEIVER_AND_LOOKUP_FORWARDING": {
+      "functions": [
+        "func_001650f8",
+        "func_00181994",
+        "func_001a3ee0",
+        "func_001ce05c",
+        "func_001d9530",
+        "func_001e9af8",
+        "func_001f1ebc",
+        "func_001f1ed8"
+      ],
+      "fact_count": 9,
+      "disposition": "RETAIN_CURRENT_TYPED_INPUTS"
+    }
+  },
+  "note_original_and_source_witnesses": [
+    {
+      "function": "func_0012d5c4",
+      "extent": 104,
+      "noted_registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x0012d5c4",
+        "r3": "0x0012d5c4",
+        "r2": "0x0012d5c4",
+        "r1": "0x0012d5c4"
+      },
+      "source": "src/checkpoint11/archive_mapped_descriptors-r12.c",
+      "source_sha256": "78d1b530b35f21b3612d04ea8135d1b2c554ef096d6e87f0899fadaee79cf58c",
+      "profile": "sdk",
+      "observation": "All four core inputs are preserved at entry and used to marshal output, byte mode, ID-buffer pointer and count. The sole wrapper0012d4f0 tail-forwardsr0-r3 without modifying them, so its empty pending-write set is expected. Retain all four formals.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_00136340",
+      "extent": 112,
+      "noted_registers": [
+        "r0",
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x00136340",
+        "r3": "0x00136340",
+        "r2": "0x00136340",
+        "r1": "0x00136340"
+      },
+      "source": "src/checkpoint11/archive_application_buffer-r12.c",
+      "source_sha256": "7b568b8e20c6d37969d9d9eb3a3de26ea6e937d1ea2cd97775dccb6dc770c4e9",
+      "profile": "sdk",
+      "observation": "All four core input registers are preserved at entry. The body marshals output, byte mode and the64-bit ID, while input/count remain the two stack formals. Wrapper0012d4d0 forwardsr0-r3 unmodified and preserves the complete five-input call. Retain the64-bit and stack inputs.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_00139174",
+      "extent": 100,
+      "noted_registers": [
+        "r1"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r1": "0x00139174"
+      },
+      "source": "src/checkpoint11/archive_stream_property-r6.cpp",
+      "source_sha256": "48093bfbc9c942603f9fd3ee912d5b344fdcd63a2cc743bc09deed14a3ebd6cf",
+      "profile": "middleware",
+      "observation": "The identifier inr1 is consumed at provider entry to choose the high-byte kind and low24-bit reference index. Accepted relay00131950 replaces onlyr0 with reader->info and forwards the sound ID unchanged. The absent fresh r1 write cannot erase the identifier.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_0014a988",
+      "extent": 4,
+      "noted_registers": [
+        "r1",
+        "r2"
+      ],
+      "positive_linear_entry_read_witnesses": {},
+      "source": "src/wave4/func_0014a988.c",
+      "source_sha256": "abafc311b0d7647a2806d7d9b0c89e74f72cf7f51debe881f61bebad23ac2a96",
+      "profile": "game",
+      "observation": "The original4-byte wrapper is a value-preserving identity that falls through into adjacent accepted0014a98c without changing core inputs; the recorded branchnop names that same target. Original0014a98c positively consumesr1 andr2. Caller0018191c supplies height127, copies it to width, and preserves its allocation pointer inr2 across the predecessor-block boundary. The scanner losesr1 when the width copy reads it and losesr2 across the block boundary; neither input is absent.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_0014cc1c",
+      "extent": 128,
+      "noted_registers": [
+        "r2",
+        "r3"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r2": "0x0014cc28",
+        "r3": "0x0014cc2c"
+      },
+      "source": "src/checkpoint14/auxiliary_mode.c",
+      "source_sha256": "9066aee1ff2e0b2047454c4084ee03ad3ed57d62a5252a8ed9c66049851096ed",
+      "profile": "middleware",
+      "observation": "The incoming mode and option are read/preserved at0x0014cc28 and0x0014cc2c before service calls, then set the real AudioDspSettings fields. A caller pending-write window omittingr2/r3 is not permission to remove either formal. No new contract is assigned to intervening callees merely because their registers remain live.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001650f8",
+      "extent": 192,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x001650fc"
+      },
+      "source": "src/checkpoint11/archive_block_queries-r10.c",
+      "source_sha256": "46e381de939dd756d6ba1d0f82354c6394784f95d417a80d5fb31bbcaf10d9cd",
+      "profile": "middleware",
+      "observation": "The file receiver is read at0x001650fc, and its block count/table drive the search. The lookup wrappers forward their unchanged incoming file pointer while supplying only a new type value. This definition was explicitly moved from the accepted old owner; the diagnostic was not eliminated.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_00181994",
+      "extent": 96,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x0018199c"
+      },
+      "source": "src/checkpoint11/intake-r7/np020/func_00181994.c",
+      "source_sha256": "77345d0dfde77d7ac44388d762fc90a77f7fa188c528015ac4ec1d09bc73857c",
+      "profile": "game",
+      "observation": "The actual provider reads state->enabled; the original incoming-r0 read at0x0018199c establishes a genuine receiver input. No local fresh caller write is required for a preserved receiver, and the input remains typed and unchanged.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001a3ee0",
+      "extent": 412,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x001a3ee4"
+      },
+      "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+      "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+      "profile": "game",
+      "observation": "The accepted provider reads the state-stack receiver at0x001a3ee4; its existing source uses depth/stages, animations and transition group. Retain MenuControllerState* rather than treating a tail caller with no new pending write as no-argument evidence. No inherited native/callback model is repaired or newly approved here.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001ce05c",
+      "extent": 276,
+      "noted_registers": [
+        "r1"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r1": "0x001ce060"
+      },
+      "source": "src/checkpoint11/batch_texture_keys-r13.cpp",
+      "source_sha256": "9f0eed0f5d8f5daee90e6c3e9340816bdb17bbc9501eb7893bc62f2bfcd32d0d",
+      "profile": "game",
+      "observation": "The original preserves the output pointer fromr1 at0x001ce060. The body writes command words, advances the pointer and returns it. The caller-window absence of a fresh unconsumedr1 write does not justify removing the output cursor.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001d9530",
+      "extent": 80,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x001d9534"
+      },
+      "source": "src/wave15/func_001d9530.c",
+      "source_sha256": "5a81b0bea2584c1a1200e0be6ddf6ad935b4815db79b9b321cf41ec847bbe531",
+      "profile": "game",
+      "observation": "The accepted provider reads the incoming voice receiver at0x001d9534 and updates envelope/group/voice flags. Retain AudioVoice*; no callback protocol or accepted implementation is changed by adjudicating the additional header-declaration occurrence.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001e9af8",
+      "extent": 484,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {
+        "r0": "0x001e9afc"
+      },
+      "source": "src/checkpoint11/ui_item_update-r12.c",
+      "source_sha256": "ad6505333bdc798a95a7e004e444a816f37cbffb95c459da5ab7c9b19f969b68",
+      "profile": "game",
+      "observation": "The original reads the item receiver at0x001e9afc. Source uses item flags/state/countdown/table and the independent InputSnapshot* input. Retain both inputs. The separate types-compose worktree migration is not part of, or proof for, this source context.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001f1ebc",
+      "extent": 28,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {},
+      "unchanged_forwarding_witnesses": [
+        {
+          "site": "0x001f1ec4",
+          "target": "0x001650f8",
+          "unchanged_incoming_registers": [
+            "r0"
+          ],
+          "kind": "direct"
+        }
+      ],
+      "source": "src/checkpoint11/archive_block_queries-r10.c",
+      "source_sha256": "46e381de939dd756d6ba1d0f82354c6394784f95d417a80d5fb31bbcaf10d9cd",
+      "profile": "middleware",
+      "observation": "Incomingr0 reaches the original direct call001650f8 at0x001f1ec4 unchanged, with only the lookup type supplied freshly inr1. The called provider consumes the file. The existing bool(const ArchiveFile*) contract and moved definition remain intact.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    },
+    {
+      "function": "func_001f1ed8",
+      "extent": 28,
+      "noted_registers": [
+        "r0"
+      ],
+      "positive_linear_entry_read_witnesses": {},
+      "unchanged_forwarding_witnesses": [
+        {
+          "site": "0x001f1ee0",
+          "target": "0x001650f8",
+          "unchanged_incoming_registers": [
+            "r0"
+          ],
+          "kind": "direct"
+        }
+      ],
+      "source": "src/checkpoint11/archive_block_queries-r10.c",
+      "source_sha256": "46e381de939dd756d6ba1d0f82354c6394784f95d417a80d5fb31bbcaf10d9cd",
+      "profile": "middleware",
+      "observation": "Incomingr0 reaches the original direct call001650f8 at0x001f1ee0 unchanged, with only the lookup type supplied freshly inr1. The called provider consumes the file. The existing bool(const ArchiveFile*) contract and moved definition remain intact.",
+      "interpretation": "Positive entry-read/preservation or actual forwarding witnesses plus the inspected source. A missing linear read never proves an absent formal; frame spills alone are not used to infer arity."
+    }
+  ],
+  "IPC_forwarding_wrapper_witnesses": [
+    {
+      "function": "func_0012d4f0",
+      "extent": 4,
+      "forwarded_to": "func_0012d5c4",
+      "site": "0x0012d4f0",
+      "all_four_entry_core_inputs_unmodified_before_transfer": true,
+      "source_stack_inputs_retained": false
+    },
+    {
+      "function": "func_0012d4d0",
+      "extent": 32,
+      "forwarded_to": "func_00136340",
+      "site": "0x0012d4e4",
+      "all_four_entry_core_inputs_unmodified_before_transfer": true,
+      "source_stack_inputs_retained": true
+    }
+  ],
+  "image_argument_witnesses": {
+    "height_and_allocation_setup": {
+      "function": "func_0018191c",
+      "callsite": "0x00181958",
+      "height_definition": "0x00181950",
+      "height_is_127": true,
+      "height_read_to_supply_width": true,
+      "width_setup": "0x00181954",
+      "image_setup": "0x00181948",
+      "image_is_preserved_allocation_pointer": true
+    },
+    "cross_block_preservation": {
+      "image_argument_setup": "0x00181948",
+      "callsite": "0x00181958",
+      "setup_precedes_basic_block_boundary": true,
+      "setup_block_directly_precedes_call_block": true,
+      "r2_not_redefined_between_setup_and_call": true
+    },
+    "identity_fallthrough": {
+      "function": "func_0014a988",
+      "extent": 4,
+      "adjacent_provider": "func_0014a98c",
+      "all_code_is_value_preserving_identity": true,
+      "no_control_transfer_or_memory_access": true,
+      "falls_through_to_provider": true,
+      "provider_extent": 76,
+      "provider_entry_read_witnesses": {
+        "r2": "0x0014a98c",
+        "r1": "0x0014a9ac",
+        "r0": "0x0014a9b0"
+      }
+    }
+  },
+  "removed_facts": [
+    {
+      "function": "func_001650f8",
+      "kind": "notes",
+      "fact": {
+        "declaration": {
+          "source": "src/checkpoint10/alternate1/func_001650f8.c"
+        },
+        "kind": "declared_inputs_not_observed",
+        "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+        "registers": [
+          "r0"
+        ]
+      },
+      "fact_index": 1,
+      "disposition": "EXPLICIT_ACCEPTED_OWNER_MOVE_NOTE_RETAINED_AT_NEW_DEFINITION",
+      "from_source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to_source": "src/checkpoint11/archive_block_queries-r10.c",
+      "baseline_prototype": "function(pointer to (const struct ArchiveFile), unsigned int) -> pointer to (const struct ArchiveBlockReference)",
+      "current_prototype": "function(pointer to (const struct ArchiveFile), unsigned int) -> pointer to (const struct ArchiveBlockReference)",
+      "prototype_unchanged": true,
+      "accepted_identity_preserved": true,
+      "replacement_new_note_index": 9,
+      "evidence": "scratch/integrator/c011/r9/MOVES-r2.json"
+    },
+    {
+      "function": "func_001f1ebc",
+      "kind": "notes",
+      "fact": {
+        "declaration": {
+          "source": "src/checkpoint10/alternate1/func_001650f8.c"
+        },
+        "kind": "declared_inputs_not_observed",
+        "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+        "registers": [
+          "r0"
+        ]
+      },
+      "fact_index": 2,
+      "disposition": "EXPLICIT_ACCEPTED_OWNER_MOVE_NOTE_RETAINED_AT_NEW_DEFINITION",
+      "from_source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to_source": "src/checkpoint11/archive_block_queries-r10.c",
+      "baseline_prototype": "function(pointer to (const struct ArchiveFile)) -> _Bool",
+      "current_prototype": "function(pointer to (const struct ArchiveFile)) -> _Bool",
+      "prototype_unchanged": true,
+      "accepted_identity_preserved": true,
+      "replacement_new_note_index": 16,
+      "evidence": "scratch/integrator/c011/r9/MOVES-r2.json"
+    },
+    {
+      "function": "func_001f1ed8",
+      "kind": "notes",
+      "fact": {
+        "declaration": {
+          "source": "src/checkpoint10/alternate1/func_001650f8.c"
+        },
+        "kind": "declared_inputs_not_observed",
+        "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+        "registers": [
+          "r0"
+        ]
+      },
+      "fact_index": 3,
+      "disposition": "EXPLICIT_ACCEPTED_OWNER_MOVE_NOTE_RETAINED_AT_NEW_DEFINITION",
+      "from_source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to_source": "src/checkpoint11/archive_block_queries-r10.c",
+      "baseline_prototype": "function(pointer to (const struct ArchiveFile)) -> _Bool",
+      "current_prototype": "function(pointer to (const struct ArchiveFile)) -> _Bool",
+      "prototype_unchanged": true,
+      "accepted_identity_preserved": true,
+      "replacement_new_note_index": 17,
+      "evidence": "scratch/integrator/c011/r9/MOVES-r2.json"
+    }
+  ],
+  "existing_fact_multiplicity_changes": [
+    {
+      "function": "func_0014cc9c",
+      "kind": "notes",
+      "fact": {
+        "declaration": {
+          "source": "include/game/service_runtime.h"
+        },
+        "kind": "declared_inputs_not_observed",
+        "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+        "registers": [
+          "s0"
+        ]
+      },
+      "baseline_count": 1,
+      "current_count": 2,
+      "disposition": "RETAIN_EXISTING_FLOAT_INPUT_IDENTICAL_DECLARATION_REPEAT",
+      "rationale": "The header repeats the same int(ServiceCommandQueueW22E*,int,float) declaration at lines252 and281. Removing declaration.line from the fact key collapses these occurrences, so this additional occurrence is not among the17 new keys. The float is stored into command->value; fresh bounded original inspection reads s0 at0x0014ccac, agreeing with c010-r6 precedent. This is one protocol, not an incompatible model, and no parameter is removed.",
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "source_sha256": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33",
+      "bounded_original_semantics": {
+        "function": "func_0014cc9c",
+        "extent": 124,
+        "positive_s0_read_witness": [
+          "0x0014ccac"
+        ],
+        "source_stores_float_into_command_value": true
+      }
+    }
+  ],
+  "count_reconciliation": {
+    "issues": "90 baseline +9 new keys =99 reported issues",
+    "notes": "513 baseline +17 new keys -3 moved-old keys +1 repeated existing-key occurrence =528 reported notes"
+  },
+  "source_and_credit_disposition": {
+    "source_changed": false,
+    "canonical_declarations_changed": false,
+    "accepted_providers_changed": false,
+    "accepted_functions_dropped": 0,
+    "NEW_holds_added": 0,
+    "NEW_hold_bytes_added": 0,
+    "c011_holds_retained": 116,
+    "c011_hold_bytes_retained": 22532,
+    "candidate_NEW_functions_retained": 89,
+    "candidate_NEW_bytes_retained": 12716,
+    "moves_retained": 9,
+    "proposed_units_retained": 2695,
+    "proposed_functions_retained": 2771,
+    "proposed_bytes_retained": 301296,
+    "c012_only_func_0017e764_ownership_unchanged": true,
+    "unfinalized_types_compose_not_adopted": true
+  },
+  "execution": {
+    "bounded_original_semantic_inspections": [
+      {
+        "purpose": "identity-and-register-checks",
+        "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+        "actual_exit_code": 0,
+        "output": "Only the semantic facts captured in this record; no original instruction text, encodings or buffers."
+      },
+      {
+        "purpose": "fatal-guard-site-checks",
+        "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+        "actual_exit_code": 0,
+        "output": "Only the semantic facts captured in this record; no original instruction text, encodings or buffers."
+      },
+      {
+        "purpose": "same-predicate-and-provider-checks",
+        "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+        "actual_exit_code": 0,
+        "output": "Only the semantic facts captured in this record; no original instruction text, encodings or buffers."
+      },
+      {
+        "purpose": "all-note-provider-checks",
+        "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+        "actual_exit_code": 0,
+        "output": "Only the semantic facts captured in this record; no original instruction text, encodings or buffers."
+      },
+      {
+        "purpose": "image-fallthrough-checks",
+        "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+        "actual_exit_code": 0,
+        "output": "Only the semantic facts captured in this record; no original instruction text, encodings or buffers."
+      },
+      {
+        "purpose": "flags-cross-block-and-float-checks",
+        "interpreter": "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+        "actual_exit_code": 0,
+        "output": "Only the semantic facts captured in this record; no original instruction text, encodings or buffers."
+      }
+    ],
+    "branch_probe_exit_code": 1,
+    "new_worktree_creation_exit_code": 0,
+    "heavy_commands_run": 0,
+    "matcher_commands_run": 0,
+    "reason_no_new_reproof": "No source, header, composition, profile or ledger input changed. No failed or unchanged gate was rerun. The existing r9 match/interface evidence is referenced without claiming a new execution.",
+    "argcheck_rerun": false,
+    "build_suite_prepare_review_registration_finalize_push_run": false,
+    "subagents_or_task_tool_used": false
+  },
+  "qualifications": [
+    "This is author adjudication, not an independent review or acceptance. Main retains all acceptance, review registration and push ownership.",
+    "The reported baseline diagnostics and notes retain their existing adjudication chain; no gate code or report was edited or suppressed.",
+    "Linear entry-read checks are positive witnesses only, not path-complete missing-argument proofs. Source use and actual forwarding distinguish inputs from prologue spills and caller temporaries.",
+    "The identity and same-predicate observations establish the specific reported false positives; they do not claim a general caller-contract proof for every inherited function.",
+    "No unfinalized branch or private uncredited provider was used as an accepted contract prerequisite.",
+    "Only source, addresses, extents, semantic facts, counts and hashes were emitted. No original bytes, encodings, disassembly, raw buffers or licensed payload were stored."
+  ]
+}
