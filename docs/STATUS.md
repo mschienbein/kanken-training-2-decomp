@@ -2,6 +2,35 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-23 — c009-r6 accepted (+648 functions); next checkpoints queued
+
+**Accepted:** 2,269 functions / 249,372 B (seq 10: … cmodels, c009-r6). Denominator **v9-r2**:
+4,624 creditable functions / 1,131,454 B (**22.04%**). Gates **v1.19**.
+
+- **c009-r6** adds 648 functions / 53,464 B (waves 15–20, retries, solos) with explicit linker v6
+  plus literal L1. It took six rounds: each independent review that failed found cross-unit callable
+  contracts that disagreed with the original program. These were callback type erasure,
+  resource-dispatch tables, scene vtables, a completed font table typing an existing static table,
+  converter slots that needed `float(float)`, a queue callback that drops its cursor argument, and
+  an unauthorized DisplayTarget vtable. Each was fixed where an exact fix existed; otherwise only
+  the new function was deferred. 28 functions / 3,588 B stay deferred and uncredited. Both r6
+  reviews PASS_WITH_QUALIFICATIONS with no findings (`docs/known-issues-c009-r2.md`).
+- **Ready for gates, in order:**
+  - c010-r6: 424 functions / 40,480 B. Pre-review fixes applied; a targeted re-check is running.
+  - ctypes1 (composed type models): 190 revised functions and 2 new. Interfaces clean; pre-review
+    running.
+  - c011-r4: pre-review findings resolved by deferral.
+  - c012: 71 new functions / 12,472 B.
+- **Blocked:**
+  - cmodels2: two accepted scene/PMF contract findings need the native scene family.
+  - The native MenuScene destructor family needs linker model U1, now at v14 after four review
+    rounds that each found one major issue and no blockers.
+- **Catalogue v13-r2** (boundary/library reclassification; 0 function-record changes in its
+  last round) passed review and will be adopted between checkpoints.
+- **Escalation:** the step-5b second pass continues, with 108 batches queued. The permuter sweep
+  (≤32-byte residuals) has 127 rows left and has found one match, which needs a natural
+  rewrite because the permuter's version uses steering.
+
 ## 2026-10-18 (later) — cmodels accepted (linker v6 + L1); linker model v8 adopted
 
 **Accepted:** 1,621 functions / 195,908 B (seq 9: … c008-r3, cmodels). Denominator **v9-r2**:

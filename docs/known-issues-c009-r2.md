@@ -976,3 +976,19 @@ review registration, finalize or push was run by this worker.
 ledger and fresh output paths for the remaining gates and the new
 `c009-r6` preparation, followed by two fresh independent reviews.
 
+
+## C009-r6 accepted (history seq 10)
+
+**Gates (Main, source `f47bb29f`):**
+- Whole-ledger interfaces: exit 0, with 0 disagreements, 0 policy items and 494 explicitly waived unchecked C++ units across 2,216 units.
+- argcheck: actual exit 2, with 78 issues and 409 notes. These facts are identical to c009-r5's, which were adjudicated by carry. The one scope change is the deferred `func_00117854`. This is a recorded mechanical gap, not a clean ABI pass.
+- `accept.py prepare --checkpoint c009-r6`: exit 0, PASS. Two fresh full builds were identical; the suite ran 814 tests (1 skipped, 0 failed modules). `prepare.json` SHA-256 `27cfe2290762d55003973de10d4ce91fcf369202aeda1bbfcfa984d7284274c6`.
+
+**Independent reviews:** both PASS_WITH_QUALIFICATIONS with zero findings.
+- codex-a: 825 required functions, 348 PASS and 477 QUALIFIED rows. REVIEW.json SHA-256 `dcbc3c5634c5c8062d11091444dee00af06c8975584282179f8727bc79ac7ec6`.
+- codex-b: 825 functions, 322 PASS and 503 QUALIFIED rows. REVIEW.json SHA-256 `7900f7840d13c22eef41f914d30b0d1196f0c4992225e4eff8eae661351b4092`.
+- Both re-ran about 1,900 sequential matcher commands (all MATCH) and their own argcheck (exit 2, every issue and note adjudicated). Both confirmed that the c009-r4 font/converter findings and the c009-r5 cursor/DisplayTarget findings are resolved at the root, that all 1,621 accepted identities and the five moves are preserved, and that the 28 manifest deferrals (3,588 B) are uncredited.
+
+**Finalized:** seq 10. Ledger 2,269 / 4,624 functions and 249,372 / 1,131,454 B (22.04%) on denominator v9-r2. This adds 648 NEW functions (53,464 B) to cmodels' 1,621 (195,908 B). `accept.py verify` passes.
+
+**Mandatory qualifications carried by both reviews:** R1 erased-callee provenance is inference; L1 proves only the witnessed span; C-only mandatory-discard results are qualified, not historical-semantics passes; C++ and dynamic-dispatch ABI gaps remain explicit; preserved original bugs and counted loops stay qualified; the cursor signedness in the CommandQueue slot is `[INFERENCE]`; opaque font/layout/text-decoder tables (`data_00223d98`, PF01, PF05) are honest under-specification, never invoked through a guessed type.

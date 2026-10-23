@@ -2,7 +2,24 @@
 
 Current entry on top.
 
-## 2026-10-20 — resumed WSL desktop (current)
+## 2026-10-23 — c009-r6 accepted; 8-subagent cap (current)
+
+**State:** `docs/STATUS.md` top entry. Accepted 2,269 functions / 249,372 B (seq 10, c009-r6);
+denominator v9-r2; gates v1.19. Same host and inputs as below.
+
+Changes to the restart sequence below:
+- **Concurrency:** the user capped this run at **8 concurrent Codex `gpt-6.1-sol:max` subagents**,
+  nested agents included. Every task text says "never use the task tool". Main cannot cancel a
+  subagent's children; only cancelling the parent works.
+- **Live state:** `scratch/integrator/PIPELINE-LIVE-20261023.md` (branch heads, agents, heavy-slot
+  queue). `scratch/integrator/PIPELINE.md` points to it.
+- **Permuter sweep-10:** run by Main without an agent. Run `driver.py request`, write
+  `HEAVY-SLOT-GRANTED-N.json` with the request sha, then `driver.py run-chunk N`. A gate can
+  pre-empt a chunk via `STOP-AFTER-ROW.json` (delete it afterwards).
+- **Next checkpoint order:** catalogue v13-r2 adoption, then c010-r6, ctypes1, c011-r4 and c012.
+  cmodels2 and the native MenuScene family wait for linker U1 (v14 in review).
+
+## 2026-10-20 — resumed WSL desktop
 
 **State:** `docs/STATUS.md` top entry. Accepted 1,621 functions / 195,908 B (seq 9, cmodels);
 denominator v9-r2; gates v1.19. Host: WSL2 Ubuntu on the Windows desktop
