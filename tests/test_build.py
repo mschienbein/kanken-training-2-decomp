@@ -25,13 +25,20 @@ BASE = inplace_tests.BASE
 
 class BuildRemovedCalleeModelTest(unittest.TestCase):
     def synthetic_build(self, model="armlink5-inline-branchnop-v3", retained=False, reverse=False,
-                        comdat_alias=None, credit_helper=False):
+                        comdat_alias=None, credit_helper=False, unreferenced=False):
         temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         root = Path(temporary.name)
         fixture = inplace_tests.RemovedCalleeModelTest()
         names = {}
-        if comdat_alias is not None:
+        if unreferenced:
+            if unreferenced == "unwind":
+                caller, memory, functions, names = inplace_tests.UnreferencedDestructorUnwindModelTest().fixture("extab")
+            else:
+                caller, memory, functions, names = inplace_tests.UnreferencedDestructorModelTest().fixture()
+            helper = inplace.ObjectFile.__new__(inplace.ObjectFile)
+            helper.sections, helper.symbols = {}, []
+        elif comdat_alias is not None:
             (caller, helper), memory, functions, names = fixture.comdat_alias_fixture(
                 contradictory=comdat_alias == "contradictory",
                 original_size=12 if comdat_alias == "wrong_original" else 8)
@@ -197,6 +204,35 @@ class BuildRemovedCalleeModelTest(unittest.TestCase):
                 self.assertEqual([row["target"] for row in rewrites], [None, None])
                 self.assertTrue(all(row["removed_callee"]["object"] == "src/caller.c" for row in rewrites))
 
+    def test_v9_section_eliminations_are_owned_hashed_and_reported_without_extra_credit(self):
+        model = inplace_tests.UnreferencedDestructorModelTest.MODEL
+        for reverse in (False, True):
+            receipt, root = self.synthetic_build(model=model, reverse=reverse, unreferenced=True)
+            self.assertEqual(receipt["result"], "PASS")
+            self.assertEqual((receipt["credited"]["functions"], receipt["credited"]["bytes"]), (1, 4))
+            units = {unit["source"]: unit for unit in receipt["units"]}
+            owner = units["src/caller.c"]
+            member, = owner["removed_special_members"]
+            self.assertEqual(member["object"], "src/caller.c")
+            self.assertEqual(owner["linker_section_rewrites"], [{
+                "rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}])
+            self.assertEqual(owner["linker_rewrites"], {})
+            self.assertEqual(owner["object_sha256"], build.sha256_file(root / "build/synthetic-removed/obj/src/caller.o"))
+            self.assertNotIn("removed_special_members", units["src/helper.c"])
+
+    def test_v10_receipts_bind_every_owned_unwind_companion_without_crediting_it(self):
+        model = inplace_tests.UnreferencedDestructorUnwindModelTest.MODEL
+        for reverse in (False, True):
+            receipt, root = self.synthetic_build(model=model, reverse=reverse, unreferenced="unwind")
+            self.assertEqual(receipt["result"], "PASS")
+            self.assertEqual((receipt["credited"]["functions"], receipt["credited"]["bytes"]), (1, 4))
+            owner = next(unit for unit in receipt["units"] if unit["source"] == "src/caller.c")
+            member, = owner["removed_special_members"]
+            self.assertEqual([row["kind"] for row in member["unwind_sections"]], ["exidx", "extab"])
+            self.assertEqual({row["object"] for row in member["unwind_sections"]}, {"src/caller.c"})
+            self.assertEqual(owner["linker_section_rewrites"][0]["removed_special_member"], member)
+            self.assertEqual(owner["object_sha256"], build.sha256_file(root / "build/synthetic-removed/obj/src/caller.o"))
+
 PROFILE = toolchain.Profile(
     "game", "armcc_504_82",
     ("--cpu=MPCore", "--fpmode=fast", "--apcs=/interwork", "--arm", "--split_sections", "-O3", "-Otime"),
@@ -232,6 +268,7 @@ class SyntheticBuildFixture:
             "config/catalogue.json": json.dumps(catalogue),
             "config/compiler_profiles.json": "{}",
             "toolchain.lock.json": "{}",
+            "tools/linker_models.py": Path(inplace.__file__).with_name("linker_models.py").read_text(),
         }.items():
             self.write_source(rel, text)
         (self.root / "docs").mkdir()
@@ -240,7 +277,7 @@ class SyntheticBuildFixture:
         (self.root / "orig/exheader.bin").write_bytes(b"synthetic exheader hash input")
         for module, attr, value in (
             (build, "ROOT", self.root), (build, "MATCHES", self.root / "config/matches.json"),
-            (build, "HARNESS", ()), (image, "CATALOGUE", self.root / "config/catalogue.json"),
+            (build, "HARNESS", ("tools/linker_models.py",)), (image, "CATALOGUE", self.root / "config/catalogue.json"),
             (image, "NAMES", self.root / "config/names.json"),
             (toolchain, "ROOT", self.root), (toolchain, "PROFILES", self.root / "config/compiler_profiles.json"),
             (toolchain, "CACHE", self.root / ".cache/objcache"),

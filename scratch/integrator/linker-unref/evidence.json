@@ -1,0 +1,68 @@
+{
+  "model": "armlink5-inline-branchnop-v9",
+  "base_commit": "82d9cf7",
+  "adopted": false,
+  "gates_draft": "scratch/integrator/linker-unref/GATES-DRAFT.md",
+  "focused_regressions": {
+    "exit": 0,
+    "tests_run": 101,
+    "seconds": 0.573,
+    "result": "OK",
+    "command": ".venv/bin/python -m unittest tests.test_inplace.UnreferencedDestructorModelTest tests.test_inplace.RemovedUnwindModelTest tests.test_inplace.RemovedCalleeModelTest tests.test_inplace.CppFunctionAliasTest tests.test_inplace.CompositeAliasSwitchTest tests.test_match.UnreferencedDestructorCompareTest tests.test_match.CppAliasCompareTest tests.test_match.AliasCompareSafetyTest tests.test_match.ModelOptionsTest tests.test_build.BuildRemovedCalleeModelTest tests.test_accept.AcceptGateTest.test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions tests.test_accept.AcceptGateTest.test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers tests.test_accept.AcceptGateTest.test_v3_to_v4_selection_binds_receipts_and_reopens_unchanged_r1_callers"
+  },
+  "final_focused_regressions": {
+    "exit": 0,
+    "tests_run": 126,
+    "seconds": 1.011,
+    "result": "OK",
+    "command": [
+      ".venv/bin/python", "-m", "unittest",
+      "tests.test_inplace.UnreferencedDestructorModelTest",
+      "tests.test_inplace.RemovedUnwindModelTest",
+      "tests.test_inplace.RemovedCalleeModelTest",
+      "tests.test_inplace.CppFunctionAliasTest",
+      "tests.test_inplace.CompositeAliasSwitchTest",
+      "tests.test_inplace.ArmlinkModelTest",
+      "tests.test_inplace.ArmlinkBoundaryTest",
+      "tests.test_inplace.BoundedSwitchModelTest",
+      "tests.test_inplace.BoundedSwitchEffectsTest",
+      "tests.test_match.UnreferencedDestructorCompareTest",
+      "tests.test_match.CppAliasCompareTest",
+      "tests.test_match.AliasCompareSafetyTest",
+      "tests.test_match.ModelOptionsTest",
+      "tests.test_build.BuildRemovedCalleeModelTest",
+      "tests.test_accept.AcceptGateTest.test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions",
+      "tests.test_accept.AcceptGateTest.test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions",
+      "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings",
+      "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers",
+      "tests.test_accept.AcceptGateTest.test_v3_to_v4_selection_binds_receipts_and_reopens_unchanged_r1_callers"
+    ]
+  },
+  "real_menu_reset": {
+    "snapshot_commit": "d8aef63a",
+    "source_sha256": "27745497e2d3c8649d0d747478b1cbd6b184d2f4984c31b5d4895416a555b8bd",
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+      "-c",
+      "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/match.py',*sys.argv[2:]]; runpy.run_path('tools/match.py',run_name='__main__')",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v9",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--names",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+      "--show",
+      "0",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v9"
+    ],
+    "exit": 2,
+    "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json (not config/names.json); a MATCH here needs those bindings adopted\n",
+    "stderr": "error: .ARM.exidx: linked metadata keeps a U1 deleting destructor live\n",
+    "include_root_override": "Only toolchain.ROOT is rebound to the immutable fixture so quoted game/ headers come from d8aef63a; pinned game flags/compiler and the linker implementation remain those of linker-unref."
+  }
+}

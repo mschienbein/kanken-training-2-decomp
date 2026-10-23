@@ -283,6 +283,10 @@ class AliasCompareSafetyTest(unittest.TestCase):
             for model in match.inplace.LINKER_MODELS:
                 with self.subTest(case=case, model=model):
                     obj, mem, catalogue, names = self.explicit_bound_pool_fixture(code_size, pool_size)
+                    if match.inplace.linker_model(model).complete_group_declarations:
+                        from tests.elf_fixture import serialize_object
+                        obj = match.inplace.ObjectFile(Path("explicit.o"), data=serialize_object(obj),
+                                                       input_kind="object")
                     self.assertEqual(match.inplace.function_aliases(obj), {})
                     metadata = [vars(sym).copy() for sym in obj.symbols]
                     ctx = match.Context.__new__(match.Context)
@@ -368,7 +372,7 @@ class ModelOptionsTest(unittest.TestCase):
 
 
 class PlacementRefusalTest(unittest.TestCase):
-    def invoke(self, obj, image, catalogue, model=match.inplace.DEFAULT_LINKER_MODEL):
+    def invoke(self, obj, image, catalogue, model=match.inplace.DEFAULT_LINKER_MODEL, names=None):
         if not hasattr(image, "sha256"):
             image.sha256 = "synthetic-image"
         if not hasattr(image, "bss"):
@@ -395,7 +399,7 @@ class PlacementRefusalTest(unittest.TestCase):
                 (match.toolchain, "armcc_exe", {"return_value": compiler}),
                 (match.image_mod.Image, "load", {"return_value": image}),
                 (match.image_mod, "load_catalogue", {"return_value": catalogue_record}),
-                (match.image_mod, "load_names", {"return_value": {}}),
+                (match.image_mod, "load_names", {"return_value": names or {}}),
                 (match.inplace, "ObjectFile", {"return_value": obj}),
             ):
                 stack.enter_context(patch.object(module, name, **kwargs))
@@ -554,6 +558,52 @@ class PlacementRefusalTest(unittest.TestCase):
                     patch.object(match.inplace.InPlaceLinker, "place", side_effect=error):
                 with self.assertRaises(type(error)):
                     self.invoke(*placement_failure_fixture(0))
+
+
+class UnreferencedDestructorCompareTest(unittest.TestCase):
+    invoke = PlacementRefusalTest.invoke
+
+    def test_matcher_writes_section_action_and_original_witness_metadata(self):
+        from tests.test_inplace import UnreferencedDestructorModelTest
+
+        fixture = UnreferencedDestructorModelTest()
+        obj, image, catalogue, names = fixture.fixture()
+        code, record, error = self.invoke(obj, image, catalogue, fixture.MODEL, names)
+        self.assertEqual((code, error), (0, ""))
+        self.assertEqual(record["linker_model"], fixture.MODEL)
+        self.assertEqual([row["name"] for row in record["functions"]], [fixture.D1])
+        self.assertEqual(record["functions"][0]["linker_rewrites"], [])
+        member, = record["removed_special_members"]
+        self.assertEqual(member["symbols"], [fixture.D0])
+        self.assertEqual(record["linker_rewrites"], [{
+            "rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}])
+        self.assertNotIn("_candidate", json.dumps(record))
+        self.assertNotIn("_original", json.dumps(record))
+
+    def test_proposed_names_binding_prevents_u1_and_is_never_silently_ignored(self):
+        from tests.test_inplace import UnreferencedDestructorModelTest
+
+        fixture = UnreferencedDestructorModelTest()
+        obj, image, catalogue, names = fixture.fixture()
+        names = match.merge_names(names, {fixture.D0: {"address": 0x180100}})
+        code, record, _ = self.invoke(obj, image, catalogue, fixture.MODEL, names)
+        self.assertEqual(code, 2)
+        self.assertEqual(record["status"], "refused")
+        self.assertIn("original address binding", record["reason"])
+        self.assertNotIn("removed_special_members", record)
+
+    def test_v10_matcher_serializes_the_complete_own_unwind_closure(self):
+        from tests.test_inplace import UnreferencedDestructorUnwindModelTest
+
+        fixture = UnreferencedDestructorUnwindModelTest()
+        obj, image, catalogue, names = fixture.fixture("extab")
+        code, record, error = self.invoke(obj, image, catalogue, fixture.MODEL, names)
+        self.assertEqual((code, error), (0, ""))
+        self.assertEqual(record["linker_model"], fixture.MODEL)
+        member, = record["removed_special_members"]
+        self.assertEqual([row["kind"] for row in member["unwind_sections"]], ["exidx", "extab"])
+        self.assertEqual(record["linker_rewrites"][0]["removed_special_member"], member)
+        self.assertEqual([row["name"] for row in record["functions"]], [fixture.D1])
 
 
 if __name__ == "__main__":

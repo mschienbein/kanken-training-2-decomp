@@ -1,0 +1,140 @@
+{
+  "model": "armlink5-inline-branchnop-v10",
+  "parent_model": "armlink5-inline-branchnop-v9",
+  "previous_implementation_commit": "33b5823454e4426bb6da712883d40bcf71904a01",
+  "adopted": false,
+  "gates_draft": "scratch/integrator/linker-unref/GATES-DRAFT.md",
+  "focused_regressions": {
+    "exit": 0,
+    "tests_run": 138,
+    "seconds": 0.926,
+    "result": "OK",
+    "command": [
+      ".venv/bin/python",
+      "-m",
+      "unittest",
+      "tests.test_inplace.UnreferencedDestructorUnwindModelTest",
+      "tests.test_inplace.UnreferencedDestructorModelTest",
+      "tests.test_inplace.RemovedUnwindModelTest",
+      "tests.test_inplace.RemovedCalleeModelTest",
+      "tests.test_inplace.CppFunctionAliasTest",
+      "tests.test_inplace.CompositeAliasSwitchTest",
+      "tests.test_inplace.ArmlinkModelTest",
+      "tests.test_inplace.ArmlinkBoundaryTest",
+      "tests.test_inplace.BoundedSwitchModelTest",
+      "tests.test_inplace.BoundedSwitchEffectsTest",
+      "tests.test_match.UnreferencedDestructorCompareTest",
+      "tests.test_match.CppAliasCompareTest",
+      "tests.test_match.AliasCompareSafetyTest",
+      "tests.test_match.ModelOptionsTest",
+      "tests.test_build.BuildRemovedCalleeModelTest",
+      "tests.test_accept.AcceptGateTest.test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions",
+      "tests.test_accept.AcceptGateTest.test_v9_to_v10_transition_reopens_u1_owner_and_binds_every_unwind_companion",
+      "tests.test_accept.AcceptGateTest.test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions",
+      "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_l1_functions_and_exposes_all_mappings",
+      "tests.test_accept.AcceptGateTest.test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers",
+      "tests.test_accept.AcceptGateTest.test_v3_to_v4_selection_binds_receipts_and_reopens_unchanged_r1_callers"
+    ]
+  },
+  "real_menu_reset": {
+    "snapshot_commit": "d8aef63a",
+    "source_sha256": "27745497e2d3c8649d0d747478b1cbd6b184d2f4984c31b5d4895416a555b8bd",
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/.venv/bin/python",
+      "-c",
+      "import runpy,sys; from pathlib import Path; sys.path.insert(0,'tools'); import toolchain; toolchain.ROOT=Path(sys.argv[1]); sys.argv=['tools/match.py',*sys.argv[2:]]; runpy.run_path('tools/match.py',run_name='__main__')",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/src/wave18/func_001acbb4.cpp",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v10",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--names",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json",
+      "--show",
+      "0",
+      "--out",
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v10"
+    ],
+    "exit": 0,
+    "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/types-menu-d8aef63a/config/names.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN14MenuResetSceneD1Ev @ 0x1acbb4 size 0x64/0x64\nREMOVED  _ZN14MenuResetSceneD0Ev (108 bytes; U1 i._ZN14MenuResetSceneD0Ev)\n",
+    "stderr": "",
+    "include_root_override": "Only toolchain.ROOT is rebound to the immutable fixture so quoted game/ headers come from d8aef63a; pinned game flags/compiler and the linker implementation remain those of linker-unref.",
+    "result_path": "scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.result.json",
+    "functions": [
+      {
+        "name": "_ZN14MenuResetSceneD1Ev",
+        "address": 1756084,
+        "size": 100,
+        "candidate_size": 100,
+        "status": "match",
+        "linker_rewrites": []
+      }
+    ],
+    "linker_rewrites": [
+      {
+        "rule": "unused_deleting_destructor",
+        "target": null,
+        "removed_special_member": {
+          "symbols": [
+            "_ZN14MenuResetSceneD0Ev"
+          ],
+          "section": "i._ZN14MenuResetSceneD0Ev",
+          "section_index": 1,
+          "size": 108,
+          "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.o",
+          "evidence": {
+            "vtable": "_ZTV14MenuResetScene",
+            "vtable_address": 2241984,
+            "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+            "complete_destructor_address": 1756084,
+            "d0_slot_offset": 12,
+            "d0_slot_is_null": true,
+            "d1_slot_agrees": true
+          },
+          "unwind_sections": [
+            {
+              "section": ".ARM.exidx",
+              "section_index": 4,
+              "size": 8,
+              "kind": "exidx",
+              "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.o"
+            }
+          ]
+        }
+      }
+    ],
+    "removed_special_members": [
+      {
+        "symbols": [
+          "_ZN14MenuResetSceneD0Ev"
+        ],
+        "section": "i._ZN14MenuResetSceneD0Ev",
+        "section_index": 1,
+        "size": 108,
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.o",
+        "evidence": {
+          "vtable": "_ZTV14MenuResetScene",
+          "vtable_address": 2241984,
+          "complete_destructor": "_ZN14MenuResetSceneD1Ev",
+          "complete_destructor_address": 1756084,
+          "d0_slot_offset": 12,
+          "d0_slot_is_null": true,
+          "d1_slot_agrees": true
+        },
+        "unwind_sections": [
+          {
+            "section": ".ARM.exidx",
+            "section_index": 4,
+            "size": 8,
+            "kind": "exidx",
+            "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref/scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.o"
+          }
+        ]
+      }
+    ]
+  },
+  "historical_v9_receipt": "scratch/integrator/linker-unref/real-menu-reset-v9/func_001acbb4.result.json"
+}

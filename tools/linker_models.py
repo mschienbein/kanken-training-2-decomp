@@ -22,6 +22,16 @@ class LinkerModel:
     bounded_switches: bool = False  # v4: bounded ARM jump-table CFG with fail-closed endian state
     function_entry_aliases: bool = False  # v6: proven aliases plus independently bound legacy placement
     removed_unwind: bool = False  # v8: eliminate only complete, exclusive EHABI/group closures
+    unreferenced_destructors: bool = False  # v9: witnessed, unbound D0 sections with no live references
+    unreferenced_destructor_unwind: bool = False  # v10: U1 owners receive v8's exclusive own-unwind closure
+    checked_destructor_removal: bool = False  # v11: complete allocated census, exact mappings/target identities
+    complete_section_metadata: bool = False  # v12: unreduced ELF header and group/copy identity
+    structural_companion_edges: bool = False  # v13: exempt exact own structural edges, never whole sources
+    complete_symbol_resolution: bool = False  # v14: all supplied definitions, scoped refs and ABI-marker namespace
+    single_object_u1: bool = False  # v15: one directly attested input; preserve original provenance separately
+    per_unit_u1: bool = False  # v16: direct-unit U1 preparation, never aggregate U1 authorization
+    closed_u1_composition: bool = False  # v17: complete all-copy group closure and positive unit evidence
+    complete_group_declarations: bool = False  # v18: census every raw group, even empty/orphaned declarations
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -34,6 +44,54 @@ LINKER_MODELS = {m.name: m for m in (
                 bounded_switches=True, function_entry_aliases=True),
     LinkerModel("armlink5-inline-branchnop-v8", inline=True, branchnop=True, removed_inline=True,
                 bounded_switches=True, function_entry_aliases=True, removed_unwind=True),
+    LinkerModel("armlink5-inline-branchnop-v9", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True),
+    LinkerModel("armlink5-inline-branchnop-v10", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True),
+    LinkerModel("armlink5-inline-branchnop-v11", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True),
+    LinkerModel("armlink5-inline-branchnop-v12", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True),
+    LinkerModel("armlink5-inline-branchnop-v13", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True),
+    LinkerModel("armlink5-inline-branchnop-v14", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True, complete_symbol_resolution=True),
+    LinkerModel("armlink5-inline-branchnop-v15", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True, complete_symbol_resolution=True, single_object_u1=True),
+    LinkerModel("armlink5-inline-branchnop-v16", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True, complete_symbol_resolution=True,
+                single_object_u1=True, per_unit_u1=True),
+    LinkerModel("armlink5-inline-branchnop-v17", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True, complete_symbol_resolution=True,
+                single_object_u1=True, per_unit_u1=True, closed_u1_composition=True),
+    LinkerModel("armlink5-inline-branchnop-v18", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True, complete_symbol_resolution=True,
+                single_object_u1=True, per_unit_u1=True, closed_u1_composition=True,
+                complete_group_declarations=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).

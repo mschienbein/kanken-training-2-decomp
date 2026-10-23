@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "model": "armlink5-inline-branchnop-v17",
+  "adopted": false,
+  "branch": "linker-unref",
+  "previous_implementation_commit": "6bd6cd7b84c807fd92bee98572bd8a92303c782e",
+  "review": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/review/linker-v16/codex",
+    "verdict": "FAIL",
+    "sha256": {
+      "SEAL.json": "dfd752e4f8324c75cd059db458a0bed789491cc3737222ad5345e7aed4ee4774",
+      "REPORT.md": "5af10d4a9124a98bc0e4008d9341d337a15f5a49c0fd17c54a4c295d189ff5ff",
+      "REVIEW.json": "a9c36cc099831ff30c7a44e4054e7bcd8a3ea36f68b02f7980839dc0abdfa8c1",
+      "group_stage.py": "0bd3728081f24fa7c6154a529a1a5a2867bfbc0f8472c8adb2d310b750386bb7",
+      "receipt_attacks.py": "745e55ce840228d6b15418a091a9241978daaf8bc4a1d76fe2276324f4b7db05",
+      "prepare_scope.py": "1159591c70faace1283acaa8ef5e056d96f8651ab4fba1f88c0d44173e2cb937"
+    }
+  },
+  "scope": "Targeted systematic sweep of per-unit/global U1 composition and receipt-scope absence/filtering boundaries; not an exhaustive linker/ELF audit or adoption.",
+  "findings_fixed": [
+    {
+      "id": "V16-F01",
+      "severity": "blocker",
+      "root": "Local U1 plans were committed without checking every original same-signature allocated COMDAT copy.",
+      "fix": "V17 check_u1_group_closure requires every original positive/zero-sized allocated affected member to belong to its own unit removal set and have one supported canonical COMDAT membership, then compares complete original copy roles/metadata/contents/targets in a remapped metadata-only view. No aggregate witness or new removal is authorized.",
+      "regressions": [
+        "ClosedCompositionTest.test_review_six_same_signature_kept_data_and_zero_members_refuse",
+        "ClosedCompositionTest.test_different_signatures_remain_positive_in_both_orders",
+        "ClosedCompositionTest.test_all_closed_copies_require_equal_complete_code_and_companion_metadata"
+      ],
+      "exact_counterexamples": {
+        "foreign_members": [
+          "kept-code",
+          "unplaced-data",
+          "zero-member"
+        ],
+        "object_orders": [
+          "owner-first",
+          "foreign-first"
+        ],
+        "count": 6,
+        "expected": "all refuse"
+      }
+    },
+    {
+      "id": "V16-F02",
+      "severity": "major",
+      "root": "A negative bounded-mode check and lossy build_summary filter treated absent scope/units as full evidence.",
+      "fix": "Every new prepare requires a schema-2 full build-receipt with positive whole-image/BLZ input/output hashes and equality checks, fresh PASS, coherent unit/credit/compiler provenance and complete selected U1 action/member/witness schema. Summaries identify themselves as non-receipts and retain scope; hash-bound complete receipts are revalidated at review/finalize/history.",
+      "regressions": [
+        "PositiveFullEvidenceTest.test_bounded_omission_relabel_and_builtin_summary_never_become_full",
+        "PositiveFullEvidenceTest.test_full_receipt_requires_each_positive_image_scope_and_unit_field",
+        "PositiveFullEvidenceTest.test_isolated_prepare_rejects_the_reviewers_bounded_transformations",
+        "PositiveFullEvidenceTest.test_selected_verification_rejects_missing_mode_and_summary_receipts",
+        "PositiveFullEvidenceTest.test_legacy_full_evidence_is_explicitly_scoped_and_partial_evidence_never_is"
+      ]
+    }
+  ],
+  "closure_sweep": [
+    {
+      "boundary": "Original allocated census before pruning",
+      "inputs": "sections plus dependency_sections, original symbols/reference identity, retention roots, relocation transports and group metadata",
+      "result": "Original object proof and existing foreign-reference veto keep zero-sized/unplaced/retained sources visible; no prepared aggregate is allowed to supply positive U1 evidence. Inherited v11-v16 negative matrices all executed."
+    },
+    {
+      "boundary": "Affected COMDAT copy membership",
+      "inputs": "all original local plans, positive and zero-sized allocated sections, raw group copies/indices, canonical symbol-table/signature provenance",
+      "result": "Kept/unplaced/zero/unproved affected members and unknown flags or unrepresented members veto; raw-reader group_issues/group_copies prevent loss before the global census. Unknown flags 0/3 and unrepresented-index regressions executed."
+    },
+    {
+      "boundary": "Cross-unit copy equivalence",
+      "inputs": "remapped original section identities; complete code/companion bytes, mapping/symbol/section/group metadata and resolved relocation-target identities",
+      "result": "Existing complete destructor-copy checker is used only as a negative composition proof. Equal closed copies accepted at preparation, changed D0/extab copies refused in both orders. Ordinary aggregate ownership checks still forbid duplicate credited emitted owners."
+    },
+    {
+      "boundary": "Foreign dependencies and ABI provenance",
+      "inputs": "all original positive/zero-sized source relocations and all supplied personality definitions",
+      "result": "Existing foreign-reference and supplied-definition vetoes remain before aggregation; all v16 and inherited namespace/ABI/retention regressions executed. No name-only cross-unit witness or personality exception was introduced."
+    },
+    {
+      "boundary": "Compiler-output aliasing",
+      "inputs": "unit source paths, compiled object and dependency paths/hashes",
+      "result": "V17 retains the source suffix in object paths; same-stem C/C++ units have independent compiler outputs. Dedicated regression executed."
+    },
+    {
+      "boundary": "Receipt scope identity",
+      "inputs": "schema_version, record_kind, mode, result/fresh, whole-image/BLZ hashes/checks, covered fields, credited counts and units",
+      "result": "Positive full identity and hashes/checks are mandatory, covered fields forbidden. Missing/relabelled scope, missing units, empty credited-unit census and summaries refuse. No defaulting absent mode to full."
+    },
+    {
+      "boundary": "Input/unit provenance absence",
+      "inputs": "selected model labels, catalogue/profiles/toolchain/exheader/matches hashes, harness and compiler digests; source/object/profile/compiler/flags/function rows",
+      "result": "Mandatory new-receipt fields cannot silently disappear. Unit sources/functions must be unique, credited function count agrees with unit rows, every used compiler has a digest, and source/object hashes exist. Empty compiler maps with used units and duplicate units refuse."
+    },
+    {
+      "boundary": "U1 action/witness absence",
+      "inputs": "explicit authorization count; removed_special_members, linker_section_rewrites, u1_witness_comparisons; fresh dependency manifest and headers",
+      "result": "All lists/counts, including zero-use unit lists, are mandatory; action/member records agree exactly. Each removed D0 has exactly one matching full-size retained D1 comparison with equal candidate/original hashes. Missing fields and wrong witness size refuse."
+    }
+  ],
+  "reporting_filter_sweep": [
+    {
+      "path": "tools/build.py: build",
+      "behavior": "Both bounded and full producers explicitly mark schema/kind/mode. Per-unit actions and exact witnesses retain original local ownership/indices and source/object/dependency/harness hashes. Bounded mode writes no hybrid image/BLZ payload or whole-image success flags."
+    },
+    {
+      "path": "tools/accept.py: build_summary",
+      "behavior": "New summaries preserve mode/covered and use record_kind build-summary; no units are invented, and neither new nor historical summary formatting can satisfy full receipt validation."
+    },
+    {
+      "path": "tools/accept.py: prepare",
+      "behavior": "build_scope_valid is an unconditional PASS prerequisite for both complete receipts; new prepare records freeze build_evidence_version 2 and receipt hashes."
+    },
+    {
+      "path": "tools/accept.py: verify_selection / review / finalize / verify_history",
+      "behavior": "Consumers reload complete hash-bound receipts, compare their exact corresponding summary and frozen selection, and enforce positive full evidence. Finalize rejects a failed prepare before acceptance."
+    },
+    {
+      "path": "tools/accept.py: model_use_summary / linker_review_summary",
+      "behavior": "Diagnostic/review derivations preserve U1 owners, companions and actions, including zero-credit owners; they are not full receipts or independent authorization. Failed scope prevents prepare PASS even if a diagnostic summary can be formed."
+    },
+    {
+      "path": "tools/match.py",
+      "behavior": "Inherited explicit section-action/member reporting and complete comparison_inputs hash closure apply to v17; fresh MenuResetScene and refused MenuScene controls executed."
+    },
+    {
+      "path": "tools/compid.py",
+      "behavior": "Inherited source/pair action/member/comparison_inputs propagation remains; model registry and all compiler-grid tests executed."
+    },
+    {
+      "path": "tools/collect.py",
+      "behavior": "Every U1 model, including v17, is refused before candidate publication because the collector lacks per-comparison section-action receipts; all collector tests executed."
+    },
+    {
+      "path": "tools/argcheck.py: load_rewrites",
+      "behavior": "Consumes function-level rewrite metadata for erased call diagnostics; it does not produce U1/full-build authorization or credit. All argcheck tests executed."
+    },
+    {
+      "path": "tools/permute.py: MODEL / Oracle",
+      "behavior": "Fixed armlink5-inline-branchnop-v2 context; no U1 selector, new permuter execution or U1 reporting claim."
+    }
+  ],
+  "historical_compatibility": {
+    "models": "v9-v16 algorithm selections remain available and unadopted. Only v17 enables closed_u1_composition/distinct build-unit object paths; common receipt producers now report positive schema/scope explicitly.",
+    "legacy_full_exception": "Only explicitly requested historical verification of schema-1, no-mode/no-kind, non-v17 full evidence may use legacy formatting; positive whole-image/BLZ hashes/checks, fresh PASS, credited fields and units remain required. New prepare never enables this exception.",
+    "failed_postmortem": "The pre-selector default-model legacy review path may register an exact FAIL/FAIL postmortem without claiming full success; finalize refuses its failed prepare. No covered evidence can yield accepted credit through this path.",
+    "defaults": {
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none"
+    },
+    "gates_untouched": {
+      "docs/GATES.md": "df9147d5721d9a4fb2d43e63604126e602e8d37a695691ee6350f15e31f98639",
+      "scratch/integrator/linker-unref/GATES-DRAFT.md": "dd655e48e87bd34d612c20cdbf32a7986fdecb626823917ca12fdb5e5a6f17ff"
+    }
+  },
+  "verification": {
+    "command_id": "all-linker-accept-build-v17-r6",
+    "argv": [
+      "nice",
+      "-n",
+      "10",
+      ".venv/bin/python",
+      "-m",
+      "unittest",
+      "tests.test_inplace",
+      "tests.test_match",
+      "tests.test_literal_pools",
+      "tests.test_compid",
+      "tests.test_collect",
+      "tests.test_repr_guard",
+      "tests.test_argcheck",
+      "tests.test_build",
+      "tests.test_accept",
+      "tests.test_unreferenced_v11",
+      "tests.test_unreferenced_v12",
+      "tests.test_unreferenced_v13",
+      "tests.test_unreferenced_v14",
+      "tests.test_unreferenced_v15",
+      "tests.test_build_u1_v16",
+      "tests.test_build_u1_v17"
+    ],
+    "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-unref",
+    "exit": 0,
+    "tests_run": 507,
+    "test_modules": [
+      "tests.test_inplace",
+      "tests.test_match",
+      "tests.test_literal_pools",
+      "tests.test_compid",
+      "tests.test_collect",
+      "tests.test_repr_guard",
+      "tests.test_argcheck",
+      "tests.test_build",
+      "tests.test_accept",
+      "tests.test_unreferenced_v11",
+      "tests.test_unreferenced_v12",
+      "tests.test_unreferenced_v13",
+      "tests.test_unreferenced_v14",
+      "tests.test_unreferenced_v15",
+      "tests.test_build_u1_v16",
+      "tests.test_build_u1_v17"
+    ],
+    "bounded_real_checks": {
+      "exit_zero": true,
+      "schema_scope_explicit": true,
+      "pass": true,
+      "two_units": true,
+      "model": true,
+      "stage": true,
+      "covered_exact": true,
+      "one_action": true,
+      "d0_extent": true,
+      "own_exidx": true,
+      "retained_full_witness": true,
+      "empty_unit_explicit": true,
+      "uses_action_visible": true,
+      "snapshot_source": true,
+      "not_checkpoint_evidence": true,
+      "no_image_payload": true
+    },
+    "matcher_checks": {
+      "reset_exit_zero": true,
+      "d1_exact": true,
+      "one_u1": true,
+      "d0_and_exidx": true,
+      "scene_live_vtable": true,
+      "scene_no_actions": true
+    }
+  },
+  "retained_attempts": [
+    {
+      "command_id": "all-linker-accept-build-v17-r1",
+      "exit": 1,
+      "unittest_summary": [
+        "Ran 565 tests in 12.102s"
+      ]
+    },
+    {
+      "command_id": "all-linker-accept-build-v17-r2",
+      "exit": 0,
+      "unittest_summary": [
+        "Ran 507 tests in 12.411s"
+      ]
+    },
+    {
+      "command_id": "all-linker-accept-build-v17-r3",
+      "exit": 1,
+      "unittest_summary": [
+        "Ran 507 tests in 11.340s"
+      ]
+    },
+    {
+      "command_id": "all-linker-accept-build-v17-r4",
+      "exit": 1,
+      "unittest_summary": [
+        "Ran 507 tests in 10.352s"
+      ]
+    },
+    {
+      "command_id": "all-linker-accept-build-v17-r5",
+      "exit": 0,
+      "unittest_summary": [
+        "Ran 507 tests in 12.884s"
+      ]
+    },
+    {
+      "command_id": "all-linker-accept-build-v17-r6",
+      "exit": 0,
+      "unittest_summary": [
+        "Ran 507 tests in 11.745s"
+      ]
+    }
+  ],
+  "retained_attempt_notes": {
+    "r1": "565 tests, stale SimpleNamespace literal fixtures failed under complete-resolution model registry entries; duplicate imported AcceptGateTest discovery repeated a legacy failed-postmortem test. Corrected fixture protocol and historical failed-review path; no U1 finding regression failed.",
+    "r2": "507 tests PASS before expanding the positive provenance absence sweep.",
+    "r3": "507 tests, 8 failures exposed empty synthetic HARNESS provenance and legacy error ordering after the stricter provenance checks; positive fixtures now supply nonempty harness/complete hashes, and model mismatch is diagnosed first.",
+    "r4": "507 tests, 25 setup errors from a mistaken test-fixture module attribute; corrected to the existing Path(inplace.__file__).with_name linker-model input pattern.",
+    "r5": "507 tests PASS; fresh bounded build and two real matcher controls completed.",
+    "r6": "507 tests PASS after adding unit/compiler/credit coherence controls; no build/link decision code changed after the fresh bounded build."
+  },
+  "not_run": [
+    "full suite",
+    "whole-ledger production build",
+    "full build",
+    "prepare on real ledger",
+    "whole-ledger interfaces/argcheck",
+    "permuter",
+    "adoption/finalize/push",
+    "subagents"
+  ]
+}

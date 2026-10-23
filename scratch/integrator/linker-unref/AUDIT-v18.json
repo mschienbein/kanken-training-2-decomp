@@ -1,0 +1,1191 @@
+{
+  "schema_version": 1,
+  "model": "armlink5-inline-branchnop-v18",
+  "parent_model": "armlink5-inline-branchnop-v17",
+  "source_commit": "4a071371317fd0c0ac49074632f4c5316ecfea0f",
+  "branch": "linker-unref",
+  "adopted": false,
+  "review": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/review/linker-v17/codex",
+    "verdict": "FAIL",
+    "sha256": {
+      "REPORT.md": "e0efd65395816f7d509ad3a1d13281044b7e8c7c02b72aaeebf56cc347152182",
+      "REVIEW.json": "ce1f7b90fc6f1469c4d025ab5f1d76a3c7e6062b1ba0d0eadccfb2c25dbb9dbc",
+      "SEAL.json": "61e0eaa80f27899ea90590b2dfd48b82eb1bdd33a6719516083a37928826ad69",
+      "raw_group_variants.py": "c07ef0752f30f28d50446fc178d50505e02e628f81bc1576d3637626e35a16e5",
+      "legacy_compatibility.py": "24bbca67862a0466a47aa1187de5666a02a96e4b20cf1ad6516174480a406d06"
+    }
+  },
+  "scope": "Systematic targeted sweep of raw group/empty-structure preservation and historical optional-field boundaries. Not a universal malformed-ELF audit, new acceptance policy, full suite/build or adoption.",
+  "findings_fixed": [
+    {
+      "id": "V17-F01",
+      "severity": "blocker",
+      "root": "The if-words parser guard erased empty SHT_GROUP header/signature declarations before allocation/copy closure.",
+      "fix": "New GroupDeclaration records every raw declaration, optional flag word, signature, full member indices, original object and issues. Independent declaration counts and all raw SHF_GROUP ownership survive combination. V18 checks every original input before local U1, and direct matching also requires the census. Empty/malformed/unaccounted declarations refuse; every affected copy must have an allocated member and a complete own-unit removal proof.",
+      "review_counterexamples": {
+        "empty_declarations": 6,
+        "nonempty_controls": 12,
+        "kinds": [
+          "kept-code",
+          "unplaced-data",
+          "zero-member"
+        ],
+        "orders": [
+          "owner-first",
+          "foreign-first"
+        ],
+        "sizes": [
+          0,
+          4,
+          8
+        ],
+        "result": "All 18 refuse; missing words refuse before prepare_unit_u1 is called."
+      },
+      "regressions": [
+        "CompleteGroupCensusTest.test_review_six_empty_group_declarations_refuse_before_any_local_u1",
+        "CompleteGroupCensusTest.test_review_twelve_nonempty_group_controls_still_refuse"
+      ]
+    },
+    {
+      "id": "V17-F02",
+      "severity": "blocker",
+      "root": "The common unit predicate retroactively required linker_rewrites on authentic pre-reporting schema-1 receipts.",
+      "fix": "Rewrite reporting is optional only under the explicit historical legacy path for default-v2 receipts from before inputs.linker_model reporting. Later historical and every modern receipt still require it. All positive complete-image/BLZ and selected modern U1 evidence remains mandatory.",
+      "regressions": [
+        "AcceptGateTest.test_pre_rewrite_legacy_receipts_keep_their_recorded_optional_fields",
+        "FullReceiptV18Test.test_new_full_receipt_still_requires_rewrite_reporting"
+      ],
+      "authentic_proof": {
+        "target": "a443fef10a1436922fe36a749a5fe10d5abb310c",
+        "merge": "52901fa3d4d6e6912ec4fcb4267e01e174500559",
+        "checkpoints": 10,
+        "receipts": 20,
+        "command_id": "finalized-history-verify-v18-r3",
+        "exit": 0
+      }
+    }
+  ],
+  "empty_absent_structure_sweep": [
+    {
+      "boundary": "SHT_GROUP body/header mismatch",
+      "observed": "A zero-sized body still has sh_info/signature and potentially live SHF_GROUP members; absence is not no group.",
+      "change": "All declarations recorded independently of if words; no flag/member words are explicit issues. Partial words become a structural LinkError before any U1 decision.",
+      "coverage": "Six empty cases, twelve size-4/size-8 controls, and sizes 1/2/3/5/6/7 all exercised through actual synthetic ELF parsing and the bounded pipeline."
+    },
+    {
+      "boundary": "Allocated/nonallocated member filtering",
+      "observed": "section_groups historically filters membership to allocated indices, so valid raw nonallocated-only copies can vanish from per-section closure.",
+      "change": "Raw member tuples are retained before filtering. V18 affected declarations must have at least one allocated member and all their allocated members must be in the corresponding local plan.",
+      "coverage": "Same-signature nonallocated-only copy refuses in both orders; a fully accounted unrelated nonallocated group remains a positive control. Positive/zero-sized allocated foreign members remain vetoes."
+    },
+    {
+      "boundary": "SHF_GROUP without a declaration / duplicate memberships",
+      "observed": "A section can survive as ordinary allocated data if no declaration populates SectionMetadata.groups.",
+      "change": "Full original ELF header membership map checks every SHF_GROUP section, every member flag and multiple owners, including nonallocated sections. Issues survive separately from allocated sections.",
+      "coverage": "Orphan group flag, unknown flags, unrepresented index, zero-member and raw empty-group regression matrices."
+    },
+    {
+      "boundary": "Combine/nested default-empty paths",
+      "observed": "getattr(..., []) and missing count defaults could otherwise erase absent original census metadata.",
+      "change": "Combination preserves declarations/origins/counts/issues and explicitly marks any missing original census attributes. Direct census requires all structures and exact count equality.",
+      "coverage": "Each of three missing census fields refuses directly and after combination; empty declarations survive single and nested combination; dropped records with unchanged independent count refuse."
+    },
+    {
+      "boundary": "Resolved/prepared views",
+      "observed": "U1 preparation removes runtime sections but must not erase original group safety evidence.",
+      "change": "Original declaration objects/counts/issues survive existing shallow resolved/prepared views and combination; builder preflights all originals before the first local U1 operation and later applies negative affected-copy proof. No aggregate positive authorization was added.",
+      "coverage": "Inherited complete agreeing/contradictory copies, foreign-reference/personality matrices, zero-credit units, stage/action/witness tests and the real two-unit bounded build."
+    },
+    {
+      "boundary": "Other empty dependency/retention structures",
+      "observed": "Zero-sized allocated sections remain dependency_sections; LINK_ORDER/INFO_LINK and relocations are inventoried before placement. Noncanonical allocated relocation tables are checked before iterating their records. Empty ordinary directive bodies contain no directive payload, unlike a group header with a live signature; LLVM linker-option section type is retained regardless of body size.",
+      "change": "No unrelated new ELF rule or weakened reference/retention rule. Existing zero-size/reference/metadata/retention tests all execute in the full linker module selection.",
+      "qualification": "This is a targeted source/code-path sweep, not proof of all malformed ELF forms."
+    },
+    {
+      "boundary": "Earlier model isolation",
+      "observed": "Recording raw evidence must not silently repair v17 under its old selector.",
+      "change": "Only v18 selects complete_group_declarations; v9-v17 keep their prior runtime decision gates. Unsupported partial-word parser exceptions are normalized to LinkError without making a formerly refused object eligible.",
+      "coverage": "Dedicated v17 kept-code empty-group acceptance remains as an immutable-history control; earlier model tests and registry/default tests pass."
+    }
+  ],
+  "legacy_optional_field_sweep": {
+    "inventory": "20 genuine full receipts from all 10 finalized checkpoints in the actual finalized integration target; no record was repaired or rewritten.",
+    "pre_rewrite_eras": [
+      "c001-pilot-r4",
+      "c002-wave1-r3",
+      "c003-wave2-r3"
+    ],
+    "historical_dispatch": "Only explicit allow_legacy_full, schema-1 absent-mode/absent-kind, pre-v17 models use historical full evidence. The pre-rewrite omission additionally requires default-v2 and no input linker_model producer label. New prepare never requests this exception.",
+    "fields_checked": "Common historical input/output image+BLZ digests and whole-image equality checks, fresh PASS, credited counts, unit source/functions exist across the actual era inventory. New schema/kind/mode, model/config/harness/compiler digests, unit source/object/profile/flags/coherence, dependency/action/witness fields stay on their modern or selected-model branches. Later historical rewrite dictionaries remain mandatory.",
+    "summary_filtering": "New build summaries remain non-receipts; historical summary formatting is only compared against hash-bound complete receipts. Bounded, missing-mode, relabelled and summary variants still refuse, including under the explicit legacy argument.",
+    "failed_postmortem": "The existing exact failed legacy postmortem exception cannot finalize, because finalize refuses a failed prepare. No change made.",
+    "schema_inventory": [
+      {
+        "checkpoint": "c001-pilot-r4",
+        "suffix": "a",
+        "sha256": "566a1c6f98ba457785ee6d23e85b749859a21498b51ceed40db750a36bc2cac3",
+        "schema_version": 1,
+        "model": null,
+        "unit_count": 7,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 7,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c001-pilot-r4",
+        "suffix": "b",
+        "sha256": "12d4229db031d2b551c18feed953b6faf04f9b71f4e6b142d00a9b96f7f2fa1d",
+        "schema_version": 1,
+        "model": null,
+        "unit_count": 7,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 7,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c002-wave1-r3",
+        "suffix": "a",
+        "sha256": "0eaf1eee3acf7f11e7ade9a6f945d39a7bdcd2055c9ae1db1c7a4524e445cfb7",
+        "schema_version": 1,
+        "model": null,
+        "unit_count": 45,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 45,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c002-wave1-r3",
+        "suffix": "b",
+        "sha256": "ffd0bada0096ba0e27a07713dd5d890fd76f7de3b7a965054b19f215255f7113",
+        "schema_version": 1,
+        "model": null,
+        "unit_count": 45,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 45,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c003-wave2-r3",
+        "suffix": "a",
+        "sha256": "79c797fce7a7806fd5d5343495c1cb7d15f17982785c80689d71c7c7003e09f0",
+        "schema_version": 1,
+        "model": null,
+        "unit_count": 93,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 93,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c003-wave2-r3",
+        "suffix": "b",
+        "sha256": "5e6192681335e84e71aeb2fc2efb9c31c1eeba911eeb536e97ca6f03ff3c36a4",
+        "schema_version": 1,
+        "model": null,
+        "unit_count": 93,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 93,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c004-r3",
+        "suffix": "a",
+        "sha256": "71a39fc2638cd7c262c988bf994366c4c39fe87abb77e54661632d9d436e542c",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 274,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c004-r3",
+        "suffix": "b",
+        "sha256": "3bad5838907c7b7c026106c99f479144390406efc8cf65e1bcc740a3cef45688",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 274,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c005-r2",
+        "suffix": "a",
+        "sha256": "e3e25fda9a0ef7225064446bd58bf6e30068d62188721a91c2b122bc1d8dc6e0",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 456,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c005-r2",
+        "suffix": "b",
+        "sha256": "eb958bd22cd410c28896bedd454de4f87b9252672c4c56ea1690a9f8e0b8b5e8",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 456,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "object_sha256",
+          "profile",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c006-r3",
+        "suffix": "a",
+        "sha256": "69ae9e949df3d3d47c7d657d4908f8391c9c9d639e6e90d48fb8f1b0d115c157",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 835,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c006-r3",
+        "suffix": "b",
+        "sha256": "87dc67bb64e62b86801899e6ddf08cbd9afe0b52927ed48902b22bed1c4f9ba9",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 835,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c007",
+        "suffix": "a",
+        "sha256": "50187762ea13f7c35992418cc020d7a020d9665d0ff3b8b60174ca29b82e749d",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 1093,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c007",
+        "suffix": "b",
+        "sha256": "07c547edd8d42592a6bff56d1c372546cad60f5c0308f0f4989f021278384bbc",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 1093,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c008-r3",
+        "suffix": "a",
+        "sha256": "f02259550bfda6999efc27825aa87c90a4c5efb70d92e27065cc8039dea11de3",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 1527,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c008-r3",
+        "suffix": "b",
+        "sha256": "360c4ab8602818e686c31032b12c331f41cce671629ae83b55892f529aac0de7",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v2",
+        "unit_count": 1527,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "cmodels",
+        "suffix": "a",
+        "sha256": "2e1fe4fde4c6056524567bcd82eca59466c87799527bed203feef2bef56f2cb9",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v6",
+        "unit_count": 1562,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "cmodels",
+        "suffix": "b",
+        "sha256": "7095f7c76891cb943754adf7dc519e5ce03258003ad641746eec347875d9697e",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v6",
+        "unit_count": 1562,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c009-r6",
+        "suffix": "a",
+        "sha256": "7638190fce5261104e4f4b5cb72306c826a3dfa7d75bc5ef3a81b856fb527875",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v6",
+        "unit_count": 2216,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      },
+      {
+        "checkpoint": "c009-r6",
+        "suffix": "b",
+        "sha256": "6f244cae470f816f1b70a285508f18df8fabc68bf35872836e4afa5409a3835e",
+        "schema_version": 1,
+        "model": "armlink5-inline-branchnop-v6",
+        "unit_count": 2216,
+        "unit_common_fields": [
+          "cache_hit",
+          "compiler",
+          "flags",
+          "functions",
+          "linker_rewrites",
+          "literal_rebindings",
+          "object_sha256",
+          "profile",
+          "removed_callees",
+          "source",
+          "source_sha256"
+        ],
+        "unit_missing_rewrites": 0,
+        "input_fields": [
+          "catalogue_sha256",
+          "code_bin_sha256",
+          "compilers",
+          "exefs_code_sha256",
+          "exheader_sha256",
+          "harness_sha256",
+          "linker_model",
+          "literal_model",
+          "matches",
+          "matches_canonical",
+          "matches_sha256",
+          "names_sha256",
+          "profiles_sha256",
+          "toolchain_lock_sha256"
+        ],
+        "output_fields": [
+          "code_bin_sha256",
+          "exefs_code_sha256"
+        ],
+        "checks": {
+          "credited_functions_exact": true,
+          "code_bin_identical": true,
+          "exefs_code_identical": true
+        }
+      }
+    ],
+    "coverage": "New pre-rewrite review/finalize/history fixture plus inherited modern positive/negative scope tests under v18; exact real CLI verifies all 10 finalized checkpoints, exit 0."
+  },
+  "integration_proof": {
+    "source_commit": "4a071371317fd0c0ac49074632f4c5316ecfea0f",
+    "finalized": {
+      "target": "a443fef10a1436922fe36a749a5fe10d5abb310c",
+      "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-v18-finalized-verify",
+      "merge": "52901fa3d4d6e6912ec4fcb4267e01e174500559",
+      "merge_tree_command_id": "finalized-merge-tree-v18-r3",
+      "merge_tree_exit": 0,
+      "merge_command_id": "finalized-merge-v18-r3",
+      "merge_exit": 0,
+      "history_verify_command_id": "finalized-history-verify-v18-r3",
+      "history_verify_exit": 0,
+      "checkpoints": 10,
+      "test_command_id": "finalized-all-linker-accept-build-v18-r3",
+      "test_exit": 0,
+      "tests_run": 527
+    },
+    "pending_differential": {
+      "target": "7a975a0db3e0fde06ba2235c85d047d8efe4ced2",
+      "plain_worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-v18-plain-control",
+      "merged_worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-v18-verify",
+      "merge": "cd294f88cd0e1b996efea530ba6084d282cbf752",
+      "plain_verify_command_id": "plain-pending-history-verify-v18-r3",
+      "merged_verify_command_id": "merged-pending-history-verify-v18-r3",
+      "exits": [
+        1,
+        1
+      ],
+      "identical_first_diagnostic": true,
+      "diagnostic": "error: src/wave12/func_001dc574.c: missing\n",
+      "complete_failure_count": 273,
+      "complete_failure_sets_equal": true,
+      "failure_set_command_ids": [
+        "plain-pending-complete-failure-set-v18-r4",
+        "merged-pending-complete-failure-set-v18-r4"
+      ],
+      "added_failures": 0,
+      "qualification": "Both are expected live-source/header failures from c010-r7 PREPARED changes on top of finalized c009-r6; not successful verify and not attributed to the linker.",
+      "test_command_id": "integration-all-linker-accept-build-v18-r2",
+      "tests_run": 527,
+      "test_exit": 0
+    },
+    "snapshots": "No accepted src/include/config/receipt/history files were restored or hand-assembled. New detached worktrees were merged locally; main and every existing branch except linker-unref stayed unmoved. The d8aef63a alias is only the pre-existing scratch bounded author fixture, installed after successful historical verification.",
+    "tool_sha256_equal_across_source_and_both_merges": {
+      "tools/linker_models.py": {
+        "branch": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5",
+        "finalized_merge": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5",
+        "pending_merge": "19b5d5ad72d488df21599725b6b2c4349dc3316b65df3bf238dc932682cff9b5"
+      },
+      "tools/inplace.py": {
+        "branch": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
+        "finalized_merge": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189",
+        "pending_merge": "4d93106408845f54ae4fb6ad3ce9fb0633756d12fadb4b4f29592d715f113189"
+      },
+      "tools/build.py": {
+        "branch": "b8442b110b8c2dcc73c053a392403a1fb24a4de9fc2a1e059cb6d73c624f0f39",
+        "finalized_merge": "b8442b110b8c2dcc73c053a392403a1fb24a4de9fc2a1e059cb6d73c624f0f39",
+        "pending_merge": "b8442b110b8c2dcc73c053a392403a1fb24a4de9fc2a1e059cb6d73c624f0f39"
+      },
+      "tools/accept.py": {
+        "branch": "fc035f15dd8f69c76da522da077467d4245e6f58bb566f7a7d0601fa9921e5dc",
+        "finalized_merge": "fc035f15dd8f69c76da522da077467d4245e6f58bb566f7a7d0601fa9921e5dc",
+        "pending_merge": "fc035f15dd8f69c76da522da077467d4245e6f58bb566f7a7d0601fa9921e5dc"
+      }
+    }
+  },
+  "reporting_consumer_sweep": [
+    {
+      "path": "tools/inplace.py / tools/build.py",
+      "result": "New flag is immutable v18-only; new declarations are metadata, never positive borrowed witnesses. Unit action/count/witness schema remains explicit and hash-bound."
+    },
+    {
+      "path": "tools/match.py / tools/compid.py",
+      "result": "Inherited checked-destructor selectors bind source/object/names/profile/harness inputs and retain section actions; all matcher/grid tests execute with v18 registered. Three earlier in-memory alias probes now use a real parsed synthetic ELF only under the new complete census policy, rather than inventing empty safety fields."
+    },
+    {
+      "path": "tools/collect.py / tools/permute.py",
+      "result": "Collector continues refusing all U1 models; permuter stays fixed on non-U1 v2. No new execution or selector bypass."
+    },
+    {
+      "path": "tools/accept.py",
+      "result": "Era-scoped legacy predicate is the only historical change. Prepare/review/finalize/history retain positive modern full evidence and receipt hashes; zero-credit U1 owners/actions remain visible through model_uses. Real bounded receipt is refused as checkpoint evidence."
+    }
+  ],
+  "real_cases": {
+    "bounded_command_id": "finalized-bounded-build-v18-r4",
+    "bounded_exit": 0,
+    "bounded_receipt": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/linker-v18-finalized-verify/build/linker-unref-v18-bounded-r4/receipt.json",
+    "checks": {
+      "exit_zero": true,
+      "explicit_bounded_schema": true,
+      "model18": true,
+      "two_units": true,
+      "d1_exact": true,
+      "one_action": true,
+      "d0_extent": true,
+      "own_exidx": true,
+      "witness_extent": true,
+      "witness_hash": true,
+      "empty_unit_explicit": true,
+      "source_snapshot": true,
+      "no_image_payload": true,
+      "not_checkpoint_evidence": true,
+      "actions_in_model_uses": true
+    },
+    "matcher_command_ids": [
+      "finalized-real-menu-reset-v18-r3",
+      "finalized-real-menu-scene-v18-r3"
+    ],
+    "matcher_exits": [
+      0,
+      2
+    ],
+    "matcher_checks": {
+      "reset_exit_zero": true,
+      "d1_exact": true,
+      "one_u1": true,
+      "d0_and_exidx": true,
+      "scene_live_vtable": true,
+      "scene_no_actions": true
+    }
+  },
+  "retained_failures": [
+    {
+      "command_id": "historical-accept-verify-v18-r1",
+      "exit": 1,
+      "reason": "Legacy receipt validation fixed; old author branch then reaches missing accepted source src/wave2/func_0014de8c.c. No source hydration was performed."
+    },
+    {
+      "command_id": "all-linker-accept-build-v18-r1",
+      "exit": 1,
+      "tests_run": 527,
+      "errors": 3,
+      "reason": "Three subcases in an old alias fixture lacked any parsed raw census. Corrected only the v18 fixture path to use an actual synthetic ELF reader."
+    },
+    {
+      "command_id": "integration-history-verify-v18-r2",
+      "exit": 1,
+      "reason": "Pinned 7a975a0d prepared-state missing source; subsequently proven identical to plain target with complete failure-set control."
+    },
+    {
+      "command_id": "finalized-bounded-build-v18-r3",
+      "exit": 1,
+      "reason": "External old-worktree matches path could not be reported relative to finalized integration ROOT. New immutable r4 output uses the identical-content local fixture manifest; no linker change or partial success claim."
+    }
+  ],
+  "gates_unchanged": {
+    "docs/GATES.md": "df9147d5721d9a4fb2d43e63604126e602e8d37a695691ee6350f15e31f98639",
+    "scratch/integrator/linker-unref/GATES-DRAFT.md": "dd655e48e87bd34d612c20cdbf32a7986fdecb626823917ca12fdb5e5a6f17ff"
+  },
+  "defaults": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "not_run": [
+    "subagents/task tool",
+    "full suite",
+    "full production/whole-ledger build",
+    "production prepare/finalize",
+    "whole-ledger interfaces/argcheck",
+    "permuter",
+    "push",
+    "main mutation",
+    "gate adoption"
+  ]
+}

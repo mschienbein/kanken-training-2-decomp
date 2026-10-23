@@ -53,9 +53,12 @@ class AcceptGateTest(unittest.TestCase):
         builds = []
         for suffix in ("a", "b"):
             receipt = {
-                "name": f"{name}-{suffix}", "result": result, "fresh": True, "inputs": {},
+                "name": f"{name}-{suffix}", "result": result, "fresh": True,
+                "inputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
                 "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80},
-                "outputs": {"code_bin_sha256": "x"},
+                "outputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
+                "checks": {"credited_functions_exact": True, "code_bin_identical": True, "exefs_code_identical": True},
+                "units": units,
             }
             accept.write_exclusive(out / "receipts" / f"{name}-{suffix}.json", receipt)
             builds.append({key: receipt[key] for key in ("name", "result", "credited", "outputs")})
@@ -94,6 +97,22 @@ class AcceptGateTest(unittest.TestCase):
         self.assertEqual(len(accept.verify_history()), 1)
         with self.assertRaisesRegex(accept.AcceptError, "already finalized"):
             accept.finalize("c001", 1)
+
+    def test_pre_rewrite_legacy_receipts_keep_their_recorded_optional_fields(self):
+        for suffix in ("a", "b"):
+            receipt = accept.load_json(self.root / "accept/c001/receipts" / f"c001-{suffix}.json")
+            self.assertNotIn("linker_model", receipt["inputs"])
+            self.assertTrue(all("linker_rewrites" not in unit for unit in receipt["units"]))
+            self.assertTrue(accept.build_receipt_scope_valid(
+                receipt, accept.LEGACY_MODELS["linker_model"], allow_legacy_full=True))
+            self.assertFalse(accept.build_receipt_scope_valid(receipt, accept.LEGACY_MODELS["linker_model"]))
+            labelled = json.loads(json.dumps(receipt))
+            labelled["inputs"].update(accept.LEGACY_MODELS)
+            self.assertFalse(accept.build_receipt_scope_valid(
+                labelled, accept.LEGACY_MODELS["linker_model"], allow_legacy_full=True))
+        self.review()
+        accept.finalize("c001", 1)
+        self.assertEqual(len(accept.verify_history()), 1)
 
     def test_fail_review_blocks_finalize(self):
         self.review("FAIL")
@@ -176,13 +195,31 @@ class AcceptGateTest(unittest.TestCase):
                         linker_model="armlink5-inline-branchnop-v2", literal_model="none", linker_models=None):
         """accept.prepare with builds, suite, interfaces and git stubbed out (exercised elsewhere)."""
         import types
-        receipt = {"result": "PASS", "outputs": {"code_bin_sha256": "x"},
+        receipt = {"schema_version": 2, "record_kind": "build-receipt", "mode": "full", "result": "PASS",
+                   "outputs": {"code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64},
+                   "checks": {"credited_functions_exact": True, "code_bin_identical": True, "exefs_code_identical": True},
                    "units": [{"source": u["source"], "functions": u["functions"],
                               "linker_rewrites": {"func_00100000": [{"kind": "inline_nop"}], "func_00100004": []},
                               "literal_rebindings": list(literal_rebindings)} for u in units],
                    "credited": {"functions": 1, "bytes": 8, "catalogue_functions": 10, "catalogue_bytes": 80}}
         if receipt_units is not None:
             receipt["units"] = receipt_units
+        for unit in receipt["units"]:
+            unit.setdefault("linker_rewrites", {})
+            unit.setdefault("source_sha256", "c" * 64)
+            unit.setdefault("object_sha256", "d" * 64)
+            unit.setdefault("profile", "game")
+            unit.setdefault("compiler", "synthetic")
+            unit.setdefault("flags", [])
+            if accept.linker_models.LINKER_MODELS[linker_model].per_unit_u1:
+                unit.setdefault("removed_special_members", [])
+                unit.setdefault("linker_section_rewrites", [])
+                unit.setdefault("u1_witness_comparisons", [])
+                unit["u1_authorization_count"] = len(unit["removed_special_members"])
+                unit["dependency_manifest_sha256"] = "c" * 64
+                unit["headers_sha256"] = {}
+        receipt["credited"]["functions"] = sum(len(unit["functions"]) for unit in receipt["units"])
+        receipt["credited"]["bytes"] = 8 * receipt["credited"]["functions"]
         literal_choices = iter(literal_models) if literal_models is not None else None
         linker_choices = iter(linker_models) if linker_models is not None else None
         self.build_calls = []
@@ -193,8 +230,14 @@ class AcceptGateTest(unittest.TestCase):
             self.assertEqual(frozen, {"linker_model": kwargs["linker_model"], "literal_model": kwargs["literal_model"]})
             self.build_calls.append((name, kwargs))
             return {**receipt, "name": name, "fresh": kwargs["fresh"], "inputs": {
+                "code_bin_sha256": "a" * 64, "exefs_code_sha256": "b" * 64,
+                **{key: "c" * 64 for key in ("catalogue_sha256", "profiles_sha256",
+                                             "toolchain_lock_sha256", "exheader_sha256", "matches_sha256")},
+                "harness_sha256": {"synthetic": "d" * 64}, "compilers": {"synthetic": "e" * 64},
                 "linker_model": next(linker_choices) if linker_choices is not None else kwargs["linker_model"],
                 "literal_model": next(literal_choices) if literal_choices is not None else kwargs["literal_model"],
+                **({"u1_stage": "per-unit-direct-before-aggregation"}
+                   if accept.linker_models.LINKER_MODELS[kwargs["linker_model"]].per_unit_u1 else {}),
             }}
 
         stubs = {
@@ -226,7 +269,7 @@ class AcceptGateTest(unittest.TestCase):
         """The prepare record must show each gate's outcome, not only the overall result."""
         record = self.stubbed_prepare("c009", [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}])
         self.assertEqual(set(record["checks"]), {
-            "build_a_pass", "build_b_pass", "builds_identical", "models_selected", "suite_pass", "interfaces_pass",
+            "build_a_pass", "build_b_pass", "builds_identical", "models_selected", "build_scope_valid", "suite_pass", "interfaces_pass",
         })
         self.assertEqual(record["result"], "PASS")
         self.assertEqual(record["commit"], "0" * 40)
@@ -542,6 +585,89 @@ class AcceptGateTest(unittest.TestCase):
                     qualifications=["L1 witnessed candidate span; original pool extent and ownership unknown"])
         self.assertEqual(accept.finalize("c015", 1)["seq"], 2)
         accept.verify_history()
+
+    def u1_model_transition(self, previous, selected, own_unwind=False):
+        units = [{"source": "src/a.c", "profile": "game", "functions": ["func_00100000"]}]
+        self.stubbed_prepare("c014", units, linker_model=previous)
+        self.review(name="c014")
+        accept.finalize("c014", 1)
+        member = {"section": "i._ZN6WidgetD0Ev", "section_index": 2, "symbols": ["_ZN6WidgetD0Ev"],
+                  "size": 12, "object": "src/a.c", "evidence": {"d0_slot_is_null": True}}
+        if own_unwind:
+            member["unwind_sections"] = [{
+                "section": ".ARM.exidx.D0", "section_index": 3, "kind": "exidx", "size": 8, "object": "src/a.c"}]
+        if accept.linker_models.LINKER_MODELS[selected].per_unit_u1:
+            member.update(unit="src/a.c", input_kind="object")
+            member["evidence"]["complete_destructor_address"] = 0x100000
+            member["evidence"]["complete_destructor_size"] = 4
+        action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
+        receipts = [{"source": "src/a.c", "functions": ["func_00100000"], "removed_special_members": [member],
+                     "linker_section_rewrites": [action]}]
+        if accept.linker_models.LINKER_MODELS[selected].per_unit_u1:
+            receipts[0]["u1_witness_comparisons"] = [{"address": 0x100000, "size": 4, "status": "match",
+                                                   "sha256": "c" * 64, "original_sha256": "c" * 64}]
+        record = self.stubbed_prepare("c015", [], receipt_units=receipts, linker_model=selected)
+        out = self.root / "accept/c015"
+        self.assertEqual(record["revised_units"], [])
+        self.assertEqual(record["model_changes"], {"linker_model": {"previous": previous, "selected": selected}})
+        self.assertEqual(record["model_reviews"], {"func_00100000": {"source": "src/a.c", "rules": ["U1"]}})
+        self.assertEqual(record["model_uses"]["src/a.c"]["removed_special_members"], [member])
+        self.assertEqual(record["linker_section_rewrites"], {"src/a.c": [action]})
+        self.assertEqual(accept.new_functions(out, record), {"func_00100000": "src/a.c"})
+        empty = {"reviewer": "empty", "family": "openai", "verdict": "PASS", "functions": [],
+                 "findings": [], "qualifications": []}
+        path = self.root / "empty-u1-review.json"
+        path.write_text(json.dumps(empty), encoding="utf-8")
+        with self.assertRaisesRegex(accept.AcceptError, "does not cover"):
+            accept.review("c015", path)
+        for suffix, summary in zip(("a", "b"), record["builds"]):
+            receipt_path = out / "receipts" / f"c015-{suffix}.json"
+            self.assertEqual(accept.load_json(receipt_path)["units"][0]["linker_section_rewrites"], [action])
+            self.assertEqual(summary["receipt_sha256"], accept.sha256_file(receipt_path))
+        self.review("PASS_WITH_QUALIFICATIONS", name="c015", row="QUALIFIED",
+                    qualifications=["U1 null-slot and class spelling are bounded witnesses, not original link provenance"])
+        self.assertEqual(accept.finalize("c015", 1)["linker_model"], selected)
+        accept.verify_history()
+
+    def test_v8_to_v9_transition_reopens_unchanged_u1_owner_and_binds_section_actions(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v8", "armlink5-inline-branchnop-v9")
+
+    def test_v9_to_v10_transition_reopens_u1_owner_and_binds_every_unwind_companion(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v9", "armlink5-inline-branchnop-v10", own_unwind=True)
+
+    def test_v10_to_v11_transition_reopens_u1_owner_and_binds_corrected_model(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v10", "armlink5-inline-branchnop-v11", own_unwind=True)
+
+    def test_v11_to_v12_transition_reopens_u1_owner_and_binds_complete_metadata_model(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v11", "armlink5-inline-branchnop-v12", own_unwind=True)
+
+    def test_v12_to_v13_transition_reopens_u1_owner_and_binds_structural_edge_model(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v12", "armlink5-inline-branchnop-v13", own_unwind=True)
+
+    def test_v13_to_v14_transition_reopens_u1_owner_and_binds_complete_namespace_model(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v13", "armlink5-inline-branchnop-v14", own_unwind=True)
+
+    def test_v14_to_v15_transition_binds_narrow_single_object_scope(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v14", "armlink5-inline-branchnop-v15", own_unwind=True)
+
+    def test_v15_to_v16_transition_binds_per_unit_actions_witnesses_and_review_scope(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v15", "armlink5-inline-branchnop-v16", own_unwind=True)
+
+    def test_v16_to_v17_transition_binds_closed_groups_and_positive_full_receipts(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v16", "armlink5-inline-branchnop-v17", own_unwind=True)
+
+    def test_v17_to_v18_transition_binds_complete_group_census_and_full_receipts(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v17", "armlink5-inline-branchnop-v18", own_unwind=True)
+
+    def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
+        member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}
+        action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}
+        uses = accept.model_use_summary({"units": [{
+            "source": "src/helper.cpp", "functions": [], "removed_special_members": [member],
+            "linker_section_rewrites": [action]}]})
+        self.assertEqual(uses["src/helper.cpp"]["u1_functions"], [])
+        self.assertEqual(uses["src/helper.cpp"]["removed_special_members"], [member])
+        self.assertEqual(uses["src/helper.cpp"]["linker_section_rewrites"], [action])
 
     def test_model_transition_reopens_unchanged_r1_callers_and_keeps_zero_credit_helpers(self):
         receipt_units, rewrite = self.removed_helper_baseline(linker_model="armlink5-inline-branchnop-v2")
