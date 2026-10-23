@@ -2,6 +2,7 @@
 #define GAME_RUNTIME_H
 #include <stddef.h>
 #include "game/input.h"
+#include "game/waitable_handle.h"
 
 /* Process-wide helpers used across subsystems. */
 
@@ -20,10 +21,20 @@ struct ExtendedBufferState {
     unsigned state;
     unsigned first, second;
 };
+/* The copy worker owns a 256-entry ring; indices are signed in its update. */
+struct CopyRequest {
+    unsigned char *destination;
+    const unsigned char *source;
+    unsigned count;
+};
 struct BufferOwner {
-    unsigned char reserved[0xc08];
+    int write;
+    int read;
+    struct CopyRequest requests[256];
     void *buffer;
     unsigned count, owned, state, active;
+    int stop;
+    struct WorkerThread thread;
 };
 
 struct ByteWriter { unsigned char *data; unsigned position; };
@@ -119,6 +130,8 @@ extern const struct MotionKey data_002180fc[3];
 extern unsigned char *func_00152d48(struct BitmapPool *pool);
 extern void func_0017e5f4(struct BitmapPool *pool, const void *element);
 extern struct BufferOwner bss_002d4270;
+extern void func_0010aa28(void *argument);
+extern int func_00192c20(const unsigned char *source, unsigned char *destination);
 extern struct ExtendedBufferState bss_0049da8c;
 extern struct TaggedBufferState bss_0049cbc0;
 extern struct Allocation bss_0049cbb4;
