@@ -7,7 +7,7 @@ static inline int error_level(const Result &result)
 
 Result func_00120dc4(const char *path)
 {
-    FilesystemGlobals *globals = &data_00242c18;
+    ServiceClientState *globals = &data_00242c18;
     if (globals->current != 0)
         return Result(0xc92044e7);
     MountedDevice *device;

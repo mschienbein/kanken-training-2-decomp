@@ -1,7 +1,4 @@
-/* [INFERENCE] Original wrapper class name and state-word role unrecovered. */
-struct InitializedWord {
-    unsigned int value;
-    InitializedWord() : value(0) {}
-};
+#include "game/runtime_type_initializers.h"
 
-InitializedWord data_00242f90;
+/* [INFERENCE] Native root metadata has no parent; original class name unknown. */
+const nw::ut::internal::RuntimeTypeInfo data_00242f90(0);

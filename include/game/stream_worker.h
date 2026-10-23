@@ -21,7 +21,9 @@ struct W22StreamJob {
     int destination, length, source;
 };
 struct W22StreamWorker {
-    unsigned char reserved00[12];
+    void *resource;
+    unsigned reserved04;
+    unsigned count;
     unsigned pending, stopping;
     unsigned char reserved14[0x1014];
     struct W22StreamJob *job;

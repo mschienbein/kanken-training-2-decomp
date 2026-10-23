@@ -178,6 +178,8 @@ extern struct StaticHandle data_00243040;
 extern struct StaticHandle data_0024376c;
 extern struct StaticHandle data_00243794;
 extern struct StaticHandle data_00242d8c;
+extern struct StaticHandle data_002438a8;
+extern struct StaticHandle data_0024311c;
 extern CtrResult func_001235a8(unsigned selector, const void *buffer,
                               unsigned size, CtrHandle handle);
 extern CtrResult func_0010d418(unsigned char value);

@@ -33,6 +33,12 @@ struct CommandPatch {
     unsigned reserved0c[3];
 };
 
+/* The dispatcher supplies the incremented queue cursor to the completion
+ * provider (00186ef0 -> registered 0010ace8), not a void argument list.
+ * [INFERENCE] Cursor signedness follows the recovered queue field below;
+ * no callback result is consumed by the witnessed dispatch path. */
+typedef void (*CommandQueueCompletionCallback)(int cursor);
+
 struct CommandQueue {
     unsigned id;
     unsigned char *base;
@@ -48,7 +54,7 @@ struct CommandQueue {
     int option;                             /* 0x2c; queried as an unsigned word */
     unsigned captured_size;
     struct CommandPatch *patch;
-    void (*callback)(void);                  /* 0x38; no distinct argument prepared */
+    CommandQueueCompletionCallback callback; /* 0x38 */
     unsigned char complete, flush;
     unsigned char reserved3e[2];
     struct CommandQueue *next;
@@ -92,6 +98,9 @@ extern void func_0012ccd8(struct CommandQueue *queue, struct Command *command);
 extern void func_00196114(unsigned mode);
 extern void func_00110548(void);
 extern void func_00190878(void);
+extern void func_001105a8(CommandQueueCompletionCallback callback);
+/* External registered provider; its original body consumes the cursor. */
+extern void func_0010ace8(int cursor);
 
 #ifdef __cplusplus
 }

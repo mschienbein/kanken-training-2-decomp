@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/lyt/lyt_ArcResourceAccessor.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: retain the public class layouts and declarations for standalone selective reuse.
+ * Modified 2026-10-22: retain native layout, canonical archive helper contract
+ * and an undefined destructor key for the witnessed external vtable.
  * This file is free software under GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -16,6 +17,9 @@
 #include <nw/lyt/lyt_Arc.h>
 #include <cstddef>
 
+extern "C" void *func_001cdb10(nw::lyt::ARCHandle *archive,
+    const wchar_t *root, nw::lyt::ResType type, const wchar_t *name, u32 *size);
+
 namespace nw{
 namespace lyt{
 class ArcResourceAccessor : public ResourceAccessor
@@ -24,6 +28,9 @@ public:
     static const int ROOTPATH_MAX = 64;
 
     ArcResourceAccessor();
+    /* [INFERENCE] Selective-link key choice, not recovered original syntax.
+     * Keep the witnessed external vtable owned by the native class. */
+    virtual ~ArcResourceAccessor();
     bool Attach(void* archiveStart,const char* resourceRootDirectory);
     void* Detach();
 

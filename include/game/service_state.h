@@ -18,6 +18,7 @@ struct SoundFileGroup;
 struct StreamMutex;
 struct WorkQueue;
 struct X07NarrowCommand;
+struct MountedDevice;
 
 #include <stdbool.h>
 #include "ctr/svc.h"
@@ -31,7 +32,9 @@ struct X07NarrowCommand;
 struct ServiceClientState {
     bool active;
     bool latched;
-    unsigned char reserved02[0x0e];
+    unsigned char reserved02[6];
+    struct MountedDevice *current;
+    volatile unsigned guard;
     unsigned handle;
     unsigned reserved14;
     long long interval;

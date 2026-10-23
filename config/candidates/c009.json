@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "note": "C009-r5 opaque-font and float-converter correction after both c009-r4 independent reviews sealed FAIL. Proposed 649 NEW functions / 53,520 B, preserving all 1,621 accepted / 195,908 B: 2,270 functions / 249,428 B in 2,217 units. A-F01 restores the accepted opaque FontVTable and explicitly defers four NEW height/width completion consumers / 144 B; no accepted identity is deferred. B-F01 genuinely migrates the converter table, identity provider and random provider to one float(float) protocol, preserving the supplied phase and actual result. Five accepted moves remain; mandatory-discard scheduler, typed no-op helpers and prior explicit deferrals/qualifications remain. Total post-r3 NEW deferrals are 26 / 3,264 B, plus prior0011f3a8 / 268 B; older historical deferrals are separate. Selection remains armlink5-inline-branchnop-v6 + anonymous-string-records-v1. Evidence is scratch/integrator/c009-r5/HANDOFF.json and docs/known-issues-c009-r2.md; Main alone owns integrated gates, prepare and acceptance.",
+ "note": "C009-r6 minimal remediation after c009-r5 codex-b sealed FAIL (F01 completion cursor; F02 unauthorized DisplayTarget native-vtable binding). F01 genuinely preserves the int cursor through one shared slot/setter/provider contract, using original dispatcher and registered-provider evidence. F02 restores the opaque DisplayTarget and defers only its NEW 56-byte constructor, removing its C1/C2/_ZTV names. Proposed 648 NEW functions / 53,464 B, preserving all 1,621 accepted / 195,908 B: 2,269 functions / 249,372 B in 2,216 units. Five accepted moves remain. The proactive callable/native-binding sweep, mandatory-discard scheduler, typed no-op helpers, prior deferrals and source/model qualifications are retained explicitly. Post-r3 contract deferrals total 27 / 3,320 B; including prior0011f3a8 they total 28 / 3,588 B. Older historical deferrals remain separate. Frozen v6/L1, GATES v1.19 and denominator v9-r2 unchanged; Main owns integrated gates and fresh independent reviews.",
  "units": [
   {
    "source": "src/large/func_00163488.c",
@@ -3365,14 +3365,6 @@
    "author": "c009-wave18"
   },
   {
-   "source": "src/wave18/func_00117854.cpp",
-   "profile": "game",
-   "functions": [
-    "func_00117854"
-   ],
-   "author": "w18g"
-  },
-  {
    "source": "src/wave18/func_0011db78.c",
    "profile": "game",
    "functions": [
@@ -5490,6 +5482,15 @@
    "reason": "Search finds this additional get_widths consumer of the removed completion. Preserve the opaque static table and its accepted providers instead of inventing a callable aggregate interface.",
    "reentry_condition": "Land the canonical font-family table, glyph-width aggregate and provider/user model from scratch/research/type-models/fontgfx/ before reintroducing this dispatching width wrapper.",
    "evidence": "scratch/integrator/c009-r5/FONT-DEFERRALS-r1.json"
+  },
+  {
+   "function": "func_00117854",
+   "kind": "NEW-only unauthorized native-vtable model",
+   "finding": "c009-r5 codex-b F02",
+   "target_bytes": 56,
+   "reason": "DisplayTarget is not an accepted native-vtable precedent; its new Finalize-only virtual key has no virtual destructor. Restore the opaque type and remove the constructor and all introduced DisplayTarget C1/C2/_ZTV bindings.",
+   "reentry_condition": "Recover an exact non-vtable form, or a separately authorized native family with real destructor/provider evidence; migrate its constructor, actual providers and every user together before re-entry.",
+   "evidence": "scratch/integrator/c009-r6/DISPLAY-TARGET-DEFERRALS-r1.json"
   }
  ]
 }

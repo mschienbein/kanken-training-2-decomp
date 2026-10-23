@@ -1,11 +1,11 @@
 #include "ctr/svc.h"
+#include "ctr/ipc.h"
 #include "game/stream_manager.h"
 
 
 #include "game/service_protocol.h"
 extern int data_00243770;
 extern CtrHandle data_002438a4;
-extern CtrHandle data_002438a8;
 
 extern const unsigned data_00220b5c;
 
@@ -18,7 +18,7 @@ static __forceinline void release_service(int *references)
         if (failure >= 0) {
             unsigned value = data_00220b5c;
             data_00243054 = value;
-            data_002438a8 = value;
+            data_002438a8.handle = value;
         }
     }
 }

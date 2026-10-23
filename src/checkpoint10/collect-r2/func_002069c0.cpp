@@ -1,7 +1,3 @@
-/* [INFERENCE] Original wrapper class name and state-word role unrecovered. */
-struct InitializedWord {
-    unsigned int value;
-    InitializedWord() : value(0) {}
-};
+#include "ctr/ipc.h"
 
-InitializedWord data_002438a8;
+StaticHandle data_002438a8;

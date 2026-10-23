@@ -1,6 +1,5 @@
 #include "ctr/ipc.h"
 
-extern CtrHandle data_0024311c;
 
 unsigned func_00121d28(unsigned *first, unsigned *second, unsigned *third,
                        unsigned *fourth, unsigned *fifth, unsigned *sixth)
@@ -16,7 +15,7 @@ unsigned func_00121d28(unsigned *first, unsigned *second, unsigned *third,
     int failure;
 
     command[0] = ctrIpcHeader(10u, 0u, 0u);
-    result = (unsigned)svcSendSyncRequest(data_0024311c);
+    result = (unsigned)svcSendSyncRequest(data_0024311c.handle);
     failure = (int)(result & 0x80000000u);
     if (failure >= 0) {
         *out0 = command[3];

@@ -1,25 +1,17 @@
 #include "game/bss_0049ecf0.h"
 
-/* Kind zero uses the command payload as source, destination and byte count. */
-struct CopyCommand {
-    unsigned char kind;
-    unsigned char reserved01[3];
-    const void *source;
-    void *destination;
-    unsigned size;
-    unsigned char reserved10[12];
-};
 
 extern void func_00190878(void);
 
 void func_0018c5f0(void *destination, const void *source, unsigned size)
 {
     struct CommandQueue *queue = bss_0049ecf0.writing;
-    struct CopyCommand *command = (struct CopyCommand *)&queue->commands[queue->count];
+    struct Command *command = &queue->commands[queue->count];
     command->kind = 0;
     command->source = source;
-    command->destination = destination;
-    command->size = size;
+    /* Kind zero uses the established generic payload words as address/count. */
+    command->size = (unsigned)destination;
+    command->flags = size;
     func_0012fb38();
     ++queue->count;
     if (bss_0049ecf0.executing == queue && bss_0049ecf0.enabled && !bss_0049ecf0.pending) {

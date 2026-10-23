@@ -8,10 +8,14 @@ struct ServiceCoordinator;
 #include "game/runtime.h"
 
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
+struct AudioDspVolumeSettings {
+    float master_volume;
+    float output_volume[2];
+};
+
 struct AudioDspParameterBlock {
     unsigned int flags;
-    float master_volume;
-    unsigned char reserved08[8];
+    struct AudioDspVolumeSettings volume;
     unsigned short value10;
     unsigned char reserved12[4];
     unsigned short value16;

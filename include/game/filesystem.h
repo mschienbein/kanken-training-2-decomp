@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include "game/result.h"
+#include "game/service_state.h"
 
 /* [INFERENCE] Only the mounted-device disposal slot and actual session/archive
  * prefix are recovered; no complete native filesystem class identity is claimed. */
@@ -16,17 +17,9 @@ struct MountedDevice {
     unsigned session;
     unsigned long long archive;
 };
-struct FilesystemGlobals {
-    void *allocator;
-    void *reserved04;
-    struct MountedDevice *current;
-    volatile unsigned guard;
-    unsigned session;
-};
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct FilesystemGlobals data_00242c18;
 extern struct Result func_0012e468(struct MountedDevice **device, unsigned archive_id);
 extern struct Result func_0019281c(const char *path, struct MountedDevice *device,
                                   unsigned char flags, unsigned char external);

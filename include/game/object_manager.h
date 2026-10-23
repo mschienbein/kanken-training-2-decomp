@@ -19,16 +19,14 @@ struct ObjectManager {
     unsigned char reserved00[0x1b8];
     unsigned field1b8, field1bc, field1c0;
     struct StreamMutex lock;
-#ifdef __cplusplus
-    nw::ut::LinkList<RegistryEntry, offsetof(RegistryEntry, link)> registry;
-#else
-    struct PoolList registry;
-#endif
+    unsigned char reserved1d0[0x0c];
     struct PoolList active;                 /* 0x1dc */
     unsigned char reserved1e8[0x0c];
     unsigned char running;
     unsigned char reserved1f5[2];
     unsigned char stopping;
+    unsigned reserved1f8;
+    unsigned voice_requests;
 };
 
 struct ResourceRecordList;
@@ -92,8 +90,6 @@ extern void func_00195ec4(struct StreamMutex *lock);
 extern void func_0017e634(struct ObjectManager *manager, struct RegistryEntry *entry);
 extern struct PoolLink *func_0017e640(struct ObjectManager *manager,
                                      struct RegistryEntry *entry);
-extern void func_001312d4(struct ObjectManager *manager, struct RegistryEntry *entry);
-extern void func_0014bc70(struct ObjectManager *manager, struct RegistryEntry *entry);
 extern unsigned func_0014d7a0(struct ResourceRecordList *list);
 #ifdef __cplusplus
 }
