@@ -1,0 +1,39 @@
+{
+ "schema_version": 1,
+ "status": "NO_NEW_FACTS_CARRIED_FROM_C010_R7_NO_SOURCE_CHANGE",
+ "adjudicator": "Main",
+ "checkpoint": "c010-r8",
+ "merged_source": "c0a4f99b (main 8725b134 + c010-r8 f78df906)",
+ "input_binding": {
+  "argcheck": {
+   "path": "scratch/integrator/c010-r8/main-argcheck-r1.json",
+   "sha256": "c7718cc8e2da3db6822bd9beb8259c661e7bfc68f30c769cb8c17699211b6201",
+   "exit_code": 2,
+   "summary": {
+    "callback_sites": 10,
+    "direct_sites": 13115,
+    "elapsed_seconds": 643.437,
+    "flagged_functions": 56,
+    "functions": 2682,
+    "issues": 90,
+    "notes": 513,
+    "rewrite_sites": 58,
+    "tail_sites": 703,
+    "unchecked_functions": 524,
+    "unresolved_indirect_sites": 1045
+   }
+  },
+  "new_facts": {
+   "path": "scratch/integrator/c010-r8/main-argcheck-new-facts-r1.json",
+   "sha256": "333455dd115ee98a4a2074c9b4ae4b06fec8686f1be8d4e4d3264fea30849224"
+  },
+  "baseline": "scratch/integrator/c010-r7/main-argcheck-r1.json (c010-r7 pre-prepare run), adjudicated by c010-r7 456bfc8e:scratch/integrator/c010-r7/main-argcheck-adjudications-r1.json over c010-r6 5f581fc7 and the c009-r6 baseline"
+ },
+ "scope": {
+  "new_issue_facts": 0,
+  "new_note_facts": 0,
+  "removed_facts": 0
+ },
+ "result": "All 90 issues and 513 notes are identical, under the fact key (function, kind, canonical JSON without declaration.line), to the c010-r7 run whose new facts were adjudicated in 456bfc8e. Both c010-r7 reviewers independently re-adjudicated that set. Nothing new to adjudicate; exit 2 is retained as the mechanical status.",
+ "verification_boundary": "The reviewers re-run argcheck after prepare and adjudicate every fact independently."
+}
