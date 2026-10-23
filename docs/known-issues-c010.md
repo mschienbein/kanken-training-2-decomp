@@ -1,4 +1,88 @@
-# c010-r6 candidate — known issues and qualifications
+# c010 candidates — known issues and qualifications
+
+## c010-r7 — generic callbacks, shared envelope and native getter boundary
+
+This **unaccepted successor candidate** starts from frozen main `7083a0a3`
+(prepared c010-r6 source `3caf7c4d`), over finalized c009-r6 and denominator
+v13-r2. Historical c010-r6 prepare/review FAIL records are unchanged.
+
+### Current scope
+
+- **422 candidate units / 433 claims:** **421 NEW functions / 40,204 B**, plus
+  **12 accepted-identity moves / 192 B**. Two helper-only candidate units earn
+  no function/data credit.
+- **86 NEW-only deferrals / 7,408 B in 85 units:** the inherited 83-function
+  boundary plus native sound setters `001913fc`, `001d296c`, `001d2b8c`
+  (**276 B**). No accepted identity is deferred.
+- All **2,269 accepted predecessor identities / 249,372 B** survive. Proposed
+  ledger: **2,626 units / 2,690 functions / 289,576 B**, including 24 helper-only
+  units. These proposal counts are not acceptance credit.
+
+Current authority: `scratch/integrator/c010/r7/HANDOFF-r1.json`,
+`NEW-DEFERRALS-r1.json` and `PROACTIVE-SWEEP-r1.json` in that same directory.
+The handoff binds the fresh complete sequential matcher result, not the frozen
+r6 receipt or a focused subset.
+
+Final complete sequential reproof **exited 0**: **2,602/2,602 matcher commands
+exited 0; all 2,690 required functions MATCH**, including the natural contexts
+for all 24 helper-only definitions. Explicit v6/L1 and frozen per-unit profiles
+were used with `--show 0`; the complete rewrite projection reports
+`scope_complete=true`.
+
+### Sealed codex-b findings
+
+- **C010R6B-F01 — genuine generic callback repair:** the three C construction
+  callbacks `00156dbc`, `001c4490`, `001c5d90` now have the actual
+  `void *(void *)` interface. Only a provider that writes concrete element
+  fields recovers its actual element pointer inside the body. The
+  `001911c4` ARM-to-Thumb veneer is declared once beside the existing generic
+  array runtime, with the identical callback, element-size and count types.
+  The specialized `StaticServiceEntry` runtime declaration is removed; no
+  function-pointer cast, adapter or address-only-registration qualification.
+- **C010R6B-F02 — one shared envelope object:** initializer `0021443c` constructs
+  actual `const SoundEnvelope data_0024380a` through its shared constructor,
+  matching the accepted readers and the sibling `002437f8` precedent. The
+  local `AdshrCurve` model and its obsolete initializer-name binding are
+  replaced. Original variable/TU spelling remains `[INFERENCE]`; no five-byte
+  layout equivalence is used as a type alias.
+- **C010R6B-F03 — explicit dependent NEW-only deferrals:** all three native
+  `BasicSound` setters that invoke the unclosed playback-handle slot are
+  removed from credit/source. Accepted `001d3148` and its existing receiver/
+  result model stay unchanged. No invented native provider, name alias,
+  receiver/result cast or implicit native-family approval is introduced.
+
+### Proactive sweep and continuing qualifications
+
+The sweep covers every NEW/revised unit named by the frozen r6 prepare:
+588 input units, of which 585 remain and three are explicitly deferred.
+It inventories invoking generic runtime boundaries, explicit callable source
+expressions, reconstructed storage types and native/virtual consumers.
+Both generic providers and the veneer now agree; RTTI roots, handle wrappers,
+vector storage and both envelope defaults retain one published object type.
+The three isolated initializer records have no competing live declaration
+in the exact-symbol source/header search.
+
+Known static native providers are distinguished from unrecovered dynamic
+populations. The retained native archive accessor and Pane uniform-command
+providers use their real native members. No remaining selected NEW/revised
+source invokes `GetBasicSoundPlayerHandle`; complete sound hierarchy recovery
+is still a prerequisite to re-entering the three deferred setters. Existing
+opaque/dynamic interfaces and inherited qualifications are not declared proved
+compatible merely because their callers match.
+
+All earlier R1 erased-helper identity, L1 placement/extent, C-only scheduler
+MUST-discard, ARMCC-extension, noinline, partial-owner and `ORIGINAL BUG:`
+qualifications continue to apply. The new callback fixes are actual invoking
+contracts, not additional no-op-registration hypotheses.
+
+Exact remaining Main-only interfaces/argcheck/prepare argv are in
+`scratch/integrator/c010/r7/REMAINING-HEAVY-COMMANDS-r1.json`, against the fresh
+r7 proposal and complete rewrite projection. No heavy gate, full build, suite,
+prepare, review registration, finalization or push was run by this author.
+Main must retain failed r6 evidence, fold all independent review findings,
+integrate clean committed inputs and obtain fresh complete acceptance evidence.
+
+## Historical c010-r6 candidate
 
 This is an **unaccepted candidate**, based on c010-r5 `0c62c893` and integrated
 onto prepared c009-r6 `8e488abc` (prepared source `f47bb29f`). The c010-r5 tree

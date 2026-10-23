@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "status": "PASS_COMPLETE_CURRENT_PROPOSED_LEDGER_MATCH_ONLY",
+  "source_commit": "4941be4f",
+  "outer_exit": 0,
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "scratch/integrator/c010/match_scope.py",
+    "--run",
+    "match-r7-r1",
+    "--scope",
+    "scratch/integrator/c010/r7/complete-match-scope-r1.json"
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_primaries": 2602,
+  "completed_primaries": 2602,
+  "MATCH_primaries": 2602,
+  "per_unit_exit_counts": {
+    "0": 2602
+  },
+  "required_MATCH_functions": 2690,
+  "credited_function_bytes": 289576,
+  "helper_only_definitions_in_context": 24,
+  "helper_recipe_contexts": 27,
+  "paused": false,
+  "results": "scratch/integrator/c010/match-r7-r1/results.json",
+  "results_sha256": "4b9a41bbf225030c8c0cdc7da5e43737adfa40efd7ff741712636fdbc5cf6135",
+  "rewrite_projection": "scratch/integrator/c010/match-r7-r1/linker-rewrites.json",
+  "rewrite_projection_sha256": "7bb41d39e1826ef16229c387096da18023712ad45d657aa8ff98462bf0a6022a",
+  "rewrite_projection_scope_complete": true,
+  "rewrite_projection_expected_units": 2602,
+  "rewrite_projection_matched_units": 2602,
+  "scope": "scratch/integrator/c010/r7/complete-match-scope-r1.json",
+  "scope_sha256": "693e231f67d72bc5008ef566b0310cec6b05a0288e60b06bd9f434d9d7ba13db",
+  "source_context": "scratch/integrator/c010/r7/SOURCE-CONTEXT-r1.json",
+  "source_context_sha256": "170226d7387a347870a76fd1328fc07f3ab0e91747538f747afa99ff8b2be009",
+  "runner_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "historical_attempts": "scratch/integrator/c010/r7/REPROOF-ATTEMPTS-r1.json",
+  "boundary": "Sequential nice-10 single-process source/helper matchers only, no full-image build or heavy gate. No original bytes/encodings/disassembly. A complete MATCH closure is not approval of unknown dynamic contracts or an acceptance receipt."
+}

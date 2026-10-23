@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/r7/focused-scope-r2.json",
+  "scope_sha256": "3a18e41eec5b25588788581b5a3bf20f48a785adc1a9a894adafbf649ee1be0e",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_units": 1,
+  "completed_units": 1,
+  "paused": false,
+  "match_units": 1,
+  "exit_counts": {
+    "0": 1
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021443c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0021443c"
+      ],
+      "author": "v9a07",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/func_0021443c.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r2/u0000"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    __sti___17_func_0021443c_cpp_b254dc20 @ 0x21443c size 0x2c/0x2c\n",
+      "receipt": "scratch/integrator/c010/match-r7-focused-r2/u0000/func_0021443c.result.json",
+      "source_sha256": "7e90fd237c4350e079664a1a5fc4f4571397062a39d0b402fb9863357378142d",
+      "extra_source_sha256": {},
+      "receipt_sha256": "6be083f18bae84dddc48e43ec5f2bbee135b3166bfc0c35a77ef04b0c3c5dc54"
+    }
+  ],
+  "script_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "rewrite_projection": "scratch/integrator/c010/match-r7-focused-r2/linker-rewrites.json"
+}

@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "agent": "C010R5Codex",
+  "source_commit": "4941be4f",
+  "base_commit": "7083a0a3b9b56d56e24735ec3963283c92328c16",
+  "prepared_source": "3caf7c4d1559d2c11dfc9983e758acd32e6887ab",
+  "review_input": {
+    "review": "scratch/review/c010-r6/codex-b/REVIEW.json",
+    "sha256": "06f16270044654d1db593fa0f461637e7c462fcd1ac15c4e6971ff1029749b99",
+    "verdict": "FAIL:3 blockers on8 required functions; all existing MATCH observations retained as ground truth."
+  },
+  "counts": {
+    "candidate_units": 422,
+    "candidate_claims": 433,
+    "NEW_functions": 421,
+    "NEW_bytes": 40204,
+    "moves": 12,
+    "moved_bytes": 192,
+    "deferral_units": 85,
+    "deferral_functions": 86,
+    "deferral_bytes": 7408,
+    "proposed_units": 2626,
+    "proposed_functions": 2690,
+    "proposed_bytes": 289576,
+    "accepted_predecessor_functions": 2269,
+    "accepted_predecessor_bytes": 249372,
+    "preserved_accepted_identities": 2269,
+    "helper_only_units": 24
+  },
+  "findings": [
+    {
+      "id": "C010R6B-F01",
+      "disposition": "GENUINE_INVOKING_CALLBACK_INTERFACE_FIX",
+      "functions": [
+        "func_00156dbc",
+        "func_001c4490",
+        "func_001c5d90",
+        "func_00214138"
+      ],
+      "remedy": "All three C callback providers now have exact void*(void*) type; actual concrete pair storage is recovered inside the writing callback. No-op callbacks return the same generic storage without unused record definitions. The veneer and underlying runtime share one declaration family in reset_reference.h, with size_t size/count; service_list.h no longer shadows the ABI.",
+      "definition_headers": [
+        "include/game/reset_reference.h",
+        "include/game/service_list.h"
+      ],
+      "bounded_evidence": "Nine of ten focused-r1 units MATCH exit0, including every callback and service-array caller; the one refusal was only the separate envelope initializer name."
+    },
+    {
+      "id": "C010R6B-F02",
+      "disposition": "GENUINE_SINGLE_SHARED_OBJECT_MODEL",
+      "functions": [
+        "func_0021443c"
+      ],
+      "remedy": "Construct actual extern const SoundEnvelope data0024380a(127,127,127,127,127), using the same shared type and constructor as accepted envelope clients/sibling002437f8. Removed local AdshrCurve object and replaced its obsolete emitted initializer name, not added a compatibility alias.",
+      "canonical_header": "include/game/sound_format.h",
+      "accepted_clients_preserved": [
+        "src/wave9/func_00139020.c",
+        "src/wave9/func_001f1a20.c"
+      ],
+      "bounded_evidence": "Changed canonical-object/observed-name context MATCH exit0 in focused-r2. Failed initial missing-name refusal retained."
+    },
+    {
+      "id": "C010R6B-F03",
+      "disposition": "EXPLICIT_DEPENDENT_NEW_ONLY_DEFERRALS",
+      "functions": [
+        "func_001913fc",
+        "func_001d296c",
+        "func_001d2b8c"
+      ],
+      "remedy": "Defer these NEW setters and remove their source/unused NEW native-name bindings. The complete native BasicSound/SequenceSound/playback getter family is not established, so no invented native override or receiver/result alias is introduced.",
+      "bytes_deferred": 276,
+      "accepted_provider_preserved": {
+        "function": "func_001d3148",
+        "source": "src/wave8/func_001d3148.cpp",
+        "source_sha256": "cfa437a3cd788dad820935ac0d164ca58020da4658629838a638b9a16a4aedf0"
+      },
+      "deferral_record": "scratch/integrator/c010/r7/NEW-DEFERRALS-r1.json"
+    }
+  ],
+  "proactive_sweep": {
+    "path": "scratch/integrator/c010/r7/PROACTIVE-SWEEP-r1.json",
+    "sha256": "ea943c617e14bb1347af2e3d1b2b3f31cd8c879a40f03d7a510e3b8c68954e41",
+    "input_NEW_revised_units": 588,
+    "retained_units": 585,
+    "NEW_only_removed": 3,
+    "classes": [
+      "generic invoking runtime callbacks",
+      "one model per actual published object",
+      "native slots versus actual supplied providers"
+    ],
+    "limits": "Known static provider/source contracts screened; arbitrary unresolved dynamic populations remain qualified, not automatically compatible. No whole-ledger G3/argcheck or independent re-review is claimed."
+  },
+  "no_accepted_identity_deferred": true,
+  "accepted_predecessor_identities_preserved": 2269,
+  "explicit_moves_preserved": 12,
+  "qualifications": [
+    "Source-only typed noninvoking registrations remain distinct from the invoking generic vector runtime.",
+    "Compiler-synthesized native construction/startup ABI is not an explicit incompatible C function-pointer cast.",
+    "Original element/variable/TU names remain INFERENCE, never a license for another same-layout owner.",
+    "Complete native sound getter/owner recovery remains the re-entry prerequisite for the three NEW setters."
+  ],
+  "not_run": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}
