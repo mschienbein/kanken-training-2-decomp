@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "source_commit": "102a6d8078f745e193e6db4fd258d4add1192b7e",
+  "contract_closure": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json",
+  "facts": [
+    {
+      "family": "scheduled_task",
+      "parameter_type": "int(*)(void)",
+      "provider_example": "func_0013db40",
+      "invoker": "func_0010239c",
+      "source": "src/checkpoint10/func_0010239c.c",
+      "line": 17,
+      "source_sha256": "55c70e33188a4d2969012251c6bb1252e8ac82f8922f01d6f47b075a8f119d42",
+      "argument_count": 0,
+      "result_use": "Expression statement explicitly discards the result. C-only procedure callbacks may fall through under C11 6.9.1p12; they must not become C++ bodies. Real int-result providers retain their returns.",
+      "proof": "scratch/integrator/c010/match-r8-r2/u2585/func_0010239c.result.json"
+    },
+    {
+      "family": "thread_start_context",
+      "parameter_type": "void(*)(void*,void*)",
+      "invoker": "func_0012d104",
+      "source": "src/wave13/func_0012d104.c",
+      "line": 9,
+      "source_sha256": "a49b34fafcdea9be69af55f72da4c7127d1708892e1acc70522c3ceccdb18fd8",
+      "argument_roles": [
+        "start->argument",
+        "start->context"
+      ],
+      "result_use": "Void callback expression statement; the second context argument is real and is not erased.",
+      "proof": "scratch/integrator/c010/match-r8-r2/u1296/func_0012d104.result.json"
+    },
+    {
+      "family": "array_constructor",
+      "parameter_type": "void*(*)(void*)",
+      "invoker": "__aeabi_vec_ctor_nocookie_nodtor",
+      "original_invocation": "0x001911de",
+      "argument_roles": [
+        "current element storage"
+      ],
+      "result_use": "Returns the constructed element pointer required by ARM cppabi32 vector helper protocol; void-return and typed free-function substitutes are not compatible.",
+      "contract_source": "https://github.com/ARM-software/abi-aa/blob/main/cppabi32/cppabi32.rst#library-helper-functions"
+    },
+    {
+      "family": "native_character_reader",
+      "parameter_type": "u16(nw::font::CharStrmReader::*)(void)",
+      "source": "include/nw/font/font_CharStrmReader.h",
+      "line": 37,
+      "source_sha256": "d3636c23850160391b07617c4cc1840400ff6ca85052c783e7d7c04e75477d08",
+      "argument_roles": [
+        "native implicit CharStrmReader this"
+      ],
+      "result_use": "Next() returns the native member-call result as u16; all six compiler-emitted native methods retain that owner/result type.",
+      "symbol_witnesses": "scratch/integrator/c010/r8/NATIVE-SYMBOL-WITNESSES.json"
+    },
+    {
+      "family": "source_only_typed_registration",
+      "helper_count": 8,
+      "result_use": "Source-only typed no-op definitions neither store nor invoke their callback. Their erased original identity remains unrecovered; they are not aliases of a generic invoking vector runtime."
+    }
+  ]
+}
