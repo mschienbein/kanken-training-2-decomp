@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint11/fx_delay-r3.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001d23b4"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001d23b4": "src/checkpoint11/fx_delay-r3.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/fx_delay-r3.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u2587"
+  ],
+  "exit_code": 0,
+  "seconds": 0.347547,
+  "source_sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u2587/fx_delay-r3.result.json",
+  "receipt_sha256": "ed588a8b75cc33ba8705d07b08563af27e57910a7220af1df21cb77ec43dbbcd",
+  "output": "MATCH    _ZN2nw3snd7FxDelayC1Ev @ 0x1d23b4 size 0xa8/0xa8\n",
+  "stderr": ""
+}

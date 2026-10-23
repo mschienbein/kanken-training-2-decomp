@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_001bd68c/func_001bd68c.cpp",
+ "source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "7324194a4e1d548200b045759aea74f2f67c6f46caaa21d63d5e57907f7e3231",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v8",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_001bd68c/drawing_state.c",
+   "source_sha256": "241e8241f60875e0a31998380046ffbd5cdeb9eb7dc7af96d719b8343c8ca1be",
+   "object_sha256": "fc61a6de8587de6c4142f2760ef93e816a9c463373e94f8b544f40a812a0fb97"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r41262_drawing_state"
+   ],
+   "section": "i.r41262_drawing_state",
+   "size": 8,
+   "object": "scratch/integrator/cmodels2/reproof-r4-r1/017-func_001bd68c/extra-0-drawing_state.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001bd68c",
+   "address": 1824396,
+   "size": 696,
+   "candidate_size": 696,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 516,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe59008c4",
+     "removed_callee": {
+      "symbols": [
+       "r41262_drawing_state"
+      ],
+      "section": "i.r41262_drawing_state",
+      "size": 8,
+      "object": "scratch/integrator/cmodels2/reproof-r4-r1/017-func_001bd68c/extra-0-drawing_state.o"
+     }
+    }
+   ]
+  }
+ ]
+}

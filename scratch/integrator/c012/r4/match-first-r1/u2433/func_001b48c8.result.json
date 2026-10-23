@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint10/func_001b48c8.c",
+ "source_sha256": "23ad536704c9e569dd28a9d0f1925046e1234ae977218ff37e29c6f08af76663",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "963aeafb42da89c2b5533ec5af8750c53fc2633a7052333936af1549a0ce6c74",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/object_registration/sound_resource_cache.c",
+   "source_sha256": "45a9f591b10e8d25ddbe9350308b0cbcbca8def27d42b800599d6a504c922113",
+   "object_sha256": "f5facf11080614e92f8ea6d14c5fa8e415ccaabd84b75c987725963a23d1ba5a"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_sound_resource_cache_cleanup"
+   ],
+   "section": "i.register_sound_resource_cache_cleanup",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u2433/extra-0-sound_resource_cache.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001b48c8",
+   "address": 1788104,
+   "size": 88,
+   "candidate_size": 88,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 52,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_sound_resource_cache_cleanup"
+      ],
+      "section": "i.register_sound_resource_cache_cleanup",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u2433/extra-0-sound_resource_cache.o"
+     }
+    },
+    {
+     "offset": 60,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

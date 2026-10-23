@@ -543,6 +543,7 @@ extern struct WordPair *func_00126988(struct WordPair *out,
 extern struct SoundWaveReader *func_001d3c78(struct SoundWaveReader *reader,
                                     const struct SoundWaveFile *file, int relocated);
 extern struct WordPair *func_00194a34(struct WordPair *out, unsigned code);
+extern const struct SoundPlayerInfo *func_0014c2a4(const struct SoundArchiveInfo *info);
 #ifdef __cplusplus
 }
 #endif

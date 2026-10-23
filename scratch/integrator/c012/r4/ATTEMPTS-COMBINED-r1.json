@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "first_phase_attempts": {
+    "path": "ATTEMPTS-FIRST-r1.json",
+    "sha256": "e00a9baf28c17d5619e3b490b40503633ba78e15405a1c1211d6841d59e242fe"
+  },
+  "match_command_phases": [
+    {
+      "phase": "focused-independent-derivations",
+      "commands": 190,
+      "exit_counts": {
+        "0": 72,
+        "1": 6,
+        "2": 112
+      }
+    },
+    {
+      "phase": "independent-full-source-proof",
+      "commands": 2618,
+      "exit_counts": {
+        "0": 2618
+      }
+    },
+    {
+      "phase": "combined-standalone-context-attempt-r1",
+      "commands": 2621,
+      "exit_counts": {
+        "0": 2619,
+        "2": 2
+      },
+      "actual_driver_exit_code": 1,
+      "exit_record": "DRIVER-EXIT-COMBINED-r1.json"
+    },
+    {
+      "phase": "combined-genuine-context-proof-r2",
+      "commands": 2619,
+      "exit_counts": {
+        "0": 2619
+      },
+      "actual_driver_exit_code": 0,
+      "exit_record": "DRIVER-EXIT-COMBINED-r2.json"
+    }
+  ],
+  "match_command_totals": {
+    "commands": 8048,
+    "exit_counts": {
+      "0": 7928,
+      "1": 6,
+      "2": 114
+    }
+  },
+  "non_match_observed_exits": {
+    "pure_candidate_composition": 0,
+    "independent_original_pool_semantic_metadata": 0,
+    "component_source_change_inventory": 0,
+    "original_function_header_read": 0,
+    "source_restoration_reads": "Every git show exit, including expected child-absent128, is retained in FOLDED-ACCEPTED-SOURCE-RESTORATION-r1.json."
+  },
+  "metadata_cell_failures": [
+    {
+      "step": "Freeze source hashes before undeclared component deletion was restored",
+      "exception": "FileNotFoundError",
+      "reported_eval_exit": 1,
+      "disposition": "Restore exact canonical accepted source; no proof invoked."
+    },
+    {
+      "step": "Assert grouped claim coverage using Counter(mapping)",
+      "exception": "AssertionError",
+      "reported_eval_exit": 1,
+      "disposition": "Use Counter(tuple(mapping)) for key counts; no source/config/proof output changed and no proof invoked."
+    }
+  ],
+  "agent_or_task_calls": 0,
+  "heavy_commands": []
+}

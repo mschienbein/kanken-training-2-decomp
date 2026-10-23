@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "scope": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/COMPLETE-SCOPE-r2.json",
+  "scope_sha256": "4d1e441238d1cc3e2ca71d31ec7c31e3849ad3c361f541f735f98b9a6193d848",
+  "script_sha256": "f6b19d84063c1dd08bbb679b59d306865ad5d47263d08d5c1f9ea75834192a3f",
+  "expected_units": 2621,
+  "completed_units": 2621,
+  "required_functions": 2711,
+  "matched_functions": 2709,
+  "scope_complete": false,
+  "helper_only_units": [
+    "src/checkpoint12/intake-r29/final_func_00173078/item_page_kind.c",
+    "src/models/func_0010be58/result_failure_bits.c",
+    "src/models/func_0013f06c/frame_heap_unbound_hooks.c",
+    "src/models/func_0015f890/text_base_destruction.c",
+    "src/models/func_00168d14/character_panel_minimum.c",
+    "src/models/func_00172e00/transition-C-setter.c",
+    "src/models/func_001730ec/item_accessors.c",
+    "src/models/func_001a00f8/transition_active.c",
+    "src/models/func_001a2814/tu441_removed_helpers.c",
+    "src/models/func_001b8908/panel_accessors.c",
+    "src/models/func_001b9f18/drawing_state.c",
+    "src/models/func_001bd68c/drawing_state.c",
+    "src/models/func_001ddde4/item_accessors.c",
+    "src/models/func_001e0afc/removed_initializers.c",
+    "src/models/func_001ed874/category_initializers.c",
+    "src/models/linear_buffer/linear_buffer_allocator.c",
+    "src/models/object_registration/animation_state.c",
+    "src/models/object_registration/drawing_input.c",
+    "src/models/object_registration/object_manager.c",
+    "src/models/object_registration/prompt_manager.c",
+    "src/models/object_registration/resource_service_lock.c",
+    "src/models/object_registration/sound_resource_cache.c",
+    "src/models/object_registration/stream_manager.c",
+    "src/models/object_registration/style_owner.c",
+    "src/models/transition_setters/transition_active.c"
+  ],
+  "exit_counts": {
+    "0": 2619,
+    "2": 2
+  },
+  "result": "FAIL",
+  "actual_driver_exit_code": 1,
+  "driver_exit_record": "DRIVER-EXIT-COMBINED-r1.json",
+  "failure_rows": [
+    {
+      "source": "src/models2/training_visibility/func_00169018.c",
+      "extra_sources": [
+        "src/models/func_001ddde4/item_accessors.c"
+      ],
+      "exit_code": 2,
+      "stderr": "error: i.r41279_item_identifier: candidate-only callee has no inlined call; cannot remove it\n",
+      "receipt": "scratch/integrator/c012/r4/match-combined-r1/u2643/func_00169018.result.json"
+    },
+    {
+      "source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "extra_sources": [
+        "src/models/func_001730ec/item_accessors.c"
+      ],
+      "exit_code": 2,
+      "stderr": "error: i.w19_item_value: candidate-only callee has no inlined call; cannot remove it\n",
+      "receipt": "scratch/integrator/c012/r4/match-combined-r1/u2645/func_001e5d38.result.json"
+    }
+  ],
+  "disposition": "Retain every actual exit. Use whole genuine paired-caller contexts from supplied CM2 plan; do not split helpers, invent a caller or hide a failing emitted subset. No source/type/count delta."
+}

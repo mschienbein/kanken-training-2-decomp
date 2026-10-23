@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/shared_func_0015f84c/func_0015f84c.cpp",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/032-shared_func_0015f84c",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.183821,
+  "source": "src/checkpoint12/intake-r17/shared_func_0015f84c/func_0015f84c.cpp",
+  "source_sha256": "ac2a29200e4fd17387a23170a8015c1f2a4a6fe2afda6803433718f549de7372",
+  "claimed_functions": [
+    "func_0015f84c"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/032-shared_func_0015f84c/func_0015f84c.result.json",
+  "receipt_sha256": "6f2f659263adfe90d1b085eb490331770e3f41386f8c63b26c39a15818c605a9",
+  "functions": [
+    {
+      "name": "_ZN15W11EntryCommandC1Ev",
+      "address": 1439820,
+      "size": 68,
+      "candidate_size": 68,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN15W11EntryCommandC1Ev @ 0x15f84c size 0x44/0x44\n",
+  "stderr": ""
+}

@@ -1,0 +1,283 @@
+{
+  "schema_version": 1,
+  "status": "MANUAL_SOURCE_REVIEW_NOT_G3_NOT_PREPARE",
+  "base": "5820254f",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "first_component_commit": "8c94c419cf2911c8e1616d20ed0435d6565aedfb",
+  "imported_component_commit": "5a75bf13",
+  "first_component_review": {
+    "path": "scratch/integrator/c012/r4/SOURCE-POLICY-r1.json",
+    "sha256": "e330913eafaa82b84cdddb6fefa03a5214aa06b6a346d3b753902df23c5efd27"
+  },
+  "imported_change_inventory": {
+    "argv": [
+      "git",
+      "diff-tree",
+      "--no-commit-id",
+      "--name-status",
+      "-r",
+      "5820254f",
+      "5a75bf13",
+      "--",
+      "src",
+      "include",
+      "config",
+      "docs",
+      "THIRD_PARTY.md"
+    ],
+    "exit_code": 0,
+    "rows": [
+      {
+        "transition": "A",
+        "path": "config/candidates/cmodels2.json"
+      },
+      {
+        "transition": "A",
+        "path": "docs/known-issues-cmodels2.md"
+      },
+      {
+        "transition": "A",
+        "path": "include/game/display_initializer.h"
+      },
+      {
+        "transition": "M",
+        "path": "include/game/functions.h"
+      },
+      {
+        "transition": "M",
+        "path": "include/game/item_entries.h"
+      },
+      {
+        "transition": "M",
+        "path": "include/game/text_resources.h"
+      },
+      {
+        "transition": "M",
+        "path": "include/game/transition.h"
+      },
+      {
+        "transition": "D",
+        "path": "src/checkpoint10/alternate1/func_001650f8.c"
+      },
+      {
+        "transition": "M",
+        "path": "src/models/func_0015f890/func_0015f890.cpp"
+      },
+      {
+        "transition": "M",
+        "path": "src/models/func_00172e00/transition-C-setter.c"
+      },
+      {
+        "transition": "M",
+        "path": "src/models/func_00172e00/transition-qualified-removed.cpp"
+      },
+      {
+        "transition": "M",
+        "path": "src/models/func_001730ec/item_accessors.c"
+      },
+      {
+        "transition": "A",
+        "path": "src/models2/counted_resources/func_001e5d38.cpp"
+      },
+      {
+        "transition": "A",
+        "path": "src/models2/display_initializer/display_metadata.c"
+      },
+      {
+        "transition": "A",
+        "path": "src/models2/display_initializer/func_001456e4.c"
+      },
+      {
+        "transition": "A",
+        "path": "src/models2/menu_transition/func_00171208.cpp"
+      },
+      {
+        "transition": "A",
+        "path": "src/models2/training_visibility/func_00169018.c"
+      },
+      {
+        "transition": "M",
+        "path": "src/wave19/func_0015f5b0.c"
+      },
+      {
+        "transition": "M",
+        "path": "src/wave19/func_001743d8.c"
+      }
+    ]
+  },
+  "reviewed_NEW": [
+    {
+      "function": "func_00169018",
+      "source": "src/models2/training_visibility/func_00169018.c",
+      "disposition": "qualified-candidate",
+      "contract": "Same canonical L041InitializeScreen.message/MessageLayout object; canonical MenuPage/MenuItem result and existing signed category accessor; actual ad6d0/ad6ec/77b84 providers use that MessageLayout. No receiver cast. The held7a49c body is not imported; this caller keeps its existing canonical opaque interface.",
+      "R1_helper": "src/models/func_001ddde4/item_accessors.c"
+    },
+    {
+      "function": "func_00171208",
+      "source": "src/models2/menu_transition/func_00171208.cpp",
+      "disposition": "qualified-candidate",
+      "contract": "set_completion returns the same actual MenuTransitionState receiver it writes, then the caller uses it through the canonical type and existing dispatcher. No cast, guessed callback word or new hierarchy. CM2-F03 is explicitly not repaired.",
+      "R1_helper": "src/models/func_00172e00/transition-C-setter.c"
+    },
+    {
+      "function": "func_001e5d38",
+      "source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "disposition": "qualified-candidate",
+      "contract": "Same saved W8EntryList receiver reaches existing1730ec and new1e5d38 in two original caller contexts (163770,178154). Entries remain canonical W8ItemEntry through signed category helper and actual15f5b0 provider. No unrelated CountedResource facade or geometry-only alias.",
+      "R1_helper": "src/models/func_001730ec/item_accessors.c"
+    },
+    {
+      "function": "func_001456e4",
+      "target_bytes": 240,
+      "status": "uncredited-NEW-hold",
+      "component": "cmodels2-r5-fold-review",
+      "finding": "C012R4-MERGE-F01",
+      "category": "unevidenced-downcast",
+      "reason": "A genuine BoundDisplayObject result is not independently established. The current producer chain selects the canonical ResourceEvent pool; reinterpreting its base as BoundDisplayObject is not justified by matching field offsets. Final81700/81448 receiver models require a coherent transaction, not a cast.",
+      "evidence": "scratch/integrator/c012/r4/FOLDED-DISPLAY-PRODUCER-r1.json",
+      "evidence_sha256": "8f5afa279e3e7c2682671536336e4034b47d91f8face5c06bb63918efb0a9718",
+      "Main_ruling": "Hold001456e4 and its new setter helper; no independent Bound-producer ruling exists. Standing downcast rule requires tag- or producer-evidence. Fold only the other3 NEW/356B.",
+      "quarantined_source": "scratch/integrator/c012/r4/held-sources/src/models2/display_initializer/func_001456e4.c",
+      "quarantined_helper": "scratch/integrator/c012/r4/held-sources/src/models2/display_initializer/display_metadata.c",
+      "quarantined_header": "scratch/integrator/c012/r4/held-headers/include/game/display_initializer.h",
+      "helper_credit": 0
+    }
+  ],
+  "revised_accepted_units": [
+    {
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0015f890"
+      ],
+      "accepted_source_sha256": "8fc747a274e476f700fb2d44d0332e248e52cbd0181e328c7f40d6f9a2ac0c14",
+      "current_source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae"
+    },
+    {
+      "source": "src/models/func_00172e00/transition-C-setter.c",
+      "profile": "game",
+      "functions": [],
+      "accepted_source_sha256": "4495a88e6ed8dbeed4be158af55169eef2872e38330944c961aeb17b2979fc9f",
+      "current_source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3"
+    },
+    {
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00172e00"
+      ],
+      "accepted_source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+      "current_source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56"
+    },
+    {
+      "source": "src/models/func_001730ec/item_accessors.c",
+      "profile": "game",
+      "functions": [],
+      "accepted_source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3",
+      "current_source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874"
+    },
+    {
+      "source": "src/wave19/func_0015f5b0.c",
+      "profile": "game",
+      "functions": [
+        "func_0015f5b0"
+      ],
+      "accepted_source_sha256": "e9c417a5c8c5bf9e05b50a82f6c76eee9452d4e8d298857055ee12bc1b5cf110",
+      "current_source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac"
+    },
+    {
+      "source": "src/wave19/func_001743d8.c",
+      "profile": "game",
+      "functions": [
+        "func_001743d8"
+      ],
+      "accepted_source_sha256": "0506975d8d7b0c01ce391a4a117bd60fe5a6ec9436f42be40a4712bf0e5d43dd",
+      "current_source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f"
+    }
+  ],
+  "review_classes": [
+    {
+      "class": "callback-erasure-and-incompatible-call-types",
+      "decision": "No callback-runtime/provider signature from finalized c010-r8 is weakened. No new function-pointer cast or erased specialized callback. New1456e4 is held rather than relabeling its receiving provider."
+    },
+    {
+      "class": "one-model-per-class-and-native-owner",
+      "decision": "Reuse canonical W8ItemEntry/W8EntryList, MenuTransitionState, L041InitializeScreen/MessageLayout and W22TextResources. Remove obsolete CountedResource declaration from functions.h by including item_entries.h. Do not claim ResourceEvent and BoundDisplayObject are aliases. CM2-F01/F03 remain open."
+    },
+    {
+      "class": "native-slot-and-actually-invoking-provider",
+      "decision": "No new native vtable, key, slot insertion/reordering, native alias or U1. Existing accepted native scene roots/derived/PMF contracts are retained unchanged, with F01/F03 blocking. Text-resource explicit live cell keeps actual void(W22TextResources*) type and F04 extent/native-identity qualification."
+    },
+    {
+      "class": "illegal-downcasts",
+      "decision": "Hold1456e4, setter and header. Producer investigation independent of body byte match identifies ResourceEvent pool; Main confirms no independent Bound producer ruling. No other retained folded body adds a downcast."
+    },
+    {
+      "class": "C-facade-into-native-members",
+      "decision": "No new C/native member facade or name binding. Counted-item provider and call sites use the same ordinary canonical type. Native PMF invoker keeps existing genuine interface; open hierarchy is not hidden by free C aliases."
+    },
+    {
+      "class": "non-adopting-callees-or-helper-subsets",
+      "decision": "Use only existing accepted helper-only definitions, with their genuine accepted companion callers where both accessors need actual inline consumers. Both original source owners stay explicit in the grouped scope. No helper split, seeding body, unused-definition suppression, failing geometry/display helper, or partial passing-function subset is admitted. Every required and emitted function must MATCH."
+    },
+    {
+      "class": "punning-byte-storage-and-constant-runtime-offsets",
+      "decision": "No new runtime-object overlay, union view, memcpy reinterpretation, offsetof owner recovery, byte-offset member access or float/integer storage bridge. Canonical typed fields only. Serialized-format ruling remains per-row in known-issues-c012.md and SERIALIZED-FORMAT-r1.json."
+    },
+    {
+      "class": "unauthorized-vtable-and-name-aliases",
+      "decision": "No component config/names.json or profile delta. F04 explicit table live type remains qualified; no native identity or data credit. Display-only header is quarantined. Existing c0123 actual symbol bindings remain unchanged."
+    },
+    {
+      "class": "steering-and-dead-weight",
+      "decision": "No dead computation, volatile, asm, register force, barrier, unused seeding helper or source-policy exception introduced. Unreachable display setter is quarantined with its caller rather than retained as compiler influence."
+    }
+  ],
+  "c010_r8_callback_closure": {
+    "path": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json",
+    "sha256": "a9bbac9992ea67218441d6918899d69029b286897d5de0662df7e13e680fd13e",
+    "new_or_child_revised_functions_in_provider_table": [],
+    "existing_c012_provider_rows": [
+      "func_001e37dc",
+      "func_001db960",
+      "func_001e3818",
+      "func_0014b438"
+    ],
+    "provider_0014b438": "The old accepted mismatch is actually repaired to void*(void*), over real HwrIndexValue storage, returning that same storage; no native MaterialColor constructor alias. Other three provider bodies keep exact final Main contracts.",
+    "whole_callback_closure_rerun": false
+  },
+  "open_accepted_code_blockers": [
+    {
+      "id": "CM2-F01",
+      "reason": "Native lifecycle/table/provider family cannot close exactly while the accepted root D1 remains unrepresentable with an actually undefined key under the authorized no-slot-change pattern. All accepted forms/identities retained.",
+      "resolution_limit": "U1 adoption removes the old unavailable-model prerequisite, not the live native vtable reference or D1 equality obligation."
+    },
+    {
+      "id": "CM2-F03",
+      "reason": "The actual invoked PMF interfaces still require that coherent root/derived family. No receiver erasure, unrelated alias, PMF hand-decoding or synthetic interface/base was introduced."
+    }
+  ],
+  "verbatim_findings": {
+    "CM2-F01": "**CM2-F01 remains blocking:** the real scene lifecycle providers and their native/\n  explicit table interfaces require one coherent exact migration. Keeping accepted\n  forms is not a claim that the previously identified slot contracts are repaired.",
+    "CM2-F03": "**CM2-F03 remains blocking:** the three accepted scene/member-callback relationships\n  need the genuine shared native hierarchy and providers. The PMF is actually invoked;\n  receiver erasure, unrelated record aliases and hand-decoding are not repairs."
+  },
+  "accepted_source_restoration": {
+    "path": "scratch/integrator/c012/r4/FOLDED-ACCEPTED-SOURCE-RESTORATION-r1.json",
+    "sha256": "38ad15397cde7471009afae4e5841b2a4e9848c00a5c63dbf15fddac11128790"
+  },
+  "accepted_identity_withdrawals": [],
+  "claims_of_closed_heavy_or_independent_review_gates": [],
+  "previous_record": {
+    "path": "FOLDED-SOURCE-POLICY-r1.json",
+    "sha256": "76692d06d2376317e6a61103e2e636e4def1a709b12238e3f381fd664f147bf2",
+    "reason": "Natural helper-only standalone assumption was too narrow; source contracts/counts unchanged. Retain the actual original paired-caller compilation contexts and explicit distinct credited owners."
+  },
+  "natural_context_contract": {
+    "path": "NATURAL-CONTEXT-CLOSURE-r1.json",
+    "sha256": "4386dd0f0e6786d9763193a68452129f82604d7bbb885daa6c00790eaed37cbe"
+  }
+}

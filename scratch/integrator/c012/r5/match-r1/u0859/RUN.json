@@ -1,0 +1,44 @@
+{
+  "source": "src/nw4c/snd_GroupFileReader.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_0013187c",
+    "func_0013188c",
+    "func_001318cc"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_0013187c": "src/nw4c/snd_GroupFileReader.cpp",
+    "func_0013188c": "src/nw4c/snd_GroupFileReader.cpp",
+    "func_001318cc": "src/nw4c/snd_GroupFileReader.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_GroupFileReader.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u0859"
+  ],
+  "exit_code": 0,
+  "seconds": 0.381746,
+  "source_sha256": "3829db9d9e282a0d8ebb67707f3df05d3a42b63b683244fd93c4822b26edb660",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u0859/snd_GroupFileReader.result.json",
+  "receipt_sha256": "870e8b44cd9a2646505190a3d9d5b55049cc6e77fff16155214bbfa325dec326",
+  "output": "MATCH    _ZNK2nw3snd8internal15GroupFileReader19GetGroupItemExCountEv @ 0x13187c size 0x10/0x10\nMATCH    _ZNK2nw3snd8internal15GroupFileReader19ReadGroupItemInfoExEPNS1_9GroupFile15GroupItemInfoExEj @ 0x13188c size 0x40/0x40\nMATCH    _ZNK2nw3snd8internal15GroupFileReader25ReadGroupItemLocationInfoEPNS1_21GroupItemLocationInfoEj @ 0x1318cc size 0x54/0x54\n",
+  "stderr": ""
+}

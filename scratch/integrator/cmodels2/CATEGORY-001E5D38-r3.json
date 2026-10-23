@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "function": "func_001e5d38",
+  "author_result": {
+    "path": "scratch/authors/nf217/RESULT.json",
+    "sha256": "2f335fcec3d51d7539e7794a1ce89f434c38e1c366010e4bda644d354f799f26"
+  },
+  "author_v3": {
+    "path": "scratch/authors/nf217/match/02-traversal-category-v3/func_001e37ec.result.json",
+    "sha256": "2acd82fcf71885f51a8290ebfcb6f780651e16e4dcb84b505c09c65fdb8c2452"
+  },
+  "author_primary": "The direct default-v2 traversal remains104/116B with45 differing common bytes; the separate v3 target matches while seven other TU functions remain mismatches. No whole-TU match is asserted.",
+  "isolation": "Keep only the exact traversal operation. The seven other author definitions and controller context remain untouched in their author files; no alternate/context identity is emitted by the new unit.",
+  "receiver_proofs": [
+    {
+      "caller": "func_00163770",
+      "first_target": "func_001730ec",
+      "second_target": "func_001e5d38",
+      "first_call_address": 1458744,
+      "second_call_address": 1458760,
+      "receiver_saved_register": "r5",
+      "intervening_explicit_r5_definitions": 0,
+      "intervening_lines": 3,
+      "intervening_operation_roles": [
+        "unconditional result preservation",
+        "unconditional argument setup",
+        "unconditional argument setup"
+      ],
+      "both_direct_calls_unconditional": true,
+      "saved_receiver_unchanged_in_complete_interval": true
+    },
+    {
+      "caller": "func_00178154",
+      "first_target": "func_001730ec",
+      "second_target": "func_001e5d38",
+      "first_call_address": 1543560,
+      "second_call_address": 1543576,
+      "receiver_saved_register": "r5",
+      "intervening_explicit_r5_definitions": 0,
+      "intervening_lines": 3,
+      "intervening_operation_roles": [
+        "unconditional result preservation",
+        "unconditional argument setup",
+        "unconditional argument setup"
+      ],
+      "both_direct_calls_unconditional": true,
+      "saved_receiver_unchanged_in_complete_interval": true
+    }
+  ],
+  "receiver_proof_qualification": "In each caller the two direct calls are16 bytes apart, with the same preserved r5 receiver and no intervening definition of it. Both caller entries/call returns obey AAPCS callee-saved preservation. This establishes the same actual list, and both traversals fetch the same entry vector; equal offsets alone do not establish this relationship.",
+  "interval_analysis_note": "An initial metadata classifier limited all three intervening words to argument moves and therefore reported incomplete classification. A read-only refinement identifies the first word as result preservation, then two argument moves. All three preserve r5; no compiler or matcher was rerun.",
+  "packet_bindings": [
+    {
+      "path": "scratch/authors/nf217/packets/func_00163770.md",
+      "sha256": "44f1a79c651687142b36b9542311355ba0e97eeea8b61159283e6681dd59f6fc"
+    },
+    {
+      "path": "scratch/authors/nf217/packets/func_00178154.md",
+      "sha256": "48977c00067190fefac47df315f4871bb6ac3bd295afc3e6de09642038c61d53"
+    },
+    {
+      "path": "scratch/authors/nf217/packets/func_001e5d38.md",
+      "sha256": "b20194de77657de990e7185580e27bf2cb1a5546f12ef59ec95f696fa555b448"
+    }
+  ],
+  "packet_policy": "Only paths, hashes and derived call/receiver facts; no original bytes, instructions, disassembly or packet content is reproduced.",
+  "typed_contract": {
+    "header": {
+      "path": "include/game/item_entries.h",
+      "sha256": "278a86164775dace24b4601a2e081827f9f5e7eb3fc05c661a104fb7ae204781"
+    },
+    "canonical_list": "W8EntryList",
+    "canonical_entry": "W8ItemEntry",
+    "removed_private_shadows": [
+      "CountedResource",
+      "CountedResourceList"
+    ],
+    "fields": "Same list/entry identity permits signed int count at+0xc, signed-byte weight at+0x14 and const unsigned-byte value sequence at+0x1c. Category remains the existing signed-byte first field at+6. Extent stays0x20.",
+    "helper_reused": "w19_item_category; exact existing helper definition remains in src/models/func_001730ec/item_accessors.c, not copied or renamed.",
+    "helper_inputs_results": "const W8ItemEntry * input is the checked nonnull entry fetched from the actual list. The helper returns the signed category widened to full int; comparison uses the full signed int category argument. It performs one readonly byte access and no mutation.",
+    "weighted_result": "func_0015f5b0 takes the same const W8ItemEntry *, iterates its positive signed count, and returns a full signed int accumulated from signed weight when a value byte equals1. The traversal sums that int result. No return is inferred solely from BL.",
+    "existing_value_helper": "w19_item_value preserves all32 bits using the explicit unsigned conversion of the now-semantic signed count field; accepted001730ec still MATCHes.",
+    "control_flow": "Null entry vector returns0; signed count bounds the forward traversal, null entries are skipped, failed category predicates skip the weighted call, and all paths retain the preserved entry receiver.",
+    "allocation_dependency": "The existing00167860 allocator using sizeof(W8ItemEntry) remains complete-unit v8/L1 MATCH96/96B."
+  },
+  "provider_ownership": [
+    {
+      "function": "func_0015f5b0",
+      "source": "src/wave19/func_0015f5b0.c",
+      "body_change": "Only the canonical input type/include changes; arithmetic, loop and return are preserved.",
+      "source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac",
+      "candidate_credit": false
+    },
+    {
+      "function": "func_001743d8",
+      "source": "src/wave19/func_001743d8.c",
+      "body_change": "Only the shared list/entry names and entries member replace their private CountedResource shadows; loop/result unchanged.",
+      "source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f",
+      "candidate_credit": false
+    }
+  ],
+  "main_header_integration_delta": {
+    "path": "include/game/functions.h",
+    "current_Main_forward_to_remove": "struct CountedResource;",
+    "current_Main_prototype_to_remove": "extern int func_0015f5b0(const struct CountedResource *);",
+    "authority": "include/game/item_entries.h owns int func_0015f5b0(const struct W8ItemEntry *); include that header transitively where needed rather than retaining an obsolete CountedResource declaration.",
+    "local_base": "Neither obsolete declaration exists in8dd4d016/cmodels2. No unfinished predecessor commit was merged."
+  },
+  "coordination": "C010Codex confirms no competing CountedResource migration; FixC009R3Codex confirms these existing source paths are not its callable-remediation changes. C011Codex supplies no alternative category provider and forbids offset-only borrowing.",
+  "new_selected_row": {
+    "function": "func_001e5d38",
+    "target_bytes": 116,
+    "source": "src/models2/counted_resources/func_001e5d38.cpp",
+    "source_sha256": "158809ed798b9ee6193ec1cb55684163787bf2b36acbfee19a8bac17515080a3",
+    "profile": "game",
+    "author": "nf217",
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v8",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "receipt": {
+      "path": "scratch/cm2/intake-r3/category/func_001e5d38.result.json",
+      "sha256": "712ac3086d895b8bedc96e38e85812917fdf26d6f2e6a45cd543f8c29ee1f003"
+    },
+    "exit_code": 0,
+    "status": "match",
+    "rules": [
+      "R1"
+    ],
+    "required_verdict": "QUALIFIED",
+    "rewrites": [
+      {
+        "offset": 64,
+        "rule": "inline_insn",
+        "target": null,
+        "removed_callee": {
+          "symbols": [
+            "w19_item_category"
+          ],
+          "section": "i.w19_item_category",
+          "size": 8,
+          "object": "scratch/cm2/intake-r3/category/extra-0-item_accessors.o"
+        }
+      }
+    ],
+    "extra_sources": [
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001730ec/item_accessors.c",
+        "source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874",
+        "object_sha256": "ef5b0cc981bf6c105f12137c5a48a77f3092149b3aa2443c13bb873477aab1f5"
+      },
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_001730ec/func_001730ec_removed.c",
+        "source_sha256": "8e85116907b06b33eaeba46698afb23d9c24f95360cb7c390e0db711d6e81714",
+        "object_sha256": "2dcc92d3a1dbfd47246c73717f1f72e93c34cb1cbcb172a1c56fedef60693400"
+      },
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/wave19/func_0015f5b0.c",
+        "source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac",
+        "object_sha256": "1b15f4b4bba2a80ac73b869316b48d29307d4e0b2d903cf004dc040d4384fe83"
+      },
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/wave19/func_001743d8.c",
+        "source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f",
+        "object_sha256": "cf6dfde5a81d4ffafe76be098b65b58588556d303689d0563332d6aa0b5f0b30"
+      }
+    ],
+    "model_necessity": "A fresh complete-unit v8/L1 witness, not proof of v8-only necessity; preserved default mismatches/refusals and v3/v6 qualifications remain authoritative for their own inputs."
+  },
+  "qualifications": [
+    "[INFERENCE] Same actual list/entry identity is evidenced; historical class spelling, complete layout and TU membership remain unrecovered.",
+    "The accepted category helper role remains R1/QUALIFIED; no historical helper identity or call graph is recovered.",
+    "The new target is complete-unit MATCH only after coherent typed provider/header cutover, not because a private mismatching TU was declared accepted.",
+    "Existing provider identities retain their source owners and receive no duplicate cmodels2 credit."
+  ]
+}

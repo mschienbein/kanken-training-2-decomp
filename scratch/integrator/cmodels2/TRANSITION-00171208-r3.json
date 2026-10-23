@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "function": "func_00171208",
+  "author_result": {
+    "path": "scratch/authors/np017/RESULT.json",
+    "sha256": "dca7c44742d48a8184056acd7e964c7d3162f3a3a1b15e020e30150eda73bde4"
+  },
+  "author_primary": "The delivered direct default-v2 source remains its measured five-byte mismatch. Only the separate qualified source is selected.",
+  "author_qualified_v3": {
+    "path": "scratch/authors/np017/match/00171208/26-canonical-setter-v3-witness/func_00171208.result.json",
+    "sha256": "1d4ab5c54428fcf34684005ed25f884afe9ccb759fb8a2e57f0365e2467ab9db"
+  },
+  "author_qualified_v6": {
+    "path": "scratch/authors/np017/match/00171208/final-qualified-v6/func_00171208-qualified-v6.result.json",
+    "sha256": "54d7967b2cd4ec9fcc5c47120918e51cbea062e41f82424244eb16400e25fcb4"
+  },
+  "reused_helper": {
+    "source": "src/models/func_00172e00/transition-C-setter.c",
+    "original_helper_source_sha256": "4495a88e6ed8dbeed4be158af55169eef2872e38330944c961aeb17b2979fc9f",
+    "current_source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3",
+    "new_definition_added": false,
+    "functions": []
+  },
+  "typed_cutover": {
+    "header": {
+      "path": "include/game/transition.h",
+      "sha256": "efcb1bacbd21cad7c473f025f3015276b1efa733ee01209e2889c6d23d0feaef"
+    },
+    "removed_shadow": "TransitionCompletion",
+    "receiver": "MenuTransitionState",
+    "callback_interface": "CallbackTarget",
+    "evidence": "Both callers forward this exact receiver to func_00177b10, which consumes its virtual member-callback interface; no base relation is inferred only from equal offsets. C exposes the same leading vtable word.",
+    "helper_inputs": "MenuTransitionState *state and full-width signed int completion are actual incoming entry arguments.",
+    "helper_result": "The source returns exactly the same MenuTransitionState * argument, not a guessed result from a preceding void call.",
+    "effects": "One full-width completion store at +0x34; no additional memory effect, flags or callee-saved state.",
+    "outgoing": "The returned typed receiver drives the selected mode store and the existing typed member-callback dispatcher after unchanged timing/transition calls.",
+    "callbacks": "00171208 uses the directly referenced data_00218648 MemberCallback; accepted00172e00 retains CallbackTarget::callback5. No callback, member-pointer or receiver erasure casts remain in either source."
+  },
+  "new_selected_row": {
+    "function": "func_00171208",
+    "target_bytes": 96,
+    "source": "src/models2/menu_transition/func_00171208.cpp",
+    "source_sha256": "7a97308881ee69ab80e381d27ce71c73859351126a2cfbe58d3a2597dae405c1",
+    "profile": "game",
+    "author": "np017",
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v8",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "receipt": {
+      "path": "scratch/cm2/intake-r3/transition/func_00171208.result.json",
+      "sha256": "2702b1c488566692d3510a53ba74280805b0e15d7c3d6734f09bfd14f9910553"
+    },
+    "exit_code": 0,
+    "status": "match",
+    "rules": [
+      "R1"
+    ],
+    "required_verdict": "QUALIFIED",
+    "rewrites": [
+      {
+        "offset": 4,
+        "rule": "inline_insn",
+        "target": null,
+        "removed_callee": {
+          "symbols": [
+            "set_completion"
+          ],
+          "section": "i.set_completion",
+          "size": 8,
+          "object": "scratch/cm2/intake-r3/transition/extra-0-transition-C-setter.o"
+        }
+      }
+    ],
+    "extra_sources": [
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_00172e00/transition-C-setter.c",
+        "source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3",
+        "object_sha256": "1846b998a012c7a0857fbff47d0e8f42f5871b8c82d2711a6a683f1ff3501829"
+      },
+      {
+        "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/src/models/func_00172e00/transition-qualified-removed.cpp",
+        "source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56",
+        "object_sha256": "6979b557cbf80656cacd17334339389cde91460a5305f1497a2097a9494e44b4"
+      }
+    ],
+    "model_necessity": "A fresh complete-unit v8/L1 witness, not proof of v8-only necessity; preserved default mismatches/refusals and v3/v6 qualifications remain authoritative for their own inputs."
+  },
+  "reopened_accepted_caller": "src/models/func_00172e00/transition-qualified-removed.cpp",
+  "qualifications": [
+    "[INFERENCE] The completion helper identity, original existence, spelling, outlining and historical TU/call graph remain unrecovered.",
+    "The virtual-slot interface is evidenced by actual dispatcher use, not a reconstructed complete historical class hierarchy.",
+    "Both new and accepted caller bytes MATCH under v8/L1 in one complete helper closure; no accepted credit or readiness follows."
+  ]
+}

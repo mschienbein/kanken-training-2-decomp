@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/042-tu973/layout_native.cpp",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/005-042-tu973",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.30317,
+  "source": "src/checkpoint12/intake-r17/042-tu973/layout_native.cpp",
+  "source_sha256": "4805e2d2101160ae04d67c5e1c1011886d80fa213079c695d7a89903f3fb7cb3",
+  "claimed_functions": [
+    "func_001ce9e8"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/005-042-tu973/layout_native.result.json",
+  "receipt_sha256": "09d1b06de11f763a323a8813b2ed9f09edabccabf78c9870dc0c031472a81dcb",
+  "functions": [
+    {
+      "name": "_ZN2nw3lyt6Layout5BuildEPKvPNS0_16ResourceAccessorE",
+      "address": 1894888,
+      "size": 676,
+      "candidate_size": 676,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN2nw3lyt6Layout5BuildEPKvPNS0_16ResourceAccessorE @ 0x1ce9e8 size 0x2a4/0x2a4\n",
+  "stderr": ""
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "prereview_sha256": "8189633804b0b21301b6280f4dad9a6966c41150be9e9c7dcede62c0a82410e4",
+  "status": "BLOCKED_DO_NOT_PREPARE",
+  "summary": {
+    "new_deferral_functions": 1,
+    "new_deferral_bytes": 296,
+    "inherited_tracked_holds": 9,
+    "inherited_tracked_hold_bytes": 4464,
+    "total_tracked_holds": 10,
+    "total_tracked_hold_bytes": 4760,
+    "remaining_candidate_units": 5,
+    "remaining_new_functions": 4,
+    "remaining_new_bytes": 596,
+    "unresolved_blocker_findings": 2,
+    "resolved_findings": 2,
+    "protected_identity_deferrals": 0,
+    "reproof_runs": 101,
+    "reproof_exit_0": 100,
+    "unique_functions_match": 103,
+    "unique_matched_bytes": 17392,
+    "retained_prereview_required_functions": 39,
+    "remaining_prereview_required_functions_all_exact": true,
+    "c009_owned_font_holds": 4,
+    "c009_owned_font_hold_bytes": 144,
+    "c011_owned_font_holds": 2,
+    "c011_owned_font_hold_bytes": 364,
+    "predecessor_owned_holds_counted_as_new_cmodels2": false,
+    "reproof_exit_2": 1,
+    "additional_inherited_compile_blockers": 1
+  },
+  "findings": [
+    {
+      "id": "CM2-F01",
+      "disposition": "unresolved-blocker",
+      "status": "BLOCKED_DO_NOT_PREPARE",
+      "reason": "The accepted scene/native slot declarations and real concrete providers still disagree. No accepted identity can be deferred. Both contacted owners confirm no adoptable exactly-witnessed model independent of quarantined native MenuScene/linker-v11 work.",
+      "authority": "Main explicitly directed recording CM2-F01/F03 as unresolved blockers if an exact accepted-contract revision on main e09feab5 is not achievable; no narrowed transition set is authorized.",
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/014-func_001a2814_tu/func_001a2814_tu.result.json",
+          "result_sha256": "2335930089a827787e9c78ee7eab42cc511cf8d089a4900422caf1437c89d1e9"
+        },
+        {
+          "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/018-training_initialize_grouped_reset/training_initialize_grouped_reset.result.json",
+          "result_sha256": "2087e46ff5b9dcec2579950d5708928d3b6f1c2548af2780dc6a269720585633"
+        },
+        {
+          "source": "src/models/func_001ed874/func_001ed874.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/019-func_001ed874/func_001ed874.result.json",
+          "result_sha256": "1616b6625c16934e8995e8c76159e118c212c166301e696eac49efbbcf781ebb"
+        }
+      ],
+      "evidence": [
+        "scratch/integrator/cmodels2/BLOCKERS-r1.json",
+        "scratch/prereview/cmodels2/PREREVIEW.json#CM2-F01"
+      ],
+      "exactness_does_not_close_contract": true,
+      "functions_deferred": []
+    },
+    {
+      "id": "CM2-F02",
+      "disposition": "NEW-only-deferral",
+      "status": "NEW-path-deferred; inherited-c010-caller-reproof-blocked",
+      "function": "func_001e958c",
+      "deferred_bytes": 296,
+      "reason": "Quarantine the new native menu teardown, its exclusive Point/Rectangle helper unit and menu_resources.h. Remove both new units from cmodels2.json, so the incompatible MenuResources::State* C-linkage declaration/call is not admitted. Retained W24CollectionScreen cleanup remains unchanged.",
+      "reproof_exit": 2,
+      "reproof_exits": [
+        {
+          "source": "src/checkpoint10/func_001e8810.c",
+          "exit_code": 2,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/100-func_001e8810/func_001e8810.result.json",
+          "result_sha256": "a1c6d1abf9823407d97e892398596343381129d46750bb932e7bc213e1bbedd6"
+        }
+      ],
+      "evidence": [
+        "config/candidates/cmodels2.json",
+        "scratch/integrator/cmodels2/DEFERRALS-r4-r1.json",
+        "scratch/integrator/cmodels2/deferred-r4/menu_teardown.cpp"
+      ],
+      "accepted_or_prepared_identity": false,
+      "qualification": "The incompatible NEW MenuResources declaration is removed, but reproof of the unchanged c010 C caller fails on its separate inherited DisplayObject*/ResourceEvent* argument mismatch. No cast or off-scope c010 repair is imported; CM2 is still blocked."
+    },
+    {
+      "id": "CM2-F03",
+      "disposition": "unresolved-blocker",
+      "status": "BLOCKED_DO_NOT_PREPARE",
+      "reason": "The three accepted registering owners still have no genuine CallbackTarget base/override family. The PMF is really invoked by accepted 001b7dac. Native PMFs are not flattened and no reinterpretation is hidden. A complete native family requires unavailable adopted D0/VFE handling; quarantined research is not a repair.",
+      "authority": "Same explicit Main ruling as CM2-F01. Preserve all accepted reopened callers and the exhaustive v8 transition review obligation.",
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/models/func_001bd68c/func_001bd68c.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/017-func_001bd68c/func_001bd68c.result.json",
+          "result_sha256": "2e813f0294396aeb0290f8a660bb399b88627870212712821a8036576474e9c8"
+        },
+        {
+          "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/018-training_initialize_grouped_reset/training_initialize_grouped_reset.result.json",
+          "result_sha256": "2087e46ff5b9dcec2579950d5708928d3b6f1c2548af2780dc6a269720585633"
+        },
+        {
+          "source": "src/models/func_001ed874/func_001ed874.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/019-func_001ed874/func_001ed874.result.json",
+          "result_sha256": "1616b6625c16934e8995e8c76159e118c212c166301e696eac49efbbcf781ebb"
+        },
+        {
+          "source": "src/wave10/func_00177b10.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/098-func_00177b10/func_00177b10.result.json",
+          "result_sha256": "ba9cca5b4d0f967933b24451e217b03f1446757733292bb2c0853c63234df743"
+        },
+        {
+          "source": "src/wave20/func_001b7dac.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/099-func_001b7dac/func_001b7dac.result.json",
+          "result_sha256": "8e5664dc93c842298fbae407bc75a479f89c2eb4e2a9ff4ee33ae7949e44890a"
+        }
+      ],
+      "evidence": [
+        "scratch/integrator/cmodels2/BLOCKERS-r1.json",
+        "scratch/prereview/cmodels2/PREREVIEW.json#CM2-F03"
+      ],
+      "exactness_does_not_close_contract": true,
+      "functions_deferred": []
+    },
+    {
+      "id": "CM2-F04",
+      "disposition": "local-fix",
+      "status": "fixed-with-explicit-boundary-qualification",
+      "reason": "Replace the unbounded unsigned array/void* vptr with W22TextResourcesVTable: one witnessed null/VFE data cell and one void(W22TextResources*) self-destructor cell; the storing body now takes the typed table address. No fake callback arity is assigned to the null cell.",
+      "reproof_exit": 0,
+      "reproof_exits": [
+        {
+          "source": "src/models/func_0015f890/func_0015f890.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/010-func_0015f890/func_0015f890.result.json",
+          "result_sha256": "c7df95537915baf7af00d97c96af774d4caba0e2d8cf21164a8f747d3fc002fb"
+        },
+        {
+          "source": "src/checkpoint10/func_0015f5e4.cpp",
+          "exit_code": 0,
+          "result": "scratch/integrator/cmodels2/reproof-r4-r1/097-func_0015f5e4/func_0015f5e4.result.json",
+          "result_sha256": "0a6416df9099492e47a5d8c1837dc77766656e7c746307a13ed100b4bd97f2b7"
+        }
+      ],
+      "evidence": [
+        "include/game/text_resources.h",
+        "src/models/func_0015f890/func_0015f890.cpp",
+        "scratch/integrator/cmodels2/TEXT-TABLE-FACTS-r1.json"
+      ],
+      "qualification": "[INFERENCE] Eight-byte address-point extent follows the neighboring independently stored address point00223518 and its eight-byte ABI header; no native original class identity or table-data credit is claimed. The real callable cell and its receiver/result protocol are directly witnessed."
+    }
+  ]
+}

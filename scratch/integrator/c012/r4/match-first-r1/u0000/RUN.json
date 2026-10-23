@@ -1,0 +1,43 @@
+{
+  "source": "src/pilot/pilot_a.c",
+  "profile": "game",
+  "functions": [
+    "func_0010e664",
+    "func_001149a8",
+    "func_00136930",
+    "func_00140dac",
+    "func_001179b4",
+    "func_001263b8",
+    "func_00122350"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/pilot/pilot_a.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u0000"
+  ],
+  "exit_code": 0,
+  "seconds": 0.23476,
+  "source_sha256": "a363a225f4731f450e6cafa8556ef0e7ab04af9556d63056aa62694f5accd763",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-first-r1/u0000/pilot_a.result.json",
+  "receipt_sha256": "2b88bcc07dadb9e5d5b08226e0697ff859cdc4e3d4ab5f6ee1a69dfa88016416",
+  "output": "MATCH    func_0010e664 @ 0x10e664 size 0xc/0xc\nMATCH    func_001149a8 @ 0x1149a8 size 0x18/0x18\nMATCH    func_001179b4 @ 0x1179b4 size 0x10/0x10\nMATCH    func_00122350 @ 0x122350 size 0x10/0x10\nMATCH    func_001263b8 @ 0x1263b8 size 0x14/0x14\nMATCH    func_00136930 @ 0x136930 size 0x28/0x28\nMATCH    func_00140dac @ 0x140dac size 0x28/0x28\n",
+  "stderr": ""
+}

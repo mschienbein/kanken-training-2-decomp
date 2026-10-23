@@ -1,0 +1,55 @@
+{
+  "source": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001e395c"
+  ],
+  "extra_sources": [],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/derive-r1/u029"
+  ],
+  "exit_code": 0,
+  "stdout": "MATCH    func_001e395c @ 0x1e395c size 0x198/0x198 [armlink5-inline-branchnop-v6: 2 inline_nop]\n",
+  "stderr": "",
+  "source_sha256": "59af4c916c34393c6e583d80c7968de63951b9d0755d2bf1473524c8135365e7",
+  "receipt": "scratch/integrator/c012/r5/derive-r1/u029/func_001e395c.result.json",
+  "result_functions": [
+    {
+      "name": "func_001e395c",
+      "address": 1980764,
+      "size": 408,
+      "candidate_size": 408,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": [
+        {
+          "offset": 176,
+          "rule": "inline_nop",
+          "target": 2029700,
+          "word": "0xe1a00000"
+        },
+        {
+          "offset": 336,
+          "rule": "inline_nop",
+          "target": 2029700,
+          "word": "0xe1a00000"
+        }
+      ]
+    }
+  ]
+}

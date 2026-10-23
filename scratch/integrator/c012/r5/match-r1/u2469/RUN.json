@@ -1,0 +1,40 @@
+{
+  "source": "src/checkpoint10/collect-r2/nw-reader.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001c5ad4"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001c5ad4": "src/checkpoint10/collect-r2/nw-reader.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/collect-r2/nw-reader.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u2469"
+  ],
+  "exit_code": 0,
+  "seconds": 0.288789,
+  "source_sha256": "81f49008201f5ea001aa729bdc34fe5f4f733f808ccd35050fce45a7a81f12bd",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u2469/nw-reader.result.json",
+  "receipt_sha256": "cee5cf053e8e336a64e2fc52b914f2dd6ad4716a5f37861d6bcb01a2706a40ad",
+  "output": "MATCH    _ZN2nw4font14CharStrmReader16ReadNextCharUTF8Ev @ 0x1c5ad4 size 0x6c/0x6c\n",
+  "stderr": ""
+}

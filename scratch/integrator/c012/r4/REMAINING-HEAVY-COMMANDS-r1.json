@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "MAIN_ONLY_NO_HEAVY_COMMAND_EXERCISED",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "scope": "Independent c012-r4 delta on5820254f; the separately supplied cmodels2-r5 delta is not folded in this first record.",
+  "prerequisites": [
+    "Integrate finalized c011, ctypes1 and c014 changes; preserve the exact c014 TaskPool agreement and all c010-r8 callable/opaque/native-owner decisions.",
+    "Refresh the composed ledger and source/header/helper contexts after actual parent integration. No stale old cmodels2-r3 tree is a predecessor replacement.",
+    "Adjudicate every callback, caller/result, native slot/owner, PMF hierarchy and source qualification; no bounded byte result claims those full gates closed.",
+    "Only Main writes canonical acceptance records, registers reviews, finalizes or pushes. Heavy work is machine-wide serialized and requires a granted slot and fresh unused output paths."
+  ],
+  "commands": [
+    {
+      "grant_required": true,
+      "argv": [
+        ".venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/c012/r4/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/c012/r4/INTERFACES-r1.json"
+      ]
+    },
+    {
+      "grant_required": true,
+      "argv": [
+        ".venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/c012/r4/PROPOSED-LEDGER.json",
+        "--json",
+        "scratch/integrator/c012/r4/ARGCHECK-r1.json"
+      ],
+      "acceptance": "Every issue and note requiring a caller/result/type adjudication is explicitly addressed; unchecked C++ is manual review, not approval."
+    },
+    {
+      "grant_required": true,
+      "after": "Closed contracts, a clean integrated commit and a fresh checkpoint name",
+      "argv": [
+        ".venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "c012-r1",
+        "--candidates",
+        "config/candidates/c012.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "includes": "Two fresh complete builds and suite; two independent full-scope reviews and Main finalize follow only a passing prepare."
+    }
+  ],
+  "not_run": [
+    "whole-ledger interfaces",
+    "whole-ledger argcheck",
+    "emitted-owner audit",
+    "build",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}

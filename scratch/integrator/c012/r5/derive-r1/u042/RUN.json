@@ -1,0 +1,36 @@
+{
+  "source": "src/models2/menu_transition/func_00171208.cpp",
+  "profile": "game",
+  "functions": [
+    "func_00171208"
+  ],
+  "extra_sources": [
+    "src/models/func_00172e00/transition-C-setter.c"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/models2/menu_transition/func_00171208.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/derive-r1/u042",
+    "--extra-source",
+    "src/models/func_00172e00/transition-C-setter.c"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "error: armcc failed (1) on func_00171208.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/src/models2/menu_transition/func_00171208.cpp\", line 8: Error:  #167: argument of type \"MenuTransitionState *\" is incompatible with parameter of type \"TransitionCompletion *\"\n      state = set_completion(state, next_state);\n                             ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/src/models2/menu_transition/func_00171208.cpp\", line 8: Error:  #513: a value of type \"TransitionCompletion *\" cannot be assigned to an entity of type \"MenuTransitionState *\"\n      state = set_completion(state, next_state);\n            ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/src/models2/menu_transition/func_00171208.cpp\", line 12: Error:  #20: identifier \"data_00218648\" is undefined\n      func_00177b10(state, data_00218648);\n                           ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/src/models2/menu_transition/func_00171208.cpp\", line 12: Error:  #167: argument of type \"MenuTransitionState *\" is incompatible with parameter of type \"CallbackTarget *\"\n      func_00177b10(state, data_00218648);\n                    ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/src/models2/menu_transition/func_00171208.cpp: 0 warnings, 4 errors\n\n",
+  "source_sha256": "7a97308881ee69ab80e381d27ce71c73859351126a2cfbe58d3a2597dae405c1",
+  "receipt": "scratch/integrator/c012/r5/derive-r1/u042/func_00171208.result.json",
+  "result_functions": []
+}

@@ -1,0 +1,46 @@
+{
+  "source": "src/checkpoint10/func_001b48c8.c",
+  "profile": "game",
+  "functions": [
+    "func_001b48c8"
+  ],
+  "extra_sources": [
+    "src/models/object_registration/sound_resource_cache.c"
+  ],
+  "function_owners": {
+    "func_001b48c8": "src/checkpoint10/func_001b48c8.c"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint10/func_001b48c8.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u2411",
+    "--extra-source",
+    "src/models/object_registration/sound_resource_cache.c"
+  ],
+  "exit_code": 0,
+  "seconds": 0.238378,
+  "source_sha256": "23ad536704c9e569dd28a9d0f1925046e1234ae977218ff37e29c6f08af76663",
+  "extra_source_sha256": {
+    "src/models/object_registration/sound_resource_cache.c": "45a9f591b10e8d25ddbe9350308b0cbcbca8def27d42b800599d6a504c922113"
+  },
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r2/u2411/func_001b48c8.result.json",
+  "receipt_sha256": "bf68570daaea942a2b96dcd6ef1d219a710d8cd358acc62ccd439962f60b8ca6",
+  "output": "MATCH    func_001b48c8 @ 0x1b48c8 size 0x58/0x58 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  register_sound_resource_cache_cleanup (4 bytes; i.register_sound_resource_cache_cleanup)\n",
+  "stderr": ""
+}

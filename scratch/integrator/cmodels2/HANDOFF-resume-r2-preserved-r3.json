@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "assignment": "ResumeModels2 local integration",
+  "status": "complete-local-handoff-not-checkpoint-ready",
+  "commit": "8dd4d0169a752a42e5381d9be5367da58fa45d21",
+  "branch": "cmodels2-integrate",
+  "main_merged": "261fdc9",
+  "merge_commit": "64c7cab4d334b82c63a1b9e13f590b99c99541c8",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/cmodels2.json",
+    "sha256": "2c40ae7950bb7c41f6b6a874b053ce5f8aa9cb834faa0cbbb1a80c82b63285bb"
+  },
+  "scope": {
+    "path": "scratch/integrator/cmodels2/SCOPE-r2.json",
+    "sha256": "817a3dbc14f676246082f51b38e4b04cfe97313d6aa36284e447f7b301fdeaf9"
+  },
+  "notes": {
+    "path": "scratch/integrator/cmodels2-NOTES.md",
+    "sha256": "237aeb268edb87f15ffd7798641db4eae3c2c7507db79a41177316724d42f479"
+  },
+  "candidate_functions": [
+    "func_001e958c",
+    "func_001456e4",
+    "func_00169018"
+  ],
+  "candidate_bytes": 680,
+  "candidate_units": 5,
+  "new_helpers": 2,
+  "existing_helper_reused": "src/models/func_001ddde4/item_accessors.c",
+  "model_review_projection": {
+    "R1_functions": 22,
+    "L1_owning_functions": 1,
+    "helper_only_units": 18,
+    "existing_R1_reopened": 19,
+    "existing_R1_unchanged_sources": 18,
+    "record": {
+      "path": "scratch/integrator/cmodels2/MODEL-TRANSITION-r2.json",
+      "sha256": "1dab49459c3d474e1d284fdfeefe21ba1cdbe06bfacec294e36438e0246591a4"
+    }
+  },
+  "ownership_inventory": {
+    "functions": 137,
+    "bytes": 150300,
+    "record": {
+      "path": "scratch/integrator/cmodels2/OWNERSHIP-INVENTORY-r2.json",
+      "sha256": "8d5fa79da8b6b3b7d618bda56fb54263cd5bb6cc243e793ea15cd4f037e83688"
+    },
+    "refresh_record": {
+      "path": "scratch/integrator/cmodels2/RESIDUE-REFRESH-RECONCILIATION-r1.json",
+      "sha256": "8eb49a9587d787d65d2e2525462919013419b3a10f3b90ee2b1811fb1ff7e32f"
+    }
+  },
+  "witnesses": {
+    "preserved_menu": {
+      "path": "scratch/integrator/cmodels2/CANDIDATE-WITNESS.metadata.json",
+      "sha256": "1b7fdc277053e2f5d23fa271bfed61f38b8f66e7d468471a59e6a61acc16a050"
+    },
+    "display": {
+      "path": "scratch/integrator/cmodels2/DISPLAY-001456E4-r1.json",
+      "sha256": "81f1e54cfb91b13aaad3b812238a5d6adf1aa8d152c34c563fd0d8b8d8a89262"
+    },
+    "visibility": {
+      "path": "scratch/integrator/cmodels2/VISIBILITY-00169018-r2.json",
+      "sha256": "f1c477a33ddae58a85e13948181dce79880439b74cf4f3ea84017d8dc45121da"
+    },
+    "receiver": {
+      "path": "scratch/integrator/cmodels2/RECEIVER-MATCH-r2.json",
+      "sha256": "60cbf3275ca953a5ac2b8e3ff0d9e2f061e051b449667ccd41895aca5916f55d"
+    }
+  },
+  "checks_exercised_this_resume": [
+    "001456e4 isolated v8/L1 MATCH240/240 exit0 with helper",
+    "00169018 v8/L1 MATCH144/144 and existing001ddde4 MATCH464/464 exit0 with unchanged accepted two-helper closure",
+    "Seven bounded accepted receiver/consumer commands all exit0,7 functions/2580B MATCH",
+    "Metadata-only finalized receipt/source/hash/group/ownership reconciliation; no new whole-ledger MATCH claimed"
+  ],
+  "checks_preserved_not_repeated": [
+    "001e958c isolated v8/L1 MATCH296/296;v6/L1 refusal own-exidx boundary",
+    "1546-unit1621-function195908B v8/L1 sweep; headers revised now so not a fresh current-header pass"
+  ],
+  "explicit_deferrals": [
+    "001d5864",
+    "001ab680",
+    "001db404",
+    "001ef89c",
+    "001d5694(c011)"
+  ],
+  "ownership_preserved": [
+    "001a77d4(c010 tu604 v2/none)",
+    "001ed874(finalized cmodels)",
+    "001b8908 source unchanged",
+    "all finalized identities"
+  ],
+  "heavy_slot": "Main refused local heavy run; reserved ResumeC009-2/Main. No whole-ledger/G3/argcheck/full builds/full suite/prepare/finalize/push executed. Main schedules dependency boundary after c009/c010/c011 finalize and refreshes final model projection.",
+  "integration_boundary": "Import scoped MessageLayout receiver core/L041 C guard+169018 formal; retain c009 canonical reset/clock/number fixes and c010 shared L041 caller migration. Do not copy old reset-owner views over those patches.",
+  "preserved_workspace_note": "The pre-existing .venv symlink appeared untracked under directory-only ignore; it was not added, deleted, moved or modified."
+}

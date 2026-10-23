@@ -1,0 +1,40 @@
+{
+  "source": "src/nw4c/snd_WaveFile.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001f47b4",
+    "func_001f481c",
+    "func_001f4894",
+    "func_001f48a0"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_WaveFile.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u0871"
+  ],
+  "exit_code": 0,
+  "seconds": 0.222338,
+  "source_sha256": "41facc079f6f42b1ce0bc4195fca789a704cd65337ffdd364b435ad99ec324ec",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "duplicate_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-first-r1/u0871/snd_WaveFile.result.json",
+  "receipt_sha256": "65afe4176d86d6232f6a8e1d437148a03ddc1fc17af127e342188fbe7c723f3d",
+  "output": "MATCH    _ZNK2nw3snd8internal8WaveFile10FileHeader12GetDataBlockEv @ 0x1f47b4 size 0x68/0x68\nMATCH    _ZNK2nw3snd8internal8WaveFile10FileHeader12GetInfoBlockEv @ 0x1f481c size 0x6c/0x6c\nMATCH    _ZNK2nw3snd8internal8WaveFile11ChannelInfo17GetSamplesAddressEPKv @ 0x1f4894 size 0xc/0xc\nMATCH    _ZNK2nw3snd8internal8WaveFile13InfoBlockBody14GetChannelInfoEi @ 0x1f48a0 size 0x20/0x20\n",
+  "stderr": ""
+}

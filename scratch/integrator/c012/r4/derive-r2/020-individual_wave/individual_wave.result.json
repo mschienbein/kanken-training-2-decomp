@@ -1,0 +1,40 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/checkpoint12/intake-r17/individual_wave/individual_wave.cpp",
+ "source_sha256": "fd25c498458f7ddb74bc179bb4500a219079d81455f88a47500b4557058c0a62",
+ "profile": "middleware",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "d9d2223e2b3faf979c13ef96e3b2a01e2bbb730032ca27d98c2b6c5296374936",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": {
+  "path": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702"
+ },
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "_ZN2nw3snd8internal18SoundArchiveLoader18LoadIndividualWaveEjjPNS0_22SoundMemoryAllocatableEj",
+   "address": 1588540,
+   "size": 372,
+   "candidate_size": 356,
+   "status": "mismatch",
+   "first_diff": 4,
+   "linker_rewrites": []
+  }
+ ]
+}

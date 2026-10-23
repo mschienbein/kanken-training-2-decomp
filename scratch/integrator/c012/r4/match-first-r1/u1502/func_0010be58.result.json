@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_0010be58/func_0010be58.c",
+ "source_sha256": "eb9f07d402e029e66ff5b8e72981005f6af1098f5cd4f3143a153106110728bf",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "382271719edccf61eeb677de7386dd3437ee1c918d390ab05717ae22e850a20a",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_0010be58/result_failure_bits.c",
+   "source_sha256": "540d28dafc06a8d8a4e3f0c7a00c56949278353df65777f6e6a44373acfa9f13",
+   "object_sha256": "3b6eb025b1df621181a419f61f8e3d8845c3fbd4461880b49ad50b9e3ce3ddd3"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "result_failure_bits"
+   ],
+   "section": "i.result_failure_bits",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u1502/extra-0-result_failure_bits.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_0010be58",
+   "address": 1097304,
+   "size": 60,
+   "candidate_size": 60,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 36,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe2000102",
+     "removed_callee": {
+      "symbols": [
+       "result_failure_bits"
+      ],
+      "section": "i.result_failure_bits",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-first-r1/u1502/extra-0-result_failure_bits.o"
+     }
+    }
+   ]
+  }
+ ]
+}

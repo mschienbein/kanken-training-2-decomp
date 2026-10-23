@@ -6,45 +6,8 @@ pass the normal checkpoint review before it is credited.
 
 | Upstream | License | Pinned commit | Used for | Files here |
 |---|---|---|---|---|
-| [ctrdecomp/NintendoWare4Ctr](https://github.com/ctrdecomp/NintendoWare4Ctr) | GPL-3.0-only | `15ddb5632db5a6f0d2f46e3827fc78df468684bd` (2026-10-11) | NW4C layout, sound, font, graphics and utility code (upstream 3.7.4; target 3.7.5) | `src/nw4c/`, curated `include/nw/`, project-owned `include/nn/` adapters and `include/preinclude.h`; per-file notices, `src/nw4c/LICENSE.txt`, `PROVENANCE.json` and `PROVENANCE-round3.json` preserve supplied origin/modifications; integration hashes are recorded with c007. c011 additionally adapts `src/checkpoint11/func_001809f4.cpp`, `src/checkpoint11/func_001c7fa0.cpp` and `src/checkpoint11/lyt_delete_animation.cpp`, with hash-bound provenance in `scratch/integrator/c011/`. |
+| [ctrdecomp/NintendoWare4Ctr](https://github.com/ctrdecomp/NintendoWare4Ctr) | GPL-3.0-only | `15ddb5632db5a6f0d2f46e3827fc78df468684bd` (2026-10-11) | NW4C layout, sound, font and graphics code (upstream 3.7.4; target 3.7.5) | `src/nw4c/`, curated `include/nw/`, project-owned `include/nn/` adapters and `include/preinclude.h`; per-file notices, `src/nw4c/LICENSE.txt`, `PROVENANCE.json` and `PROVENANCE-round3.json` preserve supplied origin/modifications; integration hashes are recorded with c007. |
 | [devkitPro/libctru](https://github.com/devkitPro/libctru) | zlib | `9b55eda44cf80b971503991e0c78f9bc8fe50425` (2026-09-29) | The 160-sample DSP frame length published by `ndspSync` in `libctru/source/ndsp/ndsp.c`; no implementation copied | Project-owned `NN_SND_SAMPLES_PER_FRAME` declaration in `include/nn/snd.h`; numeric-source hashes in `src/nw4c/FACTS-HEADER-GAPS.json`, license notice in `src/nw4c/LICENSE-LIBCTRU.txt`. |
-
-c011's resumed source milestone additionally adapts the pinned NW4C delay
-constructor (`src/checkpoint11/fx_delay-r3.cpp`), sound scalar helpers
-(`sound_scale_lookup-r3.cpp`) and native shape setup (`shape_setup-r6.cpp`).
-Their GPL-3.0-only notices and modification notes remain in each source;
-`include/nw/snd/snd_FxDelay.h` records the measured retail damping-default
-correction. Archive, material, DSP and text-flow reconstruction uses the
-canonical declarations and retains source-bound matching/provenance receipts
-under `scratch/integrator/c011/`; it is not a claim of recovered original
-translation-unit boundaries or Nintendo SDK source.
-The resumed c011 collection also adapts the pinned native texture image command
-(`texture_image_command-r9.cpp`), primitive/index-stream cleanup
-(`primitive_set_cleanup-r9.cpp`), group cleanup (`group_ownership_cleanup-r9.cpp`)
-and texture setup dispatch (`texture_setup_dispatch-r12.cpp`). Their original
-GPL-3.0-only notices remain in each source. The sequence auxiliary command
-(`sequence_auxiliary_command-r14.cpp`) retains its supplied reconstruction notice.
-Exact author/source/receipt bindings and current explicit v6/L1 destination
-evidence are in `scratch/integrator/c011/CONSUMED-RESULTS-r6.json` and
-`DESTINATION-MATCH-r16.json`; they grant no new library/data or accepted credit.
-The r7 intake additionally adapts the pinned public ResFontBase texture-name
-cleanup organization (`src/checkpoint11/intake-r7/nf169/func_0013ea40.cpp`) and
-Voice refresh/update helper layering (`intake-r7/nf176/audio_sync.cpp` and
-`intake-r7/nf176/func_0014f114.cpp`). Their supplied GPL-3.0-only notices,
-modification notes and unrecovered historical-identity qualifications remain
-in source. Exact delivery and destination bindings are recorded in
-`scratch/integrator/c011/INTAKE-r7.json` and `DESTINATION-CLOSURE-r8.json`;
-they grant no library/helper or accepted credit.
-The r9 intake adapts the pinned sound archive loader's embedded-group wave-table
-setup in `src/checkpoint11/intake-r9/np060/archive_loader.cpp`, retaining its
-GPL-3.0-only source/modification notice and original missing-file behavior.
-It uses the actual canonical initialized-byte reader instead of aliasing the
-older public reader layout. `INTAKE-r9.json` and `DESTINATION-CLOSURE-r9.json`
-under `scratch/integrator/c011/` bind this reconstruction; no library/data or
-accepted credit is implied.
-
-
-
 
 The public Khronos GLES declaration/constant subsets in `include/GLES2/` use the
 MIT license from [OpenGL-Registry](https://github.com/KhronosGroup/OpenGL-Registry),
@@ -79,6 +42,15 @@ draw-info and renderer contract. Public `Draw`/`DrawSelf` remain unchanged.
 `scratch/integrator/c010/DEFERRAL-REENTRY-native-r1.json` binds the source,
 header changes, original ownership facts and bounded witnesses; no accepted
 credit or complete identity for the target root prefix follows from this re-entry.
+
+The unaccepted c012-r4 source delta reuses the existing canonical CSPT
+`PrefetchFileHeader` lookup interface through
+`src/checkpoint12/intake-r22/final_func_00153ebc/`. The same pinned public
+declaration/helper provenance and license remain applicable. Larger native
+layout, sound-manager, stream and TextBox proposals that do not close their
+actual owner/provider families are quarantined under
+`scratch/integrator/c012/r4/held-sources/`, with their per-file notices intact;
+they are not adopted library implementations or new library/data credit.
 
 Policy: only sources whose license is compatible with GPL-3.0 are copied; attribution, the
 upstream license and modification notices stay with the copied code. Public repositories without a

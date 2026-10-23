@@ -1,0 +1,788 @@
+{
+  "schema_version": 1,
+  "branch": "c012-r4",
+  "worktree": "scratch/worktrees/c012-r4",
+  "base_commit": "5820254f",
+  "old_c012_commit": "25dec8449af91cc2416c44027dd5b85e4e6123de",
+  "excluded_old_model_lineage": "9733e05b (not merged or cherry-picked)",
+  "status": "COMBINED_SOURCE_DELTA_COMPLETE_BLOCKED_DO_NOT_PREPARE",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.20",
+  "counts": {
+    "new_functions": 29,
+    "new_bytes": 4856,
+    "moved_functions": 30,
+    "moved_bytes": 908,
+    "candidate_functions": 59,
+    "candidate_bytes": 5764,
+    "candidate_units": 44,
+    "helper_only_candidate_units": 1,
+    "proposed_functions": 2711,
+    "proposed_bytes": 293436,
+    "held_previous_scope": 47,
+    "prior_R3_holds": 3,
+    "tracked_NEW_holds": 60,
+    "tracked_NEW_hold_bytes": 13588,
+    "withheld_accepted_moves": 1,
+    "withheld_accepted_move_bytes": 40,
+    "tracked_hold_identities_including_accepted_move": 61,
+    "revised_accepted_nonmove_functions": 6,
+    "revised_accepted_nonmove_bytes": 416,
+    "proposed_units": 2646,
+    "proposed_helper_only_units": 25,
+    "revised_accepted_helper_only_units": 2,
+    "folded_cmodels2_new_functions": 3,
+    "folded_cmodels2_new_bytes": 356,
+    "folded_cmodels2_NEW_holds": 11,
+    "proof_natural_contexts": 2619
+  },
+  "counts_boundary": "Only29 NEW/4856B are proposed new credit.30 explicit moves/908B preserve accepted identities;6 revised accepted nonmove functions/416B and2 revised accepted helpers add no credit. All2682 final accepted identities survive. Proposed2711/293436B is not accepted progress. The197-row carried deferral union is not the60-row current r4 NEW-hold count.",
+  "candidate_manifest": {
+    "path": "config/candidates/c012.json",
+    "sha256": "acac258c81a1feb90f70b37a0529a45f5fbbf2190218ba8a055de7406c37ea62"
+  },
+  "proposed_ledger": {
+    "path": "PROPOSED-LEDGER-r3.json",
+    "sha256": "c0a94d7120e8a09b0c4a9abe6dbc1acd8fe8efd74fabf200436934d6f132bf8b",
+    "current_alias": "PROPOSED-LEDGER.json"
+  },
+  "source_reproof": {
+    "schema_version": 1,
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "scope": "COMPLETE-SCOPE-r3.json",
+    "scope_sha256": "d84890b041c46d0790b6915710682acafe3d79ff114d4ef96923e74d418c8c70",
+    "script_sha256": "b4e22eb2839b772ede6ecf0b74c03bcda977782e98f9efa43f3b90b41bdf8537",
+    "script_dependencies": {
+      "reprove_closure.py": "f6b19d84063c1dd08bbb679b59d306865ad5d47263d08d5c1f9ea75834192a3f"
+    },
+    "expected_units": 2619,
+    "completed_units": 2619,
+    "ledger_units": 2646,
+    "required_functions": 2711,
+    "matched_functions": 2711,
+    "scope_complete": true,
+    "helper_only_units": [
+      "src/checkpoint12/intake-r29/final_func_00173078/item_page_kind.c",
+      "src/models/func_0010be58/result_failure_bits.c",
+      "src/models/func_0013f06c/frame_heap_unbound_hooks.c",
+      "src/models/func_0015f890/text_base_destruction.c",
+      "src/models/func_00168d14/character_panel_minimum.c",
+      "src/models/func_00172e00/transition-C-setter.c",
+      "src/models/func_001730ec/item_accessors.c",
+      "src/models/func_001a00f8/transition_active.c",
+      "src/models/func_001a2814/tu441_removed_helpers.c",
+      "src/models/func_001b8908/panel_accessors.c",
+      "src/models/func_001b9f18/drawing_state.c",
+      "src/models/func_001bd68c/drawing_state.c",
+      "src/models/func_001ddde4/item_accessors.c",
+      "src/models/func_001e0afc/removed_initializers.c",
+      "src/models/func_001ed874/category_initializers.c",
+      "src/models/linear_buffer/linear_buffer_allocator.c",
+      "src/models/object_registration/animation_state.c",
+      "src/models/object_registration/drawing_input.c",
+      "src/models/object_registration/object_manager.c",
+      "src/models/object_registration/prompt_manager.c",
+      "src/models/object_registration/resource_service_lock.c",
+      "src/models/object_registration/sound_resource_cache.c",
+      "src/models/object_registration/stream_manager.c",
+      "src/models/object_registration/style_owner.c",
+      "src/models/transition_setters/transition_active.c"
+    ],
+    "exit_counts": {
+      "0": 2619
+    },
+    "result": "PASS",
+    "record": "match-combined-r2/results.json",
+    "record_sha256": "1e4e6313366cf99b401184acdb0cf4671319df6b08a8d9fc1135f32145ca70f8",
+    "actual_driver_exit_code": 0,
+    "driver_exit_record": "DRIVER-EXIT-COMBINED-r2.json",
+    "driver_exit_record_sha256": "f7765d54e5af4106701050940e327ab20db2e73cf2e86e99de678f0f5eb0f0d6",
+    "no_failed_emitted_function_subset": true,
+    "distinct_grouped_canonical_owners_preserved": true,
+    "failed_attempt_retained": {
+      "path": "REPROOF-COMBINED-FAILED-r1.json",
+      "sha256": "845ad89483754d6624312cb5edb7cef6bbb74e779da10fb4a8be4997cb0a5454",
+      "actual_driver_exit_code": 1,
+      "exit_counts": {
+        "0": 2619,
+        "2": 2
+      }
+    },
+    "not_a_full_G4_receipt_or_emitted_owner_audit": true,
+    "heavy_checks_run": []
+  },
+  "dispositions": {
+    "path": "DISPOSITIONS-COMBINED-r1.json",
+    "sha256": "837023ff4e9d69ed96b51fa010caf08fced6e8de6ffc7ad656a1b6bd6cc9140e",
+    "current_alias": "DISPOSITIONS.json",
+    "original_required_input_identities": 135,
+    "original_rows_including_inherited_policy_correction": 136,
+    "candidate_claims": 59,
+    "old_claims": 103,
+    "old_move_inputs": 32,
+    "folded_NEW_body_inputs": 4,
+    "folded_inherited_NEW_holds": 10
+  },
+  "all_old_moves": {
+    "path": "MOVES-AUDIT-r1.json",
+    "sha256": "615e11356e1f6dee56c6d3e37bee2dcff687e3ac58eab2ac2b03eb1bc4f4b133",
+    "inputs": 32,
+    "retained": 30,
+    "accepted_owner_retained_without_move": [
+      "func_001c5294"
+    ],
+    "held_potential_NEW_not_accepted": [
+      "func_001d4078"
+    ]
+  },
+  "five_legacy_c010_moves": [
+    {
+      "function": "func_0019ecf8",
+      "old_move": {
+        "function": "func_0019ecf8",
+        "from": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "final_profile": "sdk",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0019ecf8",
+        "from": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c"
+      },
+      "destination_sha256": "c13db71619b8ba266b74e90e35a5e04ba58f4ccfb7f16f97d69d1bd3ad811179",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d4078",
+      "old_move": {
+        "function": "func_001d4078",
+        "from": "src/checkpoint10/func_001d4078.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001d4078/func_001d4078.c"
+      },
+      "final_ledger_member": false,
+      "final_owner": null,
+      "final_profile": null,
+      "disposition": "held-potential-NEW-not-a-move",
+      "category": "unmodeled-callback-family",
+      "reason": "Final c010-r8 explicitly deferred001d4078: the result/context callback family is unmodeled. It is not an accepted move. Old ArchiveTransfer/context mutex/result declarations would reverse that closure; both dependent new claims stay held."
+    },
+    {
+      "function": "func_001db960",
+      "old_move": {
+        "function": "func_001db960",
+        "from": "src/checkpoint10/func_001db960.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/func_001db960.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001db960",
+        "from": "src/checkpoint10/func_001db960.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c"
+      },
+      "destination_sha256": "fe8861dd84653046fa645872616e5ffb2f732f9ad1d45bb1604994b326788314",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0021092c",
+      "old_move": {
+        "function": "func_0021092c",
+        "from": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+        "to": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0021092c",
+        "from": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+        "to": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp"
+      },
+      "destination_sha256": "55414407acdaf002af82bc0ff0473fac88fce7002e7b7cbd912112cd86454ec2",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001757dc",
+      "old_move": {
+        "function": "func_001757dc",
+        "from": "src/checkpoint10/func_001757dc.c",
+        "to": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/func_001757dc.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001757dc",
+        "from": "src/checkpoint10/func_001757dc.c",
+        "to": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c"
+      },
+      "destination_sha256": "4cc8a9d54a37f0bc633570be69cb5ab312cb7a9726e3a56c9626cf3cde91cfe1",
+      "final_body_wins": true,
+      "special_case": null
+    }
+  ],
+  "accepted_nonmove_source_revisions": {
+    "first_component": [
+      {
+        "source": "src/wave16/func_00153fec.c",
+        "functions": [
+          "func_00153fec"
+        ],
+        "sha256": "80f5031229be9946f4cedf8fd871b54f8cf3f73bca61edae5269206466941386",
+        "reason": "Shared exact TaskPool definition; implementation body unchanged."
+      },
+      {
+        "source": "src/wave16/func_0015477c.c",
+        "functions": [
+          "func_0015477c"
+        ],
+        "sha256": "131608f72079d492c6a002df1f24656e6da83d3d968201f9c1467d3a1791fe84",
+        "reason": "Shared exact TaskPool definition; implementation body unchanged."
+      }
+    ],
+    "folded_component": [
+      {
+        "source": "src/models/func_0015f890/func_0015f890.cpp",
+        "profile": "game",
+        "functions": [
+          "func_0015f890"
+        ],
+        "accepted_source_sha256": "8fc747a274e476f700fb2d44d0332e248e52cbd0181e328c7f40d6f9a2ac0c14",
+        "current_source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae"
+      },
+      {
+        "source": "src/models/func_00172e00/transition-C-setter.c",
+        "profile": "game",
+        "functions": [],
+        "accepted_source_sha256": "4495a88e6ed8dbeed4be158af55169eef2872e38330944c961aeb17b2979fc9f",
+        "current_source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3"
+      },
+      {
+        "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+        "profile": "game",
+        "functions": [
+          "func_00172e00"
+        ],
+        "accepted_source_sha256": "efa8e8efbf66784568c376e7970174fe3b0136390c377472b4bb01e60a567cb3",
+        "current_source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56"
+      },
+      {
+        "source": "src/models/func_001730ec/item_accessors.c",
+        "profile": "game",
+        "functions": [],
+        "accepted_source_sha256": "3dea631b293bfdf7f941db3de7bf2f42f73e001ac8ed65f39d282131b70e7ff3",
+        "current_source_sha256": "0c8c43b9f0e735976e6d6098290cc7141dccf6154d78d3964b273b4bd8a2d874"
+      },
+      {
+        "source": "src/wave19/func_0015f5b0.c",
+        "profile": "game",
+        "functions": [
+          "func_0015f5b0"
+        ],
+        "accepted_source_sha256": "e9c417a5c8c5bf9e05b50a82f6c76eee9452d4e8d298857055ee12bc1b5cf110",
+        "current_source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac"
+      },
+      {
+        "source": "src/wave19/func_001743d8.c",
+        "profile": "game",
+        "functions": [
+          "func_001743d8"
+        ],
+        "accepted_source_sha256": "0506975d8d7b0c01ce391a4a117bd60fe5a6ec9436f42be40a4712bf0e5d43dd",
+        "current_source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f"
+      }
+    ],
+    "credited_revisions": 6,
+    "credited_revised_bytes": 416,
+    "revised_helper_only_units": 2,
+    "credit_added": 0
+  },
+  "TaskPool_agreement": {
+    "path": "TASK-POOL-AGREEMENT-r1.json",
+    "sha256": "e19e2ae4e7cde59096ddb91e679732037431733ea9e8d0ba713298ef91dc9528",
+    "c014_commit": "479eb7f4",
+    "canonical_header_sha256": "fdecc7599595eac61674d0984c21cb87d742d9cac4a8cd9b068972daf404115c",
+    "one_model": true,
+    "allocation_extent_claimed": false,
+    "0017e764_owner": "c012 only",
+    "legacy0015477c_recovery_newly_approved": false
+  },
+  "cmodels2_dependency_audit": {
+    "first_independent_component": {
+      "kept_units_require_cmodels2_only_sources_or_helpers": false,
+      "direct_old_cmodels2_function_mentions": [],
+      "missing_old_lineage_include": "application_configuration.h came from c011, not cmodels2; the include was unused and removed. The actual Result endpoints are declared in service_clients.h.",
+      "qualification": "Broad old screen/item-entry headers overlapped model work historically, but the retained source uses final main and only c012-exclusive definitions. No old models2 source or helper was copied."
+    },
+    "combined_component": "Only fresh5a75bf13 on same5820254f imported; old9733e05b predecessor lineage is still excluded. Onlythree NEW bodies survive; no display initializer/setter/header or CM2-F02 geometry transaction is active.",
+    "natural_existing_helpers": [
+      {
+        "function": "func_00169018",
+        "helpers": [
+          "src/models/func_001ddde4/item_accessors.c"
+        ]
+      },
+      {
+        "function": "func_00171208",
+        "helpers": [
+          "src/models/func_00172e00/transition-C-setter.c"
+        ]
+      },
+      {
+        "function": "func_001e5d38",
+        "helpers": [
+          "src/models/func_001730ec/item_accessors.c"
+        ]
+      }
+    ]
+  },
+  "held_source_policy": {
+    "path": "SOURCE-POLICY-r1.json",
+    "sha256": "e330913eafaa82b84cdddb6fefa03a5214aa06b6a346d3b753902df23c5efd27",
+    "interpretation": "Provisional source admission, not independent G6 or complete native hierarchy approval."
+  },
+  "qualified_format_ruling": {
+    "path": "SERIALIZED-FORMAT-r1.json",
+    "sha256": "e08481d6f89e5e5c2bcc6df40b5145885b5ceecde0cbb821ff164cbb344ce826",
+    "00116e30_retained": "QUALIFIED under Main explicit conditions(a)-(d); runtime byte-owner holds unchanged."
+  },
+  "historical_deferrals": {
+    "path": "HISTORICAL-DEFERRALS-r3.json",
+    "sha256": "45350f918435c9648f571da135642e60965059ebafda35197326fdce96f7aeb9",
+    "status": "Historical149-row snapshot, not newly re-audited/count-conflated."
+  },
+  "current_scope_NEW_holds": [
+    "func_00107dec",
+    "func_0010c138",
+    "func_0010e2e0",
+    "func_00111114",
+    "func_00117f2c",
+    "func_001229d4",
+    "func_00126330",
+    "func_001266e4",
+    "func_0012672c",
+    "func_00131464",
+    "func_001387f4",
+    "func_0014381c",
+    "func_001456e4",
+    "func_0014b6f8",
+    "func_00150124",
+    "func_0015ea0c",
+    "func_0015f84c",
+    "func_0017433c",
+    "func_0017a49c",
+    "func_0017fe04",
+    "func_00183d3c",
+    "func_0018d51c",
+    "func_0019000c",
+    "func_00195900",
+    "func_001ab680",
+    "func_001acc88",
+    "func_001acf28",
+    "func_001ada1c",
+    "func_001b4310",
+    "func_001b50bc",
+    "func_001b5a34",
+    "func_001b5cc0",
+    "func_001bc5ac",
+    "func_001c1c74",
+    "func_001c3068",
+    "func_001c9e08",
+    "func_001cbf34",
+    "func_001cc4cc",
+    "func_001ce9e8",
+    "func_001cf448",
+    "func_001d3f18",
+    "func_001d3f58",
+    "func_001d4010",
+    "func_001d4078",
+    "func_001d5694",
+    "func_001d5864",
+    "func_001dac54",
+    "func_001db404",
+    "func_001e37ec",
+    "func_001e958c",
+    "func_001ea1cc",
+    "func_001ebda4",
+    "func_001ef89c",
+    "func_001f1cf0",
+    "func_001f563c",
+    "func_001f57d4",
+    "func_002108b0",
+    "func_00212650",
+    "func_00212ae8",
+    "func_00212b20"
+  ],
+  "unchanged_accepted_attention": [
+    "func_001c5294"
+  ],
+  "source_privacy": "Only sources, decoded pointer identities/addresses, counts, extents and hashes; no original buffers/disassembly/packets/instruction words in the new records.",
+  "known_issues": {
+    "path": "docs/known-issues-c012.md",
+    "sha256": "5c2d577ba0bd7e4770c141147ab3572a2ce931ff39566aa119a985550fa41a77"
+  },
+  "not_exercised": [
+    "whole-ledger interfaces",
+    "whole-ledger argcheck",
+    "emitted-owner audit",
+    "build",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "heavy_slot_requests": [],
+  "agent_or_task_calls": 0,
+  "accepted_ledger_or_accept_records_edited": false,
+  "remaining_heavy_commands": {
+    "path": "REMAINING-HEAVY-COMMANDS-r2.json",
+    "sha256": "7cb5661b2be22cb57e57c805d2bff6e3d4da69d0cb07a32ab34e05c0a44a5ea5",
+    "current_alias": "REMAINING-HEAVY-COMMANDS.json"
+  },
+  "independent_component_commit": "8c94c419cf2911c8e1616d20ed0435d6565aedfb",
+  "folded_component_commit": "5a75bf13",
+  "folded_component_input_counts": {
+    "proposed_NEW_functions": 4,
+    "proposed_NEW_bytes": 596,
+    "admitted_NEW_functions": 3,
+    "admitted_NEW_bytes": 356,
+    "additional_NEW_hold": "func_001456e4",
+    "inherited_NEW_holds_retained": 10,
+    "revised_accepted_functions": 4,
+    "revised_accepted_bytes": 280,
+    "revised_accepted_helper_only_units": 2
+  },
+  "first_source_reproof": {
+    "schema_version": 1,
+    "selection": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "record": "match-first-r1/results.json",
+    "record_sha256": "27a32767d537d07b511badf5dca4233e26970580bb6732991fd9434dfddcb6e6",
+    "scope": "COMPLETE-SCOPE-r1.json",
+    "scope_sha256": "9c0ce47c656f85b971e97cf4356fb783ca74090623f22a1bf68536e1c91025e4",
+    "result": "PASS",
+    "commands": 2618,
+    "exit_counts": {
+      "0": 2618
+    },
+    "required_functions": 2708,
+    "matched_functions": 2708,
+    "scope_complete": true,
+    "helper_only_units": [
+      "src/checkpoint12/intake-r29/final_func_00173078/item_page_kind.c",
+      "src/models/func_0010be58/result_failure_bits.c",
+      "src/models/func_0013f06c/frame_heap_unbound_hooks.c",
+      "src/models/func_0015f890/text_base_destruction.c",
+      "src/models/func_00168d14/character_panel_minimum.c",
+      "src/models/func_00172e00/transition-C-setter.c",
+      "src/models/func_001730ec/item_accessors.c",
+      "src/models/func_001a00f8/transition_active.c",
+      "src/models/func_001a2814/tu441_removed_helpers.c",
+      "src/models/func_001b8908/panel_accessors.c",
+      "src/models/func_001b9f18/drawing_state.c",
+      "src/models/func_001bd68c/drawing_state.c",
+      "src/models/func_001ddde4/item_accessors.c",
+      "src/models/func_001e0afc/removed_initializers.c",
+      "src/models/func_001ed874/category_initializers.c",
+      "src/models/linear_buffer/linear_buffer_allocator.c",
+      "src/models/object_registration/animation_state.c",
+      "src/models/object_registration/drawing_input.c",
+      "src/models/object_registration/object_manager.c",
+      "src/models/object_registration/prompt_manager.c",
+      "src/models/object_registration/resource_service_lock.c",
+      "src/models/object_registration/sound_resource_cache.c",
+      "src/models/object_registration/stream_manager.c",
+      "src/models/object_registration/style_owner.c",
+      "src/models/transition_setters/transition_active.c"
+    ],
+    "no_failed_emitted_function_subset": true,
+    "not_a_full_G4_receipt_or_emitted_owner_audit": true,
+    "heavy_checks_run": []
+  },
+  "folded_source_review": {
+    "path": "FOLDED-SOURCE-POLICY-r2.json",
+    "sha256": "5d999adc5520565fc344d7320da4b993fa23ae5c65d6fca37be0cd76e510eb16"
+  },
+  "folded_rehomes": {
+    "path": "FOLDED-SOURCE-TRANSITIONS-r1.json",
+    "sha256": "d467cf54aab6c02215116df611f7706031aeddf3d829c4821d1bfb68d93906b6"
+  },
+  "folded_accepted_source_restoration": {
+    "path": "FOLDED-ACCEPTED-SOURCE-RESTORATION-r1.json",
+    "sha256": "38ad15397cde7471009afae4e5841b2a4e9848c00a5c63dbf15fddac11128790",
+    "functions": [
+      "func_001650f8",
+      "func_001f1ebc",
+      "func_001f1ed8",
+      "func_001f1f20",
+      "func_001f1f34",
+      "func_001f1f4c"
+    ],
+    "accepted_identity_withdrawals": []
+  },
+  "folded_review_hold": {
+    "function": "func_001456e4",
+    "target_bytes": 240,
+    "status": "uncredited-NEW-hold",
+    "component": "cmodels2-r5-fold-review",
+    "finding": "C012R4-MERGE-F01",
+    "category": "unevidenced-downcast",
+    "reason": "A genuine BoundDisplayObject result is not independently established. The current producer chain selects the canonical ResourceEvent pool; reinterpreting its base as BoundDisplayObject is not justified by matching field offsets. Final81700/81448 receiver models require a coherent transaction, not a cast.",
+    "evidence": "scratch/integrator/c012/r4/FOLDED-DISPLAY-PRODUCER-r1.json",
+    "evidence_sha256": "8f5afa279e3e7c2682671536336e4034b47d91f8face5c06bb63918efb0a9718",
+    "Main_ruling": "Hold001456e4 and its new setter helper; no independent Bound-producer ruling exists. Standing downcast rule requires tag- or producer-evidence. Fold only the other3 NEW/356B.",
+    "quarantined_source": "scratch/integrator/c012/r4/held-sources/src/models2/display_initializer/func_001456e4.c",
+    "quarantined_helper": "scratch/integrator/c012/r4/held-sources/src/models2/display_initializer/display_metadata.c",
+    "quarantined_header": "scratch/integrator/c012/r4/held-headers/include/game/display_initializer.h",
+    "helper_credit": 0
+  },
+  "CROSS-CANDIDATE-MOVES": [
+    {
+      "function": "func_0019ecf8",
+      "unit": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c",
+      "original_owner": "c010 candidate (unfinalized; c010-r5 is being re-derived by Main)",
+      "owner_candidate": "c010",
+      "historical_owner_candidate_manifest": "scratch/worktrees/c010-g3-unify/config/candidates/c010.json",
+      "historical_owner_path": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "owner_path": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "c012_destination": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c",
+      "reason_it_moved_historically": "Prior r17 canonical service/waitable-handle/SVC declaration migration; kernel-result callback and -1LL wait timeout retained.",
+      "current_r4_disposition": "explicit-final-owner-move",
+      "current_r4_owner_contract": "Finalized main5820254f/c010-r8 source is copied exactly first, then canonical headers are used; no stale callback/native model is inherited.",
+      "rebase-to-final-owner-required": false,
+      "final-owner-rederivation-completed-at": "5820254f",
+      "new_this_round": false
+    },
+    {
+      "function": "func_001d4078",
+      "unit": "src/checkpoint12/intake-r17/owner_func_001d4078/func_001d4078.c",
+      "original_owner": "c010 candidate (unfinalized; c010-r5 is being re-derived by Main)",
+      "owner_candidate": "c010",
+      "historical_owner_candidate_manifest": "scratch/worktrees/c010-g3-unify/config/candidates/c010.json",
+      "historical_owner_path": "src/checkpoint10/func_001d4078.c",
+      "owner_path": null,
+      "c012_destination": "src/checkpoint12/intake-r17/owner_func_001d4078/func_001d4078.c",
+      "reason_it_moved_historically": "Prior r17 archive initialization callback migrated to one writable ArchiveStreamObject context/result/mutex contract.",
+      "current_r4_disposition": "held-potential-NEW-not-a-move",
+      "current_r4_owner_contract": "Not an accepted identity. Held potential NEW with the unmodeled context/result callback family, not a move.",
+      "rebase-to-final-owner-required": false,
+      "final-owner-rederivation-completed-at": "5820254f",
+      "new_this_round": false
+    },
+    {
+      "function": "func_001db960",
+      "unit": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c",
+      "original_owner": "c010 candidate (unfinalized; c010-r5 is being re-derived by Main)",
+      "owner_candidate": "c010",
+      "historical_owner_candidate_manifest": "scratch/worktrees/c010-g3-unify/config/candidates/c010.json",
+      "historical_owner_path": "src/checkpoint10/func_001db960.c",
+      "owner_path": "src/checkpoint10/func_001db960.c",
+      "c012_destination": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c",
+      "reason_it_moved_historically": "Prior r17 startup callback and its initializer share one typed sixteen-byte receiver prefix; ignored receiver is retained.",
+      "current_r4_disposition": "explicit-final-owner-move",
+      "current_r4_owner_contract": "Finalized main5820254f/c010-r8 source is copied exactly first, then canonical headers are used; no stale callback/native model is inherited.",
+      "rebase-to-final-owner-required": false,
+      "final-owner-rederivation-completed-at": "5820254f",
+      "new_this_round": false
+    },
+    {
+      "function": "func_0021092c",
+      "unit": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp",
+      "original_owner": "c010 candidate (unfinalized; c010-r5 is being re-derived by Main)",
+      "owner_candidate": "c010",
+      "historical_owner_candidate_manifest": "scratch/worktrees/c010-g3-unify/config/candidates/c010.json",
+      "historical_owner_path": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+      "owner_path": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+      "c012_destination": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp",
+      "reason_it_moved_historically": "Prior r17 default-quantities constructor/global declaration moved to canonical sound_state.h; generated self-definition binding and native storage remain shared.",
+      "current_r4_disposition": "explicit-final-owner-move",
+      "current_r4_owner_contract": "Finalized main5820254f/c010-r8 source is copied exactly first, then canonical headers are used; no stale callback/native model is inherited.",
+      "rebase-to-final-owner-required": false,
+      "final-owner-rederivation-completed-at": "5820254f",
+      "new_this_round": false
+    },
+    {
+      "function": "func_001757dc",
+      "unit": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+      "original_owner": "c010 candidate (unfinalized; c010-r5 is being re-derived by Main)",
+      "owner_candidate": "c010",
+      "historical_owner_candidate_manifest": "scratch/worktrees/c010-g3-unify/config/candidates/c010.json",
+      "historical_owner_path": "src/checkpoint10/func_001757dc.c",
+      "owner_path": "src/checkpoint10/func_001757dc.c",
+      "c012_destination": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+      "reason_it_moved_historically": "Prior r22 ParameterBufferState provider and new scene consumers share one canonical buffer/read-write/count/position contract.",
+      "current_r4_disposition": "explicit-final-owner-move",
+      "current_r4_owner_contract": "Finalized main5820254f/c010-r8 source is copied exactly first, then canonical headers are used; no stale callback/native model is inherited.",
+      "rebase-to-final-owner-required": false,
+      "final-owner-rederivation-completed-at": "5820254f",
+      "new_this_round": false
+    }
+  ],
+  "CROSS-CANDIDATE-MOVES-policy": "Every historical c010 row is retained as provenance; actual finalized-owner rederivation completed against5820254f. No legacy candidate body overrides final c010-r8. New moves require same-TU need. Future integration parent changes require rederivation again.",
+  "deferrals": {
+    "path": "DEFERRALS-COMBINED-r1.json",
+    "sha256": "6a7c28d5b50253b1c5a450335d26c5b908458876785fa7e123b0b0200dbac299",
+    "current_alias": "DEFERRALS.json",
+    "current_NEW_holds": 60,
+    "current_NEW_hold_bytes": 13588,
+    "carried_uncredited_union": 197,
+    "inherited_historical_only_rows": 149
+  },
+  "open_accepted_code_blockers": [
+    {
+      "id": "CM2-F01",
+      "reason": "Native lifecycle/table/provider family cannot close exactly while the accepted root D1 remains unrepresentable with an actually undefined key under the authorized no-slot-change pattern. All accepted forms/identities retained.",
+      "resolution_limit": "U1 adoption removes the old unavailable-model prerequisite, not the live native vtable reference or D1 equality obligation."
+    },
+    {
+      "id": "CM2-F03",
+      "reason": "The actual invoked PMF interfaces still require that coherent root/derived family. No receiver erasure, unrelated alias, PMF hand-decoding or synthetic interface/base was introduced."
+    }
+  ],
+  "verbatim_open_findings": {
+    "CM2-F01": "**CM2-F01 remains blocking:** the real scene lifecycle providers and their native/\n  explicit table interfaces require one coherent exact migration. Keeping accepted\n  forms is not a claim that the previously identified slot contracts are repaired.",
+    "CM2-F03": "**CM2-F03 remains blocking:** the three accepted scene/member-callback relationships\n  need the genuine shared native hierarchy and providers. The PMF is actually invoked;\n  receiver erasure, unrelated record aliases and hand-decoding are not repairs."
+  },
+  "CM2_F04": "Qualified explicit two-cell table, live void(W22TextResources*) and null/VFE cell without invented arity; extent remains[INFERENCE], no native identity/data credit.",
+  "CM2_F02": "NEW001e958c, private owner and geometry helper remain held/uncredited.",
+  "revised_accepted_nonmove_functions": [
+    {
+      "function": "func_00153fec",
+      "source": "src/wave16/func_00153fec.c",
+      "target_bytes": 24,
+      "source_sha256": "80f5031229be9946f4cedf8fd871b54f8cf3f73bca61edae5269206466941386"
+    },
+    {
+      "function": "func_0015477c",
+      "source": "src/wave16/func_0015477c.c",
+      "target_bytes": 112,
+      "source_sha256": "131608f72079d492c6a002df1f24656e6da83d3d968201f9c1467d3a1791fe84"
+    },
+    {
+      "function": "func_0015f890",
+      "source": "src/models/func_0015f890/func_0015f890.cpp",
+      "target_bytes": 44,
+      "source_sha256": "b0d16fc5615bc93a39477a3a973e74af56613b985712c37e4fe89687e4cd32ae"
+    },
+    {
+      "function": "func_00172e00",
+      "source": "src/models/func_00172e00/transition-qualified-removed.cpp",
+      "target_bytes": 96,
+      "source_sha256": "3a81d25a069879ef6293913b66401d15eecfa12647ef2afaa60a853c18472d56"
+    },
+    {
+      "function": "func_0015f5b0",
+      "source": "src/wave19/func_0015f5b0.c",
+      "target_bytes": 52,
+      "source_sha256": "c6e3ccc6d46530aa2f091cd23ed1c7e48d6b3fe5a3581b50e53b846effa01cac"
+    },
+    {
+      "function": "func_001743d8",
+      "source": "src/wave19/func_001743d8.c",
+      "target_bytes": 88,
+      "source_sha256": "09099675d472a479a76701c00bfa1cc12e1a2dc139dc1a3e9cbed9dd6ed8892f"
+    }
+  ],
+  "checkpoint_ready": false,
+  "accepted_credit_added": 0,
+  "critical_identity_preservation": {
+    "path": "CRITICAL-IDENTITY-PRESERVATION-r4.json",
+    "sha256": "b6c58a12406f851054aee25f5ab1096303ca61129412addac274c521e69f9499"
+  },
+  "natural_context_contract": {
+    "path": "NATURAL-CONTEXT-CLOSURE-r1.json",
+    "sha256": "4386dd0f0e6786d9763193a68452129f82604d7bbb885daa6c00790eaed37cbe"
+  },
+  "source_reproof_current_record": {
+    "path": "REPROOF-COMBINED-r2.json",
+    "sha256": "14652fb1ba24572d6518b6c377ff6739e00fd65f7f9ff2044e24ec798691e5c9"
+  },
+  "source_reproof_natural_contexts": 2619,
+  "original_input_disposition_summary": {
+    "total": 136,
+    "by_current_disposition": {
+      "qualified-current-candidate-NEW": 24,
+      "round3-canonical-contract-deferred": 27,
+      "uncredited-NEW-hold": 19,
+      "canonical-contract-deferred": 30,
+      "deduplicated-final-accepted-owner": 22,
+      "qualified-current-candidate-MOVE": 1,
+      "held-census-contract": 7,
+      "deduplicated-owner": 3,
+      "catalogue-noncreditable": 3
+    },
+    "census_eligible": {
+      "total": 63,
+      "by_current_disposition": {
+        "qualified-current-candidate-NEW": 20,
+        "round3-canonical-contract-deferred": 6,
+        "canonical-contract-deferred": 30,
+        "uncredited-NEW-hold": 7
+      }
+    },
+    "census_holds": {
+      "total": 11,
+      "all_retained_uncredited": true,
+      "by_current_disposition": {
+        "held-census-contract": 7,
+        "uncredited-NEW-hold": 4
+      }
+    }
+  },
+  "all_candidate_proof_functions": 59,
+  "open_blockers_carried_verbatim_not_repaired": [
+    "CM2-F01",
+    "CM2-F03"
+  ],
+  "source_context_attempts": [
+    {
+      "record": "match-first-r1/results.json",
+      "scope": "COMPLETE-SCOPE-r1.json",
+      "commands": 2618,
+      "exit_counts": {
+        "0": 2618
+      },
+      "purpose": "Independent c012 before fold"
+    },
+    {
+      "record": "match-combined-r1/results.json",
+      "scope": "COMPLETE-SCOPE-r2.json",
+      "commands": 2621,
+      "exit_counts": {
+        "0": 2619,
+        "2": 2
+      },
+      "actual_driver_exit_code": 1,
+      "purpose": "Retained two natural-context errors; no source or count change"
+    },
+    {
+      "record": "match-combined-r2/results.json",
+      "scope": "COMPLETE-SCOPE-r3.json",
+      "commands": 2619,
+      "exit_counts": {
+        "0": 2619
+      },
+      "actual_driver_exit_code": 0,
+      "purpose": "Complete actual natural-context proof"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ extern struct ItemPage *func_0015f84c(struct ItemPage *entry);
 /* [INFERENCE] Candidate-only field accessors; historical identities unknown. */
 int w19_item_category(const struct ItemPage *entry);
 unsigned w19_item_value(const struct ItemPage *entry);
+extern int func_001e5d38(const struct W8EntryList *list, int category);
 #ifdef __cplusplus
 }
 #endif

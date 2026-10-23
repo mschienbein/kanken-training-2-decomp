@@ -1,0 +1,42 @@
+{
+  "source": "src/nw4c/snd_SequenceSoundFile.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_00153de8",
+    "func_00153e54"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_00153de8": "src/nw4c/snd_SequenceSoundFile.cpp",
+    "func_00153e54": "src/nw4c/snd_SequenceSoundFile.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_SequenceSoundFile.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u0865"
+  ],
+  "exit_code": 0,
+  "seconds": 0.228457,
+  "source_sha256": "011087104e3885e8f6ec613cd9aaedfc55477124daddde4aeb2d5b53876ef6db",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r2/u0865/snd_SequenceSoundFile.result.json",
+  "receipt_sha256": "bca7b770d2dbffe360931ce6588e1cc2765ac9073a3f10c2ed4d6f4821940025",
+  "output": "MATCH    _ZNK2nw3snd8internal17SequenceSoundFile10FileHeader12GetDataBlockEv @ 0x153de8 size 0x6c/0x6c\nMATCH    _ZNK2nw3snd8internal17SequenceSoundFile10FileHeader13GetLabelBlockEv @ 0x153e54 size 0x68/0x68\n",
+  "stderr": ""
+}

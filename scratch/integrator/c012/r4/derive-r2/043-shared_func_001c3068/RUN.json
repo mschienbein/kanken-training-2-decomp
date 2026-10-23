@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/shared_func_001c3068/func_001c3068.cpp",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/043-shared_func_001c3068",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.19675,
+  "source": "src/checkpoint12/intake-r17/shared_func_001c3068/func_001c3068.cpp",
+  "source_sha256": "d4145ee66a2e736af8b54427a30163550c781a4c56eda32f9d03bf36a9d7dd08",
+  "claimed_functions": [
+    "func_001c3068"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/043-shared_func_001c3068/func_001c3068.result.json",
+  "receipt_sha256": "156891c87b81469207f26aef86ea6a3b3766cf4705b572735c0e84b2e04be183",
+  "functions": [
+    {
+      "name": "_ZN16SoundSystemStateC1Ev",
+      "address": 1847400,
+      "size": 152,
+      "candidate_size": 152,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN16SoundSystemStateC1Ev @ 0x1c3068 size 0x98/0x98\n",
+  "stderr": ""
+}

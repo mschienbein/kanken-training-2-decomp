@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models2/menu_transition/func_00171208.cpp",
+ "source_sha256": "7a97308881ee69ab80e381d27ce71c73859351126a2cfbe58d3a2597dae405c1",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "71342363317d3c82e2eed5ab563767eef8d40f37f13ca6ca0e14794e52d833eb",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/src/models/func_00172e00/transition-C-setter.c",
+   "source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3",
+   "object_sha256": "27e332ab4ca4d8d170148e680ad2e9b8c21cdc5ebd6adfd56db0ca05373c139a"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "set_completion"
+   ],
+   "section": "i.set_completion",
+   "size": 8,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u2644/extra-0-transition-C-setter.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00171208",
+   "address": 1511944,
+   "size": 96,
+   "candidate_size": 96,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 4,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801034",
+     "removed_callee": {
+      "symbols": [
+       "set_completion"
+      ],
+      "section": "i.set_completion",
+      "size": 8,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r1/u2644/extra-0-transition-C-setter.o"
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+  "source": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_InvalidateData.cpp",
+  "profile": "middleware",
+  "functions": [
+    "func_001d44b0"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001d44b0": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_InvalidateData.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_InvalidateData.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u0863"
+  ],
+  "exit_code": 0,
+  "seconds": 0.364475,
+  "source_sha256": "c128566b00e407850c50d79f4a559f00b4fea9df83d2e0fd5939e9afd1d29a63",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u0863/snd_PlayerHeapDataManager__PlayerHeapDataManager_InvalidateData.result.json",
+  "receipt_sha256": "18c55503436a5cfb378195136f9b64aa7931d525a6c9d2a3de7e6c8b93c4e7aa",
+  "output": "MATCH    _ZN2nw3snd8internal21PlayerHeapDataManager14InvalidateDataEPKvS4_ @ 0x1d44b0 size 0x34/0x34\n",
+  "stderr": ""
+}

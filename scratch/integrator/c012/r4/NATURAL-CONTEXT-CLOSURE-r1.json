@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "EXACT_GENUINE_HELPER_CONTEXTS_NOT_SOURCE_STEERING",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "failed_attempt": {
+    "path": "REPROOF-COMBINED-FAILED-r1.json",
+    "sha256": "845ad89483754d6624312cb5edb7cef6bbb74e779da10fb4a8be4997cb0a5454",
+    "commands": 2621,
+    "exit_counts": {
+      "0": 2619,
+      "2": 2
+    },
+    "actual_driver_exit_code": 1
+  },
+  "reason": "The two existing accessor files each define two real helpers. A new caller alone consumes only one and v6 correctly refuses the unused other definition. The supplied component plan already uses each new caller with the accepted caller that actually consumes the other helper. Preserve those complete natural contexts; never split, seed, suppress, or relabel an unused definition.",
+  "groups": [
+    {
+      "primary_source": "src/models/func_001ddde4/func_001ddde4.c",
+      "additional_credited_source": "src/models2/training_visibility/func_00169018.c",
+      "additional_function": "func_00169018",
+      "canonical_function_owners": {
+        "func_001ddde4": "src/models/func_001ddde4/func_001ddde4.c",
+        "func_00169018": "src/models2/training_visibility/func_00169018.c"
+      },
+      "helper_sources": [
+        "src/models/func_001ddde4/item_accessors.c"
+      ],
+      "source_and_helper_contracts_changed": false
+    },
+    {
+      "primary_source": "src/models/func_001730ec/func_001730ec_removed.c",
+      "additional_credited_source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "additional_function": "func_001e5d38",
+      "canonical_function_owners": {
+        "func_001730ec": "src/models/func_001730ec/func_001730ec_removed.c",
+        "func_001e5d38": "src/models2/counted_resources/func_001e5d38.cpp"
+      },
+      "helper_sources": [
+        "src/models/func_001730ec/item_accessors.c"
+      ],
+      "source_and_helper_contracts_changed": false
+    }
+  ],
+  "other_NEW_context": {
+    "function": "func_00171208",
+    "source": "src/models2/menu_transition/func_00171208.cpp",
+    "helper": "src/models/func_00172e00/transition-C-setter.c",
+    "r1_exit_code": 0
+  },
+  "current_scope": {
+    "path": "COMPLETE-SCOPE-r3.json",
+    "sha256": "d84890b041c46d0790b6915710682acafe3d79ff114d4ef96923e74d418c8c70",
+    "natural_contexts": 2619,
+    "credited_function_owners": 2711,
+    "ledger_units": 2646,
+    "helper_only_units": 25
+  },
+  "driver": {
+    "path": "reprove_grouped_closure.py",
+    "sha256": "b4e22eb2839b772ede6ecf0b74c03bcda977782e98f9efa43f3b90b41bdf8537",
+    "existing_helpers_module": {
+      "path": "reprove_closure.py",
+      "sha256": "f6b19d84063c1dd08bbb679b59d306865ad5d47263d08d5c1f9ea75834192a3f"
+    },
+    "ownership_rule": "Each context claims the complete union of actual compiled credited source functions, with their original distinct canonical source owners. Every ledger function occurs in exactly one context. Foreign credited emitted owners and any non-MATCH emitted comparison refuse."
+  },
+  "new_credited_or_helper_functions_added_for_context_repair": [],
+  "source_configuration_or_header_change_for_context_repair": false,
+  "fresh_attempt": "match-combined-r2/results.json"
+}

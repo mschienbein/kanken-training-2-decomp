@@ -1,0 +1,42 @@
+{
+  "source": "src/nw4c/snd_SoundArchiveLoader.cpp",
+  "profile": "game",
+  "functions": [
+    "func_00146fd4",
+    "func_001f261c"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_00146fd4": "src/nw4c/snd_SoundArchiveLoader.cpp",
+    "func_001f261c": "src/nw4c/snd_SoundArchiveLoader.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/snd_SoundArchiveLoader.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5/scratch/integrator/c012/r5/match-r1/u0870"
+  ],
+  "exit_code": 0,
+  "seconds": 0.41667,
+  "source_sha256": "b375936c3f2df4585ac1c474d1523de1c51c1ed6d9e0991fedbe52f9acb4d1bd",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r5/match-r1/u0870/snd_SoundArchiveLoader.result.json",
+  "receipt_sha256": "45db2f089d9ec44ce9cc919904bda088a4612ba2bf372b3c51f0f5c43eb598b7",
+  "output": "MATCH    _ZN2nw3snd8internal18SoundArchiveLoaderC2Ev @ 0x146fd4 size 0x24/0x24\nMATCH    _ZNK2nw3snd8internal18SoundArchiveLoader30GetFileAddressFromSoundArchiveEj @ 0x1f261c size 0x1c/0x1c\n",
+  "stderr": ""
+}

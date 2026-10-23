@@ -1,0 +1,1701 @@
+{
+  "schema_version": 1,
+  "base": "5820254f",
+  "previous_c012": "25dec844",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "counts": {
+    "new_functions": 26,
+    "new_bytes": 4500,
+    "moved_functions": 30,
+    "moved_bytes": 908,
+    "candidate_functions": 56,
+    "candidate_bytes": 5408,
+    "candidate_units": 41,
+    "helper_only_candidate_units": 1,
+    "proposed_functions": 2708,
+    "proposed_bytes": 293080,
+    "held_previous_scope": 47,
+    "prior_R3_holds": 3
+  },
+  "old_claims": [
+    {
+      "function": "func_0010163c",
+      "source": "src/checkpoint12/intake-r32/startup_constructors/func_0010163c.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "sdk",
+      "source_sha256": "a593783719ca3feb0b1690d5f278b354df3c9b87a197faba43cd4f4bc7fabcc9",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2640/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00107dec",
+      "source": "src/checkpoint12/intake-r29/final_func_00107dec/func_00107dec.c",
+      "disposition": "HOLD",
+      "category": "unmodeled-callback-family",
+      "reason": "The c010-r8 callback table marks startup invocation at0019bd04 unestablished for this provider. The old allocator also depends on a non-final manager prefix. Do not guess a four-input startup interface or restore that model."
+    },
+    {
+      "function": "func_0010cb9c",
+      "source": "src/checkpoint12/intake-r22/final_func_0010cb9c/func_0010cb9c.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "6a5b2242b5e136211a39e3c352eddc572d0d35b9ed07bd0ed45aeb75dea5e6ff",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2632/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0010e2e0",
+      "source": "src/checkpoint12/intake-r17/transform/transform.cpp",
+      "disposition": "HOLD",
+      "category": "unauthorized-vtable",
+      "reason": "The old TransformObjectW8C model manually stores a vtable pointer and is absent from final matrix.h. Do not restore it over the final native matrix/transform model."
+    },
+    {
+      "function": "func_0011375c",
+      "source": "src/checkpoint12/intake-r22/final_func_0011375c/func_0011375c.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "middleware",
+      "source_sha256": "0e4e7587fbc31947b3f0c66e8295609247330630de46c7c6c170c48fab8ccb42",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2621/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00115344",
+      "source": "src/checkpoint12/intake-r17/owner_func_00115344/func_00115344.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "6df03b83a5cde7f4f07dcd1ef83828a63ff9c7127b317b06125157f6ff26946d",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2610/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00116e30",
+      "source": "src/checkpoint12/intake-r22/final_func_00116e30/func_00116e30.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "07c0f5c7d3ebef936402fd6d5822f246cdddaee5f8d66367bcb48aadbc9b3242",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2617/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00117f2c",
+      "source": "src/checkpoint12/intake-r17/032-np083/func_00117f2c.cpp",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "Final Framebuffer has no attachments array. The alternate attachment/resource interpretation lacks the actual producer/owner and extent transaction; the finalized allocator/header wins."
+    },
+    {
+      "function": "func_001229d4",
+      "source": "src/checkpoint12/intake-r22/final_func_001229d4/func_001229d4.c",
+      "disposition": "HOLD",
+      "category": "unmodeled-callback-family",
+      "reason": "Final GraphicsContext intentionally leaves the callback region opaque. Seven guessed GraphicsCallback slots do not establish each actual invoker/provider exact callable type; no erased callback table is published."
+    },
+    {
+      "function": "func_00126330",
+      "source": "src/checkpoint12/intake-r17/calendar_r13/func_00126330.cpp",
+      "disposition": "HOLD",
+      "category": "C-facade-into-native-member",
+      "reason": "CalendarTime::CalendarTime aliases accepted C001861ec(WordPair*,...) returning WordPair*. The ordinary array runtime also requires its exact void*(void*) provider; no spare native-constructor treatment is allowed."
+    },
+    {
+      "function": "func_001266e4",
+      "source": "src/checkpoint12/intake-r17/service_filters/service_filters.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-context",
+      "reason": "The old exact callers depend on same-TU visibility of an uncredited mismatching0019e81c translator. Removing that non-adopted body makes both callers mismatch; a passing function subset is not complete closure."
+    },
+    {
+      "function": "func_0012672c",
+      "source": "src/checkpoint12/intake-r17/service_filters/service_filters.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-context",
+      "reason": "The old exact callers depend on same-TU visibility of an uncredited mismatching0019e81c translator. Removing that non-adopted body makes both callers mismatch; a passing function subset is not complete closure."
+    },
+    {
+      "function": "func_00126f44",
+      "source": "src/checkpoint12/intake-r17/func_00126f44/func_00126f44.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "6adad141b2911257f46c1d3fbc11244814b5a1ebb896c14fb162726200a09d60",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2607/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0012d43c",
+      "source": "src/checkpoint12/intake-r17/owner_func_0012d43c/func_0012d43c.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "6f28bd6542e8ad3cb469ffc62b897b0e50e7601a43563e2618aeae7f6bcfca35",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2608/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0012f050",
+      "source": "src/checkpoint12/intake-r22/final_func_0012f050/func_0012f050.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "ccde06d5ffbb20ce6e8bc5142f532f2d03e434b3ea7dbd946950d6eef6b71326",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2626/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00131464",
+      "source": "src/checkpoint12/intake-r17/pool_drain/pool_drain.cpp",
+      "disposition": "HOLD",
+      "category": "byte-offset-owner-recovery",
+      "reason": "The drain recovers AudioVoiceGroup from PoolLink by offsetof byte subtraction. The agreed TaskPool prefix does not authorize this new container-of access."
+    },
+    {
+      "function": "func_00135908",
+      "source": "src/checkpoint12/intake-r17/037-np007/func_00135908.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "b139b2c424531c9f9df0c0a2ee91ebc4688ee282be3ae2d2af73809f9a8e63a4",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2602/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001387f4",
+      "source": "src/checkpoint12/intake-r17/008-tu491/func_001387f4.cpp",
+      "disposition": "HOLD",
+      "category": "C-facade-into-native-member",
+      "reason": "Final accepted001306c8 still calls a C facade func001387f4(RenderDrawList**,int). The proposed provider is real ResPrimitive::SetupDrawCommand(bool); a genuine ResPrimitive value-wrapper/caller transaction is missing, not a cast or spare alias."
+    },
+    {
+      "function": "func_001409c0",
+      "source": "src/checkpoint12/intake-r17/func_001409c0/func_001409c0.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "75e97f0a4f667c1773ed0a90c67cf62a3a812af93206aee345b8359628162574",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2604/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0014381c",
+      "source": "src/checkpoint12/intake-r17/admit_func_0014381c/func_0014381c.cpp",
+      "disposition": "HOLD",
+      "category": "native-slot-provider",
+      "reason": "The proposed new SoundDataManager constructor installs the native vtable over existing non-adopting slot owners:001d0324 is DirectSoundLoaderState cleanup,001f1864 is PointerTableOwner lookup, and001f1800 is EventDispatcher::dispatch(RoutedEvent*). No complete actual native provider/owner transaction is adopted. Bounded pointer identities are evidence of references, not table-extent proof."
+    },
+    {
+      "function": "func_0014a380",
+      "source": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "sdk",
+      "source_sha256": "0ebb5a0d49c8c1f6f3358b2df283d2d047cc9001a2de980a589ef8bf93af88ec",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2639/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0014a394",
+      "source": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "sdk",
+      "source_sha256": "0ebb5a0d49c8c1f6f3358b2df283d2d047cc9001a2de980a589ef8bf93af88ec",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2639/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0014a3c4",
+      "source": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "sdk",
+      "source_sha256": "0ebb5a0d49c8c1f6f3358b2df283d2d047cc9001a2de980a589ef8bf93af88ec",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2639/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0014b438",
+      "source": "src/checkpoint12/intake-r17/owner_func_0014b438/func_0014b438.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "47bdc24875e49d1e07fbef662e903a7326b10f046012a4ca00ee42e0583562a5",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2615/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0014b6f8",
+      "source": "src/checkpoint12/intake-r29/final_func_0014b6f8/func_0014b6f8.cpp",
+      "disposition": "HOLD",
+      "category": "native-slot-provider",
+      "reason": "The proposed current-request field, SignalState completion and execute vtable would replace final AudioTaskManager/AudioWorkRequest members without the full real execute-slot provider family. Callback width alone is not that type proof."
+    },
+    {
+      "function": "func_00150124",
+      "source": "src/checkpoint12/intake-r22/final_func_00150124/func_00150124.cpp",
+      "disposition": "HOLD",
+      "category": "steering-or-unproved-value-model",
+      "reason": "The old AudioMixMatrix adds a zeroing constructor followed by an unconditional all-zero reset, without a supplied adopting matrix/helper family. Do not restore redundant work or a guessed matrix API solely for the byte witness."
+    },
+    {
+      "function": "func_00153ebc",
+      "source": "src/checkpoint12/intake-r22/final_func_00153ebc/func_00153ebc.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "middleware",
+      "source_sha256": "ce118eff970c27efa6640065b52b86855490613f0afa9d14c16ee93353e24700",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2628/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001542d8",
+      "source": "src/checkpoint12/intake-r22/final_func_001542d8/func_001542d8.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "5643ee1e4eae22ba438cda48dc519f32a134ceda5ce49b1d0da9f3b218910dbc",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2620/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001543b8",
+      "source": "src/checkpoint12/intake-r22/final_func_001543b8/func_001543b8.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "250a502b4a602a27c4d3fa5223c119de157610e611d8bb223ff1e60b4a863410",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2622/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0015dd7c",
+      "source": "src/checkpoint12/intake-r22/final_func_0015dd7c/func_0015dd7c.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "middleware",
+      "source_sha256": "e2d799b8a64465c013593c89084018522ab86b6750e9157e24e7e226d7e052bd",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2625/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0015ea0c",
+      "source": "src/checkpoint12/intake-r17/001-nf019/0015ea0c_separate_b_g_r.cpp",
+      "disposition": "HOLD",
+      "category": "illegal-downcast",
+      "reason": "The new caller reinterprets canonical DisplayBinding* as ColoredDisplayBinding* without a tag/producer proof for that concrete object; no C linkage/name addition can close that owner mismatch."
+    },
+    {
+      "function": "func_0015f84c",
+      "source": "src/checkpoint12/intake-r17/shared_func_0015f84c/func_0015f84c.cpp",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "Native W11EntryCommand construction conflicts with the existing W8ItemEntry public owner/constructor interface. Equal offsets are not a class alias or a native provider adoption."
+    },
+    {
+      "function": "func_00164444",
+      "source": "src/checkpoint12/intake-r29/final_func_00164444/func_00164444.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "sdk",
+      "source_sha256": "64e33e60d597249cfb219b1fae304d53cbe78ef1730547c7cae08e789beb6468",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2633/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0016992c",
+      "source": "src/checkpoint12/intake-r29/final_func_0016992c/func_0016992c.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "5975df0c3cb34eb1e2eab15f8db4b0de4383c5303175676f88eb3f6ceb2de4d5",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2634/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0016f08c",
+      "source": "src/checkpoint12/intake-r29/final_func_0016f08c/func_0016f08c.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "f359e87340d8683d1cd21d539ab65659809ba3878efe87097ec7853714881b0f",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2637/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00173078",
+      "source": "src/checkpoint12/intake-r29/final_func_00173078/func_00173078.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "ced31c4d660e79979ea351421b0eb3f2fc47dbc14b6f6673c19355cabaf09b27",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2636/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0017433c",
+      "source": "src/checkpoint12/intake-r22/final_scalar_fade/func_0017433c.c",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "The old PlaybackHandle/RuntimePlaybackChannel/TaskRuntime.channels model is absent from the final root. Do not recreate a parallel playback/animation owner or cast its controller."
+    },
+    {
+      "function": "func_001757dc",
+      "source": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "4cc8a9d54a37f0bc633570be69cb5ab312cb7a9726e3a56c9626cf3cde91cfe1",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2631/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0017e764",
+      "source": "src/checkpoint12/intake-r29/final_existing_pool_release/pool_release.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "311359c687d362de859ce66af110b338a2791482b632504d98431078fe893dcc",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2635/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0017fe04",
+      "source": "src/checkpoint12/intake-r17/canonical_func_0017fe04/func_0017fe04_external_color_callback.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "MaterialColor::MaterialColor aliases0014b438, whose actual adopted callback is void*(void*) over HwrIndexValue. ctypes1 confirms no native MaterialColor/MaterialInit transaction; no alias to the C record is admitted."
+    },
+    {
+      "function": "func_0018279c",
+      "source": "src/checkpoint12/intake-r17/068-nf220/func_001f1af4_shared.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "middleware",
+      "source_sha256": "212bfd154f099bab7207518293126372e1f692e432d3421ced19632d466b8fad",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2603/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00183d3c",
+      "source": "src/checkpoint12/intake-r17/individual_wave/individual_wave.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-provider",
+      "reason": "The native loader targets member aliases for accepted C ArchiveHandle/ArchiveReader/WaveArchive providers, and its complete body mismatches under final headers. No C/native receiver or result facade is restored."
+    },
+    {
+      "function": "func_00186538",
+      "source": "src/checkpoint12/intake-r17/owner_func_00186538/func_00186538.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "57ec94173a34b400dc48e696de9dca7c668c84c432e25bfccd69c6932ea2608a",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2609/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0018ce64",
+      "source": "src/checkpoint12/intake-r17/func_0018ce64/func_0018ce64.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "0f60ef36a553bd161e485b6d42ff723c565af0c44e0794776b4e1b294dafef70",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2606/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0018d51c",
+      "source": "src/checkpoint12/intake-r17/canonical_bank_r11/func_0018d51c.cpp",
+      "disposition": "HOLD",
+      "category": "C-facade-into-native-member",
+      "reason": "The bank loader declares native00183d3c as a separate C ArchiveLoader operation and constructs a competing BankReader/BankFile view. The exact native loader/archive/allocator family is not adopted."
+    },
+    {
+      "function": "func_0019000c",
+      "source": "src/checkpoint12/intake-r29/final_func_0019000c/func_0019000c.cpp",
+      "disposition": "HOLD",
+      "category": "native-slot-provider",
+      "reason": "TransferStream invents a virtual owner with reserved void slots and Result-valued seek/read, without the actual slot-provider/return-owner closure. Do not alias it to the different byte-count-returning FileStream."
+    },
+    {
+      "function": "func_00195900",
+      "source": "src/checkpoint12/intake-r17/canonical_func_00195900/func_00195900.cpp",
+      "disposition": "HOLD",
+      "category": "illegal-downcast",
+      "reason": "The animation loader reinterprets DisplayObject* as unrelated W16AnimatedDisplay* with no actual producer/tag containment proof. No second native/slot owner is published."
+    },
+    {
+      "function": "func_0019c920",
+      "source": "src/checkpoint12/intake-r22/final_func_0019c920/func_0019c920.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "middleware",
+      "source_sha256": "e99edc36ec865705b44b35d137705480ccac84932c7870b1ba45bc2e86b6ab74",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2623/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0019dc20",
+      "source": "src/checkpoint12/intake-r29/final_func_0019dc20/func_0019dc20.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "bed93e58eb5b2e25552a31cf734f6cada54e0b57fe68c51bd6c26bb14ad66e41",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2638/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0019ecf8",
+      "source": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "sdk",
+      "source_sha256": "c13db71619b8ba266b74e90e35a5e04ba58f4ccfb7f16f97d69d1bd3ad811179",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2611/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_0019f904",
+      "source": "src/checkpoint12/intake-r22/final_func_0019f904/func_0019f904.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "sdk",
+      "source_sha256": "e4eeea2ab9b4ec27bcac603ee5575e10c8ef90e8622eaf60fa2bd6a9d80dcb50",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2619/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001ada1c",
+      "source": "src/checkpoint12/intake-r17/shared_func_001ada1c/func_001ada1c.cpp",
+      "disposition": "HOLD",
+      "category": "incomplete-type-family",
+      "reason": "The guarded W22ResourceGroup assumes unadopted native001ae908/001ae9e4 constructor/destructor owners and a one-word mask base; the complete, exactly witnessed family is not supplied."
+    },
+    {
+      "function": "func_001b50bc",
+      "source": "src/checkpoint12/intake-r17/shared_func_001b50bc/func_001b50bc.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-provider",
+      "reason": "The native W22LargeResourceGroup destructor alias targets accepted C001b63ec(W24ExtendedWidgetScreen*) returning that separate owner. No native/group identity is established by geometry."
+    },
+    {
+      "function": "func_001b5a34",
+      "source": "src/checkpoint12/intake-r17/044-tu442/positions.cpp",
+      "disposition": "HOLD",
+      "category": "illegal-downcast",
+      "reason": "Final WidgetSlot.object is ResourceEvent*. The old source treats it as DisplayObject* and then BoundDisplayObject* based on a tag without proving the actual containing owner. Preserve final ResourceEvent/base semantics and the color-family boundary."
+    },
+    {
+      "function": "func_001b5cc0",
+      "source": "src/checkpoint12/intake-r17/044-tu442/positions.cpp",
+      "disposition": "HOLD",
+      "category": "illegal-downcast",
+      "reason": "Final WidgetSlot.object is ResourceEvent*. The old source treats it as DisplayObject* and then BoundDisplayObject* based on a tag without proving the actual containing owner. Preserve final ResourceEvent/base semantics and the color-family boundary."
+    },
+    {
+      "function": "func_001c1c74",
+      "source": "src/checkpoint12/intake-r17/shared_func_001c1c74/func_001c1c74.cpp",
+      "disposition": "HOLD",
+      "category": "incomplete-type-family",
+      "reason": "The guarded SingletonHolder/Storage family requires an external native cleanup owner001c1f34 not adopted in this delta; names-admission alone does not supply the complete owner/provider transaction."
+    },
+    {
+      "function": "func_001c3068",
+      "source": "src/checkpoint12/intake-r17/shared_func_001c3068/func_001c3068.cpp",
+      "disposition": "HOLD",
+      "category": "incomplete-type-family",
+      "reason": "SoundSystemState depends on unadopted SoundManagerState/SoundActorState constructor/vtable models. The private complete class family and its nominal field/callback contracts are not a final-main owner transaction."
+    },
+    {
+      "function": "func_001c5294",
+      "source": "src/checkpoint12/intake-r17/owner_func_001c5294/func_001c5294.c",
+      "disposition": "HOLD",
+      "category": "callback-erasure",
+      "reason": "Do not move/re-adopt the existing KernelHandleOwner*(KernelHandleOwner*) provider through a runtime void(void*) interface. It remains accepted unchanged at its final owner; ctypes1 explicitly holds the honest generic repair."
+    },
+    {
+      "function": "func_001c5354",
+      "source": "src/checkpoint12/intake-r22/final_func_001c5354/func_001c5354.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "middleware",
+      "source_sha256": "35fa82033bae5ed349128962ffd2e8b3ced756050c1941c92e312e908823a293",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2618/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001c9e08",
+      "source": "src/checkpoint12/intake-r17/admit_func_001c9e08/func_001c9e08_native.cpp",
+      "disposition": "HOLD",
+      "category": "unproved-constructor",
+      "reason": "The local inline empty nn::math::MTX44 default constructor fills a missing canonical SDK definition to support the identity holder. No independent canonical constructor adoption is supplied; do not turn an inferred no-op into a project-wide class implementation."
+    },
+    {
+      "function": "func_001cbf34",
+      "source": "src/checkpoint12/intake-r17/admit_func_001cbf34/func_001cbf34_native_local_header_all.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-provider",
+      "reason": "The native AnimResource calls a native IsValidBinaryFile signature through an alias to C001813a0, whose actual BinaryFileHeader/return/argument types are separate. No header-layout alias or copied header value is introduced."
+    },
+    {
+      "function": "func_001cc4cc",
+      "source": "src/checkpoint12/intake-r17/047-np030/texture_container.cpp",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "The cleanup uses private TextureCacheNode instead of the genuine native TextureRefLink owner, and the full TU has an unmatched RegistTexture body plus a native LinkList member alias into C00191154. No fake node/list class or mismatching context is adopted."
+    },
+    {
+      "function": "func_001ce9e8",
+      "source": "src/checkpoint12/intake-r17/042-tu973/layout_native.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-provider",
+      "reason": "Native Layout::Build reaches Pane::AppendChild through a member alias to accepted C provider001822fc, and casts the separate binary-header models. The actual native Pane/provider and canonical-header transaction is not adopted on5820254f."
+    },
+    {
+      "function": "func_001cf448",
+      "source": "src/checkpoint12/intake-r30/final_textbox_policy/func_001cf448.cpp",
+      "disposition": "HOLD",
+      "category": "protected-native-owner-transaction",
+      "reason": "The ResourceEntry/ResourceTable.entries/native TextBox publication, wrapper and cleanup0011f080 transaction remains held (TypesCompose F02). A narrow private-header/member rewrite or table-cluster proximity is not owner proof. Keep final private TextBox/MakeUniform slot and accepted001cf418 unchanged."
+    },
+    {
+      "function": "func_001d3f18",
+      "source": "src/checkpoint12/intake-r17/shared_func_001d3f18/func_001d3f18.cpp",
+      "disposition": "HOLD",
+      "category": "unauthorized-vtable",
+      "reason": "The private BufferedFileStream model lacks the required explicit virtual-destructor/key-function owner transaction and uses a new bound vtable over non-adopting stream providers. Keep final native stream declarations."
+    },
+    {
+      "function": "func_001d3f58",
+      "source": "src/checkpoint12/intake-r29/final_func_001d3f58/func_001d3f58_native.cpp",
+      "disposition": "HOLD",
+      "category": "incomplete-native-slot-family",
+      "reason": "The Read body itself MATCHes as native MemoryFileStream::Read, and the native constructor/Close/Seek already exist. [INFERENCE] The full family is still not one exact owner/interface transaction: accepted capability providers remain free functions over the separate MemoryInputStream record. No receiver alias or partial cleanup/capability cutover is claimed; hold the new fragment pending that canonical transaction."
+    },
+    {
+      "function": "func_001d4010",
+      "source": "src/checkpoint12/intake-r17/canonical_func_001d4010/func_001d4010.cpp",
+      "disposition": "HOLD",
+      "category": "unmodeled-callback-family",
+      "reason": "Final c010-r8 explicitly deferred001d4078: the result/context callback family is unmodeled. It is not an accepted move. Old ArchiveTransfer/context mutex/result declarations would reverse that closure; both dependent new claims stay held."
+    },
+    {
+      "function": "func_001d4078",
+      "source": "src/checkpoint12/intake-r17/owner_func_001d4078/func_001d4078.c",
+      "disposition": "HOLD",
+      "category": "unmodeled-callback-family",
+      "reason": "Final c010-r8 explicitly deferred001d4078: the result/context callback family is unmodeled. It is not an accepted move. Old ArchiveTransfer/context mutex/result declarations would reverse that closure; both dependent new claims stay held."
+    },
+    {
+      "function": "func_001d9df0",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001d9df4",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001d9df8",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001d9dfc",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001d9e00",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001d9e04",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001d9e08",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001dac54",
+      "source": "src/checkpoint12/intake-r17/003-tu664/func_001dac54.cpp",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "Its forwarding argument is DrawCommandState*, while final accepted001dac84 is MemoryWriteStream*. Keep the finalized provider; do not retag it or add a pointer/byte-storage bridge."
+    },
+    {
+      "function": "func_001dac84",
+      "source": "src/checkpoint12/intake-r17/func_001dac84/func_001dac84.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "d122551ad003ff18b9f1e5f88a150c2efe79a752ce23d917160d5058458b2fd2",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2605/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001db958",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001db95c",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001db960",
+      "source": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "fe8861dd84653046fa645872616e5ffb2f732f9ad1d45bb1604994b326788314",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2612/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001dcbf8",
+      "source": "src/checkpoint12/intake-r22/final_func_001dcbf8/func_001dcbf8.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "08ec34baa1778061edde6c74a37e7f866e04df3a329f516f80883d03da6b80fa",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2616/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001dce3c",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001dd360",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001e35e0",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001e37dc",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001e37ec",
+      "source": "src/checkpoint12/intake-r29/final_func_001e37ec/func_001e37ec.cpp",
+      "disposition": "HOLD",
+      "category": "native-slot-provider",
+      "reason": "The opaque AllocatorInterface and unused instance do not establish the actual virtual allocator slot owner/invoking signature. No new C/native allocator facade or guessed slot provider is published."
+    },
+    {
+      "function": "func_001e3818",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001e395c",
+      "source": "src/checkpoint12/intake-r22/final_func_001e395c/func_001e395c.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "59af4c916c34393c6e583d80c7968de63951b9d0755d2bf1473524c8135365e7",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2629/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001e722c",
+      "source": "src/checkpoint12/intake-r22/final_func_001e722c/func_001e722c.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "0b1400c396f160cf25844207022043b574521a51bc60a28e375e4e3ba8ddede8",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2630/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001ea1cc",
+      "source": "src/checkpoint12/intake-r22/final_func_001ea1cc/func_001ea1cc.c",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "The old W11jNumberFormat.flags and color receiver/callee contracts conflict with the final number-format/color models. No reserved-word refinement or narrowed shadow color declaration is used to compile it."
+    },
+    {
+      "function": "func_001ebda4",
+      "source": "src/checkpoint12/intake-r17/shared_func_001ebda4/func_001ebda4.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "The proposed native virtual destructor maps to final C001ebe1c(void). No native ServiceSingleton owner/key-function/actual cleanup provider is adopted."
+    },
+    {
+      "function": "func_001ebe1c",
+      "source": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2613/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001ed05c",
+      "source": "src/checkpoint12/intake-r22/final_func_001ed05c/func_001ed05c.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "b0a6ce7426e05f9f301135b6bd3077bca1ec53d4f55fc4efd5fa171f4cc11f0d",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2627/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_001f1cf0",
+      "source": "src/checkpoint12/intake-r17/canonical_func_001f1cf0/func_001f1cf0.cpp",
+      "disposition": "HOLD",
+      "category": "one-model-per-class",
+      "reason": "The final SoundWaveReader info is not the proposed native WaveFile::InfoBlockBody. Do not complete the opaque canonical reader with a competing native interpretation; the output/reader family needs one real owner transaction."
+    },
+    {
+      "function": "func_001f563c",
+      "source": "src/checkpoint12/intake-r17/mutex_func_001f563c/func_001f563c.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "StaticStreamMutex globals would replace final StreamMutex objects and alias a native destructor to accepted C001c519c(void). This is not the exact __aeabi_atexit void(void*) provider/owner transaction."
+    },
+    {
+      "function": "func_001f57d4",
+      "source": "src/checkpoint12/intake-r17/mutex_func_001f57d4/func_001f57d4.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "StaticStreamMutex globals would replace final StreamMutex objects and alias a native destructor to accepted C001c519c(void). This is not the exact __aeabi_atexit void(void*) provider/owner transaction."
+    },
+    {
+      "function": "func_002108b0",
+      "source": "src/checkpoint12/intake-r17/shared_func_002108b0/func_002108b0.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "The native StartupCallbackState destructor alias targets final C001db960(void*). The descriptor contains a code pointer; do not disguise a still-unproved native/table owner as a C record initializer or spare destructor alias."
+    },
+    {
+      "function": "func_0021092c",
+      "source": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "move",
+      "profile": "game",
+      "source_sha256": "55414407acdaf002af82bc0ff0473fac88fce7002e7b7cbd912112cd86454ec2",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2614/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_00212650",
+      "source": "src/checkpoint12/intake-r17/handle_func_00212650/func_00212650.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "The proposed native KernelHandleOwner destructor aliases accepted C001c5294. Its real generic callback repair is held by ctypes1 after a size mismatch; no native initializer or altered scalar/global owner is adopted."
+    },
+    {
+      "function": "func_00212ae8",
+      "source": "src/checkpoint12/intake-r17/mutex_func_00212ae8/func_00212ae8.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "StaticStreamMutex globals would replace final StreamMutex objects and alias a native destructor to accepted C001c519c(void). This is not the exact __aeabi_atexit void(void*) provider/owner transaction."
+    },
+    {
+      "function": "func_00212b20",
+      "source": "src/checkpoint12/intake-r17/shared_func_00212b20/func_00212b20.cpp",
+      "disposition": "HOLD",
+      "category": "non-adopting-callback-provider",
+      "reason": "StaticAllocation::~StaticAllocation aliases C001d3370(Allocation*) returning Allocation*. A first-member offset match does not adopt the actual native destructor and invoking callback contract."
+    },
+    {
+      "function": "func_00214ef4",
+      "source": "src/checkpoint12/intake-r34/attribute_initializer/func_00214ef4.cpp",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "6e9fdeae0bfc9c4d2ccbd77fcdad869c20a5a31093ae0497108bd10211eac636",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2641/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    },
+    {
+      "function": "func_002175ec",
+      "source": "src/checkpoint12/intake-r22/final_func_002175ec/func_002175ec.c",
+      "disposition": "BYTE-MATCHED-QUALIFIED-CANDIDATE",
+      "kind": "NEW",
+      "profile": "game",
+      "source_sha256": "51aac85881d2d528aab20fd6537b9289759052d95d6265e88df46747ac8b22d4",
+      "basis": "Existing canonical final-main types and actual primitive/opaque interfaces; no rejected native/class/callback model is restored. Final full reproof and independent Main gates remain separate.",
+      "proof_record": "scratch/integrator/c012/r4/match-first-r1/u2624/RUN.json",
+      "proof_exit_code": 0,
+      "all_emitted_functions_match": true
+    }
+  ],
+  "old_moves": [
+    {
+      "function": "func_00115344",
+      "old_move": {
+        "function": "func_00115344",
+        "from": "src/wave14/func_00115344.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_00115344/func_00115344.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave14/func_00115344.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_00115344",
+        "from": "src/wave14/func_00115344.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_00115344/func_00115344.c"
+      },
+      "destination_sha256": "6df03b83a5cde7f4f07dcd1ef83828a63ff9c7127b317b06125157f6ff26946d",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_00126f44",
+      "old_move": {
+        "function": "func_00126f44",
+        "from": "src/wave16/func_00126f44.c",
+        "to": "src/checkpoint12/intake-r17/func_00126f44/func_00126f44.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave16/func_00126f44.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_00126f44",
+        "from": "src/wave16/func_00126f44.c",
+        "to": "src/checkpoint12/intake-r17/func_00126f44/func_00126f44.c"
+      },
+      "destination_sha256": "6adad141b2911257f46c1d3fbc11244814b5a1ebb896c14fb162726200a09d60",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0012d43c",
+      "old_move": {
+        "function": "func_0012d43c",
+        "from": "src/wave14/func_0012d43c.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0012d43c/func_0012d43c.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave14/func_0012d43c.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0012d43c",
+        "from": "src/wave14/func_0012d43c.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0012d43c/func_0012d43c.c"
+      },
+      "destination_sha256": "6f28bd6542e8ad3cb469ffc62b897b0e50e7601a43563e2618aeae7f6bcfca35",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001409c0",
+      "old_move": {
+        "function": "func_001409c0",
+        "from": "src/wave9/func_001409c0.c",
+        "to": "src/checkpoint12/intake-r17/func_001409c0/func_001409c0.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave9/func_001409c0.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001409c0",
+        "from": "src/wave9/func_001409c0.c",
+        "to": "src/checkpoint12/intake-r17/func_001409c0/func_001409c0.c"
+      },
+      "destination_sha256": "75e97f0a4f667c1773ed0a90c67cf62a3a812af93206aee345b8359628162574",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0014b438",
+      "old_move": {
+        "function": "func_0014b438",
+        "from": "src/wave10/func_0014b438.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0014b438/func_0014b438.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave10/func_0014b438.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0014b438",
+        "from": "src/wave10/func_0014b438.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0014b438/func_0014b438.c"
+      },
+      "destination_sha256": "47bdc24875e49d1e07fbef662e903a7326b10f046012a4ca00ee42e0583562a5",
+      "final_body_wins": true,
+      "special_case": "Actual void*(void*) HwrIndexValue runtime provider, agreed with ctypes1; no MaterialColor alias."
+    },
+    {
+      "function": "func_00186538",
+      "old_move": {
+        "function": "func_00186538",
+        "from": "src/wave14/func_00186538.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_00186538/func_00186538.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave14/func_00186538.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_00186538",
+        "from": "src/wave14/func_00186538.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_00186538/func_00186538.c"
+      },
+      "destination_sha256": "57ec94173a34b400dc48e696de9dca7c668c84c432e25bfccd69c6932ea2608a",
+      "final_body_wins": true,
+      "special_case": "Exact final body preserved; failed unsigned-temp experiment is not adopted."
+    },
+    {
+      "function": "func_0018ce64",
+      "old_move": {
+        "function": "func_0018ce64",
+        "from": "src/wave2/func_0018ce64.c",
+        "to": "src/checkpoint12/intake-r17/func_0018ce64/func_0018ce64.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave2/func_0018ce64.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0018ce64",
+        "from": "src/wave2/func_0018ce64.c",
+        "to": "src/checkpoint12/intake-r17/func_0018ce64/func_0018ce64.c"
+      },
+      "destination_sha256": "0f60ef36a553bd161e485b6d42ff723c565af0c44e0794776b4e1b294dafef70",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0019ecf8",
+      "old_move": {
+        "function": "func_0019ecf8",
+        "from": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "final_profile": "sdk",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0019ecf8",
+        "from": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_0019ecf8/func_0019ecf8.c"
+      },
+      "destination_sha256": "c13db71619b8ba266b74e90e35a5e04ba58f4ccfb7f16f97d69d1bd3ad811179",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001c5294",
+      "old_move": {
+        "function": "func_001c5294",
+        "from": "src/sdk/func_001c5294.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001c5294/func_001c5294.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/sdk/func_001c5294.c",
+      "final_profile": "game",
+      "disposition": "retain-accepted-final-owner-no-move",
+      "category": "callback-erasure",
+      "reason": "Do not move/re-adopt the existing KernelHandleOwner*(KernelHandleOwner*) provider through a runtime void(void*) interface. It remains accepted unchanged at its final owner; ctypes1 explicitly holds the honest generic repair."
+    },
+    {
+      "function": "func_001d4078",
+      "old_move": {
+        "function": "func_001d4078",
+        "from": "src/checkpoint10/func_001d4078.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001d4078/func_001d4078.c"
+      },
+      "final_ledger_member": false,
+      "final_owner": null,
+      "final_profile": null,
+      "disposition": "held-potential-NEW-not-a-move",
+      "category": "unmodeled-callback-family",
+      "reason": "Final c010-r8 explicitly deferred001d4078: the result/context callback family is unmodeled. It is not an accepted move. Old ArchiveTransfer/context mutex/result declarations would reverse that closure; both dependent new claims stay held."
+    },
+    {
+      "function": "func_001d9df0",
+      "old_move": {
+        "function": "func_001d9df0",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9df0",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d9df4",
+      "old_move": {
+        "function": "func_001d9df4",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9df4",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d9df8",
+      "old_move": {
+        "function": "func_001d9df8",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9df8",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d9dfc",
+      "old_move": {
+        "function": "func_001d9dfc",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9dfc",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d9e00",
+      "old_move": {
+        "function": "func_001d9e00",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9e00",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d9e04",
+      "old_move": {
+        "function": "func_001d9e04",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9e04",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001d9e08",
+      "old_move": {
+        "function": "func_001d9e08",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001d9e08",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001dac84",
+      "old_move": {
+        "function": "func_001dac84",
+        "from": "src/wave7/func_001dac84.c",
+        "to": "src/checkpoint12/intake-r17/func_001dac84/func_001dac84.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave7/func_001dac84.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001dac84",
+        "from": "src/wave7/func_001dac84.c",
+        "to": "src/checkpoint12/intake-r17/func_001dac84/func_001dac84.c"
+      },
+      "destination_sha256": "d122551ad003ff18b9f1e5f88a150c2efe79a752ce23d917160d5058458b2fd2",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001db958",
+      "old_move": {
+        "function": "func_001db958",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001db958",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001db95c",
+      "old_move": {
+        "function": "func_001db95c",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001db95c",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001db960",
+      "old_move": {
+        "function": "func_001db960",
+        "from": "src/checkpoint10/func_001db960.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/func_001db960.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001db960",
+        "from": "src/checkpoint10/func_001db960.c",
+        "to": "src/checkpoint12/intake-r17/owner_func_001db960/func_001db960.c"
+      },
+      "destination_sha256": "fe8861dd84653046fa645872616e5ffb2f732f9ad1d45bb1604994b326788314",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001dce3c",
+      "old_move": {
+        "function": "func_001dce3c",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001dce3c",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001dd360",
+      "old_move": {
+        "function": "func_001dd360",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001dd360",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001e35e0",
+      "old_move": {
+        "function": "func_001e35e0",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001e35e0",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001e37dc",
+      "old_move": {
+        "function": "func_001e37dc",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001e37dc",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001e3818",
+      "old_move": {
+        "function": "func_001e3818",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001e3818",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001ebe1c",
+      "old_move": {
+        "function": "func_001ebe1c",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave3/empty_functions.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001ebe1c",
+        "from": "src/wave3/empty_functions.c",
+        "to": "src/checkpoint12/intake-r17/empty_owners/empty_functions.c"
+      },
+      "destination_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0021092c",
+      "old_move": {
+        "function": "func_0021092c",
+        "from": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+        "to": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0021092c",
+        "from": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+        "to": "src/checkpoint12/intake-r17/owner_func_0021092c/func_0021092c.cpp"
+      },
+      "destination_sha256": "55414407acdaf002af82bc0ff0473fac88fce7002e7b7cbd912112cd86454ec2",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_001757dc",
+      "old_move": {
+        "function": "func_001757dc",
+        "from": "src/checkpoint10/func_001757dc.c",
+        "to": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/checkpoint10/func_001757dc.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_001757dc",
+        "from": "src/checkpoint10/func_001757dc.c",
+        "to": "src/checkpoint12/intake-r22/final_func_001757dc/func_001757dc.c"
+      },
+      "destination_sha256": "4cc8a9d54a37f0bc633570be69cb5ab312cb7a9726e3a56c9626cf3cde91cfe1",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0014a380",
+      "old_move": {
+        "function": "func_0014a380",
+        "from": "src/wave10/func_0014a380.c",
+        "to": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave10/func_0014a380.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0014a380",
+        "from": "src/wave10/func_0014a380.c",
+        "to": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp"
+      },
+      "destination_sha256": "0ebb5a0d49c8c1f6f3358b2df283d2d047cc9001a2de980a589ef8bf93af88ec",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0014a394",
+      "old_move": {
+        "function": "func_0014a394",
+        "from": "src/wave7/func_0014a394.cpp",
+        "to": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave7/func_0014a394.cpp",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0014a394",
+        "from": "src/wave7/func_0014a394.cpp",
+        "to": "src/checkpoint12/intake-r32/archive_player_counts/func_0014a380.cpp"
+      },
+      "destination_sha256": "0ebb5a0d49c8c1f6f3358b2df283d2d047cc9001a2de980a589ef8bf93af88ec",
+      "final_body_wins": true,
+      "special_case": null
+    },
+    {
+      "function": "func_0019dc20",
+      "old_move": {
+        "function": "func_0019dc20",
+        "from": "src/wave6/func_0019dc20.c",
+        "to": "src/checkpoint12/intake-r29/final_func_0019dc20/func_0019dc20.c"
+      },
+      "final_ledger_member": true,
+      "final_owner": "src/wave6/func_0019dc20.c",
+      "final_profile": "game",
+      "disposition": "explicit-final-owner-move",
+      "move": {
+        "function": "func_0019dc20",
+        "from": "src/wave6/func_0019dc20.c",
+        "to": "src/checkpoint12/intake-r29/final_func_0019dc20/func_0019dc20.c"
+      },
+      "destination_sha256": "bed93e58eb5b2e25552a31cf734f6cada54e0b57fe68c51bd6c26bb14ad66e41",
+      "final_body_wins": true,
+      "special_case": null
+    }
+  ],
+  "prior_R3_holds_retained": [
+    {
+      "function": "func_0010c138",
+      "target_bytes": 132,
+      "category": "source-policy-withheld",
+      "reason": "The prior c012 source explicitly qualified itself as permuter steering. The natural equivalent service-mask query does not match under selected v8/L1 (derive-r35/001-touch_query/RUN.json, exit 1). The steering claim is withdrawn rather than relabeled natural. This was NEW provisional credit only; no accepted identity disappears.",
+      "source": "scratch/integrator/c012/withheld-r35/func_0010c138.c",
+      "evidence": "derive-r35/001-touch_query/RUN.json"
+    },
+    {
+      "function": "func_00111114",
+      "target_bytes": 264,
+      "category": "decoder-contract-withheld",
+      "reason": "The author/predecessor MATCH uses a new two-input 00192c20 decoder declaration, but the current c010 contract hold explicitly preserves a caller-evidenced third count argument and forbids a two-input shim. Supplying that real count naturally produces a selected v8/L1 mismatch (derive-r37/001-final_func_00111114/RUN.json, exit 1). No narrowed shared decoder API is published. Re-entry requires one evidenced decoder/source-destination/count contract and public 001110f0/00111114 caller consolidation.",
+      "source": "scratch/integrator/c012/withheld-r37/func_00111114.c",
+      "evidence": "derive-r37/001-final_func_00111114/RUN.json",
+      "contract_record": "scratch/worktrees/c010-r3-closure/scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json: 00176c6c/001775e0 rows"
+    },
+    {
+      "function": "func_001b4310",
+      "target_bytes": 172,
+      "category": "source-policy-withheld",
+      "reason": "The np201/predecessor MATCH retains a finite empty loop solely as a source spelling qualification. Standing no-steering policy does not admit it. Removing the empty loop produces a selected v8/L1 mismatch (derive-r32/002-final_func_001b4310/RUN.json, exit 1); no volatile, barrier, replacement dead work or loop was substituted. This is a NEW unaccepted identity, not a dropped accepted function.",
+      "source": "scratch/integrator/c012/withheld-r32/func_001b4310.cpp",
+      "archived_header": "scratch/integrator/c012/withheld-r32/scrollbar_update.h",
+      "evidence": "derive-r32/002-final_func_001b4310/RUN.json"
+    }
+  ],
+  "cmodels2_dependency_audit": {
+    "kept_units_require_cmodels2_only_sources_or_helpers": false,
+    "direct_old_cmodels2_function_mentions": [],
+    "missing_old_lineage_include": "application_configuration.h came from c011, not cmodels2; the include was unused and removed. The actual Result endpoints are declared in service_clients.h.",
+    "qualification": "Broad old screen/item-entry headers overlapped model work historically, but the retained source uses final main and only c012-exclusive definitions. No old models2 source or helper was copied."
+  },
+  "accepted_identity_withdrawals": [],
+  "qualified_scope": "These are source/type dispositions, not an independent G6 review or acceptance certificate.",
+  "complete_reproof": {
+    "record": "match-first-r1/results.json",
+    "sha256": "27a32767d537d07b511badf5dca4233e26970580bb6732991fd9434dfddcb6e6",
+    "commands": 2618,
+    "all_commands_exit0": true,
+    "required_functions": 2708,
+    "scope_complete": true
+  },
+  "serialized_access_ruling": "SERIALIZED-FORMAT-r1.json"
+}

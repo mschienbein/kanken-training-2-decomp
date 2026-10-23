@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r17/mutex_func_001f57d4/func_001f57d4.cpp",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/022-mutex_func_001f57d4",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 0,
+  "seconds": 0.248198,
+  "source": "src/checkpoint12/intake-r17/mutex_func_001f57d4/func_001f57d4.cpp",
+  "source_sha256": "19b447d9f4314879e7d230b0e52e4b4b6d9ca276ff1c34176e969b703b75d730",
+  "claimed_functions": [
+    "func_001f57d4"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/022-mutex_func_001f57d4/func_001f57d4.result.json",
+  "receipt_sha256": "412d102cfe76950f7354cd7072fef010e9bdfdd291caba7a38b4104da4014652",
+  "functions": [
+    {
+      "name": "__sti___17_func_001f57d4_cpp_4bb06614",
+      "address": 2054100,
+      "size": 56,
+      "candidate_size": 56,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    __sti___17_func_001f57d4_cpp_4bb06614 @ 0x1f57d4 size 0x38/0x38\n",
+  "stderr": ""
+}

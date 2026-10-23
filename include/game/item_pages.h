@@ -46,6 +46,10 @@ extern void func_001719f4(struct ItemPageSet *set, unsigned char kind, int forma
                         int category, int index, int enabled);
 extern void func_0015f724(struct ItemPage *page, int index, int column, int value);
 extern void func_0015f840(struct ItemPage *page, int index, unsigned char flags);
+/* [INFERENCE] Source-defined signed getter removed by R1; original identity
+ * and historical call graph are not recovered. It earns no separate credit. */
+extern signed char item_page_kind(const struct ItemPage *page);
+extern int func_00173078(const struct ItemPageSet *set, int kind);
 #ifdef __cplusplus
 }
 #endif

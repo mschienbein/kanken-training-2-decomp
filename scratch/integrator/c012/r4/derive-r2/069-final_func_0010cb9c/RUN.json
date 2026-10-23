@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint12/intake-r22/final_func_0010cb9c/func_0010cb9c.c",
+    "--profile",
+    "game",
+    "--out",
+    "scratch/integrator/c012/r4/derive-r2/069-final_func_0010cb9c",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--names",
+    "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4",
+  "exit_code": 1,
+  "seconds": 0.197042,
+  "source": "src/checkpoint12/intake-r22/final_func_0010cb9c/func_0010cb9c.c",
+  "source_sha256": "c69156423c0f151f60245acc0fcc045ce7a5d567c6b121637884c175cb8425bb",
+  "claimed_functions": [
+    "func_0010cb9c"
+  ],
+  "profile": "game",
+  "names_sha256": "e6c9f70c930fa4c92261cab10d42a7c0b4912e9d6653c380f6fbfb09fca5968e",
+  "proposed_names": "scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json",
+  "proposed_names_sha256": "5830c0364222b39c7cdd52fc68b002e0acf7dd1fdc2298c7018c1a90fcefe702",
+  "extra_sources": [],
+  "receipt": "scratch/integrator/c012/r4/derive-r2/069-final_func_0010cb9c/func_0010cb9c.result.json",
+  "receipt_sha256": "4a7698f47d4f006b7779043d8582953af01d6fca882ec1f8686c317a9e731808",
+  "functions": [
+    {
+      "name": "func_0010c534",
+      "address": 1099060,
+      "size": 152,
+      "candidate_size": 152,
+      "status": "mismatch",
+      "first_diff": 4,
+      "linker_rewrites": []
+    },
+    {
+      "name": "func_0010cb9c",
+      "address": 1100700,
+      "size": 112,
+      "candidate_size": 112,
+      "status": "match",
+      "first_diff": null,
+      "linker_rewrites": []
+    },
+    {
+      "name": "func_0010e094",
+      "address": 1106068,
+      "size": 232,
+      "candidate_size": 232,
+      "status": "mismatch",
+      "first_diff": 5,
+      "linker_rewrites": []
+    }
+  ],
+  "removed_callees": [],
+  "literal_rebindings": [],
+  "status": null,
+  "reason": null,
+  "stdout": "note: proposed names overlay scratch/integrator/c012/r4/PROPOSED-NAMES-r1.json (not config/names.json); a MATCH here needs those bindings adopted\nMISMATCH func_0010c534 @ 0x10c534 size 0x98/0x98 first difference at +0x4\nMATCH    func_0010cb9c @ 0x10cb9c size 0x70/0x70\nMISMATCH func_0010e094 @ 0x10e094 size 0xe8/0xe8 first difference at +0x5\n",
+  "stderr": ""
+}

@@ -1,0 +1,44 @@
+{
+  "source": "src/nw4c/gfx_GraphicsDevice.cpp",
+  "profile": "game",
+  "functions": [
+    "func_001244e8",
+    "func_001820d4",
+    "func_001c6a38"
+  ],
+  "extra_sources": [],
+  "function_owners": {
+    "func_001244e8": "src/nw4c/gfx_GraphicsDevice.cpp",
+    "func_001820d4": "src/nw4c/gfx_GraphicsDevice.cpp",
+    "func_001c6a38": "src/nw4c/gfx_GraphicsDevice.cpp"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/gfx_GraphicsDevice.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r4/scratch/integrator/c012/r4/match-combined-r2/u1052"
+  ],
+  "exit_code": 0,
+  "seconds": 0.183649,
+  "source_sha256": "245e46f894fc3e229284f31f5ec7edb8fd8d085d5d6b6c411ac2de6ab11965ad",
+  "extra_source_sha256": {},
+  "credited_functions_match": true,
+  "all_emitted_functions_match": true,
+  "foreign_credited_owners": [],
+  "receipt": "scratch/integrator/c012/r4/match-combined-r2/u1052/gfx_GraphicsDevice.result.json",
+  "receipt_sha256": "38d011df050bf09df9eaf0c2226d03bbd1e7301d47d081c619bcd59d11a088c6",
+  "output": "MATCH    _ZN2nw3gfx14GraphicsDevice25InvalidateAllLookupTablesEv @ 0x1244e8 size 0x24/0x24\nMATCH    _ZN2nw3gfx14GraphicsDevice19ActivateLookupTableENS0_3res19ResImageLookupTableENS1_9LutTargetE @ 0x1820d4 size 0x98/0x98\nMATCH    _ZN2nw3gfx14GraphicsDevice21InvalidateLookupTableENS0_3res19ResImageLookupTableE @ 0x1c6a38 size 0x30/0x30\n",
+  "stderr": ""
+}

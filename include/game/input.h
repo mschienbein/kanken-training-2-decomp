@@ -156,6 +156,16 @@ struct TouchDeviceState {
     struct InputPoint position;
 };
 
+/* [INFERENCE] Tracking extends the canonical coordinate/state snapshot.
+ * Only the held/reference/history tail is newly witnessed here. */
+struct TouchMotion {
+    struct InputSnapshot sample;
+    int held;
+    float reference;
+    float previous;
+};
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -183,6 +193,7 @@ extern void func_00170418(struct PointerState *input);
 extern int func_0016ec14(const struct InputMode *mode);
 extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
 extern int func_001e9af8(struct W22UiItem *item, const struct InputSnapshot *input);
+extern int func_0016f08c(struct TouchMotion *touch);
 #ifdef __cplusplus
 }
 #endif
