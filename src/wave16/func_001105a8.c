@@ -3,7 +3,7 @@
 
 
 
-void func_001105a8(void (*callback)(void))
+void func_001105a8(CommandQueueCompletionCallback callback)
 {
     struct CommandQueue *queue =
         bss_0049ecf0.writing;

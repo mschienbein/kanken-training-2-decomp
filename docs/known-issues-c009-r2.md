@@ -833,3 +833,146 @@ findings, four new deferrals, preserved identities, actual float protocol and
 the completed reproof. No heavy gate or heavy-slot request was run; Main's
 go-ahead is still required before interfaces/argcheck/prepare/suite.
 
+## C009-r5 sealed review FAIL; C009-r6 cursor fix and native-model deferral
+
+C009-r5 prepared successfully at source
+`c99f2c674647e91790dd2f6c4b2b337b5b70c5f3`, with records committed on Main
+`e09feab5`. Both independent reviews are registered on Main `18301660`:
+codex-a **PASS_WITH_QUALIFICATIONS**, codex-b **FAIL** with two blockers.
+The predecessor and its reviews remain immutable. C009-r6 is a fresh branch
+and worktree from `18301660`, not another attempt under the failed name.
+No preparation, acceptance or new credit is claimed by this remediation.
+
+### F01 — retain the real command-queue completion cursor
+
+`CommandQueue.callback` and the NEW setter `001105a8` incorrectly declared
+`void(void)`. Original dispatcher `00186ef0` preserves the incremented queue
+cursor across its unlock, explicitly supplies that word before its indirect
+tail exit, and does not merely leave an unrelated temporary in the argument
+register. The actual registration in `00106740` supplies `0010ace8`; that
+provider preserves the incoming cursor and compares it against completion
+entry boundaries.
+
+This is a **genuine fix, not a deferral**. The shared header now defines
+`CommandQueueCompletionCallback` as `void (*)(int cursor)`, uses it for the
+slot and setter, and declares the actual external provider as
+`void func_0010ace8(int cursor)`. The setter definition uses the same typedef.
+No function-pointer conversion, adapter, alias, fabricated provider or
+synthetic registration/dispatch body is introduced.
+
+The catalogue has one direct setter-entry caller, at `001069a8`; a bounded
+aligned-address census finds one literal identity for the registered provider.
+The registration caller, provider and original dispatcher have no supplied
+credited source in this proposal, so their original evidence is retained
+explicitly rather than claimed as newly compiled source.
+Cursor signedness follows the existing queue field and remains
+**[INFERENCE]**: the witnessed conditional completion stores do not establish
+a signed-versus-unsigned ordering type. No observed caller consumes a callback
+result; the retained void result is a bounded protocol qualification, not a
+recovered historical scalar-result claim.
+
+The local setter witness is **24/24 B MATCH, exit 0**. The complete final
+reproof also includes every one of the header's **18 transitive dependents**.
+Evidence is `CURSOR-RESOLUTION-r1.json`,
+`CURSOR-PROVIDER-SEMANTICS-r1.json` and the sealed predecessor's
+`CALLBACK-CURSOR-CONTRACT-r2.json`, provider/registration facts and bounded
+consumer facts, all hash-bound under `scratch/integrator/c009-r6/`.
+
+### F02 — remove the unauthorized DisplayTarget native-vtable model
+
+The NEW `00117854` constructor used a `Finalize`-only virtual key without
+a virtual destructor and introduced `_ZTV13DisplayTarget`. DisplayTarget
+is not an accepted native-vtable precedent; its exact constructor bytes did
+not authorize that different model.
+
+The complete native class, constructor declaration and virtual key are
+removed from `display_target.h`, which now exposes only an opaque receiver.
+The NEW constructor leaves `src/` and the candidate manifest; its exact
+predecessor source is preserved privately in
+`scratch/integrator/c009-r6/deferred/func_00117854.cpp`.
+All three c009-only DisplayTarget bindings, C1, C2 and `_ZTV`, are removed
+from `config/names.json`. No replacement native family, destructor alias,
+second callable view or cast is substituted.
+
+This is a **NEW-only deferral: 1 function / 56 B**. There are no other NEW
+source dependents of this completion. Accepted identity `00110358` retains
+its explicit unused opaque receiver and freshly MATCHes; no accepted identity
+is withdrawn, renamed or deferred. Re-entry requires an exact non-vtable form,
+or separately authorized native-family evidence with the real providers and
+every user migrated together. `DISPLAY-TARGET-DEFERRALS-r1.json` and
+`DEFERRALS-r1.json` retain the exact source hashes, reason and re-entry condition.
+
+### Proactive callback and native-binding sweep
+
+The sweep covers all **811 surviving NEW/revised source units**, their
+**972 distinct source/header files** under conservative include reachability,
+**124 direct function-pointer declarators**, and the **60 predecessor
+declaration changes** against accepted cmodels, adjudicated in **21 families**.
+It also retains the typedef-storage, static-table, native-member-descriptor,
+compiler-produced callback-reference and original consumer evidence rather
+than treating a no-warning lexical search as an ABI proof.
+
+The bounded static population includes **24 tables / 21 typed cells**,
+**42 scene-array cells**, **five float converter slots** and **seven native
+member descriptors**. All **51 supplied static/scene provider signatures**
+are rebound to their actual current source. No additional NEW same-class
+blocker was identified. Unknown dynamic provider/receiver/override populations
+remain **unknown**, not compatible by default; the previously documented
+accepted scene/member/dispatch limitations remain explicit and unresolved.
+Opaque font/layout/decoder tables are still under-specifications, not
+zero-entry or recovered native tables.
+
+Fresh symbol-metadata inspection of **847 actual objects** from the final
+reproof, including helper companions, finds **no emitted `_ZTV` symbol**.
+The **11 remaining overlay `_ZTV` bindings** are identical to accepted
+cmodels, with no added or changed family; DisplayTarget, allocator,
+TextDecoderBase and ResourceObject native bindings are absent.
+Dispatch-only virtual declarations do not by themselves claim a native table
+binding or a recovered complete provider family. Exact scope, source context,
+family dispositions and object hashes are in `CALLABLE-SWEEP-r1.json`,
+`SUPPLIED-PROVIDER-REBINDINGS-r1.json`, `ACCEPTED-BOUNDARY-r1.json` and
+`NATIVE-OBJECT-SWEEP-r1.json`.
+
+### Current scope, exercised proof and Main-only remaining gates
+
+Pure composition proposes **2,216 units / 2,269 functions / 249,372 B**:
+all **1,621 accepted identities / 195,908 B** plus **648 NEW / 53,464 B**.
+New profiles: game **588 / 47,956 B**, middleware **35 / 3,824 B**,
+sdk **25 / 1,684 B**. The candidate has **659 units**, the same five explicit
+accepted moves and **22 proposed helper-only units**. The previous accepted
+source-revision scope is unchanged; the cursor fix and constructor deferral
+do not withdraw accepted credit or change the denominator.
+
+The new r6 deferral is **1 / 56 B**. Post-r3 contract deferrals now total
+**27 / 3,320 B**; including the earlier `0011f3a8` deferral, the manifest
+boundary is **28 / 3,588 B**. Older historical `00113c0c`/`0018ee88` and
+earlier scopes remain separate and unchanged.
+
+The final sequential, single-process, **niceness 10** `tools/match.py`
+closure completed with **actual exit 0: 822 units / 828 credited functions,
+all MATCH**. It includes all surviving NEW/revised units, all **19 distinct
+touched-header dependents** (18 queue, one opaque DisplayTarget), and
+**25 actual R1 caller/helper combinations covering all 22 helper sources**.
+Every expected result is present with its exact extent and frozen profile;
+there are no extra credited rows, profile/model disagreements, failed units
+or changed inputs. Including the earlier local setter proof, all **823
+matcher commands exited 0**. Explicit v6/L1 selection, frozen GATES v1.19
+and denominator v9-r2 are unchanged.
+
+Scope SHA-256:
+`8ada88f5f62b493f47e6c8ce65006fb022d3698c2ead0bb3c76ccd7daaa7020b`.
+Full `match-r1/RESULTS.json` SHA-256:
+`2bedc494fc2d880211fd0e9fd5db8885a6a07753d2fdf32e30422d1be4082135`.
+Per-command exits, source/object/result hashes and input bindings are retained.
+Five metadata-query failures (four schema assumptions and a host-interpreter
+import) are recorded separately; no matcher failure is hidden or relabeled.
+
+R1 erased-callee provenance, L1 witnessed-span limitations, C-only
+mandatory-discard results, C++ mechanical gaps, original bugs, counted loops,
+ARMCC extensions and frozen-profile qualifications remain mandatory.
+No subagent, whole-ledger interfaces/argcheck, suite, full build, prepare,
+review registration, finalize or push was run by this worker.
+`HANDOFF.json` and `REMAINING-HEAVY-COMMANDS.json` give Main the exact proposed
+ledger and fresh output paths for the remaining gates and the new
+`c009-r6` preparation, followed by two fresh independent reviews.
+
