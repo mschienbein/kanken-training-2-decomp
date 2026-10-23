@@ -2,6 +2,45 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-23 (evening) — c011-r11 accepted (+88 functions); pipeline paused
+
+**Accepted:** 2,770 functions / 301,020 B (seq 12: … c010-r8, c011-r11). Denominator **v13-r2**:
+4,571 creditable functions / 1,121,674 B (**26.84%**). Gates **v1.20**.
+
+- **c011-r11** adds 88 functions / 12,440 B, folding in the c013 and c014 intakes, with explicit
+  linker v6 plus literal L1, 9 accepted moves and 32 revised accepted units. Review history:
+  - r8 failed Main's whole-ledger interfaces gate: a `ChoiceController` ODR clash and 8 inline
+    declaration items. r9 fixed them.
+  - r10: both reviews FAIL despite exact bytes. The findings were a memcpy prefix overlay, a
+    one-past-end table cast, a cast of byte storage to a typed workspace, and two overlapping
+    externs modelling one packet.
+  - r11 fixed the first three compliantly, migrating the accepted initializer `0014db18` to the
+    canonical typed root, and held `001ce05c` (276 B). Both reviews PASS_WITH_QUALIFICATIONS
+    with no findings.
+  - Each r11 reviewer carried 149 of 157 rows forward from its own sealed r10 review, after
+    re-proving the matches and confirming the sources and include closures were byte-identical.
+    This cut review time about 45%.
+  - 117 functions stay held and uncredited (`docs/known-issues-c011.md`).
+- **Pipeline paused at the user's request** after this checkpoint. The concurrency cap was 4
+  subagents, to conserve usage.
+- **Ready next, in order** (detail in `docs/RESUME.md`):
+  1. **Catalogue v14:** reclassifies 5 vendor-library functions (`_snputwc`, `strcat`, `wcsncpy`,
+     `__cxa_guard_acquire`, `wcslen`) and the 20-function NW4C `FastWordCopyAsm_*` assembly family
+     as non-C. That is −25 creditable functions / −1,580 B, with accepted records unchanged.
+     The full suite passes (1,104 tests). The r1 review FAILed on one major finding: its new
+     tests pin aggregate totals instead of testing behaviour. Its accounting, protection and
+     metadata checks all pass, and its fresh assembly-trace and regeneration replay is still
+     incomplete. Revision v14-r2 and a second review come next.
+  2. **Combined checkpoint c012-r5:** ctypes1 r4 (pre-review PASS) plus c012 r4 (29 new functions
+     / 4,856 B and 30 moves, with cmodels2 folded in). ctypes1 merges cleanly; c012 r4 conflicts
+     in about 70 files and needs a merge pass.
+  3. **c015:** about 57 harvested author matches.
+- **Blocked on the user:**
+  - The remaining Thumb C-library family (about 50 functions) does not match the local ARM
+    Compiler 5.04/5.06 libraries. It needs the 4.1 runtime libraries or a ruling.
+  - CM2-F01/F03 (scene vtable and member-callback contracts in accepted code) need a ruling on
+    the vtable key-function pattern.
+
 ## 2026-10-23 (later) — c010-r8 accepted (+413 functions); gates v1.20 adopted
 
 **Accepted:** 2,682 functions / 288,580 B (seq 11: … c009-r6, c010-r8). Denominator **v13-r2**:

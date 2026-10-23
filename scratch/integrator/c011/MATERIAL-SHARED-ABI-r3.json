@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "rows": [
+    {
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c011/canonical-inputs/material_dtor-r3.cpp",
+        "--profile",
+        "sdk",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/material-dtor-shared-r3",
+        "--names",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r41406/names-material.json"
+      ],
+      "profile": "sdk",
+      "exit_code": 0,
+      "elapsed_seconds": 0.26195263862609863,
+      "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/authors/r41406/names-material.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN14MaterialObjectD1Ev @ 0x1cfe68 size 0x40/0x40\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c011/canonical-inputs/material_deleting-r3.c",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/material-delete-shared-r3"
+      ],
+      "profile": "game",
+      "exit_code": 1,
+      "elapsed_seconds": 0.23347020149230957,
+      "stdout": "MISMATCH func_001cfe24 @ 0x1cfe24 size 0x48/0x44 first difference at +0x0\n",
+      "stderr": ""
+    }
+  ],
+  "qualification": "One shared partial owner with the actual C deleting-wrapper ABI and native C++ destructor. The failed full-public-class RTTI and failed common-profile experiments remain separate immutable evidence; no compiler flags, ignored metadata, casts or public-class aliases are used."
+}

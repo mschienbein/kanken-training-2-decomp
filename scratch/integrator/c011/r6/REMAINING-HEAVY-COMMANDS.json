@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "branch": "c011-r6",
+  "working_directory": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r6",
+  "status": "NOT RUN by author; no heavy slot requested",
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "prerequisites": [
+    "Finalize the applicable c010-r7 after its own fresh prepare and independent reviews. Base this transaction on the exact source819edc6f/current2687-identity ledger, not failed c010-r6 or obsolete counts.",
+    "Integrate the complete committed c011 transaction, all107 c011 holds and all89 c010-r7/28 c009 holds. Preserve every accepted/current retained predecessor identity and all nine explicit owner moves.",
+    "Recheck SOURCE-CONTEXT-r1.json source/header/catalogue/profile/name bindings against the integrated source. Any drift needs fresh affected proof and immutable unused output names.",
+    "Use only final LINKER-REWRITES-r1.json with scope_complete=true:2667 primaries,2767 required functions and all24 helper-only definitions. SAFE-MATCH-RECEIPTS-r1.json publishes semantic receipts and hashes without encoded instruction words; raw receipt hash bindings remain available in the local private matcher outputs.",
+    "Manually discharge unchecked C++, every real callable/virtual population and provider/input/result contract, R1 provenance, original bugs and inherited qualifications. A direct symbol census does not close a dynamic receiver hierarchy; the sealed loader route was held, not relabeled compatible.",
+    "Serialize each heavy operation machine-wide. Confirm each output/checkpoint path is still unused immediately before invocation; failures get a fresh suffix rather than overwritten records."
+  ],
+  "commands": [
+    {
+      "step": "whole_ledger_interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r6",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/c011/r6/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/c011/r6/interfaces-r1.json"
+      ],
+      "requirements": [
+        "Require no errors/policy items and adjudicate all unchecked C++ manually."
+      ]
+    },
+    {
+      "step": "whole_ledger_argcheck",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r6",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/c011/r6/PROPOSED-LEDGER.json",
+        "--rewrites",
+        "scratch/integrator/c011/r6/LINKER-REWRITES-r1.json",
+        "--json",
+        "scratch/integrator/c011/r6/argcheck-r1.json"
+      ],
+      "requirements": [
+        "Capture actual exit and adjudicate every warning/note. Removed target-null R1 helpers have no historical callee edge proved by the CFG filter."
+      ]
+    },
+    {
+      "step": "prepare_after_predecessor_finalization_and_adjudicated_gates",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r6",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "c011-r6",
+        "--candidates",
+        "config/candidates/c011.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": [
+        "Main runs only in the clean integrated committed source after c010-r7 finalization. Candidate cwd is reproducibility metadata, not author authorization.",
+        "Require actual exit0/PASS with two fresh complete builds, unique emitted ownership and full suite; then two fresh independent bound reviews. Main alone registers reviews/finalizes/pushes."
+      ]
+    }
+  ],
+  "unused_at_record_creation": {
+    "scratch/integrator/c011/r6/interfaces-r1.json": true,
+    "scratch/integrator/c011/r6/argcheck-r1.json": true,
+    "accept/c011-r6": true
+  },
+  "heavy_commands_exercised": [],
+  "unexercised": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}

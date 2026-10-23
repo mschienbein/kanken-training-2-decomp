@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "status": "source-milestone-unaccepted-not-review-ready",
+  "branch": "c011-integrate",
+  "worktree": "scratch/worktrees/c011",
+  "initial_base": "36924e7c42eed98ee07bb8ed72a6bb0c945912dc",
+  "latest_c010_tip_merged": "beec234b77c92634aaddea024805ecd83471e852",
+  "gate_revision": "v1.16 unchanged",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "summary": {
+    "scope_functions": 45,
+    "scope_target_bytes": 7780,
+    "collected_units": 17,
+    "collected_functions": 19,
+    "collected_target_bytes": 2064,
+    "deferred_functions": 26,
+    "deferred_target_bytes": 5716,
+    "unowned_or_unresolved_dispositions": 0
+  },
+  "publication_snapshot": {
+    "author_manifests": 906,
+    "scope_records": [
+      "SCOPE.json",
+      "SCOPE-SUPPLEMENT-r2.json"
+    ],
+    "cutoff_epoch": 1792281646.3301518,
+    "predecessor_identities_excluded": 2928,
+    "c010_scope_excluded": 648
+  },
+  "candidate_manifest": "config/candidates/c011.json",
+  "candidate_profiles": {
+    "game": 15,
+    "sdk": 1,
+    "middleware": 1
+  },
+  "dispositions": "DISPOSITIONS-r1.json",
+  "source_cutovers": "SOURCE-CUTOVERS-r1.json",
+  "name_proofs": [
+    "NAMES-PROVENANCE-r1.json",
+    "NAMES-PROVENANCE-r2.json"
+  ],
+  "collection_evidence": [
+    "COLLECT-r1.json",
+    "COLLECT-r2.json",
+    "COLLECT-r3.json"
+  ],
+  "per_unit_evidence": {
+    "post_cutover": "POST-CUTOVER-r1.json",
+    "units": 20,
+    "new_target_functions": 18,
+    "reserved_c010_target_functions": 4,
+    "all_targets_match": true,
+    "late_unchanged_native_heap_unit": "COLLECT-r3.json",
+    "new_target_total_including_late_collection": 19
+  },
+  "accepted_source_revisions": [],
+  "unexercised": [
+    "G3 whole-ledger interfaces",
+    "argcheck and adjudication",
+    "whole emitted-owner audit",
+    "pre-review",
+    "full build",
+    "full test suite",
+    "prepare",
+    "independent checkpoint reviews",
+    "finalize",
+    "push"
+  ],
+  "serialization": "No heavy slot was requested or used. Main grants readiness work only after c010. All collection/match compilations here were sequential and nice10.",
+  "remaining_blockers": [
+    "26 scoped MATCHes retain explicit accepted owner/signature/layout conflicts; no aliases or casts were adopted to suppress them. See each exact source/receipt/evidence row in DISPOSITIONS-r1.json.",
+    "The inherited c009/c010 pipeline is not yet review-ready; parent heavy gates and native/caller-contract integration remain authoritative.",
+    "The candidate plus revised parent new units and shared-header dependency closure need main-owned G3, argcheck, ownership audit and pre-review in the serialized slot before any prepare."
+  ],
+  "next_main_checks": [
+    "Merge c011 only after normal isolated integration of the predecessor checkpoints; main was not edited here.",
+    "Build the proposed ledger from the current accepted ledger, c008-r3/c009/c010 including c010 moves, and c011 additions without duplicating function owners.",
+    "After the c010 heavy slot, run whole-ledger interfaces, argcheck/adjudication, emitted-owner closure and pre-review; prepare only with an explicitly frozen v2/none selection after those pass."
+  ],
+  "qualifications": [
+    "Candidate totals are not accepted progress.",
+    "All45 inventoried default-model identities have a disposition:19 collected,26 deferred; future publications after the closed snapshot are not silently claimed.",
+    "Private match objects, packets, ROM data and disassembly are not part of the commit."
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "runs": [
+    {
+      "source": "src/checkpoint11/intake-r7/nf158/func_00116eb0.cpp",
+      "profile": "game",
+      "targets": [
+        "func_00116eb0"
+      ],
+      "author_source": "scratch/authors/nf158/src/func_00116eb0.cpp",
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint11/intake-r7/nf158/func_00116eb0.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r18/nf158/func_00116eb0"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r18/nf158/func_00116eb0/func_00116eb0.result.json",
+      "receipt_sha256": "f4b16dbd67bd9f4bf991f21f4adf6f8cbea5e92b40974abf4f3e6755e51a44ac",
+      "source_sha256": "ac6546421ed9a06afb37f2998eab850cdf8e603bf7e7b2654a772d9b7b0ade9d",
+      "observed": [
+        {
+          "name": "_ZN16InputDeviceStateC1Ev",
+          "address": 1142448,
+          "status": "match",
+          "size": 144,
+          "candidate_size": 144,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    },
+    {
+      "source": "src/wave20/func_0017a6c8.cpp",
+      "profile": "game",
+      "targets": [
+        "func_0017a6c8"
+      ],
+      "dependency": true,
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/wave20/func_0017a6c8.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r18/wave20/func_0017a6c8"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r18/wave20/func_0017a6c8/func_0017a6c8.result.json",
+      "receipt_sha256": "d039292f15e1851adfd37b7f660c939b0329b8051dc9f496eefefcd9e7e4ad49",
+      "source_sha256": "97dc8e377c0658479466825b3f042852a2d330c21b243b893f6fa26c49b456ad",
+      "observed": [
+        {
+          "name": "func_0017a6c8",
+          "address": 1550024,
+          "status": "match",
+          "size": 44,
+          "candidate_size": 44,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    }
+  ]
+}

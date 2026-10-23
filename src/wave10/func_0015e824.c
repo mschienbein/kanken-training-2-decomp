@@ -1,5 +1,5 @@
 #include "game/screen.h"
-extern void func_0015e830(struct AlignmentHandle *alignment, unsigned value);
+#include "game/input_device.h"
 
 void func_0015e824(struct TrainingWidget *widget, unsigned value)
 {

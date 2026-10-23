@@ -1,0 +1,293 @@
+{
+  "schema_version": 3,
+  "checkpoint": "c011",
+  "status": "source-ready-complete-named-intake-not-gated-parent-header-refresh-pending",
+  "branch": "c011-integrate",
+  "worktree": "scratch/worktrees/c011",
+  "recovered_tip": "76f628fd46017d1ce7aea59f8d6532db17937f8a",
+  "preservation_commit": "dafd2b23855914d5b01ef5f9eb70122dd6c92058",
+  "main_tip_merged": "261fdc9804c2ff34eaa224f30142d2b2f23e8ff2",
+  "main_merge_commit": "058cf28f796bccaee75d6de9360168a288210b22",
+  "latest_c010_tip_merged": "4138720f91f749c36872404050ae7aef7831cbc6",
+  "c010_merge_commit": "fc65c3a34b16bc5db2bbef665ad00e758f4d3fe1",
+  "c009_tip_already_ancestor": "444fc847ef9247ca0ecf23e22a0299dd2841fe82",
+  "gate_revision": "v1.19 unchanged",
+  "denominator": "v9-r2 unchanged",
+  "accepted_baseline": {
+    "sequence": 9,
+    "checkpoint": "cmodels",
+    "functions": 1621,
+    "target_bytes": 195908
+  },
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "historical_model_qualification": "Previous v2/none witnesses and scope records stay unchanged and do not select current c011. Accepted ledger requires explicit v6/L1. cmodels2 alone targets v8/L1.",
+  "summary": {
+    "scope_functions": 187,
+    "scope_target_bytes": 32004,
+    "collected_units": 95,
+    "collected_new_functions": 103,
+    "collected_new_target_bytes": 14776,
+    "contract_deferred_functions": 84,
+    "contract_deferred_target_bytes": 17228,
+    "context_move_functions": 10,
+    "context_move_target_bytes": 984,
+    "candidate_claimed_functions": 113,
+    "candidate_claimed_target_bytes": 15760,
+    "historical_isolated_destination_runs": 76,
+    "historical_isolated_target_matches": 92,
+    "prior_r7_collected_units": 20,
+    "prior_r7_collected_functions": 22,
+    "prior_r7_collected_target_bytes": 3640,
+    "prior_r7_contract_deferred_functions": 10,
+    "prior_r7_contract_deferred_target_bytes": 1212,
+    "prior_r7_isolated_runs": 35,
+    "prior_r7_terminal_ready_sources": 26,
+    "prior_r7_terminal_matched_targets": 28,
+    "published_result_manifests": 116,
+    "publication_rows": 343,
+    "model_only_rows_excluded": 1,
+    "incremental_collected_units": 5,
+    "incremental_collected_functions": 5,
+    "incremental_collected_target_bytes": 1044,
+    "incremental_contract_deferred_functions": 2,
+    "incremental_contract_deferred_target_bytes": 188,
+    "incremental_isolated_runs": 10,
+    "incremental_terminal_ready_sources": 8,
+    "incremental_matched_targets": 8,
+    "carried_prior_deferrals_not_reinvestigated": 10,
+    "cumulative_post_resume_isolated_runs": 45
+  },
+  "candidate_manifest": "config/candidates/c011.json",
+  "candidate_manifest_sha256": "66880cecfd42a8b959545dc32df2b667d52dc8e5e6392c1df0e6305dc223a97a",
+  "candidate_profiles": {
+    "game": 54,
+    "sdk": 10,
+    "middleware": 31
+  },
+  "dispositions": "DISPOSITIONS-r5.json",
+  "consumed_results": "CONSUMED-RESULTS-r9.json",
+  "scope_records": [
+    "SCOPE.json",
+    "SCOPE-SUPPLEMENT-r2.json",
+    "SCOPE-SUPPLEMENT-r3.json",
+    "SCOPE-SUPPLEMENT-r4.json",
+    "SCOPE-SUPPLEMENT-r5.json",
+    "SCOPE-SUPPLEMENT-r6.json",
+    "SCOPE-SUPPLEMENT-r7.json",
+    "SCOPE-SUPPLEMENT-r9.json"
+  ],
+  "scope_sha256": "84a2d0540f929e6d9de8356c31179ae54b9ad999b8f0a3dafda66b4e8b53e7cd",
+  "ownership_basis": "OWNERSHIP-INPUTS-r9.json",
+  "contract_reconciliation": "CONTRACT-RECONCILIATION-r9.json",
+  "permuter_classification": "PERMUTER-CLASSIFICATION-r1.json",
+  "name_proofs": [
+    "NAMES-PROVENANCE-r1.json",
+    "NAMES-PROVENANCE-r2.json",
+    "NAMES-PROVENANCE-r3.json",
+    "NAMES-PROVENANCE-r5.json",
+    "NAMES-PROVENANCE-r7.json",
+    "NAMES-PROVENANCE-r9.json"
+  ],
+  "names_adopted_this_resume": ["_ZN2nw3snd8internal18SoundArchiveLoader38SetWaveArchiveTableInEmbeddedGroupImplEjPNS0_22SoundMemoryAllocatableE"],
+  "intake_record": "INTAKE-r9.json",
+  "intake_record_sha256": "3061552775c74a8793d2da648f448328e9bb4728a9c312be1b19affc42b411ca",
+  "exact_source_scope": "DESTINATION-SOURCE-SCOPE-r9.json",
+  "disposition_updates": ["SUCCESSOR-CONTRACT-UPDATE-r1.json"],
+  "header_preservation": "HEADER-PRESERVATION-r7.json",
+  "preserved_source_complete_tip": "1814a725881a752f69c4c20ecff1bbfa12fbad7e",
+  "parent_ownership_update": "PARENT-OWNERSHIP-UPDATE-r1.json",
+  "predecessor_archive_token_prerequisite": {
+    "isolated_commit": "f5c402ae65b6464fb4bbac6d8975d224a025bc56",
+    "record": "PARENT-ARCHIVE-TOKEN-CUTOVER-r1.json",
+    "patch": "parent-archive-token-r1/CUTOVER.patch",
+    "required_boundary": "The isolated full64-bit token wrapper/archive_ipc.h correction must land in c010 BEFORE G3/prepare, not at later c011 acceptance.",
+    "scope": "Only the two parent source/header files and their standalone32B/game wrapper plus112B/sdk terminal witnesses; no child00117ad8 declaration, credit or candidate manifest. Do not merge unfinished child scope.",
+    "status": "Applied surgically by Main in the current parent before G3/prepare; child scope excluded.",
+    "application_record": "PARENT-ARCHIVE-TOKEN-APPLICATION-r1.json",
+    "parent_import_receipt": "scratch/worktrees/c010/scratch/integrator/c010/PARENT-ARCHIVE-IMPORT-r69.json",
+    "parent_import_commit": "1947019",
+    "current_parent_owner": "Main directly owns c010-integrate; no further edit requests to the completed C010Codex session."
+  },
+  "collection_evidence": [
+    "COLLECT-r1.json",
+    "COLLECT-r2.json",
+    "COLLECT-r3.json",
+    "COLLECT-r4.json",
+    "COLLECT-r5.json",
+    "COLLECT-r6.json",
+    "COLLECT-r7.json",
+    "COLLECT-r8.json",
+    "COLLECT-r9.json",
+    "COLLECT-r10.json",
+    "COLLECT-r11.json",
+    "COLLECT-r12.json",
+    "COLLECT-r13.json",
+    "COLLECT-r14.json",
+    "COLLECT-r15.json"
+  ],
+  "current_destination_evidence": {
+    "path": "DESTINATION-CLOSURE-r9.json",
+    "sha256": "ce0f3d22b95d42e93153f54f7e8c49ab5eb98e95ba91989d2d118eae495de9bf",
+    "sequential_invocations": 10,
+    "incremental_candidate_units": 5,
+    "incremental_candidate_targets": 5,
+    "direct_dependency_units": 3,
+    "terminal_matched_targets": 8,
+    "all_incremental_claimed_targets_match": true,
+    "historical_destination_evidence": "DESTINATION-MATCH-r16.json",
+    "previous_destination_evidence": "DESTINATION-CLOSURE-r8.json",
+    "explicit_models": {
+      "linker_model": "armlink5-inline-branchnop-v6",
+      "literal_model": "anonymous-string-records-v1"
+    },
+    "qualification": "Five new targets and three direct dependencies only. np050 retains its real0015ad74 mismatch; np038/np039 remain explicit contract deferrals without reruns. Two extra r24 parent-only witnesses bind the isolated token correction. Main separately applied and witnessed the actual parent in r69. Prior98-function scope and all82 deferrals survive; complete shared-header dependency refresh still waits for finalized parents."
+  },
+  "context_moves": [
+    {
+      "function": "func_00152560",
+      "from": "src/wave13/func_00152560.c",
+      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp"
+    },
+    {
+      "function": "func_0014fe14",
+      "from": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_0014feac",
+      "from": "src/checkpoint10/func_0014feac.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp"
+    },
+    {
+      "function": "func_00155ab4",
+      "from": "src/checkpoint10/func_00155ab4.c",
+      "to": "src/checkpoint11/aux_channel_publication-r3.c"
+    },
+    {
+      "function": "func_001650f8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1ebc",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1ed8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f20",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f34",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    },
+    {
+      "function": "func_001f1f4c",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c"
+    }
+  ],
+  "parent_revised_sources": [
+    {
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "source_sha256": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33"
+    },
+    {
+      "source": "src/checkpoint10/func_001d31cc.cpp",
+      "source_sha256": "e84ff629ac70b5998c151bcdf7153eb64ea01e0543155c433467fd920219f26f"
+    },
+    {
+      "source": "src/wave20/func_0017a690.cpp",
+      "source_sha256": "fc3cff0956242059f94a57fbd796f3bd0aad7ed0251d76d5c4cb3b0b6ebf771e"
+    },
+    {
+      "source": "src/wave20/func_0017a6c8.cpp",
+      "source_sha256": "97dc8e377c0658479466825b3f042852a2d330c21b243b893f6fa26c49b456ad"
+    },
+    {
+      "source": "src/checkpoint10/func_0019051c.c",
+      "source_sha256": "2b619847dc5758522513873e5dd2b61407d0135159e1970884f571a66b9b916e"
+    },
+    {
+      "source": "src/checkpoint10/func_0011f6a8.c",
+      "source_sha256": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183",
+      "prerequisite": "Isolated f5c402a correction, applied by Main before c010 G3/prepare; no child credit."
+    }
+  ],
+  "accepted_source_revisions": [
+    "src/wave13/func_00152560.c -> src/checkpoint11/dsp_auxiliary-r5.cpp (previously authorized move, no new credit)",
+    "src/wave11/func_0015e2a4.c and src/wave11/func_00181420.c include the actual shared depth contract; bodies MATCH unchanged",
+    "src/wave5/func_00145840.c shares its exact RequestRecord through request_exchange.h; body MATCH unchanged",
+    "src/wave10/func_0014db18.c includes the canonical handwriting workspace declarations while preserving byte-pointer storage ABI; body MATCH unchanged"
+  ],
+  "accepted_math_revision_performed": false,
+  "mandatory_deferrals": [
+    {
+      "function": "func_00116064",
+      "reason": "Main conditionally authorized a single native math accessor only if predecessor branches did not touch the accepted transform/accessor family. The observed c010 diff includes MatrixIdentityW8C/matrix34Identity definitions in c5f4_final2.cpp and func_0010dd88.cpp, so the overlap condition stops the cutover. Accepted00180234 is unchanged; no cast, second helper or legacy-identity extension is imported. TU952 separately proposes const nw::gfx::CalculatedTransform* for00180234 versus the current mutable TransformComponentsW8C*; the same64-byte identity/return-type family must be reconciled with the accessor cutover."
+    },
+    {
+      "function": "func_001ce9e8",
+      "reason": "The whole native Layout::Build MATCH proves its own body and natural AppendChild/group calls, but001822fc is an accepted RegistrationOwner*/RegistrationEntry* C definition, not Pane::AppendChild(Pane*). This actual receiver/argument contract needs an accepted-unit migration not planned by c010. Three proven native name proposals are retained in provenance but are not admitted for this deferred row."
+    },
+    {
+      "function": "func_001d67c8",
+      "reason": "Dispatcher helper001d7318 is declared unsigned-char(StreamVoice*,StreamVoiceEvent*,const StreamVoiceSetup*,const void*,int,int), while decoded definition is int(StreamLoadState*,StreamLoadResult*,void**,unsigned,unsigned,int). Partial kind/priority/active and codec state layouts do not prove common owner. Preserve sixth input; no aliases/casts promoted."
+    },
+    {
+      "function": "func_001d7318",
+      "reason": "Decoded loader MATCH preserves real six-input and int result contract plus original unbounded eight-channel copy bug, but incoming dispatcher exposes incompatible state/result/pointer/capacity formals. Canonicalize dispatcher and loader with actual typed prefixes and ABI evidence before collection; never alias StreamSound or StreamVoice by offsets."
+    }
+  ],
+  "publication_snapshot": {
+    "input": "INTAKE-r9.json",
+    "input_sha256": "3061552775c74a8793d2da648f448328e9bb4728a9c312be1b19affc42b411ca",
+    "upstream_intake": "scratch/integrator/CODEX-DEFAULT-UNRESERVED-r1.json",
+    "input_rows": 17,
+    "authorized_new_rows": 7,
+    "new_collected_rows": 5,
+    "new_contract_deferred_rows": 2,
+    "unchanged_prior_deferrals_not_reinvestigated": 10,
+    "cumulative_published_result_manifests": 116,
+    "cumulative_publication_rows": 343,
+    "scoped_default_identities": 187,
+    "consumed_results": "CONSUMED-RESULTS-r9.json",
+    "previous_snapshot": "INTAKE-r7.json",
+    "qualification": "Every authorized new row and all ten carried old rows have explicit dispositions. Prior publication/missing-path records remain immutable; this seven-target increment is complete, not an all-future-publications claim."
+  },
+  "unexercised": [
+    "G3 whole-ledger interfaces",
+    "argcheck and adjudication",
+    "whole emitted-owner audit",
+    "complete shared-header dependent match closure",
+    "seven-step pre-review",
+    "full integrated builds",
+    "full test suite",
+    "prepare",
+    "independent checkpoint review",
+    "finalize",
+    "push"
+  ],
+  "serialization": "No heavy job, full audit, build, tests, prepare or finalize run. This increment used ten sequential nice10 match.py --show0 invocations (eight destination/dependency runs plus two distinct parent-only header runs), v6/L1 and unchanged frozen profiles; prior35 remain historical. Main's two r69 parent-directory witnesses are separately recorded, not rerun or counted as ours.",
+  "next_main_checks": [
+    "After c009-r3 and c010 finalize, compose accepted seq9 with their final inventories, then c011 additions and exactly ten preserved context moves. No accepted identity may disappear or acquire a second emitted owner.",
+    "Retain prior source/hash-bound parent reservations0014cc9c/001d31cc and001d0348/001d2234/001f478c. C010 r67 now explicitly retains uncredited001c7760/001c8a40 in src; preserve their child reservations and both distinct parent/child source hashes. No native-pair cutover, re-entry or release follows.",
+    "Retain the source-bound prior native-writer and RequestRecord refinements. The separate1f6a8/archive_ipc token prerequisite is already surgically applied by Main in c010 r69 with exact32B/game and112B/sdk witnesses; do not replace its differing parent header with child-only declarations or add00117ad8 credit there.",
+    "Refresh complete shared-header dependencies across accepted/final parent/c011 units only after predecessors settle. Current r9 source-ready witnesses cover five new targets and three direct dependencies; prior r8 witnesses remain historical, not a complete current-header closure.",
+    "Run whole-ledger G3, argcheck/manual incoming-outgoing/lifetime adjudication, emitted-owner closure, seven-step pre-review and integrated builds/suite once when composed sources settle. Main alone prepares with explicit v6/L1, reviews, finalizes and pushes.",
+    "Preserve all82 prior contract deferrals plus the new counter volatile-storage and successor scheduler-C-callback gaps,84 total. The other ten input rows were not re-investigated. Existing RequestWait191e18/native font/command callback gaps remain real, never casts or aliases.",
+    "Future publication refresh deduplicates CONSUMED-RESULTS-r9.json exact row keys and stable ownership. Prior math00116064/00180234, layout001ce9e8/accepted001822fc, stream001d67c8/001d7318, native-pair and PERMUTER-CLASSIFICATION-r1 holds remain unchanged; no source search was restarted."
+  ],
+  "historical_handoff": "HANDOFF-resume-r6.json",
+  "qualification": "Complete authorized incremental source-ready intake, not gate readiness:95units/113claims includes ten unchanged context moves.103new identities/14776B are unaccepted;84contract deferrals/17228B retain exact witnesses, plus the excluded v3-only match. Prior98 source functions and82 deferrals survive unchanged. Parent token correction is separately committed and applied before c010 gates without child credit. Accepted ledger/receipts, denominator and gates are unchanged; no unfinished predecessor branch was merged."
+}

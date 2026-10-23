@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "branch": "c013",
+  "working_directory": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c013",
+  "status": "NOT RUN by intake author; no heavy slot requested",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2",
+  "prerequisites": [
+    "Use this entire committed c013 transaction on the actual finalized c010-r7 plus c011-r7 predecessor. Its present base is exactly 8359b8594dd53889717cca14fb0a9de0edd201e2; later follow-ups require the requested rebase and fresh affected proof, not stale header/source carry.",
+    "Finalize the applicable predecessors before preparing c013. Recompose PROPOSED-LEDGER.json against the actual accepted ledger, including any intervening accepted candidate; the current proposal intentionally excludes c012/cmodels2-r4/types-compose additions.",
+    "Preserve all three admitted functions, canonical header changes, four intake holds and the original unique accepted 001f4500 owner. No held overlay or bank/native/C facade is admitted. Count nm02 as an inherited hold, not a fourth additional distinct hold.",
+    "Require the exact SOURCE-CONTEXT-r1.json inputs and typed source/callback review. R1 identities, L1 witnessed-span limitations, approved intrinsic/original-bug notes, C-only MUST-discard rules and inherited unknown dynamic populations remain explicit qualifications.",
+    "Use LINKER-REWRITES-r1.json with its COMPLETE-REWRITE-SCOPE-r1.json for whole-ledger argcheck. It combines 1384 fresh passing primary receipts with 1282 untouched c011-r7 receipt carries; it is not an author-run whole-ledger gate or complete recompile.",
+    "Serialize heavy operations machine-wide. Check every output/checkpoint name is still unused immediately before execution; failures require fresh immutable suffixes. Run only from Main's clean committed integrated source and obtain fresh independent bound reviews."
+  ],
+  "commands": [
+    {
+      "step": "whole_ledger_interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c013",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/c013/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/c013/interfaces-r1.json"
+      ],
+      "requirements": [
+        "Require no unresolved disagreements/policy items and manually adjudicate unchecked C++ owner and callable contracts."
+      ]
+    },
+    {
+      "step": "whole_ledger_argcheck",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c013",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/c013/PROPOSED-LEDGER.json",
+        "--rewrites",
+        "scratch/integrator/c013/LINKER-REWRITES-r1.json",
+        "--json",
+        "scratch/integrator/c013/argcheck-r1.json"
+      ],
+      "requirements": [
+        "Capture the actual exit and adjudicate every issue/note, including inherited typed native boundaries and discarded C results. No-warning output is not a callback/ABI proof."
+      ]
+    },
+    {
+      "step": "prepare_after_predecessor_finalization_and_adjudicated_gates",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c013",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "c013",
+        "--candidates",
+        "config/candidates/c013.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": [
+        "Main only, from clean committed integrated inputs after the actual predecessors finalize. Require actual PASS/exit 0, both fresh complete byte-identical builds, unique emitted ownership and the complete suite. Then obtain the required independent bound reviews before Main registers/finalizes/pushes."
+      ]
+    }
+  ],
+  "unused_at_record_creation": {
+    "scratch/integrator/c013/interfaces-r1.json": true,
+    "scratch/integrator/c013/argcheck-r1.json": true,
+    "accept/c013": true
+  },
+  "heavy_commands_exercised": [],
+  "unexercised": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "independent review",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}

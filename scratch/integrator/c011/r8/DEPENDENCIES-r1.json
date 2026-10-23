@@ -1,0 +1,4390 @@
+{
+  "schema_version": 1,
+  "parent_runtime_closure": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json",
+  "parent_runtime_closure_sha256": "a9bbac9992ea67218441d6918899d69029b286897d5de0662df7e13e680fd13e",
+  "parent_changed_source_paths": [
+    "include/game/sound_task.h",
+    "include/game/stream_worker.h",
+    "src/checkpoint10/doubleword.c",
+    "src/checkpoint10/func_00107ce4.cpp",
+    "src/checkpoint10/func_0010a704.c",
+    "src/checkpoint10/func_0014d664.cpp",
+    "src/checkpoint10/func_001c5764.c",
+    "src/checkpoint10/func_001c588c.c",
+    "src/checkpoint10/func_001db960.c"
+  ],
+  "current_changed_retained_parent_functions": [
+    "func_0010a704",
+    "func_0014d664",
+    "func_001c4b10",
+    "func_001c5764",
+    "func_001c588c",
+    "func_001db960"
+  ],
+  "inspection_exit_code": 0,
+  "metadata": {
+    "binding_failures": [],
+    "object_contexts": 2685,
+    "scoped_objects": 71,
+    "native_definition_inventory": {
+      "1461952": [
+        {
+          "source": "src/wave10/func_00164ec0.cpp",
+          "symbol": "_ZN15RenderParameterC1Ev",
+          "size": 12
+        },
+        {
+          "source": "src/wave10/func_00164ec0.cpp",
+          "symbol": "_ZN15RenderParameterC2Ev",
+          "size": 0
+        }
+      ],
+      "1461964": [
+        {
+          "source": "src/wave10/func_00164ecc.cpp",
+          "symbol": "_ZN15RenderParameterC1Effjjjj",
+          "size": 48
+        },
+        {
+          "source": "src/wave10/func_00164ecc.cpp",
+          "symbol": "_ZN15RenderParameterC2Effjjjj",
+          "size": 0
+        }
+      ],
+      "2032048": [
+        {
+          "source": "src/wave8/func_001f01b0.cpp",
+          "symbol": "_ZNK2nw3lyt4Pane19MakeUniformDataSelfEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "size": 8
+        }
+      ],
+      "1205028": [
+        {
+          "source": "src/wave9/func_00126324.cpp",
+          "symbol": "_ZN19ResourceCursorStateC1Ev",
+          "size": 12
+        },
+        {
+          "source": "src/wave9/func_00126324.cpp",
+          "symbol": "_ZN19ResourceCursorStateC2Ev",
+          "size": 0
+        }
+      ],
+      "1697124": [
+        {
+          "source": "src/wave9/func_0019e564.cpp",
+          "symbol": "_ZN14ResourceResultC1Ev",
+          "size": 20
+        },
+        {
+          "source": "src/wave9/func_0019e564.cpp",
+          "symbol": "_ZN14ResourceResultC2Ev",
+          "size": 0
+        }
+      ],
+      "1945096": [
+        {
+          "source": "src/nw4c/font_ResFontBase.cpp",
+          "symbol": "_ZN2nw4font11ResFontBase15GenTextureNamesEv",
+          "size": 144
+        }
+      ],
+      "1945252": [
+        {
+          "source": "src/nw4c/font_ResFontBase.cpp",
+          "symbol": "_ZN2nw4font11ResFontBase18DeleteTextureNamesEv",
+          "size": 88
+        }
+      ],
+      "1945340": [
+        {
+          "source": "src/nw4c/font_ResFontBase.cpp",
+          "symbol": "_ZN2nw4font11ResFontBase20RemoveResourceBufferEv",
+          "size": 120
+        }
+      ],
+      "1130104": [
+        {
+          "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+          "symbol": "_ZN2nw4font11ResFontBaseC1Ev",
+          "size": 48
+        },
+        {
+          "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+          "symbol": "_ZN2nw4font11ResFontBaseC2Ev",
+          "size": 0
+        }
+      ],
+      "2031624": [
+        {
+          "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+          "symbol": "_ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv",
+          "size": 16
+        }
+      ],
+      "2031640": [
+        {
+          "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+          "symbol": "_ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv",
+          "size": 16
+        }
+      ],
+      "1885472": [
+        {
+          "source": "src/nw4c/lyt_Animation__SetResource.cpp",
+          "symbol": "_ZN2nw3lyt18AnimTransformBasic11SetResourceEPKNS0_3res14AnimationBlockEPNS0_16ResourceAccessorE",
+          "size": 16
+        }
+      ],
+      "1883076": [
+        {
+          "source": "src/nw4c/lyt_Arc.cpp",
+          "symbol": "_ZN2nw3lyt11ARCFastOpenEPNS0_9ARCHandleEiPNS0_11ARCFileInfoE",
+          "size": 76
+        }
+      ],
+      "1323724": [
+        {
+          "source": "src/nw4c/lyt_Arc.cpp",
+          "symbol": "_ZN2nw3lyt13ARCInitHandleEPvPNS0_9ARCHandleE",
+          "size": 76
+        }
+      ],
+      "1311988": [
+        {
+          "source": "src/nw4c/lyt_ArcResourceAccessor.cpp",
+          "symbol": "_ZN2nw3lyt19ArcResourceAccessor6AttachEPvPKc",
+          "size": 104
+        }
+      ],
+      "1888120": [
+        {
+          "source": "src/nw4c/lyt_ArcResourceAccessor.cpp",
+          "symbol": "_ZN2nw3lyt19ArcResourceAccessor7GetFontEPKc",
+          "size": 84
+        }
+      ],
+      "1312092": [
+        {
+          "source": "src/nw4c/lyt_ArcResourceAccessor.cpp",
+          "symbol": "_ZN2nw3lyt19ArcResourceAccessorC1Ev",
+          "size": 68
+        },
+        {
+          "source": "src/nw4c/lyt_ArcResourceAccessor.cpp",
+          "symbol": "_ZN2nw3lyt19ArcResourceAccessorC2Ev",
+          "size": 0
+        }
+      ],
+      "1485428": [
+        {
+          "source": "src/nw4c/lyt_Common.cpp",
+          "symbol": "_ZN2nw3lyt8internal11TexCoordAry4FreeEv",
+          "size": 44
+        }
+      ],
+      "1570936": [
+        {
+          "source": "src/nw4c/lyt_Common.cpp",
+          "symbol": "_ZN2nw3lyt8internal11TexCoordAryC1Ev",
+          "size": 20
+        },
+        {
+          "source": "src/nw4c/lyt_Common.cpp",
+          "symbol": "_ZN2nw3lyt8internal11TexCoordAryC2Ev",
+          "size": 0
+        }
+      ],
+      "1884380": [
+        {
+          "source": "src/nw4c/lyt_FontContainer.cpp",
+          "symbol": "_ZN2nw3lyt13FontContainer14FindFontByNameEPKc",
+          "size": 80
+        }
+      ],
+      "1644904": [
+        {
+          "source": "src/nw4c/lyt_Layout__AllocMemory.cpp",
+          "symbol": "_ZN2nw3lyt6Layout11AllocMemoryEjh",
+          "size": 32
+        }
+      ],
+      "1895564": [
+        {
+          "source": "src/nw4c/lyt_Layout__Animate.cpp",
+          "symbol": "_ZN2nw3lyt6Layout7AnimateEj",
+          "size": 28
+        }
+      ],
+      "1894468": [
+        {
+          "source": "src/nw4c/lyt_Layout__BindAnimation.cpp",
+          "symbol": "_ZN2nw3lyt6Layout13BindAnimationEPNS0_13AnimTransformE",
+          "size": 36
+        }
+      ],
+      "1894440": [
+        {
+          "source": "src/nw4c/lyt_Layout__CalculateMtx.cpp",
+          "symbol": "_ZN2nw3lyt6Layout12CalculateMtxERKNS0_8DrawInfoE",
+          "size": 28
+        }
+      ],
+      "1599752": [
+        {
+          "source": "src/nw4c/lyt_Layout__Layout.cpp",
+          "symbol": "_ZN2nw3lyt6LayoutC1Ev",
+          "size": 60
+        },
+        {
+          "source": "src/nw4c/lyt_Layout__Layout.cpp",
+          "symbol": "_ZN2nw3lyt6LayoutC2Ev",
+          "size": 0
+        }
+      ],
+      "1894536": [
+        {
+          "source": "src/nw4c/lyt_Layout__SetAnimationEnable.cpp",
+          "symbol": "_ZN2nw3lyt6Layout18SetAnimationEnableEPNS0_13AnimTransformEb",
+          "size": 32
+        }
+      ],
+      "1894568": [
+        {
+          "source": "src/nw4c/lyt_Layout__UnbindAllAnimation.cpp",
+          "symbol": "_ZN2nw3lyt6Layout18UnbindAllAnimationEv",
+          "size": 16
+        }
+      ],
+      "1894504": [
+        {
+          "source": "src/nw4c/lyt_Layout__UnbindAnimation.cpp",
+          "symbol": "_ZN2nw3lyt6Layout15UnbindAnimationEPNS0_13AnimTransformE",
+          "size": 32
+        }
+      ],
+      "1890980": [
+        {
+          "source": "src/nw4c/lyt_Pane__Animate.cpp",
+          "symbol": "_ZN2nw3lyt4Pane7AnimateEj",
+          "size": 108
+        }
+      ],
+      "1890284": [
+        {
+          "source": "src/nw4c/lyt_Pane__BindAnimation.cpp",
+          "symbol": "_ZN2nw3lyt4Pane13BindAnimationEPNS0_13AnimTransformEbb",
+          "size": 36
+        }
+      ],
+      "1890580": [
+        {
+          "source": "src/nw4c/lyt_Pane__FindMaterialByName.cpp",
+          "symbol": "_ZN2nw3lyt4Pane18FindMaterialByNameEPKcb",
+          "size": 196
+        }
+      ],
+      "1890320": [
+        {
+          "source": "src/nw4c/lyt_Pane__FindPaneByName.cpp",
+          "symbol": "_ZN2nw3lyt4Pane14FindPaneByNameEPKcb",
+          "size": 116
+        }
+      ],
+      "1572200": [
+        {
+          "source": "src/nw4c/lyt_Pane__GetMaterial.cpp",
+          "symbol": "_ZNK2nw3lyt4Pane11GetMaterialEv",
+          "size": 60
+        }
+      ],
+      "1189488": [
+        {
+          "source": "src/nw4c/lyt_Pane__GetVtxColor.cpp",
+          "symbol": "_ZNK2nw3lyt4Pane11GetVtxColorEj",
+          "size": 16
+        }
+      ],
+      "1890436": [
+        {
+          "source": "src/nw4c/lyt_Pane__SetColorElement.cpp",
+          "symbol": "_ZN2nw3lyt4Pane15SetColorElementEjh",
+          "size": 28
+        }
+      ],
+      "1890464": [
+        {
+          "source": "src/nw4c/lyt_Pane__UnbindAnimation.cpp",
+          "symbol": "_ZN2nw3lyt4Pane15UnbindAnimationEPNS0_13AnimTransformEb",
+          "size": 100
+        }
+      ],
+      "1884904": [
+        {
+          "source": "src/nw4c/lyt_ResourceAccessor.cpp",
+          "symbol": "_ZN2nw3lyt16ResourceAccessor8LoadFontEPKc",
+          "size": 176
+        }
+      ],
+      "1897476": [
+        {
+          "source": "src/nw4c/lyt_TextBox.cpp",
+          "symbol": "_ZN2nw3lyt7TextBox11SetVtxColorEjNS_2ut6Color8E",
+          "size": 20
+        }
+      ],
+      "1898392": [
+        {
+          "source": "src/nw4c/lyt_TextBox.cpp",
+          "symbol": "_ZN2nw3lyt7TextBox18SetVtxColorElementEjh",
+          "size": 24
+        }
+      ],
+      "2036652": [
+        {
+          "source": "src/nw4c/lyt_TextBox.cpp",
+          "symbol": "_ZNK2nw3lyt7TextBox11GetMaterialEj",
+          "size": 16
+        }
+      ],
+      "2036852": [
+        {
+          "source": "src/nw4c/lyt_TextBox.cpp",
+          "symbol": "_ZNK2nw3lyt7TextBox14GetMaterialNumEv",
+          "size": 16
+        }
+      ],
+      "2036868": [
+        {
+          "source": "src/nw4c/lyt_TextBox.cpp",
+          "symbol": "_ZNK2nw3lyt7TextBox16GetTextGlobalMtxEPN2nn4math5MTX34E",
+          "size": 184
+        }
+      ],
+      "1895848": [
+        {
+          "source": "src/nw4c/lyt_Window.cpp",
+          "symbol": "_ZN2nw3lyt6Window11SetVtxColorEjNS_2ut6Color8E",
+          "size": 16
+        }
+      ],
+      "1896084": [
+        {
+          "source": "src/nw4c/lyt_Window.cpp",
+          "symbol": "_ZN2nw3lyt6Window18SetVtxColorElementEjh",
+          "size": 24
+        }
+      ],
+      "1352768": [
+        {
+          "source": "src/nw4c/snd_BankFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal8BankFile10FileHeader12GetInfoBlockEv",
+          "size": 108
+        }
+      ],
+      "2039316": [
+        {
+          "source": "src/nw4c/snd_BiquadFilterPresets.cpp",
+          "symbol": "_ZNK2nw3snd8internal15BiquadFilterHpf15GetCoefficientsEifPN2nn3snd3CTR24BiquadFilterCoefficientsE",
+          "size": 84
+        }
+      ],
+      "2039400": [
+        {
+          "source": "src/nw4c/snd_BiquadFilterPresets.cpp",
+          "symbol": "_ZNK2nw3snd8internal15BiquadFilterLpf15GetCoefficientsEifPN2nn3snd3CTR24BiquadFilterCoefficientsE",
+          "size": 84
+        }
+      ],
+      "2040980": [
+        {
+          "source": "src/nw4c/snd_BiquadFilterPresets.cpp",
+          "symbol": "_ZNK2nw3snd8internal18BiquadFilterBpf51215GetCoefficientsEifPN2nn3snd3CTR24BiquadFilterCoefficientsE",
+          "size": 100
+        }
+      ],
+      "1912096": [
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZN2nw3snd8internal10CurveAdshr10InitializeEf",
+          "size": 72
+        }
+      ],
+      "1912168": [
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZN2nw3snd8internal10CurveAdshr5ResetEf",
+          "size": 28
+        }
+      ],
+      "1375492": [
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZN2nw3snd8internal10CurveAdshr6UpdateEi",
+          "size": 272
+        }
+      ],
+      "1483248": [
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZN2nw3snd8internal10CurveAdshr9SetAttackEi",
+          "size": 16
+        }
+      ],
+      "1912196": [
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZN2nw3snd8internal10CurveAdshrC1Ev",
+          "size": 28
+        },
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZN2nw3snd8internal10CurveAdshrC2Ev",
+          "size": 0
+        }
+      ],
+      "1382884": [
+        {
+          "source": "src/nw4c/snd_CurveAdshr.cpp",
+          "symbol": "_ZNK2nw3snd8internal10CurveAdshr8GetValueEv",
+          "size": 56
+        }
+      ],
+      "1341012": [
+        {
+          "source": "src/nw4c/snd_FrameHeap.cpp",
+          "symbol": "_ZN2nw3snd8internal9FrameHeapC1Ev",
+          "size": 24
+        },
+        {
+          "source": "src/nw4c/snd_FrameHeap.cpp",
+          "symbol": "_ZN2nw3snd8internal9FrameHeapC2Ev",
+          "size": 0
+        }
+      ],
+      "1283016": [
+        {
+          "source": "src/nw4c/snd_GroupFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal9GroupFile10FileHeader12GetFileBlockEv",
+          "size": 100
+        }
+      ],
+      "1283120": [
+        {
+          "source": "src/nw4c/snd_GroupFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal9GroupFile10FileHeader12GetInfoBlockEv",
+          "size": 108
+        }
+      ],
+      "1283228": [
+        {
+          "source": "src/nw4c/snd_GroupFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal9GroupFile10FileHeader14GetInfoExBlockEv",
+          "size": 100
+        }
+      ],
+      "1251452": [
+        {
+          "source": "src/nw4c/snd_GroupFileReader.cpp",
+          "symbol": "_ZNK2nw3snd8internal15GroupFileReader19GetGroupItemExCountEv",
+          "size": 16
+        }
+      ],
+      "1251468": [
+        {
+          "source": "src/nw4c/snd_GroupFileReader.cpp",
+          "symbol": "_ZNK2nw3snd8internal15GroupFileReader19ReadGroupItemInfoExEPNS1_9GroupFile15GroupItemInfoExEj",
+          "size": 64
+        }
+      ],
+      "1251532": [
+        {
+          "source": "src/nw4c/snd_GroupFileReader.cpp",
+          "symbol": "_ZNK2nw3snd8internal15GroupFileReader25ReadGroupItemLocationInfoEPNS1_21GroupItemLocationInfoEj",
+          "size": 84
+        }
+      ],
+      "1564636": [
+        {
+          "source": "src/nw4c/snd_InstancePool.cpp",
+          "symbol": "_ZN2nw3snd8internal8PoolImpl9AllocImplEv",
+          "size": 24
+        }
+      ],
+      "1916832": [
+        {
+          "source": "src/nw4c/snd_MemorySoundArchive.cpp",
+          "symbol": "_ZN2nw3snd18MemorySoundArchive16MemoryFileStream4SeekEij",
+          "size": 48
+        }
+      ],
+      "1916880": [
+        {
+          "source": "src/nw4c/snd_MemorySoundArchive.cpp",
+          "symbol": "_ZN2nw3snd18MemorySoundArchive16MemoryFileStream5CloseEv",
+          "size": 20
+        }
+      ],
+      "1916900": [
+        {
+          "source": "src/nw4c/snd_MemorySoundArchive.cpp",
+          "symbol": "_ZN2nw3snd18MemorySoundArchive16MemoryFileStreamC1EPKvj",
+          "size": 36
+        },
+        {
+          "source": "src/nw4c/snd_MemorySoundArchive.cpp",
+          "symbol": "_ZN2nw3snd18MemorySoundArchive16MemoryFileStreamC2EPKvj",
+          "size": 0
+        }
+      ],
+      "1918180": [
+        {
+          "source": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_Finalize.cpp",
+          "symbol": "_ZN2nw3snd8internal21PlayerHeapDataManager8FinalizeEv",
+          "size": 44
+        }
+      ],
+      "1918128": [
+        {
+          "source": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_InvalidateData.cpp",
+          "symbol": "_ZN2nw3snd8internal21PlayerHeapDataManager14InvalidateDataEPKvS4_",
+          "size": 52
+        }
+      ],
+      "1918224": [
+        {
+          "source": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_PlayerHeapDataManager.cpp",
+          "symbol": "_ZN2nw3snd8internal21PlayerHeapDataManagerC1Ev",
+          "size": 60
+        },
+        {
+          "source": "src/nw4c/snd_PlayerHeapDataManager__PlayerHeapDataManager_PlayerHeapDataManager.cpp",
+          "symbol": "_ZN2nw3snd8internal21PlayerHeapDataManagerC2Ev",
+          "size": 0
+        }
+      ],
+      "1392104": [
+        {
+          "source": "src/nw4c/snd_SequenceSoundFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal17SequenceSoundFile10FileHeader12GetDataBlockEv",
+          "size": 108
+        }
+      ],
+      "1392212": [
+        {
+          "source": "src/nw4c/snd_SequenceSoundFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal17SequenceSoundFile10FileHeader13GetLabelBlockEv",
+          "size": 100
+        }
+      ],
+      "1352476": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveFile__SoundArchiveFile_FileHeader_GetFileBlockOffset.cpp",
+          "symbol": "_ZNK2nw3snd8internal16SoundArchiveFile10FileHeader18GetFileBlockOffsetEv",
+          "size": 60
+        }
+      ],
+      "1327572": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveFile__SoundArchiveFile_FileInfo_GetFileLocationType.cpp",
+          "symbol": "_ZNK2nw3snd8internal16SoundArchiveFile8FileInfo19GetFileLocationTypeEv",
+          "size": 36
+        }
+      ],
+      "1313296": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveFile__SoundArchiveFile_InfoBlockBody_GetItemFileId.cpp",
+          "symbol": "_ZNK2nw3snd8internal16SoundArchiveFile13InfoBlockBody13GetItemFileIdEj",
+          "size": 396
+        }
+      ],
+      "1586156": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveFile__SoundArchiveFile_SoundInfo_GetSoundType.cpp",
+          "symbol": "_ZNK2nw3snd8internal16SoundArchiveFile9SoundInfo12GetSoundTypeEv",
+          "size": 48
+        }
+      ],
+      "1339348": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveLoader.cpp",
+          "symbol": "_ZN2nw3snd8internal18SoundArchiveLoaderC2Ev",
+          "size": 32
+        }
+      ],
+      "2041372": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveLoader.cpp",
+          "symbol": "_ZNK2nw3snd8internal18SoundArchiveLoader30GetFileAddressFromSoundArchiveEj",
+          "size": 28
+        }
+      ],
+      "2049972": [
+        {
+          "source": "src/nw4c/snd_WaveFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal8WaveFile10FileHeader12GetDataBlockEv",
+          "size": 100
+        }
+      ],
+      "2050076": [
+        {
+          "source": "src/nw4c/snd_WaveFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal8WaveFile10FileHeader12GetInfoBlockEv",
+          "size": 108
+        }
+      ],
+      "2050196": [
+        {
+          "source": "src/nw4c/snd_WaveFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal8WaveFile11ChannelInfo17GetSamplesAddressEPKv",
+          "size": 12
+        }
+      ],
+      "2050208": [
+        {
+          "source": "src/nw4c/snd_WaveFile.cpp",
+          "symbol": "_ZNK2nw3snd8internal8WaveFile13InfoBlockBody14GetChannelInfoEi",
+          "size": 32
+        }
+      ],
+      "2040504": [
+        {
+          "source": "src/nw4c/snd_WaveSoundFile__WaveSoundFile_WaveSoundData_GetNoteInfoReferenceTable.cpp",
+          "symbol": "_ZNK2nw3snd8internal13WaveSoundFile13WaveSoundData25GetNoteInfoReferenceTableEv",
+          "size": 12
+        }
+      ],
+      "1336952": [
+        {
+          "source": "src/nw4c/ut_BinaryFileFormat.cpp",
+          "symbol": "_ZN2nw2ut24GetNextBinaryBlockHeaderEPNS0_16BinaryFileHeaderEPNS0_17BinaryBlockHeaderE",
+          "size": 224
+        }
+      ],
+      "1356868": [
+        {
+          "source": "src/nw4c/ut_HeapBase.cpp",
+          "symbol": "_ZN2nw2ut8HeapBase10InitializeEjPvS2_t",
+          "size": 100
+        }
+      ],
+      "1581420": [
+        {
+          "source": "src/nw4c/ut_HeapBase.cpp",
+          "symbol": "_ZN2nw2ut8HeapBase14FillFreeMemoryEPvj",
+          "size": 40
+        }
+      ],
+      "1583896": [
+        {
+          "source": "src/nw4c/ut_HeapBase.cpp",
+          "symbol": "_ZN2nw2ut8HeapBase15FillAllocMemoryEPvj",
+          "size": 64
+        }
+      ],
+      "1337320": [
+        {
+          "source": "src/nw4c/ut_HeapBase.cpp",
+          "symbol": "_ZN2nw2ut8HeapBase8FinalizeEv",
+          "size": 56
+        }
+      ],
+      "1595236": [
+        {
+          "source": "src/nw4c/snd_WaveSoundFileReader.cpp",
+          "symbol": "_ZNK2nw3snd8internal19WaveSoundFileReader12ReadNoteInfoEPNS1_17WaveSoundNoteInfoEjj",
+          "size": 188
+        }
+      ],
+      "1549576": [
+        {
+          "source": "src/wave11/func_0017a508.cpp",
+          "symbol": "_ZN14W11BaseCommandC1Ev",
+          "size": 12
+        },
+        {
+          "source": "src/wave11/func_0017a508.cpp",
+          "symbol": "_ZN14W11BaseCommandC2Ev",
+          "size": 0
+        }
+      ],
+      "1817576": [
+        {
+          "source": "src/wave11/func_001bbbe8.cpp",
+          "symbol": "_ZN18W11PositionCommandC1Ev",
+          "size": 32
+        },
+        {
+          "source": "src/wave11/func_001bbbe8.cpp",
+          "symbol": "_ZN18W11PositionCommandC2Ev",
+          "size": 0
+        }
+      ],
+      "1142208": [
+        {
+          "source": "src/nw4c/font_RectDrawer.cpp",
+          "symbol": "_ZN2nw4font10RectDrawer10InitializeEPvS2_PKvj",
+          "size": 32
+        }
+      ],
+      "1666212": [
+        {
+          "source": "src/nw4c/font_RectDrawer.cpp",
+          "symbol": "_ZN2nw4font10RectDrawer11SetParallaxEfff",
+          "size": 20
+        }
+      ],
+      "1944808": [
+        {
+          "source": "src/nw4c/font_RectDrawer.cpp",
+          "symbol": "_ZN2nw4font10RectDrawer8FinalizeEv",
+          "size": 16
+        }
+      ],
+      "1139452": [
+        {
+          "source": "src/nw4c/gfx_FragmentLight.cpp",
+          "symbol": "_ZN2nw3gfx13FragmentLight23DestroyResFragmentLightEPNS_2os10IAllocatorEPNS0_3res20ResFragmentLightDataE",
+          "size": 176
+        }
+      ],
+      "1581268": [
+        {
+          "source": "src/nw4c/gfx_GraphicsDevice.cpp",
+          "symbol": "_ZN2nw3gfx14GraphicsDevice19ActivateLookupTableENS0_3res19ResImageLookupTableENS1_9LutTargetE",
+          "size": 140
+        }
+      ],
+      "1862200": [
+        {
+          "source": "src/nw4c/gfx_GraphicsDevice.cpp",
+          "symbol": "_ZN2nw3gfx14GraphicsDevice21InvalidateLookupTableENS0_3res19ResImageLookupTableE",
+          "size": 44
+        }
+      ],
+      "1197288": [
+        {
+          "source": "src/nw4c/gfx_GraphicsDevice.cpp",
+          "symbol": "_ZN2nw3gfx14GraphicsDevice25InvalidateAllLookupTablesEv",
+          "size": 32
+        }
+      ],
+      "1871956": [
+        {
+          "source": "src/nw4c/gfx_Light.cpp",
+          "symbol": "_ZN2nw3gfx5Light20DestroyOriginalValueEv",
+          "size": 40
+        }
+      ],
+      "1246512": [
+        {
+          "source": "src/nw4c/gfx_ParticleShape.cpp",
+          "symbol": "_ZN2nw3gfx13ParticleShape11FlushBufferEv",
+          "size": 144
+        }
+      ],
+      "1280284": [
+        {
+          "source": "src/nw4c/gfx_ResFog.cpp",
+          "symbol": "_ZN2nw3gfx3res6ResFog7CleanupEv",
+          "size": 44
+        }
+      ],
+      "1323460": [
+        {
+          "source": "src/nw4c/gfx_ResFragmentShader.cpp",
+          "symbol": "_ZN2nw3gfx3res17ResFragmentShader7CleanupEv",
+          "size": 44
+        }
+      ],
+      "1337380": [
+        {
+          "source": "src/nw4c/gfx_ResFragmentShader.cpp",
+          "symbol": "_ZN2nw3gfx3res24ResFragmentLightingTable7CleanupEv",
+          "size": 372
+        }
+      ],
+      "1247688": [
+        {
+          "source": "src/nw4c/gfx_ResGraphicsFile.cpp",
+          "symbol": "_ZN2nw3gfx3res15ResGraphicsFile7CleanupEv",
+          "size": 1116
+        }
+      ],
+      "1280328": [
+        {
+          "source": "src/nw4c/gfx_ResLight.cpp",
+          "symbol": "_ZN2nw3gfx3res8ResLight7CleanupEv",
+          "size": 136
+        }
+      ],
+      "1311120": [
+        {
+          "source": "src/nw4c/gfx_ResMesh.cpp",
+          "symbol": "_ZN2nw3gfx3res7ResMesh7CleanupEv",
+          "size": 108
+        }
+      ],
+      "1880564": [
+        {
+          "source": "src/nw4c/gfx_SceneNode.cpp",
+          "symbol": "_ZN2nw3gfx9SceneNode10InitializeEPNS_2os10IAllocatorE",
+          "size": 88
+        }
+      ],
+      "1140596": [
+        {
+          "source": "src/nw4c/gfx_ShaderProgram.cpp",
+          "symbol": "_ZN2nw3gfx13ShaderProgramC1EPNS_2os10IAllocatorE",
+          "size": 116
+        },
+        {
+          "source": "src/nw4c/gfx_ShaderProgram.cpp",
+          "symbol": "_ZN2nw3gfx13ShaderProgramC2EPNS_2os10IAllocatorE",
+          "size": 0
+        }
+      ],
+      "1861036": [
+        {
+          "source": "src/nw4c/gfx_TransformNode.cpp",
+          "symbol": "_ZN2nw3gfx13TransformNode10InitializeEPNS_2os10IAllocatorE",
+          "size": 56
+        }
+      ],
+      "1572108": [
+        {
+          "source": "src/nw4c/lyt_Material__28bb0e7ddc14.cpp",
+          "symbol": "_ZN2nw3lyt8Material12SetTexMapNumEh",
+          "size": 92
+        }
+      ],
+      "1899860": [
+        {
+          "source": "src/nw4c/lyt_Material__af8d58ddba39.cpp",
+          "symbol": "_ZN2nw3lyt8Material15SetColorElementEjh",
+          "size": 64
+        }
+      ],
+      "1201248": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveLoader__2d4f33d2d29a.cpp",
+          "symbol": "_ZN2nw3snd8internal18SoundArchiveLoader17LoadSequenceSoundEjPNS0_22SoundMemoryAllocatableEjj",
+          "size": 228
+        }
+      ],
+      "1249732": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveLoader__b94b2919de9e.cpp",
+          "symbol": "_ZN2nw3snd8internal18SoundArchiveLoader19LoadWaveArchiveImplEjjPNS0_22SoundMemoryAllocatableEjj",
+          "size": 192
+        }
+      ],
+      "1917596": [
+        {
+          "source": "src/nw4c/snd_SoundArchiveLoader__d01f03425073.cpp",
+          "symbol": "_ZN2nw3snd8internal18SoundArchiveLoader37detail_LoadWaveArchiveByWaveSoundFileEPKviPNS0_22SoundMemoryAllocatableE",
+          "size": 136
+        }
+      ],
+      "1340880": [
+        {
+          "source": "src/retries/func_001475d0.cpp",
+          "symbol": "_ZN11HeapStorage10initializeEPvj",
+          "size": 132
+        }
+      ],
+      "1326516": [
+        {
+          "source": "src/wave13/func_00143db4.cpp",
+          "symbol": "_ZN15LockedListOwnerC1Ev",
+          "size": 60
+        },
+        {
+          "source": "src/wave13/func_00143db4.cpp",
+          "symbol": "_ZN15LockedListOwnerC2Ev",
+          "size": 0
+        }
+      ],
+      "1106300": [
+        {
+          "source": "src/wave14/func_0010e17c.cpp",
+          "symbol": "_ZN17LayoutDrawStorageC1Ev",
+          "size": 48
+        },
+        {
+          "source": "src/wave14/func_0010e17c.cpp",
+          "symbol": "_ZN17LayoutDrawStorageC2Ev",
+          "size": 0
+        }
+      ],
+      "1144392": [
+        {
+          "source": "src/wave14/func_00117648.cpp",
+          "symbol": "_ZN15LayoutSubobjectC1Ev",
+          "size": 60
+        },
+        {
+          "source": "src/wave14/func_00117648.cpp",
+          "symbol": "_ZN15LayoutSubobjectC2Ev",
+          "size": 0
+        }
+      ],
+      "1175236": [
+        {
+          "source": "src/wave14/func_0011eec4.cpp",
+          "symbol": "_ZN15LayoutDrawStateC1Ev",
+          "size": 68
+        },
+        {
+          "source": "src/wave14/func_0011eec4.cpp",
+          "symbol": "_ZN15LayoutDrawStateC2Ev",
+          "size": 0
+        }
+      ],
+      "2037760": [
+        {
+          "source": "src/wave14/func_001f1800.cpp",
+          "symbol": "_ZN15EventDispatcher8dispatchEP11RoutedEvent",
+          "size": 100
+        }
+      ],
+      "2051544": [
+        {
+          "source": "src/wave14/func_001f4dd8.cpp",
+          "symbol": "_ZN10EventRoute8dispatchEP11RoutedEvent",
+          "size": 100
+        }
+      ],
+      "1913504": [
+        {
+          "source": "src/retries/func_001d32a0.cpp",
+          "symbol": "_ZN14SceneAggregateD1Ev",
+          "size": 56
+        },
+        {
+          "source": "src/retries/func_001d32a0.cpp",
+          "symbol": "_ZN14SceneAggregateD2Ev",
+          "size": 0
+        }
+      ],
+      "1588912": [
+        {
+          "source": "src/retries/func_00183eb0.cpp",
+          "symbol": "_ZN13ArchiveAccess18read_resource_infoEjP19ArchiveResourceInfo",
+          "size": 88
+        }
+      ],
+      "1251364": [
+        {
+          "source": "src/retries/func_00131824.cpp",
+          "symbol": "_ZNK19SoundArchiveAdapter9readRangeEjP14SoundRangeInfo",
+          "size": 88
+        }
+      ],
+      "1359136": [
+        {
+          "source": "src/retries/func_0014bd20.cpp",
+          "symbol": "_ZN16SoundVoiceObjectC1Ev",
+          "size": 80
+        },
+        {
+          "source": "src/retries/func_0014bd20.cpp",
+          "symbol": "_ZN16SoundVoiceObjectC2Ev",
+          "size": 0
+        }
+      ],
+      "1596140": [
+        {
+          "source": "src/retries/func_00185aec.cpp",
+          "symbol": "_ZNK21SoundArchiveAccessors14readBankFileIdEjPj",
+          "size": 88
+        }
+      ],
+      "2029592": [
+        {
+          "source": "src/retries/func_001ef818.cpp",
+          "symbol": "_ZN15LargeEventOwnerD1Ev",
+          "size": 104
+        },
+        {
+          "source": "src/retries/func_001ef818.cpp",
+          "symbol": "_ZN15LargeEventOwnerD2Ev",
+          "size": 0
+        }
+      ],
+      "1348348": [
+        {
+          "source": "src/retries/func_001492fc.cpp",
+          "symbol": "_ZN19SoundStreamInstanceC1EP13SoundItemPool",
+          "size": 108
+        },
+        {
+          "source": "src/retries/func_001492fc.cpp",
+          "symbol": "_ZN19SoundStreamInstanceC2EP13SoundItemPool",
+          "size": 0
+        }
+      ],
+      "1306732": [
+        {
+          "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+          "symbol": "_ZN2nw2ut9FrameHeap11FreeByStateEj",
+          "size": 164
+        }
+      ],
+      "1899644": [
+        {
+          "source": "src/wave17/func_001cfc7c.cpp",
+          "symbol": "_ZN14W17TexturePane7destroyEv",
+          "size": 164
+        }
+      ],
+      "1101360": [
+        {
+          "source": "src/wave18/func_0010ce30.cpp",
+          "symbol": "_ZN14ScrollPositionC1Ev",
+          "size": 20
+        },
+        {
+          "source": "src/wave18/func_0010ce30.cpp",
+          "symbol": "_ZN14ScrollPositionC2Ev",
+          "size": 0
+        }
+      ],
+      "1323408": [
+        {
+          "source": "src/wave18/func_00143190.cpp",
+          "symbol": "_ZN2nw3gfx3res16ResTextureMapper7CleanupEv",
+          "size": 48
+        }
+      ],
+      "1461156": [
+        {
+          "source": "src/wave18/func_00164ba4.cpp",
+          "symbol": "_ZN18ResourceDescriptorC1EiiPKc",
+          "size": 36
+        },
+        {
+          "source": "src/wave18/func_00164ba4.cpp",
+          "symbol": "_ZN18ResourceDescriptorC2EiiPKc",
+          "size": 0
+        }
+      ],
+      "1470632": [
+        {
+          "source": "src/wave18/func_001670a8.cpp",
+          "symbol": "_ZN14ControlTriplet5clearEv",
+          "size": 60
+        }
+      ],
+      "1508232": [
+        {
+          "source": "src/wave18/func_00170388.cpp",
+          "symbol": "_ZN14ControlTripletC1Ev",
+          "size": 60
+        },
+        {
+          "source": "src/wave18/func_00170388.cpp",
+          "symbol": "_ZN14ControlTripletC2Ev",
+          "size": 0
+        }
+      ],
+      "1510816": [
+        {
+          "source": "src/wave18/func_00170da0.cpp",
+          "symbol": "_ZN10MotionPairC1Ev",
+          "size": 20
+        },
+        {
+          "source": "src/wave18/func_00170da0.cpp",
+          "symbol": "_ZN10MotionPairC2Ev",
+          "size": 0
+        }
+      ],
+      "1855952": [
+        {
+          "source": "src/wave18/func_001c51d0.cpp",
+          "symbol": "_ZN12SlotBitOwnerD1Ev",
+          "size": 48
+        },
+        {
+          "source": "src/wave18/func_001c51d0.cpp",
+          "symbol": "_ZN12SlotBitOwnerD2Ev",
+          "size": 0
+        }
+      ],
+      "1945860": [
+        {
+          "source": "src/wave18/func_001db104.cpp",
+          "symbol": "_ZN15TextDecoderBaseC1Ev",
+          "size": 36
+        },
+        {
+          "source": "src/wave18/func_001db104.cpp",
+          "symbol": "_ZN15TextDecoderBaseC2Ev",
+          "size": 0
+        }
+      ],
+      "1589468": [
+        {
+          "source": "src/wave19/func_001840dc.cpp",
+          "symbol": "_ZN2nw3gfx3res10ResTexture7CleanupEv",
+          "size": 104
+        }
+      ],
+      "1364708": [
+        {
+          "source": "src/wave18/func_0014d2e4.cpp",
+          "symbol": "_ZN18RuntimeMemberOwnerC1Ev",
+          "size": 32
+        },
+        {
+          "source": "src/wave18/func_0014d2e4.cpp",
+          "symbol": "_ZN18RuntimeMemberOwnerC2Ev",
+          "size": 0
+        }
+      ],
+      "1367692": [
+        {
+          "source": "src/wave2/func_0014de8c.cpp",
+          "symbol": "_ZN13RuntimeMemberC1Ev",
+          "size": 4
+        },
+        {
+          "source": "src/wave2/func_0014de8c.cpp",
+          "symbol": "_ZN13RuntimeMemberC2Ev",
+          "size": 0
+        }
+      ],
+      "1945520": [
+        {
+          "source": "src/checkpoint10/copy-view.cpp",
+          "symbol": "_ZN2nw4font14CharStrmReader20ReadNextCharSJISCopyEv",
+          "size": 56
+        }
+      ],
+      "1945576": [
+        {
+          "source": "src/checkpoint10/copy-view.cpp",
+          "symbol": "_ZN2nw4font14CharStrmReader20ReadNextCharUTF8CopyEv",
+          "size": 108
+        }
+      ],
+      "1947084": [
+        {
+          "source": "src/checkpoint10/texture_canonical.cpp",
+          "symbol": "_ZN2nw4font8internal13TextureObject3SetEjPKNS0_4FontEPKvttt",
+          "size": 68
+        }
+      ],
+      "1589576": [
+        {
+          "source": "src/checkpoint10/func_00184148.cpp",
+          "symbol": "_ZN2nw4anim3res7ResAnim7CleanupEv",
+          "size": 188
+        }
+      ],
+      "1888032": [
+        {
+          "source": "src/checkpoint10/archive_access.cpp",
+          "symbol": "_ZN2nw3lyt19ArcResourceAccessor11GetResourceEjPKcPj",
+          "size": 88
+        }
+      ],
+      "1934860": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001d860c.cpp",
+          "symbol": "_ZN26SoundPreparationParametersC1EP21SoundArchiveAccessorsP17SoundFileProviderPK20SoundPreparationInfoPK18SoundFileReferencePK13SoundWaveInfo",
+          "size": 44
+        },
+        {
+          "source": "src/checkpoint10/collect-r2/func_001d860c.cpp",
+          "symbol": "_ZN26SoundPreparationParametersC2EP21SoundArchiveAccessorsP17SoundFileProviderPK20SoundPreparationInfoPK18SoundFileReferencePK13SoundWaveInfo",
+          "size": 0
+        }
+      ],
+      "1858964": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c5d94.cpp",
+          "symbol": "_ZN2nw2io10FileStream12FilePosition4SkipEi",
+          "size": 68
+        }
+      ],
+      "1858260": [
+        {
+          "source": "src/checkpoint10/collect-r2/nw-reader.cpp",
+          "symbol": "_ZN2nw4font14CharStrmReader16ReadNextCharUTF8Ev",
+          "size": 108
+        }
+      ],
+      "2010184": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001eac48.cpp",
+          "symbol": "_ZN10LayerOwner10initializeEv",
+          "size": 228
+        }
+      ],
+      "2037340": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001f165c_native_offset_chain.cpp",
+          "symbol": "_ZNK2nw3lyt8Material15GetBlendModePtrEv",
+          "size": 64
+        }
+      ],
+      "1249184": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_00130fa0_public_range.cpp",
+          "symbol": "_ZN2nw3snd8internal15GroupFileReaderC1EPKv",
+          "size": 140
+        },
+        {
+          "source": "src/checkpoint10/collect-r2/func_00130fa0_public_range.cpp",
+          "symbol": "_ZN2nw3snd8internal15GroupFileReaderC2EPKv",
+          "size": 0
+        }
+      ],
+      "1858204": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c5a9c_native.cpp",
+          "symbol": "_ZN2nw4font14CharStrmReader16ReadNextCharSJISEv",
+          "size": 56
+        }
+      ],
+      "1862248": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c6a68.cpp",
+          "symbol": "_ZN18TextureBufferOwnerD1Ev",
+          "size": 100
+        },
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c6a68.cpp",
+          "symbol": "_ZN18TextureBufferOwnerD2Ev",
+          "size": 0
+        }
+      ],
+      "1866420": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+          "symbol": "_ZN2nw3gfx3res18ResVertexAttribute7CleanupEv",
+          "size": 116
+        }
+      ],
+      "1868356": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c8244.cpp",
+          "symbol": "_ZN2nw3gfx3res25SetupTextureMapperCommandENS1_26ResPixelBasedTextureMapperENS1_14ResCubeTextureE",
+          "size": 476
+        }
+      ],
+      "1880332": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001cb10c_destructor.cpp",
+          "symbol": "_ZN22R41270AnimGroupStorageD1Ev",
+          "size": 228
+        },
+        {
+          "source": "src/checkpoint10/collect-r2/func_001cb10c_destructor.cpp",
+          "symbol": "_ZN22R41270AnimGroupStorageD2Ev",
+          "size": 0
+        }
+      ],
+      "1909352": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001d2268_history_ref.cpp",
+          "symbol": "_ZN2nw3snd7FxDelay12UpdateBufferEiPN2nn3snd3CTR10AuxBusDataEiNS0_12SampleFormatEfNS0_10OutputModeE",
+          "size": 256
+        }
+      ],
+      "1909608": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001d2368.cpp",
+          "symbol": "_ZN2nw3snd7FxDelay8FinalizeEv",
+          "size": 76
+        }
+      ],
+      "1910588": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001d273c.cpp",
+          "symbol": "_ZN2nw3snd8FxReverb8FinalizeEv",
+          "size": 84
+        }
+      ],
+      "1854244": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001c4b24.cpp",
+          "symbol": "_ZN16GlobalPoolObject7releaseEv",
+          "size": 76
+        }
+      ],
+      "1900376": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_001cff58.cpp",
+          "symbol": "_ZN2nw3lyt8internal17FindAnimationLinkEPNS_2ut8LinkListINS0_13AnimationLinkELl0EEEPNS0_13AnimTransformE",
+          "size": 56
+        }
+      ],
+      "1583844": [
+        {
+          "source": "src/checkpoint10/func_0013888c.cpp",
+          "symbol": "_ZN2nw3gfx3res14ResLookupTable7CleanupEv",
+          "size": 48
+        }
+      ],
+      "1280140": [
+        {
+          "source": "src/checkpoint10/func_0013888c.cpp",
+          "symbol": "_ZN2nw3gfx3res17ResLookupTableSet7CleanupEv",
+          "size": 140
+        }
+      ],
+      "1146536": [
+        {
+          "source": "src/checkpoint10/native/pane_uniform_commands.cpp",
+          "symbol": "_ZN2nw3lyt4Pane12DrawCommandsEPhP14LayoutDrawInfoP19LayoutRenderContext",
+          "size": 132
+        }
+      ],
+      "1945684": [
+        {
+          "source": "src/wave13/func_001db054.cpp",
+          "symbol": "_ZN2nw4font14CharStrmReader17ReadNextCharUTF16Ev",
+          "size": 20
+        }
+      ],
+      "1945704": [
+        {
+          "source": "src/wave13/func_001db068.cpp",
+          "symbol": "_ZN2nw4font14CharStrmReader18ReadNextCharCP1252Ev",
+          "size": 20
+        }
+      ],
+      "1867680": [
+        {
+          "source": "src/checkpoint11/func_001c7fa0.cpp",
+          "symbol": "_ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+          "size": 300
+        }
+      ],
+      "1796356": [
+        {
+          "source": "src/checkpoint11/func_001b6904.cpp",
+          "symbol": "_ZN14PairCollectionD1Ev",
+          "size": 88
+        },
+        {
+          "source": "src/checkpoint11/func_001b6904.cpp",
+          "symbol": "_ZN14PairCollectionD2Ev",
+          "size": 0
+        }
+      ],
+      "1797020": [
+        {
+          "source": "src/checkpoint11/func_001b6904.cpp",
+          "symbol": "_ZN16ScalarCollectionD1Ev",
+          "size": 88
+        },
+        {
+          "source": "src/checkpoint11/func_001b6904.cpp",
+          "symbol": "_ZN16ScalarCollectionD2Ev",
+          "size": 0
+        }
+      ],
+      "1461044": [
+        {
+          "source": "src/checkpoint11/func_00164b34.cpp",
+          "symbol": "_ZN13PaneIndexListC1Eiz",
+          "size": 72
+        },
+        {
+          "source": "src/checkpoint11/func_00164b34.cpp",
+          "symbol": "_ZN13PaneIndexListC2Eiz",
+          "size": 0
+        }
+      ],
+      "1575412": [
+        {
+          "source": "src/checkpoint11/func_001809f4.cpp",
+          "symbol": "_ZN2nw2ut8HeapBase15FindContainHeapEPNS0_8LinkListIS1_Ll4EEEPKv",
+          "size": 88
+        }
+      ],
+      "1909684": [
+        {
+          "source": "src/checkpoint11/fx_delay-r3.cpp",
+          "symbol": "_ZN2nw3snd7FxDelayC1Ev",
+          "size": 168
+        },
+        {
+          "source": "src/checkpoint11/fx_delay-r3.cpp",
+          "symbol": "_ZN2nw3snd7FxDelayC2Ev",
+          "size": 0
+        }
+      ],
+      "1861092": [
+        {
+          "source": "src/checkpoint13/transform_callbacks.cpp",
+          "symbol": "_ZN2nw3gfx13TransformNode15CreateCallbacksEPNS_2os10IAllocatorE",
+          "size": 332
+        }
+      ]
+    },
+    "C_to_native": [],
+    "native_alias_to_C_only": [],
+    "C_to_external_native_binding": [],
+    "held_references": [],
+    "changed_provider_references": [],
+    "candidate_defined_vtables": [],
+    "scoped_object_records": {
+      "src/checkpoint11/func_00117684.cpp": {
+        "source": "src/checkpoint11/func_00117684.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2591-func_00117684/func_00117684.o",
+        "source_sha256": "a70cc3783c2f6288e89f75292345a734eaf9bd166e01059eac514eaee090b5c5",
+        "object_sha256": "caaea4981eb3accfccfe1f80fb596622ad4ed952524b2ffb542101f726618a38",
+        "references": [
+          {
+            "symbol": "func_00193af4",
+            "address": 1653492,
+            "kind": 28,
+            "section": "i.func_00117684",
+            "offset": 28
+          },
+          {
+            "symbol": "func_0018f0dc",
+            "address": 1634524,
+            "kind": 28,
+            "section": "i.func_00117684",
+            "offset": 52
+          },
+          {
+            "symbol": "func_00197c68",
+            "address": 1670248,
+            "kind": 28,
+            "section": "i.func_00117684",
+            "offset": 68
+          },
+          {
+            "symbol": "func_0019b344",
+            "address": 1684292,
+            "kind": 28,
+            "section": "i.func_00117684",
+            "offset": 80
+          },
+          {
+            "symbol": "i.func_00117684",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001c7fa0.cpp": {
+        "source": "src/checkpoint11/func_001c7fa0.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2592-func_001c7fa0/func_001c7fa0.o",
+        "source_sha256": "85e75ea7a6a340850c1df6fffa7568de73102bea7bd2c78117a589cded4a76ac",
+        "object_sha256": "1401cdd41bd76c8fb337f859e9342749363e6c6e30e9873d1a25d983c7f17453",
+        "references": [
+          {
+            "symbol": "strlen",
+            "address": 1649528,
+            "kind": 28,
+            "section": "i._ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+            "offset": 84
+          },
+          {
+            "symbol": "_ZNK2nw2ut14ResDicPatricia3GetEPKcj",
+            "address": 2031780,
+            "kind": 28,
+            "section": "i._ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+            "offset": 100
+          },
+          {
+            "symbol": "_ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+            "address": 1867680,
+            "kind": 28,
+            "section": "i._ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+            "offset": 196
+          },
+          {
+            "symbol": "__ARM_common_memcpy4_5",
+            "address": 1586264,
+            "kind": 28,
+            "section": "i._ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+            "offset": 208
+          },
+          {
+            "symbol": "i._ZN2nw3gfx3res25GetReferenceTextureTargetENS1_19ResReferenceTextureENS1_15ResGraphicsFileE",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i.__ARM_common_memcpy4_5",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001d033c.c": {
+        "source": "src/checkpoint11/func_001d033c.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2593-func_001d033c/func_001d033c.o",
+        "source_sha256": "a1b309ab730c685771fd88fe69b337e304635ea38e9613caa0bd1a750c3dd606",
+        "object_sha256": "74196d18744ebe85e58aa3ae80c7621f1ffefa24e4cae0d43ce0dbabea204e48",
+        "references": [
+          {
+            "symbol": "func_001d0348",
+            "address": 1901384,
+            "kind": 29,
+            "section": "i.func_001d033c",
+            "offset": 8
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001d222c.c": {
+        "source": "src/checkpoint11/func_001d222c.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2594-func_001d222c/func_001d222c.o",
+        "source_sha256": "50c67d05210f44948f868e963d1c8087b09d712a0aad66dc8254c549c4735bcb",
+        "object_sha256": "37528bc01412642f62e1af340ada84ef76409763d82d37f87974e0d430ed494d",
+        "references": [
+          {
+            "symbol": "func_001d2234",
+            "address": 1909300,
+            "kind": 29,
+            "section": "i.func_001d222c",
+            "offset": 4
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_0016c0f8.cpp": {
+        "source": "src/checkpoint11/func_0016c0f8.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2595-func_0016c0f8/func_0016c0f8.o",
+        "source_sha256": "010547f54d24736226d589d58c7f0e7efd1e58fa2e60c433391e17ad53c95746",
+        "object_sha256": "5190a0d5180fbfee337f3af9ad3dd2a44c8c343c20e21f5ac7137cd03120911d",
+        "references": [
+          {
+            "symbol": "func_0016c358",
+            "address": 1491800,
+            "kind": 28,
+            "section": "i.func_0016c0f8",
+            "offset": 40
+          },
+          {
+            "symbol": "func_001c3988",
+            "address": 1849736,
+            "kind": 28,
+            "section": "i.func_0016c0f8",
+            "offset": 72
+          },
+          {
+            "symbol": "i.func_0016c0f8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/slot_teardown.cpp": {
+        "source": "src/checkpoint11/slot_teardown.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2596-slot_teardown/slot_teardown.o",
+        "source_sha256": "8e40e3b137ddaef39bda7a3600c841d9d94157f81527ed03fbfc75c04a812434",
+        "object_sha256": "85059c63ee34193d4fc7e7ff4c7b78798ceca844cf5706965b73fb72462729ad",
+        "references": [
+          {
+            "symbol": "func_00183208",
+            "address": 1585672,
+            "kind": 29,
+            "section": "i.func_001aced0",
+            "offset": 40
+          },
+          {
+            "symbol": "func_001852f4",
+            "address": 1594100,
+            "kind": 28,
+            "section": "i.func_001aced0",
+            "offset": 60
+          },
+          {
+            "symbol": "i.func_001aced0",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001b6904.cpp": {
+        "source": "src/checkpoint11/func_001b6904.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2597-func_001b6904/func_001b6904.o",
+        "source_sha256": "a5f28e2ab7f26b6f12f6acc96c6808cd68e734e24bef582297a6cce0bfa8ccfa",
+        "object_sha256": "892266f0bc6bba1a86fbdff69e605da96132a4b232f55159b812c77f49a5b3a9",
+        "references": [
+          {
+            "symbol": "func_00183208",
+            "address": 1585672,
+            "kind": 29,
+            "section": "i._ZN14PairCollectionD1Ev",
+            "offset": 40
+          },
+          {
+            "symbol": "func_001852f4",
+            "address": 1594100,
+            "kind": 28,
+            "section": "i._ZN14PairCollectionD1Ev",
+            "offset": 60
+          },
+          {
+            "symbol": "func_00183208",
+            "address": 1585672,
+            "kind": 29,
+            "section": "i._ZN16ScalarCollectionD1Ev",
+            "offset": 40
+          },
+          {
+            "symbol": "func_001852f4",
+            "address": 1594100,
+            "kind": 28,
+            "section": "i._ZN16ScalarCollectionD1Ev",
+            "offset": 60
+          },
+          {
+            "symbol": "func_00183208",
+            "address": 1585672,
+            "kind": 29,
+            "section": "i.func_001b7cf8",
+            "offset": 40
+          },
+          {
+            "symbol": "func_001852f4",
+            "address": 1594100,
+            "kind": 28,
+            "section": "i.func_001b7cf8",
+            "offset": 60
+          },
+          {
+            "symbol": "i.func_001b7cf8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i._ZN14PairCollectionD1Ev",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i._ZN16ScalarCollectionD1Ev",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/pair_collection.cpp": {
+        "source": "src/checkpoint11/pair_collection.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2598-pair_collection/pair_collection.o",
+        "source_sha256": "e1737b1ee80cf82c8a7e95659f2a4d2bd3649672ddd5f4f995636e01df7f9be0",
+        "object_sha256": "e8c3af9e8bedd7a5fb8012d4b0c3795d1d1873ac531745c5e837edbcaafb5149",
+        "references": [
+          {
+            "symbol": "__cxa_guard_acquire",
+            "address": 1645696,
+            "kind": 28,
+            "section": "i.func_001b6400",
+            "offset": 24
+          },
+          {
+            "symbol": "_ZnwjPKv",
+            "address": 1703844,
+            "kind": 28,
+            "section": "i.func_001b6400",
+            "offset": 92
+          },
+          {
+            "symbol": "__aeabi_atexit",
+            "address": 1461948,
+            "kind": 28,
+            "section": "i.func_001b6400",
+            "offset": 132
+          },
+          {
+            "symbol": "__cxa_guard_release",
+            "address": 2186948,
+            "kind": 28,
+            "section": "i.func_001b6400",
+            "offset": 144
+          },
+          {
+            "symbol": ".data",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b6400",
+            "offset": 156
+          },
+          {
+            "symbol": ".bss",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b6400",
+            "offset": 160
+          },
+          {
+            "symbol": "data_002232d5",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b6400",
+            "offset": 164
+          },
+          {
+            "symbol": "__dso_handle",
+            "address": 1048576,
+            "kind": 2,
+            "section": "i.func_001b6400",
+            "offset": 168
+          },
+          {
+            "symbol": "_ZN14PairCollectionD1Ev",
+            "address": 1796356,
+            "kind": 2,
+            "section": "i.func_001b6400",
+            "offset": 172
+          },
+          {
+            "symbol": "i.func_001b6400",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/scalar_collection.cpp": {
+        "source": "src/checkpoint11/scalar_collection.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2599-scalar_collection/scalar_collection.o",
+        "source_sha256": "d7b945e0bd6008771c8636b3e07b6583330f624071feb5f12e870602b5f3605a",
+        "object_sha256": "de7c463c633904ff69b9a40bc2d83d0993be26b41d6d6d2debd395f8ff9d27cc",
+        "references": [
+          {
+            "symbol": "__cxa_guard_acquire",
+            "address": 1645696,
+            "kind": 28,
+            "section": "i.func_001b695c",
+            "offset": 24
+          },
+          {
+            "symbol": "_ZnwjPKv",
+            "address": 1703844,
+            "kind": 28,
+            "section": "i.func_001b695c",
+            "offset": 92
+          },
+          {
+            "symbol": "__aeabi_atexit",
+            "address": 1461948,
+            "kind": 28,
+            "section": "i.func_001b695c",
+            "offset": 132
+          },
+          {
+            "symbol": "__cxa_guard_release",
+            "address": 2186948,
+            "kind": 28,
+            "section": "i.func_001b695c",
+            "offset": 144
+          },
+          {
+            "symbol": ".data",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b695c",
+            "offset": 156
+          },
+          {
+            "symbol": ".bss",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b695c",
+            "offset": 160
+          },
+          {
+            "symbol": "data_002232d5",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b695c",
+            "offset": 164
+          },
+          {
+            "symbol": "__dso_handle",
+            "address": 1048576,
+            "kind": 2,
+            "section": "i.func_001b695c",
+            "offset": 168
+          },
+          {
+            "symbol": "_ZN16ScalarCollectionD1Ev",
+            "address": 1797020,
+            "kind": 2,
+            "section": "i.func_001b695c",
+            "offset": 172
+          },
+          {
+            "symbol": "i.func_001b695c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_00164b34.cpp": {
+        "source": "src/checkpoint11/func_00164b34.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2600-func_00164b34/func_00164b34.o",
+        "source_sha256": "98c8568c0efe356cd088373b9adc20338479385e4ca942a6e199a2d17de96db4",
+        "object_sha256": "0737a0fb09d62f276297522d4d990ad07810b04a3c72a9acace5843531afb263",
+        "references": [
+          {
+            "symbol": "i._ZN13PaneIndexListC1Eiz",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001d4e2c.cpp": {
+        "source": "src/checkpoint11/func_001d4e2c.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2601-func_001d4e2c/func_001d4e2c.o",
+        "source_sha256": "807d93d797d4d014b9d7dae034c3ac5f437e140cadbfd0eceaa759ebc130acbe",
+        "object_sha256": "0fbfa84341906300f95983ae7d207b9cd77e99b050fd2503de235f67ef8692e3",
+        "references": [
+          {
+            "symbol": "func_001d9530",
+            "address": 1938736,
+            "kind": 29,
+            "section": "i.func_001d4e2c",
+            "offset": 80
+          },
+          {
+            "symbol": "func_001d9178",
+            "address": 1937784,
+            "kind": 28,
+            "section": "i.func_001d4e2c",
+            "offset": 104
+          },
+          {
+            "symbol": "i.func_001d4e2c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001809f4.cpp": {
+        "source": "src/checkpoint11/func_001809f4.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2602-func_001809f4/func_001809f4.o",
+        "source_sha256": "fa1ed2b6991a74417cb61462667da3fd34bd1e47feff7c35cb36a2feb357ebd0",
+        "object_sha256": "7de33c98132c60d8c38f6b13d659a8a300316bac3fb42c4ae34deaef8795f8f9",
+        "references": [
+          {
+            "symbol": "_ZN2nw2ut8HeapBase15FindContainHeapEPNS0_8LinkListIS1_Ll4EEEPKv",
+            "address": 1575412,
+            "kind": 28,
+            "section": "i._ZN2nw2ut8HeapBase15FindContainHeapEPNS0_8LinkListIS1_Ll4EEEPKv",
+            "offset": 52
+          },
+          {
+            "symbol": "i._ZN2nw2ut8HeapBase15FindContainHeapEPNS0_8LinkListIS1_Ll4EEEPKv",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/archive_block_queries-r10.c": {
+        "source": "src/checkpoint11/archive_block_queries-r10.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2603-archive_block_queries-r10/archive_block_queries-r10.o",
+        "source_sha256": "46e381de939dd756d6ba1d0f82354c6394784f95d417a80d5fb31bbcaf10d9cd",
+        "object_sha256": "e6c77edf9a2c94ac20ba33dbe61cee99cdceb1b45d7c794f01cb91e5c0f4b98f",
+        "references": [
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1ebc",
+            "offset": 8
+          },
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1ed8",
+            "offset": 8
+          },
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1ef4",
+            "offset": 8
+          },
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1f08",
+            "offset": 8
+          },
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1f20",
+            "offset": 8
+          },
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1f34",
+            "offset": 8
+          },
+          {
+            "symbol": "func_001650f8",
+            "address": 1462520,
+            "kind": 28,
+            "section": "i.func_001f1f4c",
+            "offset": 8
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_0010bed4.c": {
+        "source": "src/checkpoint11/func_0010bed4.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2604-func_0010bed4/func_0010bed4.o",
+        "source_sha256": "62e0f084508ac18377a7267da1306e6c0d63344ae02fa55150c256e8a8bedfa6",
+        "object_sha256": "fbaab487574976377986b0ef7805f579999365e3ec0eab9ebec5311747ecd11c",
+        "references": [
+          {
+            "symbol": "func_0010be58",
+            "address": 1097304,
+            "kind": 28,
+            "section": "i.func_0010bed4",
+            "offset": 4
+          },
+          {
+            "symbol": "func_0010bf74",
+            "address": 1097588,
+            "kind": 28,
+            "section": "i.func_0010bed4",
+            "offset": 8
+          },
+          {
+            "symbol": "func_0010bf60",
+            "address": 1097568,
+            "kind": 28,
+            "section": "i.func_0010bed4",
+            "offset": 12
+          },
+          {
+            "symbol": "func_0010bef8",
+            "address": 1097464,
+            "kind": 28,
+            "section": "i.func_0010bed4",
+            "offset": 16
+          },
+          {
+            "symbol": "func_0012d0a4",
+            "address": 1233060,
+            "kind": 28,
+            "section": "i.func_0010bed4",
+            "offset": 20
+          },
+          {
+            "symbol": "func_0010bef4",
+            "address": 1097460,
+            "kind": 29,
+            "section": "i.func_0010bed4",
+            "offset": 28
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/fx_delay-r3.cpp": {
+        "source": "src/checkpoint11/fx_delay-r3.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2605-fx_delay-r3/fx_delay-r3.o",
+        "source_sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+        "object_sha256": "c1d64aae2dcea95fe02ab6b252c840ea29177c7effd3e92688dee28d9ac74d89",
+        "references": [
+          {
+            "symbol": "_ZTVN2nw3snd7FxDelayE",
+            "address": 2245972,
+            "kind": 2,
+            "section": "i._ZN2nw3snd7FxDelayC1Ev",
+            "offset": 156
+          },
+          {
+            "symbol": "i._ZN2nw3snd7FxDelayC1Ev",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/sound_scale_lookup-r3.cpp": {
+        "source": "src/checkpoint11/sound_scale_lookup-r3.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2606-sound_scale_lookup-r3/sound_scale_lookup-r3.o",
+        "source_sha256": "55cfb5030d427c4c52c1a40c93b79352165cf8eda2648cc680ab7f4f5613431f",
+        "object_sha256": "6cb4385016e04cf4a96a6be21f016a329b993033d04e1fe08e961c7ce3fd96b1",
+        "references": [
+          {
+            "symbol": "data_0021dfcc",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014fe14",
+            "offset": 148
+          },
+          {
+            "symbol": "data_0021dffc",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014feac",
+            "offset": 292
+          },
+          {
+            "symbol": "data_0021e02c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014feac",
+            "offset": 296
+          },
+          {
+            "symbol": "data_0021e42c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014ffd8",
+            "offset": 84
+          },
+          {
+            "symbol": "i.func_0014fe14",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i.func_0014feac",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i.func_0014ffd8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/fatal_header.c": {
+        "source": "src/checkpoint11/fatal_header.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2607-fatal_header/fatal_header.o",
+        "source_sha256": "9f23ad0444955619a6c1a8a3683d322f4798663d97d9e0d9641e4f34e6897e96",
+        "object_sha256": "acb0d5ddf079c784dfdd5e82b0264dc67e4f3c11c453717b3a16475945d4a24e",
+        "references": [
+          {
+            "symbol": "func_00186294",
+            "address": 1598100,
+            "kind": 29,
+            "section": "i.func_00192afc",
+            "offset": 56
+          },
+          {
+            "symbol": "bss_004b1200",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00192afc",
+            "offset": 64
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/application_configuration-r5.cpp": {
+        "source": "src/checkpoint11/application_configuration-r5.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2608-application_configuration-r5/application_configuration-r5.o",
+        "source_sha256": "1f863d9a299bfdb666f1d44f604bd9bb57b8fa89b61f7e73a762588b2a07d493",
+        "object_sha256": "a1ca6eda17ecb4b522eeb9fdf89390c43f628cda5bde54e36d10111d44dbead5",
+        "references": [
+          {
+            "symbol": "func_0011375c",
+            "address": 1128284,
+            "kind": 28,
+            "section": "i.func_0010bff4",
+            "offset": 32
+          },
+          {
+            "symbol": "func_0019d6c4",
+            "address": 1693380,
+            "kind": 29,
+            "section": "i.func_0010bff4",
+            "offset": 52
+          },
+          {
+            "symbol": "func_00121764",
+            "address": 1185636,
+            "kind": 28,
+            "section": "i.func_0010bff4",
+            "offset": 68
+          },
+          {
+            "symbol": "func_0019d6c4",
+            "address": 1693380,
+            "kind": 29,
+            "section": "i.func_0010bff4",
+            "offset": 80
+          },
+          {
+            "symbol": "func_001136a4",
+            "address": 1128100,
+            "kind": 28,
+            "section": "i.func_0010bff4",
+            "offset": 92
+          },
+          {
+            "symbol": "func_0011375c",
+            "address": 1128284,
+            "kind": 28,
+            "section": "i.func_0010c0a4",
+            "offset": 32
+          },
+          {
+            "symbol": "func_0019d6c4",
+            "address": 1693380,
+            "kind": 29,
+            "section": "i.func_0010c0a4",
+            "offset": 52
+          },
+          {
+            "symbol": "func_00121764",
+            "address": 1185636,
+            "kind": 28,
+            "section": "i.func_0010c0a4",
+            "offset": 68
+          },
+          {
+            "symbol": "func_0019d6c4",
+            "address": 1693380,
+            "kind": 29,
+            "section": "i.func_0010c0a4",
+            "offset": 80
+          },
+          {
+            "symbol": "func_001136a4",
+            "address": 1128100,
+            "kind": 28,
+            "section": "i.func_0010c0a4",
+            "offset": 92
+          },
+          {
+            "symbol": "i.func_0010bff4",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i.func_0010c0a4",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/dsp_auxiliary-r5.cpp": {
+        "source": "src/checkpoint11/dsp_auxiliary-r5.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2609-dsp_auxiliary-r5/dsp_auxiliary-r5.o",
+        "source_sha256": "26f353582a2c5b207851283f782af5cc3fe7f7e073fcfdc633fb437fd2c1d850",
+        "object_sha256": "23603807448bad0152678ce537e1607d387ddc077c09777c8ab0de373a15144b",
+        "references": [
+          {
+            "symbol": "func_00182210",
+            "address": 1581584,
+            "kind": 28,
+            "section": "i.func_001524ec",
+            "offset": 12
+          },
+          {
+            "symbol": "func_0018f018",
+            "address": 1634328,
+            "kind": 28,
+            "section": "i.func_001524ec",
+            "offset": 16
+          },
+          {
+            "symbol": "func_00182204",
+            "address": 1581572,
+            "kind": 28,
+            "section": "i.func_001524ec",
+            "offset": 84
+          },
+          {
+            "symbol": "func_00182204",
+            "address": 1581572,
+            "kind": 28,
+            "section": "i.func_001524ec",
+            "offset": 100
+          },
+          {
+            "symbol": "func_00182210",
+            "address": 1581584,
+            "kind": 28,
+            "section": "i.func_00152560",
+            "offset": 12
+          },
+          {
+            "symbol": "func_0018f018",
+            "address": 1634328,
+            "kind": 28,
+            "section": "i.func_00152560",
+            "offset": 16
+          },
+          {
+            "symbol": "func_00182204",
+            "address": 1581572,
+            "kind": 28,
+            "section": "i.func_00152560",
+            "offset": 72
+          },
+          {
+            "symbol": "func_00182204",
+            "address": 1581572,
+            "kind": 28,
+            "section": "i.func_00152560",
+            "offset": 88
+          },
+          {
+            "symbol": "i.func_001524ec",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i.func_00152560",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/file_open-r5.cpp": {
+        "source": "src/checkpoint11/file_open-r5.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2610-file_open-r5/file_open-r5.o",
+        "source_sha256": "9d695b546e09aef4b17d3d0bd34cf31f9c748ae404b5d614a5ab940581e0886e",
+        "object_sha256": "5dedff2d1d8b21e4bf4f02c867e264b3a2a5321c39e428773a9345eef2eb1c61",
+        "references": [
+          {
+            "symbol": "func_00192ae8",
+            "address": 1649384,
+            "kind": 28,
+            "section": "i.func_00112ae0",
+            "offset": 32
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_00112ae0",
+            "offset": 52
+          },
+          {
+            "symbol": "func_0011fca0",
+            "address": 1178784,
+            "kind": 28,
+            "section": "i.func_00112ae0",
+            "offset": 80
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_00112ae0",
+            "offset": 92
+          },
+          {
+            "symbol": "func_00192ab0",
+            "address": 1649328,
+            "kind": 28,
+            "section": "i.func_00112ae0",
+            "offset": 104
+          },
+          {
+            "symbol": "i.func_00112ae0",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/notification_history-r5.c": {
+        "source": "src/checkpoint11/notification_history-r5.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2611-notification_history-r5/notification_history-r5.o",
+        "source_sha256": "4e912a5622d5e3cba1d0c4ac196b49abea857e2c3867e1e9a000b0ecb0fe48e9",
+        "object_sha256": "20a80327e2dc56e741a603d61bd483e556e2bf62fa509a8b063c497e1ca9f499",
+        "references": [
+          {
+            "symbol": "bss_00280af8",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001dbb70",
+            "offset": 96
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/service_registration-r5.cpp": {
+        "source": "src/checkpoint11/service_registration-r5.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2612-service_registration-r5/service_registration-r5.o",
+        "source_sha256": "0cceab8c7ce3ff6a65df93fdd302a6c27ff00b6357e54a13f6c9752e1e52e0d7",
+        "object_sha256": "42d114947f749a771f0cc3ba030e1a58fbc1789023cfb6d31c369b005fa4265a",
+        "references": [
+          {
+            "symbol": "func_0010d0c0",
+            "address": 1102016,
+            "kind": 28,
+            "section": "i.func_00101714",
+            "offset": 8
+          },
+          {
+            "symbol": "func_0019ed2c",
+            "address": 1699116,
+            "kind": 28,
+            "section": "i.func_00101714",
+            "offset": 48
+          },
+          {
+            "symbol": "func_0010d0d0",
+            "address": 1102032,
+            "kind": 28,
+            "section": "i.func_00101714",
+            "offset": 64
+          },
+          {
+            "symbol": "func_0019ecf8",
+            "address": 1699064,
+            "kind": 28,
+            "section": "i.func_00101714",
+            "offset": 80
+          },
+          {
+            "symbol": "func_0010d418",
+            "address": 1102872,
+            "kind": 28,
+            "section": "i.func_00101714",
+            "offset": 88
+          },
+          {
+            "symbol": "func_0019ec88",
+            "address": 1698952,
+            "kind": 28,
+            "section": "i.func_00101714",
+            "offset": 92
+          },
+          {
+            "symbol": "data_00242a28",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00101714",
+            "offset": 104
+          },
+          {
+            "symbol": "bss_0049ee7c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00101714",
+            "offset": 108
+          },
+          {
+            "symbol": "i.func_00101714",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/sound_archive_header-r5.cpp": {
+        "source": "src/checkpoint11/sound_archive_header-r5.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2613-sound_archive_header-r5/sound_archive_header-r5.o",
+        "source_sha256": "55ae87422af24ce6617c9ac9d72f7b1d5d895cf65ec1685fd01a06b022eec1c7",
+        "object_sha256": "44f2015e576dbdd298199aaf2d213a2bbf7f99c4d7a10089e7b217fd2a2de6fc",
+        "references": [
+          {
+            "symbol": "i.func_00147054",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/text_flow_y-r5.cpp": {
+        "source": "src/checkpoint11/text_flow_y-r5.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2614-text_flow_y-r5/text_flow_y-r5.o",
+        "source_sha256": "848fcee4af833d0a3442e40c84ec98c78b73169f1176bacb0324e25d1029807d",
+        "object_sha256": "54f364b144a6486fe4a8977bc92f9f7f7fb71e9a9f0d0f168d14d79c329aa244",
+        "references": [
+          {
+            "symbol": "i.func_0017a5f0",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/archive_stream_property-r6.cpp": {
+        "source": "src/checkpoint11/archive_stream_property-r6.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2615-archive_stream_property-r6/archive_stream_property-r6.o",
+        "source_sha256": "48093bfbc9c942603f9fd3ee912d5b344fdcd63a2cc743bc09deed14a3ebd6cf",
+        "object_sha256": "9221134da70128447ce4548f14a846d830b9a7df6ece9ba772beb0813141ea2b",
+        "references": [
+          {
+            "symbol": "i.func_00139174",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/shape_setup-r6.cpp": {
+        "source": "src/checkpoint11/shape_setup-r6.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2616-shape_setup-r6/shape_setup-r6.o",
+        "source_sha256": "45208cf4fd5f78f711c1eac3b715cba5544f9ea0ecd5587cbadb92c435cc9a0c",
+        "object_sha256": "7cfc2bfb300101d7cd682dce51e447ea3b6f923909c8f1cca899be488f58bb2e",
+        "references": [
+          {
+            "symbol": "func_001c7560",
+            "address": 1865056,
+            "kind": 28,
+            "section": "i.func_001c8894",
+            "offset": 132
+          },
+          {
+            "symbol": "func_001c7a24",
+            "address": 1866276,
+            "kind": 28,
+            "section": "i.func_001c8894",
+            "offset": 220
+          },
+          {
+            "symbol": "i.func_001c8894",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/text_flow_x-r6.cpp": {
+        "source": "src/checkpoint11/text_flow_x-r6.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2617-text_flow_x-r6/text_flow_x-r6.o",
+        "source_sha256": "091b19ebdc6623c32566367a01eee235bf61b8773bfa1acde531f7d46ea2dd3b",
+        "object_sha256": "e14f1f0bcbb3db1491d373d2c399374279340c0d1be2d21801b314bb702de418",
+        "references": [
+          {
+            "symbol": "i.func_001af59c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/choice_activation-r8.cpp": {
+        "source": "src/checkpoint11/choice_activation-r8.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2618-choice_activation-r8/choice_activation-r8.o",
+        "source_sha256": "0581194e3478d745add932e7e09b267fbbea7f11a374f042b487ea3648590236",
+        "object_sha256": "81bd155051291d29db95e6e4420262cf32f68148be49efaf9d7de8e86f0b2c4e",
+        "references": [
+          {
+            "symbol": "func_0017a968",
+            "address": 1550696,
+            "kind": 28,
+            "section": "i.func_001b376c",
+            "offset": 176
+          },
+          {
+            "symbol": "func_0017a9a0",
+            "address": 1550752,
+            "kind": 28,
+            "section": "i.func_001b376c",
+            "offset": 188
+          },
+          {
+            "symbol": "func_00195a08",
+            "address": 1661448,
+            "kind": 28,
+            "section": "i.func_001b376c",
+            "offset": 236
+          },
+          {
+            "symbol": "func_001826fc",
+            "address": 1582844,
+            "kind": 28,
+            "section": "i.func_001b376c",
+            "offset": 260
+          },
+          {
+            "symbol": "func_0015e948",
+            "address": 1435976,
+            "kind": 28,
+            "section": "i.func_001b376c",
+            "offset": 284
+          },
+          {
+            "symbol": ".constdata",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001b376c",
+            "offset": 336
+          },
+          {
+            "symbol": "i.func_001b376c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/func_001dc744_storage.c": {
+        "source": "src/checkpoint11/func_001dc744_storage.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2619-func_001dc744_storage/func_001dc744_storage.o",
+        "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+        "object_sha256": "a376eaf8c0152e369cb54f802db8fbfb1295336924d4ab7b4484f4715a2aaa10",
+        "references": [
+          {
+            "symbol": "bss_00280af0",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001dc744",
+            "offset": 56
+          },
+          {
+            "symbol": "bss_00280af0",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001dc918",
+            "offset": 56
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/date_minute_second.cpp": {
+        "source": "src/checkpoint11/date_minute_second.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2620-date_minute_second/date_minute_second.o",
+        "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+        "object_sha256": "4b6cee5adec363a5b091eb15b559365d819fde14319d4a99daf88dc4954f099f",
+        "references": [
+          {
+            "symbol": "__aeabi_ldivmod",
+            "address": 1626628,
+            "kind": 28,
+            "section": "i.func_001efbf8",
+            "offset": 32
+          },
+          {
+            "symbol": "__aeabi_ldivmod",
+            "address": 1626628,
+            "kind": 28,
+            "section": "i.func_001efc64",
+            "offset": 32
+          },
+          {
+            "symbol": "i.func_001efbf8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          },
+          {
+            "symbol": "i.func_001efc64",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/gpu_buffer_descriptor-r9.c": {
+        "source": "src/checkpoint11/gpu_buffer_descriptor-r9.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2621-gpu_buffer_descriptor-r9/gpu_buffer_descriptor-r9.o",
+        "source_sha256": "8a8a1bcd3da70a96c5134adbb37eb968dccc0780633d2bb8bea76223565e10d1",
+        "object_sha256": "0ae61df3f2066195bf19e6f8da8ffb04c7e57f8ddbde022ef1d47a53f5598cb6",
+        "references": [
+          {
+            "symbol": "func_0018f0ac",
+            "address": 1634476,
+            "kind": 28,
+            "section": "i.func_001223c0",
+            "offset": 32
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/primitive_set_cleanup-r9.cpp": {
+        "source": "src/checkpoint11/primitive_set_cleanup-r9.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2622-primitive_set_cleanup-r9/primitive_set_cleanup-r9.o",
+        "source_sha256": "159ed35299d54bbb003933d731a71eeaf29124159942d1e2d8406c5efd226f12",
+        "object_sha256": "b1ed063390a97763a7b3719d76d21773e242087e8c75947ceb6408642216297f",
+        "references": [
+          {
+            "symbol": "func_0019cecc",
+            "address": 1691340,
+            "kind": 28,
+            "section": "i.func_001c78f8",
+            "offset": 244
+          },
+          {
+            "symbol": "data_002429f8",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001c78f8",
+            "offset": 284
+          },
+          {
+            "symbol": "i.func_001c78f8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/reverse_word_bytes-r9.c": {
+        "source": "src/checkpoint11/reverse_word_bytes-r9.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2623-reverse_word_bytes-r9/reverse_word_bytes-r9.o",
+        "source_sha256": "a7e0f832a32773ed96e79945dac8f0e663f1a5c8be6da3d4da003484d852b5d8",
+        "object_sha256": "c179b6d3a7013aed3a10fc8b3f3f2f35281c372568e738fbc07c6c6a9ba6134a",
+        "references": [],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/service_configuration_prefix-r9.cpp": {
+        "source": "src/checkpoint11/service_configuration_prefix-r9.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2624-service_configuration_prefix-r9/service_configuration_prefix-r9.o",
+        "source_sha256": "6abdfb4db37e33923cd49c3931cb8a0dea9e561198741b8d8aa0146a0b931633",
+        "object_sha256": "34c3e5c8599c5fc2bdb4367483a8ec8954f167790ca22e1e8dfb30791d9cb66b",
+        "references": [
+          {
+            "symbol": "func_00192ae8",
+            "address": 1649384,
+            "kind": 28,
+            "section": "i.func_00112bf8",
+            "offset": 24
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_00112bf8",
+            "offset": 44
+          },
+          {
+            "symbol": "func_00121e80",
+            "address": 1187456,
+            "kind": 28,
+            "section": "i.func_00112bf8",
+            "offset": 60
+          },
+          {
+            "symbol": "__aeabi_memcpy",
+            "address": 1703948,
+            "kind": 28,
+            "section": "i.func_00112bf8",
+            "offset": 88
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_00112bf8",
+            "offset": 100
+          },
+          {
+            "symbol": "func_00192ab0",
+            "address": 1649328,
+            "kind": 28,
+            "section": "i.func_00112bf8",
+            "offset": 116
+          },
+          {
+            "symbol": "i.func_00112bf8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/service_description_open-r9.cpp": {
+        "source": "src/checkpoint11/service_description_open-r9.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2625-service_description_open-r9/service_description_open-r9.o",
+        "source_sha256": "ae45af16a96e6743f8ba245d8dc24032b16ed5d49e58c8646837f853cb80bcd5",
+        "object_sha256": "347e90fc2af56953a12f0bded0d2414844d64228f24c5b773ffb9d324c5b9cc0",
+        "references": [
+          {
+            "symbol": "func_0018fb88",
+            "address": 1637256,
+            "kind": 28,
+            "section": "i.func_00112f10",
+            "offset": 36
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_00112f10",
+            "offset": 56
+          },
+          {
+            "symbol": "func_00192ae8",
+            "address": 1649384,
+            "kind": 28,
+            "section": "i.func_00112f10",
+            "offset": 72
+          },
+          {
+            "symbol": "func_001209bc",
+            "address": 1182140,
+            "kind": 28,
+            "section": "i.func_00112f10",
+            "offset": 116
+          },
+          {
+            "symbol": "func_00192ab0",
+            "address": 1649328,
+            "kind": 28,
+            "section": "i.func_00112f10",
+            "offset": 132
+          },
+          {
+            "symbol": "i.func_00112f10",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/stream_header_reader-r9.cpp": {
+        "source": "src/checkpoint11/stream_header_reader-r9.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2626-stream_header_reader-r9/stream_header_reader-r9.o",
+        "source_sha256": "1719b76bd44fb902a372dff9738c77f13fc406a692e51d5b20e81bd6b9e6d74c",
+        "object_sha256": "fa51280243f2cc4018be0612d74c9a71ba96c41cd4f6f256f2ec2098807ca6af",
+        "references": [
+          {
+            "symbol": "func_001f1f20",
+            "address": 2039584,
+            "kind": 28,
+            "section": "i.func_001d47c8",
+            "offset": 56
+          },
+          {
+            "symbol": "i.func_001d47c8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/text_alignment_horizontal-r9.c": {
+        "source": "src/checkpoint11/text_alignment_horizontal-r9.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2627-text_alignment_horizontal-r9/text_alignment_horizontal-r9.o",
+        "source_sha256": "54bd97e2f063e126ddb513c5391469b9e24b9ca94851118c9e3674c962fe052d",
+        "object_sha256": "9b272105b95fa81167b9541d94b708bc0f2be2bc6162d1e5ac9882f979858325",
+        "references": [],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/text_alignment_vertical-r9.c": {
+        "source": "src/checkpoint11/text_alignment_vertical-r9.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2628-text_alignment_vertical-r9/text_alignment_vertical-r9.o",
+        "source_sha256": "0a8de118359354ecd7603abfc379b5b3fd6189c8ba160ac65764abc8a30eddef",
+        "object_sha256": "7bb98633bba23ca0595f304c434161c90766d31c41214bf65ad686d78ac06781",
+        "references": [],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/text_table_lookup-r9.c": {
+        "source": "src/checkpoint11/text_table_lookup-r9.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2629-text_table_lookup-r9/text_table_lookup-r9.o",
+        "source_sha256": "6a24a578f7bd312e8e968c99ec88a3acb89c2994b2b1d14bb7994cff06c0af9a",
+        "object_sha256": "a221c7037142e3111981e843a1f70804466a0aedd8e9a09bfca71e7d2348222a",
+        "references": [],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/texture_image_command-r9.cpp": {
+        "source": "src/checkpoint11/texture_image_command-r9.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2630-texture_image_command-r9/texture_image_command-r9.o",
+        "source_sha256": "3000398a5c2e98f0fa476e649162071a8212eabfe9ba6af5741de6938269e364",
+        "object_sha256": "90e3d884bc60b718938313ec39d5842cd0d8940f1aab92486d659e6f449590db",
+        "references": [
+          {
+            "symbol": "func_0018f0ac",
+            "address": 1634476,
+            "kind": 28,
+            "section": "i.func_001c8424",
+            "offset": 316
+          },
+          {
+            "symbol": "i.func_001c8424",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/animation_child_text-r12.c": {
+        "source": "src/checkpoint11/animation_child_text-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2631-animation_child_text-r12/animation_child_text-r12.o",
+        "source_sha256": "fa3bbe2c10a9f6b17aef2c982ea949a5fdc2c520842b32546e36c65b8b09efec",
+        "object_sha256": "791a7a2fa6cd03e19dc74053e7b3ad28b651b819814495de957ec20d117297e3",
+        "references": [
+          {
+            "symbol": "func_0017a968",
+            "address": 1550696,
+            "kind": 28,
+            "section": "i.func_00171d40",
+            "offset": 60
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/archive_application_buffer-r12.c": {
+        "source": "src/checkpoint11/archive_application_buffer-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2632-archive_application_buffer-r12/archive_application_buffer-r12.o",
+        "source_sha256": "7b568b8e20c6d37969d9d9eb3a3de26ea6e937d1ea2cd97775dccb6dc770c4e9",
+        "object_sha256": "e195ee6fbd7cbd8186b8203d944fda71c66451643762783262f833efd6393dc7",
+        "references": [
+          {
+            "symbol": "data_0024377c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00136340",
+            "offset": 108
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/archive_mapped_descriptors-r12.c": {
+        "source": "src/checkpoint11/archive_mapped_descriptors-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2633-archive_mapped_descriptors-r12/archive_mapped_descriptors-r12.o",
+        "source_sha256": "78d1b530b35f21b3612d04ea8135d1b2c554ef096d6e87f0899fadaee79cf58c",
+        "object_sha256": "9195e4ac7ad15b686940b2c320b05e9007cd0d955d76830a7bd5592574443054",
+        "references": [
+          {
+            "symbol": "data_0024377c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012d5c4",
+            "offset": 100
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/audio_coefficients_submit-r12.c": {
+        "source": "src/checkpoint11/audio_coefficients_submit-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2634-audio_coefficients_submit-r12/audio_coefficients_submit-r12.o",
+        "source_sha256": "011b2eed145173e1cdd92b4e5a136a2e14719263309d67edb956d7639b316ac4",
+        "object_sha256": "890062a6098bfe072d0892c1c4140ba9fd5fc7ce481b341af53ce5965787509e",
+        "references": [
+          {
+            "symbol": "func_00182210",
+            "address": 1581584,
+            "kind": 28,
+            "section": "i.func_0014cd18",
+            "offset": 16
+          },
+          {
+            "symbol": "func_0018f018",
+            "address": 1634328,
+            "kind": 28,
+            "section": "i.func_0014cd18",
+            "offset": 20
+          },
+          {
+            "symbol": "__aeabi_memcpy4",
+            "address": 1703948,
+            "kind": 28,
+            "section": "i.func_0014cd18",
+            "offset": 96
+          },
+          {
+            "symbol": "func_00182204",
+            "address": 1581572,
+            "kind": 28,
+            "section": "i.func_0014cd18",
+            "offset": 112
+          },
+          {
+            "symbol": "func_00182204",
+            "address": 1581572,
+            "kind": 28,
+            "section": "i.func_0014cd18",
+            "offset": 128
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/display_queue_remove-r12.c": {
+        "source": "src/checkpoint11/display_queue_remove-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2635-display_queue_remove-r12/display_queue_remove-r12.o",
+        "source_sha256": "29c0aad6105c6a7a0198819e649033ad70b9f9bc0d35275dd7d4cedc1284379b",
+        "object_sha256": "d346834077358882787e527977e696c6d040efba3fa3a74de1dbc81ed5af7c48",
+        "references": [
+          {
+            "symbol": "func_00196cb8",
+            "address": 1666232,
+            "kind": 28,
+            "section": "i.func_0018528c",
+            "offset": 12
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/gpu_buffer_release-r12.c": {
+        "source": "src/checkpoint11/gpu_buffer_release-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2636-gpu_buffer_release-r12/gpu_buffer_release-r12.o",
+        "source_sha256": "289e779bded0f9e04e083076bf7c6e983b8aa937316f77f87f0fb51eac070bf0",
+        "object_sha256": "c0270d8c04a808d86e68f51387a51bdfaf528ef67384c0b3a435d6d7de242a90",
+        "references": [
+          {
+            "symbol": "data_002429f8",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0018c784",
+            "offset": 232
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/layout_find_child-r12.cpp": {
+        "source": "src/checkpoint11/layout_find_child-r12.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2637-layout_find_child-r12/layout_find_child-r12.o",
+        "source_sha256": "60ef409063941ced32e6873ece3be82cf9e00ebbf29772b2711b0870e2502103",
+        "object_sha256": "f8bc7ff4db3eb55cd27515e6e9b9c775c0e94f8743c5fb1fdf27920b4375f877",
+        "references": [
+          {
+            "symbol": "func_0015dd7c",
+            "address": 1432956,
+            "kind": 28,
+            "section": "i.func_00167ee4",
+            "offset": 56
+          },
+          {
+            "symbol": "func_00167ee4",
+            "address": 1474276,
+            "kind": 28,
+            "section": "i.func_00167ee4",
+            "offset": 80
+          },
+          {
+            "symbol": "i.func_00167ee4",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/service_open_options-r12.cpp": {
+        "source": "src/checkpoint11/service_open_options-r12.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2638-service_open_options-r12/service_open_options-r12.o",
+        "source_sha256": "3854cc2499dd63e50b7a836181ba9438ac0b8164f30bb45c4c51d5db931c040e",
+        "object_sha256": "5f6b11577cf47983fe9c195752d664fb94027bd0efd0e57123e7ce6a332ae61b",
+        "references": [
+          {
+            "symbol": "func_00192ae8",
+            "address": 1649384,
+            "kind": 28,
+            "section": "i.func_001125ac",
+            "offset": 32
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_001125ac",
+            "offset": 52
+          },
+          {
+            "symbol": "func_0011f6e8",
+            "address": 1177320,
+            "kind": 28,
+            "section": "i.func_001125ac",
+            "offset": 80
+          },
+          {
+            "symbol": "_ZN13ServiceResultC1E6Result",
+            "address": 1657396,
+            "kind": 28,
+            "section": "i.func_001125ac",
+            "offset": 92
+          },
+          {
+            "symbol": "func_00192ab0",
+            "address": 1649328,
+            "kind": 28,
+            "section": "i.func_001125ac",
+            "offset": 104
+          },
+          {
+            "symbol": "i.func_001125ac",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/ui_item_update-r12.c": {
+        "source": "src/checkpoint11/ui_item_update-r12.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2639-ui_item_update-r12/ui_item_update-r12.o",
+        "source_sha256": "ad6505333bdc798a95a7e004e444a816f37cbffb95c459da5ab7c9b19f969b68",
+        "object_sha256": "9c0bc6ab8393e32ee6d8bfe995503d70dba54f6ce22e279be207984d2deb4ab4",
+        "references": [
+          {
+            "symbol": "func_0015e31c",
+            "address": 1434396,
+            "kind": 28,
+            "section": "i.func_001e9af8",
+            "offset": 132
+          },
+          {
+            "symbol": "func_0017a968",
+            "address": 1550696,
+            "kind": 28,
+            "section": "i.func_001e9af8",
+            "offset": 252
+          },
+          {
+            "symbol": "func_001703c4",
+            "address": 1508292,
+            "kind": 28,
+            "section": "i.func_001e9af8",
+            "offset": 288
+          },
+          {
+            "symbol": "func_0017a968",
+            "address": 1550696,
+            "kind": 28,
+            "section": "i.func_001e9af8",
+            "offset": 340
+          },
+          {
+            "symbol": "func_001703c4",
+            "address": 1508292,
+            "kind": 28,
+            "section": "i.func_001e9af8",
+            "offset": 384
+          },
+          {
+            "symbol": "func_0015e31c",
+            "address": 1434396,
+            "kind": 28,
+            "section": "i.func_001e9af8",
+            "offset": 464
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/batch_texture_keys-r13.cpp": {
+        "source": "src/checkpoint11/batch_texture_keys-r13.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2640-batch_texture_keys-r13/batch_texture_keys-r13.o",
+        "source_sha256": "9f0eed0f5d8f5daee90e6c3e9340816bdb17bbc9501eb7893bc62f2bfcd32d0d",
+        "object_sha256": "e9fc55f7a970f016b368c024c47c4454ce2f576af48a76004aa53116515439ed",
+        "references": [
+          {
+            "symbol": "func_00192720",
+            "address": 1648416,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 80
+          },
+          {
+            "symbol": "func_0016b404",
+            "address": 1487876,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 100
+          },
+          {
+            "symbol": "func_0016b404",
+            "address": 1487876,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 112
+          },
+          {
+            "symbol": "func_0016b404",
+            "address": 1487876,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 132
+          },
+          {
+            "symbol": "func_0016b404",
+            "address": 1487876,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 144
+          },
+          {
+            "symbol": "func_0016b404",
+            "address": 1487876,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 164
+          },
+          {
+            "symbol": "func_0016b404",
+            "address": 1487876,
+            "kind": 28,
+            "section": "i.func_001ce05c",
+            "offset": 176
+          },
+          {
+            "symbol": "data_0024352c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001ce05c",
+            "offset": 264
+          },
+          {
+            "symbol": "data_002435ec",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001ce05c",
+            "offset": 268
+          },
+          {
+            "symbol": "i.func_001ce05c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/startup_command_pool-r14.c": {
+        "source": "src/checkpoint11/startup_command_pool-r14.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2641-startup_command_pool-r14/startup_command_pool-r14.o",
+        "source_sha256": "ae2577e8d1da79f7df7023a5f10baf66d59baf72d7dffedc34a3b1809239881e",
+        "object_sha256": "bf6e8c297426926c868120205a63f2878f3a673012912f318329c1e1859217fa",
+        "references": [
+          {
+            "symbol": "func_0019d798",
+            "address": 1693592,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 16
+          },
+          {
+            "symbol": "func_00135268",
+            "address": 1266280,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 36
+          },
+          {
+            "symbol": "func_00135128",
+            "address": 1265960,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 44
+          },
+          {
+            "symbol": "func_00135f1c",
+            "address": 1269532,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 52
+          },
+          {
+            "symbol": "func_00135c74",
+            "address": 1268852,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 68
+          },
+          {
+            "symbol": "func_00135c10",
+            "address": 1268752,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 76
+          },
+          {
+            "symbol": "func_00135bb0",
+            "address": 1268656,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 84
+          },
+          {
+            "symbol": "func_00135b4c",
+            "address": 1268556,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 92
+          },
+          {
+            "symbol": "func_001360dc",
+            "address": 1269980,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 100
+          },
+          {
+            "symbol": "func_0013604c",
+            "address": 1269836,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 108
+          },
+          {
+            "symbol": "func_0013605c",
+            "address": 1269852,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 116
+          },
+          {
+            "symbol": "func_0013606c",
+            "address": 1269868,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 124
+          },
+          {
+            "symbol": "func_0013607c",
+            "address": 1269884,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 132
+          },
+          {
+            "symbol": "func_00145afc",
+            "address": 1334012,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 140
+          },
+          {
+            "symbol": "func_0019f450",
+            "address": 1700944,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 148
+          },
+          {
+            "symbol": "func_00190678",
+            "address": 1640056,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 152
+          },
+          {
+            "symbol": "func_0019d798",
+            "address": 1693592,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 168
+          },
+          {
+            "symbol": "func_001415b0",
+            "address": 1316272,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 224
+          },
+          {
+            "symbol": "func_00145690",
+            "address": 1332880,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 236
+          },
+          {
+            "symbol": "func_00145658",
+            "address": 1332824,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 248
+          },
+          {
+            "symbol": "func_001415b0",
+            "address": 1316272,
+            "kind": 28,
+            "section": "i.func_00141944",
+            "offset": 276
+          },
+          {
+            "symbol": "bss_0028d944",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00141944",
+            "offset": 348
+          },
+          {
+            "symbol": ".data",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00141944",
+            "offset": 360
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/alignment_vertical-r15.cpp": {
+        "source": "src/checkpoint11/alignment_vertical-r15.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2642-alignment_vertical-r15/alignment_vertical-r15.o",
+        "source_sha256": "746ca2276d9b63b54ca909a88477bc1bf13c2456f7ffa94c949c9e628c08e9ed",
+        "object_sha256": "ae50e684a1f0774490c64d0549c4c1f3a192c11e0a4a61c977c8f7fc2025b38f",
+        "references": [
+          {
+            "symbol": "i.func_0015e830",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf170/func_0014025c.c": {
+        "source": "src/checkpoint11/intake-r7/nf170/func_0014025c.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2643-func_0014025c/func_0014025c.o",
+        "source_sha256": "c0cb1778e1e2aa257c1381308a30fac2f5d9607df6fe94bc29e4ca699e7c70e7",
+        "object_sha256": "e78081cf822710c5eb5e044939a473b25dc1ac68863413a5dedef237cf777d28",
+        "references": [
+          {
+            "symbol": "func_001846f8",
+            "address": 1591032,
+            "kind": 28,
+            "section": "i.func_0014025c",
+            "offset": 36
+          },
+          {
+            "symbol": "data_002432b8",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014025c",
+            "offset": 52
+          },
+          {
+            "symbol": "data_00242fc8",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014025c",
+            "offset": 56
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf176/func_0014f114.cpp": {
+        "source": "src/checkpoint11/intake-r7/nf176/func_0014f114.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2644-func_0014f114/func_0014f114.o",
+        "source_sha256": "9b706457a17a1a525e9e901baa8bd4ab5870819eb12d549725c499c99fabdd9c",
+        "object_sha256": "76b03b84b61eb422a5ca4ab314f6ddcd4a168e0aefb894a186aa43df92b8dcd7",
+        "references": [
+          {
+            "symbol": "func_0014fc78",
+            "address": 1375352,
+            "kind": 29,
+            "section": "i.func_0014f114",
+            "offset": 112
+          },
+          {
+            "symbol": "func_00150124",
+            "address": 1376548,
+            "kind": 28,
+            "section": "i.func_0014f114",
+            "offset": 136
+          },
+          {
+            "symbol": "func_00151a1c",
+            "address": 1382940,
+            "kind": 28,
+            "section": "i.func_0014f114",
+            "offset": 148
+          },
+          {
+            "symbol": "func_0015274c",
+            "address": 1386316,
+            "kind": 29,
+            "section": "i.func_0014f114",
+            "offset": 184
+          },
+          {
+            "symbol": "func_001526b4",
+            "address": 1386164,
+            "kind": 29,
+            "section": "i.func_0014f114",
+            "offset": 344
+          },
+          {
+            "symbol": "func_001526b4",
+            "address": 1386164,
+            "kind": 29,
+            "section": "i.func_0014f114",
+            "offset": 400
+          },
+          {
+            "symbol": "func_001526b4",
+            "address": 1386164,
+            "kind": 29,
+            "section": "i.func_0014f114",
+            "offset": 456
+          },
+          {
+            "symbol": "bss_004b32c0",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0014f114",
+            "offset": 492
+          },
+          {
+            "symbol": "i.func_0014f114",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf177/func_00151928.c": {
+        "source": "src/checkpoint11/intake-r7/nf177/func_00151928.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2645-func_00151928/func_00151928.o",
+        "source_sha256": "a36178ac716e46c9248d9f33b78bbb4827dc3bc56951399495dd39ea7c1ce427",
+        "object_sha256": "e296d35206649061016a09e29310114a06882a0655b209c06c79cc56e7190ca7",
+        "references": [],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf191/func_001835b8.cpp": {
+        "source": "src/checkpoint11/intake-r7/nf191/func_001835b8.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2646-func_001835b8/func_001835b8.o",
+        "source_sha256": "4d6bea9953be95a271ab2b96c4d8fc96032a8672393d6472488af021f963ba4d",
+        "object_sha256": "ae73fb63ca25307c7eb958d6956ac8c752f4b47e7be539e0a6caa9d0980e9aec",
+        "references": [
+          {
+            "symbol": "func_001526b4",
+            "address": 1386164,
+            "kind": 29,
+            "section": "i.func_001835b8",
+            "offset": 52
+          },
+          {
+            "symbol": "i.func_001835b8",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf194/func_001941b0_shared.c": {
+        "source": "src/checkpoint11/intake-r7/nf194/func_001941b0_shared.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2647-func_001941b0_shared/func_001941b0_shared.o",
+        "source_sha256": "99c2d5aab8acfce8833bfa3847676106a7a87f2225b9ca7649d4339a621e706f",
+        "object_sha256": "8e6a6a962f7a5eb1b20c9e03be9f5f1fcd5566a31ebd4f0af4cf843a825563e6",
+        "references": [
+          {
+            "symbol": "data_0024226c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001941b0",
+            "offset": 68
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf207/func_001c5140.cpp": {
+        "source": "src/checkpoint11/intake-r7/nf207/func_001c5140.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2648-func_001c5140/func_001c5140.o",
+        "source_sha256": "ea61fbea3a097af8e280422313bb3a3bdadcd5824d47be580338fc3cb209c3dd",
+        "object_sha256": "34468dd7a319a344417102818ca9c36e724f0f945a7bd371cf5ed45e7114687f",
+        "references": [
+          {
+            "symbol": "func_0018f0ac",
+            "address": 1634476,
+            "kind": 28,
+            "section": "i.func_001c5140",
+            "offset": 40
+          },
+          {
+            "symbol": "func_0018f0ac",
+            "address": 1634476,
+            "kind": 28,
+            "section": "i.func_001c5140",
+            "offset": 56
+          },
+          {
+            "symbol": "i.func_001c5140",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/nf218/func_001e981c.c": {
+        "source": "src/checkpoint11/intake-r7/nf218/func_001e981c.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2649-func_001e981c/func_001e981c.o",
+        "source_sha256": "ed042c3306e715bc07f4e8472a3ee54669c0b95d76641447de45622b0c18d8bd",
+        "object_sha256": "e498edd51c1c457f1bcd947c32384dbef6ec70b4239f1bc6be3962dc49f469c9",
+        "references": [
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 212
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 216
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 220
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 224
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 228
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 232
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 236
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 240
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001e981c",
+            "offset": 244
+          },
+          {
+            "symbol": "func_0017a968",
+            "address": 1550696,
+            "kind": 28,
+            "section": "i.func_001e981c",
+            "offset": 260
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np017/func_00170234.cpp": {
+        "source": "src/checkpoint11/intake-r7/np017/func_00170234.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2650-func_00170234/func_00170234.o",
+        "source_sha256": "a4fdcb2735a3add2fd30b7f0ffcd812a8f9e014072ed9f049699de2a7fac7a2c",
+        "object_sha256": "501013e39ca7e19f9a248fcf5aaef7db2e340e2333da87d7b48d6b3bab1ccb46",
+        "references": [
+          {
+            "symbol": "bss_0029f540",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00170234",
+            "offset": 96
+          },
+          {
+            "symbol": "i.func_00170234",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np019/func_00175848.cpp": {
+        "source": "src/checkpoint11/intake-r7/np019/func_00175848.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2651-func_00175848/func_00175848.o",
+        "source_sha256": "4b1352dd4f55193d36af71d433c95aa98a2cefa3bd32127e0c574fa305d52e6d",
+        "object_sha256": "16d51b043e06873461d63cd2ea949025132ae2e92eb5cf48653e6bdd184b5eb8",
+        "references": [
+          {
+            "symbol": "func_0015e2a4",
+            "address": 1434276,
+            "kind": 28,
+            "section": "i.func_00175848",
+            "offset": 12
+          },
+          {
+            "symbol": "func_00196144",
+            "address": 1663300,
+            "kind": 28,
+            "section": "i.func_00175848",
+            "offset": 56
+          },
+          {
+            "symbol": "func_00196144",
+            "address": 1663300,
+            "kind": 28,
+            "section": "i.func_00175848",
+            "offset": 68
+          },
+          {
+            "symbol": "func_00181420",
+            "address": 1578016,
+            "kind": 28,
+            "section": "i.func_00175848",
+            "offset": 88
+          },
+          {
+            "symbol": "func_00181420",
+            "address": 1578016,
+            "kind": 28,
+            "section": "i.func_00175848",
+            "offset": 108
+          },
+          {
+            "symbol": "func_0019eb24",
+            "address": 1698596,
+            "kind": 28,
+            "section": "i.func_00175848",
+            "offset": 124
+          },
+          {
+            "symbol": "data_00218000",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00175848",
+            "offset": 136
+          },
+          {
+            "symbol": "i.func_00175848",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np020/func_00181994.c": {
+        "source": "src/checkpoint11/intake-r7/np020/func_00181994.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2652-func_00181994/func_00181994.o",
+        "source_sha256": "77345d0dfde77d7ac44388d762fc90a77f7fa188c528015ac4ec1d09bc73857c",
+        "object_sha256": "363eb3a83d3bfc588639b18fbdab4b75953b72729b24d6d52baeea6f9cdf5221",
+        "references": [
+          {
+            "symbol": "func_00181a4c",
+            "address": 1579596,
+            "kind": 28,
+            "section": "i.func_00181994",
+            "offset": 64
+          },
+          {
+            "symbol": "func_00186598",
+            "address": 1598872,
+            "kind": 28,
+            "section": "i.func_00181994",
+            "offset": 80
+          },
+          {
+            "symbol": ".constdata",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00181994",
+            "offset": 92
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np024/attributes_accessors.c": {
+        "source": "src/checkpoint11/intake-r7/np024/attributes_accessors.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2653-attributes_accessors/attributes_accessors.o",
+        "source_sha256": "bdcdaee10e93f3cf25984c24d682849213566006f269431adf433d19143c8fa1",
+        "object_sha256": "b65d08cde3ef4b19074592cc1f251193a1d7233aa716fc496d1c06147640985c",
+        "references": [
+          {
+            "symbol": "strncmp",
+            "address": 1636448,
+            "kind": 28,
+            "section": "i.func_0018fdfc",
+            "offset": 44
+          },
+          {
+            "symbol": "strncmp",
+            "address": 1636448,
+            "kind": 28,
+            "section": "i.func_0018fed0",
+            "offset": 44
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np029/channel_extent.cpp": {
+        "source": "src/checkpoint11/intake-r7/np029/channel_extent.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2654-channel_extent/channel_extent.o",
+        "source_sha256": "4cbab39a3951520054f47972f1f8111ca34c06582e50a4ebef58adde839742fa",
+        "object_sha256": "67b048ac49158d919e755e09e36d179c83c8ac3a5fc563b016dc71ab90372b49",
+        "references": [
+          {
+            "symbol": "i.func_001c5930",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np032/func_001dc3c4.c": {
+        "source": "src/checkpoint11/intake-r7/np032/func_001dc3c4.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2655-func_001dc3c4/func_001dc3c4.o",
+        "source_sha256": "aee1edc16ee9bf27ab969406d5690b5c8e6b6599edfd77f2a5f92ca7f9560750",
+        "object_sha256": "02c54a9560f2334575fe8ec309d8c9e923f4ee13e8ef14a03e20df94112a52d4",
+        "references": [
+          {
+            "symbol": "bss_00280af0",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001dc3c4",
+            "offset": 56
+          },
+          {
+            "symbol": "bss_00280af0",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_001dc538",
+            "offset": 56
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r7/np033/func_001f169c.cpp": {
+        "source": "src/checkpoint11/intake-r7/np033/func_001f169c.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2656-func_001f169c/func_001f169c.o",
+        "source_sha256": "43a8a368e468b7461c7029071c64dffa11d7689bd2607937a3d8fbeee7b0f878",
+        "object_sha256": "7244712184ce79531058426282e6c66dcc95de56e440539dc5bbe117cfcc217b",
+        "references": [
+          {
+            "symbol": "i.func_001f169c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r9/np044/func_00138274.c": {
+        "source": "src/checkpoint11/intake-r9/np044/func_00138274.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2657-func_00138274/func_00138274.o",
+        "source_sha256": "92d618deecc8f0af0b765255f0e121b3f950d634c6f6df7f1c8e8b7ec7bfbee3",
+        "object_sha256": "7aa4900e2bdafc959a1f1cec3a2fe0b09f03fb0ef9fb488b97f9647161b382f4",
+        "references": [
+          {
+            "symbol": "data_00243040",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_00138274",
+            "offset": 72
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint11/intake-r9/np050/a03-direct-storage-roots.c": {
+        "source": "src/checkpoint11/intake-r9/np050/a03-direct-storage-roots.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2658-a03-direct-storage-roots/a03-direct-storage-roots.o",
+        "source_sha256": "bcf08e47f71808fa22cd551e14a59b4783468c3ffef379d413a6d272e20b0381",
+        "object_sha256": "37cd4d5d1cce53e0f27323b43c1f314be666b74d6b0b4bce8bd1ad1f0eeb490d",
+        "references": [
+          {
+            "symbol": "func_0017d8a8",
+            "address": 1562792,
+            "kind": 29,
+            "section": "i.func_0015b950",
+            "offset": 128
+          },
+          {
+            "symbol": "func_0015c5a4",
+            "address": 1426852,
+            "kind": 28,
+            "section": "i.func_0015b950",
+            "offset": 184
+          },
+          {
+            "symbol": "func_0015c734",
+            "address": 1427252,
+            "kind": 28,
+            "section": "i.func_0015b950",
+            "offset": 196
+          },
+          {
+            "symbol": "func_0017b4ac",
+            "address": 1553580,
+            "kind": 28,
+            "section": "i.func_0015b950",
+            "offset": 368
+          },
+          {
+            "symbol": "data_0024385c",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0015b950",
+            "offset": 444
+          },
+          {
+            "symbol": "data_00243864",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0015b950",
+            "offset": 448
+          },
+          {
+            "symbol": "data_00243830",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0015b950",
+            "offset": 452
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint13/language.cpp": {
+        "source": "src/checkpoint13/language.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2659-language/language.o",
+        "source_sha256": "62c6982fcb8765fd961e9d2d4e6be467796e88403aab6f1f898913e571dca5e9",
+        "object_sha256": "f29bd3401cd0815204620a8ae6925b50abf16df02426959fa9cdb85527184011",
+        "references": [
+          {
+            "symbol": "func_00121764",
+            "address": 1185636,
+            "kind": 28,
+            "section": "i.func_0012e68c",
+            "offset": 28
+          },
+          {
+            "symbol": "func_0019d6c4",
+            "address": 1693380,
+            "kind": 29,
+            "section": "i.func_0012e68c",
+            "offset": 40
+          },
+          {
+            "symbol": "func_0013685c",
+            "address": 1271900,
+            "kind": 28,
+            "section": "i.func_0012e68c",
+            "offset": 48
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 76
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 80
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 84
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 88
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 92
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 96
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 100
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 212
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 216
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 220
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 224
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 228
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 232
+          },
+          {
+            "symbol": "__switch$$",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 236
+          },
+          {
+            "symbol": "data_0021c5d8",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0012e68c",
+            "offset": 280
+          },
+          {
+            "symbol": "i.func_0012e68c",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint13/copy_worker.c": {
+        "source": "src/checkpoint13/copy_worker.c",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2660-copy_worker/copy_worker.o",
+        "source_sha256": "7f29a53ace7514b39e0694b1d116ef03788c93898cda5bce0363e105429fdfdf",
+        "object_sha256": "14b0a12987ae48c273d18fd1339679f1e1b6c89b2b21ff17908a63ceae2188c2",
+        "references": [
+          {
+            "symbol": "func_00195d94",
+            "address": 1662356,
+            "kind": 28,
+            "section": "i.func_0010aa28",
+            "offset": 20
+          },
+          {
+            "symbol": "func_00192c20",
+            "address": 1649696,
+            "kind": 28,
+            "section": "i.func_0010aa28",
+            "offset": 148
+          },
+          {
+            "symbol": "bss_002d4270",
+            "address": null,
+            "kind": 2,
+            "section": "i.func_0010aa28",
+            "offset": 276
+          }
+        ],
+        "defined_vtables": []
+      },
+      "src/checkpoint13/transform_callbacks.cpp": {
+        "source": "src/checkpoint13/transform_callbacks.cpp",
+        "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8/scratch/integrator/c011/r8/matches-r1/2661-transform_callbacks/transform_callbacks.o",
+        "source_sha256": "0e9940ceabf6d4b4c66c721b58ee2d89e8ca65c77d7ee14b9bcda4d35325c417",
+        "object_sha256": "092d056d6b8df05604e261536fa3b8d0ac1595bbfdc37ab001b80d94163d719d",
+        "references": [
+          {
+            "symbol": "i._ZN2nw3gfx13TransformNode15CreateCallbacksEPNS_2os10IAllocatorE",
+            "address": null,
+            "kind": 42,
+            "section": ".ARM.exidx",
+            "offset": 0
+          }
+        ],
+        "defined_vtables": []
+      }
+    }
+  },
+  "hold_counts": {
+    "c009": 28,
+    "c010-r8": 94,
+    "c011-r8": 114,
+    "combined": 236
+  },
+  "held_functions": [
+    "func_00106fe8",
+    "func_00107ce4",
+    "func_00107f0c",
+    "func_0010cc0c",
+    "func_0010d500",
+    "func_0010dcb0",
+    "func_0010dce8",
+    "func_0010dd20",
+    "func_0010e2e0",
+    "func_001137c4",
+    "func_00113e20",
+    "func_00116064",
+    "func_00116be4",
+    "func_00116eb0",
+    "func_00117854",
+    "func_00117ad8",
+    "func_0011f3a8",
+    "func_001233d0",
+    "func_0012f5a0",
+    "func_001312d4",
+    "func_00131464",
+    "func_00131540",
+    "func_00135908",
+    "func_00137154",
+    "func_00138f38",
+    "func_0013ea40",
+    "func_0014077c",
+    "func_00140ecc",
+    "func_00143318",
+    "func_00143328",
+    "func_00143df4",
+    "func_00145e3c",
+    "func_001470d0",
+    "func_0014a7e0",
+    "func_0014b244",
+    "func_0014b4b0",
+    "func_0014b54c",
+    "func_0014b85c",
+    "func_0014bc70",
+    "func_0014d1ec",
+    "func_0014eec8",
+    "func_0014fbec",
+    "func_0015072c",
+    "func_0015121c",
+    "func_001512fc",
+    "func_00151458",
+    "func_00151584",
+    "func_001532e8",
+    "func_001551a0",
+    "func_00155a44",
+    "func_00155d68",
+    "func_0015ea0c",
+    "func_0015ebfc",
+    "func_00161650",
+    "func_00162f0c",
+    "func_00162f78",
+    "func_0016337c",
+    "func_00169fb0",
+    "func_0016b58c",
+    "func_0016e47c",
+    "func_00170088",
+    "func_0017053c",
+    "func_00170e58",
+    "func_00171a98",
+    "func_00173e48",
+    "func_00174484",
+    "func_00179e5c",
+    "func_0017e3d8",
+    "func_0017e6c8",
+    "func_0017e764",
+    "func_0017fc7c",
+    "func_001814e8",
+    "func_00182994",
+    "func_00182d9c",
+    "func_0018362c",
+    "func_00183ff8",
+    "func_00185050",
+    "func_00185934",
+    "func_00185a88",
+    "func_00185bb0",
+    "func_0018ef74",
+    "func_00190450",
+    "func_001911f0",
+    "func_001913fc",
+    "func_001a0200",
+    "func_001a29f4",
+    "func_001a2a18",
+    "func_001a407c",
+    "func_001a7420",
+    "func_001a7444",
+    "func_001a78a4",
+    "func_001a81e4",
+    "func_001a8224",
+    "func_001ab51c",
+    "func_001ab540",
+    "func_001ab590",
+    "func_001acb04",
+    "func_001acb90",
+    "func_001acc30",
+    "func_001acf28",
+    "func_001ae140",
+    "func_001af258",
+    "func_001af370",
+    "func_001af424",
+    "func_001af554",
+    "func_001af644",
+    "func_001aff94",
+    "func_001b325c",
+    "func_001b4f58",
+    "func_001b5b60",
+    "func_001b6db4",
+    "func_001b7294",
+    "func_001b72b8",
+    "func_001b7dac",
+    "func_001b7e9c",
+    "func_001b7fc0",
+    "func_001b8ba0",
+    "func_001ba1d4",
+    "func_001ba1f8",
+    "func_001bb8c0",
+    "func_001bb8e4",
+    "func_001bbc1c",
+    "func_001bc538",
+    "func_001bd944",
+    "func_001bd968",
+    "func_001bdc7c",
+    "func_001be0c0",
+    "func_001be104",
+    "func_001c0d30",
+    "func_001c0d54",
+    "func_001c19e0",
+    "func_001c21c8",
+    "func_001c2cd4",
+    "func_001c3670",
+    "func_001c3ac0",
+    "func_001c46c0",
+    "func_001c4de8",
+    "func_001c5530",
+    "func_001c5dd8",
+    "func_001c6440",
+    "func_001c74e8",
+    "func_001c7d7c",
+    "func_001c8af0",
+    "func_001cc12c",
+    "func_001cc1d4",
+    "func_001cc1e4",
+    "func_001cc4cc",
+    "func_001ce8b8",
+    "func_001ce8f4",
+    "func_001ce940",
+    "func_001ce998",
+    "func_001ce9e8",
+    "func_001cf1f4",
+    "func_001cf338",
+    "func_001cf3a4",
+    "func_001cfb24",
+    "func_001cfdb4",
+    "func_001cfe24",
+    "func_001cfe68",
+    "func_001d01dc",
+    "func_001d296c",
+    "func_001d2b8c",
+    "func_001d2c44",
+    "func_001d2c84",
+    "func_001d2f90",
+    "func_001d3230",
+    "func_001d38ac",
+    "func_001d3bcc",
+    "func_001d3e90",
+    "func_001d4078",
+    "func_001d48d4",
+    "func_001d540c",
+    "func_001d5694",
+    "func_001d603c",
+    "func_001d67c8",
+    "func_001d7318",
+    "func_001d773c",
+    "func_001d7780",
+    "func_001d7e6c",
+    "func_001d7edc",
+    "func_001d82b0",
+    "func_001d8638",
+    "func_001d9050",
+    "func_001d90c8",
+    "func_001d9820",
+    "func_001d9a0c",
+    "func_001d9c14",
+    "func_001d9ca0",
+    "func_001da39c",
+    "func_001dac54",
+    "func_001dacc0",
+    "func_001dadc4",
+    "func_001daf74",
+    "func_001db3ec",
+    "func_001e3270",
+    "func_001e3294",
+    "func_001e3794",
+    "func_001e37b8",
+    "func_001e381c",
+    "func_001e3af4",
+    "func_001e3ea4",
+    "func_001e3ec8",
+    "func_001e3f38",
+    "func_001e440c",
+    "func_001e5658",
+    "func_001e567c",
+    "func_001e5a20",
+    "func_001e7134",
+    "func_001e744c",
+    "func_001e7564",
+    "func_001e7c4c",
+    "func_001e7cb8",
+    "func_001e7fb8",
+    "func_001e8024",
+    "func_001e84ec",
+    "func_001e8714",
+    "func_001e8738",
+    "func_001ea6d8",
+    "func_001eb7a4",
+    "func_001ebe20",
+    "func_001ec128",
+    "func_001ef704",
+    "func_001ef790",
+    "func_001efcec",
+    "func_001efd08",
+    "func_001efeac",
+    "func_001f4408",
+    "func_001f46d0",
+    "func_001f4784",
+    "func_001f4920",
+    "func_001f4994",
+    "func_001f49b0",
+    "func_001f4b58",
+    "func_001f4cf8",
+    "func_001f4eb4",
+    "func_001f5780"
+  ],
+  "credited_holds": [],
+  "observed_placed_hold_emissions": [],
+  "baseline_name_bindings_missing_or_rebound": [],
+  "adjudication": [
+    "No c011 object references a deferred endpoint or the six retained c010-r8 provider bodies that changed; all provider/header forms survive the source merge.",
+    "The newly selected worker is itself an original runtime provider that was UNCLAIMED in the parent closure. Its one-input intake draft was corrected to the exact two-input invoking type and independently structurally compared, not hidden behind another API.",
+    "All current callback/slot cases are in CALLBACK-SLOT-CONTRACTS-r1.json. The three opaque stored providers remain QUALIFIED by Main(a)-(e), not an invented function-type table.",
+    "The folded native TransformNode factory is the genuine member matching its canonical declaration; original bank accessor001f4500 stays in its accepted C owner.",
+    "Direct native/C facade and newly emitted vtable screens remain empty. Source-only native lifetime ABI and eventual external slot populations retain their qualifications."
+  ],
+  "limits": [
+    "No absent direct reference proves an unknown dynamic population. The three specific opaque populations remain explicitly unrecovered, address-stored-only, with no new typed invocation or native identity.",
+    "This is a bounded candidate dependency/type audit using fresh compiler metadata, not whole-ledger interfaces/argcheck/ownership acceptance gates.",
+    "The parent48 definite accepted-attention rows,7 nominal/custom qualification rows and26 existing unmodeled passed-code rows are inherited Main obligations; no blanket ABI pass is claimed."
+  ]
+}

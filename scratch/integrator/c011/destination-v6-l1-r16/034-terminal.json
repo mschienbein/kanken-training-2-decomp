@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/service_registration-r5.cpp",
+  "source_sha256": "0cceab8c7ce3ff6a65df93fdd302a6c27ff00b6357e54a13f6c9752e1e52e0d7",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_00101714"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/service_registration-r5.cpp",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/034-service_registration-r5"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.147254,
+  "stdout": "MATCH    func_00101714 @ 0x101714 size 0x70/0x70\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/034-service_registration-r5/service_registration-r5.result.json",
+  "result_sha256": "a243805d211eacdc92908e7161aed1d3bd0a491521ea39499bcbb5041cfbbd2a",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_00101714",
+      "status": "match",
+      "size": 112,
+      "candidate_size": 112,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

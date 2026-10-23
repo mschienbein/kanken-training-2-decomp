@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "functions": [
+    "func_00116064",
+    "func_0010e2e0"
+  ],
+  "accepted_unit": "src/wave8/func_00180234.cpp",
+  "authorization": "Main allowed a single native accessor only if c009/c010 did not overlap the accepted unit/accessor family.",
+  "previously_observed_required_branch_checks": {
+    "c009": "No accepted-unit/accessor overlap observed.",
+    "c010": "Overlap observed in src/checkpoint10/c5f4_final2.cpp and src/checkpoint10/func_0010dd88.cpp, both defining MatrixIdentityW8C/matrix34Identity."
+  },
+  "decision": "Accepted-contract deferral; no accepted math unit or identity changed. Main acknowledged the overlap and TU952 interaction.",
+  "TU952_interaction": {
+    "reported_return": "const nw::gfx::CalculatedTransform*",
+    "accepted_return": "TransformComponentsW8C*",
+    "same_extent_bytes": 64,
+    "reconciliation": "Identity/constness and accessor migration must be coordinated; equal extent is not a class-identity proof."
+  },
+  "revised_units": []
+}

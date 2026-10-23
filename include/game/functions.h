@@ -251,6 +251,7 @@ extern void func_001acc18(void *object);
 extern int func_00177124(int mode);
 extern void func_0016d4f8(struct W10DrawingInput *controller);
 extern void func_0016fca0(int mode);
+extern unsigned int func_0016b404(const unsigned int *source);
 extern void func_00174480(void *object);
 
 #ifdef __cplusplus

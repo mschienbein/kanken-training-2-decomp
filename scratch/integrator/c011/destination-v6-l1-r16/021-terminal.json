@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/fx_delay-r3.cpp",
+  "source_sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_001d23b4"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/fx_delay-r3.cpp",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/021-fx_delay-r3"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.132235,
+  "stdout": "MATCH    _ZN2nw3snd7FxDelayC1Ev @ 0x1d23b4 size 0xa8/0xa8\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/021-fx_delay-r3/fx_delay-r3.result.json",
+  "result_sha256": "c6020ea38132c939e54d14b50ac15872d65e46c884d999cc1bf081a7269f24bb",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001d23b4",
+      "status": "match",
+      "size": 168,
+      "candidate_size": 168,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

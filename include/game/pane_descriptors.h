@@ -65,6 +65,7 @@ struct PanePlacement {
 extern "C" {
 extern NameTable *bss_00244378[30];
 void func_00206afc(void);
+void func_00170e58(Screen *screen, int index, int enabled);
 extern PanePlacement *bss_00246f7c[11];
 void func_0020fa08(void);
 void func_00212b60(void);

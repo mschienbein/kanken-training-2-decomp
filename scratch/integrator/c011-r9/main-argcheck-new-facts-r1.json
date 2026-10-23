@@ -1,0 +1,507 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c011-r9",
+ "merged_source": "c2606cfd",
+ "argcheck": {
+  "path": "scratch/integrator/c011-r9/main-argcheck-r1.json",
+  "sha256": "576990c48cb04f82d7375b9ae8973ad941d6e3e190245f13788d58e54eb7768b",
+  "exit_code": 2,
+  "summary": {
+   "callback_sites": 10,
+   "direct_sites": 13326,
+   "elapsed_seconds": 1030.088,
+   "flagged_functions": 58,
+   "functions": 2771,
+   "issues": 99,
+   "notes": 528,
+   "rewrite_sites": 58,
+   "tail_sites": 731,
+   "unchecked_functions": 547,
+   "unresolved_indirect_sites": 1045
+  }
+ },
+ "baseline": {
+  "path": "scratch/integrator/c010-r8/main-argcheck-r1.json",
+  "sha256": "c7718cc8e2da3db6822bd9beb8259c661e7bfc68f30c769cb8c17699211b6201",
+  "adjudications": "c010-r8 289e656a (no new facts vs c010-r7; chain 456bfc8e, 5f581fc7)"
+ },
+ "fact_key": "(function, kind, canonical JSON with declaration.line removed)",
+ "new_issues": [
+  {
+   "function": "func_0010bed4",
+   "c011_claim": true,
+   "declaration": {
+    "line": 26,
+    "source": "include/game/service_availability.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0019edc0"
+   ]
+  },
+  {
+   "function": "func_0010bed4",
+   "c011_claim": true,
+   "declaration": {
+    "line": 3,
+    "source": "src/checkpoint11/func_0010bed4.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0019edc0"
+   ]
+  },
+  {
+   "function": "func_0012d0a4",
+   "c011_claim": false,
+   "declaration": {
+    "line": 32,
+    "source": "include/game/service_availability.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x0010bee8"
+   ]
+  },
+  {
+   "function": "func_00145658",
+   "c011_claim": false,
+   "declaration": {
+    "line": 125,
+    "source": "include/game/startup.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00141a3c"
+   ]
+  },
+  {
+   "function": "func_00145690",
+   "c011_claim": false,
+   "declaration": {
+    "line": 124,
+    "source": "include/game/startup.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00141a30"
+   ]
+  },
+  {
+   "function": "func_00192afc",
+   "c011_claim": true,
+   "declaration": {
+    "line": 44,
+    "source": "include/game/applet.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r2"
+   ],
+   "sites": [
+    "0x0010b910",
+    "0x0010d214",
+    "0x0010d47c",
+    "0x001151a0",
+    "0x00115220",
+    "0x0011525c",
+    "0x001152fc",
+    "0x00115398",
+    "0x00115c28",
+    "0x00122e88",
+    "0x0012307c",
+    "0x00123304",
+    "0x0012e8e4",
+    "0x0012fdc0",
+    "0x0012fe10",
+    "0x0012fea4",
+    "0x001368e4",
+    "0x00185f24",
+    "0x00192024",
+    "0x00192294",
+    "0x001922d8",
+    "0x001923f4",
+    "0x00194ad4",
+    "0x0019ec7c",
+    "0x0019ecb8"
+   ]
+  },
+  {
+   "function": "func_00192afc",
+   "c011_claim": true,
+   "declaration": {
+    "line": 44,
+    "source": "include/game/applet.h"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00185f24",
+    "0x0019ec7c"
+   ]
+  },
+  {
+   "function": "func_00192afc",
+   "c011_claim": true,
+   "declaration": {
+    "line": 17,
+    "source": "src/checkpoint11/fatal_header.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r2"
+   ],
+   "sites": [
+    "0x0010b910",
+    "0x0010d214",
+    "0x0010d47c",
+    "0x001151a0",
+    "0x00115220",
+    "0x0011525c",
+    "0x001152fc",
+    "0x00115398",
+    "0x00115c28",
+    "0x00122e88",
+    "0x0012307c",
+    "0x00123304",
+    "0x0012e8e4",
+    "0x0012fdc0",
+    "0x0012fe10",
+    "0x0012fea4",
+    "0x001368e4",
+    "0x00185f24",
+    "0x00192024",
+    "0x00192294",
+    "0x001922d8",
+    "0x001923f4",
+    "0x00194ad4",
+    "0x0019ec7c",
+    "0x0019ecb8"
+   ]
+  },
+  {
+   "function": "func_00192afc",
+   "c011_claim": true,
+   "declaration": {
+    "line": 17,
+    "source": "src/checkpoint11/fatal_header.c"
+   },
+   "kind": "void_result_consumed",
+   "qualification": "[INFERENCE] a preserved input or temporary can resemble a result",
+   "registers": [
+    "r0"
+   ],
+   "sites": [
+    "0x00185f24",
+    "0x0019ec7c"
+   ]
+  }
+ ],
+ "new_notes": [
+  {
+   "function": "func_0012d5c4",
+   "c011_claim": true,
+   "declaration": {
+    "line": 30,
+    "source": "include/game/archive_ipc.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1",
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "function": "func_0012d5c4",
+   "c011_claim": true,
+   "declaration": {
+    "line": 12,
+    "source": "src/checkpoint11/archive_mapped_descriptors-r12.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1",
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "function": "func_00136340",
+   "c011_claim": true,
+   "declaration": {
+    "line": 32,
+    "source": "include/game/archive_ipc.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1",
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "function": "func_00136340",
+   "c011_claim": true,
+   "declaration": {
+    "line": 20,
+    "source": "src/checkpoint11/archive_application_buffer-r12.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0",
+    "r1",
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "function": "func_00139174",
+   "c011_claim": true,
+   "declaration": {
+    "line": 7,
+    "source": "include/game/archive_queries.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ]
+  },
+  {
+   "function": "func_0014a988",
+   "c011_claim": false,
+   "declaration": {
+    "line": 21,
+    "source": "include/game/hwr_image.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1",
+    "r2"
+   ]
+  },
+  {
+   "function": "func_0014cc1c",
+   "c011_claim": true,
+   "declaration": {
+    "line": 57,
+    "source": "include/game/audio_dsp.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "function": "func_0014cc1c",
+   "c011_claim": true,
+   "declaration": {
+    "line": 12,
+    "source": "src/checkpoint14/auxiliary_mode.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "function": "func_001650f8",
+   "c011_claim": true,
+   "declaration": {
+    "line": 5,
+    "source": "src/checkpoint11/archive_block_queries-r10.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_00181994",
+   "c011_claim": true,
+   "declaration": {
+    "line": 15,
+    "source": "src/checkpoint11/intake-r7/np020/func_00181994.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_001a3ee0",
+   "c011_claim": false,
+   "declaration": {
+    "line": 47,
+    "source": "include/game/menu_controller.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_001ce05c",
+   "c011_claim": true,
+   "declaration": {
+    "line": 42,
+    "source": "include/game/graphics_address.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r1"
+   ]
+  },
+  {
+   "function": "func_001d9530",
+   "c011_claim": false,
+   "declaration": {
+    "line": 259,
+    "source": "include/game/audio_voice.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_001e9af8",
+   "c011_claim": true,
+   "declaration": {
+    "line": 150,
+    "source": "include/game/input.h"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_001e9af8",
+   "c011_claim": true,
+   "declaration": {
+    "line": 5,
+    "source": "src/checkpoint11/ui_item_update-r12.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_001f1ebc",
+   "c011_claim": true,
+   "declaration": {
+    "line": 15,
+    "source": "src/checkpoint11/archive_block_queries-r10.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  },
+  {
+   "function": "func_001f1ed8",
+   "c011_claim": true,
+   "declaration": {
+    "line": 20,
+    "source": "src/checkpoint11/archive_block_queries-r10.c"
+   },
+   "kind": "declared_inputs_not_observed",
+   "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+   "registers": [
+    "r0"
+   ]
+  }
+ ],
+ "removed_facts": [
+  {
+   "function": "func_001650f8",
+   "kind": "notes",
+   "fact": {
+    "declaration": {
+     "source": "src/checkpoint10/alternate1/func_001650f8.c"
+    },
+    "kind": "declared_inputs_not_observed",
+    "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+    "registers": [
+     "r0"
+    ]
+   }
+  },
+  {
+   "function": "func_001f1ebc",
+   "kind": "notes",
+   "fact": {
+    "declaration": {
+     "source": "src/checkpoint10/alternate1/func_001650f8.c"
+    },
+    "kind": "declared_inputs_not_observed",
+    "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+    "registers": [
+     "r0"
+    ]
+   }
+  },
+  {
+   "function": "func_001f1ed8",
+   "kind": "notes",
+   "fact": {
+    "declaration": {
+     "source": "src/checkpoint10/alternate1/func_001650f8.c"
+    },
+    "kind": "declared_inputs_not_observed",
+    "qualification": "[INFERENCE] no caller explicitly supplies these in the local unconsumed-write window; forwarding and earlier/consumed setup are not excluded",
+    "registers": [
+     "r0"
+    ]
+   }
+  }
+ ]
+}

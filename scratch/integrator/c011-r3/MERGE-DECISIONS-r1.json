@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "branch": "c011-r3-closure",
+  "base_commit": "64fae9d",
+  "merged_commit": "8575e16",
+  "preflight": "MERGE-TREE-r1.json",
+  "merge_attempt": "MERGE-r1.json",
+  "conflicts": [
+    {
+      "path": "config/names.json",
+      "resolution": "Union of all C011 additions and both C010 native font aliases. Keep the c009-r3 RuntimeMember constructor evidence and real C2 alias, not the superseded C function description."
+    },
+    {
+      "path": "include/game/archive_ipc.h",
+      "resolution": "Retain all C011 exact output/array/token wrapper declarations with the predecessor full-width FileArchiveHandle token and six-input terminal IPC contract."
+    },
+    {
+      "path": "include/game/functions.h",
+      "resolution": "Retain both distinct additions0016b404 and00174480; no competing signature or alias."
+    },
+    {
+      "path": "include/game/notification.h",
+      "resolution": "Union current calendar/history interfaces and C011 track setter; deduplicate identical grade setters."
+    },
+    {
+      "path": "include/game/selection.h",
+      "resolution": "One W6ListItem layout with C011 evidenced semantic fields. Migrate C010 consumer001e8934 id->identifier, state->countdown, frame->initial, saved_frame->text_index at the same actual offsets. Fresh exact witness retained."
+    },
+    {
+      "path": "include/game/sound_runtime.h",
+      "resolution": "Retain genuine predecessor SequenceCommandSound/SequenceStartEvent native contracts plus C011 sound refinements. No alternate owner alias or extra queue result is introduced."
+    },
+    {
+      "path": "include/game/startup.h",
+      "resolution": "Keep int0014562c C-only mandatory-discard procedure declaration, plus all C011 startup initializer declarations. int(void) slots and actual int providers remain unchanged; queue00186598 and signal0019ea6c stayvoid."
+    },
+    {
+      "path": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "resolution": "Retire this fully moved source as declared by C011 move0014fe14. Complete destination sound_scale_lookup-r3.cpp retains the identity. The C010 candidate is preserved as historical predecessor input, not recompiled separately in this cutover tree."
+    }
+  ],
+  "additional_real_caller_migration": {
+    "source": "src/checkpoint11/intake-r9/np044/func_00138274.c",
+    "change": "Read actual data00243040.handle subobject under the canonical StaticHandle contract, rather than pass the containing record as a scalar.",
+    "witness": "ipc-handle-r2-command.json",
+    "exit_code": 0,
+    "receipt_sha256": "75ac4cb9228cc666b4417a4c5a3d0e577e5ed7a0d4b018a3519bcec9848e9ce8"
+  },
+  "invariants": {
+    "all_original_c011_candidates_and_moves_unchanged": true,
+    "new_c011_functions_retained": 103,
+    "new_c011_bytes_retained": 14776,
+    "moves_retained": 10,
+    "moved_bytes_retained": 984,
+    "explicit_deferrals_retained": 84,
+    "missing_accepted": [],
+    "missing_predecessor": [],
+    "bounded_emitted_wrong_owner_entries": []
+  },
+  "qualification": "Structural composition and bounded emitted-definition entries are not a whole-ledger emitted-object audit. All frozen predecessor C-only/R1/L1/nominal-ABI qualifications remain. No accepted records/history, other worktree, frozen main source or toolchain/private payload was changed."
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "admitted": [
+    {
+      "name": "_ZN15OwnedPoolObject7releaseEv",
+      "address": 1853120,
+      "function": "func_001c46c0",
+      "source_sha256": "243ce664f1d507005a42104d9252dc313b16e8ab085ed267451191e2a8128cb6",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nf037/match/guard/10-final-minimal-names/guard_09-pool-first.result.json",
+      "receipt_sha256": "19cb90a2599469e5eea364d30e7d64dbec8c2497bfc82b604f5cccf97f4ecb68",
+      "object_sha256": "d032fadde2ee9ac1ec870a412ed577365ce8aceae4a0ba6be1c4f68171b5864e",
+      "size": 80,
+      "proof": "Actual whole-function MATCH self-definition or emitted same-entry zero-size alias.",
+      "qualification": "[INFERENCE] Natural C++ member identity for the catalogued pool-release routine; address fixed by function body and caller contract, not a recovered original class name."
+    },
+    {
+      "name": "_ZN23AnimationBindingStorageD1Ev",
+      "address": 1859032,
+      "function": "func_001c5dd8",
+      "source_sha256": "2a9ddc70aebb6693eea77190dd9c5a4b386a78d89aaf9b6828eae71fcf8bd1e2",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu1029/match/08-delivery-canonical-reference-game/func_001c5dd8_owner.result.json",
+      "receipt_sha256": "112f46eed0d8768418a2b3972b1be21765d79b99d67eef67e4a85f6d977834fd",
+      "object_sha256": "90be2d3cfe790380efa072fef7d73c9bcc8060278983135ac66af669d6b94ab6",
+      "size": 108,
+      "proof": "Actual whole-function MATCH self-definition or emitted same-entry zero-size alias.",
+      "qualification": "0x001c5dd8 is the destructor referenced by the AnimBinding vtable used by SceneNode::CreateAnimBinding; this source retains its two canonical MoveArray layouts and this-return ABI. AnimationBindingStorage is an inferred descriptive reconstruction name."
+    },
+    {
+      "name": "_ZN23AnimationBindingStorageD2Ev",
+      "address": 1859032,
+      "function": "func_001c5dd8",
+      "source_sha256": "2a9ddc70aebb6693eea77190dd9c5a4b386a78d89aaf9b6828eae71fcf8bd1e2",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu1029/match/08-delivery-canonical-reference-game/func_001c5dd8_owner.result.json",
+      "receipt_sha256": "112f46eed0d8768418a2b3972b1be21765d79b99d67eef67e4a85f6d977834fd",
+      "object_sha256": "90be2d3cfe790380efa072fef7d73c9bcc8060278983135ac66af669d6b94ab6",
+      "size": 0,
+      "proof": "Actual whole-function MATCH self-definition or emitted same-entry zero-size alias.",
+      "qualification": "ARMCC emits AnimationBindingStorage D1/D2 as same-section same-entry aliases of this naturally defined destructor."
+    }
+  ],
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  }
+}

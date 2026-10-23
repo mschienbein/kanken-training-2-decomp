@@ -1,0 +1,613 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "previous_scope": "SCOPE-SUPPLEMENT-r7.json",
+  "previous_committed_result": "COMMITTED-RESULT-r8.json",
+  "input": "INTAKE-r9.json",
+  "input_sha256": "3061552775c74a8793d2da648f448328e9bb4728a9c312be1b19affc42b411ca",
+  "required_models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "frozen_profiles": [
+    "game",
+    "sdk",
+    "middleware"
+  ],
+  "profile_config_sha256": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
+  "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+  "ownership_basis": "OWNERSHIP-INPUTS-r9.json",
+  "prior_scope_identities": 180,
+  "new_default_rows": [
+    {
+      "function": "func_00106fe8",
+      "author": "np038",
+      "address": "0x00106fe8",
+      "target_size": 144,
+      "manifest": "scratch/authors/np038/RESULT.json",
+      "manifest_sha256": "c43e7700f930703c515cc98f40b40e0f0c9a5ec45bf4929aee710d11c7fdc12d",
+      "row_index": 0,
+      "source": "scratch/authors/np038/src/func_00106fe8.c",
+      "source_sha256": "69b1e487c663a91b26a6d55571fa3329f8cb1c31d2ff10de3bf42b71ba12df20",
+      "receipt": "scratch/authors/np038/match/03-final-delivered/func_00106fe8.result.json",
+      "receipt_sha256": "ec44a51c39dd750c99d72784578fec31bcd0d7b5fc58316737e132d85085c405",
+      "reported_status": "match",
+      "profile": "middleware",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "disposition": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Author MATCH retains volatile signed begin/counter fields in a private CommandSystem, while the canonical shared global and both counter writers use nonvolatile signed fields. Independent reloads alone do not prove an asynchronous/volatile storage contract. No second global type, volatile-only steering, qualifier cast or unproved retag of accepted writers is admitted; the real writer/callback concurrency contract must close first.",
+      "author_unit_definitions": [
+        {
+          "function": "func_00106fe8",
+          "emitted_name": "func_00106fe8",
+          "status": "match",
+          "target_size": 144,
+          "candidate_size": 144,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        }
+      ]
+    },
+    {
+      "function": "func_00107f0c",
+      "author": "np039",
+      "address": "0x00107f0c",
+      "target_size": 44,
+      "manifest": "scratch/authors/np039/RESULT.json",
+      "manifest_sha256": "ee1a32494c0ab01f1238031b1526f10c9dd53c26256bb904f9d6e15ae18604da",
+      "row_index": 0,
+      "source": "scratch/authors/np039/src/func_00107f0c.cpp",
+      "source_sha256": "db6042587956d1b64fad4870718e621d539b8ac178c60a3d77936ffac55cd118",
+      "receipt": "scratch/authors/np039/match/final-selected/game/func_00107f0c.result.json",
+      "receipt_sha256": "009c125ebd0d9907c6d47561e76a15cdf35f1c910891b8a3a422ff2c98bde6bd",
+      "reported_status": "match",
+      "profile": "game",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [
+        "__aeabi_uldivmod",
+        "__aeabi_ul2f"
+      ],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "disposition": "contract-resolution-deferred-not-rejected-match",
+      "reason": "The44-byte wrapper requires the genuine mismatching0019f338 and all five inherited mismatching bodies in its exact C++ TU. FixC009R3Codex reports an UNFROZEN trial with C-language int(*)(void) callbacks and int(index,callback,unsigned) mutation result discarded; this author TU instead supplies C++ void procedure callbacks and a void scheduler. Do not import that competing definition, add callback erasure casts or replace visibility with a stub. WorkQueue/controller, destruction callback, ResourceSet/ResourceResult and rendering declarations remain full-TU obligations. Wait for Main to freeze successor contracts; no competing remediation performed.",
+      "author_unit_definitions": [
+        {
+          "function": "func_001073c0",
+          "emitted_name": "func_001073c0",
+          "status": "mismatch",
+          "target_size": 272,
+          "candidate_size": 272,
+          "first_difference_offset": 16,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_00107f0c",
+          "emitted_name": "func_00107f0c",
+          "status": "match",
+          "target_size": 44,
+          "candidate_size": 44,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_00108988",
+          "emitted_name": "func_00108988",
+          "status": "mismatch",
+          "target_size": 1436,
+          "candidate_size": 1440,
+          "first_difference_offset": 8,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_00109808",
+          "emitted_name": "func_00109808",
+          "status": "mismatch",
+          "target_size": 576,
+          "candidate_size": 576,
+          "first_difference_offset": 4,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_0010b200",
+          "emitted_name": "func_0010b200",
+          "status": "mismatch",
+          "target_size": 288,
+          "candidate_size": 288,
+          "first_difference_offset": 17,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_0010b320",
+          "emitted_name": "func_0010b320",
+          "status": "mismatch",
+          "target_size": 272,
+          "candidate_size": 276,
+          "first_difference_offset": 0,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_0019f338",
+          "emitted_name": "func_0019f338",
+          "status": "mismatch",
+          "target_size": 280,
+          "candidate_size": 280,
+          "first_difference_offset": 24,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        }
+      ]
+    },
+    {
+      "function": "func_00117ad8",
+      "author": "np040",
+      "address": "0x00117ad8",
+      "target_size": 108,
+      "manifest": "scratch/authors/np040/RESULT.json",
+      "manifest_sha256": "be3d0bd21628ce377aa954160df6cb50e64997657554293d1036a4040378d16d",
+      "row_index": 0,
+      "source": "scratch/authors/np040/src/func_00117ad8.c",
+      "source_sha256": "6bfe748cc0289734fc6adef62d27948b31c6d1b753115ac38d0f1bd78cd42803",
+      "receipt": "scratch/authors/np040/match/22-final-read-cursor/func_00117ad8.result.json",
+      "receipt_sha256": "e9650c952525e352d317bb62c4bf545a6427abeb27f87c48aaafaecf5a6cb476",
+      "reported_status": "match",
+      "profile": "sdk",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "collected-current-pair-destination-match",
+      "disposition": "collected-current-pair-destination-match",
+      "integration_source": "src/checkpoint11/intake-r9/np040/func_00117ad8.c",
+      "integration_source_sha256": "9b684a5173f6baf3f427e8991f539a6595bdf52e9737b993dcf203137b9c38fa",
+      "destination_receipt": "scratch/integrator/c011/destination-v6-l1-r23/np040/func_00117ad8/func_00117ad8.result.json",
+      "destination_receipt_sha256": "2d0e174a3493a13e9df554fbb8ecc338c06fea446bd4941cf896308b27fe3d7d",
+      "reason": "Exact named source grouped/copied using collect.py conventions, actual shared declarations reconciled and target rederived under its unchanged frozen profile and explicit v6/L1; no companion or whole-TU credit.",
+      "author_unit_definitions": [
+        {
+          "function": "func_00117ad8",
+          "emitted_name": "func_00117ad8",
+          "status": "match",
+          "target_size": 108,
+          "candidate_size": 108,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": true
+        }
+      ]
+    },
+    {
+      "function": "func_00138274",
+      "author": "np044",
+      "address": "0x00138274",
+      "target_size": 76,
+      "manifest": "scratch/authors/np044/RESULT.json",
+      "manifest_sha256": "2d80ecc4f0948f7e10b6bf618ff8b691d908efc2ed02bf9b285ee9378790bb45",
+      "row_index": 0,
+      "source": "scratch/authors/np044/src/func_00138274.c",
+      "source_sha256": "aece9b7ec0ac9a9fa7a12594ac5d8a52f2679527d862086e0d9dcd150b8ae218",
+      "receipt": "scratch/authors/np044/match/26-final-delivery/func_00138274.result.json",
+      "receipt_sha256": "72145fa577e58c62dea6d18a7671387afc132c0820f7ec774166f04d9eed4c67",
+      "reported_status": "match",
+      "profile": "middleware",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "collected-current-pair-destination-match",
+      "disposition": "collected-current-pair-destination-match",
+      "integration_source": "src/checkpoint11/intake-r9/np044/func_00138274.c",
+      "integration_source_sha256": "aece9b7ec0ac9a9fa7a12594ac5d8a52f2679527d862086e0d9dcd150b8ae218",
+      "destination_receipt": "scratch/integrator/c011/destination-v6-l1-r23/np044/func_00138274/func_00138274.result.json",
+      "destination_receipt_sha256": "8b1ae8476b3b705610901bf596281a86fbc4391029228bb6f8ad61cb9358c856",
+      "reason": "Exact named source grouped/copied using collect.py conventions, actual shared declarations reconciled and target rederived under its unchanged frozen profile and explicit v6/L1; no companion or whole-TU credit.",
+      "author_unit_definitions": [
+        {
+          "function": "func_00138274",
+          "emitted_name": "func_00138274",
+          "status": "match",
+          "target_size": 76,
+          "candidate_size": 76,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": true
+        }
+      ]
+    },
+    {
+      "function": "func_0015b950",
+      "author": "np050",
+      "address": "0x0015b950",
+      "target_size": 456,
+      "manifest": "scratch/authors/np050/RESULT.json",
+      "manifest_sha256": "2efeaecb319ad9162729d76cba1a2f0f156c46d9db96bdc4dd5a585d3187bd2f",
+      "row_index": 0,
+      "source": "scratch/authors/np050/variants/a03-direct-storage-roots.c",
+      "source_sha256": "404b70a8069e69332b527fc58f0b32b4dd4c1f43f224ac9d855cb7ab2c189e52",
+      "receipt": "scratch/authors/np050/match/a03-direct-storage-roots/a03-direct-storage-roots.result.json",
+      "receipt_sha256": "8cf1864f0e5ffc939e125b3dbced633d5fdd2a7ad7f9bf10b9c864b5733d1f6b",
+      "reported_status": "match",
+      "profile": "middleware",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "collected-current-pair-destination-match",
+      "disposition": "collected-current-pair-destination-match",
+      "integration_source": "src/checkpoint11/intake-r9/np050/a03-direct-storage-roots.c",
+      "integration_source_sha256": "493054a4ad2fcea5d557063c7428e8fe81d6921e3f2bf22b5405abb1c337be08",
+      "destination_receipt": "scratch/integrator/c011/destination-v6-l1-r23/np050/a03-direct-storage-roots/a03-direct-storage-roots.result.json",
+      "destination_receipt_sha256": "1ae1635442621eff4f99ab349fc914962d77ce7d377dd129946fa76697797e18",
+      "reason": "Exact named source grouped/copied using collect.py conventions, actual shared declarations reconciled and target rederived under its unchanged frozen profile and explicit v6/L1; no companion or whole-TU credit.",
+      "author_unit_definitions": [
+        {
+          "function": "func_0015ad74",
+          "emitted_name": "func_0015ad74",
+          "status": "mismatch",
+          "target_size": 288,
+          "candidate_size": 284,
+          "first_difference_offset": 0,
+          "existing_owners": [],
+          "new_credit_claimed": false
+        },
+        {
+          "function": "func_0015b950",
+          "emitted_name": "func_0015b950",
+          "status": "match",
+          "target_size": 456,
+          "candidate_size": 456,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": true
+        }
+      ]
+    },
+    {
+      "function": "func_00185934",
+      "author": "np060",
+      "address": "0x00185934",
+      "target_size": 312,
+      "manifest": "scratch/authors/np060/RESULT.json",
+      "manifest_sha256": "b3382aaab56c522476d83fc7a5c8d338520294085e9ab29f77fcc496580b881e",
+      "row_index": 0,
+      "source": "scratch/authors/np060/src/archive_loader.cpp",
+      "source_sha256": "093d36b7c246698a1fbf3d5f178ddd9eaed25ca4062935717b8a76a52a6e4623",
+      "receipt": "scratch/authors/np060/match/22_final_qualified/archive_loader.result.json",
+      "receipt_sha256": "1d43d0bdc2bd16a43dec2d62bfb7201a6a06adda69242beba90831daf0e9156b",
+      "reported_status": "match",
+      "profile": "middleware",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [
+        "_ZN2nw3snd8internal18SoundArchiveLoader38SetWaveArchiveTableInEmbeddedGroupImplEjPNS0_22SoundMemoryAllocatableE"
+      ],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "collected-current-pair-destination-match",
+      "disposition": "collected-current-pair-destination-match",
+      "integration_source": "src/checkpoint11/intake-r9/np060/archive_loader.cpp",
+      "integration_source_sha256": "e5895494833533964bee6e7062d4c9adf7987ee73e0f0ca8fcdaf4b7fb1f0aec",
+      "destination_receipt": "scratch/integrator/c011/destination-v6-l1-r23/np060/archive_loader/archive_loader.result.json",
+      "destination_receipt_sha256": "7391353a2a246be72989498f7184c5e7961d1ce16f987db8f41a9da26e23b383",
+      "reason": "Exact named source grouped/copied using collect.py conventions, actual shared declarations reconciled and target rederived under its unchanged frozen profile and explicit v6/L1; no companion or whole-TU credit.",
+      "author_unit_definitions": [
+        {
+          "function": "func_00185934",
+          "emitted_name": "_ZN2nw3snd8internal18SoundArchiveLoader38SetWaveArchiveTableInEmbeddedGroupImplEjPNS0_22SoundMemoryAllocatableE",
+          "status": "match",
+          "target_size": 312,
+          "candidate_size": 312,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": true
+        }
+      ]
+    },
+    {
+      "function": "func_001911f0",
+      "author": "np062",
+      "address": "0x001911f0",
+      "target_size": 92,
+      "manifest": "scratch/authors/np062/RESULT.json",
+      "manifest_sha256": "06a29e6ec5cf0de9a5d412b29f487b41e222120f6124a8495ccaafb6db90f9b6",
+      "row_index": 0,
+      "source": "scratch/authors/np062/src/commands_final.cpp",
+      "source_sha256": "ad9445aaf842f7d0ddc2bbfdbae82efa0469d73857d7a3382bca1a3b0731e33d",
+      "receipt": "scratch/authors/np062/match/09-final-selected/commands_final.result.json",
+      "receipt_sha256": "4ce95440347b39db749535666b7e30c028685799ce5e3e16d978984d8a4b5cc3",
+      "reported_status": "match",
+      "profile": "middleware",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "ownership_at_intake": [],
+      "required_models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      },
+      "author_needs_names": [],
+      "author_extra_sources": [],
+      "source_receipt_binding": true,
+      "status": "collected-current-pair-destination-match",
+      "disposition": "collected-current-pair-destination-match",
+      "integration_source": "src/checkpoint11/intake-r9/np062/commands_final.cpp",
+      "integration_source_sha256": "2fdf1cedbf0fb8550ee01bdc4dbc39a01d35c03b5efdfc2e7553de75d7efbcc2",
+      "destination_receipt": "scratch/integrator/c011/destination-v6-l1-r23/np062/commands_final/commands_final.result.json",
+      "destination_receipt_sha256": "223ea11fed1652003520c008eb06acd1055df52fb981c983a0270ee527331635",
+      "reason": "Exact named source grouped/copied using collect.py conventions, actual shared declarations reconciled and target rederived under its unchanged frozen profile and explicit v6/L1; no companion or whole-TU credit.",
+      "author_unit_definitions": [
+        {
+          "function": "func_001911f0",
+          "emitted_name": "func_001911f0",
+          "status": "match",
+          "target_size": 92,
+          "candidate_size": 92,
+          "first_difference_offset": null,
+          "existing_owners": [],
+          "new_credit_claimed": true
+        }
+      ]
+    }
+  ],
+  "resumed_scope_identities": 187,
+  "carried_prior_rows": [
+    {
+      "batch": "np021",
+      "function": "func_00182d9c",
+      "result": "scratch/authors/np021/RESULT.json",
+      "row_index": 0,
+      "source": "scratch/authors/np021/src/func_00182d9c.c",
+      "receipt": "scratch/authors/np021/match/func_00182d9c/02-final-exact-source/func_00182d9c.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "08cdc0f7c50fe539d70d55470d385eab1af5847f91db7c09a27b24943e3b0c7b",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/np021/src/func_00182d9c.c",
+      "prior_manifest_sha256": "08cdc0f7c50fe539d70d55470d385eab1af5847f91db7c09a27b24943e3b0c7b",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "np024",
+      "function": "func_00190450",
+      "result": "scratch/authors/np024/RESULT.json",
+      "row_index": 2,
+      "source": "scratch/authors/np024/variants/req13-reply-store-helper/request_exchange.cpp",
+      "receipt": "scratch/authors/np024/match/req13-reply-store-helper/request_exchange.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "ae8e2a5abd03a6765d14b8fb7a661535ad582d50c2ff2074a742fdf90397ccbd",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/np024/variants/req13-reply-store-helper/request_exchange.cpp",
+      "prior_manifest_sha256": "ae8e2a5abd03a6765d14b8fb7a661535ad582d50c2ff2074a742fdf90397ccbd",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "np030",
+      "function": "func_001cc12c",
+      "result": "scratch/authors/np030/RESULT.json",
+      "row_index": 0,
+      "source": "scratch/authors/np030/src/font_container.cpp",
+      "receipt": "scratch/authors/np030/match/font-final-borrowed-front-storage/font_container.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "9ff927064795edb206858cef28e502bbe96ca98e6f5452dad00244247f20af69",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/np030/src/font_container.cpp",
+      "prior_manifest_sha256": "9ff927064795edb206858cef28e502bbe96ca98e6f5452dad00244247f20af69",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "np030",
+      "function": "func_001cc4cc",
+      "result": "scratch/authors/np030/RESULT.json",
+      "row_index": 1,
+      "source": "scratch/authors/np030/src/texture_container.cpp",
+      "receipt": "scratch/authors/np030/match/texture-final-borrowed-front-storage/texture_container.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "9ff927064795edb206858cef28e502bbe96ca98e6f5452dad00244247f20af69",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/np030/src/texture_container.cpp",
+      "prior_manifest_sha256": "9ff927064795edb206858cef28e502bbe96ca98e6f5452dad00244247f20af69",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "np031",
+      "function": "func_001d773c",
+      "result": "scratch/authors/np031/RESULT.json",
+      "row_index": 2,
+      "source": "scratch/authors/np031/src/sound_destruction_tu29.cpp",
+      "receipt": "scratch/authors/np031/match/engine/25-final-exact-delivery/sound_destruction_tu29.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "6bf41a34fe91d5ca599ec6b020389ebe3af0bfe1429effb3878644d5d65546c1",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/np031/src/sound_destruction_tu29.cpp",
+      "prior_manifest_sha256": "6bf41a34fe91d5ca599ec6b020389ebe3af0bfe1429effb3878644d5d65546c1",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "nf173",
+      "function": "func_0014b4b0",
+      "result": "scratch/authors/nf173/RESULT.json",
+      "row_index": 2,
+      "source": "scratch/authors/nf173/src/func_0014b4b0-a04.cpp",
+      "receipt": "scratch/authors/nf173/match/b4b0-final/func_0014b4b0-a04.result.json",
+      "profile": "sdk",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "455de93570f9508f0a240d01b74d2f8aaf582670882808199ad272aa749f762e",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/nf173/src/func_0014b4b0-a04.cpp",
+      "prior_manifest_sha256": "455de93570f9508f0a240d01b74d2f8aaf582670882808199ad272aa749f762e",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "nf177",
+      "function": "func_0015072c",
+      "result": "scratch/authors/nf177/RESULT.json",
+      "row_index": 0,
+      "source": "scratch/authors/nf177/src/func_0015072c.cpp",
+      "receipt": "scratch/authors/nf177/match/0015072c-08-final/func_0015072c.result.json",
+      "profile": "middleware",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "6aacffd8eb8749c03592ab14597f360f293088776baef9610af82edec4e9ad34",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/nf177/src/func_0015072c.cpp",
+      "prior_manifest_sha256": "6aacffd8eb8749c03592ab14597f360f293088776baef9610af82edec4e9ad34",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "nf186",
+      "function": "func_0017053c",
+      "result": "scratch/authors/nf186/RESULT.json",
+      "row_index": 0,
+      "source": "scratch/authors/nf186/src/func_0017053c.cpp",
+      "receipt": "scratch/authors/nf186/match/075-func_0017053c-final-game/func_0017053c.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "515eb3d4340776181a497f45d4f10e47dc1aae2d7f28bc8522e0f984736c4530",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/nf186/src/func_0017053c.cpp",
+      "prior_manifest_sha256": "515eb3d4340776181a497f45d4f10e47dc1aae2d7f28bc8522e0f984736c4530",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "nf197",
+      "function": "func_001acf28",
+      "result": "scratch/authors/nf197/RESULT.json",
+      "row_index": 2,
+      "source": "scratch/authors/nf197/final/selection_pool.cpp",
+      "receipt": "scratch/authors/nf197/match/083-final-selection-pool/selection_pool.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "bbcf4a7ea075232eb2502c10d6c81ca70e3da3a0e0c06d82d3ec29c5d022f3a1",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/nf197/final/selection_pool.cpp",
+      "prior_manifest_sha256": "bbcf4a7ea075232eb2502c10d6c81ca70e3da3a0e0c06d82d3ec29c5d022f3a1",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    },
+    {
+      "batch": "nf206",
+      "function": "func_001c21c8",
+      "result": "scratch/authors/nf206/RESULT.json",
+      "row_index": 0,
+      "source": "scratch/authors/nf206/delivered/func_001c20fc.cpp",
+      "receipt": "scratch/authors/nf206/match/final-selected-game/func_001c20fc.result.json",
+      "profile": "game",
+      "model": "armlink5-inline-branchnop-v2",
+      "result_sha256": "5dc50a0c294974da1157f670b06c40f7bd91b2cda9aaa8929c1875100fd2c49a",
+      "disposition": "unchanged-prior-contract-deferral-not-reinvestigated",
+      "prior_disposition": "DISPOSITIONS-r4.json",
+      "prior_status": "contract-resolution-deferred-not-rejected-match",
+      "prior_source": "scratch/authors/nf206/delivered/func_001c20fc.cpp",
+      "prior_manifest_sha256": "5dc50a0c294974da1157f670b06c40f7bd91b2cda9aaa8929c1875100fd2c49a",
+      "reason": "Main explicitly authorized only the other seven new rows. Preserve the existing contract reservation and exact prior evidence; no unchanged source search, counter-run, helper alias, callback cast or credit."
+    }
+  ],
+  "summary": {
+    "scope_functions": 187,
+    "scope_target_bytes": 32004,
+    "collected_units": 95,
+    "collected_new_functions": 103,
+    "collected_new_target_bytes": 14776,
+    "contract_deferred_functions": 84,
+    "contract_deferred_target_bytes": 17228,
+    "context_move_functions": 10,
+    "context_move_target_bytes": 984,
+    "candidate_claimed_functions": 113,
+    "candidate_claimed_target_bytes": 15760,
+    "incremental_collected_units": 5,
+    "incremental_collected_functions": 5,
+    "incremental_collected_target_bytes": 1044,
+    "incremental_contract_deferred_functions": 2,
+    "incremental_contract_deferred_target_bytes": 188,
+    "incremental_isolated_runs": 10,
+    "incremental_source_ready_sources": 8,
+    "incremental_matched_targets": 8,
+    "isolated_parent_only_runs": 2,
+    "carried_prior_deferrals_not_reinvestigated": 10,
+    "cumulative_named_publication_manifests": 116,
+    "cumulative_publication_rows": 343
+  },
+  "parent_prerequisite": "PARENT-ARCHIVE-TOKEN-CUTOVER-r1.json",
+  "parent_application": "PARENT-ARCHIVE-TOKEN-APPLICATION-r1.json",
+  "qualification": "Complete explicitly authorized seven-target increment only. Do not reinterpret the other ten unreserved rows as new credit or restart their existing deferral investigations. No accepted ledger/receipt, denominator or gate changed."
+}

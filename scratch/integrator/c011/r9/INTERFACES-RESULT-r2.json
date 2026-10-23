@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "request": "scratch/integrator/c011/r9/HEAVY-SLOT-REQUEST.json",
+  "grant": "scratch/integrator/c011/r9/HEAVY-SLOT-GRANTED.json",
+  "release": "scratch/integrator/c011/r9/HEAVY-SLOT-RELEASED.json",
+  "actual_exit_code": 0,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c011/r9/PROPOSED-LEDGER-r2.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c011/r9/interfaces-r2.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+  "report": "scratch/integrator/c011/r9/interfaces-r2.json",
+  "report_sha256": "20213eace44d957bcba90b662f3dbed3f144f719c97b2d636689791273ef276f",
+  "stdout": "scratch/integrator/c011/r9/interfaces-r2.stdout.txt",
+  "stderr": "scratch/integrator/c011/r9/interfaces-r2.stderr.txt",
+  "counts": {
+    "units": 2695,
+    "disagreements": 0,
+    "policy_items": 0,
+    "unchecked_cpp": 734,
+    "unchecked_other": 0
+  },
+  "heavy_runs": 1,
+  "slot_release_atomic": true,
+  "source_inputs_changed_after_gate": false,
+  "C++_manual_review_not_waived": true
+}

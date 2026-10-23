@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "branch": "c013",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c013",
+  "base_commit": "8359b8594dd53889717cca14fb0a9de0edd201e2",
+  "status": "SOURCE_READY_FOR_MAIN_GATES_AFTER_APPLICABLE_PREDECESSOR_FINALIZATION_AND_ANY_REQUESTED_REBASE",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2",
+  "summary": {
+    "candidate_units": 3,
+    "candidate_claims": 3,
+    "NEW_functions": 3,
+    "NEW_bytes": 908,
+    "moves": 0,
+    "moved_bytes": 0,
+    "intake_holds": 4,
+    "intake_hold_bytes": 844,
+    "additional_distinct_holds": 3,
+    "additional_distinct_hold_bytes": 516,
+    "already_inherited_hold_functions": [
+      "func_001d01dc"
+    ],
+    "combined_distinct_holds": 231,
+    "predecessor_retained_functions": 2763,
+    "predecessor_retained_bytes": 299324,
+    "proposed_units": 2690,
+    "proposed_functions": 2766,
+    "proposed_bytes": 300232,
+    "helper_only_units": 24,
+    "fresh_primary_commands": 1384,
+    "fresh_exit_0": 1384,
+    "fresh_required_functions_MATCH": 1422,
+    "fresh_uncredited_runtime_comparison_rows": 2,
+    "changed_header_dependents_including_helper_units": 1394,
+    "affected_helper_only_units": 10,
+    "helper_units_supplied_in_fresh_contexts": 17,
+    "complete_projection_primary_units": 2666,
+    "inherited_untouched_primary_receipts": 1282,
+    "self_prereview_classes": 48,
+    "new_vtable_symbols": 0,
+    "new_names_bindings": 0,
+    "new_object_references_to_holds": 0,
+    "fresh_R1_qualified_callers": 18,
+    "fresh_L1_pool_owning_units": 1
+  },
+  "candidate_manifest": "config/candidates/c013.json",
+  "candidate_manifest_sha256": "b3cec364baa777cda9546ff352b96fd207ec523d9781eede485a540155c4a7fe",
+  "documentation": "docs/known-issues-c013.md",
+  "documentation_sha256": "2c0c18f51f5d35432f0dbc08155230b13a487f158509d6f250f408415f06b1ee",
+  "proposed_ledger": "scratch/integrator/c013/PROPOSED-LEDGER.json",
+  "ownership": "scratch/integrator/c013/OWNERSHIP-r1.json",
+  "author_intake": "scratch/integrator/c013/AUTHOR-INTAKE-r1.json",
+  "holds": "scratch/integrator/c013/HOLD-DISPOSITIONS-r1.json",
+  "self_prereview": "scratch/integrator/c013/SELF-PREREVIEW-r1.json",
+  "fresh_proof_scope": "scratch/integrator/c013/MATCH-SCOPE-r1.json",
+  "fresh_safe_receipts": "scratch/integrator/c013/SAFE-MATCH-RECEIPTS-r1.json",
+  "all_actual_attempts": "scratch/integrator/c013/REPROOF-ATTEMPTS-r1.json",
+  "source_context": "scratch/integrator/c013/SOURCE-CONTEXT-r1.json",
+  "complete_rewrite_projection": "scratch/integrator/c013/LINKER-REWRITES-r1.json",
+  "complete_rewrite_scope": "scratch/integrator/c013/COMPLETE-REWRITE-SCOPE-r1.json",
+  "new_object_contracts": "scratch/integrator/c013/NEW-OBJECT-CONTRACTS-r1.json",
+  "remaining_heavy_commands": "scratch/integrator/c013/REMAINING-HEAVY-COMMANDS.json",
+  "header_revisions": [
+    {
+      "path": "include/game/language.h",
+      "action": "added",
+      "before_sha256": null,
+      "after_sha256": "8e63acfce477fd4f0668c2487853e31a544d6dffa66da400537b3cec4eb32f62"
+    },
+    {
+      "path": "include/game/runtime.h",
+      "action": "changed",
+      "before_sha256": "27c709643d098b076e574359724e2788c23a0a19bdd481a1bcf1d99f5447faf4",
+      "after_sha256": "cdd17ec78cc024d2f8e550fad0848d75f05f4332e6514b97079f29da4138d35f"
+    },
+    {
+      "path": "include/nw/ut/ut_MoveArray.h",
+      "action": "changed",
+      "before_sha256": "1259db455a15a831ec2b4555626a91d514f43d00244a4b82796470941ee21f6c",
+      "after_sha256": "c31fac3197ab3f01b13e4d6806905f4fdf0a576d607e0a318aa8d3e902e60f3c"
+    }
+  ],
+  "admitted_receipts": [
+    {
+      "function": "func_0012e68c",
+      "source": "src/checkpoint13/language.cpp",
+      "profile": "middleware",
+      "receipt": "scratch/integrator/c013/match-r1/language/language.result.json",
+      "receipt_sha256": "8026b1fc9f580f4e4bd47a8ff6a4291066ab66ab71f60ba030aca5ae9b0276d1"
+    },
+    {
+      "function": "func_0010aa28",
+      "source": "src/checkpoint13/copy_worker.c",
+      "profile": "game",
+      "receipt": "scratch/integrator/c013/match-r1/copy-worker/copy_worker.result.json",
+      "receipt_sha256": "14130588539a2892496a9520c6e0dbce37a0688354ca6af85b0f28cdf5acefa2"
+    },
+    {
+      "function": "func_001c65e4",
+      "source": "src/checkpoint13/transform_callbacks.cpp",
+      "profile": "game",
+      "receipt": "scratch/integrator/c013/match-r1/transform-callbacks/transform_callbacks.result.json",
+      "receipt_sha256": "eac22da4fd343f65cbedf04ef1d50328368746b4f8a66388297f6b5a3d1c3348"
+    }
+  ],
+  "moves": [],
+  "accepted_context_owner_preserved": {
+    "function": "func_001f4500",
+    "source": "src/wave9/func_001f4500.c",
+    "profile": "game",
+    "source_sha256": "00983b2bf69e46f71dcc999070551406834807c85aef38b5b5d6e1082c3dea49",
+    "native_duplicate_defined": false
+  },
+  "names_adopted": [],
+  "held_names_overlays_not_applied": true,
+  "all_2763_predecessor_identities_preserved": true,
+  "all_1422_fresh_required_functions_MATCH": true,
+  "all_1384_actual_match_commands_exit_0": true,
+  "fresh_scope_complete": true,
+  "whole_ledger_matcher_rerun_claimed": false,
+  "open_integration_issues": [
+    {
+      "functions": [
+        "func_001d9820"
+      ],
+      "issue": "Canonical AudioVoice construction/member family versus second ConstructedPaneObject model; held, no cast or native alias."
+    },
+    {
+      "functions": [
+        "func_001d01dc"
+      ],
+      "issue": "Native SoundArchive count/reader versus retained C ArchiveHandle provider, plus nonmatching retail Window context; inherited hold retained."
+    },
+    {
+      "functions": [
+        "func_001f4408",
+        "func_001f46d0"
+      ],
+      "issue": "Forbidden byte-offset bank/reference decoding and private serialized-tail extent. A later admitted native accessor must explicitly move 001f4500 or omit it."
+    }
+  ],
+  "main_only_requirements": [
+    "Use this entire committed c013 transaction on the actual finalized c010-r7 plus c011-r7 predecessor. Its present base is exactly 8359b8594dd53889717cca14fb0a9de0edd201e2; later follow-ups require the requested rebase and fresh affected proof, not stale header/source carry.",
+    "Finalize the applicable predecessors before preparing c013. Recompose PROPOSED-LEDGER.json against the actual accepted ledger, including any intervening accepted candidate; the current proposal intentionally excludes c012/cmodels2-r4/types-compose additions.",
+    "Preserve all three admitted functions, canonical header changes, four intake holds and the original unique accepted 001f4500 owner. No held overlay or bank/native/C facade is admitted. Count nm02 as an inherited hold, not a fourth additional distinct hold.",
+    "Require the exact SOURCE-CONTEXT-r1.json inputs and typed source/callback review. R1 identities, L1 witnessed-span limitations, approved intrinsic/original-bug notes, C-only MUST-discard rules and inherited unknown dynamic populations remain explicit qualifications.",
+    "Use LINKER-REWRITES-r1.json with its COMPLETE-REWRITE-SCOPE-r1.json for whole-ledger argcheck. It combines 1384 fresh passing primary receipts with 1282 untouched c011-r7 receipt carries; it is not an author-run whole-ledger gate or complete recompile.",
+    "Serialize heavy operations machine-wide. Check every output/checkpoint name is still unused immediately before execution; failures require fresh immutable suffixes. Run only from Main's clean committed integrated source and obtain fresh independent bound reviews."
+  ],
+  "qualifications": [
+    "Self pre-review only, not independent acceptance. Every new function needs its ordinary bound review row.",
+    "Approved __current_pc and ORIGINAL BUG language-shift assumption; role/TU/profile ownership claims remain inference where indicated.",
+    "Canonical typed empty native signal allocation does not recover arbitrary external allocator or dynamic slot populations.",
+    "18 fresh inherited R1 caller rows and one L1 pool-owning unit retain their qualifications; no helper/data credit.",
+    "No inherited accepted bank/list/result/scene/font ABI issue is declared repaired by these NEW-only holds.",
+    "Two compiler-runtime comparison rows MATCH but are not credited."
+  ],
+  "records_sha256": {
+    "PROPOSED-LEDGER.json": "d6a29336edf3540c458485b4f45b0643881604c97980e9804baf38e68f9b6a9a",
+    "OWNERSHIP-r1.json": "075d599bb2a14521b71b5af64eaf545d84c83f9fed4e03458cf873d8635f0db5",
+    "AUTHOR-INTAKE-r1.json": "4f9c9b694c9a60be82ad9a5bc3c43c731edaa368e8753736e9c60eb94a3637d9",
+    "HOLD-DISPOSITIONS-r1.json": "fe069a1e2884dfa445b7af73af2f9b383d0c882afa30bd2b636b5585108c1244",
+    "MATCH-SCOPE-r1.json": "fda74e3f93c122d03bcb1ede0a073336b5bd1e3c5d5b3dcc68c0c7bf4a408d89",
+    "COMPLETE-REWRITE-SCOPE-r1.json": "4dcb4d04aa3b26a45cb1bda197a1079f351a2dad9a83ac3f996efda389f39bed",
+    "SAFE-MATCH-RECEIPTS-r1.json": "1e9134fdb5f40936d7777fa83a1031045d75f9db87f18abbb42ba6d5cf85a7d1",
+    "REPROOF-ATTEMPTS-r1.json": "decf946ec291b23d9351b144a48fc65370c0cb289aea0d3aa3b893d70b5bc905",
+    "SOURCE-CONTEXT-r1.json": "784992353d558081cebb626bae7a6dca622715f97b5bd3928b64ebc5fa6ec9a4",
+    "LINKER-REWRITES-r1.json": "5089f8b326e00588a53708ab5f45f7feb03e04a586f92e49963e5473a91b381d",
+    "NEW-OBJECT-CONTRACTS-r1.json": "abc8991d1023c2525078c766c2fb7382a90e792b5d419181be51afa8cf8d7217",
+    "SELF-PREREVIEW-r1.json": "980fc4dd5598e5082125d8de7c08a19146ed08f63b83eb962f139a896d26a6f9",
+    "MATCH-SUMMARY-r1.json": "9f87f10653e70cf03f9e533eb5ee974b106b3012e3fc93e19f05fec1559f47bb",
+    "REMAINING-HEAVY-COMMANDS.json": "c04a15e219f0a582027aaba3db91914b1db9ff804dee5a80ca2900bba1bca872"
+  },
+  "unexercised": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "independent review",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "heavy_gates_run": false,
+  "subagents_or_task_tool_used": false,
+  "main_acceptance_or_history_modified": false,
+  "other_branches_or_worktrees_modified": false,
+  "commit_binding": "The c013 commit containing this record; its exact source/manifest/header/artifact hashes are bound above."
+}

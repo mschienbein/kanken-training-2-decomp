@@ -1,0 +1,1772 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "input": "STEP5-INPUT-r6.json",
+  "input_sha256": "b9e567112b3c11dd2bcc776c64693f61a6084eb38b940ee55efb796c88e7ff11",
+  "required_models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "rows": [
+    {
+      "function": "func_001125ac",
+      "target_size": 124,
+      "manifest": "scratch/authors/np002/RESULT.json",
+      "manifest_sha256": "f0b6f991889032f70c1c7e91534427c0cfe5f2f9d27503d62f8fedad80a72278",
+      "row_index": 2,
+      "author": "np002",
+      "source": "scratch/authors/np002/src/func_001125ac.cpp",
+      "source_sha256": "3e43c171a78e2031dbe6057ec5101a895ccf47d19f5e97079476f688d74dbd4b",
+      "receipt": "scratch/authors/np002/match/func_001125ac/01-options-first-idiom/func_001125ac.result.json",
+      "receipt_sha256": "302b939b6b88994aa77b9d4158ed58073c30216e694249d7fed244c21ebc3aa1",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "sdk",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00112bf8",
+      "target_size": 136,
+      "manifest": "scratch/authors/nf052/RESULT.json",
+      "manifest_sha256": "b5cc21dd240f667ed1819754d80874830edc7caf13aaf2ad5586f55bfd5094f7",
+      "row_index": 1,
+      "author": "nf052",
+      "source": "scratch/authors/nf052/src/func_00112bf8.cpp",
+      "source_sha256": "f1faa79520b91ca981bea9722277f4e4650f23d8e2aaf9be7435011f0b7d1753",
+      "receipt": "scratch/authors/nf052/match/func_00112bf8/final-middleware/func_00112bf8.result.json",
+      "receipt_sha256": "00143bcdc6666d1615fd758be26e3177da7de8826733ee8fe941c034bda4842b",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00112f10",
+      "target_size": 152,
+      "manifest": "scratch/authors/nf053/RESULT.json",
+      "manifest_sha256": "67f6053e1bb7905b4fa4a3c71f9ea7107081f2a13060c76ac64b2b9e5a15b2eb",
+      "row_index": 0,
+      "author": "nf053",
+      "source": "scratch/authors/nf053/src/func_00112f10.cpp",
+      "source_sha256": "d6a128016aae429994d60b9d8a8ead814c7c97434861d960b537f4e08d01505d",
+      "receipt": "scratch/authors/nf053/match/func_00112f10/007-final/game/func_00112f10.result.json",
+      "receipt_sha256": "a082d1dbea7490a228630b39a360d816147076b7d6e7e242c015aba5974c3b1a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001137c4",
+      "target_size": 296,
+      "manifest": "scratch/authors/nf099/RESULT.json",
+      "manifest_sha256": "dda9a88863ec89be61d0330034245ebd51a890b4c2e157648f3ab0be01e3071b",
+      "row_index": 1,
+      "author": "nf099",
+      "source": "scratch/authors/nf099/final/func_001137c4.c",
+      "source_sha256": "353adaef049186e4b78a203e44dad50ab74593d250d2c723790fcf6d46172934",
+      "receipt": "scratch/authors/nf099/match/func_001137c4-final/func_001137c4.result.json",
+      "receipt_sha256": "fd5bd2039d29cf910e292b8c5eb28feb96df7c499c70c90f301be38567274152",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "sdk",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "InputServiceState suffix and copied MappedMemoryBlock duplicate the canonical owner. The expanded InputService would overlap separately accepted bss_004b1fb8 TouchInputService at +8; c010 initializer data_0024311c also has a distinct native handle owner and func00121d28 unsigned return vs author CtrResult. No accepted aggregate/global/signature cutover is performed.",
+      "contract_evidence": [
+        {
+          "path": "include/game/input.h",
+          "sha256": "236c836e421bfd888536943a4c789e96553f1c23a18dd1abb39b0119af181765"
+        },
+        {
+          "path": "include/game/command_group.h",
+          "sha256": "c0bfc31f9b58ea1459935431b4a91a73882d0c7fef6cb90afec37589de1519c3"
+        },
+        {
+          "path": "include/game/memory_arena.h",
+          "sha256": "f7f791e54bb89403bb86e3e25b533c0b9e160796eec965ad27d8a9bdb8e65a61"
+        },
+        {
+          "path": "src/checkpoint10/func_00121d28_final_formatted.c",
+          "sha256": "7b06ff39b8d909090fb29a7d6a8a4fa68cf88259daecfdd6d334a92e1e82b1d4"
+        },
+        {
+          "path": "src/checkpoint10/collect-r2/func_00212518.cpp",
+          "sha256": "ad0bdf53c768e33de866a986beeacf697fbc726069da38382ed5190a6813acc7"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001223c0",
+      "target_size": 60,
+      "manifest": "scratch/authors/nf056/RESULT.json",
+      "manifest_sha256": "31a50b100f8310aa4d546de709eb80c53edc62be463fdb3bd4e1a446808cd5d4",
+      "row_index": 0,
+      "author": "nf056",
+      "source": "scratch/authors/nf056/src/func_001223c0.c",
+      "source_sha256": "84d4e1fccf2159e1da5562aea6f7365b50a9683d66dc1945d12e7d689f5d8a9e",
+      "receipt": "scratch/authors/nf056/match/d12-final-middleware/func_001223c0.result.json",
+      "receipt_sha256": "b7f4180aa2296bb827caa475851cf468feefb5cebf231f0ea1d55153b225776b",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001233d0",
+      "target_size": 204,
+      "manifest": "scratch/authors/nf102/RESULT.json",
+      "manifest_sha256": "886323b02484735509c8662ee4dc099f344a612fa60794ec65d8db8fe9b47c08",
+      "row_index": 0,
+      "author": "nf102",
+      "source": "scratch/authors/nf102/src/func_0012300c.cpp",
+      "source_sha256": "42f18fd8211630b8e1391a832177dfee882cd1439a82b9fc7de1938fde9a9f54",
+      "receipt": "scratch/authors/nf102/match/display-final-delivery/func_0012300c.result.json",
+      "receipt_sha256": "45e97467b60f424be95a7db1ec76280079b5d3f34acaab0499315b9c7bec6bd4",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Author uses constructor-bearing DisplayFramebuffer[2] pointer and long-long data00242a40, while parent00142b8c/00137b84 expose DisplayFramebufferPair* and0010d454 AppletTimeout aggregate. Writable constructor callback at accepted00142a54 is unresolved too. Do not import private frame classes/names or reinterpret timeout without coordinated exact owner/constructor/aggregate cutovers.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/func_00142b8c.c",
+          "sha256": "9ed233adc84f9a1266cf909d8e8d82bcd338b40e0f792930f5ae67b502baa4de"
+        },
+        {
+          "path": "src/checkpoint10/func_00137b84.c",
+          "sha256": "fcb2800b3dcb0eac8019b59c0759673bf510fd4d08d62f3536e9f5f864d6e1ce"
+        },
+        {
+          "path": "src/checkpoint10/func_0010d454.c",
+          "sha256": "5c294990a69dfffd02bba741fca47e6e86b5e78581699e4879aab7b05a3571f9"
+        },
+        {
+          "path": "src/wave2/func_00142a54.c",
+          "sha256": "06ab0f33b6b862ed97aec977976febe86114238c9c9e4e109f46ad0a31d11aed"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0012d5c4",
+      "target_size": 104,
+      "manifest": "scratch/authors/nf104/RESULT.json",
+      "manifest_sha256": "381c7a19e7633f404a7861acb5ba1d05312be830965075ba6bb107ed9f43013d",
+      "row_index": 0,
+      "author": "nf104",
+      "source": "scratch/authors/nf104/src/func_0012d5c4.c",
+      "source_sha256": "78d1b530b35f21b3612d04ea8135d1b2c554ef096d6e87f0899fadaee79cf58c",
+      "receipt": "scratch/authors/nf104/match/func_0012d5c4/final-natural-mapped-descriptors-sdk/func_0012d5c4.result.json",
+      "receipt_sha256": "5907f7b2f749a55e04a1b8bdcdd000ef64cd2d31a7f4bfd1a4158e5c6e30de55",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "sdk",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00131464",
+      "target_size": 160,
+      "manifest": "scratch/authors/nf057/RESULT.json",
+      "manifest_sha256": "f23714005875b2402ae7742ec2fdc1055fbd6449ef7b1a0023d0aa558fa618be",
+      "row_index": 2,
+      "author": "nf057",
+      "source": "scratch/authors/nf057/src/func_00131464.cpp",
+      "source_sha256": "102f710c457b6e45cd7966c8a4d8625e55965845d69c206e19f724d1519e9b87",
+      "receipt": "scratch/authors/nf057/match/00131464-14-delivered-middleware/func_00131464.result.json",
+      "receipt_sha256": "e564d0e4b69c8157f8622d3dd55c1a47893312f52ff978a9259d4dba77eab8eb",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "TaskPool initialized/active/inactive record duplicates accepted local partial TaskPool definitions00153fec/0015477c and intersects native VoiceManager/AudioVoiceGroup lifetime. Identical intrusive layouts do not settle that full shared pool owner. Same pool boundary as historical0017e764.",
+      "contract_evidence": [
+        {
+          "path": "include/game/audio_tasks.h",
+          "sha256": "e16e85d82411d034d6c8205f10372ca6cfa0126ab3fbd5d83559688c07e4e715"
+        },
+        {
+          "path": "src/wave16/func_00153fec.c",
+          "sha256": "481cfb6751ad8d710b87156783129fa64832b8cbf65db7797b7aa89c35443483"
+        },
+        {
+          "path": "src/wave16/func_0015477c.c",
+          "sha256": "6d5861eaf1cb317d8554b20c69e8cc06daa1ad8514be3b4ff6825d4a448b0d3d"
+        },
+        {
+          "path": "include/game/audio_voice.h",
+          "sha256": "b2988eb49b6dc0f92520e7d4ea51017473f94acc848e923858cab73ce4f8405e"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_00135908",
+      "target_size": 288,
+      "manifest": "scratch/authors/np007/RESULT.json",
+      "manifest_sha256": "74fe94d9d27dc5b45b7eecbb989f8677506e91ca88797bba60a41d0f0a82d904",
+      "row_index": 1,
+      "author": "np007",
+      "source": "scratch/authors/np007/src/func_00135908.c",
+      "source_sha256": "c3c023dc7c542949a7e10601726496d574bce7a749515e14757ae8f1c2a0042e",
+      "receipt": "scratch/authors/np007/match/00135908-27-delivered-game/func_00135908.result.json",
+      "receipt_sha256": "af8153c67e3e58f7f8169a245532c2ff0cb278489d1c0d6042a86be8babf47bf",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "The target interprets data0023fdc8 as signed int frame advance, while accepted startup consumers bind RestorableState{unsigned current,saved}. It also duplicates accepted local AnimationResource/Header. Signed conversion must not be silently changed or aliased to the unsigned global just for bytes; shared global/consumer ownership requires an explicit accepted cutover.",
+      "contract_evidence": [
+        {
+          "path": "include/game/startup.h",
+          "sha256": "6b812b35a504aabe7d4af9f160fabdbeb7de372ab38afa4f7f6f343f58452534"
+        },
+        {
+          "path": "src/wave15/func_00106190.c",
+          "sha256": "9a99416878c840457aa083f5e0f4447b393588aaf9fc3029678c85a537499785"
+        },
+        {
+          "path": "src/wave16/func_00135b34.c",
+          "sha256": "36c1d0172167a64df54185905204ca6ea4351ffc2baf00b3a3de749ab3176634"
+        },
+        {
+          "path": "src/wave16/func_0013dea0.c",
+          "sha256": "1dcf0ab913522440253ee2e1a8955b67f95e3bdc366700c36923d2067cadf451"
+        },
+        {
+          "path": "src/wave9/func_001409c0.c",
+          "sha256": "84b1bfd7c1076798d0d43743943f9b5fa43e0473e0babae46683dab276882bb2"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_00136340",
+      "target_size": 112,
+      "manifest": "scratch/authors/np007/RESULT.json",
+      "manifest_sha256": "74fe94d9d27dc5b45b7eecbb989f8677506e91ca88797bba60a41d0f0a82d904",
+      "row_index": 2,
+      "author": "np007",
+      "source": "scratch/authors/np007/src/func_00136340.c",
+      "source_sha256": "7b568b8e20c6d37969d9d9eb3a3de26ea6e937d1ea2cd97775dccb6dc770c4e9",
+      "receipt": "scratch/authors/np007/match/00136340-13-delivered-sdk/func_00136340.result.json",
+      "receipt_sha256": "5e0f8168de02aa0622409d5210a502b72997a9a2552babc01248e364d81403eb",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "sdk",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00141944",
+      "target_size": 364,
+      "manifest": "scratch/authors/np010/RESULT.json",
+      "manifest_sha256": "4bec5f26114e02ecffe75cb5ad5d6ae33f75d88d0ce170aa0a8ca33c5cae0a69",
+      "row_index": 2,
+      "author": "np010",
+      "source": "scratch/authors/np010/src/func_00141944.c",
+      "source_sha256": "f7e4ee562aa5525867e011147cb5ebd1c5375cb15ed2707b97f6dcdfb66d300f",
+      "receipt": "scratch/authors/np010/match/func_00141944/final-delivery/func_00141944.result.json",
+      "receipt_sha256": "2a0eda0d8e79f2fe8627f4a2237433b7f56866f8b814ef1620168cdf50552e2f",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_0014b244",
+      "target_size": 108,
+      "manifest": "scratch/authors/nf062/RESULT.json",
+      "manifest_sha256": "7bc639d8a773612324c0118df7bbbcf876c50f4d73dee1c7797630f305b3d902",
+      "row_index": 1,
+      "author": "nf062",
+      "source": "scratch/authors/nf062/src/func_001494dc.cpp",
+      "source_sha256": "fabd18e97dd682c0b34285670c8ac75e1ba23532c1df09efce48528a9c87d902",
+      "receipt": "scratch/authors/nf062/match/channel/final_corrected_layout/func_001494dc.result.json",
+      "receipt_sha256": "fc32827453075d32b47015489d162e2def42538109196a46c2ba6d696b8e30ff",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Author keeps unsigned channel versus canonical signed-char index, local InputSessionFields fallback bytes, and int(ServiceCoordinator*,unsigned,int) call00180d10 whereas accepted body uses int(DriverContext*,int,short). A real accepted driver/context/width cutover is needed; no source view cast or local divergent prototype is admitted.",
+      "contract_evidence": [
+        {
+          "path": "include/game/input_runtime.h",
+          "sha256": "770fe4990b9c268785433e93fcd3b574cac096aecf66f88306f9ddfc7f063087"
+        },
+        {
+          "path": "src/wave15/func_00180d10.c",
+          "sha256": "c133127884983c8b73bb5f3fd120b2e0e1bcfd2c7bd34effa75560b208b8447a"
+        },
+        {
+          "path": "src/wave16/func_00146150.c",
+          "sha256": "c22662b59aed67ca98ebc6860c5a40a55fc0ba3c02e8f3541d44b69274d52db6"
+        },
+        {
+          "path": "src/wave17/func_0014c990.c",
+          "sha256": "67db13fbbdb9ecc94f085921f56abeb68b8b3f5a3306dfb4a3c8154d01b1ba92"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0014cd18",
+      "target_size": 140,
+      "manifest": "scratch/authors/np013/RESULT.json",
+      "manifest_sha256": "8cda7ad86cc5076acad7d920107314d7a2b474dde64e2c837e663d9b38c1ad8f",
+      "row_index": 2,
+      "author": "np013",
+      "source": "scratch/authors/np013/src/func_0014cd18.c",
+      "source_sha256": "dbd8e1ea505940b4b0cf31ac9bf600cd8bded2dd0f7cba92849eeae39d47bf22",
+      "receipt": "scratch/authors/np013/match/func_0014cd18/17-final-transaction-canonical-payload/func_0014cd18.result.json",
+      "receipt_sha256": "62115fd570cd3a11d05026554987a6be6def42d849933504d7636b9833adb027",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_0014fbec",
+      "target_size": 140,
+      "manifest": "scratch/authors/nf062/RESULT.json",
+      "manifest_sha256": "7bc639d8a773612324c0118df7bbbcf876c50f4d73dee1c7797630f305b3d902",
+      "row_index": 2,
+      "author": "nf062",
+      "source": "scratch/authors/nf062/src/func_0014fbec.c",
+      "source_sha256": "32b58797c1cad76905c64701eeccd56d27e93ebb5d739bb43152c96aa4196d9d",
+      "receipt": "scratch/authors/nf062/match/filter/final_selected/func_0014fbec.result.json",
+      "receipt_sha256": "355754bb7477a251e4f131dffc94d99a42f9b60b122fa73e168609296c6fd249",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Filter target casts AudioChannel to ChannelFilterPrefix and AudioChannelState to DirtyValueObject; accepted shared biquad, coefficient and dirty endpoints use distinct real records. Reconcile shared channel/state and input-device coefficient contracts rather than publishing coincident offsets.",
+      "contract_evidence": [
+        {
+          "path": "include/game/audio_voice.h",
+          "sha256": "b2988eb49b6dc0f92520e7d4ea51017473f94acc848e923858cab73ce4f8405e"
+        },
+        {
+          "path": "include/game/audio_filter.h",
+          "sha256": "7d8cdee8031480b608b85bf5259549cacc0a098f6786d84569a05a4c4f1729df"
+        },
+        {
+          "path": "include/game/input_device.h",
+          "sha256": "a8cd8849e6efded8162a768ffdab3f1e1bbc858be36e1da48da795a08ddc8967"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001512fc",
+      "target_size": 136,
+      "manifest": "scratch/authors/nf114/RESULT.json",
+      "manifest_sha256": "5a6a984b5467b6fa9e6fd5604dbf4c1f178c8569fb26a6e87c6308ebe1f1ec93",
+      "row_index": 1,
+      "author": "nf114",
+      "source": "scratch/authors/nf114/src/func_001512fc.cpp",
+      "source_sha256": "bdddc28cb7182990f57410200826a4a55d8d0b521b6ba59f876c62ed44c2c6fd",
+      "receipt": "scratch/authors/nf114/match/command_a26_delivered_middleware/func_001512fc.result.json",
+      "receipt_sha256": "e9f3a0c696b2956cb254ddcd91dbe22096ef290e53a58d0d35a800f42d7bd598",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "The native member-template loop requires CommandGroup/AnimationTrack callback identity and bool,int method-table data0021df3c. Parent command wrappers keep separate CommandGroup/CommandTarget and complete byte-method table views; canonical SequencePlayer does not declare those methods. Do not silently equate owners or add a shorter table shadow.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/func_0015121c.cpp",
+          "sha256": "b4c7a4e5563777deff34d8272b81edbc95159fdf1a1a2dc6cf5789b8e0138b4f"
+        },
+        {
+          "path": "src/checkpoint10/func_00151458.cpp",
+          "sha256": "8f6816893c10029a0fbae2947544b14dbd627f58b56c757e2b4aa03bcf4f4c40"
+        },
+        {
+          "path": "src/checkpoint10/func_00151584.cpp",
+          "sha256": "0e638bcadc380e2309fe32630820e1b0401a86063117bbc541410576f7f8e489"
+        },
+        {
+          "path": "include/game/sequence.h",
+          "sha256": "e309612afb030d4b56bcdf7f3943543273ad15d29a2cb994f867b53712cb4788"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001532e8",
+      "target_size": 208,
+      "manifest": "scratch/authors/np014/RESULT.json",
+      "manifest_sha256": "4c3070de75c0a7c7864bc8603a44d3b4c7d31495967d0f2aebd1f2fb5919f6e7",
+      "row_index": 2,
+      "author": "np014",
+      "source": "scratch/authors/np014/final/stream.cpp",
+      "source_sha256": "9444f4c6122e02efc70a15f2cd870b724e4530f7d5f8a77b8fb20d2c3c4e987e",
+      "receipt": "scratch/authors/np014/match/stream-09-final-delivered/stream.result.json",
+      "receipt_sha256": "79971af9dbefe75c4247cf473c7e321161815273d4b73984533f09bbedd12749",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Natural author uses polymorphic StreamPlayer::Stop(+0x14) while accepted prefetch_stream.h has void*vtable complete record. The __aeabi_uldivmod overlay at runtime001941f8 has catalogue ABI classification (530 cases), but preserved runtime report explicitly lacks whole-helper/caller binding proof at its seal. Record remains deferred pending typed Stop contract and independently bound runtime provenance; no guessed symbol adoption.",
+      "contract_evidence": [
+        {
+          "path": "include/game/prefetch_stream.h",
+          "sha256": "40f466c147d528e23e8c01b3923c2160ad71a352e7873f1940d3e1b6283a91b3"
+        },
+        {
+          "path": "src/sdk2/func_00153cc4.cpp",
+          "sha256": "4e6dabf90d81cbdf9d67c10d07492a51f25a9da9adbff6304ac894f3a97afeb0"
+        },
+        {
+          "path": "config/catalogue.json",
+          "sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64"
+        },
+        {
+          "path": "scratch/integrator/runtime-helpers/REPORT.md",
+          "sha256": "cdd63c35f704b0f46796efd65442d9df1935fab0de24881c56f645b5a646150a"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001551a0",
+      "target_size": 92,
+      "manifest": "scratch/authors/nf063/RESULT.json",
+      "manifest_sha256": "85e499e29883afc69ed18c97994e33da9eab57e1b1f18aec43d07bca0afd27cd",
+      "row_index": 2,
+      "author": "nf063",
+      "source": "scratch/authors/nf063/variants/vm09-local-receivers/voice.cpp",
+      "source_sha256": "896a9b8e905f71d02d9aa45895869e49ef1aaca8d4fab5b1b6150964c39e2f9e",
+      "receipt": "scratch/authors/nf063/match/vm09-local-receivers/voice.result.json",
+      "receipt_sha256": "f2abb58d18a3969426557b7d4e48dcc387584283a35c66f5dd75dea4385d81e5",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Native VoiceManager::AppendVoiceList/Voice owner conflicts with partial TaskPool/AudioVoiceGroup and accepted channel callback views. The same-address self-definition does not unify native and C owners or unused return contract. Coordinate the whole pool/voice registration family with c010; no shadow alias.",
+      "contract_evidence": [
+        {
+          "path": "include/nw/snd/snd_VoiceManager.h",
+          "sha256": "d7981d5fb70f2472db06899493a15b50aa164b01ee2250870b9c9a5fcce08ab9"
+        },
+        {
+          "path": "include/nw/snd/snd_Voice.h",
+          "sha256": "472bfb184c1c62f44b3c529f08a08397c46d7cf11d19f2a2374d8a7c73a0f04e"
+        },
+        {
+          "path": "include/game/audio_voice.h",
+          "sha256": "b2988eb49b6dc0f92520e7d4ea51017473f94acc848e923858cab73ce4f8405e"
+        },
+        {
+          "path": "include/game/audio_tasks.h",
+          "sha256": "e16e85d82411d034d6c8205f10372ca6cfa0126ab3fbd5d83559688c07e4e715"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_00155d68",
+      "target_size": 116,
+      "manifest": "scratch/authors/nf064/RESULT.json",
+      "manifest_sha256": "8e36c1227de8e11328770aa3ef6cb0d9ba6139bb58cbfeed33078410b6fcb990",
+      "row_index": 0,
+      "author": "nf064",
+      "source": "scratch/authors/nf064/src/allocators.cpp",
+      "source_sha256": "94b8d7d6224f4392c9aeacd7e194444e5ce593aeb64290d87a7c4e64875d2fcf",
+      "receipt": "scratch/authors/nf064/match/final-allocators-middleware/allocators.result.json",
+      "receipt_sha256": "2795ed93527e798e1d601dd6752e6c8240dc03e2a099e1386465d6bc98a18050",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Target invokes native void001551a0 with local TaskPool/AudioVoiceGroup and performs real priority traversal; author TU also duplicates uncollected allocator00154838 and shared AudioChannel/HandleManager differing records. Retire local blocks only with genuine shared pool/voice/priority cutover, not second matching owner.",
+      "contract_evidence": [
+        {
+          "path": "include/game/audio_voice.h",
+          "sha256": "b2988eb49b6dc0f92520e7d4ea51017473f94acc848e923858cab73ce4f8405e"
+        },
+        {
+          "path": "include/game/service_runtime.h",
+          "sha256": "5dbf72dcf0670d6b9ccb5a7ad9d62468c0bc20b92254ecb1c6dd2b5746adeb6e"
+        },
+        {
+          "path": "include/game/audio_tasks.h",
+          "sha256": "e16e85d82411d034d6c8205f10372ca6cfa0126ab3fbd5d83559688c07e4e715"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0015e830",
+      "target_size": 148,
+      "manifest": "scratch/authors/nf117/RESULT.json",
+      "manifest_sha256": "9c62e47ed4d32ee6d526a2b9d850bb042b418a61988d28fbe328fbb4bb263f1e",
+      "row_index": 1,
+      "author": "nf117",
+      "source": "scratch/authors/nf117/src/alignment.cpp",
+      "source_sha256": "bdb016dfa2b15fdcb96253181ca01db7c01c2096fe3f282f5dee95178af65f8f",
+      "receipt": "scratch/authors/nf117/match/final-alignment-game/alignment.result.json",
+      "receipt_sha256": "c0973cadfd169babb7511683f7efba3a4def389ae70a23fb1921f3d15fce5a66",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00167ee4",
+      "target_size": 152,
+      "manifest": "scratch/authors/nf118/RESULT.json",
+      "manifest_sha256": "8aba39fe640b00045c3cc334e6ea7c401c8fa19feca1fa716a06dea2676b068b",
+      "row_index": 2,
+      "author": "nf118",
+      "source": "scratch/authors/nf118/src/func_00167ee4_step5.cpp",
+      "source_sha256": "53dea8a67cbd6d46621827555f919b4062fcb5c96b1e2a2cfda51fde902d0a82",
+      "receipt": "scratch/authors/nf118/match/func_00167ee4/step5-final/func_00167ee4_step5.result.json",
+      "receipt_sha256": "a079db4c0c422ba32344214ad84974ae1dc954de5428792ca56b67e2d3df866d",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00169fb0",
+      "target_size": 184,
+      "manifest": "scratch/authors/nf119/RESULT.json",
+      "manifest_sha256": "c61801ec1065897680a4fc9c25da1fa58d5918cadabaa4492029bd68efea2bf6",
+      "row_index": 0,
+      "author": "nf119",
+      "source": "scratch/authors/nf119/variants/audio01-indexed-members/func_00169fb0.c",
+      "source_sha256": "bdf9bf13b4b7a23c5c1868eac63efd61c3d704f1eb001ce92d409680f74510b5",
+      "receipt": "scratch/authors/nf119/match/audio01-indexed-members/middleware/func_00169fb0.result.json",
+      "receipt_sha256": "8748ccc4641c9e0d78648a00b3be53bbfeae637738ff921864fb8e9f42e01692",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "AudioDecodeState includes PackedRecordSource prefix and ADPCM tail, but parent decoder_command has a different same-named AudioDecodeState starting with AudioReadStream*, and accepted decoder helpers retain further local views. No same-offset alias or flexible-tail retag without decoder state/record/ADPCM ownership reconciliation.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/collect-r2/decoder_command.cpp",
+          "sha256": "88b160c4d32a6b8962435f15219dfaf1b0fe6a986c418ef6a61143fa78a01ab1"
+        },
+        {
+          "path": "include/game/memory.h",
+          "sha256": "1fe2c70d3937b6b4996562105168d467327935507b979c8a38d32578d3cc5cf2"
+        },
+        {
+          "path": "include/game/prefetch_stream.h",
+          "sha256": "40f466c147d528e23e8c01b3923c2160ad71a352e7873f1940d3e1b6283a91b3"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0016b404",
+      "target_size": 40,
+      "manifest": "scratch/authors/nf065/RESULT.json",
+      "manifest_sha256": "77027b47777e6161dffa03bc069f0b5dd54469afbe58e9ef7fee311398aef72b",
+      "row_index": 2,
+      "author": "nf065",
+      "source": "scratch/authors/nf065/variants/0016b404-a05-byte-helper.c",
+      "source_sha256": "19121dd95c20a9d0bfddee04b1be567d8531654a057bd0323d7bb3d7c850cc24",
+      "receipt": "scratch/authors/nf065/match/0016b404/final-selected/0016b404-a05-byte-helper.result.json",
+      "receipt_sha256": "4ef44f731e2c112dbd64dbf47174375eb8c4fce758177e4b56f7d0c149d54563",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_0016e47c",
+      "target_size": 336,
+      "manifest": "scratch/authors/nf119/RESULT.json",
+      "manifest_sha256": "c61801ec1065897680a4fc9c25da1fa58d5918cadabaa4492029bd68efea2bf6",
+      "row_index": 2,
+      "author": "nf119",
+      "source": "scratch/authors/nf119/variants/widget09-expression-copy-size/widget_operations.cpp",
+      "source_sha256": "83268781df9c52ceb586338eab58c89fed551541714de1dd373f310f8ac40fdf",
+      "receipt": "scratch/authors/nf119/match/widget09-expression-copy-size/game/widget_operations.result.json",
+      "receipt_sha256": "aeb554fbe618514b4f1d7acf4cf7e268706ee0480701509a92367e0166e9ac1a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Canonical WidgetSlot::object is DisplayObject*, but target reinterprets it as TrainingWidget to call typed text formatter00170c20. Retagging shared slot or text runtime would affect accepted users. Preserve author bytes; reconcile the real widget/base relationship rather than retaining receiver cast.",
+      "contract_evidence": [
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        },
+        {
+          "path": "include/game/property_descriptor.h",
+          "sha256": "717a22e85bae9d519ea8771ae1742be4bffae479f61001b6fedbc1a448a9c3ca"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_00171d40",
+      "target_size": 72,
+      "manifest": "scratch/authors/nf121/RESULT.json",
+      "manifest_sha256": "7af09b0bcefaf4e3fb4658c228970fc5a843a544f77e95b85125448614a80475",
+      "row_index": 2,
+      "author": "nf121",
+      "source": "scratch/authors/nf121/src/func_00171d40.c",
+      "source_sha256": "f2927d7ebb9504122560cbf966cd4c8e56c512fc555537ce681ec0314c7b4433",
+      "receipt": "scratch/authors/nf121/match/060-delivered-func_00171d40-game/func_00171d40.result.json",
+      "receipt_sha256": "7c635acfff3fd5d58d7b35fa00dbfdc652fd116f5da2768217bf46ee190af941",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00173e48",
+      "target_size": 172,
+      "manifest": "scratch/authors/nf122/RESULT.json",
+      "manifest_sha256": "b2a90d130f045cb503d3920244732aa43a7255bd4e17d6cfcb2f3b7f2ebc3d8f",
+      "row_index": 1,
+      "author": "nf122",
+      "source": "scratch/authors/nf122/src/func_00173e48.cpp",
+      "source_sha256": "175bd33ebf83d30b40c790fef0f68d18799fec8a437dc4fa3449a326b8f673d8",
+      "receipt": "scratch/authors/nf122/match/00173e48_25_final_source/func_00173e48.result.json",
+      "receipt_sha256": "1aa526bbb8c7da6c92052358e93a529ab2bd23b0c369b43bbcaa6c65d60f37c7",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Target reads canonical DisplayHandle::object(ResourceEvent*) as DisplayObject* and dispatches activation APIs; private SelectionHintPanel ten-handle prefix cannot resolve accepted resource/display owner relationship. Same lifecycle boundary as historical selector and display-handle deferrals.",
+      "contract_evidence": [
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        },
+        {
+          "path": "include/game/resource_runtime.h",
+          "sha256": "b68fd128d3c7d3cc90acb996d5cb5e87d0caa8445c0911aab59241141390517b"
+        },
+        {
+          "path": "include/game/selection.h",
+          "sha256": "b40ca89b51a221e2306d00ff94ebdc57497ab43eab65fb1110b91d58458ec18f"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_00178f5c",
+      "target_size": 40,
+      "manifest": "scratch/authors/nf069/RESULT.json",
+      "manifest_sha256": "0c12334957b443f94ff6df2c158cac8193282d4eba5637303458b8650531b6cc",
+      "row_index": 1,
+      "author": "nf069",
+      "source": "scratch/authors/nf069/src/func_00178f5c.c",
+      "source_sha256": "e793da9576e26da83e7f78461e119e4b615278e591609d6e10df2149c9be3e46",
+      "receipt": "scratch/authors/nf069/match/final-text/game/func_00178f5c.result.json",
+      "receipt_sha256": "b09edde773988df023b38dd189acc8a53d49e0a8055181ba9a1fb8fe2616d373",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_00179e5c",
+      "target_size": 120,
+      "manifest": "scratch/authors/nf070/RESULT.json",
+      "manifest_sha256": "0ba5cf16a47984bddb1e23941fc403fcfa087debc75231cccdcdbb6153f5a55b",
+      "row_index": 0,
+      "author": "nf070",
+      "source": "scratch/authors/nf070/src/final/func_00179e5c.c",
+      "source_sha256": "8ac6a329d398664177d4b47737fcf26fc1c8f334e568bd347521e588712f6d7f",
+      "receipt": "scratch/authors/nf070/match/75-00179e5c-final-middleware/func_00179e5c.result.json",
+      "receipt_sha256": "3f7e9f13dd15b2d4c258c8be58345c4ceb2c9eeb726e29a0ccdae278286e0050",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "NavigationScreenView overlays side byte at Screen+0x78 with the canonical WidgetSlot pointer vector, without evidence of union variant ownership. Shared001b5b60 formal also has a declaration gap. Do not publish the nominal Screen overlay as a common record or overwrite accepted pointer storage.",
+      "contract_evidence": [
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0017e6c8",
+      "target_size": 156,
+      "manifest": "scratch/authors/nf125/RESULT.json",
+      "manifest_sha256": "d6411571ae65899d0e02777f5f2faf46680bd3999978eeea96c4391304259d46",
+      "row_index": 0,
+      "author": "nf125",
+      "source": "scratch/authors/nf125/variants/scalar-factor_local.c",
+      "source_sha256": "d1b37c6314a82617600984fee2fda2cd5d4c15c199b219fb7815bf9b06352270",
+      "receipt": "scratch/authors/nf125/match/scalar-07-factor_local/scalar-factor_local.result.json",
+      "receipt_sha256": "746b9ead0c8960e46b13299a3aeeb77bfe9d1be5c4588eccb43eea5210971ce8",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "sdk",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "One-float ScalarUpdate[] declaration for bss004b8440 conflicts with accepted GraphicsConverters table containing float(float), void(void), and float(void) entries (reset/random). Preserve mixed callback arities and canonical initializer; homogeneous array cannot be admitted on an index alone.",
+      "contract_evidence": [
+        {
+          "path": "src/wave19/func_00147478.c",
+          "sha256": "99035d7e59d40c760e66901179cab060024cf8d0bf33df2af29b94281e42a4e8"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0017fc7c",
+      "target_size": 144,
+      "manifest": "scratch/authors/nf125/RESULT.json",
+      "manifest_sha256": "d6411571ae65899d0e02777f5f2faf46680bd3999978eeea96c4391304259d46",
+      "row_index": 1,
+      "author": "nf125",
+      "source": "scratch/authors/nf125/variants/material-local_count.cpp",
+      "source_sha256": "ef2b108fbc08d55de436b71fa0965ba89f72b88947f44ff1a2d674635d5c851a",
+      "receipt": "scratch/authors/nf125/match/material-25-local_count/material-local_count.result.json",
+      "receipt_sha256": "f6bdb38b86e29b682f40771ba9003d1201213df7fbf970bc6db05b282416276a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Native nw::lyt::Material::SetTexCoordGenNum self-definition conflicts with canonical game Material* endpoint used by accepted00181100; m_MemNum bitfields/native extent are not the shared C count record. Requires true material/getter/caller cutover, not name alias.",
+      "contract_evidence": [
+        {
+          "path": "include/game/material.h",
+          "sha256": "82b5b83fad55e37d2189a4d5ff1200206c2660457dfaa7402149d10b14a65c6a"
+        },
+        {
+          "path": "include/nw/lyt/lyt_Material.h",
+          "sha256": "b91dba4b3ecb382d9f52ae2571db7a9e7c61a7e8008cb84a7a82efae88f057d2"
+        },
+        {
+          "path": "src/wave13/func_00181100.cpp",
+          "sha256": "7f815b22e87c5873f2b22d7848ef36c4e4a2323ce15f2b51b1c72a1ed32521c9"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_00180388",
+      "target_size": 72,
+      "manifest": "scratch/authors/nf070/RESULT.json",
+      "manifest_sha256": "0ba5cf16a47984bddb1e23941fc403fcfa087debc75231cccdcdbb6153f5a55b",
+      "row_index": 1,
+      "author": "nf070",
+      "source": "scratch/authors/nf070/src/final/func_00180388.c",
+      "source_sha256": "29ddbf0d2230783f0ae66f34e00cf82271735d3a9dd44c0987fb47e13bd21c91",
+      "receipt": "scratch/authors/nf070/match/76-00180388-final-game/func_00180388.result.json",
+      "receipt_sha256": "640f7404a80cc205dc535a76d4ed47b58dd70f90c7b30198610d6e28e87c4802",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001803d0",
+      "target_size": 52,
+      "manifest": "scratch/authors/nf070/RESULT.json",
+      "manifest_sha256": "0ba5cf16a47984bddb1e23941fc403fcfa087debc75231cccdcdbb6153f5a55b",
+      "row_index": 2,
+      "author": "nf070",
+      "source": "scratch/authors/nf070/src/final/func_001803d0.c",
+      "source_sha256": "700c8e85fae767cbed92ddb0373338e0c1a6866402e9a931aa813bf91c376c26",
+      "receipt": "scratch/authors/nf070/match/77-001803d0-final-sdk/func_001803d0.result.json",
+      "receipt_sha256": "4c26f87b3bac1a3a3ed40f09e025020d0e4a88a8b4a318510a16a7e8937416df",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "sdk",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001814e8",
+      "target_size": 56,
+      "manifest": "scratch/authors/nf126/RESULT.json",
+      "manifest_sha256": "10f435042c8eaffc89c331cb5b3a1428c8c763f07f0d16628f1b79d761def0fc",
+      "row_index": 0,
+      "author": "nf126",
+      "source": "scratch/authors/nf126/src/resource_binding.c",
+      "source_sha256": "dbc1f21a7bca33deadf8c20858111e786be162c565922a98fd5f681f72dfede6",
+      "receipt": "scratch/authors/nf126/match/001814e8/final-middleware/resource_binding.result.json",
+      "receipt_sha256": "52b4567e789d4104c660bd32fb74574b66d4044827ad27b729ab8bfcfb3098d9",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "MATCH relies on same-TU genuine but mismatching definitions of accepted resource lookups0018269c/001851f0/001971a0 with explicit noinline, and a local00196e14 binding signature. Removing/replacing those definitions needs destination witness and accepted owner moves; do not carry duplicate accepted bodies or claim target-only extraction preserves match.",
+      "contract_evidence": [
+        {
+          "path": "include/game/resource_tables.h",
+          "sha256": "214dfca11309255a6c2cfc1f32e080d461e8ba909725c7ade10cb2e916cfeecd"
+        },
+        {
+          "path": "config/matches.json",
+          "sha256": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0018528c",
+      "target_size": 104,
+      "manifest": "scratch/authors/nf128/RESULT.json",
+      "manifest_sha256": "b80ade85dfb4029f164935d5b09185b59cf13cf588c3790392d2eb0011d015db",
+      "row_index": 2,
+      "author": "nf128",
+      "source": "scratch/authors/nf128/src/display_queues.c",
+      "source_sha256": "eb7e0b054539ca4b4ff7a26bc6b1538fd36ee5f22d2e166603c95a64115cffb7",
+      "receipt": "scratch/authors/nf128/match/a05-queue-prev_before_current/game/display_queues_prev_before_current.result.json",
+      "receipt_sha256": "beefd665f1fc1a85aed597c08a32531a8262380a2e82a35f6e6f15aab2288daf",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001ab590",
+      "target_size": 204,
+      "manifest": "scratch/authors/nf076/RESULT.json",
+      "manifest_sha256": "af19625aa65a2f95222783d5e6d60d4475d1a34e422444a94c15f8f6e3351a25",
+      "row_index": 1,
+      "author": "nf076",
+      "source": "scratch/authors/nf076/src/menu_modes.cpp",
+      "source_sha256": "4108a1040bd7affbae8fc7fc5f859523fdfe5a9c0da769e348391b4bb9210206",
+      "receipt": "scratch/authors/nf076/match/menu-03-final-canonical-contracts/menu_modes.result.json",
+      "receipt_sha256": "a4d96cbb4536755abc43ccbfe27d998d7025d1dbfd64d0df7174e4ee4fe18259",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "MenuResetStateTu605 crosses CallbackTarget via reinterpret_cast and duplicates c010001abf24 owner/formal plus accepted control callbacks. The callback registration cannot prove aggregate owner from offsets. Shared menu scene/control lifetime cutover is required.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/func_001abf24.c",
+          "sha256": "7352560dfa41107fc9ea89f707b8860c783d2b31e1cd056a729a127f4163e276"
+        },
+        {
+          "path": "include/game/deferred_callback.h",
+          "sha256": "aa267a0eaa80d4858d235d040b041256b5e733109a317f7612f5167c2ac8aa59"
+        },
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001af258",
+      "target_size": 172,
+      "manifest": "scratch/authors/nf136/RESULT.json",
+      "manifest_sha256": "babad69b6e70eeeab55f93332b0b74b029e5e8e056a6a4b62a619fede43147e5",
+      "row_index": 2,
+      "author": "nf136",
+      "source": "scratch/authors/nf136/final/func_001aeb30.cpp",
+      "source_sha256": "d75acd03cfc84899f7143230065304ddec4616089f95be64af8be6b0a6d43c3d",
+      "receipt": "scratch/authors/nf136/match/func_001af258/064-final-delivery-game/func_001aeb30.result.json",
+      "receipt_sha256": "37c18f2942013c60b2b4b09c0ebc8cd29010cac4411b0343537ec4a5d223d32a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001af424",
+      "target_size": 304,
+      "manifest": "scratch/authors/nf137/RESULT.json",
+      "manifest_sha256": "6fb354474a2ef0018ee1caffb30e0c4b0b91633dbd36c9c57745fc8018de651e",
+      "row_index": 1,
+      "author": "nf137",
+      "source": "scratch/authors/nf137/final/selection-buffer/func_001aeb30.cpp",
+      "source_sha256": "682e5daf63fbe302780646bda949b52d37c7c92e0632682f8dd53ec4dda0eb27",
+      "receipt": "scratch/authors/nf137/match/final-func_001af424/func_001aeb30.result.json",
+      "receipt_sha256": "61b90ca95dd52bbe13949883f5f4ab91962591e7937ca9353a3463a825547c6a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Target cleanup invokes00183208 with DisplayObject* from ResourceEvent-backed DisplayHandle and introduces TU607::SelectionScreen where accepted ScreenResourceManager declares Component001af424. Native bitset extent alone does not prove owner. Keep whole MATCH receipt; defer genuine accepted owner/resource endpoint cutover.",
+      "contract_evidence": [
+        {
+          "path": "include/game/resource_runtime.h",
+          "sha256": "b68fd128d3c7d3cc90acb996d5cb5e87d0caa8445c0911aab59241141390517b"
+        },
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        },
+        {
+          "path": "src/large/func_00176e24.c",
+          "sha256": "226737a391543d5b480c9832c63e908a829997f51c2158627b096790e313cceb"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001bdc7c",
+      "target_size": 252,
+      "manifest": "scratch/authors/nf139/RESULT.json",
+      "manifest_sha256": "7e36d5a3a1877e68f310a8221bbbab70794c2b0da87179ef33855488876c265a",
+      "row_index": 2,
+      "author": "nf139",
+      "source": "scratch/authors/nf139/variants/func_001bdc7c/phase-before-primary-slot/func_001bdc7c.cpp",
+      "source_sha256": "535eacb621bbb234e1162f8b1af441aeeda40fa19d8a8c362a431f19472c1152",
+      "receipt": "scratch/authors/nf139/match/func_001bdc7c/exit-final-canonical-includes/func_001bdc7c.result.json",
+      "receipt_sha256": "ebffa3ea54750696ee7305064ea35b563d17371c2eaebd2cdbda789df88f82f0",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "W24eExitState is cast to different W6SelectionReset and CallbackTarget receivers, interacting with canonical W6Selector/handle/list and existing scene callbacks. Reconcile shared actual scene/registration owner; no inferred overlapping partial views or erased helper aliases substitute.",
+      "contract_evidence": [
+        {
+          "path": "include/game/selection.h",
+          "sha256": "b40ca89b51a221e2306d00ff94ebdc57497ab43eab65fb1110b91d58458ec18f"
+        },
+        {
+          "path": "include/game/deferred_callback.h",
+          "sha256": "aa267a0eaa80d4858d235d040b041256b5e733109a317f7612f5167c2ac8aa59"
+        },
+        {
+          "path": "include/game/scene_dispatch.h",
+          "sha256": "be830c0053ef38e77e5c5f1898d97ec61dcc65177dab6afd22fb61b3cb966492"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001c2cd4",
+      "target_size": 160,
+      "manifest": "scratch/authors/nf081/RESULT.json",
+      "manifest_sha256": "75bf6c7546b2eb843175605d12094dc22527a15587aa08158f77949363b5d0c4",
+      "row_index": 2,
+      "author": "nf081",
+      "source": "scratch/authors/nf081/attempts/func_001c2cd4/08-returned-owner-clean-final/func_001c2cd4.cpp",
+      "source_sha256": "bd242fe0bcc7c88b5369000f2d9bbf8e003c7e35125b2b8ad12367ab79ff6467",
+      "receipt": "scratch/authors/nf081/match/func_001c2cd4/08-returned-owner-clean-final-game/func_001c2cd4.result.json",
+      "receipt_sha256": "dec8601d199770c283872dfd1c61e13d6a3461d0742eb1b4bac91646d6e61c26",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Natural factory matches, but registered TimedDisplayController callback001c3010 currently has parent-local DisplayObject* release via00183208, conflicting with canonical ResourceEvent* endpoint; parent001c2f10 has same local timer owner. Owner/cleanup registration must migrate together rather than instantiate a private shadow constructor.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/func_001c3010.cpp",
+          "sha256": "312c5453a7779662b794adf012a821facbb9285305052548cf27d4673903b46c"
+        },
+        {
+          "path": "src/checkpoint10/func_001c2f10.c",
+          "sha256": "6500ef1c66e4b67cfc38d87361ffc99f529d9a7656f712083a0d03ad5f50fb03"
+        },
+        {
+          "path": "include/game/resource_runtime.h",
+          "sha256": "b68fd128d3c7d3cc90acb996d5cb5e87d0caa8445c0911aab59241141390517b"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001c3670",
+      "target_size": 192,
+      "manifest": "scratch/authors/nf083/RESULT.json",
+      "manifest_sha256": "0d3fea81c07f08a537ee8de170a9aa41b419b22d0313be92d7f9e4977d2d9a2b",
+      "row_index": 0,
+      "author": "nf083",
+      "source": "scratch/authors/nf083/src/func_001c20fc.cpp",
+      "source_sha256": "d2d53a0dbef33c8be5c10c13a6ee9f703b7039c95e06bc2c84b405b155e37599",
+      "receipt": "scratch/authors/nf083/match/func_001c3670/09-loop-helper/func_001c20fc.result.json",
+      "receipt_sha256": "126300abfd7101d6568e77da20f9406ecfd70fce1cce3225d878638fd8174540",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "PanelCollection5 constructor path assigns canonical ResourceEvent* create0017a818 to private DisplayObject* owner and then labels it with DisplayObject APIs. Matching body does not resolve native resource/display ownership; no competing object record/callee prototype imported.",
+      "contract_evidence": [
+        {
+          "path": "include/game/property_descriptor.h",
+          "sha256": "717a22e85bae9d519ea8771ae1742be4bffae479f61001b6fedbc1a448a9c3ca"
+        },
+        {
+          "path": "include/game/resource_runtime.h",
+          "sha256": "b68fd128d3c7d3cc90acb996d5cb5e87d0caa8445c0911aab59241141390517b"
+        },
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001c3ac0",
+      "target_size": 400,
+      "manifest": "scratch/authors/nf141/RESULT.json",
+      "manifest_sha256": "f1a3d2caf8c0d52cdde2abe142c8a6ccc37d488f35c66906207936337fbdd4eb",
+      "row_index": 0,
+      "author": "nf141",
+      "source": "scratch/authors/nf141/attempts/text14-default-before-clear/func_001c3ac0.c",
+      "source_sha256": "2fc981fa618bad7aee2c41f0d14c5f02408156cd997c808d33dfed397b68c916",
+      "receipt": "scratch/authors/nf141/match/text14-default-before-clear/func_001c3ac0.result.json",
+      "receipt_sha256": "8fbf2b03936b4fe1b385043eaad9455b082146cac1c4e2008295936d68ee5c1c",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Void* screen target reinterprets its vector simultaneously as ListEntry** and TransformTarget*const*, and DisplayObject* as TrainingWidget for formatter00170c20. The table/text/position relationship needs one real typed owner and base/subobject bridge; raw vector casts cannot stand as shared canonical declarations.",
+      "contract_evidence": [
+        {
+          "path": "include/game/property_descriptor.h",
+          "sha256": "717a22e85bae9d519ea8771ae1742be4bffae479f61001b6fedbc1a448a9c3ca"
+        },
+        {
+          "path": "include/game/screen.h",
+          "sha256": "5b82c16d76231a1d72392ac5b211120eba9a669a4bd6c97f503e0cfeeb96efae"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001c74e8",
+      "target_size": 120,
+      "manifest": "scratch/authors/nf142/RESULT.json",
+      "manifest_sha256": "c428b9a6fbc5d22172f10f8e992942347b20c064c943c0b4f20ca7d73b2dfd29",
+      "row_index": 2,
+      "author": "nf142",
+      "source": "scratch/authors/nf142/attempts/001c74e8-13-goto-scoped-native-cases/func_001c74e8.cpp",
+      "source_sha256": "7d63007662c01b8e7e77cfd6b1c723e600a91d0c547cd7e307352fd5af9ec224",
+      "receipt": "scratch/authors/nf142/match/001c74e8-13-goto-scoped-native-cases/func_001c74e8.result.json",
+      "receipt_sha256": "aa9c607af2547382803d90652b89c265b887f0b4e5bfcb74d8767ef73a6305d1",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001c78f8",
+      "target_size": 292,
+      "manifest": "scratch/authors/nf084/RESULT.json",
+      "manifest_sha256": "913bcb678cc0e832885ab519b87756784766cf80c579eb2ac1d1254bf5afa795",
+      "row_index": 1,
+      "author": "nf084",
+      "source": "scratch/authors/nf084/delivery/primitive_cleanup.cpp",
+      "source_sha256": "0b86baa8d08e276d60afaef30ee2f53c67468ad763df66a818ade1897bbee541",
+      "receipt": "scratch/authors/nf084/match/func_001c78f8/final-game/primitive_cleanup.result.json",
+      "receipt_sha256": "40bb0942491803a9fe121f92c27b4899143f93371c513abfd18d54ab4a10ce02",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001c8424",
+      "target_size": 344,
+      "manifest": "scratch/authors/nf038/RESULT.json",
+      "manifest_sha256": "26fb479ab37c790782dcd20735d5301c23ad7bb0ca310b6e4ed9a77fa8876867",
+      "row_index": 2,
+      "author": "nf038",
+      "source": "scratch/authors/nf038/attempts/11-texture-final-natural/texture_commands.cpp",
+      "source_sha256": "e89b021d68cf766d7f98ad7021142438fcf08df45ded2465d9951d773f3545b5",
+      "receipt": "scratch/authors/nf038/match/11-texture-final-natural/texture_commands.result.json",
+      "receipt_sha256": "019f3204d36df23fdc8e1dc00f1ce35fa9fc53294573f1d73674924af822d22e",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001cc1e4",
+      "target_size": 104,
+      "manifest": "scratch/authors/nf084/RESULT.json",
+      "manifest_sha256": "913bcb678cc0e832885ab519b87756784766cf80c579eb2ac1d1254bf5afa795",
+      "row_index": 2,
+      "author": "nf084",
+      "source": "scratch/authors/nf084/delivery/func_001c8e10.cpp",
+      "source_sha256": "c995d12f54329c5db6483c6c8f90840945b312a8d0d6711bcc7a597e3c60b348",
+      "receipt": "scratch/authors/nf084/match/func_001cc1e4/final-game/func_001c8e10.result.json",
+      "receipt_sha256": "f5a66c3effb94548e932e679cfc10b431e418b8557cb4ba6361d20fe0e29b628",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001ce05c",
+      "target_size": 276,
+      "manifest": "scratch/authors/nf144/RESULT.json",
+      "manifest_sha256": "f2998068c39f54ff881fb692eb18c5f89e6e9a94fb9207840e794add1caf543a",
+      "row_index": 0,
+      "author": "nf144",
+      "source": "scratch/authors/nf144/src/batch_keys.cpp",
+      "source_sha256": "e5ab41651c222ecc145517d2f8c9a1670578412ac66b238b4a0ebb05d81006d1",
+      "receipt": "scratch/authors/nf144/match/a29-final-key/batch_keys.result.json",
+      "receipt_sha256": "2f0c0a662b57c91dbe385d4ba6cbc7abee5077c241cd9850a7822e9c5f60a14e",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d01dc",
+      "target_size": 328,
+      "manifest": "scratch/authors/nf041/RESULT.json",
+      "manifest_sha256": "5acb80346cb876b1a0a0afefefec9129eebad7376c3104ebf2a89d4a7b674099",
+      "row_index": 1,
+      "author": "nf041",
+      "source": "scratch/authors/nf041/src/func_001ceeac.cpp",
+      "source_sha256": "d267f8310d973c1059a02a4b754a4dacfdbb17b525f75983489fee065d939951",
+      "receipt": "scratch/authors/nf041/match/invalidate/025-final-selected-whole-tu/func_001ceeac.result.json",
+      "receipt_sha256": "513fbc002818dcca65a026b874951b1cc9588cf5ca26f276a2f155980bb3bb58",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Native SoundDataManager target is natural, but count callee name maps accepted001f2b90 whose actual ArchiveHandle*/ArchiveIndex caller is not canonical nw::snd::SoundArchive*. An accepted count-owner cutover and proven aliases are required; unrelated Window constructor mismatches must stay uncredited.",
+      "contract_evidence": [
+        {
+          "path": "src/wave8/func_001f2b90.c",
+          "sha256": "4020514354f97c7cf6ed5da78284404af94bec32a5018673884d03e553995443"
+        },
+        {
+          "path": "include/game/archive.h",
+          "sha256": "7b73d0fcd0bf679393e45f4437e83ce8bc1e1090fe285d2cc9b0d83b2503d352"
+        },
+        {
+          "path": "include/game/item_text.h",
+          "sha256": "363805702b755679b73c30498f270bcbf33c4c1174e2c87a40ba81ac550c9228"
+        },
+        {
+          "path": "include/nw/snd/snd_SoundDataManager.h",
+          "sha256": "b0958269a1136e60d0ebced7ee7b9a04d424ae2fc19063b7d851ae4f8e09ff9a"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d2f90",
+      "target_size": 88,
+      "manifest": "scratch/authors/nf085/RESULT.json",
+      "manifest_sha256": "b572e95379f5502356c39d971d504d1429d6a7ff24b6d19c7b85e9a6247e156e",
+      "row_index": 2,
+      "author": "nf085",
+      "source": "scratch/authors/nf085/src/sequence_commands.cpp",
+      "source_sha256": "0bad92205a36942f68778781b00ef8681d8c67abdd3728b063e6ce019dd657ad",
+      "receipt": "scratch/authors/nf085/match/func_001d2f90/11-final-header-marker/sequence_commands.result.json",
+      "receipt_sha256": "bf36a2b9808935554b127e8a528ca5363f194e0ae20f3ab9cbeb1f142647503a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d47c8",
+      "target_size": 84,
+      "manifest": "scratch/authors/nf042/RESULT.json",
+      "manifest_sha256": "31ab2768a98b2e1b7471e51f40dd7104e3a9046d58b11b9a3e7084df49aa218d",
+      "row_index": 0,
+      "author": "nf042",
+      "source": "scratch/authors/nf042/src/022-final-stream-header.cpp",
+      "source_sha256": "1d29fba69e1a5bd72c29060837aa09d66599ab2f320b3d4c92ede8b16fc00644",
+      "receipt": "scratch/authors/nf042/match/022-final-stream-header/022-final-stream-header.result.json",
+      "receipt_sha256": "33078abacf85c8c35a53fec6a3ac3acea18e26bde490df2d1d0ea04306da045e",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d603c",
+      "target_size": 64,
+      "manifest": "scratch/authors/nf087/RESULT.json",
+      "manifest_sha256": "0a70bcb3f10d0a1b7da9da6a3c4d45cf39311d20bbb1acafb18613f6b1e9faab",
+      "row_index": 0,
+      "author": "nf087",
+      "source": "scratch/authors/nf087/src/sound_destruction_tu29.cpp",
+      "source_sha256": "1a34e030e035f3cebc79577ac0124545e4e5d9a8a7f14831060b5a1fd485d43e",
+      "receipt": "scratch/authors/nf087/match/func_001d603c-final/sound_destruction_tu29.result.json",
+      "receipt_sha256": "f26df1f5e9ec0178c36db339725037459743be61db3a4c916fabe7c9f81a5a92",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Wave-player target uses local W15iWavePlayer/W15iWaveItem and three WavePlayerType address points while parent001d5f1c derives SynchronizationOwner with PendingTask68*. Shared wave_player.h has another partial pointer/type. Natural cleanup wrapper needs actual player/item/vtable group contract, not new opaque pointer alias.",
+      "contract_evidence": [
+        {
+          "path": "include/game/wave_player.h",
+          "sha256": "f50fdd0c9f14bf9bb525fbbb2a33a4e4143771b52fa22b6000107c5fdd608a21"
+        },
+        {
+          "path": "src/checkpoint10/func_001d5f1c.cpp",
+          "sha256": "3105836e4b357b389de74b03d37341bb09dd0aca9e6502c23306ca7d67f12b69"
+        },
+        {
+          "path": "include/game/object_manager.h",
+          "sha256": "242da596f301d3258d7a24f46a5efa7a9c8176ee16a5355703b5d9d5a95ddc2f"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d67c8",
+      "target_size": 248,
+      "manifest": "scratch/authors/nf042/RESULT.json",
+      "manifest_sha256": "31ab2768a98b2e1b7471e51f40dd7104e3a9046d58b11b9a3e7084df49aa218d",
+      "row_index": 1,
+      "author": "nf042",
+      "source": "scratch/authors/nf042/src/023-final-stream-commands.cpp",
+      "source_sha256": "77ebc85fa9c3cf921325f97f372730d4c2fd3b008b44980af061c53ab24360c7",
+      "receipt": "scratch/authors/nf042/match/023-final-stream-commands/023-final-stream-commands.result.json",
+      "receipt_sha256": "68611d4ed8f9022839afabb9b712816117b49c72c3631bb7cb1204f9d1614a97",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Dispatcher helper001d7318 is declared unsigned-char(StreamVoice*,StreamVoiceEvent*,const StreamVoiceSetup*,const void*,int,int), while decoded definition is int(StreamLoadState*,StreamLoadResult*,void**,unsigned,unsigned,int). Partial kind/priority/active and codec state layouts do not prove common owner. Preserve sixth input; no aliases/casts promoted.",
+      "contract_evidence": [
+        {
+          "path": "include/game/stream_manager.h",
+          "sha256": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0"
+        },
+        {
+          "path": "include/game/sound_runtime.h",
+          "sha256": "4ff5429a35a4de5cb36402520bb2c90c12efba99943f7fe60804f756909b4407"
+        },
+        {
+          "path": "scratch/authors/nf042/src/024-final-stream-block.cpp",
+          "sha256": "03066e8ed6b07e79a9aef6973a2e692bbf4e7b5e8c3916fbd8278562fb24a17a"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d7318",
+      "target_size": 1060,
+      "manifest": "scratch/authors/nf042/RESULT.json",
+      "manifest_sha256": "31ab2768a98b2e1b7471e51f40dd7104e3a9046d58b11b9a3e7084df49aa218d",
+      "row_index": 2,
+      "author": "nf042",
+      "source": "scratch/authors/nf042/src/024-final-stream-block.cpp",
+      "source_sha256": "03066e8ed6b07e79a9aef6973a2e692bbf4e7b5e8c3916fbd8278562fb24a17a",
+      "receipt": "scratch/authors/nf042/match/024-final-stream-block/024-final-stream-block.result.json",
+      "receipt_sha256": "f35ff50ec5704580723f41a1cc2871e2167b3a61580134758878d37823af1a49",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Decoded loader MATCH preserves real six-input and int result contract plus original unbounded eight-channel copy bug, but incoming dispatcher exposes incompatible state/result/pointer/capacity formals. Canonicalize dispatcher and loader with actual typed prefixes and ABI evidence before collection; never alias StreamSound or StreamVoice by offsets.",
+      "contract_evidence": [
+        {
+          "path": "scratch/authors/nf042/src/023-final-stream-commands.cpp",
+          "sha256": "77ebc85fa9c3cf921325f97f372730d4c2fd3b008b44980af061c53ab24360c7"
+        },
+        {
+          "path": "include/game/stream_manager.h",
+          "sha256": "2ec4830a96997d3ffd70754ad48ff6cf88ea669b10ee4259e3f41173dc513ec0"
+        },
+        {
+          "path": "include/nw/io/io_FileStream.h",
+          "sha256": "6163163ac3d005c8332598cd3a0b60d96592d182c32daa15a32fa9a57c914edb"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d8638",
+      "target_size": 220,
+      "manifest": "scratch/authors/nf087/RESULT.json",
+      "manifest_sha256": "0a70bcb3f10d0a1b7da9da6a3c4d45cf39311d20bbb1acafb18613f6b1e9faab",
+      "row_index": 1,
+      "author": "nf087",
+      "source": "scratch/authors/nf087/src/sequence_reset.cpp",
+      "source_sha256": "5007716a808607dce21356e271b5821dc976729d0e33f04ac49a987b32d14135",
+      "receipt": "scratch/authors/nf087/match/func_001d8638-final/sequence_reset.result.json",
+      "receipt_sha256": "7fc26a105034b870d71478d278a517a2ba519905b1c69efd6e68ab6b70535145",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "SequenceTiming/Flags/VariableState reinterpret SequencePlayer into competing records; tick_count overlaps canonically reserved storage and variables require volatile qualification unlike accepted field. BaseState reset0016a068 and native parser/allocator consumers require shared lifecycle/extent/volatility migration.",
+      "contract_evidence": [
+        {
+          "path": "include/game/sequence.h",
+          "sha256": "e309612afb030d4b56bcdf7f3943543273ad15d29a2cb994f867b53712cb4788"
+        },
+        {
+          "path": "src/checkpoint10/scene_targets.cpp",
+          "sha256": "b69c24ed150f88f603e5b90b05210c94de5d239ca897c2adccd1c8745262c271"
+        },
+        {
+          "path": "include/nw/snd/snd_SequenceSoundPlayer.h",
+          "sha256": "4c8484a6a29ac3731203db61f3ae9c3a372e4cbcb577180fcfba58ea18d98535"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001d9050",
+      "target_size": 64,
+      "manifest": "scratch/authors/nf087/RESULT.json",
+      "manifest_sha256": "0a70bcb3f10d0a1b7da9da6a3c4d45cf39311d20bbb1acafb18613f6b1e9faab",
+      "row_index": 2,
+      "author": "nf087",
+      "source": "scratch/authors/nf087/src/sequence_loading.cpp",
+      "source_sha256": "87d6592913ea47fc10a6140924615b0cd0bb5d43578cb408fdb26bff42aa7ff6",
+      "receipt": "scratch/authors/nf087/match/func_001d9050-final/sequence_loading.result.json",
+      "receipt_sha256": "eda02946087057ee16628518ad64e6525401638af74df53de1d45e47723cae43",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Natural SequencePlayer cleanup conflicts with parent001d3c2c declaration returning PlaybackCleanupState* and use at embedded WaveSoundCleanup+0x128. Canonical SequencePlayer, member vtable group, and underlying001d8d7c must be reconciled; no pointer retag or secondary-vtable shadow.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/func_001d3c2c.cpp",
+          "sha256": "9169ba43f4acde809930cff3e40ef62d65e38857d1605d782c8a8c907eb33be2"
+        },
+        {
+          "path": "include/game/sequence.h",
+          "sha256": "e309612afb030d4b56bcdf7f3943543273ad15d29a2cb994f867b53712cb4788"
+        },
+        {
+          "path": "include/game/sound_runtime.h",
+          "sha256": "4ff5429a35a4de5cb36402520bb2c90c12efba99943f7fe60804f756909b4407"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001dc744",
+      "target_size": 60,
+      "manifest": "scratch/authors/nf044/RESULT.json",
+      "manifest_sha256": "b5876470e18a2d58313aef432d68ed7a3379a940d878249fb738743a455a5129",
+      "row_index": 0,
+      "author": "nf044",
+      "source": "scratch/authors/nf044/src/func_001dc744_storage.c",
+      "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+      "receipt": "scratch/authors/nf044/match/27-flags-storage-accessor-composed/func_001dc744_storage.result.json",
+      "receipt_sha256": "7bdb71c5094ace8380d1d9ff80ed7c98982b00281829dabbc1207b5999079989",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001dc918",
+      "target_size": 60,
+      "manifest": "scratch/authors/nf044/RESULT.json",
+      "manifest_sha256": "b5876470e18a2d58313aef432d68ed7a3379a940d878249fb738743a455a5129",
+      "row_index": 1,
+      "author": "nf044",
+      "source": "scratch/authors/nf044/src/func_001dc744_storage.c",
+      "source_sha256": "5478be5642ea5fd76e3f4ec399b2d10b666f7d58235207de90af969c658fdfab",
+      "receipt": "scratch/authors/nf044/match/27-flags-storage-accessor-composed/func_001dc744_storage.result.json",
+      "receipt_sha256": "7bdb71c5094ace8380d1d9ff80ed7c98982b00281829dabbc1207b5999079989",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001e3294",
+      "target_size": 236,
+      "manifest": "scratch/authors/nf089/RESULT.json",
+      "manifest_sha256": "c99cc569ca6c6ac72f1ad244fbef23a8913ed575bfe2ad68ded8d551bcad7826",
+      "row_index": 1,
+      "author": "nf089",
+      "source": "scratch/authors/nf089/src/summary_menu.cpp",
+      "source_sha256": "300b4dc99ebeb0ff695aa9ce7a4fdf14023b2498b6ea5048e9cd3800954e3a6a",
+      "receipt": "scratch/authors/nf089/match/final-func_001e3294/summary_menu.result.json",
+      "receipt_sha256": "d3cb3678289bff23080041dbc6b1eff4de4d90c06a329de8d2c0880b3d4c307a",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "SummaryMenuScene/MenuSceneBase partial class conflicts with accepted ScreenResourceManager*00176e24 and native constructor00174484 deferral; helper00169018 is reserved model2 MessageLayout owner, not SummaryMenuScene*. Do not claim model2 or parent001e3270 identities or cast shared scene.",
+      "contract_evidence": [
+        {
+          "path": "include/game/resource_runtime.h",
+          "sha256": "b68fd128d3c7d3cc90acb996d5cb5e87d0caa8445c0911aab59241141390517b"
+        },
+        {
+          "path": "src/large/func_00176e24.c",
+          "sha256": "226737a391543d5b480c9832c63e908a829997f51c2158627b096790e313cceb"
+        },
+        {
+          "path": "scratch/worktrees/cmodels2/src/models2/training_visibility/func_00169018.c",
+          "sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985"
+        },
+        {
+          "path": "include/game/training_screen.h",
+          "sha256": "19191b2840a4731e50f751e6da1ddd5350ee08de23a4dcc6ed6a8bebf05211dd"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_001e9af8",
+      "target_size": 484,
+      "manifest": "scratch/authors/nf090/RESULT.json",
+      "manifest_sha256": "12181c2ebf06134c6088265a2423a070ad4362ba1f2ca560905c358124231fc7",
+      "row_index": 2,
+      "author": "nf090",
+      "source": "scratch/authors/nf090/src/func_001e9af8_final.c",
+      "source_sha256": "1c3fa1930fc6ddbf09e2d9eb63f2e89bc45c79e6e5c977dab2033f68f3da8586",
+      "receipt": "scratch/authors/nf090/match/func_001e9af8/31-final-match-confirmation/func_001e9af8_final.result.json",
+      "receipt_sha256": "9941f354b4a79db71e1e2524cc20030c89734de40e50553f899b06dc87e9b327",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001efbf8",
+      "target_size": 108,
+      "manifest": "scratch/authors/nf046/RESULT.json",
+      "manifest_sha256": "e50ffc31da405c8e6737b91565618613a4726d936b53a72d34ba11ac26dbb787",
+      "row_index": 0,
+      "author": "nf046",
+      "source": "scratch/authors/nf046/src/date_minute_second.cpp",
+      "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+      "receipt": "scratch/authors/nf046/match/date-final/date_minute_second.result.json",
+      "receipt_sha256": "fe8dd06396553a25f3d8702d10a5f14083b609601ef69e4d03b54f00e4b7c439",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001efc64",
+      "target_size": 108,
+      "manifest": "scratch/authors/nf046/RESULT.json",
+      "manifest_sha256": "e50ffc31da405c8e6737b91565618613a4726d936b53a72d34ba11ac26dbb787",
+      "row_index": 1,
+      "author": "nf046",
+      "source": "scratch/authors/nf046/src/date_minute_second.cpp",
+      "source_sha256": "b3544f1715e9496dbee303b892810001356443c4512d2d899513a2d133cf8b2a",
+      "receipt": "scratch/authors/nf046/match/date-final/date_minute_second.result.json",
+      "receipt_sha256": "fe8dd06396553a25f3d8702d10a5f14083b609601ef69e4d03b54f00e4b7c439",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001f1ef4",
+      "target_size": 20,
+      "manifest": "scratch/authors/nf047/RESULT.json",
+      "manifest_sha256": "11c15668bc8f334184f5f90cfacdf8edfec41ffb96a16f2344e296b44ce5998d",
+      "row_index": 0,
+      "author": "nf047",
+      "source": "scratch/authors/nf047/src/func_001f1ef4/func_001efee4.cpp",
+      "source_sha256": "c231f4fa542f9aa0120d575a5443c14f7ae6cf3bcc35046d564a4f15cb9bb43d",
+      "receipt": "scratch/authors/nf047/match/func_001f1ef4/99-delivery/func_001efee4.result.json",
+      "receipt_sha256": "de45edcab1e0331b8c0f79bb50500e34a767a0bd62bf9c5b7f8d641854e578eb",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": false
+    },
+    {
+      "function": "func_001f49b0",
+      "target_size": 124,
+      "manifest": "scratch/authors/nf047/RESULT.json",
+      "manifest_sha256": "11c15668bc8f334184f5f90cfacdf8edfec41ffb96a16f2344e296b44ce5998d",
+      "row_index": 2,
+      "author": "nf047",
+      "source": "scratch/authors/nf047/src/func_001f49b0/func_001f49b0.cpp",
+      "source_sha256": "8e7eb94f9a826966c181e22efc3949a06c292d14230d5c8bdce6d7492afb7ccb",
+      "receipt": "scratch/authors/nf047/match/func_001f49b0/99-delivery/func_001f49b0.result.json",
+      "receipt_sha256": "c65e402709743415d5b6592b21fc878b2ea765ebaef1e5303a9c3a1cc4368f1d",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "FontCachedResource readonly/u16 lookup001f4a2c and glyph helper001f4b90 conflict with parent FontMapResource mutable/full-word contracts; target relies on genuine but mismatching co-emitted helper/glyph wrapper. Shared native FontInformation/FontResource identity and accepted helper owners must migrate together; no noinline or shadow class alias added.",
+      "contract_evidence": [
+        {
+          "path": "src/checkpoint10/func_001f4b58.cpp",
+          "sha256": "6bf7035386899012a947fb77ca28460ac0bd5550d171ed0881ed2fa006dcb919"
+        },
+        {
+          "path": "include/game/font.h",
+          "sha256": "8dd457a826975e568e37773d4474b3b08c775605a1ebd70384f675d0cb7722f1"
+        },
+        {
+          "path": "include/game/resource_font.h",
+          "sha256": "7f3c43dd66cd99afc8fc3912732657616ffeb84f12048c33cd504b730d769a78"
+        }
+      ],
+      "late_publication": false
+    },
+    {
+      "function": "func_0018c784",
+      "target_size": 240,
+      "manifest": "scratch/authors/tu1095/RESULT.json",
+      "manifest_sha256": "6b9fa354356d81d830db9d360e343fd86170699e1c681d3200a6bd08dd5cdc3a",
+      "row_index": 0,
+      "author": "tu1095",
+      "source": "scratch/authors/tu1095/src/buffer_release_guarded.c",
+      "source_sha256": "31c30149f863a59cd4b58f66bbaa471665dd8703e0e66a1724eb32735c88228b",
+      "receipt": "scratch/authors/tu1095/match/07-final-guarded-host-middleware/buffer_release_guarded.result.json",
+      "receipt_sha256": "d417851261597b37e4862bc9b55449f91eb830aeb12bd4ed5e6f15c8d98bd2e5",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "middleware",
+      "status": "collected-current-pair-destination-witness-pending-final-closure",
+      "reason": "collect.py destination adoption; historical r9/r11 witnesses preserved and current v6/L1 isolated destination evidence required.",
+      "contract_evidence": [],
+      "late_publication": true
+    },
+    {
+      "function": "func_0016337c",
+      "target_size": 268,
+      "manifest": "scratch/authors/np015/RESULT.json",
+      "manifest_sha256": "4ec8a2b1c1dccfe910a4e67c1050ff801ddee2dcd66bf8dc9750e4cc7e3aeb86",
+      "row_index": 0,
+      "author": "np015",
+      "source": "scratch/authors/np015/src/23-height-before-width-staging/func_0016337c.cpp",
+      "source_sha256": "a02bc2a17be24db8c809d4f77aad16251708c0368da56014d47a30dd628f8dc9",
+      "receipt": "scratch/authors/np015/match/func_0016337c-26-final-reused-staging/func_0016337c.result.json",
+      "receipt_sha256": "89d96283dc1f256381837b35be98b7e149d3531edc3afc2cf2ab3864f6c8b7bb",
+      "author_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "profile": "game",
+      "status": "contract-resolution-deferred-not-rejected-match",
+      "reason": "Natural MenuExtentRequest staging matches but casts canonical AnimationOwner* to W6ListController* for active setters. Accepted owners have distinct array types/layout contracts; common actual UI owner relationship is unproven. Retain matching staging witness without admitting cast or disturbing accepted00168d14 model owner.",
+      "contract_evidence": [
+        {
+          "path": "include/game/menu_controller.h",
+          "sha256": "ce3571c0b51822b13490e832c37ddc812585f2616e655a14c26a37ea39af73e4"
+        },
+        {
+          "path": "include/game/animation.h",
+          "sha256": "e6dc76dc1e76ad9699e45a9226691db74672bb2f2bc5003dfbd9095da815b94d"
+        },
+        {
+          "path": "include/game/selection.h",
+          "sha256": "b40ca89b51a221e2306d00ff94ebdc57497ab43eab65fb1110b91d58458ec18f"
+        }
+      ],
+      "late_publication": true
+    }
+  ],
+  "qualification": "Unaccepted candidates only. Every author witness is immutable and individually bound; deferrals are ownership/signature blockers, not rejection or loss of accepted identities. Current pair destination receipts are recorded separately after shared declarations settle."
+}

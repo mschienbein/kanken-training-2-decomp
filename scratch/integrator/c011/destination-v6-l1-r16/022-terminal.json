@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/material_dtor-r3.cpp",
+  "source_sha256": "3029d01d149713dc7aea4b0be6907128eef21b24627c339f539dc4d0f106a26a",
+  "profile": "sdk",
+  "credited_functions": [
+    "func_001cfe68"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/material_dtor-r3.cpp",
+    "--profile",
+    "sdk",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/022-material_dtor-r3"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.14412,
+  "stdout": "MATCH    _ZN14MaterialObjectD1Ev @ 0x1cfe68 size 0x40/0x40\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/022-material_dtor-r3/material_dtor-r3.result.json",
+  "result_sha256": "4a63bc0a59388c63f6e41fda7f19864aed68aa5334a7f1484e49c9a68e6ac390",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001cfe68",
+      "status": "match",
+      "size": 64,
+      "candidate_size": 64,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

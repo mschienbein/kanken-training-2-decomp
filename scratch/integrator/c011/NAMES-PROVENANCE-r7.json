@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "bindings": {
+    "_ZN16InputDeviceStateC1Ev": {
+      "address": 1142448,
+      "evidence": "c011 nf158: emitted complete-object self-definition at 00116eb0, exact source/receipt recorded in INTAKE-r7.json. Canonical InputDeviceState has two InputBufferState members, and caller0010e2c8 consumes its returned writable receiver. [INFERENCE] Descriptive native class spelling; not an unrelated helper identity."
+    },
+    "_ZN16InputDeviceStateC2Ev": {
+      "address": 1142448,
+      "evidence": "c011 nf158: same complete-extent emitted base-object constructor entry accompanying C1 in the exact named author source/receipt; frozen v6 alias requirements remain mandatory. [INFERENCE] Descriptive native class spelling."
+    },
+    "_ZN16InputBufferStateC1Ev": {
+      "address": 1194808,
+      "evidence": "c011 nf158: the real embedded-member constructor calls00123b38 on canonical InputBufferState subobjects at+4/+14. Existing accepted src/wave13/func_00123b38.c initializes storage/count/capacity/enabled and returns that same writable pointer; no argument or layout erasure. INTAKE-r7.json binds author source/receipt and native destination witness. [INFERENCE] Native constructor spelling, not a generic private-helper alias."
+    }
+  },
+  "author_names": "scratch/authors/nf158/names.json",
+  "author_names_sha256": "0c9e192a991eb70391c0f6ccf203facd9f719f7c08f7010a01965863b2053930",
+  "author_source": "scratch/authors/nf158/src/func_00116eb0.cpp",
+  "author_source_sha256": "69167227e370bd78c63266b0b1c2ce5133ea20a8fa41e406c5d0386e4c37c982",
+  "accepted_member_constructor": "src/wave13/func_00123b38.c",
+  "accepted_member_constructor_sha256": "726e3356c90a3ad35bf09bd0857dbd9a26961564835894324b59a8680e270a88",
+  "native_destination": "src/checkpoint11/intake-r7/nf158/func_00116eb0.cpp",
+  "destination_receipt": "scratch/integrator/c011/destination-v6-l1-r18/nf158/func_00116eb0/func_00116eb0.result.json",
+  "qualification": "Native self-definition and actual canonical embedded-member construction only. Descriptive historical names remain INFERENCE; frozen alias/extent and manual caller review remain required. Deferred private helper/native lifetime overlays were not admitted."
+}

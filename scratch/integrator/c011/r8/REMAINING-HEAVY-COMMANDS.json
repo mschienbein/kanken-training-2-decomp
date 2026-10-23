@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "checkpoint": "c011-r8 only (c013 folded)",
+  "branch": "c011-r8",
+  "working_directory": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8",
+  "status": "NOT RUN by author; no heavy slot requested",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2",
+  "prerequisites": [
+    "Finalize the applicable c010-r8 and recheck its actual retained2682-identity ledger/source f78df906 binding. Any predecessor drift requires recomposition and fresh affected proof, not restoration of older failed-r7 identities.",
+    "Integrate the full c011-r7 plus folded c013 transaction as this single checkpoint. No separate c013 candidate/prepare exists; only config/candidates/c011.json and the r8 current records drive gates.",
+    "Preserve all114 c011,94 c010-r8 and28 c009 holds, the nine current moves, original001f4500 C owner, and the exact two-input copy-worker declaration/body. Three opaque stored providers remain per-row QUALIFIED only under Main(a)-(e), not guessed callable slots.",
+    "Recheck SOURCE-CONTEXT-r1.json sources/headers/names/profiles/catalogue/tooling; changes require new immutable proof names. Archived folded-c013 records retain historical internal references and cannot substitute for current r8 context.",
+    "Use final LINKER-REWRITES-r1.json with scope_complete=true:2661 primaries,2761 required MATCH functions and all24 helper-only definitions; not historical c013/r7 receipt carries.",
+    "Adjudicate every known invoking callback/slot type, actual unchecked C++ and dynamic population, R1 provenance, C-only MUST-discard contract and unique emitted owner. The parent48 accepted mismatch-attention rows,7 nominal/custom qualification rows and26 existing unmodeled passed-code rows remain separate Main obligations, not a blanket waiver.",
+    "Serialize heavy commands machine-wide; verify every output/checkpoint path remains unused immediately before running, and use fresh suffixes after any failed execution."
+  ],
+  "commands": [
+    {
+      "step": "whole_ledger_interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/c011/r8/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/c011/r8/interfaces-r1.json"
+      ],
+      "requirements": [
+        "Require no errors/policy items and manual C++/callable-type adjudication, preserving exact shared worker protocol and honest opaque-row qualifications."
+      ]
+    },
+    {
+      "step": "whole_ledger_argcheck",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/c011/r8/PROPOSED-LEDGER.json",
+        "--rewrites",
+        "scratch/integrator/c011/r8/LINKER-REWRITES-r1.json",
+        "--json",
+        "scratch/integrator/c011/r8/argcheck-r1.json"
+      ],
+      "requirements": [
+        "Capture actual exit and adjudicate all warnings/notes. Function matching and exact callback arity do not prove unknown receiver populations or R1 historical identities."
+      ]
+    },
+    {
+      "step": "prepare_after_predecessor_finalization_and_adjudicated_gates",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r8",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "c011-r8",
+        "--candidates",
+        "config/candidates/c011.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": [
+        "Main alone runs from its clean integrated committed tree after applicable c010-r8 finalization. This candidate cwd is reproducibility metadata, not author authorization.",
+        "Require actual exit0/PASS, two fresh complete builds with unique emitted ownership and full suite, then two independent bound reviews. Main alone registers reviews/finalizes/pushes."
+      ]
+    }
+  ],
+  "unused_at_record_creation": {
+    "scratch/integrator/c011/r8/interfaces-r1.json": true,
+    "scratch/integrator/c011/r8/argcheck-r1.json": true,
+    "accept/c011-r8": true
+  },
+  "heavy_commands_exercised": [],
+  "unexercised": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/func_001ddde4/func_001ddde4.c",
+ "source_sha256": "a98c10266ad8d600832f4e93a063ca736908f139b7a351896dd182b794d8e661",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "93ecae98bf5c720d4ddaf3f288ec78788d8354c110d1a54c7ea4073fe7f48c6f",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/func_001ddde4/item_accessors.c",
+   "source_sha256": "3e9903b61fcdaa200e49eec705b334d828f39fc30715f546d1b36297d70fba7a",
+   "object_sha256": "f9147bc016ad47e356684e0250fe144bb1fe78ff336d1f8edcb2d919611da34e"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r41279_item_category"
+   ],
+   "section": "i.r41279_item_category",
+   "size": 8,
+   "object": "scratch/integrator/c011/r5/matches-r1/4281-func_001ddde4/extra-0-item_accessors.o"
+  },
+  {
+   "symbols": [
+    "r41279_item_identifier"
+   ],
+   "section": "i.r41279_item_identifier",
+   "size": 8,
+   "object": "scratch/integrator/c011/r5/matches-r1/4281-func_001ddde4/extra-0-item_accessors.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001ddde4",
+   "address": 1957348,
+   "size": 464,
+   "candidate_size": 464,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 104,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe590000c",
+     "removed_callee": {
+      "symbols": [
+       "r41279_item_identifier"
+      ],
+      "section": "i.r41279_item_identifier",
+      "size": 8,
+      "object": "scratch/integrator/c011/r5/matches-r1/4281-func_001ddde4/extra-0-item_accessors.o"
+     }
+    },
+    {
+     "offset": 296,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d001d0",
+     "removed_callee": {
+      "symbols": [
+       "r41279_item_category"
+      ],
+      "section": "i.r41279_item_category",
+      "size": 8,
+      "object": "scratch/integrator/c011/r5/matches-r1/4281-func_001ddde4/extra-0-item_accessors.o"
+     }
+    },
+    {
+     "offset": 356,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d001d0",
+     "removed_callee": {
+      "symbols": [
+       "r41279_item_category"
+      ],
+      "section": "i.r41279_item_category",
+      "size": 8,
+      "object": "scratch/integrator/c011/r5/matches-r1/4281-func_001ddde4/extra-0-item_accessors.o"
+     }
+    }
+   ]
+  }
+ ]
+}
