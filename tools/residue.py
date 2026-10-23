@@ -18,7 +18,11 @@ rows can improve a reported residual but cannot complete an assigned target rung
 Only objective steps 1, 2, 3 and dispositioned step 4 are required for exhaustion.
 Steps 5/5b/5c remain evidence-bearing extra passes. The census completed_steps is
 the authority for steps 1-3; its initial/svc-initial/svc-retry labels map to the
-objective's first rung. Batch-name prefixes never establish those three rungs.
+objective's first rung. After the census cut, only verified census supplements
+(scratch/integrator/census-supplements/S*.json) add rungs 1-3: each witness must
+name a Main-recorded batch of that explicit step that targets the function and a
+delivered target RESULT row for it, or the run refuses. Batch-name prefixes never
+establish those three rungs.
 Step 4 dispositions are completed search, not_applicable above the bound, or an
 evidenced adapter_refused attempt. An improved seed inside the bound reopens an
 older above-bound refusal. Unknown residuals do not waive step 4.
@@ -57,6 +61,8 @@ CLASSES = ("held_contract", "header_blocked", "near_miss_exhausted",
 FROZEN_PROFILES = frozenset(("game", "sdk", "middleware"))
 FUNCTION_RE = re.compile(r"func_([0-9a-fA-F]{8})\Z")
 BATCH_RE = re.compile(r"[A-Za-z][A-Za-z0-9_-]*\Z")
+SUPPLEMENT_DIR = "scratch/integrator/census-supplements"
+WITNESS_STATUSES = ("match", "mismatch", "library_candidate", "extent")
 HOLD_NAME_RE = re.compile(r"defer|handoff|dispositions", re.I)
 HOLD_RE = re.compile(r"defer|held|hold|withheld|blocked|unresolved", re.I)
 CLOSED_RE = re.compile(r"closed|resolved_deferrals|collected|accepted|repaired", re.I)
@@ -537,6 +543,50 @@ class Joiner:
                 if row.get("hard_dispatch_holds"):
                     self.add_hold(name, relevant_text(row), evidence, "escalation_dispatch_hold")
 
+    def load_census_supplements(self) -> None:
+        """Main-recorded census witnesses for rungs 1-3 after the census cut, verified against records."""
+        for path in sorted((self.root / SUPPLEMENT_DIR).glob("S*.json")):
+            label = path.relative_to(self.root).as_posix()
+            doc = self.inputs.load(label)
+            for index, row in enumerate(doc.get("rows", [])):
+                name = identity(row)
+                evidence = f"{label}#/rows/{index}"
+                if name not in self.functions:
+                    raise ValueError(f"{evidence}: supplement identity is not creditable")
+                target = self.functions[name]
+                if integer(row.get("target_bytes")) != target.size:
+                    raise ValueError(f"{evidence}: supplement extent disagrees with the catalogue")
+                for step, entries in row.get("completion_evidence", {}).items():
+                    if step not in AUTHOR_STEPS or not entries:
+                        raise ValueError(f"{evidence}: supplements witness only rungs 1-3, with evidence")
+                    for entry in entries:
+                        self.verify_witness(name, step, entry, evidence)
+                        target.attempts[step].add(entry["batch"])
+                    target.completed.add(step)
+                    target.step_evidence[step].add(f"{evidence}/completion_evidence/{step}")
+                    target.evidence.add(evidence)
+
+    def verify_witness(self, name: str, step: str, entry: dict, evidence: str) -> None:
+        batch = entry.get("batch") if isinstance(entry, dict) else None
+        if not isinstance(batch, str) or not BATCH_RE.fullmatch(batch):
+            raise ValueError(f"{evidence}: witness needs a batch id")
+        doc = self.inputs.load(f"scratch/integrator/batches/{batch}.json", required=True)
+        if not isinstance(doc, dict) or doc.get("created_by") != "Main" or str(doc.get("step")) != step:
+            raise ValueError(f"{evidence}: {batch} is not a Main-recorded step-{step} batch")
+        if name not in self.batch_targets.get(batch, set()):
+            raise ValueError(f"{evidence}: {name} is not a target of {batch}")
+        result = self.inputs.load(f"scratch/authors/{batch}/RESULT.json", required=True)
+        rows = result.get("functions", []) if isinstance(result, dict) else []
+        index = entry.get("result_row")
+        if not isinstance(index, int) or not 0 <= index < len(rows):
+            raise ValueError(f"{evidence}: {batch} RESULT has no row {index!r}")
+        delivered = rows[index]
+        if identity(delivered) != name or delivered.get("status") not in WITNESS_STATUSES:
+            raise ValueError(f"{evidence}: {batch} row {index} is not a delivered target result for {name}")
+        size = integer(delivered.get("size"))
+        if size is not None and size != self.functions[name].size:
+            raise ValueError(f"{evidence}: {batch} row {index} measured a different extent")
+
     def load_authors(self) -> None:
         for path in sorted((self.root / "scratch/authors").glob("*/RESULT.json")):
             label = path.relative_to(self.root).as_posix()
@@ -888,6 +938,7 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
     join.select_pending(default_pending() if pending is None else pending)
     join.load_batches()
     join.load_census()
+    join.load_census_supplements()
     join.load_authors()
     join.load_permuter()
     join.load_step4_refusals()
@@ -914,7 +965,7 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
             "policy": {"creditable_kind": "function", "required_steps": list(REQUIRED_STEPS),
                        "author_steps_required": list(AUTHOR_STEPS),
                        "extra_passes_not_required": list(EXTRA_STEPS),
-                       "rungs_1_to_3_authority": "census completed_steps, not batch-name prefixes",
+                       "rungs_1_to_3_authority": "census completed_steps plus verified Main census supplements, not batch-name prefixes",
                        "permuter_bound_bytes": join.permuter_bound,
                        "boundary_is_not_completed_search": True,
                        "assignment_is_not_attempt": True,
@@ -973,7 +1024,7 @@ def markdown(report: dict) -> str:
         lines.append(f"| `{gap['function']}` | {gap['current_size']} | {gap.get('census_size', 'absent')} |")
     lines += ["", "## Interpretation", "",
               "- Exhaustion requires only objective steps 1 (retry pool), 2 (fresh author with best attempt/diff), 3 (whole-TU neighbours), and dispositioned step 4. Steps 5/5b/5c are recorded extras, not prerequisites.",
-              "- Census `completed_steps` is authoritative through its cut, independently of whether a completion-evidence array exists. Census `initial`/`svc-initial`/`svc-retry` map to objective step 1. No early-rung completion is inferred from a batch prefix.",
+              "- Census `completed_steps` is authoritative through its cut, independently of whether a completion-evidence array exists. Census `initial`/`svc-initial`/`svc-retry` map to objective step 1. After the cut, a verified census supplement may add rungs 1-3: every witness names a Main-recorded batch of that explicit step targeting the function and its delivered target RESULT row. No early-rung completion is inferred from a batch prefix or assignment.",
               "- Step 4 is dispositioned by a completed search, an evidenced adapter refusal, or a current best residual above the frozen permuter bound. Refusal/exclusion is not a search. An improved seed inside the bound reopens an old above-bound exclusion; unknown residuals do not waive step 4.",
               "- `held_contract` means an exact reported body plus a recorded contract/type/policy hold, not accepted C. `header_blocked` requires an explicit authoring/compile block, not an ordinary adoption-time header request; it may still have missing ladder rungs. Only the selected best author's integration needs remain active, while older needs stay in historical evidence.",
               "- `pending_intake` is a direct unheld author MATCH under a frozen profile, outside all pending manifests. It is actionable collection work, not an exhausted search or accepted credit.",

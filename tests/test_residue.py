@@ -202,6 +202,33 @@ class ResidueTest(unittest.TestCase):
         self.assertEqual(row["census"]["completed_steps"], ["initial", "2", "3"])
         self.assertTrue(row["ladder"]["1"]["evidence"])
 
+    def test_verified_census_supplements_add_rungs_and_unverifiable_ones_refuse(self) -> None:
+        name = self.names[9]
+        supplement = "scratch/integrator/census-supplements/S01.json"
+        self.put("scratch/integrator/batches/fa90.json", {
+            "step": "1", "created_by": "Main", "functions": [{"function": name}]})
+        self.put("scratch/authors/fa90/RESULT.json", {"functions": [
+            self.row(10, 0, status="context_match"), self.row(9, 6)]})
+        unwitnessed = next(row for row in self.report()["rows"] if row["function"] == name)
+        self.assertFalse(unwitnessed["ladder"]["1"]["completed"])
+
+        def witness(step: str = "1", row: int = 1, size: int = 32) -> None:
+            self.put(supplement, {"rows": [{"function": name, "target_bytes": size,
+                                            "completion_evidence": {step: [{"batch": "fa90", "result_row": row}]}}]})
+
+        witness()
+        witnessed = next(row for row in self.report()["rows"] if row["function"] == name)
+        self.assertTrue(witnessed["ladder"]["1"]["completed"])
+        self.assertTrue(any(supplement in item for item in witnessed["ladder"]["1"]["evidence"]))
+        for bad in ({"step": "2"}, {"row": 0}, {"row": 5}, {"step": "4"}, {"size": 64}):
+            witness(**bad)
+            with self.assertRaises(ValueError, msg=str(bad)):
+                self.report()
+        self.put("scratch/integrator/batches/fa90.json", {"step": "1", "functions": [{"function": name}]})
+        witness()
+        with self.assertRaises(ValueError):
+            self.report()
+
     def test_resolved_extension_ruling_is_not_an_open_user_question(self) -> None:
         self.put("docs/rulings/2026-10-17-armcc-extensions.md", "Documented extensions are approved.\n")
         self.put("scratch/integrator/c009/contract-deferrals.json", [
