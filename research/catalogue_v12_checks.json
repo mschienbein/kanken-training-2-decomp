@@ -1,0 +1,142 @@
+{
+  "adoption": false,
+  "base_source_commit": "32620ff561b7f3c21d7f7059be5e391615cd4ef4",
+  "checks": [
+    {
+      "actual_exit_code": 0,
+      "r4_baseline_independently_checked": true,
+      "receipt": "scratch/closure/v12-local-entries/complete-section-proof-r1.json",
+      "scope": "two exact members,96 section bytes; no discovery or current-image generation",
+      "wall_seconds": 0.5902602389978711
+    },
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v12-local-entries/public-consumer-smoke-r3.json",
+      "result": {
+        "private_complete_section_cli": {
+          "actual_exit_code": 0,
+          "result": {
+            "adoption": false,
+            "baseline_proposal_sha256": "55168a79db0d76debddd3b55cf62beed6ab29dc73396d2d3dd29e882ac6e3451",
+            "current_image_generation": false,
+            "exact_entry_transitions": 2,
+            "mode": "retained_r4_baseline",
+            "new_C_credit": 0,
+            "object_proof": {
+              "complete_section_bytes": 96,
+              "new_C_credit": 0,
+              "runtime_pool_value_admitted": false,
+              "sections": [
+                {
+                  "address": 1050048,
+                  "member_offset": 656918,
+                  "member_sha256": "ca69465256b5d9a9b5a7909af7b9c23d3d82b2d3fc5692645db52a265ccb1c22",
+                  "section_bytes": 48,
+                  "whole_section_sha256": "5636d4867ce871f5beed15b8346ce6436c44a0a3e01a60e7410403166e5ab59c"
+                },
+                {
+                  "address": 1051092,
+                  "member_offset": 670346,
+                  "member_sha256": "56e3f5ea3ef9d52b795a524349060bc7dc7ce8dd04c57ba15240abb6fb850991",
+                  "section_bytes": 48,
+                  "whole_section_sha256": "e59082f49f725fed856405bfb3bc8485c56551b6e8a90d358d75b52815159ddd"
+                }
+              ]
+            },
+            "status": "pass"
+          }
+        },
+        "real_synthetic_cli": {
+          "actual_exit_code": 0,
+          "refused_actual_exit_code": 1,
+          "refused_output_exists": false
+        },
+        "retained_r4_metadata_consumer": {
+          "anomalies": 9,
+          "fresh_current_image_generation": false,
+          "functions": 4743,
+          "new_C_credit": 0,
+          "new_library_entries": [
+            "001005c0/10",
+            "001009d4/10"
+          ],
+          "ordinary_extent_bytes": 1123188,
+          "successor_catalogue_written": false,
+          "unchanged_complete_old_records": 4741,
+          "unchanged_ordinary_identities": 4579,
+          "unknown_bytes": 158,
+          "unknown_intervals": 33
+        },
+        "synthetic_complete_real_elf_bytes": 48,
+        "synthetic_public_builder_and_consumer": "pass",
+        "synthetic_refusals": [
+          "member",
+          "anchor",
+          "mapping",
+          "relocations",
+          "size",
+          "tag",
+          "section_hash",
+          "old_pointer_record",
+          "missing_veto",
+          "hole",
+          "credit",
+          "private_member_archive_hash"
+        ]
+      },
+      "scope": "Final bounded synthetic public producer/consumer and CLI, complete private two-member proof, and in-memory retained-r4 metadata successor consumer; no current-image discovery/generation",
+      "wall_seconds": 1.5077274159993976
+    }
+  ],
+  "cited_repo_relative_input_sha256": {
+    "scratch/integrator/catalogue-v11/THUMB-CERTIFICATE-SCOUT-r2.md": "f405a6899486e65420dfe22fe13940b1ebd839a31cc0f9e39567e2b66d45bbf0",
+    "scratch/libid/analysis-504b82-r2/relocation-evidence.json": "76a10fc2ed115a6f3c5b9c0934ffa8b579b63ed01b61fc79c66cf70e71768a9c",
+    "scratch/libid/final-504b82-r1/archives/armlib/c_5.json": "a5eb19813030f169cd53d57242f1216dd3f78872ad6fda0b945c4579ee72d432",
+    "scratch/worktrees/catalogue-v11-r2/research/catalogue_v10_r4_evidence.json": "4db813af5c65a7018633080901fa3d556afcd1a1ce577fae93001eea5a83879e",
+    "scratch/worktrees/catalogue-v11-r4/scratch/analyze/catalogue-v11-r4.json": "55168a79db0d76debddd3b55cf62beed6ab29dc73396d2d3dd29e882ac6e3451",
+    "scratch/worktrees/catalogue-v11/scratch/runtime-data-v11/alignment-object-metadata.json": "c3b89be37226dc2c5922b8c0581f679953a8ecf1f1cb67dcb0e3f7db51f61008"
+  },
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "main_remaining_checks": [
+    "Integrated full suite once after integration and a serialized heavy-slot grant",
+    "One fresh v12 catalogue generation",
+    "Public v12 retained-proposal consumer with exact private object proof",
+    "Independent full source/evidence and fresh-proposal review, plus the separate frozen r4 review"
+  ],
+  "new_C_credit": 0,
+  "not_run": [
+    "unittest methods/module/full suite",
+    "fresh current-image generation",
+    "build/compiler/matching",
+    "whole-ledger source audit",
+    "lint/formatter"
+  ],
+  "preserved_author_failures": [
+    {
+      "actual_exit_code": 1,
+      "cause": "The retained scratch script did not add the worktree root to its module import path. No production consumer was entered.",
+      "correction": "r2 adds only the explicit worktree import context.",
+      "receipt": "scratch/closure/v12-local-entries/public-consumer-smoke-r1.json"
+    },
+    {
+      "actual_exit_code": 1,
+      "cause": "The synthetic LE reference classified a zero mapped-data halfword as alignment while the BE baseline correctly left it unknown. The unchanged historical r3 exact-range guard refused that extra unproved reopening.",
+      "correction": "The synthetic object now has a nonzero mapped-data halfword, leaving the hole unknown in both stages; no production guard changed.",
+      "receipt": "scratch/closure/v12-local-entries/public-consumer-smoke-r2.json"
+    }
+  ],
+  "qualification": "Retained-r4 metadata output is not a new generated catalogue or an unchanged-image claim. No canonical catalogue, names, accepted source/profile, prepared ledger, GATES, denominator/history or C-credit changes.",
+  "revision": "catalogue-v12",
+  "source_sha256": {
+    "research/catalogue_v12_evidence.json": "a7e134f1c4e83f3171f9ee472478e5acd4520edd9144fd2a4aed6c3ff782c7d8",
+    "research/catalogue_v12_object_proof.json": "94285fdfb00e542d3fe478cbedf75d36828a4a176cb464a9e390a50cc87fb4c8",
+    "tests/test_analyze.py": "81ec6efbd0ac104ce0006d12cee39e161200c6dad82ad94c97b3c9355540ccc7",
+    "tests/test_catalogue_endian_cli.py": "749783717e8999c672bfbafb51741b85eb3037fef11db6c0f8348daae2a70e4e",
+    "tests/test_catalogue_entry_reassessment.py": "3cef781a6eca75560f49752c97aa8abf964b0f4ecad0052dd83e6d7caf134755",
+    "tests/test_catalogue_local_entries.py": "0205ad920132dddebf480c4bc81f2cb16620a039e2b627e04e26a5a06378bce3",
+    "tests/test_catalogue_protection.py": "fd204ad619151f643ce493c6a66527c53fdbd63a9b048d68752bef9904c8e9b2",
+    "tools/analyze.py": "6d8a71057016ce8239c222af6b977118dccf9e3ffcad78d33dbd6a8fe2ba5fa7",
+    "tools/catalogue_closure.py": "ccf515290c28211ec1c91e5845875df6215cf6737334b9099e63cc064971b4b4",
+    "tools/catalogue_local_entries.py": "30654d9660ad467379f0ba6c38d367c826e571beb9610acaa1b4978037e7348e"
+  }
+}

@@ -65,7 +65,7 @@ On Windows use `.venv\Scripts\python.exe`; `armcc.exe` runs natively there (no w
 | Tool | Use |
 |---|---|
 | `tools/rom.py` | import/verify the private dump into `orig/` |
-| `tools/analyze.py` | regenerate the function catalogue (denominator) from `orig/code.bin` |
+| `tools/analyze.py` | propose the function catalogue from `orig/code.bin`; unadopted protection/entry reassessment: [`v11-r3 report`](docs/catalogue/REPORT-v11-r3.md) |
 | `tools/denominator.py` | hash-chained catalogue history; `verify` runs in CI |
 | `tools/packet.py func_XXXXXXXX` | author packet: symbolized disassembly, callers/callees, C skeleton (private, `scratch/packets/`) |
 | `tools/decompile.py func_XXXXXXXX` | optional cached Ghidra pseudo-C author aid (private, shared across worktrees; [setup/limits](docs/DECOMPILER.md)) |

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "tests.test_catalogue_alignment"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13",
+  "exit_code": 1,
+  "seconds": 0.22167104698019102,
+  "stderr": ".F.....\n======================================================================\nFAIL: test_misaligned_successor_refuses_before_any_mutation (tests.test_catalogue_alignment.CatalogueAlignmentTests.test_misaligned_successor_refuses_before_any_mutation)\n----------------------------------------------------------------------\nValueError: v13 uniform fill census is incomplete or duplicates a placement\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v13/tests/test_catalogue_alignment.py\", line 147, in test_misaligned_successor_refuses_before_any_mutation\n    with self.assertRaisesRegex(ValueError, \"misaligned\"):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: \"misaligned\" does not match \"v13 uniform fill census is incomplete or duplicates a placement\"\n\n----------------------------------------------------------------------\nRan 7 tests in 0.086s\n\nFAILED (failures=1)\n",
+  "stdout": ""
+}

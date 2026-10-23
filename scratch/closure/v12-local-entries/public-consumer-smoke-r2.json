@@ -1,0 +1,14 @@
+{
+  "actual_exit_code": 1,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "-B",
+    "scratch/closure/v12-local-entries/public-consumer-smoke-r2.py"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v12-local-entries",
+  "script_sha256": "be05c8b25ded102f05ee737f928c88b821c9a5131716e7f4f898d3a9fa49d963",
+  "stderr": "Traceback (most recent call last):\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v12-local-entries/scratch/closure/v12-local-entries/public-consumer-smoke-r2.py\", line 17, in <module>\n    data = local_fixture()\n           ^^^^^^^^^^^^^^^\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v12-local-entries/tests/test_catalogue_local_entries.py\", line 130, in local_fixture\n    baseline = analyze.build_catalogue(image, layout, classifications=[classification], closure={\"entry_revision\": reassessment})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v12-local-entries/tools/analyze.py\", line 2402, in build_catalogue\n    catalogue_closure.check_entry_revision(\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v12-local-entries/tools/catalogue_closure.py\", line 1356, in check_entry_revision\n    raise ValueError(\"v11-r3 unknown ranges differ from separately proved closure/reopened proposals\")\nValueError: v11-r3 unknown ranges differ from separately proved closure/reopened proposals\n",
+  "stdout": "",
+  "supersedes_harness_failure": "public-consumer-smoke-r1.json",
+  "wall_seconds": 0.5027433299983386
+}

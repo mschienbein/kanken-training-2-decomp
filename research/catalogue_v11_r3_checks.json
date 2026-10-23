@@ -1,0 +1,506 @@
+{
+  "adoption": false,
+  "authored_regression_methods_not_run": 5,
+  "checks": [
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v11-r2/three-callback-metadata-r1.json",
+      "result": {
+        "formed_witnesses": [],
+        "scope": "only three frozen pointer-source owners /118 code bytes; no generation",
+        "sources": [
+          {
+            "code_bytes": 54,
+            "expected_code_bytes": 54,
+            "expected_witness": {
+              "definition_site": 1049456,
+              "evidence": "dominated_tagged_pc_relative_value",
+              "function": 1049440,
+              "isa": "thumb",
+              "site": 1049458,
+              "target": 1050106
+            },
+            "opaque_reasons": [
+              {
+                "reason": "uncertified_processor_effect",
+                "site": 1049444
+              },
+              {
+                "reason": "uncertified_processor_effect",
+                "site": 1049470
+              },
+              {
+                "reason": "uncertified_processor_effect",
+                "site": 1049484
+              },
+              {
+                "reason": "unresolved_computed_transfer",
+                "site": 1049492
+              }
+            ],
+            "pool_definition_le": false,
+            "primary_entry": 1049440,
+            "source": 1049440,
+            "target_in_adopted_entries": false,
+            "target_in_prepared_identities": false,
+            "target_size": 16
+          },
+          {
+            "code_bytes": 32,
+            "expected_code_bytes": 32,
+            "expected_witness": {
+              "definition_site": 1050068,
+              "evidence": "dominated_tagged_pc_relative_value",
+              "function": 1050058,
+              "isa": "thumb",
+              "site": 1050072,
+              "target": 1050048
+            },
+            "opaque_reasons": [
+              {
+                "reason": "uncertified_processor_effect",
+                "site": 1050076
+              }
+            ],
+            "pool_definition_le": false,
+            "primary_entry": 1050058,
+            "source": 1050058,
+            "target_in_adopted_entries": false,
+            "target_in_prepared_identities": false,
+            "target_size": 10
+          },
+          {
+            "code_bytes": 32,
+            "expected_code_bytes": 32,
+            "expected_witness": {
+              "definition_site": 1051112,
+              "evidence": "dominated_tagged_pc_relative_value",
+              "function": 1051102,
+              "isa": "thumb",
+              "site": 1051116,
+              "target": 1051092
+            },
+            "opaque_reasons": [
+              {
+                "reason": "uncertified_processor_effect",
+                "site": 1051120
+              }
+            ],
+            "pool_definition_le": false,
+            "primary_entry": 1051102,
+            "source": 1051102,
+            "target_in_adopted_entries": false,
+            "target_in_prepared_identities": false,
+            "target_size": 10
+          }
+        ],
+        "target_total_bytes": 36
+      },
+      "sha256": "8a6c3e9688796e1c467adcafce976007fc4fa8c001b2e43143bff8fbcee318d4",
+      "wall_seconds": 0.255168
+    },
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v11-r2/three-callback-effect-categories-r1.json",
+      "result": {
+        "effects": [
+          {
+            "call": false,
+            "conditional": false,
+            "decoder_class_in_certified_thumb16_inventory": false,
+            "family": "thumb16_effect_class_not_certified",
+            "indirect_transfer": false,
+            "instruction_size": 2,
+            "ordinary_return": false,
+            "processor_status_instruction": false,
+            "site": 1049444,
+            "source": 1049440
+          },
+          {
+            "call": false,
+            "conditional": false,
+            "decoder_class_in_certified_thumb16_inventory": false,
+            "family": "thumb16_effect_class_not_certified",
+            "indirect_transfer": false,
+            "instruction_size": 2,
+            "ordinary_return": false,
+            "processor_status_instruction": false,
+            "site": 1049470,
+            "source": 1049440
+          },
+          {
+            "call": false,
+            "conditional": false,
+            "decoder_class_in_certified_thumb16_inventory": false,
+            "family": "thumb16_effect_class_not_certified",
+            "indirect_transfer": false,
+            "instruction_size": 2,
+            "ordinary_return": false,
+            "processor_status_instruction": false,
+            "site": 1049484,
+            "source": 1049440
+          },
+          {
+            "call": false,
+            "conditional": false,
+            "decoder_class_in_certified_thumb16_inventory": false,
+            "family": "thumb16_effect_class_not_certified",
+            "indirect_transfer": false,
+            "instruction_size": 2,
+            "ordinary_return": false,
+            "processor_status_instruction": false,
+            "site": 1050076,
+            "source": 1050058
+          },
+          {
+            "call": false,
+            "conditional": false,
+            "decoder_class_in_certified_thumb16_inventory": false,
+            "family": "thumb16_effect_class_not_certified",
+            "indirect_transfer": false,
+            "instruction_size": 2,
+            "ordinary_return": false,
+            "processor_status_instruction": false,
+            "site": 1051120,
+            "source": 1051102
+          }
+        ],
+        "scope": "seven refused effects in the same three bounded source owners; semantic categories only"
+      },
+      "sha256": "fc485b0acd094e8b465dd316571024281a0efe16917fab9a32fac4dad3393889",
+      "wall_seconds": 0.133573
+    },
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v11-r2/diagnostic-generation-r1.json",
+      "sha256": "a2432b6d201199ecc7314c680aefbbbc9b591884bbb0bc81b71a011d0a1b6461",
+      "stdout": "4741 functions; 178 unknown bytes; 9 anomalies; 116.944s; scratch/closure/v11-r2/diagnostic-proposal-r1.json\n",
+      "wall_seconds": 117.121732
+    },
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v11-r2/diagnostic-protected-records-r1.json",
+      "result": {
+        "accepted_identities_remain_ordinary": true,
+        "accepted_identities_verified": 1621,
+        "all_full_protected_records_equal": true,
+        "prepared_identities_verified": 2297,
+        "proposal_sha256": "9b04527f05f081a07d98a2809609d2a61938f838b028f0a5cb478d6efc996a2b",
+        "protected_complete_records_verified": 2298,
+        "scope": "bounded metadata comparison against already retained diagnostic; no new generation"
+      },
+      "sha256": "63bd9bde3505cae59b2a1d73e2df20fa8e58395049be1673f41e5ec1d2fa4729",
+      "wall_seconds": 0.506841
+    },
+    {
+      "actual_exit_code": 1,
+      "receipt": "scratch/closure/v11-r2/r3-retained-consumer-r1.json",
+      "sha256": "ec96a046cf2bf6eb3915361c8d88e19096ce82a6f1f4df66c9af182d46c76046",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 18, in <module>\n  File \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/catalogue-v11-r2/tools/catalogue_closure.py\", line 1341, in check_entry_revision\n    raise ValueError(\"v11-r3 owner identities differ from the exact authenticated delta\")\nValueError: v11-r3 owner identities differ from the exact authenticated delta\n",
+      "wall_seconds": 0.470438
+    },
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v11-r2/r3-retained-consumer-r2.json",
+      "result": {
+        "computed_statistics": {
+          "anomalies": 9,
+          "creditable_bytes": 1123188,
+          "creditable_functions": 4579,
+          "functions": 4741,
+          "unknown_bytes": 178,
+          "unknown_ranges": 35
+        },
+        "negative_controls": {
+          "missing_negative_certificate": "v11-r3 withdrawal 0x1005fa lacks its exact negative/unknown protection",
+          "relabel_reopened_as_rodata": "v11-r3 withdrawal 0x1005c0 lacks its exact negative/unknown protection",
+          "retire_protected_identity": "v11-r3 withdrawal 0x1005c0 lacks its exact negative/unknown protection"
+        },
+        "new_entries": 1,
+        "prior_entries": 4776,
+        "protection_union": 2298,
+        "retained_prior_entries": 4773,
+        "revision": "catalogue-v11-r3",
+        "scope": "new r3 public consumer over retained source98107cd metadata; no generation or suite",
+        "withdrawn_addresses": [
+          1050048,
+          1050106,
+          1051092
+        ]
+      },
+      "sha256": "bb4b7fbd3e17fe405fb34152d605b562c7461d2c5f9211888bc9d152213d872d",
+      "wall_seconds": 1.186244
+    },
+    {
+      "actual_exit_code": 1,
+      "receipt": "scratch/closure/v11-r2/r3-synthetic-public-cli-r1.json",
+      "sha256": "1cb901b446ccc4a61044260c832d2a834b6500581127698846a4667e31e98cd5",
+      "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 7, in <module>\nAssertionError: catalogue: v11-r3 anomaly delta differs from the exact descriptor proof\n\n",
+      "wall_seconds": 0.313649
+    },
+    {
+      "actual_exit_code": 0,
+      "receipt": "scratch/closure/v11-r2/r3-synthetic-public-cli-r2.json",
+      "result": {
+        "actual_functions_equal_typed_producer": true,
+        "new_child_bound": true,
+        "protected_claims": 2,
+        "refusal": "catalogue: v11-r3 entry evidence differs from its immutable parent/image/proposal",
+        "refused_cli_exit": 1,
+        "refused_output_absent": true,
+        "scope": "one lightweight synthetic public r3 CLI smoke; no test methods or original-image generation",
+        "valid_cli_exit": 0
+      },
+      "sha256": "7f7b448857a54302f4d846e2d24dbda214411b908f95cb3195f70d6ce83d7bfa",
+      "wall_seconds": 0.443506
+    }
+  ],
+  "complete_delta": {
+    "adopted_entries_retained": 4730,
+    "anomaly_delta": {
+      "added": [],
+      "removed": [
+        {
+          "address": 1664232,
+          "issue": "undecodable_reachable_code"
+        }
+      ]
+    },
+    "entry_delta": {
+      "added": [
+        {
+          "address": 1702160,
+          "evidence": [
+            "exact_bound_global_section_entry"
+          ],
+          "isa": "thumb",
+          "kind": "entry",
+          "owner": 1702160,
+          "sources": []
+        }
+      ],
+      "after_count": 4774,
+      "before_count": 4776,
+      "changed": [],
+      "removed": [
+        {
+          "address": 1050048,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "thumb",
+          "kind": "entry",
+          "owner": 1050048,
+          "sources": []
+        },
+        {
+          "address": 1050106,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "thumb",
+          "kind": "entry",
+          "owner": 1050106,
+          "sources": []
+        },
+        {
+          "address": 1051092,
+          "evidence": [
+            "pointer"
+          ],
+          "isa": "thumb",
+          "kind": "entry",
+          "owner": 1051092,
+          "sources": []
+        }
+      ]
+    },
+    "path": "scratch/closure/v11-r2/diagnostic-complete-delta-r1.json",
+    "physical_map_changes": [
+      {
+        "after": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "before": {
+          "kind": "function",
+          "owner": 1050048
+        },
+        "end": 1050058,
+        "start": 1050048
+      },
+      {
+        "after": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "before": {
+          "kind": "function",
+          "owner": 1050106
+        },
+        "end": 1050122,
+        "start": 1050106
+      },
+      {
+        "after": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "before": {
+          "kind": "function",
+          "owner": 1051092
+        },
+        "end": 1051102,
+        "start": 1051092
+      },
+      {
+        "after": {
+          "kind": "rodata",
+          "owner": null
+        },
+        "before": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "end": 1403440,
+        "start": 1403312
+      },
+      {
+        "after": {
+          "kind": "rodata",
+          "owner": null
+        },
+        "before": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "end": 1656040,
+        "start": 1655980
+      },
+      {
+        "after": {
+          "kind": "function",
+          "owner": 1664152
+        },
+        "before": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "end": 1664260,
+        "start": 1664232
+      },
+      {
+        "after": {
+          "kind": "function",
+          "owner": 1702160
+        },
+        "before": {
+          "kind": "unknown",
+          "owner": null
+        },
+        "end": 1702162,
+        "start": 1702160
+      }
+    ],
+    "prepared_complete_records_retained": 2297,
+    "protected_union": 2298,
+    "sha256": "cf0e1b8a2046d624ba2d520d83e426f4ed4b3037d98fe7d99fa995169c00edd4"
+  },
+  "decision": "Main explicitly retains sound r5 refusals and authorizes withdrawal of exactly the three unadopted r4 entries into unknown. All4730 adopted v9-r2 entries and2297 prepared complete records remain mandatory. Do not infer a new positive entry witness from a closed-looking body or restore provisional entries to meet a count.",
+  "diagnostic_generation": {
+    "actual_exit_code": 0,
+    "adopted_entries_retained": 4730,
+    "anomalies": 9,
+    "complete_delta": {
+      "path": "scratch/closure/v11-r2/diagnostic-complete-delta-r1.json",
+      "sha256": "cf0e1b8a2046d624ba2d520d83e426f4ed4b3037d98fe7d99fa995169c00edd4"
+    },
+    "entries": 4774,
+    "generation_receipt": {
+      "path": "scratch/closure/v11-r2/diagnostic-generation-r1.json",
+      "sha256": "a2432b6d201199ecc7314c680aefbbbc9b591884bbb0bc81b71a011d0a1b6461"
+    },
+    "ordinary_extent_bytes": 1123188,
+    "ordinary_owners": 4579,
+    "owners": 4741,
+    "prepared_complete_records_retained": 2297,
+    "proposal": {
+      "path": "scratch/closure/v11-r2/diagnostic-proposal-r1.json",
+      "sha256": "9b04527f05f081a07d98a2809609d2a61938f838b028f0a5cb478d6efc996a2b",
+      "size": 9501806
+    },
+    "source_commit": "98107cdad6d917086fbc36f687fbde933c500e15",
+    "unknown_bytes": 178,
+    "unknown_intervals": 35
+  },
+  "immutable_input_sha256": {
+    "research/catalogue_v10_r5_evidence.json": "b758574088ae4a9c85f8dd89548066dec48d060d622aa43dcef36707827d2f52",
+    "research/catalogue_v11_evidence.json": "ee7aaca7fb66c3740f8e9bc62b50b79bc8d8ac4bfc49082d545e851e320ec1fc",
+    "research/catalogue_v11_protection.json": "1c2cf1bf6396f5a78251cb9ef0f1a5b59eff1c77517341b47399143caf6df415",
+    "research/catalogue_v11_r2_checks.json": "2c6ae4cca0cc26fdd2934e74d472e0c22563eab1117f242d05aa527aea08b4ed",
+    "research/catalogue_v11_r2_evidence.json": "b344066340a4e40b9f3bf316aafae6bb185b1e11ac53b8c68cbe7775a81feeb7",
+    "research/catalogue_v11_r3_evidence.json": "7a1a2aa5e5344061fe2d4be7a82e55a726723c295f6c065d3d5623263f2d39e4"
+  },
+  "inherited_failed_suite": {
+    "actual_exit_code": 1,
+    "failed_method": "tests.test_analyze.CatalogueTests.test_original_invariants_and_stability",
+    "failure": "stale ungenerated v11 owner/ordinary count hypothesis; exact three unadopted r4 pointer-entry proposals lack current r5 certificate",
+    "path": "scratch/integrator/catalogue-v11/integrated-r2-suite-r1.json",
+    "sha256": "c85ce76d6f64279db92db9d312e37b236a2f654662e26c1d5b8131ef2016eac3",
+    "skipped": 1,
+    "source_commit": "98107cdad6d917086fbc36f687fbde933c500e15",
+    "tests_run": 887
+  },
+  "new_C_credit": 0,
+  "not_run_after_successor_source_changes": [
+    "test methods/modules",
+    "full suite",
+    "current-image generation",
+    "build/compiler/matcher",
+    "whole-tree audits",
+    "linters/formatters"
+  ],
+  "qualification": "Exactly one Main-granted diagnostic current-image generation ran against source98107cd, then released the heavy slot atomically. No successor current-image generation or suite was run. Final new-consumer checks use the retained diagnostic and bounded source-owner certificates; final CLI smoke is synthetic only. Fresh integrated suite/generation and independent review remain required.",
+  "remaining_main_commands": [
+    [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-t",
+      "."
+    ],
+    [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "tools/analyze.py",
+      "catalogue",
+      "--out",
+      "scratch/analyze/catalogue-v11-r3.json"
+    ]
+  ],
+  "retained_author_check_failures": [
+    {
+      "cause": "New expected-kind reconciliation incorrectly changed two existing multi_entry owners to runtime, unlike apply_classifications. Corrected to apply classification kind only to ordinary function, preserving topology.",
+      "receipt": "scratch/closure/v11-r2/r3-retained-consumer-r1.json"
+    },
+    {
+      "cause": "Synthetic reference incorrectly reused adopted pre-typed-repair anomalies rather than the prior proposal metadata. Fixture now uses independently typed public-writer reference, like actual frozen r4. Production anomaly guard unchanged.",
+      "receipt": "scratch/closure/v11-r2/r3-synthetic-public-cli-r1.json"
+    }
+  ],
+  "revision": "catalogue-v11-r3",
+  "schema_version": 1,
+  "source_parent_commit": "98107cdad6d917086fbc36f687fbde933c500e15",
+  "source_sha256": {
+    "tests/test_analyze.py": "7c4cf2ea7f610c96a1a35ee2739f30a2bedd84036700ca22e90550fc58ed45ee",
+    "tests/test_catalogue_endian_cli.py": "394281b571ec5696bfe94cfe7c87e2d469d43044409713c017c6dbfcc6a1e09d",
+    "tests/test_catalogue_entry_reassessment.py": "c2103a23b4e760fa2a18388c4d43ec3ec8a79fee5a90c9c0ffc42e76c01e8c93",
+    "tests/test_catalogue_protection.py": "5ecea321da2838faa235656b14cc2a1179def6687f16dffc6a27f5031ac38e7a",
+    "tools/analyze.py": "888199c44ec974f85a4a9d595dc492a181ed5b2166688cc9a5a3b58ea4a0370a",
+    "tools/catalogue_closure.py": "f007bb489af92631036f206e86fc7a88fd14a51a4c0d4731240f52bcc902abd0"
+  }
+}

@@ -1,0 +1,2939 @@
+{
+  "baseline": {
+    "adopted": false,
+    "field_sha256": {
+      "anomalies": "5b945609a3c5d0a04b630b9c87698babb274ab2083813a336ba1dbf1cb628a73",
+      "boundary_merges": "30d809170ec8fae3b03454790b62a7a4c70603466b8e39fe0781c9c13257a746",
+      "closure_evidence": "be31d98ee249a31dc4edb9d86b8c8defc35abd7662d71352457c94f8e64f53da",
+      "entry_groups": "4eae2807c4d2b741718e90c1c6bf8418fe627e0e387948e87bb7dcc46d82b1e6",
+      "functions": "ab8b72dc735670a30f45c2d12a86123eb9b4a1aa8e0b12727015e2bb9b974774",
+      "image": "1104eaae8df9a61a24a2576e4d99669b19441f802dfdf765c97f7d9af6f67b14",
+      "image_sha256": "a973d2c72d0e6955266f6ee64a98d4ba59f9863a69e40dfc9540fef9f3933cd7",
+      "leading_instruction_inventory": "b30e65b8c3bfe0f1f6c474f975646ad94ede092f263f0c16fc41a85236b7d686",
+      "leading_instruction_repairs": "1fbb5d06dd39986cedeac5791dd69d9b5d8b9013e15bf725da0dc74b39ee3c57",
+      "legacy_entry_preservation": "977b7c3e55c975f32fce7871b60b5d56574763bb8be83f62809c547de040ef78",
+      "linker_nop_inventory": "aa7d0b93e2100aac63a5931b76d37fa6fa6103041cb5c2760c64ffc3cd88ec3d",
+      "linker_tail_extent_splits": "a4126b1be3f49577e9ced07f4778e9460419631e600402865c17603568e65006",
+      "linker_tail_inventory": "35de3ae220e86364d33e4f260fbb499052673f56657d4d28eaadcb5c7e36deb6",
+      "linker_tail_splits": "2fc65b64b473f1ed91862bacc560f04da98139700b236354bb0e5c66f31b0d22",
+      "literal_conflicts": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "pc_relative_pointer_witnesses": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "pointer_entry_inventory": "10ded4dbbdfa2115dc7c0a09e2ae78ce3c873e249614945593459425fbf15ced",
+      "pointer_prefix_wrappers": "8260c6c2c5570a99de1b2ddd9790a4774658c50deb289494b985d2ce1fefd22b",
+      "pointer_target_repairs": "073ad9162a22a76878947ab147bc30c2f11b35094cbcbf6b6cfd4a496a932d36",
+      "protected_entry_observations": "49b460564d52a568c33185fd53e7cef6b49cd64b35ce9a11daa3a75e79866e2f",
+      "protected_start_observations": "96acf8a2888393d2f6325f8b0756b0553dbb03820eec1a81ebb031a255068df4",
+      "ranges": "1dbaaa2a7ca5f81120eee5924d2fede700da9a248eeee49ae758fdef7f906eca",
+      "relative_pointer_tables": "e7be8de7b44e42d24144efb519af6c801e5f8744a606eba5494a9c1900a94ee7",
+      "schema_version": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "segments": "d8e1d63cddad7fdf580db2c8ba9952df7ca064053261f139feda793de565fe6f",
+      "shared_literals": "f3c9fa204a6ee12db491d86244285562568b6c1e861d18fcface87d13bed72e3",
+      "stats": "0d94150820ef55b63105e5d67b5a89d3096cfe0c93b2b83edaf2d1ed096c0a93",
+      "tail_target_repairs": "e2210ebf81e6b52861fac5888828d2c73611dbc4dd6e7926d4a8582970912003"
+    },
+    "proposal_sha256": "ee64b7d69bf5b96fe26a8ada241a59eca2924ac4ab9a376a5fc449e2d1e5a942",
+    "range_kinds": [
+      "data",
+      "function",
+      "padding",
+      "rodata",
+      "segment_padding",
+      "unknown"
+    ],
+    "revision": "catalogue-v12-r2"
+  },
+  "classifications": [
+    {
+      "address": 1051864,
+      "before_sha256": "6a84ad09cdac187cf859c6718746ad37ada7861219a8448c9396bcba32d1a86a",
+      "coverage": [
+        [
+          "_printf_ll.o",
+          1,
+          1051864,
+          1051876
+        ],
+        [
+          "_printf_i.o",
+          1,
+          1051876,
+          1051884
+        ],
+        [
+          "_printf_d.o",
+          1,
+          1051884,
+          1051892
+        ],
+        [
+          "_printf_u.o",
+          1,
+          1051892,
+          1051900
+        ],
+        [
+          "_printf_o.o",
+          1,
+          1051900,
+          1051908
+        ],
+        [
+          "_printf_x.o",
+          1,
+          1051908,
+          1051916
+        ],
+        [
+          "_printf_lli.o",
+          1,
+          1051916,
+          1051924
+        ],
+        [
+          "_printf_lld.o",
+          1,
+          1051924,
+          1051932
+        ],
+        [
+          "_printf_llu.o",
+          1,
+          1051932,
+          1051940
+        ],
+        [
+          "_printf_llo.o",
+          1,
+          1051940,
+          1051948
+        ],
+        [
+          "_printf_llx.o",
+          1,
+          1051948,
+          1051956
+        ],
+        [
+          "_printf_l.o",
+          1,
+          1051956,
+          1051968
+        ],
+        [
+          "_printf_c.o",
+          1,
+          1051968,
+          1051976
+        ],
+        [
+          "_printf_s.o",
+          1,
+          1051976,
+          1051984
+        ],
+        [
+          "_printf_lc.o",
+          1,
+          1051984,
+          1051992
+        ],
+        [
+          "_printf_ls.o",
+          1,
+          1051992,
+          1052000
+        ],
+        [
+          "_printf_percent_end.o",
+          1,
+          1052000,
+          1052008
+        ]
+      ],
+      "extent_sha256": "98ca4db6d067347f74fff7af16cefc42abf98dbdf74bca424ee10b23f4a9c6db",
+      "identity": "ordered_printf_percent_collection_suffix",
+      "isa": "arm",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 144
+    },
+    {
+      "address": 1077368,
+      "before_sha256": "95969ce35e8801f0732ae84596fdf03ad9ee4aad14b908a417c9e2007fec20e1",
+      "coverage": [
+        [
+          "func_00107078",
+          3,
+          1077368,
+          1077440
+        ]
+      ],
+      "extent_sha256": "d158fafd70e1e74595578856f6bcbd3aadaae34ed915e67278047c19d2249b39",
+      "identity": "_get_lc_numeric",
+      "isa": "arm",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 72
+    },
+    {
+      "address": 1233092,
+      "before_sha256": "cc922cd129df5ddde3e55bca89788366adf7fb38b6d4e0a28070dd043bae5e85",
+      "control_transfer": {
+        "continuation": 1233224,
+        "incoming": [
+          {
+            "conditional": true,
+            "image_sha256": "bbed4f4ab0f0518615ae8fb5f3fca54dd6e9e8063985bd7db7ae28f9389d1a3f",
+            "isa": "arm",
+            "owner": 1233156,
+            "record_sha256": "50248986118ff675c00e4f540aeb6cee80a630ecc6d78a768cf07aed3d86eb87",
+            "site": 1233212,
+            "target": 1233092,
+            "target_isa": "arm"
+          }
+        ],
+        "literal_site": 1233128
+      },
+      "extent_sha256": "96d2108f925f4a606681e5b2e0fcf19fc353cb44aa305b0abb24f6cd8db00adc",
+      "identity": "fixed_LR_continuation_trampoline",
+      "isa": "arm",
+      "kind": "assembly",
+      "qualification": "Exact architecture-specific fixed LR continuation and terminal non-call indirect transfer; no vendor/API identity or ordinary C calling-convention claim.",
+      "size": 40
+    },
+    {
+      "address": 1261864,
+      "before_sha256": "4cb7af44f423b39f2f73bdccbacf9d9d5e2351513055110287ca50992726211c",
+      "coverage": [
+        [
+          "func_00134128",
+          3,
+          1261864,
+          1261936
+        ]
+      ],
+      "extent_sha256": "b57e347ca1b4ba5215236c10cfc90392f5f49812709397c25c8c9e5eed62cfbb",
+      "identity": "_get_lc_ctype",
+      "isa": "arm",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 72
+    },
+    {
+      "address": 1402356,
+      "before_sha256": "483e788877a204c4ffaddc2c27957102548b5cf14cdfcd696ae57acad4ca7455",
+      "coverage": [
+        [
+          "unpack_three_complete_sections",
+          1,
+          1402356,
+          1402412
+        ],
+        [
+          "unpack_three_complete_sections",
+          5,
+          1402412,
+          1402496
+        ],
+        [
+          "unpack_three_complete_sections",
+          3,
+          1402496,
+          1402600
+        ]
+      ],
+      "extent_sha256": "e8835ffc94f327eba5cad509fc949dc79f388ef691f238b7d7ecb5f968f76184",
+      "identity": "_btod_d2e + _d2e_denorm_low + _d2e_norm_op1",
+      "isa": "arm",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 244
+    },
+    {
+      "address": 1402600,
+      "before_sha256": "a1b89cd7018c136d638dba34904b3e9c312765c610a1ba1ae7036bda5a69015e",
+      "coverage": [
+        [
+          "division_complete_section",
+          19,
+          1402600,
+          1403312
+        ]
+      ],
+      "extent_sha256": "ba360e1afa11c7fc600e44faa7806ddba53d02557d447bab0a091d937ad65f38",
+      "identity": "__btod_div_common",
+      "isa": "arm",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 712
+    },
+    {
+      "address": 1403440,
+      "before_sha256": "227e43a61f68cfe3740b5954091636f49f5cf0f47994c4d09cf29ba496e5fbf9",
+      "coverage": [
+        [
+          "round_pack_complete_section",
+          14,
+          1403440,
+          1403660
+        ]
+      ],
+      "extent_sha256": "f85ef1236d6fbaa43de28e030b2a52a49d374fcce6b71cb3557cdefa94cc8aec",
+      "identity": "_e2e",
+      "isa": "arm",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 220
+    },
+    {
+      "address": 1580692,
+      "anchor": {
+        "address": 1580702,
+        "group": "errno",
+        "offset": 10,
+        "record_sha256": "c2ffb35e265944ddad1a3b032927cc196ea557669428ba04f8e57fd59909df8b",
+        "section": 1,
+        "symbol": "__set_errno"
+      },
+      "before_sha256": "2d7c4568490c00fc56aa41e6b57eb8e70dfe214faacff5f1ad7eef9130cf5d8d",
+      "coverage": [
+        [
+          "errno",
+          1,
+          1580692,
+          1580702
+        ]
+      ],
+      "extent_sha256": "aaeed39611fc06ec17925db7ae6c2b3ff1321241cca5ca5d9804cfd6c5779c76",
+      "identity": "__read_errno",
+      "isa": "thumb",
+      "kind": "library",
+      "qualification": "Complete selected input sections and independent original placement; no new API aliases, historical archive uniqueness, pool/data ownership, extent change or C credit. Observed external targets are not API identities.",
+      "size": 10
+    }
+  ],
+  "groups": [
+    {
+      "allocated_section_indices": [
+        1,
+        3
+      ],
+      "id": "func_00107078",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "28623e516e5b15f7c6d568bac0d82d21bd227669cf4462710614aea20ac4216e",
+          "isa": "arm",
+          "owner": 1054320,
+          "record_sha256": "4cecb061b82c0710469d90cea44bf661df493987acc157c94949617f2485cb13",
+          "site": 1054384,
+          "target": 1077368,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [
+        {
+          "offset": 64,
+          "source_section": 3,
+          "target_section": 1
+        },
+        {
+          "offset": 68,
+          "source_section": 3,
+          "target_section": 1
+        },
+        {
+          "offset": 0,
+          "source_section": 1,
+          "target_section": 1
+        },
+        {
+          "offset": 8,
+          "source_section": 1,
+          "target_section": 1
+        },
+        {
+          "offset": 12,
+          "source_section": 1,
+          "target_section": 1
+        },
+        {
+          "offset": 16,
+          "source_section": 1,
+          "target_section": 1
+        },
+        {
+          "offset": 20,
+          "source_section": 1,
+          "target_section": 1
+        }
+      ],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 2317852,
+          "executable": false,
+          "image_sha256": "f5d009504575a30557b73a569178e9e1522f55a8e7707b87ab690096f0c112d3",
+          "index": 1,
+          "mapping": [],
+          "name": "locale$$data",
+          "nobits": false,
+          "object_sha256": "d8bf4181a0ab86f6bf6bf1051180eec02eec7b7d3b7aa1e7cf333967fbe191a9",
+          "relocated_sha256": "f5d009504575a30557b73a569178e9e1522f55a8e7707b87ab690096f0c112d3",
+          "relocations": [
+            {
+              "addend": 0,
+              "offset": 0,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_end",
+              "symbol_offset": 28,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 28,
+              "target": 2317880,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": -4,
+              "offset": 8,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_name",
+              "symbol_offset": 4,
+              "symbol_section": 1,
+              "symbol_size": 2,
+              "symbol_value": 4,
+              "target": 2317856,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": 0,
+              "offset": 12,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_point",
+              "symbol_offset": 24,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 24,
+              "target": 2317876,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": 4,
+              "offset": 16,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_thousands",
+              "symbol_offset": 26,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 26,
+              "target": 2317878,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": 8,
+              "offset": 20,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_grouping",
+              "symbol_offset": 27,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 27,
+              "target": 2317879,
+              "thumb": false,
+              "type": 3
+            }
+          ],
+          "size": 28,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "locale$$data",
+              "offset": 0,
+              "size": 28,
+              "value": 0
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcnum_c_name",
+              "offset": 4,
+              "size": 2,
+              "value": 4
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcnum_c_start",
+              "offset": 12,
+              "size": 0,
+              "value": 12
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcnum_c_point",
+              "offset": 24,
+              "size": 0,
+              "value": 24
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcnum_c_thousands",
+              "offset": 26,
+              "size": 0,
+              "value": 26
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcnum_c_grouping",
+              "offset": 27,
+              "size": 0,
+              "value": 27
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcnum_c_end",
+              "offset": 28,
+              "size": 0,
+              "value": 28
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        },
+        {
+          "alignment": 4,
+          "base": 1077368,
+          "executable": true,
+          "image_sha256": "d158fafd70e1e74595578856f6bcbd3aadaae34ed915e67278047c19d2249b39",
+          "index": 3,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ],
+            [
+              64,
+              "$d"
+            ]
+          ],
+          "name": "locale$$code",
+          "nobits": false,
+          "object_sha256": "0b01d242c6bcdbdb59ca1940b3fb8315cd744395304a5321cd62a7ac9beae617",
+          "relocated_sha256": "d158fafd70e1e74595578856f6bcbd3aadaae34ed915e67278047c19d2249b39",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 32,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "strcmp",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1661924,
+              "thumb": false,
+              "type": 28
+            },
+            {
+              "addend": 28,
+              "offset": 64,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_name",
+              "symbol_offset": 4,
+              "symbol_section": 1,
+              "symbol_size": 2,
+              "symbol_value": 4,
+              "target": 2317856,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": 4,
+              "offset": 68,
+              "rule": "same_object_definition",
+              "symbol": "__lcnum_c_start",
+              "symbol_offset": 12,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 12,
+              "target": 2317864,
+              "thumb": false,
+              "type": 3
+            }
+          ],
+          "size": 72,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "locale$$code",
+              "offset": 0,
+              "size": 72,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_get_lc_numeric",
+              "offset": 0,
+              "size": 72,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "lc_numeric_c.o",
+        "member_offset": 1025890,
+        "member_sha256": "fc34443b5914c2ef6516900503447e1951d383ce00d6a63ecf6c67d613c9ab54"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1,
+        3
+      ],
+      "id": "func_00134128",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "28623e516e5b15f7c6d568bac0d82d21bd227669cf4462710614aea20ac4216e",
+          "isa": "arm",
+          "owner": 1054320,
+          "record_sha256": "4cecb061b82c0710469d90cea44bf661df493987acc157c94949617f2485cb13",
+          "site": 1054364,
+          "target": 1261864,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [
+        {
+          "offset": 64,
+          "source_section": 3,
+          "target_section": 1
+        },
+        {
+          "offset": 68,
+          "source_section": 3,
+          "target_section": 1
+        },
+        {
+          "offset": 0,
+          "source_section": 1,
+          "target_section": 1
+        },
+        {
+          "offset": 8,
+          "source_section": 1,
+          "target_section": 1
+        }
+      ],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 2317580,
+          "executable": false,
+          "image_sha256": "d232b1b7dd4cac7d4dcdbeb901e56252b5c1a2efa4b6e430f25f909b5de48710",
+          "index": 1,
+          "mapping": [],
+          "name": "locale$$data",
+          "nobits": false,
+          "object_sha256": "b7a9f59049ff744cdad057472956bb1b511afb01bad98f210452d1c42e8e8339",
+          "relocated_sha256": "d232b1b7dd4cac7d4dcdbeb901e56252b5c1a2efa4b6e430f25f909b5de48710",
+          "relocations": [
+            {
+              "addend": 0,
+              "offset": 0,
+              "rule": "same_object_definition",
+              "symbol": "__lcctype_c_end",
+              "symbol_offset": 272,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 272,
+              "target": 2317852,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": -4,
+              "offset": 8,
+              "rule": "same_object_definition",
+              "symbol": "__lcctype_c_name",
+              "symbol_offset": 4,
+              "symbol_section": 1,
+              "symbol_size": 2,
+              "symbol_value": 4,
+              "target": 2317584,
+              "thumb": false,
+              "type": 3
+            }
+          ],
+          "size": 272,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "locale$$data",
+              "offset": 0,
+              "size": 272,
+              "value": 0
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcctype_c_name",
+              "offset": 4,
+              "size": 2,
+              "value": 4
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcctype_c_start",
+              "offset": 12,
+              "size": 0,
+              "value": 12
+            },
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_OBJECT",
+              "name": "__lcctype_c_end",
+              "offset": 272,
+              "size": 0,
+              "value": 272
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_OBJECT",
+              "name": "__ctype",
+              "offset": 13,
+              "size": 0,
+              "value": 13
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        },
+        {
+          "alignment": 4,
+          "base": 1261864,
+          "executable": true,
+          "image_sha256": "b57e347ca1b4ba5215236c10cfc90392f5f49812709397c25c8c9e5eed62cfbb",
+          "index": 3,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ],
+            [
+              64,
+              "$d"
+            ]
+          ],
+          "name": "locale$$code",
+          "nobits": false,
+          "object_sha256": "0b01d242c6bcdbdb59ca1940b3fb8315cd744395304a5321cd62a7ac9beae617",
+          "relocated_sha256": "b57e347ca1b4ba5215236c10cfc90392f5f49812709397c25c8c9e5eed62cfbb",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 32,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "strcmp",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1661924,
+              "thumb": false,
+              "type": 28
+            },
+            {
+              "addend": 28,
+              "offset": 64,
+              "rule": "same_object_definition",
+              "symbol": "__lcctype_c_name",
+              "symbol_offset": 4,
+              "symbol_section": 1,
+              "symbol_size": 2,
+              "symbol_value": 4,
+              "target": 2317584,
+              "thumb": false,
+              "type": 3
+            },
+            {
+              "addend": 4,
+              "offset": 68,
+              "rule": "same_object_definition",
+              "symbol": "__lcctype_c_start",
+              "symbol_offset": 12,
+              "symbol_section": 1,
+              "symbol_size": 0,
+              "symbol_value": 12,
+              "target": 2317592,
+              "thumb": false,
+              "type": 3
+            }
+          ],
+          "size": 72,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "locale$$code",
+              "offset": 0,
+              "size": 72,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_get_lc_ctype",
+              "offset": 0,
+              "size": 72,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "lc_ctype_c.o",
+        "member_offset": 1020886,
+        "member_sha256": "98f4ccdaf6ae738d60330e9fee17336400adf299a49a1d2d79e7d405a05ae99e"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1,
+        3,
+        5,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        19
+      ],
+      "id": "unpack_three_complete_sections",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "543ffeeb6561bdb17c6c08c57c5bf73d46f932deb8265718aed61ed0443a18bb",
+          "isa": "thumb",
+          "owner": 1702314,
+          "record_sha256": "ab1e3aee9b308d989ad74c3fa297b101b0eece60268b8e26d9eb0559b6b9c3d0",
+          "site": 1702340,
+          "target": 1402356,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [
+        {
+          "offset": 40,
+          "source_section": 1,
+          "target_section": 3
+        },
+        {
+          "offset": 12,
+          "source_section": 3,
+          "target_section": 5
+        }
+      ],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1402356,
+          "executable": true,
+          "image_sha256": "c89b21aa2085c834d7a5e21117f8e3d59a0bef8069b7dadb602d84037dae4a8d",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": "CL$$btod_d2e",
+          "nobits": false,
+          "object_sha256": "0310279ff6c8551f9d265934495c786cd2f9063e3e619a22ca765b54508562bc",
+          "relocated_sha256": "c89b21aa2085c834d7a5e21117f8e3d59a0bef8069b7dadb602d84037dae4a8d",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 40,
+              "rule": "same_object_definition",
+              "symbol": "_d2e_norm_op1",
+              "symbol_offset": 0,
+              "symbol_section": 3,
+              "symbol_size": 104,
+              "symbol_value": 0,
+              "target": 1402496,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 56,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_d2e",
+              "offset": 0,
+              "size": 56,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_btod_d2e",
+              "offset": 0,
+              "size": 56,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        },
+        {
+          "alignment": 4,
+          "base": 1402496,
+          "executable": true,
+          "image_sha256": "7bcaa689b991ca0105434a81c0959518019a06613888c724a6ef4c9fd222cca2",
+          "index": 3,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": "CL$$btod_d2e_norm_op1",
+          "nobits": false,
+          "object_sha256": "ad33e63b367be4086fe175db656026dac9839f51a6ee1f2b7f676650024a33bb",
+          "relocated_sha256": "7bcaa689b991ca0105434a81c0959518019a06613888c724a6ef4c9fd222cca2",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 12,
+              "rule": "same_object_definition",
+              "symbol": "_d2e_denorm_low",
+              "symbol_offset": 0,
+              "symbol_section": 5,
+              "symbol_size": 84,
+              "symbol_value": 0,
+              "target": 1402412,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 104,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_d2e_norm_op1",
+              "offset": 0,
+              "size": 104,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_d2e_norm_op1",
+              "offset": 0,
+              "size": 104,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        },
+        {
+          "alignment": 4,
+          "base": 1402412,
+          "executable": true,
+          "image_sha256": "4889003450da055b8b80c9e67cce2c62d9120e4cc13edae1b46cdf1c007e2c24",
+          "index": 5,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": "CL$$btod_d2e_denorm_low",
+          "nobits": false,
+          "object_sha256": "4889003450da055b8b80c9e67cce2c62d9120e4cc13edae1b46cdf1c007e2c24",
+          "relocated_sha256": "4889003450da055b8b80c9e67cce2c62d9120e4cc13edae1b46cdf1c007e2c24",
+          "relocations": [],
+          "size": 84,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_d2e_denorm_low",
+              "offset": 0,
+              "size": 84,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_d2e_denorm_low",
+              "offset": 0,
+              "size": 84,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "btod.o",
+        "member_offset": 839426,
+        "member_sha256": "a3703f4bbfbb4e1c6fc9b815585e573fbae26d6289a81622f2663d36cfc07b26"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1,
+        3,
+        5,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        19
+      ],
+      "id": "division_complete_section",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "5857afed2d0efbc5a1543d95fe0827defbd9a2bf52acecf9236b909ea9292935",
+          "isa": "arm",
+          "owner": 1403660,
+          "record_sha256": "6be73d0ac85c7ab078bb025ad23e91435678b19e3dfd201445362f1f8badbd8f",
+          "site": 1403692,
+          "target": 1402600,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1402600,
+          "executable": true,
+          "image_sha256": "9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384",
+          "index": 19,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ],
+            [
+              712,
+              "$d"
+            ]
+          ],
+          "name": "CL$$btod_div_common",
+          "nobits": false,
+          "object_sha256": "9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384",
+          "relocated_sha256": "9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384",
+          "relocations": [],
+          "size": 840,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_div_common",
+              "offset": 0,
+              "size": 840,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "__btod_div_common",
+              "offset": 0,
+              "size": 712,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "btod.o",
+        "member_offset": 839426,
+        "member_sha256": "a3703f4bbfbb4e1c6fc9b815585e573fbae26d6289a81622f2663d36cfc07b26"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1,
+        3,
+        5,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        19
+      ],
+      "id": "round_pack_complete_section",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "5857afed2d0efbc5a1543d95fe0827defbd9a2bf52acecf9236b909ea9292935",
+          "isa": "arm",
+          "owner": 1403660,
+          "record_sha256": "6be73d0ac85c7ab078bb025ad23e91435678b19e3dfd201445362f1f8badbd8f",
+          "site": 1403696,
+          "target": 1403440,
+          "target_isa": "arm"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "ce85e261aec0af2e285226618d1da14bfdae2e8d4407304785d36a04ede9cd1b",
+          "isa": "arm",
+          "owner": 1703200,
+          "record_sha256": "b12b8af2d8649d04a549a5797543c263f0166756a49afab19c4c6ab9800ff6cd",
+          "site": 1703236,
+          "target": 1403440,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1403440,
+          "executable": true,
+          "image_sha256": "f85ef1236d6fbaa43de28e030b2a52a49d374fcce6b71cb3557cdefa94cc8aec",
+          "index": 14,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": "CL$$btod_e2e",
+          "nobits": false,
+          "object_sha256": "13c3e6b6d735de48a11ee5d5ca4889b77fe24858c20374a24d9ab93fe4d50feb",
+          "relocated_sha256": "f85ef1236d6fbaa43de28e030b2a52a49d374fcce6b71cb3557cdefa94cc8aec",
+          "relocations": [
+            {
+              "addend": -8,
+              "callee_address": 2192876,
+              "callee_extent_sha256": "6dcd5e75586fe6683156c0d559d4827b73bd48d501fa5781a1c6099aacd7c877",
+              "offset": 36,
+              "rule": "existing_inline_arm_call",
+              "symbol": "__ieee_status",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "type": 28
+            }
+          ],
+          "size": 220,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_e2e",
+              "offset": 0,
+              "size": 220,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_e2e",
+              "offset": 0,
+              "size": 220,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "btod.o",
+        "member_offset": 839426,
+        "member_sha256": "a3703f4bbfbb4e1c6fc9b815585e573fbae26d6289a81622f2663d36cfc07b26"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1,
+        3,
+        5,
+        6,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        19
+      ],
+      "id": "independent_complete_wrapper",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "5857afed2d0efbc5a1543d95fe0827defbd9a2bf52acecf9236b909ea9292935",
+          "isa": "arm",
+          "owner": 1403660,
+          "record_sha256": "6be73d0ac85c7ab078bb025ad23e91435678b19e3dfd201445362f1f8badbd8f",
+          "site": 1403696,
+          "target": 1403440,
+          "target_isa": "arm"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "ce85e261aec0af2e285226618d1da14bfdae2e8d4407304785d36a04ede9cd1b",
+          "isa": "arm",
+          "owner": 1703200,
+          "record_sha256": "b12b8af2d8649d04a549a5797543c263f0166756a49afab19c4c6ab9800ff6cd",
+          "site": 1703236,
+          "target": 1403440,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [
+        {
+          "offset": 32,
+          "source_section": 8,
+          "target_section": 19
+        },
+        {
+          "offset": 36,
+          "source_section": 8,
+          "target_section": 14
+        }
+      ],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1403660,
+          "executable": true,
+          "image_sha256": "5857afed2d0efbc5a1543d95fe0827defbd9a2bf52acecf9236b909ea9292935",
+          "index": 8,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": "CL$$btod_ediv",
+          "nobits": false,
+          "object_sha256": "4e2e7ce4cf1d7c24b958f093216a9552041971ddb4b24e1dcd8b320ad44218a1",
+          "relocated_sha256": "5857afed2d0efbc5a1543d95fe0827defbd9a2bf52acecf9236b909ea9292935",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 32,
+              "rule": "same_object_definition",
+              "symbol": "__btod_div_common",
+              "symbol_offset": 0,
+              "symbol_section": 19,
+              "symbol_size": 712,
+              "symbol_value": 0,
+              "target": 1402600,
+              "thumb": false,
+              "type": 28
+            },
+            {
+              "addend": -8,
+              "offset": 36,
+              "rule": "same_object_definition",
+              "symbol": "_e2e",
+              "symbol_offset": 0,
+              "symbol_section": 14,
+              "symbol_size": 220,
+              "symbol_value": 0,
+              "target": 1403440,
+              "thumb": false,
+              "type": 28
+            }
+          ],
+          "size": 48,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_ediv",
+              "offset": 0,
+              "size": 48,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_btod_ediv",
+              "offset": 0,
+              "size": 48,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        },
+        {
+          "alignment": 4,
+          "base": 1403440,
+          "executable": true,
+          "image_sha256": "f85ef1236d6fbaa43de28e030b2a52a49d374fcce6b71cb3557cdefa94cc8aec",
+          "index": 14,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": "CL$$btod_e2e",
+          "nobits": false,
+          "object_sha256": "13c3e6b6d735de48a11ee5d5ca4889b77fe24858c20374a24d9ab93fe4d50feb",
+          "relocated_sha256": "f85ef1236d6fbaa43de28e030b2a52a49d374fcce6b71cb3557cdefa94cc8aec",
+          "relocations": [
+            {
+              "addend": -8,
+              "callee_address": 2192876,
+              "callee_extent_sha256": "6dcd5e75586fe6683156c0d559d4827b73bd48d501fa5781a1c6099aacd7c877",
+              "offset": 36,
+              "rule": "existing_inline_arm_call",
+              "symbol": "__ieee_status",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "type": 28
+            }
+          ],
+          "size": 220,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_e2e",
+              "offset": 0,
+              "size": 220,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_e2e",
+              "offset": 0,
+              "size": 220,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        },
+        {
+          "alignment": 4,
+          "base": 1402600,
+          "executable": true,
+          "image_sha256": "9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384",
+          "index": 19,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ],
+            [
+              712,
+              "$d"
+            ]
+          ],
+          "name": "CL$$btod_div_common",
+          "nobits": false,
+          "object_sha256": "9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384",
+          "relocated_sha256": "9d7eb50894287249b1c65c775ce361a9f9e9c4db0aca800f91333bb6d4c0a384",
+          "relocations": [],
+          "size": 840,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": "CL$$btod_div_common",
+              "offset": 0,
+              "size": 840,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "__btod_div_common",
+              "offset": 0,
+              "size": 712,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "btod.o",
+        "member_offset": 839426,
+        "member_sha256": "a3703f4bbfbb4e1c6fc9b815585e573fbae26d6289a81622f2663d36cfc07b26"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_ll.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051864,
+          "executable": true,
+          "image_sha256": "4470ebefd1d8026e2a213303a6abcc73c688575ab8ca3c246643413d9c122e00",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000007",
+          "nobits": false,
+          "object_sha256": "4470ebefd1d8026e2a213303a6abcc73c688575ab8ca3c246643413d9c122e00",
+          "relocated_sha256": "4470ebefd1d8026e2a213303a6abcc73c688575ab8ca3c246643413d9c122e00",
+          "relocations": [],
+          "size": 12,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000007",
+              "offset": 0,
+              "size": 12,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_ll",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_ll.o",
+        "member_offset": 726106,
+        "member_sha256": "7ee4b7f1cb659911063e38dd11658a2f7ba5827115040a76f44da9b2b3c76396"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_i.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051876,
+          "executable": true,
+          "image_sha256": "5e622844b68b7f02d19829a03407a7e8fb14a1f833885eedaa251017f55fd4e5",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000008",
+          "nobits": false,
+          "object_sha256": "c6b93d8329f68041e2c06fe4f565c091b2c67dbce22b4e0f21096d3065badc6d",
+          "relocated_sha256": "5e622844b68b7f02d19829a03407a7e8fb14a1f833885eedaa251017f55fd4e5",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_int_dec",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1701428,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000008",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_i",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_i.o",
+        "member_offset": 715146,
+        "member_sha256": "66407614ce3449163befc99d4707ffc28e5451c6d3be3989aea2fc4f03b83b45"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_d.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051884,
+          "executable": true,
+          "image_sha256": "5848bf270e82de80142e35075b949c2efd8076a718302bd0357d745541591dc2",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000009",
+          "nobits": false,
+          "object_sha256": "15ab6ec27e2e486de0c9c8d0459cd30b7987879754b5c71d18b06b790c3852d3",
+          "relocated_sha256": "5848bf270e82de80142e35075b949c2efd8076a718302bd0357d745541591dc2",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_int_dec",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1701428,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000009",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_d",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_d.o",
+        "member_offset": 716062,
+        "member_sha256": "6329d3bf0b5ee0d2ba17e14b6282bd4b90dab7d38c4b1ab36e8efb79df4b5fa7"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_u.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051892,
+          "executable": true,
+          "image_sha256": "89064242f9577abb9dcbabea4a7b90cd64113a31a745ea9e5f041e3e55610109",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$0000000A",
+          "nobits": false,
+          "object_sha256": "3842273a4dc6050206f2b598e07f930454c84a67716f2ae5e4713e2a8399d104",
+          "relocated_sha256": "89064242f9577abb9dcbabea4a7b90cd64113a31a745ea9e5f041e3e55610109",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_int_dec",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1701428,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$0000000A",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_u",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_u.o",
+        "member_offset": 716978,
+        "member_sha256": "fc01ddf6ee8d7e364305825f79d1d290170821d46a9d7f841dc00addd8a32e3d"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_o.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051900,
+          "executable": true,
+          "image_sha256": "37799c2beaaa2d23229eb498921bec85797672c391d5348db434865d8c93a73d",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$0000000B",
+          "nobits": false,
+          "object_sha256": "032673eab73123da09a8741249af0f11719126b1d7d7881f8f738449fdd17c4d",
+          "relocated_sha256": "37799c2beaaa2d23229eb498921bec85797672c391d5348db434865d8c93a73d",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_int_oct",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1051244,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$0000000B",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_o",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_o.o",
+        "member_offset": 714230,
+        "member_sha256": "16f909c685aaeadd1480235b0dc1b2a3fda923f8904f62d29e4e5c0e46de291a"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_x.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051908,
+          "executable": true,
+          "image_sha256": "80404ce5bfd734bbaeb859e5dfe9352a6fda8f59849f7f1f1efb649af3204f69",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$0000000C",
+          "nobits": false,
+          "object_sha256": "82f1747009c3345282501dd15ed7eb839613c634c8d9362cea4c0c41ec916388",
+          "relocated_sha256": "80404ce5bfd734bbaeb859e5dfe9352a6fda8f59849f7f1f1efb649af3204f69",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_int_hex",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1622672,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$0000000C",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_x",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_x.o",
+        "member_offset": 712398,
+        "member_sha256": "df213978e50591a8bdb54694200439d51262d8ff825d21f08f220fbccecf88a7"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_lli.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051916,
+          "executable": true,
+          "image_sha256": "5332de28befcd80ee2bec5e845c965e05925606e21ab3e82e4c69c801bb14991",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$0000000D",
+          "nobits": false,
+          "object_sha256": "76574c615c6e90bb4c3d63d9aa44438cf5019456075c79a6f9b0265f6df3fda9",
+          "relocated_sha256": "5332de28befcd80ee2bec5e845c965e05925606e21ab3e82e4c69c801bb14991",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_longlong_dec",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1701308,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$0000000D",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_lli",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_lli.o",
+        "member_offset": 723250,
+        "member_sha256": "8309374d9333cd5c35ab1c4982667f8b72b4b14d3b0da8e2f486b8369d8d4b55"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_lld.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051924,
+          "executable": true,
+          "image_sha256": "e46d659a442e2ddf7ca29d5b70c879a443e381ed72d066c4f0ba4487f149c2cd",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$0000000E",
+          "nobits": false,
+          "object_sha256": "c2c457749558c7fea90b3959ca47f65c1a6995fe61149046cc069024fdf932b3",
+          "relocated_sha256": "e46d659a442e2ddf7ca29d5b70c879a443e381ed72d066c4f0ba4487f149c2cd",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_longlong_dec",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1701308,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$0000000E",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_lld",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_lld.o",
+        "member_offset": 724202,
+        "member_sha256": "459e77ef0da6d1746d016b8da3c776e11f8fe944c6e2ddfb5e978ca9abb78372"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_llu.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051932,
+          "executable": true,
+          "image_sha256": "6170147ec65be474bd49396cdeaf33c0e710071ed6217ce527a78bacc63ce0bd",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$0000000F",
+          "nobits": false,
+          "object_sha256": "fe8c83e1948930a8f67a8b4823d202e7947ac99f5e53a6364345de2f598cffcd",
+          "relocated_sha256": "6170147ec65be474bd49396cdeaf33c0e710071ed6217ce527a78bacc63ce0bd",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_longlong_dec",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1701308,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$0000000F",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_llu",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_llu.o",
+        "member_offset": 725154,
+        "member_sha256": "db1490c4ffec74d5e9e8c5fc8a349b3def3fe2848b7987557bde4d685c4a267a"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_llo.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051940,
+          "executable": true,
+          "image_sha256": "b7d7bb02c29e543afed5108e96e76b36921629c9acc93f5e8ca7b1c4e4af8b64",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000010",
+          "nobits": false,
+          "object_sha256": "092a6cd7e7492f5c67c9edb56277582da5cdea61d69e080c62a0065384672640",
+          "relocated_sha256": "b7d7bb02c29e543afed5108e96e76b36921629c9acc93f5e8ca7b1c4e4af8b64",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_ll_oct",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1622664,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000010",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_llo",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_llo.o",
+        "member_offset": 729662,
+        "member_sha256": "6ba566de3c683f4cd0be9376ee1958aa71899d59580b81730126760d740ebaed"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_llx.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051948,
+          "executable": true,
+          "image_sha256": "9fd6e6ed7ed0a633bf90bd5cf569d1c670eea6f2e6b49792ee92861d8481a6da",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000011",
+          "nobits": false,
+          "object_sha256": "02103280cc8ae3235c61492125793841449f8269edcf2d7ddd721382bcdb8f05",
+          "relocated_sha256": "9fd6e6ed7ed0a633bf90bd5cf569d1c670eea6f2e6b49792ee92861d8481a6da",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_ll_hex",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1622656,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000011",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_llx",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_llx.o",
+        "member_offset": 730606,
+        "member_sha256": "10ba901eebf44a3099f6ba7a295d83c6fef97349b264a343ae8feb4c6415fe49"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_l.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051956,
+          "executable": true,
+          "image_sha256": "ac5accef65b8e3e0a13ed2fbbddae3f15fd65efdc23e820a6a37002399a0177d",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000012",
+          "nobits": false,
+          "object_sha256": "ac5accef65b8e3e0a13ed2fbbddae3f15fd65efdc23e820a6a37002399a0177d",
+          "relocated_sha256": "ac5accef65b8e3e0a13ed2fbbddae3f15fd65efdc23e820a6a37002399a0177d",
+          "relocations": [],
+          "size": 12,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000012",
+              "offset": 0,
+              "size": 12,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_l",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_l.o",
+        "member_offset": 726942,
+        "member_sha256": "e5652e6bb13d36667c98681bf94a9229fd50b6f32214706cb4942652c2383cee"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_c.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051968,
+          "executable": true,
+          "image_sha256": "7842da1e1dded5f32934d9b5dd5c0adc8d91609a1154e6273594d6dcadfa1e68",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000013",
+          "nobits": false,
+          "object_sha256": "a8d6131524ebf02c93b4723deb71f6641d252511464b0264c721fd8edcfc37fd",
+          "relocated_sha256": "7842da1e1dded5f32934d9b5dd5c0adc8d91609a1154e6273594d6dcadfa1e68",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_char",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1050892,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000013",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_c",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_c.o",
+        "member_offset": 709650,
+        "member_sha256": "8faea91d763b7321997bbe890fed9db31da88463d87f0fddbe54806d1575b4e5"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_s.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051976,
+          "executable": true,
+          "image_sha256": "51019daf38f3665283df66ff54ebea0366536edd29a9bf1e339642bee5aaeb2f",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000014",
+          "nobits": false,
+          "object_sha256": "fbff908e4d55a0cf6d8e18b13d0c48ad67b645f7b9130dc6fa8ebb1a2a87aea6",
+          "relocated_sha256": "51019daf38f3665283df66ff54ebea0366536edd29a9bf1e339642bee5aaeb2f",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_string",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1622648,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000014",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_s",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_s.o",
+        "member_offset": 710562,
+        "member_sha256": "8972874f84594a6906f2322350a6be8c27d647624bcd619e2ee1bef1c3e06c17"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_lc.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051984,
+          "executable": true,
+          "image_sha256": "de59e23ecfec93d20e5f9615efb621dd964b9c6e424502ab80928403c08fea0f",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000015",
+          "nobits": false,
+          "object_sha256": "5dd39569eeec0be664f5a7ecd3a687258e8c170802b84f85390400d781fb4151",
+          "relocated_sha256": "de59e23ecfec93d20e5f9615efb621dd964b9c6e424502ab80928403c08fea0f",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_wchar",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1051376,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000015",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_lc",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_lc.o",
+        "member_offset": 727778,
+        "member_sha256": "ec09337040026d0b932ec09c25fe84227d92eda6cd529d8b07e1a2f9e110b254"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_ls.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1051992,
+          "executable": true,
+          "image_sha256": "b1984126d4410b63e8e772835d67cac8f4a4e2a9baf5a9e22503fc9ec4e74d5d",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000016",
+          "nobits": false,
+          "object_sha256": "35b45158be1b2465fd82f163521eb4e6a1d5000fbe56139a2216e8a1baf0ba5c",
+          "relocated_sha256": "b1984126d4410b63e8e772835d67cac8f4a4e2a9baf5a9e22503fc9ec4e74d5d",
+          "relocations": [
+            {
+              "addend": -8,
+              "offset": 4,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "_printf_wstring",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1622640,
+              "thumb": false,
+              "type": 29
+            }
+          ],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000016",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_ls",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_ls.o",
+        "member_offset": 728718,
+        "member_sha256": "0c062b39bf1a857368ebba6f035b6281b155a525ed1daa9e5db9159fd02e1278"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "_printf_percent_end.o",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "c700a298e6d5db7a1e5be232997240bbfac82d5d01fa4dd2d8a28970073f12a8",
+          "isa": "thumb",
+          "owner": 1050188,
+          "record_sha256": "9a62cbcf6f4e6f3a09a9464dda9ea8cbf5a2841ae5ea64c92eeb852e31c16d9c",
+          "site": 1050514,
+          "target": 1051816,
+          "target_isa": "arm"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 4,
+          "base": 1052000,
+          "executable": true,
+          "image_sha256": "2d1dbd1fc0230a2d9c983fe16af56a37e2f9a6bba0107c870a4a1e3bba771f1a",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$a"
+            ]
+          ],
+          "name": ".ARM.Collect$$_printf_percent$$00000017",
+          "nobits": false,
+          "object_sha256": "2d1dbd1fc0230a2d9c983fe16af56a37e2f9a6bba0107c870a4a1e3bba771f1a",
+          "relocated_sha256": "2d1dbd1fc0230a2d9c983fe16af56a37e2f9a6bba0107c870a4a1e3bba771f1a",
+          "relocations": [],
+          "size": 8,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".ARM.Collect$$_printf_percent$$00000017",
+              "offset": 0,
+              "size": 8,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "_printf_percent_end",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_printf_percent_end.o",
+        "member_offset": 722406,
+        "member_sha256": "41a01c122bbb2c47e12d125ec25fb0fec8a5122d71a9a2796fda3e0611c28bde"
+      }
+    },
+    {
+      "allocated_section_indices": [
+        1
+      ],
+      "id": "errno",
+      "incoming": [
+        {
+          "conditional": false,
+          "image_sha256": "73703965b4bbce75d7b224b401c6134c2268f9a2c087481163f1fc9b7aae517a",
+          "isa": "arm",
+          "owner": 1397256,
+          "record_sha256": "d208758730f7eec43a8e93274e20682e15005fd15e8b74c5578e3e69f515309b",
+          "site": 1398208,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "73703965b4bbce75d7b224b401c6134c2268f9a2c087481163f1fc9b7aae517a",
+          "isa": "arm",
+          "owner": 1397256,
+          "record_sha256": "d208758730f7eec43a8e93274e20682e15005fd15e8b74c5578e3e69f515309b",
+          "site": 1398252,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "73703965b4bbce75d7b224b401c6134c2268f9a2c087481163f1fc9b7aae517a",
+          "isa": "arm",
+          "owner": 1397256,
+          "record_sha256": "d208758730f7eec43a8e93274e20682e15005fd15e8b74c5578e3e69f515309b",
+          "site": 1398376,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "73703965b4bbce75d7b224b401c6134c2268f9a2c087481163f1fc9b7aae517a",
+          "isa": "arm",
+          "owner": 1397256,
+          "record_sha256": "d208758730f7eec43a8e93274e20682e15005fd15e8b74c5578e3e69f515309b",
+          "site": 1398908,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "73703965b4bbce75d7b224b401c6134c2268f9a2c087481163f1fc9b7aae517a",
+          "isa": "arm",
+          "owner": 1397256,
+          "record_sha256": "d208758730f7eec43a8e93274e20682e15005fd15e8b74c5578e3e69f515309b",
+          "site": 1398928,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "804f4999ed21d99dcce5b46ce58fe79562c14c864888506d62f90cf988bfee2d",
+          "isa": "arm",
+          "owner": 1584324,
+          "record_sha256": "ebe98c74e1060a9b2135c1d9509459bbee699294b38d34aa598259a5ba5d47fa",
+          "site": 1584516,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "0a025be178bcd178dc9b42d1aef6739311d1c76d2f1f086f7a1a8f2e71de0ef3",
+          "isa": "arm",
+          "owner": 1691764,
+          "record_sha256": "e6c9068f9d5610b3c059bce539fb52e098282ba0ab2812d08f959b056be62738",
+          "site": 1692060,
+          "target": 1580702,
+          "target_isa": "thumb"
+        },
+        {
+          "conditional": false,
+          "image_sha256": "9cede515f458023ea79975d410c902737fa70a59ae550329ef6538637ff4b6a4",
+          "isa": "arm",
+          "owner": 1692140,
+          "record_sha256": "9c1c248a3adb9747a54bbabbb73d7f308741844005d882cc8455ace0003db868",
+          "site": 1692508,
+          "target": 1580702,
+          "target_isa": "thumb"
+        }
+      ],
+      "placement": [],
+      "sections": [
+        {
+          "alignment": 2,
+          "base": 1580692,
+          "executable": true,
+          "image_sha256": "167bc947d37ee79e9736f94ee854c68e338793b3218d6ad6a959c62f17ed0127",
+          "index": 1,
+          "mapping": [
+            [
+              0,
+              "$t"
+            ]
+          ],
+          "name": ".text",
+          "nobits": false,
+          "object_sha256": "f90b9b8623156e433343b7f1f85709028979b4a3c267681b350eedd8dafb0f84",
+          "relocated_sha256": "167bc947d37ee79e9736f94ee854c68e338793b3218d6ad6a959c62f17ed0127",
+          "relocations": [
+            {
+              "addend": -4,
+              "offset": 2,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "__aeabi_errno_addr",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1704088,
+              "thumb": false,
+              "type": 10
+            },
+            {
+              "addend": -4,
+              "offset": 14,
+              "rule": "observed_external_target_not_API_identity",
+              "symbol": "__aeabi_errno_addr",
+              "symbol_offset": 0,
+              "symbol_section": "SHN_UNDEF",
+              "symbol_size": 0,
+              "symbol_value": 0,
+              "target": 1704088,
+              "thumb": false,
+              "type": 10
+            }
+          ],
+          "size": 22,
+          "symbols": [
+            {
+              "bind": "STB_LOCAL",
+              "kind": "STT_SECTION",
+              "name": ".text",
+              "offset": 0,
+              "size": 0,
+              "value": 0
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "__read_errno",
+              "offset": 0,
+              "size": 10,
+              "value": 1
+            },
+            {
+              "bind": "STB_GLOBAL",
+              "kind": "STT_FUNC",
+              "name": "__set_errno",
+              "offset": 10,
+              "size": 12,
+              "value": 11
+            }
+          ],
+          "whole_section_equal": true,
+          "writable": false
+        }
+      ],
+      "witness": {
+        "archive": ".cache/armlib/5.04-b82/lib/armlib/c_5.l",
+        "archive_sha256": "3583239cecab63fb14cd40478ffb4d6fbedd67abd1df5acaa332d47d274d1fbe",
+        "member": "_rserrno.o",
+        "member_offset": 369346,
+        "member_sha256": "8a7f49b0a29d673b6622adce1ebe1f31703686a338fc360073c040af95dcc17a"
+      }
+    }
+  ],
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "schema_version": 1,
+  "source_evidence": [
+    {
+      "path": "scratch/research/library-candidate-triage/PROOF.json",
+      "sha256": "b2e4df101b6fe9b523015c45be335735669fedbe097fa5baf9d5eba7a6b81477"
+    },
+    {
+      "path": "scratch/research/thumb-profile/errno-anchor-evidence.json",
+      "sha256": "bfcee03943bca257949cb7e8738a09fcb8547d72080952c1dbdab6c213060a6c"
+    }
+  ]
+}

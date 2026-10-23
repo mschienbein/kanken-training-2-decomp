@@ -9,10 +9,11 @@ from pathlib import Path
 import struct
 import subprocess
 import tempfile
+from types import SimpleNamespace
 import unittest
 from unittest import mock
 
-from tools import analyze, ctrfmt
+from tools import analyze, catalogue_alignment, catalogue_closure, catalogue_frozen, catalogue_local_entries, ctrfmt
 
 BASE = 0x100000
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,6 +38,170 @@ def fixture(words: list[int], *, rodata: list[int] | None = None, data: list[int
 def literal_words(value: bytes) -> list[int]:
     padded = value + b"\0" * (-len(value) % 4)
     return list(struct.unpack(f"<{len(padded) // 4}I", padded))
+
+
+def local_revision_fixture(root: Path, image_sha256: str, baseline: dict | None = None) -> None:
+    """Freeze an independently built synthetic baseline, never bypass its checks."""
+    baseline = baseline or {key: {} if key in ("stats", "closure_evidence") else []
+                            for key in catalogue_local_entries.BASELINE_FIELDS}
+    baseline_descriptor = {"revision": "catalogue-v11-r4", "adopted": False,
+                           "proposal_sha256": catalogue_local_entries.metadata_sha(baseline),
+                           "field_sha256": catalogue_local_entries.baseline_hashes(baseline)}
+    exheader = root / "orig/exheader.bin"
+    exheader_sha = hashlib.sha256(exheader.read_bytes()).hexdigest() if exheader.is_file() else hashlib.sha256(b"").hexdigest()
+    proof = {"image_sha256": image_sha256, "exheader_sha256": exheader_sha,
+             "baseline": baseline_descriptor, "records": []}
+    proof_path = root / "research/catalogue_v12_object_proof.json"
+    proof_path.write_bytes(analyze.serialize_catalogue(proof))
+    parent = root / "research/catalogue_v11_r4_evidence.json"
+    revision = {"revision": "catalogue-v12", "image_sha256": image_sha256, "exheader_sha256": exheader_sha,
+                "parent_evidence": {"path": str(parent.relative_to(root)), "sha256": hashlib.sha256(parent.read_bytes()).hexdigest()},
+                "object_proof": {"path": str(proof_path.relative_to(root)), "sha256": hashlib.sha256(proof_path.read_bytes()).hexdigest()},
+                "baseline": baseline_descriptor, "transitions": [], "preserved_unknown_ranges": [],
+                "new_C_credit": 0, "adoption": False, "policy": catalogue_local_entries.POLICY}
+    (root / "research/catalogue_v12_evidence.json").write_bytes(analyze.serialize_catalogue(revision))
+    # V13 is a distinct empty successor in generic CLI fixtures, not a bypass.
+    v13baseline = {**baseline, "image_sha256": image_sha256}
+    v13baseline["closure_evidence"] = {**baseline["closure_evidence"],
+                                     "local_runtime_entries": catalogue_local_entries._receipt(revision, [])}
+    descriptor = {"revision": "catalogue-v12-r2", "adopted": False,
+                  "proposal_sha256": catalogue_local_entries.metadata_sha(v13baseline),
+                  "field_sha256": catalogue_alignment.baseline_hashes(v13baseline),
+                  "range_kinds": sorted(baseline["stats"].get("bytes_by_range_kind", {}))}
+    section_proof = {"image_sha256": image_sha256, "baseline": descriptor, "sections": [],
+                     "external_census": [], "external_census_intervals": [], "internal_padding": []}
+    section_path = root / "research/catalogue_v13_section_proof.json"
+    section_path.write_bytes(analyze.serialize_catalogue(section_proof))
+    v13 = {"revision": "catalogue-v13", "policy": catalogue_alignment.POLICY, "image_sha256": image_sha256,
+           "exheader_sha256": exheader_sha, "baseline": descriptor, "transitions": [], "resolved_anomalies": [],
+           "parent_evidence": {"path": "research/catalogue_v12_evidence.json",
+                               "sha256": hashlib.sha256((root / "research/catalogue_v12_evidence.json").read_bytes()).hexdigest()},
+           "section_proof": {"path": str(section_path.relative_to(root)),
+                             "sha256": hashlib.sha256(section_path.read_bytes()).hexdigest()},
+           "new_C_credit": 0, "adoption": False}
+    (root / "research/catalogue_v13_evidence.json").write_bytes(analyze.serialize_catalogue(v13))
+    inputs, absent = {}, []
+    expected = ["config/catalogue.json", "config/names.json", "config/matches.json"]
+    expected.extend(f"config/candidates/c00{number}.json" for number in range(4, 9))
+    expected.extend(str(path.relative_to(root)) for directory in ("accept", "src") for path in (root / directory).rglob("*") if path.is_file())
+    for label in expected:
+        source = root / label
+        if not source.is_file():
+            absent.append(label)
+            continue
+        content = source.read_bytes()
+        target = catalogue_frozen.PREFIX + label
+        (root / target).parent.mkdir(parents=True, exist_ok=True)
+        (root / target).write_bytes(content)
+        inputs[label] = {"path": target, "size": len(content), "sha256": hashlib.sha256(content).hexdigest()}
+    (root / catalogue_frozen.MANIFEST).write_bytes(analyze.serialize_catalogue(
+        {"revision": "catalogue-v13", "inputs": inputs, "absent_paths": absent}))
+    review = {"verdict": "FAIL", "source_commit": "synthetic-v13",
+              "findings": [{"id": "V13-CODEX-F01"}, {"id": "V13-CODEX-F02"}]}
+    review_path = root / "research/catalogue_v13_r2_review.json"
+    review_path.write_bytes(analyze.serialize_catalogue(review))
+    repair = {"revision": "catalogue-v13-r2", "image_sha256": image_sha256,
+              "policy": "refuse_absent_consumption_and_bounded_read_veto_padding",
+              "parent_evidence": {"path": "research/catalogue_v13_evidence.json",
+                                  "sha256": hashlib.sha256((root / "research/catalogue_v13_evidence.json").read_bytes()).hexdigest()},
+              "reviewed_failure": {"path": str(review_path.relative_to(root)),
+                                   "sha256": hashlib.sha256(review_path.read_bytes()).hexdigest()},
+              "sealed_failure": {"source_commit": "synthetic-v13"}, "new_C_credit": 0, "adoption": False}
+    (root / "research/catalogue_v13_r2_evidence.json").write_bytes(analyze.serialize_catalogue(repair))
+
+
+def freeze_local_fixture(root: Path, image: bytes, layout, *, classifications: list[dict] | None = None,
+                         protected: dict[int, dict] | None = None) -> None:
+    """Run the ordinary public predecessor pipeline before adding an empty child."""
+    closure = json.loads((root / "research/catalogue_v10_evidence.json").read_bytes())
+    closure.update(runtime_data=json.loads((root / "research/catalogue_v11_evidence.json").read_bytes()),
+                   protection_revision=json.loads((root / "research/catalogue_v11_r2_evidence.json").read_bytes()),
+                   entry_revision=json.loads((root / "research/catalogue_v11_r3_evidence.json").read_bytes()))
+    adopted = json.loads((root / "config/catalogue.json").read_bytes())
+    baseline = analyze.build_catalogue(image, layout, classifications=classifications or [], protected_functions=protected or {},
+                                       literal_encodings=closure.get("literal_encodings", []),
+                                       prior_functions=adopted["functions"], closure=closure)
+    local_revision_fixture(root, baseline["image_sha256"], baseline)
+
+
+def library_revision_fixture(root: Path, parent: Path, image_sha256: str) -> dict:
+    """Write the mandatory next-revision input without any real library payload."""
+    revision = {
+        "revision": "catalogue-v10-r3", "image_sha256": image_sha256,
+        "parent_evidence": {"path": str(parent.relative_to(root)),
+                            "sha256": hashlib.sha256(parent.read_bytes()).hexdigest()},
+        "classification_records": [], "provenance": "synthetic revision",
+        "library_identification": {"authenticated_owners": [], "protected_collisions": [],
+                                   "prior_classification_authentication": [], "names_proposal": {"symbols": {}}},
+    }
+    revision_path = root / "research/catalogue_v10_r3_evidence.json"
+    revision_path.write_text(json.dumps(revision))
+    extension = {
+        "revision": "catalogue-v10-r4", "image_sha256": image_sha256,
+        "parent_evidence": {"path": str(revision_path.relative_to(root)),
+                            "sha256": hashlib.sha256(revision_path.read_bytes()).hexdigest()},
+        "classification_records": [], "authenticated_owners": [], "pool_qualified_record_addresses": [],
+        "extent_adjudication": {"image_sha256": image_sha256, "adjudications": []},
+        "scope_and_dispositions": [], "source_revision": "synthetic-r7", "source_sha256": {},
+        "summary": {}, "qualification": "synthetic unchanged-extent library extension",
+        "names_handoff": {"proposed_names": 0, "new_name_bindings_embedded": 0},
+    }
+    extension_path = root / "research/catalogue_v10_r4_evidence.json"
+    extension_path.write_text(json.dumps(extension))
+    repair = {"revision": "catalogue-v10-r5", "image_sha256": image_sha256,
+              "parent_evidence": {"path": str(extension_path.relative_to(root)),
+                                  "sha256": hashlib.sha256(extension_path.read_bytes()).hexdigest()},
+              "provenance": "synthetic endian repair"}
+    repair_path = root / "research/catalogue_v10_r5_evidence.json"
+    repair_path.write_text(json.dumps(repair))
+    runtime = {
+        "revision": "catalogue-v11", "image_sha256": image_sha256,
+        "parent_evidence": {"path": str(repair_path.relative_to(root)),
+                            "sha256": hashlib.sha256(repair_path.read_bytes()).hexdigest()},
+        "prior_proposal": {"sha256": "a" * 64, "commit": "1" * 40, "unknown_bytes": 4,
+                           "unknown_intervals": 1, "adopted": False},
+        "sections": [], "new_C_credit": 0, "qualification": "synthetic complete-section closure",
+        "historical_negative_measurements": {},
+    }
+    runtime_path = root / "research/catalogue_v11_evidence.json"
+    runtime_path.write_text(json.dumps(runtime))
+    protection = {
+        "revision": "catalogue-v11-r2", "image_sha256": image_sha256, "new_C_credit": 0,
+        "parent_evidence": {"path": str(runtime_path.relative_to(root)),
+                            "sha256": hashlib.sha256(runtime_path.read_bytes()).hexdigest()},
+        "literal_evidence": {"path": str(parent.relative_to(root)),
+                             "sha256": hashlib.sha256(parent.read_bytes()).hexdigest()},
+        "prepared_protection": None, "protected_record_transitions": [],
+    }
+    (root / "research/catalogue_v11_r2_evidence.json").write_text(json.dumps(protection))
+    protection_path = root / "research/catalogue_v11_r2_evidence.json"
+    baseline_path = root / "config/catalogue.json"
+    baseline = json.loads(baseline_path.read_bytes()) if baseline_path.is_file() else {}
+    entry_revision = {
+        "revision": "catalogue-v11-r3", "image_sha256": image_sha256, "new_C_credit": 0, "adoption": False,
+        "parent_evidence": {"path": str(protection_path.relative_to(root)),
+                            "sha256": hashlib.sha256(protection_path.read_bytes()).hexdigest()},
+        "prior_proposal": runtime["prior_proposal"],
+        "prior_owners": [{key: row[key] for key in ("address", "size", "isa", "kind")}
+                         for row in baseline.get("functions", [])],
+        "prior_entries": [{"owner": row["address"], **entry}
+                          for row in baseline.get("functions", []) for entry in row["entries"]],
+        "prior_unknown_ranges": [[row["start"], row["end"]] for row in baseline.get("ranges", [])
+                                 if row["kind"] == "unknown"],
+        "prior_anomalies": baseline.get("anomalies", []), "withdrawn_entry_proposals": [],
+    }
+    entry_path = root / "research/catalogue_v11_r3_evidence.json"
+    entry_path.write_text(json.dumps(entry_revision))
+    leaf_repair = {
+        "revision": "catalogue-v11-r4", "image_sha256": image_sha256,
+        "parent_evidence": {"path": str(entry_path.relative_to(root)),
+                            "sha256": hashlib.sha256(entry_path.read_bytes()).hexdigest()},
+        "policy": "reject_user_bank_transfers_before_leaf_effects",
+        "new_C_credit": 0, "adoption": False,
+    }
+    (root / "research/catalogue_v11_r4_evidence.json").write_text(json.dumps(leaf_repair))
+    local_revision_fixture(root, image_sha256)
+    return revision
 
 
 def walker_bounds(table: int, end: int, first_word: int) -> tuple[list[int], dict]:
@@ -1368,6 +1533,8 @@ class CatalogueTests(unittest.TestCase):
                "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper"}
         evidence = {"revision": "catalogue-v9-r2", "image_sha256": baseline["image_sha256"],
                     "classification_records": [row], "thumb_dispositions": [], "author_dispositions": [],
+                    "thumb_v9_residue": [{"address": address}
+                                         for address in (BASE, BASE + 2, BASE + 4)],
                     "provenance": {"proof_status": "synthetic"}, "source_candidate_sha256": "synthetic",
                     "source_input_sha256": {}}
         scratch = ROOT / "scratch"
@@ -1381,23 +1548,56 @@ class CatalogueTests(unittest.TestCase):
                 (root / "config/matches.json").write_text(
                     json.dumps({"units": [{"functions": ["func_00100000"]}]} if protect else {"units": []}))
                 (root / "research/catalogue_v9_r2_evidence.json").write_text(json.dumps(evidence))
+                baseline_payload = analyze.serialize_catalogue(baseline)
+                closure = {"image_sha256": baseline["image_sha256"], "literal_encodings": [],
+                           "provenance": {"proof_status": "synthetic"}, "closed_graph_owners": [],
+                           "parent_evidence": {"path": "research/catalogue_v9_r2_evidence.json",
+                                               "sha256": hashlib.sha256((root / "research/catalogue_v9_r2_evidence.json").read_bytes()).hexdigest()},
+                           "baseline_catalogue": {"blob": "1" * 40, "reference": "synthetic",
+                                                  "revision": "synthetic-adopted",
+                                                  "sha256": hashlib.sha256(baseline_payload).hexdigest()}}
+                (root / "research/catalogue_v10_evidence.json").write_text(json.dumps(closure))
+                library_revision_fixture(root, root / "research/catalogue_v10_evidence.json", baseline["image_sha256"])
                 (root / "orig/code.bin").write_bytes(image)
                 exheader = bytearray(0x200)
                 for offset, segment in zip((0x10, 0x20, 0x30), (layout.text, layout.rodata, layout.data)):
                     struct.pack_into("<III", exheader, offset, segment.address, 1, segment.size)
                 (root / "orig/exheader.bin").write_bytes(exheader)
+                freeze_local_fixture(root, image, layout, classifications=[] if protect else [row],
+                                     protected={BASE: baseline["functions"][0]} if protect else {})
                 with mock.patch.object(analyze, "ROOT", root), mock.patch.object(
-                    analyze.subprocess, "run", return_value=subprocess.CompletedProcess([], 1, b"", b"")
+                    analyze.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, baseline_payload, b"")
                 ), redirect_stdout(io.StringIO()):
                     for name in ("first", "second"):
                         self.assertEqual(analyze.main(["catalogue", "--out", str(root / f"{name}.json")]), 0)
                 self.assertEqual((root / "first.json").read_bytes(), (root / "second.json").read_bytes())
                 result = json.loads((root / "first.json").read_bytes())
                 self.assertTrue(result["generator"]["bundled_review_applied"])
-                self.assertEqual(result["revision_review"]["name"], "catalogue-v9-r2")
+                self.assertEqual(result["revision_review"]["name"], "catalogue-v13-r2")
+                self.assertEqual(result["generator"]["revision"], "catalogue-v13-r2")
                 self.assertEqual(result["generator"]["classification_input"], "research/catalogue_v9_r2_evidence.json")
+                self.assertIn("research/catalogue_v10_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v10_r3_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v10_r4_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v10_r5_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_r2_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_r3_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v11_r4_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v12_evidence.json", result["generator"]["input_sha256"])
+                self.assertIn("research/catalogue_v12_object_proof.json", result["generator"]["input_sha256"])
+                self.assertEqual(result["revision_review"]["library_identification"]["canonical_names_applied"], 0)
                 self.assertEqual(result["functions"][0]["kind"], "function" if protect else "runtime")
                 self.assertEqual(len(result["revision_review"]["withheld_classifications"]), int(protect))
+                residue = result["revision_review"]["thumb_v9_residue"]
+                classified = {item["address"] for item in result["revision_review"]["classifications"]}
+                self.assertEqual({item["address"] for item in residue},
+                                 {BASE, BASE + 2, BASE + 4} if protect else {BASE + 4})
+                self.assertTrue(all(item["candidate_owner"] not in classified for item in residue))
+                self.assertFalse(any(item["ownership_classified"] for item in residue))
+                # A classified owner's interior row leaves too; unrelated unowned
+                # rows and protected/withheld classifications must remain.
+                self.assertEqual(len(evidence["thumb_v9_residue"]) - len(residue), 0 if protect else 2)
 
     def test_ordinary_library_identity_is_not_just_a_semantic_name(self) -> None:
         result = self.catalogue([0xE12FFF1E])
@@ -1660,10 +1860,18 @@ class CatalogueTests(unittest.TestCase):
     def test_original_invariants_and_stability(self) -> None:
         image = (ROOT / "orig/code.bin").read_bytes()
         layout = ctrfmt.parse_exheader((ROOT / "orig/exheader.bin").read_bytes())
-        adopted = json.loads((ROOT / "config/catalogue.json").read_bytes())
+        adopted = json.loads(catalogue_frozen.resolve(ROOT, "config/catalogue.json").read_bytes())
         evidence = json.loads((ROOT / "research/catalogue_v9_r2_evidence.json").read_bytes())
+        closure, _, _ = catalogue_closure.load_inputs(ROOT, ROOT / "research/catalogue_v9_r2_evidence.json")
+        prepared = closure["runtime_data"]["_prepared_protection"]
         protected, _, _ = analyze.load_protected_functions(
-            ROOT, adopted, [], git_blobs=evidence["protected_git_blobs"])
+            ROOT, adopted, [ROOT / prepared["ledger"]["path"]], git_blobs=evidence["protected_git_blobs"])
+        protected, transitions = catalogue_closure.resolve_protected_records(
+            protected, analyze.Analyzer(image, layout), closure,
+            evidence["literal_encodings"] + closure["literal_encodings"])
+        self.assertEqual({row["address"] for row in transitions}, {0x203A68, 0x1E81FC})
+        self.assertEqual(prepared["identity_count"], 2297)
+        self.assertLessEqual({row["address"] for row in prepared["identities"]}, protected.keys())
         adopted_functions = {function["address"]: function for function in adopted["functions"]}
         scratch = ROOT / "scratch"
         scratch.mkdir(exist_ok=True)
@@ -1678,21 +1886,107 @@ class CatalogueTests(unittest.TestCase):
         functions = {function["address"]: function for function in first["functions"]}
         for address, expected in protected.items():
             self.assertEqual(functions[expected["address"]], expected, f"{address:#x}")
+        self.assertEqual({row["address"] for row in first["revision_review"]["protected_metadata_transitions"]},
+                         {0x203A68, 0x1E81FC})
+        self.assertEqual(first["revision_review"]["protected_metadata_transitions"], transitions)
+        for row in prepared["identities"]:
+            self.assertEqual(hashlib.sha256(analyze.serialize_catalogue(functions[row["owner"]])).hexdigest(),
+                             row["proposal_record_sha256"])
+        reference = closure["entry_revision"]
+        withdrawn = {row["address"]: row for row in reference["withdrawn_entry_proposals"]}
+        self.assertEqual(set(withdrawn), {0x1005C0, 0x1005FA, 0x1009D4})
+        local_entries = closure["local_entry_revision"]["transitions"]
+        self.assertEqual([(row["address"], row["size"]) for row in local_entries],
+                         [(0x1005C0, 10), (0x1009D4, 10)])
+        alignment_revision = closure["alignment_revision"]
+        non_c = alignment_revision["_non_c_proof"]["classifications"]
+        excluded = {row["address"] for row in non_c}
+        expected_ordinary = {row["address"]: row["size"] for row in reference["prior_owners"]
+                             if row["kind"] == "function" and row["address"] not in withdrawn and row["address"] not in excluded}
+        self.assertEqual({row["address"]: row["size"] for row in functions.values() if row["kind"] == "function"},
+                         expected_ordinary)
         self.assertEqual((first["stats"]["functions"], first["stats"]["creditable_functions"],
-                          first["stats"]["creditable_bytes"]), (4699, 4624, 1131454))
-        self.assertEqual((first["stats"]["bytes_by_range_kind"]["unknown"], first["stats"]["unknown_ranges"],
-                          first["stats"]["anomalies"]), (4408, 84, 37))
+                          first["stats"]["creditable_bytes"]),
+                         (len(reference["prior_owners"]) - len(withdrawn)
+                          + len(closure["runtime_data"]["entry_fragments"]) + len(local_entries),
+                          len(expected_ordinary), sum(expected_ordinary.values())))
+        expected_unknown = {address for lo, hi in reference["prior_unknown_ranges"] for address in range(lo, hi)}
+        for row in withdrawn.values():
+            expected_unknown.update(range(row["address"], row["address"] + row["prior_function"]["size"]))
+        for row in closure["runtime_data"]["sections"]:
+            expected_unknown.difference_update(range(*row["claim"]))
+        for row in closure["runtime_data"]["entry_fragments"]:
+            expected_unknown.difference_update(range(row["address"], row["address"] + row["classification_record"]["size"]))
+        for row in local_entries:
+            expected_unknown.difference_update(range(row["address"], row["address"] + row["size"]))
+        for row in alignment_revision["transitions"]:
+            expected_unknown.difference_update(range(row["start"], row["end"]))
+        self.assertEqual({address for row in first["ranges"] if row["kind"] == "unknown"
+                          for address in range(row["start"], row["end"])}, expected_unknown)
+        self.assertEqual(first["stats"]["bytes_by_range_kind"]["unknown"], len(expected_unknown))
+        self.assertEqual(first["stats"]["unknown_ranges"], sum(address - 1 not in expected_unknown for address in expected_unknown))
+        reassessment = first["revision_review"]["provisional_entry_reassessment"]
+        self.assertEqual({row["address"] for row in reassessment["withdrawn_proposals"]}, withdrawn.keys())
+        self.assertEqual(reassessment["retained_prior_entries"], len(reference["prior_entries"]) - len(withdrawn))
+        self.assertEqual(reassessment["new_entries"], len(closure["runtime_data"]["entry_fragments"]))
+        proposed_entries = {(row["address"], row["isa"]) for row in reference["prior_entries"]}
+        expected_entries = (proposed_entries - {(row["address"], row["prior_function"]["isa"])
+                                                for row in withdrawn.values()}
+                            | {(row["address"], row["isa"]) for row in closure["runtime_data"]["entry_fragments"]}
+                            | {(row["address"], row["isa"]) for row in local_entries})
+        self.assertEqual({(entry["address"], entry["isa"]) for row in functions.values() for entry in row["entries"]},
+                         expected_entries)
+        self.assertTrue(all(row["address"] not in protected for row in withdrawn.values()))
+        for row in local_entries:
+            self.assertEqual((functions[row["address"]]["kind"], functions[row["address"]]["size"]), ("library", row["size"]))
+        reconstructed_v12 = catalogue_alignment.check_catalogue(first, analyze.Analyzer(image, layout), closure)
+        v12_unknown = {address for row in reconstructed_v12["ranges"] if row["kind"] == "unknown"
+                       for address in range(row["start"], row["end"])}
+        self.assertTrue(all(address in v12_unknown for first_address, end in
+                            closure["local_entry_revision"]["preserved_unknown_ranges"]
+                            for address in range(first_address, end)))
+        reconstructed_r4 = catalogue_local_entries.check_catalogue(reconstructed_v12, analyze.Analyzer(image, layout), closure)
+        self.assertEqual(catalogue_local_entries.baseline_hashes(reconstructed_r4),
+                         closure["local_entry_revision"]["baseline"]["field_sha256"])
+        self.assertEqual(first["revision_review"]["local_runtime_entries"]["new_C_credit"], 0)
+        vetoes = {(row["function"], row["site"], row["evidence"]) for row in first["closure_evidence"]["read_vetoes"]}
+        for row in withdrawn.values():
+            witness = row["prior_witness"]
+            self.assertIn((witness["function"], witness["definition_site"],
+                           "unproved_data_endian_pool_value_veto_only"), vetoes)
+        resolved_anomalies = {(row["claim"][0], "undecodable_reachable_code")
+                              for row in closure["runtime_data"]["sections"]
+                              if row["closure_kind"] == "descriptor_continuation"}
+        resolved_anomalies.update((row["address"], row["issue"]) for row in alignment_revision["resolved_anomalies"])
+        expected_anomalies = {(row["address"], row["issue"]) for row in reference["prior_anomalies"]} - resolved_anomalies
+        self.assertEqual({(row["address"], row["issue"]) for row in first["anomalies"]}, expected_anomalies)
+        self.assertEqual(first["stats"]["anomalies"], len(expected_anomalies))
         self.assertEqual(sum(first["stats"][key] for key in ("code_bytes", "pool_bytes", "literal_bytes")),
                          first["stats"]["bytes_by_range_kind"]["function"])
+        runtime = first["closure_evidence"]["exact_runtime_data"]
+        self.assertEqual([(row["address"], row["size"]) for row in runtime["entry_fragments"]], [(0x19F910, 2)])
+        self.assertEqual((functions[0x19F910]["kind"], functions[0x19F910]["size"]), ("library", 2))
+        self.assertEqual([(row["start"], row["end"], row["kind"]) for row in runtime["sections"]],
+                         [(0x1569B0, 0x156A30, "rodata"), (0x1944AC, 0x1944E8, "rodata"),
+                          (0x1964E8, 0x196504, "function")])
+        f2ul = functions[0x196498]
+        self.assertEqual((f2ul["kind"], f2ul["size"], f2ul["literals"]),
+                         ("runtime", 108, [[0x1964E8, 0x1964EC]]))
+        self.assertEqual(f2ul["classification_evidence"]["historical_classification_evidence"]["size"], 80)
+        self.assertEqual(runtime["sections"][-1]["descriptor_proof"]["continuation_targets"],
+                         [0x1964EC, 0x1964F8])
+        self.assertEqual((functions[0x1566E8]["size"], functions[0x1941F8]["size"]), (712, 692))
+        self.assertFalse(runtime["global_noreturn_inferred"])
         self.assertEqual((functions[0x1372EC]["size"], functions[0x1372EC]["literals"]),
                          (708, [[0x137520, 0x1375B0]]))
         for address in (0x1BC29C, 0x1B8234, 0x1B54E4):
             item = next(row for row in first["ranges"] if row["start"] <= address < row["end"])
             self.assertEqual((item["kind"], item["owner"], item["end"] - item["start"]), ("rodata", None, 4))
         regenerated = analyze.build_catalogue(
-            image, layout, protected_functions=protected, classifications=evidence["classification_records"],
-            literal_encodings=evidence["literal_encodings"], relative_pointer_tables=evidence["relative_pointer_tables"],
-            prior_functions=first["functions"])
+            image, layout, protected_functions=protected,
+            classifications=evidence["classification_records"] + closure["classification_records"],
+            literal_encodings=evidence["literal_encodings"] + closure["literal_encodings"],
+            relative_pointer_tables=evidence["relative_pointer_tables"], prior_functions=first["functions"], closure=closure)
         self.assertEqual(regenerated["functions"], first["functions"])
         for address, (head_size, target, tail_size) in {
             0x131948: (8, 0x131950, 8), 0x1EFCD0: (8, 0x1EFCD8, 8),
@@ -1705,6 +1999,50 @@ class CatalogueTests(unittest.TestCase):
         for address in (0x11EF2C, 0x11EF4C, 0x1565B0):
             self.assertEqual((functions[address]["kind"], functions[address]["classification_evidence"]["basis"]),
                              ("assembly", "unrepresentable_abi"))
+        for address in (0x1109B4, 0x11EF58, 0x12D0EC, 0x12D150, 0x18F7D4):
+            self.assertEqual((functions[address]["kind"], functions[address]["classification_evidence"]["basis"]),
+                             ("assembly", "unrepresentable_abi"))
+        group = functions[0x18EAEC]
+        self.assertEqual((group["kind"], group["size"]), ("multi_entry", 924))
+        self.assertEqual([entry["address"] for entry in group["entries"]], [0x18EAEC, 0x18EBF8, 0x18EC7C])
+        self.assertFalse(first["closure_evidence"]["owner_merges"][0]["ownership_classified"])
+        self.assertEqual(len(first["closure_evidence"]["closed_leaves"]), 42)
+        self.assertEqual(sum(row["end"] - row["start"] for row in first["closure_evidence"]["closed_leaves"]), 2560)
+        self.assertEqual(first["pc_relative_pointer_witnesses"], [])
+        raw_sites = first["closure_evidence"]["raw_svc_sites"]
+        expected_services = {0x01: 1, 0x02: 1, 0x03: 3, 0x08: 1, 0x09: 1, 0x0A: 5,
+                             0x14: 1, 0x17: 1, 0x18: 5, 0x19: 5, 0x1E: 1, 0x1F: 3,
+                             0x20: 2, 0x21: 1, 0x22: 1, 0x23: 91, 0x24: 23, 0x25: 1,
+                             0x27: 1, 0x28: 23, 0x2B: 1, 0x2D: 1, 0x32: 118, 0x35: 1, 0x3C: 1}
+        self.assertEqual(len(raw_sites), 293)
+        self.assertEqual({service: sum(row["service"] == service for row in raw_sites)
+                          for service in {row["service"] for row in raw_sites}}, expected_services)
+        self.assertTrue(all(row["invalidation"] == ("all_address_facts" if row["service"] == 0x3C
+                                                   else "r0-r7_ip_lr_flags") for row in raw_sites))
+        self.assertTrue(all(row["documented_outputs"] == [0, 1, 2, 3, 4, 5]
+                            for row in raw_sites if row["service"] == 0x02))
+        self.assertTrue(first["revision_review"]["raw_svc_contracts"]["sources"])
+        library_review = first["revision_review"]["library_identification"]
+        self.assertEqual((library_review["proposed_classifications"], library_review["applied_classifications"],
+                          library_review["applied_extent_bytes"]), (80, 80, 10098))
+        self.assertEqual((library_review["protected_coincidences_flag_only"], library_review["proposed_names"],
+                          library_review["canonical_names_applied"]), (206, 87, 0))
+        self.assertEqual((library_review["checkpoint_name_proposals"], library_review["new_name_bindings_embedded"]),
+                         (100, 0))
+        extension = library_review["r7_extension"]
+        self.assertEqual({row["address"]: functions[row["address"]]["size"]
+                          for row in extension["extent_adjudication"]["adjudications"]},
+                         {0x1005A6: 22, 0x100AD0: 10, 0x19FAA8: 620})
+        unresolved = [row for row in extension["scope_and_dispositions"] if not row["r7_authenticated"]]
+        self.assertEqual(len(unresolved), 10)
+        for row in unresolved:
+            self.assertEqual(functions[row["address"]], adopted_functions[row["address"]])
+        authenticated_prior = {row["address"] for row in library_review["prior_classification_authentication"] if row["authenticated"]}
+        for address in (0x1008AC, 0x100C80, 0x100C9E, 0x19F6B4):
+            self.assertIn(address, authenticated_prior)
+            self.assertEqual(functions[address], adopted_functions[address])
+        for row in library_review["protected_collisions"]:
+            self.assertEqual(functions[row["address"]], adopted_functions[row["address"]])
         for address in (0x10007C, 0x100114, 0x100520, 0x1008DC, 0x10090C, 0x100A6C, 0x100AF0, 0x100C94,
                         0x19F5BC, 0x19F634, 0x19F6AC, 0x1911C4):
             self.assertEqual((functions[address]["kind"], functions[address]["size"]), ("veneer", 8))
@@ -1746,9 +2084,20 @@ class CatalogueTests(unittest.TestCase):
         self.assertTrue(all((row["address"], row["isa"]) in entries for row in table_targets))
         self.assertEqual(len(evidence["initializer_targets_previously_unknown"]), 93)
         residue = review["thumb_v9_residue"]
-        self.assertEqual(len(residue), 56)
+        classified_owners = {row["address"] for row in review["classifications"]}
+        source_owners = {
+            row["address"]: next((function["address"] for function in functions.values()
+                                  if function["address"] <= row["address"] < function["address"] + function["size"]), None)
+            for row in evidence["thumb_v9_residue"]
+        }
+        resolved_residue = {address for address, owner in source_owners.items() if owner in classified_owners}
+        self.assertEqual(len(source_owners), 56)
+        self.assertEqual((len(resolved_residue), len(residue)), (45, 11))
+        self.assertEqual({row["address"] for row in residue}, source_owners.keys() - resolved_residue)
+        self.assertEqual(len(source_owners) - len(residue), len(resolved_residue))
+        self.assertTrue(all(row["candidate_owner"] not in classified_owners for row in residue))
         self.assertFalse(any(row["ownership_classified"] for row in residue))
-        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 54)
+        self.assertEqual(sum(row["candidate_owner_kind"] == "function" for row in residue), 9)
         self.assertEqual({row["address"]: row["candidate_owner"] for row in residue
                           if row["candidate_owner_kind"] == "multi_entry"},
                          {0x1000A0: 0x100084, 0x10030C: 0x10030C})
@@ -1756,6 +2105,665 @@ class CatalogueTests(unittest.TestCase):
             self.assertEqual(functions[address]["size"], adopted_functions[address]["size"])
         self.assertNotIn(0x14E510, functions)
         self.assertNotIn(0x16BDE4, functions)
+
+
+class CatalogueClosureTests(unittest.TestCase):
+    def leaf(self, words: list[int], *, record: bool = False) -> dict | None:
+        image, layout = fixture(words)
+        return catalogue_closure.constant_copy_leaf(
+            analyze.Analyzer(image, layout), BASE, BASE + len(words) * 4, allow_record_layout=record)
+
+    def test_text_closure_preserves_each_mapped_segments_range_boundaries(self) -> None:
+        for rodata, data in (([], []), ([0], []), ([], [0]), ([0], [0])):
+            with self.subTest(rodata=rodata, data=data):
+                image, layout = fixture([0xE12FFF1E], rodata=rodata, data=data)
+                baseline = analyze.build_catalogue(image, layout)
+                closed = analyze.build_catalogue(image, layout, closure={})
+                self.assertEqual(closed["ranges"], baseline["ranges"])
+                self.assertEqual(analyze.validate_catalogue(closed, image, layout), [])
+
+    def test_returning_svc_discards_all_core_call_clobbered_pointer_facts(self) -> None:
+        for register in (0, 1, 2, 3, 12):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE59F0008 | register << 12, condition << 28 | 0x0F000028,
+                        0xE1D010F0 | register << 16, 0xE12FFF1E, BASE + 24,
+                        0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    self.assertFalse(any(row["site"] == BASE + 8 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_query_memory_raw_r4_r5_outputs_never_own_stale_pointees(self) -> None:
+        # The sealed review's four ABI-preserving hand-encoded callers, unchanged.
+        for register in (4, 5):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE92D4070, 0xE3A02000, 0xE59F000C | register << 12, 0xE3520001,
+                        condition << 28 | 0x0F000002, 0xE1D060F0 | register << 16, 0xE8BD8070,
+                        BASE + 40, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 40 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    self.assertFalse(any(row["site"] == BASE + 20
+                                         for row in result["closure_evidence"]["read_footprints"]))
+                    self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+
+    def test_raw_svc_table_and_unknown_contracts_do_not_use_aapcs_preservation(self) -> None:
+        arm = analyze.arm
+        raw_clobbers = {getattr(arm, f"ARM_REG_R{register}") for register in range(8)} | {
+            arm.ARM_REG_R12, arm.ARM_REG_LR, arm.ARM_REG_CPSR, arm.ARM_REG_APSR, arm.ARM_REG_APSR_NZCV}
+        for service, (_, outputs) in catalogue_closure._RAW_SVC_CONTRACTS.items():
+            image, layout = fixture([0xEF000000 | service, 0xE12FFF1E])
+            decoded = analyze.Analyzer(image, layout).detailed(BASE)
+            with self.subTest(service=service):
+                writes = catalogue_closure._register_writes(decoded)
+                if outputs is None:
+                    self.assertIsNone(writes)
+                else:
+                    self.assertLessEqual(raw_clobbers, writes)
+                    self.assertLessEqual({getattr(arm, f"ARM_REG_R{register}") for register in outputs}, writes)
+        for operands in ([], [SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R12, access=1)],
+                         [SimpleNamespace(type=arm.ARM_OP_IMM, imm=0x7F)],
+                         [SimpleNamespace(type=arm.ARM_OP_IMM, imm=0x100)],
+                         [SimpleNamespace(type=arm.ARM_OP_IMM, imm=-1)]):
+            with self.subTest(operands=operands):
+                svc = SimpleNamespace(id=arm.ARM_INS_SVC, operands=operands, regs_write=[],
+                                      regs_access=lambda: ([], []), writeback=False)
+                self.assertIsNone(catalogue_closure._register_writes(svc, call=True))
+
+    def test_other_raw_results_and_unknown_services_fail_closed_for_every_predicate(self) -> None:
+        for service in (0x1E, 0x2A, 0x2B, 0x3C, 0x7F):
+            registers = range(12) if service in (0x3C, 0x7F) else range(8)
+            for register in registers:
+                for condition in range(15):
+                    with self.subTest(service=service, register=register, condition=condition):
+                        image, layout = fixture([
+                            0xE92D4FF0, 0xE3A02000, 0xE59F000C | register << 12, 0xE3520001,
+                            condition << 28 | 0x0F000000 | service,
+                            0xE1D060F0 | register << 16, 0xE8BD8FF0, BASE + 40,
+                            0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                        result = analyze.build_catalogue(image, layout, closure={})
+                        row = next(row for row in result["ranges"] if row["start"] <= BASE + 40 < row["end"])
+                        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                        self.assertFalse(any(row["site"] == BASE + 20
+                                             for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_ordinary_calls_still_preserve_r4_r7_pointer_facts(self) -> None:
+        for register in range(4, 8):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE92D40F0, 0xE59F000C | register << 12, 0xE3500000 | register << 16,
+                        branch(BASE + 12, BASE + 32, link=True, condition=condition),
+                        0xE5901000 | register << 16, 0xE8BD80F0, BASE + 48, 0xFFFFFFFF,
+                        0xE3A00000, 0xE12FFF1E, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 48 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+                    self.assertTrue(any(row["site"] == BASE + 16
+                                        for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_exclusive_pair_write_does_not_leave_a_stale_pointer(self) -> None:
+        # LDREXD writes both r0/r1; Capstone 5's aggregate writes/access flags omit them.
+        image, layout = fixture([
+            0xE59F100C, 0xE3A02000, 0xE1B20F9F, 0xE1D130F0, 0xE12FFF1E,
+            BASE + 28, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 28 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertFalse(any(row["site"] == BASE + 12 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_coprocessor_and_status_reads_invalidate_their_destinations(self) -> None:
+        for instruction, register in ((0xEE100F10, 0), (0xEC510F00, 0), (0xEC510F00, 1), (0xE10F0000, 0)):
+            with self.subTest(instruction=instruction, register=register):
+                image, layout = fixture([
+                    0xE59F0008 | register << 12, instruction, 0xE1D020F0 | register << 16,
+                    0xE12FFF1E, BASE + 24, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+                self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+
+    def test_shifted_move_does_not_reintroduce_an_unmodeled_pointer_value(self) -> None:
+        image, layout = fixture([
+            0xE59F1008, 0xE1A00081, 0xE1D020F0, 0xE12FFF1E, BASE + 24,
+            0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+
+    def test_postindex_base_write_cannot_reuse_its_old_pointer(self) -> None:
+        image, layout = fixture([
+            0xE59F0010, 0xE4D01002, 0xE1D030F0, 0xE12FFF1E,
+            0xFFFFFFFF, 0xFFFFFFFF, BASE + 32, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        self.assertTrue(any(row["site"] == BASE + 4 for row in result["closure_evidence"]["read_footprints"]))
+        self.assertFalse(any(row["site"] == BASE + 8 for row in result["closure_evidence"]["read_footprints"]))
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 33 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+
+    def test_register_inventory_covers_actual_multi_outputs_and_writeback(self) -> None:
+        for instruction, expected in (
+            (0xEF000028, {"r0", "r1", "r2", "r3", "ip", "lr"}),
+            (0xE0810392, {"r0", "r1"}), (0xE0C10392, {"r0", "r1"}),
+            (0xE1C200D0, {"r0", "r1"}), (0xE0C200D8, {"r0", "r1", "r2"}),
+            (0xE8920003, {"r0", "r1"}), (0xE8B20003, {"r0", "r1", "r2"}),
+            (0xE1B20F9F, {"r0", "r1"}), (0xE1020091, {"r0"}),
+            (0xE10F0000, {"r0"}), (0xEE100F10, {"r0"}), (0xEC510F00, {"r0", "r1"}),
+            (0xE92D4010, {"sp"}), (0xE8BD4030, {"sp", "r4", "r5", "lr"})):
+            with self.subTest(instruction=instruction):
+                image, layout = fixture([instruction, 0xE12FFF1E])
+                decoded = analyze.Analyzer(image, layout).detailed(BASE)
+                writes = catalogue_closure._register_writes(decoded)
+                self.assertIsNotNone(writes)
+                self.assertLessEqual(expected, {decoded.reg_name(register) for register in writes})
+
+    def test_register_inventory_uses_implicit_writes_and_refuses_unknown_effects(self) -> None:
+        arm = analyze.arm
+        register = SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R1, access=1)
+        unknown = SimpleNamespace(id=arm.ARM_INS_CDP, operands=[register], regs_write=[arm.ARM_REG_R6],
+                                  regs_access=lambda: ([], []), writeback=False)
+        self.assertEqual(catalogue_closure._register_writes(unknown), {arm.ARM_REG_R1, arm.ARM_REG_R6})
+        unknown.operands = []
+        unknown.regs_write = []
+        self.assertIsNone(catalogue_closure._register_writes(unknown))
+        memory = SimpleNamespace(type=arm.ARM_OP_MEM, mem=SimpleNamespace(base=arm.ARM_REG_R0), access=0)
+        store = SimpleNamespace(id=arm.ARM_INS_STR, operands=[register, memory], regs_write=[],
+                                regs_access=lambda: ([], []), writeback=True)
+        self.assertEqual(catalogue_closure._register_writes(store), {arm.ARM_REG_R0})
+        for opcode, operands in ((arm.ARM_INS_LDREXD, [register, memory]),
+                                 (arm.ARM_INS_LDM, [register]), (arm.ARM_INS_MRRC, [register]),
+                                 (arm.ARM_INS_LDR, [memory])):
+            malformed = SimpleNamespace(id=opcode, operands=operands, regs_write=[],
+                                        regs_access=lambda: ([], []), writeback=False)
+            with self.subTest(malformed_opcode=opcode):
+                self.assertIsNone(catalogue_closure._register_writes(malformed))
+
+    def test_conditional_calls_discard_every_caller_saved_pointer_fact(self) -> None:
+        for register in (0, 1, 2, 3, 12):
+            for condition in (1, 14):
+                with self.subTest(register=register, condition=condition):
+                    image, layout = fixture([
+                        0xE92D4010, 0xE59F000C | register << 12, 0xE3500000 | register << 16,
+                        branch(BASE + 12, BASE + 32, link=True, condition=condition),
+                        0xE5904000 | register << 16, 0xE8BD8010, BASE + 48, 0xFFFFFFFF,
+                        0xE3A00000 | register << 12, 0xE12FFF1E, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+                    result = analyze.build_catalogue(image, layout, closure={})
+                    row = next(row for row in result["ranges"] if row["start"] <= BASE + 48 < row["end"])
+                    self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                    self.assertFalse(any(row["site"] == BASE + 16 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_conditional_register_call_also_clobbers_pointer_facts(self) -> None:
+        image, layout = fixture([
+            0xE92D4030, 0xE59F0014, 0xE59F5014, 0xE3500000, 0x112FFF35, 0xE5904000, 0xE8BD8030,
+            0xFFFFFFFF, BASE + 64, BASE + 48, 0xFFFFFFFF, 0xFFFFFFFF,
+            0xE3A00000, 0xE12FFF1E, 0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 64 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertFalse(any(row["site"] == BASE + 20 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_conditional_call_preserves_a_callee_saved_pointer_fact(self) -> None:
+        image, layout = fixture([
+            0xE92D4010, 0xE59F400C, 0xE3540000, branch(BASE + 12, BASE + 32, link=True, condition=1),
+            0xE5941000, 0xE8BD8010, BASE + 48, 0xFFFFFFFF, 0xE3A00000, 0xE12FFF1E,
+            0xFFFFFFFF, 0xFFFFFFFF, 0x01010101, 0xFFFFFFFF])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 48 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+        self.assertTrue(any(row["site"] == BASE + 16 for row in result["closure_evidence"]["read_footprints"]))
+
+    def test_exception_return_forms_never_create_closed_copy_owners(self) -> None:
+        for terminal in (0xE1B0F00E, 0xE25EF004, 0xE8FD8010, 0xE1A0F08E, 0xE1A0F06E):
+            with self.subTest(terminal=terminal):
+                image, layout = fixture([0xE12FFF1E, 0xE5912000, 0xE5802000, terminal])
+                analyzer = analyze.Analyzer(image, layout)
+                self.assertIsNone(catalogue_closure.constant_copy_leaf(analyzer, BASE + 4, BASE + 16))
+                result = analyze.build_catalogue(image, layout, closure={})
+                self.assertNotIn(BASE + 4, {function["address"] for function in result["functions"]})
+        image, layout = fixture([0xE12FFF1E, 0xE5912000, 0xE5802000, 0xE1A0F00E])
+        self.assertIsNotNone(catalogue_closure.constant_copy_leaf(analyze.Analyzer(image, layout), BASE + 4, BASE + 16))
+        result = analyze.build_catalogue(image, layout, closure={})
+        self.assertIn(BASE + 4, {function["address"] for function in result["functions"]})
+
+    def test_user_bank_transfers_cannot_create_closed_leaf_owners(self) -> None:
+        # Hand-encoded synthetic LDM/STM differ only by the user-bank S bit.
+        for user_load, user_store in ((False, False), (True, False),
+                                      (False, True), (True, True)):
+            with self.subTest(user_load=user_load, user_store=user_store):
+                image, layout = fixture([
+                    0xE12FFF1E,
+                    0xE8910004 | (0x00400000 if user_load else 0),
+                    0xE8800004 | (0x00400000 if user_store else 0),
+                    0xE12FFF1E,
+                ])
+                result = analyze.build_catalogue(image, layout, closure={})
+                functions = {row["address"]: row for row in result["functions"]}
+                if user_load or user_store:
+                    self.assertNotIn(BASE + 4, functions)
+                    unknown = [row for row in result["ranges"] if row["kind"] == "unknown"]
+                    self.assertEqual(sum(max(0, min(BASE + 16, row["end"])
+                                             - max(BASE + 4, row["start"]))
+                                         for row in unknown), 12)
+                    self.assertFalse(any(row["start"] == BASE + 4
+                                         for row in result["closure_evidence"]["closed_leaves"]))
+                else:
+                    self.assertEqual((functions[BASE + 4]["kind"], functions[BASE + 4]["size"]),
+                                     ("function", 12))
+                    leaf = next(row for row in result["closure_evidence"]["closed_leaves"]
+                                if row["start"] == BASE + 4)
+                    self.assertEqual(leaf["write_spans"], [[0, 4]])
+                self.assertEqual(analyze.validate_catalogue(result, image, layout), [])
+
+    def test_signed_byte_and_halfword_reads_veto_alignment(self) -> None:
+        for instruction, width in ((0xE1DF10BE, 2), (0xE1DF10FE, 2), (0xE5DF100E, 1), (0xE1DF10DE, 1)):
+            with self.subTest(instruction=instruction, width=width):
+                image, layout = fixture([instruction, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+                self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+                reads = [row for row in result["closure_evidence"]["read_footprints"] if row["site"] == BASE]
+                self.assertEqual([(row["start"], row["end"]) for row in reads], [(BASE + 22, BASE + 22 + width)])
+                self.assertFalse(any(row["start"] <= BASE + 22 < row["end"] for row in result["closure_evidence"]["alignment"]))
+
+    def test_conditional_reads_veto_alignment_without_claiming_data(self) -> None:
+        for instruction in (0x01DF10BE, 0x01DF10FE, 0x01DF10DE):
+            with self.subTest(instruction=instruction):
+                image, layout = fixture([instruction, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+                self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+                self.assertTrue(any(row["site"] == BASE for row in result["closure_evidence"]["read_vetoes"]))
+
+    def test_unmodeled_and_unbounded_reads_do_not_prove_no_reference(self) -> None:
+        image, layout = fixture([0xED9F0100, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+        self.assertEqual(analyze.Analyzer(image, layout).detailed(BASE).id, analyze.arm.ARM_INS_LDC)
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertTrue(any(row["site"] == BASE for row in result["closure_evidence"]["read_vetoes"]))
+        image, layout = fixture([0xE59F0014, 0xE7901002, 0xFA000000, 0xE12FFF1E, 0x4801B500,
+                                 0x0000BD00, 0x12345678, BASE + 22])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertTrue(any(row["site"] == BASE + 4 for row in result["closure_evidence"]["read_vetoes"]))
+
+    def test_read_inventory_widths_cover_signed_unprivileged_atomic_and_doubleword_forms(self) -> None:
+        arm = analyze.arm
+        register = SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R1)
+        memory = SimpleNamespace(type=arm.ARM_OP_MEM, access=0, subtracted=False,
+                                 mem=SimpleNamespace(base=arm.ARM_REG_R0, index=0, disp=6),
+                                 shift=SimpleNamespace(type=0, value=0))
+        known = {arm.ARM_REG_R0: (BASE, BASE, "synthetic")}
+        for width, names in ((1, ("LDRB", "LDRBT", "LDRSB", "LDRSBT", "LDREXB", "SWPB")),
+                             (2, ("LDRH", "LDRHT", "LDRSH", "LDRSHT", "LDREXH")),
+                             (4, ("LDR", "LDRT", "LDREX", "SWP")), (8, ("LDRD", "LDREXD"))):
+            for name in names:
+                with self.subTest(name=name):
+                    operands = [register, register, memory] if width == 8 else [register, memory]
+                    instruction = SimpleNamespace(id=getattr(arm, "ARM_INS_" + name), operands=operands)
+                    reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+                    self.assertEqual(reads, [(BASE + 6, BASE + 6 + width, BASE, "synthetic")])
+                    self.assertFalse(uncertain)
+        for reg, width in ((arm.ARM_REG_S0, 4), (arm.ARM_REG_D0, 8)):
+            instruction = SimpleNamespace(id=arm.ARM_INS_VLDR,
+                                          operands=[SimpleNamespace(type=arm.ARM_OP_REG, reg=reg), memory])
+            reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+            self.assertEqual(reads[0][:2], (BASE + 6, BASE + 6 + width))
+            self.assertFalse(uncertain)
+
+    def test_multiple_read_address_modes_use_complete_architectural_spans(self) -> None:
+        arm = analyze.arm
+        reg = lambda value: SimpleNamespace(type=arm.ARM_OP_REG, reg=value)
+        known = {arm.ARM_REG_R0: (BASE + 16, BASE, "synthetic"), arm.ARM_REG_SP: (BASE + 16, BASE, "synthetic")}
+        for name, registers, offset, width in (
+            ("LDM", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], 0, 8),
+            ("LDMIB", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], 4, 8),
+            ("LDMDA", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], -4, 8),
+            ("LDMDB", [arm.ARM_REG_R0, arm.ARM_REG_R1, arm.ARM_REG_R2], -8, 8),
+            ("VLDMIA", [arm.ARM_REG_R0, arm.ARM_REG_S0, arm.ARM_REG_S1], 0, 8),
+            ("VLDMDB", [arm.ARM_REG_R0, arm.ARM_REG_D0, arm.ARM_REG_D1], -16, 16),
+            ("POP", [arm.ARM_REG_R1, arm.ARM_REG_R2], 0, 8),
+            ("VPOP", [arm.ARM_REG_D0, arm.ARM_REG_D1], 0, 16)):
+            with self.subTest(name=name):
+                instruction = SimpleNamespace(id=getattr(arm, "ARM_INS_" + name), operands=[reg(value) for value in registers])
+                reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+                self.assertEqual(reads[0][:2], (BASE + 16 + offset, BASE + 16 + offset + width))
+                self.assertFalse(uncertain)
+
+    def test_partially_mapped_reads_veto_without_claiming_a_truncated_object(self) -> None:
+        image, layout = fixture([0xE12FFF1E])
+        catalogue = analyze.build_catalogue(image, layout)
+        analyzer = analyze.Analyzer(image, layout)
+        vetoes = []
+        with mock.patch.object(catalogue_closure, "_instruction_reads",
+                               return_value=([(BASE - 2, BASE + 2, BASE, "synthetic")], False)):
+            reads = catalogue_closure.read_footprints(catalogue, analyzer, read_vetoes=vetoes)
+        self.assertEqual(reads, [])
+        self.assertEqual([(row["start"], row["end"]) for row in vetoes], [(BASE, BASE + 2)])
+        self.assertEqual(vetoes[0]["evidence"], "partially_mapped_read_veto_only")
+
+    def test_unknown_memory_read_shapes_and_missing_access_flags_fail_closed(self) -> None:
+        arm = analyze.arm
+        register = SimpleNamespace(type=arm.ARM_OP_REG, reg=arm.ARM_REG_R1)
+        memory = SimpleNamespace(type=arm.ARM_OP_MEM, access=0, subtracted=False,
+                                 mem=SimpleNamespace(base=arm.ARM_REG_R0, index=0, disp=0),
+                                 shift=SimpleNamespace(type=0, value=0))
+        known = {arm.ARM_REG_R0: (BASE, BASE, "synthetic")}
+        for instruction in (SimpleNamespace(id=arm.ARM_INS_LDC, operands=[register, memory]),
+                            SimpleNamespace(id=arm.ARM_INS_CDP, operands=[register, memory]),
+                            SimpleNamespace(id=arm.ARM_INS_LDRSH, operands=[register]),
+                            SimpleNamespace(id=arm.ARM_INS_LDM, operands=[register])):
+            with self.subTest(instruction=instruction.id):
+                self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], True))
+        # A known, store-only class does not become a read just because flags are absent.
+        instruction = SimpleNamespace(id=arm.ARM_INS_STR, operands=[register, memory])
+        self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], False))
+        memory.mem.index = arm.ARM_REG_R2
+        instruction = SimpleNamespace(id=arm.ARM_INS_LDR, operands=[register, memory])
+        self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], True))
+        known[arm.ARM_REG_R2] = (3, BASE, "synthetic")
+        memory.shift = SimpleNamespace(type=arm.ARM_SFT_LSL, value=1)
+        reads, uncertain = catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8)
+        self.assertEqual(reads[0][:2], (BASE + 6, BASE + 10))
+        self.assertFalse(uncertain)
+        memory.shift = SimpleNamespace(type=arm.ARM_SFT_RRX, value=1)
+        self.assertEqual(catalogue_closure._instruction_reads(instruction, known, BASE, BASE + 8), ([], True))
+
+    def test_complete_copy_effects_do_not_claim_library_ownership(self) -> None:
+        for load, store, width in ((0xE5912000, 0xE5802000, 4), (0xE5D12000, 0xE5C02000, 1)):
+            with self.subTest(width=width):
+                leaf = self.leaf([load, store, 0xE12FFF1E])
+                self.assertIsNotNone(leaf)
+                self.assertEqual((leaf["copy_bytes"], leaf["source_bytes"], leaf["instruction_count"]), (width, width, 3))
+                self.assertFalse(leaf["ownership_classified"])
+
+    def test_record_permutation_requires_its_explicit_memory_contract(self) -> None:
+        words = [0xE5912004, 0xE5802000, 0xE5912000, 0xE5802004, 0xE12FFF1E]
+        self.assertIsNone(self.leaf(words))
+        leaf = self.leaf(words, record=True)
+        self.assertEqual((leaf["source_bytes"], leaf["copy_bytes"]), (8, 8))
+        self.assertEqual([field["source_offset"] for field in leaf["fields"]], [4, 0])
+        constants = self.leaf([0xE5913000, 0xE5803000, 0xE3A02007, 0xE5802004, 0xE12FFF1E], record=True)
+        self.assertEqual([field["kind"] for field in constants["fields"]], ["source", "constant"])
+
+    def test_copy_witness_fails_closed_for_unproved_effects(self) -> None:
+        bad = {
+            "predicate": [0x05912000, 0xE5802000, 0xE12FFF1E],
+            "call": [branch(BASE, BASE + 8, link=True), 0xE5802000, 0xE12FFF1E],
+            "indexed": [0xE7912003, 0xE5802000, 0xE12FFF1E],
+            "callee_clobber": [0xE5914000, 0xE5804000, 0xE12FFF1E],
+            "unbalanced_stack": [0xE92D0010, 0xE5912000, 0xE5802000, 0xE12FFF1E],
+            "source_write": [0xE5912000, 0xE5812000, 0xE12FFF1E],
+            "flags": [0xE5912000, 0xE5802000, 0xE2900001, 0xE12FFF1E],
+            "missing_return": [0xE5912000, 0xE5802000],
+            "preserved_vfp_alias": [0xED910B00, 0xED800B00, 0xE12FFF1E],
+        }
+        for reason, words in bad.items():
+            with self.subTest(reason=reason):
+                self.assertIsNone(self.leaf(words, record=True))
+
+    def test_nonlocal_string_never_borrows_a_neighbors_pool(self) -> None:
+        image, layout = fixture([0xE28F0008, 0xE12FFF1E, 0xE92D4010, 0xE8BD8010, *literal_words(b"foo\0")])
+        result = analyze.build_catalogue(image, layout)
+        self.assertEqual([function["size"] for function in result["functions"]], [8, 8])
+        self.assertIn({"start": BASE + 16, "end": BASE + 20, "kind": "rodata", "owner": None}, result["ranges"])
+        image, layout = fixture([0xE28F0010, 0xE12FFF1E, 0xE92D4010, 0xE59F0004, 0xE8BD8010, 0,
+                                 *literal_words(b"foo\0")])
+        result = analyze.build_catalogue(image, layout)
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 24 < row["end"])
+        # Sharing vetoes exclusive pool ownership before optional closure.
+        self.assertEqual((row["kind"], row["owner"]), ("unknown", None))
+        self.assertEqual(result["functions"][1]["pools"], [])
+        self.assertEqual(result["functions"][0]["size"], 8)
+        # The actual LDR then proves four unowned data bytes, not a borrowed pool.
+        closed = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in closed["ranges"] if row["start"] <= BASE + 24 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+        self.assertEqual(closed["functions"][1]["pools"], [])
+
+    def test_reviewed_wide_bound_requires_digest_terminator_and_zero_alignment(self) -> None:
+        image, layout = fixture([0xE28F0000, 0xE12FFF1E, *literal_words("AB\0".encode("utf-16le"))])
+        row = {"function": BASE, "target": BASE + 8, "end": BASE + 14, "references": [BASE],
+               "encoding": "utf-16le", "image_interval_sha256": hashlib.sha256(image[8:14]).hexdigest()}
+        result = analyze.build_catalogue(image, layout, literal_encodings=[row])
+        self.assertEqual(result["functions"][0]["literals"], [[BASE + 8, BASE + 16]])
+        for change in ({"end": BASE + 16}, {"image_interval_sha256": "0" * 64}):
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                analyze.build_catalogue(image, layout, literal_encodings=[{**row, **change}])
+        with self.assertRaises(ValueError):
+            analyze.build_catalogue(image[:14] + b"\1" + image[15:], layout, literal_encodings=[row])
+
+    def test_dominated_thumb_pc_pointer_requires_the_actual_defining_value(self) -> None:
+        image, layout = fixture([0xFA000002, 0xE12FFF1E, 0, 0, 0x4478200B, 0x00004770, 0, 0, 0x47702007])
+        result = analyze.build_catalogue(image, layout)
+        self.assertIn(BASE + 32, {function["address"] for function in result["functions"]})
+        self.assertTrue(any(row["target"] == BASE + 32 for row in result["pc_relative_pointer_witnesses"]))
+        image, layout = fixture([0xFA000002, 0xE12FFF1E, 0, 0, 0x2000200B, 0x47704478, 0, 0, 0x47702007])
+        result = analyze.build_catalogue(image, layout)
+        self.assertNotIn(BASE + 32, {function["address"] for function in result["functions"]})
+
+    def test_only_unreferenced_zero_halfwords_can_align_thumb_pools(self) -> None:
+        for fill, expected in ((0, "padding"), (0xFFFF, "unknown")):
+            with self.subTest(fill=fill):
+                image, layout = fixture([0xFA000002, 0xE12FFF1E, 0, 0, 0x4801B500,
+                                         (fill << 16) | 0xBD00, 0x12345678])
+                result = analyze.build_catalogue(image, layout, closure={})
+                row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+                self.assertEqual(row["kind"], expected)
+        image, layout = fixture([0xE1DF10BE, 0xFA000001, 0xE12FFF1E, 0, 0x4801B500, 0x0000BD00, 0x12345678])
+        result = analyze.build_catalogue(image, layout, closure={})
+        row = next(row for row in result["ranges"] if row["start"] <= BASE + 22 < row["end"])
+        self.assertEqual((row["kind"], row["owner"]), ("rodata", None))
+
+    def graph_fixture(self, first_word: int = 0xE3520000) -> tuple:
+        words = [first_word, branch(BASE + 4, BASE + 16, condition=0), 0xE92D4010, 0xE8BD8010,
+                 0xE92D4010, 0xE8BD8010]
+        image, layout = fixture(words)
+        analyzer = analyze.Analyzer(image, layout)
+        functions = []
+        for address in (BASE + 8, BASE + 16):
+            analyzer.add_seed(address, "arm", "prologue")
+            functions.append({"address": address, "size": 8, "code_size": 8, "isa": "arm", "kind": "function",
+                              "evidence": ["prologue"], "code_ranges": [[address, address + 8]], "pools": [],
+                              "literals": [], "noreturn": False, "noreturn_reasons": [],
+                              "entries": [{"address": address, "isa": "arm", "kind": "entry",
+                                           "evidence": ["prologue"], "sources": []}]})
+        catalogue = {"functions": functions, "stats": {}, "ranges": [
+            {"start": BASE, "end": BASE + 8, "kind": "unknown", "owner": None},
+            *({"start": function["address"], "end": function["address"] + 8,
+               "kind": "function", "owner": function["address"]} for function in functions)]}
+        record = {"start": BASE, "end": BASE + 24, "legacy_owners": [BASE + 8, BASE + 16],
+                  "image_interval_sha256": hashlib.sha256(image[:24]).hexdigest(),
+                  "behavior_witness": {"identity": "synthetic"}, "behavior_cases": 1, "behavior_copy_and_abi_passes": 1}
+        return catalogue, analyzer, record
+
+    def test_entry_connected_graph_preserves_weak_labels_as_topology_not_ownership(self) -> None:
+        catalogue, analyzer, record = self.graph_fixture()
+        old = json.loads(json.dumps(catalogue["functions"]))
+        rows = catalogue_closure.merge_closed_graphs(catalogue, analyzer, [record], {})
+        function = catalogue["functions"][0]
+        self.assertEqual((function["kind"], function["size"]), ("multi_entry", 24))
+        self.assertEqual([entry["address"] for entry in function["entries"]], [BASE, BASE + 8, BASE + 16])
+        self.assertFalse(rows[0]["ownership_classified"])
+        analyze.preserve_prior_entries(catalogue, old)
+        analyze.preserve_prior_entries(catalogue, json.loads(json.dumps(catalogue["functions"])))
+        self.assertEqual(len(catalogue["functions"][0]["entries"]), 3)
+
+    def test_graph_merge_rejects_protected_strong_data_and_unclosed_members(self) -> None:
+        for reason in ("protected", "strong_entry", "pool", "digest", "missing_behavior", "system_instruction"):
+            with self.subTest(reason=reason):
+                catalogue, analyzer, record = self.graph_fixture(0xEF000000 if reason == "system_instruction" else 0xE3520000)
+                protected = {}
+                if reason == "protected":
+                    protected[BASE + 8] = catalogue["functions"][0]
+                elif reason == "strong_entry":
+                    catalogue["functions"][0]["entries"][0]["sources"] = [BASE + 0x100]
+                elif reason == "pool":
+                    catalogue["functions"][0]["pools"] = [[BASE + 12, BASE + 16]]
+                elif reason == "digest":
+                    record["image_interval_sha256"] = "0" * 64
+                elif reason == "missing_behavior":
+                    record["behavior_cases"] = 0
+                with self.assertRaises(ValueError):
+                    catalogue_closure.merge_closed_graphs(catalogue, analyzer, [record], protected)
+
+    def test_classification_checks_the_entire_original_extent_identity(self) -> None:
+        image, layout = fixture([0xE12FFF1E])
+        row = {"address": BASE, "size": 4, "isa": "arm", "image_sha256": hashlib.sha256(image).hexdigest(),
+               "kind": "runtime", "basis": "compiler_abi", "identity": "synthetic ABI helper",
+               "evidence": "synthetic compiler/ABI witness", "compiler_emission": "synthetic emitted helper",
+               "original_extent_sha256": "0" * 64}
+        with self.assertRaises(ValueError):
+            analyze.build_catalogue(image, layout, classifications=[row])
+
+    def library_evidence(self) -> tuple[list[dict], dict]:
+        record = {"address": BASE, "size": 4, "isa": "arm", "kind": "library", "basis": "known_library",
+                  "identity": "synthetic_library", "image_sha256": "synthetic",
+                  "known_library_identity": "Synthetic test metadata, not a real ownership claim",
+                  "original_extent_sha256": "a" * 64,
+                  "library_witness": {"symbol": "synthetic_library", "image_body_sha256": "a" * 64}}
+        owner = {"address": BASE, "size": 4, "isa": "arm", "authenticated": True, "whole_body_identical": True,
+                 "selected_alias_groups": [["synthetic_library", "synthetic_alias"]]}
+        library = {"authenticated_owners": [owner], "protected_collisions": [],
+                   "prior_classification_authentication": [], "names_proposal": {
+                       "symbols": {"synthetic_library": {"address": BASE}, "synthetic_alias": {"address": BASE}}}}
+        return [record], library
+
+    def test_library_delta_checks_identity_without_applying_names(self) -> None:
+        records, library = self.library_evidence()
+        before = json.dumps([records, library], sort_keys=True)
+        catalogue_closure._validate_library_evidence(records, library, "synthetic")
+        self.assertEqual(json.dumps([records, library], sort_keys=True), before)
+        for change in ({"image_sha256": "wrong"}, {"size": 8}, {"isa": "thumb"}, {"kind": "runtime"},
+                       {"original_extent_sha256": "b" * 64},
+                       {"library_witness": {"symbol": "unrelated_same_body", "image_body_sha256": "a" * 64}}):
+            records, library = self.library_evidence()
+            records[0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                catalogue_closure._validate_library_evidence(records, library, "synthetic")
+
+    def test_protected_coincidences_never_become_library_or_name_evidence(self) -> None:
+        records, library = self.library_evidence()
+        library["protected_collisions"] = [{"address": BASE, "authenticated": False}]
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence(records, library, "synthetic")
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence([], library, "synthetic")
+        records, library = self.library_evidence()
+        library["protected_collisions"] = [{"address": BASE + 4, "authenticated": True}]
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence(records, library, "synthetic")
+
+    def test_library_aliases_and_unique_authenticated_owners_are_required(self) -> None:
+        records, library = self.library_evidence()
+        library["names_proposal"]["symbols"]["different_object_same_bytes"] = {"address": BASE}
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence(records, library, "synthetic")
+        records, library = self.library_evidence()
+        library["authenticated_owners"][0]["authenticated"] = False
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence(records, library, "synthetic")
+        records, library = self.library_evidence()
+        library["authenticated_owners"].append(dict(library["authenticated_owners"][0]))
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence(records, library, "synthetic")
+        records, library = self.library_evidence()
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_library_evidence(records + records, library, "synthetic")
+
+    def test_pool_qualified_identity_cannot_claim_foreign_tail_or_grow_its_declaration(self) -> None:
+        records, _ = self.library_evidence()
+        declaration = {
+            "address": BASE, "isa": "arm", "old_catalogue_size": 4,
+            "recommended_catalogue_size": 4, "elf_declared_size": 4, "elf_symbol_kind": "STT_FUNC",
+            "image_body_sha256": "a" * 64, "symbol": "synthetic_library",
+            "whole_declared_body_masked_equal": True, "whole_declared_body_reencoded_equal": True,
+            "rejected_growth_size": 8, "rejected_growth_delta": 4,
+            "all_foreign_tail_readers": [{"target_start": BASE + 4, "target_end": BASE + 8}],
+        }
+        extension = {
+            "image_sha256": "synthetic", "pool_qualified_record_addresses": [BASE],
+            "extent_adjudication": {"image_sha256": "synthetic", "adjudications": [declaration]},
+            "scope_and_dispositions": [],
+        }
+        catalogue_closure._validate_declared_extents(records, extension)
+        for change in ({"recommended_catalogue_size": 8}, {"elf_declared_size": 8},
+                       {"elf_symbol_kind": "STT_OBJECT"}, {"whole_declared_body_reencoded_equal": False},
+                       {"all_foreign_tail_readers": [{"target": BASE + 2}]}):
+            altered = json.loads(json.dumps(extension))
+            altered["extent_adjudication"]["adjudications"][0].update(change)
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                catalogue_closure._validate_declared_extents(records, altered)
+        extension["scope_and_dispositions"] = [{"address": BASE, "r7_authenticated": False}]
+        with self.assertRaises(ValueError):
+            catalogue_closure._validate_declared_extents(records, extension)
+
+    def test_frozen_baseline_and_parent_are_independently_authenticated(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / "research").mkdir()
+            parent = root / "research/parent.json"
+            parent.write_text("{}")
+            baseline = json.dumps({"image_sha256": "synthetic"}).encode()
+            evidence = {"image_sha256": "synthetic",
+                        "parent_evidence": {"path": "research/parent.json", "sha256": hashlib.sha256(parent.read_bytes()).hexdigest()},
+                        "baseline_catalogue": {"blob": "1" * 40, "reference": "synthetic", "revision": "prior",
+                                               "sha256": hashlib.sha256(baseline).hexdigest()}}
+            path = root / "research/catalogue_v10_evidence.json"
+            path.write_text(json.dumps(evidence))
+            library_revision_fixture(root, path, "synthetic")
+            with mock.patch.object(catalogue_closure.subprocess, "run",
+                                   return_value=subprocess.CompletedProcess([], 0, baseline, b"")):
+                _, prior, inputs = catalogue_closure.load_inputs(root, parent)
+                self.assertEqual(prior["revision"], "prior")
+                self.assertIn("research/catalogue_v10_evidence.json", inputs)
+                self.assertIn("research/catalogue_v10_r3_evidence.json", inputs)
+                self.assertIn("research/catalogue_v10_r4_evidence.json", inputs)
+                self.assertIn("research/catalogue_v10_r5_evidence.json", inputs)
+                self.assertIn("research/catalogue_v11_evidence.json", inputs)
+                self.assertIn("research/catalogue_v11_r2_evidence.json", inputs)
+                self.assertIn("research/catalogue_v11_r3_evidence.json", inputs)
+                for field in ("parent_evidence", "baseline_catalogue"):
+                    changed = json.loads(json.dumps(evidence))
+                    changed[field]["sha256"] = "0" * 64
+                    path.write_text(json.dumps(changed))
+                    with self.subTest(field=field), self.assertRaises(ValueError):
+                        catalogue_closure.load_inputs(root, parent)
+                path.write_text(json.dumps(evidence))
+                revision = library_revision_fixture(root, path, "synthetic")
+                revision_path = root / "research/catalogue_v10_r3_evidence.json"
+                for change in ({"image_sha256": "wrong"}, {"parent_evidence": {**revision["parent_evidence"], "sha256": "0" * 64}}):
+                    revision_path.write_text(json.dumps({**revision, **change}))
+                    with self.subTest(revision_change=change), self.assertRaises(ValueError):
+                        catalogue_closure.load_inputs(root, parent)
+                library_revision_fixture(root, path, "synthetic")
+                extension_path = root / "research/catalogue_v10_r4_evidence.json"
+                extension = json.loads(extension_path.read_text())
+                for change in ({"image_sha256": "wrong"},
+                               {"parent_evidence": {**extension["parent_evidence"], "sha256": "0" * 64}}):
+                    extension_path.write_text(json.dumps({**extension, **change}))
+                    with self.subTest(extension_change=change), self.assertRaisesRegex(ValueError, "v10-r4 evidence"):
+                        catalogue_closure.load_inputs(root, parent)
+                library_revision_fixture(root, path, "synthetic")
+                repair_path = root / "research/catalogue_v10_r5_evidence.json"
+                repair = json.loads(repair_path.read_text())
+                for change in ({"image_sha256": "wrong"}, {"revision": "catalogue-v10-r4"},
+                               {"parent_evidence": {**repair["parent_evidence"], "sha256": "0" * 64}}):
+                    repair_path.write_text(json.dumps({**repair, **change}))
+                    with self.subTest(repair_change=change), self.assertRaisesRegex(ValueError, "v10-r5 evidence"):
+                        catalogue_closure.load_inputs(root, parent)
+                library_revision_fixture(root, path, "synthetic")
+                runtime_path = root / "research/catalogue_v11_evidence.json"
+                runtime = json.loads(runtime_path.read_text())
+                for change in ({"image_sha256": "wrong"},
+                               {"parent_evidence": {**runtime["parent_evidence"], "sha256": "0" * 64}}):
+                    runtime_path.write_text(json.dumps({**runtime, **change}))
+                    with self.subTest(runtime_change=change), self.assertRaisesRegex(ValueError, "v11 runtime evidence"):
+                        catalogue_closure.load_inputs(root, parent)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,118 @@
+{
+  "adoption": false,
+  "base_commit": "307e1bd1486e8f81f744f4b1d771a90b6171259f",
+  "bounded_checks": [
+    {
+      "receipt": "scratch/closure/v11-r2/bounded-metadata-r1.json",
+      "result": {
+        "complete_old_new_digest_pairs": [
+          {
+            "address": 2112104,
+            "after_sha256": "a0b0c0d0c6b4f0f5cfd04b0e63a79d0d09cdc828dbd38bdba399404367422b53",
+            "before_sha256": "c6c942b981aecf0cf7004f0619b447f3ef856750786b1a40da3f16679925371d",
+            "literal_witnesses_sha256": "e2104853d923268567f497c95392b7e4366412d357e980a7ab96d815c90d5eb9",
+            "original_extent_sha256": "7ca925694087255cefa4c52281478a5352d032e3af16d616efe5875c58844bfd"
+          },
+          {
+            "address": 1999356,
+            "after_sha256": "dc903285a1aa31521324ebc70db684ccf134567bdc013748a1ef103c57dc7a30",
+            "before_sha256": "045976405b19240872809dc2852f81b9095704561be90009d65e4c923118241f",
+            "literal_witnesses_sha256": "74e47cb8e219d70c5aa22e33535f78162d893bb02805fe12c60451824973e7c2",
+            "original_extent_sha256": "a655893bf376bd9d036c588da57f1e4f2c132b06c8369c503cc4191b922d3481"
+          }
+        ],
+        "prepared_identities_verified": 2297,
+        "protected_union": 2298,
+        "protection_manifests": 8,
+        "r5_and_v11_immutable_inputs_bound": true,
+        "revision": "catalogue-v11-r2",
+        "scope": "metadata plus two exact original extents only; no image generation",
+        "transition_addresses": [
+          1999356,
+          2112104
+        ],
+        "unchanged_all_protected_entries_and_extents": true,
+        "unchanged_protected_address_set": true
+      },
+      "returncode": 0,
+      "sha256": "c7bffb3bedbd321c5d9cb698ccc646c944fee8922c2acc9985f399e89346b2a1",
+      "wall_seconds": 0.434303
+    },
+    {
+      "receipt": "scratch/closure/v11-r2/synthetic-public-cli-r1.json",
+      "result": {
+        "actual_functions_equal_independent_typed_writer": true,
+        "adopted_catalogue_unmodified": true,
+        "prepared_only_identity_protected": true,
+        "protected_rows": 2,
+        "refused_cli_exit": 1,
+        "refused_diagnostic": "catalogue: v11-r2 transitions do not bind every exact inherited metadata repair",
+        "refused_output_absent": true,
+        "revision": "catalogue-v11-r2",
+        "scope": "one lightweight synthetic public CLI smoke; no tests or current-image generation",
+        "valid_cli_exit": 0
+      },
+      "returncode": 0,
+      "sha256": "0922e537db7c36702735f6531038810c911a3fecb59d0d6538eaf1771f93f5bd",
+      "wall_seconds": 0.537069
+    }
+  ],
+  "immutable_input_sha256": {
+    "research/catalogue_v10_r4_evidence.json": "4db813af5c65a7018633080901fa3d556afcd1a1ce577fae93001eea5a83879e",
+    "research/catalogue_v10_r5_evidence.json": "b758574088ae4a9c85f8dd89548066dec48d060d622aa43dcef36707827d2f52",
+    "research/catalogue_v11_evidence.json": "ee7aaca7fb66c3740f8e9bc62b50b79bc8d8ac4bfc49082d545e851e320ec1fc",
+    "research/catalogue_v11_protection.json": "1c2cf1bf6396f5a78251cb9ef0f1a5b59eff1c77517341b47399143caf6df415",
+    "research/catalogue_v11_r2_evidence.json": "b344066340a4e40b9f3bf316aafae6bb185b1e11ac53b8c68cbe7775a81feeb7"
+  },
+  "inherited_integrated_failure": {
+    "diagnostic": "protected function 0x203a68 cannot retain its adopted catalogue record",
+    "failed_method": "tests.test_analyze.CatalogueTests.test_original_invariants_and_stability",
+    "path": "scratch/integrator/catalogue-v11/integrated-suite-r1.json",
+    "returncode": 1,
+    "sha256": "8b639687be7dbff3cd4e924fcf66d4a6c78049c696716af83071d8d22e3f46b4",
+    "skipped": 1,
+    "tests_run": 879
+  },
+  "new_C_credit": 0,
+  "not_run": [
+    "tests (including authored regressions)",
+    "integrated full suite",
+    "current-image catalogue generation",
+    "builds",
+    "compiler/matcher",
+    "whole-tree audits",
+    "linters",
+    "formatters"
+  ],
+  "qualification": "Bounded metadata proof and one synthetic public CLI smoke only. The current-image totals remain ungenerated hypotheses; fresh independent whole-proposal review remains required. All prior failures/revisions and original216B/runtime plus separate2B selector accounting remain untouched.",
+  "remaining_main_commands": [
+    [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-t",
+      "."
+    ],
+    [
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "-B",
+      "tools/analyze.py",
+      "catalogue",
+      "--out",
+      "scratch/analyze/catalogue-v11-r2.json"
+    ]
+  ],
+  "revision": "catalogue-v11-r2",
+  "schema_version": 1,
+  "source_sha256": {
+    "tests/test_analyze.py": "40cc68df7e79b5a3194f047908511a6fddf514193d62dc40b1f3effac80d7fc5",
+    "tests/test_catalogue_endian_cli.py": "e0c47ca4cd579706438858964f379ac51147fa9816eb3f88d1f8982bdd5cbd4a",
+    "tests/test_catalogue_protection.py": "1d857516e5f184ead1287f1790d617a8e73930ace0f8d8438f69c096065a4cf8",
+    "tools/analyze.py": "0b934aff28608b0ff1efe32746516734e531a2451e9e19f461bb57bbb159858f",
+    "tools/catalogue_closure.py": "6e94b44a4bc30c86da5c84092530a54d41cb6a4b3ef5b3bf5b0cce3f65c80d67"
+  }
+}

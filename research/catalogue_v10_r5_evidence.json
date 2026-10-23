@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "revision": "catalogue-v10-r5",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "parent_evidence": {
+    "path": "research/catalogue_v10_r4_evidence.json",
+    "sha256": "4db813af5c65a7018633080901fa3d556afcd1a1ce577fae93001eea5a83879e"
+  },
+  "finding": "V10R4-R01",
+  "sealed_failed_review": {
+    "path": "scratch/review/catalogue-v10-r4/restart-20261020",
+    "reviewed_commit": "3de76111a448dfaca260fab5630762edb27feb0c",
+    "proposal_sha256": "dacef0040a70f33bf8ec9c2f2a427a02624dcd55e960ea0844c1717321294bda",
+    "review_sha256": "241cef07122cc3e642ef95fc5ad4bc068c66f7a594ab8ec721c4df5779183781",
+    "record_sha256": "4c496b8f688a07627f00d0ca48d329443f769c9deb76a1fa3781e4ff8750befc",
+    "report_sha256": "3cf441645bf93efe46257b523640740f8a9441b9766b2d4b957ecb375e5b7223",
+    "endian_sha256": "26a5915c389649d3c7fa38bc7f54d34c669d651132af70cd14b291e4ad5d0ca3",
+    "probe_sha256": "d3b5850dd8dc32f02c2ebf10912f3a1227d388209b07ce66a35a45eb18956f4f",
+    "verdict": "FAIL"
+  },
+  "provenance": "Source-only repair of the sealed pool-value admission defect: ARM and Thumb load-derived values require reachable all-path little-endian state before image-data interpretation. Primary public entries carry the existing LE ABI obligation; secondary labels and actual incoming edges do not reset it. Conditional paths join, explicit SETEND LE can restore state only before a new load, and opaque processor effects/computed transfers refuse the owner proof. Existing raw-SVC register invalidation, pointer/memory guards and immutable library evidence remain in force.",
+  "qualification": "Unadopted repair, not an independent review or gate/model revision. Current-image generation, integrated full suite, protection/accounting checks and fresh independent review remain required. No unchanged current-image geometry, new closure, original caller identity, source credit or adoption is asserted. Runtime object-backed v11 work is separate."
+}
