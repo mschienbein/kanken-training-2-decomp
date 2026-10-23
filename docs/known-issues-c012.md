@@ -5,6 +5,12 @@
 This candidate uses finalized main `69854e8e` (c011-r11, sequence 12), canonical
 ctypes1-r4 `93921aa2` through `eb37e93e`, and c012-r4 `4a9cf7b5`. There is one
 candidate, `config/candidates/c012.json`, with explicit **v6 / L1**, no U1.
+Adopted denominator **v14** is merged from main `4a4da5cd`; none of its 25
+reclassified owners appears in NEW, move, revised-unit or proposed-ledger claims.
+Every closure identity has byte-identical full catalogue rows and protected
+address/size/kind/isa/entries projections. Main authorizes carrying the observed
+pre-v14 proof after the source/header bindings are mechanically unchanged; no
+second full proof is run. Prepare still requires its two fresh full builds.
 The separate ctypes manifest is archived in the r5 fold evidence.
 
 - **29 NEW / 4,824 B** and **31 explicit accepted moves / 940 B**: **60 candidate

@@ -2,7 +2,29 @@
 
 Current entry on top.
 
-## 2026-10-23 (evening) — c011-r11 accepted; PAUSED by the user (current)
+## 2026-10-23 (night) — resumed with 2 subagents; denominator v14 adopted (current)
+
+**State:** `docs/STATUS.md` top entry. Accepted 2,770 functions / 301,020 B (seq 12, c011-r11);
+denominator **v14** (4,546 / 1,120,094 B); gates v1.20. Same host and inputs as below.
+**Concurrency cap: 2 subagents**, nested ones included (`scratch/integrator/rotation.py`
+ACTIVE_TARGET=2). Pipeline agents take slots before authors.
+
+Live state: `scratch/integrator/PIPELINE-LIVE-20261023.md`, top section "RESUMED". Order:
+1. **c012-r5** = main + ctypes1 r4 + c012 r4, on branch `c012-r5` (worktree
+   `scratch/worktrees/c012-r5`, base eb37e93e). C012R3Codex is doing the merge, the combined
+   manifest and the closure re-proof.
+   - Then Main runs `policy_lint.py`, interfaces, argcheck and prepare, followed by two reviewers.
+   - Before prepare, re-check that the committed manifest claims none of v14's 25 non-C owners.
+2. **c015 intake** from `scratch/integrator/HARVEST-LIST.json` and RESIDUE pending_intake.
+3. **Ladder:**
+   - a census supplement for rungs 1–3 (today's fa and tr batches);
+   - author batches for the remaining missing rungs;
+   - sweep-11 chunks (local, heavy slot).
+4. **Final accounting:**
+   - land `tools/residue.py` (`residue-table` at 667c2d5b, reviewed independently first);
+   - publish the residue table and the list of items blocked on the user in STATUS.
+
+## 2026-10-23 (evening) — c011-r11 accepted; PAUSED by the user
 
 **State:** `docs/STATUS.md` top entry. Accepted 2,770 functions / 301,020 B (seq 12, c011-r11);
 denominator v13-r2; gates v1.20. Same host and inputs as below. No new subagents are started;
