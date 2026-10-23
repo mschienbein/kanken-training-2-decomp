@@ -90,7 +90,7 @@ extern void *func_001c5b88(void *object);
 extern void func_001c6adc(void);
 extern void func_001db134(void *object);
 extern void func_00215ec4(volatile unsigned int *guard);
-extern void func_00216140(void *object, ObjectDestructor destroy, void (*image_base)(void));
+extern void func_00216140(void *storage);
 extern void func_00164ebc(void *object, ObjectDestructor destroy, void (*image_base)(void));
 /* [INFERENCE] Registration supplies one opaque object argument to each empty
  * destructor; no erased call establishes a more specific native class name. */
@@ -233,7 +233,7 @@ extern void func_001c31c0(struct AssetSlot **);
 extern void func_001c3618(struct AssetSlot **);
 extern void func_001c3854(struct AssetSlot **);
 extern void func_001c42e8(struct AssetSlot **);
-extern struct KernelHandleOwner *func_001c526c(struct KernelHandleOwner *);
+extern void *func_001c526c(void *storage);
 extern int func_001c55dc(int);
 extern int func_001c7a1c(void);
 extern void func_001d98f4(struct AudioModulationState *);
@@ -247,7 +247,7 @@ extern int func_001eaf70(struct Component001eaf70 *);
 extern void func_001eb1cc(struct W10DrawingInput *, unsigned int);
 extern void func_00176dc8(int index);
 extern void func_00181e44(void);
-extern void func_001acc18(void *object);
+extern void *func_001acc18(void *storage);
 extern int func_00177124(int mode);
 extern void func_0016d4f8(struct W10DrawingInput *controller);
 extern void func_0016fca0(int mode);

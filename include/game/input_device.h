@@ -112,14 +112,14 @@ extern void func_0012d0b8(void);
 extern void func_0012d0c4(void *argument);
 extern void func_0012d148(void);
 extern void func_0010c480(struct ResetStateOwner *owner);
-extern struct PoolList *func_0011ee7c(struct PoolList *list);
-extern struct PoolList *func_0011ee94(struct PoolList *list);
-extern struct PoolList *func_0011eeac(struct PoolList *list);
+extern void *func_0011ee7c(void *storage);
+extern void *func_0011ee94(void *storage);
+extern void *func_0011eeac(void *storage);
 extern struct InputBufferState *func_00123b38(struct InputBufferState *buffer);
-extern void func_0012d104(struct ThreadStartContext *start);
-extern struct PoolList *func_001342f4(struct PoolList *list);
-extern struct PoolList *func_00144970(struct PoolList *list);
-extern struct DisplayBufferState *func_0014ee44(struct DisplayBufferState *buffer);
+extern void func_0012d104(void *storage);
+extern void *func_001342f4(void *storage);
+extern void *func_00144970(void *storage);
+extern void *func_0014ee44(void *storage);
 extern void func_00152624(struct DirtyValueObject *object, const struct PackedPosition *value);
 #ifdef __cplusplus
 }

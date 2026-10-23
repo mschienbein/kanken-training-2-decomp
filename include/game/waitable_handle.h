@@ -39,7 +39,7 @@ extern "C" {
 extern void func_0019df84(struct WaitableHandle *completion);
 extern void func_0019dfbc(CtrResult result);
 extern void func_00185d74(struct WorkerThread *worker);
-extern void func_00149270(struct WorkerThread *worker);
+extern void func_00149270(void *argument, void *context);
 extern struct WorkerThread *func_00143ac8(struct WorkerThread *worker);
 extern struct WaitableHandle *func_001c52bc(struct WaitableHandle *object);
 extern struct LargeResourceElement *func_001c3100(struct LargeResourceElement *element);

@@ -1,7 +1,8 @@
 #include "game/functions.h"
 
-struct TimingState *func_001d3898(struct TimingState *state)
+void *func_001d3898(void *storage)
 {
+    struct TimingState *state = storage;
     func_0017e818(state);
     return state;
 }

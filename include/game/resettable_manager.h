@@ -16,7 +16,7 @@ struct ResettableManager : AllocatorBase {
 extern "C" {
 extern const unsigned data_00223bf0[];
 
-extern ResettableManager *func_00134170(ResettableManager *manager);
+extern void func_00134170(void *storage);
 }
 #endif
 

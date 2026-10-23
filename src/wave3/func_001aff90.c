@@ -1,3 +1,4 @@
-void func_001aff90(void)
+void func_001aff90(void *storage)
 {
+
 }

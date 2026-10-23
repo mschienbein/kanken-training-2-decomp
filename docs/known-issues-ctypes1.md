@@ -1,6 +1,53 @@
 # ctypes1 — rebased type composition and qualifications
 
-## c010-r8 rebase
+## Accepted-runtime callback follow-up
+
+The current candidate keeps **all 2,682 c010-r8 identities**, with **one NEW
+64-byte native reader and no moves**. Its input history is the initial rebase
+below, followed by the separately committed accepted-runtime callback repair.
+The final source delta against c010-r8 is **55 units and 18 headers**.
+
+The supplied closure has **81 rows**: 48 definite type/role mismatches, seven
+custom-family rows and 26 unmodeled passed-code candidates. Current disposition:
+
+- **32 fixed:** providers use their actual invoking array, cleanup or thread
+  function type. Concrete object recovery occurs only inside the real provider.
+  All live declarations and source callers are migrated; no callback cast,
+  adapter or specialized runtime signature is introduced.
+- **45 held:** ten natural exact-type variants mismatch and were restored
+  exactly, six further providers have native-owner/scene/byte-storage or
+  scalar/function-pointer transport conflicts, seven custom families lack a
+  canonical invocation contract, and 22 unmodeled rows remain unestablished.
+  These are known obligations, not waived ABI checks or withdrawn identities.
+- **Four not applicable:** two candidates have no accepted provider, and two
+  known atexit `r2` values are image-base/DSO handles, not callback parameters.
+
+In particular, `00142a54` now has the actual **`void *(void *)` generic
+initializer** at its original accepted C owner. The speculative native
+framebuffer constructor move, declaration and two constructor aliases are
+withdrawn. Its empty body returns the supplied storage and MATCHes four bytes.
+`0019f6ac` and its accepted array caller now share the genuine generic callback
+and size/count contract rather than a KernelHandleOwner-specific declaration.
+
+No generic signature is used to hide the bound native Pane color member,
+the quarantined scene cleanup, the incomplete large-resource storage family,
+or unresolved scalar/function-pointer thread argument transport. Held native
+and inherited representation issues still require supported closure/adjudication.
+No register forcing, extra memory access, fabricated return, no-op adapter or
+same-layout alias was used to make a mismatching callback pass.
+
+The final callback closure has **1,643 primary units / 1,682 functions**, all
+MATCH, plus 18 helper-only definitions in their real contexts. Actual attempts:
+**1,644 exit 0 and ten exit 1**; failed variants are immutable and inactive.
+The complete rewrite projection covers all 2,595 live primary units.
+
+Current authority is `scratch/integrator/ctypes1/r2/HANDOFF.json`, the complete
+81-row `RUNTIME-CALLBACK-DISPOSITIONS-r1.json`, `CALLBACK-FOLLOWUP-r1.json`,
+`PROPOSED-LEDGER-r2.json` and `LINKER-REWRITES-r2.json`. Remaining heavy commands
+are Main-only, after the c010 predecessor and held obligations are adjudicated.
+No heavy gate, prepare, acceptance registration, finalization or push was run.
+
+## Historical initial rebase — `f7ca72c5`
 
 This unaccepted candidate is based on c010-r8 source
 `f78df90632d86c1f48eb90b4ca2aacc5a23b50bc`. The complete `types-compose`

@@ -1,16 +1,7 @@
 {
   "schema_version": 1,
-  "note": "ctypes1 rebase r2 on c010-r8 sourcef78df906. All2682 proposed c010 identities survive. c010 callback/thread/atexit fixes and94 NEW-only deferrals take precedence. Competing native Voice/Record/CWAR, game display/TextBox, FilesystemGlobals and DSP transactions are held at exact c010 forms, never bridged by casts or facades. The native MenuScene family remains quarantined pending adopted U1. Same-path type revisions are source/header-bound, not repeated additions. The inherited CharStrmReader helper and SJIS provider are preserved exactly after honest safe variants mismatched; NEW reader uses the direct UTF16 provider only.",
+  "note": "ctypes1 rebase r2 on c010-r8 sourcef78df906. All2682 proposed c010 identities survive. c010 callback/thread/atexit fixes and94 NEW-only deferrals take precedence. Competing native Voice/Record/CWAR, game display/TextBox, FilesystemGlobals and DSP transactions are held at exact c010 forms, never bridged by casts or facades. The native MenuScene family remains quarantined pending adopted U1. Same-path type revisions are source/header-bound, not repeated additions. The inherited CharStrmReader helper and SJIS provider are preserved exactly after honest safe variants mismatched; NEW reader uses the direct UTF16 provider only. Accepted-runtime follow-up replaces the speculative native framebuffer constructor move with the actual generic void*(void*) initializer at its original accepted C owner; no constructor-name alias remains.",
   "units": [
-    {
-      "source": "src/wave2/func_00142a54.cpp",
-      "profile": "game",
-      "functions": [
-        "func_00142a54"
-      ],
-      "author": "types-compose",
-      "qualification": "Explicit prepared/accepted move or Main-approved native display/reader re-entry; no further deferral."
-    },
     {
       "source": "src/wave20/func_001f4cf8.cpp",
       "profile": "game",
@@ -21,11 +12,5 @@
       "qualification": "NEW re-entry of exactly the PF06-excluded reader: native Font::GetCharStrmReader(wchar_t) returns actual CharStrmReader member descriptors from data_0021c64c; native CP1252/UTF16 providers are bound through explicit moves, and UTF16 consumes the witnessed wchar_t producer API. This does not close the opaque game FontVTable/data_00223d98 or re-enter the four excluded wrappers. Unobserved historical callee identity remains [INFERENCE]."
     }
   ],
-  "moves": [
-    {
-      "function": "func_00142a54",
-      "from": "src/wave2/func_00142a54.c",
-      "to": "src/wave2/func_00142a54.cpp"
-    }
-  ]
+  "moves": []
 }
