@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_0010be58/func_0010be58.c",
+ "source_sha256": "eb9f07d402e029e66ff5b8e72981005f6af1098f5cd4f3143a153106110728bf",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "2c26525b363fcb7344ea91965cee3ebb6be448e79e3b04dfb138723a48b059e1",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v8",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_0010be58/result_failure_bits.c",
+   "source_sha256": "540d28dafc06a8d8a4e3f0c7a00c56949278353df65777f6e6a44373acfa9f13",
+   "object_sha256": "7527c209255795c34d6c1a6b7df374a821e81e9c902654633e56c022b1c0bc36"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "result_failure_bits"
+   ],
+   "section": "i.result_failure_bits",
+   "size": 8,
+   "object": "scratch/integrator/cmodels2/reproof-r4-r1/008-func_0010be58/extra-0-result_failure_bits.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_0010be58",
+   "address": 1097304,
+   "size": 60,
+   "candidate_size": 60,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 36,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe2000102",
+     "removed_callee": {
+      "symbols": [
+       "result_failure_bits"
+      ],
+      "section": "i.result_failure_bits",
+      "size": 8,
+      "object": "scratch/integrator/cmodels2/reproof-r4-r1/008-func_0010be58/extra-0-result_failure_bits.o"
+     }
+    }
+   ]
+  }
+ ]
+}

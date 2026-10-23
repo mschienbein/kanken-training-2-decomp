@@ -169,7 +169,7 @@ extern int func_00145f74(void (*)(void), void (*)(void), void (*)(void));
 extern void func_00147998(unsigned int);
 extern float func_001493a8(float);
 extern float func_001493c4(float);
-extern void func_00149424(void);
+extern float func_00149424(float phase);
 extern float func_00149428(float);
 extern struct W10DrawingInput *func_00149a98(struct W10DrawingInput *);
 extern unsigned int func_0014c338(void);

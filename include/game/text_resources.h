@@ -31,8 +31,17 @@ struct OwnedElementListW22E {
     struct OwnedElementW22E **entries;
     unsigned remaining;
 };
+struct W22TextResources;
+/* The address point has a null/VFE cell followed by the real self-destructor.
+ * [INFERENCE] Its eight-byte extent ends at the next table's eight-byte ABI
+ * header (data_00223518 - 8). No arity is invented for the null cell and no
+ * native class identity is asserted by this explicit callable-table view. */
+struct W22TextResourcesVTable {
+    unsigned null_entry;
+    void (*destroy)(struct W22TextResources *resources);
+};
 struct W22TextResources {
-    const void *vtable;
+    const struct W22TextResourcesVTable *vtable;
     short identifier;
     signed char kind, mode, state;
     unsigned char reserved09[3];
@@ -45,7 +54,7 @@ struct W22TextResources {
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern const unsigned data_00223508[];
+extern const struct W22TextResourcesVTable data_00223508;
 void func_0015f5e4(struct W22TextResources *resources);
 void func_0015f890(struct W22TextResources *resources);
 /* [INFERENCE] Armlink-inlined empty base-destruction identity remains unknown. */

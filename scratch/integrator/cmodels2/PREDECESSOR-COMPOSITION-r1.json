@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "observed_old_snapshot": {
+    "source": "src/checkpoint10/func_001e8810.c",
+    "source_sha256": "f22585d4d97d8eacbd2727b220de6e0eeb70c27224652aa5d09c7b8f2e801ad4",
+    "reproof_exit": 2,
+    "record": "scratch/integrator/cmodels2/REPROOF-r1.json",
+    "reason": "DisplayObject* object field passed to func_00183208(ResourceEvent*)"
+  },
+  "owner_reply": {
+    "owner": "C010R5Codex",
+    "status": "peer-reported, not imported or independently compiled by this agent",
+    "fact": "c010-r5 retains 001e8810, uses ResourceEvent* for W24CollectionElement.object and the canonical endpoint, and its full r5-r1 sequential sweep matched that unit.",
+    "instruction": "Do not import the unfinalized branch; record the older cmodels2 snapshot as a composition blocker."
+  },
+  "disposition": "No identity is deferred. Rebase onto the finalized corrected c010 transaction and rerun against that changed input; preserve this old-snapshot exit2.",
+  "affected_current_handoff": "scratch/integrator/cmodels2/HANDOFF.json"
+}

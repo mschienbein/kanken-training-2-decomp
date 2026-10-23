@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models2/menu_transition/func_00171208.cpp",
+ "source_sha256": "7a97308881ee69ab80e381d27ce71c73859351126a2cfbe58d3a2597dae405c1",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "74c2b8796bb80c4630ff0353d4e55669a1a52cbf76fa1198a34747d3297991cb",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v8",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/func_00172e00/transition-C-setter.c",
+   "source_sha256": "bf4e133663a1409a9d510a86e83fb461ce888d6e3c021532dd4be95c7265a4c3",
+   "object_sha256": "7d195f881629044b56939b46a37af5c6b9e0a38628c0a7935db8fc6e89b2385a"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "set_completion"
+   ],
+   "section": "i.set_completion",
+   "size": 8,
+   "object": "scratch/integrator/cmodels2/reproof-r4-r1/002-func_00171208/extra-0-transition-C-setter.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00171208",
+   "address": 1511944,
+   "size": 96,
+   "candidate_size": 96,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 4,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801034",
+     "removed_callee": {
+      "symbols": [
+       "set_completion"
+      ],
+      "section": "i.set_completion",
+      "size": 8,
+      "object": "scratch/integrator/cmodels2/reproof-r4-r1/002-func_00171208/extra-0-transition-C-setter.o"
+     }
+    }
+   ]
+  }
+ ]
+}

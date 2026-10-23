@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/wave4/func_00185d1c.c",
+ "source_sha256": "313256efc02b6951ec031c244ba85f83617ff97b9cb560f3777373a8168006c2",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "36e96273aee2e6684c63ca8b55c13401e1afa7a4af803a0e39860d0c7f4eb5e6",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v8",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r4/src/models/object_registration/object_manager.c",
+   "source_sha256": "f3b2a6dc4ab54f5c40ca7fe609fad087fe28d96268ef9530fcd2a1816a66bd13",
+   "object_sha256": "42384b98b4f92c4d626e7fe05401646264899f15664d8e44be794cc3e5d0c287"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_object_manager_cleanup"
+   ],
+   "section": "i.register_object_manager_cleanup",
+   "size": 4,
+   "object": "scratch/integrator/cmodels2/reproof-r4-r1/031-func_00185d1c/extra-0-object_manager.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00185d1c",
+   "address": 1596700,
+   "size": 88,
+   "candidate_size": 88,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 52,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_object_manager_cleanup"
+      ],
+      "section": "i.register_object_manager_cleanup",
+      "size": 4,
+      "object": "scratch/integrator/cmodels2/reproof-r4-r1/031-func_00185d1c/extra-0-object_manager.o"
+     }
+    },
+    {
+     "offset": 60,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

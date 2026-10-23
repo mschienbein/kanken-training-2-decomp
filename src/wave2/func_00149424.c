@@ -1,4 +1,5 @@
 #include "game/functions.h"
-void func_00149424(void)
+float func_00149424(float phase)
 {
+    return phase;
 }

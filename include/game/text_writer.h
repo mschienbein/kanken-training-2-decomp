@@ -26,11 +26,7 @@ struct TextBounds {
     float left, top, right, bottom;
 };
 
-/* The matching getter bodies use the native font vtable and writer fields.
- * This is their actual const receiver, not an alias of a padded W20 view. */
 extern "C" {
-float func_0017a690(const nw::font::WideTextWriter *writer);
-float func_0017a6c8(const nw::font::WideTextWriter *writer);
 extern void func_00192720(void *destination, const void *source, unsigned size);
 extern unsigned func_00186afc(struct TextWriterState *writer, struct TextBounds *bounds,
                           const unsigned short **cursor, int length);
