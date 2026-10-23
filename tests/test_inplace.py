@@ -2358,7 +2358,7 @@ class UnreferencedDestructorModelTest(unittest.TestCase):
                 self.assertEqual(getattr(selected, key), value)
         self.assertTrue(selected.unreferenced_destructors)
         for model in inplace.LINKER_MODELS:
-            if model in (self.MODEL, "armlink5-inline-branchnop-v10"):
+            if model in (self.MODEL, "armlink5-inline-branchnop-v10", "armlink5-inline-branchnop-v11"):
                 continue
             self.assertFalse(inplace.linker_model(model).unreferenced_destructors)
             obj, mem, catalogue, names = self.fixture()

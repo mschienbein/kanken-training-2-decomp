@@ -47,16 +47,31 @@ def run_grid(ctx, sources: list[Path], grid: dict, out: Path) -> dict:
     rewrites: dict[str, dict[str, list[dict]]] = {}  # function -> pair -> linker rewrites (non-empty only)
     failures: dict[str, dict[str, str]] = {}  # pair -> {source: reason}
     pairs = []
+    section_rewrites: dict[str, dict[str, list[dict]]] = {}
+    special_members: dict[str, dict[str, list[dict]]] = {}
+    comparison_inputs: dict[str, dict[str, dict]] = {}
+    checked = getattr(ctx.model, "checked_destructor_removal", False)
     for compiler in grid["compilers"]:
         for fname, flags in grid["flagsets"].items():
             pair = f"{compiler}:{fname}"
             pairs.append(pair)
             profile = toolchain.Profile(pair, compiler, tuple(flags))
-            for src in sources:
-                obj = out / "obj" / compiler / fname / (src.stem + ".o")
+            for source_index, src in enumerate(sources):
+                directory = out / "obj" / compiler / fname
+                if checked:
+                    directory /= str(source_index)  # same-stem probes must keep distinct bound objects
+                obj = directory / (src.stem + ".o")
                 try:
-                    toolchain.compile_source(profile, src.resolve(), obj)
+                    if checked:
+                        toolchain.compile_source(profile, src.resolve(), obj, cache=False)
+                    else:
+                        toolchain.compile_source(profile, src.resolve(), obj)
                     results = ctx.compare(obj)
+                    if checked:
+                        comparison_inputs.setdefault(src.as_posix(), {})[pair] = ctx.evidence_inputs(profile, src.resolve(), obj)
+                    if getattr(ctx, "section_rewrites", []):
+                        section_rewrites.setdefault(src.as_posix(), {})[pair] = ctx.section_rewrites
+                        special_members.setdefault(src.as_posix(), {})[pair] = ctx.removed_special_members
                 except (toolchain.ToolchainError, inplace.LinkError, image_mod.ImageError) as e:
                     failures.setdefault(pair, {})[src.as_posix()] = str(e).splitlines()[0]
                     continue
@@ -74,7 +89,10 @@ def run_grid(ctx, sources: list[Path], grid: dict, out: Path) -> dict:
         if names and p not in failures and all(rows[n].get(p) == "Y" for n in names)
     ]
     return {"pairs": pairs, "functions": names, "results": rows, "failures": failures, "matching_all": qualifying,
-            "linker_model": ctx.model.name, "linker_rewrites": rewrites}
+            "linker_model": ctx.model.name, "linker_rewrites": rewrites,
+            **({"linker_section_rewrites": section_rewrites, "removed_special_members": special_members}
+               if section_rewrites else {}),
+            **({"comparison_inputs": comparison_inputs} if comparison_inputs else {})}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -108,6 +126,8 @@ def main(argv: list[str] | None = None) -> int:
         "sources": {s.as_posix(): hashlib.sha256(s.read_bytes()).hexdigest() for s in args.sources},
         "grid": grid, "image_sha256": ctx.image.sha256,
         **{k: result[k] for k in ("results", "failures", "matching_all", "linker_model", "linker_rewrites")},
+        **{key: result[key] for key in ("linker_section_rewrites", "removed_special_members", "comparison_inputs")
+           if key in result},
     }
     args.out.mkdir(parents=True, exist_ok=True)
     (args.out / "compid.json").write_text(json.dumps(record, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")

@@ -673,16 +673,17 @@ class ObjectFile:
             if elf["e_machine"] != "EM_ARM" or elf["e_type"] != "ET_REL":
                 raise LinkError(f"{path}: not an ARM relocatable object")
             self.sections: dict[int, Section] = {}
-            # Keep even zero-sized allocated group members as closure witnesses. They do not
-            # enter the frozen placement model, but v8 must not silently discard their group.
+            # Zero-sized allocated sections cannot be placed, but can still retain dependencies.
+            # Preserve them separately for v11; frozen models keep their original placement/census.
+            self.dependency_sections: dict[int, Section] = {}
             allocated_indices: set[int] = set()
             self.section_groups: list[tuple[int, str, set[int | str]]] = []
             for i, s in enumerate(elf.iter_sections()):
                 if s["sh_flags"] & SH_FLAGS.SHF_ALLOC:
                     allocated_indices.add(i)
-                if s["sh_flags"] & SH_FLAGS.SHF_ALLOC and s["sh_size"]:
                     nobits = s["sh_type"] == "SHT_NOBITS"
-                    self.sections[i] = Section(
+                    destination = self.sections if s["sh_size"] else self.dependency_sections
+                    destination[i] = Section(
                         i, s.name, b"" if nobits else s.data(), s["sh_size"], nobits,
                         bool(s["sh_flags"] & SH_FLAGS.SHF_EXECINSTR), bool(s["sh_flags"] & SH_FLAGS.SHF_WRITE),
                         align=max(1, s["sh_addralign"]),
@@ -696,13 +697,14 @@ class ObjectFile:
                             (SH_FLAGS.SHF_MASKOS | SH_FLAGS.SHF_MASKPROC, "OS/processor section flags"),
                         ) if s["sh_flags"] & flag),
                     )
+            allocated = self.sections | self.dependency_sections
             symtab = elf.get_section_by_name(".symtab")
             self.symbols = [
                 Symbol(sym.name, sym["st_value"], sym["st_size"], sym["st_info"]["type"], sym["st_info"]["bind"], sym["st_shndx"])
                 for sym in symtab.iter_symbols()
             ]
             for sym in symtab.iter_symbols():
-                section = self.sections.get(sym["st_shndx"])
+                section = allocated.get(sym["st_shndx"])
                 if section is None:
                     continue
                 if sym.name.startswith("__tagsym$$"):
@@ -716,7 +718,7 @@ class ObjectFile:
                             or s["sh_type"] == "SHT_LLVM_LINKER_OPTIONS")]
             if elf["e_entry"]:
                 metadata.append("ELF entry point")
-            for section in self.sections.values():
+            for section in allocated.values():
                 section.retention += tuple(f"uninterpreted {name}" for name in metadata)
             for s in elf.iter_sections():
                 if s["sh_type"] == "SHT_GROUP":
@@ -728,22 +730,22 @@ class ObjectFile:
                             flags, signature, {member for member in words[1:] if member in allocated_indices}))
                         if flags & 1:  # Frozen COMDAT identity; other group semantics are not modeled.
                             for member in words[1:]:
-                                if member in self.sections:
-                                    self.sections[member].comdat = signature
+                                if member in allocated:
+                                    allocated[member].comdat = signature
             for s in elf.iter_sections():
                 if not isinstance(s, RelocationSection):
                     continue
                 if s.is_RELA():
                     raise LinkError(f"{path}: RELA section {s.name} unsupported")
-                target = self.sections.get(s["sh_info"])
+                target = allocated.get(s["sh_info"])
                 if target is None:
                     continue  # relocations of non-allocated sections (debug_frame)
                 for r in s.iter_relocations():
                     target.relocs.append(Reloc(r["r_offset"], r["r_info_type"], self.symbols[r["r_info_sym"]]))
         for sym in self.symbols:
-            if sym.name in ("$a", "$t", "$d") and isinstance(sym.shndx, int) and sym.shndx in self.sections:
-                self.sections[sym.shndx].mapping.append((sym.value, sym.name))
-        for sec in self.sections.values():
+            if sym.name in ("$a", "$t", "$d") and isinstance(sym.shndx, int) and sym.shndx in allocated:
+                allocated[sym.shndx].mapping.append((sym.value, sym.name))
+        for sec in allocated.values():
             sec.mapping.sort()
 
     def __repr__(self) -> str:
@@ -757,12 +759,17 @@ class ObjectFile:
         """
         merged = cls.__new__(cls)
         merged.sections, merged.symbols = {}, []
+        merged.dependency_sections = {}
         merged.section_owners, merged.section_objects = {}, {}
         merged.section_groups = []
         symbols_by_object, indices_by_object = [], []
         definitions = {}
+        dependency_index = sum(len(obj.sections) for obj in objects) + 1
         for owner, obj in enumerate(objects):
             indices = {index: len(merged.sections) + i + 1 for i, index in enumerate(obj.sections)}
+            for index in getattr(obj, "dependency_sections", {}):
+                indices[index] = dependency_index
+                dependency_index += 1
             indices_by_object.append(indices)
             symbols = {}
             for sym in obj.symbols:
@@ -775,11 +782,12 @@ class ObjectFile:
             for flags, signature, members in getattr(obj, "section_groups", ()):
                 merged.section_groups.append((
                     flags, signature, {indices.get(index, f"UNALLOCATED_{owner}_{index}") for index in members}))
-            for index, section in obj.sections.items():
+            for index, section in (obj.sections | getattr(obj, "dependency_sections", {})).items():
                 new_index = indices[index]
                 linked = (indices.get(section.linked_section, f"UNALLOCATED_{owner}_{section.linked_section}")
                           if section.link_order else 0)
-                merged.sections[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked)
+                destination = merged.sections if index in obj.sections else merged.dependency_sections
+                destination[new_index] = replace(section, index=new_index, relocs=[], linked_section=linked)
                 merged.section_owners[new_index] = owner
                 merged.section_objects[new_index] = labels[owner] if labels is not None else str(getattr(obj, "path", f"object[{owner}]"))
             for sym in obj.defined_globals():
@@ -793,13 +801,14 @@ class ObjectFile:
                     definitions[sym.name] = new_sym
         for owner, obj in enumerate(objects):
             symbols = symbols_by_object[owner]
-            for index, section in obj.sections.items():
+            for index, section in (obj.sections | getattr(obj, "dependency_sections", {})).items():
                 new_index = indices_by_object[owner][index]
                 for rel in section.relocs:
                     sym = symbols[id(rel.symbol)]
                     if sym.shndx == "SHN_UNDEF" and sym.name in definitions:
                         sym = definitions[sym.name]
-                    merged.sections[new_index].relocs.append(replace(rel, symbol=sym))
+                    destination = merged.sections if new_index in merged.sections else merged.dependency_sections
+                    destination[new_index].relocs.append(replace(rel, symbol=sym))
         return merged
 
     def defined_functions(self) -> list[Symbol]:
@@ -1493,22 +1502,29 @@ class InPlaceLinker:
             return None
         return callee.data
 
+    def _reference_sections(self, obj: ObjectFile) -> dict[int, Section]:
+        """V11 keeps every allocated root/dependency source without changing legacy placement."""
+        if self.model.checked_destructor_removal:
+            return obj.sections | getattr(obj, "dependency_sections", {})
+        return obj.sections
+
     def _retention_sections(self, obj: ObjectFile) -> dict[int, tuple[str, ...]]:
         """DUI0474K §4.3 roots survive independently of whether their calls inline."""
-        retained = {index: section.retention for index, section in obj.sections.items() if section.retention}
+        sections = self._reference_sections(obj)
+        retained = {index: section.retention for index, section in sections.items() if section.retention}
         for sym in obj.symbols:
-            if sym.shndx in obj.sections and sym.name.startswith("__tagsym$$"):
+            if sym.shndx in sections and sym.name.startswith("__tagsym$$"):
                 retained[sym.shndx] = (*retained.get(sym.shndx, ()), sym.name)
         for selector, reason in self.retention_roots.items():
-            matches = {index for index, section in obj.sections.items() if fnmatchcase(section.name, selector)}
+            matches = {index for index, section in sections.items() if fnmatchcase(section.name, selector)}
             matches.update(sym.shndx for sym in obj.symbols
-                           if sym.shndx in obj.sections and fnmatchcase(sym.name, selector))
+                           if sym.shndx in sections and fnmatchcase(sym.name, selector))
             if not matches:
                 raise LinkError(f"uninterpretable retention root {selector!r}: no supplied symbol/section")
             for index in matches:
                 retained[index] = (*retained.get(index, ()), reason)
-        groups = {obj.sections[index].comdat for index in retained} - {None}
-        for index, section in obj.sections.items():
+        groups = {sections[index].comdat for index in retained} - {None}
+        for index, section in sections.items():
             if section.comdat in groups and index not in retained:
                 retained[index] = ("retained COMDAT group",)
         return retained
@@ -1599,6 +1615,89 @@ class InPlaceLinker:
                     raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory removed-callee copies")
         return removed
 
+    @staticmethod
+    def _check_destructor_mapping(section: Section, symbols: list[Symbol]) -> None:
+        """V11: mapping starts describe complete, instruction-aligned ARM/Thumb ranges."""
+        markers = [sym for sym in symbols if sym.name in ("$a", "$t", "$d")]
+        if (section.align & (section.align - 1)
+                or any(sym.size % (2 if _is_thumb_function(sym) else 4) for sym in symbols if sym.kind == "STT_FUNC")
+                or sorted((sym.value, sym.name) for sym in markers) != section.mapping
+                or any(sym.kind != "STT_NOTYPE" or sym.bind != "STB_LOCAL" or sym.size for sym in markers)):
+            raise LinkError(f"{section.name}: U1 has invalid mapping-symbol metadata")
+        ends = [offset for offset, _ in section.mapping[1:]] + [section.size]
+        for (start, kind), end in zip(section.mapping, ends):
+            alignment = {"$a": 4, "$t": 2, "$d": 1}[kind]
+            if start % alignment or (end - start) % alignment:
+                raise LinkError(f"{section.name}: U1 has misaligned or incomplete mapping ranges")
+
+    def _check_destructor_copy(self, obj: ObjectFile, first: Section, second: Section,
+                               proven_targets: dict[int, tuple] | None = None) -> None:
+        """V11: equal local spellings are not equal resolved relocation destinations."""
+        sections = self._reference_sections(obj)
+        proven_targets = proven_targets or {}
+
+        def target_identity(rel: Reloc, source: Section) -> tuple:
+            sym = rel.symbol
+            if rel.type == R_ARM_V4BX and source.executable and not source.link_order:
+                return ("architecture-marker",)
+            metadata = (sym.bind, sym.kind, sym.value, sym.size)
+            if sym.shndx in sections:
+                # Even byte-identical ordinary local objects are distinct, unproved identities.
+                return ("defined-section", proven_targets.get(sym.shndx, sym.shndx), *metadata)
+            if sym.shndx == "SHN_ABS":
+                return ("absolute", *metadata)
+            if sym.shndx == "SHN_UNDEF" and sym.bind in ("STB_GLOBAL", "STB_WEAK"):
+                target = self.resolver.lookup(sym.name)
+                if target is not None:
+                    return ("original", target.address, target.thumb, *metadata)
+                return ("external", sym.name, *metadata)
+            raise LinkError(f"{source.name}: U1 COMDAT relocation has an unproved target identity")
+
+        def symbols(section: Section) -> list[tuple]:
+            return sorted((sym.name, sym.value, sym.size, sym.kind, sym.bind)
+                          for sym in obj.symbols if sym.shndx == section.index)
+
+        def identity(section: Section) -> tuple:
+            return (section.data, section.size, section.nobits, section.executable, section.writable,
+                    section.mapping, section.align, section.merge_strings, section.entsize,
+                    section.elf_type, section.link_order, proven_targets.get(section.linked_section, section.linked_section),
+                    [(rel.offset, rel.type, target_identity(rel, section)) for rel in section.relocs],
+                    symbols(section))
+
+        if identity(first) != identity(second):
+            raise LinkError(f"COMDAT {first.comdat} {first.name} has contradictory U1 relocation targets or copies")
+
+    def _check_destructor_group_copies(self, obj: ObjectFile, groups: set[str]) -> None:
+        """Every allocated group copy has the same independently proved code/companion roles."""
+        sections = self._reference_sections(obj)
+        roles = {}
+        for index, section in sections.items():
+            if section.comdat not in groups:
+                continue
+            if index in self._removed_unwind:
+                owner = sections[self._removed_unwind[index]]
+                roles[index] = ("own-unwind", owner.name, section.name)
+            else:
+                roles[index] = ("code", section.name)
+        targets = {index: (sections[index].comdat, role) for index, role in roles.items()}
+        witnesses = {}
+        for _, signature, indices in getattr(obj, "section_groups", ()):
+            if signature not in groups:
+                continue
+            copy = {}
+            for index in indices:
+                role = roles[index]
+                if role in copy:
+                    raise LinkError(f"COMDAT {signature}: duplicate allocated member role is unproved")
+                copy[role] = sections[index]
+            first = witnesses.setdefault(signature, copy)
+            if first.keys() != copy.keys():
+                raise LinkError(f"COMDAT {signature}: contradictory allocated group-copy closure")
+            for role in first:
+                self._check_destructor_copy(obj, first[role], copy[role], targets)
+        if groups - witnesses.keys():
+            raise LinkError("U1 COMDAT lacks an allocated group-copy witness")
+
     def _unreferenced_destructors(self, obj: ObjectFile, names: dict[str, int]) -> dict[int, dict]:
         """U1 preflight: recognize D0 metadata and original null-slot evidence, never infer liveness."""
         if not self.model.unreferenced_destructors:
@@ -1639,6 +1738,8 @@ class InPlaceLinker:
                     or any(not 0 <= offset < section.size or kind not in ("$a", "$t", "$d")
                            for offset, kind in section.mapping)):
                 raise LinkError(f"{section.name}: unsupported U1 deleting-destructor section metadata")
+            if self.model.checked_destructor_removal:
+                self._check_destructor_mapping(section, symbols)
             for sym in symbols:
                 if sym is destructor:
                     continue
@@ -1703,7 +1804,7 @@ class InPlaceLinker:
         return removed
 
     def _check_unreferenced_destructors(self, obj: ObjectFile) -> None:
-        """Check every live allocated reference/group; v10 alone admits proven own-unwind closure."""
+        """Check every live allocated reference/group; v10/v11 admit proven own-unwind closure."""
         if not self._unreferenced_sections:
             return
         dead = self._removed_sections.keys() | self._removed_unwind.keys()
@@ -1711,7 +1812,7 @@ class InPlaceLinker:
         if self.model.unreferenced_destructor_unwind:
             targets |= {index for index, owner in self._removed_unwind.items() if owner in self._unreferenced_sections}
         names = {name: index for index, row in self._unreferenced_sections.items() for name in row["symbols"]}
-        for section in obj.sections.values():
+        for section in self._reference_sections(obj).values():
             if section.index in dead:
                 continue  # existing R1/v8 rules have already proved this source absent
             if section.link_order and section.linked_section in targets:
@@ -1730,7 +1831,7 @@ class InPlaceLinker:
                         f"{obj.sections[index].name} is still referenced (relocation type {rel.type})")
         removable = dead | self._unreferenced_sections.keys()
         groups = {obj.sections[index].comdat for index in self._unreferenced_sections} - {None}
-        members = {signature: {index for index, sec in obj.sections.items() if sec.comdat == signature}
+        members = {signature: {index for index, sec in self._reference_sections(obj).items() if sec.comdat == signature}
                    for signature in groups}
         for flags, signature, indices in getattr(obj, "section_groups", ()):
             if signature in groups or indices & self._unreferenced_sections.keys():
@@ -1749,11 +1850,16 @@ class InPlaceLinker:
             if key is None:
                 continue
             prior = copies.setdefault(key, section)
+            if self.model.checked_destructor_removal:
+                self._check_destructor_copy(obj, prior, section)
+                continue
             relocations = lambda sec: [(rel.offset, rel.type, rel.symbol.name, rel.symbol.value, rel.symbol.kind)
                                        for rel in sec.relocs]
             if (section.data != prior.data or section.mapping != prior.mapping
                     or relocations(section) != relocations(prior)):
                 raise LinkError(f"COMDAT {key[0]} {key[1]} has contradictory U1 deleting-destructor copies")
+        if self.model.checked_destructor_removal:
+            self._check_destructor_group_copies(obj, groups)
 
     @staticmethod
     def _compact_unwind_prefix_size(word: int) -> int | None:
@@ -1778,7 +1884,7 @@ class InPlaceLinker:
         companions: dict[int, int] = {}
         exidx_by_owner: dict[int, int] = {}
         incoming: dict[int, list[tuple[Section, Reloc]]] = {}
-        for section in obj.sections.values():
+        for section in self._reference_sections(obj).values():
             for rel in section.relocs:
                 if rel.type != R_ARM_V4BX:
                     incoming.setdefault(rel.symbol.shndx, []).append((section, rel))
@@ -1867,7 +1973,7 @@ class InPlaceLinker:
             exidx_by_owner[owner] = section.index
 
         # Section links are dependencies too, even without an allocated relocation.
-        for section in obj.sections.values():
+        for section in self._reference_sections(obj).values():
             if (section.link_order and section.linked_section in (removed | companions)
                     and section.index not in companions):
                 raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")
@@ -1913,7 +2019,7 @@ class InPlaceLinker:
         rewrites = {}
         used = set()
         contexts = {}
-        for section in obj.sections.values():
+        for section in self._reference_sections(obj).values():
             if section.index in self._removed_unwind:
                 continue
             for rel in section.relocs:
@@ -2003,6 +2109,8 @@ class InPlaceLinker:
         unwind_owners = (self._removed_sections | self._unreferenced_sections
                          if self.model.unreferenced_destructor_unwind else self._removed_sections)
         self._removed_unwind = self._removed_unwind_sections(obj, names_to_address or {}, unwind_owners)
+        if self.model.checked_destructor_removal:
+            self._check_unreferenced_destructors(obj)  # preflight before placement can consume any witness
         placements = self.place(obj, names_to_address or {})
         removed_rewrites = self._removed_call_rewrites(obj, placements)
         self._check_unreferenced_destructors(obj)

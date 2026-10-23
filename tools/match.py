@@ -31,6 +31,8 @@ import inplace  # noqa: E402
 import toolchain  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
+HARNESS = ("tools/match.py", "tools/inplace.py", "tools/linker_models.py", "tools/image.py",
+           "tools/toolchain.py", "tools/ctrfmt.py", "tools/display.py", "tools/compid.py", "tools/collect.py")
 
 
 def sha256(path: Path) -> str:
@@ -102,7 +104,7 @@ class Context:
         if catalogue["image_sha256"] != self.image.sha256:
             raise inplace.LinkError("catalogue was generated from a different code.bin")
         self.functions = image_mod.functions_by_address(catalogue)
-        names = image_mod.load_names()
+        names = image_mod.load_names(image_mod.NAMES)
         if names_path is not None:
             names = merge_names(names, image_mod.load_names(names_path))
         self.resolver = inplace.Resolver(self.functions, names)
@@ -112,13 +114,57 @@ class Context:
         self.removed_callees: list[dict] = []
         self.removed_special_members: list[dict] = []
         self.section_rewrites: list[dict] = []
+        self.decision_inputs = {}
+        if self.model.checked_destructor_removal:
+            self.decision_inputs = {
+                "linker_model": self.model.name, "literal_model": self.literal_model,
+                "names_path": image_mod.NAMES.as_posix(),
+                "names_sha256": sha256(image_mod.NAMES) if image_mod.NAMES.is_file() else None,
+                "proposed_names": None if names_path is None else {
+                    "path": names_path.as_posix(), "sha256": sha256(names_path)},
+                "resolver_sha256": hashlib.sha256(json.dumps(names, sort_keys=True).encode()).hexdigest(),
+                "catalogue_sha256": sha256(catalogue_path), "image_sha256": self.image.sha256,
+                "exheader_sha256": sha256(image_mod.ROOT / "orig/exheader.bin"),
+                "title_sha256": sha256(image_mod.ROOT / "config/title.json"), "bss": list(self.image.bss),
+                "profiles_sha256": sha256(toolchain.PROFILES),
+                "toolchain_lock_sha256": sha256(ROOT / "toolchain.lock.json"),
+                "harness_sha256": {path: sha256(ROOT / path) for path in HARNESS},
+            }
 
     def __repr__(self) -> str:
         return f"Context(functions={len(self.functions)})"
 
+    def evidence_inputs(self, profile: toolchain.Profile, source: Path, obj: Path,
+                        profiles_path: Path | None = None) -> dict:
+        """V11 comparison evidence closes every config, source/header, object and harness input."""
+        if not self.model.checked_destructor_removal:
+            return {}
+        dependencies = obj.with_suffix(".d")
+        if not dependencies.is_file():
+            raise inplace.LinkError("v11 comparison requires the compiler dependency manifest")
+        headers = toolchain._parse_depend(dependencies.read_text(encoding="utf-8"), source)
+        missing = next((path for path in headers if not path.is_file()), None)
+        if missing is not None:
+            raise inplace.LinkError("v11 comparison dependency header is unavailable")
+        effective = {"name": profile.name, "compiler": profile.compiler, "flags": list(profile.flags)}
+        return {
+            **self.decision_inputs,
+            "source": source.as_posix(), "source_sha256": sha256(source),
+            "object": obj.as_posix(), "object_sha256": sha256(obj),
+            "dependency_manifest_sha256": sha256(dependencies),
+            "headers_sha256": {path.as_posix(): sha256(path) for path in sorted(set(headers))},
+            "compiler_sha256": sha256(toolchain.armcc_exe(profile.compiler)),
+            "effective_profile": effective,
+            "effective_profile_sha256": hashlib.sha256(json.dumps(effective, sort_keys=True).encode()).hexdigest(),
+            "proposed_profiles": None if profiles_path is None else {
+                "path": profiles_path.as_posix(), "sha256": sha256(profiles_path)},
+        }
+
     def compare(self, obj_path: Path, extra_objects: list[Path] | None = None) -> list[Comparison]:
         """Link the object in place; one result row per catalogued function it defines, listing
         the branches the linker model wrote as armlink's optimisations (`linker_rewrites`)."""
+        self.literal_rebindings, self.removed_callees = [], []
+        self.removed_special_members, self.section_rewrites = [], []
         obj = inplace.ObjectFile(obj_path)
         if extra_objects:
             obj = inplace.ObjectFile.combine([obj, *(inplace.ObjectFile(path) for path in extra_objects)])
@@ -171,20 +217,33 @@ class Context:
 def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir: Path, show: int,
         model: str = inplace.DEFAULT_LINKER_MODEL, names_path: Path | None = None,
         extra_sources: list[Path] | None = None,
-        literal_model: str = inplace.DEFAULT_LITERAL_MODEL) -> int:
+        literal_model: str = inplace.DEFAULT_LITERAL_MODEL, *, profiles_path: Path | None = None) -> int:
     ctx = Context(catalogue_path, model, names_path, literal_model)
     if names_path is not None:
         print(f"note: proposed names overlay {names_path} (not config/names.json); a MATCH here needs those bindings adopted")
     obj_path = out_dir / (source.stem + ".o")
-    toolchain.compile_source(profile, source, obj_path)
+    if ctx.model.checked_destructor_removal:
+        toolchain.compile_source(profile, source, obj_path, cache=False)
+    else:
+        toolchain.compile_source(profile, source, obj_path)
     companions = []
     for index, extra in enumerate(extra_sources or []):
         companion = out_dir / f"extra-{index}-{extra.stem}.o"
-        toolchain.compile_source(profile, extra, companion)
+        if ctx.model.checked_destructor_removal:
+            toolchain.compile_source(profile, extra, companion, cache=False)
+        else:
+            toolchain.compile_source(profile, extra, companion)
         companions.append(companion)
     results = ctx.compare(obj_path, companions)
     if not results:
         raise inplace.LinkError("candidate defines no surviving catalogued functions to compare")
+    inputs = {}
+    if ctx.model.checked_destructor_removal:
+        inputs = {
+            **ctx.evidence_inputs(profile, source, obj_path, profiles_path),
+            "extra_inputs": [ctx.evidence_inputs(profile, path, obj, profiles_path)
+                             for path, obj in zip(extra_sources or [], companions)],
+        }
     for r in results:
         label = {"match": "MATCH   ", "match_extent_differs": "EXTENT  ", "mismatch": "MISMATCH"}[r["status"]]
         detail = {
@@ -216,6 +275,7 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         "functions": [{k: v for k, v in r.items() if not k.startswith("_")} for r in results],
         **({"removed_special_members": ctx.removed_special_members, "linker_rewrites": ctx.section_rewrites}
            if ctx.removed_special_members else {}),
+        **inputs,
     }
     (out_dir / (source.stem + ".result.json")).write_text(json.dumps(record, indent=1) + "\n", encoding="utf-8", newline="\n")
     return 0 if all(r["status"] == "match" for r in results) else 1
@@ -255,8 +315,9 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     out_dir = args.out or ROOT / "scratch/match" / args.source.stem / args.profile
     try:
+        extra = {"profiles_path": args.profiles} if args.profiles is not None else {}
         return run(args.source.resolve(), profiles[args.profile], args.catalogue, out_dir, args.show, args.linker_model,
-                   args.names, [path.resolve() for path in args.extra_source], args.literal_model)
+                   args.names, [path.resolve() for path in args.extra_source], args.literal_model, **extra)
     except (inplace.LinkError, toolchain.ToolchainError, image_mod.ImageError) as e:
         print(f"error: {e}", file=sys.stderr)
         out_dir.mkdir(parents=True, exist_ok=True)

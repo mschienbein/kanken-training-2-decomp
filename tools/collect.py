@@ -52,6 +52,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--extra-source", type=Path, action="append", default=[],
                         help="same-build helper copied with all callers, which must share one profile (repeatable)")
     args = parser.parse_args(argv)
+    if inplace.linker_model(args.linker_model).unreferenced_destructors:
+        print("error: collection refuses U1 linker models without a per-comparison section-action receipt; "
+              "use match.py/build.py for explicit U1 evidence", file=sys.stderr)
+        return 2
     if args.candidates.exists():
         print(f"error: {args.candidates} exists", file=sys.stderr)
         return 1

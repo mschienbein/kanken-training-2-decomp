@@ -15,12 +15,12 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **`armlink5-inline-branchnop-v9`** retains its strict no-own-exidx
-U1 rule and receipt as unadopted history. The new experimental opt-in
-**`armlink5-inline-branchnop-v10`** adds v8's exclusive own-unwind closure for U1 D0 owners;
-it does not alter v9 or any adopted model. Its proposed gate revision is
-`scratch/integrator/linker-unref/GATES-DRAFT.md`, pending independent implementation/exact-text
-review. `docs/GATES.md` remains frozen v1.19; implementation availability is not adoption.
+The recorded experimental **v9/v10** implementations remain selectable, immutable and
+**unadopted**; their independent review at `scratch/review/linker-v10/codex/REPORT.md`
+sealed **FAIL** (F01–F05). The new experimental opt-in **`armlink5-inline-branchnop-v11`**
+corrects their U1 dependency census, mapping/copy proofs and reporting/hash closure under a
+new identity. Its proposed gate revision is `scratch/integrator/linker-unref/GATES-DRAFT.md`,
+pending independent implementation/exact-text review. `docs/GATES.md` remains frozen v1.19.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -69,8 +69,9 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v6` | frozen opt-in, adopted gates v1.18; PASS_WITH_QUALIFICATIONS | all v4 rules plus proven full-section function-entry aliases and entity-wide removal preflight; independently bound names retain frozen placement/complete-extent checks without borrowing a sibling binding |
 | `armlink5-inline-branchnop-v7` (88f5c38) | **retired**, never adopted | its own-exidx exception could partially remove a live COMDAT group and accepted truncated compact extab while rejecting complete zero-terminated entries; sealed review `scratch/review/exidx-v7/REVIEW.md`, FAIL |
 | `armlink5-inline-branchnop-v8` | frozen opt-in, adopted gates v1.19; PASS_WITH_QUALIFICATIONS | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
-| `armlink5-inline-branchnop-v9` | recorded unadopted history, selectable | v8 plus U1: unbound, witnessed, compiler-generated D0 sections with no live allocated reference or partial-group removal; no vtable/exidx exemption |
-| `armlink5-inline-branchnop-v10` | experimental opt-in, **not adopted** | v9 plus v8's exclusive own-exidx/extab closure for independently eligible U1 D0 owners; all other live references still refuse |
+| `armlink5-inline-branchnop-v9` | recorded unadopted history, selectable; review FAIL | v8 plus U1: unbound, witnessed D0 removal without own-unwind exemption; recorded implementation omits zero-sized dependency sources, exact mapping alignment and relocation-target identity |
+| `armlink5-inline-branchnop-v10` | recorded unadopted history, selectable; review FAIL | v9 plus v8's own-exidx/extab closure for U1 owners; inherits F01/F02/F05 and incomplete matcher/grid reporting closure (F03/F04) |
+| `armlink5-inline-branchnop-v11` | experimental opt-in, **not adopted** | v10 U1/own-companion design plus complete allocated dependency/root witnesses, exact mapping ranges, normalized copy-target identity, matcher hashes and explicit action reporting/refusal in every consumer |
 
 ## Function-entry alias identity (v6 only)
 
@@ -429,6 +430,96 @@ The same immutable snapshot/include-root override as v9 was used; no source flag
 Commands and every action are recorded in `scratch/integrator/linker-unref/evidence-v10.json`;
 the full result is `scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.result.json`.
 This private MATCH does not adopt v10, grant credit, or replace independent gate review.
+
+## Complete U1 dependency and evidence proof (experimental v11)
+
+The sealed review of `f9c35805` found one blocker and four major defects; its exact
+counterexamples and FAIL remain in `scratch/review/linker-v10/codex/`. Neither v9 nor v10
+is corrected under its recorded identity. Only **`armlink5-inline-branchnop-v11`** adds:
+
+- **F01 — complete allocated census:** `ObjectFile.dependency_sections` preserves zero-sized
+  allocated sections separately from frozen output placement. Symbols, relocations, roots,
+  section links, group membership and defining-object identity survive parsing and combination.
+  V11's retention, U1 all-reference, R1 proof and own-unwind incoming/link-order censuses
+  include them. A retained or unplaced zero-sized NONE/link-order source can keep D0,
+  exidx or extab live; no source is omitted merely because it has no bytes to place.
+  Unknown/unproved zero-sized group members veto complete group elimination. Earlier models
+  continue to use their original section/reference sets.
+  An early U1 census precedes placement witness inference, then the final census follows
+  R1's actual call-removal proofs; provisional candidates never publish elimination actions.
+- **F02 — exact mapping ranges:** every mapping marker is local zero-size `STT_NOTYPE`,
+  exactly represented by the section map. ARM starts and range lengths are multiples of
+  four; Thumb starts/ranges multiples of two; data may be byte-aligned. The entry ISA,
+  function extent alignment, ordering, unique offsets, complete ranges and power-of-two
+  section alignment must agree.
+  Odd or incomplete code ranges are unsupported, not evidence for U1.
+- **F05 — relocation-target identity:** copies compare full section metadata, bytes, mapping
+  and each relocation's type/offset plus normalized target identity, binding, kind, value and
+  size. A definition's actual combined section identity is mandatory: equal local names,
+  equal local data bytes or a matching unproved COMDAT key do not establish one target.
+  Shared resolved definitions, agreeing absolute targets and agreeing global extern identities
+  are supported. Unproved/local-undefined and contradictory targets refuse in either order.
+  Every allocated group copy also has the same proved code/own-companion roles, complete
+  metadata and companion contents. Only already-proved own-companion structural targets
+  may normalize through those roles; arbitrary local/COMDAT destinations never do.
+  Defined-symbol names, binding, kind, value and extent must agree across copies as well.
+- **F03 — matcher input closure:** successful v11 results bind canonical names plus overlay,
+  canonical and proposed profile inputs and effective profile, catalogue/image/exheader/layout,
+  title/toolchain lock/compiler, source/object/dependency manifest and every dependency header,
+  and all decision/reporting harness modules. Helper inputs receive the same closure.
+  Fresh compilation supplies the required dependency manifest; missing manifests/headers
+  refuse rather than publishing an unbound action. The model id alone is not an implementation
+  hash. Full-build receipts retain their existing source/object/config/harness closure.
+- **F04 — every reporting consumer:** compiler-grid records retain each source/pair's
+  `linker_section_rewrites`, `removed_special_members`/companions and v11 `comparison_inputs`.
+  V11 gives same-stem source probes distinct object paths so one receipt cannot overwrite
+  another comparison's hash-bound object.
+  A failed comparison cannot inherit a previous source's actions. `collect.py` explicitly
+  refuses every U1 model before writing candidates because its collection schema has no
+  per-comparison section-action receipt. Match/build/prepare preserve the existing explicit
+  U1 action closure; the permuter remains on its fixed non-U1 model.
+
+The regression helper `tests/elf_fixture.py` adapts the review's independent synthetic ELF
+writer; `tests/test_unreferenced_v11.py` reuses its actual parsed-ELF counterexamples instead
+of bypassing the reader with only dataclass mutations. It covers zero-sized retained sources
+to code/index/extab, both combined-object orders and cross-object extern dependencies,
+rooted zero-sized group witnesses, invalid mapping metadata, distinct same-spelled local
+relocation targets (including equal-byte locals), exact shared-target controls and reporting
+closure/dispatch. V9/v10 receipts, failed review and private historical matches remain evidence
+of those implementations only, not approval of this correction.
+
+V11 retains v8's adopted R1 baseline plus the v10-shaped U1 exclusive own-unwind rule; no
+general table stripping or dead-code elimination is added. Existing transition review
+obligations also apply to v10→v11: every current R1 caller, L1 owning-unit function and
+credited function in each U1-owning unit is reopened. The revised draft requires independent
+exact-text/implementation review and a recorded gate revision before a checkpoint selects v11.
+No checkpoint, historical selection, adopted rule or default is retroactively changed.
+
+Executed v11 measurements for this proposal: **166 focused tests, exit 0, OK**, including
+parsed-ELF review counterexamples/positive controls, frozen-model regressions,
+matcher/grid/collector dispatch, receipt attribution and v10→v11 transition closure.
+All **eight exact sealed F01/F02/F05 ELF fixtures** reused from the reviewer directory
+refuse under v11 without elimination actions; six reused valid fixtures still match and
+report their actions (probe exit 0). Reviewer files were read only. Unrecorded test counts
+in the inherited work-in-progress are not claimed as evidence.
+
+Both real cases use the same immutable `d8aef63a` source/header/name snapshot and frozen
+`game` flags/compiler with `--show 0`, explicit v11/L1 and the proposed names overlay:
+
+- **MenuResetScene attempt008: exit 0**, D1 matches all **100 bytes** at `0x001acbb4`.
+  Exactly one `unused_deleting_destructor`, `target: null`, removes D0 section **1 / 108 B**
+  and its own exidx section **4 / 8 B**. There is no extab or per-function branch rewrite.
+  The receipt binds the canonical names, profile inputs/effective profile, nine harness
+  modules, fifty dependency headers and the remaining full input closure.
+- **MenuScene attempt006: exit 2**, now directly at v11's early all-reference census:
+  `.constdata__ZTV9MenuScene+0xc` still refers to D0 through ABS32. No action is published.
+  This is not a reclassification of v10's earlier RTTI-placement refusal.
+
+Exact argv/cwd/exits, reused-fixture hashes and every action are recorded in
+`scratch/integrator/linker-unref/evidence-v11.json`; full receipts are
+`scratch/integrator/linker-unref/real-menu-reset-v11-r2/func_001acbb4.result.json` and
+`scratch/integrator/linker-unref/real-menu-scene-v11-r2/func_00174480.result.json`.
+No full suite, full build, whole-ledger audit, model adoption or new credit is claimed.
 
 ## Sources
 
