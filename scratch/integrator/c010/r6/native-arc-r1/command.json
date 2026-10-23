@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "-c",
+    "import sys,json\nfrom pathlib import Path\nsys.path.insert(0,\"tools\")\nimport toolchain\nfrom inplace import ObjectFile\nout=Path(\"scratch/integrator/c010/r6/native-arc-r1/archive_access.o\")\ntry:\n toolchain.compile_source(toolchain.load_profiles()[\"middleware\"],Path(\"src/checkpoint10/archive_access.cpp\"),out)\n print(json.dumps({\"defined_functions\":[s.name for s in ObjectFile(out).defined_functions()]}))\nexcept toolchain.ToolchainError as e:\n print(str(e));sys.exit(2)\n"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6",
+  "exit": 0,
+  "output": "{\"defined_functions\": [\"_ZN2nw3lyt19ArcResourceAccessor11GetResourceEjPKcPj\", \"_ZN2nw3lyt19ArcResourceAccessorD0Ev\", \"_ZN2nw3lyt19ArcResourceAccessorD1Ev\", \"_ZN2nw3lyt19ArcResourceAccessorD2Ev\"]}\n"
+}

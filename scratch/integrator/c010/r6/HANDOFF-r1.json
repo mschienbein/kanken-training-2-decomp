@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "status": "C010_R6_REMEDIATED_CANDIDATE_COMPLETE_AFFECTED_MATCH_WITH_EXPLICIT_NEW_DEFERRALS",
+  "agent": "C010R5Codex",
+  "branch": "c010-r6",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6",
+  "source_commit": "c851c232",
+  "integration_commit": "53ee02d4",
+  "immutable_parent_c010_r5": "0c62c8939d39d1697e91aa8f735c764b6abfc73a",
+  "immutable_parent_worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5",
+  "prepared_c009_r6": "8e488abcc4b106f2e1023ea120734fcc390b6da5",
+  "prepared_source": "f47bb29f",
+  "gate_revision": "v1.19",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "counts": {
+    "candidate_units": 425,
+    "candidate_claims": 436,
+    "NEW_functions": 424,
+    "NEW_bytes": 40480,
+    "moves": 12,
+    "moved_bytes": 192,
+    "deferral_units": 82,
+    "deferral_functions": 83,
+    "deferral_bytes": 7132,
+    "proposed_units": 2629,
+    "proposed_functions": 2693,
+    "proposed_bytes": 289852,
+    "prepared_predecessor_functions": 2269,
+    "prepared_predecessor_bytes": 249372,
+    "preserved_prepared_identities": 2269,
+    "helper_only_units": 24
+  },
+  "all_2269_prepared_identities_preserved": true,
+  "accepted_list_owner_restoration": {
+    "functions": [
+      "func_0018d868",
+      "func_00191154",
+      "func_00191178"
+    ],
+    "cancelled_move_rows": 3,
+    "removed_NATIVE_unit": "src/checkpoint10/ut_LinkList.cpp",
+    "qualification": "Exact prepared C providers preserved; no full native list cutover claimed. Remaining twelve explicit moves survive."
+  },
+  "review_dispositions": [
+    {
+      "id": "C010R5-F01",
+      "disposition": "GENUINE_SHARED_OWNER_FIX",
+      "functions": [
+        "func_001ab65c",
+        "func_001bd9f0"
+      ]
+    },
+    {
+      "id": "C010R5-F02",
+      "disposition": "NEW_ONLY_DEPENDENCY_DEFERRAL",
+      "deferred_NEW": [
+        "func_0017e3d8"
+      ]
+    },
+    {
+      "id": "C010R5-F03",
+      "disposition": "NEW_ONLY_FACTORY_DEPENDENCY_DEFERRAL",
+      "deferred_NEW": [
+        "func_001ce8f4",
+        "func_001ce940",
+        "func_001ce8b8"
+      ]
+    },
+    {
+      "id": "C010R5-F04",
+      "disposition": "GENUINE_NATIVE_INSTALLED_PROVIDER",
+      "functions": [
+        "func_001ccf20"
+      ]
+    },
+    {
+      "id": "C010R5-F05",
+      "disposition": "GENUINE_ONE_TYPE_PER_GLOBAL",
+      "functions": [
+        "func_00120dc4",
+        "func_0010bc70",
+        "func_00106e70",
+        "func_00107ce4",
+        "func_001f596c",
+        "func_0020e344",
+        "func_002069c0",
+        "func_00212518",
+        "func_00121520",
+        "func_0012159c",
+        "func_00121d28"
+      ]
+    },
+    {
+      "id": "C010R5-F06",
+      "disposition": "RESTORE_PROTECTED_PREPARED_FORMS_AND_DEFER_NEW_NATIVE_DEPENDENTS",
+      "accepted_identities_restored_unchanged": [
+        "func_0018d868",
+        "func_00191154",
+        "func_00191178"
+      ],
+      "deferred_NEW": [
+        "func_00185bb0",
+        "func_0014d1ec",
+        "func_00138f38",
+        "func_001d2c44",
+        "func_001cc1d4",
+        "func_001312d4",
+        "func_0014bc70"
+      ]
+    },
+    {
+      "id": "C010R5-F07",
+      "disposition": "FOUR_GENUINE_OWNER_REPAIRS_THREE_NEW_ONLY_DEFERRALS",
+      "fixed_functions": [
+        "func_00167654",
+        "func_00180d9c",
+        "func_001d1c10",
+        "func_0018c5f0"
+      ],
+      "deferred_NEW": [
+        "func_00171a98",
+        "func_001a78a4",
+        "func_00182994"
+      ]
+    }
+  ],
+  "added_NEW_deferrals": {
+    "functions": [
+      "func_001312d4",
+      "func_00138f38",
+      "func_0014bc70",
+      "func_0014d1ec",
+      "func_00171a98",
+      "func_0017e3d8",
+      "func_00182994",
+      "func_00185bb0",
+      "func_001a78a4",
+      "func_001cc1d4",
+      "func_001ce8b8",
+      "func_001ce8f4",
+      "func_001ce940",
+      "func_001d2c44"
+    ],
+    "functions_count": 14,
+    "units": 14,
+    "bytes": 1512
+  },
+  "c009_owned_deferrals_unchanged": [
+    "func_00131540",
+    "func_001f4920",
+    "func_001efcec",
+    "func_001f4994",
+    "func_00117854"
+  ],
+  "reproof": {
+    "outer_exit": 0,
+    "MATCH_primaries": 2605,
+    "expected_primaries": 2605,
+    "required_MATCH_functions": 2693,
+    "helper_only_definitions_in_context": 24,
+    "per_unit_exit_counts": {
+      "0": 2605
+    },
+    "scope_complete": true
+  },
+  "records": {
+    "candidate_manifest": {
+      "path": "config/candidates/c010.json",
+      "sha256": "dfbcca12a4ebee7f24340e431dacaf43a80c5e8ad8e54b49eda5b15f7576e97c"
+    },
+    "dry_ledger": {
+      "path": "scratch/integrator/c010/r6/dry-matches-r1.json",
+      "sha256": "9ff9ddf6a3e628c9ea7aaf170fd02287093f3ef1c0b92c39117a51400db0f20d"
+    },
+    "source_context": {
+      "path": "scratch/integrator/c010/r6/SOURCE-CONTEXT-r2.json",
+      "sha256": "7179d1e0ed3145fa6ac652f3e5641ba23feea7566060159af8718dece22c622c"
+    },
+    "complete_scope": {
+      "path": "scratch/integrator/c010/r6/complete-match-scope-r2.json",
+      "sha256": "e9f3c726027d223ab048a54c0bc1bcb9bbf9ddbefd036ed8e2f1ae8bb6a702a2"
+    },
+    "reproof_summary": {
+      "path": "scratch/integrator/c010/r6/REPROOF-SUMMARY-r1.json",
+      "sha256": "bb37d18a7c3b82eb191b875d862c05c86ad511d517622f3bf2056c9ec9738257"
+    },
+    "reproof_results": {
+      "path": "scratch/integrator/c010/match-r6-r2/results.json",
+      "sha256": "28e83b336a85c72606ea3061409cb22afe4959a414b493a43caa985a2f5e81ea"
+    },
+    "complete_rewrite_projection": {
+      "path": "scratch/integrator/c010/match-r6-r2/linker-rewrites.json",
+      "sha256": "447628731965a4a2fecadd219d746577d56c17d9b2c197c9092593cbf466e956"
+    },
+    "deferrals": {
+      "path": "scratch/integrator/c010/r6/NEW-DEFERRALS-r1.json",
+      "sha256": "e8fac3bd286201f454f5bf52808ece02f416d992695759350cb8f0c2eb9e0623"
+    },
+    "finding_remediation": {
+      "path": "scratch/integrator/c010/r6/REMEDIATION-r1.json",
+      "sha256": "d71ed8946407f141dc68ab9f8a63c5f193dec120be8794d8fb95a2235b2fb32f"
+    },
+    "known_issues": {
+      "path": "docs/known-issues-c010.md",
+      "sha256": "bf9c0f38ea693d4ddc5c72b2ca6e854641b754f0df1234d0ddd3ad149312e5ec"
+    },
+    "remaining_heavy_commands": {
+      "path": "scratch/integrator/c010/r6/REMAINING-HEAVY-COMMANDS-r1.json",
+      "sha256": "943300966a747bf1b1c6c87a2b082204bcb1327938686db8d35ff7f737da4240"
+    },
+    "historical_actual_exits": {
+      "path": "scratch/integrator/c010/r6/REPROOF-ATTEMPTS-r1.json",
+      "sha256": "0d3c9fdd4dba4f41a303a45039082cecba6bbe7e5c8bca8b7de507eeea5d368d"
+    },
+    "deferral_boundary": {
+      "path": "scratch/integrator/c010/r6/DEFERRAL-BOUNDARY-r1.json",
+      "sha256": "c19519a25cb5a18d6f4033181cacaa7a20d82e74ddc17bd429527388cf548ae8"
+    }
+  },
+  "remaining_blockers": [
+    "Applicable c009-r6 predecessor finalization under frozen evidence.",
+    "Inherited accepted scene/allocator/Pane-Material/sound/legacy-retail-font prerequisites require supported Main closure/adjudication; NEW-only deferrals are not a waiver.",
+    "Main integrates clean committed source, executes/adjudicates whole-ledger interfaces and complete-rewrite argcheck, prepares two fresh complete builds plus suite, then obtains two independent hash-bound reviews before finalize/push.",
+    "Any integrated source/header/profile/name/catalogue/composition drift requires a new affected closure and new immutable record/output names."
+  ],
+  "not_run": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "main_only": [
+    "main",
+    "accept/ records",
+    "canonical ledger/history",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "records_policy": "Immutable historical FAIL and every actual attempted exit are retained. Current r6 authority is exactly the records referenced here, not old r5 or focused partial projections."
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "PASS_COMPLETE_PROPOSED_LEDGER_SEQUENTIAL_MATCH_ONLY",
+  "source_commit": "c851c232",
+  "outer_exit": 0,
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6",
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "scratch/integrator/c010/match_scope.py",
+    "--run",
+    "match-r6-r2",
+    "--scope",
+    "scratch/integrator/c010/r6/complete-match-scope-r2.json"
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_primaries": 2605,
+  "completed_primaries": 2605,
+  "MATCH_primaries": 2605,
+  "per_unit_exit_counts": {
+    "0": 2605
+  },
+  "required_functions": 2693,
+  "required_function_bytes": 289852,
+  "all_helpers_in_natural_context": 24,
+  "helper_recipe_contexts": 27,
+  "paused": false,
+  "results": "scratch/integrator/c010/match-r6-r2/results.json",
+  "results_sha256": "28e83b336a85c72606ea3061409cb22afe4959a414b493a43caa985a2f5e81ea",
+  "rewrite_projection": "scratch/integrator/c010/match-r6-r2/linker-rewrites.json",
+  "rewrite_projection_sha256": "447628731965a4a2fecadd219d746577d56c17d9b2c197c9092593cbf466e956",
+  "rewrite_projection_scope_complete": true,
+  "rewrite_projection_expected_units": 2605,
+  "rewrite_projection_matched_units": 2605,
+  "scope_sha256": "e9f3c726027d223ab048a54c0bc1bcb9bbf9ddbefd036ed8e2f1ae8bb6a702a2",
+  "source_context": "scratch/integrator/c010/r6/SOURCE-CONTEXT-r2.json",
+  "source_context_sha256": "7179d1e0ed3145fa6ac652f3e5641ba23feea7566060159af8718dece22c622c",
+  "runner_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "historical_exits": "scratch/integrator/c010/r6/REPROOF-ATTEMPTS-r1.json",
+  "boundary": "No original payload/disassembly/encodings stored. No interfaces/argcheck/full builds/suite/prepare/registration/finalize/push. This is source candidate proof, not acceptance or manual type approval."
+}
