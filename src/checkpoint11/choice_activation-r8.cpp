@@ -23,7 +23,7 @@ static void initialize_choice_values(int *values)
     memcpy(values, initial_values, sizeof(initial_values));
 }
 
-void func_001b376c(ChoiceController *controller, int index)
+void func_001b376c(ChoiceGridState *controller, int index)
 {
     ChoiceEntry *entry = &controller->entries[index];
     if (entry->objects[0]) {

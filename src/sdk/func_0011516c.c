@@ -1,7 +1,7 @@
 #include "ctr/ipc.h"
+#include "game/applet.h"
 
 extern const CtrHandle data_0021c5cc;
-extern void func_00192afc(CtrResult result, const void *location);
 
 static __forceinline CtrResult CloseSession(CtrHandle *session)
 {

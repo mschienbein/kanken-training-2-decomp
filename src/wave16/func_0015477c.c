@@ -10,7 +10,6 @@ struct TaskPool {
 
 #include <stddef.h>
 
-extern void func_001835b8(struct AudioVoiceGroup *group);
 extern void func_00183550(struct AudioVoiceGroup *group);
 
 int func_0015477c(struct TaskPool *pool, int priority)

@@ -1,5 +1,6 @@
 #ifndef GAME_APPLICATION_CONFIGURATION_H
 #define GAME_APPLICATION_CONFIGURATION_H
+#ifdef __cplusplus
 #include "game/sdk_init.h"
 #include "game/runtime.h"
 /* [INFERENCE] Four-byte application configuration block and consumed roles. */
@@ -10,7 +11,15 @@ extern "C" {
 Result func_0011375c(unsigned char *state);
 void func_001136a4(unsigned char state);
 unsigned func_00121764(void *destination, unsigned size, unsigned block);
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 int func_0010bff4(void);
 int func_0010c0a4(void);
+#ifdef __cplusplus
 }
+#endif
 #endif
