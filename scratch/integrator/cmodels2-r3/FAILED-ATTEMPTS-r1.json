@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "attempt_count": 6,
+  "all_attempts_retained": true,
+  "failures": [
+    {
+      "source": "src/checkpoint10/func_00135c10.c",
+      "source_sha256": "8391d40c30c7892686528fd0f046ffc6897e058488de76ccd3dbe7ee88159fe6",
+      "exit_code": 2,
+      "receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_00135c10/func_00135c10.result.json",
+      "receipt_sha256": "cddbc90b85d536c706ae22f586fa5feb381ff40094e9f505f98113c84ffd79d1",
+      "log": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_00135c10/command.log",
+      "log_sha256": "0f82575a7e8f8674043bd1e5fd1d2bbe3000e43eb3177e2d64eb12294eb9d831",
+      "scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r1.json",
+      "input_source_commit": "cee7419",
+      "reason": "armcc failed (1) on func_00135c10.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_00135c10.c\", line 16: Error:  #136: struct \"RendererShutdownState\" has no field \"buffer\"\n      bss_0049d93c.buffer = records;\n                   ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_00135c10.c\", line 17: Error:  #136: struct \"RendererShutdownState\" has no field \"count\"\n      bss_0049d93c.count = count;\n                   ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_00135c10.c\", line 18: Error:  #136: struct \"RendererShutdownState\" has no field \"capacity\"\n      bss_0049d93c.capacity = 0;\n                   ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_00135c10.c: 0 warnings, 3 errors\n",
+      "replacement_current_receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r2/checkpoint10/func_00135c10/func_00135c10.result.json",
+      "replacement_scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r2.json"
+    },
+    {
+      "source": "src/checkpoint10/func_001773cc.c",
+      "source_sha256": "3752deb525dd1a92a62d5d9dd16c41b77471527bf8cb970582b5b433fd77edd3",
+      "exit_code": 2,
+      "receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_001773cc/func_001773cc.result.json",
+      "receipt_sha256": "9ad77ac87ff1364218421ed047f3351353522e1fd45dea85c7ae20b5579b201b",
+      "log": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_001773cc/command.log",
+      "log_sha256": "bf71c8878c3e87dd27f77fc34301c7837642ad729ef6620d5f1d2c1808b5fda2",
+      "scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r1.json",
+      "input_source_commit": "cee7419",
+      "reason": "armcc failed (1) on func_001773cc.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_001773cc.c\", line 5: Error:  #147-D: declaration is incompatible with \"void func_00170dc0(struct MessageLayout *, int, int)\" (declared at line 49 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/include/game/messages.h\")\n  extern void func_00170dc0(struct DisplayHandle **handles, int index, int enabled);\n              ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_001773cc.c: 0 warnings, 1 error\n",
+      "replacement_current_receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r2/checkpoint10/func_001773cc/func_001773cc.result.json",
+      "replacement_scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r2.json"
+    },
+    {
+      "source": "src/checkpoint10/func_00196564.c",
+      "source_sha256": "1b6413e63a0e948560e512caf75ca33dcc3def332a727834439dd18ab0b4b2d7",
+      "exit_code": 2,
+      "receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_00196564/func_00196564.result.json",
+      "receipt_sha256": "1c6c50ccd462c6caba7a6b2e7f97513131ec735c4e3f8e27368e22ef44bb36eb",
+      "log": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_00196564/command.log",
+      "log_sha256": "9f0bbc785848a9f4c1da0e401202b72d436d17ceac8ecf851accaad5654d851d",
+      "scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r1.json",
+      "input_source_commit": "cee7419",
+      "reason": "armcc failed (1) on func_00196564.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_00196564.c\", line 12: Error:  #136: struct \"ShaderRegistry\" has no field \"current\"\n      int location = func_00191b08(bss_002d4250.programs[bss_002d4250.current], \"uModelView\");\n                                                                      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_00196564.c: 0 warnings, 1 error\n",
+      "replacement_current_receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r2/checkpoint10/func_00196564/func_00196564.result.json",
+      "replacement_scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r2.json"
+    },
+    {
+      "source": "src/checkpoint10/func_001965a4.c",
+      "source_sha256": "b7230c280db76ec2c83102e6025f90f7cef35205a8607c6b917980c48191017c",
+      "exit_code": 2,
+      "receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_001965a4/func_001965a4.result.json",
+      "receipt_sha256": "a547bca19effe3b4d3706de2a12d61a0ec1565bf6acab5b49a7fa6bf3a88b2a2",
+      "log": "scratch/integrator/cmodels2-r3/runs/bounded-r1/checkpoint10/func_001965a4/command.log",
+      "log_sha256": "7cc5d9e513fa8c38ed839b272ffea64aef4747a641d1dca3d8eebf408e927cf9",
+      "scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r1.json",
+      "input_source_commit": "cee7419",
+      "reason": "armcc failed (1) on func_001965a4.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_001965a4.c\", line 12: Error:  #136: struct \"ShaderRegistry\" has no field \"current\"\n      int location = func_00191b08(bss_002d4250.programs[bss_002d4250.current], \"uProjection\");\n                                                                      ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure/src/checkpoint10/func_001965a4.c: 0 warnings, 1 error\n",
+      "replacement_current_receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r2/checkpoint10/func_001965a4/func_001965a4.result.json",
+      "replacement_scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r2.json"
+    },
+    {
+      "source": "src/models2/counted_resources/func_001e5d38.cpp",
+      "source_sha256": "158809ed798b9ee6193ec1cb55684163787bf2b36acbfee19a8bac17515080a3",
+      "exit_code": 2,
+      "receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r1/models2/counted_resources/func_001e5d38/func_001e5d38.result.json",
+      "receipt_sha256": "6976ae08e4d6fa2293f851e868f5bcfd1ed920be456fdfa45343dae8f3bdfaa9",
+      "log": "scratch/integrator/cmodels2-r3/runs/bounded-r1/models2/counted_resources/func_001e5d38/command.log",
+      "log_sha256": "c4721a94d6336887fc5ee4ab54556aae6edd414c58efddf0240f23ea9512f2e1",
+      "scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r1.json",
+      "input_source_commit": "ba2301d",
+      "reason": "i.w19_item_value: candidate-only callee has no inlined call; cannot remove it",
+      "replacement_current_receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r2/models2/counted_resources/func_001e5d38/func_001e5d38.result.json",
+      "replacement_scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r2.json"
+    },
+    {
+      "source": "src/models2/training_visibility/func_00169018.c",
+      "source_sha256": "dad803d4f926f04f74fcf7f9b061d0bf2ca43ac9bb0acfb2a03510c6869e0985",
+      "exit_code": 2,
+      "receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r1/models2/training_visibility/func_00169018/func_00169018.result.json",
+      "receipt_sha256": "5d85e9691e01a1704178f5cc3950010401c42d84219839350194dc6491a3cf6f",
+      "log": "scratch/integrator/cmodels2-r3/runs/bounded-r1/models2/training_visibility/func_00169018/command.log",
+      "log_sha256": "709b6ee4538682016c2d5d0de3fc0e5e19a1db3f0c076207a0a966a261c3c478",
+      "scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r1.json",
+      "input_source_commit": "ba2301d",
+      "reason": "i.r41279_item_identifier: candidate-only callee has no inlined call; cannot remove it",
+      "replacement_current_receipt": "scratch/integrator/cmodels2-r3/runs/bounded-r2/models2/training_visibility/func_00169018/func_00169018.result.json",
+      "replacement_scope": "scratch/integrator/cmodels2-r3/bounded-match-scope-r2.json"
+    }
+  ],
+  "no_unchanged_retry": "All six follow-up contexts change actual source/header/recipe inputs. Old scopes, logs, receipts and source commit identities are retained unchanged."
+}

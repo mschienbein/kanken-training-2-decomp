@@ -1,0 +1,49 @@
+{
+  "function": "func_00169018",
+  "size": 144,
+  "source": "scratch/research/residual-families/signed-byte/erased-property-getter/func_00169018.c",
+  "source_sha256": "4759eed6c36b3720eb69e3518525f7feee8998b69b998737887bda2b165debb7",
+  "extra_sources": [
+    {
+      "source": "scratch/research/residual-families/signed-byte/erased-property-getter/signed_key.c",
+      "sha256": "fea6f318a7b672477562828243cc33876e39a735687886ed7a3962e158ba141e"
+    }
+  ],
+  "profile": "game",
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "/home/michael/code/kanken-training-2-decomp/scratch/research/residual-families/signed-byte/erased-property-getter/func_00169018.c",
+    "--extra-source",
+    "/home/michael/code/kanken-training-2-decomp/scratch/research/residual-families/signed-byte/erased-property-getter/signed_key.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v8",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/scratch/cm2/late-00169018"
+  ],
+  "exit_code": 0,
+  "stdout": "MATCH    func_00169018 @ 0x169018 size 0x90/0x90 [armlink5-inline-branchnop-v8: 1 inline_insn]\nREMOVED  menu_item_signed_key (8 bytes; i.menu_item_signed_key)\n",
+  "stderr": "",
+  "receipt": "scratch/cm2/late-00169018/func_00169018.result.json",
+  "receipt_sha256": "968b35d8776fde359ff51c4547504ef3db17824ee76066151fb3f4156ed5df71",
+  "reason": null,
+  "outcomes": [
+    {
+      "name": "func_00169018",
+      "address": 1478680,
+      "size": 144,
+      "candidate_size": 144,
+      "status": "match",
+      "first_diff": null
+    }
+  ]
+}

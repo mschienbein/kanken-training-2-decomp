@@ -1,16 +1,6 @@
-#include "game/functions.h"
-struct CountedResource {
-    unsigned char reserved00[6];
-    signed char category;
-    unsigned char reserved07[5];
-    int count;
-    unsigned char reserved10[4];
-    signed char weight;
-    unsigned char reserved15[7];
-    const unsigned char *values;
-};
+#include "game/item_entries.h"
 
-int func_0015f5b0(const struct CountedResource *resource)
+int func_0015f5b0(const struct W8ItemEntry *resource)
 {
     int total = 0;
     int remaining = resource->count;

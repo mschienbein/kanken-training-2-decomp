@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "status": "BLOCKED_DO_NOT_RUN",
+  "owner": "Main",
+  "blocking_findings": [
+    "CM2-F01",
+    "CM2-F03"
+  ],
+  "not_run_here": [
+    "whole-ledger interfaces/argcheck",
+    "whole-ledger emitted ownership",
+    "suite",
+    "full builds",
+    "prepare",
+    "review/finalize",
+    "push"
+  ],
+  "prerequisites": [
+    "A genuine exact native scene/root transaction must close CM2-F01/F03 while preserving every accepted identity; adopted U1 alone does not close the root key/emission boundary.",
+    "Recompute actual source/header/model/helper and callback review closure on the final integrated parent. The proposed ledger is metadata, not a gate result.",
+    "If a U1 owner becomes admissible, select v18 globally and re-prove/reopen every listed R1/L1/U1 owner; per-unit proof labels cannot override one checkpoint-global selection."
+  ],
+  "commands": [
+    {
+      "purpose": "Whole-ledger interfaces and unchecked C++ adjudication after blockers close",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "--matches",
+        "scratch/integrator/cmodels2-r5/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/cmodels2-r5/interfaces-final.json"
+      ]
+    },
+    {
+      "purpose": "Whole-ledger argcheck and complete typed/control-flow adjudication",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/cmodels2-r5/PROPOSED-LEDGER.json",
+        "--json",
+        "scratch/integrator/cmodels2-r5/argcheck-final.json"
+      ]
+    },
+    {
+      "purpose": "Main-only prepare under a freshly reserved checkpoint name after all blockers close; two fresh full builds/suite/full identity and evidence closure",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "cmodels2-r5",
+        "--candidates",
+        "config/candidates/cmodels2.json",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--allow-unchecked-cpp"
+      ],
+      "checkpoint_name_requires_Main_reservation": true,
+      "selection_requires_refresh_if_U1_scope_changes": true
+    }
+  ],
+  "heavy_commands_exercised": []
+}

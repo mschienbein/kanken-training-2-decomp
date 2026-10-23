@@ -1,0 +1,38 @@
+{
+  "source": "scratch/integrator/model-rows-next.json",
+  "source_sha256": "8daf75ac14f9c07754914f05cd5672307c43c1e71028462ecf06d5afcc6eeff1",
+  "captured_utc": "2026-10-18T01:05:00.675814+00:00",
+  "content": {
+    "purpose": "model-qualified author witnesses discovered after ModelSweep2 froze its inputs; route to the next model checkpoint (v8 selection) or cmodels successor",
+    "rows": [
+      {
+        "address": "0x001e958c",
+        "size": 296,
+        "model": "armlink5-inline-branchnop-v8",
+        "literal": "none",
+        "author": "nf045",
+        "result": "scratch/authors/nf045/RESULT.json",
+        "note": "default/v3 refuse native destructor; v6 refuses unwind reference; exact under v8"
+      },
+      {
+        "address": "0x001ed874",
+        "size": 828,
+        "model": "armlink5-inline-branchnop-v3",
+        "literal": "none",
+        "author": "nf045",
+        "result": "scratch/authors/nf045/RESULT.json",
+        "note": "default refuses removed initializer helpers; exact under v3 (check v6/v8 for selection compatibility)"
+      },
+      {
+        "address": "0x00169018",
+        "size": 144,
+        "model": "armlink5-inline-branchnop-v3",
+        "literal": "none",
+        "author": "residual-families",
+        "source": "scratch/research/residual-families/signed-byte/erased-property-getter/func_00169018.c",
+        "receipt": "scratch/research/residual-families/measure/signed-byte-00169018-erased-getter-v3/func_00169018.result.json",
+        "note": "[INFERENCE] Erased signed-property getter identity; explicit R1 selector required; no default-model credit."
+      }
+    ]
+  }
+}

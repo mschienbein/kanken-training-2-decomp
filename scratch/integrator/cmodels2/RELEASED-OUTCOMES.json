@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "rows": [
+    {
+      "function": "func_001db404",
+      "size": 48,
+      "source": "scratch/authors/r301/src/func_001db404.cpp",
+      "profile": "game",
+      "names_overlay": null,
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r301/src/func_001db404.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v8",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/scratch/cm2/released/func_001db404"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001db404 @ 0x1db404 size 0x30/0x30\n",
+      "stderr": "",
+      "receipt": "scratch/cm2/released/func_001db404/func_001db404.result.json",
+      "receipt_sha256": "6116f4cf8fd4b8503bf4c35b596769cefb08eb45b706f91e352a383d398ab39b",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001db404",
+          "address": 1946628,
+          "size": 48,
+          "candidate_size": 48,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "elapsed_seconds": 0.248
+    },
+    {
+      "function": "func_001ef89c",
+      "size": 196,
+      "source": "scratch/authors/r4038/recovery/variants/ef89c_members.cpp",
+      "profile": "game",
+      "names_overlay": "scratch/authors/r4038/recovery/teardown_names.json",
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4038/recovery/variants/ef89c_members.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v8",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/scratch/cm2/released/func_001ef89c",
+        "--names",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4038/recovery/teardown_names.json"
+      ],
+      "exit_code": 0,
+      "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/authors/r4038/recovery/teardown_names.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZN11HeapManagerD1Ev @ 0x1ef89c size 0xc4/0xc4 [armlink5-inline-branchnop-v8: 1 inline_nop]\n",
+      "stderr": "",
+      "receipt": "scratch/cm2/released/func_001ef89c/ef89c_members.result.json",
+      "receipt_sha256": "666bff4063aeec80bd561ee8d245151927b6dc10b39918a2bc84a8e1767fd617",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "_ZN11HeapManagerD1Ev",
+          "address": 2029724,
+          "size": 196,
+          "candidate_size": 196,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "elapsed_seconds": 0.239
+    },
+    {
+      "function": "func_001d5694",
+      "size": 284,
+      "source": "scratch/authors/tu900/src/direct_native_wave.cpp",
+      "profile": "middleware",
+      "names_overlay": "scratch/authors/tu900/names-native.json",
+      "extra_sources": [],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu900/src/direct_native_wave.cpp",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v8",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2/scratch/cm2/released/func_001d5694",
+        "--names",
+        "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu900/names-native.json"
+      ],
+      "exit_code": 0,
+      "stdout": "note: proposed names overlay /home/michael/code/kanken-training-2-decomp/scratch/authors/tu900/names-native.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    func_001d5694 @ 0x1d5694 size 0x11c/0x11c\n",
+      "stderr": "",
+      "receipt": "scratch/cm2/released/func_001d5694/direct_native_wave.result.json",
+      "receipt_sha256": "4ecd14996dd5bba95423b4d39f827848e45856134987cbc7381c1106dab60211",
+      "reason": null,
+      "outcomes": [
+        {
+          "name": "func_001d5694",
+          "address": 1922708,
+          "size": 284,
+          "candidate_size": 284,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "elapsed_seconds": 0.304
+    }
+  ]
+}

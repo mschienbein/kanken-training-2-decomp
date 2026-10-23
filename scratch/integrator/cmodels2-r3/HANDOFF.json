@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "status": "assigned-source-and-complete-composed-transition-closure-complete-awaiting-Main-only-acceptance-gates",
+  "branch": "cmodels2-r3-closure",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/cmodels2-r3-closure",
+  "base_commit": "ba2301d",
+  "merged_predecessor_commit": "cee7419",
+  "model": "openai-codex/gpt-6.1-sol:max",
+  "nested_agents_or_provider_fallback": false,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v8",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "gate_sha256": "df9147d5721d9a4fb2d43e63604126e602e8d37a695691ee6350f15e31f98639",
+  "candidate_manifest": "config/candidates/cmodels2.json",
+  "candidate_manifest_sha256": "78b1507e214381e03549ccba70d6441e2ac77bd94b1d7a97db32e7e33d4458e6",
+  "candidate_manifest_preserved_verbatim": true,
+  "counts": {
+    "accepted_functions": 1621,
+    "accepted_bytes": 195908,
+    "c009_r3_functions": 2296,
+    "c009_r3_bytes": 252692,
+    "c010_functions": 2797,
+    "c010_bytes": 300112,
+    "c011_predecessor_units": 2821,
+    "c011_predecessor_functions": 2900,
+    "c011_predecessor_bytes": 314888,
+    "cmodels2_new_functions": 5,
+    "cmodels2_new_bytes": 892,
+    "cmodels2_units": 7,
+    "complete_units": 2828,
+    "complete_primary_units": 2804,
+    "complete_functions": 2905,
+    "complete_bytes": 315780,
+    "helper_only_units": 24,
+    "helper_recipes": 30,
+    "predecessor_move_rows_preserved": 21,
+    "changed_source_units": 18,
+    "changed_primary_units": 14,
+    "changed_helper_only_units": 4,
+    "changed_headers_since_predecessor": 8,
+    "R1_callers": 31,
+    "L1_owning_units": 1,
+    "L1_reopened_functions": 1,
+    "model_review_functions": 32,
+    "fresh_current_contexts": 65,
+    "fresh_current_credited_targets": 66,
+    "compiled_source_object_context_bindings": 97
+  },
+  "new_functions": [
+    "func_001456e4",
+    "func_00169018",
+    "func_00171208",
+    "func_001e5d38",
+    "func_001e958c"
+  ],
+  "current_composition": "scratch/integrator/cmodels2-r3/composition-r2.json",
+  "dry_ledger": "scratch/integrator/cmodels2-r3/dry-matches-r1.json",
+  "complete_match_scope": "scratch/integrator/cmodels2-r3/complete-match-scope-r2.json",
+  "superseded_scope": "complete-match-scope-r1.json is preserved staging metadata only; Main must use r2, which compiles helpers through genuine callers rather than invoking helper-only matches.",
+  "current_inventory": "scratch/integrator/cmodels2-r3/CURRENT-INVENTORY-r1.json",
+  "model_transition_scope": "scratch/integrator/cmodels2-r3/MODEL-TRANSITION-r1.json",
+  "R1_header_dependencies": "scratch/integrator/cmodels2-r3/MATCH-WITNESS-INDEX-r1.json compiled_source_object_bindings plus MODEL-TRANSITION-r1.json dependency_reviews",
+  "helper_recipes": "scratch/integrator/cmodels2-r3/HELPER-RECIPES-r1.json",
+  "own_unwind_closure": "scratch/integrator/cmodels2-r3/V8-OWN-UNWIND-CLOSURE-r1.json",
+  "source_ready": "scratch/integrator/cmodels2-r3/SOURCE-READY-r1.json",
+  "contracts": "scratch/integrator/cmodels2-r3/PREDECESSOR-CONTRACTS-r1.json",
+  "witness_index": "scratch/integrator/cmodels2-r3/MATCH-WITNESS-INDEX-r1.json",
+  "all_actual_match_invocations": 71,
+  "all_actual_match_exit_counts": {
+    "0": 65,
+    "2": 6
+  },
+  "final_actual_exit_counts": {
+    "0": 65
+  },
+  "all_final_credited_targets_match": true,
+  "supported_bounded_rewrite_projection": {
+    "path": "scratch/integrator/cmodels2-r3/linker-rewrites-bounded-r1.json",
+    "shape": "units[].linker_rewrites",
+    "units": 89,
+    "credited_primary_contexts": 65,
+    "helper_only_units": 24,
+    "complete_transition_scope": true,
+    "complete_ledger_scope": false,
+    "receipt_source_object_attribution": "object is explicitly mapped to its actual defining source; receipt_object retains the original raw receipt object label. Original complete raw receipt hashes are bound, generated instruction-word fields omitted.",
+    "restriction": "Never pass a sweep index as --rewrites or claim this bounded projection is the whole-ledger rewrite input."
+  },
+  "remaining_heavy_commands": "scratch/integrator/cmodels2-r3/REMAINING-HEAVY-COMMANDS-r1.json",
+  "authoritative_inputs": {
+    "own_handoff": {
+      "path": "scratch/integrator/cmodels2/HANDOFF-resume-r2.json",
+      "sha256": "13e9c8f2bedf369678d165954cb32527a4c9e446c64da5c6c700b39a7d9155d1"
+    },
+    "own_scope": {
+      "path": "scratch/integrator/cmodels2/SCOPE-r3.json",
+      "sha256": "f1156d11f2154f72de0a08e36c35eafb0328bb58a0267392c907ffca51d2bf04"
+    },
+    "c011_r3_handoff": {
+      "path": "scratch/integrator/c011-r3/HANDOFF.json",
+      "sha256": "18579bfd3cf4d5e9b2323bcf4836792586051dd6560df71e50c8c475cc42c3e0"
+    },
+    "c010_handoff": {
+      "path": "scratch/integrator/c010/HANDOFF.json",
+      "sha256": "4d721abc66d5df15a14ec363edd0528f6b6c4376b83c2c1f80a4947ea3a6247c"
+    },
+    "c009_r3_handoff": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/HANDOFF.json",
+      "sha256": "154e6f482a88d82458f47bfca2a2064300664433a48aed671b81d7b3baa0482b"
+    },
+    "c009_r3_callback_closure": {
+      "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c009-r3/scratch/integrator/c009-r3/callback-contract-closure-r1.json",
+      "sha256": "49e531b485ee7757289f2750b5ed57b06f34608b4b4c25fb55eaf01590a1194a"
+    },
+    "c009_r3_prepared_full_receipt": {
+      "path": "/home/michael/code/kanken-training-2-decomp/accept/c009-r3/receipts/c009-r3-a.json",
+      "sha256": "3299072cf9f4e755eebb7ea88a22ea48823464762d2c21f8e340129bea2e05c1"
+    },
+    "accepted_cmodels_full_receipts": [
+      {
+        "path": "accept/cmodels/receipts/cmodels-a.json",
+        "sha256": "2e1fe4fde4c6056524567bcd82eca59466c87799527bed203feef2bef56f2cb9"
+      },
+      {
+        "path": "accept/cmodels/receipts/cmodels-b.json",
+        "sha256": "7095f7c76891cb943754adf7dc519e5ce03258003ad641746eec347875d9697e"
+      }
+    ]
+  },
+  "records_sha256": {
+    "MERGE-r1.json": "a97d0a3788eabde73c3ea912220bd911c91eb70ef7b8b73913ed2d3b0b45abf9",
+    "composition-r1.json": "94d9393dd03450b0d232e68abc32bffa105b557997bf50358e7016cc8d72f890",
+    "composition-r2.json": "a4781bab67285009271df003b67fb9d2b02418ab71d1cf7515c85622a11bd872",
+    "dry-matches-r1.json": "5d629a92755cc349de1eab1f740913b6f5b8805db3a69c405ea954f3eb8be051",
+    "bounded-match-scope-r1.json": "c2f81cc57c8b60ad800298c2fbcfb71958905136efad1b9831df942c8f931d76",
+    "bounded-match-scope-r2.json": "9f87276196133ae3ee20844b2d6a61cbebac60126effba3e4fcade59ba6cf35f",
+    "complete-match-scope-r1.json": "9b0d31ac1be5453a7e0df3769bc4628729eb6c18fd00f72a40dab7aa41c0d453",
+    "complete-match-scope-r2.json": "a2bf3a2c4bf8e045085ce48175f6034505cf51628f1071ed946599a101847d58",
+    "match_scope.py": "1b7ca9fd1106fb3720f2715430406ed6af4467ddd9aa9f7da7a506727baafe37",
+    "CURRENT-INVENTORY-r1.json": "cf180480ee440e536a6ef548dd168b2074e4cf571ae352f20e4ac91434789fcb",
+    "MODEL-TRANSITION-r1.json": "6502514a3cd5bc80c58635b050e785e8d5b3279ff3007a30bbc171b8b3c0259e",
+    "HELPER-RECIPES-r1.json": "b04c8c004e4625ded29bb6c7db8a96cded8610a8d8906a10219503c424175345",
+    "PREDECESSOR-CONTRACTS-r1.json": "ae8f76942f23a88d3c5000f68209fd8e00e96e8ceef8bcbce32530eb3f327835",
+    "SOURCE-READY-r1.json": "c622e7fbfec3eb8ed19d30d33eba406cc0ba04c7b54f0436bf234537e72126a3",
+    "V8-OWN-UNWIND-CLOSURE-r1.json": "a9a98e1d69d093ddcb2139b4f76d82f6b2c75f01acc002d89c1c00374e176097",
+    "MATCH-WITNESS-INDEX-r1.json": "9653c8738e88e7762e8ff9e7dcbec277dde0d2463ad386d6628a81c87b0fb8c8",
+    "linker-rewrites-bounded-r1.json": "b00a3b3f23089f9fe759ee94b9e0b2b92220cf86238f03c1bfec76bccf4cbe14",
+    "FAILED-ATTEMPTS-r1.json": "2af0d92e56c3ea4ca1fccec2e2f8871edf99de86253d2d45a76b29ff16e43a22",
+    "TOOL-ATTEMPTS-r1.json": "dcd0aa1a74cb5fc87ee178706fa392c8554e042c20f3b42f9e11b305984a8185",
+    "REMAINING-HEAVY-COMMANDS-r1.json": "be612158811fc2aeb3b111f991e22570c18322c0ae7ac3698e2e8a0c53a06667",
+    "runs/bounded-r1/results.json": "e5e582781382be25924592fa60df3c41b77e36b338769abae3ba20b33edda988",
+    "runs/bounded-r1/linker-rewrites.json": "2fbb658cc12facfcc753304a94ce99f91a43516323fdb2a4c5302afb8d6cc827",
+    "runs/bounded-r1/exits.jsonl": "e919e4c83165962d4fabbc692a3397d94d94539b104c02fd95b7e0606d7cb72b",
+    "runs/bounded-r2/results.json": "3acb8b0516b26b772e70c5c2a7c55437ec455514adfebdb2b2da46716ec769b9",
+    "runs/bounded-r2/linker-rewrites.json": "6e4dc58e3423cc2a239fd187ddd8d5a92b01b324d8cdc7023f489fc9893253e8",
+    "runs/bounded-r2/exits.jsonl": "1103b99bf37e6830d12229668e0d143c1d059967587fa5feaf711c34aa23e098"
+  },
+  "documentation_update": {
+    "path": "docs/RESUME.md",
+    "sha256": "7a846c8f1e6d2284fe2bffa7533534295a9f718701f38227b222d81c00201fcb"
+  },
+  "qualifications": [
+    "The complete provisional composition retains every stable predecessor identity and declared move, plus exactly five new functions/892 B in seven units. No function, helper, unwind metadata, data or denominator credit was accepted here.",
+    "Imported scheduler storage remains int(void); genuine int providers keep defined results; only actual C procedure definitions use mandatory-discard unspecified results. Queue/signaling remain void, typed non-invoking registrations and genuine void*(void*) vector provider remain intact. No callback compatibility cast, invented result or C++ procedure fallthrough was added.",
+    "The complete composed transition set is31 R1 callers plus one L1 owning function. All are freshly witnessed under v8/L1, including all changed provider/header contexts and all24 helper-only sources through30 genuine recipes. Every R1 caller still needs independent QUALIFIED identity provenance and full typed incoming/outgoing/CFG review.",
+    "Six exact preserved exit2 attempts led to genuine input corrections: nested allocation members, the canonical MessageLayout receiver, the shader selector after separate program/shader tables and required existing identifier/value consumers for multi-function helper units. All final65 contexts have actual exit0; no failure was relabeled.",
+    "Two source-defined four-byte Point/Rectangle destructor entities and their exclusive eight-byte own indexes are eliminated under v8. Fresh actual allocated-section/root/reference/group metadata is retained; both actual group lists are empty. The surviving caller index is not removed; historical helper identities and original exidx bounds stay [INFERENCE].",
+    "The L1 owner retains all49 mappings/7284 witnessed bytes; original full pool extent, historical ownership, sharing/order and native all-source linking remain qualified. No literal-data credit is added.",
+    "Raw objects, dependency caches, compiler logs and instruction-bearing receipts remain private and SHA-256-bound. The89-unit supported projection includes65 proven primary contexts plus24 helpers, not the entire2828-unit ledger.",
+    "No whole-ledger/native/G3/argcheck/original-slot/emitted-owner audit, full build, suite, prepare, independent review, finalize or push was executed. Main must run the exact serialized remaining commands after predecessor acceptance and refresh complete evidence for any intervening changes.",
+    "Inherited C011 mixed uncredited contexts001dc400/0015ad74 and all unselected author/predecessor deferrals remain explicit. This task does not re-enter or declare exhausted any deferred identity."
+  ],
+  "remaining_gaps": [
+    "No remaining code-generation failure in the assigned changed-source/model-transition scope: all65 final current contexts match with actual exit0.",
+    "Main-only finalized c009-r3 -> C010 -> C011 predecessor acceptance and canonical ledger/history reconciliation.",
+    "Complete machine-serialized gates, actual emitted ownership, original typed indirect/callback consumers, two fresh full receipts/suite and independent whole-checkpoint reviews before cmodels2 acceptance."
+  ],
+  "private_inputs": "orig and .cache/toolchain symlink to main checkout; all tools use main .venv absolute interpreter. No private input/toolchain content was edited.",
+  "canonical_ledger_history_and_accepted_receipts_unchanged": true,
+  "write_boundary": "Only this newly created worktree was edited. Main and all predecessor/peer worktrees remain untouched."
+}
