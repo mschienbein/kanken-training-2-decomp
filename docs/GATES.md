@@ -259,7 +259,7 @@ The v1.20 implementation is separately reviewed at `scratch/review/linker-v18/co
 tip `fdc61f7ef6863e2eacde2d20fab4a5d861dbaf56`). Its seal explicitly does **not** approve
 exact v18 gate text or adoption. The v1.20 text in this file and `docs/LINKER.md` requires
 separate exact-text approval, bound to their committed hashes in
-`scratch/integrator/linker-unref/GATES-v1.20-TEXT.json`, before the v18 sequence below.
+`scratch/integrator/linker-unref/GATES-v1.20-TEXT-r2.json`, before the v18 sequence below.
 The v11–v17 author drafts, including the unchanged v16-era `GATES-DRAFT.md`, remain
 never-adopted historical evidence, not accepted v18 text.
 
@@ -938,7 +938,8 @@ this text. No removed D0, companion or other external data earns catalogue credi
    cannot lend witnesses or authorize U1. A common path, ledger owner or outer label
    is not original identity. Direct matcher/grid U1 comparisons refuse extra objects.
 2. **Complete D0 section.** The full allocated section is readonly executable
-   SHT_PROGBITS, non-NOBITS, non-merge, without link-order or fixed-entry metadata,
+   SHT_PROGBITS, non-NOBITS and not classified as a string-merge section
+   (both SHF_MERGE and SHF_STRINGS set), without link-order or fixed-entry metadata,
    with power-of-two alignment at least four and complete candidate bytes. It defines
    exactly one STT_FUNC: a global/weak, nonzero-sized ARM Itanium-ABI `D0Ev` deleting
    destructor at offset zero under ARMCC's `i.<symbol>` split-section name. Its size
@@ -959,7 +960,11 @@ this text. No removed D0, companion or other external data earns catalogue credi
 4. **Same-object retained D1 and primary table.** The same encoded class emits a
    separate retained D1 in that direct original object, with agreeing section and
    symbol origins, explicitly bound to an ordinary catalogue function start.
-   D1/D2 bindings and ISA agree. The primary `_ZTV` witness is explicitly bound,
+   Address bindings of emitted D1/D2 functions in positive-sized allocated
+   sections agree with that D1 start. The emitted retained D1 ISA agrees with
+   the catalogue and primary-table entry. D2 aliases retain the inherited v6
+   alias/independently-bound placement rules; U1 adds no separate emitted-D2
+   ISA check. The primary `_ZTV` witness is explicitly bound,
    four-byte aligned and readable, outside catalogued function extents and BSS,
    without conflicting resolver evidence. Its header has zero offset-to-top,
    null RTTI or explicitly agreeing `_ZTI`, the retained D1 at offset +8 including
@@ -970,10 +975,13 @@ this text. No removed D0, companion or other external data earns catalogue credi
 5. **Complete namespace and copy identity.** Inventory supplied definitions before
    classification, regardless of size/allocation/binding/type/storage, and resolve
    original references without mutating input identities. Locals remain scoped;
-   only legal global/weak externs bind by name. Unsupported/incompatible kinds,
-   named undefined locals, COMMON storage, invalid extents and incomplete table/index
-   evidence refuse. Contradictory/unproved duplicate globals refuse; identical full
-   ABS identities and supported COMDATs retain their existing proof obligations.
+   only legal global/weak externs bind by name. Allocated-source relocations require
+   supported reference/resolved-symbol kinds and compatible named bindings. Namespace
+   resolution rejects named undefined locals except the inherited ordinary-code V4BX
+   marker; unnamed NONE markers retain their namespace exception. COMMON storage,
+   invalid allocated-definition extents and incomplete table/index evidence refuse.
+   Contradictory/unproved duplicate globals refuse; identical full ABS identities
+   and supported COMDATs retain their existing proof obligations.
    D0 copies and every affected allocated group copy agree in complete bytes,
    mappings, defined-symbol/visibility metadata, unreduced section/group header
    semantics and actual relocation-target identity. Equal local spellings or bytes
@@ -1053,8 +1061,10 @@ this text. No removed D0, companion or other external data earns catalogue credi
     catalogue, canonical/proposed names/config/model and every decision/reporting
     harness input are hash-bound. Match/grid/build/prepare carry all U1 actions or
     refuse; collection without a per-comparison action receipt refuses U1.
-    No original/candidate buffers, instruction encodings or disassembly are
-    serialized. Every surviving comparison, exact extent, overlap and unique
+    No original/candidate payload buffers or disassembly dumps are serialized.
+    U1 section actions contain no instruction encodings; inherited per-function
+    branch rewrite records retain their modeled replacement `word` metadata.
+    Every surviving comparison, exact extent, overlap and unique
     credited emitted-owner obligation remains mandatory.
 11. **Positive full receipts, never bounded substitution.** Every new prepare
     requires two fresh PASS full build receipts with `schema_version: 2`,

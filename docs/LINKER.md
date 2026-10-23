@@ -679,8 +679,9 @@ Only **`armlink5-inline-branchnop-v14`** enables the complete namespace cutover:
   definitions. Denying the exception does not falsely bind a global to an unrelated local.
 - Conflicting/unproved global/weak duplicates refuse in either order; supported COMDAT
   identities retain their complete downstream proof. Equal full ABS identities represent
-  the same actual value. Unsupported reference/definition kinds, named undefined locals,
-  invalid extents and incomplete/noncanonical symbol-table/index evidence refuse.
+  the same actual value. Unsupported relocation-reference/resolved-definition kinds,
+  illegal undefined-local references, invalid allocated extents and incomplete table/index
+  evidence refuse; the unreferenced-definition inventory is not itself a type whitelist.
 - COMMON storage allocation is not modeled and explicitly refuses. A supplied NONE
   dependency must have verified output placement; omitted zero/nonallocated storage cannot
   masquerade as a library extern. Actual ABS constants have no output storage and retain
@@ -1005,6 +1006,25 @@ witness or R1 proof; it applies original-input vetoes and compares every staged 
 relocation, including zero-credit owners. The code/metadata section above describes the
 reviewed implementation, not an exception to any normative prerequisite.
 
+The first exact-text proposal (`548c0234`, manifest `39bd54e7`) failed independent
+gate-text review on three enforcement overstatements; the v18 implementation PASS was
+not retracted. The revised text describes the existing boundaries without changing code:
+
+- The D0 guard rejects the string-merge classification with both `SHF_MERGE` and
+  `SHF_STRINGS` set, not every standalone raw merge/string flag. Complete metadata,
+  entry-size and copy-consistency requirements still apply.
+- Emitted D1/D2 address bindings in positive-sized allocated sections agree with the
+  retained D1 start, and retained D1 ISA agrees with the catalogue/table. U1 adds no
+  independent emitted-D2 ISA check; inherited alias and independently bound placement
+  rules remain distinct.
+- U1 section actions carry no instruction encodings. Inherited per-function branch
+  rewrites retain their modeled replacement `word` metadata; raw original/candidate
+  payload buffers and disassembly dumps are not serialized.
+- Namespace kind/compatibility checks apply to allocated-source relocation references
+  and their resolved symbols, not every unreferenced definition in the inventory.
+  Ordinary-code V4BX and unnamed NONE retain their namespace-only exceptions; the
+  separate U1 liveness and own-unwind dependency rules still apply.
+
 Both fresh full receipts, frozen selection, prepare, review and history bind every
 action/companion and input. Positive schema-2 full-image/BLZ receipt identity and exact
 unit/action/witness dispatch are mandatory for new prepares; bounded evidence and
@@ -1018,7 +1038,7 @@ separate independent approval of the committed exact texts, run the integrated f
 and record v1.20 on top of v1.19 between checkpoints. The implementation PASS, this text,
 private MATCHes and bounded builds grant no credit and perform no adoption. The immutable
 text hashes and claim-to-code/test map are in
-`scratch/integrator/linker-unref/GATES-v1.20-TEXT.json`.
+`scratch/integrator/linker-unref/GATES-v1.20-TEXT-r2.json`.
 
 ## Sources
 
