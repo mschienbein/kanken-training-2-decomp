@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "branch": "c013",
+  "status": "SELF_PRE_REVIEW_ONLY_NOT_INDEPENDENT_ACCEPTANCE",
+  "admitted_scope": "The three c013 sources and the canonical header changes, with complete touched-header byte reproof. Untouched accepted-family problems are preserved, not blanket-approved.",
+  "review_sources_sha256": {
+    "docs/known-issues-c009.md": "06f16d748481b8cdaceb184af8abcb98a552ec50a47973822d3767ce2a231615",
+    "docs/known-issues-c009-r2.md": "a29c9421c7f850be5a1f0a370037d551b7eec90a66fb9ab082186b6029cb4ef1",
+    "docs/known-issues-c010.md": "c29c55a627ba9c10ba967ea4c35e11a54cb8de1b3f7952f5ee8852169ab00923",
+    "docs/known-issues-c011.md": "4146f80dbe7c0843e277993b67fd61b8034b9b43ed120422a69b5b8ba1a7ff16",
+    "scratch/integrator/c011/FINDINGS-DISPOSITION-r1.json": "aa70b1a0f9f8a0dcf66aca2d6dac66925f1c8e66bc94b47bcb3f3f2ce1a5eb5b",
+    "scratch/integrator/c011/r5/NEW-DEFERRALS-r1.json": "b710c7ce5c233e6efae5707566ad6647dd1580e53502830ac3b76bc5e85a8716",
+    "scratch/integrator/c011/r6/NEW-DEFERRALS-r1.json": "5960937891639a0db8b56b9d5dfc2a3b4a0d4925c17523a8e1d282b673401ab1",
+    "scratch/integrator/c011/r7/FINDINGS-DISPOSITION-r1.json": "28c607daa7aa4d2b67b049108fee64f568e8857369d2c9462ce47052b9cbd43e"
+  },
+  "classes": [
+    {
+      "id": "S01",
+      "class": "One model per class/global; canonical shared declarations",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "Only the existing BufferOwner is completed; CopyRequest is declared once in runtime.h. TransformNode/Signal2/MoveArray use their canonical NW definitions. RegionalMasks is an anonymous used value aggregate, not a second storage view. The competing voice and archive models are held."
+    },
+    {
+      "id": "S02",
+      "class": "Tag/producer casts; no complete-base-object downcasts",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "No admitted source downcasts a complete base value. Signal creation uses actual allocator-provided storage and native placement construction. The copy worker converts only its erased captured pointer to the existing SignalState contract."
+    },
+    {
+      "id": "S03",
+      "class": "Callable types and every invoking callback/slot provider",
+      "disposition": "PASS_WITH_BOUNDED_QUALIFICATION",
+      "evidence_and_limits": "New sources contain no callable conversion or generic callback facade. TransformNode uses Signal2<void,TransformNode*,SceneContext*> and its canonical Slot2::Invoke signature. This allocator creates empty signal storage; no new concrete slot provider is installed. Unknown pre-existing dynamic providers are not claimed compatible."
+    },
+    {
+      "id": "S04",
+      "class": "No C/native member facades or native aliases over C providers",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "Fresh new objects have only C declarations for C calls, or the actual TransformNode native member. nm02 is held specifically because GetWaveArchiveCount would bind over the actual C ArchiveHandle provider. No held name is added."
+    },
+    {
+      "id": "S05",
+      "class": "No punning, memcpy reinterpretation, byte-offset object access or false aliases",
+      "disposition": "PASS_WITH_EXPLICIT_HOLDS",
+      "evidence_and_limits": "The admitted worker reads its real byte-stream fields and canonical queue members, not an owner object representation. No union or byte-offset owner view is introduced. Both nm01 targets are held for their byte-offset chunk/reference resolution rather than treating a helper name as an exception."
+    },
+    {
+      "id": "S06",
+      "class": "No steering, invented callees, forced spills/registers or dead uses",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "All language masks and helper values affect the selected result. The copy helper performs the requested signed-length copy. Initializing fresh MoveArray capacity establishes a real field invariant before its existing setters; no source-local specializations, volatile, barriers, fake calls, inline assembly or forced registers are added."
+    },
+    {
+      "id": "S07",
+      "class": "Native vtable authorization and key functions",
+      "disposition": "PASS_NO_NEW_NATIVE_VTABLE_MODEL",
+      "evidence_and_limits": "No _ZTV is defined or referenced by the three admitted objects and no vtable overlay is added. Existing allocator RTTI reference is unchanged canonical NW typing, not a new class or table-extent recovery."
+    },
+    {
+      "id": "S08",
+      "class": "PMFs and member lowering",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No member-function pointer decoding, free-function/member conversion, C destructor facade or synthetic adapter appears in admitted sources."
+    },
+    {
+      "id": "S09",
+      "class": "Frozen profiles, full extent and compiler/runtime credit",
+      "disposition": "PASS_WITH_PROFILE_QUALIFICATION",
+      "evidence_and_limits": "1384 sequential niced --show 0 commands exited 0; all 1422 required functions have exact catalogue extents under frozen profiles and explicit v6/L1. Two additional comparison rows are existing compiler-runtime helpers, not credit. Middleware ownership of language selection remains inferred; other profiles were not remeasured."
+    },
+    {
+      "id": "S10",
+      "class": "Approved extensions and original bugs",
+      "disposition": "QUALIFIED",
+      "evidence_and_limits": "language.cpp retains approved __current_pc and the explicit ORIGINAL BUG language-shift assumption. The worker preserves active clearing on the empty-queue path and stop-return behavior. No undocumented assembly binding is added."
+    },
+    {
+      "id": "S11",
+      "class": "Unique emitted ownership, explicit rehoming and preserved accepted identities",
+      "disposition": "PASS_NO_MOVES",
+      "evidence_and_limits": "All 2763 predecessor identities survive in the proposal. The native bank TU is not admitted, so accepted 001f4500 stays solely at its original C owner and no move is needed. New definitions are exactly the three requested identities; compiler metadata labels do not receive credit."
+    },
+    {
+      "id": "S12",
+      "class": "R1/L1 helper and header dependency closure",
+      "disposition": "QUALIFIED",
+      "evidence_and_limits": "Every affected header-dependent primary and every affected helper caller is re-proved with its original natural extra-source combination. Current proof supplies 17 helpers; the full proposal retains all 24. R1 erased identities remain inference and L1 only establishes a witnessed literal span; no helper/data credit is added."
+    },
+    {
+      "id": "C009-H1",
+      "class": "Partial-layout sizeof regression (PipelineStorage)",
+      "disposition": "PASS_SCOPE_NOT_WEAKENED",
+      "evidence_and_limits": "No new sizeof(BufferOwner), fabricated total clear length or fixed serialized-tail extent is used. Queue members preserve all prior buffer/count/owned/state/active offsets. Complete changed-header reproof retains exact old extents; the earlier PipelineStorage qualification is not reinterpreted."
+    },
+    {
+      "id": "C009-H2",
+      "class": "Scheduler, vector runtime and destructor registration erasure",
+      "disposition": "PASS_NO_NEW_ERASURE",
+      "evidence_and_limits": "No new scheduler callback, vector callback or atexit-style registration is added. The worker is a real void(void*) thread entry and its shared declaration matches the definition. Existing C-only MUST-discard qualifications remain unchanged."
+    },
+    {
+      "id": "C009-H3",
+      "class": "Resource dispatch by-value native wrappers versus pointer facades",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No resource dispatcher table, cast wrapper or procedural ResTexture family is added. Signal slot inputs are the existing native pointer types, not a new resource protocol."
+    },
+    {
+      "id": "C009-H4",
+      "class": "Scene vtables and inferred common receiver tails",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No scene slot, lifecycle provider or common-owner table is changed. Existing dynamic populations remain unrecovered rather than completed by layout resemblance."
+    },
+    {
+      "id": "C009-H5",
+      "class": "Opaque font/static-table completion and native reader contracts",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No FontVTable completion, font getter alias, reader descriptor or method-pointer provider is added. Existing c009 font exclusions remain unselected."
+    },
+    {
+      "id": "C009-H6",
+      "class": "Float(float) converter phases and command-queue cursor inputs",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No converter provider, scheduler result or CommandQueue callback declaration is revised or narrowed. The copy ring is the distinct existing BufferOwner, not the command queue."
+    },
+    {
+      "id": "C009-H7",
+      "class": "Unauthorized DisplayTarget vtable and object-family shadows",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No DisplayTarget constructor, native key, new _ZTV binding or source-level lifecycle family is introduced."
+    },
+    {
+      "id": "C010-F01",
+      "class": "Concrete scene slot providers",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No scene prepare/finish slot is modified; existing concrete W23FlowScreen/W6SelectionReset contracts remain."
+    },
+    {
+      "id": "C010-F02",
+      "class": "Float PMFs over distinct free providers",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No AnimationTrack PMF or provider alias is introduced."
+    },
+    {
+      "id": "C010-F03",
+      "class": "Layout factories/AnimTransform receiver-result facades",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No Layout factory or second binding-manager object is introduced."
+    },
+    {
+      "id": "C010-F04",
+      "class": "Archive resource accessor native owner and ARCHandle",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No archive accessor owner is weakened or replaced. The separate nm02 archive count boundary is explicitly held."
+    },
+    {
+      "id": "C010-F05",
+      "class": "Global identity, RTTI, StaticHandle and worker prefixes",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "BufferOwner is the single address-rooted bss_002d4270 declaration used by its pre-existing readers. No parallel global view is retained. ServiceClientState, W22StreamWorker, native RTTI roots and StaticHandle remain unchanged."
+    },
+    {
+      "id": "C010-F06",
+      "class": "Native list/iterator/Material/wave boundaries",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No accepted C list provider moves, native iterator aliases or wave family cutover are added."
+    },
+    {
+      "id": "C010-F07",
+      "class": "Notification/DSP/object-manager/command record overlays",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "Only real queue and stop/thread fields replace opaque BufferOwner storage. No integer-pointer union, DSP byte/halfword pun or kind-zero payload reinterpretation is added."
+    },
+    {
+      "id": "C010R6-F01",
+      "class": "Exact generic void*(void*) constructor providers/veneer",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No generic construction callback or veneer declaration is revised; native Signal2 creation does not cast a provider into an array runtime."
+    },
+    {
+      "id": "C010R6-F02",
+      "class": "One const SoundEnvelope object",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No envelope initializer, AdshrCurve shadow or constructor alias is added; the competing np272 object model remains held."
+    },
+    {
+      "id": "C010R6-F03",
+      "class": "BasicSound dynamic-handle slot and SoundVoiceObject cleanup",
+      "disposition": "PASS_WITH_EXPLICIT_HOLD",
+      "evidence_and_limits": "No unclosed playback slot is invoked and no C SoundOperation cleanup is introduced. The np272 voice constructor is not admitted without its true canonical family."
+    },
+    {
+      "id": "C010R6-F04",
+      "class": "Real ResTextureAnim value versus cast base wrapper",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No wrapper value is downcast and no inferred derived identity is constructed over a base object."
+    },
+    {
+      "id": "C010R6-F05",
+      "class": "Actual derived arena events and native SoundInfo providers",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No base event is downcast or projected and no new archive caller invokes a native provider through a separate record model."
+    },
+    {
+      "id": "C011-F01",
+      "class": "Procedural ResTexture-by-value dispatch mismatch",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No texture dispatch table or slot provider is added."
+    },
+    {
+      "id": "C011-F02",
+      "class": "MaterialObject/AnimTransform destruction shadows",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No new Material or animation destruction endpoint is declared or called."
+    },
+    {
+      "id": "C011-F03",
+      "class": "Font table and W20/native writer family aliases",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No font table is completed and no native writer alias is introduced."
+    },
+    {
+      "id": "C011-F04",
+      "class": "Empty no-argument reset invoked with invented receiver",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "No empty reset/registration callee is invented; all explicit calls use existing shared contracts or the published decompressor signature."
+    },
+    {
+      "id": "C011-F05",
+      "class": "ArchiveStream/cache-owner table completion",
+      "disposition": "PASS_WITH_EXPLICIT_HOLD",
+      "evidence_and_limits": "No partial archive table is completed or invoked. nm02 is held instead of assigning a native reader family to the accepted C owner."
+    },
+    {
+      "id": "C011-F06",
+      "class": "InputDeviceState/HeapObject/RectDrawer constructor shadows",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No input-device constructor, vtable root or competing global type is added."
+    },
+    {
+      "id": "C011-F07",
+      "class": "CompositeState versus real SoundVoiceObject",
+      "disposition": "PASS_WITH_EXPLICIT_HOLD",
+      "evidence_and_limits": "np272 is held because its second voice model is not a canonical owner cutover."
+    },
+    {
+      "id": "C011-F08",
+      "class": "Unreconciled AudioAux manager registrations/provider populations",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No auxiliary calculator or preset provider is installed or newly invoked; unknown dynamic populations are not manufactured."
+    },
+    {
+      "id": "C011-F09",
+      "class": "Partial pool/count owner and allocator-table population",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No pool/count owner alias or table-extent assertion is introduced."
+    },
+    {
+      "id": "C011R4-FAMILY",
+      "class": "DSP byte/halfword publication and unproved WidgetSlot derived owners",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No ushort/byte overlay or ResourceEvent-to-DisplayObject conversion is added."
+    },
+    {
+      "id": "C011R5-F01",
+      "class": "Loader secondary-base thunk reaching C provider",
+      "disposition": "PASS_WITH_EXPLICIT_HOLD",
+      "evidence_and_limits": "nm02 native-to-C count boundary is rejected by the same actual-provider rule; no secondary-base or const/result facade is inferred."
+    },
+    {
+      "id": "C011R5-F02",
+      "class": "Calls into held texture parameter/catalogue endpoints",
+      "disposition": "PASS_FOR_ADMITTED_SCOPE",
+      "evidence_and_limits": "Fresh new-object references target no c009/c010/c011/c013 held function. No held texture entry is revived."
+    },
+    {
+      "id": "C011R6-SWEEP-01",
+      "class": "ChannelCommand byte access to StreamEvent object representation",
+      "disposition": "PASS_NO_NEW_OBJECT_BYTE_VIEW",
+      "evidence_and_limits": "The copy worker accesses an actual unsigned-char stream and CopyRequest records, not bytes of a StreamEvent or another owner object. nm01 byte-offset decoders are separately held."
+    },
+    {
+      "id": "C011R6-SWEEP-02",
+      "class": "Nonexact genuine derived-event construction",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No fake derived storage, added allocation or code-generation coercion is added to admit a nonexact source."
+    },
+    {
+      "id": "C011R6-F01",
+      "class": "Bank FileHeader native member and independent C BankReader facade",
+      "disposition": "PASS_NO_NEW_BANK_CUTOVER",
+      "evidence_and_limits": "No bank reader facade, native alias or additional complete BankFile representation is added. nm01 remains outside active src/ and accepted accessor ownership is unchanged."
+    },
+    {
+      "id": "C011R7-SWEEP-F01/F02",
+      "class": "Native iterator return aliases over retained C PoolList providers",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "No list cleanup, erased iterator or native erase alias is added."
+    },
+    {
+      "id": "C011R7-SWEEP-F03",
+      "class": "WordPair/unsigned facade over accepted ServiceResult(Result)",
+      "disposition": "PASS_NOT_INTRODUCED",
+      "evidence_and_limits": "The existing Result wrapper returned by the configuration IPC is used directly; no WordPair constructor facade or uncompiled-callee type waiver is added."
+    }
+  ],
+  "functions": [
+    {
+      "function": "func_0012e68c",
+      "source": "src/checkpoint13/language.cpp",
+      "profile": "middleware",
+      "status": "MATCH_WITH_REVIEW_QUALIFICATIONS",
+      "receipt": "scratch/integrator/c013/match-r1/language/language.result.json",
+      "qualification": "Approved __current_pc, ORIGINAL BUG shift assumption, source helper/TU identity and middleware ownership inference."
+    },
+    {
+      "function": "func_0010aa28",
+      "source": "src/checkpoint13/copy_worker.c",
+      "profile": "game",
+      "status": "MATCH_WITH_REVIEW_QUALIFICATIONS",
+      "receipt": "scratch/integrator/c013/match-r1/copy-worker/copy_worker.result.json",
+      "qualification": "Inferred queue/control names and captured SignalState role; preserves signed copy/count and stop/idle behavior without asserting a complete historical allocation extent."
+    },
+    {
+      "function": "func_001c65e4",
+      "source": "src/checkpoint13/transform_callbacks.cpp",
+      "profile": "game",
+      "status": "MATCH_WITH_REVIEW_QUALIFICATIONS",
+      "receipt": "scratch/integrator/c013/match-r1/transform-callbacks/transform_callbacks.result.json",
+      "qualification": "Canonical native object/slot types; historical capacity-initializer spelling inferred. Concrete external allocator and dynamic slot populations are not exhaustively recovered."
+    }
+  ],
+  "held_identities_screened": 231,
+  "admitted_object_references_to_holds": [],
+  "new_native_vtable_symbols": [],
+  "uncredited_runtime_rows": [
+    {
+      "emitting_source": "src/wave13/func_00190dc0.c",
+      "identity": "func_00126f2c",
+      "name": "__ARM_common_memset4_5",
+      "size": 24,
+      "credited_owner": null,
+      "status": "match"
+    },
+    {
+      "emitting_source": "src/checkpoint11/func_001c7fa0.cpp",
+      "identity": "func_00183458",
+      "name": "__ARM_common_memcpy4_5",
+      "size": 20,
+      "credited_owner": null,
+      "status": "match"
+    }
+  ],
+  "accepted_context_owner_move_needed": false,
+  "moves": [],
+  "heavy_gates_run": false,
+  "external_independent_review_claimed": false
+}
