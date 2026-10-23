@@ -2,6 +2,43 @@
 
 Current entry on top; older entries are kept as history.
 
+## 2026-10-23 (later) — c010-r8 accepted (+413 functions); gates v1.20 approved
+
+**Accepted:** 2,682 functions / 288,580 B (seq 11: … c009-r6, c010-r8). Denominator **v13-r2**:
+4,571 creditable functions / 1,121,674 B (**25.73%**). Gates **v1.19**; v1.20 is approved and
+adopted next, between checkpoints.
+
+- **c010-r8** adds 413 functions / 39,208 B with explicit linker v6 plus literal L1. It took three
+  review rounds:
+  - r6: both reviews FAIL. Array-runtime callbacks, envelope object identity, a BasicSound slot,
+    a base-wrapper downcast, a C call into a native member, and a non-adopting provider.
+  - r7: one review FAIL. Three more array-runtime callbacks.
+  - r8: closed the class with an exhaustive runtime-callback table (array runtime, atexit, thread
+    entries, native-member slots). Both reviews PASS_WITH_QUALIFICATIONS with no findings.
+  - 94 functions / 8,404 B stay deferred and uncredited (`docs/known-issues-c010.md`).
+- **Inherited attention:** the table also found 48 definite callback type/role mismatches, 7 custom-family
+  rows and 26 unmodeled rows on providers accepted in c001–c009. ctypes1 r2 fixes 32 of them
+  exactly; the rest are held with reasons.
+- **Gates v1.20 approved (exact text):** linker model `armlink5-inline-branchnop-v18` adds U1, removal
+  of an unused deleting destructor from a single directly compiled object, with complete
+  COMDAT/section-group closure.
+  - The implementation passed review after v11–v17 each failed one round. The exact gate text
+    passed on its second round.
+  - Adoption, with a full suite run, comes next, between checkpoints. It unblocks cmodels2 and the
+    native MenuScene destructor family.
+- **Ready for gates, in order:**
+  - c011-r8: 79 functions / 11,080 B, with c013's intake folded in. Pre-review running.
+  - ctypes1 r2: 55 units and 18 headers revised, 1 new function. Pre-review running.
+  - c014 intake: step-5c matches. Being integrated.
+  - c012: 71 functions, needs re-derivation.
+- **Escalation:**
+  - Permuter sweep-10 finished: 1,000 attempts. Its one match used steering and was later
+    re-found naturally.
+  - New step 5c, a third author pass on the 615 unaccepted functions within 64 bytes, has
+    154 batches. The first ~50 produced about 20 matches; many residuals are 1–6 bytes of
+    register-role or scheduling difference.
+  - 184 author matches remain uncollected because of contract holds. They feed the residue table.
+
 ## 2026-10-23 — c009-r6 accepted (+648 functions); denominator v13-r2 adopted
 
 **Accepted:** 2,269 functions / 249,372 B (seq 10: … cmodels, c009-r6). Denominator **v13-r2**

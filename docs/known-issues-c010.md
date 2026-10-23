@@ -1,5 +1,36 @@
 # c010 candidates — known issues and qualifications
 
+## c010-r8 accepted (history seq 11)
+
+Finalized 2026-10-23 as history seq 11: **2,682 functions / 288,580 B** credited of denominator
+v13-r2 (4,571 functions / 1,121,674 B, **25.73%**). c010 adds **413 new functions / 39,208 B** and
+12 accepted moves (192 B, credit unchanged), with explicit linker `armlink5-inline-branchnop-v6`
+and literal model `anonymous-string-records-v1`.
+
+- **Reviews:** both PASS_WITH_QUALIFICATIONS with no findings (`accept/c010-r8/reviews/`).
+  - codex-a: 111 PASS / 516 QUALIFIED of 627 rows.
+  - codex-b: 135 PASS / 492 QUALIFIED.
+  - Every QUALIFIED row's reason is in the sealed records under `scratch/review/c010-r8/`.
+- **Rounds:**
+  - c010-r5 pre-review: FAIL.
+  - c010-r6: both reviews FAIL (array-runtime callbacks, envelope object identity, BasicSound slot,
+    base-wrapper downcast, C call into a native member, non-adopting SoundVoiceObject provider).
+  - c010-r7: codex-b FAIL (three more array-runtime callbacks).
+  - c010-r8: closed the class mechanically with an exhaustive runtime-callback table
+    (`scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json`: array runtime, atexit, thread
+    entries and native-member slots), with zero unresolved new or revised rows.
+- **Deferred, uncredited:** 94 new functions / 8,404 B in 93 units, listed in the r8 section below
+  and the deferral records. Each failed an exact type or contract fix and was not credited rather
+  than bridged with casts.
+- **Inherited accepted attention.** The closure found 48 definite type/role mismatch rows,
+  7 nominal custom-family rows and 26 unmodeled rows on providers accepted in c001–c009 and
+  unchanged here. They are outside c010's scope; both reviewers verified that no new or revised
+  c010 unit depends on them through an incompatible type. ctypes1 r2 (`types-compose-r2`) fixes
+  32 rows exactly; the rest are held with reasons in `scratch/integrator/ctypes1/r2/`.
+- **argcheck** exits 2 (90 issues / 513 notes). All were adjudicated in the r6/r7 records and again
+  by both r8 reviewers. The two facts new in r7 (`func_00215ec4` r1/r2 at `0x001b4904`) are
+  arguments of the unattributed removed-callee rewrite at `func_001b48c8` +52.
+
 ## c010-r8 — exhaustive runtime-callback closure
 
 This **unaccepted successor** remains on branch `c010-r7`, preserving immutable
