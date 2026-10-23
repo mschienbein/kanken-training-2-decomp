@@ -4,10 +4,6 @@
 #ifdef __cplusplus
 #include <preinclude.h>
 #include <nw/lyt/lyt_Animation.h>
-/* [INFERENCE] The original pointer-result slot matches native Layout's
- * AnimResource overload; no placeholder virtual owner or erased return. */
-extern "C" nw::lyt::AnimTransform *func_001ce8b8(nw::lyt::Layout *layout,
-    const void *file, nw::lyt::ResourceAccessor *accessor);
 #endif
 #include "game/matrix.h"
 

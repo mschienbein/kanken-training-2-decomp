@@ -261,7 +261,6 @@ extern void func_00143328(struct SoundPlayer *player, struct SoundInstance *soun
 /* [INFERENCE] Native DetachSoundPlayer takes the player argument even though
  * this body only clears the stored pointer; caller inputs are not discarded. */
 extern void func_001d2c78(struct SoundInstance *sound, struct SoundPlayer *player);
-extern void func_001d2c44(struct SoundPlayer *player, struct SoundInstance *sound);
 extern void func_0016a3e0(struct SoundInstance *sound);
 extern void func_001d3bcc(struct SequenceSoundControl *sound);
 extern void func_001d9c14(struct WaveSoundControl *sound);

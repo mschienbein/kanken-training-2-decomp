@@ -16,18 +16,12 @@ struct LayoutBinding {
     void *second_allocation;
     unsigned short flags;
 };
-/* [INFERENCE] The natural insertion caller owns this count-and-sentinel list. */
-struct LayoutBindingManager {
-    unsigned reserved00;
-    PoolList bindings;
-};
 
 extern "C" {
 extern const void *const data_00224100[];
 LayoutBinding *func_001cce4c(LayoutBinding *binding);
 extern void func_00191aec(void *allocation);
 LayoutBinding *func_001cce84(LayoutBinding *binding);
-LayoutBinding *func_001ce940(LayoutBindingManager *manager);
 }
 #endif
 
