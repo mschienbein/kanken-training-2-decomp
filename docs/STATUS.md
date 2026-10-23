@@ -2,10 +2,10 @@
 
 Current entry on top; older entries are kept as history.
 
-## 2026-10-23 — c009-r6 accepted (+648 functions); next checkpoints queued
+## 2026-10-23 — c009-r6 accepted (+648 functions); denominator v13-r2 adopted
 
-**Accepted:** 2,269 functions / 249,372 B (seq 10: … cmodels, c009-r6). Denominator **v9-r2**:
-4,624 creditable functions / 1,131,454 B (**22.04%**). Gates **v1.19**.
+**Accepted:** 2,269 functions / 249,372 B (seq 10: … cmodels, c009-r6). Denominator **v13-r2**
+(history v10): 4,571 creditable functions / 1,121,674 B (**22.23%**). Gates **v1.19**.
 
 - **c009-r6** adds 648 functions / 53,464 B (waves 15–20, retries, solos) with explicit linker v6
   plus literal L1. It took six rounds: each independent review that failed found cross-unit callable
@@ -25,8 +25,13 @@ Current entry on top; older entries are kept as history.
   - cmodels2: two accepted scene/PMF contract findings need the native scene family.
   - The native MenuScene destructor family needs linker model U1, now at v14 after four review
     rounds that each found one major issue and no blockers.
-- **Catalogue v13-r2** (boundary/library reclassification; 0 function-record changes in its
-  last round) passed review and will be adopted between checkpoints.
+- **Denominator v13-r2** adopted after c009-r6 finalized:
+  - 90 owners reclassified as vendor runtime library, plus 6 more assembly owners.
+  - Unknown bytes 4,408 → 114; anomalies 37 → 1.
+  - All 2,269 accepted functions keep identical extents.
+  - v13 failed its first review (two fail-closed gaps in the generator's inputs); v13-r2 passed
+    with no findings.
+  - Details: `docs/catalogue/REPORT-v13-r2.md`, `REVIEW-v13-r1.md`, `REVIEW-v13-r2.md`.
 - **Escalation:** the step-5b second pass continues, with 108 batches queued. The permuter sweep
   (≤32-byte residuals) has 127 rows left and has found one match, which needs a natural
   rewrite because the permuter's version uses steering.
