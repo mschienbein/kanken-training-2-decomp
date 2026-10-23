@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "agent": "TypesComposeCodex",
+  "branch": "types-compose",
+  "source_commit": "d80e0cdbf59b78479fcd27539d86cd4b661867bc",
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose",
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/types-compose/proposed-ledger-r2.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/types-compose/interfaces-r2.json"
+  ],
+  "purpose": "One corrected whole-ledger ctypes1 audit after immutable interfaces-r1 failure: include canonical HandleManager header; drop relay-type body revision and restore exact prepared source with opaque compatible union model. All 23 affected relay/header units and the audio leaf are MATCH, final closure is PROOF-CLOSURE-r3.json.",
+  "prior_audit": {
+    "output": "scratch/integrator/types-compose/interfaces-r1.json",
+    "exit": 1,
+    "disagreements": 1,
+    "policy": 0,
+    "unchecked_c": 1
+  },
+  "matches_sha256": "57681d04288775fb7f12474bc24b9d4da6a6de583ca7166d155fdd18ddc1a452",
+  "candidates_sha256": "83e07d71fa9f3ac04614b212cc8aeeec433bbeb4cdd8f4dc8d6ac23a17612f6b",
+  "compose_record": "scratch/integrator/types-compose/COMPOSE-r2.json",
+  "compose_sha256": "302ef06baff13625fd9516e5b8d50bf2af65de817f52eb67389c35013cc8ac5b",
+  "proof_closure_sha256": "f129e7a6ec459aa61887ca844034f8c94f3236e68f0c3b862e8cf143509a6e96",
+  "output_paths": [
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/scratch/integrator/types-compose/interfaces-r2.json"
+  ],
+  "grant_path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/scratch/integrator/types-compose/HEAVY-SLOT-GRANTED-interfaces-r2.json",
+  "release_path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/scratch/integrator/types-compose/HEAVY-SLOT-RELEASED-interfaces-r2.json"
+}
