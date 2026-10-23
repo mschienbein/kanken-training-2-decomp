@@ -15,15 +15,17 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9–v17** implementations remain selectable, immutable and
-**unadopted**. Sealed FAILs v10–v17 remain under `scratch/review/`; v15 narrows U1 to
-one direct object, v16 stages that proof before aggregation, and v17 adds global COMDAT
-copy vetoes and positive full receipt scope but loses empty group declarations and
-incorrectly requires later reporting fields on early historical receipts.
-The new experimental opt-in **`armlink5-inline-branchnop-v18`** preserves every raw group
-declaration before U1 and restores era-scoped historical verification. Aggregation itself
-never authorizes U1. The historical proposed v1.20 text under `scratch/integrator/linker-unref/`
-has not been amended for v18. Frozen GATES remains v1.19 and defaults remain v2/none.
+The recorded experimental **v9–v17** implementations remain selectable and immutable;
+they and every **v11–v17 gate draft were never adopted**. Sealed FAILs remain under
+`scratch/review/`. V18 implementation source `4a071371` and evidence tip `fdc61f7e` received
+**PASS, no findings** in `scratch/review/linker-v18/codex/`; that seal explicitly does
+not approve exact gate text or adoption.
+This branch now proposes the exact **frozen v1.20** text in `docs/GATES.md`, including
+the normative **v18-only U1** section, adoption sequence and reviewer checklist. The
+v16-era `scratch/integrator/linker-unref/GATES-DRAFT.md` remains immutable historical
+evidence, never current v18 authority. V1.20 activates only between closed checkpoints,
+after separate exact-text approval and Main's integrated full suite; this author text
+does not adopt it. Defaults remain v2/none, and aggregation never authorizes U1.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -74,10 +76,14 @@ The older v3 review fixes below preceded its adoption. V4 never changes v3's fro
 | `armlink5-inline-branchnop-v8` | frozen opt-in, adopted gates v1.19; PASS_WITH_QUALIFICATIONS | corrected v6 plus exclusive own-exidx elimination with complete allocated group/copy closure and zero-terminated frame-only compact extab; no kept-function table removal |
 | `armlink5-inline-branchnop-v9` | recorded unadopted history, selectable; review FAIL | v8 plus U1: unbound, witnessed D0 removal without own-unwind exemption; recorded implementation omits zero-sized dependency sources, exact mapping alignment and relocation-target identity |
 | `armlink5-inline-branchnop-v10` | recorded unadopted history, selectable; review FAIL | v9 plus v8's own-exidx/extab closure for U1 owners; inherits F01/F02/F05 and incomplete matcher/grid reporting closure (F03/F04) |
-| `armlink5-inline-branchnop-v11` | recorded unadopted history, selectable; review FAIL | v10 U1/own-companion design plus allocated dependency/root witnesses, mapping checks, normalized copy targets, matcher hashes and explicit action reporting; complete raw ELF metadata gaps remain |
-| `armlink5-inline-branchnop-v16` | recorded unadopted history, selectable; review FAIL | direct-unit U1 preparation before aggregation; missing foreign same-signature COMDAT closure and positive full-build receipt scope |
-| `armlink5-inline-branchnop-v17` | recorded unadopted history, selectable; review FAIL | all-original allocated COMDAT copy vetoes and positive full receipt scope, but empty declarations disappear and pre-rewrite historical receipts are rejected |
-| `armlink5-inline-branchnop-v18` | experimental opt-in, **not adopted** | v17 plus complete raw group declaration/ownership census before any direct-unit U1 decision, including nonallocated declarations and members; historical receipt fields follow their recorded era |
+| `armlink5-inline-branchnop-v11` | selectable historical implementation/draft; **never adopted**, review FAIL | allocated dependency/root witnesses, mapping checks, normalized copy targets and hash/reporting closure; incomplete raw metadata |
+| `armlink5-inline-branchnop-v12` | selectable historical implementation/draft; **never adopted**, review FAIL | unreduced section metadata; incomplete structural companion-edge proof |
+| `armlink5-inline-branchnop-v13` | selectable historical implementation/draft; **never adopted**, review FAIL | exact structural companion edges; incomplete supplied-definition/personality namespace |
+| `armlink5-inline-branchnop-v14` | selectable historical implementation/draft; **never adopted**, review FAIL | complete namespace resolution; original identity could be borrowed across nested aggregation |
+| `armlink5-inline-branchnop-v15` | selectable historical implementation/draft; **never adopted** | narrowed direct-original-object U1, intentionally unavailable through aggregate builder dispatch |
+| `armlink5-inline-branchnop-v16` | selectable historical implementation/draft; **never adopted**, review FAIL | direct-unit U1 staging; missing foreign same-signature COMDAT closure and positive full receipt scope |
+| `armlink5-inline-branchnop-v17` | selectable historical implementation/draft; **never adopted**, review FAIL | global copy vetoes/full receipt scope; empty declarations disappear and early historical receipts are rejected |
+| `armlink5-inline-branchnop-v18` | implementation PASS; v1.20 exact-text proposal, **not adopted** | complete raw group/ownership census, own-original witness and per-unit composition proofs, modern positive full receipts and era-scoped historical verification |
 
 ## Function-entry alias identity (v6 only)
 
@@ -274,7 +280,12 @@ unchanged. No author source/receipt or `docs/GATES.md` is modified. Independent 
 review and an explicit gate revision after the active frozen checkpoint closes are required
 before adoption; a private MATCH does not grant credit.
 
-## Unreferenced deleting destructors (experimental v9, rule U1)
+The v9–v17 sections below describe historical author proposals and their recorded results,
+not adopted gate authority. References to frozen v1.19 or a proposed v1.20 inside those
+records describe that historical stage. Every v11–v17 draft was never adopted; the current
+v18 exact-text proposal is the normative section and adoption boundary in `docs/GATES.md`.
+
+## Unreferenced deleting destructors (recorded v9; never adopted, rule U1)
 
 V9 is **v8 plus U1**, not a change to any recorded model. Extending v8 preserves its adopted
 R1 own-unwind/group closure instead of silently dropping cmodels2's v8 behavior. U1 does not
@@ -366,7 +377,7 @@ exact exits are recorded in `scratch/integrator/linker-unref/evidence.json`; the
 `scratch/integrator/linker-unref/real-menu-reset-v9/func_001acbb4.result.json`.
 No full build, whole-ledger audit, adoption or new credit is claimed.
 
-## Deleting-destructor own-unwind closure (experimental v10)
+## Deleting-destructor own-unwind closure (recorded v10; never adopted)
 
 V9's real MenuResetScene receipt records a strict own-exidx refusal. It remains a valid
 historical identity, not an adopted model or a rule amended under its recorded name.
@@ -437,7 +448,7 @@ Commands and every action are recorded in `scratch/integrator/linker-unref/evide
 the full result is `scratch/integrator/linker-unref/real-menu-reset-v10/func_001acbb4.result.json`.
 This private MATCH does not adopt v10, grant credit, or replace independent gate review.
 
-## Complete U1 dependency and evidence proof (experimental v11)
+## Complete U1 dependency and evidence proof (recorded v11; never adopted)
 
 The sealed review of `f9c35805` found one blocker and four major defects; its exact
 counterexamples and FAIL remain in `scratch/review/linker-v10/codex/`. Neither v9 nor v10
@@ -527,7 +538,7 @@ Exact argv/cwd/exits, reused-fixture hashes and every action are recorded in
 `scratch/integrator/linker-unref/real-menu-scene-v11-r2/func_00174480.result.json`.
 No full suite, full build, whole-ledger audit, model adoption or new credit is claimed.
 
-## Unreduced semantic section metadata (experimental v12)
+## Unreduced semantic section metadata (recorded v12; never adopted)
 
 The independent review of `5de7845b` held all five earlier root fixes, but sealed **FAIL**
 on **V11-F01**: `SHF_TLS`, `SHF_INFO_LINK` and individual `SHF_MERGE`/`SHF_STRINGS`
@@ -585,10 +596,10 @@ Exact argv/cwd/exits, retained failures, fixture hashes, receipts and actions ar
 `scratch/integrator/linker-unref/evidence-v12.json`; fresh real receipts are under
 `scratch/integrator/linker-unref/real-menu-{reset,scene}-v12-r3/`.
 The v1.20 draft for that proposal named v12 and preserved R1/L1/U1 transition-review obligations.
-V11 remains selectable and unadopted, defaults remain v2/none, and frozen GATES remains v1.19.
+At that stage V11 remained selectable and never adopted; defaults were v2/none and GATES was frozen v1.19.
 No adoption, full suite, full build, checkpoint rewrite or new credit is claimed.
 
-## Edge-specific own-unwind exemption (experimental v13)
+## Edge-specific own-unwind exemption (recorded v13; never adopted)
 
 The independent review of `e0a409b1` confirmed the unreduced-metadata root fix, but sealed
 **FAIL** on **V12-F01**: the reference collector saw foreign INFO_LINK edges, then the
@@ -641,10 +652,10 @@ The same `d8aef63a` real commands, with only model/output selection changed, giv
 Exact argv/cwd/exits, retained failure, fixture hashes and real action/input receipts are
 `scratch/integrator/linker-unref/evidence-v13.json`; fresh real receipts are under
 `scratch/integrator/linker-unref/real-menu-{reset,scene}-v13-r2/`.
-The proposed v1.20 text for that historical proposal named v13. Defaults remain v2/none and frozen GATES remains
-v1.19. No adoption, full suite/build, checkpoint rewrite or new credit is claimed.
+The proposed v1.20 text for that historical proposal named v13 and was never adopted.
+Defaults were v2/none and GATES was then frozen v1.19. No adoption or new credit followed.
 
-## Complete supplied-symbol namespace (experimental v14)
+## Complete supplied-symbol namespace (recorded v14; never adopted)
 
 The independent review of `e164f003` confirmed V12-F01's exact-edge root fix, but sealed
 **FAIL** on **V13-F01**: the combination map used `defined_globals()`, a positive-sized
@@ -717,7 +728,7 @@ Exact argv/cwd/exits, audit binding, fixture hashes and complete real receipts/a
 The proposed v1.20 text for that historical proposal named v14. No adoption, full suite/build, checkpoint rewrite,
 subagent execution or new credit is claimed.
 
-## Narrow single-direct-object U1 scope (experimental v15)
+## Narrow single-direct-object U1 scope (recorded v15; never adopted)
 
 The independent review of `5b60ef11` confirmed the namespace fix, but sealed **FAIL**
 on **V14-F01**. Original symbol scopes survived nested combination, while U1 compared
@@ -790,7 +801,7 @@ The current builder always supplies an aggregate, so v15 **does not authorize U1
 builds**, even with one wrapped unit. No per-unit removal workaround or future broader model is
 implicit. The v1.20 draft for that historical proposal named v15; no adoption, full suite/build, subagents or new credit.
 
-## Direct-unit U1 in full builds (recorded v16; review FAIL)
+## Direct-unit U1 in full builds (recorded v16; never adopted, review FAIL)
 
 V15's aggregate refusal remains immutable. Only
 **`armlink5-inline-branchnop-v16`** adds a builder stage that authorizes U1 on each ledger
@@ -856,7 +867,7 @@ Direct matcher re-runs preserve MenuResetScene **exit 0 / MATCH 100 B** with the
 action, and MenuScene **exit 2 / live vtable refusal** without actions.
 No whole-ledger production build, full suite, adoption, subagents or new credit is claimed.
 
-## Global composition and positive receipt scope (recorded v17; review FAIL)
+## Global composition and positive receipt scope (recorded v17; never adopted, review FAIL)
 
 The sealed v16 review (`scratch/review/linker-v16/codex/SEAL.json`, **FAIL**) reproduces
 two independent holes. A foreign same-signature COMDAT group containing kept code,
@@ -915,10 +926,10 @@ Commands, exits, source/object/header hashes and complete actions are in
 `scratch/integrator/linker-unref/evidence-v17.json`; the systematic closure/absence/
 consumer sweep is `scratch/integrator/linker-unref/AUDIT-v17.json`.
 
-Neither `docs/GATES.md` nor `GATES-DRAFT.md` is changed. No whole-ledger production/full
-build, full suite, adoption, checkpoint mutation, subagent or new credit is claimed.
+That v17 proposal changed neither `docs/GATES.md` nor `GATES-DRAFT.md` and was never
+adopted. Its historical evidence claims no whole-ledger/full build, full suite or new credit.
 
-## Complete raw group census and historical eras (experimental v18)
+## Complete raw group census and historical eras (v18; implementation PASS)
 
 The sealed v17 review (`scratch/review/linker-v17/codex/SEAL.json`, **FAIL**) found two
 blockers: empty affected `SHT_GROUP` declarations disappeared before the member census
@@ -979,9 +990,35 @@ commit `4a071371`, with no accepted source/header/receipt restoration:
 
 Both merge-tree checks and local merges exit 0 without conflicts. The original branch
 history/source-drift failure, the first incomplete synthetic-fixture test run and the
-first external-manifest bounded setup failure are retained in the evidence. Neither GATES
-file is amended; no production full build, full suite, adoption, main mutation or push
-is performed.
+first external-manifest bounded setup failure are retained in the evidence. That
+implementation/evidence phase amended neither GATES file and performed no production
+full build, full suite, adoption, main mutation or push.
+
+### V1.20 normative text and activation boundary
+
+`docs/GATES.md` now contains the separately proposed exact v1.20 text: only explicit
+`armlink5-inline-branchnop-v18` may use its witnessed U1 rule after the adoption sequence.
+Each positive proof uses one compile-attested direct non-nested original object, its own
+retained D1 and primary-table witness, complete raw SHT_GROUP/COMDAT/reference closure
+and only exclusive structurally valid own unwind. The builder cannot borrow an aggregate
+witness or R1 proof; it applies original-input vetoes and compares every staged D1 after
+relocation, including zero-credit owners. The code/metadata section above describes the
+reviewed implementation, not an exception to any normative prerequisite.
+
+Both fresh full receipts, frozen selection, prepare, review and history bind every
+action/companion and input. Positive schema-2 full-image/BLZ receipt identity and exact
+unit/action/witness dispatch are mandatory for new prepares; bounded evidence and
+summaries never authorize acceptance. Historical receipts retain their own era's optional
+fields. Transitions reopen affected R1 callers and the existing L1/U1 owner/dependency
+closure. Earlier algorithms, defaults, records and source-policy qualifications stay
+unchanged; v11–v17 drafts are not relabelled into approval.
+
+Main must first close every active checkpoint under its existing gates/evidence, obtain
+separate independent approval of the committed exact texts, run the integrated full suite
+and record v1.20 on top of v1.19 between checkpoints. The implementation PASS, this text,
+private MATCHes and bounded builds grant no credit and perform no adoption. The immutable
+text hashes and claim-to-code/test map are in
+`scratch/integrator/linker-unref/GATES-v1.20-TEXT.json`.
 
 ## Sources
 

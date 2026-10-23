@@ -1,6 +1,25 @@
-# Gate design — frozen v1.19 (2026-10-17)
+# Gate design — frozen v1.20 (2026-10-23)
 
 Revisions:
+- **v1.20** (2026-10-23): only the new, explicitly selected immutable model
+  `armlink5-inline-branchnop-v18` permits U1 removal of an original-unbound, unrooted
+  deleting-destructor D0 section witnessed by the same direct original object's retained
+  catalogued D1 and a bound primary vtable with an agreeing D1 slot and null D0 slot.
+  Optional exclusive own-exidx/frame-only extab removal requires the complete structural,
+  reference, namespace and group/copy proof below. Every original SHT_GROUP declaration,
+  including empty declarations and filtered/nonallocated members, enters a complete census
+  before a local U1 decision; unavailable, malformed or unaccounted membership refuses.
+  Positive authorization consumes one compile-attested direct non-nested object, never
+  an aggregate or another unit's witness. The builder stages each own unit independently,
+  applies original-input composition vetoes and compares every retained D1 after aggregate
+  relocation. New prepares require positive full-image/BLZ receipt identity and equality,
+  complete unit/action/witness/hash closure and frozen selection through prepare/history;
+  bounded comparisons and summaries never authorize acceptance. Historical receipts retain
+  their recorded era's optional fields. All earlier model algorithms, adopted R1/L1/v8
+  obligations and defaults remain unchanged; v9–v17 and their drafts were never adopted.
+  Activation is a distinct recorded revision on top of v1.19, only between closed checkpoints
+  after independent implementation/exact-text approval and Main's integrated full suite.
+  Implementation PASS alone, this text and private comparisons grant no credit.
 - **v1.19** (2026-10-17): only the new, explicitly selected immutable model
   `armlink5-inline-branchnop-v8` permits an R1-removed helper's exclusive own EHABI index
   and supported frame-only extab to disappear with its complete removable allocated
@@ -201,7 +220,7 @@ next checkpoint is prepared. A batch never runs under a gate design that changed
 
 ## Adoption sequencing and accepted text sources
 
-The revision entries and normative blocks below quote the final accepted text from:
+The earlier revision entries and normative blocks preserve the final accepted text from:
 
 - v1.14 L1 and its selector, v1.15 R1 and the same selector, and the mandatory adoption/reviewer
   checklist: `scratch/review/adopt-r1-l1-r2/REVIEW.md`, “Exact GATES text accepted”
@@ -234,6 +253,15 @@ The revision entries and normative blocks below quote the final accepted text fr
   binds accepted-text SHA-256
   `4886bfc5fe81c2349c044c216ef6814064d6d5763f06ba024569dbae1c095ea9`. The branch's later
   merge of main (`70fe237`) reconciles `docs/LINKER.md` status text only.
+
+The v1.20 implementation is separately reviewed at `scratch/review/linker-v18/codex/`
+(PASS, no findings; source `4a071371317fd0c0ac49074632f4c5316ecfea0f`, evidence/documentation
+tip `fdc61f7ef6863e2eacde2d20fab4a5d861dbaf56`). Its seal explicitly does **not** approve
+exact v18 gate text or adoption. The v1.20 text in this file and `docs/LINKER.md` requires
+separate exact-text approval, bound to their committed hashes in
+`scratch/integrator/linker-unref/GATES-v1.20-TEXT.json`, before the v18 sequence below.
+The v11–v17 author drafts, including the unchanged v16-era `GATES-DRAFT.md`, remain
+never-adopted historical evidence, not accepted v18 text.
 
 The selector re-review requires the following integration order verbatim:
 
@@ -273,6 +301,28 @@ also apply under explicit v8 selection; no older model identity or proof is chan
 Only the complete own-unwind exception below extends the v6 reference-removal boundary.
 This approval performs no adoption and grants no source, helper, metadata, data or
 denominator credit.
+
+### V18 adoption sequencing
+
+Adopt v1.20 as a distinct recorded revision on top of frozen v1.19, preserving all earlier
+accepted provisions and historical selections/receipts. Activation requires the reviewed v18
+implementation, separate passing independent review of these exact committed gate texts,
+Main running the integrated full suite, and finalization and closure of every active
+checkpoint under its existing frozen evidence. Record the revision only **between**
+checkpoints and before the first new prepare selecting v18. Do not change an in-flight
+checkpoint's gates/model or retroactively reinterpret any earlier selection.
+
+The inherited otherwise-v4/v6/v8 bounded-switch, function-entry-alias, independent-binding,
+R1 and complete own-unwind authorizations also apply under explicit v18 selection. Only
+the narrowly witnessed U1 rule below extends the adopted elimination boundary; ordinary
+R1 still requires its actual eligible inlined-call proof. Every model transition reopens
+all affected R1 callers, together with existing L1/U1 owner and helper/header dependencies.
+Strict/v2/v3/v4/v6/v8 algorithms remain frozen; selectable v9–v17 retain their historical
+rules and are not adopted by this revision. Defaults remain v2 / literal `none`.
+
+This text and its implementation review perform no adoption and grant no checkpoint,
+function, helper, metadata, data or denominator credit. Private MATCHes, bounded comparisons,
+focused tests and author audits cannot substitute for the recorded activation sequence.
 
 ## Author loop (no gate, private)
 
@@ -418,6 +468,12 @@ Default selection remains v2 / literal `none`. Both fresh G4 builds, immutable s
 prepare and finalized history must name v8 explicitly. Existing model-transition and
 helper/header/COMDAT dependency reviews remain mandatory, including unchanged credited
 callers and helper-only ledger units. A private MATCH is neither adoption nor acceptance.
+
+After v1.20's separate implementation/exact-text approval and adoption sequence, R1 also
+admits the distinct `armlink5-inline-branchnop-v18` identifier. It inherits all adopted
+corrected-v4/v6/v8 R1, alias, retention, comparison, own-unwind and review obligations.
+The v18-only U1 section below is a separate removal proof, not an R1 call-proof waiver,
+general dead-section collector or permission to select any never-adopted v9–v17 draft.
 
 A credited caller may use R1 only when all the following conditions hold:
 
@@ -630,7 +686,8 @@ Records: `accept/<cp>/` (exclusive-create JSON; FAIL kept), `docs/progress-histo
 
 - Confirm the independently reviewed implementation commits and separately reviewed selector
   match the committed harness being prepared; record v1.14/v1.15 before the first relevant
-  prepare. Do not change `docs/GATES.md` or historical artifacts as part of this draft.
+  prepare. Preserve historical artifacts; record later gate revisions only through their
+  adoption sequences above, never during a checkpoint.
 - Inspect `selection.json`, `prepare.json`, both full receipts and finalized history: both
   explicit choices, fresh compilation, output equality, selection/receipt/prepare hashes,
   full mapping/rewrite/helper closure and source/object/profile attribution must agree.
@@ -651,6 +708,24 @@ Records: `accept/<cp>/` (exclusive-create JSON; FAIL kept), `docs/progress-histo
 - Preserve every bound-original equality/refusal and retention safeguard, including compiler
   `__tagsym$$used`, exported roots, KEEP selectors, data references and COMDAT propagation.
   The R3 review closes F01/F02/F08 only for its reviewed implementation; do not weaken it.
+- For v18, distinguish the implementation PASS from exact-text approval. Bind the actual
+  implementation and both committed gate-text hashes; close every active checkpoint,
+  run Main's integrated full suite and record v1.20 on top of v1.19 before selecting v18.
+  Never treat the v11–v17 drafts or the v16-era scratch draft as adopted text.
+- Inspect every original SHT_GROUP declaration and ownership witness, including empty,
+  zero-sized and filtered/nonallocated cases. Establish each affected copy/member's own
+  removal proof and complete metadata/target agreement; signatures, outer unit labels
+  and an aggregate D1 cannot supply missing evidence. Preserve the no-positive-aggregate-U1
+  boundary and verify every staged owner's retained D1 at its full relocated extent.
+- For U1, establish the primary class/table binding from constructor-installed address
+  points and real virtual consumers; inspect null-D0/retained-D1 evidence, every root and
+  every allocated reference/dependency, including zero-sized/unplaced sources. Treat
+  historical spelling, original linker options and global D0 nonexistence as unproved.
+- For every new prepare, inspect positive full-receipt identity, whole-image and BLZ
+  equality, complete unit/compiler/source/object/header provenance and exact action/witness
+  dispatch in both fresh builds. Missing mode, bounded results, covered-span receipts or
+  summaries cannot become full evidence by omission or relabelling. Retain historical
+  era-specific optional fields without weakening modern evidence or rewriting records.
 - Existing G3–G7, natural source/interface review, original bugs, and complete function extent
   equality remain mandatory. A model selector, private MATCH, suite pass or gate draft grants
   no credit by itself. No real armlink execution or standalone original link is claimed.
@@ -846,6 +921,193 @@ actual type/flags/sh_link, effective PREL31 targets, whole-section extent, encod
 count and separate final zero descriptor terminator. Check all incoming references, ownership,
 roots and original bindings. Establish that no kept function/group member or required original
 entry is erased. Preserve every inherited typed-contract/ABI/QUALIFIED provenance obligation.
+
+### Witnessed unreferenced deleting destructor and own-unwind closure (v18 only)
+
+U1 is permitted only for a new checkpoint explicitly selecting
+`armlink5-inline-branchnop-v18` after the v1.20 adoption sequence. All conditions below
+are mandatory; unsupported, missing or contradictory evidence refuses. V18 includes
+the adopted corrected-v8 baseline, but no earlier model gains U1 authorization from
+this text. No removed D0, companion or other external data earns catalogue credit.
+
+1. **Direct original input.** Each positive U1 authorization consumes exactly one
+   compile-attested direct, non-nested object. Preserve the actual reader origin of
+   every section, symbol and original reference used by the proof. D0, retained D1
+   and companions must belong to that same original object. Combined/nested objects,
+   including a one-element wrapper, archive members, bundles and ambiguous inputs
+   cannot lend witnesses or authorize U1. A common path, ledger owner or outer label
+   is not original identity. Direct matcher/grid U1 comparisons refuse extra objects.
+2. **Complete D0 section.** The full allocated section is readonly executable
+   SHT_PROGBITS, non-NOBITS, non-merge, without link-order or fixed-entry metadata,
+   with power-of-two alignment at least four and complete candidate bytes. It defines
+   exactly one STT_FUNC: a global/weak, nonzero-sized ARM Itanium-ABI `D0Ev` deleting
+   destructor at offset zero under ARMCC's `i.<symbol>` split-section name. Its size
+   is bounded by the complete section, which may include trailing owned bytes/pools.
+   Accept only length-checked ordinary simple/nested identifier encodings, not
+   templates, substitutions, thunks or inferred names. D1/D2/C1/C2 are not U1 owners.
+   Other symbols are only permitted local section symbols and exactly represented
+   local zero-size STT_NOTYPE ARM/Thumb/data markers. Mapping ranges are ordered,
+   nonempty and bounded, with four-byte ARM and two-byte Thumb code/entry/extent
+   alignment and the correct entry ISA. Malformed markers, aliases or independent
+   symbols refuse.
+3. **No original identity or root.** No section symbol may have a canonical,
+   proposed-overlay or explicit per-link original binding or catalogued name/entry.
+   An originally bound D0 retains ordinary placement/comparison; it is not U1.
+   Entry/KEEP/export/used roots, uninterpreted retention metadata and retained
+   group/copy members prevent removal. Retention never waives existing bound-body,
+   extent, alias, reference or original-equality refusals.
+4. **Same-object retained D1 and primary table.** The same encoded class emits a
+   separate retained D1 in that direct original object, with agreeing section and
+   symbol origins, explicitly bound to an ordinary catalogue function start.
+   D1/D2 bindings and ISA agree. The primary `_ZTV` witness is explicitly bound,
+   four-byte aligned and readable, outside catalogued function extents and BSS,
+   without conflicting resolver evidence. Its header has zero offset-to-top,
+   null RTTI or explicitly agreeing `_ZTI`, the retained D1 at offset +8 including
+   ISA, and a null D0 slot at +12. No foreign/nested D1, arbitrary table search,
+   secondary-table inference or missing/contradictory binding is supported.
+   Retained D1 still passes ordinary complete-section/catalogue equality; an extent
+   difference or mismatch is not MATCH or credit.
+5. **Complete namespace and copy identity.** Inventory supplied definitions before
+   classification, regardless of size/allocation/binding/type/storage, and resolve
+   original references without mutating input identities. Locals remain scoped;
+   only legal global/weak externs bind by name. Unsupported/incompatible kinds,
+   named undefined locals, COMMON storage, invalid extents and incomplete table/index
+   evidence refuse. Contradictory/unproved duplicate globals refuse; identical full
+   ABS identities and supported COMDATs retain their existing proof obligations.
+   D0 copies and every affected allocated group copy agree in complete bytes,
+   mappings, defined-symbol/visibility metadata, unreduced section/group header
+   semantics and actual relocation-target identity. Equal local spellings or bytes
+   do not prove equal definitions. Normalize only already-proved structural
+   own-companion targets; unrepresented or contradictory targets/members refuse.
+6. **Every group declaration before U1.** Preserve every original SHT_GROUP
+   declaration, original count, signature/table provenance and complete raw member
+   indices, including empty declarations, zero-sized allocated members and members
+   filtered from placement or allocation. Group flags must have supported COMDAT
+   semantics; canonical symbol-table/signature and entry-size evidence must agree.
+   Missing flag/member words, partial words, duplicate/invalid membership, orphan
+   SHF_GROUP flags, unavailable censuses and incomplete/contradictory metadata refuse.
+   Combination/nesting preserves original counts, identities and issues; absence
+   cannot silently become an empty safe census.
+
+   Before any local U1 decision, the builder validates every original unit's census.
+   Every affected allocated member across all supplied copies must already have its
+   own U1, separately proved R1, or validated own-companion removal proof. Kept code,
+   bound entities, data/BSS, unproved zero-sized or unrepresented members prevent
+   whole-group elimination. In builder composition, every affected declaration must
+   additionally represent at least one allocated member, all in that unit's own
+   removal plan. The direct-unit stage has only its own U1 and companion proofs:
+   it cannot borrow a later aggregate R1 proof or sweep in an arbitrary member.
+   Equal signatures alone never prove complete copy closure.
+7. **Exclusive own unwind only.** A U1 D0 may remove at most one exclusive own index
+   under the v8 format/ownership conditions 2–5 and 7 above, replacing only the R1
+   owner/call prerequisite with this U1 proof. It is readonly allocated
+   SHT_ARM_EXIDX `.ARM.exidx*`, exactly eight bytes, with SHF_LINK_ORDER/sh_link to
+   that exact D0 section and one zero-effective-addend entry-key PREL31. The second
+   word is CANTUNWIND, direct compact personality 0, or the structural PREL31 to the
+   start of one exclusive readonly frame-only compact `.ARM.extab*`. Out-of-line
+   personalities 0/1/2 require their full encoded prefix and one separate final
+   zero descriptor-list terminator. Shared/combined/truncated/kept-function metadata,
+   roots, original bindings, independent entities, unsupported relocations,
+   descriptors and required original placement refuse.
+
+   Only the exact own-index LINK_ORDER/key PREL31 and optional own-extab structural
+   PREL31 edges are exempt. A personality NONE dependency must remain a matching
+   undefined global/weak NOTYPE/FUNC marker with zero value/size and default
+   visibility after the complete supplied-definition census. Any same-name supplied
+   definition, including local, ABS, COMMON, zero-sized or nonallocated storage,
+   denies that external-marker exception. CANTUNWIND has no extra dependency;
+   an extab-pointing index has exactly the two structural references. Other
+   relocation/LINK_ORDER/INFO_LINK edges refuse, even to the same owner or another
+   removal candidate; nonzero INFO_LINK is not structural. Metadata V4BX is not
+   ignored. No original unwind key/address or table bounds are invented.
+8. **All-reference census, not dead-cycle inference.** Census all positive- and
+   zero-sized allocated code/data/tables, retained/dependency sources, aliases,
+   foreign unwind, unresolved D0 names, relocations and link/info dependencies,
+   placed or unplaced. Before a companion exemption, establish complete independent
+   group/owner/format proof. Exidx has no other incoming allocated reference;
+   extab's sole incoming reference is its own index's structural PREL31.
+   Every remaining D0/companion reference refuses, including self/peer cycles and
+   foreign supplied references; apparent mutual deadness is not proof.
+   Ordinary nonreferencing V4BX is allowed only in executable, non-link-ordered
+   PROGBITS code. Direct-link early census precedes placement and its final census
+   follows actual R1 removal proofs; the builder retains the separate original-input
+   censuses/vetoes in condition 9. Provisional candidates never authorize credit.
+9. **Per-unit build, negative composition only.** Compile all ledger units fresh
+   and inspect original objects for unique emitted credited ownership before
+   pruning. After the all-original group census, authorize each U1 plan only on
+   that unit's own direct object. Prepared views remove only its proved U1 owners
+   and companions while preserving definitions/reference provenance. Separate
+   original-input composition checks veto foreign references, supplied personality
+   definitions, incomplete affected groups and contradictory copies; they cannot
+   add a removal or loan a witness. The remaining aggregate performs ordinary
+   placement/relocation/R1 and never authorizes U1; escaped unprocessed U1 candidates
+   refuse. Compare every staged retained D1 against its full catalogue extent
+   after aggregate relocation, even in a zero-credit owning unit.
+10. **Explicit actions and complete input closure.** Record
+    `rule: unused_deleting_destructor`, `target: null`, D0 symbols, full section
+    name/index/size, original object, ledger unit, input kind and table/D1 witness.
+    Each eliminated own companion appears in `unwind_sections` with its original
+    name/index/kind/full size/ownership. Unit `linker_section_rewrites` and
+    `removed_special_members` remain distinct from per-function branch rewrites.
+    Source/object/compiler/profile, fresh dependency/header, original image/layout,
+    catalogue, canonical/proposed names/config/model and every decision/reporting
+    harness input are hash-bound. Match/grid/build/prepare carry all U1 actions or
+    refuse; collection without a per-comparison action receipt refuses U1.
+    No original/candidate buffers, instruction encodings or disassembly are
+    serialized. Every surviving comparison, exact extent, overlap and unique
+    credited emitted-owner obligation remains mandatory.
+11. **Positive full receipts, never bounded substitution.** Every new prepare
+    requires two fresh PASS full build receipts with `schema_version: 2`,
+    `record_kind: build-receipt`, `mode: full`, matching input/output complete
+    image and BLZ hashes and positive credited/whole-image/BLZ equality checks.
+    Coherent units, credited function counts, compiler/source/object/profile/flags,
+    config/harness hashes and selected model evidence are present, not inferred
+    from absent fields. V18 additionally requires
+    `u1_stage: per-unit-direct-before-aggregation`, an explicit per-unit authorization
+    count and action/member/witness lists, including empty lists/count zero.
+    Actions correspond exactly to members; each removed D0 has the full expected
+    positive D1 extent and a matching candidate/original hash witness. Dependency
+    manifests and headers remain bound. Missing fields, altered witness sizes,
+    covered-span evidence, bounded results and summaries cannot pass by omission
+    or relabelling. Bounded mode emits only covered metadata, no hybrid image/BLZ
+    output or recompression, and never authorizes a checkpoint.
+12. **Frozen selection, review and historical binding.** Freeze v18 and the
+    independent literal choice before either fresh build; both receipts agree
+    with that selection. Prepare binds the complete receipts/actions, selection,
+    source/header/config/ledger hashes and modern evidence version. Review,
+    finalize and history re-open the complete hash-bound receipts; summaries
+    cannot replace them. Expose every U1 owner through `model_uses`, including
+    zero-credit units. Model transitions reopen affected R1 callers, all current
+    L1 owner functions and credited U1-owner functions; helper/COMDAT/header
+    revisions retain existing dependency review. Historical records and selections
+    are never rewritten. Explicitly allowed historical schema-1 default-v2 receipts
+    predating producer `linker_model` reporting may omit rewrite dictionaries;
+    later historical and all modern receipts still require them. Historical full
+    image/BLZ evidence stays mandatory and this era rule never weakens new prepare.
+
+U1's null-D0/retained-D1 witness is consistent with virtual-function elimination followed
+by unused-section removal, not proof of original linker options, historical class spelling,
+global D0 nonexistence, native armlink execution or an authenticated original unwind regime.
+Those remain explicit [INFERENCE]/manual-policy boundaries. No similar-byte search,
+general dead-code/data elimination, source-policy waiver or invented original identity
+is authorized. All inherited R1 typed-contract/CFG/ABI/QUALIFIED provenance requirements,
+L1 qualifications and G0–G8 ownership/extent/review obligations remain unchanged.
+
+#### G4/G6 reviewer additions (v18)
+
+G4 requires the direct-unit stage, original-input composition vetoes, every retained D1's
+full relocated comparison and the complete positive full-receipt identity above in both
+fresh builds. Inspect every action/companion and zero-credit owner in both complete
+receipts; output equality, a summary or a bounded PASS cannot waive any condition.
+
+Under G6 inspect the original ELF declarations, membership/flag/table evidence, all
+original identities, complete copy contents/targets, roots and placed/unplaced references.
+Independently establish each U1/companion proof and each retained D1 comparison. Validate
+the primary class/table binding against constructor-installed address points and actual
+virtual-call consumers, not mangling/null cells alone. Preserve every existing manual
+source/typed-contract/ABI obligation; affected R1 callers still require their precise
+visible [INFERENCE] notes and explicit QUALIFIED provenance rows. This text grants no
+credit and does not itself activate v18.
 
 ## Primary sources and review qualifications
 
