@@ -1,0 +1,67 @@
+{
+ "schema_version": 1,
+ "checkpoint": "c010-r7",
+ "merged_source": "c10a3311",
+ "argcheck": {
+  "path": "scratch/integrator/c010-r7/main-argcheck-r1.json",
+  "sha256": "5baeb280d5b84095218a6b73a19164cb9cb2d1d6676c6ecf4d38269d3fa94c4b",
+  "exit_code": 2,
+  "summary": {
+   "callback_sites": 10,
+   "direct_sites": 13115,
+   "elapsed_seconds": 625.327,
+   "flagged_functions": 56,
+   "functions": 2687,
+   "issues": 90,
+   "notes": 513,
+   "rewrite_sites": 58,
+   "tail_sites": 703,
+   "unchecked_functions": 525,
+   "unresolved_indirect_sites": 1045
+  }
+ },
+ "baseline": {
+  "path": "scratch/integrator/c010-r6/main-argcheck-r1.json",
+  "sha256": "d1cc6ce3bb002e234570ba953dcc2246e1eeaf93be07416249ffcf801af9a1d2",
+  "adjudications": "c010-r6 5f581fc7:scratch/integrator/c010/r6/ARGCHECK-ADJUDICATIONS-r1.json (over c009-r6 adjudications)"
+ },
+ "fact_key": "(function, kind, canonical JSON with declaration.line removed)",
+ "new_issues": [
+  {
+   "function": "func_00215ec4",
+   "c010_claim": false,
+   "declaration": {
+    "line": 92,
+    "source": "include/game/functions.h"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x001b4904"
+   ]
+  },
+  {
+   "function": "func_00215ec4",
+   "c010_claim": false,
+   "declaration": {
+    "line": 3,
+    "source": "src/wave4/func_00215ec4.c"
+   },
+   "kind": "missing_core_parameters",
+   "qualification": "[INFERENCE] caller preparation is evidence, not proof of parameter count/type",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x001b4904"
+   ]
+  }
+ ],
+ "new_notes": [],
+ "removed_facts": []
+}

@@ -1,0 +1,92 @@
+{
+ "schema_version": 1,
+ "status": "ALL_NEW_FACTS_ADJUDICATED_FALSE_POSITIVE_NO_SOURCE_CHANGE",
+ "adjudicator": "Main",
+ "checkpoint": "c010-r7",
+ "merged_source": "c10a3311 (main 7c440027 + c010-r7 819edc6f)",
+ "input_binding": {
+  "argcheck": {
+   "path": "scratch/integrator/c010-r7/main-argcheck-r1.json",
+   "sha256": "5baeb280d5b84095218a6b73a19164cb9cb2d1d6676c6ecf4d38269d3fa94c4b",
+   "exit_code": 2,
+   "summary": {
+    "callback_sites": 10,
+    "direct_sites": 13115,
+    "elapsed_seconds": 625.327,
+    "flagged_functions": 56,
+    "functions": 2687,
+    "issues": 90,
+    "notes": 513,
+    "rewrite_sites": 58,
+    "tail_sites": 703,
+    "unchecked_functions": 525,
+    "unresolved_indirect_sites": 1045
+   }
+  },
+  "new_facts": {
+   "path": "scratch/integrator/c010-r7/main-argcheck-new-facts-r1.json",
+   "sha256": "64f0a5b87c26c07846e71b6bb94efbea9ff897201dcb36f5a2a888a7cc8393d8"
+  },
+  "baseline": "scratch/integrator/c010-r6/main-argcheck-r1.json (c010-r6 pre-prepare run; adjudicated by c010-r6 5f581fc7 scratch/integrator/c010/r6/ARGCHECK-ADJUDICATIONS-r1.json over the c009-r6 baseline)"
+ },
+ "scope": {
+  "new_issue_facts": 2,
+  "distinct_targets": 1,
+  "new_note_facts": 0,
+  "removed_facts": 0,
+  "prototype_changes": 0,
+  "NEW_deferrals_added": 0
+ },
+ "why_new": "The c010-r6 pre-prepare argcheck had no c010 receipts. main now carries accept/c010-r6/receipts/*, whose recorded linker rewrites add 12 rewrite-attributed sites (46 -> 58). One of them, func_001b48c8 +60, attributes an erased call to func_00215ec4 and exposes the two facts.",
+ "new_issues": [
+  {
+   "function": "func_00215ec4",
+   "declaration": "include/game/functions.h:92",
+   "kind": "missing_core_parameters",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x001b4904"
+   ]
+  },
+  {
+   "function": "func_00215ec4",
+   "declaration": "src/wave4/func_00215ec4.c:3",
+   "kind": "missing_core_parameters",
+   "registers": [
+    "r1",
+    "r2"
+   ],
+   "sites": [
+    "0x001b4904"
+   ]
+  }
+ ],
+ "adjudication": {
+  "verdict": "FALSE_POSITIVE_UNATTRIBUTED_REMOVED_CALLEE_REWRITE",
+  "caller": {
+   "function": "func_001b48c8",
+   "claim": "c010 NEW",
+   "source": "src/checkpoint10/func_001b48c8.c",
+   "source_sha256": "23ad536704c9e569dd28a9d0f1925046e1234ae977218ff37e29c6f08af76663",
+   "unchanged_since": "e4c5c74b (before c010-r6)"
+  },
+  "observations": [
+   "accept/c010-r6/receipts/c010-r6-{a,b}.json record two inline_nop rewrites in func_001b48c8. +52 (site 0x001b48fc) has removed_callee register_sound_resource_cache_cleanup (section i.register_sound_resource_cache_cleanup, 4 B, src/models/object_registration/sound_resource_cache.c) and target null. +60 (site 0x001b4904) has target 0x00215ec4.",
+   "argcheck attributes only the +60 site (kind linker_rewrite, callee func_00215ec4). Because the +52 site has no target identity, it is not modelled as a call, so its argument writes are not consumed or reset.",
+   "The r1/r2 writes at 0x001b48f8/0x001b48f4 precede the +52 registration site. They are the second and third arguments of source line 12, register_sound_resource_cache_cleanup(cache, func_001b501c, func_00100000); r0 already holds cache from func_001b4f58. Only the r0 write at 0x001b4900 belongs to the +60 call, source line 14: func_00215ec4(&data_0023ecec).",
+   "func_00215ec4 is the empty one-pointer guard release (src/wave4/func_00215ec4.c). It is accepted since wave4, and both declarations agree on void(volatile unsigned int *)."
+  ],
+  "signature_kept": "void func_00215ec4(volatile unsigned int *guard)",
+  "qualification": "[INFERENCE] Attribution of the r1/r2 writes to the +52 removed-callee site comes from site order plus the receipt-recorded removed callee and the caller source's three-argument registration call. The erased registration identity itself stays unrecovered, as already recorded in the c010 known issues."
+ },
+ "mechanical": {
+  "exit_2_retained": true,
+  "issues": 90,
+  "notes": 513,
+  "baseline_88_issues_and_513_notes_identical_to_c010_r6": true
+ },
+ "verification_boundary": "No source, header, manifest, profile, names or catalogue change. Reviewers re-run argcheck after prepare (the c010-r7 receipts then supply the same records) and adjudicate every fact independently."
+}
