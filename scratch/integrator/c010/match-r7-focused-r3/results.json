@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/r7/focused-scope-r3.json",
+  "scope_sha256": "a731bff8542c7f3067668cd1857550908db8c7748555a8aaf6757d949a0d19af",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_units": 3,
+  "completed_units": 3,
+  "paused": false,
+  "match_units": 2,
+  "exit_counts": {
+    "0": 2,
+    "1": 1
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_00184148.cpp",
+      "profile": "game",
+      "functions": [
+        "func_00184148"
+      ],
+      "author": "r41247",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_00184148.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r3/u0000"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    _ZN2nw4anim3res7ResAnim7CleanupEv @ 0x184148 size 0xbc/0xbc\n",
+      "receipt": "scratch/integrator/c010/match-r7-focused-r3/u0000/func_00184148.result.json",
+      "source_sha256": "1cce69b4e54f2946549b45fca9906dc171db4e0c3bf6fa28afa5db6dfc9f0397",
+      "extra_source_sha256": {},
+      "receipt_sha256": "e5dc5857a52275c6b3e856c94adeede864167cec4cc1f7b7fa886e206c613849"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/decoder_command.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001d68c0"
+      ],
+      "author": "tu621",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/decoder_command.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r3/u0001"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001d68c0 @ 0x1d68c0 size 0x94/0x94\n",
+      "receipt": "scratch/integrator/c010/match-r7-focused-r3/u0001/decoder_command.result.json",
+      "source_sha256": "e34dc6f40d055274ef9ccf6c172db2e427a76f1358e33b7a575edea59d12bf17",
+      "extra_source_sha256": {},
+      "receipt_sha256": "c2a192998a0660a4d5e8ba0428284a7a14579e65ed77b87d6cf486e2a276c184"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/release.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_001d9ca0"
+      ],
+      "author": "tu622",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/release.cpp",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r3/u0002"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "output": "MISMATCH func_001d9ca0 @ 0x1d9ca0 size 0x44/0x44 first difference at +0x20\n",
+      "receipt": "scratch/integrator/c010/match-r7-focused-r3/u0002/release.result.json",
+      "source_sha256": "3e3f4d5aa094b08dfb640b3b4540475022c617e71a01a6d4c63a8485045a3ae7",
+      "extra_source_sha256": {},
+      "receipt_sha256": "5c0b8891c8f89a1db59c7620f26ba82e9843b3296165ff61c12c47ee501f37a9"
+    }
+  ],
+  "script_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "rewrite_projection": "scratch/integrator/c010/match-r7-focused-r3/linker-rewrites.json"
+}

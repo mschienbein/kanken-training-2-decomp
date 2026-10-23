@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "agent": "C010R5Codex",
+  "source_commit": "ecd63db2",
+  "base_commit": "7083a0a3b9b56d56e24735ec3963283c92328c16",
+  "prepared_source": "3caf7c4d1559d2c11dfc9983e758acd32e6887ab",
+  "review_input": {
+    "review": "scratch/review/c010-r6/codex-b/REVIEW.json",
+    "sha256": "06f16270044654d1db593fa0f461637e7c462fcd1ac15c4e6971ff1029749b99",
+    "verdict": "FAIL:3 blockers on8 required functions; all existing MATCH observations retained as ground truth."
+  },
+  "counts": {
+    "candidate_units": 419,
+    "candidate_claims": 430,
+    "NEW_functions": 418,
+    "NEW_bytes": 39780,
+    "moves": 12,
+    "moved_bytes": 192,
+    "deferral_units": 88,
+    "deferral_functions": 89,
+    "deferral_bytes": 7832,
+    "proposed_units": 2623,
+    "proposed_functions": 2687,
+    "proposed_bytes": 289152,
+    "accepted_predecessor_functions": 2269,
+    "accepted_predecessor_bytes": 249372,
+    "preserved_accepted_identities": 2269,
+    "helper_only_units": 24
+  },
+  "findings": [
+    {
+      "id": "C010R6B-F01",
+      "disposition": "GENUINE_INVOKING_CALLBACK_INTERFACE_FIX",
+      "functions": [
+        "func_00156dbc",
+        "func_001c4490",
+        "func_001c5d90",
+        "func_00214138"
+      ],
+      "remedy": "All three C callback providers now have exact void*(void*) type; actual concrete pair storage is recovered inside the writing callback. No-op callbacks return the same generic storage without unused record definitions. The veneer and underlying runtime share one declaration family in reset_reference.h, with size_t size/count; service_list.h no longer shadows the ABI.",
+      "definition_headers": [
+        "include/game/reset_reference.h",
+        "include/game/service_list.h"
+      ],
+      "bounded_evidence": "Nine of ten focused-r1 units MATCH exit0, including every callback and service-array caller; the one refusal was only the separate envelope initializer name."
+    },
+    {
+      "id": "C010R6B-F02",
+      "disposition": "GENUINE_SINGLE_SHARED_OBJECT_MODEL",
+      "functions": [
+        "func_0021443c"
+      ],
+      "remedy": "Construct actual extern const SoundEnvelope data0024380a(127,127,127,127,127), using the same shared type and constructor as accepted envelope clients/sibling002437f8. Removed local AdshrCurve object and replaced its obsolete emitted initializer name, not added a compatibility alias.",
+      "canonical_header": "include/game/sound_format.h",
+      "accepted_clients_preserved": [
+        "src/wave9/func_00139020.c",
+        "src/wave9/func_001f1a20.c"
+      ],
+      "bounded_evidence": "Changed canonical-object/observed-name context MATCH exit0 in focused-r2. Failed initial missing-name refusal retained."
+    },
+    {
+      "id": "C010R6B-F03",
+      "disposition": "EXPLICIT_DEPENDENT_NEW_ONLY_DEFERRALS",
+      "functions": [
+        "func_001913fc",
+        "func_001d296c",
+        "func_001d2b8c"
+      ],
+      "remedy": "Defer these NEW setters and remove their source/unused NEW native-name bindings. The complete native BasicSound/SequenceSound/playback getter family is not established, so no invented native override or receiver/result alias is introduced.",
+      "bytes_deferred": 276,
+      "accepted_provider_preserved": {
+        "function": "func_001d3148",
+        "source": "src/wave8/func_001d3148.cpp",
+        "source_sha256": "cfa437a3cd788dad820935ac0d164ca58020da4658629838a638b9a16a4aedf0"
+      },
+      "deferral_record": "scratch/integrator/c010/r7/NEW-DEFERRALS-r1.json"
+    },
+    {
+      "id": "C010R6A-F01-F02",
+      "original_ids": [
+        "F01",
+        "F02"
+      ],
+      "disposition": "SAME_GENUINE_FIXES_AS_CODEX_B",
+      "remedy": "Generic runtime/veneer and all three C callbacks retain void*(void*); both envelope defaults retain canonical SoundEnvelope. No reversal of earlier fixes."
+    },
+    {
+      "id": "C010R6A-F03",
+      "original_id": "F03",
+      "disposition": "GENUINE_REAL_WRAPPER_VALUE",
+      "functions": [
+        "func_00184148"
+      ],
+      "remedy": "Construct ResTextureAnim textures(member.ptr()) in the texture-tag branch. The complete automatic ResMemberAnim value is never cast to a derived reference. Serialized payload and actual wrapper dynamic types are kept distinct.",
+      "bounded_proof": "focused-r3 exit0,MATCH188/188"
+    },
+    {
+      "id": "C010R6A-F04",
+      "original_id": "F04",
+      "disposition": "DEPENDENT_NEW_ONLY_DEFERRAL",
+      "functions": [
+        "func_00140ecc"
+      ],
+      "bytes": 244,
+      "remedy": "Withdraw NEW archive-ID caller rather than call accepted native SoundInfo::GetSoundType through a separate SoundRecord C receiver/result facade. A full native producer/caller cutover is not established; no aliases,copies or casts. Accepted provider remains unchanged."
+    },
+    {
+      "id": "C010R6A-F05",
+      "original_id": "F05",
+      "disposition": "DEPENDENT_NEW_ONLY_DEFERRAL",
+      "functions": [
+        "func_001d7e6c"
+      ],
+      "bytes": 112,
+      "remedy": "Withdraw NEW SoundOperation provider from the bound SoundVoiceObject family. Remove unused SoundOperation/Entry models and prototype; preserve accepted native owner/constructor and members unchanged."
+    },
+    {
+      "id": "C010R7-SWEEP-REAL-DERIVED-EVENT",
+      "disposition": "ONE_GENUINE_FIX_ONE_NEW_ONLY_DEFERRAL",
+      "fixed": [
+        "func_001d68c0"
+      ],
+      "deferred": [
+        "func_001d9ca0"
+      ],
+      "deferred_bytes": 68,
+      "remedy": "Explicitly placement-construct real AudioDecodeEvent in correctly sized raw arena storage, returning the derived type directly. Two honest real BufferReleaseEvent construction forms were not byte-exact, so only that NEW callback is deferred. No added allocation,initialization stores,frame/register forcing or retained mismatching body.",
+      "bounded_proof": "decoderMATCH148/148 exit0; release68/68 +0x20 exit1 in both focused-r3/r4"
+    }
+  ],
+  "proactive_sweep": {
+    "path": "scratch/integrator/c010/r7/PROACTIVE-SWEEP-r2.json",
+    "sha256": "003b4ddf5c898f3635fb4e75e2d4f16fa8d3e8234cb52e044f7d83bc791e7f31",
+    "input_NEW_revised_units": 588,
+    "retained_units": 582,
+    "NEW_only_removed": 6,
+    "compiled_primary_units_screened": 580,
+    "classes": [
+      "generic invoking runtime callbacks",
+      "one model per published object",
+      "native-slot providers adopting their owners",
+      "complete base objects versus actual derived objects",
+      "C/address-named calls to selected native members"
+    ],
+    "legacy_boundary": "Two accepted WaveFile facade edges predate c010 and keep their callee/receiver/result interfaces; explicitly recorded as inherited, not newly approved or silently claimed fixed.",
+    "prefix_limits": "Broad native-binding windows are not table extents. ShaderProgram+0x18 and DisposeCallback+0x34 candidates are outside their actual declared virtual prefixes and are not assigned invented owners."
+  },
+  "no_accepted_identity_deferred": true,
+  "accepted_predecessor_identities_preserved": 2269,
+  "explicit_moves_preserved": 12,
+  "qualifications": [
+    "Source-only typed noninvoking registrations remain distinct from the invoking generic vector runtime.",
+    "Compiler-synthesized native construction/startup ABI is not an explicit incompatible C function-pointer cast.",
+    "Original element/variable/TU names remain INFERENCE, never a license for another same-layout owner.",
+    "Complete native sound getter/owner recovery remains the re-entry prerequisite for the three NEW setters."
+  ],
+  "not_run": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "supersedes": "REMEDIATION-r1.json",
+  "additional_review_input": {
+    "review": "scratch/review/c010-r6/codex-a/REVIEW.json",
+    "sha256": "3dc657c27f9ad76738892964dcc251c1576f404b85bc9ae9d5dac34fa9e410aa",
+    "status_from_Main": "Both c010-r6 independent FAIL reviews registered; immutable input."
+  },
+  "deferral_record": "scratch/integrator/c010/r7/NEW-DEFERRALS-r2.json"
+}

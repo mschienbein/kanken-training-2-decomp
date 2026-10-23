@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "purpose": "Preserve the existing base event API while explicitly placement-constructing the real BufferReleaseEvent before the base upcast. The caller downcast is now from a genuine base subobject, not a complete base object.",
+  "units": [
+    {
+      "source": "src/checkpoint10/collect-r2/release.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_001d9ca0"
+      ],
+      "author": "tu622"
+    }
+  ]
+}
