@@ -1,4 +1,130 @@
-# c010-r6 candidate — known issues and qualifications
+# c010 candidates — known issues and qualifications
+
+## c010-r7 — both reviews folded with real-object and native-owner boundaries
+
+This **unaccepted successor candidate** starts from frozen main `7083a0a3`
+(prepared c010-r6 source `3caf7c4d`), over finalized c009-r6 and denominator
+v13-r2. Historical c010-r6 prepare/review FAIL records are unchanged.
+
+### Current scope
+
+- **419 candidate units / 430 claims:** **418 NEW functions / 39,780 B**, plus
+  **12 accepted-identity moves / 192 B**. Two helper-only candidate units earn
+  no function/data credit.
+- **89 NEW-only deferrals / 7,832 B in 88 units:** the inherited 83-function
+  boundary plus three native sound setters (**276 B**), archive caller
+  `00140ecc` (**244 B**), voice-slot provider `001d7e6c` (**112 B**) and
+  proactive release-event callback `001d9ca0` (**68 B**).
+  No accepted identity is deferred.
+- All **2,269 accepted predecessor identities / 249,372 B** survive. Proposed
+  ledger: **2,623 units / 2,687 functions / 289,152 B**, including 24 helper-only
+  units. These proposal counts are not acceptance credit.
+
+Current authority: `scratch/integrator/c010/r7/HANDOFF-r2.json`,
+`NEW-DEFERRALS-r2.json` and `PROACTIVE-SWEEP-r2.json` in that same directory.
+The handoff binds the fresh complete sequential matcher result, not the frozen
+r6 receipt or a focused subset.
+
+Final combined-review reproof **exited 0**: **2,599/2,599 matcher commands
+exited 0; all 2,687 required functions MATCH**, including the natural contexts
+for all 24 helper-only definitions. Explicit v6/L1 and frozen per-unit profiles
+were used with `--show 0`; the complete rewrite projection reports
+`scope_complete=true`.
+
+### Sealed codex-b findings
+
+- **C010R6B-F01 — genuine generic callback repair:** the three C construction
+  callbacks `00156dbc`, `001c4490`, `001c5d90` now have the actual
+  `void *(void *)` interface. Only a provider that writes concrete element
+  fields recovers its actual element pointer inside the body. The
+  `001911c4` ARM-to-Thumb veneer is declared once beside the existing generic
+  array runtime, with the identical callback, element-size and count types.
+  The specialized `StaticServiceEntry` runtime declaration is removed; no
+  function-pointer cast, adapter or address-only-registration qualification.
+- **C010R6B-F02 — one shared envelope object:** initializer `0021443c` constructs
+  actual `const SoundEnvelope data_0024380a` through its shared constructor,
+  matching the accepted readers and the sibling `002437f8` precedent. The
+  local `AdshrCurve` model and its obsolete initializer-name binding are
+  replaced. Original variable/TU spelling remains `[INFERENCE]`; no five-byte
+  layout equivalence is used as a type alias.
+- **C010R6B-F03 — explicit dependent NEW-only deferrals:** all three native
+  `BasicSound` setters that invoke the unclosed playback-handle slot are
+  removed from credit/source. Accepted `001d3148` and its existing receiver/
+  result model stay unchanged. No invented native provider, name alias,
+  receiver/result cast or implicit native-family approval is introduced.
+
+### Additional sealed codex-a findings
+
+The common generic-callback and envelope findings **F01/F02** are the same
+genuine repairs described above. The remaining findings are folded as follows:
+
+- **F03 — genuine texture-wrapper object:** `ResAnim::Cleanup` constructs a
+  real `ResTextureAnim` value from the tag-selected payload pointer. The
+  complete local `ResMemberAnim` wrapper is never downcast to a derived
+  reference. This is the existing value-wrapper convention, not an assertion
+  that a payload tag changes a C++ wrapper's dynamic type. Exact **188 B MATCH**.
+- **F04 — dependent NEW archive caller deferred:** `00140ecc` is removed
+  rather than invoking native `SoundInfo::GetSoundType` through a separate
+  `SoundRecord` receiver and integer-result facade. The accepted native
+  provider is unchanged; no record alias, payload copy or type-erased adapter.
+- **F05 — dependent NEW voice provider deferred:** `001d7e6c` is removed
+  rather than supplying a free `SoundOperation *` cleanup in the bound native
+  `SoundVoiceObject` family. The parallel `SoundOperation`/entry definitions
+  and prototype are removed. Accepted native constructor/owner forms survive.
+
+The extended sweep also makes the decoder arena producer explicitly construct
+the actual derived `AudioDecodeEvent`, with no base-object downcast; exact
+**148 B MATCH**. Two honest real-derived release-event construction variants
+remain **68/68 B mismatches**, so NEW callback `001d9ca0` is explicitly deferred,
+not retained with a questionable storage projection or code-generation forcing.
+
+
+### Proactive sweep and continuing qualifications
+
+The sweep covers every NEW/revised unit named by the frozen r6 prepare:
+588 input units, of which 582 remain and six are explicitly deferred.
+It inventories generic runtime boundaries, reconstructed objects, complete
+base-value/derived casts, direct C-to-native relocations and bound native slots.
+Both generic providers and the veneer now agree; RTTI roots, handle wrappers,
+vector storage and both envelope defaults retain one published object type.
+The three isolated initializer records have no competing live declaration
+in the exact-symbol source/header search.
+
+Known static native providers are distinguished from unrecovered dynamic
+populations. The retained native archive accessor and Pane uniform-command
+providers use their real native members. No remaining selected NEW/revised
+source invokes `GetBasicSoundPlayerHandle`; complete sound hierarchy recovery
+is still a prerequisite to re-entering the three deferred setters. Existing
+opaque/dynamic interfaces and inherited qualifications are not declared proved
+compatible merely because their callers match.
+
+The current compiled direct-call census covers all 580 scoped primary objects
+and 165 native provider identities. Apart from the removed NEW archive edge,
+the only C-named-to-native edges are the two pre-existing accepted WaveFile
+calls in `001d3c78`; their callee/receiver/result interfaces are unchanged from
+the accepted predecessor. This preserves, and does **not** newly approve, that
+inherited boundary or claim a complete WaveFile family cutover.
+
+Native-binding prefix scans are not table-extent proofs. Apparent candidates
+at ShaderProgram `+0x18` and DisposeCallback `+0x34` lie beyond those classes'
+declared virtual prefixes and are not assigned invented owners. The actual
+ArcResourceAccessor provider remains native; the proved SoundVoiceObject
+provider is deferred. Unrecovered historical extents/populations stay explicit.
+
+
+All earlier R1 erased-helper identity, L1 placement/extent, C-only scheduler
+MUST-discard, ARMCC-extension, noinline, partial-owner and `ORIGINAL BUG:`
+qualifications continue to apply. The new callback fixes are actual invoking
+contracts, not additional no-op-registration hypotheses.
+
+Exact remaining Main-only interfaces/argcheck/prepare argv are in
+`scratch/integrator/c010/r7/REMAINING-HEAVY-COMMANDS-r2.json`, against the fresh
+r7 proposal and complete rewrite projection. No heavy gate, full build, suite,
+prepare, review registration, finalization or push was run by this author.
+Both registered r6 FAIL reviews are retained and folded here. Main must integrate
+clean committed inputs and obtain fresh complete acceptance evidence.
+
+## Historical c010-r6 candidate
 
 This is an **unaccepted candidate**, based on c010-r5 `0c62c893` and integrated
 onto prepared c009-r6 `8e488abc` (prepared source `f47bb29f`). The c010-r5 tree

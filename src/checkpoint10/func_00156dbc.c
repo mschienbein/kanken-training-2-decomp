@@ -7,8 +7,9 @@ struct ConstructorPair00156dbc {
     unsigned long long value;
 };
 
-struct ConstructorPair00156dbc *func_00156dbc(struct ConstructorPair00156dbc *object)
+void *func_00156dbc(void *storage)
 {
+    struct ConstructorPair00156dbc *object = storage;
     object->value = 0;
     return object;
 }

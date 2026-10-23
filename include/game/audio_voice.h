@@ -128,26 +128,6 @@ struct AudioVoiceGroup {
     struct PoolLink link;
 };
 
-/* [INFERENCE] Observed operation/entry prefixes; task_id is the full word
- * passed to cancellation, not an invented RegistryEntry pointer contract. */
-struct SoundOperationEntry {
-    unsigned char reserved00[8];
-    struct AudioVoiceGroup *group;
-    unsigned char reserved0c[0x3c8 - 0x0c];
-};
-struct SoundOperation {
-    unsigned char reserved00[0x0d];
-    unsigned char registered;
-    unsigned char reserved0e[0x44 - 0x0e];
-    struct RegistryEntry entry;
-    unsigned char reserved50[0x10];
-    unsigned task_id;
-    unsigned char reserved64[0x220 - 0x64];
-    unsigned count;
-#ifndef __cplusplus
-    struct SoundOperationEntry entries[];
-#endif
-};
 
 struct AudioEnvelope {
     unsigned char state;
@@ -273,7 +253,6 @@ struct TaskPool;
 extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
-extern void func_001d7e6c(struct SoundOperation *operation);
 /* [INFERENCE] Factory channel/priority words and callback/context are distinct
  * from the lower AudioVoiceGroup allocator's callback. The context remains a
  * pointer because the original delivered callback dereferences it. */

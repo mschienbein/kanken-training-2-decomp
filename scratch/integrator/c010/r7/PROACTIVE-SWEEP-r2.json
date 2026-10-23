@@ -1,0 +1,3914 @@
+{
+  "schema_version": 1,
+  "source_commit": "ecd63db2",
+  "supersedes": "PROACTIVE-SWEEP-r1.json",
+  "scope": {
+    "NEW_revised_input_units": 588,
+    "retained_source_units": 582,
+    "NEW_only_removed_units": 6,
+    "compiled_primary_units_screened": 580,
+    "helper_only_scoped_definitions": 2
+  },
+  "three_extended_classes": [
+    "downcasts of complete objects that are not of the derived type",
+    "C/address-named facade calls to selected native members",
+    "providers in already-bound native families that do not adopt the owner"
+  ],
+  "real_object_repairs": [
+    {
+      "function": "func_00184148",
+      "change": "Construct actual ResTextureAnim value from the tag-selected payload pointer; no reference downcast of the complete local ResMemberAnim wrapper.",
+      "observed": "MATCH188/188, focused-r3 exit0"
+    },
+    {
+      "function": "func_001d68c0",
+      "change": "Placement-construct actual AudioDecodeEvent in its60-byte arena allocation and return that derived type directly. No base-pointer downcast or invented subtype; default initialization adds no zero stores.",
+      "observed": "MATCH148/148, focused-r3 exit0"
+    },
+    {
+      "function": "func_001d9ca0",
+      "change": "Two actual derived BufferReleaseEvent construction forms were attempted, including preserving the base API with a genuine base-subobject upcast. Both mismatch68/68 at+0x20, so the NEW callback is explicitly deferred.",
+      "observed": "focused-r3/r4 actual exit1, records immutable"
+    }
+  ],
+  "current_cast_expressions": [
+    {
+      "source": "src/checkpoint10/collect-r2/func_00130fa0_public_range.cpp",
+      "line": 14,
+      "source_expression": "const ut::BinaryFileHeader *header = reinterpret_cast<const ut::BinaryFileHeader *>(groupFile);",
+      "category": "serialized raw-block/tag projection",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00130fa0_public_range.cpp",
+      "line": 27,
+      "source_expression": "const GroupFile::FileHeader *header = static_cast<const GroupFile::FileHeader *>(groupFile);",
+      "category": "serialized raw-block/tag projection",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+      "line": 17,
+      "source_expression": "void *address = reinterpret_cast<void *>(stream.GetLocationAddress());",
+      "category": "target ABI integer-address representation",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c8244.cpp",
+      "line": 83,
+      "source_expression": "command[7] |= (func_0018f0ac(reinterpret_cast<const void *>(addr)) >> 3) & ADDRESS_MASK;",
+      "category": "target ABI integer-address representation",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c8244.cpp",
+      "line": 86,
+      "source_expression": "command[7 + face] |= (func_0018f0ac(reinterpret_cast<const void *>(addr)) >> 3) & CUBE_ADDRESS_MASK;",
+      "category": "target ABI integer-address representation",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_001235a8_input_constructor.cpp",
+      "line": 26,
+      "source_expression": "reinterpret_cast<R4023BufferCommand *>(ctrIpcCommandBuffer());",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0014d308.cpp",
+      "line": 23,
+      "source_expression": "return reinterpret_cast<AudioVoice *>(",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0014d308.cpp",
+      "line": 24,
+      "source_expression": "reinterpret_cast<char *>(iterator.get()) - offsetof(AudioVoice, link));",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0014d664.cpp",
+      "line": 8,
+      "source_expression": "task = reinterpret_cast<SoundQueuedTask *>(func_00180510(&task->base));",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_00153f28_native.cpp",
+      "line": 9,
+      "source_expression": "return static_cast<const PrefetchFileBlock *>(file->GetBlock(0x4004));",
+      "category": "serialized raw-block/tag projection",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0015e8c4.cpp",
+      "line": 28,
+      "source_expression": "ChoiceBinding **bindings() { return reinterpret_cast<ChoiceBinding **>(this + 1); }",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0016a888.cpp",
+      "line": 22,
+      "source_expression": "func_00183c84(&reader, static_cast<const ArchiveFile *>(loaded_file),",
+      "category": "serialized raw-block/tag projection",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0017e454.cpp",
+      "line": 10,
+      "source_expression": "return reinterpret_cast<const PrefetchReferenceTable *>(reinterpret_cast<const char *>(block) + block->channel_table_offset);",
+      "category": "serialized raw-block/tag projection",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0017f504.cpp",
+      "line": 24,
+      "source_expression": "AudioWorkRequest *task = reinterpret_cast<AudioWorkRequest *>(",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_0017f504.cpp",
+      "line": 25,
+      "source_expression": "reinterpret_cast<char *>(first) - offsetof(AudioWorkRequest, link));",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_00193168.cpp",
+      "line": 22,
+      "source_expression": "unsigned short *temporary = static_cast<unsigned short *>(",
+      "category": "raw allocator/result storage recovery",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_001c7e90.cpp",
+      "line": 20,
+      "source_expression": "void* address = reinterpret_cast<void*>( resImage.GetLocationAddress() );",
+      "category": "target ABI integer-address representation",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_001c7f20.cpp",
+      "line": 20,
+      "source_expression": "void* address = reinterpret_cast<void*>( resImage.GetLocationAddress() );",
+      "category": "target ABI integer-address representation",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/func_001d31cc.cpp",
+      "line": 12,
+      "source_expression": "Command *command = static_cast<Command *>(func_0019147c(manager, (sizeof(Command) + 3) / 4));",
+      "category": "raw allocator/result storage recovery",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/checkpoint10/resume_names_varargs.cpp",
+      "line": 10,
+      "source_expression": "table->names = static_cast<const char **>(",
+      "category": "raw allocator/result storage recovery",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/wave12/func_0016e270.cpp",
+      "line": 15,
+      "source_expression": "PromptObjects *objects = static_cast<PromptObjects *>(",
+      "category": "raw allocator/result storage recovery",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/wave13/func_001db054.cpp",
+      "line": 7,
+      "source_expression": "const wchar_t *current = static_cast<const wchar_t *>(m_CharStrm);",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/wave13/func_001db068.cpp",
+      "line": 7,
+      "source_expression": "const u8 *current = static_cast<const u8 *>(m_CharStrm);",
+      "category": "existing typed subobject/container/cursor convention",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    },
+    {
+      "source": "src/wave15/func_0010b8b8.cpp",
+      "line": 42,
+      "source_expression": "default: func_00192afc((int)result.value, reinterpret_cast<const void *>(address));",
+      "category": "target ABI integer-address representation",
+      "qualification": "Not automatically a derived-type proof. Complete local base values, unproved owner aliases and base-to-derived object projections are separately checked; existing source-policy qualifications remain."
+    }
+  ],
+  "native_header_reference_cast_search": {
+    "pattern": "static_cast<...&...>",
+    "scope": "include/nw",
+    "observed_matches": 0,
+    "limit": "Textual screen, not complete template instantiation/type proof."
+  },
+  "C_named_to_native_compiled_census": {
+    "source_units_screened": 580,
+    "native_provider_identity_count": 165,
+    "C_named_to_native_references": [
+      {
+        "source": "src/retries/func_001d3c78.c",
+        "caller_section": "i.func_001d3c78",
+        "offset": 76,
+        "target_function": "func_001f481c",
+        "native_provider_source": "src/nw4c/snd_WaveFile.cpp",
+        "native_provider_symbol": "_ZNK2nw3snd8internal8WaveFile10FileHeader12GetInfoBlockEv"
+      },
+      {
+        "source": "src/retries/func_001d3c78.c",
+        "caller_section": "i.func_001d3c78",
+        "offset": 88,
+        "target_function": "func_001f47b4",
+        "native_provider_source": "src/nw4c/snd_WaveFile.cpp",
+        "native_provider_symbol": "_ZNK2nw3snd8internal8WaveFile10FileHeader12GetDataBlockEv"
+      }
+    ]
+  },
+  "C_to_native_dispositions": [
+    {
+      "subject": "func_00140ecc -> func_001833ec",
+      "disposition": "NEW_only_deferred",
+      "reason": "No real native SoundInfo producer/caller closure; no equal-layout SoundRecord cast/alias allowed."
+    },
+    {
+      "subject": "accepted func_001d3c78 -> native WaveFile::FileHeader GetInfoBlock/GetDataBlock",
+      "disposition": "INHERITED_ACCEPTED_CALL_BOUNDARY_INTENTIONALLY_UNCHANGED",
+      "reason": "Both call targets and existing C receiver/result facade interfaces predate c010, as source comparison to finalized-c009-r6 parent a443fef1 confirms. C010 only refines the separate relocated argument to its full word; it does not newly supply these native providers or change those call interfaces. Preserve the accepted identity and inherited boundary, not claim a full native WaveFile cutover. These same two inherited edges were listed by sealed codex-a without being reported as patch findings.",
+      "accepted_source": "src/retries/func_001d3c78.c",
+      "source_sha256": "8697d593e6ed596518ae877f80c199c23bfb966cb404a0cb4374be7a9c54d5c9",
+      "qualification": "This is not compatible-type approval of the legacy boundary or an arbitrary alias waiver; Main retains inherited-contract adjudication."
+    }
+  ],
+  "native_binding_prefix_census": [
+    {
+      "native_binding": "_ZTV18W11PositionCommand",
+      "address_point": "0x2236e4",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTV14W11BaseCommand",
+      "address_point": "0x223960",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw4font11ResFontBaseE",
+      "address_point": "0x223cd8",
+      "bounded_prefix_bytes": 112,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3gfx13ShaderProgramE",
+      "address_point": "0x223e88",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [
+        {
+          "slot_offset": 24,
+          "cell_address": "0x223ea0",
+          "target_function": "func_001f0158",
+          "current_provider": "src/wave14/func_001f0158.cpp",
+          "candidate_claimed": true,
+          "accepted_identity": true
+        }
+      ],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3lyt19ArcResourceAccessorE",
+      "address_point": "0x224128",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [
+        {
+          "slot_offset": 8,
+          "cell_address": "0x224130",
+          "target_function": "func_001ccf20",
+          "current_provider": "src/checkpoint10/archive_access.cpp",
+          "candidate_claimed": true,
+          "accepted_identity": false
+        }
+      ],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3lyt6LayoutE",
+      "address_point": "0x22421c",
+      "bounded_prefix_bytes": 76,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3snd18MemorySoundArchive16MemoryFileStreamE",
+      "address_point": "0x22477c",
+      "bounded_prefix_bytes": 88,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3snd8internal18SoundArchiveLoaderE",
+      "address_point": "0x224810",
+      "bounded_prefix_bytes": 60,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3snd8internal21PlayerHeapDataManagerE",
+      "address_point": "0x224854",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTVN2nw3snd8internal6driver15DisposeCallbackE",
+      "address_point": "0x2248b8",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [
+        {
+          "slot_offset": 52,
+          "cell_address": "0x2248ec",
+          "target_function": "func_001d5f1c",
+          "current_provider": "src/checkpoint10/func_001d5f1c.cpp",
+          "candidate_claimed": true,
+          "accepted_identity": false
+        }
+      ],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    },
+    {
+      "native_binding": "_ZTV16SoundVoiceObject",
+      "address_point": "0x2249a0",
+      "bounded_prefix_bytes": 64,
+      "scoped_selected_provider_candidates": [],
+      "qualification": "Conservative prefix census only, NOT a recovered full table extent or owner proof for entries beyond actual declared slots."
+    }
+  ],
+  "prefix_ownership_adjudications": [
+    {
+      "candidate": "_ZTVShaderProgram+0x18 -> func_001f0158",
+      "disposition": "NOT_A_NATIVE_OWNER_ASSIGNMENT",
+      "reason": "ShaderProgram/GfxObject declare only the inherited/overridden virtual destructor pair. The candidate at+0x18 lies beyond that8-byte virtual function prefix; a conservative64-byte read window is not a table extent. No invented ShaderProgram RTTI owner imposed on the accepted getter."
+    },
+    {
+      "candidate": "_ZTVDisposeCallback+0x34 -> func_001d5f1c",
+      "disposition": "NOT_A_NATIVE_OWNER_ASSIGNMENT",
+      "reason": "DisposeCallback declares a destructor pair and InvalidateData, a12-byte function prefix. +0x34 is outside it; no owner is inferred from neighbouring data."
+    },
+    {
+      "candidate": "ArcResourceAccessor+8 -> func_001ccf20",
+      "disposition": "REAL_NATIVE_MEMBER_RETAINED",
+      "reason": "Actual ArcResourceAccessor::GetResource definition and canonical owner/body, already closed by r6."
+    },
+    {
+      "candidate": "SoundVoiceObject+0x14 -> func_001d7e6c",
+      "disposition": "NEW_PROVIDER_DEFERRED",
+      "reason": "The independently proved slot provider is removed; false SoundOperation/Entry models and declaration removed, accepted constructor and native class untouched."
+    }
+  ],
+  "large_native_prefix_coverage": {
+    "ResFontBase_bytes_screened": 112,
+    "MemoryFileStream_bytes_screened": 88,
+    "Layout_bytes_screened": 76,
+    "full_historical_extents_claimed": false,
+    "note": "Only source-declared/native witnessed slot relationships justify an owner assignment; broader prefix candidates are not evidence of table extent."
+  },
+  "prior_three_class_sweep": "PROACTIVE-SWEEP-r1.json retained; generic-runtime callback/shared-object/native-getter remedies remain active.",
+  "units": [
+    {
+      "source": "src/checkpoint10/alternate1/func_001650f8.c",
+      "status": "retained_screened",
+      "source_sha256": "a419a52ddf5e188188a89603846e5fe964805cc6f0803a0802b4f1a92f8ac823",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/archive_access.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d57de789abd4f404adf06d84a946230869c7b48f6daf45d0df6e5b9952fcf24b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/c5f4_final2.cpp",
+      "status": "retained_screened",
+      "source_sha256": "8de3aa195751724b7d66daf4da139ceada87353f1210f5a379e1bea672f3faf9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/capture_output_locals.c",
+      "status": "retained_screened",
+      "source_sha256": "d24a69c196c0a4a9ef280ded7323b38d405212457a0eb5acadbf016b5888399a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/aux_commands.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e5c3768671cdb4d4dc195eb5052cb90afe206d163ef817d16b16c351c98b1435",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d2030f1805a7a1ad1f234f31ef9927f040838db66047768faeefd21f6f084d02",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/decoder_command.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e34dc6f40d055274ef9ccf6c172db2e427a76f1358e33b7a575edea59d12bf17",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0011359c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d3cb024318d2bcad68816fdc4dc0224d186cdd0552dc2086c3500e3b335bcef0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00123364.c",
+      "status": "retained_screened",
+      "source_sha256": "568c100c4b256e41a2faef40cccd142d33df6406d2da3691a98d574d82491216",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00130fa0_public_range.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c3071a5cce67e2d7a12b53e494292664dae9179e883d2751d228f1686ed35e33",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0014b54c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f7fbc00e6c29fee32dcc41e138433f65ae3647548614459cae38957989e52dda",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0016a0d0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f21ce9edc3381612b0edb88f9e006af24a1695d8b03ac64ba4dce85010846de2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0017a518.cpp",
+      "status": "retained_screened",
+      "source_sha256": "6e71d51f5b5cd48aa4c613f8fda9d135caf8d3984e8ac84efd9acc8bd012b680",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0017a71c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bc9478268ba9443162bcd14672a7cdd22d41ec94fdeb73ec69e43ac8785fff8f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001913fc.cpp",
+      "status": "NEW_only_deferred_removed",
+      "source_sha256": null,
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0019ecf8.c",
+      "status": "retained_screened",
+      "source_sha256": "c13db71619b8ba266b74e90e35a5e04ba58f4ccfb7f16f97d69d1bd3ad811179",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001bbdd4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "fd36901038981152aac89edbad7b0763f897e7112f5ac6abe9af566fea1800ff",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c4b24.cpp",
+      "status": "retained_screened",
+      "source_sha256": "73ace25414ae379d3fc7206aaaa8ad39f7d10d266a2333f99def7fc990aa6b04",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c5a9c_native.cpp",
+      "status": "retained_screened",
+      "source_sha256": "88d6d13ed723dc682ef019d839f4f65d590d186dfc091b685a80eaf0939921fe",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c5d94.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d00e4f7c4b7ad9633bdbd5caad539be138eae6309e21f720cbed062bcab7a35a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c6a68.cpp",
+      "status": "retained_screened",
+      "source_sha256": "93a683be0334643915e806573ffb2bcbdfc1671a156552574b987c72eb59f965",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c7ab4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "8a18a0d9e9011d7f44a377045fbb19e80d931605fbb445c7216beaadf892f584",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c8244.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3d9ad5e596eda30e74668153d6c6e1eba6c0cdb83b65cedde96458d36b216259",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001cb10c_destructor.cpp",
+      "status": "retained_screened",
+      "source_sha256": "116af2213a4443acde93f24aad9237fcba0ad60899f599ead1f0e6a609602d5f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001cff58.cpp",
+      "status": "retained_screened",
+      "source_sha256": "848d2d6edd583a78d47d08544bf45c9000114c878c2dfeed3773b94e529a2ab4",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001d2268_history_ref.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d05097f458306d709fd23d1910252426901b312136a86ab0cf50286314324801",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001d2368.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b2f8af4a8c11469a07aacbf7bce1c028b3b38eb47d96ebad10e8502e5566869e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001d273c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "498ea41571376ac5aa23fc507d708d16f84cd86db9835669389686bf52805a21",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001d296c.cpp",
+      "status": "NEW_only_deferred_removed",
+      "source_sha256": null,
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001d2b8c.cpp",
+      "status": "NEW_only_deferred_removed",
+      "source_sha256": null,
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001d860c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f00ffa492878b6c1cd5dbeb2b3ad090eaa2fb7479e265e4d9113a5f9396748c9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001dc4a4.c",
+      "status": "retained_screened",
+      "source_sha256": "cb685ee0afc0677fe4a74371b5c3bbe2863459fa9ae4a0c24faa8736c4329ace",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001eac48.cpp",
+      "status": "retained_screened",
+      "source_sha256": "703416b837f8307ff7b8181ff638eb858c2a01cbcba2da86aef8b05a5f9c3b57",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001f165c_native_offset_chain.cpp",
+      "status": "retained_screened",
+      "source_sha256": "0b145636ed218765ddf4a8744cec57bdb40d8d36c14f198ec7d4222d85cfc938",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001f58bc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bd07f518e1096109c921c9c8254793c05a5073397be8cf6f9c9bcf899302de65",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001f5930.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b7dcca566c1fb4b5994c693368aeb32bcbf7861821e1ffdbe644920d6aec3599",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001f596c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "03ec38ff41fcb05dbccb913e135de9810eb6419dae09513019a076c25467da76",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002052f0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "501769277cde4b3353200e651f11b2e390c0252d310ed17d2a420447659227f4",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00205308.cpp",
+      "status": "retained_screened",
+      "source_sha256": "94db5c6dfcab8dbf5ffb3d1fad3538096759b1d2faf78f4ee658a8f152188a01",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002069ac.cpp",
+      "status": "retained_screened",
+      "source_sha256": "9e5bc4f09cb23686b8ac9001c5c1ead2b724b8fe078b47a3d041c394fa85039f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002069c0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1bc8069608461af89267c46ed1acf2eeadb2ce8adefefdc65aa4d9332719926d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002069d4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ed50bf5a4df3e898de9b02e77dc8779c8eae98c7dd848df971f5617abaee24de",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00206a4c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d6abe28042c2ac8698a94dfceaa15746e88f62c0fdf1fbd43cae2f5f4d577792",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0020e358.cpp",
+      "status": "retained_screened",
+      "source_sha256": "5fbba5932b45f4baf3b4976042ed912c69039ca1fbfaf151c9c9316504e58d90",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0020e370.cpp",
+      "status": "retained_screened",
+      "source_sha256": "8e681ef8b52cf7f4268b49080eea7804d9afb065443af67bf76585168e492467",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021086c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c8be28c53f2f63428683891510fc0d40259ca54b8c1eb7c2093b0cff2ad66cfb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00210880.cpp",
+      "status": "retained_screened",
+      "source_sha256": "6949e465705bb4bdad68e3c20499bb8006e8c45b12a9eca322fb0eed7a2cce73",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00210898.cpp",
+      "status": "retained_screened",
+      "source_sha256": "225d02df705450e0f640d35fb2553532ef374598bb0cc6663aaa1c4d5be51713",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002108e8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "5e91ab6da6dd44aabafcbaf4a1238da0f9f8f9e8577741f5233875f10aaf1fc2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00210900.cpp",
+      "status": "retained_screened",
+      "source_sha256": "32f6423f1ee093172ddffca78fe50df21fd27134cf748346e1fdcf56c90dde2b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021092c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "55414407acdaf002af82bc0ff0473fac88fce7002e7b7cbd912112cd86454ec2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00210948.cpp",
+      "status": "retained_screened",
+      "source_sha256": "8ed59d1e97421d67d0d9a4ed1df62104ee24075296c3f209f4982c9986d1c641",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002124ec.cpp",
+      "status": "retained_screened",
+      "source_sha256": "9e155c3a6dca3fcd94eb4edb9c0a2d12fea42846b05f7d2eb97097b7ea0c7cc7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212500.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2cbfaaef33b7e41a4f538e3c7cbb4c574cd2d4c13d2b6f37c77022dee2d3ceff",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212518.cpp",
+      "status": "retained_screened",
+      "source_sha256": "688ece25e031788a9ba4353f7edbf86e86b09019c98cd0eba2cbb74a44cda295",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021252c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "76d8497e304536ffef53ddd30988f076f172dd1f53ccea39d69ed1a16c1954f1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212544.cpp",
+      "status": "retained_screened",
+      "source_sha256": "9e72a146cf3667e0d4279fd3cd5045dbc0c9c0b028ded0c8464ec1ffaf74bee7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212558.cpp",
+      "status": "retained_screened",
+      "source_sha256": "25064dbfecf6a8ca7f8c1eba7e4da09182bbd5f597c157452635ff8b80fa3ee0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021256c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e6d9f9355f30f2cfbc6a9b6960a9d8e6c4acf608f671577c7fb82975942cd0cf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212580.cpp",
+      "status": "retained_screened",
+      "source_sha256": "877ce505aeae84038a0f21d1fab6de6d56de3753071d1ff5b84d7e68bfed5612",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002126c8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "6e6434b8756776143644970f47267aec0b8b1729d32aa393b6d0bde564f493dc",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002126dc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "30bd74b9ddf7c7a45a9903c07478c2be84b1c5f68b58f5c34105bcb650da6b58",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212a8c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3f344c0630e6e9fc3b0e4ddbea4b91b46fce04bfd258e9f1dbd5b8419191c476",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212aa4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d9be08e72e279d4ca3ae8ec608a4403b86badfcbccec3c1e8b35a4a733931fd8",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212abc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3d9de9ed943adf178c1d05e8945a4be4bcbb1c1a7f0eb394078ff566c1d38c25",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212ad0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7c1ea111b690366e3959abeda9ba7f293c21a22eddb045e1a351daa728ee1cfe",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00212b48.cpp",
+      "status": "retained_screened",
+      "source_sha256": "04746b6bf251fe3aa3b01dc69ecc33de3488171101face7528cc6a9de66f6b3e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00213624.cpp",
+      "status": "retained_screened",
+      "source_sha256": "9653f0283f2d3a1b62cd313dce77cbaa88ea699048fc481c23d7bdd17e5eb563",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021431c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bb838ae808afac18e76d9a2e0a3a0555d855844dfc436f7fb81d51190d8a57a5",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214334.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3208069693695fd03e93e48ed2d2922414b9d1b1244ae44184963cbb8e603098",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021434c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "4364567e1926e546812ec5ed5f7d955fd4154efc8d53e436277ad21f163cdeda",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214360.cpp",
+      "status": "retained_screened",
+      "source_sha256": "087f3d4abecfe7c3a0b3836595b26f47298494bffb1182ad6cd5dd61183bdeec",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214378.cpp",
+      "status": "retained_screened",
+      "source_sha256": "99530cf8586a0ecd836ecd723f5ab60727cf7e69f237e16d53c58cd72ca8c41b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214390.cpp",
+      "status": "retained_screened",
+      "source_sha256": "a2bd398c8e62ed46e43dde73c0232b61e56fc6937068b9caa9f7d696f834eef3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002143bc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "23306de408cbeb6b56f6d777a20c3f1cbfe8a6e81461fbe79b3511f5a365a7b4",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002143d4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "dabf3d5158166cabc4dae0e2864dfc4141a984ce67da4a39823b72d53191e200",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214424.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b1d08ffc67c769795f255963269c39193e49efd9203e5d0e71d5e192ea525595",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_0021443c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7e90fd237c4350e079664a1a5fc4f4571397062a39d0b402fb9863357378142d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002145dc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "be68a23c918258acf53edb040fb99b262b039ab7e7ecf06902b19e73ef3f111c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214fa0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "6a59370fc6937ddf24de23d84b5d141cbc273cc4e4b342fada401682c7dce469",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214fb8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "40d5cde9b117cce27187734890d7d4a5f47a5d3ee4d6b894c7615dedc96cc869",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00214fd0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "fe93b8e40b0495bff5223dc94a1dc67cf10a5a85b230134152044b5ae25de878",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002158c0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "03e20f0d4b8929fe3efa72b04e41e414fe30b6ef749513eca3c89c9fc492cb02",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002158ec.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2be61e3295991a90e4737ce26b68e382ee59f8dd477433a0f05e71e72135d9af",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215904.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ae66b0fe4b31584efce2340bf7705a625a4c49e9498924c75ac0263b47a0824c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215960.cpp",
+      "status": "retained_screened",
+      "source_sha256": "4790988231c4b3eb5c5d06ffd82e1cc638920f4afb14fdd7645e819aeb7bd549",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215978.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1078b69c3daf06afd1839a502cb63b21fc8a72f332412598ec5485aa558f1728",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002159c8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2aabde353b368a2cd4d157c5f15c69a75e03578442ddf899fdf98e32b5e47d25",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002159dc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "8fc741d2d3f32dbdcda7e203caf6426c594643662458395508fe723584abfe9e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_002159f4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ada4ee3004e4b11581a3ad79e5c7e63398df48445bd60a3fb2bf5fa07d121068",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215a0c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "91f06b34828197d814752d98113ec83f7b5f48e9d91a54d6dafbfd56a75911b4",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215a24.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e0e27803597bb9b4abd7439a7de107309ac50e0019f3b6c18ee2db60fdbefabe",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215a4c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b3d7777cc8f3d51b07b241f6d1fa36b21e52499b464c3e095d442906cc6c2337",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215a64.cpp",
+      "status": "retained_screened",
+      "source_sha256": "4e6340599f14fb5324f2bf4ca84f71cb03b8ceb47b09a11c76d60c557f0f6d57",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215a7c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "adee6632c5055bb02ce5465ac7fd185cb0a7f1a84f691854d0df6da92f3dc1ab",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215a94.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e1b19f30f08993b666a0e65a7167a18b29e02aae7eb4e1a66dec5fa1a9e38453",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215aac.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7929a4d3c883cdc5d05c10d816b913c22efed29589eecbdd932ed531bfb5a89c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_00215ac4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "abdcc7073c3a933a725a359576bf41a93db3f7b7e8bce100c28bdbebb7f4aa6f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/light_position.cpp",
+      "status": "retained_screened",
+      "source_sha256": "71a2fc5eb1cde9ac905f0a3154f1abc9f8a4cbb21804a6b964f8446e7c5da185",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/nw-reader.cpp",
+      "status": "retained_screened",
+      "source_sha256": "81f49008201f5ea001aa729bdc34fe5f4f733f808ccd35050fce45a7a81f12bd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/release.cpp",
+      "status": "NEW_only_deferred_removed",
+      "source_sha256": null,
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/copy-view.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c315f16622a049a420f28b91061a2c5fdc2ca4e9491a3056efccccbe4a0bb90a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/doubleword.c",
+      "status": "retained_screened",
+      "source_sha256": "ffcd8c556d07eefc98b63080dc95aaffa1226fe01b3896533f7969183b9a04ce",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/end_local.c",
+      "status": "retained_screened",
+      "source_sha256": "d3cc92563602b6a3850c8b2bd2a401d628b2ed51c4e8ee1511024111507f1af0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/flag_bool.c",
+      "status": "retained_screened",
+      "source_sha256": "2f1d59b8b799abc6908aa21db041139c04225bd856a2a7f3099de0a3f9ba56b9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010239c.c",
+      "status": "retained_screened",
+      "source_sha256": "55c70e33188a4d2969012251c6bb1252e8ac82f8922f01d6f47b075a8f119d42",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001032e0.c",
+      "status": "retained_screened",
+      "source_sha256": "31b1cd75afc54bbb0e5d4a5f79b4fe40d2657fe15aea65b564570d4ef33269de",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001033cc.c",
+      "status": "retained_screened",
+      "source_sha256": "d1781f47d325099d6a3363d43bd62d9269b42ecb42eea9afe732523a4398e95f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00103978.c",
+      "status": "retained_screened",
+      "source_sha256": "ebe77131396bf59ead5ce75166755915e8581a6f65703ae455a28afec37ab6ee",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00104d6c.c",
+      "status": "retained_screened",
+      "source_sha256": "9528c0e0f34f46060e4070fd9d42d70a1d3dfe5f47873e2eaa2c19c9c610430f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00104fc4.c",
+      "status": "retained_screened",
+      "source_sha256": "58e0a20e6478db66e202ab9741b8524b86ec0dfe83a55a15fff1b553390178d5",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00106e48.c",
+      "status": "retained_screened",
+      "source_sha256": "12d2dbef2ada654637d8de3d4e57e659e7a2b98694bfd5b408e78ccfb479ed82",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00106e70.c",
+      "status": "retained_screened",
+      "source_sha256": "ecab8d2f8a32b17008a092284e2eef78e25ef946d74b63480a57dd01b6c8a98e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00106ec4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "27076d7de4b2a79ebe6d651b2abc7c1304c73618bbbed621b7eba53a150da6f7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00107ce4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "64a7d8dfda3e78ae7c05762b518c1bc70a0abe0e126e51fd83cff8d758906b1f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010a704.c",
+      "status": "retained_screened",
+      "source_sha256": "4df93169a40d15e8c8dd1ae985d51b6e089ab48338ea490379b481dc01ee8dcb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010a814.c",
+      "status": "retained_screened",
+      "source_sha256": "6a3a77e344f7b08af26b28ce1c28c9657327d52554983c64b9f78bc2a3691ecd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010b5cc.c",
+      "status": "retained_screened",
+      "source_sha256": "7362ffc98a51c73a0ca13c06d234fc28d49eecb15f1ec4c5732bd7a4e2458ae0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010bd7c.c",
+      "status": "retained_screened",
+      "source_sha256": "1adeb0dd5a4593601f1d00f5108d4b57125ba847a971680e03aaa3a26aae694e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010bef4.c",
+      "status": "retained_screened",
+      "source_sha256": "7993058308061b7e1efc9c67d4dc4cf25070ffb6051185a2045f9c0fb2d2184a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010c06c_pc_local.cpp",
+      "status": "retained_screened",
+      "source_sha256": "aaf872997eda32ae38a3fd2e6f144a77d5437eaa5c0a3c3512edb8e5a21f4417",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010c33c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2edbaca333ed58ef1d85f86d2a99062437ccaf76784b9c47f246f2fc3587401c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010c498.cpp",
+      "status": "retained_screened",
+      "source_sha256": "879c06d67d3839e78d58d234f5bd867f612367f8fcfe0bd640ab55a97ee4150d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010c504.c",
+      "status": "retained_screened",
+      "source_sha256": "683593810a0aa16e8f717f17b273fff6804bdb029097775199c2da667e0c4481",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010d27c.c",
+      "status": "retained_screened",
+      "source_sha256": "fc7a2d05a93ff3abeac2d85d9e1a862fc38321bc7e0086cc63d707aee2f644ed",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010d454.c",
+      "status": "retained_screened",
+      "source_sha256": "a5229d69cdd5140ec52304626d2070f35d2538fe9fb93ab9060115bdb3dd37ad",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010d644.cpp",
+      "status": "retained_screened",
+      "source_sha256": "732001860292918df284f856b76ff83f854f703f8d6a87f038b5baf6311650b3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010dd88.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7ad3f4c2d1295942b628a581136ff89e8bda6c5cdc450c3c2115f2467cad4496",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0010e230.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b96d7de7abdfab1a48c8b16119a51db0367bb75bcdaa21211120f0958e6af251",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00110548.c",
+      "status": "retained_screened",
+      "source_sha256": "2276f44eed55b287b58fac6698e3cd4742ea38c8d0fc9a268af7d42c9f83ea86",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0011073c.c",
+      "status": "retained_screened",
+      "source_sha256": "8f69df2ded234d4c8b27e879f487fea1fc04a4ff1b055bf80ed806e3605f52a0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00113254.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1e8c767deaae5b5f4c258545ed6364add946e8a9f239a905492482f6a9df9f6d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0011327c.c",
+      "status": "retained_screened",
+      "source_sha256": "c542ac1c280109c77bc47836a03335eeeee6406945d2dd9489f61dd3c06184fe",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00113afc.c",
+      "status": "retained_screened",
+      "source_sha256": "926c43783a2a19705db1338d4f210bdf4e3cf27ae1e83f90c0638166fe3e2b87",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00114bac.c",
+      "status": "retained_screened",
+      "source_sha256": "609f864ef1643dce73553d859f9d75c09bc53f8e6a1781706b6da9ff17c7befb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001151b8.c",
+      "status": "retained_screened",
+      "source_sha256": "220f7e448881f6dc579726e07dea5c60aa57619b71131e4315ddecabd23a8c9e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001159e8.c",
+      "status": "retained_screened",
+      "source_sha256": "039d9c99fc8ab98e83028fb7b496c6a0083a65a405ac5941a5d6da89d6a47fd6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00116c1c.c",
+      "status": "retained_screened",
+      "source_sha256": "d8f05c9fe7b34683ec4a04d72cf5599a0de25a3ab115a257d96ffd84a380225f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "status": "retained_screened",
+      "source_sha256": "e5ea53336e3b9e4530f75d88df129303f76148d720305a9c4321961b8951731e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0011da50.c",
+      "status": "retained_screened",
+      "source_sha256": "03459b3084694c71c1f892509b82f6957fa86f25f3eeaeaadfd3287a8c2af1ad",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0011f6a8.c",
+      "status": "retained_screened",
+      "source_sha256": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0011f6c8.c",
+      "status": "retained_screened",
+      "source_sha256": "a6695f80127d31f876c34afe17bfc4ad1602062d142d9c3048aebc63d4f2cbf5",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00120dc4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "921e27595b609280874600b1e3a281faa07f36295fc4ae902435ecef80ae6ae6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00121520.c",
+      "status": "retained_screened",
+      "source_sha256": "54d58917d65a60452fb3dca1e6538333d73bcfdc9bb16162c5defa30aa651418",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012159c.c",
+      "status": "retained_screened",
+      "source_sha256": "9a1e824ca6625c39b06d10f28ca272d63b5cd42751891620bda4b8457d7b0b11",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00121838.c",
+      "status": "retained_screened",
+      "source_sha256": "836fee065f3243683f1471f84a6d27e520a07d34e3c52ae59a8f0442f243f888",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00121bc8.c",
+      "status": "retained_screened",
+      "source_sha256": "ae49846299b71d835a1ef36231db7377bbec7225333e5f1b5dfb4a35713b62ce",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00121cf8.c",
+      "status": "retained_screened",
+      "source_sha256": "741c1b3547cab183c2f981eacb6d4aac324d3fde9ce0c18b66bc74f88221e176",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00121d28_final_formatted.c",
+      "status": "retained_screened",
+      "source_sha256": "afaab4d8af83d3a83ac18c43261bc3fec513bf5d8881eaabb7037eb64e2ec7e1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001224a4.c",
+      "status": "retained_screened",
+      "source_sha256": "a8584edb2d05f2635b2888f26c9da2bb1091b6e324b2a9d28a532112366a1cca",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00122988.c",
+      "status": "retained_screened",
+      "source_sha256": "3c04fad65bbe5e0cdd4719335d1bd01a47ef17a806e33fb2988ec3781c71590d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001235a8_input_constructor.cpp",
+      "status": "retained_screened",
+      "source_sha256": "35e367900abcb0a8b55bb1c383516014d16674f03e119057676698f49ae3e017",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00123a70.c",
+      "status": "retained_screened",
+      "source_sha256": "546bce50bfc6b001daed81dd1054af0cd127c4933671be41f7d78069c076a781",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00127168.c",
+      "status": "retained_screened",
+      "source_sha256": "04d6024ad6be1ffeb598b244e0c6cdaf5ca1d084915ad8a2bc1c106aebb00b3a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012d394.c",
+      "status": "retained_screened",
+      "source_sha256": "c32b90dcf45e852763abf6cd5d8c70502804eb8c0292c809236a9082e9339a63",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012d3e4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "606a9945a69e4b363dd0af920618ae2e467bb867a355a670cdbc75294247dca1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012d478.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f4f8b8a1bef80cd4a8a77c9014c202e5d55516d637753eb98f67a6fa83978a3e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012d788.c",
+      "status": "retained_screened",
+      "source_sha256": "32eb72f75409e3e321edaf7dc94cc21a1d37ec83878c2192b416b0e597d6fa2f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012e7f8.c",
+      "status": "retained_screened",
+      "source_sha256": "b016bc6c9bd736c7f810d119e924ac17f5d6e4c04eb4f047e46499ac2972b37a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012e8a4.c",
+      "status": "retained_screened",
+      "source_sha256": "b096d670749639f392d494c6459ad380a56839d47dbba34380cdf947e60c7556",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012ef30.cpp",
+      "status": "retained_screened",
+      "source_sha256": "92f5287581fe8010690bbe4e5310edbe7331b1009237eec6b447c825042c37ad",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012f51c.c",
+      "status": "retained_screened",
+      "source_sha256": "fc41a7eafe701a1686b9b5a20801e7a259d454d4d1a0e44f91c186210daa1a09",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012f570.c",
+      "status": "retained_screened",
+      "source_sha256": "e66c03e5d203cf28a33bf636205d5b4ed711f29a0f4632ef92ca3b98c2e552cf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0012f84c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "50b0c24decd70ad8d61408139c27679e5542d356db78eb1ab0750e7cd79a64c8",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00130308.c",
+      "status": "retained_screened",
+      "source_sha256": "095c423cd27232aebb1e2420cbb7dd40199013fa2330f9b9c949567088d56d15",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001306c8.c",
+      "status": "retained_screened",
+      "source_sha256": "0a4f89533986391beec185b6283d8fd0e17c884a64cfbf016ee16cc626d92595",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00131948.c",
+      "status": "retained_screened",
+      "source_sha256": "d6bceda912ca608a00024747c2a4954990d0053d4fdd493edf9f3fca251234a9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00132310.c",
+      "status": "retained_screened",
+      "source_sha256": "418dd5feb55931e4b3d545e32357920fc689ad37863823f4a0c88d998ae2e608",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00132324.c",
+      "status": "retained_screened",
+      "source_sha256": "5edc94a13ec90c9b3b8147936900758e13875acf0345126eacbc18e8ae2f7c45",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00132344.c",
+      "status": "retained_screened",
+      "source_sha256": "09b6991912e47f87610d48faa50cfc9b6329286cf65d232546e242734b934084",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00132364.c",
+      "status": "retained_screened",
+      "source_sha256": "bb79c22480d092e652b3098ffa2df9215346ed45d46c4f9f9fb27a7ea90aa1d6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00135c10.c",
+      "status": "retained_screened",
+      "source_sha256": "1fb13ee6f935d1297d4238b481d3b253beae73ba68c7412b12d883cd5a7bfb57",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0013685c.c",
+      "status": "retained_screened",
+      "source_sha256": "e98035bda5f281b6a3828655ffd005008b780da6a449e70b4e3717e008bac8ed",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00136a78.c",
+      "status": "retained_screened",
+      "source_sha256": "ed47ef59075a68556ba0f0865e69755f069900d688af91229a9c4e6a3a121d59",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00137770.c",
+      "status": "retained_screened",
+      "source_sha256": "7a797636a847777d8eb8ced2c66be144010cd63add7e6facb0b8526633780c90",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00137b84.c",
+      "status": "retained_screened",
+      "source_sha256": "e7a978c9de518681b3563de7458c7a266d802fa8e193bca8cfca02515a89d16f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0013888c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ffc2d4fe62859d245c64ebe68a2ffc706f24fa4b475a4d238f3831fb6c1976c0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0013cfdc.c",
+      "status": "retained_screened",
+      "source_sha256": "325cd0280bf7fa932fcf04c52cffd608920fdb66fce7e51fd11727b9f2dec532",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0013db40.c",
+      "status": "retained_screened",
+      "source_sha256": "37146879923f3d2655f204e879233ed7dca7654d9e693c38faacf57f2deadaf1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0013e84c.c",
+      "status": "retained_screened",
+      "source_sha256": "40abb943f794341d4f05b94d71b1af9a8e270a4fbb21c363d725e9460640a83a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00140490.cpp",
+      "status": "retained_screened",
+      "source_sha256": "55ab78c9a49994606e7e3131d4886a95a8b61d81753ad25ca3eba244c262bd53",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00140904.c",
+      "status": "retained_screened",
+      "source_sha256": "e83e5ff060dbe22e7a39731e05f0013b5413b25402e543fa630b7eb635153cfa",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00140ecc.c",
+      "status": "NEW_only_deferred_removed",
+      "source_sha256": null,
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00141560.c",
+      "status": "retained_screened",
+      "source_sha256": "16eeae9c46c95ac47168564de933d1610ab88570c7d62cd191016dd879137edf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001425bc.c",
+      "status": "retained_screened",
+      "source_sha256": "f1ff68703a7e77155d6da3df2016c51a2cb9c38f8041a6016473f32ba90ea1f3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00142b8c.c",
+      "status": "retained_screened",
+      "source_sha256": "da282185d97735b5ce987f87452f6958c08e9d736f0cb1e661159955ce4d127d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00142fa4.c",
+      "status": "retained_screened",
+      "source_sha256": "d725d34b49a980d3598ea4b0ade2351b09f4cc7e6d27a240ac4a1774e7510cda",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00142fd0.c",
+      "status": "retained_screened",
+      "source_sha256": "bfec510c2df86e187acaeb4d47008416bd6239754bf5820879372878558bb55b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001436f4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d048c685cb2ce95da5e630b5f52c951004dd25de3cda16f53399be17bf5e0de6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00143b08.c",
+      "status": "retained_screened",
+      "source_sha256": "1c50db57d9e7f739999386973dde08d1bd2b36a6faabe2b4ad1694c41acae90f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001441f8.c",
+      "status": "retained_screened",
+      "source_sha256": "95f2b957dbf16aec21da7750977ac1fdf6bca005dfe3f623ce6eaf328bfdda05",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001457d4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1983e99c29df5026a9754be7212098bea43b2b1045e7c7941620e5aeb93b1c8a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001458b8.c",
+      "status": "retained_screened",
+      "source_sha256": "895a274594cebcf47995d02631996c17d879973e1f98e55c5a0f40614f315cc4",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00145928.c",
+      "status": "retained_screened",
+      "source_sha256": "e56f7e9df6525789649918bc14ff8f303e6a907b032917dc05924bef91eabedf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00146188.c",
+      "status": "retained_screened",
+      "source_sha256": "f4e201e7e1a875ad38e58c8863c034a7fba2216805c94fc80dad45cef3593bdf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00146664.c",
+      "status": "retained_screened",
+      "source_sha256": "12bc1da67ef015a8dff1f41ac0e550c35237defc8b890205bcc6f6190332d9e1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00147264.c",
+      "status": "retained_screened",
+      "source_sha256": "96549ee7848382d94bbd6b1fe7b00f72fc5ef322a31aac1e72d61d1d3f006149",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014793c.c",
+      "status": "retained_screened",
+      "source_sha256": "31d0ee77f8f5ee6e74b0bcb6fa208db1196050784ab9c10b01fc6c8f71d090e0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00148040.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b57925a12dd8b5c2ef9571620677da367ab77926fa97f63e9117764ba1dfe1a7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00148094.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e7d8200a1eabaa4052c0c70d0780e81edbec97cef033ff983b36db7fec023ddb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00148a9c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "9e7b3b640ee13f9609eff896b9412d4822aaebb8a219ef7619df33c6677e8bf3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014aeb4.c",
+      "status": "retained_screened",
+      "source_sha256": "43ac79e401dd047afc5ad5999d819cc6baaf09718c1fd41a742073b865a08c3e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014b85c.c",
+      "status": "retained_screened",
+      "source_sha256": "982034432f4af5896e972b64cd615c9f793398876fb1def5c26b6e606c067f15",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014cad4.c",
+      "status": "retained_screened",
+      "source_sha256": "fbac92a45f85ca09afacd98c510bbf9cf5683352d4f093242121dbfd4d205440",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "status": "retained_screened",
+      "source_sha256": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014cda4.c",
+      "status": "retained_screened",
+      "source_sha256": "c93ed4cc83492b2988deed9457043b5980d47ad176fed217d202c61297727e05",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014ce14.c",
+      "status": "retained_screened",
+      "source_sha256": "df01a059483bb7469c5460ce46adc3226a198413f2f86683f05f125c5b7ecd90",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014d308.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ce7795d153603ddad741b29579705487143a36b48e5cedf3df772dc708630235",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014d664.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7daf22c9a9339f9d5f595972babbebf041698abd6f9eaaeea66732deb83ccd42",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014d7a0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b0611e1b7297db9f5bd5ac5cd47d289a27cc471681fa2cebff564f6a1bb732f2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0014feac.cpp",
+      "status": "retained_screened",
+      "source_sha256": "599a1ecbbba20ccf0bf34b9f00f80fc5fb850a8c69f29ab4f7417a00c67e64c8",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001500bc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "99df6ce8e970a971036d79c2f1ed5759b0874cd35184f320fbbbce509b231714",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "status": "retained_screened",
+      "source_sha256": "5209fd31336921dd934bb3975e7061efaa7c5fc7828ffa40577240c466a49523",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015343c_late_workspace.c",
+      "status": "retained_screened",
+      "source_sha256": "17a267fcf0fce17960606fde34e54ee6fceb1c20b31d376111b8a0b1110de94f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001534e0_late_workspace.c",
+      "status": "retained_screened",
+      "source_sha256": "f80b6f5e3a663abe8469719d22decfc31c15e0bfd9585d4e64e1d3eb17a136e0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00153f28_native.cpp",
+      "status": "retained_screened",
+      "source_sha256": "0cd1031074854056de30fa197f13dbac62d68829323bd08a83fc399429713871",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00153f9c_shape05.c",
+      "status": "retained_screened",
+      "source_sha256": "a0ed8c92255181f6fc3ae7b58fb3dfe5bf11e1566540de611f033817cbd5551d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00154078.c",
+      "status": "retained_screened",
+      "source_sha256": "e2c2a9ae0d1eff6a5e68a63201e6d3a702ad637db8626d26487ee87159dae3be",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00154804.c",
+      "status": "retained_screened",
+      "source_sha256": "463ec94a7d952763eae7fb8a21cd6d3a859a107260e5d115f21f85579d4b8b67",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00154f3c.c",
+      "status": "retained_screened",
+      "source_sha256": "d8e920b2b89bead746fa44ff519fefcaa1ba1a7ee3a59e20bd0d01962acef7db",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00155120.c",
+      "status": "retained_screened",
+      "source_sha256": "fb415729bd8f10fd81da6618ac384ac07701c48ea8b696de67bc3062b08b57b3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00155ab4.c",
+      "status": "retained_screened",
+      "source_sha256": "18dbc44e35b9380053936c9e8608ee3dc6b6eee318496289f62338c96a7ac066",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00155dec.c",
+      "status": "retained_screened",
+      "source_sha256": "56bbb899d61fbbd1692d37e3a01d6f4ea511d8d45aeefbc3ddf302a0faa33b67",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00155e20.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c92a69faefff5fe64a3698dc3ce505562e4165e76a4add2c089d081b90b27816",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00156dbc.c",
+      "status": "retained_screened",
+      "source_sha256": "a177695d1293d4ee3cb78effdadbdfde7d9f6ce7f955ddb10af10b4acff08aea",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015e3f4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "6e8e98b2e0b090fee4948f34ac3b52324bacd47b007a0509e3f0feed89203ee7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015e508.c",
+      "status": "retained_screened",
+      "source_sha256": "9a726acbfa7ad596ba734c72970453ad1c464f4c321dccc68305bd87f14a1541",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015e534_vtb0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bf70a8ac86a0cfd0f4547cb47ee218ea7c6ebed4394ab568ee9008bbecaea310",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015e57c_vtb0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "5912063e65e9c50fa9f50849e99e5c23c026deb47cec9b40c0e2a590e5198dd9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015e8c4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "043b0bd4defd6209907894f46cdab6d962c00d026059bc8ce2c782dcffe2f4da",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015eba4.c",
+      "status": "retained_screened",
+      "source_sha256": "f32e45e10085a912a9039d934a24de383828a5074a7f7ee4846d9c43ce8450f1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015f5e4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f471f38dc139d08394ed61fd9e1391fa1320b7208a93442b1e25c816616b1c0f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0015f6ec.c",
+      "status": "retained_screened",
+      "source_sha256": "3bfb0be6fa30b3594ac9e5f4eb296723897639be3fc029b6ca052077df04d1a6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00166f20.c",
+      "status": "retained_screened",
+      "source_sha256": "3e16b68f0b4358294e79d12dab43aeaee34654831d6bfb8e64853abe25a946bf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00167654.c",
+      "status": "retained_screened",
+      "source_sha256": "8ad4430a9782319842f2537088f4db110e31f15bf8ca7e952d15b9541c2efd56",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00167c34.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f5d68b501b0aa4a4ed373913c2711092581d2f0bce42c08309e52eb37db81400",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001685c0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d0f64f11daa188a02e185503dfa71d1cba95ea27b0cb17b58588b300600602ce",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00168618.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c63ff37609e5976080152575a331e99727e7fef3a910bf1d3de37879edc66db2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00168cec.cpp",
+      "status": "retained_screened",
+      "source_sha256": "0c23eefc4e81cd159c050d8438fed81e2f68d91a487d5f5c23ea7821263a2c6c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00168dd0.c",
+      "status": "retained_screened",
+      "source_sha256": "d13a3a7e226597b3d9bc8882ab79adaf9dae6ec1ad30e259a0b04344260bb2c0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016a888.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c8d02f382b688f2e21a8c954bc44507f6d4f194c9519b4d5995067e8416453bc",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016a980.c",
+      "status": "retained_screened",
+      "source_sha256": "75297e02328e0e925afa574575ef216b16b606a642ebe70ec2da7428c41f061f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016b898.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7463d6c6ef3663b5c79b32ab06a98f0bef21bdddbb7e1ed556597c23a9d67f5d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016bd7c.c",
+      "status": "retained_screened",
+      "source_sha256": "8194eb447350ff3e84d6ca97526ea3eee16a4dc0fe30842637141dbff3252e26",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016bda4.c",
+      "status": "retained_screened",
+      "source_sha256": "3da09810133bae47f092954b5bfed5cf5c68bb03e0f93d3705837d360ab54c14",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016cb6c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c8e60a27ae29d5d2decf06f8e7d7500f94d0de8f67f0caf8cec8d9f47471c66a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016dc94.c",
+      "status": "retained_screened",
+      "source_sha256": "09cbe0dbb21b13bb66fb775162226f3d05c99ad85bb46df692abf234fa51a934",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016de28_shape11.c",
+      "status": "retained_screened",
+      "source_sha256": "2ae5ace5801809763c5d9ad1b06ee262ef5fb4067161422b4162192127b8b2f7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016e1d0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b143d6b7aac38cf56d73b1dd426263069b7e290e4156507b4605ab00ee8df397",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016f3a0.c",
+      "status": "retained_screened",
+      "source_sha256": "1ad78c820efecd60a819291a66568aa147babe19f875c5b272a5a8fcff18ee5f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0016fc1c.c",
+      "status": "retained_screened",
+      "source_sha256": "68920965b88b75a04184a69ad36cfabab317f10f45c19a7dca218dbede8b2dc0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00171d88.c",
+      "status": "retained_screened",
+      "source_sha256": "015fa47892616b1a7036452a534fbbc9512ffd5836a7f7e187e027a8bf07ff64",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00172f50.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3883257a7a01408ec8f7ac8ef07c823fcdfbb700984fbc30e6cb62b239410bef",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00173630.c",
+      "status": "retained_screened",
+      "source_sha256": "ee1d0796019a18fd31aad015f4a5270132ddd92808c50dbc8f6a43686c64a207",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001757dc.c",
+      "status": "retained_screened",
+      "source_sha256": "a683fb420a08447bb3ac49ede97982f4f78d556cdfa1b2ee87edcaa2712ab726",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00175d90.c",
+      "status": "retained_screened",
+      "source_sha256": "377cb25f70da2675aefb7efc64520d971ae574f917f00b87b91f5fbe6bcff4ad",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00177354.c",
+      "status": "retained_screened",
+      "source_sha256": "b74a7b78a69f6807c6b96af1abc9dad7f740dfb09f5f106c0d22e1afdf59d593",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001773cc.c",
+      "status": "retained_screened",
+      "source_sha256": "5620810810a00ed4b1d6ecd01f63e799cc2862d790274d88fdeaad1474fa7f69",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00177520.c",
+      "status": "retained_screened",
+      "source_sha256": "60a917ca65f52e17dfe3297cccc342aee5820f631d47bfa01bd3d4804ffe470e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017771c.c",
+      "status": "retained_screened",
+      "source_sha256": "a1b1b31ce8ff1d79b0c64896e40ba7cd57f482b6c9cbe417cd1f77f68631ca7d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00177a84.cpp",
+      "status": "retained_screened",
+      "source_sha256": "054b4c7ac44ab725e7aaa396976f593ab1053d0cf2800cd6c0c91b5619da8b47",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001794e8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ca70215609156acc6ad28c1f12e46458301be537bb81a42404588fecc77b0210",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017a034.c",
+      "status": "retained_screened",
+      "source_sha256": "6834389d846d5fa5b61f6a901a27af96d3f2b770515c22d367ef31b6a9fb279e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017a9b4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "11eaf8487696072629cbaaccb514fc761230eef4cd566192cdd018df89f9dd51",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017e454.cpp",
+      "status": "retained_screened",
+      "source_sha256": "316bc0b69a976f142620832dd3754555725b1d1dad01ad5f6880039e3197ec05",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017e640.cpp",
+      "status": "retained_screened",
+      "source_sha256": "5f6ea28eda439a1fbb8736915f7103dff7a6e4d9ce3e935ebbf565281998ec95",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017e8fc.c",
+      "status": "retained_screened",
+      "source_sha256": "03af8ce0d14efd39be13da62dcd1f70d95d717ca1ba708fb4e87635886d73cc6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0017f504.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bb4a9b7adc2d7b4c5aac36b412e55ad902708c7327e7eac112a501cb5f0e0217",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0018075c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e851f7b515a5785807c6a8ba913ec111759a13a385fe80032f31715231092abf",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00180d9c.c",
+      "status": "retained_screened",
+      "source_sha256": "ff4f4d3856c02f7f0f3ab9f4c66fd9f1e77c17590b7f5be47aea87893a4eabb0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001811b8.c",
+      "status": "retained_screened",
+      "source_sha256": "2aa37e3dd01c056dc61f39ae79396566c2fd2afb5b1ffb2198a1909205b96d86",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00182aa8.c",
+      "status": "retained_screened",
+      "source_sha256": "ff0dd03e85e9dc1765b74db7882b29f7a2e3ebdfda29c8f75efd296f9c486ed4",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00182ca8.c",
+      "status": "retained_screened",
+      "source_sha256": "2f33bb6a66796d3b2182cbdcf5583493f939b761860b8a77c8cc009501bdb387",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00183bfc.c",
+      "status": "retained_screened",
+      "source_sha256": "77314020bac337eb5cb5fd87afae9a4561895c356a591100a136007859b61b9b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00184148.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1cce69b4e54f2946549b45fca9906dc171db4e0c3bf6fa28afa5db6dfc9f0397",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001852f8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "8ba8fc5e577ca61f20f33ea09e2daff9e26b8e56c96a4dafb8365947cbc0d816",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001858dc_recovery.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bd2cdda15e4471b2bcd486934692b92c08b0cc74eb763eb9208f797f927995f1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00185f70.c",
+      "status": "retained_screened",
+      "source_sha256": "1e6bae3e5aa25928a7dfc23b1dd2ccaaed13606055a4dd3a477827970d5936d9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00186494.c",
+      "status": "retained_screened",
+      "source_sha256": "c7ed756f6248073c12a64d7a075f451f3cafc0dd75bfd4ab88978d1f75df6b4c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0018c5f0.c",
+      "status": "retained_screened",
+      "source_sha256": "4685bfb72e57db5f55d8006e527c4b9366fb77280ceacccd60cd3b5b288eca37",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0018d894.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7c370ef7880ba14d3514af541302dacc2ccdf882892e18465cb17819008599fd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0018f6c8_shape07.c",
+      "status": "retained_screened",
+      "source_sha256": "972c24756fc757aae9c209f0d218a18bbe9eba6ce67a53b706699c2c30b849aa",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0018ff34.cpp",
+      "status": "retained_screened",
+      "source_sha256": "561f0e44f0dd9e19ea01b026b9c5a2bff97707f3ed0a4cca3dd3aac7449539e2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019051c.c",
+      "status": "retained_screened",
+      "source_sha256": "333b881b02a830e8946a0f5a9ef48d6907a3e526ec6d7dc9a94bd367468d4da7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001905b0.c",
+      "status": "retained_screened",
+      "source_sha256": "164e9ae3a3a84b61154ae024270ac1463a832301bb7e147c966e3152b3abc3b5",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001905e0.c",
+      "status": "retained_screened",
+      "source_sha256": "5c4392f19907560c290453edb8136dd1d16c67f4b99a5bb42bedc0115f3914a1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00190610.c",
+      "status": "retained_screened",
+      "source_sha256": "c446e4a8f5af6c846cb5c129b37969ccefb21c0660060433a9287454bb0c0b50",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00190b1c.c",
+      "status": "retained_screened",
+      "source_sha256": "12cb2e6f1b9b8717d0c333f5e4106a64c95db11de8bfee14eb4602fe2093dbdc",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00190c1c.c",
+      "status": "retained_screened",
+      "source_sha256": "80d6b27f92ca42747020603b6c878936538c6bad43d407c3ba8c3b74fae27b2c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019194c.c",
+      "status": "retained_screened",
+      "source_sha256": "2d2d6e15561e00ea4694ee62905e5d522b829198fdf2bd400d8e3ddfae00577a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00191c94.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3548208a0e5140e7e1e3c4ebf84385d5d06052239676b021c43e7bb027f04094",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00192410.c",
+      "status": "retained_screened",
+      "source_sha256": "6ee7e517c8f03cbca42161742b2c1119688b2fa61a87d0c76c3b0334d1aa010f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019242c.c",
+      "status": "retained_screened",
+      "source_sha256": "e41dee58019f95fcb4e54e810044053f9bd304f57e82ca0ed4b22290bf2e825c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00192458.c",
+      "status": "retained_screened",
+      "source_sha256": "07c9cc4a822cc159a760de83e93ad602e0473f3945edc4d52ebcc05580ad1ef0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019312c.c",
+      "status": "retained_screened",
+      "source_sha256": "ceb73392fea37f0958b2f84537967577bdd955536d3d52a2f575e0ecadeb1560",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00193168.cpp",
+      "status": "retained_screened",
+      "source_sha256": "148b84a29b53974bfcaf20a06a8142dc1b5686456198d30f1991380cee254fea",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001932e8_slots.c",
+      "status": "retained_screened",
+      "source_sha256": "e829b96c729a2c697416bcc9f6d875e81ba69dba815a6832240fdf250b36041c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00194504.c",
+      "status": "retained_screened",
+      "source_sha256": "578a4069e5d5ab77d7ccc7372aa417964fbb91f335f04c8c84aa5e050c1c8d94",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00195e5c.c",
+      "status": "retained_screened",
+      "source_sha256": "6df51ef68309f2939f33bc7726f70bab6cd81fcc251b6eaad650856ce175ab86",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00196114.c",
+      "status": "retained_screened",
+      "source_sha256": "d7eebfe442c78743aec4d80bf1d1b8e76824dd9a938cb6a9675dfde51f28062c",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00196564.c",
+      "status": "retained_screened",
+      "source_sha256": "83f4992403d61bafb2ed6fc7d6d75ee4480b7a70996ae79bf3fd833a608f9405",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001965a4.c",
+      "status": "retained_screened",
+      "source_sha256": "bf221c0c5d418ad21c4df572d4a70b699dcf3ab11a06d8b9d02f1f5feb959c7e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001966bc.c",
+      "status": "retained_screened",
+      "source_sha256": "f0e989d2bd84cd86dc62648f54608095f47cf39832e22be4582dd04429644b15",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019e414.c",
+      "status": "retained_screened",
+      "source_sha256": "43d0cedd2c6c874d158e954b32991f17f2208f76859ea161eb80886bf2052ada",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019ebd0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2dd0b0d16bb4cf2317a4df1da0c28f9c1a16ce91d9ea7bed309412b823ba7b58",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019edbc.c",
+      "status": "retained_screened",
+      "source_sha256": "40457500735baea396fa92115616134e2f943e19847901581219dbc0bc08b62f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0019f0c4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "5622d4c4c9908ddf8f3edfb2fee524557e8bf491955efe93cf842a6c94ef3bce",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001a79fc.c",
+      "status": "retained_screened",
+      "source_sha256": "d1242fd704a10eebe2cf68515a48dbcabbd615a3ed8618cd110b7180c2575090",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001abf24.c",
+      "status": "retained_screened",
+      "source_sha256": "b30697c3c7e723352031e4b475350e9e2af8669306c58a2def01146729367f75",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001ad288.c",
+      "status": "retained_screened",
+      "source_sha256": "a37502fda4b815907ed4f9be1f7f0b833002a3032c796983c869d1ee73af5ef6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001ad5a8.c",
+      "status": "retained_screened",
+      "source_sha256": "12fe239c887cc4e85d348ff7a8b708f0aaad2196b3520ac67022189fc336f235",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001ae00c.c",
+      "status": "retained_screened",
+      "source_sha256": "99334c7a964f0e0961f84071c8ede7efa59bb7f08e22debd7aefd59983bc6724",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b0600_final.c",
+      "status": "retained_screened",
+      "source_sha256": "3636a60496359b890d0ebb33a7da4bc9f3f24e1e22f7140f5e2d7ec1c8b83745",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b3564.c",
+      "status": "retained_screened",
+      "source_sha256": "db97d6ec82578c729c0d23ba9209cb181ed9e7edd0bb3e62a12f05fcf69c0a78",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b3c0c_shape01.c",
+      "status": "retained_screened",
+      "source_sha256": "7f0fcab71ee7f315fd997bcb8455524b3ae10bd9c90b62edb66240d16fc23f7b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b44e8.c",
+      "status": "retained_screened",
+      "source_sha256": "88bb6e63210ca420a98c0f200a81f36c0ac0dcd145afd408b5d4b43d3e13c790",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b48c8.c",
+      "status": "retained_screened",
+      "source_sha256": "23ad536704c9e569dd28a9d0f1925046e1234ae977218ff37e29c6f08af76663",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b4ec8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ffd2e5d1a9c7fdd3c60362dff38393212f1f7b7172da0f01b5e8dce5ca66dcd9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b54ec.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d89af3707929b8fdb2d76960c31b65d93fe791bce1347fc964e073930f6afca5",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001b63ec.c",
+      "status": "retained_screened",
+      "source_sha256": "91955b586a9490b47a23da3cf3c8b3eaa32059fc62ee9f082dcd1d30622d1236",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001bdb70.c",
+      "status": "retained_screened",
+      "source_sha256": "dad92c418c8930754d74ba191bbf505d08ef3096bde91e5556f03c134515f5ad",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c0f5c.c",
+      "status": "retained_screened",
+      "source_sha256": "84d70b801a8803e39ce610cad4fef5e5cffa0a2cfec2019afc48ee16623d5fdd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c144c.c",
+      "status": "retained_screened",
+      "source_sha256": "aa79172768e3df3ca7d3407f3251ba2fef6c6c6ad4e3a7105b0a3ddb0a7f5928",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c1600.cpp",
+      "status": "retained_screened",
+      "source_sha256": "763fb069e2883cd1346bc94e5caf60681d8bba5d357bc901762efc45eef5f301",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c1cfc.c",
+      "status": "retained_screened",
+      "source_sha256": "178d6010ed96944dec0aedcab025c77df002f324410b87dc45aba9aea96a5233",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c1e6c.c",
+      "status": "retained_screened",
+      "source_sha256": "fec94377219b28b52ac66ac4ffd8a27f3d7091ee2f6d3af3505dcd60ea19ecbb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c2e98.c",
+      "status": "retained_screened",
+      "source_sha256": "ca6420a99c940b9d0fffce9fcc7ded8043cdd5695b598e84c15e7cda649e40a3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c3010.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2ddc956399a4b71140b46584950caf3b5d1bd0887cff6b131e47f4335ce2ecea",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c4490.c",
+      "status": "retained_screened",
+      "source_sha256": "d801442e7bd40ad62bb817105c27bc38ea7731053a39bc9e0edf77339d6b98d6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c4540.cpp",
+      "status": "retained_screened",
+      "source_sha256": "25e6fddb12a1e95c284e133267843ef98e88aea067afd5d53e0c10592c721f78",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c4558.c",
+      "status": "retained_screened",
+      "source_sha256": "93cd1d188b8fd2056ece49c70b23d19c96241b91dfa1020ca9a0ed1d27e7e830",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c4a8c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "64163bc134542f483c6ae4b5c8358f6a2606df754f756d28d4b99fa3cab2dbd2",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c4bdc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "555a5e6aea020687056cbcfd5d9d51fb216a8a4a59e3910e8098934177735993",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c5764.c",
+      "status": "retained_screened",
+      "source_sha256": "ebf06e2db0940c6c8c828eb15bdf03e88cca41caab33be07dd0c08dba8a65af1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c588c.c",
+      "status": "retained_screened",
+      "source_sha256": "48a87297064476ea7265422886aa88be5d2177eac6190d579bd7bdf75c65296e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c7e278a7d0ea5a9c59ca66262f135c04331ece35e9590f1a2a628e41204f8a5e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c5d90.c",
+      "status": "retained_screened",
+      "source_sha256": "3313e912c3812d4703545aa3599b6be7b4a4b5ad7c07cdae66edca8bd792f444",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c5ea0_inherit.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2c31a046d1e69dc8fa38cc66cc4be62f0a1b91afbcfde8586808a8a98b9f5ee3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c6afc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "27cd0264ea759c0b8c360df11faea5e360727fbe1b11078bef46fece429ea4d6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7380.cpp",
+      "status": "retained_screened",
+      "source_sha256": "51b406099cd127b4db8858451d0c3c42bbd3d7a45e64b3ca32cd28feb8c53eb9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7828.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d0ad452f4c40ee2150d15d6c25ed2c8b1647cf93d96dd02d38a05cc14494a3c1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7a24.cpp",
+      "status": "retained_screened",
+      "source_sha256": "cf45fa6e1a37ea38f22afc67e0dc419c7d84fa971c7bf2ee18de5cce767c25f7",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7d00.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3102ea4d32ae67863d809c82d87d7146c2a302c7c390f9e727ed50eaf10e6e27",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7e1c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "20683dd4ce9dbf944967b0506c5ecd19c53b96e4b84d8cf28b620e3e296728d6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7e90.cpp",
+      "status": "retained_screened",
+      "source_sha256": "4b87a12c8ebe9dc04ee9225d02d0bff0e624a58d88af099bf25026d38bec5e7f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7f20.cpp",
+      "status": "retained_screened",
+      "source_sha256": "22f4c0025a200171b132a628c58f4e8695e70e69b1f8387227b932fb41eec644",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c80cc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "624a5aa9dca8bffa0a4a8af3702649d6085504b7e73e6b0a848ab9efbeebc5e8",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c8c3c_helper.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e38b300b389192ba092be0541e770852b373c05a9670bccdac2f8b09770863b0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c8d14.cpp",
+      "status": "retained_screened",
+      "source_sha256": "f1956076bccf3529d81fb2e36a23ab74cebd31b7512009934306d1bbac202580",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c8db0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "0508468b8443cf74f696dc2638097f1bd22c6c98073f5e1cf1bcc331855deefe",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001c9944_resources.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7e230b5acb62b4792a6747d9f53805cf6f5406e84ce2588ad32cd7df7fb179ad",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001ccff8.c",
+      "status": "retained_screened",
+      "source_sha256": "fcdd5c5f9c4fa310e7b23c6e0b0bf9573848672182a499dbf3f049d9ea65f6db",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001cf418.c",
+      "status": "retained_screened",
+      "source_sha256": "4fea5bf21edb768e4cbed8aa3e01ed813b928860ec3514ae3e739e89b2a5853e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d0348.c",
+      "status": "retained_screened",
+      "source_sha256": "85b224d4414ae82293712393ac2a2c99dbcb1b2860fe986e8ef7a7644fe92bfe",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d0380.cpp",
+      "status": "retained_screened",
+      "source_sha256": "88069f0567efca83cb8eed9a6bb23ef190cac4f8d7ba5fb8f90e0cfc4e3bbb24",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d1c10.c",
+      "status": "retained_screened",
+      "source_sha256": "11161cd3da373ec8450f88a4123e0a376c82ee61ac76fb12fbfab4169543d833",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2234.c",
+      "status": "retained_screened",
+      "source_sha256": "96fb664e9bf7fe296257485e1a52b369b01ed32aae2bced4e8e7b156ef038ecd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2fe8.c",
+      "status": "retained_screened",
+      "source_sha256": "f635e0f58790d7fd4047cb4b9f679c0a93b8ab2d585c92798954f5255704de8b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d31cc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "495f60c2b6f5c57ada4656636c099dbb89c1675d3b6f22c39f9cd7ab259187a0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d4078.c",
+      "status": "retained_screened",
+      "source_sha256": "cea9ac8c7ce3491e8d9d33391ecbb12106e8905ed07bfba8f6572dc5f7cdcea3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d5f1c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "85ba60820b2b7e2739cacd1efc8d58d33ac12f44a70aa78a7ea8ade2a632505d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d6094.c",
+      "status": "retained_screened",
+      "source_sha256": "a24da798773129f96675a419b09c4125ab9e47b100dd7a2be981699b19e708cd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d7e6c.c",
+      "status": "NEW_only_deferred_removed",
+      "source_sha256": null,
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001d9ce4.cpp",
+      "status": "retained_screened",
+      "source_sha256": "74f4659729304a639774d414f67a01c3394bf780de8ffa34f77b3a94f92ce8cd",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001db960.c",
+      "status": "retained_screened",
+      "source_sha256": "22363263d7c28ed113267da9a69ff9417bf0ad0994c3ecb81b973e489a740587",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc100.c",
+      "status": "retained_screened",
+      "source_sha256": "3ddfff0d3c65bde65459c2c1cd317181fcace61f1907930b649add67f6ba63bb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc180.c",
+      "status": "retained_screened",
+      "source_sha256": "614ba0938a800379d06625a86c0b115f3edc9de92172f4bf726aa8a08ba6d29a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc1ac.c",
+      "status": "retained_screened",
+      "source_sha256": "201756cebf8d73f5262edc9cec91fb3a1c1e59d1058f9a8acd1b0450dc09953f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc1d8.c",
+      "status": "retained_screened",
+      "source_sha256": "612dbd27d86df5f7bb8707774d68dd9f7b7875afb329a1cd11b12c98fb43c87b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc844.c",
+      "status": "retained_screened",
+      "source_sha256": "8ca4e2914265e71fdcb04b68d1cbaee321b274e3220bbc5055cec8255a84c3da",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dc8e0.c",
+      "status": "retained_screened",
+      "source_sha256": "ec461b54200a4d5bf4128c9cfac334152fe142c63838c70061c89d6d82e6654b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dcdd0.c",
+      "status": "retained_screened",
+      "source_sha256": "6e8b9fc2aee24f888dfe62b2f3d56c09df3e07e21b84443d544f361fa02589cb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dcf4c.c",
+      "status": "retained_screened",
+      "source_sha256": "6aabccb1c195a7268380131d3343b4ec902fe5b63c9cc3815ce4b62bdadd43b9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dcfc0.c",
+      "status": "retained_screened",
+      "source_sha256": "b063eba7a5b0c86e83582daf3fca9bfa7e6a2e9a2caeb7aa25acc7140f39c517",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dd3a4.c",
+      "status": "retained_screened",
+      "source_sha256": "cd90acb7bdf3b2664e04c409158fe1678957c0524936e6043da841d2a1014cce",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001dd884.c",
+      "status": "retained_screened",
+      "source_sha256": "9dae5a0ca3466fa11bbe4c645661dcc9207494be86f1ca655591de45db274ad9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001e5a20.c",
+      "status": "retained_screened",
+      "source_sha256": "5dcf6df3c271d4942aad10a69b7683d5b5db278a2091da3c60e1678fdc6c9a93",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001e8810.c",
+      "status": "retained_screened",
+      "source_sha256": "9450e3761a86561bd9f25f7c187655846e4e456f2b3913f201393b3fbca9c497",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001e8934.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3802a80127a5071d2569ee8351b0ad050261ba61cfdad6b65915e891dc39b566",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "status": "retained_screened",
+      "source_sha256": "ac86f681093d164b701cf31ba8d4984e92361f7f5d0f9ffcdc4c6d5249c742b8",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001e9e7c.c",
+      "status": "retained_screened",
+      "source_sha256": "170295803993b28d2a8e9a57f7d89aad63a10fac81211af9f3fe66c1c2251459",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001eaed8.c",
+      "status": "retained_screened",
+      "source_sha256": "16226f1d8853968983cef6cf288d54d87792f97d27cfadab9824f8294d8c74fb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001ebca0_canonical.cpp",
+      "status": "retained_screened",
+      "source_sha256": "a71532c74e25396ba3255321dbf684c97f15cc5498ed36aa1be9e7c211a8255f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001ed2cc.c",
+      "status": "retained_screened",
+      "source_sha256": "46909bbc28e29cd9b61a8172c9f10311b9fd8990e234ec6de9075f9c55a36dce",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001efa28.c",
+      "status": "retained_screened",
+      "source_sha256": "389adf3cdecaf706ea3df4b45926c17c44c38d4820aa2887fe6bbeb30b64963f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001efcd0_01.c",
+      "status": "retained_screened",
+      "source_sha256": "cd3fc08fc82cbd3b9abfad1d5f634cc24d8b36236788ace0f373a06874568864",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f16c4_integer_temp.c",
+      "status": "retained_screened",
+      "source_sha256": "b472c8b3a9d680f63f44476d2631ceb562a64e43bd302330499b4333ec34af45",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f16f8_recovery.cpp",
+      "status": "retained_screened",
+      "source_sha256": "dda4d2933b4579be9cc5b7e319e30cf2b2205e7c6c24dfcecd57d32398709d7e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f2374.c",
+      "status": "retained_screened",
+      "source_sha256": "e3f726afa7881ebe976d3b6d52e12a68a79564307ec71f4529bafcc97cc00f38",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f23b8.c",
+      "status": "retained_screened",
+      "source_sha256": "17185b8ede4232cee8dfc6f223f8f293cfc63d1ec3ba3161d93c013bf4535008",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f2a78_shape05.c",
+      "status": "retained_screened",
+      "source_sha256": "ccb02e80e275efbb923a858dccac6b7e35e8d3bd8cffbc408a765512fd6106be",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f2ac8.c",
+      "status": "retained_screened",
+      "source_sha256": "db53937b6a18604e581f9f8bb87477cc76a9bfdae7388631f542be4107034d61",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f3e50.cpp",
+      "status": "retained_screened",
+      "source_sha256": "dac27bb37973004e3697b72a01307fd4a587b06ba948123c92bccfe59d3dd6e5",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f478c.c",
+      "status": "retained_screened",
+      "source_sha256": "a7e13ba2ec4179e103a2ea5fcc5da1311d6565b59a5ae83411284d2072aff215",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "status": "retained_screened",
+      "source_sha256": "cef8b5072f0df1af3e7f93b863cd771e069cccb8d7170cf82067fd781b97fa1b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e294.c",
+      "status": "retained_screened",
+      "source_sha256": "b86598c9134b150a2b1bed2178bc61710d8d567ff69086cd5369ba3fc90fff02",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e304.c",
+      "status": "retained_screened",
+      "source_sha256": "1cc4f428859e198734d4a92f1a25f76b2727ed3350c3eaf36a122d04860e9d2b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e318.c",
+      "status": "retained_screened",
+      "source_sha256": "986a7021f43429fd1ac51c1742366b710af232632cb4eaa664aa9ffedf99f3c9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e32c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1a8d9bd75016520ad3b4ebdbf3d4f839728991e5b5bbed59f8a4cbfce95bd46d",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e344.cpp",
+      "status": "retained_screened",
+      "source_sha256": "392d7974cffa8a038dc0b90fcfa12b61f5af080d85aba0ccb32d38b0b23563eb",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e388.c",
+      "status": "retained_screened",
+      "source_sha256": "1d57e23f14812861a0c74a601df05cc3c289407adb2018056f65a77dd4ab39a6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e38c.c",
+      "status": "retained_screened",
+      "source_sha256": "3bc64789fc25e4f0f923bf39b7b676ec15a704e35e817a1b2ae4e2037b0f7ee9",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e390.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b47c9b044ec83bb20a49ceacd57668a2947e9dfa302ab207d5c7d4e59c0a495e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_0020f858.cpp",
+      "status": "retained_screened",
+      "source_sha256": "edb5e947fecd72131705c1b4b7cc49dca006daefe06b5f63040a56ec261d4444",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00212a78.c",
+      "status": "retained_screened",
+      "source_sha256": "5608840173c68381954a994d8cd9bdd6da823a2eb2bf1484bb10958a11e115b6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00214138.cpp",
+      "status": "retained_screened",
+      "source_sha256": "61ff91fc6f83f4bf6119aeca3bfc2d029d788be71ddc8067cc6fb6d927ffe7af",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_002158d8.c",
+      "status": "retained_screened",
+      "source_sha256": "4effbd6f33a8d61401ccf7ad83e2198e6b59507640fec5d58bb1350be77468d0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00215adc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "444e84d2110bc3307bcb02271f1313fcd0dcde7596e9e82cd754894fd79b19a0",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/func_00216670.c",
+      "status": "retained_screened",
+      "source_sha256": "55f4ac6daa3687044e44cc0a82a3ac6ada86d861e7ddec4c58746cedb318213f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/native/layout_root_commands.cpp",
+      "status": "retained_screened",
+      "source_sha256": "60c16fbead7791b6c584179ef18a261d7886c7da76d2b751afdc301629777775",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/native/pane_uniform_commands.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1c6641a6ad76265c50d1df2536c413ec84e6630bfda16c7bd5744c95c798ca08",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/publication_signed.c",
+      "status": "retained_screened",
+      "source_sha256": "476977d6c2c08a2e1b14ae080406a0e6cedf9a0754e49d03df956eea24960e7e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/resume_0012fdd0_reply.c",
+      "status": "retained_screened",
+      "source_sha256": "8e39fd54494a5498619ea8889e119ec694e4dc1046b1b41a30be7ffc83964e5f",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/resume_names_varargs.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c711c7bc97a89fda31f6a10363da15e43f2646a4dc3bf71b54def1ab70b85ffa",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/texture_canonical.cpp",
+      "status": "retained_screened",
+      "source_sha256": "cce8811994f2d3c7a64ab3ca8811f3a7900fd8aa7da812ccad4f1914de71dda1",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/checkpoint10/wave_native_table.cpp",
+      "status": "retained_screened",
+      "source_sha256": "baf51f7f7b948e8a891af428a990500a474d457e8129fd04155c73b882a4dfd6",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/large/func_00176e24.c",
+      "status": "retained_screened",
+      "source_sha256": "77201b3cc206a79c66def9d8fa79286012bb27ca54cf6d26abb63c76a826f007",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/models/object_registration/resource_service_lock.c",
+      "status": "retained_screened",
+      "source_sha256": "3f5b2311d8af64bab6e18a40ec0d897f47c8ee8ebabd65878d09ffee01d5537b",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/models/object_registration/sound_resource_cache.c",
+      "status": "retained_screened",
+      "source_sha256": "45a9f591b10e8d25ddbe9350308b0cbcbca8def27d42b800599d6a504c922113",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/retries/func_0012349c.c",
+      "status": "retained_screened",
+      "source_sha256": "87072d1a8b2f6d7ae7399cd925ef55f4d78b88c7d0d2f2bea15757047b39e793",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/retries/func_001234e4.c",
+      "status": "retained_screened",
+      "source_sha256": "fbd7d60899aae07faba9211ff44c0629d323874059b9195dc79cde2b1f5b84bc",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/retries/func_0012f170.c",
+      "status": "retained_screened",
+      "source_sha256": "f3fc23810e5d50186319c76fdcdc84d395a6895bc9b2caaa2242297e82c2be5c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/retries/func_001d3c78.c",
+      "status": "retained_screened",
+      "source_sha256": "8697d593e6ed596518ae877f80c199c23bfb966cb404a0cb4374be7a9c54d5c9",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0010be14.c",
+      "status": "retained_screened",
+      "source_sha256": "759466c43a7710716661d65807bd8727f90b2d16a392d460886104c338c11456",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0010bf88.c",
+      "status": "retained_screened",
+      "source_sha256": "89692fba8adf681c653331f3a3d6ea37706dadc7f5524b6a805eebe298868cda",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0010d418.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b526fa1fe0282e7d3f0d8748f91688ba2228fbbe7cd8df198611c9db060b3ccb",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00113c74.c",
+      "status": "retained_screened",
+      "source_sha256": "b7a0a964760f275f0b04eb1cd50745da6bb801403dd10937a4c44d8041e1bff7",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0011516c.c",
+      "status": "retained_screened",
+      "source_sha256": "2b22194087975772bb050ba378aec50dc557a704a6be8f94e3eeb3e158f738d9",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00115a98.cpp",
+      "status": "retained_screened",
+      "source_sha256": "09511375e9987d39b39bb915307e6b751110a708b7494739fa7de862ef354969",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00115ad4.c",
+      "status": "retained_screened",
+      "source_sha256": "d6794ea084a2a388b3c908c1801a029699924c77d7f34bedbbe2b4bb576367b2",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0012192c.c",
+      "status": "retained_screened",
+      "source_sha256": "16195a2beba91cb249a3d63f2059f8c8f3564c85ad63f817b4d138b81500cfce",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_001235f8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "149ee2e96deff75b1a77cd5297a3d725836285871c10ea4dd7b53f64c004b301",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00123634.c",
+      "status": "retained_screened",
+      "source_sha256": "9871145c3a6135d41a6d88669b510e2c97948a6092a368c78aa07a41c1448ec5",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00123664.c",
+      "status": "retained_screened",
+      "source_sha256": "fe5d6003432fadb2802380a03f3fba827b92c06df26a778de28c2af78f62ed8b",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0012feb0.c",
+      "status": "retained_screened",
+      "source_sha256": "9a7569989ffea00d8537e5dc38633eacb16c4ae5d256448b28f1fb2d17c9250c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0012fee8.c",
+      "status": "retained_screened",
+      "source_sha256": "dacfd0e726b626cd806f040b3e049edc60e0dffccb74948ce4a86f8545b0ece1",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0012ff20.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c889a6b90da7f8e59ae95635117d56aa279c543e16dfce8b175f4df8f9adc3c3",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00136878.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e5ece9fb1d1aa0bcc8ac8b0be8cacc6c2692d0571c3206a43b78745573c249fb",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00137c20.c",
+      "status": "retained_screened",
+      "source_sha256": "aa7ada68e2096524361021d70ce667eb23bf324127073b0c8687b2311e99e3d5",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0013823c.c",
+      "status": "retained_screened",
+      "source_sha256": "26f2d3c3b8191024b84587f80959731c304d7bc487872cad2bbe90547ae1ac0f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_001382c0.c",
+      "status": "retained_screened",
+      "source_sha256": "11d1342c007f0a89a1e5e7df11e90c2945ce518d18d65e2d74e5b50f629358f8",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_001426a8.c",
+      "status": "retained_screened",
+      "source_sha256": "3d88933d116028d5b8a5b054d5f1a36507e1069a4b740d478567e3e510f7ea0f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00142718.c",
+      "status": "retained_screened",
+      "source_sha256": "218ca1da34e5468a0e82ea6888a9312370ef726aad3c04cf773e6ddd4eedd860",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_00143020.c",
+      "status": "retained_screened",
+      "source_sha256": "b7289464eb9dc91f63650c0b1403b1f7d876a2f533f9cae122a11393243da941",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_0018f068.c",
+      "status": "retained_screened",
+      "source_sha256": "c59ac01c7b1f07b03701a2889c659269ab21a5c1d92c352006e6a3e9ca94730e",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_001c4d9c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3a8c0da8de824076882ce44332caf6e15aab5489d25fcc1ed47000572c3e22b1",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk/func_001c51a4.c",
+      "status": "retained_screened",
+      "source_sha256": "a3ffe466a731c57b1437072b66ebd4f024d41ed8e30edff9d07b9f000db767bb",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00115998.c",
+      "status": "retained_screened",
+      "source_sha256": "ca7da85568ac3954c2a7118642c828277d169fa5b5becf9fb0a8b84e6d1cd680",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00115a44.c",
+      "status": "retained_screened",
+      "source_sha256": "ed2d6b00312dc5fb5cf3c556d77b541dd80bb09afb92dfc1354dbb2f8a6ac464",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00121da4.c",
+      "status": "retained_screened",
+      "source_sha256": "d7cbfda227d224d41bfb459e42671edac661ac5c094ed41f986fb6bf69e1903c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00121de0.c",
+      "status": "retained_screened",
+      "source_sha256": "c421e0f053f0cd8371925497b145a2f73ec54ec0b5b8fd68c0a9bf8fa6833ea5",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_0012ff64.c",
+      "status": "retained_screened",
+      "source_sha256": "cff4fdbbef0de52c5a5281fb9b5e3ce9a727d0af7a1ff4f0e40bad8a7f211469",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00137070.c",
+      "status": "retained_screened",
+      "source_sha256": "13566b08c222178f793a3114c3e7d577e6f2fbdd18cd8167938f13735a9c55db",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_001380c8.c",
+      "status": "retained_screened",
+      "source_sha256": "ac570ab8d82486139f06ea45bc8f3e6cf7a3b677b6c1e96aea80e3a0d37ba380",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_001382f8.c",
+      "status": "retained_screened",
+      "source_sha256": "3ab1a16a1234e522f0bda1ccea306194410eccf706de1664cf6dd00edde9f3ce",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00138334.c",
+      "status": "retained_screened",
+      "source_sha256": "9e2060bb2bdaceb3850f4278714418279f46b4540e0971f31486652525203f8a",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00138370.c",
+      "status": "retained_screened",
+      "source_sha256": "fe95e76dddd544f64ce23bd3849c363cc75936e136f4122bf90ca591934a42ac",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_001383ac.c",
+      "status": "retained_screened",
+      "source_sha256": "5f97e374d27ee8bbc8a53c19c9c8da1774af5c900e1efb019d845c71f2977609",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_0013e7d4.c",
+      "status": "retained_screened",
+      "source_sha256": "b558d8713bd8c074373cd3f1476630c58fcf7e92d1a69af006fca77bd01397ec",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00142644.c",
+      "status": "retained_screened",
+      "source_sha256": "4d35252c666882c832a34a01a8bc17f46b296739297745faf349e53990ebacad",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_0016de90.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7ad7a264d2b183e998889b3555cb0b98ba41d7be0390313813285e1f7a3ad20e",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/sdk2/func_00180768.c",
+      "status": "retained_screened",
+      "source_sha256": "e10dc4135b36df310c01f7c41abcbcc9a5934e6e63a3607d389226b9f036c980",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave1/func_0018fcc0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "96620bf6788adfb1c5607d8e7eee430b68e77a847b1afe90e2311868a9f2024b",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave1/func_00195254.c",
+      "status": "retained_screened",
+      "source_sha256": "118e37d5344f5c17fe548a7135d58309238c17e95c44381ac0f3bd903c546974",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave1/func_0019e02c_returning.c",
+      "status": "retained_screened",
+      "source_sha256": "819e0ddf31cc318e3bc7c4bc8ba379b7fdaf7408ce183fcd4513c58d8670b239",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_0014caf0.c",
+      "status": "retained_screened",
+      "source_sha256": "cf264570158f873f83968392e1600a7462497372328fd5437135cb0bd7d9ca16",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_0014e20c.c",
+      "status": "retained_screened",
+      "source_sha256": "9f14c5cd2eb923172ea15c52e610ebb6fc7e67886757ffc07ab869ff45adfaa7",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_001528dc.c",
+      "status": "retained_screened",
+      "source_sha256": "f9c3413b0e689625685fbb2d82814153e8879274c7bb10cf3f377ad968b0fa2c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_0016e3e0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "01c8999bdb1e72802d0a96614f65e6b3a85c9668c08577913ea6ab3691b5935d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_0016e7e0.c",
+      "status": "retained_screened",
+      "source_sha256": "83742720cea8893237bc3014380c15f5f8af68c6fa8ad27564cfd6464399a355",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_001b06a4.c",
+      "status": "retained_screened",
+      "source_sha256": "be4718300941e83f972acf9e2429d645190372b5d75e08402c462a165357ea4c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave10/func_001dd6c8.c",
+      "status": "retained_screened",
+      "source_sha256": "e06efd8eded912975dfe6e11db96d5004ee36d0d476825e22a601d0ab1e529d7",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave11/func_0010be94.c",
+      "status": "retained_screened",
+      "source_sha256": "9c4708c689fbc1339d0aa50fc608b3b06a4c436e6602360efed4606aae2114fc",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave11/func_0016ff08.c",
+      "status": "retained_screened",
+      "source_sha256": "52486294178f061b06dc57cc838076182a2fd74a9784b015275790c8e178246b",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave11/func_0016ff68.c",
+      "status": "retained_screened",
+      "source_sha256": "6a0da82d5165b10f6034495f6ef7244ac1788fedcdb36061285762683e6ca38f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave11/func_001949e4.c",
+      "status": "retained_screened",
+      "source_sha256": "4e1de371052ac3823b30d42842cd7201646ea0550623195573747249e4e2fab5",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave11/func_001d6678.c",
+      "status": "retained_screened",
+      "source_sha256": "c1d913192960fd592e44d7436bc1be949868a8935fa4b32a5eff77914d53da33",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave11/func_001d6b24.c",
+      "status": "retained_screened",
+      "source_sha256": "c904a7ac4a0d8959744ac6a31b58d6415e2bd6f456333ef9826b9161c237a9b7",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_001504a8.c",
+      "status": "retained_screened",
+      "source_sha256": "fa519fc8c1d0d9a7ad5660d369ef5416a1366970d52523f9677bb4b95ef5c2ab",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_0015050c.c",
+      "status": "retained_screened",
+      "source_sha256": "498aee23fd2ca1275daf9638967c15a8fd05f159668a6f09a862455ded35d807",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_0016e270.cpp",
+      "status": "retained_screened",
+      "source_sha256": "d2bf3af89e20871eca620b8abdd864cc04668923dc08afafe3887a2fe5af5dbf",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_001c1700.cpp",
+      "status": "retained_screened",
+      "source_sha256": "fc64b94a7a6c1b7c304a9c2bc284554bc4ef85313ac39e7546591c60cf659368",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_001c1794.c",
+      "status": "retained_screened",
+      "source_sha256": "9b1e961f74a31639cad20e2bdbbe8c15132aeb984c8ac9fc5a3af64c1842efd8",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_001c1924.c",
+      "status": "retained_screened",
+      "source_sha256": "5a2e7b2fc94da1ed74c5f1293ab98416f028cac4bfe83d78f87bf0c1dc206399",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave12/func_001d2c78.c",
+      "status": "retained_screened",
+      "source_sha256": "94035c6805fc3eeb21074f4b1004afdd741f72bd6e82945cbbfb432cdb2e2daa",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave13/func_001719f4.c",
+      "status": "retained_screened",
+      "source_sha256": "583834d37aefe7253c32c5613da099c6be5c26ed41b1123d7ba416173fe383a6",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave13/func_00180510.cpp",
+      "status": "retained_screened",
+      "source_sha256": "e21d35af5991fd460b171227eeda15f55746e8f971178310d31fc2e125c3bc72",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave13/func_0018f018.c",
+      "status": "retained_screened",
+      "source_sha256": "3a4a41f2dded62cec87e68cae05309a1abf3f2185f145f2a6f51364920fd39b6",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave13/func_001d9198.cpp",
+      "status": "retained_screened",
+      "source_sha256": "be452e72be0ed99c3fc1598bfe874ce5ec2f2754e371aa21d8ff7bb04a541e59",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave13/func_001db054.cpp",
+      "status": "retained_screened",
+      "source_sha256": "691cdc17894d66de54729e26ed69290619dc1e692d49750c560a773507deb02a",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave13/func_001db068.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ae1e6fb8390ec058a54d5bf0e776dd326040a50199aaa134e7701d3a1571b8ed",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave14/func_001cf6dc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "93876e766661a3632747449ca509dedde8a2b1ce53e9c87390c616c6e0cd5cd8",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave14/func_001da0e0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "04530f9d6ab9244d6e5c90d6808cf724d23040b8074b5c6d13f93d6303196469",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave14/func_001f014c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "eefe8c30f72285c90e2d9dacccd4e6d573ee6f86e7d90ae5edc40d1a4d8f035e",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave14/func_001f0158.cpp",
+      "status": "retained_screened",
+      "source_sha256": "97ccc5146738e635b6061ad2d0c3126700eb04540ef8782a2c538651fffcad92",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave14/func_001f017c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "cebf5ca0a472d867b00c9fd8596f40714d388296c6cd2b63c39c5bb72bf4f8b3",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave14/func_001f0188.cpp",
+      "status": "retained_screened",
+      "source_sha256": "61b988ff1da7717dfb0f5879e8d4702d53541e07daab5eae87c6c952374c0256",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave14/func_001f0194.cpp",
+      "status": "retained_screened",
+      "source_sha256": "3a57c113fb4abe2d6a347ee6e6a85f185d6be1d69933cc99e1c6ae19c7edacb8",
+      "scope_kind": "NEW"
+    },
+    {
+      "source": "src/wave15/func_00106190.c",
+      "status": "retained_screened",
+      "source_sha256": "e2c1aaec907ba9b2eaefff12e82b656d729815d6e4dbe8982f3bb7b42fd5ed26",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_0010b8b8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "534cf7b1b6dc71a24b5744571afce614e16d1be9f8340a96aa93326e620ee08f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_0010bc70.c",
+      "status": "retained_screened",
+      "source_sha256": "efafd72ed21764e02d1ce652eb2957d4c12713ec17617b3aa64ec943acae1b18",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_00131950.c",
+      "status": "retained_screened",
+      "source_sha256": "c9a37bc72a0d6839889f068ef62937ad1d49f19e41039c01e3e8c2caeffc3b89",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_00155148.c",
+      "status": "retained_screened",
+      "source_sha256": "e1c67ad5ac34497921c078b81b4e532f52d3c0848ebe65f319ccd95063d490ef",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_0015643c.c",
+      "status": "retained_screened",
+      "source_sha256": "53dc219eadb5be5429d0bef4a770cd124c661e2730ea7693f5060798b550ef0e",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_00180e14.c",
+      "status": "retained_screened",
+      "source_sha256": "7a428667419b5f6906175dc4b038f2b04c9e0f977304dda65edef324ca86569e",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_0018d8c4.c",
+      "status": "retained_screened",
+      "source_sha256": "83575ce3ef9b694dc25aebf4ea426dc717e0e9f4eac24e512256a3146640c55c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_0018d8d4.c",
+      "status": "retained_screened",
+      "source_sha256": "76ff07b00ab5ebf87e41da638db276e301a7624a5fd7937da9eaad98f5f31df7",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_0018dc38.c",
+      "status": "retained_screened",
+      "source_sha256": "fade75e848ff595d24bbe6d97a0b997dd3444a67ad65ae2ee594fa671b0e9e27",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_001d3c58.cpp",
+      "status": "retained_screened",
+      "source_sha256": "c2924f4cbe5dbc2344fd008c7ee32746de4d88163bf833faf6db8646ca7cdcef",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_001e5ce0.c",
+      "status": "retained_screened",
+      "source_sha256": "68cd565383f521f5902aa3b9f6493c054bba9d44547c17b7cf42d62620240b64",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave15/func_001efcd8.c",
+      "status": "retained_screened",
+      "source_sha256": "7887e1ac76bd0442043519b536baaf2bf8394949d60b55b64418da16b9503b78",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_001043c8.c",
+      "status": "retained_screened",
+      "source_sha256": "af4c38733074c728026d21d8867f3ccfc1cea156122158c34354514626ddbfd2",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_001043e0.c",
+      "status": "retained_screened",
+      "source_sha256": "1123b98597bbcafa1e41f1bb1a68a09009adaa68f0f14f72ca3524bfb953fb4a",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_00106a50.c",
+      "status": "retained_screened",
+      "source_sha256": "f28a251e292e84703099cebcd66011ab4edf7093c800343adab21c1fad67c8ef",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_00107140.c",
+      "status": "retained_screened",
+      "source_sha256": "f40369bb8a2cb417d438dae970b44f93fcd104b1928e1947792be55559bb6e29",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_00135ae8.c",
+      "status": "retained_screened",
+      "source_sha256": "489cb0a693097a77133f8f03e37692b4f9c16197d38b51591bf2f277501e529c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_001525c8.c",
+      "status": "retained_screened",
+      "source_sha256": "30c335d0a54de04b8a43fef062826b3e7bd399159e14068cf8c26dcfe88bd538",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_001525dc.c",
+      "status": "retained_screened",
+      "source_sha256": "f96b53e1187ffc7f70fd06934c927cfa5048f18aa2964e9525a33846e058b301",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_001ab65c.c",
+      "status": "retained_screened",
+      "source_sha256": "efead4de8dc8b8ed0b2eb430d23363ed614bf50fbff591979a1653b3cb5a3472",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave16/func_001bd9f0.c",
+      "status": "retained_screened",
+      "source_sha256": "7954854fef695d9b4336f05936dc616a1107a2f0e6b263789a7bf7e08907fec6",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_001103e4.c",
+      "status": "retained_screened",
+      "source_sha256": "b040931400353462522209926e41c1e9947a15c3945883bdd35c1e3a2e7a3c4d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_0015eaa8.c",
+      "status": "retained_screened",
+      "source_sha256": "717deca1b149cb3d2ebb62fcce2dc65dd1025a7482d381add751db3987b99752",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_00177160.c",
+      "status": "retained_screened",
+      "source_sha256": "d4bef4c151279c4690a5f9a1fac6ee4eec191328307571e82b71e3d90f55ba5f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_0017731c.c",
+      "status": "retained_screened",
+      "source_sha256": "8783bc392bbed45f88aa46891881934a3b025d499ec3ad811521f6d11fc22d9c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_0019b988.c",
+      "status": "retained_screened",
+      "source_sha256": "d14152fe70c75f004529557238c6bdeb87afeb022e3bd7d10cf3a2d28d790039",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_001adff8.c",
+      "status": "retained_screened",
+      "source_sha256": "bdc977c39559c1f4027dc04a93019d584be2484c1a7079455fcbdae427f8643e",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_001c4b74.cpp",
+      "status": "retained_screened",
+      "source_sha256": "bcb5b35e72d415b4b791d8bad33c5782731f690ee0fd9b9f3ba5d3330a929f99",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_001c4b9c.cpp",
+      "status": "retained_screened",
+      "source_sha256": "20174456d774ab0c1bbef0cc4c21ce1fbc42e60b2d84f8f964da746bd8251541",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_001c4bbc.cpp",
+      "status": "retained_screened",
+      "source_sha256": "7e8f41dd4f38a1120f4157741d7db556bdb89aae9b1ecb767dbcee3dc5de635d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave17/func_001ef9d8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "fd09201bb516baa78097de6c6e03dd5a87fb20028a1d92824ef06bbf108b768d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_00145e08.cpp",
+      "status": "retained_screened",
+      "source_sha256": "302939401c0342676de9efdaa7864fc7faa741410d09ab195116694712c56f50",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_00145e84.cpp",
+      "status": "retained_screened",
+      "source_sha256": "926c55edd6b345b2b8d9a01132f3021b4df532ea36b06609d1d1d13447efa280",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_00145eb0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "afd0bba71e8546d81c7c0732ea7cda5ca90e7d7325c0c8d532d03f8d1371d32c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_00146008.cpp",
+      "status": "retained_screened",
+      "source_sha256": "b6aa98bd6da7d93c52a8dd18b77ba5aa0c2c32d59bd01575bcedb6b14fb0f22a",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_00148014.cpp",
+      "status": "retained_screened",
+      "source_sha256": "2ca69acfca9386d4f83d789cec6ca904878dbfaf7d4eaa1fa640953dab0846f0",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_0014c930.c",
+      "status": "retained_screened",
+      "source_sha256": "336f2ce04b3d2e453a430801876a44093ed161b08151469236f02b94c8f93978",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_0015dd5c.c",
+      "status": "retained_screened",
+      "source_sha256": "fbb7148f862d6e99be8bcfc2d112d9d9752861abe7a9e3269bc10d9fb236746d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_0017e8bc.c",
+      "status": "retained_screened",
+      "source_sha256": "5b15fb44be3c13bded539a5b041a61c10d42166691cbf896569fb68e739d0357",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_001af154.c",
+      "status": "retained_screened",
+      "source_sha256": "e026623ab6b305567c1bfc01afb344a9a3608c55d7f33bfeabf7731b0126fc5b",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_001b5c88.c",
+      "status": "retained_screened",
+      "source_sha256": "e6e733f3fa6f047b3147947b62e3ab75fe5361f97dc2aa194c7d6d6484783115",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_001ba280.c",
+      "status": "retained_screened",
+      "source_sha256": "febc02ef8b7bd87688792c572ed335152465ba283a311f32ed80b276bf030238",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave18/func_001d2be8.c",
+      "status": "retained_screened",
+      "source_sha256": "49bc20921fff4bbed9cfe99597f56023109f6043d7218dec687ce88ae817cd60",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave19/func_0012edd4.c",
+      "status": "retained_screened",
+      "source_sha256": "bd687089e8b20f81671d20d3d676ba2d0d62e96881b88e48f61e0049b4003e62",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave19/func_0016c07c.c",
+      "status": "retained_screened",
+      "source_sha256": "06978cf57dc2ded5e8ed2ab78c7c6a24c1d480c5e8a931e315fd6bf750f7c686",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave19/func_0016dae8.c",
+      "status": "retained_screened",
+      "source_sha256": "7416d23a9053570c22d921b97976ebddd64aeca6593e1db3fe0f47539f66540d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave19/func_001701b4.c",
+      "status": "retained_screened",
+      "source_sha256": "1c161406c86fc628e5fa5b8b06a8eec835c733b5d665216b42b78ffdb3c75d45",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave19/func_001ae888.c",
+      "status": "retained_screened",
+      "source_sha256": "d665e1373a737f6d5adc9c4251ca44acb94fbbc3777fce153efeb5d45bbdf4c7",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave19/func_001e74b8.c",
+      "status": "retained_screened",
+      "source_sha256": "4101164ec2e10d9f81bf76f2479a96dec8e93e55e7415793f0b398ca6151db39",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave2/func_0011d260.c",
+      "status": "retained_screened",
+      "source_sha256": "5e757c440ed3e595e89998e34dcaa1ba2f39e38bf0b35d9f0ec26370ddfb882a",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave2/func_0018f0ac.c",
+      "status": "retained_screened",
+      "source_sha256": "27ed82185e01a202f3e03a148fee5465e41bcec6565e8d89bf4aedcf7d286ee2",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave2/func_001b7c9c.c",
+      "status": "retained_screened",
+      "source_sha256": "a020549e9c1517d7eeed942d0c7b33d7bd0079134e580a5224a10c820e4363c0",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave20/func_0015e4a8.cpp",
+      "status": "retained_screened",
+      "source_sha256": "fb5f3e31a6b2784cb47304fc711a390c181d5ee4e97b47bab32f5cfdce658841",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave20/func_0015e634.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ebf2491a4f53603a1aac6b2bf4ddc5445d17a81c2b4ec80cac4436bfdb7d2826",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave20/func_001791fc.c",
+      "status": "retained_screened",
+      "source_sha256": "69295aa50510634a97ee52eb9d6febb9efff101af6398a338e15e8b840de425c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave3/empty_functions.c",
+      "status": "retained_screened",
+      "source_sha256": "a699ecd3a6bf3812625264aef698d4eb47e62c51acf20bb54947bdf6090e2760",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0010c338.c",
+      "status": "retained_screened",
+      "source_sha256": "b8f7e6dbd29527303ddeb7a4581e7ddd15d22b99ba7bd6e45d8e56acc8b9bc2c",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_00121bc4.c",
+      "status": "retained_screened",
+      "source_sha256": "4e46ad36b15ad3d390b0dab2f4f5b7f5a8c76812c05420bfeaec97c4cac5e25b",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_001224a0.c",
+      "status": "retained_screened",
+      "source_sha256": "0244e03fdc28363c41e67b7ab4ef9f562171f67e40fb762a77312ea2bb8e12be",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_00122984.c",
+      "status": "retained_screened",
+      "source_sha256": "79f28aa56090384c6061f5b0ec43399e19e5b6d050174a8c0e431dbd4bdd16cd",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0012f518.c",
+      "status": "retained_screened",
+      "source_sha256": "eba1854a1704a493c7ddfa959f949ff54453c55f4037754daa2ca44924d5510f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_00136858.c",
+      "status": "retained_screened",
+      "source_sha256": "7d7dec62af890fe4b31cf11b6376de1c14a54a9d84a25283a4caad0a919b06e9",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0013776c.c",
+      "status": "retained_screened",
+      "source_sha256": "a19caa0b8907a3cf4c4f8b6023fab7a485b0620f4e4e33ead97e23f1c19481a6",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0014d784.c",
+      "status": "retained_screened",
+      "source_sha256": "437396cdb6f5348169c13960534043744f9ba4c3d83f74ec97041839874fde2d",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_00166f1c.c",
+      "status": "retained_screened",
+      "source_sha256": "8b81574f23e7e5f66ed640d4635a3f7148023471ca178b3706aa3b2b4d20e774",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0016a994.c",
+      "status": "retained_screened",
+      "source_sha256": "c3f78b5174601eac68b07b942fc9c5f0ea4a1b57fcbe87bb7fac75867d67ccc4",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0016f39c.c",
+      "status": "retained_screened",
+      "source_sha256": "a412328aa5fd3d9c5d91ee3f8ff775209bbec6e24376c5ff1e68af34c35f63ea",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_00185cc0.c",
+      "status": "retained_screened",
+      "source_sha256": "71138b7fb0364801cf455c3ae54e9fbe6521823685c10ff7ea1743e0931a3354",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0019d048.c",
+      "status": "retained_screened",
+      "source_sha256": "ea683ee896e82c7ed005059012eb88487224b21d5387b0fca4310018ff4a504a",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_0019d058.c",
+      "status": "retained_screened",
+      "source_sha256": "440b13b0495b620f26a30e5345c0d79518bf28720f14d935769a82b5c9374428",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_001b54e8.c",
+      "status": "retained_screened",
+      "source_sha256": "267c69ca408da354314d98f20b52d73876a9d0d9fe44a841e42bc071507a9b1f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave4/func_001d32e0.c",
+      "status": "retained_screened",
+      "source_sha256": "50faaeaae425e84e0100c2585c67eed6d0e7666843b0563bb7247f8ebb8bd742",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave5/func_00145840.c",
+      "status": "retained_screened",
+      "source_sha256": "ca44c922e757fd719ab4892de52a78f720dd62ecda7cc0a91199dfc34d2e8a9b",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave5/func_001941a8.c",
+      "status": "retained_screened",
+      "source_sha256": "cb1785a4645b5aef079609053982f35ddb7ac89fad6732629121bbdccc2a8443",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave6/func_00127398.c",
+      "status": "retained_screened",
+      "source_sha256": "6850619b30ec256409672b812287620abe127090d9158d1c45d29777354ff98f",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave6/func_001467e4.c",
+      "status": "retained_screened",
+      "source_sha256": "6aa95d46d488f7b97c95f8cbf8195abd727f2c153ff551a614af6d17c74385de",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave6/func_0016a87c.c",
+      "status": "retained_screened",
+      "source_sha256": "a37357e4bf10f2d3f1e5b500e2a0f57960a4c95d5fcdeb2d772e584f12debd61",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave6/func_0016c55c.c",
+      "status": "retained_screened",
+      "source_sha256": "7a2cce809689f47d262fb1c00f5fca11d168c35016783390a9423023b32a6fd0",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave6/func_0019dc20.c",
+      "status": "retained_screened",
+      "source_sha256": "bed93e58eb5b2e25552a31cf734f6cada54e0b57fe68c51bd6c26bb14ad66e41",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_00180234.cpp",
+      "status": "retained_screened",
+      "source_sha256": "78fb88bb4dae0bc074f9c846cd3acc39d9fe45d70b5cd85cebbd9ac822cad838",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_0018290c.c",
+      "status": "retained_screened",
+      "source_sha256": "87d91ac50733936af071efc9233fa1dac565415daa6fb59d9d511e393df2acbd",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_001c3cf8.c",
+      "status": "retained_screened",
+      "source_sha256": "b356e8dfe4143e01499433c40255413d025072e2a931611b26a9f501434a5f19",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_001cfd94.cpp",
+      "status": "retained_screened",
+      "source_sha256": "cf2149bd9058d897e83e5c976e4a92530511e2350d4f61e80c2a1c66e9bcafb4",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_001cfdac.cpp",
+      "status": "retained_screened",
+      "source_sha256": "1117436fcedf4016d46d2acb8c100db482a9c550e213748a333a84e51dc8faeb",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_001cff50.cpp",
+      "status": "retained_screened",
+      "source_sha256": "ff941e91543d1f0c8fdfb23906318301cff3668e12f3b4f9ec580cb6c4230442",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_001e403c.c",
+      "status": "retained_screened",
+      "source_sha256": "2b2cec435160f6da6430b5433ed253bb2af4f112e9dcd4b83e888c61cdff7604",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave8/func_001f01b0.cpp",
+      "status": "retained_screened",
+      "source_sha256": "977080f3c11233e78c1b513821d3130db34d0d819701f48a21d447131bdf7c59",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave9/func_0013923c.c",
+      "status": "retained_screened",
+      "source_sha256": "ca07e787af842915ade5155f5eaf5f0bb6741ce57d4833b7cc400014be2c0040",
+      "scope_kind": "REVISED_ACCEPTED"
+    },
+    {
+      "source": "src/wave9/func_00141554.c",
+      "status": "retained_screened",
+      "source_sha256": "f672131eb132c3223c60c7227b234656fee8b2da87f84ec59026be3717fdf592",
+      "scope_kind": "REVISED_ACCEPTED"
+    }
+  ],
+  "limits": "Author source/metadata and bounded semantic census, not interfaces/argcheck/full builds/suite/independent review. Original payload/words/encodings/disassembly not retained; serialized data projections and unresolved dynamic populations retain explicit qualifications. No new arbitrary downcast/owner or C-to-native facade is approved."
+}

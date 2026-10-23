@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "source_commit": "ecd63db2",
+  "status": "PASS_COMPLETE_BOTH_REVIEW_PROPOSED_LEDGER_MATCH_ONLY",
+  "supersedes": "REPROOF-SUMMARY-r1.json",
+  "outer_exit": 0,
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "scratch/integrator/c010/match_scope.py",
+    "--run",
+    "match-r7-r2",
+    "--scope",
+    "scratch/integrator/c010/r7/complete-match-scope-r2.json"
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_primaries": 2599,
+  "completed_primaries": 2599,
+  "MATCH_primaries": 2599,
+  "per_unit_exit_counts": {
+    "0": 2599
+  },
+  "required_MATCH_functions": 2687,
+  "credited_function_bytes": 289152,
+  "helper_only_definitions_in_context": 24,
+  "helper_recipe_contexts": 27,
+  "paused": false,
+  "results": "scratch/integrator/c010/match-r7-r2/results.json",
+  "results_sha256": "0ca07e786129ec21ce098270cdf77e54456a5104338d6b8b6c925923befe03fa",
+  "rewrite_projection": "scratch/integrator/c010/match-r7-r2/linker-rewrites.json",
+  "rewrite_projection_sha256": "ba0dfde3858a1bf92b5e69a213515b24fc5ae7cb5691c91eaf2fd482018d1dae",
+  "rewrite_projection_scope_complete": true,
+  "rewrite_projection_expected_units": 2599,
+  "rewrite_projection_matched_units": 2599,
+  "scope": "scratch/integrator/c010/r7/complete-match-scope-r2.json",
+  "scope_sha256": "d2d023e942e09d790552d033b70deaeb8a4010ae3ef2824fb505867861e3b77c",
+  "source_context": "scratch/integrator/c010/r7/SOURCE-CONTEXT-r2.json",
+  "source_context_sha256": "fd579654dcafd1b803e8cfce895ab671620ebfa7afd1090b2be422de7daa9a25",
+  "runner_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "earlier_actual_exits": "scratch/integrator/c010/r7/REPROOF-ATTEMPTS-r2.json",
+  "boundary": "Sequential nice-10 single-process matcher proof, not interfaces/argcheck/full build/suite/prepare/review/finalize. No original bytes/encodings/disassembly stored."
+}

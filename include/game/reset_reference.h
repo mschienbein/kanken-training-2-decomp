@@ -29,6 +29,9 @@ extern struct ResetReference bss_004b2a44[24];
 extern void *func_00156da0(void *storage);
 extern void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void *(*constructor)(void *),
                                             size_t element_size, size_t element_count);
+/* ARM-to-Thumb veneer of the same generic array-construction runtime. */
+extern void *func_001911c4(void *array, void *(*constructor)(void *),
+                          size_t element_size, size_t element_count);
 #ifdef __cplusplus
 }
 #endif

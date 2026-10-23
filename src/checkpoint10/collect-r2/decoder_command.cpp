@@ -4,11 +4,12 @@
  */
 #include "game/prefetch_stream.h"
 #include "game/stream_manager.h"
+#include <new>
 
 
-static StreamEvent *allocate_event(StreamManager *manager, unsigned words)
+static AudioDecodeEvent *allocate_event(StreamManager *manager, unsigned words)
 {
-    StreamEvent *event = static_cast<StreamEvent *>(func_0019147c(manager, words));
+    AudioDecodeEvent *event = new (func_0019147c(manager, words)) AudioDecodeEvent;
     event->start = manager->write_index;
     return event;
 }
@@ -25,7 +26,7 @@ unsigned func_001d68c0(AudioDecodeOwner *owner)
 {
     AudioDecodeState *decoder = owner->decoder;
     StreamManager *manager = func_00185bfc();
-    AudioDecodeEvent *event = static_cast<AudioDecodeEvent *>(allocate_event(manager, 15));
+    AudioDecodeEvent *event = allocate_event(manager, 15);
     event->opcode = 42;
     bool success;
     if (decoder->kind == 0)

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/r7/focused-scope-r4.json",
+  "scope_sha256": "8f87b02ac9adbf7684583fc7d1b16c11ceb0d789608e8c0e794d46848f1fb3d9",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_units": 1,
+  "completed_units": 1,
+  "paused": false,
+  "match_units": 0,
+  "exit_counts": {
+    "1": 1
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/collect-r2/release.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_001d9ca0"
+      ],
+      "author": "tu622",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/release.cpp",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r4/u0000"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "output": "MISMATCH func_001d9ca0 @ 0x1d9ca0 size 0x44/0x44 first difference at +0x20\n",
+      "receipt": "scratch/integrator/c010/match-r7-focused-r4/u0000/release.result.json",
+      "source_sha256": "1a8690498ed67ba1f55957294f283f1dc5568f55c8f849a1078483d6e033fb88",
+      "extra_source_sha256": {},
+      "receipt_sha256": "2deb841b01386521ec1a9dbba9fa2e7ca88bc7cdae01b42fe928d10abc4b2bea"
+    }
+  ],
+  "script_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "rewrite_projection": "scratch/integrator/c010/match-r7-focused-r4/linker-rewrites.json"
+}

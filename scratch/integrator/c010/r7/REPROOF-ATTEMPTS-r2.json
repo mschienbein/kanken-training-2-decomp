@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "runs": [
+    {
+      "run": "match-r7-focused-r1",
+      "outer_exit": 1,
+      "expected_units": 10,
+      "completed_units": 10,
+      "MATCH_units": 9,
+      "per_unit_exit_counts": {
+        "0": 9,
+        "2": 1
+      },
+      "result": "scratch/integrator/c010/match-r7-focused-r1/results.json",
+      "result_sha256": "1210324457c511752fa340c32594721bd87ee5488e6c10e38b777722bf89ab01",
+      "scope": "scratch/integrator/c010/r7/focused-scope-r1.json",
+      "scope_sha256": "08557a22f79d734fde6abc5f255952d560268e21da6009118d7b1d3314a1998b",
+      "nonzero_rows": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_0021443c.cpp",
+          "profile": "game",
+          "functions": [
+            "func_0021443c"
+          ],
+          "author": "v9a07",
+          "command": [
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/checkpoint10/collect-r2/func_0021443c.cpp",
+            "--profile",
+            "game",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r1/u0004"
+          ],
+          "exit_code": 2,
+          "credited_functions_match": false,
+          "output": "error: unresolved symbol '__sti___17_func_0021443c_cpp_b254dc20' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+          "receipt": "scratch/integrator/c010/match-r7-focused-r1/u0004/func_0021443c.result.json",
+          "source_sha256": "7e90fd237c4350e079664a1a5fc4f4571397062a39d0b402fb9863357378142d",
+          "extra_source_sha256": {},
+          "receipt_sha256": "15a00ffb8d20bc61b60621520bff5db75fdb89551a133e19786c26bcdb1f40f2"
+        }
+      ]
+    },
+    {
+      "run": "match-r7-focused-r2",
+      "outer_exit": 0,
+      "expected_units": 1,
+      "completed_units": 1,
+      "MATCH_units": 1,
+      "per_unit_exit_counts": {
+        "0": 1
+      },
+      "result": "scratch/integrator/c010/match-r7-focused-r2/results.json",
+      "result_sha256": "a40f5daa2e1873d29d0a2b3dfad4a27459f40aa32fac17220962db8326d234f9",
+      "scope": "scratch/integrator/c010/r7/focused-scope-r2.json",
+      "scope_sha256": "3a18e41eec5b25588788581b5a3bf20f48a785adc1a9a894adafbf649ee1be0e",
+      "nonzero_rows": []
+    },
+    {
+      "run": "match-r7-r1",
+      "outer_exit": 0,
+      "expected_units": 2602,
+      "completed_units": 2602,
+      "MATCH_units": 2602,
+      "per_unit_exit_counts": {
+        "0": 2602
+      },
+      "result": "scratch/integrator/c010/match-r7-r1/results.json",
+      "result_sha256": "4b9a41bbf225030c8c0cdc7da5e43737adfa40efd7ff741712636fdbc5cf6135",
+      "scope": "scratch/integrator/c010/r7/complete-match-scope-r1.json",
+      "scope_sha256": "693e231f67d72bc5008ef566b0310cec6b05a0288e60b06bd9f434d9d7ba13db",
+      "nonzero_rows": []
+    },
+    {
+      "run": "match-r7-focused-r3",
+      "outer_exit": 1,
+      "expected_units": 3,
+      "completed_units": 3,
+      "MATCH_units": 2,
+      "per_unit_exit_counts": {
+        "0": 2,
+        "1": 1
+      },
+      "result": "scratch/integrator/c010/match-r7-focused-r3/results.json",
+      "result_sha256": "52f934b55a2d822c0a88c34925b71469f1ca8bf4c958cc0d3df85139b98db9ff",
+      "scope": "scratch/integrator/c010/r7/focused-scope-r3.json",
+      "scope_sha256": "a731bff8542c7f3067668cd1857550908db8c7748555a8aaf6757d949a0d19af",
+      "nonzero_rows": [
+        {
+          "source": "src/checkpoint10/collect-r2/release.cpp",
+          "profile": "middleware",
+          "functions": [
+            "func_001d9ca0"
+          ],
+          "author": "tu622",
+          "command": [
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/checkpoint10/collect-r2/release.cpp",
+            "--profile",
+            "middleware",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r3/u0002"
+          ],
+          "exit_code": 1,
+          "credited_functions_match": false,
+          "output": "MISMATCH func_001d9ca0 @ 0x1d9ca0 size 0x44/0x44 first difference at +0x20\n",
+          "receipt": "scratch/integrator/c010/match-r7-focused-r3/u0002/release.result.json",
+          "source_sha256": "3e3f4d5aa094b08dfb640b3b4540475022c617e71a01a6d4c63a8485045a3ae7",
+          "extra_source_sha256": {},
+          "receipt_sha256": "5c0b8891c8f89a1db59c7620f26ba82e9843b3296165ff61c12c47ee501f37a9"
+        }
+      ]
+    },
+    {
+      "run": "match-r7-focused-r4",
+      "outer_exit": 1,
+      "expected_units": 1,
+      "completed_units": 1,
+      "MATCH_units": 0,
+      "per_unit_exit_counts": {
+        "1": 1
+      },
+      "result": "scratch/integrator/c010/match-r7-focused-r4/results.json",
+      "result_sha256": "869ea8ea02e717f134f4b58764d7697644d08ac8183e7f7d2992ebe9ba9cfcc7",
+      "scope": "scratch/integrator/c010/r7/focused-scope-r4.json",
+      "scope_sha256": "8f87b02ac9adbf7684583fc7d1b16c11ceb0d789608e8c0e794d46848f1fb3d9",
+      "nonzero_rows": [
+        {
+          "source": "src/checkpoint10/collect-r2/release.cpp",
+          "profile": "middleware",
+          "functions": [
+            "func_001d9ca0"
+          ],
+          "author": "tu622",
+          "command": [
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/checkpoint10/collect-r2/release.cpp",
+            "--profile",
+            "middleware",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r4/u0000"
+          ],
+          "exit_code": 1,
+          "credited_functions_match": false,
+          "output": "MISMATCH func_001d9ca0 @ 0x1d9ca0 size 0x44/0x44 first difference at +0x20\n",
+          "receipt": "scratch/integrator/c010/match-r7-focused-r4/u0000/release.result.json",
+          "source_sha256": "1a8690498ed67ba1f55957294f283f1dc5568f55c8f849a1078483d6e033fb88",
+          "extra_source_sha256": {},
+          "receipt_sha256": "2deb841b01386521ec1a9dbba9fa2e7ca88bc7cdae01b42fe928d10abc4b2bea"
+        }
+      ]
+    }
+  ],
+  "failure_disposition": "The canonical SoundEnvelope TU emitted a new actual initializer name. Preserve the refusal and replace only the old initializer-name binding with the emitted name; no alternate record type, data alias, byte patch or silent fallback. Changed name context then MATCH, exit0.",
+  "boundary": "Actual exits retained; no original bytes/encodings/disassembly.",
+  "supersedes": "REPROOF-ATTEMPTS-r1.json",
+  "additional_failure_disposition": "Real-derived release-event construction, preserving both direct derived and existing base API forms, remained68/68B mismatches at+0x20. NEW func001d9ca0 is now explicitly deferred, not selected with a storage projection or code-generation forcing. Texture wrapper and real decoder event construction both MATCH."
+}

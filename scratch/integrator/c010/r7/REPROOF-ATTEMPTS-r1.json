@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "runs": [
+    {
+      "run": "match-r7-focused-r1",
+      "outer_exit": 1,
+      "expected_units": 10,
+      "completed_units": 10,
+      "MATCH_units": 9,
+      "per_unit_exit_counts": {
+        "0": 9,
+        "2": 1
+      },
+      "result": "scratch/integrator/c010/match-r7-focused-r1/results.json",
+      "result_sha256": "1210324457c511752fa340c32594721bd87ee5488e6c10e38b777722bf89ab01",
+      "scope": "scratch/integrator/c010/r7/focused-scope-r1.json",
+      "scope_sha256": "08557a22f79d734fde6abc5f255952d560268e21da6009118d7b1d3314a1998b",
+      "nonzero_rows": [
+        {
+          "source": "src/checkpoint10/collect-r2/func_0021443c.cpp",
+          "profile": "game",
+          "functions": [
+            "func_0021443c"
+          ],
+          "author": "v9a07",
+          "command": [
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/checkpoint10/collect-r2/func_0021443c.cpp",
+            "--profile",
+            "game",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7/scratch/integrator/c010/match-r7-focused-r1/u0004"
+          ],
+          "exit_code": 2,
+          "credited_functions_match": false,
+          "output": "error: unresolved symbol '__sti___17_func_0021443c_cpp_b254dc20' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+          "receipt": "scratch/integrator/c010/match-r7-focused-r1/u0004/func_0021443c.result.json",
+          "source_sha256": "7e90fd237c4350e079664a1a5fc4f4571397062a39d0b402fb9863357378142d",
+          "extra_source_sha256": {},
+          "receipt_sha256": "15a00ffb8d20bc61b60621520bff5db75fdb89551a133e19786c26bcdb1f40f2"
+        }
+      ]
+    },
+    {
+      "run": "match-r7-focused-r2",
+      "outer_exit": 0,
+      "expected_units": 1,
+      "completed_units": 1,
+      "MATCH_units": 1,
+      "per_unit_exit_counts": {
+        "0": 1
+      },
+      "result": "scratch/integrator/c010/match-r7-focused-r2/results.json",
+      "result_sha256": "a40f5daa2e1873d29d0a2b3dfad4a27459f40aa32fac17220962db8326d234f9",
+      "scope": "scratch/integrator/c010/r7/focused-scope-r2.json",
+      "scope_sha256": "3a18e41eec5b25588788581b5a3bf20f48a785adc1a9a894adafbf649ee1be0e",
+      "nonzero_rows": []
+    }
+  ],
+  "failure_disposition": "The canonical SoundEnvelope TU emitted a new actual initializer name. Preserve the refusal and replace only the old initializer-name binding with the emitted name; no alternate record type, data alias, byte patch or silent fallback. Changed name context then MATCH, exit0.",
+  "boundary": "Actual exits retained; no original bytes/encodings/disassembly."
+}

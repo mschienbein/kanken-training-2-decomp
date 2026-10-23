@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "status": "C010_R7_BOTH_REVIEWS_FOLDED_COMPLETE_AFFECTED_MATCH",
+  "supersedes": "HANDOFF-r1.json",
+  "branch": "c010-r7",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r7",
+  "source_commit": "ecd63db2",
+  "prior_immutable_r7_commit": "3ce49ac2630259b7134300ecd33c6ca5f110d54d",
+  "immutable_base_main": "7083a0a3b9b56d56e24735ec3963283c92328c16",
+  "immutable_r6_prepared_source": "3caf7c4d1559d2c11dfc9983e758acd32e6887ab",
+  "accepted_predecessor": "c009-r6 finalized",
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2 inherited",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "counts": {
+    "candidate_units": 419,
+    "candidate_claims": 430,
+    "NEW_functions": 418,
+    "NEW_bytes": 39780,
+    "moves": 12,
+    "moved_bytes": 192,
+    "deferral_units": 88,
+    "deferral_functions": 89,
+    "deferral_bytes": 7832,
+    "proposed_units": 2623,
+    "proposed_functions": 2687,
+    "proposed_bytes": 289152,
+    "accepted_predecessor_functions": 2269,
+    "accepted_predecessor_bytes": 249372,
+    "preserved_accepted_identities": 2269,
+    "helper_only_units": 24
+  },
+  "all_2269_accepted_predecessor_identities_preserved": true,
+  "explicit_moves_preserved": 12,
+  "folded_dispositions": [
+    {
+      "review": "codex-b",
+      "id": "C010R6B-F01",
+      "disposition": "GENUINE_GENERIC_RUNTIME_CALLBACK_FIX",
+      "subjects": [
+        "func_00156dbc",
+        "func_001c4490",
+        "func_001c5d90",
+        "func_00214138"
+      ]
+    },
+    {
+      "review": "codex-b",
+      "id": "C010R6B-F02",
+      "disposition": "GENUINE_SHARED_ENVELOPE_OBJECT_FIX",
+      "subjects": [
+        "func_0021443c"
+      ]
+    },
+    {
+      "review": "codex-b",
+      "id": "C010R6B-F03",
+      "disposition": "THREE_DEPENDENT_NEW_ONLY_DEFERRALS",
+      "subjects": [
+        "func_001913fc",
+        "func_001d296c",
+        "func_001d2b8c"
+      ],
+      "bytes": 276
+    },
+    {
+      "review": "codex-a",
+      "id": "F01/F02",
+      "disposition": "SAME_GENERIC_CALLBACK_AND_SHARED_ENVELOPE_FIXES"
+    },
+    {
+      "review": "codex-a",
+      "id": "F03",
+      "disposition": "GENUINE_REAL_TEXTURE_WRAPPER_VALUE",
+      "subjects": [
+        "func_00184148"
+      ],
+      "MATCH_bytes": 188
+    },
+    {
+      "review": "codex-a",
+      "id": "F04",
+      "disposition": "DEPENDENT_NEW_ONLY_DEFERRAL",
+      "subjects": [
+        "func_00140ecc"
+      ],
+      "bytes": 244
+    },
+    {
+      "review": "codex-a",
+      "id": "F05",
+      "disposition": "DEPENDENT_NEW_ONLY_DEFERRAL",
+      "subjects": [
+        "func_001d7e6c"
+      ],
+      "bytes": 112
+    },
+    {
+      "review": "proactive sweep",
+      "id": "REAL_DERIVED_EVENT",
+      "disposition": "GENUINE_DECODER_EVENT_CONSTRUCTION_AND_NEW_ONLY_RELEASE_CALLBACK_DEFERRAL",
+      "fixed_subjects": [
+        "func_001d68c0"
+      ],
+      "fixed_MATCH_bytes": 148,
+      "deferred_subjects": [
+        "func_001d9ca0"
+      ],
+      "deferred_bytes": 68
+    }
+  ],
+  "added_since_3ce49ac2": {
+    "NEW_only_deferrals": [
+      "func_00140ecc",
+      "func_001d7e6c",
+      "func_001d9ca0"
+    ],
+    "NEW_deferral_bytes": 424,
+    "accepted_deferrals": 0
+  },
+  "proactive_sweep": {
+    "input_NEW_revised_units": 588,
+    "retained_sources": 582,
+    "NEW_only_removed": 6,
+    "compiled_primary_objects_screened": 580,
+    "native_provider_identities_screened": 165,
+    "result": "Real-object/derived-event cases fixed or NEW-deferred; removed NEW C-to-native and bound-family providers. Two pre-existing accepted WaveFile edges remain explicitly inherited; broad prefix false ownership candidates rejected using actual virtual declarations."
+  },
+  "reproof": {
+    "outer_exit": 0,
+    "expected_primaries": 2599,
+    "MATCH_primaries": 2599,
+    "per_unit_exit_counts": {
+      "0": 2599
+    },
+    "required_MATCH_functions": 2687,
+    "helper_only_definitions_in_context": 24,
+    "scope_complete": true
+  },
+  "records": {
+    "candidate_manifest": {
+      "path": "config/candidates/c010.json",
+      "sha256": "657f932ce71048e1fce530ee4bbf85d3678028e50af6c5638abb31b88475c627"
+    },
+    "fresh_proposed_ledger": {
+      "path": "scratch/integrator/c010/r7/dry-matches-r2.json",
+      "sha256": "72fa6a1f920d48d8b39b9e3e8129e6184d648c322e8b46e69c93669e8b5f6d13"
+    },
+    "source_context": {
+      "path": "scratch/integrator/c010/r7/SOURCE-CONTEXT-r2.json",
+      "sha256": "fd579654dcafd1b803e8cfce895ab671620ebfa7afd1090b2be422de7daa9a25"
+    },
+    "complete_scope": {
+      "path": "scratch/integrator/c010/r7/complete-match-scope-r2.json",
+      "sha256": "d2d023e942e09d790552d033b70deaeb8a4010ae3ef2824fb505867861e3b77c"
+    },
+    "reproof_summary": {
+      "path": "scratch/integrator/c010/r7/REPROOF-SUMMARY-r2.json",
+      "sha256": "8b77fc2fc7b9aa1f36f8595fa38319b8d9ee9b9684a8fbadce9d523e18c54b62"
+    },
+    "reproof_results": {
+      "path": "scratch/integrator/c010/match-r7-r2/results.json",
+      "sha256": "0ca07e786129ec21ce098270cdf77e54456a5104338d6b8b6c925923befe03fa"
+    },
+    "complete_rewrite_projection": {
+      "path": "scratch/integrator/c010/match-r7-r2/linker-rewrites.json",
+      "sha256": "ba0dfde3858a1bf92b5e69a213515b24fc5ae7cb5691c91eaf2fd482018d1dae"
+    },
+    "deferrals": {
+      "path": "scratch/integrator/c010/r7/NEW-DEFERRALS-r2.json",
+      "sha256": "dec505591bfa61b2eb39d7c13c501cf12223a1dff28317a7b8d656ab9f92a1e1"
+    },
+    "remediation": {
+      "path": "scratch/integrator/c010/r7/REMEDIATION-r2.json",
+      "sha256": "9c25c582bdf63ab90cc3b75d87851940ea9a455b19bee67eed8071130f99a4a0"
+    },
+    "proactive_sweep": {
+      "path": "scratch/integrator/c010/r7/PROACTIVE-SWEEP-r2.json",
+      "sha256": "003b4ddf5c898f3635fb4e75e2d4f16fa8d3e8234cb52e044f7d83bc791e7f31"
+    },
+    "known_issues": {
+      "path": "docs/known-issues-c010.md",
+      "sha256": "c29c55a627ba9c10ba967ea4c35e11a54cb8de1b3f7952f5ee8852169ab00923"
+    },
+    "remaining_heavy_commands": {
+      "path": "scratch/integrator/c010/r7/REMAINING-HEAVY-COMMANDS-r2.json",
+      "sha256": "a054ea373e75a15e3abf18d957eb4af3d3ed19c6358dfa103705dfb386228cf3"
+    },
+    "earlier_actual_exits": {
+      "path": "scratch/integrator/c010/r7/REPROOF-ATTEMPTS-r2.json",
+      "sha256": "9ff7c716696feafc4d5b5d92fa1356629f009a26bb810a1e5b925889388a1fcd"
+    }
+  },
+  "remaining_Main_requirements": [
+    "Retain both registered r6 FAIL reviews and all earlier r7 evidence; no historical record is rewritten or relabeled passing.",
+    "Integrate clean committed both-review r7 inputs and run/adjudicate fresh whole-ledger interfaces and complete-rewrite argcheck against dry-matches-r2.json.",
+    "Two pre-existing accepted WaveFile C-to-native facade edges are explicitly recorded as inherited, not newly approved or migrated; Main retains inherited-contract adjudication.",
+    "Prepare with two fresh complete builds plus suite and obtain two fresh independent bound reviews before finalize/push.",
+    "Any integrated source/header/profile/name/catalogue/composition drift requires fresh affected proof under unused immutable paths."
+  ],
+  "not_run": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "main_only": [
+    "main",
+    "accept/ records",
+    "canonical ledger/history",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}
