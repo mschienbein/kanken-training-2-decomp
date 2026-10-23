@@ -8,19 +8,11 @@ struct ResourceHandle;
 #include <stdint.h>
 #include "game/runtime.h"
 #include "game/font.h"
+#include "game/exp_heap.h"
 
-struct ResourceObject;
-struct ResourceTableEntry {
-    int active;
-    void *allocation;
-    struct ResourceObject *object;
-    unsigned char reserved[3];
-    unsigned char flag;
-    unsigned char tail[8];
-};
 
 struct ResourceTable {
-    struct ResourceTableEntry *entries;
+    struct ResourceEntry *entries;
     int count;
     int activeCount;
     unsigned char reserved0c[0x28];
@@ -65,6 +57,7 @@ struct DetailList {
 extern "C" {
 #endif
 extern struct ResourceTable bss_002d3d60;
+extern void func_0011f080(struct ResourceEntry *entry);
 extern struct EntryList data_0024225c;
 extern struct DetailList data_00242264;
 extern unsigned *data_0023fd80;

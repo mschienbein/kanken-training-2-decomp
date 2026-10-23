@@ -1,19 +1,15 @@
-#include <preinclude.h>
-#include <nw/lyt/lyt_Picture.h>
-#include <nw/lyt/lyt_Layout.h>
-
-namespace nw { namespace lyt {
-void Picture::SetMaterial(Material *material)
+#include "game/material.h"
+#include "game/shader.h"
+extern "C" void func_0017fda4(DisplayPane *pane, Material *material)
 {
-    Material *previous = m_pMaterial;
+    Material *previous = pane->material;
     if (previous == material)
         return;
-    if (previous && !previous->IsUserAllocated()) {
-        previous->~Material();
-        Layout::FreeMemory(previous);
+    if (previous && !(previous->flags & 1)) {
+        previous->vtable->destroy(previous);
+        func_00191aec(previous);
     }
-    m_pMaterial = material;
+    pane->material = material;
     if (material)
-        material->SetTextureDirty();
+        material->flags &= 0xfb;
 }
-} }

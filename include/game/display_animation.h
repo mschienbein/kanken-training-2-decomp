@@ -8,6 +8,9 @@ struct AudioChannel;
 struct AudioChannelPacket;
 struct AudioChannelState;
 struct HandleManager;
+struct BoundDisplayObject;
+struct DisplayAnimationController;
+struct DisplayAnimationNode;
 struct DisplayObject;
 struct DisplayRegistration;
 struct InputSessionContext;
@@ -54,6 +57,27 @@ struct QuestionTable {
 };
 
 
+/* QUALIFIED legacy material-family payload; needs-canonical-cutover.
+ * Canonical display code does not access or convert this accepted view. */
+struct DisplayAnimationSlot {
+    unsigned int in_use;
+    int kind;
+    unsigned int field08;
+    float speed;
+    unsigned char alpha;
+    unsigned char reserved11[3];
+    int field14;
+    int field18;
+    int field1c;
+    int field20;
+    int field24;
+    int playback_state;
+    int animation_id;
+    unsigned int field30;
+    struct DisplayAnimationController *controller;
+    struct DisplayAnimationNode **reference;
+};
+
 struct DisplayRegistration {
     struct DisplayObject *object;
     int enabled;
@@ -85,7 +109,7 @@ extern int func_001672dc(const struct QuestionTable *table, int index);
 extern void func_0016bf80(struct DisplayObject *object, int index, float speed);
 extern void func_00173d90(struct DisplayRegistration *const *slots, int index, int active);
 extern void func_00177740(const struct MenuItem *metadata, int *first, int *second);
-extern void func_001810e4(struct DisplayObject *object, int index);
+extern void func_001810e4(struct BoundDisplayObject *object, int index);
 #ifdef __cplusplus
 }
 #endif

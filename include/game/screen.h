@@ -15,6 +15,76 @@ extern "C" {
 
 struct ResourceEntry;
 
+/* QUALIFIED legacy material boundary; needs-canonical-cutover.
+ * These field-only declarations retain the c009-r6 material-wrapper ABI.
+ * They are not base classes, aliases or conversions of canonical DisplayObject.
+ * Only the rolled-back material-family units dereference these legacy views. */
+struct Material;
+struct DisplayPane {
+    const void *vtable;
+    unsigned char reserved04[0x24];
+    float position[3];
+    float rotation[3];
+    float scale[2];
+    float size[2];
+    unsigned char reserved50[0x64];
+    unsigned char alpha;
+    unsigned char reservedb5[2];
+    unsigned char flags;
+    unsigned char reservedb8[0x84];
+    struct Material *material;
+};
+struct DisplayPaneLink {
+    unsigned char reserved00[8];
+    struct DisplayPane *pane;
+};
+struct DisplayBindingTarget {
+    unsigned char reserved00[0x10];
+    float value;
+};
+struct DisplayBinding {
+    unsigned char reserved00[8];
+    float value;
+    unsigned char reserved0c[8];
+    int mode;
+    float duration;
+    unsigned reserved1c;
+    struct DisplayBindingTarget *target;
+    unsigned reserved24;
+    struct DisplayPaneLink *link;
+    unsigned char reserved2c[8];
+    struct DisplayPane *pane;
+};
+struct BoundDisplayObject {
+    /* The accepted prefix is opaque here, never a canonical DisplayObject. */
+    unsigned char reserved00[0x94];
+    struct DisplayBinding *bindings[5];
+    int screen;
+    int index;
+    struct BoundDisplayObject *next;
+    struct BoundDisplayObject *next_secondary;
+    unsigned char reservedb8[8];
+    unsigned char queued;
+};
+struct DisplayTexCoords {
+    float uv[4][2];
+};
+struct DisplayVertexArray {
+    unsigned char capacity;
+    unsigned char count;
+    unsigned short reserved02;
+    struct DisplayTexCoords *entries;
+};
+struct DisplayVertexPane {
+    struct DisplayPane pane;
+    unsigned char reserved140[0x10];
+    struct DisplayVertexArray vertices;
+};
+extern void func_0014d02c(struct DisplayVertexPane *pane, unsigned index,
+                         const struct DisplayTexCoords *coordinates);
+extern void func_0014e504(struct DisplayVertexPane *pane, unsigned count);
+extern void func_0014e50c(struct DisplayVertexArray *vertices, unsigned count);
+
 
 
 

@@ -94,7 +94,8 @@ struct G103798 { void *p; int n; };
 
 #ifdef __cplusplus
 namespace nw { namespace lyt { class TextBox; } }
-/* D08: 0015d798 constructs a native 0x108-byte TextBox, not ResourceObject. */
+/* D08: 0015d798 constructs this pool entry's native 0x108-byte TextBox;
+ * 0011f080 uses its FreeStringBuffer and virtual destructor protocol. */
 struct ResourceEntry {
     int active;
     void *allocation;
