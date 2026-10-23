@@ -328,3 +328,30 @@ original existence and historical TU/call graph remain **[INFERENCE]/QUALIFIED**
 L1 retains its pool-extent, sharing, ordering and historical-TU qualifications.
 There is one global v6/L1 selection; no component proof label can override it.
 
+
+## r5 exercised proof and policy triage
+
+The complete source proof passed **2,695 sequential niced contexts**, every matcher
+exit **0**, with **2,799/2,799 required identities MATCH** and all **25 helper-only
+units** covered. Every emitted comparison MATCHes and canonical owners remain
+distinct. The actual driver exit is **0**. `REPROOF-r1.json` and
+`V14-PROOF-CARRY-r1.json` bind the protected carry to adopted v14; no second full
+proof was run and no source/header changed afterward.
+
+Main's requested lint exited **0**: **23 source leads** (eight C pointer casts,
+three memcpy calls, six static pointer casts, two opaque-union mentions and four
+shared-ring volatile qualifiers), **six proximity leads**, **zero second-model
+hits**. Every lead has an individual evidence-backed disposition in
+`POLICY-LINT-DISPOSITIONS-r1.json`; none requires a source/header change. Lint is
+triage, not an independent G6 certificate.
+
+The additional reviewed serialized-font boundary `0019d8c4` retains all four
+format conditions: **(a)** headerSize and block.size come from serialized records,
+and TGLP is the payload tag, not an arbitrary runtime-object displacement;
+**(b)** the canonical FontBlock.data payload is converted once to documented
+FontGlyphInfo and then accessed through that type, without a runtime font-class
+overlay; **(c)** canonical C font.h supplies these format records and its validator,
+not a block-address resolver, so the existing typed boundary is retained; **(d)**
+**[INFERENCE]** original valid-file/block bounds and alignment remain trusted.
+No new byte walker, second format model, validation fallback or data credit is added.
+
