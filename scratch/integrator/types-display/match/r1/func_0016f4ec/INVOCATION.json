@@ -1,0 +1,25 @@
+{
+  "source": "src/wave17/func_0016f4ec.cpp",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave17/func_0016f4ec.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/r1/func_0016f4ec"
+  ],
+  "exit": 2,
+  "seconds": 0.139,
+  "output": "error: armcc failed (1) on func_0016f4ec.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/include/nw/lyt/../ut/../../nn/math.h\", line 57: Warning:  #1165-D: types cannot be declared in anonymous unions\n  struct MTX23 { union { f32 m[2][3]; f32 a[6]; struct { f32 _00,_01,_02,_10,_11,_12; } f; }; };\n                                                       ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/include/nw/lyt/../ut/../../nn/math.h\", line 58: Warning:  #1165-D: types cannot be declared in anonymous unions\n  struct MTX33 { union { f32 m[3][3]; f32 a[9]; struct { f32 _00,_01,_02,_10,_11,_12,_20,_21,_22; } f; }; };\n                                                       ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/include/nw/lyt/../ut/../../nn/math.h\", line 60: Warning:  #1165-D: types cannot be declared in anonymous unions\n      union { f32 m[3][4]; f32 a[12]; struct { f32 _00,_01,_02,_03,_10,_11,_12,_13,_20,_21,_22,_23; } f; };\n                                             ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/include/nw/lyt/../ut/../../nn/math.h\", line 73: Warning:  #1165-D: types cannot be declared in anonymous unions\n      union { f32 m[4][4]; f32 a[16]; struct { f32 _00,_01,_02,_03,_10,_11,_12,_13,_20,_21,_22,_23,_30,_31,_32,_33; } f; };\n                                             ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/include/nw/assert.h\", line 11: Error:  #35: #error directive: \"The imported NW4C candidates require the upstream release assertion configuration\"\n  #error \"The imported NW4C candidates require the upstream release assertion configuration\"\n   ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/wave17/func_0016f4ec.cpp: 4 warnings, 1 error\n\n",
+  "out": "scratch/integrator/types-display/match/r1/func_0016f4ec",
+  "extra_sources": [],
+  "source_sha256": "8369f45ed459426153626fd5ff5cb82083aba1c11b81d9b5235650aedf6fb0b8"
+}

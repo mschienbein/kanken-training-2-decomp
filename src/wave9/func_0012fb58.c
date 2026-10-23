@@ -1,5 +1,7 @@
-/* No direct caller constrains a return value; this initializer writes one word. */
-void func_0012fb58(unsigned *state)
+/* The invoking array ABI returns the original element storage. */
+void *func_0012fb58(void *storage)
 {
+    unsigned *state = storage;
     *state = 0;
+    return storage;
 }

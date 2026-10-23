@@ -1,0 +1,111 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001ed874/func_001ed874.cpp",
+ "source_sha256": "ca8a0501a9fd19bd6248a38d1f9e7182641c262a2096fb631085dc4eebbe303c",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "5df9aa015da7dc6d396a7f60007dbf598b7a503ade21b9a9fd5a73f6818086de",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001ed874/category_initializers.c",
+   "source_sha256": "6a485c0d1ca9f80fc3fbcfb27dc5f7322997d4c0ee3402227e59c1c54728e6e9",
+   "object_sha256": "eb4e1c28dc401b2ddcdbd20f60a604d16958422d0e9f13f9964e902a51f69c25"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "initialize_category_panel"
+   ],
+   "section": "i.initialize_category_panel",
+   "size": 4,
+   "object": "scratch/integrator/types-menu/matches/attempt-039-func_001ed874/extra-0-category_initializers.o"
+  },
+  {
+   "symbols": [
+    "initialize_handle_panel"
+   ],
+   "section": "i.initialize_handle_panel",
+   "size": 4,
+   "object": "scratch/integrator/types-menu/matches/attempt-039-func_001ed874/extra-0-category_initializers.o"
+  },
+  {
+   "symbols": [
+    "initialize_selector"
+   ],
+   "section": "i.initialize_selector",
+   "size": 4,
+   "object": "scratch/integrator/types-menu/matches/attempt-039-func_001ed874/extra-0-category_initializers.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "_ZN13CategoryScene8activateEv",
+   "address": 2021492,
+   "size": 828,
+   "candidate_size": 828,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 280,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "initialize_selector"
+      ],
+      "section": "i.initialize_selector",
+      "size": 4,
+      "object": "scratch/integrator/types-menu/matches/attempt-039-func_001ed874/extra-0-category_initializers.o"
+     }
+    },
+    {
+     "offset": 292,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "initialize_handle_panel"
+      ],
+      "section": "i.initialize_handle_panel",
+      "size": 4,
+      "object": "scratch/integrator/types-menu/matches/attempt-039-func_001ed874/extra-0-category_initializers.o"
+     }
+    },
+    {
+     "offset": 356,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "initialize_category_panel"
+      ],
+      "section": "i.initialize_category_panel",
+      "size": 4,
+      "object": "scratch/integrator/types-menu/matches/attempt-039-func_001ed874/extra-0-category_initializers.o"
+     }
+    }
+   ]
+  }
+ ]
+}

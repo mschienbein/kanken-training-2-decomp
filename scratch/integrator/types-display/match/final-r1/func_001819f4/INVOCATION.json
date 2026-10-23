@@ -1,0 +1,29 @@
+{
+  "source": "src/wave18/func_001819f4.c",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave18/func_001819f4.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_001819f4",
+    "--extra-source",
+    "src/models/object_registration/drawing_input.c"
+  ],
+  "exit": 0,
+  "seconds": 0.216,
+  "output": "MATCH    func_001819f4 @ 0x1819f4 size 0x58/0x58 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  register_drawing_input_cleanup (4 bytes; i.register_drawing_input_cleanup)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_001819f4",
+  "extra_sources": [
+    "src/models/object_registration/drawing_input.c"
+  ],
+  "source_sha256": "2f71a63e2c0f4d3fd9d818572022fa7facb0ab0b2b6e58729dc7c2c2474d14c2"
+}

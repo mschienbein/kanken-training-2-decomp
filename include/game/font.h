@@ -23,12 +23,15 @@ struct FontBlock {
 #endif
 };
 
-struct FontGlyphData {
-    unsigned char cellWidth, cellHeight, baseline, maximumWidth;
-    unsigned sheetSize;
-    unsigned short sheetCount, sheetFormat;
-    unsigned short sheetRows, sheetColumns, sheetWidth, sheetHeight;
-    void *sheetImages;
+/* Shared serialized format; this does not identify either runtime font class. */
+struct FontGlyphInfo {
+    unsigned char cell_width, cell_height;
+    signed char baseline;
+    unsigned char max_width;
+    unsigned sheet_size;
+    unsigned short sheet_count, format;
+    unsigned short columns, rows, width, height;
+    unsigned char *sheet_image;
 };
 
 
@@ -83,4 +86,5 @@ struct GlyphWidths {
     unsigned char glyph_width;
     signed char advance;
 };
+
 #endif

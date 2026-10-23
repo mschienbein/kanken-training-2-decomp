@@ -1,5 +1,6 @@
 #include "game/functions.h"
 #include "ctr/svc.h"
+#include "game/reset_reference.h"
 
 struct KernelHandleOwner {
     CtrHandle handle;
@@ -7,9 +8,6 @@ struct KernelHandleOwner {
 
 extern struct KernelHandleOwner bss_004b35b8[3];
 
-extern void func_0019f6ac(struct KernelHandleOwner *array,
-                         struct KernelHandleOwner *(*destroy)(struct KernelHandleOwner *),
-                         unsigned element_size, unsigned count);
 
 void func_00156dcc(void)
 {

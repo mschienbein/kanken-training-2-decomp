@@ -1,7 +1,7 @@
 #include "ctr/cp15.h"
 #include "game/service_runtime.h"
 
-void func_0014e078(void)
+void func_0014e078(void *argument, void *context)
 {
     struct ServiceWorker *worker = func_00182f88();
     worker->service_running = 1;

@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "input": "scratch/prereview/ctypes1-r2/PREREVIEW.json",
+  "input_sha256": "6ca7aea7a5bd89318313f48c735c16fb54c88b7679994961522f0db1712b0067",
+  "findings": [
+    {
+      "id": "R2-F01",
+      "disposition": "EXACT_ACCEPTED_PROVIDER_ROLLBACK_NOT_NEW_DEFERRAL",
+      "functions": [
+        "func_001f4b2c",
+        "func_001f4b48",
+        "func_001f4cb4",
+        "func_001f4cc4"
+      ],
+      "providers": [
+        {
+          "function": "func_001f4b2c",
+          "source": "src/wave12/func_001f4b2c.cpp",
+          "source_sha256": "2370a9da6aba54181cefcd50ded92f88eed38b6c4d19ab86a38d32a3da58d97d",
+          "accepted_c010_sha256": "2370a9da6aba54181cefcd50ded92f88eed38b6c4d19ab86a38d32a3da58d97d",
+          "exact_accepted_source": true
+        },
+        {
+          "function": "func_001f4b48",
+          "source": "src/wave12/func_001f4b48.cpp",
+          "source_sha256": "27a221aec347985706fc37130c5faac8d4e69ea12026ee6e42e12995090d1d1e",
+          "accepted_c010_sha256": "27a221aec347985706fc37130c5faac8d4e69ea12026ee6e42e12995090d1d1e",
+          "exact_accepted_source": true
+        },
+        {
+          "function": "func_001f4cb4",
+          "source": "src/wave12/func_001f4cb4.cpp",
+          "source_sha256": "f33c06dc1e2258f9bc590d951a79ce3014a19a8718aef29cf0815c2193c23d57",
+          "accepted_c010_sha256": "f33c06dc1e2258f9bc590d951a79ce3014a19a8718aef29cf0815c2193c23d57",
+          "exact_accepted_source": true
+        },
+        {
+          "function": "func_001f4cc4",
+          "source": "src/wave12/func_001f4cc4.cpp",
+          "source_sha256": "d1f0d69539fd447f71e3fd1881833f9f7e5cd19aa16e2bb5bdecb98e97172e48",
+          "accepted_c010_sha256": "d1f0d69539fd447f71e3fd1881833f9f7e5cd19aa16e2bb5bdecb98e97172e48",
+          "exact_accepted_source": true
+        }
+      ],
+      "declarations": "Removed four incoming FontResource prototypes from font_resource.h. The accepted ResourceFontView definitions and sound_controller.h declarations remain one consistent transaction; no alias or partial owner unification is claimed.",
+      "proofs": [
+        {
+          "source": "src/wave12/func_001f4b2c.cpp",
+          "profile": "game",
+          "functions": [
+            "func_001f4b2c"
+          ],
+          "extra_sources": [],
+          "argv": [
+            "nice",
+            "-n",
+            "10",
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/wave12/func_001f4b2c.cpp",
+            "--profile",
+            "game",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "scratch/integrator/ctypes1/r3/match/focus-r1-003-func_001f4b2c"
+          ],
+          "exit": 0,
+          "source_sha256": "2370a9da6aba54181cefcd50ded92f88eed38b6c4d19ab86a38d32a3da58d97d",
+          "receipt": "scratch/integrator/ctypes1/r3/match/focus-r1-003-func_001f4b2c/func_001f4b2c.result.json",
+          "receipt_sha256": "22947f939fb2d3a04eee33a5cf510bdb074e096ff0658e3ff546a4a4e9a449ed",
+          "receipt_record": {
+            "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose-r3/src/wave12/func_001f4b2c.cpp",
+            "source_sha256": "2370a9da6aba54181cefcd50ded92f88eed38b6c4d19ab86a38d32a3da58d97d",
+            "profile": "game",
+            "compiler": "armcc_504_82",
+            "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+            "flags": [
+              "--cpu=MPCore",
+              "--fpmode=fast",
+              "--apcs=/interwork",
+              "--arm",
+              "--split_sections",
+              "--signed_chars",
+              "-O3",
+              "-Otime"
+            ],
+            "object_sha256": "7ea8bf15d6ab89fd9a3925b8b07e7f4dcafb765cb68f9b29abdd39d436edcdcc",
+            "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+            "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+            "linker_model": "armlink5-inline-branchnop-v6",
+            "literal_model": "anonymous-string-records-v1",
+            "literal_rebindings": [],
+            "proposed_names": null,
+            "extra_sources": [],
+            "removed_callees": [],
+            "functions": [
+              {
+                "name": "func_001f4b2c",
+                "address": 2050860,
+                "size": 16,
+                "candidate_size": 16,
+                "status": "match",
+                "first_diff": null,
+                "linker_rewrites": []
+              }
+            ]
+          }
+        },
+        {
+          "source": "src/wave12/func_001f4b48.cpp",
+          "profile": "game",
+          "functions": [
+            "func_001f4b48"
+          ],
+          "extra_sources": [],
+          "argv": [
+            "nice",
+            "-n",
+            "10",
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/wave12/func_001f4b48.cpp",
+            "--profile",
+            "game",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "scratch/integrator/ctypes1/r3/match/focus-r1-004-func_001f4b48"
+          ],
+          "exit": 0,
+          "source_sha256": "27a221aec347985706fc37130c5faac8d4e69ea12026ee6e42e12995090d1d1e",
+          "receipt": "scratch/integrator/ctypes1/r3/match/focus-r1-004-func_001f4b48/func_001f4b48.result.json",
+          "receipt_sha256": "4ea73587e9b22acdf046fe6a9c5a3c74f7c214bb80d54109584feb9a2a0af07e",
+          "receipt_record": {
+            "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose-r3/src/wave12/func_001f4b48.cpp",
+            "source_sha256": "27a221aec347985706fc37130c5faac8d4e69ea12026ee6e42e12995090d1d1e",
+            "profile": "game",
+            "compiler": "armcc_504_82",
+            "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+            "flags": [
+              "--cpu=MPCore",
+              "--fpmode=fast",
+              "--apcs=/interwork",
+              "--arm",
+              "--split_sections",
+              "--signed_chars",
+              "-O3",
+              "-Otime"
+            ],
+            "object_sha256": "39f33419e43322576844d16d5608a02031d8c08da3584be80d0e2b2260a423dd",
+            "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+            "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+            "linker_model": "armlink5-inline-branchnop-v6",
+            "literal_model": "anonymous-string-records-v1",
+            "literal_rebindings": [],
+            "proposed_names": null,
+            "extra_sources": [],
+            "removed_callees": [],
+            "functions": [
+              {
+                "name": "func_001f4b48",
+                "address": 2050888,
+                "size": 16,
+                "candidate_size": 16,
+                "status": "match",
+                "first_diff": null,
+                "linker_rewrites": []
+              }
+            ]
+          }
+        },
+        {
+          "source": "src/wave12/func_001f4cb4.cpp",
+          "profile": "game",
+          "functions": [
+            "func_001f4cb4"
+          ],
+          "extra_sources": [],
+          "argv": [
+            "nice",
+            "-n",
+            "10",
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/wave12/func_001f4cb4.cpp",
+            "--profile",
+            "game",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "scratch/integrator/ctypes1/r3/match/focus-r1-005-func_001f4cb4"
+          ],
+          "exit": 0,
+          "source_sha256": "f33c06dc1e2258f9bc590d951a79ce3014a19a8718aef29cf0815c2193c23d57",
+          "receipt": "scratch/integrator/ctypes1/r3/match/focus-r1-005-func_001f4cb4/func_001f4cb4.result.json",
+          "receipt_sha256": "3c68a9df550ba84e2df84edf40738ce3bada42359f8d4404f1c09e7ec28f1ae9",
+          "receipt_record": {
+            "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose-r3/src/wave12/func_001f4cb4.cpp",
+            "source_sha256": "f33c06dc1e2258f9bc590d951a79ce3014a19a8718aef29cf0815c2193c23d57",
+            "profile": "game",
+            "compiler": "armcc_504_82",
+            "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+            "flags": [
+              "--cpu=MPCore",
+              "--fpmode=fast",
+              "--apcs=/interwork",
+              "--arm",
+              "--split_sections",
+              "--signed_chars",
+              "-O3",
+              "-Otime"
+            ],
+            "object_sha256": "2fae64331e2556a4e52f63810bc7dd0922284c1e5e3f6bd11bfdb2bbf9bce184",
+            "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+            "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+            "linker_model": "armlink5-inline-branchnop-v6",
+            "literal_model": "anonymous-string-records-v1",
+            "literal_rebindings": [],
+            "proposed_names": null,
+            "extra_sources": [],
+            "removed_callees": [],
+            "functions": [
+              {
+                "name": "func_001f4cb4",
+                "address": 2051252,
+                "size": 16,
+                "candidate_size": 16,
+                "status": "match",
+                "first_diff": null,
+                "linker_rewrites": []
+              }
+            ]
+          }
+        },
+        {
+          "source": "src/wave12/func_001f4cc4.cpp",
+          "profile": "game",
+          "functions": [
+            "func_001f4cc4"
+          ],
+          "extra_sources": [],
+          "argv": [
+            "nice",
+            "-n",
+            "10",
+            "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+            "tools/match.py",
+            "src/wave12/func_001f4cc4.cpp",
+            "--profile",
+            "game",
+            "--linker-model",
+            "armlink5-inline-branchnop-v6",
+            "--literal-model",
+            "anonymous-string-records-v1",
+            "--show",
+            "0",
+            "--out",
+            "scratch/integrator/ctypes1/r3/match/focus-r1-006-func_001f4cc4"
+          ],
+          "exit": 0,
+          "source_sha256": "d1f0d69539fd447f71e3fd1881833f9f7e5cd19aa16e2bb5bdecb98e97172e48",
+          "receipt": "scratch/integrator/ctypes1/r3/match/focus-r1-006-func_001f4cc4/func_001f4cc4.result.json",
+          "receipt_sha256": "795f1752961670c8fc5be28abb8f7e4469b119a2a53e633c603409957fdad448",
+          "receipt_record": {
+            "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose-r3/src/wave12/func_001f4cc4.cpp",
+            "source_sha256": "d1f0d69539fd447f71e3fd1881833f9f7e5cd19aa16e2bb5bdecb98e97172e48",
+            "profile": "game",
+            "compiler": "armcc_504_82",
+            "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+            "flags": [
+              "--cpu=MPCore",
+              "--fpmode=fast",
+              "--apcs=/interwork",
+              "--arm",
+              "--split_sections",
+              "--signed_chars",
+              "-O3",
+              "-Otime"
+            ],
+            "object_sha256": "6fc1bc0d1c5979a4d83878029ffc9b020a0c36f8e1a84aea909255193596b94c",
+            "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+            "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+            "linker_model": "armlink5-inline-branchnop-v6",
+            "literal_model": "anonymous-string-records-v1",
+            "literal_rebindings": [],
+            "proposed_names": null,
+            "extra_sources": [],
+            "removed_callees": [],
+            "functions": [
+              {
+                "name": "func_001f4cc4",
+                "address": 2051268,
+                "size": 16,
+                "candidate_size": 16,
+                "status": "match",
+                "first_diff": null,
+                "linker_rewrites": []
+              }
+            ]
+          }
+        }
+      ],
+      "reason": "ResourceFontView is also used by other accepted font getters. No full genuine owner cutover for those independent transaction views is established, so restore accepted source rather than conflate records by layout."
+    },
+    {
+      "id": "R2-F02",
+      "disposition": "COMPLETE_ACTUAL_NATIVE_CONSTRUCTOR_AND_ARRAY_OWNER",
+      "function": "func_0014c2cc",
+      "from": "src/wave18/func_0014c2cc.c",
+      "to": "src/wave18/func_0014c2cc.cpp",
+      "class": "SoundInterpolation",
+      "actual_members": [
+        "value",
+        "target",
+        "remaining",
+        "duration"
+      ],
+      "actual_caller": "src/retries/func_001492fc.cpp",
+      "actual_array_count": 4,
+      "actual_element_size": 16,
+      "constructor_MATCH_bytes": 32,
+      "caller_MATCH_bytes": 120,
+      "aliases": [
+        "C1 existing own entry",
+        "C2 emitted zero-size same-entry alias"
+      ],
+      "sole_native_object_model": "include/game/sound_voice.h",
+      "no_ScalarState_or_generic_C_facade": true,
+      "symbol_proof": "INTERPOLATION-OWNER-SYMBOLS-r1.json",
+      "generic_callback_accounting": "31 actual generic C callback fixes plus this one actual native compiler-generated member-array constructor, not32 generic signatures."
+    }
+  ],
+  "sweep": {
+    "path": "SHARED-DECLARATION-SWEEP-r1.json",
+    "sha256": "7dd69847cf7d132828c6a083375da9331f9219978383d86fa99ae51f33837d4b",
+    "incompatible_explicit_declarations": 0,
+    "generic_fixed_providers_with_native_alias_conflicts": 0,
+    "native_bound_changed_providers": "All three own actual native definitions; constructor/texture deletion/const Font reader."
+  },
+  "c011_precedence": "Only names JSON conflicted. Preserve every c011 entry and compose only distinct actual own definitions; no address rebind or c011 source rollback.",
+  "counts": {
+    "base_units": 2685,
+    "base_functions": 2761,
+    "proposed_units": 2686,
+    "proposed_functions": 2762,
+    "preserved_base_identities": 2761,
+    "NEW_functions": 1,
+    "NEW_bytes": 64,
+    "manifest_units": 2,
+    "manifest_claims": 2,
+    "moves": 1,
+    "removed_units": 1,
+    "revised_or_added_sources": 51,
+    "changed_headers": 18,
+    "reproved_primary_units": 1727,
+    "reproved_functions": 1776,
+    "contextual_helpers": 18,
+    "all_match_exit_counts": {
+      "0": 1727
+    },
+    "font_accepted_rollbacks": 4,
+    "generic_callback_repairs": 31,
+    "native_callback_family_repairs": 1,
+    "held_callback_rows": 45,
+    "not_applicable_callback_rows": 4,
+    "c011_NEW_holds_preserved": 114,
+    "c010_NEW_holds_preserved": 94
+  }
+}

@@ -1,0 +1,2424 @@
+{
+  "schema_version": 1,
+  "original_conflict_files": [
+    "docs/known-issues-c009-r2.md",
+    "include/game/archive.h",
+    "include/game/audio_dsp.h",
+    "include/game/audio_voice.h",
+    "include/game/exp_heap.h",
+    "include/game/filesystem.h",
+    "include/game/font.h",
+    "include/game/font_resource.h",
+    "include/game/framebuffer.h",
+    "include/game/graphics_state.h",
+    "include/game/layout_lifecycle.h",
+    "include/game/render_state.h",
+    "include/game/resource_runtime.h",
+    "include/game/screen.h",
+    "include/game/service_runtime.h",
+    "include/game/sound_track.h",
+    "include/nw/font/font_CharStrmReader.h",
+    "include/nw/lyt/lyt_Pane.h",
+    "scratch/integrator/c010/prereview-fixes/retired-src/func_001db054.c",
+    "scratch/integrator/c010/prereview-fixes/retired-src/func_001db068.c",
+    "src/wave13/func_001d9198.cpp",
+    "src/wave15/func_0010bc70.c",
+    "src/wave15/func_00155148.cpp",
+    "src/wave15/func_00180e14.c",
+    "src/wave17/func_0015eaa8.c",
+    "src/wave20/func_0015e4a8.cpp",
+    "src/wave20/func_0015e634.cpp",
+    "src/wave8/func_0018290c.cpp"
+  ],
+  "original_conflict_blocks": [
+    {
+      "path": "docs/known-issues-c009-r2.md",
+      "ids": [
+        10
+      ]
+    },
+    {
+      "path": "include/game/archive.h",
+      "ids": [
+        1
+      ]
+    },
+    {
+      "path": "include/game/audio_dsp.h",
+      "ids": [
+        11
+      ]
+    },
+    {
+      "path": "include/game/audio_voice.h",
+      "ids": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "path": "include/game/exp_heap.h",
+      "ids": [
+        12
+      ]
+    },
+    {
+      "path": "include/game/filesystem.h",
+      "ids": [
+        13
+      ]
+    },
+    {
+      "path": "include/game/font.h",
+      "ids": [
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "path": "include/game/font_resource.h",
+      "ids": [
+        17
+      ]
+    },
+    {
+      "path": "include/game/framebuffer.h",
+      "ids": [
+        18,
+        19
+      ]
+    },
+    {
+      "path": "include/game/graphics_state.h",
+      "ids": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "path": "include/game/layout_lifecycle.h",
+      "ids": [
+        23,
+        24
+      ]
+    },
+    {
+      "path": "include/game/render_state.h",
+      "ids": [
+        25,
+        26
+      ]
+    },
+    {
+      "path": "include/game/resource_runtime.h",
+      "ids": [
+        27
+      ]
+    },
+    {
+      "path": "include/game/screen.h",
+      "ids": [
+        28,
+        29,
+        30,
+        31
+      ]
+    },
+    {
+      "path": "include/game/service_runtime.h",
+      "ids": [
+        32
+      ]
+    },
+    {
+      "path": "include/game/sound_track.h",
+      "ids": [
+        33,
+        34
+      ]
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "ids": [
+        35
+      ]
+    },
+    {
+      "path": "include/nw/lyt/lyt_Pane.h",
+      "ids": [
+        36
+      ]
+    },
+    {
+      "path": "scratch/integrator/c010/prereview-fixes/retired-src/func_001db054.c",
+      "ids": []
+    },
+    {
+      "path": "scratch/integrator/c010/prereview-fixes/retired-src/func_001db068.c",
+      "ids": []
+    },
+    {
+      "path": "src/wave13/func_001d9198.cpp",
+      "ids": [
+        37
+      ]
+    },
+    {
+      "path": "src/wave15/func_0010bc70.c",
+      "ids": [
+        38
+      ]
+    },
+    {
+      "path": "src/wave15/func_00155148.cpp",
+      "ids": [
+        39
+      ]
+    },
+    {
+      "path": "src/wave15/func_00180e14.c",
+      "ids": [
+        40
+      ]
+    },
+    {
+      "path": "src/wave17/func_0015eaa8.c",
+      "ids": [
+        41
+      ]
+    },
+    {
+      "path": "src/wave20/func_0015e4a8.cpp",
+      "ids": [
+        42
+      ]
+    },
+    {
+      "path": "src/wave20/func_0015e634.cpp",
+      "ids": [
+        43
+      ]
+    },
+    {
+      "path": "src/wave8/func_0018290c.cpp",
+      "ids": [
+        44
+      ]
+    }
+  ],
+  "c010_precedence": "Target full canonical declarations, callback protocols, real-object construction and NEW-only deferrals win. All source history is merged; unsupported active cutovers are explicitly held rather than discarded invisibly or bridged.",
+  "input_manifest_dispositions": [
+    {
+      "source_unit": "src/sdk2/func_0014603c.cpp",
+      "functions": [
+        "func_0014603c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0014603c": "src/sdk2/func_0014603c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/sdk2/func_0017da08.cpp",
+      "functions": [
+        "func_0017da08"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017da08": "src/sdk2/func_0017da08.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/types/display/func_0015e5d4.cpp",
+      "functions": [
+        "func_0015e5d4"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015e5d4": null
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed",
+        "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+      ]
+    },
+    {
+      "source_unit": "src/wave10/func_0015475c.cpp",
+      "functions": [
+        "func_0015475c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015475c": "src/wave10/func_0015475c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave11/func_00124a20.cpp",
+      "functions": [
+        "func_00124a20"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00124a20": "src/wave11/func_00124a20.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave11/func_0015eac8.cpp",
+      "functions": [
+        "func_0015eac8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015eac8": "src/wave11/func_0015eac8.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave11/func_0018271c.cpp",
+      "functions": [
+        "func_0018271c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0018271c": "src/wave11/func_0018271c.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave12/func_0017dae0.cpp",
+      "functions": [
+        "func_0017dae0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017dae0": "src/wave12/func_0017dae0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave12/func_0017daf8.cpp",
+      "functions": [
+        "func_0017daf8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017daf8": "src/wave12/func_0017daf8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave12/func_0017deec.cpp",
+      "functions": [
+        "func_0017deec"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017deec": "src/wave12/func_0017deec.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave12/func_001d2b80.cpp",
+      "functions": [
+        "func_001d2b80"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d2b80": "src/wave12/func_001d2b80.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave12/func_001d4cb8.cpp",
+      "functions": [
+        "func_001d4cb8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d4cb8": "src/wave12/func_001d4cb8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_0014ee44.cpp",
+      "functions": [
+        "func_0014ee44"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0014ee44": "src/wave13/func_0014ee44.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_0014ee5c.cpp",
+      "functions": [
+        "func_0014ee5c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0014ee5c": "src/wave13/func_0014ee5c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_0014fc78.cpp",
+      "functions": [
+        "func_0014fc78"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0014fc78": "src/wave13/func_0014fc78.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_0015274c.cpp",
+      "functions": [
+        "func_0015274c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015274c": "src/wave13/func_0015274c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_00154224.cpp",
+      "functions": [
+        "func_00154224"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00154224": "src/wave13/func_00154224.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_0015e954.cpp",
+      "functions": [
+        "func_0015e954"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015e954": "src/wave13/func_0015e954.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_0016504c.cpp",
+      "functions": [
+        "func_0016504c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0016504c": "src/wave13/func_0016504c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_001c540c.cpp",
+      "functions": [
+        "func_001c540c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001c540c": "src/wave13/func_001c540c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_001d88f0.cpp",
+      "functions": [
+        "func_001d88f0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d88f0": "src/wave13/func_001d88f0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_001db054.cpp",
+      "functions": [
+        "func_001db054"
+      ],
+      "disposition": "absorbed_by_c010",
+      "current_owners": {
+        "func_001db054": "src/wave13/func_001db054.cpp"
+      },
+      "reasons": []
+    },
+    {
+      "source_unit": "src/wave13/func_001db068.cpp",
+      "functions": [
+        "func_001db068"
+      ],
+      "disposition": "absorbed_by_c010",
+      "current_owners": {
+        "func_001db068": "src/wave13/func_001db068.cpp"
+      },
+      "reasons": []
+    },
+    {
+      "source_unit": "src/wave13/func_001f2ef8.cpp",
+      "functions": [
+        "func_001f2ef8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001f2ef8": "src/wave13/func_001f2ef8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave13/func_001f2f2c.cpp",
+      "functions": [
+        "func_001f2f2c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001f2f2c": "src/wave13/func_001f2f2c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave14/func_00154f78.cpp",
+      "functions": [
+        "func_00154f78"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00154f78": "src/wave14/func_00154f78.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave15/func_0014fbcc.cpp",
+      "functions": [
+        "func_0014fbcc"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0014fbcc": "src/wave15/func_0014fbcc.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave15/func_001525f0.cpp",
+      "functions": [
+        "func_001525f0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001525f0": "src/wave15/func_001525f0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave15/func_00155148.cpp",
+      "functions": [
+        "func_00155148"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00155148": "src/wave15/func_00155148.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave15/func_0015643c.cpp",
+      "functions": [
+        "func_0015643c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015643c": "src/wave15/func_0015643c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave15/func_001d9178.cpp",
+      "functions": [
+        "func_001d9178"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d9178": "src/wave15/func_001d9178.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave15/func_001d9530.cpp",
+      "functions": [
+        "func_001d9530"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d9530": "src/wave15/func_001d9530.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave16/func_0015263c.cpp",
+      "functions": [
+        "func_0015263c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015263c": "src/wave16/func_0015263c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave16/func_00153fec.cpp",
+      "functions": [
+        "func_00153fec"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00153fec": "src/wave16/func_00153fec.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave16/func_0015477c.cpp",
+      "functions": [
+        "func_0015477c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015477c": "src/wave16/func_0015477c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave17/func_0015e480.cpp",
+      "functions": [
+        "func_0015e480"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015e480": "src/wave17/func_0015e480.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave17/func_0015e698.cpp",
+      "functions": [
+        "func_0015e698"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0015e698": "src/wave17/func_0015e698.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave17/func_0016f4ec.cpp",
+      "functions": [
+        "func_0016f4ec"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0016f4ec": "src/wave17/func_0016f4ec.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave17/func_001cf67c.cpp",
+      "functions": [
+        "func_001cf67c",
+        "func_001cfbcc",
+        "func_001cfc7c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001cf67c": "src/wave17/func_001cf67c.cpp",
+        "func_001cfbcc": "src/wave17/func_001cfbcc.cpp",
+        "func_001cfc7c": "src/wave17/func_001cfc7c.cpp"
+      },
+      "reasons": [
+        "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+      ]
+    },
+    {
+      "source_unit": "src/wave18/func_001d94a0.cpp",
+      "functions": [
+        "func_001d94a0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d94a0": "src/wave18/func_001d94a0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave19/func_00150098.cpp",
+      "functions": [
+        "func_00150098"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00150098": "src/wave19/func_00150098.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave19/func_001501ec.cpp",
+      "functions": [
+        "func_001501ec"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001501ec": "src/wave19/func_001501ec.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave19/func_0017e6a4.cpp",
+      "functions": [
+        "func_0017e6a4"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017e6a4": "src/wave19/func_0017e6a4.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave2/func_00142a54.cpp",
+      "functions": [
+        "func_00142a54"
+      ],
+      "disposition": "retained",
+      "current_owners": {
+        "func_00142a54": "src/wave2/func_00142a54.cpp"
+      },
+      "reasons": []
+    },
+    {
+      "source_unit": "src/wave20/func_00150210.cpp",
+      "functions": [
+        "func_00150210"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00150210": "src/wave20/func_00150210.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave20/func_001f4cf8.cpp",
+      "functions": [
+        "func_001f4cf8"
+      ],
+      "disposition": "retained",
+      "current_owners": {
+        "func_001f4cf8": "src/wave20/func_001f4cf8.cpp"
+      },
+      "reasons": []
+    },
+    {
+      "source_unit": "src/wave4/func_001391d8.cpp",
+      "functions": [
+        "func_001391d8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001391d8": "src/wave4/func_001391d8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave4/func_0017e358.cpp",
+      "functions": [
+        "func_0017e358"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017e358": "src/wave4/func_0017e358.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave4/func_00183c54.cpp",
+      "functions": [
+        "func_00183c54"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00183c54": "src/wave4/func_00183c54.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave6/func_001826fc.cpp",
+      "functions": [
+        "func_001826fc"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001826fc": "src/wave6/func_001826fc.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_00150030.cpp",
+      "functions": [
+        "func_00150030"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00150030": "src/wave7/func_00150030.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001545ec.cpp",
+      "functions": [
+        "func_001545ec"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001545ec": "src/wave7/func_001545ec.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_00154608.cpp",
+      "functions": [
+        "func_00154608"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00154608": "src/wave7/func_00154608.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_00154624.cpp",
+      "functions": [
+        "func_00154624"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00154624": "src/wave7/func_00154624.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001550e0.cpp",
+      "functions": [
+        "func_001550e0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001550e0": "src/wave7/func_001550e0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001551fc.cpp",
+      "functions": [
+        "func_001551fc"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001551fc": "src/wave7/func_001551fc.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_00156398.cpp",
+      "functions": [
+        "func_00156398"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00156398": "src/wave7/func_00156398.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_0016a158.cpp",
+      "functions": [
+        "func_0016a158"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0016a158": "src/wave7/func_0016a158.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_0016a178.cpp",
+      "functions": [
+        "func_0016a178"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0016a178": "src/wave7/func_0016a178.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_0016a204.cpp",
+      "functions": [
+        "func_0016a204"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0016a204": "src/wave7/func_0016a204.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_0017e470.cpp",
+      "functions": [
+        "func_0017e470"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017e470": "src/wave7/func_0017e470.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_0017e47c.cpp",
+      "functions": [
+        "func_0017e47c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017e47c": "src/wave7/func_0017e47c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_0017e4bc.cpp",
+      "functions": [
+        "func_0017e4bc"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0017e4bc": "src/wave7/func_0017e4bc.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001816c0.cpp",
+      "functions": [
+        "func_001816c0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001816c0": "src/wave7/func_001816c0.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001816e0.cpp",
+      "functions": [
+        "func_001816e0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001816e0": "src/wave7/func_001816e0.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_00181700.cpp",
+      "functions": [
+        "func_00181700"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00181700": "src/wave7/func_00181700.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_00181734.cpp",
+      "functions": [
+        "func_00181734"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00181734": "src/wave7/func_00181734.c"
+      },
+      "reasons": [
+        "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001d49a8.cpp",
+      "functions": [
+        "func_001d49a8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d49a8": "src/wave7/func_001d49a8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001d49c8.cpp",
+      "functions": [
+        "func_001d49c8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d49c8": "src/wave7/func_001d49c8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001d49e8.cpp",
+      "functions": [
+        "func_001d49e8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d49e8": "src/wave7/func_001d49e8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001d911c.cpp",
+      "functions": [
+        "func_001d911c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d911c": "src/wave7/func_001d911c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave7/func_001d9220.cpp",
+      "functions": [
+        "func_001d9220"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d9220": "src/wave7/func_001d9220.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_00138cb0.cpp",
+      "functions": [
+        "func_00138cb0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00138cb0": "src/wave8/func_00138cb0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_00152f10.cpp",
+      "functions": [
+        "func_00152f10"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00152f10": "src/wave8/func_00152f10.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_0016a27c.cpp",
+      "functions": [
+        "func_0016a27c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0016a27c": "src/wave8/func_0016a27c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_0018290c.cpp",
+      "functions": [
+        "func_0018290c"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_0018290c": "src/wave8/func_0018290c.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_001829d0.cpp",
+      "functions": [
+        "func_001829d0"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001829d0": "src/wave8/func_001829d0.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_00183bc8.cpp",
+      "functions": [
+        "func_00183bc8"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_00183bc8": "src/wave8/func_00183bc8.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_001c5950.cpp",
+      "functions": [
+        "func_001c5950"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001c5950": "src/wave8/func_001c5950.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_001c5970.cpp",
+      "functions": [
+        "func_001c5970"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001c5970": "src/wave8/func_001c5970.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_001c59fc.cpp",
+      "functions": [
+        "func_001c59fc"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001c59fc": "src/wave8/func_001c59fc.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_001d4a48.cpp",
+      "functions": [
+        "func_001d4a48"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d4a48": "src/wave8/func_001d4a48.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    },
+    {
+      "source_unit": "src/wave8/func_001d4aac.cpp",
+      "functions": [
+        "func_001d4aac"
+      ],
+      "disposition": "held_at_c010",
+      "current_owners": {
+        "func_001d4aac": "src/wave8/func_001d4aac.c"
+      },
+      "reasons": [
+        "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+      ]
+    }
+  ],
+  "held_function_reasons": {
+    "func_0010264c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0010bc70": [
+      "c010 one ServiceClientState for data_00242c18 wins over competing FilesystemGlobals"
+    ],
+    "func_0011f080": [
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_00124a20": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001351bc": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00135268": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00138cb0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001391d8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00145b5c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0014603c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00148800": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_00148854": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_001488bc": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_0014891c": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_00148988": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_001489e8": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_00148a3c": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_0014aaf4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0014ab30": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0014d000": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0014d02c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0014d2e4": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0014de8c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0014e504": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0014ee44": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0014ee5c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0014fbcc": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0014fc78": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00150030": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00150098": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001501ec": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00150210": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00152560": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_001525f0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0015263c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0015274c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00152f10": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00153fec": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00154224": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001545ec": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00154608": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00154624": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0015475c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0015477c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001549d8": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_00154f78": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001550e0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00155148": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001551fc": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00156398": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0015643c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0015e480": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e49c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e4a8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed",
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_0015e5c4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e5d4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed",
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_0015e5f0": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e624": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e634": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed",
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_0015e684": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e698": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e780": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e824": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e948": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e954": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e96c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015e9dc": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015ea60": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015eaa8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0015eac8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016504c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00166eb0": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016a158": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0016a178": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0016a204": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0016a27c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0016bf80": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016c020": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016d4f8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016dbc4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016f4ec": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016f534": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016ff08": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0016fff8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00170014": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00170fc4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00171db8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00179160": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00179298": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001793e4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0017da08": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017da3c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017dae0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017daf8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017deec": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017e358": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017e470": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017e47c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017e4bc": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_0017e6a4": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00180404": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00180c84": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_00180d10": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_00180e14": [
+      "c010 genuine AudioDspParameterBlock.volume and ServiceCoordinator.storage.audio subobjects win over the competing VoiceDspPayload projection"
+    ],
+    "func_001810e4": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00181100": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00181420": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00181448": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001815a8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001816c0": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001816e0": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00181700": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00181724": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00181734": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001826fc": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00182718": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0018271c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0018290c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001829d0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00183208": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00183550": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00183bc8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_00183c54": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001869f0": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00195874": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_00195a08": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_0019637c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001963f8": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001af154": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c1bf0": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c1d4c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c1ddc": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c29ac": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c2d74": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c3988": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001c540c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001c5950": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001c5970": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001c5994": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001c59fc": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001cf67c": [
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_001cf7b0": [
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_001cfbcc": [
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_001cfc7c": [
+      "c010 target text-state/dirty protocol and prepared wrapper clients prevent the entire ResourceEntry/native TextBox transaction from being claimed complete; retain prepared family rather than revive prereview F02"
+    ],
+    "func_001d2b80": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d49a8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d49c8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d49e8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d4a48": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d4aac": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d4cb8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d4d5c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d88f0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d911c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d9178": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d9198": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d9220": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d94a0": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d9530": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d9580": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001d98f4": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001e403c": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001e5718": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001eb190": [
+      "c010 credited BoundDisplayObject/PendingDisplayUpdate/material callers require prepared display-owner forms; no canonical0xcc DisplayObject conversion into the legacy family is allowed"
+    ],
+    "func_001f2ef8": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ],
+    "func_001f2f2c": [
+      "c010 canonical AudioVoiceGroup/AudioSlot/AudioEnvelope/ArchiveReader and generic runtime clients must not coexist with uncompleted native Voice/RecordState/CurveAdshr/CWAR receiver cutovers"
+    ]
+  },
+  "restored_paths": [
+    "docs/known-issues-c009-r2.md",
+    "include/game/archive.h",
+    "include/game/audio.h",
+    "include/game/audio_dsp.h",
+    "include/game/audio_tasks.h",
+    "include/game/audio_voice.h",
+    "include/game/command_group.h",
+    "include/game/display_animation.h",
+    "include/game/display_groups.h",
+    "include/game/exp_heap.h",
+    "include/game/filesystem.h",
+    "include/game/functions.h",
+    "include/game/input_device.h",
+    "include/game/layout_lifecycle.h",
+    "include/game/material.h",
+    "include/game/prefetch_stream.h",
+    "include/game/reset_reference.h",
+    "include/game/resource_objects.h",
+    "include/game/resource_runtime.h",
+    "include/game/resource_tables.h",
+    "include/game/scene_lifecycle.h",
+    "include/game/screen.h",
+    "include/game/sequence.h",
+    "include/game/service_runtime.h",
+    "include/game/sound_controller.h",
+    "include/game/sound_task.h",
+    "include/game/sound_track.h",
+    "include/game/sound_voice.h",
+    "include/game/startup.h",
+    "include/nw/font/font_DispStringBuffer.h",
+    "include/nw/font/font_RectDrawer.h",
+    "include/nw/lyt/lyt_Material.h",
+    "include/nw/lyt/lyt_Pane.h",
+    "include/nw/lyt/lyt_Picture.h",
+    "include/nw/lyt/lyt_TextBox.h",
+    "include/nw/snd/snd_CurveAdshr.h",
+    "include/nw/snd/snd_Voice.h",
+    "include/nw/snd/snd_VoiceManager.h",
+    "include/nw/snd/snd_WaveArchiveFileReader.h",
+    "scratch/integrator/c010/prereview-fixes/retired-src/func_001db054.c",
+    "scratch/integrator/c010/prereview-fixes/retired-src/func_001db068.c",
+    "src/retries/func_0015e684.c",
+    "src/retries/func_0016dbc4.c",
+    "src/retries/func_00183550.cpp",
+    "src/sdk/func_00137b48.c",
+    "src/sdk2/func_0014603c.c",
+    "src/sdk2/func_0017da08.c",
+    "src/wave1/func_0011f080.cpp",
+    "src/wave10/func_0015475c.c",
+    "src/wave10/func_0015e49c.c",
+    "src/wave10/func_0015e5c4.c",
+    "src/wave10/func_0015e5f0.c",
+    "src/wave10/func_0015e624.c",
+    "src/wave10/func_0015e780.c",
+    "src/wave10/func_0015e824.c",
+    "src/wave10/func_0015e96c.c",
+    "src/wave10/func_0016fff8.c",
+    "src/wave10/func_00170014.c",
+    "src/wave10/func_001793e4.c",
+    "src/wave10/func_001963f8.c",
+    "src/wave11/func_00124a20.c",
+    "src/wave11/func_00145b5c.c",
+    "src/wave11/func_0015eac8.c",
+    "src/wave11/func_0016ff08.c",
+    "src/wave11/func_00181420.c",
+    "src/wave11/func_00181448.c",
+    "src/wave11/func_0018271c.c",
+    "src/wave11/func_0019637c.c",
+    "src/wave12/func_0017dae0.c",
+    "src/wave12/func_0017daf8.c",
+    "src/wave12/func_0017deec.c",
+    "src/wave12/func_00195874.c",
+    "src/wave12/func_001c1bf0.c",
+    "src/wave12/func_001d2b80.c",
+    "src/wave12/func_001d4cb8.c",
+    "src/wave13/func_00148800.c",
+    "src/wave13/func_00148854.c",
+    "src/wave13/func_001488bc.c",
+    "src/wave13/func_0014891c.c",
+    "src/wave13/func_00148988.c",
+    "src/wave13/func_001489e8.c",
+    "src/wave13/func_00148a3c.c",
+    "src/wave13/func_0014aaf4.c",
+    "src/wave13/func_0014ab30.c",
+    "src/wave13/func_0014ee44.c",
+    "src/wave13/func_0014ee5c.c",
+    "src/wave13/func_0014fc78.c",
+    "src/wave13/func_00152560.c",
+    "src/wave13/func_0015274c.c",
+    "src/wave13/func_00154224.c",
+    "src/wave13/func_001549d8.c",
+    "src/wave13/func_0015e954.c",
+    "src/wave13/func_0015e9dc.c",
+    "src/wave13/func_0016504c.c",
+    "src/wave13/func_00180404.c",
+    "src/wave13/func_00181100.cpp",
+    "src/wave13/func_001c540c.c",
+    "src/wave13/func_001d88f0.c",
+    "src/wave13/func_001d9198.cpp",
+    "src/wave13/func_001d9580.cpp",
+    "src/wave13/func_001f2ef8.c",
+    "src/wave13/func_001f2f2c.c",
+    "src/wave14/func_00154f78.c",
+    "src/wave14/func_0016bf80.c",
+    "src/wave14/func_001810e4.c",
+    "src/wave15/func_0010264c.c",
+    "src/wave15/func_0010bc70.c",
+    "src/wave15/func_001351bc.c",
+    "src/wave15/func_0014fbcc.c",
+    "src/wave15/func_001525f0.c",
+    "src/wave15/func_00155148.c",
+    "src/wave15/func_0015643c.c",
+    "src/wave15/func_00180c84.c",
+    "src/wave15/func_00180d10.c",
+    "src/wave15/func_00180e14.c",
+    "src/wave15/func_00183208.c",
+    "src/wave15/func_001869f0.c",
+    "src/wave15/func_001d4d5c.cpp",
+    "src/wave15/func_001d9178.c",
+    "src/wave15/func_001d9530.c",
+    "src/wave16/func_00135268.c",
+    "src/wave16/func_0015263c.c",
+    "src/wave16/func_00153fec.c",
+    "src/wave16/func_0015477c.c",
+    "src/wave16/func_00181724.c",
+    "src/wave16/func_001c1d4c.c",
+    "src/wave17/func_0015e480.c",
+    "src/wave17/func_0015e698.c",
+    "src/wave17/func_0015eaa8.c",
+    "src/wave17/func_0016f4ec.c",
+    "src/wave17/func_00171db8.c",
+    "src/wave17/func_001c29ac.cpp",
+    "src/wave17/func_001c2d74.cpp",
+    "src/wave17/func_001cf67c.cpp",
+    "src/wave17/func_001cfbcc.cpp",
+    "src/wave17/func_001cfc7c.cpp",
+    "src/wave18/func_0014d2e4.cpp",
+    "src/wave18/func_0015ea60.c",
+    "src/wave18/func_0016d4f8.c",
+    "src/wave18/func_0016f534.c",
+    "src/wave18/func_001af154.c",
+    "src/wave18/func_001c3988.c",
+    "src/wave18/func_001d94a0.c",
+    "src/wave18/func_001d98f4.c",
+    "src/wave19/func_00150098.c",
+    "src/wave19/func_001501ec.c",
+    "src/wave19/func_0016c020.c",
+    "src/wave19/func_00170fc4.c",
+    "src/wave19/func_0017e6a4.c",
+    "src/wave2/func_0014de8c.cpp",
+    "src/wave2/func_00179298.cpp",
+    "src/wave20/func_0014d02c.c",
+    "src/wave20/func_00150210.c",
+    "src/wave20/func_0015e4a8.cpp",
+    "src/wave20/func_0015e634.cpp",
+    "src/wave20/func_00166eb0.c",
+    "src/wave20/func_001c1ddc.c",
+    "src/wave20/func_001cf7b0.cpp",
+    "src/wave20/func_001eb190.c",
+    "src/wave4/func_001391d8.c",
+    "src/wave4/func_0017da3c.c",
+    "src/wave4/func_0017e358.c",
+    "src/wave4/func_00182718.c",
+    "src/wave4/func_00183c54.c",
+    "src/wave6/func_0015e948.c",
+    "src/wave6/func_001826fc.c",
+    "src/wave6/func_00195a08.c",
+    "src/wave7/func_0014d000.c",
+    "src/wave7/func_0014e504.c",
+    "src/wave7/func_00150030.c",
+    "src/wave7/func_001545ec.c",
+    "src/wave7/func_00154608.c",
+    "src/wave7/func_00154624.c",
+    "src/wave7/func_001550e0.c",
+    "src/wave7/func_001551fc.c",
+    "src/wave7/func_00156398.c",
+    "src/wave7/func_0016a158.c",
+    "src/wave7/func_0016a178.c",
+    "src/wave7/func_0016a204.c",
+    "src/wave7/func_0017e470.c",
+    "src/wave7/func_0017e47c.c",
+    "src/wave7/func_0017e4bc.c",
+    "src/wave7/func_001815a8.c",
+    "src/wave7/func_001816c0.c",
+    "src/wave7/func_001816e0.c",
+    "src/wave7/func_00181700.c",
+    "src/wave7/func_00181734.c",
+    "src/wave7/func_001d49a8.c",
+    "src/wave7/func_001d49c8.c",
+    "src/wave7/func_001d49e8.c",
+    "src/wave7/func_001d911c.c",
+    "src/wave7/func_001d9220.c",
+    "src/wave7/func_001e5718.c",
+    "src/wave8/func_00138cb0.c",
+    "src/wave8/func_00152f10.c",
+    "src/wave8/func_0016a27c.c",
+    "src/wave8/func_00179160.c",
+    "src/wave8/func_0018290c.c",
+    "src/wave8/func_001829d0.c",
+    "src/wave8/func_00183bc8.c",
+    "src/wave8/func_001c5950.c",
+    "src/wave8/func_001c5970.c",
+    "src/wave8/func_001c5994.cpp",
+    "src/wave8/func_001c59fc.c",
+    "src/wave8/func_001d4a48.c",
+    "src/wave8/func_001d4aac.c",
+    "src/wave8/func_001e403c.c"
+  ],
+  "removed_active_proposals": [
+    {
+      "path": "include/game/display_object.h",
+      "source_sha256": "2bb86fe0ed953c36ed8ca87128fa736d5f3a4859c7b7f44005c60374b9bbabb2",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/sdk2/func_0014603c.cpp",
+      "source_sha256": "7c2c1ae637f3cd81a8ab01de4de231d17216f8f5fb35f49b0151ad731f014c16",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/sdk2/func_0017da08.cpp",
+      "source_sha256": "892452a1e7d2f45c59edba4464d493a27889370769bf9088f34f8624be10cfbe",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/types/display/func_0015e5d4.cpp",
+      "source_sha256": "b9d09e25181bac9ef7d9cde23e499ef96c4cb8ec4a948eae4e7436e9749fed6c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave10/func_0015475c.cpp",
+      "source_sha256": "b220cf33b6cc3fabb66916ae5f2bb48461f9aab33e53628d3cebe6d08b60696a",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave11/func_00124a20.cpp",
+      "source_sha256": "b3bfc7e75a4e3b5bff13eacb8ce3eb70c6c8ed6db8d3c8c6a80c9615536fa91c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave11/func_0015eac8.cpp",
+      "source_sha256": "1e500db39fc13e8d5a80bf807ff0fb4f7332274263f2e9fcf7b403c439c83fa4",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave11/func_0018271c.cpp",
+      "source_sha256": "26ad4452ab6729c869a0e8e98acc91c148b1bac9c757704709ca1c63cbe34716",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave12/func_0017dae0.cpp",
+      "source_sha256": "d39a5b8fdb6dc8e1666dfec9ad66af2b24cbd980cd3f4371cc7b9477f23cf5aa",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave12/func_0017daf8.cpp",
+      "source_sha256": "f7fb6583b0c66f10461fc21961b0f3ca9f5859e17e9db9fa5e5795f9490b4c7c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave12/func_0017deec.cpp",
+      "source_sha256": "fb17378bc273f1cea4d35a4aa0807aed64e7164307f2f2f161036bcb135751f8",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave12/func_001d2b80.cpp",
+      "source_sha256": "2c4bd08cdcc1fd16a02d05f589c66b17e8f254de8bcaa20a720f84149886b438",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave12/func_001d4cb8.cpp",
+      "source_sha256": "5060b07db7bb620d3a1e399360a2dabf85acb7062b9257efccc97800dec82169",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_0014ee44.cpp",
+      "source_sha256": "294b4fadb6906a7cd5b2962c5f97c2fcbfe882f5cd3b9b08c6711353409df306",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_0014ee5c.cpp",
+      "source_sha256": "2a6a2f28229a3aa0980da27f5b09444fd7058def64fe7cc3ea5041f457e95945",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_0014fc78.cpp",
+      "source_sha256": "0b38146b97a242543642d782486c199a96ac5dbf804e53287655996cc0da8bdd",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_0015274c.cpp",
+      "source_sha256": "a244050d382fc54ce341ad5ea8c7fa93996bb1143b569eea9ca69b8f860fbfda",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_00154224.cpp",
+      "source_sha256": "86685b359e9192d81fbaddfb8fc07191c0712831e0fd34b8adc7560a9977d265",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_0015e954.cpp",
+      "source_sha256": "0e11f296e630c629500659965adcae3bd0069505946289e31facbcd82faf31d2",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_0016504c.cpp",
+      "source_sha256": "5905aff7f168cc57de27bef886d7a9f2699954503e33381d9ae11f96417da273",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_001c540c.cpp",
+      "source_sha256": "683e6dabc95f64c0cfaf39d7309b74f72cd5b3fe9435691d815387c92843bc36",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_001d88f0.cpp",
+      "source_sha256": "c6113f971493c95c6ecec5d6280f57b0468fd5f01129a978f0cb576d718f163f",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_001f2ef8.cpp",
+      "source_sha256": "a437c7a83ca181abbd445b3f49163d4df1aad4e18f9d7e3fbf9d67581e31751c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave13/func_001f2f2c.cpp",
+      "source_sha256": "003d1c08a8a85173ca41f315c73f378f25d45ca95e97e8a893a7a2b572714e00",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave14/func_00154f78.cpp",
+      "source_sha256": "97e0d3610b6cb640ecdde85353701a889c1b6e1f734c53ad5e228ac731cc3c2c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave15/func_0014fbcc.cpp",
+      "source_sha256": "f2dce19c73f114359d1d8ec1c86b907500e3546998333bb35c04b18409cebf31",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave15/func_001525f0.cpp",
+      "source_sha256": "72064e7cf7fdaec040965d97a8700a3cd34b23e91d3cebcd92f128f6ebe4cede",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave15/func_00155148.cpp",
+      "source_sha256": "d4149b012bed133dea9f9731481b0029a52a205c8421dac2a4a3ac3ad92ac18e",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave15/func_0015643c.cpp",
+      "source_sha256": "c53c5837d1675faf7d717a1a1f4e316d9e3ef140a1d28d151913904485262a61",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave15/func_001d9178.cpp",
+      "source_sha256": "f07bc623068c2de29e5ca8a0b0c249e260858871a20b8a965a7126416d0000e6",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave15/func_001d9530.cpp",
+      "source_sha256": "913638ebc24c9e2ec8c976d97573df1df261b089fc1caf3036a0f037d7b48246",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave16/func_0015263c.cpp",
+      "source_sha256": "2bd9fe99af246d1440e2983c3bd8db12483c259fd4ddbbd54b48113b1724a144",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave16/func_00153fec.cpp",
+      "source_sha256": "149b841bdfee926d3e8db254c645a7014608862f4dbbd0d2eb5fb7efd32a94e1",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave16/func_0015477c.cpp",
+      "source_sha256": "7faedf41f20eb4dad9d39ece4e1c16aee29bd52ece1a36cf2ce5e6d4d1bb68d7",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave17/func_0015e480.cpp",
+      "source_sha256": "2cfc9fa04b696131400e30dc6cb63287885044446566bbf706b5681aa8cdd2eb",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave17/func_0015e698.cpp",
+      "source_sha256": "89cc6f6ab1ebd9a741198a7b2bb87253da77d3a38f835b94654ef9abc8b68464",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave17/func_0016f4ec.cpp",
+      "source_sha256": "106457d837a6d27b484800dc088645c03583d212aeb6bee3df8573d906c44120",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave18/func_001d94a0.cpp",
+      "source_sha256": "4430980f9948269478ce8da114b4a22936e7edec310da417fc0daac0dcebd9e1",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave19/func_00150098.cpp",
+      "source_sha256": "12c34d3ae25ce91cd8b85a103253302b1ab7513c47d93d4246534efb1b767152",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave19/func_001501ec.cpp",
+      "source_sha256": "47e0efea90cee376153e8645e760e781d4d9593ea01a53428d4ccc5e86c7abc3",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave19/func_0017e6a4.cpp",
+      "source_sha256": "dda09825c84916cab3c859274b51e311777b9de6fb7aeed8d243340810b083bb",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave20/func_00150210.cpp",
+      "source_sha256": "e0c4eec95cec478c83344153ab31d2d7c620010ba568377091b782ca806a16fc",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave4/func_001391d8.cpp",
+      "source_sha256": "2340bce260eec6572a91bbae4faa6b7edc1ffbc5425747eb3b5d94de90e506a2",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave4/func_0017e358.cpp",
+      "source_sha256": "63596ec87291e90f9a6c4db3108348bb25d9fb4d7d762ca23289ce6952b4a64a",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave4/func_00183c54.cpp",
+      "source_sha256": "4c1e1cb9ccedc17a8778862971142d897f96f02cb772f9fb02cd24b9626263e8",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave6/func_001826fc.cpp",
+      "source_sha256": "2993eeac17fcb8a94dd43d770ae71db176fbc63008a4bed1ceb76ad615132a66",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_00150030.cpp",
+      "source_sha256": "dea91c9936c7ea8e833f75fb95755ebb22e5dfacdfade958fc8e586949680bb1",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001545ec.cpp",
+      "source_sha256": "a8b88ea5130d3c7a1f1e387e50fd198803b9ba790b238940f7f97302a8b9f346",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_00154608.cpp",
+      "source_sha256": "a291f60dc12e10db34b981cd466355f333231fbe30f1bf656c95550c6b66e78c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_00154624.cpp",
+      "source_sha256": "ce23965459be598480fbda6a7d9aabc69915e158cb5bc65e6c8c6d3cb71132d0",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001550e0.cpp",
+      "source_sha256": "a61b131d77f63a7b00553e6360dab8e240df26a370910c074af962b8271829d9",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001551fc.cpp",
+      "source_sha256": "f257ed5c1752e30f356fc5bd7345d4ffd8a69726804974ca97689e5fd82fdece",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_00156398.cpp",
+      "source_sha256": "7e721dfce633926a36ed906a975a3c4103aa066570e0b1e18bc04ef663316625",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_0016a158.cpp",
+      "source_sha256": "c9f07c91a23f0f063c8e779a8e0a578dc3385b57b67c82012fdbb50328f8381c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_0016a178.cpp",
+      "source_sha256": "3a30d8645d174d5607e55817ae2abec727d364447c8bc30975c38953e02f932b",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_0016a204.cpp",
+      "source_sha256": "8a1817b55c5714c34c22eb0604eea10c4f6e96094e64462f6788fa77650e5297",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_0017e470.cpp",
+      "source_sha256": "1ffa637455e8513e6202e64eecb5e3d12dd8794ce553b5f097bd5c3d79f7940b",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_0017e47c.cpp",
+      "source_sha256": "422797a4ac46fec309a9d37d45cedfeca4cc6ef9ff235bf972c058444872a544",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_0017e4bc.cpp",
+      "source_sha256": "66a910894aac201a6a9fae785a189b9b0e7f1d000b0dcd7c57c2a9e034ce7e3c",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001816c0.cpp",
+      "source_sha256": "18f38adbc4a9a76fc20ec6f6d85a26aa2ff4aca005ebd5becd75a98ba4e704aa",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001816e0.cpp",
+      "source_sha256": "ef2ee52767c2093a37b0523f811a4f422b5976df74343778459e2b9c8e17d5a8",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_00181700.cpp",
+      "source_sha256": "e700b1a9018bd3439d151bc23c777a3bf6904af1d04380eaa46c94a2943575e0",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_00181734.cpp",
+      "source_sha256": "599dcda2cbc4fa53a7fe91b8c4c405af5bdb59828d3bf0d64638c29c236c0f27",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001d49a8.cpp",
+      "source_sha256": "58df90a33fb362293e4a7e405ee4d3d1bf3aa2e1a57c8661720f48f986bd9c7b",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001d49c8.cpp",
+      "source_sha256": "d6b4dfce3d7e62bd038b4a34221ebbefa8074123834e0fc6fa4e7a3db25d40f5",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001d49e8.cpp",
+      "source_sha256": "2798b33d8f067e58568c9ebcce919d998b26f980110664e7d28681a0b42e7227",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001d911c.cpp",
+      "source_sha256": "e036eba5e9f1f7dbf9e31e67a3ebad2a9e6729ea098169474a1b38e24e89fe52",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave7/func_001d9220.cpp",
+      "source_sha256": "444998f8481e8ff11b981cbec65d02ba5846fcf986407375f96e5d3fd4f9c631",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_00138cb0.cpp",
+      "source_sha256": "d30edf4ce38e0e4d5f417ac01f739dc99df06e1c72bef6ed1306ec4bb6232e09",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_00152f10.cpp",
+      "source_sha256": "322d0cccb9cfdb7a508869567f37257e87456828ccd1aa4f0779d88a0c95ca83",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_0016a27c.cpp",
+      "source_sha256": "593fc50c6620ebcd3f0dbae8cd07cd872da450529656595bdc53f1dd7a1004c8",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_0018290c.cpp",
+      "source_sha256": "b2a6204dace0d363805fea5e1f50217ccb9bc5e4227e6d89647a228f8af457d5",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_001829d0.cpp",
+      "source_sha256": "2c9aaacacd7f58bb69b00e42c32ae2c546824b90db46c360bf752920b36f93ae",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_00183bc8.cpp",
+      "source_sha256": "33718ff95d84cc805dfdedcf2f15956b67ec6276e625c083ccac7c5102eda5fe",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_001c5950.cpp",
+      "source_sha256": "25570afb8f72f04d848935b6aa872bb712640b9a661235033a08d6edf40e27d6",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_001c5970.cpp",
+      "source_sha256": "bd373bf4000498c993f7865252691ef46a509b1474ef59d17d1659df7acd30d3",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_001c59fc.cpp",
+      "source_sha256": "a9d5209b52b7e8343e40de71c5efddf1eabec4cf97a372bdaaa62d5dd3735fd6",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_001d4a48.cpp",
+      "source_sha256": "394d144546b35c839a87f0066b103e943212a00daf4cf0f45061e696adde5409",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    },
+    {
+      "path": "src/wave8/func_001d4aac.cpp",
+      "source_sha256": "f0d224456f46b6e827a63813181c37aef72016b147fff3d22e70b2de1165ede9",
+      "decision": "unselected/removed active proposal because its complete type family is held; source retained in types-compose parent commit"
+    }
+  ],
+  "render_field_union": "One GpuState retains c010 requested/excluded flags, feature6502 and both33-word constant arrays while adding the independently witnessed shader bytes/words only inside untouched padding; no overlapping storage aliases.",
+  "font_field_renames": {
+    "line_feed": "field01",
+    "encoding": "field07",
+    "height": "field14",
+    "width": "field15",
+    "ascent": "field16"
+  },
+  "reader_helper_hold": "Safe value-based StepStrm changes the live c010 SJIS match; natural typed cursor forms56B/48B also mismatch target56B. Main explicitly approved exact c010 restoration. NEW getter selects only the direct UTF16 member (or null), not this helper.",
+  "late_display_header_hold": "Source-only FlagDisplayObject->DisplayObject prototype rewrite was also rolled back with the whole display family.",
+  "protected_c010_fixes": [
+    "void*(void*) generic array constructor ABI",
+    "const SoundEnvelope data_0024380a",
+    "real ResTextureAnim wrapper value, not base-object downcast",
+    "actual AudioDecodeEvent arena construction",
+    "r8 generic callbacks, sound-loader thread and three atexit providers",
+    "all94 NEW-only deferrals"
+  ],
+  "no_cast_bridges_or_new_adapters": true
+}

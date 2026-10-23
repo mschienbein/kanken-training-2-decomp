@@ -1,0 +1,29 @@
+{
+  "source": "src/models/func_001ed874/func_001ed874.cpp",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001ed874/func_001ed874.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_001ed874",
+    "--extra-source",
+    "src/models/func_001ed874/category_initializers.c"
+  ],
+  "exit": 0,
+  "seconds": 0.208,
+  "output": "MATCH    func_001ed874 @ 0x1ed874 size 0x33c/0x33c [armlink5-inline-branchnop-v6: 3 inline_nop]\nREMOVED  initialize_category_panel (4 bytes; i.initialize_category_panel)\nREMOVED  initialize_handle_panel (4 bytes; i.initialize_handle_panel)\nREMOVED  initialize_selector (4 bytes; i.initialize_selector)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_001ed874",
+  "extra_sources": [
+    "src/models/func_001ed874/category_initializers.c"
+  ],
+  "source_sha256": "3f96e8d1053e1b39d380c59df46ac8ab62f278302cdc7e93e8ed6c61cd9eff32"
+}

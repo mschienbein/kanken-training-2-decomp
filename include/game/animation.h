@@ -1,6 +1,7 @@
 #ifndef GAME_ANIMATION_H
 #define GAME_ANIMATION_H
 
+/* Opaque intrusive-registry receiver; its +0x100 link is not in the 0xcc display pool owner. */
 struct AnimatedObject;
 struct AnimationIterator;
 struct AnimationLinkPrefix;
@@ -13,6 +14,7 @@ struct WidgetPosition;
 #include <stdbool.h>
 #include "game/audio.h"
 #include "game/pool_list.h"
+#include "game/input.h"
 
 #include "game/screen.h"
 
@@ -38,8 +40,8 @@ struct Animation {
     unsigned char reserved04[4];
     struct AnimationChild **children;
     unsigned char reserved0c[0x24];
-    float coordinates[4];
-    float bounds[4];
+    struct InputRectangle coordinates;
+    struct InputRectangle bounds;
     float width;
     float height;
     unsigned char reserved58[0x10];
@@ -87,9 +89,9 @@ typedef struct FrameTiming {
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern float func_0016702c(const float *rectangle, float value);
-extern float func_00167000(const float *rectangle, float value);
-extern void func_001670e4(float *destination, float x, float y, float z, float w);
+extern float func_0016702c(const struct InputRectangle *rectangle, float value);
+extern float func_00167000(const struct InputRectangle *rectangle, float value);
+extern void func_001670e4(struct InputRectangle *destination, float x, float y, float z, float w);
 extern FrameTiming bss_00495b30;
 extern void func_0015eaa8(struct AnimationDisplayObject *object, int index);
 extern float func_0017adb4(void);

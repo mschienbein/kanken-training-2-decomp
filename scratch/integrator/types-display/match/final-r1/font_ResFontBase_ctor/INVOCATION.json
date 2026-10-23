@@ -1,0 +1,25 @@
+{
+  "source": "src/nw4c/font_ResFontBase_ctor.cpp",
+  "profile": "middleware",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/nw4c/font_ResFontBase_ctor.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/font_ResFontBase_ctor"
+  ],
+  "exit": 0,
+  "seconds": 0.177,
+  "output": "MATCH    _ZN2nw4font11ResFontBaseC1Ev @ 0x113e78 size 0x34/0x34\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtLargeEv @ 0x1f0008 size 0x10/0x10\nMATCH    _ZNK2nw4font11ResFontBase27IsLinearFilterEnableAtSmallEv @ 0x1f0018 size 0x10/0x10\n",
+  "out": "scratch/integrator/types-display/match/final-r1/font_ResFontBase_ctor",
+  "extra_sources": [],
+  "source_sha256": "e96372bf88b46931821c73415df2f9ed5c1c00e725431710dd8f4fc0f914e035"
+}

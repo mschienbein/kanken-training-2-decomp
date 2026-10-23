@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/wave18/func_001eade0.cpp",
+ "source_sha256": "f2564510c5f0b9545f45aaa6b5f80e33b06444cd4201180f015ee781b85552f2",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "e7a8f1066cb2a265db2287028d309ebfdf7f1eb5a12ab35ad9cb9a81feb1baef",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/models/object_registration/style_owner.c",
+   "source_sha256": "3a9fbb24621a5b9dc309dfb2e76ff37c0653aff2da3df2192e6bfcb44b722306",
+   "object_sha256": "94e5a35e9a1a9c4c459abdc3a206fb984a288cc258a5f42108dd597377a059d6"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_style_owner_cleanup"
+   ],
+   "section": "i.register_style_owner_cleanup",
+   "size": 4,
+   "object": "scratch/integrator/types-display/match/final-r1/func_001eade0/extra-0-style_owner.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001eade0",
+   "address": 2010592,
+   "size": 248,
+   "candidate_size": 248,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 192,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_style_owner_cleanup"
+      ],
+      "section": "i.register_style_owner_cleanup",
+      "size": 4,
+      "object": "scratch/integrator/types-display/match/final-r1/func_001eade0/extra-0-style_owner.o"
+     }
+    },
+    {
+     "offset": 204,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

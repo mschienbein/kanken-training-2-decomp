@@ -1,0 +1,73 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/wave19/func_00167284.c",
+ "source_sha256": "ff10da281247559b755c33e573aa207d8350525ed53c6b5a764e6156cf80d787",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "825c6686314f56c1cfcc80d899d4fb2f45fc5373cf9f4e564ea4d1d072a124af",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/models/object_registration/animation_state.c",
+   "source_sha256": "52ac1278c1f71c6fb826fe161c8561b6edfe5b84f5c46f5a332986963676950b",
+   "object_sha256": "5f8c3075aebd571739b567b1846df6fb5f0ff92f7dcf1aa3620e5ca3ca2b5415"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_animation_state_cleanup"
+   ],
+   "section": "i.register_animation_state_cleanup",
+   "size": 4,
+   "object": "scratch/integrator/types-display/match/final-r1/func_00167284/extra-0-animation_state.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00167284",
+   "address": 1471108,
+   "size": 88,
+   "candidate_size": 88,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 52,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_animation_state_cleanup"
+      ],
+      "section": "i.register_animation_state_cleanup",
+      "size": 4,
+      "object": "scratch/integrator/types-display/match/final-r1/func_00167284/extra-0-animation_state.o"
+     }
+    },
+    {
+     "offset": 60,
+     "rule": "inline_nop",
+     "target": 2186948,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}
