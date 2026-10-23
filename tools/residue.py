@@ -48,6 +48,8 @@ AUTHOR_STEPS = ("1", "2", "3")
 REQUIRED_STEPS = (*AUTHOR_STEPS, "4")
 EXTRA_STEPS = ("5", "5b", "5c")
 STEPS = (*REQUIRED_STEPS, *EXTRA_STEPS)
+# Permuter sweeps that share the sweep-10 summary schema; sweep-10 is required, later ones optional.
+PERMUTER_SWEEPS = (("sweep-10", True), ("sweep-11", False))
 BANDS = ("0 (held)", "1-16", "17-64", "65-256", ">256", "unknown")
 CLASSES = ("held_contract", "header_blocked", "near_miss_exhausted",
            "never_matched_exhausted", "awaits_user_ruling", "ladder_incomplete",
@@ -566,10 +568,21 @@ class Joiner:
                         self.functions[name].step_evidence[step].add(evidence)
 
     def load_permuter(self) -> None:
-        label = "scratch/permute/sweep-10/summary.json"
-        doc = self.inputs.load(label, required=True)
-        self.permuter_bound = integer(doc.get("policy", {}).get("operational_differing_byte_cap")) or 32
-        for path in sorted((self.root / "scratch/permute/sweep-10").glob("HEAVY-SLOT-RELEASED-*.json")):
+        self.permuter_bound = None
+        for sweep, required in PERMUTER_SWEEPS:
+            label = f"scratch/permute/{sweep}/summary.json"
+            doc = self.inputs.load(label, required=required)
+            if doc is None:
+                continue
+            bound = integer(doc.get("policy", {}).get("operational_differing_byte_cap")) or 32
+            if self.permuter_bound is None:
+                self.permuter_bound = bound
+            elif bound != self.permuter_bound:
+                raise ValueError(f"{label}: permuter bound {bound} differs from {self.permuter_bound}")
+            self.load_sweep(sweep, label, doc)
+
+    def load_sweep(self, sweep: str, label: str, doc: dict) -> None:
+        for path in sorted((self.root / f"scratch/permute/{sweep}").glob("HEAVY-SLOT-RELEASED-*.json")):
             release_label = path.relative_to(self.root).as_posix()
             release = self.inputs.load(release_label)
             for index, execution in enumerate(release.get("actual_row_exits", [])):
@@ -593,20 +606,22 @@ class Joiner:
             target.evidence.add(evidence)
             if state in ("plateau", "exhausted", "match"):
                 target.completed.add("4")
-                target.attempts["4"].add("sweep-10")
+                target.attempts["4"].add(sweep)
                 target.step_evidence["4"].add(evidence)
             elif state == "adapter_refused":
-                target.attempts["4"].add("sweep-10")
+                target.attempts["4"].add(sweep)
                 target.step_evidence["4"].add(evidence)
             for index, final in enumerate(row.get("final_functions") or []):
                 if identity(final) == name:
                     measured = {**final, "differing_bytes": final.get("changed_bytes")}
-                    self.observe(name, measured, f"{evidence}/final_functions/{index}", "sweep-10", "permuter")
+                    self.observe(name, measured, f"{evidence}/final_functions/{index}", sweep, "permuter")
             applicability = row.get("applicability", {})
             if isinstance(applicability.get("residual_evidence"), dict):
                 self.observe(name, {"residual": applicability["residual_evidence"],
                                     "source": row.get("source"), "receipt": row.get("origin_receipt"),
-                                    "status": "mismatch"}, f"{evidence}/applicability", "sweep-10", "permuter_seed")
+                                    "status": "mismatch"}, f"{evidence}/applicability", sweep, "permuter_seed")
+
+    def load_step4_refusals(self) -> None:
         for path in sorted((self.root / "scratch/permute/step4-nm").rglob("*.json")):
             label = path.relative_to(self.root).as_posix()
             doc = self.inputs.load(label)
@@ -875,6 +890,7 @@ def generate(root: Path, pending: list[tuple[tuple[str, ...], str]] | None = Non
     join.load_census()
     join.load_authors()
     join.load_permuter()
+    join.load_step4_refusals()
     join.load_holds()
     join.load_harvest()
     join.load_user_holds()

@@ -269,6 +269,25 @@ class ResidueTest(unittest.TestCase):
         self.assertEqual(by_name[self.names[5]]["permuter"]["disposition"], "completed")
         self.assertEqual(by_name[self.names[6]]["permuter"]["disposition"], "not_applicable")
 
+    def test_later_sweeps_complete_step4_only_when_searched_and_share_the_bound(self) -> None:
+        self.census([7, 8], ["initial", "2", "3"])
+        self.author("w02", [self.row(7, 12), self.row(8, 12)])
+        self.put("scratch/permute/sweep-11/summary.json", {
+            "policy": {"operational_differing_byte_cap": 32},
+            "rows": {self.names[7]: {"function": self.names[7], "state": "plateau"},
+                     self.names[8]: {"function": self.names[8], "state": "pending"}}})
+        by_name = {row["function"]: row for row in self.report()["rows"]}
+        searched, pending = by_name[self.names[7]], by_name[self.names[8]]
+        self.assertTrue(searched["ladder"]["4"]["completed"])
+        self.assertTrue(any("sweep-11" in item for item in searched["ladder"]["4"]["evidence"]))
+        self.assertEqual(searched["status_class"], "near_miss_exhausted")
+        self.assertFalse(pending["ladder"]["4"]["completed"])
+        self.assertEqual(pending["status_class"], "ladder_incomplete")
+        self.put("scratch/permute/sweep-11/summary.json", {
+            "policy": {"operational_differing_byte_cap": 16}, "rows": {}})
+        with self.assertRaises(ValueError):
+            self.report()
+
     def test_census_identity_reconciliation_preserves_mapping_gaps(self) -> None:
         self.put("scratch/integrator/census-20261021-r3/LADDER.json", {
             "rows": [
