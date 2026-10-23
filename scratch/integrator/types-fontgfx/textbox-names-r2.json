@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "symbols": {
+    "_ZN2nw3lyt7TextBox16FreeStringBufferEv": {
+      "address": 1898108,
+      "evidence": "Own native complete provider must match existing001cf67c."
+    },
+    "_ZN2nw3lyt7TextBoxD0Ev": {
+      "address": 1899468,
+      "evidence": "Own native deleting destructor must match existing001cfbcc."
+    },
+    "_ZN2nw3lyt7TextBoxD1Ev": {
+      "address": 1899644,
+      "evidence": "Own native complete destructor must match existing001cfc7c."
+    },
+    "_ZN2nw3lyt7TextBoxD2Ev": {
+      "address": 1899644,
+      "evidence": "Complete/base compiler alias of the same native destructor."
+    },
+    "_ZTVN2nw3lyt7TextBoxE": {
+      "address": 2245480,
+      "evidence": "Original TextBox table address point224370; native own-definition proof required."
+    },
+    "_ZN2nw3lyt4PaneD2Ev": {
+      "address": 1485208,
+      "evidence": "Proposal only: hierarchy-proven Pane destructor at the terminal call of both existing TextBox destructors; own provider/source proof still required."
+    },
+    "_ZdlPv": {
+      "address": 1594100,
+      "evidence": "Original deleting destructor deallocates the original object via001852f4; standard void(void*) operator delete role from native D0 witness."
+    },
+    "_ZN2nw3lyt4PaneD1Ev": {
+      "address": 1485208,
+      "evidence": "Proposal only: real base destructor final call, native whole-definition proof pending."
+    }
+  }
+}

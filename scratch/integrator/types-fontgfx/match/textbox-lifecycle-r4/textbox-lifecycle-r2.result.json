@@ -1,0 +1,58 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-fontgfx/scratch/integrator/types-fontgfx/textbox-lifecycle-r2.cpp",
+ "source_sha256": "7c3b8a2795a4b2f50f5b0a35e423dfcc8c6a04c1f952f21e983fd701de7200ba",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "8762573eb6373257808f13a10baa4a98c1aca3111139da5024bb82a05fd3bbf4",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": {
+  "path": "scratch/integrator/types-fontgfx/textbox-names-r2.json",
+  "sha256": "23459f4ae07c6584856750845fa1981b99244af36772dd122ebe9cfe5b222091"
+ },
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "_ZN2nw3lyt7TextBox16FreeStringBufferEv",
+   "address": 1898108,
+   "size": 96,
+   "candidate_size": 96,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": []
+  },
+  {
+   "name": "_ZN2nw3lyt7TextBoxD0Ev",
+   "address": 1899468,
+   "size": 176,
+   "candidate_size": 176,
+   "status": "mismatch",
+   "first_diff": 9,
+   "linker_rewrites": []
+  },
+  {
+   "name": "_ZN2nw3lyt7TextBoxD1Ev",
+   "address": 1899644,
+   "size": 168,
+   "candidate_size": 168,
+   "status": "mismatch",
+   "first_diff": 9,
+   "linker_rewrites": []
+  }
+ ]
+}

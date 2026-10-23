@@ -1,0 +1,117 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001b8908/func_001b8908_removed.cpp",
+ "source_sha256": "071abbaf6fc0b239989e0a2ac73ad26ee7cab261bc71a5d96b504f80ed29da51",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "07d27e3e326db897250f20949aeb568e1525f1cc30af6c4260ee0e80de7c3f4e",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001b8908/panel_accessors.c",
+   "source_sha256": "be5822350de5727f212fbcbb4906dfbd4015d46a6b2c73239de5eefc9d20e10e",
+   "object_sha256": "ed7cf83aab5a6f877f4f9e830fd5f2fc1d0184632c0af57e99f7256ddd9e1e0f"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "L034_get_selected"
+   ],
+   "section": "i.L034_get_selected",
+   "size": 8,
+   "object": "scratch/integrator/types-menu/matches/attempt-267-func_001b8908_removed/extra-0-panel_accessors.o"
+  },
+  {
+   "symbols": [
+    "L034_set_input_enabled"
+   ],
+   "section": "i.L034_set_input_enabled",
+   "size": 8,
+   "object": "scratch/integrator/types-menu/matches/attempt-267-func_001b8908_removed/extra-0-panel_accessors.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001b8908",
+   "address": 1804552,
+   "size": 664,
+   "candidate_size": 664,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 64,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5c0108c",
+     "removed_callee": {
+      "symbols": [
+       "L034_set_input_enabled"
+      ],
+      "section": "i.L034_set_input_enabled",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-267-func_001b8908_removed/extra-0-panel_accessors.o"
+     }
+    },
+    {
+     "offset": 456,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5c0108c",
+     "removed_callee": {
+      "symbols": [
+       "L034_set_input_enabled"
+      ],
+      "section": "i.L034_set_input_enabled",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-267-func_001b8908_removed/extra-0-panel_accessors.o"
+     }
+    },
+    {
+     "offset": 464,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5900090",
+     "removed_callee": {
+      "symbols": [
+       "L034_get_selected"
+      ],
+      "section": "i.L034_get_selected",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-267-func_001b8908_removed/extra-0-panel_accessors.o"
+     }
+    },
+    {
+     "offset": 484,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5900090",
+     "removed_callee": {
+      "symbols": [
+       "L034_get_selected"
+      ],
+      "section": "i.L034_get_selected",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-267-func_001b8908_removed/extra-0-panel_accessors.o"
+     }
+    }
+   ]
+  }
+ ]
+}

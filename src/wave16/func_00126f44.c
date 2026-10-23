@@ -7,5 +7,5 @@ struct TransferSurface;
 
 struct TransferSurface *func_00126f44(void)
 {
-    return data_002426d8->bound_framebuffer->surface;
+    return data_002426d8->bound_framebuffer->attachments[0].surface;
 }

@@ -1,0 +1,44 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/wave18/func_001db104.cpp",
+ "source_sha256": "662ea59efb65e940b7e20eb865c4be629e072af84fd8ed31367452de0e030cba",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "ef7a733d45ff79f7b13625c852d7f34fb91466a5d20e340230f51a22f0888fe5",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "_ZN15TextDecoderBaseC1Ev",
+   "address": 1945860,
+   "size": 44,
+   "candidate_size": 44,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 24,
+     "rule": "inline_nop",
+     "target": 1374184,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

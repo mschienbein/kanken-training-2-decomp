@@ -1,0 +1,67 @@
+{
+  "source": "src/wave13/func_0014d254.c",
+  "profile": "game",
+  "functions": [
+    "func_0014d254"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave13/func_0014d254.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-compose/match/r13-0003-func_0014d254"
+  ],
+  "exit": 0,
+  "source_sha256": "ca8624181fbffd243b2374691e79a93890ba00a79f607b01d43c922e5722de20",
+  "receipt": "scratch/integrator/types-compose/match/r13-0003-func_0014d254/func_0014d254.result.json",
+  "receipt_sha256": "d70650cc1c07a2f8634be5c6cb4c74628f7ac717c5ea9dcbdd21f3e4f95daa41",
+  "receipt_record": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave13/func_0014d254.c",
+    "source_sha256": "ca8624181fbffd243b2374691e79a93890ba00a79f607b01d43c922e5722de20",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "a9a929885abd4fd1188173c039b671da03a7e18ddf6f2d07efd80142c8bed1ee",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "func_0014d254",
+        "address": 1364564,
+        "size": 52,
+        "candidate_size": 52,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

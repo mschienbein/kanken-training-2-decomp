@@ -1,0 +1,29 @@
+{
+  "source": "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001e0afc/training_initialize_grouped_reset.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/training_initialize_grouped_reset",
+    "--extra-source",
+    "src/models/func_001e0afc/removed_initializers.c"
+  ],
+  "exit": 0,
+  "seconds": 0.234,
+  "output": "MATCH    func_001e0afc @ 0x1e0afc size 0x6cc/0x6cc [armlink5-inline-branchnop-v6: 1 inline_insn, 2 inline_nop]\nREMOVED  TU924_page_count (8 bytes; i.TU924_page_count)\nREMOVED  TU924_reset_optional (4 bytes; i.TU924_reset_optional)\nREMOVED  TU924_reset_prompts (4 bytes; i.TU924_reset_prompts)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/training_initialize_grouped_reset",
+  "extra_sources": [
+    "src/models/func_001e0afc/removed_initializers.c"
+  ],
+  "source_sha256": "c68178d9c34bf59bfa69f60a06efe801613d19d43da4ab39dc769d663ebfa237"
+}

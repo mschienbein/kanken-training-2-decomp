@@ -1,0 +1,29 @@
+{
+  "source": "src/models/transition_setters/func_001a8048_value_setter.c",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/transition_setters/func_001a8048_value_setter.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_001a8048_value_setter",
+    "--extra-source",
+    "src/models/transition_setters/transition_active.c"
+  ],
+  "exit": 0,
+  "seconds": 0.191,
+  "output": "MATCH    func_001a8048 @ 0x1a8048 size 0x19c/0x19c [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  transition_active (8 bytes; i.transition_active)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_001a8048_value_setter",
+  "extra_sources": [
+    "src/models/transition_setters/transition_active.c"
+  ],
+  "source_sha256": "4163d4a549b8d9eb174f76dfed879b9422f10a8cf9d1fd32e1bd56a08ba6e4c8"
+}

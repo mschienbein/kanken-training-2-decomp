@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001a00f8/func_001a00f8.cpp",
+ "source_sha256": "83ed0b657404958fb6a8eb0f1e17b14df21a03370af1e36ef4de2901085e6f3c",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "13d99235347e51edefc777fb4ffbd333b44a97805cca6c86333cd3042c96274d",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_001a00f8/transition_active.c",
+   "source_sha256": "65cb59766ef45d9b179da30758f0985a5f6419d7642a7b6e0a554b7e2597bc18",
+   "object_sha256": "a072a6709a0e6b52017a2889befb169fe4f3b21a16ee38e840286e2861ef447b"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "r4040_transition_active"
+   ],
+   "section": "i.r4040_transition_active",
+   "size": 8,
+   "object": "scratch/integrator/types-menu/matches/attempt-020-func_001a00f8/extra-0-transition_active.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001a00f8",
+   "address": 1704184,
+   "size": 264,
+   "candidate_size": 264,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 40,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d003d4",
+     "removed_callee": {
+      "symbols": [
+       "r4040_transition_active"
+      ],
+      "section": "i.r4040_transition_active",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-020-func_001a00f8/extra-0-transition_active.o"
+     }
+    }
+   ]
+  }
+ ]
+}

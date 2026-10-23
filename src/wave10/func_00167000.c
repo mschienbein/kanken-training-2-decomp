@@ -1,8 +1,10 @@
-float func_00167000(const float *rectangle, float value)
+#include "game/input.h"
+
+float func_00167000(const struct InputRectangle *rectangle, float value)
 {
-    if (rectangle[1] > value)
-        value = rectangle[1];
-    else if (rectangle[1] + rectangle[3] < value)
-        value = rectangle[1] + rectangle[3];
+    if (rectangle->y > value)
+        value = rectangle->y;
+    else if (rectangle->y + rectangle->height < value)
+        value = rectangle->y + rectangle->height;
     return value;
 }

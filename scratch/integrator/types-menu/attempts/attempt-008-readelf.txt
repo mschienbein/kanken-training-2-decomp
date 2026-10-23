@@ -1,0 +1,103 @@
+There are 19 section headers, starting at offset 0xa44:
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] i._ZN14MenuResetSceneD0Ev PROGBITS        00000000 000034 00006c 00  AX  0   0  4
+  [ 2] i._ZN14MenuResetSceneD1Ev PROGBITS        00000000 0000a0 000064 00  AX  0   0  4
+  [ 3] .ARM.exidx        ARM_EXIDX       00000000 000104 000008 00  AL  2   0  4
+  [ 4] .ARM.exidx        ARM_EXIDX       00000000 00010c 000008 00  AL  1   0  4
+  [ 5] .arm_vfe_header   PROGBITS        00000000 000114 000004 00      0   0  4
+  [ 6] .comment          PROGBITS        00000000 000118 000267 00      0   0  1
+  [ 7] .debug_frame      PROGBITS        00000000 00037f 000080 00      0   0  1
+  [ 8] .debug_frame      PROGBITS        00000000 0003ff 000080 00      0   0  1
+  [ 9] .symtab           SYMTAB          00000000 000480 0001b0 10     17  11  4
+  [10] .reli._ZN14MenuResetSceneD0Ev REL             00000000 000630 000058 08      9   1  4
+  [11] .reli._ZN14MenuResetSceneD1Ev REL             00000000 000688 000050 08      9   2  4
+  [12] .rel.ARM.exidx    REL             00000000 0006d8 000008 08      9   3  4
+  [13] .rel.ARM.exidx    REL             00000000 0006e0 000008 08      9   4  4
+  [14] .rel.debug_frame  REL             00000000 0006e8 000010 08      9   7  4
+  [15] .rel.debug_frame  REL             00000000 0006f8 000010 08      9   8  4
+  [16] .shstrtab         STRTAB          00000000 000708 0000a0 00      0   0  1
+  [17] .strtab           STRTAB          00000000 0007a8 000252 00      0   0  1
+  [18] .ARM.attributes   ARM_ATTRIBUTES  00000000 0009fa 000049 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+  L (link order), O (extra OS processing required), G (group), T (TLS),
+  C (compressed), x (unknown), o (OS specific), E (exclude),
+  D (mbind), y (purecode), p (processor specific)
+
+Relocation section '.reli._ZN14MenuResetSceneD0Ev' at offset 0x630 contains 11 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000010  0000121c R_ARM_CALL             00000000   func_00171e30
+00000020  0000171c R_ARM_CALL             00000000   func_00177124
+0000002c  0000161c R_ARM_CALL             00000000   func_00177084
+00000034  0000181c R_ARM_CALL             00000000   func_00181b58
+0000003c  0000111c R_ARM_CALL             00000000   func_00170f6c
+00000044  0000151c R_ARM_CALL             00000000   func_00176e24
+00000048  0000141c R_ARM_CALL             00000000   func_00176df4
+00000050  0000131c R_ARM_CALL             00000000   func_00176dc8
+00000058  00000e1c R_ARM_CALL             00000000   _ZN9MenuSceneD2Ev
+00000064  0000101d R_ARM_JUMP24           00000000   _ZdlPv
+00000068  00000f02 R_ARM_ABS32            00000000   _ZTV14MenuResetScene
+
+Relocation section '.reli._ZN14MenuResetSceneD1Ev' at offset 0x688 contains 10 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000010  0000121c R_ARM_CALL             00000000   func_00171e30
+00000020  0000171c R_ARM_CALL             00000000   func_00177124
+0000002c  0000161c R_ARM_CALL             00000000   func_00177084
+00000034  0000181c R_ARM_CALL             00000000   func_00181b58
+0000003c  0000111c R_ARM_CALL             00000000   func_00170f6c
+00000044  0000151c R_ARM_CALL             00000000   func_00176e24
+00000048  0000141c R_ARM_CALL             00000000   func_00176df4
+00000050  0000131c R_ARM_CALL             00000000   func_00176dc8
+0000005c  00000e1d R_ARM_JUMP24           00000000   _ZN9MenuSceneD2Ev
+00000060  00000f02 R_ARM_ABS32            00000000   _ZTV14MenuResetScene
+
+Relocation section '.rel.ARM.exidx' at offset 0x6d8 contains 1 entry:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000000  0000072a R_ARM_PREL31           00000000   i._ZN14MenuResetSceneD1Ev
+
+Relocation section '.rel.ARM.exidx' at offset 0x6e0 contains 1 entry:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000000  0000062a R_ARM_PREL31           00000000   i._ZN14MenuResetSceneD0Ev
+
+Relocation section '.rel.debug_frame' at offset 0x6e8 contains 2 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000068  00000902 R_ARM_ABS32            00000000   __ARM_grp_.debug_frame$5
+0000006c  00000702 R_ARM_ABS32            00000000   i._ZN14MenuResetSceneD1Ev
+
+Relocation section '.rel.debug_frame' at offset 0x6f8 contains 2 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000068  00000a02 R_ARM_ABS32            00000000   __ARM_grp_.debug_frame$8
+0000006c  00000602 R_ARM_ABS32            00000000   i._ZN14MenuResetSceneD0Ev
+
+Symbol table '.symtab' contains 27 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS /home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/wave18/func_001acbb4.cpp
+     2: 00000000     0 NOTYPE  LOCAL  DEFAULT    1 $a
+     3: 00000068     0 NOTYPE  LOCAL  DEFAULT    1 $d
+     4: 00000000     0 NOTYPE  LOCAL  DEFAULT    2 $a
+     5: 00000060     0 NOTYPE  LOCAL  DEFAULT    2 $d
+     6: 00000000     0 SECTION LOCAL  DEFAULT    1 i._ZN14MenuResetSceneD0Ev
+     7: 00000000     0 SECTION LOCAL  DEFAULT    2 i._ZN14MenuResetSceneD1Ev
+     8: 00000000     0 NOTYPE  LOCAL  DEFAULT  ABS BuildAttributes$$ARM_ISAv6$E$P$J$K$S$VFPv2$PE$FZ_POSZERO$PLD1$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$REQ8$PRES8$EABIv2
+     9: 00000000     0 OBJECT  LOCAL  DEFAULT    7 __ARM_grp_.debug_frame$5
+    10: 00000000     0 OBJECT  LOCAL  DEFAULT    8 __ARM_grp_.debug_frame$8
+    11: 00000000   104 FUNC    GLOBAL HIDDEN     1 _ZN14MenuResetSceneD0Ev
+    12: 00000000    96 FUNC    GLOBAL HIDDEN     2 _ZN14MenuResetSceneD1Ev
+    13: 00000000     0 FUNC    GLOBAL HIDDEN     2 _ZN14MenuResetSceneD2Ev
+    14: 00000000     0 FUNC    GLOBAL HIDDEN   UND _ZN9MenuSceneD2Ev
+    15: 00000000     0 OBJECT  GLOBAL HIDDEN   UND _ZTV14MenuResetScene
+    16: 00000000     0 FUNC    GLOBAL HIDDEN   UND _ZdlPv
+    17: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00170f6c
+    18: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00171e30
+    19: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00176dc8
+    20: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00176df4
+    21: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00176e24
+    22: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00177084
+    23: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00177124
+    24: 00000000     0 FUNC    GLOBAL HIDDEN   UND func_00181b58
+    25: 00000000     0 FUNC    WEAK   HIDDEN   UND Lib$$Request$$armlib
+    26: 00000000     0 FUNC    WEAK   HIDDEN   UND Lib$$Request$$cpplib
