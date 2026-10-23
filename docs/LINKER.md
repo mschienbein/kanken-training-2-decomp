@@ -15,14 +15,14 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9–v13** implementations remain selectable, immutable and
+The recorded experimental **v9–v14** implementations remain selectable, immutable and
 **unadopted**. Their sealed FAILs remain under `scratch/review/linker-v10/` through
-`scratch/review/linker-v13/`. V13 fixed foreign companion edges, but V13-F01 exposed
-zero-sized supplied definitions being omitted from the personality namespace.
-The new experimental opt-in **`armlink5-inline-branchnop-v14`** resolves the complete
-supplied symbol inventory before every R1/U1 decision. Its proposed gate revision and
-systematic audit are under `scratch/integrator/linker-unref/`, pending independent review.
-`docs/GATES.md` remains frozen v1.19; defaults remain v2/none.
+`scratch/review/linker-v14/`. V14 fixed the complete namespace, but V14-F01 refuted its
+nested original-object witness/accounting claims and AUDIT pairs P13/C26 and P20/C26.
+The new experimental opt-in **`armlink5-inline-branchnop-v15`** deliberately narrows U1
+to one compile-attested, non-nested object, refusing aggregate/archive/ambiguous inputs.
+The revised gate text and `AUDIT-v15.json` are under `scratch/integrator/linker-unref/`.
+They require independent review; frozen GATES remains v1.19 and defaults remain v2/none.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -710,8 +710,81 @@ Bounded d8aef63a real commands change only model/output selection:
 Exact argv/cwd/exits, audit binding, fixture hashes and complete real receipts/actions are
 `scratch/integrator/linker-unref/evidence-v14.json`; fresh real receipts are under
 `scratch/integrator/linker-unref/real-menu-{reset,scene}-v14-r2/`.
-The proposed v1.20 text now names v14. No adoption, full suite/build, checkpoint rewrite,
+The proposed v1.20 text for that historical proposal named v14. No adoption, full suite/build, checkpoint rewrite,
 subagent execution or new credit is claimed.
+
+## Narrow single-direct-object U1 scope (experimental v15)
+
+The independent review of `5b60ef11` confirmed the namespace fix, but sealed **FAIL**
+on **V14-F01**. Original symbol scopes survived nested combination, while U1 compared
+collapsed `section_owners`: a D0-only original borrowed D1 from a different original
+after nesting, and its action named the outer bundle. Six nested variants reproduced
+this; the broad AUDIT-v14 conclusions **P13/C26 and P20/C26 are withdrawn**.
+
+Only **`armlink5-inline-branchnop-v15`** enables the narrower scope:
+
+- U1 and its own-unwind exemption require **exactly one directly supplied, compile-attested
+  object**. Every candidate section, symbol and relocation reference read must share its
+  real immutable `ObjectOrigin`. Original-image/catalogue/config witnesses remain separate
+  hash-bound reference evidence, not additional candidate TUs.
+- Every `ObjectFile.combine` result refuses U1, including a single-element wrapper,
+  a valid complete unit plus an empty/unrelated unit, flat multi-object and nested inputs.
+  Archive members, declared bundles, ambiguous defaults and missing/mixed origins also
+  refuse before namespace/witness/placement. Equal filenames, bytes and unit-owner numbers
+  never establish original identity.
+- Raw readers/default comparisons are ambiguous. The successful compiler dispatch in
+  `match.run`/`compid` explicitly attests the object it just compiled. A raw API caller
+  must supply genuine direct-input provenance; re-reading a saved aggregate is not an
+  attestation. Archive-labelled/member or declared bundled input cannot become direct merely
+  by assigning an outer ledger label.
+- The in-scope D1 witness consumes original section **and symbol** identity, not
+  `section_owners`. Complete input origin maps cover zero/nonallocated headers and symbols
+  too; a missing/foreign entry refuses. All namespace, mapping, structural, reference,
+  retention and whole-extent rules remain mandatory.
+
+**R1 review:** its linking proof has no same-original-object D1 assumption; it uses actual
+section/target identities and retains cross-object helper support. The related attribution
+bug did affect R1 (and optional L1) object labels, so v15 preserves original provenance
+separately: `object` identifies the original reader input, `unit` identifies the outer
+ledger unit, and `input_kind` makes provenance class explicit. Build helper filtering and
+acceptance helper-revision expansion consume `unit`; they never mistake an ELF output path
+for a ledger source. Known-reader R1 semantics remain unchanged. Missing original identity
+does not produce invented provenance.
+
+`tests/test_unreferenced_v15.py` reproduces all six nested witness loans and both flat orders,
+then covers single wrappers, extra empty inputs, archives/bundles, unattested/default
+readers, equal-path distinct identities, missing/mixed maps and direct positive controls.
+Eight R1 flat/nested/both-order/direct/archive variants reproduce their synthetic original
+caller bytes and preserve helper.o independently of the outer unit. The revised-helper
+dependency test confirms review expansion follows the ledger unit.
+
+`AUDIT-v15.json` records **20 paths × 42 case classes = 840 pairs**, marking out-of-scope
+U1 cases **“refused by scope”** with regressions. It rechecks all **100** prior
+owner-dependent safe claims and explicitly withdraws the two refuted conclusions instead
+of extending their broad proofs. The author audit remains subject to independent review;
+build filtering is source-reviewed, not represented as a production build execution.
+
+Executed focused selections: **227 tests, exit 0, OK**, plus **13 checkpoint-binding
+tests, exit 0, OK**. The final sealed replay has **91 cases, exit 0**: **58 scope
+refusals**, **28 inherited refusals**, and **five direct matches**, including an actual
+byte comparison of the review's direct control. Two formerly positive multi-object controls
+are intentionally refused. An earlier probe's direct control established linker acceptance
+only; the later immutable probe adds the actual comparison rather than claiming the former
+as byte-match evidence.
+
+The exact d8aef63a real commands change only model/output selection:
+
+- **MenuResetScene attempt008: exit 0**, D1 **MATCH, 100 B at `0x001acbb4`**; exactly one
+  target-null action removes D0 **108 B** plus own exidx **8 B**, with original direct
+  provenance, no extab or branch rewrite.
+- **MenuScene attempt006: exit 2**, live vtable ABS32 at `.constdata__ZTV9MenuScene+0xc`;
+  no elimination action.
+
+Commands, audit binding, hashes and receipts are `scratch/integrator/linker-unref/evidence-v15.json`;
+fresh real records are under `real-menu-{reset,scene}-v15-r1/`.
+The current builder always supplies an aggregate, so v15 **does not authorize U1 in whole-ledger
+builds**, even with one wrapped unit. No per-unit removal workaround or future broader model is
+implicit. The v1.20 draft now names v15; no adoption, full suite/build, subagents or new credit.
 
 ## Sources
 

@@ -107,7 +107,9 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             claims[address] = unit["source"]
     definitions: dict[str, str] = {}  # global (non-COMDAT) definition name -> defining unit
     function_definitions: dict[int, str] = {}  # credited stable identity -> emitted defining unit
-    objects = [inplace.ObjectFile(out / "obj" / Path(unit["source"]).with_suffix(".o")) for unit in matches["units"]]
+    provenance = {"input_kind": "object"} if linker.model.single_object_u1 else {}
+    objects = [inplace.ObjectFile(out / "obj" / Path(unit["source"]).with_suffix(".o"), **provenance)
+               for unit in matches["units"]]
     # Inspect the original objects before combining/linking can coalesce COMDAT copies. Removing
     # an old credit claim must never hide an emitted body, even under another bound symbol name.
     for unit, objfile in zip(matches["units"], objects):
@@ -174,7 +176,8 @@ def build(name: str, matches_path: Path = MATCHES, fresh: bool = False, jobs: in
             "linker_rewrites": rewrites,
             "literal_rebindings": [row for row in linker.literal_rebindings
                                    if combined.section_owners[row["section_index"]] == owner],
-            "removed_callees": [row for row in linker.removed_callees if row["object"] == unit["source"]],
+            "removed_callees": [row for row in linker.removed_callees
+                                if row.get("unit", row["object"]) == unit["source"]],
             **({
                 "removed_special_members": [row for row in linker.removed_special_members
                                             if combined.section_owners[row["section_index"]] == owner],

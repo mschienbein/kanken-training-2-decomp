@@ -160,14 +160,17 @@ class Context:
                 "path": profiles_path.as_posix(), "sha256": sha256(profiles_path)},
         }
 
-    def compare(self, obj_path: Path, extra_objects: list[Path] | None = None) -> list[Comparison]:
+    def compare(self, obj_path: Path, extra_objects: list[Path] | None = None, *,
+                compiled_object: bool = False) -> list[Comparison]:
         """Link the object in place; one result row per catalogued function it defines, listing
         the branches the linker model wrote as armlink's optimisations (`linker_rewrites`)."""
         self.literal_rebindings, self.removed_callees = [], []
         self.removed_special_members, self.section_rewrites = [], []
-        obj = inplace.ObjectFile(obj_path)
+        provenance = ({"input_kind": "object" if compiled_object else "ambiguous"}
+                      if getattr(self.model, "single_object_u1", False) else {})
+        obj = inplace.ObjectFile(obj_path, **provenance)
         if extra_objects:
-            obj = inplace.ObjectFile.combine([obj, *(inplace.ObjectFile(path) for path in extra_objects)])
+            obj = inplace.ObjectFile.combine([obj, *(inplace.ObjectFile(path, **provenance) for path in extra_objects)])
         linker = inplace.InPlaceLinker(self.image, self.functions, self.resolver, self.image.bss,
                                        self.model, self.literal_model)
         linked = linker.link(obj)
@@ -234,7 +237,8 @@ def run(source: Path, profile: toolchain.Profile, catalogue_path: Path, out_dir:
         else:
             toolchain.compile_source(profile, extra, companion)
         companions.append(companion)
-    results = ctx.compare(obj_path, companions)
+    results = (ctx.compare(obj_path, companions, compiled_object=True) if getattr(ctx.model, "single_object_u1", False)
+               else ctx.compare(obj_path, companions))
     if not results:
         raise inplace.LinkError("candidate defines no surviving catalogued functions to compare")
     inputs = {}

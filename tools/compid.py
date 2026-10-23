@@ -66,7 +66,8 @@ def run_grid(ctx, sources: list[Path], grid: dict, out: Path) -> dict:
                         toolchain.compile_source(profile, src.resolve(), obj, cache=False)
                     else:
                         toolchain.compile_source(profile, src.resolve(), obj)
-                    results = ctx.compare(obj)
+                    results = (ctx.compare(obj, compiled_object=True)
+                               if getattr(ctx.model, "single_object_u1", False) else ctx.compare(obj))
                     if checked:
                         comparison_inputs.setdefault(src.as_posix(), {})[pair] = ctx.evidence_inputs(profile, src.resolve(), obj)
                     if getattr(ctx, "section_rewrites", []):

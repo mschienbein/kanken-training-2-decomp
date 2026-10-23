@@ -251,7 +251,8 @@ def linker_review_summary(receipt: dict, changed_units: set[str], revised_header
         for function, rows in sorted(unit.get("linker_rewrites", {}).items()):
             if not rows:
                 continue
-            helpers = {row["removed_callee"]["object"] for row in rows if row.get("removed_callee")}
+            helpers = {row["removed_callee"].get("unit", row["removed_callee"]["object"])
+                       for row in rows if row.get("removed_callee")}
             for row in rows:
                 helpers.update(comdat_sources.get(row.get("removed_callee", {}).get("comdat"), ()))
             changed_helpers = sorted(helpers & changed_units)

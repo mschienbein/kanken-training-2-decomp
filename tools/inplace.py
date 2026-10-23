@@ -694,15 +694,35 @@ class Section:
     metadata: SectionMetadata | None = None  # v12 requires actual ELF metadata, never guessed flags
 
 
+@dataclass(frozen=True, eq=False)
+class ObjectOrigin:
+    """Identity of an actual reader input, independent of names, ledger units and nesting."""
+
+    label: str
+    kind: str
+
+    def __deepcopy__(self, memo: dict) -> ObjectOrigin:
+        return self
+
+
 class ObjectFile:
     """The allocatable sections, symbols and REL relocations of one armcc object."""
 
-    def __init__(self, path: Path, *, data: bytes | None = None):
+    def __init__(self, path: Path, *, data: bytes | None = None, input_kind: str = "ambiguous"):
         self.path = path
+        if input_kind not in ("object", "archive_member", "bundle", "ambiguous"):
+            raise LinkError(f"{path}: unknown object input provenance kind")
+        if re.search(r"\.(?:a|lib|zip|jar|7z)(?:$|[(:!]|/)", path.as_posix(), re.IGNORECASE):
+            input_kind = "archive_member"
+        self.origin = ObjectOrigin(str(path), input_kind)
+        self.input_origins = (self.origin,)
+        self.combination_depth = 0
         with path.open("rb") if data is None else BytesIO(data) as f:
             elf = ELFFile(f)
             if elf["e_machine"] != "EM_ARM" or elf["e_type"] != "ET_REL":
                 raise LinkError(f"{path}: not an ARM relocatable object")
+            self.input_section_count = elf.num_sections()
+            self.section_origins = {index: self.origin for index in range(self.input_section_count)}
             self.sections: dict[int, Section] = {}
             # Zero-sized allocated sections cannot be placed, but can still retain dependencies.
             # Preserve them separately for v11; frozen models keep their original placement/census.
@@ -741,6 +761,7 @@ class ObjectFile:
                        sym["st_shndx"], sym["st_other"]["visibility"])
                 for sym in symtab.iter_symbols()
             ]
+            self.symbol_origins = {id(symbol): self.origin for symbol in self.symbols}
             self.symbol_table_issues += tuple(
                 "unsupported or unrepresented symbol section index" for symbol in self.symbols
                 if (isinstance(symbol.shndx, int) and not 0 < symbol.shndx < elf.num_sections()
@@ -818,6 +839,11 @@ class ObjectFile:
         merged.dependency_sections = {}
         merged.section_owners, merged.section_objects = {}, {}
         merged.section_groups = []
+        merged.origin = None
+        merged.combination_depth = 1 + max((getattr(obj, "combination_depth", 0) for obj in objects), default=0)
+        merged.input_origins = tuple(dict.fromkeys(origin for obj in objects
+                                                  for origin in getattr(obj, "input_origins", ())))
+        merged.section_origins, merged.symbol_origins = {}, {}
         merged.symbol_owners = {}
         merged.symbol_table_issues = tuple(issue for obj in objects
                                            for issue in getattr(obj, "symbol_table_issues", ()))
@@ -831,6 +857,8 @@ class ObjectFile:
                 indices[index] = dependency_index
                 dependency_index += 1
             indices_by_object.append(indices)
+            for index, origin in getattr(obj, "section_origins", {}).items():
+                merged.section_origins[indices.get(index, f"UNALLOCATED_{owner}_{index}")] = origin
             symbols = {}
             scopes = {}
             for sym in obj.symbols:
@@ -843,6 +871,7 @@ class ObjectFile:
                     scopes[scope] = next_scope
                     next_scope += 1
                 merged.symbol_owners[id(symbols[id(sym)])] = scopes[scope]
+                merged.symbol_origins[id(symbols[id(sym)])] = getattr(obj, "symbol_origins", {}).get(id(sym))
             symbols_by_object.append(symbols)
             merged.symbols.extend(symbols.values())
             for flags, signature, members in getattr(obj, "section_groups", ()):
@@ -1175,6 +1204,48 @@ class InPlaceLinker:
     def __repr__(self) -> str:
         return f"InPlaceLinker(functions={len(self.functions)}, bss=({self.bss[0]:#x}, {self.bss[1]:#x}))"
 
+    def _object_provenance(self, obj: ObjectFile, index: int) -> dict:
+        unit = getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate")))
+        if not self.model.single_object_u1:
+            return {"object": unit}
+        origin = getattr(obj, "section_origins", {}).get(index)
+        if not isinstance(origin, ObjectOrigin):
+            raise LinkError("original defining-object identity is unavailable")
+        return {"object": origin.label, "unit": unit, "input_kind": origin.kind}
+
+    def _check_u1_input_scope(self, obj: ObjectFile, names: dict[str, int]) -> None:
+        """V15 has no cross-object U1 proof: reject derived/ambiguous inputs before reading witnesses."""
+        if not self.model.single_object_u1:
+            return
+        by_section = {}
+        for symbol in obj.symbols:
+            if symbol.shndx in obj.sections:
+                by_section.setdefault(symbol.shndx, []).append(symbol)
+        attempted = any(
+            any(symbol.kind == "STT_FUNC" and deleting_destructor_class(symbol.name) is not None
+                for symbol in symbols)
+            and not any(symbol.name in names or self.resolver.lookup(symbol.name) is not None
+                        for symbol in symbols if symbol.name)
+            for symbols in by_section.values())
+        if not attempted:
+            return
+        origin = getattr(obj, "origin", None)
+        sections = getattr(obj, "section_origins", {})
+        symbols = getattr(obj, "symbol_origins", {})
+        allocated = obj.sections | getattr(obj, "dependency_sections", {})
+        if (not isinstance(origin, ObjectOrigin) or origin.kind != "object"
+                or getattr(obj, "combination_depth", None) != 0
+                or getattr(obj, "input_origins", ()) != (origin,)
+                or len(sections) != getattr(obj, "input_section_count", None)
+                or any(value is not origin for value in sections.values())
+                or any(sections.get(index) is not origin for index in allocated)
+                or len(symbols) != len(obj.symbols)
+                or any(symbols.get(id(symbol)) is not origin for symbol in obj.symbols)
+                or any(symbols.get(id(reference)) is not origin
+                       for section in allocated.values() for relocation in section.relocs
+                       for reference in (relocation.symbol, relocation.reference) if reference is not None)):
+            raise LinkError("U1 refused by scope: requires one directly supplied, non-nested object with complete identity")
+
     # -- placement -----------------------------------------------------------------------------
 
     def place(self, obj: ObjectFile, names_to_address: dict[str, int]) -> dict[int, Placement]:
@@ -1393,7 +1464,7 @@ class InPlaceLinker:
         self.literal_rebindings.append({
             "rule": "anonymous-string-records-v1", "section": sec.name, "base": base,
             "section_index": sec.index,
-            "object": getattr(obj, "section_objects", {}).get(sec.index, str(getattr(obj, "path", ""))),
+            **self._object_provenance(obj, sec.index),
             "size": sec.size, "record_count": len(records), "reference_count": references,
             "records": [{"candidate_offset": offset, "output_offset": offsets[offset],
                          "size": len(records[offset])} for offset in records],
@@ -1791,7 +1862,7 @@ class InPlaceLinker:
                 raise LinkError(f"{section.name}: retained callee ({reasons}); its call must remain a BL")
             removed[index] = {
                 "symbols": sorted(sym.name for sym in aliases), "section": section.name, "size": section.size,
-                "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate"))),
+                **self._object_provenance(obj, index),
             }
             if section.comdat:
                 removed[index]["comdat"] = section.comdat
@@ -1922,7 +1993,8 @@ class InPlaceLinker:
             for key in ("name", "symbol") if row.get(key)
         }
         removed = {}
-        owners = getattr(obj, "section_owners", {})
+        owners = (getattr(obj, "section_origins", {}) if self.model.single_object_u1
+                  else getattr(obj, "section_owners", {}))
         for index, symbols in by_section.items():
             functions = [sym for sym in symbols if sym.kind == "STT_FUNC"]
             candidates = [sym for sym in functions if deleting_destructor_class(sym.name) is not None]
@@ -1967,7 +2039,10 @@ class InPlaceLinker:
             complete_name = f"_ZN{encoded}D1Ev"
             complete = [sym for sym in obj.defined_functions() if sym.name == complete_name
                         and sym.shndx != index and _symbol_offset(sym) == 0
-                        and owners.get(sym.shndx) == owners.get(index)]
+                        and (owners.get(sym.shndx) is owners.get(index) if self.model.single_object_u1
+                             else owners.get(sym.shndx) == owners.get(index))
+                        and (not self.model.single_object_u1
+                             or getattr(obj, "symbol_origins", {}).get(id(sym)) is owners.get(index))]
             complete_target = self.resolver.lookup(complete_name)
             complete_address = names.get(complete_name, complete_target.address if complete_target else None)
             if (not complete or complete_address not in self.functions
@@ -2006,7 +2081,7 @@ class InPlaceLinker:
             row = {
                 "symbols": [destructor.name], "section": section.name, "section_index": index,
                 "size": section.size,
-                "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate"))),
+                **self._object_provenance(obj, index),
                 "evidence": {"vtable": table_name, "vtable_address": table_address,
                              "complete_destructor": complete_name, "complete_destructor_address": complete_address,
                              "d0_slot_offset": 12, "d0_slot_is_null": True, "d1_slot_agrees": True},
@@ -2235,7 +2310,7 @@ class InPlaceLinker:
             removed[owner]["unwind_sections"] = [
                 {"section": obj.sections[index].name, "section_index": index,
                  "size": obj.sections[index].size, "kind": "exidx" if index == exidx_by_owner[owner] else "extab",
-                 "object": getattr(obj, "section_objects", {}).get(index, str(getattr(obj, "path", "candidate")))}
+                 **self._object_provenance(obj, index)}
                 for index in sorted(companions) if companions[index] == owner
             ]
         return companions
@@ -2339,6 +2414,7 @@ class InPlaceLinker:
         self.rewrites, self.removed_callees = [], []
         self._removed_unwind = {}
         self._unreferenced_sections, self.removed_special_members = {}, []
+        self._check_u1_input_scope(obj, names_to_address or {})
         if self.model.complete_symbol_resolution:
             obj = obj.resolve_definitions()
         self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
