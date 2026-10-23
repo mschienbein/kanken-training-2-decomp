@@ -31,9 +31,6 @@ struct ResetStateOwner {
 };
 
 struct InputBufferState {
-#ifdef __cplusplus
-    InputBufferState();
-#endif
     void *storage;
     unsigned count, capacity;
     unsigned char enabled;
@@ -53,7 +50,6 @@ struct InputCoordinates {
 
 #ifdef __cplusplus
 struct InputDeviceState {
-    InputDeviceState();
     const InputDeviceVTable *vtable;
     InputBufferState first;
     InputBufferState second;
@@ -118,7 +114,6 @@ struct AlignmentHandle {
 extern "C" {
 #endif
 extern const struct InputDeviceVTable data_002241f8;
-extern const struct InputDeviceVTable data_00224bf8;
 struct InputDeviceState *func_00116eb0(struct InputDeviceState *object);
 extern struct InputDeviceState *func_0010e2c8(struct InputDeviceState *object);
 extern void func_00121364(void);

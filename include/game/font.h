@@ -76,15 +76,10 @@ struct GlyphWidths {
     unsigned char glyph_width;
     signed char advance;
 };
-struct FontVTable {
-    void (*destroy)(struct FontResource *font);
-    unsigned char reserved04[0x0c];
-    int (*height)(const struct FontResource *font);
-    unsigned char reserved14[0x28];
-    struct GlyphWidths (*get_widths)(const struct FontResource *font, unsigned short character);
-    unsigned char reserved40[0x28];
-    int (*texture_count)(const struct FontResource *font);
-};
+/* FontVTable intentionally remains opaque, following c009-r5. Concrete
+ * providers have distinct receiver/result contracts; no callable slots are
+ * asserted until the complete font-family recovery. GlyphWidths is only the
+ * field record used by the separate c010 width implementation. */
 
 #ifdef __cplusplus
 namespace nw { namespace font { struct Glyph; } }
@@ -143,11 +138,5 @@ void func_001f4b58(struct FontResource *font, struct W12cGlyphMetrics *glyph, un
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-int func_001efcec(const FontResource *font, unsigned short character);
-int func_001f4994(const FontResource *font, unsigned short character);
-}
-#endif
 
 #endif

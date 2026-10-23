@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "status": "not-run-no-heavy-grant-requested",
+  "prerequisites": [
+    "Rebase the candidate transaction on finalized c009-r5 and corrected/finalized c010; do not merge the stale ancestor wholesale.",
+    "Reconcile the separately owned c010 font GlyphWidths/FontResource cache fields against the final c010 source; FontVTable/data_00223d98 must stay opaque.",
+    "Four c009-r5 NEW font-wrapper holds (144 B) remain c009-owned; do not re-add or charge them to c011.",
+    "Recompute candidate ledger, moves, R1/header dependencies and unique emitted owners on the actual finalized predecessor."
+  ],
+  "commands": [
+    {
+      "purpose": "G3 whole-ledger audit after composing finalized predecessors",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/interfaces.py",
+        "--matches",
+        "<fresh-composed-ledger>",
+        "--allow-unchecked-cpp",
+        "--json",
+        "<fresh-output>"
+      ],
+      "heavy": true
+    },
+    {
+      "purpose": "Whole-ledger caller-contract audit; adjudicate every finding",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "<fresh-composed-ledger>",
+        "--json",
+        "<fresh-output>"
+      ],
+      "heavy": true
+    },
+    {
+      "purpose": "prepare: two fresh full builds, suite and ownership closure; Main only",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        ".venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "<new-unique-name>",
+        "--candidates",
+        "config/candidates/c011.json",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--allow-unchecked-cpp"
+      ],
+      "heavy": true
+    }
+  ],
+  "qualifications": [
+    "Template paths/names are deliberately not executable until Main freezes the rebased predecessor and chooses immutable output names.",
+    "No accepted or prepared identity is deferred. No heavy command, acceptance registration, finalize or push was run."
+  ]
+}

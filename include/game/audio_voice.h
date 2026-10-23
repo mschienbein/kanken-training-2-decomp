@@ -421,9 +421,21 @@ struct AudioFadeController {
     struct AudioVoice *voices;
 };
 
+/* c009-r5: one phase-in/value-out protocol for all five installed providers.
+ * The retained allocation extent follows the initializer's 0x200-byte clear. */
+struct GraphicsConverters {
+    float (*wrap)(float phase);
+    float (*curve)(float phase);
+    float (*identity)(float phase);
+    float (*step)(float phase);
+    float (*random)(float phase);
+    unsigned char reserved14[0x1ec];
+};
+
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern struct GraphicsConverters bss_004b8440;
 extern struct AudioCounter *func_00156dac(struct AudioCounter *counter);
 extern unsigned int func_00180418(void);
 extern void func_0015268c(struct AudioChannelState *state, float volume);
@@ -446,7 +458,7 @@ extern void func_001d4850(struct ResetState001d4850 *state);
 extern void func_001d0164(struct ResourceState001d0164 *state);
 extern int func_00148a3c(struct ServiceCoordinator *context, unsigned value);
 extern int func_001549d8(struct ServiceCoordinator *context);
-extern float func_00149388(void);
+extern float func_00149388(float phase);
 extern void func_0014ee5c(struct AudioVoiceGroup *group);
 extern void func_0014fc78(struct AudioChannel *channel, float volume);
 extern float func_00151a1c(const struct AudioLinearRamp *ramp);
