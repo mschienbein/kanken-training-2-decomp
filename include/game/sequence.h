@@ -132,7 +132,7 @@ extern void func_0017deec(struct AnimationTrack *track);
 extern void func_001d4db0(struct AudioVoice *voice, int event, void *context);
 extern void func_00141594(const unsigned int *handle, unsigned int *out);
 extern void func_00144960(void *const *value, void **out);
-extern struct WordPair *func_0014d288(struct WordPair *pair);
+extern void *func_0014d288(void *storage);
 extern void func_0014f7d8(const unsigned int *value, unsigned int *out);
 extern bool func_00172f28(const unsigned int *kind);
 extern void func_0017e2bc(struct AnimationTrack *track);

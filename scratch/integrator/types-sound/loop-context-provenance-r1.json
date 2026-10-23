@@ -1,0 +1,27 @@
+{
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "source_report": "scratch/authors/ns100/RESULT.json",
+  "source_report_sha256": "5e959cdf9ce8ca28d0842776e5f4b1087043b00b7a7957db3663ddbd2979bc65",
+  "evidence": {
+    "function": "func_00153af8",
+    "function_sha256": "6bbc8ed1e5f782bc59309b911f7c5fe9b6ff499527c4fcdc32307ad46b79159f",
+    "copy_call": {
+      "site": "0x153bcc",
+      "target": "0x17da60",
+      "arg0_origin": "(((entry.r0+unknown-write.0x153b90)+(load(entry.r2+0x0)+load(entry.r2+0x0)))+0x530)"
+    },
+    "record_clear_call": {
+      "site": "0x153bd4",
+      "target": "0x17da3c",
+      "arg0_origin": "(((entry.r0+unknown-write.0x153b90)+(load(entry.r2+0x0)+load(entry.r2+0x0)))+0x230)"
+    },
+    "record_field_store": {
+      "site": "0x153bd8",
+      "base": "(((entry.r0+unknown-write.0x153b90)+(load(entry.r2+0x0)+load(entry.r2+0x0)))+0x230)",
+      "field_offset": 8,
+      "value_origin": "(((entry.r0+unknown-write.0x153b90)+(load(entry.r2+0x0)+load(entry.r2+0x0)))+0x530)"
+    },
+    "same_value_as_copy_destination": true
+  },
+  "qualification": "Address/offset/value-origin facts only; the loop-context field name and const qualifier are source-level inferences. Native copy destination is the real per-channel ADPCM loop-state record; no match/admission of 00153af8 is claimed."
+}

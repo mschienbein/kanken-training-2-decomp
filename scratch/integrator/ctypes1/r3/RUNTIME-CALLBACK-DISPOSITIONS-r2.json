@@ -1,0 +1,4211 @@
+{
+  "schema_version": 1,
+  "input_sha256": "a9bbac9992ea67218441d6918899d69029b286897d5de0662df7e13e680fd13e",
+  "baseline_commit": "f7ca72c56e3ebb9095e2f9b5c6def9d77f2ae30f",
+  "row_counts": {
+    "fixed": 32,
+    "held": 45,
+    "not-applicable": 4
+  },
+  "category_counts": {
+    "definite_type_or_role_mismatch": 48,
+    "custom_nominal_family": 7,
+    "unmodeled_passed_code_candidate": 26
+  },
+  "rows": [
+    {
+      "row_id": "definite-00",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00216140",
+      "input": {
+        "address": "0x00216140",
+        "name": "func_00216140",
+        "aliases": [
+          "func_00216140"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave4/func_00216140.c",
+        "declared_provider_type": "function(pointer to (void), pointer to (function(pointer to (void)) -> void), pointer to (function(void) -> void)) -> void",
+        "declaration_site": {
+          "source": "src/wave4/func_00216140.c",
+          "line": 3
+        },
+        "source_sha256": "716b7d64cc2fe84b56eb1aa4012f58376df751b7548026b800ad174cacd5ac2e",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave4/func_00216140.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-040-func_00216140/func_00216140.result.json",
+        "receipt_sha256": "ec0f0e6929887a4e766acc5e2ad45388c5a5cf9f305c61d9eff51bee62401fd6"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x00214d9c",
+          "site": "0x00214e1c",
+          "entrypoint": "0x00100c94",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00100c94",
+          "site": "0x00100c98",
+          "entrypoint": "0x00100c9c",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/functions.h",
+        "src/wave4/func_00216140.c"
+      ]
+    },
+    {
+      "row_id": "definite-01",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00216e4c",
+      "input": {
+        "address": "0x00216e4c",
+        "name": "func_00216e4c",
+        "aliases": [
+          "func_00216e4c"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave4/func_00216e4c.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave4/func_00216e4c.c",
+          "line": 1
+        },
+        "source_sha256": "eadef9d18ea3accd01ba465fb4d2b814affe974981457f6de7e36f497bc1d8c9",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave4/func_00216e4c.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-042-func_00216e4c/func_00216e4c.result.json",
+        "receipt_sha256": "8a5e4647bd760898cfe21ae7465bef686ccd4f3575a42dbd13782ccc0efc3044"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x00214e40",
+          "site": "0x00214ec8",
+          "entrypoint": "0x00100c94",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00100c94",
+          "site": "0x00100c98",
+          "entrypoint": "0x00100c9c",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave4/func_00216e4c.c"
+      ]
+    },
+    {
+      "row_id": "definite-02",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0012d104",
+      "input": {
+        "address": "0x0012d104",
+        "name": "func_0012d104",
+        "aliases": [
+          "func_0012d104"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave13/func_0012d104.c",
+        "declared_provider_type": "function(pointer to (struct ThreadStartContext)) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_0012d104.c",
+          "line": 4
+        },
+        "source_sha256": "a49b34fafcdea9be69af55f72da4c7127d1708892e1acc70522c3ceccdb18fd8",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_0012d104.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-005-func_0012d104/func_0012d104.result.json",
+        "receipt_sha256": "c24fd7d9296ef65ecc3b0de49aa919094304cd4fd16fea183f86e91b658595be"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x0019dd50",
+          "site": "0x0019de08",
+          "entrypoint": "0x0011ef08",
+          "category": "kernel_thread_entry",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_0012d104.c"
+      ]
+    },
+    {
+      "row_id": "definite-03",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001bb9b4",
+      "input": {
+        "address": "0x001bb9b4",
+        "name": "func_001bb9b4",
+        "aliases": [
+          "func_001bb9b4"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/sdk/func_001bb9b4.cpp",
+        "declared_provider_type": "LargeHandleOwner * func_001bb9b4(LargeHandleOwner *object);",
+        "declaration_site": {
+          "source": "src/sdk/func_001bb9b4.cpp",
+          "line": 14
+        },
+        "source_sha256": "6fe7c01ee0f237de1bd276d268146d913e84c7321ed8f8a9546cdded5c2cff1d",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk/func_001bb9b4.cpp",
+      "disposition": "held",
+      "reason": "Depends on the unclosed LargeResourceElement/CompositeResource cleanup family and specialized typed array destruction; no byte-offset/punning bridge is admissible in a new callback repair.",
+      "restored_sha256": "6fe7c01ee0f237de1bd276d268146d913e84c7321ed8f8a9546cdded5c2cff1d",
+      "original_consumers": [
+        {
+          "caller": "0x001f5170",
+          "site": "0x001f5200",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-04",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001bba58",
+      "input": {
+        "address": "0x001bba58",
+        "name": "func_001bba58",
+        "aliases": [
+          "func_001bba58"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/retries/func_001bba58.cpp",
+        "declared_provider_type": "JoinedHandleOwner18 * func_001bba58(JoinedHandleOwner18 *object);",
+        "declaration_site": {
+          "source": "src/retries/func_001bba58.cpp",
+          "line": 13
+        },
+        "source_sha256": "7e97563d9b6f372e22ce7fc281275c144307739699e9fe55169c4867b1f63e39",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/retries/func_001bba58.cpp",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-023-func_001bba58/func_001bba58.result.json",
+        "receipt_sha256": "bffe39962b46f0bcc9c1112e4516b7c8d91cef53a89559f0f7127defae2f8fc7"
+      },
+      "restored_sha256": "7e97563d9b6f372e22ce7fc281275c144307739699e9fe55169c4867b1f63e39",
+      "baseline_sha256": "7e97563d9b6f372e22ce7fc281275c144307739699e9fe55169c4867b1f63e39",
+      "original_consumers": [
+        {
+          "caller": "0x001f5218",
+          "site": "0x001f5248",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-05",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c2158",
+      "input": {
+        "address": "0x001c2158",
+        "name": "func_001c2158",
+        "aliases": [
+          "func_001c2158"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/retries/func_001c2158.cpp",
+        "declared_provider_type": "JoinedHandleOwnerC20 * func_001c2158(JoinedHandleOwnerC20 *object);",
+        "declaration_site": {
+          "source": "src/retries/func_001c2158.cpp",
+          "line": 13
+        },
+        "source_sha256": "4f254dcc39ef791f272e3a04795f97d5d5d65bc103bb5935741ab3ed9be38a96",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/retries/func_001c2158.cpp",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-024-func_001c2158/func_001c2158.result.json",
+        "receipt_sha256": "e3ca5b348ff543c4a0ab436d939151aae54ec1ae032668f8d8a668c1129b5abb"
+      },
+      "restored_sha256": "4f254dcc39ef791f272e3a04795f97d5d5d65bc103bb5935741ab3ed9be38a96",
+      "baseline_sha256": "4f254dcc39ef791f272e3a04795f97d5d5d65bc103bb5935741ab3ed9be38a96",
+      "original_consumers": [
+        {
+          "caller": "0x001f5258",
+          "site": "0x001f543c",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-06",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001aff90",
+      "input": {
+        "address": "0x001aff90",
+        "name": "func_001aff90",
+        "aliases": [
+          "func_001aff90"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave3/func_001aff90.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001aff90.c",
+          "line": 1
+        },
+        "source_sha256": "1adbdb767890da04aabd9af2a0ca861ec947abe9cc5cef49728dc8124492008c",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001aff90.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-020-func_001aff90/func_001aff90.result.json",
+        "receipt_sha256": "79748eaf1e547ccefdde4bb51497511eae0e6d4c190c837b86da4663bdc5e6dd"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x001f5488",
+          "site": "0x001f55d8",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave3/func_001aff90.c"
+      ]
+    },
+    {
+      "row_id": "definite-07",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c519c",
+      "input": {
+        "address": "0x001c519c",
+        "name": "func_001c519c",
+        "aliases": [
+          "func_001c519c"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave3/func_001c519c.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001c519c.c",
+          "line": 1
+        },
+        "source_sha256": "3524a70ed37e2dd3f43103aa895bfea5233133e0fab72847ed9fb2365d425738",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001c519c.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-027-func_001c519c/func_001c519c.result.json",
+        "receipt_sha256": "454d7b797012f22015dd7aba5fc90ad572a79ef5db4f7ad74ff2206c863647b1"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x001f563c",
+          "site": "0x001f5664",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001f57d4",
+          "site": "0x001f57fc",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001f586c",
+          "site": "0x001f58a4",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00205280",
+          "site": "0x002052d4",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00212674",
+          "site": "0x002126b0",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00212ae8",
+          "site": "0x00212b10",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave3/func_001c519c.c"
+      ]
+    },
+    {
+      "row_id": "definite-08",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c4568",
+      "input": {
+        "address": "0x001c4568",
+        "name": "func_001c4568",
+        "aliases": [
+          "func_001c4568"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave3/func_001c4568.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001c4568.c",
+          "line": 1
+        },
+        "source_sha256": "006f0f21df119d325d3f88ef451729247676ec0b63bff092375678ef268755d1",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001c4568.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-025-func_001c4568/func_001c4568.result.json",
+        "receipt_sha256": "a816f1aaea2318385fb8b5cff03af1ae300973f90aff192033c4ca3cd6810fef"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x001f5674",
+          "site": "0x001f574c",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave3/func_001c4568.c"
+      ]
+    },
+    {
+      "row_id": "definite-09",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c5198",
+      "input": {
+        "address": "0x001c5198",
+        "name": "func_001c5198",
+        "aliases": [
+          "func_001c5198"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave3/func_001c5198.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001c5198.c",
+          "line": 1
+        },
+        "source_sha256": "7030abf8d359278f84365e840d7a26d5e408c5cac181300161bb205416d02725",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001c5198.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-026-func_001c5198/func_001c5198.result.json",
+        "receipt_sha256": "73e8989d67ff573d629ece97eeca49263fdba7f6ffef6dddaeb7d4d6ea29d0a0"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x001f5944",
+          "site": "0x001f595c",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00214d18",
+          "site": "0x00214d78",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave3/func_001c5198.c"
+      ]
+    },
+    {
+      "row_id": "definite-10",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001e7fdc",
+      "input": {
+        "address": "0x001e7fdc",
+        "name": "func_001e7fdc",
+        "aliases": [
+          "func_001e7fdc"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave17/func_001e7fdc.cpp",
+        "declared_provider_type": "void func_001e7fdc(ScreenResourceManager *scene);",
+        "declaration_site": {
+          "source": "src/wave17/func_001e7fdc.cpp",
+          "line": 5
+        },
+        "source_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave17/func_001e7fdc.cpp",
+      "disposition": "held",
+      "reason": "Also the installed scene cleanup provider in the quarantined scene-table family. Erasing the native/scene receiver to satisfy atexit would break the other callable owner; complete native family/U1 remains required.",
+      "restored_sha256": "e010a3a84431433ded34a1cad9046ec4e972a7c33dbe05e2a9b5b6d0fcff1afb",
+      "original_consumers": [
+        {
+          "caller": "0x00203810",
+          "site": "0x002039b8",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-11",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c52bc",
+      "input": {
+        "address": "0x001c52bc",
+        "name": "func_001c52bc",
+        "aliases": [
+          "_ZN11OwnedHandleD1Ev",
+          "func_001c52bc"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/sdk/func_001c52bc.c",
+        "declared_provider_type": "function(pointer to (struct WaitableHandle)) -> pointer to (struct WaitableHandle)",
+        "declaration_site": {
+          "source": "src/sdk/func_001c52bc.c",
+          "line": 3
+        },
+        "source_sha256": "ce4ccd21a26c6764ca2c43340f96a95b919a1b862cc0a0ff6717ca437843f2d2",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk/func_001c52bc.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-031-func_001c52bc/func_001c52bc.result.json",
+        "receipt_sha256": "41c54001991c0cc6a6d29431586c988a2a6a9e5c9b10f587ea6e652bfc678a88"
+      },
+      "restored_sha256": "ce4ccd21a26c6764ca2c43340f96a95b919a1b862cc0a0ff6717ca437843f2d2",
+      "baseline_sha256": "ce4ccd21a26c6764ca2c43340f96a95b919a1b862cc0a0ff6717ca437843f2d2",
+      "original_consumers": [
+        {
+          "caller": "0x00205320",
+          "site": "0x0020536c",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "source": "src/wave11/func_00205320.cpp",
+            "kind": "credited source body; final whole-proposal MATCH binds original callsite, including implicit compiler/runtime calls"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-12",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c5738",
+      "input": {
+        "address": "0x001c5738",
+        "name": "func_001c5738",
+        "aliases": [
+          "func_001c5738"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/sdk/func_001c5738.c",
+        "declared_provider_type": "function(pointer to (struct KernelHandleOwner)) -> pointer to (struct KernelHandleOwner)",
+        "declaration_site": {
+          "source": "src/sdk/func_001c5738.c",
+          "line": 7
+        },
+        "source_sha256": "def959a11e5ee95a88f1af5aa36bb150ca8272e8a7f745bf59ed5a473e696c32",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk/func_001c5738.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-032-func_001c5738/func_001c5738.result.json",
+        "receipt_sha256": "6ed86368c7d6505af12e3d1369119a64a3d405f6c68308113051f9ef92c7b218"
+      },
+      "restored_sha256": "def959a11e5ee95a88f1af5aa36bb150ca8272e8a7f745bf59ed5a473e696c32",
+      "baseline_sha256": "def959a11e5ee95a88f1af5aa36bb150ca8272e8a7f745bf59ed5a473e696c32",
+      "original_consumers": [
+        {
+          "caller": "0x002069ec",
+          "site": "0x00206a34",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-13",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c58d0",
+      "input": {
+        "address": "0x001c58d0",
+        "name": "func_001c58d0",
+        "aliases": [
+          "func_001c58d0"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/sdk2/func_001c58d0.cpp",
+        "declared_provider_type": "DualHandleState * func_001c58d0(DualHandleState *object);",
+        "declaration_site": {
+          "source": "src/sdk2/func_001c58d0.cpp",
+          "line": 2
+        },
+        "source_sha256": "d69fd117cb87bef7cb1a97b0acd5c5316e2c45b6d2bffcfe7e826a171a272e0c",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk2/func_001c58d0.cpp",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-034-func_001c58d0/func_001c58d0.result.json",
+        "receipt_sha256": "6a44fc0a94c8ba0757a7186d3021259486381223017388372715edb79e856d20"
+      },
+      "restored_sha256": "d69fd117cb87bef7cb1a97b0acd5c5316e2c45b6d2bffcfe7e826a171a272e0c",
+      "baseline_sha256": "d69fd117cb87bef7cb1a97b0acd5c5316e2c45b6d2bffcfe7e826a171a272e0c",
+      "original_consumers": [
+        {
+          "caller": "0x00206a98",
+          "site": "0x00206ae8",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-14",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c5294",
+      "input": {
+        "address": "0x001c5294",
+        "name": "func_001c5294",
+        "aliases": [
+          "func_001c5294"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/sdk/func_001c5294.c",
+        "declared_provider_type": "function(pointer to (struct KernelHandleOwner)) -> pointer to (struct KernelHandleOwner)",
+        "declaration_site": {
+          "source": "src/sdk/func_001c5294.c",
+          "line": 7
+        },
+        "source_sha256": "9701aa9b821581e47ba00d80d945c3140cd5425e69fb18d7ea08aca186c2b082",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk/func_001c5294.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-030-func_001c5294/func_001c5294.result.json",
+        "receipt_sha256": "664304ec074e2826cc40d5df8a853554906d125618fff55b122cf96df9e3dc16"
+      },
+      "restored_sha256": "9701aa9b821581e47ba00d80d945c3140cd5425e69fb18d7ea08aca186c2b082",
+      "baseline_sha256": "9701aa9b821581e47ba00d80d945c3140cd5425e69fb18d7ea08aca186c2b082",
+      "original_consumers": [
+        {
+          "caller": "0x00212650",
+          "site": "0x00212664",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-15",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001d3370",
+      "input": {
+        "address": "0x001d3370",
+        "name": "func_001d3370",
+        "aliases": [
+          "func_001d3370"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave11/func_001d3370.c",
+        "declared_provider_type": "function(pointer to (struct Allocation)) -> pointer to (struct Allocation)",
+        "declaration_site": {
+          "source": "src/wave11/func_001d3370.c",
+          "line": 4
+        },
+        "source_sha256": "91699c6966a9f4b72e7b3544e05314a4ac74c54c1de9f82acc2365ca42d4a57c",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave11/func_001d3370.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-036-func_001d3370/func_001d3370.result.json",
+        "receipt_sha256": "eb8564dae5124e08084a05a3581d7702fa4910f567e330b0db4e2607fe9bbdb9"
+      },
+      "restored_sha256": "91699c6966a9f4b72e7b3544e05314a4ac74c54c1de9f82acc2365ca42d4a57c",
+      "baseline_sha256": "91699c6966a9f4b72e7b3544e05314a4ac74c54c1de9f82acc2365ca42d4a57c",
+      "original_consumers": [
+        {
+          "caller": "0x00212b20",
+          "site": "0x00212b38",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-16",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c5760",
+      "input": {
+        "address": "0x001c5760",
+        "name": "func_001c5760",
+        "aliases": [
+          "func_001c5760"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave3/func_001c5760.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001c5760.c",
+          "line": 1
+        },
+        "source_sha256": "5f8a0a3a0037c3a7fa6087957b1e6d39e3a45df07597de5f4a33bf898eae0e91",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001c5760.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-033-func_001c5760/func_001c5760.result.json",
+        "receipt_sha256": "8293ee4e62b4a97988a3dcd7042eec3139eb3f18026c65e70156177fdcc99798"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x002136fc",
+          "site": "0x00213788",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave3/func_001c5760.c"
+      ]
+    },
+    {
+      "row_id": "definite-17",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00134170",
+      "input": {
+        "address": "0x00134170",
+        "name": "func_00134170",
+        "aliases": [
+          "func_00134170"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> void",
+        "source": "src/wave17/func_00134170.cpp",
+        "declared_provider_type": "ResettableManager * func_00134170(ResettableManager *manager);",
+        "declaration_site": {
+          "source": "src/wave17/func_00134170.cpp",
+          "line": 5
+        },
+        "source_sha256": "8fe5877f5d7b7fd3d7f7732ad6ce90d6c505271c71c1384b54f032eca86bddce",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave17/func_00134170.cpp",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-007-func_00134170/func_00134170.result.json",
+        "receipt_sha256": "b4f6cf6a120f080c489da22f825bbed1198223186d03924605f0039ee53c200f"
+      },
+      "actual_type": "function(pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x00214164",
+          "site": "0x002142e8",
+          "entrypoint": "0x00164ebc",
+          "category": "atexit_noninvoking_registration",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/resettable_manager.h",
+        "src/wave17/func_00134170.cpp"
+      ]
+    },
+    {
+      "row_id": "definite-18",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0011ee94",
+      "input": {
+        "address": "0x0011ee94",
+        "name": "func_0011ee94",
+        "aliases": [
+          "func_0011ee94"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_0011ee94.c",
+        "declared_provider_type": "function(pointer to (struct PoolList)) -> pointer to (struct PoolList)",
+        "declaration_site": {
+          "source": "src/wave13/func_0011ee94.c",
+          "line": 5
+        },
+        "source_sha256": "53b60de57bf17d9c78ecd78017d1c2aeef072e2b7533bfc76675741afb064cbd",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_0011ee94.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-003-func_0011ee94/func_0011ee94.result.json",
+        "receipt_sha256": "bb64ebe4a5899a71a4c4e08d1018bb012a4c29ebf55239a2337f7749dd280292"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x0010e3a0",
+          "site": "0x0010e408",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 128
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_0011ee94.c"
+      ]
+    },
+    {
+      "row_id": "definite-19",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0011eeac",
+      "input": {
+        "address": "0x0011eeac",
+        "name": "func_0011eeac",
+        "aliases": [
+          "func_0011eeac"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_0011eeac.c",
+        "declared_provider_type": "function(pointer to (struct PoolList)) -> pointer to (struct PoolList)",
+        "declaration_site": {
+          "source": "src/wave13/func_0011eeac.c",
+          "line": 5
+        },
+        "source_sha256": "fa390a9fa49ab92c7534a9c31adf4297e56d148303521a4af95ef2faa9b99f58",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_0011eeac.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-004-func_0011eeac/func_0011eeac.result.json",
+        "receipt_sha256": "056a470a8489219fa31abdb1b30950a5e53cbff1584f464c831aae2754c23063"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x0010e3a0",
+          "site": "0x0010e4cc",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 128
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_0011eeac.c"
+      ]
+    },
+    {
+      "row_id": "definite-20",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0011ee7c",
+      "input": {
+        "address": "0x0011ee7c",
+        "name": "func_0011ee7c",
+        "aliases": [
+          "func_0011ee7c"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_0011ee7c.c",
+        "declared_provider_type": "function(pointer to (struct PoolList)) -> pointer to (struct PoolList)",
+        "declaration_site": {
+          "source": "src/wave13/func_0011ee7c.c",
+          "line": 5
+        },
+        "source_sha256": "2f099780f3c0c8c79ed37d1aab0003e1350678eff79f3c1c93bfd5a343edca2c",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_0011ee7c.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-002-func_0011ee7c/func_0011ee7c.result.json",
+        "receipt_sha256": "8318efe27f00f8be75b314d0e8c3bbe6d5e44eff001cdede83a525cb3fbba8d3"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x0010e3a0",
+          "site": "0x0010e590",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 128
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_0011ee7c.c"
+      ]
+    },
+    {
+      "row_id": "definite-21",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00122670",
+      "input": {
+        "address": "0x00122670",
+        "name": "func_00122670",
+        "aliases": [
+          "_ZNK2nw3lyt4Pane11GetVtxColorEj",
+          "func_00122670"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/nw4c/lyt_Pane__GetVtxColor.cpp",
+        "emitted_symbol_receipt": "scratch/integrator/c010/match-r7-r2/u0856/lyt_Pane__GetVtxColor.result.json",
+        "emitted_symbol_receipt_sha256": "81b4ac540d6ea88c3a863ceb0bcc32826195c94e12afd594d61d131dc526ac7d",
+        "emitted_symbols": [
+          "_ZNK2nw3lyt4Pane11GetVtxColorEj"
+        ],
+        "declared_provider_type": "Native C++ member definition: _ZNK2nw3lyt4Pane11GetVtxColorEj",
+        "comparison": "INCOMPATIBLE_NATIVE_MEMBER_ROLE",
+        "abi_rule": "Only actual compiler-emitted C1/C2 or D1/D2 symbols receive native ABI treatment. A spare alias or C++ free function never receives this exception.",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/nw4c/lyt_Pane__GetVtxColor.cpp",
+      "disposition": "held",
+      "reason": "Bound native Pane::GetVtxColor returns Color and takes its native const receiver/index. A generic array callback cannot replace that genuine native member or add an alias; the shared-address/runtime role needs independent identity evidence.",
+      "restored_sha256": "aa0a4bbf8884436870430ce74b76501591c5580198138b505a6ce2848b4c030b",
+      "original_consumers": [
+        {
+          "caller": "0x00113eac",
+          "site": "0x00113ed4",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00113eac",
+          "site": "0x00113ee8",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-22",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0012fb58",
+      "input": {
+        "address": "0x0012fb58",
+        "name": "func_0012fb58",
+        "aliases": [
+          "func_0012fb58"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave9/func_0012fb58.c",
+        "declared_provider_type": "function(pointer to (unsigned int)) -> void",
+        "declaration_site": {
+          "source": "src/wave9/func_0012fb58.c",
+          "line": 2
+        },
+        "source_sha256": "73eee545b480394d6f103c1d8b90df9c118d76d62dfc3b6436513bd02eb56b21",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave9/func_0012fb58.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-006-func_0012fb58/func_0012fb58.result.json",
+        "receipt_sha256": "14175f5670c13414e8be06bed431b900c28d18a032cfe443353abe8af4486146"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x0012300c",
+          "site": "0x00123024",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 3
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave9/func_0012fb58.c"
+      ]
+    },
+    {
+      "row_id": "definite-23",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00142a54",
+      "input": {
+        "address": "0x00142a54",
+        "name": "func_00142a54",
+        "aliases": [
+          "func_00142a54"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave2/func_00142a54.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/wave2/func_00142a54.c",
+          "line": 1
+        },
+        "source_sha256": "06ab0f33b6b862ed97aec977976febe86114238c9c9e4e109f46ad0a31d11aed",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave2/func_00142a54.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-009-func_00142a54/func_00142a54.result.json",
+        "receipt_sha256": "670725bfc52cfa065c3f6a2eceaa6d9b118571ae92700da35f97c7784d0358d5"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001233d0",
+          "site": "0x001233ec",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00142a58",
+          "site": "0x00142a74",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/framebuffer.h",
+        "src/wave2/func_00142a54.c"
+      ]
+    },
+    {
+      "row_id": "definite-24",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001342f4",
+      "input": {
+        "address": "0x001342f4",
+        "name": "func_001342f4",
+        "aliases": [
+          "func_001342f4"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_001342f4.c",
+        "declared_provider_type": "function(pointer to (struct PoolList)) -> pointer to (struct PoolList)",
+        "declaration_site": {
+          "source": "src/wave13/func_001342f4.c",
+          "line": 5
+        },
+        "source_sha256": "693f6c412b0c177e597191e1c9aaadeaf8433c1781fdc10dbbad5859d35e3937",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_001342f4.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-008-func_001342f4/func_001342f4.result.json",
+        "receipt_sha256": "4135c2ee7ac2ed773c39007757f518500e0e2ef0be9156588359da3f19829ab7"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00124900",
+          "site": "0x00124948",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 128,
+            "array_storage_address": "0x004b89a4"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_001342f4.c"
+      ]
+    },
+    {
+      "row_id": "definite-25",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014b438",
+      "input": {
+        "address": "0x0014b438",
+        "name": "func_0014b438",
+        "aliases": [
+          "func_0014b438"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave10/func_0014b438.c",
+        "declared_provider_type": "function(pointer to (struct HwrIndexValue)) -> void",
+        "declaration_site": {
+          "source": "src/wave10/func_0014b438.c",
+          "line": 5
+        },
+        "source_sha256": "b555bf39668f2c6e07d90cf2a49405771392d17a880e4ff05ebd1811d8b45ba7",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave10/func_0014b438.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-012-func_0014b438/func_0014b438.result.json",
+        "receipt_sha256": "3fca93f5fa729f4844f041a36271faecd34b3b74ea6052fa01c62afcccfcb6af"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00125aa4",
+          "site": "0x00125ac4",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00125aa4",
+          "site": "0x00125ad8",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x0014b4b0",
+          "site": "0x0014b4d4",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x0016aaa0",
+          "site": "0x0016aad8",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 7
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x0017fe04",
+          "site": "0x0017fe34",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 7
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001ceeac",
+          "site": "0x001ceed4",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001cf1f4",
+          "site": "0x001cf21c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001cf974",
+          "site": "0x001cf9a0",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001cfb24",
+          "site": "0x001cfb4c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave10/func_0014b438.c"
+      ]
+    },
+    {
+      "row_id": "definite-26",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014d288",
+      "input": {
+        "address": "0x0014d288",
+        "name": "func_0014d288",
+        "aliases": [
+          "func_0014d288"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave12/func_0014d288.c",
+        "declared_provider_type": "function(pointer to (struct WordPair)) -> pointer to (struct WordPair)",
+        "declaration_site": {
+          "source": "src/wave12/func_0014d288.c",
+          "line": 4
+        },
+        "source_sha256": "5b2d0afb769d56433a829c271d0871cf8550e57825369282d002aa0aaab55a09",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave12/func_0014d288.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-014-func_0014d288/func_0014d288.result.json",
+        "receipt_sha256": "2c7dc90067da5dc8c7268b4bb0ee3b81097257e3a3d65ae6663ca0a63ad389ad"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00148f70",
+          "site": "0x001490bc",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x0014d690",
+          "site": "0x0014d73c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001d1c94",
+          "site": "0x001d1dcc",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001d1c94",
+          "site": "0x001d1de0",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001d8398",
+          "site": "0x001d841c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/sequence.h",
+        "src/wave12/func_0014d288.c"
+      ]
+    },
+    {
+      "row_id": "definite-27",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014c2cc",
+      "input": {
+        "address": "0x0014c2cc",
+        "name": "func_0014c2cc",
+        "aliases": [
+          "_ZN18SoundInterpolationC1Ev",
+          "func_0014c2cc"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave18/func_0014c2cc.c",
+        "declared_provider_type": "function(pointer to (struct ScalarState)) -> void",
+        "declaration_site": {
+          "source": "src/wave18/func_0014c2cc.c",
+          "line": 8
+        },
+        "source_sha256": "571f1a5fbb5e9739773093d66c61bd2cff77108e3c7422efb89b43074a6fbabb",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave18/func_0014c2cc.cpp",
+      "disposition": "fixed",
+      "reason": "Actual SoundInterpolation::SoundInterpolation owns its C1/C2 definitions. SoundStreamInstance constructs four actual SoundInterpolation members through compiler-lowered C++ array construction; no ScalarState facade or explicit incompatible callback cast.",
+      "proof": {
+        "constructor_receipt": "scratch/integrator/ctypes1/r3/match/focus-r1-001-func_0014c2cc/func_0014c2cc.result.json",
+        "constructor_receipt_sha256": "3b7d824459d215c175e45d3e44d0fa7bfafef57ee1727c9f7da4d7c1c02675e2",
+        "caller_receipt": "scratch/integrator/ctypes1/r3/match/focus-r1-002-func_001492fc/func_001492fc.result.json",
+        "caller_receipt_sha256": "e037d495e85fa23e6ab9a1aed1540634d02fadc056952ac369b682887fb9a4ee",
+        "symbol_metadata": "INTERPOLATION-OWNER-SYMBOLS-r1.json"
+      },
+      "actual_type": "SoundInterpolation::SoundInterpolation(): genuine native C++ constructor with implicit this and compiler-generated array-construction ABI; not a C void*(void*) definition",
+      "original_consumers": [
+        {
+          "caller": "0x001492fc",
+          "site": "0x00149344",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 4
+          },
+          "source_binding": {
+            "source": "src/retries/func_001492fc.cpp",
+            "kind": "credited source body; final whole-proposal MATCH binds original callsite, including implicit compiler/runtime calls"
+          }
+        },
+        {
+          "caller": "0x001d5570",
+          "site": "0x001d55b0",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001d5570",
+          "site": "0x001d55c4",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave18/func_0014c2cc.cpp",
+        "src/retries/func_001492fc.cpp",
+        "include/game/sound_voice.h",
+        "config/names.json"
+      ],
+      "fix_kind": "actual-native-member-constructor",
+      "generic_C_signature_claimed": false,
+      "actual_owner": "SoundInterpolation"
+    },
+    {
+      "row_id": "definite-28",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014ee44",
+      "input": {
+        "address": "0x0014ee44",
+        "name": "func_0014ee44",
+        "aliases": [
+          "func_0014ee44"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_0014ee44.c",
+        "declared_provider_type": "function(pointer to (struct DisplayBufferState)) -> pointer to (struct DisplayBufferState)",
+        "declaration_site": {
+          "source": "src/wave13/func_0014ee44.c",
+          "line": 4
+        },
+        "source_sha256": "abff46508d297b7c34f3e59e0e738fc571b1717391fbf68e88727dbc62b20a26",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_0014ee44.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-017-func_0014ee44/func_0014ee44.result.json",
+        "receipt_sha256": "ed1b31056fe2f6b49eaee764c221670246dea22488066304f4aa79ac95a6d085"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x0014d690",
+          "site": "0x0014d6e8",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_0014ee44.c"
+      ]
+    },
+    {
+      "row_id": "definite-29",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014ee30",
+      "input": {
+        "address": "0x0014ee30",
+        "name": "func_0014ee30",
+        "aliases": [
+          "func_0014ee30"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave12/func_0014ee30.c",
+        "declared_provider_type": "function(pointer to (struct AudioRecord12)) -> pointer to (struct AudioRecord12)",
+        "declaration_site": {
+          "source": "src/wave12/func_0014ee30.c",
+          "line": 4
+        },
+        "source_sha256": "f761e066f151052d65f63b6b6dafdb7e3df2c769f06438aba10c1c147d535c17",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave12/func_0014ee30.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-016-func_0014ee30/func_0014ee30.result.json",
+        "receipt_sha256": "e6ffe27a43f636771bbc2a8769f5ac404505350bfdf2c2ccfa557b8d75fdd438"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x0014d690",
+          "site": "0x0014d6fc",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/aux_effect.h",
+        "src/wave12/func_0014ee30.c"
+      ]
+    },
+    {
+      "row_id": "definite-30",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00144970",
+      "input": {
+        "address": "0x00144970",
+        "name": "func_00144970",
+        "aliases": [
+          "func_00144970"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_00144970.c",
+        "declared_provider_type": "function(pointer to (struct PoolList)) -> pointer to (struct PoolList)",
+        "declaration_site": {
+          "source": "src/wave13/func_00144970.c",
+          "line": 5
+        },
+        "source_sha256": "ea0d778983afb64cc636694d8263ec9104e03c2fc726c495c8008bf3efeea8da",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_00144970.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-010-func_00144970/func_00144970.result.json",
+        "receipt_sha256": "9bedcbac95278c69b68a533dfcc5af31acfd0b02604beaa631dfba15b598fdcc"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00185de4",
+          "site": "0x00185e18",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 3,
+            "array_storage_address": "0x004b91b0"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/input_device.h",
+        "src/wave13/func_00144970.c"
+      ]
+    },
+    {
+      "row_id": "definite-31",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001d0110",
+      "input": {
+        "address": "0x001d0110",
+        "name": "func_001d0110",
+        "aliases": [
+          "func_001d0110"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave19/func_001d0110.c",
+        "declared_provider_type": "function(pointer to (struct PackedDefaults)) -> pointer to (struct PackedDefaults)",
+        "declaration_site": {
+          "source": "src/wave19/func_001d0110.c",
+          "line": 10
+        },
+        "source_sha256": "e97d799b38ca2bdf84e23bb62b8d001b9340095ac1fae24ed5947681072f34c7",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave19/func_001d0110.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-035-func_001d0110/func_001d0110.result.json",
+        "receipt_sha256": "f6a1a5c56bf46a720ed615e3271b40c9694ae947407c89160545f6d3262c2fbd"
+      },
+      "restored_sha256": "e97d799b38ca2bdf84e23bb62b8d001b9340095ac1fae24ed5947681072f34c7",
+      "baseline_sha256": "e97d799b38ca2bdf84e23bb62b8d001b9340095ac1fae24ed5947681072f34c7",
+      "original_consumers": [
+        {
+          "caller": "0x001d0614",
+          "site": "0x001d1230",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 13,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-32",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001d3898",
+      "input": {
+        "address": "0x001d3898",
+        "name": "func_001d3898",
+        "aliases": [
+          "func_001d3898"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave4/func_001d3898.c",
+        "declared_provider_type": "function(pointer to (struct TimingState)) -> pointer to (struct TimingState)",
+        "declaration_site": {
+          "source": "src/wave4/func_001d3898.c",
+          "line": 3
+        },
+        "source_sha256": "e595710587d665a779da1d8725fc2bb7a26e39635cb8741cd3722e90fe08bbec",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave4/func_001d3898.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-037-func_001d3898/func_001d3898.result.json",
+        "receipt_sha256": "61a2682ab6fa544b21b1dd3342ab49b0d5dd65bc6d372878c0acbb0701b791a2"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001d540c",
+          "site": "0x001d5484",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 16,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave4/func_001d3898.c"
+      ]
+    },
+    {
+      "row_id": "definite-33",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_002161ec",
+      "input": {
+        "address": "0x002161ec",
+        "name": "func_002161ec",
+        "aliases": [
+          "func_002161ec"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave13/func_002161ec.c",
+        "declared_provider_type": "function(pointer to (struct PoolList)) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_002161ec.c",
+          "line": 4
+        },
+        "source_sha256": "16c0091ec292fe791aa3b4f784826f59bab0bab6c0fbed6acacf2a0beb0b9fd7",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave13/func_002161ec.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-041-func_002161ec/func_002161ec.result.json",
+        "receipt_sha256": "a1cf032379ab6107aa20621177ecdaeac4fd07046b65ab7b47b080090a645641"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001d5570",
+          "site": "0x001d55d8",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 12,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/command_group.h",
+        "src/wave13/func_002161ec.c"
+      ]
+    },
+    {
+      "row_id": "definite-34",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00156dac",
+      "input": {
+        "address": "0x00156dac",
+        "name": "func_00156dac",
+        "aliases": [
+          "func_00156dac"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave12/func_00156dac.cpp",
+        "declared_provider_type": "AudioCounter * func_00156dac(AudioCounter *counter);",
+        "declaration_site": {
+          "source": "src/wave12/func_00156dac.cpp",
+          "line": 6
+        },
+        "source_sha256": "586de4e451cb2dfc37015119bf86132e3e60f77a64a6911628e9473f5d577023",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave12/func_00156dac.cpp",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-018-func_00156dac/func_00156dac.result.json",
+        "receipt_sha256": "1df780f13d046318d78c268da6b7eace6f83f4d70950346c36efcbf8e606325a"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001d5570",
+          "site": "0x001d55ec",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x00215120",
+          "site": "0x00215134",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 8,
+            "element_count": 7,
+            "array_storage_address": "0x004b3570"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/audio_voice.h",
+        "src/wave12/func_00156dac.cpp"
+      ]
+    },
+    {
+      "row_id": "definite-35",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001d9920",
+      "input": {
+        "address": "0x001d9920",
+        "name": "func_001d9920",
+        "aliases": [
+          "func_001d9920"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave4/func_001d9920.c",
+        "declared_provider_type": "function(pointer to (struct ExtendedTimingState)) -> pointer to (struct ExtendedTimingState)",
+        "declaration_site": {
+          "source": "src/wave4/func_001d9920.c",
+          "line": 12
+        },
+        "source_sha256": "d8bf6cb1e05d3532edf52546e43166ae9951e1474314bed9b2c4f22675b47b59",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave4/func_001d9920.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-038-func_001d9920/func_001d9920.result.json",
+        "receipt_sha256": "0434ce91ddbe24e56c2a11ba7287c0853f477dad4ea628695d37d64e902df23c"
+      },
+      "restored_sha256": "d8bf6cb1e05d3532edf52546e43166ae9951e1474314bed9b2c4f22675b47b59",
+      "baseline_sha256": "d8bf6cb1e05d3532edf52546e43166ae9951e1474314bed9b2c4f22675b47b59",
+      "original_consumers": [
+        {
+          "caller": "0x001d9820",
+          "site": "0x001d986c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 32,
+            "element_count": 4
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-36",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001b733c",
+      "input": {
+        "address": "0x001b733c",
+        "name": "func_001b733c",
+        "aliases": [
+          "func_001b733c"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave19/func_001b733c.c",
+        "declared_provider_type": "function(pointer to (struct TransformIdentity)) -> pointer to (struct TransformIdentity)",
+        "declaration_site": {
+          "source": "src/wave19/func_001b733c.c",
+          "line": 8
+        },
+        "source_sha256": "f262b9f1f08fb1c434fe41e8db991146a12f380a19fa64068359cc5ecfa10d16",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave19/func_001b733c.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-022-func_001b733c/func_001b733c.result.json",
+        "receipt_sha256": "85bb20b461df64943dce5146a4747e8a7bbdea7573d514a6220058dfa31389a5"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001f5488",
+          "site": "0x001f54f8",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 164,
+            "element_count": 1,
+            "array_storage_address": "0x00495b60"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave19/func_001b733c.c"
+      ]
+    },
+    {
+      "row_id": "definite-37",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001b3340",
+      "input": {
+        "address": "0x001b3340",
+        "name": "func_001b3340",
+        "aliases": [
+          "func_001b3340"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave3/func_001b3340.c",
+        "declared_provider_type": "function(pointer to (void)) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001b3340.c",
+          "line": 3
+        },
+        "source_sha256": "f3c2c27516c798e90b77a42adbcaf79611b5dc6dd119e78938babf427c28139a",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001b3340.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-021-func_001b3340/func_001b3340.result.json",
+        "receipt_sha256": "625ab90d1ef230a58abcf36c3ce9c1d7b2a6bc217d9b67b31ad392b508b1352d"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001f5488",
+          "site": "0x001f5558",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 596,
+            "element_count": 8,
+            "array_storage_address": "0x00497720"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave3/func_001b3340.c"
+      ]
+    },
+    {
+      "row_id": "definite-38",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001acc18",
+      "input": {
+        "address": "0x001acc18",
+        "name": "func_001acc18",
+        "aliases": [
+          "func_001acc18"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave3/func_001acc18.c",
+        "declared_provider_type": "function(pointer to (void)) -> void",
+        "declaration_site": {
+          "source": "src/wave3/func_001acc18.c",
+          "line": 4
+        },
+        "source_sha256": "8279fd722bbca9e006587a295990df99b08f4daa621aa70135e80479df31e8bb",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave3/func_001acc18.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-019-func_001acc18/func_001acc18.result.json",
+        "receipt_sha256": "71f8a01e19e62f943419eb4ea4194f77b4dc26447feaebfa2deaef552ead6156"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x001f5488",
+          "site": "0x001f556c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 224,
+            "element_count": 8,
+            "array_storage_address": "0x004989cc"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/functions.h",
+        "src/wave3/func_001acc18.c"
+      ]
+    },
+    {
+      "row_id": "definite-39",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001ef960",
+      "input": {
+        "address": "0x001ef960",
+        "name": "func_001ef960",
+        "aliases": [
+          "func_001ef960"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave18/func_001ef960.c",
+        "declared_provider_type": "function(pointer to (struct ElementArray)) -> pointer to (struct ElementArray)",
+        "declaration_site": {
+          "source": "src/wave18/func_001ef960.c",
+          "line": 15
+        },
+        "source_sha256": "aa7d4cf2cbeffa19cb8b7c1d4f3212f3bf6cff388f15e788265f12559a6c7fb4",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave18/func_001ef960.c",
+      "disposition": "held",
+      "reason": "Natural exact-generic callback changes bytes/extent. Restored the entire provider source and its canonical declarations exactly to the first rebased commit; no steering, invented return behavior or accepted-identity withdrawal.",
+      "failed_proof": {
+        "exit": 1,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-039-func_001ef960/func_001ef960.result.json",
+        "receipt_sha256": "01f467349165e1be2f1b5e82c5991800cda9b567463833fb18a18d43aa10f7cc"
+      },
+      "restored_sha256": "aa7d4cf2cbeffa19cb8b7c1d4f3212f3bf6cff388f15e788265f12559a6c7fb4",
+      "baseline_sha256": "aa7d4cf2cbeffa19cb8b7c1d4f3212f3bf6cff388f15e788265f12559a6c7fb4",
+      "original_consumers": [
+        {
+          "caller": "0x001f5488",
+          "site": "0x001f55ac",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 1700,
+            "element_count": 2,
+            "array_storage_address": "0x0049cbe8"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-40",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c5260",
+      "input": {
+        "address": "0x001c5260",
+        "name": "func_001c5260",
+        "aliases": [
+          "func_001c5260"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave15/func_001c5260.c",
+        "declared_provider_type": "function(pointer to (unsigned int)) -> void",
+        "declaration_site": {
+          "source": "src/wave15/func_001c5260.c",
+          "line": 2
+        },
+        "source_sha256": "f9ba6a6004671dc670fecdedab3ba140ec12d0f65e62f91e4d682245004d8d3f",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave15/func_001c5260.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-028-func_001c5260/func_001c5260.result.json",
+        "receipt_sha256": "55898ee02960c2cd5c1d615c166497ab031f52c41d3adc0fe118d673addde8f6"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00214d18",
+          "site": "0x00214d2c",
+          "entrypoint": "0x001911cc",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 3,
+            "array_storage_address": "0x004b35b8"
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/wave15/func_001c5260.c"
+      ]
+    },
+    {
+      "row_id": "definite-41",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0011362c",
+      "input": {
+        "address": "0x0011362c",
+        "name": "func_0011362c",
+        "aliases": [
+          "func_0011362c"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+        "source": "src/wave1/func_0011362c.c",
+        "declared_provider_type": "function(pointer to (function(void) -> void)) -> void",
+        "declaration_site": {
+          "source": "src/wave1/func_0011362c.c",
+          "line": 3
+        },
+        "source_sha256": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave1/func_0011362c.c",
+      "disposition": "held",
+      "reason": "The provider consumes a function-pointer VALUE, not a pointer to an object containing one. Converting incoming void* to an invokable function pointer would introduce forbidden pointer-type reinterpretation; real transport/typed closure remains unestablished.",
+      "restored_sha256": "8ee883d9cdd2f6f3a9f4e2787a086fb9fe60fc508ef028d06fd1e1dd8ca865c9",
+      "original_consumers": [
+        {
+          "caller": "0x0010c380",
+          "site": "0x0010c410",
+          "entrypoint": "0x0019dd50",
+          "category": "thread_start_context_registration",
+          "callback_parameter_index": 2,
+          "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-42",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00149270",
+      "input": {
+        "address": "0x00149270",
+        "name": "func_00149270",
+        "aliases": [
+          "func_00149270"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+        "source": "src/wave20/func_00149270.cpp",
+        "declared_provider_type": "function(pointer to (struct WorkerThread)) -> void",
+        "declaration_site": {
+          "source": "src/wave20/func_00149270.cpp",
+          "line": 7
+        },
+        "source_sha256": "317fbc5bf8c697907affbca8b301bf44b6ab3254e7657369d897d4f7ac8fd2df",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave20/func_00149270.cpp",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-011-func_00149270/func_00149270.result.json",
+        "receipt_sha256": "7e9dc52886e3344544c3f55ef1a878b1ce1d98496b555da2b3b4b83eccdfde05"
+      },
+      "actual_type": "function(pointer to (void), pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x00146e78",
+          "site": "0x00146ef8",
+          "entrypoint": "0x0019dd50",
+          "category": "thread_start_context_registration",
+          "callback_parameter_index": 2,
+          "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/waitable_handle.h",
+        "src/wave12/func_00144960.c",
+        "src/wave20/func_00149270.cpp"
+      ]
+    },
+    {
+      "row_id": "definite-43",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014fa30",
+      "input": {
+        "address": "0x0014fa30",
+        "name": "func_0014fa30",
+        "aliases": [
+          "func_0014fa30"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+        "source": "src/wave11/func_0014fa30.c",
+        "declared_provider_type": "function(unsigned int) -> void",
+        "declaration_site": {
+          "source": "src/wave11/func_0014fa30.c",
+          "line": 2
+        },
+        "source_sha256": "a6c1456f84e75795e0c1aa27e537823463b04881da97e5ea53a94e144635fc08",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave11/func_0014fa30.c",
+      "disposition": "held",
+      "reason": "The thread provider forwards a scalar unsigned word, while the current runtime stores an opaque object pointer. No actual pointer-to-unsigned transport contract is established; do not reinterpret its representation or invent a payload object.",
+      "restored_sha256": "a6c1456f84e75795e0c1aa27e537823463b04881da97e5ea53a94e144635fc08",
+      "original_consumers": [
+        {
+          "caller": "0x0014c9b0",
+          "site": "0x0014ca40",
+          "entrypoint": "0x0019dd50",
+          "category": "thread_start_context_registration",
+          "callback_parameter_index": 2,
+          "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "definite-44",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_0014e078",
+      "input": {
+        "address": "0x0014e078",
+        "name": "func_0014e078",
+        "aliases": [
+          "func_0014e078"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+        "source": "src/sdk/func_0014e078.c",
+        "declared_provider_type": "function(void) -> void",
+        "declaration_site": {
+          "source": "src/sdk/func_0014e078.c",
+          "line": 4
+        },
+        "source_sha256": "e0a33545ba40e751ae625e755166ff0a4f50080bce82d683a50eace91661fe4a",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk/func_0014e078.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-015-func_0014e078/func_0014e078.result.json",
+        "receipt_sha256": "d1a7a1e55d7006ecb836829d22430a0563d736b80b69022bc8216c4b5534bafe"
+      },
+      "actual_type": "function(pointer to (void), pointer to (void)) -> void",
+      "original_consumers": [
+        {
+          "caller": "0x0014cafc",
+          "site": "0x0014cba4",
+          "entrypoint": "0x0019dd50",
+          "category": "thread_start_context_registration",
+          "callback_parameter_index": 2,
+          "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+          "array_semantics": null,
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "src/sdk/func_0014e078.c"
+      ]
+    },
+    {
+      "row_id": "definite-45",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c526c",
+      "input": {
+        "address": "0x001c526c",
+        "name": "func_001c526c",
+        "aliases": [
+          "func_001c526c"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/sdk/func_001c526c.c",
+        "declared_provider_type": "function(pointer to (struct KernelHandleOwner)) -> pointer to (struct KernelHandleOwner)",
+        "declaration_site": {
+          "source": "src/sdk/func_001c526c.c",
+          "line": 8
+        },
+        "source_sha256": "f17f0a00f6515b6b6cebab1f00a3737832efeb6c57e16a53885c7be30474880a",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/sdk/func_001c526c.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-029-func_001c526c/func_001c526c.result.json",
+        "receipt_sha256": "9bf143a79a5efaf0658285de81a9996f46f10b0e2c1ec137a8baca07f1146c0b"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00156dcc",
+          "site": "0x00156ddc",
+          "entrypoint": "0x0019f6ac",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 4,
+            "element_count": 3,
+            "array_storage_address": "0x004b35b8"
+          },
+          "source_binding": {
+            "source": "src/wave17/func_00156dcc.c",
+            "kind": "credited source body; final whole-proposal MATCH binds original callsite, including implicit compiler/runtime calls"
+          }
+        },
+        {
+          "caller": "0x0019f6ac",
+          "site": "0x0019f6b0",
+          "entrypoint": "0x0019f6b4",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": {
+              "kind": "parameter",
+              "function": "0x0019f6ac",
+              "register": "r2"
+            },
+            "element_count": {
+              "kind": "parameter",
+              "function": "0x0019f6ac",
+              "register": "r3"
+            }
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/functions.h",
+        "src/sdk/func_001c526c.c",
+        "src/wave17/func_00156dcc.c"
+      ]
+    },
+    {
+      "row_id": "definite-46",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_00110358",
+      "input": {
+        "address": "0x00110358",
+        "name": "func_00110358",
+        "aliases": [
+          "func_00110358"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave1/func_00110358.c",
+        "declared_provider_type": "function(pointer to (struct DisplayTarget)) -> void",
+        "declaration_site": {
+          "source": "src/wave1/func_00110358.c",
+          "line": 4
+        },
+        "source_sha256": "d6b14794afe4e2595cb31106d283bf2ecd0d0b7b166d8af93430723f8484d869",
+        "comparison": "INCOMPATIBLE_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave1/func_00110358.c",
+      "disposition": "fixed",
+      "reason": "Exact runtime callable type; concrete object recovered only inside its real provider; all shared declarations/callers migrated without a callback cast or adapter.",
+      "proof": {
+        "exit": 0,
+        "receipt": "scratch/integrator/ctypes1/r2/match/callback-r1-001-func_00110358/func_00110358.result.json",
+        "receipt_sha256": "e9446ddb0aab08e8954f2a5f34735ba1d9c734e465b85eb5474d2eda42c4b449"
+      },
+      "actual_type": "function(pointer to (void)) -> pointer to (void)",
+      "original_consumers": [
+        {
+          "caller": "0x00103c88",
+          "site": "0x00103d84",
+          "entrypoint": "0x0019f6b4",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 24,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        },
+        {
+          "caller": "0x001bba8c",
+          "site": "0x001bbb24",
+          "entrypoint": "0x0019f6b4",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 24,
+            "element_count": 2
+          },
+          "source_binding": {
+            "kind": "uncredited original caller; intentionally included"
+          }
+        }
+      ],
+      "source_references": [
+        "include/game/display_target.h",
+        "src/wave1/func_00110358.c"
+      ]
+    },
+    {
+      "row_id": "definite-47",
+      "category": "definite_type_or_role_mismatch",
+      "function": "func_001c3100",
+      "input": {
+        "address": "0x001c3100",
+        "name": "func_001c3100",
+        "aliases": [
+          "func_001c3100"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+        "source": "src/wave20/func_001c3100.cpp",
+        "declared_provider_type": "LargeResourceElement * func_001c3100(LargeResourceElement *element);",
+        "declaration_site": {
+          "source": "src/wave20/func_001c3100.cpp",
+          "line": 7
+        },
+        "source_sha256": "9a3976e9b33a6caa885055271c24c71464d728b89ab2f469de22220d82a977a7",
+        "comparison": "INCOMPATIBLE_CPP_FREE_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "current_source": "src/wave20/func_001c3100.cpp",
+      "disposition": "held",
+      "reason": "Opaque LargeResourceElement is reinterpreted as CompositeResource and returned through byte-offset ResourceCleanup projections. No exactly-witnessed single storage family is available; preserve accepted body, do not launder it behind void*.",
+      "restored_sha256": "9a3976e9b33a6caa885055271c24c71464d728b89ab2f469de22220d82a977a7",
+      "original_consumers": [
+        {
+          "caller": "0x001bb9b4",
+          "site": "0x001bba44",
+          "entrypoint": "0x0019f6b4",
+          "category": "array_runtime",
+          "callback_parameter_index": 1,
+          "runtime_parameter_type": "function(pointer to (void)) -> pointer to (void)",
+          "array_semantics": {
+            "element_size": 193780,
+            "element_count": 1
+          },
+          "source_binding": {
+            "source": "src/sdk/func_001bb9b4.cpp",
+            "kind": "credited source body; final whole-proposal MATCH binds original callsite, including implicit compiler/runtime calls"
+          }
+        }
+      ],
+      "source_references": []
+    },
+    {
+      "row_id": "custom-00",
+      "category": "custom_nominal_family",
+      "function": "func_001e59d4",
+      "input": {
+        "address": "0x001e59d4",
+        "name": "func_001e59d4",
+        "aliases": [
+          "func_001e59d4"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: paired RadarWidget callback",
+        "source": "src/wave6/func_001e59d4.c",
+        "declared_provider_type": "function(pointer to (const struct RadarWidget), int) -> void",
+        "declaration_site": {
+          "source": "src/wave6/func_001e59d4.c",
+          "line": 4
+        },
+        "source_sha256": "938b9d21e7c2f1684e5e1decd4a77a71e83ea550913dd11be55857c30ec29e57",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "No canonical invoking callback type is established for the paired radar population; preserve the accepted provider rather than erase real arguments or invent a common owner.",
+      "source_sha256": "938b9d21e7c2f1684e5e1decd4a77a71e83ea550913dd11be55857c30ec29e57"
+    },
+    {
+      "row_id": "custom-01",
+      "category": "custom_nominal_family",
+      "function": "func_001d51b8",
+      "input": {
+        "address": "0x001d51b8",
+        "name": "func_001d51b8",
+        "aliases": [
+          "func_001d51b8"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: float-state callback/member representation requires native callable-family recovery",
+        "source": "src/wave13/func_001d51b8.c",
+        "declared_provider_type": "function(pointer to (struct FloatState001d51b8), float) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_001d51b8.c",
+          "line": 2
+        },
+        "source_sha256": "2a6a8ee0488f55d670c8fb13edff3d8b65459f10f4a67eecf2d62aa8cf5664c9",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "This float-state address belongs to an unresolved native member/callback descriptor family with distinct existing receivers. A common PMF owner is not proved; no free-to-member alias, C PMF decoding or receiver cast is introduced.",
+      "source_sha256": "2a6a8ee0488f55d670c8fb13edff3d8b65459f10f4a67eecf2d62aa8cf5664c9"
+    },
+    {
+      "row_id": "custom-02",
+      "category": "custom_nominal_family",
+      "function": "func_001d5284",
+      "input": {
+        "address": "0x001d5284",
+        "name": "func_001d5284",
+        "aliases": [
+          "func_001d5284"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: float-state callback/member representation requires native callable-family recovery",
+        "source": "src/wave13/func_001d5284.c",
+        "declared_provider_type": "function(pointer to (struct FloatState001d5284), float) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_001d5284.c",
+          "line": 2
+        },
+        "source_sha256": "7c5ab0da9be9c2bcc5dc0abcf6f42eeefd7d4ad2269c6fdb71a6af7e5e64286a",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "This float-state address belongs to an unresolved native member/callback descriptor family with distinct existing receivers. A common PMF owner is not proved; no free-to-member alias, C PMF decoding or receiver cast is introduced.",
+      "source_sha256": "7c5ab0da9be9c2bcc5dc0abcf6f42eeefd7d4ad2269c6fdb71a6af7e5e64286a"
+    },
+    {
+      "row_id": "custom-03",
+      "category": "custom_nominal_family",
+      "function": "func_001d5404",
+      "input": {
+        "address": "0x001d5404",
+        "name": "func_001d5404",
+        "aliases": [
+          "func_001d5404"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: float-state callback/member representation requires native callable-family recovery",
+        "source": "src/wave13/func_001d5404.c",
+        "declared_provider_type": "function(pointer to (struct FloatState001d5404), float) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_001d5404.c",
+          "line": 2
+        },
+        "source_sha256": "4f828bf8cce821d4f74823966b7c23590bdbc23caf5ef66b94663982846b7a5a",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "This float-state address belongs to an unresolved native member/callback descriptor family with distinct existing receivers. A common PMF owner is not proved; no free-to-member alias, C PMF decoding or receiver cast is introduced.",
+      "source_sha256": "4f828bf8cce821d4f74823966b7c23590bdbc23caf5ef66b94663982846b7a5a"
+    },
+    {
+      "row_id": "custom-04",
+      "category": "custom_nominal_family",
+      "function": "func_001d4ad4",
+      "input": {
+        "address": "0x001d4ad4",
+        "name": "func_001d4ad4",
+        "aliases": [
+          "func_001d4ad4"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: float-state callback/member representation requires native callable-family recovery",
+        "source": "src/wave13/func_001d4ad4.c",
+        "declared_provider_type": "function(pointer to (struct FloatState001d4ad4), float) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_001d4ad4.c",
+          "line": 2
+        },
+        "source_sha256": "52ba6c06e97c1870e768fc7974a042c53b627e21ecac1fd8ba30b71ad39d9eaf",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "This float-state address belongs to an unresolved native member/callback descriptor family with distinct existing receivers. A common PMF owner is not proved; no free-to-member alias, C PMF decoding or receiver cast is introduced.",
+      "source_sha256": "52ba6c06e97c1870e768fc7974a042c53b627e21ecac1fd8ba30b71ad39d9eaf"
+    },
+    {
+      "row_id": "custom-05",
+      "category": "custom_nominal_family",
+      "function": "func_001d4b70",
+      "input": {
+        "address": "0x001d4b70",
+        "name": "func_001d4b70",
+        "aliases": [
+          "func_001d4b70"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: float-state callback/member representation requires native callable-family recovery",
+        "source": "src/wave13/func_001d4b70.c",
+        "declared_provider_type": "function(pointer to (struct FloatState001d4b70), float) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_001d4b70.c",
+          "line": 2
+        },
+        "source_sha256": "9faad50fb2756754392195f97760bb8b3d6b0e52424189367f3ca2f24b29fb60",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "This float-state address belongs to an unresolved native member/callback descriptor family with distinct existing receivers. A common PMF owner is not proved; no free-to-member alias, C PMF decoding or receiver cast is introduced.",
+      "source_sha256": "9faad50fb2756754392195f97760bb8b3d6b0e52424189367f3ca2f24b29fb60"
+    },
+    {
+      "row_id": "custom-06",
+      "category": "custom_nominal_family",
+      "function": "func_001d4cec",
+      "input": {
+        "address": "0x001d4cec",
+        "name": "func_001d4cec",
+        "aliases": [
+          "func_001d4cec"
+        ],
+        "ledger_state": "ACCEPTED_UNCHANGED",
+        "prior_prepared_claim": false,
+        "runtime_parameter_type": "UNESTABLISHED: float-state callback/member representation requires native callable-family recovery",
+        "source": "src/wave13/func_001d4cec.c",
+        "declared_provider_type": "function(pointer to (struct FloatState001d4cec), float) -> void",
+        "declaration_site": {
+          "source": "src/wave13/func_001d4cec.c",
+          "line": 2
+        },
+        "source_sha256": "9f365ab8f0a1e5899e404ca2373c8ec45467bb4e3f786da17716bcd171a318f4",
+        "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+        "current_NEW_or_revised_closed": true
+      },
+      "disposition": "held",
+      "reason": "This float-state address belongs to an unresolved native member/callback descriptor family with distinct existing receivers. A common PMF owner is not proved; no free-to-member alias, C PMF decoding or receiver cast is introduced.",
+      "source_sha256": "9f365ab8f0a1e5899e404ca2373c8ec45467bb4e3f786da17716bcd171a318f4"
+    },
+    {
+      "row_id": "unmodeled-00",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107b4",
+      "input": {
+        "caller": "0x0010292c",
+        "site": "0x001029e4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107b4",
+          "owner": "0x001107b4",
+          "names": [
+            "func_001107b4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107b4",
+          "name": "func_001107b4",
+          "aliases": [
+            "func_001107b4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_001107b4.c",
+          "declared_provider_type": "function(pointer to (const struct WordProperty), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_001107b4.c",
+            "line": 4
+          },
+          "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de"
+    },
+    {
+      "row_id": "unmodeled-01",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107d0",
+      "input": {
+        "caller": "0x0010292c",
+        "site": "0x001029e4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107d0",
+          "owner": "0x001107d0",
+          "names": [
+            "func_001107d0"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107d0",
+          "name": "func_001107d0",
+          "aliases": [
+            "func_001107d0"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave1/func_001107d0.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave1/func_001107d0.c",
+            "line": 2
+          },
+          "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2"
+    },
+    {
+      "row_id": "unmodeled-02",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107c4",
+      "input": {
+        "caller": "0x0010292c",
+        "site": "0x001029e4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107c4",
+          "owner": "0x001107c4",
+          "names": [
+            "func_001107c4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107c4",
+          "name": "func_001107c4",
+          "aliases": [
+            "func_001107c4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave9/func_001107c4.c",
+          "declared_provider_type": "function(pointer to (function(pointer to (void)) -> void), pointer to (const pointer to (void))) -> void",
+          "declaration_site": {
+            "source": "src/wave9/func_001107c4.c",
+            "line": 2
+          },
+          "source_sha256": "09ea0c82d4bac015e150e6df8e709f86d4d283b37b46149230b14b63b9c57c92",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "09ea0c82d4bac015e150e6df8e709f86d4d283b37b46149230b14b63b9c57c92"
+    },
+    {
+      "row_id": "unmodeled-03",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107b4",
+      "input": {
+        "caller": "0x00103878",
+        "site": "0x0010392c",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107b4",
+          "owner": "0x001107b4",
+          "names": [
+            "func_001107b4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107b4",
+          "name": "func_001107b4",
+          "aliases": [
+            "func_001107b4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_001107b4.c",
+          "declared_provider_type": "function(pointer to (const struct WordProperty), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_001107b4.c",
+            "line": 4
+          },
+          "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de"
+    },
+    {
+      "row_id": "unmodeled-04",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107d0",
+      "input": {
+        "caller": "0x00103878",
+        "site": "0x0010392c",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107d0",
+          "owner": "0x001107d0",
+          "names": [
+            "func_001107d0"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107d0",
+          "name": "func_001107d0",
+          "aliases": [
+            "func_001107d0"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave1/func_001107d0.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave1/func_001107d0.c",
+            "line": 2
+          },
+          "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2"
+    },
+    {
+      "row_id": "unmodeled-05",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107c4",
+      "input": {
+        "caller": "0x00103878",
+        "site": "0x0010392c",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107c4",
+          "owner": "0x001107c4",
+          "names": [
+            "func_001107c4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107c4",
+          "name": "func_001107c4",
+          "aliases": [
+            "func_001107c4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave9/func_001107c4.c",
+          "declared_provider_type": "function(pointer to (function(pointer to (void)) -> void), pointer to (const pointer to (void))) -> void",
+          "declaration_site": {
+            "source": "src/wave9/func_001107c4.c",
+            "line": 2
+          },
+          "source_sha256": "09ea0c82d4bac015e150e6df8e709f86d4d283b37b46149230b14b63b9c57c92",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "09ea0c82d4bac015e150e6df8e709f86d4d283b37b46149230b14b63b9c57c92"
+    },
+    {
+      "row_id": "unmodeled-06",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107b4",
+      "input": {
+        "caller": "0x00104e9c",
+        "site": "0x00104f3c",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107b4",
+          "owner": "0x001107b4",
+          "names": [
+            "func_001107b4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107b4",
+          "name": "func_001107b4",
+          "aliases": [
+            "func_001107b4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_001107b4.c",
+          "declared_provider_type": "function(pointer to (const struct WordProperty), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_001107b4.c",
+            "line": 4
+          },
+          "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de"
+    },
+    {
+      "row_id": "unmodeled-07",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107d0",
+      "input": {
+        "caller": "0x00104e9c",
+        "site": "0x00104f3c",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107d0",
+          "owner": "0x001107d0",
+          "names": [
+            "func_001107d0"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107d0",
+          "name": "func_001107d0",
+          "aliases": [
+            "func_001107d0"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave1/func_001107d0.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave1/func_001107d0.c",
+            "line": 2
+          },
+          "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2"
+    },
+    {
+      "row_id": "unmodeled-08",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107b4",
+      "input": {
+        "caller": "0x001073c0",
+        "site": "0x00107470",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107b4",
+          "owner": "0x001107b4",
+          "names": [
+            "func_001107b4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107b4",
+          "name": "func_001107b4",
+          "aliases": [
+            "func_001107b4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_001107b4.c",
+          "declared_provider_type": "function(pointer to (const struct WordProperty), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_001107b4.c",
+            "line": 4
+          },
+          "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "72bdc735827a83a01d6bb37334fd6444660494636615c5b5b724ccaf4ed222de"
+    },
+    {
+      "row_id": "unmodeled-09",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107d0",
+      "input": {
+        "caller": "0x001073c0",
+        "site": "0x00107470",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107d0",
+          "owner": "0x001107d0",
+          "names": [
+            "func_001107d0"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107d0",
+          "name": "func_001107d0",
+          "aliases": [
+            "func_001107d0"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave1/func_001107d0.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave1/func_001107d0.c",
+            "line": 2
+          },
+          "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "c5b8763970af9110f95763cf7b44bc120399e1d313ff4ea0eec99f85fedd01c2"
+    },
+    {
+      "row_id": "unmodeled-10",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001107c4",
+      "input": {
+        "caller": "0x001073c0",
+        "site": "0x00107470",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001107c4",
+          "owner": "0x001107c4",
+          "names": [
+            "func_001107c4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001107c4",
+          "name": "func_001107c4",
+          "aliases": [
+            "func_001107c4"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave9/func_001107c4.c",
+          "declared_provider_type": "function(pointer to (function(pointer to (void)) -> void), pointer to (const pointer to (void))) -> void",
+          "declaration_site": {
+            "source": "src/wave9/func_001107c4.c",
+            "line": 2
+          },
+          "source_sha256": "09ea0c82d4bac015e150e6df8e709f86d4d283b37b46149230b14b63b9c57c92",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "09ea0c82d4bac015e150e6df8e709f86d4d283b37b46149230b14b63b9c57c92"
+    },
+    {
+      "row_id": "unmodeled-11",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_00113ca4",
+      "input": {
+        "caller": "0x0010c380",
+        "site": "0x0010c410",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x00113ca4",
+          "owner": "0x00113ca4",
+          "names": [
+            "func_00113ca4"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x00113ca4",
+          "name": "func_00113ca4",
+          "aliases": [
+            "func_00113ca4"
+          ],
+          "ledger_state": "UNCLAIMED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "declared_provider_type": "NO_LEDGER_PROVIDER",
+          "comparison": "UNCLAIMED_PROVIDER",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "not-applicable",
+      "reason": "No accepted provider exists at this candidate address. The assignment does not create or credit an unclaimed provider; no source is synthesized."
+    },
+    {
+      "row_id": "unmodeled-12",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0012cebc",
+      "input": {
+        "caller": "0x00115638",
+        "site": "0x001157b4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0012cebc",
+          "owner": "0x0012cebc",
+          "names": [
+            "func_0012cebc"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0012cebc",
+          "name": "func_0012cebc",
+          "aliases": [
+            "func_0012cebc"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_0012cebc.c",
+          "declared_provider_type": "function(pointer to (const struct WordProperty), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_0012cebc.c",
+            "line": 4
+          },
+          "source_sha256": "ae8ecf1e6890b91f131f4cbbde854ac2a1892e63134d854b12210e6d27fa89ea",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "ae8ecf1e6890b91f131f4cbbde854ac2a1892e63134d854b12210e6d27fa89ea"
+    },
+    {
+      "row_id": "unmodeled-13",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0012ced8",
+      "input": {
+        "caller": "0x00115638",
+        "site": "0x001157b4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0012ced8",
+          "owner": "0x0012ced8",
+          "names": [
+            "func_0012ced8"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0012ced8",
+          "name": "func_0012ced8",
+          "aliases": [
+            "func_0012ced8"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave1/func_0012ced8.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave1/func_0012ced8.c",
+            "line": 1
+          },
+          "source_sha256": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "fd47b90c03f8223a0be3c9aeee342f4984c0d1906234df6db39d9416113efd80"
+    },
+    {
+      "row_id": "unmodeled-14",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_00144960",
+      "input": {
+        "caller": "0x0012f65c",
+        "site": "0x0012f810",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x00144960",
+          "owner": "0x00144960",
+          "names": [
+            "func_00144960"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x00144960",
+          "name": "func_00144960",
+          "aliases": [
+            "func_00144960"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_00144960.c",
+          "declared_provider_type": "function(pointer to (const pointer to (void)), pointer to (pointer to (void))) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_00144960.c",
+            "line": 4
+          },
+          "source_sha256": "664725678efe7cf021f9eaf080ef2b87489b3293d5823f0c2968a64680e301ee",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "664725678efe7cf021f9eaf080ef2b87489b3293d5823f0c2968a64680e301ee"
+    },
+    {
+      "row_id": "unmodeled-15",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001c8994",
+      "input": {
+        "caller": "0x001401fc",
+        "site": "0x00140240",
+        "callee": "0x001c8994",
+        "argument_location": "r1",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001c8994",
+          "owner": "0x001c8994",
+          "names": [
+            "func_001c8994"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001c8994",
+          "name": "func_001c8994",
+          "aliases": [
+            "func_001c8994"
+          ],
+          "ledger_state": "UNCLAIMED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "declared_provider_type": "NO_LEDGER_PROVIDER",
+          "comparison": "UNCLAIMED_PROVIDER",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "not-applicable",
+      "reason": "No accepted provider exists at this candidate address. The assignment does not create or credit an unclaimed provider; no source is synthesized."
+    },
+    {
+      "row_id": "unmodeled-16",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_00144960",
+      "input": {
+        "caller": "0x00146e78",
+        "site": "0x00146ef8",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x00144960",
+          "owner": "0x00144960",
+          "names": [
+            "func_00144960"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x00144960",
+          "name": "func_00144960",
+          "aliases": [
+            "func_00144960"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_00144960.c",
+          "declared_provider_type": "function(pointer to (const pointer to (void)), pointer to (pointer to (void))) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_00144960.c",
+            "line": 4
+          },
+          "source_sha256": "664725678efe7cf021f9eaf080ef2b87489b3293d5823f0c2968a64680e301ee",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "664725678efe7cf021f9eaf080ef2b87489b3293d5823f0c2968a64680e301ee"
+    },
+    {
+      "row_id": "unmodeled-17",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0014f7d8",
+      "input": {
+        "caller": "0x0014c9b0",
+        "site": "0x0014ca40",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0014f7d8",
+          "owner": "0x0014f7d8",
+          "names": [
+            "func_0014f7d8"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0014f7d8",
+          "name": "func_0014f7d8",
+          "aliases": [
+            "func_0014f7d8"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_0014f7d8.c",
+          "declared_provider_type": "function(pointer to (const unsigned int), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_0014f7d8.c",
+            "line": 2
+          },
+          "source_sha256": "0c4f869706bd184de84fc156443ad8a609b53e38271aa82c0fdad3c5d5a34d23",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "0c4f869706bd184de84fc156443ad8a609b53e38271aa82c0fdad3c5d5a34d23"
+    },
+    {
+      "row_id": "unmodeled-18",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0014c2c8",
+      "input": {
+        "caller": "0x0014c9b0",
+        "site": "0x0014ca40",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0014c2c8",
+          "owner": "0x0014c2c8",
+          "names": [
+            "func_0014c2c8"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0014c2c8",
+          "name": "func_0014c2c8",
+          "aliases": [
+            "func_0014c2c8"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave2/func_0014c2c8.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave2/func_0014c2c8.c",
+            "line": 1
+          },
+          "source_sha256": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec"
+    },
+    {
+      "row_id": "unmodeled-19",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0014f7d8",
+      "input": {
+        "caller": "0x0014cafc",
+        "site": "0x0014cba4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+20",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0014f7d8",
+          "owner": "0x0014f7d8",
+          "names": [
+            "func_0014f7d8"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0014f7d8",
+          "name": "func_0014f7d8",
+          "aliases": [
+            "func_0014f7d8"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave12/func_0014f7d8.c",
+          "declared_provider_type": "function(pointer to (const unsigned int), pointer to (unsigned int)) -> void",
+          "declaration_site": {
+            "source": "src/wave12/func_0014f7d8.c",
+            "line": 2
+          },
+          "source_sha256": "0c4f869706bd184de84fc156443ad8a609b53e38271aa82c0fdad3c5d5a34d23",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "0c4f869706bd184de84fc156443ad8a609b53e38271aa82c0fdad3c5d5a34d23"
+    },
+    {
+      "row_id": "unmodeled-20",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0014c2c8",
+      "input": {
+        "caller": "0x0014cafc",
+        "site": "0x0014cba4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+24",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0014c2c8",
+          "owner": "0x0014c2c8",
+          "names": [
+            "func_0014c2c8"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0014c2c8",
+          "name": "func_0014c2c8",
+          "aliases": [
+            "func_0014c2c8"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave2/func_0014c2c8.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave2/func_0014c2c8.c",
+            "line": 1
+          },
+          "source_sha256": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "ee67b4b4a13abf28eb052d4f2e144b3c0a8fceff51df02e2d24ac28efbcfe7ec"
+    },
+    {
+      "row_id": "unmodeled-21",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_0014c2bc",
+      "input": {
+        "caller": "0x0014cafc",
+        "site": "0x0014cba4",
+        "callee": "0x0019dd50",
+        "argument_location": "stack+28",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x0014c2bc",
+          "owner": "0x0014c2bc",
+          "names": [
+            "func_0014c2bc"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x0014c2bc",
+          "name": "func_0014c2bc",
+          "aliases": [
+            "func_0014c2bc"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave10/func_0014c2bc.c",
+          "declared_provider_type": "function(pointer to (function(pointer to (void)) -> void), pointer to (pointer to (void))) -> void",
+          "declaration_site": {
+            "source": "src/wave10/func_0014c2bc.c",
+            "line": 1
+          },
+          "source_sha256": "1e8fd12c4540f9badb5c76adba8d1cad8e0fa859d2597514004e8208df12f195",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "1e8fd12c4540f9badb5c76adba8d1cad8e0fa859d2597514004e8208df12f195"
+    },
+    {
+      "row_id": "unmodeled-22",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_00100000",
+      "input": {
+        "caller": "0x00214d9c",
+        "site": "0x00214e1c",
+        "callee": "0x00100c94",
+        "argument_location": "r2",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x00100000",
+          "owner": "0x00100000",
+          "names": [
+            "func_00100000",
+            "__dso_handle"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x00100000",
+          "name": "func_00100000",
+          "aliases": [
+            "__dso_handle",
+            "func_00100000"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave14/func_00100000.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave14/func_00100000.c",
+            "line": 5
+          },
+          "source_sha256": "82e93333a947f768df7898aca325ef0ee0e1d827d9ad14da05da725c45a8b31c",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "not-applicable",
+      "reason": "Known atexit registration parameter2 is the image-base/DSO HANDLE, not its callback parameter1. func00100000 is the program entrypoint used as that opaque handle, not an invokable cleanup callback. No function type rewrite applies."
+    },
+    {
+      "row_id": "unmodeled-23",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_00100000",
+      "input": {
+        "caller": "0x00214e40",
+        "site": "0x00214ec8",
+        "callee": "0x00100c94",
+        "argument_location": "r2",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x00100000",
+          "owner": "0x00100000",
+          "names": [
+            "func_00100000",
+            "__dso_handle"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x00100000",
+          "name": "func_00100000",
+          "aliases": [
+            "__dso_handle",
+            "func_00100000"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave14/func_00100000.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave14/func_00100000.c",
+            "line": 5
+          },
+          "source_sha256": "82e93333a947f768df7898aca325ef0ee0e1d827d9ad14da05da725c45a8b31c",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "not-applicable",
+      "reason": "Known atexit registration parameter2 is the image-base/DSO HANDLE, not its callback parameter1. func00100000 is the program entrypoint used as that opaque handle, not an invokable cleanup callback. No function type rewrite applies."
+    },
+    {
+      "row_id": "unmodeled-24",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_001d433c",
+      "input": {
+        "caller": "0x00215120",
+        "site": "0x002151cc",
+        "callee": "0x001d5570",
+        "argument_location": "r1",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x001d433c",
+          "owner": "0x001d433c",
+          "names": [
+            "func_001d433c"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x001d433c",
+          "name": "func_001d433c",
+          "aliases": [
+            "func_001d433c"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave3/func_001d433c.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave3/func_001d433c.c",
+            "line": 1
+          },
+          "source_sha256": "8cbad21cafe5f841ca8c52d4da5aee075cf2c976b0338b538990370072eb6bbb",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier.",
+      "source_sha256": "8cbad21cafe5f841ca8c52d4da5aee075cf2c976b0338b538990370072eb6bbb"
+    },
+    {
+      "row_id": "unmodeled-25",
+      "category": "unmodeled_passed_code_candidate",
+      "function": "func_00100000",
+      "input": {
+        "caller": "0x00215120",
+        "site": "0x002151cc",
+        "callee": "0x001d5570",
+        "argument_location": "r2",
+        "provider": {
+          "kind": "function_address",
+          "address": "0x00100000",
+          "owner": "0x00100000",
+          "names": [
+            "func_00100000",
+            "__dso_handle"
+          ]
+        },
+        "provider_contract": {
+          "address": "0x00100000",
+          "name": "func_00100000",
+          "aliases": [
+            "__dso_handle",
+            "func_00100000"
+          ],
+          "ledger_state": "ACCEPTED_UNCHANGED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "UNESTABLISHED: candidate argument to a callee without a canonical callback declaration",
+          "source": "src/wave14/func_00100000.c",
+          "declared_provider_type": "function(void) -> void",
+          "declaration_site": {
+            "source": "src/wave14/func_00100000.c",
+            "line": 5
+          },
+          "source_sha256": "82e93333a947f768df7898aca325ef0ee0e1d827d9ad14da05da725c45a8b31c",
+          "comparison": "UNESTABLISHED_RUNTIME_OR_CPP_NOMINAL_TYPE",
+          "current_NEW_or_revised_closed": true
+        },
+        "disposition": "Explicit possible callback candidate, not silently declared noninvoking/noncallback. Main owns unchanged accepted providers."
+      },
+      "disposition": "held",
+      "reason": "The callee lacks a canonical callable declaration for this argument. Actual copy/invoke/destruction and payload storage roles are unestablished; do not turn a possible code address into a guessed void* callback or invent an argument carrier. This looks like another image-base role, but callee001d5570 is unmodeled; unlike the known00100c94 cases it remains explicitly held rather than silently treated as noncallback.",
+      "source_sha256": "82e93333a947f768df7898aca325ef0ee0e1d827d9ad14da05da725c45a8b31c"
+    }
+  ],
+  "fixed_providers": [
+    "func_00110358",
+    "func_0011ee7c",
+    "func_0011ee94",
+    "func_0011eeac",
+    "func_0012d104",
+    "func_0012fb58",
+    "func_00134170",
+    "func_001342f4",
+    "func_00142a54",
+    "func_00144970",
+    "func_00149270",
+    "func_0014b438",
+    "func_0014c2cc",
+    "func_0014d288",
+    "func_0014e078",
+    "func_0014ee30",
+    "func_0014ee44",
+    "func_00156dac",
+    "func_001acc18",
+    "func_001aff90",
+    "func_001b3340",
+    "func_001b733c",
+    "func_001c4568",
+    "func_001c5198",
+    "func_001c519c",
+    "func_001c5260",
+    "func_001c526c",
+    "func_001c5760",
+    "func_001d3898",
+    "func_00216140",
+    "func_002161ec",
+    "func_00216e4c"
+  ],
+  "held_mismatch_providers": [
+    "func_001bba58",
+    "func_001c2158",
+    "func_001c5294",
+    "func_001c52bc",
+    "func_001c5738",
+    "func_001c58d0",
+    "func_001d0110",
+    "func_001d3370",
+    "func_001d9920",
+    "func_001ef960"
+  ],
+  "held_owner_or_transport_providers": {
+    "func_00122670": "Bound native Pane::GetVtxColor returns Color and takes its native const receiver/index. A generic array callback cannot replace that genuine native member or add an alias; the shared-address/runtime role needs independent identity evidence.",
+    "func_001e7fdc": "Also the installed scene cleanup provider in the quarantined scene-table family. Erasing the native/scene receiver to satisfy atexit would break the other callable owner; complete native family/U1 remains required.",
+    "func_001bb9b4": "Depends on the unclosed LargeResourceElement/CompositeResource cleanup family and specialized typed array destruction; no byte-offset/punning bridge is admissible in a new callback repair.",
+    "func_001c3100": "Opaque LargeResourceElement is reinterpreted as CompositeResource and returned through byte-offset ResourceCleanup projections. No exactly-witnessed single storage family is available; preserve accepted body, do not launder it behind void*.",
+    "func_0011362c": "The provider consumes a function-pointer VALUE, not a pointer to an object containing one. Converting incoming void* to an invokable function pointer would introduce forbidden pointer-type reinterpretation; real transport/typed closure remains unestablished.",
+    "func_0014fa30": "The thread provider forwards a scalar unsigned word, while the current runtime stores an opaque object pointer. No actual pointer-to-unsigned transport contract is established; do not reinterpret its representation or invent a payload object."
+  },
+  "no_accepted_identity_deferred": true,
+  "no_callback_casts_or_new_wrappers": true,
+  "supersedes": "RUNTIME-CALLBACK-DISPOSITIONS.json: explicitly replace all inherited generic-type/source-reference fields for the now-genuine native constructor.",
+  "fixed_protocol_counts": {
+    "exact_generic_C_providers": 31,
+    "genuine_native_member_constructors": 1,
+    "held": 45,
+    "not_applicable": 4
+  }
+}

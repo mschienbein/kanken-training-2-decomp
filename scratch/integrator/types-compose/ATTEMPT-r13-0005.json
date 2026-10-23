@@ -1,0 +1,67 @@
+{
+  "source": "src/wave13/func_0017fda4.cpp",
+  "profile": "game",
+  "functions": [
+    "func_0017fda4"
+  ],
+  "extra_sources": [],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave13/func_0017fda4.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-compose/match/r13-0005-func_0017fda4"
+  ],
+  "exit": 0,
+  "source_sha256": "35b6e1b50990349f15c0f3152653c5ec3dffe81a09e72acb8e9d16cfe8c91487",
+  "receipt": "scratch/integrator/types-compose/match/r13-0005-func_0017fda4/func_0017fda4.result.json",
+  "receipt_sha256": "d6eca22257faabf91820a57d1bb4f076c944e82e94ed37e1196435d80f350ba0",
+  "receipt_record": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave13/func_0017fda4.cpp",
+    "source_sha256": "35b6e1b50990349f15c0f3152653c5ec3dffe81a09e72acb8e9d16cfe8c91487",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "441b05fa56dcd2769851bada111be991b8dc6f99bb14b639ea19af0b13f5eed2",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "func_0017fda4",
+        "address": 1572260,
+        "size": 96,
+        "candidate_size": 96,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

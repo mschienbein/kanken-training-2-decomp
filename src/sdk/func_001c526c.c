@@ -5,8 +5,9 @@ struct KernelHandleOwner {
     CtrHandle handle;
 };
 
-struct KernelHandleOwner *func_001c526c(struct KernelHandleOwner *object)
+void *func_001c526c(void *storage)
 {
+    struct KernelHandleOwner *object = storage;
     if (object->handle != 0) {
         svcCloseHandle(object->handle);
         object->handle = 0;

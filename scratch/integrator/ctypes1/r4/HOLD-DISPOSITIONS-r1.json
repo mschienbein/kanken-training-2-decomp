@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "checkpoint": "ctypes1",
+  "revision": "r4",
+  "item3": {
+    "disposition": "NOT APPLIED; explicit Main ruling",
+    "reason": "New SecondTrainingScreen retains one +0x4c controls pointer in union TrainingControls and reads it as both unrelated AnimationOwner* and W6ListController* in one revised body. This is union punning/competing-owner access, not a source-policy repair. A witnessed single common model is required.",
+    "ruling": "Do not import item3. Keep accepted forms and the old sdk profile of 0016de90.",
+    "accepted_revision_sources_held": [
+      {
+        "source": "src/wave19/func_0016dae8.c",
+        "functions": [
+          "func_0016dae8"
+        ],
+        "retained_source_sha256": "7416d23a9053570c22d921b97976ebddd64aeca6593e1db3fe0f47539f66540d",
+        "r3_source_sha256": "7416d23a9053570c22d921b97976ebddd64aeca6593e1db3fe0f47539f66540d",
+        "unchanged_from_r3": true
+      },
+      {
+        "source": "src/checkpoint10/collect-r2/func_001bbdd4.cpp",
+        "functions": [
+          "func_001bbdd4"
+        ],
+        "retained_source_sha256": "fd36901038981152aac89edbad7b0763f897e7112f5ac6abe9af566fea1800ff",
+        "r3_source_sha256": "fd36901038981152aac89edbad7b0763f897e7112f5ac6abe9af566fea1800ff",
+        "unchanged_from_r3": true
+      },
+      {
+        "source": "src/wave15/func_0016c9f0.c",
+        "functions": [
+          "func_0016c9f0"
+        ],
+        "retained_source_sha256": "e7ac6aab78ee2cbd34d7292fa4692107931097a45ed9ea00e1b5d87bf7368fea",
+        "r3_source_sha256": "e7ac6aab78ee2cbd34d7292fa4692107931097a45ed9ea00e1b5d87bf7368fea",
+        "unchanged_from_r3": true
+      },
+      {
+        "source": "src/models/func_001bd68c/func_001bd68c.cpp",
+        "functions": [
+          "func_001bd68c"
+        ],
+        "retained_source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+        "r3_source_sha256": "e38a262bfc9cbe5a3c5016ec74d6c4318919ddc4b391e6612dc3eb3c5d137960",
+        "unchanged_from_r3": true
+      },
+      {
+        "source": "src/sdk2/func_0016de90.cpp",
+        "functions": [
+          "func_0016de90"
+        ],
+        "retained_source_sha256": "7ad7a264d2b183e998889b3555cb0b98ba41d7be0390313813285e1f7a3ad20e",
+        "r3_source_sha256": "7ad7a264d2b183e998889b3555cb0b98ba41d7be0390313813285e1f7a3ad20e",
+        "unchanged_from_r3": true
+      },
+      {
+        "source": "src/wave8/func_001e403c.c",
+        "functions": [
+          "func_001e403c"
+        ],
+        "retained_source_sha256": "2b2cec435160f6da6430b5433ed253bb2af4f112e9dcd4b83e888c61cdff7604",
+        "r3_source_sha256": "2b2cec435160f6da6430b5433ed253bb2af4f112e9dcd4b83e888c61cdff7604",
+        "unchanged_from_r3": true
+      }
+    ],
+    "declarations_held": [
+      "void func_001bc2a0(struct SecondTrainingScreen *screen);",
+      "void func_0016c60c(struct SecondTrainingScreen *screen, int mode);",
+      "void func_0016dae8(struct SecondTrainingScreen *screen, int mode, int reset);",
+      "void func_001bbdd4(struct SecondTrainingScreen *screen);",
+      "void func_001bbc1c(struct SecondTrainingScreen *screen);",
+      "void func_001bbfc4(struct SecondTrainingScreen *screen);",
+      "void func_001bc220(struct SecondTrainingScreen *screen);",
+      "void func_001bc5ac(struct SecondTrainingScreen *screen);",
+      "void func_001bbc50(struct SecondTrainingScreen *screen);",
+      "void func_0016c9f0(struct SecondTrainingScreen *screen);",
+      "void func_001bd68c(struct SecondTrainingScreen *screen);"
+    ],
+    "reprofile_held": {
+      "function": "func_0016de90",
+      "from": "sdk",
+      "proposed": "middleware",
+      "private_124B_MATCH": "Research only; unselected and unnecessary without item3"
+    },
+    "single_model_evidence_required": [
+      "Actual producer establishes one concrete controls owner or a genuine common base accepted by both call families.",
+      "Close the controller and child ownership/declarations/callers without pointer union alternatives, nominal facade aliases or reinterpretation."
+    ],
+    "names_delta": {}
+  },
+  "nm46": {
+    "function": "func_001ea6d8",
+    "extent": 420,
+    "disposition": "NEW NOT SELECTED under Main clean-source condition",
+    "research_receipt": {
+      "path": "scratch/integrator/contract-backlog/match/sealed-author-nm46/nm46-func_001e89e8.result.json",
+      "sha256": "0c7e824c7fa5c003107388b029de4d535349e081974cfc4636960fd5e73dfbd2",
+      "source": "scratch/integrator/contract-backlog/src/nm46-func_001e89e8.c",
+      "source_sha256": "4dc13c9a176bde23503a1fd43bb98c2862f11eab3a371cb46572b7fa74213857",
+      "status": "MATCH in intact three-function research TU under v2/none; no checkpoint credit"
+    },
+    "blockers": [
+      {
+        "source_lines": "286-334, especially304/323",
+        "issue": "HorizontalLabelGroup stores BoundDisplayObject* but sends it to const DisplayData* width provider by unrelated-owner casts. DisplayData.parts elements and BoundDisplayObject.bindings elements are distinct canonical models.",
+        "provider": "src/wave17/func_0016f4ec.c:25-27 consumes DisplayData.parts[0]->container->dimensions; there is no genuine field projection from BoundDisplayObject.",
+        "required": "Producer/tag evidence closing the actual display owner and element model; do not reopen the already held whole display/resource transaction speculatively."
+      },
+      {
+        "source_lines": "319-330",
+        "issue": "memcpy copies an InputPoint struct into float[2] array storage; no such representation conversion imported.",
+        "possible_local_repair": "Type-preserving float-to-float component copies can avoid this representation issue but do not resolve the width-owner interface."
+      }
+    ],
+    "unselected_companions": [
+      {
+        "function": "func_001e89e8",
+        "research_status": "25 differing bytes at80B"
+      },
+      {
+        "function": "func_001e8c74",
+        "research_status": "2020/2096B,763 differing bytes including extent"
+      }
+    ],
+    "canonical_sources_added": [],
+    "names_delta": {}
+  },
+  "item5": {
+    "disposition": "UNCHANGED accepted TaskPool provider; research decisionc",
+    "source": "func_0015477c",
+    "issue": "Producer evidence for an embedded noninitial link is not proof of a base enabling reverse owner casts; existing112B MATCH does not waive owner-recovery policy."
+  },
+  "applied_items": [
+    "1",
+    "2",
+    "4"
+  ],
+  "applied_accepted_functions": 12,
+  "applied_helper_units": 1,
+  "new_profile_revisions": []
+}

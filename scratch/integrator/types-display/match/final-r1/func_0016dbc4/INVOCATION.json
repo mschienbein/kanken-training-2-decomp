@@ -1,0 +1,25 @@
+{
+  "source": "src/retries/func_0016dbc4.c",
+  "profile": "sdk",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/retries/func_0016dbc4.c",
+    "--profile",
+    "sdk",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_0016dbc4"
+  ],
+  "exit": 2,
+  "seconds": 0.166,
+  "output": "error: armcc failed (1) on func_0016dbc4.c:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/retries/func_0016dbc4.c\", line 20: Error:  #136: struct \"DisplayObject\" has no field \"base\"\n      func_001826fc(&input->displays[0]->base, 1);\n                                         ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-display/src/retries/func_0016dbc4.c: 0 warnings, 1 error\n\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_0016dbc4",
+  "extra_sources": [],
+  "source_sha256": "142e3a0b8da0b6b70369ac8e545f085606ae0befdc729ce4c7628738034cab25"
+}

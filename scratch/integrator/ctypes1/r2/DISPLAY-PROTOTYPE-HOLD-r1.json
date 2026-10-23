@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "symbol": "func_0015ea60",
+  "header": "include/game/functions.h",
+  "decision": "Preserve exact c010 FlagDisplayObject declaration and provider. The isolated incoming DisplayObject prototype belonged to the held complete-display transaction, not an independent type revision.",
+  "failed_proof": {
+    "source": "src/wave18/func_0015ea60.c",
+    "profile": "game",
+    "functions": [
+      "func_0015ea60"
+    ],
+    "extra_sources": [],
+    "command": [
+      "nice",
+      "-n",
+      "10",
+      "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+      "tools/match.py",
+      "src/wave18/func_0015ea60.c",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--show",
+      "0",
+      "--out",
+      "scratch/integrator/ctypes1/r2/match/r8-closure-r1-1202-func_0015ea60"
+    ],
+    "exit": 2,
+    "credited_functions_match": false,
+    "source_sha256": "4bb6cc510046c88f9d0a8f436381d731cbbc565d469f01afd6525809197a0f0a",
+    "extra_source_sha256": {},
+    "receipt": "scratch/integrator/ctypes1/r2/match/r8-closure-r1-1202-func_0015ea60/func_0015ea60.result.json",
+    "receipt_sha256": "3f746abe5e67c96187fd846bdf9c1a0a43bb7577f76e44a1abdde752fa4f6898",
+    "status_counts": {}
+  },
+  "target_header_sha256": "e66e3661971f14aefea3ec11c69495fe948804e715e59abd119da925131d480a"
+}

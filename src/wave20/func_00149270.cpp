@@ -4,8 +4,9 @@
 
 
 
-extern "C" void func_00149270(struct WorkerThread *worker)
+extern "C" void func_00149270(void *argument, void *context)
 {
+    struct WorkerThread *worker = static_cast<struct WorkerThread *>(argument);
     while (!worker->stop_requested) {
         func_0014b7a0(func_00185de4());
         if (worker->stop_requested)

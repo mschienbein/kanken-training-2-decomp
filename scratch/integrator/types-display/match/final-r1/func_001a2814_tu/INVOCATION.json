@@ -1,0 +1,29 @@
+{
+  "source": "src/models/func_001a2814/func_001a2814_tu.cpp",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_001a2814/func_001a2814_tu.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_001a2814_tu",
+    "--extra-source",
+    "src/models/func_001a2814/tu441_removed_helpers.c"
+  ],
+  "exit": 0,
+  "seconds": 0.206,
+  "output": "MATCH    func_001a2814 @ 0x1a2814 size 0x1e0/0x1e0 [armlink5-inline-branchnop-v6: 1 inline_nop]\nMATCH    func_001a3ee0 @ 0x1a3ee0 size 0x19c/0x19c [armlink5-inline-branchnop-v6: 1 inline_insn]\nREMOVED  tu441_transition_active (8 bytes; i.tu441_transition_active)\nREMOVED  tu441_update_secondary (4 bytes; i.tu441_update_secondary)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_001a2814_tu",
+  "extra_sources": [
+    "src/models/func_001a2814/tu441_removed_helpers.c"
+  ],
+  "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef"
+}

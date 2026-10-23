@@ -5,12 +5,9 @@ struct BankInstrumentInfo;
 struct BinaryBlockHeader;
 struct BinaryFileHeader;
 struct FontGlyphInfo;
-struct FontInfo;
 struct FontInformation;
-struct FontReader;
 struct FontResource;
 struct FontResourceHeader;
-struct FontResourceReader;
 struct FontVTable;
 struct P1179b4;
 struct S1179b4;
@@ -21,12 +18,11 @@ struct ValuePresence;
 struct VramAllocator;
 struct VramNode;
 struct WordProperty;
-struct FontManager;
 
 #include <stddef.h>
-#include "game/pool_list.h"
 #include "game/font.h"
 
+#include <stdbool.h>
 
 
 
@@ -83,31 +79,12 @@ struct SoundUpdateFlag {
     unsigned char pending;
 };
 
-struct FontReader {
-    const void *vtable;
-    struct BinaryFileHeader *file;
-    struct FontInfo *info;
-};
 
 struct BinaryBlockHeader {
     unsigned signature;
     unsigned size;
 };
 
-struct FontGlyphInfo {
-    unsigned char cell_width;
-    unsigned char cell_height;
-    unsigned char baseline;
-    unsigned char max_width;
-    unsigned sheet_size;
-    unsigned short sheet_count;
-    unsigned short format;
-    unsigned short columns;
-    unsigned short rows;
-    unsigned short width;
-    unsigned short height;
-    unsigned char *sheet_image;
-};
 
 struct WordProperty {
     unsigned value;
@@ -167,11 +144,6 @@ struct FontInformation {
     unsigned char field16;
 };
 
-struct FontResourceReader {
-    const void *vtable;
-    const unsigned char *resource;
-    const struct FontInformation *information;
-};
 
 #ifdef __cplusplus
 extern "C" {
@@ -190,8 +162,8 @@ extern int func_001494b8(struct VramAllocator *allocator, unsigned size, unsigne
 extern void func_001d2e04(struct SoundFileBuffer *buffer);
 extern void func_001d5c8c(struct SoundUpdateFlag *object);
 extern void func_001d89a0(struct SoundUpdateFlag *object);
-extern void func_001dae98(struct FontReader *reader, struct BinaryFileHeader *file,
-                   struct FontInfo *info);
+extern void func_001dae98(struct FontResource *reader, struct FontFile *file,
+                   struct FontInformation *information);
 extern unsigned func_001db354(const struct BinaryFileHeader *file);
 extern void func_001107b4(const struct WordProperty *property, unsigned *output);
 extern int func_001179c4(struct S1179b4 *object);
@@ -200,11 +172,11 @@ extern void func_0011e97c(const struct WordProperty *property, unsigned *output)
 extern int func_001266d4(const struct ValuePresence *object);
 extern void func_0012cebc(const struct WordProperty *property, unsigned *output);
 extern const unsigned char *func_001f4888(const struct FontResourceHeader *header);
-extern int func_001f4988(const struct FontResourceReader *reader);
-extern int func_001f4b3c(const struct FontResourceReader *reader);
-extern int func_001f4cd4(const struct FontResourceReader *reader);
-extern int func_001f4ce0(const struct FontResourceReader *reader);
-extern int func_001f4cec(const struct FontResourceReader *reader);
+extern int func_001f4988(const struct FontResource *reader);
+extern int func_001f4b3c(const struct FontResource *reader);
+extern int func_001f4cd4(const struct FontResource *reader);
+extern int func_001f4ce0(const struct FontResource *reader);
+extern int func_001f4cec(const struct FontResource *reader);
 #ifdef __cplusplus
 }
 #endif
@@ -212,8 +184,10 @@ extern int func_001f4cec(const struct FontResourceReader *reader);
 
 #include "game/render_state.h"
 #ifdef __cplusplus
-/* [INFERENCE] Native identities and roles; layouts follow matching consumers. */
+#include "game/pool_list.h"
 
+/* Existing partial teardown owner. Its native container-destructor/return
+ * contracts remain an explicit prerequisite; no new native alias is claimed. */
 struct FontManager {
     const void *vtable;
     unsigned char reserved04[0x20];

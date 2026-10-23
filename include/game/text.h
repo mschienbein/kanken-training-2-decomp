@@ -29,6 +29,7 @@ struct MenuItem {
     signed char link_count;
     unsigned char reserved1b5[3];
     const unsigned short *link;
+    unsigned char reserved1bc[0x7c];          /* allocation extent: 0x238 */
 };
 
 static __inline const unsigned short *const *text_table_entries(const struct TextTable *table)

@@ -396,7 +396,7 @@ struct GraphicsConverters {
     unsigned char reserved14[0x1ec];
 };
 extern struct GraphicsConverters bss_004b8440;
-extern struct AudioCounter *func_00156dac(struct AudioCounter *counter);
+extern void *func_00156dac(void *storage);
 extern unsigned int func_00180418(void);
 extern void func_0015268c(struct AudioChannelState *state, float volume);
 extern void func_00152758(struct AudioChannelState *state, float gain);

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "checkpoint": "ctypes1",
+  "status": "NOT RUN; no heavy slot requested",
+  "baseline_checkpoint": "c010-r8",
+  "baseline_source": "f78df90632d86c1f48eb90b4ca2aacc5a23b50bc",
+  "prerequisites": [
+    "Finalize c010-r8 first and preserve its2682 identities,12 predecessor moves and94 NEW-only deferrals.",
+    "Integrate complete types-compose-r2 ancestry and current source/header/name/candidate hashes; do not install the dry ledger as an accepted record by hand.",
+    "Adjudicate the separate accepted-runtime callback follow-up and every inherited/unchecked C++ contract.",
+    "Use machine-wide exclusive heavy-slot grants; create unused output/checkpoint paths and preserve every failure."
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "commands": [
+    {
+      "step": "whole-ledger interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/ctypes1/r2/PROPOSED-LEDGER-r1.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/ctypes1/r2/interfaces-r1.json"
+      ]
+    },
+    {
+      "step": "whole-ledger caller contracts",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/ctypes1/r2/PROPOSED-LEDGER-r1.json",
+        "--rewrites",
+        "scratch/integrator/ctypes1/r2/LINKER-REWRITES-r1.json",
+        "--json",
+        "scratch/integrator/ctypes1/r2/argcheck-r1.json"
+      ]
+    },
+    {
+      "step": "prepare only after gates/adjudications",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "ctypes1",
+        "--candidates",
+        "config/candidates/ctypes1.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": "Clean committed integrated tree; two fresh full builds and suite, then two independent bound reviews. Main alone registers/finalizes/pushes."
+    }
+  ]
+}

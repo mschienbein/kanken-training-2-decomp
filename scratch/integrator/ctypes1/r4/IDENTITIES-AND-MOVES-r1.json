@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "base": "a72b9d45aa94d2df8a311fee64a0a0c4da54c48a",
+  "all_current_base_identities_preserved": true,
+  "base_functions": 2771,
+  "proposed_functions": 2772,
+  "NEW": [
+    "func_001f4cf8"
+  ],
+  "moves": [
+    {
+      "function": "func_0014c2cc",
+      "from": "src/wave18/func_0014c2cc.c",
+      "to": "src/wave18/func_0014c2cc.cpp",
+      "checkpoint": "ctypes1"
+    }
+  ],
+  "removed_source_units": [
+    "src/wave18/func_0014c2cc.c"
+  ],
+  "c009_r5_prepared": {
+    "ledger_sha256": "e183f4cf206cf003bb1308b90d4bafb254253b4fe0705c7c813a6e4fbdac983d",
+    "prepared_function_count": 2270,
+    "retained": 2269,
+    "inherited_exceptions": [
+      {
+        "function": "func_00117854",
+        "old_source": "src/wave18/func_00117854.cpp",
+        "already_absent_from_c011_r9": true,
+        "disposition": "Keep later protected display-family hold; no r4 re-entry/withdrawal",
+        "evidence": "scratch/integrator/ctypes1/r2/HANDOFF.json:protected_c009_deferrals and existing known-issues-ctypes1.md"
+      }
+    ],
+    "explicit_current_source_transitions": [
+      {
+        "function": "func_001dc574",
+        "from": "src/wave12/func_001dc574.c",
+        "to": "src/checkpoint10/collect-r2/func_001dc4a4.c",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001dc90c",
+        "from": "src/wave12/func_001dc90c.c",
+        "to": "src/checkpoint10/collect-r2/func_001dc4a4.c",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_00152560",
+        "from": "src/wave13/func_00152560.c",
+        "to": "src/checkpoint11/dsp_auxiliary-r5.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001db054",
+        "from": "src/wave13/func_001db054.c",
+        "to": "src/wave13/func_001db054.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001db068",
+        "from": "src/wave13/func_001db068.c",
+        "to": "src/wave13/func_001db068.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001f014c",
+        "from": "src/wave14/func_001f014c.c",
+        "to": "src/wave14/func_001f014c.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001f0158",
+        "from": "src/wave14/func_001f0158.c",
+        "to": "src/wave14/func_001f0158.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001f017c",
+        "from": "src/wave14/func_001f017c.c",
+        "to": "src/wave14/func_001f017c.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001f0188",
+        "from": "src/wave14/func_001f0188.c",
+        "to": "src/wave14/func_001f0188.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001f0194",
+        "from": "src/wave14/func_001f0194.c",
+        "to": "src/wave14/func_001f0194.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_0014c2cc",
+        "from": "src/wave18/func_0014c2cc.c",
+        "to": "src/wave18/func_0014c2cc.cpp",
+        "qualification": "Explicit ctypes1 manifest move"
+      },
+      {
+        "function": "func_00182ae4",
+        "from": "src/wave18/func_00182ae4.cpp",
+        "to": "src/checkpoint10/func_0013888c.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001c6a34",
+        "from": "src/wave4/func_001c6a34.cpp",
+        "to": "src/checkpoint10/func_0013888c.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      },
+      {
+        "function": "func_001c7f10",
+        "from": "src/wave12/func_001c7f10.cpp",
+        "to": "src/checkpoint10/func_0013888c.cpp",
+        "qualification": "Inherited predecessor source transition; no new ctypes1 move/credit claimed"
+      }
+    ]
+  },
+  "protected_unselected": {
+    "func_00131540": true,
+    "func_001f4920": true,
+    "func_001efcec": true,
+    "func_001f4994": true,
+    "func_001e84ec": true,
+    "func_00117854": true,
+    "func_0015e5d4": true
+  },
+  "qualified_reentry": {
+    "function": "func_001f4cf8",
+    "source": "src/wave20/func_001f4cf8.cpp",
+    "bytes": 64,
+    "qualification": "NEW re-entry of exactly the PF06-excluded reader: native Font::GetCharStrmReader(wchar_t) returns actual CharStrmReader member descriptors from data_0021c64c; native CP1252/UTF16 providers are bound through explicit moves, and UTF16 consumes the witnessed wchar_t producer API. This does not close the opaque game FontVTable/data_00223d98 or re-enter the four excluded wrappers. Unobserved historical callee identity remains [INFERENCE]."
+  },
+  "new_r4_withdrawals": []
+}

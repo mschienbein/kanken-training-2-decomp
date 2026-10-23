@@ -1,0 +1,390 @@
+{
+ "schema_version": 1,
+ "theme": "fontgfx",
+ "type_foundation_fully_closed": false,
+ "items": [
+  {
+   "id": "font-native-version",
+   "status": "BLOCKED_PREREQUISITE",
+   "functions": [
+    "func_001daf74",
+    "func_001f49b0",
+    "func_001cc12c",
+    "func_0013156c"
+   ],
+   "evidence": [
+    "fontgfx F01/F05/F09/F10",
+    "MODEL.md sections1/2",
+    "include/nw/font/font_Font.h Glyph format+12 vs retail writer001f4b90 format+10",
+    "native ResFontBase constructor binding00113e78 vs retail001daf74",
+    "older interface-deferrals-r4 row0013156c: distinct0021c5e0/middleware factory and dummy/return/version contract"
+   ],
+   "reason": "No complete retail native interface/override population or justified version identity. The exact C scalar slot repair does not authorize a Font/ResFontBase/Glyph alias or a second native name at another address."
+  },
+  {
+   "id": "container-lifetime",
+   "status": "BLOCKED_PREREQUISITE",
+   "functions": [
+    "func_001ccfcc",
+    "func_001cc12c",
+    "func_001cc4cc",
+    "func_001cceb8",
+    "func_001cd008"
+   ],
+   "evidence": [
+    "fontgfx T01/T02/T03/F10",
+    "src/wave18/func_001ccfcc.cpp",
+    "RUNS-r1.json failed001ccfcc after removing required FontManager declarations",
+    "include/nw/lyt/lyt_ArcResourceAccessor.h actual FontContainer+24/TextureContainer+30"
+   ],
+   "reason": "Existing001ccfcc still uses partial FontManager and pointer-return container teardown arithmetic. It is retained unchanged, NOT claimed type-correct or newly admitted. The real container destructors/finalizers and registry/accessor native font version must cut over together. DeleteTexture(const TextureInfo&) provider now genuinely MATCHes; registration/lookup owner/name proofs remain."
+  },
+  {
+   "id": "native-list",
+   "status": "BLOCKED_CROSS_THEME",
+   "functions": [
+    "func_001822fc",
+    "func_001cfdb4",
+    "func_001ce9e8",
+    "func_00196144"
+   ],
+   "evidence": [
+    "fontgfx L04",
+    "c009-r4/contract-deferrals-r3.json G07",
+    "NATIVE-LIST-PREREQUISITE.json"
+   ],
+   "reason": "Main explicitly directs keeping Pane caller on its current matching form until accepted00191154 and all C/native list consumers migrate. No native AppendChild alias or W19Child selector restoration."
+  },
+  {
+   "id": "native-material-constructor",
+   "status": "NO_NATIVE_NAME_ADOPTED",
+   "functions": [
+    "func_0017fe04"
+   ],
+   "evidence": [
+    "match/material-ctor-r1/material-ctor-r1.result.json",
+    "match/material-ctor-r2/material-ctor-r1.result.json",
+    "fontgfx L03"
+   ],
+   "reason": "Pinned native ctor witness156/92 and Color8 callback16/12 mismatch. Keep exact address-named Material*(Material*) original constructor at proven table224480,size50. No C1/vtable aliases from these failed proposals are adopted."
+  },
+  {
+   "id": "matrix-atomic-transaction",
+   "status": "DEFERRED_TO_C010_REBASE",
+   "functions": [
+    "func_00116064",
+    "func_0010e2e0",
+    "func_00180234",
+    "func_00193620"
+   ],
+   "evidence": [
+    "fontgfx M01/M02/M03",
+    "MIGRATION.json matrix atomic transaction"
+   ],
+   "reason": "Required transaction includes c010 owners0010dd88 and001405f4, explicitly excluded from this assignment. No duplicate singleton/accessor or partial geometry-only MTX34 alias added."
+  },
+  {
+   "id": "surface-prefix",
+   "status": "BLOCKED_PRODUCER_PROOF",
+   "functions": [
+    "func_00183ff8"
+   ],
+   "evidence": [
+    "fontgfx B01/B02/B03"
+   ],
+   "reason": "Framebuffer attachment ownership is corrected. Full shared TransferSurface producer prefix/texture-image owner extent remains unproved; no complete renderbuffer/texture object alias is introduced. Later attachment query can use corrected bound owner after a fresh whole-TU witness."
+  },
+  {
+   "id": "remaining-preserved-residuals",
+   "status": "NOT_CLOSED",
+   "functions": [
+    "func_0017f7f8",
+    "func_0017053c",
+    "func_001273a0",
+    "func_001233d0",
+    "func_0015ebfc"
+   ],
+   "evidence": [
+    "fontgfx L05/G04/B05/F05"
+   ],
+   "reason": "Coordinate lifetime, layout factoring, GPU byte-cursor scheduling, AppletTimeout duration, and WideTextWriter-vs-CharWriter remain genuine independent prerequisites. DisplayFramebuffer array lifetime portion alone is now corrected."
+  },
+  {
+   "id": "other-theme-carries",
+   "status": "INTENTIONALLY_UNCHANGED",
+   "functions": [
+    "func_00113c0c",
+    "func_0018ee88"
+   ],
+   "evidence": [
+    "c009/interface-deferrals-r4.json"
+   ],
+   "reason": "Result/raw-status and ServiceCallbackState/byte-mode residuals belong to services, not fontgfx; no shadow declarations or scope substitution."
+  }
+ ],
+ "later_checkpoint_effects": [
+  {
+   "function": "func_0019d9d8",
+   "evidence": [
+    "F07"
+   ],
+   "effect": "field-view conflict resolved by actual legacy+0xc member; fresh typed family rematch required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cf83c",
+   "evidence": [
+    "F03",
+    "L02"
+   ],
+   "effect": "vtable spelling conflict resolved, but full retail FontObjectBase/TextBox migration and source rematch required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Correct ascent/encoding slot meanings and real native TextBox storage/Init; native font-version boundary remains.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_00101f64",
+   "evidence": [
+    "F04"
+   ],
+   "effect": "font-vtable portion only; resource-table owner/allocations must remain coherent with other themes",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001608b4",
+   "evidence": [
+    "Q01"
+   ],
+   "effect": "0017a424 overload conflict resolved; other source casts/types in the full TU are not certified",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001e0a28",
+   "evidence": [
+    "Q01"
+   ],
+   "effect": "0017a424 overload conflict resolved; preserve other lesson-family ownership deferrals",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001daf74",
+   "evidence": [
+    "F01",
+    "F02"
+   ],
+   "effect": "retail base/derived constructor layout resolved by actual chain; do not alias native legacy ResFontBase",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001f49b0",
+   "evidence": [
+    "F05",
+    "F08",
+    "F09"
+   ],
+   "effect": "cache storage resolved, but ushort-input proposal and genuine co-emitted helper/glyph mismatches remain; no automatic closure",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cc12c",
+   "evidence": [
+    "F10",
+    "T01"
+   ],
+   "effect": "entry/lifetime owner model specified; native font::Font versus retail interface identity still requires proof; remains deferred",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cc4cc",
+   "evidence": [
+    "T01",
+    "T02"
+   ],
+   "effect": "real TextureInfo contract specified; registration/lookup/delete defining providers must cut over atomically; remains deferred pending those proofs",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Genuine DeleteTexture(const TextureInfo&) provider now matched; registry/finalizer/lookup own-definition proofs remain.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cceb8",
+   "evidence": [
+    "T02",
+    "T03"
+   ],
+   "effect": "aggregate/reference contract specified; distinct cache-at30 owner and provider name proofs remain",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Native texture reference deletion provider repaired, other cache/aggregate/name proofs remain.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cd008",
+   "evidence": [
+    "T02",
+    "T03"
+   ],
+   "effect": "aggregate/reference contract specified; distinct cache-at1c owner and provider name proofs remain",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Native texture reference deletion provider repaired, distinct accessor owners preserved.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cf1f4",
+   "evidence": [
+    "L01",
+    "L03"
+   ],
+   "effect": "retail native class offset conflict resolved; actual provider/class cutover and fresh whole-TU match required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Picture-specific prefix yields158 retail extent while retaining Window layout; genuine Material getters/providers migrated.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001cfb24",
+   "evidence": [
+    "L02",
+    "L03"
+   ],
+   "effect": "retail TextBox/Material owner conflict resolved; virtual allocation format/provider population and fresh match required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Real TextBox Init and D1/D0/FreeStringBuffer providers match; material native ctor name and full allocation override population remain unproved.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_0017fc7c",
+   "evidence": [
+    "L03"
+   ],
+   "effect": "native Material count-record conflict resolved by full caller/factory migration; fresh match required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Actual native Material and accepted00181100 callers migrated by Display dependency; no unproved SetTexCoordGenNum alias added.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001ce9e8",
+   "evidence": [
+    "L04"
+   ],
+   "effect": "AppendChild owner model resolved; real provider own-definition/rematch required before admission",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_00196144",
+   "evidence": [
+    "L04"
+   ],
+   "effect": "native-pane/list portion resolved; group/binding/registration tail consumers must migrate with Display theme",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_0017053c",
+   "evidence": [
+    "L05"
+   ],
+   "effect": "native owner requirement clarified; existing lifetime/source-factoring mismatch remains",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_0017f7f8",
+   "evidence": [
+    "L01"
+   ],
+   "effect": "not closed: coordinate element lifetime/construction remains unproved; native VEC2 geometry is not enough",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_00183ff8",
+   "evidence": [
+    "B01",
+    "B02"
+   ],
+   "effect": "extra-context-view conflict resolved by same bound Framebuffer and actual attachment members; fresh accepted-family rematch required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Actual bound Framebuffer now owns two typed attachment members; no extra-context view.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001233d0",
+   "evidence": [
+    "B04",
+    "B05"
+   ],
+   "effect": "framebuffer pair/constructor portion resolved; AppletTimeout aggregate conflict remains; not full closure",
+   "admitted_by_this_research": false,
+   "implemented_portion": "Genuine DisplayFramebuffer constructor and pair declaration; AppletTimeout remains blocked.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_001273a0",
+   "evidence": [
+    "G01",
+    "G02",
+    "G04"
+   ],
+   "effect": "not closed: corrected shared GPU layout does not solve byte-cursor scheduling/match residual",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_00116064",
+   "evidence": [
+    "M01",
+    "M03"
+   ],
+   "effect": "one identity/type migration resolves shared helper overlap; native provider and all eight clients must be re-proved together",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_0010e2e0",
+   "evidence": [
+    "M01",
+    "M03"
+   ],
+   "effect": "same single helper migration; no duplicate MatrixIdentityW8C, fresh whole-family match required",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  },
+  {
+   "function": "func_0015ebfc",
+   "evidence": [
+    "F05"
+   ],
+   "effect": "not closed: canonical getter requires const WideTextWriter*, not CharWriter*; no base-to-derived shortcut",
+   "admitted_by_this_research": false,
+   "implemented_portion": "No new full-function admission: retain the exact model prerequisite/effect and respect excluded later-checkpoint ownership.",
+   "whole_deferral_closed": false
+  }
+ ],
+ "c009_r4_restorations": [],
+ "restoration_disposition": "No fontgfx c009-family deferral is honestly closed end-to-end: G07 requires the native-list migration; older0013156c requires its distinct font version/factory contract. Display dependency independently restores0015e5d4.",
+ "main_required_checks": [
+  "Compose all five theme ownership/header/name deltas.",
+  "Resolve/adjudicate the explicit remaining native font/container/list prerequisites before claiming a complete type checkpoint.",
+  "Main alone runs whole-ledger interfaces/argcheck, source/indirect table audits, full suite, two fresh full builds and independent reviews under frozen v1.19/v6/L1."
+ ]
+}

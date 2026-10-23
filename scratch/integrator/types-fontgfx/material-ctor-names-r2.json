@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "symbols": {
+    "_ZN2nw3lyt8MaterialC1Ev": {
+      "address": 1572356,
+      "evidence": "Own native constructor witness must MATCH original0017fe04, which installs table224480 and follows the0x50 allocation in L03."
+    },
+    "_ZN2nw3lyt8MaterialC2Ev": {
+      "address": 1572356,
+      "evidence": "Complete/base native aliases of the same emitted constructor; no unrelated alias."
+    },
+    "_ZTVN2nw3lyt8MaterialE": {
+      "address": 2245752,
+      "evidence": "Native ctor vtable address-point+8 is original224480, independently verified by the own ctor match."
+    },
+    "_ZN2nw2ut6Color8C1Ev": {
+      "address": 1356856,
+      "evidence": "Original0017fe04 references callback0014b438 at0017fe24 before native array construction0014e4cc. Candidate emits the real Color8 default constructor; own provider MATCH required."
+    },
+    "_ZN2nw2ut6Color8C2Ev": {
+      "address": 1356856,
+      "evidence": "Original0017fe04 references callback0014b438 at0017fe24 before native array construction0014e4cc. Candidate emits the real Color8 default constructor; own provider MATCH required."
+    }
+  }
+}

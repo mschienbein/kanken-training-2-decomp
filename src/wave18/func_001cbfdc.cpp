@@ -1,10 +1,13 @@
+#include <preinclude.h>
+#include <nw/lyt/lyt_Util.h>
 #include "game/font_resource.h"
 
 
 
-extern "C" void func_001cbfdc(const unsigned *handle)
+namespace nw { namespace lyt {
+void DeleteTexture(const TextureInfo &information)
 {
-    unsigned value = *handle;
+    unsigned value = information.GetTextureObject();
     if (data_00242f8c != 0) {
         unsigned texture = value;
         if (texture != 0)
@@ -16,3 +19,4 @@ extern "C" void func_001cbfdc(const unsigned *handle)
                 reinterpret_cast<void *>(value & ~3u));
     }
 }
+} }

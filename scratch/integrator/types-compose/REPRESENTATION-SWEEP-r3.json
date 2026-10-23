@@ -1,0 +1,763 @@
+{
+  "schema_version": 1,
+  "supersedes": [
+    "REPRESENTATION-SWEEP-r1.json",
+    "REPRESENTATION-SWEEP-r2.json"
+  ],
+  "scope": "Every surviving changed composition source/header plus all11 material rollback bodies, F02 cleanup and new/deleted repair headers. All proposed-ledger source clients were searched for resource and legacy/canonical family identifiers.",
+  "baseline": "ce44750dc2f7f170e79b526a3e9c35e1180489f0",
+  "material_rollback_baseline": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+  "scanned_files": 241,
+  "scanned_paths": [
+    "include/game/animation.h",
+    "include/game/archive.h",
+    "include/game/audio.h",
+    "include/game/audio_dsp.h",
+    "include/game/audio_tasks.h",
+    "include/game/audio_voice.h",
+    "include/game/command_group.h",
+    "include/game/display_animation.h",
+    "include/game/display_groups.h",
+    "include/game/display_object.h",
+    "include/game/exp_heap.h",
+    "include/game/filesystem.h",
+    "include/game/font.h",
+    "include/game/font_resource.h",
+    "include/game/framebuffer.h",
+    "include/game/functions.h",
+    "include/game/graphics_state.h",
+    "include/game/input.h",
+    "include/game/input_device.h",
+    "include/game/input_runtime.h",
+    "include/game/layout_lifecycle.h",
+    "include/game/material.h",
+    "include/game/prefetch_stream.h",
+    "include/game/render_state.h",
+    "include/game/reset_reference.h",
+    "include/game/resource_runtime.h",
+    "include/game/resource_tables.h",
+    "include/game/scene_lifecycle.h",
+    "include/game/scheduler.h",
+    "include/game/screen.h",
+    "include/game/sequence.h",
+    "include/game/service_runtime.h",
+    "include/game/service_state.h",
+    "include/game/sound_controller.h",
+    "include/game/sound_task.h",
+    "include/game/sound_track.h",
+    "include/game/sound_voice.h",
+    "include/game/startup.h",
+    "include/game/voice_wave_info.h",
+    "include/nw/font/font_CharStrmReader.h",
+    "include/nw/font/font_DispStringBuffer.h",
+    "include/nw/font/font_RectDrawer.h",
+    "include/nw/lyt/lyt_Material.h",
+    "include/nw/lyt/lyt_Pane.h",
+    "include/nw/lyt/lyt_Picture.h",
+    "include/nw/lyt/lyt_TextBox.h",
+    "include/nw/snd/snd_CurveAdshr.h",
+    "include/nw/snd/snd_Voice.h",
+    "include/nw/snd/snd_VoiceManager.h",
+    "include/nw/snd/snd_WaveArchiveFileReader.h",
+    "src/retries/func_0015e684.c",
+    "src/retries/func_0016dbc4.c",
+    "src/retries/func_00183550.cpp",
+    "src/sdk2/func_0014603c.cpp",
+    "src/sdk2/func_0017da08.cpp",
+    "src/types/display/func_0015e5d4.cpp",
+    "src/wave1/func_0011f080.cpp",
+    "src/wave1/func_001670e4.c",
+    "src/wave10/func_0015475c.cpp",
+    "src/wave10/func_0015e49c.c",
+    "src/wave10/func_0015e5c4.c",
+    "src/wave10/func_0015e5f0.c",
+    "src/wave10/func_0015e624.c",
+    "src/wave10/func_0015e780.c",
+    "src/wave10/func_0015e824.c",
+    "src/wave10/func_0015e96c.c",
+    "src/wave10/func_00167000.c",
+    "src/wave10/func_0016702c.c",
+    "src/wave10/func_0016fff8.c",
+    "src/wave10/func_00170014.c",
+    "src/wave10/func_001793e4.c",
+    "src/wave10/func_00179e00.c",
+    "src/wave10/func_00179e40.c",
+    "src/wave10/func_001963f8.c",
+    "src/wave11/func_00124a20.cpp",
+    "src/wave11/func_00145b5c.c",
+    "src/wave11/func_0015eac8.cpp",
+    "src/wave11/func_0016ff08.c",
+    "src/wave11/func_00175a5c.c",
+    "src/wave11/func_00181420.c",
+    "src/wave11/func_00181448.c",
+    "src/wave11/func_0018271c.cpp",
+    "src/wave11/func_0019637c.c",
+    "src/wave12/func_0017dae0.cpp",
+    "src/wave12/func_0017daf8.cpp",
+    "src/wave12/func_0017deec.cpp",
+    "src/wave12/func_00195874.c",
+    "src/wave12/func_001c1bf0.c",
+    "src/wave12/func_001d2b80.cpp",
+    "src/wave12/func_001d4cb8.cpp",
+    "src/wave12/func_001dae98.c",
+    "src/wave12/func_001f4988.c",
+    "src/wave12/func_001f4b2c.cpp",
+    "src/wave12/func_001f4b3c.c",
+    "src/wave12/func_001f4b48.cpp",
+    "src/wave12/func_001f4cb4.cpp",
+    "src/wave12/func_001f4cc4.cpp",
+    "src/wave12/func_001f4cd4.c",
+    "src/wave12/func_001f4ce0.c",
+    "src/wave12/func_001f4cec.c",
+    "src/wave13/func_0010c12c.c",
+    "src/wave13/func_00148800.c",
+    "src/wave13/func_00148854.c",
+    "src/wave13/func_001488bc.c",
+    "src/wave13/func_0014891c.c",
+    "src/wave13/func_00148988.c",
+    "src/wave13/func_001489e8.c",
+    "src/wave13/func_00148a3c.c",
+    "src/wave13/func_0014aaf4.c",
+    "src/wave13/func_0014ab30.c",
+    "src/wave13/func_0014d254.c",
+    "src/wave13/func_0014ee44.cpp",
+    "src/wave13/func_0014ee5c.cpp",
+    "src/wave13/func_0014fc78.cpp",
+    "src/wave13/func_00152560.c",
+    "src/wave13/func_0015274c.cpp",
+    "src/wave13/func_00154224.cpp",
+    "src/wave13/func_001549d8.c",
+    "src/wave13/func_0015e954.cpp",
+    "src/wave13/func_0015e9dc.c",
+    "src/wave13/func_0016504c.cpp",
+    "src/wave13/func_0017fda4.cpp",
+    "src/wave13/func_00180404.c",
+    "src/wave13/func_00181100.cpp",
+    "src/wave13/func_001c540c.cpp",
+    "src/wave13/func_001d88f0.cpp",
+    "src/wave13/func_001d9198.cpp",
+    "src/wave13/func_001d9580.cpp",
+    "src/wave13/func_001db054.cpp",
+    "src/wave13/func_001db068.cpp",
+    "src/wave13/func_001f2ef8.cpp",
+    "src/wave13/func_001f2f2c.cpp",
+    "src/wave14/func_00154f78.cpp",
+    "src/wave14/func_0016bf80.c",
+    "src/wave14/func_001810e4.c",
+    "src/wave15/func_0010264c.c",
+    "src/wave15/func_0010bc70.c",
+    "src/wave15/func_001351bc.c",
+    "src/wave15/func_0014fbcc.cpp",
+    "src/wave15/func_001525f0.cpp",
+    "src/wave15/func_00155148.cpp",
+    "src/wave15/func_0015643c.cpp",
+    "src/wave15/func_00180c84.c",
+    "src/wave15/func_00180d10.c",
+    "src/wave15/func_00180e14.c",
+    "src/wave15/func_00183208.c",
+    "src/wave15/func_001869f0.c",
+    "src/wave15/func_001d4d5c.cpp",
+    "src/wave15/func_001d9178.cpp",
+    "src/wave15/func_001d9530.cpp",
+    "src/wave16/func_00126f44.c",
+    "src/wave16/func_00135268.c",
+    "src/wave16/func_0015263c.cpp",
+    "src/wave16/func_00153fec.cpp",
+    "src/wave16/func_0015477c.cpp",
+    "src/wave16/func_00181724.c",
+    "src/wave16/func_001c1d4c.c",
+    "src/wave17/func_0015e480.cpp",
+    "src/wave17/func_0015e698.cpp",
+    "src/wave17/func_0015eaa8.c",
+    "src/wave17/func_0016f4ec.cpp",
+    "src/wave17/func_00171db8.c",
+    "src/wave17/func_001c29ac.cpp",
+    "src/wave17/func_001c2d74.cpp",
+    "src/wave17/func_001cf67c.cpp",
+    "src/wave18/func_0014d2e4.cpp",
+    "src/wave18/func_0015ea60.c",
+    "src/wave18/func_0016d4f8.c",
+    "src/wave18/func_0016f534.c",
+    "src/wave18/func_001af154.c",
+    "src/wave18/func_001c3988.c",
+    "src/wave18/func_001cbfdc.cpp",
+    "src/wave18/func_001d94a0.cpp",
+    "src/wave18/func_001d98f4.c",
+    "src/wave19/func_00150098.cpp",
+    "src/wave19/func_001501ec.cpp",
+    "src/wave19/func_0016c020.c",
+    "src/wave19/func_00170fc4.c",
+    "src/wave19/func_0017e6a4.cpp",
+    "src/wave2/func_00142a54.cpp",
+    "src/wave2/func_0014de8c.cpp",
+    "src/wave2/func_00179298.cpp",
+    "src/wave2/func_0018ce64.c",
+    "src/wave20/func_0014d02c.c",
+    "src/wave20/func_00150210.cpp",
+    "src/wave20/func_0015e4a8.cpp",
+    "src/wave20/func_0015e634.cpp",
+    "src/wave20/func_00166eb0.c",
+    "src/wave20/func_001c1ddc.c",
+    "src/wave20/func_001cf7b0.cpp",
+    "src/wave20/func_001eb190.c",
+    "src/wave20/func_001f4cf8.cpp",
+    "src/wave4/func_001391d8.cpp",
+    "src/wave4/func_0017da3c.c",
+    "src/wave4/func_0017e358.cpp",
+    "src/wave4/func_00182718.c",
+    "src/wave4/func_00183c54.cpp",
+    "src/wave6/func_0015e948.c",
+    "src/wave6/func_001826fc.cpp",
+    "src/wave6/func_00195a08.c",
+    "src/wave7/func_0014d000.c",
+    "src/wave7/func_0014e504.c",
+    "src/wave7/func_00150030.cpp",
+    "src/wave7/func_001545ec.cpp",
+    "src/wave7/func_00154608.cpp",
+    "src/wave7/func_00154624.cpp",
+    "src/wave7/func_001550e0.cpp",
+    "src/wave7/func_001551fc.cpp",
+    "src/wave7/func_00156398.cpp",
+    "src/wave7/func_0016a158.cpp",
+    "src/wave7/func_0016a178.cpp",
+    "src/wave7/func_0016a204.cpp",
+    "src/wave7/func_0017e470.cpp",
+    "src/wave7/func_0017e47c.cpp",
+    "src/wave7/func_0017e4bc.cpp",
+    "src/wave7/func_001815a8.c",
+    "src/wave7/func_001816c0.cpp",
+    "src/wave7/func_001816e0.cpp",
+    "src/wave7/func_00181700.cpp",
+    "src/wave7/func_00181734.cpp",
+    "src/wave7/func_001d49a8.cpp",
+    "src/wave7/func_001d49c8.cpp",
+    "src/wave7/func_001d49e8.cpp",
+    "src/wave7/func_001d911c.cpp",
+    "src/wave7/func_001d9220.cpp",
+    "src/wave7/func_001e5718.c",
+    "src/wave8/func_00138cb0.cpp",
+    "src/wave8/func_00152f10.cpp",
+    "src/wave8/func_0016a27c.cpp",
+    "src/wave8/func_00179160.c",
+    "src/wave8/func_0018290c.cpp",
+    "src/wave8/func_001829d0.cpp",
+    "src/wave8/func_00183bc8.cpp",
+    "src/wave8/func_001c5950.cpp",
+    "src/wave8/func_001c5970.cpp",
+    "src/wave8/func_001c5994.cpp",
+    "src/wave8/func_001c59fc.cpp",
+    "src/wave8/func_001d4a48.cpp",
+    "src/wave8/func_001d4aac.cpp",
+    "src/wave8/func_001e403c.c",
+    "src/wave9/func_0019d8c4.c"
+  ],
+  "representation_sensitive_files": 28,
+  "method": "Complete source read/diff inventory for memcpy/memmove/union/reinterpret/static/const/C-style pointer conversions; differentiate actual producer-backed object addressing and same-type copying from representation reinterpretation.",
+  "introduced_representation_sites_resolved": [
+    {
+      "source": "src/wave13/func_0014ab30.cpp (removed)",
+      "reason": "F01 word-to-BlendMode memcpy",
+      "disposition": "eleven-unit prepared material-family rollback, all source hashes exact"
+    },
+    {
+      "source": "src/wave17/func_0016f4ec.cpp",
+      "reason": "Size aggregate-to-float array memcpy",
+      "disposition": "four individual float-to-float memcpy copies;72B MATCH r16"
+    }
+  ],
+  "sites": [
+    {
+      "path": "include/game/animation.h",
+      "sites": [
+        {
+          "line": 114,
+          "source": "return *reinterpret_cast<AnimatedObject *>(reinterpret_cast<char *>(node) -",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "The offsetof-based intrusive iterator is present in c009-r6 verbatim; this composition changes only its opaque registry-owner explanation and independent rectangle types, not its representation operation."
+    },
+    {
+      "path": "include/game/display_object.h",
+      "sites": [
+        {
+          "line": 60,
+          "source": "((struct DisplayTimedAttachment *)(object)->attachments[index])",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 66,
+          "source": "return (const struct DisplayTimedAttachment *)object->attachments[index];",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 74,
+          "source": "return (struct TextDisplayAttachment *)object->attachments[index];",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 113,
+          "source": "return (LayoutDisplayAttachment *)object->attachments[index];",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 121,
+          "source": "return (PaneDisplayAttachment *)object->attachments[index];",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "producer_evidenced_actual_object",
+      "reason": "Each cast is a tag/producer-proven downcast to the actual allocated attachment (D05/D06/D07), not reinterpretation of a stored value as an unrelated peer."
+    },
+    {
+      "path": "include/game/functions.h",
+      "sites": [
+        {
+          "line": 119,
+          "source": "extern void func_0010ce44(void (*)(void *), void *);",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 120,
+          "source": "extern void func_0010ce58(int (*)(void *), void *);",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 121,
+          "source": "extern void func_0010cf84(void (*)(void *), void *);",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 163,
+          "source": "extern int func_00145f74(void (*)(void), void (*)(void), void (*)(void));",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "regex_false_positive",
+      "reason": "The matched lines are callback function-pointer declarations, not pointer casts or representation access."
+    },
+    {
+      "path": "include/game/graphics_state.h",
+      "sites": [
+        {
+          "line": 14,
+          "source": "union GraphicsRelayHeader;",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 17,
+          "source": "union GraphicsRelayHeader *header;",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "prepared_opaque_boundary",
+      "reason": "Only the prepared union tag/pointer is exposed; relay body restored unchanged previously. No new union access or cross-representation transfer is introduced."
+    },
+    {
+      "path": "include/game/screen.h",
+      "sites": [
+        {
+          "line": 238,
+          "source": "union WidgetSlotState {",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 246,
+          "source": "union WidgetSlotState state;",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 264,
+          "source": "return (struct WidgetSlot **)(controller + 1);",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "WidgetSlotState union and widget_slots owner-vector computation are unchanged legacy accepted operations. Material legacy views are separately marked needs-canonical-cutover; no alias or conversion to canonical DisplayObject exists."
+    },
+    {
+      "path": "include/game/sequence.h",
+      "sites": [
+        {
+          "line": 41,
+          "source": "union { const unsigned char *end; int available; } input;",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 63,
+          "source": "union { int wait_count; struct AudioVoice *voices; } activity;",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "The two state unions existed in the prepared header verbatim; no member-access transition or cross-representation copy was added."
+    },
+    {
+      "path": "include/game/service_state.h",
+      "sites": [
+        {
+          "line": 56,
+          "source": "union SynchronizationStorage event;",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 184,
+          "source": "union {",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 188,
+          "source": "union {",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "The synchronization storage and request/reply unions are unchanged prepared declarations."
+    },
+    {
+      "path": "include/game/sound_task.h",
+      "sites": [
+        {
+          "line": 12,
+          "source": "union SynchronizationStorage;",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 38,
+          "source": "union SynchronizationStorage state;",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 144,
+          "source": "union SynchronizationStorage state;",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "SynchronizationStorage tags/members predate the composition; no new reinterpretation is added."
+    },
+    {
+      "path": "include/nw/font/font_CharStrmReader.h",
+      "sites": [
+        {
+          "line": 51,
+          "source": "const CharType* charStrm = static_cast<const CharType*>(m_CharStrm);",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 58,
+          "source": "const CharType* charStrm = static_cast<const CharType*>(m_CharStrm);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "producer_evidenced_actual_object",
+      "reason": "m_CharStrm is type-erased input from native Set(const wchar_t*)/Set(const char*) producer contracts. Restoring the actual character type is not a different value representation."
+    },
+    {
+      "path": "include/nw/font/font_DispStringBuffer.h",
+      "sites": [
+        {
+          "line": 74,
+          "source": "return reinterpret_cast<internal::CharAttribute*>(",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 75,
+          "source": "reinterpret_cast<uptr>(this) + sizeof(*this) );",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "The pre-existing variable-tail CharAttribute accessor is unchanged from prepared source; not introduced or widened."
+    },
+    {
+      "path": "include/nw/font/font_RectDrawer.h",
+      "sites": [
+        {
+          "line": 140,
+          "source": "union",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 143,
+          "source": "union",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_unchanged",
+      "reason": "The uniform-buffer union definitions are unchanged prepared declarations; no new member use is introduced."
+    },
+    {
+      "path": "include/nw/lyt/lyt_Pane.h",
+      "sites": [
+        {
+          "line": 167,
+          "source": "return const_cast<Pane*>(&list.front());",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 175,
+          "source": "return const_cast<Pane*>(list.GetNext(pChild));",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "const_only",
+      "reason": "The unchanged casts remove const from real Pane list elements; they do not change representation or class identity."
+    },
+    {
+      "path": "src/wave11/func_00145b5c.c",
+      "sites": [
+        {
+          "line": 23,
+          "source": "word = (unsigned char *)&bss_0049cbd0;",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 26,
+          "source": "entry = (struct ResourceRegistrationSlot *)(word + 0x1c);",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_addressing",
+      "reason": "The original-bug byte computation is byte-for-byte unchanged; only its returned owner contract had previously been canonicalized to the actual ResourceRegistrationSlot.display subobject. It has no call edge into the material legacy family."
+    },
+    {
+      "path": "src/wave13/func_0014d254.c",
+      "sites": [
+        {
+          "line": 7,
+          "source": "return (struct MaterialPair *)(material->parameters + offset);",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "exact_prepared_material_rollback",
+      "reason": "Entire source equals the c009-r6 prepared hash. Any old field-only pointer conversion remains confined to the accepted material boundary; no conversion to canonical DisplayObject or BlendMode is added. No new source-policy approval of the legacy view is claimed."
+    },
+    {
+      "path": "src/wave13/func_0015e9dc.c",
+      "sites": [
+        {
+          "line": 9,
+          "source": "(struct ColoredDisplayBinding *)object->bindings[index];",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "exact_prepared_material_rollback",
+      "reason": "Entire source equals the c009-r6 prepared hash. Any old field-only pointer conversion remains confined to the accepted material boundary; no conversion to canonical DisplayObject or BlendMode is added. No new source-policy approval of the legacy view is claimed."
+    },
+    {
+      "path": "src/wave13/func_00180404.c",
+      "sites": [
+        {
+          "line": 9,
+          "source": "(struct TextureDisplayBinding *)object->bindings[index];",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "exact_prepared_material_rollback",
+      "reason": "Entire source equals the c009-r6 prepared hash. Any old field-only pointer conversion remains confined to the accepted material boundary; no conversion to canonical DisplayObject or BlendMode is added. No new source-policy approval of the legacy view is claimed."
+    },
+    {
+      "path": "src/wave13/func_00181100.cpp",
+      "sites": [
+        {
+          "line": 10,
+          "source": "reinterpret_cast<TextureDisplayBinding *>(object->bindings[0]);",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 20,
+          "source": "Material *material = static_cast<Material *>(",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "exact_prepared_material_rollback",
+      "reason": "Entire source equals the c009-r6 prepared hash. Any old field-only pointer conversion remains confined to the accepted material boundary; no conversion to canonical DisplayObject or BlendMode is added. No new source-policy approval of the legacy view is claimed."
+    },
+    {
+      "path": "src/wave13/func_001d9580.cpp",
+      "sites": [
+        {
+          "line": 41,
+          "source": "const unsigned char *begin = static_cast<const unsigned char *>(descriptor->data);",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 44,
+          "source": "if (first <= end && static_cast<const unsigned char *>(descriptor->data) <= last) {",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "byte_range_only",
+      "reason": "void* sample storage is converted to character addresses for interval comparisons, not read as a different scalar/aggregate type."
+    },
+    {
+      "path": "src/wave13/func_001db054.cpp",
+      "sites": [
+        {
+          "line": 7,
+          "source": "const wchar_t *current = static_cast<const wchar_t *>(m_CharStrm);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "producer_evidenced_actual_object",
+      "reason": "The native Set(const wchar_t*) API is the witnessed producer of the type-erased stream; the decoder reads actual wchar_t objects and returns u16."
+    },
+    {
+      "path": "src/wave13/func_001db068.cpp",
+      "sites": [
+        {
+          "line": 7,
+          "source": "const u8 *current = static_cast<const u8 *>(m_CharStrm);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "producer_evidenced_actual_object",
+      "reason": "The native byte-stream producer supplies actual u8 character objects; the decoder reads that type and returns u16."
+    },
+    {
+      "path": "src/wave14/func_001810e4.c",
+      "sites": [
+        {
+          "line": 8,
+          "source": "struct DisplayAnimationSlot *slot = (struct DisplayAnimationSlot *)object->bindings[index];",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "exact_prepared_material_rollback",
+      "reason": "Entire source equals the c009-r6 prepared hash. Any old field-only pointer conversion remains confined to the accepted material boundary; no conversion to canonical DisplayObject or BlendMode is added. No new source-policy approval of the legacy view is claimed."
+    },
+    {
+      "path": "src/wave17/func_0016f4ec.cpp",
+      "sites": [
+        {
+          "line": 15,
+          "source": "memcpy(&size[0], &node->m_Size.width, sizeof size[0]);",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 16,
+          "source": "memcpy(&size[1], &node->m_Size.height, sizeof size[1]);",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 17,
+          "source": "memcpy(width, &size[0], sizeof *width);",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 18,
+          "source": "memcpy(height, &size[1], sizeof *height);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "fixed_same_type_copy",
+      "reason": "Removed the aggregate Size-to-float-array reinterpretation. Four final memcpy calls copy exactly one float to another actual float; every destination is declared float. MATCH72B in r16."
+    },
+    {
+      "path": "src/wave18/func_001cbfdc.cpp",
+      "sites": [
+        {
+          "line": 19,
+          "source": "reinterpret_cast<void *>(value & ~3u));",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "inherited_address_encoding",
+      "reason": "The integer-to-void* conversion is the unchanged address field of the texture-release protocol; no value is read through an incompatible type."
+    },
+    {
+      "path": "src/wave4/func_001391d8.cpp",
+      "sites": [
+        {
+          "line": 11,
+          "source": "const void *address = static_cast<const unsigned char *>(",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 12,
+          "source": "static_cast<const void *>(file)) + static_cast<int>(offset);",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 14,
+          "source": "static_cast<const nw::ut::BinaryBlockHeader *>(address);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "serialized_object_locator",
+      "reason": "The S15 reference type0x6801 locates a distinct serialized BinaryBlockHeader and the CWAT tag identifies its payload. This computes the address of an evidenced block object, not a representation alias of the FileHeader or a word-to-header value copy. No offset or format interpretation was invented by this repair."
+    },
+    {
+      "path": "src/wave7/func_0014d000.c",
+      "sites": [
+        {
+          "line": 7,
+          "source": "func_0014e504((struct DisplayVertexPane *)binding->pane, 1);",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 8,
+          "source": "func_0014d02c((struct DisplayVertexPane *)binding->pane, 0, coordinates);",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "exact_prepared_material_rollback",
+      "reason": "Entire source equals the c009-r6 prepared hash. Any old field-only pointer conversion remains confined to the accepted material boundary; no conversion to canonical DisplayObject or BlendMode is added. No new source-policy approval of the legacy view is claimed."
+    },
+    {
+      "path": "src/wave8/func_00152f10.cpp",
+      "sites": [
+        {
+          "line": 12,
+          "source": "StreamChannel *state = static_cast<StreamChannel *>(context);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "producer_evidenced_actual_object",
+      "reason": "S08 and callback-producers-r2:00150778/00150cf8 pass their actual constructed StreamChannel array member (+0x228,stride0x3c8) as context to0017e500; the cast recovers that actual object, not a peer representation."
+    },
+    {
+      "path": "src/wave8/func_0018290c.cpp",
+      "sites": [
+        {
+          "line": 7,
+          "source": "AudioVoice *child = static_cast<AudioVoice *>(context);",
+          "existed_in_c009_r5_source": false
+        }
+      ],
+      "disposition": "producer_evidenced_actual_object",
+      "reason": "S05/001d9198 registers the AudioVoice returned by001d5528 as context; the cast recovers that actual allocation."
+    },
+    {
+      "path": "src/wave9/func_0019d8c4.c",
+      "sites": [
+        {
+          "line": 11,
+          "source": "block = (const struct FontBlock *)((const unsigned char *)file + file->headerSize);",
+          "existed_in_c009_r5_source": true
+        },
+        {
+          "line": 14,
+          "source": "glyph = (struct FontGlyphInfo *)block->data;",
+          "existed_in_c009_r5_source": false
+        },
+        {
+          "line": 17,
+          "source": "block = (const struct FontBlock *)((const unsigned char *)block + block->size);",
+          "existed_in_c009_r5_source": true
+        }
+      ],
+      "disposition": "canonical_serialized_type_rename",
+      "reason": "The serialized TGLP/GlyphInfo locator and block walk existed in the prepared source; the renamed shared record has the same witnessed serialized field meaning. No word/aggregate value representation conversion is introduced."
+    }
+  ],
+  "new_unresolved_representation_punning_retained": 0,
+  "qualifications": [
+    "Prepared material-family and other unchanged accepted representation/addressing operations are legacy debt, not new type-model approvals.",
+    "Producer-backed actual-object casts retain D05-D08/S05/S08/S15 and native Set API evidence; they are not arbitrary peer views.",
+    "Serialized object locators preserve their witnessed format/reference/tag contracts; no new packed-value reinterpretation is introduced."
+  ],
+  "errata": "Earlier provisional sweep records mis-cited the StreamChannel context producer. The actual source qualification is S08:00150778/00150cf8 pass their constructed channel-array member (+0x228,stride0x3c8) to0017e500.0014de8c constructs RecordState and is not that callback registration."
+}

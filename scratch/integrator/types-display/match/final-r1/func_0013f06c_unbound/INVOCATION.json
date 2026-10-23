@@ -1,0 +1,29 @@
+{
+  "source": "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+  "profile": "middleware",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/models/func_0013f06c/func_0013f06c_unbound.cpp",
+    "--profile",
+    "middleware",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_0013f06c_unbound",
+    "--extra-source",
+    "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+  ],
+  "exit": 0,
+  "seconds": 0.198,
+  "output": "MATCH    _ZN2nw2ut9FrameHeap11FreeByStateEj @ 0x13f06c size 0xa4/0xa4 [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  frame_heap_release_lock (4 bytes; i.frame_heap_release_lock)\nREMOVED  frame_heap_release_unlock (4 bytes; i.frame_heap_release_unlock)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_0013f06c_unbound",
+  "extra_sources": [
+    "src/models/func_0013f06c/frame_heap_unbound_hooks.c"
+  ],
+  "source_sha256": "fa93eae81600402323869190c29d3f4545d143d792bde5b9c1ffcd7402618472"
+}

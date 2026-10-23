@@ -113,7 +113,7 @@ extern int func_001d85d8(struct PendingTask128 *task);
 extern void func_001d85f4(struct PendingTask128 *task);
 extern void func_001db0f8(struct AudioParameterState *state, float value);
 extern int func_001f1890(const struct OptionalVoiceMode *voice);
-extern void func_002161ec(struct PoolList *list);
+extern void *func_002161ec(void *storage);
 #ifdef __cplusplus
 }
 #endif

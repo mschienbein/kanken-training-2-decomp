@@ -13,7 +13,7 @@ static const struct PaneIndexList *choice_map(const struct W19SelectionPanel *pa
 
 static int initial_press(const struct InputSnapshot *input)
 {
-    return input->active == 1 && input->previous_active == 0;
+    return input->pointer.active == 1 && input->pointer.previous_active == 0;
 }
 
 void func_001ae00c(struct W19SelectionPanel *panel, int reached_count)
@@ -29,14 +29,14 @@ void func_001ae00c(struct W19SelectionPanel *panel, int reached_count)
     for (i = 0; i < count; ++i) {
         struct InputSnapshot *input = panel->inputs[i];
         /* ORIGINAL BUG: only the first region is checked for null before this loop. */
-        func_00170418(input);
+        func_00170418(&input->pointer);
         if ((input->state & 4) == 0 && (input->state & 1) != 0) {
             if ((input->state & 2) != 0) {
-                if (input->released ||
-                    !func_001703c4(&input->rectangle, input->position.x, input->position.y))
+                if (input->pointer.released ||
+                    !func_001703c4(&input->rectangle, input->pointer.position.x, input->pointer.position.y))
                     input->state = 1;
             } else if (initial_press(input)) {
-                if (!func_001703c4(&input->rectangle, input->position.x, input->position.y)) {
+                if (!func_001703c4(&input->rectangle, input->pointer.position.x, input->pointer.position.y)) {
                     input->state = 1;
                 } else {
                     input->state |= 2;

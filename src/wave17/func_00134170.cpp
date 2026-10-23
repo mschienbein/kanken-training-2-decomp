@@ -2,10 +2,11 @@
 
 
 
-ResettableManager *func_00134170(ResettableManager *manager)
+void func_00134170(void *storage)
 {
+    ResettableManager *manager = static_cast<ResettableManager *>(storage);
     manager->vtable = data_00223bf0;
     if (manager->current)
         manager->current = 0;
-    return static_cast<ResettableManager *>(func_00183234(manager));
+    func_00183234(manager);
 }

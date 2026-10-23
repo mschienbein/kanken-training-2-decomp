@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "checkpoint": "ctypes1",
+  "revision": "r4",
+  "status": "NOT RUN by worker; no heavy slot requested",
+  "source_base": "a72b9d45aa94d2df8a311fee64a0a0c4da54c48a",
+  "predecessor": "c011-r9 including c014; finalize before ctypes1",
+  "Main_gate_context": "Preserve adopted Main GATESv1.20/U1/current tooling. Author transaction retains explicitv6/L1 and makes no native MenuScene/U1 selection.",
+  "prerequisites": [
+    "Finalize exact c011-r9 predecessor while preserving all2771 identities and116 c011/94 c010 protected NEW-only holds. Recompose/reprove if predecessor sources change.",
+    "Integrate the complete ctypes1 transaction and hashed r4 source/header/names/manifest records, retaining dfed46c3 and reviewed47897d25 history.",
+    "Keep item3/all six accepted revisions and0016de90 reprofile out; nm46/companions out; inherited TaskPool/stream/display/font/MenuScene holds unwaived.",
+    "Review31 generic callbacks separately from true native interpolation constructor; retain45 held ABI obligations/four not-applicable rows.",
+    "Use current complete2672-primary rewrite projection and adjudicate every native/C++ contract plus R1/L1 qualifications.",
+    "Reserve machine-wide heavy slot; ensure every output/checkpoint path is unused immediately before each command."
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "commands": [
+    {
+      "step": "whole-ledger interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/ctypes1/r4/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/ctypes1/r4/interfaces-r1.json"
+      ]
+    },
+    {
+      "step": "whole-ledger caller contracts",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/ctypes1/r4/PROPOSED-LEDGER.json",
+        "--rewrites",
+        "scratch/integrator/ctypes1/r4/LINKER-REWRITES.json",
+        "--json",
+        "scratch/integrator/ctypes1/r4/argcheck-r1.json"
+      ]
+    },
+    {
+      "step": "fresh prepare after gates/adjudications",
+      "cwd": "/home/michael/code/kanken-training-2-decomp",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "ctypes1",
+        "--candidates",
+        "config/candidates/ctypes1.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": "Clean committed integrated source. Two fresh full builds+full suite, then two independent bound reviews; Main alone registers/finalizes/pushes."
+    }
+  ]
+}

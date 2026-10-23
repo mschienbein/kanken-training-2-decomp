@@ -1,0 +1,29 @@
+{
+  "source": "src/wave7/func_00185bfc.c",
+  "profile": "game",
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave7/func_00185bfc.c",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-display/match/final-r1/func_00185bfc",
+    "--extra-source",
+    "src/models/object_registration/stream_manager.c"
+  ],
+  "exit": 0,
+  "seconds": 0.175,
+  "output": "MATCH    func_00185bfc @ 0x185bfc size 0x5c/0x5c [armlink5-inline-branchnop-v6: 2 inline_nop]\nREMOVED  register_stream_manager_cleanup (4 bytes; i.register_stream_manager_cleanup)\n",
+  "out": "scratch/integrator/types-display/match/final-r1/func_00185bfc",
+  "extra_sources": [
+    "src/models/object_registration/stream_manager.c"
+  ],
+  "source_sha256": "9ff3a82aae77725358c0b697a6ff4911827ce19a66c693b74c7fdcd9ef810dda"
+}

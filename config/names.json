@@ -1725,6 +1725,18 @@
     "_ZTVN2nw3snd7FxDelayE": {
       "address": 2245972,
       "evidence": "c011: retained canonical FxDelay constructor relocation reproduces the vptr address point0x22455c, eight bytes after this native symbol; scratch/integrator/c011/NAMES-PROVENANCE-r3.json. [INFERENCE] Historical class spelling."
+    },
+    "_ZN2nw3lyt13DeleteTextureERKNS0_11TextureInfoE": {
+      "address": 1884124,
+      "evidence": "Own native DeleteTexture(const TextureInfo&) provider MATCH116B at001cbfdc, scratch/integrator/types-fontgfx/match/texture-delete-r1. The actual TextureContainer allocation constructs TextureInfo at entry+88; no first-word complete-object alias is retained."
+    },
+    "_ZNK2nw4font4Font17GetCharStrmReaderEw": {
+      "address": 2051320,
+      "evidence": "c009: src/wave20/func_001f4cf8.cpp defines the frozen native nw::font::Font::GetCharStrmReader(wchar_t) const API at this address; whole-function 64-byte MATCH under the frozen game profile is scratch/integrator/c009/native-reader-r2/func_001f4cf8.result.json. The hidden aggregate result, const Font receiver and unused wchar_t dummy are retained. This is a same-address own definition, not an external callee alias; original private identity remains qualified."
+    },
+    "_ZN18SoundInterpolationC2Ev": {
+      "address": 1360588,
+      "evidence": "ctypes1-r3 actual SoundInterpolation::SoundInterpolation self-definition at0014c2cc; compiler-emitted C1/C2 same-entry constructor aliases under frozen v6. Native SoundStreamInstance owns four actual16-byte members; no ScalarState facade or free-function constructor alias remains."
     }
   }
 }

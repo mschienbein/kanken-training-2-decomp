@@ -32,6 +32,8 @@ extern void *__aeabi_vec_ctor_nocookie_nodtor(void *array, void *(*constructor)(
 /* ARM-to-Thumb veneer of the same generic array-construction runtime. */
 extern void *func_001911c4(void *array, void *(*constructor)(void *),
                           size_t element_size, size_t element_count);
+extern void *func_0019f6ac(void *array, void *(*destroy)(void *),
+                          size_t element_size, size_t element_count);
 #ifdef __cplusplus
 }
 #endif

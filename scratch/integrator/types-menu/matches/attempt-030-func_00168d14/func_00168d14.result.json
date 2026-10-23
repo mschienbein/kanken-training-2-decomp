@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_00168d14/func_00168d14.c",
+ "source_sha256": "ada2656cfed7c69180cbe57f172ba42484201f1459ee963b28b0358b54a45dc7",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "b70ba0a81d37bc7775fb45e7d639c06bd1ed8b6fa73415cc871ba9a0a81de9e6",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-menu/src/models/func_00168d14/character_panel_minimum.c",
+   "source_sha256": "bf5936bcf02d89654a1d274eb60cf6e59354c345dedbd1537021c05abc407ab8",
+   "object_sha256": "c624e1fce87bd96ed56c247ff2c6ef92b994f9c80c6a46adbe9e47265920f75f"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "set_character_panel_minimum"
+   ],
+   "section": "i.set_character_panel_minimum",
+   "size": 8,
+   "object": "scratch/integrator/types-menu/matches/attempt-030-func_00168d14/extra-0-character_panel_minimum.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00168d14",
+   "address": 1477908,
+   "size": 168,
+   "candidate_size": 168,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 140,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801080",
+     "removed_callee": {
+      "symbols": [
+       "set_character_panel_minimum"
+      ],
+      "section": "i.set_character_panel_minimum",
+      "size": 8,
+      "object": "scratch/integrator/types-menu/matches/attempt-030-func_00168d14/extra-0-character_panel_minimum.o"
+     }
+    }
+   ]
+  }
+ ]
+}

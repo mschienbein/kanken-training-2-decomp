@@ -1,0 +1,66 @@
+{
+  "source": "src/wave13/func_0014ab30.cpp",
+  "profile": "game",
+  "functions": [
+    "func_0014ab30"
+  ],
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/wave13/func_0014ab30.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "scratch/integrator/types-compose/match/r12-0001-func_0014ab30"
+  ],
+  "exit": 1,
+  "source_sha256": "e6f85c75e465b4c45a304165595b31762fe450534e7afddcc64fc174dfa8a9ec",
+  "receipt": "scratch/integrator/types-compose/match/r12-0001-func_0014ab30/func_0014ab30.result.json",
+  "receipt_sha256": "8d839bfb5af86b91be217df2228d4c64aa8df5d40bd360a86713ad8a0c724f70",
+  "receipt_record": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/types-compose/src/wave13/func_0014ab30.cpp",
+    "source_sha256": "e6f85c75e465b4c45a304165595b31762fe450534e7afddcc64fc174dfa8a9ec",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "d415602382e2c04953514abe69e6156d00d344a2d7b157ff8c866df0ae1cdd6d",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": null,
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "func_0014ab30",
+        "address": 1354544,
+        "size": 32,
+        "candidate_size": 96,
+        "status": "mismatch",
+        "first_diff": 20,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

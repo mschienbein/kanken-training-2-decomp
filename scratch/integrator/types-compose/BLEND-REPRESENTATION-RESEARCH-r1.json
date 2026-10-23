@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "subject": "BlendMode packed-word versus native byte-field representation",
+  "status": "UNRESOLVED_RESEARCH_NOT_AN_ADOPTED_MODEL",
+  "policy": "No memcpy/union/pointer conversion may reinterpret one value representation as the other, even if standard-defined. No unsigned-backed BlendMode model is adopted.",
+  "evidence": [
+    {
+      "kind": "prepared_source",
+      "source": "src/wave13/func_0014ab30.c",
+      "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+      "fact": "The accepted game wrapper assigns its unsigned argument through MaterialWord::value after the accepted Material getter."
+    },
+    {
+      "kind": "native_declaration",
+      "source": "include/nw/lyt/lyt_Types.h:799-825",
+      "fact": "Pinned native BlendMode defines four byte-valued fields (blendOp/srcFactor/dstFactor/logicOp), typed constructor/Set and getters."
+    },
+    {
+      "kind": "fresh_failed_typed_attempt",
+      "record": "ATTEMPT-r12-0001.json",
+      "profile": "game",
+      "target_extent": 32,
+      "candidate_extent": 96,
+      "source_semantics": "Decode each argument octet into its native enum, construct a real BlendMode, then same-type assign it.",
+      "exit": 1
+    },
+    {
+      "kind": "fresh_failed_typed_attempt",
+      "record": "ATTEMPT-r12-0003.json",
+      "profile": "game",
+      "target_extent": 32,
+      "candidate_extent": 56,
+      "source_semantics": "Decode the four octets and use BlendMode::Set directly.",
+      "exit": 1
+    },
+    {
+      "kind": "bounded_caller_roots",
+      "record": "BLEND-PRODUCERS-r1.json",
+      "fact": "The sole recovered direct caller is uncredited001494dc. The bounded symbolic argument root is unresolved; no genuinely native BlendMode producer for that input has been proved."
+    }
+  ],
+  "rejected_options": [
+    "A memcpy between unsigned and BlendMode, union alias or integer/aggregate pointer cast is punning.",
+    "Retyping the incoming argument as by-value BlendMode without a witnessed native producer is unproven.",
+    "Changing the canonical BlendMode to unsigned-backed storage would affect alignment and every user; Main explicitly disallowed adopting that unproved model in this repair.",
+    "Dead code, volatile/register forcing, profile changes and assembly are not alternatives."
+  ],
+  "what_would_settle_it": [
+    "Trace001494dc argument production to a genuine declared native BlendMode, with every call-site/ABI and storage lifetime proved; then migrate that real typed producer/consumer contract.",
+    "Or obtain complete retail Material/BlendMode constructor, setter, getter, allocation, alignment and layout evidence sufficient to choose one actual storage model across all users, not just this matching wrapper.",
+    "Or find a natural typed byte-field implementation that MATCHes under the already frozen profile, with all family clients and dependents reproved."
+  ],
+  "current_disposition": {
+    "action": "Restore the entire11-unit dependent material-wrapper family exactly to c009-r6 prepared source hashes; withdraw9 composition moves and2 introduced native self-definition bindings.",
+    "boundary": "QUALIFIED legacy/native interface boundary; needs-canonical-cutover. No canonical DisplayObject pointer converts to or is handed into this legacy family by a credited unit.",
+    "source_hashes": [
+      {
+        "function": "func_0014ab30",
+        "before_source": "src/wave13/func_0014ab30.cpp",
+        "prepared_source": "src/wave13/func_0014ab30.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "84a789f00b6d12a1c4802dcd46ab4d3f485cc4b31f1a5ab330227d486c60a1a6",
+        "restored_sha256": "84a789f00b6d12a1c4802dcd46ab4d3f485cc4b31f1a5ab330227d486c60a1a6",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0014aaf4",
+        "before_source": "src/wave13/func_0014aaf4.cpp",
+        "prepared_source": "src/wave13/func_0014aaf4.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "6db484693b95f4f5e3276b12511d2c3fb86f81aae5290e7d14c65ef73f5d916e",
+        "restored_sha256": "6db484693b95f4f5e3276b12511d2c3fb86f81aae5290e7d14c65ef73f5d916e",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0014d254",
+        "before_source": "src/wave13/func_0014d254.cpp",
+        "prepared_source": "src/wave13/func_0014d254.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "ca8624181fbffd243b2374691e79a93890ba00a79f607b01d43c922e5722de20",
+        "restored_sha256": "ca8624181fbffd243b2374691e79a93890ba00a79f607b01d43c922e5722de20",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0017fda4",
+        "before_source": "src/wave13/func_0017fda4.cpp",
+        "prepared_source": "src/wave13/func_0017fda4.cpp",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "35b6e1b50990349f15c0f3152653c5ec3dffe81a09e72acb8e9d16cfe8c91487",
+        "restored_sha256": "35b6e1b50990349f15c0f3152653c5ec3dffe81a09e72acb8e9d16cfe8c91487",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_00181100",
+        "before_source": "src/wave13/func_00181100.cpp",
+        "prepared_source": "src/wave13/func_00181100.cpp",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "7f815b22e87c5873f2b22d7848ef36c4e4a2323ce15f2b51b1c72a1ed32521c9",
+        "restored_sha256": "7f815b22e87c5873f2b22d7848ef36c4e4a2323ce15f2b51b1c72a1ed32521c9",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_00180404",
+        "before_source": "src/wave13/func_00180404.cpp",
+        "prepared_source": "src/wave13/func_00180404.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "02a4abd18084a6a5c4c204183e01007771243cf6dbb98eaf0156beb3e697ae5a",
+        "restored_sha256": "02a4abd18084a6a5c4c204183e01007771243cf6dbb98eaf0156beb3e697ae5a",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_001810e4",
+        "before_source": "src/wave14/func_001810e4.cpp",
+        "prepared_source": "src/wave14/func_001810e4.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "7a3d0cd6923703177634eed7f22a1a8af415a8e842d196ae85a3ca9f98803ca0",
+        "restored_sha256": "7a3d0cd6923703177634eed7f22a1a8af415a8e842d196ae85a3ca9f98803ca0",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0015e9dc",
+        "before_source": "src/wave13/func_0015e9dc.cpp",
+        "prepared_source": "src/wave13/func_0015e9dc.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "5377dcc01674f31f95e0fac0aa83e956a402abe94cfe4f55e57411e088ffc836",
+        "restored_sha256": "5377dcc01674f31f95e0fac0aa83e956a402abe94cfe4f55e57411e088ffc836",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0014d000",
+        "before_source": "src/wave7/func_0014d000.cpp",
+        "prepared_source": "src/wave7/func_0014d000.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "b38093655cbf44225657844f1858ac2fa45e09f5ac6a7e473e612a58de2f228a",
+        "restored_sha256": "b38093655cbf44225657844f1858ac2fa45e09f5ac6a7e473e612a58de2f228a",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0014d02c",
+        "before_source": "src/wave20/func_0014d02c.cpp",
+        "prepared_source": "src/wave20/func_0014d02c.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "2745ff92a8a62e45a3416503eec8620236e8ca7e319042c7a7de5370e1357f8c",
+        "restored_sha256": "2745ff92a8a62e45a3416503eec8620236e8ca7e319042c7a7de5370e1357f8c",
+        "source_hash_equal_to_c009_r6_prepare": true
+      },
+      {
+        "function": "func_0014e504",
+        "before_source": "src/wave7/func_0014e504.cpp",
+        "prepared_source": "src/wave7/func_0014e504.c",
+        "prepared_ref": "f47bb29fd17442816ca0d82121fe1ab2f7f9568c",
+        "prepared_sha256": "e799e6555d797c6a1d5530691c69155db3eb6c91012d5cc2410266717299f041",
+        "restored_sha256": "e799e6555d797c6a1d5530691c69155db3eb6c91012d5cc2410266717299f041",
+        "source_hash_equal_to_c009_r6_prepare": true
+      }
+    ]
+  }
+}

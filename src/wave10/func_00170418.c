@@ -3,7 +3,7 @@
 
 #include "game/input.h"
 
-void func_00170418(struct InputSnapshot *input)
+void func_00170418(struct PointerState *input)
 {
     struct InputPoint position;
     bool active, released, tracking;

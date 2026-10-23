@@ -6,10 +6,15 @@ extern "C" {
 #endif
 
 struct TransferSurface;
-struct Framebuffer {
-    unsigned word00, word04, word08;
+struct FramebufferAttachment {
+    unsigned kind;
+    unsigned object_name;
+    unsigned target;
     struct TransferSurface *surface;
-    unsigned word10, word14, word18, word1c;
+};
+
+struct Framebuffer {
+    struct FramebufferAttachment attachments[2];
     struct Framebuffer *next;
     struct Framebuffer *previous;
 };
@@ -158,7 +163,8 @@ struct GpuState {
     unsigned char force_update;
     unsigned char reserved0d[0x0d];
     unsigned char feature6502;
-    unsigned char reserved1b[5];
+    unsigned char shader_mode;               /* 0x1b; c010 feature6502 remains distinct */
+    unsigned current_program;                /* 0x1c: name, not a pointer */
     int viewport_x;
     int viewport_y;
     int viewport_width;
@@ -172,7 +178,10 @@ struct GpuState {
     unsigned char polygon_offset_enabled;
     unsigned char reserved55[3];
     unsigned active_texture;
-    unsigned char reserved5c[0xb0];
+    unsigned char reserved5c[0x9c];
+    unsigned shader_texture_state[3];        /* 0xf8, 0xfc, 0x100 */
+    unsigned char shader_texture_dirty[4];   /* 0x104..0x107 */
+    unsigned char reserved108[4];
     unsigned first_constants[33];
     unsigned second_constants[33];
     unsigned char reserved214[0x244];
