@@ -1,9 +1,9 @@
 #include "game/animation.h"
 
-void func_00179e40(struct MenuControlSet *owner, int index,
+void func_00179e40(struct AnimationOwner *owner, int index,
                    float x, float y, float width, float height)
 {
-    struct MenuGroup *panel = owner->groups[index];
+    struct Animation *panel = owner->animations[index];
     if (panel != 0)
-        func_001670e4(&panel->limits, x, y, width, height);
+        func_001670e4(&panel->bounds, x, y, width, height);
 }

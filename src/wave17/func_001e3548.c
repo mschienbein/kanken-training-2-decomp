@@ -1,7 +1,7 @@
 #include "game/functions.h"
 #include "game/selection.h"
 
-struct DeferredRequest {
+struct W17SelectionOwner {
     void *allocation;
     int selection;
     unsigned int count;
@@ -9,7 +9,7 @@ struct DeferredRequest {
 
 
 
-void func_001e3548(struct DeferredRequest *state)
+void func_001e3548(struct W17SelectionOwner *state)
 {
     if (state->selection != -1) {
         struct MetadataEntry entry = data_0023fce4[state->selection];

@@ -8,17 +8,15 @@
 #include "game/screen_operations.h"
 
 #ifdef __cplusplus
-struct TrainingScreenB : MenuScene {
-    virtual void build();
-    virtual ~TrainingScreenB();
-    virtual void activate();
-    virtual void update();
-    virtual void depart();
-    virtual void prepare();
-    /* [INFERENCE] func_001bd944 constructs this concrete class.
-     * Slot 7 override was eliminated (null cell); its signature is
-     * unrecoverable beyond the root placeholder. Never call or bind it. */
-    virtual void reserved_slot7();
+struct L035DrawingScreen {
+    const void *vtable;
+    unsigned char reserved04[0x10];
+    W10DrawingInput *input;
+    unsigned char reserved18[0x34];
+    W6ListController *list;
+    unsigned char reserved50[0x2c];
+    CharacterPanel *panel;
+    unsigned char reserved80[0x10];
     int mode;
     unsigned char reserved94[4];
     int states[3];
@@ -29,8 +27,6 @@ struct TrainingScreenB : MenuScene {
     unsigned char reservedb8[0x3f4];
     int phase;
     unsigned short recognized;
-    unsigned char reserved4b2[0x1e];
-    W11ControlScreen *small_controls;
 
     void set_state(int state)
     {
@@ -39,11 +35,8 @@ struct TrainingScreenB : MenuScene {
     }
 };
 extern "C" {
-void func_001bd68c(TrainingScreenB *screen);
-void func_001bbdd4(TrainingScreenB *screen);
-void func_001bc2a0(TrainingScreenB *screen);
-void func_001bbfc4(TrainingScreenB *screen);
-extern const SceneMemberCallback data_00218498;
+void func_001bd68c(L035DrawingScreen *screen);
+extern const MemberCallback data_00218498;
 }
 #endif
 

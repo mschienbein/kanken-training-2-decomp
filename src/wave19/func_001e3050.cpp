@@ -1,6 +1,6 @@
 #include "game/training_screen.h"
 
-void func_001e3050(SummaryTrainingScene *state)
+void func_001e3050(L041InitializeScreen *state)
 {
     state->set_entry(0, 1);
     state->set_entry(1, 5);

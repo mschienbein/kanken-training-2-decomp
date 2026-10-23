@@ -19,7 +19,7 @@ extern "C" float func_00134190(const struct TextWriterState *writer,
     {
         float width = bounds.right - bounds.left;
         /* [INFERENCE] callee identity: inlined by armlink. */
-        finish_text_writer_copy(&copy);
+        func_00174480(&copy);
         return width;
     }
 }

@@ -1,7 +1,7 @@
 #include "game/w11_control.h"
 void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y)
 {
-    struct SmallLabelHandle *slot = screen->slots[index];
+    struct WidgetSlot *slot = screen->slots[index];
     if (slot != 0) {
         struct DisplayObject *object = slot->object;
         /* ORIGINAL BUG: an existing slot's null object is not checked before the stores. */

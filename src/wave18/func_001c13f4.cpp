@@ -3,7 +3,7 @@
 
 
 
-extern "C" void func_001c13f4(L044TrainingFrame *collection)
+extern "C" void func_001c13f4(W18WideDisplayCollection *collection)
 {
     for (int i = 0; i < 27; ++i) {
         DisplayHandle *handle = collection->handles[i];

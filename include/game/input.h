@@ -79,9 +79,7 @@ struct InputPoint {
     float x, y;
 };
 
-/* The actual 0x24-byte pointer sample shared by standalone input and menu
- * groups. A complete InputSnapshot is not embedded in a MenuGroup. */
-struct PointerSample {
+struct InputSnapshot {
     bool active, released;
     unsigned char reserved02[2];
     struct InputPoint position;
@@ -91,9 +89,6 @@ struct PointerSample {
     bool tracking;
     unsigned char reserved19[3];
     struct InputPoint start_position;
-};
-struct InputSnapshot {
-    struct PointerSample pointer;
     struct InputRectangle rectangle;
     unsigned int state;
 };
@@ -102,6 +97,31 @@ struct InputMode {
     unsigned int value;
 };
 
+struct InputItem {
+    unsigned char reserved00[0x0c];
+    unsigned short flags;
+    unsigned char reserved0e;
+    unsigned char state;
+    unsigned char reserved10[2];
+    unsigned short counter;
+};
+
+struct InputGroup {
+    unsigned int flags;
+    int count;
+    struct InputItem **items;
+    struct InputSnapshot input;
+    unsigned char reserved44[0x3c];
+    unsigned int enabled;
+    struct InputMode mode;
+};
+
+struct InputOwner {
+    unsigned char reserved00[0x20];
+#ifndef __cplusplus
+    struct InputGroup *groups[];
+#endif
+};
 
 struct TouchDeviceState {
     unsigned char reserved00[4];
@@ -140,7 +160,7 @@ extern int func_00121354(void);
 extern void func_00123a64(struct ButtonSample *sample);
 extern void func_00123a70(unsigned *held, unsigned *pressed, unsigned *released);
 extern struct TouchDeviceState bss_004972d8;
-extern void func_00170418(struct PointerSample *input);
+extern void func_00170418(struct InputSnapshot *input);
 extern int func_0016ec14(const struct InputMode *mode);
 extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
 #ifdef __cplusplus

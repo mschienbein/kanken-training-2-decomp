@@ -8,12 +8,11 @@
 
 
 
-static void clear_control_input(SummaryTrainingScene *screen, int index);
-static void hide_alternate_item(SummaryTrainingScene *screen, int index);
+static void clear_control_input(L041InitializeScreen *screen, int index);
+static void hide_alternate_item(L041InitializeScreen *screen, int index);
 
-void SummaryTrainingScene::activate()
+extern "C" void func_001e0afc(struct L041InitializeScreen *screen)
 {
-    SummaryTrainingScene *screen = this;
     if (func_0019efd0())
         return;
     func_00176d98();
@@ -71,120 +70,120 @@ void SummaryTrainingScene::activate()
                      reinterpret_cast<const unsigned short *>(L"\x3000"), 0);
         func_00170db4(screen->message, 1);
     }
-    if (screen->primary_list) {
-        func_00176b24(screen->primary_list);
-        func_00176ae8(screen->primary_list, 4, 8);
+    if (screen->selection) {
+        func_00176b24(screen->selection);
+        func_00176ae8(screen->selection, 4, 8);
     }
-    if (screen->navigation) {
-        func_0017697c(screen->navigation);
-        func_001795cc(screen->navigation, 7, -1);
+    if (screen->alternate) {
+        func_0017697c(screen->alternate);
+        func_001795cc(screen->alternate, 7, -1);
         hide_alternate_item(screen, 8);
         hide_alternate_item(screen, 9);
         hide_alternate_item(screen, 13);
         hide_alternate_item(screen, 14);
     }
-    if (screen->scalar)
-        func_00172b38(screen->scalar);
-    if (screen->controller68)
-        TU924_reset_optional(screen->controller68);
-    if (screen->animation) {
-        func_0017673c(screen->animation);
-        func_0017a258(screen->animation, 100.0f, 100.0f);
+    if (screen->dialog)
+        func_00172b38(screen->dialog);
+    if (screen->optional_panel)
+        TU924_reset_optional(screen->optional_panel);
+    if (screen->scroll) {
+        func_0017673c(screen->scroll);
+        func_0017a258(screen->scroll, 100.0f, 100.0f);
     }
-    if (screen->indicators) {
+    if (screen->action_panel) {
         switch (screen->mode) {
         case 0:
         case 1:
         case 2:
-            func_001762ac(screen->indicators, 0);
+            func_001762ac(screen->action_panel, 0);
             break;
         case 3:
-            func_001762ac(screen->indicators, 3);
+            func_001762ac(screen->action_panel, 3);
             break;
         }
         if (screen->mode != 0)
-            func_0016e1c8(screen->indicators, 5, 1);
-        if (screen->animation)
-            func_0017a164(screen->indicators, func_0017a210(screen->animation));
+            func_0016e1c8(screen->action_panel, 5, 1);
+        if (screen->scroll)
+            func_0017a164(screen->action_panel, func_0017a210(screen->scroll));
     }
-    if (screen->characters)
-        func_00175dcc(&screen->characters->controller);
-    if (screen->controller80)
-        func_001b4aa0(screen->controller80);
-    if (screen->labels) {
-        func_00175d90(screen->labels);
-        func_00175d18(screen->labels, bss_00291230);
+    if (screen->answer_panel)
+        func_00175dcc(screen->answer_panel);
+    if (screen->handwriting)
+        func_001b4aa0(screen->handwriting);
+    if (screen->clock) {
+        func_00175d90(screen->clock);
+        func_00175d18(screen->clock, bss_00291230);
         if (screen->mode == 0)
-            func_0017a034(screen->labels, 0, screen->duration);
+            func_0017a034(screen->clock, 0, screen->duration);
     }
-    if (screen->style) {
-        func_00175b8c(&screen->style->base);
-        func_00175ab8(&screen->style->base, 0, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 1, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 2, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 3, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 4, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 5, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 6, 79, 79, 79, 255);
-        func_00175ab8(&screen->style->base, 7, 79, 79, 79, 255);
-        func_00179160(&screen->style->base, 4, 0.4f, 0.45f);
-        func_00179160(&screen->style->base, 5, 0.4f, 0.45f);
-        func_00179160(&screen->style->base, 6, 0.4f, 0.45f);
-        func_00179160(&screen->style->base, 7, 0.4f, 0.45f);
+    if (screen->display) {
+        func_00175b8c(screen->display);
+        func_00175ab8(screen->display, 0, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 1, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 2, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 3, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 4, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 5, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 6, 79, 79, 79, 255);
+        func_00175ab8(screen->display, 7, 79, 79, 79, 255);
+        func_00179160(screen->display, 4, 0.4f, 0.45f);
+        func_00179160(screen->display, 5, 0.4f, 0.45f);
+        func_00179160(screen->display, 6, 0.4f, 0.45f);
+        func_00179160(screen->display, 7, 0.4f, 0.45f);
     }
-    if (screen->controls) {
-        func_001e9944(screen->controls);
+    if (screen->controls.list) {
+        func_001e9944(screen->controls.list);
         switch (screen->mode) {
         case 0:
         case 1:
         case 2:
-            func_00179600(screen->controls, 0, 1);
-            func_00179600(screen->controls, 1, 0);
+            func_00179600(screen->controls.list, 0, 1);
+            func_00179600(screen->controls.list, 1, 0);
             break;
         case 3:
-            func_00179600(screen->controls, 0, 0);
-            func_00179600(screen->controls, 1, 1);
+            func_00179600(screen->controls.list, 0, 0);
+            func_00179600(screen->controls.list, 1, 1);
             break;
         }
-        func_00179600(screen->controls, 2, 1);
-        func_00179600(screen->controls, 3, 0);
-        func_00179600(screen->controls, 4, 0);
-        func_00179600(screen->controls, 5, 0);
-        func_00179600(screen->controls, 6, 0);
-        func_00179600(screen->controls, 7, 0);
-        func_00179600(screen->controls, 8, 0);
-        func_00179d48(screen->controls, screen->control_index, 1, 0);
+        func_00179600(screen->controls.list, 2, 1);
+        func_00179600(screen->controls.list, 3, 0);
+        func_00179600(screen->controls.list, 4, 0);
+        func_00179600(screen->controls.list, 5, 0);
+        func_00179600(screen->controls.list, 6, 0);
+        func_00179600(screen->controls.list, 7, 0);
+        func_00179600(screen->controls.list, 8, 0);
+        func_00179d48(screen->controls.animation, screen->control_index, 1, 0);
         func_00177c58(screen, 0);
         clear_control_input(screen, 4);
         clear_control_input(screen, 5);
         clear_control_input(screen, 6);
         clear_control_input(screen, 7);
-        func_001770cc(screen->controls, screen->control_index, 0);
-        func_001770cc(screen->controls, 2, 0);
-        func_001770cc(screen->controls, 8, 0);
-        func_00175a90(screen->controls, 8, 1);
-        func_00175a5c(screen->controls, 8, 70.0f, -28.0f, 184.0f, 184.0f);
+        func_001770cc(screen->controls.animation, screen->control_index, 0);
+        func_001770cc(screen->controls.animation, 2, 0);
+        func_001770cc(screen->controls.animation, 8, 0);
+        func_00175a90(screen->controls.input, 8, 1);
+        func_00175a5c(screen->controls.animation, 8, 70.0f, -28.0f, 184.0f, 184.0f);
     }
-    if (screen->options)
-        func_001758e4(screen->options);
+    if (screen->accessory)
+        func_001758e4(screen->accessory);
     switch (func_001758d4()) {
     case 0: func_0017abf8(0, 0x1000003); break;
     case 1: func_0017abf8(0, 0x1000004); break;
     case 2: func_0017abf8(0, 0x1000005); break;
     }
     /* [INFERENCE] The descriptor supplies the member identity; this object's
-     * relationship to the canonical opaque MenuScene is unrecovered. */
-    func_00177b10(screen, data_00218718);
+     * relationship to the canonical opaque CallbackTarget is unrecovered. */
+    func_00177b10(reinterpret_cast<CallbackTarget *>(screen), data_00218718);
     func_00175848();
 }
 
-static void clear_control_input(SummaryTrainingScene *screen, int index)
+static void clear_control_input(L041InitializeScreen *screen, int index)
 {
-    func_0016f930(screen->controls, index);
+    func_0016f930(screen->controls.input, index);
 }
 
-static void hide_alternate_item(SummaryTrainingScene *screen, int index)
+static void hide_alternate_item(L041InitializeScreen *screen, int index)
 {
-    func_00170e50(screen->navigation, index);
+    func_00170e50(screen->alternate, index);
 }
 

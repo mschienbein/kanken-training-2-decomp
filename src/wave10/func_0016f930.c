@@ -1,17 +1,17 @@
-#include "game/menu_controls.h"
+#include "game/input.h"
 
-void func_0016f930(const struct MenuControlSet *owner, int index)
+void func_0016f930(const struct InputOwner *owner, int index)
 {
-    struct MenuGroup *group = owner->groups[index];
+    struct InputGroup *group = owner->groups[index];
     int i;
     if (group && group->count > 0) {
-        group->preserve_selected = 1;
-        func_00170418(&group->pointer);
+        group->enabled = 1;
+        func_00170418(&group->input);
         for (i = 0; i < group->count; ++i) {
-            struct MenuControlItem *item = group->items[i];
+            struct InputItem *item = group->items[i];
             if (item) {
-                item->delay = 0;
-                item->result = 0;
+                item->state = 0;
+                item->counter = 0;
                 item->flags &= ~6;
             }
         }

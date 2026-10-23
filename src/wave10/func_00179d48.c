@@ -1,6 +1,6 @@
 #include "game/animation.h"
 
-static __forceinline void set_element_active(struct MenuControlItem *element, int enabled)
+static __forceinline void set_element_active(struct AnimationChild *element, int enabled)
 {
     struct DisplayObject *object;
     if (element->flags & 8)
@@ -21,16 +21,16 @@ static __forceinline void set_element_active(struct MenuControlItem *element, in
     }
 }
 
-void func_00179d48(struct MenuControlSet *owner, int panel_index, int element_index, int enabled)
+void func_00179d48(struct AnimationOwner *owner, int panel_index, int element_index, int enabled)
 {
-    struct MenuGroup *panel = owner->groups[panel_index];
-    struct MenuControlItem *element;
-    if (panel == 0 || panel->items == 0 || panel->items[element_index] == 0)
+    struct Animation *panel = owner->animations[panel_index];
+    struct AnimationChild *element;
+    if (panel == 0 || panel->children == 0 || panel->children[element_index] == 0)
         return;
-    element = panel->items[element_index];
+    element = panel->children[element_index];
     if (enabled)
         element->flags &= ~8u;
     else
         element->flags |= 8u;
-    set_element_active(panel->items[element_index], enabled);
+    set_element_active(panel->children[element_index], enabled);
 }

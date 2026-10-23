@@ -10,10 +10,11 @@ struct DisplayBuffer {
 };
 
 /* [INFERENCE] Relay roles; constructor0012f65c installs this subobject at+30. */
-struct GraphicsRelayHeader { unsigned word; };
+/* Keep the prepared relay value model opaque; its body is not a type cutover. */
+union GraphicsRelayHeader;
 struct GraphicsRelayRing {
     unsigned reserved;
-    struct GraphicsRelayHeader *header;
+    union GraphicsRelayHeader *header;
 };
 struct GraphicsContext {
     struct StreamMutex mutex;

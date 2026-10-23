@@ -1,9 +1,9 @@
 #include "game/w11_control.h"
-void func_0016f9a8(struct VisualLabelSet72 *owner, int index, float x, float y)
+void func_0016f9a8(struct W11jVisualOwner *owner, int index, float x, float y)
 {
-    struct VisualLabelGroup10 *node = owner->groups[index];
+    struct W11jVisualNode *node = owner->nodes[index];
     if (node != 0) {
-        node->scale.x = x;
-        node->scale.y = y;
+        node->scale_x = x;
+        node->scale_y = y;
     }
 }

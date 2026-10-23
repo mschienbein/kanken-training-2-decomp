@@ -1,17 +1,21 @@
 #ifndef GAME_MODE_DISPATCH_H
 #define GAME_MODE_DISPATCH_H
-#include "game/category_progress.h"
 
 
 
 #ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+struct ModeDispatchObject;
 
-/* CategoryScene is defined in category_progress.h. */
+struct ModeDispatchObject {
+    unsigned char reserved00[0x90];
+    int mode;
+};
 
 extern "C" {
-void func_001ec890(CategoryScene *object);
-void func_001ed698(CategoryScene *object);
+void func_001ec890(ModeDispatchObject *object);
+void func_001ed698(ModeDispatchObject *object);
+void func_001ec194(ModeDispatchObject *object);
 }
 #endif
 

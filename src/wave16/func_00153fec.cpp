@@ -1,10 +1,9 @@
 #include "game/audio_voice.h"
 #include "game/functions.h"
+#include "game/service_runtime.h"
 
 struct AudioChannel;
 
-struct HandleManager;
-extern struct HandleManager bss_004b6888;
 
 extern "C" struct AudioChannel *func_00153fec(int priority,
     void (*callback)(struct AudioChannel *, nw::snd::internal::driver::Voice *),

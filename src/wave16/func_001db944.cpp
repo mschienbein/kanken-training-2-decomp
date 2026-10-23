@@ -5,6 +5,5 @@
 
 void func_001db944(void)
 {
-    MenuScene *scene = &bss_0028dd7c;
-    scene->build();
+    bss_0028dd7c.invoke_slot02();
 }

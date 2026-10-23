@@ -7,6 +7,5 @@
 
 extern "C" void func_001db840(void)
 {
-    MenuScene *scene = &bss_0028e848;
-    scene->build();
+    bss_0028e848.invoke_slot02();
 }

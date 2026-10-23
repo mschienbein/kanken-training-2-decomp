@@ -3,7 +3,7 @@
 
 struct W16RestoreState {
     unsigned char reserved00[0x48];
-    struct VisualLabelSet72 *widgets;
+    struct W11jVisualOwner *widgets;
     unsigned char reserved4c[0xc];
     struct W6Selector *selector;
     unsigned char reserved5c[0x60];

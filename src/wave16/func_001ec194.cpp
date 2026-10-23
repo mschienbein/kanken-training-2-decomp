@@ -2,11 +2,10 @@
 
 
 
-void CategoryScene::prepare()
+void func_001ec194(ModeDispatchObject *object)
 {
-    CategoryScene *object = this;
-    if (object->active_layer == 0)
+    if (object->mode == 0)
         func_001ec890(object);
-    else if (object->active_layer == 1)
+    else if (object->mode == 1)
         func_001ed698(object);
 }

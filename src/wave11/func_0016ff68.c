@@ -12,11 +12,11 @@ static __inline void set_object_active(struct DisplayObject *object, int enabled
 
 void func_0016ff68(struct W11ControlScreen *screen, int index, int enabled)
 {
-    struct SmallLabelHandle *slot = screen->slots[index];
+    struct WidgetSlot *slot = screen->slots[index];
     if (slot != 0) {
-        slot->enabled = enabled;
+        slot->state.label.enabled = enabled;
         if (enabled == 0)
-            slot->label_index = -1;
+            slot->state.label.label_index = -1;
         set_object_active(slot->object, enabled);
     }
 }

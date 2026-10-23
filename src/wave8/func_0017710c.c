@@ -1,7 +1,7 @@
 #include "game/animation.h"
 
-int func_0017710c(const struct MenuControlSet *owner, int index)
+int func_0017710c(const struct AnimationOwner *owner, int index)
 {
-    const struct MenuGroup *animation = owner->groups[index];
-    return animation != 0 ? animation->selected : -1;
+    const struct Animation *animation = owner->animations[index];
+    return animation != 0 ? animation->frame : -1;
 }

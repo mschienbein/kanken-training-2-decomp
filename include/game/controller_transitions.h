@@ -1,6 +1,9 @@
 #ifndef GAME_CONTROLLER_TRANSITIONS_H
 #define GAME_CONTROLLER_TRANSITIONS_H
 
+struct TransitionScreenW19G;
+struct RestartTransitionScreenW19G;
+struct DetailedTransitionScreenW19G;
 struct Screen;
 struct MenuOptionGroup;
 struct AnimationState;
@@ -15,91 +18,33 @@ struct AnimationState;
 
 
 
-struct DepartureScene : MenuScene {
-    virtual void build();
-    virtual ~DepartureScene();
-    virtual void activate();
-    virtual void update();
-    virtual void depart();
-    /* [INFERENCE] Concrete constructor func_001e744c; slot 6
-     * override eliminated (null cell). Declaration only, never called. */
-    virtual void prepare();
-    /* [INFERENCE] func_001e744c constructs this concrete class.
-     * Slot 7 override was eliminated (null cell); its signature is
-     * unrecoverable beyond the root placeholder. Never call or bind it. */
-    virtual void reserved_slot7();
+struct TransitionScreenW19G : CallbackTarget {
+    unsigned char reserved04[0x50];
+    Screen *buttons;
+    unsigned char reserved58[8];
+    Screen *selector;
+    unsigned char reserved64[0x2c];
     int phase;
     float progress;
     int previous_phase;
 };
-struct ReturnScene : MenuScene {
-    virtual void build();
-    virtual ~ReturnScene();
-    virtual void activate();
-    virtual void update();
-    virtual void depart();
-    /* [INFERENCE] Concrete constructor func_001e7fb8; slot 6
-     * override eliminated (null cell). Declaration only, never called. */
-    virtual void prepare();
-    /* [INFERENCE] func_001e7fb8 constructs this concrete class.
-     * Slot 7 override was eliminated (null cell); its signature is
-     * unrecoverable beyond the root placeholder. Never call or bind it. */
-    virtual void reserved_slot7();
+struct RestartTransitionScreenW19G : TransitionScreenW19G {
+    int field9c;
+    int fielda0;
+    MenuOptionGroup *first;
+    MenuOptionGroup *second;
+};
+struct DetailedTransitionScreenW19G : CallbackTarget {
+    unsigned char reserved04[0x44];
+    W11jVisualOwner *region;
+    W6ListController *choices;
+    unsigned reserved50;
+    Screen *buttons;
+    unsigned char reserved58[0x38];
     int phase;
     float progress;
     int previous_phase;
-};
-struct CompletionScene : MenuScene {
-    virtual void build();
-    virtual ~CompletionScene();
-    virtual void activate();
-    virtual void update();
-    virtual void depart();
-    /* [INFERENCE] Concrete constructor func_001ec128; slot 6
-     * override eliminated (null cell). Declaration only, never called. */
-    virtual void prepare();
-    /* [INFERENCE] func_001ec128 constructs this concrete class.
-     * Slot 7 override was eliminated (null cell); its signature is
-     * unrecoverable beyond the root placeholder. Never call or bind it. */
-    virtual void reserved_slot7();
-    int phase;
-    float progress;
-    int previous_phase;
-};
-struct DetailedTransitionScene : MenuScene {
-    virtual void build();
-    virtual ~DetailedTransitionScene();
-    virtual void activate();
-    virtual void update();
-    virtual void depart();
-    virtual void prepare();
-    /* [INFERENCE] func_001e7c4c constructs this concrete class.
-     * Slot 7 override was eliminated (null cell); its signature is
-     * unrecoverable beyond the root placeholder. Never call or bind it. */
-    virtual void reserved_slot7();
-    int phase;
-    float progress;
-    int previous_phase;
-    int field9c, fielda0;
-    MenuOptionGroup *first, *second;
-};
-struct IntroScene : MenuScene {
-    virtual void build();
-    virtual ~IntroScene();
-    virtual void activate();
-    virtual void update();
-    virtual void depart();
-    /* [INFERENCE] Concrete constructor func_001e3ea4; slot 6
-     * override eliminated (null cell). Declaration only, never called. */
-    virtual void prepare();
-    /* [INFERENCE] func_001e3ea4 constructs this concrete class.
-     * Slot 7 override was eliminated (null cell); its signature is
-     * unrecoverable beyond the root placeholder. Never call or bind it. */
-    virtual void reserved_slot7();
-    int phase;
-    float remaining;
-    int sound, page, question;
-    MenuOptionGroup *first_options, *second_options;
+    int field9c;
 };
 
 extern "C" {
@@ -108,8 +53,8 @@ extern "C" {
 
 extern int func_0019efd0(void);
 extern void func_00176d98(void);
-extern void func_00176b24(SelectionList24 *set);
-extern void func_0017697c(SelectionList29 *set);
+extern void func_00176b24(Screen *set);
+extern void func_0017697c(Screen *set);
 extern int func_00170234(int channel);
 extern void func_0017433c(int channel, int duration);
 extern void func_00175848(void);
@@ -120,11 +65,10 @@ extern void func_001b6c90(MenuOptionGroup *resource);
 extern void func_001b7e9c(MenuOptionGroup *resource);
 
 
-extern SelectionList29 *func_001671d4(void);
+extern Screen *func_001671d4(void);
 extern void func_0017673c(AnimationState *set);
-void func_001b3c0c(AnimationState *slider, int delta);
 extern void func_0017a258(AnimationState *set, float width, float height);
-extern void func_001e9944(MenuControlSet *controller);
+extern void func_001e9944(W6ListController *controller);
 }
 #endif
 

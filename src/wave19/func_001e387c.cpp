@@ -5,9 +5,8 @@
 
 /* [INFERENCE] Virtual member names are unrecovered; the callback uses slot 4. */
 
-void IntroScene::activate()
+extern "C" void func_001e387c(RestartTransitionScreenW19G *state)
 {
-    IntroScene *state = this;
     if (func_0019efd0() != 0)
         return;
     func_00176d98();
@@ -18,18 +17,18 @@ void IntroScene::activate()
     } else {
         state->phase = 0;
     }
-    state->remaining = 0.0f;
-    state->sound = -1;
-    state->page = 0;
-    state->question = 0;
-    func_001b6c90(state->first_options);
-    func_001b7e9c(state->second_options);
-    if (state->primary_list != 0)
-        func_00176b24(state->primary_list);
-    if (state->navigation != 0)
-        func_0017697c(state->navigation);
+    state->progress = 0.0f;
+    state->previous_phase = -1;
+    state->field9c = 0;
+    state->fielda0 = 0;
+    func_001b6c90(state->first);
+    func_001b7e9c(state->second);
+    if (state->buttons != 0)
+        func_00176b24(state->buttons);
+    if (state->selector != 0)
+        func_0017697c(state->selector);
     if (func_00170234(0) > 0)
         func_0017433c(0, (int)func_0017adb4() * 15);
-    func_00177b10(state, &MenuScene::update);
+    func_00177b10(state, &CallbackTarget::callback4);
     func_00175848();
 }

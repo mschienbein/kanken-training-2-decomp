@@ -1,26 +1,31 @@
-#include "game/graphics_state.h"
-#include <string.h>
+/* [INFERENCE] Interrupt-relay header: its upper byte contains the enabled flag. */
+union GraphicsRelayHeader {
+    unsigned int word;
+    struct {
+        unsigned char index;
+        unsigned char count;
+        unsigned char status;
+        unsigned char flags;
+    } fields;
+};
 
-/* [INFERENCE] Interrupt-relay enable is bit24 of the actual shared word. */
+struct GraphicsRelayRing {
+    unsigned int reserved;
+    union GraphicsRelayHeader *header;
+};
 
 void func_00137b48(struct GraphicsRelayRing *ring, int enabled)
 {
-    unsigned value;
-    unsigned char bytes[sizeof(value)];
-    struct GraphicsRelayHeader *header;
+    union GraphicsRelayHeader value;
+    union GraphicsRelayHeader *header;
     if (ring->header != 0) {
         do {
-            unsigned char flags;
             header = ring->header;
-            value = __ldrex(&header->word);
-            memcpy(bytes, &value, sizeof(value));
-            flags = bytes[3];
+            value.word = __ldrex(&header->word);
             if (enabled)
-                flags |= 1;
+                value.fields.flags |= 1;
             else
-                flags &= ~1;
-            bytes[3] = flags;
-            memcpy(&value, bytes, sizeof(value));
-        } while (__strex(value, &header->word));
+                value.fields.flags &= ~1;
+        } while (__strex(value.word, &header->word));
     }
 }

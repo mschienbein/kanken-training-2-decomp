@@ -13,7 +13,7 @@ struct W10ExerciseState {
     unsigned char reserved00[0x14];
     struct W10DrawingInput *input;
     unsigned char reserved18[0x34];
-    struct MenuControlSet *list;
+    struct W6ListController *list;
     unsigned char reserved50[0x2c];
     struct CharacterPanel *widgets;
     unsigned char reserved80[0x10];

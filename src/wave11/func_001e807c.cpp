@@ -4,9 +4,8 @@
 #include "game/screen.h"
 #include "game/runtime.h"
 
-void ScreenInitializationState::activate()
+extern "C" void func_001e807c(struct ScreenInitializationState *state)
 {
-    ScreenInitializationState *state = this;
     if (func_0019efd0())
         return;
     func_00176d98();
@@ -16,28 +15,28 @@ void ScreenInitializationState::activate()
     state->count = 0;
     func_001b6c90(state->first_options);
     func_001b7e9c(state->second_options);
-    if (state->primary_list)
-        func_00176b24(state->primary_list);
-    if (state->navigation)
-        func_0017697c(state->navigation);
-    if (state->controls) {
-        func_001e9944(state->controls);
-        func_00179600(state->controls, 0, 1);
+    if (state->selection)
+        func_00176b24(state->selection);
+    if (state->alternate)
+        func_0017697c(state->alternate);
+    if (state->actions) {
+        func_001e9944(state->actions);
+        func_00179600(state->actions, 0, 1);
     }
-    if (state->controller88)
-        func_001adabc(state->controller88);
-    if (state->style) {
+    if (state->action)
+        func_001adabc(state->action);
+    if (state->screen) {
         struct MotionKey keys[4];
-        func_00175b8c(&state->style->base);
-        func_00179160(&state->style->base, 0, 0.45f, 0.55f);
-        func_00175ab8(&state->style->base, 0, 79, 79, 79, 0);
-        func_00166eac(&state->style->base, 0, 134.0f, -96.0f);
+        func_00175b8c(state->screen);
+        func_00179160(state->screen, 0, 0.45f, 0.55f);
+        func_00175ab8(state->screen, 0, 79, 79, 79, 0);
+        func_00166eac(state->screen, 0, 134.0f, -96.0f);
         func_00192720(keys, data_002188e8, sizeof(keys));
-        func_0016ee38(&state->playback_motion);
-        if (func_0016ece8(&state->playback_motion, keys, 1)) {
-            func_0016ec84(&state->playback_motion, 0, -1);
-            func_0016ec6c(&state->playback_motion, 0);
-            func_0016ec28(&state->playback_motion, -1);
+        func_0016ee38(&state->animation);
+        if (func_0016ece8(&state->animation, keys, 1)) {
+            func_0016ec84(&state->animation, 0, -1);
+            func_0016ec6c(&state->animation, 0);
+            func_0016ec28(&state->animation, -1);
         }
     }
     /* [INFERENCE] The opaque callback receiver is this state object; the
