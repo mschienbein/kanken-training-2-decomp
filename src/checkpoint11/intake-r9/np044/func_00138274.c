@@ -1,4 +1,5 @@
 #include "ctr/ipc.h"
+#include "game/applet.h"
 
 union ConnectionCommand {
     struct {

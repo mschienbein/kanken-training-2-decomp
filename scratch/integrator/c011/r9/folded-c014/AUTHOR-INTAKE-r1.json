@@ -1,0 +1,1590 @@
+{
+  "schema_version": 1,
+  "requested_count": 13,
+  "requested_bytes": 2240,
+  "rows": [
+    {
+      "batch": "nm12",
+      "row": {
+        "address": "0x001f29b4",
+        "name": "func_001f29b4",
+        "size": 164,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm12/src/001f29b4/func_001f29b4.c",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nm12/match/001f29b4/20-final/func_001f29b4.result.json",
+        "source_sha256": "881ed585a9de969eb239a760599654da5dd566bff01fceb99b0781f663beb6de",
+        "receipt_sha256": "c709e688a277b9fb11f6582a5bc72ef77158989097b8f3e7b147a84bcb0f3e87",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "needs_names": [],
+        "attempts": 20,
+        "minutes": 0.061592,
+        "exit_code": 0,
+        "residual": {
+          "candidate_size": 164,
+          "target_size": 164,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "changed_word_offsets": [],
+          "first_difference_offset": null,
+          "extent_delta": 0
+        },
+        "notes": "step5c: MATCH, 164/164 bytes, default v2/none. The inherited SDK residue was solely the zero-comparison condition at +0x6c: unsigned lower-or-same in the original versus unconditional in the candidate; comparison inputs/immediate and every other byte were identical. Extracting the real bounded prefix-copy operation, with destination/source/count arguments and the original per-iteration serialized-offset reload, matches under frozen middleware. The same operation under sdk retains the identical one-byte residue; under game it is a 160/164-byte mismatch. The exact inherited source under middleware is a 46-byte miss, so neither profile change alone nor helper extraction under sdk solves it. Two other genuine helper forms independently match middleware. Final exact delivered file confirms MATCH, with no emitted out-of-line helper. Canonical signed table count, unsigned accessor index, count-byte narrowing, partial output and ORIGINAL BUG null dereference are unchanged. Caller 0x001d6954 supplies a writable stack output. Profile witness: only middleware matches the chosen operation source among the three frozen profiles; ownership inferred. [INFERENCE] Historical helper/TU identity and optimizer phase are unrecovered; this is an ordinary real copying operation, not an invented external callee.",
+        "from_result": "scratch/authors/np034/RESULT.json",
+        "evidence": "scratch/authors/nm12/EVIDENCE.json"
+      },
+      "author_result": "scratch/authors/nm12/RESULT.json",
+      "author_result_sha256": "8acc916308514ec72a8dd18b1b717506552474cfa09631b6bfa28866d683375b",
+      "integration_needs": [
+        {
+          "kind": "headers/types",
+          "subject": "include/game/event_route.h",
+          "detail": "For the newly matching reader, centralize BinaryParameterReader { unsigned reserved00; const BinaryTableBlock *block; }, the completed BinaryByteParameters { unsigned char channels[4]; unsigned reserved04; int values_offset; }, BinaryByteValueList { unsigned count; unsigned char values[]; }, ByteParameterValue { unsigned char channels[4]; unsigned char count; unsigned char values[2]; }, and int func_001f29b4(const BinaryParameterReader *, ByteParameterValue *, int). Existing BinaryByteParameters forward declaration/accessor identity is reused. Preserve signed BinaryReferenceTable::count, unsigned accessor index, seven-byte writable output, narrowed count and the marked unchecked typed-reference dereference. No header was edited."
+        },
+        {
+          "kind": "headers/storage",
+          "subject": "include/game/screen.h and data_00242238",
+          "detail": "The retained ResourceEventQueues aggregate has four reserved unsigned words, then primary/secondary/other BoundDisplayObject pointers at +0x10/+0x14/+0x18. Reconcile that single global storage view with existing data_00242248/data_0024224c/data_00242250 declarations before any future adoption; no new binding or unproven alias is proposed. Canonical BoundDisplayObject and notifier signatures are included, not redefined."
+        },
+        {
+          "kind": "headers/contracts",
+          "subject": "include/game/archive.h and include/game/archive_resource.h",
+          "detail": "Current archive.h already declares bool func_001f2b04(const SoundArchiveReader *, unsigned, SoundArchiveWaveInfo *). The exact inherited source refuses on that intervening conflict. The private final source follows the canonical bool/output identity and completes currently opaque SoundArchiveWaveInfo as { unsigned file_id, size; }; centralize that definition before integration. Also centralize the identical accepted ArchiveStreamInfo { unsigned file_id; }, const ArchiveStreamInfo *func_001f2030(const SoundArchiveInfo *, unsigned), and the marked const ArchiveBlockReference *func_001650f8(const ArchiveFile *, unsigned) declaration. Retain partial file_id publication before failure and untouched size on failure."
+        },
+        {
+          "kind": "names",
+          "subject": "scratch/authors/nm12/names/001f2b04.json",
+          "detail": "Exact inherited overlay copy is retained for _ZNK2nw3lyt6Window12GetFrameSizeEhPKNS1_5FrameE at 0x001f01f0 and _ZNK2nw4font11ResFontBase17GetGlyphFromIndexEPNS0_5GlyphEt at 0x001efee4. Both remain absent from canonical names. These are the same qualified native self-definition bindings as the predecessor, not new aliases; no unmatched function receives credit."
+        },
+        {
+          "kind": "headers/types",
+          "subject": "include/game/resource_font.h and include/game/layout_draw.h",
+          "detail": "The unchanged complete archive TU retains its explicitly marked ResourceFontView using nw::font::FontInformation and nw::font::internal::TextureObject pointees versus the canonical weaker view. Reconcile that existing strengthened view, and move the marked float func_00186a6c(float) declaration into a shared header before any future adoption; do not create a competing C++ class identity."
+        },
+        {
+          "kind": "contract conflicts",
+          "subject": "include/game/sequence.h, include/game/audio_voice.h and target-version sound sequence declarations",
+          "detail": "The unchanged command-processor companion retains explicitly marked target-version parser state: track parser prefix +0x1c, target wait +0x60, ten eight-byte call-stack entries, signed-halfword interpolation counters, four LFO sets and a player pointer. Canonical older SequenceTrack CALL_STACK_DEPTH 3 and ParserTrackParam/MoveValue layouts are not silently substituted. Centralize its existing marked typed extern-C declarations if that surrounding TU is ever adopted. No companion was dropped, fixed or credited here."
+        }
+      ]
+    },
+    {
+      "batch": "nm11",
+      "row": {
+        "address": "0x00122360",
+        "name": "func_00122360",
+        "size": 44,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm11/src/tu415_buffers.c",
+        "profile": "sdk",
+        "receipt": "scratch/authors/nm11/match/final-func_00122360/tu415_buffers.result.json",
+        "source_sha256": "bd43157135a56da0286d3b5c0827081f1beb268cb01592279602d1e85789926f",
+        "receipt_sha256": "b1ae7cb0bc108f6d726c3389b2f1e2707fdfd05be81e623bc30aa01a70cab2b6",
+        "object_sha256": "cb3dc47efe71c9d8037391a096eca63c486dd63183b1b3ccf63bd5485a599df5",
+        "final_exit_code": 1,
+        "attempts": 29,
+        "successful_comparisons": 27,
+        "compile_or_link_refusals": 2,
+        "minutes": 0.08597,
+        "residual": {
+          "candidate_size": 44,
+          "target_size": 44,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "word_offsets": [],
+          "first_difference_offset": null
+        },
+        "notes": "step5c: MATCH 44/44 B under the inherited frozen sdk/default-v2 profile, from the exact nf007 TU and its 2-B zero-temporary residual. A borrowed LinearBufferState carries the three actual used/capacity/enabled values into their real destination stores; every field is initialized and consumed, with no dead state or added observable contract. This reproduces the target zero materialization/storage register at +0x1c/+0x24. AlignedBuffer now copies the accepted sibling definition exactly and func_0018f0ac comes from canonical game/render_state.h. Final exact delivered-file matcher exit is 1 solely because the inherited func_001223c0 companion remains the same 56/60-B mismatch; its candidate bytes are identical to nf007 and it is not credit or context_match. [INFERENCE] Helper/type descriptive identity is not a recovered historical symbol.",
+        "needs_names": [],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "provenance": {
+          "from_batch": "nf007",
+          "from_result": "scratch/authors/nf007/RESULT.json",
+          "previous_source": "scratch/authors/nf007/src/tu415_buffers.c",
+          "previous_receipt": "scratch/authors/nf007/match/24-final-func_00122360-sdk/tu415_buffers.result.json",
+          "exact_inherited_baseline": "scratch/authors/nm11/baseline/tu415_buffers.c",
+          "inherited_source_sha256": "5600589378524da8540eff9283d232fb2a75c275cfcf40d1fd840f8dae6976b3",
+          "delivered_source_unchanged_from_inherited": false
+        }
+      },
+      "author_result": "scratch/authors/nm11/RESULT.json",
+      "author_result_sha256": "f8fdec770ff05035b41194cb995cfe5231657205f8c77c7b5e4fa8fb5587b7aa",
+      "integration_needs": {
+        "headers": [
+          {
+            "applies_to": "func_00122360",
+            "source": "scratch/authors/nm11/src/tu415_buffers.c",
+            "details": "No new shared header or name overlay is required for the isolated C match. AlignedBuffer is identical to accepted src/wave17/func_00130348.c; func_0018f0ac uses existing game/render_state.h. LinearBufferState is private, used operation state. GpuBufferDescriptor and func_001223c0 stay as the inherited uncredited companion; any future shared-header consolidation must preserve their distinct identity."
+          },
+          {
+            "applies_to": "func_001d9d48",
+            "suggested_header": "include/game/region_heap.h",
+            "declarations": [
+              "void func_00131504(struct HeapStorage *storage);",
+              "struct HeapStorage *func_001d99cc(struct HeapStorage *storage);",
+              "void func_001d9d48(struct RegionHeapOwner *owner);"
+            ],
+            "details": "If this mismatch is adopted later, move the marked local extern-C block into the shared header. First two declarations agree with the accepted wave8 definitions."
+          },
+          {
+            "applies_to": "func_00115354",
+            "suggested_header": "include/game/applet_query.h",
+            "details": "Move marked query/wrapper declarations only after reconciling the selector conflict below. Preserve writable optional output widths 1/4/4/4 and the proven service lock/query/diagnostic/unlock/copyback order."
+          },
+          {
+            "applies_to": "func_00141ab0",
+            "suggested_header": "include/game/model_animation.h",
+            "declarations": [
+              "extern int data_0023fdc8;",
+              "void func_00135908(struct ModelAnimationObject *object, int index);",
+              "void func_00145998(struct ModelAnimationObject *object, int index);"
+            ],
+            "details": "Consolidate inherited model-track/object/manager types and marked extern-C declarations if adopted later. AnimationHeader/AnimationResource match src/wave9/func_001409c0.c exactly; the global pool declaration cannot be promoted until the conflict below is reconciled."
+          }
+        ],
+        "names": [],
+        "contract_conflicts": [
+          {
+            "symbol": "func_00123538",
+            "delivered_contract": "CtrResult (unsigned mode, unsigned char *kind, unsigned *first, unsigned *second, unsigned *third)",
+            "current_tracked_contract": "CtrResult (unsigned char selector, unsigned char *enabled, unsigned *first, unsigned *second, unsigned *third)",
+            "current_tracked_source": "src/checkpoint10/capture_output_locals.c",
+            "details": "This tracked callee is not present in the inspected accepted ledger. Its byte-selector provenance is compatible with the sole wrapper caller constant 2, but neither that constant nor the 2-B byte-selector witness establishes the wrapper ABI width. Preserve/report this conflict rather than silently narrowing the exact inherited near-miss source. A previous signed-char draft conflict is superseded by the concrete current tracked declaration, not resolved by an alias."
+          },
+          {
+            "types": [
+              "RegionHeapOwner",
+              "LockedListOwner"
+            ],
+            "details": "Canonical partial owner views share the vtable at +0 and lock area, while +0x10 is HeapStorage.heap in RegionHeapOwner and TaggedPoolList.tag in LockedListOwner. Reconcile actual owner identity/layout before adopting the heap candidate; data_00224ae8 already uses the canonical LockedListVTable binding and must not be rebound."
+          },
+          {
+            "symbol": "data_00242238",
+            "current_tracked_contract": "struct ResourceEventPool from include/game/resource_runtime.h",
+            "delivered_contract": "struct AnimationManager with ModelAnimationObject *objects at +0xc and int count at +0x1c",
+            "details": "Canonical ResourceEvent has DisplayObject base, two EventResource pointers at +0x94/+0x98, unsigned reserved9c and unsigned active at +0xa0. Inherited ModelAnimationObject instead has three ModelAnimationTrack pointers at +0x94/+0x98/+0x9c and void *active at +0xa0. The 0xcc stride and common offsets do not prove class identity; unify an evidenced typed pool/object model rather than inventing an alias."
+          },
+          {
+            "types": [
+              "ModelAnimationTrack",
+              "DisplayAnimationTrack"
+            ],
+            "details": "Model code reads/writes a full unsigned flags word at +4, plus callback/resource tail fields at +0x1c/+0x20. Current display_animation.h exposes unsigned-char flags plus padding and stops after +0x18. Reconcile the supported layout/operation contract; do not silently substitute the byte/shorter view."
+          }
+        ],
+        "qualifications": [
+          "[INFERENCE] Newly introduced LinearBufferState is descriptive private live state, not an asserted historical external type or helper identity.",
+          "Existing C++ INTEGRATOR markers and descriptive partial type identities are retained only on mismatched sources, not waived for prepare.",
+          "The query retains approved ARMCC __current_pc and the inherited ORIGINAL BUG failed-IPC indeterminate output annotation."
+        ],
+        "context_ownership": [
+          "The full tu415_buffers.c is delivered. Only func_00122360 newly MATCHes; func_001223c0 remains byte-identical to the previous mismatching candidate and uncredited. There are no additional delivered context MATCHes."
+        ]
+      }
+    },
+    {
+      "batch": "nm08",
+      "row": {
+        "address": "0x00154674",
+        "function": "func_00154674",
+        "size": 232,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm08/delivery/func_00154674.cpp",
+        "source_sha256": "ddf14721146df36cb0b5463df69b65d3883f3e897bf48e2623050f22bd6f9bc6",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nm08/match/func_00154674/26-final-delivery/func_00154674.result.json",
+        "receipt_sha256": "905cb9b00d55720fdde8ce284de02b814807536a16f9e48aef631f0cd0440eaa",
+        "object_sha256": "448c21451b8608a74cd5b704d403529e7c8cbc17d79436198050f3b1daef3219",
+        "exit_code": 1,
+        "attempts": 26,
+        "minutes": null,
+        "matcher_seconds": 3.927716,
+        "residual": {
+          "compiled_size": 232,
+          "target_size": 232,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "different_word_offsets": [],
+          "first_difference_offset": null
+        },
+        "notes": "step5c: MATCH, 232/232, under frozen middleware/default v2. The predecessor differed only at word +0x24: its first signed channel-count read used still-live incoming root r1 instead of saved root r4, both copies of the same group. Preserve the zero-trip count guard and express the allocation-search body as do/while (++i < channel_count); that natural loop form selects the saved root and removes the last byte. The delivered callback also uses canonical AudioVoiceGroup/AudioChannel, an unsigned-char allocation option, and canonical callback/context/callee contracts directly, eliminating inherited native reinterpretations and nominal aliases. Final exact-file receipt is target MATCH but whole-TU exit 1: inherited native AppendVoiceList stays its body-identical 12-byte mismatch. [INFERENCE] Historical loop spelling and callback/class names remain unrecovered.",
+        "names": "scratch/authors/nm08/names.json",
+        "needs_names": [
+          "_ZN2nw3snd8internal6driver12VoiceManager15AppendVoiceListEPNS2_5VoiceE"
+        ],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "from_batch": "np049",
+        "from_result": "scratch/authors/np049/RESULT.json"
+      },
+      "author_result": "scratch/authors/nm08/RESULT.json",
+      "author_result_sha256": "6f7b5a8163cf0e3344515549ba8e48d42359652b093461e4596b234e8d2fbd78",
+      "integration_needs": [
+        {
+          "functions": [
+            "func_00154674"
+          ],
+          "headers": [
+            "include/game/audio_voice.h: add the existing local C-linkage void func_00154674(AudioChannel *, AudioVoiceGroup *) declaration before adoption. Existing func_001526b4 and manager/release declarations are already reused."
+          ],
+          "names": [
+            "_ZN2nw3snd8internal6driver12VoiceManager15AppendVoiceListEPNS2_5VoiceE"
+          ],
+          "names_overlay": "scratch/authors/nm08/names.json",
+          "contract_conflicts": [],
+          "notes": [
+            "Delivered callback now uses canonical objects directly; its predecessor native Voice/AudioVoiceGroup and hardware Voice/AudioChannel alias qualifications are eliminated, not silently adopted.",
+            "The inherited native AppendVoiceList context at 0x001551a0 remains unmatched. This is a target-only witness, not an all-MATCH TU or an ownership/rehome request.",
+            "Only the AppendVoiceList self-definition binding is required by this TU. The unchanged inherited overlay also contains an unused __aeabi_uldivmod entry; do not propose that entry for adoption."
+          ]
+        },
+        {
+          "functions": [
+            "func_00146070"
+          ],
+          "headers": [
+            "Use the delivered existing ServiceOutput receiver/layout, not the obsolete private AudioControlClient view.",
+            "Share void func_00148594(InputSessionContext *) and make the existing void func_0019df5c(void) declaration available to C; the query/release declarations are already reused from canonical IPC/service headers."
+          ],
+          "names": [],
+          "names_overlay": null,
+          "contract_conflicts": [
+            "The original initializer passes bss_004b97ac (canonical InputSessionContext *) to func_0014877c, while src/wave15/func_0014877c.c defines its receiver as ServiceOutput *. Reconcile that receiver and the callee-written +2 mode byte; the delivered differing prototype is explicitly marked INTEGRATOR. No receiver cast or nominal alias is introduced."
+          ],
+          "notes": [
+            "Current ServiceOutput member names are retained at the exact written offsets; historical field vocabulary remains [INFERENCE].",
+            "The copied existing result_failure_bits helper is experimental only: default refusal and frozen-v3 I1-I3/call-ABI refusal are preserved, with no qualified model MATCH."
+          ]
+        },
+        {
+          "functions": [
+            "func_0017dff4"
+          ],
+          "headers": [
+            "Share descriptive SampledCurve (one-byte selector), extern const float *data_0024374c[], and the C-linkage float(const SampledCurve *, float) API in include/game/audio_curve.h if adopted."
+          ],
+          "names": [],
+          "names_overlay": null,
+          "contract_conflicts": [
+            "Do not alias SampledCurve to imported Util::PanInfo, whose selector is enum-width. The target byte width and signed sample conversion remain unchanged."
+          ]
+        },
+        {
+          "functions": [
+            "func_001822d4",
+            "func_00183034"
+          ],
+          "headers": [
+            "Move the marked C-linkage declarations and descriptive SessionResourceVTable/ResourceIdentifier/SessionResource layout to shared session/resource headers if adopted.",
+            "Consolidate the inherited partial ResourceServiceState with the current canonical definition, whose +8 const CtrHandle *session now agrees."
+          ],
+          "names": [],
+          "names_overlay": null,
+          "contract_conflicts": [
+            "The inherited companion reads data_0021abd0 at its base as a CtrHandle; include/game/service_runtime.h declares const InvalidHandleRecord with handle at +4. Reconcile the actual global contract, not by a cast, alias or changed read."
+          ],
+          "notes": [
+            "Preserve the complete companion mismatch; no context MATCH is claimed.",
+            "Approved __current_pc intrinsic remains an explicit qualification."
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "nm22",
+      "row": {
+        "address": "0x00136450",
+        "name": "func_00136450",
+        "size": 192,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm22/src/func_00136450.c",
+        "source_sha256": "64d06ff850e3fd878f859ff371c82da5059dfca35749b52e5bcab3dd2df60b60",
+        "profile": "sdk",
+        "receipt": "scratch/authors/nm22/match/final-func_00136450-sdk/func_00136450.result.json",
+        "receipt_sha256": "6edf2fe68731ed8c4acadd64b76973b93b795ba12eb895af21e2939c66425898",
+        "object_sha256": "794997cadbf9e6056cabd33195e9e2a9081debc41e88bd5f4360cb0de430cf92",
+        "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names_overlay": null,
+        "needs_names": [],
+        "exit_code": 0,
+        "attempts": 40,
+        "minutes": 0.12341,
+        "timing_basis": "Sum of matcher subprocess wall time only; analysis time is not apportioned.",
+        "residual": {
+          "compiled_size": 192,
+          "target_size": 192,
+          "size_delta": 0,
+          "differing_bytes": 0,
+          "differing_common_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "differing_word_offsets": []
+        },
+        "from_source": "scratch/authors/np008/src/func_00136450.c",
+        "from_receipt": "scratch/authors/np008/match/final-func_00136450-middleware/func_00136450.result.json",
+        "notes": "step5c: MATCH, all 192 bytes, default v2/none. Factoring only the actual fourth/fifth field copies into one storage-first static operation helper gives the original r7/r8 source-pointer allocation under frozen sdk, removing the inherited four-byte register-only miss at +0x08/+0x1c/+0x5c/+0x78. The five const string inputs, copy call order, group-count reloads across calls and final increment are unchanged; canonical ServiceStringCounts now comes from game/service_state.h. Final exact delivered-file matcher exit 0. Profile witness: only sdk matches this source (middleware: 192 bytes/six differing bytes; game: 188 bytes/147 differing bytes including extent). [INFERENCE] Compiler/TU ownership is not authenticated by that witness. No names overlay, extra TU, linker rewrite or invented external callee is required. The original missing string-table capacity check remains documented.",
+        "qualifications": [
+          "ORIGINAL BUG: no capacity check guards the fixed global string table.",
+          "[INFERENCE] sdk is the frozen matching-profile witness, not proof of historical library/compiler ownership."
+        ],
+        "attempt_log": "scratch/authors/nm22/RUNS.jsonl"
+      },
+      "author_result": "scratch/authors/nm22/RESULT.json",
+      "author_result_sha256": "f0c6f90adcf56bd3a536b409dbae643fd881ae28a8399f84aa8238ede4735677",
+      "integration_needs": {
+        "headers": [
+          {
+            "functions": [
+              "func_001039ac"
+            ],
+            "path": "include/game/drawing_system.h",
+            "need": "Unify the expanded DrawingSystem view, RenderTargetVTable destroy slot and heap-owned target prefix before adopting this C++ mismatch. Move its marked extern-C graphics/global declarations into canonical headers. Canonical RenderResourceGroup and func_0019cc68/func_0019cb3c now come from render_resource.h, not conflicting local declarations."
+          },
+          {
+            "functions": [
+              "func_00196d18"
+            ],
+            "path": "include/game/render_state.h",
+            "need": "Change/reconcile Framebuffer +0x20 as unsigned handle and +0x24 as Framebuffer *next, then migrate allocator/startup consumers consistently and replace the exact local GpuVertexAttribute/GpuState/FramebufferManager copies with the canonical include. No tracked header was edited."
+          },
+          {
+            "functions": [
+              "func_00136450"
+            ],
+            "path": "include/game/service_state.h",
+            "need": "No new header is required for the MATCH: canonical ServiceStringCounts/data_002430e4 are already reused. Preserve the data_002430e4 interior relationship to the opaque data_002430e0 allocation; never invent a second storage alias. The local bounded-copy declaration exactly matches src/checkpoint10/func_00186494.c; optional later declaration consolidation must retain size_t(char *, const char *, size_t) and char table[][0x40]."
+          }
+        ],
+        "names": [],
+        "contract_conflicts": [
+          {
+            "subject": "Framebuffer last two words",
+            "canonical": "include/game/render_state.h",
+            "detail": "Current canonical fields are Framebuffer *next at +0x20 and Framebuffer *previous at +0x24. The target compares/writes the caller-evidenced unsigned handle at +0x20 and follows a next link at +0x24. Prefix through +0x1c, size 0x28, manager types and public unsigned(target, handle) ABI are retained. src/wave2/func_0018ce64.c and func_00118074.c currently use the canonical next/previous names for those zeroed words; both need a coordinated field migration. Old SlotList and +4/+12-manager conflicts are no longer current."
+          },
+          {
+            "subject": "RenderTargetVTable and HeapRenderTarget",
+            "canonical": "include/game/drawing_system.h",
+            "detail": "Slot zero is invoked as void(RenderTarget *) destroy before release through the owning Heap pointer at target +4. Canonical slot zero is currently reserved void(void); integrate a typed slot and heap-owned prefix rather than bending the call."
+          },
+          {
+            "subject": "Expanded DrawingSystem",
+            "canonical": "include/game/drawing_system.h",
+            "detail": "The local cleanup view exposes three canonical 0x24-byte resource groups at +0x18, queue/texture/framebuffer storage and CameraState *camera at +0x254 (canonical currently ends at +0x254). Reconcile unused canonical fields too: pointer-valued ready versus inherited unsigned ready, active versus signed screen at +0xa8, and unsigned phase versus inherited signed phase at +0x250. Cleanup does not establish those unused scalar contracts."
+          }
+        ],
+        "new_match_requires_names_or_header_change": false
+      }
+    },
+    {
+      "batch": "nm25",
+      "row": {
+        "address": "0x00192a7c",
+        "name": "func_00192a7c",
+        "size": 52,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+        "source_sha256": "27496f45ecd04abdb57dfd5c04ddf4a9ee7c664c4d585f5e24f3c4acf862b398",
+        "profile": "sdk",
+        "receipt": "scratch/authors/nm25/match/sdk-040-delivered-final/func_00191e18.result.json",
+        "receipt_sha256": "d8bceaa02111529af35d33308bb58253d05da1a203a478092cfbf0cedc659481",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "residual": {
+          "name": "func_00192a7c",
+          "address": "0x00192a7c",
+          "status": "match",
+          "candidate_size": 52,
+          "target_size": 52,
+          "size_delta": 0,
+          "differing_bytes": 0,
+          "differing_bytes_common_extent": 0,
+          "first_difference_offset": null,
+          "changed_instruction_offsets": []
+        },
+        "residual_before": {
+          "name": "func_00192a7c",
+          "address": "0x00192a7c",
+          "status": "mismatch",
+          "candidate_size": 52,
+          "target_size": 52,
+          "size_delta": 0,
+          "differing_bytes": 7,
+          "differing_bytes_common_extent": 7,
+          "first_difference_offset": 9,
+          "changed_instruction_offsets": [
+            8,
+            12,
+            16
+          ]
+        },
+        "residual_after": {
+          "name": "func_00192a7c",
+          "address": "0x00192a7c",
+          "status": "match",
+          "candidate_size": 52,
+          "target_size": 52,
+          "size_delta": 0,
+          "differing_bytes": 0,
+          "differing_bytes_common_extent": 0,
+          "first_difference_offset": null,
+          "changed_instruction_offsets": []
+        },
+        "residual_differing_bytes_before": 7,
+        "residual_differing_bytes_after": 0,
+        "attempts": 40,
+        "minutes": 0.145,
+        "minutes_scope": "sum of recorded matcher subprocess wall times only; SDK rows share the same 40 whole-TU invocations",
+        "previous_source": "scratch/authors/np207/src/func_00191e18.cpp",
+        "previous_receipt": "scratch/authors/np207/match/sdk-025-delivered/func_00191e18.result.json",
+        "notes": "step5c: MATCH, improving 7 -> 0 differing bytes at the exact 52-byte extent under frozen sdk/default v2. A natural conditional initialization-result value (success zero, otherwise the existing error) followed by a nonzero-result diagnostic recovers the original conditional error-literal load and diagnostic-PC materialization. The fatal handler remains the existing two-unsigned canonical call and the handle is read after it returns; the unsigned(void) interface agrees with service_clients.h and the two source-bound IPC consumers. The final exact delivered TU was measured at sdk-040; whole-TU exit remains 1 because its nine other emitted functions are still mismatches. Qualification: approved __current_pc compiler intrinsic; no removed-callee/model qualification.",
+        "needs_names": [],
+        "qualifications": [
+          "Approved __current_pc compiler intrinsic."
+        ]
+      },
+      "author_result": "scratch/authors/nm25/RESULT.json",
+      "author_result_sha256": "ac51587d9fa022f920024f1d1398fd0d6bee8718407bbba28c71066b0a7da096",
+      "integration_needs": {
+        "headers": [
+          {
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "source_lines": "20-35,47-63,588-598",
+            "need": "Migrate the inherited local extern-C blocks before G3. Top block symbols: func_00192494, func_00192c20, func_00192dd0, func_0019342c, func_00193a8c, func_00193c00, data_0021ade0, data_00242c0c, data_00242c08, bss_002d1d38, data_00242fcc, func_0018c5f0. Applet block symbols: data_00242a34, data_00242a40, func_00130044(unsigned*,int*,void*,unsigned,unsigned*,CtrHandle*,long long), func_00191d34, func_00123398, func_001218e4, func_00192458, func_00123364, func_00191e18, func_00192250. Graphics block: func_001245d0, func_001246a4, func_001247a0, func_00193620; preserve writable GraphicsReference* color/alpha, independent float and final bool in func_001247a0. Reuse existing canonical declarations where available; do not duplicate weaker prototypes."
+          },
+          {
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "need": "Publish/reconcile the source-bound L029 upload/builder/buffer records, ServiceHandleState (two one-byte flags plus padding and handle at +4), EcdDictionary and TextureDescription/TextureResourceOperations types with the appropriate shared subsystem headers before moving their cross-unit declarations. No new header or owner alias is proposed."
+          },
+          {
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "need": "Complete canonical AnimationState/handle-collection ownership in include/game/w11_control.h:42-51, preserving start +0x44, finish +0x48, active/enabled +0x54, lower/upper/current +0x58/+0x5c/+0x60 while exposing drag/down/up +0x38/+0x3c/+0x40, drag_origin +0x50, saved +0x64, scale +0x6c, drag_previous +0x70, drag_delta +0x74 and following MotionState. Reconcile Component001b4310 dispatch ownership from display_update.h, not an unproven alias."
+          },
+          {
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "need": "Retain the inherited display complete-allocation cutover: WidgetSlot.object is ResourceEvent*, and func_00181700/func_0015e684 receive ResourceEvent*, rather than the current screen.h DisplayObject*/BoundDisplayObject* contracts. Move the marked declarations at source lines 103-116 and 197-209 into unified display/menu headers only after reconciliation. TransitionController still refines the ten-slot prefix used by src/wave8/func_00172c04.c. Canonical InputSnapshot/InputPoint/InputRectangle/TouchDeviceState are reused."
+          },
+          {
+            "source": "scratch/authors/nm25/variants/sound/sound-014-queued-node-live-snapshot.cpp",
+            "need": "Complete SequencePlayer/SequenceSoundPlayer with stopping +0x0f, canonical ArchiveReader[4] +0xf4, BankReader[4] +0x134, event flag +0x165, pool +0x174 and task +0x178. Current sequence.h:78-94 is incomplete. W15iStreamSound is not asserted to alias the current canonical owner. Move the marked block at lines 31-44 to a shared sequence/stream-player header only after that cutover."
+          }
+        ],
+        "names": [
+          {
+            "path": "scratch/authors/nm25/names-input.json",
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "symbols": [
+              "_ZN11TouchBoundsC1Effff",
+              "_ZN14ControlTripletC1Ev",
+              "_ZN8SlotBankC1Ev",
+              "_ZN8SlotBankC2Ev"
+            ],
+            "need": "Inherited np207/ns084 overlay copied byte-for-byte; no new binding, rebinding or alias is proposed. Unused entries remain provenance only."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "symbol": "func_00193c00",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "existing": "include/game/render_state.h PipelineStorage scalar fields at +0x808/+0x80c",
+            "delivered": "Inherited private BufferBindings array_buffer/element_buffer BufferObject* view",
+            "need": "Reconcile the allocation and all readers/writers before admission. The inherited cast in this unmatched companion is not a proved alias; it was not added or expanded in this pass."
+          },
+          {
+            "symbol": "func_0017e35c",
+            "source": "scratch/authors/nm25/variants/sound/sound-014-queued-node-live-snapshot.cpp",
+            "existing": "include/game/sequence.h:129 SequencePlayer*",
+            "delivered": "W15iStreamSound*",
+            "need": "Apply the complete-owner cutover above; do not introduce a cast between the two incomplete declarations."
+          },
+          {
+            "symbol": "func_001d3c58",
+            "source": "scratch/authors/nm25/variants/sound/sound-014-queued-node-live-snapshot.cpp",
+            "existing": "include/game/wave_player.h:96 and src/wave15/func_001d3c58.cpp use W15iAddressCache*",
+            "delivered": "BankReader*",
+            "need": "Retype the provider and its shared declaration to the canonical twelve-byte bank-reader contract evidenced by the inherited sound model S07."
+          },
+          {
+            "symbol": "func_001d482c",
+            "source": "scratch/authors/nm25/variants/sound/sound-014-queued-node-live-snapshot.cpp",
+            "existing": "src/wave15/func_001d482c.cpp W15iRecordCache*",
+            "delivered": "ArchiveReader*",
+            "need": "Retype the provider to canonical sixteen-byte archive readers before admission."
+          }
+        ],
+        "resolved_local_contract_conflicts": [
+          {
+            "symbol": "func_00185f70",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "resolution": "Removed only the stale inherited local void(unsigned char) declaration; reused include/game/service_state.h:138 void(int), consistent with src/checkpoint10/func_00185f70.c. The existing call passes literal 1. No tracked contract was edited."
+          }
+        ],
+        "preserved_non_target_statuses": [
+          {
+            "address": "0x001b3f04",
+            "name": "func_001b3f04",
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 344,
+            "candidate_size_after": 344
+          },
+          {
+            "address": "0x001b405c",
+            "name": "func_001b405c",
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 348,
+            "candidate_size_after": 348
+          },
+          {
+            "address": "0x001b4f58",
+            "name": "_ZN8SlotBankC1Ev",
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 196,
+            "candidate_size_after": 196
+          },
+          {
+            "address": "0x001b6788",
+            "name": "func_001b6788",
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 416,
+            "candidate_size_after": 416
+          },
+          {
+            "address": "0x001b6c90",
+            "name": "func_001b6c90",
+            "source": "scratch/authors/nm25/variants/control/control-023-drag-operation-state-movement.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 156,
+            "candidate_size_after": 156
+          },
+          {
+            "address": "0x00191e18",
+            "name": "func_00191e18",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 1016,
+            "candidate_size_after": 1016
+          },
+          {
+            "address": "0x00192250",
+            "name": "func_00192250",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 316,
+            "candidate_size_after": 316
+          },
+          {
+            "address": "0x00192494",
+            "name": "func_00192494",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 544,
+            "candidate_size_after": 544
+          },
+          {
+            "address": "0x00192c20",
+            "name": "func_00192c20",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 424,
+            "candidate_size_after": 424
+          },
+          {
+            "address": "0x00192dd0",
+            "name": "func_00192dd0",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 232,
+            "candidate_size_after": 232
+          },
+          {
+            "address": "0x0019342c",
+            "name": "func_0019342c",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 440,
+            "candidate_size_after": 440
+          },
+          {
+            "address": "0x001936a0",
+            "name": "func_001936a0",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 940,
+            "candidate_size_after": 940
+          },
+          {
+            "address": "0x00193c00",
+            "name": "func_00193c00",
+            "source": "scratch/authors/nm25/src/func_00191e18.cpp",
+            "before_status": "mismatch",
+            "after_status": "mismatch",
+            "status_preserved": true,
+            "candidate_size_before": 288,
+            "candidate_size_after": 288
+          }
+        ],
+        "catalogue_changes": [],
+        "models": "All selected rows use frozen default armlink5-inline-branchnop-v2 / literal none. No alternative model or removed helper is claimed."
+      }
+    },
+    {
+      "batch": "nm20",
+      "row": {
+        "address": "0x001ae140",
+        "name": "func_001ae140",
+        "native_name": null,
+        "size": 420,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm20/src/func_001ae140.c",
+        "source_sha256": "9ba0772733beaf0de3a640d9d7c879913ce1de3684df8a986efc9f5f0d98818a",
+        "profile": "game",
+        "receipt": "scratch/authors/nm20/match/final-grid-exact-delivery/func_001ae140.result.json",
+        "receipt_sha256": "fc104a0b6e155e325d717e3c87495dec6d421286e10881f18e2e28c6d2a7d8a4",
+        "object_sha256": "5b191bfcb6783f943f7ed968dd1f487e2f0819027fbdecaec28aaa8cd1a228c3",
+        "terminal_record": "scratch/authors/nm20/match/final-grid-exact-delivery/terminal.json",
+        "final_exit_code": 0,
+        "whole_tu_match": true,
+        "attempts": 7,
+        "minutes": 0.024185,
+        "timing_basis": "Observed sequential matcher subprocess time only, not author analysis; shared-TU durations overlap and must not be summed.",
+        "residual": {
+          "candidate_size": 420,
+          "target_size": 420,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "first_difference_offset": null,
+          "differing_byte_offsets": []
+        },
+        "notes": "step5c: MATCH, 420/420 B, default v2/game. Prior differences at instruction offsets +0xc0/+0xc4 were solely the loaded-mask/test temporary (target r10, candidate r8). A guarded do-while row traversal together with the commuted mask predicate reproduces the exact allocation; isolated guarded traversal remains a 2-byte miss, so both natural changes are retained. Original local declaration order and all cap/allocation-failure behavior are unchanged. The supplied unclassified permuter witness was naturalized rather than copied with expanded historical headers. Canonical ResourceEvent cleanup, ResourceDescriptor global and caller-evidenced Component001ae140 receiver types are used. This is not integration-ready: the marked ResourceDescriptor/NameTable dispatcher contract conflict must be reconciled before prepare. No cast, unproven alias, steering or new external callee was added.",
+        "names": null,
+        "needs_names": [],
+        "needs_headers": [
+          "Reconcile include/game/command_state.h func_0017a938/func_001670ec descriptor-table contracts with ResourceDescriptor objects constructed by func_002095c0; exact canonical/local signatures and caller/writer evidence are recorded in CONTRACTS.json and integration_needs.contract_conflicts. No unproven NameTable alias or caller cast is permissible."
+        ],
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempt_log": "scratch/authors/nm20/ATTEMPTS.jsonl",
+        "diagnosis_evidence": "scratch/authors/nm20/DIAGNOSIS.json",
+        "contract_evidence": "scratch/authors/nm20/CONTRACTS.json",
+        "integration_ready": false,
+        "predecessor": {
+          "from_batch": "r41257",
+          "result": "scratch/authors/r41257/RESULT.json",
+          "source": "scratch/authors/r41257/attempts/func_001ae140/14-unsigned-controller-mask/func_001ae140.c",
+          "source_sha256": "e5257ded8b6271dd4b2f4f76ab6efe5af0a79f7388aab361f3fa38b2aaa0acc1",
+          "profile": "game",
+          "receipt": "scratch/authors/r41257/match/func_001ae140/14-unsigned-controller-mask-game/func_001ae140.result.json",
+          "names": null,
+          "notes": "needs-profile?: complete 420-byte extent remains two byte positions different, both confined to the mask-test scratch-register allocation. Fresh unsigned mask typing, scoped C++ lifetimes, helper decomposition, commuted tests, scan joins and teardown traversal variants were measured; no frozen profile MATCH."
+        },
+        "candidate_bytes_unchanged": false,
+        "target_focused_source_hypotheses": 6
+      },
+      "author_result": "scratch/authors/nm20/RESULT.json",
+      "author_result_sha256": "95a48d0a67969bfe7814b7382aa2aa43cd375bf52c367c546d9e095fd47d8b8c",
+      "integration_needs": {
+        "headers": [
+          {
+            "source": "scratch/authors/nm20/src/func_001ae140.c",
+            "owner": "include/game/command_state.h",
+            "requirement": "Resolve the marked descriptor-table contract conflict below; this otherwise exact 420-B source is not prepare-ready. The inherited mismatched DisplayObject cleanup prototype and mutable-global versus const-NameTable view were not retained."
+          },
+          {
+            "source": "scratch/authors/nm20/src/lyt_runtime.cpp",
+            "suggested_header": "include/game/layout_lifetime.h",
+            "types": [
+              "struct LayoutDestructionView { const void* const* vtable; nw::lyt::AnimTransformList animations; nw::lyt::Pane* root; nw::lyt::GroupContainer* groups; };"
+            ],
+            "declarations": [
+              "extern const void* data_0022421c[];",
+              "nw::lyt::GroupContainer* func_001cc1e4(nw::lyt::GroupContainer* groups);",
+              "LayoutDestructionView* func_001cecb8(LayoutDestructionView* owner);"
+            ],
+            "requirement": "Retained inherited INTEGRATOR block must be moved/reconciled before prepare; reconcile the predecessor PoolOwner view rather than inventing a GroupContainer destructor alias. The whole TU remains a diagnostic near miss."
+          }
+        ],
+        "names": [
+          {
+            "path": "scratch/authors/nm20/pane.names.json",
+            "required": [
+              "_ZN2nw3lyt4Pane11AnimateSelfEj"
+            ],
+            "qualification": "Exact predecessor overlay copied without rebinding. Pane remains mismatched; no new name adoption is claimed. Do not adopt unrelated unused entries."
+          },
+          {
+            "path": "scratch/authors/nm20/layout.names.json",
+            "required": [
+              "_ZN2nw3lyt8Material7AnimateEv",
+              "_ZN2nw3lyt8internal11TexCoordAry4CopyEPKvh",
+              "_ZN2nw3lyt6Layout19DeleteAnimTransformEPNS0_13AnimTransformE"
+            ],
+            "qualification": "Exact predecessor overlay copied. Only DeleteAnimTransform is a context MATCH; Material/Copy remain mismatch-only native self-definition hypotheses. The inherited unused FxReverb binding is not required and must not be adopted for this TU."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "function": "func_0017a938",
+            "source": "scratch/authors/nm20/src/func_001ae140.c",
+            "canonical": "void func_0017a938(const struct NameTable *const *, int, unsigned);",
+            "delivered_evidenced": "void func_0017a938(const struct ResourceDescriptor *const *, int, unsigned);",
+            "canonical_locations": [
+              "include/game/command_state.h:26-29",
+              "src/wave20/func_0017a938.c:6-9"
+            ],
+            "evidence": [
+              "include/game/resource_descriptors.h:63 declares ResourceDescriptor *bss_00247098[13].",
+              "src/large/func_002095c0.cpp:5-17 constructs actual ResourceDescriptor objects and stores them in this table.",
+              "The original grid cleanup selects those exact pointers and passes the table to the wrapper, which forwards it to func_001670ec."
+            ],
+            "required_integration": "Reconcile the native common descriptor hierarchy/dispatch interface and every affected caller/header/wrapper. Do not independently change only this prototype, cast these distinct complete object types, or adopt an unproven alias."
+          }
+        ],
+        "types_defined": [
+          {
+            "name": "Component001ae140",
+            "source": "scratch/authors/nm20/src/func_001ae140.c",
+            "qualification": "Supplied partial Grid25 layout, renamed to the exact caller-evidenced forward tag. The one-mask-word extent/multirow bounds remain [INFERENCE]. No tracked header completion was made."
+          },
+          {
+            "name": "LayoutDestructionView",
+            "source": "scratch/authors/nm20/src/lyt_runtime.cpp",
+            "qualification": "Inherited unchanged partial lifetime view, not a recovered complete native Layout class."
+          }
+        ],
+        "unit_ownership": [
+          "The complete lyt_runtime.cpp retains all four original definitions. DeleteAnimTransform is existing context, not new target credit; do not adopt another duplicate defining TU. Use explicit ownership/rehoming rules if integration later consolidates these functions.",
+          "The grid unit byte-MATCHes but its marked dispatcher contract conflict prevents integration as-is. The pane and layout units remain near misses, not all-MATCH deliverables."
+        ],
+        "catalogue_or_model_changes": []
+      }
+    },
+    {
+      "batch": "nm29",
+      "row": {
+        "name": "func_0014aa94",
+        "address": "0x0014aa94",
+        "size": 96,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm29/src/func_0014aa94.cpp",
+        "source_sha256": "c70a2cd69fdd6caace690b93217cb8f8b3113e03add0c7b4d3614e5be222273c",
+        "profile": "middleware",
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "receipt": "scratch/authors/nm29/match/final-material/func_0014aa94.result.json",
+        "receipt_sha256": "8665f7d8fb07a08cb43b37579edea75e6b262996ce990ef3bb695dada1ccef57",
+        "final_exit_code": 1,
+        "attempts": 35,
+        "minutes": 0.09357,
+        "minutes_basis": "Recorded matcher wall time only; reasoning time was not measured.",
+        "residual_before": {
+          "differing_bytes": 4,
+          "target_size": 96,
+          "candidate_size": 96
+        },
+        "residual": {
+          "name": "func_0014aa94",
+          "address": 1354388,
+          "status": "match",
+          "target_size": 96,
+          "candidate_size": 96,
+          "differing_bytes": 0,
+          "first_difference_offset": null,
+          "differing_instruction_offsets": []
+        },
+        "notes": "step5c: MATCH, 4 -> 0 differing bytes at the full 96-byte extent under frozen middleware/default v2. The inherited four words at +8/+24/+48/+68 differed solely by exchanging saved source-stage and material-result homes: target stages r7/material r6, candidate stages r6/material r7. Whole-body normalization proves this exchange explains the baseline. A consumed two-pointer StageUpload value captures the genuine material lookup result and immutable input-stage pointer together, reproducing those live ranges without new effects, registers, directives, allocation or copying. The initial three-field upload value also MATCHed; removing its count field and using ordinary two-field aggregate initialization still MATCHes, giving the smaller delivered change. Source-field order and constructor trials are preserved; not every constructor form matches. The obsolete PaneMaterialView cast was removed to use the current canonical DisplayPane pointer. Caller 001494dc passes the real owner, count 1 and a stack-backed stage. Existing func_0014ab30 remains an exact context MATCH, while the emitted native SetTevStageNum retains its 328-byte/62-difference mismatch; whole-TU exit 1 is explicit. [INFERENCE] Original upload-value spelling/identity is unrecovered. This is a per-function candidate witness, not an all-MATCH TU or acceptance credit.",
+        "needs_names": [
+          "_ZN2nw3lyt8Material14SetTevStageNumEh"
+        ],
+        "extra_sources": [],
+        "families": [
+          "F02",
+          "F03"
+        ],
+        "names": "scratch/authors/nm29/material-names.json"
+      },
+      "author_result": "scratch/authors/nm29/RESULT.json",
+      "author_result_sha256": "ae5c81d141da456c11e4b8b8e1753ac79bf4d4da0a839350a211e783c6b81628",
+      "integration_needs": [
+        {
+          "need": "Promote material C-linkage contracts",
+          "source": "scratch/authors/nm29/src/func_0014aa94.cpp",
+          "headers": [
+            "include/game/material.h"
+          ],
+          "contracts": [
+            "nw::lyt::TevStage *func_0014d058(Material *material);",
+            "void func_0014aa94(BoundDisplayObject *object, int count, const nw::lyt::TevStage *stages);"
+          ],
+          "notes": "These remain in the inherited INTEGRATOR extern-C block. Use a C++-aware canonical declaration, not a local header. StageUpload is a private consumed two-pointer POD; no cross-unit type promotion is required for it."
+        },
+        {
+          "need": "Native material self-name and complete TU closure",
+          "source": "scratch/authors/nm29/src/func_0014aa94.cpp",
+          "names": "scratch/authors/nm29/material-names.json",
+          "symbols": [
+            "_ZN2nw3lyt8Material14SetTevStageNumEh"
+          ],
+          "notes": "Only the inherited same-address native setter self-binding at 0x0014d0a4 is needed. No new callee alias. The native setter is still a 328-byte/62-difference mismatch, retained intact; func_0014ab30 remains context_match. Do not drop either body or report an all-MATCH unit. Reconcile the inherited game Material/native nw::lyt::Material pointer-view bridge before integration."
+        },
+        {
+          "need": "needs-canonical-cutover: display",
+          "sources": [
+            "scratch/authors/nm29/src/func_0014aa94.cpp",
+            "scratch/authors/nm29/src/func_001ad708_message_unit.cpp"
+          ],
+          "headers": [
+            "include/game/screen.h",
+            "include/game/resource_runtime.h",
+            "include/game/material.h",
+            "include/game/messages.h"
+          ],
+          "evidence": "scratch/research/type-models/display/MODEL.md sections 1 and 4, D01-D04",
+          "conflicts": [
+            "include/game/screen.h:20-26 and :129-137 still split the complete owner into DisplayObject/BoundDisplayObject shells.",
+            "include/game/resource_runtime.h:182 declares func_00183208(ResourceEvent *), while the message TU uses the model-evidenced complete DisplayObject *.",
+            "include/game/screen.h:458,460,476 use BoundDisplayObject * for position endpoints receiving the same complete message-owned DisplayObject."
+          ],
+          "notes": "No tracked type migration, alias, attachment projection or header change was made. This target-only match does not resolve the existing complete-owner/payload/native-provider contract cutover."
+        },
+        {
+          "need": "Promote/reconcile full message owner and local C-linkage block",
+          "source": "scratch/authors/nm29/src/func_001ad708_message_unit.cpp",
+          "types": [
+            "MessageEntry",
+            "MessageLayout",
+            "Tu606MessageOwner",
+            "DisplayObject"
+          ],
+          "contracts": [
+            "func_00183208",
+            "func_0017a9a0",
+            "func_00180358",
+            "func_0015e684",
+            "func_00181700",
+            "func_0019e08c",
+            "func_00180314",
+            "func_001ad3c8",
+            "func_0017060c",
+            "func_00170c20",
+            "func_0015e780",
+            "func_0015e824",
+            "func_001ad5a8",
+            "func_001ad708",
+            "func_001ad848",
+            "func_001ad98c"
+          ],
+          "conflicts": [
+            "src/large/func_00176e24.c:17,46 and include/game/resource_runtime.h:97 use Component001ad708 for the same cleanup receiver."
+          ],
+          "notes": "The message source is an exact inherited TU. Canonical messages.h still ends MessageLayout before the resource-bearing allocation word. Preserve its two context MATCHes, cleanup mismatch and the three explicit inherited destruction-identity qualifications during any cutover."
+        },
+        {
+          "need": "Reader private type promotion only for a future match",
+          "source": "scratch/authors/nm29/src/func_0011788c.c",
+          "types": [
+            "Utf16Storage",
+            "Utf16Reader"
+          ],
+          "notes": "Scoped include/src searches found no canonical declaration for these inherited reader/storage identities. Layout, unsigned inputs and result are evidenced; semantic names remain [INFERENCE]. No new alias or external declaration is proposed."
+        }
+      ]
+    },
+    {
+      "batch": "nm34",
+      "row": {
+        "address": "0x00157500",
+        "name": "func_00157500",
+        "size": 468,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm34/src/func_00157500/31-score-before-position.c",
+        "source_sha256": "479a48cd7a219fe161ca53778b4ef3fe3f4b3dfb23b787d7407578006f553c9b",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nm34/match/func_00157500/final-selected/31-score-before-position.result.json",
+        "receipt_sha256": "9ff7a9916d708bc9332282621ba4024adedc9acb115ed85d0d60528acc85f9a3",
+        "whole_tu_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 39,
+        "minutes": 0.1213,
+        "inherited_source": "scratch/authors/np208/src/func_00157500/08-record-guarded-for.c",
+        "inherited_receipt": "scratch/authors/np208/match/func_00157500/08-record-guarded-for/08-record-guarded-for.result.json",
+        "inherited_result": "scratch/authors/np208/RESULT.json",
+        "residual_before": {
+          "candidate_size": 468,
+          "target_size": 468,
+          "differing_bytes": 8,
+          "first_difference_offset": 293,
+          "changed_instruction_offsets": [
+            292,
+            296,
+            304,
+            316,
+            320,
+            324,
+            332,
+            336
+          ]
+        },
+        "residual": {
+          "candidate_size": 468,
+          "target_size": 468,
+          "differing_bytes": 0,
+          "first_difference_offset": null,
+          "changed_instruction_offsets": []
+        },
+        "notes": "step5c: MATCH, 468/468 bytes, default v2/none and frozen middleware. Move only the used unsigned-short insertion-position declaration/zero initialization after the source score load, leaving every loop, typed record copy, public argument and global layout unchanged. This natural local lifetime ordering removes the inherited eight differing bytes at +0x124/+0x128/+0x130/+0x13c/+0x140/+0x144/+0x14c/+0x150: the unrolled shift's remaining-count/remainder temporary and copied-word scratch now have the original r6/r4 roles. Every other instruction field was already identical and remains so. The sole caller func_0017b5b4 and the no-callee three-argument contract are retained. No helper, alias, header change, profile change, padding, or register directive is needed. The exact delivered file is confirmed by the final-selected match.py invocation, exit 0.",
+        "needs_names": [],
+        "extra_sources": [],
+        "integration_needs": {
+          "headers": [],
+          "names": [],
+          "contract_conflicts": []
+        }
+      },
+      "author_result": "scratch/authors/nm34/RESULT.json",
+      "author_result_sha256": "50d6bddc9b44a85694f55be6e999c0cf3d6906a0ea372e0b05bc9fc037ccb3ac",
+      "integration_needs": {
+        "headers": [
+          "Publish the inherited FilePath descriptor, FileDevice virtual open interface and C-linkage declarations in include/game/file_stream.h: FileDevice *func_0012cdf0(const unsigned short *), int func_0019d5b0(const unsigned short *), Result func_0019d6f4(unsigned *, const unsigned short *, unsigned). Remove the local INTEGRATOR block only through that canonical cutover.",
+          "Publish the exact inherited W14GlyphOwner layout and INTEGRATOR C-linkage block in include/game/glyph_records.h: unsigned func_001e3420(const RecordSet *, int); the existing 15-argument typed scalar func_0015f73c declaration; and void func_001676bc(W14GlyphOwner *, W14GlyphList *, int, int, int, int). Keep canonical RecordSet/GlyphRecord and the getter declarations from game/selection.h and game/text_renderer.h, rather than introducing parallel identities."
+        ],
+        "names": [],
+        "contract_conflicts": [
+          "The inherited best source binds unsigned &output = *handle after device lookup but before virtual open. The observed caller setups support non-null storage but do not prove all future/external contracts. If failure-only nullable outputs must remain permitted, the previously measured eight-byte pointer-carrier alternative is scratch/authors/np208/src/func_0019d6f4/33-deferred-output-pointer-carrier.cpp with its recorded np208 receipt; it is not a MATCH or a new nm34 measurement."
+        ]
+      }
+    },
+    {
+      "batch": "nm32",
+      "row": {
+        "address": "0x0017df84",
+        "name": "func_0017df84",
+        "size": 88,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nm32/match/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.result.json",
+        "source_sha256": "22a6dfdd79c79c2eda2ead677f28304c43e18e0547c0ba08b7b3588e3b46c5fc",
+        "object_sha256": "f08b665693fa409f6f6e43b2444353b04114635a13065523e37184977da99ba6",
+        "receipt_sha256": "0e86d6718bcc2a6e2ca683dcceff2cbcd10bf97067acce97b0691fe2367c8f94",
+        "final_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "attempts": 44,
+        "comparison_attempts": 44,
+        "refused_attempts": 0,
+        "minutes": 0.174248,
+        "minutes_scope": "Summed sequential isolated matcher subprocess wall time only; research/writing time not separately attributed.",
+        "residual": {
+          "candidate_size": 88,
+          "target_size": 88,
+          "extent_delta": 0,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "differing_word_offsets": [],
+          "first_diff": null
+        },
+        "notes": "step5c: MATCH 88/88 under frozen game/default-v2; whole two-function TU exits 0. The inherited four-byte residual was solely the +0x0c/+0x10 request/category preservation-copy exchange. A natural implementation-private WorkRequestView borrows the existing request and exposes its real activation/link operations; an ordinary used const unsigned selected=category snapshot supplies the unchanged list index. Together these restore request-before-category preservation without extra work, outputs, allocation, ABI changes or call substitutions. The initial two-value-wrapper witness MATCHed; reducing WorkCategory to the plain unsigned snapshot still MATCHes, while removing the request boundary does not. Canonical public prototype is unchanged, every original callee including func_0014a7e0 is retained, and func_0017e764 remains 44/44 context MATCH. [INFERENCE] Historical helper spelling/class identity is not claimed. Inherited TaskPool/notification sharing and signal-storage typing qualifications remain explicit integration needs.",
+        "needs_names": [],
+        "needs_headers": [
+          "Share the inherited complete TaskPool layout through include/game/audio_tasks.h and reconcile the partial TaskPool definitions in src/wave16/func_00153fec.c and src/wave16/func_0015477c.c. Final private helper WorkRequestView remains implementation-local.",
+          "Move int func_0014a7e0(struct StreamQueue *queue, void *value) into include/game/audio_tasks.h, then remove the final source INTEGRATOR/C-linkage block. This is the original notification target, not a replacement alias.",
+          "Retained signal-storage qualification: canonical AudioWorkRequest currently has unsigned signal_state, signal_count at +0x0c/+0x10, used as the existing SignalState {unsigned state; StreamCriticalSection critical;} by the supplied source. Prefer reconciling this as a typed embedded SignalState member and updating affected callers during integration; do not add a second incompatible owner view."
+        ],
+        "previous": {
+          "from_batch": "nf026",
+          "result": "scratch/authors/nf026/RESULT.json",
+          "source": "scratch/authors/nf026/delivery/func_0017df84.cpp",
+          "profile": "game",
+          "receipt": "scratch/authors/nf026/match/55-audio-delivery-final/func_0017df84.result.json",
+          "source_sha256": "958d98bc037244550572a9a27bc1babf11f8a2fda708ac713cf92eba0f2effaf",
+          "names": null
+        },
+        "evidence": {
+          "attempts": "scratch/authors/nm32/ATTEMPTS.json",
+          "diagnosis": "scratch/authors/nm32/DIAGNOSIS.json",
+          "contracts": "scratch/authors/nm32/CONTRACTS.json"
+        }
+      },
+      "author_result": "scratch/authors/nm32/RESULT.json",
+      "author_result_sha256": "6045fb41c4ac6448ebbec3438d1e6e7c1469fc4930799324907d1e6547f67d13",
+      "integration_needs": {
+        "headers": [
+          {
+            "target": "func_0017df84",
+            "source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+            "needs": [
+              "Share the inherited complete TaskPool layout through include/game/audio_tasks.h and reconcile the partial TaskPool definitions in src/wave16/func_00153fec.c and src/wave16/func_0015477c.c. Final private helper WorkRequestView remains implementation-local.",
+              "Move int func_0014a7e0(struct StreamQueue *queue, void *value) into include/game/audio_tasks.h, then remove the final source INTEGRATOR/C-linkage block. This is the original notification target, not a replacement alias.",
+              "Retained signal-storage qualification: canonical AudioWorkRequest currently has unsigned signal_state, signal_count at +0x0c/+0x10, used as the existing SignalState {unsigned state; StreamCriticalSection critical;} by the supplied source. Prefer reconciling this as a typed embedded SignalState member and updating affected callers during integration; do not add a second incompatible owner view."
+            ]
+          },
+          {
+            "target": "func_0018191c",
+            "source": "scratch/authors/nm32/final/func_0018191c/40-final-canonical-owner-signed-default/func_0018191c.cpp",
+            "needs": [
+              "Share the exact existing EffectPresetMasks and W19EffectPresetBlock definitions plus extern const struct W19EffectPresetBlock data_002181c0 through include/game/image_activation.h (or the canonical drawing-input preset header), migrating src/checkpoint10/func_0016dc94.c to the same header. Do not change fallback unsigned-short signedness.",
+              "Share void func_001494dc(struct W10DrawingInput *state) and void func_0018191c(struct W10DrawingInput *state) through the canonical drawing-input/image activation header. No W23JImageActivation or W23JImageDefaults type should be promoted from the prior scratch source.",
+              "Add the existing exact C wrapper contract int func_0014a988(unsigned width, unsigned height, struct HwrImage *image) to include/game/hwr_image.h and reuse it in src/wave4/func_0014a988.c; remove the marked local C-linkage block before prepare. func_001811b8 and func_0014a9d8 already use their existing shared declarations."
+            ]
+          }
+        ],
+        "names": [],
+        "contract_conflicts": [
+          {
+            "symbol": "func_0018191c",
+            "status": "resolved_in_delivered_source",
+            "old_private_view": "scratch/authors/nf026/src/func_0018191c.cpp:W23JImageActivation.flags is signed short; W23JImageDefaults describes data_002181c0 independently.",
+            "canonical_contract": "include/game/screen.h:W10DrawingInput.effect_mask is unsigned short; src/checkpoint10/func_0016dc94.c supplies the existing W19EffectPresetBlock/EffectPresetMasks global view.",
+            "resolution": "Use canonical W10DrawingInput and exact canonical preset definitions with a local signed-short snapshot. Four original shared-receiver caller checks plus exact field offsets support this identity; no type alias or tracked header change was introduced. Migrate only shared declarations during integration."
+          },
+          {
+            "symbol": "TaskPool",
+            "status": "inherited_integration_need",
+            "detail": "Complete C++ TaskPool layout must be shared/reconciled with current C partial prefix views before G3; no canonical definition was edited."
+          }
+        ],
+        "optional_shared_declarations": [
+          {
+            "symbol": "func_00196e14",
+            "prototype": "void func_00196e14(struct DisplayObject *object, int index, int flags, const void *resource, const char *name);",
+            "suggested_header": "include/game/screen.h",
+            "required_for_final_c_source": false
+          }
+        ],
+        "context_ownership": [
+          {
+            "source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+            "functions": [
+              "func_0017df84",
+              "func_0017e764"
+            ],
+            "requirement": "Retain the complete all-MATCH two-function TU; func_0017e764 is inherited context, not a fresh independent claim. Enforce unique ownership if selected."
+          },
+          {
+            "source": "scratch/authors/nm32/final/func_00181520/40-final-inherited-complete-tu/func_00181520.c",
+            "existing_canonical_source": "src/wave9/func_0018269c.c",
+            "functions": [
+              "func_0018269c",
+              "func_001851f0",
+              "func_001971a0"
+            ],
+            "requirement": "Target remains mismatch: do not adopt as all-MATCH or duplicate canonical query owners; any future adoption requires explicit rehoming and complete-TU reconciliation."
+          }
+        ],
+        "qualifications": [
+          "[INFERENCE] WorkRequestView, helper spellings and historical translation-unit grouping are descriptive, not recovered historical identities.",
+          "Final activation uses existing unsigned canonical fields; the signed-short local snapshot is the original read-provenance witness, not a proposal to change shared header signedness.",
+          "Resource query noinline annotations and request signal-storage view are inherited and explicitly retained; no new annotations, intrinsics, flags, model selectors, names or aliases were added."
+        ]
+      }
+    },
+    {
+      "batch": "nm32",
+      "row": {
+        "address": "0x0018191c",
+        "name": "func_0018191c",
+        "size": 120,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm32/final/func_0018191c/40-final-canonical-owner-signed-default/func_0018191c.cpp",
+        "profile": "game",
+        "receipt": "scratch/authors/nm32/match/func_0018191c/40-final-canonical-owner-signed-default/func_0018191c.result.json",
+        "source_sha256": "4ba97eb626c53c36b5258eebfb2c2cd3ac37df293a8615f82ccdab660e868f15",
+        "object_sha256": "119d29cf8eef6e0769ee0c1d764c3c0483c7670c3e525543a98d6472203beb6f",
+        "receipt_sha256": "f030f2e47a6a1e2b6192b55d77e5f85769aa67df3ab9f7fc7ca4744be30250a0",
+        "final_exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "names": null,
+        "attempts": 40,
+        "comparison_attempts": 40,
+        "refused_attempts": 0,
+        "minutes": 0.125377,
+        "minutes_scope": "Summed sequential isolated matcher subprocess wall time only; research/writing time not separately attributed.",
+        "residual": {
+          "candidate_size": 120,
+          "target_size": 120,
+          "extent_delta": 0,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "differing_word_offsets": [],
+          "first_diff": null
+        },
+        "notes": "step5c: MATCH 120/120 under frozen game/default-v2, final whole-TU exit 0. The inherited eight-byte residual was only the +0x60/+0x64 normalization/store exchange. Four checked original callers pass the same symbolic object to this target and canonical func_0016dc94(W10DrawingInput *,int); its three accessed field offsets/widths also agree. Reuse canonical W10DrawingInput.notification_active, field89a and unsigned-short effect_mask, rather than the incompatible private signed-flags owner, and copy the existing W19EffectPresetBlock/EffectPresetMasks default layout. A genuinely consumed signed-short default snapshot preserves the original signed 16-bit read; converting it for both the canonical unsigned field and unsigned consumer restores normalization-before-store. The canonical default and destination remain unsigned: no header signedness edit, alias or forced schedule is used. The minimal source MATCHes game and middleware; final selects game and removes redundant local prototypes in favor of existing headers. [INFERENCE] Exact historical snapshot spelling is unrecovered.",
+        "needs_names": [],
+        "needs_headers": [
+          "Share the exact existing EffectPresetMasks and W19EffectPresetBlock definitions plus extern const struct W19EffectPresetBlock data_002181c0 through include/game/image_activation.h (or the canonical drawing-input preset header), migrating src/checkpoint10/func_0016dc94.c to the same header. Do not change fallback unsigned-short signedness.",
+          "Share void func_001494dc(struct W10DrawingInput *state) and void func_0018191c(struct W10DrawingInput *state) through the canonical drawing-input/image activation header. No W23JImageActivation or W23JImageDefaults type should be promoted from the prior scratch source.",
+          "Add the existing exact C wrapper contract int func_0014a988(unsigned width, unsigned height, struct HwrImage *image) to include/game/hwr_image.h and reuse it in src/wave4/func_0014a988.c; remove the marked local C-linkage block before prepare. func_001811b8 and func_0014a9d8 already use their existing shared declarations."
+        ],
+        "previous": {
+          "from_batch": "nf026",
+          "result": "scratch/authors/nf026/RESULT.json",
+          "source": "scratch/authors/nf026/src/func_0018191c.cpp",
+          "profile": "game",
+          "receipt": "scratch/authors/nf026/match/56-activation-retained-final/func_0018191c.result.json",
+          "source_sha256": "b643e8edb04f960cb3298f94bba63e8ffbe56c95cf542f4f066780031e8ba9f3",
+          "names": null
+        },
+        "evidence": {
+          "attempts": "scratch/authors/nm32/ATTEMPTS.json",
+          "diagnosis": "scratch/authors/nm32/DIAGNOSIS.json",
+          "contracts": "scratch/authors/nm32/CONTRACTS.json"
+        }
+      },
+      "author_result": "scratch/authors/nm32/RESULT.json",
+      "author_result_sha256": "6045fb41c4ac6448ebbec3438d1e6e7c1469fc4930799324907d1e6547f67d13",
+      "integration_needs": {
+        "headers": [
+          {
+            "target": "func_0017df84",
+            "source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+            "needs": [
+              "Share the inherited complete TaskPool layout through include/game/audio_tasks.h and reconcile the partial TaskPool definitions in src/wave16/func_00153fec.c and src/wave16/func_0015477c.c. Final private helper WorkRequestView remains implementation-local.",
+              "Move int func_0014a7e0(struct StreamQueue *queue, void *value) into include/game/audio_tasks.h, then remove the final source INTEGRATOR/C-linkage block. This is the original notification target, not a replacement alias.",
+              "Retained signal-storage qualification: canonical AudioWorkRequest currently has unsigned signal_state, signal_count at +0x0c/+0x10, used as the existing SignalState {unsigned state; StreamCriticalSection critical;} by the supplied source. Prefer reconciling this as a typed embedded SignalState member and updating affected callers during integration; do not add a second incompatible owner view."
+            ]
+          },
+          {
+            "target": "func_0018191c",
+            "source": "scratch/authors/nm32/final/func_0018191c/40-final-canonical-owner-signed-default/func_0018191c.cpp",
+            "needs": [
+              "Share the exact existing EffectPresetMasks and W19EffectPresetBlock definitions plus extern const struct W19EffectPresetBlock data_002181c0 through include/game/image_activation.h (or the canonical drawing-input preset header), migrating src/checkpoint10/func_0016dc94.c to the same header. Do not change fallback unsigned-short signedness.",
+              "Share void func_001494dc(struct W10DrawingInput *state) and void func_0018191c(struct W10DrawingInput *state) through the canonical drawing-input/image activation header. No W23JImageActivation or W23JImageDefaults type should be promoted from the prior scratch source.",
+              "Add the existing exact C wrapper contract int func_0014a988(unsigned width, unsigned height, struct HwrImage *image) to include/game/hwr_image.h and reuse it in src/wave4/func_0014a988.c; remove the marked local C-linkage block before prepare. func_001811b8 and func_0014a9d8 already use their existing shared declarations."
+            ]
+          }
+        ],
+        "names": [],
+        "contract_conflicts": [
+          {
+            "symbol": "func_0018191c",
+            "status": "resolved_in_delivered_source",
+            "old_private_view": "scratch/authors/nf026/src/func_0018191c.cpp:W23JImageActivation.flags is signed short; W23JImageDefaults describes data_002181c0 independently.",
+            "canonical_contract": "include/game/screen.h:W10DrawingInput.effect_mask is unsigned short; src/checkpoint10/func_0016dc94.c supplies the existing W19EffectPresetBlock/EffectPresetMasks global view.",
+            "resolution": "Use canonical W10DrawingInput and exact canonical preset definitions with a local signed-short snapshot. Four original shared-receiver caller checks plus exact field offsets support this identity; no type alias or tracked header change was introduced. Migrate only shared declarations during integration."
+          },
+          {
+            "symbol": "TaskPool",
+            "status": "inherited_integration_need",
+            "detail": "Complete C++ TaskPool layout must be shared/reconciled with current C partial prefix views before G3; no canonical definition was edited."
+          }
+        ],
+        "optional_shared_declarations": [
+          {
+            "symbol": "func_00196e14",
+            "prototype": "void func_00196e14(struct DisplayObject *object, int index, int flags, const void *resource, const char *name);",
+            "suggested_header": "include/game/screen.h",
+            "required_for_final_c_source": false
+          }
+        ],
+        "context_ownership": [
+          {
+            "source": "scratch/authors/nm32/final/func_0017df84/44-final-request-view-category-snapshot/func_0017df84.cpp",
+            "functions": [
+              "func_0017df84",
+              "func_0017e764"
+            ],
+            "requirement": "Retain the complete all-MATCH two-function TU; func_0017e764 is inherited context, not a fresh independent claim. Enforce unique ownership if selected."
+          },
+          {
+            "source": "scratch/authors/nm32/final/func_00181520/40-final-inherited-complete-tu/func_00181520.c",
+            "existing_canonical_source": "src/wave9/func_0018269c.c",
+            "functions": [
+              "func_0018269c",
+              "func_001851f0",
+              "func_001971a0"
+            ],
+            "requirement": "Target remains mismatch: do not adopt as all-MATCH or duplicate canonical query owners; any future adoption requires explicit rehoming and complete-TU reconciliation."
+          }
+        ],
+        "qualifications": [
+          "[INFERENCE] WorkRequestView, helper spellings and historical translation-unit grouping are descriptive, not recovered historical identities.",
+          "Final activation uses existing unsigned canonical fields; the signed-short local snapshot is the original read-provenance witness, not a proposal to change shared header signedness.",
+          "Resource query noinline annotations and request signal-storage view are inherited and explicitly retained; no new annotations, intrinsics, flags, model selectors, names or aliases were added."
+        ]
+      }
+    },
+    {
+      "batch": "nm35",
+      "row": {
+        "address": "0x001acb38",
+        "name": "func_001acb38",
+        "size": 88,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm35/src/menu_modes.cpp",
+        "source_sha256": "336d9d0f579230072ad9d6a0ef63f621e1d597b464bb09029dad86f5b93c8f7c",
+        "profile": "game",
+        "receipt": "scratch/authors/nm35/match/func_001acb38/final-delivered/menu_modes.result.json",
+        "receipt_sha256": "5b2e8aadca6b1ae12d073c633c047135afb5c4b0048cf355d9e6c552a69a8e9c",
+        "exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 30,
+        "minutes": 0.101634,
+        "residual": {
+          "target_size": 88,
+          "candidate_size": 88,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "word_offsets": [],
+          "first_difference_offset": null,
+          "size_delta": 0
+        },
+        "notes": "step5c: MATCH, 88/88 bytes under frozen game/default v2. The inherited four-byte miss was only the initial constant/register-role swap. A default activation descriptor represents the fixed secondary activation directly; a previous-first store_mode input order preserves the old-to-new transition value lifetimes. Together they recover all initial publications and both primary-mode branches without changing the public receiver or any companion body. The ORIGINAL BUG discarded-previous-mode comment remains. Existing func_001abf24 still MATCHes 200 bytes; func_001ab590 remains a mismatch, so whole-TU exit is 1. [INFERENCE] Historical command/helper spelling is unrecovered; no original helper identity is asserted.",
+        "previous": {
+          "from_batch": "np182",
+          "from_result": "scratch/authors/np182/RESULT.json",
+          "source": "scratch/authors/np182/src/menu_modes.cpp",
+          "receipt": "scratch/authors/np182/match/func_001acb38/final-delivered/game/menu_modes.result.json",
+          "differing_bytes": 4
+        },
+        "names": null,
+        "needs_names": [],
+        "integration_qualification": true
+      },
+      "author_result": "scratch/authors/nm35/RESULT.json",
+      "author_result_sha256": "718556accbc4a931842beb43409934d1ea6c85b4b6bae4a283b29cb2d1481539",
+      "integration_needs": {
+        "headers": [
+          {
+            "function": "func_001acb38",
+            "suggested_header": "include/game/menu_reset.h",
+            "source": "scratch/authors/nm35/src/menu_modes.cpp",
+            "need": "Reconcile and centralize the inherited MenuResetStateTu605 definition and marked import block before prepare. The target, existing matching context and mismatching context are retained in one TU. MenuActivation and typed mode-root helpers remain private implementation details.",
+            "required_layout": {
+              "selection": 144,
+              "values": 148,
+              "previous": 156,
+              "mode": 172,
+              "size": 184
+            },
+            "exact_declaration_block": "extern \"C\" {\nvoid func_001ab590(MenuResetStateTu605 *state, int next_state);\nvoid func_001acb38(MenuResetStateTu605 *state);\nvoid func_001abf24(MenuResetStateTu605 *state);\nvoid func_001db964(int group, int index, unsigned *value, float *x, float *y);\nextern const MemberCallback data_00218660;\nvoid func_001737c0(MenuResetStateTu605 *state, int enabled);\n}"
+          },
+          {
+            "function": "func_0014242c",
+            "suggested_header": "include/game/shared_memory.h",
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "need": "Move the evidenced wrapper and raw five-input service declarations into a shared header using the already canonical MappedMemoryBlock and CTR types. MemoryCreateOperation is a private receiver-bound operation, not a second MappedMemoryBlock definition.",
+            "declarations": [
+              "CtrResult func_00145610(CtrHandle *handle, unsigned address, unsigned size, CtrMemoryPermission permissions, CtrMemoryPermission remote_permissions);",
+              "void func_0014242c(MappedMemoryBlock *block, unsigned address, unsigned size, CtrMemoryPermission permissions, CtrMemoryPermission remote_permissions);"
+            ],
+            "other_marked_imports": "extern \"C\" {\n    extern CtrResult func_00145610(CtrHandle *handle, unsigned int address,\n        unsigned int size, CtrMemoryPermission permissions,\n        CtrMemoryPermission remote_permissions);\n    extern R41221ResourceServiceState data_00242afc;\n    extern StreamCriticalSection data_00242b0c;\n    extern ServiceSessionSlots data_00242b10;\n    extern const char data_0021abd8[];\n    extern LifecycleCallback bss_0049eec4[8];\n    extern void *bss_0049eee4[8];\n    extern void (*bss_0049ef04[8])(void);\n    extern ResourceServiceEvent bss_0049ef24;\n    extern void func_00146590(ResourceServiceEvent *event);\n    extern void func_00136714(StreamCriticalSection *lock);\n    extern long long data_00242a40, data_00242a48;\n}"
+          },
+          {
+            "function": "func_0014cc1c",
+            "suggested_header": "include/game/audio_dsp.h",
+            "source": "scratch/authors/nm35/src/func_0014cc1c.c",
+            "need": "Current canonical AudioDspParameterBlock already has flags at +0, mode38 at +0x38 and option39 at +0x39. The inherited private AuxiliaryFilterMode/AuxiliaryModeSettings view instead models a logical settings subobject at +4, with its mode/option at +0x34/+0x35. Reconcile that logical subobject in the canonical type before prepare; do not add a conflicting second complete DSP class. The delivered source explicitly includes the canonical header and carries an INTEGRATOR marker.",
+            "evidence": "scratch/authors/nm35/DSP-SUBOBJECT-EVIDENCE.json",
+            "canonical_direct_attempt": {
+              "source": "scratch/authors/nm35/variants/func_0014cc1c/11-current-canonical-dsp-fields/func_0014cc1c.c",
+              "receipt": "scratch/authors/nm35/match/func_0014cc1c/11-current-canonical-dsp-fields/func_0014cc1c.result.json",
+              "candidate_size": 124,
+              "target_size": 128,
+              "differing_bytes": 57,
+              "diagnosis": "The direct canonical-field setter removes the +4 settings-address calculation at original +0x48; changing to that form is not a byte-identical integration."
+            },
+            "public_declaration": "int func_0014cc1c(struct ServiceCoordinator *coordinator, int channel, int mode, unsigned char option);"
+          }
+        ],
+        "names": [
+          {
+            "function": "func_0014007c",
+            "overlay": "scratch/authors/nm35/names.json",
+            "needs_names": [
+              "_ZN2nw3gfx3res11ResMaterial7CleanupEv"
+            ],
+            "qualification": "Only the self-definition remains absent from current config/names.json. ResTextureMapper::Cleanup is already canonically bound to the same address; the inherited overlay also carries an unrelated ResShape self-binding not requested here. No new name or alias was introduced; the unmatched ResMaterial self-name remains a provisional inherited proposal, not an adoption request."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "scope": "Inherited nonmatching func_001424e0 context; the matching target does not use this state.",
+            "need": "Reconcile local R41221ResourceServiceState at data_00242afc with canonical ResourceServiceState in game/service_runtime.h. The local view writes initialized as CtrHandle* at +8 versus canonical const CtrHandle* session, treats +4/+6 as serial/completed, uses the four-byte StreamCriticalSection at +0x10 and cached handle at +0x14, and clears unsigned counters at +0x1c/+0x20 where canonical fields are const void* source and unsigned size. Do not silently collect the conflicting complete declarations."
+          },
+          {
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "scope": "Inherited callback-reset portion of nonmatching func_001424e0.",
+            "need": "The local extern void *bss_0049eee4[8] conflicts with game/service_state.h's LifecycleCallbackTables bss_0049eee4, which contains LifecycleCallback resumed[8] followed by exiting[8]. Reuse that canonical callable table rather than adopting the void-pointer view. data_00242b10 ServiceSessionSlots also spans the canonical data_00242b14 handle and requires deliberate storage-owner reconciliation."
+          }
+        ],
+        "catalogue_changes": [],
+        "tracked_changes": [],
+        "acceptance": "Three new isolated default-v2 target MATCH witnesses, not accepted checkpoint credit. All whole-TU mismatches and source-policy integration markers remain explicit."
+      }
+    },
+    {
+      "batch": "nm35",
+      "row": {
+        "address": "0x0014cc1c",
+        "name": "func_0014cc1c",
+        "size": 128,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm35/src/func_0014cc1c.c",
+        "source_sha256": "3e5e22fded605e572de35ed7175854c7bc214b63472b83d34269f9b314617313",
+        "profile": "middleware",
+        "receipt": "scratch/authors/nm35/match/func_0014cc1c/final-delivered-r2/func_0014cc1c.result.json",
+        "receipt_sha256": "34a2d43a9f95c223384c6260ef0da765cf0066b907d1570ce8ac29d9530360ae",
+        "exit_code": 0,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 13,
+        "minutes": 0.039627,
+        "residual": {
+          "target_size": 128,
+          "candidate_size": 128,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "word_offsets": [],
+          "first_difference_offset": null,
+          "size_delta": 0
+        },
+        "notes": "step5c: MATCH, 128/128 bytes under frozen middleware/default v2. Moving the existing genuinely consumed selected_channel snapshot to after lock acquisition but before the availability query recovers both saved channel/mode roles and their initial save order; no parameter order/width, mode-zero semantics, serial read timing or output changes. Current canonical audio_dsp.h is now included explicitly. Its direct flags/mode38/option39 rewrite was measured separately at 124/128 bytes with 57 differing positions because it removes the original +4 settings-address calculation. The retained private +4 settings view MATCHes but needs deliberate canonical subobject reconciliation before prepare; this is marked INTEGRATOR in the delivered source, not silently called an opaque canonical tail.",
+        "previous": {
+          "from_batch": "np048",
+          "from_result": "scratch/authors/np048/RESULT.json",
+          "source": "scratch/authors/np048/src/func_0014cc1c.c",
+          "receipt": "scratch/authors/np048/match/26-final-selected/func_0014cc1c.result.json",
+          "differing_bytes": 5
+        },
+        "names": null,
+        "needs_names": [],
+        "integration_qualification": true
+      },
+      "author_result": "scratch/authors/nm35/RESULT.json",
+      "author_result_sha256": "718556accbc4a931842beb43409934d1ea6c85b4b6bae4a283b29cb2d1481539",
+      "integration_needs": {
+        "headers": [
+          {
+            "function": "func_001acb38",
+            "suggested_header": "include/game/menu_reset.h",
+            "source": "scratch/authors/nm35/src/menu_modes.cpp",
+            "need": "Reconcile and centralize the inherited MenuResetStateTu605 definition and marked import block before prepare. The target, existing matching context and mismatching context are retained in one TU. MenuActivation and typed mode-root helpers remain private implementation details.",
+            "required_layout": {
+              "selection": 144,
+              "values": 148,
+              "previous": 156,
+              "mode": 172,
+              "size": 184
+            },
+            "exact_declaration_block": "extern \"C\" {\nvoid func_001ab590(MenuResetStateTu605 *state, int next_state);\nvoid func_001acb38(MenuResetStateTu605 *state);\nvoid func_001abf24(MenuResetStateTu605 *state);\nvoid func_001db964(int group, int index, unsigned *value, float *x, float *y);\nextern const MemberCallback data_00218660;\nvoid func_001737c0(MenuResetStateTu605 *state, int enabled);\n}"
+          },
+          {
+            "function": "func_0014242c",
+            "suggested_header": "include/game/shared_memory.h",
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "need": "Move the evidenced wrapper and raw five-input service declarations into a shared header using the already canonical MappedMemoryBlock and CTR types. MemoryCreateOperation is a private receiver-bound operation, not a second MappedMemoryBlock definition.",
+            "declarations": [
+              "CtrResult func_00145610(CtrHandle *handle, unsigned address, unsigned size, CtrMemoryPermission permissions, CtrMemoryPermission remote_permissions);",
+              "void func_0014242c(MappedMemoryBlock *block, unsigned address, unsigned size, CtrMemoryPermission permissions, CtrMemoryPermission remote_permissions);"
+            ],
+            "other_marked_imports": "extern \"C\" {\n    extern CtrResult func_00145610(CtrHandle *handle, unsigned int address,\n        unsigned int size, CtrMemoryPermission permissions,\n        CtrMemoryPermission remote_permissions);\n    extern R41221ResourceServiceState data_00242afc;\n    extern StreamCriticalSection data_00242b0c;\n    extern ServiceSessionSlots data_00242b10;\n    extern const char data_0021abd8[];\n    extern LifecycleCallback bss_0049eec4[8];\n    extern void *bss_0049eee4[8];\n    extern void (*bss_0049ef04[8])(void);\n    extern ResourceServiceEvent bss_0049ef24;\n    extern void func_00146590(ResourceServiceEvent *event);\n    extern void func_00136714(StreamCriticalSection *lock);\n    extern long long data_00242a40, data_00242a48;\n}"
+          },
+          {
+            "function": "func_0014cc1c",
+            "suggested_header": "include/game/audio_dsp.h",
+            "source": "scratch/authors/nm35/src/func_0014cc1c.c",
+            "need": "Current canonical AudioDspParameterBlock already has flags at +0, mode38 at +0x38 and option39 at +0x39. The inherited private AuxiliaryFilterMode/AuxiliaryModeSettings view instead models a logical settings subobject at +4, with its mode/option at +0x34/+0x35. Reconcile that logical subobject in the canonical type before prepare; do not add a conflicting second complete DSP class. The delivered source explicitly includes the canonical header and carries an INTEGRATOR marker.",
+            "evidence": "scratch/authors/nm35/DSP-SUBOBJECT-EVIDENCE.json",
+            "canonical_direct_attempt": {
+              "source": "scratch/authors/nm35/variants/func_0014cc1c/11-current-canonical-dsp-fields/func_0014cc1c.c",
+              "receipt": "scratch/authors/nm35/match/func_0014cc1c/11-current-canonical-dsp-fields/func_0014cc1c.result.json",
+              "candidate_size": 124,
+              "target_size": 128,
+              "differing_bytes": 57,
+              "diagnosis": "The direct canonical-field setter removes the +4 settings-address calculation at original +0x48; changing to that form is not a byte-identical integration."
+            },
+            "public_declaration": "int func_0014cc1c(struct ServiceCoordinator *coordinator, int channel, int mode, unsigned char option);"
+          }
+        ],
+        "names": [
+          {
+            "function": "func_0014007c",
+            "overlay": "scratch/authors/nm35/names.json",
+            "needs_names": [
+              "_ZN2nw3gfx3res11ResMaterial7CleanupEv"
+            ],
+            "qualification": "Only the self-definition remains absent from current config/names.json. ResTextureMapper::Cleanup is already canonically bound to the same address; the inherited overlay also carries an unrelated ResShape self-binding not requested here. No new name or alias was introduced; the unmatched ResMaterial self-name remains a provisional inherited proposal, not an adoption request."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "scope": "Inherited nonmatching func_001424e0 context; the matching target does not use this state.",
+            "need": "Reconcile local R41221ResourceServiceState at data_00242afc with canonical ResourceServiceState in game/service_runtime.h. The local view writes initialized as CtrHandle* at +8 versus canonical const CtrHandle* session, treats +4/+6 as serial/completed, uses the four-byte StreamCriticalSection at +0x10 and cached handle at +0x14, and clears unsigned counters at +0x1c/+0x20 where canonical fields are const void* source and unsigned size. Do not silently collect the conflicting complete declarations."
+          },
+          {
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "scope": "Inherited callback-reset portion of nonmatching func_001424e0.",
+            "need": "The local extern void *bss_0049eee4[8] conflicts with game/service_state.h's LifecycleCallbackTables bss_0049eee4, which contains LifecycleCallback resumed[8] followed by exiting[8]. Reuse that canonical callable table rather than adopting the void-pointer view. data_00242b10 ServiceSessionSlots also spans the canonical data_00242b14 handle and requires deliberate storage-owner reconciliation."
+          }
+        ],
+        "catalogue_changes": [],
+        "tracked_changes": [],
+        "acceptance": "Three new isolated default-v2 target MATCH witnesses, not accepted checkpoint credit. All whole-TU mismatches and source-policy integration markers remain explicit."
+      }
+    },
+    {
+      "batch": "nm35",
+      "row": {
+        "address": "0x0014242c",
+        "name": "func_0014242c",
+        "size": 148,
+        "isa": "arm",
+        "status": "match",
+        "source": "scratch/authors/nm35/src/platform.cpp",
+        "source_sha256": "5c0e4bd5c448251edd768aadad28bbff1181476b8cb3c2d9d6de3a631edeffa6",
+        "profile": "sdk",
+        "receipt": "scratch/authors/nm35/match/func_0014242c/final-delivered/platform.result.json",
+        "receipt_sha256": "66557e56ba664c4ec69d79aebac871087cec69215c7c7db529db89a56cd7b353",
+        "exit_code": 1,
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none",
+        "attempts": 48,
+        "minutes": 0.158034,
+        "residual": {
+          "target_size": 148,
+          "candidate_size": 148,
+          "differing_bytes": 0,
+          "differing_words": 0,
+          "word_offsets": [],
+          "first_difference_offset": null,
+          "size_delta": 0
+        },
+        "notes": "step5c: MATCH, 148/148 bytes under frozen sdk/default v2. A receiver-bound MemoryCreateOperation retaining the canonical MappedMemoryBlock pointer fixes frame/validation staging and the separate handle/remote-permission stack publications, reducing 38 differing bytes to only two. A real CtrHandle reference to block->handle in successful publication then selects the original handle reload/store roles at +0x5c/+0x60 and closes the remaining difference. Both values and all five raw service inputs retain their original contracts. The two inherited platform companions remain mismatches and their service-state/callback declaration conflicts are integration needs; whole-TU exit 1 is not a target failure. [INFERENCE] The private operation name is descriptive, not recovered historical class identity.",
+        "previous": {
+          "from_batch": "np182",
+          "from_result": "scratch/authors/np182/RESULT.json",
+          "source": "scratch/authors/np182/src/platform.cpp",
+          "receipt": "scratch/authors/np182/match/func_0014242c/final-delivered/sdk/platform.result.json",
+          "differing_bytes": 38
+        },
+        "names": null,
+        "needs_names": [],
+        "integration_qualification": true
+      },
+      "author_result": "scratch/authors/nm35/RESULT.json",
+      "author_result_sha256": "718556accbc4a931842beb43409934d1ea6c85b4b6bae4a283b29cb2d1481539",
+      "integration_needs": {
+        "headers": [
+          {
+            "function": "func_001acb38",
+            "suggested_header": "include/game/menu_reset.h",
+            "source": "scratch/authors/nm35/src/menu_modes.cpp",
+            "need": "Reconcile and centralize the inherited MenuResetStateTu605 definition and marked import block before prepare. The target, existing matching context and mismatching context are retained in one TU. MenuActivation and typed mode-root helpers remain private implementation details.",
+            "required_layout": {
+              "selection": 144,
+              "values": 148,
+              "previous": 156,
+              "mode": 172,
+              "size": 184
+            },
+            "exact_declaration_block": "extern \"C\" {\nvoid func_001ab590(MenuResetStateTu605 *state, int next_state);\nvoid func_001acb38(MenuResetStateTu605 *state);\nvoid func_001abf24(MenuResetStateTu605 *state);\nvoid func_001db964(int group, int index, unsigned *value, float *x, float *y);\nextern const MemberCallback data_00218660;\nvoid func_001737c0(MenuResetStateTu605 *state, int enabled);\n}"
+          },
+          {
+            "function": "func_0014242c",
+            "suggested_header": "include/game/shared_memory.h",
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "need": "Move the evidenced wrapper and raw five-input service declarations into a shared header using the already canonical MappedMemoryBlock and CTR types. MemoryCreateOperation is a private receiver-bound operation, not a second MappedMemoryBlock definition.",
+            "declarations": [
+              "CtrResult func_00145610(CtrHandle *handle, unsigned address, unsigned size, CtrMemoryPermission permissions, CtrMemoryPermission remote_permissions);",
+              "void func_0014242c(MappedMemoryBlock *block, unsigned address, unsigned size, CtrMemoryPermission permissions, CtrMemoryPermission remote_permissions);"
+            ],
+            "other_marked_imports": "extern \"C\" {\n    extern CtrResult func_00145610(CtrHandle *handle, unsigned int address,\n        unsigned int size, CtrMemoryPermission permissions,\n        CtrMemoryPermission remote_permissions);\n    extern R41221ResourceServiceState data_00242afc;\n    extern StreamCriticalSection data_00242b0c;\n    extern ServiceSessionSlots data_00242b10;\n    extern const char data_0021abd8[];\n    extern LifecycleCallback bss_0049eec4[8];\n    extern void *bss_0049eee4[8];\n    extern void (*bss_0049ef04[8])(void);\n    extern ResourceServiceEvent bss_0049ef24;\n    extern void func_00146590(ResourceServiceEvent *event);\n    extern void func_00136714(StreamCriticalSection *lock);\n    extern long long data_00242a40, data_00242a48;\n}"
+          },
+          {
+            "function": "func_0014cc1c",
+            "suggested_header": "include/game/audio_dsp.h",
+            "source": "scratch/authors/nm35/src/func_0014cc1c.c",
+            "need": "Current canonical AudioDspParameterBlock already has flags at +0, mode38 at +0x38 and option39 at +0x39. The inherited private AuxiliaryFilterMode/AuxiliaryModeSettings view instead models a logical settings subobject at +4, with its mode/option at +0x34/+0x35. Reconcile that logical subobject in the canonical type before prepare; do not add a conflicting second complete DSP class. The delivered source explicitly includes the canonical header and carries an INTEGRATOR marker.",
+            "evidence": "scratch/authors/nm35/DSP-SUBOBJECT-EVIDENCE.json",
+            "canonical_direct_attempt": {
+              "source": "scratch/authors/nm35/variants/func_0014cc1c/11-current-canonical-dsp-fields/func_0014cc1c.c",
+              "receipt": "scratch/authors/nm35/match/func_0014cc1c/11-current-canonical-dsp-fields/func_0014cc1c.result.json",
+              "candidate_size": 124,
+              "target_size": 128,
+              "differing_bytes": 57,
+              "diagnosis": "The direct canonical-field setter removes the +4 settings-address calculation at original +0x48; changing to that form is not a byte-identical integration."
+            },
+            "public_declaration": "int func_0014cc1c(struct ServiceCoordinator *coordinator, int channel, int mode, unsigned char option);"
+          }
+        ],
+        "names": [
+          {
+            "function": "func_0014007c",
+            "overlay": "scratch/authors/nm35/names.json",
+            "needs_names": [
+              "_ZN2nw3gfx3res11ResMaterial7CleanupEv"
+            ],
+            "qualification": "Only the self-definition remains absent from current config/names.json. ResTextureMapper::Cleanup is already canonically bound to the same address; the inherited overlay also carries an unrelated ResShape self-binding not requested here. No new name or alias was introduced; the unmatched ResMaterial self-name remains a provisional inherited proposal, not an adoption request."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "scope": "Inherited nonmatching func_001424e0 context; the matching target does not use this state.",
+            "need": "Reconcile local R41221ResourceServiceState at data_00242afc with canonical ResourceServiceState in game/service_runtime.h. The local view writes initialized as CtrHandle* at +8 versus canonical const CtrHandle* session, treats +4/+6 as serial/completed, uses the four-byte StreamCriticalSection at +0x10 and cached handle at +0x14, and clears unsigned counters at +0x1c/+0x20 where canonical fields are const void* source and unsigned size. Do not silently collect the conflicting complete declarations."
+          },
+          {
+            "source": "scratch/authors/nm35/src/platform.cpp",
+            "scope": "Inherited callback-reset portion of nonmatching func_001424e0.",
+            "need": "The local extern void *bss_0049eee4[8] conflicts with game/service_state.h's LifecycleCallbackTables bss_0049eee4, which contains LifecycleCallback resumed[8] followed by exiting[8]. Reuse that canonical callable table rather than adopting the void-pointer view. data_00242b10 ServiceSessionSlots also spans the canonical data_00242b14 handle and requires deliberate storage-owner reconciliation."
+          }
+        ],
+        "catalogue_changes": [],
+        "tracked_changes": [],
+        "acceptance": "Three new isolated default-v2 target MATCH witnesses, not accepted checkpoint credit. All whole-TU mismatches and source-policy integration markers remain explicit."
+      }
+    }
+  ],
+  "policy": "Exact source/result/receipt input bindings; author MATCH and whole-TU status kept distinct. Unrequested nonmatching companions are not credited."
+}

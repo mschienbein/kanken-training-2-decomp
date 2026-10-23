@@ -43,6 +43,7 @@ extern CtrResult func_00115b0c(void);
 extern int func_0018f068(unsigned handle, unsigned char *value);
 extern void func_00192afc(int result, const void *pc);
 extern void func_0019ec88(void);
+extern CtrResult func_00138274(void *buffer, unsigned size);
 extern int func_001382c0(unsigned value);
 extern CtrResult func_0012ff20(unsigned applet_id, unsigned char mode);
 extern struct ServiceManagerState data_0024313c;

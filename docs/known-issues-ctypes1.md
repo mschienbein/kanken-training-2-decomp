@@ -2,6 +2,12 @@
 
 ## r4 — reviewed receiver, page and input contracts
 
+The source base is **c011-r9 `a72b9d45`**, including folded c014, merged without
+rewriting reviewed r3 `47897d25`. All **2,771 predecessor identities** survive;
+the composed ledger has **2,772 functions**, including the existing qualified
+64-byte native Font reader and one explicit native interpolation-constructor
+move. Main must finalize that exact c011 predecessor before ctypes1 acceptance.
+
 The independent ContractBacklogResearch proposals **1, 2 and 4** are selected:
 
 - The three slot wrappers/providers share `WidgetController*`, retaining the
@@ -14,11 +20,29 @@ The independent ContractBacklogResearch proposals **1, 2 and 4** are selected:
   0x38-byte InputSnapshot region. Sampler calls project that member; region
   operations retain the containing rectangle and state.
 
-All **12 revised accepted functions / 1,596 bytes MATCH** under frozen game
+All **13 revised predecessor functions / 2,080 bytes MATCH** under frozen game
 and explicit v6/L1, including the changed R1 helper's actual caller context.
-The source transaction changes 13 files including that helper, plus seven
-headers. Final integrated closure bindings are recorded separately under
-`scratch/integrator/ctypes1/r4/`.
+The thirteenth function is c011-r9's 484-byte UI consumer 001e9af8: its
+InputSnapshot API, calls and logic stay unchanged, while seven sample accesses
+project the actual pointer member. The r4 increment changes 14 source files
+including the helper, plus seven headers; the cumulative ctypes delta against
+c011-r9 is **65 revised/added source files and 23 headers**, comprising
+63 revised predecessor identities, the one NEW reader and one helper-only unit.
+
+The final affected closure is **1,859 primary units / 1,908 functions MATCH**,
+with 22 helper-only definitions compiled in their natural contexts. One
+InputSnapshot member-access compile refusal was retained and corrected before
+the remaining proofs. All actual r4 invocations, including 12 early direct
+proofs, account for **1,871 exit 0 and one exit 2**. No unchanged failed input
+was rerun. The safe complete rewrite projection covers all 2,672 live primaries.
+Authoritative source/hash/proof bindings are under
+`scratch/integrator/ctypes1/r4/HANDOFF.json`; Main alone runs the remaining
+whole-ledger, fresh-prepare and independent-review gates.
+
+The old c009-r5 prepared ledger has one inherited exception: **00117854** is
+already absent from c011-r9 and remains the protected display-family hold
+recorded by r2. Thus 2,269 of its 2,270 prepared identities remain; r4 introduces
+no new withdrawal, and it preserves every current c011-r9 predecessor identity.
 
 **Item 3 is not applied, by Main's explicit ruling.** The proposed second-mode
 receiver still reads one +0x4c pointer as both AnimationOwner and W6ListController

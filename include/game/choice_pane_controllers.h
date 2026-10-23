@@ -17,7 +17,10 @@ struct ChoiceEntry {
     InputRectangle *regions[3];
 };
 
-struct ChoiceController {
+/* [INFERENCE] Data-state name, not the polymorphic ChoiceController used by
+ * ChoiceBinding. The original 001b3434 context uses word zero as a column
+ * divisor; 001b376c consumes its entry array beginning at +0x18. */
+struct ChoiceGridState {
     int columns;
     unsigned char reserved04[0x0c];
     unsigned pending[2];
@@ -25,5 +28,5 @@ struct ChoiceController {
     const NameTable *const *tables;
 };
 
-extern "C" void func_001b376c(ChoiceController *controller, int index);
+extern "C" void func_001b376c(ChoiceGridState *controller, int index);
 #endif

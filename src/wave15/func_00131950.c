@@ -1,7 +1,7 @@
 #include "game/archive.h"
 #include "game/sound_archive.h"
 
-extern int func_00139174(const struct SoundArchiveInfo *info, unsigned int sound_id);
+#include "game/archive_queries.h"
 
 int func_00131950(const struct SoundArchiveReader *reader, unsigned int sound_id)
 {

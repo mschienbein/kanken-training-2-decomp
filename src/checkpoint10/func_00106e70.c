@@ -1,6 +1,5 @@
 #include "game/service_state.h"
-extern int func_0010c0a4(void);
-extern int func_0010bff4(void);
+#include "game/application_configuration.h"
 
 void func_00106e70(void)
 {

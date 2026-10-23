@@ -1,11 +1,6 @@
 #include <stdint.h>
+#include "game/linear_buffer.h"
 
-struct AlignedBuffer {
-    unsigned char *begin;
-    unsigned used;
-    unsigned size;
-    unsigned char enabled;
-};
 
 void func_00130348(struct AlignedBuffer *buffer, unsigned char *memory,
                    unsigned size, unsigned char enabled)

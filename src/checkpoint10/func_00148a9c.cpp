@@ -10,7 +10,7 @@ extern "C" int func_00148a9c(struct ServiceCoordinator *state, unsigned short va
     }
     struct AudioDspParameterBlock *request =
         state->storage.audio.voice_parameters[state->completion_slot];
-    request->value1e = value;
+    request->settings.value1e = value;
     request->flags |= 0x40000000u;
     func_00182204();
     return 1;

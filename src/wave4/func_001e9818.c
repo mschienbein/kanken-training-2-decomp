@@ -1,6 +1,4 @@
-/* [INFERENCE] Signature: Callee packet uses r0 as screen base, scaled r1 as a slot index and stores/tests incoming r2/r3. */
-
-extern void func_001e981c(void *screen, int index, int first, int second);
+#include "game/selection.h"
 
 void func_001e9818(void *screen, int index, int first, int second)
 {
