@@ -1,6 +1,12 @@
-# c011-r11 candidate — source-policy remediation and folded c013/c014 intake
+# c011-r11 — accepted (history seq 12); source-policy remediation and folded c013/c014 intake
 
-This is an **unaccepted single candidate** descending from c011-r8 `f9ea308e`.
+**Accepted 2026-10-23 as history seq 12:** 2,770 functions / 301,020 B (+88 functions /
+12,440 B over c010-r8). Prepared at dd1c5f2e (prepare.json sha256 9d72ce48…). Reviews codex-b
+and codex-a both PASS_WITH_QUALIFICATIONS with 0 findings (accept/c011-r11/reviews/). Every
+qualification in those records stands. The 117 holds (116 NEW-only holds + F04 `001ce05c`) and
+`0017e764`, which belongs to c012, are uncredited. The text below is the candidate record.
+
+This was a **single candidate** descending from c011-r8 `f9ea308e`.
 It retains c013's earlier fold and now merges **c014 `479eb7f4`** into c011.
 **No separate c013 or c014 checkpoint exists.** Historical intake manifests,
 documents, agreements and proof records are archived unchanged under the r8/r9

@@ -2,7 +2,42 @@
 
 Current entry on top.
 
-## 2026-10-23 (later) — c010-r8 accepted; 16-subagent cap (current)
+## 2026-10-23 (evening) — c011-r11 accepted; PAUSED by the user (current)
+
+**State:** `docs/STATUS.md` top entry. Accepted 2,770 functions / 301,020 B (seq 12, c011-r11);
+denominator v13-r2; gates v1.20. Same host and inputs as below. No new subagents are started;
+the catalogue-v14 review was the last one in flight at the pause. The
+pause was requested to conserve usage; the last concurrency cap was **4 subagents**, nested
+agents included. Ask the user what cap applies before resuming.
+
+Resume in this order. The live detail is in `scratch/integrator/PIPELINE-LIVE-20261023.md`; see
+its PAUSE section and checkpoint table.
+1. **Catalogue v14** (branch `catalogue-v14` at 5b8f88dd, worktree `scratch/worktrees/catalogue-v14`).
+   The independent review goes in `scratch/review/catalogue-v14/codex/`.
+   - If it PASSes, adopt between checkpoints: merge the branch, check `tools/denominator.py
+     verify` and the suite, then update STATUS.
+   - If it FAILs, revise with CatalogueV14Codex.
+2. **Combined checkpoint c012-r5** = main + ctypes1 r4 (`types-compose-r3` at 93921aa2, merges
+   cleanly) + c012 r4 (`c012-r4` at 4a9cf7b5, about 70 conflicts against main).
+   - Revive C012R3Codex to merge, resolve semantically, combine the candidate JSON, and re-prove
+     the closure.
+   - Then run Main's `scratch/integrator/policy_lint.py`, interfaces, argcheck and prepare,
+     followed by one review pair.
+   - The review contract may reuse the r11 delta pattern
+     (`scratch/integrator/contracts/c011-r11-review-contract.md`) only for an r+1 round.
+   - Main ruled that CM2-F01/F03 are known issues in accepted code, not c012 blockers.
+3. **c015 intake** from `scratch/integrator/HARVEST-LIST.json` (57 entries).
+4. **Escalation ladder:**
+   - `scratch/integrator/queue.json` (`rotation.py fill()`, about 58 batches);
+   - permuter sweep-11 chunks 4 onward (delete `scratch/permute/sweep-11/STOP-AFTER-ROW.json`
+     first).
+5. **Final accounting:**
+   - land `tools/residue.py` (branch `residue-table` at 3853f79d);
+   - regenerate the residue table after the last checkpoint;
+   - publish the STATUS residue section and the list of items blocked on the user (ARM Compiler
+     4.1 runtime libraries; the CM2 vtable ruling).
+
+## 2026-10-23 (later) — c010-r8 accepted; 16-subagent cap
 
 **State:** `docs/STATUS.md` top entry. Accepted 2,682 functions / 288,580 B (seq 11, c010-r8);
 denominator v13-r2; gates v1.20 (adopted 5ea97031, linker v18 available). Same host and inputs as below.
