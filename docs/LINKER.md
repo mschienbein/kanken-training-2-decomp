@@ -15,14 +15,14 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9/v10/v11/v12** implementations remain selectable, immutable
-and **unadopted**. Their sealed FAILs remain in `scratch/review/linker-v10/codex/`
-(F01–F05), `scratch/review/linker-v11/codex/` (V11-F01: lost semantic flags), and
-`scratch/review/linker-v12/codex/` (V12-F01: foreign companion INFO_LINK cycles).
-The new experimental opt-in **`armlink5-inline-branchnop-v13`** preserves the complete
-metadata/census/reporting root fixes and limits own-unwind exemption to exact structural
-edges. Its proposed gate revision is `scratch/integrator/linker-unref/GATES-DRAFT.md`,
-pending independent review. `docs/GATES.md` remains frozen v1.19.
+The recorded experimental **v9–v13** implementations remain selectable, immutable and
+**unadopted**. Their sealed FAILs remain under `scratch/review/linker-v10/` through
+`scratch/review/linker-v13/`. V13 fixed foreign companion edges, but V13-F01 exposed
+zero-sized supplied definitions being omitted from the personality namespace.
+The new experimental opt-in **`armlink5-inline-branchnop-v14`** resolves the complete
+supplied symbol inventory before every R1/U1 decision. Its proposed gate revision and
+systematic audit are under `scratch/integrator/linker-unref/`, pending independent review.
+`docs/GATES.md` remains frozen v1.19; defaults remain v2/none.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -637,8 +637,81 @@ The same `d8aef63a` real commands, with only model/output selection changed, giv
 Exact argv/cwd/exits, retained failure, fixture hashes and real action/input receipts are
 `scratch/integrator/linker-unref/evidence-v13.json`; fresh real receipts are under
 `scratch/integrator/linker-unref/real-menu-{reset,scene}-v13-r2/`.
-The proposed v1.20 text now names v13. Defaults remain v2/none and frozen GATES remains
+The proposed v1.20 text for that historical proposal named v13. Defaults remain v2/none and frozen GATES remains
 v1.19. No adoption, full suite/build, checkpoint rewrite or new credit is claimed.
+
+## Complete supplied-symbol namespace (experimental v14)
+
+The independent review of `e164f003` confirmed V12-F01's exact-edge root fix, but sealed
+**FAIL** on **V13-F01**: the combination map used `defined_globals()`, a positive-sized
+placement view, as an external-symbol namespace. A supplied zero-sized global/weak
+personality definition therefore remained labelled SHN_UNDEF and passed the ABI exception.
+The nonzero counterpart refused. V13 and every prior record retain their old meaning.
+
+Only **`armlink5-inline-branchnop-v14`** enables the complete namespace cutover:
+
+- `defined_symbols()` inventories **every defined symbol**, regardless of section size,
+  allocation, binding or kind, including local, NOBITS, ABS and COMMON definitions.
+  Filtered function/global placement views never establish that a name is absent.
+- `Reloc.reference` preserves each original pre-combination reference and symbol scopes
+  survive nested composition. Before every v14 link—including a single object—
+  `resolve_definitions()` creates a non-mutating resolved view. Legal global/weak externs
+  bind to actual supplied definitions; locals remain direct scoped identities and never
+  satisfy a foreign global extern.
+- The personality NONE exception additionally requires a genuinely undefined, default-visible
+  global/weak NOTYPE/FUNC with zero value/size and **no supplied same-name definition**.
+  This conservative exclusion includes locals, ABS/COMMON, nonallocated and zero-sized
+  definitions. Denying the exception does not falsely bind a global to an unrelated local.
+- Conflicting/unproved global/weak duplicates refuse in either order; supported COMDAT
+  identities retain their complete downstream proof. Equal full ABS identities represent
+  the same actual value. Unsupported reference/definition kinds, named undefined locals,
+  invalid extents and incomplete/noncanonical symbol-table/index evidence refuse.
+- COMMON storage allocation is not modeled and explicitly refuses. A supplied NONE
+  dependency must have verified output placement; omitted zero/nonallocated storage cannot
+  masquerade as a library extern. Actual ABS constants have no output storage and retain
+  value-based semantics, never an unrelated names-overlay substitution.
+- R1's helper metadata now accounts for every symbol, not just its function view: independent
+  data/file/global-section aliases refuse. Only proved full-entry FUNC aliases, permitted
+  local section symbols and ARM mapping markers may accompany the removed helper.
+  Visibility also participates in v14 target/copy identity. Ordinary byte/extent, original
+  callee equality, CFG/ABI, ownership and source-policy gates are unchanged.
+
+The requested systematic author audit is
+`scratch/integrator/linker-unref/AUDIT-v14.json`: **20 resolution paths × 33 ELF case
+classes = 660 explicit pairs**, each labelled `refuses` or `proven_safe` with its
+path-specific identity/dominance proof and mapped regression. It records **11 corrected
+unsafe classes**, distinguishing legal namespace visibility from legal extern resolution.
+Its coverage includes the reader, both combination passes, scopes/original references,
+single/nested dispatch, filtered views, aliases, original bindings, R1/U1/unwind/copy
+consumers, placement, NONE/final targets and matcher/build reporting. It is an author audit,
+not independent approval; path-entry counts were not instrumented and upstream-refused
+cases are explicitly identified as dominated, not claimed to execute unreachable consumers.
+
+`tests/test_unreferenced_v14.py` exercises **120 definition inventories**, **240
+both-order resolution instances** and **1,920 supplied-personality scenarios** across
+U1/pure-R1, inline/extab personalities 0/1/2, size/allocation/binding/type combinations.
+It also covers ABS/COMMON, nonallocated and section symbols, aliases, duplicate weak/global/
+COMDAT definitions, single/nested combination, table provenance, kind/extent/visibility
+failures and reporting. Executed focused selections: **215 tests, exit 0, OK**, plus
+**13 checkpoint-binding tests, exit 0, OK**. The earlier 213-test passing selection is retained.
+
+Sealed-object replay: **82 cases, exit 0**. All **76 negatives** refuse without actions,
+including all 44 supplied-personality-definition scenarios and the former local controls;
+six valid structural controls still match and report actions. Genuine external marker and
+ordinary namespace positive controls remain in the focused suite.
+
+Bounded d8aef63a real commands change only model/output selection:
+
+- **MenuResetScene attempt008: exit 0**, D1 **MATCH, 100 B at `0x001acbb4`**; exactly one
+  U1 action removes D0 **108 B** plus own exidx **8 B**, no extab or branch rewrite.
+- **MenuScene attempt006: exit 2**, live vtable ABS32 at `.constdata__ZTV9MenuScene+0xc`;
+  no elimination action.
+
+Exact argv/cwd/exits, audit binding, fixture hashes and complete real receipts/actions are
+`scratch/integrator/linker-unref/evidence-v14.json`; fresh real receipts are under
+`scratch/integrator/linker-unref/real-menu-{reset,scene}-v14-r2/`.
+The proposed v1.20 text now names v14. No adoption, full suite/build, checkpoint rewrite,
+subagent execution or new credit is claimed.
 
 ## Sources
 

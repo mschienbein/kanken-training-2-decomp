@@ -7,9 +7,10 @@ import inplace
 
 
 TYPES = {"SHT_PROGBITS": 1, "SHT_NOBITS": 8, "SHT_ARM_EXIDX": 0x70000001}
-KINDS = {"STT_NOTYPE": 0, "STT_OBJECT": 1, "STT_FUNC": 2, "STT_SECTION": 3}
+KINDS = {"STT_NOTYPE": 0, "STT_OBJECT": 1, "STT_FUNC": 2, "STT_SECTION": 3,
+         "STT_FILE": 4, "STT_COMMON": 5, "STT_TLS": 6}
 BINDS = {"STB_LOCAL": 0, "STB_GLOBAL": 1, "STB_WEAK": 2}
-SPECIAL_INDICES = {"SHN_UNDEF": 0, "SHN_ABS": 0xFFF1}
+SPECIAL_INDICES = {"SHN_UNDEF": 0, "SHN_ABS": 0xFFF1, "SHN_COMMON": 0xFFF2}
 
 
 def serialize_object(obj: inplace.ObjectFile, *, headers: dict[int, dict] | None = None) -> bytes:
@@ -56,7 +57,9 @@ def serialize_object(obj: inplace.ObjectFile, *, headers: dict[int, dict] | None
         strings.extend(symbol.name.encode() + b"\0")
         index = indices[symbol.shndx] if symbol.shndx in indices else SPECIAL_INDICES[symbol.shndx]
         symbol_table.extend(struct.pack("<IIIBBH", name, symbol.value, symbol.size,
-                                        (BINDS[symbol.bind] << 4) | KINDS[symbol.kind], 0, index))
+                                        (BINDS[symbol.bind] << 4) | KINDS[symbol.kind],
+                                        {"STV_DEFAULT": 0, "STV_INTERNAL": 1, "STV_HIDDEN": 2, "STV_PROTECTED": 3}
+                                        [symbol.visibility], index))
     symbol_table_index = len(sections)
     sections.extend([
         {"name": ".symtab", "type": 2, "flags": 0, "data": bytes(symbol_table), "size": len(symbol_table),

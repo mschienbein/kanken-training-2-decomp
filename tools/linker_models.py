@@ -27,6 +27,7 @@ class LinkerModel:
     checked_destructor_removal: bool = False  # v11: complete allocated census, exact mappings/target identities
     complete_section_metadata: bool = False  # v12: unreduced ELF header and group/copy identity
     structural_companion_edges: bool = False  # v13: exempt exact own structural edges, never whole sources
+    complete_symbol_resolution: bool = False  # v14: all supplied definitions, scoped refs and ABI-marker namespace
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -58,6 +59,11 @@ LINKER_MODELS = {m.name: m for m in (
                 unreferenced_destructors=True, unreferenced_destructor_unwind=True,
                 checked_destructor_removal=True, complete_section_metadata=True,
                 structural_companion_edges=True),
+    LinkerModel("armlink5-inline-branchnop-v14", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True, complete_symbol_resolution=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).

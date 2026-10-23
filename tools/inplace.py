@@ -633,6 +633,7 @@ class Symbol:
     kind: str  # STT_* type
     bind: str
     shndx: int | str
+    visibility: str = "STV_DEFAULT"
 
 
 @dataclass
@@ -640,6 +641,7 @@ class Reloc:
     offset: int
     type: int
     symbol: Symbol
+    reference: Symbol | None = None  # preserve the pre-combination reference; legacy binding is not v14 authority
 
 
 @dataclass(frozen=True)
@@ -730,10 +732,19 @@ class ObjectFile:
                     )
             allocated = self.sections | self.dependency_sections
             symtab = elf.get_section_by_name(".symtab")
+            canonical_table = elf.get_section_index(".symtab")
+            self.symbol_table_issues = tuple(
+                f"unsupported symbol table {section.name}" for index, section in enumerate(elf.iter_sections())
+                if section["sh_type"] in ("SHT_SYMTAB", "SHT_DYNSYM") and index != canonical_table)
             self.symbols = [
-                Symbol(sym.name, sym["st_value"], sym["st_size"], sym["st_info"]["type"], sym["st_info"]["bind"], sym["st_shndx"])
+                Symbol(sym.name, sym["st_value"], sym["st_size"], sym["st_info"]["type"], sym["st_info"]["bind"],
+                       sym["st_shndx"], sym["st_other"]["visibility"])
                 for sym in symtab.iter_symbols()
             ]
+            self.symbol_table_issues += tuple(
+                "unsupported or unrepresented symbol section index" for symbol in self.symbols
+                if (isinstance(symbol.shndx, int) and not 0 < symbol.shndx < elf.num_sections()
+                    or isinstance(symbol.shndx, str) and symbol.shndx not in ("SHN_UNDEF", "SHN_ABS", "SHN_COMMON")))
             for sym in symtab.iter_symbols():
                 section = allocated.get(sym["st_shndx"])
                 if section is None:
@@ -783,6 +794,8 @@ class ObjectFile:
                 target = allocated.get(s["sh_info"])
                 if target is None:
                     continue  # relocations of non-allocated sections (debug_frame)
+                if s["sh_link"] != canonical_table:
+                    self.symbol_table_issues += (f"noncanonical relocation symbol table: {s.name}",)
                 for r in s.iter_relocations():
                     target.relocs.append(Reloc(r["r_offset"], r["r_info_type"], self.symbols[r["r_info_sym"]]))
         for sym in self.symbols:
@@ -805,6 +818,10 @@ class ObjectFile:
         merged.dependency_sections = {}
         merged.section_owners, merged.section_objects = {}, {}
         merged.section_groups = []
+        merged.symbol_owners = {}
+        merged.symbol_table_issues = tuple(issue for obj in objects
+                                           for issue in getattr(obj, "symbol_table_issues", ()))
+        next_scope = 0
         symbols_by_object, indices_by_object = [], []
         definitions = {}
         dependency_index = sum(len(obj.sections) for obj in objects) + 1
@@ -815,11 +832,17 @@ class ObjectFile:
                 dependency_index += 1
             indices_by_object.append(indices)
             symbols = {}
+            scopes = {}
             for sym in obj.symbols:
                 shndx = sym.shndx
                 if isinstance(shndx, int):
                     shndx = indices.get(shndx, f"UNALLOCATED_{owner}_{shndx}")
                 symbols[id(sym)] = replace(sym, shndx=shndx)
+                scope = getattr(obj, "symbol_owners", {}).get(id(sym), 0)
+                if scope not in scopes:
+                    scopes[scope] = next_scope
+                    next_scope += 1
+                merged.symbol_owners[id(symbols[id(sym)])] = scopes[scope]
             symbols_by_object.append(symbols)
             merged.symbols.extend(symbols.values())
             for flags, signature, members in getattr(obj, "section_groups", ()):
@@ -856,11 +879,12 @@ class ObjectFile:
             for index, section in (obj.sections | getattr(obj, "dependency_sections", {})).items():
                 new_index = indices_by_object[owner][index]
                 for rel in section.relocs:
+                    reference = symbols[id(rel.reference if rel.reference is not None else rel.symbol)]
                     sym = symbols[id(rel.symbol)]
                     if sym.shndx == "SHN_UNDEF" and sym.name in definitions:
                         sym = definitions[sym.name]
                     destination = merged.sections if new_index in merged.sections else merged.dependency_sections
-                    destination[new_index].relocs.append(replace(rel, symbol=sym))
+                    destination[new_index].relocs.append(replace(rel, symbol=sym, reference=reference))
         return merged
 
     def defined_functions(self) -> list[Symbol]:
@@ -878,6 +902,68 @@ class ObjectFile:
             and s.name and s.name not in ("$a", "$t", "$d")
             and isinstance(s.shndx, int) and s.shndx in self.sections
         ]
+
+    def defined_symbols(self) -> list[Symbol]:
+        """Namespace view, not a placement filter: includes every binding, type and storage class."""
+        return [symbol for symbol in self.symbols if symbol.shndx != "SHN_UNDEF"]
+
+    def resolve_definitions(self) -> ObjectFile:
+        """V14's non-mutating, complete namespace cutover, also for a single supplied object."""
+        issues = getattr(self, "symbol_table_issues", ())
+        if issues:
+            raise LinkError(issues[0])
+        definitions = {}
+        globals_by_name = {}
+        allocated = self.sections | getattr(self, "dependency_sections", {})
+        for symbol in self.defined_symbols():
+            definitions.setdefault(symbol.name, []).append(symbol)
+            if symbol.shndx == "SHN_COMMON":
+                raise LinkError(f"{symbol.name}: COMMON storage allocation is not modeled")
+            if symbol.shndx in allocated:
+                section = allocated[symbol.shndx]
+                offset = _symbol_offset(symbol)
+                if not 0 <= offset <= section.size or not 0 <= symbol.size <= section.size - offset:
+                    raise LinkError(f"{symbol.name}: supplied symbol extent is outside its section")
+            if not symbol.name or symbol.bind not in ("STB_GLOBAL", "STB_WEAK"):
+                continue
+            prior = globals_by_name.setdefault(symbol.name, symbol)
+            if prior is symbol:
+                continue
+            metadata = lambda item: (item.value, item.size, item.kind, item.bind, item.visibility)
+            same_absolute = prior.shndx == symbol.shndx == "SHN_ABS" and metadata(prior) == metadata(symbol)
+            first, second = self.sections.get(prior.shndx), self.sections.get(symbol.shndx)
+            same_comdat = (first is not None and second is not None and first.comdat
+                           and comdat_key(first) == comdat_key(second) and metadata(prior) == metadata(symbol))
+            if not same_absolute and not same_comdat:
+                raise LinkError(f"global {symbol.name!r} has ambiguous supplied definitions")
+        resolved = self.__class__.__new__(self.__class__)
+        resolved.__dict__ = self.__dict__.copy()
+        resolved.definition_namespace = {name: tuple(rows) for name, rows in definitions.items()}
+        resolved.sections, resolved.dependency_sections = {}, {}
+        for index, section in (self.sections | getattr(self, "dependency_sections", {})).items():
+            relocations = []
+            for relocation in section.relocs:
+                reference = relocation.reference if relocation.reference is not None else relocation.symbol
+                symbol = reference
+                if reference.kind not in ("STT_NOTYPE", "STT_FUNC", "STT_OBJECT", "STT_SECTION"):
+                    raise LinkError(f"{section.name}: unsupported relocation symbol kind {reference.kind}")
+                if reference.shndx == "SHN_UNDEF":
+                    architecture_marker = (relocation.type == R_ARM_V4BX and section.executable
+                                           and section.elf_type == "SHT_PROGBITS" and not section.link_order)
+                    null_marker = relocation.type == R_ARM_NONE and not reference.name
+                    if reference.bind not in ("STB_GLOBAL", "STB_WEAK") and not architecture_marker and not null_marker:
+                        raise LinkError(f"{section.name}: named undefined local symbol cannot resolve externally")
+                    if reference.bind in ("STB_GLOBAL", "STB_WEAK") and reference.name in globals_by_name:
+                        symbol = globals_by_name[reference.name]
+                        if (reference.kind != "STT_NOTYPE" and symbol.kind != "STT_NOTYPE"
+                                and reference.kind != symbol.kind):
+                            raise LinkError(f"{section.name}: supplied symbol kind disagrees with its reference")
+                if symbol.kind not in ("STT_NOTYPE", "STT_FUNC", "STT_OBJECT", "STT_SECTION"):
+                    raise LinkError(f"{section.name}: unsupported supplied symbol kind {symbol.kind}")
+                relocations.append(replace(relocation, symbol=symbol, reference=reference))
+            destination = resolved.sections if index in self.sections else resolved.dependency_sections
+            destination[index] = replace(section, relocs=relocations)
+        return resolved
 
 
 @dataclass(frozen=True)
@@ -1684,6 +1770,16 @@ class InPlaceLinker:
                     or any(rel.type != R_ARM_V4BX for rel in section.relocs)
                     or inline_arm_call(0xEB000000, section.data) is None):
                 continue
+            if self.model.complete_symbol_resolution:
+                allowed = {id(alias) for alias in aliases}
+                if any(not (
+                        id(symbol) in allowed
+                        or symbol.bind == "STB_LOCAL" and symbol.kind == "STT_SECTION"
+                        and symbol.value == 0 and symbol.size in (0, section.size)
+                        or symbol.bind == "STB_LOCAL" and symbol.kind == "STT_NOTYPE"
+                        and symbol.name == "$a" and symbol.value == 0 and symbol.size == 0)
+                       for symbol in obj.symbols if symbol.shndx == index):
+                    continue  # an independent non-function alias is not an R1 callee identity
             if section.size == 8:
                 insn = next(_ARM.disasm(section.data[:4], 0, 1))
                 read, written = map(set, insn.regs_access())
@@ -1745,6 +1841,8 @@ class InPlaceLinker:
             if rel.type == R_ARM_V4BX and source.executable and not source.link_order:
                 return ("architecture-marker",)
             metadata = (sym.bind, sym.kind, sym.value, sym.size)
+            if self.model.complete_symbol_resolution:
+                metadata += (sym.visibility,)
             if sym.shndx in sections:
                 # Even byte-identical ordinary local objects are distinct, unproved identities.
                 return ("defined-section", proven_targets.get(sym.shndx, sym.shndx), *metadata)
@@ -1758,7 +1856,8 @@ class InPlaceLinker:
             raise LinkError(f"{source.name}: U1 COMDAT relocation has an unproved target identity")
 
         def symbols(section: Section) -> list[tuple]:
-            return sorted((sym.name, sym.value, sym.size, sym.kind, sym.bind)
+            return sorted((sym.name, sym.value, sym.size, sym.kind, sym.bind,
+                           sym.visibility if self.model.complete_symbol_resolution else None)
                           for sym in obj.symbols if sym.shndx == section.index)
 
         def identity(section: Section) -> tuple:
@@ -2032,6 +2131,13 @@ class InPlaceLinker:
                         or rel.symbol.shndx != "SHN_UNDEF"
                         or rel.symbol.name != f"__aeabi_unwind_cpp_pr{personality}"):
                     raise LinkError(f"{section.name}: unsupported unwind relocation or dependency")
+                if self.model.complete_symbol_resolution:
+                    symbol = rel.symbol
+                    if (symbol.name in obj.definition_namespace
+                            or symbol.bind not in ("STB_GLOBAL", "STB_WEAK")
+                            or symbol.kind not in ("STT_NOTYPE", "STT_FUNC")
+                            or symbol.value or symbol.size or symbol.visibility != "STV_DEFAULT"):
+                        raise LinkError(f"{section.name}: personality dependency is not a genuinely external ABI marker")
 
         for section in obj.sections.values():
             references = [rel for rel in section.relocs
@@ -2233,6 +2339,8 @@ class InPlaceLinker:
         self.rewrites, self.removed_callees = [], []
         self._removed_unwind = {}
         self._unreferenced_sections, self.removed_special_members = {}, []
+        if self.model.complete_symbol_resolution:
+            obj = obj.resolve_definitions()
         self._retained_sections = self._retention_sections(obj) if self.model.removed_inline else {}
         self._unreferenced_sections = self._unreferenced_destructors(obj, names_to_address or {})
         self._removed_sections = self._candidate_only_callees(obj, names_to_address or {})
@@ -2272,6 +2380,9 @@ class InPlaceLinker:
                     # A dependency: a section of this object it names must be part of the output,
                     # which here means placed (and so verified); library symbols are external.
                     sym = rel.symbol
+                    if (self.model.complete_symbol_resolution
+                            and sym.shndx not in ("SHN_UNDEF", "SHN_ABS") and sym.shndx not in placements):
+                        raise LinkError(f"{sec.name}: supplied dependency has no verified output placement")
                     if isinstance(sym.shndx, int) and sym.shndx in obj.sections and sym.shndx not in placements:
                         raise LinkError(f"{sec.name} depends on {obj.sections[sym.shndx].name}, which no reference places")
                     continue

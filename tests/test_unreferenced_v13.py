@@ -241,7 +241,7 @@ class StructuralCompanionEdgesTest(unittest.TestCase):
                 self.assertEqual(getattr(selected, key), value)
         self.assertTrue(selected.structural_companion_edges)
         self.assertTrue(all(not model.structural_companion_edges for name, model in inplace.LINKER_MODELS.items()
-                            if name != MODEL))
+                            if name not in (MODEL, "armlink5-inline-branchnop-v14")))
         self.assertEqual(inplace.DEFAULT_LINKER_MODEL, "armlink5-inline-branchnop-v2")
         self.assertEqual(inplace.DEFAULT_LITERAL_MODEL, "none")
 
