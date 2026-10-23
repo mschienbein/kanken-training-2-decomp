@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "bounded_canonical_derivation": {
+    "commands": 45,
+    "exit_counts": {
+      "2": 3,
+      "0": 42
+    },
+    "record": "BOUNDED-RESULTS-r1.json",
+    "disposition": "Two missing canonical C-linkage/getter declarations were fixed before the final proof; NEW171208 was held. No failing subset counted as a whole-TU pass."
+  },
+  "complete_source_proof": {
+    "commands": 2695,
+    "actual_driver_exit_code": 0,
+    "exit_counts": {
+      "0": 2695
+    },
+    "record": "REPROOF-r1.json"
+  },
+  "policy_lint": {
+    "actual_exit_code": 0,
+    "record": "POLICY-LINT-RUN-r1.json",
+    "all_source_and_proximity_hits_dispositioned": true
+  },
+  "nonmatch_observations": [
+    {
+      "command": "git merge --no-ff --no-commit4a9cf7b5",
+      "actual_exit_code": 1,
+      "record": "MERGE-r1.json"
+    },
+    {
+      "command": "git merge --no-ff --no-commit4a4da5cd",
+      "actual_exit_code": 0,
+      "record": "V14-MERGE-r1.json"
+    },
+    {
+      "command": "git add with empty .c/.h evidence pathspecs",
+      "actual_exit_code": 128,
+      "record": "STAGING-FAILURE-r1.json"
+    },
+    {
+      "command": "command -v inotifywait",
+      "actual_exit_code": 1,
+      "disposition": "Event watcher unavailable; no watcher was started and no grant polling occurred. Main grant arrived via IRC."
+    }
+  ],
+  "whole_ledger_argcheck_or_prepare_or_full_builds_or_suite_exercised": false,
+  "agent_or_task_calls": 0,
+  "interfaces": {
+    "granted_attempts": 1,
+    "numeric_actual_exit_code": null,
+    "tool_deadline_seconds": 3600,
+    "tool_result": "Command timed out after3600seconds",
+    "record": "INTERFACES-TIMEOUT-r1.json",
+    "atomic_slot_release": "HEAVY-SLOT-RELEASED.json",
+    "retry_exercised": false
+  }
+}

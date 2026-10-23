@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "branch": "c012-r5",
+  "worktree": "scratch/worktrees/c012-r5",
+  "source_base_commit": "69854e8e",
+  "canonical_ctypes_merge_start": "eb37e93e",
+  "incoming_c012_commit": "4a9cf7b5",
+  "canonical_source_merge_commit": "1284a45ef176a3d17d2335e1f8a4e9dedd74886c",
+  "adopted_v14_main": "4a4da5cd",
+  "v14_merge_commit": "43fbd7e537ea027f8f3a9d86c11e4283400da2f1",
+  "status": "SOURCE_READY_INTERFACES_TOOL_TIMEOUT_NO_VERDICT",
+  "checkpoint_ready": false,
+  "pending": [
+    "Main-controlled fresh interfaces completion: granted attempt was killed by execution deadline and produced no verdict."
+  ],
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.20",
+  "counts": {
+    "new_functions": 29,
+    "new_bytes": 4824,
+    "moves": 31,
+    "moved_bytes": 940,
+    "candidate_claims": 60,
+    "candidate_units": 45,
+    "revised_accepted_units": 61,
+    "revised_accepted_functions": 60,
+    "NEW_holds": 61,
+    "NEW_hold_bytes": 13684,
+    "proposed_functions": 2799,
+    "proposed_bytes": 305844,
+    "proposed_units": 2722,
+    "proposed_helper_units": 25,
+    "tracked_revised_accepted_units": 64,
+    "ctypes_original_revised_units": 63,
+    "ctypes_revised_units_covered_by_moves": 3,
+    "candidate_bytes": 5764
+  },
+  "candidate_manifest": {
+    "path": "config/candidates/c012.json",
+    "sha256": "c1ca0108c382a5416ebf9d5a0aa53443ca61db14ba87b2dcce97f85f9d08596f"
+  },
+  "archived_ctypes_manifest": {
+    "path": "folded-inputs/ctypes1-r4.json",
+    "sha256": "24850e4482e27e2a9a15822ee841c4e3092f8b8bd85bb1e2b1f1785bc29e536f"
+  },
+  "proposed_ledger": {
+    "path": "PROPOSED-LEDGER-r2.json",
+    "sha256": "6bc213a59fb246d02269445fbd264786cdccb2d4c5d96f2b676c591475c1c4f7",
+    "current_alias": "PROPOSED-LEDGER.json"
+  },
+  "source_closure": {
+    "path": "REPROOF-r1.json",
+    "sha256": "8927d292ec28436a8e83d0e627374d8a602bfdcc3985607dcacc444a63fd0aad",
+    "contexts": 2695,
+    "functions": 2799,
+    "exit_counts": {
+      "0": 2695
+    },
+    "actual_driver_exit_code": 0,
+    "helpers": 25,
+    "all_emitted_comparisons_MATCH": true,
+    "scope": "COMPLETE-SCOPE-r1.json",
+    "current_carried_scope": "COMPLETE-SCOPE-r2.json",
+    "not_G4_or_independent_review": true
+  },
+  "v14_proof_carry": {
+    "path": "V14-PROOF-CARRY-r1.json",
+    "sha256": "20f58f014af7be588ab249467fcf1e78e898de15e53d7dc63a8915da6b5279a7",
+    "identical_full_catalogue_rows": 2799,
+    "identical_protected_projections": 2799,
+    "NEW_move_revised_reclassified_intersections": [],
+    "second_full_proof_runs": 0
+  },
+  "policy_lint": {
+    "path": "POLICY-LINT.json",
+    "sha256": "33732a8b5bf56a4ab093a9a7ec2b823a586ec65387e8f831f08b71d29df64b4a",
+    "run": "POLICY-LINT-RUN-r1.json",
+    "source_commit": "43fbd7e537ea027f8f3a9d86c11e4283400da2f1",
+    "actual_exit_code": 0,
+    "source_hits": 23,
+    "proximity_hits": 6,
+    "second_model_hits": 0,
+    "unresolved_hits": 0,
+    "dispositions": "POLICY-LINT-DISPOSITIONS-r1.json",
+    "code_changes_required": false
+  },
+  "dispositions": {
+    "path": "DISPOSITIONS-r1.json",
+    "sha256": "30af4c08db34321bb19be1d3379bc55b090bda223d9fa39478caecda44911be1"
+  },
+  "holds": {
+    "path": "DEFERRALS-r1.json",
+    "NEW_count": 61,
+    "NEW_bytes": 13684,
+    "newly_held": "func_00171208",
+    "existing60preserved": true
+  },
+  "moves": {
+    "path": "MOVES-AUDIT-r1.json",
+    "count": 31,
+    "retired_old_units": 17,
+    "unrelated_canonical_deletions_restored": 543
+  },
+  "revised_units": {
+    "path": "REVISED-UNITS-r1.json",
+    "reconciliation": "CTYPES-REVISION-RECONCILIATION-r1.json",
+    "ctypes_original": 63,
+    "tracked_total": 64,
+    "surviving_source_hash_revisions": 61,
+    "covered_by_moves": 3
+  },
+  "critical_identity_001cf418": "Accepted unchanged owner retained; no move or native TextBox rewrite.",
+  "critical_identity_0019dc20": "Explicit declared accepted move retained and rederived from final canonical owner.",
+  "mandatory_RestorableState_fix": "Main4a9cf7b5 preserved: one canonical signed RestorableState, no parallel scalar declaration.",
+  "accepted_CM2_F01_F03": {
+    "classification": "INHERITED_ACCEPTED_CODE_KNOWN_ISSUES_NOT_CURRENT_BLOCKERS",
+    "Main_ruling": "CM2-F01/F03 are on accepted callers c012 does not revise. They remain known issues, not c012-r5 blockers.",
+    "NEW_dependent_fragment": "00171208 held instead of weakening canonical declarations."
+  },
+  "known_issues": {
+    "path": "docs/known-issues-c012.md",
+    "sha256": "9fa9f4f4fc4630639c67ae24e9f5596afa0dcd839ed544dea82485df3735dc76"
+  },
+  "not_exercised": [
+    "whole-ledger argcheck",
+    "full-image/BLZ builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ],
+  "agent_or_task_calls": 0,
+  "accepted_records_or_canonical_ledger_edited": false,
+  "accepted_credit_added": 0,
+  "ordinary_remaining_gates": "REMAINING-HEAVY-COMMANDS-r1.json",
+  "Main_after_interfaces_instruction": "Commit evidence, report the interfaces exit and stop. Main runs argcheck and prepare. No source/header changes after interfaces unless it fails.",
+  "source_commit_for_granted_interfaces": "196b70a1d1b6e0a35fba7276d486f5e7edfaf78f",
+  "source_or_header_changes_after_full_proof": [],
+  "lint_dispositions_sha256": "4cddc33a5ec38a5a7d17213f79e4d2a813acc4a47bb8fb0e2f518f5784688b17",
+  "heavy_slot_grant": {
+    "path": "HEAVY-SLOT-GRANTED.json",
+    "sha256": "a335abdc7fb875716276e2fd056e270f9e3c989cc5460d2790434d6cb1fd4000"
+  },
+  "heavy_slot_request": {
+    "path": "HEAVY-SLOT-REQUEST.json",
+    "sha256": "981af3fb90aaf91cb963889bfa8dcd5858639994af3c99bf52846c4cf847a695"
+  },
+  "source_checkpoint_ready": true,
+  "current_source_blockers": [],
+  "interfaces": {
+    "result": "TOOL_DEADLINE_TIMEOUT_NO_VERDICT",
+    "actual_exit_code": null,
+    "timeout_seconds": 3600,
+    "wall_seconds": 3600.33,
+    "report_written": false,
+    "record": "INTERFACES-TIMEOUT-r1.json",
+    "record_sha256": "f8c010ce9808e2cd1f25982dcb867f300c0e544e9df0373ff36880fac525c091",
+    "slot_released": true,
+    "release_record": "HEAVY-SLOT-RELEASED.json",
+    "release_record_sha256": "dd000371a811e7f51820da42aa4b28e7a1ebf796a2e8f9af28e1798782edd5f7",
+    "attempts": 1,
+    "retry_exercised": false
+  },
+  "checkpoint_ready_reason": "Source closure and lint are complete, with no current source blocker and no CM2 accepted-code blocker. Do not represent the uncompleted interfaces check as PASS. Main instructed report its outcome andstop; Main owns the remaining heavy gates.",
+  "source_or_header_changes_after_interfaces": []
+}

@@ -8,10 +8,10 @@
   "canonical_source_merge_commit": "1284a45ef176a3d17d2335e1f8a4e9dedd74886c",
   "adopted_v14_main": "4a4da5cd",
   "v14_merge_commit": "43fbd7e537ea027f8f3a9d86c11e4283400da2f1",
-  "status": "COMPLETE_SOURCE_CLOSURE_AND_LINT_PENDING_GRANTED_INTERFACES",
+  "status": "SOURCE_READY_INTERFACES_TOOL_TIMEOUT_NO_VERDICT",
   "checkpoint_ready": false,
   "pending": [
-    "Main-granted whole-ledger interfaces check"
+    "Main-controlled fresh interfaces completion: granted attempt was killed by execution deadline and produced no verdict."
   ],
   "selection": {
     "linker_model": "armlink5-inline-branchnop-v6",
@@ -135,5 +135,36 @@
   ],
   "agent_or_task_calls": 0,
   "accepted_records_or_canonical_ledger_edited": false,
-  "accepted_credit_added": 0
+  "accepted_credit_added": 0,
+  "ordinary_remaining_gates": "REMAINING-HEAVY-COMMANDS-r1.json",
+  "Main_after_interfaces_instruction": "Commit evidence, report the interfaces exit and stop. Main runs argcheck and prepare. No source/header changes after interfaces unless it fails.",
+  "source_commit_for_granted_interfaces": "196b70a1d1b6e0a35fba7276d486f5e7edfaf78f",
+  "source_or_header_changes_after_full_proof": [],
+  "lint_dispositions_sha256": "4cddc33a5ec38a5a7d17213f79e4d2a813acc4a47bb8fb0e2f518f5784688b17",
+  "heavy_slot_grant": {
+    "path": "HEAVY-SLOT-GRANTED.json",
+    "sha256": "a335abdc7fb875716276e2fd056e270f9e3c989cc5460d2790434d6cb1fd4000"
+  },
+  "heavy_slot_request": {
+    "path": "HEAVY-SLOT-REQUEST.json",
+    "sha256": "981af3fb90aaf91cb963889bfa8dcd5858639994af3c99bf52846c4cf847a695"
+  },
+  "source_checkpoint_ready": true,
+  "current_source_blockers": [],
+  "interfaces": {
+    "result": "TOOL_DEADLINE_TIMEOUT_NO_VERDICT",
+    "actual_exit_code": null,
+    "timeout_seconds": 3600,
+    "wall_seconds": 3600.33,
+    "report_written": false,
+    "record": "INTERFACES-TIMEOUT-r1.json",
+    "record_sha256": "f8c010ce9808e2cd1f25982dcb867f300c0e544e9df0373ff36880fac525c091",
+    "slot_released": true,
+    "release_record": "HEAVY-SLOT-RELEASED.json",
+    "release_record_sha256": "dd000371a811e7f51820da42aa4b28e7a1ebf796a2e8f9af28e1798782edd5f7",
+    "attempts": 1,
+    "retry_exercised": false
+  },
+  "checkpoint_ready_reason": "Source closure and lint are complete, with no current source blocker and no CM2 accepted-code blocker. Do not represent the uncompleted interfaces check as PASS. Main instructed report its outcome andstop; Main owns the remaining heavy gates.",
+  "source_or_header_changes_after_interfaces": []
 }

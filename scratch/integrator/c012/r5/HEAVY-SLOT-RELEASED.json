@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "released": true,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c012/r5/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c012/r5/INTERFACES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5",
+  "actual_exit_codes": [],
+  "interfaces_actual_exit_code": null,
+  "wrapper_actual_exit_code": null,
+  "termination": "Bash tool killed the granted runner command at its3600-second deadline; no numeric child exit was returned.",
+  "timed_out": true,
+  "timeout_seconds": 3600,
+  "tool_observation": "Command timed out after3600 seconds; wall3600.33 seconds.",
+  "output_paths": [
+    "scratch/integrator/c012/r5/INTERFACES-r1.json",
+    "scratch/integrator/c012/r5/INTERFACES-RUN-r1.json",
+    "scratch/integrator/c012/r5/HEAVY-SLOT-RELEASED.json"
+  ],
+  "interfaces_report_present": false,
+  "interfaces_run_record_present": false,
+  "record": "INTERFACES-TIMEOUT-r1.json",
+  "source_or_header_changes": [],
+  "retry_exercised": false
+}

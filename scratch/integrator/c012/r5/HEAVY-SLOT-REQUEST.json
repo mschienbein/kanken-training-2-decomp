@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c012/r5/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c012/r5/INTERFACES-r1.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c012-r5",
+  "purpose": "Main-requested whole-ledger interfaces check for combined c012-r5 on adoptedv14, after complete source proof and every lint lead adjudicated.",
+  "source_commit": "196b70a1d1b6e0a35fba7276d486f5e7edfaf78f",
+  "matches_sha256": "6bc213a59fb246d02269445fbd264786cdccb2d4c5d96f2b676c591475c1c4f7",
+  "output_paths": [
+    "scratch/integrator/c012/r5/INTERFACES-r1.json",
+    "scratch/integrator/c012/r5/INTERFACES-RUN-r1.json",
+    "scratch/integrator/c012/r5/HEAVY-SLOT-RELEASED.json"
+  ],
+  "runner": [
+    ".venv/bin/python",
+    "scratch/integrator/c012/r5/run_interfaces.py"
+  ],
+  "runner_sha256": "3deafd4a60b461976d1204a7235ee17f4f797d08f7adce2072bd2d3f6abffea3",
+  "atomic_release": "Runner publishesHEAVY-SLOT-RELEASED.json immediately after the single granted command, with every actual exit code and output path."
+}

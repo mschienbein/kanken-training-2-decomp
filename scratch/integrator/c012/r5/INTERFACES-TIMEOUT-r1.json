@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "source_commit": "196b70a1d1b6e0a35fba7276d486f5e7edfaf78f",
+  "runner_command": [
+    ".venv/bin/python",
+    "scratch/integrator/c012/r5/run_interfaces.py"
+  ],
+  "granted_argv": [
+    "nice",
+    "-n",
+    "10",
+    ".venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c012/r5/PROPOSED-LEDGER.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c012/r5/INTERFACES-r1.json"
+  ],
+  "granted_record_sha256": "a335abdc7fb875716276e2fd056e270f9e3c989cc5460d2790434d6cb1fd4000",
+  "result": "TOOL_DEADLINE_TIMEOUT_NO_INTERFACES_VERDICT",
+  "timeout_seconds": 3600,
+  "wall_seconds": 3600.33,
+  "numeric_interfaces_exit_code": null,
+  "numeric_runner_exit_code": null,
+  "interfaces_json_written": false,
+  "run_json_written": false,
+  "release_record": "HEAVY-SLOT-RELEASED.json",
+  "release_record_sha256": "dd000371a811e7f51820da42aa4b28e7a1ebf796a2e8f9af28e1798782edd5f7",
+  "post_timeout_observations": {
+    "settled_job_record": "proc://bg_235 no longer available",
+    "output_record_glob": "No INTERFACES*.json or HEAVY-SLOT-RELEASED*.json existed before manual atomic timeout release."
+  },
+  "cause": "Execution deadline killed the wrapper before the interfaces command produced its report; this is not a source/interface PASS or FAIL verdict.",
+  "retry_exercised": false,
+  "Main_instruction": "Afterinterfaces reportexit andstop; Main ownsargcheck/prepare. No source or header change made."
+}
