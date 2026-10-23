@@ -26,6 +26,7 @@ class LinkerModel:
     unreferenced_destructor_unwind: bool = False  # v10: U1 owners receive v8's exclusive own-unwind closure
     checked_destructor_removal: bool = False  # v11: complete allocated census, exact mappings/target identities
     complete_section_metadata: bool = False  # v12: unreduced ELF header and group/copy identity
+    structural_companion_edges: bool = False  # v13: exempt exact own structural edges, never whole sources
 
 
 LINKER_MODELS = {m.name: m for m in (
@@ -52,6 +53,11 @@ LINKER_MODELS = {m.name: m for m in (
                 bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
                 unreferenced_destructors=True, unreferenced_destructor_unwind=True,
                 checked_destructor_removal=True, complete_section_metadata=True),
+    LinkerModel("armlink5-inline-branchnop-v13", inline=True, branchnop=True, removed_inline=True,
+                bounded_switches=True, function_entry_aliases=True, removed_unwind=True,
+                unreferenced_destructors=True, unreferenced_destructor_unwind=True,
+                checked_destructor_removal=True, complete_section_metadata=True,
+                structural_companion_edges=True),
 )}
 DEFAULT_LINKER_MODEL = "armlink5-inline-branchnop-v2"
 # Names recorded by earlier artifacts whose rules are withdrawn: never run again (docs/LINKER.md).

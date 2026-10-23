@@ -591,6 +591,9 @@ class AcceptGateTest(unittest.TestCase):
     def test_v11_to_v12_transition_reopens_u1_owner_and_binds_complete_metadata_model(self):
         self.u1_model_transition("armlink5-inline-branchnop-v11", "armlink5-inline-branchnop-v12", own_unwind=True)
 
+    def test_v12_to_v13_transition_reopens_u1_owner_and_binds_structural_edge_model(self):
+        self.u1_model_transition("armlink5-inline-branchnop-v12", "armlink5-inline-branchnop-v13", own_unwind=True)
+
     def test_u1_zero_credit_owner_remains_visible_without_inventing_credited_functions(self):
         member = {"symbols": ["_ZN6WidgetD0Ev"], "object": "src/helper.cpp", "section_index": 3}
         action = {"rule": "unused_deleting_destructor", "target": None, "removed_special_member": member}

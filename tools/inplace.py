@@ -1595,15 +1595,20 @@ class InPlaceLinker:
                 reference(metadata.info) if metadata.flags & SH_FLAGS.SHF_INFO_LINK else ("scalar", metadata.info),
                 memberships, section.comdat)
 
-    def _section_dependencies(self, obj: ObjectFile, section: Section) -> tuple[int | str, ...]:
-        """V12 also retains SHF_INFO_LINK dependencies; older models keep their exact census."""
+    def _section_dependency_edges(self, obj: ObjectFile, section: Section) -> tuple[tuple[str, int | str], ...]:
+        """Keep edge kind as well as destination: equal targets do not make INFO_LINK structural."""
         if not self.model.complete_section_metadata:
-            return (section.linked_section,) if section.link_order else ()
+            return (("link_order", section.linked_section),) if section.link_order else ()
         self._section_metadata_identity(obj, section)
         metadata = section.metadata
-        return tuple(index for index in (metadata.link,
-                                         metadata.info if metadata.flags & SH_FLAGS.SHF_INFO_LINK else 0)
-                     if index)
+        return tuple((kind, index) for kind, index in (
+            ("link_order", metadata.link),
+            ("info_link", metadata.info if metadata.flags & SH_FLAGS.SHF_INFO_LINK else 0),
+        ) if index)
+
+    def _section_dependencies(self, obj: ObjectFile, section: Section) -> tuple[int | str, ...]:
+        """V12 also retains SHF_INFO_LINK dependencies; older models keep their exact census."""
+        return tuple(index for _, index in self._section_dependency_edges(obj, section))
 
     def _retention_sections(self, obj: ObjectFile) -> dict[int, tuple[str, ...]]:
         """DUI0474K §4.3 roots survive independently of whether their calls inline."""
@@ -2088,6 +2093,14 @@ class InPlaceLinker:
 
         # Section links are dependencies too, even without an allocated relocation.
         for section in self._reference_sections(obj).values():
+            if self.model.structural_companion_edges and section.index in companions:
+                # Relocations already passed the exact key/tail/personality whitelist above.
+                # A companion's only permitted header edge is its own index's LINK_ORDER.
+                owner = companions[section.index]
+                for kind, index in self._section_dependency_edges(obj, section):
+                    if (kind != "link_order" or section.index != exidx_by_owner[owner] or index != owner):
+                        raise LinkError(f"{section.name}: nonstructural or foreign own-unwind header dependency")
+                continue
             if (any(index in (removed | companions) for index in self._section_dependencies(obj, section))
                     and section.index not in companions):
                 raise LinkError(f"{section.name}: another linked section keeps removed unwind/code live")

@@ -15,14 +15,14 @@ The opt-in **`armlink5-inline-branchnop-v8`** (corrected v6 plus complete own-un
 is adopted under gates v1.19; v7 is retired, never adopted. The exact accepted gate text and
 sealed independent review are `scratch/review/exidx-v8/GATES-ACCEPTED.md` / `SEAL.json`
 (PASS_WITH_QUALIFICATIONS). The v1.19 revision precedes the code merge.
-The recorded experimental **v9/v10/v11** implementations remain selectable, immutable and
-**unadopted**. V9/v10 sealed **FAIL** at `scratch/review/linker-v10/codex/REPORT.md`
-(F01–F05); v11 sealed **FAIL** at `scratch/review/linker-v11/codex/REPORT.md`
-(V11-F01: semantic ELF flags were lost before its claimed complete-metadata copy proof).
-The new experimental opt-in **`armlink5-inline-branchnop-v12`** preserves the v11 root
-fixes and adds unreduced semantic section/group metadata and link/info dependency checks.
-Its proposed gate revision is `scratch/integrator/linker-unref/GATES-DRAFT.md`, pending
-independent implementation/exact-text review. `docs/GATES.md` remains frozen v1.19.
+The recorded experimental **v9/v10/v11/v12** implementations remain selectable, immutable
+and **unadopted**. Their sealed FAILs remain in `scratch/review/linker-v10/codex/`
+(F01–F05), `scratch/review/linker-v11/codex/` (V11-F01: lost semantic flags), and
+`scratch/review/linker-v12/codex/` (V12-F01: foreign companion INFO_LINK cycles).
+The new experimental opt-in **`armlink5-inline-branchnop-v13`** preserves the complete
+metadata/census/reporting root fixes and limits own-unwind exemption to exact structural
+edges. Its proposed gate revision is `scratch/integrator/linker-unref/GATES-DRAFT.md`,
+pending independent review. `docs/GATES.md` remains frozen v1.19.
 Original model: ArmlinkInline, 2026-10-16; removed-callee extension: LinkerRemovedCallee, 2026-10-17.
 
 The public toolchain has armcc but no armlink, so the original link step cannot be rerun. The
@@ -580,9 +580,65 @@ L1, names overlay and `--show 0`:
 Exact argv/cwd/exits, retained failures, fixture hashes, receipts and actions are recorded in
 `scratch/integrator/linker-unref/evidence-v12.json`; fresh real receipts are under
 `scratch/integrator/linker-unref/real-menu-{reset,scene}-v12-r3/`.
-The v1.20 draft now names v12 and preserves all R1/L1/U1 transition-review obligations.
+The v1.20 draft for that proposal named v12 and preserved R1/L1/U1 transition-review obligations.
 V11 remains selectable and unadopted, defaults remain v2/none, and frozen GATES remains v1.19.
 No adoption, full suite, full build, checkpoint rewrite or new credit is claimed.
+
+## Edge-specific own-unwind exemption (experimental v13)
+
+The independent review of `e0a409b1` confirmed the unreduced-metadata root fix, but sealed
+**FAIL** on **V12-F01**: the reference collector saw foreign INFO_LINK edges, then the
+blanket companion-source exemption removed them from consideration. Mutual exidx/extab
+dependencies to peer D0s returned two MATCH rows and two U1 actions. Two mixed-index
+COMDAT copies returned four of each in both object orders. That failed implementation,
+its receipt evidence and all older models remain immutable, selectable, unadopted history.
+
+Only **`armlink5-inline-branchnop-v13`** enables `structural_companion_edges`:
+
+- Header dependencies retain both **edge kind and destination**. INFO_LINK does not become
+  structural merely because its destination happens to equal a valid LINK_ORDER owner.
+- Before a companion can leave the census, its only permitted header edge is an exidx's
+  exact LINK_ORDER to its own validated removed owner. Any nonzero INFO_LINK refuses,
+  even to that same owner; an INFO_LINK flag with zero info carries no edge.
+- Existing per-relocation validation permits only the exact own PREL31 entry key and the
+  optional PREL31 tail to that index's own exclusive extab. Extab is reached only by its
+  own index. Every other supplied-section edge from a companion refuses: peer D0s,
+  other removal candidates, kept/unplaced code/data and foreign metadata are not swept in.
+- The exact matching **undefined** EHABI personality NONE dependency remains supported as
+  an ABI marker, not an arbitrary section reference. Defined/foreign, extra or unsupported
+  relocations still refuse. The rule applies equally to pure R1 own-unwind closures.
+- Own-companion header-edge checks precede group-copy normalization, removal reporting and
+  the later U1 source exclusions. Neither matching metadata nor corresponding group roles
+  establish that a self/peer cycle is dead. No action is published on refusal.
+
+`tests/test_unreferenced_v13.py` uses actual serialized/parsed ELF through `Context.compare`.
+It covers mutual pairs, three-cycles, direct self/peer U1 cycles, acyclic foreign edges,
+INFO_LINK/LINK_ORDER/NONE/ABS32/PREL31 transports, kept/data/code/metadata targets,
+both section/object orders and mixed-index joint COMDAT copies. Positive controls cover
+one/two/three independent structural closures, zero-info markers, complete frame-only
+extab, exact ABI markers and pure R1 closures. Matcher/grid/collector dispatch and the
+v12→v13 selection transition retain the existing action/hash/review obligations.
+
+Executed focused selections: **194 tests, exit 0, OK**, plus **13 checkpoint-binding
+tests, exit 0, OK**. Reusing the exact sealed objects under v13, all **26** earlier
+counterexamples and all **six** v12 peer/mixed-index comparison scenarios refuse without
+actions; six valid controls still match and report actions (probe exit 0). The first
+focused run lacked a local section symbol for its synthetic foreign-exidx relocation
+fixture and exited 1; that harness record is retained and the corrected run uses a new name.
+
+The same `d8aef63a` real commands, with only model/output selection changed, give:
+
+- **MenuResetScene attempt008: exit 0**, retained D1 **MATCH, 100 B at `0x001acbb4`**.
+  Exactly one target-null U1 action removes D0 **108 B** plus its own exidx **8 B**;
+  no extab or per-function branch rewrite.
+- **MenuScene attempt006: exit 2**, live vtable ABS32 at `.constdata__ZTV9MenuScene+0xc`;
+  no elimination action.
+
+Exact argv/cwd/exits, retained failure, fixture hashes and real action/input receipts are
+`scratch/integrator/linker-unref/evidence-v13.json`; fresh real receipts are under
+`scratch/integrator/linker-unref/real-menu-{reset,scene}-v13-r2/`.
+The proposed v1.20 text now names v13. Defaults remain v2/none and frozen GATES remains
+v1.19. No adoption, full suite/build, checkpoint rewrite or new credit is claimed.
 
 ## Sources
 
