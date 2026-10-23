@@ -16,7 +16,25 @@ struct W17StorageHeader;
 #include "game/resource_instance.h"
 
 #ifdef __cplusplus
+extern "C" {
+#endif
+void *func_0016a998(void *object);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
+#include <nw/lyt/lyt_Material.h>
+#include <nw/lyt/lyt_Common.h>
+/* [INFERENCE] Material pane prefix, distinct from the other layout owners. */
+struct MaterialPane {
+    const void *const *vtable;
+    unsigned char reserved04[0x138];
+    nw::lyt::Material *resource;
+    unsigned char reserved140[0x10];
+    nw::lyt::internal::TexCoordAry vertices;
+};
 
 
 
@@ -76,7 +94,9 @@ void func_0016b260(void *allocation);
 
 
 void func_00191aec(void *allocation);
-void *func_0016a998(void *object);
+extern const void *const data_002242f0[];
+void *func_001cf3a4(MaterialPane *pane);
+void func_001cf338(MaterialPane *pane);
 void func_0016aa74(DisplayVertexArray *buffer);
 void func_001cf67c(W17TexturePane *pane);
 extern const W17LayoutVTable data_00224370;

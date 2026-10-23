@@ -1,10 +1,4 @@
-struct SparseResourceState {
-    void *resource;
-    unsigned reserved04;
-    unsigned count;
-};
-
-extern struct SparseResourceState bss_004962a8;
+#include "game/stream_worker.h"
 
 void func_001043e0(void)
 {

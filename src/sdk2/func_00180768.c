@@ -1,10 +1,4 @@
-struct FreeListNode {
-    struct FreeListNode *next;
-};
-
-struct FreeListPool {
-    struct FreeListNode *head;
-};
+#include "game/sound_runtime.h"
 
 static __forceinline unsigned int align_word(unsigned int size)
 {
@@ -20,7 +14,7 @@ unsigned int func_00180768(struct FreeListPool *pool, void *storage,
     unsigned int count = (size - (aligned - (unsigned int)storage)) / stride;
     unsigned int i;
     for (i = 0; i < count; ++i) {
-        struct FreeListNode *node = (struct FreeListNode *)aligned;
+        struct FreeLink *node = (struct FreeLink *)aligned;
         node->next = pool->head;
         pool->head = node;
         aligned += stride;

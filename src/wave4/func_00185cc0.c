@@ -1,19 +1,6 @@
 #include "game/functions.h"
 
-#include "game/pool_list.h"
-
-struct ObjectPool {
-    void *free_list;
-    struct PoolList active;
-    unsigned char initialized;
-    unsigned char reserved11[3];
-    unsigned int capacity;
-    void *storage;
-    unsigned int storage_size;
-};
-
-extern volatile unsigned int data_00243718;
-extern struct ObjectPool bss_004b8420;
+#include "game/object_pool.h"
 
 static __forceinline void initializeList(struct PoolList *list)
 {
@@ -24,7 +11,7 @@ static __forceinline void initializeList(struct PoolList *list)
 
 static __forceinline void initializePool(struct ObjectPool *pool)
 {
-    pool->free_list = 0;
+    pool->free_list.head = 0;
     initializeList(&pool->active);
     pool->initialized = 0;
     pool->capacity = 0;

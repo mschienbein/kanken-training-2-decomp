@@ -22,7 +22,6 @@ struct StartupLink {
 
 #ifdef __cplusplus
 struct StartupItemPageSet : ItemPageSet {
-    unsigned char reserved18[4];
     StartupItemPageSet();
 };
 #endif

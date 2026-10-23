@@ -1,7 +1,4 @@
-struct TransformTarget;
-
-extern void func_0016bde0(struct TransformTarget *const *objects, int index,
-                          int mode, float x, float y);
+#include "game/selection_components.h"
 
 void func_001c3cf8(struct TransformTarget *const *objects, int index,
                    float x, float y)

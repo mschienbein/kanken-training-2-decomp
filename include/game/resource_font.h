@@ -56,6 +56,19 @@ struct U8DirectoryEntry {
     bool is_directory;
 };
 
+
+#ifdef __cplusplus
+#include <preinclude.h>
+#include <nw/lyt/lyt_Arc.h>
+/* Separate enclosing view: native archive at +8 and a bounded wide name. */
+struct NamedArchive {
+    unsigned char reserved00[8];
+    nw::lyt::ARCHandle view;
+    wchar_t name[64];
+};
+extern "C" bool func_00140490(NamedArchive *archive, void *file, const char *name);
+#endif
+
 #ifdef __cplusplus
 class StreamSizeBackend {
 public:

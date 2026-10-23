@@ -1,5 +1,18 @@
 #ifndef GAME_SHADER_H
 #define GAME_SHADER_H
+#include "game/matrix.h"
+/* [INFERENCE] Real renderer receiver forwarded unchanged to buffer setup,
+ * distinct from ShaderConfiguration despite compatible individual fields. */
+struct RendererState {
+    unsigned char reserved00[0x15c];
+    unsigned program;
+    unsigned reserved160;
+    struct Matrix34 model_matrix;
+    unsigned buffers[2];
+    int uniforms[79];
+    unsigned char reserved2d8[8];
+    unsigned char initialized;
+};
 struct ShaderConfiguration {
     unsigned program, texture;
     unsigned char reserved08[0x50];
@@ -11,6 +24,7 @@ struct ShaderConfiguration {
 struct ShaderRegistry {
     unsigned programs[3];
     unsigned shaders[3];
+    int current;
 };
 #ifdef __cplusplus
 extern "C" {
@@ -31,8 +45,13 @@ extern void func_00199c08(unsigned program, unsigned location, const char *name)
 extern void func_00198170(unsigned program);
 extern void func_00197c68(unsigned program);
 extern int func_00191b08(unsigned program, const char *name);
+extern void func_0011da50(int location, unsigned count, int transpose, const void *values);
+extern void func_00127ddc(int location, const unsigned *values, unsigned type, int count);
 extern void func_0019194c(int location, unsigned value);
 extern void func_00191aec(void *allocation);
+extern const char *data_00242e48[79];
+extern void func_00116c1c(struct RendererState *state);
+extern void func_0010dd88(struct RendererState *state);
 #ifdef __cplusplus
 }
 #endif

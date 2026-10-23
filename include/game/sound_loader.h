@@ -12,6 +12,8 @@ struct SoundLoaderVTable;
 #include "game/runtime.h"
 
 #ifdef __cplusplus
+#include <preinclude.h>
+#include <nw/snd/snd_SoundArchive.h>
 /* [INFERENCE] Descriptive types and callback roles follow the matching consumers. */
 
 
@@ -56,6 +58,12 @@ void func_001d0324(DirectSoundLoaderState *owner);
 void func_001d4174(SoundLoaderState *loader, const SoundArchive *archive);
 void func_001d4124(CachedSoundLoaderState *owner, const SoundArchive *archive);
 extern const SoundLoaderVTable data_00224810;
+/* [INFERENCE] The wave loader forwards its opaque loader unchanged to lookup.
+ * It uses the real native archive interface and the canonical 16-byte CWAR
+ * reader; neither is aliased to the other historical loader/archive views. */
+const void *func_0016a29c(SoundLoaderState *loader, unsigned id);
+const void *func_0016a888(const void *file, unsigned index,
+                         const nw::snd::SoundArchive *archive, SoundLoaderState *loader);
 }
 #endif
 

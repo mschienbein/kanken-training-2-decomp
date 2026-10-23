@@ -39,14 +39,16 @@ public:
     ResourceDescriptor();
     ResourceDescriptor(int category, int resource, const char *name);
 };
+#endif
 
 /* [INFERENCE] Compact index-list constructor witnessed by 002095c0. */
 struct PaneIndexList {
     int count;
-    unsigned char indices[16];
+    signed char indices[16];
+#ifdef __cplusplus
     PaneIndexList(int count, ...);
-};
 #endif
+};
 
 #ifdef __cplusplus
 extern "C" {

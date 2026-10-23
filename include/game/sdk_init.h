@@ -18,6 +18,7 @@ struct FatalErrorInfo {
 extern "C" {
 #endif
 extern signed char data_00242d64;
+extern void func_001135e8(void);
 extern const CtrHandle data_0021c110, data_00220b8c;
 extern struct TranslationOffsets data_00243798;
 extern struct FatalErrorInfo bss_004b1200;

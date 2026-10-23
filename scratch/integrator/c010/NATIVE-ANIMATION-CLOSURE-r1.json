@@ -1,0 +1,463 @@
+{
+  "schema_version": 1,
+  "status": "native-animation-pointer-result-lifetime-gap-closed-at-collected-destination-awaiting-main-gates",
+  "worktree": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-native-animation",
+  "branch": "c010-native-animation",
+  "base_commit": "30b1017f941b9ba01b067dcdbd18d5f7c32674b4",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "profile": "game",
+  "show": 0,
+  "scope": {
+    "units": [
+      {
+        "source": "src/checkpoint10/func_001ce8b8.cpp",
+        "profile": "game",
+        "functions": [
+          "func_001ce8b8"
+        ]
+      }
+    ],
+    "fresh_header_changes": [],
+    "qualification": "One new translation unit only; no accepted/helper context was moved, copied into the unit or redefined. Not a complete header-dependent or whole-ledger closure."
+  },
+  "lifetime_semantics": [
+    "The const native AnimResource reference binds directly to the AnimResource(file) temporary; C++ extends the temporary lifetime through the reference scope, including the virtual CreateAnimTransform call.",
+    "The pinned inline explicit constructor calls the already admitted native AnimResource::Set(const void*) entry on that same native object. No C reader shim, default-constructor substitution or new Set definition is introduced.",
+    "The actual nw::lyt::Layout receiver, const AnimResource reference and original ResourceAccessor pointer reach the real pointer-result virtual overload. The returned AnimTransform pointer is returned unchanged.",
+    "The matching form has no casts, shadow classes, aliases, attributes, dead code, added destructor, volatile state, profile changes or model changes. A matching source spelling is not a claim that the original historical source used this exact spelling."
+  ],
+  "frozen_seed": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001ce8b8.cpp",
+    "sha256": "e4ff3406041c55d8dd43e8bf61efe08c2d5cd346516bd9177e58c66403253506",
+    "unchanged": true
+  },
+  "preserved_reader_identity": {
+    "name": "_ZN2nw3lyt12AnimResource3SetEPKv",
+    "address": "0x001cbf34",
+    "proof": "same-address-emitted-self-definition",
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4065/variants/func_001cbf34_native_local_header_all.cpp",
+    "source_sha256": "ff5a1be29724a96ca1111e91f06bfdf9936bf2469bb932ca04df855b57582875",
+    "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4065/match/func_001cbf34/a07_middleware/func_001cbf34_native_local_header_all.result.json",
+    "receipt_sha256": "fe7fc4fe79cf4a0a242de2c841d119c04c7284aae57e6a4a220e165e0f4ecd78",
+    "profile": "middleware",
+    "object_sha256": "7dc75045ed60bd094e51f5ba20e376a0914af7b4099116c8623c569ccd4e9222",
+    "definition_and_binding_unchanged": true,
+    "qualification": "Retained identity receipt, not recompiled or re-owned by this game-profile caller."
+  },
+  "prior_attempt_reuse": [
+    {
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4002/src/func_001ce8b8.cpp",
+      "source_sha256": "5e75e3cdfed626111893cbe58941b90b90bd6199db5c96c94f5bce7c4c208d7b",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4002/match/func_001ce8b8/final-game/func_001ce8b8.result.json",
+      "observation": "Historical60B MATCH used the old shadow/void/C-reader contract, so it was inspected and preserved, not restored."
+    },
+    {
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4002/variants/layout-reader-ref-local/func_001ce8b8.cpp",
+      "reexpression": "scratch/integrator/c010/native-animation-reentry-r1/proposals/reused-reader-ref-local.cpp",
+      "observation": "First tried the prior local pointer/reference lifetime shape using only the canonical native APIs:56/60B mismatch, exit1."
+    },
+    {
+      "source": "/home/michael/code/kanken-training-2-decomp/scratch/authors/r4002/variants/layout-attach-helper/func_001ce8b8.cpp",
+      "reexpression": "scratch/integrator/c010/native-animation-reentry-r1/proposals/reused-attach-helper.cpp",
+      "observation": "Then tried the prior pointer helper shape with the actual result type:56/60B mismatch, exit1."
+    },
+    {
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/graphics-storage-match-r56/checkpoint10/func_001ce8b8/func_001ce8b8.result.json",
+      "observation": "Retained canonical r56 game56/60B mismatch, not rerun."
+    },
+    {
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/animation-reader-match-r60/func_001ce8b8.result.json",
+      "observation": "Retained canonical r60 game56/60B mismatch and frozen seed, not recompiled."
+    }
+  ],
+  "runs": [
+    {
+      "kind": "bounded-match",
+      "source": "scratch/integrator/c010/native-animation-reentry-r1/proposals/reused-reader-ref-local.cpp",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c010/native-animation-reentry-r1/proposals/reused-reader-ref-local.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c010/native-animation-reentry-r1/match/reused-reader-ref-local"
+      ],
+      "exit_code": 1,
+      "stdout": "MISMATCH func_001ce8b8 @ 0x1ce8b8 size 0x38/0x3c first difference at +0x0\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/c010/native-animation-reentry-r1/match/reused-reader-ref-local/reused-reader-ref-local.result.json",
+      "receipt_sha256": "bac8d6ea57d5d22c51346d37324b7855017c13494eab3687f5f350af3e236c4a",
+      "source_sha256": "086a9e4ca8d7311bb3f732e6a4810b60a7907faf42effc037ce63be4349d5750",
+      "functions": [
+        {
+          "name": "func_001ce8b8",
+          "address": 1894584,
+          "size": 60,
+          "candidate_size": 56,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "kind": "bounded-match",
+      "source": "scratch/integrator/c010/native-animation-reentry-r1/proposals/reused-attach-helper.cpp",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c010/native-animation-reentry-r1/proposals/reused-attach-helper.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c010/native-animation-reentry-r1/match/reused-attach-helper"
+      ],
+      "exit_code": 1,
+      "stdout": "MISMATCH func_001ce8b8 @ 0x1ce8b8 size 0x38/0x3c first difference at +0x0\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/c010/native-animation-reentry-r1/match/reused-attach-helper/reused-attach-helper.result.json",
+      "receipt_sha256": "210aa374286b18ccf06a576c44364ac98f94e694dfd9dfe645b6051231d8d799",
+      "source_sha256": "e6f293a8fd526f47376566fac0a4dff51e7a87ee579fbe6f6562e0d2522431a9",
+      "functions": [
+        {
+          "name": "func_001ce8b8",
+          "address": 1894584,
+          "size": 60,
+          "candidate_size": 56,
+          "status": "mismatch",
+          "first_diff": 0,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "kind": "bounded-match",
+      "source": "scratch/integrator/c010/native-animation-reentry-r1/proposals/temporary-resource.cpp",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c010/native-animation-reentry-r1/proposals/temporary-resource.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c010/native-animation-reentry-r1/match/temporary-resource"
+      ],
+      "exit_code": 1,
+      "stdout": "MISMATCH func_001ce8b8 @ 0x1ce8b8 size 0x3c/0x3c first difference at +0x9\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/c010/native-animation-reentry-r1/match/temporary-resource/temporary-resource.result.json",
+      "receipt_sha256": "63084ca21b59b63abb4c5a56ee86e9b3937f4c3732f5999d1a576c9f5ba3dd46",
+      "source_sha256": "ac2ed3c3db6ea8a3f1f4563aa951658ffa39baba81d2c2a18ee44a25c1356867",
+      "functions": [
+        {
+          "name": "func_001ce8b8",
+          "address": 1894584,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "mismatch",
+          "first_diff": 9,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "kind": "bounded-match",
+      "source": "scratch/integrator/c010/native-animation-reentry-r1/proposals/helper-temporary-resource.cpp",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c010/native-animation-reentry-r1/proposals/helper-temporary-resource.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c010/native-animation-reentry-r1/match/helper-temporary-resource"
+      ],
+      "exit_code": 1,
+      "stdout": "MISMATCH func_001ce8b8 @ 0x1ce8b8 size 0x3c/0x3c first difference at +0x9\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/c010/native-animation-reentry-r1/match/helper-temporary-resource/helper-temporary-resource.result.json",
+      "receipt_sha256": "f663c3cad562dcc1035fffc78239945dd252c34cbfec17b6e6c3de549e210cfa",
+      "source_sha256": "fe5910d769d8e13272518ba67b08c5ca9d67747300340446f6e4c995ae5d334a",
+      "functions": [
+        {
+          "name": "func_001ce8b8",
+          "address": 1894584,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "mismatch",
+          "first_diff": 9,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "kind": "bounded-match",
+      "source": "scratch/integrator/c010/native-animation-reentry-r1/proposals/lifetime-extended-resource.cpp",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "scratch/integrator/c010/native-animation-reentry-r1/proposals/lifetime-extended-resource.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c010/native-animation-reentry-r1/match/lifetime-extended-resource"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001ce8b8 @ 0x1ce8b8 size 0x3c/0x3c\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/c010/native-animation-reentry-r1/match/lifetime-extended-resource/lifetime-extended-resource.result.json",
+      "receipt_sha256": "a5f9294eed067b94e3123a9b98632124d12f3254bae488b778caef2ffaca1d31",
+      "source_sha256": "d516ee97d20ab9dbf6cb0ae1d88a181367830752097bbaab4c4a48fd9c024830",
+      "functions": [
+        {
+          "name": "func_001ce8b8",
+          "address": 1894584,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ]
+    },
+    {
+      "kind": "destination-collection",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/collect.py",
+        "--dest",
+        "src/checkpoint10",
+        "--candidates",
+        "scratch/integrator/c010/native-animation-reentry-r1/collected.json",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "scratch/integrator/c010/native-animation-reentry-r1/RESULT.json"
+      ],
+      "exit_code": 0,
+      "stdout": "taken: 1 units, 1 functions -> scratch/integrator/c010/native-animation-reentry-r1/collected.json\n",
+      "stderr": "",
+      "collected": "scratch/integrator/c010/native-animation-reentry-r1/collected.json",
+      "collected_sha256": "45a9cc1fff2b2d9f8ff8965ce552d605969905885bc9e0e986c97f2de140043d"
+    },
+    {
+      "kind": "bounded-destination-match",
+      "source": "src/checkpoint10/func_001ce8b8.cpp",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001ce8b8.cpp",
+        "--profile",
+        "game",
+        "--show",
+        "0",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--out",
+        "scratch/integrator/c010/native-animation-reentry-r1/destination"
+      ],
+      "exit_code": 0,
+      "stdout": "MATCH    func_001ce8b8 @ 0x1ce8b8 size 0x3c/0x3c\n",
+      "stderr": "",
+      "receipt": "scratch/integrator/c010/native-animation-reentry-r1/destination/func_001ce8b8.result.json",
+      "receipt_sha256": "4d864a55d2ed6ea23e72b52784914fca21a3a299a51e65aebfeb6198afacaf46",
+      "source_sha256": "d516ee97d20ab9dbf6cb0ae1d88a181367830752097bbaab4c4a48fd9c024830",
+      "functions": [
+        {
+          "name": "func_001ce8b8",
+          "address": 1894584,
+          "size": 60,
+          "candidate_size": 60,
+          "status": "match",
+          "first_diff": null,
+          "linker_rewrites": []
+        }
+      ]
+    }
+  ],
+  "run_log": "scratch/integrator/c010/native-animation-reentry-r1/exits.jsonl",
+  "run_log_sha256": "a1e01da2563b861879c4be13cc5fe47474188f9916cf20449b11dff028971e5a",
+  "destination": {
+    "source": "src/checkpoint10/func_001ce8b8.cpp",
+    "source_sha256": "d516ee97d20ab9dbf6cb0ae1d88a181367830752097bbaab4c4a48fd9c024830",
+    "receipt": "scratch/integrator/c010/native-animation-reentry-r1/destination/func_001ce8b8.result.json",
+    "receipt_sha256": "4d864a55d2ed6ea23e72b52784914fca21a3a299a51e65aebfeb6198afacaf46",
+    "object_sha256": "648c372131178d4964120b21704be67515705e24e2b75652fb199918c3574624",
+    "functions": [
+      {
+        "name": "func_001ce8b8",
+        "address": 1894584,
+        "size": 60,
+        "candidate_size": 60,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": []
+      }
+    ],
+    "collection_result": "scratch/integrator/c010/native-animation-reentry-r1/collected.json",
+    "collection_result_sha256": "45a9cc1fff2b2d9f8ff8965ce552d605969905885bc9e0e986c97f2de140043d",
+    "author_result": "scratch/integrator/c010/native-animation-reentry-r1/RESULT.json",
+    "author_result_sha256": "364073c31cb34e92b8823fbe5969b1e8e0a632e5185c618d6babb1edbe34ef83"
+  },
+  "candidate_delta": {
+    "manifest": "config/candidates/c010.json",
+    "before_sha256": "b159999ba9360bc4a2a6ab799d842fc3c6a1edf4aa54c1312d8f485384bfc809",
+    "after_sha256": "2f1aaabd9e6eda02997e8be195a65281aaa4de1756fa1b765cb512379d5d5c6b",
+    "prior_units": 497,
+    "prior_claims": 510,
+    "prior_new_functions": 500,
+    "added_units": 1,
+    "added_functions": [
+      "func_001ce8b8"
+    ],
+    "added_target_bytes": 60,
+    "all_prior_rows_and_ten_moves_preserved_verbatim": true,
+    "new_accepted_moves": [],
+    "qualification": "Surgical singleton append only; no whole-ledger ownership audit or acceptance claim."
+  },
+  "counts_metadata_only": {
+    "candidate_units": 498,
+    "candidate_claims": 511,
+    "new_functions": 501,
+    "new_target_bytes": 47420,
+    "accepted_moves": 10,
+    "moved_target_bytes": 240,
+    "new_deferred_units": 47,
+    "new_deferred_functions": 49,
+    "new_deferred_target_bytes": 9136
+  },
+  "deferrals": {
+    "current": "scratch/integrator/c010/NEW-DEFERRALS-native-animation-r1.json",
+    "current_sha256": "344ee699b6e6c70f9dbfc0c33a6a88c021f8c138f284c9b4e23fcbf845995352",
+    "parent": "scratch/integrator/c010/NEW-DEFERRALS-native-links-r1.json",
+    "parent_sha256": "9f271d5ce28423a09da7f55d28c2d674cbd75b4ca4a5d4ff1b3b3335fc86546b",
+    "resolved_only": [
+      "func_001ce8b8"
+    ],
+    "all_other_rows_unchanged": true
+  },
+  "inherited_prerequisites": {
+    "native_links_contract": "scratch/integrator/c010/NATIVE-LINKS-CONTRACT-r1.json",
+    "native_links_witnesses": "scratch/integrator/c010/NATIVE-LINKS-WITNESSES-r1.json",
+    "native_links_parent_import": "scratch/integrator/c010/NATIVE-LINKS-IMPORT-r70.json",
+    "archive": {
+      "commit": "1947019",
+      "origin_commit": "f5c402ae65b6464fb4bbac6d8975d224a025bc56",
+      "receipt": "scratch/integrator/c010/PARENT-ARCHIVE-IMPORT-r69.json",
+      "wrapper_match_bytes": 32,
+      "terminal_match_bytes": 112,
+      "child_credit_imported": false,
+      "qualification": "Only the two source/header files were imported; global source/header/ledger inventories remain stale until complete predecessor reconciliation."
+    },
+    "predecessor": "Main imports only after the currently frozen c009-r3 closure; no predecessor source or catalogue review input is edited here.",
+    "other_dependencies": [
+      {
+        "owner": "FixC009R3Codex/Main",
+        "status": "not frozen/imported here",
+        "subjects": [
+          "scheduler callback result protocol and typed C mandatory-discard procedure definitions",
+          "typed erased registration helpers and source/helper hash closure",
+          "156da0 void*(void*) vector entry",
+          "14de8c native RuntimeMember constructor and actual callers"
+        ],
+        "constraint": "Do not force uniformint, erase real results, fabricate returns or import unfinished predecessor patches. Re-enter deferred10239c/13db40 only with the frozen coherent protocol."
+      },
+      {
+        "owner": "C011Codex/Main",
+        "status": "reserved, not released",
+        "subjects": [
+          "001c7760/001c7fa0 native pair identity and return ABI",
+          "001c8a40 dependent native mapper call"
+        ],
+        "sources": [
+          "src/checkpoint10/func_001c7760.cpp",
+          "src/checkpoint10/func_001c8a40.cpp"
+        ],
+        "constraint": "Exact source bytes retained but neither identity is proposed for C010 credit; no new pair cutover authorized. Refresh future proposed move/addition metadata without changing accepted history.",
+        "snapshot_note": {
+          "current_c010_sha256": "6ca3a01c9ac026963a558b0fcd1c3954005dae48c8e49366d793b9f816a5b83c",
+          "peer_reported_c011_sha256": "6035021e9ca99d3ce6a3ecb8edfd63919c36916b629b41e649621b1c814fddde",
+          "peer_worktree_not_rechecked": true,
+          "claim": "These are distinct preserved snapshots, not byte-identical across worktrees and not a release/re-entry authorization."
+        }
+      },
+      {
+        "owner": "Main final manual review",
+        "status": "unexercised",
+        "subjects": [
+          "all original virtual/callback slot results and supplied inputs",
+          "data_002429f8 actual interior release-slot consumer closure",
+          "accepted/native1d4174 loader/archive nominal fork remains explicit, not cured by deferred new callers",
+          "191e18 parent6-argument AppletTimeout-by-value versus child private5-argument lead",
+          "all source/header R1 and L1 dependencies and emitted unique ownership"
+        ],
+        "constraint": "Per-unit bytes, structural ownership projection and absence of a warning are not typed-contract proofs."
+      }
+    ]
+  },
+  "unchanged_inputs": {
+    "config/matches.json": "e7af84243d2315512084ff76699230d0dc21155e8b3c699c535edcf5793d4fc4",
+    "config/names.json": "7135766b164c571dd6963e67652cccc026c407fa7db8386ee90e29c4f54eabde",
+    "config/compiler_profiles.json": "2abe5d865287a6365fc06898f9dd8de3e5c49498c6d638c9d32e9653da0aea65",
+    "include/preinclude.h": "7e97b53a88d2fa4dadae21dcd1f5ba29c37e5154172e811b4402328f3ba0ac10",
+    "include/game/layout.h": "c81cebe06a5d9ede6227bca2ce106100ef1e2ab77a2d419ed645d295cb9bbd6d",
+    "include/nw/lyt/lyt_Animation.h": "2176e3414fa3eb127bbf3c4ee35f3c4d01036557af02d7e27103ac39ebf7cad4",
+    "include/nw/lyt/lyt_Layout.h": "12de636076ba10d03a3b416908d240a4c67cfa61007478a710a43f3c701b4dcb",
+    "src/checkpoint10/collect-r2/func_001ce8f4.cpp": "6727a873b4dc63036e2167eef12b37872dfdc08171f7742058c3f9b80ae2ff7f",
+    "src/checkpoint10/collect-r2/func_001cff58.cpp": "848d2d6edd583a78d47d08544bf45c9000114c878c2dfeed3773b94e529a2ab4",
+    "src/wave8/func_001cfd94.cpp": "cf2149bd9058d897e83e5c976e4a92530511e2350d4f61e80c2a1c66e9bcafb4",
+    "src/wave8/func_001cfdac.cpp": "1117436fcedf4016d46d2acb8c100db482a9c550e213748a333a84e51dc8faeb",
+    "src/wave8/func_001cff50.cpp": "ff941e91543d1f0c8fdfb23906318301cff3668e12f3b4f9ec580cb6c4230442"
+  },
+  "environment_observations": [
+    {
+      "phase": "in-memory retained-object inspection",
+      "failure": "Initial eval interpreter lacked capstone (ModuleNotFoundError).",
+      "resolution": "Loaded the existing shared project virtualenv packages; no install, source change or match failure was hidden."
+    }
+  ],
+  "previous_handoff": {
+    "path": "scratch/integrator/c010/HANDOFF.json",
+    "base_commit": "30b1017f941b9ba01b067dcdbd18d5f7c32674b4",
+    "sha256": "0c8d8dbb11d5dcec971401178d84aaf9c5036b02141c478d4249ff5161a00071",
+    "preserved_in_base": true
+  },
+  "verification_boundary": "Five sequential trial match.py --show0 invocations (four real exit1 mismatches and one exit0 MATCH), successful destination collect, then one destination match.py --show0 exit0 MATCH. Models explicitly v6/L1 and profile game throughout. No builds, tests, whole-ledger audits, interfaces, argcheck, generation, prepare, reviews, finalize, verify or parent writes."
+}

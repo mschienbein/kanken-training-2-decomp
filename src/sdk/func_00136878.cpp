@@ -1,6 +1,6 @@
 #include "ctr/ipc.h"
 
-extern "C" CtrResult func_00136878(const CtrHandle *session, unsigned char mode)
+extern "C" CtrResult func_00136878(const CtrHandle *session, signed char mode)
 {
     union ByteCommandWord *command = (union ByteCommandWord *)(ctrGetThreadLocalStorage() + 0x80);
     CtrResult result;

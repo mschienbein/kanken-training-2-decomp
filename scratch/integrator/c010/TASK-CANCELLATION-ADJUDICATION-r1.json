@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "canonical-input-contract-and-touched-matches-resolved-not-whole-audit",
+  "original_facts": "owner-cutover/task-facts-r2.json",
+  "historical_incomplete_analysis": "owner-cutover/task-facts-r1.json",
+  "decision": {
+    "func_001d32e0": "void(AudioTaskManager*,unsigned id)",
+    "func_001d32e4": "void(AudioTaskManager*,unsigned id)",
+    "func_001d6b24": "void(unsigned id)",
+    "func_001d6678": "void(unsigned id)"
+  },
+  "proof": [
+    "Original001d32e4 compares the unchanged r1 word against a word read at node+0x14 and does not dereference r1.",
+    "Pinned snd_Task.h declares u32 m_Id; snd_TaskManager.h distinguishes CancelTask(Task*) from CancelTaskById(u32). The original loop matches the ID-consumer contract, not a RegistryEntry or Task pointer receiver.",
+    "Both24B wrappers preserve their original entry r0 as the full-word ID forwarded to001d32e0 after obtaining the manager.",
+    "Caller001d3230 uses the actual embedded address as a 32-bit ID on the pinned ARM ABI; opaque storage at+0x2314 does not assert the unknown member is RegistryEntry or Task. Caller001d7e6c forwards its loaded full word, now named task_id instead of a fictitious RegistryEntry*."
+  ],
+  "source_migrations": {
+    "SequencePoolSound": "include/game/sound_runtime.h",
+    "SoundOperation_and_entries": "include/game/audio_voice.h",
+    "all_four_cancellation_declarations": "include/game/audio_tasks.h",
+    "unrelated_voice_group_pointer": "SoundOperationEntry.group now uses the actual AudioVoiceGroup receiver of accepted001835b8"
+  },
+  "matches": {
+    "first_pass": "task-svc-match-r1/results.json",
+    "first_pass_exits": {
+      "0": 5,
+      "2": 1
+    },
+    "historical_byte_active_mismatch": "task-svc-match-r2/results.json",
+    "final_sequence_caller": "task-svc-match-r3/results.json",
+    "final_task_functions_match": 5,
+    "svc_caller_match": true
+  },
+  "qualifications": [
+    "The pointer-to-ID conversion records a real address-token protocol, not a pointer-as-task shim; no fake class identity, common complete task object or function alias is introduced.",
+    "Retained bool field/accessors have original-source and pinned native bool lifecycle evidence. Replacing it with an unsigned byte changed output; the actual mismatch is preserved, not hidden.",
+    "New C flexible-tail SoundOperation follows existing project #ifndef __cplusplus convention; the failed first C++ exposure and edit-gap incident remain recorded.",
+    "Original task class identity, uncatalogued producers/indirect consumers and whole-ledger argcheck remain unresolved; no all-producer proof is claimed."
+  ]
+}

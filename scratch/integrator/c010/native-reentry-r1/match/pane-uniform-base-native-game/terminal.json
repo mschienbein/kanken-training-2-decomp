@@ -1,0 +1,26 @@
+{
+  "source": "scratch/integrator/c010/native-reentry-r1/src/pane_uniform_base.cpp",
+  "source_sha256": "46d10f5378a1cddff74b9247b8969c455ef9782120b6dfd48f50efed379e39f8",
+  "profile": "game",
+  "exit_code": 0,
+  "command": [
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "scratch/integrator/c010/native-reentry-r1/src/pane_uniform_base.cpp",
+    "--profile",
+    "game",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--show",
+    "0",
+    "--out",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/match/pane-uniform-base-native-game",
+    "--names",
+    "scratch/integrator/c010/native-reentry-r1/pane-uniform-names-proposed.json"
+  ],
+  "stdout": "note: proposed names overlay scratch/integrator/c010/native-reentry-r1/pane-uniform-names-proposed.json (not config/names.json); a MATCH here needs those bindings adopted\nMATCH    _ZNK2nw3lyt4Pane19MakeUniformDataSelfEPhP14LayoutDrawInfoP19LayoutRenderContext @ 0x1f01b0 size 0x8/0x8\n",
+  "stderr": "",
+  "label": "pane-uniform-base-native-game"
+}

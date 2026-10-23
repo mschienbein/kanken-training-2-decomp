@@ -13,7 +13,7 @@ struct GlyphRenderBuffer {
     float parameter;
 };
 
-extern void func_00141560(unsigned mode, float value);
+#include "game/command_buffer.h"
 
 void func_00141554(struct GlyphRenderBuffer *buffer, float value)
 {

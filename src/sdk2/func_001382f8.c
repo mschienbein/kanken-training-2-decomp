@@ -6,7 +6,7 @@ struct IpcByteResponse {
     unsigned char value;
 };
 
-extern CtrHandle data_0024376c;
+
 
 CtrResult func_001382f8(unsigned char *out)
 {
@@ -16,7 +16,7 @@ CtrResult func_001382f8(unsigned char *out)
     int failure;
 
     command->header = ctrIpcHeader(60u, 0u, 0u);
-    result = svcSendSyncRequest(data_0024376c);
+    result = svcSendSyncRequest(data_0024376c.handle);
     failure = ctrIpcTransportFailure(result);
     if (failure >= 0) {
         *out = command->value;

@@ -20,3 +20,4 @@ typedef float GLclampf;
 typedef int GLfixed;
 #include "gl2legacyconstants.h"
 #include "gl2constants.h"
+#include "gl2dmpconstants.h"

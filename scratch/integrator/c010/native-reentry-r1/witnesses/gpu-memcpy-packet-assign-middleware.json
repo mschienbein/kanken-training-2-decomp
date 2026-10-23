@@ -1,0 +1,16 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/gpu-memcpy-packet-assign-middleware/gpu_memcpy_packet_assign.result.json",
+  "private_receipt_sha256": "444bd7b5a45488a256c9626dd097fba355839459bbafc9dfb124c372d2c1fd1d",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/gpu_memcpy_packet_assign.c",
+    "profile": "middleware",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "status": "refused",
+    "reason": "unresolved symbol '__ARM_common_memcpy4_8' (not in config/names.json, not func_/data_/bss_XXXXXXXX)",
+    "error_type": "LinkError",
+    "functions": []
+  }
+}

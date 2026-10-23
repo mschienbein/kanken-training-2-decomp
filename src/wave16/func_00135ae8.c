@@ -2,7 +2,6 @@
 #include "game/scheduler.h"
 
 
-extern int func_0013db40(void);
 
 
 /* C-only procedure callback: every caller discards its value (C11 6.9.1p12).

@@ -4,6 +4,7 @@
 struct FontInformation;
 struct FontResource;
 struct FontVTable;
+struct W12cGlyphMetrics;
 
 struct FontFile {
     unsigned signature;
@@ -47,12 +48,19 @@ struct FontResource {
     struct FontInformation *information;
     struct FontTexture *textures;
     unsigned flags;
-    unsigned short reserved14, reserved16;
+    /* Original lookup mutates these two cache halfwords through const font
+     * interfaces. They are not an appended decoder/cache subclass. */
+#ifdef __cplusplus
+    mutable unsigned short cached_code, cached_index;
+#else
+    unsigned short cached_code, cached_index;
+#endif
 };
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+extern unsigned func_0019d8c4(const struct FontFile *file);
 extern int func_001149c0(const struct FontFile *file, unsigned signature,
                           unsigned version, unsigned minimum_blocks);
 extern struct FontFile *func_0013ea40(struct FontResource *font);
@@ -68,4 +76,11 @@ extern void *func_0019d9d8(struct FontResource *font, void *textureSheets);
  * Its concrete table providers have distinct receiver/result contracts; no
  * callable members are exposed before the coordinated font-family recovery. */
 
+
+/* Serialized three-byte width data does not complete the opaque FontVTable. */
+struct GlyphWidths {
+    signed char left;
+    unsigned char glyph_width;
+    signed char advance;
+};
 #endif

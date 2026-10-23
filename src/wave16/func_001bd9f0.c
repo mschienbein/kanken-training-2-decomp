@@ -1,14 +1,8 @@
-struct DispatchStateB {
-    unsigned char reserved00[0x90];
-    int mode;
-};
+#include "game/selection.h"
 
-extern void func_001bdb70(struct DispatchStateB *state);
-extern void func_001bda14(struct DispatchStateB *state);
-
-void func_001bd9f0(struct DispatchStateB *state)
+void func_001bd9f0(struct W6SelectionReset *state)
 {
-    switch (state->mode) {
+    switch (state->stack_index) {
     case 0:
         func_001bda14(state);
         break;

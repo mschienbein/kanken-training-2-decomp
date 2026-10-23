@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/owner-cutover/task-svc-scope-r2.json",
+  "scope_sha256": "9902befc97a845e803ace910e54f2ebaced484e51cd1e0a3c3c7da53ff65cae7",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  },
+  "expected_units": 1,
+  "completed_units": 1,
+  "paused": false,
+  "match_units": 1,
+  "exit_counts": {
+    "0": 1
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_001d3230.cpp",
+      "profile": "sdk",
+      "functions": [
+        "func_001d3230"
+      ],
+      "author": "r41273",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001d3230.cpp",
+        "--profile",
+        "sdk",
+        "--linker-model",
+        "armlink5-inline-branchnop-v2",
+        "--literal-model",
+        "none",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/task-svc-match-r3/checkpoint10/func_001d3230"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001d3230 @ 0x1d3230 size 0x70/0x70\n",
+      "receipt": "scratch/integrator/c010/task-svc-match-r3/checkpoint10/func_001d3230/func_001d3230.result.json",
+      "source_sha256": "86076b9934a5475904b97e6f29fa3aa648da1a846b7ea2f686cbbd283179a0f8"
+    }
+  ]
+}

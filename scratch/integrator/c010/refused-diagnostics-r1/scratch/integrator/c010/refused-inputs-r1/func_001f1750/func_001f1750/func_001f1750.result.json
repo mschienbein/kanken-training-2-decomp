@@ -1,0 +1,10 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001f1750/func_001f1750.cpp",
+ "profile": "middleware",
+ "linker_model": "armlink5-inline-branchnop-v2",
+ "literal_model": "none",
+ "status": "refused",
+ "reason": "armcc failed (1) on func_001f1750.cpp:\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001f1750/func_001f1750.cpp\", line 5: Error:  #256: invalid redeclaration of type name \"SoundArchiveAddonVTable\" (declared at line 284 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/archive.h\")\n  struct SoundArchiveAddonVTable {\n         ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001f1750/func_001f1750.cpp\", line 12: Error:  #256: invalid redeclaration of type name \"SoundArchiveAddon\" (declared at line 296 of \"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/include/game/archive.h\")\n  struct SoundArchiveAddon {\n         ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001f1750/func_001f1750.cpp\", line 29: Error:  #167: argument of type \"SoundArchiveAddon *\" is incompatible with parameter of type \"SoundArchiveAddon *\"\n          return addon->vtable->read_stream(addon, sound_id, output);\n                                            ^\n\"/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001f1750/func_001f1750.cpp\", line 37: Error:  #144: a value of type \"SoundArchiveAddon *\" cannot be used to initialize an entity of type \"SoundArchiveAddon *\"\n      SoundArchiveAddon *addon = archive->addon;\n                                 ^\n/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/scratch/integrator/c010/refused-inputs-r1/func_001f1750/func_001f1750.cpp: 0 warnings, 4 errors\n",
+ "error_type": "ToolchainError",
+ "functions": []
+}

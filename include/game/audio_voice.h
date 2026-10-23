@@ -1,6 +1,7 @@
 #ifndef GAME_AUDIO_VOICE_H
 #define GAME_AUDIO_VOICE_H
 
+struct ObjectPool;
 struct AnimationTrack;
 struct AudioBiquadCoefficients;
 struct HandleManager;
@@ -9,16 +10,12 @@ struct AudioFadeController;
 struct AudioLinearRamp;
 struct AudioSlotBufferDescriptor001d9580;
 struct AudioVoiceOwner001d9580;
-struct ByteCursor001db068;
-struct ConfigState001719f4;
-struct ConfigTarget001719f4;
 struct FloatState001d4ad4;
 struct FloatState001d4b70;
 struct FloatState001d4cec;
 struct FloatState001d51b8;
 struct FloatState001d5284;
 struct FloatState001d5404;
-struct HalfwordCursor001db054;
 struct PackedPointer001f15fc;
 struct PoolLink;
 struct ResetState001d4850;
@@ -66,7 +63,7 @@ struct AudioChannelState {
     float value24;
     unsigned char reserved28[4];
     unsigned int value2c;
-    unsigned int value30;
+    struct AudioSlot *pending;
     unsigned short value34;
     unsigned short value36;
     float value38;
@@ -75,7 +72,7 @@ struct AudioChannelState {
     float value68;
     unsigned short flags;
     unsigned char flag6e;
-    unsigned char flag6f;
+    unsigned char dirty;
     struct StreamMutex mutex;
     struct AdpcmCoefficients coefficients;
 };
@@ -91,7 +88,8 @@ struct AudioChannel {
     unsigned char reserved16[2];
     int extent;
     float volume;
-    unsigned char reserved20[0x44];
+    int priority;
+    unsigned char reserved24[0x40];
     float gain;
     struct AudioChannelState *state;
 };
@@ -128,6 +126,27 @@ struct AudioVoiceGroup {
     unsigned char format;
     unsigned char reserved51[7];
     struct PoolLink link;
+};
+
+/* [INFERENCE] Observed operation/entry prefixes; task_id is the full word
+ * passed to cancellation, not an invented RegistryEntry pointer contract. */
+struct SoundOperationEntry {
+    unsigned char reserved00[8];
+    struct AudioVoiceGroup *group;
+    unsigned char reserved0c[0x3c8 - 0x0c];
+};
+struct SoundOperation {
+    unsigned char reserved00[0x0d];
+    unsigned char registered;
+    unsigned char reserved0e[0x44 - 0x0e];
+    struct RegistryEntry entry;
+    unsigned char reserved50[0x10];
+    unsigned task_id;
+    unsigned char reserved64[0x220 - 0x64];
+    unsigned count;
+#ifndef __cplusplus
+    struct SoundOperationEntry entries[];
+#endif
 };
 
 struct AudioEnvelope {
@@ -206,6 +225,7 @@ struct AudioVoice {
     void *callback_data;
     struct AudioVoiceGroup *group;
     struct AudioVoice *next;
+    struct PoolLink link;
 };
 
 struct AudioControlBase {
@@ -253,11 +273,22 @@ struct TaskPool;
 extern "C" {
 #endif
 extern void func_00156398(struct AudioChannel *channel, struct RecordState *record);
+extern void func_001d7e6c(struct SoundOperation *operation);
+/* [INFERENCE] Factory channel/priority words and callback/context are distinct
+ * from the lower AudioVoiceGroup allocator's callback. The context remains a
+ * pointer because the original delivered callback dereferences it. */
+extern struct AudioVoice *func_001d5528(struct ObjectPool *pool);
+extern struct AudioVoice *func_001d9198(int channels, int priority,
+    void (*callback)(struct AudioVoice *, int, void *), void *context);
+extern void func_001d96e8(struct AudioVoice *voice,
+    void (*callback)(struct AudioVoice *, int, void *), void *context);
 extern void func_0017da08(struct AudioVoiceGroup *group, int index,
                           struct RecordState *record, int remember);
 extern struct AudioVoice *func_001d89ac(struct AudioTrackControl *parent,
     unsigned char index, const struct AudioVoiceStartArgs *arguments);
 extern void func_0014e20c(struct AudioChannelState *state);
+extern void func_0014e218(struct AudioChannelState *state);
+extern unsigned func_001efcd8(const struct AudioChannelState *state);
 extern void func_001545ec(struct AudioChannel *channel, int mode);
 extern void func_001545f4(struct AudioChannelState *state, int mode);
 extern void func_00154608(struct AudioChannel *channel, unsigned int value);
@@ -271,6 +302,8 @@ extern void func_001563a0(struct AudioChannelState *state, struct RecordState *r
 extern void func_001c5994(struct AudioChannel *channel, const struct AudioSlot *slot);
 extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *slot);
 extern void func_001d49e8(struct AudioVoiceGroup *group, int index, const struct AudioSlot *slot);
+extern const unsigned short data_0021dfcc[];
+extern unsigned func_0014fe14(float value);
 #ifdef __cplusplus
 }
 #endif
@@ -296,15 +329,6 @@ struct SequenceEnabledState {
 };
 
 
-struct ConfigState001719f4 {
-    unsigned char kind;
-    unsigned char complex_format;
-    unsigned char option;
-    unsigned char reserved03;
-    int index;
-    unsigned char reserved08[0x10];
-    struct ConfigTarget001719f4 *target;
-};
 
 struct ResourceState001d0164 {
     const void *vtable;
@@ -357,13 +381,6 @@ struct AudioSlotBufferDescriptor001d9580 {
     unsigned char reserved12[6];
 };
 
-struct HalfwordCursor001db054 {
-    const unsigned short *current;
-};
-
-struct ByteCursor001db068 {
-    const unsigned char *current;
-};
 
 struct PackedPointer001f15fc {
     unsigned char reserved00[0x2c];
@@ -410,8 +427,6 @@ extern void func_00145da8(struct StreamCriticalSection *critical);
 extern void func_00145d3c(struct StreamCriticalSection *critical);
 extern void func_00183900(struct StreamQueue *queue, struct StreamEvent *event);
 extern int func_001dc390(int format);
-extern void func_00171a34(struct ConfigTarget001719f4 *target, unsigned char option,
-                          int index, unsigned flags);
 extern unsigned char func_001f2f2c(const struct AudioVoiceGroup *group);
 extern unsigned func_001d4864(unsigned samples, int format);
 extern void func_001835b8(struct AudioVoiceGroup *group);
@@ -442,9 +457,18 @@ extern int func_0014891c(struct ServiceCoordinator *context, unsigned int value)
 extern int func_00148988(struct ServiceCoordinator *context, unsigned int value);
 extern void func_001489e8(struct ServiceCoordinator *context, unsigned int value);
 extern void func_001526e0(struct AudioChannelState *state, int mode);
+extern void func_0014fc98(struct AudioChannelState *state);
+extern void func_001526b4(struct AudioChannel *channel, int mode);
+extern void func_00155dec(struct AudioChannel *channel, int priority);
+extern void func_00156484(struct HandleManager *manager,
+                        struct AudioChannel *channel, int priority);
+extern void func_001500bc(struct AudioVoiceGroup *group, int type, float factor);
+extern void func_001c599c(struct AudioChannelState *state, const struct AudioSlot *notification);
+/* [INFERENCE] The update consumes the same factory/callback AudioVoice receiver;
+ * pinned Channel::Update(bool) corroborates, but does not recover its native name. */
+extern void func_0014f304(struct AudioVoice *voice, bool update);
+extern void func_0014d308(struct ObjectPool *pool);
 extern unsigned int func_00155d24(unsigned int bits);
-extern void func_001719f4(struct ConfigState001719f4 *state, unsigned char kind, int format,
-                  unsigned char option, int index, unsigned flags);
 extern void func_001d4ad4(struct FloatState001d4ad4 *state, float value);
 extern void func_001d4b70(struct FloatState001d4b70 *state, float value);
 extern void func_001d4cec(struct FloatState001d4cec *state, float value);
@@ -453,8 +477,6 @@ extern void func_001d5284(struct FloatState001d5284 *state, float value);
 extern void func_001d5404(struct FloatState001d5404 *state, float value);
 extern void func_001d9580(struct AudioVoiceOwner001d9580 *owner,
                              const unsigned char *first, const unsigned char *last);
-extern unsigned short func_001db054(struct HalfwordCursor001db054 *cursor);
-extern unsigned char func_001db068(struct ByteCursor001db068 *cursor);
 extern void *func_001f15fc(const struct PackedPointer001f15fc *state);
 extern unsigned func_001f2ef8(const struct AudioVoiceGroup *group);
 extern void func_001d4adc(struct AudioFadeController *controller, bool muted,

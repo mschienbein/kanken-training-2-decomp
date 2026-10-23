@@ -18,12 +18,46 @@ struct SoundFileGroup;
 struct StreamMutex;
 struct WorkQueue;
 struct X07NarrowCommand;
+struct MountedDevice;
 
+#include <stdbool.h>
 #include "ctr/svc.h"
 #include "game/pool_list.h"
 #include "game/service_callbacks.h"
 #include "game/service_runtime.h"
 #include "game/shared_memory.h"
+
+/* The activity flags, client handle (+0x10), and interval (+0x18) belong
+ * to the same published service state at 0x00242c18. */
+struct ServiceClientState {
+    bool active;
+    bool latched;
+    unsigned char reserved02[6];
+    struct MountedDevice *current;
+    volatile unsigned guard;
+    unsigned handle;
+    unsigned reserved14;
+    long long interval;
+};
+struct ServiceStringCounts {
+    int single_count;
+    int group_count;
+};
+
+struct RequestRecord {
+    unsigned kind;
+    unsigned flags;
+    unsigned short count;
+    unsigned short length;
+    unsigned short text[0x76c];
+    unsigned char flag_ee4;
+    unsigned char flag_ee5;
+    unsigned char flag_ee6;
+    unsigned char auxiliary[0x89];
+    int handle;
+    unsigned short status;
+    unsigned char reservedf76[10];
+};
 
 /* Partial state at 0x00242a50. The signed flag is read by func_00195e84;
  * the status word at 0x18 is shared by the service-state predicates. */
@@ -53,7 +87,7 @@ struct AppletStartupState {
     unsigned char requested;
     unsigned char reserved02[2];
     unsigned reasons;
-    union SynchronizationStorage event;
+    struct SignalState event;
 };
 
 struct PendingState {
@@ -61,7 +95,8 @@ struct PendingState {
     unsigned char pending;
     signed char blocking;
     unsigned char graphics_active;
-    unsigned char reserved04[4];
+    unsigned char completion;
+    unsigned char reserved05[3];
     struct ServiceWaitObject *wait_object;
 };
 
@@ -72,11 +107,16 @@ struct ServiceContext;
 extern "C" {
 #endif
 extern struct ServiceState data_00242a50;
+extern struct ServiceClientState data_00242c18;
+extern struct ServiceStringCounts data_002430e4;
+extern void func_0010b5cc(void *context);
 extern struct ServiceContext data_002430e0;
 extern struct PendingState data_00242a28;
 extern int func_001927a8(void);
 extern int func_00192c10(void);
 extern void func_00115040(unsigned char mode);
+extern void func_00192458(unsigned value);
+extern void func_0019051c(struct RequestRecord *record);
 extern unsigned char func_00122af0(void);
 extern void func_00122fe8(unsigned char value);
 extern void func_00122ff8(void);
@@ -95,6 +135,8 @@ extern void func_00192400(unsigned option);
 extern void func_00192484(unsigned char value);
 extern unsigned func_00192794(void);
 extern int func_00195e84(void);
+extern void func_00185f70(int enabled);
+extern void func_0018ef74(void);
 #ifdef __cplusplus
 }
 #endif
@@ -237,7 +279,6 @@ extern void func_001233c0(ServicePollCallback callback, void *context);
 extern unsigned data_00243030;
 extern struct ServicePollRegistration data_00243008;
 extern CtrHandle data_00242ff8;
-extern CtrHandle data_00243040;
 extern struct LifecycleCallbackTables bss_0049eee4;
 extern unsigned short data_00243124;
 extern void (*bss_004b51e8[16])(void *value);

@@ -1,9 +1,6 @@
 #include "game/functions.h"
 
-struct RegisteredObject {
-    unsigned char reserved[0x88];
-    struct RegistryEntry entry;
-};
+#include "game/object_pool.h"
 
 struct RegisteredObject *func_0014d784(struct RegisteredObject *object)
 {

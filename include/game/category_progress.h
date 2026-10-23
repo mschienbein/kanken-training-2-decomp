@@ -8,7 +8,9 @@
 #include "game/deferred_callback.h"
 #include "game/screen_operations.h"
 
-struct L044TrainingFrame;
+struct L044TrainingFrame {
+    struct WidgetSlot *slots[17];
+};
 struct L044StatisticsPanel;
 struct L044ProgressPanel;
 struct CategoryScreen {
@@ -65,6 +67,7 @@ extern "C" {
 #endif
 extern void func_00166ae8(struct CategoryScreen *screen, int state, int transition);
 extern void func_001c144c(struct L044TrainingFrame *frame);
+extern void func_0016bf90(struct L044TrainingFrame *frame, int index, int kind);
 extern void func_00170298(struct L044ProgressPanel *panel);
 extern void func_001ae2e4(struct L044StatisticsPanel *panel);
 extern void func_001ec1b8(struct CategoryScreen *screen, int reset);

@@ -7,8 +7,8 @@
 Result func_00148014(uint16_t flags)
 {
     Result result(0xc8a0a7f8u);
-    const struct ServiceHandle *session = data_00242afc.initialized;
+    const CtrHandle *session = data_00242afc.session;
     if (session)
-        result = func_0014aed0(&session->handle, flags);
+        result = func_0014aed0(session, flags);
     return result;
 }

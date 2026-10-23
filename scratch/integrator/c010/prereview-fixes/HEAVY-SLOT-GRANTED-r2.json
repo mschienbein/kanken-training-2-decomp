@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "granted": true,
+  "granted_by": "Main",
+  "grantee": "C010G3UnifyCodex",
+  "granted_utc": "2026-10-20T23:37:00Z",
+  "request": "scratch/integrator/c010/prereview-fixes/HEAVY-SLOT-REQUEST-r2.json",
+  "class": "non-exclusive strictly sequential bounded reproof (single matcher process at a time, nice -n 10)",
+  "scope": "Exactly the 614-unit cohort in affected-header-scope-r2.json at frozen source e4c5c74b, v6/L1, --show 0. It may overlap the current exclusive job because it is single-process and niced; no whole-ledger interfaces, builds, suites or parallel matcher fan-out.",
+  "release_marker": "scratch/integrator/c010/prereview-fixes/HEAVY-SLOT-RELEASED-r2.json",
+  "release_rule": "Write the release marker atomically with \"released\": true, the aggregate exit, per-unit exit counts and result paths when the cohort finishes."
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+      "tools/match.py",
+      "src/checkpoint10/func_00216670.cpp",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--show",
+      "0",
+      "--out",
+      "scratch/integrator/c010/g3-unify/writer-r1"
+    ],
+    "exit_code": 1,
+    "source_sha256": "6d4fbd7ca22d0055eb999f92113aa75d856aa9da0812d2fb98bd29ee2b23af26",
+    "receipt": "scratch/integrator/c010/g3-unify/writer-r1/func_00216670.result.json",
+    "receipt_sha256": "a44bc06a31550a6d4f60f4b460d3955873b5fb83ccacb2259c0bcfe4c15b9219",
+    "explanation": "Implicit native C++ copy chose __aeabi_memcpy4 and separate cursor stores; retained failed attempt."
+  },
+  {
+    "command": [
+      "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/.venv/bin/python",
+      "tools/match.py",
+      "src/checkpoint10/func_00216670.c",
+      "--profile",
+      "game",
+      "--linker-model",
+      "armlink5-inline-branchnop-v6",
+      "--literal-model",
+      "anonymous-string-records-v1",
+      "--show",
+      "0",
+      "--out",
+      "scratch/integrator/c010/g3-unify/writer-r2"
+    ],
+    "exit_code": 0,
+    "source_sha256": "55f4ac6daa3687044e44cc0a82a3ac6ada86d861e7ddec4c58746cedb318213f",
+    "receipt": "scratch/integrator/c010/g3-unify/writer-r2/func_00216670.result.json",
+    "receipt_sha256": "71a2955f9b7d5c21c57f5d20c3426f36f75ce7946bcef78780a487a3cb5207fa",
+    "explanation": "Real common-prefix C representation preserves the explicit copy helper and aggregate cursor copy; MATCH 92/92."
+  }
+]

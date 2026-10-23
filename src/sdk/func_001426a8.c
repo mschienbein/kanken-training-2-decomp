@@ -2,7 +2,6 @@
 #include "ctr/cp15.h"
 #include "ctr/svc.h"
 
-extern CtrHandle data_002430d8;
 
 CtrResult func_001426a8(const void *buffer, unsigned int size)
 {
@@ -16,7 +15,7 @@ CtrResult func_001426a8(const void *buffer, unsigned int size)
     command[1] = size;
     command[3] = (unsigned int)buffer;
     __schedule_barrier();
-    session = &data_002430d8;
+    session = &data_002430d8.handle;
     size = descriptor | (size << 14);
     __schedule_barrier();
     size |= 2;

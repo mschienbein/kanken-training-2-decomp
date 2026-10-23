@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "status": "All actual earlier r6 commands retained; final current complete proof is separate",
+  "native_symbol_compile": {
+    "path": "scratch/integrator/c010/r6/native-arc-r1/command.json",
+    "sha256": "1a6efe73ac1a1285f8607c1a5b197c9ea0495be62a28c59ad62707712fb39d0c",
+    "exit": 0
+  },
+  "runs": [
+    {
+      "run": "match-r6-focused-r1",
+      "outer_exit": 1,
+      "expected_units": 28,
+      "completed_units": 28,
+      "MATCH_units": 23,
+      "per_unit_exit_counts": {
+        "0": 23,
+        "1": 3,
+        "2": 2
+      },
+      "results": "scratch/integrator/c010/match-r6-focused-r1/results.json",
+      "results_sha256": "f9cfad75a01f79c0ea9cb33e244a30b9ee4f34fa9ed8ca1d7acbb1509d339530",
+      "scope": "scratch/integrator/c010/r6/focused-scope-r1.json",
+      "scope_sha256": "eb0727361100c09f1fa058f57b4a091460168e49ad1cbb749c9ab076618083a1",
+      "nonzero_rows": [
+        {
+          "source": "src/checkpoint10/func_001312d4.cpp",
+          "source_sha256": "8a77a18cc8475503b070cc204527f46acc0e368679b9baea507835c53526eeed",
+          "exit": 1,
+          "output": "MISMATCH func_001312d4 @ 0x1312d4 size 0x30/0x30 first difference at +0x18\n",
+          "receipt": "scratch/integrator/c010/match-r6-focused-r1/u0009/func_001312d4.result.json",
+          "receipt_sha256": "1d7ca45c8ffb4fdb607e166177fbd0bf9501f705a6f2c0f70ce63a92c03cd52d"
+        },
+        {
+          "source": "src/checkpoint10/func_0014bc70.cpp",
+          "source_sha256": "a1a649e65ced3d198d7b9fe9d2f55e88edf840b679a5014769194fda40ba6dc0",
+          "exit": 1,
+          "output": "MISMATCH func_0014bc70 @ 0x14bc70 size 0x34/0x34 first difference at +0x18\n",
+          "receipt": "scratch/integrator/c010/match-r6-focused-r1/u0010/func_0014bc70.result.json",
+          "receipt_sha256": "e4dd6c0defeab92b829a356b964801fe7f1f6d32c1dc16f6723d7866917889f3"
+        },
+        {
+          "source": "src/checkpoint10/archive_access.cpp",
+          "source_sha256": "d57de789abd4f404adf06d84a946230869c7b48f6daf45d0df6e5b9952fcf24b",
+          "exit": 2,
+          "output": "error: unresolved symbol '_ZN2nw3lyt19ArcResourceAccessorD0Ev' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+          "receipt": "scratch/integrator/c010/match-r6-focused-r1/u0015/archive_access.result.json",
+          "receipt_sha256": "96be1ab6646c8a2d14a54af295b8b877cde0ced9b08db07fda2668c8d714727e"
+        },
+        {
+          "source": "src/checkpoint10/func_0020e344.cpp",
+          "source_sha256": "392d7974cffa8a038dc0b90fcfa12b61f5af080d85aba0ccb32d38b0b23563eb",
+          "exit": 2,
+          "output": "error: unresolved symbol '__sti___17_func_0020e344_cpp_b04e481a' (not in config/names.json, not func_/data_/bss_XXXXXXXX)\n",
+          "receipt": "scratch/integrator/c010/match-r6-focused-r1/u0016/func_0020e344.result.json",
+          "receipt_sha256": "63222fbfdf9a1a2f0f2a8e628a4b7bf4795af5a5e3787efee5a378b91f864486"
+        },
+        {
+          "source": "src/checkpoint10/func_00180d9c.c",
+          "source_sha256": "26d993067af5df20fdc7752e51b35a929b819fe0845702a5acf7a382055fef05",
+          "exit": 1,
+          "output": "MISMATCH func_00180d9c @ 0x180d9c size 0x74/0x78 first difference at +0x20\n",
+          "receipt": "scratch/integrator/c010/match-r6-focused-r1/u0018/func_00180d9c.result.json",
+          "receipt_sha256": "2644c4e3163ed3b024dcfb834d89db4315b675a44314bc7d68a4cddb56b59d8e"
+        }
+      ]
+    },
+    {
+      "run": "match-r6-focused-r2",
+      "outer_exit": 0,
+      "expected_units": 5,
+      "completed_units": 5,
+      "MATCH_units": 5,
+      "per_unit_exit_counts": {
+        "0": 5
+      },
+      "results": "scratch/integrator/c010/match-r6-focused-r2/results.json",
+      "results_sha256": "c8fb4fc425cf34f706863e6bfb0837bf6c0f9cec343046c8bcc4383f26c2b39c",
+      "scope": "scratch/integrator/c010/r6/focused-scope-r2.json",
+      "scope_sha256": "cd7467b8bfd995bb21deec929c63bc123a3d5e99f524a193feceda3c29da1130",
+      "nonzero_rows": []
+    },
+    {
+      "run": "match-r6-r1",
+      "outer_exit": 0,
+      "expected_units": 2605,
+      "completed_units": 2605,
+      "MATCH_units": 2605,
+      "per_unit_exit_counts": {
+        "0": 2605
+      },
+      "results": "scratch/integrator/c010/match-r6-r1/results.json",
+      "results_sha256": "126cb2377f77d2d3cf481ce5c539e78adfbd29f6ce7d6aaed0e3d8df64a30a61",
+      "scope": "scratch/integrator/c010/r6/complete-match-scope-r1.json",
+      "scope_sha256": "38acd3b0b764da071231310f14299b6df2391e6bc57b2ccc55383fb46e46203e",
+      "nonzero_rows": []
+    }
+  ],
+  "failed_input_dispositions": [
+    {
+      "subjects": [
+        "func_001312d4",
+        "func_0014bc70"
+      ],
+      "observed": "Honest typed C calls to exact prepared list providers emit correct extents but mismatch at+0x18; both exit1.",
+      "disposition": "NEW-only deferral, no register/argument steering or retained mismatching body."
+    },
+    {
+      "subject": "func_001ccf20",
+      "observed": "Real member first emitted its class vtable and implicit destructor; match refused unresolved ArcResourceAccessorD0Ev, exit2.",
+      "disposition": "Explicit undefined native destructor key prevents selective source emission of competing vtable/destructors, preserves existing witnessed external _ZTV; source syntax choice qualified[INFERENCE]. New source/header context MATCH exit0."
+    },
+    {
+      "subject": "func_0020e344",
+      "observed": "Native RTTI root TU initially refused actual compiler initializer name with no binding, exit2.",
+      "disposition": "Bind only the actually observed initializer name to its existing identity; root type/parent not changed to suppress error. New binding context MATCH exit0."
+    },
+    {
+      "subject": "func_00180d9c",
+      "observed": "First direct-field owner repair emitted116/120B, exit1.",
+      "disposition": "Represent actual master/output volume settings as a real nested DSP subobject, migrate existing master-volume client, and call helper through that member. No GlobalCoordinatorView or unrelated storage lvalue; changed-source context MATCH exit0."
+    }
+  ],
+  "no_unchanged_failure_rerun": true,
+  "privacy": "Only source,names,addresses,extents,counts,hashes and semantic output. No original bytes,encodings,disassembly or private buffers."
+}

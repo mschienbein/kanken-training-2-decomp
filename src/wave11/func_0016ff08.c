@@ -3,7 +3,7 @@ void func_0016ff08(struct W11ControlScreen *screen, int index, float x, float y)
 {
     struct WidgetSlot *slot = screen->slots[index];
     if (slot != 0) {
-        struct DisplayObject *object = slot->object;
+        struct DisplayObject *object = widget_display(slot);
         /* ORIGINAL BUG: an existing slot's null object is not checked before the stores. */
         object->position[0] = x;
         object->position[1] = y;

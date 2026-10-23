@@ -1,0 +1,46 @@
+{
+  "witness_kind": "metadata-only-match-receipt",
+  "private_receipt": "scratch/integrator/c010/native-reentry-r1/match/pane-uniform-commands-native-game/pane_uniform_commands.result.json",
+  "private_receipt_sha256": "e8ee42abe352385d2601fd94cb48a60de9b848472355263b7b3c78d983ed57ec",
+  "qualification": "The unmodified tool receipt is kept privately. This publication omits generated instruction-word fields from linker-rewrite metadata; no code or instruction words are published. All source/object/image hashes, statuses, extents, offsets, targets and selected models are retained.",
+  "match": {
+    "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-def-native/scratch/integrator/c010/native-reentry-r1/src/pane_uniform_commands.cpp",
+    "source_sha256": "1c6641a6ad76265c50d1df2536c413ec84e6630bfda16c7bd5744c95c798ca08",
+    "profile": "game",
+    "compiler": "armcc_504_82",
+    "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+    "flags": [
+      "--cpu=MPCore",
+      "--fpmode=fast",
+      "--apcs=/interwork",
+      "--arm",
+      "--split_sections",
+      "--signed_chars",
+      "-O3",
+      "-Otime"
+    ],
+    "object_sha256": "671f29522cc58e3bfb35c87fb27f8e6cf76d6b5b25f3ae5a45c315d643a45fbc",
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1",
+    "literal_rebindings": [],
+    "proposed_names": {
+      "path": "scratch/integrator/c010/native-reentry-r1/pane-uniform-names-proposed.json",
+      "sha256": "419224a6279f02ef2629272bd6e95a99e2bb49a82e84cb54ea16978cf575774e"
+    },
+    "extra_sources": [],
+    "removed_callees": [],
+    "functions": [
+      {
+        "name": "_ZN2nw3lyt4Pane12DrawCommandsEPhP14LayoutDrawInfoP19LayoutRenderContext",
+        "address": 1146536,
+        "size": 132,
+        "candidate_size": 132,
+        "status": "match",
+        "first_diff": null,
+        "linker_rewrites": []
+      }
+    ]
+  }
+}

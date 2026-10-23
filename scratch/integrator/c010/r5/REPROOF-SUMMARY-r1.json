@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "agent": "C010R5Codex",
+  "source_commit": "30a0f37e",
+  "status": "PASS_SEQUENTIAL_COMPLETE_PROPOSED_LEDGER_MATCH_ONLY",
+  "outer_exit": 0,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "command": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "scratch/integrator/c010/match_scope.py",
+    "--run",
+    "match-r5-r2",
+    "--scope",
+    "scratch/integrator/c010/r5/complete-match-scope-r2.json"
+  ],
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5",
+  "expected_primary_units": 2617,
+  "completed_primary_units": 2617,
+  "MATCH_primary_units": 2617,
+  "per_unit_exit_counts": {
+    "0": 2617
+  },
+  "required_functions": 2708,
+  "required_function_bytes": 291420,
+  "proposed_total_units": 2641,
+  "helper_only_definitions": 24,
+  "helper_context_recipes": 27,
+  "paused": false,
+  "scope": "scratch/integrator/c010/r5/complete-match-scope-r2.json",
+  "scope_sha256": "fdcfcbaaa441e25f283df876c26370fc91630370b50f79d32dd8ec7736729be5",
+  "source_context": "scratch/integrator/c010/r5/SOURCE-CONTEXT-r2.json",
+  "source_context_sha256": "514063c946577620f63473cd111c13116eefd5c9bc6f0ffdb59dce0ff579a237",
+  "results": "scratch/integrator/c010/match-r5-r2/results.json",
+  "results_sha256": "5904f27fcd067783f6b4b73e43ff7d69bd01906fa3b1dc041f5ad36a6ab745e8",
+  "rewrite_projection": "scratch/integrator/c010/match-r5-r2/linker-rewrites.json",
+  "rewrite_projection_sha256": "651e7cf311dd8ad8c50af923c339905afd2746f3586cba8d87ca0ca057ad40f7",
+  "rewrite_projection_scope_complete": true,
+  "rewrite_projection_expected_units": 2617,
+  "rewrite_projection_matched_units": 2617,
+  "runner_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "historical_failures": "scratch/integrator/c010/r5/REPROOF-ATTEMPTS-r1.json",
+  "boundary": "One nice-10 matcher at a time, frozen per-unit profiles, explicit v6/L1, --show0 and natural --extra-source helper contexts. No full-image build, suite, whole-ledger interfaces/argcheck, prepare, independent review, finalize, acceptance credit or push."
+}

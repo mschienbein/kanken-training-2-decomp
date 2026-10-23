@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "basis": "GATES v1.16: credited identities have exactly one emitted owner; three old singleton definitions are replaced by the complete native four-method unit.",
+  "moves": [
+    {
+      "function": "func_0018d868",
+      "from": "src/wave7/func_0018d868.c",
+      "to": "src/checkpoint10/ut_LinkList.cpp",
+      "old_profile": "game",
+      "destination_profile": "middleware",
+      "old_source_sha256": "77724436aad08e985f4492d17825c23ee430d50e49a2622efef248e686fd04f5",
+      "preserved_source": "scratch/integrator/c010/owner-cutover/retired/src/wave7/func_0018d868.c"
+    },
+    {
+      "function": "func_00191154",
+      "from": "src/wave6/func_00191154.c",
+      "to": "src/checkpoint10/ut_LinkList.cpp",
+      "old_profile": "game",
+      "destination_profile": "middleware",
+      "old_source_sha256": "27faba2f13bb0ebe163b78dfd0ece8b82b365b2c80e2723aed3f4ce563096f21",
+      "preserved_source": "scratch/integrator/c010/owner-cutover/retired/src/wave6/func_00191154.c"
+    },
+    {
+      "function": "func_00191178",
+      "from": "src/wave6/func_00191178.c",
+      "to": "src/checkpoint10/ut_LinkList.cpp",
+      "old_profile": "game",
+      "destination_profile": "middleware",
+      "old_source_sha256": "4dbae42b620d7eacaef2a09079826716e396d030ad993fccc0a2606face3f8a9",
+      "preserved_source": "scratch/integrator/c010/owner-cutover/retired/src/wave6/func_00191178.c"
+    }
+  ],
+  "destination_functions": [
+    "func_00185bb0",
+    "func_0018d868",
+    "func_00191154",
+    "func_00191178"
+  ],
+  "profile": "middleware",
+  "author_receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/nw4c/match/ut_LinkList/middleware/ut_LinkList.result.json",
+  "qualifications": [
+    "Natural licensed LinkListImpl definitions replace the C views; no new callee alias, copied original code or source shim is introduced.",
+    "Existing C call boundaries retain count/sentinel and one-word node/iterator ABI views; manual C/C++ boundary review and final fresh object ownership remain mandatory.",
+    "This is a proposed move, not acceptance or a historical ledger edit."
+  ]
+}

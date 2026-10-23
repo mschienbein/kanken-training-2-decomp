@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/r6/focused-scope-r2.json",
+  "scope_sha256": "cd7467b8bfd995bb21deec929c63bc123a3d5e99f524a193feceda3c29da1130",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_units": 5,
+  "completed_units": 5,
+  "paused": false,
+  "match_units": 5,
+  "exit_counts": {
+    "0": 5
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/archive_access.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001ccf20"
+      ],
+      "author": "tu445",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/archive_access.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6/scratch/integrator/c010/match-r6-focused-r2/u0000"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    _ZN2nw3lyt19ArcResourceAccessor11GetResourceEjPKcPj @ 0x1ccf20 size 0x58/0x58\n",
+      "receipt": "scratch/integrator/c010/match-r6-focused-r2/u0000/archive_access.result.json",
+      "source_sha256": "d57de789abd4f404adf06d84a946230869c7b48f6daf45d0df6e5b9952fcf24b",
+      "extra_source_sha256": {},
+      "receipt_sha256": "605c867995958f262ea409cbbeaebbed2147349a9d3aedc214ecfa501ad77ba8"
+    },
+    {
+      "source": "src/checkpoint10/func_0020e344.cpp",
+      "profile": "game",
+      "functions": [
+        "func_0020e344"
+      ],
+      "author": "v9a02",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_0020e344.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6/scratch/integrator/c010/match-r6-focused-r2/u0001"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    __sti___17_func_0020e344_cpp_b04e481a @ 0x20e344 size 0x14/0x14\n",
+      "receipt": "scratch/integrator/c010/match-r6-focused-r2/u0001/func_0020e344.result.json",
+      "source_sha256": "392d7974cffa8a038dc0b90fcfa12b61f5af080d85aba0ccb32d38b0b23563eb",
+      "extra_source_sha256": {},
+      "receipt_sha256": "6931250d54daeda7e19cc612061270067dafa32f3f11405337fa85e59a812a27"
+    },
+    {
+      "source": "src/checkpoint10/func_00180d9c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00180d9c"
+      ],
+      "author": "w22d",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_00180d9c.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6/scratch/integrator/c010/match-r6-focused-r2/u0002"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_00180d9c @ 0x180d9c size 0x78/0x78\n",
+      "receipt": "scratch/integrator/c010/match-r6-focused-r2/u0002/func_00180d9c.result.json",
+      "source_sha256": "ff4f4d3856c02f7f0f3ab9f4c66fd9f1e77c17590b7f5be47aea87893a4eabb0",
+      "extra_source_sha256": {},
+      "receipt_sha256": "a421aaff9e2b3a4b490115d4d3ab7baa3fb612857b1d8e06bd214472724c705f"
+    },
+    {
+      "source": "src/wave15/func_00180e14.c",
+      "profile": "middleware",
+      "functions": [
+        "func_00180e14"
+      ],
+      "author": "c009-wave15",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/wave15/func_00180e14.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6/scratch/integrator/c010/match-r6-focused-r2/u0003"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_00180e14 @ 0x180e14 size 0x60/0x60\n",
+      "receipt": "scratch/integrator/c010/match-r6-focused-r2/u0003/func_00180e14.result.json",
+      "source_sha256": "7a428667419b5f6906175dc4b038f2b04c9e0f977304dda65edef324ca86569e",
+      "extra_source_sha256": {},
+      "receipt_sha256": "3303b843bf2cfa2eb6375cf75a234c1d5997b1ec782f18e8bb412ddb75566f00"
+    },
+    {
+      "source": "src/nw4c/lyt_ArcResourceAccessor.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001404f4",
+        "func_0014055c",
+        "func_001ccf78"
+      ],
+      "author": "nw4c",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/nw4c/lyt_ArcResourceAccessor.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r6/scratch/integrator/c010/match-r6-focused-r2/u0004"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    _ZN2nw3lyt19ArcResourceAccessor6AttachEPvPKc @ 0x1404f4 size 0x68/0x68\nMATCH    _ZN2nw3lyt19ArcResourceAccessorC1Ev @ 0x14055c size 0x48/0x48\nMATCH    _ZN2nw3lyt19ArcResourceAccessor7GetFontEPKc @ 0x1ccf78 size 0x54/0x54\n",
+      "receipt": "scratch/integrator/c010/match-r6-focused-r2/u0004/lyt_ArcResourceAccessor.result.json",
+      "source_sha256": "ca24182cd3208eb97b15d81248470bf7c791e28d0aaf1ffdddace14626f00213",
+      "extra_source_sha256": {},
+      "receipt_sha256": "289eae76871502e7790ec4ee461a3deefbb4916c94cc0640877bc88f777f064c"
+    }
+  ],
+  "script_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "rewrite_projection": "scratch/integrator/c010/match-r6-focused-r2/linker-rewrites.json"
+}

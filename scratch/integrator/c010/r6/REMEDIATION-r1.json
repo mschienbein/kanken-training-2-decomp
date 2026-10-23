@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "agent": "C010R5Codex",
+  "status": "AUTHOR_REMEDIATION_AND_EXPLICIT_NEW_ONLY_BOUNDARIES_NOT_AN_ACCEPTANCE_REVIEW",
+  "source_commit": "c851c232",
+  "review_input": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/prereview/c010-r5/PREREVIEW.json",
+    "sha256": "674386342bece1576fcb311e2b4bae4b869efe90c3a5004c305b0799afa5bb17",
+    "seal_sha256": "9892859e27c6d48e0ab66757c44f15f35c1141ce1faca9f73e0f37aea0bc8219",
+    "seal_reference_from_Main": "9892859e",
+    "verdict_ground_truth": "FAIL:7 blockers; no rerun of unchanged r5 source to challenge it."
+  },
+  "base": {
+    "frozen_c010_r5": "0c62c8939d39d1697e91aa8f735c764b6abfc73a",
+    "prepared_c009_r6": "8e488abcc4b106f2e1023ea120734fcc390b6da5",
+    "prepared_source": "f47bb29f",
+    "cursor_contract": "Inherited CommandQueueCompletionCallback(int cursor), provider declaration and setter; additive header conflict resolved without dropping c010 declarations.",
+    "c009_owned_DisplayTarget_deferral": "func_00117854 remains unselected/absent; all four c009-owned font deferrals remain unchanged."
+  },
+  "counts": {
+    "candidate_units": 425,
+    "candidate_claims": 436,
+    "NEW_functions": 424,
+    "NEW_bytes": 40480,
+    "moves": 12,
+    "moved_bytes": 192,
+    "deferral_units": 82,
+    "deferral_functions": 83,
+    "deferral_bytes": 7132,
+    "proposed_units": 2629,
+    "proposed_functions": 2693,
+    "proposed_bytes": 289852,
+    "prepared_predecessor_functions": 2269,
+    "prepared_predecessor_bytes": 249372,
+    "preserved_prepared_identities": 2269,
+    "helper_only_units": 24
+  },
+  "findings": [
+    {
+      "id": "C010R5-F01",
+      "disposition": "GENUINE_SHARED_OWNER_FIX",
+      "functions": [
+        "func_001ab65c",
+        "func_001bd9f0"
+      ],
+      "change": "Concrete W18SceneAVTable.prepare and W18SceneBVTable.prepare now take the exact W23FlowScreen and W6SelectionReset owners used by their revised providers. Defining shared contracts are included; obsolete DispatchStateA/B forwards removed. No accepted provider deferred.",
+      "sources": [
+        "include/game/scene_lifecycle.h",
+        "include/game/selection_components.h",
+        "include/game/selection.h",
+        "src/wave16/func_001ab65c.c",
+        "src/wave16/func_001bd9f0.c"
+      ]
+    },
+    {
+      "id": "C010R5-F02",
+      "disposition": "NEW_ONLY_DEPENDENCY_DEFERRAL",
+      "deferred_NEW": [
+        "func_0017e3d8"
+      ],
+      "change": "The last credited float-PMF descriptor visitor is removed from credit/source. The six distinct C providers are not converted to members or reinterpreted. Prior PMF-family deferrals remain."
+    },
+    {
+      "id": "C010R5-F03",
+      "disposition": "NEW_ONLY_FACTORY_DEPENDENCY_DEFERRAL",
+      "deferred_NEW": [
+        "func_001ce8f4",
+        "func_001ce940",
+        "func_001ce8b8"
+      ],
+      "change": "All dependent NEW factories/callers removed. Obsolete explicit-this factory declarations and unused LayoutBindingManager facade removed as well. Native Layout declarations and accepted native constructor remain; no LayoutBinding/AnimTransform alias or returned-object cast."
+    },
+    {
+      "id": "C010R5-F04",
+      "disposition": "GENUINE_NATIVE_INSTALLED_PROVIDER",
+      "functions": [
+        "func_001ccf20"
+      ],
+      "change": "Define actual ArcResourceAccessor::GetResource(ResType,const char*,u32*) using its real ARCHandle/root/name members and retain the natural narrow-to-wide helper. Remove the parallel ArchiveResourceAccessor and C wrapper declaration. Shared func001cdb10 contract now accepts native ARCHandle*. Actual emitted member symbol bound from compile plus independently witnessed installed slot.",
+      "sources": [
+        "src/checkpoint10/archive_access.cpp",
+        "include/nw/lyt/lyt_ArcResourceAccessor.h",
+        "include/game/resource_font.h",
+        "config/names.json"
+      ],
+      "qualification": "[INFERENCE] Undefined native destructor key is a selective-link choice, not recovered original syntax. Existing witnessed _ZTV binding is retained; no competing vtable/destructor definition or credit is emitted."
+    },
+    {
+      "id": "C010R5-F05",
+      "disposition": "GENUINE_ONE_TYPE_PER_GLOBAL",
+      "functions": [
+        "func_00120dc4",
+        "func_0010bc70",
+        "func_00106e70",
+        "func_00107ce4",
+        "func_001f596c",
+        "func_0020e344",
+        "func_002069c0",
+        "func_00212518",
+        "func_00121520",
+        "func_0012159c",
+        "func_00121d28"
+      ],
+      "changes": {
+        "data_00242c18": "Single ServiceClientState includes flags, current MountedDevice*, volatile guard, handle and interval. Filesystem Globals facade removed; both client families use the one canonical state.",
+        "bss_004962a8": "Single W22StreamWorker includes the actual initializer resource/count prefix; accepted initializer includes its shared header rather than a private SparseResourceState.",
+        "RTTI_roots": "data_00242f90 and data_00243814 are const native RuntimeTypeInfo roots with null parents. The latter NEW TU moves from C to C++ and uses observed emitted initializer binding; no writes through a const scalar facade.",
+        "handles": "data_002438a8 and data_0024311c use existing StaticHandle. All selected clients access .handle and no scalar declarations survive."
+      }
+    },
+    {
+      "id": "C010R5-F06",
+      "disposition": "RESTORE_PROTECTED_PREPARED_FORMS_AND_DEFER_NEW_NATIVE_DEPENDENTS",
+      "accepted_identities_restored_unchanged": [
+        "func_0018d868",
+        "func_00191154",
+        "func_00191178"
+      ],
+      "accepted_sources": [
+        "src/wave7/func_0018d868.c",
+        "src/wave6/func_00191154.c",
+        "src/wave6/func_00191178.c"
+      ],
+      "cancelled_moves": 3,
+      "deferred_NEW": [
+        "func_00185bb0",
+        "func_0014d1ec",
+        "func_00138f38",
+        "func_001d2c44",
+        "func_001cc1d4",
+        "func_001312d4",
+        "func_0014bc70"
+      ],
+      "also_deferred_by_F03": [
+        "func_001ce940"
+      ],
+      "change": "Withdraw the incomplete native list rehome and restore exact c009-r6 C providers, preserving their accepted C clients. Retained NEW C list clients now call those actual C definitions; remaining NEW native list mutation dependents and Material/wave providers are deferred. Typed C registry rewrites were exercised but mismatched, so no mismatching body is selected. C010-only unused native name claims for withdrawn providers are removed; pre-existing accepted bindings are not rewritten.",
+      "limits": "This does not claim a full native list/Material/wave family cutover. Existing accepted legacy external interfaces remain intentionally intact instead of being reinterpreted through address overlays."
+    },
+    {
+      "id": "C010R5-F07",
+      "disposition": "FOUR_GENUINE_OWNER_REPAIRS_THREE_NEW_ONLY_DEFERRALS",
+      "fixed_functions": [
+        "func_00167654",
+        "func_00180d9c",
+        "func_001d1c10",
+        "func_0018c5f0"
+      ],
+      "deferred_NEW": [
+        "func_00171a98",
+        "func_001a78a4",
+        "func_00182994"
+      ],
+      "changes": {
+        "notification": "Write W14ValuePair through bss_00280af8.storage.selection directly, preserving the original missing-negative-bound checks.",
+        "coordinator": "Use ServiceCoordinator.storage.audio.voice_parameters[completion_slot] and actual AudioDspParameterBlock.volume settings. The master-volume client migrates to the same real subobject. No GlobalCoordinatorView or GlobalSoundParameters overlay remains.",
+        "manager": "Promote voice_requests into actual ObjectManager at+0x1fc and use the typed factory result, removing W24eSoundManagerView.",
+        "command": "Write the actual Command kind-zero source/address/count payload using the existing shared generic-word convention, not a CopyCommand lvalue."
+      },
+      "deferral_reason": "The selection animation-owner relationship and pool registered/free-node ownership still need genuine full cutovers. A head-member-only fix would leave additional unrelated casts; defer only the NEW consumers."
+    }
+  ],
+  "source_policy": "No cast between callable types, PMF reinterpretation, fabricated base/owner alias, invented callee, byte patch, asm, volatile/register forcing, dead steering or accepted/prepared deferral. Unknown native families are not declared proved by MATCH.",
+  "remaining_boundary": "No interfaces/argcheck/full builds/suite/prepare/review registration/finalize/push. Main owns all acceptance and inherited prerequisite adjudications."
+}

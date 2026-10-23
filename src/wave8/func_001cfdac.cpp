@@ -1,7 +1,7 @@
 #include "game/layout.h"
 
-extern "C" LayoutAnimationLink *func_001cfdac(
-    const LayoutMaterial *material, const LayoutAnimationTransform *animation)
+extern "C" nw::lyt::AnimationLink *func_001cfdac(
+    LayoutMaterial *material, nw::lyt::AnimTransform *animation)
 {
-    return func_001cff58(&material->animation_links, animation);
+    return nw::lyt::internal::FindAnimationLink(&material->animation_links, animation);
 }

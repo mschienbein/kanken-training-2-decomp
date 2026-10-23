@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "branch": "c010-g3-unify",
+  "source_commit": "e4c5c74b",
+  "frozen_predecessor_used": "c009-r3 provisional2296 functions",
+  "finalized_c009_r4_required_before_prepare": true,
+  "existing_native_rehomes_requiring_exact_new_from_owners": [
+    {
+      "function": "func_00182ae4",
+      "R3_from": "src/wave18/func_00182ae4.c",
+      "known_R4_from": "src/wave18/func_00182ae4.cpp"
+    },
+    {
+      "function": "func_001c6a34",
+      "R3_from": "src/wave4/func_001c6a34.c",
+      "known_R4_from": "src/wave4/func_001c6a34.cpp"
+    },
+    {
+      "function": "func_001c7f10",
+      "R3_from": "src/wave12/func_001c7f10.c",
+      "known_R4_from": "src/wave12/func_001c7f10.cpp"
+    }
+  ],
+  "canonical_reader_rehomes": [
+    {
+      "function": "func_001db054",
+      "from": "src/wave13/func_001db054.c",
+      "to": "src/wave13/func_001db054.cpp",
+      "checkpoint": "c010"
+    },
+    {
+      "function": "func_001db068",
+      "from": "src/wave13/func_001db068.c",
+      "to": "src/wave13/func_001db068.cpp",
+      "checkpoint": "c010"
+    }
+  ],
+  "reader_rebase_rule": "If the finalized predecessor already owns these canonical .cpp providers, remove redundant move/candidate declarations rather than re-awarding credit or emitting another Copy body. Otherwise preserve the explicit accepted identity moves.",
+  "resource_rule": "Preserve r4 resource_dispatch.h native ResTextureMapper/ResTexture value protocol and r4 cpp providers00143190/001840dc/001c8984/001c8990/001c8b1c; never merge old c010 C pointer facades over them. Deferred NEW001c8af0 requires the same native protocol; reconcile cube-cleanup name/linkage atomically.",
+  "reader_helper_rule": "Only the public native member-pointer typedef and exact table declaration are required by this local cutover. Existing frozen stream-helper bodies were left unchanged. An unrelated helper-body rewrite broke both NEW UTF8/SJIS copy witnesses; those failed attempts are retained, so do not silently adopt that rewrite without reproof. Canonical accepted UTF16/CP1252 paths/bodies align with types-fontgfx70ac3e9/a14c1f61.",
+  "harness_rule": "Pick up Main tools-interfaces-vaarg correction after its suite. Historical G3 interfaces-r2 exit1 with782 C++ waived plus1 C parser gap must remain immutable. Re-run whole-ledger G3 in c010 prepare after rebase.",
+  "accepted_contract_rule": "The explicit NEW deferrals do not prove surviving scene, allocator, Pane/Material, sound or legacy/retail font table types. Those accepted-interface/native-owner obligations remain preparation blockers; never drop accepted identities or cast/pun receivers to conceal them.",
+  "qualifications_record": "scratch/integrator/c010/prereview-fixes/KNOWN-ISSUES-prereview-r1.json",
+  "no_acceptance_claim": true
+}

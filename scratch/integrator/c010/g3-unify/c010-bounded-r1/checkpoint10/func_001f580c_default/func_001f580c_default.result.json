@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/checkpoint10/func_001f580c_default.c",
+ "source_sha256": "b9305eb528169ab06c9246db42bd0c76b02005bfd3407201f0db65a845163637",
+ "profile": "middleware",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "cf3a207793e4a36c73b1e7b47df5919eaccfa70e7feeb337ff760b19ee154c67",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/src/models/object_registration/resource_service_lock.c",
+   "source_sha256": "4499f8723cd2be7305ee603b13650665e79ca6621ee412fd137e9356292fcdb6",
+   "object_sha256": "11aa9701e4ba806066c28258d31c798f8de7eff2b105104bce9b79f53a3a8ac1"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "register_resource_service_lock_cleanup"
+   ],
+   "section": "i.register_resource_service_lock_cleanup",
+   "size": 4,
+   "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/integrator/c010/g3-unify/c010-bounded-r1/checkpoint10/func_001f580c_default/extra-0-resource_service_lock.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001f580c",
+   "address": 2054156,
+   "size": 96,
+   "candidate_size": 96,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 20,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "register_resource_service_lock_cleanup"
+      ],
+      "section": "i.register_resource_service_lock_cleanup",
+      "size": 4,
+      "object": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-g3-unify/scratch/integrator/c010/g3-unify/c010-bounded-r1/checkpoint10/func_001f580c_default/extra-0-resource_service_lock.o"
+     }
+    }
+   ]
+  }
+ ]
+}

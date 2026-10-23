@@ -23,8 +23,6 @@ struct W6DisplayCollection;
 struct W17WideCollection;
 struct W18DisplayCollection;
 struct W18WideDisplayCollection;
-struct DispatchStateA;
-struct DispatchStateB;
 struct ModeDispatchObject;
 struct DisplayUpdateManager;
 struct W6SelectionScreen;
@@ -32,6 +30,7 @@ struct W6SelectionScreen;
 #include "game/notification.h"
 #include "game/scene_dispatch.h"
 #include "game/selection.h"
+#include "game/selection_components.h"
 #include "game/resource_runtime.h"
 
 
@@ -170,12 +169,12 @@ struct W17InactiveSceneVTable : W17SceneVTable {
     void (*finish)(DisplayUpdateManager *scene);
 };
 struct W18SceneAVTable : W17SceneVTable {
-    void (*prepare)(DispatchStateA *scene);
+    void (*prepare)(W23FlowScreen *scene);
     unsigned reserved1c;
     void (*finish)(DisplayUpdateManager *scene);
 };
 struct W18SceneBVTable : W17SceneVTable {
-    void (*prepare)(DispatchStateB *scene);
+    void (*prepare)(W6SelectionReset *scene);
     unsigned reserved1c;
     void (*finish)(DisplayUpdateManager *scene);
 };

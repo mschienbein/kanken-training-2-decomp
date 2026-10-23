@@ -12,6 +12,8 @@ struct SoundVoiceBuffer;
 struct SoundVoiceElement;
 struct SoundVoiceObject;
 
+struct W23JSoundState;
+struct W23JVoiceCallback;
 #include <stdbool.h>
 #include "game/runtime.h"
 #include "game/sound_runtime.h"
@@ -103,6 +105,19 @@ struct SoundStreamInstance : SoundStreamBase {
     unsigned field3290, field3294;
     SoundStreamInstance(SoundItemPool *pool);
 };
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* The callback keeps its unused receiver and forwards all five actual inputs.
+ * Its result is the same AudioVoice allocated by the lower voice factory. */
+extern struct AudioVoice *func_001d4ea8(struct W23JSoundState *state,
+    int key, int velocity, int value, int enabled);
+extern struct AudioVoice *func_001f3e50(struct W23JVoiceCallback *callback,
+    struct W23JSoundState *state, int key, int velocity, int value, int enabled);
+#ifdef __cplusplus
+}
 #endif
 
 #endif

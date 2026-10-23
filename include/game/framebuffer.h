@@ -1,6 +1,16 @@
 #ifndef GAME_FRAMEBUFFER_H
 #define GAME_FRAMEBUFFER_H
 
+struct DisplayFramebuffer {
+    void *left;
+    void *right;
+    unsigned format;
+    unsigned stride;
+};
+struct DisplayFramebufferPair {
+    struct DisplayFramebuffer display[2];
+};
+
 struct FramebufferResource {
     const void *vtable;
     void *allocator;
@@ -52,9 +62,30 @@ struct OffscreenState {
 };
 
 #ifdef __cplusplus
+/* [INFERENCE] Separate viewport target protocol, not a FramebufferRenderTarget
+ * alias. Only the descriptor-returning slot used by this wrapper is recovered. */
+class ViewportRenderTarget {
+public:
+    virtual ~ViewportRenderTarget();
+    virtual void reserved08();
+    virtual const RenderTargetConfiguration *description();
+};
+struct ViewportState;
+struct ViewportRectangle {
+    float left, bottom, right, top, near_depth, far_depth;
+};
+extern "C" {
+void func_00116400(ViewportState *state, ViewportRenderTarget *target,
+                    const ViewportRectangle *viewport);
+void func_0010d644(ViewportState *state, ViewportRenderTarget *target);
+}
+#endif
+
+#ifdef __cplusplus
 extern "C" {
 #endif
 extern struct OffscreenState bss_00495c04;
+extern void func_00137b84(struct DisplayFramebufferPair *output);
 #ifdef __cplusplus
 }
 #endif

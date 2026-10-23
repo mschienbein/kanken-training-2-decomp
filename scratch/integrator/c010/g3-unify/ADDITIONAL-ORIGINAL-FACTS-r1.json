@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "synchronization_initializer": {
+    "function": "func_0019df28",
+    "size": 52,
+    "direct_callees": [
+      "func_0012e560"
+    ],
+    "receiver_store_facts": [
+      {
+        "field_offset": 0,
+        "width": 4,
+        "source_role": null
+      }
+    ],
+    "reason": "Initializer calls the light-critical-section initializer on its +4 member and updates the state word at +0; accepted signal/wait and queue clients use the same eight-byte object. Remove the competing StreamSemaphore tag and SynchronizationStorage union in favor of SignalState."
+  },
+  "playback_reads": [
+    {
+      "constant_address": "0x0029f540",
+      "argument_strides": {}
+    },
+    {
+      "constant_address": "0x002cebc0",
+      "argument_strides": {
+        "0": 8
+      }
+    }
+  ],
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361"
+}

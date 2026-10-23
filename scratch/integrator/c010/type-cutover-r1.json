@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "plan": "type-cutover-plan-r1.json",
+  "status": "source-migration-not-native-or-layout-pass",
+  "definitions": 32,
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_001526b4_modefirst.c",
+      "types": [
+        "AdpcmCoefficients",
+        "AudioSlot"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001526b4_modefirst.c#13A6]\n4:struct AudioBiquadCoefficients {\n5:    short b0, b1, b2, a1, a2;\n6:};\n7:/* INTEGRATOR: differs from include/game/audio_voice.h: named fields occupy the\n8: * existing padding, including the pending list at 0x30 and mutex at 0x70. */"
+    },
+    {
+      "source": "src/checkpoint10/func_0015343c_late_workspace.c",
+      "types": [
+        "WorkspacePair"
+      ],
+      "headers_added": [
+        "game/service_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0015343c_late_workspace.c#CE7D]\n1:#include \"game/service_runtime.h\"\n2:#include \"game/functions.h\"\n3:#include \"game/input_runtime.h\"\n24:struct WorkspaceCoordinator;\n25:\n26:\n27:struct WorkspaceOwner {\n\n31:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001534e0_late_workspace.c",
+      "types": [
+        "WorkspacePair"
+      ],
+      "headers_added": [
+        "game/service_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001534e0_late_workspace.c#C29A]\n1:#include \"game/service_runtime.h\"\n2:#include \"game/functions.h\"\n3:#include \"game/input_runtime.h\"\n24:struct WorkspaceCoordinator;\n25:\n26:\n27:struct WorkspaceOwner {\n\n31:};"
+    },
+    {
+      "source": "src/checkpoint10/func_00175ab8_green_unsigned_temp.c",
+      "types": [
+        "DisplayObject",
+        "DisplayData"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00175ab8_green_unsigned_temp.c#778A]\n2:/* INTEGRATOR: differs from include/game/screen.h: stack-passed blue and alpha\n3: * are read as bytes, and the core color arguments are forwarded as unsigned char. */\n4:struct DisplayPart;\n5:\n6:"
+    },
+    {
+      "source": "src/checkpoint10/func_0019ebd0.cpp",
+      "types": [
+        "ServiceObject"
+      ],
+      "headers_added": [
+        "game/service_protocol.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0019ebd0.cpp#05EA]\n1:#include \"game/service_protocol.h\"\n2:#include \"ctr/svc.h\"\n3:\n\n12:struct GameResourceState {\n\n17:};\n18:\n19:\n20:struct ResourceTransferDescriptor {\n\n26:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001e9754.c",
+      "types": [
+        "AnimatedWidget",
+        "MotionScreen"
+      ],
+      "headers_added": [
+        "game/motion_screen.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001e9754.c#F675]\n1:#include \"game/motion_screen.h\"\n2:#include \"game/runtime.h\"\n3:#include \"game/text_writer.h\"\n\n5:struct MotionState {\n\n19:};\n20:\n21:\n22:/* INTEGRATOR: differs from include/game/runtime.h: MotionKey has a float value\n23: * at 0x14, written by this function; the existing reserved tail needs refinement. */"
+    },
+    {
+      "source": "src/checkpoint10/func_0011d12c.c",
+      "types": [
+        "PipelineOwner",
+        "GpuVertexAttribute"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0011d12c.c#23BE]\n17:struct PipelineStorage {\n\n21:};\n22:\n23:\n24:\n25:struct GpuState {\n\n42:};"
+    },
+    {
+      "source": "src/checkpoint10/func_0019312c.c",
+      "types": [
+        "PackageFile",
+        "PackageView"
+      ],
+      "headers_added": [
+        "game/package_file.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0019312c.c#6AD0]\n1:#include \"game/package_file.h\"\n2:#include \"game/archive.h\"\n3:\n4:struct PackageAttribute;\n5:struct PackageDirectory {\n6:    struct PackageFile *entries;\n7:    unsigned count;\n8:};\n9:struct PackageArchive {\n10:    void *reserved00;\n\n12:};"
+    },
+    {
+      "source": "src/checkpoint10/func_0016bd7c.c",
+      "types": [
+        "FileHandleOwner"
+      ],
+      "headers_added": [
+        "game/file_handle.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0016bd7c.c#A06D]\n1:#include \"game/file_handle.h\"\n2:#include \"game/runtime.h\"\n3:\n4:\n5:/* [INFERENCE] Role names: the SDK's checked-result helper reports a failing\n\n7: * \"no handle\" result code and its symbolic name are unknown. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001d6ab8.cpp",
+      "types": [
+        "FreeLink"
+      ],
+      "headers_added": [
+        "game/region_heap.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d6ab8.cpp#56D7]\n1:#include \"game/region_heap.h\"\n2:#include \"game/functions.h\"\n3:#include <stddef.h>\n\n8:struct SynchronizationOwner {\n\n10:    struct SynchronizationState synchronization;\n11:};\n12:struct SceneEntry;\n13:struct SceneEntryVtable {\n\n15:};"
+    },
+    {
+      "source": "src/checkpoint10/c5f4_final2.cpp",
+      "types": [
+        "SceneVec3",
+        "SceneVec2",
+        "SceneMode",
+        "SceneNode"
+      ],
+      "headers_added": [
+        "game/scene_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/c5f4_final2.cpp#63F9]\n1:#include \"game/scene_runtime.h\"\n2:#include \"game/functions.h\"\n3:#include \"game/matrix.h\"\n4:#include \"game/pool_list.h\"\n5:\n6:/* INTEGRATOR: differs from include/game/screen.h (DisplayPane) and\n7: * include/game/layout.h (LayoutPane): expanded pane view with recovered\n8: * lists, transform matrices, packed mode, name and user-data fields. */\n9:\n10:/* INTEGRATOR: identical to MatrixIdentityW8C / matrix34Identity() in\n\n12: * move both to include/game/matrix.h. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001273a0.c",
+      "types": [
+        "GpuVertexAttribute"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001273a0.c#7FBF]\n4:/* INTEGRATOR: differs from include/game/render_state.h: reserved ranges\n5: * contain the capability flags and force-update flag named below. */\n6:struct GpuState {\n7:    unsigned dirty;\n\n49:};"
+    },
+    {
+      "source": "src/checkpoint10/resume_binding_insertposition.cpp",
+      "types": [
+        "LayoutBinding"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/resume_binding_insertposition.cpp#77B9]\n3:#include \"game/pool_list.h\"\n4:\n5:struct LayoutBindingAllocator;\n6:struct LayoutBindingAllocatorVTable {\n\n9:};"
+    },
+    {
+      "source": "src/checkpoint10/func_0016a104.cpp",
+      "types": [
+        "SoundLoaderState",
+        "SoundLoaderCacheEntry",
+        "CachedSoundLoaderState"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0016a104.cpp#9188]\n4:\n5:struct SoundLoaderVTable;\n6:\n7:struct PrimarySoundLoaderVTable {\n\n9:};"
+    },
+    {
+      "source": "src/checkpoint10/func_001773cc.c",
+      "types": [
+        "PackedRecord",
+        "PackedRecordSet"
+      ],
+      "headers_added": [
+        "game/packed_records.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001773cc.c#6A34]\n1:#include \"game/packed_records.h\"\n2:#include \"game/messages.h\"\n3:\n4:extern int func_00181aac(int selection);\n5:extern void func_00170dc0(struct DisplayHandle **handles, int index, int enabled);"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2c84.c",
+      "types": [
+        "SoundHandle"
+      ],
+      "headers_added": [
+        "game/sound_runtime.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001d2c84.c#010F]\n1:#include \"game/sound_runtime.h\"\n2:#include \"game/pool_list.h\"\n3:\n4:struct SoundInstance;\n5:struct SoundPlayer;\n6:struct SoundInstanceVTable {\n7:    unsigned char reserved00[0x10];\n\n11:};"
+    },
+    {
+      "source": "src/checkpoint10/func_00148a9c.cpp",
+      "types": [
+        "ServiceBufferPair"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00148a9c.cpp#2BF6]\n4:struct CoordinatorRequest {\n\n7:    unsigned short value;\n8:};\n9:/* INTEGRATOR: differs from include/game/service_runtime.h: completion_slots\n10: * point to request records with flags at +0 and a value at +0x1e. */"
+    },
+    {
+      "source": "src/checkpoint10/func_00155e20.cpp",
+      "types": [
+        "ServiceBufferPair"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00155e20.cpp#E3CD]\n12:struct CoordinatorChannelSlots {\n\n15:    struct CoordinatorRequest *trailing[96];\n16:};\n17:/* INTEGRATOR: differs from include/game/service_runtime.h: completion_slots\n18: * point to request records with flags at +0 and a value at +0x1e. */"
+    },
+    {
+      "source": "src/checkpoint10/func_001c599c.cpp",
+      "types": [
+        "AdpcmCoefficients"
+      ],
+      "headers_added": [
+        "game/audio_voice.h"
+      ],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_001c599c.cpp#5909]\n1:#include \"game/audio_voice.h\"\n2:#include \"game/stream_manager.h\"\n3:\n4:struct AudioSlot {\n5:    unsigned char reserved00[0x10];\n\n11:};"
+    },
+    {
+      "source": "src/checkpoint10/func_0013cfdc.c",
+      "types": [
+        "SubmissionState"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_0013cfdc.c#55FD]\n3:struct GpuFlushState {\n\n5:    unsigned control_flags;\n6:};\n7:\n8:"
+    },
+    {
+      "source": "src/checkpoint10/func_00104fc4.c",
+      "types": [
+        "ResourceArray"
+      ],
+      "headers_added": [],
+      "edit_result": "[/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010/src/checkpoint10/func_00104fc4.c#255C]\n3:#include \"game/runtime.h\"\n4:\n5:struct ResourceArrayEntry {\n6:    unsigned active;\n\n8:};"
+    }
+  ],
+  "ast_failure": "Complete struct definitions plus semicolon were rejected as multiple AST nodes; no AST changes were applied. Interface-scanner token-exact complete statements were removed instead."
+}

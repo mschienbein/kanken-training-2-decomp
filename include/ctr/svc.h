@@ -10,8 +10,8 @@
  * occupies the unused wrapper-output slot; it is not an output pointer.
  * __value_in_regs returns aggregate words consecutively from r0, without an
  * implicit result pointer. Callers marshal these results into userland objects.
- * ARMCC rejects long long arguments (#1502), so 64-bit input values are
- * passed as their low/high words; reserved_r1 preserves AAPCS's aligned pair.
+ * ARMCC rejects long long arguments (#1502). SleepThread therefore takes
+ * low/high words; WaitSynchronization1 below marshals a signed 64-bit timeout.
  *
  * ControlMemory (0x01), QueryMemory (0x02), CreateThread (0x08),
  * ArbitrateAddress (0x22) and WaitSynchronizationN (0x25) require r4/r5.
@@ -24,6 +24,14 @@ typedef unsigned int CtrMemoryPermission;
 typedef int CtrResetType;
 typedef unsigned int CtrProcessInfoType;
 typedef unsigned int CtrBreakReason;
+
+/* ARMCC's documented aligned type attribute expresses the unused r1 slot
+ * before the wait timeout's low/high words in r2/r3. Keep the low word in
+ * an object of this type: a cast alone is not a reliable parameter conversion
+ * in the pinned compilers. This type is not a named-register binding.
+ * https://developer.arm.com/documentation/dui0472/j/Compiler-specific-Features/--attribute----aligned---type-attribute
+ */
+typedef unsigned int CtrSvcTimeoutLow __attribute__((aligned(8)));
 
 typedef struct CtrSvcHandleResult {
     CtrResult result;
@@ -57,7 +65,7 @@ __svc(0x1f) CtrResult svcMapMemoryBlock(CtrHandle memory_block, unsigned int add
 __svc(0x20) CtrResult svcUnmapMemoryBlock(CtrHandle memory_block, unsigned int address);
 __svc(0x21) __value_in_regs CtrSvcHandleResult svcCreateAddressArbiter(void);
 __svc(0x23) CtrResult svcCloseHandle(CtrHandle handle);
-__svc(0x24) CtrResult svcWaitSynchronization1(CtrHandle handle, unsigned int reserved_r1, unsigned int timeout_low, int timeout_high);
+__svc(0x24) CtrResult ctrSvcWaitSynchronization1Raw(CtrHandle handle, CtrSvcTimeoutLow timeout_low, int timeout_high);
 __svc(0x27) __value_in_regs CtrSvcHandleResult svcDuplicateHandle(unsigned int reserved_r0, CtrHandle original);
 __svc(0x28) long long svcGetSystemTick(void);
 __svc(0x2b) __value_in_regs CtrSvcProcessInfoResult svcGetProcessInfo(unsigned int reserved_r0, CtrHandle process, CtrProcessInfoType type);
@@ -69,5 +77,16 @@ __svc(0x3c) void svcBreak(CtrBreakReason reason);
 #ifdef __cplusplus
 }
 #endif
+
+/* The fully initialized aligned low-word object retains the raw ABI's hole
+ * without supplying any C value for the ignored r1 slot. Neither word is
+ * discarded; signed right shift preserves the timeout's high 32 bits.
+ */
+static __forceinline CtrResult svcWaitSynchronization1(CtrHandle handle, long long nanoseconds)
+{
+    CtrSvcTimeoutLow timeout_low = (unsigned int)nanoseconds;
+    int timeout_high = (int)(nanoseconds >> 32);
+    return ctrSvcWaitSynchronization1Raw(handle, timeout_low, timeout_high);
+}
 
 #endif

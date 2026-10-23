@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "command": ["git", "add", "scratch/integrator/c010-NOTES.md", "scratch/integrator/c010/HANDOFF.json"],
+  "exit_code": 1,
+  "diagnostic": "The following paths are ignored by one of your .gitignore files: scratch. Use -f if you really want to add them.",
+  "classification": "staging-policy-refusal-not-compiler-or-match-failure",
+  "resolution": "Re-read both exact files, then explicitly force-stage the requested NOTES and HANDOFF plus this record. The failed && chain did not execute its commit or rev-parse commands."
+}

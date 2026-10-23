@@ -1,3 +1,5 @@
+#include <preinclude.h>
+#include "game/text_renderer.h"
 #include "game/screen.h"
 
 

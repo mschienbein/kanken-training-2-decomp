@@ -1,0 +1,2211 @@
+{
+  "schema_version": 1,
+  "initial_interfaces": {
+    "path": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r3-closure/scratch/integrator/c010/interfaces-r3-closure-early-r1.json",
+    "sha256": "10eca2b122d4b15806835ef3e999352524f07aaa0fc7281cf80d569598bf96ad",
+    "disagreements": 39,
+    "policy": 71
+  },
+  "frozen_commit": "final-source-commit-recorded-in-G3-UNIFY-r1",
+  "disagreements": [
+    {
+      "kind": "declaration",
+      "name": "bss_0028d95c",
+      "sites": [
+        {
+          "line": 11,
+          "source": "src/checkpoint10/func_0015e508.c",
+          "type": "struct FadeState"
+        },
+        {
+          "line": 15,
+          "source": "src/checkpoint10/func_0014793c.c",
+          "type": "array[] of (struct TransitionDisplay)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/transition_state.h",
+        "evidence_and_change": "The resetter indexes 0x24-byte records. Fade reads +0x1c and +0x40, exactly records[0].previous and records[1].previous; one array definition retains both uses.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "odr",
+      "name": "class PoolIterator",
+      "sites": [
+        {
+          "line": 14,
+          "source": "include/game/sound.h",
+          "type": "class definition (header)"
+        },
+        {
+          "line": 16,
+          "source": "src/checkpoint10/func_0014d308.cpp",
+          "type": "class definition"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sound.h",
+        "evidence_and_change": "One node pointer is the common ABI. The shared struct now owns the original C++ iterator operations plus the default construction used by the accepted end iterator; the local competing class is removed.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "odr",
+      "name": "class ResourceRecord",
+      "sites": [
+        {
+          "line": 38,
+          "source": "include/game/object_manager.h",
+          "type": "class definition (header)"
+        },
+        {
+          "line": 59,
+          "source": "include/game/material.h",
+          "type": "class definition (header)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/object_manager.h",
+        "evidence_and_change": "The amount-list entry has an intrusive link at +0x50, whereas material ResourceRecord is a separate 28-byte metadata record. Name the former ResourceAmountEntry, migrate its real list/template user, and retain the independent material type; no alias or same-owner claim.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "type-name",
+      "name": "class SoundArchiveAccessors",
+      "sites": [
+        {
+          "line": 1,
+          "source": "src/checkpoint10/collect-r2/func_001d860c.cpp",
+          "type": "forward declaration without the defining header"
+        },
+        {
+          "line": 74,
+          "source": "include/game/sound_archive.h",
+          "type": "class definition (header)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sound_archive.h",
+        "evidence_and_change": "Include the defining archive header instead of forward-declaring its header-defined C++ class.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "data_00242c18",
+      "sites": [
+        {
+          "line": 7,
+          "source": "src/wave15/func_0010bc70.c",
+          "type": "struct ServiceClientState"
+        },
+        {
+          "line": 9,
+          "source": "src/checkpoint10/func_00106e70.c",
+          "type": "struct W23JActivityState"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_state.h",
+        "evidence_and_change": "Combine the boolean activity/latch at +0/+1, service handle at +0x10, and signed interval at +0x18 into the single address-rooted ServiceClientState.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "data_002430e4",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00186494.c",
+          "type": "struct ServiceStringCounts"
+        },
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_0012d788.c",
+          "type": "struct DebugRecordCounts"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_state.h",
+        "evidence_and_change": "The string appender increments the first signed count; the resetter clears both adjacent count words. Share ServiceStringCounts; signed spelling follows the indexing consumer.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0010d454",
+      "sites": [
+        {
+          "line": 16,
+          "source": "src/wave16/func_00106a50.c",
+          "type": "function(int) -> void"
+        },
+        {
+          "line": 30,
+          "source": "src/checkpoint10/func_0010d454.c",
+          "type": "function(_Bool) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/applet.h",
+        "evidence_and_change": "Retain the boolean notification input evidenced by the updater and pass the existing caller constant zero through that exact shared contract.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0011da50",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_0011da50.c",
+          "type": "function(unsigned int, unsigned int, int, pointer to (const void)) -> void"
+        },
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_00196564.c",
+          "type": "function(int, unsigned int, int, pointer to (const float)) -> void"
+        },
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_001965a4.c",
+          "type": "function(int, unsigned int, int, pointer to (const float)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/shader.h",
+        "evidence_and_change": "Keep all four inputs. Uniform callers obtain a signed location from 00191b08; the writer forwards the source as raw four-byte command units, so const void* preserves float callers without falsely narrowing the source representation.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00121bc8",
+      "sites": [
+        {
+          "line": 27,
+          "source": "src/checkpoint10/func_00121bc8.c",
+          "type": "function(pointer to (struct HeapBase)) -> void"
+        },
+        {
+          "line": 3,
+          "source": "src/wave4/func_00121bc4.c",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/exp_heap.h",
+        "evidence_and_change": "The body searches HeapBase child lists and unlinks that heap. The accepted native tail wrapper receives ExpHeap and passes its real initial HeapBase member, matching the constructor/teardown caller contract without an opaque receiver or cast.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00127ddc",
+      "sites": [
+        {
+          "line": 1,
+          "source": "src/checkpoint10/func_0019194c.c",
+          "type": "function(unsigned int, pointer to (const unsigned int), unsigned int, int) -> void"
+        },
+        {
+          "line": 2,
+          "source": "src/checkpoint10/func_00190610.c",
+          "type": "function(unsigned int, pointer to (const unsigned int), unsigned int, unsigned int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/shader.h",
+        "evidence_and_change": "Share signed uniform location, immutable unsigned command words, unsigned type word and signed count; native negative-one location check is retained. Signed count spelling remains inferred from signed control paths, not a reduced-width ABI.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0012edd4",
+      "sites": [
+        {
+          "line": 12,
+          "source": "src/wave19/func_0012edd4.c",
+          "type": "function(pointer to (struct OffsetList), pointer to (void)) -> void"
+        },
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_00121bc8.c",
+          "type": "function(pointer to (struct IntrusiveList), pointer to (void)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/exp_heap.h",
+        "evidence_and_change": "OffsetList and IntrusiveList have identical head/tail/count/link-offset semantics and fields. Migrate the accepted unlink definition to the canonical list/link declarations used by HeapBase children.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00130308",
+      "sites": [
+        {
+          "line": 10,
+          "source": "src/checkpoint10/func_00130308.c",
+          "type": "function(void) -> int"
+        },
+        {
+          "line": 148,
+          "source": "include/game/sound_track.h",
+          "type": "function(void) -> unsigned int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sound_track.h",
+        "evidence_and_change": "The fallback calls return CtrResult, whose high-bit failure code is compared before retry. Correct the unsigned prototype to CtrResult rather than changing that return contract.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00131950",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00131948.c",
+          "type": "function(pointer to (const struct SoundArchiveReader), unsigned int) -> unsigned int"
+        },
+        {
+          "line": 5,
+          "source": "src/wave15/func_00131950.c",
+          "type": "function(pointer to (const struct SoundArchiveReader), unsigned int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sound_archive.h",
+        "evidence_and_change": "Retain the accepted int reader-wrapper return through the new shared declaration. The outer unsigned wrapper receives the same bits by ordinary C conversion, without a declaration disagreement.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0014caf0",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_0014cad4.c",
+          "type": "function(pointer to (struct FrameTime), pointer to (const long long)) -> void"
+        },
+        {
+          "line": 6,
+          "source": "src/wave10/func_0014caf0.c",
+          "type": "function(pointer to (struct HwrWordPair), pointer to (const struct HwrWordPair)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/frame_timing.h",
+        "evidence_and_change": "The actual worker supplies &ServiceWorker.elapsed, a signed long long. Share FrameTime destination and const long long* source; the accepted eight-byte copy is revised to copy ticks, not an unrelated HWR pair.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0014e218",
+      "sites": [
+        {
+          "line": 13,
+          "source": "src/checkpoint10/func_00154078.c",
+          "type": "function(pointer to (struct HwrChannelState)) -> void"
+        },
+        {
+          "line": 2,
+          "source": "src/wave10/func_0014e20c.c",
+          "type": "function(pointer to (struct AudioChannelState)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/audio_voice.h",
+        "evidence_and_change": "The accepted reset wrapper uses AudioChannelState.flags at +0x6c; the c010 update channel forwards that same state pointer at +0x68. Replace its unrelated HWR state tag with the canonical audio state.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0015dd5c",
+      "sites": [
+        {
+          "line": 2,
+          "source": "src/wave18/func_0015dd5c.c",
+          "type": "function(pointer to (const unsigned short), unsigned int) -> pointer to (const unsigned short)"
+        },
+        {
+          "line": 20,
+          "source": "src/checkpoint10/func_001dcfc0.c",
+          "type": "function(pointer to (const unsigned short), unsigned short) -> pointer to (const unsigned short)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/text.h",
+        "evidence_and_change": "The search compares zero-extended UTF-16 units with the full incoming word. Preserve unsigned character input rather than truncating it to an unsigned short.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0016bde0",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave8/func_001c3cf8.c",
+          "type": "function(pointer to (const pointer to (struct TransformTarget)), int, int, float, float) -> void"
+        },
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_0016bda4.c",
+          "type": "function(pointer to (struct W24BPositionPanel), int, int, float, float) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "The accepted position tail wrapper forwards a pointer vector unchanged. Use TransformTarget*const* for the c010 wrapper and its selector helper as well, preserving both float inputs and all core words.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0016dc94",
+      "sites": [
+        {
+          "line": 25,
+          "source": "src/checkpoint10/func_0016dc94.c",
+          "type": "function(pointer to (struct W8EffectState), int) -> void"
+        },
+        {
+          "line": 30,
+          "source": "src/checkpoint10/func_001dd884.c",
+          "type": "function(pointer to (struct W8EffectState), int) -> void"
+        },
+        {
+          "line": 512,
+          "source": "include/game/screen.h",
+          "type": "function(pointer to (struct W10DrawingInput), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/screen.h",
+        "evidence_and_change": "The accepted W10DrawingInput endpoint owns the same mask halfword at +0x89e. Name that field in the existing canonical struct and migrate the c010 body and practice-screen pointer without a cast.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00170dc0",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00177354.c",
+          "type": "function(pointer to (pointer to (struct DisplayHandle)), int, int) -> void"
+        },
+        {
+          "line": 49,
+          "source": "include/game/messages.h",
+          "type": "function(pointer to (struct MessageLayout), int, int) -> void"
+        },
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_001773cc.c",
+          "type": "function(pointer to (pointer to (struct DisplayHandle)), int, int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/messages.h",
+        "evidence_and_change": "The accepted layout contract takes MessageLayout, not a handle-array facade. Pass the actual layout object and remove the existing entry-vector receiver casts from both callers.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00173630",
+      "sites": [
+        {
+          "line": 198,
+          "source": "include/game/selection.h",
+          "type": "function(pointer to (struct W6ListController), int, int) -> void"
+        },
+        {
+          "line": 6,
+          "source": "src/checkpoint10/func_00173630.c",
+          "type": "function(pointer to (struct TransformOwner), int, int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection.h",
+        "evidence_and_change": "Retain the accepted W6ListController receiver even though this body does not inspect it; preserve both caller-evidenced index/group inputs.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00175d90",
+      "sites": [
+        {
+          "line": 28,
+          "source": "src/checkpoint10/func_00175d90.c",
+          "type": "function(pointer to (struct NumericPanelSet)) -> void"
+        },
+        {
+          "line": 97,
+          "source": "include/game/w11_control.h",
+          "type": "function(pointer to (struct W11jVisualOwner)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/w11_control.h",
+        "evidence_and_change": "Use the canonical 72-record W11jVisualOwner and its format-kind word at +0xc with 28-byte stride, and share its per-index reset helper.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_0019194c",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_0019194c.c",
+          "type": "function(unsigned int, unsigned int) -> void"
+        },
+        {
+          "line": 47,
+          "source": "include/game/shader.h",
+          "type": "function(int, unsigned int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/shader.h",
+        "evidence_and_change": "The signed uniform location returned by lookup is forwarded unchanged to 00127ddc. Match the established signed header endpoint rather than making the lookup caller unsigned.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001abf24",
+      "sites": [
+        {
+          "line": 26,
+          "source": "src/checkpoint10/func_001abf24.c",
+          "type": "function(pointer to (struct W23FlowScreen)) -> void"
+        },
+        {
+          "line": 6,
+          "source": "src/wave16/func_001ab65c.c",
+          "type": "function(pointer to (struct DispatchStateA)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "The dispatcher reads the same +0x90 stack-index field used by the mode updater. Complete that shared W23FlowScreen state with its current/previous mode vectors and migrate both endpoints.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001ae00c",
+      "sites": [
+        {
+          "line": 34,
+          "source": "src/checkpoint10/func_001ae00c.c",
+          "type": "function(pointer to (struct W19SelectionPanel)) -> void"
+        },
+        {
+          "line": 7,
+          "source": "src/wave17/func_001adff8.c",
+          "type": "function(pointer to (struct Component001adff8), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "Publish W19SelectionPanel and preserve the tail wrapper reached count in the updater signature although unused. Use the real PaneIndexList constructed by 002095c0, with signed byte indices consumed by the input updater.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001b3564",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_001b3564.c",
+          "type": "function(pointer to (struct ChoiceController)) -> void"
+        },
+        {
+          "line": 76,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001b3564)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "The manager publishes the exact component passed to the 23-index resetter. Preserve canonical opaque Component001b3564 instead of colliding with an unrelated C++ ChoiceController class.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001b3c0c",
+      "sites": [
+        {
+          "line": 20,
+          "source": "src/checkpoint10/func_001b3c0c_shape01.c",
+          "type": "function(pointer to (struct SliderState), int) -> void"
+        },
+        {
+          "line": 7,
+          "source": "src/wave19/func_001e74b8.c",
+          "type": "function(pointer to (struct AnimationState), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/w11_control.h",
+        "evidence_and_change": "AnimationState already exposes the primary pointer, enabled flag and lower/upper/current float fields at the slider offsets. Migrate the body to that canonical type and shared update helper.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001c144c",
+      "sites": [
+        {
+          "line": 31,
+          "source": "src/checkpoint10/func_001c144c.c",
+          "type": "function(pointer to (struct W24BDecorationPanel)) -> void"
+        },
+        {
+          "line": 67,
+          "source": "include/game/category_progress.h",
+          "type": "function(pointer to (struct L044TrainingFrame)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/category_progress.h",
+        "evidence_and_change": "Complete the existing L044TrainingFrame as its observed 17-slot vector and use that established receiver in the decoration initializer and its per-slot helper.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001d2be8",
+      "sites": [
+        {
+          "line": 13,
+          "source": "src/wave18/func_001d2be8.c",
+          "type": "function(pointer to (struct ProgressCounters)) -> void"
+        },
+        {
+          "line": 20,
+          "source": "src/checkpoint10/func_001d2fe8.c",
+          "type": "function(pointer to (struct ExtendedTimedState)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/progress_counters.h",
+        "evidence_and_change": "The original limit/current pairs at +0x70/+0x74, +0x90/+0x94, +0xc0/+0xc4 are subobjects of the extended timed state. One declaration retains all base and channel counters.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001dcdd0",
+      "sites": [
+        {
+          "line": 19,
+          "source": "src/checkpoint10/func_001dcdd0.c",
+          "type": "function(pointer to (struct DeferredResourceList16)) -> void"
+        },
+        {
+          "line": 74,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001dcdd0)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "The display-update manager component at +0x3c is the list with state +0xc, 16-byte entries and count +0x14. Publish that concrete list instead of an unrelated opaque tag.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001dcf4c",
+      "sites": [
+        {
+          "line": 14,
+          "source": "src/checkpoint10/func_001dcf4c.c",
+          "type": "function(pointer to (struct DeferredResourceList20)) -> void"
+        },
+        {
+          "line": 73,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001dcf4c)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "The display-update manager component at +0x38 is the list with state +8 and DetailEntry pointer +0xc. Publish that concrete list instead of an unrelated opaque tag.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001dd6c8",
+      "sites": [
+        {
+          "line": 12,
+          "source": "src/wave10/func_001dd6c8.c",
+          "type": "function(pointer to (struct W6SelectionScreen)) -> void"
+        },
+        {
+          "line": 21,
+          "source": "src/checkpoint10/func_001debb4.c",
+          "type": "function(pointer to (struct W11StateScreen)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection.h",
+        "evidence_and_change": "Retain the accepted W6SelectionScreen endpoint and defer only the incompatible new modal dispatcher. No new cast, union or invented common owner is used.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001e9e7c",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_001e9e7c.c",
+          "type": "function(pointer to (struct ElementCollection)) -> void"
+        },
+        {
+          "line": 78,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001e9e7c)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "evidence_and_change": "The manager publishes its +0x4c component to the 20-index resetter. Share canonical opaque Component001e9e7c with the per-index helper, with no invented complete layout.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001eaed8",
+      "sites": [
+        {
+          "line": 10,
+          "source": "src/large/func_00176e24.c",
+          "type": "function(pointer to (struct Component001eaed8)) -> void"
+        },
+        {
+          "line": 38,
+          "source": "src/checkpoint10/func_001eaed8.c",
+          "type": "function(pointer to (struct W24TextScreen)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/resource_runtime.h",
+        "evidence_and_change": "The cleanup consumes resource events, proving its slot object pointer as ResourceEvent*. Publish W24TextSlot/W24TextScreen and the actual manager component. Do not equate it with the generic W8 handle solely from compatible offsets.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001ebca0",
+      "sites": [
+        {
+          "line": 428,
+          "source": "include/game/screen.h",
+          "type": "function(pointer to (void), pointer to (struct PendingDisplayUpdate)) -> void"
+        },
+        {
+          "line": 97,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct DisplayUpdateManager), pointer to (struct DisplayUpdateEntry6c)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/display_update.h",
+        "evidence_and_change": "The third manager vector has the exact 0x6c PendingDisplayUpdate stride. Use that canonical element type and retain the existing opaque context input, rather than redeclaring the callee with an unrelated entry facade.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001efcd0",
+      "sites": [
+        {
+          "line": 14,
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/permute/sweep-c1/inputs/func_001efcd0.c",
+          "type": "function(pointer to (const struct ObjectMember68)) -> unsigned int"
+        },
+        {
+          "line": 442,
+          "source": "include/game/audio_voice.h",
+          "type": "function(pointer to (const struct AudioChannel)) -> unsigned int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/audio_voice.h",
+        "evidence_and_change": "The accepted voice-group caller consumes a sample-position word and supplies AudioChannel*. Use its actual AudioChannelState* member at +0x68, not an unrelated ResourceDataView.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001efcd8",
+      "sites": [
+        {
+          "line": 12,
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/permute/sweep-c1/inputs/func_001efcd0.c",
+          "type": "function(pointer to (const struct WordMember08)) -> unsigned int"
+        },
+        {
+          "line": 7,
+          "source": "src/wave15/func_001efcd8.c",
+          "type": "function(pointer to (const struct ResourceDataView)) -> pointer to (const unsigned char)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/audio_voice.h",
+        "evidence_and_change": "The group/channel wrapper consumes a sample-position word from AudioChannelState +8. Correct the accepted generic pointer-result accessor to the canonical unsigned audio-state accessor; adjacent byte accessors do not establish identical object ownership.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_001f23b8",
+      "sites": [
+        {
+          "line": 113,
+          "source": "include/game/item_text.h",
+          "type": "function(pointer to (const struct BankInstrumentInfo)) -> int"
+        },
+        {
+          "line": 3,
+          "source": "src/checkpoint10/func_001f23b8.c",
+          "type": "function(pointer to (const struct BankInstrumentInfo)) -> _Bool"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/item_text.h",
+        "evidence_and_change": "The recovered body is a boolean predicate. Correct the int caller declaration to bool without changing the input object or packed-parameter lookup.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "declaration",
+      "name": "func_00216670",
+      "sites": [
+        {
+          "line": 15,
+          "source": "src/checkpoint10/func_00216670.c",
+          "type": "function(pointer to (struct W24eTextWriter), pointer to (const unsigned short), int) -> float"
+        },
+        {
+          "line": 181,
+          "source": "include/game/layout_draw.h",
+          "type": "function(pointer to (struct LayoutDrawState), pointer to (const void), unsigned short) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/layout_draw.h",
+        "evidence_and_change": "Share the real 0x64-byte writer with its canonical constructor-initialized prefix. Expose that prefix by named composition to C/C++, retain the signed length and float result, type the UTF-16 source, and preserve the aggregate cursor copy. The failed C++ implicit-copy witness is retained before the matching explicit C copy.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    },
+    {
+      "kind": "layout",
+      "name": "struct W8ScreenState",
+      "sites": [
+        {
+          "line": 10,
+          "source": "src/checkpoint10/func_001e42fc.c",
+          "type": "struct W8ScreenState { array[20] of (unsigned char) reserved00; pointer to (struct W8EffectState) effects; array[52] of (unsigned char) reserved18; pointer to (struct W6ListController) choices; pointer to (struct W8DisplaySet) display; pointer to (struct Screen) buttons; pointer to (struct W6Selector) first_resource; pointer to (struct W6HandlePanel10) second_resource; pointer to (struct Screen) selector; pointer to (struct Screen) other; array[44] of (unsigned char) reserved68; int phase; array[4] of (unsigned char) reserved98; int previous_phase; array[16] of (unsigned char) reserveda0; int text_length; array[12] of (unsigned char) reservedb4; array[25] of (unsigned short) text; array[142] of (unsigned char) reservedf2; pointer to (struct DisplayObject) cursor }"
+        },
+        {
+          "line": 8,
+          "source": "src/wave8/func_001e403c.c",
+          "type": "struct W8ScreenState { array[20] of (unsigned char) reserved00; pointer to (struct W10DrawingInput) effects; array[52] of (unsigned char) reserved18; pointer to (struct W6ListController) choices; pointer to (struct W8DisplaySet) display; pointer to (struct Screen) buttons; pointer to (struct W6Selector) first_resource; pointer to (struct W6HandlePanel10) second_resource; pointer to (struct Screen) selector; pointer to (struct Screen) other; array[44] of (unsigned char) reserved68; int phase; array[4] of (unsigned char) reserved98; int previous_phase; array[16] of (unsigned char) reserveda0; int text_length; array[12] of (unsigned char) reservedb4; array[25] of (unsigned short) text; array[142] of (unsigned char) reservedf2; pointer to (struct DisplayObject) cursor }"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/choice_screen.h",
+        "evidence_and_change": "Move the accepted drawing/list choice-scene layout into its shared header. The conflicting new phase dispatcher is explicitly deferred because its AnimationOwner bridge has no proved allocation/constructor relation; no alternate layout is credited.",
+        "original_facts": "scratch/integrator/c010/g3-unify/original-contract-facts-r1.json",
+        "current_witness_index": "scratch/integrator/c010/g3-unify/MATCH-WITNESS-INDEX-g3-unify-r2.json"
+      }
+    }
+  ],
+  "policy": [
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0010a814",
+      "sites": [
+        {
+          "line": 8,
+          "source": "src/wave15/func_00106190.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/screen.h",
+        "definition_owner_before": "src/checkpoint10/func_0010a814.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0010b5cc",
+      "sites": [
+        {
+          "line": 8,
+          "source": "src/wave16/func_00106a50.c",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_state.h",
+        "definition_owner_before": "src/checkpoint10/func_0010b5cc.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0010d454",
+      "sites": [
+        {
+          "line": 16,
+          "source": "src/wave16/func_00106a50.c",
+          "type": "function(int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/applet.h",
+        "definition_owner_before": "src/checkpoint10/func_0010d454.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001135e8",
+      "sites": [
+        {
+          "line": 2,
+          "source": "src/checkpoint10/func_0010bef4.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sdk_init.h",
+        "definition_owner_before": "src/wave11/func_001135e8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00115ad4",
+      "sites": [
+        {
+          "line": 12,
+          "source": "src/checkpoint10/func_0010d454.c",
+          "type": "function(unsigned int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/applet.h",
+        "definition_owner_before": "src/sdk/func_00115ad4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00116ce8",
+      "sites": [
+        {
+          "line": 31,
+          "source": "src/checkpoint10/func_0010a704.c",
+          "type": "function(pointer to (struct RegionHeapOwner)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/region_heap.h",
+        "definition_owner_before": "src/wave8/func_00116ce8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0011d12c",
+      "sites": [
+        {
+          "line": 12,
+          "source": "src/wave17/func_001103e4.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/bss_0049ecf0.h",
+        "definition_owner_before": "src/checkpoint10/func_0011d12c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0011da50",
+      "sites": [
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_00196564.c",
+          "type": "function(int, unsigned int, int, pointer to (const float)) -> void"
+        },
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_001965a4.c",
+          "type": "function(int, unsigned int, int, pointer to (const float)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/shader.h",
+        "definition_owner_before": "src/checkpoint10/func_0011da50.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0012142c",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/checkpoint10/func_001932e8_slots.c",
+          "type": "function(unsigned int) -> pointer to (const char)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/runtime.h",
+        "definition_owner_before": "src/wave11/func_0012142c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001217b4",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_0012d394.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/wave4/func_001217b4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00121bc8",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave4/func_00121bc4.c",
+          "type": "function(pointer to (void)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/exp_heap.h",
+        "definition_owner_before": "src/checkpoint10/func_00121bc8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00122350",
+      "sites": [
+        {
+          "line": 2,
+          "source": "src/checkpoint10/func_0010c504.c",
+          "type": "function(int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/runtime.h",
+        "definition_owner_before": "src/pilot/pilot_a.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001224a4",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave4/func_001224a0.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/checkpoint10/func_001224a4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0012251c",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_001932e8_slots.c",
+          "type": "function(pointer to (char), pointer to (const char), ...) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/runtime.h",
+        "definition_owner_before": "src/wave11/func_0012251c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00122988",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave4/func_00122984.c",
+          "type": "function(unsigned int, pointer to (const void), pointer to (const void), unsigned int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/command_buffer.h",
+        "definition_owner_before": "src/checkpoint10/func_00122988.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0012e7b4",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_00121520.c",
+          "type": "function(pointer to (unsigned int)) -> int"
+        },
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_0012159c.c",
+          "type": "function(pointer to (unsigned int)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/sdk/func_0012e7b4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0012edd4",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_00121bc8.c",
+          "type": "function(pointer to (struct IntrusiveList), pointer to (void)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/exp_heap.h",
+        "definition_owner_before": "src/wave19/func_0012edd4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0012f51c",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave4/func_0012f518.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/checkpoint10/func_0012f51c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00131950",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00131948.c",
+          "type": "function(pointer to (const struct SoundArchiveReader), unsigned int) -> unsigned int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sound_archive.h",
+        "definition_owner_before": "src/wave15/func_00131950.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00135c10",
+      "sites": [
+        {
+          "line": 9,
+          "source": "src/wave16/func_00107140.c",
+          "type": "function(int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/startup.h",
+        "definition_owner_before": "src/checkpoint10/func_00135c10.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0013685c",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave4/func_00136858.c",
+          "type": "function(void) -> unsigned char"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/checkpoint10/func_0013685c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00137770",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/wave4/func_0013776c.c",
+          "type": "function(pointer to (void), unsigned int) -> unsigned int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/checkpoint10/func_00137770.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00137b84",
+      "sites": [
+        {
+          "line": 10,
+          "source": "src/checkpoint10/func_00142b8c.c",
+          "type": "function(pointer to (struct DisplayFramebufferPair)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/framebuffer.h",
+        "definition_owner_before": "src/checkpoint10/func_00137b84.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001380c8",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/checkpoint10/resume_0012fdd0_reply.c",
+          "type": "function(unsigned int, unsigned int, unsigned int, unsigned int, pointer to (unsigned char)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/sdk2/func_001380c8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00138334",
+      "sites": [
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_00130308.c",
+          "type": "function(unsigned char) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/sdk2/func_00138334.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001383ac",
+      "sites": [
+        {
+          "line": 7,
+          "source": "src/checkpoint10/func_00130308.c",
+          "type": "function(unsigned char) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/sdk2/func_001383ac.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0013e734",
+      "sites": [
+        {
+          "line": 1,
+          "source": "src/checkpoint10/func_0013685c.c",
+          "type": "function(pointer to (unsigned char)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/sdk2/func_0013e734.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00141560",
+      "sites": [
+        {
+          "line": 16,
+          "source": "src/wave9/func_00141554.c",
+          "type": "function(unsigned int, float) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/command_buffer.h",
+        "definition_owner_before": "src/checkpoint10/func_00141560.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0014417c",
+      "sites": [
+        {
+          "line": 14,
+          "source": "src/checkpoint10/func_00140ecc.c",
+          "type": "function(pointer to (const struct SoundArchiveInfo)) -> pointer to (const struct SoundReferenceTable)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/sound_format.h",
+        "definition_owner_before": "src/wave9/func_0014417c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0014a9d8",
+      "sites": [
+        {
+          "line": 17,
+          "source": "src/checkpoint10/func_0016dc94.c",
+          "type": "function(unsigned int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/screen.h",
+        "definition_owner_before": "src/wave4/func_0014a9d8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0014cad4",
+      "sites": [
+        {
+          "line": 19,
+          "source": "src/checkpoint10/func_0014b85c.c",
+          "type": "function(pointer to (struct FrameTime)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/frame_timing.h",
+        "definition_owner_before": "src/checkpoint10/func_0014cad4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0014caf0",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_0014cad4.c",
+          "type": "function(pointer to (struct FrameTime), pointer to (const long long)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/frame_timing.h",
+        "definition_owner_before": "src/wave10/func_0014caf0.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0014d784",
+      "sites": [
+        {
+          "line": 10,
+          "source": "src/checkpoint10/func_00182994.c",
+          "type": "function(pointer to (struct RegisteredObject)) -> pointer to (struct RegisteredObject)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/object_pool.h",
+        "definition_owner_before": "src/wave4/func_0014d784.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001547ec",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/checkpoint10/func_00153f9c_shape05.c",
+          "type": "function(pointer to (const struct PrefetchChannelReference)) -> pointer to (const struct AdpcmChannelParameters)"
+        },
+        {
+          "line": 6,
+          "source": "src/checkpoint10/func_001f2a78_shape05.c",
+          "type": "function(pointer to (const struct PrefetchChannelReference)) -> pointer to (const struct AdpcmChannelParameters)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/prefetch_stream.h",
+        "definition_owner_before": "src/wave10/func_001547ec.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00154804",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00153f9c_shape05.c",
+          "type": "function(pointer to (const struct PrefetchReferenceTable), unsigned int) -> pointer to (const struct PrefetchChannelReference)"
+        },
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_001f2a78_shape05.c",
+          "type": "function(pointer to (const struct PrefetchReferenceTable), unsigned int) -> pointer to (const struct PrefetchChannelReference)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/prefetch_stream.h",
+        "definition_owner_before": "src/checkpoint10/func_00154804.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00155dec",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/wave15/func_0015643c.c",
+          "type": "function(pointer to (struct AudioChannel), int) -> void"
+        },
+        {
+          "line": 5,
+          "source": "src/wave15/func_00155148.c",
+          "type": "function(pointer to (struct AudioChannel), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/audio_voice.h",
+        "definition_owner_before": "src/checkpoint10/func_00155dec.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0015dd5c",
+      "sites": [
+        {
+          "line": 20,
+          "source": "src/checkpoint10/func_001dcfc0.c",
+          "type": "function(pointer to (const unsigned short), unsigned short) -> pointer to (const unsigned short)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/text.h",
+        "definition_owner_before": "src/wave18/func_0015dd5c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0015e780",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_001ad5a8.c",
+          "type": "function(pointer to (struct TrainingWidget), unsigned int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/messages.h",
+        "definition_owner_before": "src/wave10/func_0015e780.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0015e824",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/checkpoint10/func_001ad5a8.c",
+          "type": "function(pointer to (struct TrainingWidget), unsigned int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/messages.h",
+        "definition_owner_before": "src/wave10/func_0015e824.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0015eaa8",
+      "sites": [
+        {
+          "line": 26,
+          "source": "src/checkpoint10/func_001c2e98.c",
+          "type": "function(pointer to (struct AnimationDisplayObject), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/animation.h",
+        "definition_owner_before": "src/wave17/func_0015eaa8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0015f6ec",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/wave15/func_001e5ce0.c",
+          "type": "function(pointer to (const struct ItemPage)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/item_pages.h",
+        "definition_owner_before": "src/checkpoint10/func_0015f6ec.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0016dc94",
+      "sites": [
+        {
+          "line": 30,
+          "source": "src/checkpoint10/func_001dd884.c",
+          "type": "function(pointer to (struct W8EffectState), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/screen.h",
+        "definition_owner_before": "src/checkpoint10/func_0016dc94.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0016e5cc",
+      "sites": [
+        {
+          "line": 19,
+          "source": "src/checkpoint10/func_001dcfc0.c",
+          "type": "function(pointer to (const unsigned short), pointer to (const unsigned short), int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/text.h",
+        "definition_owner_before": "src/wave2/func_0016e5cc.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00172994",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/wave10/func_001b06a4.c",
+          "type": "function(int) -> int"
+        },
+        {
+          "line": 6,
+          "source": "src/wave10/func_001dd6c8.c",
+          "type": "function(int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection.h",
+        "definition_owner_before": "src/checkpoint10/func_00172994.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": true
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0017f4f4",
+      "sites": [
+        {
+          "line": 11,
+          "source": "src/checkpoint10/func_00182994.c",
+          "type": "function(pointer to (pointer to (struct FreeLink)), pointer to (struct FreeLink)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/region_heap.h",
+        "definition_owner_before": "src/wave8/func_0017f4f4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001811b8",
+      "sites": [
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_001458b8.c",
+          "type": "function(void) -> void"
+        },
+        {
+          "line": 8,
+          "source": "src/checkpoint10/func_00145928.c",
+          "type": "function(void) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/command_state.h",
+        "definition_owner_before": "src/checkpoint10/func_001811b8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00181328",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00143b08.c",
+          "type": "function(pointer to (struct StreamQueue)) -> pointer to (struct StreamQueue)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/audio_tasks.h",
+        "definition_owner_before": "src/wave11/func_00181328.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00181aac",
+      "sites": [
+        {
+          "line": 3,
+          "source": "src/checkpoint10/func_00177354.c",
+          "type": "function(int) -> int"
+        },
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_001773cc.c",
+          "type": "function(int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/messages.h",
+        "definition_owner_before": "src/wave9/func_00181aac.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00186224",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00121bc8.c",
+          "type": "function(pointer to (const struct IntrusiveList), pointer to (const void)) -> pointer to (struct HeapBase)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/exp_heap.h",
+        "definition_owner_before": "src/wave11/func_00186224.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001863fc",
+      "sites": [
+        {
+          "line": 14,
+          "source": "src/checkpoint10/func_00121838.c",
+          "type": "function(pointer to (const unsigned int)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_protocol.h",
+        "definition_owner_before": "src/sdk/func_001863fc.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0018d850",
+      "sites": [
+        {
+          "line": 24,
+          "source": "src/checkpoint10/func_001d1c10.c",
+          "type": "function(pointer to (const struct SoundArchivePlayerView)) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/archive.h",
+        "definition_owner_before": "src/wave6/func_0018d850.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0019051c",
+      "sites": [
+        {
+          "line": 17,
+          "source": "src/wave5/func_00145840.c",
+          "type": "function(pointer to (struct RequestRecord)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_state.h",
+        "definition_owner_before": "src/checkpoint10/func_0019051c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00192458",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_00192410.c",
+          "type": "function(unsigned int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_state.h",
+        "definition_owner_before": "src/checkpoint10/func_00192458.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_00195e84",
+      "sites": [
+        {
+          "line": 5,
+          "source": "src/checkpoint10/func_0010d27c.c",
+          "type": "function(void) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/service_state.h",
+        "definition_owner_before": "src/wave1/func_00195e84.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0019d8c4",
+      "sites": [
+        {
+          "line": 9,
+          "source": "src/checkpoint10/func_001458b8.c",
+          "type": "function(pointer to (const struct FontFile)) -> unsigned int"
+        },
+        {
+          "line": 9,
+          "source": "src/checkpoint10/func_00145928.c",
+          "type": "function(pointer to (const struct FontFile)) -> unsigned int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/font.h",
+        "definition_owner_before": "src/wave9/func_0019d8c4.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_0019df08",
+      "sites": [
+        {
+          "line": 19,
+          "source": "src/checkpoint10/func_001eaed8.c",
+          "type": "function(pointer to (void), unsigned int) -> pointer to (void)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/runtime.h",
+        "definition_owner_before": "src/wave2/func_0019df08.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001abf24",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/wave16/func_001ab65c.c",
+          "type": "function(pointer to (struct DispatchStateA)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "definition_owner_before": "src/checkpoint10/func_001abf24.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001ae00c",
+      "sites": [
+        {
+          "line": 7,
+          "source": "src/wave17/func_001adff8.c",
+          "type": "function(pointer to (struct Component001adff8), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "definition_owner_before": "src/checkpoint10/func_001ae00c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001b0188",
+      "sites": [
+        {
+          "line": 4,
+          "source": "src/checkpoint10/func_001b0600_final.c",
+          "type": "function(pointer to (struct W11ControlScreen)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/w11_control.h",
+        "definition_owner_before": "src/wave11/func_001b0188.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001b3564",
+      "sites": [
+        {
+          "line": 76,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001b3564)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "definition_owner_before": "src/checkpoint10/func_001b3564.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001b3c0c",
+      "sites": [
+        {
+          "line": 7,
+          "source": "src/wave19/func_001e74b8.c",
+          "type": "function(pointer to (struct AnimationState), int) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/w11_control.h",
+        "definition_owner_before": "src/checkpoint10/func_001b3c0c_shape01.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001d2be8",
+      "sites": [
+        {
+          "line": 20,
+          "source": "src/checkpoint10/func_001d2fe8.c",
+          "type": "function(pointer to (struct ExtendedTimedState)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/progress_counters.h",
+        "definition_owner_before": "src/wave18/func_001d2be8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001dcdd0",
+      "sites": [
+        {
+          "line": 74,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001dcdd0)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "definition_owner_before": "src/checkpoint10/func_001dcdd0.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001dcecc",
+      "sites": [
+        {
+          "line": 6,
+          "source": "src/checkpoint10/func_001773cc.c",
+          "type": "function(pointer to (struct PackedRecordSet), int) -> pointer to (const unsigned short)"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/packed_records.h",
+        "definition_owner_before": "src/wave19/func_001dcecc.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001dcf0c",
+      "sites": [
+        {
+          "line": 7,
+          "source": "src/checkpoint10/func_001773cc.c",
+          "type": "function(pointer to (struct PackedRecordSet), int) -> int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/packed_records.h",
+        "definition_owner_before": "src/wave19/func_001dcf0c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001dcf4c",
+      "sites": [
+        {
+          "line": 73,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001dcf4c)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "definition_owner_before": "src/checkpoint10/func_001dcf4c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001dd6c8",
+      "sites": [
+        {
+          "line": 21,
+          "source": "src/checkpoint10/func_001debb4.c",
+          "type": "function(pointer to (struct W11StateScreen)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection.h",
+        "definition_owner_before": "src/wave10/func_001dd6c8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001e403c",
+      "sites": [
+        {
+          "line": 45,
+          "source": "src/checkpoint10/func_001e42fc.c",
+          "type": "function(pointer to (struct W8ScreenState)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/choice_screen.h",
+        "definition_owner_before": "src/wave8/func_001e403c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001e9e7c",
+      "sites": [
+        {
+          "line": 78,
+          "source": "src/wave17/func_001eb7a4.c",
+          "type": "function(pointer to (struct Component001e9e7c)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/selection_components.h",
+        "definition_owner_before": "src/checkpoint10/func_001e9e7c.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001eaed8",
+      "sites": [
+        {
+          "line": 10,
+          "source": "src/large/func_00176e24.c",
+          "type": "function(pointer to (struct Component001eaed8)) -> void"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/resource_runtime.h",
+        "definition_owner_before": "src/checkpoint10/func_001eaed8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    },
+    {
+      "kind": "inline-declaration",
+      "level": "policy",
+      "name": "func_001efcd8",
+      "sites": [
+        {
+          "line": 12,
+          "source": "/home/michael/code/kanken-training-2-decomp/scratch/permute/sweep-c1/inputs/func_001efcd0.c",
+          "type": "function(pointer to (const struct WordMember08)) -> unsigned int"
+        }
+      ],
+      "resolution": {
+        "header": "include/game/audio_voice.h",
+        "definition_owner_before": "src/wave15/func_001efcd8.c",
+        "change": "Remove local declaration; use the header-owned contract. Where the original declarations disagree, the corresponding disagreement adjudication is authoritative. Unchanged contracts are backed by the original G3-selected definition and retained frozen profile, not inferred from an unused register.",
+        "definition_is_deferred": false
+      }
+    }
+  ],
+  "supersedes": "G3-RESOLUTIONS-r1.json"
+}

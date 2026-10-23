@@ -1,4 +1,4 @@
-extern unsigned char *data_00242fc8;
+#include "game/command_buffer.h"
 
 unsigned char *func_0018d8d4(void)
 {

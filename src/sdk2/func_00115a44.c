@@ -1,6 +1,6 @@
 #include "ctr/ipc.h"
 
-extern CtrHandle data_00243040;
+
 
 struct IpcNormalWords_00115a44 {
     unsigned int size;
@@ -34,7 +34,7 @@ CtrResult func_00115a44(const void *buffer, unsigned int size, CtrHandle handle)
     descriptor |= 2u;
     command->buffer = buffer;
     command->descriptor = descriptor;
-    result = svcSendSyncRequest(data_00243040);
+    result = svcSendSyncRequest(data_00243040.handle);
     failure = ctrIpcTransportFailure(result);
 
     if (failure >= 0)

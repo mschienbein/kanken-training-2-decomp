@@ -6,6 +6,7 @@ struct DisplayAnimationTrack;
 struct DisplayObject;
 struct Handle1c4478;
 struct Handle1c4484;
+
 struct PromptManager;
 struct SoundStarter;
 struct SoundTrack;
@@ -36,6 +37,7 @@ struct Handle1c4484 {
 };
 
 
+
 #ifdef __cplusplus
 class SoundStarter {
 public:
@@ -56,6 +58,7 @@ extern int func_001c1924(const struct PromptManager *manager);
 extern int func_001ace94(const struct Widget1ace94 *widget);
 extern struct Handle1c4478 *func_001c4478(struct Handle1c4478 *handle);
 extern struct Handle1c4484 *func_001c4484(struct Handle1c4484 *handle);
+
 extern unsigned char func_001d018c(struct SoundStarter *starter, struct SoundTrack **track,
                                      unsigned resource, unsigned flags);
 #ifdef __cplusplus

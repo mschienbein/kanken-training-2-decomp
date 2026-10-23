@@ -48,6 +48,10 @@ struct AllocationSystem {
     void *memory;
 };
 extern struct AllocationSystem data_002429f4;
+/* Interior symbol for AllocationSystem.release at data_002429f4 + 4;
+ * this names the callback word itself, not a second storage allocation. */
+extern void (*data_002429f8)(unsigned module, unsigned kind,
+                           unsigned id, void *memory);
 extern void func_00215e88(AllocationCallback *allocate, ReleaseCallback *release);
 
 struct SubmissionState {
@@ -80,6 +84,28 @@ struct PipelineConfiguration {
     struct VertexRange ranges[16];
 };
 
+/* [INFERENCE] Hash-bucket buffer prefix observed by the original teardown
+ * consumer. Opaque payload pointers do not assert a recovered native class. */
+/* [INFERENCE] Buffer payload prefix observed by the mode-dependent release
+ * consumer. Usage and reserved words are retained without native class claims. */
+struct W6eGpuBufferPayload {
+    void *device_memory;
+    void *host_memory;
+    unsigned size;
+    unsigned reserved0c;
+    unsigned usage;
+    unsigned module;
+    int mode;
+};
+struct W6eGpuBuffer {
+    unsigned handle;
+    int kind;
+    union {
+        struct W6eGpuBufferPayload *buffer;
+        struct PipelineConfiguration *configuration;
+    } payload;
+    struct W6eGpuBuffer *next;
+};
 /* The original initializer clears this fixed extent; sizeof the partial
  * PipelineStorage view below is not the historical allocation size. */
 enum { PIPELINE_STORAGE_INITIALIZED_BYTES = 0x854 };
@@ -89,7 +115,7 @@ struct PipelineSnapshot {
 };
 
 struct PipelineStorage {
-    unsigned char reserved00[0x800];
+    struct W6eGpuBuffer *buckets[512];
     struct PipelineConfiguration *configuration;
     unsigned reserved804;
     unsigned current;
@@ -104,6 +130,7 @@ struct PipelineOwner {
     unsigned ready;
 };
 extern struct PipelineOwner data_00242a14;
+extern void func_0018c784(struct W6eGpuBuffer *object);
 
 extern void func_00126f5c(unsigned *state);
 extern void func_00127294(unsigned *state);
@@ -126,22 +153,52 @@ struct GpuVertexAttribute {
 
 struct GpuState {
     unsigned dirty;
-    unsigned char reserved04[0x1c];
+    unsigned requested_flags;
+    unsigned excluded_flags;
+    unsigned char force_update;
+    unsigned char reserved0d[0x0d];
+    unsigned char feature6502;
+    unsigned char reserved1b[5];
     int viewport_x;
     int viewport_y;
     int viewport_width;
     int viewport_height;
     unsigned char viewport_dirty;
-    unsigned char reserved31[0x27];
+    unsigned char reserved31[3];
+    unsigned front_face;
+    unsigned cull_face;
+    unsigned char cull_enabled;
+    unsigned char reserved3d[0x17];
+    unsigned char polygon_offset_enabled;
+    unsigned char reserved55[3];
     unsigned active_texture;
-    unsigned char reserved5c[0x3fc];
+    unsigned char reserved5c[0xb0];
+    unsigned first_constants[33];
+    unsigned second_constants[33];
+    unsigned char reserved214[0x244];
     struct GpuVertexAttribute attributes[16];
     unsigned element_buffer;
     unsigned array_buffer;
     unsigned deferred_buffer;
-    unsigned char reserved5e4[0x7c];
+    unsigned char reserved5e4[0x34];
+    unsigned source_color;
+    unsigned source_alpha;
+    unsigned destination_color;
+    unsigned destination_alpha;
+    unsigned char reserved628[0x20];
+    unsigned char scissor_enabled;
+    unsigned char reserved649;
+    unsigned char stencil_enabled;
+    unsigned char depth_enabled;
+    unsigned char blend_enabled;
+    unsigned char logic_enabled;
+    unsigned char reserved64e;
+    unsigned char feature6780;
+    unsigned char reserved650[0x10];
     float clear_color[4];                   /* 0x660 */
-    unsigned char reserved670[0x100];
+    unsigned char reserved670[0x24];
+    unsigned char feature67a0;
+    unsigned char reserved695[0xdb];
     unsigned control;                       /* 0x770 */
 };
 extern struct GpuState *data_00242fd0;
@@ -149,6 +206,15 @@ extern struct GpuState *data_00242fd0;
 extern void func_0019b8e4(float red, float green, float blue, float alpha);
 extern void func_00196d18(unsigned target, unsigned handle);
 extern void func_00130e24(unsigned handle, void **color_memory, void **depth_memory);
+extern unsigned func_0018f0ac(const void *address);
+extern unsigned data_00242fd4, data_00242fd8, data_00242fdc;
+extern void func_001273a0(int capability, unsigned char enabled);
+extern void func_0019e414(unsigned features);
+extern void func_001876ac(unsigned *state);
+extern void func_001871e4(unsigned *state);
+extern void func_001395c0(unsigned *state);
+extern void func_00133b08(void);
+extern void func_0013cfdc(void);
 
 #ifdef __cplusplus
 }

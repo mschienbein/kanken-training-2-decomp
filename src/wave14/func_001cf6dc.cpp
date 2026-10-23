@@ -8,7 +8,7 @@
 extern "C" void func_001cf6dc(LayoutDrawPane *pane, LayoutRenderContext *context)
 {
     LayoutDrawState state;
-    state.geometry = pane->geometry;
+    state.base.geometry = pane->geometry;
     func_001cf504(pane, &state);
     if (pane->pending) {
         func_001da0e0(&state);

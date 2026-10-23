@@ -1,10 +1,7 @@
-struct ResourceDataView {
-    unsigned reserved00[2];
-    const unsigned char *data;
-};
+#include "game/audio_voice.h"
 
-/* The adjacent byte accessor dereferences the same data field. */
-const unsigned char *func_001efcd8(const struct ResourceDataView *resource)
+/* The channel/group callers consume this word as a sample position. */
+unsigned func_001efcd8(const struct AudioChannelState *state)
 {
-    return resource->data;
+    return state->value08;
 }

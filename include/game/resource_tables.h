@@ -23,7 +23,9 @@ struct ResourceTable {
     struct ResourceTableEntry *entries;
     int count;
     int activeCount;
-    unsigned char reserved0c[0x28];
+    unsigned char reserved0c[4];
+    unsigned field10, field14, field18, field1c;
+    unsigned char reserved20[0x14];
     struct FontResource *font;
     float width, height;
     unsigned char mode, flag41, flag42, flag43, flag44, flag45;
@@ -69,6 +71,7 @@ extern struct EntryList data_0024225c;
 extern struct DetailList data_00242264;
 extern unsigned *data_0023fd80;
 extern unsigned char *func_001971a0(uintptr_t resource, int index);
+extern void func_00103978(void);
 #ifdef __cplusplus
 }
 #endif

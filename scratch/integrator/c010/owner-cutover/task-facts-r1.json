@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "functions": [
+    {
+      "function": "func_001d32e4",
+      "entry_based_memory_accesses": [],
+      "entry_r1_comparisons": [
+        {
+          "site_offset": 76,
+          "input_register": "r1",
+          "other": {
+            "kind": "unknown"
+          }
+        }
+      ],
+      "calls": [
+        {
+          "site_offset": 20,
+          "target": "func_00192bd8",
+          "same_entry_receiver": false,
+          "entry_r1_present": true,
+          "arg1": {
+            "kind": "entry",
+            "register": "r1"
+          }
+        },
+        {
+          "site_offset": 88,
+          "target": "func_00191178",
+          "same_entry_receiver": false,
+          "entry_r1_present": false,
+          "arg1": {
+            "kind": "unknown"
+          }
+        },
+        {
+          "site_offset": 100,
+          "target": "func_0019ea6c",
+          "same_entry_receiver": false,
+          "entry_r1_present": false,
+          "arg1": {
+            "kind": "unknown"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001d6b24",
+      "entry_based_memory_accesses": [],
+      "entry_r1_comparisons": [],
+      "calls": [
+        {
+          "site_offset": 8,
+          "target": "func_00185de4",
+          "same_entry_receiver": true,
+          "entry_r1_present": true,
+          "arg1": {
+            "kind": "entry",
+            "register": "r1"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_001d6678",
+      "entry_based_memory_accesses": [],
+      "entry_r1_comparisons": [],
+      "calls": [
+        {
+          "site_offset": 8,
+          "target": "func_00185de4",
+          "same_entry_receiver": true,
+          "entry_r1_present": true,
+          "arg1": {
+            "kind": "entry",
+            "register": "r1"
+          }
+        }
+      ]
+    },
+    {
+      "function": "func_00185de4",
+      "entry_based_memory_accesses": [],
+      "entry_r1_comparisons": [],
+      "calls": [
+        {
+          "site_offset": 24,
+          "target": "func_00191c80",
+          "same_entry_receiver": false,
+          "entry_r1_present": true,
+          "arg1": {
+            "kind": "entry",
+            "register": "r1"
+          }
+        },
+        {
+          "site_offset": 52,
+          "target": "func_001911cc",
+          "same_entry_receiver": false,
+          "entry_r1_present": false,
+          "arg1": {
+            "kind": "constant"
+          }
+        }
+      ]
+    }
+  ],
+  "native_contracts": {
+    "TaskManager::CancelTask": "void(Task*)",
+    "TaskManager::CancelTaskById": "void(u32)"
+  },
+  "qualification": "Abstract scoped CFG facts only, with conservative merge and explicit load/store-width tags. Presence of an entry register at a call does not establish actual argument arity. Unknown prior-call r0 is not evidence of a meaningful result. Public API names alone do not bind addresses or invent owner identities."
+}

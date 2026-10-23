@@ -1,0 +1,378 @@
+{
+  "schema_version": 1,
+  "family": "resource",
+  "baseline_commit": "8575e16",
+  "original_image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+  "method": "Read-only private Capstone decoding and bounded direct-caller/vtable metadata queries. Only aggregate producer/consumer/ABI facts, stable function identities, offsets and hashes are retained; no original instructions, bytes, packets or licensed payload are emitted. Linear symbolic traces were used as local discovery aids, not as an all-path native identity or formal-count proof.",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "facts": [
+    {
+      "id": "R01",
+      "functions": [
+        "func_001e35e4",
+        "func_001e37b8",
+        "func_001e3794"
+      ],
+      "claim": "The five-word allocation provider reads its size from the incoming stack word, distinguishes full-word regions 0x10000/0x20000/0x30000 and modes 0x100..0x105, and does not read its fourth incoming word. Its successful allocation paths use the canonical pointer-returning managed-heap or VRAM allocation endpoints; the wrapper forwards that pointer result. Exact vtable data_00224db4 slots +8/+0xc identify001e37b8/001e3794, the allocation/release slots of the existing Heap interface. Preserve unused Heap receiver, alignment and flags inputs.",
+      "limits": "Region/mode/flags names are descriptive. This does not resolve the separately owned list-key insertion/release or fatal-handler contract, publish an implementation of001e35e4, or change the distinct retained GraphicsHeap storage view."
+    },
+    {
+      "id": "R02",
+      "functions": [
+        "func_0012f65c",
+        "func_0012f894",
+        "func_0011068c",
+        "func_001228f0",
+        "func_0011e884",
+        "func_0019b74c",
+        "func_0012f84c"
+      ],
+      "claim": "The actual constructor0012f65c installs exactly two shared-memory buffer pointers at receiver+0x5c/+0x60 and initializes the separate SignalState at+0x64. Teardown0012f894 clears exactly those two pointer slots and separately tears down other synchronization/thread state.0011068c queries buffer indices0/1; the direct setter chain0019b74c ->0011e884 ->001228f0 supplies index0. Existing status remains the signed byte+0x75;0012f84c locks the real mutex at+0, manipulates byte+0x76 and waits on the event at+0x64.",
+      "limits": "No runtime bounds check is invented for existing full-word indexed entrypoints. This is an observed partial context, not a claimed complete native graphics class."
+    },
+    {
+      "id": "R03",
+      "functions": [
+        "func_001a2d9c",
+        "func_001a3978",
+        "func_001a77d4",
+        "func_001a7b54",
+        "func_00171268"
+      ],
+      "claim": "The original dispatch providers both update receiver word+0x90 to1/2.001a3978 also writes+0xb4;001a7b54 reads+0xb4 and accesses a later receiver field+0x388.00171268 reads receiver fields+0x94/+0xa0/+0xb4. These larger real receiver consumers invalidate treating the old three-phase scratch view as a complete owner.",
+      "limits": "These reads do not identify the +0xb0 store as one member of a native fixed array, prove all stage bounds, or supply a MenuControllerState/W6SelectionScreen/Screen base relationship."
+    },
+    {
+      "id": "R04",
+      "functions": [
+        "func_00196144",
+        "func_001822fc",
+        "func_00196cb8"
+      ],
+      "claim": "00196144 forwards resource-provider result+0x10 as001822fc receiver; its tag6 entry comes from binding+0x34 and tag5 entry from binding+0x28 then+8.001822fc links entry+4 into receiver list+0x10 and stores receiver into entry+0xc.",
+      "limits": "Native Pane::AppendChild is a supported hypothesis, not nominal identity proof from offsets. C011 explicitly retains its same native-Pane versus C RegistrationOwner mismatch for001ce9e8; no001822fc credit, move or reservation is taken here."
+    },
+    {
+      "id": "R05",
+      "functions": [
+        "func_00120eec",
+        "func_0012e0e0",
+        "func_0012e29c",
+        "func_0012e384",
+        "func_0012dce0"
+      ],
+      "claim": "The actual factory lifecycle includes a0x130-byte object, constructor0012e384 storing its own vtable, a separate FileSessionObject backing handle, and pooled acquisition0012e29c ->00192978 using bss_004b1cb0 rather than the file-session pool bss_004b1d28. The retained r341 factory reads a byte selector at descriptor+8 and file id+12; the wrapper must preserve the full incoming kind word before that narrowing.",
+      "limits": "The generic pool path is not an authorization to call the current FileSessionObject*-returning declaration as a FactoryObject* allocator. A real pool/provider cutover and original archive-path uninitialized reserved bytes must both survive."
+    },
+    {
+      "id": "R06",
+      "functions": [
+        "func_001cecb8",
+        "func_001ceca8",
+        "func_001e87c8",
+        "func_00186908",
+        "func_00135c74",
+        "func_00197220"
+      ],
+      "claim": "001cecb8 restores its unchanged receiver as the final pointer result. Its vptr store is the same vtable entry-address established by the already named native nw::lyt::Layout constructor and _ZTVN2nw3lyt6LayoutE+8. That vtable has001cecb8/001ceca8 in its two destructor slots. The base teardown handles the animation list+4, root pane+0x10 with the pane ownership byte, and group container+0x14. Constructors00135c74/00197220 allocate48-byte derived objects and invoke the native Layout constructor before installing data_00224e44.",
+      "limits": "The old PoolOwner is not a separate class to publish: its geometry is a shadow of native Layout. The exact derived native class, +0x20 member, owned allocation+0x24/ownership byte+0x28 and native destructor/source ownership still require one natural typed cutover."
+    },
+    {
+      "id": "R07",
+      "functions": [
+        "func_00192c20",
+        "func_0010aa28",
+        "func_00111114",
+        "func_00176c6c",
+        "func_001775e0"
+      ],
+      "claim": "All direct original decoder consumers are0010aa28,00111114,00176c6c and001775e0. The resource consumers compute a payload-count word before the copy/decode branch. The independent00111114 paths forward source and a new/shared output buffer, without providing a separately recovered count contract after their preceding allocation work.",
+      "limits": "An independently named third formal is still not established. The decoder body can ignore an incoming count, and eager shared-header parsing remains possible. No two-input shim, overload or dropped input is introduced."
+    },
+    {
+      "id": "R08",
+      "functions": [
+        "func_00140298",
+        "func_001387f4"
+      ],
+      "claim": "The only direct original00140298 caller is001387f4. The original helper leaves112 as its result. The pinned public native provider SetupDrawIndexStreamCommand is declared s32(CommandBufferInfo&,ResIndexStream,bool), returns generated command size, and its public ResPrimitive::SetupDrawCommand consumer assigns that signed size for an assertion. This supplies a concrete native result hypothesis stronger than the old ignored local int.",
+      "limits": "No unique same-address native provider MATCH/name binding is claimed here. The present C pointer-to-payload-pointer001306c8 ->001387f4 boundary still contradicts the native ResPrimitive this contract. Do not turn the native ResIndexStream value into a raw-pointer alias to force closure.",
+      "public_sources": [
+        "https://raw.githubusercontent.com/ctrdecomp/NintendoWare4Ctr/15ddb5632db5a6f0d2f46e3827fc78df468684bd/sources/libraries/gfx/gfx_ActivateCommand.cpp",
+        "https://raw.githubusercontent.com/ctrdecomp/NintendoWare4Ctr/15ddb5632db5a6f0d2f46e3827fc78df468684bd/sources/libraries/gfx/res/gfx_ResShape.cpp",
+        "include/nw/gfx/gfx_ActivateCommand.h"
+      ]
+    },
+    {
+      "id": "R09",
+      "functions": [
+        "func_00104804",
+        "func_00104a28",
+        "func_0010d6d8",
+        "func_0010d500",
+        "func_0010dd20",
+        "func_0010dcb0",
+        "func_0010dce8"
+      ],
+      "claim": "The actual initializer00104a28 stores0010d6d8 result in GraphicsResources+0x10;0010d500 in+0x14;0010dd20 in+0x1c;0010dcb0 in+0x20;0010dce8 in+0x24. The four latter providers already return distinct canonical HeapAllocatorD500/Dd20/Dcb0/Dce8 pointers, not one CleanupElement type. It also stores the renderer pointer into the D500 object resource+8. Existing tail slots+0x28/+0x2c/+0x30 are the real GraphicsResource* producer family.",
+      "limits": "The producer passes the static data_002426d0 owner to Heap-based factories while the current graphics header/init source retain its distinct raw GraphicsHeap storage/vtable view. That construction/owner boundary and the complete renderer contract are not repaired by a typedef or object-pointer cast. Keep the original wrong+0x24 release and second+0x24 test."
+    },
+    {
+      "id": "R10",
+      "functions": [
+        "func_00181a4c",
+        "func_001900ac",
+        "func_001974c0",
+        "func_001865ec"
+      ],
+      "claim": "The real consumer001900ac distinguishes operations1/2/3/4. Operation3 uses target at command+0x14, first/last at+0x18/+0x1c, and mode/word at+0xc/+0x10; it calls scalar resource/index queries001851f0 and0018269c, indexes the target table and forwards payload words into001974c0. Operation2 uses its two scalar words at+0xc/+0x10 instead.",
+      "limits": "A genuine operation-tagged payload union is different from the rejected word/float punning shim. Complete typed variants1/4 and a natural bit-preserving fifth-word producer form that rederives the original floating copy remain unclosed; do not publish pointer first/last formals from the old scratch source."
+    }
+  ],
+  "inspection_scope": [
+    {
+      "function": "func_00104804",
+      "size": 548,
+      "extent_sha256": "019a867f6c8f5e0a1ed3f81ef94f33e7425ca154ffde39229f5f7328819f7162"
+    },
+    {
+      "function": "func_00104a28",
+      "size": 148,
+      "extent_sha256": "9f466ae583df3866b3ea757f6a1301e4c61c502d9712fee11b4863bffe538831"
+    },
+    {
+      "function": "func_0010aa28",
+      "size": 280,
+      "extent_sha256": "c11ea4e86eb18559877d5487e6491816bc7c18c1b152020c8ff68cd3168f2700"
+    },
+    {
+      "function": "func_0010d500",
+      "size": 64,
+      "extent_sha256": "a5760fe87f6fc91ee214ef9a057eda8cac66f323cf30312ff90ccdd46839e3fd"
+    },
+    {
+      "function": "func_0010d6d8",
+      "size": 1496,
+      "extent_sha256": "a84cf575e169b8da654435995e78a14a8670fa1650dd465b8eff9128e70e08ef"
+    },
+    {
+      "function": "func_0010dcb0",
+      "size": 56,
+      "extent_sha256": "57d2524607ab47479a365113120da3d7711b63b8866883323aeab5e28e6ab786"
+    },
+    {
+      "function": "func_0010dce8",
+      "size": 56,
+      "extent_sha256": "6fd2bbfe541c02e025da78d61f6b5244257e4a8ac62c4cd31b77b6c2aa47dcbc"
+    },
+    {
+      "function": "func_0010dd20",
+      "size": 56,
+      "extent_sha256": "da10fca495ab20a399691e004d5fa59f7f408965f778f4a085833fe3d5942047"
+    },
+    {
+      "function": "func_0011068c",
+      "size": 176,
+      "extent_sha256": "aa204c1325deedabed43deab4299f568b371e20ce7b4ddd7c92573883406744c"
+    },
+    {
+      "function": "func_00111114",
+      "size": 264,
+      "extent_sha256": "284b6be936fd228db0d04fef8443f2aacfc3682d1a328c1eb843c3583e902354"
+    },
+    {
+      "function": "func_0011e884",
+      "size": 32,
+      "extent_sha256": "93fd08997fffc0a540ab582b6dbe94e6451e2cae1e48c7abaa9687b743e69e87"
+    },
+    {
+      "function": "func_00120eec",
+      "size": 88,
+      "extent_sha256": "bb03ae1a225ab3fb3c4603dded0d8d40c1e17dfde6e901ba5ebed64497185a7a"
+    },
+    {
+      "function": "func_001228f0",
+      "size": 148,
+      "extent_sha256": "0146b1f2d5642854fff8f473ed02f244ade4240ba79135be653d3aef3cc0eecb"
+    },
+    {
+      "function": "func_0012dce0",
+      "size": 992,
+      "extent_sha256": "31ae362b096a0c9d8bd0fb4e7fac0bc7e627b8e9f7ab941ff3c2336e8a971b76"
+    },
+    {
+      "function": "func_0012e0e0",
+      "size": 444,
+      "extent_sha256": "d2ad39e06aa164290baf55a8cbe7bf977c434b8ec4669dd4dd1af190065c9708"
+    },
+    {
+      "function": "func_0012e29c",
+      "size": 232,
+      "extent_sha256": "34279b427bb1a311487cfc6af18feff9c3edfc86d1cb3e493d8b358721d9734b"
+    },
+    {
+      "function": "func_0012e384",
+      "size": 228,
+      "extent_sha256": "8f6374977aa2793efd9a56527a703f4658b7a695971aefe34af03536fd72a564"
+    },
+    {
+      "function": "func_0012f65c",
+      "size": 496,
+      "extent_sha256": "6c887bddd967fe54c73f1b88f51c57ac690d50864ad4a924e552278110fcba6d"
+    },
+    {
+      "function": "func_0012f84c",
+      "size": 72,
+      "extent_sha256": "33e042adf1f72d9f1ae0f411c747d757ef0ca7be68290277a0beba94e852de03"
+    },
+    {
+      "function": "func_0012f894",
+      "size": 236,
+      "extent_sha256": "af9d4db37af647692ca8a9199c2b6041db745ff1aabb8819922cbb76171dc90e"
+    },
+    {
+      "function": "func_00135c74",
+      "size": 680,
+      "extent_sha256": "82302c15105c75e3bf939e461f7dce44c11f1c72afef5752f4522f76d3d4eb70"
+    },
+    {
+      "function": "func_001387f4",
+      "size": 152,
+      "extent_sha256": "4c68f8ca987a3910becffeccfa6f3f2435958e9c191ad9533e30fb706cbcdf8c"
+    },
+    {
+      "function": "func_00140298",
+      "size": 504,
+      "extent_sha256": "85acda9302476318bccbf5eb2e4e3daf123baa093478a42e8fc874fa767cd4aa"
+    },
+    {
+      "function": "func_00171268",
+      "size": 1668,
+      "extent_sha256": "6e67010a473ae977f10dfd95d8fb414dc6446d5c11256a1e55c1fdfe91698095"
+    },
+    {
+      "function": "func_00176c6c",
+      "size": 300,
+      "extent_sha256": "6a87888867867d93a3f3aa50e8f581df99877fe5dcedb3ed658bae29b68f4721"
+    },
+    {
+      "function": "func_001775e0",
+      "size": 316,
+      "extent_sha256": "41f5c735191a591102357328e1c92aa67e5dfbcbb5533ef0b549f616664c9659"
+    },
+    {
+      "function": "func_00181a4c",
+      "size": 96,
+      "extent_sha256": "b1b4dd4726e5c06d19e100cf35d77270500634b99e41bdce8af82cdd26d970f7"
+    },
+    {
+      "function": "func_001822fc",
+      "size": 36,
+      "extent_sha256": "fd79f76a8456c630c0708a00c316e56ac1b71906ff262a63ba541ff33e73df46"
+    },
+    {
+      "function": "func_00186908",
+      "size": 60,
+      "extent_sha256": "48637e8188d21bff08fd55ee1da71ce710dd0fb1bae4a01fb023a1b27941756d"
+    },
+    {
+      "function": "func_001900ac",
+      "size": 932,
+      "extent_sha256": "1b0c41ba025ef9cc64be11ecc2c2ff44bc1c2eefb4228a41b4de8360c20b3849"
+    },
+    {
+      "function": "func_001929dc",
+      "size": 160,
+      "extent_sha256": "54294475e8dbdf701bbd57b94e125d2a4a32042e73079a1a033fcfe9688aaaf3"
+    },
+    {
+      "function": "func_00192c20",
+      "size": 432,
+      "extent_sha256": "d1f2b116dfd3f037c1095807562d6c36a4d48e183803f0de00f48043191d345b"
+    },
+    {
+      "function": "func_00196144",
+      "size": 236,
+      "extent_sha256": "b0e827c6215bead875f951afe46bb7f9076e5b4d463750894e0e19dd05c3fce6"
+    },
+    {
+      "function": "func_00196cb8",
+      "size": 96,
+      "extent_sha256": "48cbe957a8a9d929a8e62433b1ff953b0dc11b1ba99caea34c91a95fe99c1f93"
+    },
+    {
+      "function": "func_00197220",
+      "size": 456,
+      "extent_sha256": "dced3235bfca55d38de3ffa452406e3bf4a49579f8bf4616b3c41bfcd329fa5c"
+    },
+    {
+      "function": "func_001973e8",
+      "size": 216,
+      "extent_sha256": "0b23c72190b86705ab37e4dce6eb3eeef299f1070d82ca6391bef2f0dcbd6e68"
+    },
+    {
+      "function": "func_001974c0",
+      "size": 692,
+      "extent_sha256": "d411b0e33183e43770095538354a5a4687d89b1ec2b5bcaecb4d1f1c8d909907"
+    },
+    {
+      "function": "func_0019b74c",
+      "size": 408,
+      "extent_sha256": "ec0ee141d4ce1b86b2b5fe39a4173fec705ee43ce3d3894ea74c4c4032963aa6"
+    },
+    {
+      "function": "func_001a2d9c",
+      "size": 208,
+      "extent_sha256": "16f21bd27508a24538550a7847fb1dbe38f3b28b1b43a19898645fcbfcc3e535"
+    },
+    {
+      "function": "func_001a3978",
+      "size": 1384,
+      "extent_sha256": "6958c0262a4cc628de5cff296f79148352f8b2e4cdf984e2e224c2150fcb6f7c"
+    },
+    {
+      "function": "func_001a77d4",
+      "size": 208,
+      "extent_sha256": "15b5ad870f5ba75cabfcf0e0e682fa55fccfec3004d5e3202c01658126dade39"
+    },
+    {
+      "function": "func_001a7b54",
+      "size": 1268,
+      "extent_sha256": "9b67b05efe67a1d59f75b0072421e5884e39d75db6ec28cb7bddcd3c43ef2bca"
+    },
+    {
+      "function": "func_001ceca8",
+      "size": 16,
+      "extent_sha256": "223cfbf6405794b0eb06e3fb9f3efbc342d839b490b93fc7af21c4927ad10dd1"
+    },
+    {
+      "function": "func_001cecb8",
+      "size": 240,
+      "extent_sha256": "0b559e72001f6cf582cd0853ad8bdb81d5d6bb426ebefe86bacf34ce4d2df311"
+    },
+    {
+      "function": "func_001e35e4",
+      "size": 284,
+      "extent_sha256": "b44dc5c63516213809db6611239cce70a00def7121133d8235a5f359f2aa96d2"
+    },
+    {
+      "function": "func_001e37b8",
+      "size": 36,
+      "extent_sha256": "2b11b4d5c8000e2681c0db7a494b5845e1ea312cee46921ebd0d5be2a16c692c"
+    },
+    {
+      "function": "func_001e87c8",
+      "size": 72,
+      "extent_sha256": "a6a42f3e8422b31c9866081f4a696661f7bba215c2c5801df1dc235100f030e5"
+    },
+    {
+      "function": "func_001f5488",
+      "size": 436,
+      "extent_sha256": "5c9f33b94bf8457a1b858a4ea6f0f2bb238ab0bc58bfb3a268d7646df46726b5"
+    }
+  ]
+}

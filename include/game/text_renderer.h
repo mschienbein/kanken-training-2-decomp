@@ -5,6 +5,49 @@ struct RecordSet;
 
 #include "game/runtime.h"
 
+#ifdef __cplusplus
+#include <nw/ut/ut_Color.h>
+/* [INFERENCE] Shared target-version text-field view used by application
+ * wrappers; not the complete native TextBox or a material-bearing pane. */
+struct SurfaceSize {
+    float width, height;
+    SurfaceSize(float w, float h) : width(w), height(h) {}
+    SurfaceSize(const SurfaceSize &other) : width(other.width), height(other.height) {}
+    bool operator==(const SurfaceSize &other) const
+    { return width == other.width && height == other.height; }
+    bool operator!=(const SurfaceSize &other) const { return !(*this == other); }
+};
+struct SurfaceTextState {
+    unsigned char reserved00[0xd8];
+    nw::ut::Color8 colors[2];
+    unsigned char reservede0[4];
+    SurfaceSize size;
+    float line_spacing, character_spacing;
+    unsigned char reservedf4[0x0a];
+    unsigned char dirty;
+    void SetTextColor(unsigned index, nw::ut::Color8 value)
+    {
+        colors[index] = value;
+    }
+    bool update_dirty(bool changed) { dirty |= changed; return changed; }
+    void set_size(const SurfaceSize &value)
+    {
+        if (update_dirty(!(size == value)))
+            size = value;
+    }
+    void set_character_spacing(float value)
+    {
+        if (update_dirty(character_spacing != value))
+            character_spacing = value;
+    }
+    void set_line_spacing(float value)
+    {
+        if (update_dirty(line_spacing != value))
+            line_spacing = value;
+    }
+};
+#endif
+
 /* [INFERENCE] Descriptive names; widths and offsets follow matching clients. */
 #ifdef __cplusplus
 extern "C" {

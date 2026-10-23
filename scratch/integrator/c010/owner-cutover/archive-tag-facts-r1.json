@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "function": "func_001650f8",
+  "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+  "callee": {
+    "entry_tag_register_writes": [
+      56,
+      116,
+      148
+    ],
+    "full_word_comparisons": [
+      {
+        "offset": 48,
+        "compares_unchanged_entry_core_word": true,
+        "other_value": {
+          "origin": "unsigned-halfword",
+          "proven_unsigned_16_bit": true
+        }
+      },
+      {
+        "offset": 108,
+        "compares_unchanged_entry_core_word": true,
+        "other_value": {
+          "origin": "unsigned-halfword",
+          "proven_unsigned_16_bit": true
+        }
+      },
+      {
+        "offset": 140,
+        "compares_unchanged_entry_core_word": true,
+        "other_value": {
+          "origin": "unsigned-halfword",
+          "proven_unsigned_16_bit": true
+        }
+      }
+    ]
+  },
+  "callers": [
+    {
+      "function": "func_001f1ebc",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "unknown",
+        "proven_unsigned_16_bit": false
+      }
+    },
+    {
+      "function": "func_001f1ed8",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "unknown",
+        "proven_unsigned_16_bit": false
+      }
+    },
+    {
+      "function": "func_001f1ef4",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "constant",
+        "proven_unsigned_16_bit": true,
+        "high_half_proven_nonzero": false
+      }
+    },
+    {
+      "function": "func_001f1f08",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "unknown",
+        "proven_unsigned_16_bit": false
+      }
+    },
+    {
+      "function": "func_001f1f20",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "constant",
+        "proven_unsigned_16_bit": true,
+        "high_half_proven_nonzero": false
+      }
+    },
+    {
+      "function": "func_001f1f34",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "unknown",
+        "proven_unsigned_16_bit": false
+      }
+    },
+    {
+      "function": "func_001f1f4c",
+      "offset": 8,
+      "kind": "direct-call",
+      "tag_argument": {
+        "origin": "unknown",
+        "proven_unsigned_16_bit": false
+      }
+    }
+  ],
+  "caller_count": 7,
+  "decision": "Retain unsigned full-word tag in the canonical C endpoint; the stored unsigned-short field does not narrow the parameter.",
+  "qualification": "[INFERENCE] Historical formal spelling is not recovered. An unchanged entry core word is compared without an observed truncation; a narrow C formal would introduce an unsupported caller-side input restriction. All discovered direct/tail callers are listed, not indirect aliases or uncatalogued code. The analysis does not execute the original program."
+}

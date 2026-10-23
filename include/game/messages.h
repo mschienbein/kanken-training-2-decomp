@@ -47,6 +47,9 @@ extern void func_001ad5a8(struct MessageLayout *layout, int index);
 /* These helpers receive the same layout object, not an unrelated handle-array
  * owner. The original forwards its first address, without a receiver cast. */
 extern void func_00170dc0(struct MessageLayout *layout, int index, int enabled);
+extern int func_00181aac(int selection);
+extern void func_0015e780(struct TrainingWidget *widget, unsigned value);
+extern void func_0015e824(struct TrainingWidget *widget, unsigned value);
 extern void func_00170db4(struct MessageLayout *layout, int enabled);
 extern void func_00177b84(struct MessageLayout *layout, int enabled);
 extern void func_001ad6d0(struct MessageLayout *layout, int first, int second);

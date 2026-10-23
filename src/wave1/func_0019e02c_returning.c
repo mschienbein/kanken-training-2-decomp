@@ -1,13 +1,6 @@
 #include "game/runtime.h"
 
-struct ResourceSet {
-    unsigned char state[0x44];
-    void *first;
-    void *second;
-    void *allocation;
-};
-
-extern struct ResourceSet bss_00291758;
+#include "game/resource_publication.h"
 
 void func_0019e02c(void)
 {

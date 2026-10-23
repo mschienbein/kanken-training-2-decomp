@@ -86,6 +86,7 @@ struct MainThreadRecord {
     unsigned char *thread_local_storage;
 };
 
+
 #ifdef __cplusplus
 extern "C" {
 #endif

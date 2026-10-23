@@ -5,7 +5,7 @@
 
 static __forceinline Result configure_client(void)
 {
-    Result result = func_00113c0c(&data_002430d8, data_0021ac13);
+    Result result = func_00113c0c(&data_002430d8.handle, data_0021ac13);
     switch (result.failed()) {
     case 0:
         result = func_00113c74();

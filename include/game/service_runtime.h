@@ -27,15 +27,23 @@ struct AudioChannel;
 typedef void (*LifecycleCallback)(void);
 
 /* Callback pending and resource busy are distinct fields of this state object. */
-struct ServiceHandle { unsigned handle; };
 struct ResourceServiceState {
-    unsigned char reserved00[2];
+    unsigned char deferred;
+    signed char published;
     unsigned char pending;
-    unsigned char reserved03[5];
-    const struct ServiceHandle *initialized;
+    signed char acquired;
+    unsigned short first, second;
+    const CtrHandle *session;
     unsigned int busy;
     unsigned char lock_storage[8];
     CtrHandle handle;
+    const void *source;
+    unsigned size;
+};
+/* [INFERENCE] Startup only exposes the result subobject, not a complete class. */
+struct ServiceStartupState {
+    unsigned char reserved00[0x24];
+    struct Result result;
 };
 struct InvalidHandleRecord { unsigned int reserved; CtrHandle handle; };
 struct SharedPublicationState {
@@ -50,6 +58,60 @@ struct SharedPublicationState {
 };
 
 
+struct ChannelParameters {
+    unsigned samples;
+    unsigned reserved04;
+    unsigned reserved08;
+    unsigned char mode;
+    unsigned char reserved0d[3];
+};
+struct ChannelWorkspace {
+    unsigned reserved00;
+    struct ChannelParameters parameters;
+    void *memory;
+    unsigned memory_size;
+    void *buffers[4];
+    unsigned indices[4];
+    unsigned frames;
+    unsigned current;
+    unsigned reserved44[3];
+    unsigned saved_samples;
+    unsigned char saved_mode;
+    unsigned char channels;
+    unsigned char initialized;
+};
+struct ExtendedWorkspace {
+    unsigned reserved00;
+    unsigned first_duration;
+    unsigned reserved08;
+    unsigned second_duration;
+    unsigned reserved10[6];
+    void *memory;
+    unsigned reserved2c;
+    unsigned first_count;
+    unsigned second_count;
+    unsigned third_count;
+    unsigned char *buffer;
+    unsigned char *second_buffer;
+    unsigned reserved44[2];
+    unsigned char *first;
+    unsigned char *second_first;
+    unsigned reserved54[2];
+    unsigned *second;
+    unsigned *third;
+    unsigned *second_second;
+    unsigned *second_third;
+    unsigned reserved6c[4];
+    unsigned *fourth;
+    unsigned *second_fourth;
+    unsigned char reserved84[0x6c];
+    unsigned saved_first_duration;
+    unsigned saved_second_duration;
+    unsigned saved_first_count;
+    unsigned saved_second_count;
+    unsigned saved_third_count;
+    unsigned char initialized;
+};
 struct WorkspacePair {
     struct ChannelWorkspace *channels;
     struct ExtendedWorkspace *extended;
@@ -95,14 +157,14 @@ struct ServiceCoordinator {
     CtrHandle ready_event, completion_event;
     struct StreamMutex mutex;
     unsigned char reserved14[0x109c - 0x14];
-    union {
-        unsigned short *completion_slots[150];
+    struct {
         struct {
-            unsigned short *reserved109c[2];
+            unsigned char reserved109c[8];
             struct AudioDspParameterBlock *voice_parameters[2];
             struct AudioDspReply *replies[2];
             struct AudioDspParameterBlock *auxiliary_parameters[2][24];
         } audio;
+        unsigned char reserved1174[0x180];
     } storage;
     struct ServiceBufferPair buffers[5];
     unsigned char enabled, pending;
@@ -111,6 +173,33 @@ struct ServiceCoordinator {
     unsigned extra;
     unsigned char reserved132c[0x15b0 - 0x132c];
     unsigned char publish;
+};
+/* [INFERENCE] Command-queue view starts at +0x10b4, distinct from
+ * ServiceCoordinator.storage at +0x109c. The coefficient-copy consumer
+ * establishes the destination pointee; no native owner equivalence is claimed. */
+struct ServiceCommandW22E {
+    unsigned flags;
+    unsigned char reserved04[0x34 - 4];
+    float value;
+    unsigned char reserved38[0xb0 - 0x38];
+    unsigned parameter;
+    unsigned char reservedb4[8];
+    unsigned short options, identifier;
+};
+struct ServiceCommandDescriptorW22E {
+    unsigned char reserved00[8];
+    unsigned short identifier;
+};
+struct AdpcmCoefficients;
+struct ServiceCommandQueueW22E {
+    unsigned char reserved00[0x10b4];
+    struct ServiceCommandW22E *commands[2][24];
+    struct ServiceCommandDescriptorW22E *descriptors[2][24];
+    struct AdpcmCoefficients *destinations[2][24];
+    unsigned char reserved12f4[0x131e - 0x12f4];
+    unsigned short command_buffer;
+    unsigned short descriptor_buffer;
+    unsigned short destination_buffer;
 };
 struct AudioChannel;
 struct HandleManager {
@@ -138,6 +227,8 @@ extern CtrHandle data_00242b14;
 extern const struct InvalidHandleRecord data_0021abd0;
 extern struct SharedPublicationState data_00242d90;
 extern struct ServiceOutput bss_004b5234;
+extern struct ServiceStartupState bss_0049f000;
+extern void func_0020e32c(void);
 extern struct ServiceCoordinator bss_004b5284;
 extern struct HandleManager bss_004b6888;
 extern void func_0012fbd4(struct ResourceServiceEvent *event);
@@ -145,6 +236,8 @@ extern void func_0012e620(struct StreamCriticalSection *lock);
 extern int func_0012e854(LifecycleCallback first, LifecycleCallback second,
     LifecycleCallback third);
 extern void func_0013e84c(void);
+extern int func_00148a9c(struct ServiceCoordinator *state, unsigned short value);
+extern int func_00155e20(struct ServiceCoordinator *state, int channel);
 extern void func_0013e9d8(void);
 extern void func_0013e810(void);
 extern int func_0012f1c0(struct ServiceOutput *state);
@@ -163,6 +256,25 @@ extern void func_0014b224(struct ServiceWorker *state, unsigned char value);
 /* [INFERENCE] The wrapper forwards this word; the worker body does not read it. */
 extern void func_0014fa48(struct ServiceWorker *backend, unsigned argument);
 extern void func_001521dc(struct HandleManager *manager, struct AudioChannel *handle);
+/* These publishers store the unchanged workspace argument in the actual
+ * ServiceOutput slots at +0x34/+0x38 before the matching initializer call. */
+extern int func_0015343c(struct ServiceOutput *owner, unsigned index,
+                        struct ChannelWorkspace *workspace);
+extern int func_001534e0(struct ServiceOutput *owner, unsigned index,
+                        struct ExtendedWorkspace *workspace);
+extern void func_0017e8fc(struct ChannelWorkspace *workspace);
+extern int func_00154438(struct ChannelWorkspace *workspace);
+extern int func_001544e0(struct ExtendedWorkspace *workspace);
+extern const unsigned char data_00229aa0[];
+extern CtrResult func_00185050(const void *source, unsigned size,
+                             unsigned short first, unsigned short second);
+extern CtrResult func_001425bc(void);
+extern CtrResult func_001368b0(void);
+extern void func_0012e8a4(void);
+extern struct Result func_00148040(unsigned value, void *buffer,
+                                 unsigned short capacity, unsigned short *output);
+extern struct Result func_00148094(unsigned value, unsigned *output);
+extern int func_0014cc9c(struct ServiceCommandQueueW22E *queue, int channel, float value);
 #ifdef __cplusplus
 }
 #endif

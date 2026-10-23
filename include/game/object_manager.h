@@ -8,6 +8,11 @@ struct StreamMutex;
 
 
 #include "game/stream_manager.h"
+#ifdef __cplusplus
+#include <preinclude.h>
+#include <nw/ut/ut_LinkList.h>
+#include <stddef.h>
+#endif
 
 
 struct ObjectManager {
@@ -20,7 +25,24 @@ struct ObjectManager {
     unsigned char running;
     unsigned char reserved1f5[2];
     unsigned char stopping;
+    unsigned reserved1f8;
+    unsigned voice_requests;
 };
+
+struct ResourceRecordList;
+#ifdef __cplusplus
+/* [INFERENCE] Independent resource-list prefix; its link is at +0x50, not
+ * RegistryEntry.link and not the manager's own registry. */
+struct ResourceAmountEntry {
+    unsigned amount;
+    unsigned char reserved04[0x4c];
+    PoolLink link;
+};
+struct ResourceRecordList {
+    unsigned reserved00;
+    nw::ut::LinkList<ResourceAmountEntry, offsetof(ResourceAmountEntry, link)> records;
+};
+#endif
 
 struct OperationSettings {
     unsigned value;
@@ -68,6 +90,7 @@ extern void func_00195ec4(struct StreamMutex *lock);
 extern void func_0017e634(struct ObjectManager *manager, struct RegistryEntry *entry);
 extern struct PoolLink *func_0017e640(struct ObjectManager *manager,
                                      struct RegistryEntry *entry);
+extern unsigned func_0014d7a0(struct ResourceRecordList *list);
 #ifdef __cplusplus
 }
 #endif

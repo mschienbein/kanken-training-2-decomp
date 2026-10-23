@@ -1,10 +1,11 @@
 #include "game/scene_lifecycle.h"
+#include "game/audio_voice.h"
 
 void func_0018290c(struct AudioVoiceGroup *resource, int event,
                    void *context)
 {
-    struct SoundTrack *child = context;
-    unsigned notification = 2;
+    struct AudioVoice *child = context;
+    int notification = 2;
     switch (event) {
     case 0:
         func_00183550(resource);
@@ -20,9 +21,9 @@ void func_0018290c(struct AudioVoiceGroup *resource, int event,
     }
     if (child->callback)
         child->callback(child, notification, child->callback_data);
-    child->task = 0;
-    child->enabled = 0;
-    child->active = 0;
-    child->pending = 0;
+    child->group = 0;
+    child->flag138 = 0;
+    child->flag139 = 0;
+    child->flag13a = 0;
     func_00182994(func_00185cc0(), child);
 }

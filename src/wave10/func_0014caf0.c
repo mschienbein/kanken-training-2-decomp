@@ -1,10 +1,6 @@
-struct HwrWordPair {
-    unsigned first;
-    unsigned second;
-};
+#include "game/frame_timing.h"
 
-void func_0014caf0(struct HwrWordPair *destination,
-                   const struct HwrWordPair *source)
+void func_0014caf0(struct FrameTime *destination, const long long *source)
 {
-    *destination = *source;
+    destination->ticks = *source;
 }
