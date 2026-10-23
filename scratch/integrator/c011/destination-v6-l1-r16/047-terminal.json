@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/reverse_word_bytes-r9.c",
+  "source_sha256": "a7e0f832a32773ed96e79945dac8f0e663f1a5c8be6da3d4da003484d852b5d8",
+  "profile": "game",
+  "credited_functions": [
+    "func_0016b404"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/reverse_word_bytes-r9.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/047-reverse_word_bytes-r9"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.133062,
+  "stdout": "MATCH    func_0016b404 @ 0x16b404 size 0x28/0x28\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/047-reverse_word_bytes-r9/reverse_word_bytes-r9.result.json",
+  "result_sha256": "0482e34d44184e08577c0cda78638d630e0cae197e0af36ec6e0933d5c7094ca",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_0016b404",
+      "status": "match",
+      "size": 40,
+      "candidate_size": 40,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

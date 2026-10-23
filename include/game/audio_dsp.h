@@ -13,8 +13,9 @@ struct AudioDspVolumeSettings {
     float output_volume[2];
 };
 
-struct AudioDspParameterBlock {
-    unsigned int flags;
+/* [INFERENCE] The contiguous settings subobject begins at parent +4.
+ * Existing field labels retain their offsets relative to the parent block. */
+struct AudioDspSettings {
     struct AudioDspVolumeSettings volume;
     unsigned short value10;
     unsigned char reserved12[4];
@@ -38,6 +39,11 @@ struct AudioDspParameterBlock {
     unsigned int flagsc0;
 };
 
+struct AudioDspParameterBlock {
+    unsigned int flags;
+    struct AudioDspSettings settings;
+};
+
 struct AudioDspReply {
     unsigned short reserved00;
     unsigned short value;
@@ -48,6 +54,8 @@ extern "C" {
 #endif
 extern int func_00155ab4(struct ServiceCoordinator *coordinator, int channel,
     short count);
+extern int func_0014cc1c(struct ServiceCoordinator *coordinator, int channel,
+    int mode, unsigned char option);
 #ifdef __cplusplus
 }
 #endif

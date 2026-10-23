@@ -2,7 +2,9 @@
  * NintendoWare4Ctr contributors; upstream include/nw/ut/ut_MoveArray.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: public header unchanged except standalone relative include paths
+ * Modified 2026-10-17: standalone relative include paths.
+ * Modified 2026-10-23: initialize fresh wrapped/variable capacity storage before
+ * the existing bit-field setters, as witnessed by TransformNode::CreateCallbacks.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #pragma once
@@ -67,7 +69,8 @@ public:
     MoveArray(TTElemet* elements, size_t capacity, os::IAllocator* allocator = NULL, ArrayKind kind = ARRAY_WRAPPER):
         m_Allocator(allocator),
         m_Elements(reinterpret_cast<TElement*>(elements)),
-        m_End(reinterpret_cast<TElement*>(elements))
+        m_End(reinterpret_cast<TElement*>(elements)),
+        m_Capacity(0)
     {
         SetCapacity(capacity);
         SetArrayKind(kind);
@@ -95,7 +98,8 @@ public:
     MoveArray(os::IAllocator* allocator):
         m_Allocator(allocator),
         m_Elements(NULL),
-        m_End(NULL)
+        m_End(NULL),
+        m_Capacity(0)
     {
         NW_NULL_ASSERT(allocator);
         SetCapacity(0);

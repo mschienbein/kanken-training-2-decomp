@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/gpu_buffer_descriptor-r9.c",
+  "source_sha256": "8a8a1bcd3da70a96c5134adbb37eb968dccc0780633d2bb8bea76223565e10d1",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_001223c0"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/gpu_buffer_descriptor-r9.c",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/044-gpu_buffer_descriptor-r9"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.142985,
+  "stdout": "MATCH    func_001223c0 @ 0x1223c0 size 0x3c/0x3c\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/044-gpu_buffer_descriptor-r9/gpu_buffer_descriptor-r9.result.json",
+  "result_sha256": "96bfd5c1999538916d9fdcd7347c5f4a7decdd4115b00b6b6539a3566fa02372",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001223c0",
+      "status": "match",
+      "size": 60,
+      "candidate_size": 60,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

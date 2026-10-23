@@ -1,5 +1,5 @@
 #include "ctr/ipc.h"
-extern unsigned func_00192a7c(void);
+#include "game/service_clients.h"
 
 
 int func_0012dcc0(unsigned *output)

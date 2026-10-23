@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "rows": [
+    {
+      "function": "func_001ad708",
+      "target_size": 152,
+      "source": "scratch/permute/sweep-4/search/func_001ad708/best.c",
+      "source_sha256": "c9a66d07930455d1b8892501602ac76c780acc8b1eeb582ae8e98599246d193f",
+      "receipt": "scratch/permute/sweep-4/verify/func_001ad708/best.result.json",
+      "receipt_sha256": "fe955c42095bf39937685cdf6bd04dd0b9108ecb79be631d654f85b18c190ed5",
+      "summary": "scratch/permute/sweep-4/summary.json",
+      "summary_sha256": "1695a390d8f007614f454c9db35fcd046e8204e83d69b4aea3a6dbb65e938281",
+      "prior_exact_verification_exit_code": 0,
+      "prior_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "source_classification": "qualified-steering",
+      "disposition": "source-policy-qualified-contract-deferred-not-new-credit",
+      "reason": "Target body uses a two-stage artificial local copy of the constant -1 (permute_tmp_1/permute_tmp_0 at retained lines646-648) and redundant double-negation at651 solely as search mutations, not a recovered program operation. It also declares accepted00183208 with DisplayObject* instead of canonical ResourceEvent*, so owner cutover remains an independent blocker.",
+      "search_rerun": false,
+      "accepted_or_predecessor_owner": null
+    },
+    {
+      "function": "func_001ae140",
+      "target_size": 420,
+      "source": "scratch/permute/sweep-4/search/func_001ae140/best.c",
+      "source_sha256": "402f1ae239c9b807327d6376b30368cbd26c0a55250c97c74ce75045e8026ca3",
+      "receipt": "scratch/permute/sweep-4/verify/func_001ae140/best.result.json",
+      "receipt_sha256": "3d232fcb73f09ce7cb36bab25d083a62a92726c101915f8ba8d09804c2ebace3",
+      "summary": "scratch/permute/sweep-4/summary.json",
+      "summary_sha256": "1695a390d8f007614f454c9db35fcd046e8204e83d69b4aea3a6dbb65e938281",
+      "prior_exact_verification_exit_code": 0,
+      "prior_models": {
+        "linker_model": "armlink5-inline-branchnop-v2",
+        "literal_model": "none"
+      },
+      "source_classification": "qualified-steering",
+      "disposition": "source-policy-qualified-contract-deferred-not-new-credit",
+      "reason": "Target body retains redundant double-negation and redundant signed-int cast of already-signed i at1404 plus permutation-only nested blocks and loop-form substitutions. Treat this exact search witness conservatively as steering-qualified, not automatically natural C. Independently the Grid25 owner and DisplayObject* cleanup declaration conflict with accepted Component001ae140/ResourceEvent* contracts; the existing c011 deferral is still active.",
+      "search_rerun": false,
+      "accepted_or_predecessor_owner": null
+    }
+  ],
+  "qualification": "Static source classification only; immutable search/verification receipts are unchanged. 001ea6d8 remains the existing DISPOSITIONS-r2 contract deferral; no second collection or search is run."
+}

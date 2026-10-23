@@ -1,0 +1,44 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/src/checkpoint11/intake-r9/np062/commands_final.cpp",
+ "source_sha256": "2fdf1cedbf0fb8550ee01bdc4dbc39a01d35c03b5efdfc2e7553de75d7efbcc2",
+ "profile": "middleware",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "046df0e02a1ffcf9aa45f3405b2ff3fc42240862e24755dd16fc14bc41a37c68",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "d13a8c794676c135b3bcd03676bf1803c5b5215455428ee4177ed911311c3d64",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [],
+ "removed_callees": [],
+ "functions": [
+  {
+   "name": "func_001911f0",
+   "address": 1642992,
+   "size": 92,
+   "candidate_size": 92,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 88,
+     "rule": "branchnop",
+     "target": 1643084,
+     "word": "0xe1a00000"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/linear_buffer/func_00112b5c.c",
+ "source_sha256": "7c57da5c03b0eceb191c76f7d7ee1586d65b9b77f7022272ef4dacd1e5d0034c",
+ "profile": "sdk",
+ "compiler": "armcc_41_791",
+ "compiler_sha256": "4c13735a16b3a15bc1938526b5dfdba4a2bbd1b45eddb41485ba42d2ee62cc54",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O2",
+  "-Otime"
+ ],
+ "object_sha256": "75076eed0f5182c9439f75af98dbc6b4d2ebfe4a8f1f75851c5d280a8fc47446",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/linear_buffer/linear_buffer_allocator.c",
+   "source_sha256": "769d023b593330b79ad72a11adf42e00dba0adb0b50a186573a4f862565eb6af",
+   "object_sha256": "0460bacad3b9741794460aa758500b960919f10e15d26d34b20460c7d03cc3e2"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "InitializeLinearBufferAllocator"
+   ],
+   "section": "i.InitializeLinearBufferAllocator",
+   "size": 8,
+   "object": "scratch/integrator/c011/r5/matches-r1/1607-func_00112b5c/extra-0-linear_buffer_allocator.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_00112b5c",
+   "address": 1125212,
+   "size": 36,
+   "candidate_size": 36,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 12,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe5801000",
+     "removed_callee": {
+      "symbols": [
+       "InitializeLinearBufferAllocator"
+      ],
+      "section": "i.InitializeLinearBufferAllocator",
+      "size": 8,
+      "object": "scratch/integrator/c011/r5/matches-r1/1607-func_00112b5c/extra-0-linear_buffer_allocator.o"
+     }
+    }
+   ]
+  }
+ ]
+}

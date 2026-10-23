@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "sealed_review": "scratch/prereview/c011-r6/PREREVIEW.json",
+  "sealed_review_sha256": "049f5a0d118b74c587e2a74312c4b39087c4c51988e972aed8a1dfe945142e9f",
+  "seal": "scratch/prereview/c011-r6/SEAL.json",
+  "seal_sha256": "aca63f5d1430a95294074486ccb2870f4bd324c1c000eb3f0f9ad294033450c4",
+  "status": "Sealed blocker and every additional proved/declared-contract sweep hit isolated by NEW-only deferral. No accepted family is declared repaired.",
+  "findings": [
+    {
+      "id": "C011R6-F01",
+      "function": "func_00185a88",
+      "disposition": "NEW-only-deferral",
+      "deferred_bytes": 100,
+      "reason": "The actual native BankFile::FileHeader::GetInfoBlock const member/InfoBlock result is called through an independent C BankFile/BankBlock facade. Shared BankReader has accepted C initializer/reference consumers and is not the public native BankFileReader extent. No local cast, returned-object alias or second reader model is admitted; the NEW path is held instead.",
+      "evidence": [
+        "include/nw/snd/snd_BankFile.h",
+        "src/nw4c/snd_BankFile.cpp",
+        "include/game/archive.h",
+        "src/sdk2/func_0015276c.cpp",
+        "src/wave7/func_00185a6c.c"
+      ],
+      "reproof_exit": null,
+      "reproof_note": "Withdrawn NEW implementation is not claimed passing source admission. Final complete current proposal has2663 exit0 and2763 required MATCH functions. Genuine ServiceResult alternatives have actual recorded exit1, not suppressed failures."
+    },
+    {
+      "id": "C011R7-SWEEP-F01",
+      "function": "func_001ce998",
+      "disposition": "NEW-only-deferral",
+      "deferred_bytes": 80,
+      "reason": "New genuine Layout::DeleteAnimTransform invokes native LinkListImpl::erase(LinkListNode*) but its original-bound target0018d868 remains the actual C PoolLink*(PoolList*,PoolLink*) provider. Native receiver/node/iterator result and C record/pointer result differ. Main approves a NEW-only hold and retention of the prepared C provider.",
+      "evidence": [
+        "src/wave7/func_0018d868.c",
+        "include/game/pool_list.h",
+        "include/nw/ut/ut_LinkList.h"
+      ],
+      "reproof_exit": null,
+      "reproof_note": "Withdrawn NEW implementation is not claimed passing source admission. Final complete current proposal has2663 exit0 and2763 required MATCH functions. Genuine ServiceResult alternatives have actual recorded exit1, not suppressed failures."
+    },
+    {
+      "id": "C011R7-SWEEP-F02",
+      "function": "func_001cc1e4",
+      "disposition": "NEW-only-deferral",
+      "deferred_bytes": 104,
+      "reason": "The new GroupContainer cleanup invokes native erase(iterator) at actual C provider00191178. Its native implicit receiver/by-value iterator/iterator result do not match PoolLink*(PoolList*,PoolLink*). Main approves a NEW-only hold, not a reinterpretation or accepted-provider rehome.",
+      "evidence": [
+        "src/wave6/func_00191178.c",
+        "include/game/pool_list.h",
+        "include/nw/ut/ut_LinkList.h"
+      ],
+      "reproof_exit": null,
+      "reproof_note": "Withdrawn NEW implementation is not claimed passing source admission. Final complete current proposal has2663 exit0 and2763 required MATCH functions. Genuine ServiceResult alternatives have actual recorded exit1, not suppressed failures."
+    },
+    {
+      "id": "C011R7-SWEEP-F03",
+      "function": "func_00117ad8",
+      "disposition": "NEW-only-deferral",
+      "deferred_bytes": 108,
+      "reason": "The NEW WordPair*/unsigned facade conflicts with the existing accepted ServiceResult(Result) constructor declaration/caller at the same address. Provider absence is not a waiver. Genuine aggregate-result and genuine typed-storage placement-construction forms both mismatch, so Main's fix-or-hold rule selects the NEW hold. No actual uncompiled body or original historical class is fabricated.",
+      "evidence": [
+        "include/game/service_result.h",
+        "include/game/result.h",
+        "src/wave14/func_0010b92c.cpp",
+        "scratch/integrator/c011/r7/attempts/func_00117ad8-value.cpp",
+        "scratch/integrator/c011/r7/deferred/func_00117ad8-placement.cpp"
+      ],
+      "reproof_exit": null,
+      "reproof_note": "Withdrawn NEW implementation is not claimed passing source admission. Final complete current proposal has2663 exit0 and2763 required MATCH functions. Genuine ServiceResult alternatives have actual recorded exit1, not suppressed failures."
+    }
+  ],
+  "all_current_predecessor_retained_identities_preserved": true,
+  "inherited_boundaries_intentionally_unchanged": [
+    "Accepted C bank reader/reference consumers and native bank provider; broad native bank-family migration is not imported.",
+    "Prepared C PoolList/PoolLink erase providers and their accepted clients.",
+    "Existing accepted canonical ServiceResult(Result) construction and older predecessor-only result views; no declaration or class is weakened to admit the NEW facade."
+  ]
+}

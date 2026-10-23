@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "branch": "c013",
+  "authority": "Assignment explicitly requires holding, without credit, anything that cannot integrate cleanly under the standing source rules.",
+  "counts": {
+    "functions": 4,
+    "bytes": 844,
+    "additional_distinct_holds": 3,
+    "additional_distinct_hold_bytes": 516,
+    "already_held_by_c011": ["func_001d01dc"],
+    "combined_distinct_predecessor_and_c013_holds": 231
+  },
+  "rows": [
+    {
+      "function": "func_001d9820",
+      "author": "np272",
+      "size": 156,
+      "profile": "sdk",
+      "status": "HELD_UNCREDITED",
+      "reason": "The matching ConstructedPaneObject/TimingConstructor model describes the very pool allocation that canonical func_001d5528 exposes as AudioVoice*. Its RuntimeMember[4], registration and timing storage compete with the existing AudioVoice slots/envelope/vector model. Equal offsets and a names overlay do not establish a second complete object identity. A local native constructor alias or a cast of the allocation result would violate the one-model rule.",
+      "evidence": [
+        "scratch/authors/np272/RESULT.json#integration_needs.contract_conflicts",
+        "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+        "include/game/audio_voice.h"
+      ],
+      "required_cutover": "Recover and migrate the actual AudioVoice construction/member family and every affected accepted caller together, retaining one typed receiver. Only then adopt required native names and move data_00224a80 to its actual shared owner header.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+        "observed_source_sha256": "6b2dc6e75f1347d4464e9fa4eb283c383f1e7c7bb9c00aefd48b2f30fb397fb8",
+        "receipt": "scratch/authors/np272/match/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.result.json",
+        "observed_receipt_sha256": "d752174f984b5d6927a7fbf8c46fe87409f80bcc2e3bce4d243ded6d2ca85cb0",
+        "names": "scratch/authors/np272/names/func_001d9820.json",
+        "names_sha256": "4134f8d2826895b8b9c2c4e5b0373a397f6df47ce7e6819188f5781b55fbb6bf"
+      }
+    },
+    {
+      "function": "func_001d01dc",
+      "native_name": "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+      "author": "nm02",
+      "size": 328,
+      "profile": "middleware",
+      "status": "HELD_UNCREDITED",
+      "reason": "The native SoundArchive::GetWaveArchiveCount() const reference at 001f2b90 would alias the retained C provider unsigned func_001f2b90(ArchiveHandle*), whose index is ArchiveIndex*. Native SoundArchive instead owns SoundArchiveFileReader*. The input overlay does not reconcile the receiver, constness or downstream reader contract. The delivered TU also contains a nonmatching partial Window reconstruction with unreconciled retail offsets.",
+      "evidence": [
+        "scratch/authors/nm02/RESULT.json#integration_needs",
+        "src/wave8/func_001f2b90.c",
+        "include/game/archive.h",
+        "include/nw/snd/snd_SoundArchive.h"
+      ],
+      "required_cutover": "Consolidate the archive count/reader/provider family with explicit accepted owner transitions and no C/native facade; partition or canonically reconcile the nonmatching Window context. Publish the genuine archive-reader setter only when the target is admitted.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/nm02/src/func_001ceeac_step5c.cpp",
+        "observed_source_sha256": "6c0968c83b983f03a8f8b4e5744b18ca20358f2edd47a57de84dce359d6cbf88",
+        "receipt": "scratch/authors/nm02/match/a001-file-address-scope/func_001ceeac_step5c.result.json",
+        "observed_receipt_sha256": "cbb29de8559e2783fde9a5d83166c5a74183760d312a4ca49774bd99d251edae",
+        "names": "scratch/authors/nm02/names.json",
+        "names_sha256": "d7e86be3c69f7eee537158b7838d726d8f78dd401f1e1a7c796dc301cc6c5681"
+      }
+    },
+    {
+      "function": "func_001f4408",
+      "native_name": "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+      "author": "nm01",
+      "size": 180,
+      "profile": "middleware",
+      "status": "HELD_UNCREDITED",
+      "reason": "The shared decoder resolves chunk roots with AddOffsetToPtr and synthesizes a byte displacement sizeof(u32)+RoundUp(count,4)+index*sizeof(Reference) before dereferencing a selected Reference. Hiding this address arithmetic in the existing offset helper does not remove the assignment's prohibition on byte-offset access. Its private one-entry serialized tails also do not supply an actual array extent. The tag-evidenced chunk downcasts alone do not discharge these separate source rules.",
+      "evidence": [
+        "scratch/authors/nm01/src/bank_regions_tu.cpp:14-83",
+        "scratch/authors/nm01/EVIDENCE.json#diagnosis",
+        "scratch/authors/nm01/RESULT.json#integration_needs"
+      ],
+      "required_cutover": "Provide a compliant canonical serialized-table representation without forbidden byte-offset/object-representation access or invented fixed extent. If the native accessor remains in an admitted TU, explicitly move 001f4500 and delete its emptied C owner; otherwise do not emit it. Retain 001f44bc as uncredited until exact.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+        "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+        "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+        "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+        "names": "scratch/authors/nm01/names/bank.json",
+        "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+      }
+    },
+    {
+      "function": "func_001f46d0",
+      "native_name": "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj",
+      "author": "nm01",
+      "size": 180,
+      "profile": "middleware",
+      "status": "HELD_UNCREDITED",
+      "reason": "Uses the same split/direct/range decoder and forbidden byte-offset reference resolution as 001f4408; matching native method spelling and tag-selected casts are not an exception to the storage-access rule. No second BankFile/resource model or shadow lookup is added.",
+      "evidence": [
+        "scratch/authors/nm01/src/bank_regions_tu.cpp:14-83,115-118",
+        "scratch/authors/nm01/EVIDENCE.json#diagnosis"
+      ],
+      "required_cutover": "The same compliant canonical decoder and explicit unique accessor ownership decision as 001f4408.",
+      "canonical_changes_applied": false,
+      "new_v6_L1_proof_claimed": false,
+      "author_input": {
+        "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+        "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+        "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+        "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+        "names": "scratch/authors/nm01/names/bank.json",
+        "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+      }
+    }
+  ],
+  "ownership": {
+    "moves": [],
+    "accepted_or_predecessor_identities_withdrawn": [],
+    "func_001f4500_retained_owner": "src/wave9/func_001f4500.c",
+    "nm01_source_not_admitted": true,
+    "held_names_overlays_not_applied": true
+  },
+  "unchanged_failed_author_TUs_rerun": false,
+  "inherited_c009_c010_c011_holds_preserved": true
+}

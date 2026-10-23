@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "applied-by-Main-before-c010-G3-prepare",
+  "isolated_source_commit": "f5c402ae65b6464fb4bbac6d8975d224a025bc56",
+  "isolated_source_receipt": "PARENT-ARCHIVE-TOKEN-CUTOVER-r1.json",
+  "parent_import_receipt": "scratch/worktrees/c010/scratch/integrator/c010/PARENT-ARCHIVE-IMPORT-r69.json",
+  "parent_import_receipt_sha256": "04624794cab17fd7436b727f220854c0666a8f3975672a657bd640e455a455dd",
+  "parent_scope_sha256": {
+    "include/game/archive_ipc.h": "72436e15d3d439f21d120c3636ec9cbc2ba876e8d366724428149c07eb76c942",
+    "src/checkpoint10/func_0011f6a8.c": "ed4472b719a281a85009fde09d244052622e7dad7cab9283c83d928d1bf1c183"
+  },
+  "parent_bounded_witnesses": [
+    {
+      "source": "src/checkpoint10/func_0011f6a8.c",
+      "profile": "game",
+      "exit_code": 0,
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      }
+    },
+    {
+      "source": "src/retries/func_0012d550.c",
+      "profile": "sdk",
+      "exit_code": 0,
+      "models": {
+        "linker_model": "armlink5-inline-branchnop-v6",
+        "literal_model": "anonymous-string-records-v1"
+      }
+    }
+  ],
+  "import_mode": "Surgical two-file patch into current parent; child-only header declarations and candidate credit excluded.",
+  "child_credit_imported": false,
+  "candidate_manifest_imported": false,
+  "qualification": "Main reports and independently records successful current-parent wrapper32/32B/game and terminal112/112B/sdk witnesses. No rerun to confirm that report. Applied surgically because parent header differed; child-only FileArchiveHandle/00117ad8 and all remaining c011 scope were excluded. This satisfies the source-import prerequisite only, not G3/prepare/acceptance."
+}

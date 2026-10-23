@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "owner": "Main only",
+  "branch": "c011-r7",
+  "working_directory": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r7",
+  "status": "NOT RUN by author; no heavy slot requested",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "gate_revision": "v1.19",
+  "denominator": "v13-r2",
+  "prerequisites": [
+    "Finalize the applicable c010-r7 source/current2687-identity ledger before preparing c011. If the actual accepted predecessor differs from819edc6f, recompose and reprove its changed closure rather than forcing stale identities or header forms.",
+    "Integrate this entire transaction: all111 c011 holds, the28 c009/89 c010 holds, the nine exact owner moves, and removal of every NEW native facade found by the full class sweep. No accepted/current predecessor-retained identity is withdrawn.",
+    "Recheck SOURCE-CONTEXT-r1.json source/header/name/profile/catalogue/tool bindings in the integrated tree. Drift requires fresh affected proof and new immutable output names.",
+    "Use only final LINKER-REWRITES-r1.json with scope_complete=true:2663 primaries,2763 required MATCH functions, all24 helper-only definitions. Initial matching-but-type-invalid list/result contexts and failed honest constructor forms are historical evidence, not current admission.",
+    "Adjudicate actual unchecked C++ receiver/argument/result contracts, every callback/table population, R1 provenance and inherited bank/list/result-family boundaries. The source-only exclusions do not claim those accepted families are recovered.",
+    "Serialize all heavy operations machine-wide and verify output/checkpoint names are still unused immediately before running. Failures use fresh suffixes, never overwrite evidence."
+  ],
+  "commands": [
+    {
+      "step": "whole_ledger_interfaces",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r7",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/interfaces.py",
+        "check",
+        "--matches",
+        "scratch/integrator/c011/r7/PROPOSED-LEDGER.json",
+        "--allow-unchecked-cpp",
+        "--json",
+        "scratch/integrator/c011/r7/interfaces-r1.json"
+      ],
+      "requirements": [
+        "Require no errors/policy items and manual adjudication of unchecked C++ classes and callable contracts."
+      ]
+    },
+    {
+      "step": "whole_ledger_argcheck",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r7",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/argcheck.py",
+        "--matches",
+        "scratch/integrator/c011/r7/PROPOSED-LEDGER.json",
+        "--rewrites",
+        "scratch/integrator/c011/r7/LINKER-REWRITES-r1.json",
+        "--json",
+        "scratch/integrator/c011/r7/argcheck-r1.json"
+      ],
+      "requirements": [
+        "Capture actual exit and adjudicate every warning/note, including inherited boundaries and C-only MUST-discard results."
+      ]
+    },
+    {
+      "step": "prepare_after_predecessor_finalization_and_adjudicated_gates",
+      "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r7",
+      "argv": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/accept.py",
+        "prepare",
+        "--checkpoint",
+        "c011-r7",
+        "--candidates",
+        "config/candidates/c011.json",
+        "--allow-unchecked-cpp",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1"
+      ],
+      "requirements": [
+        "Main runs only from its clean integrated committed source after the applicable c010-r7 finalizes. Candidate cwd is reproduction metadata, not author authorization.",
+        "Require actual exit0/PASS, two fresh complete builds with unique emitted ownership and full suite, then two independent bound reviews. Main alone registers/finalizes/pushes."
+      ]
+    }
+  ],
+  "unused_at_record_creation": {
+    "scratch/integrator/c011/r7/interfaces-r1.json": true,
+    "scratch/integrator/c011/r7/argcheck-r1.json": true,
+    "accept/c011-r7": true
+  },
+  "heavy_commands_exercised": [],
+  "unexercised": [
+    "interfaces",
+    "argcheck",
+    "full builds",
+    "suite",
+    "prepare",
+    "review registration",
+    "finalize",
+    "push"
+  ]
+}

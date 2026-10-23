@@ -14,8 +14,8 @@ void func_00148800(struct ServiceCoordinator *context, unsigned int value)
     if (func_0018f018()) {
         parameters =
             context->storage.audio.voice_parameters[context->completion_slot];
-        parameters->valuebc = value;
-        parameters->flagsc0 |= 0x00010000u;
+        parameters->settings.valuebc = value;
+        parameters->settings.flagsc0 |= 0x00010000u;
         func_00182204();
     } else {
         func_00182204();

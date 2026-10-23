@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "summary": {
+    "candidate_units": 10,
+    "candidate_claims": 10,
+    "NEW_functions": 10,
+    "NEW_bytes": 1636,
+    "moves": 0,
+    "intake_holds": 3,
+    "intake_hold_bytes": 604,
+    "inherited_hold_overlap": [
+      "func_001ae140"
+    ],
+    "additional_distinct_holds": 2,
+    "additional_distinct_hold_bytes": 184,
+    "combined_distinct_credit_holds": 238,
+    "predecessor_retained_functions": 2761,
+    "predecessor_retained_bytes": 299660,
+    "proposed_units": 2695,
+    "proposed_functions": 2771,
+    "proposed_bytes": 301296,
+    "helper_only_units": 24,
+    "source_revised_predecessor_units": 20,
+    "changed_or_added_headers": 12,
+    "final_primary_commands": 594,
+    "final_exit_0": 594,
+    "final_required_functions_MATCH": 602,
+    "fresh_uncredited_runtime_comparison_rows": 0,
+    "affected_helper_only_units": 2,
+    "fresh_helper_context_sources": 2,
+    "complete_projection_primaries": 2671,
+    "untouched_inherited_primary_receipts": 2077,
+    "all_actual_match_commands": 605,
+    "all_actual_exit_0": 605,
+    "private_external_context_witnesses": 1,
+    "private_external_context_MATCH_bytes": 44,
+    "external_context_definition_or_credit_in_c014": false,
+    "resolved_external_credit_held_edges": 1,
+    "new_unresolved_boundary_conflicts": 0,
+    "new_vtable_symbols": 0,
+    "new_names_bindings": 0,
+    "self_prereview_classes": 57,
+    "fresh_R1_qualified_callers": 4,
+    "fresh_L1_pool_owning_units": 0
+  },
+  "fresh_R1_rows_requiring_qualified_review": [
+    {
+      "source": "src/models/linear_buffer/func_00112628.c",
+      "function": "func_00112628"
+    },
+    {
+      "source": "src/models/linear_buffer/func_00112b5c.c",
+      "function": "func_00112b5c"
+    },
+    {
+      "source": "src/models/linear_buffer/func_001131d4.c",
+      "function": "func_001131d4"
+    },
+    {
+      "source": "src/checkpoint10/func_001f580c_default.c",
+      "function": "func_001f580c"
+    }
+  ],
+  "fresh_L1_pool_owning_units": [],
+  "NEW_function_rows": [
+    {
+      "function": "func_001f29b4",
+      "source": "src/checkpoint14/byte_parameters.cpp",
+      "profile": "middleware",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0585-byte_parameters/byte_parameters.result.json",
+      "receipt_sha256": "8ccec8d2d1f2434f9ea080d0b02cb8ee8d3948805578d9e80178c9775bf566b2",
+      "qualifications": "Canonical serialized Table one-entry tail convention; partial record/type/helper identity inference; ORIGINAL BUG unchecked typed-reference dereference; seven-byte output and narrowed count retained."
+    },
+    {
+      "function": "func_00122360",
+      "source": "src/checkpoint14/aligned_buffer.c",
+      "profile": "sdk",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0586-aligned_buffer/aligned_buffer.result.json",
+      "receipt_sha256": "e94859e956a10854fa6cb07b26ad19d1a9949f5ab25e2362b0b8a4d31ad11db6",
+      "qualifications": "Private consumed state grouping and descriptive object names inferred; original caller-span/alignment preconditions unchanged."
+    },
+    {
+      "function": "func_00154674",
+      "source": "src/checkpoint14/channel_drop.cpp",
+      "profile": "middleware",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0587-channel_drop/channel_drop.result.json",
+      "receipt_sha256": "e5307e375f96a7db15a262c908ceb76158e6264939669731c3028a3ba0e00d29",
+      "qualifications": "Exact known two-pointer runtime callback and three-input group callback; canonical external pool interface closed via shared prefix and44B witness, with c012 retaining ownership."
+    },
+    {
+      "function": "func_00136450",
+      "source": "src/checkpoint14/service_strings.c",
+      "profile": "sdk",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0588-service_strings/service_strings.result.json",
+      "receipt_sha256": "020e5244c371617b3ebecf883f303f899800ee94126c18441401b52b9ab7693b",
+      "qualifications": "SDK is matching-profile witness, not ownership authentication; original unchecked fixed string-table capacity."
+    },
+    {
+      "function": "func_00192a7c",
+      "source": "src/checkpoint14/service_handle.cpp",
+      "profile": "sdk",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0589-service_handle/service_handle.result.json",
+      "receipt_sha256": "385f6b39835312e340b7d59adf5e3382b460bc99553dcb10359d58dc4210d466",
+      "qualifications": "Approved __current_pc; unused root prefix opaque; checked literal names the same +4 handle word, not another service object."
+    },
+    {
+      "function": "func_00157500",
+      "source": "src/checkpoint14/candidate_ranking.c",
+      "profile": "middleware",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0590-candidate_ranking/candidate_ranking.result.json",
+      "receipt_sha256": "ef83792cb18d1e4e8a41fde1d7529aedca4f527e21058db3a873c6abb7caa374",
+      "qualifications": "Descriptive list/template names, original invalid-template sentinel and fixed32-slot backshift remain; no complete allocation extent inferred."
+    },
+    {
+      "function": "func_0018191c",
+      "source": "src/checkpoint14/image_activation.cpp",
+      "profile": "game",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0591-image_activation/image_activation.result.json",
+      "receipt_sha256": "3d6a2ff6e377d44aabf32d646c015cf144fd99f8bc22142b772cfc776785e96c",
+      "qualifications": "Four recorded same-object callers support canonical W10DrawingInput; signed local snapshot preserves original read without changing unsigned shared fields. Resource(1,3) is passed to the actual HwrImage initializer."
+    },
+    {
+      "function": "func_001acb38",
+      "source": "src/checkpoint14/menu_modes.cpp",
+      "profile": "game",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0592-menu_modes/menu_modes.result.json",
+      "receipt_sha256": "a0bbc1ded4ec37e065a301e237d9da117e170f87310a5de4b2aef13ceb17b937",
+      "qualifications": "Canonical W23 shared mode prefix and used +0xac field; historical full owner/helper/TU identity inferred. ORIGINAL BUG saved history is discarded."
+    },
+    {
+      "function": "func_0014cc1c",
+      "source": "src/checkpoint14/auxiliary_mode.c",
+      "profile": "middleware",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0593-auxiliary_mode/auxiliary_mode.result.json",
+      "receipt_sha256": "d30ea97e86c19fc62f0b5aee908ac9eb734da74568b068bedb23bc81f4d89c99",
+      "qualifications": "Settings subobject/historical spelling inferred; coherent complete field cutover preserves every width/offset and original mode-zero/option behavior."
+    },
+    {
+      "function": "func_0014242c",
+      "source": "src/checkpoint14/memory_create.cpp",
+      "profile": "sdk",
+      "status": "MATCH_SELF_REVIEW_QUALIFIED",
+      "receipt": "scratch/integrator/c014/match-r2/closure/0594-memory_create/memory_create.result.json",
+      "receipt_sha256": "a54953c5f6bad034e07cf3c402004d11510b6c841921668a8a52bf5cde964237",
+      "qualifications": "Borrowed operation/helper spelling inferred; actual five-input raw wrapper, result and mapping record contracts preserved; numeric mapping address conversion is intentional."
+    }
+  ],
+  "all_final_required_functions_MATCH": true,
+  "all_final_source_header_config_bindings_stable": true,
+  "whole_ledger_matcher_rerun_claimed": false,
+  "initial_type_gap_not_relabelled_as_admission": true,
+  "inherited_0015477c_expression_not_approved_here": true
+}

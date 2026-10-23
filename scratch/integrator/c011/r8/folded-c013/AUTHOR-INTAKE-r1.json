@@ -1,0 +1,865 @@
+{
+  "schema_version": 1,
+  "policy": "Author input metadata and hashes only; held inputs are not rerun, admitted receipts are independently reproduced after canonical integration. No packets, bytes or instruction encodings.",
+  "rows": [
+    {
+      "address": "0x001d9820",
+      "name": "func_001d9820",
+      "size": 156,
+      "status": "match",
+      "source": "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+      "source_sha256": "6b2dc6e75f1347d4464e9fa4eb283c383f1e7c7bb9c00aefd48b2f30fb397fb8",
+      "profile": "sdk",
+      "receipt": "scratch/authors/np272/match/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.result.json",
+      "receipt_sha256": "d752174f984b5d6927a7fbf8c46fe87409f80bcc2e3bce4d243ded6d2ca85cb0",
+      "names": "scratch/authors/np272/names/func_001d9820.json",
+      "needs_names": [
+        "_ZN17TimingConstructorC1Ev",
+        "_ZN21ConstructedPaneObjectC1Ev",
+        "_ZN21ConstructedPaneObjectC2Ev"
+      ],
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "author": "np272",
+      "author_result": "scratch/authors/np272/RESULT.json",
+      "author_result_sha256": "49bd4585df0616cb364c70270349b5def4ad0346b3d20e252a5c9cbdb6513d83",
+      "observed_source_sha256": "6b2dc6e75f1347d4464e9fa4eb283c383f1e7c7bb9c00aefd48b2f30fb397fb8",
+      "observed_receipt_sha256": "d752174f984b5d6927a7fbf8c46fe87409f80bcc2e3bce4d243ded6d2ca85cb0",
+      "observed_receipt_function": [
+        {
+          "name": "_ZN21ConstructedPaneObjectC1Ev",
+          "address": 1939488,
+          "size": 156,
+          "candidate_size": 156,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [
+          {
+            "source": "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+            "declaration": "extern const unsigned data_00224a80[];",
+            "action": "Move the inherited INTEGRATOR extern-C declaration into a shared lifecycle/audio header and remove the marker before prepare. The body reuses canonical RuntimeMember, RegistryEntry, TimingState, CurveAdshr and AudioByteRamp; no private header or canonical-header edit was made."
+          },
+          {
+            "source": "scratch/authors/np272/drafts/func_002136fc/07-state-cursor-declared-first/func_002136fc_globals.cpp",
+            "action": "Before any future integration, reconcile the expanded HandleManager storage (IndexedTransform[24], opaque 0x9c-byte LockedTransform[24], typed channel pointers) with include/game/service_runtime.h and include/game/audio_voice.h. The accepted IndexedTransform field contract was copied exactly from src/wave20/func_001c5890.c."
+          }
+        ],
+        "names": [
+          {
+            "source": "scratch/authors/np272/drafts/func_002136fc/07-state-cursor-declared-first/func_002136fc_globals.cpp",
+            "overlay": "scratch/authors/np272/names/func_002136fc.json",
+            "symbols": [
+              "_ZN12ChannelTu629C1Ej",
+              "_ZN17AudioManagerTu629D1Ev",
+              "_ZN17ChannelStateTu629C1Ej",
+              "__sti___25_func_002136fc_globals_cpp"
+            ],
+            "qualification": "Inherited observed address bindings; descriptive native class identities remain [INFERENCE]. Adopt only used required symbols, not unrelated predecessor-overlay entries or nonselected visibility-trial proposals."
+          },
+          {
+            "source": "scratch/authors/np272/src/func_0014e65c.cpp",
+            "overlay": "scratch/authors/np272/names/func_0014e65c.json",
+            "symbols": [
+              "_ZN2nw3lyt8internal11TexCoordAry8SetCoordEjPKN2nn4math4VEC2E"
+            ],
+            "qualification": "Inherited observed address bindings; descriptive native class identities remain [INFERENCE]. Adopt only used required symbols, not unrelated predecessor-overlay entries or nonselected visibility-trial proposals."
+          },
+          {
+            "source": "scratch/authors/np272/drafts/func_001d9820/14-canonical-ramp-storage-accessor/func_001d9820.cpp",
+            "overlay": "scratch/authors/np272/names/func_001d9820.json",
+            "symbols": [
+              "_ZN17TimingConstructorC1Ev",
+              "_ZN21ConstructedPaneObjectC1Ev",
+              "_ZN21ConstructedPaneObjectC2Ev"
+            ],
+            "qualification": "Inherited observed address bindings; descriptive native class identities remain [INFERENCE]. Adopt only used required symbols, not unrelated predecessor-overlay entries or nonselected visibility-trial proposals."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "target": "func_002136fc",
+            "evidence": "The initializer stores constructor results for the 0x6c-byte IndexedTransform and 0x9c-byte LockedTransform objects and registers its manager receiver with func_001c5760.",
+            "conflict": "Current canonical HandleManager exposes only opaque storage and AudioChannel* entries; src/wave3/func_001c5760.c declares void(void), while registration evidences a writable receiver. Preserve both inherited INTEGRATOR conflict markers; do not bend the source to those declarations."
+          },
+          {
+            "target": "func_0014e65c",
+            "conflict": "src/wave20/func_0014d02c.c declares the entry with DisplayVertexArray/DisplayTexCoords, whereas the canonical native definition uses TexCoordAry/VEC2. The capacities/pointer prefix, unsigned index and four float-pair storage agree. Caller/native identity migration remains integration work; no external alias was invented."
+          },
+          {
+            "target": "func_001d9820",
+            "qualification": "The sole direct caller func_001d5528 passes the object-pool allocation result as receiver; include/game/audio_voice.h gives that allocation path the public AudioVoice* result type. ConstructedPaneObject/TimingConstructor are inherited descriptive native identities [INFERENCE], not a license to introduce incompatible AudioVoice cross-unit aliases. Reconcile ownership/types before adoption; no canonical header was changed."
+          }
+        ],
+        "context": "No other matched function belongs to any delivered TU, so no context_match function row is omitted. The genuine RuntimeMember and color-updater companions that matched only in nonselected experiments are diagnostic evidence, not delivered matches. Preserve the func_002136fc_globals.cpp basename because the evidenced static-initializer symbol depends on it."
+      },
+      "names_sha256": "4134f8d2826895b8b9c2c4e5b0373a397f6df47ce7e6819188f5781b55fbb6bf"
+    },
+    {
+      "address": "0x0012e68c",
+      "name": "func_0012e68c",
+      "size": 296,
+      "status": "match",
+      "source": "scratch/authors/np274/src/func_0012e68c.cpp",
+      "source_sha256": "3bb5a48b16a6d4ec34f1b0b8b2cebf50edb08a97f7e78eec4ca5c10766f2c306",
+      "profile": "middleware",
+      "receipt": "scratch/authors/np274/match/0012e68c/16-final-selected/func_0012e68c.result.json",
+      "receipt_sha256": "2231ad82d65afd16cefd6fa34e091f75b7f2c126f8d34975ba04b7e4c7f521d5",
+      "needs_names": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "author": "np274",
+      "author_result": "scratch/authors/np274/RESULT.json",
+      "author_result_sha256": "ce102139a11ef8c171ad2b28daa2059589c38ae4b981c1bca3af5695ce7e6381",
+      "observed_source_sha256": "3bb5a48b16a6d4ec34f1b0b8b2cebf50edb08a97f7e78eec4ca5c10766f2c306",
+      "observed_receipt_sha256": "2231ad82d65afd16cefd6fa34e091f75b7f2c126f8d34975ba04b7e4c7f521d5",
+      "observed_receipt_function": [
+        {
+          "name": "func_0012e68c",
+          "address": 1238668,
+          "size": 296,
+          "candidate_size": 296,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [
+          {
+            "source": "scratch/authors/np274/src/func_0012e68c.cpp",
+            "destination": "include/game/language.h",
+            "need": "Move the existing INTEGRATOR extern-C declaration of const unsigned char data_0021c5d8 into a canonical header before integration. func_00121764 and func_0013685c already come from ctr/ipc.h and game/service_protocol.h. RegionalMasks and all semantic helpers are anonymous-namespace implementation details; no shared class is introduced."
+          },
+          {
+            "source": "scratch/authors/np274/src/func_001ce67c.cpp",
+            "destination": "include/game/archive_owner.h",
+            "need": "Inherited INTEGRATOR block declares data_0022414c, func_00185bb0(unsigned *, PoolLink *, PoolLink *) and func_001cd344(ArchiveListOwner &). Reconcile the native LinkListImpl erasure and ResourceProvider10 owner identities centrally before adoption."
+          },
+          {
+            "suggested_header": "include/game/resource_nodes.h",
+            "source_lines": "132-178",
+            "status": "inherited",
+            "description": "Camera resource destroyer declaration and recovered-camera complete destruction entry; recovery class is preserved, not newly introduced.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/material_state.h",
+            "source_lines": "202-275",
+            "status": "inherited",
+            "description": "MaterialState/DefaultState views, writable initialization guards, placement objects, and pointer-taking destructor callbacks.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/layout_texture.h",
+            "source_lines": "531-572",
+            "status": "inherited",
+            "description": "Recovered retail image/texture/spec views and graphics declarations.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/layout_resources.h",
+            "source_lines": "654-659",
+            "status": "inherited",
+            "description": "GroupContainer complete-destruction entry declaration.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/layout_archive.h",
+            "source_lines": "694-727",
+            "status": "inherited",
+            "description": "Recovered archive/file/list/accessor views and archive entry declarations.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/layout_animation.h",
+            "source_lines": "828-829",
+            "status": "inherited",
+            "description": "func_0016b898(float, const nw::lyt::res::HermiteKey *, unsigned).",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/layout_matrix.h",
+            "source_lines": "928-929",
+            "status": "inherited",
+            "description": "func_00156560 with typed MTX34/MTX34/VEC2/VEC3 pointer arguments.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "suggested_header": "include/game/layout_drawer.h",
+            "source_lines": "1055-1059",
+            "status": "inherited",
+            "description": "func_001f1610 and func_001ce2b4 typed material/drawer/command interfaces.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          }
+        ],
+        "names": [
+          {
+            "source": "scratch/authors/np274/src/func_001ce67c.cpp",
+            "overlay": "scratch/authors/np274/func_001ce67c.names.json",
+            "inherited_unchanged": true,
+            "required_symbols": [
+              "_ZN2nw3lyt13FontContainerD1Ev",
+              "_ZN2nw3lyt16TextureContainerD1Ev",
+              "_ZN2nw3lyt6Layout12BuildPaneObjEiPKvRKNS0_11ResBlockSetE",
+              "_ZN2nw3lyt4PaneC1EPKNS0_3res4PaneE",
+              "_ZN13R41304PictureC1EPKN2nw3lyt3res7PictureERKNS1_11ResBlockSetE",
+              "_ZN2nw3lyt6WindowC1EPKNS0_3res6WindowERKNS0_11ResBlockSetE",
+              "_ZN2nw3lyt8BoundingC1EPKNS0_3res8BoundingERKNS0_11ResBlockSetE",
+              "_ZN12Tu922TextBoxC1EPKN2nw3lyt3res7TextBoxERKNS1_11ResBlockSetEj"
+            ],
+            "not_yet_in_config": [
+              "_ZN2nw3lyt13FontContainerD1Ev",
+              "_ZN2nw3lyt16TextureContainerD1Ev",
+              "_ZN2nw3lyt6Layout12BuildPaneObjEiPKvRKNS0_11ResBlockSetE",
+              "_ZN2nw3lyt4PaneC1EPKNS0_3res4PaneE",
+              "_ZN13R41304PictureC1EPKN2nw3lyt3res7PictureERKNS1_11ResBlockSetE",
+              "_ZN2nw3lyt6WindowC1EPKNS0_3res6WindowERKNS0_11ResBlockSetE",
+              "_ZN2nw3lyt8BoundingC1EPKNS0_3res8BoundingERKNS0_11ResBlockSetE",
+              "_ZN12Tu922TextBoxC1EPKN2nw3lyt3res7TextBoxERKNS1_11ResBlockSetEj"
+            ],
+            "need": "Use the exact inherited evidence-backed overlay for remeasurement; no binding was added, moved or invented by this pass."
+          },
+          {
+            "source": "scratch/authors/np274/src/func_0014e50c.cpp",
+            "overlay": "scratch/authors/np274/func_0014e50c.names.json",
+            "inherited_unchanged": true,
+            "required_symbols": [
+              "_ZN2nw3lyt8internal11TexCoordAry7SetSizeEh"
+            ],
+            "not_yet_in_config": [
+              "_ZN2nw3lyt8internal11TexCoordAry8SetCoordEjPKN2nn4math4VEC2E",
+              "_ZN2nw3lyt8internal11TexCoordAry7SetSizeEh",
+              "_ZZN2nw3lyt8internal11TexCoordAry7SetSizeEhE9texCoords",
+              "_ZGVZN2nw3lyt8internal11TexCoordAry7SetSizeEhE9texCoords"
+            ],
+            "need": "Use the exact inherited evidence-backed overlay for remeasurement; no binding was added, moved or invented by this pass."
+          },
+          {
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp",
+            "overlay": "scratch/authors/np274/func_001c8e10.names.json",
+            "inherited_unchanged": true,
+            "required_symbols": [
+              "_ZN2nn4math10SinCosFIdxEPfS1_f",
+              "_ZN2nn4math9MTX34MultEPNS0_5MTX34EPKS1_S4_",
+              "_ZN2nw3gfx5Light15CreateAnimGroupEPNS_2os10IAllocatorE",
+              "_ZN2nw3gfx9AnimGroup10InitializeEb",
+              "_ZN2nw3gfx9AnimGroupC1ENS_4anim3res12ResAnimGroupEPNS0_9SceneNodeEPNS_2os10IAllocatorE",
+              "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+              "_ZN2nw3lyt18AnimTransformBasic7AnimateEjPNS0_4PaneE",
+              "_ZN2nw3lyt4Pane12CalculateMtxERKNS0_8DrawInfoE",
+              "_ZTV13DefaultState0",
+              "_ZTV13DefaultState1",
+              "_ZTV13DefaultState2",
+              "_ZTV13DefaultState3",
+              "_ZTV13DefaultState4",
+              "_ZTV13DefaultState5",
+              "_ZTV13DefaultState6",
+              "_ZTV13DefaultState7",
+              "_ZTV13DefaultState8",
+              "_ZTV13DefaultState9",
+              "_ZTV14DefaultState10",
+              "_ZTV14DefaultState11",
+              "_ZTV21R41163RecoveredCamera",
+              "_ZTVN2nw3gfx13TransformNodeE",
+              "_ZTVN2nw3gfx9SceneNodeE"
+            ],
+            "not_yet_in_config": [
+              "_ZTV21R41163RecoveredCamera",
+              "_ZTVN2nw3gfx13TransformNodeE",
+              "_ZTVN2nw3gfx9SceneNodeE",
+              "_ZN2nw3gfx5Light15CreateAnimGroupEPNS_2os10IAllocatorE",
+              "_ZN2nw3gfx9AnimGroupC1ENS_4anim3res12ResAnimGroupEPNS0_9SceneNodeEPNS_2os10IAllocatorE",
+              "_ZN2nw3gfx9AnimGroup10InitializeEb",
+              "_ZTV13DefaultState0",
+              "_ZTV13DefaultState1",
+              "_ZTV13DefaultState2",
+              "_ZTV13DefaultState3",
+              "_ZTV13DefaultState4",
+              "_ZTV13DefaultState5",
+              "_ZTV13DefaultState6",
+              "_ZTV13DefaultState7",
+              "_ZTV13DefaultState8",
+              "_ZTV13DefaultState9",
+              "_ZTV14DefaultState10",
+              "_ZTV14DefaultState11",
+              "_ZN2nw3lyt16TextureContainer17FindTextureByNameEPKc",
+              "_ZN2nw3lyt4Pane12CalculateMtxERKNS0_8DrawInfoE",
+              "_ZN2nn4math9MTX34MultEPNS0_5MTX34EPKS1_S4_",
+              "_ZN2nn4math10SinCosFIdxEPfS1_f",
+              "_ZN2nw3lyt18AnimTransformBasic7AnimateEjPNS0_4PaneE"
+            ],
+            "need": "Use the exact inherited evidence-backed overlay for remeasurement; no binding was added, moved or invented by this pass."
+          }
+        ],
+        "contract_conflicts": [
+          {
+            "source": "scratch/authors/np274/src/func_001ce67c.cpp",
+            "canonical": "include/nw/lyt/lyt_Picture.h",
+            "need": "Inherited R41304Picture retains the measured retail 344-byte layout and 0xd4/0x13c/0x140/0x150 flag/material/colors/coordinates offsets rather than the canonical 340-byte view. Do not merge the different class layouts without central reconciliation."
+          },
+          {
+            "source": "scratch/authors/np274/src/func_001ce67c.cpp",
+            "canonical": "include/nw/lyt/lyt_TextBox.h",
+            "need": "Inherited zero-extra-storage Tu922TextBox has the evidenced format argument defaulting to zero; the canonical resource constructor omits it. Private historical class identity remains INFERENCE."
+          },
+          {
+            "source": "scratch/authors/np274/src/func_001ce67c.cpp",
+            "canonical": "include/nw/ut/ut_LinkList.h; include/game/resource_cache.h",
+            "need": "Inherited C-style func_00185bb0/PoolList and ArchiveListOwner contracts need native iterator and ResourceProvider10 identity reconciliation. The unassigned owner body still mismatches and was not rewritten."
+          },
+          {
+            "status": "inherited, not changed by nf278",
+            "source_lines": "240-274",
+            "description": "Existing source identifies pointer-taking destructor callbacks versus void(void) declarations in src/wave3/empty_functions.c and func_001c73c0, func_001c73c4, func_001c73c8, func_001c6b3c. Retained for integrator adjudication; no shared declaration was edited.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          },
+          {
+            "status": "inherited, not changed by nf278",
+            "source_lines": "277-279",
+            "description": "The recovered MaterialArray reserve algorithm differs from frozen nw::ut::MoveArray::reserve (allocation check, placement-copy and clear-before-Free); private view retained.",
+            "source": "scratch/authors/np274/src/func_001c8e10.cpp"
+          }
+        ],
+        "ownership": [
+          {
+            "address": "0x00191968",
+            "current_source": "src/nw4c/lyt_Layout__AllocMemory.cpp",
+            "need": "Context MATCH only. Explicit rehoming and removal of the old emitted definition are required if the combined factory TU is ever adopted; do not count duplicate credit."
+          }
+        ],
+        "new_target_interface_changes": [],
+        "qualifications": [
+          "Only func_0012e68c is a new target MATCH. Its anonymous mask aggregate is source factoring, not an independently recovered historical type.",
+          "Approved __current_pc intrinsic and the existing ORIGINAL BUG language-shift assumption remain on the new MATCH.",
+          "All three unmatched delivered TUs are exact predecessor source copies; their existing GPL provenance, INTEGRATOR markers and recovery qualifications are retained.",
+          "No new external names, aliases, asm, volatile, barriers, fake callers, invented address callees or dead-code steering were introduced.",
+          "The native Bounding visibility probe refused the compiler-generated unbound C2 entry under default v2. This is a preserved refusal, not proof that genuine callee visibility cannot affect its caller. No native alias was added to bypass it.",
+          "The 24 changed TexCoordAry variants all refuse local-static placement; do not report their refusal as a numeric near miss or claim a typed-storage fix.",
+          "All failed variants, outputs and exit codes are preserved under this author directory. No experimental source, additional companion or diagnostic storage declaration is part of the delivery."
+        ]
+      }
+    },
+    {
+      "address": "0x0010aa28",
+      "name": "func_0010aa28",
+      "size": 280,
+      "status": "match",
+      "source": "scratch/authors/np293/src/final/func_0010aa28.c",
+      "source_sha256": "e7ac3c60bff65eeb00843e9519271ec6c4fcdf181e324f78198b9a8151b99df6",
+      "profile": "game",
+      "receipt": "scratch/authors/np293/match/final/func_0010aa28/func_0010aa28.result.json",
+      "receipt_sha256": "c70fda3c6f06dde553869b8d1e8e4e926d1598ff3e457ca553e43c8424610251",
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "integration_needs": [
+        {
+          "kind": "needs-canonical-cutover",
+          "path": "include/game/runtime.h",
+          "need": "Complete BufferOwner reserved[0xc08] as write/read indices and 256 CopyRequest records, preserve buffer/count/owned/state/active offsets, and publish stop at +0xc1c plus WorkerThread tail. This is required for integration of the MATCH, not a byte discrepancy."
+        },
+        {
+          "kind": "shared-declarations",
+          "need": "Publish CopyRequest {unsigned char *destination; const unsigned char *source; unsigned count;} and the existing int 00192c20(const unsigned char*, unsigned char*) decompressor contract with the complete owner. The void* thread-entry and canonical SignalState wait contract are unchanged."
+        }
+      ],
+      "author": "np293",
+      "author_result": "scratch/authors/np293/RESULT.json",
+      "author_result_sha256": "200fe98f07a74cfc645c3a60211a99c6a0ef1a76413416fb87c366b0b4caa0e8",
+      "observed_source_sha256": "e7ac3c60bff65eeb00843e9519271ec6c4fcdf181e324f78198b9a8151b99df6",
+      "observed_receipt_sha256": "c70fda3c6f06dde553869b8d1e8e4e926d1598ff3e457ca553e43c8424610251",
+      "observed_receipt_function": [
+        {
+          "name": "func_0010aa28",
+          "address": 1092136,
+          "size": 280,
+          "candidate_size": 280,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": [
+        {
+          "function": "func_00153584",
+          "needs": [
+            {
+              "kind": "needs-canonical-cutover",
+              "path": "include/game/service_runtime.h",
+              "need": "Publish the exclusive users word at coordinator +0x14 and typed ServiceBufferPair int* members; current reserved14 and unsigned buffer words are too weak. Retain the exact canonical SharedPublicationState.ready field."
+            },
+            {
+              "kind": "contract-conflict",
+              "need": "The genuine 001536c8 companion forwards ServiceOutput and HandleManager owners to processing callees. Preserve the source-bound pointer contracts and const ServiceOutput* cost reader; reconcile src/wave15/func_00154258.c W15fCostOptions with ServiceOutput output_mode/flag03. No FilterOwner/PlaybackManager casts are retained."
+            },
+            {
+              "kind": "shared-declarations",
+              "need": "Move the marked audio-processing extern C blocks into a reconciled shared header; include that header before any G3/prepare integration. No new names overlay."
+            }
+          ]
+        },
+        {
+          "function": "func_00181748",
+          "needs": [
+            {
+              "kind": "needs-canonical-cutover",
+              "paths": [
+                "include/game/screen.h",
+                "include/game/display_animation.h"
+              ],
+              "need": "Reconcile the complete 0xcc display owner, tag-6 0x3c Picture payload, pool slots/capacity/used and +0xd68 material-reference vector with current prefix-only and generic registration declarations. The endpoint-specific slots[] type does not solve the generic tagged attachment API."
+            },
+            {
+              "kind": "shared-declarations",
+              "need": "Move source-bound bss_0049cbd0, bss_00495b30, 00183168, 0018528c, 00196230, 00196144 and 00181748 declarations to the reconciled header. Reuse the exact existing FrameTiming definition. AnimationSlotRange is a private used value helper, not a second storage view."
+            },
+            {
+              "kind": "names",
+              "path": "scratch/authors/np293/names-picture.json",
+              "symbols": [
+                "_ZN2nw3lyt7PictureC1Eh"
+              ],
+              "need": "Preserve the previously evidenced native Picture(u8) constructor overlay at 0014b4b0. Do not adopt the inherited descriptive DisplayAnimationController constructor as an alias."
+            }
+          ]
+        },
+        {
+          "function": "func_0010aa28",
+          "needs": [
+            {
+              "kind": "needs-canonical-cutover",
+              "path": "include/game/runtime.h",
+              "need": "Complete BufferOwner reserved[0xc08] as write/read indices and 256 CopyRequest records, preserve buffer/count/owned/state/active offsets, and publish stop at +0xc1c plus WorkerThread tail. This is required for integration of the MATCH, not a byte discrepancy."
+            },
+            {
+              "kind": "shared-declarations",
+              "need": "Publish CopyRequest {unsigned char *destination; const unsigned char *source; unsigned count;} and the existing int 00192c20(const unsigned char*, unsigned char*) decompressor contract with the complete owner. The void* thread-entry and canonical SignalState wait contract are unchanged."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "address": "0x001c65e4",
+      "name": "func_001c65e4",
+      "size": 332,
+      "status": "match",
+      "source": "scratch/authors/np294/src/func_001c65e4.cpp",
+      "source_sha256": "3d4129fb4712b5b7d946d351dd26304a7c3b1df327cf887783e6a83b320e74af",
+      "profile": "game",
+      "receipt": "scratch/authors/np294/match/func_001c65e4/final-delivered/func_001c65e4.result.json",
+      "receipt_sha256": "11c5b025c016cf80dba82b8cff3d37da81ca4249377bd684d3581863a162a769",
+      "names": null,
+      "needs_names": [],
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "integration_needs": {
+        "headers": [
+          "needs-canonical-cutover: include/nw/ut/ut_MoveArray.h:66-74,95-103. Initialize the complete fresh capacity word to zero before the existing SetCapacity/SetArrayKind sequence. The delivered native inline specializations are source-local evidence; reconcile the shared constructor rather than adopting an inconsistent ODR instantiation."
+        ],
+        "names": [],
+        "contract_conflicts": [
+          "Current pinned constructors read uninitialized m_Capacity through SetCapacity. The target matches explicit zero initialization with the canonical setter sequence; the historical source spelling remains [INFERENCE]. A shared-header cutover must preserve/reconcile other users."
+        ]
+      },
+      "needs_headers": [
+        "needs-canonical-cutover: include/nw/ut/ut_MoveArray.h:66-74,95-103. Initialize the complete fresh capacity word to zero before the existing SetCapacity/SetArrayKind sequence. The delivered native inline specializations are source-local evidence; reconcile the shared constructor rather than adopting an inconsistent ODR instantiation."
+      ],
+      "author": "np294",
+      "author_result": "scratch/authors/np294/RESULT.json",
+      "author_result_sha256": "555368b030476c57ecd48e400694c614f62a9e54158aa7f74c63652ce1dc6a04",
+      "observed_source_sha256": "3d4129fb4712b5b7d946d351dd26304a7c3b1df327cf887783e6a83b320e74af",
+      "observed_receipt_sha256": "11c5b025c016cf80dba82b8cff3d37da81ca4249377bd684d3581863a162a769",
+      "observed_receipt_function": [
+        {
+          "name": "_ZN2nw3gfx13TransformNode15CreateCallbacksEPNS_2os10IAllocatorE",
+          "address": 1861092,
+          "size": 332,
+          "candidate_size": 332,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [
+          {
+            "target": "func_001c65e4",
+            "need": "needs-canonical-cutover: include/nw/ut/ut_MoveArray.h:66-74,95-103. Initialize the complete fresh capacity word to zero before the existing SetCapacity/SetArrayKind sequence. The delivered native inline specializations are source-local evidence; reconcile the shared constructor rather than adopting an inconsistent ODR instantiation."
+          },
+          {
+            "target": "func_001e6f40",
+            "need": "Move W14GlyphOwner and the local extern-C contracts for func_00167860, func_001676bc and func_001e6f40 into the reconciled glyph/owner header. func_0018ffac now uses game/random.h, not a local duplicate."
+          },
+          {
+            "target": "func_001303a8",
+            "need": "Consolidate RenderShaderResource, RenderShader and RenderContext with their exact definitions in src/checkpoint10/func_001306c8.c, and move the descriptive RenderJob/model/skeleton/matrix-array/primitive/bone declarations and local extern-C contracts to a shared render-command header."
+          },
+          {
+            "target": "func_001303a8",
+            "need": "The original dynamic flag storage is RenderShader::prefix[0] at +0x14, not RenderShaderResource::flags. Keep the distinct serialized RenderSkeletonResource identity; the inherited common shader/bone resource view was removed."
+          },
+          {
+            "target": "func_001303a8",
+            "need": "The global cursor uses the existing unsigned char *data_00242fc8 declaration from game/command_buffer.h. No cursor rebind is needed."
+          },
+          {
+            "target": "func_001d7b6c",
+            "need": "needs-canonical-cutover: complete/unify StreamTrack and StreamPlayer in include/game/prefetch_stream.h with the target-evidenced active byte, signed biquad type, gain/spatial modifiers and player parameter tail. Local partial type names remain [INFERENCE]."
+          },
+          {
+            "target": "func_001d7b6c",
+            "need": "Move the local extern-C stream/voice contracts to the reconciled sound headers before integration."
+          },
+          {
+            "target": "func_001d7b6c",
+            "need": "Unify the property-only W19FloatProperty receiver of src/wave19/func_0015024c.c and W20FloatProperty receiver of src/wave20/func_00150054.c with AudioVoiceGroup, without casts or aliases."
+          }
+        ],
+        "names": [],
+        "contract_conflicts": [
+          {
+            "target": "func_001c65e4",
+            "need": "Current pinned constructors read uninitialized m_Capacity through SetCapacity. The target matches explicit zero initialization with the canonical setter sequence; the historical source spelling remains [INFERENCE]. A shared-header cutover must preserve/reconcile other users."
+          },
+          {
+            "target": "func_001e6f40",
+            "need": "The W14GlyphOwner/W14GlyphList consumer contract disagrees with src/wave8/func_00167860.cpp and include/game/item_entries.h, whose provider constructs W8ItemEntry for W8EntryList. Preserve this unresolved owner/provider identity issue; no cast or alias is proposed."
+          },
+          {
+            "target": "func_001e6f40",
+            "need": "The caller src/wave15/func_00172ea0.c declares a SelectionAction receiver; the coordinated owner cutover must reconcile that view as well."
+          },
+          {
+            "target": "func_001303a8",
+            "need": "The inherited triple pointer chase wrote the shader resource rather than the command-prefix word. The delivered two-link storage access preserves the RenderJob receiver supported by caller 00123e70; an intermediate RenderContext-receiver hypothesis was rejected when that caller passed arg0 here but arg0->context to 001306c8."
+          },
+          {
+            "target": "func_001303a8",
+            "need": "RenderJob/model/skeleton/primitive semantic names remain [INFERENCE]; this does not establish a native NW4C class identity or authorize aliases."
+          },
+          {
+            "target": "func_001d7b6c",
+            "need": "The two existing property-only voice provider receiver identities remain inconsistent with the canonical AudioVoiceGroup obtained from StreamChannel::channel."
+          },
+          {
+            "target": "func_001d7b6c",
+            "need": "Resolved the inherited func_00150210 formal-width disagreement locally: copy the provider int formal from src/wave20/func_00150210.c and retain the evidenced outgoing byte narrowing explicitly at the call site. This preserves the measured 207-byte residual and does not infer an unsigned-byte callee formal."
+          }
+        ]
+      }
+    },
+    {
+      "address": "0x001d01dc",
+      "name": "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+      "size": 328,
+      "status": "match",
+      "source": "scratch/authors/nm02/src/func_001ceeac_step5c.cpp",
+      "source_sha256": "6c0968c83b983f03a8f8b4e5744b18ca20358f2edd47a57de84dce359d6cbf88",
+      "profile": "middleware",
+      "receipt": "scratch/authors/nm02/match/a001-file-address-scope/func_001ceeac_step5c.result.json",
+      "names": "scratch/authors/nm02/names.json",
+      "needs_names": [
+        "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+        "_ZNK2nw3snd12SoundArchive19GetWaveArchiveCountEv"
+      ],
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "integration_needs": [
+        "shared-archive-reader-setter",
+        "native-sound-count-receiver",
+        "retained-Window-owner-and-layout"
+      ],
+      "author": "nm02",
+      "author_result": "scratch/authors/nm02/RESULT.json",
+      "author_result_sha256": "877fe8fb7c6cc4fa33960608ff4cbe268ce9dbf5b333c5e25000b06578244b2c",
+      "observed_source_sha256": "6c0968c83b983f03a8f8b4e5744b18ca20358f2edd47a57de84dce359d6cbf88",
+      "observed_receipt_sha256": "cbb29de8559e2783fde9a5d83166c5a74183760d312a4ca49774bd99d251edae",
+      "observed_receipt_function": [
+        {
+          "name": "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+          "address": 1901020,
+          "size": 328,
+          "candidate_size": 328,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [
+          {
+            "id": "shared-archive-reader-setter",
+            "header": "include/game/archive.h",
+            "detail": "Add the existing evidenced declaration const void *func_00183bc8(const struct ArchiveReader *reader, unsigned index, const void *replacement), identical to src/wave8/func_00183bc8.c. Remove the inherited marked source-local extern-C block before prepare. func_00183bfc(const ArchiveReader*, unsigned) is now already declared at archive.h:117, so its local duplicate needs removal, not another shared declaration."
+          },
+          {
+            "id": "retained-Window-owner-and-layout",
+            "header": "include/nw/lyt/lyt_Window.h",
+            "detail": "The unchanged, mismatched Tu1007Window partial view retains retail inflation/colors/coordinates/frames/material/state offsets 0x138/0x148/0x158/0x160/0x164/0x168-0x169. Resolve the canonical retail-layout discrepancy and a reviewed TU consolidation/partition before adoption; do not silently drop its definition or install a second nw::lyt::Window owner. R41304Color reuses the inherited callback identity."
+          }
+        ],
+        "names": {
+          "overlay": "scratch/authors/nm02/names.json",
+          "copied_from": "scratch/authors/np290/names.json",
+          "byte_identical_to_parent": true,
+          "new_bindings_proposed": false,
+          "target_bindings": [
+            "_ZN2nw3snd16SoundDataManager14InvalidateDataEPKvS3_",
+            "_ZNK2nw3snd12SoundArchive19GetWaveArchiveCountEv"
+          ],
+          "retained_context_bindings": [
+            "_ZN2nw3lyt4PaneC1EPKNS0_3res4PaneE",
+            "_ZN2nw3lyt8MaterialC1EPKNS0_3res8MaterialERKNS0_11ResBlockSetE",
+            "_ZN2nw3lyt8internal11TexCoordAry7ReserveEh",
+            "_ZN2nw3lyt8internal11TexCoordAry4CopyEPKvh",
+            "_ZN11R41304ColorC1Ev",
+            "_ZN12Tu1007WindowC1EPKN2nw3lyt3res6WindowERKNS1_11ResBlockSetE",
+            "_ZN12Tu1007WindowC2EPKN2nw3lyt3res6WindowERKNS1_11ResBlockSetE",
+            "_ZTV12Tu1007Window"
+          ],
+          "detail": "Exact evidenced inherited overlay, including its existing same-entry constructor bindings. No aliases or callees were invented. Do not duplicate any existing credited/emitted owner during collection."
+        },
+        "contract_conflicts": [
+          {
+            "id": "native-sound-count-receiver",
+            "address": "0x001f2b90",
+            "detail": "The overlay binds unsigned nw::snd::SoundArchive::GetWaveArchiveCount() const, but accepted src/wave8/func_001f2b90.c defines unsigned func_001f2b90(struct ArchiveHandle *handle), forwarding handle->index. Native SoundArchive has a SoundArchiveFileReader* at +4; the partial C ArchiveHandle has ArchiveIndex* at +4. Reconcile native receiver identity/constness with the existing C owner before adoption; no tracked declaration or cast was changed in this task."
+          }
+        ],
+        "catalogue_or_model_changes": []
+      },
+      "names_sha256": "d7e86be3c69f7eee537158b7838d726d8f78dd401f1e1a7c796dc301cc6c5681"
+    },
+    {
+      "address": "0x001f4408",
+      "name": "func_001f4408",
+      "native_name": "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+      "size": 180,
+      "status": "match",
+      "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+      "source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+      "profile": "middleware",
+      "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+      "receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+      "names": "scratch/authors/nm01/names/bank.json",
+      "needs_names": [
+        "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+        "_ZNK2nw3snd8internal8BankFile13InfoBlockBody13GetInstrumentEi",
+        "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+        "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj"
+      ],
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "author": "nm01",
+      "author_result": "scratch/authors/nm01/RESULT.json",
+      "author_result_sha256": "e9ebc8a8996fd8f2b07ffe9fa187f35f95793706a60a0b790943a1ec349e95b0",
+      "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+      "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+      "observed_receipt_function": [
+        {
+          "name": "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+          "address": 2049032,
+          "size": 180,
+          "candidate_size": 180,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [],
+        "names": [
+          {
+            "overlay": "scratch/authors/nm01/names/bank.json",
+            "needs_names": [
+              "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+              "_ZNK2nw3snd8internal8BankFile13InfoBlockBody13GetInstrumentEi",
+              "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+              "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj"
+            ],
+            "inherited_unchanged": true,
+            "evidence": "Same-address native self-definitions using canonical BankFile types. No callee aliases or rebinding introduced; exact historical private method identity remains [INFERENCE]."
+          }
+        ],
+        "contract_conflicts": [],
+        "ownership": [
+          {
+            "function": "func_001f4500",
+            "existing_owner": "src/wave9/func_001f4500.c",
+            "needs": "Explicit accepted-owner move is required before adopting this native TU; do not emit a duplicate credited accessor."
+          }
+        ],
+        "unmatched_targets": [
+          {
+            "function": "func_001f44bc",
+            "status": "mismatch",
+            "size": 68,
+            "differing_bytes": 15,
+            "candidate_bytes_identical_to_inherited": true,
+            "needs": "Promoted from context to Main's follow-up target; retain as uncredited after the 26-trial finite negative result. Whole-TU exit remains 1."
+          }
+        ],
+        "source_policy_qualifications": [
+          "Inherited private serialized SplitRegions.upperBound[1] and RangeRegions.region[1] remain, following the canonical C++ one-entry serialized-tail convention. Step5 nf269 b15 preserves the ARMCC C++ flexible-tail refusal. No shared-header edit or new array-layout claim was made.",
+          "[INFERENCE] Private chunk names, natural shared decoder TU membership and native method historical spelling remain inferred as in np275."
+        ]
+      },
+      "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+    },
+    {
+      "address": "0x001f4500",
+      "name": "func_001f4500",
+      "native_name": "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+      "size": 12,
+      "status": "context_match",
+      "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+      "source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+      "profile": "middleware",
+      "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+      "receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+      "names": "scratch/authors/nm01/names/bank.json",
+      "needs_names": [
+        "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+        "_ZNK2nw3snd8internal8BankFile13InfoBlockBody13GetInstrumentEi",
+        "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+        "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj"
+      ],
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "author": "nm01",
+      "author_result": "scratch/authors/nm01/RESULT.json",
+      "author_result_sha256": "e9ebc8a8996fd8f2b07ffe9fa187f35f95793706a60a0b790943a1ec349e95b0",
+      "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+      "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+      "observed_receipt_function": [
+        {
+          "name": "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+          "address": 2049280,
+          "size": 12,
+          "candidate_size": 12,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [],
+        "names": [
+          {
+            "overlay": "scratch/authors/nm01/names/bank.json",
+            "needs_names": [
+              "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+              "_ZNK2nw3snd8internal8BankFile13InfoBlockBody13GetInstrumentEi",
+              "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+              "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj"
+            ],
+            "inherited_unchanged": true,
+            "evidence": "Same-address native self-definitions using canonical BankFile types. No callee aliases or rebinding introduced; exact historical private method identity remains [INFERENCE]."
+          }
+        ],
+        "contract_conflicts": [],
+        "ownership": [
+          {
+            "function": "func_001f4500",
+            "existing_owner": "src/wave9/func_001f4500.c",
+            "needs": "Explicit accepted-owner move is required before adopting this native TU; do not emit a duplicate credited accessor."
+          }
+        ],
+        "unmatched_targets": [
+          {
+            "function": "func_001f44bc",
+            "status": "mismatch",
+            "size": 68,
+            "differing_bytes": 15,
+            "candidate_bytes_identical_to_inherited": true,
+            "needs": "Promoted from context to Main's follow-up target; retain as uncredited after the 26-trial finite negative result. Whole-TU exit remains 1."
+          }
+        ],
+        "source_policy_qualifications": [
+          "Inherited private serialized SplitRegions.upperBound[1] and RangeRegions.region[1] remain, following the canonical C++ one-entry serialized-tail convention. Step5 nf269 b15 preserves the ARMCC C++ flexible-tail refusal. No shared-header edit or new array-layout claim was made.",
+          "[INFERENCE] Private chunk names, natural shared decoder TU membership and native method historical spelling remain inferred as in np275."
+        ]
+      },
+      "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+    },
+    {
+      "address": "0x001f46d0",
+      "name": "func_001f46d0",
+      "native_name": "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj",
+      "size": 180,
+      "status": "match",
+      "source": "scratch/authors/nm01/src/bank_regions_tu.cpp",
+      "source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+      "profile": "middleware",
+      "receipt": "scratch/authors/nm01/match/final-bank/bank_regions_tu.result.json",
+      "receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+      "names": "scratch/authors/nm01/names/bank.json",
+      "needs_names": [
+        "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+        "_ZNK2nw3snd8internal8BankFile13InfoBlockBody13GetInstrumentEi",
+        "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+        "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj"
+      ],
+      "extra_sources": [],
+      "linker_model": "armlink5-inline-branchnop-v2",
+      "literal_model": "none",
+      "author": "nm01",
+      "author_result": "scratch/authors/nm01/RESULT.json",
+      "author_result_sha256": "e9ebc8a8996fd8f2b07ffe9fa187f35f95793706a60a0b790943a1ec349e95b0",
+      "observed_source_sha256": "bf376a760641793229b65c8712fcd6b653503caee111a020caa8b6132eb5374f",
+      "observed_receipt_sha256": "6f0bbd662d4ce2f045b09148f8df07a0abee7345e6ffc475f64f0e0c7bf0aa8b",
+      "observed_receipt_function": [
+        {
+          "name": "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj",
+          "address": 2049744,
+          "size": 180,
+          "candidate_size": 180,
+          "status": "match",
+          "first_diff": null
+        }
+      ],
+      "result_integration_needs": {
+        "headers": [],
+        "names": [
+          {
+            "overlay": "scratch/authors/nm01/names/bank.json",
+            "needs_names": [
+              "_ZNK2nw3snd8internal8BankFile10Instrument12GetKeyRegionEj",
+              "_ZNK2nw3snd8internal8BankFile13InfoBlockBody13GetInstrumentEi",
+              "_ZNK2nw3snd8internal8BankFile13InfoBlockBody27GetInstrumentReferenceTableEv",
+              "_ZNK2nw3snd8internal8BankFile9KeyRegion17GetVelocityRegionEj"
+            ],
+            "inherited_unchanged": true,
+            "evidence": "Same-address native self-definitions using canonical BankFile types. No callee aliases or rebinding introduced; exact historical private method identity remains [INFERENCE]."
+          }
+        ],
+        "contract_conflicts": [],
+        "ownership": [
+          {
+            "function": "func_001f4500",
+            "existing_owner": "src/wave9/func_001f4500.c",
+            "needs": "Explicit accepted-owner move is required before adopting this native TU; do not emit a duplicate credited accessor."
+          }
+        ],
+        "unmatched_targets": [
+          {
+            "function": "func_001f44bc",
+            "status": "mismatch",
+            "size": 68,
+            "differing_bytes": 15,
+            "candidate_bytes_identical_to_inherited": true,
+            "needs": "Promoted from context to Main's follow-up target; retain as uncredited after the 26-trial finite negative result. Whole-TU exit remains 1."
+          }
+        ],
+        "source_policy_qualifications": [
+          "Inherited private serialized SplitRegions.upperBound[1] and RangeRegions.region[1] remain, following the canonical C++ one-entry serialized-tail convention. Step5 nf269 b15 preserves the ARMCC C++ flexible-tail refusal. No shared-header edit or new array-layout claim was made.",
+          "[INFERENCE] Private chunk names, natural shared decoder TU membership and native method historical spelling remain inferred as in np275."
+        ]
+      },
+      "names_sha256": "d2afd4972bb86622e58586c42accd2cac166e4cbc2768e7e09036e82baac0bcb"
+    }
+  ]
+}

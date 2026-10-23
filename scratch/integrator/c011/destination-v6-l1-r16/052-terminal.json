@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/text_alignment_vertical-r9.c",
+  "source_sha256": "0a8de118359354ecd7603abfc379b5b3fd6189c8ba160ac65764abc8a30eddef",
+  "profile": "game",
+  "credited_functions": [
+    "func_00180388"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/text_alignment_vertical-r9.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/052-text_alignment_vertical-r9"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.149234,
+  "stdout": "MATCH    func_00180388 @ 0x180388 size 0x48/0x48\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/052-text_alignment_vertical-r9/text_alignment_vertical-r9.result.json",
+  "result_sha256": "59c928203fa9311bfb0c733735f81f334b33458267855b720bc8aa3401fadb0a",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_00180388",
+      "status": "match",
+      "size": 72,
+      "candidate_size": 72,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

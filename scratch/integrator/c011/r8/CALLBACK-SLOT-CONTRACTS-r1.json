@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "parent_closure": "scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json",
+  "parent_closure_sha256": "a9bbac9992ea67218441d6918899d69029b286897d5de0662df7e13e680fd13e",
+  "parent_source_commit": "f78df90632d86c1f48eb90b4ca2aacc5a23b50bc",
+  "parent_counts": {
+    "catalogue_functions": 4743,
+    "decoded_functions": 4743,
+    "decode_errors": 0,
+    "original_call_sites_scanned": 20327,
+    "source_files_scanned": 3228,
+    "callback_runtime_entries": 53,
+    "array_entrypoints_including_veneers": 5,
+    "array_original_call_sites": 70,
+    "array_provider_addresses": 45,
+    "original_callback_parameter_rows": 272,
+    "source_api_mentions": 141,
+    "explicit_source_calls": 70,
+    "passed_code_candidates_classified": 308,
+    "indirect_parameter_candidates_retained": 547,
+    "unique_provider_contract_rows": 157,
+    "NEW_provider_addresses": 17,
+    "revised_provider_addresses": 7,
+    "accepted_attention_rows": 55,
+    "source_only_noninvoking_helpers": 8,
+    "native_member_callback_families": 4,
+    "native_member_provider_addresses": 6,
+    "unmodeled_existing_passed_code_candidates": 26,
+    "source_scan_errors": 0,
+    "unresolved_NEW_or_revised_rows": 0
+  },
+  "scope": "All71 current c011 units, including folded language/worker/TransformNode factory; each known original runtime provider or callable-table case is adjudicated.",
+  "original_scoped_runtime_rows": [
+    {
+      "caller": "0x00104e9c",
+      "site": "0x00104f3c",
+      "entrypoint": "0x0019dd50",
+      "category": "thread_start_context_registration",
+      "callback_parameter_index": 2,
+      "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+      "argument_fact": {
+        "kind": "function_address",
+        "address": "0x0010aa28",
+        "owner": "0x0010aa28",
+        "names": [
+          "func_0010aa28"
+        ]
+      },
+      "providers": [
+        {
+          "address": "0x0010aa28",
+          "name": "func_0010aa28",
+          "aliases": [
+            "func_0010aa28"
+          ],
+          "ledger_state": "UNCLAIMED",
+          "prior_prepared_claim": false,
+          "runtime_parameter_type": "function(pointer to (void), pointer to (void)) -> void",
+          "declared_provider_type": "NO_LEDGER_PROVIDER",
+          "comparison": "UNCLAIMED_PROVIDER",
+          "current_NEW_or_revised_closed": true
+        }
+      ],
+      "array_semantics": null,
+      "source_binding": {
+        "kind": "uncredited original caller; intentionally included"
+      }
+    }
+  ],
+  "current_worker_exact_type_check": {
+    "exit_code": 0,
+    "declarations": [
+      {
+        "name": "func_0010aa28",
+        "definition": false,
+        "type": "function(pointer to (void), pointer to (void)) -> void",
+        "type_key": [
+          "function",
+          [],
+          [
+            [
+              "base",
+              [],
+              [
+                "void"
+              ]
+            ],
+            [
+              [
+                "pointer",
+                [],
+                [
+                  [
+                    "base",
+                    [],
+                    [
+                      "void"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "pointer",
+                [],
+                [
+                  [
+                    "base",
+                    [],
+                    [
+                      "void"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            false
+          ]
+        ],
+        "site": {
+          "source": "include/game/runtime.h",
+          "line": 133
+        },
+        "exact_runtime_type": true
+      },
+      {
+        "name": "func_0010aa28",
+        "definition": true,
+        "type": "function(pointer to (void), pointer to (void)) -> void",
+        "type_key": [
+          "function",
+          [],
+          [
+            [
+              "base",
+              [],
+              [
+                "void"
+              ]
+            ],
+            [
+              [
+                "pointer",
+                [],
+                [
+                  [
+                    "base",
+                    [],
+                    [
+                      "void"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "pointer",
+                [],
+                [
+                  [
+                    "base",
+                    [],
+                    [
+                      "void"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            false
+          ]
+        ],
+        "site": {
+          "source": "src/checkpoint13/copy_worker.c",
+          "line": 15
+        },
+        "exact_runtime_type": true
+      }
+    ],
+    "all_exact": true
+  },
+  "worker_original_call": {
+    "caller": "0x00104e9c",
+    "site": "0x00104f3c",
+    "factory": "0x0019dd50",
+    "factory_callback_parameter": 2,
+    "known_type": "void(void*,void*)",
+    "provider": "func_0010aa28",
+    "provider_definition": "src/checkpoint13/copy_worker.c:15",
+    "shared_declaration": "include/game/runtime.h:133",
+    "accepted_invoker": "src/wave13/func_0012d104.c:9 invokes start->entry(start->argument,start->context)",
+    "kernel_vs_inner_entry": "The outer kernel entry receives ThreadStartContext*, while its stored inner work callback receives argument and context; these are separate contracts.",
+    "unused_second_input_preserved": true,
+    "reproof_exit": 0,
+    "catalogue_bytes": 280
+  },
+  "opaque_stored_provider_rows": [
+    {
+      "function": "func_001d033c",
+      "storage": "0x002245ec +0x1c",
+      "physical_cell": "0x00224608",
+      "verdict": "QUALIFIED_RETAINED",
+      "required_visible_qualification": "Invoking population and protocol unrecovered; address stored only.",
+      "provider_type": "void(LinkedOwner*)",
+      "source": "src/checkpoint11/func_001d033c.c",
+      "source_sha256": "a1b309ab730c685771fd88fe69b337e304635ea38e9613caa0bd1a750c3dd606",
+      "conditions": {
+        "a_opaque_storage": {
+          "satisfied": true,
+          "evidence": "002245ec/002246b8 remain const unsigned[] with opaque address-only vptrs;002434ec has no project callable table completion."
+        },
+        "b_no_selected_table_invocation": {
+          "satisfied": true,
+          "evidence": "Selected references to the named sound tables only install their opaque addresses; no selected source declares/invokes a callable slot through any of these table objects. Unknown dynamic routes remain unrecovered, not proven compatible."
+        },
+        "c_no_native_provider_identity": {
+          "satisfied": true,
+          "native_provider_aliases": []
+        },
+        "d_body_and_direct_contract_evidence": {
+          "satisfied": true,
+          "evidence": "void func_001d0348(OwnedLink*) shares the actual selected link field",
+          "invoker_type_not_invented": true
+        },
+        "e_existing_opaque_address_storage_only": {
+          "satisfied": true,
+          "evidence": "The original allocated-data cell is unchanged and its hash is recorded. No new initializer of the table or integer cast of a function pointer is introduced."
+        }
+      },
+      "cell_fact": {
+        "storage": "0x00224608",
+        "function": "func_001d033c",
+        "cell_sha256": "ccadc2f9e51f7afa09bab34dfb22b33aceaab8ad6114cb9c672d27f5f46d62e9"
+      }
+    },
+    {
+      "function": "func_001d222c",
+      "storage": "0x002246b8 +0x1c",
+      "physical_cell": "0x002246d4",
+      "verdict": "QUALIFIED_RETAINED",
+      "required_visible_qualification": "Invoking population and protocol unrecovered; address stored only.",
+      "provider_type": "void(LinkedView*)",
+      "source": "src/checkpoint11/func_001d222c.c",
+      "source_sha256": "50c67d05210f44948f868e963d1c8087b09d712a0aad66dc8254c549c4735bcb",
+      "conditions": {
+        "a_opaque_storage": {
+          "satisfied": true,
+          "evidence": "002245ec/002246b8 remain const unsigned[] with opaque address-only vptrs;002434ec has no project callable table completion."
+        },
+        "b_no_selected_table_invocation": {
+          "satisfied": true,
+          "evidence": "Selected references to the named sound tables only install their opaque addresses; no selected source declares/invokes a callable slot through any of these table objects. Unknown dynamic routes remain unrecovered, not proven compatible."
+        },
+        "c_no_native_provider_identity": {
+          "satisfied": true,
+          "native_provider_aliases": []
+        },
+        "d_body_and_direct_contract_evidence": {
+          "satisfied": true,
+          "evidence": "void func_001d2234(LinkedView*) shares the actual forwarded linked pointer",
+          "invoker_type_not_invented": true
+        },
+        "e_existing_opaque_address_storage_only": {
+          "satisfied": true,
+          "evidence": "The original allocated-data cell is unchanged and its hash is recorded. No new initializer of the table or integer cast of a function pointer is introduced."
+        }
+      },
+      "cell_fact": {
+        "storage": "0x002246d4",
+        "function": "func_001d222c",
+        "cell_sha256": "a3804875478bfa756c549981a07a3fe628ba9641ce0a96fd55076d4fd674aaa7"
+      }
+    },
+    {
+      "function": "func_001c8894",
+      "storage": "0x002434ec",
+      "physical_cell": "0x002434ec",
+      "verdict": "QUALIFIED_RETAINED",
+      "required_visible_qualification": "Invoking population and protocol unrecovered; address stored only.",
+      "provider_type": "void(nw::os::IAllocator*, nw::gfx::ResShape)",
+      "source": "src/checkpoint11/shape_setup-r6.cpp",
+      "source_sha256": "45208cf4fd5f78f711c1eac3b715cba5544f9ea0ecd5587cbadb92c435cc9a0c",
+      "conditions": {
+        "a_opaque_storage": {
+          "satisfied": true,
+          "evidence": "002245ec/002246b8 remain const unsigned[] with opaque address-only vptrs;002434ec has no project callable table completion."
+        },
+        "b_no_selected_table_invocation": {
+          "satisfied": true,
+          "evidence": "Selected references to the named sound tables only install their opaque addresses; no selected source declares/invokes a callable slot through any of these table objects. Unknown dynamic routes remain unrecovered, not proven compatible."
+        },
+        "c_no_native_provider_identity": {
+          "satisfied": true,
+          "native_provider_aliases": []
+        },
+        "d_body_and_direct_contract_evidence": {
+          "satisfied": true,
+          "evidence": "The body uses the real allocator and resource value; typed primitive/vertex-attribute helpers match their actual declarations",
+          "invoker_type_not_invented": true
+        },
+        "e_existing_opaque_address_storage_only": {
+          "satisfied": true,
+          "evidence": "The original allocated-data cell is unchanged and its hash is recorded. No new initializer of the table or integer cast of a function pointer is introduced."
+        }
+      },
+      "cell_fact": {
+        "storage": "0x002434ec",
+        "function": "func_001c8894",
+        "cell_sha256": "c18a925fbc8d132650fe0f4b413925eda2fb7e4cd9d7d01bd0e51071857804e8"
+      }
+    }
+  ],
+  "Main_qualification_ruling": "Exact invoking type is mandatory where a runtime/invoker/slot type is known. The three specified unrecovered populations are retained QUALIFIED only with all(a)-(e) satisfied; opaque address storage is not a homogeneous callable table or compatibility proof.",
+  "native_lifetime_rows": [
+    {
+      "providers": [
+        "func_001b6904",
+        "func_001b6b9c"
+      ],
+      "objects": [
+        "PairCollection",
+        "ScalarCollection"
+      ],
+      "contract": "Compiler-generated native C++ static lifetime uses actual same-owner destructor definitions under the documented C++ ABI. It is not an ordinary C provider cast to a generic callback.",
+      "qualification": "R1 erased registration identity/original call graph remains INFERENCE/QUALIFIED.",
+      "source": "src/checkpoint11/func_001b6904.cpp; pair_collection.cpp; scalar_collection.cpp"
+    }
+  ],
+  "known_native_virtual_interfaces": [
+    {
+      "family": "FxDelay/FxBase",
+      "contract": "Actual native constructor installs the canonical external vtable. Supplied Finalize/UpdateBuffer are genuine native members with the shared declared receiver/scalar/VFP inputs; uncompiled destructor/unpopulated cells are not fabricated."
+    },
+    {
+      "family": "AllocationSystem release",
+      "contract": "void(unsigned,unsigned,unsigned,void*) is shared by the declaration and all selected consumers. No new concrete release provider is supplied; dynamic population remains external/qualified."
+    },
+    {
+      "family": "Signal2/Slot2 folded factory",
+      "contract": "Slot2<void,TransformNode*,SceneContext*>::Invoke(TransformNode*,SceneContext*) returns void on its real native receiver. CreateCallbacks constructs empty canonical signal/slot-list storage, not concrete slot providers or function-address initializers.",
+      "source": [
+        "src/checkpoint13/transform_callbacks.cpp",
+        "include/nw/gfx/gfx_TransformNode.h",
+        "include/nw/ut/ut_Signal.h",
+        "include/nw/ut/ut_MoveArray.h"
+      ],
+      "no_source_local_specialization": true,
+      "new_slot_provider_definitions": [],
+      "eventual_external_population": "unrecovered, no compatibility claim"
+    }
+  ],
+  "unmodeled_original_runtime_rows_in_scope": [],
+  "new_defined_vtables": [],
+  "data_resident_scoped_provider_census": {
+    "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+    "candidate_function_address_cells": [
+      {
+        "storage": "0x00224608",
+        "function": "func_001d033c",
+        "cell_sha256": "ccadc2f9e51f7afa09bab34dfb22b33aceaab8ad6114cb9c672d27f5f46d62e9"
+      },
+      {
+        "storage": "0x002246d4",
+        "function": "func_001d222c",
+        "cell_sha256": "a3804875478bfa756c549981a07a3fe628ba9641ce0a96fd55076d4fd674aaa7"
+      },
+      {
+        "storage": "0x002434ec",
+        "function": "func_001c8894",
+        "cell_sha256": "c18a925fbc8d132650fe0f4b413925eda2fb7e4cd9d7d01bd0e51071857804e8"
+      }
+    ],
+    "qualification": "Exact function-address equality in allocated data is a storage candidate, not by itself a callable extent/population/arity proof; no raw data or instruction fields emitted."
+  },
+  "current_scope_outcomes": {
+    "known_worker_provider_types_exact": true,
+    "known_type_mismatches_remaining": 0,
+    "qualified_unrecovered_stored_provider_rows": 3,
+    "all_unresolved_NEW_or_revised_invoking_type_rows": 0,
+    "opaque_unknowns_are_not_reported_as_exact": true
+  }
+}

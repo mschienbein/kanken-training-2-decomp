@@ -1,5 +1,4 @@
-extern void func_00136450(const char *first, const char *second, const char *third,
-                          const char *fourth, const char *fifth);
+#include "game/service_state.h"
 
 unsigned func_0012d6e4(int selection)
 {

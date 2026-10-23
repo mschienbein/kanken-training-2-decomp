@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/material_deleting-r3.c",
+  "source_sha256": "584671c2bc045b824e26761e67956231c39777f2113a56e7314d83d9d7712207",
+  "profile": "game",
+  "credited_functions": [
+    "func_001cfe24"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/material_deleting-r3.c",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/006-material_deleting-r3"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.15017,
+  "stdout": "MATCH    func_001cfe24 @ 0x1cfe24 size 0x44/0x44\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/006-material_deleting-r3/material_deleting-r3.result.json",
+  "result_sha256": "1467c2928131eb9c2e0731be1d34c6143e8dddb39195fe78f1fa55393c7ab50a",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001cfe24",
+      "status": "match",
+      "size": 68,
+      "candidate_size": 68,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

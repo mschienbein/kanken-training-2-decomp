@@ -13,6 +13,11 @@
 
 
 
+/* Partial handle-bearing object; its unused prefix remains opaque. */
+struct ServiceHandleState {
+    unsigned char reserved00[4];
+    CtrHandle handle;
+};
 struct HardwareInfo { unsigned flags; unsigned reserved04[47]; };
 extern "C" {
 extern unsigned char data_00242be0;
@@ -25,11 +30,17 @@ CtrResult func_00113c74(void);
 extern unsigned data_0024377c;
 extern const char data_0021c5d9[];
 extern unsigned char data_002430dc;
+extern struct ServiceHandleState data_00242c08;
+/* The original checked word is the handle subobject at data_00242c08 + 4,
+ * not an independently modeled service object. */
+extern CtrHandle data_00242c0c;
 unsigned func_00192a7c(void);
 void func_0019d6c4(unsigned result, unsigned address);
 Result func_00121444(void);
 bool func_0010c06c(void);
 }
+#else
+unsigned func_00192a7c(void);
 #endif
 
 #endif

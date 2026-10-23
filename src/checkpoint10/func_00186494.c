@@ -2,7 +2,6 @@
 
 #include "game/service_state.h"
 extern char bss_004b486c[];
-extern size_t func_0019de40(char *destination, const char *source, size_t capacity);
 
 void func_00186494(const char *text)
 {

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "note": "Unaccepted c013 intake on c011-r7 8359b8594dd53889717cca14fb0a9de0edd201e2 (c010-r7 plus c011-r7), frozen GATES v1.19 and denominator v13-r2; explicit v6/L1. Three NEW functions / 908 B, no moves. Hold 001d9820,001d01dc,001f4408,001f46d0 (844 B): canonical voice/archive identity prerequisites and forbidden byte-offset bank decoding. The accepted 001f4500 accessor stays solely at src/wave9/func_001f4500.c; no nm01 TU or overlay is admitted. Details and touched-header reproof: scratch/integrator/c013/HANDOFF.json and docs/known-issues-c013.md.",
+  "units": [
+    {
+      "source": "src/checkpoint13/language.cpp",
+      "profile": "middleware",
+      "functions": ["func_0012e68c"],
+      "author": "np274"
+    },
+    {
+      "source": "src/checkpoint13/copy_worker.c",
+      "profile": "game",
+      "functions": ["func_0010aa28"],
+      "author": "np293"
+    },
+    {
+      "source": "src/checkpoint13/transform_callbacks.cpp",
+      "profile": "game",
+      "functions": ["func_001c65e4"],
+      "author": "np294"
+    }
+  ]
+}

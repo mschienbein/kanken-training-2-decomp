@@ -18,6 +18,7 @@ extern "C" {
 extern struct HwrOutputState data_00243818;
 extern unsigned char *data_00243890;
 extern struct HwrImage *data_00243854;
+extern int func_0014a988(unsigned width, unsigned height, struct HwrImage *image);
 extern int func_0014a98c(unsigned width, unsigned height, struct HwrImage *image);
 extern int func_0014c360(unsigned short width, unsigned short height,
                          unsigned limit_a, unsigned limit_b,

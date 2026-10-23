@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "initial_target_receipts": [
+    {
+      "source": "src/checkpoint14/byte_parameters.cpp",
+      "receipt": "scratch/integrator/c014/match-r1/targets/01-byte_parameters/byte_parameters.result.json",
+      "receipt_sha256": "8ccec8d2d1f2434f9ea080d0b02cb8ee8d3948805578d9e80178c9775bf566b2",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/aligned_buffer.c",
+      "receipt": "scratch/integrator/c014/match-r1/targets/02-aligned_buffer/aligned_buffer.result.json",
+      "receipt_sha256": "e94859e956a10854fa6cb07b26ad19d1a9949f5ab25e2362b0b8a4d31ad11db6",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/channel_drop.cpp",
+      "receipt": "scratch/integrator/c014/match-r1/targets/03-channel_drop/channel_drop.result.json",
+      "receipt_sha256": "5e2309a55f3952ba96f55f0512236b01f6a3b51066726c37666c8ae950a24455",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/service_strings.c",
+      "receipt": "scratch/integrator/c014/match-r1/targets/04-service_strings/service_strings.result.json",
+      "receipt_sha256": "4ee27592d01ee1be33155e5f4d4ebe6f2a610fedfba6c4204f4f6f1694628ebe",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/service_handle.cpp",
+      "receipt": "scratch/integrator/c014/match-r1/targets/05-service_handle/service_handle.result.json",
+      "receipt_sha256": "385f6b39835312e340b7d59adf5e3382b460bc99553dcb10359d58dc4210d466",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/candidate_ranking.c",
+      "receipt": "scratch/integrator/c014/match-r1/targets/06-candidate_ranking/candidate_ranking.result.json",
+      "receipt_sha256": "ef83792cb18d1e4e8a41fde1d7529aedca4f527e21058db3a873c6abb7caa374",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/image_activation.cpp",
+      "receipt": "scratch/integrator/c014/match-r1/targets/07-image_activation/image_activation.result.json",
+      "receipt_sha256": "3d6a2ff6e377d44aabf32d646c015cf144fd99f8bc22142b772cfc776785e96c",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/menu_modes.cpp",
+      "receipt": "scratch/integrator/c014/match-r1/targets/08-menu_modes/menu_modes.result.json",
+      "receipt_sha256": "a0bbc1ded4ec37e065a301e237d9da117e170f87310a5de4b2aef13ceb17b937",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/auxiliary_mode.c",
+      "receipt": "scratch/integrator/c014/match-r1/targets/09-auxiliary_mode/auxiliary_mode.result.json",
+      "receipt_sha256": "bb2af0b25175eaaed3ea471578a46828c1f5e16478c2aa21c8fd2592ff34c4f7",
+      "exit_code": 0
+    },
+    {
+      "source": "src/checkpoint14/memory_create.cpp",
+      "receipt": "scratch/integrator/c014/match-r1/targets/10-memory_create/memory_create.result.json",
+      "receipt_sha256": "a54953c5f6bad034e07cf3c402004d11510b6c841921668a8a52bf5cde964237",
+      "exit_code": 0
+    }
+  ],
+  "initial_target_bytes_all_MATCH": true,
+  "initial_boundary_issue": [
+    {
+      "source": "src/checkpoint14/channel_drop.cpp",
+      "symbol": "func_0017e764",
+      "identity": "func_0017e764",
+      "retained_provider": null,
+      "native_aliases": [],
+      "held": true
+    }
+  ],
+  "disposition": "The scoped object audit caught channel_drop.cpp calling credit-held 0017e764. Main agreed to preserve its c012 ownership, land c014 canonical TaskPool first, and have c012 rebase onto that exact model. The real shared-type gap is fixed by task_pool.h plus removal of both accepted C copies, not by hiding the held reference. A private exact 44-byte interface witness binds that closure; no c014 definition or credit of 0017e764 is added.",
+  "superseded_current_evidence": "Final MATCH-SCOPE-r2.json and its full fresh reproof, after the TaskPool header change. Do not use initial matches as current admission evidence.",
+  "private_witness": "scratch/integrator/c014/match-r2/pool-interface-witness/pool_release.result.json",
+  "agreement": "scratch/integrator/c014/TASK-POOL-AGREEMENT-r1.json"
+}

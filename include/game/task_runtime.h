@@ -7,6 +7,13 @@
 struct RuntimeActiveSlot { int identifier; unsigned reserved04; };
 struct W24eSoundLoadContext;
 struct RegionHeapOwner;
+struct PlaybackHandle;
+/* [INFERENCE] Four independent playback records occupy the previously
+ * unrecovered +0x2f680 region, before the prepared sound/heap fields. */
+struct RuntimePlaybackChannel {
+    int resource;
+    struct PlaybackHandle *handle;
+};
 struct TaskRuntime {
     unsigned active;
     unsigned reserved04;
@@ -14,7 +21,8 @@ struct TaskRuntime {
     int tags[48];
     unsigned char reservedcc[0x2f600 - 0xcc];
     struct RuntimeActiveSlot slots[16];
-    unsigned char reserved2f680[0x28];
+    struct RuntimePlaybackChannel channels[4];
+    unsigned char reserved2f6a0[8];
     struct W24eSoundLoadContext *sound;
     struct RegionHeapOwner *heap;
     unsigned char reserved2f6b0[0x31708 - 0x2f6b0];

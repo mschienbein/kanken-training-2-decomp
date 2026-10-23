@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "requester": "C011CmodelsFixCodex",
+  "checkpoint": "c011-r9 combined c014",
+  "purpose": "ONE whole-ledger interfaces run after fixing the actual Main failure, sweeping all c011/c014 models and local prototypes, and re-proving all2771 functions. No other heavy gate is requested.",
+  "cwd": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9",
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/interfaces.py",
+    "check",
+    "--matches",
+    "scratch/integrator/c011/r9/PROPOSED-LEDGER-r2.json",
+    "--allow-unchecked-cpp",
+    "--json",
+    "scratch/integrator/c011/r9/interfaces-r2.json"
+  ],
+  "output_paths": [
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9/scratch/integrator/c011/r9/interfaces-r2.json",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9/scratch/integrator/c011/r9/interfaces-r2.stdout.txt",
+    "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9/scratch/integrator/c011/r9/interfaces-r2.stderr.txt"
+  ],
+  "proposed_ledger": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9/scratch/integrator/c011/r9/PROPOSED-LEDGER-r2.json",
+  "proposed_ledger_sha256": "dbe4cd1923f80f038ebf950959fb9fab129d291bdd3865561547b99270189665",
+  "interfaces_tool_sha256": "02b00e602e056af4f1e70f5f900f4ce5f805028e638915713862cb8878f10ee0",
+  "same_interfaces_tool_as_failed_Main_merge": true,
+  "source_proof": {
+    "commands": 2671,
+    "exit_counts": {
+      "0": 2671
+    },
+    "required_functions_MATCH": 2771,
+    "helper_only_definitions": 24
+  },
+  "grant_required_before_execution": true,
+  "expected_grant_file": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9/scratch/integrator/c011/r9/HEAVY-SLOT-GRANTED.json",
+  "release_file": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r9/scratch/integrator/c011/r9/HEAVY-SLOT-RELEASED.json",
+  "outputs_initially_absent": true
+}
