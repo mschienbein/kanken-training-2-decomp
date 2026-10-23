@@ -422,6 +422,11 @@ extern unsigned func_00183c54(const struct ArchiveFile *file);
 extern struct ArchiveReader *func_00183c84(struct ArchiveReader *reader,
                                           const struct ArchiveFile *file, int use_table);
 extern void func_00140970(struct ArchiveReader *reader);
+extern const void *func_00183bc8(const struct ArchiveReader *reader, unsigned index,
+                                const void *replacement);
+extern const void *func_00183bfc(const struct ArchiveReader *reader, unsigned index);
+extern int func_001391d8(const struct ArchiveReader *reader);
+extern const unsigned data_00220b58;
 
 #ifdef __cplusplus
 }

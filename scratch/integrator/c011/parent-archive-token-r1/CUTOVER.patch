@@ -1,0 +1,40 @@
+diff --git a/include/game/archive_ipc.h b/include/game/archive_ipc.h
+index 8c61708..327d9cd 100644
+--- a/include/game/archive_ipc.h
++++ b/include/game/archive_ipc.h
+@@ -27,6 +27,12 @@ extern unsigned func_0012d5c4(struct ArchiveInfo *output, unsigned char mode,
+     const unsigned long long *ids, unsigned count);
+ extern unsigned func_00136340(void *output, unsigned char mode,
+     unsigned long long id, const unsigned short *input, unsigned count);
++extern CtrResult func_0012d550(unsigned *count, struct ArchiveInfo *entries,
++    unsigned capacity, unsigned char mode, unsigned long long token,
++    unsigned index);
++extern CtrResult func_0011f6a8(unsigned *count, struct ArchiveInfo *entries,
++    unsigned capacity, unsigned char mode, unsigned long long token,
++    unsigned index);
+ #ifdef __cplusplus
+ }
+ #endif
+diff --git a/src/checkpoint10/func_0011f6a8.c b/src/checkpoint10/func_0011f6a8.c
+index 810dfdc..211d200 100644
+--- a/src/checkpoint10/func_0011f6a8.c
++++ b/src/checkpoint10/func_0011f6a8.c
+@@ -1,11 +1,10 @@
+-/* The IPC callee writes through both output pointers; the buffer descriptor scales count by the record size. */
+-extern int func_0012d550(unsigned *output, void *buffer, unsigned count,
+-                        unsigned char mode, unsigned first, unsigned second,
+-                        unsigned third);
++#include "game/archive_ipc.h"
+ 
+-int func_0011f6a8(unsigned *output, void *buffer, unsigned count,
+-                  unsigned char mode, unsigned first, unsigned second,
+-                  unsigned third)
++/* The terminal operation consumes one complete 64-bit token, not three
++ * independently typed trailing words. Writable outputs retain their types. */
++CtrResult func_0011f6a8(unsigned *output, struct ArchiveInfo *buffer, unsigned count,
++                        unsigned char mode, unsigned long long token,
++                        unsigned index)
+ {
+-    return func_0012d550(output, buffer, count, mode, first, second, third);
++    return func_0012d550(output, buffer, count, mode, token, index);
+ }

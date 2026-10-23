@@ -1,0 +1,63 @@
+{
+  "source": "src/checkpoint11/sound_scale_lookup-r3.cpp",
+  "source_sha256": "55cfb5030d427c4c52c1a40c93b79352165cf8eda2648cc680ab7f4f5613431f",
+  "profile": "middleware",
+  "credited_functions": [
+    "func_0014fe14",
+    "func_0014feac",
+    "func_0014ffd8"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/sound_scale_lookup-r3.cpp",
+    "--profile",
+    "middleware",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/023-sound_scale_lookup-r3"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.132487,
+  "stdout": "MATCH    func_0014fe14 @ 0x14fe14 size 0x98/0x98\nMATCH    func_0014feac @ 0x14feac size 0x12c/0x12c\nMATCH    func_0014ffd8 @ 0x14ffd8 size 0x58/0x58\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/023-sound_scale_lookup-r3/sound_scale_lookup-r3.result.json",
+  "result_sha256": "0cda987261e5b1ee5cd507861888bce983e8cec676e2f9c09ed4071372ad5e7b",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_0014fe14",
+      "status": "match",
+      "size": 152,
+      "candidate_size": 152,
+      "first_diff": null
+    },
+    {
+      "function": "func_0014feac",
+      "status": "match",
+      "size": 300,
+      "candidate_size": 300,
+      "first_diff": null
+    },
+    {
+      "function": "func_0014ffd8",
+      "status": "match",
+      "size": 88,
+      "candidate_size": 88,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

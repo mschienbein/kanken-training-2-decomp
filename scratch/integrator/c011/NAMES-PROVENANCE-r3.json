@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "rows": [
+    {
+      "name": "strncat",
+      "address": 1050580,
+      "proof": "natural whole-function MATCH retained direct call relocation",
+      "function": "func_00143df4",
+      "source_sha256": "e5599ccc9b61d61264b785a7776a20afad9718b2f4428cca9b4478fe2c526182",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu1066/match/final-middleware/func_00143df4.result.json",
+      "receipt_sha256": "9457dd4c4214bdcfca5fff51480ef719835596ffb17ba75c10256b642e02b023",
+      "object_sha256": "695959e5c752eaaf1cdd523b0092ad8a939c4ffc0edd9544b6458ba1ccf66cf5",
+      "refs": [
+        {
+          "section": 1,
+          "offset": 220,
+          "type": 28,
+          "within_matched_target": true
+        }
+      ],
+      "qualification": "func_00143df4 calls the original Thumb concatenation routine with destination, source and bounded append count at its natural strncat call site; carried forward from r333."
+    },
+    {
+      "name": "_ZN2nw3lyt4Pane11AppendChildEPS1_",
+      "address": 1581820,
+      "proof": "natural whole-function MATCH retained direct call relocation",
+      "function": "func_001ce9e8",
+      "source_sha256": "4805e2d2101160ae04d67c5e1c1011886d80fa213079c695d7a89903f3fb7cb3",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu973/match/041-final-layout-narrow-bindings/layout_native.result.json",
+      "receipt_sha256": "711b4b7358df2eb952539f1904a2ec5a1c43b67c1fc3507ac6f7faf748a51d23",
+      "object_sha256": "36d5967471d8f98db105399577a59b7d1178da57c8c56c790f1a1c546b09686f",
+      "refs": [
+        {
+          "section": 1,
+          "offset": 412,
+          "type": 28,
+          "within_matched_target": true
+        }
+      ],
+      "qualification": "Original Layout::Build pane-link case calls this entry with parent and newly built child; canonical Pane::AppendChild has that contract."
+    },
+    {
+      "name": "_ZN2nw3lyt5GroupC1EPKNS0_3res5GroupEPNS0_4PaneE",
+      "address": 1891580,
+      "proof": "natural whole-function MATCH retained direct call relocation",
+      "function": "func_001ce9e8",
+      "source_sha256": "4805e2d2101160ae04d67c5e1c1011886d80fa213079c695d7a89903f3fb7cb3",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu973/match/041-final-layout-narrow-bindings/layout_native.result.json",
+      "receipt_sha256": "711b4b7358df2eb952539f1904a2ec5a1c43b67c1fc3507ac6f7faf748a51d23",
+      "object_sha256": "36d5967471d8f98db105399577a59b7d1178da57c8c56c790f1a1c546b09686f",
+      "refs": [
+        {
+          "section": 1,
+          "offset": 588,
+          "type": 28,
+          "within_matched_target": true
+        }
+      ],
+      "qualification": "Original Layout::Build group block allocates a canonical Group then calls this constructor with the group resource and root Pane; pinned public source independently supplies the same natural call."
+    },
+    {
+      "name": "_ZN2nw3lyt6Layout5BuildEPKvPNS0_16ResourceAccessorE",
+      "address": 1894888,
+      "proof": "same-address whole-function MATCH self-definition",
+      "function": "func_001ce9e8",
+      "source_sha256": "4805e2d2101160ae04d67c5e1c1011886d80fa213079c695d7a89903f3fb7cb3",
+      "receipt": "/home/michael/code/kanken-training-2-decomp/scratch/authors/tu973/match/041-final-layout-narrow-bindings/layout_native.result.json",
+      "receipt_sha256": "711b4b7358df2eb952539f1904a2ec5a1c43b67c1fc3507ac6f7faf748a51d23",
+      "object_sha256": "36d5967471d8f98db105399577a59b7d1178da57c8c56c790f1a1c546b09686f",
+      "refs": [],
+      "qualification": "[INFERENCE] Native Layout::Build same-address self-definition in scratch/authors/tu973/variants/layout-construction-reference-contract/layout_native.cpp; exact compiled body is witnessed by the final game-profile match receipt. Class/method spelling uses the pinned public native contract."
+    },
+    {
+      "name": "_ZN2nw3snd7FxDelayC1Ev",
+      "address": 1909684,
+      "proof": "same-address canonical native MATCH self-definition/entry alias",
+      "function": "func_001d23b4",
+      "source_sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+      "receipt": "scratch/integrator/c011/fx-delay-native-r3/fx_delay-r3.result.json",
+      "receipt_sha256": "4e3ccdba1511c274a9677e11cb24d1f4c271d1c4c02906427d2996f438bd52f3",
+      "object_sha256": "8f9e77fe0d374f26a2b066aea3eb1f54207d9881e4c2a5094eac1dafd5e4ebf7",
+      "refs": [],
+      "qualification": "[INFERENCE] Descriptive/historical type spelling. Whole function equals the retained original extent; the binding does not authorize a duplicate native identity."
+    },
+    {
+      "name": "_ZN2nw3snd7FxDelayC2Ev",
+      "address": 1909684,
+      "proof": "same-address canonical native MATCH self-definition/entry alias",
+      "function": "func_001d23b4",
+      "source_sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+      "receipt": "scratch/integrator/c011/fx-delay-native-r3/fx_delay-r3.result.json",
+      "receipt_sha256": "4e3ccdba1511c274a9677e11cb24d1f4c271d1c4c02906427d2996f438bd52f3",
+      "object_sha256": "8f9e77fe0d374f26a2b066aea3eb1f54207d9881e4c2a5094eac1dafd5e4ebf7",
+      "refs": [],
+      "qualification": "[INFERENCE] Descriptive/historical type spelling. Whole function equals the retained original extent; the binding does not authorize a duplicate native identity."
+    },
+    {
+      "name": "_ZTVN2nw3snd7FxDelayE",
+      "address": 2245972,
+      "proof": "native MATCH constructor/destructor retained vtable reference; address point minus ABI8",
+      "function": "func_001d23b4",
+      "source_sha256": "c30c3dba7b0b84d5b944d271ddbfa2226b4f5e518d1315ff1b4c0ae62b68e7ee",
+      "receipt": "scratch/integrator/c011/fx-delay-native-r3/fx_delay-r3.result.json",
+      "receipt_sha256": "4e3ccdba1511c274a9677e11cb24d1f4c271d1c4c02906427d2996f438bd52f3",
+      "object_sha256": "8f9e77fe0d374f26a2b066aea3eb1f54207d9881e4c2a5094eac1dafd5e4ebf7",
+      "refs": [
+        {
+          "section": 1,
+          "offset": 156,
+          "type": 2,
+          "within_matched_target": true
+        }
+      ],
+      "qualification": "[INFERENCE] Descriptive/historical type spelling. Whole function equals the retained original extent; the binding does not authorize a duplicate native identity."
+    },
+    {
+      "name": "_ZN14MaterialObjectD1Ev",
+      "address": 1900136,
+      "proof": "same-address canonical native MATCH self-definition/entry alias",
+      "function": "func_001cfe68",
+      "source_sha256": "3029d01d149713dc7aea4b0be6907128eef21b24627c339f539dc4d0f106a26a",
+      "receipt": "scratch/integrator/c011/material-dtor-shared-r3/material_dtor-r3.result.json",
+      "receipt_sha256": "5fcc9670f55c78d31f52fe192836f786231e84af511b30bdf25c98ed7571e8a8",
+      "object_sha256": "56086fb3b9a2d96875ee3785bd15dd9b88801de91ec88bc8e494f17211876cb8",
+      "refs": [],
+      "qualification": "[INFERENCE] Descriptive/historical type spelling. Whole function equals the retained original extent; the binding does not authorize a duplicate native identity."
+    },
+    {
+      "name": "_ZN14MaterialObjectD2Ev",
+      "address": 1900136,
+      "proof": "same-address canonical native MATCH self-definition/entry alias",
+      "function": "func_001cfe68",
+      "source_sha256": "3029d01d149713dc7aea4b0be6907128eef21b24627c339f539dc4d0f106a26a",
+      "receipt": "scratch/integrator/c011/material-dtor-shared-r3/material_dtor-r3.result.json",
+      "receipt_sha256": "5fcc9670f55c78d31f52fe192836f786231e84af511b30bdf25c98ed7571e8a8",
+      "object_sha256": "56086fb3b9a2d96875ee3785bd15dd9b88801de91ec88bc8e494f17211876cb8",
+      "refs": [],
+      "qualification": "[INFERENCE] Descriptive/historical type spelling. Whole function equals the retained original extent; the binding does not authorize a duplicate native identity."
+    },
+    {
+      "name": "_ZTV14MaterialObject",
+      "address": 2245752,
+      "proof": "native MATCH constructor/destructor retained vtable reference; address point minus ABI8",
+      "function": "func_001cfe68",
+      "source_sha256": "3029d01d149713dc7aea4b0be6907128eef21b24627c339f539dc4d0f106a26a",
+      "receipt": "scratch/integrator/c011/material-dtor-shared-r3/material_dtor-r3.result.json",
+      "receipt_sha256": "5fcc9670f55c78d31f52fe192836f786231e84af511b30bdf25c98ed7571e8a8",
+      "object_sha256": "56086fb3b9a2d96875ee3785bd15dd9b88801de91ec88bc8e494f17211876cb8",
+      "refs": [
+        {
+          "section": 1,
+          "offset": 60,
+          "type": 2,
+          "within_matched_target": true
+        }
+      ],
+      "qualification": "[INFERENCE] Descriptive/historical type spelling. Whole function equals the retained original extent; the binding does not authorize a duplicate native identity."
+    }
+  ],
+  "excluded_proposals": [
+    "Unmatched sound/StreamTrack aliases from tu973",
+    "RetailDelayState private spelling replaced by canonical FxDelay",
+    "Full public Material names refused by metadata placement; one shared partial MaterialObject ABI is used instead."
+  ],
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v2",
+    "literal_model": "none"
+  }
+}

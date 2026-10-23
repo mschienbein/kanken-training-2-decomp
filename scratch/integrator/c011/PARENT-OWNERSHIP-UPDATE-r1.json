@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "status": "final-c010-source-inventory-not-acceptance",
+  "prior_source_complete_commit": "899f13edb0a1b5ca43bf743e85aab05531b6f39d",
+  "c010_candidate": "scratch/worktrees/c010/config/candidates/c010.json",
+  "c010_candidate_sha256": "5f0ea8fe65607d09cb8e24b1ad51d69df31a6ce5eec128fc42c5884cf604acc3",
+  "c010_inventory": "scratch/worktrees/c010/scratch/integrator/c010/CURRENT-INVENTORY-r67.json",
+  "c010_inventory_sha256": "63b8b15ce322e9634ce19375a4d99ae9d86ab3bb3df9c595bf0ce381d4b68888",
+  "c010_deferrals": "scratch/worktrees/c010/scratch/integrator/c010/NEW-DEFERRALS-r67.json",
+  "c010_deferrals_sha256": "6d7cdc5f04faa5f94845dcc111544b8e8b8dc9477ac325993195af82d3c6b091",
+  "c010_counts": {
+    "candidate_units": 496,
+    "candidate_claims": 509,
+    "new_functions": 499,
+    "new_target_bytes": 47304,
+    "accepted_moves": 10,
+    "moved_target_bytes": 240,
+    "new_deferred_units": 49,
+    "new_deferred_functions": 51,
+    "new_deferred_target_bytes": 9252,
+    "reentered_prior_deferrals": [
+      "func_001685c0",
+      "func_00168618"
+    ]
+  },
+  "fresh_c011_owner_conflicts": [],
+  "prior_moves_preserved": [
+    {
+      "function": "func_00152560",
+      "from": "src/wave13/func_00152560.c",
+      "to": "src/checkpoint11/dsp_auxiliary-r5.cpp",
+      "c010_current_owner": null,
+      "activation": "unchanged prior accepted move"
+    },
+    {
+      "function": "func_0014fe14",
+      "from": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp",
+      "c010_current_owner": "src/checkpoint10/collect-r2/cutoff.cpp",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_0014feac",
+      "from": "src/checkpoint10/func_0014feac.cpp",
+      "to": "src/checkpoint11/sound_scale_lookup-r3.cpp",
+      "c010_current_owner": "src/checkpoint10/func_0014feac.cpp",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_00155ab4",
+      "from": "src/checkpoint10/func_00155ab4.c",
+      "to": "src/checkpoint11/aux_channel_publication-r3.c",
+      "c010_current_owner": "src/checkpoint10/func_00155ab4.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_001650f8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c",
+      "c010_current_owner": "src/checkpoint10/alternate1/func_001650f8.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_001f1ebc",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c",
+      "c010_current_owner": "src/checkpoint10/alternate1/func_001650f8.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_001f1ed8",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c",
+      "c010_current_owner": "src/checkpoint10/alternate1/func_001650f8.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_001f1f20",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c",
+      "c010_current_owner": "src/checkpoint10/alternate1/func_001650f8.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_001f1f34",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c",
+      "c010_current_owner": "src/checkpoint10/alternate1/func_001650f8.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    },
+    {
+      "function": "func_001f1f4c",
+      "from": "src/checkpoint10/alternate1/func_001650f8.c",
+      "to": "src/checkpoint11/archive_block_queries-r10.c",
+      "c010_current_owner": "src/checkpoint10/alternate1/func_001650f8.c",
+      "activation": "pending finalized-parent composition; do not infer release from absence"
+    }
+  ],
+  "native_pair_reservations": [
+    {
+      "source": "src/checkpoint10/func_001c7760.cpp",
+      "functions": [
+        "func_001c7760"
+      ],
+      "profile": "game",
+      "source_sha256": "6ca3a01c9ac026963a558b0fcd1c3954005dae48c8e49366d793b9f816a5b83c",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c7760.cpp",
+      "category": "child-reserved-new-unit",
+      "reason": "c011 owns the1c7760/1c7fa0 native-pair migration. Do not edit/rebind/retype it independently. Re-entry requires child-supplied exact native declaration, hash-bound emitted same-address self-definition and native pair return-ABI proof.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "scratch/integrator/c010/HANDOFF.json"
+      ],
+      "accepted_identity_removed": false,
+      "retained_in_src_for_reservation": true,
+      "reservation": "C011 retains ownership; no native-pair cutover or ownership release is asserted."
+    },
+    {
+      "source": "src/checkpoint10/func_001c8a40.cpp",
+      "functions": [
+        "func_001c8a40"
+      ],
+      "profile": "game",
+      "source_sha256": "7a65a8c02c2ac77d4627733b70bc59347c6199d2567c4e650bc4144ed4afd663",
+      "preserved_source": "scratch/integrator/c010/deferred-codex-r42/checkpoint10/func_001c8a40.cpp",
+      "category": "shared-contract-gap",
+      "reason": "The cube callee001c8244 is actually self-bound native SetupTextureMapperCommand(ResPixelBasedTextureMapper,ResCubeTexture), not a C function definition. Replace the C shadow only via its real native declaration/call. 001c7760 is c011-reserved: wait for the child's approved native-pair contract, do not redesign it here. Original001c8424/001c857c lack accepted/native defining evidence in this scope. Preserve exact native wrapper input types but do not invent native overload bindings from edited calls.",
+      "evidence": [
+        "/home/michael/code/kanken-training-2-decomp/scratch/integrator/c010/helpers/native-graphics/proposals-codex-r1.json",
+        "src/checkpoint10/collect-r2/func_001c8244.cpp"
+      ],
+      "accepted_identity_removed": false,
+      "retained_in_src_for_reservation": true,
+      "reservation": "C011 retains ownership; no native-pair cutover or ownership release is asserted."
+    }
+  ],
+  "c011_preserved_native_pair_source": {
+    "source": "src/checkpoint10/func_001c7760.cpp",
+    "sha256": "6035021e9ca99d3ce6a3ecb8edfd63919c36916b629b41e649621b1c814fddde",
+    "qualification": "This reserved child snapshot differs from the parent r67 snapshot. Both remain preserved; no identity equivalence, source replacement, cutover, re-entry or release follows."
+  },
+  "qualification": "Metadata-only coordination update. C010 reports final source disposition496units/509claims with both native reservation files retained in src but uncredited. Acceptance remains unfinished; do not merge unfinished changes or refresh shared-header closure before Main finalizes the predecessors. c011 candidate/moves/source and all bounded witnesses remain unchanged."
+}

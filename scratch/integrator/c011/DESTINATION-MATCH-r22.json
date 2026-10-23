@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "header": "include/game/text_writer.h",
+  "header_sha256": "02945ab8c87d44fd061fad683bd29bdbec2679a21b0ffa0fe4124a050af0bb98",
+  "cause": "Restore every prior TextWriterState/TextBounds/declaration and original C++ guard while adding the new native const getters. This changes the header input; no unchanged retry.",
+  "runs": [
+    {
+      "source": "src/checkpoint11/intake-r7/nf198/func_001af644.cpp",
+      "profile": "game",
+      "targets": [
+        "func_001af644"
+      ],
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint11/intake-r7/nf198/func_001af644.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r22/func_001af644"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r22/func_001af644/func_001af644.result.json",
+      "receipt_sha256": "964eaaa36472fdbe639d6757bdce944c1095e2f8cb0a5303d2b6c1acae939440",
+      "source_sha256": "361b744b6ebf22bb660c46752e7021bac1b3999471bf3ecc6adffa93026ad66d",
+      "observed": [
+        {
+          "name": "func_001af644",
+          "address": 1766980,
+          "status": "match",
+          "size": 248,
+          "candidate_size": 248,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    },
+    {
+      "source": "src/wave20/func_0017a690.cpp",
+      "profile": "game",
+      "targets": [
+        "func_0017a690"
+      ],
+      "dependency": true,
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/wave20/func_0017a690.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r22/func_0017a690"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r22/func_0017a690/func_0017a690.result.json",
+      "receipt_sha256": "97b585e1408f691d5c5a550e3cc2b7a7e7f9b4c8bf062db06925c37f6f77a747",
+      "source_sha256": "fc3cff0956242059f94a57fbd796f3bd0aad7ed0251d76d5c4cb3b0b6ebf771e",
+      "observed": [
+        {
+          "name": "func_0017a690",
+          "address": 1549968,
+          "status": "match",
+          "size": 56,
+          "candidate_size": 56,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    },
+    {
+      "source": "src/wave20/func_0017a6c8.cpp",
+      "profile": "game",
+      "targets": [
+        "func_0017a6c8"
+      ],
+      "dependency": true,
+      "command": [
+        "nice",
+        "-n",
+        "10",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011/.venv/bin/python",
+        "tools/match.py",
+        "src/wave20/func_0017a6c8.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "scratch/integrator/c011/destination-v6-l1-r22/func_0017a6c8"
+      ],
+      "exit_code": 0,
+      "receipt": "scratch/integrator/c011/destination-v6-l1-r22/func_0017a6c8/func_0017a6c8.result.json",
+      "receipt_sha256": "7d79add192cf47d06a8071177cae241a319b3cbb76569c437c861290e1147c97",
+      "source_sha256": "97dc8e377c0658479466825b3f042852a2d330c21b243b893f6fa26c49b456ad",
+      "observed": [
+        {
+          "name": "func_0017a6c8",
+          "address": 1550024,
+          "status": "match",
+          "size": 44,
+          "candidate_size": 44,
+          "first_diff": null
+        }
+      ],
+      "reason": null
+    }
+  ]
+}

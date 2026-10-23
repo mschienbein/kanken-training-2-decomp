@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/lyt_delete_animation.cpp",
+  "source_sha256": "e0c1cbb4615955fdf87b32936108c9631ce4a9090848bd9c1496ef2e94b1b7e5",
+  "profile": "game",
+  "credited_functions": [
+    "func_001ce998"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/lyt_delete_animation.cpp",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/013-lyt_delete_animation"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.131287,
+  "stdout": "MATCH    _ZN2nw3lyt6Layout19DeleteAnimTransformEPNS0_13AnimTransformE @ 0x1ce998 size 0x50/0x50\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/013-lyt_delete_animation/lyt_delete_animation.result.json",
+  "result_sha256": "5dffbaf13289847eea69f4fe2b3da9070a3861e7738409c6eba65e4401712394",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001ce998",
+      "status": "match",
+      "size": 80,
+      "candidate_size": 80,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

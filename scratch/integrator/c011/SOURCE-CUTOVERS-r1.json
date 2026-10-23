@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "canonical_inputs": [
+    {
+      "function": "func_00164b34",
+      "original": "scratch/authors/r41386/final/func_00164b34.cpp",
+      "integration_input": "scratch/integrator/c011/canonical-inputs/func_00164b34.cpp",
+      "reason": "Reuse the already caller-proven PaneIndexList class/declaration, its count/indices fields and natural variadic constructor; do not introduce a competing ByteSelectionList identity.",
+      "proof": "canonical-index-r1/func_00164b34.result.json"
+    },
+    {
+      "function": "func_001d4e2c",
+      "original": "scratch/authors/tu876/src/func_001d4e2c.cpp",
+      "integration_input": "scratch/integrator/c011/canonical-inputs/func_001d4e2c.cpp",
+      "reason": "Use AnimationTrack.suppress_stop at+0x82, already named by the parent shared header, and canonical AudioVoice endpoint declarations.",
+      "proof": "post-cutover-r1/func_001d4e2c/func_001d4e2c.result.json"
+    }
+  ],
+  "collected_source_changes": [
+    {
+      "source": "src/checkpoint11/slot_teardown.cpp",
+      "functions": [
+        "func_001aced0"
+      ],
+      "reason": "Keep only the credited two-cell cleanup. The delivered001acc30 is deferred for its accepted WidgetSlot/ResourceEvent conflict; delivered001ad288 is c010-owned and is not emitted here. The distinct four-byte cells use the real ResourceEvent cleanup contract without changing WidgetSlot or casting DisplayObject."
+    },
+    {
+      "source": "src/checkpoint11/func_001b6904.cpp",
+      "functions": [
+        "func_001b6904",
+        "func_001b6b9c",
+        "func_001b7cf8"
+      ],
+      "reason": "Unify the independently matching singleton allocations and cleanups with one shared template/header. Pair/Scalar cleanup functions become actual native destructor definitions at their caller-proven registration targets. Their small handles use ResourceEvent* because the real endpoint owns that interface; no accepted field is retagged."
+    }
+  ],
+  "parent_new_unit_migrations": [
+    {
+      "source": "src/checkpoint10/func_001c7760.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c7760"
+      ],
+      "source_sha256": "6035021e9ca99d3ce6a3ecb8edfd63919c36916b629b41e649621b1c814fddde"
+    },
+    {
+      "source": "src/checkpoint10/func_001d0348.c",
+      "profile": "game",
+      "functions": [
+        "func_001d0348"
+      ],
+      "source_sha256": "feac0f411f1fee646326ead607a86208998301e6183afe1d2d959de94503d9c2"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2234.c",
+      "profile": "game",
+      "functions": [
+        "func_001d2234"
+      ],
+      "source_sha256": "64cca166695cb922709489ac404549e1a2a9acb33d87b3f7e52c816fc333478a"
+    },
+    {
+      "source": "src/checkpoint10/func_001f478c.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001f478c"
+      ],
+      "source_sha256": "905bffea6a92f5b8f29ff9b9a3e1c490d9efc41a755283c796de788794e0da43"
+    }
+  ],
+  "parent_migration_contracts": {
+    "linked_owners": "Identical C owner/link/peer fields moved into linked_owners.h. Historical owner identity and peer-role qualifications remain explicit; no native alias or relationship between LinkedOwner and LinkedView is asserted.",
+    "counted_list": "The wrapper passes the address of the canonical head pointer at+8 to the existing pointer-to-pointer count routine; no CountedListView pointer pun remains.",
+    "texture_resource": "The reserved c010 caller now invokes the actual canonical native GetReferenceTextureTarget definition using its declared std::pair<ResTexture,bool> return. No extern-C method shadow or pair cast remains. Runtime00183458, emitted through native resource wrappers, is uncredited."
+  },
+  "accepted_source_revisions": [],
+  "new_headers": [
+    "include/game/linked_owners.h",
+    "include/game/counted_list.h",
+    "include/game/screen_actions.h",
+    "include/game/ui_resource.h",
+    "include/game/resource_collection.h",
+    "include/game/reusable_pool.h",
+    "include/game/selection_collections.h",
+    "include/game/texture_resource.h"
+  ],
+  "extended_headers": [
+    "include/game/shader.h",
+    "include/game/sequence.h",
+    "include/game/audio_voice.h"
+  ],
+  "newly_adopted_aliases": 13,
+  "qualification": "[INFERENCE] Names describe roles and types where history is unrecovered; exact same-address function and retained caller-reference evidence is separate."
+}

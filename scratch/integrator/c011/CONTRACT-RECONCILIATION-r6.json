@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "checkpoint": "c011",
+  "required_models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "source_cutovers": [
+    {
+      "function": "func_001f1ef4",
+      "source": "src/checkpoint11/archive_block_queries-r10.c",
+      "removed_obsolete_source": "src/checkpoint11/archive_block_queries-r3.c",
+      "preserved_obsolete_copy": "scratch/integrator/c011/obsolete-sources/archive_block_queries-r3.c",
+      "retained_context": [
+        "func_001650f8",
+        "func_001f1ebc",
+        "func_001f1ed8",
+        "func_001f1f20",
+        "func_001f1f34",
+        "func_001f1f4c"
+      ],
+      "reason": "Whole eight-function finder/query destination replaces previous seven-function c011 owner; fullword type and existing original missing-reference bug preserved. Existing approved c010 moves are retargeted, not new claims."
+    },
+    {
+      "function": "func_0014cd18",
+      "source": "src/checkpoint11/audio_coefficients_submit-r12.c",
+      "header": "include/game/service_runtime.h",
+      "parent_source": "src/checkpoint10/func_0014cc9c.c",
+      "parent_functions": [
+        "func_0014cc9c"
+      ],
+      "reason": "One canonical CommandQueue at+10b4 with actual AdpcmCoefficients* destination. Parent never accesses old untyped DataW22E fields; unused local record is removed. ServiceCoordinator+109c remains distinct. Natural copy source is existing coefficient subobject."
+    },
+    {
+      "function": "func_001d2f90",
+      "source": "src/checkpoint11/sequence_auxiliary_command-r14.cpp",
+      "header": "include/game/sound_runtime.h",
+      "parent_source": "src/checkpoint10/func_001d31cc.cpp",
+      "parent_functions": [
+        "func_001d31cc"
+      ],
+      "reason": "Shared identical SequenceStartOptions field widths/extent; target uses canonical SequenceSound.playback. Parent keeps its SequenceCommandSound binding/actual separate event owner. Only local duplicate options record removed."
+    },
+    {
+      "function": "func_0018c784",
+      "source": "src/checkpoint11/gpu_buffer_release-r12.c",
+      "header": "include/game/render_state.h",
+      "parent_source": "src/checkpoint10/func_0011d12c.c",
+      "reason": "Exact existing W6eGpuBuffer bucket prefix and typed release callback reused; only opaque payload0x1c release prefix completed. No full PipelineStorage or native class equivalence claim."
+    },
+    {
+      "function": "func_0015e830",
+      "source": "src/checkpoint11/alignment_vertical-r15.cpp",
+      "header": "include/game/input_device.h",
+      "reason": "Canonical handle prefix and exact0xb6/0xfc/0xfe fields, actual const-byte reference helper; unrelated horizontal mismatch removed and retained as author context. No PackedTextState alias."
+    },
+    {
+      "function": "func_00141944",
+      "source": "src/checkpoint11/startup_command_pool-r14.c",
+      "header": "include/game/startup.h",
+      "reason": "Canonical count/storage and0x300entries plus existing incoming unsigned allocator/mode/status contracts; original two inferred return-only-call rewrites retained."
+    },
+    {
+      "function": "func_001ce05c",
+      "source": "src/checkpoint11/batch_texture_keys-r13.cpp",
+      "header": "include/game/graphics_address.h",
+      "reason": "Only observed renderer mode byte retained, real key/template/packet data fields declared, existing reverse-word function used. No unused local vector/color/renderer suffix classes or fabricated payload data."
+    },
+    {
+      "function": "func_001e9af8",
+      "source": "src/checkpoint11/ui_item_update-r12.c",
+      "header": "include/game/input.h",
+      "reason": "Qualified UI item owner is distinct from InputItem; canonical DisplayObject/NameTable/InputSnapshot/rectangle and notification endpoint reused."
+    }
+  ],
+  "names_adopted": [],
+  "names_qualification": "No new symbol binding was required by admitted target-only sources; native overlays tied to deferred owners remain unadmitted. Existing names unchanged.",
+  "parent_reserved_revisions": [
+    {
+      "source": "src/checkpoint10/func_0014cc9c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0014cc9c"
+      ],
+      "source_sha256": "b4717d396edfdad66264ae3ff8e5905453e86dd6fb87d6eb3418ccbfd6ffed33"
+    },
+    {
+      "source": "src/checkpoint10/func_001d31cc.cpp",
+      "profile": "sdk",
+      "functions": [
+        "func_001d31cc"
+      ],
+      "source_sha256": "e84ff629ac70b5998c151bcdf7153eb64ea01e0543155c433467fd920219f26f"
+    },
+    {
+      "source": "src/checkpoint10/func_001d0348.c",
+      "profile": "game",
+      "functions": [
+        "func_001d0348"
+      ],
+      "source_sha256": "feac0f411f1fee646326ead607a86208998301e6183afe1d2d959de94503d9c2"
+    },
+    {
+      "source": "src/checkpoint10/func_001d2234.c",
+      "profile": "game",
+      "functions": [
+        "func_001d2234"
+      ],
+      "source_sha256": "64cca166695cb922709489ac404549e1a2a9acb33d87b3f7e52c816fc333478a"
+    },
+    {
+      "source": "src/checkpoint10/func_001f478c.c",
+      "profile": "sdk",
+      "functions": [
+        "func_001f478c"
+      ],
+      "source_sha256": "905bffea6a92f5b8f29ff9b9a3e1c490d9efc41a755283c796de788794e0da43"
+    },
+    {
+      "source": "src/checkpoint10/func_001c7760.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c7760"
+      ],
+      "source_sha256": "6035021e9ca99d3ce6a3ecb8edfd63919c36916b629b41e649621b1c814fddde"
+    }
+  ],
+  "destination_evidence": "DESTINATION-MATCH-r16.json",
+  "destination_evidence_sha256": "fc5f96f7af8f407808f1cd56ffb76a0e4ae4dfcc82066320b5d4127472ae3367",
+  "all_source_provenance": "CONSUMED-RESULTS-r6.json",
+  "deferrals": "DISPOSITIONS-r3.json",
+  "accepted_identity_guarantee": "Canonical accepted ledger untouched after main merge; sole prior accepted move00152560 preserved exactly; nine c010 forward moves preserved with authorized complete destination owners/profiles. No new accepted-source move or accepted-record edit."
+}

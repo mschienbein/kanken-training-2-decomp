@@ -1,0 +1,47 @@
+{
+  "source": "src/checkpoint11/record_slots_active-r13.cpp",
+  "source_sha256": "abc8f23eb71b95bcef4b3b792f3862a496a0b1918c0b278286a40e6fe6ef50c9",
+  "profile": "game",
+  "credited_functions": [
+    "func_001af258"
+  ],
+  "argv": [
+    "nice",
+    "-n",
+    "10",
+    "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+    "tools/match.py",
+    "src/checkpoint11/record_slots_active-r13.cpp",
+    "--profile",
+    "game",
+    "--show",
+    "0",
+    "--linker-model",
+    "armlink5-inline-branchnop-v6",
+    "--literal-model",
+    "anonymous-string-records-v1",
+    "--out",
+    "scratch/integrator/c011/destination-v6-l1-r16/066-record_slots_active-r13"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.131713,
+  "stdout": "MATCH    func_001af258 @ 0x1af258 size 0xac/0xac\n",
+  "stderr": "",
+  "result": "scratch/integrator/c011/destination-v6-l1-r16/066-record_slots_active-r13/record_slots_active-r13.result.json",
+  "result_sha256": "c3fbf3afaaaeb2c2a6597857993d6bfa61f1ee908c6e79f2d41a38d6efcdc11c",
+  "models": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "status": null,
+  "targets": [
+    {
+      "function": "func_001af258",
+      "status": "match",
+      "size": 172,
+      "candidate_size": 172,
+      "first_diff": null
+    }
+  ],
+  "dependency_only": false
+}

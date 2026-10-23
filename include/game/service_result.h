@@ -20,6 +20,15 @@ struct ServiceResult {
 #endif
 };
 
+/* [INFERENCE] Counted service-description prefix; configuration is opaque. */
+struct ServiceDescription {
+    unsigned value;
+    unsigned char kind, option, mode, reserved;
+};
+struct ServiceConfigurationData;
+/* [INFERENCE] Read-only operation options; the wrapper never accesses them. */
+struct W23JOpenOptions;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -37,6 +46,20 @@ extern void func_00192ab0(struct ServiceObject *object, struct ServiceResult res
 struct ServiceResult func_00112de0(struct ServiceObject *object, const char *name);
 extern struct ServiceResult func_0010b92c(struct ServiceObject *object);
 extern void func_001847dc(void);
+extern struct ServiceResult func_00112bf8(struct ServiceObject *object,
+                                         void *information);
+extern struct Result func_0018fb88(const struct ServiceDescription *specifications,
+                                   unsigned count);
+extern struct ServiceResult func_001209bc(struct ServiceObject *object,
+    const struct ServiceDescription *specification,
+    const struct ServiceConfigurationData *configuration, unsigned count, int flag);
+extern struct ServiceResult func_00112f10(struct ServiceObject *object,
+    const struct ServiceDescription *specification,
+    const struct ServiceConfigurationData *configuration);
+extern struct Result func_0011f6e8(struct ServiceObject *object, unsigned offset,
+    unsigned size, const struct W23JOpenOptions *options);
+extern struct ServiceResult func_001125ac(struct ServiceObject *object,
+    unsigned offset, unsigned size, const struct W23JOpenOptions *options);
 #ifdef __cplusplus
 }
 #endif

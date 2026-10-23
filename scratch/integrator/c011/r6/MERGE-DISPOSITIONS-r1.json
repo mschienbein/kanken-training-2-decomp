@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "branch": "c011-r6",
+  "worktree_created_from": "819edc6f",
+  "worktree_create_exit": 0,
+  "merge_source": "5172bded4e6516c533d1c4e1a0bbf69f79968b6c",
+  "merge_exit": 1,
+  "conflict": "include/game/audio_voice.h",
+  "resolution": "Keep c010-r7 removal of SoundOperation/function001d7e6c, but preserve only genuine c011-required declarations for accepted AudioVoice endpoints001d9178/001d9530. The initial omission is retained as one failed compile, not hidden. Both definitions were read; the complete final sweep re-proves them and their new consumer.",
+  "names_overlay": "All current c010-r7 bindings are retained without rebinding. Only the exclusive c011 loader self-definition binding is removed with its NEW-only hold.",
+  "predecessor_source_or_header_reversals": false,
+  "changed_base": "Current c010-r7 proposed2687 identities are authoritative; its six NEW failed-r6 dependents are not reintroduced.",
+  "new_sweep_decisions": [
+    "func_00137154",
+    "func_00185934",
+    "func_001911f0",
+    "func_001d2f90"
+  ],
+  "no_accepted_identity_deferred": true,
+  "no_heavy_gate_run": true,
+  "no_subagent_spawned": true
+}

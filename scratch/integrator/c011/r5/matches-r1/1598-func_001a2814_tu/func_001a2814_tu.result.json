@@ -1,0 +1,99 @@
+{
+ "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/func_001a2814/func_001a2814_tu.cpp",
+ "source_sha256": "4b2e2ee0e3552fe6c853e97bc02c4d2cc6cc618469240dbf51e89262b9e565ef",
+ "profile": "game",
+ "compiler": "armcc_504_82",
+ "compiler_sha256": "198f346b4cdf64831eafe1c379fbbbd6e28d21731f839994118b0eb76106394d",
+ "flags": [
+  "--cpu=MPCore",
+  "--fpmode=fast",
+  "--apcs=/interwork",
+  "--arm",
+  "--split_sections",
+  "--signed_chars",
+  "-O3",
+  "-Otime"
+ ],
+ "object_sha256": "be9ef3ad85bb50e5bd306e7f05bf21f3c5fddef8d96f07550af6c2f199ea6520",
+ "image_sha256": "a367b5dcd65e3924c93cf3fbaee5d4d40f9c5205d1287912784a974d5e405361",
+ "catalogue_sha256": "394e550406cc227550245bbbed378e7bba21f1de858fdd9310d9a737aba27b8a",
+ "linker_model": "armlink5-inline-branchnop-v6",
+ "literal_model": "anonymous-string-records-v1",
+ "literal_rebindings": [],
+ "proposed_names": null,
+ "extra_sources": [
+  {
+   "source": "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c011-r5/src/models/func_001a2814/tu441_removed_helpers.c",
+   "source_sha256": "ea097093e38d544f1bcfc71f303683ae3e15fc0246f77826af75741dab404a36",
+   "object_sha256": "79abf5bcbbfd4e770c9ef8fea2e7e017fba1ef24b12bca354511c822a810b273"
+  }
+ ],
+ "removed_callees": [
+  {
+   "symbols": [
+    "tu441_transition_active"
+   ],
+   "section": "i.tu441_transition_active",
+   "size": 8,
+   "object": "scratch/integrator/c011/r5/matches-r1/1598-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+  },
+  {
+   "symbols": [
+    "tu441_update_secondary"
+   ],
+   "section": "i.tu441_update_secondary",
+   "size": 4,
+   "object": "scratch/integrator/c011/r5/matches-r1/1598-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+  }
+ ],
+ "functions": [
+  {
+   "name": "func_001a2814",
+   "address": 1714196,
+   "size": 480,
+   "candidate_size": 480,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 56,
+     "rule": "inline_nop",
+     "target": null,
+     "word": "0xe1a00000",
+     "removed_callee": {
+      "symbols": [
+       "tu441_update_secondary"
+      ],
+      "section": "i.tu441_update_secondary",
+      "size": 4,
+      "object": "scratch/integrator/c011/r5/matches-r1/1598-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+     }
+    }
+   ]
+  },
+  {
+   "name": "func_001a3ee0",
+   "address": 1720032,
+   "size": 412,
+   "candidate_size": 412,
+   "status": "match",
+   "first_diff": null,
+   "linker_rewrites": [
+    {
+     "offset": 40,
+     "rule": "inline_insn",
+     "target": null,
+     "word": "0xe1d003d4",
+     "removed_callee": {
+      "symbols": [
+       "tu441_transition_active"
+      ],
+      "section": "i.tu441_transition_active",
+      "size": 8,
+      "object": "scratch/integrator/c011/r5/matches-r1/1598-func_001a2814_tu/extra-0-tu441_removed_helpers.o"
+     }
+    }
+   ]
+  }
+ ]
+}

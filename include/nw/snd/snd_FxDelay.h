@@ -2,7 +2,8 @@
  * NintendoWare4Ctr contributors; upstream include/nw/snd/snd_FxDelay.h
  * https://github.com/ctrdecomp/NintendoWare4Ctr/tree/15ddb5632db5a6f0d2f46e3827fc78df468684bd
  * Pinned commit: 15ddb5632db5a6f0d2f46e3827fc78df468684bd
- * Modified 2026-10-17: standalone UTF-8 and relative include normalization.
+ * Modified 2026-10-17: standalone UTF-8 and relative includes; retail damping
+ * default 0.5f follows the whole-function constructor MATCH at 001d23b4.
  * GNU GPL version 3; see LICENSE.txt.
  */
 #ifndef NW_SND_FX_DELAY_H_
@@ -26,7 +27,7 @@ public:
         Param(): 
             m_DelayTime(250), 
             m_FeedbackGain(0.4f), 
-            m_Damping(1.0f), 
+            m_Damping(0.5f),
             m_IsEnableSurround(false)
         {
         }

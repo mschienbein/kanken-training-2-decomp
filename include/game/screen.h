@@ -61,7 +61,11 @@ struct DisplayData {
 #endif
 };
 
-struct PackedTextState;
+/* Both packed-alignment operations share this evidenced byte prefix. */
+struct PackedTextState {
+    unsigned char reserved00[0xb6];
+    unsigned char alignment;
+};
 struct WidgetBinding {
     unsigned char reserved00[0x28];
     struct AlignmentHandle *alignment;
@@ -421,6 +425,8 @@ extern void func_00176df4(void);
 extern void func_00181448(struct BoundDisplayObject *object);
 extern void func_0019637c(struct BoundDisplayObject *object,
                           struct BoundDisplayObject **head, int primary);
+extern void func_0018528c(struct BoundDisplayObject *object);
+extern void func_001af258(struct Screen *screen, int enabled);
 extern const struct NameTable *bss_00246f4c[];
 extern void func_0016e7e0(struct WidgetController *controller, int index, int enabled);
 extern void func_0016e3e0(struct WidgetController *controller, int index, int value);
@@ -455,6 +461,8 @@ extern void func_0015e534(struct DisplaySurface *surface, unsigned char red,
 extern void func_0015e57c(struct DisplaySurface *surface, unsigned char red,
                           unsigned char green, unsigned char blue, unsigned char alpha);
 extern void func_00180358(struct DisplayObject *object, int first, int second);
+extern void func_00180388(struct DisplayObject *object, unsigned char alignment);
+extern void func_001803d0(struct DisplayObject *object, unsigned char alignment);
 extern void func_0015e684(struct BoundDisplayObject *object, int index, float x, float y, float z);
 extern void func_0018271c(void *object, unsigned char alpha);
 extern void func_00181700(struct BoundDisplayObject *object, float x, float y, float z);
