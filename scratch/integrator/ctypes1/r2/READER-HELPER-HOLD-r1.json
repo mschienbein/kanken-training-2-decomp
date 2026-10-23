@@ -1,0 +1,19 @@
+{
+  "header": "include/nw/font/font_CharStrmReader.h",
+  "provider": "src/checkpoint10/collect-r2/func_001c5a9c_native.cpp",
+  "reason": "Safe value-based StepStrm changes the live c010 SJIS match; natural typed cursor forms56B/48B also mismatch target56B. Main explicitly approved exact c010 restoration. NEW getter selects only the direct UTF16 member (or null), not this helper.",
+  "attempts": [
+    {
+      "exit": 1,
+      "source_sha256": "a07dc640aa6e9d14ec3619bcdd083f9f687147e5de4fce1b62f26ff9a1a703b1",
+      "receipt": "scratch/integrator/ctypes1/r2/match/reader-safe-r1-func_001c5a9c/func_001c5a9c_native.result.json",
+      "receipt_sha256": "f73cfc347560565048c4c9cce90b84ad0f589e3d2b3625ee9240a01e929c9138"
+    },
+    {
+      "exit": 1,
+      "source_sha256": "4c2950938b1150f181c851972ccd56da178570c1cc00050902db3e0425077538",
+      "receipt": "scratch/integrator/ctypes1/r2/match/reader-safe-r2-func_001c5a9c/func_001c5a9c_native.result.json",
+      "receipt_sha256": "33a70307bf620330d4bd1962927b5653e75e66e04b9480d5291d767560047b97"
+    }
+  ]
+}

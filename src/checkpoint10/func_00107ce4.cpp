@@ -1,7 +1,8 @@
 #include "game/stream_worker.h"
 
-void func_00107ce4(SignalState *wake)
+void func_00107ce4(void *argument, void *context)
 {
+    SignalState *wake = static_cast<SignalState *>(argument);
     for (;;) {
         func_00195d94(wake);
         if (bss_004962a8.stopping)

@@ -1,5 +1,92 @@
 # c010 candidates — known issues and qualifications
 
+## c010-r8 — exhaustive runtime-callback closure
+
+This **unaccepted successor** remains on branch `c010-r7`, preserving immutable
+`819edc6f` and the registered c010-r7 review records on main `8725b134`.
+Compiled source is pinned to `102a6d80`; subsequent commits contain evidence and
+this documentation only. Historical r6/r7 preparation and review results are
+not reused as current acceptance.
+
+### Current scope and honest dispositions
+
+- **414 candidate units / 425 claims:** **413 NEW functions / 39,208 B** and
+  **12 accepted-identity moves / 192 B**.
+- **94 NEW-only deferrals / 8,404 B in 93 units.** The five r8 additions are
+  `0014b54c` (**64 B**), `00107ce4` (**216 B**), `0014b85c` (**124 B**),
+  `001d4078` (**48 B**) and `001e5a20` (**120 B**): **572 B** total.
+  Their original direct/address consumers are uncredited; no current NEW
+  dependent remains. Unselected best attempts are retained, not acceptance
+  credit or callable-interface approval.
+- All **2,269 accepted predecessor identities / 249,372 B** survive. Proposed
+  ledger: **2,618 units / 2,682 functions / 288,580 B**, including **24
+  helper-only units**. The accepted opaque `FontVTable`, `float(float)`
+  converter protocol and c009-owned deferrals remain unchanged.
+
+**Sealed c010-r7 codex-b F01:** `0014d664` and `001c4b10` now have the actual
+`void *(void *)` array-runtime signature. Concrete element storage is recovered
+inside each body; there is no callback cast or specialized runtime declaration.
+For `0014b54c`, both the honest generic recovery and genuine placement-
+construction alternative failed to MATCH (**172/64 B** and **180/64 B**).
+The provider is therefore NEW-only deferred, not forced back to a concrete
+callback type or a code-generation workaround.
+
+The class sweep additionally repairs sound-loader thread entry `0010a704` to
+the actual `void(void *, void *)` `ThreadStartContext.entry` protocol and empty
+atexit callbacks `001c5764`, `001c588c`, `001db960` to `void(void *)`.
+The honest generic stream-thread repair `00107ce4` was **220/216 B** and is
+also NEW-only deferred. Three custom frame-timing, result/context and paired
+radar callback families remain unmodeled; their NEW providers are the other
+three deferrals above. Their receiver, argument and result types are not guessed.
+
+### Mechanical closure and inherited attention
+
+Authority: `scratch/integrator/c010/r8/RUNTIME-CALLBACK-CLOSURE.json`.
+The census decodes **all 4,743 catalogue functions**, including uncredited
+callers, scans **20,327 original call/tail sites** and **all 3,228 project
+source/header files**, and classifies **308 passed-code candidates** while
+retaining **547 indirect-parameter candidates**. Saturated source-glob buckets
+are partitioned rather than silently truncated.
+
+The table covers **53 runtime/API entries**, **272 original callback-parameter
+rows**, **70 explicit source calls**, **157 provider/contract rows**, all
+**five array entrypoints/veneers**, **70 original array callsites** and **45
+array-provider addresses**. It inventories atexit registration, scheduled and
+thread entrypoints, audio/event callbacks, eight source-only noninvoking typed
+registration helpers and four native member-callback families. All six native
+character-reader methods are checked as genuine members of their declared
+owner; C++ free functions and spare constructor aliases never receive native
+constructor/destructor treatment.
+
+**All 17 current NEW and seven revised/moved callback-provider addresses are
+closed; zero unresolved NEW/revised rows remain.** Existing accepted providers
+are reported separately for Main: **48 definite type/role mismatch rows** and
+**seven nominal/custom-family qualifications**, all unchanged accepted
+identities. Another **26 unmodeled passed-code candidates** (24 unchanged
+accepted, two unclaimed) remain explicit rather than being asserted noninvoking
+or excluded by assumption. These are inherited review/gate obligations, not
+author permission to modify accepted source or silently waive a contract.
+
+### Complete reproof and integrator boundary
+
+Final `match-r8-r2` **exited 0**: **2,594/2,594 sequential, niced, single-process
+matcher commands exited 0; all 2,682 required functions MATCH** under explicit
+v6/L1. All 24 helper-only units are supplied in their natural contexts, and the
+complete rewrite projection reports `scope_complete=true`.
+
+Earlier focused attempts and the first complete attempt remain immutable,
+including every nonzero exit; the latter exposed the unmatched stream-thread
+repair instead of narrowing the assertion to a passing subset.
+
+Current handoff: `scratch/integrator/c010/r8/HANDOFF-r3.json`,
+`NEW-DEFERRALS-r4.json`, `SOURCE-CONTEXT-r4.json` and
+`REMAINING-HEAVY-COMMANDS-r3.json`. The dry ledger is `dry-matches-r4.json`.
+No whole-ledger interfaces/argcheck gate, full build, suite, prepare, review
+registration, finalize or push was run by the author. Main alone must integrate
+without source-context drift, resolve/adjudicate inherited accepted attention,
+run the listed heavy gates, prepare `c010-r8` with two fresh full builds and
+suite, and obtain two independent bound reviews before finalizing.
+
 ## c010-r7 — both reviews folded with real-object and native-owner boundaries
 
 This **unaccepted successor candidate** starts from frozen main `7083a0a3`
