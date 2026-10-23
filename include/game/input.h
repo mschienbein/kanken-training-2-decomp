@@ -79,7 +79,7 @@ struct InputPoint {
     float x, y;
 };
 
-struct InputSnapshot {
+struct PointerState {
     bool active, released;
     unsigned char reserved02[2];
     struct InputPoint position;
@@ -89,6 +89,10 @@ struct InputSnapshot {
     bool tracking;
     unsigned char reserved19[3];
     struct InputPoint start_position;
+};
+
+struct InputSnapshot {
+    struct PointerState pointer;
     struct InputRectangle rectangle;
     unsigned int state;
 };
@@ -175,7 +179,7 @@ extern int func_00121354(void);
 extern void func_00123a64(struct ButtonSample *sample);
 extern void func_00123a70(unsigned *held, unsigned *pressed, unsigned *released);
 extern struct TouchDeviceState bss_004972d8;
-extern void func_00170418(struct InputSnapshot *input);
+extern void func_00170418(struct PointerState *input);
 extern int func_0016ec14(const struct InputMode *mode);
 extern int func_001703c4(const struct InputRectangle *rectangle, float x, float y);
 extern int func_001e9af8(struct W22UiItem *item, const struct InputSnapshot *input);

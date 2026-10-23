@@ -391,8 +391,9 @@ extern struct DisplayQueueCounter bss_00495c70;
 extern void func_0010a814(void);
 extern void func_0017a9b4(struct Screen *screen, int value);
 extern void func_0017a71c(struct Screen *screen, int index, int enabled);
-extern void func_001b54ec(struct Screen *screen, int enabled);
-extern void func_001b54e8(struct Screen *screen, int enabled);
+extern void func_001b54ec(struct WidgetController *controller, int enabled);
+extern void func_001b54e8(struct WidgetController *controller, int enabled);
+extern void func_001b5a28(struct WidgetController *controller, int enabled);
 extern void func_0015e3f4(struct DisplaySurface *surface, unsigned char red,
                         unsigned char green, unsigned char blue, unsigned char alpha);
 extern int func_0019efd0(void);

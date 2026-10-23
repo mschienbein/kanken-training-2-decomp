@@ -1,6 +1,43 @@
 # ctypes1 — rebased type composition and qualifications
 
-## r3 — c011-r8 base and sealed r2 prereview corrections
+## r4 — reviewed receiver, page and input contracts
+
+The independent ContractBacklogResearch proposals **1, 2 and 4** are selected:
+
+- The three slot wrappers/providers share `WidgetController*`, retaining the
+  caller-evidenced integer flag and void result without requiring a full Screen.
+- `ItemPage` is the one child identity. CountedResource, W8ItemEntry and the
+  W14 glyph shadows are removed; value rows are unsigned-short storage, flags
+  are unsigned bytes, and MenuItem keeps its witnessed 0x238 allocation extent.
+  The historical R1 item-accessor identities remain explicitly inferred.
+- The 0x24-byte `PointerState` is a genuine initial member of the unchanged
+  0x38-byte InputSnapshot region. Sampler calls project that member; region
+  operations retain the containing rectangle and state.
+
+All **12 revised accepted functions / 1,596 bytes MATCH** under frozen game
+and explicit v6/L1, including the changed R1 helper's actual caller context.
+The source transaction changes 13 files including that helper, plus seven
+headers. Final integrated closure bindings are recorded separately under
+`scratch/integrator/ctypes1/r4/`.
+
+**Item 3 is not applied, by Main's explicit ruling.** The proposed second-mode
+receiver still reads one +0x4c pointer as both AnimationOwner and W6ListController
+through union TrainingControls. That is competing-owner union punning, not a
+common-model proof. All six proposed accepted revisions stay at accepted forms;
+0016de90 keeps its sdk profile, and no profile-changing move is introduced.
+The controls slot needs a witnessed single owner/common base before this
+receiver transaction may be reconsidered.
+
+**nm46 001ea6d8 is not selected.** Its 420-byte research MATCH still casts
+BoundDisplayObject to unrelated DisplayData at both width-query calls and
+copies an InputPoint representation into float-array storage. Type-preserving
+component copies could remove the latter issue, but cannot establish the
+missing owner/element projection for 0016f4ec. No shadow display model, width
+facade or incompatible call is imported, and both unmatched companions stay out.
+The TaskPool reverse-owner issue in proposal 5 is also unchanged, not waived.
+Exact held evidence and Main's ruling are in `HOLD-DISPOSITIONS-r1.json`.
+
+## Historical r3 — c011-r8 base and sealed r2 prereview corrections
 
 The current source base is **c011-r8 `f9ea308e`**, including folded c013.
 All **2,761 proposed predecessor identities** survive. The dry ctypes1 ledger

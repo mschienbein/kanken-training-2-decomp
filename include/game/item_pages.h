@@ -1,15 +1,23 @@
 #ifndef GAME_ITEM_PAGES_H
 #define GAME_ITEM_PAGES_H
 
-/* Paged item lists (partial). */
+/* Paged item lists. Child layout is shared with the typed glyph initializer. */
+#include "game/text.h"
 struct W11SingleState;
 
 struct ItemPage {
-    unsigned char reserved00[0x0c];
+    unsigned char reserved00[4];
+    short group;
+    signed char kind;
+    signed char configured;
+    signed char cached_kind;                /* 0x08; getter compares signed kinds */
+    unsigned char reserved09[3];
     int count;                              /* 0x0c */
-    unsigned char reserved10[8];
-    unsigned short **values;
-    unsigned char *flags;
+    struct MenuItem **objects;
+    signed char limit;
+    unsigned char reserved15[3];
+    unsigned short **values;                /* 0x18; eight code units per row */
+    unsigned char *flags;                   /* 0x1c */
 };
 
 struct ItemPageSet {

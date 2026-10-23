@@ -6,7 +6,7 @@ void func_0016f930(const struct InputOwner *owner, int index)
     int i;
     if (group && group->count > 0) {
         group->enabled = 1;
-        func_00170418(&group->input);
+        func_00170418(&group->input.pointer);
         for (i = 0; i < group->count; ++i) {
             struct InputItem *item = group->items[i];
             if (item) {

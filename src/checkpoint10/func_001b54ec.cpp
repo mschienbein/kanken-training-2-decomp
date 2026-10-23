@@ -1,11 +1,11 @@
 #include "game/screen.h"
-static __forceinline int widget_has_flag(struct Screen *screen, int index, unsigned int mask)
+static __forceinline int widget_has_flag(struct WidgetController *screen, int index, unsigned int mask)
 {
-    struct WidgetSlot *slot = screen->slots[index];
+    struct WidgetSlot *slot = widget_slots(screen)[index];
     return slot != 0 && slot->object != 0 && (slot->state.flags & mask);
 }
 
-void func_001b54ec(struct Screen *screen, int enabled)
+void func_001b54ec(struct WidgetController *screen, int enabled)
 {
     int index = 0;
     if (enabled) {
@@ -34,11 +34,11 @@ void func_001b54ec(struct Screen *screen, int enabled)
             case 10:
                 continue;
             }
-            func_0016e7e0(&screen->controller, index, 1);
+            func_0016e7e0(screen, index, 1);
         }
     } else {
         for (; index < 27; ++index)
-            func_0016e7e0(&screen->controller, index, 0);
+            func_0016e7e0(screen, index, 0);
     }
 }
 
