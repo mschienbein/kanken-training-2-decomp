@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "scope": "scratch/integrator/c010/r5/repair-scope-r2.json",
+  "scope_sha256": "18e8c2f568d71a829fcfc787284b1a5f172b116659501af5bbccd8bd405d2a5c",
+  "selection": {
+    "linker_model": "armlink5-inline-branchnop-v6",
+    "literal_model": "anonymous-string-records-v1"
+  },
+  "expected_units": 5,
+  "completed_units": 5,
+  "paused": false,
+  "match_units": 4,
+  "exit_counts": {
+    "0": 4,
+    "1": 1
+  },
+  "rows": [
+    {
+      "source": "src/checkpoint10/func_0016bd7c.c",
+      "profile": "middleware",
+      "functions": [
+        "func_0016bd7c"
+      ],
+      "author": "r4024",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_0016bd7c.c",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5/scratch/integrator/c010/match-r5-repair-r2/u0000"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_0016bd7c @ 0x16bd7c size 0x28/0x28\n",
+      "receipt": "scratch/integrator/c010/match-r5-repair-r2/u0000/func_0016bd7c.result.json",
+      "source_sha256": "8194eb447350ff3e84d6ca97526ea3eee16a4dc0fe30842637141dbff3252e26",
+      "extra_source_sha256": {},
+      "receipt_sha256": "a86b1ceea429ab7dabcf1b84ef48f3c64a9bcae50651eadaea33f5c2fac33faa"
+    },
+    {
+      "source": "src/checkpoint10/collect-r2/func_001c7d7c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c7d7c"
+      ],
+      "author": "r41268",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/collect-r2/func_001c7d7c.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5/scratch/integrator/c010/match-r5-repair-r2/u0001"
+      ],
+      "exit_code": 1,
+      "credited_functions_match": false,
+      "output": "MISMATCH func_001c7d7c @ 0x1c7d7c size 0xa0/0x9c first difference at +0x8\n",
+      "receipt": "scratch/integrator/c010/match-r5-repair-r2/u0001/func_001c7d7c.result.json",
+      "source_sha256": "b813dfb37379f83577d2d64e99939b9a453263d4d5b47db65c81d5c122db9108",
+      "extra_source_sha256": {},
+      "receipt_sha256": "17012103f733b8b2bbaf79bdc90f76a371a9b33826531c30a16d5d19ddc31d15"
+    },
+    {
+      "source": "src/checkpoint10/func_001c4bdc.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c4bdc"
+      ],
+      "author": "w23a",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/checkpoint10/func_001c4bdc.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5/scratch/integrator/c010/match-r5-repair-r2/u0002"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001c4bdc @ 0x1c4bdc size 0x70/0x70\n",
+      "receipt": "scratch/integrator/c010/match-r5-repair-r2/u0002/func_001c4bdc.result.json",
+      "source_sha256": "555a5e6aea020687056cbcfd5d9d51fb216a8a4a59e3910e8098934177735993",
+      "extra_source_sha256": {},
+      "receipt_sha256": "4c85b9083d97a2c42749dd90f4ee2e7cb09a7046ba7640e1cec205e32b188fcb"
+    },
+    {
+      "source": "src/sdk/func_001c4d9c.cpp",
+      "profile": "middleware",
+      "functions": [
+        "func_001c4d9c"
+      ],
+      "author": "x10",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/sdk/func_001c4d9c.cpp",
+        "--profile",
+        "middleware",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5/scratch/integrator/c010/match-r5-repair-r2/u0003"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001c4d9c @ 0x1c4d9c size 0x4c/0x4c\n",
+      "receipt": "scratch/integrator/c010/match-r5-repair-r2/u0003/func_001c4d9c.result.json",
+      "source_sha256": "3a8c0da8de824076882ce44332caf6e15aab5489d25fcc1ed47000572c3e22b1",
+      "extra_source_sha256": {},
+      "receipt_sha256": "217029cc5a5d6949f7ba7a177635e52b48ad29fac290efb6447696e784887c01"
+    },
+    {
+      "source": "src/sdk/func_001c4d1c.cpp",
+      "profile": "game",
+      "functions": [
+        "func_001c4d1c"
+      ],
+      "author": "x10",
+      "command": [
+        "/home/michael/code/kanken-training-2-decomp/.venv/bin/python",
+        "tools/match.py",
+        "src/sdk/func_001c4d1c.cpp",
+        "--profile",
+        "game",
+        "--linker-model",
+        "armlink5-inline-branchnop-v6",
+        "--literal-model",
+        "anonymous-string-records-v1",
+        "--show",
+        "0",
+        "--out",
+        "/home/michael/code/kanken-training-2-decomp/scratch/worktrees/c010-r5/scratch/integrator/c010/match-r5-repair-r2/u0004"
+      ],
+      "exit_code": 0,
+      "credited_functions_match": true,
+      "output": "MATCH    func_001c4d1c @ 0x1c4d1c size 0x28/0x28\n",
+      "receipt": "scratch/integrator/c010/match-r5-repair-r2/u0004/func_001c4d1c.result.json",
+      "source_sha256": "d461f14d5a470d62cd4e5448c55d8d1f3d71380eb65038112263cde748989b4a",
+      "extra_source_sha256": {},
+      "receipt_sha256": "4becd035623c4f937589e5b06b23540b979bbb178ee65974aa90cb03363a7025"
+    }
+  ],
+  "script_sha256": "2add14f81ededca7bc10af54c9d275d2c03b3b28d0a6f3640a828a52c16f6e89",
+  "rewrite_projection": "scratch/integrator/c010/match-r5-repair-r2/linker-rewrites.json"
+}
